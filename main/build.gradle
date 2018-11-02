@@ -21,7 +21,7 @@ android {
     compileSdkVersion "Google Inc.:Google APIs:23"
 
     compileOptions {
-    	// use the diamond operator and some other goodies in Android
+        // use the diamond operator and some other goodies in Android
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
@@ -64,7 +64,7 @@ android {
             versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
 
             // additional proguard rules just for the test code
-			testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
             testCoverageEnabled isContinuousIntegrationServer()
@@ -100,14 +100,14 @@ android {
         // remove unused resources in addition to unused code
         shrinkResources true
 
-		// proguard rules
+        // proguard rules
         buildType.proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
     }
 
     testBuildType "debug" //the default BuildType
 
     sourceSets {
-    	// application sources in source set "main"
+        // application sources in source set "main"
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src', 'thirdparty', '../common/src'] // no need for annotation generated sources
@@ -148,10 +148,10 @@ android {
     }
 
     lintOptions {
-    	// generally we accept lint errors when building
+        // generally we accept lint errors when building
         abortOnError false
 
-    	// abort release builds in case of FATAL errors
+        // abort release builds in case of FATAL errors
         checkReleaseBuilds true
 
         // recommended by ButterKnife, http://jakewharton.github.io/butterknife/
@@ -401,7 +401,7 @@ task verifyCgeoKeys {
                     into ("res/values")
                     def properties = new Properties()
                     propertiesFile.withInputStream {
-                        properties.load(it);
+                        properties.load(it)
                     }
                     filter(ReplaceTokens, tokens: properties)
                     filter { it.replaceAll("@.+?@", "") }
@@ -613,11 +613,11 @@ task downloadLibs {
     description "Downloads the dependency JARs for use with Eclipse"
     doFirst {
         configurations.implementation.resolvedConfiguration.resolvedArtifacts.each { ResolvedArtifact artifact ->
-        	if (artifact.extension == 'jar' || artifact.extension == 'aar') {
-	            project.copy {
-	                from artifact.file
-	                into "libs"
-	            }
+            if (artifact.extension == 'jar' || artifact.extension == 'aar') {
+                project.copy {
+                    from artifact.file
+                    into "libs"
+                }
             }
             if (artifact.extension == 'aar') {
                 unzipAAR(artifact.file.name)
