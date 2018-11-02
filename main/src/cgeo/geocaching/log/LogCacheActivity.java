@@ -218,19 +218,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void initializeTrackablesAction() {
         for (final TrackableLog trackable : trackables) {
-            if (trackableState == null) { // initial call
-                if (Settings.isTrackableAutoVisit()) {
-                    trackable.action = LogTypeTrackable.VISITED;
-                }
-            } else { // refresh view
-                final Integer tbStateId = trackableState.getInt(trackable.trackCode);
+            if (trackableState != null) { // refresh view
+                final int tbStateId = trackableState.getInt(trackable.trackCode);
                 if (tbStateId > 0) { // found in saved list
                     trackable.action = LogTypeTrackable.getById(tbStateId);
-                } else { // not found
-                    if (Settings.isTrackableAutoVisit()) {
-                        trackable.action = LogTypeTrackable.VISITED;
-                    }
+                    continue;
                 }
+            }
+            if (Settings.isTrackableAutoVisit()) { // initial or new grabbed
+                trackable.action = LogTypeTrackable.VISITED;
             }
         }
     }
