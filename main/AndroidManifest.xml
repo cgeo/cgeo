@@ -5,10 +5,7 @@
     package="cgeo.geocaching"
     android:installLocation="auto">
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="22"
-        tools:overrideLibrary="locus.api.android"/>
+    <uses-sdk tools:overrideLibrary="locus.api.android"/>
     
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

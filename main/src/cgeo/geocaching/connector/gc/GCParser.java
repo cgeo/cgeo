@@ -765,7 +765,7 @@ public final class GCParser {
                         waypoint.setOriginalCoordsEmpty(true);
                     }
 
-                    if (wpItems.length >= j) {
+                    if (j + 1 < wpItems.length) {
                         final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j + 1], "<td");
                         assert wpNote != null;
                         if (wpNote.length < 4) {
