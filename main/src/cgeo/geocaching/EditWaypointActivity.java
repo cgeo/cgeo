@@ -370,7 +370,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private void initializeDistanceUnitSelector() {
         distanceUnits = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
-            distanceUnitSelector.setSelection(Settings.useImperialUnits() ? 2 : 0); //0:m, 2:ft
+            distanceUnitSelector.setSelection(Settings.useImperialUnits() ?
+                    DistanceParser.DistanceUnit.FT.getValue() : DistanceParser.DistanceUnit.M.getValue());
         }
     }
 
@@ -582,7 +583,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final String bearingText = bearing.getText().toString();
         final String distanceText = distanceView.getText().toString();
-        final DistanceParser.UNIT distanceUnit = DistanceParser.UNIT.getById(distanceUnitSelector.getSelectedItemPosition());
+        final DistanceParser.DistanceUnit distanceUnit = DistanceParser.DistanceUnit.getById(distanceUnitSelector.getSelectedItemPosition());
 
         if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance

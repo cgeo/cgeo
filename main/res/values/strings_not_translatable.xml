@@ -8,6 +8,15 @@
         <item>DDD°MM\'SS.SSS\"</item>
     </string-array>
 
+    <!-- distance units -->
+    <string-array name="distance_units">
+        <item>@string/unit_m</item>
+        <item>@string/unit_km</item>
+        <item>@string/unit_ft</item>
+        <item>@string/unit_yd</item>
+        <item>@string/unit_mi</item>
+    </string-array>
+
     <!-- upload image scaling -->
     <integer-array name="log_image_scale_values">
         <item>-1</item>

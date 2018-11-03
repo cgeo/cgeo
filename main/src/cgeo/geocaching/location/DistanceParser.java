@@ -1,11 +1,11 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.utils.MatcherWrapper;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import cgeo.geocaching.utils.MatcherWrapper;
 
 public final class DistanceParser {
 
@@ -36,23 +36,23 @@ public final class DistanceParser {
         final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
         final String unitStr = StringUtils.lowerCase(matcher.group(2), Locale.US);
 
-        UNIT unit = metricUnit ? UNIT.M : UNIT.FT;
+        DistanceUnit unit = metricUnit ? DistanceUnit.M : DistanceUnit.FT;
 
         switch (unitStr) {
             case "m":
-                unit = UNIT.M;
+                unit = DistanceUnit.M;
                 break;
             case "km":
-                unit = UNIT.KM;
+                unit = DistanceUnit.KM;
                 break;
             case "yd":
-                unit = UNIT.YD;
+                unit = DistanceUnit.YD;
                 break;
             case "mi":
-                unit = UNIT.MI;
+                unit = DistanceUnit.MI;
                 break;
             case "ft":
-                unit = UNIT.FT;
+                unit = DistanceUnit.FT;
                 break;
         }
         return convertDistance(value, unit);
@@ -65,7 +65,7 @@ public final class DistanceParser {
      * @param unit     unit to convert from
      * @return the distance in kilometers
      */
-    public static float convertDistance(final float distance, final UNIT unit)
+    public static float convertDistance(final float distance, final DistanceUnit unit)
             throws NumberFormatException {
         switch (unit) {
             case M:
@@ -82,21 +82,25 @@ public final class DistanceParser {
         }
     }
 
-    public enum UNIT {
+    public enum DistanceUnit {
         M(0), KM(1), FT(2), YD(3), MI(4);
-        private int value;
+        private final int value;
 
-        UNIT(final int value) {
+        DistanceUnit(final int value) {
             this.value = value;
         }
 
-        public static UNIT getById(final int id) {
-            for (final UNIT e : values()) {
+        public static DistanceUnit getById(final int id) {
+            for (final DistanceUnit e : values()) {
                 if (e.value == id) {
                     return e;
                 }
             }
             return MI;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 

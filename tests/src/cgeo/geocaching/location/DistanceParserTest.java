@@ -36,22 +36,22 @@ public class DistanceParserTest {
 
     @Test
     public void testWithUnitKm() {
-        assertThat((double) DistanceParser.convertDistance(1.2f, DistanceParser.UNIT.KM)).isEqualTo(1.2, offset(MM));
+        assertThat((double) DistanceParser.convertDistance(1.2f, DistanceParser.DistanceUnit.KM)).isEqualTo(1.2, offset(MM));
     }
 
     @Test
     public void testWithUnitM() {
-        assertThat((double) DistanceParser.convertDistance(1200, DistanceParser.UNIT.M)).isEqualTo(1.2, offset(MM));
+        assertThat((double) DistanceParser.convertDistance(1200, DistanceParser.DistanceUnit.M)).isEqualTo(1.2, offset(MM));
     }
 
     @Test
     public void testWithUnitFt() {
-        assertThat((double) DistanceParser.convertDistance(1200, DistanceParser.UNIT.FT)).isEqualTo(0.36576, offset(MM));
+        assertThat((double) DistanceParser.convertDistance(1200, DistanceParser.DistanceUnit.FT)).isEqualTo(0.36576, offset(MM));
     }
 
     @Test
     public void testWithUnitMi() {
-        assertThat((double) DistanceParser.convertDistance(1.2f, DistanceParser.UNIT.MI)).isEqualTo(1.9312128, offset(MM));
+        assertThat((double) DistanceParser.convertDistance(1.2f, DistanceParser.DistanceUnit.MI)).isEqualTo(1.9312128, offset(MM));
     }
 
 }

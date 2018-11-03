@@ -73,7 +73,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     private int contextMenuItemPosition;
 
-    private DistanceParser.UNIT distanceUnit = DistanceParser.UNIT.M;
+    private DistanceParser.DistanceUnit distanceUnit = DistanceParser.DistanceUnit.M;
 
     protected static class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.simple_way_point_longitude) protected TextView longitude;
@@ -262,13 +262,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     }
 
     private void initializeDistanceUnitSelector() {
-        if (Settings.useImperialUnits()) {
-            getDistanceUnitSelector().setSelection(2); // ft
-            distanceUnit = DistanceParser.UNIT.getById(2);
-        } else {
-            getDistanceUnitSelector().setSelection(0); // m
-            distanceUnit = DistanceParser.UNIT.getById(0);
-        }
+        distanceUnit = Settings.useImperialUnits() ? DistanceParser.DistanceUnit.FT : DistanceParser.DistanceUnit.M;
+        getDistanceUnitSelector().setSelection(distanceUnit.getValue());
 
         getDistanceUnitSelector().setOnItemSelectedListener(new ChangeDistanceUnit(this));
     }
@@ -310,7 +305,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void onItemSelected(final AdapterView<?> arg0, final View arg1, final int arg2,
                 final long arg3) {
-            unitView.distanceUnit = DistanceParser.UNIT.getById(arg2);
+            unitView.distanceUnit = DistanceParser.DistanceUnit.getById(arg2);
         }
 
         @Override
