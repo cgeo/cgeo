@@ -166,12 +166,6 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         return Settings.isSUConnectorActive();
     }
 
-    @Override
-    public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        return new SearchResult();
-        //return searchCaches("cache", new Parameters(PARAMETER_REQUEST_TYPE, REQUEST_TYPE_CENTER, "radius", "40", "clng", GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center), "clat", GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center), PARAMETER_RESULT_FIELDS, RESULT_FIELDS_SEARCH));
-    }
-
     public final String getConsumerKey() {
         return CgeoApplication.getInstance().getString(R.string.su_consumer_key);
     }
@@ -204,6 +198,12 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         final List<Geocache> caches = SuApi.searchByBBox(viewport, this);
 
         return new SearchResult(caches);
+    }
+
+    @Override
+    @NonNull
+    public SearchResult searchByCenter(@NonNull final Geopoint center) {
+        return new SearchResult(SuApi.searchByCenter(center, 20, this));
     }
 
     @Override

@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -63,6 +64,26 @@ public class SuApi {
                 "maxlng", String.valueOf(viewport.getLongitudeMax()));
 
         final JSONResult result = SuApi.getRequest(connector, SuApiEndpoint.CACHE_LIST, params);
+        return SuParser.parseCaches(result.data);
+    }
+
+
+    /**
+     * Returns list of caches located around {@code center}
+     *
+     * @param center    coordinates of the central point
+     * @param radius    radius in km
+     * @param connector Geocaching connector
+     * @return list of caches located around {@code center}
+     */
+    @NonNull
+    public static List<Geocache> searchByCenter(final Geopoint center, final float radius, @NonNull final SuConnector connector) {
+        final Parameters params = new Parameters(
+                "lat", String.valueOf(center.getLatitude()),
+                "lng", String.valueOf(center.getLongitude()),
+                "radius", Float.toString(radius));
+
+        final JSONResult result = SuApi.getRequest(connector, SuApiEndpoint.CACHE_LIST_CENTER, params);
         return SuParser.parseCaches(result.data);
     }
 

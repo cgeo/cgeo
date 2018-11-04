@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 enum SuApiEndpoint {
     CACHE("/api/geocache.php", OAuthLevel.Level1),
     CACHE_LIST("/api/list.php", OAuthLevel.Level1),
+    CACHE_LIST_CENTER("/api/list_center.php", OAuthLevel.Level1),
     NOTE("/api/note.php", OAuthLevel.Level1);
 
     @NonNull
