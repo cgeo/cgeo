@@ -9,7 +9,7 @@
     </string-array>
 
     <!-- distance units -->
-    <string-array name="distance_units">
+    <string-array name="distance_units" translatable="false">
         <item>@string/unit_m</item>
         <item>@string/unit_km</item>
         <item>@string/unit_ft</item>
