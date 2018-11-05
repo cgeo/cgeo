@@ -45,7 +45,9 @@ public final class LogEntry {
     public final long date;
     /** Is a found log */
     public final int found;
-    /** Friend's log entry */
+    /** Own's or Friend's log entry indicator.
+     * Such logs will be visible in separated tab "Friends/Own Logs" in addition to main Logbook
+     * */
     public final boolean friend;
     /** Report problem */
     public final ReportProblemType reportProblem;
@@ -208,7 +210,7 @@ public final class LogEntry {
          * Set {@link LogEntry} friend.
          *
          * @param friend
-         *          {@code true} if this is a log from a friend
+         *          {@code true} if this is a log from current user himself or his friend
          */
         @NonNull
         public Builder setFriend(final boolean friend) {
