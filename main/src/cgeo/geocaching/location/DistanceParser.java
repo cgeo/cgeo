@@ -2,10 +2,10 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Locale;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public final class DistanceParser {
 
@@ -58,6 +58,20 @@ public final class DistanceParser {
         return convertDistance(value, unit);
     }
 
+
+    /**
+     * Parses a distance string {@code distanceText} representing distance in units {@code unit}
+     *
+     * @param distanceText distance string
+     * @param unit         unit to convert from
+     * @return the distance in kilometers
+     * @throws NumberFormatException if the given string is not numeric
+     */
+    public static float parseDistance(final String distanceText, final DistanceUnit unit)
+            throws NumberFormatException {
+        return convertDistance(Float.parseFloat(distanceText), unit);
+    }
+
     /**
      * Converts distance from different units to kilometers
      *
@@ -65,8 +79,7 @@ public final class DistanceParser {
      * @param unit     unit to convert from
      * @return the distance in kilometers
      */
-    public static float convertDistance(final float distance, final DistanceUnit unit)
-            throws NumberFormatException {
+    public static float convertDistance(final float distance, final DistanceUnit unit) {
         switch (unit) {
             case M:
                 return distance / 1000;

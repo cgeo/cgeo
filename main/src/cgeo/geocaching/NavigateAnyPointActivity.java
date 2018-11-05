@@ -515,8 +515,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
             final double distance;
             try {
-                final float srcDistance = Float.parseFloat(distanceText);
-                distance = DistanceParser.convertDistance(srcDistance, distanceUnit);
+                distance = DistanceParser.parseDistance(distanceText, distanceUnit);
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;

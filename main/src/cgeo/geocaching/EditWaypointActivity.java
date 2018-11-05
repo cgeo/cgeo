@@ -61,7 +61,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
@@ -597,8 +596,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             final double distance;
             try {
-                final float srcDistance = Float.parseFloat(distanceText);
-                distance = DistanceParser.convertDistance(srcDistance, distanceUnit);
+                distance = DistanceParser.parseDistance(distanceText, distanceUnit);
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;
