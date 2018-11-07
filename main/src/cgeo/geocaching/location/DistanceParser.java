@@ -1,63 +1,10 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.utils.MatcherWrapper;
-
-import java.util.Locale;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 public final class DistanceParser {
-
-    private static final Pattern pattern = Pattern.compile("^([0-9.,]+)[ ]*(m|km|ft|yd|mi|)?$", Pattern.CASE_INSENSITIVE);
 
     private DistanceParser() {
         // utility class
     }
-
-    /**
-     * Parse a distance string composed by a number and an optional suffix
-     * (such as "1.2km").
-     *
-     * @param distanceText the string to analyze
-     * @param metricUnit   if false AND no unit is present in the string, the units will be considered
-     *                     to be FT, meters otherwise
-     * @return the distance in kilometers
-     * @throws NumberFormatException if the given number is invalid
-     */
-    public static float parseDistance(final String distanceText, final boolean metricUnit)
-            throws NumberFormatException {
-        final MatcherWrapper matcher = new MatcherWrapper(pattern, distanceText);
-
-        if (!matcher.find()) {
-            throw new NumberFormatException(distanceText);
-        }
-
-        final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
-        final String unitStr = StringUtils.lowerCase(matcher.group(2), Locale.US);
-
-        DistanceUnit unit = metricUnit ? DistanceUnit.M : DistanceUnit.FT;
-
-        switch (unitStr) {
-            case "m":
-                unit = DistanceUnit.M;
-                break;
-            case "km":
-                unit = DistanceUnit.KM;
-                break;
-            case "yd":
-                unit = DistanceUnit.YD;
-                break;
-            case "mi":
-                unit = DistanceUnit.MI;
-                break;
-            case "ft":
-                unit = DistanceUnit.FT;
-                break;
-        }
-        return convertDistance(value, unit);
-    }
-
 
     /**
      * Parses a distance string {@code distanceText} representing distance in units {@code unit}
@@ -69,7 +16,7 @@ public final class DistanceParser {
      */
     public static float parseDistance(final String distanceText, final DistanceUnit unit)
             throws NumberFormatException {
-        return convertDistance(Float.parseFloat(distanceText), unit);
+        return convertDistance(Float.parseFloat(distanceText.replace(',', '.')), unit);
     }
 
     /**
@@ -110,6 +57,55 @@ public final class DistanceParser {
                 }
             }
             return MI;
+        }
+
+        /**
+         * Parses English-language string representing {@link DistanceUnit} object
+         *
+         * @param unitStr string like "km" to parse
+         * @return DistanceUnit object corresponding to the string
+         * @throws NumberFormatException if string is empty or cannot be parsed to {@link DistanceUnit}
+         */
+        public static DistanceUnit parseUnit(final String unitStr) throws NumberFormatException {
+            final DistanceUnit unit;
+
+            switch (unitStr.toLowerCase()) {
+                case "km":
+                    unit = DistanceUnit.KM;
+                    break;
+                case "mi":
+                    unit = DistanceUnit.MI;
+                    break;
+                case "m":
+                    unit = DistanceUnit.M;
+                    break;
+                case "ft":
+                    unit = DistanceUnit.FT;
+                    break;
+                case "yd":
+                    unit = DistanceUnit.YD;
+                    break;
+                default:
+                    throw new NumberFormatException();
+            }
+            return unit;
+        }
+
+        /**
+         * Parses English-language string {@code unitStr} representing {@link DistanceUnit} object.
+         * If the string cannot be parsed to a valid unit, {@code defaultUnit} will be returned
+         *
+         * @param unitStr     string like "km" to parse
+         * @param defaultUnit unit which will be returned if parsing fails
+         * @return DistanceUnit object corresponding to the string, or {@code defaultUnit}
+         * if the string cannot be parsed
+         */
+        public static DistanceUnit parseUnit(final String unitStr, final DistanceUnit defaultUnit) {
+            try {
+                return parseUnit(unitStr);
+            } catch (final NumberFormatException e) {
+                return defaultUnit;
+            }
         }
 
         public int getValue() {
