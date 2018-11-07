@@ -114,7 +114,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_DETAILSIMAGE = Pattern.compile("<div id=\"TrackableDetails\">([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*</div> <div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">");
     static final Pattern PATTERN_TRACKABLE_ICON = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>");
     static final Pattern PATTERN_TRACKABLE_TYPE = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>");
-    static final Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("\\(([0-9.,]+(km|mi))[^\\)]*\\)\\s*<a href=\"map_gm");
+    static final Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("\\(([0-9.,]+)(km|mi)[^\\)]*\\)\\s*<a href=\"map_gm");
     static final Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data BorderTop .+?/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span[^>]+>)?([^<]+)</.+?)?<td colspan=\"4\">\\s*<div.*?>(.*?)</div>\\s*(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<li><a href=\"([^\"]+)\".+?LogImgTitle.+?>([^<]*)</");
     static final String TRACKABLE_IS_LOCKED = ">Found it? Log it! (locked)</a></td>";
@@ -127,7 +127,7 @@ public final class GCConstants {
     static final Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
     /** Second group used */
     static final Pattern PATTERN_SEARCH_TRACKABLESINSIDE = Pattern.compile("<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*");
-    static final Pattern PATTERN_SEARCH_DIRECTION_DISTANCE = Pattern.compile("<img src=\"/images/icons/compass/([^\\.]+)\\.gif\"[^>]*>[^<]*<br />([^<]+)</span>");
+    static final Pattern PATTERN_SEARCH_DIRECTION_DISTANCE = Pattern.compile("<img src=\"/images/icons/compass/([^\\.]+)\\.gif\"[^>]*>[^<]*<br />([0-9.,]+)\\s*?(m|km|ft|yd|mi|)?</span>");
     static final Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
     static final Pattern PATTERN_SEARCH_CONTAINER = Pattern.compile("<img src=\"/images/icons/container/([^\\.]+)\\.gif\"");
     static final Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile("\\|\\W*(GC[0-9A-Z&&[^ILOSU]]+)[^\\|]*\\|");
