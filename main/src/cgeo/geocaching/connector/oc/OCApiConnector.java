@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
@@ -17,7 +18,7 @@ import java.util.concurrent.Callable;
 import io.reactivex.Maybe;
 import org.apache.commons.lang3.StringUtils;
 
-public class OCApiConnector extends OCConnector implements ISearchByGeocode {
+public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOAuthCapability {
 
     private final String cK;
     private final ApiSupport apiSupport;
@@ -104,10 +105,12 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
         return apiSupport;
     }
 
+    @Override
     public int getTokenPublicPrefKeyId() {
         return 0;
     }
 
+    @Override
     public int getTokenSecretPrefKeyId() {
         return 0;
     }
