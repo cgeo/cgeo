@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.su;
 
+import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
@@ -18,6 +19,8 @@ import junit.framework.Assert;
 
 public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 
+    private static UserInfo user;
+    private static String userJson = "{\"status\":{\"code\":\"OK\"},\"data\":{\"id\":68451,\"name\":\"lega4\",\"foundCaches\":594,\"hiddenCaches\":28}}";
     private static Geocache cache;
     private static String cacheJson = "{\"status\":{\"code\":\"OK\"}," +
             "\"data\":{" +
@@ -109,6 +112,11 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
     private void parseCache(final String jsonData) throws Exception {
         final ObjectNode actualObj = (ObjectNode) JsonUtils.reader.readTree(jsonData);
         cache = SuParser.parseCache(actualObj);
+    }
+
+    private void parseUser(final String jsonData) throws Exception {
+        final ObjectNode actualObj = (ObjectNode) JsonUtils.reader.readTree(jsonData);
+        user = SuParser.parseUser(actualObj);
     }
 
     private List<Geocache> parseCaches(final String jsonData) throws Exception {
@@ -342,5 +350,17 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         final List<Geocache> caches = parseCaches(cachesListJson);
 
         Assert.assertEquals("VI6989", caches.get(0).getGeocode());
+    }
+
+    public void testCanParseUserName() throws Exception {
+        parseUser(userJson);
+
+        Assert.assertEquals("lega4", user.getName());
+    }
+
+    public void testCanParseUserFinds() throws Exception {
+        parseUser(userJson);
+
+        Assert.assertEquals(594, user.getFinds());
     }
 }

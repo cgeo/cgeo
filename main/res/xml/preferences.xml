@@ -307,7 +307,7 @@
                         android:dependency="@string/pref_connectorSUActive"
                         android:layout="@layout/text_preference"
                         android:text="@string/settings_su_description" />
-                    <cgeo.geocaching.settings.CredentialsPreference
+                    <cgeo.geocaching.settings.OAuthPreference
                         android:dependency="@string/pref_connectorSUActive"
                         android:summary="@string/auth_unconnected"
                         android:key="@string/pref_fakekey_su_authorization" />

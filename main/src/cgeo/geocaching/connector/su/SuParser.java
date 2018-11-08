@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.su;
 
+import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -87,8 +88,22 @@ public class SuParser {
     private static final String CACHE_IMAGE_CAPTION = "description";
     private static final String CACHE_IMAGE_TYPE = "type";
 
+    private static final String USER_NAME = "name";
+    private static final String USER_FOUNDS = "foundCaches";
+
     private SuParser() {
         // utility class
+    }
+
+    @NonNull
+    public static UserInfo parseUser(final ObjectNode response) {
+        final JsonNode data = response.get("data");
+
+        final int finds = data.get(USER_FOUNDS).asInt();
+        final String name = data.get(USER_NAME).asText();
+
+        return new UserInfo(name, finds, UserInfo.UserInfoStatus.SUCCESSFUL);
+
     }
 
     @NonNull

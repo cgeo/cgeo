@@ -4,23 +4,23 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
-import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.UserInfo;
+import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.MapTokens;
+import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.DisposableHandler;
 
 import android.app.Activity;
@@ -33,7 +33,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, ICredentials {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -48,9 +48,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     // all IDs are unique at SU
     private static final CharSequence PREFIX_GENERAL = "SU";
 
-
-    @NonNull
-    private final SuLogin suLogin = SuLogin.getInstance();
+    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
     private SuConnector() {
         // singleton
@@ -60,60 +58,46 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         return Holder.INSTANCE;
     }
 
+    public OAuthLevel getSupportedAuthLevel() {
+
+        if (Settings.hasOAuthAuthorization(getTokenPublicPrefKeyId(), getTokenSecretPrefKeyId())) {
+            return OAuthLevel.Level3;
+        }
+        return OAuthLevel.Level1;
+    }
+
+    private boolean supportsPersonalization() {
+        return getSupportedAuthLevel() == OAuthLevel.Level3;
+    }
+
     @Override
     public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
-        final StatusCode status = suLogin.login();
-
-        if (ConnectorFactory.showLoginToast && handler != null) {
-            handler.sendMessage(handler.obtainMessage(0, status));
-            ConnectorFactory.showLoginToast = false;
-
-            // invoke settings activity to insert login details
-            if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
-                SettingsActivity.openForScreen(R.string.preference_screen_su, fromActivity);
-            }
+        if (supportsPersonalization()) {
+            userInfo = SuApi.getUserInfo(this);
+        } else {
+            userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfo.UserInfoStatus.NOT_SUPPORTED);
         }
-        return status == StatusCode.NO_ERROR;
+        return userInfo.getStatus() == UserInfo.UserInfoStatus.SUCCESSFUL;
     }
 
     @Override
     public String getUserName() {
-        return suLogin.getActualUserName();
+        return userInfo.getName();
     }
 
     @Override
     public int getCachesFound() {
-        return suLogin.getActualCachesFound();
+        return userInfo.getFinds();
     }
 
     @Override
     public String getLoginStatusString() {
-        return suLogin.getActualStatus();
+        return CgeoApplication.getInstance().getString(userInfo.getStatus().resId);
     }
 
     @Override
     public boolean isLoggedIn() {
-        return suLogin.isActualLoginStatus();
-    }
-
-    @Override
-    public Credentials getCredentials() {
-        return Settings.getCredentials(R.string.pref_suusername, R.string.pref_supassword);
-    }
-
-    @Override
-    public int getUsernamePreferenceKey() {
-        return R.string.pref_suusername;
-    }
-
-    @Override
-    public int getPasswordPreferenceKey() {
-        return R.string.pref_supassword;
-    }
-
-    @Override
-    public int getAvatarPreferenceKey() {
-        return R.string.pref_su_avatar;
+        return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
     }
 
     @Override
@@ -172,6 +156,16 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
 
     public final String getConsumerSecret() {
         return CgeoApplication.getInstance().getString(R.string.su_consumer_secret);
+    }
+
+    @Override
+    public int getTokenPublicPrefKeyId() {
+        return R.string.pref_su_tokenpublic;
+    }
+
+    @Override
+    public int getTokenSecretPrefKeyId() {
+        return R.string.pref_su_tokensecret;
     }
 
     @Override

@@ -799,7 +799,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.settings.SUAuthorizationActivity"
+            android:name="cgeo.geocaching.connector.su.SuAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
@@ -808,6 +808,11 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="www.cgeo.org"/>
+                <data android:pathPrefix="/geocachingsu/"/>
+                <data android:scheme="callback" />
             </intent-filter>
         </activity>
 

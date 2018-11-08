@@ -765,6 +765,9 @@
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
 
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
+
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo is now authorized to interact with %s.</string>
     <string name="err_auth_geokrety_bad_password">Your username/password seems invalid.</string>

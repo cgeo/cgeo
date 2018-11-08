@@ -3,6 +3,8 @@ package cgeo.geocaching.connector.su;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.UserInfo;
+import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -29,6 +31,20 @@ public class SuApi {
 
     private SuApi() {
         // utility class
+    }
+
+
+    @NonNull
+    public static UserInfo getUserInfo(@NonNull final SuConnector connector) {
+        final Parameters params = new Parameters();
+
+        final JSONResult result = getRequest(connector, SuApiEndpoint.USER, params);
+
+        if (!result.isSuccess) {
+            return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.FAILED);
+        }
+
+        return SuParser.parseUser(result.data);
     }
 
     @Nullable
@@ -141,14 +157,7 @@ public class SuApi {
             return new JSONResult("unknown connector host");
         }
 
-        final SuLogin suLogin = SuLogin.getInstance();
-
-        //TODO: Try to re-login if needed ?
-//        if (suLogin.oAtoken.isEmpty() && !suLogin.getActualUserName().isEmpty()) {
-//            suLogin.login(true);
-//        }
-
-        final OAuthTokens tokens = suLogin.getOAuthTokens();
+        final OAuthTokens tokens = new OAuthTokens(connector);
         if (!tokens.isValid()) {
             throw new NotAuthorizedException();
         }

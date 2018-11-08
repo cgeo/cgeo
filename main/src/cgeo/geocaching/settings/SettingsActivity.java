@@ -672,8 +672,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
                 break;
             case R.string.pref_fakekey_su_authorization:
-                setAuthTitle(prefKeyId, SuConnector.getInstance());
-                setConnectedUsernameTitle(prefKeyId, SuConnector.getInstance());
+                setSuAuthTitle();
+                setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
                 break;
             case R.string.pref_fakekey_gcvote_authorization:
                 setAuthTitle(prefKeyId, GCVote.getInstance());
@@ -695,6 +695,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void setOCAuthTitle(final OCPreferenceKeys key) {
         getPreference(key.authPrefId)
                 .setTitle(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    private void setSuAuthTitle() {
+        getPreference(R.string.pref_fakekey_su_authorization)
+                .setTitle(getString(Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret)
                         ? R.string.settings_reauthorize
                         : R.string.settings_authorize));
     }
@@ -827,8 +834,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 redrawScreen(R.string.preference_screen_geokrety);
                 break;
             case R.string.pref_fakekey_su_authorization:
-                setAuthTitle(requestCode, SuConnector.getInstance());
-                setConnectedUsernameTitle(requestCode, SuConnector.getInstance());
+                setSuAuthTitle();
+                setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
                 redrawScreen(R.string.preference_screen_su);
                 break;
             default:
