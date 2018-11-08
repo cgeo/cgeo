@@ -64,6 +64,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
 
+    private String lastVerifier = null;
+
     private final Handler requestTokenHandler = new RequestTokenHandler(this);
     private final Handler changeTokensHandler = new ChangeTokensHandler(this);
 
@@ -179,15 +181,24 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
         final Uri uri = getIntent().getData();
-        if (uri != null) {
-            final String verifier = uri.getQueryParameter("oauth_verifier");
-            if (StringUtils.isNotBlank(verifier)) {
-                exchangeTokens(verifier);
-            } else {
-                // We can shortcut the whole verification process if we do not have a token at all.
-                changeTokensHandler.sendEmptyMessage(NOT_AUTHENTICATED);
-            }
+        if (uri == null) {
+            return;
         }
+
+        final String verifier = uri.getQueryParameter("oauth_verifier");
+
+        if (StringUtils.isBlank(verifier)) {
+            // We can shortcut the whole verification process if we do not have a token at all.
+            changeTokensHandler.sendEmptyMessage(NOT_AUTHENTICATED);
+            return;
+        }
+
+        if (verifier.equals(lastVerifier)) {
+            return;
+        }
+
+        lastVerifier = verifier;
+        exchangeTokens(verifier);
     }
 
     private void requestToken() {
