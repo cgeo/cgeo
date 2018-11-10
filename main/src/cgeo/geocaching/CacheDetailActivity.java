@@ -1714,7 +1714,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 descriptionView.setBackgroundColor(backgroundColor);
 
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                final Spannable description = new SpannableString(Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
+                final Editable description = new SpannableStringBuilder(Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
                 addWarning(unknownTagsHandler, description);
                 if (StringUtils.isNotBlank(description)) {
                     fixRelativeLinks(description);
@@ -1768,14 +1768,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
     // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
     // sometimes technically incorrect.
-    private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Spanned description) {
+    private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Editable description) {
         if (unknownTagsHandler.isProblematicDetected()) {
             final int startPos = description.length();
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (StringUtils.isNotEmpty(cache.getUrl())) {
                 final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
-                ((Editable) description).append("\n\n").append(tableNote);
-                ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                description.append("\n\n").append(tableNote);
+                description.setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
     }
