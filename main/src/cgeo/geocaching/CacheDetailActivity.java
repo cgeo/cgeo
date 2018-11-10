@@ -1788,8 +1788,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final int start = spannable.getSpanStart(span);
                 final int end = spannable.getSpanEnd(span);
 
-                spannable.removeSpan(span);
-                spannable.setSpan(new BackgroundColorSpan(Color.GRAY), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                //  Assuming that backgroundColor can be either white or black,
+                // this will set opposite background color (white for black and black for white)
+                spannable.setSpan(new BackgroundColorSpan(backgroundColor ^ 0x00ffffff), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
     }
