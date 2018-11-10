@@ -10,6 +10,7 @@ enum SuApiEndpoint {
     CACHE_LIST("/api/list.php", OAuthLevel.Level1),
     CACHE_LIST_CENTER("/api/list_center.php", OAuthLevel.Level1),
     NOTE("/api/note.php", OAuthLevel.Level1),
+    POST_IMAGE("/api/photo.php", OAuthLevel.Level1),
     USER("/api/profile.php", OAuthLevel.Level1);
 
     @NonNull

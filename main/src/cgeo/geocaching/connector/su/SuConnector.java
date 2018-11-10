@@ -221,6 +221,11 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
+    public boolean supportsLogImages() {
+        return true;
+    }
+
+    @Override
     @NonNull
     public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
         return new SuLoggingManager(activity, this, cache);

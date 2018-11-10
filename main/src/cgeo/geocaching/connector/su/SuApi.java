@@ -1,7 +1,10 @@
 package cgeo.geocaching.connector.su;
 
+import static android.util.Base64.DEFAULT;
+
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
@@ -10,21 +13,27 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.Response;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class SuApi {
@@ -138,6 +147,46 @@ public class SuApi {
         }
 
         return new LogResult(StatusCode.NO_ERROR, data.get("data").get("noteID").asText());
+    }
+
+    @NonNull
+    private static String createImageCaption(final Image image) {
+        final StringBuilder caption = new StringBuilder(StringUtils.trimToEmpty(image.getTitle()));
+        if (StringUtils.isNotEmpty(caption) && StringUtils.isNotBlank(image.getDescription())) {
+            caption.append(": ");
+        }
+        caption.append(StringUtils.trimToEmpty(image.getDescription()));
+        return caption.toString();
+    }
+
+    @NonNull
+    public static ImageResult postImage(final Geocache cache, final Image image) {
+        final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
+        if (!(connector instanceof SuConnector)) {
+            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+        }
+        final SuConnector gcsuConnector = (SuConnector) connector;
+
+        try {
+            final File file = image.getFile();
+            if (file == null) {
+                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            }
+
+            final Parameters params = new Parameters("cacheID", cache.getCacheId());
+            params.add("image", Base64.encodeToString(IOUtils.readFully(new FileInputStream(file), (int) file.length()), DEFAULT));
+            params.add("caption", createImageCaption(image));
+
+            final ObjectNode data = postRequest(gcsuConnector, SuApiEndpoint.POST_IMAGE, params).data;
+
+            if (data != null && data.get("data").get("success").asBoolean()) {
+                return new ImageResult(StatusCode.NO_ERROR, data.get("data").get("image_url").asText());
+            }
+
+        } catch (final Exception e) {
+            Log.e("SuApi.postLogImage", e);
+        }
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
     }
 
     @NonNull

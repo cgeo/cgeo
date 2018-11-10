@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.su;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
@@ -48,7 +47,7 @@ public class SuLoggingManager extends AbstractLoggingManager {
     @Override
     @NonNull
     public final ImageResult postLogImage(final String logId, final Image image) {
-        return new ImageResult(StatusCode.LOG_POST_ERROR, "");
+        return SuApi.postImage(cache, image);
     }
 
     @Override
