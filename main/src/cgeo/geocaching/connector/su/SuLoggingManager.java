@@ -3,12 +3,14 @@ package cgeo.geocaching.connector.su;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.utils.Log;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -41,7 +43,12 @@ public class SuLoggingManager extends AbstractLoggingManager {
     @Override
     @NonNull
     public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
-        return SuApi.postLog(cache, logType, date, log);
+        try {
+            return SuApi.postLog(cache, logType, date, log);
+        } catch (final SuApi.SuApiException e) {
+            Log.e("Logging manager SuApi.postLog exception: ", e);
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -59,11 +60,14 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     public OAuthLevel getSupportedAuthLevel() {
-
-        if (Settings.hasOAuthAuthorization(getTokenPublicPrefKeyId(), getTokenSecretPrefKeyId())) {
+        if (hasAuthorization()) {
             return OAuthLevel.Level3;
         }
         return OAuthLevel.Level1;
+    }
+
+    public boolean hasAuthorization() {
+        return Settings.hasOAuthAuthorization(getTokenPublicPrefKeyId(), getTokenSecretPrefKeyId());
     }
 
     private boolean supportsPersonalization() {
@@ -73,7 +77,11 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
         if (supportsPersonalization()) {
-            userInfo = SuApi.getUserInfo(this);
+            try {
+                userInfo = SuApi.getUserInfo(this);
+            } catch (final SuApi.SuApiException e) {
+                userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.FAILED);
+            }
         } else {
             userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfo.UserInfoStatus.NOT_SUPPORTED);
         }
@@ -181,6 +189,9 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
             return new SearchResult(StatusCode.NOT_LOGGED_IN);
         } catch (final SuApi.ConnectionErrorException e) {
             return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByGeocode failed: ", e);
+            return null;
         }
 
         return new SearchResult(cache);
@@ -189,15 +200,32 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        final List<Geocache> caches = SuApi.searchByBBox(viewport, this);
-
-        return new SearchResult(caches);
+        try {
+            return new SearchResult(SuApi.searchByBBox(viewport, this));
+        } catch (final SuApi.NotAuthorizedException e) {
+            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+        } catch (final SuApi.ConnectionErrorException e) {
+            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByViewport failed: ", e);
+            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+        }
     }
 
     @Override
     @NonNull
     public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        return new SearchResult(SuApi.searchByCenter(center, 20, this));
+        try {
+            return new SearchResult(SuApi.searchByCenter(center, 20, this));
+        } catch (final SuApi.NotAuthorizedException e) {
+            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+        } catch (final SuApi.ConnectionErrorException e) {
+            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByCenter failed: ", e);
+            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+        }
+
     }
 
     @Override

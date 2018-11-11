@@ -44,7 +44,7 @@ public class SuApi {
 
 
     @NonNull
-    public static UserInfo getUserInfo(@NonNull final SuConnector connector) {
+    public static UserInfo getUserInfo(@NonNull final SuConnector connector) throws SuApiException {
         final Parameters params = new Parameters();
 
         final JSONResult result = getRequest(connector, SuApiEndpoint.USER, params);
@@ -57,7 +57,7 @@ public class SuApi {
     }
 
     @Nullable
-    public static Geocache searchByGeocode(final String geocode) {
+    public static Geocache searchByGeocode(final String geocode) throws SuApiException {
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (!(connector instanceof SuConnector)) {
             return null;
@@ -77,7 +77,7 @@ public class SuApi {
     }
 
     @NonNull
-    public static List<Geocache> searchByBBox(final Viewport viewport, @NonNull final SuConnector connector) {
+    public static List<Geocache> searchByBBox(final Viewport viewport, @NonNull final SuConnector connector) throws SuApiException {
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
         }
@@ -102,7 +102,7 @@ public class SuApi {
      * @return list of caches located around {@code center}
      */
     @NonNull
-    public static List<Geocache> searchByCenter(final Geopoint center, final float radius, @NonNull final SuConnector connector) {
+    public static List<Geocache> searchByCenter(final Geopoint center, final float radius, @NonNull final SuConnector connector) throws SuApiException {
         final Parameters params = new Parameters(
                 "lat", String.valueOf(center.getLatitude()),
                 "lng", String.valueOf(center.getLongitude()),
@@ -125,7 +125,7 @@ public class SuApi {
     }
 
     @NonNull
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) {
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) throws SuApiException {
         final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
         if (!(connector instanceof SuConnector)) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
@@ -190,17 +190,17 @@ public class SuApi {
     }
 
     @NonNull
-    private static JSONResult getRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) {
+    private static JSONResult getRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) throws SuApiException {
         return request(connector, endpoint, "GET", params);
     }
 
     @NonNull
-    private static JSONResult postRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) {
+    private static JSONResult postRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) throws SuApiException {
         return request(connector, endpoint, "POST", params);
     }
 
     @NonNull
-    private static JSONResult request(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final String method, @NonNull final Parameters params) {
+    private static JSONResult request(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final String method, @NonNull final Parameters params) throws SuApiException {
         final String host = connector.getHost();
         if (StringUtils.isBlank(host)) {
             return new JSONResult("unknown connector host");
@@ -220,31 +220,48 @@ public class SuApi {
             } else {
                 result = new JSONResult(Network.postRequest(uri, params).blockingGet());
             }
+        } catch (final RuntimeException e) {
+            if (e.getCause() instanceof InterruptedException) {
+                Log.w("SuApi.JSONResult Interrupted");
+                return new JSONResult("interrupted");
+            }
+            Log.e("SuApi.JSONResult unknown error", e);
+            throw new ConnectionErrorException();
         } catch (final Exception e) {
+            Log.e("SuApi.JSONResult unknown error", e);
             throw new ConnectionErrorException();
         }
 
+        if (!result.isSuccess) {
+            Log.w("JSONResult exception, failed request");
+            throw new ConnectionErrorException();
+        }
         if (result.data.get("status").get("code").toString().contains("ERROR") && result.data.get("status").get("type").toString().contains("AuthorisationRequired")) {
             throw new NotAuthorizedException();
         }
         return result;
     }
 
-    static class CacheNotFoundException extends RuntimeException {
+    static class SuApiException extends Exception {
     }
 
-    static class ConnectionErrorException extends RuntimeException {
+    static class CacheNotFoundException extends SuApiException {
     }
 
-    static class NotAuthorizedException extends RuntimeException {
+    static class ConnectionErrorException extends SuApiException {
+    }
+
+    static class NotAuthorizedException extends SuApiException {
     }
 
     private static class JSONResult {
         public final boolean isSuccess;
+        public final int responceCode;
         public final ObjectNode data;
 
         JSONResult(final Response response) {
             ObjectNode tempData = null;
+            responceCode = response.code();
             try {
                 tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().byteStream());
             } catch (final Exception e) {
@@ -258,6 +275,7 @@ public class SuApi {
 
         JSONResult(@NonNull final String errorMessage) {
             isSuccess = false;
+            responceCode = -1;
             data = new ObjectNode(JsonUtils.factory);
             data.putObject("error").put("developer_message", errorMessage);
         }
