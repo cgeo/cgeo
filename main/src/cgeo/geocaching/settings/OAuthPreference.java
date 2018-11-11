@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 public class OAuthPreference extends AbstractClickablePreference {
 
     private static final int NO_KEY = -1;
@@ -78,20 +80,49 @@ public class OAuthPreference extends AbstractClickablePreference {
 
     }
 
+    private ImmutablePair<Integer, Integer> getKeysIds() {
+        final int publicKeyId;
+        final int secretKeyId;
+
+        switch (oAuthMapping) {
+            case TWITTER:
+                publicKeyId = R.string.pref_twitter_token_public;
+                secretKeyId = R.string.pref_twitter_token_secret;
+                break;
+            case OCDE:
+            case OCNL:
+            case OCPL:
+            case OCRO:
+            case OCUK:
+            case OCUS:
+                final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
+                publicKeyId = key.publicTokenPrefId;
+                secretKeyId = key.privateTokenPrefId;
+                break;
+            default:
+                publicKeyId = -1;
+                secretKeyId = -1;
+        }
+        return new ImmutablePair<>(publicKeyId, secretKeyId);
+    }
+
     @Override
     protected boolean isAuthorized() {
-        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
-        if (key != null) {
-            return Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId);
+        final ImmutablePair<Integer, Integer> keys = getKeysIds();
+        if (keys.left < 0 || keys.right < 0) {
+            return false;
         }
-        return false;
+
+        return Settings.hasOCAuthorization(keys.left, keys.right);
     }
 
     @Override
     protected void revokeAuthorization() {
-        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
-        if (key != null) {
-            Settings.setTokens(key.publicTokenPrefId, null, key.privateTokenPrefId, null);
+        final ImmutablePair<Integer, Integer> keys = getKeysIds();
+        if (keys.left < 0 || keys.right < 0) {
+            return;
         }
+
+        Settings.setTokens(keys.left, null, keys.right, null);
     }
 }
