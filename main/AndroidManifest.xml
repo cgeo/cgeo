@@ -829,7 +829,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
-        
+        <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
+
     </application>
 
 </manifest>

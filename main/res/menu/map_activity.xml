@@ -140,6 +140,14 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_theme_options"
+        android:icon="@drawable/ic_menu_preferences"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/map_theme_options"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
         android:id="@+id/submenu_strategy"
         android:icon="@drawable/ic_menu_preferences"
         android:title="@string/map_strategy"

@@ -54,11 +54,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -101,11 +103,14 @@ import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
+import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
+import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
+import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
 import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
 import org.xmlpull.v1.XmlPullParserException;
 
 @SuppressLint("ClickableViewAccessibility")
-public class NewMap extends AbstractActionBarActivity {
+public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeMenuCallback, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private MfMapView mapView;
     private TileCache tileCache;
@@ -115,6 +120,9 @@ public class NewMap extends AbstractActionBarActivity {
     private NavigationLayer navigationLayer;
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
+
+    private XmlRenderThemeStyleMenu styleMenu;
+    private SharedPreferences sharedPreferences;
 
     private DistanceView distanceView;
 
@@ -160,6 +168,9 @@ public class NewMap extends AbstractActionBarActivity {
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
+
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         // some tiles are rather big, see https://github.com/mapsforge/mapsforge/issues/868
         Parameters.MAXIMUM_BUFFER_SIZE = 6500000;
@@ -288,6 +299,7 @@ public class NewMap extends AbstractActionBarActivity {
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
+            menu.findItem(R.id.menu_theme_options).setVisible(styleMenu != null);
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
@@ -393,6 +405,14 @@ public class NewMap extends AbstractActionBarActivity {
                 return true;
             case R.id.menu_theme_mode:
                 selectMapTheme();
+                return true;
+            case R.id.menu_theme_options:
+                final Intent intent = new Intent(this, RenderThemeSettings.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                if (styleMenu != null) {
+                    intent.putExtra(RenderThemeSettings.RENDERTHEME_MENU, styleMenu);
+                }
+                startActivity(intent);
                 return true;
             case R.id.menu_as_list:
                 CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
@@ -578,7 +598,7 @@ public class NewMap extends AbstractActionBarActivity {
             rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
         } else {
             try {
-                final XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(new File(themePath));
+                final XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(new File(themePath), this);
                 // Validate the theme file
                 RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
@@ -850,6 +870,7 @@ public class NewMap extends AbstractActionBarActivity {
     @Override
     protected void onDestroy() {
         Log.d("NewMap: onDestroy");
+        this.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
         this.tileCache.destroy();
         this.mapView.getModel().mapViewPosition.destroy();
         this.mapView.destroy();
@@ -910,6 +931,33 @@ public class NewMap extends AbstractActionBarActivity {
         if (cache != null) {
             EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
         }
+    }
+
+    @Override
+    public Set<String> getCategories(final XmlRenderThemeStyleMenu style) {
+        styleMenu = style;
+        final String id = this.sharedPreferences.getString(styleMenu.getId(), styleMenu.getDefaultValue());
+
+        final XmlRenderThemeStyleLayer baseLayer = styleMenu.getLayer(id);
+        if (baseLayer == null) {
+            Log.w("Invalid style " + id);
+            return null;
+        }
+        final Set<String> result = baseLayer.getCategories();
+
+        // add the categories from overlays that are enabled
+        for (final XmlRenderThemeStyleLayer overlay : baseLayer.getOverlays()) {
+            if (this.sharedPreferences.getBoolean(overlay.getId(), overlay.isEnabled())) {
+                result.addAll(overlay.getCategories());
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String s) {
+        AndroidUtil.restartActivity(this);
     }
 
     // set my location listener
