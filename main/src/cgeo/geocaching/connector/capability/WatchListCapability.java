@@ -14,20 +14,20 @@ public interface WatchListCapability extends IConnector {
     /**
      * Restrict the caches or circumstances when to add a cache to the watchlist.
      */
-    boolean canAddToWatchList(@NonNull Geocache cache);
+    boolean canAddToWatchList(@NonNull final Geocache cache);
 
     /**
      * Add the cache to the watchlist
      *
      * @return True - success/False - failure
      */
-    boolean addToWatchlist(@NonNull Geocache cache);
+    boolean addToWatchlist(@NonNull final Geocache cache);
 
     /**
      * Remove the cache from the watchlist
      *
      * @return True - success/False - failure
      */
-    boolean removeFromWatchlist(@NonNull Geocache cache);
+    boolean removeFromWatchlist(@NonNull final Geocache cache);
 
 }
