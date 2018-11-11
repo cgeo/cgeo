@@ -84,7 +84,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public OAuthLevel getSupportedAuthLevel() {
 
-        if (Settings.hasOCAuthorization(tokenPublicPrefKeyId, tokenSecretPrefKeyId)) {
+        if (Settings.hasOAuthAuthorization(tokenPublicPrefKeyId, tokenSecretPrefKeyId)) {
             return OAuthLevel.Level3;
         }
         return OAuthLevel.Level1;

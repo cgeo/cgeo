@@ -662,7 +662,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
                 if (key != null) {
                     setOCAuthTitle(key);
-                    setConnectedTitle(prefKeyId, Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
+                    setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
                 } else {
                     setConnectedTitle(prefKeyId, false);
                 }
@@ -690,7 +690,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void setOCAuthTitle(final OCPreferenceKeys key) {
         getPreference(key.authPrefId)
-                .setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
+                .setTitle(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
                         ? R.string.settings_reauthorize
                         : R.string.settings_authorize));
     }
@@ -790,7 +790,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
                 if (key != null) {
                     setOCAuthTitle(key);
-                    setConnectedTitle(requestCode, Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
+                    setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
                     redrawScreen(key.prefScreenId);
                 } else {
                     setConnectedTitle(requestCode, false);

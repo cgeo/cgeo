@@ -468,7 +468,7 @@ public class Settings {
         return getBoolean(isActivePrefKeyId, false);
     }
 
-    public static boolean hasOCAuthorization(final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId) {
+    public static boolean hasOAuthAuthorization(final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId) {
         return StringUtils.isNotBlank(getString(tokenPublicPrefKeyId, ""))
                 && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
