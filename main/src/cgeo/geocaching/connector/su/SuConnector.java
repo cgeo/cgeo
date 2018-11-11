@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -34,7 +35,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -262,6 +263,21 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public boolean canLog(@NonNull final Geocache cache) {
         return true;
+    }
+
+    @Override
+    public boolean canAddToWatchList(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public boolean addToWatchlist(@NonNull final Geocache cache) {
+        return SuApi.setWatchState(cache, true);
+    }
+
+    @Override
+    public boolean removeFromWatchlist(@NonNull final Geocache cache) {
+        return SuApi.setWatchState(cache, false);
     }
 
     /**

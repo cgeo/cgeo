@@ -18,6 +18,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -187,6 +188,22 @@ public class SuApi {
             Log.e("SuApi.postLogImage", e);
         }
         return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+    }
+
+    public static boolean setWatchState(@NonNull final Geocache cache, final boolean watched) {
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        params.add("watched", watched ? "true" : "false");
+
+        try {
+            postRequest(SuConnector.getInstance(), SuApiEndpoint.MARK, params);
+        } catch (final SuApiException e) {
+            return false;
+        }
+
+        cache.setOnWatchlist(watched);
+        DataStore.saveChangedCache(cache);
+
+        return true;
     }
 
     @NonNull

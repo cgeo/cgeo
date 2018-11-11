@@ -40,6 +40,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
             "\"founds\":23," +
             "\"notfounds\":12," +
             "\"isFound\":false," +
+            "\"is_watched\":true," +
             "\"recommendations\":44," +
             "\"votes\":23," +
             "\"rating\":4.3," +
@@ -91,7 +92,8 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
             "\"size\":3," +
             "\"founds\":23," +
             "\"notfounds\":12," +
-            "\"isFound\":false," +
+            "\"isFound\":true," +
+            "\"foundOn\":\"2018-04-05\"," +
             "\"recommendations\":44," +
             "\"votes\":23," +
             "\"rating\":4.3," +
@@ -272,7 +274,6 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         Assert.assertTrue(found);
     }
 
-
     public void testCanParseImageUrl() throws Exception {
         parseCache(cacheJson);
         final String imgUrl = ((Image) cache.getImages().toArray()[1]).getUrl();
@@ -362,5 +363,18 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         parseUser(userJson);
 
         Assert.assertEquals(594, user.getFinds());
+    }
+
+    public void testCanParseFindDate() throws Exception {
+        parseCache(simpleCache);
+
+        final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final Date date = isoFormat.parse("2018-04-05");
+        Assert.assertEquals(date, new Date(cache.getVisitedDate()));
+    }
+
+    public void testCanParseWatchStatus() throws Exception {
+        parseCache(cacheJson);
+        Assert.assertTrue(cache.isOnWatchlist());
     }
 }

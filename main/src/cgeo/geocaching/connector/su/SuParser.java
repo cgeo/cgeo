@@ -47,6 +47,8 @@ public class SuParser {
     private static final String CACHE_TERRAIN = "area";
     private static final String CACHE_SIZE = "size";
     private static final String CACHE_IS_FOUND = "isFound";
+    private static final String CACHE_IS_WATCHED = "is_watched";
+    private static final String CACHE_FOUND_ON = "foundOn";
     private static final String CACHE_HIDDEN = "dateHidden";
     private static final String CACHE_STATUS = "status";
     private static final String CACHE_DISABLED_STATUS = "status2";
@@ -162,10 +164,9 @@ public class SuParser {
         // TODO: Geokrety?
         // cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)), EnumSet.of(TrackableBrand.GEOKRETY));
 
-        // TODO: Watches?
-        // if (response.has(CACHE_IS_WATCHED)) {
-        // cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
-        // }
+        if (data.has(CACHE_IS_WATCHED)) {
+            cache.setOnWatchlist(data.get(CACHE_IS_WATCHED).asBoolean());
+        }
 
         // TODO: Uploading personal notes?
         // if (response.hasNonNull(CACHE_MY_NOTES)) {
@@ -289,8 +290,9 @@ public class SuParser {
         if (data.has(CACHE_IS_FOUND)) {
             cache.setFound(data.get(CACHE_IS_FOUND).asBoolean());
 
-            //TODO: if found, set visited date
-            //cache.setVisitedDate();
+            if (cache.isFound()) {
+                cache.setVisitedDate(parseDate(data.get(CACHE_FOUND_ON).asText()).getTime());
+            }
         }
     }
 
