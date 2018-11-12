@@ -297,8 +297,8 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
      *
      */
     protected void enableStartButtonIfReady() {
-        startButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText().toString()) &&
-                StringUtils.isNotEmpty(passwordEditText.getText().toString()));
+        startButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText()) &&
+                StringUtils.isNotEmpty(passwordEditText.getText()));
     }
 
     /**

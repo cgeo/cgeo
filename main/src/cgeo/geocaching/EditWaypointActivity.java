@@ -190,7 +190,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     }
                 }
 
-                if (StringUtils.isBlank(activity.note.getText().toString())) {
+                if (StringUtils.isBlank(activity.note.getText())) {
                     activity.note.setVisibility(View.GONE);
                 }
 
