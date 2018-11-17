@@ -330,7 +330,7 @@ public class DataStore {
             + "description TEXT, "
             + "geocode TEXT, "
             + "log_date LONG, "
-            + "log_type TEXT, "
+            + "log_type INTEGER, "
             + "log_guid TEXT "
             + "); ";
 
@@ -899,7 +899,7 @@ public class DataStore {
                     if (oldVersion < 75) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_date LONG");
-                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_type TEXT");
+                            db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_type INTEGER");
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_guid TEXT");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 75", e);
@@ -1672,7 +1672,12 @@ public class DataStore {
                 } else {
                     values.put("log_date", 0L);
                 }
-                values.put("log_type", trackable.getLogType());
+                final LogType logType = trackable.getLogType();
+                if (logType != null) {
+                    values.put("log_type", trackable.getLogType().id);
+                } else {
+                    values.put("log_type", 0);
+                }
                 values.put("log_guid", trackable.getLogGuid());
                 values.put("goal", trackable.getGoal());
                 values.put("description", trackable.getDetails());
@@ -2290,7 +2295,7 @@ public class DataStore {
                 Log.e("createTrackableFromDatabaseContent", e);
             }
         }
-        trackable.setLogType(cursor.getString(cursor.getColumnIndex("log_type")));
+        trackable.setLogType(LogType.getById(cursor.getInt(cursor.getColumnIndex("log_type"))));
         trackable.setLogGuid(cursor.getString(cursor.getColumnIndex("log_guid")));
         trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
         trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));

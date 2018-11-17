@@ -65,7 +65,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         final Trackable trackable = parseTrackable(R.raw.tb11jzk);
         assertThat(trackable).isNotNull();
         assertThat(trackable.getLogDate()).isNotNull();
-        assertThat(trackable.getLogType()).isEqualTo("Retrieved it");
+        assertThat(trackable.getLogType()).isEqualTo(LogType.RETRIEVED_IT);
         assertThat(trackable.getLogGuid()).isEqualTo("2758cb91-a3b4-489f-9d99-1f5dd708c39f");
     }
 
@@ -73,7 +73,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         final Trackable trackable = parseTrackable(R.raw.tb84bz5);
         assertThat(trackable).isNotNull();
         assertThat(trackable.getLogDate()).isNotNull();
-        assertThat(trackable.getLogType()).isEqualTo("Discovered it");
+        assertThat(trackable.getLogType()).isEqualTo(LogType.DISCOVERED_IT);
         assertThat(trackable.getLogGuid()).isEqualTo("c8093cd3-db0d-40db-b9f3-3d1671309d34");
     }
 

@@ -1437,7 +1437,7 @@ public final class GCParser {
         try {
             final String logType = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_FOUND_LOG, false, null);
             if (logType != null) {
-                trackable.setLogType(StringUtils.trim(logType));
+                trackable.setLogType(LogType.getByType(StringUtils.trim(logType)));
             }
             final MatcherWrapper retrievedMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DISPOSITION_LOG, page);
             if (retrievedMatcher.find()) {

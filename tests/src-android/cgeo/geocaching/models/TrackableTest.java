@@ -67,7 +67,7 @@ public class TrackableTest extends TestCase {
         trackable2.setReleased(new Date());
         trackable2.setLogDate(new Date());
         trackable2.setLogGuid("CC1144");
-        trackable2.setLogType("Discovered it");
+        trackable2.setLogType(LogType.DISCOVERED_IT);
         trackable2.setDistance(100);
         trackable2.setOrigin("origin");
         trackable2.setOwner("owner");
