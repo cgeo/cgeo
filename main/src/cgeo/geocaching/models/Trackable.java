@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -40,7 +41,7 @@ public class Trackable implements ILogable {
     private Date released = null;
     private Date logDate = null;
     private String logGuid;
-    private String logType;
+    private LogType logType;
     private float distance = -1;
     private String origin = null;
     private String owner = null;
@@ -233,11 +234,11 @@ public class Trackable implements ILogable {
         this.logDate = logDate != null ? new Date(logDate.getTime()) : null;
     }
 
-    public String getLogType() {
+    public LogType getLogType() {
         return logType;
     }
 
-    public void setLogType(String logType) {
+    public void setLogType(LogType logType) {
         this.logType = logType;
     }
 
