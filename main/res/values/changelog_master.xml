@@ -3,12 +3,16 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Better keyboard layout while searching for geocaches or trackables on the search activity\n
+    · New: Show whether trackable has been discovered in the past\n
+    · New: Support mapsforge style menus to select desired overlays\n
     · Fix: Remove outdated Navigon navigation application\n
     · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
     · Fix: Waypoints on mapsforge map hidden already below configured limit\n
            Known issue:\n
            Waypoints from other lists might leak onto the map....we are working on it\n
-    · New: Better keyboard layout while searching for geocaches or trackables on the search activity\n
+    · Fix: Do not forget trackable visited state after device has been rotated on logging screen\n
+    · Fix: Accept maspforge maps above V3 during offline map file selection\n
     \n
   </string>
 </resources>
