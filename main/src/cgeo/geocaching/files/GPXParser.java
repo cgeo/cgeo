@@ -117,6 +117,7 @@ abstract class GPXParser extends FileParser {
     private LogEntry.Builder logBuilder = null;
 
     private String type = null;
+    private String subtype = null;
     private String sym = null;
     private String name = null;
     private String cmt = null;
@@ -307,7 +308,7 @@ abstract class GPXParser extends FileParser {
 
                     final Geocache cacheForWaypoint = findParentCache();
                     if (cacheForWaypoint != null) {
-                        final Waypoint waypoint = new Waypoint(cache.getShortDescription(), WaypointType.fromGPXString(sym), false);
+                        final Waypoint waypoint = new Waypoint(cache.getShortDescription(), WaypointType.fromGPXString(sym, subtype), false);
                         if (wptUserDefined) {
                             waypoint.setUserDefined();
                         }
@@ -396,6 +397,9 @@ abstract class GPXParser extends FileParser {
                 final String[] content = StringUtils.split(body, '|');
                 if (content.length > 0) {
                     type = content[0].toLowerCase(Locale.US).trim();
+                    if (content.length > 1) {
+                        subtype = content[1].toLowerCase(Locale.US).trim();
+                    }
                 }
             }
         });
@@ -1152,6 +1156,7 @@ abstract class GPXParser extends FileParser {
      */
     private void resetCache() {
         type = null;
+        subtype = null;
         sym = null;
         name = null;
         desc = null;
@@ -1217,7 +1222,7 @@ abstract class GPXParser extends FileParser {
         if (cache.getCoords() == null) {
             return false;
         }
-        final boolean valid = (type == null && sym == null)
+        final boolean valid = (type == null && subtype == null && sym == null)
                 || StringUtils.contains(type, "geocache")
                 || StringUtils.contains(sym, "geocache")
                 || StringUtils.containsIgnoreCase(sym, "waymark")
