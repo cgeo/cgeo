@@ -1665,6 +1665,8 @@ public class DataStore {
                 } else {
                     values.put("released", 0L);
                 }
+                values.put("goal", trackable.getGoal());
+                values.put("description", trackable.getDetails());
 
                 final Date logDate = trackable.getLogDate();
                 if (logDate != null) {
@@ -1679,8 +1681,6 @@ public class DataStore {
                     values.put("log_type", 0);
                 }
                 values.put("log_guid", trackable.getLogGuid());
-                values.put("goal", trackable.getGoal());
-                values.put("description", trackable.getDetails());
 
                 database.insert(dbTableTrackables, null, values);
 
@@ -2286,6 +2286,8 @@ public class DataStore {
                 Log.e("createTrackableFromDatabaseContent", e);
             }
         }
+        trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
+        trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
         final String logDate = cursor.getString(cursor.getColumnIndex("log_date"));
         if (logDate != null) {
             try {
@@ -2297,8 +2299,6 @@ public class DataStore {
         }
         trackable.setLogType(LogType.getById(cursor.getInt(cursor.getColumnIndex("log_type"))));
         trackable.setLogGuid(cursor.getString(cursor.getColumnIndex("log_guid")));
-        trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
-        trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
         trackable.setLogs(loadLogs(trackable.getGeocode()));
         return trackable;
     }
