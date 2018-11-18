@@ -202,8 +202,8 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
      *
      */
     protected void enableCheckButtonIfReady() {
-        checkButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText().toString()) &&
-                StringUtils.isNotEmpty(passwordEditText.getText().toString()));
+        checkButton.setEnabled(StringUtils.isNotEmpty(usernameEditText.getText()) &&
+                StringUtils.isNotEmpty(passwordEditText.getText()));
     }
 
     /**
