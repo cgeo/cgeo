@@ -469,7 +469,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 final TextView logView = details.add(R.string.trackable_status, res.getString(R.string.trackable_found, Html.fromHtml(logType.type), Formatter.formatDate(logDate.getTime()))).right;
                 logView.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(final View v) {
                         startActivity(new Intent(Intent.ACTION_VIEW, uri));
                     }
                 });

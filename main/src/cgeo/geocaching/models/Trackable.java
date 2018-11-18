@@ -238,11 +238,11 @@ public class Trackable implements ILogable {
         return logType;
     }
 
-    public void setLogType(LogType logType) {
+    public void setLogType(final LogType logType) {
         this.logType = logType;
     }
 
-    public void setLogGuid(String logGuid) {
+    public void setLogGuid(final String logGuid) {
         this.logGuid = logGuid;
     }
 
