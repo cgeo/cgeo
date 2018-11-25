@@ -133,6 +133,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
      * Hook called at the beginning of onLoadFinished().
      */
     public void onLoadFinished() {
+        // return from trackables detail view
+        if (!trackables.isEmpty()) {
+            showProgress(false);
+            return;
+        }
+
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
@@ -403,7 +409,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         tweetCheck.setChecked(true);
         updateTweetBox(typeSelected);
         updateLogPasswordBox(typeSelected);
-
+/*
         // Load Generic Trackables
         AndroidRxUtils.bindActivity(this,
             // Obtain the actives connectors
@@ -429,7 +435,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 updateTrackablesList();
             }
         });
-
+*/
         requestKeyboardForLogging();
     }
 
