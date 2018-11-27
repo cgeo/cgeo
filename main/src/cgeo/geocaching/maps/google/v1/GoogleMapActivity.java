@@ -1,10 +1,12 @@
 package cgeo.geocaching.maps.google.v1;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+import cgeo.geocaching.settings.Settings;
 
 import com.google.android.maps.MapActivity;
 
@@ -20,6 +22,15 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
+    }
+
+    @Override
+    public void setTheme(final int resid) {
+        if (Settings.isLightSkin()) {
+            super.setTheme(R.style.cgeo_gmap_light);
+        } else {
+            super.setTheme(R.style.cgeo_gmap);
+        }
     }
 
     @Override
@@ -126,4 +137,5 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     public void showFilterMenu(final View view) {
         // do nothing, the filter bar only shows the global filter
     }
+
 }
