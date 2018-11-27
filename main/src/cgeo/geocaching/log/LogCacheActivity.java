@@ -32,7 +32,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,15 +60,11 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ViewUtils;
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
 
@@ -409,33 +404,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         tweetCheck.setChecked(true);
         updateTweetBox(typeSelected);
         updateLogPasswordBox(typeSelected);
-/*
-        // Load Generic Trackables
-        AndroidRxUtils.bindActivity(this,
-            // Obtain the actives connectors
-            Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
-            .flatMap(new Function<TrackableConnector, Observable<TrackableLog>>() {
-                @Override
-                public Observable<TrackableLog> apply(final TrackableConnector trackableConnector) {
-                    return Observable.defer(new Callable<Observable<TrackableLog>>() {
-                        @Override
-                        public Observable<TrackableLog> call() {
-                            return trackableConnector.trackableLogInventory();
-                        }
-                    }).subscribeOn(AndroidRxUtils.networkScheduler);
-                }
-            }).toList()
-        ).subscribe(new Consumer<List<TrackableLog>>() {
-            @Override
-            public void accept(final List<TrackableLog> trackableLogs) {
-                // Store trackables
-                trackables.addAll(trackableLogs);
-                // Update the UI
-                initializeTrackablesAction();
-                updateTrackablesList();
-            }
-        });
-*/
+
         requestKeyboardForLogging();
     }
 
