@@ -34,16 +34,20 @@
     </style>
 
 
-    <style name="cgeo.ActionBarStyle" parent="@android:style/Widget.DeviceDefault.ActionBar">
+    <style name="cgeo.ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
         <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
     </style>
 
 
-    <style name="cgeo.ActionBarStyle.Light.Inverse" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid.Inverse">
+    <style name="cgeo.ActionBarStyle.Light.Inverse" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
         <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
     </style>
+
+    <style name="cgeo_gmap" parent="@android:style/Theme.DeviceDefault" />
+
+    <style name="cgeo_gmap_light" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar" />
 
    <style name="cgeo.base" parent="@style/Theme.AppCompat">
 
@@ -67,8 +71,8 @@
     <style name="cgeo.base.light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
         <!-- For some reason we get the non inversed texts here (bug in abc?), explicitly set text styles -->
-        <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title.Inverse</item>
-        <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle.Inverse</item>
+        <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse</item>
 
 
         <item name="android:buttonStyle">@style/button</item>
@@ -191,7 +195,7 @@
     <style name="popup_light" parent="cgeo_popup">
     </style>
     
-    <style name="settings" parent="@style/Theme.AppCompat">
+    <style name="settings" parent="@android:style/Theme.DeviceDefault">
         <item name="settings_cloud">@drawable/settings_cloud_white</item>
         <item name="settings_details">@drawable/settings_details_white</item>
         <item name="settings_eye">@drawable/settings_eye_white</item>
@@ -203,7 +207,7 @@
         <item name="settings_info_icon">@drawable/settings_info_icon_white</item>
     </style>
 
-    <style name="settings.light" parent="@style/Theme.AppCompat.Light">
+    <style name="settings.light" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
         <item name="settings_cloud">@drawable/settings_cloud_black</item>
         <item name="settings_details">@drawable/settings_details_black</item>
         <item name="settings_eye">@drawable/settings_eye_black</item>
