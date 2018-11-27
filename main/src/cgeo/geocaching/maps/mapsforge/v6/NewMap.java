@@ -135,6 +135,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private ProgressDialog waitDialog;
     private LoadDetails loadDetailsThread;
 
+    private String themeSettingsPref = "";
+
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
@@ -936,6 +938,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     @Override
     public Set<String> getCategories(final XmlRenderThemeStyleMenu style) {
         styleMenu = style;
+        themeSettingsPref = style.getId();
         final String id = this.sharedPreferences.getString(styleMenu.getId(), styleMenu.getDefaultValue());
 
         final XmlRenderThemeStyleLayer baseLayer = styleMenu.getLayer(id);
@@ -957,7 +960,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     @Override
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String s) {
-        AndroidUtil.restartActivity(this);
+        if (StringUtils.equals(s, themeSettingsPref)) {
+            AndroidUtil.restartActivity(this);
+        }
     }
 
     // set my location listener
