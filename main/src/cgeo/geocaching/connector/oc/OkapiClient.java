@@ -616,7 +616,7 @@ final class OkapiClient {
     @Nullable
     private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
         List<Waypoint> result = null;
-        pt0 = new Geopoint(0, 0);
+        final pt0 = new Geopoint(0, 0);
         for (final JsonNode wptResponse: wptsJson) {
             try {
                 final Waypoint wpt = new Waypoint(wptResponse.get(WPT_NAME).asText(),
