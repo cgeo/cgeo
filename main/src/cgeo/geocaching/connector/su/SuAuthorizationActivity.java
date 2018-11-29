@@ -14,11 +14,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class SuAuthorizationActivity extends OAuthAuthorizationActivity {
 
     public static final OAuthParameters SU_OAUTH_PARAMS = new OAuthParameters(
-            "www.geocaching.su",
+            SuConnector.getInstance().getHost(),
             "/api/oauth/request_token.php",
             "/api/oauth/authorize.php",
             "/api/oauth/access_token.php",
-            false,
+            SuConnector.getInstance().getHttps(),
             CgeoApplication.getInstance().getString(R.string.su_consumer_key),
             CgeoApplication.getInstance().getString(R.string.su_consumer_secret),
             "callback://www.cgeo.org/geocachingsu/");
