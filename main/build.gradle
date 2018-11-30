@@ -407,7 +407,7 @@ task verifyCgeoKeys {
             }
         }
         if (!keysFile.exists()) {
-            throw new InvalidUserDataException("You must provide keys in main/res/values/keys.xml for cgeo to compile successfully. You can copy from main/templates/keys.xml and just add the necessary values.")
+            throw new InvalidUserDataException("You must provide API keys for c:geo to compile successfully. Please read the 'API keys' section in the README.md file for further details.")
         }
     }
 }
