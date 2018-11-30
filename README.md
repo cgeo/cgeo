@@ -32,7 +32,7 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
 
 ### Eclipse
-We removed the support for development in Eclipse, once we switched to a gradle based build.
+We removed the support for development in Eclipse, once we switched to a gradle-based build.
 The cause for this is that Google dropped the ADT for eclipse support
 (https://android-developers.blogspot.de/2016/11/support-ended-for-eclipse-android.html).
 
@@ -75,10 +75,10 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 * [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
 * [opencache.uk OKAPI signup](http://www.opencache.uk/okapi/signup.html)
 
-For semi automatic configuration
+For semi-automatic configuration
 1. copy `./templates/private.properties` to `./`
 2. edit `private.properties` with your keys
-3. on the graddle build the `main/res/values/keys.xml` is created and filled with the data from `private.properties`
+3. on the gradle build the `main/res/values/keys.xml` is created and filled with the data from `private.properties`
 
 If you want to do fill the `keys.xml` by hand copy `main/templates/keys.xml` to `main/res/values/`. Then edit `main/res/values/keys.xml`. For each key, replace the value starting with @ and ending with @ (inclusive) with the key. If a key is missing, remove the value and the leading and trailing @).
 
