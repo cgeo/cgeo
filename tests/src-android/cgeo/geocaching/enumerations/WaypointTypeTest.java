@@ -24,6 +24,9 @@ public class WaypointTypeTest extends AndroidTestCase {
         // new names of multi and mystery stages
         assertThat(WaypointType.fromGPXString("Physical Stage")).isEqualTo(WaypointType.STAGE);
         assertThat(WaypointType.fromGPXString("Virtual Stage")).isEqualTo(WaypointType.PUZZLE);
+
+        // subtype form
+        assertThat(WaypointType.fromGPXString("xxx", "unknown sym")).isEqualTo(WaypointType.WAYPOINT);
     }
 
 }

@@ -99,6 +99,10 @@ public enum WaypointType {
         return this == FINAL || this == STAGE;
     }
 
+    public static WaypointType fromGPXString(@NonNull final String sym) {
+        return fromGPXString(sym, null);
+    }
+
     public static WaypointType fromGPXString(@NonNull final String sym, final String subtype) {
         // first check the somewhat "official" sym types
         for (final WaypointType waypointType : WaypointType.values()) {
@@ -106,8 +110,8 @@ public enum WaypointType {
                 return waypointType;
             }
             // Maybe the <sym> element was used for a Garmin symbol (e.g. Opencaching GPX).
-            // Try the sybtype instead.
-            if (subtype != null && waypointType.gpx.equalsIgnoreCase(subtype)) {
+            // Try the subtype instead if defined
+            if (waypointType.gpx.equalsIgnoreCase(subtype)) {
                 return waypointType;
             }
         }
