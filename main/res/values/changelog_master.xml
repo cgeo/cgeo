@@ -12,7 +12,7 @@
            Known issue:\n
            Waypoints from other lists might leak onto the map....we are working on it\n
     · Fix: Do not forget trackable visited state after device has been rotated on logging screen\n
-    · Fix: Accept maspforge maps above V3 during offline map file selection\n
+    · Fix: Accept mapsforge maps above V3 during offline map file selection\n
     \n
   </string>
 </resources>
