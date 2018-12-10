@@ -721,6 +721,9 @@ final class OkapiClient {
             return WaypointType.FINAL;
         }
         if ("poi".equalsIgnoreCase(wptType)) {
+            return WaypointType.WAYPOINT;
+        }
+        if ("trailhead".equalsIgnoreCase(wptType)) {
             return WaypointType.TRAILHEAD;
         }
         return WaypointType.WAYPOINT;
