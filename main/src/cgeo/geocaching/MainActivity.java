@@ -36,7 +36,6 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -76,6 +75,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
@@ -107,6 +107,10 @@ public class MainActivity extends AbstractActionBarActivity {
     private final UpdateLocation locationUpdater = new UpdateLocation();
     private final Handler updateUserInfoHandler = new UpdateUserInfoHandler(this);
     private final Handler firstLoginHandler = new FirstLoginHandler(this);
+    /**
+     * initialization with an empty subscription
+     */
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
@@ -325,11 +329,11 @@ public class MainActivity extends AbstractActionBarActivity {
         super.onResume();
         PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(1111) {
 
-            @SuppressLint("CheckResult")
             @Override
             public void execute() {
-                locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER);
-                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler);
+                resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
+                resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
+
             }
         });
         updateUserInfoHandler.sendEmptyMessage(-1);
@@ -376,6 +380,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onPause() {
         initialized = false;
+        resumeDisposables.clear();
         unregisterReceiver(connectivityChangeReceiver);
         super.onPause();
     }
