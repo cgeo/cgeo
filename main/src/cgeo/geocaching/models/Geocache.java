@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.gc.UncertainProperty;
+import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -716,8 +717,14 @@ public class Geocache implements IWaypoint {
     }
 
     public String getCacheId() {
-        if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
-            return String.valueOf(GCConstants.gccodeToGCId(geocode));
+        // For some connectors ID can be calculated out of geocode
+        if (StringUtils.isBlank(cacheId)) {
+            if (getConnector() instanceof GCConnector) {
+                return String.valueOf(GCConstants.gccodeToGCId(geocode));
+            }
+            if (getConnector() instanceof SuConnector) {
+                return SuConnector.geocodeToId(geocode);
+            }
         }
 
         return cacheId;

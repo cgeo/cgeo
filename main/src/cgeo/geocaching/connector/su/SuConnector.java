@@ -146,7 +146,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_GENERAL, PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST, PREFIX_MYSTERY, PREFIX_MYSTERY_VIRTUAL) && isNumericId(geocode.substring(2));
+        return StringUtils.startsWithAny(StringUtils.upperCase(geocode), PREFIX_GENERAL, PREFIX_TRADITIONAL, PREFIX_MULTISTEP_VIRTUAL, PREFIX_VIRTUAL, PREFIX_MULTISTEP, PREFIX_EVENT, PREFIX_CONTEST, PREFIX_MYSTERY, PREFIX_MYSTERY_VIRTUAL) && isNumericId(SuConnector.geocodeToId(geocode));
     }
 
     @Override
@@ -319,6 +319,18 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     private static class Holder {
         @NonNull
         private static final SuConnector INSTANCE = new SuConnector();
+    }
+
+    /**
+     * For geocaching.su geocode is not immutable because first two letters
+     * indicate cache type, which may change. However ID is immutable, that's why it's preferred
+     * to use ID in all the places
+     *
+     * @param geocode cache's geocode like MV15736
+     * @return cache ID, i.e. 15736
+     */
+    public static String geocodeToId(final String geocode) {
+        return geocode.substring(2);
     }
 
 
