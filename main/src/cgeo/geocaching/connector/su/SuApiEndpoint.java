@@ -12,7 +12,8 @@ enum SuApiEndpoint {
     NOTE("/api/note.php", OAuthLevel.Level1),
     MARK("/api/mark.php", OAuthLevel.Level1),
     POST_IMAGE("/api/photo.php", OAuthLevel.Level1),
-    USER("/api/profile.php", OAuthLevel.Level1);
+    USER("/api/profile.php", OAuthLevel.Level1),
+    PERSONAL_NOTE("/api/personal_note.php", OAuthLevel.Level1);
 
     @NonNull
     final String methodName;

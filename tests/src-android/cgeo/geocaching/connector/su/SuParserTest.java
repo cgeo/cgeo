@@ -42,6 +42,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
             "\"isFound\":false," +
             "\"is_watched\":true," +
             "\"recommendations\":44," +
+            "\"personal_note\":\"My note\"," +
             "\"votes\":23," +
             "\"rating\":4.3," +
             "\"dateHidden\":\"2008-04-05\"," +
@@ -339,6 +340,12 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         parseCache(cacheJson);
 
         Assert.assertEquals(4.3f, cache.getRating());
+    }
+
+    public void testCanParsePersonalNote() throws Exception {
+        parseCache(cacheJson);
+
+        Assert.assertEquals("My note", cache.getPersonalNote());
     }
 
     public void testCanParseCachesList() throws Exception {

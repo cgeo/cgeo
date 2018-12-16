@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -35,7 +36,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -278,6 +279,38 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public boolean removeFromWatchlist(@NonNull final Geocache cache) {
         return SuApi.setWatchState(cache, false);
+    }
+
+    /**
+     * Whether or not the connector supports adding a note to a specific cache. In most cases the argument will not be
+     * relevant.
+     *
+     * @param cache
+     */
+    @Override
+    public boolean canAddPersonalNote(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    /**
+     * Upload personal note (already stored as member of the cache) to the connector website.
+     *
+     * @param cache
+     * @return success
+     */
+    @Override
+    public boolean uploadPersonalNote(@NonNull final Geocache cache) {
+        return SuApi.uploadPersonalNote(cache);
+    }
+
+    /**
+     * Returns the maximum number of characters allowed in personal notes.
+     *
+     * @return max number of characters
+     */
+    @Override
+    public int getPersonalNoteMaxChars() {
+        return 9500;
     }
 
     /**

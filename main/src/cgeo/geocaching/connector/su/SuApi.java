@@ -206,6 +206,18 @@ public class SuApi {
         return true;
     }
 
+    public static boolean uploadPersonalNote(final Geocache cache) {
+        final String currentNote = StringUtils.defaultString(cache.getPersonalNote());
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        params.add("note_text", currentNote);
+        try {
+            postRequest(SuConnector.getInstance(), SuApiEndpoint.PERSONAL_NOTE, params);
+        } catch (final SuApiException e) {
+            return false;
+        }
+        return true;
+    }
+
     @NonNull
     private static JSONResult getRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) throws SuApiException {
         return request(connector, endpoint, "GET", params);

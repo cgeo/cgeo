@@ -93,6 +93,8 @@ public class SuParser {
     private static final String USER_NAME = "name";
     private static final String USER_FOUNDS = "foundCaches";
 
+    private static final String CACHE_PERSONAL_NOTE = "personal_note";
+
     private SuParser() {
         // utility class
     }
@@ -168,10 +170,9 @@ public class SuParser {
             cache.setOnWatchlist(data.get(CACHE_IS_WATCHED).asBoolean());
         }
 
-        // TODO: Uploading personal notes?
-        // if (response.hasNonNull(CACHE_MY_NOTES)) {
-        // cache.setPersonalNote(response.get(CACHE_MY_NOTES).asText());
-        // }
+        if (data.has(CACHE_PERSONAL_NOTE)) {
+            cache.setPersonalNote(data.get(CACHE_PERSONAL_NOTE).asText());
+        }
 
         cache.setDescription(descriptionBuilder.toString());
         cache.setDetailedUpdatedNow();
