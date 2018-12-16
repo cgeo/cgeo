@@ -168,7 +168,7 @@ public final class GCConstants {
     static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 
     static final String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
-    static final String STRING_PREMIUMONLY_1 = "has marked it as Premium-Only.";
+    static final String STRING_PREMIUMONLY_1 = "class=\"illustration lock-icon\"";
     static final String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
     static final String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
     static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
