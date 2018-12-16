@@ -258,10 +258,10 @@ public class MainActivity extends AbstractActionBarActivity {
 
                 // Attempt to acquire an initial location before any real activity happens.
                 sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
-
-                init();
             }
         });
+
+        init();
 
         checkShowChangelog();
 
@@ -330,11 +330,11 @@ public class MainActivity extends AbstractActionBarActivity {
             public void execute() {
                 locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER);
                 Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler);
-                updateUserInfoHandler.sendEmptyMessage(-1);
-                startBackgroundLogin();
-                init();
             }
         });
+        updateUserInfoHandler.sendEmptyMessage(-1);
+        startBackgroundLogin();
+        init();
         connectivityChangeReceiver = new ConnectivityChangeReceiver();
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
