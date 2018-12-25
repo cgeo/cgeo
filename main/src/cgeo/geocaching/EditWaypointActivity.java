@@ -61,7 +61,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
@@ -370,7 +369,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private void initializeDistanceUnitSelector() {
         distanceUnits = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
-            distanceUnitSelector.setSelection(Settings.useImperialUnits() ? 2 : 0); //0:m, 2:ft
+            distanceUnitSelector.setSelection(Settings.useImperialUnits() ?
+                    DistanceParser.DistanceUnit.FT.getValue() : DistanceParser.DistanceUnit.M.getValue());
         }
     }
 
@@ -581,8 +581,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         final String bearingText = bearing.getText().toString();
-        // combine distance from EditText and distanceUnit saved from Spinner
-        final String distanceText = distanceView.getText().toString() + distanceUnits.get(distanceUnitSelector.getSelectedItemPosition());
+        final String distanceText = distanceView.getText().toString();
+        final DistanceParser.DistanceUnit distanceUnit = DistanceParser.DistanceUnit.getById(distanceUnitSelector.getSelectedItemPosition());
+
         if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
             final double bearing;
@@ -595,8 +596,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             final double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText,
-                        !Settings.useImperialUnits());
+                distance = DistanceParser.parseDistance(distanceText, distanceUnit);
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;

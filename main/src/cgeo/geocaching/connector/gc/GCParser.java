@@ -57,7 +57,6 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -191,10 +190,15 @@ public final class GCParser {
             }
 
             // cache distance - estimated distance for basic members
-            final String distance = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
-            if (distance != null) {
-                cache.setDistance(DistanceParser.parseDistance(distance,
-                        !Settings.useImperialUnits()));
+            final MatcherWrapper cacheDistanceMatcher = new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, row);
+            if (cacheDistanceMatcher.find()) {
+                final DistanceParser.DistanceUnit unit = DistanceParser.DistanceUnit.parseUnit(cacheDistanceMatcher.group(3),
+                        Settings.useImperialUnits() ? DistanceParser.DistanceUnit.FT : DistanceParser.DistanceUnit.M);
+                try {
+                    cache.setDistance(DistanceParser.parseDistance(cacheDistanceMatcher.group(2), unit));
+                } catch (final NumberFormatException e) {
+                    Log.e("GCParser.parseDistance: Failed to parse distance", e);
+                }
             }
 
             // difficulty/terrain
@@ -1449,11 +1453,12 @@ public final class GCParser {
         }
 
         // trackable distance
-        final String distance = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
-        if (distance != null) {
+        final MatcherWrapper distanceMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DISTANCE, page);
+        if (distanceMatcher.find()) {
+            final DistanceParser.DistanceUnit unit = DistanceParser.DistanceUnit.parseUnit(distanceMatcher.group(2),
+                    Settings.useImperialUnits() ? DistanceParser.DistanceUnit.MI : DistanceParser.DistanceUnit.KM);
             try {
-                trackable.setDistance(DistanceParser.parseDistance(distance,
-                        !Settings.useImperialUnits()));
+                trackable.setDistance(DistanceParser.parseDistance(distanceMatcher.group(1), unit));
             } catch (final NumberFormatException e) {
                 Log.e("GCParser.parseTrackable: Failed to parse distance", e);
             }
