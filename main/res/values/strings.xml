@@ -1648,4 +1648,5 @@
     <string name="close_app">Close app</string>
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs your permission to access the location of your device. This app cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo needs your permission to access the storage of your device. This app cannot be used without this permission.</string>
 </resources>
