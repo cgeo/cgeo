@@ -13,8 +13,12 @@ import cgeo.geocaching.log.TrackableLogsViewCreator;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.permission.PermissionGrantedCallback;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -201,9 +205,22 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public void onResume() {
         super.onResume();
-        if (!Settings.useLowPowerMode()) {
-            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
-        }
+
+        // resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.TrackableActivity) {
+
+            @Override
+            public void execute() {
+                Log.d("TrackableActivity.OnResumePermissionGrantedCallback.execute");
+                final Sensors sensors = Sensors.getInstance();
+                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+                sensors.setupDirectionObservable();
+
+                if (!Settings.useLowPowerMode()) {
+                    geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
+                }
+            }
+        });
     }
 
     @Override

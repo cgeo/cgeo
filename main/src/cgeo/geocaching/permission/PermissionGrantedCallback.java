@@ -1,15 +1,15 @@
 package cgeo.geocaching.permission;
 
 public abstract class PermissionGrantedCallback {
-    private int requestCode;
+    private PermissionRequestContext request;
 
-    protected PermissionGrantedCallback(final int requestCode) {
-        this.requestCode = requestCode;
+    protected PermissionGrantedCallback(final PermissionRequestContext request) {
+        this.request = request;
     }
 
     protected abstract void execute();
 
     public int getRequestCode() {
-        return requestCode;
+        return request.getRequestCode();
     }
 }
