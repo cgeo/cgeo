@@ -16,6 +16,7 @@ import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -252,7 +253,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
-        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(5555) {
+        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
             // TODO: go directly into execute if the device api level is below 26
             @Override
             public void execute() {
@@ -327,7 +328,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(1111) {
+        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
 
             @Override
             public void execute() {

@@ -70,6 +70,9 @@ public class Sensors {
     };
 
     public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
+        if (geoDataObservable != null) {
+            return;
+        }
         final Application application = CgeoApplication.getInstance();
         if (useGooglePlayServices) {
             geoDataObservable = LocationProvider.getMostPrecise(application).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
@@ -92,6 +95,9 @@ public class Sensors {
     };
 
     public void setupDirectionObservable() {
+        if (directionObservable != null) {
+            return;
+        }
         // If we have no magnetic sensor, there is no point in trying to setup any, we will always get the direction from the GPS.
         if (!hasCompassCapabilities) {
             Log.i("No compass capabilities, using only the GPS for the orientation");
