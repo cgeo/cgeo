@@ -45,6 +45,32 @@ public class PermissionHandler {
         }
     }
 
+    public static void requestStoragePermission(final Activity activity, final PermissionGrantedCallback requestContext) {
+        final String[] storagePermission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        final PermissionKey pk = new PermissionKey(storagePermission);
+
+        if (ActivityCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
+            if (!callbackRegistry.containsKey(pk)) {
+                callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
+                ActivityCompat.requestPermissions(activity, storagePermission, requestContext.getRequestCode());
+            }
+
+            boolean callbackHasAlreadyBeenRegistered = false;
+            for (final PermissionGrantedCallback permissionGrantedCallback : callbackRegistry.get(pk)) {
+                if (permissionGrantedCallback.getRequestCode() == requestContext.getRequestCode()) {
+                    callbackHasAlreadyBeenRegistered = true;
+                    break;
+                }
+            }
+            if (!callbackHasAlreadyBeenRegistered) {
+                callbackRegistry.get(pk).add(requestContext);
+            }
+        } else {
+            requestContext.execute();
+            executeCallbacksFor(storagePermission);
+        }
+    }
+
     public static void executeCallbacksFor(final String[] permissions) {
         final PermissionKey pk = new PermissionKey(permissions);
         if (callbackRegistry.containsKey(pk)) {

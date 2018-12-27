@@ -253,6 +253,13 @@ public class MainActivity extends AbstractActionBarActivity {
 
         Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
+        PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
+            @Override
+            protected void execute() {
+                // nothing to do?
+            }
+        });
+
         PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
             // TODO: go directly into execute if the device api level is below 26
             @Override
@@ -284,8 +291,9 @@ public class MainActivity extends AbstractActionBarActivity {
             PermissionHandler.executeCallbacksFor(permissions);
         } else {
             final Activity activity = this;
+            final PermissionRequestContext perm = PermissionRequestContext.fromRequestCode(requestCode);
             new AlertDialog.Builder(this)
-                    .setMessage(R.string.location_permission_request_explanation)
+                    .setMessage(perm.getAskAgainResource())
                     .setCancelable(false)
                     .setPositiveButton(R.string.ask_again, new DialogInterface.OnClickListener() {
                         @Override
@@ -300,7 +308,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             System.exit(0);
                         }
                     })
-                    .setIcon(R.drawable.ic_menu_mylocation)
+                    .setIcon(R.drawable.ic_menu_preferences)
                     .create()
                     .show();
         }
