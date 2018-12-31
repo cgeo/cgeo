@@ -167,9 +167,9 @@
     <string name="err_missing_auth">Não foi definido utilizador e/ou palavra-passe</string>
     <string name="err_wrong">Utilizador e/ou palavra-passe incorretos</string>
     <string name="err_maintenance">O geocaching.com está em manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em Memória.</string>
-    <string name="err_license">O utilizador não concordou com a licença de utilização de Geocaching.com, por isso c:geo não pode carregar as coordenadas da cache.</string>
-    <string name="err_unvalidated_account">Deve validar a sua conta primeiro em Geocaching.com.</string>
-    <string name="err_unpublished">A cache solicitada não está publicada.</string>
+    <string name="err_license">Não concordou com a licença de utilização de Geocaching.com, por isso o c:geo não pode carregar as coordenadas da geocache.</string>
+    <string name="err_unvalidated_account">Deverá validar antes a sua conta em Geocaching.com.</string>
+    <string name="err_unpublished">A geocache solicitada não está publicada.</string>
     <string name="err_cache_not_found">A cache solicitada não pôde ser encontrada.</string>
     <string name="err_premium_only">Esta geocache apenas está disponível para membros premium do Geocaching.com.</string>
     <string name="err_detail_open">O c:geo não consegue abrir os detalhes da geocache.</string>

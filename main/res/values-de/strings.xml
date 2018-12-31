@@ -1036,7 +1036,7 @@
     <string name="map_disabled_hide">Deaktivierte Caches ausblenden</string>
     <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Kartendarstellung wählen</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Themen-Optionen</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_static_title">Statische Karte</string>

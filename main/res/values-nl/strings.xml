@@ -1036,7 +1036,7 @@
     <string name="map_disabled_hide">Verbergen uitgeschakelde caches</string>
     <string name="map_theme_builtin">Standaard</string>
     <string name="map_theme_select">Selecteer mapthema</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Thema opties</string>
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_static_title">Statische kaarten</string>
