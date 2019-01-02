@@ -69,6 +69,35 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/tableRow2b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_nutshellmanual"
+                android:textColor="?text_color"
+                android:textSize="14sp" />
+
+            <TextView
+            android:id="@+id/nutshellmanual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:clickable="true"
+            android:focusable="true"
+            android:linksClickable="false"
+            android:text="@string/manual_link"
+            android:textColor="?text_color"
+            android:textColorLink="?text_color_link"
+            android:textSize="14sp" />
+        </TableRow>
+
+        <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >

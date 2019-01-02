@@ -156,6 +156,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @BindView(R.id.website) protected TextView website;
         @BindView(R.id.facebook) protected TextView facebook;
         @BindView(R.id.twitter) protected TextView twitter;
+        @BindView(R.id.nutshellmanual) protected TextView nutshellmanual;
         @BindView(R.id.market) protected TextView market;
         @BindView(R.id.faq) protected TextView faq;
 
@@ -168,6 +169,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "https://twitter.com/android_gc");
+            setClickListener(nutshellmanual, "https://manual.cgeo.org/");
             setClickListener(faq, "http://faq.cgeo.org/");
             market.setOnClickListener(new View.OnClickListener() {
 

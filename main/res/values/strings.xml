@@ -444,6 +444,7 @@
     <string name="about_system_info">c:geo system information</string>
     <string name="about_system_info_send_chooser">Send system information</string>
     <string name="changelog_github">List of all changes</string>
+    <string name="about_nutshellmanual">Online manual</string>
 
     <!-- settings -->
     <string name="settings_title_open_settings">Open settings?</string>
