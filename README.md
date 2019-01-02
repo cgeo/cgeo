@@ -19,6 +19,18 @@ For example we have a collection of [urgent issues](https://github.com/cgeo/cgeo
 
 Fork the [project source code](https://github.com/cgeo/cgeo), make changes to your clone and [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
 
+### step by step
+
+(initially)
+- [Fork](https://help.github.com/articles/fork-a-repo/) the [project source code](https://github.com/cgeo/cgeo)
+- and [clone](https://help.github.com/articles/cloning-a-repository/) this fork to your local development environment.
+
+(for every part you want to contribute)
+- make changes to your clone,
+- commit them locally to a branch based on latest master branch, 
+- push this branch to your fork
+- and then [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
+
 ### Branches
 
 - **master** is for development of new features. Nightly builds are created from this branch.
@@ -27,9 +39,14 @@ Fork the [project source code](https://github.com/cgeo/cgeo), make changes to yo
 A more complex bugfix can be first tested against the `master` branch and integrated in the nightly builds, while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release).
 
+
+
 ## Setting up an IDE
 
 Make sure to use Java 8 for your IDE and build process. Some of the involved tools require it, even though the source code is Java 7 only.
+(Android Studio will download Open JDK automatically during setup.)
+
+Install git first. (Windows users may want to look here: https://gitforwindows.org/)
 
 ### Eclipse
 We removed the support for development in Eclipse, once we switched to a gradle-based build.
@@ -51,7 +68,9 @@ For debugging create a Debug Configuration by selecting the cgeo application (in
 
 ### Android Studio (or IntelliJ IDEA)
 - Install Android Studio from https://developer.android.com/sdk/index.html
-- On first start, choose to clone a project from version control, and choose github afterwards. Supply your credentials.
+- On first start, follow the setup wizard using default options.
+- When asked what project to start with, configure git first (set path to git executable), then choose to clone a project from version control, and choose github afterwards. Enter "https://github.com/cgeo/cgeo" (*) as base URL and supply your credentials.
+- (*) If you plan to actively contribute, use the path to your fork of c:geo instead (see "step by step" section above)
 - Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `settings.gradle` in the root directory of the git repository.
 - c:geo uses [Checkstyle](http://checkstyle.sourceforge.net/) to verify that coding standards are followed throughout the project. To see violations directly in Android Studio you need to install the `CheckStyle-IDEA` Plugin and configure the `checkstyle.xml` file available in the project root directory.
 
@@ -59,7 +78,7 @@ For debugging create a Debug Configuration by selecting the cgeo application (in
 
 ### Prerequisites
 
-- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs (at least) V26, Google repository and Android support repository.
+- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs (at least) V26, Google repository and Android support repository. (File => Settings, Appearance & Behaviour => System Settings => Android SDK, Check "Show Package Details" on "SDK Platforms" tab and check subpackages as needed.)
 - If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone.
 - You need to provide several API keys for compiling the app. See next section for details.
 
@@ -85,6 +104,9 @@ If you want to do fill the `keys.xml` by hand copy `main/templates/keys.xml` to 
 ### Building with gradle
 
 Run `gradlew` from the root directory of the git repository. That will install the necessary build framework and display how to build cgeo. `gradlew assembleBasicDebug` might be a good start.
+Alternatively you can use "make" in Android Studio ("Build" => "Make Project")
+
+To be able to create an installable Android package (APK) you need to create a signing key first. In Android Studio go to "Build" => "Generate Signed Bundle & APK", select "APK" and follow the instructions. You will create a key storage and an project specific key. Enter path and access information to those in file cgeo/private.properties.
 
 ### Testing
 
@@ -96,6 +118,11 @@ To run all tests use the same `Run 'Tests in <package name>'` menu item from the
 For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be a premium member.
 
 Tests may also be launched from command line. Use `gradlew assembleBasicDebug` from the root directory of the git repository.
+
+## Deploying the app locally for testing purposes
+
+Android Studio needs to be configured for which device(s) c:geo to deploy to. Use "run" => "run" (2nd entry with this heading).
+You can create several profiles for either a physical device attached via USB as well as virtual devices run in an emulator. (If the emulator is not installed yet do so via File => Settings, Appearance & Behaviour => System Settings => Android SDK, tab "SDK Tools", check "Android Emulator" and apply.) 
 
 ## License
 
