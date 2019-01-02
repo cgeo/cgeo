@@ -26,8 +26,8 @@ Fork the [project source code](https://github.com/cgeo/cgeo), make changes to yo
 - and [clone](https://help.github.com/articles/cloning-a-repository/) this fork to your local development environment.
 
 (for every part you want to contribute)
-- make changes to your clone,
-- commit them locally to a branch based on latest master branch, 
+- create a local branch based on latest master branch,
+- make changes to this branch and commit there,
 - push this branch to your fork
 - and then [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
 
