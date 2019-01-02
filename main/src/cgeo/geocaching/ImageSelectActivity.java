@@ -239,7 +239,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     private void selectImageFromStorage() {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/jpeg");
+        intent.setType("image/*");
 
         startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECT_STORED_IMAGE);
     }
@@ -264,6 +264,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             final Uri selectedImage = data.getData();
             // In principal can selectedImage be null
             if (selectedImage != null) {
+                final String mimeType = getContentResolver().getType(selectedImage);
+                if (!("image/jpeg".equals(mimeType) || "image/png".equals(mimeType) || "image/gif".equals(mimeType))) {
+                    showToast(getString(R.string.err_unsupported_image_format));
+                    return;
+                }
                 if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
                     final String[] filePathColumn = { MediaColumns.DATA };
 
