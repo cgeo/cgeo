@@ -166,8 +166,7 @@
         <item name="android:paddingBottom">1dip</item>
         <item name="android:paddingLeft">5dip</item>
         <item name="android:paddingRight">5dip</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:lines">1</item>
+        <item name="android:maxLines">2</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/text_icon</item>
@@ -180,9 +179,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_alignParentTop">true</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_marginRight">4dip</item>
-        <item name="android:layout_marginLeft">4dip</item>
+        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">2dip</item>
         <item name="android:paddingBottom">2dip</item>
@@ -197,16 +194,21 @@
         <item name="android:text"></item>
     </style>
     <style name="icon_mainscreen_cell_counter">
-        <item name="android:layout_width">74dip</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
     </style>
-    <style name="icon_mainscreen_cell" parent="icon_mainscreen_cell_counter">
-        <item name="android:layout_margin">4dip</item>
+    <style name="icon_mainscreen_cell">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
     </style>
     <style name="icon_mainscreen_row">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">4dip</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:orientation">horizontal</item>
