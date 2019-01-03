@@ -90,6 +90,7 @@
     <string name="website_link" translatable="false"><a href="">cgeo.org</a></string>
     <string name="twitter_link" translatable="false"><a href="">@android_GC</a></string>
     <string name="support_link" translatable="false"><a href="">support@cgeo.org</a></string>
+    <string name="manual_link" translatable="false"><a href="">manual.cgeo.org</a></string>
 
     <string name="ellipsis" translatable="false">…</string>
     <string name="triple_dash_vertical" translatable="false">┆</string>
