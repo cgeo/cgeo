@@ -72,7 +72,7 @@ public class Settings {
     private static final char SEPARATOR_CHAR = ',';
 
     private static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
-    public static final int SHOW_WP_THRESHOLD_MAX = 50;
+    public static final int SHOW_WP_THRESHOLD_MAX = 200;
     private static final int BROUTER_THRESHOLD_DEFAULT = 10;
     public static final int BROUTER_THRESHOLD_MAX = 120;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
