@@ -8,6 +8,7 @@
     · New: Support mapsforge style menus to select desired overlays\n
     · New: Add link to our users guide on About c:geo page\n
     · New: Improve color detection for cache listings to automatically switch to lighter background in case of need\n
+    · New: Also support PNG and GIF as log pictures\n
     · Fix: Remove outdated Navigon navigation application\n
     · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
     · Fix: Waypoints on mapsforge map hidden already below configured limit\n
