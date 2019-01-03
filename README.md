@@ -19,18 +19,6 @@ For example we have a collection of [urgent issues](https://github.com/cgeo/cgeo
 
 Fork the [project source code](https://github.com/cgeo/cgeo), make changes to your clone and [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
 
-### step by step
-
-(initially)
-- [Fork](https://help.github.com/articles/fork-a-repo/) the [project source code](https://github.com/cgeo/cgeo)
-- and [clone](https://help.github.com/articles/cloning-a-repository/) this fork to your local development environment.
-
-(for every part you want to contribute)
-- create a local branch based on latest master branch,
-- make changes to this branch and commit there,
-- push this branch to your fork
-- and then [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
-
 ### Branches
 
 - **master** is for development of new features. Nightly builds are created from this branch.
@@ -38,8 +26,6 @@ Fork the [project source code](https://github.com/cgeo/cgeo), make changes to yo
 
 A more complex bugfix can be first tested against the `master` branch and integrated in the nightly builds, while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release).
-
-
 
 ## Setting up an IDE
 
