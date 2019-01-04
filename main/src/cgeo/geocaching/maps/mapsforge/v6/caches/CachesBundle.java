@@ -213,6 +213,21 @@ public class CachesBundle {
         }
     }
 
+    /**
+     * Forces redraw of all cache layers (e.g. for icon change)
+     */
+    public void invalidateAll() {
+        if (baseOverlay != null) {
+            baseOverlay.invalidateAll();
+        }
+        if (storedOverlay != null) {
+            storedOverlay.invalidateAll();
+        }
+        if (liveOverlay != null) {
+            liveOverlay.invalidateAll();
+        }
+    }
+
     public boolean isDownloading() {
         return liveOverlay != null && liveOverlay.isDownloading();
     }

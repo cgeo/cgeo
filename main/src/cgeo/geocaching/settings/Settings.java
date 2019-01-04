@@ -755,6 +755,14 @@ public class Settings {
         putBoolean(R.string.pref_maptrail, showTrail);
     }
 
+    public static boolean isDotMode() {
+        return getBoolean(R.string.pref_dot_mode, false);
+    }
+
+    public static void setDotMode(final boolean dotMode) {
+        putBoolean(R.string.pref_dot_mode, dotMode);
+    }
+
     /**
      * whether to show a direction line on the map
      */
