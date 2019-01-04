@@ -60,6 +60,13 @@ public class MapOptions {
         isLiveEnabled = Settings.isLiveMap();
     }
 
+    public MapOptions(final Geopoint coords) {
+        mapMode = MapMode.COORDS;
+        this.coords = coords;
+        isStoredEnabled = true;
+        isLiveEnabled = Settings.isLiveMap();
+    }
+
     public MapOptions(final Geopoint coords, final WaypointType type, final String title) {
         this.coords = coords;
         this.waypointType = type;

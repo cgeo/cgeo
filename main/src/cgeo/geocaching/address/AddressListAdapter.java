@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,11 +32,11 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
 
         @BindView(R.id.label) TextView label;
         @BindView(R.id.distance) TextView distance;
+        @BindView(R.id.mapIcon) ImageView mapIcon;
 
         AddressListHolder(final View itemView) {
             super(itemView);
         }
-
     }
 
     AddressListAdapter(@NonNull final List<Address> addresses, @NonNull final AddressClickListener addressClickListener) {
@@ -54,10 +55,15 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addresslist_item, parent, false);
         final AddressListHolder viewHolder = new AddressListHolder(view);
         viewHolder.itemView.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(final View view) {
                 clickListener.onClickAddress(addresses.get(viewHolder.getAdapterPosition()));
+            }
+        });
+        viewHolder.mapIcon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                clickListener.onClickMapIcon(addresses.get(viewHolder.getAdapterPosition()));
             }
         });
         return viewHolder;
