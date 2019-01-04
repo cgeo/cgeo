@@ -559,6 +559,15 @@
                 android:key="@string/pref_maptrail"
                 android:summary="@string/init_summary_maptrail"
                 android:title="@string/init_maptrail" />
+
+            <Preference
+                android:selectable="false"
+                android:summary="@string/init_brouterThreshold_description"
+                android:title="@string/init_brouterThreshold" />
+            <cgeo.geocaching.settings.BrouterThresholdPreference
+                android:key="@string/pref_brouterDistanceThreshold"
+                android:layout="@layout/brouter_threshold_preference" />
+
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_mapsforge_api_title" >
             <cgeo.geocaching.settings.TextPreference
