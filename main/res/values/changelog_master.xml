@@ -6,6 +6,9 @@
     · New: Better keyboard layout while searching for geocaches or trackables on the search activity\n
     · New: Show whether trackable has been discovered in the past\n
     · New: Support mapsforge style menus to select desired overlays\n
+    · New: Add link to our users guide on About c:geo page\n
+    · New: Improve color detection for cache listings to automatically switch to lighter background in case of need\n
+    · New: Also support PNG and GIF as log pictures\n
     · Fix: Remove outdated Navigon navigation application\n
     · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
     · Fix: Waypoints on mapsforge map hidden already below configured limit\n
@@ -13,6 +16,12 @@
            Waypoints from other lists might leak onto the map....we are working on it\n
     · Fix: Do not forget trackable visited state after device has been rotated on logging screen\n
     · Fix: Accept mapsforge maps above V3 during offline map file selection\n
+    · Fix: Update links to terms of use and other help pages\n
+    · Fix: Distance parsing for projection in some locales\n
+    · Fix: Wrong error message if basic member tries to open PMO-cache\n
+    · Fix: Hide opencaching waypoints with 0 coordinates\n
+    · Fix: Update OKAPI waypoint types\n
+    · Fix: Avoid doubled OKAPI authentication, which might fail then\n
     \n
   </string>
 </resources>
