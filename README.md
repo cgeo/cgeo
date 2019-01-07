@@ -56,7 +56,7 @@ For debugging create a Debug Configuration by selecting the cgeo application (in
 - Install Android Studio from https://developer.android.com/sdk/index.html
 - On first start, follow the setup wizard using default options.
 - When asked what project to start with, configure git first (set path to git executable), then choose to clone a project from version control, and choose github afterwards. Enter "https://github.com/cgeo/cgeo" (*) as base URL and supply your credentials.
-- (*) If you plan to actively contribute, use the path to your fork of c:geo instead (see "step by step" section above)
+- (*) If you plan to actively contribute, use the path to your fork of c:geo instead
 - Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `settings.gradle` in the root directory of the git repository.
 - c:geo uses [Checkstyle](http://checkstyle.sourceforge.net/) to verify that coding standards are followed throughout the project. To see violations directly in Android Studio you need to install the `CheckStyle-IDEA` Plugin and configure the `checkstyle.xml` file available in the project root directory.
 
