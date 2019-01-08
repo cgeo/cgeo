@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.ec;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -19,7 +18,6 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.DisposableHandler;
 
 import android.app.Activity;
@@ -143,15 +141,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         // login
         final StatusCode status = ecLogin.login();
 
-        if (ConnectorFactory.showLoginToast && handler != null) {
-            handler.sendMessage(handler.obtainMessage(0, status));
-            ConnectorFactory.showLoginToast = false;
-
-            // invoke settings activity to insert login details
-            if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
-                SettingsActivity.openForScreen(R.string.preference_screen_ec, fromActivity);
-            }
-        }
         return status == StatusCode.NO_ERROR;
     }
 

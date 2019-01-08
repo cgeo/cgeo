@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
@@ -33,7 +32,6 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
@@ -373,15 +371,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         // login
         final StatusCode status = GCLogin.getInstance().login();
 
-        if (ConnectorFactory.showLoginToast && handler != null) {
-            handler.sendMessage(handler.obtainMessage(0, status));
-            ConnectorFactory.showLoginToast = false;
-
-            // invoke settings activity to insert login details
-            if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
-                SettingsActivity.openForScreen(R.string.preference_screen_gc, fromActivity);
-            }
-        }
         return status == StatusCode.NO_ERROR;
     }
 

@@ -253,23 +253,23 @@ public class MainActivity extends AbstractActionBarActivity {
 
         Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
+        final Activity mainActivity = this;
+
         PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
             @Override
             protected void execute() {
-                // nothing to do?
-            }
-        });
+                PermissionHandler.executeIfLocationPermissionGranted(mainActivity, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
+                    // TODO: go directly into execute if the device api level is below 26
+                    @Override
+                    public void execute() {
+                        final Sensors sensors = Sensors.getInstance();
+                        sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+                        sensors.setupDirectionObservable();
 
-        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
-            // TODO: go directly into execute if the device api level is below 26
-            @Override
-            public void execute() {
-                final Sensors sensors = Sensors.getInstance();
-                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-                sensors.setupDirectionObservable();
-
-                // Attempt to acquire an initial location before any real activity happens.
-                sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+                        // Attempt to acquire an initial location before any real activity happens.
+                        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+                    }
+                });
             }
         });
 
@@ -298,7 +298,7 @@ public class MainActivity extends AbstractActionBarActivity {
                     .setPositiveButton(R.string.ask_again, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
-                            PermissionHandler.askAgainFor(permissions, activity);
+                            PermissionHandler.askAgainFor(permissions, activity, perm);
                         }
                     })
                     .setNegativeButton(R.string.close_app, new DialogInterface.OnClickListener() {
@@ -336,15 +336,22 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
-
+        final Activity mainActivity = this;
+        PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
             @Override
-            public void execute() {
-                resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
-                resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
+            protected void execute() {
+                PermissionHandler.executeIfLocationPermissionGranted(mainActivity, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
 
+                    @Override
+                    public void execute() {
+                        resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
+                        resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
+
+                    }
+                });
             }
         });
+
         updateUserInfoHandler.sendEmptyMessage(-1);
         startBackgroundLogin();
         init();
@@ -375,7 +382,6 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onDestroy() {
         initialized = false;
-        ConnectorFactory.showLoginToast = true;
 
         super.onDestroy();
     }
