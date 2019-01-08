@@ -81,9 +81,9 @@ public class PermissionHandler {
         }
     }
 
-    public static void askAgainFor(final String[] permissions, final Activity activity) {
+    public static void askAgainFor(final String[] permissions, final Activity activity, final PermissionRequestContext perm) {
         if (callbackRegistry.containsKey(new PermissionKey(permissions))) {
-            ActivityCompat.requestPermissions(activity, permissions, 2222);
+            ActivityCompat.requestPermissions(activity, permissions, perm.getRequestCode());
         } else {
             throw new IllegalArgumentException("No registered callback for permissions " + Arrays.toString(permissions));
         }

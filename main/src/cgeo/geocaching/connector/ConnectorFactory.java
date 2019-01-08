@@ -110,7 +110,6 @@ public final class ConnectorFactory {
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
     private static boolean forceRelog = false; // c:geo needs to log into cache providers
-    public static boolean showLoginToast = true; //login toast shown just once.
 
     private ConnectorFactory() {
         // utility class
