@@ -72,6 +72,6 @@ public abstract class AbstractMap {
         return mapActivity.superOnOptionsItemSelected(item);
     }
 
-    public abstract void onSaveInstanceState(final Bundle outState);
+    public abstract void onSaveInstanceState(Bundle outState);
 
 }

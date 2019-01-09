@@ -10,5 +10,5 @@ import android.support.annotation.NonNull;
  *
  */
 interface GeopointNavigationApp {
-    void navigate(@NonNull final Context context, @NonNull final Geopoint coords);
+    void navigate(@NonNull Context context, @NonNull Geopoint coords);
 }

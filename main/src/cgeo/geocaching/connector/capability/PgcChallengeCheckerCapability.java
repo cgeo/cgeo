@@ -10,5 +10,5 @@ import android.support.annotation.NonNull;
  * checker</a>.
  */
 public interface PgcChallengeCheckerCapability extends IConnector {
-    boolean isChallengeCache(@NonNull final Geocache cache);
+    boolean isChallengeCache(@NonNull Geocache cache);
 }

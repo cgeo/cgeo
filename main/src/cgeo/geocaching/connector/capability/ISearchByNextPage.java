@@ -8,5 +8,5 @@ import cgeo.geocaching.connector.IConnector;
  *
  */
 public interface ISearchByNextPage extends IConnector {
-    SearchResult searchByNextPage(final SearchResult search);
+    SearchResult searchByNextPage(SearchResult search);
 }

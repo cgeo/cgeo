@@ -9,6 +9,6 @@ import android.support.annotation.NonNull;
  * Connector capability to ignore caches.
  */
 public interface IgnoreCapability extends IConnector {
-    boolean canIgnoreCache(@NonNull final Geocache cache);
-    void ignoreCache(@NonNull final Geocache cache);
+    boolean canIgnoreCache(@NonNull Geocache cache);
+    void ignoreCache(@NonNull Geocache cache);
 }

@@ -162,9 +162,9 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     protected abstract String getCreateAccountUrl();
 
-    protected abstract void setCredentials(final Credentials credentials);
+    protected abstract void setCredentials(Credentials credentials);
 
-    protected abstract StatusCode checkCredentials(final Credentials credentials);
+    protected abstract StatusCode checkCredentials(Credentials credentials);
 
     protected abstract String getAuthTitle();
 

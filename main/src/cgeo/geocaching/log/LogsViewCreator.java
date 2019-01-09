@@ -124,7 +124,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
     protected abstract void addHeaderView();
 
-    protected abstract void fillCountOrLocation(LogViewHolder holder, final LogEntry log);
+    protected abstract void fillCountOrLocation(LogViewHolder holder, LogEntry log);
 
     protected abstract boolean isValid();
 

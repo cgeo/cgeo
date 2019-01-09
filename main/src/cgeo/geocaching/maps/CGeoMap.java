@@ -1348,7 +1348,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
         }
 
-        protected abstract void runWithMap(final CGeoMap map);
+        protected abstract void runWithMap(CGeoMap map);
     }
 
     /**

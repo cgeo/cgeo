@@ -8,7 +8,7 @@ import android.app.Activity;
  */
 public interface MapProvider {
 
-    boolean isSameActivity(final MapSource source1, final MapSource source2);
+    boolean isSameActivity(MapSource source1, MapSource source2);
 
     Class<? extends Activity> getMapClass();
 
@@ -18,5 +18,5 @@ public interface MapProvider {
 
     MapItemFactory getMapItemFactory();
 
-    void registerMapSource(final MapSource mapSource);
+    void registerMapSource(MapSource mapSource);
 }

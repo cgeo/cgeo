@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  */
 public final class GCVoteRatingBarUtil {
     public interface OnRatingChangeListener {
-        void onRatingChanged(final float stars);
+        void onRatingChanged(float stars);
     }
 
     private GCVoteRatingBarUtil() {

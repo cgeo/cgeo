@@ -61,7 +61,7 @@ abstract class AbstractCacheComparator implements CacheComparator {
      * @return an integer < 0 if cache1 is less than cache2, 0 if they are equal, and > 0 if cache1 is greater than
      *         cache2.
      */
-    protected abstract int compareCaches(final Geocache cache1, final Geocache cache2);
+    protected abstract int compareCaches(Geocache cache1, Geocache cache2);
 
     @Override
     public boolean isAutoManaged() {

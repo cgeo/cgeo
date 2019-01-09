@@ -16,7 +16,7 @@ public class TimeDialog extends DialogFragment implements OnTimeSetListener {
     private Calendar date;
 
     public interface TimeDialogParent {
-        void setTime(final Calendar date);
+        void setTime(Calendar date);
     }
 
     public static TimeDialog getInstance(final Calendar date) {

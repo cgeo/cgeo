@@ -10,5 +10,5 @@ import android.support.annotation.Nullable;
 
 public interface ISearchByViewPort extends IConnector {
     @NonNull
-    SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens);
+    SearchResult searchByViewport(@NonNull Viewport viewport, @Nullable MapTokens tokens);
 }

@@ -294,7 +294,7 @@ public final class StoredList extends AbstractList {
             private final List<AbstractList> lists;
             private final Set<Integer> selectedListIds;
 
-            public MultiChoiceClickListener(final List<AbstractList> lists, final Set<Integer> selectedListIds) {
+            MultiChoiceClickListener(final List<AbstractList> lists, final Set<Integer> selectedListIds) {
                 this.lists = lists;
                 this.selectedListIds = selectedListIds;
             }
@@ -318,7 +318,7 @@ public final class StoredList extends AbstractList {
             private final List<AbstractList> lists;
             private final boolean[] selectedItems;
 
-            public OnLastSelectionClickListener(final Set<Integer> selectedListIds, final Set<Integer> lastSelectedLists, final AlertDialog dialog, final List<AbstractList> lists, final boolean[] selectedItems) {
+            OnLastSelectionClickListener(final Set<Integer> selectedListIds, final Set<Integer> lastSelectedLists, final AlertDialog dialog, final List<AbstractList> lists, final boolean[] selectedItems) {
                 this.selectedListIds = selectedListIds;
                 this.lastSelectedLists = lastSelectedLists;
                 this.dialog = dialog;
@@ -344,7 +344,7 @@ public final class StoredList extends AbstractList {
             private final Action1<Set<Integer>> runAfterwards;
             private final ListNameMemento listNameMemento;
 
-            public OnOkClickListener(final Set<Integer> selectedListIds, final Action1<Set<Integer>> runAfterwards, final ListNameMemento listNameMemento) {
+            OnOkClickListener(final Set<Integer> selectedListIds, final Action1<Set<Integer>> runAfterwards, final ListNameMemento listNameMemento) {
                 this.selectedListIds = selectedListIds;
                 this.runAfterwards = runAfterwards;
                 this.listNameMemento = listNameMemento;

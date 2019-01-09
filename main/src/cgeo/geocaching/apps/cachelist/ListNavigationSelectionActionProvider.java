@@ -20,7 +20,7 @@ public class ListNavigationSelectionActionProvider extends AbstractMenuActionPro
     private Callback callback;
 
     public interface Callback {
-        void onListNavigationSelected(final CacheListApp app);
+        void onListNavigationSelected(CacheListApp app);
     }
 
     /**
