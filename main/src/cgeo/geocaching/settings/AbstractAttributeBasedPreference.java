@@ -1,10 +1,9 @@
 package cgeo.geocaching.settings;
 
-import android.support.annotation.Nullable;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 /**

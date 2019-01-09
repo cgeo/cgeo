@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.google.v1;
 
-import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
+import cgeo.geocaching.models.IWaypoint;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;

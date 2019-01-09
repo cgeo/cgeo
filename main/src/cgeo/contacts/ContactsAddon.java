@@ -3,11 +3,10 @@ package cgeo.contacts;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 public class ContactsAddon {
 

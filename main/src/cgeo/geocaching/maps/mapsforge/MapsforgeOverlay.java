@@ -6,14 +6,14 @@ import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
-import org.mapsforge.v3.android.maps.Projection;
-import org.mapsforge.v3.android.maps.overlay.Overlay;
-
 import android.graphics.Canvas;
 import android.graphics.Point;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.android.maps.overlay.Overlay;
 
 public class MapsforgeOverlay extends Overlay implements OverlayImpl {
 

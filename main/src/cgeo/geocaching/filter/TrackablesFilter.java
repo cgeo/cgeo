@@ -3,10 +3,9 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 class TrackablesFilter extends AbstractFilter {
 

@@ -1,6 +1,11 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import org.mapsforge.map.layer.LayerManager;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,12 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
-import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
+import org.mapsforge.map.layer.LayerManager;
 
 public class CachesBundle {
 

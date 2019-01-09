@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class TokenPreference extends AbstractClickablePreference {

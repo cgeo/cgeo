@@ -1,5 +1,8 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -7,9 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import java.lang.ref.WeakReference;
-
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Action1;
 
 public class UserAction {
 

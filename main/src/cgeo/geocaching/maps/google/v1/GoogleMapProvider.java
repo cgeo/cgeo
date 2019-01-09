@@ -8,9 +8,9 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 
-import com.google.android.maps.MapActivity;
-
 import android.content.res.Resources;
+
+import com.google.android.maps.MapActivity;
 
 public final class GoogleMapProvider extends AbstractMapProvider {
 

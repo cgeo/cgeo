@@ -1,14 +1,14 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
+
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
 import io.reactivex.Observable;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Specialized image class for fetching and displaying smileys in the log book.

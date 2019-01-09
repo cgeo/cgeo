@@ -4,11 +4,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utilities used for translating

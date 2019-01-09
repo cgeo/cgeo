@@ -2,14 +2,13 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity.PageViewCreator;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * View creator which destroys the created view on every {@link #notifyDataSetChanged()}.

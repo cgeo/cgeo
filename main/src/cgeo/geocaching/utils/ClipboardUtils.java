@@ -2,10 +2,9 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.content.Context;
 
 /**
  * Clipboard Utilities. Functions to copy data to the Android clipboard.

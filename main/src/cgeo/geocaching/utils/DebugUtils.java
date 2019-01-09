@@ -2,10 +2,9 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 
-import android.support.annotation.NonNull;
-
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.File;

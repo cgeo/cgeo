@@ -1,11 +1,22 @@
 package cgeo.geocaching.connector.su;
 
-import android.support.annotation.NonNull;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogEntry.Builder;
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import org.apache.commons.lang3.StringUtils;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,21 +27,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.LogEntry.Builder;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.SynchronizedDateFormat;
+import org.apache.commons.lang3.StringUtils;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 public class GeocachingSuParser {
 

@@ -9,11 +9,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.Log;
 
+import android.support.annotation.NonNull;
+
 import java.io.InputStream;
 
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 

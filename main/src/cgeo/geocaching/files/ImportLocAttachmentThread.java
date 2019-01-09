@@ -5,8 +5,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.io.IOUtils;
-
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Handler;
@@ -14,6 +12,8 @@ import android.os.Handler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+
+import org.apache.commons.io.IOUtils;
 
 class ImportLocAttachmentThread extends AbstractImportThread {
     private final Uri uri;

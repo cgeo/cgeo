@@ -2,11 +2,11 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.utils.Log;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Handles the JSON error response from OKAPI

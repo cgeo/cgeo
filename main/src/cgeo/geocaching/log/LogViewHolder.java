@@ -1,12 +1,13 @@
 package cgeo.geocaching.log;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.ui.AbstractViewHolder;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import cgeo.geocaching.R;
-import cgeo.geocaching.ui.AbstractViewHolder;
 
 public class LogViewHolder extends AbstractViewHolder {
     @BindView(R.id.added) protected TextView date ;

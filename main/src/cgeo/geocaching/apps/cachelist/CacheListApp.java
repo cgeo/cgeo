@@ -1,13 +1,13 @@
 package cgeo.geocaching.apps.cachelist;
 
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.apps.App;
+import cgeo.geocaching.models.Geocache;
+
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import java.util.List;
-
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.apps.App;
-import cgeo.geocaching.models.Geocache;
 
 public interface CacheListApp extends App {
 

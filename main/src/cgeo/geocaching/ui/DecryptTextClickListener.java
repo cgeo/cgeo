@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.utils.CryptUtils;
 
 import android.support.annotation.NonNull;
-
 import android.text.Spannable;
 import android.view.View;
 import android.widget.TextView;

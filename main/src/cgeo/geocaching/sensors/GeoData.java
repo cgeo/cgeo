@@ -1,5 +1,9 @@
 package cgeo.geocaching.sensors;
 
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -10,10 +14,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
 import org.apache.commons.lang3.StringUtils;
-
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.Log;
 
 public class GeoData extends Location {
 

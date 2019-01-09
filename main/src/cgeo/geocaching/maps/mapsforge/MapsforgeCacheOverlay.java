@@ -5,17 +5,17 @@ import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import android.support.annotation.NonNull;
-import org.mapsforge.v3.android.maps.Projection;
-import org.mapsforge.v3.android.maps.overlay.ItemizedOverlay;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.android.maps.overlay.ItemizedOverlay;
 
 public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlayItem> implements ItemizedOverlayImpl {
 

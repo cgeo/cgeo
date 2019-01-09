@@ -1,19 +1,20 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.filter.FilterRegistry.FactoryEntry;
+import cgeo.geocaching.utils.Log;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.LinearLayout;
 import android.widget.SimpleExpandableListAdapter;
-
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +23,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.filter.FilterRegistry.FactoryEntry;
-import cgeo.geocaching.utils.Log;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 
 /**
  * Show a filter selection using an {@code ExpandableListView}.

@@ -1,9 +1,6 @@
 package cgeo.geocaching.utils;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import android.support.annotation.NonNull;
-
 import android.text.Html;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -12,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 public final class HtmlUtils {
 

@@ -6,8 +6,6 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -15,6 +13,8 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class ScaleDrawer {
     private static final double SCALE_WIDTH_FACTOR = 1.0 / 2.5;

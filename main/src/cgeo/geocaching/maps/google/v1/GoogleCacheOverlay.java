@@ -5,18 +5,17 @@ import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapView;
-
-import android.support.annotation.Nullable;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapView;
 
 /**
  * Google specific implementation of the itemized cache overlay

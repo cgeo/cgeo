@@ -1,9 +1,8 @@
 package cgeo.geocaching.activity;
 
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 

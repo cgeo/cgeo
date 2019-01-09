@@ -3,6 +3,10 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.settings.Settings;
 
+import android.location.Location;
+
+import java.util.ArrayList;
+
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
 import org.mapsforge.core.model.BoundingBox;
@@ -11,10 +15,6 @@ import org.mapsforge.core.model.Point;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
-
-import android.location.Location;
-
-import java.util.ArrayList;
 
 public class HistoryLayer extends Layer {
 

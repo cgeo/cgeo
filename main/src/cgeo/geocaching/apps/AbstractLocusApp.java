@@ -1,5 +1,13 @@
 package cgeo.geocaching.apps;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.Log;
+
 import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -10,13 +18,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.Log;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import locus.api.android.ActionDisplay;
 import locus.api.android.ActionDisplayPoints;

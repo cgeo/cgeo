@@ -1,8 +1,7 @@
 package cgeo.geocaching.utils;
 
-import android.support.annotation.NonNull;
-
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 public class BundleUtils {
 

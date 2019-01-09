@@ -1,13 +1,14 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
+
 import android.location.Location;
 import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import cgeo.geocaching.R;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Units;
 
 public class DistanceView {
 

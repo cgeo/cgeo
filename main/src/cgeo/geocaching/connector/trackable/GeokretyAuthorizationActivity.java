@@ -5,11 +5,12 @@ import cgeo.geocaching.activity.TokenAuthorizationActivity;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 
-import okhttp3.Response;
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.Nullable;
 
 import java.util.regex.Pattern;
+
+import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 
 public class GeokretyAuthorizationActivity extends TokenAuthorizationActivity {
 

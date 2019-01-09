@@ -1,5 +1,12 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.Log;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -11,19 +18,12 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.Log;
+import org.apache.commons.lang3.StringUtils;
 
 public class GPXImporter {
     static final int IMPORT_STEP_START = 0;

@@ -5,10 +5,9 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 
-import android.support.annotation.NonNull;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 /**
  * Defines common functions of the provider-specific

@@ -3,12 +3,12 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import org.xml.sax.XMLReader;
-
 import android.text.Editable;
 import android.text.Html.TagHandler;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
+
+import org.xml.sax.XMLReader;
 
 public class UnknownTagsHandler implements TagHandler {
 

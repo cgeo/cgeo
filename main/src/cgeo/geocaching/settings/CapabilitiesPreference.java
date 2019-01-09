@@ -4,11 +4,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Preference for displaying the supported capabilities of an {@link IConnector} implementation.

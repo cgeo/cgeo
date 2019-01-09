@@ -1,11 +1,16 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Pair;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,12 +18,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.Sensors;
+import org.apache.commons.lang3.StringUtils;
 
 public class MultiListingFilter extends AbstractFilter {
 

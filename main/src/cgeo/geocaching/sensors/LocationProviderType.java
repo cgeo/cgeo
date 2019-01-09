@@ -1,8 +1,8 @@
 package cgeo.geocaching.sensors;
 
-import android.support.annotation.StringRes;
-
 import cgeo.geocaching.R;
+
+import android.support.annotation.StringRes;
 
 public enum LocationProviderType {
     GPS(R.string.loc_gps),

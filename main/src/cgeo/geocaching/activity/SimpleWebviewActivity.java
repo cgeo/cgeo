@@ -1,13 +1,13 @@
 package cgeo.geocaching.activity;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import butterknife.ButterKnife;
 
 public class SimpleWebviewActivity extends AbstractActionBarActivity {
 

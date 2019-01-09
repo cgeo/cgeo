@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.layer.Layer;
 

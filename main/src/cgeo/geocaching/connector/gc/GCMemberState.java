@@ -1,7 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 public enum GCMemberState {
     UNKNOWN(""),

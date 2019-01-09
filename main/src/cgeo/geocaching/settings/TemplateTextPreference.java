@@ -1,14 +1,10 @@
 package cgeo.geocaching.settings;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.List;
+
+import butterknife.ButterKnife;
+import org.apache.commons.lang3.StringUtils;
 
 public class TemplateTextPreference extends DialogPreference {
 

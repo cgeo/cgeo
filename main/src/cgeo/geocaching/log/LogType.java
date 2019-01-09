@@ -1,6 +1,8 @@
 package cgeo.geocaching.log;
 
-import org.apache.commons.lang3.StringUtils;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -10,8 +12,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Different log types

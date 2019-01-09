@@ -1,16 +1,16 @@
 package cgeo.geocaching.enumerations;
 
-import android.support.annotation.NonNull;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
 
-import org.apache.commons.lang3.StringUtils;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Geocache;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Enum listing all cache types

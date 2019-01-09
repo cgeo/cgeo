@@ -1,12 +1,12 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
+import cgeo.geocaching.models.IWaypoint;
+
+import android.graphics.drawable.Drawable;
 
 import org.mapsforge.v3.android.maps.overlay.OverlayItem;
 import org.mapsforge.v3.core.GeoPoint;
-
-import android.graphics.drawable.Drawable;
 
 public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOverlayItemImpl {
     private final IWaypoint coord;

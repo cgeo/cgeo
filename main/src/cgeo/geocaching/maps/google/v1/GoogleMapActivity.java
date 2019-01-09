@@ -8,13 +8,13 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.settings.Settings;
 
-import com.google.android.maps.MapActivity;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.google.android.maps.MapActivity;
 
 public class GoogleMapActivity extends MapActivity implements MapActivityImpl, FilteredActivity {
 
