@@ -35,7 +35,7 @@ public abstract class AbstractCachingPageViewCreator<ViewClass extends View> imp
 
     @Override
     @SuppressFBWarnings("USM_USELESS_ABSTRACT_METHOD")
-    public abstract ViewClass getDispatchedView(final ViewGroup parentView);
+    public abstract ViewClass getDispatchedView(ViewGroup parentView);
 
     /**
      * Gets the state of the view but returns an empty state if not overridden

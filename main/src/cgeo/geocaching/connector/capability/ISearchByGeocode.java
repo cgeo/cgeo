@@ -11,5 +11,5 @@ import android.support.annotation.Nullable;
  *
  */
 public interface ISearchByGeocode extends IConnector {
-    SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler);
+    SearchResult searchByGeocode(@Nullable String geocode, @Nullable String guid, DisposableHandler handler);
 }

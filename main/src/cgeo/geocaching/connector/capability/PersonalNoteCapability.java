@@ -14,14 +14,14 @@ public interface PersonalNoteCapability extends IConnector {
      * Whether or not the connector supports adding a note to a specific cache. In most cases the argument will not be
      * relevant.
      */
-    boolean canAddPersonalNote(@NonNull final Geocache cache);
+    boolean canAddPersonalNote(@NonNull Geocache cache);
 
     /**
      * Upload personal note (already stored as member of the cache) to the connector website.
      *
      * @return success
      */
-    boolean uploadPersonalNote(@NonNull final Geocache cache);
+    boolean uploadPersonalNote(@NonNull Geocache cache);
 
     /**
      * Returns the maximum number of characters allowed in personal notes.

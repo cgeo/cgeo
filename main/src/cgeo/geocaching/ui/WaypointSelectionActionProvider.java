@@ -23,9 +23,9 @@ public class WaypointSelectionActionProvider extends AbstractMenuActionProvider 
     private Geocache geocache;
 
     public interface Callback {
-        void onWaypointSelected(final Waypoint waypoint);
+        void onWaypointSelected(Waypoint waypoint);
 
-        void onGeocacheSelected(final Geocache geocache);
+        void onGeocacheSelected(Geocache geocache);
     }
 
     /**

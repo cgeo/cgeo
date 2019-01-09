@@ -16,8 +16,8 @@ public interface IFilter extends Parcelable {
     /**
      * @return {@code true} if the filter accepts the cache, false otherwise
      */
-    boolean accepts(@NonNull final Geocache cache);
+    boolean accepts(@NonNull Geocache cache);
 
-    void filter(@NonNull final List<Geocache> list);
+    void filter(@NonNull List<Geocache> list);
 
 }

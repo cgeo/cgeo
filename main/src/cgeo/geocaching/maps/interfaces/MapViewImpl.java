@@ -47,7 +47,7 @@ public interface MapViewImpl {
 
     CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
 
-    PositionAndScaleOverlay createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode);
+    PositionAndScaleOverlay createAddPositionAndScaleOverlay(Geopoint coords, String geocode);
 
     void setMapSource();
 

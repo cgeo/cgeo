@@ -14,5 +14,5 @@ public interface FieldNotesCapability extends IConnector {
     /**
      * return {@code true} if uploaded successfully
      */
-    boolean uploadFieldNotes(@NonNull final File exportFile);
+    boolean uploadFieldNotes(@NonNull File exportFile);
 }

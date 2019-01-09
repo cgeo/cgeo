@@ -94,10 +94,10 @@ public abstract class AbstractLogin {
     }
 
     @NonNull
-    protected abstract StatusCode login(final boolean retry);
+    protected abstract StatusCode login(boolean retry);
 
     @NonNull
-    protected abstract StatusCode login(final boolean retry, @NonNull final Credentials credentials);
+    protected abstract StatusCode login(boolean retry, @NonNull Credentials credentials);
 
     public void increaseActualCachesFound() {
         if (actualCachesFound >= 0) {

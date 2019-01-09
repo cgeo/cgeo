@@ -21,7 +21,7 @@ import butterknife.BindView;
 public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdapter.ViewHolder> {
 
     public interface TrackableClickListener {
-        void onTrackableClicked(final Trackable trackable);
+        void onTrackableClicked(Trackable trackable);
     }
 
     @NonNull private final List<Trackable> trackables;

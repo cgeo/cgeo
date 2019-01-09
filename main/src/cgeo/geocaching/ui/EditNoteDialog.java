@@ -25,7 +25,7 @@ public class EditNoteDialog extends DialogFragment {
     private EditText mEditText;
 
     public interface EditNoteDialogListener {
-        void onFinishEditNoteDialog(final String inputText);
+        void onFinishEditNoteDialog(String inputText);
     }
 
     /**

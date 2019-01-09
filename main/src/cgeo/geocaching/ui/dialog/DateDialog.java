@@ -15,7 +15,7 @@ public class DateDialog extends DialogFragment implements OnDateSetListener {
     private Calendar date;
 
     public interface DateDialogParent {
-        void setDate(final Calendar date);
+        void setDate(Calendar date);
     }
 
     public static DateDialog getInstance(final Calendar date) {

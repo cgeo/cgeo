@@ -50,7 +50,7 @@ abstract class AbstractClickablePreference extends Preference implements View.On
         return super.onCreateView(parent);
     }
 
-    protected abstract OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity settingsActivity);
+    protected abstract OnPreferenceClickListener getOnPreferenceClickListener(SettingsActivity settingsActivity);
 
     protected boolean isAuthorized() {
         return false;
