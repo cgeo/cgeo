@@ -4,9 +4,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
 

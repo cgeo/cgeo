@@ -2,9 +2,9 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.settings.Settings;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import java.util.Locale;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class Units {
 

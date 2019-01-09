@@ -2,10 +2,9 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.models.Geocache;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.app.Activity;
 
 import java.util.List;
 

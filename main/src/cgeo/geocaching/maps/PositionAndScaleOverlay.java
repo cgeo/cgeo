@@ -1,12 +1,12 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
+import cgeo.geocaching.storage.DataStore;
 
 import android.graphics.Canvas;
 import android.graphics.Point;

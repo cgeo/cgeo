@@ -1,9 +1,6 @@
 package cgeo.geocaching.utils;
 
-import org.apache.commons.lang3.CharEncoding;
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
-
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 
@@ -15,6 +12,9 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
 
 public final class CryptUtils {
 

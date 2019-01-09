@@ -2,9 +2,8 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 import java.util.Collection;
 

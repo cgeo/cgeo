@@ -3,10 +3,10 @@ package cgeo.geocaching.maps.google.v1;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 
+import android.graphics.Point;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.Projection;
-
-import android.graphics.Point;
 
 public class GoogleMapProjection implements MapProjectionImpl {
 

@@ -1,11 +1,10 @@
 package cgeo.geocaching.enumerations;
 
-import android.content.res.Resources;
-import android.support.annotation.StringRes;
-
-import android.support.annotation.NonNull;
-
 import cgeo.geocaching.R;
+
+import android.content.res.Resources;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 public enum StatusCode {
 

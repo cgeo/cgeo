@@ -3,14 +3,14 @@ package cgeo.geocaching.search;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.SearchManager;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class SuggestionProvider extends ContentProvider {
 

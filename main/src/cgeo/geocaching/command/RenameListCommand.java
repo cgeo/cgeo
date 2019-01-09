@@ -4,10 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.DataStore;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import android.app.Activity;
 
 public abstract class RenameListCommand extends AbstractCommand {
 

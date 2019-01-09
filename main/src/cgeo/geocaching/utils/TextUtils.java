@@ -1,5 +1,9 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.models.Geocache;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -15,9 +19,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.models.Geocache;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**

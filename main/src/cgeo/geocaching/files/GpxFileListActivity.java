@@ -6,17 +6,17 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.settings.Settings;
 
-import org.apache.commons.lang3.StringUtils;
-import android.support.annotation.NonNull;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter> {
 

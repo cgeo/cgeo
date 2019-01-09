@@ -1,8 +1,8 @@
 package cgeo.geocaching.utils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.Activity;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * AsyncTask which automatically shows a progress dialog. The progress is tracked with text messages.

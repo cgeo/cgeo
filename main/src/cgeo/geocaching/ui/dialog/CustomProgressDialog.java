@@ -1,14 +1,14 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.Log;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import java.lang.reflect.Field;
-
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.utils.Log;
 
 /**
  * Modified progress dialog class which allows hiding the absolute numbers.

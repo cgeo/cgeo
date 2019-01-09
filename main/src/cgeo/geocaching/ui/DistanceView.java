@@ -3,9 +3,8 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
-import android.support.annotation.NonNull;
-
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.TextView;
 

@@ -6,13 +6,13 @@ import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
-
 import android.graphics.Canvas;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
 
 public class GoogleOverlay extends Overlay implements OverlayImpl {
 

@@ -15,15 +15,10 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapView;
-
-import org.apache.commons.lang3.reflect.MethodUtils;
-import android.support.annotation.NonNull;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -31,6 +26,10 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 import android.widget.ZoomButtonsController;
+
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapView;
+import org.apache.commons.lang3.reflect.MethodUtils;
 
 public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;

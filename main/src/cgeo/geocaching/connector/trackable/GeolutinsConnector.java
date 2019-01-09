@@ -6,16 +6,17 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.compress.utils.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import org.xml.sax.InputSource;
 
 import java.io.InputStream;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.xml.sax.InputSource;
 
 public final class GeolutinsConnector extends AbstractTrackableConnector {
 

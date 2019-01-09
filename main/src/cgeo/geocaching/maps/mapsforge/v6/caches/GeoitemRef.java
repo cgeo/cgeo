@@ -3,9 +3,9 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.utils.TextUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Comparator;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class GeoitemRef {
 

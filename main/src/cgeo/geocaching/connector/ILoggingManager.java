@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.TrackableLog;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

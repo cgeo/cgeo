@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.IWaypoint;
 
 public interface MapItemFactory {
 

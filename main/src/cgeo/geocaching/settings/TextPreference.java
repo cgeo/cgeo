@@ -1,7 +1,5 @@
 package cgeo.geocaching.settings;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 
 import android.content.Context;
@@ -10,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import butterknife.ButterKnife;
 
 /**
  * Preference to simply show a text message. Links are not shown.

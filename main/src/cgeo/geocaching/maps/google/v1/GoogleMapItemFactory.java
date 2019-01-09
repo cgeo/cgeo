@@ -1,10 +1,10 @@
 package cgeo.geocaching.maps.google.v1;
 
-import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
+import cgeo.geocaching.models.IWaypoint;
 
 public class GoogleMapItemFactory implements MapItemFactory {
 

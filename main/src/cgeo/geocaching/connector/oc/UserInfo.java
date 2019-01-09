@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 
 import android.support.annotation.NonNull;
-
 import android.support.annotation.StringRes;
 
 public class UserInfo {

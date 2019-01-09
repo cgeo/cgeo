@@ -3,10 +3,10 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 
+import android.graphics.Point;
+
 import org.mapsforge.v3.android.maps.Projection;
 import org.mapsforge.v3.core.GeoPoint;
-
-import android.graphics.Point;
 
 public class MapsforgeMapProjection implements MapProjectionImpl {
 

@@ -3,15 +3,15 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
 
+import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
 import org.mapsforge.core.graphics.Bitmap;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.model.Rectangle;
 import org.mapsforge.map.layer.overlay.Marker;
-
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 public class GeoitemLayer extends Marker {
 

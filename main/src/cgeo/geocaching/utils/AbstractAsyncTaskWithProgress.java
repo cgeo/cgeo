@@ -2,11 +2,10 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.activity.Progress;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Abstract AsyncTask which automatically shows a progress dialog. Use it like the {@code AsyncTask} class, but leave away the

@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.gc;
 
-import android.graphics.Bitmap;
-
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+
+import android.graphics.Bitmap;
 
 /**
  * icon decoder for cache icons

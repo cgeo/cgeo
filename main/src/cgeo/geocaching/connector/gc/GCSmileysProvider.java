@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.connector.capability.Smiley;
+
 import android.support.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import cgeo.geocaching.connector.capability.Smiley;
 
 public class GCSmileysProvider {
 

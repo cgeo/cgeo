@@ -2,12 +2,12 @@ package cgeo.geocaching.search;
 
 import cgeo.geocaching.utils.functions.Func1;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The standard auto completion only matches user input at word boundaries. Therefore searching "est" will not match

@@ -1,15 +1,15 @@
 package cgeo.geocaching.connector.ec;
 
-import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

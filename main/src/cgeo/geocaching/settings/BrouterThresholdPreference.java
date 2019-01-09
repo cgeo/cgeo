@@ -1,7 +1,5 @@
 package cgeo.geocaching.settings;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.IConversion;
 
@@ -15,6 +13,8 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import java.util.Locale;
+
+import butterknife.ButterKnife;
 
 public class BrouterThresholdPreference extends Preference {
 

@@ -1,24 +1,24 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
+
 import android.app.ActionBar;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
-import android.content.SharedPreferences;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
-import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
-
 import java.util.Locale;
 import java.util.Map;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
+import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
 
 public class RenderThemeSettings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     public static final String RENDERTHEME_MENU = "renderthememenu";

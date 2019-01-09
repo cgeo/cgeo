@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 import org.mapsforge.map.layer.Layer;
 
 public class CachesOverlay extends AbstractCachesOverlay {

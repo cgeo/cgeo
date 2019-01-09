@@ -2,12 +2,12 @@ package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 
-import org.mapsforge.core.model.LatLong;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.mapsforge.core.model.LatLong;
 
 public class TapHandler {
 

@@ -1,10 +1,10 @@
 package cgeo.geocaching.settings;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.Context;
 import android.preference.EditTextPreference;
 import android.util.AttributeSet;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Password preference. It will only show a row of asterisks as summary instead of the password.

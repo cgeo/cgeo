@@ -1,20 +1,21 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
 
