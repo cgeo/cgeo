@@ -34,6 +34,14 @@ Make sure to use Java 8 for your IDE and build process. Some of the involved too
 
 Install git first. (Windows users may want to look here: https://gitforwindows.org/)
 
+### Android Studio (or IntelliJ IDEA)
+- Install Android Studio from https://developer.android.com/sdk/index.html
+- On first start, follow the setup wizard using default options.
+- When asked what project to start with, configure git first (set path to git executable), then choose to clone a project from version control, and choose github afterwards. Enter "https://github.com/cgeo/cgeo" (*) as base URL and supply your credentials.
+- (*) If you plan to actively contribute, use the path to your fork of c:geo instead
+- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `settings.gradle` in the root directory of the git repository.
+- c:geo uses [Checkstyle](http://checkstyle.sourceforge.net/) to verify that coding standards are followed throughout the project. To see violations directly in Android Studio you need to install the `CheckStyle-IDEA` Plugin and configure the `checkstyle.xml` file available in the project root directory.
+
 ### Eclipse
 We removed the support for development in Eclipse, once we switched to a gradle-based build.
 The cause for this is that Google dropped the ADT for eclipse support
@@ -51,14 +59,6 @@ Here are instructions on how to setup the eclipse environment and clone the repo
 - In eclipse, the project will be uncompilable until you have copied the files keys.xml from main/templates to main/res/values (you need to do this because eclipse fails to create the file automatically from private.properties as Android Studio do). You have to change all values starting with @ and ending with @ (inclusive) with respective keys. If a key is missing, remove the respective value (together with the leading and trailing @).
 
 For debugging create a Debug Configuration by selecting the cgeo application (inside the cgeo) folder and press F11. Then choose to run as Android Application.
-
-### Android Studio (or IntelliJ IDEA)
-- Install Android Studio from https://developer.android.com/sdk/index.html
-- On first start, follow the setup wizard using default options.
-- When asked what project to start with, configure git first (set path to git executable), then choose to clone a project from version control, and choose github afterwards. Enter "https://github.com/cgeo/cgeo" (*) as base URL and supply your credentials.
-- (*) If you plan to actively contribute, use the path to your fork of c:geo instead
-- Android Studio should detect that gradle is used for building cgeo. If it complains that this is not a gradle project, then close the project. Choose "Import project" and select the `build.gradle` or `settings.gradle` in the root directory of the git repository.
-- c:geo uses [Checkstyle](http://checkstyle.sourceforge.net/) to verify that coding standards are followed throughout the project. To see violations directly in Android Studio you need to install the `CheckStyle-IDEA` Plugin and configure the `checkstyle.xml` file available in the project root directory.
 
 ## Build
 
