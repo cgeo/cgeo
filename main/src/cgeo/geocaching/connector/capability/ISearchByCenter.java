@@ -11,5 +11,5 @@ import android.support.annotation.NonNull;
  *
  */
 public interface ISearchByCenter extends IConnector {
-    SearchResult searchByCenter(@NonNull final Geopoint center);
+    SearchResult searchByCenter(@NonNull Geopoint center);
 }

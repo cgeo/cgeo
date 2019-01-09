@@ -10,5 +10,5 @@ import android.support.annotation.NonNull;
  *
  */
 public interface ISearchByKeyword extends IConnector {
-    SearchResult searchByKeyword(@NonNull final String keyword);
+    SearchResult searchByKeyword(@NonNull String keyword);
 }

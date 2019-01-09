@@ -11,7 +11,7 @@ import cgeo.geocaching.models.Geocache;
 
 public interface CacheListApp extends App {
 
-    void invoke(@NonNull final List<Geocache> caches,
-            @NonNull final Activity activity, @NonNull final SearchResult search);
+    void invoke(@NonNull List<Geocache> caches,
+            @NonNull Activity activity, @NonNull SearchResult search);
 
 }

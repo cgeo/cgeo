@@ -14,5 +14,5 @@ public interface CacheNavigationApp extends App {
     /**
      * Navigate to the given cache. The caller will assert that cache.getCoords() is not null.
      */
-    void navigate(@NonNull final Context context, @NonNull final Geocache cache);
+    void navigate(@NonNull Context context, @NonNull Geocache cache);
 }

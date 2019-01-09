@@ -39,7 +39,7 @@ abstract class FileParser {
      *         if the input stream contains data not matching the file format of the parser
      */
     @NonNull
-    public abstract Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final DisposableHandler progressHandler) throws IOException, ParserException;
+    public abstract Collection<Geocache> parse(@NonNull InputStream stream, @Nullable DisposableHandler progressHandler) throws IOException, ParserException;
 
     /**
      * Convenience method for parsing a file.

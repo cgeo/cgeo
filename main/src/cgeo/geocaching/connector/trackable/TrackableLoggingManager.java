@@ -34,7 +34,7 @@ public interface TrackableLoggingManager {
 
     boolean canLogCoordinates();
 
-    void setGuid(final String guid);
+    void setGuid(String guid);
 
     boolean isTrackingCodeNeededToPostNote();
 

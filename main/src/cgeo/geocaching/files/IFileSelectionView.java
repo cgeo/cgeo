@@ -8,7 +8,7 @@ public interface IFileSelectionView {
 
     String getCurrentFile();
 
-    void setCurrentFile(final String name);
+    void setCurrentFile(String name);
 
     void close();
 

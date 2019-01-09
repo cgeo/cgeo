@@ -26,9 +26,9 @@ public interface TrackableConnector {
      */
     int getPreferenceActivity();
 
-    boolean canHandleTrackable(@Nullable final String geocode);
+    boolean canHandleTrackable(@Nullable String geocode);
 
-    boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand);
+    boolean canHandleTrackable(@Nullable String geocode, @Nullable TrackableBrand brand);
 
     /**
      * Return the Title of the service the connector is attached to.
@@ -57,7 +57,7 @@ public interface TrackableConnector {
      * @return the URL corresponding to this trackable
      */
     @NonNull
-    String getUrl(@NonNull final Trackable trackable);
+    String getUrl(@NonNull Trackable trackable);
 
     /**
      * Tell if the trackable has logging capabilities.
@@ -79,7 +79,7 @@ public interface TrackableConnector {
      * @return the Trackable object.
      */
     @Nullable
-    Trackable searchTrackable(final String geocode, final String guid, final String id);
+    Trackable searchTrackable(String geocode, String guid, String id);
 
     /**
      * Return a Trackable corresponding to the Trackable Geocode.
@@ -89,7 +89,7 @@ public interface TrackableConnector {
      * @return the Trackable object.
      */
     @NonNull
-    List<Trackable> searchTrackables(final String geocode);
+    List<Trackable> searchTrackables(String geocode);
 
     /**
      * Return a Trackable id from an url.
@@ -99,7 +99,7 @@ public interface TrackableConnector {
      * @return the Trackable Geocode.
      */
     @Nullable
-    String getTrackableCodeFromUrl(@NonNull final String url);
+    String getTrackableCodeFromUrl(@NonNull String url);
 
     /**
      * Return a Trackable Tracking Code from an url.
@@ -108,7 +108,7 @@ public interface TrackableConnector {
      * @return the Trackable Tracking Code, {@code null} if the URL cannot be decoded.
      */
     @Nullable
-    String getTrackableTrackingCodeFromUrl(@NonNull final String url);
+    String getTrackableTrackingCodeFromUrl(@NonNull String url);
 
     /**
      * Return available user actions for the trackable.
@@ -116,7 +116,7 @@ public interface TrackableConnector {
      * @return the List of available user action.
      */
     @NonNull
-    List<UserAction> getUserActions(final UserAction.UAContext user);
+    List<UserAction> getUserActions(UserAction.UAContext user);
 
     /**
      * Return the Brand object for the Trackable.
@@ -144,7 +144,7 @@ public interface TrackableConnector {
      * @return the Trackable logging manager.
      */
     @Nullable
-    AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity);
+    AbstractTrackableLoggingManager getTrackableLoggingManager(AbstractLoggingActivity activity);
 
     /**
      * Tell if the trackable is loggable via a generic Trackable Connector.

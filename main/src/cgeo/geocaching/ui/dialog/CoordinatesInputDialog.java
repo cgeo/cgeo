@@ -655,13 +655,13 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     public interface CoordinateUpdate {
-        void updateCoordinates(final Geopoint gp);
+        void updateCoordinates(Geopoint gp);
         boolean supportsNullCoordinates();
     }
 
     // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
     public interface CalculateState {
-        void saveCalculatorState(final CalcState calc);
+        void saveCalculatorState(CalcState calc);
         CalcState fetchCalculatorState();
     }
 

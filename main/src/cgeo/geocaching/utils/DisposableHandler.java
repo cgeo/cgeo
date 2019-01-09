@@ -73,7 +73,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
      * @param message
      *            the message to handle
      */
-    protected abstract void handleRegularMessage(final Message message);
+    protected abstract void handleRegularMessage(Message message);
 
     /**
      * Handle a dispose message.

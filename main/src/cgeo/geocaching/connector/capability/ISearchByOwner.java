@@ -11,5 +11,5 @@ import android.support.annotation.NonNull;
  *
  */
 public interface ISearchByOwner extends IConnector {
-    SearchResult searchByOwner(@NonNull final String owner);
+    SearchResult searchByOwner(@NonNull String owner);
 }
