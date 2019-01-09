@@ -126,6 +126,13 @@
     <module name="WhitespaceAround">
       <property name="severity" value="info" />
     </module>
+    <module name="ImportOrder">
+      <property name="groups" value="cgeo,android,java,javax,*"/>
+      <property name="ordered" value="true"/>
+      <property name="separated" value="true"/>
+      <property name="option" value="top"/>
+      <property name="sortStaticImportsAlphabetically" value="true"/>
+    </module>
   </module>
 </module>
 
