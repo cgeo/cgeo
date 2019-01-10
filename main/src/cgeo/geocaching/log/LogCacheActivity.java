@@ -42,9 +42,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableActivity;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -663,6 +665,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             .setLogType(typeSelected)
                             .setLog(log)
                             .setFriend(true);
+
+                    // login credentials may vary from actual username
+                    // Get correct author name from connector (if applicable)
+                    final IConnector cacheConnector = ConnectorFactory.getConnector(cache);
+                    if (cacheConnector instanceof ILogin) {
+                        final String username = ((ILogin) cacheConnector).getUserName();
+                        if (!"".equals(username)) {
+                            logBuilder.setAuthor(username);
+                        }
+                    }
 
                     // Posting image
                     if (!image.isEmpty()) {
