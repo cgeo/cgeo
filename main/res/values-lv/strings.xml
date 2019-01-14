@@ -1046,7 +1046,7 @@
     <string name="map_disabled_hide">Paslēpt izslēgtos slēpņus</string>
     <string name="map_theme_builtin">Noklusējuma</string>
     <string name="map_theme_select">Atlasiet kartes dizainu</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Kartes motīva iestatījumi</string>
     <string name="map_live_enable">Atļaut tiešsaistē</string>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_static_title">Statiskās kartes</string>
@@ -1124,7 +1124,7 @@
     <string name="trackable_travelbug">Ceļotājs</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Statuss</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicionālais</string>
     <string name="geokret_type_book_or_media">Grāmata vai elektronisks līdzeklis</string>
