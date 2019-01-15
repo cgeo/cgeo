@@ -73,6 +73,8 @@ public class Settings {
 
     private static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
+    private static final int BROUTER_THRESHOLD_DEFAULT = 10;
+    public static final int BROUTER_THRESHOLD_MAX = 120;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -958,6 +960,17 @@ public class Settings {
 
     static void setShowWaypointsThreshold(final int threshold) {
         putInt(R.string.pref_showwaypointsthreshold, threshold);
+    }
+
+    /**
+     * The Threshold for brouter routing (max. distance)
+     */
+    public static int getBrouterThreshold() {
+        return getInt(R.string.pref_brouterDistanceThreshold, BROUTER_THRESHOLD_DEFAULT);
+    }
+
+    static void setBrouterThreshold(final int threshold) {
+        putInt(R.string.pref_brouterDistanceThreshold, threshold);
     }
 
     public static boolean isUseTwitter() {
