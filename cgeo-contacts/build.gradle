@@ -7,6 +7,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
 
+    // signing is handled via private.properties
+    signingConfigs {
+        release
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -33,6 +38,11 @@ android {
         // abort release builds in case of FATAL errors
         checkReleaseBuilds true
     }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 }
 
 
@@ -43,4 +53,24 @@ dependencies {
 
     // Android annotations
     implementation 'com.android.support:support-annotations:24.2.1'
+}
+
+/*
+ * signing of release APK, use a properties file like in templates/private.properties
+ */
+
+// dynamically load the signing values from private.properties
+File privatePropertiesFile = rootProject.file('private.properties')
+if (privatePropertiesFile.exists()) {
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(privatePropertiesFile))
+    android.signingConfigs {
+        release {
+            storeFile file(properties.getProperty('key.store'))
+            storePassword properties.getProperty('key.store.password')
+            keyAlias properties.getProperty('key.alias')
+            keyPassword properties.getProperty('key.alias.password')
+        }
+    }
+    android.buildTypes.release.signingConfig android.signingConfigs.release
 }
