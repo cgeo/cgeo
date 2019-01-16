@@ -11,6 +11,7 @@
     · New: Also support PNG and GIF as log pictures\n
     · New: Add user option to change max distance up to which brouter is used\n
     · New: Three colum mainscreen with up to two lines of text each\n
+    · New: Garmin and Groundspeak waypoint IDs can coexist in the same GPX file\n
     · Fix: Remove outdated Navigon navigation application\n
     · Fix: Reorder menu items on logging screen to prevent accidental deletion of log\n
     · Fix: Waypoints on mapsforge map hidden already below configured limit\n
