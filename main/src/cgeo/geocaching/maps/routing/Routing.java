@@ -87,7 +87,7 @@ public final class Routing {
     public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
         final int maxThresholdKm = Settings.getBrouterThreshold();
 
-        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT || maxThresholdKm == 0) {
+        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
 
