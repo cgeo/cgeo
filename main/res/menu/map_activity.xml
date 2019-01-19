@@ -176,5 +176,9 @@
         android:icon="@drawable/ic_menu_agenda"
         android:title="@string/map_as_list">
     </item>
+    <item
+        android:id="@+id/menu_clear_trailhistory"
+        android:title="@string/map_clear_trailhistory">
+    </item>
 
 </menu>

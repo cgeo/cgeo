@@ -312,6 +312,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
+            menu.findItem(R.id.menu_clear_trailhistory).setVisible(Settings.isMapTrail());
+
             menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
 
             switch (Settings.getLiveMapStrategy()) {
@@ -425,6 +427,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 return true;
             case R.id.menu_as_list:
                 CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
+                return true;
+            case R.id.menu_clear_trailhistory:
+                this.historyLayer.reset();
+                this.historyLayer.requestRedraw();
+                showToast(res.getString(R.string.map_trailhistory_cleared));
                 return true;
             case R.id.menu_strategy_fast:
                 item.setChecked(true);

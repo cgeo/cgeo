@@ -1099,6 +1099,8 @@
     <string name="map_static_loading">Loading static maps…</string>
     <string name="map_token_err">Since c:geo is only able to download partial data, coordinates of caches could be inaccurate.</string>
     <string name="map_as_list">Show as list</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_strategy">Strategy</string>
     <string name="map_strategy_title">Live Map strategy</string>
     <string name="map_strategy_fastest">Fastest</string>

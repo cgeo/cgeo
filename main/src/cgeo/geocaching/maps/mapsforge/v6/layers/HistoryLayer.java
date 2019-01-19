@@ -30,6 +30,10 @@ public class HistoryLayer extends Layer {
         }
     }
 
+    public void reset() {
+        positionHistory.reset();
+    }
+
     @Override
     public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
         if (coordinates == null) {
