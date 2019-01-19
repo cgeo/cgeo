@@ -85,9 +85,7 @@ public final class Routing {
      */
     @NonNull
     public static Geopoint[] getTrack(final Geopoint start, final Geopoint destination) {
-        final int maxThresholdKm = Settings.getBrouterThreshold();
-
-        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT || maxThresholdKm == 0) {
+        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
 
@@ -98,6 +96,7 @@ public final class Routing {
         }
 
         // Disable routing for huge distances
+        final int maxThresholdKm = Settings.getBrouterThreshold();
         final float targetDistance = start.distanceTo(destination);
         if (targetDistance > maxThresholdKm) {
             return defaultTrack(start, destination);

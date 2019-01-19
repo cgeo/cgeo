@@ -46,6 +46,14 @@ public class BrouterThresholdPreference extends Preference {
         ;
     }
 
+    private boolean atLeastOne(final SeekBar seekBar, final int progress) {
+        if (progress < 1) {
+            seekBar.setProgress(1);
+            return false;
+        }
+        return true;
+    }
+
     @Override
     protected View onCreateView(final ViewGroup parent) {
         final View v = super.onCreateView(parent);
@@ -65,7 +73,7 @@ public class BrouterThresholdPreference extends Preference {
         seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                if (fromUser) {
+                if (fromUser && atLeastOne(seekBar, progress)) {
                     valueView.setText(getValueString(progress));
                 }
             }
@@ -75,7 +83,9 @@ public class BrouterThresholdPreference extends Preference {
             }
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
-                Settings.setBrouterThreshold(seekBar.getProgress());
+                if (atLeastOne(seekBar, seekBar.getProgress())) {
+                    Settings.setBrouterThreshold(seekBar.getProgress());
+                }
             }
         });
 
