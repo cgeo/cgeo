@@ -73,10 +73,8 @@ public class BrouterThresholdPreference extends Preference {
         seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                if (fromUser) {
-                    if (atLeastOne(seekBar, progress)) {
-                        valueView.setText(getValueString(progress));
-                    }
+                if (fromUser && atLeastOne(seekBar, progress)) {
+                    valueView.setText(getValueString(progress));
                 }
             }
             @Override
