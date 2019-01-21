@@ -834,6 +834,11 @@
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Long Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">This cache is on your watchlist.</string>
     <string name="cache_watchlist_on_extra">This cache is on your watchlist (Watchers: %1d).</string>
     <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>

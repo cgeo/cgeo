@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.su;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -15,6 +17,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -141,10 +144,9 @@ public class SuParser {
                 }
                 final String type = imageResponse.get(CACHE_IMAGE_TYPE).asText();
                 final String url = imageResponse.get(CACHE_IMAGE_URL).asText();
-                if (type.contains("area")) {
-                    descriptionBuilder.append("<img src=\"" + url + "\"/><br/>");
-                } else if (type.contains("cache")) {
+                if (type.contains("cache")) {
                     title = "Spoiler";
+                    descriptionBuilder.append("<img src=\"" + url + "\"/><br/>");
                 }
 
                 // No idea why all images are called "spoiler" here, just need to make them
@@ -203,21 +205,41 @@ public class SuParser {
         return result;
     }
 
+    private static void addBoldText(final StringBuilder builder, final String text) {
+        builder.append("<strong>");
+        builder.append(text);
+        builder.append("</strong>");
+    }
+
     private static void parseDescription(final StringBuilder descriptionBuilder, final ObjectNode descriptionJson) {
-        if (descriptionJson.has(CACHE_DESC_AREA)) {
-            descriptionBuilder.append(descriptionJson.get(CACHE_DESC_AREA).asText());
-        }
+        final Resources res = CgeoApplication.getInstance().getApplicationContext().getResources();
+
         if (descriptionJson.has(CACHE_DESC_CACHE)) {
+            // Cache description
+            addBoldText(descriptionBuilder, res.getString(R.string.cache_cache_description));
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_CACHE).asText());
         }
-        if (descriptionJson.has(CACHE_DESC_CONTAINS)) {
-            descriptionBuilder.append(descriptionJson.get(CACHE_DESC_CONTAINS).asText());
+        if (descriptionJson.has(CACHE_DESC_TRADITIONAL)) {
+            // Traditional part
+            addBoldText(descriptionBuilder, res.getString(R.string.cache_traditional_description));
+            descriptionBuilder.append(descriptionJson.get(CACHE_DESC_TRADITIONAL).asText());
         }
         if (descriptionJson.has(CACHE_DESC_VIRTUAL)) {
+            // Virtual part
+            addBoldText(descriptionBuilder, res.getString(R.string.cache_virtual_description));
             descriptionBuilder.append(descriptionJson.get(CACHE_DESC_VIRTUAL).asText());
         }
-        if (descriptionJson.has(CACHE_DESC_TRADITIONAL)) {
-            descriptionBuilder.append(descriptionJson.get(CACHE_DESC_TRADITIONAL).asText());
+        if (descriptionJson.has(CACHE_DESC_AREA)) {
+            // Area description
+            addBoldText(descriptionBuilder, res.getString(R.string.cache_area_description));
+            descriptionBuilder.append(descriptionJson.get(CACHE_DESC_AREA).asText());
+        }
+        if (descriptionJson.has(CACHE_DESC_CONTAINS)) {
+            // What's in the box
+            addBoldText(descriptionBuilder, res.getString(R.string.cache_box_description));
+            // Box description is the only non-HTML field, so need to add extra line break
+            descriptionBuilder.append("<br/>");
+            descriptionBuilder.append(descriptionJson.get(CACHE_DESC_CONTAINS).asText());
         }
     }
 
