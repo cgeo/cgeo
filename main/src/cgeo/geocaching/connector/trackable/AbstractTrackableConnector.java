@@ -53,7 +53,7 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions(final UserAction.Context user) {
+    public List<UserAction> getUserActions(final UserAction.UAContext user) {
         return AbstractConnector.getDefaultUserActions();
     }
 

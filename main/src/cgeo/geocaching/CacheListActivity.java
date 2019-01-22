@@ -1734,7 +1734,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityOwner(final Activity context, final String userName) {
+    public static void startActivityOwner(final Context context, final String userName) {
         if (!checkNonBlankUsername(context, userName)) {
             return;
         }
@@ -1751,7 +1751,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * @param username the username to check
      * @return <tt>true</tt> if the username is not blank, <tt>false</tt> otherwise
      */
-    private static boolean checkNonBlankUsername(final Activity context, final String username) {
+    private static boolean checkNonBlankUsername(final Context context, final String username) {
         if (StringUtils.isBlank(username)) {
             ActivityMixin.showToast(context, R.string.warn_no_username);
             return false;
@@ -1759,7 +1759,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
-    public static void startActivityFinder(final Activity context, final String userName) {
+    public static void startActivityFinder(final Context context, final String userName) {
         if (!checkNonBlankUsername(context, userName)) {
             return;
         }
