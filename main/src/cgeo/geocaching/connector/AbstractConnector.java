@@ -5,7 +5,6 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.UserAction.Context;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -273,34 +272,34 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions(final UserAction.Context user) {
+    public List<UserAction> getUserActions(final UserAction.UAContext user) {
         final List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
-            actions.add(new UserAction(R.string.user_menu_view_hidden, new Action1<Context>() {
+            actions.add(new UserAction(R.string.user_menu_view_hidden, new Action1<UserAction.UAContext>() {
 
                 @Override
-                public void call(final Context context) {
-                    CacheListActivity.startActivityOwner(context.getActivity(), context.userName);
+                public void call(final UserAction.UAContext context) {
+                    CacheListActivity.startActivityOwner(context.getContext(), context.userName);
                 }
             }));
         }
 
         if (this instanceof ISearchByFinder) {
-            actions.add(new UserAction(R.string.user_menu_view_found, new Action1<UserAction.Context>() {
+            actions.add(new UserAction(R.string.user_menu_view_found, new Action1<UserAction.UAContext>() {
 
                 @Override
-                public void call(final Context context) {
-                    CacheListActivity.startActivityFinder(context.getActivity(), context.userName);
+                public void call(final UserAction.UAContext context) {
+                    CacheListActivity.startActivityFinder(context.getContext(), context.userName);
                 }
             }));
         }
-        actions.add(new UserAction(R.string.copy_to_clipboard, new Action1<UserAction.Context>() {
+        actions.add(new UserAction(R.string.copy_to_clipboard, new Action1<UserAction.UAContext>() {
 
             @Override
-            public void call(final UserAction.Context context) {
+            public void call(final UserAction.UAContext context) {
                 ClipboardUtils.copyToClipboard(context.userName);
-                ActivityMixin.showToast(context.getActivity(), R.string.clipboard_copy_ok);
+                ActivityMixin.showToast(context.getContext(), R.string.clipboard_copy_ok);
             }
         }));
         return actions;
@@ -313,11 +312,11 @@ public abstract class AbstractConnector implements IConnector {
     public static List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
-            actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.Context>() {
+            actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.UAContext>() {
 
                 @Override
-                public void call(final Context context) {
-                    ContactsAddon.openContactCard(context.getActivity(), context.userName);
+                public void call(final UserAction.UAContext context) {
+                    ContactsAddon.openContactCard(context.getContext(), context.userName);
                 }
             }));
         }

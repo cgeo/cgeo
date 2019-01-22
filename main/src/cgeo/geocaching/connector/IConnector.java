@@ -221,7 +221,7 @@ public interface IConnector {
     Collection<String> getCapabilities();
 
     @NonNull
-    List<UserAction> getUserActions(final UserAction.Context user);
+    List<UserAction> getUserActions(final UserAction.UAContext user);
 
     /**
      * Check cache is eligible for adding to favorite

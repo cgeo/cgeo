@@ -101,7 +101,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions(final UserAction.Context user) {
+    public List<UserAction> getUserActions(final UserAction.UAContext user) {
         // travel bugs should have the same actions as GC caches
         return GCConnector.getInstance().getUserActions(user);
     }
