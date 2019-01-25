@@ -1,14 +1,14 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.UserAction;
-import cgeo.geocaching.connector.UserAction.Context;
+import cgeo.geocaching.connector.UserAction.UAContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
@@ -20,9 +20,9 @@ import java.util.List;
 
 public abstract class UserClickListener implements View.OnClickListener {
 
-    @NonNull private final Context user;
+    @NonNull private final UAContext user;
 
-    private UserClickListener(@NonNull final UserAction.Context user) {
+    private UserClickListener(@NonNull final UserAction.UAContext user) {
         this.user = user;
     }
 
@@ -36,21 +36,21 @@ public abstract class UserClickListener implements View.OnClickListener {
     }
 
     @NonNull
-    protected abstract List<UserAction> createUserActions(UserAction.Context user);
+    protected abstract List<UserAction> createUserActions(UserAction.UAContext user);
 
     /**
      * Opens a dialog to do actions on a user name
      */
     private void showUserActionsDialog(final View view) {
-        final AbstractActivity activity = (AbstractActivity) view.getContext();
-        user.setActivity(activity);
+        final Context context = view.getContext();
+        user.setContext(context);
 
         final List<UserAction> userActions = createUserActions(user);
         if (userActions.isEmpty()) {
             return;
         }
 
-        final Resources res = activity.getResources();
+        final Resources res = context.getResources();
 
         final ArrayList<String> labels = new ArrayList<>(userActions.size());
         for (final UserAction action : userActions) {
@@ -58,7 +58,7 @@ public abstract class UserClickListener implements View.OnClickListener {
         }
         final CharSequence[] items = labels.toArray(new String[labels.size()]);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(res.getString(R.string.user_menu_title) + " " + user.userName);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -79,20 +79,20 @@ public abstract class UserClickListener implements View.OnClickListener {
     }
 
     public static OnClickListener forUser(final Trackable trackable, final String userName) {
-        return new UserClickListener(new Context(userName, userName)) {
+        return new UserClickListener(new UAContext(userName, userName)) {
 
             @Override
-            protected List<UserAction> createUserActions(final UserAction.Context user) {
+            protected List<UserAction> createUserActions(final UserAction.UAContext user) {
                 return ConnectorFactory.getConnector(trackable).getUserActions(user);
             }
         };
     }
 
     public static UserClickListener forUser(final Geocache cache, final String userName, final String userId) {
-        return new UserClickListener(new Context(userName, userId)) {
+        return new UserClickListener(new UAContext(userName, userId)) {
 
             @Override
-            protected List<UserAction> createUserActions(final UserAction.Context user) {
+            protected List<UserAction> createUserActions(final UserAction.UAContext user) {
                 return ConnectorFactory.getConnector(cache).getUserActions(user);
             }
         };

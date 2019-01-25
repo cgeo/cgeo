@@ -41,7 +41,7 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
 
     @Override
     @NonNull
-    public List<UserAction> getUserActions(final UserAction.Context user) {
+    public List<UserAction> getUserActions(final UserAction.UAContext user) {
         return Collections.emptyList();
     }
 

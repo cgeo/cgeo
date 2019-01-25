@@ -3,7 +3,7 @@ package cgeo.contacts;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -14,7 +14,7 @@ public class ContactsAddon {
         // utility class
     }
 
-    public static void openContactCard(@NonNull final Activity context, @NonNull final String userName) {
+    public static void openContactCard(@NonNull final Context context, @NonNull final String userName) {
         final Parameters params = new Parameters(
                 IContacts.PARAM_NAME, userName
                 );

@@ -116,7 +116,7 @@ public interface TrackableConnector {
      * @return the List of available user action.
      */
     @NonNull
-    List<UserAction> getUserActions(UserAction.Context user);
+    List<UserAction> getUserActions(UserAction.UAContext user);
 
     /**
      * Return the Brand object for the Trackable.
