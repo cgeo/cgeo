@@ -54,6 +54,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.support.v7.widget.SearchView.OnSuggestionListener;
@@ -238,7 +239,13 @@ public class MainActivity extends AbstractActionBarActivity {
         super.onCreate(savedInstanceState);
 
         // Disable the up navigation for this activity
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+
+        // show c:geo logo
+        actionBar.setLogo(R.drawable.actionbar_cgeo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
