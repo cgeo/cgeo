@@ -23,6 +23,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -230,10 +231,12 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
 
     private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
         setTitle(title);
+        final ActionBar actionBar = getSupportActionBar();
         if (type != null) {
-            getSupportActionBar().setIcon(Compatibility.getDrawable(getResources(), type.markerId));
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setIcon(Compatibility.getDrawable(getResources(), type.markerId));
         } else {
-            getSupportActionBar().setIcon(android.R.color.transparent);
+            actionBar.setIcon(android.R.color.transparent);
         }
     }
 
