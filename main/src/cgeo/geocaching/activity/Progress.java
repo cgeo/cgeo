@@ -1,5 +1,6 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.CustomProgressDialog;
 import cgeo.geocaching.utils.Log;
 
@@ -55,7 +56,7 @@ public class Progress {
     }
 
     private void createProgressDialog(final Context context, final String title, final String message, final Message cancelMessage) {
-        dialog = hideAbsolute ? new CustomProgressDialog(context) : new ProgressDialog(context);
+        dialog = hideAbsolute ? new CustomProgressDialog(context) : new ProgressDialog(context,R.style.cgeoProgressdialogTheme);
         dialog.setTitle(title);
         dialog.setMessage(message);
         if (cancelMessage != null) {

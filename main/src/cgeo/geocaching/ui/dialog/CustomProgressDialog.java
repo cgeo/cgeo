@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.Log;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class CustomProgressDialog extends ProgressDialog {
 
     public CustomProgressDialog(final Context context) {
-        super(context, ActivityMixin.getDialogTheme());
+        super(context, R.style.cgeoProgressdialogTheme);
     }
 
     @Override
