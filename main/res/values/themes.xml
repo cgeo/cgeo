@@ -37,8 +37,13 @@
     <style name="cgeo.ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
         <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+        <item name="android:titleTextStyle">@style/cgeo.ActionBarStyle.TitleTextStyle</item>
+        <item name="titleTextStyle">@style/cgeo.ActionBarStyle.TitleTextStyle</item>
     </style>
 
+    <style name="cgeo.ActionBarStyle.TitleTextStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="cgeo.ActionBarStyle.Light.Inverse" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
