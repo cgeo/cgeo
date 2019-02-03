@@ -1,10 +1,12 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -22,6 +24,14 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
         mapBase = new CGeoMap(this);
     }
 
+    @Override
+    public void setTheme(final int resid) {
+        if (Settings.isLightSkin()) {
+            super.setTheme(R.style.cgeo_gmap_light);
+        } else {
+            super.setTheme(R.style.cgeo_gmap);
+        }
+    }
     @Override
     public Activity getActivity() {
         return this;
