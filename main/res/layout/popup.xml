@@ -31,7 +31,7 @@
                 android:id="@+id/more_details"
                 style="@style/button_small"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dip"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/popup_more" />
 
@@ -71,18 +71,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/offline_lists"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="6dip"
-                android:layout_marginRight="100dip"
-                android:paddingRight="3dip"
-                android:textColor="?text_color"
-                android:textIsSelectable="false"
-                android:textSize="14sp"
-                tools:text="list 1, list 2"/>
+                <TextView
+                    android:id="@+id/offline_lists"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="100dip"
+                    android:paddingRight="3dip"
+                    android:textColor="?text_color"
+                    android:textIsSelectable="false"
+                    android:textSize="14sp"
+                    tools:text="list 1, list 2"/>
 
                 <ImageButton
                     android:id="@+id/offline_edit"
