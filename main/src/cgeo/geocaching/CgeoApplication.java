@@ -45,7 +45,7 @@ public class CgeoApplication extends Application {
 
         OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             fixUserManagerMemoryLeak();
         }
 
@@ -64,7 +64,7 @@ public class CgeoApplication extends Application {
     /**
      * https://code.google.com/p/android/issues/detail?id=173789
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void fixUserManagerMemoryLeak() {
         try {
             // invoke UserManager.get() via reflection
