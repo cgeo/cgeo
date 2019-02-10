@@ -885,10 +885,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
+
+        Log.d("New map: onSaveInstanceState");
+
         final MapState state = prepareMapState();
         outState.putParcelable(BUNDLE_MAP_STATE, state);
         if (historyLayer != null) {
-            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, historyLayer.getHistory());
+            trailHistory = historyLayer.getHistory();
+            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, trailHistory);
         }
     }
 
