@@ -18,7 +18,7 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
-    compileSdkVersion "Google Inc.:Google APIs:23"
+    compileSdkVersion "Google Inc.:Google APIs:24"
 
     buildToolsVersion "28.0.3"
 
@@ -336,10 +336,11 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     // Support Library. Appcompat
-    implementation 'com.android.support:appcompat-v7:23.4.0'
+    def appcompatVersion = '24.2.1'
+    implementation "com.android.support:appcompat-v7:$appcompatVersion"
 
     // Support Library RecyclerView
-    implementation 'com.android.support:recyclerview-v7:23.4.0'
+    implementation "com.android.support:recyclerview-v7:$appcompatVersion"
     // we don't want to implement decorators on our own
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
@@ -363,7 +364,7 @@ dependencies {
     implementation 'com.google.zxing:android-integration:3.3.0'
 
     // GridLayout used by the coordinate calculator
-    implementation 'com.android.support:gridlayout-v7:23.0.1'
+    implementation "com.android.support:gridlayout-v7:$appcompatVersion"
 
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
     // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
