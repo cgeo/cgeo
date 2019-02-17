@@ -3,19 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/trackable_image_brand"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="4dip"
         android:scaleType="fitCenter"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeight"
         tools:src="@drawable/trackable_travelbug"/>
 
     <TextView
         android:id="@+id/trackable_name"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:gravity="center_vertical"
