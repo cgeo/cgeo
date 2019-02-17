@@ -10,7 +10,7 @@ import android.test.AndroidTestCase;
 public class GCConstantsTest extends AndroidTestCase {
 
     // adapt the following after downloading new mock html files
-    public static final int MOCK_CACHES_FOUND = 2814;
+    public static final int MOCK_CACHES_FOUND = 1681;
 
     public static void testLocation() {
         // GC37GFJ
