@@ -27,41 +27,5 @@
     · Fix: Avoid doubled OKAPI authentication, which might fail then\n
     · Fix: Added check for actual username when logging a cache\n
     \n
-    <b>2018.10.13:</b>\n
-    · Fix: Login problems due to website change\n
-    \n
-    <b>2018.09.17:</b>\n
-    · Fix: Crashes on logging page during server instabilities\n
-    · Fix: Greek translation not working\n
-    · New: Notify the user if coordinate checker of geocaching.com is available via website\n
-    \n
-    <b>2018.08.14:</b>\n
-    · Fix: Login page changed on geocaching.com causing login problems\n
-    \n
-    <b>2018.08.13:</b>\n
-    · Fix: Personal note not downloaded from server\n
-    · Fix: Only 20 trackables where shown when logging a cache\n
-    · Fix: Show closeout warning on Android below 4.1\n
-           <a href="http://faq.cgeo.org/#7078">Android 4.0 can no longer login to geocaching.com</a>\n
-    · Fix: Direction line was always shown on OSM or offline maps\n
-    \n
-    <b>2018.06.26:</b>\n
-    · New: New mapsforge library (former beta version) now used by default for OSM and offline maps\n
-           Known regressions we are still working on (click for info):\n
-           <a href="http://faq.cgeo.org#5885">Circles around caches not yet implemented</a>\n
-           <a href="http://faq.cgeo.org#5900">Waypoints of caches might be already hidden below limit</a>\n
-           <a href="http://faq.cgeo.org#5902">More caches might be shown with orange circles</a>\n
-    · New: Days since cache has been saved now replaced by months or years when applicable\n
-    · New: Contact owner by clicking on user name now also for OC caches\n
-    · New: Translation to Cebuano and Greek\n
-    · New: Support OC GPX extensions\n
-    · New: Log template [SIZE]\n
-    · New: Also extract waypoints from short description\n
-    · Fix: Turkish translation not working\n
-    · Fix: Rest user modified coords did not restore cache coords locally\n
-    · Fix: Avoid crash after deleting a GPX file on the import screen\n
-    · Fix: GPS was switched off when editing a waypoint\n
-    · Change: Use new gc.com logging page for submitting logs\n
-    \n
 </string>
 </resources>
