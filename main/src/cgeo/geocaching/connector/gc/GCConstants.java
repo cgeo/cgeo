@@ -75,7 +75,7 @@ public final class GCConstants {
     static final String PATTERN_GC_CHECKER = "ctl00_ContentBody_lblSolutionChecker";
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("class=\"li-user-info\"[^>]*>.*?<span>(.*?)</span>", Pattern.DOTALL);
+    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("class=\"user-name\"[^>]*>(.*?)</span>", Pattern.DOTALL);
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
     static final Pattern PATTERN_CACHES_FOUND = Pattern.compile(Pattern.quote("cache-count\">") + "\\s*([\\d,.]+)", Pattern.DOTALL);
 
