@@ -361,5 +361,13 @@
         <item name="android:stepSize">0.5</item>
         <item name="android:isIndicator">true</item>
     </style>
-    
+
+    <!-- progress dialog theme -->
+    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:alertDialogStyle">@style/cgeoProgressdialogThemeStyle</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="cgeoProgressdialogThemeStyle">
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
