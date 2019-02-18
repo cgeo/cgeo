@@ -99,4 +99,7 @@
     <string name="free_variable_hint" translatable="false">2 + 2</string>
     <string name="empty_equation_result" translatable="false">_</string>
     <string name="equation_error_result" translatable="false">*</string>
+
+    <!-- fileprovider -->
+    <string name="file_provider_authority" translatable="false">org.cgeo.fileprovider</string>
 </resources>
