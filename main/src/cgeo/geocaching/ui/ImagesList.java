@@ -20,9 +20,9 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.SparseArray;
@@ -307,11 +307,19 @@ public class ImagesList {
         try {
             final Intent intent = new Intent().setAction(Intent.ACTION_VIEW);
             final File file = img.isLocalFile() ? img.localFile() : LocalStorage.getGeocacheDataFile(geocode, img.getUrl(), true, true);
+            final String authority = activity.getApplicationContext().getString(R.string.file_provider_authority);
             if (file.exists()) {
-                intent.setDataAndType(Uri.fromFile(file), mimeTypeForUrl(img.getUrl()));
+                intent.setDataAndType(
+                        FileProvider.getUriForFile(activity, authority, file),
+                        mimeTypeForUrl(img.getUrl())
+                );
             } else {
-                intent.setDataAndType(Uri.fromFile(saveToTemporaryJPGFile(image)), "image/jpeg");
+                intent.setDataAndType(
+                        FileProvider.getUriForFile(activity, authority, saveToTemporaryJPGFile(image)),
+                        "image/jpeg"
+                );
             }
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             activity.startActivity(intent);
         } catch (final Exception e) {
             Log.e("ImagesList.viewImageInStandardApp", e);
