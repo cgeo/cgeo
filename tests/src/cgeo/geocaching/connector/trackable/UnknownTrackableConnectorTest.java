@@ -41,7 +41,7 @@ public class UnknownTrackableConnectorTest {
 
     @Test
     public void testGetUserActions() throws Exception {
-        assertThat(getConnector().getUserActions(new UserAction.Context(StringUtils.EMPTY, StringUtils.EMPTY))).isEmpty();
+        assertThat(getConnector().getUserActions(new UserAction.UAContext(StringUtils.EMPTY, StringUtils.EMPTY))).isEmpty();
     }
 
     @Test
