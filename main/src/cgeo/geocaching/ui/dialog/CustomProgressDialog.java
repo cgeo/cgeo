@@ -1,7 +1,6 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
