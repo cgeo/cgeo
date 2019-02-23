@@ -2,7 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2019.02.23:</b>\n
+    · Fix: Listing text no longer shown for caches from geocaching.com\n
+    \n
+    · New: Upgrade to higher target Android version as per Google requirements\n
+    <b><a href="https://www.cgeo.org/userinfo_sdk_wip.html">Click here for more info about reason for this change and known problems!</a></b>
     · New: Better keyboard layout while searching for geocaches or trackables on the search activity\n
     · New: Show whether trackable has been discovered in the past\n
     · New: Support mapsforge style menus to select desired overlays\n
