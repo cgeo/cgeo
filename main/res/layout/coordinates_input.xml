@@ -24,7 +24,7 @@
 
             <Button
                 android:id="@+id/ButtonLat"
-                style="@style/button_full" />
+                style="@style/button_letter" />
 
             <EditText
                 android:id="@+id/EditTextLatDeg"
@@ -93,7 +93,7 @@
 
             <Button
                 android:id="@+id/ButtonLon"
-                style="@style/button_full" />
+                style="@style/button_letter" />
 
             <EditText
                 android:id="@+id/EditTextLonDeg"
