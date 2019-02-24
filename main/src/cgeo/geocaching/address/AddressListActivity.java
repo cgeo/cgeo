@@ -5,6 +5,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -66,4 +67,9 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
         finish();
     }
 
+    @Override
+    public void onClickMapIcon(final Address address) {
+        DefaultMap.startActivityGeoCode(this, new Geopoint(address.getLatitude(), address.getLongitude()));
+        finish();
+    }
 }
