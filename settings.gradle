@@ -6,3 +6,12 @@ rootProject.name = "cgeo"
 include ':mapswithme-api'
 include ':main'
 include ':cgeo-contacts'
+
+// Configure the built-in local build cache to a pre-defined directory.
+// Gradle will periodically clean-up by removing entries that have not been used recently
+buildCache {
+    local(DirectoryBuildCache) {
+        directory = new File(rootDir, 'build-cache')
+        removeUnusedEntriesAfterDays = 10
+    }
+}
