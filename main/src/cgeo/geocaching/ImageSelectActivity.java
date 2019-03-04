@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -217,13 +219,13 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromCamera() {
-        final Uri imageUri = ImageUtils.getOutputImageFileUri();
-        if (imageUri == null) {
+        final File file = ImageUtils.getOutputImageFile();
+        if (file == null) {
             showFailure();
             return;
         }
-        image = new Image.Builder().setUrl(imageUri).build();
 
+        image = new Image.Builder().setUrl(Uri.fromFile(file)).build();
         if (image.isEmpty()) {
             showFailure();
             return;
@@ -231,7 +233,12 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
         // create Intent to take a picture and return control to the calling application
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, image.getUri()); // set the image file name
+        final Context context = getApplicationContext();
+        final Uri uri = FileProvider.getUriForFile(
+                context,
+                context.getString(R.string.file_provider_authority),
+                file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri); // set the image file name
 
         // start the image capture Intent
         startActivityForResult(intent, SELECT_NEW_IMAGE);
