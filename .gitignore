@@ -34,6 +34,7 @@ private.properties
 main/build/
 mapswithme-api/build/
 build
+build-cache/
 # build system user specific files
 main/gradle.properties
 
