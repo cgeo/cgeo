@@ -11,7 +11,7 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?text_color</item>
-        <item name="android:background">?button</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="edittext" parent="@android:style/Widget.EditText">
@@ -373,9 +373,10 @@
     </style>
 
     <!-- progress dialog theme -->
-    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog">
+    <style name="cgeoProgressdialogTheme" parent="Dialog_Alert">
         <item name="android:alertDialogStyle">@style/cgeoProgressdialogThemeStyle</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="buttonBarButtonStyle">@style/button</item>
     </style>
     <style name="cgeoProgressdialogThemeStyle">
         <item name="android:gravity">center</item>
