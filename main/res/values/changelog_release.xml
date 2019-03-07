@@ -2,6 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: App crashing when trying to add log image from camera\n
+    · Fix: Button to change map type not visible\n
+    · Fix: Coordinate input field broken in DMS format\n
+    · Fix: Arrows indicating submenus no longer shown\n
+    \n
+    \n
     <b>2019.02.23:</b>\n
     · Fix: Listing text no longer shown for caches from geocaching.com\n
     \n
