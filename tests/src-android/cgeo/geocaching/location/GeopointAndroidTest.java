@@ -13,7 +13,7 @@ public class GeopointAndroidTest extends TestCase {
         final String key = "geopoint";
         final Bundle bundle = new Bundle();
         bundle.putParcelable(key, gp);
-        assertThat(bundle.getParcelable(key)).isEqualTo(gp);
+        assertThat(bundle.<Geopoint>getParcelable(key)).isEqualTo(gp);
     }
 
 }
