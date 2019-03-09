@@ -32,8 +32,6 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-
-    @Override
     public Activity getActivity() {
         return this;
     }

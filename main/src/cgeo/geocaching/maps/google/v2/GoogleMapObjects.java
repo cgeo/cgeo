@@ -1,14 +1,12 @@
 package cgeo.geocaching.maps.google.v2;
 
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
 
 /**
  * class to wrap GoogleMapObjectsQueue, able to draw individually map objects and to remove all previously

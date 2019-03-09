@@ -1,15 +1,14 @@
 package cgeo.geocaching.maps.google.v2;
 
+import cgeo.geocaching.maps.CacheMarker;
+import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
+
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import cgeo.geocaching.maps.CacheMarker;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
-import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
-
 
 public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectOptionsFactory {
     private final IWaypoint coord;

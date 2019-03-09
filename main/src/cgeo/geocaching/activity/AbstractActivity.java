@@ -249,7 +249,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         setTitle(TextUtils.coloredCacheText(cache, cache.getName() + " (" + cache.getGeocode() + ")"));
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(MapUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE));
+        actionBar.setIcon(MapUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE).getDrawable());
     }
 
     /**

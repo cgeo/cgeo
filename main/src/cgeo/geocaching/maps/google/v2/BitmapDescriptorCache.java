@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.google.v2;
 
+import cgeo.geocaching.maps.CacheMarker;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,8 +9,6 @@ import android.util.SparseArray;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-
-import cgeo.geocaching.maps.CacheMarker;
 
 public class BitmapDescriptorCache {
 
