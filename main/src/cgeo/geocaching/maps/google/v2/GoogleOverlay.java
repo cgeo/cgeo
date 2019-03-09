@@ -1,12 +1,12 @@
 package cgeo.geocaching.maps.google.v2;
 
-import com.google.android.gms.maps.GoogleMap;
+import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl;
+import com.google.android.gms.maps.GoogleMap;
 
 public class GoogleOverlay implements OverlayImpl {
 

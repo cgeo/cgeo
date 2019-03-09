@@ -11,8 +11,6 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import android.app.Activity;
 import android.content.res.Resources;
 
-import com.google.android.maps.MapActivity;
-
 public final class GoogleMapProvider extends AbstractMapProvider {
 
     public static final String GOOGLE_MAP_ID = "GOOGLE_MAP";

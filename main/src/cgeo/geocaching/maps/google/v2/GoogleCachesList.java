@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps.google.v2;
 
-import android.support.annotation.NonNull;
+import cgeo.geocaching.location.IConversion;
 
-import com.google.android.gms.maps.GoogleMap;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import cgeo.geocaching.location.IConversion;
+import com.google.android.gms.maps.GoogleMap;
 
 public class GoogleCachesList {
 
