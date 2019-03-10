@@ -248,13 +248,13 @@ dependencies {
     implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
     // Apache Commons
-    implementation 'org.apache.commons:commons-collections4:4.1'
-    implementation 'org.apache.commons:commons-compress:1.14'
+    implementation 'org.apache.commons:commons-collections4:4.2'
+    implementation 'org.apache.commons:commons-compress:1.18'
     implementation 'commons-io:commons-io:2.5'
-    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '2.9.0'
+    def assertJVersion = '2.9.1'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
@@ -273,7 +273,7 @@ dependencies {
     implementation "net.sf.geographiclib:GeographicLib-Java:1.49"
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.5'
+    def jacksonVersion = '2.9.6'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -322,7 +322,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
 
     // Play Services
-    def playServicesVersion = '9.4.0'
+    def playServicesVersion = '10.0.1'
     implementation "com.google.android.gms:play-services-location:$playServicesVersion"
     implementation "com.google.android.gms:play-services-appinvite:$playServicesVersion"
     // somehow there is a transitive play service dependency which we don't want
@@ -332,8 +332,8 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:2.2.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.7"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     // Support Library. Appcompat
     def appcompatVersion = '24.2.1'
