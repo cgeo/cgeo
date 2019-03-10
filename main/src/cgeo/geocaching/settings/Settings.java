@@ -608,7 +608,7 @@ public class Settings {
     }
 
     public static boolean getChooseList() {
-        return getBoolean(R.string.pref_choose_list, false);
+        return getBoolean(R.string.pref_choose_list, true);
     }
 
     public static boolean getLoadDirImg() {
