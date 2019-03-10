@@ -225,7 +225,7 @@
     </style>
 
     <style name="Dialog_Alert" parent="@style/Theme.AppCompat.Dialog.Alert">
-        <item name="buttonBarButtonStyle">@style/button</item>
+        <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
     </style>
 
