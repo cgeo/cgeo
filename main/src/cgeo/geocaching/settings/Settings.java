@@ -649,11 +649,15 @@ public class Settings {
     }
 
     public static boolean isStoreOfflineMaps() {
-        return getBoolean(R.string.pref_offlinemaps, true);
+        // temporarily disable
+        // return getBoolean(R.string.pref_offlinemaps, true);
+        return false;
     }
 
     public static boolean isStoreOfflineWpMaps() {
-        return getBoolean(R.string.pref_offlinewpmaps, false);
+        // temporarily disable
+        // return getBoolean(R.string.pref_offlinewpmaps, false);
+        return false;
     }
 
     public static boolean isStoreLogImages() {
