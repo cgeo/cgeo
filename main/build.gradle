@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 27
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
