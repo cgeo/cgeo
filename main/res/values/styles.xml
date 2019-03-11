@@ -14,6 +14,10 @@
         <item name="android:background">?button</item>
     </style>
 
+    <style name="button_borderless" parent="button">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
     <style name="edittext" parent="@android:style/Widget.EditText">
         <item name="android:padding">6dip</item>
         <item name="android:singleLine">true</item>
@@ -373,9 +377,10 @@
     </style>
 
     <!-- progress dialog theme -->
-    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog">
+    <style name="cgeoProgressdialogTheme" parent="Dialog_Alert">
         <item name="android:alertDialogStyle">@style/cgeoProgressdialogThemeStyle</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="buttonBarButtonStyle">@style/button</item>
     </style>
     <style name="cgeoProgressdialogThemeStyle">
         <item name="android:gravity">center</item>
