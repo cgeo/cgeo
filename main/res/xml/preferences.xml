@@ -614,11 +614,13 @@
             android:defaultValue="true"
             android:key="@string/pref_offlinemaps"
             android:summary="@string/init_summary_offline"
+            android:enabled="false"
             android:title="@string/init_offline" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_offlinewpmaps"
             android:summary="@string/init_summary_offline_wp"
+            android:enabled="false"
             android:title="@string/init_offline_wp" />
         <CheckBoxPreference
             android:defaultValue="false"
