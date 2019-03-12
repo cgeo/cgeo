@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/action_bar">
 
     <TextView
@@ -13,6 +12,7 @@
         android:visibility="gone" />
 
     <View style="@style/action_bar_separator" />
+
 
     <ImageView
         android:id="@+id/defaultNavigation"
@@ -37,5 +37,6 @@
         style="@style/action_bar_action"
         android:longClickable="true"
         android:src="@android:drawable/ic_menu_more" />
+
 
 </LinearLayout>
