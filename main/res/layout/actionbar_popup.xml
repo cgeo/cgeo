@@ -36,6 +36,6 @@
         android:id="@+id/overflowActionBar"
         style="@style/action_bar_action"
         android:longClickable="true"
-        android:src="@drawable/three_dot_vertical" />
+        android:src="@android:drawable/ic_menu_more" />
 
 </LinearLayout>
