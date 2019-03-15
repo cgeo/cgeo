@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">利用可能な問題の報告が変更されました!</string>
     <string name="info_select_logimage_cancelled">添付画像のファイル選択または撮影がキャンセルされました。</string>
     <string name="info_stored_image">新規画像ファイルの保存場所:</string>
-    <string name="info_storing_static_maps">オフライン用に地図を保存中</string>
     <string name="info_cache_saved">キャッシュはローカルディスクに保存されました</string>
     <string name="warn_calculator_state_save">計算した状態を保持したい場合は、ウェイポイントを保存してください。</string>
     <string name="err_trackable_log_not_anonymous">c:geoから%1$sに匿名によるログインはできません。設定を開き、%2$s からあなたの認証情報を入力しますか?</string>
@@ -554,10 +553,6 @@
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示します。</string>
     <string name="init_disabled">無効化キャッシュ除外</string>
     <string name="init_summary_disabled">無効化キャッシュは除く</string>
-    <string name="init_offline">オフライン地図</string>
-    <string name="init_summary_offline">オフライン用にキャッシュの地図を保存</string>
-    <string name="init_offline_wp">オフライン地図(WP)</string>
-    <string name="init_summary_offline_wp">オフライン用にウェイポイントを地図に保存</string>
     <string name="init_save_log_img">画像保存</string>
     <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
     <string name="init_units">マイル/フィート表示</string>
@@ -846,8 +841,6 @@
     <string name="cache_menu_radar">レーダー</string>
     <string name="cache_menu_map">地図</string>
     <string name="cache_menu_mfbeta">Mapsforge ベータ版</string>
-    <string name="cache_menu_map_static">オフライン地図</string>
-    <string name="cache_menu_download_map_static">オフライン用に地図をダウンロード</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">他の外部アプリ</string>
     <string name="cache_menu_streetview">Googleストリートビュー</string>
@@ -936,7 +929,6 @@
     <string name="gpx_import_loading_caches_with_filename">%1$s からキャッシュをロード中</string>
     <string name="gpx_import_loading_waypoints">ウェイポイントファイルをロード中</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s からウェイポイントをロード中</string>
-    <string name="gpx_import_store_static_maps">オフライン地図を保存中</string>
     <string name="gpx_import_caches_imported">個のキャッシュをインポートしました</string>
     <string name="gpx_import_caches_imported_with_filename">%2$s から %1$d キャッシュをインポートしました</string>
     <string name="gpx_import_static_maps_skipped">オフライン用地図のダウンロードを中止しました</string>

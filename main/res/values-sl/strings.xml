@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
     <string name="info_select_logimage_cancelled">Izbira slike je bila preklicana.</string>
     <string name="info_stored_image">Slika je bila shranjena v:</string>
-    <string name="info_storing_static_maps">Poskus shranjevanja statičnih zemljevidov</string>
     <string name="info_cache_saved">Zaklad je bil shranjen lokalno</string>
     <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
@@ -563,10 +562,6 @@
     <string name="init_showwaypoint_description">Če je manj kot določeno število zakladov na zemljevidu, se pokažejo tudi dodatne točke.</string>
     <string name="init_disabled">Ne pokaži onemogočenih zakladov v iskanjih ali na zemljevidu</string>
     <string name="init_summary_disabled">Ne pokaži onemogočenih zakladov</string>
-    <string name="init_offline">Statični zemljevidi zaklada</string>
-    <string name="init_summary_offline">Za delo brez povezave shrani tudi statične zemljevide zaklada</string>
-    <string name="init_offline_wp">Statični zemljevidi dodatnih točk</string>
-    <string name="init_summary_offline_wp">Za delo brez povezave shrani tudi statične zemljevide dodatnih točk</string>
     <string name="init_save_log_img">Slike iz zapisov</string>
     <string name="init_summary_save_log_img">Za delo brez povezave shrani tudi slike iz zapisov</string>
     <string name="init_units">Anglosaške merske enote</string>
@@ -876,8 +871,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zemljevid</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statični zemljevidi</string>
-    <string name="cache_menu_download_map_static">Prenesi statične zemljevide</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Druge zunanje aplikacije</string>
     <string name="cache_menu_streetview">Pogled ulic</string>
@@ -966,7 +959,6 @@
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
     <string name="gpx_import_loading_waypoints">Nalaganje dodatnih točk iz datoteke</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nalaganje dodatnih točk iz %1$s</string>
-    <string name="gpx_import_store_static_maps">Shranjevanje statičnih zemljevidov</string>
     <string name="gpx_import_caches_imported">naloženih zakladov</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d caches imported from %2$s</string>
     <string name="gpx_import_static_maps_skipped">prekinjeno nalaganje statičnih zemljevidov</string>

@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Mevcut sorun raporları değişti!</string>
     <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
     <string name="info_stored_image">Yeni görsel kaydedildi:</string>
-    <string name="info_storing_static_maps">Statik haritalar depolanmaya çalışılıyor</string>
     <string name="info_cache_saved">Geocache yerel olarak kaydedildi</string>
     <string name="warn_calculator_state_save">Hesaplama durumunu korumak isterseniz, Yol Noktasını kaydettiğinizden emin olun.</string>
     <string name="err_trackable_log_not_anonymous">%1$s\'u c:geo\'ya kaydetme işlemi, anonim olarak yapılamıyor. %2$s\'den kimlik bilgilerinizi doldurmak için ayarları açmayı istiyor musunuz?</string>
@@ -557,10 +556,6 @@
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
-    <string name="init_offline">Statik Haritalar</string>
-    <string name="init_summary_offline">Çevrimdışı kullanımı için Geocache statik haritalarını sakla</string>
-    <string name="init_offline_wp">Statik Haritalar (WP)</string>
-    <string name="init_summary_offline_wp">Yol noktaları statik haritalarını çevrimdışı kullanım için saklayın</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -856,8 +851,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Harita</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statik Haritalar</string>
-    <string name="cache_menu_download_map_static">Statik haritaları indir</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Diğer harici uygulamalar</string>
     <string name="cache_menu_streetview">Sokak görünümü</string>
@@ -946,7 +939,6 @@
     <string name="gpx_import_loading_caches_with_filename">Geocache\'ler %1$s\'den yükleniyor</string>
     <string name="gpx_import_loading_waypoints">Yol noktaları dosyası yükleniyor</string>
     <string name="gpx_import_loading_waypoints_with_filename">Yol noktaları %1$s\'den yükleniyor</string>
-    <string name="gpx_import_store_static_maps">Statik haritalar kaydediliyor</string>
     <string name="gpx_import_caches_imported">içe aktarılan Geocache\'ler</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d Geocache %2$s\'den içe aktarıldı</string>
     <string name="gpx_import_static_maps_skipped">Statik haritaların indirilmesi iptal edildi</string>

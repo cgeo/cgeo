@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Список доступных проблем изменился!</string>
     <string name="info_select_logimage_cancelled">Выбор изображения был отменен.</string>
     <string name="info_stored_image">Новое изображение сохранено в:</string>
-    <string name="info_storing_static_maps">Пытаемся сохранить статические карты</string>
     <string name="info_cache_saved">Тайник был сохранен локально</string>
     <string name="warn_calculator_state_save">Не забудьте сохранить точку, если вы хотите сохранить состояние калькулятора.</string>
     <string name="err_trackable_log_not_anonymous">Запись в %1$s из c:geo не может быть сделана анонимно. Вы хотите перейти в настройки и заполнить данные из %2$s?</string>
@@ -563,10 +562,6 @@
     <string name="init_showwaypoint_description">Если на карте меньше заданного числа тайников, то их этапы будут показаны автоматически.</string>
     <string name="init_disabled">Исключить тайники вне игры</string>
     <string name="init_summary_disabled">Исключить тайники вне игры</string>
-    <string name="init_offline">Статические карты</string>
-    <string name="init_summary_offline">Сохранить статические карты для оффлайнового использования</string>
-    <string name="init_offline_wp">Статические карты (WP)</string>
-    <string name="init_summary_offline_wp">Сохранять путевые точки на статических картах для оффлайнового использования</string>
     <string name="init_save_log_img">Сохранять изображения</string>
     <string name="init_summary_save_log_img">Сохранять фотографии из блокнотов</string>
     <string name="init_units">Английские единицы</string>
@@ -876,8 +871,6 @@
     <string name="cache_menu_radar">Радар</string>
     <string name="cache_menu_map">Карта</string>
     <string name="cache_menu_mfbeta">Бета Mapsforge</string>
-    <string name="cache_menu_map_static">Статическая карта</string>
-    <string name="cache_menu_download_map_static">Скачать статические карты</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Другие внешние приложения</string>
     <string name="cache_menu_streetview">Просмотр улиц</string>
@@ -966,7 +959,6 @@
     <string name="gpx_import_loading_caches_with_filename">Загрузка тайников из %1$s</string>
     <string name="gpx_import_loading_waypoints">Загрузка файла точек</string>
     <string name="gpx_import_loading_waypoints_with_filename">Загрузка файла точек из %1$s</string>
-    <string name="gpx_import_store_static_maps">Сохранение статических карт</string>
     <string name="gpx_import_caches_imported">тайника (-ов) импортировано</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d тайника (-ов) импортировано из %2$s</string>
     <string name="gpx_import_static_maps_skipped">Загрузка статических карт прервана</string>

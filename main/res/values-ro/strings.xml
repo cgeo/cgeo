@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
     <string name="info_select_logimage_cancelled">Selecţia sau captura de imagine a fost anulată.</string>
     <string name="info_stored_image">Imaginea a fost salvată aici:</string>
-    <string name="info_storing_static_maps">Încerc să salvez hărţi</string>
     <string name="info_cache_saved">Geocutia a fost salvată local</string>
     <string name="warn_calculator_state_save">Asigură-te că ai salvat punctul dacă vrei să păstrezi stearea în care se află calculatorul de coordonate.</string>
     <string name="err_trackable_log_not_anonymous">Prin intermediul c:geo nu se poate publica anonim însemnarea %1$s. Vrei să mergi la setări şi să-ţi configurezi contul la %2$s?</string>
@@ -560,10 +559,6 @@
     <string name="init_showwaypoint_description">Dacă sunt afişate mai puţine cutii decât acest număr, afişează şi punctele adiţionale.</string>
     <string name="init_disabled">Exclude Inactive</string>
     <string name="init_summary_disabled">Exclude cutiile inactive</string>
-    <string name="init_offline">Hărţi statice</string>
-    <string name="init_summary_offline">Salvează hartă pentru utilizare fără conexiune internet</string>
-    <string name="init_offline_wp">Hărţi salvate (PCT)</string>
-    <string name="init_summary_offline_wp">Salvează hartă pentru punct, pentru utilizare fără internet</string>
     <string name="init_save_log_img">Salvează imagini</string>
     <string name="init_summary_save_log_img">Salvează imaginile din însemnări</string>
     <string name="init_units">Unităţi de măsură imperiale</string>
@@ -866,8 +861,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Hartă</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Hărţi statice</string>
-    <string name="cache_menu_download_map_static">Descarcă hărţi statice</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Alte aplicaţii externe</string>
     <string name="cache_menu_streetview">Vedere stradală</string>
@@ -956,7 +949,6 @@
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
     <string name="gpx_import_loading_waypoints">Încărcare fişier cu puncte</string>
     <string name="gpx_import_loading_waypoints_with_filename">Se încarcă punctele din %1$s</string>
-    <string name="gpx_import_store_static_maps">Salvare hărţi statice</string>
     <string name="gpx_import_caches_imported">cutii importate</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d geocutii importate din %2$s</string>
     <string name="gpx_import_static_maps_skipped">Descărcarea hărţilor statice a fost anulată</string>

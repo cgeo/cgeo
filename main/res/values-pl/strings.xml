@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
     <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
     <string name="info_stored_image">Nowy obraz zapisany w:</string>
-    <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
     <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
     <string name="warn_calculator_state_save">Pamiętaj aby zapisać punkt orientacyjny jeśli chcesz zachować stan kalkulatora.</string>
     <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
@@ -563,10 +562,6 @@
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
-    <string name="init_offline">Zapisuj mapy statyczne skrzynek do użytku offline</string>
-    <string name="init_summary_offline">Zapisuj mapy statyczne skrzynek do użytku offline</string>
-    <string name="init_offline_wp">Zapisuj mapy statyczne punktów nawigacji do użytku offline</string>
-    <string name="init_summary_offline_wp">Zapisuj mapy statyczne punktów nawigacji do użytku offline</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
@@ -876,8 +871,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Mapa statyczna</string>
-    <string name="cache_menu_download_map_static">Pobierz mapę statyczną</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -966,7 +959,6 @@
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrzynek z %1$s</string>
     <string name="gpx_import_loading_waypoints">Ładuję plik z punktami nawigacji</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów orientacyjnych z %1$s</string>
-    <string name="gpx_import_store_static_maps">Zapisuję mapy statyczne</string>
     <string name="gpx_import_caches_imported">skrzynek importowanych</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d skrzynek zostało importowane z %2$s</string>
     <string name="gpx_import_static_maps_skipped">Pobieranie map statycznych wstrzymane</string>
