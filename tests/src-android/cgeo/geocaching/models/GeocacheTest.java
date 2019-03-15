@@ -81,11 +81,7 @@ public class GeocacheTest extends CGeoTestCase {
     }
 
     private void assertWaypointsParsed(final String note, final int expectedWaypoints) {
-        recordMapStoreFlags();
-
         try {
-            setMapStoreFlags(false, false);
-
             final Geocache cache = new Geocache();
             final String geocode = "Test" + System.nanoTime();
             cache.setGeocode(geocode);
@@ -103,7 +99,6 @@ public class GeocacheTest extends CGeoTestCase {
             }
             removeCacheCompletely(geocode);
         } finally {
-            restoreMapStoreFlags();
         }
     }
 

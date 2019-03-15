@@ -34,7 +34,6 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.LocalStorage;
@@ -1758,8 +1757,6 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
-            StaticMapsProvider.downloadMaps(cache).mergeWith(imgGetter.waitForEndCompletable(handler)).blockingAwait();
-
             if (handler != null) {
                 handler.sendEmptyMessage(DisposableHandler.DONE);
             }
@@ -1816,10 +1813,6 @@ public class Geocache implements IWaypoint {
 
         final String searchText = getShortDescription() + ' ' + getDescription();
         return EventTimeParser.guessEventTimeMinutes(searchText);
-    }
-
-    public boolean hasStaticMap() {
-        return StaticMapsProvider.hasStaticMap(this);
     }
 
     @NonNull
