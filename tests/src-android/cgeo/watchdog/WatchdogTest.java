@@ -70,17 +70,6 @@ public class WatchdogTest extends CGeoTestCase {
     }
 
     private static void checkWebsite(final String connectorName, final String url) {
-
-        // temporarily disable oc.uk
-        if (connectorName.equalsIgnoreCase("geocaching website opencache.uk")) {
-            return;
-        }
-
-        // temporarily disable extremcaching.com
-        if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com")) {
-            return;
-        }
-
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
