@@ -173,7 +173,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_fakekey_dataDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
+                R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
                 R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
@@ -475,7 +475,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
                     @Override
                     public void run() {
-                        onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backup_info), "");
+                        onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backup), "");
                     }
                 });
                 return true;
@@ -893,15 +893,19 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     index >= 0
                             ? listPreference.getEntries()[index]
                             : null);
-        } else if (isPreference(preference, R.string.pref_fakekey_preference_backup_info)) {
-            final String text;
+        } else if (isPreference(preference, R.string.pref_fakekey_preference_backup)) {
+            final String textBackup;
+            final String textRestore;
             if (DatabaseBackupUtils.hasBackup()) {
-                text = preference.getContext().getString(R.string.init_backup_last) + " "
+                textBackup = "";
+                textRestore = preference.getContext().getString(R.string.init_backup_last) + " "
                         + DatabaseBackupUtils.getBackupDateTime();
             } else {
-                text = preference.getContext().getString(R.string.init_backup_last_no);
+                textBackup = preference.getContext().getString(R.string.init_backup_last_no);
+                textRestore = "";
             }
-            preference.setSummary(text);
+            preference.setSummary(textBackup);
+            preferenceManager.findPreference(getKey(R.string.pref_fakekey_preference_restore)).setSummary(textRestore);
         } else if (isPreference(preference, R.string.pref_ratingwanted)) {
             preferenceManager.findPreference(getKey(R.string.preference_screen_gcvote)).setSummary(getServiceSummary((Boolean) value));
             redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));
