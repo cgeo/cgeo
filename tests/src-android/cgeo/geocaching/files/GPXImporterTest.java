@@ -35,8 +35,6 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private TestHandler progressHandler;
     private int listId;
     private File tempDir;
-    private boolean importCacheStaticMaps;
-    private boolean importWpStaticMaps;
     private HandlerThread serviceThread;
 
     public void testGetWaypointsFileNameForGpxFile() throws IOException {
@@ -351,11 +349,6 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         // workaround to get storage initialized
         DataStore.getAllHistoryCachesCount();
         listId = DataStore.createList("cgeogpxesTest");
-
-        importCacheStaticMaps = Settings.isStoreOfflineMaps();
-        TestSettings.setStoreOfflineMaps(false /* true */);
-        importWpStaticMaps = Settings.isStoreOfflineWpMaps();
-        TestSettings.setStoreOfflineWpMaps(false /* true */);
     }
 
     @Override
@@ -365,8 +358,6 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         DataStore.markDropped(cachesInList);
         DataStore.removeList(listId);
         FileUtils.deleteDirectory(tempDir);
-        TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
-        TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);
         serviceThread.quit();
         super.tearDown();
     }

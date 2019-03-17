@@ -71,8 +71,6 @@
     <string translatable="false" name="pref_sigautoinsert">sigautoinsert</string>
     <string translatable="false" name="pref_trackautovisit">trackautovisit</string>
     <string translatable="false" name="pref_log_offline">log_offline</string>
-    <string translatable="false" name="pref_offlinemaps">offlinemaps</string>
-    <string translatable="false" name="pref_offlinewpmaps">offlinewpmaps</string>
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
@@ -145,8 +143,6 @@
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
     <string translatable="false" name="pref_navigation_menu_internal_new_map">navigationInternalNewMap</string>
-    <string translatable="false" name="pref_navigation_menu_static_map">navigationStatic</string>
-    <string translatable="false" name="pref_navigation_menu_static_map_download">navigationStaticDownload</string>
     <string translatable="false" name="pref_navigation_menu_locus">navigationLocus</string>
     <string translatable="false" name="pref_navigation_menu_rmaps">navigationRmaps</string>
     <string translatable="false" name="pref_navigation_menu_google_maps">navigationGoogleMaps</string>

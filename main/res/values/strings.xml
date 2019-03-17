@@ -269,7 +269,6 @@
     <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
-    <string name="info_storing_static_maps">Trying to store static maps</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
     <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
@@ -456,7 +455,7 @@
     <string name="settings_title_cachedetails">Cache Details</string>
     <string name="settings_summary_cachedetails">Customize the display of cache information.</string>
     <string name="settings_title_offlinedata">Offline Data</string>
-    <string name="settings_summary_offlinedata">Configure static maps and other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Configure your signature and set logging options.</string>
     <string name="settings_title_map">Map</string>
@@ -586,10 +585,6 @@
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Exclude Disabled</string>
     <string name="init_summary_disabled">Exclude disabled caches</string>
-    <string name="init_offline">Static Maps</string>
-    <string name="init_summary_offline">Store cache static maps for offline use</string>
-    <string name="init_offline_wp">Static Maps (WP)</string>
-    <string name="init_summary_offline_wp">Store waypoints static maps for offline use</string>
     <string name="init_save_log_img">Save Images</string>
     <string name="init_summary_save_log_img">Save Images from Logs</string>
     <string name="init_units">Use Imperial Units</string>
@@ -897,8 +892,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Map</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Static Maps</string>
-    <string name="cache_menu_download_map_static">Download Static Maps</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Other external apps</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -991,7 +984,6 @@
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
     <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
     <string name="gpx_import_loading_waypoints_with_filename">Loading waypoints from %1$s</string>
-    <string name="gpx_import_store_static_maps">Storing static maps</string>
     <string name="gpx_import_caches_imported">caches imported</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d caches imported from %2$s</string>
     <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>

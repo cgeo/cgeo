@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Verfügbare Problemberichte haben sich geändert!</string>
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
-    <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
@@ -557,10 +556,6 @@
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_disabled">Deaktivierte Caches</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
-    <string name="init_offline">Statische Karten</string>
-    <string name="init_summary_offline">Statische Karten zum Cache für Offline-Verwendung speichern</string>
-    <string name="init_offline_wp">Statische Karten (WP)</string>
-    <string name="init_summary_offline_wp">Statische Karten zu Wegpunkten für Offline-Verwendung speichern</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
     <string name="init_units">Imperiale Einheiten</string>
@@ -856,8 +851,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Karte</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statische Karten</string>
-    <string name="cache_menu_download_map_static">Statische Karten speichern</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andere externe App</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -946,7 +939,6 @@
     <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
     <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
     <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
-    <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>
     <string name="gpx_import_caches_imported">Caches importiert</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d Caches von %2$s importiert</string>
     <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>

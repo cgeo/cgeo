@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">사용할 수 있는 문제점 신고가 변경 되었습니다!</string>
     <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
     <string name="info_stored_image">새로운 사진 저장 위치 :</string>
-    <string name="info_storing_static_maps">정적 지도를 저장하는 중입니다.</string>
     <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
     <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
     <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
@@ -554,10 +553,6 @@
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_disabled">비활성캐시 제외하기</string>
     <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
-    <string name="init_offline">정적 지도</string>
-    <string name="init_summary_offline">오프라인용으로 정적지도를 저장합니다.</string>
-    <string name="init_offline_wp">정적 지도(WP)</string>
-    <string name="init_summary_offline_wp">오프라인용으로 웨이포인트 정적 지도를 저장합니다.</string>
     <string name="init_save_log_img">사진 저장하기</string>
     <string name="init_summary_save_log_img">로그에 있는 사진을 저장합니다.</string>
     <string name="init_units">영미식 단위 사용하기</string>
@@ -846,8 +841,6 @@
     <string name="cache_menu_radar">레이더</string>
     <string name="cache_menu_map">지도</string>
     <string name="cache_menu_mfbeta">Mapsforge 베타</string>
-    <string name="cache_menu_map_static">정적 지도</string>
-    <string name="cache_menu_download_map_static">정적지도 다운로드</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">기타 외부 앱</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
@@ -936,7 +929,6 @@
     <string name="gpx_import_loading_caches_with_filename">%1$s 에서 캐시 불러오는 중</string>
     <string name="gpx_import_loading_waypoints">지점 파일 불러오는 중</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s 에서 웨이포인트 불러오는 중</string>
-    <string name="gpx_import_store_static_maps">정적 지도 저장중</string>
     <string name="gpx_import_caches_imported">가져온 캐시</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d 개의 캐시를 %2$s 에서 가져왔습니다.</string>
     <string name="gpx_import_static_maps_skipped">정적지도 다운로드가 중단됨</string>

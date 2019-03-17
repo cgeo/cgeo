@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Galimos problemos ataskaitos pasikeitė!</string>
     <string name="info_select_logimage_cancelled">Nuotraukos pasirinkimas ar fotografavimas buvo atšauktas.</string>
     <string name="info_stored_image">Nauja nuotrauka įrašyta į:</string>
-    <string name="info_storing_static_maps">Bandoma išsaugoti statinius žemėlapius</string>
     <string name="info_cache_saved">Slėptuvė buvo išsaugota įrenginyje</string>
     <string name="warn_calculator_state_save">Nepamirškite išsaugokite kelio tašką, jei norite išsaugoti skaičiuoklės būseną.</string>
     <string name="err_trackable_log_not_anonymous">Anonimiškai užregistruoti %1$s per c:geo negalima. Ar norite atidaryti nustatymus ir užpildyti savo duomenis iš %2$s?</string>
@@ -563,10 +562,6 @@
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
     <string name="init_disabled">Atmesti išjungtas</string>
     <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
-    <string name="init_offline">Statiniai žemėlapiai</string>
-    <string name="init_summary_offline">Išsaugoti slėptuvių statinius žemėlapius naudojimui be interneto</string>
-    <string name="init_offline_wp">Statiniai žemėlapiai (PT)</string>
-    <string name="init_summary_offline_wp">Išsaugoti papildomų taškų statinius žemėlapius naudojimui be interneto</string>
     <string name="init_save_log_img">Išsaugoti nuotraukas</string>
     <string name="init_summary_save_log_img">Išsaugoti nuotraukas iš įrašų</string>
     <string name="init_units">Imperiniai vienetai</string>
@@ -876,8 +871,6 @@
     <string name="cache_menu_radar">Radaras</string>
     <string name="cache_menu_map">Žemėlapis</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statinis žemėlapis</string>
-    <string name="cache_menu_download_map_static">Parsisiųsti statinį žemėlapį</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Kitos išorinės programos</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -966,7 +959,6 @@
     <string name="gpx_import_loading_caches_with_filename">Įkeliamos slėptuvės nuo %1$s</string>
     <string name="gpx_import_loading_waypoints">Įkeliamas papildomų taškų failas</string>
     <string name="gpx_import_loading_waypoints_with_filename">Įkeliami papildomi taškai nuo %1$s</string>
-    <string name="gpx_import_store_static_maps">Išsaugomi statiniai žemėlapiai</string>
     <string name="gpx_import_caches_imported">slėptuvės importuotos</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d slėptuvės importuotos iš %2$s</string>
     <string name="gpx_import_static_maps_skipped">Statinių žemėlapių atsisiuntimas nutrauktas</string>

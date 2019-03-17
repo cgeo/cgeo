@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Der er ændringer i tilgængelige problemrapporter!</string>
     <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
     <string name="info_stored_image">Nyt billede gemt til:</string>
-    <string name="info_storing_static_maps">Forsøger at gemme statiske kort</string>
     <string name="info_cache_saved">Cachen blev gemt lokalt</string>
     <string name="warn_calculator_state_save">Husk at gemme waypoint, hvis du vil beholde lommeregnerens tilstand.</string>
     <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
@@ -557,10 +556,6 @@
     <string name="init_showwaypoint_description">Hvis der vises færre end dette antal cacher på kortet, vil de tilhørende waypoints også blive vist.</string>
     <string name="init_disabled">Udelad deaktiverede cacher</string>
     <string name="init_summary_disabled">Udelad deaktiverede cacher</string>
-    <string name="init_offline">Gem kort til offlinebrug</string>
-    <string name="init_summary_offline">Gem kort til offlinebrug</string>
-    <string name="init_offline_wp">Statiske kort (waypoints)</string>
-    <string name="init_summary_offline_wp">Gem statiske kort for waypoints til offline brug</string>
     <string name="init_save_log_img">Lagring af billeder</string>
     <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
     <string name="init_units">Benyt britiske afstandsmål</string>
@@ -856,8 +851,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kort</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statiske kort</string>
-    <string name="cache_menu_download_map_static">Indlæs statiske kort</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -946,7 +939,6 @@
     <string name="gpx_import_loading_caches_with_filename">Indlæser cacher fra %1$s</string>
     <string name="gpx_import_loading_waypoints">Indlæser waypoints fra fil</string>
     <string name="gpx_import_loading_waypoints_with_filename">Indlæser waypoints fra %1$s</string>
-    <string name="gpx_import_store_static_maps">Gemmer statiske kort</string>
     <string name="gpx_import_caches_imported">importerede cacher</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d cacher importeret fra %2$s</string>
     <string name="gpx_import_static_maps_skipped">Indlæsning af statiske kort blev afbrudt</string>

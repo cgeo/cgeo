@@ -336,10 +336,6 @@
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:name=".staticmaps.StaticMapsActivity_"
-            android:label="@string/map_static_title" >
-        </activity>
-        <activity
             android:name="cgeo.geocaching.log.LogCacheActivity"
             android:label="@string/log_new_log" >
         </activity>

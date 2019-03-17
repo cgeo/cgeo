@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Elérhető problémajelentések megváltoztak!</string>
     <string name="info_select_logimage_cancelled">A kép kiválasztása vagy készítése meg lett szakítva.</string>
     <string name="info_stored_image">Új kép mentési helyének megadása:</string>
-    <string name="info_storing_static_maps">Kísérlet a statikus térképek mentésére.</string>
     <string name="info_cache_saved">Láda adati letöltve</string>
     <string name="warn_calculator_state_save">Mentsd el az útpontot, ha meg akarod tartani a számológép aktuális állapotát!</string>
     <string name="err_trackable_log_not_anonymous">%1$s logolása a c:geo-ból nem végezhető el névtelenül. Meg akarod nyitni a beállításokat, hogy kitöltsd a %2$s-ra vonatkozó adatokat?</string>
@@ -557,10 +556,6 @@
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
     <string name="init_disabled">Letiltott ládák kihagyása</string>
     <string name="init_summary_disabled">Letiltott ládák kihagyása</string>
-    <string name="init_offline">Ládák statikus térképe</string>
-    <string name="init_summary_offline">Ládák statikus térképének mentése offline használathoz</string>
-    <string name="init_offline_wp">Útpontok statikus térképe</string>
-    <string name="init_summary_offline_wp">Útpontok statikus térképének mentése offline használathoz</string>
     <string name="init_save_log_img">Logokban található képek mentése</string>
     <string name="init_summary_save_log_img">Logokban található képek mentése</string>
     <string name="init_units">Mérföld/láb használata</string>
@@ -856,8 +851,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Térkép</string>
     <string name="cache_menu_mfbeta">Mapsforge béta</string>
-    <string name="cache_menu_map_static">Statikus térképek</string>
-    <string name="cache_menu_download_map_static">Statikus térképek letöltése</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Külső alkalmazás</string>
     <string name="cache_menu_streetview">Utcanézet</string>
@@ -946,7 +939,6 @@
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
     <string name="gpx_import_loading_waypoints">Útpontfájl betöltése</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
-    <string name="gpx_import_store_static_maps">Statikus térképek mentése</string>
     <string name="gpx_import_caches_imported">láda importálva</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d láda importálva %2$s fájlból</string>
     <string name="gpx_import_static_maps_skipped">A statikus térképek letöltése megszakítva.</string>

@@ -29,7 +29,6 @@ public class GPXImporter {
     static final int IMPORT_STEP_START = 0;
     static final int IMPORT_STEP_READ_FILE = 1;
     static final int IMPORT_STEP_READ_WPT_FILE = 2;
-    static final int IMPORT_STEP_STORE_STATIC_MAPS = 4;
     static final int IMPORT_STEP_FINISHED = 5;
     static final int IMPORT_STEP_FINISHED_WITH_ERROR = 6;
     static final int IMPORT_STEP_CANCEL = 7;
@@ -219,13 +218,6 @@ public class GPXImporter {
                 case IMPORT_STEP_READ_FILE:
                 case IMPORT_STEP_READ_WPT_FILE:
                     progress.setMessage(res.getString(msg.arg1, msg.obj));
-                    progress.setMaxProgressAndReset(msg.arg2);
-                    break;
-
-                case IMPORT_STEP_STORE_STATIC_MAPS:
-                    progress.dismiss();
-                    final Message skipMessage = obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED, msg.arg2, 0, msg.obj);
-                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
 
