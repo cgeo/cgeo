@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · Fix: Avoid having to choose target app twice when opening cache in browser\n
+    · Fix: Menu items and explanations mixed up in Settings - System\n
     \n
   </string>
 </resources>
