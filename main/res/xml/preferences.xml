@@ -421,6 +421,17 @@
             </PreferenceScreen>
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/settings_maxDistance"
+            android:layout="@layout/preference_category" >
+            <Preference
+                android:selectable="false"
+                android:summary="@string/init_ocMaxDistance_description"
+                android:title="@string/init_ocMaxDistance" />
+            <cgeo.geocaching.settings.OCMaxDistancePreference
+                android:key="@string/pref_ocMaxDistance"
+                android:layout="@layout/preference_seekbar" />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/settings_category_social"
             android:layout="@layout/preference_category" >
 
@@ -575,7 +586,7 @@
                 android:title="@string/init_showwaypoints" />
             <cgeo.geocaching.settings.WpThresholdPreference
                 android:key="@string/pref_showwaypointsthreshold"
-                android:layout="@layout/wp_threshold_preference" />
+                android:layout="@layout/preference_seekbar" />
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="@string/pref_map_direction"
@@ -592,7 +603,7 @@
                 android:title="@string/init_brouterThreshold" />
             <cgeo.geocaching.settings.BrouterThresholdPreference
                 android:key="@string/pref_brouterDistanceThreshold"
-                android:layout="@layout/brouter_threshold_preference" />
+                android:layout="@layout/preference_seekbar" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"

@@ -75,6 +75,8 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_MAX = 200;
     private static final int BROUTER_THRESHOLD_DEFAULT = 10;
     public static final int BROUTER_THRESHOLD_MAX = 120;
+    public static final int OCMAXDISTANCE_DEFAULT = 200;    // km
+    public static final int OCMAXDISTANCE_MAX = 9999;       // km
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -961,6 +963,17 @@ public class Settings {
 
     static void setBrouterThreshold(final int threshold) {
         putInt(R.string.pref_brouterDistanceThreshold, threshold);
+    }
+
+    /**
+     * Maximum distance up to which to return OC caches
+     */
+    public static int getOCmaxDistance() {
+        return getInt(R.string.pref_ocMaxDistance, OCMAXDISTANCE_DEFAULT);
+    }
+
+    static void setOCmaxDistance(final int maxDistance) {
+        putInt(R.string.pref_ocMaxDistance, maxDistance);
     }
 
     public static boolean isUseTwitter() {
