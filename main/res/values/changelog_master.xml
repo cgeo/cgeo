@@ -2,5 +2,8 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>\n
+    · Fix: Avoid having to choose target app twice when opening cache in browser\n
+    \n
   </string>
 </resources>
