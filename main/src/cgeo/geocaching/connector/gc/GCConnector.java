@@ -56,7 +56,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @NonNull
     private static final String CACHE_URL_SHORT = "https://coord.info/";
-    // Double slash is used to force open in browser
+
     @NonNull
     private static final String CACHE_URL_LONG = "https://www.geocaching.com/geocache/";
     /**
