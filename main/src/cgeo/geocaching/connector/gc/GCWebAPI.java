@@ -374,6 +374,9 @@ class GCWebAPI {
     }
 
     /**
+     * Sends trackable logs in groups of 10.
+     * https://github.com/cgeo/cgeo/issues/7249
+     *
      * https://www.geocaching.com/api/proxy/trackable/activities
      * <div>
      *   "postData": {
@@ -389,8 +392,23 @@ class GCWebAPI {
             if (tb.action != LogTypeTrackable.DO_NOTHING && tb.brand == TrackableBrand.TRAVELBUG) {
                 trackableLogs.add(new TrackableLog(String.valueOf(tb.action.gcApiId), logDate, geocode, tb.geocode));
             }
+            if (trackableLogs.size() == 10) {
+                if (postLogTrackable(trackableLogs).isSuccessful()) {
+                    trackableLogs.clear();
+                } else {
+                    return false;
+                }
+            }
         }
-        return trackableLogs.isEmpty() || postAPI("/trackable/activities", trackableLogs).blockingGet().isSuccessful();
+        return trackableLogs.isEmpty() || postLogTrackable(trackableLogs).isSuccessful();
+    }
+
+    private static Response postLogTrackable(final List<TrackableLog> trackableLogs) {
+        final Response response = postAPI("/trackable/activities", trackableLogs).blockingGet();
+        if (!response.isSuccessful()) {
+            Log.e("Logging trackables failed: " + response.message());
+        }
+        return response;
     }
 
     /**
