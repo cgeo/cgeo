@@ -44,4 +44,7 @@ main/gradle.properties
 !.idea/checkstyle-idea.xml
 *.iml
 
+# ignore AS layout captures
+captures/
+
 main/usage.txt
