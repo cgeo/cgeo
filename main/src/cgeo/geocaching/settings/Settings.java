@@ -75,8 +75,8 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_MAX = 200;
     private static final int BROUTER_THRESHOLD_DEFAULT = 10;
     public static final int BROUTER_THRESHOLD_MAX = 120;
-    public static final int OCMAXDISTANCE_DEFAULT = 200;    // km
-    public static final int OCMAXDISTANCE_MAX = 9999;       // km
+    public static final int OKAPI_MAX_DISTANCE_KM_DEFAULT = 200;
+    public static final int OKAPI_MAX_DISTANCE_KM_MAX = 9999;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -968,12 +968,12 @@ public class Settings {
     /**
      * Maximum distance up to which to return OC caches
      */
-    public static int getOCmaxDistance() {
-        return getInt(R.string.pref_ocMaxDistance, OCMAXDISTANCE_DEFAULT);
+    public static int getOkapiMaxDistance() {
+        return getInt(R.string.pref_okapiMaxDistance, OKAPI_MAX_DISTANCE_KM_DEFAULT);
     }
 
-    static void setOCmaxDistance(final int maxDistance) {
-        putInt(R.string.pref_ocMaxDistance, maxDistance);
+    static void setOkapiMaxDistance(final int maxDistance) {
+        putInt(R.string.pref_okapiMaxDistance, maxDistance);
     }
 
     public static boolean isUseTwitter() {

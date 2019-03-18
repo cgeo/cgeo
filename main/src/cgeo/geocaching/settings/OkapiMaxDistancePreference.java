@@ -16,22 +16,22 @@ import java.util.Locale;
 
 import butterknife.ButterKnife;
 
-public class OCMaxDistancePreference extends Preference {
+public class OkapiMaxDistancePreference extends Preference {
 
     private int seekbarLength;
     private TextView valueView;
 
-    public OCMaxDistancePreference(final Context context) {
+    public OkapiMaxDistancePreference(final Context context) {
         super(context);
         init();
     }
 
-    public OCMaxDistancePreference(final Context context, final AttributeSet attrs) {
+    public OkapiMaxDistancePreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public OCMaxDistancePreference(final Context context, final AttributeSet attrs, final int defStyle) {
+    public OkapiMaxDistancePreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -60,8 +60,8 @@ public class OCMaxDistancePreference extends Preference {
         if (distance < 0.0) {
             return 0.0;
         }
-        if (distance > Settings.OCMAXDISTANCE_MAX) {
-            return Settings.OCMAXDISTANCE_MAX;
+        if (distance > Settings.OKAPI_MAX_DISTANCE_KM_MAX) {
+            return Settings.OKAPI_MAX_DISTANCE_KM_MAX;
         }
         return distance;
     }
@@ -82,11 +82,11 @@ public class OCMaxDistancePreference extends Preference {
         valueView = ButterKnife.findById(v, R.id.preference_value_view);
 
         // init seekbar
-        seekbarLength = km2valueHelper(Settings.OCMAXDISTANCE_MAX);
+        seekbarLength = km2valueHelper(Settings.OKAPI_MAX_DISTANCE_KM_MAX);
         seekBar.setMax(seekbarLength);
 
         // set initial value
-        final int threshold = km2value(Settings.getOCmaxDistance());
+        final int threshold = km2value(Settings.getOkapiMaxDistance());
         valueView.setText(getValueString(threshold));
         seekBar.setProgress(threshold);
 
@@ -103,7 +103,7 @@ public class OCMaxDistancePreference extends Preference {
             }
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
-                Settings.setOCmaxDistance((int) Math.round(value2km(seekBar.getProgress())));
+                Settings.setOkapiMaxDistance((int) Math.round(value2km(seekBar.getProgress())));
             }
         });
 

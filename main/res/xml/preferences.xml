@@ -425,10 +425,10 @@
             android:layout="@layout/preference_category" >
             <Preference
                 android:selectable="false"
-                android:summary="@string/init_ocMaxDistance_description"
-                android:title="@string/init_ocMaxDistance" />
-            <cgeo.geocaching.settings.OCMaxDistancePreference
-                android:key="@string/pref_ocMaxDistance"
+                android:summary="@string/init_okapiMaxDistance_description"
+                android:title="@string/init_okapiMaxDistance" />
+            <cgeo.geocaching.settings.OkapiMaxDistancePreference
+                android:key="@string/pref_okapiMaxDistance"
                 android:layout="@layout/preference_seekbar" />
         </PreferenceCategory>
 

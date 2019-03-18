@@ -199,7 +199,7 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("center", centerString);
         valueMap.put("limit", getCacheLimit());
-        valueMap.put("radius", String.valueOf(Settings.getOCmaxDistance()));
+        valueMap.put("radius", String.valueOf(Settings.getOkapiMaxDistance()));
 
         return requestCaches(connector, params, valueMap, false);
     }
