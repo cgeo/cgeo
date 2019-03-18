@@ -618,7 +618,7 @@
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
     <string name="init_debug">Debug-Log aktivieren</string>
-    <string name="init_dbonsdcard_title">Speicherort der Datenbank</string>
+    <string name="init_dbonsdcard_title">Datenspeicherung</string>
     <string name="init_dbonsdcard_note">Sie können die Datenbank von c:geo entweder systemintern oder in einem benutzerdefiniertem Verzeichnis speichern. Je nach Konfiguration des Gerätes kann die Speicherung im Benutzerbereich internen Speicherplatz freigeben, aber Sie verlieren etwas Leistung und c:geo wird nicht funktionieren, wenn der Benutzerspeicher nicht verfügbar ist oder die Datenbank-Datei gelöscht wird.</string>
     <string name="init_dbonsdcard">Im Benutzerspeicher</string>
     <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
@@ -1492,7 +1492,7 @@
     <string name="settings_activate_geokrety">Aktivieren</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
-    <string name="init_summary_geokrety">Lade Trackables von GeoKrety.org</string>
+    <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
     <string name="init_geokrety_register_ok">Anmeldung OK</string>
     <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>

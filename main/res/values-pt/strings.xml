@@ -217,7 +217,7 @@
     <string name="err_log_post_failed_ec">Parece que o seu  registo não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Parece que o seu registo não foi postado. Por favor verifique-o na GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Parece que a imagem do seu registo não foi enviada. Por favor, verifique a página Web original da cache.</string>
-    <string name="err_search_address_forgot">O c:geo esqueceu a morada que tentou encontrar.</string>
+    <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
     <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
     <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
     <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
@@ -312,7 +312,7 @@
     <string name="caches_store_offline">Guardar na Memória</string>
     <string name="caches_store_all">Guardar todas</string>
     <string name="caches_store_unsaved">Guardar não memorizadas</string>
-    <string name="caches_store_selected">Memorizar seleccionada(s)</string>
+    <string name="caches_store_selected">Memorizar seleccionadas</string>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
@@ -343,7 +343,7 @@
         <item quantity="one">Quer remover esta cache da lista actual?</item>
         <item quantity="other">Quer remover todas as %d caches da lista actual?</item>
     </plurals>
-    <string name="caches_remove_selected">Remover seleccionada(s)</string>
+    <string name="caches_remove_selected">Remover seleccionadas</string>
     <plurals name="caches_remove_selected_confirm">
         <item quantity="one">Quer remover esta cache do seu dispositivo?</item>
         <item quantity="other">Quer remover as %d caches seleccionadas do seu dispositivo?</item>
@@ -671,12 +671,12 @@
     <string name="feature_log_images">Anexar imagens aos logs</string>
     <string name="feature_watch_list">Lista de observação</string>
     <string name="feature_own_coordinates">Armazenamento de coordenadas modificadas</string>
-    <string name="feature_search_keyword">Procurar por palavra-chave</string>
+    <string name="feature_search_keyword">Pesquisar por palavra-chave</string>
     <string name="feature_search_live_map">Mapa ao vivo</string>
-    <string name="feature_search_center">Procura por posição</string>
+    <string name="feature_search_center">Pesquisa pela localização</string>
     <string name="feature_search_geocode">Pesquisa por código GC</string>
     <string name="feature_search_owner">Procura por dono</string>
-    <string name="feature_search_finder">Procura por quem encontrou</string>
+    <string name="feature_search_finder">Pesquisa por quem encontrou</string>
     <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
     <string name="init_mfold_api">Antigo Mapsforge V3</string>
     <string name="init_mfold_api_description">O lançamento actual contém uma versão beta do novo mapa Mapsforge. Se tiver perdido alguma funcionalidade ou encontrar problemas poderá regressar à versão antiga aqui.</string>
@@ -695,7 +695,7 @@
     <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
     <string name="init_sendToCgeo_register">Solicitar registo</string>
     <string name="init_sendToCgeo_registering">Registando o seu dispositivo para send2cgeo…</string>
-    <string name="init_sendToCgeo_register_ok">Registo bem sucedido. O código PIN é %d. Use-o no site do c:geo para adicionar este dispositivo ao seu browser.</string>
+    <string name="init_sendToCgeo_register_ok">O registo foi bem sucedido. O código PIN é %d. Use-o no sítio web do c:geo para adicionar este dispositivo ao seu navegador.</string>
     <string name="init_sendToCgeo_register_fail">O registo falhou.</string>
     <string name="sendToCgeo_download_fail">O c:geo falhou a transferência das geocaches. Não há ligação à Internet ou o send2cgeo encontra-se fora de serviço.</string>
     <string name="sendToCgeo_no_registration">O c:geo falhou a transferência das geocaches. O registo do send2cgeo expirou. Por favor, faça o registo nas definições.</string>
@@ -816,8 +816,8 @@
         <item quantity="other">%d Pontos Adicionais</item>
     </plurals>
     <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
-    <string name="cache_hint">Pista</string>
-    <string name="cache_hint_not_available">Nenhuma pista disponível</string>
+    <string name="cache_hint">Dica</string>
+    <string name="cache_hint_not_available">Nenhuma dica disponível</string>
     <string name="cache_logs">Registos</string>
     <string name="cache_logs_friends_and_own">Registos de amigos/próprios</string>
     <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
@@ -1057,14 +1057,14 @@
     <string name="map_routing_bike">Bicicleta</string>
     <string name="map_routing_car">Carro</string>
     <!-- search -->
-    <string name="search_bar_hint">Procurar caches</string>
+    <string name="search_bar_hint">Pesquisar geocaches</string>
     <string name="search_bar_desc">Caches (código-GC, palavra-chave), Trackables (código-TB)</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Pesquisar por coordenadas</string>
     <string name="search_address">Endereço</string>
     <string name="search_address_button">Pesquisar por endereço</string>
-    <string name="search_geo">Geo código</string>
-    <string name="search_geo_button">Pesquisar por geo código</string>
+    <string name="search_geo">Código GC</string>
+    <string name="search_geo_button">Pesquisar por código GC</string>
     <string name="search_kw">Palavras-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
@@ -1152,7 +1152,7 @@
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
     <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-    <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
+    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>

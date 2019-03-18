@@ -159,7 +159,7 @@
     <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
-    <string name="err_login">Aucune compte renseigné</string>
+    <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
     <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
     <string name="err_unknown">Erreur inconnue</string>
     <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
@@ -271,7 +271,7 @@
     <!-- location service -->
     <string name="loc_last">Dernière position</string>
     <string name="loc_net">Réseau</string>
-    <string name="loc_fused">Unifié</string>
+    <string name="loc_fused">Fusionné</string>
     <string name="loc_low_power">Éco</string>
     <string name="loc_home">Domicile</string>
     <string name="loc_gps">GPS</string>
@@ -1438,7 +1438,7 @@
     <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Votre version d\'Android semble antérieure à 4.1. Les prochaines versions de c:geo pourraient ne plus fonctionner sur votre appareil.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>

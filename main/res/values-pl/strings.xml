@@ -790,7 +790,7 @@
         <item quantity="one">about %d month ago</item>
         <item quantity="few">about %d months ago</item>
         <item quantity="many">about %d months ago</item>
-        <item quantity="other">about %d months ago</item>
+        <item quantity="other">około %d miesięcy temu</item>
     </plurals>
     <string name="cache_offline_about_time_year">ponad rok temu</string>
     <string name="cache_offline_time_hour">przed jedną godziną</string>

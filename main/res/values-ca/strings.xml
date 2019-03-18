@@ -130,7 +130,7 @@
     <string name="log_your_saved_log">El registre que heu desat</string>
     <string name="log_empty_logbook">El llibre de registres del catxé està buit.</string>
     <string name="log_problem_none">Cap problema</string>
-    <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+    <string name="log_problem_needs_maintenance_label">Necessita manteniment</string>
     <string name="log_problem_needs_maintenance_text">Aquest geocatxer va informar que hi ha un problema amb aquest catxé.</string>
     <string name="log_problem_log_full_label">El llibre de registre està ple</string>
     <string name="log_problem_log_full_text">Aquest geocatxer va informar que el llibre de registre és ple.</string>
@@ -138,7 +138,7 @@
     <string name="log_problem_damaged_text">Aquest geocatxer va informar que el contenidor està danyat.</string>
     <string name="log_problem_missing_label">El catxé pot haver estat espoliat</string>
     <string name="log_problem_missing_text">Aquest geocatxer va informar que el catxé pot haver estat espoliat.</string>
-    <string name="log_problem_other_label">Other</string>
+    <string name="log_problem_other_label">Altres</string>
     <string name="log_problem_other_text">Aquest geocatxer va informar que hi ha un problema amb aquest catxé.</string>
     <string name="log_problem_archive_label">El catxé ha de ser arxivat</string>
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
@@ -255,7 +255,7 @@
     <string name="info_log_cleared">El registre ha estat esborrat.</string>
     <string name="info_waypoint_coordinates_cleared">S\'ha eliminat les coordenades.</string>
     <string name="info_log_type_changed">El tipus de registre ha estat canviat.</string>
-    <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
+    <string name="info_log_report_problem_changed">Ha canviat l\'informe de problemes disponible!</string>
     <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
     <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
     <string name="info_storing_static_maps">S\'està intentant desar els mapes estàtics</string>
@@ -267,7 +267,7 @@
     <string name="confirm_discard_wp_changes">Descartar els canvis de punts de ruta sense desar?</string>
     <string name="warn_discard_changes">Descartat els canvis del punt de referència!</string>
     <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
-    <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="warn_log_load_additional_data">c:Geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>
@@ -414,8 +414,8 @@
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
     <string name="about_system">Sistema</string>
-    <string name="about_donate">Support us</string>
-    <string name="about_donation_more">Visit website for info</string>
+    <string name="about_donate">Dona\'ns suport</string>
+    <string name="about_donation_more">Visiteu el lloc web per obtenir informació</string>
     <string name="about_contributors">Col·laboradors</string>
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
@@ -532,11 +532,11 @@
     <string name="init_signature_template_number">Número</string>
     <string name="init_signature_template_owner">Propietari</string>
     <string name="init_signature_template_name">Nom</string>
-    <string name="init_signature_template_difficulty">Difficulty</string>
-    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_difficulty">Dificultat</string>
+    <string name="init_signature_template_terrain">Terreny</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Text del registre</string>
-    <string name="init_signature_template_size">Size</string>
+    <string name="init_signature_template_size">Mida</string>
     <string name="init_ratingwanted">Valoració del GCvote</string>
     <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
@@ -771,8 +771,8 @@
         <item quantity="other">fa %d dies</item>
     </plurals>
     <plurals name="cache_offline_about_time_months">
-        <item quantity="one">about %d month ago</item>
-        <item quantity="other">about %d months ago</item>
+        <item quantity="one">fa %d mes</item>
+        <item quantity="other">fa %d mesos</item>
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_offline_time_hour">ara fa una hora</string>
@@ -1439,7 +1439,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Sembla que esteu utilitzant una versió d\'Android 2.1 o inferior. Futures versions del c:geo poden no estar disponibles per al vostre dispositiu.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
     <string name="tts_start">Comença a parlar</string>
