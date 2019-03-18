@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
 import cgeo.geocaching.connector.oc.OCAuthParams;
 import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
+import cgeo.geocaching.connector.su.SuAuthorizationActivity;
+import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
@@ -17,23 +19,36 @@ public class OAuthPreference extends AbstractClickablePreference {
     private static final int NO_KEY = -1;
 
     private enum OAuthActivityMapping {
-        NONE(NO_KEY, null, null),
-        OCDE(R.string.pref_fakekey_ocde_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_DE_AUTH_PARAMS),
-        OCPL(R.string.pref_fakekey_ocpl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_PL_AUTH_PARAMS),
-        OCNL(R.string.pref_fakekey_ocnl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_NL_AUTH_PARAMS),
-        OCUS(R.string.pref_fakekey_ocus_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_US_AUTH_PARAMS),
-        OCRO(R.string.pref_fakekey_ocro_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_RO_AUTH_PARAMS),
-        OCUK(R.string.pref_fakekey_ocuk_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_UK_AUTH_PARAMS),
-        TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class, TwitterAuthorizationActivity.TWITTER_OAUTH_PARAMS);
+        NONE(NO_KEY, null, null, -1, -1),
+        OCDE(R.string.pref_fakekey_ocde_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_DE_AUTH_PARAMS, -1, -1),
+        OCPL(R.string.pref_fakekey_ocpl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_PL_AUTH_PARAMS, -1, -1),
+        OCNL(R.string.pref_fakekey_ocnl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_NL_AUTH_PARAMS, -1, -1),
+        OCUS(R.string.pref_fakekey_ocus_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_US_AUTH_PARAMS, -1, -1),
+        OCRO(R.string.pref_fakekey_ocro_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_RO_AUTH_PARAMS, -1, -1),
+        OCUK(R.string.pref_fakekey_ocuk_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_UK_AUTH_PARAMS, -1, -1),
+        SU(R.string.pref_fakekey_su_authorization, SuAuthorizationActivity.class, SuAuthorizationActivity.SU_OAUTH_PARAMS, SuConnector.getInstance().getTokenPublicPrefKeyId(), SuConnector.getInstance().getTokenPublicPrefKeyId()),
+        TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class, TwitterAuthorizationActivity.TWITTER_OAUTH_PARAMS, R.string.pref_twitter_token_public, R.string.pref_twitter_token_secret);
 
         public final int prefKeyId;
+        public final int publicKeyId;
+        public final int secretKeyId;
         public final Class<?> authActivity;
         public final OAuthParameters authParams;
 
-        OAuthActivityMapping(final int prefKeyId, final Class<?> authActivity, final OAuthParameters authParams) {
+        OAuthActivityMapping(final int prefKeyId, final Class<?> authActivity, final OAuthParameters authParams, final int publicKeyId, final int secretKeyId) {
             this.prefKeyId = prefKeyId;
             this.authActivity = authActivity;
             this.authParams = authParams;
+
+            final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
+            // Extract keys IDs from key for OC-based services
+            if (key != null) {
+                this.publicKeyId = key.publicTokenPrefId;
+                this.secretKeyId = key.privateTokenPrefId;
+            } else {
+                this.publicKeyId = publicKeyId;
+                this.secretKeyId = secretKeyId;
+            }
         }
     }
 
@@ -80,18 +95,18 @@ public class OAuthPreference extends AbstractClickablePreference {
 
     @Override
     protected boolean isAuthorized() {
-        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
-        if (key != null) {
-            return Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId);
+        if (oAuthMapping.publicKeyId < 0 || oAuthMapping.secretKeyId < 0) {
+            return false;
         }
-        return false;
+        return Settings.hasOAuthAuthorization(oAuthMapping.publicKeyId, oAuthMapping.secretKeyId);
     }
 
     @Override
     protected void revokeAuthorization() {
-        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(oAuthMapping.prefKeyId);
-        if (key != null) {
-            Settings.setTokens(key.publicTokenPrefId, null, key.privateTokenPrefId, null);
+        if (oAuthMapping.publicKeyId < 0 || oAuthMapping.secretKeyId < 0) {
+            return;
         }
+
+        Settings.setTokens(oAuthMapping.publicKeyId, null, oAuthMapping.secretKeyId, null);
     }
 }

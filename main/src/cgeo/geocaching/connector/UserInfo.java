@@ -1,4 +1,4 @@
-package cgeo.geocaching.connector.oc;
+package cgeo.geocaching.connector;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
@@ -42,7 +42,7 @@ public class UserInfo {
     private final int finds;
     @NonNull private final UserInfoStatus status;
 
-    UserInfo(@NonNull final String name, final int finds, @NonNull final UserInfoStatus status) {
+    public UserInfo(@NonNull final String name, final int finds, @NonNull final UserInfoStatus status) {
         this.name = name;
         this.finds = finds;
         this.status = status;

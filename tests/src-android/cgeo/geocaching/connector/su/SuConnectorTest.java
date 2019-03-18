@@ -1,14 +1,13 @@
 package cgeo.geocaching.connector.su;
 
 import junit.framework.Assert;
-
 import org.junit.Test;
 
-public class SUConnectorTest {
+public class SuConnectorTest {
 
     @Test
-    public void testCanHandle() throws Exception {
-        final GeocachingSuConnector connector = GeocachingSuConnector.getInstance();
+    public void testCanHandle() {
+        final SuConnector connector = SuConnector.getInstance();
         Assert.assertTrue(connector.canHandle("TR12"));
         Assert.assertTrue(connector.canHandle("VI12"));
         Assert.assertTrue(connector.canHandle("MS32113"));
@@ -16,9 +15,16 @@ public class SUConnectorTest {
         Assert.assertTrue(connector.canHandle("LT421"));
         Assert.assertTrue(connector.canHandle("LV421"));
     }
+
     @Test
-    public void testCanNotHandle() throws Exception {
-        final GeocachingSuConnector connector = GeocachingSuConnector.getInstance();
+    public void testCanHandleSU() {
+        final SuConnector connector = SuConnector.getInstance();
+        Assert.assertTrue(connector.canHandle("SU12"));
+    }
+
+    @Test
+    public void testCanNotHandle() {
+        final SuConnector connector = SuConnector.getInstance();
         Assert.assertFalse(connector.canHandle("GC12"));
         Assert.assertFalse(connector.canHandle("OC412"));
     }
