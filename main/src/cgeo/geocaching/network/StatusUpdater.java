@@ -1,6 +1,8 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -10,7 +12,10 @@ import android.app.Application;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -64,6 +69,18 @@ public class StatusUpdater {
         }
     }
 
+    private static String getActiveConnectorsString() {
+        final List<IConnector> activeConnectors = ConnectorFactory.getActiveConnectors();
+        final List<String> activeConnectorsList = new ArrayList<>();
+        for (final IConnector conn : activeConnectors) {
+            try {
+                activeConnectorsList.add(conn.getNameAbbreviated());
+            } catch (IllegalStateException ignored) {
+            }
+        }
+        return TextUtils.join(",", activeConnectorsList);
+    }
+
     static {
         AndroidRxUtils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
             @Override
@@ -82,7 +99,8 @@ public class StatusUpdater {
                 Network.requestJSON("https://status.cgeo.org/api/status.json",
                         Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
                                 "version_name", Version.getVersionName(app),
-                                "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters))
+                                "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
+                                new Parameters("active_connectors", getActiveConnectorsString())))
                         .subscribe(new Consumer<ObjectNode>() {
                             @Override
                             public void accept(final ObjectNode json) {

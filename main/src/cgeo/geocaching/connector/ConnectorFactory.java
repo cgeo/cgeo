@@ -168,6 +168,17 @@ public final class ConnectorFactory {
         return liveConns.toArray(new ILogin[liveConns.size()]);
     }
 
+    @NonNull
+    public static List<IConnector> getActiveConnectors() {
+        final List<IConnector> activeConnectors = new ArrayList<>();
+        for (final IConnector conn : CONNECTORS) {
+            if (conn.isActive()) {
+                activeConnectors.add(conn);
+            }
+        }
+        return activeConnectors;
+    }
+
     public static boolean canHandle(@Nullable final String geocode) {
         if (geocode == null) {
             return false;
