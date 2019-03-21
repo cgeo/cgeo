@@ -45,17 +45,16 @@ public class GeocacheTest extends CGeoTestCase {
         final Geocache two = new Geocache();
 
         // identity
-        //noinspection EqualsWithItself
-        assertThat(one.equals(one)).isTrue();
+        assertThat(one).isEqualTo(one);
 
         // different objects without geocode shall not be equal
-        assertThat(one.equals(two)).isFalse();
+        assertThat(one).isNotEqualTo(two);
 
         one.setGeocode("geocode");
         two.setGeocode("geocode");
 
         // different objects with same geocode shall be equal
-        assertThat(one.equals(two)).isTrue();
+        assertThat(one).isEqualTo(two);
     }
 
     public static void testGeocodeUppercase() {

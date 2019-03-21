@@ -89,7 +89,7 @@ public class ViewportTest {
     public void testEquals() {
         assertThat(vpRef).isEqualTo(vpRef);
         assertThat(new Viewport(vpRef.bottomLeft, vpRef.topRight)).isEqualTo(vpRef);
-        assertThat(vpRef.equals(new Viewport(new Geopoint(0.0, 0.0), 1.0, 1.0))).isFalse();
+        assertThat(new Viewport(new Geopoint(0.0, 0.0), 1.0, 1.0)).isNotEqualTo(vpRef);
     }
 
     @Test

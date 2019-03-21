@@ -39,10 +39,9 @@ public class GeopointTest {
     @Test
     public void testEqual() {
         final Geopoint gp1 = new Geopoint(48.2, 2.31);
-        //noinspection EqualsWithItself
-        assertThat(gp1.equals(gp1)).isTrue();
+        assertThat(gp1).isEqualTo(gp1);
         final Geopoint gp2 = new Geopoint(48.3, 2.31);
-        assertThat(gp1.equals(gp2)).isFalse();
+        assertThat(gp1).isNotEqualTo(gp2);
     }
 
     @Test

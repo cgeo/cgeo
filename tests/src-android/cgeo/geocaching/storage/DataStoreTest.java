@@ -140,7 +140,7 @@ public class DataStoreTest extends CGeoTestCase {
 
         final String upperCase = ARTIFICIAL_GEOCODE;
         final String lowerCase = StringUtils.lowerCase(upperCase);
-        assertThat(upperCase.equals(lowerCase)).isFalse();
+        assertThat(upperCase).isNotEqualTo(lowerCase);
 
         // create cache and trackable
         final Geocache cache = new Geocache();
