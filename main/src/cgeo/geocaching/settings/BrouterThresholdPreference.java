@@ -59,8 +59,8 @@ public class BrouterThresholdPreference extends Preference {
         final View v = super.onCreateView(parent);
 
         // get views
-        final SeekBar seekBar = ButterKnife.findById(v, R.id.brouter_threshold_seekbar);
-        valueView = ButterKnife.findById(v, R.id.brouter_threshold_value_view);
+        final SeekBar seekBar = ButterKnife.findById(v, R.id.preference_seekbar);
+        valueView = ButterKnife.findById(v, R.id.preference_seekbar_value_view);
 
         // init seekbar
         seekBar.setMax(Settings.BROUTER_THRESHOLD_MAX);

@@ -579,7 +579,7 @@
                 android:title="@string/init_showwaypoints" />
             <cgeo.geocaching.settings.WpThresholdPreference
                 android:key="@string/pref_showwaypointsthreshold"
-                android:layout="@layout/wp_threshold_preference" />
+                android:layout="@layout/preference_seekbar" />
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="@string/pref_map_direction"
@@ -596,7 +596,7 @@
                 android:title="@string/init_brouterThreshold" />
             <cgeo.geocaching.settings.BrouterThresholdPreference
                 android:key="@string/pref_brouterDistanceThreshold"
-                android:layout="@layout/brouter_threshold_preference" />
+                android:layout="@layout/preference_seekbar" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
