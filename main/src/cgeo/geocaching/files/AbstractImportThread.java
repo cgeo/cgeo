@@ -2,11 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.staticmaps.StaticMapsProvider;
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -37,15 +33,6 @@ abstract class AbstractImportThread extends Thread {
             final SearchResult search = new SearchResult(caches);
             // Do not put imported caches into the cachecache. That would consume lots of memory for no benefit.
 
-            if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
-                importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, R.string.gpx_import_store_static_maps, search.getCount(), getSourceDisplayName()));
-                final boolean finishedWithoutCancel = importStaticMaps(search);
-                // Skip last message if static maps where canceled
-                if (!finishedWithoutCancel) {
-                    return;
-                }
-            }
-
             importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_FINISHED, search.getCount(), 0, getSourceDisplayName()));
         } catch (final IOException e) {
             Log.i("Importing caches failed - error reading data: ", e);
@@ -71,22 +58,4 @@ abstract class AbstractImportThread extends Thread {
      */
     protected abstract String getSourceDisplayName();
 
-    private boolean importStaticMaps(final SearchResult importedCaches) {
-        int storedCacheMaps = 0;
-        for (final String geocode : importedCaches.getGeocodes()) {
-            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            if (cache != null) {
-                Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
-                StaticMapsProvider.downloadMaps(cache).blockingAwait();
-            } else {
-                Log.d("GPXImporter.ImportThread.importStaticMaps: no data found for " + geocode);
-            }
-            storedCacheMaps++;
-            if (progressHandler.isDisposed()) {
-                return false;
-            }
-            progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCacheMaps, 0));
-        }
-        return true;
-    }
 }

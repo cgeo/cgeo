@@ -336,10 +336,6 @@
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:name=".staticmaps.StaticMapsActivity_"
-            android:label="@string/map_static_title" >
-        </activity>
-        <activity
             android:name="cgeo.geocaching.log.LogCacheActivity"
             android:label="@string/log_new_log" >
         </activity>
@@ -799,6 +795,24 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="cgeo.geocaching.connector.su.SuAuthorizationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="www.cgeo.org"/>
+                <data android:pathPrefix="/geocachingsu/"/>
+                <data android:scheme="callback" />
             </intent-filter>
         </activity>
 

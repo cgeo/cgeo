@@ -112,10 +112,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -127,8 +125,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.disposables.Disposables;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -1441,36 +1437,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     private void loadDetails(final DisposableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
         final Observable<Geocache> allCaches;
-        if (Settings.isStoreOfflineMaps()) {
-            allCaches = Observable.create(new ObservableOnSubscribe<Geocache>() {
-                private final Disposable disposable = Disposables.empty();
-
-                @Override
-                public void subscribe(final ObservableEmitter<Geocache> emitter) throws Exception {
-                    emitter.setDisposable(disposable);
-                    final Deque<Geocache> withStaticMaps = new LinkedList<>();
-                    for (final Geocache cache : caches) {
-                        if (disposable.isDisposed()) {
-                            return;
-                        }
-                        if (cache.hasStaticMap()) {
-                            withStaticMaps.push(cache);
-                        } else {
-                            emitter.onNext(cache);
-                        }
-                    }
-                    for (final Geocache cache : withStaticMaps) {
-                        if (disposable.isDisposed()) {
-                            return;
-                        }
-                        emitter.onNext(cache);
-                    }
-                    emitter.onComplete();
-                }
-            }).subscribeOn(Schedulers.io());
-        } else {
-            allCaches = Observable.fromIterable(caches);
-        }
+        allCaches = Observable.fromIterable(caches);
         final Observable<Geocache> loaded = allCaches.flatMap(new Function<Geocache, Observable<Geocache>>() {
             @Override
             public Observable<Geocache> apply(final Geocache cache) {

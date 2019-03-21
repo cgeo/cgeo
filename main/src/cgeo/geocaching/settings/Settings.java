@@ -147,8 +147,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_help_shown), prefsV0.getInt(getKey(R.string.pref_help_shown), 0) != 0);
             e.putFloat(getKey(R.string.pref_anylongitude), prefsV0.getFloat(getKey(R.string.pref_anylongitude), 0));
             e.putFloat(getKey(R.string.pref_anylatitude), prefsV0.getFloat(getKey(R.string.pref_anylatitude), 0));
-            e.putBoolean(getKey(R.string.pref_offlinemaps), prefsV0.getInt(getKey(R.string.pref_offlinemaps), 1) != 0);
-            e.putBoolean(getKey(R.string.pref_offlinewpmaps), prefsV0.getInt(getKey(R.string.pref_offlinewpmaps), 0) != 0);
             e.putString(getKey(R.string.pref_webDeviceCode), prefsV0.getString(getKey(R.string.pref_webDeviceCode), null));
             e.putString(getKey(R.string.pref_webDeviceName), prefsV0.getString(getKey(R.string.pref_webDeviceName), null));
             e.putBoolean(getKey(R.string.pref_maplive), prefsV0.getInt(getKey(R.string.pref_maplive), 1) != 0);
@@ -470,7 +468,7 @@ public class Settings {
         return getBoolean(isActivePrefKeyId, false);
     }
 
-    public static boolean hasOCAuthorization(final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId) {
+    public static boolean hasOAuthAuthorization(final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId) {
         return StringUtils.isNotBlank(getString(tokenPublicPrefKeyId, ""))
                 && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
@@ -608,7 +606,7 @@ public class Settings {
     }
 
     public static boolean getChooseList() {
-        return getBoolean(R.string.pref_choose_list, false);
+        return getBoolean(R.string.pref_choose_list, true);
     }
 
     public static boolean getLoadDirImg() {
@@ -646,18 +644,6 @@ public class Settings {
 
     public static boolean isExcludeDisabledCaches() {
         return getBoolean(R.string.pref_excludedisabled, false);
-    }
-
-    public static boolean isStoreOfflineMaps() {
-        // temporarily disable
-        // return getBoolean(R.string.pref_offlinemaps, true);
-        return false;
-    }
-
-    public static boolean isStoreOfflineWpMaps() {
-        // temporarily disable
-        // return getBoolean(R.string.pref_offlinewpmaps, false);
-        return false;
     }
 
     public static boolean isStoreLogImages() {

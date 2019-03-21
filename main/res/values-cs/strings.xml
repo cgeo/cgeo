@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Dostupná hlášení problémů se změnila!</string>
     <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
     <string name="info_stored_image">Nový obrázek uložen do:</string>
-    <string name="info_storing_static_maps">Pokus o uložení statických map</string>
     <string name="info_cache_saved">Keš uložena pro lokální použití</string>
     <string name="warn_calculator_state_save">Nezapomeň si uložit bod trasy, chceš-li zachovat stav kalkulačky.</string>
     <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
@@ -563,10 +562,6 @@
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich body trasy.</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
-    <string name="init_offline">Statické mapy</string>
-    <string name="init_summary_offline">Ukládat statické mapy ke keším pro offline použití</string>
-    <string name="init_offline_wp">Statické mapy bodů trasy</string>
-    <string name="init_summary_offline_wp">Ukládat statické mapy k bodům trasy pro offline použití</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky</string>
@@ -876,8 +871,6 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statické mapy</string>
-    <string name="cache_menu_download_map_static">Stáhnout statické mapy</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -966,7 +959,6 @@
     <string name="gpx_import_loading_caches_with_filename">Načítání keší z %1$s</string>
     <string name="gpx_import_loading_waypoints">Načítání souboru s body trasy</string>
     <string name="gpx_import_loading_waypoints_with_filename">Načítání bodů tras z %1$s</string>
-    <string name="gpx_import_store_static_maps">Ukládání statických map</string>
     <string name="gpx_import_caches_imported">Keše importovány</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d keší importováno z %2$s</string>
     <string name="gpx_import_static_maps_skipped">Stažení statických map zrušeno</string>

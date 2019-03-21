@@ -28,14 +28,6 @@ public final class TestSettings extends Settings {
         Settings.setLogin(credentials.getUsernameRaw(), credentials.getPasswordRaw());
     }
 
-    public static void setStoreOfflineMaps(final boolean offlineMaps) {
-        putBoolean(R.string.pref_offlinemaps, offlineMaps);
-    }
-
-    public static void setStoreOfflineWpMaps(final boolean offlineWpMaps) {
-        putBoolean(R.string.pref_offlinewpmaps, offlineWpMaps);
-    }
-
     public static void setUseImperialUnits(final boolean imperial) {
         putBoolean(R.string.pref_units_imperial, imperial);
     }

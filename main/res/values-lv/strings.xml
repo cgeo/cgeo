@@ -258,7 +258,6 @@
     <string name="info_log_report_problem_changed">Pieejamie paziņojamo problēmu veidi ir mainījušies!</string>
     <string name="info_select_logimage_cancelled">Attēla atlase vai uzņemšana tika atcelta.</string>
     <string name="info_stored_image">Jauns attēls tika saglabāts:</string>
-    <string name="info_storing_static_maps">Cenšas saglabāt statiskās kartes</string>
     <string name="info_cache_saved">Slēpnis ir saglabāts tavā ierīcē bezsaistē</string>
     <string name="warn_calculator_state_save">Ja vēlies saglabāt kalkulatora stāvokli, noteikti saglabā starpposmu.</string>
     <string name="err_trackable_log_not_anonymous">Nevar pieteikties %1$s no c:geo anonīmi. Vai vēlies atvērt uzstādījumus, lai ievadītu akreditācijas datus no %2$s?</string>
@@ -560,10 +559,6 @@
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_disabled">Izlaist atspējotos</string>
     <string name="init_summary_disabled">Izlaist atspējotos slēpņus</string>
-    <string name="init_offline">Statiska karte</string>
-    <string name="init_summary_offline">Uzglabāt statiskas slēpņu kartes bezsaistes lietošanai</string>
-    <string name="init_offline_wp">Statiskas kartes (SP)</string>
-    <string name="init_summary_offline_wp">Saglabāt starpposmu statiskās kartes lietošanai bezsaistē</string>
     <string name="init_save_log_img">Saglabāt attēlus</string>
     <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
     <string name="init_units">Izmantot imperiālo sistēmu</string>
@@ -866,8 +861,6 @@
     <string name="cache_menu_radar">Radars</string>
     <string name="cache_menu_map">Karte</string>
     <string name="cache_menu_mfbeta">Mapsforge Beta</string>
-    <string name="cache_menu_map_static">Statiskās kartes</string>
-    <string name="cache_menu_download_map_static">Lejupielādēt statisko karti</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Citas ārējās aplikācijas</string>
     <string name="cache_menu_streetview">Ielas skats (Street View)</string>
@@ -956,7 +949,6 @@
     <string name="gpx_import_loading_caches_with_filename">Ielādē slēpņus no %1$s</string>
     <string name="gpx_import_loading_waypoints">Ielādē starpposmu failu</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ielādē starpposmus no %1$s</string>
-    <string name="gpx_import_store_static_maps">Notiek statisko karšu lejupielādēšana</string>
     <string name="gpx_import_caches_imported">slēpņi importēti</string>
     <string name="gpx_import_caches_imported_with_filename">importēti %1$d slēpņi no %2$s</string>
     <string name="gpx_import_static_maps_skipped">Statisko karšu lejupielāde tika pārtraukta</string>

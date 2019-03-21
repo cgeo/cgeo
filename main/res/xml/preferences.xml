@@ -307,6 +307,10 @@
                         android:dependency="@string/pref_connectorSUActive"
                         android:layout="@layout/text_preference"
                         android:text="@string/settings_su_description" />
+                    <cgeo.geocaching.settings.OAuthPreference
+                        android:dependency="@string/pref_connectorSUActive"
+                        android:summary="@string/auth_unconnected"
+                        android:key="@string/pref_fakekey_su_authorization" />
                 </PreferenceCategory>
 
                 <PreferenceCategory android:title="@string/settings_information"
@@ -643,18 +647,6 @@
         android:title="@string/settings_title_offlinedata"
         android:summary="@string/settings_summary_offlinedata" >
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_offlinemaps"
-            android:summary="@string/init_summary_offline"
-            android:enabled="false"
-            android:title="@string/init_offline" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_offlinewpmaps"
-            android:summary="@string/init_summary_offline_wp"
-            android:enabled="false"
-            android:title="@string/init_offline_wp" />
-        <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_logimages"
             android:summary="@string/init_summary_save_log_img"
@@ -721,16 +713,6 @@
                     android:enabled="false"
                     android:key="@string/pref_navigation_menu_internal_map"
                     android:title="@string/cache_menu_map" />
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:enabled="false"
-                    android:key="@string/pref_navigation_menu_static_map"
-                    android:title="@string/cache_menu_map_static" />
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:enabled="false"
-                    android:key="@string/pref_navigation_menu_static_map_download"
-                    android:title="@string/cache_menu_download_map_static" />
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"

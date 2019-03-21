@@ -80,6 +80,8 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 * [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
 * [opencache.uk OKAPI signup](http://www.opencache.uk/okapi/signup.html)
 
+To obtain API key for [geocaching.su](https://geocaching.su) you need to request access from [administration](https://geocaching.su/?pn=1), keys are generated manually on request.
+
 For semi-automatic configuration
 1. copy `./templates/private.properties` to `./`
 2. edit `private.properties` with your keys

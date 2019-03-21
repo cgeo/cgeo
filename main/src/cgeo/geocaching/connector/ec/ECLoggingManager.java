@@ -36,6 +36,7 @@ class ECLoggingManager extends AbstractLoggingManager {
 
     @Override
     public final void init() {
+        // TODO: This doesn't work because enablePostButton(false) is being called after this call
         activity.onLoadFinished();
     }
 

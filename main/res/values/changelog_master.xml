@@ -2,5 +2,13 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>\n
+    · New: Show map icon on address search result to directly jump to the live map\n
+    · New: Show cache status overlay icons also in title bar of cache details\n
+    · New: Implement geocaching.su\n
+    · Fix: Avoid having to choose target app twice when opening cache in browser\n
+    · Fix: Menu items and explanations mixed up in Settings - System\n
+    · Removed: Remove all static map functions as this service is no longer available from Google\n
+    \n
   </string>
 </resources>

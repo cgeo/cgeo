@@ -6,10 +6,11 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.UserInfo;
+import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
-import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -59,7 +60,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

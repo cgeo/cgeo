@@ -33,6 +33,7 @@
     <string translatable="false" name="pref_fakekey_geokrety_authorization">fakekey_geokrety_authorization</string>
     <string translatable="false" name="pref_fakekey_gc_authorization">fakekey_gc_authorization</string>
     <string translatable="false" name="pref_fakekey_ec_authorization">fakekey_ec_authorization</string>
+    <string translatable="false" name="pref_fakekey_su_authorization">fakekey_su_authorization</string>
     <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
     <string translatable="false" name="pref_connectorGCActive">connectorGCActive</string>
     <string translatable="false" name="pref_username">username</string>
@@ -71,8 +72,6 @@
     <string translatable="false" name="pref_sigautoinsert">sigautoinsert</string>
     <string translatable="false" name="pref_trackautovisit">trackautovisit</string>
     <string translatable="false" name="pref_log_offline">log_offline</string>
-    <string translatable="false" name="pref_offlinemaps">offlinemaps</string>
-    <string translatable="false" name="pref_offlinewpmaps">offlinewpmaps</string>
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
@@ -145,8 +144,6 @@
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
     <string translatable="false" name="pref_navigation_menu_internal_new_map">navigationInternalNewMap</string>
-    <string translatable="false" name="pref_navigation_menu_static_map">navigationStatic</string>
-    <string translatable="false" name="pref_navigation_menu_static_map_download">navigationStaticDownload</string>
     <string translatable="false" name="pref_navigation_menu_locus">navigationLocus</string>
     <string translatable="false" name="pref_navigation_menu_rmaps">navigationRmaps</string>
     <string translatable="false" name="pref_navigation_menu_google_maps">navigationGoogleMaps</string>
@@ -199,6 +196,11 @@
     <string translatable="false" name="pref_fakekey_ocuk_website">fakekey_ocuk_website</string>
     <string translatable="false" name="pref_fakekey_ec_website">fakekey_ec_website</string>
     <string translatable="false" name="pref_fakekey_su_website">fakekey_su_website</string>
+    <string translatable="false" name="pref_su_tokensecret">su_tokensecret</string>
+    <string translatable="false" name="pref_su_tokenpublic">su_tokenpublic</string>
+    <string translatable="false" name="pref_temp_su_token_secret">su-temp-token-secret</string>
+    <string translatable="false" name="pref_temp_su_token_public">su-temp-token-public</string>
+
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string translatable="false" name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>
     <string translatable="false" name="pref_fakekey_geokretymap_website">fakekey_geokretymap_website</string>

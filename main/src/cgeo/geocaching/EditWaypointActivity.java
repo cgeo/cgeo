@@ -17,7 +17,6 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
@@ -710,12 +709,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
         final Waypoint oldWaypoint = cache.getWaypointById(waypointId);
         if (cache.addOrChangeWaypoint(waypoint, true)) {
-            if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
-                StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
-                if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).subscribe();
-                }
-            }
             if (waypoint.getCoords() != null && (modifyLocal.isChecked() || modifyBoth.isChecked())) {
                 if (!cache.hasUserModifiedCoords()) {
                     final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);

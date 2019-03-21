@@ -52,7 +52,6 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.staticmaps.StaticMapsProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -77,7 +76,6 @@ import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
@@ -93,10 +91,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -137,7 +133,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -156,9 +151,6 @@ import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Maybe;
-import io.reactivex.MaybeEmitter;
-import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -1104,20 +1096,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
-            // Start loading preview map
-            AndroidRxUtils.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(AndroidRxUtils.networkScheduler)
-                    .subscribe(new Consumer<BitmapDrawable>() {
-                        @Override
-                        public void accept(final BitmapDrawable image) {
-                            final Bitmap bitmap = image.getBitmap();
-                            if (bitmap != null && bitmap.getWidth() > 10) {
-                                final ImageView imageView = ButterKnife.findById(view, R.id.map_preview);
-                                imageView.setImageDrawable(image);
-                                view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
-                            }
-                        }
-                    });
-
             detailsList = ButterKnife.findById(view, R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
 
@@ -1530,31 +1508,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
     }
-
-    private final Maybe<BitmapDrawable> previewMap = Maybe.create(new MaybeOnSubscribe<BitmapDrawable>() {
-        @Override
-        public void subscribe(final MaybeEmitter<BitmapDrawable> emitter) throws Exception {
-            try {
-                // persistent preview from storage
-                Bitmap image = StaticMapsProvider.getPreviewMap(cache);
-
-                if (image == null && Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-                    StaticMapsProvider.storeCachePreviewMap(cache).blockingAwait();
-                    image = StaticMapsProvider.getPreviewMap(cache);
-                }
-
-                if (image != null) {
-                    emitter.onSuccess(ImageUtils.scaleBitmapToFitDisplay(image));
-                } else {
-                    emitter.onComplete();
-                }
-            } catch (final Exception e) {
-                Log.w("CacheDetailActivity.previewMap", e);
-                emitter.onError(e);
-            }
-        }
-
-    });
 
     /**
      * Reflect the (contextual) action mode of the action bar.

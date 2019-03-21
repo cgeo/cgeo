@@ -53,42 +53,4 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
     }
 
-    /**
-     * must be called once before setting the flags
-     * can be called again after restoring the flags
-     */
-    protected void recordMapStoreFlags() {
-        if (oldMapStoreFlagsRecorded) {
-            throw new IllegalStateException("MapStoreFlags already recorded!");
-        }
-        oldStoreMapsFlag = Settings.isStoreOfflineMaps();
-        oldStoreWpMapsFlag = Settings.isStoreOfflineWpMaps();
-        oldMapStoreFlagsRecorded = true;
-    }
-
-    /**
-     * can be called after recordMapStoreFlags,
-     * to set the flags for map storing as necessary
-     */
-    protected void setMapStoreFlags(final boolean storeCacheMap, final boolean storeWpMaps) {
-        if (!oldMapStoreFlagsRecorded) {
-            throw new IllegalStateException("Previous MapStoreFlags havn't been recorded! Setting not allowed");
-        }
-
-        TestSettings.setStoreOfflineMaps(storeCacheMap);
-        TestSettings.setStoreOfflineWpMaps(storeWpMaps);
-    }
-
-    /**
-     * has to be called after completion of the test (preferably in the finally part of a try statement)
-     */
-    protected void restoreMapStoreFlags() {
-        if (!oldMapStoreFlagsRecorded) {
-            throw new IllegalStateException("Previous MapStoreFlags havn't been recorded. Restore not possible");
-        }
-
-        TestSettings.setStoreOfflineMaps(oldStoreMapsFlag);
-        TestSettings.setStoreOfflineWpMaps(oldStoreWpMapsFlag);
-        oldMapStoreFlagsRecorded = false;
-    }
 }

@@ -22,8 +22,10 @@ public class OAuth {
                 "oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())),
                 "oauth_signature_method", "HMAC-SHA1",
                 "oauth_timestamp", Long.toString(System.currentTimeMillis() / 1000),
-                "oauth_token", StringUtils.defaultString(tokens.getTokenPublic()),
                 "oauth_version", "1.0");
+        if (StringUtils.isNotEmpty(tokens.getTokenPublic())) {
+            params.put("oauth_token", StringUtils.defaultString(tokens.getTokenPublic()));
+        }
         params.put("oauth_signature",
                 signCompletedOAuth(host, path, method, https, params, tokens.getTokenSecret(), consumerSecret));
     }

@@ -372,6 +372,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (image == null) {
             image = Image.NONE;
         }
+        // TODO: Why is it disabled in onCreate?
+        // Probably it should be disabled only when there is some explicit issue.
+        // See https://github.com/cgeo/cgeo/issues/7188
         enablePostButton(false);
 
         final TextView problemButton = ButterKnife.findById(this, R.id.report_problem);
