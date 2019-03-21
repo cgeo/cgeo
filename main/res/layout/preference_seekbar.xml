@@ -10,7 +10,7 @@
     tools:context=".settings.SettingsActivity" >
 
     <SeekBar
-        android:id="@+id/brouter_threshold_seekbar"
+        android:id="@+id/preference_seekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -19,7 +19,7 @@
         tools:progress="25"/>
 
     <TextView
-        android:id="@+id/brouter_threshold_value_view"
+        android:id="@+id/preference_seekbar_value_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
