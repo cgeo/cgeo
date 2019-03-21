@@ -88,7 +88,7 @@ public class ParametersTest {
 
     @Test
     public void testAsterisk() {
-        assertThat("*".equals(Parameters.percentEncode("*"))).isFalse();
+        assertThat(Parameters.percentEncode("*")).isNotEqualTo("*");
     }
 
     @Test

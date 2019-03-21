@@ -31,6 +31,6 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public static void testDeviceHasNormalLogin() {
         // if the unit tests were interrupted in a previous run, the device might still have the "temporary" login data from the last tests
-        assertThat("c:geo".equals(Settings.getUserName())).isFalse();
+        assertThat(Settings.getUserName()).isNotEqualTo("c:geo");
     }
 }
