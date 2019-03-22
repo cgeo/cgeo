@@ -1028,7 +1028,7 @@
     <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
     <string name="map_theme_builtin">Oletus</string>
     <string name="map_theme_select">Valitse kartan ulkoasu</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Teema-asetukset</string>
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
     <string name="map_static_title">Staattiset kartat</string>
@@ -1106,7 +1106,7 @@
     <string name="trackable_travelbug">Matkalainen</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutinit</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Tila</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Perinteinen</string>
     <string name="geokret_type_book_or_media">Kirja tai sähköinen media</string>
@@ -1234,7 +1234,7 @@
     <string name="attribute_field_puzzle_yes">Kenttämysteeri</string>
     <string name="attribute_field_puzzle_no">Ei kenttämysteeri</string>
     <string name="attribute_nightcache_yes">Yökätkö</string>
-    <string name="attribute_nightcache_no">Ei yökäktö</string>
+    <string name="attribute_nightcache_no">Ei yökätkö</string>
     <string name="attribute_parkngrab_yes">Pysäköi ja nappaa</string>
     <string name="attribute_parkngrab_no">Ei pysäköi ja nappaa -kätkö</string>
     <string name="attribute_abandonedbuilding_yes">Hylätty rakennelma</string>
@@ -1256,7 +1256,7 @@
     <string name="attribute_landf_yes">\"Lost and found\" Kätkö</string>
     <string name="attribute_landf_no">Ei \"Lost and found\" Kätkö</string>
     <string name="attribute_partnership_yes">Tiimityökätkö</string>
-    <string name="attribute_partnership_no">Ei Tiimityökätkö</string>
+    <string name="attribute_partnership_no">Ei tiimityökätkö</string>
     <string name="attribute_fee_yes">Pääsy- tai pysäköintimaksu</string>
     <string name="attribute_fee_no">Ei pääsy- tai pysäköintimaksua</string>
     <string name="attribute_rappelling_yes">Vaatii kiipeilyvälineitä</string>
@@ -1287,8 +1287,8 @@
     <string name="attribute_ticks_no">Ei punkkeja</string>
     <string name="attribute_mine_yes">Hylättyjä kaivoksia</string>
     <string name="attribute_mine_no">Ei hylättyjä kaivoksia</string>
-    <string name="attribute_cliff_yes">Jyrkänne/putoavia kiviä</string>
-    <string name="attribute_cliff_no">Ei Jyrkännettä/putoavia kiviä</string>
+    <string name="attribute_cliff_yes">Jyrkänne / putoavia kiviä</string>
+    <string name="attribute_cliff_no">Ei jyrkännettä / putoavia kiviä</string>
     <string name="attribute_hunting_yes">Metsästysalue</string>
     <string name="attribute_hunting_no">Ei metsästystä</string>
     <string name="attribute_danger_yes">Vaarallinen alue</string>
@@ -1310,7 +1310,7 @@
     <string name="attribute_picnic_yes">Piknikpöytiä lähistöllä</string>
     <string name="attribute_picnic_no">Ei piknikpöytiä lähistöllä</string>
     <string name="attribute_camping_yes">Leirintämahdollisuus</string>
-    <string name="attribute_camping_no">Ei leirintä mahdollisuutta</string>
+    <string name="attribute_camping_no">Ei leirintämahdollisuutta</string>
     <string name="attribute_stroller_yes">Saavutettavissa lastenrattailla</string>
     <string name="attribute_stroller_no">Ei saavutettavissa lastenrattailla</string>
     <string name="attribute_fuel_yes">Polttoainetta lähistöllä</string>
@@ -1334,7 +1334,7 @@
     <string name="attribute_easy_climbing_yes">Helppoa kiipeilyä</string>
     <string name="attribute_easy_climbing_no">Ei helppoa kiipeilyä</string>
     <string name="attribute_poi_yes">Paikkapiste(itä)</string>
-    <string name="attribute_poi_no">Ei Paikkapiste(itä)</string>
+    <string name="attribute_poi_no">Ei paikkapiste(itä)</string>
     <string name="attribute_moving_target_yes">Liikkuva kohde</string>
     <string name="attribute_moving_target_no">Ei liikkuva kohde</string>
     <string name="attribute_webcam_yes">Web-kamera</string>
@@ -1362,7 +1362,7 @@
     <string name="attribute_compass_yes">Kompassi</string>
     <string name="attribute_compass_no">Ei kompassia</string>
     <string name="attribute_cave_yes">Luola</string>
-    <string name="attribute_cave_no">Ei Luola</string>
+    <string name="attribute_cave_no">Ei luola</string>
     <string name="attribute_aircraft_yes">Ilma-alus</string>
     <string name="attribute_aircraft_no">Ei ilma-aluksia</string>
     <string name="attribute_investigation_yes">Tutkimus</string>
@@ -1374,11 +1374,11 @@
     <string name="attribute_other_cache_yes">Muu kätkötyyppi</string>
     <string name="attribute_other_cache_no">Ei muu kätkötyyppi</string>
     <string name="attribute_ask_owner_yes">Kysy omistajalta alkuolosuhteista</string>
-    <string name="attribute_ask_owner_no">Älä Kysy omistajalta alkuolosuhteista</string>
+    <string name="attribute_ask_owner_no">Älä kysy omistajalta alkuolosuhteista</string>
     <string name="attribute_unknown_yes">Tuntematon määrite</string>
     <string name="attribute_unknown_no">Ei tuntematonta määritettä</string>
     <string name="attribute_geotour_yes">Osa GeoKierrosta</string>
-    <string name="attribute_geotour_no">Ei ole Osa GeoKierrosta</string>
+    <string name="attribute_geotour_no">Ei ole osa GeoKierrosta</string>
     <string name="attribute_kids_2_yes">Soveltuu myös lapsille</string>
     <string name="attribute_kids_2_no">Ei sovellu lapsille</string>
     <string name="attribute_historic_site_yes">Historiallinen alue</string>
@@ -1405,8 +1405,8 @@
     <string name="attribute_wherigo_no">Ei Wherigo-kätkö</string>
     <string name="attribute_audio_cache_yes">Kuvaus sisältää äänitiedoston</string>
     <string name="attribute_audio_cache_no">Kuvaus ei sisällä äänitiedostoa</string>
-    <string name="attribute_geohotel_yes">GeoHotelli kätkö</string>
-    <string name="attribute_geohotel_no">Ei GeoHotelli kätkö</string>
+    <string name="attribute_geohotel_yes">GeoHotelli-kätkö</string>
+    <string name="attribute_geohotel_no">Ei GeoHotelli-kätkö</string>
     <string name="attribute_survey_marker_yes">Lähellä maamerkkiä</string>
     <string name="attribute_survey_marker_no">Ei lähellä maamerkkiä</string>
     <string name="attribute_offset_cache_yes">Monivaiheinen kätkö</string>

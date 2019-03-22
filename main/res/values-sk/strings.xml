@@ -1048,7 +1048,7 @@
     <string name="map_disabled_hide">Nezobrazovať deaktivované skrýše</string>
     <string name="map_theme_builtin">Predvolená</string>
     <string name="map_theme_select">Vybrať tému mapy</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Nastavenia Témy</string>
     <string name="map_live_enable">Povoliť aktívnu mapu</string>
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_static_title">Statické mapy</string>
@@ -1126,7 +1126,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutiny</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Stav</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradičné</string>
     <string name="geokret_type_book_or_media">Kniha alebo elektronické médium</string>

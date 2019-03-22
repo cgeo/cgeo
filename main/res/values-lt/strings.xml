@@ -1048,7 +1048,7 @@
     <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
     <string name="map_theme_builtin">Numatyta</string>
     <string name="map_theme_select">Pasirinkti žemėlapio temą</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Temos parinktys</string>
     <string name="map_live_enable">Slėptuvės tiesiogiai</string>
     <string name="map_live_disable">Slėptuvės netiesiogiai</string>
     <string name="map_static_title">Statinis žemėlapis</string>
@@ -1126,7 +1126,7 @@
     <string name="trackable_travelbug">Keliauninkas</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Būsena</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicinis</string>
     <string name="geokret_type_book_or_media">Knyga arba elektroninės priemonės</string>

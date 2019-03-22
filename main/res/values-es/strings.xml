@@ -124,13 +124,13 @@
     <string name="log_image_description">Descripción</string>
     <string name="log_image_scale">Redimensionamiento</string>
     <string name="log_password_title">Contraseña:</string>
-    <string name="log_report_problem">Report Problem:</string>
+    <string name="log_report_problem">Reportar un problema:</string>
     <string name="log_hint_log_password">Introduzca su contraseña</string>
     <string name="log_oc_team_comment">Comentario equipo OC</string>
     <string name="log_your_saved_log">Tu registro guardado</string>
     <string name="log_empty_logbook">No hay registros en este caché.</string>
-    <string name="log_problem_none">No Problem</string>
-    <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
+    <string name="log_problem_none">Sin problema</string>
+    <string name="log_problem_needs_maintenance_label">Necesita mantenimiento</string>
     <string name="log_problem_needs_maintenance_text">This geocacher reported that there is a problem with this cache.</string>
     <string name="log_problem_log_full_label">Logbook is full</string>
     <string name="log_problem_log_full_text">This geocacher reported that the logbook is full.</string>
@@ -138,7 +138,7 @@
     <string name="log_problem_damaged_text">This geocacher reported that the container is damaged.</string>
     <string name="log_problem_missing_label">Cache might be missing</string>
     <string name="log_problem_missing_text">This geocacher reported that the cache might be missing.</string>
-    <string name="log_problem_other_label">Other</string>
+    <string name="log_problem_other_label">Otro</string>
     <string name="log_problem_other_text">This geocacher reported that there is a problem with this cache.</string>
     <string name="log_problem_archive_label">Cache should be archived</string>
     <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
@@ -283,7 +283,7 @@
     <string name="menu_about">Sobre c:geo</string>
     <string name="menu_helpers">Programas útiles</string>
     <string name="menu_settings">Ajustes</string>
-    <string name="menu_backup">Backup</string>
+    <string name="menu_backup">Copia de seguridad</string>
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Escánear geocódigo</string>
@@ -413,7 +413,7 @@
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
     <string name="about_system">Sistema</string>
-    <string name="about_donate">Support us</string>
+    <string name="about_donate">Ayúdanos</string>
     <string name="about_donation_more">Visit website for info</string>
     <string name="about_contributors">Colaboradores</string>
     <string name="about_license">Licencia</string>
@@ -531,11 +531,11 @@
     <string name="init_signature_template_number">Número</string>
     <string name="init_signature_template_owner">Propietario</string>
     <string name="init_signature_template_name">Nombre</string>
-    <string name="init_signature_template_difficulty">Difficulty</string>
-    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_difficulty">Dificultad</string>
+    <string name="init_signature_template_terrain">Terreno</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texto de registro</string>
-    <string name="init_signature_template_size">Size</string>
+    <string name="init_signature_template_size">Tamaño</string>
     <string name="init_ratingwanted">Puntuación de GCvote</string>
     <string name="init_summary_ratingwanted">Cargar la puntuación del cache desde GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar amigos / propios</string>
@@ -673,7 +673,7 @@
     <string name="feature_search_owner">Búsqueda por dueño</string>
     <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Old Mapsforge V3</string>
+    <string name="init_mfold_api">Viejo Mapsforge V3</string>
     <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Características experimentales</string>
     <string name="init_mfbeta">Mapsforge Beta como predeterminado</string>
@@ -766,10 +766,10 @@
         <item quantity="other">hace %d días</item>
     </plurals>
     <plurals name="cache_offline_about_time_months">
-        <item quantity="one">about %d month ago</item>
-        <item quantity="other">about %d months ago</item>
+        <item quantity="one">hace %d mes</item>
+        <item quantity="other">hace %d meses</item>
     </plurals>
-    <string name="cache_offline_about_time_year">over a year ago</string>
+    <string name="cache_offline_about_time_year">hace más de un año</string>
     <string name="cache_offline_time_hour">hace una hora</string>
     <string name="cache_offline_time_hours">horas atrás</string>
     <string name="cache_offline_time_days">días atrás</string>
@@ -1028,7 +1028,7 @@
     <string name="map_disabled_hide">Ocultar cachés desactivados</string>
     <string name="map_theme_builtin">Por defecto</string>
     <string name="map_theme_select">Seleccionar tema del mapa</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Configuración de Temas</string>
     <string name="map_live_enable">Activar en vivo</string>
     <string name="map_live_disable">Desactivar en vivo</string>
     <string name="map_static_title">Mapas estáticos</string>
@@ -1106,7 +1106,7 @@
     <string name="trackable_travelbug">Travel bug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Estado</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicional</string>
     <string name="geokret_type_book_or_media">Libro o medio electrónicos</string>
@@ -1432,7 +1432,7 @@ Nombre de archivo:%2$s</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Cambios recientes en geocaching.com han roto c:geo.\nEstamos trabajando en ello, pruébalo de nuevo más tarde.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Cambios recientes en geocaching.com han roto la función de mapas en vivo.\nEstamos trabajando en ello, pruébalo de nuevo más tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está en mantenimiento.\nPuedes encontrarte algunos problemas.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Parece que usas una versión de Android anterior a 4.1. Es posible que las futuras versiones de c:geo no estén disponibles para tu dispositivo.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brújula con voz</string>
     <string name="tts_start">Empezar a hablar</string>
@@ -1479,8 +1479,8 @@ Nombre de archivo:%2$s</string>
     <string name="send">Enviar</string>
     <string name="confirm_log_title">Tipo de registro especial</string>
     <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
-    <string name="confirm_report_problem_title">Report problem</string>
-    <string name="confirm_report_problem_message">You want to report \'%s\'. Are you sure?</string>
+    <string name="confirm_report_problem_title">Reportar problema</string>
+    <string name="confirm_report_problem_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Activar</string>
     <string name="init_geokrety">GeoKrety.org</string>

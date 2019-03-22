@@ -1018,7 +1018,7 @@
     <string name="map_disabled_hide">無効化キャッシュを非表示</string>
     <string name="map_theme_builtin">デフォルト</string>
     <string name="map_theme_select">地図のテーマを選択</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">テーマのオプション</string>
     <string name="map_live_enable">オンラインで取得</string>
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_static_title">オフライン地図</string>
@@ -1096,7 +1096,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">状態</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">トラディショナル</string>
     <string name="geokret_type_book_or_media">本または電子メディア</string>

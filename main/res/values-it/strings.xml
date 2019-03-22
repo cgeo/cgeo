@@ -1028,7 +1028,7 @@
     <string name="map_disabled_hide">Nascondi le cache disabilitate</string>
     <string name="map_theme_builtin">Tema predefinito</string>
     <string name="map_theme_select">Scegli un tema mappa</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Opzioni Tema</string>
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_static_title">Mappe statiche</string>
@@ -1106,7 +1106,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Stato</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradizionale</string>
     <string name="geokret_type_book_or_media">Libro o media elettronici</string>

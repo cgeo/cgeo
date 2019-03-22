@@ -1048,7 +1048,7 @@
     <string name="map_disabled_hide">Скрыть тайники вне игры</string>
     <string name="map_theme_builtin">По умолчанию</string>
     <string name="map_theme_select">Выбрать тему карты</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Опции темы</string>
     <string name="map_live_enable">Подгружать тайники \"на лету\"</string>
     <string name="map_live_disable">Не подгружать тайники</string>
     <string name="map_static_title">Статические карты</string>
@@ -1126,7 +1126,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">ГеоКрот</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Статус</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Традиционный</string>
     <string name="geokret_type_book_or_media">Книга, CD или DVD</string>

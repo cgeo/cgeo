@@ -1028,7 +1028,7 @@
     <string name="map_disabled_hide">Göm inaktiverade cacher</string>
     <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Välj karttema</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Inställningar för teman</string>
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_static_title">Sparade kartor</string>

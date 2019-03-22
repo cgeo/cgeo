@@ -294,7 +294,7 @@
     <string name="caches_nearby_button">Közelben</string>
     <string name="advanced_search_button">Keresés</string>
     <string name="stored_caches_button">Mentett</string>
-    <string name="any_button">Irány</string>
+    <string name="any_button">Cél</string>
     <string name="unknown_scan">Nem található geokód a szkennelés eredményében.</string>
     <!-- caches -->
     <string name="caches_no_cache">Nem található láda</string>
@@ -1028,7 +1028,7 @@
     <string name="map_disabled_hide">Letiltott ládák ki</string>
     <string name="map_theme_builtin">Alapértelmezett</string>
     <string name="map_theme_select">Térképstílusok</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Térképstílus beállítások</string>
     <string name="map_live_enable">Élő mód</string>
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_static_title">Statikus térképek</string>
@@ -1106,7 +1106,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Állapot</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Hagyományos</string>
     <string name="geokret_type_book_or_media">Könyv vagy elektronikus média</string>

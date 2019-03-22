@@ -307,7 +307,7 @@
     <plurals name="caches_eta_mins">
         <item quantity="one">%d minuta</item>
         <item quantity="few">%d minuty</item>
-        <item quantity="many">%d minutes</item>
+        <item quantity="many">%d minut</item>
         <item quantity="other">%d minut</item>
     </plurals>
     <string name="caches_store_offline">Uložit offline</string>
@@ -1048,7 +1048,7 @@
     <string name="map_disabled_hide">Skrýt deaktivované keše</string>
     <string name="map_theme_builtin">Výchozí</string>
     <string name="map_theme_select">Styl mapy…</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Možnosti vzhledu</string>
     <string name="map_live_enable">Povolit aktivní mapu</string>
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_static_title">Statické mapy</string>
@@ -1126,7 +1126,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">Geolutiny</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Stav</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradiční</string>
     <string name="geokret_type_book_or_media">Kniha nebo elektronická média</string>
