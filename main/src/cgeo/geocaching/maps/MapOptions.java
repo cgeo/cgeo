@@ -61,7 +61,7 @@ public class MapOptions {
     }
 
     public MapOptions(final Geopoint coords) {
-        mapMode = MapMode.COORDS;
+        mapMode = MapMode.LIVE;
         this.coords = coords;
         isStoredEnabled = true;
         isLiveEnabled = Settings.isLiveMap();

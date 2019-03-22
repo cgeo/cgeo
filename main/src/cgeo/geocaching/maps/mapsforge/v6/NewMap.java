@@ -234,6 +234,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             targetGeocode = mapOptions.geocode;
         } else if (mapOptions.coords != null) {
             postZoomToViewport(new Viewport(mapOptions.coords, 0, 0));
+            if (mapOptions.mapMode == MapMode.LIVE) {
+                mapOptions.coords = null;   // no direction line, even if enabled in settings
+                followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+            }
         } else {
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
@@ -283,7 +287,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             } else {
                 itemMapLive.setTitle(res.getString(R.string.map_live_enable));
             }
-            itemMapLive.setVisible(mapOptions.coords == null);
+            itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
 
             final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
 
