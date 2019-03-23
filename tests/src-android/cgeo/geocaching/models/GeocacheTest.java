@@ -1,13 +1,6 @@
 package cgeo.geocaching.models;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
@@ -19,7 +12,14 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
 
 public class GeocacheTest extends CGeoTestCase {
 

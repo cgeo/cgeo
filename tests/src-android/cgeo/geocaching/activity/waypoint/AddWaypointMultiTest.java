@@ -7,14 +7,14 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
 
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
-
-import com.google.android.apps.common.testing.ui.espresso.ViewInteraction;
+import cgeo.geocaching.models.Geocache;
 
 import android.test.suitebuilder.annotation.Suppress;
+
+import com.google.android.apps.common.testing.ui.espresso.ViewInteraction;
 
 public class AddWaypointMultiTest extends AbstractAddWaypointActivityTest {
 
