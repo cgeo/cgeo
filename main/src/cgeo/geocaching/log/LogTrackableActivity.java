@@ -127,11 +127,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
             possibleLogTypesTrackable.addAll(logTypesTrackable);
-        }
 
-        if (logTypesTrackable != null && !logTypesTrackable.contains(typeSelected) && !logTypesTrackable.isEmpty()) {
-            setType(logTypesTrackable.get(0));
-            showToast(res.getString(R.string.info_log_type_changed));
+            if (!logTypesTrackable.contains(typeSelected)) {
+                setType(logTypesTrackable.get(0));
+                showToast(res.getString(R.string.info_log_type_changed));
+            }
         }
 
         postReady = loggingManager.postReady(); // we're done, user can post log
