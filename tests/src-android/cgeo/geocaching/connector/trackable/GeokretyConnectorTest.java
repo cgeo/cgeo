@@ -1,14 +1,14 @@
 package cgeo.geocaching.connector.trackable;
 
-import org.xml.sax.InputSource;
-
-import java.util.List;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import java.util.List;
+
+import org.xml.sax.InputSource;
 
 /**
  * test for {@link GeokretyConnector}
