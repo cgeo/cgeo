@@ -4,8 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
 
 import android.test.ApplicationTestCase;
