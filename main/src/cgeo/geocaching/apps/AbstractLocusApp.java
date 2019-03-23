@@ -28,6 +28,7 @@ import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 import locus.api.objects.geocaching.GeocachingData;
 import locus.api.objects.geocaching.GeocachingWaypoint;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  * for the Locus API:
@@ -62,7 +63,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
      */
     protected static void showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
             final Context context) {
-        if (objectsToShow == null || objectsToShow.isEmpty()) {
+        if (CollectionUtils.isEmpty(objectsToShow)) {
             return;
         }
 

@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.apache.commons.collections4.CollectionUtils;
 
 public class OsmAndApp extends AbstractPointNavigationApp {
 
@@ -61,7 +62,7 @@ public class OsmAndApp extends AbstractPointNavigationApp {
     private static Intent buildIntent(@Nullable final Parameters parameters) {
         final StringBuilder stringBuilder = new StringBuilder(PREFIX);
         stringBuilder.append(ADD_MAP_MARKER);
-        if (parameters != null && !parameters.isEmpty()) {
+        if (CollectionUtils.isNotEmpty(parameters)) {
             stringBuilder.append('?');
             stringBuilder.append(parameters.toString());
         }
