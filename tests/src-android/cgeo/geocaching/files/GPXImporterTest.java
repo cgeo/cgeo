@@ -9,8 +9,6 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
