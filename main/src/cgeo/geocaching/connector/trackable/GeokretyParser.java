@@ -392,7 +392,7 @@ class GeokretyParser {
                             break;
 
                         case XmlPullParser.END_TAG:
-                            if (tagname.equalsIgnoreCase("error") && text != null && !text.trim().isEmpty()) {
+                            if (tagname.equalsIgnoreCase("error") && StringUtils.isNotBlank(text)) {
                                 errors.add(text);
                             }
                             break;
