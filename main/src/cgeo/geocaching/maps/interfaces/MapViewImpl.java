@@ -42,7 +42,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     Context getContext();
 
-    PositionAndHistory createAddPositionAndScaleOverlay(final Geopoint coords);
+    PositionAndHistory createAddPositionAndScaleOverlay(Geopoint coords);
 
     void setMapSource();
 
@@ -80,7 +80,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     void onMapReady(MapReadyCallback callback);
 
-    void updateItems(final Collection<T> itemsPre);
+    void updateItems(Collection<T> itemsPre);
 
     boolean getCircles();
 
