@@ -1,18 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import android.content.res.Resources.NotFoundException;
-import android.graphics.Canvas;
-import android.graphics.DashPathEffect;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Point;
-import android.location.Location;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.maps.AbstractItemizedOverlay;
@@ -26,6 +13,19 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+
+import android.content.res.Resources.NotFoundException;
+import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Point;
+import android.location.Location;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class MapsforgeCachesList extends AbstractItemizedOverlay {
 

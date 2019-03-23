@@ -1,13 +1,10 @@
 package cgeo.geocaching.maps.google.v2;
 
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 
 /**
  * simple wrapper of googlemaps *Options, implements equals() and hashCode()

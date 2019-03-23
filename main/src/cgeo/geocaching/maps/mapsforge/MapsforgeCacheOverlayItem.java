@@ -4,8 +4,6 @@ import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.models.IWaypoint;
 
-import android.graphics.drawable.Drawable;
-
 import org.mapsforge.v3.android.maps.overlay.OverlayItem;
 import org.mapsforge.v3.core.GeoPoint;
 

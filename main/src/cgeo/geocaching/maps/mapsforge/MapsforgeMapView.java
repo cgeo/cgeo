@@ -1,29 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
-import android.widget.Toast;
-
-import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.v3.android.maps.MapView;
-import org.mapsforge.v3.android.maps.Projection;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.v3.android.maps.overlay.Overlay;
-import org.mapsforge.v3.core.GeoPoint;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.Iterator;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -40,6 +16,29 @@ import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.v3.android.maps.MapView;
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.android.maps.overlay.Overlay;
+import org.mapsforge.v3.core.GeoPoint;
 
 public class MapsforgeMapView extends MapView implements MapViewImpl<MapsforgeCacheOverlayItem> {
     private GestureDetector gestureDetector;
