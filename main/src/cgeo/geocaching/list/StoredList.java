@@ -108,7 +108,9 @@ public final class StoredList extends AbstractList {
             }
 
             final Activity activity = activityRef.get();
-            final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.Dialog_Alert);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(activity,
+                    Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert
+            );
             builder.setTitle(res.getString(titleId));
             builder.setMultiChoiceItems(listTitles, selectedItems, new MultiChoiceClickListener(lists, selectedListIds));
             builder.setPositiveButton(android.R.string.ok, new OnOkClickListener(selectedListIds, runAfterwards, listNameMemento));
