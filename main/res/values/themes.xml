@@ -235,4 +235,9 @@
         <item name="background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="Dialog_Alert_light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="buttonBarButtonStyle">@style/button_borderless</item>
+        <item name="background">?android:attr/selectableItemBackground</item>
+    </style>
+
 </resources>
