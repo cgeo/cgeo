@@ -80,25 +80,22 @@ public class GeocacheTest extends CGeoTestCase {
     }
 
     private void assertWaypointsParsed(final String note, final int expectedWaypoints) {
-        try {
-            final Geocache cache = new Geocache();
-            final String geocode = "Test" + System.nanoTime();
-            cache.setGeocode(geocode);
-            cache.setWaypoints(new ArrayList<Waypoint>(), false);
-            for (int i = 0; i < 2; i++) {
-                cache.setPersonalNote(note);
-                cache.addWaypointsFromNote();
-                final List<Waypoint> waypoints = cache.getWaypoints();
-                assertThat(waypoints).isNotNull();
-                assertThat(waypoints).hasSize(expectedWaypoints);
-                final Waypoint waypoint = waypoints.get(0);
-                assertThat(waypoint.getCoords()).isEqualTo(new Geopoint("N51 13.888 E007 03.444"));
-                assertThat(waypoint.getName()).isEqualTo(CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " 1");
-                cache.store(Collections.singleton(StoredList.TEMPORARY_LIST.id), null);
-            }
-            removeCacheCompletely(geocode);
-        } finally {
+        final Geocache cache = new Geocache();
+        final String geocode = "Test" + System.nanoTime();
+        cache.setGeocode(geocode);
+        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        for (int i = 0; i < 2; i++) {
+            cache.setPersonalNote(note);
+            cache.addWaypointsFromNote();
+            final List<Waypoint> waypoints = cache.getWaypoints();
+            assertThat(waypoints).isNotNull();
+            assertThat(waypoints).hasSize(expectedWaypoints);
+            final Waypoint waypoint = waypoints.get(0);
+            assertThat(waypoint.getCoords()).isEqualTo(new Geopoint("N51 13.888 E007 03.444"));
+            assertThat(waypoint.getName()).isEqualTo(CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " 1");
+            cache.store(Collections.singleton(StoredList.TEMPORARY_LIST.id), null);
         }
+        removeCacheCompletely(geocode);
     }
 
     public static void testMergeDownloaded() {
