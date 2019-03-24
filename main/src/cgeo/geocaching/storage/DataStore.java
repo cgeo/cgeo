@@ -1798,7 +1798,8 @@ public class DataStore {
         query.append(" WHERE ").append(dbTableCaches).append('.');
         query.append(whereGeocodeIn(geocodes));
 
-        try (final Cursor cursor = database.rawQuery(query.toString(), null)) {
+        final Cursor cursor = database.rawQuery(query.toString(), null);
+        try {
             final Set<Geocache> caches = new HashSet<>();
             int logIndex = -1;
 
@@ -1856,6 +1857,8 @@ public class DataStore {
                 }
             }
             return caches;
+        } finally {
+            cursor.close();
         }
     }
 
@@ -1977,7 +1980,8 @@ public class DataStore {
                 " WHERE " +
                 whereGeocodeIn(geocodes);
 
-        try (final Cursor cursor = database.rawQuery(query, null)) {
+        final Cursor cursor = database.rawQuery(query, null);
+        try {
             while (cursor.moveToNext()) {
                 final Integer listId = cursor.getInt(0);
                 final String geocode = cursor.getString(1);
@@ -1991,6 +1995,9 @@ public class DataStore {
                     cacheLists.put(geocode, listIds);
                 }
             }
+
+        } finally {
+            cursor.close();
         }
 
         return cacheLists;

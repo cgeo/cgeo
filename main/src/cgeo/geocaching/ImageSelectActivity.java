@@ -279,7 +279,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                 if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
                     final String[] filePathColumn = { MediaColumns.DATA };
 
-                    try (final Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null)) {
+                    Cursor cursor = null;
+                    try {
+                        cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                         if (cursor == null) {
                             showFailure();
                             return;
@@ -296,6 +298,10 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     } catch (final Exception e) {
                         Log.e("ImageSelectActivity.onActivityResult", e);
                         showFailure();
+                    } finally {
+                        if (cursor != null) {
+                            cursor.close(); // no Closable Cursor below sdk 16
+                        }
                     }
 
                     Log.d("SELECT IMAGE data = " + data.toString());
