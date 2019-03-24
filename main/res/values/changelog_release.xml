@@ -10,6 +10,7 @@
     · Fix: Action buttons on list select dialog might be not be completely visible on some phones\n
     · Removed: Support for Android 4.0.x devices\n
     · Fix: Disable static map loading by default as Google static maps are no longer available\n
+    · Fix: Try to avoid timeouts when logging with high amount of trackables in inventory\n
     \n
     \n
     <b>2019.02.23:</b>\n

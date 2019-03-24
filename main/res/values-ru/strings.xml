@@ -537,8 +537,8 @@
     <string name="init_signature_template_number">Номер тайника</string>
     <string name="init_signature_template_owner">Создатель</string>
     <string name="init_signature_template_name">Название тайника</string>
-    <string name="init_signature_template_difficulty">Сложность</string>
-    <string name="init_signature_template_terrain">Местность</string>
+    <string name="init_signature_template_difficulty">Difficulty</string>
+    <string name="init_signature_template_terrain">Terrain</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
@@ -1513,7 +1513,7 @@
     <string name="confirm_log_title">Особый тип записи</string>
     <string name="confirm_log_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <string name="confirm_report_problem_title">Сообщить о проблеме</string>
-    <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
+    <string name="confirm_report_problem_message">Вы хотите сообщить \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Активировать</string>
     <string name="init_geokrety">GeoKrety.org</string>

@@ -217,7 +217,7 @@
     <string name="err_log_post_failed_ec">Parece que o seu  registo não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Parece que o seu registo não foi postado. Por favor verifique-o na GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Parece que a imagem do seu registo não foi enviada. Por favor, verifique a página Web original da cache.</string>
-    <string name="err_search_address_forgot">O c:geo esqueceu a morada que tentou encontrar.</string>
+    <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
     <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
     <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
     <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
@@ -311,7 +311,7 @@
     <string name="caches_store_offline">Guardar na Memória</string>
     <string name="caches_store_all">Guardar todas</string>
     <string name="caches_store_unsaved">Guardar não memorizadas</string>
-    <string name="caches_store_selected">Memorizar seleccionada(s)</string>
+    <string name="caches_store_selected">Memorizar seleccionadas</string>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
@@ -342,7 +342,7 @@
         <item quantity="one">Quer remover esta cache da lista actual?</item>
         <item quantity="other">Quer remover todas as %d caches da lista actual?</item>
     </plurals>
-    <string name="caches_remove_selected">Remover seleccionada(s)</string>
+    <string name="caches_remove_selected">Remover seleccionadas</string>
     <plurals name="caches_remove_selected_confirm">
         <item quantity="one">Quer remover esta cache do seu dispositivo?</item>
         <item quantity="other">Quer remover as %d caches seleccionadas do seu dispositivo?</item>
@@ -1144,7 +1144,7 @@
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
     <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-    <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
+    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>

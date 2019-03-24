@@ -277,7 +277,7 @@
     <string name="loc_sat">Uydu</string>
     <string name="loc_trying">Yerini bulmaya çalışıyor</string>
     <string name="loc_no_addr">Bilinmeyen adres</string>
-    <string name="loc_gps_disabled">GPS devredışı</string>
+    <string name="loc_gps_disabled">GPS devre dışı</string>
     <string name="menu_centerposition">Konumuma göre ortala</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo hakkında</string>
@@ -554,8 +554,8 @@
     <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
-    <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
-    <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
+    <string name="init_disabled">Devredışı Olanları Gösterme</string>
+    <string name="init_summary_disabled">Devredışı Olan Geocache\'leri Gösterme</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>

@@ -543,7 +543,7 @@
     <string name="init_signature_template_log">Text logu</string>
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
-    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
+    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -753,7 +753,7 @@
     </plurals>
     <string name="last_day_available">zbývá poslední den</string>
     <string name="cache_offline">Offline</string>
-    <string name="cache_offline_refresh">Aktualizovat</string>
+    <string name="cache_offline_refresh">Obnovit</string>
     <string name="cache_offline_drop">Odstranit</string>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_manage">Správa</string>
@@ -848,7 +848,7 @@
     <string name="cache_dialog_offline_save_message">Ukládání keše pro offline použití…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňování keše z paměti zařízení…</string>
-    <string name="cache_dialog_refresh_title">Aktualizovat</string>
+    <string name="cache_dialog_refresh_title">Obnovit</string>
     <string name="cache_dialog_refresh_message">Aktualizace detailů keše…</string>
     <string name="cache_dialog_watchlist_add_title">Watchlist</string>
     <string name="cache_dialog_watchlist_add_message">Přidávání keše do tvého Watchlistu…</string>
@@ -884,7 +884,7 @@
     <string name="cache_menu_event">Přidat do kalendáře</string>
     <string name="cache_menu_extract_waypoints">Extrahovat body trasy</string>
     <string name="cache_menu_details">Detaily</string>
-    <string name="cache_menu_refresh">Aktualizovat</string>
+    <string name="cache_menu_refresh">Obnovit</string>
     <string name="cache_menu_share">Sdílet keš</string>
     <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
     <string name="cache_menu_copy_list">Kopírovat do jiného seznamu</string>
@@ -1102,7 +1102,7 @@
     <string name="trackable_details_loading">Načítání detailů…</string>
     <string name="trackable_log_touch">Hlášení zahlédnutí</string>
     <string name="trackable_browser_open">Otevřít v prohlížeči</string>
-    <string name="trackable_refresh">Aktualizovat</string>
+    <string name="trackable_refresh">Obnovit</string>
     <string name="trackable_goal">Cíl</string>
     <string name="trackable_details">Detaily</string>
     <string name="trackable_image">Obrázek</string>
