@@ -9,22 +9,22 @@ import org.junit.Test;
 
 public class GeoPointParserTest {
 
-    private static final double refLongitude = 8.0 + 38.564 / 60.0;
-    private static final double refLatitude = 49.0 + 56.031 / 60.0;
+    private static final double REF_LONGITUDE = 8.0 + 38.564 / 60.0;
+    private static final double REF_LATITUDE = 49.0 + 56.031 / 60.0;
 
     @Test
     public void testParseLatitude() {
-        assertThat(GeopointParser.parseLatitude("N 49° 56.031")).isCloseTo(refLatitude, within(1e-8));
+        assertThat(GeopointParser.parseLatitude("N 49° 56.031")).isCloseTo(REF_LATITUDE, within(1e-8));
     }
 
     @Test
     public void testParseLongitude() {
-        assertThat(GeopointParser.parseLongitude("E 8° 38.564")).isCloseTo(refLongitude, within(1e-8));
+        assertThat(GeopointParser.parseLongitude("E 8° 38.564")).isCloseTo(REF_LONGITUDE, within(1e-8));
     }
 
     @Test
     public void testFullCoordinates() {
-        final Geopoint goal = new Geopoint(refLatitude, refLongitude);
+        final Geopoint goal = new Geopoint(REF_LATITUDE, REF_LONGITUDE);
         assertGeopointEquals(goal, GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), 1e-6f);
     }
 
@@ -58,17 +58,17 @@ public class GeoPointParserTest {
 
     @Test
     public void testSouth() {
-        assertThat(GeopointParser.parseLatitude("S 49° 56.031")).isEqualTo(-refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("S 49° 56.031")).isEqualTo(-REF_LATITUDE, offset(1e-8));
     }
 
     @Test
     public void testWest() {
-        assertThat(GeopointParser.parseLongitude("W 8° 38.564")).isEqualTo(-refLongitude, offset(1e-8));
+        assertThat(GeopointParser.parseLongitude("W 8° 38.564")).isEqualTo(-REF_LONGITUDE, offset(1e-8));
     }
 
     @Test
     public void testLowerCase() {
-        assertThat(GeopointParser.parseLongitude("e 8° 38.564")).isEqualTo(refLongitude, offset(1e-8));
+        assertThat(GeopointParser.parseLongitude("e 8° 38.564")).isEqualTo(REF_LONGITUDE, offset(1e-8));
     }
 
     @Test
@@ -112,17 +112,17 @@ public class GeoPointParserTest {
 
     @Test
     public void testBlankAddedByAutocorrectionDot() {
-        assertThat(GeopointParser.parseLatitude("N 49° 56. 031")).isEqualTo(refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("N 49° 56. 031")).isEqualTo(REF_LATITUDE, offset(1e-8));
     }
 
     @Test
     public void testBlankAddedByAutocorrectionComma() {
-        assertThat(GeopointParser.parseLatitude("N 49° 56, 031")).isEqualTo(refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("N 49° 56, 031")).isEqualTo(REF_LATITUDE, offset(1e-8));
     }
 
     @Test
     public void testNonTrimmed() {
-        assertThat(GeopointParser.parseLatitude("    N 49° 56, 031   ")).isEqualTo(refLatitude, offset(1e-8));
+        assertThat(GeopointParser.parseLatitude("    N 49° 56, 031   ")).isEqualTo(REF_LATITUDE, offset(1e-8));
     }
 
     @Test
