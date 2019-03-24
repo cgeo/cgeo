@@ -390,13 +390,13 @@ public class SuParser {
         }
     }
 
-    private static boolean isDisabledStatus(final String status2) {
+    private static boolean isDisabledStatus(final String status) {
         // Possible values:
         // 1 - normal active
         // 2 - "doubtful"
         // 3 - "inactive", i.e. missing container
         // TODO: Maybe it makes some sense to distinguish between real "inactive" and "doubtful"?
-        return !("1".equals(status2));
+        return !("1".equals(status));
     }
 
     private static boolean isArchivedStatus(final String status) {
@@ -444,7 +444,7 @@ public class SuParser {
         try {
             return DATE_FORMAT.parse(text);
         } catch (final ParseException e) {
-            return new Date("");
+            return new Date(0);
         }
     }
 
@@ -452,7 +452,7 @@ public class SuParser {
         try {
             return DATE_TIME_FORMAT.parse(text);
         } catch (final ParseException e) {
-            return new Date("");
+            return new Date(0);
         }
     }
 }
