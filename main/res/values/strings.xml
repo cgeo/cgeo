@@ -368,6 +368,7 @@
     </plurals>
     <string name="caches_remove_progress">Removing caches</string>
     <string name="caches_delete_events">Delete past events</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
     <string name="caches_move_selected">Move selected</string>
@@ -1259,6 +1260,11 @@
         <item quantity="one">Uploaded one note successfully</item>
         <item quantity="other">Uploaded %1$d notes successfully</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
 
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Dogs allowed</string>

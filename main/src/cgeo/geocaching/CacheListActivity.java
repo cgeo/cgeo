@@ -23,6 +23,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.export.BatchUploadModifiedCoordinates;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
@@ -897,6 +898,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_export_persnotes:
                 new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
+                return true;
+            case R.id.menu_upload_modifiedcoords:
+                new BatchUploadModifiedCoordinates().export(adapter.getCheckedOrAllCaches(), this);
                 return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
