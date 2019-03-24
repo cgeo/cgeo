@@ -377,12 +377,10 @@
     </style>
 
     <!-- progress dialog theme -->
-    <style name="cgeoProgressdialogTheme" parent="Dialog_Alert">
-        <item name="android:alertDialogStyle">@style/cgeoProgressdialogThemeStyle</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="buttonBarButtonStyle">@style/button</item>
-    </style>
-    <style name="cgeoProgressdialogThemeStyle">
-        <item name="android:gravity">center</item>
+    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColorPrimary">?text_color</item>
+        <item name="android:textColor">?text_color</item>
+        <item name="android:windowBackground">?background_color</item>
+        <item name="buttonBarButtonStyle">@style/button_borderless</item>
     </style>
 </resources>
