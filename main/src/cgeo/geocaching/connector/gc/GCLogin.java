@@ -433,7 +433,7 @@ public class GCLogin extends AbstractLogin {
         final Response response = Network.getRequest("https://www.geocaching.com/play/serverparameters/params").blockingGet();
         try {
             final String javascriptBody = response.body().string();
-            final String jsonBody = javascriptBody.subSequence(javascriptBody.indexOf("{"), javascriptBody.lastIndexOf(";")).toString();
+            final String jsonBody = javascriptBody.subSequence(javascriptBody.indexOf('{'), javascriptBody.lastIndexOf(';')).toString();
             serverParameters = MAPPER.readValue(jsonBody, ServerParameters.class);
 
             if (StringUtils.isNotBlank(serverParameters.userInfo.dateFormat)) {
