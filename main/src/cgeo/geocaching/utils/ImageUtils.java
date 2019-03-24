@@ -143,14 +143,16 @@ public final class ImageUtils {
      *            Path to store to
      */
     public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String pathOfOutputImage) {
+        BufferedOutputStream bos = null;
         try {
             final FileOutputStream out = new FileOutputStream(pathOfOutputImage);
-            final BufferedOutputStream bos = new BufferedOutputStream(out);
+            bos = new BufferedOutputStream(out);
             bitmap.compress(format, quality, bos);
             bos.flush();
-            bos.close();
         } catch (final IOException e) {
             Log.e("ImageHelper.storeBitmap", e);
+        } finally {
+            IOUtils.closeQuietly(bos);
         }
     }
 
