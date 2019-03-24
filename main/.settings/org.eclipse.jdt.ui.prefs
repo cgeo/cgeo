@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=true
+editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=false
 formatter_profile=_cgeo
 formatter_settings_version=12
 org.eclipse.jdt.ui.exception.name=e
