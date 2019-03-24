@@ -74,9 +74,8 @@ public class DistanceParserTest {
     public void testCannotParseEmptyUnit() {
         try {
             DistanceParser.DistanceUnit.parseUnit("");
-            fail("No failure");
-        }
-        catch (final NumberFormatException e) {
+            fail("Expected NumberFormatException");
+        } catch (final NumberFormatException e) {
             //Expected
         }
     }
@@ -85,9 +84,8 @@ public class DistanceParserTest {
     public void testCannotParseBadUnit() {
         try {
             DistanceParser.DistanceUnit.parseUnit("custom");
-            fail("No failure");
-        }
-        catch (final NumberFormatException e) {
+            fail("Expected NumberFormatException");
+        } catch (final NumberFormatException e) {
             //Expected
         }
     }
