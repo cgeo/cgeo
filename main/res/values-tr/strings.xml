@@ -682,7 +682,6 @@
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
     <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo hakkında bilgi</string>

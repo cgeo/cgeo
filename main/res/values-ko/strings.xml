@@ -679,7 +679,6 @@
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
     <string name="map_source_osm_mapnik">OSM : Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM : 자전거지도</string>
     <string name="map_source_osm_offline">오프라인</string>
     <string name="init_sendToCgeo">c:geo로 보내기</string>
     <string name="settings_info_send2cgeo_title">send2cgeo에 관한 정보</string>

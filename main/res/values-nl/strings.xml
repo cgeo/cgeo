@@ -682,7 +682,6 @@
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>

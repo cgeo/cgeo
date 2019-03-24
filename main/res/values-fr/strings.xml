@@ -682,7 +682,6 @@
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
     <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM : pistes cyclables</string>
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
     <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
