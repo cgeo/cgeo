@@ -150,13 +150,14 @@ public class GpxExport extends AbstractExport {
                 });
             } catch (final IOException e) {
                 Log.e("GpxExport.ExportTask export", e);
-                IOUtils.closeQuietly(writer);
                 // delete partial GPX file on error
                 if (exportFile.exists()) {
                     FileUtils.deleteIgnoringFailure(exportFile);
                 }
 
                 return null;
+            } finally {
+                IOUtils.closeQuietly(writer);
             }
 
             return exportFile;

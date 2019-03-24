@@ -168,14 +168,15 @@ public class SuApi {
         }
         final SuConnector gcsuConnector = (SuConnector) connector;
 
+        final File file = image.getFile();
+        if (file == null) {
+            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+        }
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        FileInputStream fileStream = null;
         try {
-            final File file = image.getFile();
-            if (file == null) {
-                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
-            }
-
-            final Parameters params = new Parameters("cacheID", cache.getCacheId());
-            params.add("image", Base64.encodeToString(IOUtils.readFully(new FileInputStream(file), (int) file.length()), DEFAULT));
+            fileStream = new FileInputStream(file);
+            params.add("image", Base64.encodeToString(IOUtils.readFully(fileStream, (int) file.length()), DEFAULT));
             params.add("caption", createImageCaption(image));
 
             final ObjectNode data = postRequest(gcsuConnector, SuApiEndpoint.POST_IMAGE, params).data;
@@ -186,6 +187,8 @@ public class SuApi {
 
         } catch (final Exception e) {
             Log.e("SuApi.postLogImage", e);
+        } finally {
+            IOUtils.closeQuietly(fileStream);
         }
         return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
     }
