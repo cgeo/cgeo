@@ -12,8 +12,8 @@ import android.view.View;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class TrackableLogsViewCreator extends LogsViewCreator {
 
