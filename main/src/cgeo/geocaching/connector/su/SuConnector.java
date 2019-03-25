@@ -285,7 +285,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
      * Whether or not the connector supports adding a note to a specific cache. In most cases the argument will not be
      * relevant.
      *
-     * @param cache
+     * @param cache geocache
      */
     @Override
     public boolean canAddPersonalNote(@NonNull final Geocache cache) {
@@ -295,7 +295,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     /**
      * Upload personal note (already stored as member of the cache) to the connector website.
      *
-     * @param cache
+     * @param cache geocache
      * @return success
      */
     @Override

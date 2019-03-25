@@ -36,10 +36,6 @@ public class ColorUtils {
     public static double getContrastRatio(final int rgb1, final int rgb2) {
         final double lumi1 = getLuminance(Color.red(rgb1), Color.green(rgb1), Color.blue(rgb1)) + 0.05;
         final double lumi2 = getLuminance(Color.red(rgb2), Color.green(rgb2), Color.blue(rgb2)) + 0.05;
-        if (lumi1 > lumi2) {
-            return lumi1 / lumi2;
-        } else {
-            return lumi2 / lumi1;
-        }
+        return Math.max(lumi1, lumi2) / Math.min(lumi1, lumi2);
     }
 }

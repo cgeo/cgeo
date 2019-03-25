@@ -11,7 +11,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -75,8 +75,8 @@ public class GeoData extends Location {
         final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (geoManager != null) {
             try {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                        && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // we do not have permission to access the location of the user, therefore we return a dummy location
                     return DUMMY_LOCATION;
                 }

@@ -336,6 +336,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             @Override
             public void onNothingSelected(final AdapterView<?> parent) {
+                // empty
             }
         });
 
