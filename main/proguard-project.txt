@@ -64,6 +64,13 @@
 -dontwarn java.nio.file.attribute.FileAttribute
 -dontwarn java.io.File
 
+# commons text
+-dontwarn java.util.Base64
+-dontwarn java.util.Base64$Decoder
+-dontwarn java.util.Base64$Encoder
+-dontwarn javax.script.ScriptEngine
+-dontwarn javax.script.ScriptEngineManager
+
 # AssertJ -----------------------------------------------------------------------------------------
 # ignore all things in AssertJ, as long as tests are generally running fine
 -dontnote org.assertj.core.internal.**

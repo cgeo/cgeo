@@ -9,7 +9,7 @@ import android.os.SystemClock;
 import android.test.AndroidTestCase;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class HtmlPerformanceTest extends AndroidTestCase {
     private String input;
