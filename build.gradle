@@ -90,7 +90,7 @@ buildscript {
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
 
         // gradle build script profiling
-        classpath 'com.gradle:build-scan-plugin:1.16'
+        classpath 'com.gradle:build-scan-plugin:2.2.1'
     }
 }
 
@@ -148,8 +148,8 @@ allprojects {
 
 
 buildScan {
-    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
-    licenseAgree = 'yes'
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
 }
 
 
@@ -183,8 +183,8 @@ subprojects {
 /*
  * Make sure that we use the source distribution when updating the wrapper from the command line.
  */
-task wrapper(type: Wrapper) {
-    distributionType = "all"
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
 }
 
 /*
