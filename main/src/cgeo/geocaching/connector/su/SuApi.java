@@ -288,12 +288,10 @@ public class SuApi {
 
     private static class JSONResult {
         public final boolean isSuccess;
-        public final int responceCode;
         public final ObjectNode data;
 
         JSONResult(final Response response) {
             ObjectNode tempData = null;
-            responceCode = response.code();
             try {
                 tempData = (ObjectNode) JsonUtils.reader.readTree(response.body().byteStream());
             } catch (final Exception e) {
@@ -307,7 +305,6 @@ public class SuApi {
 
         JSONResult(@NonNull final String errorMessage) {
             isSuccess = false;
-            responceCode = -1;
             data = new ObjectNode(JsonUtils.factory);
             data.putObject("error").put("developer_message", errorMessage);
         }

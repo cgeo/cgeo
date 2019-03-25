@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +23,8 @@ public class PermissionHandler {
         final String[] locationPermissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
         final PermissionKey pk = new PermissionKey(locationPermissions);
 
-        if (ActivityCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(activity, locationPermissions[1]) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(activity, locationPermissions[1]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
                 callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
                 ActivityCompat.requestPermissions(activity, locationPermissions, callback.getRequestCode());
@@ -49,7 +50,7 @@ public class PermissionHandler {
         final String[] storagePermission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
         final PermissionKey pk = new PermissionKey(storagePermission);
 
-        if (ActivityCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
                 callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
                 ActivityCompat.requestPermissions(activity, storagePermission, requestContext.getRequestCode());

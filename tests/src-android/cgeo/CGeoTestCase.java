@@ -12,10 +12,6 @@ import java.util.EnumSet;
 
 public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> {
 
-    private boolean oldStoreMapsFlag;
-    private boolean oldStoreWpMapsFlag;
-    private boolean oldMapStoreFlagsRecorded = false;
-
     public CGeoTestCase() {
         super(CgeoApplication.class);
     }

@@ -100,6 +100,7 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
             forceLoad();
         }
 
+        @Override
         public String loadInBackground() {
             // XXX: We need this dummy Loader because in other case button "Send log" will complain
             // about "Downloading data in progress"
