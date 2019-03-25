@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -425,6 +426,7 @@
     <string name="about_system_info">c:geo järjestelmätiedot</string>
     <string name="about_system_info_send_chooser">Lähetä järjestelmän tiedot</string>
     <string name="changelog_github">Kaikki muutokset</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -555,6 +557,8 @@
     <string name="init_summary_exclude">Älä näytä jo löytämiäsi tai omia kätköjä</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_offline">Staattinen kartta</string>
@@ -1036,7 +1040,7 @@
     <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
     <string name="map_theme_builtin">Oletus</string>
     <string name="map_theme_select">Valitse kartan ulkoasu</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Teema-asetukset</string>
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
     <string name="map_static_title">Staattiset kartat</string>
@@ -1114,7 +1118,7 @@
     <string name="trackable_travelbug">Matkalainen</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutinit</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Tila</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Perinteinen</string>
     <string name="geokret_type_book_or_media">Kirja tai sähköinen media</string>
@@ -1562,4 +1566,9 @@
     <string name="err_logimage_caption_required">Kuvateksti on pakollinen</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

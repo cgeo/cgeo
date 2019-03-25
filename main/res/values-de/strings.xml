@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Ändern des Favoriten-Status ist fehlgeschlagen.</string>
     <string name="err_select_logimage_failed">Auswahl eines Bildes für das Log ist fehlgeschlagen.</string>
     <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
+    <string name="err_unsupported_image_format">Nicht unterstütztes Bildformat.</string>
     <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
     <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
     <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
@@ -425,6 +426,7 @@
     <string name="about_system_info">c:geo Systeminformationen</string>
     <string name="about_system_info_send_chooser">Systeminformationen senden</string>
     <string name="changelog_github">Liste aller Änderungen</string>
+    <string name="about_nutshellmanual">Onlinehandbuch</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öffne Einstellungen?</string>
     <string name="settings_title_services">Dienste</string>
@@ -555,6 +557,8 @@
     <string name="init_summary_exclude">Eigene und gefundene Caches ausblenden</string>
     <string name="init_showwaypoints">Wegpunkte zeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
+    <string name="init_brouterThreshold">Routenberechnung</string>
+    <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher Brouter (falls installiert) eine Route berechnet.</string>
     <string name="init_disabled">Deaktivierte Caches</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
     <string name="init_offline">Statische Karten</string>
@@ -1562,4 +1566,9 @@
     <string name="err_logimage_caption_required">Ein Bildtitel ist erforderlich</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">App beenden</string>
+    <string name="ask_again">Erneut nachfragen</string>
+    <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät, um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
+    <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
 </resources>

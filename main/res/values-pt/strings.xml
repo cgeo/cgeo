@@ -79,7 +79,7 @@
     <string name="log_tb_nothing">Não fazer nada</string>
     <string name="log_tb_visit">Visitei</string>
     <string name="log_tb_drop">Deixei aqui</string>
-    <string name="log_tb_sortby">Ordenar Trackable</string>
+    <string name="log_tb_sortby">Ordenar por Trackable</string>
     <string name="log_tb_changeall">Alterar todos</string>
     <string name="log_tb_grabbed">Recolhido algures</string>
     <string name="log_tb_note">Nota</string>
@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Alteração do estado de favorito falhou.</string>
     <string name="err_select_logimage_failed">A selecção de imagem para o registo falhou.</string>
     <string name="err_acquire_image_failed">Aquisição de uma imagem falhou.</string>
+    <string name="err_unsupported_image_format">Formato de imagem não suportado.</string>
     <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
     <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
@@ -425,6 +426,7 @@
     <string name="about_system_info">Informação do sistema c:geo</string>
     <string name="about_system_info_send_chooser">Enviar Informação sobre o sistema</string>
     <string name="changelog_github">Lista de todas as alterações</string>
+    <string name="about_nutshellmanual">Manual on-line</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -555,6 +557,8 @@
     <string name="init_summary_exclude">Excluir caches encontradas e minhas</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
+    <string name="init_brouterThreshold">Calcular rota</string>
+    <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
     <string name="init_disabled">Excluir caches desactivadas</string>
     <string name="init_summary_disabled">Excluir caches desactivadas</string>
     <string name="init_offline">Armazenar a cache de mapas estáticos para utilização offline</string>
@@ -834,7 +838,7 @@
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">A remover a cache da memória do dispositivo…</string>
     <string name="cache_dialog_refresh_title">Actualizar</string>
-    <string name="cache_dialog_refresh_message">A recarregar os detalhes da cache…</string>
+    <string name="cache_dialog_refresh_message">A recarregar a informação da geocache…</string>
     <string name="cache_dialog_watchlist_add_title">Lista de observação</string>
     <string name="cache_dialog_watchlist_add_message">A adicionar a geocache à lista de observação…</string>
     <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
@@ -1562,4 +1566,9 @@
     <string name="err_logimage_caption_required">É necessária uma legenda para a imagem</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Fechar a aplicação</string>
+    <string name="ask_again">Voltar a perguntar</string>
+    <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
+    <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guardar geocaches para uso off-line. Além disso, o c:geo usará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas off-line. A mesma não pode ser usada sem esta permissão.</string>
 </resources>

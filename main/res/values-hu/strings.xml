@@ -156,9 +156,9 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
-    <string name="err_server">Hiba a kapcsolatban a geocaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
-    <string name="err_server_ec">Hiba a kapcsolatban az extremcaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
-    <string name="err_server_gk">Nem lehet kapcsolódni a geokrety.org-hoz. A weboldal ideglenesen nem elérhető vagy az internetkapcsolatod nem működik.</string>
+    <string name="err_server">A geocaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
+    <string name="err_server_ec">Az extremcaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
+    <string name="err_server_gk">A geokrety.org nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_login">Hiányzó bejelentkezési adat</string>
     <string name="err_login_failed_toast">A c:geo nem tud bejelentkezni. A c:geo hálózat nélküli módban fut. Ellenőrizd a bejelentkezési adataidat a beállításoknál vagy engedélyezd az internetkapcsolatot!</string>
     <string name="err_unknown">Ismeretlen hiba</string>
@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Az állapotmódosítás sikertelen.</string>
     <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
     <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
+    <string name="err_unsupported_image_format">Nem támogatott képformátum.</string>
     <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
     <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni az utazó adatait.</string>
     <string name="err_tb_not_loggable">Ezt az utazót nem lehet logolni.</string>
@@ -292,10 +293,10 @@
     <string name="menu_scan_description">A c:geo QR formátumú geokódokat is be tud olvasni, de az ehhez szükséges alkalmazás nincs telepítve. Meg szeretnéd nyitni a Google Play-t, hogy telepítsd?</string>
     <!-- main screen -->
     <string name="live_map_button">Élő térkép</string>
-    <string name="caches_nearby_button">Közelben</string>
+    <string name="caches_nearby_button">A közelben</string>
     <string name="advanced_search_button">Keresés</string>
     <string name="stored_caches_button">Mentett</string>
-    <string name="any_button">Irány</string>
+    <string name="any_button">Cél</string>
     <string name="unknown_scan">Nem található geokód a szkennelés eredményében.</string>
     <!-- caches -->
     <string name="caches_no_cache">Nem található láda</string>
@@ -425,6 +426,7 @@
     <string name="about_system_info">c:geo rendszeradatok</string>
     <string name="about_system_info_send_chooser">Rendszeradatok küldése</string>
     <string name="changelog_github">Összes változtatás listázása</string>
+    <string name="about_nutshellmanual">Online kézikönyv</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Beállítások megnyitása?</string>
     <string name="settings_title_services">Szolgáltatások</string>
@@ -555,6 +557,8 @@
     <string name="init_summary_exclude">Saját és megtalált ládák kihagyása</string>
     <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
+    <string name="init_brouterThreshold">Útvonaltervezés</string>
+    <string name="init_brouterThreshold_description">Maximális távolság, ameddig a brouter segítő alkalmazás (ha telepítve van) útvonaltervezést végez.</string>
     <string name="init_disabled">Letiltott ládák kihagyása</string>
     <string name="init_summary_disabled">Letiltott ládák kihagyása</string>
     <string name="init_offline">Ládák statikus térképe</string>
@@ -1036,7 +1040,7 @@
     <string name="map_disabled_hide">Letiltott ládák ki</string>
     <string name="map_theme_builtin">Alapértelmezett</string>
     <string name="map_theme_select">Térképstílusok</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Térképstílus beállítások</string>
     <string name="map_live_enable">Élő mód</string>
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_static_title">Statikus térképek</string>
@@ -1114,7 +1118,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Állapot</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Hagyományos</string>
     <string name="geokret_type_book_or_media">Könyv vagy elektronikus média</string>
@@ -1562,4 +1566,9 @@
     <string name="err_logimage_caption_required">Képfelirat megadása szükséges</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">App bezárása</string>
+    <string name="ask_again">Újrakérdezés</string>
+    <string name="location_permission_request_explanation">A c:geo-nak szüksége van készüléked GPS-ének használatára, hogy megállapíthassa helyzetedet, a ládák irányát, távolságát. Ez az engedély nélkül nem lehetséges.</string>
+    <string name="storage_permission_request_explanation">A c:geo adatokat tárol készülékeden vagy SD kártyádon, ha ládákat mentesz el offline használatra. Továbbá használja készüléked tárhelyét fájlok importálásakor/exportálásakor, valamint offline térképek olvasásakor. Ez az engedély nélkül nem lehetséges.</string>
 </resources>

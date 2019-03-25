@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">S\'ha produït un error al canviar l\'estat de preferit.</string>
     <string name="err_select_logimage_failed">S\'ha produït un error en seleccionar una imatge pel registre.</string>
     <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
     <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
     <string name="err_tb_not_loggable">Aquest traçable no es pot registrar.</string>
@@ -267,7 +268,7 @@
     <string name="confirm_discard_wp_changes">Descartar els canvis de punts de ruta sense desar?</string>
     <string name="warn_discard_changes">Descartat els canvis del punt de referència!</string>
     <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
-    <string name="warn_log_load_additional_data">c:Geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
+    <string name="warn_log_load_additional_data">c:geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>
@@ -284,7 +285,7 @@
     <string name="menu_about">Quant al c:geo</string>
     <string name="menu_helpers">Programes d\'utilitat</string>
     <string name="menu_settings">Configuració</string>
-    <string name="menu_backup">Backup</string>
+    <string name="menu_backup">Còpia de seguretat</string>
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
@@ -425,6 +426,7 @@
     <string name="about_system_info">Informació del sistema de c:geo</string>
     <string name="about_system_info_send_chooser">Enviar informació del sistema</string>
     <string name="changelog_github">Llista de tots els canvis</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -555,6 +557,8 @@
     <string name="init_summary_exclude">Exclou els teus propis catxés o els que ja has trobat</string>
     <string name="init_showwaypoints">Mostra les fites</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_offline">Mapes estàtics</string>
@@ -1036,7 +1040,7 @@
     <string name="map_disabled_hide">Amagar catxés desactivats</string>
     <string name="map_theme_builtin">Per defecte</string>
     <string name="map_theme_select">Trieu els detalls del mapa</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Opcions del tema</string>
     <string name="map_live_enable">Activa en viu</string>
     <string name="map_live_disable">Desactiva en viu</string>
     <string name="map_static_title">Mapes estàtics</string>
@@ -1114,7 +1118,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Estat</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicional</string>
     <string name="geokret_type_book_or_media">Llibre o mitjans electrònics</string>
@@ -1562,4 +1566,9 @@
     <string name="err_logimage_caption_required">Cal un títol per a la imatge</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

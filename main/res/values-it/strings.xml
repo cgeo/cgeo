@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Errore nella modifica dello stato preferiti.</string>
     <string name="err_select_logimage_failed">La selezione dell\'immagine per il log è fallita.</string>
     <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
+    <string name="err_unsupported_image_format">Formato immagine non supportato.</string>
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
     <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
@@ -425,6 +426,7 @@
     <string name="about_system_info">informazioni di sistema di c:geo</string>
     <string name="about_system_info_send_chooser">Invia le informazioni del sistema</string>
     <string name="changelog_github">Elenco di tutte le modifiche</string>
+    <string name="about_nutshellmanual">Manuale online</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -555,6 +557,8 @@
     <string name="init_summary_exclude">Escludi i miei cache e queli che ho già trovato</string>
     <string name="init_showwaypoints">Mostra waypoints</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
+    <string name="init_brouterThreshold">Calcola percorso</string>
+    <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'helper della app brouter (se installata) calcolerà un percorso.</string>
     <string name="init_disabled">Escludi disattivati</string>
     <string name="init_summary_disabled">Escludi cache disattivati</string>
     <string name="init_offline">Mappe statiche</string>
@@ -1036,7 +1040,7 @@
     <string name="map_disabled_hide">Nascondi le cache disabilitate</string>
     <string name="map_theme_builtin">Tema predefinito</string>
     <string name="map_theme_select">Scegli un tema mappa</string>
-    <string name="map_theme_options">Theme Options</string>
+    <string name="map_theme_options">Opzioni Tema</string>
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_static_title">Mappe statiche</string>
@@ -1114,7 +1118,7 @@
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Stato</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradizionale</string>
     <string name="geokret_type_book_or_media">Libro o media elettronici</string>
@@ -1562,4 +1566,9 @@
     <string name="err_logimage_caption_required">Una didascalia è richiesta per l\'immagine</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Chiudi app</string>
+    <string name="ask_again">Chiedimi di nuovo</string>
+    <string name="location_permission_request_explanation">c:geo ha bisogno dell\'accesso al GPS sul tuo dispositivo per localizzare la tua posizione e calcolare la distanza e la direzione per le geocache. Non può essere utilizzato senza questo permesso.</string>
+    <string name="storage_permission_request_explanation">c:geo scriverà dati sulla tua memoria del telefono o scheda SD non appena salvi geocache per uso offline. Inoltre c:geo userà la tua memoria telefonica per importare ed esportare file e leggere mappe offline. Non può essere utilizzato senza questo permesso.</string>
 </resources>

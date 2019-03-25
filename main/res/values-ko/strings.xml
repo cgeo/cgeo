@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">호감캐시 상태를 바꾸지 못했습니다.</string>
     <string name="err_select_logimage_failed">찾지못함 로그에 대한 사진을 선택하는 중</string>
     <string name="err_acquire_image_failed">사진 가져오기 실패</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">원하시는 추적아이템을 표시할 수 없습니다. 정말 추적아이템이 맞나요?</string>
     <string name="err_tb_details_open">추적아이템 상세정보를 열 수 없습니다.</string>
     <string name="err_tb_not_loggable">이 추적아이템은 로그할 수 없습니다.</string>
@@ -422,6 +423,7 @@
     <string name="about_system_info">c:geo 시스템 정보</string>
     <string name="about_system_info_send_chooser">시스템 정보 보내기</string>
     <string name="changelog_github">모든 변경 목록</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -552,6 +554,8 @@
     <string name="init_summary_exclude">자신이 숨긴 캐시와 이미 찾은 캐시를 제외합니다.</string>
     <string name="init_showwaypoints">웨이포인트 보기</string>
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">비활성캐시 제외하기</string>
     <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
     <string name="init_offline">정적 지도</string>
@@ -1540,4 +1544,9 @@
     <string name="err_logimage_caption_required">영상에 설명이 필요합니다.</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>
