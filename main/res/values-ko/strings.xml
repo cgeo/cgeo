@@ -158,6 +158,7 @@
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
     <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">GeoKrety.org에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_login">저장된 로그인 정보가 없습니다</string>
     <string name="err_login_failed_toast">c:geo에서 로그인할 수 없습니다. 저장된 데이터를 사용하여 오프라인으로 작동됩니다. 로그인 설정과 인터넷 상태를 확인하세요.</string>
@@ -432,7 +433,7 @@
     <string name="settings_title_cachedetails">캐시 상세정보</string>
     <string name="settings_summary_cachedetails">캐시정보 표시 사용자가 지정하기</string>
     <string name="settings_title_offlinedata">오프라인 데이타</string>
-    <string name="settings_summary_offlinedata">정적 지도 및 기타 오프라인 데이터 저장소 설정하기</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">로그하기</string>
     <string name="settings_summary_logging">서명 및 로그 옵션 설정하기</string>
     <string name="settings_title_map">지도</string>
@@ -460,6 +461,7 @@
     <string name="settings_goto_url_button">더보기…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">활성화</string>
     <string name="settings_activate_ec">활성화</string>
@@ -682,8 +684,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
-    <string name="map_source_osm_mapnik">OSM : Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM : 자전거지도</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">오프라인</string>
     <string name="init_sendToCgeo">c:geo로 보내기</string>
     <string name="settings_info_send2cgeo_title">send2cgeo에 관한 정보</string>
@@ -728,6 +729,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">이제 c:geo에서 %s 에 상호작용하도록 허용되었습니다.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">이제 c:geo에서 %s 에 상호작용하도록 허용되었습니다.</string>
     <string name="err_auth_geokrety_bad_password">사용자명/비밀번호가 맞지 않는 것 같습니다.</string>
@@ -785,6 +788,11 @@
     <string name="cache_description">설명</string>
     <string name="cache_description_long">긴 설명</string>
     <string name="cache_description_table_note">설명에는 %s에서 잘 보이도록 테이블 포맷이 포함됩니다.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">관심목록에 있는 캐시입니다.</string>
     <string name="cache_watchlist_on_extra">이 캐시는 관심목록에 있습니다(총 인원 : %1d).</string>
     <string name="cache_watchlist_not_on">이 캐시는 관심목록에 없습니다.</string>
@@ -1165,7 +1173,7 @@
     <string name="export_fieldnotes">현장 기록</string>
     <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
     <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
-    <string name="export_fieldnotes_uploading">올리는 중</string>
+    <string name="export_fieldnotes_uploading">올리는 중…</string>
     <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
     <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>

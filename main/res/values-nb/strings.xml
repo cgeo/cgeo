@@ -158,6 +158,7 @@
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
     <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
     <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Får ikke kontakt med GeoKrety.org. Nettstedet kan være nede eller Internett-tilkoblingen din fungerer ikke.</string>
     <string name="err_login">Ingen innloggingsopplysninger lagret</string>
     <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer offline med cacher du har lagret. Sjekk innloggingsinnstillinger eller aktiver internettforbindelsen.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Cache-detaljer</string>
     <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon.</string>
     <string name="settings_title_offlinedata">Offline-data</string>
-    <string name="settings_summary_offlinedata">Endre lagringssted for statiske kart og andre offline-data.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
     <string name="settings_title_map">Vis på kartet</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">mer…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktiver</string>
     <string name="settings_activate_ec">Aktiver</string>
@@ -571,10 +573,10 @@
     <string name="init_livelist">Vis cachers retning i listen</string>
     <string name="init_summary_livelist">Vis cachers retning i listen</string>
     <string name="init_backup">Sikkerhetskopiering</string>
-    <string name="init_backup_backup">Sikkerhetskopi</string>
+    <string name="init_backup_backup">Lag sikkerhetskopi</string>
     <string name="init_backup_running">Oppretter sikkerhetskopi av database…</string>
     <string name="init_backup_note">Merk at denne funksjonen vil sikkerhetskopiere/gjenopprette en database som inneholder cacher og veipunkter, men ikke dine innstillinger. \nDin innloggingsinformasjon og passord vil aldri forlate dette programmet.</string>
-    <string name="init_backup_restore">Gjenopprett</string>
+    <string name="init_backup_restore">Gjenopprett fra sikkerhetskopi</string>
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
     <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
@@ -637,10 +639,10 @@
     <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
     <string name="init_maintenance_directories">Slett utdaterte filer</string>
     <string name="init_location">Geolokasjon</string>
-    <string name="init_location_note">På enheter utstyrt med Google Play-tjenester kan c:geo automatisk bruke en bedre posisjonstjeneste. Vær obs på at dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
+    <string name="init_location_note">På enheter utstyrt med Google Play-tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
     <string name="init_location_googleplayservices">Bruk Google Play Services</string>
     <string name="init_low_power">Strømsparingsmodus</string>
-    <string name="init_low_power_note">I strømsparingsmodus brukes ikke GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, og det vil medføre lengre tid for posisjonering.</string>
+    <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
     <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
     <string name="init_force_orientation_sensor_title">Retningssensor</string>
     <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Sykkelkart</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send til c:geo</string>
     <string name="settings_info_send2cgeo_title">Informasjon om send2cgeo</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
     <string name="err_auth_geokrety_bad_password">Brukernavn og/eller passord ser ut til å være feil.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Beskrivelse</string>
     <string name="cache_description_long">Full beskrivelse</string>
     <string name="cache_description_table_note">Beskrivelsen inneholder tabellformatering og må åpnes på %s for å vises riktig.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Denne cachen er på din overvåkningsliste.</string>
     <string name="cache_watchlist_on_extra">Cachen er på din overvåkningsliste (Overvåkere: %1d).</string>
     <string name="cache_watchlist_not_on">Denne cachen er ikke på din overvåkningsliste.</string>

@@ -158,6 +158,7 @@
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
     <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Službu GeoKrety.org nelze kontaktovat. Stránka může mít výpadek a nebo tvé připojení k Internetu nefunguje.</string>
     <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
     <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat s kešemi uloženými offline. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
@@ -441,7 +442,7 @@
     <string name="settings_title_cachedetails">Detaily keše</string>
     <string name="settings_summary_cachedetails">Nastavení zobrazování informací u keší.</string>
     <string name="settings_title_offlinedata">Offline zdroje</string>
-    <string name="settings_summary_offlinedata">Nastavení statických map a dalších funkcí pro offline režim.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Logování</string>
     <string name="settings_summary_logging">Nastavení podpisu a možností logování.</string>
     <string name="settings_title_map">Mapa</string>
@@ -469,6 +470,7 @@
     <string name="settings_goto_url_button">více …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktivovat</string>
     <string name="settings_activate_ec">Aktivovat</string>
@@ -545,7 +547,7 @@
     <string name="init_signature_template_log">Text logu</string>
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
-    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
+    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -691,8 +693,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyklomapa</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
@@ -737,6 +738,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo je nyní autorizováno pro interakce s %s.</string>
     <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
@@ -757,7 +760,7 @@
     </plurals>
     <string name="last_day_available">zbývá poslední den</string>
     <string name="cache_offline">Offline</string>
-    <string name="cache_offline_refresh">Obnovit</string>
+    <string name="cache_offline_refresh">Aktualizovat</string>
     <string name="cache_offline_drop">Odstranit</string>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_manage">Správa</string>
@@ -812,6 +815,11 @@
     <string name="cache_description">Popis</string>
     <string name="cache_description_long">Dlouhý popis</string>
     <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Tato keš je v tvém Watchlistu.</string>
     <string name="cache_watchlist_on_extra">Tato keš je na tvém watchlistu (sledující: %1d).</string>
     <string name="cache_watchlist_not_on">Tato keš není v tvém Watchlistu.</string>
@@ -852,7 +860,7 @@
     <string name="cache_dialog_offline_save_message">Ukládání keše pro offline použití…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňování keše z paměti zařízení…</string>
-    <string name="cache_dialog_refresh_title">Obnovit</string>
+    <string name="cache_dialog_refresh_title">Aktualizovat</string>
     <string name="cache_dialog_refresh_message">Aktualizace detailů keše…</string>
     <string name="cache_dialog_watchlist_add_title">Watchlist</string>
     <string name="cache_dialog_watchlist_add_message">Přidávání keše do tvého Watchlistu…</string>
@@ -888,7 +896,7 @@
     <string name="cache_menu_event">Přidat do kalendáře</string>
     <string name="cache_menu_extract_waypoints">Extrahovat body trasy</string>
     <string name="cache_menu_details">Detaily</string>
-    <string name="cache_menu_refresh">Obnovit</string>
+    <string name="cache_menu_refresh">Aktualizovat</string>
     <string name="cache_menu_share">Sdílet keš</string>
     <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
     <string name="cache_menu_copy_list">Kopírovat do jiného seznamu</string>
@@ -1106,7 +1114,7 @@
     <string name="trackable_details_loading">Načítání detailů…</string>
     <string name="trackable_log_touch">Hlášení zahlédnutí</string>
     <string name="trackable_browser_open">Otevřít v prohlížeči</string>
-    <string name="trackable_refresh">Obnovit</string>
+    <string name="trackable_refresh">Aktualizovat</string>
     <string name="trackable_goal">Cíl</string>
     <string name="trackable_details">Detaily</string>
     <string name="trackable_image">Obrázek</string>

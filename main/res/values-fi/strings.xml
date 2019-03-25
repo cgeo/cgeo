@@ -158,6 +158,7 @@
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
     <string name="err_login_failed_toast">c:geo ei onnistu kirjautumaan sisään. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt. Tarkista kirjautumistiedot tai kytke internet-yhteytesi päälle.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Kätkön tiedot</string>
     <string name="settings_summary_cachedetails">Kustomoi kätkön tietojen esitystapa.</string>
     <string name="settings_title_offlinedata">Offline-data</string>
-    <string name="settings_summary_offlinedata">Määritä staattinen kartta ja offline-tietojen tallennus.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Kirjaaminen</string>
     <string name="settings_summary_logging">Aseta allekirjoituksesi ja lokkausasetukset.</string>
     <string name="settings_title_map">Kartta</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">Lisää…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktivoi</string>
     <string name="settings_activate_ec">Aktivoi</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Pyöräilykartta</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
     <string name="err_auth_geokrety_bad_password">Väärä käyttäjätunnus/salasana.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Kuvaus</string>
     <string name="cache_description_long">Pitkä kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Tämä kätkö on seurantalistallasi.</string>
     <string name="cache_watchlist_on_extra">Kätkö on seurantalistallasi (seuraajia: %1d).</string>
     <string name="cache_watchlist_not_on">Tämä kätkö ei ole seurantalistallasi.</string>
@@ -847,7 +855,7 @@
     <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
     <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-    <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
+    <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
     <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
@@ -1488,12 +1496,12 @@
     <string name="settings_activate_geokrety">Aktivoi</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
-    <string name="init_summary_geokrety">Vahvista matkalaiset sivulla GeoKrety.org</string>
+    <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
     <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
     <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
     <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org tarjoaa välimuistissa olevaa tietoa GeoKrety kulkevaisille.\nAvailable aineisto sisältää enemmän GeoKrety tietoa kuin \'kuvaus\' tai \'puuttuva\' tila.\n\nDatas ei ole reaaliaikaista!\nPositions: ~ 30 min. \nDescriptions: ~ 24 h.</string>
+    <string name="init_geokrety_cache_description">GeokretyMap.org tarjoaa välimuistissa olevaa tietoa GeoKrety-reissaajille.\nAineisto sisältää enemmän tietoa GeoKretyistä kuin \'kuvaus\' tai kadonnut-tila.\n\nAineisto ei ole reaaliaikaista!\nSijainnit: ~ 30 min. \nKuvaukset: ~ 24 h.</string>
     <string name="init_geokrety_cache">Käytä GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
     <string name="trackable_title_log_without_geocode">Koodi puuttuu</string>

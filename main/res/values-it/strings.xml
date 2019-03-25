@@ -158,6 +158,7 @@
     <string name="err_parse">Errore analizzando la pagina di login</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
+    <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
     <string name="err_server_gk">Impossibile contattare GeoKrety.org. Il sito Web potrebbe essere inattivo o la tua connessione internet non sta funzionando.</string>
     <string name="err_login">Informazioni di login non memorizzate</string>
     <string name="err_login_failed_toast">c:geo non può effettuare login. Attivata la modalità offline. Verificare le informazioni di login nelle impostazioni o abilitare una connessione internet.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Dettagli cache</string>
     <string name="settings_summary_cachedetails">Personalizzazione dell\'aspetto delle informazioni del cache.</string>
     <string name="settings_title_offlinedata">Dati offline</string>
-    <string name="settings_summary_offlinedata">Configurazione mappe statiche e altri servizi offline.</string>
+    <string name="settings_summary_offlinedata">Configura altri dati offline.</string>
     <string name="settings_title_logging">Registro Log</string>
     <string name="settings_summary_logging">Configura la tua firma e imposta le opzioni di logging.</string>
     <string name="settings_title_map">Mappa</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">altro …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">OpenCaching.com (Garmin)</string>
     <string name="settings_activate_gc">Attiva</string>
     <string name="settings_activate_ec">Attiva</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Mappa</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo è ora autorizzato ad interagire con %s.</string>
     <string name="err_auth_geokrety_bad_password">Il tuo nome utente o password non sembrano validi.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Descrizione</string>
     <string name="cache_description_long">Descrizione estesa</string>
     <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>
+    <string name="cache_area_description">Descrizione area</string>
+    <string name="cache_cache_description">Descrizione cache</string>
+    <string name="cache_virtual_description">Domanda virtuale</string>
+    <string name="cache_traditional_description">Parte tradizionale</string>
+    <string name="cache_box_description">Contenuto Box</string>
     <string name="cache_watchlist_on">Questo cache è nella tua watchlist.</string>
     <string name="cache_watchlist_on_extra">Questo cache è nella tua watchlist (Watchers: %1d).</string>
     <string name="cache_watchlist_not_on">Questo cache non è nella tua watchlist.</string>

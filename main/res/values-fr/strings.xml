@@ -158,8 +158,9 @@
     <string name="err_parse">Échec login lecture page</string>
     <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
-    <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
+    <string name="err_login">Aucune compte renseigné</string>
     <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
     <string name="err_unknown">Erreur inconnue</string>
     <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
@@ -271,7 +272,7 @@
     <!-- location service -->
     <string name="loc_last">Dernière position</string>
     <string name="loc_net">Réseau</string>
-    <string name="loc_fused">Fusionné</string>
+    <string name="loc_fused">Unifié</string>
     <string name="loc_low_power">Éco</string>
     <string name="loc_home">Domicile</string>
     <string name="loc_gps">GPS</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Détails de la cache</string>
     <string name="settings_summary_cachedetails">Personnaliser l\'affichage des informations de la cache.</string>
     <string name="settings_title_offlinedata">Données hors-ligne</string>
-    <string name="settings_summary_offlinedata">Configurer les cartes statiques et le stockage des autres données hors connexion.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Visites</string>
     <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
     <string name="settings_title_map">Carte</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">plus…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Activer</string>
     <string name="settings_activate_ec">Activer</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
-    <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM : pistes cyclables</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
     <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">Opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">Désormais c:geo est autorisé à utiliser %s.</string>
     <string name="err_auth_geokrety_bad_password">Votre nom d\'utilisateur ou votre mot de passe semble invalide.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Description longue</string>
     <string name="cache_description_table_note">La description peut contenir des mises en forme riches. Consultez le site %s pour visualiser toute la description.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
     <string name="cache_watchlist_on_extra">Cette cache est sur votre liste de suivi (Personnes suivant la cache : %1d).</string>
     <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
@@ -1434,7 +1442,7 @@
     <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Votre version d\'Android semble antérieure à 4.1. Les prochaines versions de c:geo pourraient ne plus fonctionner sur votre appareil.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>

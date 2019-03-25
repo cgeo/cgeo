@@ -158,6 +158,7 @@
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
     <string name="err_server">Geocaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_ec">Extremcaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">GeoKrety.org\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_login">Kayıtlı oturum açma bilgisi yok</string>
     <string name="err_login_failed_toast">c:geo\'ya giriş yapılamıyor. c:geo kaydedilmiş Geocache\'ler ile çevrimdışı çalışıyor. Giriş ayarlarını kontrol edin veya internet bağlantınızı etkinleştirin.</string>
@@ -278,7 +279,7 @@
     <string name="loc_sat">Uydu</string>
     <string name="loc_trying">Yerini bulmaya çalışıyor</string>
     <string name="loc_no_addr">Bilinmeyen adres</string>
-    <string name="loc_gps_disabled">GPS devre dışı</string>
+    <string name="loc_gps_disabled">GPS devredışı</string>
     <string name="menu_centerposition">Konumuma göre ortala</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo hakkında</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Geocache Ayrıntıları</string>
     <string name="settings_summary_cachedetails">Geocache bilgilerinin görüntülenmesini özelleştirin.</string>
     <string name="settings_title_offlinedata">Çevrimdışı Veri</string>
-    <string name="settings_summary_offlinedata">Statik haritaları ve diğer çevrimdışı veri depolama birimlerini yapılandırın.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Kayıt</string>
     <string name="settings_summary_logging">İmzanızı yapılandırın ve kayıt seçeneklerini ayarlayın.</string>
     <string name="settings_title_map">Harita</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">daha fazla …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Etkinleştir</string>
     <string name="settings_activate_ec">Etkinleştir</string>
@@ -558,8 +560,8 @@
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
-    <string name="init_disabled">Devredışı Olanları Gösterme</string>
-    <string name="init_summary_disabled">Devredışı Olan Geocache\'leri Gösterme</string>
+    <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
+    <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo hakkında bilgi</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
     <string name="err_auth_geokrety_bad_password">Kullanıcı adınız/şifreniz geçersiz görünüyor.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Açıklama</string>
     <string name="cache_description_long">Ayrıntılı Açıklama</string>
     <string name="cache_description_table_note">Açıklama %s\'de doğru şekilde görülebilmesi için görülebilecek tablo biçimlendirmesini içerir.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Bu Geocache takip listenizde.</string>
     <string name="cache_watchlist_on_extra">Bu Geocache takip listenizde (Takip edenler:%1d).</string>
     <string name="cache_watchlist_not_on">Bu Geocache takip listenizde değil.</string>

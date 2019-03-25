@@ -158,6 +158,7 @@
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
     <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia be interneto su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
@@ -441,7 +442,7 @@
     <string name="settings_title_cachedetails">Slėptuvės informacija</string>
     <string name="settings_summary_cachedetails">Pritaikyti vaizdą slėptuvės informacijai.</string>
     <string name="settings_title_offlinedata">Duomenys darbui be interneto</string>
-    <string name="settings_summary_offlinedata">Nustatyti statinius žemėlapius ir saugojimo vietą, kai nėra ryšio.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Registravimas</string>
     <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
     <string name="settings_title_map">Žemėlapis</string>
@@ -469,6 +470,7 @@
     <string name="settings_goto_url_button">Plačiau</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktyvuoti</string>
     <string name="settings_activate_ec">Aktyvuoti</string>
@@ -691,8 +693,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Išsaugotas</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacija apie send2cgeo</string>
@@ -737,6 +738,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo dabar registruota ir leidžiama naudotis %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo dabar registruota ir leidžiama naudotis %s.</string>
     <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
@@ -812,6 +815,11 @@
     <string name="cache_description">Aprašymas</string>
     <string name="cache_description_long">Ilgas aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Ši slėptuvė yra stebimų slėptuvių sąraše.</string>
     <string name="cache_watchlist_on_extra">Ši slėptuvė yra jūsų stebimųjų slėptuvių sąraše (stebėtojų: %1d).</string>
     <string name="cache_watchlist_not_on">Šios slėptuvės nėra stebimų slėptuvių sąraše.</string>

@@ -158,6 +158,7 @@
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Nie można nawiązać połączenia ze stroną GeoKrety.org. Strona może nie działać albo nie masz połączenia z internetem.</string>
     <string name="err_login">Brak danych do logowania.</string>
     <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź ustawienia logowania i połączenie z internetem.</string>
@@ -441,7 +442,7 @@
     <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
     <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce.</string>
     <string name="settings_title_offlinedata">Dane offline</string>
-    <string name="settings_summary_offlinedata">Skonfiguruj mapy statyczne i inne miejsca przechowywania danych offline.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Logowanie</string>
     <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -469,6 +470,7 @@
     <string name="settings_goto_url_button">więcej …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktywuj</string>
     <string name="settings_activate_ec">Aktywuj</string>
@@ -691,8 +693,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
@@ -737,6 +738,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">Aplikacja c:geo jest teraz upoważniona do interakcji z %s.</string>
     <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
@@ -812,6 +815,11 @@
     <string name="cache_description">Opis</string>
     <string name="cache_description_long">Długi opis</string>
     <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Ta skrzynka jest na Twojej liście obserwowanych.</string>
     <string name="cache_watchlist_on_extra">Ta skrzynka jest na Twojej liście obserwowanych (Obserwatorzy: %1d).</string>
     <string name="cache_watchlist_not_on">Ta skrzynka nie jest na Twojej liście obserwowanych.</string>

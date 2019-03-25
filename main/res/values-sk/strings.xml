@@ -158,6 +158,7 @@
     <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
     <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Nedá sa pripojiť na GeoKrety.org. Stránka nie je dostupná alebo nie ste pripojení na internet.</string>
     <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
     <string name="err_login_failed_toast">Prepáčte, c:geo sa nepodarilo prihlásiť. c:geo funguje v offline režime. Skontrolujte vaše prihlasovacie údaje v nastaveniach alebo povoľte pripojenie k Internetu.</string>
@@ -441,7 +442,7 @@
     <string name="settings_title_cachedetails">Detaily skrýše</string>
     <string name="settings_summary_cachedetails">Nastavte zobrazovanie detailov skrýše.</string>
     <string name="settings_title_offlinedata">Údaje v režime offline</string>
-    <string name="settings_summary_offlinedata">Nastavte statické mapy a ukladací priestor pre offline dáta.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Zápis logu</string>
     <string name="settings_summary_logging">Nastavte svoj podpis a možnosti logovania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -469,6 +470,7 @@
     <string name="settings_goto_url_button">viac…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktivovať</string>
     <string name="settings_activate_ec">Aktivovať</string>
@@ -691,8 +693,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelit</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyklomapa</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o send2cgeo</string>
@@ -737,6 +738,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:Geo je teraz autorizované komunikovať s %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo  je teraz autorizované pre prístup k %s.</string>
     <string name="err_auth_geokrety_bad_password">Tvoje používateľské meno/heslo je pravdepodobne nesprávne.</string>
@@ -812,6 +815,11 @@
     <string name="cache_description">Popis</string>
     <string name="cache_description_long">Dlhý popis</string>
     <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky. Pre správne zobrazenie bude možno potrebné otvoriť popis v %s.</string>
+    <string name="cache_area_description">Popis oblasti</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Skrýša je vo vašom zozname sledovaných.</string>
     <string name="cache_watchlist_on_extra">Táto skrýša je vo vašom Zozname sledovaných (sledujúci: %1d).</string>
     <string name="cache_watchlist_not_on">Skrýša nie je vo vašom zozname sledovaných.</string>

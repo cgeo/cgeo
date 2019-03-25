@@ -158,6 +158,7 @@
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
     <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Η επικοινωνία με το GeoKrety.org απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_login">Δεν υπάρχουν αποθηκευμένα στοιχεία σύνδεσης</string>
     <string name="err_login_failed_toast">Δεν ήταν δυνατή η σύνδεση του c:geo. Το c:geo λειτουργεί χωρίς σύνδεση με αποθηκευμένες κρύπτες. Ελέγξτε τις ρυθμίσεις σύνδεσης ή ενεργοποιείστε την σύνδεσή σας στο διαδίκτυο.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Λεπτομέρειες Κρύπτης</string>
     <string name="settings_summary_cachedetails">Προσαρμόστε την εμφάνιση πληροφοριών της κρύπτης.</string>
     <string name="settings_title_offlinedata">Δεδομένα χωρίς σύνδεση</string>
-    <string name="settings_summary_offlinedata">Ρυθμίστε τους στατικούς χάρτες και άλλες επιλογές αποθήκευσης χωρίς σύνδεση.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Καταγραφή</string>
     <string name="settings_summary_logging">Ρύθμιση παραμέτρων υπογραφής και των επιλογών σας.</string>
     <string name="settings_title_map">Χάρτης</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">περισσότερα…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Ενεργοποίηση</string>
     <string name="settings_activate_ec">Ενεργοποίηση</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Ποδηλατικός χάρτης</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
     <string name="settings_info_send2cgeo_title">Σχετικά με το send2cgeo</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">Το c:geo είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">Το c:geo τώρα είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με το %s.</string>
     <string name="err_auth_geokrety_bad_password">Το όνομα χρήστη ή ο κωδικός πρόσβασης δεν είναι έγκυρα.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Περιγραφή</string>
     <string name="cache_description_long">Πλήρης περιγραφή</string>
     <string name="cache_description_table_note">Η περιγραφή περιέχει πίνακα μορφοποίησης που μπορεί να χρειαστεί να προβληθεί στο %s για να εμφανιστεί σωστά.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Αυτή η κρύπτη είναι στη λίστα παρακολούθησής σας.</string>
     <string name="cache_watchlist_on_extra">Αυτή η κρύπτη είναι στη λίστα παρακολούθησής σας (παρατηρητές: %1d).</string>
     <string name="cache_watchlist_not_on">Αυτή η κρύπτη δεν είναι στη λίστα παρακολούθησής σας.</string>

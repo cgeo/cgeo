@@ -158,6 +158,7 @@
     <string name="err_parse">Не удалось разобрать страницу входа</string>
     <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
+    <string name="err_server_su">Не удалось соединиться с Geocaching.su, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_gk">Не удается связаться с GeoKrety.org. Веб-сайт может быть недоступен или нет подключения к Интернету.</string>
     <string name="err_login">Нет сохраненной информации о пользователе</string>
     <string name="err_login_failed_toast">Не удается войти. c:geo будет работать оффлайн с сохраненными тайниками. Проверьте настройки входа или включите интернет-соединение.</string>
@@ -441,7 +442,7 @@
     <string name="settings_title_cachedetails">Настройки тайников</string>
     <string name="settings_summary_cachedetails">Настройка отображения тайников.</string>
     <string name="settings_title_offlinedata">Сохраненные данные</string>
-    <string name="settings_summary_offlinedata">Настройка статических карт и других опций сохранения.</string>
+    <string name="settings_summary_offlinedata">Настроить другие места хранения.</string>
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
     <string name="settings_title_map">Карта</string>
@@ -469,6 +470,7 @@
     <string name="settings_goto_url_button">Подробнее…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Активировать</string>
     <string name="settings_activate_ec">Активировать</string>
@@ -539,8 +541,8 @@
     <string name="init_signature_template_number">Номер тайника</string>
     <string name="init_signature_template_owner">Создатель</string>
     <string name="init_signature_template_name">Название тайника</string>
-    <string name="init_signature_template_difficulty">Difficulty</string>
-    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_difficulty">Сложность</string>
+    <string name="init_signature_template_terrain">Местность</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
@@ -691,8 +693,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Карта</string>
     <string name="map_source_osm_offline">Оффлайн</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Подробная информация о send2cgeo</string>
@@ -737,6 +738,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo теперь может взаимодействовать с %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo теперь может взаимодействовать с %s.</string>
     <string name="err_auth_geokrety_bad_password">Логин и\или пароль неверны.</string>
@@ -812,6 +815,11 @@
     <string name="cache_description">Описание</string>
     <string name="cache_description_long">Подробное описание</string>
     <string name="cache_description_table_note">Описание содержит табличное форматирование, для корректного просмотра вам может понадобиться %s.</string>
+    <string name="cache_area_description">Описание местности</string>
+    <string name="cache_cache_description">Описание тайника</string>
+    <string name="cache_virtual_description">\"Виртуальный\" вопрос</string>
+    <string name="cache_traditional_description">Традиционная часть тайника</string>
+    <string name="cache_box_description">Содержимое тайника</string>
     <string name="cache_watchlist_on">Этот тайник в вашем списке Отслеживаемых.</string>
     <string name="cache_watchlist_on_extra">Этот тайник в вашем списке Отслеживаемых (Наблюдателей: %1d).</string>
     <string name="cache_watchlist_not_on">Этот тайник не в Отслеживаемых.</string>
@@ -1517,7 +1525,7 @@
     <string name="confirm_log_title">Особый тип записи</string>
     <string name="confirm_log_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <string name="confirm_report_problem_title">Сообщить о проблеме</string>
-    <string name="confirm_report_problem_message">Вы хотите сообщить \"%s\". Вы уверены?</string>
+    <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Активировать</string>
     <string name="init_geokrety">GeoKrety.org</string>

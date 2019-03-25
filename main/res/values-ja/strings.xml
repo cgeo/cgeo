@@ -158,6 +158,7 @@
     <string name="err_parse">ログインページの解析に失敗しました</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">GeoKrety.orgに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_login">ログイン情報が保存されていません</string>
     <string name="err_login_failed_toast">ログインできません。保存済みキャッシュのみでオフラインで動作します。 ログインの設定を確認したりネット接続を有効にしてください。</string>
@@ -432,7 +433,7 @@
     <string name="settings_title_cachedetails">キャッシュの詳細</string>
     <string name="settings_summary_cachedetails">キャッシュ情報の表示をカスタマイズします。</string>
     <string name="settings_title_offlinedata">オフラインデータ</string>
-    <string name="settings_summary_offlinedata">オフライン地図やオフラインデータ保存の設定。</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">ログ</string>
     <string name="settings_summary_logging">署名やログのオプションの設定。</string>
     <string name="settings_title_map">地図</string>
@@ -460,6 +461,7 @@
     <string name="settings_goto_url_button">詳細…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">有効化</string>
     <string name="settings_activate_ec">有効化</string>
@@ -682,8 +684,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap:Mapnik</string>
-    <string name="map_source_osm_cyclemap">OpenStreetMap:Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">send2cgeoについて</string>
@@ -728,6 +729,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geoは%sと連携するための認証を受けました。</string>
     <string name="err_auth_geokrety_bad_password">ユーザ名/パスワードが正しくないようです。</string>
@@ -785,6 +788,11 @@
     <string name="cache_description">説明</string>
     <string name="cache_description_long">全て表示</string>
     <string name="cache_description_table_note">キャッシュ情報の説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません。</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">このキャッシュはウォッチリストに登録されています。</string>
     <string name="cache_watchlist_on_extra">このキャッシュはあなたのウォッチリストにある (観察者：%1d)。</string>
     <string name="cache_watchlist_not_on">このキャッシュはウォッチリストに登録されていません。</string>

@@ -158,6 +158,7 @@
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
     <string name="err_server">Nevar sazināties ar Geocaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_ec">Nevar sazināties ar Extremcaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Nevar sazināties ar GeoKrety.org. Vietne var būt uz laiku nepieejama vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_login">Nav saglabāta pieteikšanās informācija</string>
     <string name="err_login_failed_toast">c:geo nevar pierakstīties. c:geo darbojas bezsaistē ar saglabātajiem slēpņiem. Pārbaudi ielogošanās iestatījumus vai aktivizē/iespējo interneta savienojumu.</string>
@@ -202,8 +203,8 @@
     <string name="err_tb_not_loggable">Šis ceļotājs nav reģistrējams.</string>
     <string name="err_tb_find">c:geo nevar atrast ceļotāju</string>
     <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
-    <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim Jūs vēlaties pievienot Starpposma punktu.</string>
-    <string name="err_waypoint_add_failed">c:geo neizdevās pievienot tavu Starpposmu.</string>
+    <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim tu vēlies pievienot starpposma punktu.</string>
+    <string name="err_waypoint_add_failed">c:geo neizdevās pievienot tavu starpposmu.</string>
     <string name="err_point_unknown_position">c:geo nevar parādīt, kur jūs atrodaties.</string>
     <string name="err_point_no_position_given_title">Nepieciešama informācija</string>
     <string name="err_point_no_position_given">Aizpildiet vismaz platumu un garumu var arī attālumu ar pagrieziena leņķi. Varat  norādīt visas četras šūnas.</string>
@@ -265,7 +266,7 @@
     <string name="err_trackable_no_preference_activity">Atvainojiet, nevaru atrast piemērotus uzstādījumus ekrānam.</string>
     <string name="confirm_unsaved_changes_title">Izmaiņas nav saglabātas</string>
     <string name="confirm_discard_wp_changes">Vai atsaukt Starpposma izmaiņas?</string>
-    <string name="warn_discard_changes">Iepriekš nesaglabāto Starpposmu izmaiņas nav saglabātas!</string>
+    <string name="warn_discard_changes">Nesaglabāto starpposmu izmaiņas atceltas!</string>
     <string name="err_request_popup_info">c:Geo neizdevās iegūt slēpņa informāciju.</string>
     <string name="warn_log_load_additional_data">c:geo nevarēja ielādēt papildu datus (ceļotāji/favorītpunkti) ieraksta veikšanai.</string>
     <!-- location service -->
@@ -438,7 +439,7 @@
     <string name="settings_title_cachedetails">Slēpņu informācija</string>
     <string name="settings_summary_cachedetails">Pielāgot displeju slēpņa informācijai.</string>
     <string name="settings_title_offlinedata">Bezsaistes dati</string>
-    <string name="settings_summary_offlinedata">Konfigurēt statiskās kartes un citas bezsaistes datu krātuves.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Pierakstīšanās</string>
     <string name="settings_summary_logging">Konfigurē savu parakstu un iestati reģistrācijas ieraksta opcijas.</string>
     <string name="settings_title_map">Karte</string>
@@ -466,6 +467,7 @@
     <string name="settings_goto_url_button">vairāk…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktivizēt</string>
     <string name="settings_activate_ec">Aktivizēt</string>
@@ -557,7 +559,7 @@
     <string name="init_summary_useenglish">Izmantot angļu valodu c:geo (nepieciešama restartēšana)</string>
     <string name="init_exclude">Nerādīt savus un atrastos</string>
     <string name="init_summary_exclude">Nerādīt tev piederošus vai jau atrastos slēpņus</string>
-    <string name="init_showwaypoints">Rādīt Starpposmus</string>
+    <string name="init_showwaypoints">Rādīt starpposmus</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
@@ -576,7 +578,7 @@
     <string name="init_backup">Rezerves kopija</string>
     <string name="init_backup_backup">Izveidot rezerves kopiju</string>
     <string name="init_backup_running">Notiek slēpņu rezerves kopijas izveide…</string>
-    <string name="init_backup_note">Lūdzu, ņem vērā, ka šis funkcija atjaunos datu bāzi, kas satur slēpņus un Starpposmus, bet ne tavus iestatījumus.\nTavi pieteikšanās dati un paroles nekādā gadījumā nepazudīs no aplikācijas datiem.</string>
+    <string name="init_backup_note">Lūdzu, ņem vērā, ka šis funkcija atjaunos datu bāzi, kas satur slēpņus un starpposmus, bet ne tavus iestatījumus.\nTavi pieteikšanās dati un paroles nekādā gadījumā nepazudīs no aplikācijas datiem.</string>
     <string name="init_backup_restore">Atjaunot</string>
     <string name="init_backup_success">c:geo datubāze tika veiksmīgi kopēta uz:</string>
     <string name="init_backup_failed">c:geo datubāzes rezerves kopijas izveide neizdevās.</string>
@@ -688,8 +690,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Bezsaistes režīmā</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info par send2cgeo</string>
@@ -734,6 +735,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo tagad ir atļauja sazināties ar %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo tagad ir atļauja sazināties ar %s.</string>
     <string name="err_auth_geokrety_bad_password">Tavs lietotājvārds/parole, šķiet nederīgs.</string>
@@ -803,6 +806,11 @@
     <string name="cache_description">Apraksts</string>
     <string name="cache_description_long">Garš apraksts</string>
     <string name="cache_description_table_note">Apraksts satur tabulas formatējumu, kuru, iespējams, vajadzēs apskatīt %s, lai redzētu pareizi.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Tu novēro šo slēpni.</string>
     <string name="cache_watchlist_on_extra">Šis slēpnis atrodas tavā sarakstā ar novērojamajiem (Novērotāji: %1d).</string>
     <string name="cache_watchlist_not_on">Šis slēpnis nav tavā sarakstā ar novērojamajiem slēpņiem.</string>
@@ -834,7 +842,7 @@
     <string name="cache_dialog_loading_details_status_details">Apstrādā informāciju</string>
     <string name="cache_dialog_loading_details_status_spoilers">Ielādē \"spoiler\" attēlus</string>
     <string name="cache_dialog_loading_details_status_logs">Ielādē ierakstus</string>
-    <string name="cache_dialog_loading_details_status_waypoints">Apstrādā Starpposmus</string>
+    <string name="cache_dialog_loading_details_status_waypoints">Apstrādā starpposmus</string>
     <string name="cache_dialog_loading_details_status_gcvote">Ielādē GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Apkopo datus</string>
     <string name="cache_dialog_loading_details_status_render">Gatavo attēlošanai</string>
@@ -932,7 +940,7 @@
     <string name="cache_image">Attēls</string>
     <string name="cache_image_open_file">Atvērt kā failu</string>
     <string name="cache_image_open_browser">Atvērt pārlūkprogrammā</string>
-    <string name="cache_image_add_waypoint">Pievienot Stapposmu</string>
+    <string name="cache_image_add_waypoint">Pievienot starpposmu</string>
     <string name="cache_image_background">Slēpņu sarakstu fona attēls</string>
     <string name="cache_share_field">Dalīties</string>
     <string name="cache_time_full_hours">plkst.</string>
@@ -951,7 +959,7 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches">Ielādē slēpņus no .gpx faila</string>
     <string name="gpx_import_loading_caches_with_filename">Ielādē slēpņus no %1$s</string>
-    <string name="gpx_import_loading_waypoints">Ielādē Starpposmu failu</string>
+    <string name="gpx_import_loading_waypoints">Ielādē starpposmu failu</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ielādē starpposmus no %1$s</string>
     <string name="gpx_import_caches_imported">slēpņi importēti</string>
     <string name="gpx_import_caches_imported_with_filename">importēti %1$d slēpņi no %2$s</string>
@@ -994,14 +1002,14 @@
     <string name="waypoint_copy_coordinates">Kopēt koordinātas</string>
     <string name="waypoint_clear_coordinates">Dzēst koordinātas</string>
     <string name="waypoint_delete">Dzēst</string>
-    <string name="waypoint_edit_title">Rediģēt Starpposmu</string>
-    <string name="waypoint_add_title">Pievienot Starpposmu</string>
+    <string name="waypoint_edit_title">Rediģēt starpposmu</string>
+    <string name="waypoint_add_title">Pievienot starpposmu</string>
     <string name="waypoint_note">Piezīme</string>
     <string name="waypoint_user_note">Lietotāja piezīme</string>
     <string name="waypoint_visited">Apmeklēts</string>
     <string name="waypoint_save">Saglabāt</string>
     <string name="waypoint_cancel_edit">Atcelt</string>
-    <string name="waypoint_loading">Ielādē Starpposmu…</string>
+    <string name="waypoint_loading">Notiek starpposma ielāde…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Neizmainīt slēpņa koordinātas</string>
     <string name="waypoint_set_as_cache_coords">Iestatīt kā slēpņa koordinātas iekš c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Iestatīt kā slēpņa koordinātas c:geo un mājas lapā</string>
@@ -1058,7 +1066,7 @@
     <string name="live_map_notification">Koordinātas tiešsaistes kartē ne vienmēr var būt precīzas. Iespējamās neprecīzās koordinātas ir atzīmētas ar oranžu apli.\nAtverot slēpņa informāciju vai saglabājot slēpni lietošanai bezsaistē iegūsiet precīzas koordinātas.\n\nVairāk informācijas varat atrast aplikācijas sadaļā \"Par c:geo\"</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <string name="map_routing">Maršrutēšana</string>
-    <string name="map_routing_straight">Taisnā līnijā</string>
+    <string name="map_routing_straight">Taisna līnija</string>
     <string name="map_routing_walk">Kājām</string>
     <string name="map_routing_bike">Ar velo</string>
     <string name="map_routing_car">Ar auto</string>
@@ -1134,7 +1142,7 @@
     <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
     <string name="user_menu_send_message">Nosūtīt ziņu</string>
     <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>
-    <string name="user_unknown">Unknown user</string>
+    <string name="user_unknown">Nezināms lietotājs</string>
     <!-- navigation -->
     <string name="navigation">Navigācija</string>
     <string name="compass_title">Kompass</string>

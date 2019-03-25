@@ -158,6 +158,7 @@
     <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
     <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">No s\'ha pogut contactar amb GeoKrety.org. La pàgina web pot haver caigut o la connexió a internet no funciona.</string>
     <string name="err_login">No hi ha desada cap informació d\'accés</string>
     <string name="err_login_failed_toast">El c:geo no pot iniciar la sessió. El c:geo treballa fora línia amb els catxés desats. Comproveu la configuració de la connexió o activeu la connexió a Internet.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Detalls del catxé</string>
     <string name="settings_summary_cachedetails">Personalitza la pantalla d\'informació del catxé.</string>
     <string name="settings_title_offlinedata">Dades fora de línia</string>
-    <string name="settings_summary_offlinedata">Configura els  mapes estàtics i altres dades de fora de línia.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Registre</string>
     <string name="settings_summary_logging">Configura la signatura i el conjunt d\'opcions de connexió.</string>
     <string name="settings_title_map">Mapa</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">més…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Activa</string>
     <string name="settings_activate_ec">Activa</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: mapa</string>
     <string name="map_source_google_satellite">Google: satèl·lit</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">El c:geo ara està autoritzat a interactuar amb %s.</string>
     <string name="err_auth_geokrety_bad_password">El seu nom d\'usuari/contrasenya no és correcte.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Descripció</string>
     <string name="cache_description_long">Descripció llarga</string>
     <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Aquest catxé és a la vostra llista de seguiment.</string>
     <string name="cache_watchlist_on_extra">Aquest catxé està a la llista de seguiment (Seguidors: %1d).</string>
     <string name="cache_watchlist_not_on">Aquest catxé no és a la vostra llista de seguiment.</string>

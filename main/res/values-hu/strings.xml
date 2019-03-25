@@ -68,9 +68,9 @@
     <string name="log_maintained">Karbantartás történt</string>
     <string name="log_maintenance_needed">Karbantartás szükséges</string>
     <string name="log_update">Frissített koordináták</string>
-    <string name="log_archived">Archiválás</string>
-    <string name="log_unarchived">Archiválás törölve</string>
-    <string name="log_needs_archived">Archiválás szükséges</string>
+    <string name="log_archived">Megszüntetés</string>
+    <string name="log_unarchived">Visszaállítás</string>
+    <string name="log_needs_archived">Megszüntetendő</string>
     <string name="log_discovered">Felfedezve</string>
     <string name="log_reviewer">Megjegyzés az elbíráláshoz</string>
     <string name="log_submit_for_review">Beküldés elbírálásra</string>
@@ -84,7 +84,7 @@
     <string name="log_tb_grabbed">Mástól átvéve</string>
     <string name="log_tb_note">Megjegyzés</string>
     <string name="log_tb_discovered">Felfedezve</string>
-    <string name="log_tb_archived">Archiválva</string>
+    <string name="log_tb_archived">Megszüntetve</string>
     <string name="log_save">Offline mentés</string>
     <string name="log_saving">Log mentése…</string>
     <string name="log_saving_and_uploading">Log küldése és kép feltöltése…</string>
@@ -158,6 +158,7 @@
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
     <string name="err_server">A geocaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_ec">Az extremcaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
+    <string name="err_server_su">A geocaching.su. nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_gk">A geokrety.org nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_login">Hiányzó bejelentkezési adat</string>
     <string name="err_login_failed_toast">A c:geo nem tud bejelentkezni. A c:geo hálózat nélküli módban fut. Ellenőrizd a bejelentkezési adataidat a beállításoknál vagy engedélyezd az internetkapcsolatot!</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Ládaadatok</string>
     <string name="settings_summary_cachedetails">A ládák megjelenő adatainak beállítása.</string>
     <string name="settings_title_offlinedata">Offline adatok</string>
-    <string name="settings_summary_offlinedata">Statikus térképek és más offline adatok tarolásának beállítása</string>
+    <string name="settings_summary_offlinedata">Egyéb offline adatok tárolójának beállítása.</string>
     <string name="settings_title_logging">Logolás</string>
     <string name="settings_summary_logging">Aláírásod és egyéb logolási opciók beállítása</string>
     <string name="settings_title_map">Térkép</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">Tovább…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktiválás</string>
     <string name="settings_activate_ec">Aktiválás</string>
@@ -567,7 +569,7 @@
     <string name="init_log_offline">Offline logolás</string>
     <string name="init_summary_log_offline">Offline logolás használata (logoláskor nem jelenik meg az online log ablak, nem töltődik fel a log)</string>
     <string name="init_choose_list">Listaválasztás</string>
-    <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
+    <string name="init_summary_choose_list">Listaválasztás ládamentéskor</string>
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
     <string name="init_summary_livelist">Ládák irányának jelzése a listán</string>
     <string name="init_backup">Biztonsági mentés</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Térkép</string>
     <string name="map_source_google_satellite">Google: Műholdkép</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Biciklis térkép</string>
+    <string name="map_source_osm_mapnik">OSM: Térkép</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Információ a send2cgeo-ról</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">%s: A c:geo engedélyt kapott az együttműködésre.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <string name="err_auth_geokrety_bad_password">A felhasználóneved/jelszavad helytelennek tűnik.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Leírás</string>
     <string name="cache_description_long">Hosszú leírás</string>
     <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
+    <string name="cache_area_description">Terület leírása</string>
+    <string name="cache_cache_description">Láda leírása</string>
+    <string name="cache_virtual_description">Virtuális kérdés</string>
+    <string name="cache_traditional_description">Hagyományos rész</string>
+    <string name="cache_box_description">Doboz tartalma</string>
     <string name="cache_watchlist_on">Ez a láda a figyelőlistádon van.</string>
     <string name="cache_watchlist_on_extra">Ez a láda a figyelőlistádon van (figyelők száma: %1d).</string>
     <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
@@ -848,7 +856,7 @@
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
     <string name="cache_menu_navigation_transit">Tömegközlekedési navigáció</string>
     <string name="cache_menu_navigation_bike">Biciklis navigáció</string>
-    <string name="cache_menu_maps_directions">Google Térkép Útvonalak</string>
+    <string name="cache_menu_maps_directions">Google Térkép</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (séta)</string>
     <string name="cache_menu_sygic_drive">Sygic (vezetés)</string>
@@ -889,7 +897,7 @@
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_never_found">Szűz láda</string>
     <string name="cache_found_last_30_days">Megtalálva az elmúlt 30 napban</string>
-    <string name="cache_status_archived">Archiválva</string>
+    <string name="cache_status_archived">Megszüntetve</string>
     <string name="cache_status_disabled">Letiltva</string>
     <string name="cache_status_premium">Csak prémium tagoknak</string>
     <string name="cache_status_not_premium">Minden tag számára</string>
@@ -1100,7 +1108,7 @@
     <string name="trackable_spotted_at_user"></string>
     <string name="trackable_spotted_unknown_location">Ismeretlen helyen</string>
     <string name="trackable_spotted_owner">A tulajdonosnál</string>
-    <string name="trackable_spotted_archived">Archiválva</string>
+    <string name="trackable_spotted_archived">Megszüntetve</string>
     <string name="trackable_origin">Indítás helye</string>
     <string name="trackable_unknown">Ismeretlen</string>
     <string name="trackable_released">Indítás ideje</string>
@@ -1377,7 +1385,7 @@
     <string name="attribute_arithmetic_no">Nem számtani feladat</string>
     <string name="attribute_other_cache_yes">Egyéb ládatípus</string>
     <string name="attribute_other_cache_no">Nem egyéb ládatípus</string>
-    <string name="attribute_ask_owner_yes">Tulajdonost megkérdezni az indulási feltételekről</string>
+    <string name="attribute_ask_owner_yes">Tulajdonos megkérdezése az indulási feltételekről</string>
     <string name="attribute_ask_owner_no">Tulajdonost nem kell megkérdezni az indulási feltételekről</string>
     <string name="attribute_unknown_yes">Ismeretlen tulajdonság</string>
     <string name="attribute_unknown_no">Nincs ismeretlen tulajdonság</string>
@@ -1435,7 +1443,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Úgy tűnik, az Android 4.1-es verziójánál régebbit használsz. Lehetséges, hogy a c:geo jövőbeli frissítései nem lesznek elérhetők az eszközödre.</string>
+    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Beszélő iránytű</string>
     <string name="tts_start">Beszéd indítása</string>
@@ -1481,7 +1489,7 @@
     <string name="create_shortcut">Parancsikon létrehozása</string>
     <string name="send">Küldés</string>
     <string name="confirm_log_title">Speciális bejegyzéstípus</string>
-    <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan vagy benne?</string>
+    <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
     <string name="confirm_report_problem_title">Probléma jelentése</string>
     <string name="confirm_report_problem_message">Jelenteni akarod: \'%s\'. Biztosan vagy benne?</string>
     <!-- Geokrety -->

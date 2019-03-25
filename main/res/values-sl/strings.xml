@@ -158,6 +158,7 @@
     <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
     <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_ec">Povezava z Extremcaching.com ni uspela. Lahko vam povezava ne deluje ali pa je stran nedosegljiva.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Ne morem se povezati na GeoKrety.org. Spletna stran je lahko nedosegljiva ali pa ne deluje internetna povezava.</string>
     <string name="err_login">Prijavni podatki niso shranjeni</string>
     <string name="err_login_failed_toast">c:geo se ne more prijaviti. c:geo lahko deluje v načinu brez povezave s shranjenimi zakladi. Preverite vaše prijavne podatke in internetno povezavo.</string>
@@ -441,7 +442,7 @@
     <string name="settings_title_cachedetails">Podrobnosti zaklada</string>
     <string name="settings_summary_cachedetails">Customize the display of cache information.</string>
     <string name="settings_title_offlinedata">Podatki brez povezave</string>
-    <string name="settings_summary_offlinedata">Configure static maps and other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Zapisovanje</string>
     <string name="settings_summary_logging">Configure your signature and set logging options.</string>
     <string name="settings_title_map">Zemljevid</string>
@@ -469,6 +470,7 @@
     <string name="settings_goto_url_button">več …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktiviraj</string>
     <string name="settings_activate_ec">Aktiviraj</string>
@@ -691,8 +693,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
     <string name="map_source_google_satellite">Google: Satelitska slika</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Kolesarski zemljevid</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Zemljevid brez povezave</string>
     <string name="init_sendToCgeo">Pošlji v c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacije o send2cgeo</string>
@@ -737,6 +738,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo is now authorized to interact with %s.</string>
     <string name="err_auth_geokrety_bad_password">Your username/password seems invalid.</string>
@@ -812,6 +815,11 @@
     <string name="cache_description">Opis</string>
     <string name="cache_description_long">Daljši opis</string>
     <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Zaklad je na vašem spisku nadzorov.</string>
     <string name="cache_watchlist_on_extra">This cache is on your watchlist (Watchers: %1d).</string>
     <string name="cache_watchlist_not_on">Zaklad ni na vašem spisku nadzorov.</string>

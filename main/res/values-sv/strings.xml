@@ -158,6 +158,7 @@
     <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
     <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
     <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha problem eller så fungerar inte din internet-anslutning.</string>
+    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Det gick inte att kontakta GeoKrety.org. Webbplatsen kan vara nere eller så fungerar inte din internet-anslutning.</string>
     <string name="err_login">Inloggningsinformationen ej sparad</string>
     <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Cachedetaljer</string>
     <string name="settings_summary_cachedetails">Anpassa utseende på cacheinformation.</string>
     <string name="settings_title_offlinedata">Offlinedata</string>
-    <string name="settings_summary_offlinedata">Konfigurera statiska kartor och annan offline datalagring.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Loggning</string>
     <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
     <string name="settings_title_map">Karta</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">mer …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktivera</string>
     <string name="settings_activate_ec">Aktivera</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
@@ -703,7 +704,7 @@
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_check">Kolla autentisering</string>
     <string name="auth_check_again">Kolla autentisering igen</string>
-    <string name="auth_start">Påbörja koppling mot Twitter</string>
+    <string name="auth_start">Kolla autentisering</string>
     <string name="auth_again">Koppla mot Twitter igen</string>
     <string name="auth_register">Skapa ett konto</string>
     <string name="auth_connected">Ansluten</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo är nu godkänd för att kommunicera med %s.</string>
     <string name="err_auth_geokrety_bad_password">Ditt användarnamn/lösenord verkar felaktigt.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_long">Lång beskrivning</string>
     <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
+    <string name="cache_area_description">Area Description</string>
+    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_virtual_description">Virtual Question</string>
+    <string name="cache_traditional_description">Traditional Part</string>
+    <string name="cache_box_description">Box Content</string>
     <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
     <string name="cache_watchlist_on_extra">Denna cache är på din bevakningslista. (Bevakare: %1d)</string>
     <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>

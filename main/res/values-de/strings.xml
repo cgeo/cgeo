@@ -158,6 +158,7 @@
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
     <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
+    <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden (Server oder Verbindung inaktiv?).</string>
     <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
     <string name="err_login">Keine Anmeldedaten gespeichert.</string>
     <string name="err_login_failed_toast">c:geo konnte sich nicht anmelden und arbeitet im Offline-Modus. Bitte die Anmeldedaten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
@@ -435,7 +436,7 @@
     <string name="settings_title_cachedetails">Cache-Details</string>
     <string name="settings_summary_cachedetails">Anpassung der Anzeige von Cache-Informationen.</string>
     <string name="settings_title_offlinedata">Offline-Daten</string>
-    <string name="settings_summary_offlinedata">Einstellungen für statische Karten und andere Offline-Daten.</string>
+    <string name="settings_summary_offlinedata">Konfigurieren Sie einen anderen Offline-Datenspeicher.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Einstellungen für Signatur und Log-Optionen.</string>
     <string name="settings_title_map">Karte</string>
@@ -463,6 +464,7 @@
     <string name="settings_goto_url_button">mehr …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktivieren</string>
     <string name="settings_activate_ec">Aktivieren</string>
@@ -617,7 +619,7 @@
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
     <string name="init_debug">Debug-Log aktivieren</string>
-    <string name="init_dbonsdcard_title">Datenspeicherung</string>
+    <string name="init_dbonsdcard_title">Speicherort der Datenbank</string>
     <string name="init_dbonsdcard_note">Sie können die Datenbank von c:geo entweder systemintern oder in einem benutzerdefiniertem Verzeichnis speichern. Je nach Konfiguration des Gerätes kann die Speicherung im Benutzerbereich internen Speicherplatz freigeben, aber Sie verlieren etwas Leistung und c:geo wird nicht funktionieren, wenn der Benutzerspeicher nicht verfügbar ist oder die Datenbank-Datei gelöscht wird.</string>
     <string name="init_dbonsdcard">Im Benutzerspeicher</string>
     <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
@@ -685,8 +687,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-    <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
+    <string name="map_source_osm_mapnik">OSM: Karte</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
@@ -731,6 +732,8 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
+    <!-- auth geocaching.su -->
+    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo ist nun autorisiert mit %s zu kommunizieren.</string>
     <string name="err_auth_geokrety_bad_password">Dein Benutzername/Passwort scheint ungültig zu sein.</string>
@@ -794,6 +797,11 @@
     <string name="cache_description">Beschreibung</string>
     <string name="cache_description_long">Ausführliche Beschreibung</string>
     <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
+    <string name="cache_area_description">Bereichsbeschreibung</string>
+    <string name="cache_cache_description">Cachebeschreibung</string>
+    <string name="cache_virtual_description">Virtuelle Frage</string>
+    <string name="cache_traditional_description">Traditioneller Teil</string>
+    <string name="cache_box_description">Box-Inhalt</string>
     <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
     <string name="cache_watchlist_on_extra">Dieser Cache ist auf deiner Watchlist (Beobachter: %1d).</string>
     <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
@@ -1488,7 +1496,7 @@
     <string name="settings_activate_geokrety">Aktivieren</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
-    <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
+    <string name="init_summary_geokrety">Lade Trackables von GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
     <string name="init_geokrety_register_ok">Anmeldung OK</string>
     <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
