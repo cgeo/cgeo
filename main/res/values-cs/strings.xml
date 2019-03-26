@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
     <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
@@ -430,6 +431,7 @@
     <string name="about_system_info">c:geo systémové informace</string>
     <string name="about_system_info_send_chooser">Odeslat systémové informace</string>
     <string name="changelog_github">Seznam všech změn</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -560,6 +562,8 @@
     <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
     <string name="init_showwaypoints">Zobrazovat body trasy na Aktivní mapě</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich body trasy.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
@@ -1598,4 +1602,9 @@
     <string name="err_logimage_caption_required">Obrázek musí mít titulek</string>
     <string name="waypoint_latitude_null">S/J – ° –.---</string>
     <string name="waypoint_longitude_null">V/Z – ° –.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

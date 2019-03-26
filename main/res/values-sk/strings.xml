@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Zmena stavu \"Obľúbená\" zlyhala.</string>
     <string name="err_select_logimage_failed">Výber obrázka pre log zlyhal.</string>
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
     <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
@@ -430,6 +431,7 @@
     <string name="about_system_info">c:geo systémové informácie</string>
     <string name="about_system_info_send_chooser">Odoslať systémové informácie</string>
     <string name="changelog_github">Zoznam všetkých zmien</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>
@@ -560,6 +562,8 @@
     <string name="init_summary_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
     <string name="init_showwaypoints">Body trasy na mape</string>
     <string name="init_showwaypoint_description">Ak je na mape zobrazený menší počet skrýš, ako je tento, zobrazia sa aj body trás (waypoints).</string>
+    <string name="init_brouterThreshold">Vypočítať trasu</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Nezobrazovať deaktivované</string>
     <string name="init_summary_disabled">Nezobrazovať deaktivované skrýše</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
@@ -1598,4 +1602,9 @@
     <string name="err_logimage_caption_required">Obrázok musí mať popis</string>
     <string name="waypoint_latitude_null">S/J --° --.---</string>
     <string name="waypoint_longitude_null">V/Z --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Zavrieť aplikáciu</string>
+    <string name="ask_again">Opýtať sa znova</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

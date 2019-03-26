@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">c:geo ne peut pas modifier le status de favori.</string>
     <string name="err_select_logimage_failed">La sélection d\'une image pour la visite a échoué.</string>
     <string name="err_acquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
     <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
@@ -424,6 +425,7 @@
     <string name="about_system_info">Informations système de c:geo</string>
     <string name="about_system_info_send_chooser">Envoyer les informations système</string>
     <string name="changelog_github">Liste de toutes les modifications</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -554,6 +556,8 @@
     <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_showwaypoints">Points intermédiaires</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_save_log_img">Enregistrer les images</string>
@@ -1106,7 +1110,7 @@
     <string name="trackable_travelbug">Objet voyageur</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Statut</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Traditionnelle</string>
     <string name="geokret_type_book_or_media">Livre ou média électronique</string>
@@ -1554,4 +1558,9 @@
     <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

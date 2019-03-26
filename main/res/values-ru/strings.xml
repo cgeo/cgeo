@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Изменение рекомендации не удалось.</string>
     <string name="err_select_logimage_failed">Выбор изображения для записи не удался.</string>
     <string name="err_acquire_image_failed">Ошибка при загрузке изображения.</string>
+    <string name="err_unsupported_image_format">Неподдерживаемый формат изображения.</string>
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
     <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
@@ -430,6 +431,7 @@
     <string name="about_system_info">Служебная информация c:geo</string>
     <string name="about_system_info_send_chooser">Отправить служебную информацию</string>
     <string name="changelog_github">Список всех изменений</string>
+    <string name="about_nutshellmanual">Оффлайн руководство</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Открыть настройки?</string>
     <string name="settings_title_services">Сервисы</string>
@@ -560,6 +562,8 @@
     <string name="init_summary_exclude">Исключить ваши собственные и найденные вами тайники</string>
     <string name="init_showwaypoints">Показ путевых точек</string>
     <string name="init_showwaypoint_description">Если на карте меньше заданного числа тайников, то их этапы будут показаны автоматически.</string>
+    <string name="init_brouterThreshold">Вычислить путь</string>
+    <string name="init_brouterThreshold_description">Максимальное расстояние, до которого brouter будет прокладывать маршрут (если установлен).</string>
     <string name="init_disabled">Исключить тайники вне игры</string>
     <string name="init_summary_disabled">Исключить тайники вне игры</string>
     <string name="init_save_log_img">Сохранять изображения</string>
@@ -1598,4 +1602,9 @@
     <string name="err_logimage_caption_required">Необходимо добавить подпись для изображения</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Закрыть приложение</string>
+    <string name="ask_again">Спросить снова</string>
+    <string name="location_permission_request_explanation">c:geo необходим доступ к GPS чтобы определять ваше местоположение и отображать дистанцию и направление к тайникам. Приложение не может быть использовано без этого разрешения.</string>
+    <string name="storage_permission_request_explanation">c:geo необходим доступ к памяти телефона или SD карте, чтобы сохранять тайники, а также для чтения оффлайн карт и экспорта\импорта тайников. Приложение не может быть использовано без этого разрешения.</string>
 </resources>

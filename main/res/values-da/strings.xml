@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Ændring af favoritstatus mislykkedes.</string>
     <string name="err_select_logimage_failed">Valg af billede til logbeskeden mislykkedes.</string>
     <string name="err_acquire_image_failed">Optagelse af et billede mislykkedes.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">c:geo kan ikke vise den forespurgte Trackable. Er det virkelig en Trackable?</string>
     <string name="err_tb_details_open">c:geo kan ikke åbne Trackable-detaljer.</string>
     <string name="err_tb_not_loggable">Denne trackable kan ikke logges.</string>
@@ -424,6 +425,7 @@
     <string name="about_system_info">c:geo systeminformation</string>
     <string name="about_system_info_send_chooser">Send systeminformation</string>
     <string name="changelog_github">Liste over alle ændringer</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Åbn indstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -554,6 +556,8 @@
     <string name="init_summary_exclude">Udelad egne og fundne cacher</string>
     <string name="init_showwaypoints">Vis waypoints</string>
     <string name="init_showwaypoint_description">Hvis der vises færre end dette antal cacher på kortet, vil de tilhørende waypoints også blive vist.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Udelad deaktiverede cacher</string>
     <string name="init_summary_disabled">Udelad deaktiverede cacher</string>
     <string name="init_save_log_img">Lagring af billeder</string>
@@ -1554,4 +1558,9 @@
     <string name="err_logimage_caption_required">Der skal indtastes en billedtekst til billedet</string>
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">Ø/V --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

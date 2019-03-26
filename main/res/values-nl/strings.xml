@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Wijzigen favorieten status is mislukt.</string>
     <string name="err_select_logimage_failed">Selecteren van een foto voor het log is mislukt.</string>
     <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
+    <string name="err_unsupported_image_format">Beeldformaat niet ondersteund.</string>
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
     <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
@@ -424,6 +425,7 @@
     <string name="about_system_info">c:geo systeeminformatie</string>
     <string name="about_system_info_send_chooser">Verzend systeeminformatie</string>
     <string name="changelog_github">Lijst met alle wijzigingen</string>
+    <string name="about_nutshellmanual">Online handleiding</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -554,6 +556,8 @@
     <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
+    <string name="init_brouterThreshold">Route berekenen</string>
+    <string name="init_brouterThreshold_description">Maximale afstand tot welke brouter helper app (indien geïnstalleerd) een route zal berekenen.</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
@@ -1554,4 +1558,9 @@
     <string name="err_logimage_caption_required">Een bijschrift is vereist voor de afbeelding</string>
     <string name="waypoint_latitude_null">N/Z --° --.---</string>
     <string name="waypoint_longitude_null">O/W --° --.---</string>
+    <!-- permission handling -->
+    <string name="close_app">App sluiten</string>
+    <string name="ask_again">Opnieuw vragen</string>
+    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS op je apparaat om je positie te vinden en afstand en richting te berekenen naar geocaches. Het kan niet worden gebruikt zonder deze toestemming.</string>
+    <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
 </resources>

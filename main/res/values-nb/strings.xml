@@ -196,6 +196,7 @@
     <string name="err_favorite_failed">Endring av favorittstatus mislyktes.</string>
     <string name="err_select_logimage_failed">Valg av bilde til loggen mislyktes.</string>
     <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
+    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
     <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
     <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
@@ -424,6 +425,7 @@
     <string name="about_system_info">Systeminformasjon for c:geo</string>
     <string name="about_system_info_send_chooser">Send systeminformasjon</string>
     <string name="changelog_github">Liste over alle endringer</string>
+    <string name="about_nutshellmanual">Online manual</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Åpne innstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -554,6 +556,8 @@
     <string name="init_summary_exclude">Ekskluder egne og funnede cacher fra kartet</string>
     <string name="init_showwaypoints">Vis veipunkter</string>
     <string name="init_showwaypoint_description">Hvis færre enn et gitt antall cacher vises på kartet, vil veipunktene som hører til også vises.</string>
+    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Ekskluder deaktiverte cacher</string>
     <string name="init_summary_disabled">Ekskluder deaktiverte cacher</string>
     <string name="init_save_log_img">Lagre bilder</string>
@@ -1554,4 +1558,9 @@
     <string name="err_logimage_caption_required">Du må skrive inn tittel på bildet</string>
     <string name="waypoint_latitude_null">N/S--°--.---</string>
     <string name="waypoint_longitude_null">Ø/V--°--.---</string>
+    <!-- permission handling -->
+    <string name="close_app">Close app</string>
+    <string name="ask_again">Ask me again</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>
