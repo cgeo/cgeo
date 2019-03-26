@@ -470,8 +470,8 @@ static def isContinuousIntegrationServer() {
  * have a run task for our builds to launch the app directly from gradle
  */
 android.applicationVariants.all { variant ->
-    if (variant.install) {
-        tasks.create(name: "run${variant.name.capitalize()}", dependsOn: variant.install) {
+    if (variant.installProvider) {
+        tasks.create(name: "run${variant.name.capitalize()}", dependsOn: variant.installProvider.get()) {
             group 'cgeo'
             description "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
 
