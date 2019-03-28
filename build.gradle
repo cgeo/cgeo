@@ -124,6 +124,10 @@ allprojects {
                         if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
                             selection.reject("3.0.1 is not an upgrade of 3.0.1u2")
                         }
+                        // Apache Commons IO 2.6 fails in FileUtils.deleteDirectory()
+                        if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
+                            selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime.")
+                        }
                     }
                 }
             }
