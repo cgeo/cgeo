@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.su;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -15,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import junit.framework.Assert;
 
 public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 
@@ -127,139 +128,136 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         return SuParser.parseCaches(actualObj);
     }
 
-
     public void testCanParseCacheJsonCacheId() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals("3749", cache.getCacheId());
+        assertThat(cache.getCacheId()).isEqualTo("3749");
     }
 
     public void testCanParseCacheJsonCacheName() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals("Крестовоздвиженский монастырь", cache.getName());
+        assertThat(cache.getName()).isEqualTo("Крестовоздвиженский монастырь");
     }
 
     public void testCanParseCacheJsonCoords() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(new Geopoint(55.51, 37.853333), cache.getCoords());
+        assertThat(cache.getCoords()).isEqualTo(new Geopoint(55.51, 37.853333));
     }
 
     public void testCanParseCacheJsonDescriptionArea() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.getDescription().contains("area description"));
+        assertThat(cache.getDescription()).contains("area description");
     }
 
     public void testCanParseCacheJsonDescriptionCache() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.getDescription().contains("благодарность"));
+        assertThat(cache.getDescription()).contains("благодарность");
     }
 
     public void testCanParseCacheJsonDescriptionTrCache() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.getDescription().contains("Спрятан"));
+        assertThat(cache.getDescription()).contains("Спрятан");
     }
 
     public void testCanParseCacheJsonDescriptionViCache() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.getDescription().contains("Значение"));
+        assertThat(cache.getDescription()).contains("Значение");
     }
 
     public void testCanParseCacheJsonDescriptionContains() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.getDescription().contains("Карандаш"));
+        assertThat(cache.getDescription()).contains("Карандаш");
     }
 
     public void testCanParseCacheJsonTerrain() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(5f, cache.getTerrain());
+        assertThat(cache.getTerrain()).isEqualTo(5f);
     }
 
     public void testCanParseCacheJsonDifficulty() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(1f, cache.getDifficulty());
+        assertThat(cache.getDifficulty()).isEqualTo(1f);
     }
 
     public void testCanParseCacheJsonAuthorName() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals("Инструктор", cache.getOwnerDisplayName());
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("Инструктор");
     }
 
     public void testCanParseCacheJsonAuthorId() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals("20", cache.getOwnerUserId());
+        assertThat(cache.getOwnerUserId()).isEqualTo("20");
     }
 
     public void testCanParseCacheJsonCode() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals("TR3749", cache.getGeocode());
+        assertThat(cache.getGeocode()).isEqualTo("TR3749");
     }
 
     public void testCanParseCacheJsonSize() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(CacheSize.SMALL, cache.getSize());
+        assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
     }
 
     public void testCanParseFounds() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(23, (int) cache.getLogCounts().get(LogType.FOUND_IT));
+        assertThat(cache.getLogCounts().get(LogType.FOUND_IT)).isEqualTo(23);
     }
 
     public void testCanParseNotFounds() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(12, (int) cache.getLogCounts().get(LogType.DIDNT_FIND_IT));
+        assertThat(cache.getLogCounts().get(LogType.DIDNT_FIND_IT)).isEqualTo(12);
     }
 
     public void testCanParseLogs() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(7, cache.getLogs().size());
+        assertThat(cache.getLogs()).hasSize(7);
     }
 
     public void testCanParseNoLogs() throws Exception {
         parseCache(simpleCache);
-        Assert.assertEquals(0, cache.getLogs().size());
+        assertThat(cache.getLogs()).isEmpty();
     }
 
     public void testCanParseLogAuthor() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals("LE", cache.getLogs().get(0).author);
+        assertThat(cache.getLogs().get(0).author).isEqualTo("LE");
     }
 
     public void testCanParseLogText() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.getLogs().get(0).log.contains("Рыть глубоко"));
+        assertThat(cache.getLogs().get(0).log).contains("Рыть глубоко");
     }
 
     public void testCanParseLogType() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(LogType.OWNER_MAINTENANCE, cache.getLogs().get(2).getType());
+        assertThat(cache.getLogs().get(2).getType()).isEqualTo(LogType.OWNER_MAINTENANCE);
     }
 
     public void testCanParseLogDateTime() throws Exception {
         parseCache(cacheJson);
 
         final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        final Date date = isoFormat.parse("2018-10-20 18:12:46");
-        Assert.assertEquals(date, new Date(cache.getLogs().get(0).date));
+        assertThat(new Date(cache.getLogs().get(0).date)).isEqualTo(isoFormat.parse("2018-10-20 18:12:46"));
     }
 
     public void testCanParseOwnLogs() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(true, cache.getLogs().get(1).friend);
+        assertThat(cache.getLogs().get(1).friend).isTrue();
     }
 
     public void testCanByDefaultLogsNotOwned() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(false, cache.getLogs().get(0).friend);
+        assertThat(cache.getLogs().get(0).friend).isFalse();
     }
 
     public void testCanParseRecommendations() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(44, cache.getFavoritePoints());
+        assertThat(cache.getFavoritePoints()).isEqualTo(44);
     }
 
     public void testCanParseImages() throws Exception {
         parseCache(cacheJson);
-        Assert.assertEquals(6, cache.getImages().size());
+        assertThat(cache.getImages()).hasSize(6);
     }
 
 
@@ -272,116 +270,101 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
                 break;
             }
         }
-        Assert.assertTrue(found);
+        assertThat(found).isTrue();
     }
 
     public void testCanParseImageUrl() throws Exception {
         parseCache(cacheJson);
         final String imgUrl = ((Image) cache.getImages().toArray()[1]).getUrl();
-        Assert.assertTrue(imgUrl, imgUrl.contains("areas/15090.jpg"));
+        assertThat(imgUrl).contains("areas/15090.jpg");
     }
 
     public void testCacheImageInSpoiler() throws Exception {
         parseCache(cacheJson);
 
         final String imgUrl = cache.getSpoilers().get(0).getUrl();
-        Assert.assertTrue(imgUrl, imgUrl.contains("caches/3749.jpg"));
+        assertThat(imgUrl).contains("caches/3749.jpg");
     }
 
     public void testCanParseStatus() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertTrue(cache.isDisabled());
+        assertThat(cache.isDisabled()).isTrue();
     }
 
     public void testCanParseArchivedStatus() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertTrue(cache.isArchived());
+        assertThat(cache.isArchived()).isTrue();
     }
 
     public void testCanParseWaypoints() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals(2, cache.getWaypoints().size());
+        assertThat(cache.getWaypoints()).hasSize(2);
     }
 
     public void testCanParseWaypointCoords() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals(new Geopoint(1.23, 2.132), cache.getWaypoints().get(0).getCoords());
+        assertThat(cache.getWaypoints().get(0).getCoords()).isEqualTo(new Geopoint(1.23, 2.132));
     }
 
     public void testCanParseWaypointName() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals("Имя точки", cache.getWaypoints().get(0).getName());
+        assertThat(cache.getWaypoints().get(0).getName()).isEqualTo("Имя точки");
     }
 
     public void testCanParseWaypointType() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals(WaypointType.PUZZLE, cache.getWaypoints().get(0).getWaypointType());
+        assertThat(cache.getWaypoints().get(0).getWaypointType()).isEqualTo(WaypointType.PUZZLE);
     }
 
     public void testCanParseWaypointDescription() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertTrue(cache.getWaypoints().get(0).getNote().contains("point some nice descripti"));
+        assertThat(cache.getWaypoints().get(0).getNote()).contains("point some nice descripti");
     }
 
     public void testCanParseVotes() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals(23, cache.getVotes());
+        assertThat(cache.getVotes()).isEqualTo(23);
     }
 
     public void testCanParseRating() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals(4.3f, cache.getRating());
+        assertThat(cache.getRating()).isEqualTo(4.3f);
     }
 
     public void testCanParsePersonalNote() throws Exception {
         parseCache(cacheJson);
-
-        Assert.assertEquals("My note", cache.getPersonalNote());
+        assertThat(cache.getPersonalNote()).isEqualTo("My note");
     }
 
     public void testCanParseCachesList() throws Exception {
         final List<Geocache> caches = parseCaches(cachesListJson);
-
-        Assert.assertEquals(3, caches.size());
+        assertThat(caches).hasSize(3);
     }
 
     public void testCanParseCacheInTheList() throws Exception {
         final List<Geocache> caches = parseCaches(cachesListJson);
-
-        Assert.assertEquals("VI6989", caches.get(0).getGeocode());
+        assertThat(caches.get(0).getGeocode()).isEqualTo("VI6989");
     }
 
     public void testCanParseUserName() throws Exception {
         parseUser(userJson);
-
-        Assert.assertEquals("lega4", user.getName());
+        assertThat(user.getName()).isEqualTo("lega4");
     }
 
     public void testCanParseUserFinds() throws Exception {
         parseUser(userJson);
-
-        Assert.assertEquals(594, user.getFinds());
+        assertThat(user.getFinds()).isEqualTo(594);
     }
 
     public void testCanParseFindDate() throws Exception {
         parseCache(simpleCache);
 
         final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
-        final Date date = isoFormat.parse("2018-04-05");
-        Assert.assertEquals(date, new Date(cache.getVisitedDate()));
+        assertThat(new Date(cache.getVisitedDate())).isEqualTo(isoFormat.parse("2018-04-05"));
     }
 
     public void testCanParseWatchStatus() throws Exception {
         parseCache(cacheJson);
-        Assert.assertTrue(cache.isOnWatchlist());
+        assertThat(cache.isOnWatchlist()).isTrue();
     }
 }

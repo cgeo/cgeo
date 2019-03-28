@@ -19,9 +19,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.Assert;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.Assertions;
 
 public abstract class MockedCache extends Geocache {
 
@@ -80,7 +80,7 @@ public abstract class MockedCache extends Geocache {
 
             return TextUtils.replaceWhitespace(buffer.toString());
         } catch (final IOException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail("cannot read cache page", e);
         } finally {
             IOUtils.closeQuietly(is);
             IOUtils.closeQuietly(br);
