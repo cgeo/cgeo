@@ -4,9 +4,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
+import org.assertj.core.api.Assertions;
 
 import android.text.SpannableString;
 
@@ -34,7 +34,7 @@ public class TextUtilsTest extends TestCase {
 
             return TextUtils.replaceWhitespace(buffer.toString());
         } catch (final IOException e) {
-            Assert.fail(e.getMessage());
+            Assertions.fail("cannot read cache page", e);
         } finally {
             IOUtils.closeQuietly(is);
             IOUtils.closeQuietly(br);
