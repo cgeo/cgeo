@@ -1458,9 +1458,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private void updateFavPointBox() {
             // Favorite counts
-            if (cache.getFavoritePoints() > 0) {
+            final int favCount = cache.getFavoritePoints();
+            if (favCount >= 0) {
                 favoriteLine.left.setVisibility(View.VISIBLE);
-                favoriteLine.right.setText(res.getString(R.string.favorite_count, cache.getFavoritePoints()));
+                favoriteLine.right.setText(res.getString(R.string.favorite_count, favCount));
             } else {
                 favoriteLine.left.setVisibility(View.GONE);
             }

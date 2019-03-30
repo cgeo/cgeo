@@ -489,7 +489,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             }
         }
 
-        holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));
+        final int favCount = cache.getFavoritePoints();
+        holder.favorite.setText(favCount >= 0 ? Integer.toString(favCount) : "?");
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
