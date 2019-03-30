@@ -138,8 +138,10 @@ public class Geocache implements IWaypoint {
     private Boolean onWatchlist = null;
     private Boolean logOffline = null;
     private int watchlistCount = -1; // valid numbers are larger than -1
-    private int favoritePoints = 0;
+    private int favoritePoints = -1; // valid numbers are larger than -1
     private float rating = 0; // valid ratings are larger than zero
+    // FIXME: this makes no sense to favor this over the other. 0 should not be a special case here as it is
+    // in the range of acceptable values. This is probably the case at other places (rating etc.) too.
     private int votes = 0;
     private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
@@ -301,9 +303,7 @@ public class Geocache implements IWaypoint {
         if (StringUtils.isBlank(getDescription())) {
             description = other.getDescription();
         }
-        // FIXME: this makes no sense to favor this over the other. 0 should not be a special case here as it is
-        // in the range of acceptable values. This is probably the case at other places (rating, votes, etc.) too.
-        if (favoritePoints == 0) {
+        if (favoritePoints == -1) {
             favoritePoints = other.favoritePoints;
         }
         if (rating == 0) {
