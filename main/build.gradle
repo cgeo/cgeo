@@ -391,7 +391,9 @@ project.afterEvaluate{
     preBuild.dependsOn("verifyCgeoKeys")
 }
 
-task verifyCgeoKeys {
+tasks.register('verifyCgeoKeys') {
+    group = 'verification'
+    description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
         def keysFile = file("res/values/keys.xml")
         if (!keysFile.exists()) {
@@ -414,11 +416,6 @@ task verifyCgeoKeys {
             throw new InvalidUserDataException("You must provide API keys for c:geo to compile successfully. Please read the 'API keys' section in the README.md file for further details.")
         }
     }
-}
-
-configure (verifyCgeoKeys) {
-    group = 'verification'
-    description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
 }
 
 
@@ -472,9 +469,10 @@ static def isContinuousIntegrationServer() {
  */
 android.applicationVariants.all { variant ->
     if (variant.installProvider) {
-        tasks.create(name: "run${variant.name.capitalize()}", dependsOn: variant.installProvider.get()) {
+        tasks.register("run${variant.name.capitalize()}") {
             group 'cgeo'
             description "Installs the ${variant.description} and runs the main activity. Depends on 'adb' being on the PATH."
+            dependsOn tasks.named(variant.installProvider.name)
 
             doFirst {
                 def classpath = variant.applicationId
@@ -498,6 +496,7 @@ android.applicationVariants.all { variant ->
 }
 
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
+// FIXME: This uses eager task creation API. Found no way to configure a set of dependsOn with the new API.
 tasks.create(name: "testDebug", dependsOn: [ "testBasicDebugUnitTest", "connectedBasicDebugAndroidTest" ]) {
     group 'cgeo'
     description "Tests the debug build both with device-dependent and device-independent tests."
@@ -524,7 +523,7 @@ if (privatePropertiesFile.exists()) {
 }
 
 // check existence of private properties, show an error message
-task verifyPrivateProperties {
+tasks.register('verifyPrivateProperties') {
     doLast {
         if (!rootProject.file('private.properties').exists()) {
             throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
@@ -533,7 +532,8 @@ task verifyPrivateProperties {
 }
 
 // copy preferences containing user and password to the device
-task copyDefaultPreferencesToAndroid(dependsOn: 'installBasicDebug') {
+tasks.register('copyDefaultPreferencesToAndroid') {
+    dependsOn 'installBasicDebug'
     doFirst {
         def preferences = file('cgeo.geocaching_preferences.xml')
         if (preferences.exists()) {
@@ -580,15 +580,18 @@ tasks.whenTaskAdded { theTask ->
 
 apply plugin: 'checkstyle'
 
-check.dependsOn 'checkstyle'
-
-task checkstyle(type: Checkstyle) {
+tasks.register('checkstyle', Checkstyle) {
     configFile file("${project.rootDir}/checkstyle.xml")
     source 'src'
     include '**/*.java'
 
     classpath = files()
 }
+
+tasks.named('check') {
+    dependsOn tasks.named('checkstyle')
+}
+
 
 /*
  * Ribbonizer, adds ribbons to launcher icon of debug builds
