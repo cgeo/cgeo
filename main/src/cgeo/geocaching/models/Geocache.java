@@ -1757,6 +1757,9 @@ public class Geocache implements IWaypoint {
                 return;
             }
 
+            // Need to wait for images loading since HtmlImage.getDrawable is non-blocking here
+            imgGetter.waitForEndCompletable(null).blockingAwait();
+
             cache.setLists(lists);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
