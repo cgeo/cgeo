@@ -380,7 +380,7 @@
     <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:textColorPrimary">?text_color</item>
         <item name="android:textColor">?text_color</item>
-        <item name="android:windowBackground">?background_color</item>
+        <item name="android:windowBackground">@drawable/border_straight</item>
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
     </style>
 </resources>
