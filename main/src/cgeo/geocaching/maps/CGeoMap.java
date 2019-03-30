@@ -31,6 +31,9 @@ import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.permission.PermissionGrantedCallback;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -525,7 +528,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     @Override
     public void onResume() {
         super.onResume();
-        resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
+
+        // resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(this.activity, new PermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
+
+            @Override
+            public void execute() {
+                Log.d("CGeoMap.OnResumePermissionGrantedCallback.execute");
+                final Sensors sensors = Sensors.getInstance();
+                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+                sensors.setupDirectionObservable();
+
+                resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
+            }
+        });
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
