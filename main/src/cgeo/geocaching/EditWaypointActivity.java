@@ -55,7 +55,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -108,7 +107,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String lookup = "---";
     private boolean own = true;
     private boolean originalCoordsEmpty = false;
-    private List<String> distanceUnits = null;
 
     /**
      * {@code true} if the activity is newly created, {@code false} if it is restored from an instance state
@@ -367,7 +365,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private void initializeDistanceUnitSelector() {
-        distanceUnits = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
             distanceUnitSelector.setSelection(Settings.useImperialUnits() ?
                     DistanceParser.DistanceUnit.FT.getValue() : DistanceParser.DistanceUnit.M.getValue());
@@ -708,7 +705,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             finishHandler.sendEmptyMessage(SAVE_ERROR);
             return;
         }
-        final Waypoint oldWaypoint = cache.getWaypointById(waypointId);
         if (cache.addOrChangeWaypoint(waypoint, true)) {
             if (waypoint.getCoords() != null && (modifyLocal.isChecked() || modifyBoth.isChecked())) {
                 if (!cache.hasUserModifiedCoords()) {
