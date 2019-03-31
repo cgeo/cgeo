@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.JsonUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -236,7 +237,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
     public void testCanParseLogDateTime() throws Exception {
         parseCache(cacheJson);
 
-        final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         assertThat(new Date(cache.getLogs().get(0).date)).isEqualTo(isoFormat.parse("2018-10-20 18:12:46"));
     }
 
@@ -359,7 +360,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
     public void testCanParseFindDate() throws Exception {
         parseCache(simpleCache);
 
-        final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         assertThat(new Date(cache.getVisitedDate())).isEqualTo(isoFormat.parse("2018-04-05"));
     }
 
