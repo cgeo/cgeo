@@ -304,7 +304,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     protected void updateTitle() {
         setTitle(title);
-        getSupportActionBar().setSubtitle(getCurrentSubtitle());
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setSubtitle(getCurrentSubtitle());
+        }
         refreshSpinnerAdapter();
     }
 
@@ -561,18 +564,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void initActionBarSpinner() {
         mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
-        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
-            @Override
-            public boolean onNavigationItemSelected(final int i, final long l) {
-                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
-                if (newListId != listId) {
-                    switchListById(newListId);
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
+                @Override
+                public boolean onNavigationItemSelected(final int i, final long l) {
+                    final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+                    if (newListId != listId) {
+                        switchListById(newListId);
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
+            });
+        }
     }
 
     private void refreshSpinnerAdapter() {
@@ -588,7 +594,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             mCacheListSpinnerAdapter.add(l);
         }
 
-        getSupportActionBar().setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+        }
     }
 
     @Override

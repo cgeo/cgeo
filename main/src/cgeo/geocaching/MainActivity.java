@@ -240,12 +240,14 @@ public class MainActivity extends AbstractActionBarActivity {
 
         // Disable the up navigation for this activity
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
 
-        // show c:geo logo
-        actionBar.setLogo(R.drawable.actionbar_cgeo);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+            // show c:geo logo
+            actionBar.setLogo(R.drawable.actionbar_cgeo);
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
 
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);

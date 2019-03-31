@@ -266,7 +266,8 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         parseCache(cacheJson);
         boolean found = false;
         for (final Image img : cache.getImages()) {
-            if (img.title.contains("Ограда монастыря")) {
+            final String title = img.title;
+            if (title != null && title.contains("Ограда монастыря")) {
                 found = true;
                 break;
             }
