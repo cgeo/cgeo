@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 
 /**
@@ -32,7 +33,10 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
 
     private void initUpAction() {
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       final ActionBar actionBar = getSupportActionBar();
+       if (actionBar != null) {
+           actionBar.setDisplayHomeAsUpEnabled(true);
+       }
     }
 
     @Override

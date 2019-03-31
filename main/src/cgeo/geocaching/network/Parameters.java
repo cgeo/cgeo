@@ -130,11 +130,13 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     @Nullable
     public static Parameters merge(@Nullable final Parameters... params) {
         Parameters result = null;
-        for (final Parameters p: params) {
-            if (result == null) {
-                result = p;
-            } else if (p != null) {
-                result.addAll(p);
+        if (params != null) {
+            for (final Parameters p: params) {
+                if (result == null) {
+                    result = p;
+                } else if (p != null) {
+                    result.addAll(p);
+                }
             }
         }
         return result;

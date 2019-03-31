@@ -234,11 +234,13 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     private void setCacheTitleBar(@NonNull final CharSequence title, @Nullable final CacheType type) {
         setTitle(title);
         final ActionBar actionBar = getSupportActionBar();
-        if (type != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setIcon(Compatibility.getDrawable(getResources(), type.markerId));
-        } else {
-            actionBar.setIcon(android.R.color.transparent);
+        if (actionBar != null) {
+            if (type != null) {
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(Compatibility.getDrawable(getResources(), type.markerId));
+            } else {
+                actionBar.setIcon(android.R.color.transparent);
+            }
         }
     }
 
@@ -248,8 +250,10 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     protected void setCacheTitleBar(@NonNull final Geocache cache) {
         setTitle(TextUtils.coloredCacheText(cache, cache.getName() + " (" + cache.getGeocode() + ")"));
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(MapUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE));
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setIcon(MapUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE));
+        }
     }
 
     /**
