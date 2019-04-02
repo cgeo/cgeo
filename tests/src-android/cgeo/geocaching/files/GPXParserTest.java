@@ -144,11 +144,11 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGc3abcd() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.gc3abcd);
-        assertThat(caches.size()).isEqualTo(1);
+        assertThat(caches).hasSize(1);
         final Geocache gc3abcd = caches.get(0);
         assertThat(gc3abcd.getGeocode()).isEqualTo("GC3ABCD");
         final List<Waypoint> waypoints = gc3abcd.getWaypoints();
-        assertThat(waypoints.size()).isEqualTo(2);
+        assertThat(waypoints).hasSize(2);
     }
 
     private static void assertGc31j2h(final Geocache cache) {

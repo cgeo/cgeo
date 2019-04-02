@@ -107,7 +107,7 @@ public class ParametersTest {
         assertThat(Parameters.merge(params1, null)).isSameAs(params1);
         assertThat(Parameters.merge(null, params1)).isSameAs(params1);
         assertThat(Parameters.merge(null, params1, null, params2, null)).isSameAs(params1);
-        assertThat(params1.size() == 4);
-        assertThat(params2.size() == 2);
+        assertThat(params1).hasSize(2);
+        assertThat(params2).hasSize(1);
     }
 }

@@ -22,6 +22,6 @@ public class TerrainFilterTest extends TestCase {
     }
 
     public static void testAllFilters() {
-        assertThat(new TerrainFilter.Factory().getFilters().size() == 7); // terrain ranges from 1 to 7 (due to ExtremCaching.com using that value).isTrue()
+        assertThat(new TerrainFilter.Factory().getFilters()).hasSize(7); // terrain ranges from 1 to 7 (due to ExtremCaching.com using that value)
     }
 }
