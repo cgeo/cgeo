@@ -209,7 +209,7 @@ public class GeocacheTest extends CGeoTestCase {
 
         assertThat(download.hasUserModifiedCoords()).as("merged user modified").isEqualTo(true);
         assertThat(download.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(41.0, 9.0));
-        assertThat(download.getWaypoints().size()).as("merged waypoints size").isEqualTo(1);
+        assertThat(download.getWaypoints()).as("merged waypoints").hasSize(1);
         assertThat(download.getOriginalWaypoint().getCoords()).as("merged original wp").isEqualTo(new Geopoint(43.0, 11.0));
     }
 
