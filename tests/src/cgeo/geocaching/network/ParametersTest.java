@@ -93,10 +93,10 @@ public class ParametersTest {
 
     @Test
     public void testPercentEncoding() {
-        final Parameters params = new Parameters("oauth_callback", "callback://www.cgeo.org/");
-        assertThat(params.toString()).isEqualTo("oauth_callback=callback://www.cgeo.org/");
+        final Parameters params = new Parameters("oauth_callback", "callback://*.cgeo.org/");
+        assertThat(params.toString()).isEqualTo("oauth_callback=callback%3A%2F%2F*.cgeo.org%2F");
         params.usePercentEncoding();
-        assertThat(params.toString()).isEqualTo("oauth_callback=callback%3A%2F%2Fwww.cgeo.org%2F");
+        assertThat(params.toString()).isEqualTo("oauth_callback=callback%3A%2F%2F%2A.cgeo.org%2F");
     }
 
     @Test
