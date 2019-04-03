@@ -44,13 +44,12 @@ import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.SmileyImage;
-import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
@@ -409,15 +408,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
+        PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
 
             @Override
-            public void execute() {
-                Log.d("CacheDetailActivity.OnResumePermissionGrantedCallback.execute");
-                final Sensors sensors = Sensors.getInstance();
-                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-                sensors.setupDirectionObservable();
-
+            public void executeAfter() {
                 startOrStopGeoDataListener(true);
             }
         });

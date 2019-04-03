@@ -81,8 +81,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         return super.onOptionsItemSelected(item);
     }
 
-    public void onResume(final Disposable... resumeDisposable) {
-        super.onResume();
+    protected void resumeDisposables(final Disposable... resumeDisposable) {
         this.resumeDisposable.addAll(resumeDisposable);
     }
 

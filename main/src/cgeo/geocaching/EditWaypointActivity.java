@@ -14,6 +14,9 @@ import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -283,7 +286,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void onResume() {
-        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
+        super.onResume();
+
+        // resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(this,
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.EditWaypointActivity) {
+
+                    @Override
+                    public void executeAfter() {
+                        resumeDisposables(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
+                    }
+                });
     }
 
     @Override
