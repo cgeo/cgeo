@@ -7,6 +7,9 @@ import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Destination;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -239,7 +242,18 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     @Override
     public void onResume() {
-        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
+        super.onResume();
+
+        // resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(this,
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NavigateAnyPointActivity) {
+
+                    @Override
+                    public void executeAfter() {
+                        resumeDisposables(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
+                    }
+                });
+
         init();
     }
 
