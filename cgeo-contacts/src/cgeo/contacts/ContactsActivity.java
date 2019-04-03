@@ -114,9 +114,11 @@ public final class ContactsActivity extends Activity {
         final String[] projection = { idColumnName, selectionColumnName, ContactsContract.Contacts.DISPLAY_NAME };
         final String selection = selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
         final String[] selectionArgs = { like ? "%" + searchName + "%" : searchName };
+        Cursor cursor = null;
 
         final List<Pair<Integer, String>> result = new ArrayList<>();
-        try (Cursor cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null)) {
+        try {
+            cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null);
             while (cursor != null && cursor.moveToNext()) {
                 final int foundId = cursor.getInt(0);
                 final String foundName = cursor.getString(1);
@@ -126,6 +128,10 @@ public final class ContactsActivity extends Activity {
             }
         } catch (final Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
+        } finally {
+            if (cursor != null) {
+                cursor.close(); // no Closable Cursor below sdk 16
+            }
         }
         return result;
     }
