@@ -12,7 +12,6 @@ public class Intents {
 
     public static final int SETTINGS_ACTIVITY_REQUEST_CODE = 1;
     public static final int SEARCH_REQUEST_CODE = 2;
-    public static final int APP_INVITE_REQUEST_CODE = 3;
 
     private static final String PREFIX = "cgeo.geocaching.intent.extra.";
 

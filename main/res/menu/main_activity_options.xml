@@ -48,12 +48,6 @@
         app:showAsAction="ifRoom">
     </item>
     <item
-        android:id="@+id/menu_app_invite"
-        android:title="@string/invitation_action"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/menu_about"

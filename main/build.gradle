@@ -325,7 +325,6 @@ dependencies {
     // Play Services
     def playServicesVersion = '10.0.1'
     implementation "com.google.android.gms:play-services-location:$playServicesVersion"
-    implementation "com.google.android.gms:play-services-appinvite:$playServicesVersion"
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -375,12 +374,6 @@ dependencies {
  * un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
  */
 apply plugin: 'de.mobilej.unmock'
-
-
-/*
- * Google Services (App Invite)
- */
-apply plugin: 'com.google.gms.google-services'
 
 
 /*
