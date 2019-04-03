@@ -64,6 +64,13 @@
 -dontwarn java.nio.file.attribute.FileAttribute
 -dontwarn java.io.File
 
+# commons text
+-dontwarn java.util.Base64
+-dontwarn java.util.Base64$Decoder
+-dontwarn java.util.Base64$Encoder
+-dontwarn javax.script.ScriptEngine
+-dontwarn javax.script.ScriptEngineManager
+
 # AssertJ -----------------------------------------------------------------------------------------
 # ignore all things in AssertJ, as long as tests are generally running fine
 -dontnote org.assertj.core.internal.**
@@ -100,8 +107,10 @@
 
 # OkHttp references unused classes
 -dontwarn java.nio.file.*
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-# ignore reflection warnings
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.OkHttpClient$Builder
+# OkHttp platform used only on JVM and when Conscrypt dependency is available.
 -dontnote okhttp3.internal.platform.**
 
 # Play Services -----------------------------------------------------------------------------------

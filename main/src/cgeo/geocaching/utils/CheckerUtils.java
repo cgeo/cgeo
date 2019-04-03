@@ -10,8 +10,8 @@ import android.util.Patterns;
 
 import java.util.regex.Matcher;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 public final class CheckerUtils {
     private static final String[] CHECKERS = {

@@ -53,9 +53,9 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.DownloadProgress;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Send2CgeoDownloader;
-import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -304,7 +304,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     protected void updateTitle() {
         setTitle(title);
-        getSupportActionBar().setSubtitle(getCurrentSubtitle());
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setSubtitle(getCurrentSubtitle());
+        }
         refreshSpinnerAdapter();
     }
 
@@ -561,18 +564,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void initActionBarSpinner() {
         mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
-        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
-            @Override
-            public boolean onNavigationItemSelected(final int i, final long l) {
-                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
-                if (newListId != listId) {
-                    switchListById(newListId);
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
+                @Override
+                public boolean onNavigationItemSelected(final int i, final long l) {
+                    final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+                    if (newListId != listId) {
+                        switchListById(newListId);
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
+            });
+        }
     }
 
     private void refreshSpinnerAdapter() {
@@ -588,7 +594,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             mCacheListSpinnerAdapter.add(l);
         }
 
-        getSupportActionBar().setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+        }
     }
 
     @Override
@@ -625,15 +634,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this, new PermissionGrantedCallback(PermissionRequestContext.CacheListActivity) {
+        PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheListActivity) {
 
             @Override
-            public void execute() {
-                Log.d("CacheDetailActivity.OnResumePermissionGrantedCallback.execute");
-                final Sensors sensors = Sensors.getInstance();
-                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-                sensors.setupDirectionObservable();
-
+            public void executeAfter() {
                 resumeDisposables.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION | GeoDirHandler.LOW_POWER, 250, TimeUnit.MILLISECONDS));
             }
         });

@@ -9,7 +9,12 @@ public enum PermissionRequestContext {
     MainActivityStorage(1113, R.string.storage_permission_request_explanation),
     TrackableActivity(2222, R.string.location_permission_request_explanation),
     CacheDetailActivity(3333, R.string.location_permission_request_explanation),
-    CacheListActivity(4444, R.string.location_permission_request_explanation);
+    CacheListActivity(4444, R.string.location_permission_request_explanation),
+    CGeoMap(5555, R.string.location_permission_request_explanation),
+    NewMap(6666, R.string.location_permission_request_explanation),
+    EditWaypointActivity(7777, R.string.location_permission_request_explanation),
+    CompassActivity(8888, R.string.location_permission_request_explanation),
+    NavigateAnyPointActivity(9999, R.string.location_permission_request_explanation);
 
     private final int requestCode;
     private final int askAgainResource;
