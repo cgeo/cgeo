@@ -2,18 +2,18 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2019.04.04:</b>\n
     · Fix: App crashing when resuming from background\n
     · Fix: App crashing when trying to add log image from camera\n
-    · Fix: Crash when starting map from widget\n
+    · Fix: Crash when starting map from widget...yes, there are widgets available!\n
+    · Fix: Try to avoid timeouts when logging with high amount of trackables in inventory\n
     · Fix: Button to change map type not visible\n
     · Fix: Coordinate input field broken in DMS format\n
     · Fix: Arrows indicating submenus no longer shown\n
     · Fix: Action buttons on list select dialog might be not be completely visible on some phones\n
-    · Removed: Support for Android 4.0.x devices\n
     · Fix: Disable static map loading by default as Google static maps are no longer available\n
     · Fix: Some other style fixes for the user interface\n
-    · Fix: Try to avoid timeouts when logging with high amount of trackables in inventory\n
+    · Removed: Support for Android 4.0.x devices\n
     \n
     \n
     <b>2019.02.23:</b>\n
