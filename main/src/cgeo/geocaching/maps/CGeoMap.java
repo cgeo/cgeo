@@ -466,6 +466,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), Compatibility.getDrawable(getResources(), R.drawable.marker));
 
+        final Geopoint savedCoords = mapOptions.coords;  // remember for centerMap
+        if (mapOptions.mapMode == MapMode.LIVE && savedCoords != null) {
+            mapOptions.coords = null;   // no direction line, even if enabled in settings
+            followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+        }
 
         overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(mapOptions.coords, mapOptions.geocode);
         if (trailHistory != null) {
@@ -486,8 +491,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         } else if (mapOptions.mapMode != MapMode.LIVE) {
             followMyLocation = false;
         }
-        if (mapOptions.geocode != null || mapOptions.searchResult != null || mapOptions.coords != null || mapOptions.mapState != null) {
-            centerMap(mapOptions.geocode, mapOptions.searchResult, mapOptions.coords, mapOptions.mapState);
+        if (mapOptions.geocode != null || mapOptions.searchResult != null || savedCoords != null || mapOptions.mapState != null) {
+            centerMap(mapOptions.geocode, mapOptions.searchResult, savedCoords, mapOptions.mapState);
         }
 
         prepareFilterBar();
@@ -615,7 +620,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             final int titleResource = mapOptions.isLiveEnabled ? R.string.map_live_disable : R.string.map_live_enable;
             itemMapLive.setTitle(res.getString(titleResource));
-            itemMapLive.setVisible(mapOptions.coords == null);
+            itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
