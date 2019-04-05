@@ -9,6 +9,9 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -168,7 +171,15 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     @Override
     public void onResume() {
         super.onResume();
-        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
+        // resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(getActivity(),
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.AbstractDialogFragment) {
+
+            @Override
+            public void executeAfter() {
+                resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
+            }
+        });
         init();
     }
 
