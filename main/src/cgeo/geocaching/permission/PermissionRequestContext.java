@@ -7,14 +7,15 @@ public enum PermissionRequestContext {
     MainActivityOnCreate(1111, R.string.location_permission_request_explanation),
     MainActivityOnResume(1112, R.string.location_permission_request_explanation),
     MainActivityStorage(1113, R.string.storage_permission_request_explanation),
-    TrackableActivity(2222, R.string.location_permission_request_explanation),
-    CacheDetailActivity(3333, R.string.location_permission_request_explanation),
-    CacheListActivity(4444, R.string.location_permission_request_explanation),
-    CGeoMap(5555, R.string.location_permission_request_explanation),
-    NewMap(6666, R.string.location_permission_request_explanation),
-    EditWaypointActivity(7777, R.string.location_permission_request_explanation),
-    CompassActivity(8888, R.string.location_permission_request_explanation),
-    NavigateAnyPointActivity(9999, R.string.location_permission_request_explanation);
+    TrackableActivity(2221, R.string.location_permission_request_explanation),
+    CacheDetailActivity(2222, R.string.location_permission_request_explanation),
+    CacheListActivity(2223, R.string.location_permission_request_explanation),
+    CGeoMap(2224, R.string.location_permission_request_explanation),
+    NewMap(2225, R.string.location_permission_request_explanation),
+    EditWaypointActivity(2226, R.string.location_permission_request_explanation),
+    CompassActivity(2227, R.string.location_permission_request_explanation),
+    AbstractDialogFragment(2228, R.string.location_permission_request_explanation),
+    NavigateAnyPointActivity(2229, R.string.location_permission_request_explanation);
 
     private final int requestCode;
     private final int askAgainResource;
