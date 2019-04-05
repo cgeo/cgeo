@@ -705,7 +705,7 @@
     <string name="feature_search_finder">Search by finder</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Old Mapsforge V3</string>
-    <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Experimental features</string>
     <string name="init_mfbeta">Mapsforge beta as default</string>
     <string name="init_mfbeta_description">The current release contains a beta version of our new Mapsforge map as an experimental feature. This new map can be activated here as default for the live and list maps.</string>
