@@ -47,7 +47,6 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
-import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -671,7 +670,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
-        menu.findItem(R.id.menu_app_invite).setVisible(cache != null && AppInvite.isAvailable());
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
@@ -738,11 +736,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return true;
                 }
                 break;
-            case R.id.menu_app_invite:
-                if (AppInvite.isAvailable()) {
-                    AppInvite.send(this, cache);
-                }
-                return true;
             default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
                     refreshOnResume = true;

@@ -17,7 +17,6 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.playservices.AppInvite;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider;
@@ -457,7 +456,6 @@ public class MainActivity extends AbstractActionBarActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
-        menu.findItem(R.id.menu_app_invite).setVisible(AppInvite.isAvailable());
         return true;
     }
 
@@ -492,9 +490,6 @@ public class MainActivity extends AbstractActionBarActivity {
                     return true;
                 }
                 startActivity(new Intent(this, PocketQueryListActivity.class));
-                return true;
-            case R.id.menu_app_invite:
-                AppInvite.send(this, getString(R.string.invitation_message));
                 return true;
         }
         return super.onOptionsItemSelected(item);
