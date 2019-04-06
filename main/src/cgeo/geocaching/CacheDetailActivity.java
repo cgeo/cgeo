@@ -104,6 +104,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
@@ -1153,7 +1154,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(),
-                    new StoreCacheClickListener(), new MoveCacheClickListener(), new StoreCacheClickListener());
+                    new StoreCacheClickListener(), null, new MoveCacheClickListener(), new StoreCacheClickListener());
 
             // list
             updateCacheLists(view, cache, res);
@@ -2329,6 +2330,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final OnClickListener refreshCacheClickListener,
             final OnClickListener dropCacheClickListener,
             final OnClickListener storeCacheClickListener,
+            final OnClickListener showHintClickListener,
             final OnLongClickListener moveCacheListener,
             final OnLongClickListener storeCachePreselectedListener) {
         // offline use
@@ -2336,6 +2338,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final ImageButton offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
         final ImageButton offlineStoreDrop = ButterKnife.findById(view, R.id.offline_store_drop);
         final ImageButton offlineEdit = ButterKnife.findById(view, R.id.offline_edit);
+
+        boolean hintButtonEnabled = false;
+        if (null != showHintClickListener) {
+            final String hint = cache.getHint();
+            if (!StringUtils.isEmpty(hint)) {
+                final ImageButton offlineHint = ButterKnife.findById(view, R.id.offline_hint);
+                offlineHint.setVisibility(View.VISIBLE);
+                offlineHint.setClickable(true);
+                offlineHint.setOnClickListener(showHintClickListener);
+
+                final TextView offlineHintText = ButterKnife.findById(view, R.id.offline_hint_text);
+                offlineHintText.setText(hint);
+
+                hintButtonEnabled = true;
+            }
+        }
+        if (!hintButtonEnabled) {
+            // if no "hint" button is shown: expand "more details" button to full width
+            final AppCompatButton moreButton = ButterKnife.findById(view, R.id.more_details);
+            if (null != moreButton) {
+                final float scale = view.getResources().getDisplayMetrics().density;
+                final int px = (int) (4 * scale + 0.5f);
+                final ViewGroup.MarginLayoutParams lpt = (ViewGroup.MarginLayoutParams) moreButton.getLayoutParams();
+                lpt.setMargins(px, px, px, px);
+                moreButton.setLayoutParams(lpt);
+            }
+        }
 
         offlineStoreDrop.setClickable(true);
         offlineStoreDrop.setOnClickListener(storeCacheClickListener);
