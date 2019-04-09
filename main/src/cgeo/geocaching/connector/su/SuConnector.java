@@ -235,11 +235,16 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> logTypes = new ArrayList<>();
 
-        logTypes.add(LogType.FOUND_IT);
-        logTypes.add(LogType.DIDNT_FIND_IT);
+        final boolean isOwner = geocache.isOwner();
+
+        if (!isOwner) {
+            logTypes.add(LogType.FOUND_IT);
+            logTypes.add(LogType.DIDNT_FIND_IT);
+        }
+
         logTypes.add(LogType.NOTE);
 
-        if (geocache.isOwner()) {
+        if (isOwner) {
             logTypes.add(LogType.OWNER_MAINTENANCE);
         }
         return logTypes;
