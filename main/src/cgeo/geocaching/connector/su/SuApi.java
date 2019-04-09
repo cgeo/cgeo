@@ -123,6 +123,8 @@ public class SuApi {
                 return "found";
             case DIDNT_FIND_IT:
                 return "notFound";
+            case OWNER_MAINTENANCE:
+                return "authorCheck";
             case NOTE:
             default:
                 return "comment";
