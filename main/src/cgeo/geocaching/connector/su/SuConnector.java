@@ -119,7 +119,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     @NonNull
     public String getNameAbbreviated() {
-        return "GCSU";
+        return "GC.SU";
     }
 
     @Override
