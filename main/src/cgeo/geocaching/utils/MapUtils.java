@@ -150,6 +150,22 @@ public final class MapUtils {
     }
 
     /**
+     * Build the drawable for a given waypoint.
+     *
+     * @param res
+     *          the resources to use
+     * @param waypoint
+     *          the waypoint to build the drawable for
+     * @return
+     *          a drawable representing the current waypoint status
+     */
+    @NonNull
+    public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
+        final Drawable[] layers = { Compatibility.getDrawable(res, waypoint.getWaypointType().dotMarkerId) };
+        return new LayerDrawable(layers);
+    }
+
+    /**
      * Clear the cache of drawable items.
      */
     public static void clearCachedItems() {
@@ -235,6 +251,22 @@ public final class MapUtils {
         }
 
         return ld;
+    }
+
+    /**
+     * Build the drawable for a given cache.
+     *
+     * @param res
+     *          the resources to use
+     * @param cache
+     *          the cache to build the drawable for
+     * @return
+     *          a drawable representing the current cache status
+     */
+    @NonNull
+    public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
+        final Drawable layers[] = { Compatibility.getDrawable(res, cache.isFound() ? R.drawable.dot_found : cache.getType().dotMarkerId) };
+        return new LayerDrawable(layers);
     }
 
     /**

@@ -47,7 +47,7 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
             final Waypoint waypoint = new Waypoint("", type, false);
             waypoint.setCoords(coords);
 
-            addItem(waypoint);
+            addItem(waypoint, false);
 
             addLayers();
 
