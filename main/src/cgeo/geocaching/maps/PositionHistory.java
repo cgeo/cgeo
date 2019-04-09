@@ -1,8 +1,13 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
+
 import android.location.Location;
 
 import java.util.ArrayList;
+
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Map trail history
@@ -21,6 +26,42 @@ public class PositionHistory {
 
     private ArrayList<Location> history = new ArrayList<>();
 
+    // load data from permanent storage
+    public PositionHistory() {
+        history = DataStore.loadTrailHistory();
+    }
+
+    // save current coords to permanent storage
+    private void saveToStorage(final Location coordinates) {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
+            @Override
+            public void run() {
+                DataStore.saveTrailpoint(coordinates);
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                // nothing to do UI-wise
+            }
+        });
+    }
+
+    // clear position history (in memory and on permanent storage)
+    public void reset() {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
+            @Override
+            public void run() {
+                DataStore.clearTrailHistory();
+                history.clear();
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                // nothing to do UI-wise
+            }
+        });
+    }
+
     /**
      * Adds the current position to the trail history to be able to show the trail on the map.
      */
@@ -32,6 +73,7 @@ public class PositionHistory {
             return;
         }
         if (history.isEmpty()) {
+            saveToStorage(coordinates);
             history.add(coordinates);
             return;
         }
@@ -41,6 +83,7 @@ public class PositionHistory {
             return;
         }
 
+        saveToStorage(coordinates);
         history.add(coordinates);
 
         // avoid running out of memory

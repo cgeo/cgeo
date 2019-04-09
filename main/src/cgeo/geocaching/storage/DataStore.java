@@ -50,6 +50,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -169,7 +170,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 75;
+    private static final int dbVersion = 76;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -184,6 +185,7 @@ public class DataStore {
     @NonNull private static final String dbTableLogsOffline = "cg_logs_offline";
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
+    @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE " + dbTableCaches + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -338,6 +340,13 @@ public class DataStore {
             + "CREATE TABLE " + dbTableSearchDestinationHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "date LONG NOT NULL, "
+            + "latitude DOUBLE, "
+            + "longitude DOUBLE "
+            + "); ";
+
+    private static final String dbCreateTrailHistory
+            = "CREATE TABLE " + dbTableTrailHistory + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "latitude DOUBLE, "
             + "longitude DOUBLE "
             + "); ";
@@ -530,6 +539,7 @@ public class DataStore {
     private static class DbHelper extends SQLiteOpenHelper {
 
         private static boolean firstRun = true;
+        public static final int MAX_TRAILHISTORY_LENGTH = 700;
 
         DbHelper(final Context context) {
             super(context, databasePath().getPath(), null, dbVersion);
@@ -905,6 +915,17 @@ public class DataStore {
                             Log.e("Failed to upgrade to ver. 75", e);
                         }
                     }
+
+                    // add trail history table
+                    if (oldVersion < 76) {
+                        try {
+                            db.execSQL(dbCreateTrailHistory);
+
+                            Log.i("Added table " + dbTableTrailHistory + ".");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 76", e);
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -919,6 +940,13 @@ public class DataStore {
         public void onOpen(final SQLiteDatabase db) {
             if (firstRun) {
                 sanityChecks(db);
+                // limit number of records for trailHistory
+                try {
+                    db.execSQL("DELETE FROM " + dbTableTrailHistory + " WHERE _id < (SELECT MIN(_id) FROM (SELECT _id FROM " + dbTableTrailHistory + " ORDER BY _id DESC LIMIT " + MAX_TRAILHISTORY_LENGTH + "))");
+                } catch (final Exception e) {
+                    Log.w("Failed to clear trail history", e);
+                }
+
                 firstRun = false;
             }
         }
@@ -1395,6 +1423,29 @@ public class DataStore {
             database.setTransactionSuccessful();
         } catch (final Exception e) {
             Log.e("Updating searchedDestinations db failed", e);
+        } finally {
+            database.endTransaction();
+        }
+    }
+
+    /**
+     * Persists the given {@code location} into the database.
+     *
+     * @param location
+     *            a location to save
+     */
+    public static void saveTrailpoint(final Location location) {
+        init();
+
+        database.beginTransaction();
+        try {
+            final SQLiteStatement insertTrailpoint = PreparedStatement.INSERT_TRAILPOINT.getStatement();
+            insertTrailpoint.bindDouble(1, location.getLatitude());
+            insertTrailpoint.bindDouble(2, location.getLongitude());
+            insertTrailpoint.executeInsert();
+            database.setTransactionSuccessful();
+        } catch (final Exception e) {
+            Log.e("Updating trailHistory db failed", e);
         } finally {
             database.endTransaction();
         }
@@ -2129,6 +2180,48 @@ public class DataStore {
             return true;
         } catch (final Exception e) {
             Log.e("Unable to clear searched destinations", e);
+        } finally {
+            database.endTransaction();
+        }
+
+        return false;
+    }
+
+    /**
+     * Loads the trail history from the database
+     *
+     * @return A list of previously trail points or an empty list.
+     */
+    @NonNull
+    public static ArrayList<Location> loadTrailHistory() {
+        return queryToColl(dbTableTrailHistory,
+                new String[]{"_id", "latitude", "longitude"},
+                "latitude IS NOT NULL AND longitude IS NOT NULL",
+                null,
+                "_id DESC",
+                String.valueOf(DbHelper.MAX_TRAILHISTORY_LENGTH),
+                new ArrayList<Location>(),
+                new Func1<Cursor, Location>() {
+                    @Override
+                    public Location call(final Cursor cursor) {
+                        final Location l = new Location("trailHistory");
+                        l.setLatitude(cursor.getDouble(1));
+                        l.setLongitude(cursor.getDouble(2));
+                        return l;
+                    }
+                });
+    }
+
+    public static boolean clearTrailHistory() {
+        init();
+        database.beginTransaction();
+
+        try {
+            database.delete(dbTableTrailHistory, null, null);
+            database.setTransactionSuccessful();
+            return true;
+        } catch (final Exception e) {
+            Log.e("Unable to clear trail history", e);
         } finally {
             database.endTransaction();
         }
@@ -3298,6 +3391,7 @@ public class DataStore {
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
+        INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude) VALUES (?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),
