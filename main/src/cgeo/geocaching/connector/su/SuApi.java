@@ -21,6 +21,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import java.io.FileInputStream;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.Response;
@@ -38,6 +40,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class SuApi {
+
+    private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US);
 
     private SuApi() {
         // utility class
@@ -137,6 +141,7 @@ public class SuApi {
         params.add("cacheID", cache.getCacheId());
         params.add("type", getSuLogType(logType));
         params.add("text", log);
+        params.add("find_date", LOG_DATE_FORMAT.format(date.getTime()));
 
         final ObjectNode data = postRequest(gcsuConnector, SuApiEndpoint.NOTE, params).data;
 
