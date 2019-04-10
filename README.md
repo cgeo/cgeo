@@ -45,7 +45,8 @@ Details for setting up the IDE is described in the wiki (https://github.com/cgeo
 
 ### API keys
 
-Google doesn't hand out new keys for Google Maps v1, you have to use an existing one. You can leave it empty, but then Google Maps doesn't work. 
+Google doesn't hand out new keys for Google Maps v1, you have to use an existing one. You can leave it empty, but then Google Maps doesn't work.
+Also to be able to use Google Maps you need to use a Google Api enabled image, so make sure to select the right image for your emulator/device, otherwise Google Maps won't be offered as map provider in c:geo. 
 
 Request your personal API key for the various [OpenCaching](http://www.opencaching.eu/) sites we support. If you leave these blank, then those networks will remain disabled.
 * [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
