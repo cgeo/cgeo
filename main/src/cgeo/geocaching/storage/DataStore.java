@@ -560,6 +560,7 @@ public class DataStore {
             db.execSQL(dbCreateLogsOffline);
             db.execSQL(dbCreateTrackables);
             db.execSQL(dbCreateSearchDestinationHistory);
+            db.execSQL(dbCreateTrailHistory);
 
             createIndices(db);
         }
