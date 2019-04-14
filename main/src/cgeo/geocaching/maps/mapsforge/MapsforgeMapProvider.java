@@ -26,7 +26,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
-import org.mapsforge.map.model.MapViewPosition;
+import org.mapsforge.map.model.IMapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
@@ -147,7 +147,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
          * Create new render layer, if mapfile exists
          */
         @Override
-        public ITileLayer createTileLayer(final TileCache tileCache, final MapViewPosition mapViewPosition) {
+        public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
             final File mapFile = new File(fileName);
             if (mapFile.exists()) {
                 return new RendererLayer(tileCache, new MapFile(mapFile), mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
