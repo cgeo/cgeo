@@ -122,6 +122,10 @@ allprojects {
                         if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
                             selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime.")
                         }
+                        // Apache Commons lang3 3.6+ fails in StringUtils.join() for API < 19
+                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
+                            selection.reject("Apache Commons lang3 3.6+ calls methods not available in the Android runtime.")
+                        }
                     }
                 }
             }
