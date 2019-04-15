@@ -128,7 +128,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
             addCacheDetails();
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), null, new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
 
             CacheDetailActivity.updateCacheLists(view, cache, res);
         } catch (final Exception e) {
@@ -200,7 +200,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 DataStore.saveLists(Collections.singletonList(cache), listIds);
                 CacheDetailActivity.updateOfflineBox(getView(), cache, res,
                         new RefreshCacheClickListener(), new DropCacheClickListener(),
-                        new StoreCacheClickListener(), null, new StoreCacheClickListener());
+                        new StoreCacheClickListener(), new ShowHintClickListener(getView()), null, new StoreCacheClickListener());
                 CacheDetailActivity.updateCacheLists(getView(), cache, res);
             } else {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
@@ -219,7 +219,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                         if (view != null) {
                             CacheDetailActivity.updateOfflineBox(view, cache, res,
                                     new RefreshCacheClickListener(), new DropCacheClickListener(),
-                                    new StoreCacheClickListener(), null, new StoreCacheClickListener());
+                                    new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
                             CacheDetailActivity.updateCacheLists(view, cache, res);
                         }
                     }
@@ -261,6 +261,26 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
     }
 
+    private class ShowHintClickListener implements View.OnClickListener {
+        private View anchorView;
+
+        ShowHintClickListener (final View view) {
+            anchorView = view;
+        }
+
+        @Override
+        public void onClick(final View view) {
+            final TextView offlineHintText = (TextView) anchorView.findViewById(R.id.offline_hint_text);
+            final View offlineHintSeparator = anchorView.findViewById(R.id.offline_hint_separator);
+            if (offlineHintText.getVisibility() == View.VISIBLE) {
+                offlineHintText.setVisibility(View.GONE);
+                offlineHintSeparator.setVisibility(View.GONE);
+            } else {
+                offlineHintText.setVisibility(View.VISIBLE);
+                offlineHintSeparator.setVisibility(View.VISIBLE);
+            }
+        }
+    }
 
     @Override
     public void navigateTo() {
