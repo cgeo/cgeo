@@ -114,6 +114,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      */
     private static final int HIDE_PROGRESS = 0;
     private static final int SHOW_PROGRESS = 1;
+    private static final int HIDE_PROGRESS_WITH_TOAST = 2;   // used for workaround for missing progress indicator only, can be removed after switching to AppCompat.Toolbar instead of ActionBar
     private static final int UPDATE_TITLE = 0;
     private static final int INVALIDATE_MAP = 1;
     private static final int UPDATE_PROGRESS = 0;
@@ -319,7 +320,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 counter++;
             } else if (what == HIDE_PROGRESS && --counter == 0) {
                 showProgress(false);
+            // workaround for missing progress indicator: show a short toast after loading of caches is finished
+            } else if (what == HIDE_PROGRESS_WITH_TOAST && --counter == 0) {
+                final CGeoMap map = mapRef.get();
+                if (null != map) {
+                    ActivityMixin.showShortToast(map.activity, map.res.getString(R.string.map_loading_finished));
+                }
+                showProgress(false);
             }
+            // end workaround
         }
 
         private void showProgress(final boolean show) {
@@ -1337,7 +1346,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             updateMapTitle();
         } finally {
-            showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+            // used for workaround for missing progress indicator only, can be removed after switching to AppCompat.Toolbar instead of ActionBar, otherwise HIDE_PROGRESS variant would be enough
+            if (mapOptions.mapMode == MapMode.LIVE) {
+                showProgressHandler.sendEmptyMessage(HIDE_PROGRESS_WITH_TOAST);
+            } else {
+                showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+            }
         }
     }
 

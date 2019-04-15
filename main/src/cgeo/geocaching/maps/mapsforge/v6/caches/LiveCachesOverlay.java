@@ -125,7 +125,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             update(result);
 
         } finally {
-            hideProgress();
+            hideProgressWithToast();
         }
     }
 

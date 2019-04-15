@@ -253,6 +253,10 @@ public abstract class AbstractCachesOverlay {
         mapHandlers.sendEmptyProgressMessage(NewMap.HIDE_PROGRESS);
     }
 
+    protected void hideProgressWithToast() {
+        mapHandlers.sendEmptyProgressMessage(NewMap.HIDE_PROGRESS_WITH_TOAST);
+    }
+
     protected void updateTitle() {
         mapHandlers.sendEmptyDisplayMessage(NewMap.UPDATE_TITLE);
     }

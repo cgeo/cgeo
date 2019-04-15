@@ -161,6 +161,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     // ShowProgressHandler
     public static final int HIDE_PROGRESS = 0;
     public static final int SHOW_PROGRESS = 1;
+    public static final int HIDE_PROGRESS_WITH_TOAST = 2;   // used for workaround for missing progress indicator only, can be removed after switching to AppCompat.Toolbar instead of ActionBar
     // LoadDetailsHandler
     public static final int UPDATE_PROGRESS = 0;
     public static final int FINISHED_LOADING_DETAILS = 1;
@@ -1159,7 +1160,15 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             } else if (what == SHOW_PROGRESS) {
                 showProgress(true);
                 counter++;
+            // workaround for missing progress indicator: show a short toast after loading of caches is finished
+            } else if (what == HIDE_PROGRESS_WITH_TOAST && --counter == 0) {
+                final NewMap map = mapRef.get();
+                if (null != map) {
+                    map.showShortToast(map.res.getString(R.string.map_loading_finished));
+                }
+                showProgress(false);
             }
+            // end workaround
         }
 
         private void showProgress(final boolean show) {
