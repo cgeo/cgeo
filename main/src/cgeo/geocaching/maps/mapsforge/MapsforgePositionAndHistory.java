@@ -1,14 +1,13 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.DistanceDrawer;
 import cgeo.geocaching.maps.ScaleDrawer;
-import cgeo.geocaching.maps.interfaces.PositionAndHistory;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
-import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
