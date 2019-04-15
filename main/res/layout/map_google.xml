@@ -34,7 +34,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             class="cgeo.geocaching.maps.google.v2.GoogleMapView"
-            android:apiKey="@string/maps_api_key"
+            android:apiKey="@string/maps_api2_key"
             android:clickable="true"
             android:enabled="true"
             android:keepScreenOn="true" />

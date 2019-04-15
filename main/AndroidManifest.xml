@@ -80,7 +80,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/maps_api_key" />
+            android:value="@string/maps_api2_key" />
 
         <!-- support also very wide screen devices. https://developer.android.com/guide/practices/screens_support.html#MaxAspectRatio -->
         <meta-data

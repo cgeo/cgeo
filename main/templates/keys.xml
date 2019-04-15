@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Google Maps -->
-    <string name="maps_api_key" translatable="false">@maps.api.key@</string>
+    <string name="maps_api2_key" translatable="false">@maps.api2.key@</string>
 
     <!-- Opencaching.de -->
     <string name="oc_de_okapi_consumer_key" translatable="false">@ocde.okapi.consumer.key@</string>
