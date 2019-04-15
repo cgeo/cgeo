@@ -43,7 +43,7 @@ public class MapProviderFactory {
         }
 
         // Check if API key is available
-        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api_key);
+        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
         if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;
