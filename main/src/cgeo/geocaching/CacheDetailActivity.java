@@ -2343,26 +2343,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (null != showHintClickListener) {
             final String hint = cache.getHint();
             if (!StringUtils.isEmpty(hint)) {
-                final ImageButton offlineHint = ButterKnife.findById(view, R.id.offline_hint);
+                hintButtonEnabled = true;
+                final TextView offlineHintText = ButterKnife.findById(view, R.id.offline_hint_text);
+                offlineHintText.setText(hint);
+            }
+        }
+        // adjust right margin of "more details" button to whether a hint button is shown
+        final AppCompatButton moreButton = ButterKnife.findById(view, R.id.more_details);
+        if (null != moreButton) {
+            final float scale = view.getResources().getDisplayMetrics().density;
+            final int rightMargin = (int) (51 * scale + 0.5f);
+            final int otherMargin = (int) (4 * scale + 0.5f);
+            final ViewGroup.MarginLayoutParams lpt = (ViewGroup.MarginLayoutParams) moreButton.getLayoutParams();
+            lpt.setMargins(otherMargin, otherMargin, hintButtonEnabled ? rightMargin : otherMargin, otherMargin);
+            moreButton.setLayoutParams(lpt);
+        }
+
+        // show or remove clickable hint button
+        final ImageButton offlineHint = ButterKnife.findById(view, R.id.offline_hint);
+        if (null != offlineHint) {
+            if (hintButtonEnabled) {
                 offlineHint.setVisibility(View.VISIBLE);
                 offlineHint.setClickable(true);
                 offlineHint.setOnClickListener(showHintClickListener);
-
-                final TextView offlineHintText = ButterKnife.findById(view, R.id.offline_hint_text);
-                offlineHintText.setText(hint);
-
-                hintButtonEnabled = true;
-            }
-        }
-        if (!hintButtonEnabled) {
-            // if no "hint" button is shown: expand "more details" button to full width
-            final AppCompatButton moreButton = ButterKnife.findById(view, R.id.more_details);
-            if (null != moreButton) {
-                final float scale = view.getResources().getDisplayMetrics().density;
-                final int px = (int) (4 * scale + 0.5f);
-                final ViewGroup.MarginLayoutParams lpt = (ViewGroup.MarginLayoutParams) moreButton.getLayoutParams();
-                lpt.setMargins(px, px, px, px);
-                moreButton.setLayoutParams(lpt);
+            } else {
+                offlineHint.setVisibility(View.GONE);
+                offlineHint.setClickable(false);
+                offlineHint.setOnClickListener(null);
             }
         }
 
