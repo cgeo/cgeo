@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next release:</b>\n
+     <b>2019.04.16:</b>\n
     · New: Show map icon on address search result to directly jump to the live map\n
     · New: Show cache status overlay icons also in title bar of cache details\n
     · New: Implement geocaching.su\n
