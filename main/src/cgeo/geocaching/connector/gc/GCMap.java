@@ -376,12 +376,12 @@ public class GCMap {
             searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
         }
 
-        GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport).blockingGet();
+        final GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport).blockingGet();
         final List<Geocache> foundCaches = new ArrayList<Geocache>();
 
         if (mapSearchResultSet.results != null) {
 
-            for (GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
+            for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
                 if (r.postedCoordinates != null) {
                     final Geocache c = new Geocache();
                     c.setDetailed(false);

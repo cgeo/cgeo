@@ -347,7 +347,7 @@ class GCWebAPI {
 
         final StringBuilder box = new StringBuilder();
         box.append(viewport.getLatitudeMax()).append(',').append(viewport.getLongitudeMin());
-        box.append(",").append(viewport.getLatitudeMin()).append(',').append(viewport.getLongitudeMax());
+        box.append(',').append(viewport.getLatitudeMin()).append(',').append(viewport.getLongitudeMax());
         params.put("box", box.toString());
 
         final StringBuilder origin = new StringBuilder();
