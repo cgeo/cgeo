@@ -30,9 +30,12 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -238,17 +241,10 @@ public class GCMap {
      */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        final int speed = (int) Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
-        LivemapStrategy strategy = Settings.getLiveMapStrategy();
-        if (strategy == LivemapStrategy.AUTO) {
-            strategy = speed >= 30 ? LivemapStrategy.FAST : LivemapStrategy.DETAILED;
-        }
-
-        final SearchResult result = searchByViewport(viewport, tokens, strategy);
+        final SearchResult result = searchPlayMapByViewport(viewport);
 
         if (Settings.isDebug()) {
-            final StringBuilder text = new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
-            result.setUrl(result.getUrl() + text);
+            result.setUrl(result.getUrl());
         }
 
         Log.d(String.format(Locale.getDefault(), "GCMap: returning %d caches from search", result.getCount()));
@@ -366,6 +362,51 @@ public class GCMap {
 
         return searchResult;
     }
+
+    /**
+     * Searches the view port on the live map for caches.
+     * The strategy dictates if only live map information is used or if an additional
+     * searchByCoordinates query is issued.
+     *
+     * @param viewport
+     *            Area to search
+     */
+    @NonNull
+    private static SearchResult searchPlayMapByViewport(@NonNull final Viewport viewport) {
+        Log.d("GCMap.searchPlayMapByViewport" + viewport.toString());
+
+        final SearchResult searchResult = new SearchResult();
+
+        if (Settings.isDebug()) {
+            searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+        }
+
+        GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport).blockingGet();
+        List<Geocache> foundCaches = new ArrayList<Geocache>();
+
+        if (mapSearchResultSet.results != null) {
+
+            for (GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
+                if (r.postedCoordinates != null) {
+                    Geocache c = new Geocache();
+                    c.setDetailed(false);
+                    c.setReliableLatLon(true);
+                    c.setGeocode(r.code);
+                    c.setName(r.name);
+                    c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
+                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
+                    c.setPremiumMembersOnly(r.premiumOnly);
+                    c.setFound(r.userFound);
+                    foundCaches.add(c);
+                }
+            }
+        }
+
+        searchResult.addAndPutInCache(foundCaches);
+
+        return searchResult;
+    }
+
 
     /**
      * Creates a list of caches types to filter on the live map (exclusion string)
