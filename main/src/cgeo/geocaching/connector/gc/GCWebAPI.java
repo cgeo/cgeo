@@ -202,6 +202,7 @@ class GCWebAPI {
         boolean premiumOnly;
         int geocacheType;
         boolean userFound;
+        int cacheStatus;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

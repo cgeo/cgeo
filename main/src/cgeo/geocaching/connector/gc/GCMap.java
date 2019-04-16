@@ -392,6 +392,8 @@ public class GCMap {
                     c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
                     c.setPremiumMembersOnly(r.premiumOnly);
                     c.setFound(r.userFound);
+                    c.setDisabled(r.cacheStatus == 1);
+
                     foundCaches.add(c);
                 }
             }
