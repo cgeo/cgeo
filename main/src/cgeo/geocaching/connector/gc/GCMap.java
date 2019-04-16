@@ -7,13 +7,11 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
-import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.LivemapStrategy.Flag;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Formatter;
@@ -30,12 +28,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -382,13 +377,13 @@ public class GCMap {
         }
 
         GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport).blockingGet();
-        List<Geocache> foundCaches = new ArrayList<Geocache>();
+        final List<Geocache> foundCaches = new ArrayList<Geocache>();
 
         if (mapSearchResultSet.results != null) {
 
             for (GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
                 if (r.postedCoordinates != null) {
-                    Geocache c = new Geocache();
+                    final Geocache c = new Geocache();
                     c.setDetailed(false);
                     c.setReliableLatLon(true);
                     c.setGeocode(r.code);

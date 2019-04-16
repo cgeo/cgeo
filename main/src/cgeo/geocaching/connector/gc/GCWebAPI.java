@@ -345,20 +345,18 @@ class GCWebAPI {
     static Single<MapSearchResultSet> searchMap(@NonNull final Viewport viewport) {
         final Parameters params = new Parameters();
 
-        StringBuilder box = new StringBuilder();
-        box.append(viewport.getLatitudeMax()).append(",").append(viewport.getLongitudeMin());
-        box.append(",").append(viewport.getLatitudeMin()).append(",").append(viewport.getLongitudeMax());
+        final StringBuilder box = new StringBuilder();
+        box.append(viewport.getLatitudeMax()).append(',').append(viewport.getLongitudeMin());
+        box.append(",").append(viewport.getLatitudeMin()).append(',').append(viewport.getLongitudeMax());
         params.put("box", box.toString());
 
-        StringBuilder origin = new StringBuilder();
-        origin.append(viewport.getCenter().getLatitude()).append(",").append(viewport.getCenter().getLongitude());
+        final StringBuilder origin = new StringBuilder();
+        origin.append(viewport.getCenter().getLatitude()).append(',').append(viewport.getCenter().getLongitude());
         params.put("origin", origin.toString());
         params.put("take", "500");
         params.put("skip", "0");
         params.put("asc", "true");
         params.put("sort", "distance");
-
-        Log.d("searchMap()");
 
         return getAPI("/web/search", params, MapSearchResultSet.class);
     }
