@@ -184,24 +184,37 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class CacheOwner {
+        @JsonProperty("code")
         String code;
+        @JsonProperty("username")
         String username;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class MapSearchResultSet {
+        @JsonProperty("results")
         List<MapSearchResult> results;
+        @JsonProperty("total")
+        int total;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class MapSearchResult {
+        @JsonProperty("code")
         String code;
+        @JsonProperty("name")
         String name;
+        @JsonProperty("postedCoordinates")
         PostedCoordinates postedCoordinates;
+        @JsonProperty("owner")
         CacheOwner owner;
+        @JsonProperty("premiumOnly")
         boolean premiumOnly;
+        @JsonProperty("geocacheType")
         int geocacheType;
+        @JsonProperty("userFound")
         boolean userFound;
+        @JsonProperty("cacheStatus")
         int cacheStatus;
     }
 
@@ -213,7 +226,9 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class PostedCoordinates {
+        @JsonProperty("latitude")
         double latitude;
+        @JsonProperty("longitude")
         double longitude;
 
         Geopoint toCoords() {
@@ -290,7 +305,6 @@ class GCWebAPI {
         });
     }
 
-
     private static Single<Response> patchAPI(final String path) {
         return getAuthorizationHeader().flatMap(new Function<Parameters, Single<Response>>() {
             @Override
@@ -343,7 +357,7 @@ class GCWebAPI {
 
 
 
-    static Single<MapSearchResultSet> searchMap(@NonNull final Viewport viewport) {
+    static MapSearchResultSet searchMap(@NonNull final Viewport viewport) {
         final Parameters params = new Parameters();
 
         final StringBuilder box = new StringBuilder();
@@ -353,13 +367,13 @@ class GCWebAPI {
 
         final StringBuilder origin = new StringBuilder();
         origin.append(viewport.getCenter().getLatitude()).append(',').append(viewport.getCenter().getLongitude());
-        params.put("origin", origin.toString());
         params.put("take", "500");
-        params.put("skip", "0");
         params.put("asc", "true");
+        params.put("skip", "0");
         params.put("sort", "distance");
+        params.put("origin", origin.toString());
 
-        return getAPI("/web/search", params, MapSearchResultSet.class);
+        return getAPI("/web/search", params, MapSearchResultSet.class).blockingGet();
     }
 
     @NonNull
