@@ -155,8 +155,12 @@ public class GCMap {
                     c.setName(r.name);
                     c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
                     c.setType(cacheType);
+                    c.setDifficulty(r.difficulty);
+                    c.setTerrain(r.terrain);
+                    c.setSize(containerTypeToCacheSize(r.containerType));
                     c.setPremiumMembersOnly(r.premiumOnly);
                     c.setFound(r.userFound);
+                    c.setFavoritePoints(r.favoritePoints);
                     c.setDisabled(r.cacheStatus == 1);
                     if (r.owner != null) {
                         c.setOwnerDisplayName(r.owner.username);
@@ -171,5 +175,22 @@ public class GCMap {
         searchResult.addAndPutInCache(foundCaches);
 
         return searchResult;
+    }
+
+    private static CacheSize containerTypeToCacheSize(int containerType) {
+        switch (containerType) {
+            case 2:
+                return CacheSize.MICRO;
+            case 3:
+                return CacheSize.REGULAR;
+            case 4:
+                return CacheSize.LARGE;
+            case 6:
+                return CacheSize.OTHER;
+            case 8:
+                return CacheSize.SMALL;
+            default:
+                return CacheSize.UNKNOWN;
+        }
     }
 }

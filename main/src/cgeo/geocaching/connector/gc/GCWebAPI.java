@@ -216,6 +216,14 @@ class GCWebAPI {
         boolean userFound;
         @JsonProperty("cacheStatus")
         int cacheStatus;
+        @JsonProperty("difficulty")
+        float difficulty;
+        @JsonProperty("terrain")
+        float terrain;
+        @JsonProperty("containerType")
+        int containerType;
+        @JsonProperty("favoritePoints")
+        int favoritePoints;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
