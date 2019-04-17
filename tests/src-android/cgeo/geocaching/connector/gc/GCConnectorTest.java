@@ -36,6 +36,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertThat(searchResult).isNotNull();
+                assertThat(searchResult.isEmpty()).isFalse();
                 assertThat(searchResult.getGeocodes()).doesNotContain("GC4ER5H");
             }
 
@@ -43,7 +44,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertThat(searchResult).isNotNull();
-                assertThat(searchResult.isEmpty()).isFalse();
                 assertThat(searchResult.getGeocodes()).contains("GC4ER5H");
             }
         } finally {

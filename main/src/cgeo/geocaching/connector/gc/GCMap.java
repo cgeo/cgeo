@@ -153,7 +153,7 @@ public class GCMap {
                     c.setPremiumMembersOnly(r.premiumOnly);
                     c.setFound(r.userFound);
                     c.setDisabled(r.cacheStatus == 1);
-                    if(r.owner != null) {
+                    if (r.owner != null) {
                         c.setOwnerDisplayName(r.owner.username);
                         c.setOwnerUserId(r.owner.username);
                     }
