@@ -210,7 +210,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return;
         }
         final boolean satellite = GoogleMapProvider.isSatelliteSource(Settings.getMapSource());
-        googleMap.setMapType(satellite ? GoogleMap.MAP_TYPE_SATELLITE : GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setMapType(satellite ? GoogleMap.MAP_TYPE_HYBRID : GoogleMap.MAP_TYPE_NORMAL);
     }
 
     @Override
