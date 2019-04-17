@@ -14,16 +14,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
