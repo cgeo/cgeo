@@ -167,7 +167,7 @@ public class GCMap {
         return searchResult;
     }
 
-    private static CacheSize containerTypeToCacheSize(int containerType) {
+    private static CacheSize containerTypeToCacheSize(final int containerType) {
         switch (containerType) {
             case 2:
                 return CacheSize.MICRO;
