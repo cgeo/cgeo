@@ -137,24 +137,15 @@ public class GCMap {
         final List<Geocache> foundCaches = new ArrayList<Geocache>();
 
         if (mapSearchResultSet.results != null) {
-
-            CacheType selectedCacheType = Settings.getCacheType();
-
             for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
                 if (r.postedCoordinates != null) {
-
-                    CacheType cacheType = CacheType.getByWaypointType(Integer.toString(r.geocacheType));
-                    if (selectedCacheType != CacheType.ALL && selectedCacheType != cacheType) {
-                        continue;
-                    }
-
                     final Geocache c = new Geocache();
                     c.setDetailed(false);
                     c.setReliableLatLon(true);
                     c.setGeocode(r.code);
                     c.setName(r.name);
                     c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
-                    c.setType(cacheType);
+                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
                     c.setDifficulty(r.difficulty);
                     c.setTerrain(r.terrain);
                     c.setSize(containerTypeToCacheSize(r.containerType));
@@ -166,7 +157,6 @@ public class GCMap {
                         c.setOwnerDisplayName(r.owner.username);
                         c.setOwnerUserId(r.owner.username);
                     }
-
                     foundCaches.add(c);
                 }
             }

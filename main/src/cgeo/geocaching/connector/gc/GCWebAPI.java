@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.connector.trackable.TrackableBrand;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -10,6 +11,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -20,8 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -381,6 +385,10 @@ class GCWebAPI {
         params.put("sort", "distance");
         params.put("origin", origin.toString());
 
+        if (!Settings.getCacheType().equals(CacheType.ALL)) {
+            params.put("ct", Settings.getCacheType().wptTypeId);
+        }
+
         return getAPI("/web/search", params, MapSearchResultSet.class).blockingGet();
     }
 
@@ -587,5 +595,4 @@ class GCWebAPI {
 
         return new ImmutablePair<>(StatusCode.NO_ERROR, postImageResponse.url);
     }
-
 }
