@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Nopea</string>
     <string name="map_strategy_auto">Nopeuden mukaan</string>
     <string name="map_strategy_detailed">Yksityiskohtainen</string>
-    <string name="live_map_notification">Koordinaatit livekartalla eivät välttämättä aina ole tarkat.\nMahdollisesti epätarkat koordinaatit on merkitty oranssilla ympyrällä.\n\nKätkön tietojen avaaminen tai kätkön tallentaminen offline-käyttöä varten antaa aina tarkat koordinaatit.</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
     <string name="map_routing_straight">Linnuntie</string>

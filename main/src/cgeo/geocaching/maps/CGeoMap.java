@@ -497,7 +497,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         prepareFilterBar();
 
-        LiveMapHint.getInstance().showHint(activity);
         AndroidBeam.disable(activity);
     }
 

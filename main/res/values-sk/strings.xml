@@ -1073,7 +1073,6 @@
     <string name="map_strategy_fast">Rýchla</string>
     <string name="map_strategy_auto">Podľa rýchlosti</string>
     <string name="map_strategy_detailed">Podrobná</string>
-    <string name="live_map_notification">Na aktívnej mape nemusia byť súradnice vždy presné.\nSúradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\n\nPo otvorení detailu skrýše alebo po jej uložení pre použitie offline, budú vždy získané presné súradnice.</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Navigácia</string>
     <string name="map_routing_straight">Priama čiara</string>

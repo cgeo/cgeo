@@ -1073,7 +1073,6 @@
     <string name="map_strategy_fast">Szybka</string>
     <string name="map_strategy_auto">Zależna od prędkości</string>
     <string name="map_strategy_detailed">Szczegółowa</string>
-    <string name="live_map_notification">Na nowej mapie live, współrzędne nie zawsze muszą być dokładne!\nPrawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\n\nOtworzenie szczegółów skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Nawigacja</string>
     <string name="map_routing_straight">Linia prosta</string>

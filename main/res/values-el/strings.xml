@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Γρήγορη</string>
     <string name="map_strategy_auto">Ταχύτητα εξαρτώμενη από</string>
     <string name="map_strategy_detailed">Με λεπτομέρειες</string>
-    <string name="live_map_notification">Οι συντεταγμένες στο live χάρτη μπορεί να μην είναι πάντα ακριβείς! \nΟι πιθανά ασαφείς συντεταγμένες επισημαίνονται με έναν πορτοκαλί κύκλο.\n\nΤο άνοιγμα της σελίδας της κρύπτης ή η αποθήκευσή της για χρήση χωρίς σύνδεση θα αποθηκεύσει τις ακριβείς συντεταγμένες.</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_routing_straight">Ευθεία γραμμή</string>

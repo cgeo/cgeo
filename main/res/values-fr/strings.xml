@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Rapide</string>
     <string name="map_strategy_auto">En fonction du déplacement</string>
     <string name="map_strategy_detailed">Détaillée</string>
-    <string name="live_map_notification">Sur la carte temps-réel, les coordonnées de certaines caches peuvent être imprécises, elles sont alors entourées d\'un cercle orange.\nConsultez les détails de la cache ou enregistrez-la pour une utilisation hors-ligne afin d\'obtenir ses coordonnées exactes.</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
     <string name="map_routing_straight">À vol d\'oiseau</string>

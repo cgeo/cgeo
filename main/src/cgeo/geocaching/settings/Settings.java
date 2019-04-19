@@ -190,7 +190,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_defaultNavigationTool2), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
             e.putInt(getKey(R.string.pref_livemapstrategy), prefsV0.getInt(getKey(R.string.pref_livemapstrategy), LivemapStrategy.AUTO.id));
             e.putBoolean(getKey(R.string.pref_debug), prefsV0.getBoolean(getKey(R.string.pref_debug), false));
-            e.putInt(getKey(R.string.pref_livemaphintshowcount), prefsV0.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
             e.apply();
@@ -1070,14 +1069,6 @@ public class Settings {
     public static void setDebug(final boolean debug) {
         Log.setDebug(debug);
         putBoolean(R.string.pref_debug, debug);
-    }
-
-    public static int getLiveMapHintShowCount() {
-        return getInt(R.string.pref_livemaphintshowcount, 0);
-    }
-
-    public static void setLiveMapHintShowCount(final int showCount) {
-        putInt(R.string.pref_livemaphintshowcount, showCount);
     }
 
     public static boolean isDbOnSDCard() {

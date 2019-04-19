@@ -125,7 +125,6 @@
     <string translatable="false" name="pref_lowpowermode">lowpowerlocation</string>
     <string translatable="false" name="pref_lastdetailspage">lastdetailspage</string>
     <string translatable="false" name="pref_livemapstrategy">livemapstrategy</string>
-    <string translatable="false" name="pref_livemaphintshowcount">livemaphintshowcount</string>
     <string translatable="false" name="pref_logtrackablewithoutgeocodeshowcount">logtrackablewithoutgeocodeshowcount</string>
     <string translatable="false" name="pref_settingsversion">settingsversion</string>
     <string translatable="false" name="pref_trackableaction">trackableaction</string>

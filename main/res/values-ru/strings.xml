@@ -1073,7 +1073,6 @@
     <string name="map_strategy_fast">Быстрая</string>
     <string name="map_strategy_auto">Зависит от скорости</string>
     <string name="map_strategy_detailed">Детальная</string>
-    <string name="live_map_notification">Координаты на онлайновой карте не всегда точны!\n Возможные неточности выделяются оранжевым кругом.\n\nОткрытие страницы тайника или сохранение тайника всегда сохранит точные координаты.</string>
     <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_routing">Навигация</string>
     <string name="map_routing_straight">Прямая</string>
