@@ -283,7 +283,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         init();
 
-        checkShowChangelog();
+        checkChangedInstall();
 
         LocalStorage.initGeocacheDataDir();
         if (LocalStorage.isRunningLowOnDiskSpace()) {
@@ -786,16 +786,22 @@ public class MainActivity extends AbstractActionBarActivity {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
 
-    private void checkShowChangelog() {
+    private void checkChangedInstall() {
         // temporary workaround for #4143
         //TODO: understand and avoid if possible
         try {
             final long lastChecksum = Settings.getLastChangelogChecksum();
             final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
             Settings.setLastChangelogChecksum(checksum);
-            // don't show change log after new install...
-            if (lastChecksum > 0 && lastChecksum != checksum) {
-                AboutActivity.showChangeLog(this);
+
+            // show starting page after install
+            if (lastChecksum == 0) {
+                AboutActivity.showStarting(this);
+            } else {
+                // show change log page after update
+                if (lastChecksum != checksum) {
+                    AboutActivity.showChangeLog(this);
+                }
             }
         } catch (final Exception ex) {
             Log.e("Error checking/showing changelog!", ex);

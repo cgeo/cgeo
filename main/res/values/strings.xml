@@ -440,6 +440,35 @@
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text">
+<b><i>Geocaching basics</i></b>\n\n
+
+Geocaching is an outdoor game to search and find so-called \"caches\".\n
+This app helps you to play this game.\n\n
+
+Link to the full <b>c:geo basics</b> documentation: https://manual.cgeo.org/en/basicuse\n\n
+
+<b><i>c:geo device permissions</i></b>\n\n
+
+During the installation process you will be informed and need to agree, that c:geo needs certain permissions on your device: \n
+- Location:\t Of course c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches.\n
+- Photos/Media/Files: c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. \n
+                      \tFurthermore c:geo will use your phone storage for import and export of files and reading of offline maps.\n
+                      \tIn case you attach a photo to a log, c:geo needs to use your device camera.\n\n
+
+Link to the full <b>c:geo permission</b> documentation: https://manual.cgeo.org/en/installation#permissions\n\n
+
+<b><i>First steps with c:geo</i></b>\n\n
+
+In order to use c:geo, you need an account of a geocaching platform of your choice.\n
+Select a platform you would like to use, and upfront create an user account on their web page (Basic accounts are normally free of charge).\n\n
+
+Then go to the c:geo settings => services page. There you have to choose the (before selected) platform and then activate and authorize it.\n\n
+
+Link to the full <b>c:geo First steps</b> documentation: https://manual.cgeo.org/en/firststeps\n\n
+    </string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     <string name="about_system_info_send_button">Send by mail…</string>
     <string name="about_system_info">c:geo system information</string>

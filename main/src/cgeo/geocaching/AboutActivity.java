@@ -183,6 +183,16 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     }
 
+    class StartingViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+
+        @Override
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_starting_page, parentView, false);
+            return view;
+        }
+
+    }
+
     class VersionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @BindView(R.id.about_version_string) protected TextView version;
@@ -206,6 +216,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     enum Page {
         VERSION(R.string.about_version),
         HELP(R.string.about_help),
+        STARTING(R.string.about_starting),
         CHANGELOG(R.string.about_changelog),
         SYSTEM(R.string.about_system),
         CONTRIBUTORS(R.string.about_contributors),
@@ -253,6 +264,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 return new VersionViewCreator();
             case HELP:
                 return new HelpViewCreator();
+            case STARTING:
+                return new StartingViewCreator();
             case CHANGELOG:
                 return new ChangeLogViewCreator();
             case SYSTEM:
@@ -279,6 +292,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     public static void showChangeLog(final Activity fromActivity) {
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
         intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
+        fromActivity.startActivity(intent);
+    }
+
+    public static void showStarting(final Activity fromActivity) {
+        final Intent intent = new Intent(fromActivity, AboutActivity.class);
+        intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.STARTING.ordinal());
         fromActivity.startActivity(intent);
     }
 

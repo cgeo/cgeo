@@ -18,7 +18,7 @@
                 <PreferenceCategory android:title="@string/settings_settings"
                     android:layout="@layout/preference_category" >
                     <cgeo.geocaching.settings.CheckBoxWithPopupPreference
-                        android:defaultValue="true"
+                        android:defaultValue="false"
                         android:key="@string/pref_connectorGCActive"
                         android:title="@string/settings_activate_gc"
                         app:text="@string/settings_gc_legal_note"
@@ -40,7 +40,7 @@
                         android:key="@string/preference_screen_basicmembers"
                         android:title="@string/settings_title_basicmembers" >
                         <CheckBoxPreference
-                            android:defaultValue="true"
+                            android:defaultValue="false"
                             android:key="@string/pref_loaddirectionimg"
                             android:summary="@string/init_summary_loaddirectionimg"
                             android:title="@string/init_loaddirectionimg" />
