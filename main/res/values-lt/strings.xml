@@ -1073,7 +1073,6 @@
     <string name="map_strategy_fast">Greita</string>
     <string name="map_strategy_auto">Priklausoma nuo greičio</string>
     <string name="map_strategy_detailed">Išsami</string>
-    <string name="live_map_notification">Koordinatės tiesioginiame žemėlapyje gali būti netikslios!\n Galimos netikslios koordinatės žymimos oranžinės spalvos apskritimu.\n\nAtidarius slėptuvės informaciją arba išsaugojus slėptuvę naudojimui be interneto bus visada gautos tikslios koordinatės.</string>
     <string name="map_select_multiple_items">Pasirinkite elementą</string>
     <string name="map_routing">Maršrutizavimas</string>
     <string name="map_routing_straight">Tiesi linija</string>

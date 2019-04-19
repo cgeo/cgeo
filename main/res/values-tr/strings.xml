@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Hızlı</string>
     <string name="map_strategy_auto">Hıza bağımlı</string>
     <string name="map_strategy_detailed">Detaylı</string>
-    <string name="live_map_notification">Canlı harita üzerindeki koordinatlar her zaman kesin olamayabilir!\n Kesin olmayabilecek olan koordinatlar turuncu dairelerle işaretlenmiştir.\n\nGeocache detaylarını açarken veya Geocache\'i çevrimdışı kullanım için kaydederken her zaman kesin koordinatlar kullanılacaktır.</string>
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
     <string name="map_routing_straight">Düz çizgi</string>

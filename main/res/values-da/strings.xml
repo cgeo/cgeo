@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Hurtig</string>
     <string name="map_strategy_auto">Hastighedsafhængig</string>
     <string name="map_strategy_detailed">Detaljeret</string>
-    <string name="live_map_notification">Positioner på Live-kortet er ikke altid præcise!\nCacher med upræcis positionsangivelse er markeret med en orange cirkel.\n\nDen korrekte position vil dog altid blive indlæst når du åbner cachedetaljer eller gemmer cachen til offlinebrug.</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="map_routing">Navigation</string>
     <string name="map_routing_straight">Lige linje</string>

@@ -1073,7 +1073,6 @@
     <string name="map_strategy_fast">Rychlá</string>
     <string name="map_strategy_auto">Závislá na rychlosti</string>
     <string name="map_strategy_detailed">Podrobná</string>
-    <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné!\nPřípadné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\n\nOtevřením detailů keše nebo jejím uložením pro offline použití zíkáte přesné souřadnice.</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
     <string name="map_routing_straight">Vzdušná čára</string>

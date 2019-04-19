@@ -1063,7 +1063,6 @@
     <string name="map_strategy_fast">Ātrs</string>
     <string name="map_strategy_auto">Atkarībā no ātruma</string>
     <string name="map_strategy_detailed">Detalizēts</string>
-    <string name="live_map_notification">Koordinātas tiešsaistes kartē ne vienmēr var būt precīzas. Iespējamās neprecīzās koordinātas ir atzīmētas ar oranžu apli.\nAtverot slēpņa informāciju vai saglabājot slēpni lietošanai bezsaistē iegūsiet precīzas koordinātas.\n\nVairāk informācijas varat atrast aplikācijas sadaļā \"Par c:geo\"</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <string name="map_routing">Maršrutēšana</string>
     <string name="map_routing_straight">Taisna līnija</string>
