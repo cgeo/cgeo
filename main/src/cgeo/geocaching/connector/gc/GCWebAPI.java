@@ -1,14 +1,17 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.connector.trackable.TrackableBrand;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -182,6 +185,50 @@ class GCWebAPI {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class CacheOwner {
+        @JsonProperty("code")
+        String code;
+        @JsonProperty("username")
+        String username;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class MapSearchResultSet {
+        @JsonProperty("results")
+        List<MapSearchResult> results;
+        @JsonProperty("total")
+        int total;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class MapSearchResult {
+        @JsonProperty("code")
+        String code;
+        @JsonProperty("name")
+        String name;
+        @JsonProperty("postedCoordinates")
+        PostedCoordinates postedCoordinates;
+        @JsonProperty("owner")
+        CacheOwner owner;
+        @JsonProperty("premiumOnly")
+        boolean premiumOnly;
+        @JsonProperty("geocacheType")
+        int geocacheType;
+        @JsonProperty("userFound")
+        boolean userFound;
+        @JsonProperty("cacheStatus")
+        int cacheStatus;
+        @JsonProperty("difficulty")
+        float difficulty;
+        @JsonProperty("terrain")
+        float terrain;
+        @JsonProperty("containerType")
+        int containerType;
+        @JsonProperty("favoritePoints")
+        int favoritePoints;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     static final class GeocacheType {
         long id;
         String name;
@@ -189,7 +236,9 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class PostedCoordinates {
+        @JsonProperty("latitude")
         double latitude;
+        @JsonProperty("longitude")
         double longitude;
 
         Geopoint toCoords() {
@@ -257,6 +306,15 @@ class GCWebAPI {
         });
     }
 
+    private static <T> Single<T> getAPI(final String path, final Parameters parameters, final Class<T> clazz) {
+        return getAuthorizationHeader().flatMap(new Function<Parameters, SingleSource<T>>() {
+            @Override
+            public SingleSource<T> apply(@NonNull final Parameters headers) throws Exception {
+                return Network.getRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler);
+            }
+        });
+    }
+
     private static Single<Response> patchAPI(final String path) {
         return getAuthorizationHeader().flatMap(new Function<Parameters, Single<Response>>() {
             @Override
@@ -305,6 +363,31 @@ class GCWebAPI {
 
     static Single<CacheDetails> getCacheDetails(final String geocode) {
         return getAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocode), CacheDetails.class);
+    }
+
+
+
+    static MapSearchResultSet searchMap(@NonNull final Viewport viewport) {
+        final Parameters params = new Parameters();
+
+        final StringBuilder box = new StringBuilder();
+        box.append(viewport.getLatitudeMax()).append(',').append(viewport.getLongitudeMin());
+        box.append(',').append(viewport.getLatitudeMin()).append(',').append(viewport.getLongitudeMax());
+        params.put("box", box.toString());
+
+        final StringBuilder origin = new StringBuilder();
+        origin.append(viewport.getCenter().getLatitude()).append(',').append(viewport.getCenter().getLongitude());
+        params.put("take", "500");
+        params.put("asc", "true");
+        params.put("skip", "0");
+        params.put("sort", "distance");
+        params.put("origin", origin.toString());
+
+        if (!Settings.getCacheType().equals(CacheType.ALL)) {
+            params.put("ct", Settings.getCacheType().wptTypeId);
+        }
+
+        return getAPI("/web/search", params, MapSearchResultSet.class).blockingGet();
     }
 
     @NonNull
@@ -510,5 +593,4 @@ class GCWebAPI {
 
         return new ImmutablePair<>(StatusCode.NO_ERROR, postImageResponse.url);
     }
-
 }

@@ -293,8 +293,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assert parsedCache != null;
                     assertThat(parsedCache).isNotNull();
 
-                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
-                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
+                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
+                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
 
                     // check update after switch strategy to FAST
                     Settings.setLiveMapStrategy(LivemapStrategy.FAST);
@@ -307,85 +307,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assert parsedCache != null;
                     assertThat(parsedCache).isNotNull();
 
-                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
-                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
+                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
+                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
 
                 } finally {
                     // restore user settings
-                    Settings.setLiveMapStrategy(strategy);
-                    Settings.setCacheType(cacheType);
-                }
-            }
-        });
-    }
-
-    /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport, MapTokens)}
-     */
-    @MediumTest
-    public static void testSearchByViewportNotLoggedIn() {
-        withMockedLoginDo(new Runnable() {
-
-            @Override
-            public void run() {
-                final LivemapStrategy strategy = Settings.getLiveMapStrategy();
-                final LivemapStrategy testStrategy = LivemapStrategy.FAST; // FASTEST, FAST or DETAILED for tests
-                Settings.setLiveMapStrategy(testStrategy);
-                final CacheType cacheType = Settings.getCacheType();
-
-                try {
-                    { // non premium cache
-                        final MockedCache cache = new GC3FJ5F();
-                        deleteCacheFromDBAndLogout(cache.getGeocode());
-                        Tile.cache.removeFromTileCache(cache);
-                        Settings.setCacheType(CacheType.ALL);
-
-                        final Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
-
-                        assertThat(search).isNotNull();
-                        assertThat(search.getGeocodes()).contains(cache.getGeocode());
-                        // coords differ
-                        final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        assert cacheFromViewport != null;
-                        assertThat(cacheFromViewport).isNotNull();
-                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-                        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords())).isGreaterThan(1e-4f);
-                        // depending on the chosen strategy the coords can be reliable or not
-                        // noinspection ConstantConditions
-                        assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
-                    }
-
-                    { // premium cache
-                        final MockedCache cache = new MockedCache(new Geopoint(51.338717, 7.032750)) {
-                            @Override
-                            public String getGeocode() {
-                                return "GC6K70B";
-                            }
-                        };
-                        deleteCacheFromDBAndLogout(cache.getGeocode());
-                        Tile.cache.removeFromTileCache(cache);
-                        Settings.setCacheType(CacheType.ALL);
-
-                        final Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                        final SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
-
-                        assertThat(search).isNotNull();
-                        assertThat(search.getGeocodes()).contains(cache.getGeocode());
-                        // coords differ
-                        final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        assert cacheFromViewport != null;
-                        assertThat(cacheFromViewport).isNotNull();
-                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-                        Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-                        assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
-                        // depending on the chosen strategy the coords can be reliable or not
-                        // noinspection ConstantConditions
-                        assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
-                    }
-
-                } finally {
                     Settings.setLiveMapStrategy(strategy);
                     Settings.setCacheType(cacheType);
                 }

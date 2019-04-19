@@ -7,49 +7,29 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
-import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.LivemapStrategy;
-import cgeo.geocaching.maps.LivemapStrategy.Flag;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.reactivex.Single;
-import io.reactivex.functions.BiFunction;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class GCMap {
-    private static Viewport lastSearchViewport = null;
-    private static final Bitmap ONE_ONE_BITMAP = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
-
     private GCMap() {
         // utility class
     }
@@ -116,119 +96,6 @@ public class GCMap {
     }
 
     /**
-     * @param data
-     *            Retrieved data.
-     * @return SearchResult. Never null.
-     */
-    public static SearchResult parseMapJSON(final String data, final Tile tile, final Bitmap bitmap, final LivemapStrategy strategy) {
-        final SearchResult searchResult = new SearchResult();
-
-        try {
-
-            if (StringUtils.isEmpty(data)) {
-                throw new ParserException("No page given");
-            }
-
-            // Example JSON information
-            // {"grid":[....],
-            //  "keys":["","55_55","55_54","17_25","55_53","17_27","17_26","57_53","57_55","3_62","3_61","57_54","3_60","15_27","15_26","15_25","4_60","4_61","4_62","16_25","16_26","16_27","2_62","2_60","2_61","56_53","56_54","56_55"],
-            //  "data":{"55_55":[{"i":"gEaR","n":"Spiel & Sport"}],"55_54":[{"i":"gEaR","n":"Spiel & Sport"}],"17_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"55_53":[{"i":"gEaR","n":"Spiel & Sport"}],"17_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"17_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"57_53":[{"i":"gEaR","n":"Spiel & Sport"}],"57_55":[{"i":"gEaR","n":"Spiel & Sport"}],"3_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"3_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"57_54":[{"i":"gEaR","n":"Spiel & Sport"}],"3_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"15_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"15_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"15_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"4_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"4_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"4_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"16_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"16_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"16_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"2_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"2_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"2_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"56_53":[{"i":"gEaR","n":"Spiel & Sport"}],"56_54":[{"i":"gEaR","n":"Spiel & Sport"}],"56_55":[{"i":"gEaR","n":"Spiel & Sport"}]}
-            //  }
-
-            final ObjectNode json = (ObjectNode) JsonUtils.reader.readTree(data);
-
-            final ArrayNode grid = (ArrayNode) json.get("grid");
-            if (grid == null || grid.size() != (UTFGrid.GRID_MAXY + 1)) {
-                throw new ParserException("No grid inside JSON");
-            }
-            final ArrayNode keys = (ArrayNode) json.get("keys");
-            if (keys == null) {
-                throw new ParserException("No keys inside JSON");
-            }
-            final ObjectNode dataObject = (ObjectNode) json.get("data");
-            if (dataObject == null) {
-                throw new ParserException("No data inside JSON");
-            }
-
-            // iterate over the data and construct all caches in this tile
-            final Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
-            final Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
-            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<>(2000); // JSON id, cache name
-
-            for (final JsonNode rawKey: keys) {
-                final String key = rawKey.asText();
-                if (StringUtils.isNotBlank(key)) { // index 0 is empty
-                    final UTFGridPosition pos = UTFGridPosition.fromString(key);
-                    final ArrayNode dataForKey = (ArrayNode) dataObject.get(key);
-                    for (final JsonNode cacheInfo: dataForKey) {
-                        final String id = cacheInfo.get("i").asText();
-                        nameCache.put(id, cacheInfo.get("n").asText());
-
-                        List<UTFGridPosition> listOfPositions = positions.get(id);
-                        List<UTFGridPosition> singleListOfPositions = singlePositions.get(id);
-
-                        if (listOfPositions == null) {
-                            listOfPositions = new ArrayList<>();
-                            positions.put(id, listOfPositions);
-                            singleListOfPositions = new ArrayList<>();
-                            singlePositions.put(id, singleListOfPositions);
-                        }
-
-                        listOfPositions.add(pos);
-                        if (dataForKey.size() == 1) {
-                            singleListOfPositions.add(pos);
-                        }
-
-                    }
-                }
-            }
-
-            final List<Geocache> caches = new ArrayList<>();
-            for (final Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
-                final String id = entry.getKey();
-                final List<UTFGridPosition> pos = entry.getValue();
-                final UTFGridPosition xy = UTFGrid.getPositionInGrid(pos);
-                final Geocache cache = new Geocache();
-                cache.setDetailed(false);
-                cache.setReliableLatLon(false);
-                cache.setGeocode(id);
-                cache.setName(nameCache.get(id));
-                cache.setCoords(tile.getCoord(xy), tile.getZoomLevel());
-                if (strategy.flags.contains(LivemapStrategy.Flag.PARSE_TILES) && bitmap != null) {
-                    for (final UTFGridPosition singlePos : singlePositions.get(id)) {
-                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomLevel())) {
-                            break; // cache parsed
-                        }
-                    }
-                } else {
-                    cache.setType(CacheType.UNKNOWN, tile.getZoomLevel());
-                }
-
-                boolean exclude = false;
-                if (Settings.isExcludeMyCaches() && (cache.isFound() || cache.isOwner())) { // workaround for BM
-                    exclude = true;
-                }
-                if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
-                    exclude = true;
-                }
-                if (!Settings.getCacheType().contains(cache) && cache.getType() != CacheType.UNKNOWN) { // workaround for BM
-                    exclude = true;
-                }
-                if (!exclude) {
-                    caches.add(cache);
-                }
-            }
-            searchResult.addAndPutInCache(caches);
-            Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
-
-        } catch (RuntimeException | ParserException | IOException e) {
-            Log.e("GCMap.parseMapJSON", e);
-        }
-
-        return searchResult;
-    }
-
-    /**
      * Searches the view port on the live map with Strategy.AUTO
      *
      * @param viewport
@@ -238,17 +105,10 @@ public class GCMap {
      */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
-        final int speed = (int) Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
-        LivemapStrategy strategy = Settings.getLiveMapStrategy();
-        if (strategy == LivemapStrategy.AUTO) {
-            strategy = speed >= 30 ? LivemapStrategy.FAST : LivemapStrategy.DETAILED;
-        }
-
-        final SearchResult result = searchByViewport(viewport, tokens, strategy);
+        final SearchResult result = searchPlayMapByViewport(viewport);
 
         if (Settings.isDebug()) {
-            final StringBuilder text = new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
-            result.setUrl(result.getUrl() + text);
+            result.setUrl(result.getUrl());
         }
 
         Log.d(String.format(Locale.getDefault(), "GCMap: returning %d caches from search", result.getCount()));
@@ -256,21 +116,16 @@ public class GCMap {
         return result;
     }
 
+
     /**
      * Searches the view port on the live map for caches.
-     * The strategy dictates if only live map information is used or if an additional
-     * searchByCoordinates query is issued.
      *
      * @param viewport
      *            Area to search
-     * @param tokens
-     *            Live map tokens
-     * @param strategy
-     *            Strategy for data retrieval and parsing, @see Strategy
      */
     @NonNull
-    private static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens, @NonNull final LivemapStrategy strategy) {
-        Log.d("GCMap.searchByViewport" + viewport.toString());
+    private static SearchResult searchPlayMapByViewport(@NonNull final Viewport viewport) {
+        Log.d("GCMap.searchPlayMapByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
 
@@ -278,155 +133,54 @@ public class GCMap {
             searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
         }
 
-        if (strategy.flags.contains(LivemapStrategy.Flag.LOAD_TILES)) {
-            final Set<Tile> tiles = Tile.getTilesForViewport(viewport);
+        final GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport);
+        final List<Geocache> foundCaches = new ArrayList<Geocache>();
 
-            if (Settings.isDebug()) {
-                searchResult.setUrl(String.valueOf(tiles.iterator().next().getZoomLevel()) + Formatter.SEPARATOR + searchResult.getUrl());
-            }
-
-            for (final Tile tile : tiles) {
-                if (!Tile.cache.contains(tile)) {
-                    final Parameters params = new Parameters(
-                            "x", String.valueOf(tile.getX()),
-                            "y", String.valueOf(tile.getY()),
-                            "z", String.valueOf(tile.getZoomLevel()),
-                            "ep", "1",
-                            "app", "cgeo");
-                    if (tokens != null) {
-                        params.put("k", tokens.getUserSession(), "st", tokens.getSessionToken());
+        if (mapSearchResultSet.results != null) {
+            for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
+                if (r.postedCoordinates != null) {
+                    final Geocache c = new Geocache();
+                    c.setDetailed(false);
+                    c.setReliableLatLon(true);
+                    c.setGeocode(r.code);
+                    c.setName(r.name);
+                    c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
+                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
+                    c.setDifficulty(r.difficulty);
+                    c.setTerrain(r.terrain);
+                    c.setSize(containerTypeToCacheSize(r.containerType));
+                    c.setPremiumMembersOnly(r.premiumOnly);
+                    c.setFound(r.userFound);
+                    c.setFavoritePoints(r.favoritePoints);
+                    c.setDisabled(r.cacheStatus == 1);
+                    if (r.owner != null) {
+                        c.setOwnerDisplayName(r.owner.username);
+                        c.setOwnerUserId(r.owner.username);
                     }
-                    if (Settings.isExcludeMyCaches()) { // works only for PM
-                        params.put("hf", "1", "hh", "1"); // hide found, hide hidden
-                    }
-                    // ect: exclude cache type (probably), comma separated list
-                    if (Settings.getCacheType() != CacheType.ALL) {
-                        params.put("ect", getCacheTypeFilter(Settings.getCacheType()));
-                    }
-                    if (tile.getZoomLevel() != 14) {
-                        params.put("_", String.valueOf(System.currentTimeMillis()));
-                    }
-
-                    // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    final Single<Bitmap> bitmapObs = Tile.requestMapTile(params).onErrorResumeNext(Single.just(ONE_ONE_BITMAP));
-                    final Single<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP).onErrorResumeNext(Single.just(""));
-                    try {
-                        Single.zip(bitmapObs, dataObs, new BiFunction<Bitmap, String, String>() {
-                            @Override
-                            public String apply(final Bitmap bitmap, final String data) {
-                                final boolean validBitmap = bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
-
-                                if (StringUtils.isEmpty(data)) {
-                                    Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-                                } else {
-                                    final SearchResult search = parseMapJSON(data, tile, validBitmap ? bitmap : null, strategy);
-                                    if (CollectionUtils.isEmpty(search.getGeocodes())) {
-                                        Log.w("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
-                                    } else {
-                                        synchronized (searchResult) {
-                                            searchResult.addSearchResult(search);
-                                        }
-                                    }
-                                    synchronized (Tile.cache) {
-                                        Tile.cache.add(tile);
-                                    }
-                                }
-
-                                // release native bitmap memory if we didn't get the placeholder
-                                if (bitmap != ONE_ONE_BITMAP) {
-                                    bitmap.recycle();
-                                }
-
-                                return data;
-                            }
-                        }).toCompletable().blockingAwait();
-                    } catch (final Exception e) {
-                        Log.e("GCMap.searchByViewPort: connection error", e);
-                    }
-                }
-            }
-
-            // Check for vanished found caches
-            if (tiles.iterator().next().getZoomLevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
-                searchResult.addFilteredGeocodes(DataStore.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
-            }
-        }
-
-        if (strategy.flags.contains(Flag.SEARCH_NEARBY) && Settings.isGCPremiumMember()) {
-            final Geopoint center = viewport.getCenter();
-            if (lastSearchViewport == null || !lastSearchViewport.contains(center)) {
-                final SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType());
-                if (search != null && !search.isEmpty()) {
-                    final Set<String> geocodes = search.getGeocodes();
-                    lastSearchViewport = DataStore.getBounds(geocodes);
-                    searchResult.addGeocodes(geocodes);
+                    foundCaches.add(c);
                 }
             }
         }
+
+        searchResult.addAndPutInCache(foundCaches);
 
         return searchResult;
     }
 
-    /**
-     * Creates a list of caches types to filter on the live map (exclusion string)
-     *
-     * @param typeToDisplay
-     *            - cache type to omit from exclusion list so it gets displayed
-     *
-     *         cache types for live map filter:
-     *         2 = traditional, 9 = ape, 5 = letterbox
-     *         3 = multi
-     *         6 = event, 453 = mega, 13 = cito, 1304 = gps adventures
-     *         4 = virtual, 11 = webcam, 137 = earth
-     *         8 = mystery, 1858 = wherigo
-     */
-    private static String getCacheTypeFilter(final CacheType typeToDisplay) {
-        // Put all types in set, remove what should be visible in a second step
-        final Set<String> filterTypes = new HashSet<>(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
-        switch (typeToDisplay) {
-            case TRADITIONAL:
-                filterTypes.remove("2");
-                break;
-            case PROJECT_APE:
-                filterTypes.remove("9");
-                break;
-            case LETTERBOX:
-                filterTypes.remove("5");
-                break;
-            case MULTI:
-                filterTypes.remove("3");
-                break;
-            case EVENT:
-                filterTypes.remove("6");
-                break;
-            case MEGA_EVENT:
-                filterTypes.remove("453");
-                break;
-            case CITO:
-                filterTypes.remove("13");
-                break;
-            case GPS_EXHIBIT:
-                filterTypes.remove("1304");
-                break;
-            case VIRTUAL:
-                filterTypes.remove("4");
-                break;
-            case WEBCAM:
-                filterTypes.remove("11");
-                break;
-            case EARTH:
-                filterTypes.remove("137");
-                break;
-            case MYSTERY:
-                filterTypes.remove("8");
-                break;
-            case WHERIGO:
-                filterTypes.remove("1858");
-                break;
+    private static CacheSize containerTypeToCacheSize(final int containerType) {
+        switch (containerType) {
+            case 2:
+                return CacheSize.MICRO;
+            case 3:
+                return CacheSize.REGULAR;
+            case 4:
+                return CacheSize.LARGE;
+            case 6:
+                return CacheSize.OTHER;
+            case 8:
+                return CacheSize.SMALL;
             default:
-                // nothing to remove otherwise
+                return CacheSize.UNKNOWN;
         }
-
-        return StringUtils.join(filterTypes.toArray(), ",");
     }
 }

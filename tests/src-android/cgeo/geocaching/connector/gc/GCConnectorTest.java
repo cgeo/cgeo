@@ -37,7 +37,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertThat(searchResult).isNotNull();
                 assertThat(searchResult.isEmpty()).isFalse();
-                assertThat(searchResult.getGeocodes()).contains("GC4ER5H");
+                assertThat(searchResult.getGeocodes()).doesNotContain("GC4ER5H");
             }
 
             {
