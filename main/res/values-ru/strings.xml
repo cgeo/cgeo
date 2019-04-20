@@ -1067,12 +1067,6 @@
     <string name="map_static_loading">Загрузка статических карт…</string>
     <string name="map_token_err">Поскольку c:geo может загрузить только часть данных, координаты тайников могут быть неточны.</string>
     <string name="map_as_list">Показать списком</string>
-    <string name="map_strategy">Стратегия</string>
-    <string name="map_strategy_title">Стратегия онлайн карты</string>
-    <string name="map_strategy_fastest">Быстрейшая</string>
-    <string name="map_strategy_fast">Быстрая</string>
-    <string name="map_strategy_auto">Зависит от скорости</string>
-    <string name="map_strategy_detailed">Детальная</string>
     <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_routing">Навигация</string>
     <string name="map_routing_straight">Прямая</string>

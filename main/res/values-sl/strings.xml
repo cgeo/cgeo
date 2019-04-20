@@ -1067,12 +1067,6 @@
     <string name="map_static_loading">Nalaganje statičnih zemljevidov…</string>
     <string name="map_token_err">Ker je c:geo lahko prenesel samo del podatkov, so lahko koordinate nenatančne.</string>
     <string name="map_as_list">Pokaži kot seznam</string>
-    <string name="map_strategy">Strategija</string>
-    <string name="map_strategy_title">Strategija nalaganja živih podatkov</string>
-    <string name="map_strategy_fastest">Najhitrejša</string>
-    <string name="map_strategy_fast">Hitra</string>
-    <string name="map_strategy_auto">Odvisna od moje hitrosti</string>
-    <string name="map_strategy_detailed">Podrobna</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <string name="map_routing">Usmerjanje</string>
     <string name="map_routing_straight">Straight line</string>

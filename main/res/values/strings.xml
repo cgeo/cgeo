@@ -1103,12 +1103,6 @@
     <string name="map_as_list">Show as list</string>
     <string name="map_clear_trailhistory">Clear trail history</string>
     <string name="map_trailhistory_cleared">trail history cleared</string>
-    <string name="map_strategy">Strategy</string>
-    <string name="map_strategy_title">Live Map strategy</string>
-    <string name="map_strategy_fastest">Fastest</string>
-    <string name="map_strategy_fast">Fast</string>
-    <string name="map_strategy_auto">Speed dependent</string>
-    <string name="map_strategy_detailed">Detailed</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Straight line</string>

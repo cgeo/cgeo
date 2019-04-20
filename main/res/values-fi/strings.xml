@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Ladataan staattisia karttoja…</string>
     <string name="map_token_err">Koska c:geo pystyy lataamaan vain osittaiset tiedot, kätkön koordinaatit saattavat olla epätarkat.</string>
     <string name="map_as_list">Näytä luettelona</string>
-    <string name="map_strategy">Strategia</string>
-    <string name="map_strategy_title">Live-kartan strategia</string>
-    <string name="map_strategy_fastest">Nopein</string>
-    <string name="map_strategy_fast">Nopea</string>
-    <string name="map_strategy_auto">Nopeuden mukaan</string>
-    <string name="map_strategy_detailed">Yksityiskohtainen</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
     <string name="map_routing_straight">Linnuntie</string>

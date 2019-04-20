@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Statische kaarten laden…</string>
     <string name="map_token_err">Omdat c:geo alleen gedeeltelijke gegevens kan downloaden, kunnen de coördinaten onnauwkeurig zijn.</string>
     <string name="map_as_list">Laat zien als lijst</string>
-    <string name="map_strategy">Strategie</string>
-    <string name="map_strategy_title">Live kaart strategie</string>
-    <string name="map_strategy_fastest">Snelste</string>
-    <string name="map_strategy_fast">Snel</string>
-    <string name="map_strategy_auto">Afhankelijk van snelheid</string>
-    <string name="map_strategy_detailed">Gedetailleerd</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
     <string name="map_routing_straight">Rechte lijn</string>

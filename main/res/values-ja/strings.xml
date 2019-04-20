@@ -1037,12 +1037,6 @@
     <string name="map_static_loading">オフライン地図をロード中…</string>
     <string name="map_token_err">部分的なデータのみダウンロード可能なのでキャッシュの座標は不正確かもしれません。</string>
     <string name="map_as_list">リスト表示</string>
-    <string name="map_strategy">更新方法</string>
-    <string name="map_strategy_title">キャッシュ情報の取得方法</string>
-    <string name="map_strategy_fastest">最速(座標の概算値のみ)</string>
-    <string name="map_strategy_fast">速い(「最速」+タイプ)</string>
-    <string name="map_strategy_auto">自動(移動速度に依存)</string>
-    <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索</string>
     <string name="map_routing_straight">直線</string>

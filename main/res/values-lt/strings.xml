@@ -1067,12 +1067,6 @@
     <string name="map_static_loading">Įkeliamas statinis žemėlapis…</string>
     <string name="map_token_err">Slėptuvės koordinatės gali būti netikslios nes c:geo nepavyko atsisiųsti duomenų.</string>
     <string name="map_as_list">Rodyti kaip sąrašą</string>
-    <string name="map_strategy">Žemėlapio strategija</string>
-    <string name="map_strategy_title">Tiesioginio žemėlapio strategija</string>
-    <string name="map_strategy_fastest">Greičiausia</string>
-    <string name="map_strategy_fast">Greita</string>
-    <string name="map_strategy_auto">Priklausoma nuo greičio</string>
-    <string name="map_strategy_detailed">Išsami</string>
     <string name="map_select_multiple_items">Pasirinkite elementą</string>
     <string name="map_routing">Maršrutizavimas</string>
     <string name="map_routing_straight">Tiesi linija</string>

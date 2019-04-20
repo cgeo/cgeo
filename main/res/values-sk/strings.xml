@@ -1067,12 +1067,6 @@
     <string name="map_static_loading">Načítanie statických máp…</string>
     <string name="map_token_err">c:geo bolo schopné stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
-    <string name="map_strategy">Stratégia</string>
-    <string name="map_strategy_title">Stratégia aktívnej mapy</string>
-    <string name="map_strategy_fastest">Najrýchlejšia</string>
-    <string name="map_strategy_fast">Rýchla</string>
-    <string name="map_strategy_auto">Podľa rýchlosti</string>
-    <string name="map_strategy_detailed">Podrobná</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Navigácia</string>
     <string name="map_routing_straight">Priama čiara</string>

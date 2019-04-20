@@ -1067,12 +1067,6 @@
     <string name="map_static_loading">Načítání statických map…</string>
     <string name="map_token_err">Protože c:geo může stáhnout jen částečná data, souřadnice keší nemusí být přesné.</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
-    <string name="map_strategy">Strategie</string>
-    <string name="map_strategy_title">Strategie aktivní mapy</string>
-    <string name="map_strategy_fastest">Nejrychlejší</string>
-    <string name="map_strategy_fast">Rychlá</string>
-    <string name="map_strategy_auto">Závislá na rychlosti</string>
-    <string name="map_strategy_detailed">Podrobná</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
     <string name="map_routing_straight">Vzdušná čára</string>

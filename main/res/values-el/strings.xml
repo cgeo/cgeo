@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Φόρτωση στατικών χαρτών…</string>
     <string name="map_token_err">Δεδομένου ότι το c:geo μπορεί να κατεβάσει μόνο εν μέρει δεδομένα, οι συντεταγμένες της κρύπτης μπορεί να είναι ανακριβείς.</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
-    <string name="map_strategy">Στρατηγική</string>
-    <string name="map_strategy_title">Στρατηγική σε live χάρτη</string>
-    <string name="map_strategy_fastest">Ταχύτατη</string>
-    <string name="map_strategy_fast">Γρήγορη</string>
-    <string name="map_strategy_auto">Ταχύτητα εξαρτώμενη από</string>
-    <string name="map_strategy_detailed">Με λεπτομέρειες</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_routing_straight">Ευθεία γραμμή</string>

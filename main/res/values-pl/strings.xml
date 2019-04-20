@@ -1067,12 +1067,6 @@
     <string name="map_static_loading">Ładuję mapy statyczne…</string>
     <string name="map_token_err">W związku z tym, że c:geo ma możliwość pobrania tylko częściowych danych, współrzędne GPS mogą być niedokładne.</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
-    <string name="map_strategy">Strategia</string>
-    <string name="map_strategy_title">Strategia mapy online</string>
-    <string name="map_strategy_fastest">Najszybsza</string>
-    <string name="map_strategy_fast">Szybka</string>
-    <string name="map_strategy_auto">Zależna od prędkości</string>
-    <string name="map_strategy_detailed">Szczegółowa</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Nawigacja</string>
     <string name="map_routing_straight">Linia prosta</string>

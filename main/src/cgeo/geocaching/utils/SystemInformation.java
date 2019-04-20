@@ -64,7 +64,6 @@ public final class SystemInformation {
                 .append("\nMagnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
                 .append("\nDirection sensor used: ").append(usedDirectionSensor)
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
-                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
                 .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
                 .append("\nSystem language: ").append(Locale.getDefault());

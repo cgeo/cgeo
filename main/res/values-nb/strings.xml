@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Laster statiske kart…</string>
     <string name="map_token_err">Siden c:geo bare kan laste ned datasettene delvis, kan enkelte koordinater være unøyaktige.</string>
     <string name="map_as_list">Vis som liste</string>
-    <string name="map_strategy">Strategi for live-kart</string>
-    <string name="map_strategy_title">Strategi for Live-kart</string>
-    <string name="map_strategy_fastest">Raskest</string>
-    <string name="map_strategy_fast">Rask</string>
-    <string name="map_strategy_auto">Hastighetsavhengig</string>
-    <string name="map_strategy_detailed">Detaljert</string>
     <string name="map_select_multiple_items">Velg objekt</string>
     <string name="map_routing">Rute</string>
     <string name="map_routing_straight">Rett linje</string>
