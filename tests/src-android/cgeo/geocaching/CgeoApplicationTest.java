@@ -16,7 +16,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Credentials;
@@ -270,7 +269,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
             @Override
             public void run() {
                 // backup user settings
-                final LivemapStrategy strategy = Settings.getLiveMapStrategy();
                 final CacheType cacheType = Settings.getCacheType();
 
                 try {
@@ -284,8 +282,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final MapTokens tokens = GCLogin.getInstance().getMapTokens();
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
-                    // check coords for DETAILED
-                    Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
+                    // check coords
                     SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
@@ -296,23 +293,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
                     assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
 
-                    // check update after switch strategy to FAST
-                    Settings.setLiveMapStrategy(LivemapStrategy.FAST);
-                    Tile.cache.removeFromTileCache(mockedCache);
-
-                    search = ConnectorFactory.searchByViewport(viewport, tokens);
-                    assertThat(search).isNotNull();
-                    assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
-                    parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                    assert parsedCache != null;
-                    assertThat(parsedCache).isNotNull();
-
-                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
-                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
-
                 } finally {
                     // restore user settings
-                    Settings.setLiveMapStrategy(strategy);
                     Settings.setCacheType(cacheType);
                 }
             }
