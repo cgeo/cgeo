@@ -118,8 +118,8 @@ public class WaypointTest extends CGeoTestCase {
         newWaypoints.add(server);
         Waypoint.mergeWayPoints(newWaypoints, Collections.singletonList(local), false);
 
-        assertThat(newWaypoints.size()).isEqualTo(1);
-        assertThat(newWaypoints.contains(server)).isTrue();
+        assertThat(newWaypoints).hasSize(1);
+        assertThat(newWaypoints).contains(server);
 
         assertThat(server.getPrefix()).isEqualTo("S1");
         assertThat(server.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
@@ -147,8 +147,8 @@ public class WaypointTest extends CGeoTestCase {
         newWaypoints.add(server);
         Waypoint.mergeWayPoints(newWaypoints, Collections.singletonList(local), false);
 
-        assertThat(newWaypoints.size()).isEqualTo(2);
-        assertThat(newWaypoints.contains(local)).isTrue();
+        assertThat(newWaypoints).hasSize(2);
+        assertThat(newWaypoints).contains(local);
 
         // server wp is untouched
         assertThat(server.getPrefix()).isEqualTo("01");
