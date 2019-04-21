@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Kusog</string>
     <string name="map_strategy_auto">Naka-agad ra ang kigosgon</string>
     <string name="map_strategy_detailed">Detalye</string>
-    <string name="live_map_notification">Mga koordineyt na naa sa buhi na mapa kay dili pirminte!\nPosibleng mga pirmaninting koordineyt kay gipangmarkahan sa usa ka oreygn na lingin.\n\nPag-abli sa mga detalye sa cache o sa pag-save sa cache para sa offline na gamit kay pirming mahatagan ug pirmanenteng mga koordineyt.</string>
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <string name="map_routing">Mga kadaugan</string>
     <string name="map_routing_straight">Tul-id na linya</string>

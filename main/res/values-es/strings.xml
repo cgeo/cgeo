@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Rápido</string>
     <string name="map_strategy_auto">En función de la velocidad</string>
     <string name="map_strategy_detailed">Detallado</string>
-    <string name="live_map_notification">Las coordenadas en el mapa en vivo pueden no ser precisas.\nLas posibles coordenadas imprecisas están marcadas con un círculo naranja.\n\nAbrir los detalles del caché o guardándolo para su uso sin conexión proporcionará siempre coordenadas precisas.</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <string name="map_routing">Enrutamiento</string>
     <string name="map_routing_straight">Línea recta</string>

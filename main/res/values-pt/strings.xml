@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Rápido</string>
     <string name="map_strategy_auto">Dependente da velocidade</string>
     <string name="map_strategy_detailed">Detalhado</string>
-    <string name="live_map_notification">As coordenadas no mapa ao vivo podem nem sempre ser precisas!\nAs coordenadas possivelmente imprecisas estão marcadas por um circulo laranja.\n\nAo abrir os detalhes da geocache ou ao gravar a geocache para uso offline obterá sempre as coordenadas precisas.</string>
     <string name="map_select_multiple_items">Selecionar item</string>
     <string name="map_routing">Rotas</string>
     <string name="map_routing_straight">Linha a direito</string>

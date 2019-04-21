@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Schnell</string>
     <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
     <string name="map_strategy_detailed">Detailliert</string>
-    <string name="live_map_notification">Auf der neuen Live-Karte sind die Koordinaten nicht immer genau!\nEventuell ungenaue Koordinaten sind mit einem orangen Kreis markiert.\n\nDas Öffnen der Cache-Details oder das Speichern des Cache liefert immer genaue Koordinaten.</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Luftlinie</string>

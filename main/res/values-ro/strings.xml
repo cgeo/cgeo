@@ -1063,7 +1063,6 @@
     <string name="map_strategy_fast">Rapid</string>
     <string name="map_strategy_auto">În funcţie de viteză</string>
     <string name="map_strategy_detailed">Detaliat</string>
-    <string name="live_map_notification">Coordonatele pe hartă s-ar putea să nu fie întotdeauna precise!\nCoordontele imprecise sunt marcate cu un cerc portocaliu.\n\nAfişând detaliile cutiei sau salvând cutia se vor obţine întotdeauna coordonatele exacte.</string>
     <string name="map_select_multiple_items">Selectează un element</string>
     <string name="map_routing">Dirijare</string>
     <string name="map_routing_straight">Linie dreaptă</string>

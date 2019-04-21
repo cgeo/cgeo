@@ -1073,7 +1073,6 @@
     <string name="map_strategy_fast">Hitra</string>
     <string name="map_strategy_auto">Odvisna od moje hitrosti</string>
     <string name="map_strategy_detailed">Podrobna</string>
-    <string name="live_map_notification">Na zemljevidu s podatki v živo je možno, da se koordinate ne prenesejo natančno!\nMožne nenatančne koordinate so označene z oranžnim krogom.\n\nČe odprete podrobnosti zaklada, se bodo vedno naložile natančne koordinate.</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <string name="map_routing">Usmerjanje</string>
     <string name="map_routing_straight">Straight line</string>

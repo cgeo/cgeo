@@ -1053,7 +1053,6 @@
     <string name="map_strategy_fast">Ràpida</string>
     <string name="map_strategy_auto">Sensible a la velocitat</string>
     <string name="map_strategy_detailed">Detallada</string>
-    <string name="live_map_notification">Les coordenades del mapa en viu no sempre són precises! \nLes coordenades que poden ser imprecises estan marcades amb un cercle taronja.\n\nObrint els detalls del geoamagatall o desant-lo fora de línia s\'obtenen sempre les coordenades precises.</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
     <string name="map_routing">Encaminant</string>
     <string name="map_routing_straight">Línia recta</string>
