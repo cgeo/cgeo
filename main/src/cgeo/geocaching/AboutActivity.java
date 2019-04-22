@@ -185,9 +185,20 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class StartingViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
+        @BindView(R.id.about_starting_btn_services) protected Button services;
+
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_starting_page, parentView, false);
+            ButterKnife.bind(this, view);
+
+            services.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(final View v) {
+                    ;
+                }
+            });
             return view;
         }
 

@@ -8,7 +8,7 @@
         android:key="@string/preference_screen_services"
         android:summary="@string/settings_summary_services"
         android:title="@string/settings_title_services" >
-        <PreferenceCategory android:title="@string/settings_category_geocaching"
+        <PreferenceCategory android:title="@string/settings_category_geocaching_provider"
             android:layout="@layout/preference_category" >
 
             <PreferenceScreen
@@ -323,6 +323,10 @@
                         app:connector="SU" />
                 </PreferenceCategory>
             </PreferenceScreen>
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/settings_category_geocaching_additionals"
+            android:layout="@layout/preference_category" >
 
             <PreferenceScreen
                 android:key="@string/preference_screen_gcvote"
