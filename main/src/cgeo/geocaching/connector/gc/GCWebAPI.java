@@ -387,6 +387,13 @@ class GCWebAPI {
             params.put("ct", Settings.getCacheType().wptTypeId);
         }
 
+        //Hide owned/hide found caches, only works for premium members
+        if (Settings.isGCPremiumMember() && Settings.isExcludeMyCaches()) {
+            params.put("ho", "1");
+            params.put("hf", "1");
+        }
+
+        params.put("app", "cgeo");
         return getAPI("/web/search", params, MapSearchResultSet.class).blockingGet();
     }
 
