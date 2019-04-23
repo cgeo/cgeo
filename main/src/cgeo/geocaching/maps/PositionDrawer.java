@@ -22,6 +22,11 @@ import java.util.ArrayList;
 
 public class PositionDrawer {
 
+    /**
+     * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
+     */
+    private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
+
     private Location coordinates = null;
     private GeoPointImpl location = null;
     private float heading = 0f;
@@ -132,8 +137,11 @@ public class PositionDrawer {
                     historyLineShadow.setAlpha(alpha);
                     historyLine.setAlpha(alpha);
 
-                    canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLineShadow);
-                    canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLine);
+                    // connect points by line, but only if distance between previous and current point is less than defined max
+                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                        canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLineShadow);
+                        canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLine);
+                    }
 
                     pointPrevious.set(pointNow.x, pointNow.y);
                 }

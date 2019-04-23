@@ -18,6 +18,11 @@ import org.mapsforge.map.layer.Layer;
 
 public class HistoryLayer extends Layer {
 
+    /**
+     * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
+     */
+    private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
+
     private final PositionHistory positionHistory = new PositionHistory();
     private Location coordinates;
     private Paint historyLine;
@@ -61,11 +66,6 @@ public class HistoryLayer extends Layer {
 
             final int size = paintHistory.size();
             if (size > 1) {
-//                int alphaCnt = size - 201;
-//                if (alphaCnt < 1) {
-//                    alphaCnt = 1;
-//                }
-
                 final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
                 final Location prev = paintHistory.get(0);
@@ -75,19 +75,11 @@ public class HistoryLayer extends Layer {
                     final Location now = paintHistory.get(cnt);
                     final Point pointNow = MercatorProjection.getPixelRelative(new LatLong(now.getLatitude(), now.getLongitude()), mapSize, topLeftPoint);
 
-//                    final int alpha;
-//                    if ((alphaCnt - cnt) > 0) {
-//                        alpha = 255 / (alphaCnt - cnt);
-//                    }
-//                    else {
-//                        alpha = 255;
-//                    }
-
-//                    historyLineShadow.setAlpha(alpha);
-//                    historyLine.setAlpha(alpha);
-
-                    canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLineShadow);
-                    canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLine);
+                    // connect points by line, but only if distance between previous and current point is less than defined max
+                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                        canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLineShadow);
+                        canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLine);
+                    }
 
                     pointPrevious = pointNow;
                 }
