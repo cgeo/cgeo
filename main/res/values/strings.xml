@@ -441,6 +441,27 @@
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching basics</string>
+    <string name="about_starting_text_basics_text">
+Geocaching is an outdoor game to search and find so-called \"caches\".\n
+This app helps you to play this game.\n\n
+Link to the full <b>c:geo basics</b> documentation: https://manual.cgeo.org/en/basicuse
+    </string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">
+c:geo needs certain permissions on your device: <b>Location</b> and <b>Photos/Media/Files</b>.\n
+You have to confirm to use the app.\n\n
+Details are in the <b>c:geo permission</b> documentation: https://manual.cgeo.org/en/installation#permissions
+    </string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">
+In order to use c:geo, you need an account for a geocaching platform of your choice.\n
+You can configure it from our services page.\n\n
+Link to the full <b>c:geo First steps</b> documentation: https://manual.cgeo.org/en/firststeps
+    </string>
+    <string name="open_services_page">Configure your platform selection</string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     <string name="about_system_info_send_button">Send by mail…</string>
     <string name="about_system_info">c:geo system information</string>
@@ -482,7 +503,8 @@
     <string name="settings_title_navigation_menu">Navigation Menu</string>
 
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Other Logging Options</string>
 
