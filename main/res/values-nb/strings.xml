@@ -465,7 +465,6 @@
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
     <string name="settings_title_su">Geocaching.su</string>
-    <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Aktiver</string>
     <string name="settings_activate_ec">Aktiver</string>
     <string name="settings_activate_ox">Aktiver</string>
