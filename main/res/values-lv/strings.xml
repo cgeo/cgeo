@@ -1057,12 +1057,6 @@
     <string name="map_static_loading">Ielādē statiskās kartes…</string>
     <string name="map_token_err">Tā kā c:geo spēj ielādēt datus daļēji, slēpņa koordinātas varētu būt neprecīzas.</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
-    <string name="map_strategy">Stratēģija</string>
-    <string name="map_strategy_title">Tiešsaistes kartes stratēģija</string>
-    <string name="map_strategy_fastest">Ātrākais</string>
-    <string name="map_strategy_fast">Ātrs</string>
-    <string name="map_strategy_auto">Atkarībā no ātruma</string>
-    <string name="map_strategy_detailed">Detalizēts</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <string name="map_routing">Maršrutēšana</string>
     <string name="map_routing_straight">Taisna līnija</string>

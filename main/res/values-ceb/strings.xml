@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Loading ang statiko nga mga mapa…</string>
     <string name="map_token_err">Kay ang c:geo ay pwede ra maka download ug partial na data, ang mga koordinate ng cache ay basig dile sakto.</string>
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
-    <string name="map_strategy">Strategiya</string>
-    <string name="map_strategy_title">Live Map strategiya</string>
-    <string name="map_strategy_fastest">Pinakakusog</string>
-    <string name="map_strategy_fast">Kusog</string>
-    <string name="map_strategy_auto">Naka-agad ra ang kigosgon</string>
-    <string name="map_strategy_detailed">Detalye</string>
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <string name="map_routing">Mga kadaugan</string>
     <string name="map_routing_straight">Tul-id na linya</string>

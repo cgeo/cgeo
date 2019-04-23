@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Statik haritalar yükleniyor…</string>
     <string name="map_token_err">c:geo yalnızca kısmi verileri indirebildiğinden, Geocache koordinatları hatalı olabilir.</string>
     <string name="map_as_list">Liste olarak göster</string>
-    <string name="map_strategy">Strateji</string>
-    <string name="map_strategy_title">Canlı Harita Stratejisi</string>
-    <string name="map_strategy_fastest">En hızlı</string>
-    <string name="map_strategy_fast">Hızlı</string>
-    <string name="map_strategy_auto">Hıza bağımlı</string>
-    <string name="map_strategy_detailed">Detaylı</string>
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
     <string name="map_routing_straight">Düz çizgi</string>

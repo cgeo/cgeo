@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Caricamento mappe statiche…</string>
     <string name="map_token_err">Dato che c:geo riesce a scaricare solo dati parziali, le coordinate dei cache potrebbero non essere accurate.</string>
     <string name="map_as_list">Mostra lista dei cache</string>
-    <string name="map_strategy">Strategia</string>
-    <string name="map_strategy_title">Strategia mappa Live</string>
-    <string name="map_strategy_fastest">La più veloce</string>
-    <string name="map_strategy_fast">Veloce</string>
-    <string name="map_strategy_auto">In base alla tua velocità di movimento</string>
-    <string name="map_strategy_detailed">Dettagliata</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Instradamento</string>
     <string name="map_routing_straight">Linea diretta</string>

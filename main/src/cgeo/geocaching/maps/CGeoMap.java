@@ -63,7 +63,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
@@ -593,9 +592,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         MapProviderFactory.addMapviewMenuItems(menu);
 
-        final SubMenu subMenuStrategy = menu.findItem(R.id.submenu_strategy).getSubMenu();
-        subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
-
         /* if we have an Actionbar find the my position toggle */
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
         myLocSwitch = new CheckBox(activity);
@@ -636,19 +632,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
             menu.findItem(R.id.menu_clear_trailhistory).setVisible(Settings.isMapTrail());
-
-            menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
-
-            switch (Settings.getLiveMapStrategy()) {
-                case FAST:
-                    menu.findItem(R.id.menu_strategy_fast).setChecked(true);
-                    break;
-                case AUTO:
-                    menu.findItem(R.id.menu_strategy_auto).setChecked(true);
-                    break;
-                default: // DETAILED
-                    menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
-            }
 
             menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
             switch (Settings.getRoutingMode()) {
@@ -742,21 +725,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 overlayPositionAndScale.setHistory(new ArrayList<Location>());
                 mapView.repaintRequired(overlayPositionAndScale);
                 ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
-                return true;
-            }
-            case R.id.menu_strategy_fast: {
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.FAST);
-                return true;
-            }
-            case R.id.menu_strategy_auto: {
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.AUTO);
-                return true;
-            }
-            case R.id.menu_strategy_detailed: {
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
                 return true;
             }
             case R.id.menu_routing_straight: {

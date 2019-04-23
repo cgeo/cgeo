@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Chargement des cartes statiques…</string>
     <string name="map_token_err">Étant donné que c:geo est seulement capable de télécharger des données partielles, les coordonnées des caches peuvent être approximatives.</string>
     <string name="map_as_list">Lister les caches</string>
-    <string name="map_strategy">Stratégie</string>
-    <string name="map_strategy_title">Stratégie de carte active</string>
-    <string name="map_strategy_fastest">La plus rapide</string>
-    <string name="map_strategy_fast">Rapide</string>
-    <string name="map_strategy_auto">En fonction du déplacement</string>
-    <string name="map_strategy_detailed">Détaillée</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
     <string name="map_routing_straight">À vol d\'oiseau</string>

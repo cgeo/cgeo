@@ -157,30 +157,6 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/submenu_strategy"
-        android:icon="@drawable/ic_menu_preferences"
-        android:title="@string/map_strategy"
-        android:visible="false">
-        <menu>
-            <group
-                android:id="@+id/menu_group_strategy"
-                android:checkableBehavior="single" >
-                <item
-                    android:id="@+id/menu_strategy_fast"
-                    android:title="@string/map_strategy_fast">
-                </item>
-                <item
-                    android:id="@+id/menu_strategy_auto"
-                    android:title="@string/map_strategy_auto">
-                </item>
-                <item
-                    android:id="@+id/menu_strategy_detailed"
-                    android:title="@string/map_strategy_detailed">
-                </item>
-            </group>
-        </menu>
-    </item>
-    <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_agenda"
         android:title="@string/map_as_list">

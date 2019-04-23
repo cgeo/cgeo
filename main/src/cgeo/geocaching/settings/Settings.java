@@ -12,7 +12,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableComparator;
-import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
@@ -188,7 +187,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_lastdetailspage), prefsV0.getInt(getKey(R.string.pref_lastdetailspage), 1));
             e.putInt(getKey(R.string.pref_defaultNavigationTool), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
             e.putInt(getKey(R.string.pref_defaultNavigationTool2), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
-            e.putInt(getKey(R.string.pref_livemapstrategy), prefsV0.getInt(getKey(R.string.pref_livemapstrategy), LivemapStrategy.AUTO.id));
             e.putBoolean(getKey(R.string.pref_debug), prefsV0.getBoolean(getKey(R.string.pref_debug), false));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
@@ -1051,15 +1049,6 @@ public class Settings {
         return Integer.parseInt(getString(
                 R.string.pref_defaultNavigationTool2,
                 String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
-    }
-
-    @NonNull
-    public static LivemapStrategy getLiveMapStrategy() {
-        return LivemapStrategy.getById(getInt(R.string.pref_livemapstrategy, LivemapStrategy.AUTO.id));
-    }
-
-    public static void setLiveMapStrategy(final LivemapStrategy strategy) {
-        putInt(R.string.pref_livemapstrategy, strategy.id);
     }
 
     public static boolean isDebug() {

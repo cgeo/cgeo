@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">S\'està carregant els mapes estàtics…</string>
     <string name="map_token_err">Donat que el c:geo només pot descarregar dades parcials, les coordenades dels catxés podrien ser inexactes.</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
-    <string name="map_strategy">Estratègia</string>
-    <string name="map_strategy_title">Estratègia del mapa en viu</string>
-    <string name="map_strategy_fastest">La més ràpida</string>
-    <string name="map_strategy_fast">Ràpida</string>
-    <string name="map_strategy_auto">Sensible a la velocitat</string>
-    <string name="map_strategy_detailed">Detallada</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
     <string name="map_routing">Encaminant</string>
     <string name="map_routing_straight">Línia recta</string>

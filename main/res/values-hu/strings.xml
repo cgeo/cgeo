@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Statikus térképek betöltése…</string>
     <string name="map_token_err">Mivel a c:geo csak részleges adatokat tud letölteni, a ládák koordinátái pontatlanok lehetnek.</string>
     <string name="map_as_list">Mutatás listaként</string>
-    <string name="map_strategy">Stratégia</string>
-    <string name="map_strategy_title">Élő térkép stratégia</string>
-    <string name="map_strategy_fastest">Leggyorsabb</string>
-    <string name="map_strategy_fast">Gyors</string>
-    <string name="map_strategy_auto">Sebességfüggő</string>
-    <string name="map_strategy_detailed">Részletes</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <string name="map_routing">Útvonal</string>
     <string name="map_routing_straight">Egyenes vonal</string>

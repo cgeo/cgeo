@@ -20,7 +20,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -316,20 +315,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_clear_trailhistory).setVisible(Settings.isMapTrail());
 
-            menu.findItem(R.id.submenu_strategy).setVisible(mapOptions.isLiveEnabled);
-
-            switch (Settings.getLiveMapStrategy()) {
-                case FAST:
-                    menu.findItem(R.id.menu_strategy_fast).setChecked(true);
-                    break;
-                case AUTO:
-                    menu.findItem(R.id.menu_strategy_auto).setChecked(true);
-                    break;
-                default: // DETAILED
-                    menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
-                    break;
-            }
-
             menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
             switch (Settings.getRoutingMode()) {
                 case STRAIGHT:
@@ -439,18 +424,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 this.historyLayer.reset();
                 this.historyLayer.requestRedraw();
                 showToast(res.getString(R.string.map_trailhistory_cleared));
-                return true;
-            case R.id.menu_strategy_fast:
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.FAST);
-                return true;
-            case R.id.menu_strategy_auto:
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.AUTO);
-                return true;
-            case R.id.menu_strategy_detailed:
-                item.setChecked(true);
-                Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
                 return true;
             case R.id.menu_routing_straight:
                 item.setChecked(true);

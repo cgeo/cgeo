@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Indlæser statiske kort…</string>
     <string name="map_token_err">Fordi c:geo kun delvist kan downloade data, kan cachepositionerne være upræcise.</string>
     <string name="map_as_list">Vis som liste</string>
-    <string name="map_strategy">Strategi</string>
-    <string name="map_strategy_title">Live-kort strategi</string>
-    <string name="map_strategy_fastest">Hurtigste</string>
-    <string name="map_strategy_fast">Hurtig</string>
-    <string name="map_strategy_auto">Hastighedsafhængig</string>
-    <string name="map_strategy_detailed">Detaljeret</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="map_routing">Navigation</string>
     <string name="map_routing_straight">Lige linje</string>

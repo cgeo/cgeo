@@ -1057,12 +1057,6 @@
     <string name="map_static_loading">Încărcare hărţi statice…</string>
     <string name="map_token_err">Pentru că c:geo poate doar să descarce informaţii parţiale, coordonatele cutiilor pot fi imprecise.</string>
     <string name="map_as_list">Arată ca lista</string>
-    <string name="map_strategy">Strategie</string>
-    <string name="map_strategy_title">Strategie hartă</string>
-    <string name="map_strategy_fastest">Cel mai rapid</string>
-    <string name="map_strategy_fast">Rapid</string>
-    <string name="map_strategy_auto">În funcţie de viteză</string>
-    <string name="map_strategy_detailed">Detaliat</string>
     <string name="map_select_multiple_items">Selectează un element</string>
     <string name="map_routing">Dirijare</string>
     <string name="map_routing_straight">Linie dreaptă</string>

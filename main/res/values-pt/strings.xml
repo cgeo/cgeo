@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">A carregar mapas estáticos…</string>
     <string name="map_token_err">Como o c:geo apenas conseguiu transferir parcialmente os dados, as coordenadas das geocaches podem não ser precisas.</string>
     <string name="map_as_list">Mostrar como lista</string>
-    <string name="map_strategy">Estratégia</string>
-    <string name="map_strategy_title">Modo do Mapa ao vivo</string>
-    <string name="map_strategy_fastest">Mais rápido</string>
-    <string name="map_strategy_fast">Rápido</string>
-    <string name="map_strategy_auto">Dependente da velocidade</string>
-    <string name="map_strategy_detailed">Detalhado</string>
     <string name="map_select_multiple_items">Selecionar item</string>
     <string name="map_routing">Rotas</string>
     <string name="map_routing_straight">Linha a direito</string>

@@ -1047,12 +1047,6 @@
     <string name="map_static_loading">Lade statische Karte…</string>
     <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten ungenau sein.</string>
     <string name="map_as_list">Als Liste anzeigen</string>
-    <string name="map_strategy">Strategie</string>
-    <string name="map_strategy_title">Strategie für Live-Karte</string>
-    <string name="map_strategy_fastest">Schnellste</string>
-    <string name="map_strategy_fast">Schnell</string>
-    <string name="map_strategy_auto">Geschwindigkeitsabhängig</string>
-    <string name="map_strategy_detailed">Detailliert</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Luftlinie</string>
