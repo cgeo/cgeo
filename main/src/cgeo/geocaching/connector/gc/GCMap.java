@@ -150,7 +150,14 @@ public class GCMap {
                     c.setTerrain(r.terrain);
                     c.setSize(containerTypeToCacheSize(r.containerType));
                     c.setPremiumMembersOnly(r.premiumOnly);
-                    c.setFound(r.userFound);
+
+                    //Only set found if the map returns a "found",
+                    //the map API will possibly lag behind and break
+                    //cache merging if "not found" is set
+                    if (r.userFound) {
+                        c.setFound(true);
+                    }
+
                     c.setFavoritePoints(r.favoritePoints);
                     c.setDisabled(r.cacheStatus == 1);
                     if (r.owner != null) {
