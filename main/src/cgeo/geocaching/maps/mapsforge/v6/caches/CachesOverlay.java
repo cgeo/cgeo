@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.support.annotation.NonNull;
@@ -22,7 +21,6 @@ public class CachesOverlay extends AbstractCachesOverlay {
 
     private final SearchResult search;
     private final Disposable timer;
-    private boolean showWaypoints = false;
     private boolean firstRun = true;
     private boolean updating = false;
 
@@ -73,18 +71,9 @@ public class CachesOverlay extends AbstractCachesOverlay {
                 // get current viewport
                 final Viewport viewportNow = overlay.getViewport();
 
-                // Switch waypoints on or off depending on visibility. Leave them always enabled for single cache views
-                final boolean showWaypointsNow = overlay.search.getCount() <= 1 || overlay.getAllVisibleCachesCount() < Settings.getWayPointsThreshold();
+                if (previousViewport != null && !previousViewport.equals(viewportNow)) {
 
-                if (showWaypointsNow != overlay.showWaypoints) {
-
-                    final Set<Geocache> cachesToDisplay = overlay.search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
                     previousViewport = viewportNow;
-                    overlay.showWaypoints = showWaypointsNow;
-                    overlay.display(cachesToDisplay);
-
-                } else if (previousViewport != null && !previousViewport.equals(viewportNow)) {
-
                     overlay.updateTitle();
                 }
             } catch (final Exception e) {
@@ -98,7 +87,7 @@ public class CachesOverlay extends AbstractCachesOverlay {
     private void display(final Set<Geocache> cachesToDisplay) {
         try {
             showProgress();
-            update(cachesToDisplay, showWaypoints);
+            update(cachesToDisplay);
         } finally {
             hideProgress();
         }
