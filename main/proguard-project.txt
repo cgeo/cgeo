@@ -41,6 +41,7 @@
 -dontnote org.apache.http.conn.scheme.HostNameResolver
 -dontnote org.apache.http.conn.ConnectTimeoutException
 -dontnote org.apache.http.params.HttpParams
+-dontwarn android.support.v4.**
 
 # Apache commons ----------------------------------------------------------------------------------
 
@@ -138,6 +139,12 @@
 # ViewPager Indicator -----------------------------------------------------------------------------
 -dontnote com.viewpagerindicator.TitlePageIndicator
 -dontnote com.viewpagerindicator.TabPageIndicator
+
+# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
 
 # Unsorted ----------------------------------------------------------------------------------------
 
