@@ -443,25 +443,26 @@
     <string name="about_help">Help</string>
     <string name="about_starting">Getting Started</string>
     <string name="about_starting_head">Getting Started</string>
-    <string name="about_starting_text_basics_head">Geocaching basics</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
     <string name="about_starting_text_basics_text">
 Geocaching is an outdoor game to search and find so-called \"caches\".\n
-This app helps you to play this game.\n\n
-Link to the full <b>c:geo basics</b> documentation: https://manual.cgeo.org/en/basicuse
+This app can be used to play this game.\n\n
+You can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse
     </string>
     <string name="about_starting_text_device_head">c:geo device permissions</string>
     <string name="about_starting_text_device_text">
-c:geo needs certain permissions on your device: <b>Location</b> and <b>Photos/Media/Files</b>.\n
-You have to confirm to use the app.\n\n
-Details are in the <b>c:geo permission</b> documentation: https://manual.cgeo.org/en/installation#permissions
+c:geo needs certain permissions on your device:\n
+<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n
+<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\n
+Without these permissions you will not be able to use c:geo.
     </string>
     <string name="about_starting_text_first_head">First steps with c:geo</string>
     <string name="about_starting_text_first_text">
 In order to use c:geo, you need an account for a geocaching platform of your choice.\n
-You can configure it from our services page.\n\n
-Link to the full <b>c:geo First steps</b> documentation: https://manual.cgeo.org/en/firststeps
+You have to configure this account(s) in c:geo service settings before you can use c:geo!\n\n
+You can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps
     </string>
-    <string name="open_services_page">Configure your platform selection</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     <string name="about_system_info_send_button">Send by mail…</string>
     <string name="about_system_info">c:geo system information</string>
