@@ -420,7 +420,7 @@ public class Settings {
     }
 
     public static boolean isGCConnectorActive() {
-        return getBoolean(R.string.pref_connectorGCActive, true);
+        return getBoolean(R.string.pref_connectorGCActive, false);
     }
 
     public static boolean isECConnectorActive() {
