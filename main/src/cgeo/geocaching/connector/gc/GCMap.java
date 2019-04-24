@@ -15,7 +15,6 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -100,11 +99,9 @@ public class GCMap {
      *
      * @param viewport
      *            Area to search
-     * @param tokens
-     *            Live map tokens
      */
     @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
         final SearchResult result = searchPlayMapByViewport(viewport);
 
         if (Settings.isDebug()) {
