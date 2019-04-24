@@ -276,7 +276,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport);
+                    final SearchResult search = ConnectorFactory.searchByViewport(viewport);
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
