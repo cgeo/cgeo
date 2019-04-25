@@ -1250,6 +1250,7 @@ public class DataStore {
         }
 
         final List<Geocache> toBeStored = new ArrayList<>();
+        final List<Geocache> toBeUpdated = new ArrayList<>();
         // Merge with the data already stored in the CacheCache or in the database if
         // the cache had not been loaded before, and update the CacheCache.
         // Also, a DB update is required if the merge data comes from the CacheCache
@@ -1269,12 +1270,44 @@ public class DataStore {
             // the cache contains detailed information.
             if (saveFlags.contains(SaveFlag.DB) && dbUpdateRequired) {
                 toBeStored.add(cache);
+            } else if (existingCache != null && existingCache.isDisabled() != cache.isDisabled()) {
+                // Update the disabled status in the database if it changed
+                toBeUpdated.add(cache);
             }
         }
 
         for (final Geocache geocache : toBeStored) {
             storeIntoDatabase(geocache);
         }
+
+        for (final Geocache geocache : toBeUpdated) {
+            updateDisabledStatus(geocache);
+        }
+    }
+
+    private static boolean updateDisabledStatus(final Geocache cache) {
+        cache.addStorageLocation(StorageLocation.DATABASE);
+        cacheCache.putCacheInCache(cache);
+        Log.d("Updating disabled status of " + cache.toString() + " in DB");
+
+        final ContentValues values = new ContentValues();
+        values.put("disabled", cache.isDisabled() ? 1 : 0);
+
+        init();
+        try {
+            database.beginTransaction();
+            final int rows = database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
+            if (rows == 1) {
+                database.setTransactionSuccessful();
+                return true;
+            }
+        } catch (final Exception e) {
+            Log.e("updateDisabledStatus", e);
+        } finally {
+            database.endTransaction();
+        }
+
+        return false;
     }
 
     private static boolean storeIntoDatabase(final Geocache cache) {
