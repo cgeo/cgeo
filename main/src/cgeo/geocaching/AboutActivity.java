@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -196,7 +197,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
                 @Override
                 public void onClick(final View v) {
-                    //TODO implement jump to Services->Platform page
+                    SettingsActivity.openForScreen(R.string.preference_screen_services, AboutActivity.this);
                 }
             });
             return view;
