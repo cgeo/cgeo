@@ -3,6 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Use new live map on geocaching.com\n
     · New: Upgrade to mapsforge library 0.11.0\n
     · New: Batch upload modified coordinates from list\n
     · New: User can switch to compact icons on the map via menu\n
