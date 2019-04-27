@@ -400,7 +400,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         if (ConnectorFactory.anyConnectorActive()) {
             CacheDetailActivity.startActivity(this, geocodeText.toUpperCase(Locale.US));
         } else {
-            showToast(getString(R.string.warn_search_no_active_connectors));
+            showToast(getString(R.string.warn_no_connector));
         }
     }
 
@@ -417,7 +417,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
         } else {
-            showToast(getString(R.string.warn_search_no_active_connectors));
+            showToast(getString(R.string.warn_no_connector));
         }
     }
 

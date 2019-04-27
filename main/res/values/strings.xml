@@ -248,7 +248,6 @@
     <string name="warn_search_help_keyword">Enter all or part of a geocache\'s name. For example \"Night Cache\".</string>
     <string name="warn_search_help_user">Enter a username from Geocaching.com.</string>
     <string name="warn_search_help_tb">Enter the code for a trackable. For example \"TB29QMZ\".</string>
-    <string name="warn_search_no_active_connectors">No active connectors found for this search</string>
     <string name="warn_log_text_fill">Please input some text for your log.</string>
     <string name="warn_load_images">c:geo failed to load images.</string>
     <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge version 0.3.0 map file.\nOffline maps are not available.</string>
