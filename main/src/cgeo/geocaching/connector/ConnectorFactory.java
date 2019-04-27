@@ -179,6 +179,24 @@ public final class ConnectorFactory {
         return activeConnectors;
     }
 
+    public static boolean anyConnectorActive() {
+        for (final IConnector conn : CONNECTORS) {
+            if (conn.isActive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean anyTrackableConnectorActive() {
+        for (final TrackableConnector conn : TRACKABLE_CONNECTORS) {
+            if (conn.isActive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean canHandle(@Nullable final String geocode) {
         if (geocode == null) {
             return false;
