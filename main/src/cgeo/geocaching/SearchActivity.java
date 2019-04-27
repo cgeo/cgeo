@@ -397,7 +397,11 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             return;
         }
 
-        CacheDetailActivity.startActivity(this, geocodeText.toUpperCase(Locale.US));
+        if (ConnectorFactory.anyConnectorActive()) {
+            CacheDetailActivity.startActivity(this, geocodeText.toUpperCase(Locale.US));
+        } else {
+            showToast(getString(R.string.warn_search_no_active_connectors));
+        }
     }
 
     private void findTrackableFn() {
@@ -408,9 +412,13 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             return;
         }
 
-        final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
-        startActivity(trackablesIntent);
+        if (ConnectorFactory.anyTrackableConnectorActive()) {
+            final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
+            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
+            startActivity(trackablesIntent);
+        } else {
+            showToast(getString(R.string.warn_search_no_active_connectors));
+        }
     }
 
     @Override
