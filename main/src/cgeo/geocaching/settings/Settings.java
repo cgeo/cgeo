@@ -761,6 +761,17 @@ public class Settings {
     }
 
     /**
+     * whether automatic rotation of map on rotating the device is locked
+     */
+    public static boolean isMapRotationLocked() {
+        return getBoolean(R.string.pref_map_rotation_locked, false);
+    }
+
+    public static void setMapRotationLocked(final boolean rotationLocked) {
+        putBoolean(R.string.pref_map_rotation_locked, rotationLocked);
+    }
+
+    /**
      * whether to show a direction line on the map
      */
     public static boolean isMapDirection() {

@@ -108,7 +108,13 @@
                 android:visible="false"
                 app:showAsAction="ifRoom|withText">
             </item>
-
+            <item
+                android:id="@+id/menu_map_rotation_locked"
+                android:checkable="true"
+                android:title="@string/map_rotation_lock"
+                android:visible="false"
+                app:showAsAction="ifRoom|withText">
+            </item>
         </menu>
     </item>
     <item

@@ -57,8 +57,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -69,6 +71,7 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -152,6 +155,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
+    private static final String BUNDLE_SCREEN_ORIENTATION = "screenOrientation";
+    private int savedScreenOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
     // Handler messages
     // DisplayHandler
@@ -187,8 +192,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             followMyLocation = mapOptions.mapState.followsMyLocation();
+            Log.d("onCreate: (will read savedInstanceState later)");
         } else {
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
+            savedScreenOrientation = getWindowManager().getDefaultDisplay().getRotation();
+            Log.d("onCreate: saved=" + savedScreenOrientation);
         }
 
         ActivityMixin.onCreate(this, true);
@@ -256,6 +264,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         });
     }
 
+    private void setRotationLocking(final boolean featureEnabled) {
+        // lock screen rotation, if featureEnabled + API in 18..27
+        Log.d("setRotationLocking(" + featureEnabled + "), current=" + getWindowManager().getDefaultDisplay().getRotation());
+        if (featureEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT < 28) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
@@ -308,6 +324,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_dot_mode).setVisible(true);
             menu.findItem(R.id.menu_dot_mode).setChecked(Settings.isDotMode());
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 && Build.VERSION.SDK_INT < 28) {  // function available starting API level 18, not needed any more since Android P (= API level 28)
+                menu.findItem(R.id.menu_map_rotation_locked).setVisible(true);
+                menu.findItem(R.id.menu_map_rotation_locked).setChecked(Settings.isMapRotationLocked());
+            }
+
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
             menu.findItem(R.id.menu_theme_options).setVisible(styleMenu != null);
 
@@ -355,6 +376,17 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             case R.id.menu_dot_mode:
                 Settings.setDotMode(!Settings.isDotMode());
                 caches.invalidateAll();     // redraw all cache markers
+                ActivityMixin.invalidateOptionsMenu(this);
+                return true;
+            case R.id.menu_map_rotation_locked:
+                final boolean isMapRotationLocked = !Settings.isMapRotationLocked();
+                Settings.setMapRotationLocked(isMapRotationLocked);
+                if (isMapRotationLocked) {
+                    savedScreenOrientation = getWindowManager().getDefaultDisplay().getRotation();
+                    setRotationLocking(true);
+                } else {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                }
                 ActivityMixin.invalidateOptionsMenu(this);
                 return true;
             case R.id.menu_direction_line:
@@ -707,7 +739,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     protected void onResume() {
         super.onResume();
         Log.d("NewMap: onResume");
-
+        setRotationLocking(Settings.isMapRotationLocked());
         resumeTileLayer();
     }
 
@@ -895,6 +927,35 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (historyLayer != null) {
             trailHistory = historyLayer.getHistory();
             outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, trailHistory);
+        }
+        outState.putInt(BUNDLE_SCREEN_ORIENTATION, savedScreenOrientation);
+        Log.d("onSaveInstanceState: saved=" + savedScreenOrientation + ", current=" + getWindowManager().getDefaultDisplay().getRotation());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // adjust screen orientation, if necessary
+        if (Settings.isMapRotationLocked()) {
+            savedScreenOrientation = savedInstanceState.getInt(BUNDLE_SCREEN_ORIENTATION);
+            final int currentScreenOrientation = getWindowManager().getDefaultDisplay().getRotation();
+            if (savedScreenOrientation != currentScreenOrientation) {
+                // final int delta = (4 + savedScreenOrientation - currentScreenOrientation) % 4;
+                // setRequestedOrientation(delta);
+                // Log.d("onRestoreInstanceState: saved=" + savedScreenOrientation + ", current="  + currentScreenOrientation + ", delta=" + delta + ", new=" + getWindowManager().getDefaultDisplay().getRotation());
+                int newMode = (4 + savedScreenOrientation - currentScreenOrientation) % 4;
+                switch (savedScreenOrientation) {
+                    case Surface.ROTATION_0     : newMode = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT; break;
+                    case Surface.ROTATION_90    : newMode = ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE; break;
+                    case Surface.ROTATION_180   : newMode = ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT; break;
+                    case Surface.ROTATION_270   : newMode = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE; break;
+                }
+                setRequestedOrientation(newMode);
+                Log.d("onRestoreInstanceState: saved=" + savedScreenOrientation + ", current="  + currentScreenOrientation + ", newMode=" + newMode + ", new=" + getWindowManager().getDefaultDisplay().getRotation());
+            } else {
+                Log.d("onRestoreInstanceState: saved=" + savedScreenOrientation + ", current="  + currentScreenOrientation + " (ok)");
+            }
         }
     }
 

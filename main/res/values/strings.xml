@@ -1111,6 +1111,7 @@ You can read more about <b>c:geo First steps</b> in our user guide: https://manu
     <string name="map_modes">Map settings</string>
     <string name="map_trail_show">Show trail</string>
     <string name="map_dot_mode">Use compact icons</string>
+    <string name="map_rotation_lock">Lock map rotation</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
     <string name="map_disabled_hide">Hide disabled caches</string>
