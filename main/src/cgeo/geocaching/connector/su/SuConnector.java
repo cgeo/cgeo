@@ -338,5 +338,14 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         return geocode.substring(2);
     }
 
+    /**
+     * Returns the web address to create an account
+     *
+     * @return web address
+     */
+    @Override
+    public String getCreateAccountUrl() {
+        return StringUtils.join(getHostUrl(), "/?pn=14");
+    }
 
 }
