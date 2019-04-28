@@ -1086,6 +1086,13 @@ final class OkapiClient {
     }
 
     /**
+     * get the site url
+     */
+    public static String getSiteUrl(@NonNull final OCApiConnector connector) {
+        return getInstallationInformation(connector).siteUrl;
+    }
+
+    /**
      * get the registration url for mobile devices
      */
     public static String getMobileRegistrationUrl(@NonNull final OCApiConnector connector) {

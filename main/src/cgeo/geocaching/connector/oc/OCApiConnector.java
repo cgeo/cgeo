@@ -176,17 +176,34 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
     @Nullable
     public String getCreateAccountUrl() {
         // mobile
-        String url = OkapiClient.getMobileRegistrationUrl(this);
+        String url = checkAccountUrl(OkapiClient.getMobileRegistrationUrl(this));
         if (StringUtils.isNotBlank(url)) {
             return url;
         }
         // non-mobile
-        url = OkapiClient.getRegistrationUrl(this);
+        url = checkAccountUrl(OkapiClient.getRegistrationUrl(this));
         if (StringUtils.isNotBlank(url)) {
             return url;
         }
         // fall back to a simple host name based pattern
         return super.getCreateAccountUrl();
+    }
+
+    @Nullable
+    private String checkAccountUrl(final String url) {
+        if (StringUtils.isBlank(url)) {
+            return url;
+        }
+        if (StringUtils.startsWith(url, "http")) {
+            return url;
+        }
+
+        // only suffix - we compose with the site_url
+        final String site = OkapiClient.getSiteUrl(this);
+        if (StringUtils.isBlank(site)) {
+            return site;
+        }
+        return StringUtils.join(site, url);
     }
 
 }
