@@ -155,10 +155,8 @@ public abstract class AbstractCachesOverlay {
                         }
                         if (removeCodes.contains(waypoint.getGpxId())) {
                             removeCodes.remove(waypoint.getGpxId());
-                        } else {
-                            if (addItem(waypoint, isDotMode)) {
-                                newCodes.add(waypoint.getGpxId());
-                            }
+                        } else if (addItem(waypoint, isDotMode)) {
+                            newCodes.add(waypoint.getGpxId());
                         }
                     }
                 }
@@ -168,10 +166,8 @@ public abstract class AbstractCachesOverlay {
                 }
                 if (removeCodes.contains(cache.getGeocode())) {
                     removeCodes.remove(cache.getGeocode());
-                } else {
-                    if (addItem(cache, isDotMode)) {
-                        newCodes.add(cache.getGeocode());
-                    }
+                } else if (addItem(cache, isDotMode)) {
+                    newCodes.add(cache.getGeocode());
                 }
             }
         }
