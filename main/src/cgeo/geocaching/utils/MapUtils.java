@@ -265,7 +265,7 @@ public final class MapUtils {
      */
     @NonNull
     public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
-        final Drawable layers[] = { Compatibility.getDrawable(res, cache.isFound() ? R.drawable.dot_found : cache.getType().dotMarkerId) };
+        final Drawable[] layers = { Compatibility.getDrawable(res, cache.isFound() ? R.drawable.dot_found : cache.getType().dotMarkerId) };
         return new LayerDrawable(layers);
     }
 

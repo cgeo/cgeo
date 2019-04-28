@@ -76,8 +76,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private static final String SYMBOL_MIN = "'";
     private static final String SYMBOL_SEC = "\"";
     private static final String SYMBOL_POINT = ".";
-    private static final char BRACKET_OPENINGS[] = {'(', '[', '{'};
-    private static final char BRACKET_CLOSINGS[] = {')', ']', '}'};
+    private static final char[] BRACKET_OPENINGS = {'(', '[', '{'};
+    private static final char[] BRACKET_CLOSINGS = {')', ']', '}'};
 
     public static final String CALC_STATE = "calc_state";
 
