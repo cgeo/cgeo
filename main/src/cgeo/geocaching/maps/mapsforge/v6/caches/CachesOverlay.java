@@ -74,7 +74,7 @@ public class CachesOverlay extends AbstractCachesOverlay {
                 final Viewport viewportNow = overlay.getViewport();
 
                 // Switch waypoints on or off depending on visibility. Leave them always enabled for single cache views
-                final boolean showWaypointsNow = overlay.search.getCount() > 1 ? overlay.getAllVisibleCachesCount() < Settings.getWayPointsThreshold() : true;
+                final boolean showWaypointsNow = overlay.search.getCount() <= 1 || overlay.getAllVisibleCachesCount() < Settings.getWayPointsThreshold();
 
                 if (showWaypointsNow != overlay.showWaypoints) {
 
