@@ -2348,19 +2348,27 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 offlineHintText.setText(hint);
             }
         }
+
+        // retrieve margins of hint button to make sure moreButton aligns visually
+        final ImageButton offlineHint = ButterKnife.findById(view, R.id.offline_hint);
+        final ViewGroup.MarginLayoutParams lptHint = (ViewGroup.MarginLayoutParams) offlineHint.getLayoutParams();
+
         // adjust right margin of "more details" button to whether a hint button is shown
         final AppCompatButton moreButton = ButterKnife.findById(view, R.id.more_details);
         if (null != moreButton) {
             final float scale = view.getResources().getDisplayMetrics().density;
             final int rightMargin = (int) (51 * scale + 0.5f);
-            final int otherMargin = (int) (4 * scale + 0.5f);
             final ViewGroup.MarginLayoutParams lpt = (ViewGroup.MarginLayoutParams) moreButton.getLayoutParams();
-            lpt.setMargins(otherMargin, otherMargin, hintButtonEnabled ? rightMargin : otherMargin, otherMargin);
+            if (null != offlineHint) {
+                lpt.setMargins(lptHint.rightMargin, lptHint.topMargin, hintButtonEnabled ? rightMargin : lptHint.rightMargin, lptHint.bottomMargin);
+            } else {
+                final int otherMargin = (int) (4 * scale + 0.5f);
+                lpt.setMargins(otherMargin, otherMargin, hintButtonEnabled ? rightMargin : otherMargin, otherMargin);
+            }
             moreButton.setLayoutParams(lpt);
         }
 
         // show or remove clickable hint button
-        final ImageButton offlineHint = ButterKnife.findById(view, R.id.offline_hint);
         if (null != offlineHint) {
             if (hintButtonEnabled) {
                 offlineHint.setVisibility(View.VISIBLE);
