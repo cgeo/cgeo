@@ -544,7 +544,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *         <tt>false</tt> otherwise
      */
     public static boolean equals(@Nullable final Geopoint p1, @Nullable final Geopoint p2) {
-        return p1 == null ? p2 == null : p2 != null && p1.equals(p2);
+        return p1 == null ? p2 == null : p1.equals(p2);
     }
 
     /**
