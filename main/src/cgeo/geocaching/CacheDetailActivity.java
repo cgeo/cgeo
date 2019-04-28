@@ -447,30 +447,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
-        switch (viewId) {
-            case R.id.waypoint:
-                menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
-                getMenuInflater().inflate(R.menu.waypoint_options, menu);
-                final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType() == WaypointType.ORIGINAL;
-                menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
-                menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
-                menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
-                menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint);
-                final boolean hasCoords = selectedWaypoint.getCoords() != null;
-                final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
-                defaultNavigationMenu.setVisible(hasCoords);
-                defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
-                menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
-                menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
-                menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
-                final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
-                menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
-                break;
-            default:
-                if (imagesList != null) {
-                    imagesList.onCreateContextMenu(menu, view);
-                }
-                break;
+        if (viewId == R.id.waypoint) {
+            menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
+            getMenuInflater().inflate(R.menu.waypoint_options, menu);
+            final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType() == WaypointType.ORIGINAL;
+            menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint);
+            final boolean hasCoords = selectedWaypoint.getCoords() != null;
+            final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
+            defaultNavigationMenu.setVisible(hasCoords);
+            defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+            menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
+            menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
+            menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
+            final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
+            menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
+        } else if (imagesList != null) {
+            imagesList.onCreateContextMenu(menu, view);
         }
     }
 
@@ -2136,16 +2131,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                     @Override
                     public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            // detail fields
-                            case R.id.menu_calendar:
-                                CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
-                                actionMode.finish();
-                                return true;
-                            // handle clipboard actions in base
-                            default:
-                                return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
+                        if (menuItem.getItemId() == R.id.menu_calendar) {
+                            CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
+                            actionMode.finish();
+                            return true;
                         }
+
+                        // handle clipboard actions
+                        return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
                     }
                 });
                 return true;

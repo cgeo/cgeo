@@ -147,10 +147,9 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
         final int menuItem = item.getItemId();
 
-        switch (menuItem) {
-            case R.id.menu_delete:
-                new DropCacheClickListener().onClick(getView());
-                return true;
+        if (menuItem == R.id.menu_delete) {
+            new DropCacheClickListener().onClick(getView());
+            return true;
         }
         return false;
     }
