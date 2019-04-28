@@ -797,11 +797,9 @@ public class MainActivity extends AbstractActionBarActivity {
             if (lastChecksum == 0) {
                 // show starting page after install
                 AboutActivity.showStarting(this);
-            } else {
-                if (lastChecksum != checksum) {
-                    // show change log page after update
-                    AboutActivity.showChangeLog(this);
-                }
+            } else if (lastChecksum != checksum) {
+                // show change log page after update
+                AboutActivity.showChangeLog(this);
             }
         } catch (final Exception ex) {
             Log.e("Error checking/showing changelog!", ex);
