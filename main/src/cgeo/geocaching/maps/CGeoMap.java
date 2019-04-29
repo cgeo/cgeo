@@ -7,8 +7,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.GCLogin;
-import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -138,7 +136,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * Last search result used for displaying header
      */
     private SearchResult lastSearchResult = null;
-    private MapTokens tokens = null;
     private boolean noMapTokenShowed = false;
     // map status data
     private static boolean followMyLocation = true;
@@ -1222,17 +1219,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private void doDownloadRun() {
         try {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
-            if (Settings.isGCConnectorActive() && tokens == null) {
-                tokens = GCLogin.getInstance().getMapTokens();
-                if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
-                    tokens = null;
-                    if (!noMapTokenShowed) {
-                        ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
-                        noMapTokenShowed = true;
-                    }
-                }
-            }
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(mapView.getViewport().resize(0.8), tokens);
+
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(mapView.getViewport().resize(0.8));
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);

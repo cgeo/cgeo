@@ -14,7 +14,6 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
-import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
@@ -201,7 +200,7 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport) {
         try {
             return new SearchResult(SuApi.searchByBBox(viewport, this));
         } catch (final SuApi.NotAuthorizedException e) {

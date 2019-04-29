@@ -2,14 +2,11 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.GCLogin;
-import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
@@ -23,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.layer.Layer;
 
 public class LiveCachesOverlay extends AbstractCachesOverlay {
@@ -31,7 +27,6 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
     private final Disposable timer;
     private boolean downloading = false;
     public long loadThreadRun = -1;
-    private MapTokens tokens;
 
     public LiveCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
         super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
@@ -98,18 +93,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            if (Settings.isGCConnectorActive() && tokens == null) {
-                tokens = GCLogin.getInstance().getMapTokens();
-                if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
-                    tokens = null;
-                    //TODO: show missing map token toast
-                    //                    if (!noMapTokenShowed) {
-                    //                        ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
-                    //                        noMapTokenShowed = true;
-                    //                    }
-                }
-            }
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(getViewport().resize(1.2), tokens);
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(getViewport().resize(1.2));
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             AbstractCachesOverlay.filter(result);

@@ -9,7 +9,6 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -106,7 +105,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport) {
         final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
         final SearchResult searchResult = new SearchResult(caches);
         return searchResult.filterSearchResults(false, Settings.getCacheType());

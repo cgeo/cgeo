@@ -14,7 +14,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
-import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -59,7 +58,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     @NonNull
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport) {
         final SearchResult result = new SearchResult(OkapiClient.getCachesBBox(viewport, this));
 
         Log.d(String.format(Locale.getDefault(), "OC returning %d caches from search by viewport", result.getCount()));

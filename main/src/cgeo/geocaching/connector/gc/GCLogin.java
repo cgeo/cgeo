@@ -613,19 +613,6 @@ public class GCLogin extends AbstractLogin {
         return !StringUtils.contains(uri, "cache_details");
     }
 
-    /**
-     * Get user session & session token from the Live Map. Needed for following requests.
-     *
-     * @return first is user session, second is session token
-     */
-    @NonNull
-    public MapTokens getMapTokens() {
-        final String data = getRequestLogged(GCConstants.URL_LIVE_MAP, null);
-        final String userSession = TextUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
-        final String sessionToken = TextUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
-        return new MapTokens(userSession, sessionToken);
-    }
-
     private StatusCode completeLoginProcess() {
         setHomeLocation();
         getServerParameters();

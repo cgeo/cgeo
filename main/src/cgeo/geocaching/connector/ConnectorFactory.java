@@ -12,7 +12,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.ge.GeopeitusConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
@@ -334,11 +333,11 @@ public final class ConnectorFactory {
 
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final MapTokens tokens) {
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
         return SearchResult.parallelCombineActive(searchByViewPortConns, new Function<ISearchByViewPort, SearchResult>() {
             @Override
             public SearchResult apply(final ISearchByViewPort connector) {
-                return connector.searchByViewport(viewport, tokens);
+                return connector.searchByViewport(viewport);
             }
         });
     }

@@ -7,8 +7,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.connector.gc.MapTokens;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -26,7 +24,6 @@ import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
 
 import android.test.suitebuilder.annotation.MediumTest;
@@ -39,9 +36,6 @@ import java.util.GregorianCalendar;
  * application and/or context.
  */
 public class CgeoApplicationTest extends CGeoTestCase {
-
-    private static final MapTokens INVALID_TOKEN = null;
-
     /**
      * The name 'test preconditions' is a convention to signal that if this test
      * doesn't pass, the test case was not set up properly and it might explain
@@ -260,7 +254,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport, MapTokens)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport)}
      */
     @MediumTest
     public static void testSearchByViewport() {
@@ -279,11 +273,10 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final GC3FJ5F mockedCache = new GC3FJ5F();
                     deleteCacheFromDB(mockedCache.getGeocode());
 
-                    final MapTokens tokens = GCLogin.getInstance().getMapTokens();
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    final SearchResult search = ConnectorFactory.searchByViewport(viewport);
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
