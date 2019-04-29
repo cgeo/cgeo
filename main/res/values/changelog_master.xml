@@ -4,10 +4,12 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Use new live map on geocaching.com\n
-    · New: Upgrade to mapsforge library 0.11.0\n
     · New: Batch upload modified coordinates from list\n
     · New: User can switch to compact icons on the map via menu\n
     · New: Save trail to database and restore on resuming map\n
+    · New: Show getting started guide on first startup after new installation\n
+    · New: Prevent geocaching.com being used without authentication by disabling it by default on new installations\n
+    · Fix: TB status field not localized\n
     \n
     \n
   </string>
