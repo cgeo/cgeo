@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Varmuuskopio ja palauta, valitse sovelluksen hakemistoja ja säädä muita asetuksia.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
     <string name="settings_category_browser">Selain</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut lokkausasetukset</string>
     <string name="settings_goto_url_button">Lisää…</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Tuo Pocket Query</string>
     <string name="pq_my_finds">Löytöni</string>
     <string name="caches_refresh_all_warning">Tämä toiminto voi johtaa korkeaan verkkoyhteyden käyttöön. Haluatko todellakin päivittää kaikki kätköt?</string>
-    <string name="invitation_action">Kutsu ystäviä</string>
-    <string name="invitation_title">Kutsu kaverisi c:geon käyttäjäksi</string>
-    <string name="invitation_message">Kokeile c:geo-sovellusta geokätköilyyn</string>
     <string name="cache_list_remove_from">Poista listalta</string>
     <string name="list_list_headline">Listat:</string>
     <string name="cache_store_list">Tallenna listaan</string>

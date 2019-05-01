@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Biztonsági mentés és visszaállítás, program mappák megadása és egyéb rendszer specifikus beállítások</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_browser">Böngésző</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Közösségi média</string>
     <string name="settings_category_logging_other">Egyéb logolási beállítások</string>
     <string name="settings_goto_url_button">Tovább…</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Pocket lekérdezés importálása</string>
     <string name="pq_my_finds">Találataim</string>
     <string name="caches_refresh_all_warning">Ez a művelet nagy hálózati forgalmat okozhat. Biztosan frissíteni akarod összes ládát?</string>
-    <string name="invitation_action">Ajánlás barátoknak</string>
-    <string name="invitation_title">c:geo ajánlása barátoknak</string>
-    <string name="invitation_message">Próbáld ki a c:geo-t geoládázáshoz!</string>
     <string name="cache_list_remove_from">Törlés listáról</string>
     <string name="list_list_headline">Listák:</string>
     <string name="cache_store_list">Mentés listára</string>

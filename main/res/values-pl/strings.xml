@@ -464,7 +464,6 @@
     <string name="settings_summary_system">Wykonaj kopię zapasową i przywracanie, konfiguruj katalog z aplikacjami i inne ustawienia systemowe.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_browser">Przeglądarka</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Portale społecznościowe</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
     <string name="settings_goto_url_button">więcej …</string>
@@ -1579,9 +1578,6 @@
     <string name="pq_download_and_import">Importuj Pocket query</string>
     <string name="pq_my_finds">Znalezione</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrzynek?</string>
-    <string name="invitation_action">Zaproś znajomych</string>
-    <string name="invitation_title">Zaproś znajomych do użycia c:geo</string>
-    <string name="invitation_message">Wypróbuj aplikację c:geo do geocachingu</string>
     <string name="cache_list_remove_from">Usuń z listy</string>
     <string name="list_list_headline">Lista:</string>
     <string name="cache_store_list">Zapisz na liście</string>

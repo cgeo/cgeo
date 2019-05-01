@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Buhata ang bak-ap og hiuli, i-anhay ang direktoryo nga app og lain nga himutangan sa espisipiko nga sistema.</string>
     <string name="settings_title_navigation_menu">Menu sa nabigasyon</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Lain nga kapilian sa pag logging</string>
     <string name="settings_goto_url_button">dugang …</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">I-mport ang Pocket query</string>
     <string name="pq_my_finds">Ang akong nakita</string>
     <string name="caches_refresh_all_warning">Ang kani na aksyon mahimong modulong sa taas nga network trapik. Sigurado ba ka na ganahan ka i-grupo og bag-ohon ang tanan n mga caches?</string>
-    <string name="invitation_action">Mag-imbita ug mga amiga/amigo</string>
-    <string name="invitation_title">Mag imbita ug amiga/amigo na gamiton ang c:geo</string>
-    <string name="invitation_message">Suwayi ang c:geo app para sa pag-geocache</string>
     <string name="cache_list_remove_from">Itangtang gikan sa lista</string>
     <string name="list_list_headline">Mga lista:</string>
     <string name="cache_store_list">I-imbak sa lista</string>

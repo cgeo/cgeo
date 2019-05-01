@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Back-up maken en terugzetten, configureer app mappen en andere systeemspecifieke instellingen.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sociale media</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
     <string name="settings_goto_url_button">meer…</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Importeer Pocket query</string>
     <string name="pq_my_finds">Mijn vondsten</string>
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
-    <string name="invitation_action">Nodig vrienden uit</string>
-    <string name="invitation_title">Vrienden uitnodigen c:geo te gebruiken</string>
-    <string name="invitation_message">Probeer de c:geo app voor geocachen</string>
     <string name="cache_list_remove_from">Verwijder uit lijst</string>
     <string name="list_list_headline">Lijsten:</string>
     <string name="cache_store_list">Opslaan in lijst</string>

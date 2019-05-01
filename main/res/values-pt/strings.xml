@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Realizar cópia de segurança e restauro, configurar os directórios da aplicação e outras definições específicas do sistema.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Redes sociais</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
     <string name="settings_goto_url_button">mais …</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Importar Pocket query</string>
     <string name="pq_my_finds">Minhas encontradas</string>
     <string name="caches_refresh_all_warning">Esta acção poderá resultar num consumo elevado de dados. Tem a certeza que deseja actualizar todas as caches?</string>
-    <string name="invitation_action">Convidar amigos</string>
-    <string name="invitation_title">Convide amigos a utilizar c:geo</string>
-    <string name="invitation_message">Experimente a aplicação c:geo para geocaching</string>
     <string name="cache_list_remove_from">Remover da lista</string>
     <string name="list_list_headline">Listas:</string>
     <string name="cache_store_list">Armazenar na lista</string>

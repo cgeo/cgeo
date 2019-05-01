@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Esegue backup e ripristino, configura le cartelle della app ed altre impostazioni specifiche del sistema.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Altre opzioni di log</string>
     <string name="settings_goto_url_button">altro …</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Importa una Pocket query</string>
     <string name="pq_my_finds">I miei trovati</string>
     <string name="caches_refresh_all_warning">Questa azione può causare elevato traffico di rete. Sei sicuro di voler aggiornare tutti i cache?</string>
-    <string name="invitation_action">Invita gli amici</string>
-    <string name="invitation_title">Invita gli amici a utilizzare c:geo</string>
-    <string name="invitation_message">Prova l\'app c:geo per il geocaching</string>
     <string name="cache_list_remove_from">Rimuovi dalla lista</string>
     <string name="list_list_headline">Liste:</string>
     <string name="cache_store_list">Salva nella lista</string>

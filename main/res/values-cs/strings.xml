@@ -464,7 +464,6 @@
     <string name="settings_summary_system">Zálohování a obnovení, nastavení složek aplikace a dalších systémových údajů.</string>
     <string name="settings_title_navigation_menu">Navigační menu</string>
     <string name="settings_category_browser">Prohlížeč</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sociální média</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
     <string name="settings_goto_url_button">více …</string>
@@ -1579,9 +1578,6 @@
     <string name="pq_download_and_import">Importovat Pocket Query</string>
     <string name="pq_my_finds">Moje nálezy</string>
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech keší?</string>
-    <string name="invitation_action">Pozvat přátele</string>
-    <string name="invitation_title">Pozvi přátele k používání c:geo</string>
-    <string name="invitation_message">Vyzkoušej geocachingovou aplikaci c:geo</string>
     <string name="cache_list_remove_from">Odebrat ze seznamu</string>
     <string name="list_list_headline">Seznamy:</string>
     <string name="cache_store_list">Uložit do seznamu</string>

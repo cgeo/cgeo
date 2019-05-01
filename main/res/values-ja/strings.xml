@@ -455,7 +455,6 @@
     <string name="settings_summary_system">バックアップの実行やリストア、アプリのフォルダの選択とその他の特定のシステムの設定。</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
     <string name="settings_category_browser">ブラウザ</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">他のオプション</string>
     <string name="settings_goto_url_button">詳細…</string>
@@ -1517,9 +1516,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="pq_download_and_import">ポケット・クエリのインポート</string>
     <string name="pq_my_finds">自分の発見</string>
     <string name="caches_refresh_all_warning">この操作は、ネットワーク通信量が高くなる可能性があります。すべてのキャッシュを一括更新してもよろしいですか?</string>
-    <string name="invitation_action">友達を招待</string>
-    <string name="invitation_title">c:geo を使用するように友達を招待します</string>
-    <string name="invitation_message">ジオキャッシングのc:geo アプリを試してみてください</string>
     <string name="cache_list_remove_from">リストから削除</string>
     <string name="list_list_headline">リスト:</string>
     <string name="cache_store_list">リストに保存</string>
