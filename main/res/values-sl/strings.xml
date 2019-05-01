@@ -464,7 +464,6 @@
     <string name="settings_summary_system">Perform backup and restore, configure app directories and other system specific settings.</string>
     <string name="settings_title_navigation_menu">Navigacijski menu</string>
     <string name="settings_category_browser">Brskalnik</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Socialni vtičniki</string>
     <string name="settings_category_logging_other">Druge možnosti zapisa</string>
     <string name="settings_goto_url_button">več …</string>
@@ -1579,9 +1578,6 @@
     <string name="pq_download_and_import">Import Pocket query</string>
     <string name="pq_my_finds">Moje najdbe</string>
     <string name="caches_refresh_all_warning">To dejanje lahko povzroči veliko mrežnega prometa - prenosa podatkov. Ali ste prepričani, da želite osvežiti vse zaklade?</string>
-    <string name="invitation_action">Povabi prijatelje</string>
-    <string name="invitation_title">Povabi prijatelje k uporabi aplikacije c:geo</string>
-    <string name="invitation_message">Preizkusi c:geo, aplikacijo za geocaching</string>
     <string name="cache_list_remove_from">Odstrani s seznama</string>
     <string name="list_list_headline">Seznam:</string>
     <string name="cache_store_list">Shrani v seznam</string>

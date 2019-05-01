@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Realitza una còpia de seguretat i restaura, configura els directoris d\' app  i altres ajustaments específics del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
     <string name="settings_category_browser">Navegador</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Xarxes socials</string>
     <string name="settings_category_logging_other">Altres opcions de registre</string>
     <string name="settings_goto_url_button">més…</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Importa la Pocket query</string>
     <string name="pq_my_finds">Els meus trobats</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
-    <string name="invitation_action">Convida amics</string>
-    <string name="invitation_title">Convida amics a utilitzar c:geo</string>
-    <string name="invitation_message">Prova l\'app de c:geo per geocaching</string>
     <string name="cache_list_remove_from">Esborrar de la llista</string>
     <string name="list_list_headline">Llistes:</string>
     <string name="cache_store_list">Guardar a la llista</string>

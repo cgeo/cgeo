@@ -464,7 +464,6 @@
     <string name="settings_summary_system">Urobte zálohu a obnovenie, nastavte adresáre aplikácie a ďalšie systémové nastavenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
     <string name="settings_category_browser">Prehliadač</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sociálne médiá</string>
     <string name="settings_category_logging_other">Ďalšie možnosti logovania</string>
     <string name="settings_goto_url_button">viac…</string>
@@ -1579,9 +1578,6 @@
     <string name="pq_download_and_import">Importovať PQ</string>
     <string name="pq_my_finds">Moje nálezy</string>
     <string name="caches_refresh_all_warning">Táto akcia môže viesť k vysokej sieťovej prevádzke. Naozaj chceš dávkovo obnoviť všetky cache?</string>
-    <string name="invitation_action">Pozvať priateľov</string>
-    <string name="invitation_title">Pozvať priateľov na používanie c:geo</string>
-    <string name="invitation_message">Skús aplikáciu c:geo pre geocaching</string>
     <string name="cache_list_remove_from">Odstrániť zo zoznamu</string>
     <string name="list_list_headline">Zoznamy:</string>
     <string name="cache_store_list">Uložiť do zoznamu</string>

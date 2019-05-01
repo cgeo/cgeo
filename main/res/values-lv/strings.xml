@@ -461,7 +461,6 @@
     <string name="settings_summary_system">Veikt dublēšanu un atjaunošanu, konfigurējiet aplikācijas katalogus un citus īpašos sistēmas iestatījumus.</string>
     <string name="settings_title_navigation_menu">Navigācijas izvēlne</string>
     <string name="settings_category_browser">Pārlūkprogramma</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Citi pierakstīšanās iestatījumi</string>
     <string name="settings_goto_url_button">vairāk…</string>
@@ -1558,9 +1557,6 @@
     <string name="pq_download_and_import">Importēt Slēpņu atlasi (PQ)</string>
     <string name="pq_my_finds">Mani atradumi</string>
     <string name="caches_refresh_all_warning">Šī darbība var patērēt daudz interneta apjoma/tīkla trafika. Vai tiešām vēlaties uzsākt atjaunināt visus slēpņus?</string>
-    <string name="invitation_action">Uzaicināt draugus</string>
-    <string name="invitation_title">Uzaicināt draugus izmantot c:geo</string>
-    <string name="invitation_message">Izmēģināt c:geo aplikāciju slēpņošanai</string>
     <string name="cache_list_remove_from">Dzēst no saraksta</string>
     <string name="list_list_headline">Saraksti:</string>
     <string name="cache_store_list">Saglabāt sarakstā</string>

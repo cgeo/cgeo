@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Yedekleme ve geri yükleme gerçekleştirin, uygulama dizinleri ve diğer sisteme özel ayarları yapılandırın.</string>
     <string name="settings_title_navigation_menu">Navigasyon Menüsü</string>
     <string name="settings_category_browser">Tarayıcı</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
     <string name="settings_goto_url_button">daha fazla …</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Sorgulama kaydı içe aktar</string>
     <string name="pq_my_finds">Benim bulduklarım</string>
     <string name="caches_refresh_all_warning">Bu seçim yüksek ağ yoğunluğuna neden olabilir. Tüm Geocache\'leri toplu yenilemek istediğinizden emin misiniz?</string>
-    <string name="invitation_action">Arkadaşlarını davet et</string>
-    <string name="invitation_title">Arkadaşlarını c:geo kullanmaya davet et</string>
-    <string name="invitation_message">Geocaching için c:geo uygulamasını deneyin</string>
     <string name="cache_list_remove_from">Listeden kaldır</string>
     <string name="list_list_headline">Listeler:</string>
     <string name="cache_store_list">Listeye kaydet</string>

@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Udfør backup og gendannelse, konfigurér app-mapper og andre systemspecifikke indstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Sociale medier</string>
     <string name="settings_category_logging_other">Andre logningsmuligheder</string>
     <string name="settings_goto_url_button">mere…</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Importér Pocket Query</string>
     <string name="pq_my_finds">Mine fund</string>
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
-    <string name="invitation_action">Invitér venner</string>
-    <string name="invitation_title">Invitér venner til at bruge c:geo</string>
-    <string name="invitation_message">Prøv c:geo-appen til geocaching</string>
     <string name="cache_list_remove_from">Fjern fra liste</string>
     <string name="list_list_headline">Lister:</string>
     <string name="cache_store_list">Gem i liste</string>

@@ -455,7 +455,6 @@
     <string name="settings_summary_system">백업 및 복구 수행, 앱 폴더와 기타 시스템 관련 설정하기</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_browser">브라우저</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">SNS</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
     <string name="settings_goto_url_button">더보기…</string>
@@ -1516,9 +1515,6 @@
     <string name="pq_download_and_import">포켓쿼리 가져오기</string>
     <string name="pq_my_finds">내가 찾은것</string>
     <string name="caches_refresh_all_warning">이 작업은 네트워크 트래픽이 과다 발생할 수 있습니다. 정말 모든 캐시를 새로 고치시겠습니까?</string>
-    <string name="invitation_action">친구 초대</string>
-    <string name="invitation_title">친구를 c:geo로 초대하기</string>
-    <string name="invitation_message">c:geo앱을 지오캐싱을 위해 시도</string>
     <string name="cache_list_remove_from">목록에서 제거</string>
     <string name="list_list_headline">목록 :</string>
     <string name="cache_store_list">목록에 저장하기</string>

@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Sicherung, Wiederherstellung, Verzeichnisse und Systemeinstellungen.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Soziale Medien</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
     <string name="settings_goto_url_button">mehr …</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Pocket-Query importieren</string>
     <string name="pq_my_finds">Meine Funde</string>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
-    <string name="invitation_action">Freunde einladen</string>
-    <string name="invitation_title">Freunde einladen c:geo auszuprobieren</string>
-    <string name="invitation_message">Teste c:geo fürs Geocaching</string>
     <string name="cache_list_remove_from">Aus Liste entfernen</string>
     <string name="list_list_headline">Listen:</string>
     <string name="cache_store_list">In Liste speichern</string>

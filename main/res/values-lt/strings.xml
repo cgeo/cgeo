@@ -464,7 +464,6 @@
     <string name="settings_summary_system">Padaryti kopiją ir atstatyti, nustatyti programos aplankus ir kitus sisteminius specialius nustatymus.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Socialiniai tinklai</string>
     <string name="settings_category_logging_other">Kitos registravimo parinktys</string>
     <string name="settings_goto_url_button">Plačiau</string>
@@ -1579,9 +1578,6 @@
     <string name="pq_download_and_import">Importuoti Pocket query</string>
     <string name="pq_my_finds">Mano radiniai</string>
     <string name="caches_refresh_all_warning">Šis veiksmas gali išnaudoti daug tinklo srauto. Ar tikrai norite atnaujinti visas slėptuves?</string>
-    <string name="invitation_action">Pakviesti draugus</string>
-    <string name="invitation_title">Pakviesti draugus naudoti c:geo</string>
-    <string name="invitation_message">Geoslėptuvių paieškai pabandykite c:geo programėlę</string>
     <string name="cache_list_remove_from">Pašalinti iš sąrašo</string>
     <string name="list_list_headline">Sąrašas:</string>
     <string name="cache_store_list">Išsaugoti sąraše</string>

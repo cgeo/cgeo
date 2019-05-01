@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Realiza y restaura copias de seguridad, configura los directorios de la aplicación y otros ajustes del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegación</string>
     <string name="settings_category_browser">Navegador</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Redes sociales</string>
     <string name="settings_category_logging_other">Otras opciones de registro</string>
     <string name="settings_goto_url_button">más …</string>
@@ -1538,9 +1537,6 @@ Nombre de archivo:%2$s</string>
     <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="pq_my_finds">Mis encontrados</string>
     <string name="caches_refresh_all_warning">Esta acción puede ocasionar un alto tráfico de red. ¿Estás seguro de querer actualizar todos los cachés?</string>
-    <string name="invitation_action">Invitar amigos</string>
-    <string name="invitation_title">Invitar a amigos a usar c:geo</string>
-    <string name="invitation_message">Prueba la app c:geo para geocaching</string>
     <string name="cache_list_remove_from">Borrar de la lista</string>
     <string name="list_list_headline">Listas:</string>
     <string name="cache_store_list">Guardar en lista</string>

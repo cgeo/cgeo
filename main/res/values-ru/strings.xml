@@ -464,7 +464,6 @@
     <string name="settings_summary_system">Резервное копирование и восстановление, настройка директорий и других системных опций.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
     <string name="settings_category_browser">Браузер</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Социальные сети</string>
     <string name="settings_category_logging_other">Остальные параметры</string>
     <string name="settings_goto_url_button">Подробнее…</string>
@@ -1579,9 +1578,6 @@
     <string name="pq_download_and_import">Импортировать выборку</string>
     <string name="pq_my_finds">Мои находки</string>
     <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
-    <string name="invitation_action">Пригласить друзей</string>
-    <string name="invitation_title">Пригласить друзей использовать c:geo</string>
-    <string name="invitation_message">Попробуйте c:geo для геокешинга</string>
     <string name="cache_list_remove_from">Удалить из списка</string>
     <string name="list_list_headline">Списки:</string>
     <string name="cache_store_list">Сохранить в список</string>

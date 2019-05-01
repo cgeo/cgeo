@@ -461,7 +461,6 @@
     <string name="settings_summary_system">Realizează salvări de siguranţă, restaurări, configurează directoarele şi alte setări de sistem specifice.</string>
     <string name="settings_title_navigation_menu">Meniu navigaţie</string>
     <string name="settings_category_browser">Browser</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Alte opţiuni pentru jurnal</string>
     <string name="settings_goto_url_button">mai multe…</string>
@@ -1558,9 +1557,6 @@
     <string name="pq_download_and_import">Importă căutare personalizată</string>
     <string name="pq_my_finds">Găsirile mele</string>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
-    <string name="invitation_action">Invită prieteni</string>
-    <string name="invitation_title">Invită-ţi prietenii să folosească c:geo</string>
-    <string name="invitation_message">Încearca aplicaţia c:geo pentru geocaching</string>
     <string name="cache_list_remove_from">Şterge din listă</string>
     <string name="list_list_headline">Liste:</string>
     <string name="cache_store_list">Salvează în listă</string>

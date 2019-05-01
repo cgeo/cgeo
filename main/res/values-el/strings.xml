@@ -458,7 +458,6 @@
     <string name="settings_summary_system">Εκτελέσετε δημιουργία αντιγράφων ασφαλείας και επαναφοράς, ρύθμιση καταλόγου εφαρμογών και άλλες συγκεκριμένες ρυθμίσεις του συστήματος.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
-    <string name="settings_category_geocaching">Geocaching</string>
     <string name="settings_category_social">Κοινωνικά δίκτυα</string>
     <string name="settings_category_logging_other">Εμφάνιση περισσότερων επιλογών καταγραφής</string>
     <string name="settings_goto_url_button">περισσότερα…</string>
@@ -1537,9 +1536,6 @@
     <string name="pq_download_and_import">Εισαγωγή προσωποποιημένης αναζήτησης</string>
     <string name="pq_my_finds">Οι ευρέσεις μου</string>
     <string name="caches_refresh_all_warning">Αυτή η ενέργεια ενδέχεται να προκαλέσει μεγάλη κυκλοφορία δικτύου. Είναι βέβαιοι ότι θέλετε να ανανεώσετε μαζικά όλες τις κρύπτες;</string>
-    <string name="invitation_action">Προσκαλέστε φίλους</string>
-    <string name="invitation_title">Προσκαλέστε φίλους να χρησιμοποιήσουν το c:geo</string>
-    <string name="invitation_message">Δοκιμάστε την εφαρμογή c:geo για το geocaching</string>
     <string name="cache_list_remove_from">Κατάργηση από τη λίστα</string>
     <string name="list_list_headline">Λίστες:</string>
     <string name="cache_store_list">Αποθήκευση σε λίστα</string>
