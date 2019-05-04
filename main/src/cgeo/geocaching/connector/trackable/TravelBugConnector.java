@@ -59,6 +59,11 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    public boolean isActive() {
+        return Settings.isGCConnectorActive();
+    }
+
+    @Override
     public boolean isRegistered() {
         return Settings.hasGCCredentials();
     }
