@@ -84,6 +84,9 @@
     · OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data <a href="http://www.openstreetmap.org/copyright/en">licensed</a> under Creative Commons 2.0 BY-SA.\n
 	</string>
 
+    <!-- cache details -->
+    <string name="favorite_count" translatable="false">%1$d×</string>
+
     <!-- cache menu -->
     <string name="caches_map_mapswithme" translatable="false">Maps.me</string>
     <string name="cache_menu_mapswithme" translatable="false">Maps.me</string>
