@@ -12,25 +12,25 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 
-public class GpsStatusProvider {
+public class GnssStatusProvider {
 
-    private GpsStatusProvider() {
+    private static final Status NO_GNSS = new Status(false, 0, 0);
+
+    private GnssStatusProvider() {
         // Utility class, not to be instantiated
     }
 
     public static class Status {
-        public final boolean gpsEnabled;
+        public final boolean gnssEnabled;
         public final int satellitesVisible;
         public final int satellitesFixed;
 
-        public Status(final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed) {
-            this.gpsEnabled = gpsEnabled;
+        public Status(final boolean gnssEnabled, final int satellitesVisible, final int satellitesFixed) {
+            this.gnssEnabled = gnssEnabled;
             this.satellitesVisible = satellitesVisible;
             this.satellitesFixed = satellitesFixed;
         }
     }
-
-    private static final Status NO_GPS = new Status(false, 0, 0);
 
     public static Observable<Status> create(final Context context) {
         final Observable<Status> observable = Observable.create(new ObservableOnSubscribe<Status>() {
@@ -38,7 +38,7 @@ public class GpsStatusProvider {
             public void subscribe(final ObservableEmitter<Status> subscriber) throws Exception {
                 final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                 final Listener listener = new Listener() {
-                    Status latest = NO_GPS;
+                    Status latest = NO_GNSS;
 
                     @Override
                     public void onGpsStatusChanged(final int event) {
@@ -64,7 +64,7 @@ public class GpsStatusProvider {
                                 latest = new Status(true, 0, 0);
                                 break;
                             case GpsStatus.GPS_EVENT_STOPPED:
-                                latest = NO_GPS;
+                                latest = NO_GNSS;
                                 break;
                             default:
                                 subscriber.onError(new IllegalStateException());
@@ -73,7 +73,7 @@ public class GpsStatusProvider {
                         subscriber.onNext(latest);
                     }
                 };
-                subscriber.onNext(NO_GPS);
+                subscriber.onNext(NO_GNSS);
                 geoManager.addGpsStatusListener(listener);
                 subscriber.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
                     @Override

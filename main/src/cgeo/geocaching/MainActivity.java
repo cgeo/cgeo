@@ -19,8 +19,8 @@ import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.GpsStatusProvider;
-import cgeo.geocaching.sensors.GpsStatusProvider.Status;
+import cgeo.geocaching.sensors.GnssStatusProvider;
+import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
@@ -198,11 +198,11 @@ public class MainActivity extends AbstractActionBarActivity {
         return StringUtils.join(addressParts, ", ");
     }
 
-    private final Consumer<GpsStatusProvider.Status> satellitesHandler = new Consumer<Status>() {
+    private final Consumer<GnssStatusProvider.Status> satellitesHandler = new Consumer<Status>() {
         @Override
-        public void accept(final Status gpsStatus) {
-            if (gpsStatus.gpsEnabled) {
-                navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + '/' + gpsStatus.satellitesVisible);
+        public void accept(final Status gnssStatus) {
+            if (gnssStatus.gnssEnabled) {
+                navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gnssStatus.satellitesFixed + '/' + gnssStatus.satellitesVisible);
             } else {
                 navSatellites.setText(res.getString(R.string.loc_gps_disabled));
             }
