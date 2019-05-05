@@ -38,7 +38,7 @@ public class GpsStatusProvider {
             public void subscribe(final ObservableEmitter<Status> subscriber) throws Exception {
                 final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                 final Listener listener = new Listener() {
-                    Status latest = new Status(false, 0, 0);
+                    Status latest = NO_GPS;
 
                     @Override
                     public void onGpsStatusChanged(final int event) {
@@ -64,7 +64,7 @@ public class GpsStatusProvider {
                                 latest = new Status(true, 0, 0);
                                 break;
                             case GpsStatus.GPS_EVENT_STOPPED:
-                                latest = new Status(false, 0, 0);
+                                latest = NO_GPS;
                                 break;
                             default:
                                 subscriber.onError(new IllegalStateException());
