@@ -7,6 +7,7 @@ import cgeo.geocaching.models.Waypoint;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -37,10 +38,11 @@ class MapsMeApp extends AbstractPointNavigationApp {
     }
 
     private static void navigateWithWaypoints(final Context context, final Geocache cache) {
-        if (!(context instanceof Activity)) {
-            // TODO Mapsme API will do a hard cast. We could locally fix this by re-declaring all API methods
+        final Activity activity = getActivity(context);
+        if (activity == null) {
             return;
         }
+
         final ArrayList<MWMPoint> points = new ArrayList<>();
         points.add(new MWMPoint(cache.getCoords().getLatitude(), cache.getCoords().getLongitude(), cache.getName()));
         for (final Waypoint waypoint : cache.getWaypoints()) {
@@ -50,15 +52,16 @@ class MapsMeApp extends AbstractPointNavigationApp {
             }
         }
         final MWMPoint[] pointsArray = points.toArray(new MWMPoint[points.size()]);
-        MapsWithMeApi.showPointsOnMap((Activity) context, cache.getName(), pointsArray);
+        MapsWithMeApi.showPointsOnMap(activity, cache.getName(), pointsArray);
     }
 
     private static void navigate(final Context context, final Geopoint coords, final String label) {
-        if (!(context instanceof Activity)) {
-            // TODO Mapsme API will do a hard cast. We could locally fix this by re-declaring all API methods
+        final Activity activity = getActivity(context);
+        if (activity == null) {
             return;
         }
-        MapsWithMeApi.showPointOnMap((Activity) context, coords.getLatitude(), coords.getLongitude(), label);
+
+        MapsWithMeApi.showPointOnMap(activity, coords.getLatitude(), coords.getLongitude(), label);
     }
 
     @Override
@@ -70,6 +73,19 @@ class MapsMeApp extends AbstractPointNavigationApp {
     public boolean isInstalled() {
         // the library can handle the app not being installed
         return true;
+    }
+
+    private static Activity getActivity(final Context context) {
+        if (context == null) {
+            // TODO Mapsme API will do a hard cast. We could locally fix this by re-declaring all API methods
+            return null;
+        } else if (context instanceof Activity) {
+            return (Activity) context;
+        } else if (context instanceof ContextWrapper) {
+            return getActivity(((ContextWrapper) context).getBaseContext());
+        }
+
+        return null;
     }
 
 }
