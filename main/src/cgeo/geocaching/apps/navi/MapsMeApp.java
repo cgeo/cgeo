@@ -76,15 +76,12 @@ class MapsMeApp extends AbstractPointNavigationApp {
     }
 
     private static Activity getActivity(final Context context) {
-        if (context == null) {
-            // TODO Mapsme API will do a hard cast. We could locally fix this by re-declaring all API methods
-            return null;
-        } else if (context instanceof Activity) {
+        // TODO Mapsme API will do a hard cast. We could locally fix this by re-declaring all API methods
+        if (context instanceof Activity) {
             return (Activity) context;
         } else if (context instanceof ContextWrapper) {
             return getActivity(((ContextWrapper) context).getBaseContext());
         }
-
         return null;
     }
 
