@@ -779,7 +779,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             if (Settings.getChooseList()) {
                 // let user select list to store cache in
-                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.list_title, new Action1<Set<Integer>>() {
+                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.lists_title, new Action1<Set<Integer>>() {
                     @Override
                     public void call(final Set<Integer> selectedListIds) {
                         storeCaches(geocodesInViewport, selectedListIds);
