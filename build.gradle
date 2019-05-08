@@ -126,7 +126,7 @@ allprojects {
                         if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
                             selection.reject("Apache Commons lang3 3.6+ calls methods not available in the Android runtime.")
                         }
-                        // Apache Commons Text 1.2+ requires Commons lang3 3.6+ (see above)
+                        // Apache Commons Text 1.2+ requires Apache Commons lang3 3.6+ (see above)
                         if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-text' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 11) {
                             selection.reject("Apache Commons text 1.2+ requires lang3 3.6+.")
                         }
