@@ -95,24 +95,13 @@ allprojects {
             resolutionStrategy {
                 componentSelection {
                     all { ComponentSelection selection ->
-                        boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier ->
-                            selection.candidate.version.contains(qualifier)
-                        }
-                        // allow beta version of androidsvg
-                        if (selection.candidate.group == 'com.caverock') {
-                            rejected = false
-                        }
-                        // google auto service only available as rc2 right now
-                        if (selection.candidate.group == 'com.google.auto.service') {
-                            rejected = false
-                        }
-                        if (rejected) {
+                        if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
                             selection.reject('Release candidate')
                         }
 
                         // https://github.com/joel-costigliola/assertj-core/issues/345
                         if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
-                            selection.reject("assertj 3.x or higher require Java 7 SE classes not available in Android")
+                            selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
                         }
                         // findbugs team has some release trouble
                         if (selection.candidate.group == 'com.google.code.findbugs' && selection.candidate.module == 'annotations' && selection.candidate.version == '3.0.1') {
