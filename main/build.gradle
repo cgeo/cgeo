@@ -336,7 +336,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     // Support Library. All com.android.support.* libraries must use the same version
-    def supportLibraryVersion = '24.2.1'
+    def supportLibraryVersion = '25.4.0'
 
     // Support Library AppCompat
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
