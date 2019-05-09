@@ -904,7 +904,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
                 return true;
             case R.id.menu_upload_modifiedcoords:
-                new BatchUploadModifiedCoordinates().export(adapter.getCheckedOrAllCaches(), this);
+                final Activity that = this;
+                Dialogs.confirm(this, R.string.caches_upload_modifiedcoords, R.string.caches_upload_modifiedcoords_warning, new OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        new BatchUploadModifiedCoordinates().export(adapter.getCheckedOrAllCaches(), that);
+                    }
+                });
                 return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();

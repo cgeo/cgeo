@@ -369,6 +369,7 @@
     <string name="caches_remove_progress">Removing caches</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
     <string name="caches_move_selected">Move selected</string>
