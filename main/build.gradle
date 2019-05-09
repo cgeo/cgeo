@@ -335,19 +335,23 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.8"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
-    // Support Library. Appcompat
-    def appcompatVersion = '24.2.1'
-    implementation "com.android.support:appcompat-v7:$appcompatVersion"
+    // Support Library. All com.android.support.* libraries must use the same version
+    def supportLibraryVersion = '24.2.1'
+
+    // Support Library AppCompat
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+
+    // Support Library GridLayout used by the coordinate calculator
+    implementation "com.android.support:gridlayout-v7:$supportLibraryVersion"
 
     // Support Library RecyclerView
-    implementation "com.android.support:recyclerview-v7:$appcompatVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
     // we don't want to implement decorators on our own
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
     // Support Annotations. enforce same version for the main app and the test app
-    def supportAnnotationsVersion = '24.2.1'
-    implementation "com.android.support:support-annotations:$supportAnnotationsVersion"
-    androidTestImplementation "com.android.support:support-annotations:$supportAnnotationsVersion"
+    implementation "com.android.support:support-annotations:$supportLibraryVersion"
+    androidTestImplementation "com.android.support:support-annotations:$supportLibraryVersion"
 
     // Testing Support Library. Android Studio recommended test runner, see https://developer.android.com/tools/testing-support-library/index.html#setup
     androidTestImplementation 'com.android.support.test:runner:0.5'
@@ -362,9 +366,6 @@ dependencies {
 
     // Zxing barcode reader integration
     implementation 'com.google.zxing:android-integration:3.3.0'
-
-    // GridLayout used by the coordinate calculator
-    implementation "com.android.support:gridlayout-v7:$appcompatVersion"
 
     // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
     // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
