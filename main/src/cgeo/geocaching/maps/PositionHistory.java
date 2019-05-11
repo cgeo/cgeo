@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.location.Location;
 
@@ -33,31 +32,21 @@ public class PositionHistory {
 
     // save current coords to permanent storage
     private void saveToStorage(final Location coordinates) {
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
+        Schedulers.io().scheduleDirect(new Runnable() {
             @Override
             public void run() {
                 DataStore.saveTrailpoint(coordinates);
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                // nothing to do UI-wise
             }
         });
     }
 
     // clear position history (in memory and on permanent storage)
     public void reset() {
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
+        Schedulers.io().scheduleDirect(new Runnable() {
             @Override
             public void run() {
                 DataStore.clearTrailHistory();
                 history.clear();
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                // nothing to do UI-wise
             }
         });
     }
