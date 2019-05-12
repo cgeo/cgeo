@@ -341,6 +341,9 @@ dependencies {
     // Support Library AppCompat
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
 
+    // Support Library ExifInterface replaces com.android.media.ExifInterface by com.android.support.media.ExifInterface
+    implementation "com.android.support:exifinterface:$supportLibraryVersion"
+
     // Support Library GridLayout used by the coordinate calculator
     implementation "com.android.support:gridlayout-v7:$supportLibraryVersion"
 
