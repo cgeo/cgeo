@@ -21,7 +21,6 @@
         android:padding="6dp" >
 
         <android.support.v7.widget.GridLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:grid="http://schemas.android.com/apk/res-auto"
 
             android:id="@+id/EquationTable"
@@ -42,7 +41,6 @@
 
         <android.support.v7.widget.GridLayout
             android:id="@+id/FreeVariableTable"
-            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:grid="http://schemas.android.com/apk/res-auto"
 
             android:layout_height="wrap_content"
