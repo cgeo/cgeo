@@ -158,6 +158,7 @@
         style="@style/edittext_full"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="textNoSuggestions"
         android:hint="@string/latitude" />
 
     <EditText
@@ -165,6 +166,7 @@
         style="@style/edittext_full"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="textNoSuggestions"
         android:hint="@string/longitude" />
 
 </merge>
