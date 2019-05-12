@@ -226,8 +226,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     enum Page {
         VERSION(R.string.about_version),
-        HELP(R.string.about_help),
         STARTING(R.string.about_starting),
+        HELP(R.string.about_help),
         CHANGELOG(R.string.about_changelog),
         SYSTEM(R.string.about_system),
         CONTRIBUTORS(R.string.about_contributors),
@@ -273,10 +273,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         switch (page) {
             case VERSION:
                 return new VersionViewCreator();
-            case HELP:
-                return new HelpViewCreator();
             case STARTING:
                 return new StartingViewCreator();
+            case HELP:
+                return new HelpViewCreator();
             case CHANGELOG:
                 return new ChangeLogViewCreator();
             case SYSTEM:
