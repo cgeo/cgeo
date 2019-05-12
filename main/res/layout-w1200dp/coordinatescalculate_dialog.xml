@@ -80,7 +80,7 @@
                     android:overScrollMode="always"
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
-
+                    android:inputType="textAutoCorrect"
                     android:hint="@string/waypointcalc_notes_prompt" />
             </LinearLayout>
         </LinearLayout>
