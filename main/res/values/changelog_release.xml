@@ -10,6 +10,7 @@
     · New: Show getting started guide on first startup after new installation\n
     · New: Prevent geocaching.com being used without authentication by disabling it by default on new installations\n
     · Fix: TB status field not localized\n
+    · Fix: Maps.me navigation not starting\n
     \n
     \n
 </string>
