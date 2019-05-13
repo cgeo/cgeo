@@ -2,7 +2,7 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.playservices.LocationProvider;
-import cgeo.geocaching.sensors.GpsStatusProvider.Status;
+import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
@@ -49,7 +49,7 @@ public class Sensors {
 
     private Sensors() {
         final Application application = CgeoApplication.getInstance();
-        gpsStatusObservable = GpsStatusProvider.create(application).replay(1).refCount();
+        gpsStatusObservable = GnssStatusProvider.create(application).replay(1).refCount();
         final Context context = application.getApplicationContext();
         hasCompassCapabilities = RotationProvider.hasRotationSensor(context) ||
                 OrientationProvider.hasOrientationSensor(context) ||
