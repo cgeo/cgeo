@@ -74,6 +74,8 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_MAX = 200;
     private static final int BROUTER_THRESHOLD_DEFAULT = 10;
     public static final int BROUTER_THRESHOLD_MAX = 120;
+    private static final int DISTANCE_BEEP_DEFAULT = 0;
+    public static final int DISTANCE_BEEP_MAX = 1000;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -966,6 +968,21 @@ public class Settings {
 
     static void setBrouterThreshold(final int threshold) {
         putInt(R.string.pref_brouterDistanceThreshold, threshold);
+    }
+
+    /**
+     * The Threshold for distance beeps
+     */
+    public static boolean getDistanceBeep() {
+        return getBoolean(R.string.pref_distanceBeep, false);
+    }
+
+    public static int getDistanceBeepThreshold(final boolean first) {
+        return getInt(first ? R.string.pref_distanceBeep1 : R.string.pref_distanceBeep2, DISTANCE_BEEP_DEFAULT);
+    }
+
+    static void setDistanceBeepThreshold(final boolean first, final int value) {
+        putInt(first ? R.string.pref_distanceBeep1 : R.string.pref_distanceBeep2, value);
     }
 
     public static boolean isUseTwitter() {

@@ -601,6 +601,17 @@
             <cgeo.geocaching.settings.BrouterThresholdPreference
                 android:key="@string/pref_brouterDistanceThreshold"
                 android:layout="@layout/preference_seekbar" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_distanceBeep"
+                android:summary="@string/init_summary_distanceBeep"
+                android:title="@string/init_distanceBeep" />
+            <cgeo.geocaching.settings.DistanceBeepPreference1
+                android:key="@string/pref_distanceBeep1"
+                android:layout="@layout/preference_seekbar" />
+            <cgeo.geocaching.settings.DistanceBeepPreference2
+                android:key="@string/pref_distanceBeep2"
+            android:layout="@layout/preference_seekbar" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
