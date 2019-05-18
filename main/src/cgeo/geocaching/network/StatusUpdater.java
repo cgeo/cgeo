@@ -9,8 +9,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Application;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -65,7 +63,7 @@ public class StatusUpdater {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN ? CLOSEOUT_STATUS : NO_STATUS;
+            return NO_STATUS;
         }
     }
 
