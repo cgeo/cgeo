@@ -735,7 +735,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 }
             }
         }
-        this.navigationLayer = new NavigationLayer(navTarget);
+        this.navigationLayer = new NavigationLayer(navTarget, realDistance -> {
+            if (null != this.distanceView) {
+                this.distanceView.setRealDistance(realDistance);
+            }
+        });
         this.mapView.getLayerManager().getLayers().add(this.navigationLayer);
 
         // TapHandler
@@ -763,7 +767,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.mapView.getLayerManager().getLayers().add(positionLayer);
 
         //Distance view
-        this.distanceView = new DistanceView(navTarget, (TextView) findViewById(R.id.distance));
+        this.distanceView = new DistanceView(navTarget, (TextView) findViewById(R.id.distance1info), (TextView) findViewById(R.id.distance1), (TextView) findViewById(R.id.distance2info), (TextView) findViewById(R.id.distance2), Settings.isBrouterShowBothDistances());
 
         //Target view
         this.targetView = new TargetView((TextView) findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);

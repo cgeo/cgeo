@@ -29,10 +29,16 @@ public class NavigationLayer extends Layer {
     private final float width;
 
     private Paint line = null;
+    private PostRealDistance postRealDistance = null;
 
-    public NavigationLayer(final Geopoint coords) {
+    public interface PostRealDistance {
+        void postRealDistance (float realDistance);
+    }
+
+    public NavigationLayer(final Geopoint coords, final PostRealDistance postRealDistance) {
 
         this.destinationCoords = coords;
+        this.postRealDistance = postRealDistance;
 
         final DisplayMetrics metrics = new DisplayMetrics();
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
@@ -60,6 +66,7 @@ public class NavigationLayer extends Layer {
             line.setStrokeWidth(width);
             line.setStyle(Style.STROKE);
             line.setColor(0xD0EB391E);
+            line.setTextSize(20);
         }
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
@@ -75,6 +82,15 @@ public class NavigationLayer extends Layer {
             final Pair<Integer, Integer> source = pixelPoints.get(i - 1);
             final Pair<Integer, Integer> destination = pixelPoints.get(i);
             canvas.drawLine(source.first, source.second, destination.first, destination.second, line);
+        }
+
+        // calculate distance
+        if (null != postRealDistance && routingPoints.length > 1) {
+            float distance = 0.0f;
+            for (int i = 1; i < routingPoints.length; i++) {
+                distance += routingPoints[i - 1].distanceTo(routingPoints[i]);
+            }
+            postRealDistance.postRealDistance(distance);
         }
     }
 

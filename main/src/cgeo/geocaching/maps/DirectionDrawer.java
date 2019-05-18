@@ -19,16 +19,23 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 
 public class DirectionDrawer {
+
     private Geopoint currentCoords;
     private final Geopoint destinationCoords;
     private final MapItemFactory mapItemFactory;
     private final float width;
 
     private Paint linePaint = null;
+    private PostRealDistance postRealDistance = null;
 
-    public DirectionDrawer(final Geopoint coords) {
+    public interface PostRealDistance {
+        void postRealDistance (float realDistance);
+    }
+
+    public DirectionDrawer(final Geopoint coords, final PostRealDistance postRealDistance) {
         this.destinationCoords = coords;
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
+        this.postRealDistance = postRealDistance;
 
         final DisplayMetrics metrics = new DisplayMetrics();
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
@@ -67,6 +74,15 @@ public class DirectionDrawer {
         }
 
         CanvasUtils.drawPath(pixelPoints, canvas, linePaint);
+
+        // calculate distance
+        if (null != postRealDistance && routingPoints.length > 1) {
+            float distance = 0.0f;
+            for (int i = 1; i < routingPoints.length; i++) {
+                distance += routingPoints[i - 1].distanceTo(routingPoints[i]);
+            }
+            postRealDistance.postRealDistance(distance);
+        }
     }
 
     private Point translateToPixels(final MapProjectionImpl projection, final Geopoint geopoint) {

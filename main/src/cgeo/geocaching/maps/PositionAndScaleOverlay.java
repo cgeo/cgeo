@@ -22,19 +22,19 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
     DirectionDrawer directionDrawer = null;
     DistanceDrawer distanceDrawer = null;
 
-    public PositionAndScaleOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode) {
+    public PositionAndScaleOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode, final boolean showBothDistances) {
         this.ovlImpl = ovlImpl;
         positionDrawer = new PositionDrawer();
         scaleDrawer = new ScaleDrawer();
 
         if (coords != null) {
-            directionDrawer = new DirectionDrawer(coords);
-            distanceDrawer = new DistanceDrawer(mapView, coords);
+            directionDrawer = new DirectionDrawer(coords, realDistance -> distanceDrawer.setRealDistance(realDistance));
+            distanceDrawer = new DistanceDrawer(mapView, coords, showBothDistances);
         } else if (geocode != null) {
             final Viewport bounds = DataStore.getBounds(geocode);
             if (bounds != null) {
-                directionDrawer = new DirectionDrawer(bounds.center);
-                distanceDrawer = new DistanceDrawer(mapView, bounds.center);
+                directionDrawer = new DirectionDrawer(bounds.center, realDistance -> distanceDrawer.setRealDistance(realDistance));
+                distanceDrawer = new DistanceDrawer(mapView, bounds.center, showBothDistances);
             }
         }
     }

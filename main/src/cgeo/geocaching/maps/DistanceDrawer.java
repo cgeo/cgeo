@@ -30,9 +30,16 @@ public class DistanceDrawer {
     private final float boxX, boxY;
 
     private String distanceText = null;
+    private float distance = 0.0f;
+    private float realDistance = 0.0f;
+    private boolean showBothDistances = false;
 
-    public DistanceDrawer(final MapViewImpl mapView, final Geopoint destinationCoords) {
+    private static final char STRAIGHT_LINE_SYMBOL = (char) 0x007C;
+    private static final char WAVY_LINE_SYMBOL = (char) 0x2307;
+
+    public DistanceDrawer(final MapViewImpl mapView, final Geopoint destinationCoords, final boolean showBothDistances) {
         this.destinationCoords = destinationCoords;
+        this.showBothDistances = showBothDistances;
 
         final DisplayMetrics metrics = new DisplayMetrics();
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
@@ -57,12 +64,16 @@ public class DistanceDrawer {
     public void setCoordinates(final Location location) {
         final Geopoint currentCoords = new Geopoint(location);
 
-        final float distance = currentCoords.distanceTo(destinationCoords);
+        distance = currentCoords.distanceTo(destinationCoords);
         distanceText = Units.getDistanceFromKilometers(distance);
     }
 
-    void drawDistance(final Canvas canvas) {
-        if (distanceText == null) {
+    public void setRealDistance(final float realDistance) {
+        this.realDistance = realDistance;
+    }
+
+    private void setText(final Canvas canvas, final boolean firstLine, final char symbol, final String text) {
+        if (text == null) {
             return;
         }
 
@@ -96,34 +107,47 @@ public class DistanceDrawer {
         /* Calculate text size */
         final Rect textBounds = new Rect();
         paintText.setTextSize(textHeight);
-        paintText.getTextBounds(distanceText, 0, distanceText.length(), textBounds);
+        paintText.getTextBounds(text, 0, text.length(), textBounds);
         while (textBounds.height() > maxTextWidth) {
             paintText.setTextSize(paintText.getTextSize() - 1);
-            paintText.getTextBounds(distanceText, 0, distanceText.length(), textBounds);
+            paintText.getTextBounds(text, 0, text.length(), textBounds);
         }
 
         final float textX = (boxWidth - 3 * boxPadding - textBounds.width()) / 2 + boxX + 2 * boxPadding;
         final float textY = (boxHeight + textBounds.height()) / 2 + boxY;
+        final float yDelta = firstLine ? 0 : boxY + boxHeight + boxCornerRadius;
 
         /* Paint background box */
         canvas.drawRoundRect(
                 new RectF(
-                        boxX - boxShadowSize, boxY - boxShadowSize - boxCornerRadius,
-                        boxX + boxWidth + boxShadowSize + boxCornerRadius, boxY + boxHeight + boxShadowSize
+                        boxX - boxShadowSize, boxY - boxShadowSize - boxCornerRadius + yDelta,
+                        boxX + boxWidth + boxShadowSize + boxCornerRadius, boxY + boxHeight + boxShadowSize + yDelta
                 ),
                 boxCornerRadius, boxCornerRadius,
                 paintBoxShadow
-                );
+        );
         canvas.drawRoundRect(
                 new RectF(
-                        boxX, boxY - boxCornerRadius,
-                        boxX + boxWidth + boxCornerRadius, boxY + boxHeight
+                        boxX, boxY - boxCornerRadius + yDelta,
+                        boxX + boxWidth + boxCornerRadius, boxY + boxHeight + yDelta
                 ),
                 boxCornerRadius, boxCornerRadius,
                 paintBox
-                );
+        );
 
         /* Paint distance */
-        canvas.drawText(distanceText, textX, textY, paintText);
+        canvas.drawText(Character.toString(symbol), boxX + 2 * boxPadding, textY + yDelta, paintText);
+        canvas.drawText(text, textX + 5 * boxPadding, textY + yDelta, paintText);
+    }
+
+    void drawDistance(final Canvas canvas) {
+        if (showBothDistances && realDistance != 0.0f && distance != realDistance) {
+            setText(canvas, true, STRAIGHT_LINE_SYMBOL, distanceText);
+            setText(canvas, false, WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));
+        } else if (realDistance != 0.0f && distance != realDistance) {
+            setText(canvas, true, (char) WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));
+        } else {
+            setText(canvas, true, (char) STRAIGHT_LINE_SYMBOL, distanceText);
+        }
     }
 }
