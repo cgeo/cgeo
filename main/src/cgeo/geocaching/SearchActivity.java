@@ -412,13 +412,16 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             return;
         }
 
-        if (ConnectorFactory.anyTrackableConnectorActive()) {
+        // check temporaribly disabled due to #7617
+        // if (ConnectorFactory.anyTrackableConnectorActive()) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
+        /*
         } else {
             showToast(getString(R.string.warn_no_connector));
         }
+        */
     }
 
     @Override
