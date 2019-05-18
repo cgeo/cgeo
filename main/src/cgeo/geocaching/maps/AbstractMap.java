@@ -6,7 +6,6 @@ import cgeo.geocaching.maps.routing.Routing;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,9 +33,7 @@ public abstract class AbstractMap {
 
     public void onCreate(final Bundle savedInstanceState) {
         mapActivity.superOnCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-            mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        }
+        mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         Routing.connect();
     }
