@@ -22,8 +22,9 @@ public abstract class AbstractDialogFragmentWithBeep extends AbstractDialogFragm
     // minimum increase in distance, before distance gets reset
     protected static final long MIN_DISTANCE_DELTA = 10;
 
-    // repeat tone every x ms (if still close enough)
-    protected static final long MIN_TIME_DELTA = 10000;
+    // repeat tone 1/2 every x ms (if still close enough)
+    protected static final long MIN_TIME_DELTA1 = 10000;
+    protected static final long MIN_TIME_DELTA2 = 5000;
 
     // distance beep activated?
     protected boolean distanceBeep = false;
@@ -53,17 +54,17 @@ public abstract class AbstractDialogFragmentWithBeep extends AbstractDialogFragm
             final long currentTimestamp = System.currentTimeMillis();
 
             int playTone = TONE_NONE;
-            if (distanceInM > (lastDistanceInM + MIN_DISTANCE_DELTA) || ((currentTimestamp - lastTimestamp) > MIN_TIME_DELTA)) {
+            if (distanceInM > (lastDistanceInM + MIN_DISTANCE_DELTA)) {
                 lastDistanceInM = DISTANCE_RESET;
             }
-            if ((distanceInM <= distanceDoubleBeep) && (lastDistanceInM > distanceDoubleBeep)) {
+            if ((distanceInM <= distanceDoubleBeep) && ((lastDistanceInM > distanceDoubleBeep) || ((currentTimestamp - lastTimestamp) > MIN_TIME_DELTA2))) {
                 playTone = ToneGenerator.TONE_PROP_BEEP2;
-            } else if ((distanceInM <= distanceSingleBeep) && (lastDistanceInM > distanceSingleBeep)) {
+            } else if ((distanceInM <= distanceSingleBeep) && ((lastDistanceInM > distanceSingleBeep) || ((currentTimestamp - lastTimestamp) > MIN_TIME_DELTA1))) {
                 playTone = ToneGenerator.TONE_PROP_BEEP;
             }
             lastDistanceInM = distanceInM;
             if (playTone != TONE_NONE) {
-                final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME);
                 toneG.startTone(playTone);
                 lastTimestamp = currentTimestamp;
                 final Handler handler = new Handler(Looper.getMainLooper());
