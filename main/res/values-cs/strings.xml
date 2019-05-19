@@ -357,6 +357,7 @@
     </plurals>
     <string name="caches_remove_progress">Odstraňování keší</string>
     <string name="caches_delete_events">Vymazat staré události</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">Aktualizovat vybrané</string>
     <string name="caches_refresh_all">Aktualizovat vše</string>
     <string name="caches_move_selected">Přesunout vybrané</string>
@@ -427,6 +428,15 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
     <string name="about_help">Nápověda</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
     <string name="about_system_info">c:geo systémové informace</string>
@@ -464,7 +474,8 @@
     <string name="settings_summary_system">Zálohování a obnovení, nastavení složek aplikace a dalších systémových údajů.</string>
     <string name="settings_title_navigation_menu">Navigační menu</string>
     <string name="settings_category_browser">Prohlížeč</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Sociální média</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
     <string name="settings_goto_url_button">více …</string>
@@ -605,7 +616,7 @@
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
     <string name="init_gpx_importdir">Složka pro GPX import</string>
     <string name="init_dataDir">Vyber adresář dat keší</string>
-    <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro geocache (nápovědy, obrázky,...) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
+    <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro geocache (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
     <string name="init_maptrail">Zobrazovat trasu cesty</string>
     <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
     <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
@@ -685,7 +696,7 @@
     <string name="feature_search_finder">Hledat podle nálezce</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Staré Mapsforge V3</string>
-    <string name="init_mfold_api_description">Aktuální verze obsahuje betaverzi našich našich Mapsforge map. Pokud ti některé funkce chybí nebo zaznamenáš problémy, můžeš se zde vrátit ke starší verzi.</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Experimentální funkce</string>
     <string name="init_mfbeta">Mapsforge beta jako výchozí</string>
     <string name="init_mfbeta_description">Aktuální vydání aplikace obsahuje beta verzi naší nové Mapsforge mapy jako experimentální funkci. Zde lze novou mapu nastavit jako výchozí.</string>
@@ -1054,6 +1065,7 @@
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_modes">Režim mapy…</string>
     <string name="map_trail_show">Zobrazit záznam trasy</string>
+    <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Zobrazit kruhy</string>
     <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
     <string name="map_disabled_hide">Skrýt deaktivované keše</string>
@@ -1066,6 +1078,8 @@
     <string name="map_static_loading">Načítání statických map…</string>
     <string name="map_token_err">Protože c:geo může stáhnout jen částečná data, souřadnice keší nemusí být přesné.</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
     <string name="map_routing_straight">Vzdušná čára</string>
@@ -1172,6 +1186,8 @@
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
@@ -1212,6 +1228,11 @@
         <item quantity="many">Uploaded %1$d notes successfully</item>
         <item quantity="other">Poznámky (%1$d) byly úspěšně nahrány</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Vstup se psy povolen</string>
     <string name="attribute_dogs_no">Vstup se psy zakázán</string>

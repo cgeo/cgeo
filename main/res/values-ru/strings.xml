@@ -357,6 +357,7 @@
     </plurals>
     <string name="caches_remove_progress">Удаление тайников</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
+    <string name="caches_upload_modifiedcoords">Загрузить измененные координаты</string>
     <string name="caches_refresh_selected">Обновить выбранные</string>
     <string name="caches_refresh_all">Обновить все</string>
     <string name="caches_move_selected">Переместить выбранные</string>
@@ -427,6 +428,15 @@
     <string name="about_license">Лицензия</string>
     <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
     <string name="about_help">Помощь</string>
+    <string name="about_starting">Начало работы</string>
+    <string name="about_starting_head">Начало работы</string>
+    <string name="about_starting_text_basics_head">Основы геокешинга</string>
+    <string name="about_starting_text_basics_text">Geocaching - это игра на открытом воздухе для поиска и поиска так называемых \"тайников\". Это приложение может использоваться для игры.\n\nВы можете прочитать больше об <b>основах c:geo</b> в нашем руководстве пользователя: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">разрешения c:geo</string>
+    <string name="about_starting_text_device_text">c:geo нужны определенные разрешения на вашем устройстве:\n<b>Местоположение</b>: доступ к GPS для определения местоположения и вычисления расстояния и направления у тайников\n<b>Хранилище</b>:  Запись данных в телефоне, когда вы сохраните тайники оффлайн, для импорта/экспорта файлов и чтения оффлайн карт\n\nБез этих прав вы не сможете использовать c:geo.</string>
+    <string name="about_starting_text_first_head">Первые шаги с c:geo</string>
+    <string name="about_starting_text_first_text">Для использования c:geo вам нужна учетная запись для выбранного вами сайта геокешинга (независимо от c:geo). Вам необходимо настроить эту учетную запись в настройках c:geo, прежде чем вы можете использовать приложение!\n\nБолее детальная информация и <b>Первые шаги с c:geo</b> доступны в руководстве пользователя: https://manual.cgeo.org/en/firsteps</string>
+    <string name="open_services_page">Настроить сервис(-ы) геокешинга</string>
     <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
     <string name="about_system_info_send_button">Отправить по email…</string>
     <string name="about_system_info">Служебная информация c:geo</string>
@@ -464,7 +474,8 @@
     <string name="settings_summary_system">Резервное копирование и восстановление, настройка директорий и других системных опций.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
     <string name="settings_category_browser">Браузер</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
+    <string name="settings_category_geocaching_additionals">Дополнительные плагины и приложения</string>
     <string name="settings_category_social">Социальные сети</string>
     <string name="settings_category_logging_other">Остальные параметры</string>
     <string name="settings_goto_url_button">Подробнее…</string>
@@ -685,7 +696,7 @@
     <string name="feature_search_finder">Поиск по посетителям</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Старый Mapsforge V3</string>
-    <string name="init_mfold_api_description">Данная версия содержит бета-версию новой карты Mapsforge. Если пропали некоторые функции, или у вас возникают проблемы, вы всегда можете вернуться к старой версии.</string>
+    <string name="init_mfold_api_description">По умолчанию мы используем новую версию карты Mapsforge. Если вам не хватает некоторых функций или вы столкнулись с проблемами, вы можете вернуться к старой версии здесь.</string>
     <string name="init_experimental_title">Экспериментальные функции</string>
     <string name="init_mfbeta">Бета Mapsforge по умолчанию</string>
     <string name="init_mfbeta_description">Текущая версия содержит бета-версию нашей новой карты Mapsforge в качестве экспериментальной функциональности. Вы можете включить эту карту для онлайн карты и карты списков.</string>
@@ -1054,6 +1065,7 @@
     <string name="map_view_map">Тип карты</string>
     <string name="map_modes">Настройки карты</string>
     <string name="map_trail_show">Показать маршрут</string>
+    <string name="map_dot_mode">Маленькие иконки</string>
     <string name="map_circles_show">Показать круги</string>
     <string name="map_mycaches_hide">Скрыть свои/посещенные</string>
     <string name="map_disabled_hide">Скрыть тайники вне игры</string>
@@ -1066,6 +1078,8 @@
     <string name="map_static_loading">Загрузка статических карт…</string>
     <string name="map_token_err">Поскольку c:geo может загрузить только часть данных, координаты тайников могут быть неточны.</string>
     <string name="map_as_list">Показать списком</string>
+    <string name="map_clear_trailhistory">Очистить трек</string>
+    <string name="map_trailhistory_cleared">трек очищен</string>
     <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_routing">Навигация</string>
     <string name="map_routing_straight">Прямая</string>
@@ -1172,6 +1186,8 @@
     <string name="helper_gpsstatus_description">Вы можете использовать радар этого приложения вместе с c:geo. Также приложение предлагает много другой информации, связанной с GPS.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Позволяет использовать внешний GPS приемник, чтобы получить более точную информацию о местоположении и сэкономить заряд батареи вашего устройства.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker сохраняет GPS активным при переключении между приложениями и при выключении экрана устройства.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Набор Greasemonkey скриптов, позволяющих отображать геокоды как штрих-коды. С этим приложением, c:geo может распознавать такие геокоды напрямую с экрана вашего компьютера.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
@@ -1212,6 +1228,11 @@
         <item quantity="many">Успешно загружено %1$d заметок</item>
         <item quantity="other">Успешно загружено %1$d заметок</item>
     </plurals>
+    <string name="export_modifiedcoords">Измененные координаты</string>
+    <string name="export_modifiedcoords_uploading">Загрузка %1$d</string>
+    <string name="export_modifiedcoords_success">Загрузка завершена</string>
+    <string name="export_modifiedcoords_result">Загрузка завершена: %1$d неудачно / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Загрузка не удалась</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Можно с собаками</string>
     <string name="attribute_dogs_no">Нельзя с собаками</string>

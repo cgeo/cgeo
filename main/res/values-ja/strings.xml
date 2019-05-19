@@ -348,6 +348,7 @@
     </plurals>
     <string name="caches_remove_progress">キャッシュを削除中</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">選択したキャッシュを更新</string>
     <string name="caches_refresh_all">全てのキャッシュを更新</string>
     <string name="caches_move_selected">選択したキャッシュを移動</string>
@@ -418,6 +419,15 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">バグ報告を送信するときに、またはc:geoについてインフォを要求するときに次のシステムの情報を含めて送信してください：</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geo システム情報</string>
@@ -455,7 +465,8 @@
     <string name="settings_summary_system">バックアップの実行やリストア、アプリのフォルダの選択とその他の特定のシステムの設定。</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
     <string name="settings_category_browser">ブラウザ</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">他のオプション</string>
     <string name="settings_goto_url_button">詳細…</string>
@@ -596,7 +607,7 @@
     <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
     <string name="init_gpx_importdir">GPXインポートフォルダ</string>
     <string name="init_dataDir">ジオキャッシュ データ ディレクトリを選択</string>
-    <string name="init_dataDir_note">ジオキャッシュ (ネタバレ、ログの画像、...) の追加データを、外部ストレージ (お使いのデバイスに応じて、エミュレートまたは実際の外部 SD カード) に格納することができます。</string>
+    <string name="init_dataDir_note">ジオキャッシュ (ネタバレ、ログの画像、…) の追加データを、外部ストレージ (お使いのデバイスに応じて、エミュレートまたは実際の外部 SD カード) に格納することができます。</string>
     <string name="init_maptrail">軌跡表示</string>
     <string name="init_summary_maptrail">地図に軌跡を表示</string>
     <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
@@ -676,7 +687,7 @@
     <string name="feature_search_finder">発見したユーザー名で検索</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">旧 Mapsforge V3</string>
-    <string name="init_mfold_api_description">現在のリリースには、私たちの新しい Mapsforge マップのベータ版が含まれています。いくつかの機能が不足しているか、問題が発生する場合は、以前のバージョンに戻ることができます。</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">実験的な機能</string>
     <string name="init_mfbeta">デフォルトとして Mapsforge ベータ版</string>
     <string name="init_mfbeta_description">現在のリリースには、実験的な機能として新しいMapsforge地図のベータ版が含まれています。ここで、ライブと一覧のデフォルトとして、この新しい地図を有効にすることができます。</string>
@@ -1024,6 +1035,7 @@
     <string name="map_view_map">地図の変更</string>
     <string name="map_modes">表示切替</string>
     <string name="map_trail_show">軌跡を表示</string>
+    <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">0.1マイル円を表示</string>
     <string name="map_mycaches_hide">所有/見つけたキャッシュを非表示</string>
     <string name="map_disabled_hide">無効化キャッシュを非表示</string>
@@ -1036,6 +1048,8 @@
     <string name="map_static_loading">オフライン地図をロード中…</string>
     <string name="map_token_err">部分的なデータのみダウンロード可能なのでキャッシュの座標は不正確かもしれません。</string>
     <string name="map_as_list">リスト表示</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索</string>
     <string name="map_routing_straight">直線</string>
@@ -1142,13 +1156,15 @@
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。その他、GPSに関するたくさんの情報が得られます。</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">外部GPSデバイスを利用することができます。より正確な位置情報を得られ、アンドロイド端末のバッテリ消費が少なくなるかもしれません。</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">QRコードスキャナー</string>
     <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます。</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
     <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります。</string>
     <string name="helper_google_translate_title">Google 翻訳</string>
-    <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
-Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
+    <string name="helper_google_translate_description">"キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
+Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。"</string>
     <string name="helper_wear_title">c:geo Wear</string>
     <string name="helper_wear_description">c:geo Wearは、Android Wear のスマートウォッチを使用してジオキャッシュに移動することができる c:geo 用のプラグインです。</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
@@ -1180,6 +1196,11 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">%1$dノートを正常にアップロードしました</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">犬の同伴可</string>
     <string name="attribute_dogs_no">犬の同伴不可</string>

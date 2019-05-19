@@ -158,7 +158,7 @@
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
     <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
-    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
+    <string name="err_server_su">Geocaching.su에 접속할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_gk">GeoKrety.org에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_login">저장된 로그인 정보가 없습니다</string>
     <string name="err_login_failed_toast">c:geo에서 로그인할 수 없습니다. 저장된 데이터를 사용하여 오프라인으로 작동됩니다. 로그인 설정과 인터넷 상태를 확인하세요.</string>
@@ -197,7 +197,7 @@
     <string name="err_favorite_failed">호감캐시 상태를 바꾸지 못했습니다.</string>
     <string name="err_select_logimage_failed">찾지못함 로그에 대한 사진을 선택하는 중</string>
     <string name="err_acquire_image_failed">사진 가져오기 실패</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
+    <string name="err_unsupported_image_format">지원되지 않는 이미지 형식입니다.</string>
     <string name="err_tb_display">원하시는 추적아이템을 표시할 수 없습니다. 정말 추적아이템이 맞나요?</string>
     <string name="err_tb_details_open">추적아이템 상세정보를 열 수 없습니다.</string>
     <string name="err_tb_not_loggable">이 추적아이템은 로그할 수 없습니다.</string>
@@ -348,6 +348,7 @@
     </plurals>
     <string name="caches_remove_progress">캐시 제거중</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
+    <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
     <string name="caches_refresh_selected">선택된 것 새로고침</string>
     <string name="caches_refresh_all">모두 새로 고침</string>
     <string name="caches_move_selected">선택 항목 이동</string>
@@ -418,12 +419,21 @@
     <string name="about_license">라이센스</string>
     <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
     <string name="about_help">도움말</string>
+    <string name="about_starting">시작하기</string>
+    <string name="about_starting_head">시작하기</string>
+    <string name="about_starting_text_basics_head">지오캐싱 기본</string>
+    <string name="about_starting_text_basics_text">지오캐싱은 \"캐시\"를 찾는 야외 게임입니다. 이 앱을 사용하면 게임을 즐길 수 있습니다.\n\n<b>c:geo 기본</b>에 대해 좀 더 알고 싶으시면 사용자 가이드: https://manual.cgeo.org/en/basicuse 를 참고하세요.</string>
+    <string name="about_starting_text_device_head">c:geo 기기 권한</string>
+    <string name="about_starting_text_device_text">c:geo가 당신의 기기에 권한이 필요합니다.\n<b>위치</b>: GPS에 접근하여 위치를 찾기. 지오캐시에 대한 거리 및 방향을 계산하기\n<b>저장</b>: 오프라인용 지오캐시 저장, 파일의 불러오기/내보내기, 오프라인 지도 읽기 등을 위해 휴대폰 저장 장치에 대한 데이터 쓰기\n\n이러한 권한이 없으면 c:geo를 사용할 수 없습니다.</string>
+    <string name="about_starting_text_first_head">c:geo의 첫번째 단계</string>
+    <string name="about_starting_text_first_text">c:geo를 사용하기 위해서는 원하는 지오캐싱 플랫폼의 계정이 필요합니다.(c:geo와는 관련 없음) 이 계정정보를 c:geo 서비스에 설정해주어야 c:geo를 사용할 수 있습니다!\n\n<b>c:geo 첫번째 단계</b>에 대한 자세한 내용은 사용자 가이드:https://manual.cgeo.org/en/firststeps를 참고하세요.</string>
+    <string name="open_services_page">지오캐싱 플랫폼 설정</string>
     <string name="about_system_include">오류 신고나 c:geo에 대한 추가정보 요청시, 다음 시스템 정보를 포함시켜 주세요.</string>
     <string name="about_system_info_send_button">메일로 보내기…</string>
     <string name="about_system_info">c:geo 시스템 정보</string>
     <string name="about_system_info_send_chooser">시스템 정보 보내기</string>
     <string name="changelog_github">모든 변경 목록</string>
-    <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_nutshellmanual">온라인 설명서</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -433,7 +443,7 @@
     <string name="settings_title_cachedetails">캐시 상세정보</string>
     <string name="settings_summary_cachedetails">캐시정보 표시 사용자가 지정하기</string>
     <string name="settings_title_offlinedata">오프라인 데이타</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">기타 오프라인 데이터 저장소 설정</string>
     <string name="settings_title_logging">로그하기</string>
     <string name="settings_summary_logging">서명 및 로그 옵션 설정하기</string>
     <string name="settings_title_map">지도</string>
@@ -455,7 +465,8 @@
     <string name="settings_summary_system">백업 및 복구 수행, 앱 폴더와 기타 시스템 관련 설정하기</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_browser">브라우저</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
+    <string name="settings_category_geocaching_additionals">추가 서비스 및 애드온</string>
     <string name="settings_category_social">SNS</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
     <string name="settings_goto_url_button">더보기…</string>
@@ -554,8 +565,8 @@
     <string name="init_summary_exclude">자신이 숨긴 캐시와 이미 찾은 캐시를 제외합니다.</string>
     <string name="init_showwaypoints">웨이포인트 보기</string>
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
-    <string name="init_brouterThreshold">Calculate route</string>
-    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterThreshold">경로 계산</string>
+    <string name="init_brouterThreshold_description">brouter helper 앱(설치되었을 경우)이 경로를 계산할 수 있는 최대 거리</string>
     <string name="init_disabled">비활성캐시 제외하기</string>
     <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
     <string name="init_save_log_img">사진 저장하기</string>
@@ -676,14 +687,14 @@
     <string name="feature_search_finder">찾은분으로 검색</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">예전 Mapsforge V3</string>
-    <string name="init_mfold_api_description">현재 버전에는 새로운 Mapsforge 지도 베타버전이 포함되어 있습니다. 어떤 기능이 없거나, 문제점을 발견했다면 여기에서 예전 버전으로 되돌릴 수 있습니다.</string>
+    <string name="init_mfold_api_description">기본으로 새로운 Mapsforge 지도 버전을 사용합니다. 어떤 기능이 없거나, 문제점을 발견했다면 여기에서 예전 버전으로 되돌릴 수 있습니다.</string>
     <string name="init_experimental_title">실험적 기능</string>
     <string name="init_mfbeta">Mapsforge beta를 기본지도로</string>
     <string name="init_mfbeta_description">현재 버전은 실험적으로 새로운 Mapsforge 지도의 베타버전이 포함되어 있습니다. 여기에서 이 지도를 기본지도로 활성화시킬 수 있습니다.</string>
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
+    <string name="map_source_osm_mapnik">OSM: 지도</string>
     <string name="map_source_osm_offline">오프라인</string>
     <string name="init_sendToCgeo">c:geo로 보내기</string>
     <string name="settings_info_send2cgeo_title">send2cgeo에 관한 정보</string>
@@ -787,11 +798,11 @@
     <string name="cache_description">설명</string>
     <string name="cache_description_long">긴 설명</string>
     <string name="cache_description_table_note">설명에는 %s에서 잘 보이도록 테이블 포맷이 포함됩니다.</string>
-    <string name="cache_area_description">Area Description</string>
-    <string name="cache_cache_description">Cache Description</string>
-    <string name="cache_virtual_description">Virtual Question</string>
-    <string name="cache_traditional_description">Traditional Part</string>
-    <string name="cache_box_description">Box Content</string>
+    <string name="cache_area_description">지역 설명</string>
+    <string name="cache_cache_description">캐시 설명</string>
+    <string name="cache_virtual_description">가상 질문</string>
+    <string name="cache_traditional_description">전통적인 부분</string>
+    <string name="cache_box_description">상자 내용</string>
     <string name="cache_watchlist_on">관심목록에 있는 캐시입니다.</string>
     <string name="cache_watchlist_on_extra">이 캐시는 관심목록에 있습니다(총 인원 : %1d).</string>
     <string name="cache_watchlist_not_on">이 캐시는 관심목록에 없습니다.</string>
@@ -1007,7 +1018,7 @@
     <string name="waypoint_duplicate">웨이포인트 복제</string>
     <string name="waypoint_duplicated">웨이포인트가 복제됨</string>
     <string name="waypoint_copy_of">복사 :</string>
-    <string name="waypointcalc_notes_prompt">여기에 메모를 입력...</string>
+    <string name="waypointcalc_notes_prompt">여기에 메모를 입력…</string>
     <string name="search_history">기록</string>
     <string name="search_history_empty">이전 목적지가 없습니다.</string>
     <string name="search_remove_destination">목적지가 제거됨</string>
@@ -1024,6 +1035,7 @@
     <string name="map_view_map">지도 보기</string>
     <string name="map_modes">지도 설정</string>
     <string name="map_trail_show">트레일 보이기</string>
+    <string name="map_dot_mode">작은 아이콘 사용하기</string>
     <string name="map_circles_show">원 보이기</string>
     <string name="map_mycaches_hide">내캐시/찾은 캐시 숨기기</string>
     <string name="map_disabled_hide">일시정지된 캐시 숨기기</string>
@@ -1036,6 +1048,8 @@
     <string name="map_static_loading">정적 지도 불러오는 중…</string>
     <string name="map_token_err">c:geo는 일부데이터만 불러올 수 있어서, 캐시 좌표가 부정확할 수 있습니다.</string>
     <string name="map_as_list">목록으로 보기</string>
+    <string name="map_clear_trailhistory">트레일 역사 지우기</string>
+    <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
     <string name="map_select_multiple_items">항목 선택</string>
     <string name="map_routing">길찾기</string>
     <string name="map_routing_straight">직선</string>
@@ -1142,6 +1156,8 @@
     <string name="helper_gpsstatus_description">c:geo와 함께 이 어플에서 레이다를 사용할 수있습니다. GPS 와 관련된 다양한 정보를 볼 수 있습니다.</string>
     <string name="helper_bluetoothgps_title">블루투스 GPS</string>
     <string name="helper_bluetoothgps_description">외부 GPS 수신기를 이용하여 좀더 정확한 위치 데이터를 잡을 수 있고, 기기의 배터리를 절약할 수 있습니다.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker는 다른 응용으로 전환하거나, 화면을 끈 상태에서도 GPS 신호를 활성으로 유지합니다.</string>
     <string name="helper_barcode_title">바코드 스캐너</string>
     <string name="helper_barcode_description">지오코드를 바코드로 표시해주는 웹사이트와 Greasemonkey 스크립트가 있습니다. 이 앱을 사용하면 c:geo는 컴퓨터 화면서 지오코드를 직접 읽어들일 수 있습니다.</string>
     <string name="helper_pocketquery_title">포켓쿼리 생성기</string>
@@ -1179,6 +1195,11 @@
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">%1$d 개의 메모를 성공적으로 올림</item>
     </plurals>
+    <string name="export_modifiedcoords">수정된 좌표</string>
+    <string name="export_modifiedcoords_uploading">%1$d 업로드 중</string>
+    <string name="export_modifiedcoords_success">업로드 성공</string>
+    <string name="export_modifiedcoords_result">업도드 완료:%1$d 실패/%2$d 성공</string>
+    <string name="export_modifiedcoords_error">업로드 실패</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">강아지 허용</string>
     <string name="attribute_dogs_no">강아지 금지</string>
@@ -1537,8 +1558,8 @@
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
-    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
-    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="close_app">앱 닫기</string>
+    <string name="ask_again">다시 묻기</string>
+    <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
+    <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
 </resources>

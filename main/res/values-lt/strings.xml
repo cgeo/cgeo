@@ -21,7 +21,8 @@
     <string name="event">Renginys</string>
     <string name="mega">Mega-renginys</string>
     <string name="giga">Giga-renginys</string>
-    <string name="earth">Earthcache</string>
+    <string name="earth">"Earthcache
+"</string>
     <string name="cito">Aplinkos tvarkymo renginys</string>
     <string name="webcam">Webcam slėptuvė</string>
     <string name="virtual">Virtuali slėptuvė</string>
@@ -158,7 +159,7 @@
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
-    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
+    <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
     <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia be interneto su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
@@ -197,7 +198,7 @@
     <string name="err_favorite_failed">Nepavyko pakeisti mėgiamos slėptuvės statuso.</string>
     <string name="err_select_logimage_failed">Nepavyko pasirinkti nuotraukos slėptuvės įrašui.</string>
     <string name="err_acquire_image_failed">Nepavyko pasiekti nuotraukos.</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
+    <string name="err_unsupported_image_format">Nepalaikomas vaizdo formatas.</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
@@ -357,6 +358,7 @@
     </plurals>
     <string name="caches_remove_progress">Pašalinamos slėptuvės</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">Atnaujinti pasirinktas</string>
     <string name="caches_refresh_all">Atnaujinti visas</string>
     <string name="caches_move_selected">Perkelti pasirinktas</string>
@@ -427,12 +429,21 @@
     <string name="about_license">Licencija</string>
     <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
     <string name="about_help">Pagalba</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
     <string name="about_system_info_send_button">Siųsti paštu…</string>
     <string name="about_system_info">c:geo sistemos informacija</string>
     <string name="about_system_info_send_chooser">Siųsti sistemos informaciją</string>
     <string name="changelog_github">Pakeitimų sąrašas</string>
-    <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Atidaryti parametrus?</string>
     <string name="settings_title_services">Paslaugos</string>
@@ -464,7 +475,8 @@
     <string name="settings_summary_system">Padaryti kopiją ir atstatyti, nustatyti programos aplankus ir kitus sisteminius specialius nustatymus.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Socialiniai tinklai</string>
     <string name="settings_category_logging_other">Kitos registravimo parinktys</string>
     <string name="settings_goto_url_button">Plačiau</string>
@@ -563,7 +575,7 @@
     <string name="init_summary_exclude">Atmesti nuosavas ir rastas slėptuves</string>
     <string name="init_showwaypoints">Rodyti papildomus taškus</string>
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
-    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_disabled">Atmesti išjungtas</string>
     <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
@@ -605,7 +617,7 @@
     <string name="init_gpx_exportdir">GPX eksportavimo katalogas</string>
     <string name="init_gpx_importdir">GPX importavimo katalogas</string>
     <string name="init_dataDir">Pasirinkite slėptuvių duomenų katalogą</string>
-    <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, nuotraukas, ...) išorinėje atmintinėje (pseudo ar tikroje išorinėje SD atmintinėje, priklausomai nuo jūsų įrenginio).</string>
+    <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, nuotraukas, …) išorinėje atmintinėje (pseudo ar tikroje išorinėje SD atmintinėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
     <string name="init_summary_maptrail">Rodyti pėdsaką žemėlapyje</string>
     <string name="init_share_after_export">Po GPX eksportavimo atidaryti bendrinimo meniu</string>
@@ -685,14 +697,14 @@
     <string name="feature_search_finder">Paieška pagal radėją</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Senasis Mapsforge V3</string>
-    <string name="init_mfold_api_description">Dabartinė versija turi mūsų naują Mapsforge beta versijos žemėlapį. Jei pasigedote kai kurių funkcijų ar ištiko problemų, galite grįžti prie senesnios versijos čia.</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Eksperimentinės funkcijos</string>
     <string name="init_mfbeta">Mapsforge beta kaip numatytasis</string>
     <string name="init_mfbeta_description">Kaip eksperimentinė funkciją dabartinė versija turi mūsų naują Mapsforge beta versijos žemėlapį. Šis naujas žemėlapis gali būti aktyvuota čia kaip numatytasis žemėlapis.</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
+    <string name="map_source_osm_mapnik">OSM: Žemėlapis</string>
     <string name="map_source_osm_offline">Išsaugotas</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacija apie send2cgeo</string>
@@ -815,7 +827,7 @@
     <string name="cache_description_long">Ilgas aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
     <string name="cache_area_description">Area Description</string>
-    <string name="cache_cache_description">Cache Description</string>
+    <string name="cache_cache_description">Slėptuvės aprašymas</string>
     <string name="cache_virtual_description">Virtual Question</string>
     <string name="cache_traditional_description">Traditional Part</string>
     <string name="cache_box_description">Box Content</string>
@@ -1054,6 +1066,7 @@
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_modes">Žemėlapio nustatymai</string>
     <string name="map_trail_show">Rodyti pėdsaką</string>
+    <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Rodyti apskritimus</string>
     <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
     <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
@@ -1066,6 +1079,8 @@
     <string name="map_static_loading">Įkeliamas statinis žemėlapis…</string>
     <string name="map_token_err">Slėptuvės koordinatės gali būti netikslios nes c:geo nepavyko atsisiųsti duomenų.</string>
     <string name="map_as_list">Rodyti kaip sąrašą</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Pasirinkite elementą</string>
     <string name="map_routing">Maršrutizavimas</string>
     <string name="map_routing_straight">Tiesi linija</string>
@@ -1172,6 +1187,8 @@
     <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Leidžia naudoti išorinį GPS imtuvą tikslesnėms koordinatėms gauti ir taupyti jūsų prietaiso bateriją.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Egzistuoja Greasemonkey įskiepiai ir svetainės, kurios  geo kodus paverčia brūkšniniu kodu. Su šia programa c:geo gali nuskaityti tokius kodus tiesiai iš kompiuterio ekrano.</string>
     <string name="helper_pocketquery_title">Pocket Query kūrėjas</string>
@@ -1212,6 +1229,11 @@
         <item quantity="many">Sėkmingai nusiųsta %1$d pastabų</item>
         <item quantity="other">Sėkmingai nusiųsta %1$d pastabų</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Galima su šunimi</string>
     <string name="attribute_dogs_no">Negalima su šunimi</string>
@@ -1603,8 +1625,8 @@
     <string name="waypoint_latitude_null">Š/P --° --.---</string>
     <string name="waypoint_longitude_null">R/V --° --.---</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
+    <string name="close_app">Uždaryti programėlę</string>
+    <string name="ask_again">Paklausti dar kartą</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 </resources>

@@ -94,7 +94,7 @@
     <string name="log_posting_image">Resim gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
-    <string name="log_post_not_possible">Verilerin indirilmesi devam ediyor...\nLütfen birkaç saniye içinde tekrar deneyin veya internet bağlantınızı kontrol edin.</string>
+    <string name="log_post_not_possible">Verilerin indirilmesi devam ediyor…\nLütfen birkaç saniye içinde tekrar deneyin veya internet bağlantınızı kontrol edin.</string>
     <string name="log_post_geocode_missing">Geocode kayıp…</string>
     <string name="log_date_future_not_allowed">Gelecekteki kayıt tarihlerine izin verilmez.</string>
     <string name="log_add">Ekle</string>
@@ -158,7 +158,7 @@
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
     <string name="err_server">Geocaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_ec">Extremcaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
-    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
+    <string name="err_server_su">Geocaching.su adresine bağlanılamıyor. Site veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_gk">GeoKrety.org\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_login">Kayıtlı oturum açma bilgisi yok</string>
     <string name="err_login_failed_toast">c:geo\'ya giriş yapılamıyor. c:geo kaydedilmiş Geocache\'ler ile çevrimdışı çalışıyor. Giriş ayarlarını kontrol edin veya internet bağlantınızı etkinleştirin.</string>
@@ -197,7 +197,7 @@
     <string name="err_favorite_failed">Favori durumunu değiştirme başarısız oldu.</string>
     <string name="err_select_logimage_failed">Kayıt için görsel seçimi başarısız oldu.</string>
     <string name="err_acquire_image_failed">Görsel alımı başarısız oldu.</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
+    <string name="err_unsupported_image_format">Desteklenmeyen görsel formatı.</string>
     <string name="err_tb_display">c:geo istediğin Trackable\'ı görüntüleyemez. Bu gerçekten bir trackable mi?</string>
     <string name="err_tb_details_open">c:geo Trackable\'ın ayrıntılarını açamıyor.</string>
     <string name="err_tb_not_loggable">Bu trackable kaydedilebilir değil.</string>
@@ -327,7 +327,7 @@
     <string name="caches_sort_geocode">Geo Code</string>
     <string name="caches_sort_rating">Derecelendirme</string>
     <string name="caches_sort_vote">Oy (Derecenledirmeniz)</string>
-    <string name="caches_sort_inventory">Envanter Sayımı</string>
+    <string name="caches_sort_inventory">İçindeki TB Sayısı</string>
     <string name="caches_sort_date_hidden">Yerleştirme tarihi</string>
     <string name="caches_sort_date_logged">Kayıt tarihi</string>
     <string name="caches_sort_finds">Bulunanlar</string>
@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">Geocache\'ler kaldırılıyor</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
+    <string name="caches_upload_modifiedcoords">Düzenlenmiş koordinatları yükle</string>
     <string name="caches_refresh_selected">Seçilmişleri yenile</string>
     <string name="caches_refresh_all">Hepsini yenile</string>
     <string name="caches_move_selected">Seçileni taşı</string>
@@ -421,12 +422,21 @@
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
+    <string name="about_starting">Başlıyor</string>
+    <string name="about_starting_head">Başlıyor</string>
+    <string name="about_starting_text_basics_head">Geocaching Temel Kurallar</string>
+    <string name="about_starting_text_basics_text">Geocaching \'\'Cache\'\' olarak adlandırılan kutuların aranıp bulunması aktivitesidir. Bu aplikasyon bu aktiviteyi yapmak için kullanılabilir.\n\nDaha fazlasını kullanıcı rehberimizdeki <b>c:geo Temelleri</b> \'nde bulabilirsiniz</string>
+    <string name="about_starting_text_device_head">c:geo cihaz izinleri</string>
+    <string name="about_starting_text_device_text">c:geo cihazınızda bazı izinlere ihtiyaç duymaktadır:\n<b>Konum</b>: konumunuzu belirlemek, mesafe ve yön hesaplamak için GPS\'e erişim\n<b>Veri hafızası</b>: çevrımdışı kullanım için Geocache kaydettiğinizde içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için\n\nBu izinler verilmeden c:geo\'yu kullanamazsınız.</string>
+    <string name="about_starting_text_first_head">c:geo ile başlangıç</string>
+    <string name="about_starting_text_first_text">c:geo\'yu kullanabilmeniz için Geocaching platformunda bir hesabınızın olması gerekmektedir (Bu aplikasyondan bağımsız olarak) c:geo\'yu kullanmanızdan önce bu hesabınızı c:geo servis ayarlarında yapılandırmanız gerekmektedir.\n\nKullanıcı klavuzumuzda <b>c:geo ile başlangıç</b> bölümünde daha fazla bilgi bulabilirsiniz</string>
+    <string name="open_services_page">Geocaching platformlarınızı yapılandırın</string>
     <string name="about_system_include">Bir hata raporu gönderirken ya da c:geo hakkında daha fazla bilgi almak istediğinizde lütfen aşağıdaki sistem bilgilerini de ekleyin:</string>
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
     <string name="about_system_info">c:geo sistem bilgisi</string>
     <string name="about_system_info_send_chooser">Sistem bilgisini gönder</string>
     <string name="changelog_github">Tüm değişiklikler listesi</string>
-    <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
@@ -436,7 +446,7 @@
     <string name="settings_title_cachedetails">Geocache Ayrıntıları</string>
     <string name="settings_summary_cachedetails">Geocache bilgilerinin görüntülenmesini özelleştirin.</string>
     <string name="settings_title_offlinedata">Çevrimdışı Veri</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Diğer çevrimdışı belleği yapılandırın.</string>
     <string name="settings_title_logging">Kayıt</string>
     <string name="settings_summary_logging">İmzanızı yapılandırın ve kayıt seçeneklerini ayarlayın.</string>
     <string name="settings_title_map">Harita</string>
@@ -458,7 +468,8 @@
     <string name="settings_summary_system">Yedekleme ve geri yükleme gerçekleştirin, uygulama dizinleri ve diğer sisteme özel ayarları yapılandırın.</string>
     <string name="settings_title_navigation_menu">Navigasyon Menüsü</string>
     <string name="settings_category_browser">Tarayıcı</string>
-    <string name="settings_category_geocaching">Geocaching</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platformu</string>
+    <string name="settings_category_geocaching_additionals">Diğer servisler ve eklentiler</string>
     <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
     <string name="settings_goto_url_button">daha fazla …</string>
@@ -557,8 +568,8 @@
     <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
-    <string name="init_brouterThreshold">Calculate route</string>
-    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterThreshold">Rotayı hesapla</string>
+    <string name="init_brouterThreshold_description">Yönlendirici aplikasyon (brouter, eğer varsa) maksimum mesafeyi hesaplayacak.</string>
     <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
@@ -679,14 +690,14 @@
     <string name="feature_search_finder">Bulanlara göre ara</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Eski Mapsforge V3</string>
-    <string name="init_mfold_api_description">Güncel versiyon Mapsforge haritalarının beta sürümünü içermektedir. Bazı özellikleri kullanamamanız veya sorunlar yaşamanız durumunda buradan eski versiyona geri dönebilirsiniz.</string>
+    <string name="init_mfold_api_description">Mapsforge haritasının yeni bir versiyonunu varsayılan olarak kullanıyoruz. Eğer bazı özellikleri kullanamıyorsanız veya sorun yaşarsanız eski versiyona buradan dönebilirsiniz.</string>
     <string name="init_experimental_title">Deneysel özellikler</string>
     <string name="init_mfbeta">Mapsforge beta varsayılan olarak</string>
     <string name="init_mfbeta_description">Geçerli sürüm, yeni Mapsforge haritamızın beta sürümünü deneme amaçlı olarak içeriyor. Bu yeni harita canlı ve liste haritaları için varsayılan olarak etkinleştirilebilir.</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
+    <string name="map_source_osm_mapnik">OSM: Harita</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo hakkında bilgi</string>
@@ -796,11 +807,11 @@
     <string name="cache_description">Açıklama</string>
     <string name="cache_description_long">Ayrıntılı Açıklama</string>
     <string name="cache_description_table_note">Açıklama %s\'de doğru şekilde görülebilmesi için görülebilecek tablo biçimlendirmesini içerir.</string>
-    <string name="cache_area_description">Area Description</string>
-    <string name="cache_cache_description">Cache Description</string>
-    <string name="cache_virtual_description">Virtual Question</string>
-    <string name="cache_traditional_description">Traditional Part</string>
-    <string name="cache_box_description">Box Content</string>
+    <string name="cache_area_description">Bölge Açıklaması</string>
+    <string name="cache_cache_description">Cache Açıklaması</string>
+    <string name="cache_virtual_description">Sanal Soru</string>
+    <string name="cache_traditional_description">Geleneksel Kısım</string>
+    <string name="cache_box_description">Cache İçeriği</string>
     <string name="cache_watchlist_on">Bu Geocache takip listenizde.</string>
     <string name="cache_watchlist_on_extra">Bu Geocache takip listenizde (Takip edenler:%1d).</string>
     <string name="cache_watchlist_not_on">Bu Geocache takip listenizde değil.</string>
@@ -911,11 +922,11 @@
     <string name="cache_terrain">Arazi</string>
     <string name="cache_rating">Derecelendirme</string>
     <string name="cache_own_rating">Derecelendirmeniz</string>
-    <string name="cache_rating_of">üzerinden</string>
+    <string name="cache_rating_of">/</string>
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Sahibi</string>
     <string name="cache_hidden">Yerleştirilme</string>
-    <string name="cache_event">Tarih</string>
+    <string name="cache_event">Saklanma Tarihi</string>
     <string name="cache_location">Konum</string>
     <string name="cache_coordinates">Koordinatlar</string>
     <string name="cache_calculator">Hesap Makinesi</string>
@@ -1034,6 +1045,7 @@
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_modes">Harita ayarları</string>
     <string name="map_trail_show">Trail\'i göster</string>
+    <string name="map_dot_mode">Kompakt ikonları kullan</string>
     <string name="map_circles_show">Çemberleri göster</string>
     <string name="map_mycaches_hide">Geocache\'lerimi/Bulduklarımı gizle</string>
     <string name="map_disabled_hide">Devredışı Geocache\'leri gizle</string>
@@ -1046,6 +1058,8 @@
     <string name="map_static_loading">Statik haritalar yükleniyor…</string>
     <string name="map_token_err">c:geo yalnızca kısmi verileri indirebildiğinden, Geocache koordinatları hatalı olabilir.</string>
     <string name="map_as_list">Liste olarak göster</string>
+    <string name="map_clear_trailhistory">Trail geçmişini sil</string>
+    <string name="map_trailhistory_cleared">trail geçmişi silindi</string>
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
     <string name="map_routing_straight">Düz çizgi</string>
@@ -1152,6 +1166,8 @@
     <string name="helper_gpsstatus_description">Radarı bu uygulama içinde c:geo ile birlikte kullanabilirsiniz. Ayrıca size diğer GPS\'lerle alakalı çok fazla bilgi sunar.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
+    <string name="helper_gps_locker_title">GPS Kilidi</string>
+    <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_barcode_title">Barkod Tarayıcısı</string>
     <string name="helper_barcode_description">Geokodların barkod olarak görüntülenmesini sağlayan Greasemonkey komut dosyaları ve internet siteleri var. Bu uygulamayla (c:geo) bu tür geokodları doğrudan bilgisayarınızda görüntüleyebilirsiniz.</string>
     <string name="helper_pocketquery_title">Sorgulama Kaydı Yaratıcı</string>
@@ -1190,6 +1206,11 @@
         <item quantity="one">Bir not başarıyla yüklendi</item>
         <item quantity="other">%1$d not başarıyla yüklendi</item>
     </plurals>
+    <string name="export_modifiedcoords">Düzenlenmiş koordinatlar</string>
+    <string name="export_modifiedcoords_uploading">Yükleniyor %1$d</string>
+    <string name="export_modifiedcoords_success">Yükleme başarılı</string>
+    <string name="export_modifiedcoords_result">Yükleme tamamlandı: %1$d başarısız/%2$d başarılı</string>
+    <string name="export_modifiedcoords_error">Yükleme başarısız</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Köpeklere izin var</string>
     <string name="attribute_dogs_no">Köpeklere izin yok</string>
@@ -1347,7 +1368,7 @@
     <string name="attribute_inside_no">Açık alan</string>
     <string name="attribute_in_water_yes">Suyun içinde</string>
     <string name="attribute_in_water_no">Suyun içinde değil</string>
-    <string name="attribute_no_gps_yes">GPS olmadan (letterbox, pusula ile, ...)</string>
+    <string name="attribute_no_gps_yes">GPS olmadan (letterbox, pusula ile, …)</string>
     <string name="attribute_no_gps_no">GPS ile</string>
     <string name="attribute_overnight_yes">Konaklama gerekli</string>
     <string name="attribute_overnight_no">Konaklama gerekli değil</string>
@@ -1371,7 +1392,7 @@
     <string name="attribute_aircraft_no">Hava aracı bulunmuyor</string>
     <string name="attribute_investigation_yes">İnceleme</string>
     <string name="attribute_investigation_no">İnceleme yok</string>
-    <string name="attribute_puzzle_yes">Bulmaca / Gizem</string>
+    <string name="attribute_puzzle_yes">Bulmaca / Gizemli</string>
     <string name="attribute_puzzle_no">Bulmaca / gizem yok</string>
     <string name="attribute_arithmetic_yes">Aritmetik problem</string>
     <string name="attribute_arithmetic_no">Aritmetik problem yok</string>
@@ -1559,8 +1580,8 @@
     <string name="waypoint_latitude_null">K/G --° --.---</string>
     <string name="waypoint_longitude_null">D/B --° --.---</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
-    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
-    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="close_app">Aplikasyonu kapat</string>
+    <string name="ask_again">Bana yine sor</string>
+    <string name="location_permission_request_explanation">c:geo konumunuzu belirlemek, mesafe ve yön hesaplamak için cihazınızındaki GPS\'e erişim sağlamalıdır. İzinsiz çalıştırılamaz.</string>
+    <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
 </resources>
