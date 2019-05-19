@@ -58,21 +58,13 @@ public class DatabaseBackupUtils {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-            @Override
-            public void run() {
-                restoreSuccessful.set(DataStore.restoreDatabaseInternal());
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-                final boolean restored = restoreSuccessful.get();
-                final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                Dialogs.message(activity, R.string.init_backup_restore, message);
-                if (activity instanceof MainActivity) {
-                    ((MainActivity) activity).updateCacheCounter();
-                }
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal()), () -> {
+            dialog.dismiss();
+            final boolean restored = restoreSuccessful.get();
+            final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+            Dialogs.message(activity, R.string.init_backup_restore, message);
+            if (activity instanceof MainActivity) {
+                ((MainActivity) activity).updateCacheCounter();
             }
         });
     }

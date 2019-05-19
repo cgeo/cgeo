@@ -206,22 +206,14 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
                 final FragmentActivity activity = getActivity();
                 progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                    @Override
-                    public void run() {
-                        cache.store(listIds, storeCacheHandler);
-                    }
-                }, new Runnable() {
-                    @Override
-                    public void run() {
-                        activity.supportInvalidateOptionsMenu();
-                        final View view = getView();
-                        if (view != null) {
-                            CacheDetailActivity.updateOfflineBox(view, cache, res,
-                                    new RefreshCacheClickListener(), new DropCacheClickListener(),
-                                    new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
-                            CacheDetailActivity.updateCacheLists(view, cache, res);
-                        }
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
+                    activity.supportInvalidateOptionsMenu();
+                    final View view = getView();
+                    if (view != null) {
+                        CacheDetailActivity.updateOfflineBox(view, cache, res,
+                                new RefreshCacheClickListener(), new DropCacheClickListener(),
+                                new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
+                        CacheDetailActivity.updateCacheLists(view, cache, res);
                     }
                 });
             }

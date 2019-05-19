@@ -1545,12 +1545,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private static void clearOfflineLogs(final Handler handler, final List<Geocache> selectedCaches) {
-        Schedulers.io().scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                DataStore.clearLogsOffline(selectedCaches);
-                handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
-            }
+        Schedulers.io().scheduleDirect(() -> {
+            DataStore.clearLogsOffline(selectedCaches);
+            handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
         });
     }
 

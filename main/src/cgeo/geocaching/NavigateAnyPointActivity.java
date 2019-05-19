@@ -397,19 +397,13 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                @Override
-                public void run() {
-                    // Save location
-                    DataStore.saveSearchedDestination(loc);
-                }
-            }, new Runnable() {
-                @Override
-                public void run() {
-                    // Ensure to remove the footer
-                    historyListView.removeFooterView(getEmptyHistoryFooter());
-                    destinationHistoryAdapter.notifyDataSetChanged();
-                }
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                // Save location
+                DataStore.saveSearchedDestination(loc);
+            }, () -> {
+                // Ensure to remove the footer
+                historyListView.removeFooterView(getEmptyHistoryFooter());
+                destinationHistoryAdapter.notifyDataSetChanged();
             });
         }
     }

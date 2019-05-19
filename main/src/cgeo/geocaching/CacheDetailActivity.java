@@ -2505,12 +2505,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             reinitializeViewPager();
         }
 
-        Schedulers.io().scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            }
-        });
+        Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
     }
 
     private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {

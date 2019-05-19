@@ -162,16 +162,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         Dialogs.moveCursorToEnd(userNote);
                     }
-                    AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                        @Override
-                        public void run() {
-                            DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY);
-                        }
-                    }, new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode));
-                        }
+                    AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                        DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY);
+                    }, () -> {
+                        activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode));
                     });
                 }
 

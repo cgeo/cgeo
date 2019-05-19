@@ -281,18 +281,12 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             @Override
             public boolean onPreferenceClick(final Preference preference) {
                 final ProgressDialog progress = ProgressDialog.show(SettingsActivity.this, getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                    @Override
-                    public void run() {
-                        // calculate disk usage
-                        usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));
-                    }
-                }, new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.dismiss();
-                        showExtCgeoDirChooser(usedBytes.get());
-                    }
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                    // calculate disk usage
+                    usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));
+                }, () -> {
+                    progress.dismiss();
+                    showExtCgeoDirChooser(usedBytes.get());
                 });
                 return true;
             }
@@ -503,16 +497,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 final Resources res = getResources();
                 final SettingsActivity activity = SettingsActivity.this;
                 final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                    @Override
-                    public void run() {
-                        DataStore.removeObsoleteGeocacheDataDirectories();
-                    }
-                }, new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                    }
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                    DataStore.removeObsoleteGeocacheDataDirectories();
+                }, () -> {
+                    dialog.dismiss();
                 });
                 return true;
                 }
