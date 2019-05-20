@@ -45,7 +45,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.ActionBar;
 import android.app.Activity;

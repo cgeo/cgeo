@@ -10,8 +10,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 
 public class OrientationProvider {
 

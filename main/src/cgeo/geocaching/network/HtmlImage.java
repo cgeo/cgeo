@@ -39,7 +39,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Cancellable;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.disposables.CancellableDisposable;
 import io.reactivex.processors.PublishProcessor;
