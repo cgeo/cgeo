@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,18 +53,8 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
     public AddressListHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addresslist_item, parent, false);
         final AddressListHolder viewHolder = new AddressListHolder(view);
-        viewHolder.itemView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                clickListener.onClickAddress(addresses.get(viewHolder.getAdapterPosition()));
-            }
-        });
-        viewHolder.mapIcon.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                clickListener.onClickMapIcon(addresses.get(viewHolder.getAdapterPosition()));
-            }
-        });
+        viewHolder.itemView.setOnClickListener(view1 -> clickListener.onClickAddress(addresses.get(viewHolder.getAdapterPosition())));
+        viewHolder.mapIcon.setOnClickListener(v -> clickListener.onClickMapIcon(addresses.get(viewHolder.getAdapterPosition())));
         return viewHolder;
     }
 

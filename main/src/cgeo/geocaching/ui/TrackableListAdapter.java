@@ -50,13 +50,7 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trackable_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                trackableClickListener.onTrackableClicked(trackables.get(viewHolder.getAdapterPosition()));
-            }
-        });
+        viewHolder.itemView.setOnClickListener(view1 -> trackableClickListener.onTrackableClicked(trackables.get(viewHolder.getAdapterPosition())));
         return viewHolder;
     }
 

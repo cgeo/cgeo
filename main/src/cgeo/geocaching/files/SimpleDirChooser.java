@@ -8,7 +8,6 @@ import cgeo.geocaching.utils.TextUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -62,33 +61,21 @@ public class SimpleDirChooser extends AbstractListActivity {
 
         okButton = ButterKnife.findById(this, R.id.simple_dir_chooser_ok);
         resetOkButton();
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                setResult(RESULT_OK, new Intent()
-                        .setData(Uri.fromFile(new File(currentDir, adapter.getItem(lastPosition).getName()))));
-                finish();
-            }
+        okButton.setOnClickListener(v -> {
+            setResult(RESULT_OK, new Intent()
+                    .setData(Uri.fromFile(new File(currentDir, adapter.getItem(lastPosition).getName()))));
+            finish();
         });
 
         final Button cancelButton = (Button) findViewById(R.id.simple_dir_chooser_cancel);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                final Intent intent = new Intent();
-                setResult(RESULT_CANCELED, intent);
-                finish();
-            }
+        cancelButton.setOnClickListener(v -> {
+            final Intent intent = new Intent();
+            setResult(RESULT_CANCELED, intent);
+            finish();
         });
 
         final EditText pathField = ButterKnife.findById(this, R.id.simple_dir_chooser_path);
-        pathField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                editPath();
-            }
-
-        });
+        pathField.setOnClickListener(v -> editPath());
     }
 
     public void editPath() {
@@ -98,25 +85,17 @@ public class SimpleDirChooser extends AbstractListActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setText(currentDir.getPath());
         builder.setView(input);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                final String pathText = input.getText().toString();
-                final File newPathDir = new File(pathText);
-                if (newPathDir.exists() && newPathDir.isDirectory()) {
-                    currentDir = newPathDir;
-                    fill(currentDir);
-                } else {
-                    showToast(SimpleDirChooser.this.getString(R.string.simple_dir_chooser_invalid_path));
-                }
+        builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
+            final String pathText = input.getText().toString();
+            final File newPathDir = new File(pathText);
+            if (newPathDir.exists() && newPathDir.isDirectory()) {
+                currentDir = newPathDir;
+                fill(currentDir);
+            } else {
+                showToast(SimpleDirChooser.this.getString(R.string.simple_dir_chooser_invalid_path));
             }
         });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
 
         builder.show();
     }

@@ -94,21 +94,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             image = Image.NONE;
         }
 
-        cameraButton.setOnClickListener(new View.OnClickListener() {
+        cameraButton.setOnClickListener(view -> selectImageFromCamera());
 
-            @Override
-            public void onClick(final View view) {
-                selectImageFromCamera();
-            }
-        });
-
-        storedButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                selectImageFromStorage();
-            }
-        });
+        storedButton.setOnClickListener(view -> selectImageFromStorage());
 
         if (image.hasTitle()) {
             captionView.setText(image.getTitle());
@@ -133,21 +121,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        saveButton.setOnClickListener(v -> saveImageInfo(true));
 
-            @Override
-            public void onClick(final View v) {
-                saveImageInfo(true);
-            }
-        });
-
-        clearButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                saveImageInfo(false);
-            }
-        });
+        clearButton.setOnClickListener(v -> saveImageInfo(false));
 
         loadImagePreview();
     }

@@ -80,7 +80,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -252,21 +251,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         dialog.setTitle(res.getString(R.string.license));
         dialog.setMessage(res.getString(R.string.err_license));
         dialog.setCancelable(true);
-        dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int id) {
-                Cookies.clearCookies();
-                dialog.cancel();
-            }
+        dialog.setNegativeButton(res.getString(R.string.license_dismiss), (dialog1, id) -> {
+            Cookies.clearCookies();
+            dialog1.cancel();
         });
-        dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int id) {
-                Cookies.clearCookies();
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/software/agreement.aspx?ID=0")));
-            }
+        dialog.setPositiveButton(res.getString(R.string.license_show), (dialog12, id) -> {
+            Cookies.clearCookies();
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/software/agreement.aspx?ID=0")));
         });
 
         final AlertDialog alert = dialog.create();
@@ -905,12 +896,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_upload_modifiedcoords:
                 final Activity that = this;
-                Dialogs.confirm(this, R.string.caches_upload_modifiedcoords, R.string.caches_upload_modifiedcoords_warning, new OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int which) {
-                        new BatchUploadModifiedCoordinates().export(adapter.getCheckedOrAllCaches(), that);
-                    }
-                });
+                Dialogs.confirm(this, R.string.caches_upload_modifiedcoords, R.string.caches_upload_modifiedcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates().export(adapter.getCheckedOrAllCaches(), that));
                 return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
@@ -963,12 +949,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isNonDefaultList && CollectionUtils.isEmpty(cacheList)
                 && DataStore.getAllStoredCachesCount(CacheType.ALL, listId) == 0) {
             // ask user, if he wants to delete the now empty list
-            Dialogs.confirmYesNo(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_nowempty, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int whichButton) {
-                    removeListInternal();
-                }
-            });
+            Dialogs.confirmYesNo(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_nowempty, (dialog, whichButton) -> removeListInternal());
         }
     }
 
@@ -995,13 +976,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void clearOfflineLogs() {
-        Dialogs.confirmYesNo(this, R.string.caches_clear_offlinelogs, R.string.caches_clear_offlinelogs_message, new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
-                clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
-            }
+        Dialogs.confirmYesNo(this, R.string.caches_clear_offlinelogs, R.string.caches_clear_offlinelogs_message, (dialog, which) -> {
+            progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
+            clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
         });
     }
 
@@ -1336,12 +1313,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public void refreshStored(final List<Geocache> caches) {
         if (type == CacheListType.OFFLINE && caches.size() > REFRESH_WARNING_THRESHOLD) {
-            Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int id) {
-                    refreshStoredConfirmed(caches);
-                    dialog.cancel();
-                }
+            Dialogs.confirmYesNo(this, R.string.caches_refresh_all, R.string.caches_refresh_all_warning, (dialog, id) -> {
+                refreshStoredConfirmed(caches);
+                dialog.cancel();
             });
         } else {
             refreshStoredConfirmed(caches);
@@ -1402,12 +1376,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void removeFromHistoryCheck() {
         final int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
                 : R.string.cache_clear_history;
-        Dialogs.confirmYesNo(this, R.string.caches_removing_from_history, message, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int id) {
-                removeFromHistory();
-                dialog.cancel();
-            }
+        Dialogs.confirmYesNo(this, R.string.caches_removing_from_history, message, (dialog, id) -> {
+            removeFromHistory();
+            dialog.cancel();
         });
     }
 
@@ -1425,13 +1396,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void importWeb() {
         // menu is also shown with no device connected
         if (!Settings.isRegisteredForSend2cgeo()) {
-            Dialogs.confirm(this, R.string.web_import_title, R.string.init_sendToCgeo_description, new OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo, CacheListActivity.this);
-                }
-            });
+            Dialogs.confirm(this, R.string.web_import_title, R.string.init_sendToCgeo_description, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo, CacheListActivity.this));
             return;
         }
 
@@ -1675,12 +1640,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         // ask him, if there are caches on the list
-        Dialogs.confirm(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_description, R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int whichButton) {
-                removeListInternal();
-            }
-        });
+        Dialogs.confirm(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_description, R.string.list_dialog_remove, (dialog, whichButton) -> removeListInternal());
     }
 
     public void goMap() {

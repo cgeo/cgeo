@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import java.io.File;
@@ -40,23 +39,19 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
 
         mapFile = Settings.getMapFile();
 
-        selectDirectory.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                try {
-                    final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
-                    dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
-                            getString(R.string.simple_dir_chooser_title));
-                    dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
-                            getString(android.R.string.ok));
-                    startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-                } catch (final RuntimeException ignored) {
-                    // OI file manager not available
-                    final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
-                    dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getExternalPublicCgeoDirectory().getAbsolutePath());
-                    startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-                }
+        selectDirectory.setOnClickListener(v -> {
+            try {
+                final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
+                dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
+                        getString(R.string.simple_dir_chooser_title));
+                dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
+                        getString(android.R.string.ok));
+                startActivityForResult(dirChooser, REQUEST_DIRECTORY);
+            } catch (final RuntimeException ignored) {
+                // OI file manager not available
+                final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
+                dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getExternalPublicCgeoDirectory().getAbsolutePath());
+                startActivityForResult(dirChooser, REQUEST_DIRECTORY);
             }
         });
         selectDirectory.setText(getString(R.string.simple_dir_chooser_title));

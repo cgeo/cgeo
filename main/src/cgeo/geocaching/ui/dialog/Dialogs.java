@@ -405,19 +405,8 @@ public final class Dialogs {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setView(input);
-        builder.setPositiveButton(buttonTitle, new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                okayListener.call(input.getText().toString());
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int whichButton) {
-                dialog.dismiss();
-            }
-        });
+        builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(input.getText().toString()));
+        builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
         input.addTextChangedListener(new TextWatcher() {
@@ -492,12 +481,7 @@ public final class Dialogs {
 
         new AlertDialog.Builder(activity)
                 .setTitle(title)
-                .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int item) {
-                        listener.call(items.get(item));
-                    }
-                }).show();
+                .setAdapter(adapter, (dialog, item) -> listener.call(items.get(item))).show();
     }
 
     public static void dismiss(@Nullable final ProgressDialog dialog) {
@@ -538,16 +522,11 @@ public final class Dialogs {
 
         final Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.menu_filter);
-        builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                final CacheType cacheType = cacheTypes.get(position);
-                Settings.setCacheType(cacheType);
-                okayListener.call(cacheType);
-                dialog.dismiss();
-            }
-
+        builder.setSingleChoiceItems(items, checkedItem, (dialog, position) -> {
+            final CacheType cacheType = cacheTypes.get(position);
+            Settings.setCacheType(cacheType);
+            okayListener.call(cacheType);
+            dialog.dismiss();
         });
         builder.create().show();
     }

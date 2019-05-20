@@ -44,23 +44,15 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pocketquery_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.cachelist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                CacheListActivity.startActivityPocket(view.getContext(), activity.getQueries().get(viewHolder.getAdapterPosition()));
-            }
-        });
+        viewHolder.cachelist.setOnClickListener(view1 -> CacheListActivity.startActivityPocket(view1.getContext(), activity.getQueries().get(viewHolder.getAdapterPosition())));
         viewHolder.cachelist.setVisibility(activity.onlyDownloadable() ? View.GONE : View.VISIBLE);
 
-        viewHolder.download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
-                if (activity.onlyDownloadable()) {
-                    activity.returnResult(pocketQuery);
-                } else {
-                    CacheListActivity.startActivityPocketDownload(view.getContext(), pocketQuery);
-                }
+        viewHolder.download.setOnClickListener(v -> {
+            final PocketQuery pocketQuery = activity.getQueries().get(viewHolder.getAdapterPosition());
+            if (activity.onlyDownloadable()) {
+                activity.returnResult(pocketQuery);
+            } else {
+                CacheListActivity.startActivityPocketDownload(view.getContext(), pocketQuery);
             }
         });
 

@@ -32,13 +32,9 @@ public class Keyboard {
     }
 
     public void showDelayed(final View view) {
-        view.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                final InputMethodManager keyboard = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                keyboard.showSoftInput(view, 0);
-            }
+        view.postDelayed(() -> {
+            final InputMethodManager keyboard = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            keyboard.showSoftInput(view, 0);
         }, 50);
     }
 }

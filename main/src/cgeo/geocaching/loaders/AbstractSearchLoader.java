@@ -97,12 +97,9 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         } catch (final NoConnectorException ignored) {
             final Activity activity = activityRef.get();
             if (activity != null) {
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(activity, R.string.warn_no_connector, Toast.LENGTH_LONG).show();
-                        activity.finish();
-                    }
+                activity.runOnUiThread(() -> {
+                    Toast.makeText(activity, R.string.warn_no_connector, Toast.LENGTH_LONG).show();
+                    activity.finish();
                 });
             }
         } catch (final Exception e) {

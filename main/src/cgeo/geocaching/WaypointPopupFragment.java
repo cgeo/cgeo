@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -93,13 +92,9 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             details.addHtml(R.string.waypoint_note, waypoint.getNote(), waypoint.getGeocode());
 
-            buttonEdit.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(final View arg0) {
-                    EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
-                    getActivity().finish();
-                }
+            buttonEdit.setOnClickListener(arg0 -> {
+                EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
+                getActivity().finish();
             });
 
             details = new CacheDetailsCreator(getActivity(), cacheDetailsLayout);

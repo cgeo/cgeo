@@ -1668,12 +1668,7 @@ public class Geocache implements IWaypoint {
     }
 
     public Disposable refresh(final DisposableHandler handler, final Scheduler scheduler) {
-        return scheduler.scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                refreshSynchronous(handler);
-            }
-        });
+        return scheduler.scheduleDirect(() -> refreshSynchronous(handler));
     }
 
     public void refreshSynchronous(final DisposableHandler handler) {

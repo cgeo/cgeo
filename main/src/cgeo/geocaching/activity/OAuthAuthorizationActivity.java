@@ -316,12 +316,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 startButton.setOnClickListener(null);
 
                 actitity.setTempTokens(null, null);
-                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-                    @Override
-                    public void run() {
-                        actitity.requestToken();
-                    }
-                });
+                AndroidRxUtils.networkScheduler.scheduleDirect(() -> actitity.requestToken());
             }
         }
     }
@@ -348,12 +343,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
         changeTokensDialog.show();
 
-        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                changeToken(verifier);
-            }
-        });
+        AndroidRxUtils.networkScheduler.scheduleDirect(() -> changeToken(verifier));
     }
 
     @NonNull

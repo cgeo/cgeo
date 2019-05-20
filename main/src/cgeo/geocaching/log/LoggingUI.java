@@ -96,40 +96,37 @@ public final class LoggingUI extends AbstractUIFactory {
 
         final ArrayAdapter<LogTypeEntry> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, list);
 
-        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int item) {
-                final LogTypeEntry logTypeEntry = adapter.getItem(item);
-                if (logTypeEntry.logType == null) {
-                    switch (logTypeEntry.specialLogType) {
-                        case LOG_CACHE:
-                            cache.logVisit(activity);
-                            break;
+        builder.setAdapter(adapter, (dialog, item) -> {
+            final LogTypeEntry logTypeEntry = adapter.getItem(item);
+            if (logTypeEntry.logType == null) {
+                switch (logTypeEntry.specialLogType) {
+                    case LOG_CACHE:
+                        cache.logVisit(activity);
+                        break;
 
-                        case CLEAR_LOG:
-                            cache.clearOfflineLog();
-                            break;
-                    }
-                } else {
-                    final ReportProblemType reportProblem;
-                    final LogType logType;
-                    switch (logTypeEntry.logType) {
-                        case NEEDS_MAINTENANCE:
-                            logType = LogType.NOTE;
-                            reportProblem = ReportProblemType.OTHER;
-                            break;
-                        case NEEDS_ARCHIVE:
-                            logType = LogType.NOTE;
-                            reportProblem = ReportProblemType.ARCHIVE;
-                            break;
-                        default:
-                            logType = logTypeEntry.logType;
-                            reportProblem = ReportProblemType.NO_PROBLEM;
-                    }
-                    cache.logOffline(activity, logType, reportProblem);
+                    case CLEAR_LOG:
+                        cache.clearOfflineLog();
+                        break;
                 }
-                dialog.dismiss();
+            } else {
+                final ReportProblemType reportProblem;
+                final LogType logType;
+                switch (logTypeEntry.logType) {
+                    case NEEDS_MAINTENANCE:
+                        logType = LogType.NOTE;
+                        reportProblem = ReportProblemType.OTHER;
+                        break;
+                    case NEEDS_ARCHIVE:
+                        logType = LogType.NOTE;
+                        reportProblem = ReportProblemType.ARCHIVE;
+                        break;
+                    default:
+                        logType = logTypeEntry.logType;
+                        reportProblem = ReportProblemType.NO_PROBLEM;
+                }
+                cache.logOffline(activity, logType, reportProblem);
             }
+            dialog.dismiss();
         });
 
         final AlertDialog alertDialog = builder.create();

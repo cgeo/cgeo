@@ -196,12 +196,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
                 final String username = activity.usernameEditText.getText().toString();
                 final String password = activity.passwordEditText.getText().toString();
 
-                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-                    @Override
-                    public void run() {
-                        activity.requestToken(username, password);
-                    }
-                });
+                AndroidRxUtils.networkScheduler.scheduleDirect(() -> activity.requestToken(username, password));
             }
         }
     }

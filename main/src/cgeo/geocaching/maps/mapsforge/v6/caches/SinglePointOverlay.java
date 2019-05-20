@@ -21,14 +21,7 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
         this.coords = coords;
         this.type = type;
 
-        AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
-
-            @Override
-            public void run() {
-                fill();
-            }
-
-        });
+        AndroidRxUtils.computationScheduler.scheduleDirect(() -> fill());
     }
 
     @Override

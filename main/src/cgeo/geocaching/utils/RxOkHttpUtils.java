@@ -32,12 +32,9 @@ public class RxOkHttpUtils {
             public void subscribe(final SingleEmitter<Response> singleEmitter) throws Exception {
                 final Call call = client.newCall(request);
                 final AtomicBoolean completed = new AtomicBoolean(false);
-                singleEmitter.setDisposable(Disposables.fromRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!completed.get()) {
-                            call.cancel();
-                        }
+                singleEmitter.setDisposable(Disposables.fromRunnable(() -> {
+                    if (!completed.get()) {
+                        call.cancel();
                     }
                 }));
                 call.enqueue(new Callback() {

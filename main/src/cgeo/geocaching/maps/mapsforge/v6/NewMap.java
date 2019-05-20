@@ -248,12 +248,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void postZoomToViewport(final Viewport viewport) {
-        mapView.post(new Runnable() {
-            @Override
-            public void run() {
-                mapView.zoomToViewport(viewport);
-            }
-        });
+        mapView.post(() -> mapView.zoomToViewport(viewport));
     }
 
     @Override
@@ -555,21 +550,17 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         builder.setTitle(R.string.map_theme_select);
 
-        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int newItem) {
-                if (newItem != selectedItem) {
-                    // Adjust index because of <default> selection
-                    if (newItem > 0) {
-                        Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
-                    } else {
-                        Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-                    }
-                    setMapTheme();
+        builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem, (dialog, newItem) -> {
+            if (newItem != selectedItem) {
+                // Adjust index because of <default> selection
+                if (newItem > 0) {
+                    Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
+                } else {
+                    Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
                 }
-                dialog.cancel();
+                setMapTheme();
             }
+            dialog.cancel();
         });
 
         builder.show();
@@ -842,17 +833,13 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         waitDialog.setCancelable(true);
         waitDialog.setCancelMessage(loadDetailsHandler.disposeMessage());
         waitDialog.setMax(count);
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            @Override
-            public void onCancel(final DialogInterface arg0) {
-                try {
-                    if (loadDetailsThread != null) {
-                        loadDetailsThread.stopIt();
-                    }
-                } catch (final Exception e) {
-                    Log.e("CGeoMap.storeCaches.onCancel", e);
+        waitDialog.setOnCancelListener(arg0 -> {
+            try {
+                if (loadDetailsThread != null) {
+                    loadDetailsThread.stopIt();
                 }
+            } catch (final Exception e) {
+                Log.e("CGeoMap.storeCaches.onCancel", e);
             }
         });
 

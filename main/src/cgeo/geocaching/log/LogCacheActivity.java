@@ -39,8 +39,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -259,25 +257,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             holder.codeView.setText(trackable.trackCode);
             holder.nameView.setText(trackable.name);
             holder.actionButton.setText(trackable.action.getLabel() + " ▼");
-            holder.actionButton.setOnClickListener(new View.OnClickListener() {
+            holder.actionButton.setOnClickListener(view -> selectTrackableAction(trackable));
 
-                @Override
-                public void onClick(final View view) {
-                    selectTrackableAction(trackable);
-                }
-            });
-
-            holder.infoView.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(final View view) {
-                    final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
-                    final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
-                    trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
-                    trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.brand.getId());
-                    trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.trackCode);
-                    startActivity(trackablesIntent);
-                }
+            holder.infoView.setOnClickListener(view -> {
+                final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
+                final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
+                trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
+                trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.brand.getId());
+                trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.trackCode);
+                startActivity(trackablesIntent);
             });
         }
     }
@@ -306,13 +294,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         inventoryChangeAllView.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
 
         final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
-        changeButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                selectAllTrackablesAction();
-            }
-        });
+        changeButton.setOnClickListener(view -> selectAllTrackablesAction());
     }
 
     private ArrayList<TrackableLog> getSortedTrackables() {
@@ -379,23 +361,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         final TextView problemButton = ButterKnife.findById(this, R.id.report_problem);
         problemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
-        problemButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                selectProblemType();
-            }
-        });
+        problemButton.setOnClickListener(view -> selectProblemType());
 
         verifySelectedLogType();
         final Button typeButton = ButterKnife.findById(this, R.id.type);
         typeButton.setText(typeSelected.getL10n());
-        typeButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View view) {
-                selectLogType();
-            }
-        });
+        typeButton.setOnClickListener(view -> selectLogType());
 
         final Button dateButton = ButterKnife.findById(this, R.id.date);
         setDate(date);
@@ -771,24 +742,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     string.cancel,                // Negative Button
                     R.string.info_log_post_save,  // Neutral Button
                     // Positive button: Retry
-                    new OnClickListener() {
-
-                        @Override
-                        public void onClick(final DialogInterface dialog, final int which) {
-                            sendLogInternal();
-                        }
-                    },
+                        (dialog, which) -> sendLogInternal(),
                     // Negative button: dismiss popup
                     null,
                     // Neutral Button: SaveLog
-                    new OnClickListener() {
-
-                        @Override
-                        public void onClick(final DialogInterface dialogInterface, final int i) {
+                        (dialogInterface, i) -> {
                             saveMode = SaveMode.FORCE;
                             finish();
-                        }
-                });
+                        });
             }
         }
     }
@@ -840,18 +801,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
         final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
-        alert.setItems(tbLogTypes, new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                final LogTypeTrackable logType = tbLogTypeValues.get(position);
-                for (final TrackableLog tb : trackables) {
-                    tb.action = logType;
-                    Log.d("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
-                }
-                updateTrackablesList();
-                dialog.dismiss();
+        alert.setItems(tbLogTypes, (dialog, position) -> {
+            final LogTypeTrackable logType = tbLogTypeValues.get(position);
+            for (final TrackableLog tb : trackables) {
+                tb.action = logType;
+                Log.d("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
             }
+            updateTrackablesList();
+            dialog.dismiss();
         });
         alert.create().show();
     }
@@ -873,13 +830,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         for (int i = 0; i < choices.length; i++) {
             choices[i] = possible.get(i).getL10n();
         }
-        alert.setSingleChoiceItems(choices, possible.indexOf(typeSelected), new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                setType(possible.get(position));
-                dialog.dismiss();
-            }
+        alert.setSingleChoiceItems(choices, possible.indexOf(typeSelected), (dialog, position) -> {
+            setType(possible.get(position));
+            dialog.dismiss();
         });
         alert.create().show();
     }
@@ -893,13 +846,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         for (int i = 0; i < choices.length; i++) {
             choices[i] = getString(possible.get(i).labelId);
         }
-        alert.setSingleChoiceItems(choices, possible.indexOf(reportProblemSelected), new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                setReportProblem(possible.get(position));
-                dialog.dismiss();
-            }
+        alert.setSingleChoiceItems(choices, possible.indexOf(reportProblemSelected), (dialog, position) -> {
+            setReportProblem(possible.get(position));
+            dialog.dismiss();
         });
         alert.create().show();
     }
@@ -909,16 +858,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.setTitle(trackable.name);
         final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
         final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
-        alert.setSingleChoiceItems(tbLogTypes, tbLogTypeValues.indexOf(trackable.action), new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int position) {
-                final LogTypeTrackable logType = tbLogTypeValues.get(position);
-                trackable.action = logType;
-                Log.d("Trackable " + trackable.trackCode + " (" + trackable.name + ") has new action: #" + logType);
-                updateTrackablesList();
-                dialog.dismiss();
-            }
+        alert.setSingleChoiceItems(tbLogTypes, tbLogTypeValues.indexOf(trackable.action), (dialog, position) -> {
+            final LogTypeTrackable logType = tbLogTypeValues.get(position);
+            trackable.action = logType;
+            Log.d("Trackable " + trackable.trackCode + " (" + trackable.name + ") has new action: #" + logType);
+            updateTrackablesList();
+            dialog.dismiss();
         });
         alert.create().show();
     }
@@ -986,21 +931,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             return;
         }
         if (typeSelected.mustConfirmLog()) {
-            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), new OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    sendLogInternal();
-                }
-            });
+            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), (dialog, which) -> sendLogInternal());
         } else if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
-            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblemSelected.getL10n()), new OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    sendLogInternal();
-                }
-            });
+            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblemSelected.getL10n()), (dialog, which) -> sendLogInternal());
         } else {
             sendLogInternal();
         }

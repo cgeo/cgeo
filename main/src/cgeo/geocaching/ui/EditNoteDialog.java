@@ -72,23 +72,15 @@ public class EditNoteDialog extends DialogFragment {
         title.setVisibility(View.VISIBLE);
 
         final ImageButton cancel = ButterKnife.findById(view, R.id.dialog_title_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                dialog.dismiss();
-            }
-        });
+        cancel.setOnClickListener(view1 -> dialog.dismiss());
         cancel.setVisibility(View.VISIBLE);
 
         final ImageButton done = ButterKnife.findById(view, R.id.dialog_title_done);
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                // trim note to avoid unnecessary uploads for whitespace only changes
-                final String personalNote = StringUtils.trim(mEditText.getText().toString());
-                ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote);
-                dialog.dismiss();
-            }
+        done.setOnClickListener(view12 -> {
+            // trim note to avoid unnecessary uploads for whitespace only changes
+            final String personalNote = StringUtils.trim(mEditText.getText().toString());
+            ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote);
+            dialog.dismiss();
         });
         done.setVisibility(View.VISIBLE);
 

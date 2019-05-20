@@ -159,12 +159,7 @@ public class ImagesList {
 
             imageView.setImageResource(R.drawable.image_not_loaded);
             imageView.setClickable(true);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    viewImageInStandardApp(img, image);
-                }
-            });
+            imageView.setOnClickListener(view1 -> viewImageInStandardApp(img, image));
             activity.registerForContextMenu(imageView);
             imageView.setImageDrawable(image);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -211,23 +206,12 @@ public class ImagesList {
     private void addGeoOverlay(final RelativeLayout imageViewLayout, final Geopoint gpt) {
         final ImageView geoOverlay = (ImageView) imageViewLayout.findViewById(R.id.geo_overlay);
         geoOverlay.setVisibility(View.VISIBLE);
-        geoOverlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View wpNavView) {
-                wpNavView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(final View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt);
-                    }
-                });
-                wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(final View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
-                        return true;
-                    }
-                });
-            }
+        geoOverlay.setOnClickListener(wpNavView -> {
+            wpNavView.setOnClickListener(v -> NavigationAppFactory.startDefaultNavigationApplication(1, activity, gpt));
+            wpNavView.setOnLongClickListener(v -> {
+                NavigationAppFactory.startDefaultNavigationApplication(2, activity, gpt);
+                return true;
+            });
         });
     }
 

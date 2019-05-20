@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -38,19 +37,8 @@ public class GCVoteDialog {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(votingLayout);
-        builder.setPositiveButton(R.string.cache_menu_vote, new OnClickListener() {
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                vote(cache, GCVoteRatingBarUtil.getRating(votingLayout), afterVoteSent);
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int whichButton) {
-                dialog.dismiss();
-            }
-        });
+        builder.setPositiveButton(R.string.cache_menu_vote, (dialog, which) -> vote(cache, GCVoteRatingBarUtil.getRating(votingLayout), afterVoteSent));
+        builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
         GCVoteRatingBarUtil.initializeRatingBar(cache, votingLayout, new OnRatingChangeListener() {

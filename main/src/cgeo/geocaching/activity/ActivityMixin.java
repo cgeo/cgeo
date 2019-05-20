@@ -92,13 +92,7 @@ public final class ActivityMixin {
 
     private static void postShowToast(final Activity activity, final String text, final int toastDuration) {
         if (StringUtils.isNotBlank(text)) {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    showCgeoToast(activity, text, toastDuration);
-                }
-
-            });
+            activity.runOnUiThread(() -> showCgeoToast(activity, text, toastDuration));
         }
     }
 
