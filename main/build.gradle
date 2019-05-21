@@ -274,13 +274,13 @@ dependencies {
     implementation "net.sf.geographiclib:GeographicLib-Java:1.49"
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.8'
+    def jacksonVersion = '2.9.9'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
-    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'org.jsoup:jsoup:1.12.1'
 
     // Junit only needed for local unit tests
     testImplementation 'junit:junit:4.12'
@@ -323,8 +323,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.2'
 
     // Play Services
-    def playServicesVersion = '11.8.0'
-    implementation "com.google.android.gms:play-services-location:$playServicesVersion"
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -335,8 +334,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.8"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
-    // Support Library. All com.android.support.* libraries must use the same version
-    def supportLibraryVersion = '25.4.0'
+    // Support Libraries. All com.android.support.* libraries must use the same version
 
     // Support Library AppCompat
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"

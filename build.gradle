@@ -154,7 +154,9 @@ buildScan {
  * common configuration for the Java projects
  */
 
-ext.minSdkVersion = 14
+ext {
+    supportLibraryVersion = '25.4.0'
+}
 
 subprojects {
     repositories {
