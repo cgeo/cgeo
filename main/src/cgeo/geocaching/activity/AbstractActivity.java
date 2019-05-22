@@ -26,7 +26,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +40,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
-public abstract class AbstractActivity extends ActionBarActivity implements IAbstractActivity {
+public abstract class AbstractActivity extends AppCompatActivity implements IAbstractActivity {
 
     protected CgeoApplication app = null;
     protected Resources res = null;

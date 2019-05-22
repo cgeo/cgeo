@@ -14,7 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Window;
@@ -36,15 +36,15 @@ public final class ActivityMixin {
             return;
         }
 
-        if (activity instanceof ActionBarActivity) {
-            final ActionBar actionBar = ((ActionBarActivity) activity).getSupportActionBar();
+        if (activity instanceof AppCompatActivity) {
+            final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setTitle(text);
             }
         }
     }
 
-    public static void showProgress(final ActionBarActivity activity, final boolean show) {
+    public static void showProgress(final AppCompatActivity activity, final boolean show) {
         if (activity == null) {
             return;
         }
@@ -163,8 +163,8 @@ public final class ActivityMixin {
     }
 
     public static void invalidateOptionsMenu(final Activity activity) {
-        if (activity instanceof ActionBarActivity) {
-            ((ActionBarActivity) activity).supportInvalidateOptionsMenu();
+        if (activity instanceof AppCompatActivity) {
+            ((AppCompatActivity) activity).supportInvalidateOptionsMenu();
         } else {
             ActivityCompat.invalidateOptionsMenu(activity);
         }
