@@ -657,23 +657,10 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="geokrety.org" />
+                <data android:host="api.geokrety.org" />
                 <data android:host="www.geokrety.org" />
                 <data android:pathPrefix="/konkret.php" />
                 <data android:pathPrefix="/m/qr.php" />
-            </intent-filter>
-
-            <!-- GeoKretyMap.org -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="geokretymap.org" />
-                <data android:host="www.geokretymap.org" />
                 <data android:pathPrefix="/GK" />
                 <data android:pathPrefix="/gk" />
             </intent-filter>

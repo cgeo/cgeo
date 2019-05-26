@@ -59,7 +59,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([1-9A-NP-Z]{6})");
     private static final String HOST = "geokrety.org";
     public static final String URL = "https://" + HOST;
-    private static final String URLPROXY = "https://api.geokretymap.org";
+    private static final String URLPROXY = "https://api.geokrety.org";
 
     @Override
     @NonNull
@@ -258,13 +258,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @Nullable
     public String getTrackableCodeFromUrl(@NonNull final String url) {
-        // http://geokrety.org/konkret.php?id=38545
+        // https://geokrety.org/konkret.php?id=38545
         final String gkId = StringUtils.substringAfterLast(url, "konkret.php?id=");
         if (StringUtils.isNumeric(gkId)) {
             return geocode(Integer.parseInt(gkId));
         }
-        // http://geokretymap.org/38545
-        final String gkmapId = StringUtils.substringAfterLast(url, "geokretymap.org/");
+        // https://api.geokrety.org/38545
+        final String gkmapId = StringUtils.substringAfterLast(url, "api.geokrety.org/");
         if (StringUtils.isNumeric(gkmapId)) {
             return geocode(Integer.parseInt(gkmapId));
         }
