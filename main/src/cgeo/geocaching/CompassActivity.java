@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.DefaultMap;
@@ -68,6 +69,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String description;
+    private ProximityNotification proximityNotification = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -80,6 +82,9 @@ public class CompassActivity extends AbstractActionBarActivity {
             finish();
             return;
         }
+
+        // prepare promity notification
+        proximityNotification = new ProximityNotification();
 
         // cache must exist, except for "any point navigation"
         final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -267,6 +272,9 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private void setDestCoords(final Geopoint coords) {
         dstCoords = coords;
+        if (null != proximityNotification) {
+            proximityNotification.setReferencePoint(coords);
+        }
         if (dstCoords == null) {
             return;
         }
@@ -322,6 +330,10 @@ public class CompassActivity extends AbstractActionBarActivity {
                 updateDistanceInfo(geo);
 
                 updateNorthHeading(AngleUtils.getDirectionNow(dir));
+
+                if (null != proximityNotification) {
+                    proximityNotification.onUpdateGeoData(geo);
+                }
             } catch (final RuntimeException e) {
                 Log.w("Failed to update location", e);
             }

@@ -68,7 +68,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithBeep {
         super.init();
 
         waypoint = DataStore.loadWaypoint(waypointId);
-        referencePointForBeep = waypoint.getCoords();
+        proximityNotification.setReferencePoint(waypoint.getCoords());
 
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);

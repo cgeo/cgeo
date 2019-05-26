@@ -109,7 +109,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithBeep {
     @Override
     protected void init() {
         super.init();
-        referencePointForBeep = cache.getCoords();
+        proximityNotification.setReferencePoint(cache.getCoords());
 
         try {
             if (StringUtils.isNotBlank(cache.getName())) {
