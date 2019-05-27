@@ -42,7 +42,7 @@ public class Send2CgeoDownloader {
 
                 // Download new code
                 try {
-                    final Response responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params)
+                    final Response responseFromWeb = Network.getRequest("https://send2.cgeo.org/read.html", params)
                             .flatMap(Network.withSuccess).blockingGet();
 
                     final String response = Network.getResponseData(responseFromWeb);
