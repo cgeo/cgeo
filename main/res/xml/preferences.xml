@@ -377,18 +377,6 @@
                         android:key="@string/pref_fakekey_geokrety_authorization" />
                 </PreferenceCategory>
 
-                <PreferenceCategory android:title="@string/settings_advanced"
-                    android:layout="@layout/preference_category" >
-                    <CheckBoxPreference
-                        android:dependency="@string/pref_connectorGeokretyActive"
-                        android:defaultValue="true"
-                        android:key="@string/pref_geokrety_cache"
-                        android:title="@string/init_geokrety_cache" />
-                    <cgeo.geocaching.settings.TextPreference
-                        android:layout="@layout/text_preference"
-                        android:text="@string/init_geokrety_cache_description" />
-                </PreferenceCategory>
-
                 <PreferenceCategory android:title="@string/settings_information"
                     android:layout="@layout/preference_category" >
                     <Preference

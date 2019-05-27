@@ -656,7 +656,7 @@ public class Settings {
     }
 
     public static boolean isGeokretyCacheActive() {
-        return getBoolean(R.string.pref_geokrety_cache, true);
+        return true;
     }
 
     static boolean hasGeokretyAuthorization() {
