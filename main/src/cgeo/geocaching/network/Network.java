@@ -61,10 +61,10 @@ import org.jsoup.nodes.Document;
 
 public final class Network {
 
-    /** User agent id */
-    private static final String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
-    /** Native user agent, taken from a Android 2.2 Nexus **/
-    private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    /** User agent id, taken from Firefox Windows Version 67.0 */
+    private static final String PC_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0";
+    /** Native user agent, taken from a Android 5.0.1 Samsung with Chrome 66.0.3359.158 **/
+    private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; Android 5.0.1; GT-I9505 Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.158 Mobile Safari/537.36";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
