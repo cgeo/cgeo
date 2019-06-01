@@ -1492,8 +1492,6 @@
     <string name="init_geokrety_register_ok">Inici de sessió correcte</string>
     <string name="init_geokrety_register_fail">S\'ha produït un error a l\'accedir</string>
     <string name="init_geokrety_description">Autorizar c:geo a GeoKrety.org per registrar traçables.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org proporciona dades als catxés per a GeoKrety trackables.\n Les dades contenent informació dels GeoKrety com \'Descripció\' o \'misió\'.\n\nLes Dades no són en directe! \nLa Posició: ~ 30 min. \nDescripcions: ~ 24 h.</string>
-    <string name="init_geokrety_cache">Utilitzar GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Usuari: %s</string>
     <string name="trackable_title_log_without_geocode">El Geocodi no es troba</string>
     <string name="trackable_log_without_geocode">Estàs a punt d\'enviar un registre sense un Geocodi. Voleu afegir-lo ara?</string>

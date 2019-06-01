@@ -1492,8 +1492,6 @@
     <string name="init_geokrety_register_ok">Επιτυχής σύνδεση</string>
     <string name="init_geokrety_register_fail">Αποτυχία σύνδεσης</string>
     <string name="init_geokrety_description">Εξουσιοδοτείστε το c:geo να καταγράφει τα ανιχνεύσιμα GeoKrety στο GeoKrety.org.</string>
-    <string name="init_geokrety_cache_description">Το GeokretyMap.org παρέχει κρυφές πληροφορίες για τα ανιχνεύσιμα GeoKrety.\nΤα διαθέσιμα GeoKrety περιλαμβάνουν περισσότερες πληροφορίες όπως \'περιγραφή\' ή \'χαμένο\'.\n\nΤα δεδομένα δεν είναι σε πραγματικό χρόνο!\nΘέσεις: ~30min.\nΠεριγραφές: ~24h.\n.</string>
-    <string name="init_geokrety_cache">Χρήση GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Ταυτότητα χρήστη: %s</string>
     <string name="trackable_title_log_without_geocode">Δεν έχει δοθεί ο κωδικός ανιχνεύσιμου</string>
     <string name="trackable_log_without_geocode">Πρόκειται να στείλετε μια καταγραφή χωρίς κωδικό ανιχνεύσιμου. Καλό είναι να ορίσετε έναν. Θέλετε να τον προσθέσετε τώρα;</string>

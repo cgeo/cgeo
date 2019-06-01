@@ -1492,8 +1492,6 @@
     <string name="init_geokrety_register_ok">Malamposon ang pag login</string>
     <string name="init_geokrety_register_fail">Napakyas ang pag login</string>
     <string name="init_geokrety_description">I-awtorisar ang c:geo uban ang GeoKrety.org para i-log ang GeoKrety na mga trackables.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org kay maghatag og cached na mga datos para sa GeoKrety trackables.\n Ang mga datos kay mas daghan na sulod nga GeoKrety nga mga inpormasyon pareha sa \'diskripsyon\' o \'nawala\' nga estado.\n\nAng mga datos kay dili buhi!\nMga posisyon: ~30min.\nMga deskripsyon: ~24h.</string>
-    <string name="init_geokrety_cache">Gamita ang GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Id sa tagagamit: %s</string>
     <string name="trackable_title_log_without_geocode">Ang Geocode wala ma plastado</string>
     <string name="trackable_log_without_geocode">Ikaw paingon nga na mo padala og log nga walay Geocode. Gidasig na mag plastado og usa. Ganahan ba ka na magpuno karon?</string>

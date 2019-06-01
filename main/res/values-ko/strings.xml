@@ -1475,8 +1475,6 @@
     <string name="init_geokrety_register_ok">로그인 성공</string>
     <string name="init_geokrety_register_fail">로그인 실패!</string>
     <string name="init_geokrety_description">GeoKrety 추적아이템을 로그하려면 GeoKrety.org에서 c:geo를 인증하세요.</string>
-    <string name="init_geokrety_cache_description">GeoKretyMap.org에는 과거의 GeoKrety 추적아이템정보가 들어있습니다.\n\'설명\'이나 \'분실\'등의 GeoKrety 정보가 포함되어 있을 수 있습니다.\n\n데이터가 실시간정보가 아닙니다!\n위치 : ~30분.\n설명 : 약 24시간.</string>
-    <string name="init_geokrety_cache">GeoKretyMap.org 사용하기</string>
     <string name="init_geokrety_userid">사용자 ID : %s</string>
     <string name="trackable_title_log_without_geocode">지오코드 설정되지 않음</string>
     <string name="trackable_log_without_geocode">지오코드 없이 로그를 보낼 예정입니다. 지오코드가 있는게 좋습니다. 추가하시겠습니까?</string>

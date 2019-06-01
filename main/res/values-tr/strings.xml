@@ -1492,8 +1492,6 @@
     <string name="init_geokrety_register_ok">Giriş başarılı</string>
     <string name="init_geokrety_register_fail">Giriş başarısız</string>
     <string name="init_geokrety_description">c:geo\'yu GeoKrety trackable\'larını kayıt edebilmek için GeoKrety.org ile yetkilendir.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org, GeoKrety trackableları verilerini izlemeyi sağlar.\nMevcut veriler \'açıklama\' veya \'kayıp\' durumu gibi daha fazla GeoKrety bilgisi içerir.\n\n Veriler anlık değildir!\n Konum: ~30dk.\n Açıklama: ~24sa.</string>
-    <string name="init_geokrety_cache">GeoKretyMap.org\'u kullanın</string>
     <string name="init_geokrety_userid">Kullanıcı adı:%s</string>
     <string name="trackable_title_log_without_geocode">Geocode ayarlanmadı</string>
     <string name="trackable_log_without_geocode">Geocode\'u olmayan kayıt göndermek üzeresiniz. Bir tane ayarlamanız tavsiye edilir. Şimdi eklemek ister misiniz?</string>

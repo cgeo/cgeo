@@ -1509,8 +1509,6 @@
     <string name="init_geokrety_register_ok">Pieteikšanās izdevās</string>
     <string name="init_geokrety_register_fail">Pieteikšanās neizdevās</string>
     <string name="init_geokrety_description">Autorizē c:geo ar GeoKrety.org, lai reģistrētu GeoKrety ceļotāju.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org sniedz informāciju par GeoKrety ceļotājiem.\nPieejamie dati satur vairāk GeoKrety informācijas, tādus kā \"apraksts\", vai \"pazudis\" statuss.\n\nDati nav reāllaika! \nVietas: ~ 30 min. \nApraksti: ~ 24 h.</string>
-    <string name="init_geokrety_cache">Izmantot GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Lietotāja ID: %s</string>
     <string name="trackable_title_log_without_geocode">Nav ievadīts Geokods</string>
     <string name="trackable_log_without_geocode">Tiks nosūtīts ieraksts bez Geokoda. Ieteicams to ievadīt. Vai pievienot kodu?</string>

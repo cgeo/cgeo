@@ -1492,8 +1492,6 @@
     <string name="init_geokrety_register_ok">Sikeres bejelentkezés</string>
     <string name="init_geokrety_register_fail">Sikertelen bejelentkezés</string>
     <string name="init_geokrety_description">A c:geo hitelesítése a geokrety.org-on GeoKrety tárgyak logolásához.</string>
-    <string name="init_geokrety_cache_description">A geokretymap.org a GeoKrety utazókhoz biztosít adatokat.\nAz elérhető adatok több információt tartalmaznak, mint pl. leírás vagy státuszadatok.\n\nNem élő adatok!\nPoziciók: ~30 perc.\nLeírások: ~24 óra.</string>
-    <string name="init_geokrety_cache">GeoKretyMap.org használata</string>
     <string name="init_geokrety_userid">Felhasználói azonosító: %s</string>
     <string name="trackable_title_log_without_geocode">A geokód nincs beállítva</string>
     <string name="trackable_log_without_geocode">Geokód nélkül akarsz logot küldeni. Kérlek, adj meg egyet! Hozzá akarsz adni egyet most?</string>

@@ -1492,8 +1492,6 @@
     <string name="init_geokrety_register_ok">Inloggen succesvol</string>
     <string name="init_geokrety_register_fail">Inloggen mislukt</string>
     <string name="init_geokrety_description">C:geo autoriseren om op GeoKrety.org GeoKrety trackables te loggen.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org voorziet in de data van GeoKrety trackables.\nBeschikbare data bevat overige GeoKrety informatie zoals \'beschrijving\' of \'ontbreekt\' status.\n\nData is niet live! \nPosities: ~ 30 min. \nOmschrijvingen: ~ 24 h.</string>
-    <string name="init_geokrety_cache">Gebruik GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Gebruikers-id: %s</string>
     <string name="trackable_title_log_without_geocode">Geocode niet ingesteld</string>
     <string name="trackable_log_without_geocode">Je gaat een log zonder Geocode verzenden. Het wordt aanbevolen een Geocode in te stellen. Wil je nu een Geocode toevoegen?</string>

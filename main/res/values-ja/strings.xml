@@ -1476,8 +1476,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="init_geokrety_register_ok">ログインに成功しました</string>
     <string name="init_geokrety_register_fail">ログインに失敗しました</string>
     <string name="init_geokrety_description">GeoKrety.org で c:geo を認証して、GeoKrety トラッカブルをログに記録します。</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org は GeoKrety トラッカブルのキャッシュされたデータを提供します。\n利用可能なデータには \'説明\' または \'行方不明\' 状態のようなより多くの GeoKrety 情報が含まれています。\n\nデータはライブではありません!\n位置: ~30 分。\n説明: ~24時間。</string>
-    <string name="init_geokrety_cache">GeoKretyMap.org を使用する</string>
     <string name="init_geokrety_userid">ユーザID: %s</string>
     <string name="trackable_title_log_without_geocode">ジオコードが設定されていません</string>
     <string name="trackable_log_without_geocode">ジオコードのないログを送信しようとしています。それは設定することが奨励されています。今すぐ追加しますか?</string>

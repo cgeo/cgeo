@@ -1526,8 +1526,6 @@
     <string name="init_geokrety_register_ok">Prihlásenie úspešné</string>
     <string name="init_geokrety_register_fail">Prihlásenie zlyhalo</string>
     <string name="init_geokrety_description">Autorizovať c:geo na GeoKrety.org, aby ste mohli zalogovať trasovateľné predmety GeoKrety.</string>
-    <string name="init_geokrety_cache_description">GeoKretyMap.org poskytuje kešované dáta pre trasovateľné predmety GeoKrety.\nDostupné dáta obsahujú napríklad \'popis\' alebo \'chýbajúci\' status.\n\nDáta nemusia byť aktuálne!\nSúradnice: ~30min.\nPopis: ~24hod.</string>
-    <string name="init_geokrety_cache">Použiť GeoKretyMap.org</string>
     <string name="init_geokrety_userid">ID používateľa: %s</string>
     <string name="trackable_title_log_without_geocode">Geokód nie je nastavený</string>
     <string name="trackable_log_without_geocode">Chystáte sa odoslať log bez geokódu. Neodporúčame to. Chcete ho teraz pridať?</string>

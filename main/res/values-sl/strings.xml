@@ -1526,8 +1526,6 @@
     <string name="init_geokrety_register_ok">Login successful</string>
     <string name="init_geokrety_register_fail">Login failed</string>
     <string name="init_geokrety_description">Authorize c:geo with GeoKrety.org to log GeoKrety trackables.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org provides cached datas for GeoKrety trackables.\nAvailable datas contains more GeoKrety informations like \'description\' or \'missing\' status.\n\nDatas are not live!\nPositions: ~30min.\nDescriptions: ~24h.</string>
-    <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
     <string name="init_geokrety_userid">User Id: %s</string>
     <string name="trackable_title_log_without_geocode">Geocode not set</string>
     <string name="trackable_log_without_geocode">You\'re about to send a log without a Geocode. It\'s encouraged to set one. Do you want to add it now?</string>

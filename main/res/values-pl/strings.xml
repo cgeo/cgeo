@@ -1526,8 +1526,6 @@
     <string name="init_geokrety_register_ok">Zalogowano</string>
     <string name="init_geokrety_register_fail">Logowanie nieudane</string>
     <string name="init_geokrety_description">Zezwól c:geo na logowanie GeoKretów na GeoKrety.org.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org dostarcza informacji o GeoKretach.\nDostępne dane zawierają więcej informacji o GeoKretach takich jak \'opis\' lub status \'zagubiony\' .\n\nDane nie są aktualizowane na bieżąco!\nPozycja: ~30min.\nOpis: ~24h.</string>
-    <string name="init_geokrety_cache">Używaj GeoKretyMap.org</string>
     <string name="init_geokrety_userid">ID użytkownika: %s</string>
     <string name="trackable_title_log_without_geocode">Geokod nie jest ustawiony</string>
     <string name="trackable_log_without_geocode">Masz zamiar wysłać wpis bez Geokodu, ale nie jest to rekomendowane. Czy chciałbyś go dodać teraz?</string>
