@@ -48,8 +48,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -479,12 +477,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (logDate != null && logType != null) {
                 final Uri uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("LUID=" + trackable.getLogGuid()).build();
                 final TextView logView = details.add(R.string.trackable_status, res.getString(R.string.trackable_found, logType.getL10n(), Formatter.formatDate(logDate.getTime()))).right;
-                logView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(final View v) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    }
-                });
+                logView.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, uri)));
             }
 
             // trackable owner
@@ -539,17 +532,14 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 final TextView spotted = details.add(R.string.trackable_spotted, text.toString()).right;
                 spotted.setClickable(true);
                 if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
-                    spotted.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(final View arg0) {
-                            if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
-                                CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
-                            } else {
-                                // for GeoKrety we only know the cache geocode
-                                final String cacheCode = trackable.getSpottedName();
-                                if (ConnectorFactory.canHandle(cacheCode)) {
-                                    CacheDetailActivity.startActivity(TrackableActivity.this, cacheCode);
-                                }
+                    spotted.setOnClickListener(arg0 -> {
+                        if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
+                            CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
+                        } else {
+                            // for GeoKrety we only know the cache geocode
+                            final String cacheCode = trackable.getSpottedName();
+                            if (ConnectorFactory.canHandle(cacheCode)) {
+                                CacheDetailActivity.startActivity(TrackableActivity.this, cacheCode);
                             }
                         }
                     });
@@ -603,12 +593,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
-                trackableImage.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(final View view) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage())));
-                    }
-                });
+                trackableImage.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage()))));
 
                 AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Consumer<BitmapDrawable>() {
                     @Override
@@ -626,21 +611,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public void addContextMenu(final View view) {
-        view.setOnLongClickListener(new OnLongClickListener() {
+        view.setOnLongClickListener(v -> startContextualActionBar(view));
 
-            @Override
-            public boolean onLongClick(final View v) {
-                return startContextualActionBar(view);
-            }
-        });
-
-        view.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                startContextualActionBar(view);
-            }
-        });
+        view.setOnClickListener(v -> startContextualActionBar(view));
     }
 
     private boolean startContextualActionBar(final View view) {

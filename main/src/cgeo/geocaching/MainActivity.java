@@ -41,7 +41,6 @@ import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -60,7 +59,6 @@ import android.support.v7.widget.SearchView.OnSuggestionListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -153,13 +151,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         userInfo.append(conn.getLoginStatusString());
 
                         connectorInfo.setText(userInfo);
-                        connectorInfo.setOnClickListener(new OnClickListener() {
-
-                            @Override
-                            public void onClick(final View v) {
-                                SettingsActivity.openForScreen(R.string.preference_screen_services, activity);
-                            }
-                        });
+                        connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
                     }
                 });
             }
@@ -303,18 +295,10 @@ public class MainActivity extends AbstractActionBarActivity {
             new AlertDialog.Builder(this)
                     .setMessage(perm.getAskAgainResource())
                     .setCancelable(false)
-                    .setPositiveButton(R.string.ask_again, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface dialog, final int which) {
-                            PermissionHandler.askAgainFor(permissions, activity, perm);
-                        }
-                    })
-                    .setNegativeButton(R.string.close_app, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface dialog, final int which) {
-                            activity.finish();
-                            System.exit(0);
-                        }
+                    .setPositiveButton(R.string.ask_again, (dialog, which) -> PermissionHandler.askAgainFor(permissions, activity, perm))
+                    .setNegativeButton(R.string.close_app, (dialog, which) -> {
+                        activity.finish();
+                        System.exit(0);
                     })
                     .setIcon(R.drawable.ic_menu_preferences)
                     .create()
@@ -325,12 +309,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @SuppressWarnings("unused") // in Eclipse, BuildConfig.DEBUG is always true
     private void confirmDebug() {
         if (Settings.isDebug() && !BuildConfig.DEBUG) {
-            Dialogs.confirmYesNo(this, R.string.init_confirm_debug, R.string.list_confirm_debug_message, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int whichButton) {
-                    Settings.setDebug(false);
-                }
-            });
+            Dialogs.confirmYesNo(this, R.string.init_confirm_debug, R.string.list_confirm_debug_message, (dialog, whichButton) -> Settings.setDebug(false));
         }
     }
 
@@ -372,16 +351,13 @@ public class MainActivity extends AbstractActionBarActivity {
 
         for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
             if (mustLogin || !conn.isLoggedIn()) {
-                AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mustLogin) {
-                            // Properly log out from geocaching.com
-                            conn.logout();
-                        }
-                        conn.login(firstLoginHandler, MainActivity.this);
-                        updateUserInfoHandler.sendEmptyMessage(-1);
+                AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+                    if (mustLogin) {
+                        // Properly log out from geocaching.com
+                        conn.logout();
                     }
+                    conn.login(firstLoginHandler, MainActivity.this);
+                    updateUserInfoHandler.sendEmptyMessage(-1);
                 });
             }
         }
@@ -544,68 +520,31 @@ public class MainActivity extends AbstractActionBarActivity {
         initialized = true;
 
         findOnMap.setClickable(true);
-        findOnMap.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                cgeoFindOnMap(v);
-            }
-        });
+        findOnMap.setOnClickListener(v -> cgeoFindOnMap(v));
 
         findByOffline.setClickable(true);
-        findByOffline.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                cgeoFindByOffline(v);
-            }
-        });
-        findByOffline.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(final View v) {
-                new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, new Action1<Integer>() {
-
-                    @Override
-                    public void call(final Integer selectedListId) {
-                        Settings.setLastDisplayedList(selectedListId);
-                        CacheListActivity.startActivityOffline(MainActivity.this);
-                    }
-                }, false, PseudoList.HISTORY_LIST.id);
-                return true;
-            }
+        findByOffline.setOnClickListener(v -> cgeoFindByOffline(v));
+        findByOffline.setOnLongClickListener(v -> {
+            new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, selectedListId -> {
+                Settings.setLastDisplayedList(selectedListId);
+                CacheListActivity.startActivityOffline(MainActivity.this);
+            }, false, PseudoList.HISTORY_LIST.id);
+            return true;
         });
         findByOffline.setLongClickable(true);
 
         advanced.setClickable(true);
-        advanced.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                cgeoSearch(v);
-            }
-        });
+        advanced.setOnClickListener(v -> cgeoSearch(v));
 
         any.setClickable(true);
-        any.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                cgeoPoint(v);
-            }
-        });
+        any.setOnClickListener(v -> cgeoPoint(v));
 
         filter.setClickable(true);
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                selectGlobalTypeFilter();
-            }
-        });
-        filter.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(final View v) {
-                Settings.setCacheType(CacheType.ALL);
-                setFilterTitle();
-                return true;
-            }
+        filter.setOnClickListener(v -> selectGlobalTypeFilter());
+        filter.setOnLongClickListener(v -> {
+            Settings.setCacheType(CacheType.ALL);
+            setFilterTitle();
+            return true;
         });
 
         updateCacheCounter();
@@ -652,20 +591,14 @@ public class MainActivity extends AbstractActionBarActivity {
                 .setTitle(res.getString(R.string.init_backup_restore))
                 .setMessage(res.getString(R.string.init_restore_confirm))
                 .setCancelable(false)
-                .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.dismiss();
-                        DataStore.resetNewlyCreatedDatabase();
-                        DatabaseBackupUtils.restoreDatabase(MainActivity.this);
-                    }
+                .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
+                    dialog.dismiss();
+                    DataStore.resetNewlyCreatedDatabase();
+                    DatabaseBackupUtils.restoreDatabase(MainActivity.this);
                 })
-                .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
-                        DataStore.resetNewlyCreatedDatabase();
-                    }
+                .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
+                    dialog.cancel();
+                    DataStore.resetNewlyCreatedDatabase();
                 })
                 .create()
                 .show();
@@ -678,12 +611,7 @@ public class MainActivity extends AbstractActionBarActivity {
             if (!nearestView.isClickable()) {
                 nearestView.setFocusable(true);
                 nearestView.setClickable(true);
-                nearestView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(final View v) {
-                        cgeoFindNearest(v);
-                    }
-                });
+                nearestView.setOnClickListener(v -> cgeoFindNearest(v));
                 nearestView.setBackgroundResource(R.drawable.main_nearby);
             }
 

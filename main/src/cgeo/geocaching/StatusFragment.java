@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,12 +74,7 @@ public class StatusFragment extends Fragment {
                         statusGroup.setVisibility(View.VISIBLE);
 
                         if (status.url != null) {
-                            statusGroup.setOnClickListener(new OnClickListener() {
-                                @Override
-                                public void onClick(final View v) {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url)));
-                                }
-                            });
+                            statusGroup.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url))));
                         } else {
                             statusGroup.setClickable(false);
                         }

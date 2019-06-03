@@ -68,13 +68,10 @@ public class MagnetometerAndAccelerometerProvider {
                 Log.d("MagnetometerAndAccelerometerProvider: registering listener");
                 sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 sensorManager.registerListener(listener, magnetometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
-                        sensorManager.unregisterListener(listener, accelerometerSensor);
-                        sensorManager.unregisterListener(listener, magnetometerSensor);
-                    }
+                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> {
+                    Log.d("MagnetometerAndAccelerometerProvider: unregistering listener");
+                    sensorManager.unregisterListener(listener, accelerometerSensor);
+                    sensorManager.unregisterListener(listener, magnetometerSensor);
                 }));
             }
         });

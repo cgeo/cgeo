@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -69,19 +68,11 @@ abstract class AbstractClickablePreference extends Preference implements View.On
         builder.setMessage(R.string.auth_forget_message)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(R.string.auth_forget_title)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        revokeAuthorization();
-                        setSummary(R.string.auth_unconnected);
-                    }
+                .setPositiveButton(android.R.string.yes, (dialog, id) -> {
+                    revokeAuthorization();
+                    setSummary(R.string.auth_unconnected);
                 })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
-                    }
-                });
+                .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel());
         builder.create().show();
 
         return true;

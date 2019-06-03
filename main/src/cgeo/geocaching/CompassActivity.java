@@ -34,7 +34,6 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -111,12 +110,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
 
         if (Sensors.getInstance().hasCompassCapabilities()) {
-            useCompassSwitch.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    Settings.setUseCompass(((ToggleButton) view).isChecked());
-                }
-            });
+            useCompassSwitch.setOnClickListener(view -> Settings.setUseCompass(((ToggleButton) view).isChecked()));
             useCompassSwitch.setVisibility(View.VISIBLE);
         } else {
             useCompassSwitch.setVisibility(View.GONE);

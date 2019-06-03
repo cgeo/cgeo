@@ -39,7 +39,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Cancellable;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.disposables.CancellableDisposable;
 import io.reactivex.processors.PublishProcessor;
@@ -217,35 +216,23 @@ public class HtmlImage implements Html.ImageGetter {
             @Override
             public void subscribe(final ObservableEmitter<BitmapDrawable> emitter) throws Exception {
                 // Canceling disposable must sever this connection
-                final CancellableDisposable aborter = new CancellableDisposable(new Cancellable() {
-                    @Override
-                    public void cancel() throws Exception {
-                        emitter.onComplete();
-                    }
-                });
+                final CancellableDisposable aborter = new CancellableDisposable(() -> emitter.onComplete());
                 disposable.add(aborter);
                 // Canceling this subscription must dispose the data retrieval
-                emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
-                    @Override
-                    public void run() {
-                        final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
-                        final BitmapDrawable bitmap = loaded.left;
-                        if (loaded.right) {
-                            if (!onlySave) {
-                                emitter.onNext(bitmap);
-                            }
-                            emitter.onComplete();
-                            return;
-                        }
-                        if (bitmap != null && !onlySave) {
+                emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
+                    final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                    final BitmapDrawable bitmap = loaded.left;
+                    if (loaded.right) {
+                        if (!onlySave) {
                             emitter.onNext(bitmap);
                         }
-                        AndroidRxUtils.networkScheduler.scheduleDirect(new Runnable() {
-                            @Override public void run() {
-                                downloadAndSave(emitter, aborter);
-                            }
-                        });
+                        emitter.onComplete();
+                        return;
                     }
+                    if (bitmap != null && !onlySave) {
+                        emitter.onNext(bitmap);
+                    }
+                    AndroidRxUtils.networkScheduler.scheduleDirect(() -> downloadAndSave(emitter, aborter));
                 }));
             }
 
@@ -273,20 +260,17 @@ public class HtmlImage implements Html.ImageGetter {
                     emitter.onComplete();
                     return;
                 }
-                AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
-                    @Override
-                    public void run() {
-                        final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
-                        final BitmapDrawable image = loaded.left;
-                        if (image != null) {
-                            emitter.onNext(image);
-                        } else {
-                            emitter.onNext(returnErrorImage ?
-                                    new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
-                                    ImageUtils.getTransparent1x1Drawable(resources));
-                        }
-                        emitter.onComplete();
+                AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
+                    final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                    final BitmapDrawable image = loaded.left;
+                    if (image != null) {
+                        emitter.onNext(image);
+                    } else {
+                        emitter.onNext(returnErrorImage ?
+                                new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
+                                ImageUtils.getTransparent1x1Drawable(resources));
                     }
+                    emitter.onComplete();
                 });
             }
         });

@@ -139,16 +139,13 @@ public final class StoredList extends AbstractList {
             final Activity activity = activityRef.get();
             final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle(res.getString(titleId));
-            builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialogInterface, final int itemId) {
-                    final AbstractList list = lists.get(itemId);
-                    if (list == PseudoList.NEW_LIST) {
-                        // create new list on the fly
-                        promptForListCreation(runAfterwards, listNameMemento.getTerm());
-                    } else {
-                        runAfterwards.call(lists.get(itemId).id);
-                    }
+            builder.setItems(listsTitle.toArray(items), (dialogInterface, itemId) -> {
+                final AbstractList list = lists.get(itemId);
+                if (list == PseudoList.NEW_LIST) {
+                    // create new list on the fly
+                    promptForListCreation(runAfterwards, listNameMemento.getTerm());
+                } else {
+                    runAfterwards.call(lists.get(itemId).id);
                 }
             });
             builder.create().show();

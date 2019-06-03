@@ -25,7 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -191,20 +190,9 @@ public abstract class AbstractFileListActivity<T extends RecyclerView.Adapter<? 
             changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, "loaded directories"));
 
             files.addAll(list);
-            Collections.sort(files, new Comparator<File>() {
+            Collections.sort(files, (lhs, rhs) -> TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName()));
 
-                @Override
-                public int compare(final File lhs, final File rhs) {
-                    return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
-                }
-            });
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    adapter.notifyDataSetChanged();
-                }
-            });
+            runOnUiThread(() -> adapter.notifyDataSetChanged());
 
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }

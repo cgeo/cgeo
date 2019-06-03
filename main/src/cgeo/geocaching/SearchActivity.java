@@ -28,8 +28,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
@@ -189,116 +187,22 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void init() {
-        buttonLatitude.setOnClickListener(new OnClickListener() {
+        buttonLatitude.setOnClickListener(v -> updateCoordinates());
+        buttonLongitude.setOnClickListener(v -> updateCoordinates());
 
-            @Override
-            public void onClick(final View v) {
-                updateCoordinates();
-            }
-        });
-        buttonLongitude.setOnClickListener(new OnClickListener() {
+        buttonSearchCoords.setOnClickListener(arg0 -> findByCoordsFn());
 
-            @Override
-            public void onClick(final View v) {
-                updateCoordinates();
-            }
-        });
-
-        buttonSearchCoords.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View arg0) {
-                findByCoordsFn();
-            }
-        });
-
-        setSearchAction(addressEditText, buttonSearchAddress, new Runnable() {
-
-            @Override
-            public void run() {
-                findByAddressFn();
-            }
-        }, null);
-
-        setSearchAction(geocodeEditText, buttonSearchGeocode, new Runnable() {
-
-            @Override
-            public void run() {
-                findByGeocodeFn();
-            }
-        }, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsGeocode(input);
-            }
-        });
-
-        setSearchAction(keywordEditText, buttonSearchKeyword, new Runnable() {
-
-            @Override
-            public void run() {
-                findByKeywordFn();
-            }
-        }, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsKeyword(input);
-            }
-        });
-
-        setSearchAction(finderNameEditText, buttonSearchFinder, new Runnable() {
-
-            @Override
-            public void run() {
-                findByFinderFn();
-            }
-        }, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsFinderName(input);
-            }
-        });
-
-        setSearchAction(ownerNameEditText, buttonSearchOwner, new Runnable() {
-
-            @Override
-            public void run() {
-                findByOwnerFn();
-            }
-        }, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsOwnerName(input);
-            }
-        });
-
-        setSearchAction(trackableEditText, buttonSearchTrackable, new Runnable() {
-
-            @Override
-            public void run() {
-                findTrackableFn();
-            }
-        }, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsTrackableCode(input);
-            }
-        });
+        setSearchAction(addressEditText, buttonSearchAddress, () -> findByAddressFn(), null);
+        setSearchAction(geocodeEditText, buttonSearchGeocode, () -> findByGeocodeFn(), input -> DataStore.getSuggestionsGeocode(input));
+        setSearchAction(keywordEditText, buttonSearchKeyword, () -> findByKeywordFn(), input -> DataStore.getSuggestionsKeyword(input));
+        setSearchAction(finderNameEditText, buttonSearchFinder, () -> findByFinderFn(), input -> DataStore.getSuggestionsFinderName(input));
+        setSearchAction(ownerNameEditText, buttonSearchOwner, () -> findByOwnerFn(), input -> DataStore.getSuggestionsOwnerName(input));
+        setSearchAction(trackableEditText, buttonSearchTrackable, () -> findTrackableFn(), input -> DataStore.getSuggestionsTrackableCode(input));
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
         EditUtils.setActionListener(editText, runnable);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View arg0) {
-                runnable.run();
-            }
-        });
+        button.setOnClickListener(arg0 -> runnable.run());
         if (suggestionFunction != null) {
             editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
         }

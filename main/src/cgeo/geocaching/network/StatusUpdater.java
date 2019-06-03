@@ -80,37 +80,34 @@ public class StatusUpdater {
     }
 
     static {
-        AndroidRxUtils.networkScheduler.schedulePeriodicallyDirect(new Runnable() {
-            @Override
-            public void run() {
-                final Application app = CgeoApplication.getInstance();
-                final String installer = Version.getPackageInstaller(app);
-                final Parameters installerParameters = StringUtils.isNotBlank(installer) ? new Parameters("installer", installer) : null;
-                final Parameters gcMembershipParameters;
-                if (Settings.isGCConnectorActive()) {
-                    final GCMemberState memberState = Settings.getGCMemberStatus();
-                    gcMembershipParameters = new Parameters("gc_membership",
-                            memberState == GCMemberState.PREMIUM || memberState == GCMemberState.CHARTER ? "premium" : "basic");
-                } else {
-                    gcMembershipParameters = null;
-                }
-                Network.requestJSON("https://status.cgeo.org/api/status.json",
-                        Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
-                                "version_name", Version.getVersionName(app),
-                                "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
-                                new Parameters("active_connectors", getActiveConnectorsString())))
-                        .subscribe(new Consumer<ObjectNode>() {
-                            @Override
-                            public void accept(final ObjectNode json) {
-                                LATEST_STATUS.onNext(Status.defaultStatus(new Status(json)));
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(final Throwable throwable) {
-                                // Error has already been signaled during the request
-                            }
-                        });
+        AndroidRxUtils.networkScheduler.schedulePeriodicallyDirect(() -> {
+            final Application app = CgeoApplication.getInstance();
+            final String installer = Version.getPackageInstaller(app);
+            final Parameters installerParameters = StringUtils.isNotBlank(installer) ? new Parameters("installer", installer) : null;
+            final Parameters gcMembershipParameters;
+            if (Settings.isGCConnectorActive()) {
+                final GCMemberState memberState = Settings.getGCMemberStatus();
+                gcMembershipParameters = new Parameters("gc_membership",
+                        memberState == GCMemberState.PREMIUM || memberState == GCMemberState.CHARTER ? "premium" : "basic");
+            } else {
+                gcMembershipParameters = null;
             }
+            Network.requestJSON("https://status.cgeo.org/api/status.json",
+                    Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
+                            "version_name", Version.getVersionName(app),
+                            "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
+                            new Parameters("active_connectors", getActiveConnectorsString())))
+                    .subscribe(new Consumer<ObjectNode>() {
+                        @Override
+                        public void accept(final ObjectNode json) {
+                            LATEST_STATUS.onNext(Status.defaultStatus(new Status(json)));
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(final Throwable throwable) {
+                            // Error has already been signaled during the request
+                        }
+                    });
         }, 0, 1800, TimeUnit.SECONDS);
     }
 

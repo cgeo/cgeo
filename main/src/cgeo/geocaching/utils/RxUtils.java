@@ -11,8 +11,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOperator;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Cancellable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.disposables.CancellableDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -25,17 +23,9 @@ public class RxUtils {
 
     public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
         final AtomicReference<T> lastValue = new AtomicReference<>(initialValue);
-        return observable.doOnNext(new Consumer<T>() {
-            @Override
-            public void accept(final T value) {
-                lastValue.set(value);
-            }
-        }).startWith(Observable.defer(new Callable<Observable<T>>() {
-            @Override
-            public Observable<T> call() {
-                final T last = lastValue.get();
-                return last != null ? Observable.just(last) : Observable.<T>empty();
-            }
+        return observable.doOnNext(value -> lastValue.set(value)).startWith(Observable.defer((Callable<Observable<T>>) () -> {
+            final T last = lastValue.get();
+            return last != null ? Observable.just(last) : Observable.<T>empty();
         })).replay(1).refCount();
     }
 
@@ -105,17 +95,9 @@ public class RxUtils {
 
                 @Override
                 public void onSubscribe(final Disposable d) {
-                    observer.onSubscribe(new CancellableDisposable(new Cancellable() {
-                        @Override
-                        public void cancel() throws Exception {
-                            canceled.set(true);
-                            Schedulers.computation().scheduleDirect(new Runnable() {
-                                @Override
-                                public void run() {
-                                    d.dispose();
-                                }
-                            }, time, unit);
-                        }
+                    observer.onSubscribe(new CancellableDisposable(() -> {
+                        canceled.set(true);
+                        Schedulers.computation().scheduleDirect(() -> d.dispose(), time, unit);
                     }));
                 }
 

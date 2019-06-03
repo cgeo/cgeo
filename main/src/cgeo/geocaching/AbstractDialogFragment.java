@@ -86,43 +86,25 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     protected void initCustomActionBar(final View v) {
         final ImageView defaultNavigationImageView = ButterKnife.findById(v, R.id.defaultNavigation);
-        defaultNavigationImageView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View v) {
-                startDefaultNavigation2();
-                return true;
-            }
+        defaultNavigationImageView.setOnLongClickListener(v12 -> {
+            startDefaultNavigation2();
+            return true;
         });
-        defaultNavigationImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                navigateTo();
-            }
-        });
+        defaultNavigationImageView.setOnClickListener(v1 -> navigateTo());
 
         final View setAsTargetView = v.findViewById(R.id.setAsTarget);
         final View setAsTargetSep = v.findViewById(R.id.setAsTargetSep);
         if (getActivity().getCallingActivity() != null) {
             setAsTargetView.setVisibility(View.VISIBLE);
             setAsTargetSep.setVisibility(View.VISIBLE);
-            setAsTargetView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    setAsTarget();
-                }
-            });
+            setAsTargetView.setOnClickListener(v13 -> setAsTarget());
         } else {
             setAsTargetView.setVisibility(View.GONE);
             setAsTargetSep.setVisibility(View.GONE);
         }
 
         final View overflowActionBar = v.findViewById(R.id.overflowActionBar);
-        overflowActionBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                showPopup(v);
-            }
-        });
+        overflowActionBar.setOnClickListener(v14 -> showPopup(v14));
     }
 
     public final void setTitle(final CharSequence title) {
@@ -145,12 +127,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), popupMenu.getMenu(), cache);
         popupMenu.setOnMenuItemClickListener(
-                new android.widget.PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(final MenuItem item) {
-                       return AbstractDialogFragment.this.onMenuItemClick(item);
-                    }
-                }
+                item -> AbstractDialogFragment.this.onMenuItemClick(item)
         );
         popupMenu.show();
     }
@@ -248,13 +225,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         assert view != null;
         final Button buttonMore = ButterKnife.findById(view, R.id.more_details);
 
-        buttonMore.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View arg0) {
-                CacheDetailActivity.startActivity(getActivity(), geocode);
-                getActivity().finish();
-            }
+        buttonMore.setOnClickListener(arg0 -> {
+            CacheDetailActivity.startActivity(getActivity(), geocode);
+            getActivity().finish();
         });
 
         /* Only working combination as it seems */

@@ -41,8 +41,6 @@ import android.R.string;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -314,12 +312,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private void init() {
         registerForContextMenu(typeButton);
-        typeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                openContextMenu(view);
-            }
-        });
+        typeButton.setOnClickListener(view -> openContextMenu(view));
 
         setType(typeSelected);
         dateButton.setOnClickListener(new DateListener());
@@ -577,14 +570,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     sendLog();
                 } else {
                     // Redirect user to concerned connector settings
-                    Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), new OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface dialog, final int which) {
-                            if (connector.getPreferenceActivity() > 0) {
-                                SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
-                            } else {
-                                showToast(res.getString(R.string.err_trackable_no_preference_activity));
-                            }
+                    Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
+                        if (connector.getPreferenceActivity() > 0) {
+                            SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
+                        } else {
+                            showToast(res.getString(R.string.err_trackable_no_preference_activity));
                         }
                     });
                 }
@@ -676,21 +666,15 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             final int showCount = Settings.getLogTrackableWithoutGeocodeShowCount();
             Settings.setLogTrackableWithoutGeocodeShowCount(showCount + 1);
 
-            builder.setPositiveButton(string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    checkDoNotAskAgain();
-                    dialog.dismiss();
-                }
+            builder.setPositiveButton(string.yes, (dialog, which) -> {
+                checkDoNotAskAgain();
+                dialog.dismiss();
             });
-            builder.setNegativeButton(string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    checkDoNotAskAgain();
-                    dialog.dismiss();
-                    // Post the log
-                    postLog();
-                }
+            builder.setNegativeButton(string.no, (dialog, which) -> {
+                checkDoNotAskAgain();
+                dialog.dismiss();
+                // Post the log
+                postLog();
             });
             return builder.create();
         }

@@ -51,17 +51,14 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
             holder.countOrLocation.setVisibility(View.VISIBLE);
             final String cacheGuid = log.cacheGuid;
             final String cacheName = log.cacheName;
-            holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View arg0) {
-                    if (StringUtils.isNotBlank(cacheGuid)) {
-                        CacheDetailActivity.startActivityGuid(activity, cacheGuid, TextUtils.stripHtml(cacheName));
-                    } else {
-                        // for GeoKrety we only know the cache geocode
-                        final String cacheGeocode = log.cacheGeocode;
-                        if (ConnectorFactory.canHandle(cacheGeocode)) {
-                            CacheDetailActivity.startActivity(activity, cacheGeocode);
-                        }
+            holder.countOrLocation.setOnClickListener(arg0 -> {
+                if (StringUtils.isNotBlank(cacheGuid)) {
+                    CacheDetailActivity.startActivityGuid(activity, cacheGuid, TextUtils.stripHtml(cacheName));
+                } else {
+                    // for GeoKrety we only know the cache geocode
+                    final String cacheGeocode = log.cacheGeocode;
+                    if (ConnectorFactory.canHandle(cacheGeocode)) {
+                        CacheDetailActivity.startActivity(activity, cacheGeocode);
                     }
                 }
             });

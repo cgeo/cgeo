@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.media.ExifInterface;
 import android.text.Html;
-import android.text.Html.ImageGetter;
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.widget.TextView;
@@ -364,18 +363,15 @@ public final class ImageUtils {
             urls.add(image.getUrl());
         }
         for (final String text: htmlText) {
-            Html.fromHtml(StringUtils.defaultString(text), new ImageGetter() {
-                @Override
-                public Drawable getDrawable(final String source) {
-                    if (!urls.contains(source) && canBeOpenedExternally(source)) {
-                        images.add(new Image.Builder()
-                                .setUrl(source)
-                                .setTitle(StringUtils.defaultString(geocode))
-                                .build());
-                        urls.add(source);
-                    }
-                    return null;
+            Html.fromHtml(StringUtils.defaultString(text), source -> {
+                if (!urls.contains(source) && canBeOpenedExternally(source)) {
+                    images.add(new Image.Builder()
+                            .setUrl(source)
+                            .setTitle(StringUtils.defaultString(geocode))
+                            .build());
+                    urls.add(source);
                 }
+                return null;
             }, null);
         }
     }
@@ -394,12 +390,7 @@ public final class ImageUtils {
         private static final Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
         private static final LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
         private static final Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
-        private static final Runnable REDRAW_QUEUED_DRAWABLES = new Runnable() {
-            @Override
-            public void run() {
-                redrawQueuedDrawables();
-            }
-        };
+        private static final Runnable REDRAW_QUEUED_DRAWABLES = () -> redrawQueuedDrawables();
 
         private Drawable drawable;
         protected final WeakReference<TextView> viewRef;

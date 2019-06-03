@@ -45,7 +45,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -546,20 +545,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         if (!toRefresh.isEmpty()) {
-            AndroidRxUtils.refreshScheduler.scheduleDirect(new Runnable() {
-                @Override
-                public void run() {
-                    for (final String geocode : toRefresh) {
-                        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-                        if (cache != null) {
-                            // new collection type needs to remove first
-                            caches.remove(cache);
-                            // re-add to update the freshness
-                            caches.add(cache);
-                        }
+            AndroidRxUtils.refreshScheduler.scheduleDirect(() -> {
+                for (final String geocode : toRefresh) {
+                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                    if (cache != null) {
+                        // new collection type needs to remove first
+                        caches.remove(cache);
+                        // re-add to update the freshness
+                        caches.add(cache);
                     }
-                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
                 }
+                displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
             });
         }
     }
@@ -779,12 +775,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             if (Settings.getChooseList()) {
                 // let user select list to store cache in
-                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.lists_title, new Action1<Set<Integer>>() {
-                    @Override
-                    public void call(final Set<Integer> selectedListIds) {
-                        storeCaches(geocodesInViewport, selectedListIds);
-                    }
-                }, true, Collections.<Integer>emptySet(), false);
+                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodesInViewport, selectedListIds), true, Collections.<Integer>emptySet(), false);
             } else {
                 storeCaches(geocodesInViewport, Collections.singleton(StoredList.STANDARD_LIST_ID));
             }
@@ -834,21 +825,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         builder.setTitle(R.string.map_theme_select);
 
         builder.setSingleChoiceItems(names.toArray(new String[names.size()]), selectedItem,
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int newItem) {
-                        if (newItem != selectedItem) {
-                            // Adjust index because of <default> selection
-                            if (newItem > 0) {
-                                Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
-                            } else {
-                                Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
-                            }
-                            mapView.setMapTheme();
+                (dialog, newItem) -> {
+                    if (newItem != selectedItem) {
+                        // Adjust index because of <default> selection
+                        if (newItem > 0) {
+                            Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
+                        } else {
+                            Settings.setCustomRenderThemeFile(StringUtils.EMPTY);
                         }
-                        dialog.cancel();
+                        mapView.setMapTheme();
                     }
+                    dialog.cancel();
                 });
 
         builder.show();

@@ -11,8 +11,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 
 public class RotationProvider {
 
@@ -40,52 +38,46 @@ public class RotationProvider {
             Log.w("RotationProvider: no rotation sensor on this device");
             return Observable.error(new RuntimeException("no rotation sensor"));
         }
-        final Observable<Float> observable = Observable.create(new ObservableOnSubscribe<Float>() {
-            @Override
-            public void subscribe(final ObservableEmitter<Float> emitter) throws Exception {
-                final SensorEventListener listener = new SensorEventListener() {
+        final Observable<Float> observable = Observable.create(emitter -> {
+            final SensorEventListener listener = new SensorEventListener() {
 
-                    private final float[] rotationMatrix = new float[16];
-                    private final float[] orientation = new float[4];
-                    private final float[] values = new float[4];
+                private final float[] rotationMatrix = new float[16];
+                private final float[] orientation = new float[4];
+                private final float[] values = new float[4];
 
-                    @Override
-                    public void onSensorChanged(final SensorEvent event) {
-                        if (isTruncationNeeded) {
-                            // Since only the four first elements are used (and accepted), we truncate the vector.
-                            System.arraycopy(event.values, 0, values, 0, 4);
-                            SensorManager.getRotationMatrixFromVector(rotationMatrix, values);
-                        } else {
-                            try {
-                                SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
-                            } catch (final IllegalArgumentException ignored) {
-                                Log.d("installing workaround for mismatched number of values in rotation vector");
-                                // Install workaround and retry
-                                isTruncationNeeded = true;
-                                onSensorChanged(event);
-                                return;
-                            }
+                @Override
+                public void onSensorChanged(final SensorEvent event) {
+                    if (isTruncationNeeded) {
+                        // Since only the four first elements are used (and accepted), we truncate the vector.
+                        System.arraycopy(event.values, 0, values, 0, 4);
+                        SensorManager.getRotationMatrixFromVector(rotationMatrix, values);
+                    } else {
+                        try {
+                            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
+                        } catch (final IllegalArgumentException ignored) {
+                            Log.d("installing workaround for mismatched number of values in rotation vector");
+                            // Install workaround and retry
+                            isTruncationNeeded = true;
+                            onSensorChanged(event);
+                            return;
                         }
-                        SensorManager.getOrientation(rotationMatrix, orientation);
-                        emitter.onNext((float) (orientation[0] * 180 / Math.PI));
                     }
+                    SensorManager.getOrientation(rotationMatrix, orientation);
+                    emitter.onNext((float) (orientation[0] * 180 / Math.PI));
+                }
 
-                    @Override
-                    public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
-                        // empty
-                    }
+                @Override
+                public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
+                    // empty
+                }
 
-                };
-                Log.d("RotationProvider: registering listener");
-                sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("RotationProvider: unregistering listener");
-                        sensorManager.unregisterListener(listener, rotationSensor);
-                    }
-                }));
-            }
+            };
+            Log.d("RotationProvider: registering listener");
+            sensorManager.registerListener(listener, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> {
+                Log.d("RotationProvider: unregistering listener");
+                sensorManager.unregisterListener(listener, rotationSensor);
+            }));
         });
         return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share();
     }

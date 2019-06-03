@@ -47,12 +47,9 @@ public class GeoDataProvider {
                 } catch (final Exception e) {
                     Log.w("Unable to create network location provider: " + e.getMessage());
                 }
-                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(new Runnable() {
-                    @Override
-                    public void run() {
-                        geoManager.removeUpdates(networkListener);
-                        geoManager.removeUpdates(gpsListener);
-                    }
+                emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> {
+                    geoManager.removeUpdates(networkListener);
+                    geoManager.removeUpdates(gpsListener);
                 }));
             }
         });

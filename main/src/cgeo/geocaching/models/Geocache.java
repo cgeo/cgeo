@@ -1626,15 +1626,12 @@ public class Geocache implements IWaypoint {
     }
 
     public Disposable drop(final Handler handler) {
-        return Schedulers.io().scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    dropSynchronous();
-                    handler.sendMessage(Message.obtain());
-                } catch (final Exception e) {
-                    Log.e("cache.drop: ", e);
-                }
+        return Schedulers.io().scheduleDirect(() -> {
+            try {
+                dropSynchronous();
+                handler.sendMessage(Message.obtain());
+            } catch (final Exception e) {
+                Log.e("cache.drop: ", e);
             }
         });
     }
@@ -1671,12 +1668,7 @@ public class Geocache implements IWaypoint {
     }
 
     public Disposable refresh(final DisposableHandler handler, final Scheduler scheduler) {
-        return scheduler.scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                refreshSynchronous(handler);
-            }
-        });
+        return scheduler.scheduleDirect(() -> refreshSynchronous(handler));
     }
 
     public void refreshSynchronous(final DisposableHandler handler) {

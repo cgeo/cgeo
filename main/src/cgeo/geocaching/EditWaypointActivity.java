@@ -33,7 +33,6 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -162,16 +161,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         Dialogs.moveCursorToEnd(userNote);
                     }
-                    AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                        @Override
-                        public void run() {
-                            DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY);
-                        }
-                    }, new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode));
-                        }
+                    AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                        DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY);
+                    }, () -> {
+                        activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode));
                     });
                 }
 
@@ -447,19 +440,16 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         private void showCoordinateOptionsDialog(final View view, final Geopoint geopoint, final Geocache cache) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
             builder.setTitle(res.getString(R.string.waypoint_coordinates));
-            builder.setItems(R.array.waypoint_coordinates_options, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int item) {
-                    final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
-                    if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
-                        ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
-                        showToast(res.getString(R.string.clipboard_copy_ok));
-                    } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
-                        final Waypoint copy = cache.duplicateWaypoint(waypoint);
-                        if (copy != null) {
-                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            EditWaypointActivity.startActivityEditWaypoint(EditWaypointActivity.this, cache, copy.getId());
-                        }
+            builder.setItems(R.array.waypoint_coordinates_options, (dialog, item) -> {
+                final String selectedOption = res.getStringArray(R.array.waypoint_coordinates_options)[item];
+                if (res.getString(R.string.waypoint_copy_coordinates).equals(selectedOption) && geopoint != null) {
+                    ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(geopoint.toString()));
+                    showToast(res.getString(R.string.clipboard_copy_ok));
+                } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
+                    final Waypoint copy = cache.duplicateWaypoint(waypoint);
+                    if (copy != null) {
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        EditWaypointActivity.startActivityEditWaypoint(EditWaypointActivity.this, cache, copy.getId());
                     }
                 }
             });
@@ -557,12 +547,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final ActivityData currentState = getActivityData();
 
         if (currentState != null && isWaypointChanged(currentState)) {
-            Dialogs.confirm(this, R.string.confirm_unsaved_changes_title, R.string.confirm_discard_wp_changes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    finish();
-                }
-            });
+            Dialogs.confirm(this, R.string.confirm_unsaved_changes_title, R.string.confirm_discard_wp_changes, (dialog, which) -> finish());
         } else {
             finish();
         }
@@ -691,13 +676,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final Handler finishHandler = new FinishWaypointSaveHandler(this, currentState.coords);
 
-        AndroidRxUtils.computationScheduler.scheduleDirect(new Runnable() {
-            @Override
-            public void run() {
-                saveWaypointInBackground(currentState, finishHandler);
-            }
-        });
-
+        AndroidRxUtils.computationScheduler.scheduleDirect(() -> saveWaypointInBackground(currentState, finishHandler));
     }
 
     protected void saveWaypointInBackground(final ActivityData currentState, final Handler finishHandler) {

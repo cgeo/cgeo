@@ -8,7 +8,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
@@ -54,27 +53,20 @@ public class TemplateTextPreference extends DialogPreference {
         Dialogs.moveCursorToEnd(editText);
 
         final Button button = ButterKnife.findById(view, R.id.signature_templates);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View button) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(TemplateTextPreference.this.getContext());
-                alert.setTitle(R.string.init_signature_template_button);
-                final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
-                final String[] items = new String[templates.size()];
-                for (int i = 0; i < templates.size(); i++) {
-                    items[i] = settingsActivity.getString(templates.get(i).getResourceId());
-                }
-                alert.setItems(items, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int position) {
-                        dialog.dismiss();
-                        final LogTemplate template = templates.get(position);
-                        insertSignatureTemplate(template);
-                    }
-                });
-                alert.create().show();
+        button.setOnClickListener(button1 -> {
+            final AlertDialog.Builder alert = new AlertDialog.Builder(TemplateTextPreference.this.getContext());
+            alert.setTitle(R.string.init_signature_template_button);
+            final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
+            final String[] items = new String[templates.size()];
+            for (int i = 0; i < templates.size(); i++) {
+                items[i] = settingsActivity.getString(templates.get(i).getResourceId());
             }
+            alert.setItems(items, (dialog, position) -> {
+                dialog.dismiss();
+                final LogTemplate template = templates.get(position);
+                insertSignatureTemplate(template);
+            });
+            alert.create().show();
         });
 
         super.onBindDialogView(view);

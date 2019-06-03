@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -102,13 +101,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             } else {
                 changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
-            changeLogLink.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(final View v) {
-                    startUrl("https://github.com/cgeo/cgeo/releases");
-                }
-            });
+            changeLogLink.setOnClickListener(v -> startUrl("https://github.com/cgeo/cgeo/releases"));
             return view;
         }
 
@@ -128,23 +121,17 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             system.setText(systemInfo);
             system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             system.setTextIsSelectable(true);
-            copy.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    ClipboardUtils.copyToClipboard(systemInfo);
-                    showShortToast(getString(R.string.clipboard_copy_ok));
-                }
+            copy.setOnClickListener(view1 -> {
+                ClipboardUtils.copyToClipboard(systemInfo);
+                showShortToast(getString(R.string.clipboard_copy_ok));
             });
-            share.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    ClipboardUtils.copyToClipboard(systemInfo);
-                    final Intent share = new Intent(Intent.ACTION_SENDTO);
-                    share.setData(Uri.parse("mailto:"));
-                    share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_system_info));
-                    share.putExtra(Intent.EXTRA_TEXT, systemInfo);
-                    startActivity(Intent.createChooser(share, getString(R.string.about_system_info_send_chooser)));
-                }
+            share.setOnClickListener(view12 -> {
+                ClipboardUtils.copyToClipboard(systemInfo);
+                final Intent share = new Intent(Intent.ACTION_SENDTO);
+                share.setData(Uri.parse("mailto:"));
+                share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_system_info));
+                share.putExtra(Intent.EXTRA_TEXT, systemInfo);
+                startActivity(Intent.createChooser(share, getString(R.string.about_system_info_send_chooser)));
             });
             return view;
         }
@@ -171,13 +158,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             setClickListener(twitter, "https://twitter.com/android_gc");
             setClickListener(nutshellmanual, "https://manual.cgeo.org/");
             setClickListener(faq, "http://faq.cgeo.org/");
-            market.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(final View v) {
-                    ProcessUtils.openMarket(AboutActivity.this, getPackageName());
-                }
-            });
+            market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
             return view;
         }
 
@@ -192,13 +173,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_starting_page, parentView, false);
             ButterKnife.bind(this, view);
 
-            services.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(final View v) {
-                    SettingsActivity.openForScreen(R.string.preference_screen_services, AboutActivity.this);
-                }
-            });
+            services.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, AboutActivity.this));
             return view;
         }
 
@@ -255,13 +230,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     }
 
     public final void setClickListener(final View view, final String url) {
-        view.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                startUrl(url);
-            }
-        });
+        view.setOnClickListener(v -> startUrl(url));
     }
 
     private void startUrl(final String url) {

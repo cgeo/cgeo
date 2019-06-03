@@ -37,15 +37,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -227,13 +224,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void setWebsite(final int preferenceKey, final String urlOrHost) {
         final Preference preference = getPreference(preferenceKey);
-        preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
-                ProcessUtils.openUri(url, SettingsActivity.this);
-                return true;
-            }
+        preference.setOnPreferenceClickListener(preference1 -> {
+            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+            ProcessUtils.openUri(url, SettingsActivity.this);
+            return true;
         });
     }
 
@@ -277,25 +271,16 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
 
         final AtomicLong usedBytes = new AtomicLong();
-        dataDirPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                final ProgressDialog progress = ProgressDialog.show(SettingsActivity.this, getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                    @Override
-                    public void run() {
-                        // calculate disk usage
-                        usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));
-                    }
-                }, new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.dismiss();
-                        showExtCgeoDirChooser(usedBytes.get());
-                    }
-                });
-                return true;
-            }
+        dataDirPref.setOnPreferenceClickListener(preference -> {
+            final ProgressDialog progress = ProgressDialog.show(SettingsActivity.this, getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                // calculate disk usage
+                usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));
+            }, () -> {
+                progress.dismiss();
+                showExtCgeoDirChooser(usedBytes.get());
+            });
+            return true;
         });
 
     }
@@ -341,29 +326,18 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             public boolean isEnabled(final int position) {
                 return usedBytes < freeSpaces.get(position);
             }
-        }, selectedDirIndex, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int itemId) {
-                Dialogs.confirm(SettingsActivity.this, R.string.confirm_data_dir_move_title, R.string.confirm_data_dir_move, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int which) {
-                        final File dir = extDirs.get(itemId);
-                        if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
-                            LocalStorage.changeExternalPrivateCgeoDir(SettingsActivity.this, dir.getAbsolutePath());
-                        }
-                        Settings.setExternalPrivateCgeoDirectory(dir.getAbsolutePath());
-                        onPreferenceChange(getPreference(R.string.pref_fakekey_dataDir), dir.getAbsolutePath());
-                    }
-                });
-                dialog.dismiss();
-            }
+        }, selectedDirIndex, (dialog, itemId) -> {
+            Dialogs.confirm(SettingsActivity.this, R.string.confirm_data_dir_move_title, R.string.confirm_data_dir_move, (dialog1, which) -> {
+                final File dir = extDirs.get(itemId);
+                if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                    LocalStorage.changeExternalPrivateCgeoDir(SettingsActivity.this, dir.getAbsolutePath());
+                }
+                Settings.setExternalPrivateCgeoDirectory(dir.getAbsolutePath());
+                onPreferenceChange(getPreference(R.string.pref_fakekey_dataDir), dir.getAbsolutePath());
+            });
+            dialog.dismiss();
         });
-        builder.setNegativeButton(string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(string.cancel, (dialog, which) -> dialog.cancel());
         builder.create().show();
     }
 
@@ -402,24 +376,18 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         for (final DirChooserType dct : DirChooserType.values()) {
 
             getPreference(dct.keyId).setOnPreferenceClickListener(
-                    new OnPreferenceClickListener() {
-                        @Override
-                        public boolean onPreferenceClick(final Preference preference) {
-                            startDirChooser(dct);
-                            return false;
-                        }
+                    preference -> {
+                        startDirChooser(dct);
+                        return false;
                     });
         }
 
         getPreference(R.string.pref_mapDirectory).setOnPreferenceClickListener(
-                new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(final Preference preference) {
-                        final Intent intent = new Intent(SettingsActivity.this,
-                                SelectMapfileActivity.class);
-                        startActivityForResult(intent, R.string.pref_mapDirectory);
-                        return false;
-                    }
+                preference -> {
+                    final Intent intent = new Intent(SettingsActivity.this,
+                            SelectMapfileActivity.class);
+                    startActivityForResult(intent, R.string.pref_mapDirectory);
+                    return false;
                 });
     }
 
@@ -468,64 +436,39 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void initBackupButtons() {
         final Preference backup = getPreference(R.string.pref_fakekey_preference_backup);
-        backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                DatabaseBackupUtils.createBackup(SettingsActivity.this, new Runnable() {
-
-                    @Override
-                    public void run() {
-                        onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backup), "");
-                    }
-                });
-                return true;
-            }
+        backup.setOnPreferenceClickListener(preference -> {
+            DatabaseBackupUtils.createBackup(SettingsActivity.this, () -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backup), ""));
+            return true;
         });
 
         final Preference restore = getPreference(R.string.pref_fakekey_preference_restore);
-        restore.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);
-                return true;
-            }
+        restore.setOnPreferenceClickListener(preference -> {
+            DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);
+            return true;
         });
     }
 
     private void initMaintenanceButtons() {
         final Preference dirMaintenance = getPreference(R.string.pref_fakekey_preference_maintenance_directories);
-        dirMaintenance.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                // disable the button, as the cleanup runs in background and should not be invoked a second time
-                preference.setEnabled(false);
+        dirMaintenance.setOnPreferenceClickListener(preference -> {
+            // disable the button, as the cleanup runs in background and should not be invoked a second time
+            preference.setEnabled(false);
 
-                final Resources res = getResources();
-                final SettingsActivity activity = SettingsActivity.this;
-                final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-                    @Override
-                    public void run() {
-                        DataStore.removeObsoleteGeocacheDataDirectories();
-                    }
-                }, new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                    }
-                });
-                return true;
-                }
+            final Resources res = getResources();
+            final SettingsActivity activity = SettingsActivity.this;
+            final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                DataStore.removeObsoleteGeocacheDataDirectories();
+            }, () -> {
+                dialog.dismiss();
+            });
+            return true;
             });
         final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
         memoryDumpPref
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(
-                            final Preference preference) {
-                        DebugUtils.createMemoryDump(SettingsActivity.this);
-                        return true;
-                    }
+                .setOnPreferenceClickListener(preference -> {
+                    DebugUtils.createMemoryDump(SettingsActivity.this);
+                    return true;
                 });
     }
 
@@ -543,71 +486,53 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void initDbLocationPreference() {
         final Preference p = getPreference(R.string.pref_dbonsdcard);
         p.setPersistent(false);
-        p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                final boolean oldValue = Settings.isDbOnSDCard();
-                DataStore.moveDatabase(SettingsActivity.this);
-                return oldValue != Settings.isDbOnSDCard();
-            }
+        p.setOnPreferenceClickListener(preference -> {
+            final boolean oldValue = Settings.isDbOnSDCard();
+            DataStore.moveDatabase(SettingsActivity.this);
+            return oldValue != Settings.isDbOnSDCard();
         });
     }
 
     private void initDebugPreference() {
         final Preference p = getPreference(R.string.pref_debug);
-        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                Log.setDebug((Boolean) newValue);
-                return true;
-            }
+        p.setOnPreferenceChangeListener((preference, newValue) -> {
+            Log.setDebug((Boolean) newValue);
+            return true;
         });
     }
 
     private void initForceOrientationSensorPreference() {
         final Preference p = getPreference(R.string.pref_force_orientation_sensor);
-        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                final boolean useOrientationSensor = (Boolean) newValue;
-                Settings.setForceOrientationSensor(useOrientationSensor);
-                Sensors.getInstance().setupDirectionObservable();
-                return true;
-            }
+        p.setOnPreferenceChangeListener((preference, newValue) -> {
+            final boolean useOrientationSensor = (Boolean) newValue;
+            Settings.setForceOrientationSensor(useOrientationSensor);
+            Sensors.getInstance().setupDirectionObservable();
+            return true;
         });
         p.setEnabled(OrientationProvider.hasOrientationSensor(this) && RotationProvider.hasRotationSensor(this));
     }
 
     private void initLanguagePreferences() {
         final Preference p = getPreference(R.string.pref_useenglish);
-        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                setResult(RESTART_NEEDED);
-                return true;
-            }
+        p.setOnPreferenceChangeListener((preference, newValue) -> {
+            setResult(RESTART_NEEDED);
+            return true;
         });
     }
 
     private void initGeoDirPreferences() {
         final Sensors sensors = Sensors.getInstance();
         final Preference playServices = getPreference(R.string.pref_googleplayservices);
-        playServices.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                sensors.setupGeoDataObservables((Boolean) newValue, Settings.useLowPowerMode());
-                return true;
-            }
+        playServices.setOnPreferenceChangeListener((preference, newValue) -> {
+            sensors.setupGeoDataObservables((Boolean) newValue, Settings.useLowPowerMode());
+            return true;
         });
         playServices.setEnabled(GooglePlayServices.isAvailable());
-        getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                final boolean useLowPower = (Boolean) newValue;
-                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
-                sensors.setupDirectionObservable();
-                return true;
-            }
+        getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener((preference, newValue) -> {
+            final boolean useLowPower = (Boolean) newValue;
+            sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
+            sensors.setupDirectionObservable();
+            return true;
         });
     }
 

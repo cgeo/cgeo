@@ -9,7 +9,6 @@ import cgeo.geocaching.models.Trackable;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -60,12 +59,7 @@ public abstract class UserClickListener implements View.OnClickListener {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(res.getString(R.string.user_menu_title) + " " + user.userName);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int item) {
-                userActions.get(item).run(user);
-            }
-        });
+        builder.setItems(items, (dialog, item) -> userActions.get(item).run(user));
         final AlertDialog alert = builder.create();
         alert.show();
     }

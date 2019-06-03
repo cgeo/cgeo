@@ -7,8 +7,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,13 +41,7 @@ public class DatabaseBackupUtils {
         if (caches == 0) {
             restoreDatabaseInternal(activity);
         } else {
-            Dialogs.confirm(activity, R.string.init_backup_restore, activity.getString(R.string.restore_confirm_overwrite, activity.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)), new OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    restoreDatabaseInternal(activity);
-                }
-            });
+            Dialogs.confirm(activity, R.string.init_backup_restore, activity.getString(R.string.restore_confirm_overwrite, activity.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)), (dialog, which) -> restoreDatabaseInternal(activity));
 
         }
     }
@@ -58,21 +50,13 @@ public class DatabaseBackupUtils {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Runnable() {
-            @Override
-            public void run() {
-                restoreSuccessful.set(DataStore.restoreDatabaseInternal());
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-                final boolean restored = restoreSuccessful.get();
-                final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                Dialogs.message(activity, R.string.init_backup_restore, message);
-                if (activity instanceof MainActivity) {
-                    ((MainActivity) activity).updateCacheCounter();
-                }
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal()), () -> {
+            dialog.dismiss();
+            final boolean restored = restoreSuccessful.get();
+            final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+            Dialogs.message(activity, R.string.init_backup_restore, message);
+            if (activity instanceof MainActivity) {
+                ((MainActivity) activity).updateCacheCounter();
             }
         });
     }
@@ -89,13 +73,7 @@ public class DatabaseBackupUtils {
             return;
         }
         if (hasBackup()) {
-            Dialogs.confirm(activity, R.string.init_backup, activity.getString(R.string.backup_confirm_overwrite, getBackupDateTime()), new OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    createBackupInternal(activity, runAfterwards);
-                }
-            });
+            Dialogs.confirm(activity, R.string.init_backup, activity.getString(R.string.backup_confirm_overwrite, getBackupDateTime()), (dialog, which) -> createBackupInternal(activity, runAfterwards));
         } else {
             createBackupInternal(activity, runAfterwards);
         }

@@ -24,7 +24,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
-import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.subjects.ReplaySubject;
 
@@ -91,19 +90,13 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
                         emitter.onComplete();
                     }
                 });
-                emitter.setDisposable(Disposables.fromRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        disposable.dispose();
-                        AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (reference.decrementAndGet() == 0) {
-                                    instance.updateRequest();
-                                }
-                            }
-                        }, 2500, TimeUnit.MILLISECONDS);
-                    }
+                emitter.setDisposable(Disposables.fromRunnable(() -> {
+                    disposable.dispose();
+                    AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(() -> {
+                        if (reference.decrementAndGet() == 0) {
+                            instance.updateRequest();
+                        }
+                    }, 2500, TimeUnit.MILLISECONDS);
                 }));
             }
         });
@@ -124,12 +117,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
         // no less precise than 20 meters.
         final Observable<GeoData> untilPreciseEnoughObservable =
                 lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6, TimeUnit.SECONDS))
-                        .takeUntil(new Predicate<GeoData>() {
-                            @Override
-                            public boolean test(final GeoData geoData) {
-                                return geoData.getAccuracy() <= 20;
-                            }
-                        });
+                        .takeUntil(geoData -> geoData.getAccuracy() <= 20);
 
         // After sending the last known location, try to get a precise location then use the low-power mode. If no
         // location information is given for 25 seconds (if the network location is turned off for example), get
