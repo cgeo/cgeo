@@ -35,6 +35,7 @@ import org.mapsforge.v3.android.maps.Projection;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.android.maps.mapgenerator.tiledownloader.TileDownloader;
 import org.mapsforge.v3.android.maps.overlay.Overlay;
 import org.mapsforge.v3.core.GeoPoint;
 public class MapsforgeMapView extends MapView implements MapViewImpl {
@@ -194,6 +195,11 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         }
 
         final MapGenerator mapGenerator = MapGeneratorFactory.createMapGenerator(newMapType);
+
+        // Check for tile downloading, set UA
+        if (mapGenerator instanceof TileDownloader) {
+            ((TileDownloader) mapGenerator).setUserAgent(MapsforgeMapSource.MAPNIK_TILE_DOWNLOAD_UA);
+        }
 
         // When swapping map sources, make sure we aren't exceeding max zoom. See bug #1535
         final int maxZoom = mapGenerator.getZoomLevelMax();
