@@ -74,7 +74,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListAdapter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.File;
@@ -137,7 +136,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private ProgressDialog waitDialog;
     private LoadDetails loadDetailsThread;
-    private ProgressBar spinner;
 
     private String themeSettingsPref = "";
 
@@ -200,10 +198,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         setContentView(R.layout.map_mapsforge_v6);
         setTitle();
-
-        // prepare circular progress spinner
-        spinner = (ProgressBar) findViewById(R.id.map_progressbar);
-        spinner.setVisibility(View.GONE);
 
         // initialize map
         mapView = (MfMapView) findViewById(R.id.mfmapv5);
@@ -1146,7 +1140,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             if (map == null) {
                 return;
             }
-            map.spinner.setVisibility(show ? View.VISIBLE : View.GONE);
+            map.setProgressBarIndeterminateVisibility(show);
         }
 
     }

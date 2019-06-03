@@ -60,9 +60,7 @@
             android:textSize="18sp"
             android:visibility="gone"
             android:maxLines="1" />
-
-        <include layout="@layout/map_progressbar" />
-
+        
     </RelativeLayout>
 
 </LinearLayout>
