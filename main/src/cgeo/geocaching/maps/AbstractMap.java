@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 
 /**
  * Base class for the map activity. Delegates base class calls to the
@@ -33,8 +32,6 @@ public abstract class AbstractMap {
 
     public void onCreate(final Bundle savedInstanceState) {
         mapActivity.superOnCreate(savedInstanceState);
-        mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
         Routing.connect();
     }
 

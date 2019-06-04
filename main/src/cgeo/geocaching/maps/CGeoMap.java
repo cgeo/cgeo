@@ -161,6 +161,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private int detailTotal = 0;
     private int detailProgress = 0;
     private long detailProgressTime = 0L;
+    private ProgressBar spinner;
 
     // views
     private CheckBox myLocSwitch = null;
@@ -322,13 +323,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (map == null) {
                 return;
             }
-
-            final ProgressBar progress = ButterKnife.findById(map.activity, R.id.actionbar_progress);
-            if (progress != null) {
-                final int visibility = show ? View.VISIBLE : View.GONE;
-                progress.setVisibility(visibility);
-            }
-            map.activity.setProgressBarIndeterminateVisibility(show);
+            map.spinner.setVisibility(show ? View.VISIBLE : View.GONE);
         }
 
     }
@@ -472,6 +467,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             overlayPositionAndScale.setHistory(trailHistory);
         }
 
+        // prepare circular progress spinner
+        spinner = (ProgressBar) activity.findViewById(R.id.map_progressbar);
+        spinner.setVisibility(View.GONE);
 
         mapView.repaintRequired(null);
 
