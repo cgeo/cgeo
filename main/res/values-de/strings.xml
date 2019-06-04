@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">Entferne Caches…</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
+    <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -421,6 +422,15 @@
     <string name="about_license">Lizenz</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hilfe</string>
+    <string name="about_starting">Erste Schritte</string>
+    <string name="about_starting_head">Erste Schritte</string>
+    <string name="about_starting_text_basics_head">Geocaching-Grundlagen</string>
+    <string name="about_starting_text_basics_text">Geocaching ist ein Outdoor-Spiel, um so genannte \"Caches\" zu suchen und zu finden. Diese App kann verwendet werden, um dieses Spiel zu spielen.\n\nMehr über <b>c:geo Grundlagen</b> kannst du in unserem Benutzerhandbuch lesen: https://manual.cgeo.org/de/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo Geräteberechtigungen</string>
+    <string name="about_starting_text_device_text">c:geo benötigt bestimmte Berechtigungen auf deinem Gerät:\n<b>Standort</b>: Zugriff auf das GPS, um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen.\n<b>Speicher</b>: Daten in deinen Telefonspeicher schreiben, wenn du Geocaches für Offline-Nutzung speicherst, um Dateien zu im- oder exportieren und Offline-Karten zu lesen.\n\nOhne diese Berechtigungen kannst du c:geo nicht verwenden.</string>
+    <string name="about_starting_text_first_head">Erste Schritte mit c:geo</string>
+    <string name="about_starting_text_first_text">Um c:geo nutzen zu können, benötigst du ein Nutzerkonto einer Geocaching-Plattform deiner Wahl (unabhängig von dieser App). Du musst dieses Konto in den c:geo Service-Einstellungen konfigurieren, bevor du c:geo verwenden kannst!\n\nMehr über <b>Erste Schritte mit c:geo</b> kannst du in unserem Benutzerhandbuch lesen: https://manual.cgeo.org/de/firststeps</string>
+    <string name="open_services_page">Konfiguriere deine Geocaching-Platform(en)</string>
     <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
     <string name="about_system_info_send_button">Per E-Mail versenden…</string>
     <string name="about_system_info">c:geo Systeminformationen</string>
@@ -458,6 +468,8 @@
     <string name="settings_summary_system">Sicherung, Wiederherstellung, Verzeichnisse und Systemeinstellungen.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_browser">Browser</string>
+    <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
+    <string name="settings_category_geocaching_additionals">Weitere Dienste und Addons</string>
     <string name="settings_category_social">Soziale Medien</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
     <string name="settings_goto_url_button">mehr …</string>
@@ -678,7 +690,7 @@
     <string name="feature_search_finder">Suche nach Finder</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Alte Mapsforge V3</string>
-    <string name="init_mfold_api_description">Die aktuelle Programmversion enthält eine Beta-Version unserer neuen Mapsforge-Karte. Wenn du Funktionen vermisst oder Probleme auftreten, kannst du hier zur alten Version zurückkehren.</string>
+    <string name="init_mfold_api_description">Wir nutzen standardmäßig eine neue Version der Mapsforge-Karte. Wenn du einige Funktionen vermisst oder Fehler feststellst, kannst du hier zur alten Version zurückkehren.</string>
     <string name="init_experimental_title">Experimentelle Funktionen</string>
     <string name="init_mfbeta">Mapsforge beta als Standard</string>
     <string name="init_mfbeta_description">Der aktuelle Release enthält eine Betaversion unserer neuen Mapsforge-Karte als experimentelles Feature. Dies neue Karte kann hier als Standard für Live-Karte und Listen aktiviert werden.</string>
@@ -1033,6 +1045,7 @@
     <string name="map_view_map">Karte</string>
     <string name="map_modes">Karteneinstellungen</string>
     <string name="map_trail_show">Spur einblenden</string>
+    <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_circles_show">Kreise anzeigen</string>
     <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
     <string name="map_disabled_hide">Deaktivierte Caches ausblenden</string>
@@ -1045,6 +1058,8 @@
     <string name="map_static_loading">Lade statische Karte…</string>
     <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten ungenau sein.</string>
     <string name="map_as_list">Als Liste anzeigen</string>
+    <string name="map_clear_trailhistory">Spur-Historie löschen</string>
+    <string name="map_trailhistory_cleared">Spur-Historie gelöscht</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Luftlinie</string>
@@ -1151,6 +1166,8 @@
     <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker hält dein GPS aktiv, wenn du zwischen Anwendungen wechselt oder den Bildschirm deines Gerätes ausschaltest.</string>
     <string name="helper_barcode_title">Barcode-Scanner</string>
     <string name="helper_barcode_description">Es gibt Greasemonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
     <string name="helper_pocketquery_title">Pocket-Query Creator</string>
@@ -1189,6 +1206,11 @@
         <item quantity="one">Eine Notiz erfolgreich hochgeladen</item>
         <item quantity="other">%1$d Notizen erfolgreich hochgeladen</item>
     </plurals>
+    <string name="export_modifiedcoords">Geänderte Koordinaten</string>
+    <string name="export_modifiedcoords_uploading">%1$d wird hochgeladen</string>
+    <string name="export_modifiedcoords_success">Hochladen erfolgreich</string>
+    <string name="export_modifiedcoords_result">Hochladen abgeschlossen: %1$d fehlgeschlagen / %2$d OK</string>
+    <string name="export_modifiedcoords_error">Hochladen fehlgeschlagen</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Hunde erlaubt</string>
     <string name="attribute_dogs_no">Hunde nicht erlaubt</string>

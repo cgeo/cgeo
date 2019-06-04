@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">S\'estan eliminant els catxés</string>
     <string name="caches_delete_events">Elimina trobades passades</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">Actualitza els seleccionats</string>
     <string name="caches_refresh_all">Actualitza-ho tot</string>
     <string name="caches_move_selected">Mou els seleccionats</string>
@@ -421,6 +422,15 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
     <string name="about_system_info">Informació del sistema de c:geo</string>
@@ -458,6 +468,8 @@
     <string name="settings_summary_system">Realitza una còpia de seguretat i restaura, configura els directoris d\' app  i altres ajustaments específics del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
     <string name="settings_category_browser">Navegador</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Xarxes socials</string>
     <string name="settings_category_logging_other">Altres opcions de registre</string>
     <string name="settings_goto_url_button">més…</string>
@@ -598,7 +610,7 @@
     <string name="init_gpx_exportdir">Directori per a l\'exportació GPX</string>
     <string name="init_gpx_importdir">Directori per a la importació GPX</string>
     <string name="init_dataDir">Selecciona el directori de dades dels geoamatalls</string>
-    <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, ...) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
+    <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
     <string name="init_maptrail">Mostra el traçat</string>
     <string name="init_summary_maptrail">Mostra el traçat al mapa</string>
     <string name="init_share_after_export">Obre el menú per compartir després de l\'exportació a GPX</string>
@@ -678,7 +690,7 @@
     <string name="feature_search_finder">Cerca per qui els ha trobat</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">L\'antic Mapsforge v3</string>
-    <string name="init_mfold_api_description">La versió actual conté una versió beta del nostre nou mapa de Mapsforge. Pot tornar a la versió anterior aquí.</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Característiques experimentals</string>
     <string name="init_mfbeta">Mapsforge Beta per defecte</string>
     <string name="init_mfbeta_description">La versió actual disposa d\'una versió beta del nostre nou mapa Mapsforge de manera experimental. Aquest nou mapa pot ser activat aquí perquè aparegui per defecte al mapa en viu i als mapes de les llistes.</string>
@@ -1033,6 +1045,7 @@
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_modes">Configuració del mapa</string>
     <string name="map_trail_show">Mostra la ruta</string>
+    <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Mostra els cercles</string>
     <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
     <string name="map_disabled_hide">Amagar catxés desactivats</string>
@@ -1045,6 +1058,8 @@
     <string name="map_static_loading">S\'està carregant els mapes estàtics…</string>
     <string name="map_token_err">Donat que el c:geo només pot descarregar dades parcials, les coordenades dels catxés podrien ser inexactes.</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
     <string name="map_routing">Encaminant</string>
     <string name="map_routing_straight">Línia recta</string>
@@ -1151,6 +1166,8 @@
     <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
     <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
     <string name="helper_bluetoothgps_description">Permet utilitzar un receptor GPS extern per obtenir dades de localització més precises i estalviar bateria del dispositiu.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">Escàner de codi de barres</string>
     <string name="helper_barcode_description">Hi ha scripts de Greasemonkey i llocs web que permeten mostrar els codis dels catxés com a codis de barres. Amb aquesta aplicació el c:geo pot llegir directament els codis dels catxés des de l\'ordinador.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
@@ -1189,6 +1206,11 @@
         <item quantity="one">S\'ha pujat una nota correctament</item>
         <item quantity="other">S\'han pujat %1$d notes correctament</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Els gossos hi són admesos</string>
     <string name="attribute_dogs_no">No s\'admeten els gossos</string>

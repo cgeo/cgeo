@@ -94,7 +94,7 @@
     <string name="log_posting_image">Αποστολή εικόνας…</string>
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
-    <string name="log_post_not_possible">Γίνεται λήψη δεδομένων...\nΠαρακαλώ δοκιμάστε ξανά σε λίγα δευτερόλεπτα ή ελέγξτε τη σύνδεσή σας στο internet.</string>
+    <string name="log_post_not_possible">Γίνεται λήψη δεδομένων…\nΠαρακαλώ δοκιμάστε ξανά σε λίγα δευτερόλεπτα ή ελέγξτε τη σύνδεσή σας στο internet.</string>
     <string name="log_post_geocode_missing">Λείπει ο Γεωκωδικός…</string>
     <string name="log_date_future_not_allowed">Δεν επιτρέπεται η μελλοντική ημερομηνία καταγραφής.</string>
     <string name="log_add">Προσθήκη</string>
@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">Διαγραφή κρυπτών</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">Ανανέωση επιλεγμένων</string>
     <string name="caches_refresh_all">Ανανέωση όλων</string>
     <string name="caches_move_selected">Μετακίνηση επιλεγμένων</string>
@@ -421,6 +422,15 @@
     <string name="about_license">Άδεια χρήσης</string>
     <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
     <string name="about_help">Βοήθεια</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Παρακαλούμε να συμπεριλάβετε τις ακόλουθες πληροφορίες συστήματος κατά την αποστολή μιας αναφοράς σφάλματος ή όταν ζητάτε περισσότερες πληροφορίες σχετικά με το c:geo:</string>
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
@@ -458,6 +468,8 @@
     <string name="settings_summary_system">Εκτελέσετε δημιουργία αντιγράφων ασφαλείας και επαναφοράς, ρύθμιση καταλόγου εφαρμογών και άλλες συγκεκριμένες ρυθμίσεις του συστήματος.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Κοινωνικά δίκτυα</string>
     <string name="settings_category_logging_other">Εμφάνιση περισσότερων επιλογών καταγραφής</string>
     <string name="settings_goto_url_button">περισσότερα…</string>
@@ -598,7 +610,7 @@
     <string name="init_gpx_exportdir">Φάκελος εξαγωγής GPX</string>
     <string name="init_gpx_importdir">Φάκελος εισαγωγής GPX</string>
     <string name="init_dataDir">Επιλέξτε φάκελο δεδομένων κρύπτης</string>
-    <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες,...) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
+    <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
     <string name="init_maptrail">Εμφάνιση διαδρομής</string>
     <string name="init_summary_maptrail">Εμφάνιση διαδρομής στον χάρτη</string>
     <string name="init_share_after_export">Ανοίξτε το μενού κοινής χρήσης μετά από εξαγωγή GPX</string>
@@ -678,7 +690,7 @@
     <string name="feature_search_finder">Αναζήτηση ανά άτομα που τη βρήκαν</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Παλιό Mapsforge V3</string>
-    <string name="init_mfold_api_description">Η παρούσα έκδοση περιέχει μια δοκιμαστική έκδοση του νέου μας χάρτη του Mapsforge. Εάν χάσετε ορισμένες δυνατότητες ή αντιμετωπίσετε ζητήματα μπορείτε να πάτε πίσω στην παλιά έκδοση εδώ.</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Πειραματικά χαρακτηριστικά</string>
     <string name="init_mfbeta">Mapsforge beta ως προεπιλογή</string>
     <string name="init_mfbeta_description">Η τρέχουσα έκδοση περιέχει μια δοκιμαστική έκδοση του νέου χάρτη Mapsforge. Αυτός ο νέος χάρτης μπορεί να ενεργοποιηθεί εδώ για τη ζωντανή προβολή και τις λίστες.</string>
@@ -1033,6 +1045,7 @@
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_modes">Ρυθμίσεις χάρτη</string>
     <string name="map_trail_show">Εμφάνιση διαδρομής</string>
+    <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Εμφάνιση κύκλων</string>
     <string name="map_mycaches_hide">Απόκρυψη των δικών μου κρυπτών και των ευρέσεών μου</string>
     <string name="map_disabled_hide">Απόκρυψη απενεργοποιημένων κρυπτών</string>
@@ -1045,6 +1058,8 @@
     <string name="map_static_loading">Φόρτωση στατικών χαρτών…</string>
     <string name="map_token_err">Δεδομένου ότι το c:geo μπορεί να κατεβάσει μόνο εν μέρει δεδομένα, οι συντεταγμένες της κρύπτης μπορεί να είναι ανακριβείς.</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_routing_straight">Ευθεία γραμμή</string>
@@ -1151,6 +1166,8 @@
     <string name="helper_gpsstatus_description">Μπορείτε να χρησιμοποιήσετε το ραντάρ σε αυτήν την εφαρμογή σε συνδυασμό με το c:geo. Προσφέρει επίσης πολλές άλλες πληροφορίες που σχετίζονται με GPS.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Σας επιτρέπει να χρησιμοποιήσετε έναν εξωτερικό δέκτη GPS για να πάρετε πιο ακριβή δεδομένα τοποθεσίας, και να κάνετε οικονομία στη μπαταρία της συσκευής σας.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">Ανιχνευτής γραμμωτού κώδικα</string>
     <string name="helper_barcode_description">Υπάρχουν σενάρια και ιστοσελίδες Greasemonkey που επιτρέπουν να εμφανίζονται οι γεωκωδικοί ως γραμμωτοί κώδικες. Με αυτή την εφαρμογή το c:geo μπορεί να διαβάζει τέτοιους γεωκωδικούς κατευθείαν από την οθόνη του υπολογιστή σας.</string>
     <string name="helper_pocketquery_title">Δημιουργία Προσωπικής Αναζήτησης</string>
@@ -1189,6 +1206,11 @@
         <item quantity="one">Επιτυχημένη φόρτωση μιας σημείωσης</item>
         <item quantity="other">Επιτυχημένη φόρτωση %1$d σημειώσεων</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Επιτρέπονται οι σκύλοι</string>
     <string name="attribute_dogs_no">Δεν επιτρέπονται οι σκύλοι</string>
@@ -1346,7 +1368,7 @@
     <string name="attribute_inside_no">Όχι σε κλειστό χώρο</string>
     <string name="attribute_in_water_yes">Στο νερό</string>
     <string name="attribute_in_water_no">Όχι στο νερό</string>
-    <string name="attribute_no_gps_yes">Χωρίς GPS (letterboxes, μόνο με πυξίδα,...)</string>
+    <string name="attribute_no_gps_yes">Without GPS (letterboxes, compass juggling, …)</string>
     <string name="attribute_no_gps_no">Με GPS</string>
     <string name="attribute_overnight_yes">Απαραίτητη η διαμονή μιας νύχτας</string>
     <string name="attribute_overnight_no">Δεν είναι απαραίτητη η διαμονή μιας νύχτας</string>

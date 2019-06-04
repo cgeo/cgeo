@@ -7,7 +7,7 @@
     <string name="detail">Detalhes</string>
     <string name="search">Pesquisar</string>
     <string name="helpers">Aplicações Úteis</string>
-    <string name="about">Sobre c:geo</string>
+    <string name="about">Acerca do c:geo</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <!-- actionbar -->
@@ -28,8 +28,8 @@
     <string name="wherigo">Geocache Wherigo™</string>
     <string name="lostfound">Evento 10 Years!</string>
     <string name="ape">Geocache Projecto A.P.E.</string>
-    <string name="gchq">Geocache Geocaching HQ</string>
-    <string name="gps">Exposição GPS Adventures</string>
+    <string name="gchq">Geocache HQ Geocaching</string>
+    <string name="gps">Exibição das GPS Adventures</string>
     <string name="block">Geocaching Block Party</string>
     <string name="unknown">Tipo Desconhecido</string>
     <!-- cache sizes -->
@@ -172,7 +172,7 @@
     <string name="err_unvalidated_account">Deverá validar antes a sua conta em Geocaching.com.</string>
     <string name="err_unpublished">A geocache solicitada não está publicada.</string>
     <string name="err_cache_not_found">A cache solicitada não pôde ser encontrada.</string>
-    <string name="err_premium_only">Esta geocache apenas está disponível para membros premium do Geocaching.com.</string>
+    <string name="err_premium_only">Esta geocache está disponível apenas para os Membros Premium do Geocaching.com.</string>
     <string name="err_detail_open">O c:geo não consegue abrir os detalhes da geocache.</string>
     <string name="err_detail_cache">O c:geo não consegue mostrar a geocache pretendida. É mesmo uma geocache?</string>
     <string name="err_detail_cache_find">O c:geo não encontra a geocache</string>
@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">A remover caches</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
+    <string name="caches_upload_modifiedcoords">Enviar alteração de coordenadas</string>
     <string name="caches_refresh_selected">Actualizar seleccionada(s)</string>
     <string name="caches_refresh_all">Actualizar todas</string>
     <string name="caches_move_selected">Mover seleccionada(s)</string>
@@ -416,11 +417,21 @@
     <string name="about_changelog">Registo de alterações</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Apoie-nos</string>
-    <string name="about_donation_more">Aceda ao sítio web para mais informações</string>
+    <string name="about_donation_more">Aceda ao sítio web p/ mais info.</string>
     <string name="about_contributors">Contribuidores</string>
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
+    <string name="about_starting">Guia de Introdução</string>
+    <string name="about_starting_head">Guia de Introdução</string>
+    <string name="about_starting_text_basics_head">Noções básicas de Geocaching</string>
+    <string name="about_starting_text_basics_text">"O Geocaching é um jogo ao ar livre para procurar e encontrar as chamadas \"caches\". Esta aplicação pode ser usada para jogar este jogo.\n\nPode ler mais sobre as<b>Noções básicas do c:geo</b> no nosso manual do utilizador:
+https://manual.cgeo.org/en/basicuse"</string>
+    <string name="about_starting_text_device_head">Permissões do c:geo neste dispositivo</string>
+    <string name="about_starting_text_device_text">O c:geo precisa de determinadas permissões no seu dispositivo:\n<b>Localização</b>: acesso ao GPS para localizar a sua posição e calcular a distância e a direcção para as geocaches\n<b>Armazenamento</b>: escreve dados no armazenamento do seu telefone quando guarda geocaches para uso offline, para importar/exportar ficheiros e ler mapas offline\n\nSem estas permissões não será capaz de usar o c:geo.</string>
+    <string name="about_starting_text_first_head">Primeiros passos com o c:geo</string>
+    <string name="about_starting_text_first_text">De modo a utilizar o c:geo, precisa de uma conta para uma plataforma de geocaching à sua escolha (externa a esta aplicação). Essa conta tem de ser configurada nas definições do c:geo, na secção \"serviço\", antes de tirar proveito do c:geo!\n\nPode ler mais sobre os<b>Primeiros passos no c:geo</b> no nosso manual do utilizador: https://manual.cgeo.org/firststeps</string>
+    <string name="open_services_page">Configure a(s) sua(s) plataforma(s) de Geocaching</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema ao enviar um relatório de erro ou ao ser pedido mais informações sobre o c:geo:</string>
     <string name="about_system_info_send_button">Enviar por email…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
@@ -458,6 +469,8 @@
     <string name="settings_summary_system">Realizar cópia de segurança e restauro, configurar os directórios da aplicação e outras definições específicas do sistema.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
     <string name="settings_category_browser">Browser</string>
+    <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
+    <string name="settings_category_geocaching_additionals">Outros serviços e suplementos</string>
     <string name="settings_category_social">Redes sociais</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
     <string name="settings_goto_url_button">mais …</string>
@@ -598,7 +611,7 @@
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
     <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
-    <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc...) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
+    <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar rasto</string>
     <string name="init_summary_maptrail">Mostra o rasto no mapa</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
@@ -678,7 +691,7 @@
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
     <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
     <string name="init_mfold_api">Antigo Mapsforge V3</string>
-    <string name="init_mfold_api_description">O lançamento actual contém uma versão beta do novo mapa Mapsforge. Se tiver perdido alguma funcionalidade ou encontrar problemas poderá regressar à versão antiga aqui.</string>
+    <string name="init_mfold_api_description">Estamos a usar uma versão nova do mapa Mapsforge por predefinição. Se notar falta de alguma funcionalidade ou deparar-se com problemas, pode voltar para a versão antiga aqui.</string>
     <string name="init_experimental_title">Funcionalidades experimentais</string>
     <string name="init_mfbeta">Predefinir o Mapsforge beta</string>
     <string name="init_mfbeta_description">A versão actual contém uma versão beta do nosso novo mapa da Mapsforge como uma funcionalidade experimental. Este novo mapa pode ser activado aqui como o predefinido para os mapas ao vivo e das listas.</string>
@@ -845,9 +858,9 @@
     <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
     <string name="cache_dialog_watchlist_remove_message">A remover a geocache da lista de observação…</string>
     <string name="cache_dialog_favorite_add_title">Favorita</string>
-    <string name="cache_dialog_favorite_add_message">Adicionar cache aos favoritos…</string>
+    <string name="cache_dialog_favorite_add_message">A adicionar esta geocache aos favoritos…</string>
     <string name="cache_dialog_favorite_remove_title">Favorita</string>
-    <string name="cache_dialog_favorite_remove_message">Remover cache dos favoritos…</string>
+    <string name="cache_dialog_favorite_remove_message">A remover esta geocache dos favoritos…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_navigation_drive">Navegar (Conduzir)</string>
     <string name="cache_menu_navigation_drive_select_target">Cache ou lugar de estacionamento?</string>
@@ -1022,7 +1035,7 @@
     <string name="search_remove_destination">Destino removido</string>
     <string name="search_clear_history">Limpar histórico</string>
     <string name="search_history_cleared">Histórico limpo</string>
-    <string name="waypoint_coordinate_formats_plain">Plano</string>
+    <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para área de transferência</string>
     <!-- visit -->
@@ -1033,6 +1046,7 @@
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_modes">Modos de mapa</string>
     <string name="map_trail_show">Mostrar rasto</string>
+    <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_circles_show">Mostrar círculos</string>
     <string name="map_mycaches_hide">Esconder caches encontradas e minhas</string>
     <string name="map_disabled_hide">Esconder caches desativadas</string>
@@ -1045,6 +1059,8 @@
     <string name="map_static_loading">A carregar mapas estáticos…</string>
     <string name="map_token_err">Como o c:geo apenas conseguiu transferir parcialmente os dados, as coordenadas das geocaches podem não ser precisas.</string>
     <string name="map_as_list">Mostrar como lista</string>
+    <string name="map_clear_trailhistory">Limpar o histórico do percurso</string>
+    <string name="map_trailhistory_cleared">Limpo histórico do percurso</string>
     <string name="map_select_multiple_items">Selecionar item</string>
     <string name="map_routing">Rotas</string>
     <string name="map_routing_straight">Linha a direito</string>
@@ -1151,6 +1167,8 @@
     <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
+    <string name="helper_gps_locker_title">Fixar posição GPS</string>
+    <string name="helper_gps_locker_description">Fixar a posição GPS mantém o sinal de GPS activo quando alternar entre aplicações e quando o ecrã do seu dispositivo estiver desligado.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler, por exemplo, um código de barras directamente do ecrã do seu computador.</string>
     <string name="helper_pocketquery_title">Criador de Pocket Query</string>
@@ -1189,6 +1207,11 @@
         <item quantity="one">Nota enviada com sucesso</item>
         <item quantity="other">%1$d notas enviadas com sucesso</item>
     </plurals>
+    <string name="export_modifiedcoords">Coordenadas modificadas</string>
+    <string name="export_modifiedcoords_uploading">A enviar %1$d</string>
+    <string name="export_modifiedcoords_success">Enviado com sucesso</string>
+    <string name="export_modifiedcoords_result">Envio concluído: %1$d falhou / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Falha no envio</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cães permitidos</string>
     <string name="attribute_dogs_no">Cães não permitidos</string>
@@ -1321,9 +1344,9 @@
     <string name="attribute_food_yes">Comida por perto</string>
     <string name="attribute_food_no">Sem comida por perto</string>
     <string name="attribute_oc_only_yes">Só dá para registar em Opencaching</string>
-    <string name="attribute_oc_only_no">Dá registar em Opencaching e não só</string>
-    <string name="attribute_link_only_yes">Ligação para outro portal de caching</string>
-    <string name="attribute_link_only_no">Não só ligação para outro portal de caching</string>
+    <string name="attribute_oc_only_no">O registo não é restrito ao Opencaching</string>
+    <string name="attribute_link_only_yes">Apenas é uma hiperligação para outra plataforma de \"caching\"</string>
+    <string name="attribute_link_only_no">Não é apenas uma hiperligação para outra plataforma de \"caching\"</string>
     <string name="attribute_letterbox_yes">Letterbox (requer carimbo)</string>
     <string name="attribute_letterbox_no">Não é uma letterbox (não requer carimbo)</string>
     <string name="attribute_railway_yes">Caminho de ferro activo próximo</string>
@@ -1352,7 +1375,7 @@
     <string name="attribute_overnight_no">Não necessário pernoitar</string>
     <string name="attribute_specific_times_yes">Disponível apenas em horários específicos</string>
     <string name="attribute_specific_times_no">Não só disponível em horários especificados</string>
-    <string name="attribute_day_yes">Apendas de dia</string>
+    <string name="attribute_day_yes">Apenas de dia</string>
     <string name="attribute_day_no">Não só de dia</string>
     <string name="attribute_tide_yes">Maré</string>
     <string name="attribute_tide_no">Sem maré</string>

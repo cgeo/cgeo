@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2019.05.20:</b>\n
     · New: Use new live map on geocaching.com\n
     · New: Batch upload modified coordinates from list\n
     · New: User can switch to compact icons on the map via menu\n

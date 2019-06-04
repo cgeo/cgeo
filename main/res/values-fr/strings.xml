@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">Suppression des caches en cours</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
+    <string name="caches_upload_modifiedcoords">Envoyer les coordonnées modifiées</string>
     <string name="caches_refresh_selected">Rafraîchir la sélection</string>
     <string name="caches_refresh_all">Tout rafraîchir</string>
     <string name="caches_move_selected">Déplacer la sélection</string>
@@ -421,6 +422,15 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
+    <string name="about_starting">Premiers pas</string>
+    <string name="about_starting_head">Premiers pas</string>
+    <string name="about_starting_text_basics_head">Bases du Géocaching</string>
+    <string name="about_starting_text_basics_text">Le Géocaching est un jeu de plein air dont l\'objectif est de trouver ce qu\'on appelle des « caches ». Cette application peut être utilisée pour jouer à ce jeu.\n\nVous pouvez obtenir plus d’informations sur les <b>fonctions de base de c:geo</b> dans notre guide utilisateur : https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">Autorisations requises par c:geo</string>
+    <string name="about_starting_text_device_text">c:geo a besoin de certaines permissions sur votre appareil :\n<b>Position</b> : accès au GPS pour localiser votre emplacement et calculer la distance et la direction vers les géocaches\n<b>Stockage</b> :  écrire des données sur le stockage de l\'appareil lorsque vous enregistrez des géocaches pour une utilisation hors-ligne, pour importer/exporter des fichiers et lire des cartes hors-ligne.\n\nSans ces permissions vous ne pourrez pas utiliser c:geo.</string>
+    <string name="about_starting_text_first_head">Premiers pas avec c:geo</string>
+    <string name="about_starting_text_first_text">Pour utiliser c:geo, vous devez posséder un compte sur une plateforme géocaching de votre choix (indépendante de cette application). Vous devez configurer ce compte dans les paramètres c:geo, rubrique \"service\", avant de pouvoir utiliser c:geo !\n\nVous pouvez en découvrir comme faite vos <b>premiers pas avec c:geo</b> dans notre guide utilisateur : https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configurer votre/vos plateforme(s) de geocaching</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
@@ -458,6 +468,8 @@
     <string name="settings_summary_system">Sauvegarder et restaurer, configurer les répertoires et autres paramètres systèmes.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
     <string name="settings_category_browser">Navigateur</string>
+    <string name="settings_category_geocaching_platform">Plateforme de Géocaching</string>
+    <string name="settings_category_geocaching_additionals">Autres services et addons</string>
     <string name="settings_category_social">Réseaux sociaux</string>
     <string name="settings_category_logging_other">Options de visite supplémentaires</string>
     <string name="settings_goto_url_button">plus…</string>
@@ -598,7 +610,7 @@
     <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
     <string name="init_gpx_importdir">Dossier d\'import GPX</string>
     <string name="init_dataDir">Sélectionnez le dossier de stockage des Geocaches</string>
-    <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, ...) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
+    <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
     <string name="init_maptrail">Afficher la trace</string>
     <string name="init_summary_maptrail">Afficher la trace sur la carte</string>
     <string name="init_share_after_export">Ouvrir le menu de partage après les exports GPX</string>
@@ -678,7 +690,7 @@
     <string name="feature_search_finder">Rechercher par Découvreur</string>
     <string name="init_mapsforge_api_title">API Mapsforge</string>
     <string name="init_mfold_api">Ancienne version Mapsforge V3</string>
-    <string name="init_mfold_api_description">La version actuelle contient une version bêta de notre nouvelle carte Mapsforge. Si il vous manque certaines fonctionnalités ou rencontrez des problèmes, vous pouvez revenir à l\'ancienne version ici.</string>
+    <string name="init_mfold_api_description">Par défaut nous utilisons une nouvelle version des cartes Mapsforge. Si certaines fonctionnalités vous manquent ou si vous rencontrez des problèmes, vous pouvez revenir à l\'ancienne version ici.</string>
     <string name="init_experimental_title">Fonctionnalités expérimentales</string>
     <string name="init_mfbeta">Carte Mapsforge beta par défaut</string>
     <string name="init_mfbeta_description">La version actuelle contient une version beta de notre nouvelle carte Mapsforge (fonctionnalité expérimentale). Cette nouvelle carte peut être activée ici par défaut pour la carte en temps réel et pour celle des listes.</string>
@@ -1033,6 +1045,7 @@
     <string name="map_view_map">Afficher carte</string>
     <string name="map_modes">Paramètres carte</string>
     <string name="map_trail_show">Afficher le parcours</string>
+    <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_circles_show">Afficher les cercles</string>
     <string name="map_mycaches_hide">Masquer caches placées/trouvées</string>
     <string name="map_disabled_hide">Masquer caches désactivées</string>
@@ -1045,6 +1058,8 @@
     <string name="map_static_loading">Chargement des cartes statiques…</string>
     <string name="map_token_err">Étant donné que c:geo est seulement capable de télécharger des données partielles, les coordonnées des caches peuvent être approximatives.</string>
     <string name="map_as_list">Lister les caches</string>
+    <string name="map_clear_trailhistory">Effacer l\'historique des traces</string>
+    <string name="map_trailhistory_cleared">historique des traces effacé</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
     <string name="map_routing_straight">À vol d\'oiseau</string>
@@ -1109,7 +1124,7 @@
     <string name="trackable_travelbug">Objet voyageur</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Statut</string>
+    <string name="trackable_status">Status</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Traditionnelle</string>
     <string name="geokret_type_book_or_media">Livre ou média électronique</string>
@@ -1151,6 +1166,8 @@
     <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
     <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
     <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une localisation plus précise tout en économisant la batterie de votre appareil Android.</string>
+    <string name="helper_gps_locker_title">Verrouillage GPS</string>
+    <string name="helper_gps_locker_description">Le verrouillage GPS conserve le signal GPS actif lors du basculement entre les applications ou si l\'écran de votre appareil s\'éteint.</string>
     <string name="helper_barcode_title">Lecteur de code barre</string>
     <string name="helper_barcode_description">Il existe des programmes et des sites web permettant de générer un QR code contenant un géocode. En installant cette application, vous pourrez lire des QR codes et ouvrir les caches correspondantes dans c:geo.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
@@ -1189,6 +1206,11 @@
         <item quantity="one">Une note envoyée avec succès</item>
         <item quantity="other">%1$d notes envoyées avec succès</item>
     </plurals>
+    <string name="export_modifiedcoords">Coordonnées modifiées</string>
+    <string name="export_modifiedcoords_uploading">Envoi de %1$d</string>
+    <string name="export_modifiedcoords_success">Envoi réussi</string>
+    <string name="export_modifiedcoords_result">Envoi terminé : %1$d échec / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Échec de l\'envoi</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Chiens autorisés</string>
     <string name="attribute_dogs_no">Chiens interdits</string>

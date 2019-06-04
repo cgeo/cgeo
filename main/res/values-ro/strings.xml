@@ -354,6 +354,7 @@
     </plurals>
     <string name="caches_remove_progress">Ştergere geocutii</string>
     <string name="caches_delete_events">Şterge evenimentele trecute</string>
+    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
     <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
     <string name="caches_move_selected">Mută cutiile selectate</string>
@@ -424,6 +425,15 @@
     <string name="about_license">Licenţă</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Ajutor</string>
+    <string name="about_starting">Getting Started</string>
+    <string name="about_starting_head">Getting Started</string>
+    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo device permissions</string>
+    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
+    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Te rog include urmatoarele informaţii despre sistem atunci când trimiţi o sesizare sau întrebi despre c:geo:</string>
     <string name="about_system_info_send_button">Trimite prin E-Mail…</string>
     <string name="about_system_info">c:geo - informaţii despre sistem</string>
@@ -439,7 +449,7 @@
     <string name="settings_title_cachedetails">Detalii cutie</string>
     <string name="settings_summary_cachedetails">Personalizează informaţiile afişate despre o geocutie.</string>
     <string name="settings_title_offlinedata">Informaţii păstrate locale</string>
-    <string name="settings_summary_offlinedata">Configurează hărţile statice şi alte date salvate local.</string>
+    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
     <string name="settings_title_logging">Jurnal</string>
     <string name="settings_summary_logging">Configurează semnătura şi opţiunile pentru însemnări.</string>
     <string name="settings_title_map">Hartă</string>
@@ -461,6 +471,8 @@
     <string name="settings_summary_system">Realizează salvări de siguranţă, restaurări, configurează directoarele şi alte setări de sistem specifice.</string>
     <string name="settings_title_navigation_menu">Meniu navigaţie</string>
     <string name="settings_category_browser">Browser</string>
+    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Alte opţiuni pentru jurnal</string>
     <string name="settings_goto_url_button">mai multe…</string>
@@ -681,7 +693,7 @@
     <string name="feature_search_finder">Caută după găsitor</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Old Mapsforge V3</string>
-    <string name="init_mfold_api_description">The current release contains a beta version of our new Mapsforge map. If you miss some features or encounter issues you can go back to the old version here.</string>
+    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <string name="init_experimental_title">Funcţionalităţi experimentale</string>
     <string name="init_mfbeta">Mapsforge beta ca implicit</string>
     <string name="init_mfbeta_description">Versiunea curentă conţine o versiune beta a noii hărţi Mapsforge ca funcţionalitate experimentală. Aceasta poate fi activată aici ca hartă implicită pentru harta curentă, respectiv harţile de liste.</string>
@@ -1043,6 +1055,7 @@
     <string name="map_view_map">Hărţi</string>
     <string name="map_modes">Opţiuni hărţi</string>
     <string name="map_trail_show">Arată traseu</string>
+    <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Arată cercurile</string>
     <string name="map_mycaches_hide">Ascunde geocutiile mele/găsite</string>
     <string name="map_disabled_hide">Ascunde geocutiile inactive</string>
@@ -1055,6 +1068,8 @@
     <string name="map_static_loading">Încărcare hărţi statice…</string>
     <string name="map_token_err">Pentru că c:geo poate doar să descarce informaţii parţiale, coordonatele cutiilor pot fi imprecise.</string>
     <string name="map_as_list">Arată ca lista</string>
+    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Selectează un element</string>
     <string name="map_routing">Dirijare</string>
     <string name="map_routing_straight">Linie dreaptă</string>
@@ -1161,6 +1176,8 @@
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
     <string name="helper_bluetoothgps_title">GPS prin Bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">Cititor de coduri de bare</string>
     <string name="helper_barcode_description">Există aplicaţii GreaseMonkey şi site-uri care pot afişa geocoduri sub formă de coduri de bare. Cu aceasta aplicaţie, c:geo poate citi aceste geocoduri direct de pe ecranul calculatorului.</string>
     <string name="helper_pocketquery_title">Creator de \"Pocket Query\"</string>
@@ -1200,6 +1217,11 @@
         <item quantity="few">%1$d note personale încarcate cu succes</item>
         <item quantity="other">%1$d note personale încarcate cu succes</item>
     </plurals>
+    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
+    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Permis cu câini</string>
     <string name="attribute_dogs_no">Interzis cu câini</string>

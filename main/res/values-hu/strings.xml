@@ -293,7 +293,7 @@
     <string name="menu_scan_description">A c:geo QR formátumú geokódokat is be tud olvasni, de az ehhez szükséges alkalmazás nincs telepítve. Meg szeretnéd nyitni a Google Play-t, hogy telepítsd?</string>
     <!-- main screen -->
     <string name="live_map_button">Élő térkép</string>
-    <string name="caches_nearby_button">A közelben</string>
+    <string name="caches_nearby_button">Közelben</string>
     <string name="advanced_search_button">Keresés</string>
     <string name="stored_caches_button">Mentett</string>
     <string name="any_button">Cél</string>
@@ -351,6 +351,7 @@
     </plurals>
     <string name="caches_remove_progress">Ládák törlése</string>
     <string name="caches_delete_events">Elmúlt események törlése</string>
+    <string name="caches_upload_modifiedcoords">Módosított koordináták feltöltése</string>
     <string name="caches_refresh_selected">Kijelöltek frissítése</string>
     <string name="caches_refresh_all">Összes frissítése</string>
     <string name="caches_move_selected">Kijelöltek mozgatása</string>
@@ -421,6 +422,15 @@
     <string name="about_license">Licenc</string>
     <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
     <string name="about_help">Segítség</string>
+    <string name="about_starting">Bevezető</string>
+    <string name="about_starting_head">Bevezető</string>
+    <string name="about_starting_text_basics_head">A geocaching alapjai</string>
+    <string name="about_starting_text_basics_text">A geocaching egy szabadtéri játék, melynek lényege, hogy úgynevezett \"geoládákat\" találj meg. Ez az app segítségedre lesz ebben a játékban.\n\nA c:geo <b>alapvető használatáról</b> a használati útmutatónkban olvashatsz bővebben: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_device_head">c:geo alkalmazásengedélyek</string>
+    <string name="about_starting_text_device_text">A c:geo működéséhez szükséges néhány alkalmazásengedély:\n<b>Helyadatok</b>: készüléked GPS-ének használata helyzeted és a ládák irányának, távolságának megállapításához\n<b>Tárhely</b>: adatok tárolása készülékeden ládák mentésekor offline használatra, fájlok importálásakor/exportálásakor és offline térképek olvasásakor\n\nEzen engedélyek nélkül a c: geo nem használható.</string>
+    <string name="about_starting_text_first_head">Első lépések</string>
+    <string name="about_starting_text_first_text">A c:geo használatához fiók létrehozása szükséges az általad választott geocaching platformon (ez az apptól függetlenül történik). Be kell állítanod ezt a fiókot a c:geo Szolgáltatások beállításánál, mielőtt használnád a c:geo!\n\nAz <b>első lépésekről</b>a használati útmutatónkban olvashatsz bővebben: https://manual.cgeo.org/en/firststeps</string>
+    <string name="open_services_page">Geocaching platformok beállítása</string>
     <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
     <string name="about_system_info_send_button">Küldés e-mailben…</string>
     <string name="about_system_info">c:geo rendszeradatok</string>
@@ -458,6 +468,8 @@
     <string name="settings_summary_system">Biztonsági mentés és visszaállítás, program mappák megadása és egyéb rendszer specifikus beállítások</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_browser">Böngésző</string>
+    <string name="settings_category_geocaching_platform">Geocaching platformok</string>
+    <string name="settings_category_geocaching_additionals">További szolgáltatások és addonok</string>
     <string name="settings_category_social">Közösségi média</string>
     <string name="settings_category_logging_other">Egyéb logolási beállítások</string>
     <string name="settings_goto_url_button">Tovább…</string>
@@ -598,7 +610,7 @@
     <string name="init_gpx_exportdir">GPX export mappa</string>
     <string name="init_gpx_importdir">GPX import mappa</string>
     <string name="init_dataDir">Ládaadat mappa beállítása</string>
-    <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, ...) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
+    <string name="init_dataDir_note">A ládák kiegészítő adatait (spolier képek, logfotók, …) külső tárolón is tarthatod (a készülékedtől függően ez lehet emulált vagy valódi, külső SD kártya is).</string>
     <string name="init_maptrail">A nyomvonal mutatása a térképen</string>
     <string name="init_summary_maptrail">A nyomvonal mutatása a térképen</string>
     <string name="init_share_after_export">A megosztás menü megnyitása GPX exportálás után</string>
@@ -678,7 +690,7 @@
     <string name="feature_search_finder">Keresés megtalálók alapján</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Régi Mapsforge V3</string>
-    <string name="init_mfold_api_description">A jelenlegi kiadásban az új Mapsforge térképünk béta verziója található. Itt térhetsz vissza a régi verzióhoz, ha hiányzó funkcióval vagy más problémával találkozol.</string>
+    <string name="init_mfold_api_description">Alapértelmezés szerint a Mapforge-térkép új verzióját használjuk. Ha hiányzik néhány funkció, vagy problémákat tapasztalsz, akkor itt visszatérhetsz a régi verzióhoz.</string>
     <string name="init_experimental_title">Kísérleti funkciók</string>
     <string name="init_mfbeta">Mapsforge béta alapértelmezettként</string>
     <string name="init_mfbeta_description">A jelenlegi kiadásban megtalálható az új Mapsforge térképünk béta verziója kísérleti funkcióként. Itt állítható be, hogy ez a térkép legyen az alapértelmezett élő és ládatérkép.</string>
@@ -885,7 +897,8 @@
     <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Értékelés</string>
     <string name="cache_menu_checker">Geochecker megnyitása</string>
-    <string name="cache_menu_challenge_checker">Kihívásellenőrző keresése</string>
+    <string name="cache_menu_challenge_checker">"Kihívásellenőrző keresése
+"</string>
     <string name="cache_menu_ignore">Láda mellőzése</string>
     <string name="ignore_confirm_title">Légy óvatos</string>
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
@@ -1016,7 +1029,7 @@
     <string name="waypoint_duplicate">Másolás</string>
     <string name="waypoint_duplicated">Útpont megduplázva</string>
     <string name="waypoint_copy_of">Másolt</string>
-    <string name="waypointcalc_notes_prompt">Megjegyzések ...</string>
+    <string name="waypointcalc_notes_prompt">Megjegyzések…</string>
     <string name="search_history">Előzmény</string>
     <string name="search_history_empty">Nincsenek előző célpontok</string>
     <string name="search_remove_destination">Célpont törlése</string>
@@ -1032,7 +1045,8 @@
     <string name="map_live">Élő térkép</string>
     <string name="map_view_map">Térképek</string>
     <string name="map_modes">Térképmódok</string>
-    <string name="map_trail_show">Ösvény be</string>
+    <string name="map_trail_show">Nyomvonal be</string>
+    <string name="map_dot_mode">Kompakt ikonok használata</string>
     <string name="map_circles_show">Ládahatárok be</string>
     <string name="map_mycaches_hide">Saját/megtalált ládák ki</string>
     <string name="map_disabled_hide">Letiltott ládák ki</string>
@@ -1045,6 +1059,8 @@
     <string name="map_static_loading">Statikus térképek betöltése…</string>
     <string name="map_token_err">Mivel a c:geo csak részleges adatokat tud letölteni, a ládák koordinátái pontatlanok lehetnek.</string>
     <string name="map_as_list">Mutatás listaként</string>
+    <string name="map_clear_trailhistory">Nyomvonal-előzmények törlése</string>
+    <string name="map_trailhistory_cleared">Nyomvonal-előzmények törölve</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <string name="map_routing">Útvonal</string>
     <string name="map_routing_straight">Egyenes vonal</string>
@@ -1151,6 +1167,8 @@
     <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
+    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_description">A GPS Locker stabil GPS-jelről gondoskodik alkalmazások közötti váltáskor és készüléked képernyőjének kikapcsolása után is.</string>
     <string name="helper_barcode_title">Vonalkódolvasó</string>
     <string name="helper_barcode_description">Léteznek olyan Greasemonkey szkriptek és weboldalak, melyek segítségével egy geokód megjeleníthető vonalkódként. Ezzel az app-pal a c:geo közvetlenül a számítógéped képernyőjéről tudja beolvasni ezeket a geokódokat.</string>
     <string name="helper_pocketquery_title">Pocket lekérdezés készítő</string>
@@ -1189,6 +1207,11 @@
         <item quantity="one">1 személyes megjegyzés sikeresen feltöltve</item>
         <item quantity="other">%1$d személyes megjegyzés sikeresen feltöltve</item>
     </plurals>
+    <string name="export_modifiedcoords">Módosított koordináták</string>
+    <string name="export_modifiedcoords_uploading">Feltöltés: %1$d</string>
+    <string name="export_modifiedcoords_success">Sikeres feltöltés</string>
+    <string name="export_modifiedcoords_result">Feltöltés kész: %1$d sikertelen / %2$d sikeres</string>
+    <string name="export_modifiedcoords_error">A feltöltés sikertelen</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Kutyák engedélyezettek</string>
     <string name="attribute_dogs_no">Kutyák nem engedélyezettek</string>
@@ -1434,7 +1457,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
+    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Úgy tűnik, az Android 4.1-es verziójánál régebbit használsz. Lehetséges, hogy a c:geo jövőbeli frissítései nem lesznek elérhetők az eszközödre.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Beszélő iránytű</string>
     <string name="tts_start">Beszéd indítása</string>
