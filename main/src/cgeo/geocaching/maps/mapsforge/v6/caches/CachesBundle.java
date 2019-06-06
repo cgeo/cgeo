@@ -6,6 +6,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
+import cgeo.geocaching.settings.Settings;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,20 +19,23 @@ import org.mapsforge.map.layer.LayerManager;
 
 public class CachesBundle {
 
-    private static final int BASE_SEPARATOR = 0;
-    private static final int STORED_SEPARATOR = 1;
-    private static final int LIVE_SEPARATOR = 2;
+    private static final int WP_SEPERATOR = 0;
+    private static final int BASE_SEPARATOR = 1;
+    private static final int STORED_SEPARATOR = 2;
+    private static final int LIVE_SEPARATOR = 3;
 
-    private static final int BASE_OVERLAY_ID = 0;
-    private static final int STORED_OVERLAY_ID = 1;
-    private static final int LIVE_OVERLAY_ID = 2;
+    private static final int WP_OVERLAY_ID = 0;
+    private static final int BASE_OVERLAY_ID = 1;
+    private static final int STORED_OVERLAY_ID = 2;
+    private static final int LIVE_OVERLAY_ID = 3;
 
     private final MfMapView mapView;
     private final MapHandlers mapHandlers;
 
     private static final int INITIAL_ENTRY_COUNT = 200;
-    private final Set<GeoEntry> geoEntries = Collections.synchronizedSet(new HashSet<GeoEntry>(INITIAL_ENTRY_COUNT));
+    private final Set<GeoEntry> geoEntries = Collections.synchronizedSet(new GeoEntrySet(INITIAL_ENTRY_COUNT));
 
+    private WaypointsOverlay wpOverlay;
     private AbstractCachesOverlay baseOverlay;
     private AbstractCachesOverlay storedOverlay;
     private LiveCachesOverlay liveOverlay;
@@ -57,6 +61,11 @@ public class CachesBundle {
         final SeparatorLayer separator3 = new SeparatorLayer();
         this.separators.add(separator3);
         this.mapView.getLayerManager().getLayers().add(separator3);
+        final SeparatorLayer separator4 = new SeparatorLayer();
+        this.separators.add(separator4);
+        this.mapView.getLayerManager().getLayers().add(separator4);
+
+        this.wpOverlay = new WaypointsOverlay(WP_OVERLAY_ID, this.geoEntries, this, separators.get(WP_SEPERATOR), this.mapHandlers);
     }
 
     /**
@@ -242,5 +251,18 @@ public class CachesBundle {
 
     LayerManager getLayerManager() {
         return mapView.getLayerManager();
+    }
+
+    public void handleWaypoints() {
+        if (getVisibleCachesCount() < Settings.getWayPointsThreshold()) {
+            Collection<String> baseGeocodes = Collections.EMPTY_LIST;
+            if (baseOverlay != null) {
+                baseGeocodes = baseOverlay.getCacheGeocodes();
+            }
+            final boolean showStored = storedOverlay != null;
+            wpOverlay.showWaypoints(baseGeocodes, showStored);
+        } else {
+            wpOverlay.hideWaypoints();
+        }
     }
 }
