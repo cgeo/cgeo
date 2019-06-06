@@ -1531,8 +1531,6 @@
     <string name="init_geokrety_register_ok">Autentificare reuşită</string>
     <string name="init_geokrety_register_fail">Autentificare eșuată</string>
     <string name="init_geokrety_description">Autorizează c:geo la GeoKrety.org pentru a însemna obiecte călătoare de tip GeoKrety.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org furnizează informaţii recente despre obiecte călătoare GeoKrety.\nDatele disponibile conţin informaţii despre \'descriere\' sau \'statut\'.\n\nDatele furnizate nu sunt în timp real!\nPoziţia: ~30min.\nDescrierea: ~24ore.</string>
-    <string name="init_geokrety_cache">Utilizează GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Id utilizator: %s</string>
     <string name="trackable_title_log_without_geocode">Lipseşte geocodul</string>
     <string name="trackable_log_without_geocode">Eşti pe cale să trimiţi o însemnare fără Geocod. Te încurajăm să setezi unul. Vrei să adaugi acum?</string>

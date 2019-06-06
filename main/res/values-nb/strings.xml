@@ -1514,8 +1514,6 @@
     <string name="init_geokrety_register_ok">Du er logget inn</string>
     <string name="init_geokrety_register_fail">Innlogging mislyktes</string>
     <string name="init_geokrety_description">Autorisere c:geo med GeoKrety.org å logge GeoKrety-sporbare.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org gir offline datasett for GeoKrety-sporbare .\nTilgjengelige datasett inneholder mer GeoKrety-informasjon som \"beskrivelse\"- eller \"mangler\"-status.\n\nDataene er ikke live! \nPosisjoner: ~ 30 min. \nBeskrivelser: ~ 24 timer.</string>
-    <string name="init_geokrety_cache">Bruk GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Brukernavn: %s</string>
     <string name="trackable_title_log_without_geocode">Geokode ikke angitt</string>
     <string name="trackable_log_without_geocode">Du prøver å sende en logg uten en Geokode. Du oppfordres til å angi en. Vil du legge til en Geokode nå?</string>

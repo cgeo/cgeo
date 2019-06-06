@@ -1514,8 +1514,6 @@
     <string name="init_geokrety_register_ok">Connexion réussie</string>
     <string name="init_geokrety_register_fail">Erreur de connexion</string>
     <string name="init_geokrety_description">Autoriser c:geo à ouvrir une session sur GeoKrety.org pour les objets voyageurs GeoKrets.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org fournit des données pour les objets voyageurs GeoKrets.\nCes données sont par exemple la Description, la Position ou le Statut de l\'objet (disparu…).\n\nATTENTION : il ne s\'agit pas de données temps réel :\n- Les positions sont actualisées toutes les ~30 min.\n- Les descriptions sont actualisées toutes les ~24 h.</string>
-    <string name="init_geokrety_cache">Utiliser GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Utilisateur : %s</string>
     <string name="trackable_title_log_without_geocode">Géocode non renseigné</string>
     <string name="trackable_log_without_geocode">Vous êtes sur le point d\'envoyer une visite sans géocode. Il est fortement recommandé d\'indiquer un géocode. Voulez-vous l\'ajouter maintenant ?</string>

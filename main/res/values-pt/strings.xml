@@ -1515,8 +1515,6 @@ https://manual.cgeo.org/en/basicuse"</string>
     <string name="init_geokrety_register_ok">Inicio de sessão com sucesso</string>
     <string name="init_geokrety_register_fail">Falha ao iniciar sessão</string>
     <string name="init_geokrety_description">Autorize c:geo com GeoKrety.org para registar GeoKrety trackables.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org fornece dados em cache para GeoKrety trackables.\nDados disponíveis contém mais informações GeoKrety como estado \'descrição\' ou \'perdido\'.\n\nDados não são ao vivo! \nPositions: ~ 30 min. \nDescriptions: ~ 24 h.</string>
-    <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Id de utilizador: %s</string>
     <string name="trackable_title_log_without_geocode">Código GC não definido</string>
     <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>

@@ -1548,8 +1548,6 @@
     <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
     <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
     <string name="init_geokrety_description">Autorizovat c:geo pro logování sledovatelných předmětů služby Geokrety.org.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org poskytuje informace o sledovatelných předmětech služby Geokrety.\nDostupné informace jsou např. „popis“ a nebo „ztracený“ stav.\n\nData nemusí být aktuální!\nPozice: ~30 min\nPopisy: ~24 h</string>
-    <string name="init_geokrety_cache">Použít GeoKretyMap.org</string>
     <string name="init_geokrety_userid">ID uživatele: %s</string>
     <string name="trackable_title_log_without_geocode">Geokód nenastaven</string>
     <string name="trackable_log_without_geocode">Chystáš se odeslat log bez geokódu. Je doporučeno alespoň jeden nastavit, chceš ho nyní přidat?</string>

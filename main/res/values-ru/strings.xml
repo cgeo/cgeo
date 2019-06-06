@@ -1548,8 +1548,6 @@
     <string name="init_geokrety_register_ok">Вход успешен</string>
     <string name="init_geokrety_register_fail">Ошибка при входе</string>
     <string name="init_geokrety_description">Авторизуйте c:geo на GeoKrety.org, чтобы отмечать ГеоКротов.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org обеспечивает кешированные данные о ГеоКротах.\nДоступные данные содержат больше информации о ГеоКротах, такой как \"описание\" или статус \"потерян\".\n\nДанные не обновляются в реальном времени!\nМестоположение: ~30 мин.\nОписания: ~24ч.</string>
-    <string name="init_geokrety_cache">Использовать GeoKretyMap</string>
     <string name="init_geokrety_userid">Пользователь: %s</string>
     <string name="trackable_title_log_without_geocode">Код трекабла не установлен</string>
     <string name="trackable_log_without_geocode">Вы собираетесь отправить запись без геокода. Необходимо указать геокод. Добавить его сейчас?</string>

@@ -1515,8 +1515,6 @@ Nombre de archivo:%2$s"</string>
     <string name="init_geokrety_register_ok">Se ha iniciado sesión</string>
     <string name="init_geokrety_register_fail">Fallo al iniciar sesión</string>
     <string name="init_geokrety_description">Autorizar a c:geo en GeoKrety.org para registrar rastreables.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org proporciona datos almacenados para rastreables GeoKrety.\nLos datos disponibles contienen más información sobre GeoKrety como \'descripción\' o estado \'desaparecido\'.\n\n¡Los datos no se actualizan en vivo!\nPosiciones: ~30min.\nDescripciones: ~24h.</string>
-    <string name="init_geokrety_cache">Usar GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Usuario: %s</string>
     <string name="trackable_title_log_without_geocode">Geocódigo no establecido</string>
     <string name="trackable_log_without_geocode">Estás a punto de enviar un registro sin Geocódigo. Recomendamos establecer uno. ¿Quieres añadirlo ahora?</string>

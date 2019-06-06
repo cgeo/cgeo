@@ -1514,8 +1514,6 @@
     <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
     <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
     <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org tarjoaa välimuistissa olevaa tietoa GeoKrety-reissaajille.\nAineisto sisältää enemmän tietoa GeoKretyistä kuin \'kuvaus\' tai kadonnut-tila.\n\nAineisto ei ole reaaliaikaista!\nSijainnit: ~ 30 min. \nKuvaukset: ~ 24 h.</string>
-    <string name="init_geokrety_cache">Käytä GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
     <string name="trackable_title_log_without_geocode">Koodi puuttuu</string>
     <string name="trackable_log_without_geocode">Yrität lähettää lokin ilman Geokoodia. On suositeltavaa antaa koodi. Haluatko lisätä sen nyt?</string>

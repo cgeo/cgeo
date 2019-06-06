@@ -1549,8 +1549,6 @@
     <string name="init_geokrety_register_ok">Prisijungimas sėkmingas</string>
     <string name="init_geokrety_register_fail">Nepavyko prisijungti</string>
     <string name="init_geokrety_description">Leiskite c:geo prisijungti prie GeoKrety.org tam, kad galėtumėt registruoti GeoKrety keliauninkus.</string>
-    <string name="init_geokrety_cache_description">GeokretyMap.org suteikia duomenis apie GeoKrety keliauninkus.\nPrieinami duomenys turi daugiau GeoKrety informacijos kaip \"aprašymas\" arba \"dingusių\" būsena.\n\nDuomenys nėra patys naujausi! \nPadėtis: ~ 30 min. \nAprašymai: ~ 24 h.</string>
-    <string name="init_geokrety_cache">Naudoti GeoKretyMap.org</string>
     <string name="init_geokrety_userid">Vartotojo Id: %s</string>
     <string name="trackable_title_log_without_geocode">Nenurodytas geokodas</string>
     <string name="trackable_log_without_geocode">Jūs ruošiatės siųsti įrašą be Geo kodo. Reikia nurodyti Geo kodą. Ar norite pridėti jį dabar?</string>
