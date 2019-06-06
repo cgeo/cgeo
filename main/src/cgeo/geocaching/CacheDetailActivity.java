@@ -2249,10 +2249,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         boolean hintButtonEnabled = false;
         if (null != showHintClickListener) {
             final String hint = cache.getHint();
-            if (!StringUtils.isEmpty(hint)) {
+            final boolean hintGiven = !StringUtils.isEmpty(hint);
+            final String personalNote = cache.getPersonalNote();
+            final boolean personalNoteGiven = !StringUtils.isEmpty(personalNote);
+            if (hintGiven || personalNoteGiven) {
                 hintButtonEnabled = true;
                 final TextView offlineHintText = ButterKnife.findById(view, R.id.offline_hint_text);
-                offlineHintText.setText(hint);
+                offlineHintText.setText((hintGiven ? hint + (personalNoteGiven ? "\r\n" : "") : "") + (personalNoteGiven ? personalNote : ""));
             }
         }
         final ImageButton offlineHint = ButterKnife.findById(view, R.id.offline_hint);
