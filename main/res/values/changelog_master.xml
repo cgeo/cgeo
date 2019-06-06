@@ -2,5 +2,12 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+     <b>Next feature release:</b>\n
+    · New: Use https for send2cgeo\n
+    · New: Have button for last selected list in list selection when saving cache\n
+    · Fix: Reintroduce live map loading indication (horizontal progress bar)\n
+    · Fix: Also include other satellite systems than GPS in location info on mainscreen\n
+    \n
+    \n
   </string>
 </resources>
