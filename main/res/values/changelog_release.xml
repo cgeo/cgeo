@@ -2,8 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next bugfix release:</b>\n
-    · Fix: Identify cgeo towards OSM server\n
+     <b>2019.06.06:</b>\n
+    · Fix: Identify c:geo towards OSM server\n
     \n
     \n
     <b>2019.05.20:</b>\n
