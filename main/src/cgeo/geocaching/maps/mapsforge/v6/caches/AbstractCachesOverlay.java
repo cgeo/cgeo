@@ -289,10 +289,14 @@ public abstract class AbstractCachesOverlay {
         return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 || Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 || Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 || Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
     }
 
-    static synchronized void filter(final Collection<Geocache> caches) {
+    static void filter(final Collection<Geocache> caches) {
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
+        // filtering required?
+        if (!excludeMine && !excludeDisabled) {
+            return;
+        }
         final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
             if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
