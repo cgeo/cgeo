@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public final class MapUtils {
+public final class MapMarkerUtils {
 
     // data for overlays
     private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 25x30 / 33x40 / 45x51 / 60x68 / 90x102 / 120x136
@@ -36,7 +36,7 @@ public final class MapUtils {
 
     private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
 
-    private MapUtils() {
+    private MapMarkerUtils() {
         // Do not instantiate
     }
 

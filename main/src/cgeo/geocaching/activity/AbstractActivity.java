@@ -14,7 +14,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapUtils;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
@@ -251,7 +251,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setIcon(MapUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE));
+            actionBar.setIcon(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE));
         }
     }
 

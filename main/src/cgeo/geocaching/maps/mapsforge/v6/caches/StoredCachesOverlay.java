@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -85,7 +86,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
             final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
 
-            filter(cachesFromSearchResult);
+            MapUtils.filter(cachesFromSearchResult);
 
             // render
             update(cachesFromSearchResult);
