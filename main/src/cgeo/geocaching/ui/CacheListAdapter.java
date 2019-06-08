@@ -19,7 +19,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapUtils;
+import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -382,7 +382,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         } else {
             holder.logStatusMark.setVisibility(View.GONE);
         }
-        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapUtils.getCacheMarker(res, cache, holder.cacheListType), null, null, null);
+        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType), null, null, null);
     }
 
     @Override

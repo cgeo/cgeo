@@ -44,7 +44,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapUtils;
+import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -73,7 +73,6 @@ import android.widget.ViewSwitcher.ViewFactory;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -565,7 +564,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         mapView.destroyDrawingCache();
 
-        MapUtils.clearCachedItems();
+        MapMarkerUtils.clearCachedItems();
 
         super.onPause();
     }
@@ -1151,7 +1150,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             if (mapMode == MapMode.LIVE) {
                 synchronized (caches) {
-                    filter(caches);
+                    MapUtils.filter(caches);
                 }
             }
             countVisibleCaches();
@@ -1162,6 +1161,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     //All visible waypoints
                     final CacheType type = Settings.getCacheType();
                     final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, type);
+                    MapUtils.filter(waypointsInViewport);
                     waypoints.addAll(waypointsInViewport);
                 } else {
                     //All waypoints from the viewed caches
@@ -1209,7 +1209,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            filter(result);
+            MapUtils.filter(result);
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
@@ -1404,19 +1404,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
     }
 
-    private static synchronized void filter(final Collection<Geocache> caches) {
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-
-        final List<Geocache> removeList = new ArrayList<>();
-        for (final Geocache cache : caches) {
-            if ((excludeMine && (cache.isFound() || cache.isOwner())) || (excludeDisabled && (cache.isDisabled() || cache.isArchived()))) {
-                removeList.add(cache);
-            }
-        }
-        caches.removeAll(removeList);
-    }
-
     private static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
         return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 ||
                 Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
@@ -1573,13 +1560,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule());
-        item.setMarker(MapUtils.getCacheMarker(getResources(), cache));
+        item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache));
         return item;
     }
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
-        item.setMarker(MapUtils.getWaypointMarker(getResources(), waypoint));
+        item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint));
         return item;
     }
 

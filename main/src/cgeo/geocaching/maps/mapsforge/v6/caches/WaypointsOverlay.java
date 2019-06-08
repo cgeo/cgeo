@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -45,6 +46,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             final CacheType type = Settings.getCacheType();
 
             final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeDisabled, type);
+            MapUtils.filter(waypointsInViewport);
             waypoints.addAll(waypointsInViewport);
         }
         for (final Waypoint waypoint : waypoints) {
