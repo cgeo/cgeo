@@ -37,7 +37,6 @@ public class DistanceView {
     public void setDestination(final Geopoint coords) {
         destinationCoords = coords;
         realDistance = 0.0f;
-        this.distance1InfoView.setVisibility(destinationCoords != null ? View.VISIBLE : View.GONE);
         this.distance1View.setVisibility(destinationCoords != null ? View.VISIBLE : View.GONE);
     }
 
@@ -54,6 +53,7 @@ public class DistanceView {
         final float distance = currentCoords.distanceTo(destinationCoords);
 
         final boolean bothViewsNeeded = showBothDistances && realDistance != 0.0f && distance != realDistance;
+        distance1InfoView.setVisibility(bothViewsNeeded ? View.VISIBLE : View.GONE);
         distance2InfoView.setVisibility(bothViewsNeeded ? View.VISIBLE : View.GONE);
         distance2View.setVisibility(bothViewsNeeded ? View.VISIBLE : View.GONE);
         if (bothViewsNeeded) {
@@ -61,12 +61,8 @@ public class DistanceView {
             distance1View.setText(Units.getDistanceFromKilometers(distance));
             distance2InfoView.setText(WAVY_LINE_SYMBOL);
             distance2View.setText(Units.getDistanceFromKilometers(realDistance));
-        } else if (realDistance != 0.0f && distance != realDistance) {
-            distance1InfoView.setText(WAVY_LINE_SYMBOL);
-            distance1View.setText(Units.getDistanceFromKilometers(realDistance));
         } else {
-            distance1InfoView.setText(STRAIGHT_LINE_SYMBOL);
-            distance1View.setText(Units.getDistanceFromKilometers(distance));
+            distance1View.setText(Units.getDistanceFromKilometers(realDistance != 0.0f && distance != realDistance ? realDistance : distance));
         }
     }
 }

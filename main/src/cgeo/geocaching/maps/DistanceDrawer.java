@@ -136,7 +136,9 @@ public class DistanceDrawer {
         );
 
         /* Paint distance */
-        canvas.drawText(Character.toString(symbol), boxX + 2 * boxPadding, textY + yDelta, paintText);
+        if (symbol != ' ') {
+            canvas.drawText(Character.toString(symbol), boxX + 2 * boxPadding, textY + yDelta, paintText);
+        }
         canvas.drawText(text, textX + 5 * boxPadding, textY + yDelta, paintText);
     }
 
@@ -144,10 +146,8 @@ public class DistanceDrawer {
         if (showBothDistances && realDistance != 0.0f && distance != realDistance) {
             setText(canvas, true, STRAIGHT_LINE_SYMBOL, distanceText);
             setText(canvas, false, WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));
-        } else if (realDistance != 0.0f && distance != realDistance) {
-            setText(canvas, true, (char) WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));
         } else {
-            setText(canvas, true, (char) STRAIGHT_LINE_SYMBOL, distanceText);
+            setText(canvas, true, ' ', realDistance != 0.0f && distance != realDistance ? Units.getDistanceFromKilometers(realDistance) : distanceText);
         }
     }
 }
