@@ -7,6 +7,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -25,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -131,6 +133,11 @@ public class CachePopupFragment extends AbstractDialogFragment {
             CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
 
             CacheDetailActivity.updateCacheLists(view, cache, res);
+
+            final ImageButton ttsToggle = ButterKnife.findById(view, R.id.tts_toggle);
+            ttsToggle.setVisibility(View.VISIBLE);
+            ttsToggle.setOnClickListener(v -> SpeechService.toggleService(getActivity(), cache.getCoords()));
+
         } catch (final Exception e) {
             Log.e("CachePopupFragment.init", e);
         }
@@ -153,6 +160,12 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        SpeechService.stopService(getActivity());
+        super.onDestroy();
     }
 
     @Override

@@ -7,6 +7,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -102,9 +104,22 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
 
             addCacheDetails();
 
+            final View view = getView();
+            assert view != null;
+
+            final ImageButton ttsToggle = ButterKnife.findById(view, R.id.tts_toggle);
+            ttsToggle.setVisibility(View.VISIBLE);
+            ttsToggle.setOnClickListener(v -> SpeechService.toggleService(getActivity(), waypoint.getCoords()));
+
         } catch (final Exception e) {
             Log.e("WaypointPopup.init", e);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        SpeechService.stopService(getActivity());
+        super.onDestroy();
     }
 
     @Override
