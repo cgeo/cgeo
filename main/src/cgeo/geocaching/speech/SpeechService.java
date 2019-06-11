@@ -194,6 +194,14 @@ public class SpeechService extends Service implements OnInitListener {
         }
     }
 
+    public static void toggleService(final Activity activity, final Geopoint dstCoords) {
+        if (isRunning()) {
+            stopService(activity);
+        } else {
+            startService(activity, dstCoords);
+        }
+    }
+
     public static boolean isRunning() {
         return startingActivity != null;
     }
