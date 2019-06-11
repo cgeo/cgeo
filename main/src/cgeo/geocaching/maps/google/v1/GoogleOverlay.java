@@ -5,6 +5,7 @@ import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
+import cgeo.geocaching.settings.Settings;
 
 import android.graphics.Canvas;
 
@@ -20,7 +21,7 @@ public class GoogleOverlay extends Overlay implements OverlayImpl {
     private final Lock lock = new ReentrantLock();
 
     public GoogleOverlay(final MapViewImpl mapView, final Geopoint coords, final String geocode) {
-        overlayBase = new PositionAndScaleOverlay(this, mapView, coords, geocode);
+        overlayBase = new PositionAndScaleOverlay(this, mapView, coords, geocode, Settings.isBrouterShowBothDistances());
     }
 
     @Override

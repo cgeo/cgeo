@@ -968,6 +968,14 @@ public class Settings {
         putInt(R.string.pref_brouterDistanceThreshold, threshold);
     }
 
+    public static boolean isBrouterShowBothDistances() {
+        return getBoolean(R.string.pref_brouterShowBothDistances, false);
+    }
+
+    static void setBrouterShowBothDistances(final boolean show) {
+        putBoolean(R.string.pref_brouterShowBothDistances, show);
+    }
+
     public static boolean isUseTwitter() {
         return getBoolean(R.string.pref_twitter, false);
     }

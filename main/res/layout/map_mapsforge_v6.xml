@@ -43,23 +43,35 @@
             android:maxLines="1" />
         
         <TextView
-            android:id="@+id/distance"
+            android:id="@+id/distance1"
+            android:layout_marginTop="-8dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="-8dp"
-            android:layout_marginRight="-8dp"
-            android:paddingTop="4dp"
             android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/icon_bcg"
-            android:ellipsize="end"
-            android:gravity="center_horizontal"
-            android:lines="1"
-            android:textColor="@color/text_icon"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:maxLines="1" />
+            style="@style/map_distanceinfo" />
+
+        <TextView
+            android:id="@+id/distance1info"
+            android:layout_marginTop="-8dp"
+            android:layout_toLeftOf="@id/distance1"
+            android:layout_width="wrap_content"
+            style="@style/map_distanceinfo" />
+
+        <TextView
+            android:id="@+id/distance2"
+            android:layout_marginTop="0dp"
+            android:layout_below="@id/distance1"
+            android:layout_alignParentRight="true"
+            android:layout_width="100dp"
+            style="@style/map_distanceinfo" />
+
+        <TextView
+            android:id="@+id/distance2info"
+            android:layout_marginTop="0dp"
+            android:layout_below="@id/distance1info"
+            android:layout_toLeftOf="@id/distance2"
+            android:layout_width="wrap_content"
+            style="@style/map_distanceinfo" />
 
         <include layout="@layout/map_progressbar" />
 
