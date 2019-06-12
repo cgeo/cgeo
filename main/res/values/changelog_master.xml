@@ -5,8 +5,13 @@
      <b>Next feature release:</b>\n
     · New: Use https for send2cgeo\n
     · New: Have button for last selected list in list selection when saving cache\n
+    · New: Use new GeoKrety API\n
+    · New: Show also personal note when clicking on the hint button in map popup window\n
+    · New: Add Text-To-Speach navigation to cache and waypoint popup\n
+    · New: Show routed distance (requires brouter app) instead of or additionally to direct distance for selected cache on map\n
     · Fix: Reintroduce live map loading indication (horizontal progress bar)\n
     · Fix: Also include other satellite systems than GPS in location info on mainscreen\n
+    · Fix: Waypoint of other lists leaked onto a mapped list\n
     \n
     \n
   </string>
