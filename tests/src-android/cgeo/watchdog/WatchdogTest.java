@@ -53,7 +53,8 @@ public class WatchdogTest extends CGeoTestCase {
 
     @NotForIntegrationTests
     public static void testOpenCachingUS() {
-        downloadOpenCaching("OU0331");
+        // temporarily disable opencaching.us cache download check, see issue #7676
+        // downloadOpenCaching("OU0331");
     }
 
     private static void downloadOpenCaching(final String geocode) {
@@ -71,7 +72,7 @@ public class WatchdogTest extends CGeoTestCase {
 
     private static void checkWebsite(final String connectorName, final String url) {
         
-        // temporarily disable opencaching.us 
+        // temporarily disable opencaching.us website check, see issue #7676
         if (connectorName.equalsIgnoreCase("geocaching website opencaching.us")) {
             return;
         }
