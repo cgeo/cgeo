@@ -15,10 +15,10 @@ import cgeo.geocaching.utils.Log;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -107,13 +107,22 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
             final View view = getView();
             assert view != null;
 
-            final ImageButton ttsToggle = ButterKnife.findById(view, R.id.tts_toggle);
-            ttsToggle.setVisibility(View.VISIBLE);
-            ttsToggle.setOnClickListener(v -> SpeechService.toggleService(getActivity(), waypoint.getCoords()));
-
         } catch (final Exception e) {
             Log.e("WaypointPopup.init", e);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (super.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        if (item.getItemId() == R.id.menu_tts_toggle) {
+            SpeechService.toggleService(getActivity(), waypoint.getCoords());
+            return true;
+        }
+        return false;
     }
 
     @Override
