@@ -1,74 +1,23 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.R;
-
 import android.content.Context;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
-import butterknife.ButterKnife;
-
-public class WpThresholdPreference extends Preference {
-
-    private TextView valueView;
-
-    public WpThresholdPreference(final Context context) {
-        super(context);
-        init();
-    }
+public class WpThresholdPreference extends AbstractSeekbarPreference {
 
     public WpThresholdPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
-    public WpThresholdPreference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
-        init();
-    }
-
-    private void init() {
-        setPersistent(false);
+    protected void saveSetting(final int progress) {
+        Settings.setShowWaypointsThreshold(progress);
     }
 
     @Override
     protected View onCreateView(final ViewGroup parent) {
-        final View v = super.onCreateView(parent);
-
-        // get views
-        final SeekBar seekBar = ButterKnife.findById(v, R.id.preference_seekbar);
-        valueView = ButterKnife.findById(v, R.id.preference_seekbar_value_view);
-
-        // init seekbar
-        seekBar.setMax(Settings.SHOW_WP_THRESHOLD_MAX);
-
-        // set initial value
-        final int threshold = Settings.getWayPointsThreshold();
-        valueView.setText(String.valueOf(threshold));
-        seekBar.setProgress(threshold);
-
-        seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                if (fromUser) {
-                    valueView.setText(String.valueOf(progress));
-                }
-            }
-            @Override
-            public void onStartTrackingTouch(final SeekBar seekBar) {
-                // abstract method needs to be implemented, but is not used here
-            }
-            @Override
-            public void onStopTrackingTouch(final SeekBar seekBar) {
-                Settings.setShowWaypointsThreshold(seekBar.getProgress());
-            }
-        });
-
-        return v;
+        configure(0, Settings.SHOW_WP_THRESHOLD_MAX, Settings.getWayPointsThreshold(), null);
+        return super.onCreateView(parent);
     }
 }
