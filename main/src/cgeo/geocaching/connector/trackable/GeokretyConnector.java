@@ -145,7 +145,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     URL + "/export2.php" + "?gkid=" + gkid,
             };
             InputStream response = null;
-            for (String urlDetails : gkUlrs) {
+            for (final String urlDetails : gkUlrs) {
                 response = Network.getResponseStream(Network.getRequest(urlDetails));
                 if (response != null) {
                     break;
@@ -185,7 +185,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     URL +  "/export2.php?wpt=" + geocodeEncoded,
             };
             InputStream response = null;
-            for (String urlDetails : gkUlrs) {
+            for (final String urlDetails : gkUlrs) {
                 response = Network.getResponseStream(Network.getRequest(urlDetails));
                 if (response != null) {
                     break;
