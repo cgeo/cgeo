@@ -106,6 +106,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
+        //https://geokrety.org/konkret.php?id=46464
         return URL + "/konkret.php?id=" + getId(trackable.getGeocode());
     }
 
@@ -115,18 +116,18 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         return searchTrackable(geocode);
     }
 
-    private static String getUrlCache() {
-        return Settings.isGeokretyCacheActive() ? URLPROXY : URL;
-    }
-
     @Nullable
     public static Trackable searchTrackable(final String geocode) {
-        final Integer gkid;
+        final int gkid;
 
         if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
             gkid = getId(geocode);
+            if (gkid < 0) {
+                Log.d("GeokretyConnector.searchTrackable: Unable to retrieve GK numeric ID by ReferenceNumber");
+                return null;
+            }
         } else {
-            // This probably a Tracking Code
+            // This is probably a Tracking Code
             Log.d("GeokretyConnector.searchTrackable: geocode=" + geocode);
 
             final String geocodeFound = getGeocodeFromTrackingCode(geocode);
@@ -139,11 +140,20 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
         Log.d("GeokretyConnector.searchTrackable: gkid=" + gkid);
         try {
-            final String urlDetails = Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php";
-
-            final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + gkid));
+            final String[] gkUlrs = {
+                    URLPROXY + "/gk/" + gkid + "/details",
+                    URL + "/export2.php" + "?gkid=" + gkid,
+            };
+            InputStream response = null;
+            for (String urlDetails : gkUlrs) {
+                response = Network.getResponseStream(Network.getRequest(urlDetails));
+                if (response != null) {
+                    break;
+                }
+                Log.d("GeokretyConnector.searchTrackable: No data from address " + urlDetails);
+            }
             if (response == null) {
-                Log.d("GeokretyConnector.searchTrackable: No data from server");
+                Log.d("GeokretyConnector.searchTrackable: No data for gkid " + gkid);
                 return null;
             }
             try {
@@ -161,7 +171,6 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         } catch (final Exception e) {
             Log.w("GeokretyConnector.searchTrackable", e);
         }
-        // TODO maybe a fallback to no proxy would be cool?
         return null;
     }
 
@@ -170,9 +179,21 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public List<Trackable> searchTrackables(final String geocode) {
         Log.d("GeokretyConnector.searchTrackables: wpt=" + geocode);
         try {
-            final InputStream response = Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + URLEncoder.encode(geocode, "utf-8")));
+            final String geocodeEncoded = URLEncoder.encode(geocode, "utf-8");
+            final String[] gkUlrs = {
+                    URLPROXY +  "/wpt/" + geocodeEncoded,
+                    URL +  "/export2.php?wpt=" + geocodeEncoded,
+            };
+            InputStream response = null;
+            for (String urlDetails : gkUlrs) {
+                response = Network.getResponseStream(Network.getRequest(urlDetails));
+                if (response != null) {
+                    break;
+                }
+                Log.d("GeokretyConnector.searchTrackables: No data from from address " + urlDetails);
+            }
             if (response == null) {
-                Log.d("GeokretyConnector.searchTrackable: No data from server");
+                Log.d("GeokretyConnector.searchTrackables: No data for geocode " + geocode);
                 return Collections.emptyList();
             }
             try {
@@ -250,7 +271,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final String hex = geocode.substring(2);
             return Integer.parseInt(hex, 16);
         } catch (final NumberFormatException e) {
-            Log.e("Trackable.getId", e);
+            Log.e("GeokretyConnector.getId", e);
         }
         return -1;
     }
@@ -263,10 +284,12 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         if (StringUtils.isNumeric(gkId)) {
             return geocode(Integer.parseInt(gkId));
         }
-        // https://api.geokrety.org/38545
-        final String gkmapId = StringUtils.substringAfterLast(url, "api.geokrety.org/");
-        if (StringUtils.isNumeric(gkmapId)) {
-            return geocode(Integer.parseInt(gkmapId));
+        // https://api.geokrety.org/gk/38545
+        // https://api.geokrety.org/gk/38545/details
+        String gkapiId = StringUtils.substringAfterLast(url, "api.geokrety.org/gk/");
+        gkapiId = StringUtils.substringBeforeLast(gkapiId, "/");
+        if (StringUtils.isNumeric(gkapiId)) {
+            return geocode(Integer.parseInt(gkapiId));
         }
         return null;
     }
@@ -292,8 +315,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      */
     @Nullable
     private static String getGeocodeFromTrackingCode(final String trackingCode) {
-        final Parameters params = new Parameters("nr", trackingCode);
-        final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id.php", params));
+        final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id/" + trackingCode));
         // An empty response means "not found"
         if (response == null || StringUtils.equals(response, "0")) {
             return null;

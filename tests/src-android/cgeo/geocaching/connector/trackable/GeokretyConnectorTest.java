@@ -38,6 +38,9 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         assertThat(getConnector().getTrackableCodeFromUrl("https://www.geokrety.org/konkret.php?id=46464")).isEqualTo("GKB580");
         assertThat(getConnector().getTrackableCodeFromUrl("http://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
         assertThat(getConnector().getTrackableCodeFromUrl("https://geokrety.org/konkret.php?id=46465")).isEqualTo("GKB581");
+
+        assertThat(getConnector().getTrackableCodeFromUrl("https://api.geokrety.org/gk/46464")).isEqualTo("GKB580");
+        assertThat(getConnector().getTrackableCodeFromUrl("https://api.geokrety.org/gk/46464/details")).isEqualTo("GKB580");
     }
 
     public static void testGeocode() throws Exception {
