@@ -27,12 +27,14 @@ public class HistoryLayer extends Layer {
     private Location coordinates;
     private Paint historyLine;
     private Paint historyLineShadow;
+    private final int trailColor;
 
     public HistoryLayer(final ArrayList<Location> locationHistory) {
         super();
         if (locationHistory != null) {
             positionHistory.setHistory(locationHistory);
         }
+        trailColor = Settings.getTrailColor();
     }
 
     public void reset() {
@@ -54,7 +56,7 @@ public class HistoryLayer extends Layer {
         if (historyLineShadow == null) {
             historyLineShadow = AndroidGraphicFactory.INSTANCE.createPaint();
             historyLineShadow.setStrokeWidth(7.0f);
-            historyLineShadow.setColor(0x66000000);
+            historyLineShadow.setColor(trailColor);
         }
 
         positionHistory.rememberTrailPosition(coordinates);
