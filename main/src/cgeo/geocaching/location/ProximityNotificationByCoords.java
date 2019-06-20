@@ -17,7 +17,7 @@ public class ProximityNotificationByCoords extends ProximityNotification {
     }
 
     public void onUpdateGeoData(final GeoData geo) {
-        if (referencePoint != null) {
+        if (null != referencePoint) {
             checkDistance((int) (1000f * referencePoint.distanceTo(geo.getCoords())));
         }
     }

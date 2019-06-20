@@ -74,11 +74,12 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         for (final Geocache cache : baseCaches) {
             waypoints.addAll(cache.getWaypoints());
         }
-        for (Waypoint waypoint : waypoints) {
+        for (final Waypoint waypoint : waypoints) {
             final int distance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
             if (distance > 0 && distance < minDistance) {
                 minDistance = distance;
             }
         }
         return minDistance;
-    }}
+    }
+}

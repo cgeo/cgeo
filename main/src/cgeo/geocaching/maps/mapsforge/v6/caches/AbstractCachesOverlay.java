@@ -316,7 +316,7 @@ public abstract class AbstractCachesOverlay {
     public int getClosestDistanceInM(final Geopoint coord) {
         int minDistance = 50000000;
         final Set<Geocache> caches = DataStore.loadCaches(getCacheGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
-        for (Geocache cache : caches) {
+        for (final Geocache cache : caches) {
             final int distance = (int) (1000f * cache.getCoords().distanceTo(coord));
             if (distance > 0 && distance < minDistance) {
                 minDistance = distance;

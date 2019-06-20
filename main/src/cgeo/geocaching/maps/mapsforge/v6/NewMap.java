@@ -1275,7 +1275,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                             map.positionLayer.setHeading(currentHeading);
                             map.positionLayer.requestRedraw();
 
-                            if (map.proximityNotification != null) {
+                            if (null != map.proximityNotification) {
                                 map.proximityNotification.checkDistance(map.caches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
                             }
                         }

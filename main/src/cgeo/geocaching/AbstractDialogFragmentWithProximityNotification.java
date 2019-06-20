@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.location.ProximityNotificationByCoords;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.settings.Settings;
 
 import android.os.Bundle;
 
@@ -19,6 +20,6 @@ public abstract class AbstractDialogFragmentWithProximityNotification extends Ab
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        proximityNotification = new ProximityNotificationByCoords();
+        proximityNotification = Settings.isSpecificProximityNotificationActive() ? new ProximityNotificationByCoords() : null;
     }
 }

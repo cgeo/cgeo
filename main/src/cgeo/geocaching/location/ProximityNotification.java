@@ -1,7 +1,6 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.Log;
 
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -54,8 +53,6 @@ public class ProximityNotification {
     }
 
     public void checkDistance (final int distance) {
-        int tone = TONE_NONE;
-
         // no precise distances
         if (distance > Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
             return;
@@ -72,15 +69,14 @@ public class ProximityNotification {
         }
 
         // check if tone needs to be played
+        int tone = TONE_NONE;
         final long currentTimestamp = System.currentTimeMillis();
         if (twoDistances && distance <= distanceNear) {
             if ((lastTone != TONE_NEAR) || (repeatedSignal && (currentTimestamp - lastTimestamp) > MIN_TIME_DELTA_NEAR)) {
                 tone = TONE_NEAR;
             }
-        } else if (distance <= distanceFar) {
-            if ((lastTone != TONE_FAR) || (repeatedSignal && (currentTimestamp - lastTimestamp) > MIN_TIME_DELTA_FAR)) {
-                tone = TONE_FAR;
-            }
+        } else if (distance <= distanceFar && ((lastTone != TONE_FAR) || (repeatedSignal && (currentTimestamp - lastTimestamp) > MIN_TIME_DELTA_FAR))) {
+            tone = TONE_FAR;
         }
 
         // play tone if necessary
