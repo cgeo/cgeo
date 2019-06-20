@@ -265,4 +265,21 @@ public class CachesBundle {
             wpOverlay.hideWaypoints();
         }
     }
+
+    public int getClosestDistanceInM(final Geopoint coord) {
+        int minDistance = 50000000;
+        if (baseOverlay != null) {
+            minDistance = Math.min(minDistance, baseOverlay.getClosestDistanceInM(coord));
+        }
+        if (storedOverlay != null) {
+            minDistance = Math.min(minDistance, storedOverlay.getClosestDistanceInM(coord));
+        }
+        if (liveOverlay != null) {
+            minDistance = Math.min(minDistance, liveOverlay.getClosestDistanceInM(coord));
+        }
+        if (wpOverlay != null) {
+            minDistance = Math.min(minDistance, wpOverlay.getClosestDistanceInM(coord));
+        }
+        return minDistance;
+    }
 }

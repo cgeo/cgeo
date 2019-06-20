@@ -19,6 +19,7 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
@@ -145,6 +146,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     /**
      * initialization with an empty subscription to make static code analysis tools more happy
      */
+    private ProximityNotification proximityNotification;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private CheckBox myLocSwitch;
     private MapOptions mapOptions;
@@ -706,6 +708,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Log.d("NewMap: onResume");
 
         resumeTileLayer();
+        proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(false, false) : null;
     }
 
     @Override
@@ -1271,6 +1274,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                             map.positionLayer.setCoordinates(currentLocation);
                             map.positionLayer.setHeading(currentHeading);
                             map.positionLayer.requestRedraw();
+
+                            if (map.proximityNotification != null) {
+                                map.proximityNotification.checkDistance(map.caches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                            }
                         }
                     }
                 } catch (final RuntimeException e) {

@@ -596,6 +596,21 @@
                 android:title="@string/init_brouterShowBothDistances" />
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/settings_title_proximityNotification"
+            android:layout="@layout/preference_category" >
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_proximityNotificationGeneral"
+                android:summary="@string/init_summary_proximityNotificationGeneral"
+                android:title="@string/init_proximityNotificationGeneral" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_proximityNotificationSpecific"
+                android:summary="@string/init_summary_proximityNotificationSpecific"
+                android:title="@string/init_proximityNotificationSpecific" />
+            <!-- todo: seekbar preference for distances, currently using mockup -->
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
             android:layout="@layout/preference_category" >
             <cgeo.geocaching.settings.TextPreference

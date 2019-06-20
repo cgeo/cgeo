@@ -81,6 +81,8 @@
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
     <string translatable="false" name="pref_brouterShowBothDistances">pref_brouterShowBothDistances</string>
+    <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
+    <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
     <string translatable="false" name="pref_maptrail">maptrail</string>
     <string translatable="false" name="pref_dot_mode">dot_mode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>

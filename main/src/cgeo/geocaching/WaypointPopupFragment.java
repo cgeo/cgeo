@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
 
-public class WaypointPopupFragment extends AbstractDialogFragment {
+public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
     @BindView(R.id.actionbar_title) protected TextView actionBarTitle;
     @BindView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
     @BindView(R.id.edit) protected Button buttonEdit;
@@ -54,6 +54,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
 
     @Override
     protected void onUpdateGeoData(final GeoData geo) {
+        super.onUpdateGeoData(geo);
         if (waypoint != null) {
             final Geopoint coordinates = waypoint.getCoords();
             if (coordinates != null) {
@@ -68,6 +69,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
         super.init();
 
         waypoint = DataStore.loadWaypoint(waypointId);
+        proximityNotification.setReferencePoint(waypoint.getCoords());
 
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
