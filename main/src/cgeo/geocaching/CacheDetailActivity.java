@@ -50,6 +50,7 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -426,6 +427,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onDestroy() {
         createDisposables.clear();
+        SpeechService.stopService(this);
         super.onDestroy();
     }
 
@@ -732,6 +734,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return true;
                 }
                 break;
+            case R.id.menu_tts_toggle:
+                SpeechService.toggleService(this, cache.getCoords());
+                return true;
             default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
                     refreshOnResume = true;
