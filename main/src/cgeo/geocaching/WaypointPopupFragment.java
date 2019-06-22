@@ -69,7 +69,9 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         super.init();
 
         waypoint = DataStore.loadWaypoint(waypointId);
-        proximityNotification.setReferencePoint(waypoint.getCoords());
+        if (null != proximityNotification) {
+            proximityNotification.setReferencePoint(waypoint.getCoords());
+        }
 
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
