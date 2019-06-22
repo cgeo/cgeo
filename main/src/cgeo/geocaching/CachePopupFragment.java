@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
-public class CachePopupFragment extends AbstractDialogFragment {
+public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {
     private final Progress progress = new Progress();
 
     public static DialogFragment newInstance(final String geocode) {
@@ -110,6 +110,9 @@ public class CachePopupFragment extends AbstractDialogFragment {
     @Override
     protected void init() {
         super.init();
+        if (null != proximityNotification) {
+            proximityNotification.setReferencePoint(cache.getCoords());
+        }
 
         try {
             if (StringUtils.isNotBlank(cache.getName())) {

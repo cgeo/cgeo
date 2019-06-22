@@ -74,6 +74,11 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_MAX = 200;
     private static final int BROUTER_THRESHOLD_DEFAULT = 10;
     public static final int BROUTER_THRESHOLD_MAX = 120;
+
+    public static final int PROXIMITY_NOTIFICATION_MAX_DISTANCE = 1000;
+    public static final int PROXIMITY_NOTIFICATION_DISTANCE_FAR = 60;
+    public static final int PROXIMITY_NOTIFICATION_DISTANCE_NEAR = 20;
+
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -970,6 +975,26 @@ public class Settings {
 
     static void setBrouterShowBothDistances(final boolean show) {
         putBoolean(R.string.pref_brouterShowBothDistances, show);
+    }
+
+    /**
+     * Proximity notification settings
+     */
+
+    public static boolean isGeneralProximityNotificationActive() {
+        return getBoolean(R.string.pref_proximityNotificationGeneral, false);
+    }
+
+    public static boolean isSpecificProximityNotificationActive() {
+        return getBoolean(R.string.pref_proximityNotificationSpecific, false);
+    }
+
+    public static int getProximityNotificationThreshold(final boolean farDistance) {
+        return getInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, farDistance ? PROXIMITY_NOTIFICATION_DISTANCE_FAR : PROXIMITY_NOTIFICATION_DISTANCE_NEAR);
+    }
+
+    public static void setProximityNotificationThreshold(final boolean farDistance, final int distance) {
+        putInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, distance);
     }
 
     public static boolean isUseTwitter() {

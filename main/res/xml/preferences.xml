@@ -596,6 +596,26 @@
                 android:title="@string/init_brouterShowBothDistances" />
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/settings_title_proximityNotification"
+            android:layout="@layout/preference_category" >
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_proximityNotificationGeneral"
+                android:summary="@string/init_summary_proximityNotificationGeneral"
+                android:title="@string/init_proximityNotificationGeneral" />
+            <cgeo.geocaching.settings.ProximityFarPreference
+                android:key="@string/pref_proximityDistanceFar"
+                android:layout="@layout/preference_seekbar" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_proximityNotificationSpecific"
+                android:summary="@string/init_summary_proximityNotificationSpecific"
+                android:title="@string/init_proximityNotificationSpecific" />
+            <cgeo.geocaching.settings.ProximityNearPreference
+                android:key="@string/pref_proximityDistanceNear"
+                android:layout="@layout/preference_seekbar" />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
             android:layout="@layout/preference_category" >
             <cgeo.geocaching.settings.TextPreference
