@@ -314,7 +314,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 minDistance = Math.min(minDistance, distance);
             }
         }
-        Log.e("minDistance=" + minDistance);
         return minDistance;
     }
 }
