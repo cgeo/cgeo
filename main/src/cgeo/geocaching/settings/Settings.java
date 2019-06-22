@@ -990,8 +990,11 @@ public class Settings {
     }
 
     public static int getProximityNotificationThreshold(final boolean farDistance) {
-        // mockup only so far
-        return farDistance ? PROXIMITY_NOTIFICATION_DISTANCE_FAR : PROXIMITY_NOTIFICATION_DISTANCE_NEAR;
+        return getInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, farDistance ? PROXIMITY_NOTIFICATION_DISTANCE_FAR : PROXIMITY_NOTIFICATION_DISTANCE_NEAR);
+    }
+
+    public static void setProximityNotificationThreshold(final boolean farDistance, final int distance) {
+        putInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, distance);
     }
 
     public static boolean isUseTwitter() {

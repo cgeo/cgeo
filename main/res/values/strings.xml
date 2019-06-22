@@ -728,7 +728,7 @@
     <string name="init_proximityNotificationGeneral">General proximity notification</string>
     <string name="init_summary_proximityNotificationGeneral">Play a single notification, if any cache or waypoint currently visible on the map is closer than distance 1.</string>
     <string name="init_proximityNotificationSpecific">Specific proximity notification</string>
-    <string name="init_summary_proximityNotificationSpecific">Play a notification, if the selected cache or waypoint is closer than distance 1 (farther away) or distance 2 (closer).</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a notification, if the selected cache or waypoint is closer than distance 1 (farther away) or distance 2 (closer). Uses different tones for the two distances.</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
