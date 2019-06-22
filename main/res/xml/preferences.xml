@@ -582,6 +582,13 @@
                 android:key="@string/pref_maptrail"
                 android:summary="@string/init_summary_maptrail"
                 android:title="@string/init_maptrail" />
+            <ListPreference
+                android:title="Trail color"
+                android:summary="%s"
+                android:key="@string/pref_trailcolor"
+                android:defaultValue="@string/pref_value_grey"
+                android:entries="@array/trailcolors"
+                android:entryValues="@array/trailcolorValues" />
             <Preference
                 android:selectable="false"
                 android:summary="@string/init_brouterThreshold_description"

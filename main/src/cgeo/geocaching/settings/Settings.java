@@ -753,6 +753,19 @@ public class Settings {
         putBoolean(R.string.pref_maptrail, showTrail);
     }
 
+    public static int getTrailColor() {
+        final Context baseContext = CgeoApplication.getInstance().getBaseContext();
+        final String defaultValue = baseContext.getString(R.string.pref_value_grey);
+        final String trailColor = getString(R.string.pref_trailcolor, defaultValue);
+        if (trailColor.equals(baseContext.getString(R.string.pref_value_blue))) {
+            return 0xff0000dd;
+        } else if (trailColor.equals(baseContext.getString(R.string.pref_value_green))) {
+            return 0xff006b00;
+        } else {
+            return 0x66000000;
+        }
+    }
+
     public static boolean isDotMode() {
         return getBoolean(R.string.pref_dot_mode, false);
     }

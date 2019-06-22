@@ -86,6 +86,7 @@
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
     <string translatable="false" name="pref_proximityDistanceNear">pref_proximityDistanceNear</string>
     <string translatable="false" name="pref_maptrail">maptrail</string>
+    <string translatable="false" name="pref_trailcolor">trailcolor</string>
     <string translatable="false" name="pref_dot_mode">dot_mode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
@@ -224,4 +225,8 @@
     <string translatable="false" name="pref_map_direction">map_direction</string>
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
+
+    <string translatable="false" name="pref_value_blue">blue</string>
+    <string translatable="false" name="pref_value_green">green</string>
+    <string translatable="false" name="pref_value_grey">grey</string>
 </resources>

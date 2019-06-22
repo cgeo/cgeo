@@ -33,6 +33,7 @@ public class PositionDrawer {
     private Paint accuracyCircle = null;
     private Paint historyLine = null;
     private Paint historyLineShadow = null;
+    private final int trailColor;
     private final Point center = new Point();
     private final Point left = new Point();
     private Bitmap arrow = null;
@@ -45,6 +46,7 @@ public class PositionDrawer {
 
     public PositionDrawer() {
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
+        trailColor = Settings.getTrailColor();
     }
 
     void drawPosition(final Canvas canvas, final MapProjectionImpl projection) {
@@ -69,7 +71,7 @@ public class PositionDrawer {
             historyLineShadow = new Paint();
             historyLineShadow.setAntiAlias(true);
             historyLineShadow.setStrokeWidth(7.0f);
-            historyLineShadow.setColor(0x66000000);
+            historyLineShadow.setColor(trailColor);
         }
 
         if (setfil == null) {
