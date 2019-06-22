@@ -206,8 +206,6 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
-        menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         menu.findItem(R.id.menu_hint).setVisible(cache != null);
         return true;
     }
@@ -225,13 +223,8 @@ public class CompassActivity extends AbstractActionBarActivity {
                     DefaultMap.startActivityCoords(this, dstCoords, null, null);
                 }
                 return true;
-            case R.id.menu_tts_start:
-                SpeechService.startService(this, dstCoords);
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_tts_stop:
-                SpeechService.stopService(this);
-                invalidateOptionsMenuCompatible();
+            case R.id.menu_tts_toggle:
+                SpeechService.toggleService(this, dstCoords);
                 return true;
             case R.id.menu_hint:
                 cache.showHintToast(this);

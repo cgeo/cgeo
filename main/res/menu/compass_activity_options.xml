@@ -15,16 +15,9 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_tts_start"
+        android:id="@+id/menu_tts_toggle"
         android:icon="@drawable/ic_menu_start_conversation"
-        android:title="@string/tts_start"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
-        android:id="@+id/menu_tts_stop"
-        android:icon="@drawable/ic_menu_start_conversation"
-        android:title="@string/tts_stop"
-        android:visible="false"
+        android:title="@string/tts_toggle"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
