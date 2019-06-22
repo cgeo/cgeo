@@ -1662,7 +1662,7 @@
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
 
     <!-- colors -->
-    <string name="color_blue">blue</string>
-    <string name="color_green">green</string>
-    <string name="color_grey">grey</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>
