@@ -14,6 +14,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -129,6 +130,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private PositionAndScaleOverlay overlayPositionAndScale;
 
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
+    private ProximityNotification proximityNotification;
     // status data
     /**
      * Last search result used for displaying header
@@ -534,6 +536,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
                     }
                 });
+        proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(false, false) : null;
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
@@ -983,6 +986,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.setHeading(currentHeading);
                             map.mapView.repaintRequired(map.overlayPositionAndScale);
+
+                            if (null != map.proximityNotification) {
+                                map.proximityNotification.checkDistance(map.overlayCaches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                            }
                         }
                     }
                 } catch (final RuntimeException e) {
