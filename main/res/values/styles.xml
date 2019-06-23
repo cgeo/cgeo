@@ -413,4 +413,16 @@
         <item name="android:visibility">gone</item>
         <item name="android:maxLines">1</item>
     </style>
+
+    <!-- about c:geo contributors style -->
+    <style name="about_contributors">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_margin">7dip</item>
+        <item name="android:linksClickable">true</item>
+        <item name="android:paddingLeft">3dip</item>
+        <item name="android:textColor">?text_color</item>
+        <item name="android:textColorLink">?text_color_link</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

@@ -72,13 +72,22 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.contributors) protected TextView contributors;
+        @BindView(R.id.about_carnerodetails) protected TextView carnerodetails;
+        @BindView(R.id.about_contributors_recent) protected TextView contributors;
+        @BindView(R.id.about_specialthanksdetails) protected TextView specialthanks;
+        @BindView(R.id.about_contributors_others) protected TextView contributorsOthers;
+        @BindView(R.id.about_components) protected TextView components;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, parentView, false);
             ButterKnife.bind(this, view);
-            contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            final AnchorAwareLinkMovementMethod mm = AnchorAwareLinkMovementMethod.getInstance();
+            carnerodetails.setMovementMethod(mm);
+            contributors.setMovementMethod(mm);
+            specialthanks.setMovementMethod(mm);
+            contributorsOthers.setMovementMethod(mm);
+            components.setMovementMethod(mm);
             return view;
         }
 

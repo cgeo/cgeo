@@ -33,11 +33,31 @@
     <string name="settings_facebook_login_url" translatable="false">https://faq.cgeo.org/#facebook-login</string>
 
     <!-- contributors -->
-    <string name="contributors" translatable="false">
-    · carnero as the father of c:geo\n
-    \n
-    · Arne Schwabe (code)\n
+    <string name="contributors_recent" translatable="false">
     · Bananeweizen (code)\n
+    · bekuno (code)\n
+    · bjdupuis (code)\n
+    · ControlTheBit (code)\n
+    · following5 (code)\n
+    · jonas-koeritz (code)\n
+    · HolgerJeromin (code)\n
+    · lazydays79 (code)\n
+    · <a href="https://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support, documentation)\n
+    · Mathieu Alorent (code)\n
+    · Matze2 (code) \n
+    · <a href="http://github.com/moving-bits">moving-bits</a> (code)\n
+    · msperkowski (doc)\n
+    · mucek4 (code, open source project leader)\n
+    · okainov (code)\n
+    · Peter Storch (code)\n
+    · Rainer S. (code)\n
+    · <a href="http://www.sammyshp.de/">SammysHP</a> (code)\n
+    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code)\n
+    · UniQP (code)
+    </string>
+
+    <string name="contributors_other" translatable="false">
+    · Arne Schwabe (code)\n
     · blafoo (code)\n
     · campbeb (code)\n
     · Eisbehr (code)\n
@@ -47,27 +67,20 @@
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
     · <a href="https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code)\n
-    · <a href="https://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support)\n
     · marco-dev (code)\n
-    · Mathieu Alorent (code)\n
     · MichielK (code)\n
-    · mucek4 (code, open source project leader)\n
     · ncorreia (code)\n
     · Pavol Babinčák (code)\n
-    · Peter Storch (code)\n
     · <a href="https://github.com/Portree-Kid">Portree Kid</a> (code)\n
-    · Rainer S. (code)\n
     · Ray (code)\n
     · RoadRunner- (code)\n
-    · <a href="http://www.sammyshp.de/">SammysHP</a> (code)\n
-    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code)\n
     · stephanme/Geoteufel (code)\n
     · thiasB (code)\n
     · YraFyra (code)\n
-    · zenobios (code)\n
-    \n
-    · Special thanks to all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n
-    \n
+    · zenobios (code)
+    </string>
+
+    <string name="components" translatable="false">
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons):\n
     &#160;&#160;&#160;· USB by Kenneth Von Alt from The Noun Project\n
