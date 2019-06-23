@@ -137,33 +137,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         }
     }
 
-    class HelpViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-
-        @BindView(R.id.support) protected TextView support;
-        @BindView(R.id.website) protected TextView website;
-        @BindView(R.id.facebook) protected TextView facebook;
-        @BindView(R.id.twitter) protected TextView twitter;
-        @BindView(R.id.nutshellmanual) protected TextView nutshellmanual;
-        @BindView(R.id.market) protected TextView market;
-        @BindView(R.id.faq) protected TextView faq;
-
-        @Override
-        public ScrollView getDispatchedView(final ViewGroup parentView) {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, parentView, false);
-            ButterKnife.bind(this, view);
-            setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
-                    "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
-            setClickListener(website, "http://www.cgeo.org/");
-            setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
-            setClickListener(twitter, "https://twitter.com/android_gc");
-            setClickListener(nutshellmanual, "https://manual.cgeo.org/");
-            setClickListener(faq, "http://faq.cgeo.org/");
-            market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
-            return view;
-        }
-
-    }
-
     class StartingViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @BindView(R.id.about_starting_btn_services) protected Button services;
@@ -185,6 +158,14 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @BindView(R.id.about_special_build) protected TextView specialBuild;
         @BindView(R.id.donate) protected TextView donateButton;
 
+        @BindView(R.id.support) protected TextView support;
+        @BindView(R.id.website) protected TextView website;
+        @BindView(R.id.facebook) protected TextView facebook;
+        @BindView(R.id.twitter) protected TextView twitter;
+        @BindView(R.id.nutshellmanual) protected TextView nutshellmanual;
+        @BindView(R.id.market) protected TextView market;
+        @BindView(R.id.faq) protected TextView faq;
+
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, parentView, false);
@@ -195,6 +176,15 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 specialBuild.setText(BuildConfig.SPECIAL_BUILD);
                 specialBuild.setVisibility(View.VISIBLE);
             }
+
+            setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
+                    "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
+            setClickListener(website, "http://www.cgeo.org/");
+            setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
+            setClickListener(twitter, "https://twitter.com/android_gc");
+            setClickListener(nutshellmanual, "https://manual.cgeo.org/");
+            setClickListener(faq, "http://faq.cgeo.org/");
+            market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
             return view;
         }
     }
@@ -202,7 +192,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     enum Page {
         VERSION(R.string.about_version),
         STARTING(R.string.about_starting),
-        HELP(R.string.about_help),
         CHANGELOG(R.string.about_changelog),
         SYSTEM(R.string.about_system),
         CONTRIBUTORS(R.string.about_contributors),
@@ -225,7 +214,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         if (extras != null) {
             startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
         }
-        createViewPager(startPage, null);
+        createViewPager(startPage, position -> setTitle(res.getString(R.string.about) + " - " + getTitle(Page.values()[position])));
         reinitializeViewPager();
     }
 
@@ -244,8 +233,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 return new VersionViewCreator();
             case STARTING:
                 return new StartingViewCreator();
-            case HELP:
-                return new HelpViewCreator();
             case CHANGELOG:
                 return new ChangeLogViewCreator();
             case SYSTEM:
@@ -260,6 +247,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     @Override
     protected final String getTitle(final Page page) {
+        if (page == Page.VERSION) {
+            return res.getString(R.string.about_version) + " / " + res.getString(R.string.about_help);
+        }
         return res.getString(page.resourceId);
     }
 
