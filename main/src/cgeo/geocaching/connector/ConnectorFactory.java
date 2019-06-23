@@ -178,6 +178,17 @@ public final class ConnectorFactory {
         return activeConnectors;
     }
 
+    @NonNull
+    public static Collection<TrackableConnector> getActiveTrackableConnectors() {
+        final Collection<TrackableConnector> activeConnectors = new ArrayList<>();
+        for (final TrackableConnector conn : TRACKABLE_CONNECTORS) {
+            if (conn.isActive()) {
+                activeConnectors.add(conn);
+            }
+        }
+        return activeConnectors;
+    }
+
     public static boolean anyConnectorActive() {
         for (final IConnector conn : CONNECTORS) {
             if (conn.isActive()) {
@@ -250,7 +261,7 @@ public final class ConnectorFactory {
 
     @NonNull
     public static TrackableConnector getTrackableConnector(final String geocode, final TrackableBrand brand) {
-        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+        for (final TrackableConnector connector : getActiveTrackableConnectors()) {
             if (connector.canHandleTrackable(geocode, brand)) {
                 return connector;
             }
@@ -431,7 +442,7 @@ public final class ConnectorFactory {
         }
 
         final Observable<Trackable> fromNetwork =
-                Observable.fromIterable(getTrackableConnectors()).filter(new Predicate<TrackableConnector>() {
+                Observable.fromIterable(getActiveTrackableConnectors()).filter(new Predicate<TrackableConnector>() {
                     @Override
                     public boolean test(final TrackableConnector trackableConnector) {
                         return trackableConnector.canHandleTrackable(geocode, brand);
