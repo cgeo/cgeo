@@ -1265,6 +1265,14 @@ public class Settings {
         putInt(R.string.pref_logImageScale, scale);
     }
 
+    public static void setCircles(final boolean showCircles) {
+        putBoolean(R.string.pref_showCircles, showCircles);
+    }
+
+    public static boolean getCircles() {
+        return getBoolean(R.string.pref_showCircles, false);
+    }
+
     public static void setExcludeMine(final boolean exclude) {
         putBoolean(R.string.pref_excludemine, exclude);
     }
