@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.SharedPrefsBackupUtils;
 
 import android.R.string;
 import android.app.AlertDialog;
@@ -170,7 +171,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_fakekey_dataDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
+                R.string.pref_fakekey_preference_backup, R.string.pref_fakekey_preference_backupsettings_full, R.string.pref_fakekey_preference_backupsettings_light, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
                 R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
@@ -444,6 +445,27 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         final Preference restore = getPreference(R.string.pref_fakekey_preference_restore);
         restore.setOnPreferenceClickListener(preference -> {
             DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);
+            return true;
+        });
+
+        final Preference backupSettingsLight = getPreference(R.string.pref_fakekey_preference_backupsettings_light);
+        backupSettingsLight.setOnPreferenceClickListener(preference -> {
+            final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
+            spb.backup(false);
+            return true;
+        });
+
+        final Preference backupSettingsFull = getPreference(R.string.pref_fakekey_preference_backupsettings_full);
+        backupSettingsFull.setOnPreferenceClickListener(preference -> {
+            final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
+            spb.backup(true);
+            return true;
+        });
+
+        final Preference restoreSettings = getPreference(R.string.pref_fakekey_preference_restoresettings);
+        restoreSettings.setOnPreferenceClickListener(preference -> {
+            final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
+            spb.restore();
             return true;
         });
     }
@@ -847,6 +869,19 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             }
             preference.setSummary(textBackup);
             preferenceManager.findPreference(getKey(R.string.pref_fakekey_preference_restore)).setSummary(textRestore);
+        } else if (isPreference(preference, R.string.pref_fakekey_preference_backupsettings_full) || isPreference(preference, R.string.pref_fakekey_preference_backupsettings_light)) {
+            final String textBackup;
+            final String textRestore;
+            if (SharedPrefsBackupUtils.hasBackup()) {
+                textBackup = "";
+                textRestore = preference.getContext().getString(R.string.init_backup_last) + " "
+                        + SharedPrefsBackupUtils.getBackupDateTime();
+            } else {
+                textBackup = preference.getContext().getString(R.string.init_backup_settings_restore_no);
+                textRestore = "";
+            }
+            preference.setSummary(textBackup);
+            preferenceManager.findPreference(getKey(R.string.pref_fakekey_preference_restoresettings)).setSummary(textRestore);
         } else if (isPreference(preference, R.string.pref_ratingwanted)) {
             preferenceManager.findPreference(getKey(R.string.preference_screen_gcvote)).setSummary(getServiceSummary((Boolean) value));
             redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));

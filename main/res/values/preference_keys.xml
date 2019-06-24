@@ -23,6 +23,7 @@
     <string translatable="false" name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
     <string translatable="false" name="preference_screen_gcvote">preference_screen_gcvote</string>
     <string translatable="false" name="preference_screen_geokrety">preference_screen_geokrety</string>
+    <string translatable="false" name="preference_screen_backup">fakekey_backup_screen</string>
     <string translatable="false" name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string translatable="false" name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string translatable="false" name="pref_fakekey_ocnl_authorization">fakekey_ocnl_authorization</string>
@@ -97,6 +98,9 @@
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
     <string translatable="false" name="pref_fakekey_preference_backup_info">fakekey_preference_backup_info</string>
     <string translatable="false" name="pref_fakekey_preference_backup">fakekey_preference_backup</string>
+    <string translatable="false" name="pref_fakekey_preference_backupsettings_light">fakekey_preference_backupsettings_light</string>
+    <string translatable="false" name="pref_fakekey_preference_backupsettings_full">fakekey_preference_backupsettings_full</string>
+    <string translatable="false" name="pref_fakekey_preference_restoresettings">fakekey_preference_restoresettings</string>
     <string translatable="false" name="pref_fakekey_preference_restore">fakekey_preference_restore</string>
     <string translatable="false" name="pref_fakekey_preference_maintenance_directories">pref_fakekey_preference_maintenance_directories</string>
     <string translatable="false" name="pref_dbonsdcard">dbonsdcard</string>
