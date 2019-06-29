@@ -85,7 +85,8 @@
 	</string>
 
     <!-- cache details -->
-    <string name="favorite_count" translatable="false">%1$d×</string>
+    <string name="favorite_count" translatable="false">%1$d</string>
+    <string name="favorite_count_percent" translatable="false">%1$d (%2$.0f%%)</string>
 
     <!-- cache menu -->
     <string name="caches_map_mapswithme" translatable="false">Maps.me</string>

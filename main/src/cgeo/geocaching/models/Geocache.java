@@ -1913,6 +1913,7 @@ public class Geocache implements IWaypoint {
 
     /**
      * Get number of overall finds for a cache, or 0 if the number of finds is not known.
+     * TODO: 0 should be a valid value, maybe need to return -1 if the number is not known
      */
     public int getFindsCount() {
         if (getLogCounts().isEmpty()) {

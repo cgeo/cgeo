@@ -1431,11 +1431,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final int favCount = cache.getFavoritePoints();
             if (favCount >= 0) {
                 favoriteLine.left.setVisibility(View.VISIBLE);
-                favoriteLine.right.setText(res.getString(R.string.favorite_count, favCount));
+
+                final int findsCount = cache.getFindsCount();
+                if (findsCount > 0) {
+                    favoriteLine.right.setText(res.getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
+                } else {
+                    favoriteLine.right.setText(res.getString(R.string.favorite_count, favCount));
+                }
             } else {
                 favoriteLine.left.setVisibility(View.GONE);
             }
-
             final LinearLayout layout = ButterKnife.findById(view, R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
