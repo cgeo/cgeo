@@ -2,6 +2,9 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.sensors.GeoData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class ProximityNotificationByCoords extends ProximityNotification {
 
     // reference point to calculate distance to
@@ -20,6 +23,29 @@ public class ProximityNotificationByCoords extends ProximityNotification {
         if (null != referencePoint) {
             checkDistance((int) (1000f * referencePoint.distanceTo(geo.getCoords())));
         }
+    }
+
+    // extend parcelable functions
+
+    public void writeToParcel(final Parcel out, final int flags) {
+        super.writeToParcel(out, flags);
+        referencePoint.writeToParcel(out, flags);
+    }
+
+    public static final Parcelable.Creator<ProximityNotificationByCoords> CREATOR
+            = new Parcelable.Creator<ProximityNotificationByCoords>() {
+        public ProximityNotificationByCoords createFromParcel(final Parcel in) {
+            return new ProximityNotificationByCoords(in);
+        }
+
+        public ProximityNotificationByCoords[] newArray(final int size) {
+            return new ProximityNotificationByCoords[size];
+        }
+    };
+
+    private ProximityNotificationByCoords(final Parcel in) {
+        super(in);
+        referencePoint = new Geopoint(in);
     }
 
 }

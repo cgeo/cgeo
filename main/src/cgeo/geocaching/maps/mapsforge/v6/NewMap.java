@@ -156,6 +156,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
+    private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
 
     // Handler messages
     // DisplayHandler
@@ -190,9 +191,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (savedInstanceState != null) {
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
+            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
+            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
 
         ActivityMixin.onCreate(this, true);
@@ -708,7 +711,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Log.d("NewMap: onResume");
 
         resumeTileLayer();
-        proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(false, false) : null;
     }
 
     @Override
@@ -895,6 +897,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (historyLayer != null) {
             trailHistory = historyLayer.getHistory();
             outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, trailHistory);
+        }
+        if (proximityNotification != null) {
+            outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
     }
 

@@ -119,6 +119,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
+    private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
 
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
@@ -398,6 +399,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         outState.putParcelable(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, mapOptions.isLiveEnabled);
         outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
+        if (proximityNotification != null) {
+            outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
+        }
     }
 
     @Override
@@ -423,8 +427,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
+            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
+            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
 
         // If recreating from an obsolete map source, we may need a restart
@@ -536,7 +542,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
                     }
                 });
-        proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(false, false) : null;
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
