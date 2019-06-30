@@ -3,6 +3,9 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
      <b>Next feature release:</b>\n
+    · New: Proximity notification beep (configurable in Settings - Map)\n
+    · New: Show favorite percentage in cache details\n
+    · New: Add hint how to reset authorization data (long click in Settings - Services sub menus)\n
     · New: Use https for send2cgeo\n
     · New: Have button for last selected list in list selection when saving cache\n
     · New: Use new GeoKrety API\n
@@ -12,6 +15,7 @@
     · Fix: Reintroduce live map loading indication (horizontal progress bar)\n
     · Fix: Also include other satellite systems than GPS in location info on mainscreen\n
     · Fix: Waypoint of other lists leaked onto a mapped list\n
+    · Fix: Waypoints of owned caches not filtered properly on map\n
     \n
     \n
   </string>
