@@ -12,18 +12,76 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="carnero" />
+        </RelativeLayout>
+
         <TextView
-            android:id="@+id/contributors"
+            style="@style/about_contributors"
+            android:id="@+id/about_carnerodetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_margin="7dip"
-            android:linksClickable="true"
-            android:paddingLeft="3dip"
-            android:text="@string/contributors"
-            android:textColor="?text_color"
-            android:textColorLink="?text_color_link"
-            android:textSize="14sp" />
+            android:text="@string/about_contributors_carnerodetails" />
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/about_contributors_recent" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/about_contributors"
+            android:id="@+id/about_contributors_recent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contributors_recent" />
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/about_contributors_specialthanks" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/about_contributors"
+            android:id="@+id/about_specialthanksdetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_contributors_specialthanksdetails" />
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/about_contributors_other" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/about_contributors"
+            android:id="@+id/about_contributors_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contributors_other" />
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/about_components" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/about_contributors"
+            android:id="@+id/about_components"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/components" />
+
     </LinearLayout>
 
 </ScrollView>

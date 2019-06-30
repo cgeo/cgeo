@@ -15,6 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.RawRes;
 import android.support.annotation.StringRes;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -72,16 +74,82 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
-        @BindView(R.id.contributors) protected TextView contributors;
+        @BindView(R.id.about_carnerodetails) protected TextView carnerodetails;
+        @BindView(R.id.about_contributors_recent) protected TextView contributors;
+        @BindView(R.id.about_specialthanksdetails) protected TextView specialthanks;
+        @BindView(R.id.about_contributors_others) protected TextView contributorsOthers;
+        @BindView(R.id.about_components) protected TextView components;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, parentView, false);
             ButterKnife.bind(this, view);
-            contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            setText(contributors, R.string.contributors_recent);
+            setText(contributorsOthers, R.string.contributors_other);
+
+            final AnchorAwareLinkMovementMethod mm = AnchorAwareLinkMovementMethod.getInstance();
+            carnerodetails.setMovementMethod(mm);
+            contributors.setMovementMethod(mm);
+            specialthanks.setMovementMethod(mm);
+            contributorsOthers.setMovementMethod(mm);
+            components.setMovementMethod(mm);
+
             return view;
         }
 
+        private String checkRoles(final String s, final String roles, final char checkFor, final int infoId) {
+            return roles.indexOf(checkFor) >= 0 ? (s.isEmpty() ? "" : s + ", ") + getString(infoId) : s;
+        }
+
+        private void setText(final TextView t, final int resId) {
+            String s = getString(resId);
+            final SpannableStringBuilder sb = new SpannableStringBuilder("<ul>");
+            int p1 = 0;
+            int p2 = 0;
+            int p3 = 0;
+            String name;
+            String link;
+            String roles;
+
+            p1 = s.indexOf("|");
+            if (p1 >= 0) {
+                do {
+                    name = s.substring(0, p1).trim();
+                    p2 = s.indexOf("|", p1 + 1);
+                    if (p2 < 0) {
+                        break;
+                    }
+                    link = s.substring(p1 + 1, p2).trim();
+                    p3 = s.indexOf("|", p2 + 1);
+                    if (p3 < 0) {
+                        break;
+                    }
+                    final String temp = s.substring(p2 + 1, p3);
+                    roles = checkRoles(checkRoles(checkRoles(checkRoles(checkRoles(checkRoles("",
+                        temp, 'c', R.string.contribution_code),
+                        temp, 'd', R.string.contribution_documentation),
+                        temp, 'g', R.string.contribution_graphics),
+                        temp, 'p', R.string.contribution_projectleader),
+                        temp, 's', R.string.contribution_support),
+                        temp, 't', R.string.contribution_tester);
+
+                    sb.append("· ")
+                        .append(link.isEmpty() ? name : "<a href=\"" + link + "\">" + name + "</a>")
+                        .append(roles.isEmpty() ? "" : " (" + roles + ")")
+                        .append("<br />");
+
+                    s = s.substring(p3 + 1);
+                    p1 = s.indexOf("|");
+                } while (p1 > 0);
+            }
+            sb.append("</ul>");
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                t.setText(Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                t.setText(Html.fromHtml(sb.toString()));
+            }
+        }
     }
 
     class ChangeLogViewCreator extends AbstractCachingPageViewCreator<ScrollView> {

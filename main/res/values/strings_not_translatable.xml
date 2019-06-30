@@ -33,41 +33,54 @@
     <string name="settings_facebook_login_url" translatable="false">https://faq.cgeo.org/#facebook-login</string>
 
     <!-- contributors -->
-    <string name="contributors" translatable="false">
-    · carnero as the father of c:geo\n
-    \n
-    · Arne Schwabe (code)\n
-    · Bananeweizen (code)\n
-    · blafoo (code)\n
-    · campbeb (code)\n
-    · Eisbehr (code)\n
-    · Filipe C. (code)\n
-    · Iiro Jäppinen (graphic)\n
-    · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
-    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
-    · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
-    · <a href="https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code)\n
-    · <a href="https://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support)\n
-    · marco-dev (code)\n
-    · Mathieu Alorent (code)\n
-    · MichielK (code)\n
-    · mucek4 (code, open source project leader)\n
-    · ncorreia (code)\n
-    · Pavol Babinčák (code)\n
-    · Peter Storch (code)\n
-    · <a href="https://github.com/Portree-Kid">Portree Kid</a> (code)\n
-    · Rainer S. (code)\n
-    · Ray (code)\n
-    · RoadRunner- (code)\n
-    · <a href="http://www.sammyshp.de/">SammysHP</a> (code)\n
-    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code)\n
-    · stephanme/Geoteufel (code)\n
-    · thiasB (code)\n
-    · YraFyra (code)\n
-    · zenobios (code)\n
-    \n
-    · Special thanks to all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n
-    \n
+    <string name="contributors_recent" translatable="false">
+    Bananeweizen||c|
+    bekuno||c|
+    bjdupuis||c|
+    ControlTheBit||c|
+    following5||c|
+    jonas-koeritz||c|
+    HolgerJeromin||c|
+    lazydays79||c|
+    Lineflyer|https://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6|tsd|
+    Mathieu Alorent||c|
+    Matze2||c|
+    moving-bits|http://github.com/moving-bits|cg|
+    msperkowski||d|
+    mucek4||cp|
+    okainov||c|
+    Peter Storch||c|
+    Rainer S.||c|
+    SammysHP|http://www.sammyshp.de/|c|
+    Samuel Tardieu|http://www.rfc1149.net/sam.html|c|
+    UniQP||c|
+    </string>
+
+    <string name="contributors_other" translatable="false">
+    Arne Schwabe||c|
+    blafoo||c|
+    campbeb||c|
+    Eisbehr||c|
+    Filipe C.||c|
+    Iiro Jäppinen||g|
+    Jan Žatecký|http://www.jaytech.cz/|g|
+    JoWi24|http://joachim-wilke.de/|c|
+    Karsten Priegnitz|http://github.com/koem|cg|
+    KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
+    marco-dev||c|
+    MichielK||c|
+    ncorreia||c|
+    Pavol Babinčák||c|
+    Portree Kid|https://github.com/Portree-Kid|c|
+    Ray||c|
+    RoadRunner-||c|
+    stephanme/Geoteufel||c|
+    thiasB||c|
+    YraFyra||c|
+    zenobios||c|
+    </string>
+
+    <string name="components" translatable="false">
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons):\n
     &#160;&#160;&#160;· USB by Kenneth Von Alt from The Noun Project\n
