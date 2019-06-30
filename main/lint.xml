@@ -1,30 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="AppCompatResource" severity="ignore" />
+
+    <!-- we cannot use App Indexing with the GC website -->
+    <issue id="AppLinkUrlError" severity="ignore" />
+
     <issue id="ContentDescription" severity="ignore" />
+
+    <!-- false positives for return values of RxJava subscribe() calls -->
+    <issue id="CheckResult" severity="ignore" />
+
     <issue id="DuplicateIds" severity="error" />
     <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="ExportedContentProvider" severity="ignore" />
+
+    <!-- we cannot use App Indexing with the GC website -->
+    <issue id="GoogleAppIndexingWarning" severity="ignore" />
+
+    <!-- many plain Java libraries cannot be upgraded further -->
+    <issue id="GradleDependency" severity="ignore" />
+
     <issue id="GradleOverrides" severity="ignore" />
     <issue id="IconDensities" severity="ignore" />
     <issue id="ImpliedQuantity" severity="ignore" />
     <issue id="InvalidPackage" severity="ignore" />
+
+    <!-- do not care about incomplete translations -->
     <issue id="MissingQuantity">
         <ignore path="res/values-pl/strings.xml" />
         <ignore path="res/values-ru/strings.xml" />
     </issue>
+
+    <!-- unfinished localizations are okay since we always have English as fallback -->
     <issue id="MissingTranslation" severity="ignore" />
+
     <issue id="Registered" severity="ignore" />
     <issue id="RtlHardcoded" severity="ignore" />
     <issue id="RtlSymmetry" severity="ignore" />
-    <issue id="TypographyDashes">
-        <ignore path="res/values/strings.xml" />
-    </issue>
+
+    <!-- all false positives in coordinate input -->
+    <issue id="TypographyDashes" severity="ignore" />
+
+    <!-- many false positives due to our many supported languages -->
     <issue id="Typos" severity="ignore" />
+
     <issue id="UnusedAttribute" severity="ignore" />
+
+    <!-- let translators create more plural strings than needed -->
     <issue id="UnusedQuantity">
+        <ignore path="res/values-cs/strings.xml" />
+        <ignore path="res/values-lt/strings.xml" />
         <ignore path="res/values-ru/strings.xml" />
+        <ignore path="res/values-sk/strings.xml" />
     </issue>
+
+    <!-- resources loaded by dynamic name lookup -->
     <issue id="UnusedResources">
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
         <ignore path="res/values/vpi__colors.xml" />
