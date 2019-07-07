@@ -66,18 +66,19 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         syncLayers(removeCodes, newCodes);
     }
 
-    @Override
-    public int getClosestDistanceInM(final Geopoint coord) {
+    public int getClosestDistanceInM(final AbstractCachesOverlay baseOverlay, final Geopoint coord) {
         int minDistance = 50000000;
-        final Set<Geocache> baseCaches = DataStore.loadCaches(getCacheGeocodes(), LoadFlags.LOAD_WAYPOINTS);
-        final Set<Waypoint> waypoints = new HashSet<>();
-        for (final Geocache cache : baseCaches) {
-            waypoints.addAll(cache.getWaypoints());
-        }
-        for (final Waypoint waypoint : waypoints) {
-            final int distance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
-            if (distance > 0 && distance < minDistance) {
-                minDistance = distance;
+        if (null != baseOverlay) {
+            final Set<Geocache> baseCaches = DataStore.loadCaches(baseOverlay.getCacheGeocodes(), LoadFlags.LOAD_WAYPOINTS);
+            final Set<Waypoint> waypoints = new HashSet<>();
+            for (final Geocache cache : baseCaches) {
+                waypoints.addAll(cache.getWaypoints());
+            }
+            for (final Waypoint waypoint : waypoints) {
+                final int distance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
+                if (distance > 0 && distance < minDistance) {
+                    minDistance = distance;
+                }
             }
         }
         return minDistance;
