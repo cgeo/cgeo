@@ -28,12 +28,8 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         syncLayers(removeCodes, newCodes);
     }
 
-    void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored) {
-        final Collection<String> removeCodes = getGeocodes();
-        final Collection<String> newCodes = new HashSet<>();
-
+    private Set<Waypoint> filterWaypoints(final Collection<String> baseGeoCodes, final boolean showStored) {
         final Set<Waypoint> waypoints = new HashSet<>();
-        final boolean isDotMode = Settings.isDotMode();
 
         final Set<Geocache> baseCaches = DataStore.loadCaches(baseGeoCodes, LoadFlags.LOAD_WAYPOINTS);
 
@@ -50,6 +46,17 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             MapUtils.filter(waypointsInViewport);
             waypoints.addAll(waypointsInViewport);
         }
+
+        return waypoints;
+    }
+
+    void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored) {
+        final Collection<String> removeCodes = getGeocodes();
+        final Collection<String> newCodes = new HashSet<>();
+
+        final Set<Waypoint> waypoints = filterWaypoints(baseGeoCodes, showStored);
+        final boolean isDotMode = Settings.isDotMode();
+
         for (final Waypoint waypoint : waypoints) {
             if (waypoint == null || waypoint.getCoords() == null) {
                 continue;
@@ -69,11 +76,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
     public int getClosestDistanceInM(final AbstractCachesOverlay baseOverlay, final Geopoint coord) {
         int minDistance = 50000000;
         if (null != baseOverlay) {
-            final Set<Geocache> baseCaches = DataStore.loadCaches(baseOverlay.getCacheGeocodes(), LoadFlags.LOAD_WAYPOINTS);
-            final Set<Waypoint> waypoints = new HashSet<>();
-            for (final Geocache cache : baseCaches) {
-                waypoints.addAll(cache.getWaypoints());
-            }
+            final Set<Waypoint> waypoints = filterWaypoints(baseOverlay.getCacheGeocodes(), true);
             for (final Waypoint waypoint : waypoints) {
                 final int distance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
                 if (distance > 0 && distance < minDistance) {
