@@ -29,9 +29,7 @@ public enum CacheType {
     WEBCAM("webcam", "Webcam Cache", "31d2ae3c-c358-4b5f-8dcd-2185bf472d3d", R.string.webcam, R.drawable.type_webcam, "11", R.drawable.dot_virtual),
     VIRTUAL("virtual", "Virtual Cache", "294d4360-ac86-4c83-84dd-8113ef678d7e", R.string.virtual, R.drawable.type_virtual, "4", R.drawable.dot_virtual),
     WHERIGO("wherigo", "Wherigo Cache", "0544fa55-772d-4e5c-96a9-36a51ebcf5c9", R.string.wherigo, R.drawable.type_wherigo, "1858", R.drawable.dot_mystery),
-    LOSTANDFOUND("lostfound", "Lost and Found Event Cache", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.lostfound, R.drawable.type_event, "3653", R.drawable.dot_mystery), // icon missing
-// deactivated until the first such event is published (missing guid & wptTypeId)
-//    COMMUN_CELEBRATION("communceleb", "Community Celebration Event", "", R.string.communceleb, R.drawable.type_event, "????", R.drawable.dot_event), // icon missing
+    COMMUN_CELEBRATION("communceleb", "Community Celebration Event", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.communceleb, R.drawable.type_event, "3653", R.drawable.dot_event), // icon missing
     PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.drawable.type_ape, "9", R.drawable.dot_traditional),
     GCHQ("gchq", "Groundspeak HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.drawable.type_hq, "3773", R.drawable.dot_traditional),
     GCHQ_CELEBRATION("gchqceleb", "Geocaching HQ Celebration", "af820035-787a-47af-b52b-becc8b0c0c88", R.string.gchqceleb, R.drawable.type_hq, "3774", R.drawable.dot_event), // icon missing
@@ -146,9 +144,8 @@ public enum CacheType {
     }
 
     public boolean isEvent() {
-        return this == EVENT || this == MEGA_EVENT || this == CITO || this == GIGA_EVENT || this == LOSTANDFOUND ||
+        return this == EVENT || this == MEGA_EVENT || this == CITO || this == GIGA_EVENT || this == COMMUN_CELEBRATION ||
             this == BLOCK_PARTY || this == GPS_EXHIBIT  || this == GCHQ_CELEBRATION;
-//          this == BLOCK_PARTY || this == GPS_EXHIBIT || this == COMMUN_CELEBRATION || this == GCHQ_CELEBRATION;
     }
 
     @Override

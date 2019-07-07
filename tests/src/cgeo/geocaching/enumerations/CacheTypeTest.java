@@ -61,10 +61,8 @@ public class CacheTypeTest {
         assertThat(CacheType.GIGA_EVENT.isEvent()).isTrue();
         assertThat(CacheType.BLOCK_PARTY.isEvent()).isTrue();
         assertThat(CacheType.CITO.isEvent()).isTrue();
-        assertThat(CacheType.LOSTANDFOUND.isEvent()).isTrue();
+        assertThat(CacheType.COMMUN_CELEBRATION.isEvent()).isTrue();
         assertThat(CacheType.GPS_EXHIBIT.isEvent()).isTrue();
-// deactivated until the first such event is published (missing guid & wptTypeId)
-//        assertThat(CacheType.COMMUN_CELEBRATION.isEvent()).isTrue();
         assertThat(CacheType.GCHQ_CELEBRATION.isEvent()).isTrue();
         assertThat(CacheType.TRADITIONAL.isEvent()).isFalse();
     }
