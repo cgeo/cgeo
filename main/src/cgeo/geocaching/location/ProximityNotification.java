@@ -134,15 +134,24 @@ public class ProximityNotification implements Parcelable {
 
         // play tone if necessary
         if (tone != TONE_NONE) {
-            final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME);
+            final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
             toneG.startTone(tone);
             lastTimestamp = currentTimestamp;
             lastDistance = distance;
             lastTone = tone;
             final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(() -> {
-                toneG.release();
-            }, 350);
+            if (tone == TONE_NEAR) {
+                handler.postDelayed(() -> {
+                    toneG.startTone(TONE_NEAR);
+                    handler.postDelayed(() -> {
+                        toneG.release();
+                    }, 350);
+                }, 350);
+            } else {
+                handler.postDelayed(() -> {
+                    toneG.release();
+                }, 350);
+            }
         }
     }
 }
