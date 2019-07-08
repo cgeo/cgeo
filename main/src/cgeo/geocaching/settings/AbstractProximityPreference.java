@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.location.IConversion;
 
 import android.content.Context;
@@ -47,7 +48,7 @@ public abstract class AbstractProximityPreference extends AbstractSeekbarPrefere
     @Override
     protected View onCreateView(final ViewGroup parent) {
         maxSeekbarLength = valueToProgressHelper(Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE);
-        configure(1, maxSeekbarLength, valueToProgress(Settings.getProximityNotificationThreshold(farDistance)), farDistance ? "1" : "2");
+        configure(1, maxSeekbarLength, valueToProgress(Settings.getProximityNotificationThreshold(farDistance)), farDistance ? getContext().getString(R.string.far_distance) : getContext().getString(R.string.near_distance));
         return super.onCreateView(parent);
     }
 }
