@@ -12,8 +12,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import org.mapsforge.map.layer.Layer;
-
 public class GeoitemLayers implements Iterable<GeoitemLayer> {
 
     /**
@@ -34,22 +32,8 @@ public class GeoitemLayers implements Iterable<GeoitemLayer> {
         return cacheCodes.size();
     }
 
-    public synchronized Collection<Layer> getAsLayers() {
-        return new ArrayList<Layer>(this.geoitems.values());
-    }
-
     public synchronized GeoitemLayer getItem(final String itemCode) {
         return geoitems.get(itemCode);
-    }
-
-    public synchronized Collection<Layer> getMatchingLayers(final Collection<String> newCodes) {
-        final ArrayList<Layer> result = new ArrayList<>();
-        for (final String code : newCodes) {
-            if (geoitems.containsKey(code)) {
-                result.add(geoitems.get(code));
-            }
-        }
-        return result;
     }
 
     public synchronized void add(final GeoitemLayer geoitem) {
