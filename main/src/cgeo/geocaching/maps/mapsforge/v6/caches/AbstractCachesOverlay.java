@@ -33,9 +33,11 @@ public abstract class AbstractCachesOverlay {
     private final Set<GeoEntry> geoEntries;
     private final WeakReference<CachesBundle> bundleRef;
     private final Layer anchorLayer;
+    private final Layer circleLayer;
     private final GeoitemLayers layerList = new GeoitemLayers();
     private final MapHandlers mapHandlers;
     private boolean invalidated = true;
+    private boolean showCircles = false;
 
     public AbstractCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
         this.overlayId = overlayId;
@@ -43,6 +45,8 @@ public abstract class AbstractCachesOverlay {
         this.bundleRef = new WeakReference<>(bundle);
         this.anchorLayer = anchorLayer;
         this.mapHandlers = mapHandlers;
+        this.circleLayer = bundle.getCirclesSeparator();
+        this.showCircles = Settings.getCircles();
         Log.d(String.format(Locale.ENGLISH, "AbstractCacheOverlay: construct overlay %d", overlayId));
     }
 
@@ -86,6 +90,7 @@ public abstract class AbstractCachesOverlay {
 
     public void invalidate() {
         invalidated = true;
+        showCircles = Settings.getCircles();
     }
 
     public void invalidate(final Collection<String> invalidGeocodes) {
@@ -104,6 +109,22 @@ public abstract class AbstractCachesOverlay {
 
     protected void refreshed() {
         invalidated = false;
+    }
+
+    void switchCircles() {
+        showCircles = Settings.getCircles();
+        final Layers layers = getLayers();
+        final int circleIndex = layers.indexOf(circleLayer) + 1;
+        for (final GeoitemLayer layer : layerList) {
+            final Layer circle = layer.getCircle();
+            if (circle != null) {
+                if (showCircles) {
+                    layers.add(circleIndex, circle);
+                } else {
+                    layers.remove(circle);
+                }
+            }
+        }
     }
 
     protected void update(final Set<Geocache> cachesToDisplay) {
@@ -178,8 +199,18 @@ public abstract class AbstractCachesOverlay {
         if (layers == null) {
             return;
         }
-        final int index = layers.indexOf(anchorLayer) + 1;
-        layers.addAll(index, layerList.getAsLayers());
+        int index = layers.indexOf(anchorLayer) + 1;
+        final int circleIndex = layers.indexOf(circleLayer) + 1;
+        for (final GeoitemLayer layer : layerList) {
+            layers.add(index, layer);
+            if (showCircles) {
+                final Layer circle = layer.getCircle();
+                if (circle != null) {
+                    layers.add(circleIndex, circle);
+                    index++;
+                }
+            }
+        }
     }
 
     protected Collection<String> getGeocodes() {
@@ -235,6 +266,10 @@ public abstract class AbstractCachesOverlay {
         for (final GeoitemLayer layer : layerList) {
             geoEntries.remove(new GeoEntry(layer.getItemCode(), overlayId));
             layers.remove(layer);
+            final Layer circle = layer.getCircle();
+            if (circle != null) {
+                layers.remove(circle);
+            }
         }
 
         layerList.clear();
@@ -255,8 +290,19 @@ public abstract class AbstractCachesOverlay {
         }
 
         removeItems(removeCodes);
-        final int index = layers.indexOf(anchorLayer) + 1;
-        layers.addAll(index, layerList.getMatchingLayers(newCodes));
+        int index = layers.indexOf(anchorLayer) + 1;
+        final int circleIndex = layers.indexOf(circleLayer) + 1;
+        for (final String code : newCodes) {
+            final GeoitemLayer layer = layerList.getItem(code);
+            layers.add(index, layer);
+            if (showCircles) {
+                final Layer circle = layer.getCircle();
+                if (circle != null) {
+                    layers.add(circleIndex, circle);
+                    index++;
+                }
+            }
+        }
 
         Log.d(String.format(Locale.ENGLISH, "Layers for id %d synced. Codes removed: %d, new codes: %d, geoEntries: %d", overlayId, removeCodes.size(), newCodes.size(), geoEntries.size()));
     }
@@ -271,6 +317,10 @@ public abstract class AbstractCachesOverlay {
             if (item != null) {
                 geoEntries.remove(new GeoEntry(code, overlayId));
                 layers.remove(item);
+                final Layer circle = item.getCircle();
+                if (circle != null) {
+                    layers.remove(circle);
+                }
                 layerList.remove(item);
             }
         }
@@ -300,7 +350,7 @@ public abstract class AbstractCachesOverlay {
         } else {
             marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache));
         }
-        return new GeoitemLayer(cache.getGeoitemRef(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
+        return new GeoitemLayer(cache.getGeoitemRef(), cache.applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
     }
 
     private static GeoitemLayer getWaypointItem(final Waypoint waypoint, final TapHandler tapHandler, final boolean isDotMode) {
@@ -312,7 +362,7 @@ public abstract class AbstractCachesOverlay {
             } else {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint));
             }
-            return new GeoitemLayer(waypoint.getGeoitemRef(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
+            return new GeoitemLayer(waypoint.getGeoitemRef(), waypoint.getWaypointType().applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
         }
 
         return null;

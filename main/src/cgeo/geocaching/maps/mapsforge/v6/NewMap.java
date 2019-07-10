@@ -310,8 +310,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
-            //TODO: circles            menu.findItem(R.id.menu_circle_mode).setChecked(this.searchOverlay.getCircles());
-            menu.findItem(R.id.menu_circle_mode).setVisible(false);
+            menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
             menu.findItem(R.id.menu_dot_mode).setVisible(true);
             menu.findItem(R.id.menu_dot_mode).setChecked(Settings.isDotMode());
@@ -394,9 +393,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             case R.id.menu_store_unsaved_caches:
                 return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
             case R.id.menu_circle_mode:
-                //                overlayCaches.switchCircles();
-                //                mapView.repaintRequired(overlayCaches);
-                //                ActivityMixin.invalidateOptionsMenu(activity);
+                Settings.setCircles(!Settings.getCircles());
+                caches.switchCircles();
+                ActivityMixin.invalidateOptionsMenu(this);
                 return true;
             case R.id.menu_mycaches_mode:
                 Settings.setExcludeMine(!Settings.isExcludeMyCaches());
@@ -1100,6 +1099,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         //        }
 
         return subtitle.toString();
+    }
+
+    private void switchCircles() {
+        caches.switchCircles();
     }
 
     private int countVisibleCaches() {

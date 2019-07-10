@@ -15,14 +15,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
 
 public class CachesBundle {
 
-    private static final int WP_SEPERATOR = 0;
-    private static final int BASE_SEPARATOR = 1;
-    private static final int STORED_SEPARATOR = 2;
-    private static final int LIVE_SEPARATOR = 3;
+    private static final int CIRCLES_SEPARATOR = 0;
+    private static final int WP_SEPERATOR = 1;
+    private static final int BASE_SEPARATOR = 2;
+    private static final int STORED_SEPARATOR = 3;
+    private static final int LIVE_SEPARATOR = 4;
 
     private static final int WP_OVERLAY_ID = 0;
     private static final int BASE_OVERLAY_ID = 1;
@@ -64,6 +66,9 @@ public class CachesBundle {
         final SeparatorLayer separator4 = new SeparatorLayer();
         this.separators.add(separator4);
         this.mapView.getLayerManager().getLayers().add(separator4);
+        final SeparatorLayer separator5 = new SeparatorLayer();
+        this.separators.add(separator5);
+        this.mapView.getLayerManager().getLayers().add(separator5);
 
         this.wpOverlay = new WaypointsOverlay(WP_OVERLAY_ID, this.geoEntries, this, separators.get(WP_SEPERATOR), this.mapHandlers);
     }
@@ -229,6 +234,9 @@ public class CachesBundle {
      * Forces redraw of all cache layers (e.g. for icon change)
      */
     public void invalidateAll() {
+        if (wpOverlay != null) {
+            wpOverlay.invalidateAll();
+        }
         if (baseOverlay != null) {
             baseOverlay.invalidateAll();
         }
@@ -240,6 +248,21 @@ public class CachesBundle {
         }
         if (wpOverlay != null) {
             wpOverlay.invalidateAll();
+        }
+    }
+
+    public void switchCircles() {
+        if (wpOverlay != null) {
+            wpOverlay.switchCircles();
+        }
+        if (baseOverlay != null) {
+            baseOverlay.switchCircles();
+        }
+        if (storedOverlay != null) {
+            storedOverlay.switchCircles();
+        }
+        if (liveOverlay != null) {
+            liveOverlay.switchCircles();
         }
     }
 
@@ -257,6 +280,10 @@ public class CachesBundle {
 
     LayerManager getLayerManager() {
         return mapView.getLayerManager();
+    }
+
+    Layer getCirclesSeparator() {
+        return separators.get(CIRCLES_SEPARATOR);
     }
 
     public void handleWaypoints() {
