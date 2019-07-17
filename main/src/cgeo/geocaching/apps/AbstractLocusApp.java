@@ -245,6 +245,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     private static final int NO_LOCUS_ID = -1;
 
+    // https://github.com/asamm/locus-api/blob/master/locus-api-core/src/main/java/locus/api/objects/geocaching/GeocachingData.java
     private static int toLocusType(final CacheType ct) {
         switch (ct) {
             case TRADITIONAL:
@@ -271,7 +272,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_TYPE_VIRTUAL;
             case WHERIGO:
                 return GeocachingData.CACHE_TYPE_WHERIGO;
-            case LOSTANDFOUND:
+            case COMMUN_CELEBRATION:
                 return GeocachingData.CACHE_TYPE_LF_EVENT;
             case PROJECT_APE:
                 return GeocachingData.CACHE_TYPE_PROJECT_APE;
