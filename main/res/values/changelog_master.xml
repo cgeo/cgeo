@@ -12,10 +12,12 @@
     · New: Show also personal note when clicking on the hint button in map popup window\n
     · New: Add Text-To-Speach navigation to cache and waypoint popup\n
     · New: Show routed distance (requires brouter app) instead of or additionally to direct distance for selected cache on map\n
+    · New: Support for new cache types HQ Celebration and Community Celebration\n
     · Fix: Reintroduce live map loading indication (horizontal progress bar)\n
     · Fix: Also include other satellite systems than GPS in location info on mainscreen\n
     · Fix: Waypoint of other lists leaked onto a mapped list\n
     · Fix: Waypoints of owned caches not filtered properly on map\n
+    · Fix: Updated opencaching attributes\n
     \n
     \n
   </string>
