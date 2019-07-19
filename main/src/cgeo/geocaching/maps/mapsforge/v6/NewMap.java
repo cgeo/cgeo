@@ -195,7 +195,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
-            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
+            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(this, true, false) : null;
         }
 
         ActivityMixin.onCreate(this, true);
