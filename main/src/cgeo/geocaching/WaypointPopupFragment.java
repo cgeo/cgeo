@@ -48,6 +48,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        context = getContext();
         super.onCreate(savedInstanceState);
         waypointId = getArguments().getInt(WAYPOINT_ARG);
     }

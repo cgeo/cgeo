@@ -108,6 +108,12 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        context = getContext();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected void init() {
         super.init();
         if (null != proximityNotification) {

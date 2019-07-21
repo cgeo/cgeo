@@ -2,6 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.sensors.GeoData;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,8 +12,8 @@ public class ProximityNotificationByCoords extends ProximityNotification {
     // needs to be set by calling setReferencePoint()
     private Geopoint referencePoint = null;
 
-    public ProximityNotificationByCoords() {
-        super(true, true);
+    public ProximityNotificationByCoords(final Context context) {
+        super(context, true, true);
     }
 
     public void setReferencePoint(final Geopoint referencePoint) {

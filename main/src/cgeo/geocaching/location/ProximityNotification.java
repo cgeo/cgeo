@@ -2,12 +2,14 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.settings.Settings;
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Vibrator;
 
 public class ProximityNotification implements Parcelable {
 
@@ -25,6 +27,9 @@ public class ProximityNotification implements Parcelable {
 
     // how many consecutive distance peaks to ignore?
     protected  static final int IGNORE_PEAKS = 3;
+
+    // context this is running in
+    protected Context context = null;
 
     // config options - get initialized in constructor
     protected int distanceFar;
@@ -78,7 +83,9 @@ public class ProximityNotification implements Parcelable {
 
     // regular constructor
 
-    public ProximityNotification(final boolean twoDistances, final boolean repeatedSignal) {
+    public ProximityNotification(final Context context, final boolean twoDistances, final boolean repeatedSignal) {
+        this.context = context;
+
         distanceFar = Settings.getProximityNotificationThreshold(true);
         if (distanceFar < 1) {
             distanceFar = Settings.PROXIMITY_NOTIFICATION_DISTANCE_FAR;
@@ -134,23 +141,43 @@ public class ProximityNotification implements Parcelable {
 
         // play tone if necessary
         if (tone != TONE_NONE) {
-            final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
-            toneG.startTone(tone);
             lastTimestamp = currentTimestamp;
             lastDistance = distance;
             lastTone = tone;
             final Handler handler = new Handler(Looper.getMainLooper());
-            if (tone == TONE_NEAR) {
-                handler.postDelayed(() -> {
-                    toneG.startTone(TONE_NEAR);
-                    handler.postDelayed(() -> {
-                        toneG.release();
-                    }, 350);
-                }, 350);
-            } else {
-                handler.postDelayed(() -> {
-                    toneG.release();
-                }, 350);
+
+            final int ringerMode = ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE)).getRingerMode();
+            switch (ringerMode) {
+                case AudioManager.RINGER_MODE_NORMAL:
+                    final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
+                    toneG.startTone(tone);
+                    if (tone == TONE_NEAR) {
+                        handler.postDelayed(() -> {
+                            toneG.startTone(TONE_NEAR);
+                            handler.postDelayed(() -> {
+                                toneG.release();
+                            }, 350);
+                        }, 350);
+                    } else {
+                        handler.postDelayed(() -> {
+                            toneG.release();
+                        }, 350);
+                    }
+                    break;
+                case AudioManager.RINGER_MODE_VIBRATE:
+                    final Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    // @todo: when compiling with targetSDK 28 or higher use case by Build.VERSION.SDK_VERSION and for >= 26 use
+                    // v.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE));
+                    if (tone == TONE_NEAR) {
+                        v.vibrate(300);
+                        handler.postDelayed(() -> {
+                            v.vibrate(300);
+                        }, 500);
+                    } else {
+                        v.vibrate(300);
+                    }
+                    break;
+                // otherwise: stay silent
             }
         }
     }
