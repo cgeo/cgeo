@@ -453,7 +453,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
                 return true;
             case R.id.menu_backup:
-                DatabaseBackupUtils.createBackup(MainActivity.this, null);
+                SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
                 return true;
             case R.id.menu_history:
                 startActivity(CacheListActivity.getHistoryIntent(this));
