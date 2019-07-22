@@ -69,7 +69,13 @@ public class WatchdogTest extends CGeoTestCase {
         assertThat(geocache.getGeocode()).isEqualTo(geocode);
     }
 
-    private static void checkWebsite(final String connectorName, final String url) {       
+    private static void checkWebsite(final String connectorName, final String url) {     
+        
+        // temporarily disable extremcaching.com
+        if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com")) {
+            return;
+        }
+
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
