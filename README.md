@@ -98,7 +98,6 @@ c:geo is distributed under [Apache License, Version 2.0](https://www.apache.org/
 - Support: support@cgeo.org
 - Twitter: http://twitter.com/android_gc
 - Facebook: http://www.facebook.com/android.geocaching
-- Google+: https://plus.google.com/105588163414303246956
 - Google Play: https://play.google.com/store/apps/details?id=cgeo.geocaching
 - Live status: http://status.cgeo.org/
 - Developer chat: [#cgeo on freenode.net](https://webchat.freenode.net/?channels=%23cgeo)
