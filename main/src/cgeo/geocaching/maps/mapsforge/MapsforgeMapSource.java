@@ -10,7 +10,7 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
-import org.mapsforge.map.model.MapViewPosition;
+import org.mapsforge.map.model.IMapViewPosition;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 
 public class MapsforgeMapSource extends AbstractMapSource {
@@ -28,7 +28,7 @@ public class MapsforgeMapSource extends AbstractMapSource {
         return generator;
     }
 
-    public ITileLayer createTileLayer(final TileCache tileCache, final MapViewPosition mapViewPosition) {
+    public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
         final AbstractTileSource source = OpenStreetMapMapnik.INSTANCE;
         source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
         return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
