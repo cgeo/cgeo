@@ -430,7 +430,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
-            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(activity, true, false) : null;
+            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
 
         // If recreating from an obsolete map source, we may need a restart

@@ -4,12 +4,10 @@ import cgeo.geocaching.location.ProximityNotificationByCoords;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
 
-import android.content.Context;
 import android.os.Bundle;
 
 public abstract class AbstractDialogFragmentWithProximityNotification extends AbstractDialogFragment {
     protected ProximityNotificationByCoords proximityNotification = null;
-    protected Context context = null;
 
     @Override
     protected void onUpdateGeoData(final GeoData geo) {
@@ -22,6 +20,6 @@ public abstract class AbstractDialogFragmentWithProximityNotification extends Ab
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        proximityNotification = Settings.isSpecificProximityNotificationActive() ? new ProximityNotificationByCoords(context) : null;
+        proximityNotification = Settings.isSpecificProximityNotificationActive() ? new ProximityNotificationByCoords() : null;
     }
 }
