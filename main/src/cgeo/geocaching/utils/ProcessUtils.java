@@ -5,7 +5,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -127,6 +130,34 @@ public final class ProcessUtils {
         } catch (final ActivityNotFoundException e) {
             Log.e("Cannot find suitable activity", e);
             ActivityMixin.showToast(activity, R.string.err_application_no);
+        }
+    }
+
+    public static void restartApplication(final Context c) {
+        try {
+            if (c != null) {
+                final PackageManager pm = c.getPackageManager();
+                if (pm != null) {
+                    //create the intent with the default start activity for our application
+                    final Intent mStartActivity = pm.getLaunchIntentForPackage(c.getPackageName());
+                    if (mStartActivity != null) {
+                        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        // create a pending intent so the application is restarted after System.exit(0) was called.
+                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                        final AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                        System.exit(0);
+                    } else {
+                        Log.e("Was not able to restart application, mStartActivity null");
+                    }
+                } else {
+                    Log.e("Was not able to restart application, PM null");
+                }
+            } else {
+                Log.e("Was not able to restart application, Context null");
+            }
+        } catch (Exception ex) {
+            Log.e("Was not able to restart application");
         }
     }
 

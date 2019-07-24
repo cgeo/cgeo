@@ -2,19 +2,22 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>2019.06.06:</b>\n
-    · Fix: Identify c:geo towards OSM server\n
-    \n
-    \n
-    <b>2019.05.20:</b>\n
-    · New: Use new live map on geocaching.com\n
-    · New: Batch upload modified coordinates from list\n
-    · New: User can switch to compact icons on the map via menu\n
-    · New: Save trail to database and restore on resuming map\n
-    · New: Show getting started guide on first startup after new installation\n
-    · New: Prevent geocaching.com being used without authentication by disabling it by default on new installations\n
-    · Fix: TB status field not localized\n
-    · Fix: Maps.me navigation not starting\n
+     <b>Next feature release:</b>\n
+    · New: Proximity notification beep (configurable in Settings - Map)\n
+    · New: Show favorite percentage in cache details\n
+    · New: Add hint how to reset authorization data (long click in Settings - Services sub menus)\n
+    · New: Use https for send2cgeo\n
+    · New: Have button for last selected list in list selection when saving cache\n
+    · New: Use new GeoKrety API\n
+    · New: Show also personal note when clicking on the hint button in map popup window\n
+    · New: Add Text-To-Speach navigation to cache and waypoint popup\n
+    · New: Show routed distance (requires brouter app) instead of or additionally to direct distance for selected cache on map\n
+    · New: Support for new cache types HQ Celebration and Community Celebration\n
+    · Fix: Reintroduce live map loading indication (horizontal progress bar)\n
+    · Fix: Also include other satellite systems than GPS in location info on mainscreen\n
+    · Fix: Waypoint of other lists leaked onto a mapped list\n
+    · Fix: Waypoints of owned caches not filtered properly on map\n
+    · Fix: Updated opencaching attributes\n
     \n
     \n
 </string>

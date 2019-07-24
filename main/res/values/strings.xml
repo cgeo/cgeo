@@ -29,9 +29,10 @@
     <string name="webcam">Webcam Cache</string>
     <string name="virtual">Virtual Cache</string>
     <string name="wherigo">Wherigo Cache</string>
-    <string name="lostfound">Lost &amp; Found Event Cache</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE Cache</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Unknown Type</string>
@@ -298,7 +299,7 @@
     <string name="menu_about">About c:geo</string>
     <string name="menu_helpers">Utility programs</string>
     <string name="menu_settings">Settings</string>
-    <string name="menu_backup">Backup</string>
+    <string name="menu_backup">Backup / restore</string>
     <string name="menu_history">History</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -501,7 +502,7 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Choose preferred navigation methods and select external navigation apps.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Perform backup and restore, configure app directories and other system specific settings.</string>
+    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
     <string name="settings_title_navigation_menu">Navigation Menu</string>
 
     <string name="settings_category_browser">Browser</string>
@@ -623,10 +624,12 @@
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show direction of caches in the list</string>
-    <string name="init_backup">Backup</string>
+
+    <!-- backup / restore -->
+    <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
-    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints, but not your settings.\nYour Login data and passwords will never leave this application.</string>
+    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Restore</string>
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
@@ -640,6 +643,22 @@
     <string name="init_restore_confirm">Database is empty. Do you want to restore the database backup?</string>
     <string name="init_backup_last">Available backup from</string>
     <string name="init_backup_last_no">There is no file with a backup.</string>
+
+    <string name="settings_title_backup">Backup / Restore</string>
+    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
+    <string name="init_backup_settings">Backup program settings</string>
+    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
+    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
+    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
+    <string name="settings_savingerror">Error saving settings</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="init_backup_settings_restore">Restore settings</string>
+    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
+    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
+    <string name="settings_readingerror">Error reading settings</string>
+    <string name="settings_restored">Settings restored</string>
+    <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
+
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>
     <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data. You need to select the offline map directory first to get offline map support.</string>
     <string name="settings_info_themes_title">Info on Map Themes</string>
@@ -738,10 +757,12 @@
 
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>
-    <string name="init_proximityNotificationGeneral">General proximity notification</string>
-    <string name="init_summary_proximityNotificationGeneral">Play a single notification, if any cache or waypoint currently visible on the map is closer than distance 1.</string>
-    <string name="init_proximityNotificationSpecific">Specific proximity notification</string>
-    <string name="init_summary_proximityNotificationSpecific">Play a notification, if the selected cache or waypoint is closer than distance 1 (farther away) or distance 2 (closer). Uses different tones for the two distances.</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>

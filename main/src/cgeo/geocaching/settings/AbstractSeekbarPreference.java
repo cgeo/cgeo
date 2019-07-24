@@ -82,6 +82,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
         // set label (if given)
         if (null != labelValue && !labelValue.isEmpty()) {
             final TextView labelView = ButterKnife.findById(v, R.id.preference_seekbar_label_view);
+            labelView.setVisibility(View.VISIBLE);
             labelView.setText(labelValue);
         }
 

@@ -34,7 +34,7 @@ swimming          |  12  |  29  |    25 |     | PD      | USA National Park Serv
 available         |  13  |  38  |    39 |  x  | PD      | koem                      | selfmade
 night             |  14  |      |    42 |     | PD      |                           | http://thenounproject.com/noun/moon/#icon-No128
 winter            |  15  |      |       |     | PD      | USA National Park Service | http://thenounproject.com/noun/snow/#icon-No64
-stealth           |  40  |      |       |  x  | PD      | Celine                    | http://www.specialweb.com/original/icons4.html
+stealth           |  40  |      |    74 |  x  | PD      | Celine                    | http://www.specialweb.com/original/icons4.html
 firstaid          |  42  |      |       |     | PD      | Roger Cook, Dan Shanosky  | http://thenounproject.com/noun/first-aid/#icon-No535
 cow               |  43  |      |       |     | PD      |                           | http://www.openclipart.org/people/Anonymous/mucca.svg
 field_puzzle      |  47  |      |       |  x  | PD      | nicubunu                  | http://www.openclipart.org/detail/15169/red-jigsaw-piece-13-by-nicubunu http://thenounproject.com/noun/running/#icon-No246
@@ -103,7 +103,7 @@ breeding          |      |  43  |    46 |  x  | PD      | koem                  
 snow_proof        |      |  44  |    47 |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/snow/#icon-No64
 compass           |      |  47  |    49 |  x  | CC0     | James Keuning             | http://thenounproject.com/noun/compass/#icon-No9699
 cave              |      |  50  |    54 |     | PD      |                           | http://thenounproject.com/noun/cave/#icon-No3827
-aircraft          |      |  53  |       |     | CC0     | United Nations UCHA       | http://thenounproject.com/noun/helicopter/#icon-No4415
+aircraft          |      |  53  |    75 |     | CC0     | United Nations UCHA       | http://thenounproject.com/noun/helicopter/#icon-No4415
 investigation     |      |  54  |    14 |  x  | CC0     | Timur Carpeev             | http://thenounproject.com/noun/magnifying-glass/#icon-No5386
 puzzle            |      |  55  |    15 |  x  | PD      | nicubunu                  | http://www.openclipart.org/detail/15169/red-jigsaw-piece-13-by-nicubunu
 arithmetic        |      |  56  |    16 |  x  | PD      | koem                      | selfmade

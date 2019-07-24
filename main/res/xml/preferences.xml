@@ -605,22 +605,22 @@
 
         <PreferenceCategory android:title="@string/settings_title_proximityNotification"
             android:layout="@layout/preference_category" >
+            <cgeo.geocaching.settings.ProximityFarPreference
+                android:key="@string/pref_proximityDistanceFar"
+                android:layout="@layout/preference_seekbar" />
+            <cgeo.geocaching.settings.ProximityNearPreference
+                android:key="@string/pref_proximityDistanceNear"
+                android:layout="@layout/preference_seekbar" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_proximityNotificationGeneral"
                 android:summary="@string/init_summary_proximityNotificationGeneral"
                 android:title="@string/init_proximityNotificationGeneral" />
-            <cgeo.geocaching.settings.ProximityFarPreference
-                android:key="@string/pref_proximityDistanceFar"
-                android:layout="@layout/preference_seekbar" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_proximityNotificationSpecific"
                 android:summary="@string/init_summary_proximityNotificationSpecific"
                 android:title="@string/init_proximityNotificationSpecific" />
-            <cgeo.geocaching.settings.ProximityNearPreference
-                android:key="@string/pref_proximityDistanceNear"
-                android:layout="@layout/preference_seekbar" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
@@ -867,17 +867,6 @@
         android:title="@string/settings_title_system"
         android:summary="@string/settings_summary_system" >
 
-        <PreferenceCategory android:title="@string/init_backup"
-            android:layout="@layout/preference_category"
-            android:summary="@string/init_backup_note">
-            <Preference
-                android:key="@string/pref_fakekey_preference_backup"
-                android:title="@string/init_backup_backup" />
-            <Preference
-                android:key="@string/pref_fakekey_preference_restore"
-                android:title="@string/init_backup_restore" />
-        </PreferenceCategory>
-
         <PreferenceCategory android:title="@string/init_location"
             android:layout="@layout/preference_category"
             android:summary="@string/init_location_note">
@@ -925,4 +914,36 @@
                 android:title="@string/init_create_memory_dump" />
         </PreferenceCategory>
     </PreferenceScreen>
-</PreferenceScreen>
+
+    <PreferenceScreen
+        android:icon="?attr/settings_backup"
+        android:title="@string/settings_title_backup"
+        android:key="@string/preference_screen_backup"
+        android:summary="@string/settings_summary_backup" >
+
+        <PreferenceCategory android:title="@string/init_backup"
+            android:layout="@layout/preference_category"
+            android:summary="@string/init_backup_note">
+            <Preference
+                android:key="@string/pref_fakekey_preference_backup"
+                android:title="@string/init_backup_backup" />
+            <Preference
+                android:key="@string/pref_fakekey_preference_restore"
+                android:title="@string/init_backup_restore" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_backup_settings"
+            android:layout="@layout/preference_category">
+            <Preference
+                android:key="@string/pref_fakekey_preference_backupsettings_light"
+                android:title="@string/init_backup_settings_backup_light" />
+            <Preference
+                android:key="@string/pref_fakekey_preference_backupsettings_full"
+                android:title="@string/init_backup_settings_backup_full" />
+            <Preference
+                android:key="@string/pref_fakekey_preference_restoresettings"
+                android:title="@string/init_backup_settings_restore" />
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+    </PreferenceScreen>
