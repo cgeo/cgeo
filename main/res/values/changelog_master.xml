@@ -4,6 +4,8 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Backup for app settings\n
+    · New: Remember setting for distance circles on map\n
+    · New: Move offline related settings to offline data setting menu\n
     \n
     \n
   </string>
