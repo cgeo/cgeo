@@ -11,13 +11,14 @@ public class WpThresholdPreference extends AbstractSeekbarPreference {
         super(context, attrs);
     }
 
+    @Override
     protected void saveSetting(final int progress) {
         Settings.setShowWaypointsThreshold(progress);
     }
 
     @Override
     protected View onCreateView(final ViewGroup parent) {
-        configure(0, Settings.SHOW_WP_THRESHOLD_MAX, Settings.getWayPointsThreshold(), null);
+        configure(0, Settings.SHOW_WP_THRESHOLD_MAX, Settings.getWayPointsThreshold(), null, false);
         return super.onCreateView(parent);
     }
 }
