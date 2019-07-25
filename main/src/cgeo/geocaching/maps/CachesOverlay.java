@@ -61,6 +61,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
+        displayCircles = Settings.getCircles();
     }
 
     void updateItems(final CachesOverlayItemImpl item) {
@@ -95,8 +96,8 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         return displayCircles;
     }
 
-    void switchCircles() {
-        displayCircles = !displayCircles;
+    void setCircles(final boolean showCircles) {
+        displayCircles = showCircles;
     }
 
     @Override

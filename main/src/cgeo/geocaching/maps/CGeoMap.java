@@ -486,7 +486,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (mapOptions.mapState != null) {
             followMyLocation = mapOptions.mapState.followsMyLocation();
             if (overlayCaches.getCircles() != mapOptions.mapState.showsCircles()) {
-                overlayCaches.switchCircles();
+                overlayCaches.setCircles(mapOptions.mapState.showsCircles());
             }
         } else if (mapOptions.mapMode != MapMode.LIVE) {
             followMyLocation = false;
@@ -622,7 +622,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
-            menu.findItem(R.id.menu_circle_mode).setChecked(overlayCaches.getCircles());
+            menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
@@ -691,7 +691,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_store_unsaved_caches:
                 return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
             case R.id.menu_circle_mode:
-                overlayCaches.switchCircles();
+                Settings.setCircles(!Settings.getCircles());
+                overlayCaches.setCircles(Settings.getCircles());
                 mapView.repaintRequired(overlayCaches);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
