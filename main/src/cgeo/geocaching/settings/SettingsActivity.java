@@ -451,14 +451,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         final Preference backupSettingsLight = getPreference(R.string.pref_fakekey_preference_backupsettings_light);
         backupSettingsLight.setOnPreferenceClickListener(preference -> {
             final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
-            spb.backup(false);
+            spb.backup(false, () -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backupsettings_light), ""));
             return true;
         });
 
         final Preference backupSettingsFull = getPreference(R.string.pref_fakekey_preference_backupsettings_full);
         backupSettingsFull.setOnPreferenceClickListener(preference -> {
             final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
-            spb.backup(true);
+            spb.backup(true, () -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backupsettings_full), ""));
             return true;
         });
 

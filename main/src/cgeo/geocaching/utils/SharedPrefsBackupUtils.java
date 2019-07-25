@@ -48,12 +48,12 @@ public class SharedPrefsBackupUtils extends Activity {
         this.activityContext = activityContext;
     }
 
-    public void backup(final Boolean fullBackup) {
+    public void backup(final Boolean fullBackup, final Runnable runAfterwards) {
         if (!fullBackup) {
-            backupInternal(false);
+            backupInternal(false, runAfterwards);
         } else {
             Dialogs.confirm(activityContext, R.string.init_backup_settings_backup_full, R.string.init_backup_settings_backup_full_confirm, (dialog, which) -> {
-                backupInternal(true);
+                backupInternal(true, runAfterwards);
             });
         }
     }
@@ -72,7 +72,7 @@ public class SharedPrefsBackupUtils extends Activity {
         }
     }
 
-    private void backupInternal(final Boolean fullBackup) {
+    private void backupInternal(final Boolean fullBackup, final Runnable runAfterwards) {
         final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
         final Map<String, ?> keys = prefs.getAll();
         final HashSet<String> ignoreKeys = new HashSet();
@@ -148,6 +148,9 @@ public class SharedPrefsBackupUtils extends Activity {
                 Log.d("error reading settings file: " + error);
             }
             Toast.makeText(activityContext, R.string.settings_savingerror, Toast.LENGTH_LONG).show();
+        }
+        if (runAfterwards != null) {
+            runAfterwards.run();
         }
     }
 
