@@ -1,11 +1,11 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Xml;
@@ -64,7 +64,7 @@ public class SharedPrefsBackupUtils extends Activity {
         } else {
             Dialogs.confirm(activityContext, R.string.init_backup_settings_restore, R.string.init_backup_settings_restore_confirm, (dialog, which) -> {
                 if (restoreInternal()) {
-                    Dialogs.confirmYesNo(activityContext, R.string.init_backup_settings_restore, R.string.settings_restart, (dialog2, which2) -> {
+                    Dialogs.confirmYesNo(activityContext, R.string.settings_restored, R.string.settings_restart, (dialog2, which2) -> {
                         ProcessUtils.restartApplication(activityContext);
                     });
                 }
@@ -129,9 +129,6 @@ public class SharedPrefsBackupUtils extends Activity {
                             xmlSerializer.endTag(null, type);
                         }
                     }
-                    Log.e("saved " + key + "=" + value);
-                } else {
-                    Log.e("ignored key " + key + " due to privacy settings");
                 }
             }
             xmlSerializer.endTag(null, TAG_MAP);
@@ -141,13 +138,13 @@ public class SharedPrefsBackupUtils extends Activity {
             final String dataWrite = writer.toString();
             file.write(dataWrite.getBytes());
             file.close();
-            Toast.makeText(activityContext, R.string.settings_saved, Toast.LENGTH_SHORT).show();
+            Dialogs.message(activityContext, fullBackup ? R.string.init_backup_settings_backup_full : R.string.init_backup_settings_backup_light, activityContext.getString(R.string.settings_saved) + "\n" + getSettingsFile());
         } catch (IllegalArgumentException | IllegalStateException | IOException e) {
             final String error = e.getMessage();
             if (null != error) {
-                Log.d("error reading settings file: " + error);
+                Log.e("error writing settings file: " + error);
             }
-            Toast.makeText(activityContext, R.string.settings_savingerror, Toast.LENGTH_LONG).show();
+            Dialogs.message(activityContext, fullBackup ? R.string.init_backup_settings_backup_full : R.string.init_backup_settings_backup_light, R.string.settings_savingerror);
         }
         if (runAfterwards != null) {
             runAfterwards.run();
@@ -223,8 +220,6 @@ public class SharedPrefsBackupUtils extends Activity {
                                 default:
                                     throw new XmlPullParserException("unknown type");
                             }
-                            Log.e("write setting " + type + " " + key + "=" + value);
-
                             type = TYPE_UNKNOWN;
                         } else if (parser.getName().equals(TAG_MAP)) {
                             inTag = false;
@@ -242,21 +237,20 @@ public class SharedPrefsBackupUtils extends Activity {
             if (!editor.commit()) {
                 throw new XmlPullParserException("could not commit changed preferences");
             }
-            Toast.makeText(activityContext, R.string.settings_restored, Toast.LENGTH_SHORT).show();
             return true;
         } catch (IOException | XmlPullParserException e) {
             final String error = e.getMessage();
             if (null != error) {
                 Log.d("error reading settings file: " + error);
             }
-            Toast.makeText(activityContext, R.string.settings_readingerror, Toast.LENGTH_LONG).show();
+            Dialogs.message(activityContext, R.string.init_backup_settings_restore, R.string.settings_readingerror);
             return false;
         }
     }
 
     @Nullable
     private static File getSettingsFile() {
-        return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), SETTINGS_FILENAME);
+        return new File(LocalStorage.getBackupDirectory(), SETTINGS_FILENAME);
     }
 
     public static Boolean hasBackup() {
