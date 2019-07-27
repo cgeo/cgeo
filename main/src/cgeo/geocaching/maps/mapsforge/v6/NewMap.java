@@ -184,6 +184,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         // some tiles are rather big, see https://github.com/mapsforge/mapsforge/issues/868
         Parameters.MAXIMUM_BUFFER_SIZE = 6500000;
 
+        // Use fast parent tile rendering to increase performance when zooming in
+        Parameters.PARENT_TILES_RENDERING = Parameters.ParentTilesRendering.SPEED;
+
         // Get parameters from the intent
         mapOptions = new MapOptions(this, getIntent().getExtras());
 
