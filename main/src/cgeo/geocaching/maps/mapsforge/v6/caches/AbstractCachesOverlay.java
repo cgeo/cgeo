@@ -244,6 +244,12 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void syncLayers(final Collection<String> removeCodes, final Collection<String> newCodes) {
+
+        // check if there is something to do
+        if (removeCodes.isEmpty() && newCodes.isEmpty()) {
+            return;
+        }
+
         final Layers layers = getLayers();
         if (layers == null) {
             return;
