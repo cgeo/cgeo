@@ -995,6 +995,10 @@
     <string name="cache_status_not_premium">All Members Access</string>
     <string name="cache_status_stored">Stored</string>
     <string name="cache_status_not_stored">Not stored</string>
+    <string name="cache_status_stored_lasteighthours">Stored a) within last eight hours</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Stored b) within last twenty-four hours</string>
+    <string name="cache_status_stored_lastsevendays">Stored c) within last seven days</string>
+    <string name="cache_status_stored_lastthirtydays">Stored d) within last thirty days</string>
     <string name="cache_geocode">Geo code</string>
     <string name="cache_name">Name</string>
     <string name="cache_type">Type</string>

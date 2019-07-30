@@ -342,6 +342,70 @@ class StateFilterFactory implements IFilterFactory {
         }
     }
 
+    static class StateStoredWithinLastXFilter extends AbstractFilter {
+        protected long timeCompare = 0;
+
+        public static final Creator<StateStoredWithinLastXFilter> CREATOR
+                = new Parcelable.Creator<StateStoredWithinLastXFilter>() {
+
+            @Override
+            public StateStoredWithinLastXFilter createFromParcel(final Parcel in) {
+                return new StateStoredWithinLastXFilter(in);
+            }
+
+            @Override
+            public StateStoredWithinLastXFilter[] newArray(final int size) {
+                return new StateStoredWithinLastXFilter[size];
+            }
+        };
+
+        StateStoredWithinLastXFilter(final int resId, final long timeCompare) {
+            super(resId);
+            this.timeCompare = timeCompare;
+        }
+
+        protected StateStoredWithinLastXFilter(final Parcel in) {
+            super(in);
+            timeCompare = in.readLong();
+        }
+
+        @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeLong(timeCompare);
+        }
+
+        @Override
+        public boolean accepts(@NonNull final Geocache cache) {
+            return cache.isOffline() && cache.getUpdated() >= timeCompare;
+        }
+    }
+
+    static class StateStoredWithinLastEightHoursFilter extends StateStoredWithinLastXFilter {
+        StateStoredWithinLastEightHoursFilter() {
+            super(R.string.cache_status_stored_lasteighthours, System.currentTimeMillis() - 8 * 60 * 60 * 1000);
+        }
+    }
+
+    static class StateStoredWithinLastTwentyFourHoursFilter extends StateStoredWithinLastXFilter {
+        StateStoredWithinLastTwentyFourHoursFilter() {
+            super(R.string.cache_status_stored_lasttwentyfourhours, System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+        }
+    }
+
+    static class StateStoredWithinLastSevenDaysFilter extends StateStoredWithinLastXFilter {
+        StateStoredWithinLastSevenDaysFilter() {
+            super(R.string.cache_status_stored_lastsevendays, System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000);
+        }
+    }
+
+    static class StateStoredWithinLastThirtyDaysFilter extends StateStoredWithinLastXFilter {
+        StateStoredWithinLastThirtyDaysFilter() {
+            super(R.string.cache_status_stored_lastthirtydays, System.currentTimeMillis() - 30 * 24 * 60 * 60 * 1000);
+        }
+    }
+
+
     @Override
     @NonNull
     public List<IFilter> getFilters() {
@@ -359,6 +423,10 @@ class StateFilterFactory implements IFilterFactory {
         filters.add(new RatingFilter());
         filters.add(new TrackablesFilter());
         filters.add(new MultiListingFilter());
+        filters.add(new StateStoredWithinLastEightHoursFilter());
+        filters.add(new StateStoredWithinLastTwentyFourHoursFilter());
+        filters.add(new StateStoredWithinLastSevenDaysFilter());
+        filters.add(new StateStoredWithinLastThirtyDaysFilter());
 
         Collections.sort(filters, new Comparator<IFilter>() {
 
