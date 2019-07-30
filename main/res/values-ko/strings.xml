@@ -26,9 +26,10 @@
     <string name="webcam">웹캠 캐시</string>
     <string name="virtual">버추얼 캐시</string>
     <string name="wherigo">Wherigo 캐시</string>
-    <string name="lostfound">Lost &amp; Found 이벤트 캐시</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE 캐시</string>
     <string name="gchq">그라운드스픽 HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">지오캐싱 모험 전시회</string>
     <string name="block">그라운드스픽 블럭 파티</string>
     <string name="unknown">알수없는 형식</string>
@@ -349,6 +350,7 @@
     <string name="caches_remove_progress">캐시 제거중</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">선택된 것 새로고침</string>
     <string name="caches_refresh_all">모두 새로 고침</string>
     <string name="caches_move_selected">선택 항목 이동</string>
@@ -434,6 +436,18 @@
     <string name="about_system_info_send_chooser">시스템 정보 보내기</string>
     <string name="changelog_github">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -480,7 +494,7 @@
     <string name="settings_info_facebook_login_title">Facebook로그인</string>
     <string name="settings_info_facebook_login">c:geo 에서 페이스북 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다…</string>
     <string name="settings_authorize">c:geo 인증받기</string>
-    <string name="settings_reauthorize">c:geo 다시 인증받기</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">캐시 검색을 위하여 geocaching.com에 c:geo를 인증하기</string>
     <string name="settings_ec_description">캐시 검색과 찾은 캐시 접근을 위하여 extremgeocaching.com에 c:geo를 인증하기</string>
     <string name="settings_su_description">캐시 검색을 위하여 geocaching.su에 c:geo를 인증하기</string>
@@ -567,6 +581,8 @@
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_brouterThreshold">경로 계산</string>
     <string name="init_brouterThreshold_description">brouter helper 앱(설치되었을 경우)이 경로를 계산할 수 있는 최대 거리</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">비활성캐시 제외하기</string>
     <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
     <string name="init_save_log_img">사진 저장하기</string>
@@ -691,6 +707,14 @@
     <string name="init_experimental_title">실험적 기능</string>
     <string name="init_mfbeta">Mapsforge beta를 기본지도로</string>
     <string name="init_mfbeta_description">현재 버전은 실험적으로 새로운 Mapsforge 지도의 베타버전이 포함되어 있습니다. 여기에서 이 지도를 기본지도로 활성화시킬 수 있습니다.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
@@ -699,7 +723,7 @@
     <string name="init_sendToCgeo">c:geo로 보내기</string>
     <string name="settings_info_send2cgeo_title">send2cgeo에 관한 정보</string>
     <string name="init_sendToCgeo_name">장치 이름</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> 는 Firefox 나 Chrome 브라우저용 특수 플러그인을 사용하여, geocaching.com으로부터 안드로이드 기기로 지오캐시를 직접 전송하는 기능입니다. 등록하기 전에 미리 <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>를 보시기 바랍니다. send2cgeo를 사용하려면 등록만 하면 됩니다. c:geo는 일반적으로 기기를 등록하지 않아도 작동됩니다.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">등록 요청</string>
     <string name="init_sendToCgeo_registering">send2cgeo에 기기를 등록중…</string>
     <string name="init_sendToCgeo_register_ok">등록이 설공했습니다. PIN 코드는 %d입니다. 이 코드를 사용하면 c:geo 웹사이트에서 이 기기를 연결할 수 있습니다.</string>
@@ -716,7 +740,7 @@
     <string name="auth_register">계정 만들기</string>
     <string name="auth_connected">연결됨</string>
     <string name="auth_unconnected">연결되지 않음</string>
-    <string name="auth_connected_as">%s로 연결됨</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">%s를 기다리는 중…</string>
     <string name="auth_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다</string>
     <string name="auth_explain_long">\"c:geo 인증받기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 페이지가 들어있는 웹브라우저가 열립니다. 이 페이지에서 로그인하고 <b>c:geo</b>가 당신의 계정에 접근하도록 허용하세요. 그게 다입니다.</string>
@@ -1181,7 +1205,7 @@
     <string name="export_fieldnotes">현장 기록</string>
     <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
     <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
-    <string name="export_fieldnotes_uploading">올리는 중…</string>
+    <string name="export_fieldnotes_uploading">올리는 중</string>
     <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
     <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
@@ -1448,8 +1472,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">사용하시는 안드로이드 버전이 4.1 이하인 것 같습니다. 이후에는 새로운 c:geo 버전을 받지 못할 수 있습니다.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
-    <string name="tts_start">말하기 시작</string>
-    <string name="tts_stop">말하기 끝</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">연설 시작됨</string>
     <string name="tts_stopped">연설 중지됨</string>
     <string name="err_tts_lang_not_supported">현재 언어는 텍스트 음성 변환이 지원되지 않습니다.</string>
@@ -1557,4 +1580,8 @@
     <string name="ask_again">다시 묻기</string>
     <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

@@ -4,76 +4,77 @@
     <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
-    <string name="detail">Mga Detalye</string>
+    <string name="detail">Mga detalye</string>
     <string name="search">Pangitaa</string>
     <string name="helpers">Gamit kaayo nga mga app</string>
-    <string name="about">Mahitungod sa c:geo</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
+    <string name="about">Ang mahitungod sa c:geo</string>
+    <string name="latitude">Ang Latitud</string>
+    <string name="longitude">Ang longhitud</string>
     <!-- actionbar -->
-    <string name="settings_titlebar">Mga Setting sa c:geo</string>
+    <string name="settings_titlebar">ang mga Setting sa c:geo</string>
     <!-- caches -->
-    <string name="all_types">Tanan nga mga Klase sa Cache</string>
-    <string name="traditional">Kinaraan nga Cache</string>
-    <string name="multi">Dinaghan nga cache</string>
-    <string name="mystery">Misteryo nga Cache</string>
-    <string name="letterbox">Letterbox Hybrid</string>
-    <string name="event">Cache sa Panghitabo</string>
-    <string name="mega">Cache sa Minilyon nga Panghitabo</string>
-    <string name="giga">Cache sa Binilyon nga Panghitabo</string>
-    <string name="earth">Earthcache</string>
-    <string name="cito">Cache In Trash Out Event</string>
-    <string name="webcam">Cache sa Webcam</string>
+    <string name="all_types">Tanang klase sa cache</string>
+    <string name="traditional">Tradisyonal na Cache</string>
+    <string name="multi">Ang dinaghan na cache</string>
+    <string name="mystery">Ang misteryo nga Cache</string>
+    <string name="letterbox">Hybrid nga letterbox</string>
+    <string name="event">Ang panghitabo sa Cache</string>
+    <string name="mega">Ang minilyon nga panghitabo sa cache</string>
+    <string name="giga">Binilyon nga panghitabo sa Cache</string>
+    <string name="earth">Ang Earthcache</string>
+    <string name="cito">Ang pagbasura sa panghitabo sa cache</string>
+    <string name="webcam">Ang Cache sa Webcam</string>
     <string name="virtual">Birtwal nga Cache</string>
-    <string name="wherigo">Cache nga Wherigo</string>
-    <string name="lostfound">Cache sa Panghitabo nga Nawala &amp; Nakit-an</string>
-    <string name="ape">Cache sa APE nga Proyekto</string>
-    <string name="gchq">HQ sa Groundspeak</string>
+    <string name="wherigo">Ang Cache nga Whereigo</string>
+    <string name="communceleb">Community Celebration Event</string>
+    <string name="ape">Ang Proyekto sa APE Cache</string>
+    <string name="gchq">Ang Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Ang GPS sa mga panimpalad na pagpakita</string>
     <string name="block">Groundspeak ge-tabunan ang Party</string>
-    <string name="unknown">Wala nailhan nga Klase</string>
+    <string name="unknown">Ang wala mailhi nga klase</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
-    <string name="cache_size_small">Gamay</string>
+    <string name="cache_size_small">Ang Gamay</string>
     <string name="cache_size_regular">Regular</string>
     <string name="cache_size_large">Dako</string>
-    <string name="cache_size_other">Uban</string>
-    <string name="cache_size_virtual">Birtwal</string>
-    <string name="cache_size_notchosen">Wala napili</string>
-    <string name="cache_size_unknown">Wala nailhan</string>
+    <string name="cache_size_other">Uban pa</string>
+    <string name="cache_size_virtual">Ang birtwal</string>
+    <string name="cache_size_notchosen">Wala napilian</string>
+    <string name="cache_size_unknown">Wala mailhan</string>
     <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Labihan ka dako</string>
     <!-- waypoints -->
-    <string name="wp_final">Pinal nga Lokasyon</string>
-    <string name="wp_stage">Yugto sa usa ka Dinaghan nga cache</string>
-    <string name="wp_puzzle">Pangutana nga Tubagon</string>
-    <string name="wp_pkg">Parkinganan nga Lugar</string>
+    <string name="wp_final">Ang katapusan nga lokasyon</string>
+    <string name="wp_stage">Ang yugto sa dinaghan nga cache</string>
+    <string name="wp_puzzle">Ang pangutana nga tubagon</string>
+    <string name="wp_pkg">Parkinganan nga lugar</string>
     <string name="wp_trailhead">Trailhead</string>
     <string name="wp_waypoint">Ang punto sa reperensya</string>
     <string name="wp_original">Ang mga coordinate nga orihinal</string>
     <!-- logs -->
-    <string name="log_found">Nakit-an kana</string>
-    <string name="log_dnf">Wala kana nakit-an</string>
-    <string name="log_note">Pagsulat og notaryo</string>
-    <string name="log_published">Namantala</string>
+    <string name="log_found">Nakit-an na</string>
+    <string name="log_dnf">Wala na nakit-an</string>
+    <string name="log_note">Ang notaryo kay isuwat</string>
+    <string name="log_published">Ang gipatik</string>
     <string name="log_enabled">Gipagana</string>
     <string name="log_disabled">Wala gipagana</string>
     <string name="log_attend">Motambong</string>
-    <string name="log_attended">Nitambong</string>
-    <string name="log_retrieved">Gibawi</string>
-    <string name="log_placed">Nabutang</string>
-    <string name="log_grabbed">Nabira sa Usa ka Dapit</string>
-    <string name="log_movecollection">Nabalhin dadto sa Koleksyon</string>
-    <string name="log_moveinventory">Nabalhin ngadto sa Imbentaryo</string>
-    <string name="log_maintained">Nabuhat ang Pamintinar</string>
-    <string name="log_maintenance_needed">Nanginahanglan og Pagmintinar</string>
+    <string name="log_attended">Ningtambong</string>
+    <string name="log_retrieved">Gikuha</string>
+    <string name="log_placed">Ge-butang</string>
+    <string name="log_grabbed">Nabira sa usa ka dapit</string>
+    <string name="log_movecollection">Ang pagbalhin padung sa koleksyon</string>
+    <string name="log_moveinventory">Ang pagbalhin padulong sa Imbentaryo</string>
+    <string name="log_maintained">Ang pamintinar sa gibuhat</string>
+    <string name="log_maintenance_needed">Nanginahanglan ug mintinar</string>
     <string name="log_update">Ang mga na update na koordinado</string>
-    <string name="log_archived">Naarkibo</string>
-    <string name="log_unarchived">Wala naarkibo</string>
-    <string name="log_needs_archived">Nanginahanglan nga maarkibo</string>
-    <string name="log_discovered">Nadiskubre</string>
-    <string name="log_reviewer">Pagtuki sa Notaryo</string>
-    <string name="log_submit_for_review">Isumiter aron sa Pagtuki</string>
+    <string name="log_archived">Gitala</string>
+    <string name="log_unarchived">Wala na-arkibo</string>
+    <string name="log_needs_archived">Nanginahanglan ug mo-arkibo</string>
+    <string name="log_discovered">Ang nadiskobrehan</string>
+    <string name="log_reviewer">Ang pagsusi sa notaryo</string>
+    <string name="log_submit_for_review">Ang oag-sumitir sa gesusi</string>
     <string name="log_retractlisting">Ang gelista kay ibalik</string>
     <string name="log_marked_missing">Ang pagmarka kay nawagtang</string>
     <string name="log_tb_nothing">Walay kay buhaton</string>
@@ -285,7 +286,7 @@
     <string name="menu_about">Ang mahitungod sa c:geo</string>
     <string name="menu_helpers">Ang utility nga mga programa</string>
     <string name="menu_settings">Ang mga setting</string>
-    <string name="menu_backup">Backup</string>
+    <string name="menu_backup">Tabang</string>
     <string name="menu_history">Ang mga niaagi</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">I-scan ang geocode</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Pagtangtang sa mga cache</string>
     <string name="caches_delete_events">Papason ang miagi na kalilhokan</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Bag-ohon ang napili</string>
     <string name="caches_refresh_all">Bag-ohon tanan</string>
     <string name="caches_move_selected">I-isbog and napilian</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Ihatag ang impormasyon sa sistema</string>
     <string name="changelog_github">Ang listahan sa tanang kausaban</string>
     <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ablihon ang mga setting?</string>
     <string name="settings_title_services">Ang mga serbisyo</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Pagsulod sa facebook</string>
     <string name="settings_info_facebook_login">Dili mahimo ang c:geo mo sulod sa geocaching.com gamit ang imohang Facebook nga account. Pero adunay simple nga mga pamaagi…</string>
     <string name="settings_authorize">I-awtorisar nga c:geo</string>
-    <string name="settings_reauthorize">I-awtorisar ang c:geo og balik</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Pagpasugot sa c:geo kuyog sa geocaching.com para mapangita ang mga cache.</string>
     <string name="settings_ec_description">Pagpatugot sa c:geo kuyog sa extremcaching.com para mapangita ang mga cache ug ma akses/filter nimo ang imong nakit-ang mga cache.</string>
     <string name="settings_su_description">Pagpatugot sa c:geo kuyog sa geocaching.su para magpangita sa mga cache.</string>
@@ -570,6 +584,8 @@
     <string name="init_showwaypoint_description">Kung mas ubos kay sa gihatag nga kantidad sa mga caches nga gipakita sa mapa, ang ilang mga waypoint gipakita usab.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Walay ang Disabled</string>
     <string name="init_summary_disabled">Walay ang mga cache sa Disabled</string>
     <string name="init_save_log_img">I-save ang mga Imahe</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Mga eksperimentong bahin</string>
     <string name="init_mfbeta">I-default ang Mapsforge beta</string>
     <string name="init_mfbeta_description">Ang bag-o nga gawas adunay beta nga bersyon sa among bag-o nga Mapsforge nga mapa isip usa ka eksperimental na panagway. Ang kaning bag-o na mapa puwede ma-aktibo diri isip usa ka default para sa live nga mapa og mga lista sa mapa.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -702,7 +726,7 @@
     <string name="init_sendToCgeo">Ipadala sa c:geo</string>
     <string name="settings_info_send2cgeo_title">Impormasyon sa send2cgeo</string>
     <string name="init_sendToCgeo_name">Ang pangalan sa imohang device</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> magtugot nimo sa pagpadala og caches sa imohang android device deretso gikan sa geocaching.com gamit ang espesyal nga plugin para sa Firefox o Chrome. Sa dili pa magpa-rehistro, palihug tan-awa <a href="http://send2.cgeo.org/">http://send2.cgeo.org</a>. Kinahanglan ra og magparehistro kung ganahan mogamit og send2cgeo. ang c:geo mo tugon ra bisag wala na rehistro ang device.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Paghangyo og pagparehistro</string>
     <string name="init_sendToCgeo_registering">Nagrehistro ang imoha nga device para sa send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Malampusong pagrehistrar. Ang PIN code kay %d. Gamita na sa c:geo na website para makakonek ang device sa imong browser.</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Pagbuhat og account</string>
     <string name="auth_connected">Nakakonekta na</string>
     <string name="auth_unconnected">Wala pa nakakonekta</string>
-    <string name="auth_connected_as">Nakakonekta sa %s</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Gahuwat para %s…</string>
     <string name="auth_explain_short">Ang kani nga proseso kay nagtugot <b>c:geo</b> maka-access %s.</string>
     <string name="auth_explain_long">Inig pindot sa \"awtorisa c:geo\" button magsugod na ang proseso. Ang kani nga proseso kay mag abli sa web browser nga adunay %s panid. Pagsulod sa kani nga panid og mo tugot kini <b>c:geo</b> nga maka akses sa imong account.</string>
@@ -1459,8 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">You appear to be using a version of Android older than 4.1. Future releases of c:geo might no longer be available for your device.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mosturya na kompas</string>
-    <string name="tts_start">Magsugod og isturya</string>
-    <string name="tts_stop">Hunong og isturya</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Nagsugod na pulong</string>
     <string name="tts_stopped">Huningi ang pulong</string>
     <string name="err_tts_lang_not_supported">Ang kasamtamang linggwahe ay dile suportado zs text-to-speech.</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>
