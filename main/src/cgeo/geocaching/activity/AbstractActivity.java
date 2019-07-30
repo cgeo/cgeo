@@ -28,6 +28,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.util.AndroidRuntimeException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -56,7 +57,11 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     protected final void showProgress(final boolean show) {
-        ActivityMixin.showProgress(this, show);
+        try {
+            ActivityMixin.showProgress(this, show);
+        } catch (final Exception ex) {
+            Log.e(String.format("Error seeting progress: %b", show, Locale.US), ex);
+        }
     }
 
     protected final void setTheme() {
@@ -132,7 +137,11 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
      * Common actions for all onCreate functions.
      */
     private void onCreateCommon() {
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        try {
+            supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        } catch (final AndroidRuntimeException ex) {
+            Log.e("Error requesting indeterminate progress", ex);
+        }
         AndroidBeam.disable(this);
         initializeCommonFields();
     }
