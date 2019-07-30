@@ -26,9 +26,10 @@
     <string name="webcam">Webcam</string>
     <string name="virtual">Virtuelle</string>
     <string name="wherigo">Wherigo</string>
-    <string name="lostfound">Événement perdu &amp; trouvé</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project ape cache</string>
     <string name="gchq">Siège de Groundspeak</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Fête locale Groundspeak</string>
     <string name="unknown">Type inconnu</string>
@@ -137,7 +138,7 @@
     <string name="log_problem_damaged_label">Le conteneur est abîmé</string>
     <string name="log_problem_damaged_text">Ce géocacheur a signalé que le conteneur est abîmé.</string>
     <string name="log_problem_missing_label">La cache peut être absente</string>
-    <string name="log_problem_missing_text">Cet géocacheur a signalé que le cache peut être absente.</string>
+    <string name="log_problem_missing_text">Ce géocacheur a signalé que la cache pouvait être absente.</string>
     <string name="log_problem_other_label">Autre</string>
     <string name="log_problem_other_text">Ce géocacheur a signalé qu’il y a un problème avec cette cache.</string>
     <string name="log_problem_archive_label">La cache devrait être archivée</string>
@@ -160,7 +161,7 @@
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
-    <string name="err_login">Aucune compte renseigné</string>
+    <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
     <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
     <string name="err_unknown">Erreur inconnue</string>
     <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
@@ -272,7 +273,7 @@
     <!-- location service -->
     <string name="loc_last">Dernière position</string>
     <string name="loc_net">Réseau</string>
-    <string name="loc_fused">Unifié</string>
+    <string name="loc_fused">Fusionné</string>
     <string name="loc_low_power">Éco</string>
     <string name="loc_home">Domicile</string>
     <string name="loc_gps">GPS</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Suppression des caches en cours</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
     <string name="caches_upload_modifiedcoords">Envoyer les coordonnées modifiées</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Rafraîchir la sélection</string>
     <string name="caches_refresh_all">Tout rafraîchir</string>
     <string name="caches_move_selected">Déplacer la sélection</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Envoyer les informations système</string>
     <string name="changelog_github">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Connexion Facebook</string>
     <string name="settings_info_facebook_login">Vous ne pouvez pas faire que c:geo se connecte à geocaching.com avec votre compte Facebook. Mais il existe une solution simple…</string>
     <string name="settings_authorize">Autoriser c:geo</string>
-    <string name="settings_reauthorize">Ré-autoriser c:geo</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Autoriser c:geo à utiliser geocaching.com pour chercher des caches.</string>
     <string name="settings_ec_description">Autoriser c:geo à utiliser extremcaching.com pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
     <string name="settings_su_description">Autoriser c:geo à utiliser geocaching.su pour chercher des caches.</string>
@@ -570,6 +584,8 @@
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_save_log_img">Enregistrer les images</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Fonctionnalités expérimentales</string>
     <string name="init_mfbeta">Carte Mapsforge beta par défaut</string>
     <string name="init_mfbeta_description">La version actuelle contient une version beta de notre nouvelle carte Mapsforge (fonctionnalité expérimentale). Cette nouvelle carte peut être activée ici par défaut pour la carte en temps réel et pour celle des listes.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
@@ -702,7 +726,7 @@
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
     <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
     <string name="init_sendToCgeo_name">Le nom de votre appareil</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
     <string name="init_sendToCgeo_registering">Enregistrez votre appareil pour send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est %d. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Créer un compte</string>
     <string name="auth_connected">Connecté</string>
     <string name="auth_unconnected">Pas encore connecté</string>
-    <string name="auth_connected_as">Connecté en tant que %s</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">En attente de %s…</string>
     <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
     <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" lancera le processus (la page web %s sera ouverte dans un navigateur, après avoir renseigné les informations d\'authentification, <b>c:geo</b> sera autorisé à accéder à votre compte).</string>
@@ -1124,7 +1148,7 @@
     <string name="trackable_travelbug">Objet voyageur</string>
     <string name="trackable_geokrety">GeoKrety</string>
     <string name="trackable_geolutins">GeoLutins</string>
-    <string name="trackable_status">Status</string>
+    <string name="trackable_status">Statut</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Traditionnelle</string>
     <string name="geokret_type_book_or_media">Livre ou média électronique</string>
@@ -1455,12 +1479,11 @@
     <string name="status_new_rc" tools:ignore="UnusedResources">Une nouvelle version candidate est disponible.\nAppuyez ici pour l\'installer.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
-    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Votre version d\'Android semble antérieure à 4.1. Les prochaines versions de c:geo pourraient ne plus fonctionner sur votre appareil.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
-    <string name="tts_start">Commencer à parler</string>
-    <string name="tts_stop">Arrêter de parler</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Boussole parlante démarrée</string>
     <string name="tts_stopped">Boussole parlante arrêtée</string>
     <string name="err_tts_lang_not_supported">La langue courante n\'est pas prise en charge par la synthèse vocale.</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

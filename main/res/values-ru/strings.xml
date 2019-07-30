@@ -26,9 +26,10 @@
     <string name="webcam">Тайник-вебкамера</string>
     <string name="virtual">Виртуальный</string>
     <string name="wherigo">Тайник Wherigo</string>
-    <string name="lostfound">Lost &amp; Found событие</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Тайник проекта A.P.E.</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Тайник GPS Adventures Exhibit</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Неизвестный тип</string>
@@ -285,7 +286,7 @@
     <string name="menu_about">О c:geo</string>
     <string name="menu_helpers">Полезные приложения</string>
     <string name="menu_settings">Настройки</string>
-    <string name="menu_backup">Резервное копирование</string>
+    <string name="menu_backup">Сохранить</string>
     <string name="menu_history">История</string>
     <string name="menu_filter">Фильтр</string>
     <string name="menu_scan_geo">Сканировать геокод</string>
@@ -358,6 +359,7 @@
     <string name="caches_remove_progress">Удаление тайников</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
     <string name="caches_upload_modifiedcoords">Загрузить измененные координаты</string>
+    <string name="caches_upload_modifiedcoords_warning">Вы точно хотите загрузить измененные координаты для всех выбранных тайников и перезаписать существующие координаты на сервисе. Это действие не может быть отменено.</string>
     <string name="caches_refresh_selected">Обновить выбранные</string>
     <string name="caches_refresh_all">Обновить все</string>
     <string name="caches_move_selected">Переместить выбранные</string>
@@ -443,6 +445,18 @@
     <string name="about_system_info_send_chooser">Отправить служебную информацию</string>
     <string name="changelog_github">Список всех изменений</string>
     <string name="about_nutshellmanual">Оффлайн руководство</string>
+    <string name="about_contributors_carnerodetails">\"папа\" c:geo</string>
+    <string name="about_contributors_recent">Участники 2018/2019</string>
+    <string name="about_contributors_specialthanks">Особая благодарность</string>
+    <string name="about_contributors_specialthanksdetails">· все участники перевода на <a href="https://crowdin.com/project/cgeo">Crowdin.com</a>!\n· все сообщающие о проблемах\n· и все другие участники.\n</string>
+    <string name="about_contributors_other">Участники до 2018</string>
+    <string name="about_components">Компоненты</string>
+    <string name="contribution_code">код</string>
+    <string name="contribution_tester">тестирование</string>
+    <string name="contribution_support">поддержка</string>
+    <string name="contribution_documentation">документация</string>
+    <string name="contribution_projectleader">лидер проекта</string>
+    <string name="contribution_graphics">графика</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Открыть настройки?</string>
     <string name="settings_title_services">Сервисы</string>
@@ -489,7 +503,7 @@
     <string name="settings_info_facebook_login_title">Вход с Facebook</string>
     <string name="settings_info_facebook_login">Вы не можете войти в geocaching.com, используя учетную запись Facebook. Но есть простое решение…</string>
     <string name="settings_authorize">Авторизовать c:geo</string>
-    <string name="settings_reauthorize">Авторизовать c:geo еще раз</string>
+    <string name="settings_reauthorize">Обновить или удалить авторизацию</string>
     <string name="settings_gc_description">Авторизовать c:geo для поиска тайников geocaching.com.</string>
     <string name="settings_ec_description">Авторизовать c:geo для extremcaching.com, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
     <string name="settings_su_description">Авторизовать c:geo для поиска тайников geocaching.su.</string>
@@ -551,8 +565,8 @@
     <string name="init_signature_template_number">Номер тайника</string>
     <string name="init_signature_template_owner">Создатель</string>
     <string name="init_signature_template_name">Название тайника</string>
-    <string name="init_signature_template_difficulty">Сложность</string>
-    <string name="init_signature_template_terrain">Местность</string>
+    <string name="init_signature_template_difficulty">Difficulty</string>
+    <string name="init_signature_template_terrain">Terrain</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
@@ -576,6 +590,8 @@
     <string name="init_showwaypoint_description">Если на карте меньше заданного числа тайников, то их этапы будут показаны автоматически.</string>
     <string name="init_brouterThreshold">Вычислить путь</string>
     <string name="init_brouterThreshold_description">Максимальное расстояние, до которого brouter будет прокладывать маршрут (если установлен).</string>
+    <string name="init_brouterShowBothDistances">Показать расстояние по прямой</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Исключить тайники вне игры</string>
     <string name="init_summary_disabled">Исключить тайники вне игры</string>
     <string name="init_save_log_img">Сохранять изображения</string>
@@ -588,7 +604,7 @@
     <string name="init_summary_choose_list">Спрашивать, в какой список вы хотите сохранить тайники</string>
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать направление на тайник в списке</string>
-    <string name="init_backup">Резервное копирование</string>
+    <string name="init_backup">Сохранить</string>
     <string name="init_backup_backup">Сохранить</string>
     <string name="init_backup_running">Создание резервной копии…</string>
     <string name="init_backup_note">Обратите внимание, что будет сохранена только информация о тайниках и путевых точках.\nПользовательские настройки и регистрационные данные не будут сохранены.</string>
@@ -700,6 +716,14 @@
     <string name="init_experimental_title">Экспериментальные функции</string>
     <string name="init_mfbeta">Бета Mapsforge по умолчанию</string>
     <string name="init_mfbeta_description">Текущая версия содержит бета-версию нашей новой карты Mapsforge в качестве экспериментальной функциональности. Вы можете включить эту карту для онлайн карты и карты списков.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Уведомление о приближении</string>
+    <string name="init_proximityNotificationGeneral">Общее уведомление о близости на карте</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">далеко</string>
+    <string name="near_distance">близко</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
@@ -708,7 +732,7 @@
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Подробная информация о send2cgeo</string>
     <string name="init_sendToCgeo_name">Название вашего устройства</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> позволяет отправлять тайники на Android устройство напрямую с geocaching.com, используя специальное расширение для Opera или Firefox. Перед регистрацией, посетите <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Регистрация необходима, только если вы хотите использовать send2cgeo.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> позволяет отправлять тайники на Android устройство напрямую с geocaching.com, используя специальное расширение для Opera или Firefox. Перед регистрацией, посетите <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. Регистрация необходима, только если вы хотите использовать send2cgeo.</string>
     <string name="init_sendToCgeo_register">Запросить регистрацию</string>
     <string name="init_sendToCgeo_registering">Регистрация вашего устройства в send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Регистрация завершена. Ваш ПИН код %d. Используйте его на сайте c:geo для соединения этого устройства с вашим браузером.</string>
@@ -725,7 +749,7 @@
     <string name="auth_register">Создать учетную запись</string>
     <string name="auth_connected">Подключен</string>
     <string name="auth_unconnected">Еще не подключен</string>
-    <string name="auth_connected_as">Подключен как %s</string>
+    <string name="auth_connected_as">Подключено как %s.\nНажмите здесь, чтобы обновить или подержите, чтобы удалить авторизацию c:geo.</string>
     <string name="auth_dialog_waiting">Ожидание %s…</string>
     <string name="auth_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
     <string name="auth_explain_long">Нажмите \"Авторизовать c:geo\" для начала авторизации. Откроется браузер на странице %s. Введите свои данные и разрешите <b>c:geo</b> доступ к вашей учетной записи. На этом все.</string>
@@ -1481,8 +1505,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Вы используете Android 4.1 или старее. Будущие версии c:geo могут быть недоступны на вашем устройстве.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Говорящий компас</string>
-    <string name="tts_start">Начать говорить</string>
-    <string name="tts_stop">Закончить говорить</string>
+    <string name="tts_toggle">Включить говорилку</string>
     <string name="tts_started">Речь началась</string>
     <string name="tts_stopped">Речь закончилась</string>
     <string name="err_tts_lang_not_supported">Текущий язык не поддерживается TTS-движком.</string>
@@ -1538,7 +1561,7 @@
     <string name="confirm_log_title">Особый тип записи</string>
     <string name="confirm_log_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <string name="confirm_report_problem_title">Сообщить о проблеме</string>
-    <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
+    <string name="confirm_report_problem_message">Вы хотите сообщить \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Активировать</string>
     <string name="init_geokrety">GeoKrety.org</string>
@@ -1623,4 +1646,8 @@
     <string name="ask_again">Спросить снова</string>
     <string name="location_permission_request_explanation">c:geo необходим доступ к GPS чтобы определять ваше местоположение и отображать дистанцию и направление к тайникам. Приложение не может быть использовано без этого разрешения.</string>
     <string name="storage_permission_request_explanation">c:geo необходим доступ к памяти телефона или SD карте, чтобы сохранять тайники, а также для чтения оффлайн карт и экспорта\импорта тайников. Приложение не может быть использовано без этого разрешения.</string>
+    <!-- colors -->
+    <string name="color_blue">Синий</string>
+    <string name="color_green">Зеленый</string>
+    <string name="color_grey">Серый</string>
 </resources>

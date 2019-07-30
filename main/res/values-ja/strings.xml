@@ -26,9 +26,10 @@
     <string name="webcam">ウェブカムキャッシュ</string>
     <string name="virtual">バーチャルキャッシュ</string>
     <string name="wherigo">Wherigoキャッシュ</string>
-    <string name="lostfound">Lost &amp; Found イベントキャッシュ</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE キャッシュ</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">不明なタイプ</string>
@@ -349,6 +350,7 @@
     <string name="caches_remove_progress">キャッシュを削除中</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">選択したキャッシュを更新</string>
     <string name="caches_refresh_all">全てのキャッシュを更新</string>
     <string name="caches_move_selected">選択したキャッシュを移動</string>
@@ -434,6 +436,18 @@
     <string name="about_system_info_send_chooser">システム情報を送信</string>
     <string name="changelog_github">すべての変更の一覧</string>
     <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -480,7 +494,7 @@
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">c:geoからFacebookのアカウントでgeocaching.comにログインすることはできません。 しかし簡単に回避することはできます…</string>
     <string name="settings_authorize">c:geoを認証</string>
-    <string name="settings_reauthorize">再度c:geoを認証</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">geocaching.comでc:geoを認証し、キャッシュを検索します。</string>
     <string name="settings_ec_description">c:geoをextremcaching.comで認証して、キャッシュを検索したり、見つけたキャッシュにアクセス/フィルタリングします。</string>
     <string name="settings_su_description">c:geoをgeocaching.suで認証し、キャッシュを検索します。</string>
@@ -567,6 +581,8 @@
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示します。</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">無効化キャッシュ除外</string>
     <string name="init_summary_disabled">無効化キャッシュは除く</string>
     <string name="init_save_log_img">画像保存</string>
@@ -691,6 +707,14 @@
     <string name="init_experimental_title">実験的な機能</string>
     <string name="init_mfbeta">デフォルトとして Mapsforge ベータ版</string>
     <string name="init_mfbeta_description">現在のリリースには、実験的な機能として新しいMapsforge地図のベータ版が含まれています。ここで、ライブと一覧のデフォルトとして、この新しい地図を有効にすることができます。</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>
@@ -699,7 +723,7 @@
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b>はPCのブラウザ(FirefoxとChrome)で表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。 登録する前に<a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> (英語)をお読みください。簡単な登録とブラウザに拡張機能のインストールが必要です。このSend2cgeo 機能を使用しないのなら登録は不要です。</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">登録を申請</string>
     <string name="init_sendToCgeo_registering">send2cgeo にこの端末を登録しています…</string>
     <string name="init_sendToCgeo_register_ok">登録しました。PIN コードは %d です。お使いのブラウザーにc:geoウェブサイトでこれを使用してこのデバイスを接続します。</string>
@@ -716,7 +740,7 @@
     <string name="auth_register">アカウントを作成</string>
     <string name="auth_connected">接続しました</string>
     <string name="auth_unconnected">まだ接続されていません</string>
-    <string name="auth_connected_as">%s として接続しました</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
     <string name="auth_explain_short">次のプロセスは<b>c:geo</b>に%sへのアクセスを許可させる。</string>
     <string name="auth_explain_long">「c:geoを認証」ボタンを押すと、処理が開始されます。この処理は、webブラウザーで %s ページを開きます。このページにログインして、アカウントに <b>c:geo</b> のアクセスを許可します。以上です。</string>
@@ -1163,8 +1187,8 @@
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
     <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります。</string>
     <string name="helper_google_translate_title">Google 翻訳</string>
-    <string name="helper_google_translate_description">"キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
-Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。"</string>
+    <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
+Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
     <string name="helper_wear_title">c:geo Wear</string>
     <string name="helper_wear_description">c:geo Wearは、Android Wear のスマートウォッチを使用してジオキャッシュに移動することができる c:geo 用のプラグインです。</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
@@ -1449,8 +1473,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Android 4.1 よりも以前のバージョンを使用しているようです。c:geo の今後のリリースはお使いのデバイスで利用できない可能性があります。</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talking compass</string>
-    <string name="tts_start">音声案内開始</string>
-    <string name="tts_stop">音声案内終了</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">音声開始</string>
     <string name="tts_stopped">音声停止</string>
     <string name="err_tts_lang_not_supported">現在の言語で、音声読み上げはサポートされていません。</string>
@@ -1558,4 +1581,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

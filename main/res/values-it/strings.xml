@@ -26,9 +26,10 @@
     <string name="webcam">Webcam cache</string>
     <string name="virtual">Cache Virtuale</string>
     <string name="wherigo">Wherigo cache</string>
-    <string name="lostfound">Lost and Found</string>
+    <string name="communceleb">Evento Celebrazione della Comunità</string>
     <string name="ape">Project Ape cache</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Celebrazione Geocaching HQ (sede centrale)</string>
     <string name="gps">Fiera GPS cache</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Tipo sconosciuto</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Eliminazione dei cache</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
+    <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutte le cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
     <string name="caches_refresh_all">Aggiorna tutti</string>
     <string name="caches_move_selected">Muovi i cache selezionati</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Invia le informazioni del sistema</string>
     <string name="changelog_github">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
+    <string name="about_contributors_carnerodetails">come padre di c:geo</string>
+    <string name="about_contributors_recent">contributori 2018/2019</string>
+    <string name="about_contributors_specialthanks">Ringraziamenti speciali a</string>
+    <string name="about_contributors_specialthanksdetails">· tutti i nostri collaboratori per le traduzioni su <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· tutti i bug tester\n· e tutti gli altri sostenitori.\n</string>
+    <string name="about_contributors_other">Contributori da prima del 2018</string>
+    <string name="about_components">Componenti</string>
+    <string name="contribution_code">codice</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">supporto</string>
+    <string name="contribution_documentation">documentazione</string>
+    <string name="contribution_projectleader">leader del progetto open source</string>
+    <string name="contribution_graphics">grafica</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">Con il tuo account di Facebook non puoi fare login su geocaching.com. Ma c\'è una soluzione semplice…</string>
     <string name="settings_authorize">Autorizza c:geo</string>
-    <string name="settings_reauthorize">Autorizza nuovamente c:geo</string>
+    <string name="settings_reauthorize">Aggiorna o rimuovi autorizzazione</string>
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
     <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
@@ -570,6 +584,8 @@
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
     <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'helper della app brouter (se installata) calcolerà un percorso.</string>
+    <string name="init_brouterShowBothDistances">Mostra distanza</string>
+    <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_disabled">Escludi disattivati</string>
     <string name="init_summary_disabled">Escludi cache disattivati</string>
     <string name="init_save_log_img">Salva immagini</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Funzioni sperimentali</string>
     <string name="init_mfbeta">Mapsforge beta come predefinito</string>
     <string name="init_mfbeta_description">La versione corrente contiene una versione beta della nostra mappa Mapsforge come funzione sperimentale. Questa mappa può essere attivata qui come default per il live ed elenco mappe.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Notifica di prossimità</string>
+    <string name="init_proximityNotificationGeneral">Notifica generale di prossimità sulla mappa</string>
+    <string name="init_summary_proximityNotificationGeneral">Esegui una notifica singola se qualsiasi cache o waypoint attualmente visibile sulla mappa è vicino alla distanza max o vicino alla distanza min. Toni diversi vengono utilizzati per le due distanze.</string>
+    <string name="init_proximityNotificationSpecific">Notifica di prossimità waypoint specifica</string>
+    <string name="init_summary_proximityNotificationSpecific">Riproduci una notifica ripetuta se la cache o il waypoint attualmente selezionati è vicino a distanza max o vicino a distanza min. Funziona se i dettagli della cache o dei waypoint sono aperti, i popup della cache o dei waypoint sulla mappa sono mostrati o la bussola è attiva. Toni diversi vengono utilizzati per le due distanze.</string>
+    <string name="far_distance">distanza max</string>
+    <string name="near_distance">distanza min</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Crea un account</string>
     <string name="auth_connected">Connesso</string>
     <string name="auth_unconnected">Non ancora connesso</string>
-    <string name="auth_connected_as">Collegato come %s</string>
+    <string name="auth_connected_as">Collegato come %s.\nPremi qui per aggiornare o premi a lungo per rimuovere i dati di autorizzazione da c:geo.</string>
     <string name="auth_dialog_waiting">In attesa di %s…</string>
     <string name="auth_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
     <string name="auth_explain_long">Premendo il pulsante \"autorizza c:geo\" avrà inizio il processo. Verrà aperto un browser web con la pagina %s. Effettuare login alla pagina e lasciare che <b>c:geo</b> acceda al tuo account.</string>
@@ -1459,8 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 4.1. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
-    <string name="tts_start">Start voce</string>
-    <string name="tts_stop">Stop voce</string>
+    <string name="tts_toggle">Attiva/disattiva il parlato</string>
     <string name="tts_started">Sintesi vocale on</string>
     <string name="tts_stopped">Sintesi vocale off</string>
     <string name="err_tts_lang_not_supported">Il linguaggio attivo non è supportato dal modulo di sintesi vocale.</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Chiedimi di nuovo</string>
     <string name="location_permission_request_explanation">c:geo ha bisogno dell\'accesso al GPS sul tuo dispositivo per localizzare la tua posizione e calcolare la distanza e la direzione per le geocache. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_request_explanation">c:geo scriverà dati sulla tua memoria del telefono o scheda SD non appena salvi geocache per uso offline. Inoltre c:geo userà la tua memoria telefonica per importare ed esportare file e leggere mappe offline. Non può essere utilizzato senza questo permesso.</string>
+    <!-- colors -->
+    <string name="color_blue">Blu</string>
+    <string name="color_green">Verde</string>
+    <string name="color_grey">Grigio</string>
 </resources>

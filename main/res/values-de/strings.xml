@@ -26,9 +26,10 @@
     <string name="webcam">Webcam-Cache</string>
     <string name="virtual">Virtual-Cache</string>
     <string name="wherigo">Wherigo-Cache</string>
-    <string name="lostfound">Lost &amp; Found Event Cache</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project-APE-Cache</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Unbekannter Typ</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Entferne Caches…</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
+    <string name="caches_upload_modifiedcoords_warning">Möchten Sie modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Systeminformationen senden</string>
     <string name="changelog_github">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
+    <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
+    <string name="about_contributors_recent">Mitwirkende 2018/2019</string>
+    <string name="about_contributors_specialthanks">Besonderer Dank an</string>
+    <string name="about_contributors_specialthanksdetails">· Alle Mitwirkende an der Übersetzung auf <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle Issue-Ersteller\n· und alle anderen Unterstützer.\n</string>
+    <string name="about_contributors_other">Mitwirkende vor 2018</string>
+    <string name="about_components">Komponenten</string>
+    <string name="contribution_code">Code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">Support</string>
+    <string name="contribution_documentation">Handbuch</string>
+    <string name="contribution_projectleader">Open Source Projektleiter</string>
+    <string name="contribution_graphics">Grafiken</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öffne Einstellungen?</string>
     <string name="settings_title_services">Dienste</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook-Anmeldung</string>
     <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com anmelden, aber es gibt eine einfache Abhilfe…</string>
     <string name="settings_authorize">c:geo autorisieren</string>
-    <string name="settings_reauthorize">c:geo neu autorisieren</string>
+    <string name="settings_reauthorize">Autorisierung aktualisieren oder entfernen</string>
     <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
     <string name="settings_ec_description">Autorisiere c:geo auf Extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
@@ -570,6 +584,8 @@
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher Brouter (falls installiert) eine Route berechnet.</string>
+    <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
+    <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
     <string name="init_disabled">Deaktivierte Caches</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
     <string name="init_save_log_img">Logbilder</string>
@@ -629,7 +645,7 @@
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
     <string name="init_debug">Debug-Log aktivieren</string>
-    <string name="init_dbonsdcard_title">Speicherort der Datenbank</string>
+    <string name="init_dbonsdcard_title">Datenspeicherung</string>
     <string name="init_dbonsdcard_note">Sie können die Datenbank von c:geo entweder systemintern oder in einem benutzerdefiniertem Verzeichnis speichern. Je nach Konfiguration des Gerätes kann die Speicherung im Benutzerbereich internen Speicherplatz freigeben, aber Sie verlieren etwas Leistung und c:geo wird nicht funktionieren, wenn der Benutzerspeicher nicht verfügbar ist oder die Datenbank-Datei gelöscht wird.</string>
     <string name="init_dbonsdcard">Im Benutzerspeicher</string>
     <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Experimentelle Funktionen</string>
     <string name="init_mfbeta">Mapsforge beta als Standard</string>
     <string name="init_mfbeta_description">Der aktuelle Release enthält eine Betaversion unserer neuen Mapsforge-Karte als experimentelles Feature. Dies neue Karte kann hier als Standard für Live-Karte und Listen aktiviert werden.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Benachrichtigung über nahe Caches</string>
+    <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung über nahe Caches auf der Karte</string>
+    <string name="init_summary_proximityNotificationGeneral">Spiele eine einmalige Benachrichtigung, wenn ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher als die weite oder nahe Entfernung ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
+    <string name="init_proximityNotificationSpecific">Benachrichtigungston für Wegpunkte</string>
+    <string name="init_summary_proximityNotificationSpecific">Spiele eine wiederholende Benachrichtigung, wenn der aktuell ausgewählte Cache oder Wegpunkt näher als die weite oder nahe Entfernung ist. Ist aktiv wenn die Cache- oder Wegpunkt-Details geöffnet werden, ein Cache- oder Wegpunkt-Popups auf der Karte angezeigt oder der Kompass aktiv ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
+    <string name="far_distance">weite Entfernung</string>
+    <string name="near_distance">nahe Entfernung</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Nutzerkonto erstellen</string>
     <string name="auth_connected">Verbunden</string>
     <string name="auth_unconnected">Noch nicht verbunden</string>
-    <string name="auth_connected_as">Verbunden als %s</string>
+    <string name="auth_connected_as">Verbunden als %s.\nDrücken Sie kurz, um die Autorisierungsdaten von c:geo zu aktualisieren oder lang um sie zu löschen.</string>
     <string name="auth_dialog_waiting">Warte auf %s…</string>
     <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_explain_long">„Starte Autorisierung“ öffnet die Webseite von %s. Bitte dort anmelden und <b>c:geo</b> Zugriff auf den Account erlauben. Das ist alles.</string>
@@ -1450,17 +1474,16 @@
     <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
     <string name="faq_title">FAQs</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nKlicken zum Installieren.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Neue Beta-Version verfügbar.\nKlicken zum Installieren.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Deine Android-Version scheint älter als 4.1 zu sein. Zukünftige Versionen von c:geo sind für dein Gerät vermutlich nicht mehr verfügbar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
-    <string name="tts_start">Starte Sprache</string>
-    <string name="tts_stop">Stoppe Sprache</string>
+    <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
     <string name="tts_started">Sprachausgabe gestartet</string>
     <string name="tts_stopped">Sprachausgabe gestoppt</string>
     <string name="err_tts_lang_not_supported">Die aktuelle Sprache wird von TTS nicht unterstützt.</string>
@@ -1509,7 +1532,7 @@
     <string name="settings_activate_geokrety">Aktivieren</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
-    <string name="init_summary_geokrety">Lade Trackables von GeoKrety.org</string>
+    <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
     <string name="init_geokrety_register_ok">Anmeldung OK</string>
     <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Erneut nachfragen</string>
     <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät, um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
+    <!-- colors -->
+    <string name="color_blue">Blau</string>
+    <string name="color_green">Grün</string>
+    <string name="color_grey">Grau</string>
 </resources>
