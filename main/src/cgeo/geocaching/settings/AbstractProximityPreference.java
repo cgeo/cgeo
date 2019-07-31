@@ -19,7 +19,7 @@ public abstract class AbstractProximityPreference extends AbstractSeekbarPrefere
 
     @Override
     protected int valueToProgressHelper(final int value) {
-        return (int) Math.round(25.0 * Math.log10(value + 1));
+        return (int) Math.round(250.0 * Math.log10(value + 1));
     }
 
     @Override
@@ -30,7 +30,7 @@ public abstract class AbstractProximityPreference extends AbstractSeekbarPrefere
 
     @Override
     protected int progressToValue(final int progress) {
-        final int value = (int) Math.pow(10, Double.valueOf(progress) / 25.0) - 1;
+        final int value = (int) Math.pow(10, Double.valueOf(progress) / 250.0) - 1;
         return value < 0 ? 0 : value > Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE ? Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE : value;
     }
 
