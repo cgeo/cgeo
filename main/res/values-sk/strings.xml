@@ -26,9 +26,10 @@
     <string name="webcam">Webcam Cache</string>
     <string name="virtual">Virtual Cache</string>
     <string name="wherigo">Wherigo Cache</string>
-    <string name="lostfound">Lost &amp; Found Event</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project A.P.E. Cache</string>
     <string name="gchq">Ústredie Groundspeaku</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Výstava GPS Adventures</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Neznámy typ</string>
@@ -197,7 +198,7 @@
     <string name="err_favorite_failed">Zmena stavu \"Obľúbená\" zlyhala.</string>
     <string name="err_select_logimage_failed">Výber obrázka pre log zlyhal.</string>
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
+    <string name="err_unsupported_image_format">Nepodporovaný formát obrázka.</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
     <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
@@ -358,6 +359,7 @@
     <string name="caches_remove_progress">Odstraňovanie skrýše</string>
     <string name="caches_delete_events">Odstrániť minulé Eventy</string>
     <string name="caches_upload_modifiedcoords">Nahrať upravené súradnice</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Obnoviť vybraté</string>
     <string name="caches_refresh_all">Obnoviť všetky</string>
     <string name="caches_move_selected">Presunúť vybraté</string>
@@ -434,7 +436,7 @@
     <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
     <string name="about_starting_text_device_head">c:geo device permissions</string>
     <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
-    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_head">Prvé kroky s c:geo</string>
     <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
     <string name="open_services_page">Configure your geocaching platform(s)</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
@@ -443,6 +445,18 @@
     <string name="about_system_info_send_chooser">Odoslať systémové informácie</string>
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>
@@ -489,7 +503,7 @@
     <string name="settings_info_facebook_login_title">Facebook prihlásenie</string>
     <string name="settings_info_facebook_login">Nemôžete sa s c:geo prihlásiť na Geocaching.com pomocou účtu Facebook. Ale existuje jednoduché riešenie…</string>
     <string name="settings_authorize">Autorizovať c:geo</string>
-    <string name="settings_reauthorize">Autorizovať c:geo znova</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Autorizovať c:geo pre hľadanie skrýš geocaching.com.</string>
     <string name="settings_ec_description">Autorizovať c:geo pre hľadanie skrýš a prístup/filtrovanie vašich nájdených skrýš s extremcaching.com.</string>
     <string name="settings_su_description">Autorizovať c:geo pre hľadanie skrýš s geocaching.su.</string>
@@ -576,6 +590,8 @@
     <string name="init_showwaypoint_description">Ak je na mape zobrazený menší počet skrýš, ako je tento, zobrazia sa aj body trás (waypoints).</string>
     <string name="init_brouterThreshold">Vypočítať trasu</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Nezobrazovať deaktivované</string>
     <string name="init_summary_disabled">Nezobrazovať deaktivované skrýše</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
@@ -588,7 +604,7 @@
     <string name="init_summary_choose_list">Opýtať sa, v ktorom zozname uložiť skrýše</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
-    <string name="init_backup">Záloha</string>
+    <string name="init_backup">Zálohovať</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>
     <string name="init_backup_note">Berte, prosím, na vedomie, že táto voľba zálohuje/obnoví databázu skrýš a bodov trás, ale nie vaše nastavenia.\nVaše údaje pre prihlásenie (heslá) neopustia túto aplikáciu.</string>
@@ -700,6 +716,14 @@
     <string name="init_experimental_title">Experimentálne funkcie</string>
     <string name="init_mfbeta">Mapsforge beta ako predvolené</string>
     <string name="init_mfbeta_description">Aktuálne vydanie aplikácie obsahuje beta verziu našej novej Mapsforge mapy ako experimentálnu funkciu. Táto nová mapa sa tu dá nastaviť ako predvolená.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelit</string>
@@ -708,7 +732,7 @@
     <string name="init_sendToCgeo">Poslať do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o send2cgeo</string>
     <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožní prijímanie skrýš priamo z geocaching.com použitím špeciálneho rozšírenia do Firefoxu či Chrome. Pred registráciou si prosím prečítajte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registrácia je potrebná, iba keď chcete používať send2cgeo. c:geo bude fungovať i bez registrovaného zariadenia.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Žiadosť o registráciu</string>
     <string name="init_sendToCgeo_registering">Registrácia zariadenia pre send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registrácia úspešná. PIN kód je %d. Použite ho na stránkach c:geo pre pridanie tohto zariadenia do vášho prehliadača.</string>
@@ -725,7 +749,7 @@
     <string name="auth_register">Vytvoriť účet</string>
     <string name="auth_connected">Pripojené</string>
     <string name="auth_unconnected">Zatiaľ nepripojené</string>
-    <string name="auth_connected_as">Pripojené ako %s</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Čakanie na %s…</string>
     <string name="auth_explain_short">Nasledujúci postup umožní <b>c:geo</b> prístup k %s.</string>
     <string name="auth_explain_long">Stlačením tlačidla \"autorizovať c:geo\" začne proces. Tento proces otvorí webový prehliadač na stránke %s. Prihláste sa na túto stránku a umožnite <b>c:geo</b> prístup k svojmu kontu. To je všetko.</string>
@@ -1065,7 +1089,7 @@
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_modes">Nastavenia mapy</string>
     <string name="map_trail_show">Zobraziť záznam trasy</string>
-    <string name="map_dot_mode">Use compact icons</string>
+    <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_circles_show">Zobraziť kruhy</string>
     <string name="map_mycaches_hide">Skryť vlastné/nájdené skrýše</string>
     <string name="map_disabled_hide">Nezobrazovať deaktivované skrýše</string>
@@ -1078,7 +1102,7 @@
     <string name="map_static_loading">Načítanie statických máp…</string>
     <string name="map_token_err">c:geo bolo schopné stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
-    <string name="map_clear_trailhistory">Clear trail history</string>
+    <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Navigácia</string>
@@ -1186,7 +1210,7 @@
     <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
-    <string name="helper_gps_locker_title">GPS Locker</string>
+    <string name="helper_gps_locker_title">Zámok GPS</string>
     <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Existujú Greasemonkey skripty a stránky, ktoré geokód zobrazujú ako čiarový kód. S touto aplikáciou môže c:geo načítať geokód priamo z obrazovky vášho PC.</string>
@@ -1228,10 +1252,10 @@
         <item quantity="many">%1$d osobných poznámok bolo úspešne nahraných</item>
         <item quantity="other">%1$d osobných poznámok bolo úspešne nahraných</item>
     </plurals>
-    <string name="export_modifiedcoords">Modified coordinates</string>
+    <string name="export_modifiedcoords">Upravené súradnice</string>
     <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
     <string name="export_modifiedcoords_success">Upload successful</string>
-    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_result">Nahrávanie dokončené: %1$d neúspešné / %2$d v poriadku</string>
     <string name="export_modifiedcoords_error">Upload failed</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Psy povolené</string>
@@ -1481,8 +1505,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Zdá sa, že používate systém Android starší než 4.1. Ďalšie vydania c:geo už nemusia byť pre vaše zariadenie k dispozícii.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Hovoriaci kompas</string>
-    <string name="tts_start">Začať hovoriť</string>
-    <string name="tts_stop">Prestať hovoriť</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Rozprávanie zapnuté</string>
     <string name="tts_stopped">Rozprávanie vypnuté</string>
     <string name="err_tts_lang_not_supported">Aktuálny jazyk nepodporuje prevod textu na reč.</string>
@@ -1623,4 +1646,8 @@
     <string name="ask_again">Opýtať sa znova</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

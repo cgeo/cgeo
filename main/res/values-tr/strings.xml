@@ -26,9 +26,10 @@
     <string name="webcam">Webcam</string>
     <string name="virtual">Sanal Geocache</string>
     <string name="wherigo">Wherigo Geocache</string>
-    <string name="lostfound">Lost&amp;Found Etkinlik</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Macerası</string>
     <string name="block">Groundspeak Açık Hava Partisi</string>
     <string name="unknown">Bilinmeyen Tür</string>
@@ -279,13 +280,13 @@
     <string name="loc_sat">Uydu</string>
     <string name="loc_trying">Yerini bulmaya çalışıyor</string>
     <string name="loc_no_addr">Bilinmeyen adres</string>
-    <string name="loc_gps_disabled">GPS devredışı</string>
+    <string name="loc_gps_disabled">GPS devre dışı</string>
     <string name="menu_centerposition">Konumuma göre ortala</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo hakkında</string>
     <string name="menu_helpers">Yardımcı programlar</string>
     <string name="menu_settings">Ayarlar</string>
-    <string name="menu_backup">Yedek</string>
+    <string name="menu_backup">Yedekle</string>
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Geocache\'ler kaldırılıyor</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
     <string name="caches_upload_modifiedcoords">Düzenlenmiş koordinatları yükle</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Seçilmişleri yenile</string>
     <string name="caches_refresh_all">Hepsini yenile</string>
     <string name="caches_move_selected">Seçileni taşı</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Sistem bilgisini gönder</string>
     <string name="changelog_github">Tüm değişiklikler listesi</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook ile Giriş</string>
     <string name="settings_info_facebook_login">Facebook hesabınızla c:geo üzerinden geocaching.com\'a giriş yapamazsınız. Ancak basit bir çözüm var…</string>
     <string name="settings_authorize">c:geo\'yu yetkilendir</string>
-    <string name="settings_reauthorize">c:geo\'yu yeniden yetkilendir</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">c:geo\'yu geocaching.com\'da Geocache arama yapmak için yetkilendir.</string>
     <string name="settings_ec_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için extremcaching.com ile yetkilendirin.</string>
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
@@ -570,8 +584,10 @@
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
     <string name="init_brouterThreshold_description">Yönlendirici aplikasyon (brouter, eğer varsa) maksimum mesafeyi hesaplayacak.</string>
-    <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
-    <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
+    <string name="init_disabled">Devredışı Olanları Gösterme</string>
+    <string name="init_summary_disabled">Devredışı Olan Geocache\'leri Gösterme</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Deneysel özellikler</string>
     <string name="init_mfbeta">Mapsforge beta varsayılan olarak</string>
     <string name="init_mfbeta_description">Geçerli sürüm, yeni Mapsforge haritamızın beta sürümünü deneme amaçlı olarak içeriyor. Bu yeni harita canlı ve liste haritaları için varsayılan olarak etkinleştirilebilir.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
@@ -702,7 +726,7 @@
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo hakkında bilgi</string>
     <string name="init_sendToCgeo_name">Cihazınızın adı</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b>, Firefox veya Chrome için özel bir eklenti kullanarak Geocache\'lerinizi doğrudan geocaching.com\'dan Android cihazınıza göndermenizi sağlar. Kaydolmadan önce lütfen <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> adresine gidin. Send2cgeo\'yu kullanmak isterseniz kaydınızı yapmanız yeterlidir. C:geo, cihazınızı kaydettirmeden normal şekilde çalışır.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Kayıt Talep Et</string>
     <string name="init_sendToCgeo_registering">Cihazını send2cgeo\'ya kaydediliyor…</string>
     <string name="init_sendToCgeo_register_ok">Kayıt başarılı. Pin kodunuz %d. Bu pin kodunu cihazı tarayıcınıza bağlamak için c:geo web sitesinde kullanın.</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Hesap oluştur</string>
     <string name="auth_connected">Bağlandı</string>
     <string name="auth_unconnected">Henüz bağlantı gerçekleşmedi</string>
-    <string name="auth_connected_as">%s olarak bağlanıldı</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">%s için bekleniyor…</string>
     <string name="auth_explain_short">Sıradaki işlem, <b>c:geo</b>\'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_explain_long">\"c:geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem %s\'de bir sayfa açacaktır. Bu sayfada oturum açın ve <b>c:geo</b> hesabınıza erişmesine izin verin. Bu kadar.</string>
@@ -1368,7 +1392,7 @@
     <string name="attribute_inside_no">Açık alan</string>
     <string name="attribute_in_water_yes">Suyun içinde</string>
     <string name="attribute_in_water_no">Suyun içinde değil</string>
-    <string name="attribute_no_gps_yes">GPS olmadan (letterbox, pusula ile, …)</string>
+    <string name="attribute_no_gps_yes">GPS olmadan (letterbox, pusula ile, ...)</string>
     <string name="attribute_no_gps_no">GPS ile</string>
     <string name="attribute_overnight_yes">Konaklama gerekli</string>
     <string name="attribute_overnight_no">Konaklama gerekli değil</string>
@@ -1459,8 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Android 4.1 \'den daha eski bir sürüm kullanıyor olarak görünüyorsunuz. Gelecek c: geo sürümleri cihazınızda kullanılamayabilir.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
-    <string name="tts_start">Konuşmaya başla</string>
-    <string name="tts_stop">Konuşmayı durdur</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Konuşmaya başladı</string>
     <string name="tts_stopped">Konuşmayı bıraktı</string>
     <string name="err_tts_lang_not_supported">Geçerli dil metin okuma tarafından desteklenmiyor.</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Bana yine sor</string>
     <string name="location_permission_request_explanation">c:geo konumunuzu belirlemek, mesafe ve yön hesaplamak için cihazınızındaki GPS\'e erişim sağlamalıdır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

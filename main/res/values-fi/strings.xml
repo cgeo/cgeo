@@ -26,9 +26,10 @@
     <string name="webcam">Web-kamerakätkö</string>
     <string name="virtual">Virtuaalikätkö</string>
     <string name="wherigo">Wherigo-kätkö</string>
-    <string name="lostfound">Lost &amp; Found -tapahtumakätkö</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE -kätkö</string>
     <string name="gchq">Groundspeakin päämaja</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
     <string name="block">Block Party -kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
@@ -158,7 +159,7 @@
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
-    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
+    <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
     <string name="err_login_failed_toast">c:geo ei onnistu kirjautumaan sisään. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt. Tarkista kirjautumistiedot tai kytke internet-yhteytesi päälle.</string>
@@ -197,7 +198,7 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
+    <string name="err_unsupported_image_format">Kuvamuotoa ei tueta.</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -351,7 +352,8 @@
     </plurals>
     <string name="caches_remove_progress">Poistetaan kätköjä</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
-    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Päivitä valitut</string>
     <string name="caches_refresh_all">Päivitä kaikki</string>
     <string name="caches_move_selected">Siirrä valitut</string>
@@ -422,9 +424,9 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
-    <string name="about_starting">Getting Started</string>
-    <string name="about_starting_head">Getting Started</string>
-    <string name="about_starting_text_basics_head">Geocaching Basics</string>
+    <string name="about_starting">Aloitus</string>
+    <string name="about_starting_head">Aloitus</string>
+    <string name="about_starting_text_basics_head">Geokätköilyn perusteet</string>
     <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
     <string name="about_starting_text_device_head">c:geo device permissions</string>
     <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
@@ -436,7 +438,19 @@
     <string name="about_system_info">c:geo järjestelmätiedot</string>
     <string name="about_system_info_send_chooser">Lähetä järjestelmän tiedot</string>
     <string name="changelog_github">Kaikki muutokset</string>
-    <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_nutshellmanual">Online-ohjeet</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook-kirjautuminen</string>
     <string name="settings_info_facebook_login">c:geo ei voi kirjautua geocaching.com:iin Facebook tilillä, mutta se on helppo kiertää…</string>
     <string name="settings_authorize">Valtuuta c:geo</string>
-    <string name="settings_reauthorize">Valtuuta c:geo uudelleen</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
@@ -568,8 +582,10 @@
     <string name="init_summary_exclude">Älä näytä jo löytämiäsi tai omia kätköjä</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
-    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold">Laske reitti</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
@@ -694,15 +710,23 @@
     <string name="init_experimental_title">Kokeelliset ominaisuudet</string>
     <string name="init_mfbeta">Mapsforge beta oletuksena</string>
     <string name="init_mfbeta_description">Nykyinen julkaisu sisältää kokeellisena ominaisuutena beetaversion uudesta Mapsforge kartasta. Tämä uusi kartta voidaan aktivoida täällä oletus live- ja listakartaksi.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
+    <string name="map_source_osm_mapnik">OSM: Kartta</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
     <string name="init_sendToCgeo_name">Laitteen nimi</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> voit lähettää kätköt Android-laitteeseen suoraan geocaching.com sivulta, käyttäen erityistä laajennusta Firefox- ja Chrome-selaimissa. Ennen rekisteröitymistä, katso <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Sinun tarvitsee vain rekisteröityä, jos haluat käyttää send2cgeo. c:geo toimii normaalisti ilman laitteen rekisteröitymistä.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Vaatii rekisteröitymisen</string>
     <string name="init_sendToCgeo_registering">Rekisteröidään laitteesi send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Rekisteröinti onnistui. PIN-koodi on %d. Käytä sitä c:geon verkkosivuilla yhdistääksesi tämän laitteen selaimeen.</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Luo käyttäjätili</string>
     <string name="auth_connected">Yhdistetty</string>
     <string name="auth_unconnected">Ei vielä yhdistetty</string>
-    <string name="auth_connected_as">Yhdistetty käyttäjänä %s</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Odotetaan %s…</string>
     <string name="auth_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_explain_long">Painamalla \"Valtuuta c:geo\"-painiketta Aloitat tapahtuman. Tämä tapahtuma Avaa %s sivun web-selaimessa. Kirjaudu sisään tällä sivulla ja anna <b>c:geo</b> lupa käyttää tiliäsi. Siinä kaikki.</string>
@@ -811,7 +835,7 @@
     <string name="cache_cache_description">Cache Description</string>
     <string name="cache_virtual_description">Virtual Question</string>
     <string name="cache_traditional_description">Traditional Part</string>
-    <string name="cache_box_description">Box Content</string>
+    <string name="cache_box_description">Laatikon sisältö</string>
     <string name="cache_watchlist_on">Tämä kätkö on seurantalistallasi.</string>
     <string name="cache_watchlist_on_extra">Kätkö on seurantalistallasi (seuraajia: %1d).</string>
     <string name="cache_watchlist_not_on">Tämä kätkö ei ole seurantalistallasi.</string>
@@ -865,7 +889,7 @@
     <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
     <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-    <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
+    <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
     <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
@@ -1045,7 +1069,7 @@
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_modes">Kartan asetukset</string>
     <string name="map_trail_show">Näytä reitti</string>
-    <string name="map_dot_mode">Use compact icons</string>
+    <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
     <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
@@ -1058,8 +1082,8 @@
     <string name="map_static_loading">Ladataan staattisia karttoja…</string>
     <string name="map_token_err">Koska c:geo pystyy lataamaan vain osittaiset tiedot, kätkön koordinaatit saattavat olla epätarkat.</string>
     <string name="map_as_list">Näytä luettelona</string>
-    <string name="map_clear_trailhistory">Clear trail history</string>
-    <string name="map_trailhistory_cleared">trail history cleared</string>
+    <string name="map_clear_trailhistory">Tyhjennä aiemmat jäljet</string>
+    <string name="map_trailhistory_cleared">Aiemmat jäljet tyhjennetty</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
     <string name="map_routing_straight">Linnuntie</string>
@@ -1206,11 +1230,11 @@
         <item quantity="one">Yksi muistiinpano ladattu onnistuneesti</item>
         <item quantity="other">Ladattu %1$d muistiinpanoa onnistuneesti</item>
     </plurals>
-    <string name="export_modifiedcoords">Modified coordinates</string>
-    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
-    <string name="export_modifiedcoords_success">Upload successful</string>
+    <string name="export_modifiedcoords">Muutetut koordinaatit</string>
+    <string name="export_modifiedcoords_uploading">Lähetetään %1$d</string>
+    <string name="export_modifiedcoords_success">Lähetys onnistui</string>
     <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
-    <string name="export_modifiedcoords_error">Upload failed</string>
+    <string name="export_modifiedcoords_error">Lähetys epäonnistui</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Koirat sallittu</string>
     <string name="attribute_dogs_no">Koiria ei sallittu</string>
@@ -1459,8 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Käyttämäsi Android-versio näyttää olevan vanhempi kuin 4.1. Tulevat versiot c:geosta eivät ole välttämättä enää saatavissa sinun laitteellesi.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
-    <string name="tts_start">Aloita puhuminen</string>
-    <string name="tts_stop">Lopeta puhuminen</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Puhuminen aloitettu</string>
     <string name="tts_stopped">Puhuminen lopetettu</string>
     <string name="err_tts_lang_not_supported">Teksti puheeksi -toiminto ei tue valittua kieltä.</string>
@@ -1509,7 +1532,7 @@
     <string name="settings_activate_geokrety">Aktivoi</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
-    <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
+    <string name="init_summary_geokrety">Vahvista matkalaiset sivulla GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
     <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
     <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
@@ -1575,8 +1598,12 @@
     <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
+    <string name="close_app">Sulje sovellus</string>
+    <string name="ask_again">Kysy uudelleen</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

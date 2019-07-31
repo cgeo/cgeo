@@ -26,9 +26,10 @@
     <string name="webcam">Skrzynka Webcam</string>
     <string name="virtual">Wirtualna</string>
     <string name="wherigo">Scenariusz Wherigo</string>
-    <string name="lostfound">Lost &amp; found</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Projekt APE</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Nietypowa</string>
@@ -285,7 +286,7 @@
     <string name="menu_about">O c:geo</string>
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
-    <string name="menu_backup">Kopia zapasowa</string>
+    <string name="menu_backup">Wykonaj kopię zapasową</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
@@ -358,6 +359,7 @@
     <string name="caches_remove_progress">Usuwanie skrzynek</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Odśwież wybrane</string>
     <string name="caches_refresh_all">Odśwież wszystkie</string>
     <string name="caches_move_selected">Przenieś zaznaczone</string>
@@ -443,6 +445,18 @@
     <string name="about_system_info_send_chooser">Wyślij informacje systemowe</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -489,7 +503,7 @@
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie…</string>
     <string name="settings_authorize">Autoryzuj c:geo</string>
-    <string name="settings_reauthorize">Autoryzuj c:geo ponownie</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Upoważnia c:geo przy użyciu geocaching.com do szukania skrzynek.</string>
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrzynek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Upoważnij c:geo z geocaching.su aby wyszukać skrzynki.</string>
@@ -576,6 +590,8 @@
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
@@ -588,7 +604,7 @@
     <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrzynek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
-    <string name="init_backup">Kopia zapasowa</string>
+    <string name="init_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>
     <string name="init_backup_note">Zwróć uwagę, że ta opcja wykonuje tylko kopię/odzyskiwanie bazy danych zawierającej skrzynki i punkty nawigacyjne, ale nie Twoich ustawień. Twoje dane logowania (nazwa użytkownika i hasło) nigdy nie opuszczą tego programu.</string>
@@ -700,6 +716,14 @@
     <string name="init_experimental_title">Funkcje eksperymentalne</string>
     <string name="init_mfbeta">Mapsforge beta jako domyślne</string>
     <string name="init_mfbeta_description">Obecne wydanie zawiera wersję beta map Mapsforge jako eksperymentalną funkcję. Nowa mapa może być aktywowana tutaj jako domyślna dla map online i map z listy.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
@@ -708,7 +732,7 @@
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> pozwala Tobie odbierać skrzynki bezpośrednio ze strony geocaching.com za pomocą specjalnego pluginu do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli będziesz używać send2cgeo. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Poproś o rejestrację</string>
     <string name="init_sendToCgeo_registering">Rejestruję Twoje urządzenie do send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Rejestracja udana. Kod PIN to %d. Użyj go na stronie c:geo, aby dodać urządzenie do przeglądarki.</string>
@@ -725,7 +749,7 @@
     <string name="auth_register">Utwórz konto</string>
     <string name="auth_connected">Połączono</string>
     <string name="auth_unconnected">Jeszcze nie połączono</string>
-    <string name="auth_connected_as">Połączono jako %s</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Czekanie na %s…</string>
     <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
     <string name="auth_explain_long">Naciśnięcie \"autoryzuj c:geo\" rozpocznie proces autoryzacji. Zostanie otwarte okno przeglądarki ze stroną %s. Zaloguj się na tej stronie i zezwól <b>c:geo</b> na dostęp do konta.</string>
@@ -1481,8 +1505,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Wygląda na to, że używasz wersji Androida starszej niż 4.1. Przyszłe wydania c:geo mogą być już niedostępne dla Twojego urządzenia.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
-    <string name="tts_start">Zacznij mówić</string>
-    <string name="tts_stop">Przestań mówić</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
     <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
@@ -1623,4 +1646,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>

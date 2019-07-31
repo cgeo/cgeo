@@ -26,9 +26,10 @@
     <string name="webcam">Webcam cache</string>
     <string name="virtual">Virtuele cache</string>
     <string name="wherigo">Wherigo cache</string>
-    <string name="lostfound">Lost &amp; found</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project ape cache</string>
     <string name="gchq">Groundspeak hq</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Gps adventures exhibit</string>
     <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Onbekend type</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Caches worden verwijderd</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
+    <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_refresh_selected">Ververs geselecteerden</string>
     <string name="caches_refresh_all">Ververs alle</string>
     <string name="caches_move_selected">Verplaats geselecteerden</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Verzend systeeminformatie</string>
     <string name="changelog_github">Lijst met alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
+    <string name="about_contributors_carnerodetails">als vader van c:geo</string>
+    <string name="about_contributors_recent">2018/2019 bijdragers</string>
+    <string name="about_contributors_specialthanks">Speciale dank aan</string>
+    <string name="about_contributors_specialthanksdetails">· al onze vertalingsbijdragers op <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle bevinding makers\n· en alle andere ondersteuners.\n</string>
+    <string name="about_contributors_other">Bijdragers van voor 2018</string>
+    <string name="about_components">Onderdelen</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">ondersteuning</string>
+    <string name="contribution_documentation">documentatie</string>
+    <string name="contribution_projectleader">open source projectleider</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">U kunt c:geo login aanbrengen in geocaching.com met uw Facebook-account. Maar er is een eenvoudige alternatieve oplossing…</string>
     <string name="settings_authorize">Autoriseer c:geo</string>
-    <string name="settings_reauthorize">Autoriseer c:geo nogmaals</string>
+    <string name="settings_reauthorize">Autorisatie bijwerken of verwijderen</string>
     <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
     <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
@@ -569,7 +583,9 @@
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_brouterThreshold">Route berekenen</string>
-    <string name="init_brouterThreshold_description">Maximale afstand tot welke brouter helper app (indien geïnstalleerd) een route zal berekenen.</string>
+    <string name="init_brouterThreshold_description">Maximale afstand tot welke BRouter helper app (indien geïnstalleerd) een route zal berekenen.</string>
+    <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
+    <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Experimentele functies</string>
     <string name="init_mfbeta">Mapsforge bèta als standaard</string>
     <string name="init_mfbeta_description">De huidige release bevat een beta versie van onze nieuwe Mapsforge-kaart als een experimentele functie. Deze nieuwe kaart kan hier geactiveerd worden als standaard voor de live en lijst kaarten.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
+    <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specifieke melding voor waypoint nabijheid</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -702,7 +726,7 @@
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
     <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Chrome of Firefox). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. c:geo werkt ook zonder het registreren van je apparaat.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> stelt je in staat om caches rechtstreeks vanuit geocaching.com te verzenden naar je Android apparaat via een speciale plugin voor Firefox of Chrome. Voor het registreren zie <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. Je hoeft alleen te registreren als je send2cgeo wilt gebruiken. c:geo werkt ook normaal zonder je apparaat te registreren.</string>
     <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
     <string name="init_sendToCgeo_registering">Bezig met het registreren voor send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is %d. Gebruik dit op de c:geo website om dit apparaat aan je browser te verbinden.</string>
@@ -719,7 +743,7 @@
     <string name="auth_register">Account aanmaken</string>
     <string name="auth_connected">Verbonden</string>
     <string name="auth_unconnected">Nog niet verbonden</string>
-    <string name="auth_connected_as">Verbonden als %s</string>
+    <string name="auth_connected_as">Verbonden als %s.\nDruk hier om te updaten of druk lang om autorisatiegegevens van c:geo te verwijderen.</string>
     <string name="auth_dialog_waiting">Wachten op %s…</string>
     <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
     <string name="auth_explain_long">Druk op de knop \"Autoriseer c:geo\" om het proces te starten. Dit proces zal een webbrowser met een pagina voor %s. Log in op deze pagina om <b>c:geo</b> toegang te geven tot je account. Dat is alles.</string>
@@ -872,7 +896,7 @@
     <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Toon op kaart</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
+    <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andere externe apps</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -1162,7 +1186,7 @@
     <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
     <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-    <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
+    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1459,8 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.1. Toekomstige releases zijn mogelijk niet beschikbaar voor je apparaat.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
-    <string name="tts_start">Begin met praten</string>
-    <string name="tts_stop">Stop met praten</string>
+    <string name="tts_toggle">Stemweergave inschakelen</string>
     <string name="tts_started">Gestart toespraak</string>
     <string name="tts_stopped">Gestopt toespraak</string>
     <string name="err_tts_lang_not_supported">De huidige taal wordt niet ondersteund door tekst naar spraak.</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Opnieuw vragen</string>
     <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS op je apparaat om je positie te vinden en afstand en richting te berekenen naar geocaches. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
+    <!-- colors -->
+    <string name="color_blue">Blauw</string>
+    <string name="color_green">Groen</string>
+    <string name="color_grey">Grijs</string>
 </resources>

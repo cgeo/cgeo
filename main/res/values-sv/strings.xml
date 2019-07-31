@@ -26,9 +26,10 @@
     <string name="webcam">Webcam cache</string>
     <string name="virtual">Virtuell cache</string>
     <string name="wherigo">Wherigo cache</string>
-    <string name="lostfound">Lost &amp; found</string>
+    <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Projekt APE cache</string>
     <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS adventures utställning</string>
     <string name="block">Groundspeak Gatufest</string>
     <string name="unknown">Okänd typ</string>
@@ -285,7 +286,7 @@
     <string name="menu_about">Om c:geo</string>
     <string name="menu_helpers">Tilläggsprogram</string>
     <string name="menu_settings">Inställningar</string>
-    <string name="menu_backup">Säkerhetskopiering</string>
+    <string name="menu_backup">Kopiera</string>
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scanna geokod</string>
@@ -352,6 +353,7 @@
     <string name="caches_remove_progress">Tar bort cacher</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_refresh_selected">Uppdatera valda</string>
     <string name="caches_refresh_all">Uppdatera alla</string>
     <string name="caches_move_selected">Flytta valda</string>
@@ -437,6 +439,18 @@
     <string name="about_system_info_send_chooser">Skicka systeminformation</string>
     <string name="changelog_github">Lista över alla ändringar</string>
     <string name="about_nutshellmanual">Online manual</string>
+    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
+    <string name="about_contributors_recent">2018/2019 contributors</string>
+    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
+    <string name="about_contributors_other">Contributors from before 2018</string>
+    <string name="about_components">Components</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
+    <string name="contribution_projectleader">open source project leader</string>
+    <string name="contribution_graphics">graphics</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öppna inställningar?</string>
     <string name="settings_title_services">Tjänster</string>
@@ -483,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook inloggning</string>
     <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning…</string>
     <string name="settings_authorize">Tillåt c:geo</string>
-    <string name="settings_reauthorize">Tillåt c:geo igen</string>
+    <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Tillåt c:geo att söka efter cacher på geocaching.com.</string>
     <string name="settings_ec_description">Tillåt c:geo att söka efter cacher och få tillgång till/filtrera dina hittade cacher på extremcaching.com.</string>
     <string name="settings_su_description">Tillåt c:geo att söka efter cacher på geocaching.su.</string>
@@ -570,6 +584,8 @@
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
+    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Inaktiva cacher</string>
     <string name="init_summary_disabled">Dölj inaktiva cacher</string>
     <string name="init_save_log_img">Loggbilder</string>
@@ -582,7 +598,7 @@
     <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
-    <string name="init_backup">Säkerhetskopiering</string>
+    <string name="init_backup">Kopiera</string>
     <string name="init_backup_backup">Kopiera</string>
     <string name="init_backup_running">Skapar säkerhetskopia av databasen med cacher…</string>
     <string name="init_backup_note">Med knapparna nedan kan du säkerhetskopiera eller återställa databasen som innehåller cacher och punkter (waypoints). Inställningar (såsom användarnamn och lösenord) kopieras inte.</string>
@@ -694,6 +710,14 @@
     <string name="init_experimental_title">Experimentella funktioner</string>
     <string name="init_mfbeta">Mapsforge beta som standard</string>
     <string name="init_mfbeta_description">Den nuvarande versionen innehåller en betaversion av vår nya Mapforge-karta som en experimentell funktion. Denna karta kan aktiveras här som standard för live- och listkartan.</string>
+    <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Proximity notification</string>
+    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
+    <string name="far_distance">far distance</string>
+    <string name="near_distance">near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -702,7 +726,7 @@
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
     <string name="init_sendToCgeo_name">Namnet på din enhet</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Läs detta innan registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera din enhet om du kommer att använda send2cgeo. C:geo fungerar även utan registrering.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
     <string name="init_sendToCgeo_register">Registrera din enhet</string>
     <string name="init_sendToCgeo_registering">Registrerar din enhet för send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är %d. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
@@ -714,12 +738,12 @@
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_check">Kolla autentisering</string>
     <string name="auth_check_again">Kolla autentisering igen</string>
-    <string name="auth_start">Kolla autentisering</string>
+    <string name="auth_start">Påbörja koppling mot Twitter</string>
     <string name="auth_again">Koppla mot Twitter igen</string>
     <string name="auth_register">Skapa ett konto</string>
     <string name="auth_connected">Ansluten</string>
     <string name="auth_unconnected">Inte ansluten ännu</string>
-    <string name="auth_connected_as">Ansluten som %s</string>
+    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Väntar på %s…</string>
     <string name="auth_explain_short">Följande process kommer att tillåta <b>c:geo</b> att få tillgång till %s.</string>
     <string name="auth_explain_long">Genom att trycka på knappen \"tillåt c:geo\" kommer processen att startas. Denna process kommer att öppna en webbläsare med %s sida. Logga in på den här sidan och låt <b>c:geo</b> komma åt ditt konto. Det är allt.</string>
@@ -1459,8 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Du verkar använda en Android version som är äldre än 4.1. Framtida versioner av c:geo kommer troligtvis inte fungera på din telefon.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
-    <string name="tts_start">Starta tal</string>
-    <string name="tts_stop">Stoppa tal</string>
+    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Påbörjade tal</string>
     <string name="tts_stopped">Avslutade tal</string>
     <string name="err_tts_lang_not_supported">Detta språk hanteras inte av text-to-speech.</string>
@@ -1579,4 +1602,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <!-- colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_grey">Grey</string>
 </resources>
