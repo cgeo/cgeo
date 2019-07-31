@@ -151,7 +151,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
                 .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
                     int newValue;
                     try {
-                        newValue = valueToProgress(shownValueToValue(Float.valueOf(editText.getText().toString()).floatValue()));
+                        newValue = valueToProgress(shownValueToValue(Float.parseFloat(editText.getText().toString())));
                         if (newValue > maxValue) {
                             newValue = maxValue;
                             Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
