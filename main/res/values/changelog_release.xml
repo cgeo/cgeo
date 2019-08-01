@@ -3,6 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
      <b>Beta version:</b>\n
+    · New: Improve scaling of OSM online map on high res devices\n
     · New: Proximity notification beep (configurable in Settings - Map)\n
     · New: Show favorite percentage in cache details\n
     · New: Add hint how to reset authorization data (long click in Settings - Services sub menus)\n
