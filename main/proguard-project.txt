@@ -159,6 +159,12 @@
     public void set*(...);
 }
 
+# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
 # keep Emma code coverage during debug builds, and ignore related warnings
 -keep class com.vladium.** { *; }
 -dontwarn com.vladium.**
