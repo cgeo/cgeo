@@ -753,6 +753,14 @@ public class Settings {
         putBoolean(R.string.pref_maptrail, showTrail);
     }
 
+    public static boolean showListsInCacheList() {
+        return getBoolean(R.string.pref_showListsInCacheList, false);
+    }
+
+    public static void setShowListsInCacheList(final boolean showListsInCacheList) {
+        putBoolean(R.string.pref_showListsInCacheList, showListsInCacheList);
+    }
+
     public static int getTrailColor() {
         final Context baseContext = CgeoApplication.getInstance().getBaseContext();
         final String defaultValue = baseContext.getString(R.string.pref_value_grey);

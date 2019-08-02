@@ -296,6 +296,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     protected void updateTitle() {
         setTitle(title);
+        adapter.setCurrentListTitle(title);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setSubtitle(getCurrentSubtitle());
@@ -875,6 +876,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_rename_list:
                 renameList();
                 return true;
+            case R.id.menu_toggle_listdisplay:
+                final boolean showListsInCacheList = !Settings.showListsInCacheList();
+                Settings.setShowListsInCacheList(showListsInCacheList);
+                setAdapterStoredList();
+                updateAdapter();
+                return true;
             case R.id.menu_invert_selection:
                 adapter.invertSelection();
                 invalidateOptionsMenuCompatible();
@@ -1196,7 +1203,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void initAdapter() {
         final ListView listView = getListView();
         registerForContextMenu(listView);
+
         adapter = new CacheListAdapter(this, cacheList, type);
+        setAdapterStoredList();
         adapter.setFilter(currentFilter);
 
         if (listFooter == null) {
@@ -1210,6 +1219,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter.setInverseSort(currentInverseSort);
         adapter.forceSort();
+    }
+
+    private void setAdapterStoredList() {
+        adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
     }
 
     private void updateAdapter() {
