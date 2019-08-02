@@ -41,6 +41,12 @@ public class ListFilterFactory implements IFilterFactory {
         }
 
         @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeInt(listId);
+        }
+        
+        @Override
         public boolean accepts(@NonNull final Geocache cache) {
             return cache.getLists().contains(listId);
         }
