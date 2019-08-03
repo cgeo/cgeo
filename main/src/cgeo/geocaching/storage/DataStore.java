@@ -1007,15 +1007,19 @@ public class DataStore {
         }
 
         private static void dropDatabase(final SQLiteDatabase db) {
-            db.execSQL("DROP TABLE IF EXISTS " + dbTableCachesLists);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableCaches);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLists);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableCachesLists);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableAttributes);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableWaypoints);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableSpoilers);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogs);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogCount);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogImages);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOffline);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrackables);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableSearchDestinationHistory);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableTrailHistory);
         }
 
     }
