@@ -170,7 +170,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 76;
+    private static final int dbVersion = 77;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -237,7 +237,8 @@ public class DataStore {
             + "CREATE TABLE " + dbTableLists + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "title TEXT NOT NULL, "
-            + "updated LONG NOT NULL"
+            + "updated LONG NOT NULL,"
+            + "marker INTEGER NOT NULL"
             + "); ";
     private static final String dbCreateCachesLists = ""
             + "CREATE TABLE " + dbTableCachesLists + " ("
@@ -925,6 +926,15 @@ public class DataStore {
                             Log.i("Added table " + dbTableTrailHistory + ".");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 76", e);
+                        }
+                    }
+
+                    // add column for list marker
+                    if (oldVersion < 77) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableLists + " ADD COLUMN marker INTEGER NOT NULL DEFAULT 0");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 77", e);
                         }
                     }
                 }
@@ -3028,6 +3038,7 @@ public class DataStore {
             final ContentValues values = new ContentValues();
             values.put("title", name);
             values.put("updated", System.currentTimeMillis());
+            values.put("marker", 0);
 
             id = (int) database.insert(dbTableLists, null, values);
             database.setTransactionSuccessful();
