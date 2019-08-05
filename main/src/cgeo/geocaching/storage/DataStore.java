@@ -14,6 +14,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -2948,10 +2949,10 @@ public class DataStore {
 
         final Resources res = CgeoApplication.getInstance().getResources();
         final List<StoredList> lists = new ArrayList<>();
-        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), ListMarker.NO_MARKER.markerId, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
 
         try {
-            final String query = "SELECT l._id AS _id, l.title AS title, COUNT(c.geocode) AS count" +
+            final String query = "SELECT l._id AS _id, l.title AS title, l.marker AS marker, COUNT(c.geocode) AS count" +
                     " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
                     " ON l._id + " + customListIdOffset + " = c.list_id" +
                     " GROUP BY l._id" +
@@ -2968,12 +2969,13 @@ public class DataStore {
     private static List<StoredList> getListsFromCursor(final Cursor cursor) {
         final int indexId = cursor.getColumnIndex("_id");
         final int indexTitle = cursor.getColumnIndex("title");
+        final int indexMarker = cursor.getColumnIndex("marker");
         final int indexCount = cursor.getColumnIndex("count");
         return cursorToColl(cursor, new ArrayList<StoredList>(), new Func1<Cursor, StoredList>() {
             @Override
             public StoredList call(final Cursor cursor) {
                 final int count = indexCount != -1 ? cursor.getInt(indexCount) : 0;
-                return new StoredList(cursor.getInt(indexId) + customListIdOffset, cursor.getString(indexTitle), count);
+                return new StoredList(cursor.getInt(indexId) + customListIdOffset, cursor.getString(indexTitle), cursor.getInt(indexMarker), count);
             }
         });
     }
@@ -2984,7 +2986,7 @@ public class DataStore {
         if (id >= customListIdOffset) {
             final Cursor cursor = database.query(
                     dbTableLists,
-                    new String[]{"_id", "title"},
+                    new String[]{"_id", "title", "marker"},
                     "_id = ? ",
                     new String[] { String.valueOf(id - customListIdOffset) },
                     null,
@@ -2998,11 +3000,11 @@ public class DataStore {
 
         final Resources res = CgeoApplication.getInstance().getResources();
         if (id == PseudoList.ALL_LIST.id) {
-            return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), getAllCachesCount());
+            return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), ListMarker.NO_MARKER.markerId, getAllCachesCount());
         }
 
         // fall back to standard list in case of invalid list id
-        return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
+        return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), ListMarker.NO_MARKER.markerId, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
     }
 
     public static int getAllCachesCount() {
@@ -3115,6 +3117,36 @@ public class DataStore {
         }
 
         return status;
+    }
+
+    /**
+     * @param listId
+     *            List to change
+     * @param markerId
+     *            Id of new marker
+     * @return Number of lists changed
+     */
+    public static int setListMarker(final int listId, final int markerId) {
+        if (listId == StoredList.STANDARD_LIST_ID) {
+            return 0;
+        }
+
+        init();
+
+        database.beginTransaction();
+        int count = 0;
+        try {
+            final ContentValues values = new ContentValues();
+            values.put("marker", markerId);
+            values.put("updated", System.currentTimeMillis());
+
+            count = database.update(dbTableLists, values, "_id = " + (listId - customListIdOffset), null);
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+
+        return count;
     }
 
     public static void moveToList(final Collection<Geocache> caches, final int oldListId, final int newListId) {

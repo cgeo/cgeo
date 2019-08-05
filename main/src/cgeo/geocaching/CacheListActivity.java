@@ -32,6 +32,7 @@ import cgeo.geocaching.files.GpxFileListActivity;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -101,10 +102,14 @@ import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -144,6 +149,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_LIST_ID = "currentListId";
+    private static final String STATE_MARKER_ID = "currentMarkerId";
 
     private static final String BUNDLE_ACTION_KEY = "afterLoadAction";
 
@@ -161,6 +167,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final AtomicInteger detailProgress = new AtomicInteger(0);
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
+    private int markerId = ListMarker.NO_MARKER.markerId;
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
@@ -501,6 +508,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
             listId = savedInstanceState.getInt(STATE_LIST_ID);
+            markerId = savedInstanceState.getInt(STATE_MARKER_ID);
         }
 
         initAdapter();
@@ -539,6 +547,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putInt(STATE_LIST_ID, listId);
+        savedInstanceState.putInt(STATE_MARKER_ID, markerId);
     }
 
     /**
@@ -778,6 +787,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
             setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
             setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
+            setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
+/*
+            for (final ListMarker temp : ListMarker.values()) {
+                menu.findItem(temp.menuId).setChecked(temp.markerId == markerId);
+            }
+*/
 
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
@@ -831,6 +846,58 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else {
             menuItem.setTitle(res.getString(resId));
         }
+    }
+
+    private class ListMarkerAdapter extends ArrayAdapter<ListMarker> {
+
+        private ArrayList<ListMarker> items;
+        private Context context;
+
+        public ListMarkerAdapter(final Context context, final int viewResId, final ArrayList<ListMarker> items) {
+            super(context, viewResId, items);
+            this.items = items;
+            this.context = context;
+        }
+
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
+            View v = convertView;
+
+            if (v == null) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                v = inflater.inflate(R.layout.cachelist_listmarker_item, null);
+            }
+            final ListMarker item = items.get(position);
+            if (item != null) {
+                final ImageView iv = (ImageView) v.findViewById(R.id.listmarker_item_marker);
+                final TextView tv = (TextView) v.findViewById(R.id.listmarker_item_text);
+                if (item.markerId == ListMarker.NO_MARKER.markerId) {
+                    iv.setImageBitmap(null);
+                    tv.setText(context.getString(R.string.caches_listmarker_none) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
+                } else {
+                    iv.setImageResource(item.resDrawable);
+                    tv.setText(String.format(context.getString(R.string.caches_listmarker_marker), item.markerId) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
+                }
+            }
+            return v;
+        }
+    }
+
+    private void selectListMarker() {
+        final ArrayList<ListMarker> items = new ArrayList<>();
+        for (final ListMarker temp : ListMarker.values()) {
+            items.add(temp);
+        }
+        final ListMarkerAdapter adapter = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.caches_set_listmarker);
+        builder.setAdapter(adapter, (dialog, itemSelected) -> {
+            final ListMarker selectedItem = adapter.getItem(itemSelected);
+            DataStore.setListMarker(listId, selectedItem.markerId);
+            markerId = selectedItem.markerId;
+        });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -937,6 +1004,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     }
 
                 }.execute();
+                return true;
+            case R.id.menu_set_listmarker:
+                selectListMarker();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -1569,10 +1639,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (id == PseudoList.ALL_LIST.id) {
                 listId = id;
                 title = res.getString(R.string.list_all_lists);
+                markerId = ListMarker.NO_MARKER.markerId;
             } else {
                 final StoredList list = DataStore.getList(id);
                 listId = list.id;
                 title = list.title;
+                markerId = list.markerId;
             }
             type = CacheListType.OFFLINE;
 
@@ -1845,9 +1917,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 if (listId == PseudoList.ALL_LIST.id) {
                     title = res.getString(R.string.list_all_lists);
+                    markerId = ListMarker.NO_MARKER.markerId;
                 } else if (listId <= StoredList.TEMPORARY_LIST.id) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
+                    markerId = ListMarker.NO_MARKER.markerId;
                 } else {
                     final StoredList list = DataStore.getList(listId);
                     // list.id may be different if listId was not valid
@@ -1856,6 +1930,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     }
                     listId = list.id;
                     title = list.title;
+                    markerId = list.markerId;
                 }
 
                 loader = new OfflineGeocacheListLoader(this, coords, listId);
@@ -1864,18 +1939,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case HISTORY:
                 title = res.getString(R.string.caches_history);
                 listId = PseudoList.HISTORY_LIST.id;
+                markerId = ListMarker.NO_MARKER.markerId;
                 loader = new HistoryGeocacheListLoader(this, coords);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
+                markerId = ListMarker.NO_MARKER.markerId;
                 loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case COORDINATE:
                 title = coords.toString();
+                markerId = ListMarker.NO_MARKER.markerId;
                 loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
+                markerId = ListMarker.NO_MARKER.markerId;
                 title = listNameMemento.rememberTerm(keyword);
                 if (keyword != null) {
                     loader = new KeywordGeocacheListLoader(this, keyword);
@@ -1888,11 +1967,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 } else {
                     title = coords.toString();
                 }
+                markerId = ListMarker.NO_MARKER.markerId;
                 loader = new CoordsGeocacheListLoader(this, coords);
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
                 title = listNameMemento.rememberTerm(username);
+                markerId = ListMarker.NO_MARKER.markerId;
                 if (username != null) {
                     loader = new FinderGeocacheListLoader(this, username);
                 }
@@ -1900,6 +1981,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
                 title = listNameMemento.rememberTerm(ownerName);
+                markerId = ListMarker.NO_MARKER.markerId;
                 if (ownerName != null) {
                     loader = new OwnerGeocacheListLoader(this, ownerName);
                 }
@@ -1907,6 +1989,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case MAP:
                 //TODO Build Null loader
                 title = res.getString(R.string.map_map);
+                markerId = ListMarker.NO_MARKER.markerId;
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
@@ -1917,6 +2000,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case POCKET:
                 final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
                 title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
+                markerId = ListMarker.NO_MARKER.markerId;
                 loader = new PocketGeocacheListLoader(this, guid);
                 break;
         }
