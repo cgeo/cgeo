@@ -74,6 +74,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -887,14 +888,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         for (final ListMarker temp : ListMarker.values()) {
             items.add(temp);
         }
-        final ListMarkerAdapter adapter = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
-
+        final ListMarkerAdapter adapter2 = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.caches_set_listmarker);
-        builder.setAdapter(adapter, (dialog, itemSelected) -> {
-            final ListMarker selectedItem = adapter.getItem(itemSelected);
+        builder.setAdapter(adapter2, (dialog, itemSelected) -> {
+            final ListMarker selectedItem = adapter2.getItem(itemSelected);
             DataStore.setListMarker(listId, selectedItem.markerId);
             markerId = selectedItem.markerId;
+            MapMarkerUtils.resetLists();
+            adapter.notifyDataSetChanged();
         });
         final AlertDialog alert = builder.create();
         alert.show();
