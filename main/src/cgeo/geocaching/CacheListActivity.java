@@ -789,11 +789,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
             setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
             setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
-/*
-            for (final ListMarker temp : ListMarker.values()) {
-                menu.findItem(temp.menuId).setChecked(temp.markerId == markerId);
-            }
-*/
 
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
@@ -854,7 +849,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         private ArrayList<ListMarker> items;
         private Context context;
 
-        public ListMarkerAdapter(final Context context, final int viewResId, final ArrayList<ListMarker> items) {
+        ListMarkerAdapter(final Context context, final int viewResId, final ArrayList<ListMarker> items) {
             super(context, viewResId, items);
             this.items = items;
             this.context = context;
@@ -864,7 +859,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             View v = convertView;
 
             if (v == null) {
-                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = inflater.inflate(R.layout.cachelist_listmarker_item, null);
             }
             final ListMarker item = items.get(position);
