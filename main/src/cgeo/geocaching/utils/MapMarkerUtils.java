@@ -258,15 +258,13 @@ public final class MapMarkerUtils {
             insets.add(getPNInset(cacheListType)[resolution]);
         }
         // assigned lists with markers
-        int remainingMarkers = assignedMarkers;
-
-        int markerId = remainingMarkers & ListMarker.BITMASK;
+        int markerId = assignedMarkers & ListMarker.BITMASK;
         if (markerId > 0) {
             layers.add(Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId)));
             insets.add(INSET_LIST1[resolution]);
         }
 
-        markerId = (remainingMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
+        markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
         if (markerId > 0) {
             layers.add(Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId)));
             insets.add(INSET_LIST2[resolution]);
@@ -411,17 +409,18 @@ public final class MapMarkerUtils {
         readLists();
 
         int value = 0;
-        boolean first = true;
+        byte counter = 0; // how many markers are already assigned?
         final Set<Integer> lists = cache.getLists();
         for (final Integer list : lists) {
             final Integer markerId = list2marker.get(list);
             if (markerId != null) {
-                if (first) {
+                if (counter == 0) {
                     value = markerId;
-                    first = false;
-                } else {
+                    counter++;
+                } else if (counter == 1) {
                     value |= markerId << ListMarker.MAX_BITS_PER_MARKER;
-                }
+                    counter++;
+                } // maximum of two markers allowed
             }
         }
         return value;
