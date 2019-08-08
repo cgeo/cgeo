@@ -32,8 +32,8 @@
         android:layout_marginRight="4dip"
         android:layout_toRightOf="@id/checkbox"
         android:scaleType="fitXY"
-        android:src="@drawable/mark_green"
-        android:visibility="gone"
+        android:src="@drawable/mark_transparent"
+        android:visibility="visible"
         tools:visibility="visible"/>
 
     <!-- cache name and icon -->
