@@ -372,15 +372,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     public static void updateViewHolder(final ViewHolder holder, final Geocache cache, final Resources res) {
         if (cache.isFound() && cache.isLogOffline()) {
             holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
-            holder.logStatusMark.setVisibility(View.VISIBLE);
         } else if (cache.isFound()) {
             holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
-            holder.logStatusMark.setVisibility(View.VISIBLE);
         } else if (cache.isLogOffline()) {
             holder.logStatusMark.setImageResource(R.drawable.mark_orange);
-            holder.logStatusMark.setVisibility(View.VISIBLE);
         } else {
-            holder.logStatusMark.setVisibility(View.GONE);
+            holder.logStatusMark.setImageResource(R.drawable.mark_transparent);
         }
         holder.text.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType), null, null, null);
     }
