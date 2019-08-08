@@ -14,6 +14,7 @@ public class LogViewHolder extends AbstractViewHolder {
     @BindView(R.id.type) protected TextView type;
     @BindView(R.id.author) protected TextView author;
     @BindView(R.id.count_or_location) protected TextView countOrLocation;
+    @BindView(R.id.gcinfo) protected TextView gcinfo;
     @BindView(R.id.log) protected TextView text;
     @BindView(R.id.log_images) protected TextView images;
     @BindView(R.id.log_mark) protected ImageView marker;
