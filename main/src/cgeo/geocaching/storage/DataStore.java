@@ -92,6 +92,10 @@ public class DataStore {
     public static final String DB_FILE_NAME_BACKUP = "cgeo.sqlite";
     public static final String DB_FILE_CORRUPTED_EXTENSION = ".corrupted";
 
+    public static final int RESTORE_SUCCESSFUL = 1;
+    public static final int RESTORE_FAILED_GENERAL = 2;
+    public static final int RESTORE_FAILED_DBRECREATED = 3;
+
     public enum StorageLocation {
         HEAP,
         CACHE,
@@ -501,19 +505,23 @@ public class DataStore {
         return databasePath(Settings.isDbOnSDCard());
     }
 
-    public static boolean restoreDatabaseInternal() {
+    public static int restoreDatabaseInternal() {
         final File sourceFile = getBackupFileInternal(true);
         closeDb();
-        final boolean restoreDone = FileUtils.copy(sourceFile, databasePath());
+        int result = FileUtils.copy(sourceFile, databasePath()) ? RESTORE_SUCCESSFUL : RESTORE_FAILED_GENERAL;
         init();
+        if (newlyCreatedDatabase) {
+            result = RESTORE_FAILED_DBRECREATED;
+            Log.e("restored DB seems to be corrupt, needed to recreate database from scratch");
+        }
 
-        if (restoreDone) {
+        if (result == RESTORE_SUCCESSFUL) {
             Log.i("Database successfully restored from " + sourceFile.getPath());
         } else {
             Log.e("Could not restore database from " + sourceFile.getPath());
         }
 
-        return restoreDone;
+        return result;
     }
 
     private static class DBContext extends ContextWrapper {

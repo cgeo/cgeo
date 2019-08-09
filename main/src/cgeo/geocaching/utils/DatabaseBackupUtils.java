@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -49,11 +49,14 @@ public class DatabaseBackupUtils {
     private static void restoreDatabaseInternal(final Activity activity) {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
-        final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
+        final AtomicInteger restoreSuccessful = new AtomicInteger(DataStore.RESTORE_FAILED_GENERAL);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal()), () -> {
             dialog.dismiss();
-            final boolean restored = restoreSuccessful.get();
-            final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+            final int restored = restoreSuccessful.get();
+            final String message =
+                    restored == DataStore.RESTORE_SUCCESSFUL ? res.getString(R.string.init_restore_success) :
+                    restored == DataStore.RESTORE_FAILED_DBRECREATED ? res.getString(R.string.init_restore_failed_dbrecreated) :
+                    res.getString(R.string.init_restore_failed);
             Dialogs.message(activity, R.string.init_backup_restore, message);
             if (activity instanceof MainActivity) {
                 ((MainActivity) activity).updateCacheCounter();
