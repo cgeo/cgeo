@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -41,7 +42,10 @@ public class StatusFragment extends Fragment {
                 .subscribe(new Consumer<Status>() {
                     @Override
                     public void accept(final Status status) {
-                        if (status == Status.NO_STATUS) {
+                        // override current status if no live connector is active
+                        final Boolean noActiveConnectors = ConnectorFactory.anyLiveConnectorActive();
+
+                        if (status == Status.NO_STATUS && !noActiveConnectors) {
                             statusGroup.setVisibility(View.INVISIBLE);
                             return;
                         }
@@ -49,8 +53,8 @@ public class StatusFragment extends Fragment {
                         final Resources res = getResources();
                         final String packageName = getActivity().getPackageName();
 
-                        if (status.icon != null) {
-                            final int iconId = res.getIdentifier(status.icon, "drawable", packageName);
+                        if (status.icon != null || noActiveConnectors) {
+                            final int iconId = res.getIdentifier(noActiveConnectors ? "cgeo" : status.icon, "drawable", packageName);
                             if (iconId != 0) {
                                 statusIcon.setImageResource(iconId);
                                 statusIcon.setVisibility(View.VISIBLE);
@@ -62,7 +66,7 @@ public class StatusFragment extends Fragment {
                             statusIcon.setVisibility(View.GONE);
                         }
 
-                        String message = status.message;
+                        String message = noActiveConnectors ? "No active connectors!\r\rYou need to activate at least one geocaching service to start using c:geo." : status.message;
                         if (status.messageId != null) {
                             final int messageId = res.getIdentifier(status.messageId, "string", packageName);
                             if (messageId != 0) {
@@ -73,7 +77,16 @@ public class StatusFragment extends Fragment {
                         statusMessage.setText(message);
                         statusGroup.setVisibility(View.VISIBLE);
 
-                        if (status.url != null) {
+                        if (noActiveConnectors) {
+                            statusGroup.setOnClickListener(v -> {
+                                // how to start this activity from here?
+                                /*
+                                final Intent intent = new Intent(fromActivity, SettingsActivity.class);
+                                intent.putExtra(INTENT_OPEN_SCREEN, preferenceScreenKey);
+                                fromActivity.startActivity(intent);
+                                */
+                            });
+                        } else if (status.url != null) {
                             statusGroup.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url))));
                         } else {
                             statusGroup.setClickable(false);

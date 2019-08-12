@@ -167,6 +167,15 @@ public final class ConnectorFactory {
         return liveConns.toArray(new ILogin[liveConns.size()]);
     }
 
+    public static boolean anyLiveConnectorActive() {
+        for (final IConnector conn : CONNECTORS) {
+            if (conn instanceof ILogin && conn.isActive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @NonNull
     public static List<IConnector> getActiveConnectors() {
         final List<IConnector> activeConnectors = new ArrayList<>();
