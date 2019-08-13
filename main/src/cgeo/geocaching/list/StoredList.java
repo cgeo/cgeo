@@ -30,12 +30,14 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class StoredList extends AbstractList {
     private static final int TEMPORARY_LIST_ID = 0;
-    public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", 0); // Never displayed
+    public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", ListMarker.NO_MARKER.markerId, 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
+    public final int markerId;
     private final int count; // this value is only valid as long as the list is not changed by other database operations
 
-    public StoredList(final int id, final String title, final int count) {
+    public StoredList(final int id, final String title, final int markerId, final int count) {
         super(id, title);
+        this.markerId = markerId;
         this.count = count;
     }
 
@@ -222,7 +224,7 @@ public final class StoredList extends AbstractList {
                         return;
                     }
                     final int newId = DataStore.createList(listName);
-                    new StoredList(newId, listName, 0);
+                    new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
 
                     if (newId >= DataStore.customListIdOffset) {
                         runAfterwards.call(newId);
@@ -245,7 +247,7 @@ public final class StoredList extends AbstractList {
                         return;
                     }
                     final int newId = DataStore.createList(listName);
-                    new StoredList(newId, listName, 0);
+                    new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
 
                     if (newId >= DataStore.customListIdOffset) {
                         selectedLists.remove(PseudoList.NEW_LIST.id);

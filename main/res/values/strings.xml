@@ -406,6 +406,10 @@
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_make_list_unique">Make list unique</string>
+    <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_listmarker_none">No marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(selected)</string>
     <string name="caches_filter_missing_gcvote">Found caches not voted</string>
 
     <!-- caches lists -->

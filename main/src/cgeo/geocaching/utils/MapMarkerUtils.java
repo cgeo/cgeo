@@ -3,9 +3,12 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.list.ListMarker;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -16,6 +19,9 @@ import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -33,6 +39,13 @@ public final class MapMarkerUtils {
     private static final int[][] INSET_USERMODIFIEDCOORDS_LIST = { { 16, 14, 0, 2 }, { 22, 19, 0, 3 }, { 33, 28, 0, 4 }, { 44, 38, 0, 6 }, { 66, 57, 0, 9 }, { 88, 76, 0, 12 } };
     private static final int[][] INSET_PERSONALNOTE = { { 0, 17, 12, 0 }, { 0, 23, 16, 0 }, { 0, 25, 19, 0 }, { 0, 34, 26, 0 }, { 0, 51, 39, 0 }, { 0, 68, 52, 0 } };
     private static final int[][] INSET_PERSONALNOTE_LIST = { { 0, 14, 16, 2 }, { 0, 19, 22, 3 }, { 0, 28, 33, 4 }, { 0, 38, 44, 6 }, { 0, 57, 66, 9 }, { 0, 76, 88, 12 } };
+
+    // inset data for list markers
+    private static final int[][] INSET_LIST1 = { { 0, 12, 19, 12 }, { 0, 16, 25, 16 }, { 0, 20, 35, 21 }, { 0, 27, 46, 27 }, { 0, 41, 70, 41 }, { 0, 54, 93, 55 } };
+    private static final int[][] INSET_LIST2 = { { 19, 12, 0, 12 }, { 25, 16, 0, 16 }, { 35, 20, 0, 21 }, { 46, 27, 0, 27 }, { 70, 41, 0, 41 }, { 93, 54, 0, 54 } };
+
+    private static final Map<Integer, Integer> list2marker = new TreeMap<>();
+    private static Boolean listsRead = false;
 
     private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
 
@@ -72,6 +85,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
+        final int assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
                 .append(cache.getType().id)
@@ -86,12 +100,13 @@ public final class MapMarkerUtils {
                 .append(cache.getOfflineLogType())
                 .append(showBackground(cacheListType))
                 .append(showFloppyOverlay(cacheListType))
+                .append(assignedMarkers)
                 .toHashCode();
 
         synchronized (overlaysCache) {
             LayerDrawable drawable = overlaysCache.get(hashcode);
             if (drawable == null) {
-                drawable = createCacheMarker(res, cache, cacheListType);
+                drawable = createCacheMarker(res, cache, cacheListType, assignedMarkers);
                 overlaysCache.put(hashcode, drawable);
             }
             return drawable;
@@ -187,10 +202,10 @@ public final class MapMarkerUtils {
      *          a drawable representing the current cache status
      */
     @NonNull
-    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
+    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final int assignedMarkers) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
-        final List<Drawable> layers = new ArrayList<>(9);
-        final List<int[]> insets = new ArrayList<>(8);
+        final List<Drawable> layers = new ArrayList<>(11);
+        final List<int[]> insets = new ArrayList<>(10);
 
         // background: disabled or not
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
@@ -241,6 +256,18 @@ public final class MapMarkerUtils {
         if (cache.getPersonalNote() != null) {
             layers.add(Compatibility.getDrawable(res, R.drawable.marker_personalnote));
             insets.add(getPNInset(cacheListType)[resolution]);
+        }
+        // assigned lists with markers
+        int markerId = assignedMarkers & ListMarker.BITMASK;
+        if (markerId > 0) {
+            layers.add(Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId)));
+            insets.add(INSET_LIST1[resolution]);
+        }
+
+        markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
+        if (markerId > 0) {
+            layers.add(Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId)));
+            insets.add(INSET_LIST2[resolution]);
         }
 
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
@@ -360,5 +387,42 @@ public final class MapMarkerUtils {
         return cacheListType == null ?
                 INSET_PERSONALNOTE :
                 INSET_PERSONALNOTE_LIST;
+    }
+
+    private static void readLists() {
+        if (!listsRead) {
+            final List<StoredList> lists = DataStore.getLists();
+            for (final StoredList temp : lists) {
+                if (temp.markerId != ListMarker.NO_MARKER.markerId) {
+                    list2marker.put(temp.id, temp.markerId);
+                }
+            }
+            listsRead = true;
+        }
+    }
+
+    public static void resetLists() {
+        listsRead = false;
+    }
+
+    private static int getAssignedMarkers (final Geocache cache) {
+        readLists();
+
+        int value = 0;
+        byte counter = 0; // how many markers are already assigned?
+        final Set<Integer> lists = cache.getLists();
+        for (final Integer list : lists) {
+            final Integer markerId = list2marker.get(list);
+            if (markerId != null) {
+                if (counter == 0) {
+                    value = markerId;
+                    counter++;
+                } else if (counter == 1) {
+                    value |= markerId << ListMarker.MAX_BITS_PER_MARKER;
+                    counter++;
+                } // maximum of two markers allowed
+            }
+        }
+        return value;
     }
 }
