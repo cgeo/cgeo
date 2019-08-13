@@ -295,8 +295,7 @@ dependencies {
     testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation "com.asamm:locus-api:0.2.25"
-    implementation "com.asamm:locus-api-android:0.2.15"
+    implementation "com.asamm:locus-api-android:0.3.17"
 
     // Mapsforge old version
     implementation files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
