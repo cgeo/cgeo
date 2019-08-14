@@ -62,10 +62,11 @@ public class CachesOverlay extends AbstractCachesOverlay {
             overlay.updating = true;
             try {
                 // Initially bring the main list in
-                if (overlay.firstRun) {
+                if (overlay.firstRun || overlay.isInvalidated()) {
                     final Set<Geocache> cachesToDisplay = overlay.search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
                     overlay.display(cachesToDisplay);
                     overlay.firstRun = false;
+                    overlay.refreshed();
                 }
 
                 // get current viewport
