@@ -235,6 +235,9 @@ public class CachesBundle {
         if (liveOverlay != null) {
             liveOverlay.invalidateAll();
         }
+        if (wpOverlay != null) {
+            wpOverlay.invalidateAll();
+        }
     }
 
     public boolean isDownloading() {
