@@ -379,6 +379,7 @@ public final class MapMarkerUtils {
 
     private static void readLists() {
         if (!listsRead) {
+            list2marker.clear();
             final List<StoredList> lists = DataStore.getLists();
             for (final StoredList temp : lists) {
                 if (temp.markerId != ListMarker.NO_MARKER.markerId) {
