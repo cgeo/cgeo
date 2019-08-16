@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.AndroidRuntimeException;
 import android.view.Window;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +40,11 @@ public class CachePopup extends AbstractActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        try {
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        } catch (final AndroidRuntimeException ex) {
+            Log.e("Error requesting no title feature", ex);
+        }
         this.setTheme(ActivityMixin.getDialogTheme());
 
 
