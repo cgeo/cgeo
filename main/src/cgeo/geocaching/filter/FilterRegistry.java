@@ -59,6 +59,7 @@ public class FilterRegistry {
         register(R.string.cache_difficulty, DifficultyFilter.Factory.class);
         register(R.string.cache_attributes, AttributeFilter.Factory.class);
         register(R.string.cache_status, StateFilterFactory.class);
+        register(R.string.cache_stored, StoredFilterFactory.class);
         register(R.string.caches_filter_origin, OriginFilter.Factory.class);
         register(R.string.caches_filter_distance, DistanceFilter.Factory.class);
         register(R.string.caches_filter_popularity, PopularityFilter.Factory.class);
