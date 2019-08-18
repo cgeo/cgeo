@@ -6,6 +6,9 @@
     · New: Backup for app settings\n
     · New: Remember setting for distance circles on map\n
     · New: Move offline related settings to offline data setting menu\n
+    · New: Show cache name inline with log text in trackable log\n
+    · New: New Locus API version\n
+    · Fix: Have dot markers for compact map icons in better resolution\n
     \n
     \n
   </string>
