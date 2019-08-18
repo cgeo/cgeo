@@ -47,11 +47,11 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     @Override
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         if (StringUtils.isNotBlank(log.cacheName)) {
-            holder.countOrLocation.setText(Html.fromHtml(log.cacheName));
-            holder.countOrLocation.setVisibility(View.VISIBLE);
+            holder.gcinfo.setText(Html.fromHtml(log.cacheName));
+            holder.gcinfo.setVisibility(View.VISIBLE);
             final String cacheGuid = log.cacheGuid;
             final String cacheName = log.cacheName;
-            holder.countOrLocation.setOnClickListener(arg0 -> {
+            holder.gcinfo.setOnClickListener(arg0 -> {
                 if (StringUtils.isNotBlank(cacheGuid)) {
                     CacheDetailActivity.startActivityGuid(activity, cacheGuid, TextUtils.stripHtml(cacheName));
                 } else {
@@ -62,8 +62,11 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
                     }
                 }
             });
+            holder.countOrLocation.setVisibility(View.GONE);
+            holder.gcinfo.setVisibility(View.VISIBLE);
         } else {
             holder.countOrLocation.setVisibility(View.GONE);
+            holder.gcinfo.setVisibility(View.GONE);
         }
     }
 

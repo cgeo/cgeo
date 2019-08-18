@@ -713,11 +713,11 @@
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
     <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
-    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="init_summary_proximityNotificationGeneral">Speel een enkele melding als een cache of waypoint op de kaart zichtbaar, dichterbij is dan de veraf- of dichtbij-afstand. Verschillende tonen worden gebruikt voor de twee afstanden.</string>
     <string name="init_proximityNotificationSpecific">Specifieke melding voor waypoint nabijheid</string>
-    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="init_summary_proximityNotificationSpecific">Speel een herhalende melding wanneer de huidige geselecteerde cache of waypoint dichterbij is dan de veraf- of dichtbij afstand. Werkt als de cache- of waypoint details worden geopend, cache of waypoint popups op de kaart worden weergegeven of wanneer het kompas actief is. Verschillende tonen worden gebruikt voor de twee afstanden.</string>
+    <string name="far_distance">veraf afstand</string>
+    <string name="near_distance">dichtbij afstand</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -1483,7 +1483,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.1. Toekomstige releases zijn mogelijk niet beschikbaar voor je apparaat.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
-    <string name="tts_toggle">Stemweergave inschakelen</string>
+    <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
     <string name="tts_started">Gestart toespraak</string>
     <string name="tts_stopped">Gestopt toespraak</string>
     <string name="err_tts_lang_not_supported">De huidige taal wordt niet ondersteund door tekst naar spraak.</string>

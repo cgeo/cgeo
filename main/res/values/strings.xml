@@ -401,13 +401,17 @@
     <string name="caches_filter_own_rating">With own rating</string>
     <string name="caches_filter_multi_listing">Multi listing with different state</string>
     <string name="caches_filter_own_waypoint">With user defined waypoints</string>
+    <string name="caches_filter_missing_gcvote">Found caches not voted</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_toggle_listdisplay">Toggle display of additional lists</string>
-    <string name="caches_filter_missing_gcvote">Found caches not voted</string>
+    <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_listmarker_none">No marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(selected)</string>
 
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>
@@ -1701,9 +1705,16 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
 
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+
+    <!-- number input -->
+    <string name="number_input_title">Enter a value between %s and %s</string>
+    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
+    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
+    <string name="number_input_err_format">Invalid number format</string>
 </resources>

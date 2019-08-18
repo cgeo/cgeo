@@ -663,7 +663,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         // Exchange layer
         if (newLayer != null) {
-            this.mapView.getModel().displayModel.setFixedTileSize(newLayer.getFixedTileSize());
             final MapZoomControls zoomControls = mapView.getMapZoomControls();
             zoomControls.setZoomLevelMax(newLayer.getZoomLevelMax());
             zoomControls.setZoomLevelMin(newLayer.getZoomLevelMin());

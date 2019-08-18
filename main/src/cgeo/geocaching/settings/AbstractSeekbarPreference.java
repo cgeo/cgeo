@@ -2,14 +2,18 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.preference.Preference;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 
@@ -20,20 +24,50 @@ public abstract class AbstractSeekbarPreference extends Preference {
     private int maxValue = 100;
     private int startValue = 0;
     private String labelValue = "";
+    private Context context = null;
+    protected boolean hasDecimals = false;
 
     public AbstractSeekbarPreference(final Context context) {
         super(context);
+        this.context = context;
         init();
     }
 
     public AbstractSeekbarPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init();
     }
 
     public AbstractSeekbarPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
+        this.context = context;
         init();
+    }
+
+    // naming convention:
+    // progress     - the internal value of the android widget (0 to max) - always int
+    // value        - actual value (may differ from "progress" if non linear or other boundaries) - always int
+    // shownValue   - displayed value (may differ from "value", if conversions are involved) - in:float out:float or int converted to string
+
+    protected int valueToProgressHelper(final int value) {
+        return value;
+    }
+
+    protected int valueToProgress(final int value) {
+        return valueToProgressHelper(value);
+    }
+
+    protected int progressToValue(final int progress) {
+        return progress;
+    }
+
+    protected String valueToShownValue(final int value) {
+        return hasDecimals ? String.format("%.2f", (float) value) : String.valueOf(value);
+    }
+
+    protected int shownValueToValue(final float shownValue) {
+        return Math.round(shownValue);
     }
 
     protected void init() {
@@ -41,7 +75,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
     }
 
     protected String getValueString(final int progress) {
-        return String.valueOf(progress);
+        return valueToShownValue(progressToValue(progress));
     }
 
     private boolean atLeastMin(final SeekBar seekBar, final int progress) {
@@ -53,11 +87,12 @@ public abstract class AbstractSeekbarPreference extends Preference {
     }
 
     // sets boundaries and initial value for seekbar
-    protected void configure(final int minValue, final int maxValue, final int startValue, final String labelValue) {
+    protected void configure(final int minValue, final int maxValue, final int startValue, final String labelValue, final boolean hasDecimals) {
         this.minValue = minValue;
         this.maxValue = maxValue;
         this.startValue = startValue;
         this.labelValue = labelValue;
+        this.hasDecimals = hasDecimals;
     }
 
     // method to store the final value
@@ -103,6 +138,37 @@ public abstract class AbstractSeekbarPreference extends Preference {
                     saveSetting(seekBar.getProgress());
                 }
             }
+        });
+
+        valueView.setOnClickListener(v2 -> {
+            final EditText editText = new EditText(context);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | (hasDecimals ? InputType.TYPE_NUMBER_FLAG_DECIMAL : 0));
+            editText.setText(String.valueOf(valueToShownValue(progressToValue(seekBar.getProgress()))));
+
+            new AlertDialog.Builder(context)
+                .setTitle(String.format(context.getString(R.string.number_input_title), valueToShownValue(progressToValue(minValue)), valueToShownValue(progressToValue(maxValue))))
+                .setView(editText)
+                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                    int newValue;
+                    try {
+                        newValue = valueToProgress(shownValueToValue(Float.parseFloat(editText.getText().toString())));
+                        if (newValue > maxValue) {
+                            newValue = maxValue;
+                            Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                        }
+                        if (newValue < minValue) {
+                            newValue = minValue;
+                            Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+                        }
+                        seekBar.setProgress(newValue);
+                        valueView.setText(getValueString(newValue));
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
+                .show()
+            ;
         });
 
         return v;
