@@ -1106,6 +1106,8 @@
     <string name="waypoint_note">Note</string>
     <string name="waypoint_user_note">User note</string>
     <string name="waypoint_visited">Visited</string>
+    <string name="waypoint_set_visited">Set visited</string>
+    <string name="waypoint_unset_visited">Unset visited</string>
     <string name="waypoint_save">Save</string>
     <string name="waypoint_cancel_edit">Cancel</string>
     <string name="waypoint_loading">Loading waypoint…</string>
