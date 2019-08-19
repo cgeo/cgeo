@@ -8,6 +8,9 @@
     · New: Move offline related settings to offline data setting menu\n
     · New: Show cache name inline with log text in trackable log\n
     · New: New Locus API version\n
+    · New: Set waypoint to visited on map popup\n
+    · New: Filter lists by membership to other lists\n
+    · New: Rename some gc.com specific cache types (HQ and Block Party)\n
     · Fix: Have dot markers for compact map icons in better resolution\n
     \n
     \n
