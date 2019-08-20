@@ -4,6 +4,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filter.IFilter;
+import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
@@ -68,6 +69,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private final Set<CompassMiniView> compasses = new LinkedHashSet<>();
     private final Set<DistanceView> distances = new LinkedHashSet<>();
     private final CacheListType cacheListType;
+    private List<AbstractList> storedLists = null;
+    private String currentListTitle = "";
     private final Resources res;
     /** Resulting list of caches */
     private final List<Geocache> list;
@@ -133,6 +136,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         this.list = list;
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
+    }
+
+    public void setStoredLists(final List<AbstractList> storedLists) {
+        this.storedLists = storedLists;
+    }
+
+    public void setCurrentListTitle(final String currentListTitle) {
+        this.currentListTitle = currentListTitle;
     }
 
     /**
@@ -510,6 +521,20 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
             holder.info.setText(Formatter.formatCacheInfoLong(cache));
+        }
+
+        // optionally show list infos
+        if (null != storedLists) {
+            final List<String> infos = new ArrayList<>();
+            final Set<Integer> lists = cache.getLists();
+            for (final AbstractList temp : storedLists) {
+                if (lists.contains(temp.id) && !temp.title.equals(currentListTitle)) {
+                    infos.add(temp.title);
+                }
+            }
+            if (!infos.isEmpty()) {
+                holder.info.append("\n" + StringUtils.join(infos, Formatter.SEPARATOR));
+            }
         }
 
         return v;

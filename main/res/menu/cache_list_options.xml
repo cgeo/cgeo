@@ -107,6 +107,10 @@
                 android:id="@+id/menu_make_list_unique"
                 android:title="@string/caches_make_list_unique"
                 android:enabled="false"
+                app:showAsAction="never|withText"/>
+            <item
+                android:id="@+id/menu_toggle_listdisplay"
+                android:title="@string/caches_toggle_listdisplay"
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_set_listmarker"
