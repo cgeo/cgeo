@@ -30,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
     @BindView(R.id.actionbar_title) protected TextView actionBarTitle;
     @BindView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
+    @BindView(R.id.toggle_visited) protected Button buttonToggle;
     @BindView(R.id.edit) protected Button buttonEdit;
     @BindView(R.id.details_list) protected LinearLayout cacheDetailsLayout;
 
@@ -97,6 +98,13 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             details.addHtml(R.string.waypoint_note, waypoint.getNote(), waypoint.getGeocode());
+
+            buttonToggle.setText(waypoint.isVisited() ? R.string.waypoint_unset_visited : R.string.waypoint_set_visited);
+            buttonToggle.setOnClickListener(arg1 -> {
+                waypoint.setVisited(!waypoint.isVisited());
+                DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
+                buttonToggle.setText(waypoint.isVisited() ? R.string.waypoint_unset_visited : R.string.waypoint_set_visited);
+            });
 
             buttonEdit.setOnClickListener(arg0 -> {
                 EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());

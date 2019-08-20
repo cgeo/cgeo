@@ -30,14 +30,21 @@
 
             <LinearLayout
                 android:id="@+id/edit_box"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_gravity="right"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/toggle_visited"
+                    style="@style/button_small"
+                    android:text="toggle visited" />
 
                 <Button
                     android:id="@+id/edit"
                     style="@style/button_small"
                     android:text="@string/waypoint_edit" />
+
             </LinearLayout>
 
             <RelativeLayout style="@style/separator_horizontal_layout" >

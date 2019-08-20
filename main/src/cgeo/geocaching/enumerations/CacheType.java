@@ -25,22 +25,22 @@ public enum CacheType {
     MEGA_EVENT("mega", "Mega-Event Cache", "69eb8535-b718-4b35-ae3c-a856a55b0874", R.string.mega, R.drawable.type_mega, "453", R.drawable.dot_event),
     GIGA_EVENT("giga", "Giga-Event Cache", "51420629-5739-4945-8bdd-ccfd434c0ead", R.string.giga, R.drawable.type_giga, "7005", R.drawable.dot_event),
     EARTH("earth", "Earthcache", "c66f5cf3-9523-4549-b8dd-759cd2f18db8", R.string.earth, R.drawable.type_earth, "137", R.drawable.dot_virtual),
-    CITO("cito", "Cache in Trash out Event", "57150806-bc1a-42d6-9cf0-538d171a2d22", R.string.cito, R.drawable.type_cito, "13", R.drawable.dot_event),
+    CITO("cito", "Cache In Trash Out Event", "57150806-bc1a-42d6-9cf0-538d171a2d22", R.string.cito, R.drawable.type_cito, "13", R.drawable.dot_event),
     WEBCAM("webcam", "Webcam Cache", "31d2ae3c-c358-4b5f-8dcd-2185bf472d3d", R.string.webcam, R.drawable.type_webcam, "11", R.drawable.dot_virtual),
     VIRTUAL("virtual", "Virtual Cache", "294d4360-ac86-4c83-84dd-8113ef678d7e", R.string.virtual, R.drawable.type_virtual, "4", R.drawable.dot_virtual),
     WHERIGO("wherigo", "Wherigo Cache", "0544fa55-772d-4e5c-96a9-36a51ebcf5c9", R.string.wherigo, R.drawable.type_wherigo, "1858", R.drawable.dot_mystery),
     COMMUN_CELEBRATION("communceleb", "Community Celebration Event", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.communceleb, R.drawable.type_event, "3653", R.drawable.dot_event), // icon missing
     PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.drawable.type_ape, "9", R.drawable.dot_traditional),
-    GCHQ("gchq", "Groundspeak HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.drawable.type_hq, "3773", R.drawable.dot_traditional),
+    GCHQ("gchq", "Geocaching HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.drawable.type_hq, "3773", R.drawable.dot_traditional),
     GCHQ_CELEBRATION("gchqceleb", "Geocaching HQ Celebration", "af820035-787a-47af-b52b-becc8b0c0c88", R.string.gchqceleb, R.drawable.type_hq, "3774", R.drawable.dot_event), // icon missing
     GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_event, "1304", R.drawable.dot_event), // icon missing
-    BLOCK_PARTY("block", "Groundspeak Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.drawable.type_event, "4738", R.drawable.dot_event), // icon missing
+    BLOCK_PARTY("block", "Geocaching HQ Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.drawable.type_event, "4738", R.drawable.dot_event), // icon missing
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.drawable.type_unknown, "", R.drawable.dot_unknown),
     /** No real cache type -> filter */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.drawable.type_unknown, "", R.drawable.dot_unknown);
 
     /**
-     * id field is used when for storing caches in the database.
+     * id field is used for storing caches in the database.
      */
     public final String id;
     /**
@@ -87,6 +87,10 @@ public enum CacheType {
         FIND_BY_PATTERN.put("Traditional Geocache".toLowerCase(Locale.US), TRADITIONAL);
         // map lab caches to the virtual type for the time being
         FIND_BY_PATTERN.put("Lab Cache".toLowerCase(Locale.US), VIRTUAL);
+        // renaming in 2019
+        FIND_BY_PATTERN.put("Groundspeak HQ".toLowerCase(Locale.US), GCHQ);
+        FIND_BY_PATTERN.put("Groundspeak Block Party".toLowerCase(Locale.US), BLOCK_PARTY);
+        FIND_BY_PATTERN.put("Lost and Found Event Cache".toLowerCase(Locale.US), COMMUN_CELEBRATION);
 
         // Geocaching.ru
         FIND_BY_PATTERN.put("Multistep Traditional cache".toLowerCase(Locale.US), MULTI);
