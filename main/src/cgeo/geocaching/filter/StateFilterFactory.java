@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 class StateFilterFactory implements IFilterFactory {
@@ -252,36 +251,6 @@ class StateFilterFactory implements IFilterFactory {
         }
     }
 
-    static class StateNotStoredFilter extends AbstractFilter {
-
-        public static final Creator<StateNotStoredFilter> CREATOR
-                = new Parcelable.Creator<StateNotStoredFilter>() {
-
-            @Override
-            public StateNotStoredFilter createFromParcel(final Parcel in) {
-                return new StateNotStoredFilter(in);
-            }
-
-            @Override
-            public StateNotStoredFilter[] newArray(final int size) {
-                return new StateNotStoredFilter[size];
-            }
-        };
-
-        StateNotStoredFilter() {
-            super(R.string.cache_status_not_stored);
-        }
-
-        protected StateNotStoredFilter(final Parcel in) {
-            super(in);
-        }
-
-        @Override
-        public boolean accepts(@NonNull final Geocache cache) {
-            return !cache.isOffline();
-        }
-    }
-
     static class StatePremiumFilter extends AbstractFilter {
 
         public static final Creator<StatePremiumFilter> CREATOR
@@ -312,40 +281,10 @@ class StateFilterFactory implements IFilterFactory {
         }
     }
 
-    static class StateStoredFilter extends AbstractFilter {
-
-        public static final Creator<StateStoredFilter> CREATOR
-                = new Parcelable.Creator<StateStoredFilter>() {
-
-            @Override
-            public StateStoredFilter createFromParcel(final Parcel in) {
-                return new StateStoredFilter(in);
-            }
-
-            @Override
-            public StateStoredFilter[] newArray(final int size) {
-                return new StateStoredFilter[size];
-            }
-        };
-
-        StateStoredFilter() {
-            super(R.string.cache_status_stored);
-        }
-
-        protected StateStoredFilter(final Parcel in) {
-            super(in);
-        }
-
-        @Override
-        public boolean accepts(@NonNull final Geocache cache) {
-            return cache.isOffline();
-        }
-    }
-
     @Override
     @NonNull
     public List<IFilter> getFilters() {
-        final List<IFilter> filters = new ArrayList<>(6);
+        final List<IFilter> filters = new ArrayList<>(11);
         filters.add(new StateFoundFilter());
         filters.add(new StateNotFoundFilter());
         filters.add(new StateNeverFoundFilter());
@@ -354,20 +293,11 @@ class StateFilterFactory implements IFilterFactory {
         filters.add(new StateDisabledFilter());
         filters.add(new StatePremiumFilter());
         filters.add(new StateNonPremiumFilter());
-        filters.add(new StateStoredFilter());
-        filters.add(new StateNotStoredFilter());
         filters.add(new RatingFilter());
         filters.add(new TrackablesFilter());
         filters.add(new MultiListingFilter());
 
-        Collections.sort(filters, new Comparator<IFilter>() {
-
-            @Override
-            public int compare(final IFilter filter1, final IFilter filter2) {
-                return TextUtils.COLLATOR.compare(filter1.getName(), filter2.getName());
-            }
-        });
-
+        Collections.sort(filters, (filter1, filter2) -> TextUtils.COLLATOR.compare(filter1.getName(), filter2.getName()));
         return filters;
     }
 
