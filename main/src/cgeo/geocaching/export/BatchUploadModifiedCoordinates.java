@@ -24,9 +24,11 @@ public class BatchUploadModifiedCoordinates extends AbstractExport {
     private int uploadProgress = 0;
     private int uploadOk = 0;
     private int uploadFailed = 0;
+    private boolean modifiedOnly = true;
 
-    public BatchUploadModifiedCoordinates() {
+    public BatchUploadModifiedCoordinates(final boolean modifiedOnly) {
         super(R.string.export_modifiedcoords);
+        this.modifiedOnly = modifiedOnly;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class BatchUploadModifiedCoordinates extends AbstractExport {
                 IConnector con;
                 for (final Geocache cache : caches) {
                     publishProgress(++uploadProgress);
-                    if (cache.hasUserModifiedCoords()) {
+                    if (!modifiedOnly || cache.hasUserModifiedCoords()) {
                         con = ConnectorFactory.getConnector(cache);
                         if (con.supportsOwnCoordinates()) {
                             if (!con.uploadModifiedCoordinates(cache, cache.getCoords())) {
@@ -61,7 +63,7 @@ public class BatchUploadModifiedCoordinates extends AbstractExport {
                     }
                 }
             } catch (final Exception e) {
-                Log.e("BatchUploadModifiedCoordinates.ExportTask exception when uploading modified coords", e);
+                Log.e("BatchUploadModifiedCoordinates.ExportTask exception when uploading coords", e);
                 return false;
             }
             return true;
