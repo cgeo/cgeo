@@ -19,8 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import butterknife.BindView;
@@ -30,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNotification {
     @BindView(R.id.actionbar_title) protected TextView actionBarTitle;
     @BindView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
-    @BindView(R.id.toggle_visited) protected Button buttonToggle;
+    @BindView(R.id.toggle_visited) protected CheckBox toggleVisited;
     @BindView(R.id.edit) protected Button buttonEdit;
     @BindView(R.id.details_list) protected LinearLayout cacheDetailsLayout;
 
@@ -99,11 +101,10 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             details.addHtml(R.string.waypoint_note, waypoint.getNote(), waypoint.getGeocode());
 
-            buttonToggle.setText(waypoint.isVisited() ? R.string.waypoint_unset_visited : R.string.waypoint_set_visited);
-            buttonToggle.setOnClickListener(arg1 -> {
+            toggleVisited.setOnClickListener(arg1 -> {
                 waypoint.setVisited(!waypoint.isVisited());
                 DataStore.saveWaypoint(waypoint.getId(), waypoint.getGeocode(), waypoint);
-                buttonToggle.setText(waypoint.isVisited() ? R.string.waypoint_unset_visited : R.string.waypoint_set_visited);
+                Toast.makeText(getActivity(), waypoint.isVisited() ? R.string.waypoint_set_visited : R.string.waypoint_unset_visited, Toast.LENGTH_SHORT).show();
             });
 
             buttonEdit.setOnClickListener(arg0 -> {
