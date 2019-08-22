@@ -754,7 +754,7 @@ public class Settings {
     }
 
     public static boolean showListsInCacheList() {
-        return getBoolean(R.string.pref_showListsInCacheList, false);
+        return getBoolean(R.string.pref_showListsInCacheList, true);
     }
 
     public static void setShowListsInCacheList(final boolean showListsInCacheList) {

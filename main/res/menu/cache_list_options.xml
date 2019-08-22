@@ -113,10 +113,6 @@
                 android:enabled="false"
                 app:showAsAction="never|withText"/>
             <item
-                android:id="@+id/menu_toggle_listdisplay"
-                android:title="@string/caches_toggle_listdisplay"
-                app:showAsAction="ifRoom|withText"/>
-            <item
                 android:id="@+id/menu_set_listmarker"
                 android:title="@string/caches_set_listmarker"
                 app:showAsAction="never|withText">

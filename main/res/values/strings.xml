@@ -410,7 +410,6 @@
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_make_list_unique">Make list unique</string>
-    <string name="caches_toggle_listdisplay">Toggle display of additional lists</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_listmarker_none">No marker</string>
     <string name="caches_listmarker_marker">Marker %d</string>
@@ -630,6 +629,7 @@
     <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
+    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show direction of caches in the list</string>
 
