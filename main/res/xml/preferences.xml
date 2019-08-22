@@ -680,6 +680,10 @@
             android:key="@string/pref_choose_list"
             android:summary="@string/init_summary_choose_list"
             android:title="@string/init_choose_list" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_showListsInCacheList"
+            android:title="@string/init_listdisplay" />
 
         <PreferenceCategory android:title="@string/settings_title_gpx"
             android:layout="@layout/preference_category" >
