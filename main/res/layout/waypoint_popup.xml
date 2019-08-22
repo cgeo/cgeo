@@ -28,24 +28,27 @@
                 android:orientation="vertical" >
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/edit_box"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:orientation="horizontal" >
 
-                <Button
+                <CheckBox
                     android:id="@+id/toggle_visited"
-                    style="@style/button_small"
-                    android:text="toggle visited" />
-
+                    style="@style/checkbox"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/waypoint_visited" />
                 <Button
                     android:id="@+id/edit"
                     style="@style/button_small"
+                    android:layout_alignParentRight="true"
                     android:text="@string/waypoint_edit" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
