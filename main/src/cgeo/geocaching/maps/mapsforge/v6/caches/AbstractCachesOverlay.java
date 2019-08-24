@@ -223,7 +223,6 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected void repaint() {
-        mapHandlers.sendEmptyDisplayMessage(NewMap.INVALIDATE_MAP);
         mapHandlers.sendEmptyDisplayMessage(NewMap.UPDATE_TITLE);
     }
 
