@@ -161,7 +161,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     // Handler messages
     // DisplayHandler
     public static final int UPDATE_TITLE = 0;
-    public static final int INVALIDATE_MAP = 1;
     // ShowProgressHandler
     public static final int HIDE_PROGRESS = 0;
     public static final int SHOW_PROGRESS = 1;
@@ -1030,10 +1029,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 case UPDATE_TITLE:
                     map.setTitle();
                     map.setSubtitle();
-
-                    break;
-                case INVALIDATE_MAP:
-                    map.mapView.repaint();
                     break;
 
                 default:
