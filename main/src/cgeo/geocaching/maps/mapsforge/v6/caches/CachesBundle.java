@@ -1,16 +1,12 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -225,16 +221,7 @@ public class CachesBundle {
             liveOverlay.invalidate(geocodes);
         }
         if (wpOverlay != null) {
-            // get waypoint IDs for geocodes and invalidate them
-            final Set<Geocache> baseCaches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_WAYPOINTS);
-            final Collection<String> invalidWpCodes = new ArrayList<String>();
-            for (final Geocache cache : baseCaches) {
-                final List<Waypoint> wl = cache.getWaypoints();
-                for (final Waypoint w : wl) {
-                    invalidWpCodes.add(w.getGpxId());
-                }
-            }
-            wpOverlay.invalidate(invalidWpCodes);
+            wpOverlay.invalidateWaypoints(geocodes);
         }
     }
 
