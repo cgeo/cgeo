@@ -984,6 +984,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return null;
         }
         final GeoPointImpl mapCenter = mapView.getMapViewCenter();
+
+        if (mapCenter == null) {
+            return null;
+        }
+
         // For the 'old' map, isStoredEnabled == isLiveEnabled
         return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, mapView.getCircles(), null, null, mapOptions.isLiveEnabled, mapOptions.isLiveEnabled);
     }
