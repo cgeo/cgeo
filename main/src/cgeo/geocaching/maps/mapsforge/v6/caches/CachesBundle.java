@@ -228,6 +228,9 @@ public class CachesBundle {
         if (wpOverlay != null) {
             wpOverlay.invalidateWaypoints(geocodes);
         }
+        if (baseOverlay != null) {
+            baseOverlay.invalidate(geocodes);
+        }
     }
 
     /**
