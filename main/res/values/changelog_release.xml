@@ -2,6 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+     <b>2019.09.08:</b>\n
+    · Workaround: Disable Google Maps on Android 10 devices to avoid crash\n
+      We are working on fixing Google Maps on Android 10 in parallel. At the moment only OSM maps can be used on Android 10.\n
+      More info in our <a href="https://www.cgeo.org/faq#7369">FAQ</a> and on our <a href="https://github.com/cgeo/cgeo/issues/7369">issue tracker</a>.\n
+      Any help and contribution is welcome!\n
+    \n
+    \n
      <b>2019.08.18:</b>\n
     · New: Improve scaling of OSM online map on high res devices\n
     · New: Proximity notification beep (configurable in Settings - Map)\n
