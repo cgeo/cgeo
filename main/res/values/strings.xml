@@ -173,9 +173,9 @@
     <string name="err_server_gk">Unable to contact GeoKrety.org. The website may be down or your internet connection not working.</string>
     <string name="err_login">No Login information stored</string>
     <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check Login settings or enable your internet connection.</string>
-    <string name="err_unknown">Unknown error</string>
+    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_unknown_address">c:geo was unable to map this address to an existing location</string>
-    <string name="err_comm">Unknown communication error</string>
+    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">No username and/or password set</string>
     <string name="err_wrong">Wrong username and/or password</string>
     <string name="err_maintenance">Geocaching.com is down for maintenance. c:geo works offline with Stored caches.</string>
