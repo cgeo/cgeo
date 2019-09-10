@@ -14,6 +14,7 @@
     · New: Show membership to other lists in cache list\n
     · New: Rename some gc.com specific cache types (HQ and Block Party)\n
     · Fix: Have dot markers for compact map icons in better resolution\n
+    · Fix: Owner context menu not working for OC caches\n
     \n
     \n
   </string>
