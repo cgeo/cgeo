@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
@@ -38,7 +39,7 @@ public final class MapMarkerUtils {
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
 
-    private static final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
+    private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
 
     private MapMarkerUtils() {
         // Do not instantiate
@@ -55,7 +56,7 @@ public final class MapMarkerUtils {
      *          a drawable representing the current cache status
      */
     @NonNull
-    public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache) {
+    public static CacheMarker getCacheMarker(final Resources res, final Geocache cache) {
         return getCacheMarker(res, cache, null);
     }
 
@@ -75,7 +76,7 @@ public final class MapMarkerUtils {
      *          a drawable representing the current cache status
      */
     @NonNull
-    public static LayerDrawable getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
+    public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         final int assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
@@ -95,12 +96,12 @@ public final class MapMarkerUtils {
                 .toHashCode();
 
         synchronized (overlaysCache) {
-            LayerDrawable drawable = overlaysCache.get(hashcode);
-            if (drawable == null) {
-                drawable = createCacheMarker(res, cache, cacheListType, assignedMarkers);
-                overlaysCache.put(hashcode, drawable);
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createCacheMarker(res, cache, cacheListType, assignedMarkers));
+                overlaysCache.put(hashcode, marker);
             }
-            return drawable;
+            return marker;
         }
     }
 
@@ -116,19 +117,19 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    public static LayerDrawable getWaypointMarker(final Resources res, final Waypoint waypoint) {
+    public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint) {
         final int hashcode = new HashCodeBuilder()
         .append(waypoint.isVisited())
         .append(waypoint.getWaypointType().id)
         .toHashCode();
 
         synchronized (overlaysCache) {
-            LayerDrawable drawable = overlaysCache.get(hashcode);
-            if (drawable == null) {
-                drawable = createWaypointMarker(res, waypoint);
-                overlaysCache.put(hashcode, drawable);
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint));
+                overlaysCache.put(hashcode, marker);
             }
-            return drawable;
+            return marker;
         }
     }
 

@@ -2,7 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
+import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -43,7 +43,7 @@ public class MapProviderFactory {
         }
 
         // Check if API key is available
-        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api_key);
+        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
         if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;
@@ -51,7 +51,7 @@ public class MapProviderFactory {
 
         // Check if API is available
         try {
-            Class.forName("com.google.android.maps.MapActivity");
+            Class.forName("com.google.android.gms.maps.MapView");
         } catch (final ClassNotFoundException ignored) {
             return false;
         }

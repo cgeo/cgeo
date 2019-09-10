@@ -68,6 +68,10 @@ public class DistanceDrawer {
         distanceText = Units.getDistanceFromKilometers(distance);
     }
 
+    public Geopoint getDestinationCoords() {
+        return destinationCoords;
+    }
+
     public void setRealDistance(final float realDistance) {
         this.realDistance = realDistance;
     }
@@ -142,7 +146,7 @@ public class DistanceDrawer {
         canvas.drawText(text, textX + 5 * boxPadding, textY + yDelta, paintText);
     }
 
-    void drawDistance(final Canvas canvas) {
+    public void drawDistance(final Canvas canvas) {
         if (showBothDistances && realDistance != 0.0f && distance != realDistance) {
             setText(canvas, true, STRAIGHT_LINE_SYMBOL, distanceText);
             setText(canvas, false, WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));

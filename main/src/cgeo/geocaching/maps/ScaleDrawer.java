@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.graphics.BlurMaskFilter;
@@ -36,9 +37,13 @@ public class ScaleDrawer {
         return scale * Math.floor(distance / scale);
     }
 
-    void drawScale(final Canvas canvas, final MapViewImpl mapView) {
+    public void drawScale(final Canvas canvas, final MapViewImpl mapView) {
         final double span = mapView.getLongitudeSpan() / 1e6;
         final GeoPointImpl center = mapView.getMapViewCenter();
+        if (center == null) {
+            Log.w("No center, cannot draw scale");
+            return;
+        }
 
         final int bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
 
