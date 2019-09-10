@@ -2,30 +2,19 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>2019.09.08:</b>\n
-    · Workaround: Disable Google Maps on Android 10 devices to avoid crash\n
-      We are working on fixing Google Maps on Android 10 in parallel. At the moment only OSM maps can be used on Android 10.\n
-      More info in our <a href="https://www.cgeo.org/faq#7369">FAQ</a> and on our <a href="https://github.com/cgeo/cgeo/issues/7369">issue tracker</a>.\n
-      Any help and contribution is welcome!\n
-    \n
-    \n
-     <b>2019.08.18:</b>\n
-    · New: Improve scaling of OSM online map on high res devices\n
-    · New: Proximity notification beep (configurable in Settings - Map)\n
-    · New: Show favorite percentage in cache details\n
-    · New: Add hint how to reset authorization data (long click in Settings - Services sub menus)\n
-    · New: Use https for send2cgeo\n
-    · New: Have button for last selected list in list selection when saving cache\n
-    · New: Use new GeoKrety API\n
-    · New: Show also personal note when clicking on the hint button in map popup window\n
-    · New: Add Text-To-Speach navigation to cache and waypoint popup\n
-    · New: Show routed distance (requires brouter app) instead of or additionally to direct distance for selected cache on map\n
-    · New: Support for new cache types HQ Celebration and Community Celebration\n
-    · Fix: Reintroduce live map loading indication (horizontal progress bar)\n
-    · Fix: Also include other satellite systems than GPS in location info on mainscreen\n
-    · Fix: Waypoint of other lists leaked onto a mapped list\n
-    · Fix: Waypoints of owned caches not filtered properly on map\n
-    · Fix: Updated opencaching attributes\n
+    <b>Next feature release:</b>\n
+    · New: Backup for app settings\n
+    · New: Remember setting for distance circles on map\n
+    · New: Move offline related settings to offline data setting menu\n
+    · New: Show cache name inline with log text in trackable log\n
+    · New: New Locus API version\n
+    · New: Set waypoint to visited on map popup\n
+    · New: Filter lists by membership to other lists\n
+    · New: Filter for stored caches before or within a certain time frame\n
+    · New: Show membership to other lists in cache list\n
+    · New: Rename some gc.com specific cache types (HQ and Block Party)\n
+    · Fix: Have dot markers for compact map icons in better resolution\n
+    · Fix: Owner context menu not working for OC caches\n
     \n
     \n
 </string>
