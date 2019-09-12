@@ -371,8 +371,8 @@
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_warning">Do you want to upload coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
+    <string name="caches_upload_allcoords">WARNING - Uploading all coordinates</string>
+    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, where your e.g. imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather instead want to use the function "Upload modified coordinates" in the same menu.</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
     <string name="caches_move_selected">Move selected</string>
