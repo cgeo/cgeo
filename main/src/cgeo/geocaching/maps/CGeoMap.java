@@ -529,7 +529,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         setTitle();
 
         // initialize map
-        mapView = activity.findViewById(mapProvider.getMapViewId());
+        mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
 
         // added keys must be removed before passing bundle to google's mapView, otherwise this will be thrown:
         // ClassNotFoundException: Didn't find class "cgeo.geocaching.sensors.GeoData"

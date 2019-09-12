@@ -291,7 +291,7 @@ public class CachesBundle {
 
     public void handleWaypoints() {
         if (getVisibleCachesCount() < Settings.getWayPointsThreshold()) {
-            Collection<String> baseGeocodes = Collections.<String>emptyList();
+            Collection<String> baseGeocodes = Collections.emptyList();
             if (baseOverlay != null) {
                 baseGeocodes = baseOverlay.getCacheGeocodes();
             }

@@ -75,7 +75,7 @@ public class SharedPrefsBackupUtils extends Activity {
     private void backupInternal(final Boolean fullBackup, final Runnable runAfterwards) {
         final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
         final Map<String, ?> keys = prefs.getAll();
-        final HashSet<String> ignoreKeys = new HashSet<String>();
+        final HashSet<String> ignoreKeys = new HashSet<>();
 
         // if a backup without account data is requested add all account related preference keys to the ignore set
         if (!fullBackup) {
