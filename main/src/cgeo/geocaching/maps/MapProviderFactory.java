@@ -36,12 +36,6 @@ public class MapProviderFactory {
     }
 
     public static boolean isGoogleMapsInstalled() {
-        // Check if running on Android 10 or higher, as our current Google Maps v1 implementation is no longer supported on Q or higher
-        // @todo: check needs to be removed as soon as Google Maps v2 implementation is merged
-        if (android.os.Build.VERSION.SDK_INT >= 29) {
-            return false;
-        }
-
         // Check if API key is available
         final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
         if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
