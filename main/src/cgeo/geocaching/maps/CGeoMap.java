@@ -470,6 +470,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         if (mapOptions.mapState == null) {
             followMyLocation = followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
+            mapView.setCircles(Settings.getCircles());
         } else {
             followMyLocation = mapOptions.mapState.followsMyLocation();
             if (mapView.getCircles() != mapOptions.mapState.showsCircles()) {
