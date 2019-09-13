@@ -320,7 +320,7 @@ dependencies {
     implementation 'com.drewnoakes:metadata-extractor:2.12.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
-    implementation 'com.squareup.okhttp3:okhttp:3.12.3'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.5'
 
     // Play Services
     def playServicesVersion = '11.8.0'
