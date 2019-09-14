@@ -713,9 +713,9 @@
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Benachrichtigung über nahe Caches</string>
     <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung über nahe Caches auf der Karte</string>
-    <string name="init_summary_proximityNotificationGeneral">Spiele eine einmalige Benachrichtigung, wenn ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher als die weite oder nahe Entfernung ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
+    <string name="init_summary_proximityNotificationGeneral">Spiele einmalig eine Benachrichtigung ab, sobald ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher ist als die weite bzw. Entfernung. Je nach Entfernung wird ein anderer Ton abgespielt.</string>
     <string name="init_proximityNotificationSpecific">Benachrichtigungston für Wegpunkte</string>
-    <string name="init_summary_proximityNotificationSpecific">Spiele eine wiederholende Benachrichtigung, wenn der aktuell ausgewählte Cache oder Wegpunkt näher als die weite oder nahe Entfernung ist. Ist aktiv wenn die Cache- oder Wegpunkt-Details geöffnet werden, ein Cache- oder Wegpunkt-Popups auf der Karte angezeigt oder der Kompass aktiv ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
+    <string name="init_summary_proximityNotificationSpecific">Spiele wiederholt eine Benachrichtigung ab, wenn der aktuell ausgewählte Cache oder Wegpunkt näher ist als die weite bzw. Entfernung. Ist aktiv wenn die Cache- oder Wegpunkt-Details geöffnet werden, ein Cache- oder Wegpunkt-Popups auf der Karte angezeigt oder der Kompass aktiv ist. Je nach Entfernung wird ein anderer Ton abgespielt.</string>
     <string name="far_distance">weite Entfernung</string>
     <string name="near_distance">nahe Entfernung</string>
     <!-- map sources -->
