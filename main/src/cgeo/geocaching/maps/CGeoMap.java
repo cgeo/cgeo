@@ -1124,7 +1124,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      */
 
     private Disposable startTimer() {
-        if (mapOptions.coords != null) {
+        if (mapOptions.coords != null && mapOptions.mapMode != MapMode.LIVE) {
             // display just one point
             displayPoint(mapOptions.coords);
             loadTimer = new CompositeDisposable();
