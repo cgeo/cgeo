@@ -84,20 +84,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         this.googleMap = googleMap;
         mapController.setGoogleMap(googleMap);
         cachesList = new GoogleCachesList(googleMap);
-        googleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                final CameraPosition cameraPosition = googleMap.getCameraPosition();
-                // update all variable, which getters are available only in main thread
-                viewCenter = cameraPosition.target;
-                zoomLevel = cameraPosition.zoom;
-                final VisibleRegion newVisibleRegion = googleMap.getProjection().getVisibleRegion();
-                if (newVisibleRegion != null) {
-                    visibleRegion = newVisibleRegion;
-                }
-                invalidate(); // force redraw to draw scale
-            }
-        });
+        googleMap.setOnCameraMoveListener(() -> recognizePositionChange());
+        googleMap.setOnCameraIdleListener(() -> recognizePositionChange());
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
@@ -116,6 +104,17 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         redraw();
     }
 
+    private void recognizePositionChange() {
+        final CameraPosition cameraPosition = googleMap.getCameraPosition();
+        // update all variable, which getters are available only in main thread
+        viewCenter = cameraPosition.target;
+        zoomLevel = cameraPosition.zoom;
+        final VisibleRegion newVisibleRegion = googleMap.getProjection().getVisibleRegion();
+        if (newVisibleRegion != null) {
+            visibleRegion = newVisibleRegion;
+        }
+        invalidate(); // force redraw to draw scale
+    }
 
     private void initialize(final Context context) {
         if (isInEditMode()) {
