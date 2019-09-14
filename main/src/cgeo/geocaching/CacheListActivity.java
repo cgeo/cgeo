@@ -965,7 +965,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_upload_allcoords:
                 final Activity that2 = this;
-                Dialogs.confirm(this, R.string.caches_upload_allcoords, R.string.caches_upload_allcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
+                Dialogs.confirm(this, R.string.caches_upload_allcoords_dialogtitle, R.string.caches_upload_allcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
                 return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
