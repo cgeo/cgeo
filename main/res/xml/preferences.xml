@@ -587,6 +587,7 @@
                 android:summary="%s"
                 android:key="@string/pref_trailcolor"
                 android:defaultValue="@string/pref_value_grey"
+                android:dependency="@string/pref_maptrail"
                 android:entries="@array/trailcolors"
                 android:entryValues="@array/trailcolorValues" />
             <Preference
