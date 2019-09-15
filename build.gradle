@@ -69,7 +69,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // check for updates of gradle plugin dependencies
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.24.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.25.0'
 
         // Android gradle plugin
         classpath 'com.android.tools.build:gradle:3.4.2'
@@ -84,7 +84,7 @@ buildscript {
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
 
         // gradle build script profiling
-        classpath 'com.gradle:build-scan-plugin:2.4.1'
+        classpath 'com.gradle:build-scan-plugin:2.4.2'
     }
 }
 
@@ -155,7 +155,7 @@ buildScan {
  */
 
 ext {
-    supportLibraryVersion = '25.4.0'
+    supportLibraryVersion = '27.1.1'
 }
 
 subprojects {
