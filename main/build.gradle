@@ -64,6 +64,9 @@ android {
                 ]
             }
         }
+
+        // support vector drawables on older devices
+        vectorDrawables.useSupportLibrary = true
     }
 
     // signing is handled via private.properties

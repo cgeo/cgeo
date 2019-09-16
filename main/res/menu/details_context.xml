@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_copy"
-        android:icon="@drawable/ic_menu_copy_holo_dark"
+        android:icon="@drawable/ic_menu_copy"
         android:title="@android:string/copy"
         app:showAsAction="always|withText">
     </item>

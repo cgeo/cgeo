@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbars="none"
-    tools:context=".CacheDetailActivity$DetailsViewCreator" >
+    tools:context=".CacheDetailActivity$DetailsViewCreator">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -103,7 +104,7 @@
                     <ImageButton
                         android:id="@+id/offline_refresh"
                         style="@style/button_small"
-                        android:src="@drawable/ic_menu_refresh"
+                        app:srcCompat="@drawable/ic_menu_refresh"
                         android:layout_width="40dip"
                         android:layout_height="40dip"
                         android:layout_marginLeft="2dip"
@@ -135,7 +136,7 @@
                 <ImageButton
                     android:id="@+id/offline_edit"
                     style="@style/button_small"
-                    android:src="@drawable/ic_menu_edit"
+                    app:srcCompat="@drawable/ic_menu_edit"
                     android:layout_toLeftOf="@+id/offline_store_drop"
                     android:layout_width="40dip"
                     android:layout_height="40dip"/>
@@ -143,7 +144,7 @@
                 <ImageButton
                     android:id="@+id/offline_store_drop"
                     style="@style/button_small"
-                    android:src="@drawable/ic_menu_save"
+                    app:srcCompat="@drawable/ic_menu_save"
                     android:layout_alignParentRight="true"
                     android:layout_width="40dip"
                     android:layout_height="40dip"
@@ -190,7 +191,7 @@
                     android:id="@+id/add_to_watchlist"
                     style="@style/button_small"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_menu_add"
+                    app:srcCompat="@drawable/ic_menu_add"
                     android:layout_width="40dip"
                     android:layout_height="40dip"
                     android:visibility="gone"
@@ -202,7 +203,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_width="40dip"
                     android:layout_height="40dip"
-                    android:src="@drawable/ic_menu_remove"
+                    app:srcCompat="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
@@ -245,7 +246,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_width="40dip"
                     android:layout_height="40dip"
-                    android:src="@drawable/ic_menu_add"
+                    app:srcCompat="@drawable/ic_menu_add"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
@@ -255,7 +256,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_width="40dip"
                     android:layout_height="40dip"
-                    android:src="@drawable/ic_menu_remove"
+                    app:srcCompat="@drawable/ic_menu_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>

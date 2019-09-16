@@ -330,7 +330,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         activity.finish();
                         System.exit(0);
                     })
-                    .setIcon(R.drawable.ic_menu_preferences)
+                    .setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_menu_preferences))
                     .create()
                     .show();
         }

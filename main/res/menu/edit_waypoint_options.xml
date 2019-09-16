@@ -5,14 +5,14 @@
 
     <item
         android:id="@+id/menu_edit_waypoint_cancel"
-        android:icon="@drawable/ic_menu_cancel_holo_dark"
+        android:icon="@drawable/ic_menu_cancel"
         android:title="@string/waypoint_cancel_edit"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction">
     </item>
     <item
         android:id="@+id/menu_edit_waypoint_save"
-        android:icon="@drawable/ic_menu_done_holo_dark"
+        android:icon="@drawable/ic_menu_done"
         android:title="@string/waypoint_save"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction">

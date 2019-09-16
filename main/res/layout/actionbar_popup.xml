@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/action_bar">
 
     <TextView
@@ -36,6 +36,6 @@
         android:id="@+id/overflowActionBar"
         style="@style/action_bar_action"
         android:longClickable="true"
-        android:src="@drawable/three_dot_vertical" />
+        app:srcCompat="@drawable/three_dot_vertical" />
 
 </LinearLayout>

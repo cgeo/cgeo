@@ -57,6 +57,8 @@ public class CgeoApplication extends Application {
 
         // Restore cookies
         Cookies.restoreCookies();
+
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
     /**
