@@ -143,7 +143,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
         valueView.setOnClickListener(v2 -> {
             final EditText editText = new EditText(context);
             editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | (hasDecimals ? InputType.TYPE_NUMBER_FLAG_DECIMAL : 0));
-            editText.setText(String.valueOf(valueToShownValue(progressToValue(seekBar.getProgress()))));
+            editText.setText(valueToShownValue(progressToValue(seekBar.getProgress())));
 
             new AlertDialog.Builder(context)
                 .setTitle(String.format(context.getString(R.string.number_input_title), valueToShownValue(progressToValue(minValue)), valueToShownValue(progressToValue(maxValue))))
