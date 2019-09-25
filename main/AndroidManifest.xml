@@ -83,7 +83,9 @@
             android:value="@string/maps_api2_key" />
 
         <!-- required by Google Maps SDK version 16 and below if targeted to SDK 28 or above -->
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <!-- support also very wide screen devices. https://developer.android.com/guide/practices/screens_support.html#MaxAspectRatio -->
         <meta-data
