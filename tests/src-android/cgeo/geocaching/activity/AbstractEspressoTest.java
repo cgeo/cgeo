@@ -1,14 +1,14 @@
 package cgeo.geocaching.activity;
 
-import static com.google.android.apps.common.testing.ui.espresso.Espresso.onData;
-import static com.google.android.apps.common.testing.ui.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
-import static org.hamcrest.Matchers.hasToString;
-import static org.hamcrest.Matchers.startsWith;
-
 import android.app.Activity;
 import android.support.annotation.StringRes;
 import android.test.ActivityInstrumentationTestCase2;
+
+import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static android.support.test.espresso.action.ViewActions.click;
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.startsWith;
 
 public abstract class AbstractEspressoTest<T extends Activity> extends ActivityInstrumentationTestCase2<T> {
 
