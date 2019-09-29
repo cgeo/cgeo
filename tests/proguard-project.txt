@@ -1,9 +1,6 @@
--dontnote com.google.android.apps.common.testing.ui.espresso.**
 -dontnote com.google.common.reflect.**
--dontwarn org.hamcrest.**
 -dontwarn org.assertj.**
 -dontwarn cgeo.geocaching.**
--dontwarn com.google.android.apps.common.testing.testrunner.GoogleInstrumentation
 -dontwarn android.test.**
 
 -keep class cgeo.test.** { *; }
