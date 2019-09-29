@@ -105,7 +105,6 @@
                 android:checkable="true"
                 android:icon="@drawable/ic_menu_dot_mode"
                 android:title="@string/map_dot_mode"
-                android:visible="false"
                 app:showAsAction="ifRoom|withText">
             </item>
 

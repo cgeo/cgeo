@@ -312,7 +312,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
-            menu.findItem(R.id.menu_dot_mode).setVisible(true);
             menu.findItem(R.id.menu_dot_mode).setChecked(Settings.isDotMode());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());

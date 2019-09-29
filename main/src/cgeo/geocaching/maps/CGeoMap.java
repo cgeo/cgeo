@@ -63,6 +63,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -690,6 +691,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
+            menu.findItem(R.id.menu_dot_mode).setChecked(Settings.isDotMode());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
 
@@ -730,6 +732,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 return true;
             case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+                ActivityMixin.invalidateOptionsMenu(activity);
+                return true;
+            case R.id.menu_dot_mode:
+                Settings.setDotMode(!Settings.isDotMode());
+                markersInvalidated = true;
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
@@ -1359,16 +1367,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (!cachesToDisplay.isEmpty()) {
                 // Only show waypoints for single view or setting
                 // when less than showWaypointsthreshold Caches shown
+                final boolean isDotMode = Settings.isDotMode();
                 if (mapOptions.mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
                     for (final Waypoint waypoint : waypointsToDisplay) {
                         if (waypoint != null && waypoint.getCoords() != null) {
-                            itemsToDisplay.add(getWaypointItem(waypoint));
+                            itemsToDisplay.add(getWaypointItem(waypoint, isDotMode));
                         }
                     }
                 }
                 for (final Geocache cache : cachesToDisplay) {
                     if (cache != null && cache.getCoords() != null) {
-                        itemsToDisplay.add(getCacheItem(cache));
+                        itemsToDisplay.add(getCacheItem(cache, isDotMode));
                     }
                 }
             }
@@ -1388,7 +1397,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final Waypoint waypoint = new Waypoint("some place", mapOptions.waypointType != null ? mapOptions.waypointType : WaypointType.WAYPOINT, false);
         waypoint.setCoords(coords);
 
-        final CachesOverlayItemImpl item = getWaypointItem(waypoint);
+        final CachesOverlayItemImpl item = getWaypointItem(waypoint, Settings.isDotMode());
         mapView.updateItems(Collections.singletonList(item));
         displayHandler.sendEmptyMessage(INVALIDATE_MAP);
         updateMapTitle();
@@ -1661,15 +1670,23 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
     }
 
-    private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
+    private CachesOverlayItemImpl getCacheItem(final Geocache cache, final boolean isDotMode) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule());
-        item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache));
+        if (isDotMode) {
+            item.setMarker(new CacheMarker(0, (Drawable) MapMarkerUtils.createCacheDotMarker(getResources(), cache)));
+        } else {
+            item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache));
+        }
         return item;
     }
 
-    private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
+    private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint, final boolean isDotMode) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
-        item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint));
+        if (isDotMode) {
+            item.setMarker(new CacheMarker(0, (Drawable) MapMarkerUtils.createWaypointDotMarker(getResources(), waypoint)));
+        } else {
+            item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint));
+        }
         return item;
     }
 
