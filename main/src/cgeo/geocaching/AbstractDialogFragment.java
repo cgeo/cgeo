@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
@@ -221,7 +222,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             if (findsCount > 0) {
                 details.add(R.string.cache_favorite, res.getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
             } else {
-                details.add(R.string.cache_favorite, res.getString(R.string.favorite_count, favCount));
+                if (!(cache.getType().isEvent())) {
+                    details.add(R.string.cache_favorite, res.getString(R.string.favorite_count, favCount));
+                }
             }
         }
 
