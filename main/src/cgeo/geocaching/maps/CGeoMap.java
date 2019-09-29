@@ -1075,11 +1075,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.repaintRequired();
 
-                            /*
                             if (map.proximityNotification != null) {
-                                map.proximityNotification.checkDistance(map.overlayCaches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                                map.proximityNotification.checkDistance(map.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
                             }
-                            */
                         } else if (needsRepaintForHeading) {
                             final float mapBearing = map.mapView.getBearing();
                             map.overlayPositionAndScale.setHeading(currentHeading + mapBearing);
@@ -1727,6 +1725,25 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         progress.dismiss();
+    }
+
+    public int getClosestDistanceInM(final Geopoint coord) {
+        int minDistance = 50000000;
+        // check caches
+        for (final Geocache item : caches) {
+            final int distance = (int) (1000 * coord.distanceTo(item.getCoords()));
+            if (distance > 0) {
+                minDistance = Math.min(minDistance, distance);
+            }
+        }
+        // check waypoints
+        for (final Waypoint item : waypoints) {
+            final int distance = (int) (1000 * coord.distanceTo(item.getCoords()));
+            if (distance > 0) {
+                minDistance = Math.min(minDistance, distance);
+            }
+        }
+        return minDistance;
     }
 
     private class RequestDetailsThread extends Thread {
