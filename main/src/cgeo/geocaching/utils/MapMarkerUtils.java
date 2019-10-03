@@ -12,8 +12,6 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.NonNull;
@@ -153,8 +151,7 @@ public final class MapMarkerUtils {
         };
         final LayerDrawable drawable = new LayerDrawable(layers);
 
-        final Bitmap bitmap = ((BitmapDrawable) marker).getBitmap();
-        final int[] insetPadding = insetHelper(bitmap.getWidth(), bitmap.getHeight(), ((BitmapDrawable) inset).getBitmap(), VERTICAL.CENTER, HORIZONTAL.CENTER);
+        final int[] insetPadding = insetHelper(marker.getIntrinsicWidth(), marker.getIntrinsicHeight(), inset, VERTICAL.CENTER, HORIZONTAL.CENTER);
         drawable.setLayerInset(1, insetPadding[0], insetPadding[1], insetPadding[2], insetPadding[3]);
         return drawable;
     }
@@ -184,10 +181,10 @@ public final class MapMarkerUtils {
         }
     }
 
-    private static int[] insetHelper(final int width, final int height, final Bitmap b, final VERTICAL vPos, final HORIZONTAL hPos) {
+    private static int[] insetHelper(final int width, final int height, final Drawable b, final VERTICAL vPos, final HORIZONTAL hPos) {
         final int[] insetPadding = { 0, 0, 0, 0 }; // left, top, right, bottom padding for inset
-        final int iWidth = b.getWidth();
-        final int iHeight = b.getHeight();
+        final int iWidth = b.getIntrinsicWidth();
+        final int iHeight = b.getIntrinsicHeight();
 
         // vertical offset from bottom:
         final int vDelta = height / 10;
@@ -233,9 +230,8 @@ public final class MapMarkerUtils {
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
 
         // get actual layer size in px
-        final Bitmap bitmap = ((BitmapDrawable) marker).getBitmap();
-        final int width = bitmap.getWidth();
-        final int height = bitmap.getHeight();
+        final int width = marker.getIntrinsicWidth();
+        final int height = marker.getIntrinsicHeight();
 
         // Show the background circle only on map
         if (showBackground(cacheListType)) {
@@ -250,55 +246,55 @@ public final class MapMarkerUtils {
         // cache type
         Drawable inset = Compatibility.getDrawable(res, cache.getType().markerId);
         layers.add(inset);
-        insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.CENTER, HORIZONTAL.CENTER));
+        insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.CENTER));
         // own
         if (cache.isOwner()) {
             inset = Compatibility.getDrawable(res, R.drawable.marker_own);
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.TOP, HORIZONTAL.RIGHT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.RIGHT));
             // if not, checked if stored
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             inset = Compatibility.getDrawable(res, R.drawable.marker_stored);
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.TOP, HORIZONTAL.RIGHT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.RIGHT));
         }
         // found
         if (cache.isFound()) {
             inset = Compatibility.getDrawable(res, R.drawable.marker_found);
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.TOP, HORIZONTAL.LEFT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
             // if not, perhaps logged offline
         } else if (cache.isLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
             inset = Compatibility.getDrawable(res, offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay());
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.TOP, HORIZONTAL.LEFT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
         }
         // user modified coords
         if (showUserModifiedCoords(cache)) {
             inset = Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords);
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.BOTTOM, HORIZONTAL.RIGHT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.BOTTOM, HORIZONTAL.RIGHT));
         }
         // personal note
         if (cache.getPersonalNote() != null) {
             inset = Compatibility.getDrawable(res, R.drawable.marker_personalnote);
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.BOTTOM, HORIZONTAL.LEFT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.BOTTOM, HORIZONTAL.LEFT));
         }
         // assigned lists with markers
         int markerId = assignedMarkers & ListMarker.BITMASK;
         if (markerId > 0) {
             inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.CENTER, HORIZONTAL.LEFT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.LEFT));
         }
 
         markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
         if (markerId > 0) {
             inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
             layers.add(inset);
-            insets.add(insetHelper(width, height, ((BitmapDrawable) inset).getBitmap(), VERTICAL.CENTER, HORIZONTAL.RIGHT));
+            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.RIGHT));
         }
 
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
