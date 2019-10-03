@@ -18,7 +18,7 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     buildToolsVersion "28.0.3"
 
@@ -239,6 +239,10 @@ android {
         }
         // debug and release builds have offset zero, no special handling here
     }
+
+    // tests rely on JUnit-based classes
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
 }
 
 dependencies {
