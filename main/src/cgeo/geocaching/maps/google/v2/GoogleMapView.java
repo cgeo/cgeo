@@ -283,14 +283,17 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
         @Override
         public boolean onSingleTapUp(final MotionEvent e) {
-            final Point p = new Point((int) e.getX(), (int) e.getY());
-            final LatLng latLng = googleMap.getProjection().fromScreenLocation(p);
-            if (latLng != null && onCacheTapListener != null) {
-                final GoogleCacheOverlayItem closest = closest(new Geopoint(latLng.latitude, latLng.longitude));
-                if (closest != null) {
-                    final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
-                    if (insideCachePointDrawable(p, waypointPoint, closest.getMarker(0).getDrawable())) {
-                        onCacheTapListener.onCacheTap(closest.getCoord());
+            // is map already initialized?
+            if (googleMap != null) {
+                final Point p = new Point((int) e.getX(), (int) e.getY());
+                final LatLng latLng = googleMap.getProjection().fromScreenLocation(p);
+                if (latLng != null && onCacheTapListener != null) {
+                    final GoogleCacheOverlayItem closest = closest(new Geopoint(latLng.latitude, latLng.longitude));
+                    if (closest != null) {
+                        final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
+                        if (insideCachePointDrawable(p, waypointPoint, closest.getMarker(0).getDrawable())) {
+                            onCacheTapListener.onCacheTap(closest.getCoord());
+                        }
                     }
                 }
             }
