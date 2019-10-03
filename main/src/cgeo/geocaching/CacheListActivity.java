@@ -43,6 +43,7 @@ import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
+import cgeo.geocaching.loaders.NullGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
@@ -1991,12 +1992,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 break;
             case MAP:
-                //TODO Build Null loader
                 title = res.getString(R.string.map_map);
                 markerId = ListMarker.NO_MARKER.markerId;
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
+                loader = new NullGeocacheListLoader(this, search);
                 break;
             case NEXT_PAGE:
                 loader = new NextPageGeocacheListLoader(this, search);
