@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Beta version:</b>\n
+    <b>2019.10.05:</b>\n
     · New: Backup for app settings\n
     · New: Remember setting for distance circles on map\n
     · New: Move offline related settings to offline data setting menu\n
