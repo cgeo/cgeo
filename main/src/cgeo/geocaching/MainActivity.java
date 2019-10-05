@@ -93,6 +93,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.nav_location) protected TextView navLocation;
     @BindView(R.id.offline_count) protected TextView countBubble;
     @BindView(R.id.info_area) protected ListView infoArea;
+    @BindView(R.id.info_notloggedin) protected TextView notLoggedIn;
 
     /**
      * view of the action bar search
@@ -147,6 +148,7 @@ public class MainActivity extends AbstractActionBarActivity {
                                 userInfo.append(" (").append(conn.getCachesFound()).append(')');
                             }
                             userInfo.append(Formatter.SEPARATOR);
+                            activity.notLoggedIn.setVisibility(View.INVISIBLE);
                         }
                         userInfo.append(conn.getLoginStatusString());
 
