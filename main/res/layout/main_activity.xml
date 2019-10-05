@@ -20,6 +20,22 @@
         tools:layout="@layout/status" />
     <!-- ** -->
 
+    <TextView
+        android:id="@+id/info_notloggedin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/helper_bcg"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/status"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip"
+        android:padding="4dip"
+        android:gravity="center"
+        android:textColor="@color/text_icon"
+        android:textIsSelectable="false"
+        android:textSize="14sp"
+        android:text="@string/warn_notloggedin" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
