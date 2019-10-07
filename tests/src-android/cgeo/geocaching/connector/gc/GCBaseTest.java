@@ -23,6 +23,10 @@ public class GCBaseTest extends TestCase {
         final SearchResult result = GCMap.searchByGeocodes(geocodes);
         final Geocache parsedCache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
 
+        // enable here if cache is disabled (see #7886)
+        if (parsedCache.isDisabled()) {
+            parsedCache.setDisabled(false);
+        }
         Compare.assertCompareCaches(mockedCache, parsedCache, false);
     }
 
