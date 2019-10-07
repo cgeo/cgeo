@@ -305,9 +305,9 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 final Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
 
                 // enable here if cache is disabled (see #7886)
-                if (parsedCache.isDisabled()) {
+                /* if (parsedCache.isDisabled()) {
                     parsedCache.setDisabled(false);
-                }
+                } */
                 Compare.assertCompareCaches(mockedCache, parsedCache, true);
             } finally {
                 mockedCache.setMockedDataUser(oldUser);
