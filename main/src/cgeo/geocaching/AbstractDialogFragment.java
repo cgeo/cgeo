@@ -220,8 +220,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             final int findsCount = cache.getFindsCount();
             if (findsCount > 0) {
                 details.add(R.string.cache_favorite, res.getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
-            }
-            else if (!cache.isEventCache()) {
+            } else if (!cache.isEventCache()) {
                 details.add(R.string.cache_favorite, res.getString(R.string.favorite_count, favCount));
             }
         }
