@@ -95,7 +95,9 @@ public class SharedPrefsBackupUtils extends Activity {
         }
 
         try {
-            final FileOutputStream file = new FileOutputStream (getSettingsFile());
+            final File backupfn = getSettingsFile();
+            FileUtils.mkdirs(backupfn.getParentFile());
+            final FileOutputStream file = new FileOutputStream (backupfn);
             final XmlSerializer xmlSerializer = Xml.newSerializer();
             final StringWriter writer = new StringWriter();
             xmlSerializer.setOutput(writer);
@@ -138,7 +140,7 @@ public class SharedPrefsBackupUtils extends Activity {
             final String dataWrite = writer.toString();
             file.write(dataWrite.getBytes());
             file.close();
-            Dialogs.message(activityContext, fullBackup ? R.string.init_backup_settings_backup_full : R.string.init_backup_settings_backup_light, activityContext.getString(R.string.settings_saved) + "\n" + getSettingsFile());
+            Dialogs.message(activityContext, fullBackup ? R.string.init_backup_settings_backup_full : R.string.init_backup_settings_backup_light, activityContext.getString(R.string.settings_saved) + "\n" + backupfn);
         } catch (IllegalArgumentException | IllegalStateException | IOException e) {
             final String error = e.getMessage();
             if (null != error) {
