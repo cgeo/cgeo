@@ -255,6 +255,10 @@ public final class LocalStorage {
         return externalPublicCgeoDirectory;
     }
 
+    public static void resetExternalPublicCgeoDirectory() {
+        externalPublicCgeoDirectory = null;
+    }
+
     @NonNull
     public static File getFieldNotesDirectory() {
         return new File(getExternalPublicCgeoDirectory(), FIELD_NOTES_DIR_NAME);
