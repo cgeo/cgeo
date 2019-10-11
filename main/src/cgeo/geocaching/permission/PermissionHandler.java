@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import cgeo.geocaching.storage.LocalStorage;
+
 public class PermissionHandler {
 
     private static HashMap<PermissionKey, List<PermissionGrantedCallback>> callbackRegistry = new HashMap<>();
@@ -65,6 +67,14 @@ public class PermissionHandler {
             }
             if (!callbackHasAlreadyBeenRegistered) {
                 callbackRegistry.get(pk).add(requestContext);
+
+                final PermissionGrantedCallback pgc = new PermissionGrantedCallback(requestContext.getContext()) {
+                    @Override
+                    protected void execute() {
+                        LocalStorage.resetExternalPublicCgeoDirectory();
+                    }
+                };
+                callbackRegistry.get(pk).add(pgc);
             }
         } else {
             requestContext.execute();
