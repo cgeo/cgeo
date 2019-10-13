@@ -12,5 +12,8 @@ public abstract class PermissionGrantedCallback {
     public int getRequestCode() {
         return request.getRequestCode();
     }
-    public PermissionRequestContext getContext() { return request; }
+
+    public PermissionRequestContext getContext() {
+        return request;
+    }
 }
