@@ -44,6 +44,7 @@ public class GooglePositionAndHistory implements PositionAndHistory {
     private GoogleMapObjects positionObjs;
     private GoogleMapObjects historyObjs;
     private GoogleMapView mapView;
+    private final int trailColor;
 
     private static Bitmap locationIcon;
 
@@ -52,6 +53,7 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         positionObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
+        trailColor = Settings.getTrailColor();
     }
 
     @Override
@@ -202,7 +204,7 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         // history line shadow
         historyObjs.addPolyline(new PolylineOptions()
                 .addAll(points)
-                .color(0x000000 | ((int) (alpha * 0x66) << 24))
+                .color(trailColor)
                 .width(7)
                 .zIndex(ZINDEX_HISTORY_SHADOW)
         );
