@@ -70,7 +70,7 @@ public class HistoryLayer extends Layer {
             if (size > 1) {
                 final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-                final Location prev = paintHistory.get(0);
+                Location prev = paintHistory.get(0);
                 Point pointPrevious = MercatorProjection.getPixelRelative(new LatLong(prev.getLatitude(), prev.getLongitude()), mapSize, topLeftPoint);
 
                 for (int cnt = 1; cnt < size; cnt++) {
@@ -83,6 +83,7 @@ public class HistoryLayer extends Layer {
                         canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLine);
                     }
 
+                    prev = now;
                     pointPrevious = pointNow;
                 }
             }
