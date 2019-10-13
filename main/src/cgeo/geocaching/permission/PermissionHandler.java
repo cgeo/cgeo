@@ -1,5 +1,7 @@
 package cgeo.geocaching.permission;
 
+import cgeo.geocaching.storage.LocalStorage;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import cgeo.geocaching.storage.LocalStorage;
 
 public class PermissionHandler {
 
