@@ -248,6 +248,7 @@
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
+    <string name="warn_notloggedin">Nicht angemeldet. Die Live-Karte wird nur lokal gespeicherte Caches anzeigen.</string>
     <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
@@ -354,6 +355,9 @@
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_upload_modifiedcoords_warning">Möchten Sie modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
+    <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Lade alle Koordinaten hoch</string>
+    <string name="caches_upload_allcoords_warning">Dies wird auf dem Server die Koordinaten für alle (ausgewählten) Caches Deiner Liste mit den aktuellen Listingkoordinaten von c:geo überschreiben! Dies wird nur in seltenen Fällen benötigt, beispielsweise nach dem Import einer GPX-Datei, in der geänderte Koordinaten als Listingkoordinaten hinterlegt sind. Diese Funktion kann nicht rückgängig gemacht werden - Du solltest sie nur anwenden, wenn Du weißt, was Du tust. Normalerweise verwende lieber die Funktion \"Geänderte Koordinaten hochladen\" im gleichen Menü.</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -384,12 +388,17 @@
     <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
     <string name="caches_filter_multi_listing">Mehrfach gelistet mit unterschiedlichem Status</string>
     <string name="caches_filter_own_waypoint">Mit eigenen Wegpunkten</string>
+    <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
+    <string name="caches_filter_lists">Einer Liste zugewiesen</string>
     <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
-    <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
+    <string name="caches_set_listmarker">Setze Listenmarkierung</string>
+    <string name="caches_listmarker_none">Keine Markierung</string>
+    <string name="caches_listmarker_marker">Markierung %d</string>
+    <string name="caches_listmarker_selected">(ausgewählt)</string>
     <!-- caches lists -->
     <string name="menu_lists">Listen verwalten</string>
     <string name="list_menu_create">Neue Liste</string>
@@ -446,9 +455,9 @@
     <string name="about_contributors_other">Mitwirkende vor 2018</string>
     <string name="about_components">Komponenten</string>
     <string name="contribution_code">Code</string>
-    <string name="contribution_tester">tester</string>
+    <string name="contribution_tester">Tester</string>
     <string name="contribution_support">Support</string>
-    <string name="contribution_documentation">Handbuch</string>
+    <string name="contribution_documentation">Dokumentation</string>
     <string name="contribution_projectleader">Open Source Projektleiter</string>
     <string name="contribution_graphics">Grafiken</string>
     <!-- settings -->
@@ -596,8 +605,11 @@
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
+    <string name="init_listdisplay">Zeige zusätzliche Listen in der Cacheliste an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
+
+    <!-- backup / restore -->
     <string name="init_backup">Sicherung</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
@@ -610,11 +622,28 @@
     <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
     <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
+    <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Backupdatei fehlerhaft, Datenbank musste neu erstellt werden.</string>
     <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar vom</string>
     <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
+
+    <string name="settings_title_backup">Sicherung / Wiederherstellung</string>
+    <string name="settings_summary_backup">Sicherung und Wiederherstellung von Caches, Wegpunkten und Programmeinstellungen durchführen.</string>
+    <string name="init_backup_settings">Sichere Programmeinstellungen</string>
+    <string name="init_backup_settings_backup_light">Sichere Programmeinstellungen (ohne Zugangsdaten)</string>
+    <string name="init_backup_settings_backup_full">Sichere Programmeinstellungen (vollständig)</string>
+    <string name="init_backup_settings_backup_full_confirm">Möchtest Du vertrauliche Zugangsdaten speichern? Sie können durch andere Anwendungen gelesen werden.</string>
+    <string name="settings_savingerror">Fehler beim Speichern der Programmeinstellungen</string>
+    <string name="settings_saved">Programmeinstellungen erfolgreich gespeichert unter:</string>
+    <string name="init_backup_settings_restore">Programmeinstellungen wiederherstellen</string>
+    <string name="init_backup_settings_restore_confirm">Möchtest Du Deine aktuellen Programmeinstellungen überschreiben?</string>
+    <string name="init_backup_settings_restore_no">Keine Sicherung der Programmeinstellungen verfügbar</string>
+    <string name="settings_readingerror">Fehler beim Lesen der Programmeinstellungen</string>
+    <string name="settings_restored">Programmeinstellungen wiederhergestellt</string>
+    <string name="settings_restart">c:geo muss neu gestartet werden, um die geladenen Einstellungen zu aktivieren</string>
+
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
     <string name="settings_info_themes_title">Info zu Karten-Themes</string>
@@ -926,6 +955,7 @@
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
+    <string name="cache_stored">Gespeichert</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
@@ -937,6 +967,14 @@
     <string name="cache_status_not_premium">Für alle Mitglieder</string>
     <string name="cache_status_stored">Gespeichert</string>
     <string name="cache_status_not_stored">Nicht gespeichert</string>
+    <string name="cache_status_stored_lasteighthours">max. acht Stunden</string>
+    <string name="cache_status_stored_lasttwentyfourhours">max. 24 Stunden</string>
+    <string name="cache_status_stored_lastsevendays">max. sieben Tage</string>
+    <string name="cache_status_stored_lastthirtydays">max. 30 Tage</string>
+    <string name="cache_status_stored_morethaneighthours">mind. acht Stunden</string>
+    <string name="cache_status_stored_morethantwentyfourhours">mind. 24 Stunden</string>
+    <string name="cache_status_stored_morethansevendays">mind. sieben Tage</string>
+    <string name="cache_status_stored_morethanthirtydays">mind. 30 Tage</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
     <string name="cache_type">Typ</string>
@@ -1031,6 +1069,8 @@
     <string name="waypoint_note">Notiz</string>
     <string name="waypoint_user_note">Eigene Notiz</string>
     <string name="waypoint_visited">Besucht</string>
+    <string name="waypoint_set_visited">Wegpunkt auf \"besucht\" gesetzt</string>
+    <string name="waypoint_unset_visited">Wegpunkt auf \"nicht besucht\" gesetzt</string>
     <string name="waypoint_save">Speichern</string>
     <string name="waypoint_cancel_edit">Abbrechen</string>
     <string name="waypoint_loading">Lade Wegpunkt…</string>
@@ -1602,8 +1642,15 @@
     <string name="ask_again">Erneut nachfragen</string>
     <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät, um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
+    <string name="storage_permission_needed">Diese Funktion kann ohne Berechtigung zum Speichern nicht verwendet werden.</string>
     <!-- colors -->
     <string name="color_blue">Blau</string>
     <string name="color_green">Grün</string>
     <string name="color_grey">Grau</string>
+
+    <!-- number input -->
+    <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
+    <string name="number_input_err_boundarymin">Eingegebener Wert ist zu klein - zurückgesetzt auf Minimum</string>
+    <string name="number_input_err_boundarymax">Eingegebener Wert ist zu groß - zurückgesetzt auf Maximum</string>
+    <string name="number_input_err_format">Invalid number format</string>
 </resources>
