@@ -33,6 +33,10 @@ public class GooglePositionAndHistory implements PositionAndHistory {
     public static final float ZINDEX_HISTORY = 2;
     public static final float ZINDEX_HISTORY_SHADOW = 1;
 
+    /**
+     * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
+     */
+    private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
 
     private Location coordinates;
     private float heading;
@@ -173,41 +177,50 @@ public class GooglePositionAndHistory implements PositionAndHistory {
 
     private synchronized void drawHistory() {
         historyObjs.removeAll();
-        final List<Location> history = getHistory();
-        if (history.isEmpty()) {
+
+        // always add current position to drawn history to have a closed connection
+        final ArrayList<Location> paintHistory = getHistory();
+        paintHistory.add(coordinates);
+
+        final int size = paintHistory.size();
+        if (size == 1) {
             return;
         }
 
-        final int size = history.size();
+        Location prev = paintHistory.get(0);
+        int current = 1;
+        while (current < size) {
+            final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
+            points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
 
-        final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
+            boolean paint = false;
+            while (!paint && current < size) {
+                final Location now = paintHistory.get(current);
+                current++;
+                if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                    points.add(new LatLng(now.getLatitude(), now.getLongitude()));
+                } else {
+                    paint = true;
+                }
+                prev = now;
+            }
+            if (points.size() > 1) {
+                // history line
+                historyObjs.addPolyline(new PolylineOptions()
+                    .addAll(points)
+                    .color(0xFFFFFFFF)
+                    .width(3)
+                    .zIndex(ZINDEX_HISTORY)
+                );
 
-        for (int i = 1; i < size; i++) {
-            final Location loc = history.get(i);
-            points.add(new LatLng(loc.getLatitude(), loc.getLongitude()));
+                // history line shadow
+                historyObjs.addPolyline(new PolylineOptions()
+                    .addAll(points)
+                    .color(trailColor)
+                    .width(7)
+                    .zIndex(ZINDEX_HISTORY_SHADOW)
+                );
+            }
         }
-
-        if (coordinates != null) {
-            points.add(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()));
-        }
-
-        final float alpha = 1; // TODO
-
-        // history line
-        historyObjs.addPolyline(new PolylineOptions()
-                .addAll(points)
-                .color(0xFFFFFF | ((int) (alpha * 0xff) << 24))
-                .width(3)
-                .zIndex(ZINDEX_HISTORY)
-        );
-
-        // history line shadow
-        historyObjs.addPolyline(new PolylineOptions()
-                .addAll(points)
-                .color(trailColor)
-                .width(7)
-                .zIndex(ZINDEX_HISTORY_SHADOW)
-        );
-
     }
 }
