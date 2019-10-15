@@ -248,7 +248,7 @@
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
-    <string name="warn_notloggedin">Nicht angemeldet. Die Live-Karte wird nur lokal gespeicherte Caches anzeigen.</string>
+    <string name="warn_notloggedin">Nicht angemeldet. Die Live-Karte wird nur lokal gespeicherte Caches anzeigen und Onlinefunktionen werden nicht funktionieren.\n Entweder steht kein Netz zur Verfügung, es gibt ein Serverproblem, oder Du musst erst einen Service konfigurieren, indem Du auf diese Nachricht tippst.</string>
     <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>

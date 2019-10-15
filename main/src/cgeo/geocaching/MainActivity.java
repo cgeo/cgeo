@@ -285,6 +285,8 @@ public class MainActivity extends AbstractActionBarActivity {
         }
 
         confirmDebug();
+
+        notLoggedIn.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this));
     }
 
     @Override
