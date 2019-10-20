@@ -538,7 +538,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public List<LogType> getPossibleLogTypes(final Geocache geocache) {
+    @NonNull
+    public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> result = super.getPossibleLogTypes(geocache);
         // since May 2017 finding own caches is not allowed (except for events)
         if (geocache.isOwner()) {

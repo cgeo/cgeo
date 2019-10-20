@@ -2,6 +2,9 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.R;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import org.apache.commons.lang3.StringUtils;
 
 public final class OCDEConnector extends OCApiLiveConnector {
@@ -18,7 +21,8 @@ public final class OCDEConnector extends OCApiLiveConnector {
     }
 
     @Override
-    public String getGeocodeFromUrl(final String url) {
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
         for (final String mappedDomain : MAPPED_DOMAINS) {
             if (StringUtils.containsIgnoreCase(url, mappedDomain)) {
                 // replace the country specific URL to not confuse the OKAPI interface

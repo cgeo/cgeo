@@ -35,6 +35,7 @@ import java.util.List;
 
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jetbrains.annotations.NotNull;
 
 class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
 
@@ -67,7 +68,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public void onLoadFinished(final Loader<String> arg0, final String page) {
+    public void onLoadFinished(@NotNull final Loader<String> arg0, final String page) {
         if (page == null) {
             hasLoaderError = true;
         } else {
@@ -118,7 +119,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public void onLoaderReset(final Loader<String> arg0) {
+    public void onLoaderReset(@NotNull final Loader<String> arg0) {
         // nothing to do
     }
 

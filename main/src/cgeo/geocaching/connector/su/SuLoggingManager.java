@@ -25,6 +25,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SuLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
 
     @NonNull
@@ -75,18 +77,19 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
     }
 
     @Override
+    @NotNull
     public Loader<String> onCreateLoader(final int id, final Bundle args) {
         activity.onLoadStarted();
         return new SuLoggingLoader(activity.getBaseContext());
     }
 
     @Override
-    public void onLoadFinished(final Loader<String> loader, final String data) {
+    public void onLoadFinished(@NotNull final Loader<String> loader, final String data) {
         activity.onLoadFinished();
     }
 
     @Override
-    public void onLoaderReset(final Loader<String> loader) {
+    public void onLoaderReset(@NotNull final Loader<String> loader) {
         // nothing to do
     }
 

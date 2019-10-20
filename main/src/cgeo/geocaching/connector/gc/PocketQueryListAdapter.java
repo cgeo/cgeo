@@ -41,6 +41,7 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pocketquery_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
