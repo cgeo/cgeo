@@ -3,8 +3,8 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Beta version:</b>\n
-    · New: Set targetSDK to 28 to comply with upcoming Play Store requirements.\n
-    · New: Updated Google Maps API to v2\n
+    · New: Set targetSDK to 28 to comply with upcoming Play Store requirements\n
+    · New: Updated Google Maps API to v2 and enable Google Maps again for Android 10\n
     \n
     Please report any issues at our <a href="https://github.com/cgeo/cgeo/issues">Github bugtracker</a> or via Google Play beta feedback function.\n
     \n
