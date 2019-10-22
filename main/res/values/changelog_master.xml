@@ -2,13 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-<b>Nightly version:</b>\n
-· New: Set targetSDK to 28 to comply with upcoming Play Store requirements.\n
-· Please add project \"targetSDK28\" when reporting any issues at \"https://github.com/cgeo/cgeo/issues\".\n
-· Known issues for targetSDK28 can be found at \"https://github.com/cgeo/cgeo/projects/10\".\n 
-\n 
-· New: Updated Google Maps API to v2.\n
-· Please add project \"Google Maps V2\" when reporting any issues at \"https://github.com/cgeo/cgeo/issues\".\n
-· Known issues for Google Maps v2 can be found at \"https://github.com/cgeo/cgeo/projects/8\".\n 
   </string>
 </resources>
