@@ -151,4 +151,23 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return geocodeFromId(newId);
     }
 
+    /**
+     * ask cache name and create new cache if entered
+     */
+    public static void interactiveCreateCache(final Context context, final Geopoint geopoint) {
+        final EditText editText = new EditText(context);
+        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        editText.setText("");
+
+        new AlertDialog.Builder(context)
+            .setTitle("Create new cache")
+            .setView(editText)
+            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                final String geocode = InternalConnector.createCache(editText.getText().toString(), geopoint);
+                CacheDetailActivity.startActivity(context, geocode);
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
+            .show()
+        ;
+    }
 }
