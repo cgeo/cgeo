@@ -78,6 +78,12 @@ public interface IConnector {
     ILoggingManager getLoggingManager(@NonNull LogCacheActivity activity, @NonNull Geocache cache);
 
     /**
+     * enable/disable changing the name of a cache
+     *
+     */
+    boolean supportsNamechange();
+
+    /**
      * Get host name of the connector server for dynamic loading of data.
      *
      */

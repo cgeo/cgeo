@@ -753,6 +753,10 @@ public class Geocache implements IWaypoint {
         return getConnector() instanceof ISearchByCenter;
     }
 
+    public boolean supportsNamechange() {
+        return getConnector().supportsNamechange();
+    }
+
     public void shareCache(@NonNull final Activity fromActivity, final Resources res) {
         final Intent intent = getShareIntent();
 
