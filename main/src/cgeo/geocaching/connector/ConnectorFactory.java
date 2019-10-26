@@ -13,6 +13,7 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.ge.GeopeitusConnector;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
@@ -77,6 +78,7 @@ public final class ConnectorFactory {
             new TerraCachingConnector(),
             new WaymarkingConnector(),
             SuConnector.getInstance(),
+            new InternalConnector(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     ));
 

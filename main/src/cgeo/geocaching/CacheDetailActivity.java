@@ -107,6 +107,7 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
+import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -129,6 +130,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -137,6 +139,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -1073,10 +1076,32 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             detailsList = ButterKnife.findById(view, R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
 
-            // cache name (full name)
+            // cache name (full name), may be editable
             final SpannableString span = TextUtils.coloredCacheText(cache, cache.getName());
+            final TextView cachename = details.add(R.string.cache_name, span).right;
+            addContextMenu(cachename);
+            if (cache.supportsNamechange()) {
+                cachename.setOnClickListener(v -> {
+                    Context context = parentView.getContext();
+                    final EditText editText = new EditText(context);
+                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                    editText.setText(cache.getName());
 
-            addContextMenu(details.add(R.string.cache_name, span).right);
+                    new AlertDialog.Builder(context)
+                        .setTitle("set cache title")
+                        .setView(editText)
+                        .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                            cachename.setText(editText.getText().toString());
+                            cache.setName(editText.getText().toString());
+                            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                            Toast.makeText(context, "Cachename updated", Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
+                        .show()
+                    ;
+                });
+            }
+
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
             addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()).right);

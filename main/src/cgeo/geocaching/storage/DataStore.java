@@ -1090,6 +1090,10 @@ public class DataStore {
         }
     }
 
+    public static synchronized long incSequenceInternalCache () {
+        return incSequence(SEQUENCE_INTERNAL_CACHE, 1000);
+    }
+
     /**
      * Remove obsolete cache directories in c:geo private storage.
      */
