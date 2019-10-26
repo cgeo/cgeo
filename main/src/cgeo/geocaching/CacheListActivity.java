@@ -19,6 +19,7 @@ import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -983,6 +984,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_delete_events:
                 deletePastEvents();
                 invalidateOptionsMenuCompatible();
+                return true;
+            case R.id.menu_create_internal_cache:
+                InternalConnector.interactiveCreateCache(this, coords, StoredList.getConcreteList(listId));
                 return true;
             case R.id.menu_clear_offline_logs:
                 clearOfflineLogs();

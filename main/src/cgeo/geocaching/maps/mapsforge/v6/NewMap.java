@@ -944,7 +944,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (cache != null) {
             EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
         } else {
-            InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+            InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
         }
     }
 

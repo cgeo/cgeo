@@ -1082,19 +1082,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             addContextMenu(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> {
-                    Context context = parentView.getContext();
+                    final Context context = parentView.getContext();
                     final EditText editText = new EditText(context);
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
                     editText.setText(cache.getName());
 
                     new AlertDialog.Builder(context)
-                        .setTitle("set cache title")
+                        .setTitle(R.string.cache_name_set)
                         .setView(editText)
                         .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
                             cachename.setText(editText.getText().toString());
                             cache.setName(editText.getText().toString());
                             DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                            Toast.makeText(context, "Cachename updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.cache_name_updated, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
                         .show()
