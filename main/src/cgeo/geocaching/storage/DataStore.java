@@ -49,6 +49,7 @@ import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.location.Location;
@@ -191,6 +192,7 @@ public class DataStore {
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
+    @NonNull private static final String dbTableSequences = "sqlite_sequence";
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE " + dbTableCaches + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -356,6 +358,8 @@ public class DataStore {
             + "latitude DOUBLE, "
             + "longitude DOUBLE "
             + "); ";
+
+    private static final String SEQUENCE_INTERNAL_CACHE = "seq_internal_cache";
 
     private DataStore() {
         // utility class
@@ -1037,6 +1041,53 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrackables);
         }
 
+    }
+
+    /**
+     * management of sequences for program internal use
+     * synchronisation in respect of sequence name must be done by calling method
+     *
+     * @param sequence      immutable name of sequence
+     * @return id           next free sequence number reserved for caller
+     */
+    private static long incSequence (final String sequence, final long minValue) {
+        init();
+
+        database.beginTransaction();
+        final SQLiteStatement sequenceSelect = PreparedStatement.SEQUENCE_SELECT.getStatement();
+        sequenceSelect.bindString(1, sequence);
+        try {
+            final long newId = sequenceSelect.simpleQueryForLong() + 1;
+            // sequence identifier already exists in DB => increment
+            try {
+                final SQLiteStatement sequenceUpdate = PreparedStatement.SEQUENCE_UPDATE.getStatement();
+                sequenceUpdate.bindLong(1, newId);
+                sequenceUpdate.bindString(2, sequence);
+                final int test2 = sequenceUpdate.executeUpdateDelete();
+                final long test = sequenceSelect.simpleQueryForLong();
+                database.setTransactionSuccessful();
+                return newId;
+            } catch (SQLiteException e1) {
+                Log.e("could not increment sequence " + sequence);
+                throw new IllegalStateException();
+            }
+        } catch (android.database.sqlite.SQLiteDoneException e) {
+            // sequence identifier not yet in DB => create & set to the minValue given
+            final long newId = minValue;
+            try {
+                final SQLiteStatement sequenceInsert = PreparedStatement.SEQUENCE_INSERT.getStatement();
+                sequenceInsert.bindString(1, sequence);
+                sequenceInsert.bindLong(2, newId);
+                sequenceInsert.executeInsert();
+                database.setTransactionSuccessful();
+                return newId;
+            } catch (SQLiteException e2) {
+                Log.e("could not create sequence " + sequence);
+                throw new IllegalStateException();
+            }
+        } finally {
+            database.endTransaction();
+        }
     }
 
     /**
@@ -3475,7 +3526,10 @@ public class DataStore {
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),
         COUNT_ALL_TYPES_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id = ?"), // See use of COUNT_TYPE_LIST for synchronization
-        CHECK_IF_PRESENT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE geocode = ?");
+        CHECK_IF_PRESENT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE geocode = ?"),
+        SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
+        SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
+        SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
