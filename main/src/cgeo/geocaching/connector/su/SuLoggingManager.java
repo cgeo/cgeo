@@ -75,18 +75,19 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
     }
 
     @Override
+    @NonNull
     public Loader<String> onCreateLoader(final int id, final Bundle args) {
         activity.onLoadStarted();
         return new SuLoggingLoader(activity.getBaseContext());
     }
 
     @Override
-    public void onLoadFinished(final Loader<String> loader, final String data) {
+    public void onLoadFinished(@NonNull final Loader<String> loader, final String data) {
         activity.onLoadFinished();
     }
 
     @Override
-    public void onLoaderReset(final Loader<String> loader) {
+    public void onLoaderReset(@NonNull final Loader<String> loader) {
         // nothing to do
     }
 

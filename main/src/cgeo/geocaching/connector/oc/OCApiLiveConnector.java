@@ -213,12 +213,12 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean canIgnoreCache(final Geocache cache) {
+    public boolean canIgnoreCache(@NonNull final Geocache cache) {
         return true;
     }
 
     @Override
-    public void ignoreCache(final Geocache cache) {
+    public void ignoreCache(@NonNull final Geocache cache) {
         final boolean ignored = OkapiClient.setIgnored(cache, this);
 
         if (ignored) {

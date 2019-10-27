@@ -165,6 +165,7 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     }
 
     @Override
+    @NonNull
     public List<UserAction> getUserActions(final UserAction.UAContext user) {
         final List<UserAction> actions = super.getUserActions(user);
         // caches stored before parsing the UserId will not have the field set, so we must check for correct existence here

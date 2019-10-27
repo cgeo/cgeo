@@ -33,7 +33,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
@@ -67,7 +66,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public void onLoadFinished(final Loader<String> arg0, final String page) {
+    public void onLoadFinished(@NonNull final Loader<String> arg0, final String page) {
         if (page == null) {
             hasLoaderError = true;
         } else {
@@ -118,7 +117,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public void onLoaderReset(final Loader<String> arg0) {
+    public void onLoaderReset(@NonNull final Loader<String> arg0) {
         // nothing to do
     }
 
