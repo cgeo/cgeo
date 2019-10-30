@@ -2,19 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2019.10.05:</b>\n
-    · New: Backup for app settings\n
-    · New: Remember setting for distance circles on map\n
-    · New: Move offline related settings to offline data setting menu\n
-    · New: Show cache name inline with log text in trackable log\n
-    · New: New Locus API version\n
-    · New: Set waypoint to visited on map popup\n
-    · New: Filter lists by membership to other lists\n
-    · New: Filter for stored caches before or within a certain time frame\n
-    · New: Show membership to other lists in cache list\n
-    · New: Rename some gc.com specific cache types (HQ and Block Party)\n
-    · Fix: Have dot markers for compact map icons in better resolution\n
-    · Fix: Owner context menu not working for OC caches\n
+    <b>Beta version:</b>\n
+    · New: Set targetSDK to 28 to comply with upcoming Play Store requirements\n
+    · New: Updated Google Maps API to v2 and enable Google Maps again for Android 10\n
+    \n
+    Please report any issues at our <a href="https://github.com/cgeo/cgeo/issues">Github bugtracker</a> or via Google Play beta feedback function.\n
     \n
     \n
 </string>
