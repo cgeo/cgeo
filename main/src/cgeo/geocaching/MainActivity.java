@@ -93,7 +93,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.nav_location) protected TextView navLocation;
     @BindView(R.id.offline_count) protected TextView countBubble;
     @BindView(R.id.info_area) protected ListView infoArea;
-    @BindView(R.id.info_notloggedin) protected TextView notLoggedIn;
+    @BindView(R.id.info_notloggedin) protected View notLoggedIn;
 
     /**
      * view of the action bar search
@@ -286,7 +286,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         confirmDebug();
 
-        notLoggedIn.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, this));
+        notLoggedIn.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
     }
 
     @Override
