@@ -117,17 +117,25 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return search;
     }
 
-    protected static void assertCacheExists(final long id, @Nullable final String name, @Nullable final String description, @Nullable final Geopoint geopoint, final int listId) {
+    /**
+     * creates a new cache with the given id, if it does not exist yet
+     * @param context       context in which this function gets called
+     * @param id            internal (numeric) id of the cache
+     * @param name          cache's name (or null for default name)
+     * @param description   cache's description (or null for default description)
+     * @param geopoint      cache's current location (or null if none)
+     * @param listId        cache list's id
+     */
+    protected static void assertCacheExists(final Context context, final long id, @Nullable final String name, @Nullable final String description, @Nullable final Geopoint geopoint, final int listId) {
         final String geocode = geocodeFromId(id);
-        // creates a new cache with the given id, if it does not exist yet
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
             final Geocache cache = new Geocache();
             cache.setGeocode(geocode);
-            cache.setName(name == null ? "Internal cache " + id : name);
-            cache.setOwnerDisplayName("You");
-            cache.setDescription(description == null ? "user defined cache" : description);
+            cache.setName(name == null ? String.format(context.getString(R.string.internal_cache_default_name), id) : name);
+            cache.setOwnerDisplayName(context.getString(R.string.internal_cache_default_owner));
+            cache.setDescription(description == null ? context.getString(R.string.internal_cache_default_description) : description);
             cache.setDetailed(true);
-            cache.setType(CacheType.VIRTUAL);
+            cache.setType(CacheType.USER_DEFINED);
             final Set<Integer> lists = new HashSet<>(1);
             lists.add(StoredList.getConcreteList(listId));
             cache.setLists(lists);
@@ -142,17 +150,23 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     /**
      * creates a new cache for the internal connector
-     * @param geopoint      cache's current location
-     * @return String       geocode
+     * @param context       context in which this function gets called
+     * @param name          cache's name (or null for default name)
+     * @param description   cache's description (or null for default description)
+     * @param geopoint      cache's current location (or null if none)
+     * @param listId        cache list's id
+     * @return geocode      geocode of the newly created cache
      */
-    public static String createCache(@Nullable final String name, @Nullable final Geopoint geopoint, final int listId) {
+    public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, @Nullable final Geopoint geopoint, final int listId) {
         final long newId = DataStore.incSequenceInternalCache();
-        assertCacheExists(newId, name == null ? "User defined cache #" + newId : name, "This is a user defined cache", geopoint, listId);
+        assertCacheExists(context, newId, name, description, geopoint, listId);
         return geocodeFromId(newId);
     }
 
     /**
-     * ask cache name and create new cache if entered
+     * asks user for cache name and creates a new cache if name has been entered
+     * @param geopoint      cache's current location (or null if none)
+     * @param listId        cache list's id
      */
     public static void interactiveCreateCache(final Context context, final Geopoint geopoint, final int listId) {
         final EditText editText = new EditText(context);
@@ -163,7 +177,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             .setTitle(R.string.create_internal_cache)
             .setView(editText)
             .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                final String geocode = InternalConnector.createCache(editText.getText().toString(), geopoint, listId);
+                final String geocode = createCache(context, editText.getText().toString(), null, geopoint, listId);
                 CacheDetailActivity.startActivity(context, geocode);
             })
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })

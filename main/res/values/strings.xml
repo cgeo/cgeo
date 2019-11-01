@@ -35,6 +35,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Unknown Type</string>
 
     <!-- cache sizes -->
@@ -1051,6 +1052,9 @@
     <string name="cache_listed_on">Listed on %s</string>
 
     <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
 
     <!-- editor dialog -->
 
