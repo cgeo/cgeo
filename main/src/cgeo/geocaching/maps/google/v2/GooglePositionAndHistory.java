@@ -168,7 +168,7 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         );
 
         final Geopoint destCoords = mapView.getDestinationCoords();
-        if (destCoords != null && Settings.isMapDirection()) {
+        if (destCoords != null) {
             // draw direction line
             positionObjs.addPolyline(getDirectionPolyline(new Geopoint(coordinates), destCoords));
         }
