@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.enumerations.CacheType;
@@ -148,7 +149,7 @@ public class MainActivity extends AbstractActionBarActivity {
                                 userInfo.append(" (").append(conn.getCachesFound()).append(')');
                             }
                             userInfo.append(Formatter.SEPARATOR);
-                            activity.notLoggedIn.setVisibility(View.INVISIBLE);
+                            activity.checkLoggedIn();
                         }
                         userInfo.append(conn.getLoginStatusString());
 
@@ -171,6 +172,21 @@ public class MainActivity extends AbstractActionBarActivity {
                 startBackgroundLogin();
             }
         }
+    }
+
+    /**
+     * check if at least one connector has been logged in successfully
+     * and set visibility of warning message accordingly
+     */
+    public void checkLoggedIn() {
+        final ILogin[] activeConnectors = ConnectorFactory.getActiveLiveConnectors();
+        for (final IConnector conn : activeConnectors) {
+            if (((ILogin) conn).isLoggedIn()) {
+                notLoggedIn.setVisibility(View.INVISIBLE);
+                return;
+            }
+        }
+        notLoggedIn.setVisibility(View.VISIBLE);
     }
 
     private static String formatAddress(final Address address) {
@@ -286,6 +302,9 @@ public class MainActivity extends AbstractActionBarActivity {
 
         confirmDebug();
 
+        // infobox "not logged in" with link to service config; display delayed by 10 seconds
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> checkLoggedIn(), 10000);
         notLoggedIn.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
     }
 

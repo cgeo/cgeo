@@ -145,6 +145,7 @@
         android:layout_marginLeft="16dip"
         android:layout_marginRight="16dip"
         android:layout_marginBottom="16dip"
+        android:visibility="invisible"
         android:padding="4dip" >
 
         <ImageView
