@@ -6,6 +6,7 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -77,7 +78,7 @@ public class WatchdogTest extends CGeoTestCase {
         if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com")) {
             return;
         }
-        
+
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
@@ -97,7 +98,7 @@ public class WatchdogTest extends CGeoTestCase {
     @NotForIntegrationTests
     public static void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
-            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
+            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) && !(connector instanceof InternalConnector)) {
                 checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());
             }
         }
