@@ -697,7 +697,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         /* if we have an Actionbar find the my position toggle */
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
         myLocSwitch = new CheckBox(activity);
-        myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
+        myLocSwitch.setButtonDrawable(
+                AppCompatResources.getDrawable(activity, R.drawable.ic_menu_myposition)
+        );
         item.setActionView(myLocSwitch);
         initMyLocationSwitchButton(myLocSwitch);
         return true;
