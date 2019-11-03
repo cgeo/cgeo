@@ -5,6 +5,10 @@
     <b>Beta version:</b>\n
     · New: Set targetSDK to 28 to comply with upcoming Play Store requirements\n
     · New: Updated Google Maps API to v2 and enable Google Maps again for Android 10\n
+    · New: Show warning on main screen if not logged in\n
+    · New: Extend compact icon mode to Google Maps\n
+    · Fixed: Several issues with the history trail\n
+    · Fixed: Parsing empty waypoint notes used for navigation\n
     \n
     Please report any issues at our <a href="https://github.com/cgeo/cgeo/issues">Github bugtracker</a> or via Google Play beta feedback function.\n
     \n

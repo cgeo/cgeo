@@ -20,22 +20,6 @@
         tools:layout="@layout/status" />
     <!-- ** -->
 
-    <TextView
-        android:id="@+id/info_notloggedin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/helper_bcg"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/status"
-        android:layout_marginLeft="16dip"
-        android:layout_marginRight="16dip"
-        android:padding="4dip"
-        android:gravity="center"
-        android:textColor="@color/text_icon"
-        android:textIsSelectable="false"
-        android:textSize="14sp"
-        android:text="@string/warn_notloggedin" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -151,7 +135,45 @@
     </LinearLayout>
     <!-- ** -->
 
+    <RelativeLayout
+        android:id="@+id/info_notloggedin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/helper_bcg"
+        android:layout_centerVertical="true"
+        android:layout_above="@+id/connector_area"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip"
+        android:layout_marginBottom="16dip"
+        android:visibility="invisible"
+        android:padding="4dip" >
+
+        <ImageView
+            android:id="@+id/info_notloggedin_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dip"
+            android:src="@drawable/ic_menu_info_details"/>
+
+        <TextView
+            android:id="@+id/info_notloggedin_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/info_notloggedin_icon"
+            android:gravity="center"
+            android:textColor="@color/text_icon"
+            android:textIsSelectable="false"
+            android:textSize="14sp"
+            android:text="@string/warn_notloggedin_short" />
+
+    </RelativeLayout>
+    <!-- ** -->
+
     <LinearLayout
+        android:id="@+id/connector_area"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
