@@ -41,11 +41,18 @@ Details for setting up the IDE is described in the wiki (https://github.com/cgeo
 
 - [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs (at least) V26, Google repository and Android support repository. (File => Settings, Appearance & Behaviour => System Settings => Android SDK, Check "Show Package Details" on "SDK Platforms" tab and check subpackages as needed.)
 - If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone.
-- You need to provide several API keys for compiling the app. See next section for details.
+- You need to provide several API keys for compiling the app. See next sections for details.
 
 ### API keys
 
-Copy [`main/templates/keys.xml`](https://github.com/cgeo/cgeo/blob/master/main/templates/keys.xml) to `main/res/values/`. Then edit `main/res/values/keys.xml` and insert several keys (see comments in the file). Most important is the Google Maps API v2 key. You can leave it empty, but then Google Maps doesn't work.
+For the full usability of c:geo you need some API keys - for Google Maps and the opencaching sites.
+You can leave all entries in the configuration empty, but then Google Maps and the Opencaching sitess doesn't work.
+
+For using the Google Maps function it is necessary to have a Google Maps API v2 key. For this follow 
+* [Maps SDK for Android: Get an API Key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
+
+The key itself is free, and you don't have to enter any credit card info, although the web form seems to force you to.
+
 Also to be able to use Google Maps you need to use a Google Api enabled image, so make sure to select the right image for your emulator/device, otherwise Google Maps won't be offered as map provider in c:geo. 
 
 Request your personal API key for the various [OpenCaching](http://www.opencaching.eu/) sites we support. If you leave these blank, then those networks will remain disabled.
@@ -58,12 +65,18 @@ Request your personal API key for the various [OpenCaching](http://www.opencachi
 
 To obtain API key for [geocaching.su](https://geocaching.su) you need to request access from [administration](https://geocaching.su/?pn=1), keys are generated manually on request.
 
-For semi-automatic configuration
+### API keys installation
+
+In c:geo we have a semi-automatic configuration
 1. copy `./templates/private.properties` to `./`
 2. edit `private.properties` with your keys
-3. on the gradle build the `main/res/values/keys.xml` is created and filled with the data from `private.properties`
+3. on the gradle build the `./main/res/values/keys.xml` is created and filled with the data from `private.properties`
 
-If you want to do fill the `keys.xml` by hand copy `main/templates/keys.xml` to `main/res/values/`. Then edit `main/res/values/keys.xml`. For each key, replace the value starting with @ and ending with @ (inclusive) with the key. If a key is missing, remove the value and the leading and trailing @).
+The third point works only if the file `keys.xml` does not exist.
+When changing your API keys you have to delete the `keys.xml` file
+
+If you want to fill the `keys.xml` by hand copy `./main/templates/keys.xml` to `./main/res/values/`. 
+Then edit the copied `keys.xml`. For each key, replace the value starting with @ and ending with @ (inclusive) with the key. If a key is missing, remove the value and the leading and trailing @).
 
 ### Building with gradle
 
