@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo cache</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project ape cache</string>
-    <string name="gchq">Groundspeak hq</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Gps adventures exhibit</string>
-    <string name="block">Groundspeak Block Party</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Niet mogelijk om GeoKrety.org te bereiken. De website kan offline zijn of je internetverbinding werkt niet goed.</string>
     <string name="err_login">Geen login informatie opgeslagen</string>
     <string name="err_login_failed_toast">Sorry, c:geo kan niet inloggen. c:geo werkt in offline modus. Controleer je gebruikersnaam en wachtwoord en/of zet de internetverbinding aan.</string>
-    <string name="err_unknown">Onbekende fout</string>
+    <string name="err_unknown">Onbekende fout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
-    <string name="err_comm">Onbekende communicatiefout</string>
+    <string name="err_comm">Onbekende communicatiefout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld</string>
     <string name="err_wrong">Verkeerde gebruikersnaam en/of wachtwoord</string>
     <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
@@ -248,6 +248,9 @@
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
+    <string name="warn_notloggedin_title">Offline modus</string>
+    <string name="warn_notloggedin_short">Niet ingelogd. Live kaart zal alleen lokaal opgeslagen caches tonen.</string>
+    <string name="warn_notloggedin_long">Nog niet ingelogd. Live-kaart toont alleen de lokaal opgeslagen caches en online functies zullen niet werken.\n\nEr is geen netwerkverbinding, een serverprobleem of het is nodig de geocaching diensten te (her) configureren.\n\nDiensten nu configureren?</string>
     <string name="err_read_pocket_query_list">Fout bij het lezen van de Pocket query lijst.</string>
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
@@ -286,7 +289,7 @@
     <string name="menu_about">Over c:geo</string>
     <string name="menu_helpers">Hulpprogramma\'s</string>
     <string name="menu_settings">Instellingen</string>
-    <string name="menu_backup">Backup</string>
+    <string name="menu_backup">Back-up maken / terugzetten</string>
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
@@ -354,6 +357,9 @@
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
+    <string name="caches_upload_allcoords_dialogtitle">WAARSCHUWING: Alle coördinaten worden geüpload</string>
+    <string name="caches_upload_allcoords_warning">Dit zal de bestaande coördinaten op de server overschrijven voor alle (geselecteerde) caches van je lijst met de huidige coördinaten in c:geo! Dit dient alleen in speciale gevallen te worden gebruikt bijvoorbeeld wanneer je een GPX-bestand importeerde dat gecorrigeerde coördinaten bevat als lijstcoördinaten. Dit kan niet ongedaan worden gemaakt en je dient het alleen te gebruiken als je weet wat je aan het doen bent. In normale gevallen wil je liever de functie \"Upload aangepaste coördinaten\" gebruiken in hetzelfde menu.</string>
     <string name="caches_refresh_selected">Ververs geselecteerden</string>
     <string name="caches_refresh_all">Ververs alle</string>
     <string name="caches_move_selected">Verplaats geselecteerden</string>
@@ -384,12 +390,17 @@
     <string name="caches_filter_own_rating">Met eigen rating</string>
     <string name="caches_filter_multi_listing">Meerdere listings met verschillende status</string>
     <string name="caches_filter_own_waypoint">Met door de gebruiker gedefinieerde waypoints</string>
+    <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
+    <string name="caches_filter_lists">Toegewezen aan een lijst</string>
     <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
-    <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
+    <string name="caches_set_listmarker">Zet lijst marker</string>
+    <string name="caches_listmarker_none">Geen marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(geselecteerd)</string>
     <!-- caches lists -->
     <string name="menu_lists">Lijsten beheren</string>
     <string name="list_menu_create">Maak nieuwe lijst</string>
@@ -479,7 +490,7 @@
     <string name="settings_title_navigation">Navigatie</string>
     <string name="settings_summary_navigation">Kies uw voorkeur voor navigatiemethoden en externe navigatie apps.</string>
     <string name="settings_title_system">Systeem</string>
-    <string name="settings_summary_system">Back-up maken en terugzetten, configureer app mappen en andere systeemspecifieke instellingen.</string>
+    <string name="settings_summary_system">Configureer app mappen en andere systeemspecifieke instellingen.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
@@ -596,12 +607,14 @@
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches</string>
+    <string name="init_listdisplay">Toon extra lijsten in cache lijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon richting tot cache in lijst</string>
-    <string name="init_backup">Backup</string>
+    <!-- backup / restore -->
+    <string name="init_backup">Back-up caches / waypoints</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Backup aan het maken van de cache-database…</string>
-    <string name="init_backup_note">Let op: deze optie zal een backup maken/terugzetten van de database die de caches en de waypoints bevat, en/maar niet de instellingen van de applicatie. Je inloggegevens zullen nooit deze applicatie verlaten.</string>
+    <string name="init_backup_note">Houd er rekening mee dat deze optie alleen een back-up zal maken/terugzetten van de caches en waypoints uit een database maar zal geen cache afbeeldingen of programma-instellingen bevatten.</string>
     <string name="init_backup_restore">Herstel</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
@@ -610,11 +623,26 @@
     <string name="backup_confirm_overwrite">Wil je de bestaande backup van %s overschrijven?</string>
     <string name="restore_confirm_overwrite">Wil je %s op uw apparaat overschrijven met de backup?</string>
     <string name="init_restore_success">Herstellen is gelukt.</string>
+    <string name="init_restore_failed_dbrecreated">Herstellen mislukt: het back-upbestand is beschadigd, de database moest worden hersteld.</string>
     <string name="init_restore_failed">Herstellen is niet gelukt.</string>
     <string name="init_restore_running">Herstellen van de cache database…</string>
     <string name="init_restore_confirm">De database is leeg, wil je een database-backup herstellen?</string>
     <string name="init_backup_last">Backup beschikbaar van</string>
     <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
+    <string name="settings_title_backup">Back-up maken/terugzetten</string>
+    <string name="settings_summary_backup">Back-up maken en terugzetten van cache- en waypoint-gegevens en programma-instellingen.</string>
+    <string name="init_backup_settings">Back-up maken van programma-instellingen</string>
+    <string name="init_backup_settings_backup_light">Back-up maken van instellingen (zonder accountgegevens)</string>
+    <string name="init_backup_settings_backup_full">Back-up instellingen (volledig)</string>
+    <string name="init_backup_settings_backup_full_confirm">Wil je gevoelige account gerelateerde gegevens opslaan? Deze zijn mogelijk leesbaar voor andere applicaties.</string>
+    <string name="settings_savingerror">Fout bij opslaan instellingen</string>
+    <string name="settings_saved">Instellingen succesvol opgeslagen naar:</string>
+    <string name="init_backup_settings_restore">Instellingen terugzetten</string>
+    <string name="init_backup_settings_restore_confirm">Wil je je huidige instellingen overschrijven?</string>
+    <string name="init_backup_settings_restore_no">Er is geen instellingen back-up beschikbaar</string>
+    <string name="settings_readingerror">Fout bij het lezen van de instellingen</string>
+    <string name="settings_restored">Instellingen teruggezet</string>
+    <string name="settings_restart">c:geo dient nu opnieuw gestart te worden om de geladen instellingen uit te voeren</string>
     <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
     <string name="settings_info_offline_maps">c:geo ondersteund kaarten voor offline gebruik. Je kunt deze kaarten downloaden van Mapsforge of zelfs je eigen kaarten maken vanuit openbare OSM data. Hiervoor moet je eerst de offline kaarten map selecteren om offline kaarten te kunnen gebruiken.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
@@ -926,6 +954,7 @@
     <string name="ignore_confirm_title">Wees voorzichtig</string>
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
+    <string name="cache_stored">Opgeslagen</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
@@ -937,6 +966,14 @@
     <string name="cache_status_not_premium">Toegang voor alle leden</string>
     <string name="cache_status_stored">Opgeslagen</string>
     <string name="cache_status_not_stored">Niet opgeslagen</string>
+    <string name="cache_status_stored_lasteighthours">Binnen de afgelopen acht uur</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Binnen de afgelopen 24 uur</string>
+    <string name="cache_status_stored_lastsevendays">Binnen de afgelopen zeven dagen</string>
+    <string name="cache_status_stored_lastthirtydays">Binnen de afgelopen dertig dagen</string>
+    <string name="cache_status_stored_morethaneighthours">Vóór de afgelopen acht uur</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Vóór de afgelopen 24 uur</string>
+    <string name="cache_status_stored_morethansevendays">Vóór de afgelopen zeven dagen</string>
+    <string name="cache_status_stored_morethanthirtydays">Vóór de afgelopen dertig dagen</string>
     <string name="cache_geocode">Geo code</string>
     <string name="cache_name">Naam</string>
     <string name="cache_type">Type</string>
@@ -1031,6 +1068,8 @@
     <string name="waypoint_note">Notitie</string>
     <string name="waypoint_user_note">Gebruikersnotitie</string>
     <string name="waypoint_visited">Bezocht</string>
+    <string name="waypoint_set_visited">Waypoint ingesteld als bezocht</string>
+    <string name="waypoint_unset_visited">Waypoint ingesteld als niet bezocht</string>
     <string name="waypoint_save">Opslaan</string>
     <string name="waypoint_cancel_edit">Annuleren</string>
     <string name="waypoint_loading">Waypoint laden…</string>
@@ -1602,8 +1641,14 @@
     <string name="ask_again">Opnieuw vragen</string>
     <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS op je apparaat om je positie te vinden en afstand en richting te berekenen naar geocaches. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
+    <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
     <string name="color_blue">Blauw</string>
     <string name="color_green">Groen</string>
     <string name="color_grey">Grijs</string>
+    <!-- number input -->
+    <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
+    <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
+    <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
+    <string name="number_input_err_format">Ongeldig numeriek formaat</string>
 </resources>

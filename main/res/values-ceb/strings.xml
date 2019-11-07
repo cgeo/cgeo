@@ -28,10 +28,10 @@
     <string name="wherigo">Ang Cache nga Whereigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Ang Proyekto sa APE Cache</string>
-    <string name="gchq">Ang Groundspeak HQ</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Ang GPS sa mga panimpalad na pagpakita</string>
-    <string name="block">Groundspeak ge-tabunan ang Party</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="unknown">Ang wala mailhi nga klase</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Dili ma kontak ang GeoKrety.org, Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
     <string name="err_login">Walay pagsulod sa impormasyon nga gitipigan</string>
     <string name="err_login_failed_toast">ang c:geo dili makasulod sa c:geo kay nagtrabaho sa offline nga gitipigan sa mga caches. Susihon ang mga setting sa pagsulod ug ang pag-aktibo sa imohang linya sa internet.</string>
-    <string name="err_unknown">Wala nahibaw-i nga sayup</string>
+    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_unknown_address">ang c:geo wala maka aktibo sa mapa para makit-an ang kasamtangan nga lokasyon</string>
-    <string name="err_comm">Ang wala mailhi nga sayup sa komunikasyon</string>
+    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">Walay nabutang nga username ug/o password</string>
     <string name="err_wrong">Sayop nga username ug/o password</string>
     <string name="err_maintenance">Ang Geocaching.com kay nagpaubos alang sa pagmintinar sa c:geo nagtrabaho bisan offline kauban ang gitipigan nga caches.</string>
@@ -248,6 +248,9 @@
     <string name="warn_pocket_query_select">Walay gipili na bulsa na query.</string>
     <string name="warn_no_pocket_query_found">Walay bulsa na query ang nakita online.</string>
     <string name="warn_invalid_character">Ang karakter kinahanglan nga usa ka LETRA o usa ka NUMERO</string>
+    <string name="warn_notloggedin_title">Offline mode</string>
+    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
+    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Nasayop og basa sa Pocket query na lista.</string>
     <string name="info_log_posted">ang c:geo malamposon nga naghatag sa log.</string>
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
@@ -286,7 +289,7 @@
     <string name="menu_about">Ang mahitungod sa c:geo</string>
     <string name="menu_helpers">Ang utility nga mga programa</string>
     <string name="menu_settings">Ang mga setting</string>
-    <string name="menu_backup">Tabang</string>
+    <string name="menu_backup">Backup / restore</string>
     <string name="menu_history">Ang mga niaagi</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">I-scan ang geocode</string>
@@ -354,6 +357,9 @@
     <string name="caches_delete_events">Papason ang miagi na kalilhokan</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
+    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
+    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Bag-ohon ang napili</string>
     <string name="caches_refresh_all">Bag-ohon tanan</string>
     <string name="caches_move_selected">I-isbog and napilian</string>
@@ -384,12 +390,17 @@
     <string name="caches_filter_own_rating">Sa kaugalingong rating</string>
     <string name="caches_filter_multi_listing">Daghang mga listahan nga adunay lain-laing estado</string>
     <string name="caches_filter_own_waypoint">Naay tig-gamit nga pinasabot nga waypoints</string>
+    <string name="caches_filter_missing_gcvote">Nakit-ang mga cache nga wala nabotaran</string>
+    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Pagkuha gikan sa sauna…</string>
     <string name="caches_clear_offlinelogs">Hawani ang offline nga mga log</string>
     <string name="caches_clear_offlinelogs_message">Ganahan ka ba nga hawanan ang mga offline log?</string>
     <string name="caches_clear_offlinelogs_progress">Ang pagwagtang sa mga offline log</string>
     <string name="caches_make_list_unique">Himo-ong walay kapareho ang listahan</string>
-    <string name="caches_filter_missing_gcvote">Nakit-ang mga cache nga wala nabotaran</string>
+    <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_listmarker_none">No marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Ipamuno ang mga listahan</string>
     <string name="list_menu_create">Pagbuhat og bag-ong listahan</string>
@@ -479,7 +490,7 @@
     <string name="settings_title_navigation">Pag-navigate</string>
     <string name="settings_summary_navigation">Pili-a ang nauyonan na nabigasyon na mga pamaagi og pili-on ang gawas sa nabigasyon na mga apps.</string>
     <string name="settings_title_system">Ang Sistema</string>
-    <string name="settings_summary_system">Buhata ang bak-ap og hiuli, i-anhay ang direktoryo nga app og lain nga himutangan sa espisipiko nga sistema.</string>
+    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
     <string name="settings_title_navigation_menu">Menu sa nabigasyon</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
@@ -596,12 +607,14 @@
     <string name="init_summary_log_offline">Pag-enable sa Offline Logging (Dili mapakita ang online log screen sa dihang mag log, dili mag-upload sa mga log)</string>
     <string name="init_choose_list">Pangyo og lista</string>
     <string name="init_summary_choose_list">Pangutan-a kung unsa nga lista ang ibutang sa mga caches sa</string>
+    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Ipakita ang Direksyon</string>
     <string name="init_summary_livelist">Pakit-a sa direksyon sa mga cache sa lista</string>
-    <string name="init_backup">Tabang</string>
+    <!-- backup / restore -->
+    <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Tabang</string>
     <string name="init_backup_running">Pagbuhat ug tabang para sa cache database…</string>
-    <string name="init_backup_note">Palihug og nota na ang kini nga kagawian kay mo bak-ap/hiuli ang database nga adunay sulod nga caches og waypoints, pero dili ang imong settings.\nAng imohang login data og passwords kay dili mohawa ani nga aplikasyon.</string>
+    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Pagpasig-uli</string>
     <string name="init_backup_success">ang database sa c:geo kay malampuson nga na kopya padulong:</string>
     <string name="init_backup_failed">Napakyas ang pagtabang sa database sa c:geo.</string>
@@ -610,11 +623,26 @@
     <string name="backup_confirm_overwrite">Ginahan ka nga hulipan ang anaa nga tabang gekan sa %s?</string>
     <string name="restore_confirm_overwrite">Gusto nimo hulipan ang %s gekan sa imong aparato nga adunay tabang?</string>
     <string name="init_restore_success">Ang pagtarung kay sakto.</string>
+    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Napakyas ang pagpasig-uli.</string>
     <string name="init_restore_running">Pagbalik sa cache database…</string>
     <string name="init_restore_confirm">Walay sulod ang database. Ganahan ka ibalik ang tabang sa database?</string>
     <string name="init_backup_last">Anaay tabang gekan</string>
     <string name="init_backup_last_no">Walay file nga adunay tabang.</string>
+    <string name="settings_title_backup">Backup / Restore</string>
+    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
+    <string name="init_backup_settings">Backup program settings</string>
+    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
+    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
+    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
+    <string name="settings_savingerror">Error saving settings</string>
+    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="init_backup_settings_restore">Restore settings</string>
+    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
+    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
+    <string name="settings_readingerror">Error reading settings</string>
+    <string name="settings_restored">Settings restored</string>
+    <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
     <string name="settings_info_offline_maps_title">Impormasyon sa Offline nga mga mapa</string>
     <string name="settings_info_offline_maps">ang c:geo nag suporta og mga mapa para paggamit offline. Maka download og mga mapa gikan sa Mapsforge o maghimo og imohang kaugalingon nga mga mapa gikan sa OSM data. Dapat pilion og una ang offline na direktoryo sa mapa para makuha ang suporta nga mapa.</string>
     <string name="settings_info_themes_title">Pahibalo sa mga tema sa mapa</string>
@@ -926,6 +954,7 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Gitipigan</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
@@ -937,6 +966,14 @@
     <string name="cache_status_not_premium">Tanang miyembro maka-access</string>
     <string name="cache_status_stored">Gitipigan</string>
     <string name="cache_status_not_stored">Wala tipigi</string>
+    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
+    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
+    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
+    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
+    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
+    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Code sa Geo</string>
     <string name="cache_name">Pangalan</string>
     <string name="cache_type">Matang</string>
@@ -1031,6 +1068,8 @@
     <string name="waypoint_note">Sulat</string>
     <string name="waypoint_user_note">Nota sa tiggamit</string>
     <string name="waypoint_visited">Gibisita</string>
+    <string name="waypoint_set_visited">Waypoint set to visited</string>
+    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">I-save</string>
     <string name="waypoint_cancel_edit">Kanselahon</string>
     <string name="waypoint_loading">Nag-loading pa ang waypoint…</string>
@@ -1602,8 +1641,14 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <!-- number input -->
+    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
+    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
+    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
+    <string name="number_input_err_format">Invalid number format</string>
 </resources>

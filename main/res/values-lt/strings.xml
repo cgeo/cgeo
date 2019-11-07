@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo slėptuvė</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">APE projekto slėptuvė</string>
-    <string name="gchq">Groundspeak būstinė</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS nuotykių paroda</string>
-    <string name="block">Groundspeak Block Party</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="unknown">Nežinomo tipo</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
     <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia be interneto su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
-    <string name="err_unknown">Nežinoma klaida</string>
+    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_unknown_address">C:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
-    <string name="err_comm">Nežinoma ryšio klaida</string>
+    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis</string>
     <string name="err_wrong">Neteisingas prisijungimo vardas arba slaptažodis</string>
     <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
@@ -248,6 +248,9 @@
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
     <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
+    <string name="warn_notloggedin_title">Offline mode</string>
+    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
+    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Klaida skaitant Pocket query sąrašą.</string>
     <string name="info_log_posted">c:geo įrašą pateikė sėkmingai.</string>
     <string name="info_log_saved">c:geo įrašas sėkmingai išsaugotas.</string>
@@ -286,7 +289,7 @@
     <string name="menu_about">Apie c:geo</string>
     <string name="menu_helpers">Naudingos programos</string>
     <string name="menu_settings">Nustatymai</string>
-    <string name="menu_backup">Sukurti atsarginę kopiją</string>
+    <string name="menu_backup">Atsarginė kopija / atkurti</string>
     <string name="menu_history">Istorija</string>
     <string name="menu_filter">Filtras</string>
     <string name="menu_scan_geo">Skenuoti geo kodą</string>
@@ -360,6 +363,9 @@
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
+    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
+    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Atnaujinti pasirinktas</string>
     <string name="caches_refresh_all">Atnaujinti visas</string>
     <string name="caches_move_selected">Perkelti pasirinktas</string>
@@ -390,12 +396,17 @@
     <string name="caches_filter_own_rating">Su savo reitingu</string>
     <string name="caches_filter_multi_listing">Daugiafunkciniai sąrašai su skirtingu statusu</string>
     <string name="caches_filter_own_waypoint">Su vartotojo nustatytais taškais</string>
+    <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
+    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
     <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
     <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
     <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
-    <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
+    <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_listmarker_none">No marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Tvarkyti sąrašus</string>
     <string name="list_menu_create">Sukurti naują sąrašą</string>
@@ -445,18 +456,18 @@
     <string name="about_system_info_send_chooser">Siųsti sistemos informaciją</string>
     <string name="changelog_github">Pakeitimų sąrašas</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
-    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
-    <string name="about_contributors_recent">2018/2019 contributors</string>
-    <string name="about_contributors_specialthanks">Special thanks to</string>
-    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
-    <string name="about_contributors_other">Contributors from before 2018</string>
-    <string name="about_components">Components</string>
-    <string name="contribution_code">code</string>
-    <string name="contribution_tester">tester</string>
-    <string name="contribution_support">support</string>
-    <string name="contribution_documentation">documentation</string>
-    <string name="contribution_projectleader">open source project leader</string>
-    <string name="contribution_graphics">graphics</string>
+    <string name="about_contributors_carnerodetails">c:geo tėvas</string>
+    <string name="about_contributors_recent">2018/2019 pagalbininkai</string>
+    <string name="about_contributors_specialthanks">Ypatingas ačiū</string>
+    <string name="about_contributors_specialthanksdetails">· visiems mūsų vertimo pagalbininkams <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· visiems pranešusiems apie problemas\n· ir visiems kitiems rėmėjams.\n</string>
+    <string name="about_contributors_other">Pagalbininkai iki 2018</string>
+    <string name="about_components">Komponentai</string>
+    <string name="contribution_code">kodas</string>
+    <string name="contribution_tester">testuotojas</string>
+    <string name="contribution_support">pagalba</string>
+    <string name="contribution_documentation">dokumentacija</string>
+    <string name="contribution_projectleader">atvirojo kodo projekto vadovas</string>
+    <string name="contribution_graphics">grafika</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Atidaryti parametrus?</string>
     <string name="settings_title_services">Paslaugos</string>
@@ -485,7 +496,7 @@
     <string name="settings_title_navigation">Navigacija</string>
     <string name="settings_summary_navigation">Pasirinkti pirminį navigacijos būdą ir pasirinkti išorinę navigacijos programą.</string>
     <string name="settings_title_system">Sistema</string>
-    <string name="settings_summary_system">Padaryti kopiją ir atstatyti, nustatyti programos aplankus ir kitus sisteminius specialius nustatymus.</string>
+    <string name="settings_summary_system">Konfigūruokite programų katalogus ir kitus sistemos parametrus.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
@@ -589,8 +600,8 @@
     <string name="init_showwaypoints">Rodyti papildomus taškus</string>
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
     <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
-    <string name="init_brouterThreshold_description">Maksimalus atstumas, iki kurio brouter pagalbinė programa (jei įdiegta) apskaičiuoja maršrutą.</string>
-    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_brouterThreshold_description">Maksimalus atstumas, iki kurio BRouter pagalbinė programa (jei įdiegta) apskaičiuoja maršrutą.</string>
+    <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Atmesti išjungtas</string>
     <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
@@ -602,25 +613,42 @@
     <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
     <string name="init_choose_list">Klausti sąrašo</string>
     <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
+    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Sąraše rodyti kryptį į slėptuvę</string>
-    <string name="init_backup">Sukurti atsarginę kopiją</string>
+    <!-- backup / restore -->
+    <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Sukurti atsarginę kopiją</string>
     <string name="init_backup_running">Kuriama duomenų bazės atsarginė kopija…</string>
-    <string name="init_backup_note">Atkreipkite dėmesį, kad ši funkcija sukurs/atkurs slėptuvių ir papildomų taškų duomenų bazę, bet ne jūsų nustatymus.\nJūsų prisijungimo duomenys ir slaptažodžiai niekada nepaliks šios programos.</string>
+    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Atkurti iš atsarginės kopijos</string>
     <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
-    <string name="init_backup_no_backup_available">Nėra jokių atsarginės kopijos failų.</string>
+    <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
     <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
     <string name="restore_confirm_overwrite">Ar norite perrašyti %s įrenginyje su atsargine kopija?</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
+    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Atkurti nepavyko.</string>
     <string name="init_restore_running">Atkuriama slėptuvių duomenų bazė…</string>
     <string name="init_restore_confirm">Duomenų bazė tuščia. Ar norite atkurti duomenų bazę iš atsarginės kopijos?</string>
     <string name="init_backup_last">Galima atkurti nuo</string>
     <string name="init_backup_last_no">Nėra atsarginės kopijos failo.</string>
+    <string name="settings_title_backup">Atsarginė kopija / Atkurti</string>
+    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
+    <string name="init_backup_settings">Sukurti atsarginę programos nustatymų kopiją</string>
+    <string name="init_backup_settings_backup_light">Sukurti nustatymų kopiją (be paskyros duomenų)</string>
+    <string name="init_backup_settings_backup_full">Sukurti nustatymų kopiją (visų)</string>
+    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
+    <string name="settings_savingerror">Išsaugant nustatymus įvyko klaida</string>
+    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="init_backup_settings_restore">Atkurti nustatymus</string>
+    <string name="init_backup_settings_restore_confirm">Ar norite perrašyti dabartinius nustatymus?</string>
+    <string name="init_backup_settings_restore_no">Nėra nustatymų atsarginės kopijos</string>
+    <string name="settings_readingerror">Skaitant nustatymus įvyko klaida</string>
+    <string name="settings_restored">Nustatymai atkurti</string>
+    <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
     <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
     <string name="settings_info_offline_maps">c:geo palaiko išsaugotus žemėlapius kurie veikia be interneto. Žemėlapius galite atsisiųsti iš Mapsforge arba susikurti nuosavus naudodami OSM duomenis. Norėdami įgalinti tokių žemėlapių palaikymą jūs turite pasirinkti katalogą jiems saugoti.</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
@@ -722,8 +750,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">tolimas atstumas</string>
+    <string name="near_distance">artimas atstumas</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
@@ -946,6 +974,7 @@
     <string name="ignore_confirm_title">Būk atsargus</string>
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
+    <string name="cache_stored">Išsaugota</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
     <string name="cache_status_found">Rasta</string>
     <string name="cache_not_status_found">Nerasta</string>
@@ -957,6 +986,14 @@
     <string name="cache_status_not_premium">Prieinama visiems nariams</string>
     <string name="cache_status_stored">Išsaugota</string>
     <string name="cache_status_not_stored">Neišsaugota</string>
+    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
+    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
+    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
+    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
+    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
+    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geo kodas</string>
     <string name="cache_name">Pavadinimas</string>
     <string name="cache_type">Tipas</string>
@@ -1051,6 +1088,8 @@
     <string name="waypoint_note">Pastaba</string>
     <string name="waypoint_user_note">Vartotojo pastabos</string>
     <string name="waypoint_visited">Aplankytas</string>
+    <string name="waypoint_set_visited">Waypoint set to visited</string>
+    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Išsaugoti</string>
     <string name="waypoint_cancel_edit">Atšaukti</string>
     <string name="waypoint_loading">Įkeliamas papildomas taškas…</string>
@@ -1505,7 +1544,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Panašu, kad jūs naudojate Android versiją, senesnę nei 4.1. Būsimos c:geo versijos gali būti nebepasiekiamos jūsų prietaise.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Kalbantis kompasas</string>
-    <string name="tts_toggle">Toggle talking</string>
+    <string name="tts_toggle">Įjungti kalbėjimą</string>
     <string name="tts_started">Pradėtas kalbėjimas</string>
     <string name="tts_stopped">Sustabdytas kalbėjimas</string>
     <string name="err_tts_lang_not_supported">Dabartinė kalba nepalaikoma teksto-į-kalbą.</string>
@@ -1646,8 +1685,14 @@
     <string name="ask_again">Paklausti dar kartą</string>
     <string name="location_permission_request_explanation">c:geo reikalinga prieigą prie jūsų GPS, kad nustatytumėte savo padėtį ir apskaičiuotumėte atstumą bei kryptį į slėptuvę. Jis negali būti naudojamas be šio leidimo.</string>
     <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite slėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei išsaugotų žemėlapių skaitymui. Ji negali būti naudojama be šio leidimo.</string>
+    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
-    <string name="color_blue">Blue</string>
-    <string name="color_green">Green</string>
-    <string name="color_grey">Grey</string>
+    <string name="color_blue">Mėlyna</string>
+    <string name="color_green">Žalia</string>
+    <string name="color_grey">Pilka</string>
+    <!-- number input -->
+    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
+    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
+    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
+    <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
 </resources>
