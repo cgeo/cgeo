@@ -874,7 +874,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     tv.setText(context.getString(R.string.caches_listmarker_none) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
                 } else {
                     iv.setImageResource(item.resDrawable);
-                    tv.setText(String.format(context.getString(R.string.caches_listmarker_marker), item.markerId) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
+                    tv.setText(getString(item.resLabel) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
                 }
             }
             return v;

@@ -1738,6 +1738,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
 
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
