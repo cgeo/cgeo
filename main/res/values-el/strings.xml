@@ -28,10 +28,10 @@
     <string name="wherigo">Κρύπτη Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Κρύπτη Project APE</string>
-    <string name="gchq">Τα κεντρικά της Groundspeak</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
-    <string name="block">Groundspeak Block Party</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="unknown">Άγνωστος τύπος</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Πολύ μικρό</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Η επικοινωνία με το GeoKrety.org απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_login">Δεν υπάρχουν αποθηκευμένα στοιχεία σύνδεσης</string>
     <string name="err_login_failed_toast">Δεν ήταν δυνατή η σύνδεση του c:geo. Το c:geo λειτουργεί χωρίς σύνδεση με αποθηκευμένες κρύπτες. Ελέγξτε τις ρυθμίσεις σύνδεσης ή ενεργοποιείστε την σύνδεσή σας στο διαδίκτυο.</string>
-    <string name="err_unknown">Άγνωστο Σφάλμα</string>
+    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_unknown_address">Το c:geo δεν μπόρεσε να αντιστοιχίσει αυτήν τη διεύθυνση με μια υπάρχουσα τοποθεσία</string>
-    <string name="err_comm">Άγνωστο σφάλμα επικοινωνίας</string>
+    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">Δεν έχει οριστεί username ή/και κωδικός</string>
     <string name="err_wrong">Λάθος username ή/και κωδικός</string>
     <string name="err_maintenance">Το Geocaching.com δεν είναι διαθέσιμο λόγω συντήρησης. Το c:geo δουλεύει εκτός σύνδεσης με τις αποθηκευμένες κρύπτες.</string>
@@ -248,6 +248,9 @@
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
+    <string name="warn_notloggedin_title">Offline mode</string>
+    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
+    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Σφάλμα ανάγνωσης της λίστας προσωπικής αναζήτησης.</string>
     <string name="info_log_posted">Υποβλήθηκε με επιτυχία το αρχείο καταγραφής από το c:geo.</string>
     <string name="info_log_saved">Το αρχείο καταγραφής αποθηκεύτηκε με επιτυχία στο c:geo.</string>
@@ -286,7 +289,7 @@
     <string name="menu_about">Σχετικά με το c:geo</string>
     <string name="menu_helpers">Βοηθητικά προγράμματα</string>
     <string name="menu_settings">Ρυθμίσεις</string>
-    <string name="menu_backup">Αντίγραφα ασφαλείας</string>
+    <string name="menu_backup">Backup / restore</string>
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
@@ -354,6 +357,9 @@
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
+    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
+    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Ανανέωση επιλεγμένων</string>
     <string name="caches_refresh_all">Ανανέωση όλων</string>
     <string name="caches_move_selected">Μετακίνηση επιλεγμένων</string>
@@ -384,12 +390,17 @@
     <string name="caches_filter_own_rating">Με τη δική μου βαθμολογία</string>
     <string name="caches_filter_multi_listing">Πολλαπλή καταχώριση με διαφορετική κατάσταση</string>
     <string name="caches_filter_own_waypoint">Με σημεία διαδρομής αποθηκευμένα από το χρήστη</string>
+    <string name="caches_filter_missing_gcvote">Οι κρύπτες που βρέθηκαν δεν έχουν αξιολογηθεί</string>
+    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Κατάργηση από το ιστορικό…</string>
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
-    <string name="caches_filter_missing_gcvote">Οι κρύπτες που βρέθηκαν δεν έχουν αξιολογηθεί</string>
+    <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_listmarker_none">No marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Διαχείριση λιστών</string>
     <string name="list_menu_create">Δημιουργία νέας λίστας</string>
@@ -479,7 +490,7 @@
     <string name="settings_title_navigation">Πλοήγηση</string>
     <string name="settings_summary_navigation">Επιλέξτε επιθυμητή μέθοδο πλοήγησης και εξωτερικές εφαρμογές πλοήγησης.</string>
     <string name="settings_title_system">Σύστημα</string>
-    <string name="settings_summary_system">Εκτελέσετε δημιουργία αντιγράφων ασφαλείας και επαναφοράς, ρύθμιση καταλόγου εφαρμογών και άλλες συγκεκριμένες ρυθμίσεις του συστήματος.</string>
+    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
@@ -596,12 +607,14 @@
     <string name="init_summary_log_offline">Ενεργοποίηση καταγραφής εκτός σύνδεσης (Δεν θα εμφανιστεί η οθόνη ηλεκτρονικού αρχείου κατά την καταγραφή, δεν θα μεταφορτωθούν αρχεία καταγραφής)</string>
     <string name="init_choose_list">Ζητήστε τη λίστα</string>
     <string name="init_summary_choose_list">Να ερωτώμαι σε ποια λίστα θα αποθηκεύονται οι κρύπτες</string>
+    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Να φαίνεται στη λίστα η κατεύθυνση των κρύπτών</string>
-    <string name="init_backup">Αντίγραφα ασφαλείας</string>
+    <!-- backup / restore -->
+    <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Αντίγραφα ασφαλείας</string>
     <string name="init_backup_running">Δημιουργία αντιγράφων ασφαλείας της βάσης δεδομένων των κρυπτών…</string>
-    <string name="init_backup_note">Παρακαλώ σημειώστε ότι αυτό το χαρακτηριστικό θα δημιουργήσει αντίγραφα ασφαλείας/επαναφοράς μιας βάσης δεδομένων που περιέχει κρύπτες και σημεία, αλλά όχι τις ρυθμίσεις σας. \nΤα στοιχεία σύνδεσης και οι κωδικοί πρόσβασής σας δεν πρόκειται να χαθούν από αυτή την εφαρμογή.</string>
+    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Επαναφορά</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
@@ -610,11 +623,26 @@
     <string name="backup_confirm_overwrite">Θέλετε να αντικαταστήσετε το υπάρχον αντίγραφο ασφαλείας του %s;</string>
     <string name="restore_confirm_overwrite">Θέλετε να αντικαταστήσετε το %s στη συσκευή σας με το αντίγραφο ασφαλείας;</string>
     <string name="init_restore_success">Η επαναφορά ολοκληρώθηκε.</string>
+    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Η επαναφορά απέτυχε.</string>
     <string name="init_restore_running">Επαναφορά βάσης δεδομένων κρυπτών…</string>
     <string name="init_restore_confirm">Η βάση δεδομένων είναι κενή. Θέλετε να επαναφέρετε τα αντίγραφα ασφαλείας της βάσης δεδομένων;</string>
     <string name="init_backup_last">Διαθέσιμα αντίγραφα ασφαλείας από</string>
     <string name="init_backup_last_no">Δεν υπάρχει κανένα αρχείο με αντίγραφο ασφαλείας.</string>
+    <string name="settings_title_backup">Backup / Restore</string>
+    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
+    <string name="init_backup_settings">Backup program settings</string>
+    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
+    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
+    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
+    <string name="settings_savingerror">Error saving settings</string>
+    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="init_backup_settings_restore">Restore settings</string>
+    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
+    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
+    <string name="settings_readingerror">Error reading settings</string>
+    <string name="settings_restored">Settings restored</string>
+    <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να κατεβάσετε χάρτες από το Mapsforge ή ακόμη και να δημιουργήσετε δικούς σας από τα δεδομένα των OSM. Χρειάζεται πρώτα να επιλέξετε τον κατάλογο των εκτός χρήσης χαρτών για να λάβετε υποστήριξη για χάρτες εκτός σύνδεσης.</string>
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
@@ -926,6 +954,7 @@
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
+    <string name="cache_stored">Αποθηκευμένα</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
@@ -937,6 +966,14 @@
     <string name="cache_status_not_premium">Πρόσβαση από όλα τα μέλη</string>
     <string name="cache_status_stored">Αποθηκευμένες</string>
     <string name="cache_status_not_stored">Μη αποθηκευμένες</string>
+    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
+    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
+    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
+    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
+    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
+    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Κωδικός κρύπτης</string>
     <string name="cache_name">Όνομα</string>
     <string name="cache_type">Τύπος</string>
@@ -1031,6 +1068,8 @@
     <string name="waypoint_note">Σημείωση</string>
     <string name="waypoint_user_note">Σημείωση χρήστη</string>
     <string name="waypoint_visited">Επίσκεψη</string>
+    <string name="waypoint_set_visited">Waypoint set to visited</string>
+    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Αποθήκευση</string>
     <string name="waypoint_cancel_edit">Ακύρωση</string>
     <string name="waypoint_loading">Γίνεται φόρτωση σημείου…</string>
@@ -1602,8 +1641,14 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <!-- number input -->
+    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
+    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
+    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
+    <string name="number_input_err_format">Invalid number format</string>
 </resources>

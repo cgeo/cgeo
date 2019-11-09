@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo slēpnis</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Projekta A.P.E. slēpnis</string>
-    <string name="gchq">Groundspeak HQ</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures izstāde</string>
-    <string name="block">Groundspeak Block Party</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="unknown">Nezināms tips</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Nevar sazināties ar GeoKrety.org. Vietne var būt uz laiku nepieejama vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_login">Nav saglabāta pieteikšanās informācija</string>
     <string name="err_login_failed_toast">c:geo nevar pierakstīties. c:geo darbojas bezsaistē ar saglabātajiem slēpņiem. Pārbaudi ielogošanās iestatījumus vai aktivizē/iespējo interneta savienojumu.</string>
-    <string name="err_unknown">Nezināma kļūda</string>
+    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_unknown_address">c:geo nevarēja atrast kartē šo adresi ar pašreizējo atrašanās vietu</string>
-    <string name="err_comm">Nezināma sakaru kļūda</string>
+    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">Nav uzstādīts lietotājvārds un/vai parole</string>
     <string name="err_wrong">Tu ievadīji nepareizu lietotājvārdu un/vai paroli</string>
     <string name="err_maintenance">Geocaching.com apkopes dēļ nedarbojas. c:geo strādā bezsaistē ar bezsaistē saglabātajiem slēpņiem.</string>
@@ -248,6 +248,9 @@
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
     <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
     <string name="warn_invalid_character">Rakstzīmei jābūt BURTAM vai CIPARAM</string>
+    <string name="warn_notloggedin_title">Offline mode</string>
+    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
+    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Kļūda nolasot slēpņu atlašu (PQ) sarakstu.</string>
     <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
     <string name="info_log_saved">c:geo veiksmīgi saglabāja pierakstu.</string>
@@ -286,7 +289,7 @@
     <string name="menu_about">Par c:geo</string>
     <string name="menu_helpers">Papildus programmas</string>
     <string name="menu_settings">Iestatījumi</string>
-    <string name="menu_backup">Izveidot rezerves kopiju</string>
+    <string name="menu_backup">Backup / restore</string>
     <string name="menu_history">Vēsture</string>
     <string name="menu_filter">Filtrēt</string>
     <string name="menu_scan_geo">Skenēt Geo code</string>
@@ -357,6 +360,9 @@
     <string name="caches_delete_events">Pagājušo notikumu (Events) dzēšana</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
+    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
+    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Atjaunot atlasīto</string>
     <string name="caches_refresh_all">Atjaunot visu</string>
     <string name="caches_move_selected">Pārvietot atlasīto</string>
@@ -387,12 +393,17 @@
     <string name="caches_filter_own_rating">Ar paša vērtējumu</string>
     <string name="caches_filter_multi_listing">Vairākos saitos ar dažādiem statusiem</string>
     <string name="caches_filter_own_waypoint">Ar lietotāja definētiem starpposmiem</string>
+    <string name="caches_filter_missing_gcvote">Atrastie slēpņi bez vērtējuma</string>
+    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Dzēš no vēstures…</string>
     <string name="caches_clear_offlinelogs">Notīrīt bezsaistes ierakstus</string>
     <string name="caches_clear_offlinelogs_message">Vai izdzēst bezsaistes ierakstus?</string>
     <string name="caches_clear_offlinelogs_progress">Bezsaistes pierakstu dzēšana</string>
     <string name="caches_make_list_unique">Atzīmēt sarakstu kā unikālu</string>
-    <string name="caches_filter_missing_gcvote">Atrastie slēpņi bez vērtējuma</string>
+    <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_listmarker_none">No marker</string>
+    <string name="caches_listmarker_marker">Marker %d</string>
+    <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Pārvaldīt sarakstus</string>
     <string name="list_menu_create">Izveidot jaunu sarakstu</string>
@@ -482,7 +493,7 @@
     <string name="settings_title_navigation">Navigācija</string>
     <string name="settings_summary_navigation">Izvēlieties vēlamo navigācijas metodi un izvēlieties ārējās navigācijas aplikācijas.</string>
     <string name="settings_title_system">Sistēma</string>
-    <string name="settings_summary_system">Veikt dublēšanu un atjaunošanu, konfigurējiet aplikācijas katalogus un citus īpašos sistēmas iestatījumus.</string>
+    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
     <string name="settings_title_navigation_menu">Navigācijas izvēlne</string>
     <string name="settings_category_browser">Pārlūkprogramma</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
@@ -599,12 +610,14 @@
     <string name="init_summary_log_offline">Iespējot bezsaistes pierakstīšanos (nerādīs tiešsaistes pieteikšanās logu ekrānā, kad reģistrē atradumu, netiks augšupielādēti pieraksta teksti)</string>
     <string name="init_choose_list">Jautāt izvēlēties sarakstu</string>
     <string name="init_summary_choose_list">Jautāt, kurā sarakstā saglabāt slēpņus</string>
+    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Rādīt virzienu</string>
     <string name="init_summary_livelist">Rādīt slēpņu virzienus sarakstā</string>
-    <string name="init_backup">Izveidot rezerves kopiju</string>
+    <!-- backup / restore -->
+    <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Izveidot rezerves kopiju</string>
     <string name="init_backup_running">Notiek slēpņu rezerves kopijas izveide…</string>
-    <string name="init_backup_note">Lūdzu, ņem vērā, ka šis funkcija atjaunos datu bāzi, kas satur slēpņus un Starpposmus, bet ne tavus iestatījumus.\nTavi pieteikšanās dati un paroles nekādā gadījumā nepazudīs no aplikācijas datiem.</string>
+    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Atjaunot</string>
     <string name="init_backup_success">c:geo datubāze tika veiksmīgi kopēta uz:</string>
     <string name="init_backup_failed">c:geo datubāzes rezerves kopijas izveide neizdevās.</string>
@@ -613,11 +626,26 @@
     <string name="backup_confirm_overwrite">Vai vēlaties pārrakstīt esošo rezerves kopiju no %s?</string>
     <string name="restore_confirm_overwrite">Vai vēlies aizstāt %s uz savas iekārtas ar rezerves kopiju?</string>
     <string name="init_restore_success">Atjaunošana pabeigta.</string>
+    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Atjaunošana neizdevās.</string>
     <string name="init_restore_running">Atjauno slēpņu datubāzi…</string>
     <string name="init_restore_confirm">Datubāze ir tukša. Vai vēlaties atjaunot datubāzes dublējumu?</string>
     <string name="init_backup_last">Pieejams dublējums no</string>
     <string name="init_backup_last_no">Rezerves kopijas fails neeksistē.</string>
+    <string name="settings_title_backup">Backup / Restore</string>
+    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
+    <string name="init_backup_settings">Backup program settings</string>
+    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
+    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
+    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
+    <string name="settings_savingerror">Error saving settings</string>
+    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="init_backup_settings_restore">Restore settings</string>
+    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
+    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
+    <string name="settings_readingerror">Error reading settings</string>
+    <string name="settings_restored">Settings restored</string>
+    <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
     <string name="settings_info_offline_maps_title">Info uz bezsaistes kartēm</string>
     <string name="settings_info_offline_maps">c:geo atbalsta kartes lietošanai bezsaistē. Tu vari lejupielādēt kartes no Mapsforge vai pat izveidot savas kartes no OSM datiem. Vispirms jāatlasa bezsaistes karšu direktorija, lai iegūtu karti ar bezsaistes atbalstu.</string>
     <string name="settings_info_themes_title">Informācija par karšu tēmām</string>
@@ -936,6 +964,7 @@
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
+    <string name="cache_stored">Saglabātie bezsaistē</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
@@ -947,6 +976,14 @@
     <string name="cache_status_not_premium">Pieejams visiem lietotājiem</string>
     <string name="cache_status_stored">Saglabāts</string>
     <string name="cache_status_not_stored">Nav saglabāti</string>
+    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
+    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
+    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
+    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
+    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
+    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geo code</string>
     <string name="cache_name">Nosaukums</string>
     <string name="cache_type">Tips</string>
@@ -1041,6 +1078,8 @@
     <string name="waypoint_note">Piezīme</string>
     <string name="waypoint_user_note">Lietotāja piezīme</string>
     <string name="waypoint_visited">Apmeklēts</string>
+    <string name="waypoint_set_visited">Waypoint set to visited</string>
+    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Saglabāt</string>
     <string name="waypoint_cancel_edit">Atcelt</string>
     <string name="waypoint_loading">Ielādē Starpposmu…</string>
@@ -1624,8 +1663,14 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <!-- number input -->
+    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
+    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
+    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
+    <string name="number_input_err_format">Invalid number format</string>
 </resources>
