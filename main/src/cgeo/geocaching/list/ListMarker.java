@@ -4,24 +4,21 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 
 public enum ListMarker { // markerId must not change as values stored in the database depend on it
-    NO_MARKER(0, R.string.caches_listmarker_none, 0),
-    MARKER1(1, R.string.color_green, R.drawable.dot_traditional),
-    MARKER2(2, R.string.color_orange, R.drawable.dot_multi),
-    MARKER3(3, R.string.color_blue, R.drawable.dot_mystery),
-    MARKER4(4, R.string.color_red, R.drawable.dot_event),
-    MARKER5(5, R.string.color_turquoise, R.drawable.dot_virtual),
-    MARKER6(6, R.string.color_black, R.drawable.dot_black);
+    NO_MARKER(0, 0),
+    MARKER1(1, R.drawable.dot_traditional),
+    MARKER2(2, R.drawable.dot_multi),
+    MARKER3(3, R.drawable.dot_mystery),
+    MARKER4(4, R.drawable.dot_event),
+    MARKER5(5, R.drawable.dot_virtual);
 
     public final int markerId;
-    public final int resLabel;
     public final int resDrawable;
 
     public static final byte MAX_BITS_PER_MARKER = 3;
     public static final int BITMASK = (1 << MAX_BITS_PER_MARKER) - 1;
 
-    ListMarker(final int markerId, final int resLabel, final int resDrawable) {
+    ListMarker(final int markerId, final int resDrawable) {
         this.markerId = markerId;
-        this.resLabel = resLabel;
         this.resDrawable = resDrawable;
     }
 
