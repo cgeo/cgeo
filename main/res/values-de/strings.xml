@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo-Cache</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project-APE-Cache</string>
-    <string name="gchq">Groundspeak HQ</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
-    <string name="block">Groundspeak Block Party</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="unknown">Unbekannter Typ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
     <string name="err_login">Keine Anmeldedaten gespeichert.</string>
     <string name="err_login_failed_toast">c:geo konnte sich nicht anmelden und arbeitet im Offline-Modus. Bitte die Anmeldedaten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
-    <string name="err_unknown">Unbekannter Fehler</string>
+    <string name="err_unknown">Unbekannter Fehler. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> um Hilfe zu bekommen.</string>
     <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
-    <string name="err_comm">Unbekannter Kommunikationsfehler</string>
+    <string name="err_comm">Unbekannter Kommunikationsfehler. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> um Hilfe zu bekommen.</string>
     <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt</string>
     <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
     <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
@@ -248,7 +248,9 @@
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
-    <string name="warn_notloggedin">Nicht angemeldet. Die Live-Karte wird nur lokal gespeicherte Caches anzeigen und Onlinefunktionen werden nicht funktionieren.\n Entweder steht kein Netz zur Verfügung, es gibt ein Serverproblem, oder Du musst erst einen Service konfigurieren, indem Du auf diese Nachricht tippst.</string>
+    <string name="warn_notloggedin_title">Offlinemodus</string>
+    <string name="warn_notloggedin_short">Nicht eingeloggt. Die Live-Karte zeigt nur Caches an, die lokal gespeichert sind.</string>
+    <string name="warn_notloggedin_long">(Noch) nicht eingeloggt. Die Live-Karte wird nur lokal gespeicherte Caches zeigen und Onlinefunktionen werden nicht verfügbar sein.\n\nEntweder gibt es keine Netzwerkverbindung, ein Server-Problem oder du musst deine Geocaching-Dienste (neu) konfigurieren.\n\nMöchtest du die Dienste jetzt konfigurieren?</string>
     <string name="err_read_pocket_query_list">Fehler beim Lesen der Pocket Queries.</string>
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
@@ -287,7 +289,7 @@
     <string name="menu_about">Über c:geo</string>
     <string name="menu_helpers">Nützliche Apps</string>
     <string name="menu_settings">Einstellungen</string>
-    <string name="menu_backup">Sicherung</string>
+    <string name="menu_backup">Sichern / Wiederherstellen</string>
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
@@ -356,8 +358,8 @@
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_upload_modifiedcoords_warning">Möchten Sie modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Lade alle Koordinaten hoch</string>
-    <string name="caches_upload_allcoords_warning">Dies wird auf dem Server die Koordinaten für alle (ausgewählten) Caches Deiner Liste mit den aktuellen Listingkoordinaten von c:geo überschreiben! Dies wird nur in seltenen Fällen benötigt, beispielsweise nach dem Import einer GPX-Datei, in der geänderte Koordinaten als Listingkoordinaten hinterlegt sind. Diese Funktion kann nicht rückgängig gemacht werden - Du solltest sie nur anwenden, wenn Du weißt, was Du tust. Normalerweise verwende lieber die Funktion \"Geänderte Koordinaten hochladen\" im gleichen Menü.</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Alle Koordinaten hochladen</string>
+    <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Modifizierte Koordinaten hochladen\" verwenden.</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -395,7 +397,7 @@
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
-    <string name="caches_set_listmarker">Setze Listenmarkierung</string>
+    <string name="caches_set_listmarker">Listenmarkierung setzen</string>
     <string name="caches_listmarker_none">Keine Markierung</string>
     <string name="caches_listmarker_marker">Markierung %d</string>
     <string name="caches_listmarker_selected">(ausgewählt)</string>
@@ -455,9 +457,9 @@
     <string name="about_contributors_other">Mitwirkende vor 2018</string>
     <string name="about_components">Komponenten</string>
     <string name="contribution_code">Code</string>
-    <string name="contribution_tester">Tester</string>
+    <string name="contribution_tester">tester</string>
     <string name="contribution_support">Support</string>
-    <string name="contribution_documentation">Dokumentation</string>
+    <string name="contribution_documentation">Handbuch</string>
     <string name="contribution_projectleader">Open Source Projektleiter</string>
     <string name="contribution_graphics">Grafiken</string>
     <!-- settings -->
@@ -488,7 +490,7 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Sicherung, Wiederherstellung, Verzeichnisse und Systemeinstellungen.</string>
+    <string name="settings_summary_system">Konfiguriere Verzeichnisse und andere Systemeinstellungen.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
@@ -605,15 +607,14 @@
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
-    <string name="init_listdisplay">Zeige zusätzliche Listen in der Cacheliste an</string>
+    <string name="init_listdisplay">Zusätzliche Listen in der Cacheliste anzeigen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
-
     <!-- backup / restore -->
-    <string name="init_backup">Sicherung</string>
+    <string name="init_backup">Caches / Wegpunkte sichern</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
-    <string name="init_backup_note">Hinweis: Diese Option sichert die Datenbank von c:geo. Nur Caches und Wegpunkte werden gesichert, keine Einstellungen. Anmeldedaten und Passwörter werden die App nicht verlassen.</string>
+    <string name="init_backup_note">Bitte beachte, dass diese Funktion nur die Datenbank mit Caches und Wegpunkten sichert/wiederherstellt, aber keine Bilder oder Einstellungen.</string>
     <string name="init_backup_restore">Wiederherstellung</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
@@ -622,28 +623,26 @@
     <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
     <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
-    <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Backupdatei fehlerhaft, Datenbank musste neu erstellt werden.</string>
+    <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Backup-Datei ist beschädigt, Datenbank musste neu erstellt werden.</string>
     <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar vom</string>
     <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
-
-    <string name="settings_title_backup">Sicherung / Wiederherstellung</string>
-    <string name="settings_summary_backup">Sicherung und Wiederherstellung von Caches, Wegpunkten und Programmeinstellungen durchführen.</string>
-    <string name="init_backup_settings">Sichere Programmeinstellungen</string>
-    <string name="init_backup_settings_backup_light">Sichere Programmeinstellungen (ohne Zugangsdaten)</string>
-    <string name="init_backup_settings_backup_full">Sichere Programmeinstellungen (vollständig)</string>
-    <string name="init_backup_settings_backup_full_confirm">Möchtest Du vertrauliche Zugangsdaten speichern? Sie können durch andere Anwendungen gelesen werden.</string>
-    <string name="settings_savingerror">Fehler beim Speichern der Programmeinstellungen</string>
-    <string name="settings_saved">Programmeinstellungen erfolgreich gespeichert unter:</string>
-    <string name="init_backup_settings_restore">Programmeinstellungen wiederherstellen</string>
-    <string name="init_backup_settings_restore_confirm">Möchtest Du Deine aktuellen Programmeinstellungen überschreiben?</string>
-    <string name="init_backup_settings_restore_no">Keine Sicherung der Programmeinstellungen verfügbar</string>
-    <string name="settings_readingerror">Fehler beim Lesen der Programmeinstellungen</string>
-    <string name="settings_restored">Programmeinstellungen wiederhergestellt</string>
-    <string name="settings_restart">c:geo muss neu gestartet werden, um die geladenen Einstellungen zu aktivieren</string>
-
+    <string name="settings_title_backup">Sichern / Wiederherstellen</string>
+    <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
+    <string name="init_backup_settings">Sichern der Programmeinstellungen</string>
+    <string name="init_backup_settings_backup_light">Sichern der Einstellungen (ohne Anmeldedaten)</string>
+    <string name="init_backup_settings_backup_full">Sichern der Einstellungen (komplett)</string>
+    <string name="init_backup_settings_backup_full_confirm">Möchtest du sensible Anmeldedaten speichern? Sie könnten eventuell von anderen Apps gelesen werden.</string>
+    <string name="settings_savingerror">Fehler beim Speichern der Einstellungen</string>
+    <string name="settings_saved">Einstellungen erfolgreich gespeichert nach:</string>
+    <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
+    <string name="init_backup_settings_restore_confirm">Möchtest du die aktuellen Einstellungen löschen?</string>
+    <string name="init_backup_settings_restore_no">Es ist kein Backup der Einstellungen verfügbar</string>
+    <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
+    <string name="settings_restored">Einstellungen wiederhergestellt</string>
+    <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
     <string name="settings_info_themes_title">Info zu Karten-Themes</string>
@@ -742,9 +741,9 @@
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Benachrichtigung über nahe Caches</string>
     <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung über nahe Caches auf der Karte</string>
-    <string name="init_summary_proximityNotificationGeneral">Spiele einmalig eine Benachrichtigung ab, sobald ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher ist als die weite bzw. Entfernung. Je nach Entfernung wird ein anderer Ton abgespielt.</string>
+    <string name="init_summary_proximityNotificationGeneral">Spiele eine einmalige Benachrichtigung, wenn ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher als die weite oder nahe Entfernung ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
     <string name="init_proximityNotificationSpecific">Benachrichtigungston für Wegpunkte</string>
-    <string name="init_summary_proximityNotificationSpecific">Spiele wiederholt eine Benachrichtigung ab, wenn der aktuell ausgewählte Cache oder Wegpunkt näher ist als die weite bzw. Entfernung. Ist aktiv wenn die Cache- oder Wegpunkt-Details geöffnet werden, ein Cache- oder Wegpunkt-Popups auf der Karte angezeigt oder der Kompass aktiv ist. Je nach Entfernung wird ein anderer Ton abgespielt.</string>
+    <string name="init_summary_proximityNotificationSpecific">Spiele eine wiederholende Benachrichtigung, wenn der aktuell ausgewählte Cache oder Wegpunkt näher als die weite oder nahe Entfernung ist. Ist aktiv wenn die Cache- oder Wegpunkt-Details geöffnet werden, ein Cache- oder Wegpunkt-Popups auf der Karte angezeigt oder der Kompass aktiv ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
     <string name="far_distance">weite Entfernung</string>
     <string name="near_distance">nahe Entfernung</string>
     <!-- map sources -->
@@ -967,14 +966,14 @@
     <string name="cache_status_not_premium">Für alle Mitglieder</string>
     <string name="cache_status_stored">Gespeichert</string>
     <string name="cache_status_not_stored">Nicht gespeichert</string>
-    <string name="cache_status_stored_lasteighthours">max. acht Stunden</string>
-    <string name="cache_status_stored_lasttwentyfourhours">max. 24 Stunden</string>
-    <string name="cache_status_stored_lastsevendays">max. sieben Tage</string>
-    <string name="cache_status_stored_lastthirtydays">max. 30 Tage</string>
-    <string name="cache_status_stored_morethaneighthours">mind. acht Stunden</string>
-    <string name="cache_status_stored_morethantwentyfourhours">mind. 24 Stunden</string>
-    <string name="cache_status_stored_morethansevendays">mind. sieben Tage</string>
-    <string name="cache_status_stored_morethanthirtydays">mind. 30 Tage</string>
+    <string name="cache_status_stored_lasteighthours">Innerhalb der letzten acht Stunden</string>
+    <string name="cache_status_stored_lasttwentyfourhours">Innerhalb der letzten 24 Stunden</string>
+    <string name="cache_status_stored_lastsevendays">Innerhalb der letzten sieben Tage</string>
+    <string name="cache_status_stored_lastthirtydays">Innerhalb der letzten dreißig Tage</string>
+    <string name="cache_status_stored_morethaneighthours">Vor den letzten acht Stunden</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Vor den letzten 24 Stunden</string>
+    <string name="cache_status_stored_morethansevendays">Vor den letzten sieben Tagen</string>
+    <string name="cache_status_stored_morethanthirtydays">Vor den letzten dreißig Tagen</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
     <string name="cache_type">Typ</string>
@@ -1069,8 +1068,8 @@
     <string name="waypoint_note">Notiz</string>
     <string name="waypoint_user_note">Eigene Notiz</string>
     <string name="waypoint_visited">Besucht</string>
-    <string name="waypoint_set_visited">Wegpunkt auf \"besucht\" gesetzt</string>
-    <string name="waypoint_unset_visited">Wegpunkt auf \"nicht besucht\" gesetzt</string>
+    <string name="waypoint_set_visited">Wegpunkt auf Besucht gesetzt</string>
+    <string name="waypoint_unset_visited">Wegpunkt auf Nicht Besucht gesetzt</string>
     <string name="waypoint_save">Speichern</string>
     <string name="waypoint_cancel_edit">Abbrechen</string>
     <string name="waypoint_loading">Lade Wegpunkt…</string>
@@ -1642,15 +1641,14 @@
     <string name="ask_again">Erneut nachfragen</string>
     <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät, um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
-    <string name="storage_permission_needed">Diese Funktion kann ohne Berechtigung zum Speichern nicht verwendet werden.</string>
+    <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->
     <string name="color_blue">Blau</string>
     <string name="color_green">Grün</string>
     <string name="color_grey">Grau</string>
-
     <!-- number input -->
     <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
-    <string name="number_input_err_boundarymin">Eingegebener Wert ist zu klein - zurückgesetzt auf Minimum</string>
-    <string name="number_input_err_boundarymax">Eingegebener Wert ist zu groß - zurückgesetzt auf Maximum</string>
-    <string name="number_input_err_format">Invalid number format</string>
+    <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
+    <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
+    <string name="number_input_err_format">Ungültiges Zahlenformat</string>
 </resources>
