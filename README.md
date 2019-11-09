@@ -46,14 +46,14 @@ Details for setting up the IDE is described in the wiki (https://github.com/cgeo
 ### API keys
 
 For the full usability of c:geo you need some API keys - for Google Maps and the opencaching sites.
-You can leave all entries in the configuration empty, but then Google Maps and the Opencaching sitess doesn't work.
+You can leave all entries in the configuration empty, but then Google Maps and the Opencaching sites don't work.
 
 For using the Google Maps function it is necessary to have a Google Maps API v2 key. For this follow 
 * [Maps SDK for Android: Get an API Key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
 
 The key itself is free, and you don't have to enter any credit card info, although the web form seems to force you to.
 
-Also to be able to use Google Maps you need to use a Google Api enabled image, so make sure to select the right image for your emulator/device, otherwise Google Maps won't be offered as map provider in c:geo. 
+Also to be able to use Google Maps you need to use a Google API enabled image, so make sure to select the right image for your emulator/device, otherwise Google Maps won't be offered as map provider in c:geo. 
 
 Request your personal API key for the various [OpenCaching](http://www.opencaching.eu/) sites we support. If you leave these blank, then those networks will remain disabled.
 * [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
