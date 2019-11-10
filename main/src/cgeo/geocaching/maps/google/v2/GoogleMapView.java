@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.google.v2;
 
+import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.DistanceDrawer;
@@ -97,6 +99,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 return true;
             }
         });
+        googleMap.setOnMapLongClickListener(tapLatLong -> InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID));
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
             mapReadyCallback = null;
