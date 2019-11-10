@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 
 public enum ListMarker { // markerId must not change as values stored in the database depend on it
-    NO_MARKER(0, R.string.caches_listmarker_none, 0),
+    NO_MARKER(0, R.string.caches_listmarker_none, R.drawable.dot_transparent),
     MARKER1(1, R.string.color_green, R.drawable.dot_traditional),
     MARKER2(2, R.string.color_orange, R.drawable.dot_multi),
     MARKER3(3, R.string.color_blue, R.drawable.dot_mystery),
@@ -35,6 +35,6 @@ public enum ListMarker { // markerId must not change as values stored in the dat
             }
         }
         Log.e("markerId " + markerId + " not found");
-        return 0;
+        return NO_MARKER.resDrawable;
     }
 }
