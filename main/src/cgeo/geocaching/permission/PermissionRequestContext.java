@@ -7,6 +7,8 @@ public enum PermissionRequestContext {
     MainActivityOnCreate(1111, R.string.location_permission_request_explanation),
     MainActivityOnResume(1112, R.string.location_permission_request_explanation),
     MainActivityStorage(1113, R.string.storage_permission_request_explanation),
+    // placeholder, see contacts addon
+    // ContactsActivity(1114, R.string.contacts_permission_request_explanation, R.string.contacts_permission_request_denied);
     TrackableActivity(2221, R.string.location_permission_request_explanation),
     CacheDetailActivity(2222, R.string.location_permission_request_explanation),
     CacheListActivity(2223, R.string.location_permission_request_explanation),
