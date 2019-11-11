@@ -5,8 +5,11 @@ import cgeo.contacts.R;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
@@ -77,7 +80,15 @@ public class PermissionHandler {
             new AlertDialog.Builder(activity)
                     .setMessage(perm.getDeniedResource())
                     .setCancelable(false)
-                    .setNeutralButton(R.string.close, (dialog, which) -> activity.finish())
+                    .setNegativeButton(R.string.close, (dialog, which) -> activity.finish())
+                    .setPositiveButton(R.string.goto_app_details, (dialog, which) -> {
+                                final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.fromParts("package", activity.getPackageName(), null));
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                                activity.finish();
+                            }
+                    )
                     .create()
                     .show();
         }
