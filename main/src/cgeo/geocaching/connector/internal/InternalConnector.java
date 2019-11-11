@@ -149,6 +149,14 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     /**
+     * makes sure that the pseudo cache storing the "go to" targets exists
+     * @param context   context in which this function gets called
+     */
+    public static void assertHistoryCacheExists(final Context context) {
+        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), null, StoredList.STANDARD_LIST_ID);
+    }
+
+    /**
      * creates a new cache for the internal connector
      * @param context       context in which this function gets called
      * @param name          cache's name (or null for default name)

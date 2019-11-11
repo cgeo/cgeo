@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.helper.UsefulAppsActivity;
@@ -717,7 +718,8 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoPoint(final View v) {
         any.setPressed(true);
-        startActivity(new Intent(this, NavigateAnyPointActivity.class));
+        InternalConnector.assertHistoryCacheExists(this);
+        CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
     }
 
     /**

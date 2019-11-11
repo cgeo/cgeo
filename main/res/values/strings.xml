@@ -1057,6 +1057,8 @@
     <string name="internal_cache_default_name">User defined cache #%1$d</string>
     <string name="internal_cache_default_description">This is a user defined cache</string>
     <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
 
     <!-- editor dialog -->
 
