@@ -174,6 +174,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
 
+    private static final String EXTRA_FORCE_WAYPOINTSPAGE = "cgeo.geocaching.extra.cachedetail.forceWaypointsPage";
+
     /**
      * Minimal contrast ratio. If description:background contrast ratio is less than this value
      * for some string, foreground color will be removed and gray background will be used
@@ -229,11 +231,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // try to get data from extras
         String name = null;
         String guid = null;
+        boolean forceWaypointsPage = false;
 
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
+            forceWaypointsPage = extras.getBoolean(EXTRA_FORCE_WAYPOINTSPAGE);
         }
 
         // When clicking a cache in MapsWithMe, we get back a PendingIntent
@@ -303,7 +307,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // nothing, we lost the window
         }
 
-        final int pageToOpen = savedInstanceState != null ?
+        final int pageToOpen = forceWaypointsPage ? getPageIndex(Page.WAYPOINTS) :
+            savedInstanceState != null ?
                 savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
                 Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
         createViewPager(pageToOpen, new OnPageSelectedListener() {
@@ -938,10 +943,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         createDisposables.add(imagesList.loadImages(imageView, cache.getNonStaticImages()));
     }
 
-    public static void startActivity(final Context context, final String geocode) {
+    public static void startActivity(final Context context, final String geocode, final boolean forceWaypointsPage) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
         detailIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        detailIntent.putExtra(EXTRA_FORCE_WAYPOINTSPAGE, forceWaypointsPage);
         context.startActivity(detailIntent);
+    }
+
+    public static void startActivity(final Context context, final String geocode) {
+        startActivity(context, geocode, false);
     }
 
     /**
