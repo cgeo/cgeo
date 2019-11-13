@@ -21,6 +21,7 @@ public final class CheckerUtils {
             "geocheck.org/geo_inputchkcoord.php?",
             "geochecker.com/index.php?",
             "geochecker.gps-cache.de/check.aspx?",
+            "geotjek.dk/geo_inputchkcoord.php?",
     };
 
     private CheckerUtils() {
