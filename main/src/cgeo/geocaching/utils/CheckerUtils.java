@@ -16,7 +16,7 @@ import org.apache.commons.text.StringEscapeUtils;
 public final class CheckerUtils {
     private static final String[] CHECKERS = {
             "certitudes.org/certitude?",
-            "gc-apps.com/geochecker",
+            "gc-apps.com/checker/",
             "gccounter.com/gcchecker.php?",
             "geocheck.org/geo_inputchkcoord.php?",
             "geochecker.com/index.php?",
