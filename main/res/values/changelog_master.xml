@@ -2,5 +2,10 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>
+    · New: Ability to create user defined caches\n
+    · New: Use waypoints of a user defined cache in \"Go to\" menu\n
+    · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
+    · Fix: Internal database cleanup improvements\n
   </string>
 </resources>
