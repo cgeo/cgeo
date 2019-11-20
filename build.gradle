@@ -69,7 +69,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // check for updates of gradle plugin dependencies
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.25.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
 
         // Android gradle plugin
         classpath 'com.android.tools.build:gradle:3.4.2'
