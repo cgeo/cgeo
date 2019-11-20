@@ -7,5 +7,7 @@
     · New: Use waypoints of a user defined cache in \"Go to\" menu\n
     · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
     · Fix: Internal database cleanup improvements\n
+    \n
+    \n
   </string>
 </resources>
