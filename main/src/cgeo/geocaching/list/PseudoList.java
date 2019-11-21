@@ -42,6 +42,22 @@ public abstract class PseudoList extends AbstractList {
         }
     };
 
+    public static final int UDC_LIST_ID = 5;
+    /**
+     * pseudo list id for "go to target" UDC to be displayed in "all caches" only
+     */
+    public static final AbstractList UDC_LIST = new PseudoList(UDC_LIST_ID, R.string.user_defined_caches) {
+        @Override
+        public int getNumberOfCaches() {
+            return -1;
+        }
+
+        @Override
+        public boolean isConcrete() {
+            return true;
+        };
+    };
+
     /**
      * private constructor to have all instances as constants in the class
      */
