@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -153,7 +154,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context   context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), null, StoredList.STANDARD_LIST_ID);
+        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), null, PseudoList.UDC_LIST.id);
     }
 
     /**
