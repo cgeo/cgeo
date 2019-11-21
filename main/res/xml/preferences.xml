@@ -624,6 +624,15 @@
                 android:title="@string/init_proximityNotificationSpecific" />
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/user_defined_caches"
+            android:layout="@layout/preference_category" >
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_longTapCreateUDC"
+                android:summary="@string/init_summary_longtap_udc"
+                android:title="@string/init_longtap_udc" />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
             android:layout="@layout/preference_category" >
             <cgeo.geocaching.settings.TextPreference

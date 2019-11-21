@@ -1021,6 +1021,10 @@ public class Settings {
         putInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, distance);
     }
 
+    public static boolean isLongTapCreateUDC() {
+        return getBoolean(R.string.pref_longTapCreateUDC, false);
+    }
+
     public static boolean isUseTwitter() {
         return getBoolean(R.string.pref_twitter, false);
     }

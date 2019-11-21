@@ -99,7 +99,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 return true;
             }
         });
-        googleMap.setOnMapLongClickListener(tapLatLong -> InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID));
+        if (Settings.isLongTapCreateUDC()) {
+            googleMap.setOnMapLongClickListener(tapLatLong -> InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID));
+        }
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
             mapReadyCallback = null;
