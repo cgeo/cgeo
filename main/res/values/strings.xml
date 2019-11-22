@@ -493,7 +493,7 @@
     <string name="settings_title_cachedetails">Cache Details</string>
     <string name="settings_summary_cachedetails">Customize the display of cache information.</string>
     <string name="settings_title_offlinedata">Offline Data</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storge location and directories for GPX files.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Configure your signature and set logging options.</string>
     <string name="settings_title_map">Map</string>
