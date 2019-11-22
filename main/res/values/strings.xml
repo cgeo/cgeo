@@ -218,8 +218,6 @@
     <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add a waypoint for.</string>
     <string name="err_waypoint_add_failed">c:geo failed to add your waypoint.</string>
     <string name="err_point_unknown_position">c:geo can\'t recognize where you are.</string>
-    <string name="err_point_no_position_given_title">Info required</string>
-    <string name="err_point_no_position_given">Fill at least latitude and longitude or distance and bearing. You can also fill all four fields.</string>
     <string name="err_point_bear_and_dist_title">Need some help?</string>
     <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance doesn\'t require units.</string>
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
@@ -1161,11 +1159,6 @@
     <string name="waypoint_duplicated">Waypoint duplicated</string>
     <string name="waypoint_copy_of">Copy of</string>
     <string name="waypointcalc_notes_prompt">Enter notes here…</string>
-    <string name="search_history">History</string>
-    <string name="search_history_empty">No previous destinations</string>
-    <string name="search_remove_destination">Destination removed</string>
-    <string name="search_clear_history">Clear History</string>
-    <string name="search_history_cleared">History cleared</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
