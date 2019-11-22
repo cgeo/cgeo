@@ -583,7 +583,7 @@
                 android:summary="@string/init_summary_maptrail"
                 android:title="@string/init_maptrail" />
             <ListPreference
-                android:title="Trail color"
+                android:title="@string/init_trailcolor"
                 android:summary="%s"
                 android:key="@string/pref_trailcolor"
                 android:defaultValue="@string/pref_value_grey"
