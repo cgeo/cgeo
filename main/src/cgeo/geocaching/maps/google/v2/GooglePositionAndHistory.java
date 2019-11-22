@@ -49,15 +49,17 @@ public class GooglePositionAndHistory implements PositionAndHistory {
     private GoogleMapObjects historyObjs;
     private GoogleMapView mapView;
     private final int trailColor;
+    private GoogleMapView.PostRealDistance postRealDistance = null;
 
     private static Bitmap locationIcon;
 
 
-    public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView) {
+    public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance) {
         positionObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
         trailColor = Settings.getTrailColor();
+        this.postRealDistance = postRealDistance;
     }
 
     @Override
@@ -129,11 +131,19 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         final Geopoint[] routingPoints = Routing.getTrack(from, to);
 
         if (routingPoints.length > 1) {
-
+            // calculate polyline to draw
             for (int i = 1; i < routingPoints.length; i++) {
                 options.add(new LatLng(routingPoints[i].getLatitude(), routingPoints[i].getLongitude()));
             }
 
+            // calculate distance
+            if (null != postRealDistance) {
+                float distance = 0.0f;
+                for (int i = 1; i < routingPoints.length; i++) {
+                    distance += routingPoints[i - 1].distanceTo(routingPoints[i]);
+                }
+                postRealDistance.postRealDistance(distance);
+            }
         }
 
         options.add(new LatLng(to.getLatitude(), to.getLongitude()));

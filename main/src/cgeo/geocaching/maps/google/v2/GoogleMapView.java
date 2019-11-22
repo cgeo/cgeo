@@ -43,6 +43,10 @@ import com.google.android.gms.maps.model.VisibleRegion;
 
 public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOverlayItem>, OnMapReadyCallback {
 
+    public interface PostRealDistance {
+        void postRealDistance (float realDistance);
+    }
+
     private OnMapDragListener onDragListener;
     private final GoogleMapController mapController = new GoogleMapController();
     private GoogleMap googleMap;
@@ -196,7 +200,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (googleMap == null) {
             throw new IllegalStateException("Google map not initialized yet"); // TODO check
         }
-        final GoogleOverlay ovl = new GoogleOverlay(googleMap, this);
+        final GoogleOverlay ovl = new GoogleOverlay(googleMap, this, realDistance -> {
+            distanceDrawer.setRealDistance(realDistance);
+        });
         setDestinationCoords(coords);
         return ovl.getBase();
     }
