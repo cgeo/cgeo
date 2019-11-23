@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>
+    <b>Next feature release:</b>\n
     · New: Ability to create user defined caches\n
     · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
     · New: Fix support for geochecker gc-apps.com\n
