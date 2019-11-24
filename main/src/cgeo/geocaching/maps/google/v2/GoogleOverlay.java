@@ -14,9 +14,9 @@ public class GoogleOverlay implements OverlayImpl {
     private GooglePositionAndHistory overlayBase = null;
     private final Lock lock = new ReentrantLock();
 
-    public GoogleOverlay(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance) {
+    public GoogleOverlay(final GoogleMap googleMap, final GoogleMapView mapView) {
         this.mapView = mapView;
-        overlayBase = new GooglePositionAndHistory(googleMap, mapView, postRealDistance);
+        overlayBase = new GooglePositionAndHistory(googleMap, mapView);
     }
 
 
