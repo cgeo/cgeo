@@ -19,7 +19,6 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        createApplication();
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
