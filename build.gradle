@@ -1,3 +1,41 @@
+// first of all the buildscript block, then the plugins block
+buildscript {
+    repositories {
+        jcenter()
+        // gradle build-scan for profiling our build script
+        maven {
+            url 'https://plugins.gradle.org/m2'
+        }
+        google()
+    }
+    dependencies {
+        // these dependencies are used by gradle plugins, not by our projects
+
+        // Android gradle plugin
+        classpath 'com.android.tools.build:gradle:3.4.2'
+
+        // un-mocking of portable Android classes
+        classpath 'de.mobilej.unmock:UnMockPlugin:0.7.3'
+
+        // monitor our application method limit
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
+
+        // ribbonizer for easier distinction of non-release builds
+        classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
+    }
+}
+
+plugins {
+    // IDEA tasks for the project, see https://docs.gradle.org/current/userguide/idea_plugin.html
+    id 'idea'
+
+    // check for updates of gradle plugin dependencies
+    id 'com.github.ben-manes.versions' version '0.27.0'
+
+    // Build scan plugin, see https://plugins.gradle.org/plugin/com.gradle.build-scan
+    id 'com.gradle.build-scan' version '3.0'
+}
+
 /*
  * Just run this script using "gradlew", and it will show you typical examples of how to use it.
  */
@@ -43,48 +81,6 @@ tasks.register('cgeoHelp') {
         println ''
         println 'Available build types are: debug, nightly (requires an env var named NB), ' +
                 'rc (requires an env var named RC), release.'
-    }
-}
-
-/*
- * Build scan plugin shall be applied first
- */
-apply plugin: 'com.gradle.build-scan'
-/*
- * update check for all components in this gradle script
- */
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'idea'
-
-buildscript {
-    repositories {
-        jcenter()
-        // gradle build-scan for profiling our build script
-        maven {
-            url 'https://plugins.gradle.org/m2'
-        }
-        google()
-    }
-    dependencies {
-        // these dependencies are used by gradle plugins, not by our projects
-
-        // check for updates of gradle plugin dependencies
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
-
-        // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:3.4.2'
-
-        // un-mocking of portable Android classes
-        classpath 'de.mobilej.unmock:UnMockPlugin:0.7.3'
-
-        // monitor our application method limit
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
-
-        // ribbonizer for easier distinction of non-release builds
-        classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
-
-        // gradle build script profiling
-        classpath 'com.gradle:build-scan-plugin:2.4.2'
     }
 }
 
