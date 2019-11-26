@@ -37,6 +37,7 @@ DO_PR=0
 if [ $# -eq 1 ]; then
     if [ $1 -eq pr ]; then
         DO_PR=1
+	debug "create PR"
     fi
 fi
 
