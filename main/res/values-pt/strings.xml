@@ -6,7 +6,7 @@
     <string name="cache">Cache</string>
     <string name="detail">Detalhes</string>
     <string name="search">Pesquisar</string>
-    <string name="helpers">Aplicações Úteis</string>
+    <string name="helpers">Aplicações úteis</string>
     <string name="about">Acerca do c:geo</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
@@ -28,15 +28,15 @@
     <string name="wherigo">Geocache Wherigo™</string>
     <string name="communceleb">Evento Comemoração da Comunidade</string>
     <string name="ape">Geocache Projecto A.P.E.</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeak HQ</string>
     <string name="gchqceleb">Celebração Geocaching HQ</string>
     <string name="gps">Exibição das GPS Adventures</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Geocaching Block Party</string>
     <string name="unknown">Tipo Desconhecido</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Pequeno</string>
-    <string name="cache_size_regular">Normal</string>
+    <string name="cache_size_regular">Regular</string>
     <string name="cache_size_large">Grande</string>
     <string name="cache_size_other">Outro</string>
     <string name="cache_size_virtual">Virtual</string>
@@ -48,13 +48,13 @@
     <string name="wp_final">Localização final</string>
     <string name="wp_stage">Etapa da multi-cache</string>
     <string name="wp_puzzle">Pergunta para responder</string>
-    <string name="wp_pkg">Parque de estacionamento</string>
-    <string name="wp_trailhead">Início de trilho</string>
+    <string name="wp_pkg">Zona de estacionamento</string>
+    <string name="wp_trailhead">Trilho</string>
     <string name="wp_waypoint">Ponto de referência</string>
-    <string name="wp_original">Coordenadas Originais</string>
+    <string name="wp_original">Coordenadas originais</string>
     <!-- logs -->
     <string name="log_found">Encontrada</string>
-    <string name="log_dnf">Não Encontrada</string>
+    <string name="log_dnf">Não encontrada</string>
     <string name="log_note">Nota</string>
     <string name="log_published">Publicada</string>
     <string name="log_enabled">Activada</string>
@@ -64,31 +64,31 @@
     <string name="log_retrieved">Recolhido</string>
     <string name="log_placed">Colocado</string>
     <string name="log_grabbed">Recolhido algures</string>
-    <string name="log_movecollection">Mover para colecção</string>
-    <string name="log_moveinventory">Mover para inventário</string>
+    <string name="log_movecollection">Mover para a colecção</string>
+    <string name="log_moveinventory">Mover para o inventário</string>
     <string name="log_maintained">Manutenção efectuada</string>
     <string name="log_maintenance_needed">Precisa de manutenção</string>
     <string name="log_update">Coordenadas actualizadas</string>
     <string name="log_archived">Arquivada</string>
     <string name="log_unarchived">Desarquivada</string>
     <string name="log_needs_archived">Precisa de arquivamento</string>
-    <string name="log_discovered">Avistado</string>
+    <string name="log_discovered">Visto</string>
     <string name="log_reviewer">Nota de revisão</string>
     <string name="log_submit_for_review">Enviar para revisão</string>
-    <string name="log_retractlisting">Anular publicação</string>
+    <string name="log_retractlisting">Retracto da publicação</string>
     <string name="log_marked_missing">Dado como desaparecido</string>
-    <string name="log_tb_nothing">Não fazer nada</string>
-    <string name="log_tb_visit">Visitado</string>
-    <string name="log_tb_drop">Deixei aqui</string>
+    <string name="log_tb_nothing">Sem acção</string>
+    <string name="log_tb_visit">Visitar</string>
+    <string name="log_tb_drop">Deixar</string>
     <string name="log_tb_sortby">Ordenar por Trackable</string>
     <string name="log_tb_changeall">Alterar todos</string>
     <string name="log_tb_grabbed">Recolhido algures</string>
     <string name="log_tb_note">Nota</string>
-    <string name="log_tb_discovered">Descoberto</string>
+    <string name="log_tb_discovered">Visto</string>
     <string name="log_tb_archived">Arquivado</string>
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
-    <string name="log_saving_and_uploading">A publicar o registo e envio da imagem…</string>
+    <string name="log_saving_and_uploading">A publicar o registo e a enviar a imagem…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
     <string name="log_posting_gcvote">A publicar GCVote…</string>
@@ -100,14 +100,14 @@
     <string name="log_date_future_not_allowed">Não são permitidos registos com datas futuras.</string>
     <string name="log_add">Adicionar</string>
     <string name="log_repeat">Repetir último registo</string>
-    <string name="log_no_rating">Sem pontuação</string>
-    <string name="log_stars_1_description">Má</string>
-    <string name="log_stars_15_description">Fraca</string>
-    <string name="log_stars_2_description">Abaixo da média</string>
-    <string name="log_stars_25_description">Razoável</string>
-    <string name="log_stars_3_description">Normal</string>
-    <string name="log_stars_35_description">Nada má</string>
-    <string name="log_stars_4_description">Acima da média</string>
+    <string name="log_no_rating">Nenhuma classificação</string>
+    <string name="log_stars_1_description">Muito má</string>
+    <string name="log_stars_15_description">Má</string>
+    <string name="log_stars_2_description">Fraca</string>
+    <string name="log_stars_25_description">Pior que a média</string>
+    <string name="log_stars_3_description">Média</string>
+    <string name="log_stars_35_description">Melhor que a média</string>
+    <string name="log_stars_4_description">Boa</string>
     <string name="log_stars_45_description">Muito boa</string>
     <string name="log_stars_5_description">Excelente</string>
     <string name="log_webcam">Fotografia tirada pela webcam</string>
@@ -116,7 +116,7 @@
     <string name="log_announcement">Anúncio</string>
     <string name="log_today">Hoje</string>
     <string name="log_yesterday">Ontem</string>
-    <string name="log_smilies">Smilies</string>
+    <string name="log_smilies">Sorrisos</string>
     <string name="log_image">Imagem</string>
     <string name="log_image_attach">Anexar Imagem</string>
     <string name="log_image_stored">Existente</string>
@@ -127,7 +127,7 @@
     <string name="log_password_title">Palavra-passe:</string>
     <string name="log_report_problem">Reportar problema:</string>
     <string name="log_hint_log_password">Palavra-passe para registo da cache</string>
-    <string name="log_oc_team_comment">Comentário da OC Team</string>
+    <string name="log_oc_team_comment">Comentário da Equipa OC</string>
     <string name="log_your_saved_log">O seu registo gravado</string>
     <string name="log_empty_logbook">O logbook desta cache está vazio.</string>
     <string name="log_problem_none">Sem problemas</string>
@@ -157,18 +157,18 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
-    <string name="err_server">Falha ao estabelecer ligação a \"Geocaching.com\". O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
-    <string name="err_server_ec">Impossível estabelecer ligação com \"Extremcaching.com\". O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
-    <string name="err_server_su">Falha ao estabelecer ligação a Geocaching.su. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
-    <string name="err_server_gk">Impossível estabelecer ligação com GeoKrety.org. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
-    <string name="err_login">Nenhuma informação de inicio de sessão gravada</string>
-    <string name="err_login_failed_toast">O c:geo não consegue iniciar a sessão. No modo offline, o c:geo funciona com as geocaches guardadas em Memória. Verifique as definições de inicio de sessão ou active a sua ligação à Internet.</string>
-    <string name="err_unknown">Erro desconhecido. Por favor, consulte <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
+    <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
+    <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
+    <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
+    <string name="err_server_gk">Não é possível contactar o sítio \'GeoKrety.org\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
+    <string name="err_login">Nenhuma informação de início de sessão guardada</string>
+    <string name="err_login_failed_toast">O c:geo não consegue iniciar a sessão. No modo offline, o c:geo funciona com as caches guardadas em \'Armazenadas\'. Verifique as definições de início de sessão ou active a sua ligação à Internet.</string>
+    <string name="err_unknown">Erro desconhecido</string>
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
-    <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
+    <string name="err_comm">Erro de comunicação desconhecido</string>
     <string name="err_missing_auth">Não foi definido utilizador e/ou palavra-passe</string>
     <string name="err_wrong">Utilizador e/ou palavra-passe incorretos</string>
-    <string name="err_maintenance">O geocaching.com está em manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em Memória.</string>
+    <string name="err_maintenance">O sítio \'geocaching.com\' está indisponível para manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em \'Armazenadas\'.</string>
     <string name="err_license">Não fez a aceitação do contrato de utilização de Geocaching.com. Por essa razão, o c:geo não consegue carregar as coordenadas da geocache.</string>
     <string name="err_unvalidated_account">Deverá primeiro validar a sua conta no sítio web \'geocaching.com\'.</string>
     <string name="err_unpublished">A geocache solicitada não está publicada.</string>
@@ -194,7 +194,7 @@
     <string name="err_dwld_details_failed">O c:geo falhou a transferência dos detalhes da geocache.</string>
     <string name="err_load_descr_failed">O c:geo não consegue carregar a descrição.</string>
     <string name="err_location_unknown">O c:geo desconhece a localização da geocache.</string>
-    <string name="err_missing_device_name">Por favor insira um nome para este dispositivo antes de registar.</string>
+    <string name="err_missing_device_name">Por favor, introduza um nome para o dispositivo antes de o registar.</string>
     <string name="err_favorite_failed">A alteração da atribuição de favorito falhou.</string>
     <string name="err_select_logimage_failed">A selecção da imagem para o registo falhou.</string>
     <string name="err_acquire_image_failed">A obtenção da imagem falhou.</string>
@@ -216,11 +216,11 @@
     <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
     <string name="err_log_post_missing_tracking_code">Código de acompanhamento em falta.</string>
     <string name="err_log_post_missing_coordinates">Coordenadas em falta.</string>
-    <string name="err_log_post_failed">Parece que o seu registo não foi publicado. Por favor, verifique a página Web original da cache.</string>
-    <string name="err_log_post_failed_ec">Parece que o seu  registo não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
-    <string name="err_log_post_failed_gk">Parece que o seu registo não foi postado. Por favor verifique-o na GeoKrety.org.</string>
-    <string name="err_logimage_post_failed">Parece que a imagem anexada ao registo não foi enviada. Por favor, confirme se foi enviada na página web da geocache.</string>
-    <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
+    <string name="err_log_post_failed">Parece que o seu registo não foi publicado. Por favor, verifique no sítio web referente à cache se foi publicado o registo.</string>
+    <string name="err_log_post_failed_ec">Parece que o seu registo não foi publicado. Por favor, verifique-o em \'Extremcaching.com\'.</string>
+    <string name="err_log_post_failed_gk">Parece que o seu registo não foi publicado. Por favor, verifique-o em \'GeoKrety.org\'.</string>
+    <string name="err_logimage_post_failed">Parece que a imagem que anexou ao registo não foi enviada. Por favor, verifique no sítio web referente à cache se a imagem foi enviada.</string>
+    <string name="err_search_address_forgot">O c:geo esqueceu a morada que tentou encontrar.</string>
     <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
     <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
     <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
@@ -235,22 +235,19 @@
     <string name="warn_no_connector">Nenhum dos serviços de geocaching activados fornece, actualmente, esse tipo de pesquisa.</string>
     <string name="warn_search_help_title">Precisa de ajuda?</string>
     <string name="warn_search_help_address">Preencha o endereço ou o nome da localização. Por exemplo, use uma morada como \"Avenida da Liberdade 100, Lisboa, Portugal\", um nome de cidade como \"Coimbra\" ou simplesmente o nome de algum sítio como \"Parque das Nações\".</string>
-    <string name="warn_search_help_gccode">Preencha o código da geocache. Por exemplo \"GC1VCAZ\".</string>
+    <string name="warn_search_help_gccode">Introduza o código da geocache. Por exemplo \"GC1VCAZ\".</string>
     <string name="warn_search_help_keyword">Introduza total ou parcialmente o nome da geocache. Por exemplo \"Cache Nocturna\".</string>
     <string name="warn_search_help_user">Introduza o nome de um geocacher.</string>
-    <string name="warn_search_help_tb">Preencha o código do trackable. Por exemplo \"TB29QMZ\".</string>
-    <string name="warn_log_text_fill">Por favor, preencha algum texto para o registo.</string>
+    <string name="warn_search_help_tb">Introduza o código do trackable. Por exemplo \"TB29QMZ\".</string>
+    <string name="warn_log_text_fill">Por favor, insira algum texto para o registo.</string>
     <string name="warn_load_images">O c:geo falhou o carregamento de imagens.</string>
     <string name="warn_invalid_mapfile">O ficheiro de mapa seleccionado não é suportado pela versão mapsforge 0.3.0.\nOs mapas offline não estão disponíveis.</string>
-    <string name="warn_deprecated_mapfile">Está a utilizar um ficheiro de mapa de uma versão obsoleta.\nConsidere mudar o mapa para a versão 0.3.0.\nNa próxima versão vamos deixar de suportar a 0.2.4.</string>
+    <string name="warn_deprecated_mapfile">Está a utilizar um ficheiro de mapa de uma versão obsoleta.\nConsidere mudar o mapa para a versão 0.3.0.\nNa próxima versão do c:geo vamos deixar de suportar a 0.2.4.</string>
     <string name="warn_nonexistant_mapfile">O ficheiro de mapa seleccionado não existe.\nOs mapas offline não estão disponíveis.</string>
     <string name="warn_rendertheme_missing">Tema de mapa não encontrado.</string>
-    <string name="warn_pocket_query_select">Nenhuma Pocket query seleccionada.</string>
-    <string name="warn_no_pocket_query_found">Nenhuma pocket query encontrada on-line.</string>
+    <string name="warn_pocket_query_select">Nenhuma Pocket Query seleccionada.</string>
+    <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
     <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
-    <string name="warn_notloggedin_title">Modo Offline</string>
-    <string name="warn_notloggedin_short">Não tem a sessão iniciada. O mapa em tempo real mostrará apenas as caches armazenadas localmente.</string>
-    <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nOu não há uma ligação de rede, um problema com o servidor ou precisa de (re)configurar os seus serviços de geocaching.\n\nQuer configurar os serviços agora?</string>
     <string name="err_read_pocket_query_list">Erro ao ler a lista de Pocket Query.</string>
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
@@ -260,7 +257,7 @@
     <string name="info_log_post_save">Guardar offline</string>
     <string name="info_log_cleared">O registo foi limpo.</string>
     <string name="info_waypoint_coordinates_cleared">Coordenadas limpas.</string>
-    <string name="info_log_type_changed">O tipo de registo foi alterado!</string>
+    <string name="info_log_type_changed">O tipo de registo seleccionado foi alterado!</string>
     <string name="info_log_report_problem_changed">Foram alteradas as opções disponíveis para relatar um problema!</string>
     <string name="info_select_logimage_cancelled">Foi cancelada a selecção ou captura de imagem.</string>
     <string name="info_stored_image">Nova imagem guardada em:</string>
@@ -299,7 +296,7 @@
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Por perto</string>
     <string name="advanced_search_button">Pesquisar</string>
-    <string name="stored_caches_button">Memória</string>
+    <string name="stored_caches_button">Armazenadas</string>
     <string name="any_button">Ir para</string>
     <string name="unknown_scan">A leitura realizada não determinou qualquer código GC.</string>
     <!-- caches -->
@@ -314,9 +311,9 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minutos</item>
     </plurals>
-    <string name="caches_store_offline">Guardar na Memória</string>
-    <string name="caches_store_all">Guardar todas</string>
-    <string name="caches_store_unsaved">Guardar não memorizadas</string>
+    <string name="caches_store_offline">Armazenar para uso offline</string>
+    <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
+    <string name="caches_store_unsaved">Armazenar apenas caches por guardar</string>
     <string name="caches_store_selected">Memorizar seleccionada(s)</string>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
@@ -329,11 +326,11 @@
     <string name="caches_sort_favorites_ratio">Favoritos [%]</string>
     <string name="caches_sort_name">Nome</string>
     <string name="caches_sort_geocode">Código GC</string>
-    <string name="caches_sort_rating">Pontuação</string>
-    <string name="caches_sort_vote">Votos (pontuação própria)</string>
+    <string name="caches_sort_rating">Avaliação</string>
+    <string name="caches_sort_vote">Votos (avaliação própria)</string>
     <string name="caches_sort_inventory">Nº de itens no Inventário</string>
     <string name="caches_sort_date_hidden">Data de colocação</string>
-    <string name="caches_sort_date_logged">Data de Registo</string>
+    <string name="caches_sort_date_logged">Data do registo</string>
     <string name="caches_sort_finds">Nº de vezes encontrada</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Data de gravação no dispositivo</string>
@@ -355,11 +352,8 @@
     </plurals>
     <string name="caches_remove_progress">A remover caches</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
-    <string name="caches_upload_modifiedcoords">Carregar coordenadas modificadas</string>
+    <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">Quer carregar as coordenadas modificadas para todas as caches (seleccionadas) e substituir as coordenadas existentes no servidor? Isto não pode ser anulado.</string>
-    <string name="caches_upload_allcoords">Carregar coordenadas para todas as caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">AVISO - A enviar todas as coordenadas</string>
-    <string name="caches_upload_allcoords_warning">Isto irá substituir as coordenadas existentes no servidor, para todas as caches (seleccionadas) da sua lista, pelas coordenadas actuais da cache em c:geo! Isto deve ser utilizado apenas em casos especiais, p. ex. quando importou um ficheiro GPX que contém coordenadas corrigidas como coordenadas da cache. Isto não pode ser anulado e só o deve usar, se souber o que está a fazer. Em casos normais, pode preferir usar a função \"Carregar coordenadas modificadas\" no mesmo menu.</string>
     <string name="caches_refresh_selected">Actualizar seleccionada(s)</string>
     <string name="caches_refresh_all">Actualizar todas</string>
     <string name="caches_move_selected">Mover seleccionada(s)</string>
@@ -390,17 +384,12 @@
     <string name="caches_filter_own_rating">Com avaliação pessoal</string>
     <string name="caches_filter_multi_listing">Em múltiplas plataformas com registos discrepantes</string>
     <string name="caches_filter_own_waypoint">Com waypoints definidos por si</string>
-    <string name="caches_filter_missing_gcvote">Caches que encontrou por votar</string>
-    <string name="caches_filter_lists">Atribuída a uma lista</string>
     <string name="caches_removing_from_history">A remover do histórico…</string>
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
-    <string name="caches_clear_offlinelogs_progress">A limpar registos offline</string>
+    <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
-    <string name="caches_set_listmarker">Definir marcador de lista</string>
-    <string name="caches_listmarker_none">Sem marcador</string>
-    <string name="caches_listmarker_marker">Marcador %d</string>
-    <string name="caches_listmarker_selected">(seleccionado)</string>
+    <string name="caches_filter_missing_gcvote">Caches que encontrou por votar</string>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
     <string name="list_menu_create">Criar nova lista</string>
@@ -410,21 +399,21 @@
     <string name="list_title">Escolha uma lista</string>
     <string name="lists_title">Escolha as listas</string>
     <string name="lists_remove_all">Nenhum(a)</string>
-    <string name="list_inbox">Em memória</string>
+    <string name="list_inbox">Lista geral</string>
     <string name="list_all_lists">Todas as caches</string>
     <string name="list_dialog_create_title">Nova lista</string>
     <string name="list_dialog_create">Criar</string>
     <string name="list_dialog_create_ok">Foi criada uma nova lista</string>
     <string name="list_dialog_create_err">O c:geo falhou a criação da nova lista</string>
     <string name="list_dialog_remove_title">Remover lista</string>
-    <string name="list_dialog_remove_description">Pretende remover a lista actual de caches? Todas as caches presentes na lista serão movidas para a lista \"Em memória\".</string>
+    <string name="list_dialog_remove_description">Pretende remover a lista actual de caches? Todas as caches presentes na lista serão movidas para a \"Lista geral\".</string>
     <string name="list_dialog_remove_nowempty">Esta lista está vazia. Você quer removê-la?</string>
     <string name="list_dialog_remove">Remover</string>
     <string name="list_dialog_remove_ok">A lista foi removida</string>
     <string name="list_dialog_remove_err">O c:geo falhou a remoção da lista actual</string>
     <string name="list_dialog_rename_title">Mudar o nome da lista</string>
     <string name="list_dialog_rename">Mudar o nome</string>
-    <string name="list_not_available">A lista não se encontra mais disponível, a alterar para a lista padrão</string>
+    <string name="list_not_available">A lista já não está disponível, a alterar para a lista geral</string>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -471,7 +460,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_summary_appearance">Configurar unidades de distância, idioma e cores da Aplicação.</string>
     <string name="settings_title_cachedetails">Detalhes da cache</string>
     <string name="settings_summary_cachedetails">Personalizar a exibição de informações da cache.</string>
-    <string name="settings_title_offlinedata">Dados em memória</string>
+    <string name="settings_title_offlinedata">Dados armazenados</string>
     <string name="settings_summary_offlinedata">Configurar o armazenamento de outros dados off-line.</string>
     <string name="settings_title_logging">Registos</string>
     <string name="settings_summary_logging">Configurar a sua assinatura e as opções de registo.</string>
@@ -483,7 +472,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_title_data_dir">Pasta de dados de geocache</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocache (%1$s em uso)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
-    <string name="calculate_dataDir">A determinar a memória em utilização com os dados das Geocaches</string>
+    <string name="calculate_dataDir">A calcular utilização de armazenamento para dados de Geocaches</string>
     <string name="settings_data_dir_item">%1$s (%2$s livres)</string>
     <string name="confirm_data_dir_move_title">Mover a pasta dos dados de geocaches?</string>
     <string name="confirm_data_dir_move">Mover pasta de dados de geocache pode demorar muito tempo, dependendo do seu dispositivo e volume de dados.</string>
@@ -542,17 +531,17 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_activate_su">Activar</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
-    <string name="err_gcvote_send_rating">Erro ao enviar a classificação, verifique a palavra-passe do GCVote nas definições ou limpe a mesma.</string>
+    <string name="err_gcvote_send_rating">Erro ao enviar a avaliação, verifique a palavra-passe do GCVote nas definições ou limpe a mesma.</string>
     <string name="gcvote_sent">Votação enviada com sucesso</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activar</string>
     <string name="init_username">Nome de utilizador</string>
     <string name="init_password">Palavra-passe</string>
     <string name="init_login">Verificar autenticação</string>
-    <string name="init_login_popup">Iniciar sessão</string>
+    <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
     <string name="init_login_popup_ok">Sessão iniciada</string>
-    <string name="init_login_popup_failed">Falha ao iniciar sessão</string>
+    <string name="init_login_popup_failed">Falha no início de sessão</string>
     <string name="init_login_popup_failed_reason">Início de sessão falhou: %s</string>
     <string name="init_login_popup_not_authorized">Não autorizado</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
@@ -576,12 +565,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texto de registo</string>
     <string name="init_signature_template_size">Tamanho</string>
-    <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
+    <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra uma página adicional com os registos dos seus amigos e registos individuais</string>
-    <string name="init_openlastdetailspage">Ir para a Última Página vista</string>
-    <string name="init_summary_openlastdetailspage">Mostrar a última página vista ao consultar os detalhes da geocache</string>
+    <string name="init_openlastdetailspage">Último separador de detalhes visto</string>
+    <string name="init_summary_openlastdetailspage">Mostra a última página vista ao consultar os detalhes da cache</string>
     <string name="init_skin">Tema claro</string>
     <string name="init_summary_skin">Usar o tema claro (Requer reinício)</string>
     <string name="init_address">Mostrar endereço</string>
@@ -608,13 +597,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
     <string name="init_choose_list">Escolher Lista</string>
     <string name="init_summary_choose_list">Perguntar em qual lista se guarda as geocaches</string>
-    <string name="init_listdisplay">Mostrar listas adicionais na listagem de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup">Backup de geocaches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
-    <string name="init_backup_running">A criar uma cópia de segurança da base de dados das geocaches…</string>
+    <string name="init_backup_running">A criar uma cópia de segurança da base de dados de caches…</string>
     <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados contendo geocaches e pontos adicionais, mas não as suas imagens da geocache e nenhuma definição do programa.</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
@@ -624,7 +612,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="backup_confirm_overwrite">Quer substituir a cópia de segurança existente de %s?</string>
     <string name="restore_confirm_overwrite">Quer substituir %s no seu dispositivo com a cópia de segurança?</string>
     <string name="init_restore_success">Restauro concluído.</string>
-    <string name="init_restore_failed_dbrecreated">Falha no restauro: ficheiro de cópia de segurança corrompido, a base de dados teve de ser recriada.</string>
     <string name="init_restore_failed">O restauro falhou.</string>
     <string name="init_restore_running">A restaurar a base de dados de caches…</string>
     <string name="init_restore_confirm">A base de dados está vazia. Quer restaurar a cópia de segurança da base de dados?</string>
@@ -632,21 +619,21 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro com uma cópia de segurança.</string>
     <string name="settings_title_backup">Cópia de Segurança / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings">Definições da cópia de segurança do programa</string>
-    <string name="init_backup_settings_backup_light">Definições da cópia de segurança (sem dados da conta)</string>
-    <string name="init_backup_settings_backup_full">Definições da cópia de segurança (completo)</string>
+    <string name="init_backup_settings">Cópia de segurança das definições do programa</string>
+    <string name="init_backup_settings_backup_light">Criar cópia das definições (sem dados da conta)</string>
+    <string name="init_backup_settings_backup_full">Criar cópia das definições (completo)</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
-    <string name="settings_saved">Definições gravadas com sucesso para:</string>
+    <string name="settings_saved">Definições memorizadas</string>
     <string name="init_backup_settings_restore">Restaurar definições</string>
     <string name="init_backup_settings_restore_confirm">Deseja substituir as suas actuais definições?</string>
-    <string name="init_backup_settings_restore_no">Não estão disponíveis cópias de segurança das definições</string>
+    <string name="init_backup_settings_restore_no">Não está disponível cópia de segurança das definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restored">Definições restauradas</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo permite a utilização de mapas offline. Poderá transferir mapas do Mapsforge ou até criar os seus próprios mapas a partir de ficheiros OSM. Para a funcionalidade de mapas offline estar disponível, primeiro precisa de seleccionar o directório dos mapas offline.</string>
-    <string name="settings_info_themes_title">Informações sobre Map Themes</string>
+    <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objectos, como ciclovias ou linhas da altitude dentro do mapa.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="settings_title_scale_map_text">Escala do texto no mapa</string>
@@ -660,8 +647,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_maptrail">Mostra o rasto no mapa</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
-    <string name="init_trackautovisit">Visita de TBs</string>
-    <string name="init_summary_trackautovisit">Marca automaticamente os trackables como \"Visitei\"</string>
+    <string name="init_trackautovisit">Visitar TBs</string>
+    <string name="init_summary_trackautovisit">Predefine a acção \"Visitar\" a todos os seus trackables</string>
     <string name="init_sigautoinsert">Inserir automaticamente</string>
     <string name="init_loaddirectionimg">Imagem de direcção</string>
     <string name="init_summary_loaddirectionimg">Se necessário transfere a imagem da seta direccional (apenas necessário para membros básicos)</string>
@@ -680,7 +667,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_dbmove_dbmove">A mover a base de dados</string>
     <string name="init_dbmove_running">A mover a base de dados</string>
     <string name="init_dbmove_success">Base de dados movida com sucesso.</string>
-    <string name="init_dbmove_failed">Falha ao mover a base de dados.</string>
+    <string name="init_dbmove_failed">Falha ao mover a base de dados</string>
     <string name="init_datadirmove_datadirmove">A mover pasta de dados de geocache</string>
     <string name="init_datadirmove_running">A mover pasta de dados de geocache</string>
     <string name="init_datadirmove_success">Pasta de dados de geocache movida com sucesso.</string>
@@ -688,7 +675,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_plain_logs">Sem cores nos registos</string>
     <string name="init_summary_plain_logs">Mostra os registos sem a sinalização colorida</string>
     <string name="init_use_native_ua">Browser do Android</string>
-    <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de inicio de sessão em alguns fornecedores de Internet.</string>
+    <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapas</string>
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens (ex: provenientes de registos) e outros ficheiros relacionados com uma geocache numa pasta separada. Nalguns casos (como ao importar/exportar a base de dados) esta pasta pode conter ficheiros desactualizados, que podem ser apagados aqui.</string>
@@ -757,7 +744,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
     <string name="init_sendToCgeo_description">O <b>Send2cgeo</b> permite-lhe enviar geocaches para o seu dispositivo Android directamente do site geocaching.com, utilizando uma extensão especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas precisa de se registar, caso pretenda utilizar o send2cgeo. O c:geo irá funcionar mesmo sem registar o seu dispositivo.</string>
     <string name="init_sendToCgeo_register">Solicitar registo</string>
-    <string name="init_sendToCgeo_registering">Registando o seu dispositivo para send2cgeo…</string>
+    <string name="init_sendToCgeo_registering">A registar o seu dispositivo para send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">O registo foi bem sucedido. O código PIN é %d. Use-o no sítio web do c:geo para adicionar este dispositivo ao seu navegador.</string>
     <string name="init_sendToCgeo_register_fail">O registo falhou.</string>
     <string name="sendToCgeo_download_fail">O c:geo falhou a transferência das geocaches. Não há ligação à Internet ou o send2cgeo encontra-se fora de serviço.</string>
@@ -804,7 +791,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">Uma cache</item>
-        <item quantity="other">%1$d Caches</item>
+        <item quantity="other">%1$d caches</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
@@ -812,13 +799,13 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="other">restam %1$d dias</item>
     </plurals>
     <string name="last_day_available">último dia disponível</string>
-    <string name="cache_offline">Em memória</string>
+    <string name="cache_offline">Armazenada</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Remover</string>
-    <string name="cache_offline_store">Memorizar</string>
+    <string name="cache_offline_store">Armazenar</string>
     <string name="cache_offline_manage">Gerir</string>
     <string name="cache_offline_store_in_list">Armazenar na lista</string>
-    <string name="cache_offline_stored">Memorizada no dispositivo</string>
+    <string name="cache_offline_stored">Armazenada no dispositivo</string>
     <string name="cache_offline_not_ready">Não está pronta\npara utilização offline</string>
     <string name="cache_offline_time_about">há</string>
     <string name="cache_offline_time_mins">minutos</string>
@@ -851,7 +838,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_personal_note">Nota pessoal</string>
     <string name="cache_personal_note_edit">Editar</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
-    <string name="cache_personal_note_truncation">Esta nota individual será desconsiderada após %d caracteres por Geocaching.com.</string>
+    <string name="cache_personal_note_truncation">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
     <string name="cache_personal_note_upload">Carregar</string>
     <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
@@ -902,7 +889,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">A guardar geocache para utilização offline…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
-    <string name="cache_dialog_offline_drop_message">A remover geocache da memória do dispositivo…</string>
+    <string name="cache_dialog_offline_drop_message">A remover cache do armazenamento do dispositivo…</string>
     <string name="cache_dialog_refresh_title">Actualizar</string>
     <string name="cache_dialog_refresh_message">A recarregar a informação da geocache…</string>
     <string name="cache_dialog_watchlist_add_title">Lista de observação</string>
@@ -955,7 +942,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Memória</string>
     <string name="cache_status_offline_log">Registo gravado</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
@@ -965,16 +951,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_status_disabled">Desactivada</string>
     <string name="cache_status_premium">Apenas membros premium</string>
     <string name="cache_status_not_premium">Disponível para todos os membros</string>
-    <string name="cache_status_stored">Em memória</string>
-    <string name="cache_status_not_stored">Não memorizada</string>
-    <string name="cache_status_stored_lasteighthours">Dentro das últimas oito horas</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Dentro das últimas vinte e quatro horas</string>
-    <string name="cache_status_stored_lastsevendays">Dentro dos últimos sete dias</string>
-    <string name="cache_status_stored_lastthirtydays">Dentro dos últimos 30 dias</string>
-    <string name="cache_status_stored_morethaneighthours">Antes das últimas oito horas</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Antes das últimas vinte e quatro horas</string>
-    <string name="cache_status_stored_morethansevendays">Antes dos últimos sete dias</string>
-    <string name="cache_status_stored_morethanthirtydays">Antes dos últimos 30 dias</string>
+    <string name="cache_status_stored">Armazenada</string>
+    <string name="cache_status_not_stored">Não está armazenada</string>
     <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nome</string>
     <string name="cache_type">Tipo</string>
@@ -982,8 +960,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>
-    <string name="cache_rating">Pontuação</string>
-    <string name="cache_own_rating">A minha pontuação</string>
+    <string name="cache_rating">Avaliação</string>
+    <string name="cache_own_rating">A sua avaliação</string>
     <string name="cache_rating_of">de</string>
     <string name="cache_favorite">Favoritos</string>
     <string name="cache_owner">Dono</string>
@@ -994,7 +972,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originais</string>
     <string name="cache_spoiler_images_title">Imagens spoiler</string>
-    <string name="cache_log_types">Tipos de log</string>
+    <string name="cache_log_types">Tipos de registo</string>
     <string name="cache_coordinates_no">Esta geocache não tem coordenadas.</string>
     <string name="cache_clear_history">Apagar histórico</string>
     <string name="cache_remove_from_history">Remover do histórico</string>
@@ -1068,9 +1046,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_add_title">Adicionar ponto adicional</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota do utilizador</string>
-    <string name="waypoint_visited">Visitado</string>
-    <string name="waypoint_set_visited">Ponto adicional definido como visitado</string>
-    <string name="waypoint_unset_visited">Ponto adicional definido como não visitado</string>
+    <string name="waypoint_visited">Percorrido</string>
     <string name="waypoint_save">Guardar</string>
     <string name="waypoint_cancel_edit">Cancelar</string>
     <string name="waypoint_loading">A carregar ponto adicional…</string>
@@ -1084,10 +1060,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_localy_reset_cache_coords">Repor no c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Repor no c:geo e no website</string>
     <string name="waypoint_being_saved">A guardar ponto adicional…</string>
-    <string name="waypoint_coordinates_couldnt_be_modified_on_website">O sítio web não suporta a modificação das coordenadas da geocache.</string>
+    <string name="waypoint_coordinates_couldnt_be_modified_on_website">O sítio web não suporta a modificação das coordenadas da cache.</string>
     <string name="waypoint_coordinates_upload_error">Ocorreu um erro ao modificar as coordenadas no site.</string>
     <string name="waypoint_coordinates_uploading_to_website">A enviar as coordenadas %s para o sítio web.</string>
-    <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da geocache no website foram modificadas para: %s.</string>
+    <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da cache no sítio web foram modificadas para: %s.</string>
     <string name="waypoint_done">Feito</string>
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>
     <string name="waypoint_duplicated">Ponto adicional duplicado</string>
@@ -1157,7 +1133,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
-    <string name="search_pocket_loading">A carregar uma lista de Pocket Queries</string>
+    <string name="search_pocket_loading">A carregar lista de Pocket Queries</string>
     <string name="search_pocket_select">Escolher Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
@@ -1181,8 +1157,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="trackable_spotted_archived">Arquivado</string>
     <string name="trackable_origin">Origem</string>
     <string name="trackable_unknown">Desconhecido</string>
-    <string name="trackable_released">Criado</string>
-    <string name="trackable_distance">Viajado</string>
+    <string name="trackable_released">Lançado</string>
+    <string name="trackable_distance">Percorreu</string>
     <string name="trackable_touch">Contacto</string>
     <string name="trackable_not_activated">Trackable não activado</string>
     <string name="trackable_travelbug">Travelbug</string>
@@ -1222,24 +1198,24 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="helper_calendar_pastevent_question">A data do evento está no passado. Adicionar de qualquer maneira?</string>
     <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>
     <string name="helper_contacts_title">c:geo - plugin contactos</string>
-    <string name="helper_contacts_description">Permite aceder a um contacto (da sua agenda telefónica) directamente a partir de um registo feito numa geocache. Assim será mais fácil de pedir ajuda aos seus amigos.</string>
+    <string name="helper_contacts_description">Permite-lhe que aceda directamente a um contacto (da sua lista de contactos), a partir de um registo feito numa geocache. Assim será mais fácil pedir ajuda aos seus amigos.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a geocaching.com, poderá enviar as geocaches directamente para o seu smartphone com o clique de um botão no navegador.</string>
     <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+    <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_gps_locker_title">GPS Locker</string>
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
-    <string name="helper_barcode_title">Barcode Scanner</string>
+    <string name="helper_barcode_title">Leitor de código de barras</string>
     <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler, por exemplo, um código de barras directamente do ecrã do seu computador.</string>
-    <string name="helper_pocketquery_title">Criador de Pocket Query</string>
-    <string name="helper_pocketquery_description">Permite a fácil criação e transferência de Pocket Query baseado na sua posição actual ou num ponto seleccionado no mapa. Requer uma conta premium em Geocaching.com.</string>
+    <string name="helper_pocketquery_title">Pocket Query Creator</string>
+    <string name="helper_pocketquery_description">Permite a fácil criação e transferência de Pocket Query, baseado na sua posição actual ou num ponto seleccionado no mapa. Requer uma conta Premium em \'Geocaching.com\'.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das geocaches no c:geo com um toque longo sobre o texto da descrição da geocache (mesmo sem ligação à Internet).</string>
     <string name="helper_wear_title">c:geo Wear</string>
-    <string name="helper_wear_description">O c:geo Wear é uma extensão para o c:geo que possibilita que siga até as geocaches utilizando o seu smartwatch Android Wear.</string>
+    <string name="helper_wear_description">O c:geo Wear é uma extensão para c:geo que lhe permite que siga até às geocaches utilizando o seu smartwatch (relógio inteligente) com o sistema Wear OS.</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
@@ -1251,18 +1227,18 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export">Exportar</string>
     <string name="export_progress">Exportar: %1$s</string>
     <string name="export_exportedto">exportado para</string>
-    <string name="export_failed">Exportação falhou</string>
+    <string name="export_failed">A exportação falhou</string>
     <string name="export_fieldnotes">Notas de campo</string>
-    <string name="export_fieldnotes_info">As notas de campo serão exportadas para /sdcard/field-notes com a data e a hora actual como nome de ficheiro.</string>
-    <string name="export_fieldnotes_upload">Carregar para \'geocaching.com\'</string>
+    <string name="export_fieldnotes_info">As notas de campo serão exportadas para \'/sdcard/field-notes\', com a data e a hora actual como nome de ficheiro.</string>
+    <string name="export_fieldnotes_upload">Enviar para geocaching.com</string>
     <string name="export_fieldnotes_uploading">A enviar…</string>
-    <string name="export_fieldnotes_upload_success">Carregamento para \'geocaching.com\' bem sucedido</string>
+    <string name="export_fieldnotes_upload_success">Envio para geocaching.com bem sucedido</string>
     <string name="export_fieldnotes_onlynew">Apenas a partir da última exportação</string>
     <string name="export_fieldnotes_creating">A criar as notas de campo…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">O ficheiro GPX vai ser exportado para %1$s com a data e a hora actual como nome de ficheiro.</string>
     <string name="export_gpx_to">Enviar GPX exportado para</string>
-    <string name="export_confirm_title">Exportar %1$s</string>
+    <string name="export_confirm_title">A exportar %1$s</string>
     <string name="export_confirm_message">Para: %1$s\nNome de ficheiro: %2$s</string>
     <string name="export_persnotes">Notas pessoais</string>
     <string name="export_persnotes_uploading">A enviar nota pessoal %1$d</string>
@@ -1323,7 +1299,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_field_puzzle_yes">Quebra-cabeças a resolver no local</string>
     <string name="attribute_field_puzzle_no">Não é quebra-cabeças a resolver no local</string>
     <string name="attribute_nightcache_yes">Geocache nocturna</string>
-    <string name="attribute_nightcache_no">Não é geocache nocturna</string>
+    <string name="attribute_nightcache_no">Não é cache nocturna</string>
     <string name="attribute_parkngrab_yes">Estacionar e encontrar</string>
     <string name="attribute_parkngrab_no">Não é só estacionar e encontrar</string>
     <string name="attribute_abandonedbuilding_yes">Estrutura abandonada</string>
@@ -1464,8 +1440,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_other_cache_no">Não é outro tipo de cache</string>
     <string name="attribute_ask_owner_yes">Contactar previamente o dono a solicitar condições</string>
     <string name="attribute_ask_owner_no">Não requer contactar o dono a solicitar condições</string>
-    <string name="attribute_unknown_yes">Atributo desconhecido presente</string>
-    <string name="attribute_unknown_no">Sem atributo desconhecido presente</string>
+    <string name="attribute_unknown_yes">Atributo desconhecido</string>
+    <string name="attribute_unknown_no">Não há atributos desconhecidos</string>
     <string name="attribute_geotour_yes">Parte de GeoTour</string>
     <string name="attribute_geotour_no">Não é parte de GeoTour</string>
     <string name="attribute_kids_2_yes">Leve os seus filhos</string>
@@ -1474,8 +1450,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_historic_site_no">Não é um local histórico</string>
     <string name="attribute_magnetic_yes">Cache magnética</string>
     <string name="attribute_magnetic_no">Não é uma cache magnética</string>
-    <string name="attribute_usb_cache_yes">Cache USB (dead drop)</string>
-    <string name="attribute_usb_cache_no">Cache sem USB presente (dead drop)</string>
+    <string name="attribute_usb_cache_yes">É uma cache Dead Drop USB</string>
+    <string name="attribute_usb_cache_no">Não é uma cache Dead Drop USB</string>
     <string name="attribute_shovel_yes">Pode precisar de uma pá</string>
     <string name="attribute_shovel_no">Não precisa de uma pá</string>
     <string name="attribute_specific_access_yes">Disponível a horas específicas (pode ser necessário pagar entrada)</string>
@@ -1522,15 +1498,15 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Parece que utiliza uma versão de Android inferior a 4.1. Lançamentos futuros do c:geo podem não estar mais disponíveis para o seu dispositivo.</string>
     <!-- text-to-speech for compass view -->
-    <string name="tts_service">Bússola que fala</string>
+    <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
-    <string name="tts_started">Iniciou fala</string>
+    <string name="tts_started">Início das instruções de voz</string>
     <string name="tts_stopped">Parou fala</string>
     <string name="err_tts_lang_not_supported">A linguagem actual não é suportada pela conversão de texto em voz.</string>
-    <string name="tts_one_kilometer">um quilômetro</string>
+    <string name="tts_one_kilometer">um quilómetro</string>
     <plurals name="tts_kilometers">
-        <item quantity="one">%s quilômetros</item>
-        <item quantity="other">%s quilômetros</item>
+        <item quantity="one">%s quilómetro</item>
+        <item quantity="other">%s quilómetros</item>
     </plurals>
     <string name="tts_one_meter">um metro</string>
     <plurals name="tts_meters">
@@ -1574,14 +1550,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_connectorGeokretyActive">Trackables Geokrety</string>
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Nenhuma conta configurada.</string>
-    <string name="init_geokrety_register_ok">Inicio de sessão com sucesso</string>
+    <string name="init_geokrety_register_ok">Início de sessão bem-sucedido</string>
     <string name="init_geokrety_register_fail">Falha ao iniciar sessão</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">Id de utilizador: %s</string>
     <string name="trackable_title_log_without_geocode">Código GC não definido</string>
-    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
+    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
-    <string name="geokrety_parsing_failed">Falha ao analisar a resposta GeoKrety.</string>
+    <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
     <string name="settings_map_direction">Mostrar a direcção</string>
     <string name="settings_summary_map_direction">Mostra uma linha de direcção para o destino de navegação</string>
     <string name="map_direction">Mostrar a direcção</string>
@@ -1613,12 +1589,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
-    <string name="pq_available_for_download">Pocket query disponível para transferência</string>
+    <string name="pq_available_for_download">Pocket Query disponível para transferência</string>
     <string name="pq_available_for_download_description">Esta Pocket Query está disponível para transferência como um único ficheiro (no formato gpx). Pretende transferir a Pocket Query e importa-la ou mostrar as caches numa lista?</string>
     <string name="pq_as_cache_list">Ver lista de caches</string>
-    <string name="pq_download_and_import">Importar Pocket query</string>
+    <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="pq_my_finds">Minhas encontradas</string>
-    <string name="caches_refresh_all_warning">Esta acção poderá resultar num consumo elevado de dados. Tem a certeza que deseja actualizar todas as caches?</string>
+    <string name="caches_refresh_all_warning">Esta acção pode originar um consumo de dados elevado. Tem a certeza que deseja actualizar todas as caches?</string>
     <string name="cache_list_remove_from">Remover da lista</string>
     <string name="list_list_headline">Listas:</string>
     <string name="cache_store_list">Armazenar na lista</string>
@@ -1626,7 +1602,7 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="one">%d ponto adicional extraído</item>
         <item quantity="other">%d pontos adicionais extraídos</item>
     </plurals>
-    <string name="link_gc_checker">Validador de coordenadas do geocaching.com disponível via browser</string>
+    <string name="link_gc_checker">Verificador de coordenadas do \'geocaching.com\' disponível via browser</string>
     <!-- calendar adder -->
     <string name="event_fail">Falha ao adicionar o evento ao calendário</string>
     <string name="init_low_disk_space">A ficar sem espaço de armazenamento</string>
@@ -1642,14 +1618,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="ask_again">Voltar a perguntar</string>
     <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
     <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guardar geocaches para uso off-line. Além disso, o c:geo usará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas off-line. A mesma não pode ser usada sem esta permissão.</string>
-    <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
     <string name="color_blue">Azul</string>
     <string name="color_green">Verde</string>
     <string name="color_grey">Cinzento</string>
-    <!-- number input -->
-    <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
-    <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
-    <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
-    <string name="number_input_err_format">Formato de número inválido</string>
 </resources>

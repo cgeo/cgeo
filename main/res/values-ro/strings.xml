@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Cutie din Proiectul APE</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Sediul Groundspeak</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Expoziţie \"Aventuri cu GPS\"</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Mare Petrecere la Groundspeak</string>
     <string name="unknown">Tip necunoscut</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">GeoKrety.org nu poate fi contactat. Conexiunea la internet nu funcţionează sau site-ul s-ar putea să fie indisponibil momentan.</string>
     <string name="err_login">Nu există informaţii de autorizare</string>
     <string name="err_login_failed_toast">c:geo nu se poate conecta. c:geo va funcţiona deconectat cu cutiile salvate local. Verifică informaţiile de autentificare sau activează conexiunea la internet.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Eroare necunoscută</string>
     <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Eroare necunoscută de comunicaţie</string>
     <string name="err_missing_auth">Lipsă nume utilizator şi/sau parolă</string>
     <string name="err_wrong">Nume utilizator şi/sau parolă gresită</string>
     <string name="err_maintenance">Geocaching.com este oprit temporar pentru lucrări de întreţinere. c:geo funcţionează deconectat cu cutiile stocate local.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
     <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
     <string name="info_log_saved">c:geo a salvat însemnarea.</string>
@@ -360,9 +357,6 @@
     <string name="caches_delete_events">Şterge evenimentele trecute</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
     <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
     <string name="caches_move_selected">Mută cutiile selectate</string>
@@ -393,17 +387,12 @@
     <string name="caches_filter_own_rating">Cu votul tău</string>
     <string name="caches_filter_multi_listing">Afişare multiplă cu statut diferit</string>
     <string name="caches_filter_own_waypoint">Cu puncte definite de utilizator</string>
-    <string name="caches_filter_missing_gcvote">Geocutii găsite, fără votul tău</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Şterge din istoric…</string>
     <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
     <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
     <string name="caches_clear_offlinelogs_progress">Ştergere însemnări stocate local</string>
     <string name="caches_make_list_unique">Marchează lista unică</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Geocutii găsite, fără votul tău</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestiune liste</string>
     <string name="list_menu_create">Crează listă nouă</string>
@@ -610,7 +599,6 @@
     <string name="init_summary_log_offline">Activează însemnări stocate local (Nu va afişa ecranul pentru postarea de însemnări, nu va posta însemnări)</string>
     <string name="init_choose_list">Cere listă</string>
     <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Arată direcţia</string>
     <string name="init_summary_livelist">Arată direcţia cutiilor în listă</string>
     <!-- backup / restore -->
@@ -626,7 +614,6 @@
     <string name="backup_confirm_overwrite">Vrei să scrii peste salvarea de siguranţă din %s?</string>
     <string name="restore_confirm_overwrite">Vrei să înlocuieşti %s din dispozitivul tău cu cele din salvarea de siguranţă?</string>
     <string name="init_restore_success">Restaurare finalizată.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Restaurarea nu a reușit.</string>
     <string name="init_restore_running">Restaurare bază de date cutii…</string>
     <string name="init_restore_confirm">Baza de date este goală. Vrei să restaurezi dintr-o salvare de siguranţă?</string>
@@ -639,7 +626,7 @@
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Settings saved</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -964,7 +951,6 @@
     <string name="ignore_confirm_title">Atenţie</string>
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
-    <string name="cache_stored">Stocate</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
@@ -976,14 +962,6 @@
     <string name="cache_status_not_premium">Acces pentru toţi membrii</string>
     <string name="cache_status_stored">Salvată</string>
     <string name="cache_status_not_stored">Nesalvată</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geocod</string>
     <string name="cache_name">Nume</string>
     <string name="cache_type">Tip</string>
@@ -1078,8 +1056,6 @@
     <string name="waypoint_note">Notă</string>
     <string name="waypoint_user_note">Notă utilizator</string>
     <string name="waypoint_visited">Vizitat</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Salvează</string>
     <string name="waypoint_cancel_edit">Anulează</string>
     <string name="waypoint_loading">Încărcare punct…</string>
@@ -1663,14 +1639,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

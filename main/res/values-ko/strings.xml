@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo 캐시</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE 캐시</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">그라운드스픽 HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">지오캐싱 모험 전시회</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">그라운드스픽 블럭 파티</string>
     <string name="unknown">알수없는 형식</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">마이크로</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">GeoKrety.org에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_login">저장된 로그인 정보가 없습니다</string>
     <string name="err_login_failed_toast">c:geo에서 로그인할 수 없습니다. 저장된 데이터를 사용하여 오프라인으로 작동됩니다. 로그인 설정과 인터넷 상태를 확인하세요.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">알수없는 에러</string>
     <string name="err_unknown_address">c:geo는  이 주소를 위치로 바꿀 수 없습니다.</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">c:geo는  이 주소를 위치로 바꿀 수 없습니다.</string>
     <string name="err_missing_auth">사용자명/비밀번호가 설정 되지 않음</string>
     <string name="err_wrong">사용자명/비밀번호가 잘못됨</string>
     <string name="err_maintenance">Geocaching.com 이 다운되어 있습니다. 저장된 캐시를 사용해 오프라인으로 작동합니다.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
     <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
     <string name="warn_invalid_character">문자 또는 숫자만 허용됩니다.</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">포켓쿼리 목록을 불러오지 못했습니다.</string>
     <string name="info_log_posted">로그를 성공적으로 제출했습니다.</string>
     <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
@@ -354,9 +351,6 @@
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">선택된 것 새로고침</string>
     <string name="caches_refresh_all">모두 새로 고침</string>
     <string name="caches_move_selected">선택 항목 이동</string>
@@ -387,17 +381,12 @@
     <string name="caches_filter_own_rating">자신이 평가 한 것</string>
     <string name="caches_filter_multi_listing">여러 서비스에 동시에 올려진 것</string>
     <string name="caches_filter_own_waypoint">사용자 정의 지점을 사용하기</string>
-    <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">이전 기록에서 제거중…</string>
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
     <!-- caches lists -->
     <string name="menu_lists">목록 관리</string>
     <string name="list_menu_create">새 목록 만들기</string>
@@ -604,7 +593,6 @@
     <string name="init_summary_log_offline">오프라인 로그를 활성화합니다.(로그할 때, 온라인 로그 화면이 표시되지 않고, 로그가 전송되지 않습니다)</string>
     <string name="init_choose_list">목록 물어보기</string>
     <string name="init_summary_choose_list">캐시를 저장할 때 어느 목록에 저장할지 물어봅니다.</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록에서 캐시의 방향을 표시합니다.</string>
     <!-- backup / restore -->
@@ -620,7 +608,6 @@
     <string name="backup_confirm_overwrite">%s 에 있는 기존 백업을 덮어쓰시겠습니까?</string>
     <string name="restore_confirm_overwrite">기기에 있는 %s를 백업본으로 덮어쓰시겠습니까?</string>
     <string name="init_restore_success">복원이 완료되었습니다.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">복원에 실패하였습니다.</string>
     <string name="init_restore_running">캐시 데이터베이스 복원 중…</string>
     <string name="init_restore_confirm">데이터베이스가 비었습니다. 데이터베이스 백업본으로 복구하시겠습니까?</string>
@@ -633,7 +620,7 @@
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Settings saved</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -944,7 +931,6 @@
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
-    <string name="cache_stored">저장된 캐시</string>
     <string name="cache_status_offline_log">저장된 로그</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
@@ -956,14 +942,6 @@
     <string name="cache_status_not_premium">모든 회원 접근가능</string>
     <string name="cache_status_stored">저장됨</string>
     <string name="cache_status_not_stored">저장되지 않음</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">지오코드</string>
     <string name="cache_name">제목</string>
     <string name="cache_type">유형</string>
@@ -1058,8 +1036,6 @@
     <string name="waypoint_note">메모</string>
     <string name="waypoint_user_note">사용자 노트</string>
     <string name="waypoint_visited">방문했음</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">저장</string>
     <string name="waypoint_cancel_edit">취소 </string>
     <string name="waypoint_loading">지점 불러오는 중…</string>
@@ -1244,7 +1220,7 @@
     <string name="export_fieldnotes">현장 기록</string>
     <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
     <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
-    <string name="export_fieldnotes_uploading">올리는 중</string>
+    <string name="export_fieldnotes_uploading">올리는 중…</string>
     <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
     <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
@@ -1619,14 +1595,8 @@
     <string name="ask_again">다시 묻기</string>
     <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

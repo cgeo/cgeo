@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo zakladi</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE zaklad</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Sedež podjetja Groundspeak</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Razstava GPS Adventures</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Neznan tip zaklada</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Ne morem se povezati na GeoKrety.org. Spletna stran je lahko nedosegljiva ali pa ne deluje internetna povezava.</string>
     <string name="err_login">Prijavni podatki niso shranjeni</string>
     <string name="err_login_failed_toast">c:geo se ne more prijaviti. c:geo lahko deluje v načinu brez povezave s shranjenimi zakladi. Preverite vaše prijavne podatke in internetno povezavo.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Neznana napaka</string>
     <string name="err_unknown_address">c:geo was unable to map this address to an existing location</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Neznana napaka v komunikaciji</string>
     <string name="err_missing_auth">Uporabniško ime in geslo še nista nastavljena</string>
     <string name="err_wrong">Napačno uporabniško ime in/ali geslo</string>
     <string name="err_maintenance">Geocaching.com trenutno ni na voljo zaradi vzdrževanja. c:geo lahko deluje brez povezave s shranjenimi zakladi.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>
     <string name="warn_no_pocket_query_found">Noben Pocket Query ni bil najden online.</string>
     <string name="warn_invalid_character">Znak mora biti ČRKA ali ŠTEVILO</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Napaka pri branju Pocket query seznama.</string>
     <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
     <string name="info_log_saved">c:geo je shranil zapis.</string>
@@ -363,9 +360,6 @@
     <string name="caches_delete_events">Izbriši pretekla srečanja</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Osveži izbrane</string>
     <string name="caches_refresh_all">Osveži vse</string>
     <string name="caches_move_selected">Premakni izbrane</string>
@@ -396,17 +390,12 @@
     <string name="caches_filter_own_rating">Z lastno oceno</string>
     <string name="caches_filter_multi_listing">Multi listing with different state</string>
     <string name="caches_filter_own_waypoint">With user defined waypoints</string>
-    <string name="caches_filter_missing_gcvote">Found caches not voted</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Brišem iz zgodovine…</string>
     <string name="caches_clear_offlinelogs">Izbriši shranjene zapise</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Izbris shranjenih zapisov</string>
     <string name="caches_make_list_unique">Make list unique</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Found caches not voted</string>
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>
     <string name="list_menu_create">Ustvari nov seznam</string>
@@ -613,7 +602,6 @@
     <string name="init_summary_log_offline">Vklopi način brez povezave pri zapisih\n(Ne pošlji zapisa na strežnik)</string>
     <string name="init_choose_list">Vprašaj za seznam</string>
     <string name="init_summary_choose_list">Pri shranjevanju zaklada za delo brez povezave vprašaj za seznam</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Pokaži smeri</string>
     <string name="init_summary_livelist">Pokaži tudi smeri do zakladov v seznamih</string>
     <!-- backup / restore -->
@@ -629,7 +617,6 @@
     <string name="backup_confirm_overwrite">Do you want to overwrite the existing backup from %s?</string>
     <string name="restore_confirm_overwrite">Do you want to overwrite %s on your device with the backup?</string>
     <string name="init_restore_success">Obnovitev iz varnostne kopije je uspela.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Obnovitev ni uspela.</string>
     <string name="init_restore_running">Obnavljam bazo podatkov iz varnostne kopije…</string>
     <string name="init_restore_confirm">Baza podatkov je prazna, ali ji želite obnoviti iz varnostne kopije?</string>
@@ -642,7 +629,7 @@
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Settings saved</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -974,7 +961,6 @@
     <string name="ignore_confirm_title">Previdno</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Shranjeni</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
@@ -986,14 +972,6 @@
     <string name="cache_status_not_premium">Za vse člane</string>
     <string name="cache_status_stored">Shranjen</string>
     <string name="cache_status_not_stored">Ni shranjen</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geo koda</string>
     <string name="cache_name">Ime</string>
     <string name="cache_type">Tip</string>
@@ -1088,8 +1066,6 @@
     <string name="waypoint_note">Komentar</string>
     <string name="waypoint_user_note">User note</string>
     <string name="waypoint_visited">Obiskano</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Shrani</string>
     <string name="waypoint_cancel_edit">Razveljavi</string>
     <string name="waypoint_loading">Nalaganje točke…</string>
@@ -1685,14 +1661,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

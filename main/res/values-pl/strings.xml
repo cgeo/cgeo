@@ -28,10 +28,10 @@
     <string name="wherigo">Scenariusz Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Projekt APE</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeak HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Nietypowa</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Nie można nawiązać połączenia ze stroną GeoKrety.org. Strona może nie działać albo nie masz połączenia z internetem.</string>
     <string name="err_login">Brak danych do logowania.</string>
     <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź ustawienia logowania i połączenie z internetem.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Nieznany błąd</string>
     <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Nieznany błąd w komunikacji</string>
     <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła</string>
     <string name="err_wrong">Błędna nazwa użytkownika i/lub hasło</string>
     <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrzynkami.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
@@ -363,9 +360,6 @@
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Odśwież wybrane</string>
     <string name="caches_refresh_all">Odśwież wszystkie</string>
     <string name="caches_move_selected">Przenieś zaznaczone</string>
@@ -396,17 +390,12 @@
     <string name="caches_filter_own_rating">Z własną oceną</string>
     <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
     <string name="caches_filter_own_waypoint">Z punktami orientacyjnymi użytkownika</string>
-    <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
@@ -613,7 +602,6 @@
     <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o listę</string>
     <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrzynek</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <!-- backup / restore -->
@@ -629,7 +617,6 @@
     <string name="backup_confirm_overwrite">Czy chcesz nadpisać aktualną kopię zapasową z %s?</string>
     <string name="restore_confirm_overwrite">Czy chcesz nadpisać %s w twoim urządzeniu kopią zapasową?</string>
     <string name="init_restore_success">Odzyskiwanie zakończone.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Odzyskiwanie nie powiodło się.</string>
     <string name="init_restore_running">Odzyskiwanie bazy skrzynek…</string>
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
@@ -642,7 +629,7 @@
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Settings saved</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -974,7 +961,6 @@
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Zapisane</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
@@ -986,14 +972,6 @@
     <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
     <string name="cache_status_stored">Zapisano</string>
     <string name="cache_status_not_stored">Nie zapisano</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Kod skrzynki</string>
     <string name="cache_name">Nazwa</string>
     <string name="cache_type">Typ</string>
@@ -1088,8 +1066,6 @@
     <string name="waypoint_note">Notatka</string>
     <string name="waypoint_user_note">Notatka użytkownika</string>
     <string name="waypoint_visited">Odwiedzony</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Zapisz</string>
     <string name="waypoint_cancel_edit">Anuluj</string>
     <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
@@ -1685,14 +1661,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

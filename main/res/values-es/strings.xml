@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Proyecto APE</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeak HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Exhibición de cachés GPS</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">De tipo desconocido</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">No se pudo contactar con GeoKrety.org. El sitio web puede estar caído o la conexión a internet no funciona.</string>
     <string name="err_login">No hay información de acceso guardada</string>
     <string name="err_login_failed_toast">c:geo no puede iniciar sesión. c:geo puede funcionar sin conexión con los cachés que hayan sido almacenados. Comprueba las opciones de inicio de sesión o active la conexión a internet.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Error desconocido</string>
     <string name="err_unknown_address">c:geo no ha podido ubicar en el mapa esta dirección</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Error de comunicación desconocido</string>
     <string name="err_missing_auth">Falta nombre de usuario o contraseña</string>
     <string name="err_wrong">Usuario y/o contraseña incorrecto</string>
     <string name="err_maintenance">Geocaching.com no está disponible debido a labores de mantenimiento. c:geo puede funcionar sin conexión con los caches que hayan sido almacenados previamente.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">No ha seleccionado ninguna Pocket Query.</string>
     <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
     <string name="warn_invalid_character">El carácter debe ser una LETRA o un DÍGITO</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Error al leer la lista de Pocket queries.</string>
     <string name="info_log_posted">c:geo envió el registro sin problemas.</string>
     <string name="info_log_saved">c:geo guardó el registro sin problemas.</string>
@@ -357,9 +354,6 @@
     <string name="caches_delete_events">Borrar eventos pasados</string>
     <string name="caches_upload_modifiedcoords">Subir coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Actualizar seleccionados</string>
     <string name="caches_refresh_all">Actualizar todos</string>
     <string name="caches_move_selected">Mover seleccionados</string>
@@ -390,17 +384,12 @@
     <string name="caches_filter_own_rating">Con puntuación propia</string>
     <string name="caches_filter_multi_listing">Multi ficha con distinto registro</string>
     <string name="caches_filter_own_waypoint">Con waypoints definidos por el usuario</string>
-    <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Borrando del historial…</string>
     <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
     <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestionar listas</string>
     <string name="list_menu_create">Crear nueva lista</string>
@@ -607,7 +596,6 @@
     <string name="init_summary_log_offline">Permitir el registro sin conexión (No se mostrará la pantalla de registro en línea ni se enviarán los logs)</string>
     <string name="init_choose_list">Preguntar lista</string>
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Mostrar dirección</string>
     <string name="init_summary_livelist">Mostrar la dirección de los cachés en la lista</string>
     <!-- backup / restore -->
@@ -623,7 +611,6 @@
     <string name="backup_confirm_overwrite">¿Quieres sobreescribir la copia de seguridad existente de %s?</string>
     <string name="restore_confirm_overwrite">¿Quieres sobreescribir %s en tu dispositivo con la copia de seguridad?</string>
     <string name="init_restore_success">Restauración completa.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Restauración errónea.</string>
     <string name="init_restore_running">Restaurando la base de datos de cachés…</string>
     <string name="init_restore_confirm">La base de datos está vacia. ¿Desea restaurar la copia de seguridad de la base de datos?</string>
@@ -636,7 +623,7 @@
     <string name="init_backup_settings_backup_full">Ajustes de copia de seguridad (completa)</string>
     <string name="init_backup_settings_backup_full_confirm">¿Desea almacenar datos sensibles relacionados con la cuenta? Estos pueden ser leídos por otras aplicaciones.</string>
     <string name="settings_savingerror">Error al guardar los ajustes</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Ajustes guardados</string>
     <string name="init_backup_settings_restore">Restablecer ajustes</string>
     <string name="init_backup_settings_restore_confirm">¿Quieres sobreescribir tus ajustes actuales?</string>
     <string name="init_backup_settings_restore_no">No hay disponible ninguna copia de seguridad de los ajustes</string>
@@ -954,7 +941,6 @@
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Guardados</string>
     <string name="cache_status_offline_log">Registro guardado</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
@@ -966,14 +952,6 @@
     <string name="cache_status_not_premium">Acceso a todos los miembros</string>
     <string name="cache_status_stored">Guardado</string>
     <string name="cache_status_not_stored">No guardado</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nombre</string>
     <string name="cache_type">Tipo</string>
@@ -1068,8 +1046,6 @@
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota de usuario</string>
     <string name="waypoint_visited">Visitado</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Guardar</string>
     <string name="waypoint_cancel_edit">Cancelar</string>
     <string name="waypoint_loading">Cargando waypoint…</string>
@@ -1642,14 +1618,8 @@ Nombre de archivo:%2$s</string>
     <string name="ask_again">Preguntarme de nuevo</string>
     <string name="location_permission_request_explanation">c:geo necesita acceso al GPS en tu dispositivo para localizar tu posición y calcular la distancia y la dirección a geocachés. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_request_explanation">c:geo escribirá datos en el almacenamiento de tu teléfono o tarjeta SD en el momento en que guardes geocachés para su uso sin conexión. Además c:geo utilizará el almacenamiento de tu teléfono para importar y exportar archivos y leer mapas sin conexión. No puede ser usado sin este permiso.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

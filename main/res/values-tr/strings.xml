@@ -26,12 +26,12 @@
     <string name="webcam">Webcam</string>
     <string name="virtual">Sanal Geocache</string>
     <string name="wherigo">Wherigo Geocache</string>
-    <string name="communceleb">Community Celebration Event</string>
+    <string name="communceleb">Topluluk Kutlama Etkinliği</string>
     <string name="ape">Project APE</string>
-    <string name="gchq">Geocaching HQ</string>
-    <string name="gchqceleb">Geocaching HQ Celebration</string>
+    <string name="gchq">Groundspeak HQ</string>
+    <string name="gchqceleb">Geocaching HQ Kutlama</string>
     <string name="gps">GPS Macerası</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Açık Hava Partisi</string>
     <string name="unknown">Bilinmeyen Tür</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Ekstra Küçük</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">GeoKrety.org\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_login">Kayıtlı oturum açma bilgisi yok</string>
     <string name="err_login_failed_toast">c:geo\'ya giriş yapılamıyor. c:geo kaydedilmiş Geocache\'ler ile çevrimdışı çalışıyor. Giriş ayarlarını kontrol edin veya internet bağlantınızı etkinleştirin.</string>
-    <string name="err_unknown">Bilinmeyen hata. Lütfen kılavuz için <a href="https://www.cgeo.org/faq#login-failed">SSS</a> \'a bakın.</string>
+    <string name="err_unknown">Bilinmeyen hata</string>
     <string name="err_unknown_address">c: geo bu adresi mevcut bir yere eşleyemedi</string>
-    <string name="err_comm">Bilinmeyen bağlantı hatası. Lütfen kılavuz için <a href="https://www.cgeo.org/faq#login-failed">SSS</a> \'a bakın.</string>
+    <string name="err_comm">Bilinmeyen bağlantı hatası</string>
     <string name="err_missing_auth">Kullanıcı adı ve/veya parola belirlenmedi</string>
     <string name="err_wrong">Yanlış kullanıcı adı ve/veya parola</string>
     <string name="err_maintenance">Geocaching.com bakım sebebiyle çalışmıyor. c:geo, kaydedilen Geocache\'ler ile çevrimdışı çalışıyor.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Sorgulama kaydı okunmasında hata.</string>
     <string name="info_log_posted">c:geo, kayıdınızı başarıyla gönderdi.</string>
     <string name="info_log_saved">c: geo, kayıdınızı başarıyla kaydetti.</string>
@@ -283,13 +280,13 @@
     <string name="loc_sat">Uydu</string>
     <string name="loc_trying">Yerini bulmaya çalışıyor</string>
     <string name="loc_no_addr">Bilinmeyen adres</string>
-    <string name="loc_gps_disabled">GPS devre dışı</string>
+    <string name="loc_gps_disabled">GPS devredışı</string>
     <string name="menu_centerposition">Konumuma göre ortala</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo hakkında</string>
     <string name="menu_helpers">Yardımcı programlar</string>
     <string name="menu_settings">Ayarlar</string>
-    <string name="menu_backup">Backup / restore</string>
+    <string name="menu_backup">Yedekle /yeniden yükle</string>
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
@@ -356,10 +353,7 @@
     <string name="caches_remove_progress">Geocache\'ler kaldırılıyor</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
     <string name="caches_upload_modifiedcoords">Düzenlenmiş koordinatları yükle</string>
-    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
+    <string name="caches_upload_modifiedcoords_warning">Tüm seçili cache\'ler için değiştirilmiş koordinatları yüklemek ve sunucuda varolan koordinatların üzerine yazmak istiyor musunuz? Bu işlem geri alınamaz.</string>
     <string name="caches_refresh_selected">Seçilmişleri yenile</string>
     <string name="caches_refresh_all">Hepsini yenile</string>
     <string name="caches_move_selected">Seçileni taşı</string>
@@ -390,17 +384,12 @@
     <string name="caches_filter_own_rating">Kendi derecelendirmem ile</string>
     <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
     <string name="caches_filter_own_waypoint">Kullanıcı tanımlı yol noktaları ile</string>
-    <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Geçmişten kaldırılıyor…</string>
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
     <!-- caches lists -->
     <string name="menu_lists">Listeleri yönet</string>
     <string name="list_menu_create">Yeni liste oluştur</string>
@@ -450,18 +439,18 @@
     <string name="about_system_info_send_chooser">Sistem bilgisini gönder</string>
     <string name="changelog_github">Tüm değişiklikler listesi</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
-    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
-    <string name="about_contributors_recent">2018/2019 contributors</string>
-    <string name="about_contributors_specialthanks">Special thanks to</string>
+    <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
+    <string name="about_contributors_recent">2018/2019 katkıda bulunanlar</string>
+    <string name="about_contributors_specialthanks">Özel teşekkür:</string>
     <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
-    <string name="about_contributors_other">Contributors from before 2018</string>
-    <string name="about_components">Components</string>
-    <string name="contribution_code">code</string>
-    <string name="contribution_tester">tester</string>
-    <string name="contribution_support">support</string>
-    <string name="contribution_documentation">documentation</string>
-    <string name="contribution_projectleader">open source project leader</string>
-    <string name="contribution_graphics">graphics</string>
+    <string name="about_contributors_other">2018\'den önce katkıda bulunanlar</string>
+    <string name="about_components">Bileşenler</string>
+    <string name="contribution_code">kod</string>
+    <string name="contribution_tester">test kullanıcısı</string>
+    <string name="contribution_support">destek</string>
+    <string name="contribution_documentation">belgeler</string>
+    <string name="contribution_projectleader">Açık kaynak proje lideri</string>
+    <string name="contribution_graphics">grafik</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
@@ -490,7 +479,7 @@
     <string name="settings_title_navigation">Navigasyon</string>
     <string name="settings_summary_navigation">Tercih edilen navigasyon yöntemlerini seçin ve harici navigasyon uygulamalarını seçin.</string>
     <string name="settings_title_system">Sistem</string>
-    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
+    <string name="settings_summary_system">Aplikasyon dizini ve diğer sistem ayarlarını yapılandırın.</string>
     <string name="settings_title_navigation_menu">Navigasyon Menüsü</string>
     <string name="settings_category_browser">Tarayıcı</string>
     <string name="settings_category_geocaching_platform">Geocaching Platformu</string>
@@ -508,7 +497,7 @@
     <string name="settings_info_facebook_login_title">Facebook ile Giriş</string>
     <string name="settings_info_facebook_login">Facebook hesabınızla c:geo üzerinden geocaching.com\'a giriş yapamazsınız. Ancak basit bir çözüm var…</string>
     <string name="settings_authorize">c:geo\'yu yetkilendir</string>
-    <string name="settings_reauthorize">Update or remove authorization</string>
+    <string name="settings_reauthorize">Yetkilendirmeyi güncelle veya kaldır</string>
     <string name="settings_gc_description">c:geo\'yu geocaching.com\'da Geocache arama yapmak için yetkilendir.</string>
     <string name="settings_ec_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için extremcaching.com ile yetkilendirin.</string>
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
@@ -595,10 +584,10 @@
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_brouterThreshold">Rotayı hesapla</string>
     <string name="init_brouterThreshold_description">Yönlendirici aplikasyon (brouter, eğer varsa) maksimum mesafeyi hesaplayacak.</string>
-    <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
-    <string name="init_disabled">Devredışı Olanları Gösterme</string>
-    <string name="init_summary_disabled">Devredışı Olan Geocache\'leri Gösterme</string>
+    <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
+    <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -607,11 +596,10 @@
     <string name="init_summary_log_offline">Çevrimdışı oturum açmayı etkinleştir (oturum açılırken çevrimiçi kayıt ekranı gösterilmez ve kayıtlar yüklenmez)</string>
     <string name="init_choose_list">Listelemek İçin Sor</string>
     <string name="init_summary_choose_list">Geocache\'lerin hangi listede depolanacağını sor</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki Geocache\'lerin yönünü göster</string>
     <!-- backup / restore -->
-    <string name="init_backup">Backup caches / waypoints</string>
+    <string name="init_backup">Cache\'leri/ yol noktalarını yedekle</string>
     <string name="init_backup_backup">Yedekle</string>
     <string name="init_backup_running">Geocache veritabanı yedeklemesi oluşturuluyor…</string>
     <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
@@ -623,26 +611,25 @@
     <string name="backup_confirm_overwrite">%s\'den mevcut yedeklemenizin üzerine yazmak ister misiniz?</string>
     <string name="restore_confirm_overwrite">Yedeklemenizi cihazınızdaki %s\'in üzerine yazmak istiyor musunuz?</string>
     <string name="init_restore_success">Geri getirme tamamlandı.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Geri getirme başarısız oldu.</string>
     <string name="init_restore_running">Geocache veritabanı geri yükleniyor…</string>
     <string name="init_restore_confirm">Veritabanı boş. Veritabanı yedeğini geri yüklemek istiyor musunuz?</string>
     <string name="init_backup_last">Tarihinden kullanabilir yedekleme</string>
     <string name="init_backup_last_no">Yedeklenmiş bir dosya yok.</string>
-    <string name="settings_title_backup">Backup / Restore</string>
-    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
-    <string name="init_backup_settings">Backup program settings</string>
-    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
-    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
+    <string name="settings_title_backup">Yedekle /yeniden yükle</string>
+    <string name="settings_summary_backup">Yedekleme oluşturun ve Cache/yol noktası verilerini ve program ayarlarını yeniden yükleyin.</string>
+    <string name="init_backup_settings">Ayarları yedekle</string>
+    <string name="init_backup_settings_backup_light">Ayarları yedekle (hesap bilgisi olmadan)</string>
+    <string name="init_backup_settings_backup_full">Ayarları yedekle (hepsini)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
-    <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
-    <string name="init_backup_settings_restore">Restore settings</string>
-    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
-    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
-    <string name="settings_readingerror">Error reading settings</string>
-    <string name="settings_restored">Settings restored</string>
-    <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
+    <string name="settings_savingerror">Ayarları kaydetme hatası</string>
+    <string name="settings_saved">Ayarlar kaydedildi</string>
+    <string name="init_backup_settings_restore">Ayarları geri yükle</string>
+    <string name="init_backup_settings_restore_confirm">Güncel ayarların üzerine yazmak istediğinize emin misiniz?</string>
+    <string name="init_backup_settings_restore_no">Ayar yedeği bulunmuyor</string>
+    <string name="settings_readingerror">Ayarları okuma hatası</string>
+    <string name="settings_restored">Ayarlar kaydedildi</string>
+    <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo çevrimdışı kullanım için haritalar destekler. Mapsforge \'den harita indirebilir ve hatta OSM verilerinden kendi haritalarını oluşturabilirsiniz. Çevrimdışı harita desteğini almak için önce çevrimdışı harita dizinini seçmeniz gerekir.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
@@ -739,13 +726,13 @@
     <string name="init_mfbeta">Mapsforge beta varsayılan olarak</string>
     <string name="init_mfbeta_description">Geçerli sürüm, yeni Mapsforge haritamızın beta sürümünü deneme amaçlı olarak içeriyor. Bu yeni harita canlı ve liste haritaları için varsayılan olarak etkinleştirilebilir.</string>
     <!-- proximity notification -->
-    <string name="settings_title_proximityNotification">Proximity notification</string>
-    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
+    <string name="settings_title_proximityNotification">Mesafe bildirimi</string>
+    <string name="init_proximityNotificationGeneral">Haritada genel mesafe bildirimi</string>
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
-    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
+    <string name="init_proximityNotificationSpecific">Belirli yol noltası mesafe bildirimi</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">uzak mesafe</string>
+    <string name="near_distance">yakın mesafe</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
@@ -771,7 +758,7 @@
     <string name="auth_register">Hesap oluştur</string>
     <string name="auth_connected">Bağlandı</string>
     <string name="auth_unconnected">Henüz bağlantı gerçekleşmedi</string>
-    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
+    <string name="auth_connected_as">%s olarak bağlanıldı.Güncelleme için \nburaya basın veya c:geo\'da yetkilendirmeyi kaldırmak için uzun basın.</string>
     <string name="auth_dialog_waiting">%s için bekleniyor…</string>
     <string name="auth_explain_short">Sıradaki işlem, <b>c:geo</b>\'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_explain_long">\"c:geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem %s\'de bir sayfa açacaktır. Bu sayfada oturum açın ve <b>c:geo</b> hesabınıza erişmesine izin verin. Bu kadar.</string>
@@ -954,7 +941,6 @@
     <string name="ignore_confirm_title">Dikkatli ol</string>
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
-    <string name="cache_stored">Kaydedilmiş</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
     <string name="cache_status_found">Bulundu</string>
     <string name="cache_not_status_found">Bulunmadı</string>
@@ -966,14 +952,6 @@
     <string name="cache_status_not_premium">Tüm Üyelere Erişim</string>
     <string name="cache_status_stored">Kaydedilmiş</string>
     <string name="cache_status_not_stored">Kaydedilmemiş</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geo kodu</string>
     <string name="cache_name">İsim</string>
     <string name="cache_type">Tür</string>
@@ -1068,8 +1046,6 @@
     <string name="waypoint_note">Not</string>
     <string name="waypoint_user_note">Kullanıcı notu</string>
     <string name="waypoint_visited">Ziyaret Edildi</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Kaydet</string>
     <string name="waypoint_cancel_edit">İptal</string>
     <string name="waypoint_loading">Yol noktası yükleniyor…</string>
@@ -1431,7 +1407,7 @@
     <string name="attribute_inside_no">Açık alan</string>
     <string name="attribute_in_water_yes">Suyun içinde</string>
     <string name="attribute_in_water_no">Suyun içinde değil</string>
-    <string name="attribute_no_gps_yes">GPS olmadan (letterbox, pusula ile, ...)</string>
+    <string name="attribute_no_gps_yes">GPS olmadan (letterbox, pusula ile, …)</string>
     <string name="attribute_no_gps_no">GPS ile</string>
     <string name="attribute_overnight_yes">Konaklama gerekli</string>
     <string name="attribute_overnight_no">Konaklama gerekli değil</string>
@@ -1641,14 +1617,8 @@
     <string name="ask_again">Bana yine sor</string>
     <string name="location_permission_request_explanation">c:geo konumunuzu belirlemek, mesafe ve yön hesaplamak için cihazınızındaki GPS\'e erişim sağlamalıdır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrımdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
-    <string name="color_blue">Blue</string>
-    <string name="color_green">Green</string>
-    <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
+    <string name="color_blue">Mavi</string>
+    <string name="color_green">Yeşil</string>
+    <string name="color_grey">Gri</string>
 </resources>

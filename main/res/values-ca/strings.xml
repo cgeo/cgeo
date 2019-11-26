@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Projecte APE</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeak HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Desconegut</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">No s\'ha pogut contactar amb GeoKrety.org. La pàgina web pot haver caigut o la connexió a internet no funciona.</string>
     <string name="err_login">No hi ha desada cap informació d\'accés</string>
     <string name="err_login_failed_toast">El c:geo no pot iniciar la sessió. El c:geo treballa fora línia amb els catxés desats. Comproveu la configuració de la connexió o activeu la connexió a Internet.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Error desconegut</string>
     <string name="err_unknown_address">c:geo no ha pogut assignar aquesta adreça a una ubicació existent</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">S\'ha produït un error de comunicació desconegut</string>
     <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya</string>
     <string name="err_wrong">Nom d\'usuari i/o contrasenya incorrectes</string>
     <string name="err_maintenance">Geocaching.com no funciona per motius de manteniment. El c:geo funcionarà amb els catxés desats.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Error llegint la llista de consultes a mida.</string>
     <string name="info_log_posted">El c:geo ha tramès el registre correctament.</string>
     <string name="info_log_saved">El c:geo ha desat correctament el registre.</string>
@@ -357,9 +354,6 @@
     <string name="caches_delete_events">Elimina trobades passades</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Actualitza els seleccionats</string>
     <string name="caches_refresh_all">Actualitza-ho tot</string>
     <string name="caches_move_selected">Mou els seleccionats</string>
@@ -390,17 +384,12 @@
     <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
     <string name="caches_filter_multi_listing">Multi llista amb diferents estats</string>
     <string name="caches_filter_own_waypoint">Amb fites definides per l\'usuari</string>
-    <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_make_list_unique">Fer llista única</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestiona llistes</string>
     <string name="list_menu_create">Crea una llista nova</string>
@@ -607,7 +596,6 @@
     <string name="init_summary_log_offline">Habilita el registre fora de línia (No es mostrarà la pantalla de registre en línia i no enviarà els registres)</string>
     <string name="init_choose_list">Demana una llista</string>
     <string name="init_summary_choose_list">Demana a quina llista cal desar els catxés</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra la direcció dels catxés a la llista</string>
     <!-- backup / restore -->
@@ -623,7 +611,6 @@
     <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent de %s?</string>
     <string name="restore_confirm_overwrite">Voleu sobreescriure %s al dispositiu amb la còpia de seguretat?</string>
     <string name="init_restore_success">La restauració s\'ha completat.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Ha fallat la restauració.</string>
     <string name="init_restore_running">S\'està restaurant la base de dades dels catxés…</string>
     <string name="init_restore_confirm">La base de dades és buida. Voleu restaurar la còpia de seguretat?</string>
@@ -636,7 +623,7 @@
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Settings saved</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -954,7 +941,6 @@
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
-    <string name="cache_stored">Desats</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
@@ -966,14 +952,6 @@
     <string name="cache_status_not_premium">Per a tots els membres</string>
     <string name="cache_status_stored">Desat</string>
     <string name="cache_status_not_stored">No desat</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geocodi</string>
     <string name="cache_name">Nom</string>
     <string name="cache_type">Tipus</string>
@@ -1068,8 +1046,6 @@
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota de l\'usuari</string>
     <string name="waypoint_visited">Visitat</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Desa</string>
     <string name="waypoint_cancel_edit">Cancel•la</string>
     <string name="waypoint_loading">S\'està carregant la fita…</string>
@@ -1641,14 +1617,8 @@
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

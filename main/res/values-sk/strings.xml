@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo Cache</string>
     <string name="communceleb">Komunitná oslava</string>
     <string name="ape">Project A.P.E. Cache</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Ústredie Groundspeaku</string>
     <string name="gchqceleb">Oslava Geocaching HQ</string>
     <string name="gps">Výstava GPS Adventures</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Neznámy typ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Nedá sa pripojiť na GeoKrety.org. Stránka nie je dostupná alebo nie ste pripojení na internet.</string>
     <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
     <string name="err_login_failed_toast">Prepáčte, c:geo sa nepodarilo prihlásiť. c:geo funguje v offline režime. Skontrolujte vaše prihlasovacie údaje v nastaveniach alebo povoľte pripojenie k Internetu.</string>
-    <string name="err_unknown">Neznáma chyba. Pomoc nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Častých otázkach</a>.</string>
+    <string name="err_unknown">Neznáma chyba</string>
     <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
-    <string name="err_comm">Neznáma chyba komunikácie. Pomoc nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Častých otázkach</a>.</string>
+    <string name="err_comm">Neznáma chyba pri komunikácii</string>
     <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
     <string name="err_wrong">Nesprávne používateľské meno alebo heslo</string>
     <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
     <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
-    <string name="warn_notloggedin_title">Offline režim</string>
-    <string name="warn_notloggedin_short">Neprihlásené. Live mapa ukazuje len lokálne uložené kešky.</string>
-    <string name="warn_notloggedin_long">Zatiaľ neprihlásené. Live mapa ukazuje len lokálne uložené kešky a online funkcie nie sú aktívne.\n\nMožno nie je pripojenie k sieti, prípadne ide o problém na serveri alebo je potrebné znova nakonfigurovať služby geoacachingu.\n\nChcete teraz konfigurovať služby?</string>
     <string name="err_read_pocket_query_list">Chyba pri čítaní Pocket Query.</string>
     <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
     <string name="info_log_saved">c:geo úspešne uložilo log.</string>
@@ -363,9 +360,6 @@
     <string name="caches_delete_events">Odstrániť minulé Eventy</string>
     <string name="caches_upload_modifiedcoords">Nahrať upravené súradnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrať upravené súradnice pre všetky (vybrané) kešky a prepísať existujúce súradnice na serveri? Tento úkon nie je možné vrátiť.</string>
-    <string name="caches_upload_allcoords">Nahrať súradnice pre všetky kešky</string>
-    <string name="caches_upload_allcoords_dialogtitle">UPOZORNENIE – Nahrávanie všetkých súradníc</string>
-    <string name="caches_upload_allcoords_warning">Tým prepíšete existujúce súradnice na serveri pri všetkých (vybraných) keškách zo zoznamu aktuálnymi súradnicami listingov v aplikácii c:geo. Používa sa to len v zvláštnych prípadoch, napr. ak ste importovali súbor GPX, ktorý obsahuje upravené súradnice ako súradnice listingu. Tento úkon sa nedá vrátiť. Použiť by ste ho mali len v prípade, že viete, čo robíte. Zvyčajne je lepšie použiť funkciu \"Nahrať upravené súradnice\" v tej istej ponuke.</string>
     <string name="caches_refresh_selected">Obnoviť vybraté</string>
     <string name="caches_refresh_all">Obnoviť všetky</string>
     <string name="caches_move_selected">Presunúť vybraté</string>
@@ -396,17 +390,12 @@
     <string name="caches_filter_own_rating">S vlastným hodnotením</string>
     <string name="caches_filter_multi_listing">Viacnásobne zobrazená s rôznym statusom</string>
     <string name="caches_filter_own_waypoint">S vlastnými bodmi trasy (waypoint)</string>
-    <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
-    <string name="caches_filter_lists">Zaradené do zoznamu</string>
     <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
     <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
-    <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
-    <string name="caches_listmarker_none">Bez značky</string>
-    <string name="caches_listmarker_marker">Značka %d</string>
-    <string name="caches_listmarker_selected">(vybrané)</string>
+    <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
     <!-- caches lists -->
     <string name="menu_lists">Spravovať zoznamy</string>
     <string name="list_menu_create">Vytvoriť nový zoznam</string>
@@ -613,7 +602,6 @@
     <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_choose_list">Požiadať o zoznam</string>
     <string name="init_summary_choose_list">Opýtať sa, v ktorom zozname uložiť skrýše</string>
-    <string name="init_listdisplay">Zobraziť v zozname kešiek ďalšie zoznamy</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
     <!-- backup / restore -->
@@ -629,7 +617,6 @@
     <string name="backup_confirm_overwrite">Naozaj chceš prepísať existujúcu zálohu z %s?</string>
     <string name="restore_confirm_overwrite">Naozaj chceš prepísať %s na tvojom zariadení zálohou?</string>
     <string name="init_restore_success">Úspešne obnovené.</string>
-    <string name="init_restore_failed_dbrecreated">Nepodarilo sa obnoviť: súbor so zálohou je poškodený, databáza sa nedá znova vytvoriť.</string>
     <string name="init_restore_failed">Obnova zlyhala.</string>
     <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
     <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
@@ -642,7 +629,7 @@
     <string name="init_backup_settings_backup_full">Zálohovať nastavenia (úplné)</string>
     <string name="init_backup_settings_backup_full_confirm">Chcete uložiť dôverné údaje o konte? Iné aplikácie ich môžu prečítať.</string>
     <string name="settings_savingerror">Chyba pri ukladaní nastavení</string>
-    <string name="settings_saved">Nastavenia úspešne uložené do:</string>
+    <string name="settings_saved">Nastavenia uložené</string>
     <string name="init_backup_settings_restore">Obnoviť nastavenia</string>
     <string name="init_backup_settings_restore_confirm">Chcete prepísať aktuálne nastavenia?</string>
     <string name="init_backup_settings_restore_no">Nie je k dispozícii žiadna záloha s nastaveniami</string>
@@ -974,7 +961,6 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uložené</string>
     <string name="cache_status_offline_log">Uložený log</string>
     <string name="cache_status_found">Nájdená</string>
     <string name="cache_not_status_found">Nenájdená</string>
@@ -986,14 +972,6 @@
     <string name="cache_status_not_premium">Prístup pre všetkých používateľov</string>
     <string name="cache_status_stored">Uložená</string>
     <string name="cache_status_not_stored">Neuložená</string>
-    <string name="cache_status_stored_lasteighthours">Za posledných 8 hodín</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Za posledných 24 hodín</string>
-    <string name="cache_status_stored_lastsevendays">Za posledných 7 dní</string>
-    <string name="cache_status_stored_lastthirtydays">Za posledných 30 dní</string>
-    <string name="cache_status_stored_morethaneighthours">Pred poslednými 8 hodinami</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Pred poslednými 24 hodinami</string>
-    <string name="cache_status_stored_morethansevendays">Pred poslednými 7 dňami</string>
-    <string name="cache_status_stored_morethanthirtydays">Pred poslednými 30 dňami</string>
     <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Názov</string>
     <string name="cache_type">Typ</string>
@@ -1088,8 +1066,6 @@
     <string name="waypoint_note">poznámka</string>
     <string name="waypoint_user_note">Osobná poznámka</string>
     <string name="waypoint_visited">navštívený</string>
-    <string name="waypoint_set_visited">Bod trasy nastavený ako navštívený</string>
-    <string name="waypoint_unset_visited">Bod trasy nastavený ako nenavštívený</string>
     <string name="waypoint_save">Uložiť</string>
     <string name="waypoint_cancel_edit">Zrušiť</string>
     <string name="waypoint_loading">Načítanie bodu trasy…</string>
@@ -1685,14 +1661,8 @@
     <string name="ask_again">Opýtať sa znova</string>
     <string name="location_permission_request_explanation">c.geo vyžaduje prístup ku GPS na vašom zariadení ny vyhľadanie polohy a výpočet vzdialenosti a smeru ku keškám. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_request_explanation">c:geo zapisuje údaje do ukladacieho priestoru v telefóne alebo na karte SD pri ukladaní kešiek pre použitie off-line. Okrem toho c:geo používa ukladací priestor telefónu na import a export súborov a čítanie máp off-line. Nedá sa používať bez tohto povolenia.</string>
-    <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
     <string name="color_blue">Modrá</string>
     <string name="color_green">Zelená</string>
     <string name="color_grey">Sivá</string>
-    <!-- number input -->
-    <string name="number_input_title">Zadajte hodnotu od %1$s do %2$s</string>
-    <string name="number_input_err_boundarymin">Zadaná hodnota je príliš malá – obnovené na min. hodnotu</string>
-    <string name="number_input_err_boundarymax">Zadaná hodnota je príliš veľká – obnovené na max. hodnotu.</string>
-    <string name="number_input_err_format">Neplatný formát čísla</string>
 </resources>

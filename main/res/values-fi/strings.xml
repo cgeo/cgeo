@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigo-kätkö</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE -kätkö</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeakin päämaja</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Block Party -kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
     <string name="err_login_failed_toast">c:geo ei onnistu kirjautumaan sisään. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt. Tarkista kirjautumistiedot tai kytke internet-yhteytesi päälle.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Tuntematon virhe</string>
     <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Tuntematon yhteysvirhe</string>
     <string name="err_missing_auth">Käyttäjätunnusta ja/tai salasanaa ei ole asetettu</string>
     <string name="err_wrong">Väärä käyttäjätunnus ja/tai salasana</string>
     <string name="err_maintenance">Geocaching.com on huollettavana. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
     <string name="info_log_posted">c:geo latasi lokin onnistuneesti.</string>
     <string name="info_log_saved">c:geo tallensi lokin onnistuneesti.</string>
@@ -357,9 +354,6 @@
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Päivitä valitut</string>
     <string name="caches_refresh_all">Päivitä kaikki</string>
     <string name="caches_move_selected">Siirrä valitut</string>
@@ -390,17 +384,12 @@
     <string name="caches_filter_own_rating">Oma luokitus</string>
     <string name="caches_filter_multi_listing">Sama kätkö eri sivustoilla, osittain lokattu</string>
     <string name="caches_filter_own_waypoint">Käyttäjän määrittämiä välipisteitä</string>
-    <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Poistetaan historiasta…</string>
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
     <!-- caches lists -->
     <string name="menu_lists">Hallitse listoja</string>
     <string name="list_menu_create">Luo uusi lista</string>
@@ -607,7 +596,6 @@
     <string name="init_summary_log_offline">Käytä offline-lokkausta (Online-lokeja ei näytetä lokatessa, lokeja ei lähetetä)</string>
     <string name="init_choose_list">Kysy listausta</string>
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Suunta kätkölle näytetään listauksessa</string>
     <!-- backup / restore -->
@@ -623,7 +611,6 @@
     <string name="backup_confirm_overwrite">Haluatko korvata olemassa olevan varmuuskopion %s?</string>
     <string name="restore_confirm_overwrite">Haluatko korvata laitteessasi olevan %s varmuuskopiolla?</string>
     <string name="init_restore_success">Palautus valmis.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Palautus epäonnistui.</string>
     <string name="init_restore_running">Palautetaan kätkötietokantaa…</string>
     <string name="init_restore_confirm">Tietokanta on tyhjä. Haluatko palauttaa varmuuskopion?</string>
@@ -636,7 +623,7 @@
     <string name="init_backup_settings_backup_full">Varmuuskopioi asetukset (kaikki)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Virhe asetusten tallentamisessa</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Asetukset tallennettu</string>
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="init_backup_settings_restore_confirm">Haluatko korvata nykyiset asetuksesi?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -917,7 +904,7 @@
     <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
     <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-    <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
+    <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
     <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
@@ -954,7 +941,6 @@
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
-    <string name="cache_stored">Tallennettu</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
@@ -966,14 +952,6 @@
     <string name="cache_status_not_premium">Kaikille</string>
     <string name="cache_status_stored">Tallennettu</string>
     <string name="cache_status_not_stored">Ei tallennettu</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Kätkökoodi</string>
     <string name="cache_name">Nimi</string>
     <string name="cache_type">Tyyppi</string>
@@ -1068,8 +1046,6 @@
     <string name="waypoint_note">Muistiinpano</string>
     <string name="waypoint_user_note">Käyttäjän muistiinpanot</string>
     <string name="waypoint_visited">Vierailtu</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Tallenna</string>
     <string name="waypoint_cancel_edit">Peruuta</string>
     <string name="waypoint_loading">Ladataan reittipistettä…</string>
@@ -1571,7 +1547,7 @@
     <string name="settings_activate_geokrety">Aktivoi</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
-    <string name="init_summary_geokrety">Vahvista matkalaiset sivulla GeoKrety.org</string>
+    <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
     <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
     <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
@@ -1641,14 +1617,8 @@
     <string name="ask_again">Kysy uudelleen</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

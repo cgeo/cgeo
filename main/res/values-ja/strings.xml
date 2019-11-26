@@ -28,10 +28,10 @@
     <string name="wherigo">Wherigoキャッシュ</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Project APE キャッシュ</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeak HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">不明なタイプ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">マイクロ</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">GeoKrety.orgに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_login">ログイン情報が保存されていません</string>
     <string name="err_login_failed_toast">ログインできません。保存済みキャッシュのみでオフラインで動作します。 ログインの設定を確認したりネット接続を有効にしてください。</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">未知のエラー</string>
     <string name="err_unknown_address">c:geoがこのアドレスを既存の場所に合わせられませんでした</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">未知の通信エラー</string>
     <string name="err_missing_auth">ユーザ名またはパスワードが設定されていません</string>
     <string name="err_wrong">ユーザ名またはパスワードが間違っています</string>
     <string name="err_maintenance">Geocaching.comはメンテナンス中で接続できません。 保存済みキャッシュのみでオフラインで動作します。</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません。</string>
     <string name="warn_no_pocket_query_found">オンラインのポケット・クエリが見つかりませんでした。</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリ リストの読み取りエラー。</string>
     <string name="info_log_posted">ログを投稿しました。</string>
     <string name="info_log_saved">ログを保存しました。</string>
@@ -354,9 +351,6 @@
     <string name="caches_delete_events">過去のイベントを削除</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">選択したキャッシュを更新</string>
     <string name="caches_refresh_all">全てのキャッシュを更新</string>
     <string name="caches_move_selected">選択したキャッシュを移動</string>
@@ -387,17 +381,12 @@
     <string name="caches_filter_own_rating">自己評価あり</string>
     <string name="caches_filter_multi_listing">異なる状態で複数のリストに存在</string>
     <string name="caches_filter_own_waypoint">ユーザー定義のウェイ ポイントを使用</string>
-    <string name="caches_filter_missing_gcvote">発見したキャッシュは評価されていません</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">履歴から削除中…</string>
     <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインのログを削除します？</string>
     <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
     <string name="caches_make_list_unique">リストを一意にする</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">発見したキャッシュは評価されていません</string>
     <!-- caches lists -->
     <string name="menu_lists">リストを管理</string>
     <string name="list_menu_create">新しいリストを作成</string>
@@ -604,7 +593,6 @@
     <string name="init_summary_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオンラインでの投稿をしない。このチェックを外してもオフライン用に保存することはできます。)</string>
     <string name="init_choose_list">リストを選択</string>
     <string name="init_summary_choose_list">キャッシュ情報の保存時にリストを選択するダイアログを表示</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <!-- backup / restore -->
@@ -620,7 +608,6 @@
     <string name="backup_confirm_overwrite">%sの既存バックアップを上書きしますか？</string>
     <string name="restore_confirm_overwrite">バックアップでお使いのデバイス上の %s を上書きしますか?</string>
     <string name="init_restore_success">キャッシュのデータベースは正常にリストアされました。</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">キャッシュのデータベースをリストアできませんでした。</string>
     <string name="init_restore_running">キャッシュのデータベースをリストア中…</string>
     <string name="init_restore_confirm">キャッシュのデータベースは空です。バックアップからリストアしますか?</string>
@@ -633,7 +620,7 @@
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Settings saved</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
@@ -944,7 +931,6 @@
     <string name="ignore_confirm_title">ご注意ください</string>
     <string name="ignore_confirm_message">キャッシュを無視すると geocaching.com からデータをロードするとき、このキャッシュがもう二度と発生しないことを意味します。ウェブサイトで無視を解除しないと、もう一度キャッシュを参照することはできません。</string>
     <string name="cache_status">状態</string>
-    <string name="cache_stored">保存済み</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
     <string name="cache_status_found">見つかった</string>
     <string name="cache_not_status_found">未発見</string>
@@ -956,14 +942,6 @@
     <string name="cache_status_not_premium">全ての会員に閲覧可</string>
     <string name="cache_status_stored">保存済み</string>
     <string name="cache_status_not_stored">未保存</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">GCコード</string>
     <string name="cache_name">名前</string>
     <string name="cache_type">タイプ</string>
@@ -1058,8 +1036,6 @@
     <string name="waypoint_note">メモ</string>
     <string name="waypoint_user_note">ユーザー メモ</string>
     <string name="waypoint_visited">訪問済み</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">保存</string>
     <string name="waypoint_cancel_edit">キャンセル</string>
     <string name="waypoint_loading">ウェイポイントをロード中…</string>
@@ -1620,14 +1596,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="ask_again">Ask me again</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>

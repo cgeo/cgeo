@@ -28,10 +28,10 @@
     <string name="wherigo">Тайник Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
     <string name="ape">Тайник проекта A.P.E.</string>
-    <string name="gchq">Geocaching HQ</string>
+    <string name="gchq">Groundspeak HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Тайник GPS Adventures Exhibit</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Groundspeak Block Party</string>
     <string name="unknown">Неизвестный тип</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Микро</string>
@@ -163,9 +163,9 @@
     <string name="err_server_gk">Не удается связаться с GeoKrety.org. Веб-сайт может быть недоступен или нет подключения к Интернету.</string>
     <string name="err_login">Нет сохраненной информации о пользователе</string>
     <string name="err_login_failed_toast">Не удается войти. c:geo будет работать оффлайн с сохраненными тайниками. Проверьте настройки входа или включите интернет-соединение.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Неизвестная ошибка</string>
     <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Неизвестная ошибка соединения</string>
     <string name="err_missing_auth">Имя пользователя и/или пароль не установлены</string>
     <string name="err_wrong">Неправильное имя пользователя и/или пароль</string>
     <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
@@ -248,9 +248,6 @@
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
     <string name="info_log_saved">Запись в блокнот успешно сохранена.</string>
@@ -363,9 +360,6 @@
     <string name="caches_delete_events">Удалить прошедшие события</string>
     <string name="caches_upload_modifiedcoords">Загрузить измененные координаты</string>
     <string name="caches_upload_modifiedcoords_warning">Вы точно хотите загрузить измененные координаты для всех выбранных тайников и перезаписать существующие координаты на сервисе. Это действие не может быть отменено.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Обновить выбранные</string>
     <string name="caches_refresh_all">Обновить все</string>
     <string name="caches_move_selected">Переместить выбранные</string>
@@ -396,17 +390,12 @@
     <string name="caches_filter_own_rating">С собственным рейтингом</string>
     <string name="caches_filter_multi_listing">На разных сайтах с разными статусами</string>
     <string name="caches_filter_own_waypoint">С пользовательскими точками</string>
-    <string name="caches_filter_missing_gcvote">Найденные без оценок</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
     <string name="caches_removing_from_history">Очистка истории…</string>
     <string name="caches_clear_offlinelogs">Удалить сохраненные записи</string>
     <string name="caches_clear_offlinelogs_message">Вы действительно хотите удалить сохраненные записи?</string>
     <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_filter_missing_gcvote">Найденные без оценок</string>
     <!-- caches lists -->
     <string name="menu_lists">Управление списками</string>
     <string name="list_menu_create">Создать новый список</string>
@@ -576,8 +565,8 @@
     <string name="init_signature_template_number">Номер тайника</string>
     <string name="init_signature_template_owner">Создатель</string>
     <string name="init_signature_template_name">Название тайника</string>
-    <string name="init_signature_template_difficulty">Difficulty</string>
-    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_difficulty">Сложность</string>
+    <string name="init_signature_template_terrain">Местность</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
@@ -613,7 +602,6 @@
     <string name="init_summary_log_offline">Не показывать экран онлайн записи и не отправлять записи по умолчанию</string>
     <string name="init_choose_list">Спрашивать про список</string>
     <string name="init_summary_choose_list">Спрашивать, в какой список вы хотите сохранить тайники</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать направление на тайник в списке</string>
     <!-- backup / restore -->
@@ -629,7 +617,6 @@
     <string name="backup_confirm_overwrite">Вы хотите перезаписать существующую резервную копию от %s?</string>
     <string name="restore_confirm_overwrite">Вы хотите перезаписать %s на вашем устройстве резервной копией?</string>
     <string name="init_restore_success">Восстановление завершено.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Восстановление не удалось.</string>
     <string name="init_restore_running">Восстановление базы данных тайников…</string>
     <string name="init_restore_confirm">База данных пуста. Вы хотите восстановить базу данных из резервной копии?</string>
@@ -642,7 +629,7 @@
     <string name="init_backup_settings_backup_full">Резервная копия настроек (полная)</string>
     <string name="init_backup_settings_backup_full_confirm">Вы точно хотите сохранить персональные данные аккаунтов? Они могут быть прочитаны другими приложениями.</string>
     <string name="settings_savingerror">Ошибка сохранения настроек</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="settings_saved">Настройки сохранены</string>
     <string name="init_backup_settings_restore">Восстановить настройки</string>
     <string name="init_backup_settings_restore_confirm">Вы точно хотите перезаписать текущие настройки?</string>
     <string name="init_backup_settings_restore_no">Нет резервной копии настроек</string>
@@ -974,7 +961,6 @@
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">Сохраненные</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
@@ -986,14 +972,6 @@
     <string name="cache_status_not_premium">Доступно всем участникам</string>
     <string name="cache_status_stored">Сохранен</string>
     <string name="cache_status_not_stored">Не сохранен</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Код тайника</string>
     <string name="cache_name">Название</string>
     <string name="cache_type">Тип</string>
@@ -1088,8 +1066,6 @@
     <string name="waypoint_note">Заметки</string>
     <string name="waypoint_user_note">Пользовательские заметки</string>
     <string name="waypoint_visited">Посещено</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Сохранить</string>
     <string name="waypoint_cancel_edit">Отмена</string>
     <string name="waypoint_loading">Загрузка путевой точки…</string>
@@ -1600,7 +1576,7 @@
     <string name="confirm_log_title">Особый тип записи</string>
     <string name="confirm_log_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <string name="confirm_report_problem_title">Сообщить о проблеме</string>
-    <string name="confirm_report_problem_message">Вы хотите сообщить \"%s\". Вы уверены?</string>
+    <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Активировать</string>
     <string name="init_geokrety">GeoKrety.org</string>
@@ -1685,14 +1661,8 @@
     <string name="ask_again">Спросить снова</string>
     <string name="location_permission_request_explanation">c:geo необходим доступ к GPS чтобы определять ваше местоположение и отображать дистанцию и направление к тайникам. Приложение не может быть использовано без этого разрешения.</string>
     <string name="storage_permission_request_explanation">c:geo необходим доступ к памяти телефона или SD карте, чтобы сохранять тайники, а также для чтения оффлайн карт и экспорта\импорта тайников. Приложение не может быть использовано без этого разрешения.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
     <string name="color_blue">Синий</string>
     <string name="color_green">Зеленый</string>
     <string name="color_grey">Серый</string>
-    <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
 </resources>
