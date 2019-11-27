@@ -35,7 +35,7 @@ BRANCH_SOURCE='\&branch=master'
 # check if we should create a PR
 DO_PR=0
 if [ $# -eq 1 ]; then
-    if [ $1 -eq pr ]; then
+    if [ $1 = pr ]; then
         DO_PR=1
     fi
 fi
@@ -98,6 +98,12 @@ if [ -z "$(git diff)" ]; then
     debug "no changes, finishing."
     finish
     exit
+fi
+
+# check for untracked folder/files
+if [ "$(git status|grep -c untracked)" > 0 ]; then
+    debug "untracked data found, please check manually."
+    _do git status
 fi
 
 # commit changes either to BASE_BRANCH or translations BRANCH, depending on whether we prepare a PR
