@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Distance to cache not properly updated on Google Maps\n
+    \n
+    \n
     <b>2019.11.11:</b>\n
     · New: Updated Google Maps API to v2 and enable Google Maps again for Android 10\n
     · New: Set targetSDK to 28 to comply with upcoming Play Store requirements\n
