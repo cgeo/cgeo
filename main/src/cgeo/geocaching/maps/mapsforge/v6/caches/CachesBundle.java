@@ -313,11 +313,6 @@ public class CachesBundle {
         if (liveOverlay != null) {
             minDistance = Math.min(minDistance, liveOverlay.getClosestDistanceInM(coord));
         }
-        if (wpOverlay != null) {
-            minDistance = Math.min(minDistance, wpOverlay.getClosestDistanceInM(baseOverlay, coord));
-            minDistance = Math.min(minDistance, wpOverlay.getClosestDistanceInM(storedOverlay, coord));
-            minDistance = Math.min(minDistance, wpOverlay.getClosestDistanceInM(liveOverlay, coord));
-        }
         return minDistance;
     }
 }
