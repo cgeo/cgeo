@@ -3,7 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
-    · Fix: Distance to cache not properly updated on Google Maps\n
+    · Fix: Update distance info on Google Maps while moving\n
     \n
     \n
     <b>2019.11.11:</b>\n
