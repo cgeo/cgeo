@@ -7,7 +7,6 @@
     · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
     · New: Fix support for geochecker gc-apps.com\n
     · Change: Use waypoints of a user defined cache in \"Go to\" menu\n
-    · Fix: Update distance info on Google Maps while moving\n
     · Fix: Internal database cleanup improvements\n
     · Fix: Removed no longer used menu entry \"Cache list\" - \"Show on map\" - \"Mapsforge Beta\"\n
     \n
