@@ -14,8 +14,10 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -231,11 +233,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl<MapsforgeCa
             }
             setMapFile(new File(Settings.getMapFile()));
             if (!Settings.isValidMapFile(Settings.getMapFile())) {
-                Toast.makeText(
-                        getContext(),
-                        getContext().getString(R.string.warn_invalid_mapfile),
-                        Toast.LENGTH_LONG)
-                        .show();
+                Dialogs.message((Activity) getContext(), R.string.warn_invalid_mapfile);
             }
         }
         if (hasMapThemes()) {

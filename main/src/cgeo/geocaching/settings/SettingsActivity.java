@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -720,7 +719,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     if (!file.isDirectory()) {
                         Settings.setMapFile(mapFile);
                         if (!Settings.isValidMapFile(Settings.getMapFile())) {
-                            ActivityMixin.showToast(this, R.string.warn_invalid_mapfile);
+                            Dialogs.message(this, R.string.warn_invalid_mapfile);
                         } else {
                             // Ensure map source preference is updated accordingly.
                             // TODO: There should be a better way to find and select the map source for a map file

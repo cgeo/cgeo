@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
     <string name="warn_load_images">Error al cargar las imágenes.</string>
     <string name="warn_invalid_mapfile">El archivo de mapa seleccionado no es un archivo de mapsforge versión 0.3.0 válido.\nLos mapas sin conexión no están disponibles.</string>
-    <string name="warn_deprecated_mapfile">Está usando una versión obsoleta del fichero de mapa (0.2.4)\nConsidere cambiar a un archivo versión 0.3.0.\nc:geo no será compatible con mapas versión 0.2.4 en nuestra siguiente versión.</string>
     <string name="warn_nonexistant_mapfile">El archivo de mapa seleccionado no existe.\nLos mapas sin conexión no están disponibles.</string>
     <string name="warn_rendertheme_missing">No se ha encontrado el esquema de colores del mapa.</string>
     <string name="warn_pocket_query_select">No ha seleccionado ninguna Pocket Query.</string>

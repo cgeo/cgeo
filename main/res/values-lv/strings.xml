@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Lūdzu, ievadi tekstu savam apmeklējuma ierakstam.</string>
     <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
     <string name="warn_invalid_mapfile">Izvēlētais kartes fails nav derīgs mapsforge versijai 0.3.0 map file.\nBezsaistes kartes nav piejamas.</string>
-    <string name="warn_deprecated_mapfile">Jūs izmantojat novecojušu kartes faila versiju (0.2.4).\nApsveriet pāriet uz  0.3.0 versijas karti.\nMēs izbeigsim versijas 0.2.4 nākamajā atjauninājumā.</string>
     <string name="warn_nonexistant_mapfile">Izvēlētais kartes fails nepastāv. \nBezsaistes kartes nav pieejamas.</string>
     <string name="warn_rendertheme_missing">Kartes tēma nav atrasta.</string>
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>

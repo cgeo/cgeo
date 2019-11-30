@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
     <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
     <string name="warn_invalid_mapfile">Le fichier sélectionné n\'est pas un fichier de carte mapsforge version 0.3.0.\nLes cartes hors-lignes ne sont pas disponibles.</string>
-    <string name="warn_deprecated_mapfile">Vous utilisez un fichier de carte obsolète de version 0.2.4.\nVous devriez charger sans tarder une carte version 0.3.\nLe support des cartes 0.2.4 disparaîtra dans une prochaine version de c:geo.</string>
     <string name="warn_nonexistant_mapfile">Le fichier de carte spécifié n\'existe pas.\nLes cartes hors ligne ne sont pas disponibles.</string>
     <string name="warn_rendertheme_missing">Le thème de la carte n\'a pas été trouvé.</string>
     <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>

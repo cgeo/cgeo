@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
     <string name="warn_invalid_mapfile">Het geselecteerde mapbestand is geen correct mapforge 0.3.0 mapbestand.\nOffline kaarten zijn niet beschikbaar.</string>
-    <string name="warn_deprecated_mapfile">Je gebruikt een verouderd 0.2.4 mapbestand.\nJe word aangeraden naar een 0.3.0 mapbestand over te schakelen.\nOndersteuning voor de 0.2.4 versie zal in de volgende versie verdwijnen.</string>
     <string name="warn_nonexistant_mapfile">Het geselecteerde mapbestand bestaat niet.\nOffline kaarten zijn niet beschikbaar.</string>
     <string name="warn_rendertheme_missing">Map thema niet gevonden.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>

@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">로그에 내용을 입력해 주세요.</string>
     <string name="warn_load_images">이미지를 불러오지 못했습니다.</string>
     <string name="warn_invalid_mapfile">선택한 지도파일은 mapsforge 버전 0.3.0 맵파일이 아닙니다.\n오프라인 지도를 사용할 수 없습니다.</string>
-    <string name="warn_deprecated_mapfile">지원하지 않을 예정인 지도파일(0.2.4)입니다.\n0.3.0 버전으로 바꿔주세요.\n다음 버전에서는 0.2.4를 지원하지 않을 계획입니다.</string>
     <string name="warn_nonexistant_mapfile">선택한 지도파일이 존재하지 않습니다.\n오프라인 지도를 사용할 수 없습니다.</string>
     <string name="warn_rendertheme_missing">지도 테마를 찾을 수 없습니다.</string>
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>

@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Te rog introdu ceva text pentru această însemnare.</string>
     <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
     <string name="warn_invalid_mapfile">Harta aleasă nu este în formatul mapsforge versiunea 0.3.0.\nHarta salvată nu este disponibilă.</string>
-    <string name="warn_deprecated_mapfile">Foloseşti o hartă într-un format prea vechi (mapsforge 0.2.4).\nAr fi bine să schimbi pe hărţi versiunea 0.3.0.\nNu va mai exista suport pentru hărţi versiunea 0.2.4 în urmatoarea versiune de c:geo.</string>
     <string name="warn_nonexistant_mapfile">Fişierul cu harta aleasă nu există.\nHarta salvată nu este disponibilă.</string>
     <string name="warn_rendertheme_missing">Stilul hărţii nu a fost găsit.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>

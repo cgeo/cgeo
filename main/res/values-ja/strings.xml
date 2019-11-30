@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">ログの本文を入力してください。</string>
     <string name="warn_load_images">画像をロードすることができませんでした。</string>
     <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。\nオフライン地図は利用できません。</string>
-    <string name="warn_deprecated_mapfile">Mapsforge version 0.2.4フォーマットの地図ファイルは非推奨です。\nMapsforge version 0.3.0フォーマットに変更した方がいいでしょう。次のリリースでversion 0.2.4はサポートされなくなります。</string>
     <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。\nオフライン地図は利用できません。</string>
     <string name="warn_rendertheme_missing">地図のテーマファイルが見つかりません。</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません。</string>

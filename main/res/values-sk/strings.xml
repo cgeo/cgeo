@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
     <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
     <string name="warn_invalid_mapfile">Vybraná mapa nemá platný formát mapsforge verzie 0.3.0.\nOffline mapy nie sú dostupné.</string>
-    <string name="warn_deprecated_mapfile">Používate zastaralý formát mapových súborov verzie 0.2.4.\nZvážte prechod na mapy verzie 0.3.0.\nV budúcnosti prestane byť verzia 0.2.4 podporovaná.</string>
     <string name="warn_nonexistant_mapfile">Vybraný mapový súbor neexistuje.\nOffline mapy nie sú dostupné.</string>
     <string name="warn_rendertheme_missing">Téma mapy nebola nájdená.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>

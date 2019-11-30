@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Vnesite besedilo zapisa.</string>
     <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
     <string name="warn_invalid_mapfile">Izbrana datoteka ni veljaven mapsforge 0.3.0 zemljevid. Zemljevidi brez povezave niso na voljo.</string>
-    <string name="warn_deprecated_mapfile">Uporabljate različico zemljevidov 0.2.4. Prosimo uporabite različico 0.3.0. V naslednji izdaji bomo prekinili podporo za različico 0.2.4.</string>
     <string name="warn_nonexistant_mapfile">Datoteka z zemljevidi ne obstaja.\nZemljevidi brez povezave niso na voljo.</string>
     <string name="warn_rendertheme_missing">Tema zemljevidov ni na voljo.</string>
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>

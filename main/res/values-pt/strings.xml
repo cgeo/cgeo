@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Por favor, preencha algum texto para o registo.</string>
     <string name="warn_load_images">O c:geo falhou o carregamento de imagens.</string>
     <string name="warn_invalid_mapfile">O ficheiro de mapa seleccionado não é suportado pela versão mapsforge 0.3.0.\nOs mapas offline não estão disponíveis.</string>
-    <string name="warn_deprecated_mapfile">Está a utilizar um ficheiro de mapa de uma versão obsoleta.\nConsidere mudar o mapa para a versão 0.3.0.\nNa próxima versão vamos deixar de suportar a 0.2.4.</string>
     <string name="warn_nonexistant_mapfile">O ficheiro de mapa seleccionado não existe.\nOs mapas offline não estão disponíveis.</string>
     <string name="warn_rendertheme_missing">Tema de mapa não encontrado.</string>
     <string name="warn_pocket_query_select">Nenhuma Pocket query seleccionada.</string>

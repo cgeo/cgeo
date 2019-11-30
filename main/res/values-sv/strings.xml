@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
     <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
     <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfil.\nOffline-kartan är inte tillgänglig.</string>
-    <string name="warn_deprecated_mapfile">Den kartfil du använder är av en gammal version (0.2.4).\nVi rekommenderar att byta till en kartfil med version 0.3.0.\nNästa version av c:geo kommer inte hantera version 0.2.4.</string>
     <string name="warn_nonexistant_mapfile">Den angivna kartfilen finns inte.\nOffline-kartor kommer inte att vara tillgängliga.</string>
     <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
     <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
