@@ -1,28 +1,36 @@
 package cgeo.geocaching.maps.google.v2;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.DistanceDrawer;
+import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.ScaleDrawer;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapReadyCallback;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.support.v4.content.pm.PackageInfoCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -30,9 +38,11 @@ import android.view.MotionEvent;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -129,6 +139,31 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (isInEditMode()) {
             return;
         }
+
+        // check if Google Play Services support the current Google Maps API version
+        try {
+            final long version = PackageInfoCompat.getLongVersionCode(context.getPackageManager().getPackageInfo(GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE, 0));
+            if (version < GoogleApiAvailability.GOOGLE_PLAY_SERVICES_VERSION_CODE) {
+                throw new PackageManager.NameNotFoundException("found version " + version);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
+            Log.d("play services version too old / " + e.getMessage() + " / at least version " + GoogleApiAvailability.GOOGLE_PLAY_SERVICES_VERSION_CODE + " required");
+            Dialogs.confirmYesNo((Activity) context, R.string.warn_gm_not_available, R.string.switch_to_mf, (dialog, whichButton) -> {
+                // switch to first Mapsforge mapsource found
+                final List<MapSource> mapSources = MapProviderFactory.getMapSources();
+                for (final MapSource mapSource : mapSources) {
+                    if (mapSource instanceof MapsforgeMapSource) {
+                        Settings.setMapSource(mapSource);
+                        Dialogs.message((Activity) context, R.string.warn_gm_not_available, R.string.switched_to_mf, (dialog2, whichButton2) -> {
+                            ((Activity) context).finish();
+                        });
+                        break;
+                    }
+                }
+            });
+        }
+
         getMapAsync(this);
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
