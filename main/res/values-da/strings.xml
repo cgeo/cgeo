@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Indtast tekst til din logbesked.</string>
     <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
     <string name="warn_invalid_mapfile">Den valgte kortfil er ikke en gyldig mapsforge version 0.3.0 kortfil.\nOffline kort vil ikke være tilgængelige.</string>
-    <string name="warn_deprecated_mapfile">Du bruger en kortfil med et forældet format (version 0.2.4).\nOvervej at skifte til kort med version 0.3.0.\nNæste udgave af c:geo vil ikke understøtte version 0.2.4.</string>
     <string name="warn_nonexistant_mapfile">Den valgte kortfil eksisterer ikke.\nOffline kort vil ikke være tilgængelige.</string>
     <string name="warn_rendertheme_missing">Korttema ikke fundet.</string>
     <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>

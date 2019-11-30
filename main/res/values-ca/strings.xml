@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
     <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és un fitxer vàlid de mapa mapsforge versió 0.3.0 . \nEls mapes fora de línia no estan disponibles.</string>
-    <string name="warn_deprecated_mapfile">Esteu utilitzant una versió obsoleta del fitxer de mapes (0.2.4).\nConsidereu canviar a una versió de mapa 0.3.0. \nDeixarem de donar suport a la versió 0.2.4 en la propera versió.</string>
     <string name="warn_nonexistant_mapfile">No existeix el fitxer de mapa seleccionat. \nNo estan disponibles els mapes fora línia.</string>
     <string name="warn_rendertheme_missing">No s\'ha trobat l\'esquema de colors del mapa.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>

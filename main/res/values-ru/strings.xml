@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Пожалуйста, введите текст записи.</string>
     <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
     <string name="warn_invalid_mapfile">Выбранный файл карты не является файлом карты Mapsforge 0.3.0\nОффлайновые карты недоступны.</string>
-    <string name="warn_deprecated_mapfile">Вы используете устаревшую версию файла карт (0.2.4).\nМы планируем убрать поддержку 0.2.4 в следующей версии.\nОбновите вашу карту до версии 0.3.0.</string>
     <string name="warn_nonexistant_mapfile">Выбранный файл карты не существует.\nОффлайн карты недоступны.</string>
     <string name="warn_rendertheme_missing">Тема карты не найдена.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>

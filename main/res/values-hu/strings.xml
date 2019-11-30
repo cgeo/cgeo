@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
     <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
     <string name="warn_invalid_mapfile">A kiválasztott térképfájl nem felel meg a mapsforge v0.3.0 formátumnak.\nAz offline térképek nem elérhetőék.</string>
-    <string name="warn_deprecated_mapfile">0.2.4-es verziójú térképfájlt használsz.\nFontold meg a váltást 0.3.0-ás verzióra.\nA következő kiadás már nem támogatja a 0.2.4-es verziót.</string>
     <string name="warn_nonexistant_mapfile">A kiválasztott térképfájl nem létezik.\nAz offline térképek nem elérhetőék.</string>
     <string name="warn_rendertheme_missing">Nem található térképstílus</string>
     <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>

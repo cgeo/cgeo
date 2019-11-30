@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Palihug sa pag-input ug pipila ka mga teksto para sa imong log.</string>
     <string name="warn_load_images">c:geo napakyas sa pag-load ug mga larawan.</string>
     <string name="warn_invalid_mapfile">Ang napili na mapa na papeles kay dili balido nga mapsforge bersyon 0.3.0 nga papeles.\nOffline nga mapa kay dili puwede.</string>
-    <string name="warn_deprecated_mapfile">Ikaw nag gamit og dili angay nga bersyon sa mapa nga papeles (0.2.4).\nPaghatag og pagtugot og pag-ilis sa bersyon na 0.3.0 mapa.\n. Mohatag mi og suporta sa bersyon 0.2.4 sa sunod na pagpagawas.</string>
     <string name="warn_nonexistant_mapfile">Ang napili nga mapa na papeles kay wala makita.\nOffline na mapa kay dili puwede makuha o magamit.</string>
     <string name="warn_rendertheme_missing">Ang mapa nga tema kay wala makit-an.</string>
     <string name="warn_pocket_query_select">Walay gipili na bulsa na query.</string>

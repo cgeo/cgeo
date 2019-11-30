@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
     <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
     <string name="warn_invalid_mapfile">Vybraný mapový soubor není platným mapovým podkladem verze 0.3.0 mapového souboru.\nOffline mapy nejsou dostupné.</string>
-    <string name="warn_deprecated_mapfile">Používáš zastaralou verzi 0.2.4 mapového souboru.\nZvaž přepnutí na mapovou verzi 0.3.0.\nV příštím vydání již nebude verze 0.2.4 podporována.</string>
     <string name="warn_nonexistant_mapfile">Zvolený soubor map neexistuje.\nOffline mapy nejsou dostupné.</string>
     <string name="warn_rendertheme_missing">Téma pro mapu není k dispozici.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>

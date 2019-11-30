@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
     <string name="warn_load_images">c:geo nepavyko įkelti nuotraukų.</string>
     <string name="warn_invalid_mapfile">Pasirinktas žemėlapio failas nėra mapsforge 0.3.0 versijos failas.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
-    <string name="warn_deprecated_mapfile">Jūs naudojate pasenusią žemėlapio versiją (0.2.4).\nSiūlome atsinaujinti žemėlapį į 0.3.0 versiją.\nNuo sekančio leidimo versija 0.2.4 nebebus palaikoma.</string>
     <string name="warn_nonexistant_mapfile">Pasirinktas žemėlapio failas neegzistuoja.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
     <string name="warn_rendertheme_missing">Nerasta žemėlapio tema.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>

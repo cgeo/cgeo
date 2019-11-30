@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
     <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
     <string name="warn_invalid_mapfile">Valittu karttatiedosto ei ole kelvollinen mapsforge 0.3.0 version karttatiedosto.\nKartat eivät ole saatavilla offline-tilassa.</string>
-    <string name="warn_deprecated_mapfile">Käytät vanhentunutta versiota karttatiedostosta (0.2.4).\nHarkitse siirtymistä kartan 0.3.0 versioon.\nPoistamme tuen 0.2.4 versioon seuraavassa versiossa.</string>
     <string name="warn_nonexistant_mapfile">Valittua karttatiedostoa ei ole.\nOffline-kartat eivät ole saatavilla.</string>
     <string name="warn_rendertheme_missing">Karttateemaa ei löytynyt.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>

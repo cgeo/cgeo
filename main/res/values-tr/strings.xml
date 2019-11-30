@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Lütfen kaydınız için metin girin.</string>
     <string name="warn_load_images">c:geo görüntüleri yükleyemedi.</string>
     <string name="warn_invalid_mapfile">Seçilen harita dosyası geçerli bir mapsforge version 0.3.0 harita dosyası değildir. \nÇevrimdışı haritalar kullanılabilir değildir.</string>
-    <string name="warn_deprecated_mapfile">Harita dosyasının kullanımdan kaldırılmış bir versiyonunu kullanıyorsunuz (0.2.4.).\nHarita versiyonu 0.3.0\'e geçmeyi düşünün.\nBir sonraki sürümde versiyon 0.2.4\'ü destekleyemeyeceğiz.</string>
     <string name="warn_nonexistant_mapfile">Seçtiğiniz harita dosyası artık yok. \nÇevrimdışı haritalar kullanılabilir değildir.</string>
     <string name="warn_rendertheme_missing">Harita teması bulunamadı.</string>
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>

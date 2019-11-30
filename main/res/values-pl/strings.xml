@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
     <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest poprawnym plikiem mapsforge wersji 0.3.0.\nMapy offline są niedostępne.</string>
-    <string name="warn_deprecated_mapfile">Używasz przestarzałego pliku mapy w wersji 0.2.4.\nRozważ przejście na wersję mapy 0.3.0.\nNiedługo c:geo przestanie wspierać wersję 0.2.4.</string>
     <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
     <string name="warn_rendertheme_missing">Nie znaleziono tematu mapy.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>

@@ -242,7 +242,6 @@
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
     <string name="warn_invalid_mapfile">Το επιλεγμένο αρχείο χάρτη δεν είναι ένα έγκυρο αρχείο mapsforge έκδοση 0.3.0. \n Οι χάρτες δεν θα είναι διαθέσιμοι εκτός σύνδεσης.</string>
-    <string name="warn_deprecated_mapfile">Χρησιμοποιείτε ένα παλαιότερης έκδοσης αρχείο map (0.2.4).\nΚατεβάστε ένα χάρτη σε έκδοση 0.3.0. \nΟι χάρτες γενεάς 0.2.4 δεν θα υποστηρίζονται στην επόμενη έκδοση.</string>
     <string name="warn_nonexistant_mapfile">Δεν υπάρχει το αρχείο χάρτη που επιλέξατε.\nΟι χάρτες δεν είναι διαθέσιμοι εκτός σύνδεσης.</string>
     <string name="warn_rendertheme_missing">Το θέμα δεν βρέθηκε.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
