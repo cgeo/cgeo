@@ -272,6 +272,54 @@ public final class Dialogs {
      *
      * @param context
      *            activity owning the dialog
+     * @param msg
+     *            message dialog content
+     * @param positiveButton
+     *            label for positive button
+     */
+    public static AlertDialog.Builder message(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog dialog = builder.setTitle(title)
+                .setCancelable(true)
+                .setMessage(msg)
+                .setPositiveButton(positiveButton, okayListener)
+                .create();
+        dialog.setOwnerActivity(context);
+        dialog.show();
+        return builder;
+    }
+
+    /**
+     * Show a message dialog with a single "OK" button.
+     *
+     * @param context
+     *            activity owning the dialog
+     * @param msg
+     *            message dialog content
+     * @param positiveButton
+     *            label for positive button
+     */
+    public static AlertDialog.Builder message(final Activity context, final int title, final int msg, final int positiveButton, final OnClickListener okayListener) {
+        return message(context, getString(title), getString(msg), getString(positiveButton), okayListener);
+    }
+
+    /**
+     * Show a message dialog with a single "OK" button.
+     *
+     * @param context
+     *            activity owning the dialog
+     * @param msg
+     *            message dialog content
+     */
+    public static AlertDialog.Builder message(final Activity context, final int title, final int msg, final OnClickListener okayListener) {
+        return message(context, getString(title), getString(msg), getString(android.R.string.ok), okayListener);
+    }
+
+    /**
+     * Show a message dialog with a single "OK" button.
+     *
+     * @param context
+     *            activity owning the dialog
      * @param message
      *            message dialog content
      */
