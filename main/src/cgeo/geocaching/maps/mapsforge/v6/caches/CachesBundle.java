@@ -42,6 +42,7 @@ public class CachesBundle {
     private AbstractCachesOverlay storedOverlay;
     private LiveCachesOverlay liveOverlay;
     private final List<SeparatorLayer> separators = new ArrayList<>();
+    private boolean mapModeSingle = false;
 
     /**
      * Base initialization without any caches up-front
@@ -94,6 +95,7 @@ public class CachesBundle {
      */
     public CachesBundle(final String geocode, final MfMapView mapView, final MapHandlers mapHandlers) {
         this(mapView, mapHandlers);
+        this.mapModeSingle = true;
         this.baseOverlay = new CachesOverlay(geocode, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers);
     }
 
@@ -290,7 +292,7 @@ public class CachesBundle {
     }
 
     public void handleWaypoints() {
-        if (getVisibleCachesCount() < Settings.getWayPointsThreshold()) {
+        if (this.mapModeSingle || getVisibleCachesCount() < Settings.getWayPointsThreshold()) {
             Collection<String> baseGeocodes = Collections.emptyList();
             if (baseOverlay != null) {
                 baseGeocodes = baseOverlay.getCacheGeocodes();
