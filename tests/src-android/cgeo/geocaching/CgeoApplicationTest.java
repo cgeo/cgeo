@@ -228,10 +228,10 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY);
+                final SearchResult search = GCParser.searchByOwner("Lineflyer", CacheType.EARTH);
                 assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).hasSize(8);
-                assertThat(search.getGeocodes()).contains("GC36RT6");
+                assertThat(search.getGeocodes()).hasSize(5);
+                assertThat(search.getGeocodes()).contains("GC7J99X");
             }
         });
     }
