@@ -27,8 +27,8 @@
     </integer-array>
     
     <string name="settings_gc_legal_note_url" translatable="false">https://www.geocaching.com/account/documents/termsofuse</string>
-    <string name="settings_offline_maps_url" translatable="false">https://manual.cgeo.org/en/offline#offline_maps</string>
-    <string name="settings_themes_url" translatable="false">https://manual.cgeo.org/en/offline#offline_maps</string>
+    <string name="settings_offline_maps_url" translatable="false">https://manual.cgeo.org/en/offlinemaps</string>
+    <string name="settings_themes_url" translatable="false">https://manual.cgeo.org/en/offlinemaps</string>
     <string name="settings_send2cgeo_url" translatable="false">https://send2.cgeo.org/</string>
     <string name="settings_facebook_login_url" translatable="false">https://faq.cgeo.org/#facebook-login</string>
 
