@@ -19,21 +19,12 @@ update_file() {
 
 . "$(dirname $0)/globals"
 
-# current branch
-CURRENT_BRANCH=`git name-rev --name-only HEAD`
-# upload default
-BRANCH_TARGET='-F "branch=master"'
+check_branch
 
-# check branch
-if [ $CURRENT_BRANCH = release ]; then
-    debug "Syncing with branch 'release'"
-    BRANCH_TARGET='-F "branch=release"'
-elif [ $CURRENT_BRANCH != master ]; then
-    echo Only update from master or release!
-    exit
-fi
+# update CURRENT_BRANCH
+_do git pull upstream ${CURRENT_BRANCH} || die "couldn't git pull upstream ${CURRENT_BRANCH}."
 
-echo You must be on an up-to-date $CURRENT_BRANCH branch to execute this script.
+echo You prepared an up-to-date \<${CURRENT_BRANCH}\> branch to execute this script.
 echo You have 5 seconds to abort with ctrl-c if this is not the case.
 sleep 5
 

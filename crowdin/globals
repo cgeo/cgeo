@@ -44,3 +44,22 @@ require_tools git curl wget unzip sed
 
 git rev-parse --show-toplevel >& /dev/null || die "Please start this script from within a repo. Aborting."
 cd "$(git rev-parse --show-toplevel)"
+
+check_branch () {
+    # current branch
+    CURRENT_BRANCH=`git name-rev --name-only HEAD`
+
+    # upload defaults
+    BRANCH_SOURCE='\&branch=master'
+    BRANCH_TARGET='-F "branch=master"'
+
+    # check branch
+    if [ $CURRENT_BRANCH = release ]; then
+        debug "Syncing with branch 'release'"
+        BRANCH_SOURCE='\&branch=release'
+        BRANCH_TARGET='-F "branch=release"'
+    elif [ $CURRENT_BRANCH != master ]; then
+        echo Only allowed branches are master or release!
+        exit
+    fi
+}

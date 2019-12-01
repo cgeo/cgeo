@@ -12,25 +12,21 @@
 
 . "$(dirname $0)/globals"
 
+check_branch
+
 BRANCH=crowdin_translations
 GITHUB_PR_TITLE="crowdin: New translations"
 PR_EXISTS=0
 DDATE=$(date +"%Y-%m-%d %H:%M:%S")
 ZIPFILE=all.zip
-#default base branch
-BASE_BRANCH=master
 
 finish () {
     debug "cleaning up"
     # revert everything until last commit
     _do git branch | grep -q "\* ${BRANCH}" && ( _do git checkout . ; _do git reset ; )
-    _do git checkout ${BASE_BRANCH} || exit 1
+    _do git checkout ${CURRENT_BRANCH} || exit 1
     [[ -f ${ZIPFILE} ]] && _do rm "${ZIPFILE}"
 }
-
-# current branch
-CURRENT_BRANCH=`git name-rev --name-only HEAD`
-BRANCH_SOURCE='\&branch=master'
 
 # check if we should create a PR
 DO_PR=0
@@ -40,15 +36,8 @@ if [ $# -eq 1 ]; then
     fi
 fi
 
-# check branch
-if [ $CURRENT_BRANCH = release ]; then
-    debug "Syncing with branch 'release'"
-    BASE_BRANCH=release
-    BRANCH_SOURCE='\&branch=release'
-fi
-
-# update BASE_BRANCH
-_do git pull upstream ${BASE_BRANCH} || die "couldn't git pull upstream ${BASE_BRANCH}."
+# update CURRENT_BRANCH from upstream
+_do git pull upstream ${CURRENT_BRANCH} || die "couldn't git pull upstream ${CURRENT_BRANCH}."
 
 # check for existing PR
 _do curl -i --get "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" \
@@ -59,7 +48,7 @@ grep -qF "${GITHUB_PR_TITLE}" "${OUT}" && PR_EXISTS=1
 if [ $PR_EXISTS -eq 0 ]; then
     debug "We don't have an open Pull Request on github."
     # remove branch if exists
-    _do git checkout ${BASE_BRANCH} || die "Couldn't git checkout ${BASE_BRANCH}."
+    _do git checkout ${CURRENT_BRANCH} || die "Couldn't git checkout ${CURRENT_BRANCH}."
     _do git branch -D "${BRANCH}"
 else
     debug "We have an open Pull Request on github."
@@ -106,10 +95,10 @@ if [ "$(git status|grep -c untracked)" > 0 ]; then
     _do git status
 fi
 
-# commit changes either to BASE_BRANCH or translations BRANCH, depending on whether we prepare a PR
+# commit changes either to CURRENT_BRANCH or translations BRANCH, depending on whether we prepare a PR
 AMEND=""
 if [ $DO_PR -eq 1 ]; then
-    [[ ! -z "$(git log ${BASE_BRANCH}..${BRANCH})" ]] && AMEND="--amend"
+    [[ ! -z "$(git log ${CURRENT_BRANCH}..${BRANCH})" ]] && AMEND="--amend"
 fi
 
 _do git commit -a "${AMEND}" -m \"${GITHUB_PR_TITLE}\" || die "commit failed."
@@ -120,7 +109,7 @@ if [ $DO_PR -eq 1 ]; then
 
     # create pull request
     if [ $PR_EXISTS -eq 0 ]; then
-        _do curl -i -u "${GITHUB_USER}:${GITHUB_PASSWORD}" -d \'{\"title\":\"${GITHUB_PR_TITLE}\",\"body\":\"downloaded ${DDATE}\",\"head\":\"${GITHUB_USER}:${BRANCH}\",\"base\":\"${BASE_BRANCH}\"}\' "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" || die "creating the pull request failed."
+        _do curl -i -u "${GITHUB_USER}:${GITHUB_PASSWORD}" -d \'{\"title\":\"${GITHUB_PR_TITLE}\",\"body\":\"downloaded ${DDATE}\",\"head\":\"${GITHUB_USER}:${BRANCH}\",\"base\":\"${CURRENT_BRANCH}\"}\' "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" || die "creating the pull request failed."
         grep -q "201 Created" "${OUT}" || die "pull request not created."
     fi
 fi
