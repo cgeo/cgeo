@@ -432,6 +432,29 @@ public final class Dialogs {
     }
 
     /**
+     * Standard message box + additional neutral button.
+     *
+     * @param context
+     *            activity hosting the dialog
+     * @param msg
+     *            dialog message
+     * @param neutralTextButton
+     *            Text for the neutral button
+     * @param neutralListener
+     *            listener of the neutral button
+     */
+    public static AlertDialog.Builder messageNeutral(final Activity context, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog dialog = builder.setMessage(msg)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNeutralButton(neutralTextButton, neutralListener)
+                .create();
+        dialog.setOwnerActivity(context);
+        dialog.show();
+        return builder;
+    }
+
+    /**
      * Show a message dialog for input from the user. The okay button is only enabled on non empty input.
      *
      * @param context
