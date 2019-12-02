@@ -281,6 +281,7 @@
     <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="more_information">More information</string>
 
     <string name="warn_gm_not_available">Google Maps not available.</string>
     <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>

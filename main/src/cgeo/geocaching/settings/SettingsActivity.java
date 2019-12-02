@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -719,7 +721,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     if (!file.isDirectory()) {
                         Settings.setMapFile(mapFile);
                         if (!Settings.isValidMapFile(Settings.getMapFile())) {
-                            Dialogs.message(this, R.string.warn_invalid_mapfile);
+                            showInvalidMapfileMessage(this);
                         } else {
                             // Ensure map source preference is updated accordingly.
                             // TODO: There should be a better way to find and select the map source for a map file
