@@ -7,8 +7,10 @@
     · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
     · New: Fix support for geochecker gc-apps.com\n
     · Change: Use waypoints of a user defined cache in \"Go to\" menu\n
+    · Change: Link from offline map \"More info\" page to the new offline map tutorial\n
     · Fix: Internal database cleanup improvements\n
     · Fix: Removed no longer used menu entry \"Cache list\" - \"Show on map\" - \"Mapsforge Beta\"\n
+    · Fix: Ignore waypoint threshold setting when on a single cache OSM map\n
     \n
     \n
   </string>
