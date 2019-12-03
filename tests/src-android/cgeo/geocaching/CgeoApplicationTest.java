@@ -230,7 +230,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
             public void run() {
                 final SearchResult search = GCParser.searchByOwner("blafoo", CacheType.MYSTERY);
                 assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).hasSize(9);
+                assertThat(search.getGeocodes()).hasSize(8);
                 assertThat(search.getGeocodes()).contains("GC36RT6");
             }
         });
