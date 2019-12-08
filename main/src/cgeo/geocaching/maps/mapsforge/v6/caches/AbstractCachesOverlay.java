@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
@@ -369,22 +370,25 @@ public abstract class AbstractCachesOverlay {
         return null;
     }
 
-    public int getClosestDistanceInM(final Geopoint coord) {
+    public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
         int minDistance = 50000000;
+        String name = "";
         final Set<Geocache> caches = DataStore.loadCaches(getCacheGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
         for (final Geocache cache : caches) {
             final int distance = (int) (1000f * cache.getCoords().distanceTo(coord));
             if (distance > 0 && distance < minDistance) {
                 minDistance = distance;
+                name = cache.getGeocode() + " " + cache.getName();
             }
             final List<Waypoint> waypoints = cache.getWaypoints();
             for (final Waypoint waypoint : waypoints) {
                 final int wpDistance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
                 if (wpDistance > 0 && wpDistance < minDistance) {
                     minDistance = wpDistance;
+                    name = waypoint.getName() + " (" + waypoint.getWaypointType().gpx + ")";
                 }
             }
         }
-        return minDistance;
+        return new WaypointDistanceInfo(name, minDistance);
     }
 }

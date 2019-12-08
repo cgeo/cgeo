@@ -782,6 +782,10 @@
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
     <string name="far_distance">Far distance</string>
     <string name="near_distance">Near distance</string>
+    <string name="init_proximity_notification_type">Type of notification</string>
+    <string name="pn_tone_only">Tone only</string>
+    <string name="pn_text_only">Text only</string>
+    <string name="pn_tone_and_text">Tone + text</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
@@ -1752,4 +1756,9 @@
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
+
+    <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">c:geo notifications</string>
+    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
+    <string name="proximity_notification_title">c:geo proximity notification</string>
 </resources>

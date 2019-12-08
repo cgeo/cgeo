@@ -85,6 +85,9 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         // prepare proximity notification
         proximityNotification = Settings.isSpecificProximityNotificationActive() ? new ProximityNotificationByCoords() : null;
+        if (null != proximityNotification) {
+            proximityNotification.setTextNotifications(this);
+        }
 
         // cache must exist, except for "any point navigation"
         final String geocode = extras.getString(Intents.EXTRA_GEOCODE);

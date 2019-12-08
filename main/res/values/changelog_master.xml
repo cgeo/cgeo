@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Ability to create user defined caches\n
+    · New: Proximity notification messages as Android system notifications\n
     · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
     · New: Option to disable Google Maps controls for manual screen rotation\n
     · Change: Use waypoints of a user defined cache in \"Go to\" menu\n
