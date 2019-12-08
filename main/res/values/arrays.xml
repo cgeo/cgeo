@@ -12,4 +12,15 @@
         <item>@string/pref_value_green</item>
     </string-array>
 
+    <string-array name="proximity_notification_types">
+        <item>@string/pn_tone_only</item>
+        <item>@string/pn_text_only</item>
+        <item>@string/pn_tone_and_text</item>
+    </string-array>
+
+    <string-array name="proximity_notification_values">
+        <item>@string/pref_value_pn_tone_only</item>
+        <item>@string/pref_value_pn_text_only</item>
+        <item>@string/pref_value_pn_tone_and_text</item>
+    </string-array>
 </resources>

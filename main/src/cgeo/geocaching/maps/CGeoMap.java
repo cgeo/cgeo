@@ -20,6 +20,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -511,6 +512,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             currentSourceId = Settings.getMapSource().getNumericalId();
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
             trailHistory = null;
+        }
+        if (null != proximityNotification) {
+            proximityNotification.setTextNotifications(activity);
         }
 
         // If recreating from an obsolete map source, we may need a restart
@@ -1727,23 +1731,26 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         progress.dismiss();
     }
 
-    public int getClosestDistanceInM(final Geopoint coord) {
+    public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
         int minDistance = 50000000;
+        String name = "";
         // check caches
         for (final Geocache item : caches) {
             final int distance = (int) (1000 * coord.distanceTo(item.getCoords()));
-            if (distance > 0) {
-                minDistance = Math.min(minDistance, distance);
+            if (distance > 0 && distance < minDistance) {
+                minDistance = distance;
+                name = item.getGeocode() + " " + item.getName();
             }
         }
         // check waypoints
         for (final Waypoint item : waypoints) {
             final int distance = (int) (1000 * coord.distanceTo(item.getCoords()));
-            if (distance > 0) {
-                minDistance = Math.min(minDistance, distance);
+            if (distance > 0 && distance < minDistance) {
+                minDistance = distance;
+                name = item.getName() + " (" + item.getWaypointType().gpx + ")";
             }
         }
-        return minDistance;
+        return new WaypointDistanceInfo(name, minDistance);
     }
 
     private class RequestDetailsThread extends Thread {

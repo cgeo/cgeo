@@ -88,6 +88,10 @@
     <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
     <string translatable="false" name="pref_proximityDistanceNear">pref_proximityDistanceNear</string>
+    <string translatable="false" name="pref_proximityNotificationType">pref_proximityNotificationType</string>
+    <string translatable="false" name="pref_value_pn_tone_only">1</string>
+    <string translatable="false" name="pref_value_pn_text_only">2</string>
+    <string translatable="false" name="pref_value_pn_tone_and_text">3</string>
     <string translatable="false" name="pref_maptrail">maptrail</string>
     <string translatable="false" name="pref_trailcolor">trailcolor</string>
     <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>

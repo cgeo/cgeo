@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.settings.Settings;
@@ -304,17 +305,27 @@ public class CachesBundle {
         }
     }
 
-    public int getClosestDistanceInM(final Geopoint coord) {
-        int minDistance = 50000000;
+    public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
+        WaypointDistanceInfo info = new WaypointDistanceInfo("", 50000000);
+        WaypointDistanceInfo temp = info;
         if (baseOverlay != null) {
-            minDistance = Math.min(minDistance, baseOverlay.getClosestDistanceInM(coord));
+            temp = baseOverlay.getClosestDistanceInM(coord);
+            if (temp.meters > 0 && temp.meters < info.meters) {
+                info = temp;
+            }
         }
         if (storedOverlay != null) {
-            minDistance = Math.min(minDistance, storedOverlay.getClosestDistanceInM(coord));
+            temp = storedOverlay.getClosestDistanceInM(coord);
+            if (temp.meters > 0 && temp.meters < info.meters) {
+                info = temp;
+            }
         }
         if (liveOverlay != null) {
-            minDistance = Math.min(minDistance, liveOverlay.getClosestDistanceInM(coord));
+            temp = liveOverlay.getClosestDistanceInM(coord);
+            if (temp.meters > 0 && temp.meters < info.meters) {
+                info = temp;
+            }
         }
-        return minDistance;
+        return info;
     }
 }

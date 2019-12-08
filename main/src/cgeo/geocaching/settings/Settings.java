@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableComparator;
 import cgeo.geocaching.maps.MapMode;
@@ -1023,6 +1024,16 @@ public class Settings {
 
     public static void setProximityNotificationThreshold(final boolean farDistance, final int distance) {
         putInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, distance);
+    }
+
+    public static boolean isProximityNotificationTypeTone() {
+        final String pref = getString(R.string.pref_proximityNotificationType, ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY);
+        return pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY) || pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_AND_TEXT);
+    }
+
+    public static boolean isProximityNotificationTypeText() {
+        final String pref = getString(R.string.pref_proximityNotificationType, ProximityNotification.NOTIFICATION_TYPE_TONE_ONLY);
+        return pref.equals(ProximityNotification.NOTIFICATION_TYPE_TEXT_ONLY) || pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_AND_TEXT);
     }
 
     public static boolean isLongTapCreateUDC() {

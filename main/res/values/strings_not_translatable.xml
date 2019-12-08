@@ -120,4 +120,7 @@
 
     <!-- fileprovider -->
     <string name="file_provider_authority" translatable="false">org.cgeo.fileprovider</string>
+
+    <!-- notification channel -->
+    <string name="notification_channel_id" translatable="false">c:geo notification channel</string>
 </resources>

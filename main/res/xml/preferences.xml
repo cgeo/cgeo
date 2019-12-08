@@ -627,6 +627,13 @@
                 android:key="@string/pref_proximityNotificationSpecific"
                 android:summary="@string/init_summary_proximityNotificationSpecific"
                 android:title="@string/init_proximityNotificationSpecific" />
+            <ListPreference
+                android:title="@string/init_proximity_notification_type"
+                android:summary="%s"
+                android:key="@string/pref_proximityNotificationType"
+                android:defaultValue="@string/pref_value_pn_tone_only"
+                android:entries="@array/proximity_notification_types"
+                android:entryValues="@array/proximity_notification_values" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/user_defined_caches"
