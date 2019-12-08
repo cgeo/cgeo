@@ -11,6 +11,7 @@
     · Fix: Internal database cleanup improvements\n
     · Fix: Removed no longer used menu entry \"Cache list\" - \"Show on map\" - \"Mapsforge Beta\"\n
     · Fix: Ignore waypoint threshold setting when on a single cache OSM map\n
+    · Fix: Improved error message when wrong offline map version is used\n
     \n
     \n
   </string>
