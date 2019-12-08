@@ -12,7 +12,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.5.3'
 
         // un-mocking of portable Android classes
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.3'

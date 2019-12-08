@@ -51,6 +51,16 @@ android {
 
         // include only those language resources from libraries which we actively maintain ourself in the translation project
         resConfigs "en","ca","ceb","cs","da","de","el","es","fi","fr","hu","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tr"
+
+        javaCompileOptions {
+            // workaround for build error "Could not find AndroidManifest.xml file using generation folder" when using Gradle plugin v3.5
+            // might be fixed with release of AndroidAnnotations 4.7 (see https://github.com/androidannotations/androidannotations/issues/2034)
+            annotationProcessorOptions {
+                arguments = [
+                        "androidManifestFile": "$projectDir/AndroidManifest.xml".toString()
+                ]
+            } // annotationProcessorOptions
+        } // javaCompileOptions
     }
 
     // signing is handled via private.properties
