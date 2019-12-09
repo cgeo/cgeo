@@ -61,7 +61,7 @@ android {
     buildTypes {
         debug {
             // debug build name contains git commit for better reproduction of bugs
-            versionNameSuffix "-" + gitCommitId().substring(0, 7) + " developer build"
+            versionNameSuffix "-" + GitCommit.currentShort() + " developer build"
 
             // additional proguard rules just for the test code
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
@@ -71,7 +71,7 @@ android {
         }
         nightly {
             def nightlyName = System.getenv('NB') // NB, NB1, ...
-            versionNameSuffix "-$nightlyName-" + gitCommitId().substring(0, 7)
+            versionNameSuffix "-$nightlyName-" + GitCommit.currentShort()
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
             matchingFallbacks = ['release']
@@ -440,22 +440,24 @@ static def versionNameFromDate() {
 
 class GitCommit {
     static String commitId
-}
 
-/*
- * get the most recent git commit ID
- */
-def gitCommitId() {
-    // TODO: someone with proper groovy knowledge should make this a method at the above class
-    if (GitCommit.commitId == null) {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'rev-parse', 'HEAD'
-            standardOutput = stdout
+    /*
+     * get the most recent git commit ID
+     */
+    static String current() {
+        if (commitId == null) {
+            Process p = ['git', 'rev-parse', 'HEAD'].execute()
+            if (p.waitFor() != 0) {
+                throw new Error("Unable to get git commit id: " + p.err.text);
+            }
+            commitId = p.text.trim()
         }
-        GitCommit.commitId = stdout.toString().trim()
+        return commitId
     }
-    return GitCommit.commitId
+
+    static String currentShort() {
+        return current().substring(0, 7)
+    }
 }
 
 /*
