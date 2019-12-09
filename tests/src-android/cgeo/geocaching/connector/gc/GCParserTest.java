@@ -1,11 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import static cgeo.geocaching.connector.gc.GCParser.deleteModifiedCoordinates;
-import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
-import static cgeo.geocaching.connector.gc.GCParser.requestHtmlPage;
-import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CgeoApplicationTest;
 import cgeo.geocaching.SearchResult;
@@ -24,13 +18,20 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.test.Compare;
 
-import android.support.annotation.RawRes;
 import android.test.suitebuilder.annotation.MediumTest;
+
+import androidx.annotation.RawRes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
+import static cgeo.geocaching.connector.gc.GCParser.deleteModifiedCoordinates;
+import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
+import static cgeo.geocaching.connector.gc.GCParser.requestHtmlPage;
+import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 

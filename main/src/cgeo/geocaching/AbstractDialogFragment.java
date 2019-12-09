@@ -27,8 +27,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.PopupMenu;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,9 +36,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.DialogFragment;
+
 import java.util.concurrent.Callable;
 
-import butterknife.ButterKnife;
 import io.reactivex.Maybe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -85,7 +85,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     protected void initCustomActionBar(final View v) {
-        final ImageView defaultNavigationImageView = ButterKnife.findById(v, R.id.defaultNavigation);
+        final ImageView defaultNavigationImageView = v.findViewById(R.id.defaultNavigation);
         defaultNavigationImageView.setOnLongClickListener(v12 -> {
             startDefaultNavigation2();
             return true;
@@ -110,7 +110,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     public final void setTitle(final CharSequence title) {
         final View view = getView();
         assert view != null;
-        final TextView titleview = ButterKnife.findById(view, R.id.actionbar_title);
+        final TextView titleview = view.findViewById(R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);
         }
@@ -228,7 +228,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         // more details
         final View view = getView();
         assert view != null;
-        final Button buttonMore = ButterKnife.findById(view, R.id.more_details);
+        final Button buttonMore = view.findViewById(R.id.more_details);
 
         buttonMore.setOnClickListener(arg0 -> {
             CacheDetailActivity.startActivity(getActivity(), geocode);

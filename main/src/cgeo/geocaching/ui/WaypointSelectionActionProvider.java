@@ -5,13 +5,14 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ActionProvider;
-import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ActionProvider;
+import androidx.core.view.MenuItemCompat;
 
 /**
  * Action provider that lists all waypoints of a cache. Can be used to select a certain waypoint out of multiple ones in

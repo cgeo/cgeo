@@ -3,9 +3,9 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 public enum TrackableBrand {
     TRAVELBUG(1, R.drawable.trackable_travelbug, R.string.trackable_travelbug),

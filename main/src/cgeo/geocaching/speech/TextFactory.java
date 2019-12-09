@@ -7,8 +7,8 @@ import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 
-import android.support.annotation.PluralsRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.PluralsRes;
+import androidx.annotation.StringRes;
 
 import java.util.Locale;
 

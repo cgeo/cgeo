@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 

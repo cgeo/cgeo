@@ -6,7 +6,8 @@ import cgeo.geocaching.models.Geocache;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 

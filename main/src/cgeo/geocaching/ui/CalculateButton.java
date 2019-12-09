@@ -7,10 +7,11 @@ import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.core.content.ContextCompat;
 
 import java.io.Serializable;
 

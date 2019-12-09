@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.ga;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 

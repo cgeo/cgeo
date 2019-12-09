@@ -9,9 +9,10 @@ import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.settings.Settings;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;

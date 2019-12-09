@@ -6,7 +6,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import android.app.SearchManager;
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * Fixed fields cursor holding the necessary data for the search provider of the global search bar.

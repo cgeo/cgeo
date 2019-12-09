@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.tc;
 
 import cgeo.geocaching.log.LogType;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * adapter for terracaching log types

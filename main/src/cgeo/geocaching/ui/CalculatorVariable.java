@@ -9,8 +9,6 @@ import cgeo.geocaching.utils.CalculationUtils;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayout;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -19,6 +17,9 @@ import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.gridlayout.widget.GridLayout;
 
 import java.io.Serializable;
 import java.util.List;

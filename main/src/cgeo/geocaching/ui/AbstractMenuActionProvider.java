@@ -1,8 +1,9 @@
 package cgeo.geocaching.ui;
 
 import android.content.Context;
-import android.support.v4.view.ActionProvider;
 import android.view.View;
+
+import androidx.core.view.ActionProvider;
 
 /**
  * abstract super class for all our action providers showing sub menus

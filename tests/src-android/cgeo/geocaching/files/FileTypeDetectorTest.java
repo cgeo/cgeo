@@ -1,16 +1,16 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-
-import android.support.annotation.NonNull;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.RawRes;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCase {
 

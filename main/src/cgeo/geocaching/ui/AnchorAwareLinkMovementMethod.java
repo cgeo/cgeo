@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui;
 
-import android.support.annotation.NonNull;
 import android.text.Layout;
 import android.text.Selection;
 import android.text.Spannable;
@@ -10,6 +9,8 @@ import android.text.style.ClickableSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 /**
  * {@code LinkMovementMethod} with built-in suppression of errors for links, where the URL cannot be handled

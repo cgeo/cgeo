@@ -1,8 +1,11 @@
 package cgeo.geocaching.files;
 
-import android.support.annotation.RawRes;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
-import org.apache.commons.io.IOUtils;
+import androidx.annotation.RawRes;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import org.apache.commons.io.IOUtils;
 
 import static cgeo.geocaching.enumerations.CacheSize.MICRO;
 import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;

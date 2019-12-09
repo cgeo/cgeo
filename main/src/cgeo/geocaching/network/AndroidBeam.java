@@ -11,7 +11,8 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 import android.nfc.NfcEvent;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 

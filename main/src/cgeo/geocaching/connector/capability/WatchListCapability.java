@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.capability;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Connector interface to implement for adding/removing caches to/from a watch list (which is hosted at the connectors

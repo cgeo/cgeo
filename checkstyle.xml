@@ -130,7 +130,7 @@
       <property name="severity" value="info" />
     </module>
     <module name="ImportOrder">
-      <property name="groups" value="cgeo,android,java,javax,*"/>
+      <property name="groups" value="cgeo,android,androidx,java,javax,*"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <property name="option" value="top"/>

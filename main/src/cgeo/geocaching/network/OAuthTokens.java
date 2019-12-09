@@ -3,8 +3,9 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.settings.Settings;
 
-import android.support.annotation.NonNull;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;

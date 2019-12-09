@@ -6,7 +6,8 @@ import cgeo.geocaching.models.Geocache;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * Filter {@link Geocache}s if they have a locally stored {@link GCVote} rating. This filter will not do any network

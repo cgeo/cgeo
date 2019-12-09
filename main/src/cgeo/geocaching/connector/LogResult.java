@@ -2,7 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.enumerations.StatusCode;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class LogResult {
 

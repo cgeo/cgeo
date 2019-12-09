@@ -3,7 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class AbstractMapSource implements MapSource {
 

@@ -7,8 +7,9 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.support.v4.content.AsyncTaskLoader;
 import android.widget.Toast;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;

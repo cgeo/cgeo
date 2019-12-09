@@ -5,7 +5,8 @@ import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.models.Image;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.List;
 

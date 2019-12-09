@@ -6,7 +6,8 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.location.Geopoint;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import io.reactivex.functions.Function;
 

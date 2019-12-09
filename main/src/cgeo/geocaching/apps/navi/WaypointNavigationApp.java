@@ -3,7 +3,8 @@ package cgeo.geocaching.apps.navi;
 import cgeo.geocaching.models.Waypoint;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * interface for navigation to a waypoint

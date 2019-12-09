@@ -30,11 +30,12 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.support.v4.content.pm.PackageInfoCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+
+import androidx.core.content.pm.PackageInfoCompat;
 
 import java.util.Collection;
 import java.util.Iterator;

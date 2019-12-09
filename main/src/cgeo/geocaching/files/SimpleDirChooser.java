@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.LayoutRes;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +23,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,7 +59,7 @@ public class SimpleDirChooser extends AbstractListActivity {
 
         fill(currentDir);
 
-        okButton = ButterKnife.findById(this, R.id.simple_dir_chooser_ok);
+        okButton = findViewById(R.id.simple_dir_chooser_ok);
         resetOkButton();
         okButton.setOnClickListener(v -> {
             setResult(RESULT_OK, new Intent()
@@ -74,7 +74,7 @@ public class SimpleDirChooser extends AbstractListActivity {
             finish();
         });
 
-        final EditText pathField = ButterKnife.findById(this, R.id.simple_dir_chooser_path);
+        final EditText pathField = findViewById(R.id.simple_dir_chooser_path);
         pathField.setOnClickListener(v -> editPath());
     }
 
@@ -115,7 +115,7 @@ public class SimpleDirChooser extends AbstractListActivity {
     private void fill(final File dir) {
         lastPosition = -1;
         resetOkButton();
-        final EditText path = ButterKnife.findById(this, R.id.simple_dir_chooser_path);
+        final EditText path = findViewById(R.id.simple_dir_chooser_path);
         path.setText(this.getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
         final List<Option> listDirs = new ArrayList<>();
@@ -168,12 +168,12 @@ public class SimpleDirChooser extends AbstractListActivity {
 
             final Option option = items.get(position);
             if (option != null) {
-                final TextView t1 = ButterKnife.findById(v, R.id.TextView01);
+                final TextView t1 = v.findViewById(R.id.TextView01);
                 if (t1 != null) {
                     t1.setOnClickListener(new OnTextViewClickListener(position));
                     t1.setText(option.getName());
                 }
-                final CheckBox check = ButterKnife.findById(v, R.id.CheckBox);
+                final CheckBox check = v.findViewById(R.id.CheckBox);
                 if (check != null) {
                     if (!chooseForWriting || option.isWriteable()) {
                         check.setOnClickListener(new OnCheckBoxClickListener(position));

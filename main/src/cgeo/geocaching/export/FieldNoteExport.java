@@ -19,19 +19,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import butterknife.ButterKnife;
 
 /**
  * Exports offline logs in the Groundspeak Field Note format.
@@ -68,12 +67,12 @@ public class FieldNoteExport extends AbstractExport {
         final View layout = View.inflate(activity, R.layout.fieldnote_export_dialog, null);
         builder.setView(layout);
 
-        final TextView text = ButterKnife.findById(layout, R.id.info);
+        final TextView text = layout.findViewById(R.id.info);
         text.setText(activity.getString(R.string.export_confirm_message, exportLocation.getAbsolutePath(), fileName));
 
-        final CheckBox uploadOption = ButterKnife.findById(layout, R.id.upload);
+        final CheckBox uploadOption = layout.findViewById(R.id.upload);
         uploadOption.setChecked(Settings.getFieldNoteExportUpload());
-        final CheckBox onlyNewOption = ButterKnife.findById(layout, R.id.onlynew);
+        final CheckBox onlyNewOption = layout.findViewById(R.id.onlynew);
         onlyNewOption.setChecked(Settings.getFieldNoteExportOnlyNew());
 
         if (Settings.getFieldnoteExportDate() > 0) {

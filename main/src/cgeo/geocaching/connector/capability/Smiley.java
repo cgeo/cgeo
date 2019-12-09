@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.capability;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class Smiley {
     @NonNull public final String text;

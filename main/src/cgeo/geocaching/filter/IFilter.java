@@ -3,7 +3,8 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.models.Geocache;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.List;
 

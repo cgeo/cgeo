@@ -7,7 +7,8 @@ import cgeo.geocaching.activity.Progress;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.StringRes;
 
 import java.lang.ref.WeakReference;
 

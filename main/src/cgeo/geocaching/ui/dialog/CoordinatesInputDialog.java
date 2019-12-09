@@ -18,11 +18,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -40,11 +35,16 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesInputDialog extends DialogFragment {
@@ -130,24 +130,24 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (!noTitle) {
             dialog.setTitle(R.string.cache_coordinates);
         } else {
-            final TextView title = ButterKnife.findById(v, R.id.dialog_title_title);
+            final TextView title = v.findViewById(R.id.dialog_title_title);
             if (title != null) {
                 title.setText(R.string.cache_coordinates);
                 title.setVisibility(View.VISIBLE);
             }
-            final ImageButton cancel = ButterKnife.findById(v, R.id.dialog_title_cancel);
+            final ImageButton cancel = v.findViewById(R.id.dialog_title_cancel);
             if (cancel != null) {
                 cancel.setOnClickListener(new InputCancelListener());
                 cancel.setVisibility(View.VISIBLE);
             }
-            final ImageButton done = ButterKnife.findById(v, R.id.dialog_title_done);
+            final ImageButton done = v.findViewById(R.id.dialog_title_done);
             if (done != null) {
                 done.setOnClickListener(inputdone);
                 done.setVisibility(View.VISIBLE);
             }
         }
 
-        final Spinner spinner = ButterKnife.findById(v, R.id.spinnerCoordinateFormats);
+        final Spinner spinner = v.findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(getActivity(),
                         R.array.waypoint_coordinate_formats,
@@ -157,25 +157,25 @@ public class CoordinatesInputDialog extends DialogFragment {
         spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
-        bLat = ButterKnife.findById(v, R.id.ButtonLat);
-        eLat = ButterKnife.findById(v, R.id.latitude);
-        eLatDeg = ButterKnife.findById(v, R.id.EditTextLatDeg);
-        eLatMin = ButterKnife.findById(v, R.id.EditTextLatMin);
-        eLatSec = ButterKnife.findById(v, R.id.EditTextLatSec);
-        eLatSub = ButterKnife.findById(v, R.id.EditTextLatSecFrac);
-        tLatSep1 = ButterKnife.findById(v, R.id.LatSeparator1);
-        tLatSep2 = ButterKnife.findById(v, R.id.LatSeparator2);
-        tLatSep3 = ButterKnife.findById(v, R.id.LatSeparator3);
+        bLat = v.findViewById(R.id.ButtonLat);
+        eLat = v.findViewById(R.id.latitude);
+        eLatDeg = v.findViewById(R.id.EditTextLatDeg);
+        eLatMin = v.findViewById(R.id.EditTextLatMin);
+        eLatSec = v.findViewById(R.id.EditTextLatSec);
+        eLatSub = v.findViewById(R.id.EditTextLatSecFrac);
+        tLatSep1 = v.findViewById(R.id.LatSeparator1);
+        tLatSep2 = v.findViewById(R.id.LatSeparator2);
+        tLatSep3 = v.findViewById(R.id.LatSeparator3);
 
-        bLon = ButterKnife.findById(v, R.id.ButtonLon);
-        eLon = ButterKnife.findById(v, R.id.longitude);
-        eLonDeg = ButterKnife.findById(v, R.id.EditTextLonDeg);
-        eLonMin = ButterKnife.findById(v, R.id.EditTextLonMin);
-        eLonSec = ButterKnife.findById(v, R.id.EditTextLonSec);
-        eLonSub = ButterKnife.findById(v, R.id.EditTextLonSecFrac);
-        tLonSep1 = ButterKnife.findById(v, R.id.LonSeparator1);
-        tLonSep2 = ButterKnife.findById(v, R.id.LonSeparator2);
-        tLonSep3 = ButterKnife.findById(v, R.id.LonSeparator3);
+        bLon = v.findViewById(R.id.ButtonLon);
+        eLon = v.findViewById(R.id.longitude);
+        eLonDeg = v.findViewById(R.id.EditTextLonDeg);
+        eLonMin = v.findViewById(R.id.EditTextLonMin);
+        eLonSec = v.findViewById(R.id.EditTextLonSec);
+        eLonSub = v.findViewById(R.id.EditTextLonSecFrac);
+        tLonSep1 = v.findViewById(R.id.LonSeparator1);
+        tLonSep2 = v.findViewById(R.id.LonSeparator2);
+        tLonSep3 = v.findViewById(R.id.LonSeparator3);
 
         orderedInputs = Arrays.asList(eLatDeg, eLatMin, eLatSec, eLatSub, eLonDeg, eLonMin, eLonSec, eLonSub);
 
@@ -188,34 +188,34 @@ public class CoordinatesInputDialog extends DialogFragment {
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());
 
-        final Button buttonCurrent = ButterKnife.findById(v, R.id.current);
+        final Button buttonCurrent = v.findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
-        final Button buttonCache = ButterKnife.findById(v, R.id.cache);
+        final Button buttonCache = v.findViewById(R.id.cache);
 
         if (cacheCoords != null) {
             buttonCache.setOnClickListener(new CacheListener());
         } else {
             buttonCache.setVisibility(View.GONE);
         }
-        final Button buttonCalculate = ButterKnife.findById(v, R.id.calculate);
+        final Button buttonCalculate = v.findViewById(R.id.calculate);
         if (getActivity() instanceof CalculateState) {
             buttonCalculate.setOnClickListener(new CalculateListener());
             buttonCalculate.setVisibility(View.VISIBLE);
         }
 
-        final Button buttonClear = ButterKnife.findById(v, R.id.clear);
+        final Button buttonClear = v.findViewById(R.id.clear);
         if (supportsNullCoordinates()) {
             buttonClear.setOnClickListener(new ClearCoordinatesListener());
             buttonClear.setVisibility(View.VISIBLE);
         }
 
         if (hasClipboardCoordinates()) {
-            final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
+            final Button buttonClipboard = v.findViewById(R.id.clipboard);
             buttonClipboard.setOnClickListener(new ClipboardListener());
             buttonClipboard.setVisibility(View.VISIBLE);
         }
 
-        final Button buttonDone = ButterKnife.findById(v, R.id.done);
+        final Button buttonDone = v.findViewById(R.id.done);
         if (noTitle) {
             buttonDone.setVisibility(View.GONE);
         } else {
@@ -358,7 +358,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private void setVisible(@IdRes final int viewId, final int visibility) {
         final View view = getView();
         assert view != null;
-        ButterKnife.findById(view, viewId).setVisibility(visibility);
+        view.findViewById(viewId).setVisibility(visibility);
     }
 
     private void setSize(final EditText someEditText) {

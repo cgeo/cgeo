@@ -1,14 +1,14 @@
 package cgeo.geocaching.test.mock;
 
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.text.ParseException;
 import java.util.ArrayList;

@@ -18,10 +18,11 @@ import cgeo.geocaching.utils.Log;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.EnumSet;
 import java.util.HashSet;

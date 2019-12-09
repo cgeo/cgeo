@@ -10,7 +10,8 @@ import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.ArrayList;

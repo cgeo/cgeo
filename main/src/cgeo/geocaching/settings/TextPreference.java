@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import butterknife.ButterKnife;
-
 /**
  * Preference to simply show a text message. Links are not shown.
  * <p>
@@ -59,10 +57,10 @@ public class TextPreference extends AbstractAttributeBasedPreference {
 
         final View v = super.onCreateView(parent);
 
-        final TextView text = ButterKnife.findById(v, R.id.textPreferenceText);
+        final TextView text = v.findViewById(R.id.textPreferenceText);
         text.setText(this.text);
 
-        summaryView = ButterKnife.findById(v, R.id.textPreferenceSummary);
+        summaryView = v.findViewById(R.id.textPreferenceSummary);
         setSummary(null); // show saved summary text
 
         return v;

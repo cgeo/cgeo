@@ -20,8 +20,7 @@
         android:orientation="horizontal"
         android:padding="6dp" >
 
-        <android.support.v7.widget.GridLayout
-            xmlns:grid="http://schemas.android.com/apk/res-auto"
+        <androidx.gridlayout.widget.GridLayout
 
             android:id="@+id/EquationTable"
             android:layout_height="wrap_content"
@@ -39,13 +38,12 @@
             android:layout_marginRight="4dp"
             android:background="@color/just_white"/>
 
-        <android.support.v7.widget.GridLayout
+        <androidx.gridlayout.widget.GridLayout
             android:id="@+id/FreeVariableTable"
-            xmlns:grid="http://schemas.android.com/apk/res-auto"
 
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
 
-            app:orientation="vertical"/>
+            app:orientation="vertical" />
     </LinearLayout>
 </HorizontalScrollView>

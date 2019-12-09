@@ -4,7 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.location.Viewport;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public interface ISearchByViewPort extends IConnector {
     @NonNull

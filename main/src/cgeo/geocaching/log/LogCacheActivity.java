@@ -65,7 +65,6 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -192,7 +191,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             }
         }
 
-        final View reportProblemBox = ButterKnife.findById(this, R.id.report_problem_box);
+        final View reportProblemBox = findViewById(R.id.report_problem_box);
         if (possibleReportProblemTypes.size() == 1) {
             reportProblemBox.setVisibility(View.GONE);
         } else {
@@ -284,16 +283,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void updateTrackablesList() {
         final TrackableLog[] trackablesArray = getSortedTrackables().toArray(new TrackableLog[trackables.size()]);
-        final ListView inventoryList = ButterKnife.findById(this, R.id.inventory);
+        final ListView inventoryList = findViewById(R.id.inventory);
         inventoryList.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
         ViewUtils.setListViewHeightBasedOnItems(inventoryList);
 
-        ButterKnife.findById(this, R.id.inventory_box).setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
+        findViewById(R.id.inventory_box).setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
 
-        final LinearLayout inventoryChangeAllView = ButterKnife.findById(this, R.id.inventory_changeall);
+        final LinearLayout inventoryChangeAllView = findViewById(R.id.inventory_changeall);
         inventoryChangeAllView.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
 
-        final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
+        final Button changeButton = inventoryChangeAllView.findViewById(R.id.changebutton);
         changeButton.setOnClickListener(view -> selectAllTrackablesAction());
     }
 
@@ -359,16 +358,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // See https://github.com/cgeo/cgeo/issues/7188
         enablePostButton(false);
 
-        final TextView problemButton = ButterKnife.findById(this, R.id.report_problem);
+        final TextView problemButton = findViewById(R.id.report_problem);
         problemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
         problemButton.setOnClickListener(view -> selectProblemType());
 
         verifySelectedLogType();
-        final Button typeButton = ButterKnife.findById(this, R.id.type);
+        final Button typeButton = findViewById(R.id.type);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(view -> selectLogType());
 
-        final Button dateButton = ButterKnife.findById(this, R.id.date);
+        final Button dateButton = findViewById(R.id.date);
         setDate(date);
         dateButton.setOnClickListener(new DateListener());
 
@@ -467,7 +466,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         setReportProblem(ReportProblemType.NO_PROBLEM);
         oldLog = null;
 
-        final EditText logPasswordView = ButterKnife.findById(LogCacheActivity.this, R.id.log_password);
+        final EditText logPasswordView = LogCacheActivity.this.findViewById(R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
 
         saveMode = SaveMode.SMART;
@@ -510,12 +509,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public void setDate(final Calendar dateIn) {
         date = dateIn;
 
-        final Button dateButton = ButterKnife.findById(this, R.id.date);
+        final Button dateButton = findViewById(R.id.date);
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
     public void setType(final LogType type) {
-        final Button typeButton = ButterKnife.findById(this, R.id.type);
+        final Button typeButton = findViewById(R.id.type);
 
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
@@ -527,7 +526,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     public void setReportProblem(final ReportProblemType reportProblem) {
-        final TextView reportProblemButton = ButterKnife.findById(this, R.id.report_problem);
+        final TextView reportProblemButton = findViewById(R.id.report_problem);
 
         reportProblemSelected = reportProblem;
         reportProblemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
@@ -787,7 +786,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private String currentLogPassword() {
-        return ButterKnife.<EditText>findById(this, R.id.log_password).getText().toString();
+        final EditText passwdEditText = findViewById(R.id.log_password);
+        return passwdEditText.getText().toString();
     }
 
     @Override
