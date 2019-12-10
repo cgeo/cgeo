@@ -1,14 +1,17 @@
 INSTALLATION
 
-- create a NEW local repo from the github repo
-  -> the scripts automatically run git pull, git push, git commit
-  -> DON'T DO ANY WORK ON THIS REPO!! It will be pushed automatically!
-  -> this repo can be a copy (cp -a) from an existing one
+- create a NEW local repo from the private github repo
+- define upstream:
+  git remote add upstream https://github.com/cgeo/cgeo.git
 - copy crowdin/credentials.template to crowdin/credentials
 - edit crowdin/credentials
-  -> find the API-KEY here http://crowdin.net/project/cgeo/settings#project-settings-api
-- prepare crowdin:
-  - run update manually
+  -> find the API-KEY here https://crowdin.com/project/cgeo/settings#api
+
+INFORMATION
+
+- the scripts automatically runs: git pull (from upstream), git push, git commit
+- DON'T DO ANY WORK ON THIS REPO!! It will be pushed automatically!
+- this repo can be a copy (cp -a) from an existing one
 
 if we want to automate this:
 - create a cronjob to run crowdin/download every 60 mins or trigger it somehow
@@ -17,11 +20,14 @@ if we want to automate this:
 THE SCRIPTS
 
 Run all scripts from within a repo.
+Before running the script(s) switch to the planned branch. Allowed are master and release.
 
 - update: no arguments
-  -> this will upload the base language file values/strings.xml to crowdin, depending on the current branch.
-    from master, it will upload to master and globals, from release to release. other branches are not allowed.
+  -> This will upload the base language file values/strings.xml to crowdin, depending on the current branch.
+     From master, it will upload to master and globals, from release to release.
 
 - download: optional argument: pr
-  -> this will download the language files from crowdin. if the parameter 'pr' is present, it will create/update a 
-     pull request against master or release, depending on the current branch, if necessary
+  -> This will download the language files from crowdin.
+     If the parameter 'pr' is present, it will create/update a pull request against master or release,
+     depending on the current branch, if necessary.
+  -> The script checks the git status to find new languages.
