@@ -595,6 +595,10 @@ public class Settings {
         return getBoolean(R.string.pref_mapsforge_scale_text, true);
     }
 
+    public static boolean isManualRotationDisabled() {
+        return getBoolean(R.string.pref_map_manualrotation_disabled, false);
+    }
+
     public static CoordInputFormatEnum getCoordInputFormat() {
         return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.DEFAULT_INT_VALUE));
     }
