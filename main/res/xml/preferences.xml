@@ -561,6 +561,11 @@
                 android:key="@string/pref_mapsforge_scale_text"
                 android:summary="@string/settings_summary_scale_map_text"
                 android:title="@string/settings_title_scale_map_text" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_map_manualrotation_disabled"
+                android:summary="@string/settings_summary_map_manualrotation_disabled"
+                android:title="@string/settings_title_map_manualrotation_disabled" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_title_map_content"

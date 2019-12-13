@@ -99,6 +99,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
         this.googleMap = googleMap;
         mapController.setGoogleMap(googleMap);
+        if (Settings.isManualRotationDisabled()) {
+            googleMap.getUiSettings().setRotateGesturesEnabled(false);
+        }
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(() -> recognizePositionChange());
         googleMap.setOnCameraIdleListener(() -> recognizePositionChange());
