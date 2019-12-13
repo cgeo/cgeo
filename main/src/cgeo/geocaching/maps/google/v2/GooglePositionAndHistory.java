@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AngleUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,11 +16,14 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -42,9 +46,13 @@ public class GooglePositionAndHistory implements PositionAndHistory {
     private float heading;
     private PositionHistory history = new PositionHistory();
 
+    // settings for map auto rotation
+    private Location lastBearingCoordinates = null;
+    private boolean isMapAutoRotationDisabled = false;
+
     private static final int MAX_HISTORY_POINTS = 230; // TODO add alpha, make changeable in constructor?
 
-
+    private WeakReference<GoogleMap> mapRef = null;
     private GoogleMapObjects positionObjs;
     private GoogleMapObjects historyObjs;
     private GoogleMapView mapView;
@@ -55,11 +63,13 @@ public class GooglePositionAndHistory implements PositionAndHistory {
 
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance) {
+        this.mapRef = new WeakReference<>(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
         trailColor = Settings.getTrailColor();
         this.postRealDistance = postRealDistance;
+        this.isMapAutoRotationDisabled = Settings.isMapAutoRotationDisabled();
     }
 
     @Override
@@ -69,6 +79,31 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         if (coordChanged) {
             history.rememberTrailPosition(coordinates);
             mapView.setCoordinates(coordinates);
+
+            if (!isMapAutoRotationDisabled) {
+                if (null != lastBearingCoordinates) {
+                    final GoogleMap map = mapRef.get();
+                    if (null != map) {
+                        final float bearing = AngleUtils.normalize(lastBearingCoordinates.bearingTo(coordinates));
+                        final float bearingDiff = AngleUtils.normalize(bearing - map.getCameraPosition().bearing);
+                        if (bearingDiff > 15.0f && bearingDiff < 345.0f) {  // at least 15° diff
+                            lastBearingCoordinates = coordinates;
+                            // adjust bearing of map
+                            final CameraPosition cameraPosition = new CameraPosition.Builder()
+                                    .target(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
+                                    .zoom(map.getCameraPosition().zoom)
+                                    .bearing(bearing)
+                                    .tilt(0)
+                                    .build();
+                            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        }
+                    } else {
+                        lastBearingCoordinates = null;
+                    }
+                } else {
+                    lastBearingCoordinates = coordinates;
+                }
+            }
         }
     }
 

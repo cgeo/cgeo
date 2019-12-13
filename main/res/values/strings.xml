@@ -501,6 +501,7 @@
     <string name="settings_title_map">Map</string>
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
+    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_gpx">GPX</string>
 
@@ -682,8 +683,10 @@
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="settings_title_scale_map_text">Scale Map Text</string>
     <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
-    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
     <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
     <string name="init_map_directory_description">Directory with offline maps</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>

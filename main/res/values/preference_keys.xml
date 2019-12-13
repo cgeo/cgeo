@@ -80,6 +80,7 @@
     <string translatable="false" name="pref_mapDirectory">mapDirectory</string>
     <string translatable="false" name="pref_mapsforge_scale_text">mapsforgeScaleText</string>
     <string translatable="false" name="pref_map_manualrotation_disabled">map_manualrotation_disabled</string>
+    <string translatable="false" name="pref_map_autorotation_disabled">map_autorotation_disabled</string>
     <string translatable="false" name="pref_renderthemepath">renderthemepath</string>
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
