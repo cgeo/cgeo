@@ -234,16 +234,4 @@ public class MapsforgeCachesList extends AbstractItemizedOverlay {
     public int size() {
         return items.size();
     }
-
-
-    public int getClosestDistanceInM(final Geopoint coord) {
-        int minDistance = 50000000;
-        for (final CachesOverlayItemImpl item : items) {
-            final int distance = (int) (1000 * coord.distanceTo(item.getCoord()));
-            if (distance > 0) {
-                minDistance = Math.min(minDistance, distance);
-            }
-        }
-        return minDistance;
-    }
 }
