@@ -53,10 +53,10 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.5'
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
     // Android annotations
-    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
 }
 
 /*
