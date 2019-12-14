@@ -148,11 +148,6 @@ buildScan {
 /*
  * common configuration for the Java projects
  */
-
-ext {
-    supportLibraryVersion = '28.0.0'
-}
-
 subprojects {
     repositories {
         mavenCentral()
