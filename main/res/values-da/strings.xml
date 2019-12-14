@@ -16,13 +16,13 @@
     <string name="all_types">Alle cachetyper</string>
     <string name="traditional">Traditionel cache</string>
     <string name="multi">Multi-cache</string>
-    <string name="mystery">Ukendt cache</string>
+    <string name="mystery">Mysteriecache</string>
     <string name="letterbox">Letterbox-hybrid</string>
     <string name="event">Arrangementcache</string>
-    <string name="mega">Mega-arrangement-cache</string>
-    <string name="giga">Giga-arrangement Cache</string>
+    <string name="mega">Mega-Event cache</string>
+    <string name="giga">Giga-Event cache</string>
     <string name="earth">Earth-cache</string>
-    <string name="cito">Cache in/trash out-arrangement</string>
+    <string name="cito">Cache In Trash Out event</string>
     <string name="webcam">Webcam-cache</string>
     <string name="virtual">Virtuel cache</string>
     <string name="wherigo">Wherigo-cache</string>
@@ -32,13 +32,14 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS adventures-udstilling</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Ukendt Type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
     <string name="cache_size_small">Lille</string>
     <string name="cache_size_regular">Almindelig</string>
     <string name="cache_size_large">Stor</string>
-    <string name="cache_size_other">Andre</string>
+    <string name="cache_size_other">Andet</string>
     <string name="cache_size_virtual">Virtuel</string>
     <string name="cache_size_notchosen">Ikke valgt</string>
     <string name="cache_size_unknown">Ukendt</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c: geo ved ikke hvilken cache, du ønsker at tilføje et waypoint til.</string>
     <string name="err_waypoint_add_failed">c: geo kunne ikke tilføje waypoint.</string>
     <string name="err_point_unknown_position">c: geo kan ikke bestemme din placering.</string>
-    <string name="err_point_no_position_given_title">Oplysninger mangler</string>
-    <string name="err_point_no_position_given">Udfyld mindst breddegrad og længdegrad eller afstand og pejling. Du kan også udfylde alle fire felter.</string>
     <string name="err_point_bear_and_dist_title">Har du brug for hjælp?</string>
     <string name="err_point_bear_and_dist">Udfyld både pejling og afstand. Pejlingen er en kompasvinkel mellem 0 og 360 grader i forhold til nord. Afstanden kræver ikke enheder.</string>
     <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
@@ -221,10 +220,10 @@
     <string name="err_log_post_failed_gk">Det lader til, at din log ikke er blevet gemt. Check det venligst på GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Dit logbillede blev muligvis ikke uploadet korrekt. Kontrollér billedet på geocachens hjemmeside.</string>
     <string name="err_search_address_forgot">c: geo glemte den adresse, du forsøgte at finde.</string>
-    <string name="err_parse_lat">c:geo kan ikke forstå den indtastede breddegrad.</string>
-    <string name="err_parse_lon">c:geo kan ikke forstå den indtastede længdegrad.</string>
+    <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
+    <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
     <string name="err_parse_dist">c:geo kan ikke forstå den indtastede afstand.</string>
-    <string name="err_parse_lat_lon">c:geo kan ikke forstå de indtastede længde- eller breddegrader.</string>
+    <string name="err_parse_lat_lon">c:geo can\'t parse latitude or longitude.</string>
     <string name="err_rendertheme_file_unreadable">Det valgte korttema kunne ikke indlæses. Vender tilbage til det indbyggede.</string>
     <string name="err_rendertheme_invalid">Det valgte korttema er ikke gyldigt for denne version af Mapsforge. Vender tilbage til det indbyggede.</string>
     <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Indtast koden på en Trackable. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Indtast tekst til din logbesked.</string>
     <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
-    <string name="warn_invalid_mapfile">Den valgte kortfil er ikke en gyldig mapsforge version 0.3.0 kortfil.\nOffline kort vil ikke være tilgængelige.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Den valgte kortfil eksisterer ikke.\nOffline kort vil ikke være tilgængelige.</string>
     <string name="warn_rendertheme_missing">Korttema ikke fundet.</string>
     <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Ændringer til waypoints kasseret!</string>
     <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Sidst kendte</string>
     <string name="loc_net">Netværk</string>
@@ -321,7 +324,7 @@
     <string name="caches_on_map">Vis på kort</string>
     <string name="caches_sort">Sortér</string>
     <string name="caches_sort_distance">Afstand</string>
-    <string name="caches_sort_difficulty">Sværhed</string>
+    <string name="caches_sort_difficulty">Sværhedsgrad</string>
     <string name="caches_sort_terrain">Terræn</string>
     <string name="caches_sort_size">Størrelse</string>
     <string name="caches_sort_favorites">Favoritter</string>
@@ -329,7 +332,7 @@
     <string name="caches_sort_name">Navn</string>
     <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Vurdering</string>
-    <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
+    <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
     <string name="caches_sort_date_hidden">Dato for placering</string>
     <string name="caches_sort_date_logged">Dato for logbesked</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Cachedetaljer</string>
     <string name="settings_summary_cachedetails">Konfigurér visning af cacheinformationer.</string>
     <string name="settings_title_offlinedata">Offline data</string>
-    <string name="settings_summary_offlinedata">Konfigurér andet offline datalager.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Logning</string>
     <string name="settings_summary_logging">Konfigurér signatur og indstillinger for logbeskeder.</string>
     <string name="settings_title_map">Kort</string>
@@ -541,7 +544,7 @@
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
     <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-    <string name="gcvote_sent">Stemme blev afsendt</string>
+    <string name="gcvote_sent">Bedømmelse blev afsendt</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktivér</string>
     <string name="init_username">Brugernavn</string>
@@ -575,7 +578,7 @@
     <string name="init_signature_template_log">Logtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_ratingwanted">GCVote vurdering</string>
-    <string name="init_summary_ratingwanted">Indlæs cachevurdering fra GCVote.com</string>
+    <string name="init_summary_ratingwanted">Indlæs cachebedømmelser fra GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Vis venners/egne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Vis en særskilt logbogsside med venners og egne logbeskeder</string>
     <string name="init_openlastdetailspage">Åbn sidste detaljeside</string>
@@ -645,10 +648,12 @@
     <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
     <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
     <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
-    <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver, på kortet.</string>
+    <string name="settings_info_themes">c:geo understøtter tilpassede temaer til offline kort. Temaer kan bruges til at ændre farvestil på kortet (f.eks. farver som egne sig til brug i mørke) eller til at fremhæve bestemte typer af objekter, som cykelstier eller højdekurver.</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
     <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
     <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Mappe med offline kort</string>
     <string name="init_gpx_exportdir">GPX eksportmappe</string>
     <string name="init_gpx_importdir">GPX importmappe</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
     <string name="init_summary_maptrail">Vis dit spor på kortet</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Åbn Del-menu efter GPX eksport</string>
     <string name="init_include_found_status">Inkludér \"Fundet\"-status</string>
     <string name="init_trackautovisit">Besøg automatisk Trackable</string>
@@ -669,9 +675,9 @@
     <string name="init_default_navigation_tool_select">Vælg metode</string>
     <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
     <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
-    <string name="init_debug_title">Debug-information</string>
+    <string name="init_debug_title">Fejlfindingsoplysninger</string>
     <string name="init_debug_note">c:geo kan indsamle en mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
-    <string name="init_debug">Aktivér debug-log</string>
+    <string name="init_debug">Aktivér indsamling af fejlfindingsoplysningner</string>
     <string name="init_dbonsdcard_title">Databaseplacering</string>
     <string name="init_dbonsdcard_note">Du kan vælge at gemme c:geo-databasen enten i systemhukommelsen eller i en mappe i din brugerhukommelse. Hvis databasen gemmes i brugerhukommelsen vil det frigøre noget systemhukommelse, men ydeevnen kan blive forringet og c:geo fungerer ikke hvis brugerhukommelsen ikke er tilgængelig eller hvis databasefilen fjernes.</string>
     <string name="init_dbonsdcard">På brugerlager</string>
@@ -743,8 +749,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">lang afstand</string>
-    <string name="near_distance">kort afstand</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -923,7 +929,6 @@
     <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kort</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -946,14 +951,14 @@
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_android_wear">Android Wear</string>
-    <string name="cache_menu_vote">Stem</string>
+    <string name="cache_menu_vote">Bedøm</string>
     <string name="cache_menu_checker">Åben Geochecker</string>
     <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
     <string name="cache_menu_ignore">Ignorér cache</string>
     <string name="ignore_confirm_title">Vær forsigtig</string>
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Gemte</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Log gemt</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
@@ -975,10 +980,12 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">geo code</string>
     <string name="cache_name">Navn</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Størrelse</string>
     <string name="cache_distance">Distance</string>
-    <string name="cache_difficulty">Sværhed</string>
+    <string name="cache_difficulty">Sværhedsgrad</string>
     <string name="cache_terrain">Terræn</string>
     <string name="cache_rating">Vurdering</string>
     <string name="cache_own_rating">Din vurdering</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Fra %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Søger efter filer\ni</string>
@@ -1050,7 +1066,7 @@
     <string name="popup_more">Flere detaljer</string>
     <!-- waypoint -->
     <string name="waypoint">Waypoint</string>
-    <string name="waypoint_coordinates">Koordinater</string>
+    <string name="waypoint_coordinates">Position</string>
     <string name="waypoint_cache_coordinates">Cacheposition</string>
     <string name="waypoint_calculate_coordinates">Beregn position</string>
     <string name="waypoint_custom">Tilpasset</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Waypoint duplikeret</string>
     <string name="waypoint_copy_of">Kopi af</string>
     <string name="waypointcalc_notes_prompt">Indtast noter her…</string>
-    <string name="search_history">Historik</string>
-    <string name="search_history_empty">Ingen tidligere destinationer</string>
-    <string name="search_remove_destination">Destination fjernet</string>
-    <string name="search_clear_history">Slet historik</string>
-    <string name="search_history_cleared">Historik slettet</string>
     <string name="waypoint_coordinate_formats_plain">Simpel</string>
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
@@ -1350,8 +1361,8 @@
     <string name="attribute_rappelling_no">Klatreudstyr ikke nødvendigt</string>
     <string name="attribute_boat_yes">Båd nødvendig</string>
     <string name="attribute_boat_no">Båd ikke nødvendig</string>
-    <string name="attribute_scuba_yes">Dykkerudstyr nødvendigt</string>
-    <string name="attribute_scuba_no">Dykkerudstyr ikke nødvendigt</string>
+    <string name="attribute_scuba_yes">Dykkerudstyr påkrævet</string>
+    <string name="attribute_scuba_no">Dykkerudstyr ikke påkrævet</string>
     <string name="attribute_flashlight_yes">Lommelygte nødvendig</string>
     <string name="attribute_flashlight_no">Lommelygte ikke nødvendig</string>
     <string name="attribute_uv_yes">UV-lys nødvendigt</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blå</string>
     <string name="color_green">Grøn</string>
     <string name="color_grey">Grå</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Indtast en værdi mellem %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

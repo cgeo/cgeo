@@ -4,77 +4,78 @@
     <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Cache</string>
-    <string name="detail">Mga detalye</string>
+    <string name="detail">Mga Detalye</string>
     <string name="search">Pangitaa</string>
     <string name="helpers">Gamit kaayo nga mga app</string>
-    <string name="about">Ang mahitungod sa c:geo</string>
-    <string name="latitude">Ang Latitud</string>
-    <string name="longitude">Ang longhitud</string>
+    <string name="about">Mahitungod sa c:geo</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
     <!-- actionbar -->
-    <string name="settings_titlebar">ang mga Setting sa c:geo</string>
+    <string name="settings_titlebar">Mga Setting sa c:geo</string>
     <!-- caches -->
-    <string name="all_types">Tanang klase sa cache</string>
-    <string name="traditional">Tradisyonal na Cache</string>
-    <string name="multi">Ang dinaghan na cache</string>
-    <string name="mystery">Ang misteryo nga Cache</string>
-    <string name="letterbox">Hybrid nga letterbox</string>
-    <string name="event">Ang panghitabo sa Cache</string>
-    <string name="mega">Ang minilyon nga panghitabo sa cache</string>
-    <string name="giga">Binilyon nga panghitabo sa Cache</string>
-    <string name="earth">Ang Earthcache</string>
-    <string name="cito">Ang pagbasura sa panghitabo sa cache</string>
-    <string name="webcam">Ang Cache sa Webcam</string>
+    <string name="all_types">Tanan nga mga Klase sa Cache</string>
+    <string name="traditional">Kinaraan nga Cache</string>
+    <string name="multi">Dinaghan nga cache</string>
+    <string name="mystery">Misteryo nga Cache</string>
+    <string name="letterbox">Letterbox Hybrid</string>
+    <string name="event">Cache sa Panghitabo</string>
+    <string name="mega">Cache sa Minilyon nga Panghitabo</string>
+    <string name="giga">Cache sa Binilyon nga Panghitabo</string>
+    <string name="earth">Earthcache</string>
+    <string name="cito">Cache In Trash Out Event</string>
+    <string name="webcam">Cache sa Webcam</string>
     <string name="virtual">Birtwal nga Cache</string>
-    <string name="wherigo">Ang Cache nga Whereigo</string>
+    <string name="wherigo">Cache nga Wherigo</string>
     <string name="communceleb">Community Celebration Event</string>
-    <string name="ape">Ang Proyekto sa APE Cache</string>
+    <string name="ape">Cache sa APE nga Proyekto</string>
     <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Ang GPS sa mga panimpalad na pagpakita</string>
     <string name="block">Geocaching HQ Block Party</string>
-    <string name="unknown">Ang wala mailhi nga klase</string>
+    <string name="userdefined">User defined cache</string>
+    <string name="unknown">Wala nailhan nga Klase</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
-    <string name="cache_size_small">Ang Gamay</string>
+    <string name="cache_size_small">Gamay</string>
     <string name="cache_size_regular">Regular</string>
     <string name="cache_size_large">Dako</string>
-    <string name="cache_size_other">Uban pa</string>
-    <string name="cache_size_virtual">Ang birtwal</string>
-    <string name="cache_size_notchosen">Wala napilian</string>
-    <string name="cache_size_unknown">Wala mailhan</string>
+    <string name="cache_size_other">Uban</string>
+    <string name="cache_size_virtual">Birtwal</string>
+    <string name="cache_size_notchosen">Wala napili</string>
+    <string name="cache_size_unknown">Wala nailhan</string>
     <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Labihan ka dako</string>
     <!-- waypoints -->
-    <string name="wp_final">Ang katapusan nga lokasyon</string>
-    <string name="wp_stage">Ang yugto sa dinaghan nga cache</string>
-    <string name="wp_puzzle">Ang pangutana nga tubagon</string>
-    <string name="wp_pkg">Parkinganan nga lugar</string>
+    <string name="wp_final">Pinal nga Lokasyon</string>
+    <string name="wp_stage">Yugto sa usa ka Dinaghan nga cache</string>
+    <string name="wp_puzzle">Pangutana nga Tubagon</string>
+    <string name="wp_pkg">Parkinganan nga Lugar</string>
     <string name="wp_trailhead">Trailhead</string>
     <string name="wp_waypoint">Ang punto sa reperensya</string>
     <string name="wp_original">Ang mga coordinate nga orihinal</string>
     <!-- logs -->
-    <string name="log_found">Nakit-an na</string>
-    <string name="log_dnf">Wala na nakit-an</string>
-    <string name="log_note">Ang notaryo kay isuwat</string>
-    <string name="log_published">Ang gipatik</string>
+    <string name="log_found">Nakit-an kana</string>
+    <string name="log_dnf">Wala kana nakit-an</string>
+    <string name="log_note">Pagsulat og notaryo</string>
+    <string name="log_published">Namantala</string>
     <string name="log_enabled">Gipagana</string>
     <string name="log_disabled">Wala gipagana</string>
     <string name="log_attend">Motambong</string>
-    <string name="log_attended">Ningtambong</string>
-    <string name="log_retrieved">Gikuha</string>
-    <string name="log_placed">Ge-butang</string>
-    <string name="log_grabbed">Nabira sa usa ka dapit</string>
-    <string name="log_movecollection">Ang pagbalhin padung sa koleksyon</string>
-    <string name="log_moveinventory">Ang pagbalhin padulong sa Imbentaryo</string>
-    <string name="log_maintained">Ang pamintinar sa gibuhat</string>
-    <string name="log_maintenance_needed">Nanginahanglan ug mintinar</string>
+    <string name="log_attended">Nitambong</string>
+    <string name="log_retrieved">Gibawi</string>
+    <string name="log_placed">Nabutang</string>
+    <string name="log_grabbed">Nabira sa Usa ka Dapit</string>
+    <string name="log_movecollection">Nabalhin dadto sa Koleksyon</string>
+    <string name="log_moveinventory">Nabalhin ngadto sa Imbentaryo</string>
+    <string name="log_maintained">Nabuhat ang Pamintinar</string>
+    <string name="log_maintenance_needed">Nanginahanglan og Pagmintinar</string>
     <string name="log_update">Ang mga na update na koordinado</string>
-    <string name="log_archived">Gitala</string>
-    <string name="log_unarchived">Wala na-arkibo</string>
-    <string name="log_needs_archived">Nanginahanglan ug mo-arkibo</string>
-    <string name="log_discovered">Ang nadiskobrehan</string>
-    <string name="log_reviewer">Ang pagsusi sa notaryo</string>
-    <string name="log_submit_for_review">Ang oag-sumitir sa gesusi</string>
+    <string name="log_archived">Naarkibo</string>
+    <string name="log_unarchived">Wala naarkibo</string>
+    <string name="log_needs_archived">Nanginahanglan nga maarkibo</string>
+    <string name="log_discovered">Nadiskubre</string>
+    <string name="log_reviewer">Pagtuki sa Notaryo</string>
+    <string name="log_submit_for_review">Isumiter aron sa Pagtuki</string>
     <string name="log_retractlisting">Ang gelista kay ibalik</string>
     <string name="log_marked_missing">Ang pagmarka kay nawagtang</string>
     <string name="log_tb_nothing">Walay kay buhaton</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">ang c:geo wala masayud kung sa asa na cache nimo gusto i-puno ang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo napakyas og pag puno sa imoha nga waypoint.</string>
     <string name="err_point_unknown_position">ang c:geo wala masayud kung asa ka.</string>
-    <string name="err_point_no_position_given_title">Nanginahanglan og impormasyon</string>
-    <string name="err_point_no_position_given">Ibutang bisag ang latitude og longitude o ang gilay-on. Mahimo ra og pun-on ang upat nga bakante nga butanganan.</string>
     <string name="err_point_bear_and_dist_title">Nanginahanglan kag tabang?</string>
     <string name="err_point_bear_and_dist">Butangi ang direksyon og gilay-on. Ang direksyon kay angulo 0 hangtud 360 grado kabanay sa norte. Ang distansya dili kinahanglan og yunit.</string>
     <string name="err_log_load_data">ang c:geo dili maka pakita sa datus na kinahanglan aron maka log sa pagbisita.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Pagpasulod ug code para sa trackable. Pananglitan \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Palihug sa pag-input ug pipila ka mga teksto para sa imong log.</string>
     <string name="warn_load_images">c:geo napakyas sa pag-load ug mga larawan.</string>
-    <string name="warn_invalid_mapfile">Ang napili na mapa na papeles kay dili balido nga mapsforge bersyon 0.3.0 nga papeles.\nOffline nga mapa kay dili puwede.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Ang napili nga mapa na papeles kay wala makita.\nOffline na mapa kay dili puwede makuha o magamit.</string>
     <string name="warn_rendertheme_missing">Ang mapa nga tema kay wala makit-an.</string>
     <string name="warn_pocket_query_select">Walay gipili na bulsa na query.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Ang nailisan nga wala ma-save nga waypoint kay giwagtang!</string>
     <string name="err_request_popup_info">Napakyas sa pagkuha og impormasyon sa popup nga cache ang c:geo.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Ang kinalasan na nahibaloan</string>
     <string name="loc_net">Network</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Ang mga detalye sa cache</string>
     <string name="settings_summary_cachedetails">Disenyohi ang pagpakita sa impormasyon sa cache.</string>
     <string name="settings_title_offlinedata">Offline Data</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">I-kompigyur ang imong pirma ug itakda ang mga kapilian sa pag-log.</string>
     <string name="settings_title_map">Mapa</string>
@@ -649,6 +652,8 @@
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
     <string name="settings_title_scale_map_text">I-ang-ang ang teksto sa mapa</string>
     <string name="settings_summary_scale_map_text">I-ang-ang ang mga label nga teksto sa offline nga mapa ayun sa device dpi</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Direktoryo nga adunay offline nga mga mapa</string>
     <string name="init_gpx_exportdir">GPX Eksport nga Direktoryo</string>
     <string name="init_gpx_importdir">GPX Import nga Direktoryo</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
     <string name="init_maptrail">Ipakita ang dalan</string>
     <string name="init_summary_maptrail">Ipakita ang dalan sa mapa</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Ablihan ang ambit nga menu inig human sa GPX eksport</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
     <string name="init_trackautovisit">Bisitaha ang TBs</string>
@@ -743,8 +749,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -923,7 +929,6 @@
     <string name="cache_menu_sygic_drive">Sygic(Nagmaniho)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mapa</string>
-    <string name="cache_menu_mfbeta">Mapsforge beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Ubang naa sa sulod nga apps</string>
     <string name="cache_menu_streetview">Lantaw sa karsada</string>
@@ -953,7 +958,7 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Gitipigan</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
@@ -975,6 +980,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Code sa Geo</string>
     <string name="cache_name">Pangalan</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Matang</string>
     <string name="cache_size">Gidak-on</string>
     <string name="cache_distance">Distansya</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Ang papakigbahin</string>
     <string name="cache_time_full_hours">alas dose</string>
     <string name="cache_listed_on">Ang listahan sa %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Nangita ug mga files\nin</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Kinopyang waypoint</string>
     <string name="waypoint_copy_of">Kopya sa</string>
     <string name="waypointcalc_notes_prompt">Isuwat ang nga nota ari…</string>
-    <string name="search_history">Kasaysayan</string>
-    <string name="search_history_empty">Walay karaan nga destinasyon</string>
-    <string name="search_remove_destination">Gikuha ang destinasyon</string>
-    <string name="search_clear_history">Tin-awan ang kasaysayan</string>
-    <string name="search_history_cleared">Natin. aw na ang kasaysayan</string>
     <string name="waypoint_coordinate_formats_plain">Yano</string>
     <string name="from_clipboard">Gikan sa clipboard</string>
     <string name="copy_to_clipboard">Gikopya padung sa clipboard</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

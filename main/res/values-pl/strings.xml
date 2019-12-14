@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Nietypowa</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrzynki chcesz dodać punkt nawigacji.</string>
     <string name="err_waypoint_add_failed">c:geo nie może dodać punktu nawigacyjnego.</string>
     <string name="err_point_unknown_position">c:geo nie może określić Twojej lokalizacji.</string>
-    <string name="err_point_no_position_given_title">Informacje wymagane</string>
-    <string name="err_point_no_position_given">Wypełnij co najmniej szerokość i długość geograficzną lub odległość i namiar. Możesz również wypełnić wszystkie cztery pola.</string>
     <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
     <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
     <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
-    <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest poprawnym plikiem mapsforge wersji 0.3.0.\nMapy offline są niedostępne.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
     <string name="warn_rendertheme_missing">Nie znaleziono tematu mapy.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Niezapisane zmiany punktu nawigacji zostały odrzucone!</string>
     <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Ostatnia pozycja</string>
     <string name="loc_net">Sieć</string>
@@ -476,7 +479,7 @@
     <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
     <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce.</string>
     <string name="settings_title_offlinedata">Dane offline</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Logowanie</string>
     <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -655,6 +658,8 @@
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="settings_title_scale_map_text">Skaluj tekst na mapie</string>
     <string name="settings_summary_scale_map_text">Dostosowuje skalę tekstu na mapie offline do dpi urządzenia</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
     <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
@@ -662,6 +667,7 @@
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż szlak na mapie</string>
     <string name="init_summary_maptrail">Pokaż szlak na mapie</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Otwórz menu udostępniania po wyeksportowaniu plików GPX</string>
     <string name="init_include_found_status">Uwzględnij status \"Znalezione\"</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
@@ -749,8 +755,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
@@ -943,7 +949,6 @@
     <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -973,7 +978,7 @@
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Zapisane</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
@@ -995,6 +1000,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Kod skrzynki</string>
     <string name="cache_name">Nazwa</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Rozmiar</string>
     <string name="cache_distance">Odległość</string>
@@ -1025,6 +1032,15 @@
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Szukam plików\nw</string>
@@ -1111,11 +1127,6 @@
     <string name="waypoint_duplicated">Punkt orientacyjny zduplikowany</string>
     <string name="waypoint_copy_of">Kopia</string>
     <string name="waypointcalc_notes_prompt">Wprowadź uwagi tutaj…</string>
-    <string name="search_history">Historia</string>
-    <string name="search_history_empty">Brak poprzednich celów</string>
-    <string name="search_remove_destination">Cel usunięty</string>
-    <string name="search_clear_history">Usuń historię</string>
-    <string name="search_history_cleared">Historia usunięta</string>
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
@@ -1689,6 +1700,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

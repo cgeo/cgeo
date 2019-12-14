@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">지오캐싱 모험 전시회</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">알수없는 형식</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">마이크로</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">어느 캐시에 웨이포인트를 추가하시려는지 c:geo에서 알 수 없습니다.</string>
     <string name="err_waypoint_add_failed">웨이포인트 추가에 실패했습니다.</string>
     <string name="err_point_unknown_position">현재 계신 위치를 인식할 수 없습니다.</string>
-    <string name="err_point_no_position_given_title">정보가 필요합니다.</string>
-    <string name="err_point_no_position_given">적어도 경위도 혹은 거리/방위각은 입력하셔야 합니다. 4개의 항을 모두 입력하실 수도 있습니다.</string>
     <string name="err_point_bear_and_dist_title">도움이 더 필요하세요?</string>
     <string name="err_point_bear_and_dist">방위각, 거리를 모두 채우세요. 방위각은 북쪽을 기준으로 한 0에서 360도 각입니다. 거리에는 단위를 넣지 마세요.</string>
     <string name="err_log_load_data">로그에 필요한 자료를 가져오지 못했습니다.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">추적아이템 코드를 입력하세요. 예 : \"TB29QMZ\"</string>
     <string name="warn_log_text_fill">로그에 내용을 입력해 주세요.</string>
     <string name="warn_load_images">이미지를 불러오지 못했습니다.</string>
-    <string name="warn_invalid_mapfile">선택한 지도파일은 mapsforge 버전 0.3.0 맵파일이 아닙니다.\n오프라인 지도를 사용할 수 없습니다.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">선택한 지도파일이 존재하지 않습니다.\n오프라인 지도를 사용할 수 없습니다.</string>
     <string name="warn_rendertheme_missing">지도 테마를 찾을 수 없습니다.</string>
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">저장되지 않은 웨이포인트 정보가 삭제됩니다!</string>
     <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">마지막 알려진</string>
     <string name="loc_net">네트워크</string>
@@ -467,7 +470,7 @@
     <string name="settings_title_cachedetails">캐시 상세정보</string>
     <string name="settings_summary_cachedetails">캐시정보 표시 사용자가 지정하기</string>
     <string name="settings_title_offlinedata">오프라인 데이타</string>
-    <string name="settings_summary_offlinedata">기타 오프라인 데이터 저장소 설정</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">로그하기</string>
     <string name="settings_summary_logging">서명 및 로그 옵션 설정하기</string>
     <string name="settings_title_map">지도</string>
@@ -646,6 +649,8 @@
     <string name="init_mapsource_select">지도 선택</string>
     <string name="settings_title_scale_map_text">지도의 문자 확대</string>
     <string name="settings_summary_scale_map_text">기기의 dpi 지원하는 만큼 오프라인 지도의 문자들을 확대합니다.</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">오프라인 지도 폴더</string>
     <string name="init_gpx_exportdir">GPX 내보내기 폴더</string>
     <string name="init_gpx_importdir">GPX를 가져올 폴더</string>
@@ -653,6 +658,7 @@
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
     <string name="init_maptrail">트레일 보기</string>
     <string name="init_summary_maptrail">지도에서 트레일이 나타나게 합니다.</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">GPX 내보내기 후 공유메뉴 열기</string>
     <string name="init_include_found_status">\"찾음\" 상태 포함</string>
     <string name="init_trackautovisit">TB 방문하기</string>
@@ -740,8 +746,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
@@ -913,7 +919,6 @@
     <string name="cache_menu_sygic_drive">Sygic(자동차)</string>
     <string name="cache_menu_radar">레이더</string>
     <string name="cache_menu_map">지도</string>
-    <string name="cache_menu_mfbeta">Mapsforge 베타</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">기타 외부 앱</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
@@ -943,7 +948,7 @@
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
-    <string name="cache_stored">저장된 캐시</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">저장된 로그</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
@@ -965,6 +970,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">지오코드</string>
     <string name="cache_name">제목</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">유형</string>
     <string name="cache_size">크기</string>
     <string name="cache_distance">거리</string>
@@ -995,6 +1002,15 @@
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
     <string name="cache_listed_on">%s에 등록됨</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">파일 검색중\n위치 :</string>
@@ -1081,11 +1097,6 @@
     <string name="waypoint_duplicated">웨이포인트가 복제됨</string>
     <string name="waypoint_copy_of">복사 :</string>
     <string name="waypointcalc_notes_prompt">여기에 메모를 입력…</string>
-    <string name="search_history">기록</string>
-    <string name="search_history_empty">이전 목적지가 없습니다.</string>
-    <string name="search_remove_destination">목적지가 제거됨</string>
-    <string name="search_clear_history">기록 지우기</string>
-    <string name="search_history_cleared">기록 삭제됨</string>
     <string name="waypoint_coordinate_formats_plain">간단히</string>
     <string name="from_clipboard">클립보드 읽기</string>
     <string name="copy_to_clipboard">클립보드로 복사</string>
@@ -1243,7 +1254,7 @@
     <string name="export_fieldnotes">현장 기록</string>
     <string name="export_fieldnotes_info">현장 기록이 현재 날짜/시간과 함께 /sdcard/field-notes에 저장됩니다.</string>
     <string name="export_fieldnotes_upload">Geocaching.com에 올리기</string>
-    <string name="export_fieldnotes_uploading">올리는 중</string>
+    <string name="export_fieldnotes_uploading">올리는 중…</string>
     <string name="export_fieldnotes_upload_success">Geocaching.com 에 올리기 성공</string>
     <string name="export_fieldnotes_onlynew">마지막 내보내기 이후만</string>
     <string name="export_fieldnotes_creating">현장 기록 생성 중…</string>
@@ -1623,6 +1634,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

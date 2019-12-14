@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Ukjent Type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo vet ikke hvilken cache du vil legge til et veipunkt for.</string>
     <string name="err_waypoint_add_failed">c:geo kan ikke legge til veipunktet.</string>
     <string name="err_point_unknown_position">c:geo finner ikke din posisjon.</string>
-    <string name="err_point_no_position_given_title">info kreves</string>
-    <string name="err_point_no_position_given">Skriv inn minst breddegrad og lengdegrad eller avstand og peiling. Du kan også skrive inn i alle fire felt.</string>
     <string name="err_point_bear_and_dist_title">Trenger du hjelp?</string>
     <string name="err_point_bear_and_dist">Skriv inn både retning og avstand. Retning er 0 til 360 grader i forhold til nord. Avstand angis med eller uten enheter.</string>
     <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_invalid_mapfile">Den valgte kartfilen er ikke et gyldig mapsforge-kart versjon 0.3.0. \nOffline-kartene er ikke tilgjengelig.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Den valgte kartfilen finnes ikke. \nOffline-kartene er ikke tilgjengelige.</string>
     <string name="warn_rendertheme_missing">Karttema ikke funnet.</string>
     <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Ikke-lagrede endringer på veipunkt er forkastet.</string>
     <string name="err_request_popup_info">c:geo klarte ikke hente cachens popup-info.</string>
     <string name="warn_log_load_additional_data">c:geo kunne ikke laste tilleggsdata (trackables/favorittpoeng) for logging.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Sist sett</string>
     <string name="loc_net">Nettverk</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Cache-detaljer</string>
     <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon.</string>
     <string name="settings_title_offlinedata">Offline-data</string>
-    <string name="settings_summary_offlinedata">Konfigurer andre frakoblede lagrindsenheter.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
     <string name="settings_title_map">Vis på kartet</string>
@@ -611,10 +614,10 @@
     <string name="init_summary_livelist">Vis cachers retning i listen</string>
     <!-- backup / restore -->
     <string name="init_backup">Sikkerhetskopier cacher / veipunkter</string>
-    <string name="init_backup_backup">Sikkerhetskopi</string>
+    <string name="init_backup_backup">Lag sikkerhetskopi</string>
     <string name="init_backup_running">Oppretter sikkerhetskopi av database…</string>
     <string name="init_backup_note">Vennligst bemerk at dette vil sikkerhetskopiere/gjenopprette en database som KUN inneholder cacher og veipunkter, men ikke dine cachebilder eller programinnstillinger.</string>
-    <string name="init_backup_restore">Gjenopprett</string>
+    <string name="init_backup_restore">Gjenopprett fra sikkerhetskopi</string>
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
     <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
@@ -649,6 +652,8 @@
     <string name="init_mapsource_select">Velg kartkilde</string>
     <string name="settings_title_scale_map_text">Skaler karttekst</string>
     <string name="settings_summary_scale_map_text">Bruk enhetens skjermoppløsning for å skalere teksten i offline-kartet</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Mappe for offline-kart</string>
     <string name="init_gpx_exportdir">Mappe for eksport av GPX-filer</string>
     <string name="init_gpx_importdir">Mappe for import av GPX-filer</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
     <string name="init_maptrail">Vis spor</string>
     <string name="init_summary_maptrail">Vis spor på kart</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Vis meny for å dele etter eksport av GPX</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
@@ -692,10 +698,10 @@
     <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
     <string name="init_maintenance_directories">Slett utdaterte filer</string>
     <string name="init_location">Geolokasjon</string>
-    <string name="init_location_note">På enheter utstyrt med Google Play-tjenester kan c:geo automatisk bruke en bedre posisjonstjeneste. Vær obs på at dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
+    <string name="init_location_note">På enheter utstyrt med Google Play-tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
     <string name="init_location_googleplayservices">Bruk Google Play Services</string>
     <string name="init_low_power">Strømsparingsmodus</string>
-    <string name="init_low_power_note">I strømsparingsmodus brukes ikke GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, og det vil medføre lengre tid for posisjonering.</string>
+    <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
     <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
     <string name="init_force_orientation_sensor_title">Retningssensor</string>
     <string name="init_force_orientation_sensor_note">På noen enheter vil den normale retningssensoren feilaktig endre retning. Isåfall kan en alternativ sensor (orienteringssensor) gi bedre resultat.</string>
@@ -743,8 +749,8 @@
     <string name="init_summary_proximityNotificationGeneral">Spill av en varsellyd hvis en cache eller et veipunkt som er synlig på kartet er nærmere enn nær- eller fjern-avstanden. Forskjellige lyder kan brukes på de to avstandene.</string>
     <string name="init_proximityNotificationSpecific">Spesifikk nærhetsvarsling av veipunkt</string>
     <string name="init_summary_proximityNotificationSpecific">Spiller en gjentakende lyd hvis valgte cache eller veipunkt er nærmere enn \"fjern-avstand\" eller \"nær-avstand\". Det fungerer dersom detaljer til cache eller veipunkt er åpnet, cache- eller veipunkt-popup på kartet er åpnet eller når kompasset er aktivt. Det er forskjellige toner for de to avstandene.</string>
-    <string name="far_distance">fjern-avstand</string>
-    <string name="near_distance">nær-avstand</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: kart</string>
     <string name="map_source_google_satellite">Google: satellittbilder</string>
@@ -923,7 +929,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Kjøre)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kartet</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apper</string>
     <string name="cache_menu_streetview">Gatevisning</string>
@@ -953,7 +958,7 @@
     <string name="ignore_confirm_title">Vær forsiktig</string>
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Lagret</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Logg lagret</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
@@ -975,6 +980,8 @@
     <string name="cache_status_stored_morethanthirtydays">For mer enn 30 dager siden</string>
     <string name="cache_geocode">GC-kode</string>
     <string name="cache_name">Navn</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Størrelse</string>
     <string name="cache_distance">Avstand</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Oppført på %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Søker etter filer i\n</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Veipunktet er duplisert</string>
     <string name="waypoint_copy_of">Kopi av</string>
     <string name="waypointcalc_notes_prompt">Skriv notat her…</string>
-    <string name="search_history">Historikk</string>
-    <string name="search_history_empty">Ingen tidligere destinasjoner</string>
-    <string name="search_remove_destination">Målet er fjernet</string>
-    <string name="search_clear_history">Slett historikk</string>
-    <string name="search_history_cleared">Historikken er slettet</string>
     <string name="waypoint_coordinate_formats_plain">Ren tekst</string>
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blå</string>
     <string name="color_green">Grønn</string>
     <string name="color_grey">Grå</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Skriv inn en verdi mellom %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Verdien er for lav - settes til minimumsverdien</string>

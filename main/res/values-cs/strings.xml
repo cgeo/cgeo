@@ -32,6 +32,7 @@
     <string name="gchqceleb">Oslava Geocaching HQ</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo neví k jaké keši chceš přidat bod trasy.</string>
     <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj bod trasy.</string>
     <string name="err_point_unknown_position">c:geo nedokáže zjistit tvou polohu.</string>
-    <string name="err_point_no_position_given_title">Popis je vyžadován</string>
-    <string name="err_point_no_position_given">Vyplň alespoň zeměpisnou šířku a délku nebo vzdálenost a směr. Můžeš také vyplnit všechna čtyři pole.</string>
     <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
     <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
@@ -241,14 +240,14 @@
     <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
     <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
-    <string name="warn_invalid_mapfile">Vybraný mapový soubor není platným mapovým podkladem verze 0.3.0 mapového souboru.\nOffline mapy nejsou dostupné.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Zvolený soubor map neexistuje.\nOffline mapy nejsou dostupné.</string>
     <string name="warn_rendertheme_missing">Téma pro mapu není k dispozici.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
     <string name="warn_notloggedin_title">Offline režim</string>
-    <string name="warn_notloggedin_short">Nejste přihlášen. Aktivní mapa ukazuje len lokální uložené kešky.</string>
+    <string name="warn_notloggedin_short">Nejste přihlášen. Aktivní mapa ukazuje jen lokální uložené kešky.</string>
     <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje len lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Neuložené změny bodu trasy byly zahozeny!</string>
     <string name="err_request_popup_info">c:geu se nepodařilo otevřít informace o keši.</string>
     <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
+    <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
+    <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -476,7 +479,7 @@
     <string name="settings_title_cachedetails">Detaily keše</string>
     <string name="settings_summary_cachedetails">Nastavení zobrazování informací u keší.</string>
     <string name="settings_title_offlinedata">Offline zdroje</string>
-    <string name="settings_summary_offlinedata">Nastavit jiné ukládání dat offline.</string>
+    <string name="settings_summary_offlinedata">Nakonfigurujte data, která mají být uložena pro použití offline, umístění úložiště a adresáře pro soubory GPX.</string>
     <string name="settings_title_logging">Logování</string>
     <string name="settings_summary_logging">Nastavení podpisu a možností logování.</string>
     <string name="settings_title_map">Mapa</string>
@@ -581,7 +584,7 @@
     <string name="init_signature_template_log">Text logu</string>
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
-    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
+    <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -655,6 +658,8 @@
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="settings_title_scale_map_text">Měřítko textu mapy</string>
     <string name="settings_summary_scale_map_text">Velikost textových popisků offline mapy dle DPI zařízení</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
     <string name="init_gpx_importdir">Složka pro GPX import</string>
@@ -662,6 +667,7 @@
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro geocache (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
     <string name="init_maptrail">Zobrazovat trasu cesty</string>
     <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
+    <string name="init_trailcolor">Barva stopy</string>
     <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
     <string name="init_include_found_status">Zahrnout stav „nalezeno“</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
@@ -749,8 +755,8 @@
     <string name="init_summary_proximityNotificationGeneral">Přehraje jedno oznámení, pokud je jakákoli keška nebo trasový bod aktuálně viditelný na mapě bližší než dlouhá vzdálenost nebo krátká vzdálenost. Pro tyto dvě vzdálenosti se používají různé tóny.</string>
     <string name="init_proximityNotificationSpecific">Upozornění na vzdálenost konkrétního bodu trasy</string>
     <string name="init_summary_proximityNotificationSpecific">Přehraje opakované oznámení, pokud je aktuálně vybraná keška nebo trasový bod blíže než dlouhá vzdálenost nebo krátká vzdálenost. Funguje, pokud jsou otevřeny podrobnosti o kešce nebo trasovém bodu, když je na mapě zobrazeno kontextové okno s keškou nebo trasovým bodem, případně když je aktivní kompas. Pro tyto dvě vzdálenosti se používají různé tóny.</string>
-    <string name="far_distance">dlouhá vzdálenost</string>
-    <string name="near_distance">krátká vzdálenost</string>
+    <string name="far_distance">Dlouhá vzdálenost</string>
+    <string name="near_distance">Krátká vzdálenost</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
@@ -821,7 +827,7 @@
     </plurals>
     <string name="last_day_available">zbývá poslední den</string>
     <string name="cache_offline">Offline</string>
-    <string name="cache_offline_refresh">Obnovit</string>
+    <string name="cache_offline_refresh">Aktualizovat</string>
     <string name="cache_offline_drop">Odstranit</string>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_manage">Správa</string>
@@ -921,7 +927,7 @@
     <string name="cache_dialog_offline_save_message">Ukládání keše pro offline použití…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňování keše z paměti zařízení…</string>
-    <string name="cache_dialog_refresh_title">Obnovit</string>
+    <string name="cache_dialog_refresh_title">Aktualizovat</string>
     <string name="cache_dialog_refresh_message">Aktualizace detailů keše…</string>
     <string name="cache_dialog_watchlist_add_title">Watchlist</string>
     <string name="cache_dialog_watchlist_add_message">Přidávání keše do tvého Watchlistu…</string>
@@ -943,7 +949,6 @@
     <string name="cache_menu_sygic_drive">Sygic (řízení)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -957,7 +962,7 @@
     <string name="cache_menu_event">Přidat do kalendáře</string>
     <string name="cache_menu_extract_waypoints">Extrahovat body trasy</string>
     <string name="cache_menu_details">Detaily</string>
-    <string name="cache_menu_refresh">Obnovit</string>
+    <string name="cache_menu_refresh">Aktualizovat</string>
     <string name="cache_menu_share">Sdílet keš</string>
     <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
     <string name="cache_menu_copy_list">Kopírovat do jiného seznamu</string>
@@ -973,7 +978,7 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace keše znamená, že tato keš nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak keš znovu zobrazit je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uložené</string>
+    <string name="cache_stored">Uloženo</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
@@ -995,6 +1000,8 @@
     <string name="cache_status_stored_morethanthirtydays">Před posledními 30 dny</string>
     <string name="cache_geocode">GC kód</string>
     <string name="cache_name">Název</string>
+    <string name="cache_name_set">Nastavit název kešky</string>
+    <string name="cache_name_updated">Název kešky byl aktualizován</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Velikost</string>
     <string name="cache_distance">Vzdálenost</string>
@@ -1025,6 +1032,15 @@
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
+    <string name="user_defined_caches">Uživatelem definované kešky</string>
+    <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
+    <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
+    <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
+    <string name="internal_cache_default_owner">Vy</string>
+    <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
+    <string name="internal_goto_targets_description">Tato keška ukládá vaše nedávné cíle \"Přejít na\"</string>
+    <string name="init_longtap_udc">Dlouhé klapnutí na mapu</string>
+    <string name="init_summary_longtap_udc">Dlouhým klepnutím na mapu vytvořte uživatelem definovanou kešku</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Hledání souborů\nv</string>
@@ -1111,11 +1127,6 @@
     <string name="waypoint_duplicated">Kopie bodu trasy vytvořena</string>
     <string name="waypoint_copy_of">Kopie</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
-    <string name="search_history">Historie</string>
-    <string name="search_history_empty">Žádné předchozí destinace</string>
-    <string name="search_remove_destination">Destinace odebrána</string>
-    <string name="search_clear_history">Vymazat historii</string>
-    <string name="search_history_cleared">Historie vymazána</string>
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
     <string name="from_clipboard">Ze schránky</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
@@ -1182,7 +1193,7 @@
     <string name="trackable_details_loading">Načítání detailů…</string>
     <string name="trackable_log_touch">Hlášení zahlédnutí</string>
     <string name="trackable_browser_open">Otevřít v prohlížeči</string>
-    <string name="trackable_refresh">Obnovit</string>
+    <string name="trackable_refresh">Aktualizovat</string>
     <string name="trackable_goal">Cíl</string>
     <string name="trackable_details">Detaily</string>
     <string name="trackable_image">Obrázek</string>
@@ -1689,6 +1700,10 @@
     <string name="color_blue">Modrá</string>
     <string name="color_green">Zelená</string>
     <string name="color_grey">Šedá</string>
+    <string name="color_orange">Oranžová</string>
+    <string name="color_red">Červená</string>
+    <string name="color_turquoise">Tyrkysová</string>
+    <string name="color_black">Černá</string>
     <!-- number input -->
     <string name="number_input_title">Zadejte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>

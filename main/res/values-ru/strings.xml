@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Тайник GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">Пользовательский тайник</string>
     <string name="unknown">Неизвестный тип</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Микро</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo не знает, к какому тайнику вы хотите добавить точку.</string>
     <string name="err_waypoint_add_failed">c:geo не удалось добавить вашу точку.</string>
     <string name="err_point_unknown_position">c:geo не может распознать, где вы находитесь.</string>
-    <string name="err_point_no_position_given_title">Требуется информация</string>
-    <string name="err_point_no_position_given">Заполните долготу и широту или расстояние и азимут. Также вы можете заполнить остальные поля.</string>
     <string name="err_point_bear_and_dist_title">Нужна помощь?</string>
     <string name="err_point_bear_and_dist">Введите азимут и расстояние. Азимут это угол от 0 до 360 градусов относительно севера. Не вводите единицы измерения.</string>
     <string name="err_log_load_data">Не удалось загрузить данные, требуемые для записи.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Введите код трекабла. Например, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Пожалуйста, введите текст записи.</string>
     <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
-    <string name="warn_invalid_mapfile">Выбранный файл карты не является файлом карты Mapsforge 0.3.0\nОффлайновые карты недоступны.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Выбранный файл карты не существует.\nОффлайн карты недоступны.</string>
     <string name="warn_rendertheme_missing">Тема карты не найдена.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Несохраненные изменения отменены!</string>
     <string name="err_request_popup_info">c:geo не удалось загрузить информацию о тайнике.</string>
     <string name="warn_log_load_additional_data">c:geo не удалось загрузить дополнительные данные (трекаблы/рекомендации) для заметки.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Последнее местоположение</string>
     <string name="loc_net">Сеть</string>
@@ -476,7 +479,7 @@
     <string name="settings_title_cachedetails">Настройки тайников</string>
     <string name="settings_summary_cachedetails">Настройка отображения тайников.</string>
     <string name="settings_title_offlinedata">Сохраненные данные</string>
-    <string name="settings_summary_offlinedata">Настроить другие места хранения.</string>
+    <string name="settings_summary_offlinedata">Настройте сохраненные данные для автономного использования, местоположение хранения и директории для файлов GPX.</string>
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
     <string name="settings_title_map">Карта</string>
@@ -575,8 +578,8 @@
     <string name="init_signature_template_number">Номер тайника</string>
     <string name="init_signature_template_owner">Создатель</string>
     <string name="init_signature_template_name">Название тайника</string>
-    <string name="init_signature_template_difficulty">Difficulty</string>
-    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_difficulty">Сложность</string>
+    <string name="init_signature_template_terrain">Местность</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Текст записи</string>
     <string name="init_signature_template_size">Размер</string>
@@ -655,6 +658,8 @@
     <string name="init_mapsource_select">Выберите источник карт</string>
     <string name="settings_title_scale_map_text">Масштабировать текст</string>
     <string name="settings_summary_scale_map_text">Масштабировать текстовые метки на карте согласно DPI устройства</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
     <string name="init_gpx_exportdir">Папка для сохранения GPX</string>
     <string name="init_gpx_importdir">Папка импорта GPX</string>
@@ -662,6 +667,7 @@
     <string name="init_dataDir_note">Вы можете сохранять дополнительные данные тайников (спойлеры, картинки в блокноте и пр.) на внешнем хранилище (виртуальная или настоящая SD-карта, в зависимости от устройства).</string>
     <string name="init_maptrail">Показать маршрут</string>
     <string name="init_summary_maptrail">Показать маршрут на карте</string>
+    <string name="init_trailcolor">Цвет следа</string>
     <string name="init_share_after_export">Открыть меню отправки после экспорта</string>
     <string name="init_include_found_status">Включить \"Найденные\" тайники</string>
     <string name="init_trackautovisit">Отмечать трекаблы</string>
@@ -749,8 +755,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">далеко</string>
-    <string name="near_distance">близко</string>
+    <string name="far_distance">Дальнее расстояние</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
@@ -943,7 +949,6 @@
     <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
     <string name="cache_menu_radar">Радар</string>
     <string name="cache_menu_map">Карта</string>
-    <string name="cache_menu_mfbeta">Бета Mapsforge</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Другие внешние приложения</string>
     <string name="cache_menu_streetview">Просмотр улиц</string>
@@ -973,7 +978,7 @@
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">Сохраненные</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
@@ -995,6 +1000,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Код тайника</string>
     <string name="cache_name">Название</string>
+    <string name="cache_name_set">Задать имя тайника</string>
+    <string name="cache_name_updated">Имя тайника обновлено</string>
     <string name="cache_type">Тип</string>
     <string name="cache_size">Размер</string>
     <string name="cache_distance">Расстояние</string>
@@ -1025,6 +1032,15 @@
     <string name="cache_share_field">Поделиться</string>
     <string name="cache_time_full_hours">часов</string>
     <string name="cache_listed_on">Упомянут на %s</string>
+    <string name="user_defined_caches">Пользовательский тайник</string>
+    <string name="create_internal_cache">Создать пользовательский тайник</string>
+    <string name="internal_cache_default_name">Пользовательский тайник #%1$d</string>
+    <string name="internal_cache_default_description">Это пользовательский тайник</string>
+    <string name="internal_cache_default_owner">Вы</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Долгое нажатие на карту</string>
+    <string name="init_summary_longtap_udc">Длительное нажатие на карте для создания пользовательского тайника</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Поиск в\n</string>
@@ -1111,11 +1127,6 @@
     <string name="waypoint_duplicated">Точка клонирована</string>
     <string name="waypoint_copy_of">Копия</string>
     <string name="waypointcalc_notes_prompt">Введите заметку…</string>
-    <string name="search_history">История</string>
-    <string name="search_history_empty">История поиска пуста</string>
-    <string name="search_remove_destination">Точка назначения удалена</string>
-    <string name="search_clear_history">Очистить историю</string>
-    <string name="search_history_cleared">История очищена</string>
     <string name="waypoint_coordinate_formats_plain">Текст</string>
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
@@ -1599,7 +1610,7 @@
     <string name="confirm_log_title">Особый тип записи</string>
     <string name="confirm_log_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <string name="confirm_report_problem_title">Сообщить о проблеме</string>
-    <string name="confirm_report_problem_message">Вы хотите сообщить \"%s\". Вы уверены?</string>
+    <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Активировать</string>
     <string name="init_geokrety">GeoKrety.org</string>
@@ -1689,6 +1700,10 @@
     <string name="color_blue">Синий</string>
     <string name="color_green">Зеленый</string>
     <string name="color_grey">Серый</string>
+    <string name="color_orange">Оранжевый</string>
+    <string name="color_red">Красный</string>
+    <string name="color_turquoise">Бирюзовый</string>
+    <string name="color_black">Чёрный</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
