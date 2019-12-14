@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import butterknife.ButterKnife;
-
 public class SimpleWebviewActivity extends AbstractActionBarActivity {
 
     private WebView webview;
@@ -26,7 +24,7 @@ public class SimpleWebviewActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.internal_browser);
 
-        webview = ButterKnife.findById(this, R.id.webview);
+        webview = findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new SimpleWebviewClient());
         webview.loadUrl(String.valueOf(getIntent().getData()));

@@ -5,9 +5,10 @@ import cgeo.geocaching.R;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.content.FileProvider;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 

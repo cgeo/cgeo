@@ -4,8 +4,9 @@ import cgeo.geocaching.R;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;

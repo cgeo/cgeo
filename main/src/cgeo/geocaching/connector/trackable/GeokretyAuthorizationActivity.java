@@ -5,7 +5,7 @@ import cgeo.geocaching.activity.TokenAuthorizationActivity;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.regex.Pattern;
 

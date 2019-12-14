@@ -1,7 +1,5 @@
 package cgeo.geocaching.test.mock;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -9,7 +7,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,6 +20,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class MockedCache extends Geocache {
 

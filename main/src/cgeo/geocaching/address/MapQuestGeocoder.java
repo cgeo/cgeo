@@ -6,7 +6,8 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
 import android.location.Address;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.Locale;
 

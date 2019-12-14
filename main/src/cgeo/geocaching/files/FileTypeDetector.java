@@ -4,7 +4,8 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;

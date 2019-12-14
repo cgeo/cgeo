@@ -8,13 +8,14 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
 
 /**
  * Shared menu handling for all activities having menu items related to a cache. <br>

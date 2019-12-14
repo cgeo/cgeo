@@ -8,7 +8,8 @@ import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;

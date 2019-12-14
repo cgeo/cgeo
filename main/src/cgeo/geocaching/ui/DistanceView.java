@@ -4,9 +4,10 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 public class DistanceView extends TextView {
     private Geopoint cacheCoords = null;

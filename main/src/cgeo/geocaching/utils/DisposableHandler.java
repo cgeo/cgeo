@@ -5,7 +5,8 @@ import cgeo.geocaching.CgeoApplication;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.StringRes;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

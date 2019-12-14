@@ -4,7 +4,8 @@ import cgeo.geocaching.connector.IConnector;
 
 import android.app.Activity;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 public interface ILogin extends IConnector {
 

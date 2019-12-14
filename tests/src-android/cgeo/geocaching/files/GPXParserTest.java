@@ -1,21 +1,5 @@
 package cgeo.geocaching.files;
 
-import android.support.annotation.RawRes;
-
-import org.apache.commons.compress.utils.IOUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -35,6 +19,22 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+
+import androidx.annotation.RawRes;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
+import org.apache.commons.compress.utils.IOUtils;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

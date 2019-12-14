@@ -3,12 +3,13 @@ package cgeo.geocaching.apps.cachelist;
 import cgeo.geocaching.ui.AbstractMenuActionProvider;
 
 import android.content.Context;
-import android.support.v4.view.ActionProvider;
-import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
+
+import androidx.core.view.ActionProvider;
+import androidx.core.view.MenuItemCompat;
 
 import java.util.List;
 

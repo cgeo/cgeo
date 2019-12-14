@@ -17,7 +17,6 @@ import android.widget.EditText;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
 
 public class TemplateTextPreference extends DialogPreference {
@@ -48,11 +47,11 @@ public class TemplateTextPreference extends DialogPreference {
     protected void onBindDialogView(final View view) {
         settingsActivity = (SettingsActivity) this.getContext();
 
-        editText = ButterKnife.findById(view, R.id.signature_dialog_text);
+        editText = view.findViewById(R.id.signature_dialog_text);
         editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
         Dialogs.moveCursorToEnd(editText);
 
-        final Button button = ButterKnife.findById(view, R.id.signature_templates);
+        final Button button = view.findViewById(R.id.signature_templates);
         button.setOnClickListener(button1 -> {
             final AlertDialog.Builder alert = new AlertDialog.Builder(TemplateTextPreference.this.getContext());
             alert.setTitle(R.string.init_signature_template_button);

@@ -20,10 +20,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.content.FileProvider;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.SparseArray;
 import android.view.ContextMenu;
@@ -36,6 +32,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.FileProvider;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +44,6 @@ import java.io.FileOutputStream;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import butterknife.ButterKnife;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
@@ -115,7 +115,7 @@ public class ImagesList {
             }
         }));
 
-        imagesView = ButterKnife.findById(parentView, R.id.spoiler_list);
+        imagesView = parentView.findViewById(R.id.spoiler_list);
 
         final HtmlImage imgGetter = new HtmlImage(geocode, true, false, false);
 
@@ -124,12 +124,12 @@ public class ImagesList {
             assert rowView != null;
 
             if (StringUtils.isNotBlank(img.getTitle())) {
-                final TextView titleView = ButterKnife.findById(rowView, R.id.title);
+                final TextView titleView = rowView.findViewById(R.id.title);
                 titleView.setText(Html.fromHtml(img.getTitle()));
             }
 
             if (StringUtils.isNotBlank(img.getDescription())) {
-                final TextView descView = ButterKnife.findById(rowView, R.id.description);
+                final TextView descView = rowView.findViewById(R.id.description);
                 descView.setText(Html.fromHtml(img.getDescription()), TextView.BufferType.SPANNABLE);
                 descView.setVisibility(View.VISIBLE);
             }

@@ -16,13 +16,14 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.media.ExifInterface;
 import android.text.Html;
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;

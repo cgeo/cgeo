@@ -12,13 +12,15 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.StringUtils;
+
 
 public class ECLogin extends AbstractLogin {
 

@@ -1,8 +1,9 @@
 package cgeo.geocaching.utils;
 
-import android.support.annotation.NonNull;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+
+import androidx.annotation.NonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

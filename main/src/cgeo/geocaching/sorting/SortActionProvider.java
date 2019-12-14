@@ -6,13 +6,14 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.view.ActionProvider;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.view.ActionProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;

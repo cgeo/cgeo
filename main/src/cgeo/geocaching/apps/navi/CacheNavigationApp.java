@@ -4,7 +4,8 @@ import cgeo.geocaching.apps.App;
 import cgeo.geocaching.models.Geocache;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /**
  * interface for navigation to a cache

@@ -11,11 +11,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

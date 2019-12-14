@@ -11,9 +11,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 public final class CompassMiniView extends View {
     private Geopoint targetCoords = null;

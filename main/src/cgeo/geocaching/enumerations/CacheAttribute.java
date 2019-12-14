@@ -3,9 +3,10 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.SparseArray;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.List;

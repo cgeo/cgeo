@@ -11,9 +11,10 @@ import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Waypoint;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Property with certainty. When merging properties, the one with higher certainty wins.

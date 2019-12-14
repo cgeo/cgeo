@@ -5,7 +5,8 @@ import cgeo.geocaching.apps.App;
 import cgeo.geocaching.models.Geocache;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.List;
 

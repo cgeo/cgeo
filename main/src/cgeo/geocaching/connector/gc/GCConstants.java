@@ -2,11 +2,10 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.log.LogType;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
-
 
 import org.apache.commons.lang3.StringUtils;
 

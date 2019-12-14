@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <!-- H DDD°MM'SS.PPPPP" -->
-    <android.support.v7.widget.GridLayout
+    <androidx.gridlayout.widget.GridLayout
         android:id="@+id/coordTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -200,5 +200,5 @@
             android:textSize="22sp"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
-    </android.support.v7.widget.GridLayout>
+    </androidx.gridlayout.widget.GridLayout>
 </merge>

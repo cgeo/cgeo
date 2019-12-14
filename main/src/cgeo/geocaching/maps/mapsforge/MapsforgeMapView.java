@@ -21,12 +21,13 @@ import cgeo.geocaching.utils.Log;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;

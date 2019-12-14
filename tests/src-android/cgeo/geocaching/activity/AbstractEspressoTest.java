@@ -1,12 +1,13 @@
 package cgeo.geocaching.activity;
 
 import android.app.Activity;
-import android.support.annotation.StringRes;
 import android.test.ActivityInstrumentationTestCase2;
 
-import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
-import static android.support.test.espresso.action.ViewActions.click;
+import androidx.annotation.StringRes;
+
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
+import static androidx.test.espresso.action.ViewActions.click;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.startsWith;
 

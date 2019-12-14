@@ -1,9 +1,10 @@
 package cgeo.geocaching.activity;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.ActionBar;
 import android.view.View;
+
+import androidx.annotation.LayoutRes;
+import androidx.appcompat.app.ActionBar;
 
 /**
  * Classes actually having an ActionBar (as opposed to the Dialog activities)

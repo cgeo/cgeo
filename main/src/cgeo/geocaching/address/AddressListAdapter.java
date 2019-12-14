@@ -1,5 +1,4 @@
 package cgeo.geocaching.address;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -7,13 +6,14 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.location.Address;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;

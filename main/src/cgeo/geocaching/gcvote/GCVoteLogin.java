@@ -9,7 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.Log;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.InputStream;
 

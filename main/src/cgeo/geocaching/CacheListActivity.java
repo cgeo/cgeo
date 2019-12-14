@@ -94,13 +94,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.OpenableColumns;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -116,6 +109,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.core.view.MenuItemCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -128,7 +129,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -1282,7 +1282,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
             listFooter.setClickable(true);
             listFooter.setOnClickListener(new MoreCachesListener());
-            listFooterText = ButterKnife.findById(listFooter, R.id.more_caches);
+            listFooterText = listFooter.findViewById(R.id.more_caches);
             listView.addFooterView(listFooter);
         }
         setListAdapter(adapter);
@@ -1793,7 +1793,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (filterNames.isEmpty()) {
             findViewById(R.id.filter_bar).setVisibility(View.GONE);
         } else {
-            final TextView filterTextView = ButterKnife.findById(this, R.id.filter_text);
+            final TextView filterTextView = findViewById(R.id.filter_text);
             filterTextView.setText(TextUtils.join(", ", filterNames));
             findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         }

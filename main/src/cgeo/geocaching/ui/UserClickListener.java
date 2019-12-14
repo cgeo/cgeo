@@ -10,9 +10,10 @@ import cgeo.geocaching.models.Trackable;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;

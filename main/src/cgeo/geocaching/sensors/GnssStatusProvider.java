@@ -11,7 +11,8 @@ import android.location.GpsStatus.Listener;
 import android.location.LocationManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.support.annotation.RequiresApi;
+
+import androidx.annotation.RequiresApi;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

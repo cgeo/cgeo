@@ -6,8 +6,8 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Image;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Calendar;
 import java.util.Collections;

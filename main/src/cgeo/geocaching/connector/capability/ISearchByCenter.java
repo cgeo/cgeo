@@ -4,7 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.location.Geopoint;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * connector capability for online searching caches around a center coordinate, sorted by distance

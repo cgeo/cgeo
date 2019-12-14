@@ -4,7 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 

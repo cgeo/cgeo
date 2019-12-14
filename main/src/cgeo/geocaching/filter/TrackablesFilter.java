@@ -5,7 +5,8 @@ import cgeo.geocaching.models.Geocache;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 class TrackablesFilter extends AbstractFilter {
 

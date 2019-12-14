@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.routing;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Mapping of routing modes and {@link BRouterServiceConnection} implementation dependent parameter values.

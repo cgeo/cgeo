@@ -1,6 +1,6 @@
 package cgeo.geocaching.enumerations;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.EnumSet;
 

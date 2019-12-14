@@ -20,8 +20,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,11 +27,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Set;
 
-import butterknife.ButterKnife;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
@@ -123,10 +123,10 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             final View view = getView();
             assert view != null;
-            final TextView titleView = ButterKnife.findById(view, R.id.actionbar_title);
+            final TextView titleView = view.findViewById(R.id.actionbar_title);
             titleView.setCompoundDrawablesWithIntrinsicBounds(Compatibility.getDrawable(getResources(), cache.getType().markerId), null, null, null);
 
-            final LinearLayout layout = ButterKnife.findById(view, R.id.details_list);
+            final LinearLayout layout = view.findViewById(R.id.details_list);
             details = new CacheDetailsCreator(getActivity(), layout);
 
             addCacheDetails();

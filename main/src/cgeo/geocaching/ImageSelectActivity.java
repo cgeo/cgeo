@@ -18,8 +18,6 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
-import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -27,6 +25,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;

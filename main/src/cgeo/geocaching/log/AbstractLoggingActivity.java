@@ -14,16 +14,16 @@ import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 
-import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractLoggingActivity extends AbstractActionBarActivity {
@@ -99,12 +99,12 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     protected abstract LogContext getLogContext();
 
     protected final void insertIntoLog(final String newText, final boolean moveCursor) {
-        final EditText log = ButterKnife.findById(this, R.id.log);
+        final EditText log = findViewById(R.id.log);
         ActivityMixin.insertAtPosition(log, newText, moveCursor);
     }
 
     private void replaceLog(final String newText) {
-        final EditText log = ButterKnife.findById(this, R.id.log);
+        final EditText log = findViewById(R.id.log);
         log.setText(StringUtils.EMPTY);
         insertIntoLog(newText, true);
     }

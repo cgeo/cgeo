@@ -15,9 +15,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -29,13 +26,16 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -539,7 +539,7 @@ public final class Dialogs {
                 final View v = super.getView(position, convertView, parent);
 
                 // add image
-                final TextView tv = ButterKnife.findById(v, android.R.id.text1);
+                final TextView tv = v.findViewById(android.R.id.text1);
                 tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getIcon(), 0, 0, 0);
 
                 // Add margin between image and text

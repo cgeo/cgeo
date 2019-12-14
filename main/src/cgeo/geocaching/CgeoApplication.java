@@ -15,8 +15,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.UserManager;
-import android.support.annotation.NonNull;
 import android.view.ViewConfiguration;
+
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

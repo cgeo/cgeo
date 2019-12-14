@@ -1,19 +1,20 @@
 package cgeo.geocaching.location;
 
-import static cgeo.geocaching.location.Viewport.containing;
-import static java.util.Collections.singleton;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.models.ICoordinates;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
 import org.junit.Test;
+
+import static cgeo.geocaching.location.Viewport.containing;
+import static java.util.Collections.singleton;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ViewportTest {
 

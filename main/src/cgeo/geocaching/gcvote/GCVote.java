@@ -12,9 +12,9 @@ import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.io.IOException;
 import java.io.InputStream;

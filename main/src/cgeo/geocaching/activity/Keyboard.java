@@ -2,9 +2,10 @@ package cgeo.geocaching.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.annotation.NonNull;
 
 /**
  * Class for hiding/showing the soft keyboard on Android.

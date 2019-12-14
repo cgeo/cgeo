@@ -6,8 +6,9 @@ import cgeo.geocaching.models.ICoordinates;
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.sf.geographiclib.Geodesic;
 import net.sf.geographiclib.GeodesicData;

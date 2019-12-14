@@ -15,11 +15,12 @@ import cgeo.geocaching.utils.ShareUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,7 +34,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.ButterKnife;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 
@@ -79,13 +79,13 @@ public class GpxExport extends AbstractExport {
         final View layout = View.inflate(activity, R.layout.gpx_export_dialog, null);
         builder.setView(layout);
 
-        final TextView text = ButterKnife.findById(layout, R.id.info);
+        final TextView text = layout.findViewById(R.id.info);
         text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), fileName));
 
-        final CheckBox shareOption = ButterKnife.findById(layout, R.id.share);
+        final CheckBox shareOption = layout.findViewById(R.id.share);
         shareOption.setChecked(Settings.getShareAfterExport());
 
-        final CheckBox includeFoundStatus = ButterKnife.findById(layout, R.id.include_found_status);
+        final CheckBox includeFoundStatus = layout.findViewById(R.id.include_found_status);
         includeFoundStatus.setChecked(Settings.getIncludeFoundStatus());
 
         builder.setPositiveButton(R.string.export, (dialog, which) -> {

@@ -7,15 +7,15 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import butterknife.ButterKnife;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class EditNoteDialog extends DialogFragment {
@@ -45,12 +45,12 @@ public class EditNoteDialog extends DialogFragment {
     }
 
     @Override
-    @android.support.annotation.NonNull
+    @androidx.annotation.NonNull
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final FragmentActivity activity = getActivity();
 
         final View view = View.inflate(activity, R.layout.fragment_edit_note, null);
-        mEditText = ButterKnife.findById(view, R.id.note);
+        mEditText = view.findViewById(R.id.note);
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             // add a new line when editing existing text, to avoid accidental overwriting of the last line
@@ -67,15 +67,15 @@ public class EditNoteDialog extends DialogFragment {
         final AlertDialog dialog = builder.create();
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        final TextView title = ButterKnife.findById(view, R.id.dialog_title_title);
+        final TextView title = view.findViewById(R.id.dialog_title_title);
         title.setText(R.string.cache_personal_note);
         title.setVisibility(View.VISIBLE);
 
-        final ImageButton cancel = ButterKnife.findById(view, R.id.dialog_title_cancel);
+        final ImageButton cancel = view.findViewById(R.id.dialog_title_cancel);
         cancel.setOnClickListener(view1 -> dialog.dismiss());
         cancel.setVisibility(View.VISIBLE);
 
-        final ImageButton done = ButterKnife.findById(view, R.id.dialog_title_done);
+        final ImageButton done = view.findViewById(R.id.dialog_title_done);
         done.setOnClickListener(view12 -> {
             // trim note to avoid unnecessary uploads for whitespace only changes
             final String personalNote = StringUtils.trim(mEditText.getText().toString());

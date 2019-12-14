@@ -10,7 +10,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
 import java.util.Set;

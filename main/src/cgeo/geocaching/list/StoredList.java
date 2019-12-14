@@ -12,10 +12,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;

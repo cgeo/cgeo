@@ -65,9 +65,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,6 +75,10 @@ import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,7 +92,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -520,7 +520,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         // show the filter warning bar if the filter is set
         if (Settings.getCacheType() != CacheType.ALL) {
             final String cacheType = Settings.getCacheType().getL10n();
-            final TextView filterTitleView = ButterKnife.findById(this, R.id.filter_text);
+            final TextView filterTitleView = findViewById(R.id.filter_text);
             filterTitleView.setText(cacheType);
             findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         } else {

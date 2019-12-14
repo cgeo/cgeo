@@ -9,7 +9,8 @@ import cgeo.geocaching.utils.Log;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

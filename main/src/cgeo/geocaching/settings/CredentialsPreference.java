@@ -13,7 +13,6 @@ import cgeo.geocaching.network.HtmlImage;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import butterknife.ButterKnife;
+import androidx.annotation.NonNull;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class CredentialsPreference extends AbstractClickablePreference {
@@ -120,7 +120,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
         iconView.setImageDrawable(imgGetter.getDrawable(avatarUrl));
 
-        final LinearLayout frame = ButterKnife.findById(preferenceView, android.R.id.widget_frame);
+        final LinearLayout frame = preferenceView.findViewById(android.R.id.widget_frame);
         frame.setVisibility(View.VISIBLE);
         frame.addView(iconView);
 

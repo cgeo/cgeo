@@ -7,8 +7,9 @@ import cgeo.geocaching.models.Waypoint;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 abstract class OruxMapsApp extends AbstractPointNavigationApp {
 

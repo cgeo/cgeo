@@ -13,9 +13,10 @@ import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.os.EnvironmentCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.os.EnvironmentCompat;
 
 import java.io.File;
 import java.io.IOException;

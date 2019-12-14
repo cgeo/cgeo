@@ -7,9 +7,10 @@ import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.location.Location;
-import android.support.v4.util.Pair;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import androidx.core.util.Pair;
 
 import java.util.ArrayList;
 

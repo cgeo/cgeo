@@ -38,11 +38,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.view.ActionMode;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,6 +48,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.view.ActionMode;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -632,7 +633,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 clickedItemText = ((TextView) view).getText();
                 switch (viewId) {
                     case R.id.value: // name, TB-code, origin, released, distance
-                        final TextView textView = ButterKnife.findById((View) view.getParent(), R.id.name);
+                        final TextView textView = ((View) view.getParent()).findViewById(R.id.name);
                         final CharSequence itemTitle = textView.getText();
                         buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                         return true;

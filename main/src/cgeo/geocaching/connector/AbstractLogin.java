@@ -10,9 +10,8 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.DiskCookieStore;
 import cgeo.geocaching.settings.Settings;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 

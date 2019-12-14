@@ -6,20 +6,20 @@ import cgeo.geocaching.utils.Log;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.ButterKnife;
 import com.viewpagerindicator.TitlePageIndicator;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -217,7 +217,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      */
     protected final void createViewPager(final int startPageIndex, final OnPageSelectedListener pageSelectedListener) {
         // initialize ViewPager
-        viewPager = ButterKnife.findById(this, R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
 

@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public interface MapSource {
     String getName();

@@ -5,7 +5,8 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 public class UrlLoader extends AsyncTaskLoader<String> {
 

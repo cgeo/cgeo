@@ -2,7 +2,7 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.connector.capability.Smiley;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.Collections;

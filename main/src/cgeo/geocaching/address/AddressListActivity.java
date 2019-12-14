@@ -12,8 +12,9 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import android.app.ProgressDialog;
 import android.location.Address;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;

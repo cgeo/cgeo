@@ -9,8 +9,9 @@ import cgeo.geocaching.sensors.Sensors;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;

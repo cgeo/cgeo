@@ -5,8 +5,8 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.List;

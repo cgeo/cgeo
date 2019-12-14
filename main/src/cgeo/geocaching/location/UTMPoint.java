@@ -2,7 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.MatcherWrapper;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Locale;
 import java.util.regex.Pattern;

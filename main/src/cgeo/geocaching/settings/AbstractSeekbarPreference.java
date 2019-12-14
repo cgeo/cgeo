@@ -15,8 +15,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
-
 public abstract class AbstractSeekbarPreference extends Preference {
 
     private TextView valueView;
@@ -103,8 +101,8 @@ public abstract class AbstractSeekbarPreference extends Preference {
         final View v = super.onCreateView(parent);
 
         // get views
-        final SeekBar seekBar = ButterKnife.findById(v, R.id.preference_seekbar);
-        valueView = ButterKnife.findById(v, R.id.preference_seekbar_value_view);
+        final SeekBar seekBar = v.findViewById(R.id.preference_seekbar);
+        valueView = v.findViewById(R.id.preference_seekbar_value_view);
 
         // init seekbar
         seekBar.setMax(maxValue);
@@ -116,7 +114,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
 
         // set label (if given)
         if (null != labelValue && !labelValue.isEmpty()) {
-            final TextView labelView = ButterKnife.findById(v, R.id.preference_seekbar_label_view);
+            final TextView labelView = v.findViewById(R.id.preference_seekbar_label_view);
             labelView.setVisibility(View.VISIBLE);
             labelView.setText(labelValue);
         }

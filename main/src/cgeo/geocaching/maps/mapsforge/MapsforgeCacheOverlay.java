@@ -7,7 +7,8 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

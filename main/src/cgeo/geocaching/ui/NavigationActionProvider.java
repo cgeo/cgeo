@@ -5,9 +5,10 @@ import cgeo.geocaching.activity.INavigationSource;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v4.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.core.view.ActionProvider;
 
 /**
  * Action provider showing the compass icon, and reacting to normal click (primary navigation) and long click (secondary
