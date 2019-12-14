@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">不明なタイプ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">マイクロ</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
     <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした。</string>
     <string name="err_point_unknown_position">現在地を認識できません。</string>
-    <string name="err_point_no_position_given_title">情報が必要です</string>
-    <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
     <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
     <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>
     <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">トラッカブルのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」。</string>
     <string name="warn_log_text_fill">ログの本文を入力してください。</string>
     <string name="warn_load_images">画像をロードすることができませんでした。</string>
-    <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。\nオフライン地図は利用できません。</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。\nオフライン地図は利用できません。</string>
     <string name="warn_rendertheme_missing">地図のテーマファイルが見つかりません。</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません。</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">保存されてないウェイポイントの変更が廃棄されました！</string>
     <string name="err_request_popup_info">c:geo がキャッシュ ポップアップ情報の取得に失敗しました。</string>
     <string name="warn_log_load_additional_data">c:geo は、ログの追加データ (トラッカブル/お気に入りポイント) を読み込めませんでした。</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">判明した最後の位置</string>
     <string name="loc_net">ネットワーク</string>
@@ -467,7 +470,7 @@
     <string name="settings_title_cachedetails">キャッシュの詳細</string>
     <string name="settings_summary_cachedetails">キャッシュ情報の表示をカスタマイズします。</string>
     <string name="settings_title_offlinedata">オフラインデータ</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">ログ</string>
     <string name="settings_summary_logging">署名やログのオプションの設定。</string>
     <string name="settings_title_map">地図</string>
@@ -646,6 +649,8 @@
     <string name="init_mapsource_select">地図の選択</string>
     <string name="settings_title_scale_map_text">地図文字の拡大縮小</string>
     <string name="settings_summary_scale_map_text">デバイスのdpi によってオフライン地図の文字を拡大/縮小する</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_gpx_exportdir">GPXエクスポートフォルダ</string>
     <string name="init_gpx_importdir">GPXインポートフォルダ</string>
@@ -653,6 +658,7 @@
     <string name="init_dataDir_note">ジオキャッシュ (ネタバレ、ログの画像、…) の追加データを、外部ストレージ (お使いのデバイスに応じて、エミュレートまたは実際の外部 SD カード) に格納することができます。</string>
     <string name="init_maptrail">軌跡表示</string>
     <string name="init_summary_maptrail">地図に軌跡を表示</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
     <string name="init_include_found_status">\"見つかった\"ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブル「訪れた」設定</string>
@@ -740,8 +746,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>
@@ -913,7 +919,6 @@
     <string name="cache_menu_sygic_drive">Sygic (自動車)</string>
     <string name="cache_menu_radar">レーダー</string>
     <string name="cache_menu_map">地図</string>
-    <string name="cache_menu_mfbeta">Mapsforge ベータ版</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">他の外部アプリ</string>
     <string name="cache_menu_streetview">Googleストリートビュー</string>
@@ -943,7 +948,7 @@
     <string name="ignore_confirm_title">ご注意ください</string>
     <string name="ignore_confirm_message">キャッシュを無視すると geocaching.com からデータをロードするとき、このキャッシュがもう二度と発生しないことを意味します。ウェブサイトで無視を解除しないと、もう一度キャッシュを参照することはできません。</string>
     <string name="cache_status">状態</string>
-    <string name="cache_stored">保存済み</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
     <string name="cache_status_found">見つかった</string>
     <string name="cache_not_status_found">未発見</string>
@@ -965,6 +970,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">GCコード</string>
     <string name="cache_name">名前</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">タイプ</string>
     <string name="cache_size">サイズ</string>
     <string name="cache_distance">距離</string>
@@ -995,6 +1002,15 @@
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
     <string name="cache_listed_on">Listed on %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">ファイルを検索中:\n</string>
@@ -1081,11 +1097,6 @@
     <string name="waypoint_duplicated">ウェイポイントを複製しました</string>
     <string name="waypoint_copy_of">コピー ～ </string>
     <string name="waypointcalc_notes_prompt">ここにメモを入力…</string>
-    <string name="search_history">履歴</string>
-    <string name="search_history_empty">履歴はありません</string>
-    <string name="search_remove_destination">履歴から削除しました</string>
-    <string name="search_clear_history">全履歴を削除</string>
-    <string name="search_history_cleared">全履歴を削除しました</string>
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
@@ -1624,6 +1635,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

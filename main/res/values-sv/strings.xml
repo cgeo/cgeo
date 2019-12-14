@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS adventures utställning</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Okänd typ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">micro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
     <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
     <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
-    <string name="err_point_no_position_given_title">Mer info krävs</string>
-    <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
     <string name="err_point_bear_and_dist_title">Tips!</string>
     <string name="err_point_bear_and_dist">Ange både riktning och avstånd. Rikting är en vinkel mellan 0 och 360 grader relativt norr. Avstånd anges med eller utan enhet.</string>
     <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
     <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
-    <string name="warn_invalid_mapfile">Den valda kartfilen är inte en korrekt Mapsforge version 0.3.0 kartfil.\nOffline-kartan är inte tillgänglig.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Den angivna kartfilen finns inte.\nOffline-kartor kommer inte att vara tillgängliga.</string>
     <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
     <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Ej sparade ändringar av punkt slängdes!</string>
     <string name="err_request_popup_info">c:geo kunde inte hämta cachens popup-info.</string>
     <string name="warn_log_load_additional_data">c:geo misslyckades med att hämta ytterligare data (trackables/favorit poäng) för loggning.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Senast kända</string>
     <string name="loc_net">Nätverk</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Cachedetaljer</string>
     <string name="settings_summary_cachedetails">Anpassa utseende på cacheinformation.</string>
     <string name="settings_title_offlinedata">Offlinedata</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Loggning</string>
     <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
     <string name="settings_title_map">Karta</string>
@@ -649,6 +652,8 @@
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="settings_title_scale_map_text">Skala karttext</string>
     <string name="settings_summary_scale_map_text">Skala textetiketter på offlinekartor mot enhetens upplösning</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Katalog med offline-kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
     <string name="init_gpx_importdir">GPX-importkatalog</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
     <string name="init_maptrail">Spår på kartan</string>
     <string name="init_summary_maptrail">Visa spår på kartan</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
     <string name="init_trackautovisit">Trackable</string>
@@ -743,8 +749,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -765,7 +771,7 @@
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_check">Kolla autentisering</string>
     <string name="auth_check_again">Kolla autentisering igen</string>
-    <string name="auth_start">Påbörja koppling mot Twitter</string>
+    <string name="auth_start">Kolla autentisering</string>
     <string name="auth_again">Koppla mot Twitter igen</string>
     <string name="auth_register">Skapa ett konto</string>
     <string name="auth_connected">Ansluten</string>
@@ -923,7 +929,6 @@
     <string name="cache_menu_sygic_drive">Sygic (körning)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Visa på karta</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andra externa program</string>
     <string name="cache_menu_streetview">Gatuvy</string>
@@ -953,7 +958,7 @@
     <string name="ignore_confirm_title">Var försiktig</string>
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Sparade</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Sparad logg</string>
     <string name="cache_status_found">Hittad</string>
     <string name="cache_not_status_found">Ej hittad</string>
@@ -975,6 +980,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">GC-kod</string>
     <string name="cache_name">Namn</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Storlek</string>
     <string name="cache_distance">Avstånd</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Dela</string>
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Söker efter filer\ni</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Punkten har duplicerats</string>
     <string name="waypoint_copy_of">Kopia av</string>
     <string name="waypointcalc_notes_prompt">Skriv anteckningar här…</string>
-    <string name="search_history">Historik</string>
-    <string name="search_history_empty">Inga tidigare målpunkter</string>
-    <string name="search_remove_destination">Punkten borttagen</string>
-    <string name="search_clear_history">Rensa historik</string>
-    <string name="search_history_cleared">Historiken rensad</string>
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

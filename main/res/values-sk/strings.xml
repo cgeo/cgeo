@@ -32,6 +32,7 @@
     <string name="gchqceleb">Oslava Geocaching HQ</string>
     <string name="gps">Výstava GPS Adventures</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Neznámy typ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
     <string name="err_waypoint_add_failed">c:geo nemôže pridať bod trasy.</string>
     <string name="err_point_unknown_position">c:geo nevie, kde ste.</string>
-    <string name="err_point_no_position_given_title">Popis je požadovaný</string>
-    <string name="err_point_no_position_given">Vyplňte aspoň zemepisnú šírku a dĺžku alebo vzdialenosť a azimut. Môžete tiež vyplniť všetky štyri polia.</string>
     <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
     <string name="err_point_bear_and_dist">Vyplňte azimut aj vzdialenosť. Azimut je uhol 0 až 360 stupňov vzhľadom k severu. Vzdialenosť môžete zadať bez jednotiek.</string>
     <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Zadajte kód trasovateľného predmetu. Napríklad „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
     <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
-    <string name="warn_invalid_mapfile">Vybraná mapa nemá platný formát mapsforge verzie 0.3.0.\nOffline mapy nie sú dostupné.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Vybraný mapový súbor neexistuje.\nOffline mapy nie sú dostupné.</string>
     <string name="warn_rendertheme_missing">Téma mapy nebola nájdená.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Neuložené zmeny bodu trasy boli zrušené!</string>
     <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
     <string name="warn_log_load_additional_data">Aplikácii c:geo sa nepodarilo načítať ďalšie údaje (trasovateľné predmety/favoritné body) na logovanie.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">posledná známa</string>
     <string name="loc_net">sieť</string>
@@ -476,7 +479,7 @@
     <string name="settings_title_cachedetails">Detaily skrýše</string>
     <string name="settings_summary_cachedetails">Nastavte zobrazovanie detailov skrýše.</string>
     <string name="settings_title_offlinedata">Údaje v režime offline</string>
-    <string name="settings_summary_offlinedata">Nakonfigurujte iné ukladanie údajov off-line.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Zápis logu</string>
     <string name="settings_summary_logging">Nastavte svoj podpis a možnosti logovania.</string>
     <string name="settings_title_map">Mapa</string>
@@ -655,6 +658,8 @@
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="settings_title_scale_map_text">Upraviť veľkosť textu</string>
     <string name="settings_summary_scale_map_text">Veľkosť textu označenia na mape v režime offline podľa dpi zariadenia</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
     <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
@@ -662,6 +667,7 @@
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
     <string name="init_maptrail">Zobraziť stopu</string>
     <string name="init_summary_maptrail">Zobraziť stopu na mape</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Po exporte GPX otvoriť menu pre zdieľanie</string>
     <string name="init_include_found_status">Zahrnúť stav \"Nájdené\"</string>
     <string name="init_trackautovisit">Návšteva TB</string>
@@ -749,8 +755,8 @@
     <string name="init_summary_proximityNotificationGeneral">Prehrať jedno upozornenie, ak je na mape viditeľná nejaká keška alebo bod trasy bližšie než ďaleká vzdialenosť alebo blízka vzdialenosť. Na dve odlišné vzdialenosti sa používajú odlišné tóny.</string>
     <string name="init_proximityNotificationSpecific">Upozornenie na vzdialenosť konkrétneho bodu trasy</string>
     <string name="init_summary_proximityNotificationSpecific">Prehrávanie opakovaného upozornenia, ak je práve vybraná keška alebo bod trasy bližšie než ďaleká vzdialenosť alebo blízka vzdialenosť. Funguje, ak sú otvorené podrobnosti kešky alebo bodu trasy, ak je na mape zobrazené kontextové okno kešky alebo bodu trasy, prípadne ak je aktívny kompas. Na dve vzdialenosti sa používajú odlišné tóny.</string>
-    <string name="far_distance">ďaleká vzdialenosť</string>
-    <string name="near_distance">blízka vzdialenosť</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelit</string>
@@ -943,7 +949,6 @@
     <string name="cache_menu_sygic_drive">Sygic (autom)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mapa</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Ďalšie externé aplikácie</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -973,7 +978,7 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uložené</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Uložený log</string>
     <string name="cache_status_found">Nájdená</string>
     <string name="cache_not_status_found">Nenájdená</string>
@@ -995,6 +1000,8 @@
     <string name="cache_status_stored_morethanthirtydays">Pred poslednými 30 dňami</string>
     <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Názov</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Veľkosť</string>
     <string name="cache_distance">Vzdialenosť</string>
@@ -1025,6 +1032,15 @@
     <string name="cache_share_field">Zdieľať</string>
     <string name="cache_time_full_hours">hodín</string>
     <string name="cache_listed_on">Uvedené na %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
@@ -1111,11 +1127,6 @@
     <string name="waypoint_duplicated">Bod trasy bol duplikovaný</string>
     <string name="waypoint_copy_of">Kópia</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
-    <string name="search_history">História</string>
-    <string name="search_history_empty">Bez predchádzajúcich cieľov</string>
-    <string name="search_remove_destination">Cieľ odstránený</string>
-    <string name="search_clear_history">Zmazať históriu</string>
-    <string name="search_history_cleared">História zmazaná</string>
     <string name="waypoint_coordinate_formats_plain">Iba text</string>
     <string name="from_clipboard">Zo schránky</string>
     <string name="copy_to_clipboard">Kopírovať do schránky</string>
@@ -1689,6 +1700,10 @@
     <string name="color_blue">Modrá</string>
     <string name="color_green">Zelená</string>
     <string name="color_grey">Sivá</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Zadajte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je príliš malá – obnovené na min. hodnotu</string>

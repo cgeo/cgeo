@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">Benutzerdefinierter Cache</string>
     <string name="unknown">Unbekannter Typ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
     <string name="err_waypoint_add_failed">c:geo konnte den Wegpunkt nicht hinzufügen.</string>
     <string name="err_point_unknown_position">c:geo konnte den aktuellen Standort nicht bestimmen.</string>
-    <string name="err_point_no_position_given_title">Info benötigt</string>
-    <string name="err_point_no_position_given">Mindestens Längen- und Breitengrad oder Entfernung und Richtung angeben. Auch alle Angaben sind möglich.</string>
     <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
     <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad relativ zum Norden. Die Entfernung benötigt keine Bezeichnung der Einheiten. </string>
     <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
     <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
-    <string name="warn_invalid_mapfile">Die gewählte Datei ist keine gültige Mapsforge-Karte oder verwendet eine nicht unterstützte Version.\n(c:geo unterstützt aktuell v3 bis v5 / nur v3, falls \"Alte Mapsforge V3\" aktiv ist.)\n\nOffline Karte ist nicht verfügbar.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline-Karte ist nicht verfügbar.</string>
     <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Wegpunktänderungen verworfen!</string>
     <string name="err_request_popup_info">c:geo konnte die Cache-Popup Informationen nicht herunterladen.</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
+    <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
+    <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
     <!-- location service -->
     <string name="loc_last">Letzte Position</string>
     <string name="loc_net">Netzwerk</string>
@@ -358,7 +361,7 @@
     <string name="caches_upload_modifiedcoords_warning">Möchten Sie modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Alle Koordinaten hochladen</string>
-    <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Modifizierte Koordinaten hochladen\" verwenden.</string>
+    <string name="caches_upload_allcoords_warning">Dies wird alle existierenden Koordinaten auf dem Server für alle (bzw. die ausgewählten) Caches deiner Liste durch die aktuellen Listing-Koordinaten in c:geo ersetzen! Dies sollte nur in speziellen Fällen verwendet werden, z.B. wenn du eine GPX-Datei mit korrigierten Koordinaten als Listing-Koordinaten importiert hast. Dies kann nicht rückgängig gemacht werden und du solltest diese Funktion nur verwenden, wenn du weißt, was du tust. In normalen Fällen solltest du stattdessen die Funktion \"Geänderte Koordinaten hochladen\" verwenden.</string>
     <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
     <string name="caches_refresh_all">Alle aktualisieren</string>
     <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -456,7 +459,7 @@
     <string name="about_contributors_other">Mitwirkende vor 2018</string>
     <string name="about_components">Komponenten</string>
     <string name="contribution_code">Code</string>
-    <string name="contribution_tester">tester</string>
+    <string name="contribution_tester">Tester</string>
     <string name="contribution_support">Support</string>
     <string name="contribution_documentation">Handbuch</string>
     <string name="contribution_projectleader">Open Source Projektleiter</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Cache-Details</string>
     <string name="settings_summary_cachedetails">Anpassung der Anzeige von Cache-Informationen.</string>
     <string name="settings_title_offlinedata">Offline-Daten</string>
-    <string name="settings_summary_offlinedata">Konfigurieren Sie einen anderen Offline-Datenspeicher.</string>
+    <string name="settings_summary_offlinedata">Konfiguriere die zu speichernden Daten für Offline-Nutzung, den Speicherort und Verzeichnisse für GPX-Dateien.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Einstellungen für Signatur und Log-Optionen.</string>
     <string name="settings_title_map">Karte</string>
@@ -631,8 +634,8 @@
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
     <string name="init_backup_settings">Sichern der Programmeinstellungen</string>
-    <string name="init_backup_settings_backup_light">Sichern der Einstellungen (ohne Anmeldedaten)</string>
-    <string name="init_backup_settings_backup_full">Sichern der Einstellungen (komplett)</string>
+    <string name="init_backup_settings_backup_light">Einstellungen sichern (ohne Anmeldedaten)</string>
+    <string name="init_backup_settings_backup_full">Einstellungen sichern (komplett)</string>
     <string name="init_backup_settings_backup_full_confirm">Möchtest du sensible Anmeldedaten speichern? Sie könnten eventuell von anderen Apps gelesen werden.</string>
     <string name="settings_savingerror">Fehler beim Speichern der Einstellungen</string>
     <string name="settings_saved">Einstellungen erfolgreich gespeichert nach:</string>
@@ -649,6 +652,8 @@
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="settings_title_scale_map_text">Textgröße anpassen</string>
     <string name="settings_summary_scale_map_text">Textgröße der Bezeichnungen auf der Offline-Karte entsprechend der Bildschirmauflösung anpassen</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
     <string name="init_maptrail">Zeige Spur</string>
     <string name="init_summary_maptrail">Zeige Spur auf Karte</string>
+    <string name="init_trailcolor">Spurfarbe</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
     <string name="init_trackautovisit">TBs besuchen</string>
@@ -672,7 +678,7 @@
     <string name="init_debug_title">Fehlersuche</string>
     <string name="init_debug_note">c:geo kann viele Debug-Informationen generieren. Das Aktivieren dieser Einstellung wird die Stabilität von c:geo beeinträchtigen und wird nur empfohlen, um den Entwicklern eine Logdatei zu senden. Bitte Debug-Logging bei der normalen Nutzung von c:geo immer abgeschaltet lassen!</string>
     <string name="init_debug">Debug-Log aktivieren</string>
-    <string name="init_dbonsdcard_title">Datenspeicherung</string>
+    <string name="init_dbonsdcard_title">Speicherort der Datenbank</string>
     <string name="init_dbonsdcard_note">Sie können die Datenbank von c:geo entweder systemintern oder in einem benutzerdefiniertem Verzeichnis speichern. Je nach Konfiguration des Gerätes kann die Speicherung im Benutzerbereich internen Speicherplatz freigeben, aber Sie verlieren etwas Leistung und c:geo wird nicht funktionieren, wenn der Benutzerspeicher nicht verfügbar ist oder die Datenbank-Datei gelöscht wird.</string>
     <string name="init_dbonsdcard">Im Benutzerspeicher</string>
     <string name="init_dbmove_dbmove">Verschiebe Datenbank</string>
@@ -738,13 +744,13 @@
     <string name="init_mfbeta">Mapsforge beta als Standard</string>
     <string name="init_mfbeta_description">Der aktuelle Release enthält eine Betaversion unserer neuen Mapsforge-Karte als experimentelles Feature. Dies neue Karte kann hier als Standard für Live-Karte und Listen aktiviert werden.</string>
     <!-- proximity notification -->
-    <string name="settings_title_proximityNotification">Benachrichtigung über nahe Caches</string>
-    <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung über nahe Caches auf der Karte</string>
-    <string name="init_summary_proximityNotificationGeneral">Spiele eine einmalige Benachrichtigung, wenn ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher als die weite oder nahe Entfernung ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
-    <string name="init_proximityNotificationSpecific">Benachrichtigungston für Wegpunkte</string>
+    <string name="settings_title_proximityNotification">Annäherungsbenachrichtigung</string>
+    <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung auf der Karte</string>
+    <string name="init_summary_proximityNotificationGeneral">Spiele einmalig eine Benachrichtigung ab, sobald ein Cache oder Wegpunkt, der derzeit auf der Karte sichtbar ist, näher ist als die weite bzw. nahe Entfernung. Je nach Entfernung wird ein anderer Ton abgespielt.</string>
+    <string name="init_proximityNotificationSpecific">Spezielle Benachrichtigung für Wegpunkte</string>
     <string name="init_summary_proximityNotificationSpecific">Spiele eine wiederholende Benachrichtigung, wenn der aktuell ausgewählte Cache oder Wegpunkt näher als die weite oder nahe Entfernung ist. Ist aktiv wenn die Cache- oder Wegpunkt-Details geöffnet werden, ein Cache- oder Wegpunkt-Popups auf der Karte angezeigt oder der Kompass aktiv ist. Verschiedene Töne werden für die beiden Entfernungen verwendet.</string>
-    <string name="far_distance">weite Entfernung</string>
-    <string name="near_distance">nahe Entfernung</string>
+    <string name="far_distance">Weite Entfernung</string>
+    <string name="near_distance">Nahe Entfernung</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -923,7 +929,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Fahren)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Karte</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andere externe App</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -939,7 +944,7 @@
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Aktualisieren</string>
     <string name="cache_menu_share">Weiterleiten</string>
-    <string name="cache_menu_move_list">Auf andere Liste verschieben</string>
+    <string name="cache_menu_move_list">In andere Liste verschieben</string>
     <string name="cache_menu_copy_list">In andere Liste kopieren</string>
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -975,6 +980,8 @@
     <string name="cache_status_stored_morethanthirtydays">Vor den letzten dreißig Tagen</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
+    <string name="cache_name_set">Cachename festlegen</string>
+    <string name="cache_name_updated">Cachename aktualisiert</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Größe</string>
     <string name="cache_distance">Entfernung</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Weiterleiten</string>
     <string name="cache_time_full_hours">Uhr</string>
     <string name="cache_listed_on">Geführt auf %s</string>
+    <string name="user_defined_caches">Benutzerdefinierte Caches</string>
+    <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
+    <string name="internal_cache_default_name">Benutzerdefinierter Cache #%1$d</string>
+    <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
+    <string name="internal_cache_default_owner">Du</string>
+    <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
+    <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \'Gehe zu\' Ziele</string>
+    <string name="init_longtap_udc">Langes Tippen auf Karte</string>
+    <string name="init_summary_longtap_udc">Langes Tippen auf Karte um einen benutzerdefinierten Cache anzulegen</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Suche nach Dateien\nin</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Wegpunkt dupliziert</string>
     <string name="waypoint_copy_of">Kopie von</string>
     <string name="waypointcalc_notes_prompt">Notizen hier eingeben…</string>
-    <string name="search_history">Verlauf</string>
-    <string name="search_history_empty">Keine Ziele bisher</string>
-    <string name="search_remove_destination">Ziel gelöscht</string>
-    <string name="search_clear_history">Verlauf löschen</string>
-    <string name="search_history_cleared">Verlauf gelöscht</string>
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
@@ -1570,7 +1581,7 @@
     <string name="settings_activate_geokrety">Aktivieren</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
-    <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
+    <string name="init_summary_geokrety">Lade Trackables von GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
     <string name="init_geokrety_register_ok">Anmeldung OK</string>
     <string name="init_geokrety_register_fail">Anmeldung fehlgeschlagen</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blau</string>
     <string name="color_green">Grün</string>
     <string name="color_grey">Grau</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Rot</string>
+    <string name="color_turquoise">Türkis</string>
+    <string name="color_black">Schwarz</string>
     <!-- number input -->
     <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>

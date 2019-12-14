@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo ei tiedä minkä kätkön haluat lisätä välietapiksi.</string>
     <string name="err_waypoint_add_failed">c:geo epäonnistui välietapin lisäämisessä.</string>
     <string name="err_point_unknown_position">c:geo ei tunnista missä olet.</string>
-    <string name="err_point_no_position_given_title">Tiedot tarvitaan</string>
-    <string name="err_point_no_position_given">Täytä ainakin leveys- ja pituusaste tai etäisyys ja suunta. Voit myös täyttää kaikki neljä kenttää.</string>
     <string name="err_point_bear_and_dist_title">Tarvitsetko apua?</string>
     <string name="err_point_bear_and_dist">Täytä sekä suunta että matka. Suunta on 0–360 asteen kulma suhteessa pohjoiseen. Matka ei vaadi yksikköä.</string>
     <string name="err_log_load_data">c:geo ei voi ladata kirjaamiseen tarvittavia tietoja.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
     <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
-    <string name="warn_invalid_mapfile">Valittu karttatiedosto ei ole kelvollinen mapsforge 0.3.0 version karttatiedosto.\nKartat eivät ole saatavilla offline-tilassa.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Valittua karttatiedostoa ei ole.\nOffline-kartat eivät ole saatavilla.</string>
     <string name="warn_rendertheme_missing">Karttateemaa ei löytynyt.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Tallentamattomat etappimuutokset hylätty!</string>
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Viimeisin tunnettu</string>
     <string name="loc_net">Verkkoyhteys</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Kätkön tiedot</string>
     <string name="settings_summary_cachedetails">Kustomoi kätkön tietojen esitystapa.</string>
     <string name="settings_title_offlinedata">Offline-data</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Kirjaaminen</string>
     <string name="settings_summary_logging">Aseta allekirjoituksesi ja lokkausasetukset.</string>
     <string name="settings_title_map">Kartta</string>
@@ -649,6 +652,8 @@
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="settings_title_scale_map_text">Skaalaa kartan tekstit</string>
     <string name="settings_summary_scale_map_text">Tekstinimiöt offline-kartalla valitaan laitteen tarkkuuden mukaan</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Offline-karttojen polku</string>
     <string name="init_gpx_exportdir">GPX:n vientikansio</string>
     <string name="init_gpx_importdir">GPX:n tuontikansio</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
     <string name="init_maptrail">Näytä reitti</string>
     <string name="init_summary_maptrail">Näytä reitti kartalla</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Avaa jakovalikko GPX-tiedoston tuomisen jälkeen</string>
     <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
     <string name="init_trackautovisit">Reissaajien vierailu</string>
@@ -743,8 +749,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
@@ -916,14 +922,13 @@
     <string name="cache_menu_navigation_drive_select_target">Kätkö vai pysäköintialue?</string>
     <string name="cache_menu_navigation_walk">Navigointi (kävely)</string>
     <string name="cache_menu_navigation_transit">Navigointi (liikenteessä)</string>
-    <string name="cache_menu_navigation_bike">Navigointi (Pyöräily)</string>
+    <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
     <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (kävellessä)</string>
     <string name="cache_menu_sygic_drive">Sygic (ajaessa)</string>
     <string name="cache_menu_radar">Tutka</string>
     <string name="cache_menu_map">Kartta</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Muut ulkoiset sovellukset</string>
     <string name="cache_menu_streetview">Katunäkymä</string>
@@ -953,7 +958,7 @@
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
-    <string name="cache_stored">Tallennettu</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
@@ -975,6 +980,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Kätkökoodi</string>
     <string name="cache_name">Nimi</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Tyyppi</string>
     <string name="cache_size">Koko</string>
     <string name="cache_distance">Etäisyys</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Jaa</string>
     <string name="cache_time_full_hours">Kello</string>
     <string name="cache_listed_on">Listattu %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Etsitään tiedostoja\nkohteesta</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Reittipiste monistettu</string>
     <string name="waypoint_copy_of">Kopio</string>
     <string name="waypointcalc_notes_prompt">Kirjoita muistiinpano…</string>
-    <string name="search_history">Historiatiedot</string>
-    <string name="search_history_empty">Ei aikaisempia kohteita</string>
-    <string name="search_remove_destination">Kohde poistettu</string>
-    <string name="search_clear_history">Tyhjennä historiatiedot</string>
-    <string name="search_history_cleared">Historia tyhjennetty</string>
     <string name="waypoint_coordinate_formats_plain">Yksinkertainen</string>
     <string name="from_clipboard">Leikepöydältä</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
@@ -1570,7 +1581,7 @@
     <string name="settings_activate_geokrety">Aktivoi</string>
     <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
-    <string name="init_summary_geokrety">Vahvista matkalaiset sivulla GeoKrety.org</string>
+    <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
     <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
     <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
     <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

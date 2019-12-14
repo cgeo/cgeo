@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Gps adventures exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
     <string name="err_waypoint_add_failed">Sorry, c:geo kon de waypoint niet toevoegen.</string>
     <string name="err_point_unknown_position">Sorry, c:geo kan niet bepalen waar je bent.</string>
-    <string name="err_point_no_position_given_title">Info benodigd</string>
-    <string name="err_point_no_position_given">Geef op zijn minst lengte- en breedtegraad of afstand en richting. Of vul alle 4 de velden.</string>
     <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
     <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
     <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
-    <string name="warn_invalid_mapfile">Het geselecteerde mapbestand is geen correct mapforge 0.3.0 mapbestand.\nOffline kaarten zijn niet beschikbaar.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Het geselecteerde mapbestand bestaat niet.\nOffline kaarten zijn niet beschikbaar.</string>
     <string name="warn_rendertheme_missing">Map thema niet gevonden.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Waypoint wijzigingen zijn niet opgeslagen!</string>
     <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
+    <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
+    <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
     <!-- location service -->
     <string name="loc_last">Laatst bekende</string>
     <string name="loc_net">Netwerk</string>
@@ -470,7 +473,7 @@
     <string name="settings_title_cachedetails">Cache Details</string>
     <string name="settings_summary_cachedetails">De weergave van cache-informatie aanpassen.</string>
     <string name="settings_title_offlinedata">Offline gegevens</string>
-    <string name="settings_summary_offlinedata">Andere offline gegevensopslag configureren.</string>
+    <string name="settings_summary_offlinedata">Configureer de gegevens die moeten worden opgeslagen voor offline gebruik, de opslaglocatie en mappen voor GPX bestanden.</string>
     <string name="settings_title_logging">Logboek</string>
     <string name="settings_summary_logging">Configureer handtekening en stel log-opties in.</string>
     <string name="settings_title_map">Kaart</string>
@@ -649,6 +652,8 @@
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="settings_title_scale_map_text">Tekst op kaart schalen</string>
     <string name="settings_summary_scale_map_text">Tekst labels op offline kaart schalen n.a.v. DPI apparaat</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_gpx_exportdir">GPX Export map</string>
     <string name="init_gpx_importdir">GPX Import map</string>
@@ -656,6 +661,7 @@
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
     <string name="init_maptrail">Pad tonen</string>
     <string name="init_summary_maptrail">Laat pad op kaart zien</string>
+    <string name="init_trailcolor">Spoorkleur</string>
     <string name="init_share_after_export">Open deel-menu na GPX export</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
@@ -743,8 +749,8 @@
     <string name="init_summary_proximityNotificationGeneral">Speel een enkele melding als een cache of waypoint op de kaart zichtbaar, dichterbij is dan de veraf- of dichtbij-afstand. Verschillende tonen worden gebruikt voor de twee afstanden.</string>
     <string name="init_proximityNotificationSpecific">Specifieke melding voor waypoint nabijheid</string>
     <string name="init_summary_proximityNotificationSpecific">Speel een herhalende melding wanneer de huidige geselecteerde cache of waypoint dichterbij is dan de veraf- of dichtbij afstand. Werkt als de cache- of waypoint details worden geopend, cache of waypoint popups op de kaart worden weergegeven of wanneer het kompas actief is. Verschillende tonen worden gebruikt voor de twee afstanden.</string>
-    <string name="far_distance">veraf afstand</string>
-    <string name="near_distance">dichtbij afstand</string>
+    <string name="far_distance">Veraf afstand</string>
+    <string name="near_distance">Dichtbij afstand</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -923,7 +929,6 @@
     <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Toon op kaart</string>
-    <string name="cache_menu_mfbeta">Mapsforge Bèta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andere externe apps</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -975,6 +980,8 @@
     <string name="cache_status_stored_morethanthirtydays">Vóór de afgelopen dertig dagen</string>
     <string name="cache_geocode">Geo code</string>
     <string name="cache_name">Naam</string>
+    <string name="cache_name_set">Cachenaam instellen</string>
+    <string name="cache_name_updated">Cachenaam bijgewerkt</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Grootte</string>
     <string name="cache_distance">Afstand</string>
@@ -1005,6 +1012,15 @@
     <string name="cache_share_field">Delen</string>
     <string name="cache_time_full_hours">uur</string>
     <string name="cache_listed_on">Opgenomen in %s</string>
+    <string name="user_defined_caches">Door de gebruiker gedefinieerde caches</string>
+    <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
+    <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
+    <string name="internal_cache_default_description">Dit is een door de gebruiker gedefinieerde cache</string>
+    <string name="internal_cache_default_owner">Jij</string>
+    <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
+    <string name="internal_goto_targets_description">Deze cache slaat je recente \'Ga naar\' doelen op</string>
+    <string name="init_longtap_udc">Lange tik op de kaart</string>
+    <string name="init_summary_longtap_udc">Lange tik op de kaart om een gebruiker gedefinieerde cache te maken</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Zoeken naar bestanden\nin</string>
@@ -1091,11 +1107,6 @@
     <string name="waypoint_duplicated">Waypoint gedupliceerd</string>
     <string name="waypoint_copy_of">Kopie van</string>
     <string name="waypointcalc_notes_prompt">Voer hier notities in…</string>
-    <string name="search_history">Geschiedenis</string>
-    <string name="search_history_empty">Geen eerdere bestemmingen</string>
-    <string name="search_remove_destination">Bestemming verwijderd</string>
-    <string name="search_clear_history">Maak geschiedenis leeg</string>
-    <string name="search_history_cleared">Geschiedenis leeggemaakt</string>
     <string name="waypoint_coordinate_formats_plain">Plat</string>
     <string name="from_clipboard">Van klembord</string>
     <string name="copy_to_clipboard">Kopieer naar klembord</string>
@@ -1224,7 +1235,7 @@
     <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
     <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
-    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+    <string name="helper_gpsstatus_title">GPS-Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
@@ -1645,6 +1656,10 @@
     <string name="color_blue">Blauw</string>
     <string name="color_green">Groen</string>
     <string name="color_grey">Grijs</string>
+    <string name="color_orange">Oranje</string>
+    <string name="color_red">Rood</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Zwart</string>
     <!-- number input -->
     <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>

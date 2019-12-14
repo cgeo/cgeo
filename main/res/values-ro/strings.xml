@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Expoziţie \"Aventuri cu GPS\"</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Tip necunoscut</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
     <string name="err_waypoint_add_failed">c:geo nu a putut adăuga punctul.</string>
     <string name="err_point_unknown_position">c:geo nu poate determina unde te afli.</string>
-    <string name="err_point_no_position_given_title">Informaţii necesare</string>
-    <string name="err_point_no_position_given">Introdu cel puţin latitudine şi longitudine sau distanţă şi azimut. Se pot completa şi toate cele patru câmpuri.</string>
     <string name="err_point_bear_and_dist_title">Ai nevoie de ajutor?</string>
     <string name="err_point_bear_and_dist">Completează şi azimutul şi distanţa. Azimutul este unghiul de la 0 la 360 faţă de nord. Distanţa nu necesită unităţi.</string>
     <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Introdu codul pentru obiectul călător. De exemplu \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Te rog introdu ceva text pentru această însemnare.</string>
     <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
-    <string name="warn_invalid_mapfile">Harta aleasă nu este în formatul mapsforge versiunea 0.3.0.\nHarta salvată nu este disponibilă.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Fişierul cu harta aleasă nu există.\nHarta salvată nu este disponibilă.</string>
     <string name="warn_rendertheme_missing">Stilul hărţii nu a fost găsit.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Modificările nesalvate vor fi anulate!</string>
     <string name="err_request_popup_info">c:geo nu a reuşit să obţină informaţiile minime despre geocutie.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Ultima poziţie cunoscută</string>
     <string name="loc_net">Reţea</string>
@@ -473,7 +476,7 @@
     <string name="settings_title_cachedetails">Detalii cutie</string>
     <string name="settings_summary_cachedetails">Personalizează informaţiile afişate despre o geocutie.</string>
     <string name="settings_title_offlinedata">Informaţii păstrate locale</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Jurnal</string>
     <string name="settings_summary_logging">Configurează semnătura şi opţiunile pentru însemnări.</string>
     <string name="settings_title_map">Hartă</string>
@@ -652,6 +655,8 @@
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
     <string name="settings_title_scale_map_text">Redimensionează textul de pe hartă</string>
     <string name="settings_summary_scale_map_text">Redimensionează textul afişat pe o hartă salvată în funcţie de rezoluţia ecranului</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Dosar cu hărţi salvate local</string>
     <string name="init_gpx_exportdir">Dosar Exporturi GPX</string>
     <string name="init_gpx_importdir">Dosar Importuri GPX</string>
@@ -659,6 +664,7 @@
     <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
     <string name="init_maptrail">Arată traseul parcus</string>
     <string name="init_summary_maptrail">Arată traseul parcus pe Hartă</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Afişează meniul \"Distribuie\" după exportul GPX</string>
     <string name="init_include_found_status">Include starea \"Găsită\"</string>
     <string name="init_trackautovisit">TB vizitează</string>
@@ -746,8 +752,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: hartă</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -933,7 +939,6 @@
     <string name="cache_menu_sygic_drive">Sygic (cu maşina)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Hartă</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Alte aplicaţii externe</string>
     <string name="cache_menu_streetview">Vedere stradală</string>
@@ -963,7 +968,7 @@
     <string name="ignore_confirm_title">Atenţie</string>
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
-    <string name="cache_stored">Stocate</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
@@ -985,6 +990,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geocod</string>
     <string name="cache_name">Nume</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Tip</string>
     <string name="cache_size">Dimensiune</string>
     <string name="cache_distance">Distanţă</string>
@@ -1015,6 +1022,15 @@
     <string name="cache_share_field">ora</string>
     <string name="cache_time_full_hours">ora</string>
     <string name="cache_listed_on">Publicat pe %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Căutare fişiere\nîn</string>
@@ -1101,11 +1117,6 @@
     <string name="waypoint_duplicated">Punct duplicat</string>
     <string name="waypoint_copy_of">Copie după</string>
     <string name="waypointcalc_notes_prompt">Introduceţi aici observaţiile…</string>
-    <string name="search_history">Istoric</string>
-    <string name="search_history_empty">Nu există destinaţii</string>
-    <string name="search_remove_destination">Destinaţie ştearsă</string>
-    <string name="search_clear_history">Şterge istoric</string>
-    <string name="search_history_cleared">Istoric şters</string>
     <string name="waypoint_coordinate_formats_plain">Simplu</string>
     <string name="from_clipboard">Din memoria temporară</string>
     <string name="copy_to_clipboard">Copiază în memoria temporară</string>
@@ -1667,6 +1678,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

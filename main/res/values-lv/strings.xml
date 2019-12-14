@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures izstāde</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Nezināms tips</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -204,11 +205,9 @@
     <string name="err_tb_not_loggable">Šis ceļotājs nav reģistrējams.</string>
     <string name="err_tb_find">c:geo nevar atrast ceļotāju</string>
     <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
-    <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim Jūs vēlaties pievienot Starpposma punktu.</string>
-    <string name="err_waypoint_add_failed">c:geo neizdevās pievienot tavu Starpposmu.</string>
+    <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim tu vēlies pievienot starpposma punktu.</string>
+    <string name="err_waypoint_add_failed">c:geo neizdevās pievienot tavu starpposmu.</string>
     <string name="err_point_unknown_position">c:geo nevar parādīt, kur jūs atrodaties.</string>
-    <string name="err_point_no_position_given_title">Nepieciešama informācija</string>
-    <string name="err_point_no_position_given">Aizpildiet vismaz platumu un garumu var arī attālumu ar pagrieziena leņķi. Varat  norādīt visas četras šūnas.</string>
     <string name="err_point_bear_and_dist_title">Nepieciešama palīdzība?</string>
     <string name="err_point_bear_and_dist">Aizpildīt abus - gan virzienu, gan attālumu. Virziena leņķis ir no 0 līdz 360 grādiem attiecībā pret ziemeļiem. Attālumam nav jānorāda mērvienības.</string>
     <string name="err_log_load_data">c:geo nevar ielādēt datus, kas nepieciešami lai pierakstītu apmeklējumu.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Ievadiet ceļotāja kodu, lai reģistrētu atradumu. Piemēram, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Lūdzu, ievadi tekstu savam apmeklējuma ierakstam.</string>
     <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
-    <string name="warn_invalid_mapfile">Izvēlētais kartes fails nav derīgs mapsforge versijai 0.3.0 map file.\nBezsaistes kartes nav piejamas.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Izvēlētais kartes fails nepastāv. \nBezsaistes kartes nav pieejamas.</string>
     <string name="warn_rendertheme_missing">Kartes tēma nav atrasta.</string>
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
@@ -269,9 +268,13 @@
     <string name="err_trackable_no_preference_activity">Atvainojiet, nevaru atrast piemērotus uzstādījumus ekrānam.</string>
     <string name="confirm_unsaved_changes_title">Izmaiņas nav saglabātas</string>
     <string name="confirm_discard_wp_changes">Vai atsaukt Starpposma izmaiņas?</string>
-    <string name="warn_discard_changes">Iepriekš nesaglabāto Starpposmu izmaiņas nav saglabātas!</string>
+    <string name="warn_discard_changes">Nesaglabāto starpposmu izmaiņas atceltas!</string>
     <string name="err_request_popup_info">c:Geo neizdevās iegūt slēpņa informāciju.</string>
     <string name="warn_log_load_additional_data">c:geo nevarēja ielādēt papildu datus (ceļotāji/favorītpunkti) ieraksta veikšanai.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Pēdējais zināmais</string>
     <string name="loc_net">Tīkls</string>
@@ -473,7 +476,7 @@
     <string name="settings_title_cachedetails">Slēpņu informācija</string>
     <string name="settings_summary_cachedetails">Pielāgot displeju slēpņa informācijai.</string>
     <string name="settings_title_offlinedata">Bezsaistes dati</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Pierakstīšanās</string>
     <string name="settings_summary_logging">Konfigurē savu parakstu un iestati reģistrācijas ieraksta opcijas.</string>
     <string name="settings_title_map">Karte</string>
@@ -593,7 +596,7 @@
     <string name="init_summary_useenglish">Izmantot angļu valodu c:geo (nepieciešama restartēšana)</string>
     <string name="init_exclude">Nerādīt savus un atrastos</string>
     <string name="init_summary_exclude">Nerādīt tev piederošus vai jau atrastos slēpņus</string>
-    <string name="init_showwaypoints">Rādīt Starpposmus</string>
+    <string name="init_showwaypoints">Rādīt starpposmus</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
@@ -652,6 +655,8 @@
     <string name="init_mapsource_select">Izvēlies karti</string>
     <string name="settings_title_scale_map_text">Mērogot kartes tekstu</string>
     <string name="settings_summary_scale_map_text">Mērogot tekstu bezsaistes kartēs atbilstoši ierīeces dpi</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Katalogs ar bezsaistes kartēm</string>
     <string name="init_gpx_exportdir">GPX eksporta direktorija</string>
     <string name="init_gpx_importdir">GPX importa direktorija</string>
@@ -659,6 +664,7 @@
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
     <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Atvērt koplietošanas izvēlni pēc GPX eksporta</string>
     <string name="init_include_found_status">Pievienot \"Atrasts\" statusu</string>
     <string name="init_trackautovisit">Ceļotāju automātiska atzīmēšana</string>
@@ -746,8 +752,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -903,7 +909,7 @@
     <string name="cache_dialog_loading_details_status_details">Apstrādā informāciju</string>
     <string name="cache_dialog_loading_details_status_spoilers">Ielādē \"spoiler\" attēlus</string>
     <string name="cache_dialog_loading_details_status_logs">Ielādē ierakstus</string>
-    <string name="cache_dialog_loading_details_status_waypoints">Apstrādā Starpposmus</string>
+    <string name="cache_dialog_loading_details_status_waypoints">Apstrādā starpposmus</string>
     <string name="cache_dialog_loading_details_status_gcvote">Ielādē GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Apkopo datus</string>
     <string name="cache_dialog_loading_details_status_render">Gatavo attēlošanai</string>
@@ -933,7 +939,6 @@
     <string name="cache_menu_sygic_drive">Sygic (braukšana)</string>
     <string name="cache_menu_radar">Radars</string>
     <string name="cache_menu_map">Karte</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Citas ārējās aplikācijas</string>
     <string name="cache_menu_streetview">Ielas skats (Street View)</string>
@@ -963,7 +968,7 @@
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
-    <string name="cache_stored">Saglabātie bezsaistē</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
@@ -985,6 +990,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geo code</string>
     <string name="cache_name">Nosaukums</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Tips</string>
     <string name="cache_size">Izmērs</string>
     <string name="cache_distance">Attālums</string>
@@ -1010,11 +1017,20 @@
     <string name="cache_image">Attēls</string>
     <string name="cache_image_open_file">Atvērt kā failu</string>
     <string name="cache_image_open_browser">Atvērt pārlūkprogrammā</string>
-    <string name="cache_image_add_waypoint">Pievienot Stapposmu</string>
+    <string name="cache_image_add_waypoint">Pievienot starpposmu</string>
     <string name="cache_image_background">Slēpņu sarakstu fona attēls</string>
     <string name="cache_share_field">Dalīties</string>
     <string name="cache_time_full_hours">plkst.</string>
     <string name="cache_listed_on">Publicēts %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Meklēt failus\n</string>
@@ -1029,7 +1045,7 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches">Ielādē slēpņus no .gpx faila</string>
     <string name="gpx_import_loading_caches_with_filename">Ielādē slēpņus no %1$s</string>
-    <string name="gpx_import_loading_waypoints">Ielādē Starpposmu failu</string>
+    <string name="gpx_import_loading_waypoints">Ielādē starpposmu failu</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ielādē starpposmus no %1$s</string>
     <string name="gpx_import_caches_imported">slēpņi importēti</string>
     <string name="gpx_import_caches_imported_with_filename">importēti %1$d slēpņi no %2$s</string>
@@ -1072,8 +1088,8 @@
     <string name="waypoint_copy_coordinates">Kopēt koordinātas</string>
     <string name="waypoint_clear_coordinates">Dzēst koordinātas</string>
     <string name="waypoint_delete">Dzēst</string>
-    <string name="waypoint_edit_title">Rediģēt Starpposmu</string>
-    <string name="waypoint_add_title">Pievienot Starpposmu</string>
+    <string name="waypoint_edit_title">Rediģēt starpposmu</string>
+    <string name="waypoint_add_title">Pievienot starpposmu</string>
     <string name="waypoint_note">Piezīme</string>
     <string name="waypoint_user_note">Lietotāja piezīme</string>
     <string name="waypoint_visited">Apmeklēts</string>
@@ -1081,7 +1097,7 @@
     <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Saglabāt</string>
     <string name="waypoint_cancel_edit">Atcelt</string>
-    <string name="waypoint_loading">Ielādē Starpposmu…</string>
+    <string name="waypoint_loading">Notiek starpposma ielāde…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Neizmainīt slēpņa koordinātas</string>
     <string name="waypoint_set_as_cache_coords">Iestatīt kā slēpņa koordinātas iekš c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Iestatīt kā slēpņa koordinātas c:geo un mājas lapā</string>
@@ -1101,11 +1117,6 @@
     <string name="waypoint_duplicated">Starpposms dublējas (atkārtojas)</string>
     <string name="waypoint_copy_of">Kopija</string>
     <string name="waypointcalc_notes_prompt">Ievadi piezīmes šeit…</string>
-    <string name="search_history">Vēsture</string>
-    <string name="search_history_empty">Nav iepriekšējo galamērķu</string>
-    <string name="search_remove_destination">Galamērķis noņemts</string>
-    <string name="search_clear_history">Notīrīt vēsturi</string>
-    <string name="search_history_cleared">Vēsture notīrīta</string>
     <string name="waypoint_coordinate_formats_plain">Vienkāršā</string>
     <string name="from_clipboard">No starpliktuves</string>
     <string name="copy_to_clipboard">Kopēt uz starpliktuvi</string>
@@ -1134,7 +1145,7 @@
     <string name="map_trailhistory_cleared">trail history cleared</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <string name="map_routing">Maršrutēšana</string>
-    <string name="map_routing_straight">Taisnā līnijā</string>
+    <string name="map_routing_straight">Taisna līnija</string>
     <string name="map_routing_walk">Kājām</string>
     <string name="map_routing_bike">Ar velo</string>
     <string name="map_routing_car">Ar auto</string>
@@ -1210,7 +1221,7 @@
     <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
     <string name="user_menu_send_message">Nosūtīt ziņu</string>
     <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>
-    <string name="user_unknown">Unknown user</string>
+    <string name="user_unknown">Nezināms lietotājs</string>
     <!-- navigation -->
     <string name="navigation">Navigācija</string>
     <string name="compass_title">Kompass</string>
@@ -1667,6 +1678,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>

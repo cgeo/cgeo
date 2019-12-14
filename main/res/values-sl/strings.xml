@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Razstava GPS Adventures</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="userdefined">User defined cache</string>
     <string name="unknown">Neznan tip zaklada</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
@@ -207,8 +208,6 @@
     <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>
     <string name="err_waypoint_add_failed">c:geo ni uspelo dodati točke.</string>
     <string name="err_point_unknown_position">c:geo ne ve kje ste.</string>
-    <string name="err_point_no_position_given_title">Potrebne informacije</string>
-    <string name="err_point_no_position_given">Vnesite vsaj koordinate ali pa razdaljo in smer. Izpolnete lahko tudi vsa polja.</string>
     <string name="err_point_bear_and_dist_title">Potrebujete pomoč?</string>
     <string name="err_point_bear_and_dist">Vnesite smer in razdaljo. Smer je kot med 0 in 360 stopinjami od severa. Razdalja je lahko z ali brez enot.</string>
     <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
@@ -241,7 +240,7 @@
     <string name="warn_search_help_tb">Vnesite kodo sledljivčka, na primer: \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vnesite besedilo zapisa.</string>
     <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
-    <string name="warn_invalid_mapfile">Izbrana datoteka ni veljaven mapsforge 0.3.0 zemljevid. Zemljevidi brez povezave niso na voljo.</string>
+    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
     <string name="warn_nonexistant_mapfile">Datoteka z zemljevidi ne obstaja.\nZemljevidi brez povezave niso na voljo.</string>
     <string name="warn_rendertheme_missing">Tema zemljevidov ni na voljo.</string>
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>
@@ -272,6 +271,10 @@
     <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
+    <string name="more_information">More information</string>
+    <string name="warn_gm_not_available">Google Maps not available.</string>
+    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
+    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
     <!-- location service -->
     <string name="loc_last">Zadnja znana lokacija</string>
     <string name="loc_net">Omrežje</string>
@@ -476,7 +479,7 @@
     <string name="settings_title_cachedetails">Podrobnosti zaklada</string>
     <string name="settings_summary_cachedetails">Customize the display of cache information.</string>
     <string name="settings_title_offlinedata">Podatki brez povezave</string>
-    <string name="settings_summary_offlinedata">Configure other offline data storage.</string>
+    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
     <string name="settings_title_logging">Zapisovanje</string>
     <string name="settings_summary_logging">Configure your signature and set logging options.</string>
     <string name="settings_title_map">Zemljevid</string>
@@ -655,6 +658,8 @@
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
     <string name="settings_title_scale_map_text">Prilagodi velikost pisave na zemljevidu</string>
     <string name="settings_summary_scale_map_text">Prilagodi velikost pisave na zemljevidu glede na ločljivost zaslona vaše naprave</string>
+    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
@@ -662,6 +667,7 @@
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
     <string name="init_maptrail">Pokaži sled</string>
     <string name="init_summary_maptrail">Pokaži sled na zemljevidu</string>
+    <string name="init_trailcolor">Trail color</string>
     <string name="init_share_after_export">Po izvozu GPX datotek ponudi menu za deljenje</string>
     <string name="init_include_found_status">Include \"Found\" status</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
@@ -749,8 +755,8 @@
     <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">far distance</string>
-    <string name="near_distance">near distance</string>
+    <string name="far_distance">Far distance</string>
+    <string name="near_distance">Near distance</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
     <string name="map_source_google_satellite">Google: Satelitska slika</string>
@@ -943,7 +949,6 @@
     <string name="cache_menu_sygic_drive">Sygic (Driving)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zemljevid</string>
-    <string name="cache_menu_mfbeta">Mapsforge Beta</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Druge zunanje aplikacije</string>
     <string name="cache_menu_streetview">Pogled ulic</string>
@@ -973,7 +978,7 @@
     <string name="ignore_confirm_title">Previdno</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Shranjeni</string>
+    <string name="cache_stored">Stored</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
@@ -995,6 +1000,8 @@
     <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
     <string name="cache_geocode">Geo koda</string>
     <string name="cache_name">Ime</string>
+    <string name="cache_name_set">Set cachename</string>
+    <string name="cache_name_updated">Cachename updated</string>
     <string name="cache_type">Tip</string>
     <string name="cache_size">Velikost</string>
     <string name="cache_distance">Razdalja</string>
@@ -1025,6 +1032,15 @@
     <string name="cache_share_field">deli</string>
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
+    <string name="user_defined_caches">User defined caches</string>
+    <string name="create_internal_cache">Create user defined cache</string>
+    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_description">This is a user defined cache</string>
+    <string name="internal_cache_default_owner">You</string>
+    <string name="internal_goto_targets_title">\'Go to\' targets</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
+    <string name="init_longtap_udc">Long tap on map</string>
+    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Iščem datoteke\nv</string>
@@ -1111,11 +1127,6 @@
     <string name="waypoint_duplicated">Waypoint duplicated</string>
     <string name="waypoint_copy_of">Kopija od</string>
     <string name="waypointcalc_notes_prompt">Enter notes here…</string>
-    <string name="search_history">Zgodovina</string>
-    <string name="search_history_empty">Ni prejšnjih destinacij</string>
-    <string name="search_remove_destination">Destinacija odstranjena</string>
-    <string name="search_clear_history">Počisti zgodovino</string>
-    <string name="search_history_cleared">Zgodovina izbrisana</string>
     <string name="waypoint_coordinate_formats_plain">Osnovno</string>
     <string name="from_clipboard">Iz odložišča</string>
     <string name="copy_to_clipboard">Kopiraj v odložišče</string>
@@ -1689,6 +1700,10 @@
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
     <string name="color_grey">Grey</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Red</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_black">Black</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
