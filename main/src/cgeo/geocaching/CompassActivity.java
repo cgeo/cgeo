@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -304,6 +305,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
+    private static double altitudeReadings[] = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
+    private static int altitudeReadingPos = 0;
+
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
@@ -316,7 +320,19 @@ public class CompassActivity extends AbstractActionBarActivity {
                     navAccuracy.setText(null);
                 }
 
-                navLocation.setText(geo.getCoords().toString());
+                // remember new altitude reading, and calculate average from past MAX_READINGS readings
+                if (geo.hasAltitude() && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || geo.getVerticalAccuracyMeters() > 0.0)) {
+                    altitudeReadings[altitudeReadingPos] = geo.getAltitude();
+                    altitudeReadingPos = (++altitudeReadingPos) % altitudeReadings.length;
+                }
+                double averageAltitude = altitudeReadings[0];
+                for (int i = 1; i < altitudeReadings.length; i++) {
+                    averageAltitude += altitudeReadings[i];
+                }
+                if (altitudeReadings.length > 0) {
+                    averageAltitude /= (double) altitudeReadings.length;
+                }
+                navLocation.setText(geo.getCoords().toString() + Formatter.SEPARATOR + Units.getDistanceFromMeters((float) averageAltitude));
 
                 updateDistanceInfo(geo);
 
