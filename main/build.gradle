@@ -186,10 +186,6 @@ android {
         exclude '.readme'
         // AndroidAnnotations
         exclude 'androidannotations-api.properties'
-        // findbugs
-        exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.properties'
-        exclude 'META-INF/maven/com.google.code.findbugs/jsr305/pom.xml'
-        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
         // mapsforge
         exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.properties'
         exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.xml'
@@ -279,11 +275,9 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
-    // Findbugs
-    implementation ('com.google.code.findbugs:annotations:3.0.1u2') {
-        exclude group: 'com.google.code.findbugs', module: 'jsr305'
-        exclude group: 'net.jcip', module: 'jcip-annotations'
-    }
+    // SpotBugs (successor of FindBugs)
+    implementation 'net.jcip:jcip-annotations:1.0'
+    implementation 'com.github.spotbugs:spotbugs-annotations:3.1.12'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.50'
