@@ -460,7 +460,7 @@ class GitCommit {
         if (commitId == null) {
             Process p = ['git', 'rev-parse', 'HEAD'].execute()
             if (p.waitFor() != 0) {
-                throw new Error("Unable to get git commit id: " + p.err.text);
+                throw new Error("Unable to get git commit id: " + p.err.text)
             }
             commitId = p.text.trim()
         }
