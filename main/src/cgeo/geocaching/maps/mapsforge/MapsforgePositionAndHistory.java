@@ -110,4 +110,8 @@ public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndH
     public void repaintRequired() {
         ovlImpl.getMapViewImpl().repaintRequired(this);
     }
+
+    @Override
+    public void updateMapAutoRotation() {
+    }
 }

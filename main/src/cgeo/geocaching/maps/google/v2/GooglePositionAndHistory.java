@@ -69,7 +69,7 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         this.mapView = mapView;
         trailColor = Settings.getTrailColor();
         this.postRealDistance = postRealDistance;
-        this.isMapAutoRotationDisabled = Settings.isMapAutoRotationDisabled();
+        updateMapAutoRotation();
     }
 
     @Override
@@ -105,6 +105,10 @@ public class GooglePositionAndHistory implements PositionAndHistory {
                 }
             }
         }
+    }
+
+    public void updateMapAutoRotation() {
+        this.isMapAutoRotationDisabled = Settings.isMapAutoRotationDisabled();
     }
 
     @Override

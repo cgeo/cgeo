@@ -604,6 +604,10 @@ public class Settings {
         return getBoolean(R.string.pref_map_autorotation_disabled, false);
     }
 
+    public static void setMapAutoRotationDisabled(final boolean disabled) {
+        putBoolean(R.string.pref_map_autorotation_disabled, disabled);
+    }
+
     public static CoordInputFormatEnum getCoordInputFormat() {
         return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.DEFAULT_INT_VALUE));
     }
