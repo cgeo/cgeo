@@ -745,6 +745,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
+            case R.id.menu_map_autorotate:
+                Settings.setMapAutoRotationDisabled(!Settings.isMapAutoRotationDisabled());
+                overlayPositionAndScale.updateMapAutoRotation();
+                ActivityMixin.invalidateOptionsMenu(activity);
+                return true;
             case R.id.menu_direction_line:
                 Settings.setMapDirection(!Settings.isMapDirection());
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);

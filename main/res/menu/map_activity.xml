@@ -107,6 +107,14 @@
                 android:title="@string/map_dot_mode"
                 app:showAsAction="ifRoom|withText">
             </item>
+            <item
+                android:id="@+id/menu_map_autorotate"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_rotate"
+                android:title="@string/map_autorotate"
+                android:visible="false"
+                app:showAsAction="ifRoom|withText">
+            </item>
 
         </menu>
     </item>

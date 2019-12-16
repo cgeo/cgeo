@@ -128,7 +128,9 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
 
     @Override
     public boolean superOnPrepareOptionsMenu(final Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
+        final boolean result = super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.menu_map_autorotate).setVisible(true).setChecked(!Settings.isMapAutoRotationDisabled());
+        return result;
     }
 
     @Override

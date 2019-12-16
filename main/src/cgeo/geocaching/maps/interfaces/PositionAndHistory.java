@@ -21,4 +21,6 @@ public interface PositionAndHistory {
     void setHistory(ArrayList<Location> history);
 
     void repaintRequired();
+
+    void updateMapAutoRotation();
 }
