@@ -35,6 +35,7 @@ public enum CacheType {
     GCHQ_CELEBRATION("gchqceleb", "Geocaching HQ Celebration", "af820035-787a-47af-b52b-becc8b0c0c88", R.string.gchqceleb, R.drawable.type_hq, "3774", R.drawable.dot_event), // icon missing
     GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_event, "1304", R.drawable.dot_event), // icon missing
     BLOCK_PARTY("block", "Geocaching HQ Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.drawable.type_event, "4738", R.drawable.dot_event), // icon missing
+    LOCATIONLESS("locationless", "Locationless (Reverse) Cache", "8f6dd7bc-ff39-4997-bd2e-225a0d2adf9d", R.string.locationless, R.drawable.type_virtual, "12", R.drawable.dot_virtual), // icon missing
 
     // insert other official cache types before USER_DEFINED and UNKNOWN
     USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.drawable.type_virtual, "", R.drawable.dot_virtual),
