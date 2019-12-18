@@ -277,7 +277,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         return p;
     }
 
-    // https://github.com/asamm/locus-api/blob/master/locus-api-core/src/main/java/locus/api/objects/geocaching/GeocachingData.java
+    // https://github.com/asamm/locus-api/blob/master/locus-api-core/src/main/java/locus/api/objects/geocaching/GeocachingData.kt
     private static int toLocusType(final CacheType ct) {
         switch (ct) {
             case TRADITIONAL:
