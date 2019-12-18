@@ -1236,6 +1236,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
+        private long timeLastDistanceCheck = 0;
         /**
          * weak reference to the outer class
          */
@@ -1263,7 +1264,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
          */
         void repaintPositionOverlay() {
             final long currentTimeMillis = System.currentTimeMillis();
-            if (currentTimeMillis > timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL) {
+            if (currentTimeMillis > (timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL)) {
                 timeLastPositionOverlayCalculation = currentTimeMillis;
 
                 try {
@@ -1285,8 +1286,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                             map.positionLayer.setHeading(currentHeading);
                             map.positionLayer.requestRedraw();
 
-                            if (null != map.proximityNotification) {
+                            if (null != map.proximityNotification && (timeLastDistanceCheck == 0 || currentTimeMillis > (timeLastDistanceCheck + MIN_UPDATE_INTERVAL))) {
                                 map.proximityNotification.checkDistance(map.caches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                                timeLastDistanceCheck = System.currentTimeMillis();
                             }
                         }
                     }
