@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
@@ -90,4 +91,17 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         invalidate(invalidWpCodes);
     }
 
+    public int getClosestDistanceInM(final AbstractCachesOverlay baseOverlay, final Geopoint coord) {
+        int minDistance = 50000000;
+        if (null != baseOverlay) {
+            final Set<Waypoint> waypoints = filterWaypoints(baseOverlay.getCacheGeocodes(), true);
+            for (final Waypoint waypoint : waypoints) {
+                final int distance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
+                if (distance > 0 && distance < minDistance) {
+                    minDistance = distance;
+                }
+            }
+        }
+        return minDistance;
+    }
 }

@@ -18,7 +18,6 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -379,14 +378,6 @@ public abstract class AbstractCachesOverlay {
             if (distance > 0 && distance < minDistance) {
                 minDistance = distance;
                 name = cache.getGeocode() + " " + cache.getName();
-            }
-            final List<Waypoint> waypoints = cache.getWaypoints();
-            for (final Waypoint waypoint : waypoints) {
-                final int wpDistance = (int) (1000f * waypoint.getCoords().distanceTo(coord));
-                if (wpDistance > 0 && wpDistance < minDistance) {
-                    minDistance = wpDistance;
-                    name = waypoint.getName() + " (" + waypoint.getWaypointType().gpx + ")";
-                }
             }
         }
         return new WaypointDistanceInfo(name, minDistance);
