@@ -29,7 +29,8 @@
         android:orientation="vertical">
 
         <LinearLayout
-            style="@style/icon_mainscreen_row">
+            style="@style/icon_mainscreen_row"
+            android:baselineAligned="false">
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"

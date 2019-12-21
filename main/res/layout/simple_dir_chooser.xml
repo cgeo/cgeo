@@ -33,6 +33,8 @@
             android:lines="0"
             android:scrollHorizontally="true"
             tools:text="some/selected/path"
+            android:hint="@string/simple_dir_chooser_current_path"
+            android:autofillHints="@string/simple_dir_chooser_current_path"
             android:maxLines="1" />
     </LinearLayout>
 

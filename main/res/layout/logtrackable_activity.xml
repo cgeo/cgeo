@@ -75,12 +75,14 @@
             android:id="@+id/tracking"
             style="@style/edittext_full"
             android:hint="@string/trackable_code"
+            android:importantForAutofill="no"
             android:inputType="textCapCharacters" />
 
         <EditText
             android:id="@+id/log"
             style="@style/edittext_full"
             android:hint="@string/log_new_log_text"
+            android:autofillHints="@string/log_new_log_text"
             android:inputType="textMultiLine|textCapSentences"
             android:lines="5"
             android:maxLength="4000" />

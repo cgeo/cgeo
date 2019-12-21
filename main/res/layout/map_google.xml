@@ -36,6 +36,7 @@
             class="cgeo.geocaching.maps.google.v2.GoogleMapView"
             android:apiKey="@string/maps_api2_key"
             android:clickable="true"
+            android:focusable="true"
             android:enabled="true"
             android:keepScreenOn="true" />
 

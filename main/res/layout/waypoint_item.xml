@@ -5,6 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
+    android:focusable="true"
     android:descendantFocusability="blocksDescendants"
     android:longClickable="true"
     android:orientation="vertical"
@@ -25,7 +26,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
             android:clickable="true"
-            android:focusable="false"
+            android:focusable="true"
             android:longClickable="true"
             android:src="?actionbar_compass" />
 

@@ -5,6 +5,7 @@
     style="@style/button_full"
     android:layout_margin="10dip"
     android:clickable="true"
+    android:focusable="true"
     android:padding="10dip"
     android:text="@string/cache_waypoints_add"
     tools:context=".CacheDetailActivity$WaypointsViewCreator" />

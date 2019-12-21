@@ -133,7 +133,6 @@
                 android:id="@+id/offline_hint_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="6dip"
                 android:layout_marginRight="6dip"
                 android:paddingRight="3dip"

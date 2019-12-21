@@ -17,7 +17,8 @@
             android:id="@+id/scroller_child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:importantForAutofill="noExcludeDescendants">
             <include layout="@layout/coordinates_calculate" />
             <include layout="@layout/coordinates_equations" />
 
@@ -53,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@style/edittext_full"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:singleLine="false"
                 android:overScrollMode="always"
                 android:scrollbarStyle="insideInset"

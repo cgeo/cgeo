@@ -35,6 +35,7 @@
             android:layout_height="fill_parent"
             class="cgeo.geocaching.maps.mapsforge.MapsforgeMapView"
             android:clickable="true"
+            android:focusable="true"
             android:enabled="true"
             android:keepScreenOn="true" />
 
