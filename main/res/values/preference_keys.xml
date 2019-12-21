@@ -53,7 +53,6 @@
     <string translatable="false" name="pref_gcvote_avatar">gcvote_avatar</string>
     <string translatable="false" name="pref_connectorECActive">connectorECActive</string>
     <string translatable="false" name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
-    <string translatable="false" name="pref_geokrety_cache">geokretycache</string>
     <string translatable="false" name="pref_user_vote">user-vote</string>
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_twitter">twitter</string>
@@ -103,7 +102,6 @@
     <string translatable="false" name="pref_dataDir">pref_dataDir</string>
     <string translatable="false" name="pref_fakekey_dataDir">pref_fakekey_dataDir</string>
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
-    <string translatable="false" name="pref_fakekey_preference_backup_info">fakekey_preference_backup_info</string>
     <string translatable="false" name="pref_fakekey_preference_backup">fakekey_preference_backup</string>
     <string translatable="false" name="pref_fakekey_preference_backupsettings_light">fakekey_preference_backupsettings_light</string>
     <string translatable="false" name="pref_fakekey_preference_backupsettings_full">fakekey_preference_backupsettings_full</string>
@@ -160,7 +158,6 @@
     <string translatable="false" name="pref_navigation_menu_compass">navigationCompass</string>
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
-    <string translatable="false" name="pref_navigation_menu_internal_new_map">navigationInternalNewMap</string>
     <string translatable="false" name="pref_navigation_menu_locus">navigationLocus</string>
     <string translatable="false" name="pref_navigation_menu_rmaps">navigationRmaps</string>
     <string translatable="false" name="pref_navigation_menu_google_maps">navigationGoogleMaps</string>
