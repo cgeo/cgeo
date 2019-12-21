@@ -316,6 +316,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_TYPE_GPS_ADVENTURE;
             case BLOCK_PARTY:
                 return GeocachingData.CACHE_TYPE_EVENT; // no special locus type
+            case LOCATIONLESS:
+                return GeocachingData.CACHE_TYPE_LOCATIONLESS;
             default:
                 return NO_LOCUS_ID;
         }
