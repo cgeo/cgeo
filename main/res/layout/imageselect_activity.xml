@@ -60,6 +60,7 @@
             style="@style/edittext_full"
             android:layout_height="wrap_content"
             android:hint="@string/log_image_caption"
+            android:autofillHints="@string/log_image_caption"
             android:inputType="textCapSentences"
             android:maxLength="50"
             android:minLines="1" />
@@ -69,6 +70,7 @@
             style="@style/edittext_full"
             android:layout_height="wrap_content"
             android:hint="@string/log_image_description"
+            android:autofillHints="@string/log_image_description"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLength="250"
             android:minLines="5" />

@@ -33,6 +33,8 @@
     <string name="settings_facebook_login_url" translatable="false">https://faq.cgeo.org/#facebook-login</string>
 
     <!-- contributors -->
+    <string name="contributors_carnero" translatable="false">carnero</string>
+
     <string name="contributors_recent" translatable="false">
     Bananeweizen||c|
     bekuno||c|

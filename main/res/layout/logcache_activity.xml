@@ -45,6 +45,7 @@
                 style="@style/edittext_full"
                 android:layout_height="wrap_content"
                 android:hint="@string/log_new_log_text"
+                android:autofillHints="@string/log_new_log_text"
                 android:inputType="textMultiLine|textCapSentences"
                 android:maxLength="4000"
                 android:minLines="5"
@@ -72,6 +73,7 @@
                     android:id="@+id/log_password"
                     style="@style/edittext_full"
                     android:hint="@string/log_hint_log_password"
+                    android:importantForAutofill="no"
                     android:inputType="text"
                     tools:ignore="TextFields"
                     android:maxLines="1" />

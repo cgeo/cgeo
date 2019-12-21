@@ -14,7 +14,8 @@
         android:gravity="top|left"
         android:inputType="textMultiLine|textCapSentences"
         android:minLines="3"
-        android:hint="@string/init_signature"/>
+        android:hint="@string/init_signature"
+        android:autofillHints="@string/init_signature"/>
 
     <Button
         android:id="@+id/signature_templates"

@@ -29,7 +29,8 @@
             android:id="@+id/projection"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:importantForAutofill="noExcludeDescendants">
             <EditText
                 android:id="@+id/bearing"
                 style="@style/edittext_full"

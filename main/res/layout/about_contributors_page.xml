@@ -16,7 +16,7 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="carnero" />
+                android:text="@string/contributors_carnero" />
         </RelativeLayout>
 
         <TextView
