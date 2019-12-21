@@ -181,6 +181,6 @@ public enum CacheType {
     }
 
     public boolean isVirtual() {
-        return this == VIRTUAL || this == WEBCAM || this == EARTH;
+        return this == VIRTUAL || this == WEBCAM || this == EARTH || this == LOCATIONLESS;
     }
 }

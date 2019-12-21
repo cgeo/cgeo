@@ -24,6 +24,7 @@ public class CacheTypeTest {
         assertThat(CacheType.getByPattern(null)).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getByPattern("random garbage")).isEqualTo(CacheType.UNKNOWN);
         assertThat(CacheType.getByPattern("cache in trash out event")).isEqualTo(CacheType.CITO);
+        assertThat(CacheType.getByPattern("Locationless (Reverse) Cache")).isEqualTo(CacheType.LOCATIONLESS);
     }
 
     @Test
@@ -65,5 +66,6 @@ public class CacheTypeTest {
         assertThat(CacheType.GPS_EXHIBIT.isEvent()).isTrue();
         assertThat(CacheType.GCHQ_CELEBRATION.isEvent()).isTrue();
         assertThat(CacheType.TRADITIONAL.isEvent()).isFalse();
+        assertThat(CacheType.LOCATIONLESS.isEvent()).isFalse();
     }
 }
