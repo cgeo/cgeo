@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Razstava GPS Adventures</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Locationless (Reverse) Cache</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Neznan tip zaklada</string>
     <!-- cache sizes -->
@@ -97,7 +98,6 @@
     <string name="log_posting_generic_trackable">Posting %1$s %2$d/%3$d</string>
     <string name="log_clear">Počisti</string>
     <string name="log_post_not_possible">Prenos podatkov je v teku…\nPoskusite znova čez nekaj sekund ali preverite vašo povezavo z internetom.</string>
-    <string name="log_post_geocode_missing">Manjka Geokoda…</string>
     <string name="log_date_future_not_allowed">Vnaprejšnji datumi niso dovoljeni.</string>
     <string name="log_add">Dodaj</string>
     <string name="log_repeat">Ponovi prejšnji zapis</string>
@@ -180,10 +180,7 @@
     <string name="err_detail_cache_find">c:geo ni našel zaklada</string>
     <string name="err_detail_cache_find_some">c:geo ni našel tega zaklada.</string>
     <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
-    <string name="err_detail_google_maps_limit_reached">c:geo ni mogel naložiti statičnih zemljevidov. Verjetno je presežena omejitev Googlovih zemljevidov.</string>
     <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
-    <string name="err_detail_no_map_static">c:geo ni našel statičnih zemljevidov za ta zaklad.</string>
-    <string name="err_detail_not_load_map_static">c:geo ni mogel naložiti statičnih zemljevidov.</string>
     <string name="err_detail_still_working">Še opravljam drugo nalogo.</string>
     <string name="err_watchlist_still_managing">Še vedno upravljam vaš spisek nadzorov.</string>
     <string name="err_watchlist_failed">Spreminjanje spiska nadzorov ni uspelo.</string>
@@ -207,19 +204,15 @@
     <string name="err_tb_find_that">c:geo ni našel tega sledljivčka.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>
     <string name="err_waypoint_add_failed">c:geo ni uspelo dodati točke.</string>
-    <string name="err_point_unknown_position">c:geo ne ve kje ste.</string>
     <string name="err_point_bear_and_dist_title">Potrebujete pomoč?</string>
     <string name="err_point_bear_and_dist">Vnesite smer in razdaljo. Smer je kot med 0 in 360 stopinjami od severa. Razdalja je lahko z ali brez enot.</string>
     <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
-    <string name="err_log_load_data_again">c:geo ne more naložiti podatkov za zapis obiska. Ponovni poskus…</string>
-    <string name="err_log_load_data_still">c:geo še vedno nalaga podatke za zapis obiska. Prosimo počakajte še trenutek.</string>
     <string name="err_log_post_missing_tracking_code">Manjkajoča koda za sledenje.</string>
     <string name="err_log_post_missing_coordinates">Manjkajo koordinate.</string>
     <string name="err_log_post_failed">Izgleda, kot da zapis ni bil objavljen. Preverite na spletni strani.</string>
     <string name="err_log_post_failed_ec">Izgleda, da vaš zapis ni bil objavljen. Preverite na Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Izgleda, da vaš zapis ni bil objavljen. Preverite na GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Izgleda, kot da slikani bila objavljena. Preverite na spletni strani.</string>
-    <string name="err_search_address_forgot">c:geo je pozabil naslov, ki ste ga hoteli najti.</string>
     <string name="err_parse_lat">c:geo ni razumel geografske širine.</string>
     <string name="err_parse_lon">c:geo ni razumel geografske dolžine.</string>
     <string name="err_parse_dist">c:geo ni razumel razdalje.</string>
@@ -268,7 +261,6 @@
     <string name="err_trackable_no_preference_activity">Sorry, cannot find a suitable preference screen.</string>
     <string name="confirm_unsaved_changes_title">Spremembe niso shranjene</string>
     <string name="confirm_discard_wp_changes">Discard unsaved waypoint changes?</string>
-    <string name="warn_discard_changes">Unsaved waypoint changes discarded!</string>
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
@@ -346,22 +338,8 @@
     <string name="caches_select_mode_exit">Izhod iz načina izbiranja</string>
     <string name="caches_select_invert">Obrni izbor</string>
     <string name="caches_nearby">V bližini</string>
-    <string name="caches_manage">Upravljaj</string>
     <string name="caches_remove_all">Odstrani vse</string>
-    <plurals name="caches_remove_all_confirm">
-        <item quantity="one">Do you want to remove this cache from the current list?</item>
-        <item quantity="two">Do you want to remove all %d caches from the current list?</item>
-        <item quantity="few">Do you want to remove all %d caches from the current list?</item>
-        <item quantity="other">Do you want to remove all %d caches from the current list?</item>
-    </plurals>
     <string name="caches_remove_selected">Odstrani izbrane</string>
-    <plurals name="caches_remove_selected_confirm">
-        <item quantity="one">Do you want to remove this cache from your device?</item>
-        <item quantity="two">Do you want to remove the selected %d caches from your device?</item>
-        <item quantity="few">Do you want to remove the selected %d caches from your device?</item>
-        <item quantity="other">Do you want to remove the selected %d caches from your device?</item>
-    </plurals>
-    <string name="caches_remove_progress">Odstranjujem zaklade</string>
     <string name="caches_delete_events">Izbriši pretekla srečanja</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
@@ -376,10 +354,6 @@
     <string name="caches_copy_all">Kopiraj vse</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Izvozi v Locus</string>
-    <string name="caches_recaptcha_title">reCAPTCHA</string>
-    <string name="caches_recaptcha_explanation">Prepišite besedilo iz slike, če želite shraniti tudi koordinate. To okno lahko izklopite v nastavitvah.</string>
-    <string name="caches_recaptcha_hint">Besedilo iz slike</string>
-    <string name="caches_recaptcha_continue">Nadaljuj</string>
     <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filtriraj po</string>
     <string name="caches_filter_size">Velikosti</string>
@@ -407,7 +381,6 @@
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
     <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>
@@ -417,19 +390,15 @@
     <string name="list_menu_import">Uvozi</string>
     <string name="list_title">Izberi seznam</string>
     <string name="lists_title">Izberi sezname</string>
-    <string name="lists_remove_all">None</string>
     <string name="list_inbox">Shranjeni</string>
     <string name="list_all_lists">Vsi zakladi</string>
     <string name="list_dialog_create_title">Nov seznam</string>
     <string name="list_dialog_create">Ustvari</string>
-    <string name="list_dialog_create_ok">Nov seznam je bil ustvarjen</string>
     <string name="list_dialog_create_err">c:geo ni mogel ustvariti novega seznama</string>
     <string name="list_dialog_remove_title">Odstrani seznam</string>
     <string name="list_dialog_remove_description">Ali želite odstraniti trenutni seznam zakladov? Vsi ostali zakladi bodo premaknjeni v seznam \"Shranjeni\".</string>
     <string name="list_dialog_remove_nowempty">Seznam je prazen. Ali želite odstraniti trenutni seznam?</string>
     <string name="list_dialog_remove">Odstrani</string>
-    <string name="list_dialog_remove_ok">Seznam je bil odstranjen</string>
-    <string name="list_dialog_remove_err">c:geo ni mogel odstraniti seznama</string>
     <string name="list_dialog_rename_title">Preimenuj seznam</string>
     <string name="list_dialog_rename">Preimenuj</string>
     <string name="list_not_available">Seznam ni več na voljo, preklapljam na standardni seznam</string>
@@ -485,6 +454,7 @@
     <string name="settings_title_map">Zemljevid</string>
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Podatki zemljevida</string>
+    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_map_content">Vsebina zemljevida</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache data directory</string>
@@ -508,10 +478,8 @@
     <string name="settings_goto_url_button">več …</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
-    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_activate_gc">Aktiviraj</string>
     <string name="settings_activate_ec">Aktiviraj</string>
-    <string name="settings_activate_ox">Aktiviraj</string>
     <string name="settings_gc_legal_note">Za uporabo storitev Geocaching.com se morate strinjati s pogoji uporabe podjetja Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Prijava s Facebookom</string>
     <string name="settings_info_facebook_login">V c:geo se ne morete prijaviti s Facebook računom, obstaja pa druga enostavna rešitev…</string>
@@ -553,9 +521,6 @@
     <string name="gcvote_sent">Voting successfully sent</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktiviraj</string>
-    <string name="init_username">Uporabniško ime</string>
-    <string name="init_password">Geslo</string>
-    <string name="init_login">Preveri in shrani podatke</string>
     <string name="init_login_popup">Prijava</string>
     <string name="init_login_popup_working">Prijavljanje…</string>
     <string name="init_login_popup_ok">Prijava uspešna</string>
@@ -593,8 +558,6 @@
     <string name="init_summary_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
     <string name="init_address">Pokaži naslov</string>
     <string name="init_summary_address">Na glavnem zaslonu pokaži naslov namesto koordinat</string>
-    <string name="init_captcha">Pokaži CAPTCHA</string>
-    <string name="init_summary_captcha">Če je potrebno pokaži varnostno besedilo CAPTCHA (samo pri članstvu Basic)</string>
     <string name="init_useenglish">Uporabi angleški jezik</string>
     <string name="init_summary_useenglish">Uporabi angleški jezik za c:geo (potrebuje ponovni zagon)</string>
     <string name="init_exclude">Ne pokaži najdenih ali mojih zakladov</string>
@@ -658,8 +621,10 @@
     <string name="init_mapsource_select">Izberi vir zemljevidov</string>
     <string name="settings_title_scale_map_text">Prilagodi velikost pisave na zemljevidu</string>
     <string name="settings_summary_scale_map_text">Prilagodi velikost pisave na zemljevidu glede na ločljivost zaslona vaše naprave</string>
-    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
     <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
@@ -718,9 +683,7 @@
     <string name="init_hardware_acceleration_title">Strojno pospešeno prikazovanje</string>
     <string name="init_hardware_acceleration_note">Strojno pospeševanje omogoča hitrejše prikazovanje grafičnih elementov na zaslonu. Vendar imajo nekatere Android naprave s strojno pospešenim prikazovanjem težave, predvsem s prikazovanjem odebeljenega teksta. V primeru težav izključite strojno pospešeno prikazovanje grafičnih elementov.</string>
     <string name="init_hardware_acceleration">Omogoči strojno pospeševanje</string>
-    <string name="settings_create_account">Ustvari račun</string>
     <string name="settings_open_website">Odpri spletno stran</string>
-    <string name="settings_open_geokrety_register">Open GeoKrety.org registration page</string>
     <string name="settings_open_geokretymap_website">Open GeoKretyMap.org website</string>
     <string name="settings_settings">Nastavitve</string>
     <string name="settings_information">Informacije</string>
@@ -731,7 +694,6 @@
     <string name="settings_ec_icons_other">Svoj stil</string>
     <string name="settings_ec_icons_oc">Kot OC</string>
     <string name="settings_features">Podprte funkcije</string>
-    <string name="feature_description">Sledeče <b>online</b> funkcije so na voljo v c:geo (poleg offline funkcij):</string>
     <string name="feature_personal_notes">Osebni zapis</string>
     <string name="feature_online_logging">Online zapis</string>
     <string name="feature_log_images">Dodaj slike k zapisu</string>
@@ -746,9 +708,6 @@
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Old Mapsforge V3</string>
     <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
-    <string name="init_experimental_title">Experimental features</string>
-    <string name="init_mfbeta">Nastavi Mapsforge beta kot privzeto</string>
-    <string name="init_mfbeta_description">The current release contains a beta version of our new Mapsforge map as an experimental feature. This new map can be activated here as default for the live and list maps.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>
     <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
@@ -757,6 +716,10 @@
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
     <string name="far_distance">Far distance</string>
     <string name="near_distance">Near distance</string>
+    <string name="init_proximity_notification_type">Type of notification</string>
+    <string name="pn_tone_only">Tone only</string>
+    <string name="pn_text_only">Text only</string>
+    <string name="pn_tone_and_text">Tone + text</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Cestni zemljevid</string>
     <string name="map_source_google_satellite">Google: Satelitska slika</string>
@@ -792,7 +755,6 @@
     <string name="auth_credentials_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_credentials_explain_long">Filling your credentials and pressing the \"Check authentication\" button will start the process. This process will connect to %s and validate your credentials. That\'s all.</string>
     <!-- auth token -->
-    <string name="auth_token_register">Ustvari račun</string>
     <string name="auth_token_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_token_explain_long">Filling your credential and pressing the \"authorize c:geo\" button will start the process. This process will connect to %s and retrieve an authentication token. That\'s all.</string>
     <!-- auth Twitter -->
@@ -830,12 +792,8 @@
     <string name="cache_offline_refresh">Osveži</string>
     <string name="cache_offline_drop">Remove</string>
     <string name="cache_offline_store">Shrani</string>
-    <string name="cache_offline_manage">Manage</string>
-    <string name="cache_offline_store_in_list">Shrani v seznam</string>
     <string name="cache_offline_stored">Shranjeno na napravi</string>
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
-    <string name="cache_offline_time_about">o</string>
-    <string name="cache_offline_time_mins">minut nazaj</string>
     <string name="cache_offline_time_mins_few">nekaj minut nazaj</string>
     <plurals name="cache_offline_about_time_mins">
         <item quantity="one">about %d minute ago</item>
@@ -862,9 +820,6 @@
         <item quantity="other">about %d months ago</item>
     </plurals>
     <string name="cache_offline_about_time_year">over a year ago</string>
-    <string name="cache_offline_time_hour">eno uro nazaj</string>
-    <string name="cache_offline_time_hours">ur nazaj</string>
-    <string name="cache_offline_time_days">dni nazaj</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Atributi</string>
     <string name="cache_inventory">Inventar</string>
@@ -880,7 +835,6 @@
     <string name="cache_personal_note_upload_error">Error uploading personal note</string>
     <string name="cache_personal_note_upload_cancelled">Nalaganje lastne opombe je bilo preklicano</string>
     <string name="cache_description">Opis</string>
-    <string name="cache_description_long">Daljši opis</string>
     <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
     <string name="cache_area_description">Area Description</string>
     <string name="cache_cache_description">Cache Description</string>
@@ -891,15 +845,8 @@
     <string name="cache_watchlist_on_extra">This cache is on your watchlist (Watchers: %1d).</string>
     <string name="cache_watchlist_not_on">Zaklad ni na vašem spisku nadzorov.</string>
     <string name="cache_watchlist_not_on_extra">This cache is not on your watchlist (Watchers: %1d).</string>
-    <string name="cache_watchlist_add">Dodaj na spisek nadzorov</string>
-    <string name="cache_watchlist_remove">Odstrani iz spiska nadzorov</string>
     <string name="cache_favpoint_on">Zaklad je na vašem spisku priljubljenih.</string>
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
-    <string name="cache_favpoint_add">Dodaj</string>
-    <string name="cache_favpoint_remove">Odstrani</string>
-    <string name="cache_list_text">Seznam:</string>
-    <string name="cache_list_change">Premakni</string>
-    <string name="cache_list_unknown">Ni v seznamu</string>
     <string name="cache_list_select_last">Last Selection</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
@@ -970,7 +917,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_pebble">Pebble</string>
-    <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Vote</string>
     <string name="cache_menu_checker">Odpri Geochecker</string>
     <string name="cache_menu_challenge_checker">Poišči Challenge-Checker</string>
@@ -1053,14 +999,10 @@
     <string name="simple_dir_chooser_current_path">Pot:</string>
     <string name="simple_dir_chooser_invalid_path">Neveljavna pot</string>
     <!-- gpx -->
-    <string name="gpx_import_loading_caches">Nalaganje zakladov iz .gpx datoteke</string>
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
-    <string name="gpx_import_loading_waypoints">Nalaganje dodatnih točk iz datoteke</string>
     <string name="gpx_import_loading_waypoints_with_filename">Nalaganje dodatnih točk iz %1$s</string>
-    <string name="gpx_import_caches_imported">naloženih zakladov</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d caches imported from %2$s</string>
     <string name="gpx_import_static_maps_skipped">prekinjeno nalaganje statičnih zemljevidov</string>
-    <string name="gpx_import_title_static_maps">Shrani statične zemljevide</string>
     <string name="gpx_import_title_reading_file">Branje datoteke</string>
     <string name="gpx_import_title">Uvozi GPX</string>
     <string name="gpx_import_title_caches_imported">Rezultat</string>
@@ -1068,7 +1010,6 @@
     <string name="gpx_import_error_io">Datoteke ni bilo mogoče prebrati</string>
     <string name="gpx_import_error_parser">Datoteka ni v pravem formatu</string>
     <string name="gpx_import_error_unexpected">Neznana napaka</string>
-    <string name="gpx_import_canceled">Preklican GPX uvoz</string>
     <string name="gpx_import_canceled_with_filename">GPX import from %1$s was canceled</string>
     <string name="gpx_import_delete_title">Izbriši datoteko</string>
     <string name="gpx_import_delete_message">Ali želite izbrisati %s?</string>
@@ -1117,14 +1058,11 @@
     <string name="waypoint_reset">Ponastavi</string>
     <string name="waypoint_localy_reset_cache_coords">Ponastavi v c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Ponastavi v c:geo in na spletni strani</string>
-    <string name="waypoint_being_saved">Shranjevanje točke…</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Spletna stran ne omogoča spreminjanja koordinat zaklada.</string>
     <string name="waypoint_coordinates_upload_error">Pri shranjevanju koordinat na spletni strani je prišlo do napake.</string>
-    <string name="waypoint_coordinates_uploading_to_website">Nalaganje koordinat %s na spletno stran.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Koordinate na spletni strani so bile nastavljene na: %s.</string>
     <string name="waypoint_done">Končano</string>
     <string name="waypoint_duplicate">Podvoji točko</string>
-    <string name="waypoint_duplicated">Waypoint duplicated</string>
     <string name="waypoint_copy_of">Kopija od</string>
     <string name="waypointcalc_notes_prompt">Enter notes here…</string>
     <string name="waypoint_coordinate_formats_plain">Osnovno</string>
@@ -1139,6 +1077,7 @@
     <string name="map_modes">Možnosti</string>
     <string name="map_trail_show">Pokaži sled</string>
     <string name="map_dot_mode">Use compact icons</string>
+    <string name="map_autorotate">Map autorotate</string>
     <string name="map_circles_show">Pokaži kroge</string>
     <string name="map_mycaches_hide">Skrij lastne ali najdene zaklade</string>
     <string name="map_disabled_hide">Skrij onemogočene zaklade</string>
@@ -1147,9 +1086,6 @@
     <string name="map_theme_options">Theme Options</string>
     <string name="map_live_enable">Vklopi podatke v živo</string>
     <string name="map_live_disable">Izklopi podatke v živo</string>
-    <string name="map_static_title">Statični zemljevidi</string>
-    <string name="map_static_loading">Nalaganje statičnih zemljevidov…</string>
-    <string name="map_token_err">Ker je c:geo lahko prenesel samo del podatkov, so lahko koordinate nenatančne.</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_clear_trailhistory">Clear trail history</string>
     <string name="map_trailhistory_cleared">trail history cleared</string>
@@ -1181,13 +1117,11 @@
     <string name="search_tb_hint">Koda sledljivčka</string>
     <string name="search_tb_button">Iskanje sledljivčka</string>
     <string name="search_destination">Destinacija</string>
-    <string name="search_direction_rel">Iz trenutnega položaja</string>
     <string name="search_address_started">Iskanje mest</string>
     <string name="search_address_result">Najdena mesta</string>
     <string name="search_own_caches">Iskanje mojih zakladov</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Nalaganje seznama Pocket Query</string>
-    <string name="search_pocket_select">Izberi Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Sledljivček</string>
     <string name="trackable_details_loading">Nalaganje podatkov o sledljivčku…</string>
@@ -1239,8 +1173,6 @@
     <string name="use_compass">V uporabi je GPS in magnetni kompas</string>
     <string name="destination_select">Izbira destinacije</string>
     <string name="navigation_direct_navigation">Direktna navigacija</string>
-    <string name="navigation_target">Cilj</string>
-    <string name="err_nav_no_coordinates">Ne morem začeti navigacije brez koordinat</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
     <!-- license -->
     <string name="license">Licenca</string>
@@ -1267,15 +1199,10 @@
     <string name="helper_pocketquery_description">Aplikacija vam omogoča ustvarjanje PQ poizvedb na Geocaching.com S temi poizvedbami lahko enostavno prenesete zakladke na napravo. Deluje samo na Premium računih.</string>
     <string name="helper_google_translate_title">Prevajalnik Google</string>
     <string name="helper_google_translate_description">Če prenesete pakete prevodov znotraj Google Translate aplikacije, lahko prevajate opise zakladov v c:geo tudi brez povezave z dolgim pritiskom na tekst.</string>
-    <string name="helper_wear_title">c:geo Wear</string>
-    <string name="helper_wear_description">c:geo Wear is a plugin for c:geo that lets you navigate to geocaches using your Android Wear smartwatch.</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo omogoča igranje in iskanje geocaches vrste Wherigo. c:Geo lahko samodejno sprožijo prenos kartuš v to app.</string>
     <string name="helper_brouter_title">BRouter Offline navigacija</string>
     <string name="helper_brouter_description">BRouter provides offline routing. If it is installed and has the necessary files downloaded, c:geo will automatically show a route to the cache on the internal map.</string>
-    <!-- add-ons -->
-    <string name="addon_missing_title">Manjkajoči dodatek</string>
-    <string name="addon_download_prompt">Prenesite iz Google Play.</string>
     <!-- export -->
     <string name="export">Izvozi</string>
     <string name="export_progress">Izvozi: %1$s</string>
@@ -1614,11 +1541,7 @@
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktiviraj</string>
     <string name="init_geokrety">GeoKrety.org</string>
-    <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
     <string name="init_summary_geokrety">Enable trackables from GeoKrety.org</string>
-    <string name="init_summary_geokrety_account">Ni nastavljenih uporabniških računov.</string>
-    <string name="init_geokrety_register_ok">Login successful</string>
-    <string name="init_geokrety_register_fail">Login failed</string>
     <string name="init_geokrety_description">Authorize c:geo with GeoKrety.org to log GeoKrety trackables.</string>
     <string name="init_geokrety_userid">User Id: %s</string>
     <string name="trackable_title_log_without_geocode">Geocode not set</string>
@@ -1664,15 +1587,9 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
-    <string name="pq_available_for_download">Pocket query available for download</string>
-    <string name="pq_available_for_download_description">This Pocket query is available for download as one file (gpx). Do you want to download and import it or view the caches as list?</string>
-    <string name="pq_as_cache_list">Ogled seznama zakladov</string>
     <string name="pq_download_and_import">Import Pocket query</string>
-    <string name="pq_my_finds">Moje najdbe</string>
     <string name="caches_refresh_all_warning">To dejanje lahko povzroči veliko mrežnega prometa - prenosa podatkov. Ali ste prepričani, da želite osvežiti vse zaklade?</string>
-    <string name="cache_list_remove_from">Odstrani s seznama</string>
     <string name="list_list_headline">Seznam:</string>
-    <string name="cache_store_list">Shrani v seznam</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint extracted</item>
         <item quantity="two">%d waypoints extracted</item>
@@ -1709,4 +1626,8 @@
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
+    <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">c:geo notifications</string>
+    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
+    <string name="proximity_notification_title">c:geo proximity notification</string>
 </resources>
