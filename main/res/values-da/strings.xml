@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS adventures-udstilling</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Locationless (Reverse) Cache</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Ukendt Type</string>
     <!-- cache sizes -->
@@ -97,7 +98,6 @@
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
     <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
-    <string name="log_post_geocode_missing">Geocode mangler…</string>
     <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
     <string name="log_add">Tilføj</string>
     <string name="log_repeat">Gentag sidste logbesked</string>
@@ -180,10 +180,7 @@
     <string name="err_detail_cache_find">c:geo kan ikke finde geocachen</string>
     <string name="err_detail_cache_find_some">c:geo kan ikke finde denne denne geocache.</string>
     <string name="err_detail_cache_find_any">c:geo kan ikke finde nogen geocacher.</string>
-    <string name="err_detail_google_maps_limit_reached">c: geo kunne ikke hente statisk kort. Måske er det tilladte maksimum for Google Maps API forespørgsler overskredet.</string>
     <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
-    <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
-    <string name="err_detail_not_load_map_static">c: geo kunne ikke indlæse statiske kort.</string>
     <string name="err_detail_still_working">Arbejder stadig på en anden opgave.</string>
     <string name="err_watchlist_still_managing">Administrerer stadig din overvågningsliste.</string>
     <string name="err_watchlist_failed">Ændring af din overvågningsliste mislykkedes.</string>
@@ -207,19 +204,15 @@
     <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
     <string name="err_waypoint_cache_unknown">c: geo ved ikke hvilken cache, du ønsker at tilføje et waypoint til.</string>
     <string name="err_waypoint_add_failed">c: geo kunne ikke tilføje waypoint.</string>
-    <string name="err_point_unknown_position">c: geo kan ikke bestemme din placering.</string>
     <string name="err_point_bear_and_dist_title">Har du brug for hjælp?</string>
     <string name="err_point_bear_and_dist">Udfyld både pejling og afstand. Pejlingen er en kompasvinkel mellem 0 og 360 grader i forhold til nord. Afstanden kræver ikke enheder.</string>
     <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
-    <string name="err_log_load_data_again">c: geo kan ikke indlæse de data, der kræves for at logge besøget. Forsøger igen.</string>
-    <string name="err_log_load_data_still">c:geo forsøger stadig at indlæse de data, som kræves for at sende logbeskeden. Vent venligst.</string>
     <string name="err_log_post_missing_tracking_code">Trackingkoden mangler.</string>
     <string name="err_log_post_missing_coordinates">Koordinaterne mangler.</string>
     <string name="err_log_post_failed">Din logbesked blev muligvis ikke uploadet. Kontrollér logbeskeden på geocachens hjemmeside.</string>
     <string name="err_log_post_failed_ec">Din logbesked blev muligvis ikke blev gemt korrekt. Kontrollér venligst på extremecaching.com.</string>
     <string name="err_log_post_failed_gk">Det lader til, at din log ikke er blevet gemt. Check det venligst på GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Dit logbillede blev muligvis ikke uploadet korrekt. Kontrollér billedet på geocachens hjemmeside.</string>
-    <string name="err_search_address_forgot">c: geo glemte den adresse, du forsøgte at finde.</string>
     <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
     <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
     <string name="err_parse_dist">c:geo kan ikke forstå den indtastede afstand.</string>
@@ -268,7 +261,6 @@
     <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
     <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
-    <string name="warn_discard_changes">Ændringer til waypoints kasseret!</string>
     <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
     <string name="more_information">More information</string>
@@ -344,18 +336,8 @@
     <string name="caches_select_mode_exit">Afslut markering</string>
     <string name="caches_select_invert">Omvend markering</string>
     <string name="caches_nearby">I nærheden</string>
-    <string name="caches_manage">Administrér</string>
     <string name="caches_remove_all">Fjern alle</string>
-    <plurals name="caches_remove_all_confirm">
-        <item quantity="one">Vil du fjerne denne cache fra den aktuelle liste?</item>
-        <item quantity="other">Ønsker du at fjerne alle %d cacher fra den aktuelle liste?</item>
-    </plurals>
     <string name="caches_remove_selected">Fjern valgte</string>
-    <plurals name="caches_remove_selected_confirm">
-        <item quantity="one">Vil du fjerne denne cache fra enheden?</item>
-        <item quantity="other">Vil du slette de %d valgte cacher fra din enhed?</item>
-    </plurals>
-    <string name="caches_remove_progress">Fjerner cacher</string>
     <string name="caches_delete_events">Slet tidligere arrangementer</string>
     <string name="caches_upload_modifiedcoords">Upload ændrede positioner</string>
     <string name="caches_upload_modifiedcoords_warning">Vil du uploade ændrede positioner for alle valgte geocacher og overskrive de eksisterende positioner på serveren? Denne handling kan ikke fortydes.</string>
@@ -370,10 +352,6 @@
     <string name="caches_copy_all">Kopiér alle</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Eksportér til Locus</string>
-    <string name="caches_recaptcha_title">reCAPTCHA</string>
-    <string name="caches_recaptcha_explanation">Indtast den tekst du ser på billedet. Dette aktiverer indlæsning af cache-positioner, hvilket kan deaktiveres i Indstillinger.</string>
-    <string name="caches_recaptcha_hint">Tekst fra billede</string>
-    <string name="caches_recaptcha_continue">Forsæt</string>
     <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filtrér efter</string>
     <string name="caches_filter_size">Størrelse</string>
@@ -401,7 +379,6 @@
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
     <string name="caches_listmarker_selected">(valgt)</string>
     <!-- caches lists -->
     <string name="menu_lists">Administrér lister</string>
@@ -411,19 +388,15 @@
     <string name="list_menu_import">Importér</string>
     <string name="list_title">Vælg en liste</string>
     <string name="lists_title">Vælg lister</string>
-    <string name="lists_remove_all">Ingen</string>
     <string name="list_inbox">Gemte</string>
     <string name="list_all_lists">Alle cacher</string>
     <string name="list_dialog_create_title">Ny liste</string>
     <string name="list_dialog_create">Opret</string>
-    <string name="list_dialog_create_ok">Ny liste blev oprettet</string>
     <string name="list_dialog_create_err">c:geo kunne ikke oprette ny liste</string>
     <string name="list_dialog_remove_title">Fjern liste</string>
     <string name="list_dialog_remove_description">Vil du fjerne den aktuelle liste? Alle cacher i listen bliver flyttet til \"Gemte\".</string>
     <string name="list_dialog_remove_nowempty">Listen er tom. Skal den aktuelle liste fjernes?</string>
     <string name="list_dialog_remove">Fjern</string>
-    <string name="list_dialog_remove_ok">Listen blev fjernet</string>
-    <string name="list_dialog_remove_err">c:geo kunne ikke fjerne den aktuelle liste</string>
     <string name="list_dialog_rename_title">Omdøb liste</string>
     <string name="list_dialog_rename">Omdøb</string>
     <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
@@ -479,6 +452,7 @@
     <string name="settings_title_map">Kort</string>
     <string name="settings_summary_map">Vælg kortkilde samt offline kortindstillinger og -detaljer.</string>
     <string name="settings_title_map_data">Kortdata</string>
+    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache-datamappe</string>
@@ -502,10 +476,8 @@
     <string name="settings_goto_url_button">mere…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
-    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_activate_gc">Aktivér</string>
     <string name="settings_activate_ec">Aktivér</string>
-    <string name="settings_activate_ox">Aktivér</string>
     <string name="settings_gc_legal_note">Når du bruger tjenesten geocaching.com, accepterer du Groundspeaks brugsvilkår.</string>
     <string name="settings_info_facebook_login_title">Facebook login</string>
     <string name="settings_info_facebook_login">Du kan ikke bruge din Facebook-konto til at logge c:geo på geocaching.com. Men der findes en simpel løsning…</string>
@@ -547,9 +519,6 @@
     <string name="gcvote_sent">Bedømmelse blev afsendt</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktivér</string>
-    <string name="init_username">Brugernavn</string>
-    <string name="init_password">Password</string>
-    <string name="init_login">Kontrollér login</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logger ind…</string>
     <string name="init_login_popup_ok">Login OK</string>
@@ -587,8 +556,6 @@
     <string name="init_summary_skin">Light skin (kræver genstart af c:geo)</string>
     <string name="init_address">Vis adresse på hovedskærm</string>
     <string name="init_summary_address">Vis adresse på hovedskærm</string>
-    <string name="init_captcha">Vis CAPTHCA</string>
-    <string name="init_summary_captcha">Vis CAPTHCA, hvis nødvendigt (kun Basismedlemmer)</string>
     <string name="init_useenglish">Brug engelsk</string>
     <string name="init_summary_useenglish">Brug engelsk i c:geo (kræver genstart af c:geo)</string>
     <string name="init_exclude">Udelad egne og fundne cacher</string>
@@ -652,8 +619,10 @@
     <string name="init_mapsource_select">Vælg kortkilde</string>
     <string name="settings_title_scale_map_text">Tilpas tekst på kort</string>
     <string name="settings_summary_scale_map_text">Tilpas størrelsen af tekster på offline kort, så de passer til enhedens skærmopløsning,</string>
-    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
     <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
     <string name="init_map_directory_description">Mappe med offline kort</string>
     <string name="init_gpx_exportdir">GPX eksportmappe</string>
     <string name="init_gpx_importdir">GPX importmappe</string>
@@ -712,9 +681,7 @@
     <string name="init_hardware_acceleration_title">Hardwareaccelereret grafik</string>
     <string name="init_hardware_acceleration_note">Med hardwareaccelereret grafik bliver grafiske elementer tegnet hurtigere på skærmen. Dog kan nogle enheders Android-styresystem indeholde fejl, som bevirker at tekster kan fremstå sløret (især fed skrift).  Du kan deaktivere hardwareaccelereret grafik, hvis du oplever dette problem.</string>
     <string name="init_hardware_acceleration">Aktivér hardwareaccelereret grafik</string>
-    <string name="settings_create_account">Opret konto</string>
     <string name="settings_open_website">Åbn websitet</string>
-    <string name="settings_open_geokrety_register">Åben GeoKrety.org registreringsside</string>
     <string name="settings_open_geokretymap_website">Åbn GeoKretyMap.org hjemmeside</string>
     <string name="settings_settings">Indstillinger</string>
     <string name="settings_information">Information</string>
@@ -725,7 +692,6 @@
     <string name="settings_ec_icons_other">Egen symbolstil</string>
     <string name="settings_ec_icons_oc">Som OC</string>
     <string name="settings_features">Understøttede funktioner</string>
-    <string name="feature_description">Følgende <b>online</b> funktioner på dette website er understøttet i c:geo (ud over offline-funktionerne):</string>
     <string name="feature_personal_notes">Personlig note</string>
     <string name="feature_online_logging">Online logning</string>
     <string name="feature_log_images">Vedhæft billeder til logbeskeder</string>
@@ -740,9 +706,6 @@
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Tidligere Mapsforge V3</string>
     <string name="init_mfold_api_description">Den aktuelle udgave af c:geo benytter en beta version af det nye Mapsforge kortformat. Hvis du mangler funktionalitet eller oplever problemer kan du vælge at bruge den tidligere version af Mapsforge kortformat her.</string>
-    <string name="init_experimental_title">Eksperimentel funktionalitet</string>
-    <string name="init_mfbeta">Mapsforge Beta som standard</string>
-    <string name="init_mfbeta_description">c:geo indeholder eksperimentel understøttelse af Mapsforge-kort. Mapsforge-kort kan aktiveres her som standard for live og offline kort.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>
     <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
@@ -751,6 +714,10 @@
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
     <string name="far_distance">Far distance</string>
     <string name="near_distance">Near distance</string>
+    <string name="init_proximity_notification_type">Type of notification</string>
+    <string name="pn_tone_only">Tone only</string>
+    <string name="pn_text_only">Text only</string>
+    <string name="pn_tone_and_text">Tone + text</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -786,7 +753,6 @@
     <string name="auth_credentials_explain_short">Den følgende opsætningsguide vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
     <string name="auth_credentials_explain_long">Ved at udfylde dine legitimationsoplysninger og trykke på \"Kontrollér autentifikation\" starter opsætningen. Under opsætningen vil der blive hentet autentifikationsoplysninger fra %s.</string>
     <!-- auth token -->
-    <string name="auth_token_register">Opret en konto</string>
     <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
     <string name="auth_token_explain_long">Ved at udfylde dine legitimationsoplysninger og aktivere \"Autorisér c:geo\"-knappen starter opsætningen. Under opsætningen vil der blive hentet et autentifikationsobjekt fra %s.</string>
     <!-- auth Twitter -->
@@ -820,12 +786,8 @@
     <string name="cache_offline_refresh">Genindlæs</string>
     <string name="cache_offline_drop">Fjern</string>
     <string name="cache_offline_store">Gem</string>
-    <string name="cache_offline_manage">Administrér</string>
-    <string name="cache_offline_store_in_list">Gem i liste</string>
     <string name="cache_offline_stored">Gemt i telefon</string>
     <string name="cache_offline_not_ready">Ikke klar\ntil offline brug</string>
-    <string name="cache_offline_time_about">For</string>
-    <string name="cache_offline_time_mins">minutter siden</string>
     <string name="cache_offline_time_mins_few">få minutter siden</string>
     <plurals name="cache_offline_about_time_mins">
         <item quantity="one">cirka %d minut siden</item>
@@ -844,9 +806,6 @@
         <item quantity="other">cirka %d måneder siden</item>
     </plurals>
     <string name="cache_offline_about_time_year">over et år siden</string>
-    <string name="cache_offline_time_hour">en time siden</string>
-    <string name="cache_offline_time_hours">timer siden</string>
-    <string name="cache_offline_time_days">dage siden</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Attributter</string>
     <string name="cache_inventory">Inventar</string>
@@ -862,7 +821,6 @@
     <string name="cache_personal_note_upload_error">Fejl ved upload af personlig note</string>
     <string name="cache_personal_note_upload_cancelled">Upload af personlig note blev afbrudt</string>
     <string name="cache_description">Beskrivelse</string>
-    <string name="cache_description_long">Lang beskrivelse</string>
     <string name="cache_description_table_note">Beskrivelsen indeholder tabeller som måske kun kan vises korrekt på %s.</string>
     <string name="cache_area_description">Områdebeskrivelse</string>
     <string name="cache_cache_description">Cachebeskrivelse</string>
@@ -873,15 +831,8 @@
     <string name="cache_watchlist_on_extra">Denne cache er på din overvågningsliste (overvåget af %1d).</string>
     <string name="cache_watchlist_not_on">Denne cache er ikke på din overvågningsliste.</string>
     <string name="cache_watchlist_not_on_extra">Denne cache er ikke på din overvågningsliste (overvåget af %1d).</string>
-    <string name="cache_watchlist_add">Tilføj til overvågningsliste</string>
-    <string name="cache_watchlist_remove">Fjern fra overvågningsliste</string>
     <string name="cache_favpoint_on">Dette er en favoritcache.</string>
     <string name="cache_favpoint_not_on">Denne cache er ikke blandt dine favoritter.</string>
-    <string name="cache_favpoint_add">Tilføj</string>
-    <string name="cache_favpoint_remove">Fjern</string>
-    <string name="cache_list_text">Liste:</string>
-    <string name="cache_list_change">Flyt</string>
-    <string name="cache_list_unknown">Ikke i nogen liste</string>
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
     <string name="cache_waypoints">Waypoints</string>
@@ -950,7 +901,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_pebble">Pebble</string>
-    <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Bedøm</string>
     <string name="cache_menu_checker">Åben Geochecker</string>
     <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
@@ -1033,14 +983,10 @@
     <string name="simple_dir_chooser_current_path">Sti:</string>
     <string name="simple_dir_chooser_invalid_path">Ugyldig sti</string>
     <!-- gpx -->
-    <string name="gpx_import_loading_caches">Indlæser cacher fra GPX-fil</string>
     <string name="gpx_import_loading_caches_with_filename">Indlæser cacher fra %1$s</string>
-    <string name="gpx_import_loading_waypoints">Indlæser waypoints fra fil</string>
     <string name="gpx_import_loading_waypoints_with_filename">Indlæser waypoints fra %1$s</string>
-    <string name="gpx_import_caches_imported">importerede cacher</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d cacher importeret fra %2$s</string>
     <string name="gpx_import_static_maps_skipped">Indlæsning af statiske kort blev afbrudt</string>
-    <string name="gpx_import_title_static_maps">Gem statiske kort</string>
     <string name="gpx_import_title_reading_file">Indlæser fil</string>
     <string name="gpx_import_title">Importér GPX</string>
     <string name="gpx_import_title_caches_imported">Resultat</string>
@@ -1048,7 +994,6 @@
     <string name="gpx_import_error_io">Filen kan ikke læses</string>
     <string name="gpx_import_error_parser">Ugyldigt filformat</string>
     <string name="gpx_import_error_unexpected">Uventet fejl</string>
-    <string name="gpx_import_canceled">Import af GPX blev afbrudt</string>
     <string name="gpx_import_canceled_with_filename">GPX-import fra %1$s blev afbrudt</string>
     <string name="gpx_import_delete_title">Slet fil</string>
     <string name="gpx_import_delete_message">Vil du slette %s?</string>
@@ -1097,14 +1042,11 @@
     <string name="waypoint_reset">Nulstil</string>
     <string name="waypoint_localy_reset_cache_coords">Nulstil i c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Nulstil i c:geo og på website</string>
-    <string name="waypoint_being_saved">Waypoint gemmes…</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Websitet understøtter ikke ændringer til cacheposition.</string>
     <string name="waypoint_coordinates_upload_error">Der opstod en fejl under ændring af positionen på websitet.</string>
-    <string name="waypoint_coordinates_uploading_to_website">Sender positionen %s til websitet.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Cachepositionen på websitet blev ændret til: %s.</string>
     <string name="waypoint_done">Udført</string>
     <string name="waypoint_duplicate">Duplikér waypoint</string>
-    <string name="waypoint_duplicated">Waypoint duplikeret</string>
     <string name="waypoint_copy_of">Kopi af</string>
     <string name="waypointcalc_notes_prompt">Indtast noter her…</string>
     <string name="waypoint_coordinate_formats_plain">Simpel</string>
@@ -1119,6 +1061,7 @@
     <string name="map_modes">Kortindstillinger</string>
     <string name="map_trail_show">Vis spor</string>
     <string name="map_dot_mode">Brug små ikoner</string>
+    <string name="map_autorotate">Map autorotate</string>
     <string name="map_circles_show">Vis cirkler</string>
     <string name="map_mycaches_hide">Skjul egne/fundne cacher</string>
     <string name="map_disabled_hide">Skjul deaktiverede cacher</string>
@@ -1127,9 +1070,6 @@
     <string name="map_theme_options">Indstillinger for tema</string>
     <string name="map_live_enable">Aktivér live</string>
     <string name="map_live_disable">Deaktivér live</string>
-    <string name="map_static_title">Statiske kort</string>
-    <string name="map_static_loading">Indlæser statiske kort…</string>
-    <string name="map_token_err">Fordi c:geo kun delvist kan downloade data, kan cachepositionerne være upræcise.</string>
     <string name="map_as_list">Vis som liste</string>
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
     <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
@@ -1161,13 +1101,11 @@
     <string name="search_tb_hint">Trackable id</string>
     <string name="search_tb_button">Søg trackable</string>
     <string name="search_destination">Destination</string>
-    <string name="search_direction_rel">Fra denne position</string>
     <string name="search_address_started">Søger efter steder</string>
     <string name="search_address_result">Fundne steder</string>
     <string name="search_own_caches">Søg i mine cacher</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Indlæser liste af Pocket Queries</string>
-    <string name="search_pocket_select">Vælg Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Indlæser detaljer om Trackable…</string>
@@ -1219,8 +1157,6 @@
     <string name="use_compass">GPS og magnetisk kompas i brug</string>
     <string name="destination_select">Vælg destination</string>
     <string name="navigation_direct_navigation">Direkte navigation</string>
-    <string name="navigation_target">Mål</string>
-    <string name="err_nav_no_coordinates">Kan ikke starte navigation uden position</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
     <!-- license -->
     <string name="license">Licens</string>
@@ -1247,15 +1183,10 @@
     <string name="helper_pocketquery_description">Giver mulighed for let at oprette og downloade Pocket Queries baseret på din position eller et valgt punkt på et kort. Kræver Premium-medlemskab på geocaching.com.</string>
     <string name="helper_google_translate_title">Google Oversæt</string>
     <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
-    <string name="helper_wear_title">c:geo Wear</string>
-    <string name="helper_wear_description">c:geo Wear er et plugin til c:geo, der lader dig navigere til geocacher ved hjælp af din Android Wear smartwatch.</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo giver mulighed for at afspille og søge efter geocacher af typen Wherigo. c:geo kan automatisk starte download af cartridges i denne app.</string>
     <string name="helper_brouter_title">BRouter offline navigation</string>
     <string name="helper_brouter_description">BRouter kan udføre offline navigation. Hvis BRouter er installeret og de nødvendige datafiler er downloaded, så kan c:geo automatisk vise en rute til cachen på det interne kort.</string>
-    <!-- add-ons -->
-    <string name="addon_missing_title">Manglende plugin</string>
-    <string name="addon_download_prompt">Hent fra Google Play nu.</string>
     <!-- export -->
     <string name="export">Eksportér</string>
     <string name="export_progress">Eksportér: %1$s</string>
@@ -1580,11 +1511,7 @@
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktivér</string>
     <string name="init_geokrety">GeoKrety.org</string>
-    <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
     <string name="init_summary_geokrety">Aktivér trackables fra GeoKrety.org</string>
-    <string name="init_summary_geokrety_account">Ingen konto er konfigureret.</string>
-    <string name="init_geokrety_register_ok">Login fuldført</string>
-    <string name="init_geokrety_register_fail">Login fejlede</string>
     <string name="init_geokrety_description">Autorisér c:geo til at logge GeoKrety trackables på GeoKrety.org.</string>
     <string name="init_geokrety_userid">Brugerid: %s</string>
     <string name="trackable_title_log_without_geocode">Geokode ikke sendt</string>
@@ -1622,15 +1549,9 @@
     <string name="unit_ft">fod</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">mil</string>
-    <string name="pq_available_for_download">Pocket Query er tilgængelig til download</string>
-    <string name="pq_available_for_download_description">Denne Pocket Query er tilgængelig til download som én fil (GPX). Vil du downloade og importere den eller se cacherne som en liste?</string>
-    <string name="pq_as_cache_list">Vis cacheliste</string>
     <string name="pq_download_and_import">Importér Pocket Query</string>
-    <string name="pq_my_finds">Mine fund</string>
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
-    <string name="cache_list_remove_from">Fjern fra liste</string>
     <string name="list_list_headline">Lister:</string>
-    <string name="cache_store_list">Gem i liste</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint udtrukket</item>
         <item quantity="other">%d waypoints udtrukket</item>
@@ -1665,4 +1586,8 @@
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
+    <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">c:geo notifications</string>
+    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
+    <string name="proximity_notification_title">c:geo proximity notification</string>
 </resources>

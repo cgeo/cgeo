@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">Expoziţie \"Aventuri cu GPS\"</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Locationless (Reverse) Cache</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Tip necunoscut</string>
     <!-- cache sizes -->
@@ -97,7 +98,6 @@
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
     <string name="log_clear">Şterge</string>
     <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
-    <string name="log_post_geocode_missing">Lipsă Geocod…</string>
     <string name="log_date_future_not_allowed">Nu sunt permise însemnări datate în viitor.</string>
     <string name="log_add">Adaugă</string>
     <string name="log_repeat">Repetă ultima însemnare</string>
@@ -180,10 +180,7 @@
     <string name="err_detail_cache_find">c:geo nu găseşte cutia</string>
     <string name="err_detail_cache_find_some">c:geo nu găseşte acea cutie.</string>
     <string name="err_detail_cache_find_any">c:geo nu poate găsi nici o cutie.</string>
-    <string name="err_detail_google_maps_limit_reached">c:geo nu a putut descărca harta. Posibil să fi fost depăşită limita impusă de Google Maps API.</string>
     <string name="err_detail_no_spoiler">c:geo nu a găsit imagini pentru această geocutie.</string>
-    <string name="err_detail_no_map_static">c:geo nu a găsit hartă pentru această cutie.</string>
-    <string name="err_detail_not_load_map_static">c:geo nu a putut descărca harta.</string>
     <string name="err_detail_still_working">Încă se procesează o altă comandă.</string>
     <string name="err_watchlist_still_managing">Încă lucrez la lista obiectelor urmărite.</string>
     <string name="err_watchlist_failed">Modificarea listei de cutii urmărite a eşuat.</string>
@@ -207,19 +204,15 @@
     <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
     <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
     <string name="err_waypoint_add_failed">c:geo nu a putut adăuga punctul.</string>
-    <string name="err_point_unknown_position">c:geo nu poate determina unde te afli.</string>
     <string name="err_point_bear_and_dist_title">Ai nevoie de ajutor?</string>
     <string name="err_point_bear_and_dist">Completează şi azimutul şi distanţa. Azimutul este unghiul de la 0 la 360 faţă de nord. Distanţa nu necesită unităţi.</string>
     <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>
-    <string name="err_log_load_data_again">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare. Te rog încearcă din nou.</string>
-    <string name="err_log_load_data_still">c:geo încă încarcă informaţiale necesare pentru a posta o însemnare. Te rog mai aşteaptă.</string>
     <string name="err_log_post_missing_tracking_code">Lipseşte codul de urmărire.</string>
     <string name="err_log_post_missing_coordinates">Lipsesc coordonatele.</string>
     <string name="err_log_post_failed">Se pare că însemnarea ta nu a fost postată. Te rog verifică pe site-ul pe care se află publicată această geocutie.</string>
     <string name="err_log_post_failed_ec">Se pare că însemnarea nu a fost postată. Verifică pe Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Se pare că însemnarea nu a fost postată. Verifică pe GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Se pare că imaginea pe care încercai să o trimiţi odată cu însemnarea nu a putut fi încărcată. Te rog verifică însemnarea în jurnalul geocutiei pe site-ul unde este publicată.</string>
-    <string name="err_search_address_forgot">c:geo a uitat adresa pe care o căutai.</string>
     <string name="err_parse_lat">c:geo nu înţelege latitudinea.</string>
     <string name="err_parse_lon">c:geo nu înţelege longitudinea.</string>
     <string name="err_parse_dist">c:geo nu înţelege distanţa.</string>
@@ -268,7 +261,6 @@
     <string name="err_trackable_no_preference_activity">Ecranul de configurare adecvat nu a fost găsit.</string>
     <string name="confirm_unsaved_changes_title">Modificări nesalvate</string>
     <string name="confirm_discard_wp_changes">Renunţă la modificările nesalvate de la acest punct?</string>
-    <string name="warn_discard_changes">Modificările nesalvate vor fi anulate!</string>
     <string name="err_request_popup_info">c:geo nu a reuşit să obţină informaţiile minime despre geocutie.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
@@ -345,20 +337,8 @@
     <string name="caches_select_mode_exit">Renunţă la modul selecţie</string>
     <string name="caches_select_invert">Inversează selecţia</string>
     <string name="caches_nearby">În apropiere</string>
-    <string name="caches_manage">Gestionează</string>
     <string name="caches_remove_all">Șterge toate</string>
-    <plurals name="caches_remove_all_confirm">
-        <item quantity="one">Vrei să ştergi această geocutie din lista curentă?</item>
-        <item quantity="few">Vrei să ştergi toate %d geocutiile din lista curentă?</item>
-        <item quantity="other">Vrei să ştergi toate %d geocutiile din lista curentă?</item>
-    </plurals>
     <string name="caches_remove_selected">Şterge geocutiile selectate</string>
-    <plurals name="caches_remove_selected_confirm">
-        <item quantity="one">Vrei să ştergi această geocutie din dispozitivul tău?</item>
-        <item quantity="few">Vrei să ştergi cele %d geocutii selectate din dispozitivul tău?</item>
-        <item quantity="other">Vrei să ştergi cele %d geocutii selectate din dispozitivul tău?</item>
-    </plurals>
-    <string name="caches_remove_progress">Ştergere geocutii</string>
     <string name="caches_delete_events">Şterge evenimentele trecute</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
@@ -373,10 +353,6 @@
     <string name="caches_copy_all">Copiază tot</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Exportă către Locus</string>
-    <string name="caches_recaptcha_title">reCAPTCHA</string>
-    <string name="caches_recaptcha_explanation">Tastează textul din imagine. Aceasta permite descărcarea coordonatelor cutiilor, acest lucru poate fi dezactivat în Opţiuni.</string>
-    <string name="caches_recaptcha_hint">Textul din imagine</string>
-    <string name="caches_recaptcha_continue">Continuă</string>
     <string name="caches_filter">Filtru</string>
     <string name="caches_filter_title">Filtrează după</string>
     <string name="caches_filter_size">Dimensiune</string>
@@ -404,7 +380,6 @@
     <string name="caches_make_list_unique">Marchează lista unică</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
     <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestiune liste</string>
@@ -414,19 +389,15 @@
     <string name="list_menu_import">Import</string>
     <string name="list_title">Alege o listă</string>
     <string name="lists_title">Alege listele</string>
-    <string name="lists_remove_all">Nici una</string>
     <string name="list_inbox">Salvate</string>
     <string name="list_all_lists">Toate cutiile</string>
     <string name="list_dialog_create_title">Listă nouă</string>
     <string name="list_dialog_create">Crează</string>
-    <string name="list_dialog_create_ok">A fost creată o listă nouă</string>
     <string name="list_dialog_create_err">c:geo nu a putut crea lista</string>
     <string name="list_dialog_remove_title">Şterge listă</string>
     <string name="list_dialog_remove_description">Vrei să ştergi lista curentă? Toate cutiile din listă vor fi mutate în lista \"Salvate\".</string>
     <string name="list_dialog_remove_nowempty">Lista este goală. Vrei să o ştergi?</string>
     <string name="list_dialog_remove">Şterge</string>
-    <string name="list_dialog_remove_ok">Lista a fost ştearsă</string>
-    <string name="list_dialog_remove_err">c:geo nu a putut şterge lista curentă</string>
     <string name="list_dialog_rename_title">Redenumeşte lista</string>
     <string name="list_dialog_rename">Redenumește</string>
     <string name="list_not_available">Lista nu mai există, revenire la lista standard</string>
@@ -482,6 +453,7 @@
     <string name="settings_title_map">Hartă</string>
     <string name="settings_summary_map">Alege sursele pentru hărţi, setări pentru hărţile salvate local şi alte detalii.</string>
     <string name="settings_title_map_data">Configurare hărţi</string>
+    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Dosar geocutii</string>
@@ -505,10 +477,8 @@
     <string name="settings_goto_url_button">mai multe…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
-    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_activate_gc">Activează</string>
     <string name="settings_activate_ec">Activează</string>
-    <string name="settings_activate_ox">Activează</string>
     <string name="settings_gc_legal_note">Folosind serviciul Geocaching.com declari că ai accepţi condiţiile de utilizare ale Groundspeak Inc.</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">Nu poţi face c:geo să se autentifice la geocaching.com cu contul tău de Facebook. Dar există o soluţie simplă…</string>
@@ -550,9 +520,6 @@
     <string name="gcvote_sent">Votul a fost trimis</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activează</string>
-    <string name="init_username">Utilizator</string>
-    <string name="init_password">Parolă</string>
-    <string name="init_login">Verifică autentificare</string>
     <string name="init_login_popup">Autentificare</string>
     <string name="init_login_popup_working">Autentificare în curs…</string>
     <string name="init_login_popup_ok">Autentificare REUŞITĂ</string>
@@ -590,8 +557,6 @@
     <string name="init_summary_skin">Foloseşte culori luminoase (necesită repornirea aplicaţiei)</string>
     <string name="init_address">Arată adresa</string>
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
-    <string name="init_captcha">Arată CAPTCHA</string>
-    <string name="init_summary_captcha">Arată CAPTCHA dacă este necesar (doar Basic Member)</string>
     <string name="init_useenglish">Foloseşte limba engleză</string>
     <string name="init_summary_useenglish">Foloseşte limba engleză în c:geo (Aplicaţia trebuie repornită)</string>
     <string name="init_exclude">Exclude Găsite şi Ale mele</string>
@@ -655,8 +620,10 @@
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
     <string name="settings_title_scale_map_text">Redimensionează textul de pe hartă</string>
     <string name="settings_summary_scale_map_text">Redimensionează textul afişat pe o hartă salvată în funcţie de rezoluţia ecranului</string>
-    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
     <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
     <string name="init_map_directory_description">Dosar cu hărţi salvate local</string>
     <string name="init_gpx_exportdir">Dosar Exporturi GPX</string>
     <string name="init_gpx_importdir">Dosar Importuri GPX</string>
@@ -715,9 +682,7 @@
     <string name="init_hardware_acceleration_title">Afişare accelerată hardware</string>
     <string name="init_hardware_acceleration_note">Accelerarea hardware generează şi afişează mai rapid pe ecran elemente grafice. Pe unele dispozitive însă sistemul de operare Android conţine erori şi unele texte pot apărea neclar. (în special literele îngroşate). Dezactivează accelerarea hardware dacă ai această problemă.</string>
     <string name="init_hardware_acceleration">Activează accelerarea hardware</string>
-    <string name="settings_create_account">Crează cont</string>
     <string name="settings_open_website">Intră pe site</string>
-    <string name="settings_open_geokrety_register">Deschide pagina de înregistrare de la GeoKrety.org</string>
     <string name="settings_open_geokretymap_website">Deschide site-ul GeoKretyMap.org</string>
     <string name="settings_settings">Opţiuni</string>
     <string name="settings_information">Informaţii</string>
@@ -728,7 +693,6 @@
     <string name="settings_ec_icons_other">Stil propriu</string>
     <string name="settings_ec_icons_oc">La fel ca OC</string>
     <string name="settings_features">Funcţionalităţi disponibile</string>
-    <string name="feature_description">Următoarele funcţii <b>prin internet</b> ale acestui website sunt suportate de c:geo (în plus faţă de însemnările stocate local):</string>
     <string name="feature_personal_notes">Notă personală</string>
     <string name="feature_online_logging">Jurnal pe internet</string>
     <string name="feature_log_images">Ataşează imagini la însemnări</string>
@@ -743,9 +707,6 @@
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Old Mapsforge V3</string>
     <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
-    <string name="init_experimental_title">Funcţionalităţi experimentale</string>
-    <string name="init_mfbeta">Mapsforge beta ca implicit</string>
-    <string name="init_mfbeta_description">Versiunea curentă conţine o versiune beta a noii hărţi Mapsforge ca funcţionalitate experimentală. Aceasta poate fi activată aici ca hartă implicită pentru harta curentă, respectiv harţile de liste.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>
     <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
@@ -754,6 +715,10 @@
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
     <string name="far_distance">Far distance</string>
     <string name="near_distance">Near distance</string>
+    <string name="init_proximity_notification_type">Type of notification</string>
+    <string name="pn_tone_only">Tone only</string>
+    <string name="pn_text_only">Text only</string>
+    <string name="pn_tone_and_text">Tone + text</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: hartă</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -789,7 +754,6 @@
     <string name="auth_credentials_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
     <string name="auth_credentials_explain_long">Introducând numele de utilizator şi parola şi apăsând butonul \"Verifică autentificarea\" va începe procesul. Acesta se va conecta la %s şi va încerca să valideze datele tale. Asta-i tot.</string>
     <!-- auth token -->
-    <string name="auth_token_register">Creează un cont nou</string>
     <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
     <string name="auth_token_explain_long">Introducând informaţiile tale de autentificare şi apăsând butonul \"autorizează c:geo\" va porni procesul de autorizare. Acesta se va conecta la %s şi va obţine un token de autentificare. Asta e tot.</string>
     <!-- auth Twitter -->
@@ -825,12 +789,8 @@
     <string name="cache_offline_refresh">Împrospătează</string>
     <string name="cache_offline_drop">Şterge</string>
     <string name="cache_offline_store">Salvează</string>
-    <string name="cache_offline_manage">Gestionează</string>
-    <string name="cache_offline_store_in_list">Salvează în listă</string>
     <string name="cache_offline_stored">Salvată pe dispozitiv</string>
     <string name="cache_offline_not_ready">Indisponibilă fără internet</string>
-    <string name="cache_offline_time_about">despre</string>
-    <string name="cache_offline_time_mins">minute în urmă</string>
     <string name="cache_offline_time_mins_few">câteva minute în urmă</string>
     <plurals name="cache_offline_about_time_mins">
         <item quantity="one">acum un minut</item>
@@ -853,9 +813,6 @@
         <item quantity="other">about %d months ago</item>
     </plurals>
     <string name="cache_offline_about_time_year">over a year ago</string>
-    <string name="cache_offline_time_hour">o oră în urmă</string>
-    <string name="cache_offline_time_hours">ore în urmă</string>
-    <string name="cache_offline_time_days">zile în urmă</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Atribute</string>
     <string name="cache_inventory">Inventar</string>
@@ -871,7 +828,6 @@
     <string name="cache_personal_note_upload_error">Eroare la încărcarea notei personale</string>
     <string name="cache_personal_note_upload_cancelled">Încărcarea notei personale a fost anulată</string>
     <string name="cache_description">Descriere</string>
-    <string name="cache_description_long">Descriere completă</string>
     <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>
     <string name="cache_area_description">Area Description</string>
     <string name="cache_cache_description">Cache Description</string>
@@ -882,15 +838,8 @@
     <string name="cache_watchlist_on_extra">Urmăreşti acestă geocutie (urmărită de %1d).</string>
     <string name="cache_watchlist_not_on">Această cutie nu se află în lista ta de cutii urmărite.</string>
     <string name="cache_watchlist_not_on_extra">Nu urmăreşti acestă geocutie (urmărită de %1d).</string>
-    <string name="cache_watchlist_add">Adaugă în lista de cutii urmărite</string>
-    <string name="cache_watchlist_remove">Şterge din lista de cutii urmărite</string>
     <string name="cache_favpoint_on">Această cutie e una din favoritele tale.</string>
     <string name="cache_favpoint_not_on">Cutia nu este printre favoritele tale.</string>
-    <string name="cache_favpoint_add">Adaugă</string>
-    <string name="cache_favpoint_remove">Şterge</string>
-    <string name="cache_list_text">Listă:</string>
-    <string name="cache_list_change">Mută</string>
-    <string name="cache_list_unknown">În nici o listă</string>
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
     <string name="cache_waypoints">Puncte</string>
@@ -960,7 +909,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
-    <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Votează</string>
     <string name="cache_menu_checker">Accesează Geochecker</string>
     <string name="cache_menu_challenge_checker">Caută provocări</string>
@@ -1043,14 +991,10 @@
     <string name="simple_dir_chooser_current_path">Cale:</string>
     <string name="simple_dir_chooser_invalid_path">Cale greşită</string>
     <!-- gpx -->
-    <string name="gpx_import_loading_caches">Încărcare cutii din fisier .gpx</string>
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
-    <string name="gpx_import_loading_waypoints">Încărcare fişier cu puncte</string>
     <string name="gpx_import_loading_waypoints_with_filename">Se încarcă punctele din %1$s</string>
-    <string name="gpx_import_caches_imported">cutii importate</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d geocutii importate din %2$s</string>
     <string name="gpx_import_static_maps_skipped">Descărcarea hărţilor statice a fost anulată</string>
-    <string name="gpx_import_title_static_maps">Salvează hărţile statice</string>
     <string name="gpx_import_title_reading_file">Citire fişier</string>
     <string name="gpx_import_title">Importă GPX</string>
     <string name="gpx_import_title_caches_imported">Rezultat</string>
@@ -1058,7 +1002,6 @@
     <string name="gpx_import_error_io">Fişierul nu poate fi citit</string>
     <string name="gpx_import_error_parser">Fişier defect sau format greşit</string>
     <string name="gpx_import_error_unexpected">Eroare neașteptată</string>
-    <string name="gpx_import_canceled">Importul de fişier GPX a fost anulat</string>
     <string name="gpx_import_canceled_with_filename">A fost anulat importul GPX din %1$s</string>
     <string name="gpx_import_delete_title">Şterge fişier</string>
     <string name="gpx_import_delete_message">Vrei să ştergi fişierul %s?</string>
@@ -1107,14 +1050,11 @@
     <string name="waypoint_reset">Reset</string>
     <string name="waypoint_localy_reset_cache_coords">Resetează în c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Resetează în c:geo şi pe site</string>
-    <string name="waypoint_being_saved">Punctul este salvat…</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Site-ul nu suportă modificarea coordonatelor geocutiei.</string>
     <string name="waypoint_coordinates_upload_error">Eroare în timp ce încercam să modific coordonatele pe site.</string>
-    <string name="waypoint_coordinates_uploading_to_website">Încărcare coordonate %s în site.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Coordonatele geocutiei de pe site au fost modificate la: %s.</string>
     <string name="waypoint_done">Gata</string>
     <string name="waypoint_duplicate">Duplică punct</string>
-    <string name="waypoint_duplicated">Punct duplicat</string>
     <string name="waypoint_copy_of">Copie după</string>
     <string name="waypointcalc_notes_prompt">Introduceţi aici observaţiile…</string>
     <string name="waypoint_coordinate_formats_plain">Simplu</string>
@@ -1129,6 +1069,7 @@
     <string name="map_modes">Opţiuni hărţi</string>
     <string name="map_trail_show">Arată traseu</string>
     <string name="map_dot_mode">Use compact icons</string>
+    <string name="map_autorotate">Map autorotate</string>
     <string name="map_circles_show">Arată cercurile</string>
     <string name="map_mycaches_hide">Ascunde geocutiile mele/găsite</string>
     <string name="map_disabled_hide">Ascunde geocutiile inactive</string>
@@ -1137,9 +1078,6 @@
     <string name="map_theme_options">Theme Options</string>
     <string name="map_live_enable">Ia de pe net</string>
     <string name="map_live_disable">Fără internet</string>
-    <string name="map_static_title">Hărţi statice</string>
-    <string name="map_static_loading">Încărcare hărţi statice…</string>
-    <string name="map_token_err">Pentru că c:geo poate doar să descarce informaţii parţiale, coordonatele cutiilor pot fi imprecise.</string>
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_clear_trailhistory">Clear trail history</string>
     <string name="map_trailhistory_cleared">trail history cleared</string>
@@ -1171,13 +1109,11 @@
     <string name="search_tb_hint">Codul obiectului călător</string>
     <string name="search_tb_button">Caută obiect călător</string>
     <string name="search_destination">Destinaţie</string>
-    <string name="search_direction_rel">Pornind de la această poziţie</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
     <string name="search_own_caches">Caută cutiile mele</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Încărcare listă de \"Pocket Queries\"</string>
-    <string name="search_pocket_select">Alege \"Pocket Query\"</string>
     <!-- trackable -->
     <string name="trackable">Obiecte călătoare</string>
     <string name="trackable_details_loading">Încărcare detalii obiect călător…</string>
@@ -1229,8 +1165,6 @@
     <string name="use_compass">Foloseşte GPS şi busolă magnetică</string>
     <string name="destination_select">Alege destinaţia</string>
     <string name="navigation_direct_navigation">Navigare directă</string>
-    <string name="navigation_target">Ţintă</string>
-    <string name="err_nav_no_coordinates">Nu se poate porni navigarea fără coordonate</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
     <!-- license -->
     <string name="license">Licenţă</string>
@@ -1257,15 +1191,10 @@
     <string name="helper_pocketquery_description">Permite crearea de Pocket Queries centrate pe poziţia ta actuală sau a unui punct de pe hartă. Necesită cont premium pe Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
-    <string name="helper_wear_title">c:geo Wear</string>
-    <string name="helper_wear_description">c:geo Wear este un modul pentru c:geo care îţi permite să navighezi către geocutii folosindu-ţi Smartwatch Android Wear.</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
     <string name="helper_brouter_title">Navigare independentă cu BRouter</string>
     <string name="helper_brouter_description">BRouter oferă servicii de dirijare offline. În cazul în care această aplicaţie este instalată şi au fost descărcate în ea fişierele necesare, c:geo poate să arate traseul pe harta sa proprie.</string>
-    <!-- add-ons -->
-    <string name="addon_missing_title">Extensie lipsă</string>
-    <string name="addon_download_prompt">Ia acum de pe Google Play.</string>
     <!-- export -->
     <string name="export">Exportă</string>
     <string name="export_progress">Export: %1$s</string>
@@ -1597,11 +1526,7 @@
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Activează</string>
     <string name="init_geokrety">GeoKrety.org</string>
-    <string name="init_connectorGeokretyActive">Geokrety</string>
     <string name="init_summary_geokrety">Activează obiecte călătoare prin GeoKrety.org</string>
-    <string name="init_summary_geokrety_account">Nu exista nici un cont configurat.</string>
-    <string name="init_geokrety_register_ok">Autentificare reuşită</string>
-    <string name="init_geokrety_register_fail">Autentificare eșuată</string>
     <string name="init_geokrety_description">Autorizează c:geo la GeoKrety.org pentru a însemna obiecte călătoare de tip GeoKrety.</string>
     <string name="init_geokrety_userid">Id utilizator: %s</string>
     <string name="trackable_title_log_without_geocode">Lipseşte geocodul</string>
@@ -1643,15 +1568,9 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">zd</string>
     <string name="unit_mi">mi</string>
-    <string name="pq_available_for_download">Căutarea personalizată este gata pentru descărcare</string>
-    <string name="pq_available_for_download_description">Această căutare personalizată poate fi descărcată ca un singur fişier (GPX). Vrei să-l descarci şi să-l imporţi sau să afişezi geocutiile într-o listă?</string>
-    <string name="pq_as_cache_list">Afişează lista geocutiilor</string>
     <string name="pq_download_and_import">Importă căutare personalizată</string>
-    <string name="pq_my_finds">Găsirile mele</string>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
-    <string name="cache_list_remove_from">Şterge din listă</string>
     <string name="list_list_headline">Liste:</string>
-    <string name="cache_store_list">Salvează în listă</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punct extras</item>
         <item quantity="few">%d puncte extrase</item>
@@ -1687,4 +1606,8 @@
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
+    <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">c:geo notifications</string>
+    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
+    <string name="proximity_notification_title">c:geo proximity notification</string>
 </resources>

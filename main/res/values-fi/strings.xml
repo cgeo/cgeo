@@ -32,6 +32,7 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit -kätkö</string>
     <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Locationless (Reverse) Cache</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <!-- cache sizes -->
@@ -97,7 +98,6 @@
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
     <string name="log_clear">Tyhjennä</string>
     <string name="log_post_not_possible">Datan lataus käynnissä…\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
-    <string name="log_post_geocode_missing">Geokoodi puuttuu…</string>
     <string name="log_date_future_not_allowed">Tulevaisuuden päivämäärät eivät ole sallittuja lokissa.</string>
     <string name="log_add">Lisää</string>
     <string name="log_repeat">Toista edellinen loki</string>
@@ -180,10 +180,7 @@
     <string name="err_detail_cache_find">c:geo ei löydä geokätköä</string>
     <string name="err_detail_cache_find_some">c:geo ei löydä kyseistä geokätköä.</string>
     <string name="err_detail_cache_find_any">c:geo ei löydä yhtään geokätköä.</string>
-    <string name="err_detail_google_maps_limit_reached">c:geo ei onnistunut lataamaan staattisia karttoja. Ehkä Google Maps API:n käyttöraja tuli vastaan.</string>
     <string name="err_detail_no_spoiler">c:geo ei löytänyt kätkön spoilerikuvia.</string>
-    <string name="err_detail_no_map_static">c:geo ei löytänyt kätkön staattista karttaa.</string>
-    <string name="err_detail_not_load_map_static">c:geo ei voinut ladata staattisia karttoja.</string>
     <string name="err_detail_still_working">Työstetään vielä toista tehtävää.</string>
     <string name="err_watchlist_still_managing">Käsitellään edelleen tarkkailulistaasi.</string>
     <string name="err_watchlist_failed">Tarkkailulistasi muuttaminen epäonnistui.</string>
@@ -207,19 +204,15 @@
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>
     <string name="err_waypoint_cache_unknown">c:geo ei tiedä minkä kätkön haluat lisätä välietapiksi.</string>
     <string name="err_waypoint_add_failed">c:geo epäonnistui välietapin lisäämisessä.</string>
-    <string name="err_point_unknown_position">c:geo ei tunnista missä olet.</string>
     <string name="err_point_bear_and_dist_title">Tarvitsetko apua?</string>
     <string name="err_point_bear_and_dist">Täytä sekä suunta että matka. Suunta on 0–360 asteen kulma suhteessa pohjoiseen. Matka ei vaadi yksikköä.</string>
     <string name="err_log_load_data">c:geo ei voi ladata kirjaamiseen tarvittavia tietoja.</string>
-    <string name="err_log_load_data_again">c:geo ei voi ladata lokiin tarvittavaa dataa. Yritetään uudestaan</string>
-    <string name="err_log_load_data_still">c:geo lataa edelleen lokiin tarvittavia tietoja. Odotathan vielä hetken.</string>
     <string name="err_log_post_missing_tracking_code">Seurantakoodi puuttuu.</string>
     <string name="err_log_post_missing_coordinates">Koordinaatit puuttuvat.</string>
     <string name="err_log_post_failed">Näyttää että lokiasi ei julkaistu. Tarkista se kätkön alkuperäiseltä nettisivulta.</string>
     <string name="err_log_post_failed_ec">Näyttää siltä, että lokiasi ei kirjattu. Ole hyvä ja tarkista se osoitteessa Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Näyttää siltä, että lokiasi ei kirjattu. Ole hyvä ja tarkista se osoitteessa GeoKrety.org.</string>
     <string name="err_logimage_post_failed">Näyttää siltä että lokisi kuvaa ei ladattu. Tarkistathan sen kätkön alkuperäiseltä nettisivulta.</string>
-    <string name="err_search_address_forgot">c:geo unohti osoitteen, mitä yritit etsiä.</string>
     <string name="err_parse_lat">c:geo ei saanut käsiteltyä leveysastetta.</string>
     <string name="err_parse_lon">c:geo ei saanut käsiteltyä pituusastetta.</string>
     <string name="err_parse_dist">c:geo ei saanut käsiteltyä etäisyyttä.</string>
@@ -268,7 +261,6 @@
     <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
     <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
-    <string name="warn_discard_changes">Tallentamattomat etappimuutokset hylätty!</string>
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
@@ -344,18 +336,8 @@
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
-    <string name="caches_manage">Hallinnoi</string>
     <string name="caches_remove_all">Poista kaikki</string>
-    <plurals name="caches_remove_all_confirm">
-        <item quantity="one">Haluatko poistaa tämän kätkön nykyisestä listasta?</item>
-        <item quantity="other">Haluatko poistaa kaikki %d kätköä nykyisestä listasta?</item>
-    </plurals>
     <string name="caches_remove_selected">Poista valitut</string>
-    <plurals name="caches_remove_selected_confirm">
-        <item quantity="one">Haluatko poistaa tämä kätkön laitteestasi?</item>
-        <item quantity="other">Haluatko poistaa nämä %d kätköä laitteestasi?</item>
-    </plurals>
-    <string name="caches_remove_progress">Poistetaan kätköjä</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
@@ -370,10 +352,6 @@
     <string name="caches_copy_all">Kopioi kaikki</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Vie Locus:iin</string>
-    <string name="caches_recaptcha_title">reCAPTCHA</string>
-    <string name="caches_recaptcha_explanation">Ole hyvä ja kirjoita kuvan teksti. Tämä mahdollistaa kätkön koordinaattien lataamisen, mikä voidaan ottaa asetuksissa pois käytöstä.</string>
-    <string name="caches_recaptcha_hint">Kuvan teksti</string>
-    <string name="caches_recaptcha_continue">Jatka</string>
     <string name="caches_filter">Suodatin</string>
     <string name="caches_filter_title">Suodata</string>
     <string name="caches_filter_size">Koko</string>
@@ -401,7 +379,6 @@
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_marker">Marker %d</string>
     <string name="caches_listmarker_selected">(selected)</string>
     <!-- caches lists -->
     <string name="menu_lists">Hallitse listoja</string>
@@ -411,19 +388,15 @@
     <string name="list_menu_import">Tuo</string>
     <string name="list_title">Valitse lista</string>
     <string name="lists_title">Valitse listat</string>
-    <string name="lists_remove_all">Ei mitään</string>
     <string name="list_inbox">Tallennettu</string>
     <string name="list_all_lists">Kaikki kätköt</string>
     <string name="list_dialog_create_title">Uusi lista</string>
     <string name="list_dialog_create">Luo</string>
-    <string name="list_dialog_create_ok">Uusi lista luotiin</string>
     <string name="list_dialog_create_err">c:geo ei voinut luoda uutta listaa</string>
     <string name="list_dialog_remove_title">Poista lista</string>
     <string name="list_dialog_remove_description">Haluatko poistaa nykyisen listan? Kaikki jäljelle jäävät kätköt listassa siirretään \"Tallennettuihin\".</string>
     <string name="list_dialog_remove_nowempty">Lista on tyhjä. Haluatko poistaa nykyisen listan?</string>
     <string name="list_dialog_remove">Poista</string>
-    <string name="list_dialog_remove_ok">Lista poistettu</string>
-    <string name="list_dialog_remove_err">c:geo ei onnistunut poistamaan nykyistä listaa</string>
     <string name="list_dialog_rename_title">Uudelleennimeä luettelo</string>
     <string name="list_dialog_rename">Nimeä uudelleen</string>
     <string name="list_not_available">Luettelo ei ole enää saatavilla, vaihdetaan oletusluetteloon</string>
@@ -479,6 +452,7 @@
     <string name="settings_title_map">Kartta</string>
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
+    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_map_content">Kartan sisältö</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Kätködatan kansio</string>
@@ -502,10 +476,8 @@
     <string name="settings_goto_url_button">Lisää…</string>
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
-    <string name="settings_title_su">Geocaching.su</string>
     <string name="settings_activate_gc">Aktivoi</string>
     <string name="settings_activate_ec">Aktivoi</string>
-    <string name="settings_activate_ox">Aktivoi</string>
     <string name="settings_gc_legal_note">Käyttämällä geocaching.com -palvelua hyväksyt samalla Groundspeakin käyttöehdot.</string>
     <string name="settings_info_facebook_login_title">Facebook-kirjautuminen</string>
     <string name="settings_info_facebook_login">c:geo ei voi kirjautua geocaching.com:iin Facebook tilillä, mutta se on helppo kiertää…</string>
@@ -547,9 +519,6 @@
     <string name="gcvote_sent">Ääni lähetetty onnistuneesti</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktivoi</string>
-    <string name="init_username">Käyttäjätunnus</string>
-    <string name="init_password">Salasana</string>
-    <string name="init_login">Tarkista kirjaus</string>
     <string name="init_login_popup">Kirjaudu</string>
     <string name="init_login_popup_working">Kirjaudutaan sisään…</string>
     <string name="init_login_popup_ok">Sisäänkirjautuminen onnistui</string>
@@ -587,8 +556,6 @@
     <string name="init_summary_skin">Muuta sävy vaaleaksi (uudelleenkäynnistys tarvitaan)</string>
     <string name="init_address">Näytä osoite</string>
     <string name="init_summary_address">Näytä osoite koordinaattien sijaan pääsivulla</string>
-    <string name="init_captcha">Näytä CAPTCHA</string>
-    <string name="init_summary_captcha">Näytä CAPTCHA tarvittaessa  (vain peruskäyttäjät)</string>
     <string name="init_useenglish">Käytä englanniksi</string>
     <string name="init_summary_useenglish">Käytä c:geoa englanniksi (uudelleenkäynnistys tarvitaan)</string>
     <string name="init_exclude">Piilota omat ja löydetyt</string>
@@ -652,8 +619,10 @@
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="settings_title_scale_map_text">Skaalaa kartan tekstit</string>
     <string name="settings_summary_scale_map_text">Tekstinimiöt offline-kartalla valitaan laitteen tarkkuuden mukaan</string>
-    <string name="settings_title_map_manualrotation_disabled">Manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
     <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
     <string name="init_map_directory_description">Offline-karttojen polku</string>
     <string name="init_gpx_exportdir">GPX:n vientikansio</string>
     <string name="init_gpx_importdir">GPX:n tuontikansio</string>
@@ -712,9 +681,7 @@
     <string name="init_hardware_acceleration_title">Grafiikan parannus</string>
     <string name="init_hardware_acceleration_note">Laitteistokiihdytys esittää graafisia elementtejä nopeammin. Kuitenkin jotkut Android-laitteet sisältävät bugin, joka näyttää tekstit epäselvinä (huomattavan lihavoidut merkit). Ota laitteistokiihdytys pois käytöstä, jos tämä tapahtuu sinulle.</string>
     <string name="init_hardware_acceleration">Mahdollista laitteistokiihdytys</string>
-    <string name="settings_create_account">Luo tunnus</string>
     <string name="settings_open_website">Avaa sivusto</string>
-    <string name="settings_open_geokrety_register">Avaa GeoKrety.org rekisteröitymissivu</string>
     <string name="settings_open_geokretymap_website">Avaa GeoKretyMap.org nettisivu</string>
     <string name="settings_settings">Asetukset</string>
     <string name="settings_information">Tiedot</string>
@@ -725,7 +692,6 @@
     <string name="settings_ec_icons_other">Oma tyyli</string>
     <string name="settings_ec_icons_oc">Kuten OC</string>
     <string name="settings_features">Tuetut ominaisuudet</string>
-    <string name="feature_description">Seuraavat <b>online</b>-ominaisuudet tällä sivustolla ovat tuettuja c:geossa (offline-ominaisuuksien lisäksi):</string>
     <string name="feature_personal_notes">Omat merkinnät</string>
     <string name="feature_online_logging">Online-lokkaaminen</string>
     <string name="feature_log_images">Liitä kuvia lokeihin</string>
@@ -740,9 +706,6 @@
     <string name="init_mapsforge_api_title">Mapsforge-rajapinta</string>
     <string name="init_mfold_api">Vanha Mapsforge V3</string>
     <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
-    <string name="init_experimental_title">Kokeelliset ominaisuudet</string>
-    <string name="init_mfbeta">Mapsforge beta oletuksena</string>
-    <string name="init_mfbeta_description">Nykyinen julkaisu sisältää kokeellisena ominaisuutena beetaversion uudesta Mapsforge kartasta. Tämä uusi kartta voidaan aktivoida täällä oletus live- ja listakartaksi.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>
     <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
@@ -751,6 +714,10 @@
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
     <string name="far_distance">Far distance</string>
     <string name="near_distance">Near distance</string>
+    <string name="init_proximity_notification_type">Type of notification</string>
+    <string name="pn_tone_only">Tone only</string>
+    <string name="pn_text_only">Text only</string>
+    <string name="pn_tone_and_text">Tone + text</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
@@ -786,7 +753,6 @@
     <string name="auth_credentials_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_credentials_explain_long">Täyttämällä käyttäjätietosi ja painamalla \"Tarkista todennus\"-painiketta aloitat prosessin. Tämä prosessi yhdistää %s ja käyttäjätiedot. Siinä kaikki.</string>
     <!-- auth token -->
-    <string name="auth_token_register">Luo käyttäjätili</string>
     <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_token_explain_long">Täyttämällä tiedot ja painamalla \"Valtuuta c:geo\" painiketta Aloitat tapahtuman. Tämä tapahtuma yhdistää %s ja hakea todennuksen. Siinä kaikki.</string>
     <!-- auth Twitter -->
@@ -820,12 +786,8 @@
     <string name="cache_offline_refresh">Päivitä</string>
     <string name="cache_offline_drop">Poista</string>
     <string name="cache_offline_store">Tallenna</string>
-    <string name="cache_offline_manage">Hallinnoi</string>
-    <string name="cache_offline_store_in_list">Tallenna listaan</string>
     <string name="cache_offline_stored">Tallennettu laitteeseen</string>
     <string name="cache_offline_not_ready">Ei käytettävissä offline-tilassa</string>
-    <string name="cache_offline_time_about">noin</string>
-    <string name="cache_offline_time_mins">Minuutteja sitten</string>
     <string name="cache_offline_time_mins_few">muutama minuutti sitten</string>
     <plurals name="cache_offline_about_time_mins">
         <item quantity="one">noin %d minuutti sitten</item>
@@ -844,9 +806,6 @@
         <item quantity="other">noin %d kuukautta sitten</item>
     </plurals>
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
-    <string name="cache_offline_time_hour">Tunti sitten</string>
-    <string name="cache_offline_time_hours">tunteja sitten</string>
-    <string name="cache_offline_time_days">päiviä sitten</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Määritteet</string>
     <string name="cache_inventory">Tavaraluettelo</string>
@@ -862,7 +821,6 @@
     <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
     <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
     <string name="cache_description">Kuvaus</string>
-    <string name="cache_description_long">Pitkä kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
     <string name="cache_area_description">Area Description</string>
     <string name="cache_cache_description">Kätkön kuvaus</string>
@@ -873,15 +831,8 @@
     <string name="cache_watchlist_on_extra">Kätkö on seurantalistallasi (seuraajia: %1d).</string>
     <string name="cache_watchlist_not_on">Tämä kätkö ei ole seurantalistallasi.</string>
     <string name="cache_watchlist_not_on_extra">Kätkö ei ole seurantalistallasi (seuraajia: %1d).</string>
-    <string name="cache_watchlist_add">Lisää seurantalistalle</string>
-    <string name="cache_watchlist_remove">Poista seurantalistalta</string>
     <string name="cache_favpoint_on">Tämä kätkö on yksi suosikeistasi.</string>
     <string name="cache_favpoint_not_on">Tämä kätkö ei ole suosikeissasi.</string>
-    <string name="cache_favpoint_add">Lisää</string>
-    <string name="cache_favpoint_remove">Poista</string>
-    <string name="cache_list_text">Lista:</string>
-    <string name="cache_list_change">Siirrä</string>
-    <string name="cache_list_unknown">Ei listauksessa</string>
     <string name="cache_list_select_last">Viimeisin valinta</string>
     <string name="cache_images">Kuvat</string>
     <string name="cache_waypoints">Reittipisteet</string>
@@ -950,7 +901,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_pebble">Peddle</string>
-    <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Anna ääni</string>
     <string name="cache_menu_checker">Avaa Geochecker</string>
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
@@ -1033,14 +983,10 @@
     <string name="simple_dir_chooser_current_path">Polku:</string>
     <string name="simple_dir_chooser_invalid_path">Virheellinen polku</string>
     <!-- gpx -->
-    <string name="gpx_import_loading_caches">Ladataan kätköjä .gpx-tiedostosta</string>
     <string name="gpx_import_loading_caches_with_filename">Ladataan kätköjä kohteesta %1$s</string>
-    <string name="gpx_import_loading_waypoints">Ladataan reittipisteitä</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ladataan reittipisteitä kohteesta %1$s</string>
-    <string name="gpx_import_caches_imported">Kätköt tuotu</string>
     <string name="gpx_import_caches_imported_with_filename">%1$d kätköä tuotu tiedostosta %2$s</string>
     <string name="gpx_import_static_maps_skipped">Staattisten karttojen lataus keskeytetty</string>
-    <string name="gpx_import_title_static_maps">Tallenna staattiset kartat</string>
     <string name="gpx_import_title_reading_file">Luetaan tiedostoa</string>
     <string name="gpx_import_title">Tuo GPX</string>
     <string name="gpx_import_title_caches_imported">Tulos</string>
@@ -1048,7 +994,6 @@
     <string name="gpx_import_error_io">Tiedostoa ei voida lukea</string>
     <string name="gpx_import_error_parser">Väärä tiedostomuoto</string>
     <string name="gpx_import_error_unexpected">Odottamaton virhe</string>
-    <string name="gpx_import_canceled">GPX:n tuonti peruttiin</string>
     <string name="gpx_import_canceled_with_filename">GPX:n tuonti kohteesta %1$s peruttiin</string>
     <string name="gpx_import_delete_title">Poista tiedosto</string>
     <string name="gpx_import_delete_message">Haluatko poistaa %s?</string>
@@ -1097,14 +1042,11 @@
     <string name="waypoint_reset">Nollaa muutokset</string>
     <string name="waypoint_localy_reset_cache_coords">Nollaa muutokset c:geossa</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Nollaa muutokset c:geossa sekä nettisivulla</string>
-    <string name="waypoint_being_saved">Reittipistettä tallennetaan…</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Nettisivu ei tue kätkökoordinaattien muuttamista.</string>
     <string name="waypoint_coordinates_upload_error">Virhe koordinaattien muuttamisessa nettisivulle.</string>
-    <string name="waypoint_coordinates_uploading_to_website">Ladataan koordinaatteja %s nettisivulle.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Kätkökoordinaatit nettisivulla on muutettu: %s.</string>
     <string name="waypoint_done">Valmis</string>
     <string name="waypoint_duplicate">Monista reittipiste</string>
-    <string name="waypoint_duplicated">Reittipiste monistettu</string>
     <string name="waypoint_copy_of">Kopio</string>
     <string name="waypointcalc_notes_prompt">Kirjoita muistiinpano…</string>
     <string name="waypoint_coordinate_formats_plain">Yksinkertainen</string>
@@ -1119,6 +1061,7 @@
     <string name="map_modes">Kartan asetukset</string>
     <string name="map_trail_show">Näytä reitti</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
+    <string name="map_autorotate">Map autorotate</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
     <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
@@ -1127,9 +1070,6 @@
     <string name="map_theme_options">Teema-asetukset</string>
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
-    <string name="map_static_title">Staattiset kartat</string>
-    <string name="map_static_loading">Ladataan staattisia karttoja…</string>
-    <string name="map_token_err">Koska c:geo pystyy lataamaan vain osittaiset tiedot, kätkön koordinaatit saattavat olla epätarkat.</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_clear_trailhistory">Tyhjennä aiemmat jäljet</string>
     <string name="map_trailhistory_cleared">Aiemmat jäljet tyhjennetty</string>
@@ -1161,13 +1101,11 @@
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
     <string name="search_destination">Määränpää</string>
-    <string name="search_direction_rel">Tästä sijainnista</string>
     <string name="search_address_started">Etsitään paikkoja</string>
     <string name="search_address_result">Löydetyt paikat</string>
     <string name="search_own_caches">Etsi minun kätköni</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Ladataan Pocket Query -listaa</string>
-    <string name="search_pocket_select">Valitse Pocket Query</string>
     <!-- trackable -->
     <string name="trackable">Reissaaja</string>
     <string name="trackable_details_loading">Ladataan reissaajan tietoja…</string>
@@ -1219,8 +1157,6 @@
     <string name="use_compass">GPS ja magneettinen kompassi käytössä</string>
     <string name="destination_select">Valitse kohde</string>
     <string name="navigation_direct_navigation">Suora navigointi</string>
-    <string name="navigation_target">kohde</string>
-    <string name="err_nav_no_coordinates">Ei voida aloittaa suunnistusta ilman koordinaatteja</string>
     <string name="osmand_marker_cgeo">Merkki c:geosta</string>
     <!-- license -->
     <string name="license">Lisenssi</string>
@@ -1247,15 +1183,10 @@
     <string name="helper_pocketquery_description">Tämän avulla on helppo luoda ja ladata Pocket Queryja nykyisestä sijainnistasi tai kartalta valitun pisteen ympäriltä. Vaatii Premium Geocaching.com-tilin.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
-    <string name="helper_wear_title">c:geo Wear</string>
-    <string name="helper_wear_description">c:geo Wear -lisäosalla voit navigoida kätköille käyttäen Android Wear -älykelloa.</string>
     <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter tarjoaa offline-navigoinnin. Jos on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
-    <!-- add-ons -->
-    <string name="addon_missing_title">Puuttuva plugin</string>
-    <string name="addon_download_prompt">Hanki se nyt Google Playsta.</string>
     <!-- export -->
     <string name="export">Vienti</string>
     <string name="export_progress">Vienti: %1$s</string>
@@ -1580,11 +1511,7 @@
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktivoi</string>
     <string name="init_geokrety">GeoKrety.org</string>
-    <string name="init_connectorGeokretyActive">Geokrety-reissaajat</string>
     <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
-    <string name="init_summary_geokrety_account">Tunnusta ei ole asetettuna.</string>
-    <string name="init_geokrety_register_ok">Kirjautuminen onnistui</string>
-    <string name="init_geokrety_register_fail">Kirjautuminen epäonnistui</string>
     <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
     <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
     <string name="trackable_title_log_without_geocode">Koodi puuttuu</string>
@@ -1622,15 +1549,9 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
-    <string name="pq_available_for_download">Pocket query valmiina ladattavaksi</string>
-    <string name="pq_available_for_download_description">Tämä Pocket query on saatavilla ladatattavaksi tiedostona (gpx). Haluatko ladata ja tuoda sen vai katsoa kätköt listana?</string>
-    <string name="pq_as_cache_list">Näytä lista kätköistä</string>
     <string name="pq_download_and_import">Tuo Pocket Query</string>
-    <string name="pq_my_finds">Löytöni</string>
     <string name="caches_refresh_all_warning">Tämä toiminto voi johtaa korkeaan verkkoyhteyden käyttöön. Haluatko todellakin päivittää kaikki kätköt?</string>
-    <string name="cache_list_remove_from">Poista listalta</string>
     <string name="list_list_headline">Listat:</string>
-    <string name="cache_store_list">Tallenna listaan</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d reittipiste purettu</item>
         <item quantity="other">%d reittipistettä purettu</item>
@@ -1665,4 +1586,8 @@
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
     <string name="number_input_err_format">Invalid number format</string>
+    <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">c:geo notifications</string>
+    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
+    <string name="proximity_notification_title">c:geo proximity notification</string>
 </resources>
