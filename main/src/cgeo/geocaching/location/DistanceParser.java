@@ -1,5 +1,7 @@
 package cgeo.geocaching.location;
 
+import java.util.Locale;
+
 public final class DistanceParser {
 
     private DistanceParser() {
@@ -69,7 +71,7 @@ public final class DistanceParser {
         public static DistanceUnit parseUnit(final String unitStr) throws NumberFormatException {
             final DistanceUnit unit;
 
-            switch (unitStr.toLowerCase()) {
+            switch (unitStr.toLowerCase(Locale.getDefault())) {
                 case "km":
                     unit = DistanceUnit.KM;
                     break;

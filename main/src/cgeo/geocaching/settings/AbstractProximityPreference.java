@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Locale;
+
 public abstract class AbstractProximityPreference extends AbstractSeekbarPreference {
     private int maxSeekbarLength = 0;   // initialized in onCreateView
     private boolean farDistance = true;
@@ -36,7 +38,7 @@ public abstract class AbstractProximityPreference extends AbstractSeekbarPrefere
 
     @Override
     protected String valueToShownValue(final int value) {
-        return Settings.useImperialUnits() ? String.format("%.2f", value / (1000 * IConversion.MILES_TO_KILOMETER)) : String.valueOf(value);
+        return Settings.useImperialUnits() ? String.format(Locale.getDefault(), "%.2f", value / (1000 * IConversion.MILES_TO_KILOMETER)) : String.valueOf(value);
     }
 
     @Override

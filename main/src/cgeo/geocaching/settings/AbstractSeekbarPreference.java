@@ -15,6 +15,8 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public abstract class AbstractSeekbarPreference extends Preference {
 
     private TextView valueView;
@@ -61,7 +63,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
     }
 
     protected String valueToShownValue(final int value) {
-        return hasDecimals ? String.format("%.2f", (float) value) : String.valueOf(value);
+        return hasDecimals ? String.format(Locale.getDefault(), "%.2f", (float) value) : String.valueOf(value);
     }
 
     protected int shownValueToValue(final float shownValue) {
