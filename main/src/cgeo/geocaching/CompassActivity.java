@@ -73,7 +73,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        onCreate(savedInstanceState, R.layout.compass_activity);
+        super.onCreate(savedInstanceState, R.layout.compass_activity);
         ButterKnife.bind(this);
 
         // get parameters

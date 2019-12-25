@@ -672,6 +672,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
         // Refresh the logs view after coming back from logging a trackable
         if (requestCode == LogTrackableActivity.LOG_TRACKABLE && resultCode == RESULT_OK) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));

@@ -230,6 +230,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
         if (resultCode == RESULT_CANCELED) {
             // User cancelled the image capture
             showToast(getString(R.string.info_select_logimage_cancelled));

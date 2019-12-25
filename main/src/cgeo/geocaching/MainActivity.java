@@ -508,6 +508,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);  // call super to make lint happy
         if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
                 ProcessPhoenix.triggerRebirth(this);

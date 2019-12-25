@@ -83,6 +83,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     @Override
     public void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);  // call super to make lint happy
         setIntent(intent);
     }
 
