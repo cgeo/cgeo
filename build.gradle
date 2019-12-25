@@ -18,7 +18,7 @@ buildscript {
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.3'
 
         // monitor our application method limit
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.2'
 
         // ribbonizer for easier distinction of non-release builds
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
