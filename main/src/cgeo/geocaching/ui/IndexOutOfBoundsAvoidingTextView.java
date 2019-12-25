@@ -2,7 +2,8 @@ package cgeo.geocaching.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * Jelly beans can crash when calculating the layout of a textview.
@@ -10,7 +11,7 @@ import android.widget.TextView;
  * https://code.google.com/p/android/issues/detail?id=35466
  *
  */
-public class IndexOutOfBoundsAvoidingTextView extends TextView {
+public class IndexOutOfBoundsAvoidingTextView extends AppCompatTextView {
 
     private boolean shouldWindowFocusWait;
 

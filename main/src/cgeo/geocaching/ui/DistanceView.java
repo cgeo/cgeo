@@ -5,11 +5,11 @@ import cgeo.geocaching.location.Units;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 
-public class DistanceView extends TextView {
+public class DistanceView extends AppCompatTextView {
     private Geopoint cacheCoords = null;
 
     public DistanceView(final Context context) {
