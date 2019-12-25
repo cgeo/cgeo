@@ -74,6 +74,7 @@ public class InfoPreference extends AbstractAttributeBasedPreference {
 
     @Override
     protected View onCreateView(final ViewGroup parent) {
+        super.onCreateView(parent);   // call super to make lint happy
 
         // show popup when clicked
         setOnPreferenceClickListener(new OnPreferenceClickListener() {

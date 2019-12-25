@@ -127,6 +127,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     @Override
     public void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);  // call super to make lint happy
         setIntent(intent);
     }
 

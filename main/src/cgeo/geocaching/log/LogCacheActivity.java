@@ -880,6 +880,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == RESULT_OK) {
                 image = data.getParcelableExtra(Intents.EXTRA_IMAGE);
