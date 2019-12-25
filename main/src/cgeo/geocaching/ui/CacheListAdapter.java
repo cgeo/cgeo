@@ -46,6 +46,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import butterknife.BindView;
@@ -451,7 +452,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final int inventorySize = cache.getInventoryItems();
         if (inventorySize > 0) {
-            holder.inventory.setText(Integer.toString(inventorySize));
+            holder.inventory.setText(String.format(Locale.getDefault(), "%d", inventorySize));
             holder.inventory.setVisibility(View.VISIBLE);
         } else {
             holder.inventory.setVisibility(View.GONE);

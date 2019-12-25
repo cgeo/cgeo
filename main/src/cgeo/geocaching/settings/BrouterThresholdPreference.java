@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Locale;
+
 public class BrouterThresholdPreference extends AbstractSeekbarPreference {
 
     public BrouterThresholdPreference(final Context context, final AttributeSet attrs) {
@@ -16,7 +18,7 @@ public class BrouterThresholdPreference extends AbstractSeekbarPreference {
 
     @Override
     protected String valueToShownValue(final int value) {
-        return Settings.useImperialUnits() ? String.format("%.2f", value / IConversion.MILES_TO_KILOMETER) : String.valueOf(value);
+        return Settings.useImperialUnits() ? String.format(Locale.getDefault(), "%.2f", value / IConversion.MILES_TO_KILOMETER) : String.valueOf(value);
     }
 
     @Override
