@@ -245,7 +245,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 postZoomToViewport(viewport);
             }
         } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
-            final Viewport viewport = DataStore.getBounds(mapOptions.geocode);
+            final Viewport viewport = DataStore.getBounds(mapOptions.geocode, true);
 
             if (viewport != null) {
                 postZoomToViewport(viewport);

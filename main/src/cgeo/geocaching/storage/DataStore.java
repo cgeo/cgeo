@@ -1851,13 +1851,18 @@ public class DataStore {
     }
 
     @Nullable
-    public static Viewport getBounds(final Set<String> geocodes) {
+    public static Viewport getBounds(final Set<String> geocodes, final boolean withWaypoints) {
         if (CollectionUtils.isEmpty(geocodes)) {
             return null;
         }
 
         final Set<Geocache> caches = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-        return Viewport.containing(caches);
+        return withWaypoints ? Viewport.containingCachesAndWaypoints(caches) : Viewport.containing(caches);
+    }
+
+    @Nullable
+    public static Viewport getBounds(final Set<String> geocodes) {
+        return getBounds(geocodes, false);
     }
 
     /**
@@ -3612,12 +3617,17 @@ public class DataStore {
     }
 
     @Nullable
-    public static Viewport getBounds(final String geocode) {
+    public static Viewport getBounds(final String geocode, final boolean withWaypoints) {
         if (geocode == null) {
             return null;
         }
 
-        return getBounds(Collections.singleton(geocode));
+        return getBounds(Collections.singleton(geocode), withWaypoints);
+    }
+
+    @Nullable
+    public static Viewport getBounds(final String geocode) {
+        return getBounds(geocode, false);
     }
 
     public static void clearVisitDate(final Collection<String> selected) {

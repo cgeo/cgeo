@@ -1,6 +1,8 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.Waypoint;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +35,12 @@ public final class Viewport {
         final double lonHalfSpan = Math.abs(lonSpan) / 2;
         bottomLeft = new Geopoint(centerLat - latHalfSpan, centerLon - lonHalfSpan);
         topRight = new Geopoint(centerLat + latHalfSpan, centerLon + lonHalfSpan);
+    }
+
+    public Viewport(@NonNull final ICoordinates point) {
+        center = point.getCoords();
+        bottomLeft = point.getCoords();
+        topRight = point.getCoords();
     }
 
     public double getLatitudeMin() {
@@ -182,6 +190,49 @@ public final class Viewport {
                     latMax = Math.max(latMax, latitude);
                     lonMin = Math.min(lonMin, longitude);
                     lonMax = Math.max(lonMax, longitude);
+                }
+            }
+        }
+        if (!valid) {
+            return null;
+        }
+        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
+    }
+
+    @Nullable
+    public static Viewport containingCachesAndWaypoints(final Collection<Geocache> caches) {
+        boolean valid = false;
+        double latMin = Double.MAX_VALUE;
+        double latMax = -Double.MAX_VALUE;
+        double lonMin = Double.MAX_VALUE;
+        double lonMax = -Double.MAX_VALUE;
+        for (final Geocache cache : caches) {
+            if (cache != null) {
+                final Geopoint coords = cache.getCoords();
+                if (coords != null) {
+                    valid = true;
+                    final double latitude = coords.getLatitude();
+                    final double longitude = coords.getLongitude();
+                    latMin = Math.min(latMin, latitude);
+                    latMax = Math.max(latMax, latitude);
+                    lonMin = Math.min(lonMin, longitude);
+                    lonMax = Math.max(lonMax, longitude);
+                }
+                if (cache.hasWaypoints()) {
+                    for (final Waypoint waypoint : cache.getWaypoints()) {
+                        if (waypoint != null) {
+                            final Geopoint wpcoords = waypoint.getCoords();
+                            if (wpcoords != null) {
+                                valid = true;
+                                final double latitude = wpcoords.getLatitude();
+                                final double longitude = wpcoords.getLongitude();
+                                latMin = Math.min(latMin, latitude);
+                                latMax = Math.max(latMax, latitude);
+                                lonMin = Math.min(lonMin, longitude);
+                                lonMax = Math.max(lonMax, longitude);
+                            }
+                        }
+                    }
                 }
             }
         }
