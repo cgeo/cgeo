@@ -425,15 +425,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.onLowMemory();
     }
 
-    protected Geopoint getIntentCoords() {
+    protected Viewport getIntentViewport() {
         if (mapOptions.coords != null) {
-            return mapOptions.coords;
+            return new Viewport(mapOptions.coords);
         } else
         if (mapOptions.geocode != null) {
-            final Viewport bounds = DataStore.getBounds(mapOptions.geocode);
-            if (bounds != null) {
-                return bounds.center;
-            }
+            return DataStore.getBounds(mapOptions.geocode, true);
         }
         return null;
     }
@@ -456,7 +453,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
         }
 
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(getIntentCoords(), mapOptions.geocode);
+        final Viewport viewport = getIntentViewport();
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(viewport != null ? viewport.center : null, mapOptions.geocode);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }
@@ -467,8 +465,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.repaintRequired(null);
 
-        setZoom(Settings.getMapZoom(mapOptions.mapMode));
-        mapView.getMapController().setCenter(Settings.getMapCenter());
+        if (mapOptions.geocode != null) {
+            mapView.zoomToBounds(viewport, mapItemFactory.getGeoPointBase(viewport.center));
+        } else {
+            setZoom(Settings.getMapZoom(mapOptions.mapMode));
+            mapView.getMapController().setCenter(Settings.getMapCenter());
+        }
 
         if (mapOptions.mapState == null) {
             followMyLocation = followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
