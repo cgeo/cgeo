@@ -210,7 +210,7 @@ public class GooglePositionAndHistory implements PositionAndHistory {
         positionObjs.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromBitmap(getLocationIcon()))
                 .position(latLng)
-                .rotation(heading)
+                .rotation(mapRef.get().getCameraPosition().bearing)
                 .anchor(0.5f, 0.5f)
                 .flat(true)
                 .zIndex(ZINDEX_POSITION)
