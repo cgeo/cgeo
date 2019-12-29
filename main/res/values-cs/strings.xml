@@ -32,7 +32,7 @@
     <string name="gchqceleb">Oslava Geocaching HQ</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
-    <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="locationless">(Reverzní) keška bez umístění</string>
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
     <!-- cache sizes -->
@@ -454,7 +454,7 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
-    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
+    <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Umístění dat keše</string>
@@ -621,10 +621,10 @@
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="settings_title_scale_map_text">Měřítko textu mapy</string>
     <string name="settings_summary_scale_map_text">Velikost textových popisků offline mapy dle DPI zařízení</string>
-    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Zakázat ruční otáčení mapy</string>
     <string name="settings_summary_map_manualrotation_disabled">Vypnout ovládací prvky pro ruční otáčení mapy</string>
-    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
-    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Zakázat automatické otáčení mapy</string>
+    <string name="settings_summary_map_autorotation_disabled">Zakázat automatické otáčení mapy</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
     <string name="init_gpx_importdir">Složka pro GPX import</string>
@@ -716,10 +716,10 @@
     <string name="init_summary_proximityNotificationSpecific">Přehraje opakované oznámení, pokud je aktuálně vybraná keška nebo trasový bod blíže než dlouhá vzdálenost nebo krátká vzdálenost. Funguje, pokud jsou otevřeny podrobnosti o kešce nebo trasovém bodu, když je na mapě zobrazeno kontextové okno s keškou nebo trasovým bodem, případně když je aktivní kompas. Pro tyto dvě vzdálenosti se používají různé tóny.</string>
     <string name="far_distance">Dlouhá vzdálenost</string>
     <string name="near_distance">Krátká vzdálenost</string>
-    <string name="init_proximity_notification_type">Type of notification</string>
-    <string name="pn_tone_only">Tone only</string>
-    <string name="pn_text_only">Text only</string>
-    <string name="pn_tone_and_text">Tone + text</string>
+    <string name="init_proximity_notification_type">Typ oznámení</string>
+    <string name="pn_tone_only">Pouze tón</string>
+    <string name="pn_text_only">Pouze text</string>
+    <string name="pn_tone_and_text">Tón + text</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
@@ -987,6 +987,11 @@
     <string name="internal_goto_targets_description">Tato keška ukládá vaše nedávné cíle \"Přejít na\"</string>
     <string name="init_longtap_udc">Dlouhé klapnutí na mapu</string>
     <string name="init_summary_longtap_udc">Dlouhým klepnutím na mapu vytvořte uživatelem definovanou kešku</string>
+    <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">degrees</string>
+    <string name="cc_hint_minutes">minutes</string>
+    <string name="cc_hint_seconds">seconds</string>
+    <string name="cc_hint_secfractions">fraction of seconds</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Hledání souborů\nv</string>
@@ -1077,7 +1082,7 @@
     <string name="map_modes">Režim mapy…</string>
     <string name="map_trail_show">Zobrazit záznam trasy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
-    <string name="map_autorotate">Map autorotate</string>
+    <string name="map_autorotate">Automatické otáčení mapy</string>
     <string name="map_circles_show">Zobrazit kruhy</string>
     <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
     <string name="map_disabled_hide">Skrýt deaktivované keše</string>
@@ -1627,7 +1632,7 @@
     <string name="number_input_err_boundarymax">Zadaná hodnota je příliš velká – obnoveno na max. hodnotu</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
     <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notifications</string>
-    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo proximity notification</string>
+    <string name="notification_channel_name">c:geo oznámení</string>
+    <string name="notification_channel_description">oznámení z aplikace c:geo</string>
+    <string name="proximity_notification_title">c:geo upozornění na vzdálenost</string>
 </resources>

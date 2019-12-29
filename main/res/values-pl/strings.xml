@@ -32,8 +32,8 @@
     <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
-    <string name="locationless">Locationless (Reverse) Cache</string>
-    <string name="userdefined">User defined cache</string>
+    <string name="locationless">Skrzynka bez lokalizacji (Reverse)</string>
+    <string name="userdefined">Skrzynka zdefiniowana przez użytkownika</string>
     <string name="unknown">Nietypowa</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -160,13 +160,13 @@
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
-    <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
+    <string name="err_server_su">Nieudane połączenie z geocaching.su. Ta strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_gk">Nie można nawiązać połączenia ze stroną GeoKrety.org. Strona może nie działać albo nie masz połączenia z internetem.</string>
     <string name="err_login">Brak danych do logowania.</string>
     <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź ustawienia logowania i połączenie z internetem.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Nieznany błąd. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
     <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
-    <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_comm">Nieznany błąd komunikacji. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
     <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła</string>
     <string name="err_wrong">Błędna nazwa użytkownika i/lub hasło</string>
     <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrzynkami.</string>
@@ -196,7 +196,7 @@
     <string name="err_favorite_failed">Zmiana statusu skrzynki ulubiona nie powiodła się.</string>
     <string name="err_select_logimage_failed">Nie można wybrać obrazu.</string>
     <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
+    <string name="err_unsupported_image_format">Nieobsługiwany format obrazu.</string>
     <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
     <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
     <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
@@ -233,15 +233,15 @@
     <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
-    <string name="warn_invalid_mapfile">The selected map file is not a valid mapsforge map file or uses an unsupported version.\n(c:geo currently supports v3 to v5 / v3 only if you are using \"Old Mapfsforge V3\" setting.)\n\nOffline maps are not available.</string>
+    <string name="warn_invalid_mapfile">Wybrany plik mapy nie jest prawidłowym plikiem mapsforge lub używa nieobsługiwanej wersji.\n(c:geo obecnie obsługuje v3 do v5 / v3 tylko jeśli używasz ustawień \"Old Mapfsforge V3\".)\n\nMapy offline nie są dostępne.</string>
     <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
     <string name="warn_rendertheme_missing">Nie znaleziono tematu mapy.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
-    <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
-    <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
+    <string name="warn_notloggedin_title">Tryb offline</string>
+    <string name="warn_notloggedin_short">Nie zalogowano. Mapa na żywo pokaże skrzynki przechowywane lokalnie.</string>
+    <string name="warn_notloggedin_long">Nie zalogowano (jeszcze). Mapa na żywo pokaże tylko skrzynki przechowywane lokalnie, a funkcje online nie będą działać.\n\nAlbo nie ma połączenia z siecią, wystąpił problem z serwerem lub powinieneś skonfigurować swoje usługi geocachingowe.\n\nCzy chcesz teraz skonfigurować usługi?</string>
     <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
@@ -252,7 +252,7 @@
     <string name="info_log_cleared">Wpis został usunięty.</string>
     <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
     <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
-    <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
+    <string name="info_log_report_problem_changed">Dostępne raporty o problemach uległy zmianie!</string>
     <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
     <string name="info_stored_image">Nowy obraz zapisany w:</string>
     <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
@@ -262,11 +262,11 @@
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacyjnego?</string>
     <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
-    <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
-    <string name="more_information">More information</string>
-    <string name="warn_gm_not_available">Google Maps not available.</string>
-    <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
-    <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
+    <string name="warn_log_load_additional_data">c:geo nie mógł załadować dodatkowych danych (przedmioty podróżne/ulubione) przy logowaniu.</string>
+    <string name="more_information">Więcej informacji</string>
+    <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
+    <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
+    <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
     <!-- location service -->
     <string name="loc_last">Ostatnia pozycja</string>
     <string name="loc_net">Sieć</string>
@@ -283,7 +283,7 @@
     <string name="menu_about">O c:geo</string>
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
-    <string name="menu_backup">Backup / restore</string>
+    <string name="menu_backup">Kopia zapasowa / przywracanie</string>
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
@@ -307,7 +307,7 @@
     <plurals name="caches_eta_mins">
         <item quantity="one">%d minuta</item>
         <item quantity="few">%d minuty</item>
-        <item quantity="many">%d minutes</item>
+        <item quantity="many">%d minut</item>
         <item quantity="other">%d minut</item>
     </plurals>
     <string name="caches_store_offline">Zapisz offline</string>
@@ -341,11 +341,11 @@
     <string name="caches_remove_all">Usuń wszystkie</string>
     <string name="caches_remove_selected">Usuń wybrane</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
-    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
-    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
-    <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
+    <string name="caches_upload_modifiedcoords">Prześlij nowe współrzędne</string>
+    <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać nowe współrzędne dla wszystkich (zaznaczonych) skrzynek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
+    <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrzynek</string>
+    <string name="caches_upload_allcoords_dialogtitle">UWAGA - Przesyłanie wszystkich współrzędnych</string>
+    <string name="caches_upload_allcoords_warning">Spowoduje to nadpisanie istniejących współrzędnych na serwerze dla wszystkich (wybranych) skrzynek Twojej listy bieżącymi współrzędnymi zapisanymi w c:geo! Tę operację można zastosować tylko w szczególnych przypadkach, np. gdy zaimportowałeś plik GPX, który zawiera skorygowane współrzędne. Nie można cofnąć tej operacji i powinieneś ją używać tylko wtedy, gdy wiesz, co robisz. W normalnych przypadkach możesz chcieć użyć funkcji \"Wyślij zmodyfikowane współrzędne\" w tym samym menu.</string>
     <string name="caches_refresh_selected">Odśwież wybrane</string>
     <string name="caches_refresh_all">Odśwież wszystkie</string>
     <string name="caches_move_selected">Przenieś zaznaczone</string>
@@ -373,15 +373,15 @@
     <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
     <string name="caches_filter_own_waypoint">Z punktami orientacyjnymi użytkownika</string>
     <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
-    <string name="caches_filter_lists">Assigned to a list</string>
+    <string name="caches_filter_lists">Przypisane do listy</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
-    <string name="caches_set_listmarker">Set list marker</string>
-    <string name="caches_listmarker_none">No marker</string>
-    <string name="caches_listmarker_selected">(selected)</string>
+    <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="caches_listmarker_none">Brak znacznika</string>
+    <string name="caches_listmarker_selected">(wybrane)</string>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
@@ -407,38 +407,38 @@
     <string name="about_changelog">Zmiany</string>
     <string name="about_system">System</string>
     <string name="about_donate">Wesprzyj nas</string>
-    <string name="about_donation_more">Visit website for info</string>
+    <string name="about_donation_more">Odwiedź stronę po więcej informacji</string>
     <string name="about_contributors">Współpracownicy</string>
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="about_starting">Getting Started</string>
-    <string name="about_starting_head">Getting Started</string>
-    <string name="about_starting_text_basics_head">Geocaching Basics</string>
-    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
-    <string name="about_starting_text_device_head">c:geo device permissions</string>
-    <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
-    <string name="about_starting_text_first_head">First steps with c:geo</string>
-    <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
-    <string name="open_services_page">Configure your geocaching platform(s)</string>
+    <string name="about_starting">Wprowadzenie</string>
+    <string name="about_starting_head">Wprowadzenie</string>
+    <string name="about_starting_text_basics_head">Podstawy Geocachingu</string>
+    <string name="about_starting_text_basics_text">Geocaching to gra terenowa, w której wyszukuje się tak zwane „skrzynki” (także „skrytki”, „cache”). Z tej aplikacji można korzystać podczas tej zabawy.\n\nWięcej na ten temat znajdziesz w dziale <b>c:geo Basics</b> w naszyh podręczniku użytkownika: https://manual.cgeo.org/en/basicuse (w języku angielskim)</string>
+    <string name="about_starting_text_device_head">uprawnienia c:geo na urządzeniu</string>
+    <string name="about_starting_text_device_text">c:geo potrzebuje pewnych uprawnień na twoim urządzeniu:\n<b>Lokalizacja</b>: dostęp do GPS, aby zlokalizować swoją pozycję i obliczyć odległość i kierunek do skrzynek\n<b>Pamięć</b>:  zapis danych na pamięć telefonu podczas zapisywania skrzynek do użycia w trybie offline, importu/eksportu plików oraz odczytu map offline\n\nBez tych uprawnień nie będzie można używać c:geo.</string>
+    <string name="about_starting_text_first_head">Pierwsze kroki z c:geo</string>
+    <string name="about_starting_text_first_text">Aby korzystać z c:geo, musisz posiadać konta na wybranych przez siebie platformach geocachingowych (niezależnie od tej aplikacji). Musisz skonfigurować te konta w ustawieniach usługi c:geo, zanim będziesz mógł używać c:geo!\n\nMożesz przeczytać więcej w dziale <b>c:geo First steps</b> w naszym podręczniku użytkownika: https://manual.cgeo.org/en/firststeps (w języku angielskim)</string>
+    <string name="open_services_page">Skonfiguruj swoje platformy geocachingowe</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
     <string name="about_system_info">c:geo informacje systemowe</string>
     <string name="about_system_info_send_chooser">Wyślij informacje systemowe</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
-    <string name="about_nutshellmanual">Online manual</string>
-    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
-    <string name="about_contributors_recent">2018/2019 contributors</string>
-    <string name="about_contributors_specialthanks">Special thanks to</string>
-    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
-    <string name="about_contributors_other">Contributors from before 2018</string>
-    <string name="about_components">Components</string>
-    <string name="contribution_code">code</string>
+    <string name="about_nutshellmanual">Podręcznik online</string>
+    <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
+    <string name="about_contributors_recent">Współtwórcy 2018/2019</string>
+    <string name="about_contributors_specialthanks">Specjalne podziękowania dla</string>
+    <string name="about_contributors_specialthanksdetails">· wszystkich naszych tłumaczy na <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· wszystkich zgłaszających błędy\n· i wszystkich innych wspierających.\n</string>
+    <string name="about_contributors_other">Współtwórcy przed rokiem 2018</string>
+    <string name="about_components">Komponenty</string>
+    <string name="contribution_code">kod</string>
     <string name="contribution_tester">tester</string>
-    <string name="contribution_support">support</string>
-    <string name="contribution_documentation">documentation</string>
-    <string name="contribution_projectleader">open source project leader</string>
-    <string name="contribution_graphics">graphics</string>
+    <string name="contribution_support">wsparcie</string>
+    <string name="contribution_documentation">dokumentacja</string>
+    <string name="contribution_projectleader">lider projektu open source</string>
+    <string name="contribution_graphics">grafika</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -448,13 +448,13 @@
     <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
     <string name="settings_summary_cachedetails">Ustaw sposób wyświetlania informacji o skrzynce.</string>
     <string name="settings_title_offlinedata">Dane offline</string>
-    <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and directories for GPX files.</string>
+    <string name="settings_summary_offlinedata">Skonfiguruj dane do zapisywania w trybie offline, lokalizację i katalogi plików GPX.</string>
     <string name="settings_title_logging">Logowanie</string>
     <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
-    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
+    <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Katalog z danymi skrzynek</string>
@@ -468,11 +468,11 @@
     <string name="settings_title_navigation">Nawigacja</string>
     <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
+    <string name="settings_summary_system">Skonfiguruj katalogi aplikacji i inne ustawienia specyficzne dla systemu.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_browser">Przeglądarka</string>
-    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
-    <string name="settings_category_geocaching_additionals">Further services and addon</string>
+    <string name="settings_category_geocaching_platform">Platforma Geocaching</string>
+    <string name="settings_category_geocaching_additionals">Dalsze usługi i dodatki</string>
     <string name="settings_category_social">Portale społecznościowe</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
     <string name="settings_goto_url_button">więcej …</string>
@@ -484,7 +484,7 @@
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie…</string>
     <string name="settings_authorize">Autoryzuj c:geo</string>
-    <string name="settings_reauthorize">Update or remove authorization</string>
+    <string name="settings_reauthorize">Aktualizacja lub usunięcie autoryzacji</string>
     <string name="settings_gc_description">Upoważnia c:geo przy użyciu geocaching.com do szukania skrzynek.</string>
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrzynek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Upoważnij c:geo z geocaching.su aby wyszukać skrzynki.</string>
@@ -564,10 +564,10 @@
     <string name="init_summary_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
-    <string name="init_brouterThreshold">Calculate route</string>
-    <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
-    <string name="init_brouterShowBothDistances">Show straight distance</string>
-    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
+    <string name="init_brouterThreshold">Obliczanie trasy</string>
+    <string name="init_brouterThreshold_description">Maksymalna odległość, do której aplikacja dodatkowa brouter (jeśli jest zainstalowana) obliczy trasę.</string>
+    <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
+    <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
@@ -578,14 +578,14 @@
     <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o listę</string>
     <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrzynek</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
+    <string name="init_listdisplay">Pokaż dodatkowe listy na liście skrzynek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <!-- backup / restore -->
-    <string name="init_backup">Backup caches / waypoints</string>
+    <string name="init_backup">Kopia skrzynek i punktów nawigacyjnych</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>
-    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
+    <string name="init_backup_note">Zwróć uwagę, że ta opcja wykonuje tylko kopię zapasową/odzyskiwanie bazy danych zawierającą skrzynki i punkty nawigacyjne, ale bez zdjęć ze skrzynek i ustawień programu.</string>
     <string name="init_backup_restore">Przywróć</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
@@ -594,26 +594,26 @@
     <string name="backup_confirm_overwrite">Czy chcesz nadpisać aktualną kopię zapasową z %s?</string>
     <string name="restore_confirm_overwrite">Czy chcesz nadpisać %s w twoim urządzeniu kopią zapasową?</string>
     <string name="init_restore_success">Odzyskiwanie zakończone.</string>
-    <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
+    <string name="init_restore_failed_dbrecreated">Przywracanie nie powiodło się. Plik kopii zapasowej został uszkodzony. Baza danych musiała zostać ponownie utworzona.</string>
     <string name="init_restore_failed">Odzyskiwanie nie powiodło się.</string>
     <string name="init_restore_running">Odzyskiwanie bazy skrzynek…</string>
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
     <string name="init_backup_last">Kopia dostępna od</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
-    <string name="settings_title_backup">Backup / Restore</string>
-    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
-    <string name="init_backup_settings">Backup program settings</string>
-    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
-    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
-    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
-    <string name="settings_savingerror">Error saving settings</string>
-    <string name="settings_saved">Settings successfully saved to:</string>
-    <string name="init_backup_settings_restore">Restore settings</string>
-    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
-    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
-    <string name="settings_readingerror">Error reading settings</string>
-    <string name="settings_restored">Settings restored</string>
-    <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
+    <string name="settings_title_backup">Kopia zapasowa / przywracanie</string>
+    <string name="settings_summary_backup">Wykonaj kopię zapasową i przywrócenie danych o skrzynkach/punktach nawigacyjnych oraz ustawień programu.</string>
+    <string name="init_backup_settings">Ustawienia kopii zapasowych</string>
+    <string name="init_backup_settings_backup_light">Kopia zapasowa ustawień (bez danych konta)</string>
+    <string name="init_backup_settings_backup_full">Kopia zapasowa ustawień (pełna)</string>
+    <string name="init_backup_settings_backup_full_confirm">Czy na pewno chcesz zachować wrażliwe dane dotyczące konta? Takie dane mogą być odczytane przez inne aplikacje.</string>
+    <string name="settings_savingerror">Błąd podczas zapisywania ustawień</string>
+    <string name="settings_saved">Ustawienia zapisano w:</string>
+    <string name="init_backup_settings_restore">Przywróć ustawienia</string>
+    <string name="init_backup_settings_restore_confirm">Czy chcesz nadpisać obecne ustawienia?</string>
+    <string name="init_backup_settings_restore_no">Brak kopii zapasowej ustawień</string>
+    <string name="settings_readingerror">Błąd odczytu ustawień</string>
+    <string name="settings_restored">Ustawienia przywrócone</string>
+    <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy również w trybie offline. Możesz pobrać mapy z Mapsforge lub stworzyć własne z danych OSM. Aby uzyskać wsparcie map w trybie offline trzeba najpierw wybrać katalog w którym są one przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
@@ -621,10 +621,10 @@
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="settings_title_scale_map_text">Skaluj tekst na mapie</string>
     <string name="settings_summary_scale_map_text">Dostosowuje skalę tekstu na mapie offline do dpi urządzenia</string>
-    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
-    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
-    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
-    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Wyłącz ręczny obrót mapy</string>
+    <string name="settings_summary_map_manualrotation_disabled">Wyłącz przełączniki ręcznego obrotu mapy</string>
+    <string name="settings_title_map_autorotation_disabled">Wyłącz automatyczny obrót mapy</string>
+    <string name="settings_summary_map_autorotation_disabled">Wyłącz automatyczny obrót mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
     <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
@@ -632,7 +632,7 @@
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
     <string name="init_maptrail">Pokaż szlak na mapie</string>
     <string name="init_summary_maptrail">Pokaż szlak na mapie</string>
-    <string name="init_trailcolor">Trail color</string>
+    <string name="init_trailcolor">Kolor szlaku</string>
     <string name="init_share_after_export">Otwórz menu udostępniania po wyeksportowaniu plików GPX</string>
     <string name="init_include_found_status">Uwzględnij status \"Znalezione\"</string>
     <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
@@ -707,28 +707,28 @@
     <string name="feature_search_finder">Szukaj wg znalazcy</string>
     <string name="init_mapsforge_api_title">MapsForge API</string>
     <string name="init_mfold_api">Stary Mapsforge V3</string>
-    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
+    <string name="init_mfold_api_description">Używamy domyślnie nowej wersji mapy Mapsforge. Jeśli brakuje Ci niektórych możliwości lub natrafiasz na problemy możesz przełączyć się tutaj na starą wersję.</string>
     <!-- proximity notification -->
-    <string name="settings_title_proximityNotification">Proximity notification</string>
-    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
-    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
-    <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
-    <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
-    <string name="far_distance">Far distance</string>
-    <string name="near_distance">Near distance</string>
-    <string name="init_proximity_notification_type">Type of notification</string>
-    <string name="pn_tone_only">Tone only</string>
-    <string name="pn_text_only">Text only</string>
-    <string name="pn_tone_and_text">Tone + text</string>
+    <string name="settings_title_proximityNotification">Powiadomienie o bliskości</string>
+    <string name="init_proximityNotificationGeneral">Ogólnie powiadomienie o bliskości na mapie</string>
+    <string name="init_summary_proximityNotificationGeneral">Odtwórz pojedyncze powiadomienie jeśli dowolna skrzynka lub pubkt nawigacyjny są aktualnie widoczne na mapie i znajdują się bliżej niż daleka lub bliska odległość. Różne tony są używane dla tych dwóch odległości.</string>
+    <string name="init_proximityNotificationSpecific">Powiadomienie o bliskości konkretnego punktu nawigacyjnego</string>
+    <string name="init_summary_proximityNotificationSpecific">Odtwórz wielokrotne powiadomienie jeśli dowolna skrzynka lub pubkt nawigacyjny znajdują się bliżej niż daleka lub bliska odległość. Opcja działa jeśli otworzone są szczegóły skrzynki lub pubktu nawigacyjnego, na mapie są widoczne okienka skrzynki lub waypointa lub aktywny jest kompas. Różne tony są używane dla tych dwóch odległości.</string>
+    <string name="far_distance">Daleka odległość</string>
+    <string name="near_distance">Bliska odległość</string>
+    <string name="init_proximity_notification_type">Typ powiadomienia</string>
+    <string name="pn_tone_only">Tylko ton</string>
+    <string name="pn_text_only">Tylko tekst</string>
+    <string name="pn_tone_and_text">Ton i tekst</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
+    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to send caches to your Android device directly from geocaching.com using a special plugin for Firefox or Chrome. Before registering, please see <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normally without registering your device.</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> pozwala na przesyłanie skrzynki do Twojego urządzenia z Androidem bezpośrednio ze strony geocaching.com za pomocą specjalnej wtyczki do przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest wymagana tylko jeśli chcesz korzystać z tej usługi. c:geo będzie normalnie działał również bez rejestracji urządzenia.</string>
     <string name="init_sendToCgeo_register">Poproś o rejestrację</string>
     <string name="init_sendToCgeo_registering">Rejestruję Twoje urządzenie do send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Rejestracja udana. Kod PIN to %d. Użyj go na stronie c:geo, aby dodać urządzenie do przeglądarki.</string>
@@ -745,7 +745,7 @@
     <string name="auth_register">Utwórz konto</string>
     <string name="auth_connected">Połączono</string>
     <string name="auth_unconnected">Jeszcze nie połączono</string>
-    <string name="auth_connected_as">Connected as %s.\nPress here to update or long press to remove authorization data from c:geo.</string>
+    <string name="auth_connected_as">Połączony jako %s.\nNaciśnij tutaj, aby zaktualizować lub przytrzymaj, aby usunąć dane autoryzacyjne z c:geo.</string>
     <string name="auth_dialog_waiting">Czekanie na %s…</string>
     <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
     <string name="auth_explain_long">Naciśnięcie \"autoryzuj c:geo\" rozpocznie proces autoryzacji. Zostanie otwarte okno przeglądarki ze stroną %s. Zaloguj się na tej stronie i zezwól <b>c:geo</b> na dostęp do konta.</string>
@@ -777,14 +777,14 @@
     <plurals name="cache_counts">
         <item quantity="one">Jedna skrzynka</item>
         <item quantity="few">%1$d skrzynki</item>
-        <item quantity="many">%1$d caches</item>
+        <item quantity="many">%1$d skrzynek</item>
         <item quantity="other">%1$d skrzynek</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
         <item quantity="one">został jeden dzień</item>
         <item quantity="few">zostało %1$d dni</item>
-        <item quantity="many">%1$d days remaining</item>
+        <item quantity="many">zostało %1$d dni</item>
         <item quantity="other">zostało %1$d dni</item>
     </plurals>
     <string name="last_day_available">dostępne ostatni dzień</string>
@@ -798,26 +798,26 @@
     <plurals name="cache_offline_about_time_mins">
         <item quantity="one">około %d minuty temu</item>
         <item quantity="few">około %d minuty temu</item>
-        <item quantity="many">about %d minutes ago</item>
+        <item quantity="many">około %d minut temu</item>
         <item quantity="other">około %d minut temu</item>
     </plurals>
     <plurals name="cache_offline_about_time_hours">
         <item quantity="one">około %d godziny temu</item>
         <item quantity="few">około %d godzin temu</item>
-        <item quantity="many">about %d hours ago</item>
+        <item quantity="many">około %d godzin temu</item>
         <item quantity="other">około %d godzin temu</item>
     </plurals>
     <plurals name="cache_offline_about_time_days">
         <item quantity="one">około %d dnia temu</item>
         <item quantity="few">około %d dni temu</item>
-        <item quantity="many">about %d days ago</item>
+        <item quantity="many">około %d dni temu</item>
         <item quantity="other">około %d dni temu</item>
     </plurals>
     <plurals name="cache_offline_about_time_months">
-        <item quantity="one">about %d month ago</item>
-        <item quantity="few">about %d months ago</item>
-        <item quantity="many">about %d months ago</item>
-        <item quantity="other">około %d miesięcy temu</item>
+        <item quantity="one">ok. %d miesiąc temu</item>
+        <item quantity="few">ok. %d miesiące temu</item>
+        <item quantity="many">ok. %d miesięcy temu</item>
+        <item quantity="other">ok. %d miesięcy temu</item>
     </plurals>
     <string name="cache_offline_about_time_year">ponad rok temu</string>
     <string name="cache_premium">Premium</string>
@@ -836,11 +836,11 @@
     <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
     <string name="cache_description">Opis</string>
     <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
-    <string name="cache_area_description">Area Description</string>
-    <string name="cache_cache_description">Cache Description</string>
-    <string name="cache_virtual_description">Virtual Question</string>
-    <string name="cache_traditional_description">Traditional Part</string>
-    <string name="cache_box_description">Box Content</string>
+    <string name="cache_area_description">Opis terenu</string>
+    <string name="cache_cache_description">Opis skrzynki</string>
+    <string name="cache_virtual_description">Pytanie wirtualne</string>
+    <string name="cache_traditional_description">Część tradycyjna</string>
+    <string name="cache_box_description">Zawartość pojemnika</string>
     <string name="cache_watchlist_on">Ta skrzynka jest na Twojej liście obserwowanych.</string>
     <string name="cache_watchlist_on_extra">Ta skrzynka jest na Twojej liście obserwowanych (Obserwatorzy: %1d).</string>
     <string name="cache_watchlist_not_on">Ta skrzynka nie jest na Twojej liście obserwowanych.</string>
@@ -853,7 +853,7 @@
     <plurals name="waypoints">
         <item quantity="one">1 punkt</item>
         <item quantity="few">%d punkty</item>
-        <item quantity="many">%d Waypoints</item>
+        <item quantity="many">%d punktów nawigacji</item>
         <item quantity="other">%d punktów nawigacji</item>
     </plurals>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
@@ -924,7 +924,7 @@
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Stored</string>
+    <string name="cache_stored">Przechowywany</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
@@ -936,18 +936,18 @@
     <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
     <string name="cache_status_stored">Zapisano</string>
     <string name="cache_status_not_stored">Nie zapisano</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
-    <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
-    <string name="cache_status_stored_morethansevendays">Before last seven days</string>
-    <string name="cache_status_stored_morethanthirtydays">Before last thirty days</string>
+    <string name="cache_status_stored_lasteighthours">W ciągu ostatnich ośmiu godzin</string>
+    <string name="cache_status_stored_lasttwentyfourhours">W ciągu ostatnich dwudziestu czterech godzin</string>
+    <string name="cache_status_stored_lastsevendays">W ciągu ostatnich siedmiu dni</string>
+    <string name="cache_status_stored_lastthirtydays">W ciągu ostatnich trzydziestu dni</string>
+    <string name="cache_status_stored_morethaneighthours">Przed ostatnimi ośmioma godzinami</string>
+    <string name="cache_status_stored_morethantwentyfourhours">Przed ostatnimi dwudziestoma czterema godzinami</string>
+    <string name="cache_status_stored_morethansevendays">Przed ostatnimi siedmioma dniami</string>
+    <string name="cache_status_stored_morethanthirtydays">Przed ostatnimi trzydziestoma dniami</string>
     <string name="cache_geocode">Kod skrzynki</string>
     <string name="cache_name">Nazwa</string>
-    <string name="cache_name_set">Set cachename</string>
-    <string name="cache_name_updated">Cachename updated</string>
+    <string name="cache_name_set">Ustaw nazwę skrzynki</string>
+    <string name="cache_name_updated">Nazwa skrzynki uaktualniona</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Rozmiar</string>
     <string name="cache_distance">Odległość</string>
@@ -978,15 +978,20 @@
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
-    <string name="user_defined_caches">User defined caches</string>
-    <string name="create_internal_cache">Create user defined cache</string>
-    <string name="internal_cache_default_name">User defined cache #%1$d</string>
-    <string name="internal_cache_default_description">This is a user defined cache</string>
-    <string name="internal_cache_default_owner">You</string>
-    <string name="internal_goto_targets_title">\'Go to\' targets</string>
-    <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
-    <string name="init_longtap_udc">Long tap on map</string>
-    <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
+    <string name="user_defined_caches">Skrzynki zdefiniowane przez użytkownika</string>
+    <string name="create_internal_cache">Utwórz skrzynkę zdefiniowaną przez użytkownika</string>
+    <string name="internal_cache_default_name">Skrzynka zdefiniowana przez użytkownika #%1$d</string>
+    <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
+    <string name="internal_cache_default_owner">Ty</string>
+    <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
+    <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \'Idź do\'</string>
+    <string name="init_longtap_udc">Przytrzymaj dłużej na mapie</string>
+    <string name="init_summary_longtap_udc">Przytrzymaj dłużej na mapie aby utworzyć skrzynkę zdefiniowaną przez użytkownika</string>
+    <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">degrees</string>
+    <string name="cc_hint_minutes">minutes</string>
+    <string name="cc_hint_seconds">seconds</string>
+    <string name="cc_hint_secfractions">fraction of seconds</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Szukam plików\nw</string>
@@ -1044,8 +1049,8 @@
     <string name="waypoint_note">Notatka</string>
     <string name="waypoint_user_note">Notatka użytkownika</string>
     <string name="waypoint_visited">Odwiedzony</string>
-    <string name="waypoint_set_visited">Waypoint set to visited</string>
-    <string name="waypoint_unset_visited">Waypoint set to not visited</string>
+    <string name="waypoint_set_visited">Punkt drogi ustawiony jako odwiedzony</string>
+    <string name="waypoint_unset_visited">Punkt drogi ustawiony jako nieodwiedzony</string>
     <string name="waypoint_save">Zapisz</string>
     <string name="waypoint_cancel_edit">Anuluj</string>
     <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
@@ -1076,8 +1081,8 @@
     <string name="map_view_map">Widok mapy</string>
     <string name="map_modes">Tryb mapy</string>
     <string name="map_trail_show">Pokaż szlak</string>
-    <string name="map_dot_mode">Use compact icons</string>
-    <string name="map_autorotate">Map autorotate</string>
+    <string name="map_dot_mode">Użyj kompaktowych ikon</string>
+    <string name="map_autorotate">Autoobrót mapy</string>
     <string name="map_circles_show">Pokaż okręgi</string>
     <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
     <string name="map_disabled_hide">Ukryj nieaktywne skrzynki</string>
@@ -1087,8 +1092,8 @@
     <string name="map_live_enable">Włącz online</string>
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
-    <string name="map_clear_trailhistory">Clear trail history</string>
-    <string name="map_trailhistory_cleared">trail history cleared</string>
+    <string name="map_clear_trailhistory">Wyczyść historię szlaku</string>
+    <string name="map_trailhistory_cleared">wyczyszczono historię szlaku</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Nawigacja</string>
     <string name="map_routing_straight">Linia prosta</string>
@@ -1192,7 +1197,7 @@
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_gps_locker_title">GPS Locker</string>
-    <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
+    <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
     <string name="helper_pocketquery_title">Kreator Pocket Query</string>
@@ -1225,14 +1230,14 @@
     <plurals name="export_persnotes_upload_success">
         <item quantity="one">Wysłano pomyślnie notatkę</item>
         <item quantity="few">Wysłano pomyślnie %1$d notatki</item>
-        <item quantity="many">Uploaded %1$d notes successfully</item>
+        <item quantity="many">Wysłano pomyślnie %1$d notatek</item>
         <item quantity="other">Wysłano pomyślnie %1$d notatek</item>
     </plurals>
-    <string name="export_modifiedcoords">Modified coordinates</string>
-    <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
-    <string name="export_modifiedcoords_success">Upload successful</string>
-    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
-    <string name="export_modifiedcoords_error">Upload failed</string>
+    <string name="export_modifiedcoords">Zmienione współrzędne</string>
+    <string name="export_modifiedcoords_uploading">Eksportowanie %1$d</string>
+    <string name="export_modifiedcoords_success">Eksportowanie zakończone</string>
+    <string name="export_modifiedcoords_result">Eksportowanie zakończone: %1$d nieudane / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Eksportowanie nie powiodło się</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Psy dozwolone</string>
     <string name="attribute_dogs_no">Psy niedozwolone</string>
@@ -1481,7 +1486,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Wygląda na to, że używasz wersji Androida starszej niż 4.1. Przyszłe wydania c:geo mogą być już niedostępne dla Twojego urządzenia.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
-    <string name="tts_toggle">Toggle talking</string>
+    <string name="tts_toggle">Przełącz mówienie</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
     <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
@@ -1489,28 +1494,28 @@
     <plurals name="tts_kilometers">
         <item quantity="one">%s kilometr</item>
         <item quantity="few">%s kilometry</item>
-        <item quantity="many">%s kilometers</item>
+        <item quantity="many">%s kilometrów</item>
         <item quantity="other">%s kilometrów</item>
     </plurals>
     <string name="tts_one_meter">jeden metr</string>
     <plurals name="tts_meters">
         <item quantity="one">%s metr</item>
         <item quantity="few">%s metry</item>
-        <item quantity="many">%s meters</item>
+        <item quantity="many">%s metrów</item>
         <item quantity="other">%s metrów</item>
     </plurals>
     <string name="tts_one_mile">jedna mila</string>
     <plurals name="tts_miles">
         <item quantity="one">%s mila</item>
         <item quantity="few">%s mile</item>
-        <item quantity="many">%s miles</item>
+        <item quantity="many">%s mil</item>
         <item quantity="other">%s mil</item>
     </plurals>
     <string name="tts_one_foot">jedna stopa</string>
     <plurals name="tts_feet">
         <item quantity="one">%s stopa</item>
         <item quantity="few">%s stopy</item>
-        <item quantity="many">%s feet</item>
+        <item quantity="many">%s stóp</item>
         <item quantity="other">%s stóp</item>
     </plurals>
     <string name="tts_one_oclock">pierwsza</string>
@@ -1520,13 +1525,13 @@
     <plurals name="days_ago">
         <item quantity="one">wczoraj</item>
         <item quantity="few">%d dni temu</item>
-        <item quantity="many">%d days ago</item>
+        <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
     </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s ulubiony</item>
         <item quantity="few">%s ulubione</item>
-        <item quantity="many">%s favorites</item>
+        <item quantity="many">%s ulubionych</item>
         <item quantity="other">%s ulubionych</item>
     </plurals>
     <string name="more_than_percent_favorite_points">&gt; %d%% ulubionych</string>
@@ -1555,21 +1560,21 @@
     <plurals name="command_move_caches_result">
         <item quantity="one">Przeniesiono %d skrzynkę</item>
         <item quantity="few">Przeniesiono %d skrzynki</item>
-        <item quantity="many">Moved %d caches</item>
+        <item quantity="many">Przeniesiono %d skrzynek</item>
         <item quantity="other">Przeniesiono %d skrzynek</item>
     </plurals>
     <string name="command_copy_caches_progress">Kopiowanie skrzynek do listy %1s</string>
     <plurals name="command_copy_caches_result">
         <item quantity="one">Skopiowano %d skrzynkę</item>
         <item quantity="few">Skopiowano %d skrzynki</item>
-        <item quantity="many">Copied %d caches</item>
+        <item quantity="many">Skopiowano %d skrzynek</item>
         <item quantity="other">Skopiowano %d skrzynek</item>
     </plurals>
     <string name="command_delete_caches_progress">Usuwanie skrzynek</string>
     <plurals name="command_delete_caches_result">
         <item quantity="one">Usunięto %d skrzynkę</item>
         <item quantity="few">Usunięto %d skrzynki</item>
-        <item quantity="many">Deleted %d caches</item>
+        <item quantity="many">Usunięto %d skrzynek</item>
         <item quantity="other">Usunięto %d skrzynek</item>
     </plurals>
     <string name="command_rename_list_result">Zmieniono nazwę listy</string>
@@ -1578,7 +1583,7 @@
     <plurals name="fav_points_remaining">
         <item quantity="one">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
         <item quantity="few">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
-        <item quantity="many">Add this cache to favorites (%d remaining)</item>
+        <item quantity="many">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
         <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
     </plurals>
     <!-- distance units -->
@@ -1593,10 +1598,10 @@
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt orientacyjny został wyciągnięty</item>
         <item quantity="few">%d punkty orientacyjne zostały wyciągnięte</item>
-        <item quantity="many">%d waypoints extracted</item>
+        <item quantity="many">%d punktów orientacyjnych zostało wyciągniętych</item>
         <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
     </plurals>
-    <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+    <string name="link_gc_checker">sprawdzanie współrzędnych w serwisie geocaching.com dostępne jest przez przeglądarkę</string>
     <!-- calendar adder -->
     <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
     <string name="init_low_disk_space">Zaczyna brakować miejsca</string>
@@ -1608,26 +1613,26 @@
     <string name="waypoint_latitude_null">N/S--°--.---</string>
     <string name="waypoint_longitude_null">E/W--°--.---</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
-    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
-    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
-    <string name="storage_permission_needed">This function is not possible without storage permission.</string>
+    <string name="close_app">Zamknij aplikację</string>
+    <string name="ask_again">Zapytaj mnie ponownie</string>
+    <string name="location_permission_request_explanation">c:geo potrzebuje dostępu do GPS na twoim urządzeniu, aby określić twoją pozycję i obliczyć odległość i kierunek do skrzynki. Dane z GPS nie mogą być używane bez twojej zgody.</string>
+    <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrzynek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
+    <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
-    <string name="color_blue">Blue</string>
-    <string name="color_green">Green</string>
-    <string name="color_grey">Grey</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Red</string>
-    <string name="color_turquoise">Turquoise</string>
-    <string name="color_black">Black</string>
+    <string name="color_blue">Niebieski</string>
+    <string name="color_green">Zielony</string>
+    <string name="color_grey">Szary</string>
+    <string name="color_orange">Pomarańczowy</string>
+    <string name="color_red">Czerwony</string>
+    <string name="color_turquoise">Turkusowy</string>
+    <string name="color_black">Czarny</string>
     <!-- number input -->
-    <string name="number_input_title">Enter a value between %1$s and %2$s</string>
-    <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
-    <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
+    <string name="number_input_title">Wprowadź wartość między %1$s a %2$s</string>
+    <string name="number_input_err_boundarymin">Wprowadzona wartość jest zbyt mała - zresetuj do wartości minimalnej</string>
+    <string name="number_input_err_boundarymax">Wprowadzona wartość jest zbyt duża - zresetuj do wartości maksymalnej</string>
+    <string name="number_input_err_format">Nieprawidłowy format numeru</string>
     <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notifications</string>
-    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo proximity notification</string>
+    <string name="notification_channel_name">Powiadomienia c:geo</string>
+    <string name="notification_channel_description">powiadomienia z aplikacji c:geo</string>
+    <string name="proximity_notification_title">Powiadomienie o bliskości</string>
 </resources>

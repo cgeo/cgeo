@@ -963,6 +963,11 @@
     <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
     <string name="init_longtap_udc">Long tap on map</string>
     <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
+    <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">degrees</string>
+    <string name="cc_hint_minutes">minutes</string>
+    <string name="cc_hint_seconds">seconds</string>
+    <string name="cc_hint_secfractions">fraction of seconds</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">ファイルを検索中:\n</string>

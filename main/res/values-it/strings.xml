@@ -452,7 +452,7 @@
     <string name="settings_title_map">Mappa</string>
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
-    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
+    <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Directory dati geocache</string>
@@ -619,10 +619,10 @@
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="settings_title_scale_map_text">Ridimensiona testo mappa</string>
     <string name="settings_summary_scale_map_text">Ridimensiona il testo della mappa offline a seconda del DPI del dispositivo</string>
-    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Disabilita la rotazione manuale della mappa</string>
     <string name="settings_summary_map_manualrotation_disabled">Disabilita i controlli per la rotazione manuale delle mappe</string>
-    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
-    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Disabilita rotazione automatica della mappa</string>
+    <string name="settings_summary_map_autorotation_disabled">Disabilita rotazione automatica della mappa</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_gpx_exportdir">Cartella di export GPX</string>
     <string name="init_gpx_importdir">Cartella di import GPX</string>
@@ -714,10 +714,10 @@
     <string name="init_summary_proximityNotificationSpecific">Riproduci una notifica ripetuta se la cache o il waypoint attualmente selezionati è vicino a distanza max o vicino a distanza min. Funziona se i dettagli della cache o dei waypoint sono aperti, i popup della cache o dei waypoint sulla mappa sono mostrati o la bussola è attiva. Toni diversi vengono utilizzati per le due distanze.</string>
     <string name="far_distance">Distanza max</string>
     <string name="near_distance">Distanza min</string>
-    <string name="init_proximity_notification_type">Type of notification</string>
-    <string name="pn_tone_only">Tone only</string>
-    <string name="pn_text_only">Text only</string>
-    <string name="pn_tone_and_text">Tone + text</string>
+    <string name="init_proximity_notification_type">Tipo di notifica</string>
+    <string name="pn_tone_only">Solo tono</string>
+    <string name="pn_text_only">Solo testo</string>
+    <string name="pn_tone_and_text">Tono + testo</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -971,6 +971,11 @@
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\"</string>
     <string name="init_longtap_udc">Tocca a lungo sulla mappa</string>
     <string name="init_summary_longtap_udc">Toccare a lungo sulla mappa per creare un cache definito dall\'utente</string>
+    <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">degrees</string>
+    <string name="cc_hint_minutes">minutes</string>
+    <string name="cc_hint_seconds">seconds</string>
+    <string name="cc_hint_secfractions">fraction of seconds</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Ricerca file\nin</string>
@@ -1061,7 +1066,7 @@
     <string name="map_modes">Modi mappa</string>
     <string name="map_trail_show">Mostra scia</string>
     <string name="map_dot_mode">Usa icone compatte</string>
-    <string name="map_autorotate">Map autorotate</string>
+    <string name="map_autorotate">Mappa autorotata</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
     <string name="map_disabled_hide">Nascondi le cache disabilitate</string>
@@ -1587,7 +1592,7 @@
     <string name="number_input_err_boundarymax">Il valore inserito è troppo grande - resettato al valore massimo</string>
     <string name="number_input_err_format">Formato del numero non valido</string>
     <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notifications</string>
-    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo proximity notification</string>
+    <string name="notification_channel_name">Notifiche c:geo</string>
+    <string name="notification_channel_description">notifiche dall\'app di geocaching c:geo</string>
+    <string name="proximity_notification_title">Notifica di prossimità c:geo</string>
 </resources>

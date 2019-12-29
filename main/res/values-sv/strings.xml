@@ -339,7 +339,7 @@
     <string name="caches_remove_all">Ta bort alla</string>
     <string name="caches_remove_selected">Ta bort valda</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
-    <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
+    <string name="caches_upload_modifiedcoords">Ladda upp modifierade koordinater</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
     <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
@@ -562,7 +562,7 @@
     <string name="init_summary_exclude">Dölj egna och hittade cacher</string>
     <string name="init_showwaypoints">Extra punkter på kartan</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
-    <string name="init_brouterThreshold">Calculate route</string>
+    <string name="init_brouterThreshold">Beräkna rutt</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
@@ -971,6 +971,11 @@
     <string name="internal_goto_targets_description">This cache stores your recent \'Go to\' targets</string>
     <string name="init_longtap_udc">Long tap on map</string>
     <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
+    <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">degrees</string>
+    <string name="cc_hint_minutes">minutes</string>
+    <string name="cc_hint_seconds">seconds</string>
+    <string name="cc_hint_secfractions">fraction of seconds</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Söker efter filer\ni</string>
@@ -1060,7 +1065,7 @@
     <string name="map_view_map">Karttyp</string>
     <string name="map_modes">Kartlägen</string>
     <string name="map_trail_show">Visa spår</string>
-    <string name="map_dot_mode">Use compact icons</string>
+    <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_autorotate">Map autorotate</string>
     <string name="map_circles_show">Visa cirklar</string>
     <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
