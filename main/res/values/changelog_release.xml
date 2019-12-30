@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2019.12.30:</b>\n
 	· Fix: Avoid app freeze when mapping large lists on OSM maps\n
 	\n
 	\n 
