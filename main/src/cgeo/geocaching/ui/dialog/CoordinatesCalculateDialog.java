@@ -41,6 +41,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.gridlayout.widget.GridLayout;
@@ -265,7 +266,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 shot = true;
             }
 
-            currentFormat = Settings.CoordInputFormatEnum.fromInt(pos);
+            currentFormat = Settings.CoordInputFormatEnum.fromInt(((SpinnerItem) parent.getItemAtPosition(pos)).id);
             Settings.setCoordInputFormat(currentFormat);
             setFormat();
 
@@ -354,6 +355,23 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
     }
 
+    // minimum helper class for workaround until Plain_SingleLine gets supported by coordinates calculator
+    private class SpinnerItem {
+        public int id;
+        public String text;
+
+        SpinnerItem (final int id, final String text) {
+            this.id = id;
+            this.text = text;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         final Dialog dialog = getDialog();
@@ -383,10 +401,22 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         spinner = v.findViewById(R.id.spinnerCoordinateFormats);
+        /*
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(getActivity(),
                         R.array.waypoint_coordinate_formats,
                         android.R.layout.simple_spinner_item);
+        */
+        // workaround until Plain_SingleLine format is supported in CoordinatesCalculator:
+        final String[] formats = getResources().getStringArray(R.array.waypoint_coordinate_formats);
+        final String leaveOut = getString(R.string.waypoint_coordinate_formats_plain_singleline);
+        final ArrayAdapter<SpinnerItem> adapter = new ArrayAdapter<SpinnerItem>(getActivity(), android.R.layout.simple_spinner_item);
+        for (int i = 0; i < formats.length; i++) {
+            if (!formats[i].equals(leaveOut)) {
+                adapter.add(new SpinnerItem(i, formats[i]));
+            }
+        }
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
