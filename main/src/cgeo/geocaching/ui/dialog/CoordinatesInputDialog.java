@@ -271,6 +271,9 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLatSub.setVisibility(View.GONE);
                 eLonSub.setVisibility(View.GONE);
 
+                eLatMin.setHint(R.string.cc_hint_fraction);
+                eLonMin.setHint(R.string.cc_hint_fraction);
+
                 tLatSep1.setText(".");
                 tLonSep1.setText(".");
                 tLatSep2.setText("°");
@@ -296,6 +299,11 @@ public class CoordinatesInputDialog extends DialogFragment {
                 tLonSep3.setVisibility(View.VISIBLE);
                 eLatSub.setVisibility(View.GONE);
                 eLonSub.setVisibility(View.GONE);
+
+                eLatMin.setHint(R.string.cc_hint_minutes);
+                eLatSec.setHint(R.string.cc_hint_fraction);
+                eLonMin.setHint(R.string.cc_hint_minutes);
+                eLonSec.setHint(R.string.cc_hint_fraction);
 
                 tLatSep1.setText("°");
                 tLonSep1.setText("°");
@@ -326,6 +334,13 @@ public class CoordinatesInputDialog extends DialogFragment {
                 tLonSep3.setVisibility(View.VISIBLE);
                 eLatSub.setVisibility(View.VISIBLE);
                 eLonSub.setVisibility(View.VISIBLE);
+
+                eLatMin.setHint(R.string.cc_hint_minutes);
+                eLatSec.setHint(R.string.cc_hint_seconds);
+                eLatSub.setHint(R.string.cc_hint_fraction);
+                eLonMin.setHint(R.string.cc_hint_minutes);
+                eLonSec.setHint(R.string.cc_hint_seconds);
+                eLonSub.setHint(R.string.cc_hint_fraction);
 
                 tLatSep1.setText("°");
                 tLonSep1.setText("°");

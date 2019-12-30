@@ -84,7 +84,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:inputType="number"
-                android:hint="@string/cc_hint_secfractions"
+                android:hint="@string/cc_hint_fraction"
                 android:selectAllOnFocus="true" />
             <TextView
                 android:id="@+id/LatPaddingRight"
@@ -157,7 +157,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:inputType="number"
-                android:hint="@string/cc_hint_secfractions"
+                android:hint="@string/cc_hint_fraction"
                 android:selectAllOnFocus="true" />
         </TableRow>
     </TableLayout>

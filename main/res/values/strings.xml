@@ -1021,7 +1021,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
 
     <!-- editor dialog -->
 
