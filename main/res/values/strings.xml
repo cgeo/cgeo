@@ -1018,6 +1018,7 @@
     <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
 
     <!-- coordinate calculator hints -->
+    <string name="cc_hint_latlon">latitude longitude</string>
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
@@ -1113,6 +1114,7 @@
     <string name="waypoint_copy_of">Copy of</string>
     <string name="waypointcalc_notes_prompt">Enter notes here…</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>
+    <string name="waypoint_coordinate_formats_plain_singleline">Plain (single line)</string>
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
 

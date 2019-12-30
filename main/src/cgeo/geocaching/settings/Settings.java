@@ -92,6 +92,7 @@ public class Settings {
 
     public enum CoordInputFormatEnum {
         Plain,
+        Plain_Singleline,
         Deg,
         Min,
         Sec;

@@ -250,6 +250,8 @@ public class CoordinatesInputDialog extends DialogFragment {
             bLon.setText(String.valueOf(currentCoords().getLonDir()));
         }
 
+        eLat.setHint(R.string.latitude);
+
         switch (currentFormat) {
             case Plain:
                 setVisible(R.id.coordTable, View.GONE);
@@ -258,6 +260,15 @@ public class CoordinatesInputDialog extends DialogFragment {
                 if (gp != null) {
                     eLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                     eLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+                }
+                break;
+            case Plain_Singleline:
+                setVisible(R.id.coordTable, View.GONE);
+                eLat.setVisibility(View.VISIBLE);
+                eLon.setVisibility(View.GONE);
+                eLat.setHint(R.string.cc_hint_latlon);
+                if (gp != null) {
+                    eLat.setText(gp.format(GeopointFormatter.Format.LAT_LON_DECMINUTE));
                 }
                 break;
             case Deg: // DDD.DDDDD°
@@ -488,6 +499,9 @@ public class CoordinatesInputDialog extends DialogFragment {
                     break;
                 case Plain:
                     current = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
+                    break;
+                case Plain_Singleline:
+                    current = new Geopoint(eLat.getText().toString());
                     break;
                 default:
                     throw new IllegalStateException("can never happen, keep tools happy");

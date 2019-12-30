@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- coordinate input formats - order must be the same as in Settings.CoordInputFormatEnum -->
     <string-array name="waypoint_coordinate_formats" translatable="false">
         <item>@string/waypoint_coordinate_formats_plain</item>
+        <item>@string/waypoint_coordinate_formats_plain_singleline</item>
         <item>DDD.DDDDD°</item>
         <item>DDD°MM.MMM\'</item>
         <item>DDD°MM\'SS.SSS\"</item>
