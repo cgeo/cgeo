@@ -21,8 +21,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 import io.reactivex.observers.DisposableObserver;
@@ -69,37 +67,34 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
     private static Observable<GeoData> get(final Context context, final AtomicInteger reference) {
         final LocationProvider instance = getInstance(context);
 
-        return Observable.create(new ObservableOnSubscribe<GeoData>() {
-            @Override
-            public void subscribe(final ObservableEmitter<GeoData> emitter) throws Exception {
-                if (reference.incrementAndGet() == 1) {
-                    instance.updateRequest();
-                }
-                final Disposable disposable = subject.subscribeWith(new DisposableObserver<GeoData>() {
-                    @Override
-                    public void onNext(final GeoData value) {
-                        emitter.onNext(value);
-                    }
-
-                    @Override
-                    public void onError(final Throwable e) {
-                        emitter.onError(e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        emitter.onComplete();
-                    }
-                });
-                emitter.setDisposable(Disposables.fromRunnable(() -> {
-                    disposable.dispose();
-                    AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(() -> {
-                        if (reference.decrementAndGet() == 0) {
-                            instance.updateRequest();
-                        }
-                    }, 2500, TimeUnit.MILLISECONDS);
-                }));
+        return Observable.create(emitter -> {
+            if (reference.incrementAndGet() == 1) {
+                instance.updateRequest();
             }
+            final Disposable disposable = subject.subscribeWith(new DisposableObserver<GeoData>() {
+                @Override
+                public void onNext(final GeoData value) {
+                    emitter.onNext(value);
+                }
+
+                @Override
+                public void onError(final Throwable e) {
+                    emitter.onError(e);
+                }
+
+                @Override
+                public void onComplete() {
+                    emitter.onComplete();
+                }
+            });
+            emitter.setDisposable(Disposables.fromRunnable(() -> {
+                disposable.dispose();
+                AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(() -> {
+                    if (reference.decrementAndGet() == 0) {
+                        instance.updateRequest();
+                    }
+                }, 2500, TimeUnit.MILLISECONDS);
+            }));
         });
     }
 

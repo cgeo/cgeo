@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.BehaviorSubject;
 import org.apache.commons.lang3.StringUtils;
 
@@ -98,16 +97,8 @@ public class StatusUpdater {
                             "version_name", Version.getVersionName(app),
                             "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
                             new Parameters("active_connectors", getActiveConnectorsString())))
-                    .subscribe(new Consumer<ObjectNode>() {
-                        @Override
-                        public void accept(final ObjectNode json) {
-                            LATEST_STATUS.onNext(Status.defaultStatus(new Status(json)));
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(final Throwable throwable) {
-                            // Error has already been signaled during the request
-                        }
+                    .subscribe(json -> LATEST_STATUS.onNext(Status.defaultStatus(new Status(json))), throwable -> {
+                        // Error has already been signaled during the request
                     });
         }, 0, 1800, TimeUnit.SECONDS);
     }

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposables;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -27,30 +25,27 @@ public class RxOkHttpUtils {
      * @return a Single containing the response or an IOException
      */
     public static Single<Response> request(final OkHttpClient client, final Request request) {
-        return Single.create(new SingleOnSubscribe<Response>() {
-            @Override
-            public void subscribe(final SingleEmitter<Response> singleEmitter) throws Exception {
-                final Call call = client.newCall(request);
-                final AtomicBoolean completed = new AtomicBoolean(false);
-                singleEmitter.setDisposable(Disposables.fromRunnable(() -> {
-                    if (!completed.get()) {
-                        call.cancel();
-                    }
-                }));
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(final Call call, final IOException e) {
-                        completed.set(true);
-                        singleEmitter.onError(e);
-                    }
+        return Single.create(singleEmitter -> {
+            final Call call = client.newCall(request);
+            final AtomicBoolean completed = new AtomicBoolean(false);
+            singleEmitter.setDisposable(Disposables.fromRunnable(() -> {
+                if (!completed.get()) {
+                    call.cancel();
+                }
+            }));
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(final Call call, final IOException e) {
+                    completed.set(true);
+                    singleEmitter.onError(e);
+                }
 
-                    @Override
-                    public void onResponse(final Call call, final Response response) throws IOException {
-                        completed.set(true);
-                        singleEmitter.onSuccess(response);
-                    }
-                });
-            }
+                @Override
+                public void onResponse(final Call call, final Response response) throws IOException {
+                    completed.set(true);
+                    singleEmitter.onSuccess(response);
+                }
+            });
         });
     }
 

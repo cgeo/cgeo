@@ -35,7 +35,6 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -63,8 +62,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -191,12 +188,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
 
-        createViewPager(0, new OnPageSelectedListener() {
-            @Override
-            public void onPageSelected(final int position) {
-                lazyLoadTrackableImages();
-            }
-        });
+        createViewPager(0, position -> lazyLoadTrackableImages());
         refreshTrackable(message);
     }
 
@@ -234,27 +226,16 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
         createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, guid, id, brand)).subscribe(
-                new Consumer<Trackable>() {
-                    @Override
-                    public void accept(final Trackable newTrackable) throws Exception {
-                        if (trackingCode != null) {
-                            newTrackable.setTrackingcode(trackingCode);
-                        }
-                        act(newTrackable);
+                newTrackable -> {
+                    if (trackingCode != null) {
+                        newTrackable.setTrackingcode(trackingCode);
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(final Throwable throwable) throws Exception {
-                        Log.w("unable to retrieve trackable information", throwable);
-                        showToast(res.getString(R.string.err_tb_find_that));
-                        finish();
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        act(null);
-                    }
-                }));
+                    act(newTrackable);
+                }, throwable -> {
+                    Log.w("unable to retrieve trackable information", throwable);
+                    showToast(res.getString(R.string.err_tb_find_that));
+                    finish();
+                }, () -> act(null)));
     }
 
     @Nullable
@@ -331,15 +312,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void setupIcon(final ActionBar actionBar, final String url) {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-        AndroidRxUtils.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Consumer<BitmapDrawable>() {
-            @Override
-            public void accept(final BitmapDrawable image) {
-                if (actionBar != null) {
-                    final int height = actionBar.getHeight();
-                    //noinspection SuspiciousNameCombination
-                    image.setBounds(0, 0, height, height);
-                    actionBar.setIcon(image);
-                }
+        AndroidRxUtils.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(image -> {
+            if (actionBar != null) {
+                final int height = actionBar.getHeight();
+                //noinspection SuspiciousNameCombination
+                image.setBounds(0, 0, height, height);
+                actionBar.setIcon(image);
             }
         });
     }
@@ -596,12 +574,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 trackableImage.setClickable(true);
                 trackableImage.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage()))));
 
-                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(new Consumer<BitmapDrawable>() {
-                    @Override
-                    public void accept(final BitmapDrawable bitmapDrawable) {
-                        trackableImage.setImageDrawable(bitmapDrawable);
-                    }
-                });
+                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(bitmapDrawable -> trackableImage.setImageDrawable(bitmapDrawable));
 
                 imageView.addView(trackableImage);
             }

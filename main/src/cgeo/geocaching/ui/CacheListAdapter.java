@@ -26,7 +26,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -51,7 +50,6 @@ import java.util.Set;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -483,13 +481,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
                 holder.dirImg.setVisibility(View.INVISIBLE);
                 holder.direction.setVisibility(View.GONE);
-                DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<BitmapDrawable>() {
-                    @Override
-                    public void accept(final BitmapDrawable bitmapDrawable) {
-                        if (cache == holder.cache) {
-                            holder.dirImg.setImageDrawable(bitmapDrawable);
-                            holder.dirImg.setVisibility(View.VISIBLE);
-                        }
+                DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(bitmapDrawable -> {
+                    if (cache == holder.cache) {
+                        holder.dirImg.setImageDrawable(bitmapDrawable);
+                        holder.dirImg.setVisibility(View.VISIBLE);
                     }
                 });
             } else {

@@ -7,7 +7,6 @@ import cgeo.geocaching.ui.AbstractMenuActionProvider;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 
 import androidx.core.view.ActionProvider;
@@ -42,13 +41,9 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
             }
             final CacheNavigationApp cacheApp = (CacheNavigationApp) app.app;
             if (app.app.isEnabled(geocache)) {
-                subMenu.add(Menu.NONE, app.id, Menu.NONE, app.app.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-                    @Override
-                    public boolean onMenuItemClick(final MenuItem item) {
-                        cacheApp.navigate(context, geocache);
-                        return true;
-                    }
+                subMenu.add(Menu.NONE, app.id, Menu.NONE, app.app.getName()).setOnMenuItemClickListener(item -> {
+                    cacheApp.navigate(context, geocache);
+                    return true;
                 });
             }
         }

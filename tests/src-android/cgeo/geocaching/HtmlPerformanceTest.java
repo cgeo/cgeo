@@ -35,21 +35,14 @@ public class HtmlPerformanceTest extends AndroidTestCase {
 
     public void testUnescapePerformance() {
         final int runs = 100;
-        measure("unescape Apache", new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < runs; i++) {
-                    unescapeApache();
-                }
+        measure("unescape Apache", () -> {
+            for (int i = 0; i < runs; i++) {
+                unescapeApache();
             }
         });
-        measure("unescape Android", new Runnable() {
-
-            @Override
-            public void run() {
-                for (int i = 0; i < runs; i++) {
-                    unescapeAndroid();
-                }
+        measure("unescape Android", () -> {
+            for (int i = 0; i < runs; i++) {
+                unescapeAndroid();
             }
         });
     }

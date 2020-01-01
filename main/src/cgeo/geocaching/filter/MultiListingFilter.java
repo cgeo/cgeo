@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -89,13 +88,7 @@ public class MultiListingFilter extends AbstractFilter {
                 sorted.add(new Pair<>(distance, cache));
             }
         }
-        Collections.sort(sorted, new Comparator<Pair<Float, Geocache>>() {
-
-            @Override
-            public int compare(final Pair<Float, Geocache> lhs, final Pair<Float, Geocache> rhs) {
-                return Float.compare(lhs.first, rhs.first);
-            }
-        });
+        Collections.sort(sorted, (lhs, rhs) -> Float.compare(lhs.first, rhs.first));
         return sorted;
     }
 

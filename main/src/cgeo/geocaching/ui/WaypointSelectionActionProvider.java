@@ -7,7 +7,6 @@ import cgeo.geocaching.models.Waypoint;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 
 import androidx.annotation.NonNull;
@@ -56,23 +55,15 @@ public class WaypointSelectionActionProvider extends AbstractMenuActionProvider 
         subMenu.clear();
         for (final Waypoint waypoint : geocache.getWaypoints()) {
             if (waypoint.getCoords() != null) {
-                subMenu.add(Menu.NONE, waypoint.getId(), Menu.NONE, waypoint.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-                    @Override
-                    public boolean onMenuItemClick(final MenuItem item) {
-                        callback.onWaypointSelected(waypoint);
-                        return true;
-                    }
+                subMenu.add(Menu.NONE, waypoint.getId(), Menu.NONE, waypoint.getName()).setOnMenuItemClickListener(item -> {
+                    callback.onWaypointSelected(waypoint);
+                    return true;
                 });
             }
         }
-        subMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, getContext().getString(R.string.cache)).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-            @Override
-            public boolean onMenuItemClick(final MenuItem item) {
-                callback.onGeocacheSelected(geocache);
-                return true;
-            }
+        subMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, getContext().getString(R.string.cache)).setOnMenuItemClickListener(item -> {
+            callback.onGeocacheSelected(geocache);
+            return true;
         });
     }
 

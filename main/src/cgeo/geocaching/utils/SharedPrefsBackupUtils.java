@@ -53,9 +53,7 @@ public class SharedPrefsBackupUtils extends Activity {
         if (!fullBackup) {
             backupInternal(false, runAfterwards);
         } else {
-            Dialogs.confirm(activityContext, R.string.init_backup_settings_backup_full, R.string.init_backup_settings_backup_full_confirm, (dialog, which) -> {
-                backupInternal(true, runAfterwards);
-            });
+            Dialogs.confirm(activityContext, R.string.init_backup_settings_backup_full, R.string.init_backup_settings_backup_full_confirm, (dialog, which) -> backupInternal(true, runAfterwards));
         }
     }
 
@@ -65,9 +63,7 @@ public class SharedPrefsBackupUtils extends Activity {
         } else {
             Dialogs.confirm(activityContext, R.string.init_backup_settings_restore, R.string.init_backup_settings_restore_confirm, (dialog, which) -> {
                 if (restoreInternal()) {
-                    Dialogs.confirmYesNo(activityContext, R.string.settings_restored, R.string.settings_restart, (dialog2, which2) -> {
-                        ProcessUtils.restartApplication(activityContext);
-                    });
+                    Dialogs.confirmYesNo(activityContext, R.string.settings_restored, R.string.settings_restart, (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
                 }
             });
         }

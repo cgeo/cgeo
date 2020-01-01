@@ -8,9 +8,7 @@ import cgeo.geocaching.utils.Log;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.LinearLayout;
 import android.widget.SimpleExpandableListAdapter;
 
@@ -69,14 +67,9 @@ public class FilterActivity extends AbstractActionBarActivity {
                         new int[] { android.R.id.text1 }
                 );
         filterList.setAdapter(adapter);
-        filterList.setOnChildClickListener(new OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(final ExpandableListView parent, final View v, final int groupPosition, final int childPosition, final long id) {
-                setFilterResult(groupPosition, childPosition);
-                return true;
-            }
-
+        filterList.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+            setFilterResult(groupPosition, childPosition);
+            return true;
         });
     }
 

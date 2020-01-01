@@ -17,10 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
 public class AddressListActivity extends AbstractActionBarActivity implements AddressClickListener {
@@ -46,19 +44,13 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
                 .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword));
-        AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(new Consumer<List<Address>>() {
-            @Override
-            public void accept(final List<Address> foundAddresses) {
-                waitDialog.dismiss();
-                addresses.addAll(foundAddresses);
-                adapter.notifyItemRangeInserted(0, foundAddresses.size());
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(final Throwable throwable) {
-                finish();
-                showToast(res.getString(R.string.err_unknown_address));
-            }
+        AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(foundAddresses -> {
+            waitDialog.dismiss();
+            addresses.addAll(foundAddresses);
+            adapter.notifyItemRangeInserted(0, foundAddresses.size());
+        }, throwable -> {
+            finish();
+            showToast(res.getString(R.string.err_unknown_address));
         });
     }
 

@@ -260,13 +260,10 @@ public class Settings {
             FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupDirectory());
 
             Log.i("Moving geocache data");
-            final FileFilter geocacheDirectories = new FileFilter() {
-                @Override
-                public boolean accept(final File pathname) {
-                    final String name = pathname.getName();
-                    return pathname.isDirectory() &&
-                            (HtmlImage.SHARED.equals(name) || LocalStorage.GEOCACHE_FILE_PATTERN.matcher(name).find());
-                }
+            final FileFilter geocacheDirectories = pathname -> {
+                final String name = pathname.getName();
+                return pathname.isDirectory() &&
+                        (HtmlImage.SHARED.equals(name) || LocalStorage.GEOCACHE_FILE_PATTERN.matcher(name).find());
             };
             final File[] list = LocalStorage.getLegacyExternalCgeoDirectory().listFiles(geocacheDirectories);
             if (list != null) {

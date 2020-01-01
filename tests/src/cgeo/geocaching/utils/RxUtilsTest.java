@@ -41,12 +41,9 @@ public class RxUtilsTest {
     @Test
     public void testObservableCache() {
         final AtomicInteger counter = new AtomicInteger(0);
-        final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<>(new Function<String, Observable<Integer>>() {
-            @Override
-            public Observable<Integer> apply(final String s) {
-                counter.incrementAndGet();
-                return Observable.just(s.length());
-            }
+        final RxUtils.ObservableCache<String, Integer> cache = new RxUtils.ObservableCache<>(s -> {
+            counter.incrementAndGet();
+            return Observable.just(s.length());
         });
         assertThat(cache.get("a").blockingSingle()).isEqualTo(1);
         assertThat(counter.get()).isEqualTo(1);
@@ -63,12 +60,7 @@ public class RxUtilsTest {
     @Test
     public void testDelayedUnsubscription() {
         final AtomicBoolean unsubscribed = new AtomicBoolean(false);
-        Observable.never().doOnDispose(new Action() {
-            @Override
-            public void run() {
-                unsubscribed.set(true);
-            }
-        }).lift(new RxUtils.DelayedUnsubscription<>(100, TimeUnit.MILLISECONDS)).subscribe().dispose();
+        Observable.never().doOnDispose(() -> unsubscribed.set(true)).lift(new RxUtils.DelayedUnsubscription<>(100, TimeUnit.MILLISECONDS)).subscribe().dispose();
         assertThat(unsubscribed.get()).isFalse();
         try {
             Thread.sleep(200);

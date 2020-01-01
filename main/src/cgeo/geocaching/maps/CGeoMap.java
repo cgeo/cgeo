@@ -28,7 +28,6 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
-import cgeo.geocaching.maps.interfaces.MapReadyCallback;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
@@ -62,7 +61,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -549,12 +547,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
         mapView.onCreate(savedInstanceState);
 
-        mapView.onMapReady(new MapReadyCallback() {
-            @Override
-            public void mapReady() {
-                initializeMap(trailHistory);
-            }
-        });
+        mapView.onMapReady(() -> initializeMap(trailHistory));
 
         prepareFilterBar();
 
@@ -1449,17 +1442,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         waitDialog.setCancelable(true);
         waitDialog.setCancelMessage(loadDetailsHandler.disposeMessage());
         waitDialog.setMax(detailTotal);
-        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            @Override
-            public void onCancel(final DialogInterface arg0) {
-                try {
-                    if (loadDetailsThread != null) {
-                        loadDetailsThread.stopIt();
-                    }
-                } catch (final Exception e) {
-                    Log.e("CGeoMap.storeCaches.onCancel", e);
+        waitDialog.setOnCancelListener(arg0 -> {
+            try {
+                if (loadDetailsThread != null) {
+                    loadDetailsThread.stopIt();
                 }
+            } catch (final Exception e) {
+                Log.e("CGeoMap.storeCaches.onCancel", e);
             }
         });
 

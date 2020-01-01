@@ -19,7 +19,6 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.functions.Action1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -281,31 +280,15 @@ public abstract class AbstractConnector implements IConnector {
         final List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
-            actions.add(new UserAction(R.string.user_menu_view_hidden, new Action1<UserAction.UAContext>() {
-
-                @Override
-                public void call(final UserAction.UAContext context) {
-                    CacheListActivity.startActivityOwner(context.getContext(), context.displayName);
-                }
-            }));
+            actions.add(new UserAction(R.string.user_menu_view_hidden, context -> CacheListActivity.startActivityOwner(context.getContext(), context.displayName)));
         }
 
         if (this instanceof ISearchByFinder) {
-            actions.add(new UserAction(R.string.user_menu_view_found, new Action1<UserAction.UAContext>() {
-
-                @Override
-                public void call(final UserAction.UAContext context) {
-                    CacheListActivity.startActivityFinder(context.getContext(), context.displayName);
-                }
-            }));
+            actions.add(new UserAction(R.string.user_menu_view_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.displayName)));
         }
-        actions.add(new UserAction(R.string.copy_to_clipboard, new Action1<UserAction.UAContext>() {
-
-            @Override
-            public void call(final UserAction.UAContext context) {
-                ClipboardUtils.copyToClipboard(context.displayName);
-                ActivityMixin.showToast(context.getContext(), R.string.clipboard_copy_ok);
-            }
+        actions.add(new UserAction(R.string.copy_to_clipboard, context -> {
+            ClipboardUtils.copyToClipboard(context.displayName);
+            ActivityMixin.showToast(context.getContext(), R.string.clipboard_copy_ok);
         }));
         return actions;
     }
@@ -317,13 +300,7 @@ public abstract class AbstractConnector implements IConnector {
     public static List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
-            actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.UAContext>() {
-
-                @Override
-                public void call(final UserAction.UAContext context) {
-                    ContactsAddon.openContactCard(context.getContext(), context.displayName);
-                }
-            }));
+            actions.add(new UserAction(R.string.user_menu_open_contact, context -> ContactsAddon.openContactCard(context.getContext(), context.displayName)));
         }
 
         return actions;

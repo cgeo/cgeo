@@ -123,14 +123,11 @@ public final class Network {
 
     private static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final Function<String, Single<? extends ObjectNode>> stringToJson = new Function<String, Single<? extends ObjectNode>>() {
-        @Override
-        public Single<? extends ObjectNode> apply(final String s) {
-            try {
-                return Single.just((ObjectNode) JsonUtils.reader.readTree(s));
-            } catch (final Throwable t) {
-                return Single.error(t);
-            }
+    public static final Function<String, Single<? extends ObjectNode>> stringToJson = s -> {
+        try {
+            return Single.just((ObjectNode) JsonUtils.reader.readTree(s));
+        } catch (final Throwable t) {
+            return Single.error(t);
         }
     };
 
@@ -188,12 +185,7 @@ public final class Network {
      * @return a single with the deserialized value, or an IO exception
      */
     public static <T> Single<T> postRequest(final String uri, final Class<T> clazz, final Parameters params, final Parameters headers) {
-        return request("POST", uri, params, headers, null).flatMap(getResponseData).map(new Function<String, T>() {
-            @Override
-            public T apply(@NonNull final String js) throws Exception {
-                return mapper.readValue(js, clazz);
-            }
-        });
+        return request("POST", uri, params, headers, null).flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
     }
 
     /**
@@ -211,12 +203,7 @@ public final class Network {
      */
     public static <T> Single<T> postRequest(final String uri, final Class<T> clazz, final Parameters params, final Parameters headers,
                                             final String fileFieldName, final String fileContentType, final File file) {
-        return postRequest(uri, params, headers, fileFieldName, fileContentType, file).flatMap(getResponseData).map(new Function<String, T>() {
-            @Override
-            public T apply(@NonNull final String js) throws Exception {
-                return mapper.readValue(js, clazz);
-            }
-        });
+        return postRequest(uri, params, headers, fileFieldName, fileContentType, file).flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
     }
 
 
@@ -419,12 +406,7 @@ public final class Network {
      */
     @NonNull
     public static <T> Single<T> getRequest(final String uri, final Class<T> clazz, @Nullable final Parameters params, @Nullable final Parameters headers) {
-         return getRequest(uri, params, headers).flatMap(getResponseData).map(new Function<String, T>() {
-             @Override
-             public T apply(@NonNull final String js) throws Exception {
-                 return mapper.readValue(js, clazz);
-             }
-         });
+         return getRequest(uri, params, headers).flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
     }
 
     /**
@@ -575,28 +557,25 @@ public final class Network {
      *   successful HTTP request with Content-Type "text/html", or containing an IOException otherwise.
      */
     public static Single<Document> getResponseDocument(final Single<Response> response) {
-        return response.flatMap(new Function<Response, Single<Document>>() {
-            @Override
-            public Single<Document> apply(final Response resp) {
-                try {
-                    final String uri = resp.request().url().toString();
-                    if (resp.isSuccessful()) {
-                        final MediaType mediaType = MediaType.parse(resp.header("content-type", ""));
-                        if (mediaType == null || !StringUtils.equals(mediaType.type(), "text") || !StringUtils.equals(mediaType.subtype(), "html")) {
-                            throw new IOException("unable to parse non HTML page with media type " + mediaType + " for " + uri);
-                        }
-                        final InputStream inputStream = resp.body().byteStream();
-                        try {
-                            return Single.just(Jsoup.parse(inputStream, null, uri));
-                        } finally {
-                            IOUtils.closeQuietly(inputStream);
-                            resp.close();
-                        }
+        return response.flatMap((Function<Response, Single<Document>>) resp -> {
+            try {
+                final String uri = resp.request().url().toString();
+                if (resp.isSuccessful()) {
+                    final MediaType mediaType = MediaType.parse(resp.header("content-type", ""));
+                    if (mediaType == null || !StringUtils.equals(mediaType.type(), "text") || !StringUtils.equals(mediaType.subtype(), "html")) {
+                        throw new IOException("unable to parse non HTML page with media type " + mediaType + " for " + uri);
                     }
-                    throw new IOException("unsuccessful request " + uri);
-                } catch (final Throwable t) {
-                    return Single.error(t);
+                    final InputStream inputStream = resp.body().byteStream();
+                    try {
+                        return Single.just(Jsoup.parse(inputStream, null, uri));
+                    } finally {
+                        IOUtils.closeQuietly(inputStream);
+                        resp.close();
+                    }
                 }
+                throw new IOException("unsuccessful request " + uri);
+            } catch (final Throwable t) {
+                return Single.error(t);
             }
         });
     }
@@ -618,31 +597,23 @@ public final class Network {
         }
     }
 
-    public static final Function<Response, Single<String>> getResponseData = new Function<Response, Single<String>>() {
-        @Override
-        public Single<String> apply(final Response response) {
-            if (response.isSuccessful()) {
-                try {
-                    return Single.just(response.body().string());
-                } catch (final IOException e) {
-                    return Single.error(e);
-                } finally {
-                    response.close();
-                }
+    public static final Function<Response, Single<String>> getResponseData = response -> {
+        if (response.isSuccessful()) {
+            try {
+                return Single.just(response.body().string());
+            } catch (final IOException e) {
+                return Single.error(e);
+            } finally {
+                response.close();
             }
-            return Single.error(new IOException("request was not successful"));
         }
+        return Single.error(new IOException("request was not successful"));
     };
 
     /**
      * Filter only successful responses for use with flatMap.
      */
-    public static final Function<Response, Single<Response>> withSuccess = new Function<Response, Single<Response>>() {
-        @Override
-        public Single<Response> apply(final Response response) {
-            return response.isSuccessful() ? Single.just(response) : Single.<Response>error(new IOException("unsuccessful response: " + response));
-        }
-    };
+    public static final Function<Response, Single<Response>> withSuccess = response -> response.isSuccessful() ? Single.just(response) : Single.<Response>error(new IOException("unsuccessful response: " + response));
 
     /**
      * Wait until a request has completed and check its response status. An exception will be thrown if the
@@ -654,17 +625,7 @@ public final class Network {
         Completable.fromSingle(response.flatMap(withSuccess)).blockingAwait();
     }
 
-    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = new Function<Response, Single<String>>() {
-        @Override
-        public Single<String> apply(final Response response) throws Exception {
-            return getResponseData.apply(response).map(new Function<String, String>() {
-                @Override
-                public String apply(final String s) {
-                    return TextUtils.replaceWhitespace(s);
-                }
-            });
-        }
-    };
+    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(s -> TextUtils.replaceWhitespace(s));
 
     @Nullable
     public static String rfc3986URLEncode(final String text) {

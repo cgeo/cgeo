@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
@@ -39,11 +38,8 @@ import android.widget.TextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.DialogFragment;
 
-import java.util.concurrent.Callable;
-
 import io.reactivex.Maybe;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
     protected Resources res = null;
@@ -175,19 +171,11 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidRxUtils.bindActivity(getActivity(), Maybe.fromCallable(new Callable<GCVoteRating>() {
-            @Override
-            public GCVoteRating call() {
-                return GCVote.getRating(cache.getGuid(), geocode);
-            }
-        })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Consumer<GCVoteRating>() {
-            @Override
-            public void accept(final GCVoteRating rating) {
-                cache.setRating(rating.getRating());
-                cache.setVotes(rating.getVotes());
-                DataStore.saveChangedCache(cache);
-                details.addRating(cache);
-            }
+        AndroidRxUtils.bindActivity(getActivity(), Maybe.fromCallable(() -> GCVote.getRating(cache.getGuid(), geocode))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(rating -> {
+            cache.setRating(rating.getRating());
+            cache.setVotes(rating.getVotes());
+            DataStore.saveChangedCache(cache);
+            details.addRating(cache);
         });
     }
 
@@ -295,12 +283,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
             return true;
         }
-        if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(final DialogInterface dialog) {
-                init();
-            }
-        })) {
+        if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
             return true;
         }
 

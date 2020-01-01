@@ -382,12 +382,7 @@ public final class LogEntry {
     /**
      * {@link LogEntry} {@link Comparator} by descending date
      */
-    public static final Comparator<LogEntry> DESCENDING_DATE_COMPARATOR = new Comparator<LogEntry>() {
-        @Override
-        public int compare(final LogEntry logEntry1, final LogEntry logEntry2) {
-            return (int) (logEntry2.date - logEntry1.date);
-        }
-    };
+    public static final Comparator<LogEntry> DESCENDING_DATE_COMPARATOR = (logEntry1, logEntry2) -> (int) (logEntry2.date - logEntry1.date);
 
     /**
      * Return {@code true} if passed {@link LogType} Object is equal to the current {@link LogType} Object.

@@ -17,7 +17,6 @@ import androidx.core.view.ActionProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Provides a sub menu for sorting caches. Register your listener in the onCreateOptionsMenu of the containing activity.
@@ -95,13 +94,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         register(R.string.caches_sort_vote, VoteComparator.class);
 
         // sort the menu labels alphabetically for easier reading
-        Collections.sort(registry, new Comparator<ComparatorEntry>() {
-
-            @Override
-            public int compare(final ComparatorEntry lhs, final ComparatorEntry rhs) {
-                return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
-            }
-        });
+        Collections.sort(registry, (lhs, rhs) -> TextUtils.COLLATOR.compare(lhs.name, rhs.name));
     }
 
     @Override

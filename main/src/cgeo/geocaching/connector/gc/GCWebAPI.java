@@ -136,27 +136,19 @@ class GCWebAPI {
             }
             // We may request several authorizations at the same time. This is not a big deal, and the web
             // implementation does this much more than we will ever do.
-            return getAuthorization().map(new Function<Authorization, Authorization>() {
-                @Override
-                public Authorization apply(@NonNull final Authorization authorization) throws Exception {
-                    synchronized (CACHE_LOCK) {
-                        cachedAuthorization = authorization;
-                        // Expires after .8 of authorized caching time.
-                        cachedAuthorizationExpires = System.currentTimeMillis() + authorization.expiresIn * 800;
-                        return cachedAuthorization;
-                    }
+            return getAuthorization().map(authorization -> {
+                synchronized (CACHE_LOCK) {
+                    cachedAuthorization = authorization;
+                    // Expires after .8 of authorized caching time.
+                    cachedAuthorizationExpires = System.currentTimeMillis() + authorization.expiresIn * 800;
+                    return cachedAuthorization;
                 }
             });
         }
     }
 
     static Single<Parameters> getAuthorizationHeader() {
-        return getCachedAuthorization().map(new Function<Authorization, Parameters>() {
-            @Override
-            public Parameters apply(@NonNull final Authorization authorization) throws Exception {
-                return new Parameters("Authorization", authorization.getAuthorizationField());
-            }
-        });
+        return getCachedAuthorization().map(authorization -> new Parameters("Authorization", authorization.getAuthorizationField()));
     }
 
     /**
@@ -297,67 +289,32 @@ class GCWebAPI {
 
 
     private static <T> Single<T> getAPI(final String path, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, SingleSource<T>>() {
-            @Override
-            public SingleSource<T> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.getRequest(API_URL + path, clazz, null, headers).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.getRequest(API_URL + path, clazz, null, headers).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static <T> Single<T> getAPI(final String path, final Parameters parameters, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, SingleSource<T>>() {
-            @Override
-            public SingleSource<T> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.getRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.getRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static Single<Response> patchAPI(final String path) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, Single<Response>>() {
-            @Override
-            public Single<Response> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.patchRequest(API_URL + path, headers).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> Network.patchRequest(API_URL + path, headers).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static Single<Response> postAPI(final String path, final Parameters parameters) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, Single<Response>>() {
-            @Override
-            public Single<Response> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.postRequest(API_URL + path, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> Network.postRequest(API_URL + path, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static <T> Single<T> postAPI(final String path, final Parameters parameters, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, SingleSource<T>>() {
-            @Override
-            public SingleSource<T> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.postRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.postRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static <T> Single<T> postAPI(final String path, final Parameters parameters,
                                          final String fileFieldName, final String fileContentType, final File file, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, SingleSource<T>>() {
-            @Override
-            public SingleSource<T> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.postRequest(API_URL + path, clazz, parameters, headers, fileFieldName, fileContentType, file).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.postRequest(API_URL + path, clazz, parameters, headers, fileFieldName, fileContentType, file).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static Single<Response> postAPI(final String path, final Object jsonObject) {
-        return getAuthorizationHeader().flatMap(new Function<Parameters, Single<Response>>() {
-            @Override
-            public Single<Response> apply(@NonNull final Parameters headers) throws Exception {
-                return Network.postJsonRequest(API_URL + path, headers, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        });
+        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> Network.postJsonRequest(API_URL + path, headers, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     static Single<CacheDetails> getCacheDetails(final String geocode) {

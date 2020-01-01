@@ -9,13 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GeoitemRef {
 
-    public static final Comparator<? super GeoitemRef> NAME_COMPARATOR = new Comparator<GeoitemRef>() {
-
-        @Override
-        public int compare(final GeoitemRef left, final GeoitemRef right) {
-            return TextUtils.COLLATOR.compare(left.getName(), right.getName());
-        }
-    };
+    public static final Comparator<? super GeoitemRef> NAME_COMPARATOR = (Comparator<GeoitemRef>) (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName());
 
     private final String itemCode;
     private final CoordinatesType type;

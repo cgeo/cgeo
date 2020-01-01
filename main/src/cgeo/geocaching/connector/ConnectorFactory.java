@@ -42,12 +42,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
@@ -336,12 +334,7 @@ public final class ConnectorFactory {
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return SearchResult.parallelCombineActive(searchByViewPortConns, new Function<ISearchByViewPort, SearchResult>() {
-            @Override
-            public SearchResult apply(final ISearchByViewPort connector) {
-                return connector.searchByViewport(viewport);
-            }
-        });
+        return SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
     }
 
     @Nullable
@@ -424,38 +417,13 @@ public final class ConnectorFactory {
     public static Maybe<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
         if (StringUtils.isEmpty(geocode)) {
             // Only solution is GC search by uid
-            return Maybe.fromCallable(new Callable<Trackable>() {
-                @Override
-                public Trackable call() {
-                    return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
-                }
-            }).subscribeOn(AndroidRxUtils.networkScheduler);
+            return Maybe.fromCallable(() -> TravelBugConnector.getInstance().searchTrackable(geocode, guid, id)).subscribeOn(AndroidRxUtils.networkScheduler);
         }
 
         final Observable<Trackable> fromNetwork =
-                Observable.fromIterable(getTrackableConnectors()).filter(new Predicate<TrackableConnector>() {
-                    @Override
-                    public boolean test(final TrackableConnector trackableConnector) {
-                        return trackableConnector.canHandleTrackable(geocode, brand);
-                    }
-                }).flatMapMaybe(new Function<TrackableConnector, Maybe<Trackable>>() {
-                    @Override
-                    public Maybe<Trackable> apply(final TrackableConnector trackableConnector) {
-                        return Maybe.fromCallable(new Callable<Trackable>() {
-                            @Override
-                            public Trackable call() {
-                                return trackableConnector.searchTrackable(geocode, guid, id);
-                            }
-                        }).subscribeOn(AndroidRxUtils.networkScheduler);
-                    }
-                });
+                Observable.fromIterable(getTrackableConnectors()).filter(trackableConnector -> trackableConnector.canHandleTrackable(geocode, brand)).flatMapMaybe((Function<TrackableConnector, Maybe<Trackable>>) trackableConnector -> Maybe.fromCallable(() -> trackableConnector.searchTrackable(geocode, guid, id)).subscribeOn(AndroidRxUtils.networkScheduler));
 
-        final Maybe<Trackable> fromLocalStorage = Maybe.fromCallable(new Callable<Trackable>() {
-            @Override
-            public Trackable call() {
-                return DataStore.loadTrackable(geocode);
-            }
-        }).subscribeOn(Schedulers.io());
+        final Maybe<Trackable> fromLocalStorage = Maybe.fromCallable(() -> DataStore.loadTrackable(geocode)).subscribeOn(Schedulers.io());
 
         return fromNetwork.firstElement().switchIfEmpty(fromLocalStorage);
     }

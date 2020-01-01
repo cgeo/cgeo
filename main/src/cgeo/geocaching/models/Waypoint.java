@@ -259,13 +259,7 @@ public class Waypoint implements IWaypoint {
     /**
      * Sort waypoints by their probable order (e.g. parking first, final last).
      */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = new Comparator<Waypoint>() {
-
-        @Override
-        public int compare(final Waypoint left, final Waypoint right) {
-            return left.order() - right.order();
-        }
-    };
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) (left, right) -> left.order() - right.order();
 
     /**
      * Delegates the creation of the waypoint-id for gpx-export to the waypoint

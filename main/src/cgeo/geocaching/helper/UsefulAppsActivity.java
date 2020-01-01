@@ -36,15 +36,11 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
         ButterKnife.bind(this);
 
         final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.apps_list, false, false);
-        view.setAdapter(new HelperAppAdapter(this, HELPER_APPS, new HelperAppClickListener() {
-
-            @Override
-            public void onClickHelperApp(final HelperApp helperApp) {
-                if (helperApp.packageName.startsWith("http")) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(helperApp.packageName)));
-                } else {
-                    ProcessUtils.openMarket(UsefulAppsActivity.this, helperApp.packageName);
-                }
+        view.setAdapter(new HelperAppAdapter(this, HELPER_APPS, helperApp -> {
+            if (helperApp.packageName.startsWith("http")) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(helperApp.packageName)));
+            } else {
+                ProcessUtils.openMarket(UsefulAppsActivity.this, helperApp.packageName);
             }
         }));
 

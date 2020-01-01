@@ -50,8 +50,6 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDirectory;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Cancellable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.internal.disposables.CancellableDisposable;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -108,12 +106,7 @@ public class ImagesList {
     public Disposable loadImages(final View parentView, final Collection<Image> images) {
         // Start with a fresh disposable because of this method can be called several times if the
         // enclosing activity is stopped/restarted.
-        final CompositeDisposable disposables = new CompositeDisposable(new CancellableDisposable(new Cancellable() {
-            @Override
-            public void cancel() throws Exception {
-                removeAllViews();
-            }
-        }));
+        final CompositeDisposable disposables = new CompositeDisposable(new CancellableDisposable(() -> removeAllViews()));
 
         imagesView = parentView.findViewById(R.id.spoiler_list);
 
@@ -138,12 +131,7 @@ public class ImagesList {
             assert imageView != null;
             rowView.addView(imageView);
             imagesView.addView(rowView);
-            disposables.add(AndroidRxUtils.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Consumer<BitmapDrawable>() {
-                @Override
-                public void accept(final BitmapDrawable image) {
-                    display(imageView, image, img, rowView);
-                }
-            }));
+            disposables.add(AndroidRxUtils.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(image -> display(imageView, image, img, rowView)));
         }
 
         return disposables;

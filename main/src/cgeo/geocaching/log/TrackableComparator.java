@@ -5,17 +5,11 @@ import cgeo.geocaching.utils.TextUtils;
 import java.util.Comparator;
 
 public enum TrackableComparator {
-    TRACKABLE_COMPARATOR_NAME(new Comparator<TrackableLog>() {
-        @Override
-        public int compare(final TrackableLog lhs, final TrackableLog rhs) {
-            return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
-        }
+    TRACKABLE_COMPARATOR_NAME((lhs, rhs) -> {
+        return TextUtils.COLLATOR.compare(lhs.name, rhs.name);
     }),
-    TRACKABLE_COMPARATOR_TRACKCODE(new Comparator<TrackableLog>() {
-        @Override
-        public int compare(final TrackableLog lhs, final TrackableLog rhs) {
-            return TextUtils.COLLATOR.compare(lhs.trackCode, rhs.trackCode);
-        }
+    TRACKABLE_COMPARATOR_TRACKCODE((lhs, rhs) -> {
+        return TextUtils.COLLATOR.compare(lhs.trackCode, rhs.trackCode);
     });
 
     private final Comparator<TrackableLog> comparator;

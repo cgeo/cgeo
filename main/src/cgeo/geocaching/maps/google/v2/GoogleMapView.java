@@ -49,7 +49,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.VisibleRegion;
 
 public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOverlayItem>, OnMapReadyCallback {
@@ -106,16 +105,13 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(() -> recognizePositionChange());
         googleMap.setOnCameraIdleListener(() -> recognizePositionChange());
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(final Marker marker) {
-                // onCacheTapListener will fire on onSingleTapUp event, not here, because this event
-                // is fired 300 ms after map tap, which is too slow for UI
+        googleMap.setOnMarkerClickListener(marker -> {
+            // onCacheTapListener will fire on onSingleTapUp event, not here, because this event
+            // is fired 300 ms after map tap, which is too slow for UI
 
-                // suppress default behaviour (yeah, true == suppress)
-                // ("The default behavior is for the camera to move to the marker and an info window to appear.")
-                return true;
-            }
+            // suppress default behaviour (yeah, true == suppress)
+            // ("The default behavior is for the camera to move to the marker and an info window to appear.")
+            return true;
         });
         if (Settings.isLongTapCreateUDC()) {
             googleMap.setOnMapLongClickListener(tapLatLong -> InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID));
@@ -159,9 +155,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 for (final MapSource mapSource : mapSources) {
                     if (mapSource instanceof MapsforgeMapSource) {
                         Settings.setMapSource(mapSource);
-                        Dialogs.message((Activity) context, R.string.warn_gm_not_available, R.string.switched_to_mf, (dialog2, whichButton2) -> {
-                            ((Activity) context).finish();
-                        });
+                        Dialogs.message((Activity) context, R.string.warn_gm_not_available, R.string.switched_to_mf, (dialog2, whichButton2) -> ((Activity) context).finish());
                         break;
                     }
                 }

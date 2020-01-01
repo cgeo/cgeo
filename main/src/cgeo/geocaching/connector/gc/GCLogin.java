@@ -30,8 +30,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -398,31 +396,20 @@ public class GCLogin extends AbstractLogin {
      */
     static Single<String> retrieveHomeLocation() {
         return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"))
-                .map(new Function<Document, String>() {
-                    @Override
-                    public String apply(final Document document) {
-                        final Document innerHtml = Jsoup.parse(document.getElementById("tplSearchCoords").html());
-                        return innerHtml.select("input.search-coordinates").attr("value");
-                    }
+                .map(document -> {
+                    final Document innerHtml = Jsoup.parse(document.getElementById("tplSearchCoords").html());
+                    return innerHtml.select("input.search-coordinates").attr("value");
                 });
     }
 
     private static void setHomeLocation() {
-        retrieveHomeLocation().subscribe(new Consumer<String>() {
-            @Override
-            public void accept(final String homeLocationStr) throws Exception {
-                if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
-                    assert homeLocationStr != null;
-                    Log.i("Setting home location to " + homeLocationStr);
-                    Settings.setHomeLocation(homeLocationStr);
-                }
+        retrieveHomeLocation().subscribe(homeLocationStr -> {
+            if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
+                assert homeLocationStr != null;
+                Log.i("Setting home location to " + homeLocationStr);
+                Settings.setHomeLocation(homeLocationStr);
             }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(final Throwable throwable) throws Exception {
-                Log.w("Unable to retrieve the home location");
-            }
-        });
+        }, throwable -> Log.w("Unable to retrieve the home location"));
     }
 
     public ServerParameters getServerParameters() {

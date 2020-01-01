@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -71,13 +70,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
             if (!sortedLogCounts.isEmpty()) {
                 // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
-
-                    @Override
-                    public int compare(final Entry<LogType, Integer> logCountItem1, final Entry<LogType, Integer> logCountItem2) {
-                        return logCountItem1.getKey().compareTo(logCountItem2.getKey());
-                    }
-                });
+                Collections.sort(sortedLogCounts, (logCountItem1, logCountItem2) -> logCountItem1.getKey().compareTo(logCountItem2.getKey()));
 
                 final List<String> labels = new ArrayList<>(sortedLogCounts.size());
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {

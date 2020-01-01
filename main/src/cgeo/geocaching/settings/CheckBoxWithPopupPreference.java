@@ -6,7 +6,6 @@ import cgeo.geocaching.ui.UrlPopup;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,18 +59,15 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
         }
 
         // show dialog when checkbox enabled
-        setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                if (baseOnPrefChangeListener != null) {
-                    baseOnPrefChangeListener.onPreferenceChange(preference, newValue);
-                }
-                if (!(Boolean) newValue) {
-                    return true;
-                }
-                new UrlPopup(preference.getContext()).show(title, text, url, urlButton);
+        setOnPreferenceChangeListener((preference, newValue) -> {
+            if (baseOnPrefChangeListener != null) {
+                baseOnPrefChangeListener.onPreferenceChange(preference, newValue);
+            }
+            if (!(Boolean) newValue) {
                 return true;
             }
+            new UrlPopup(preference.getContext()).show(title, text, url, urlButton);
+            return true;
         });
 
         return super.onCreateView(parent);

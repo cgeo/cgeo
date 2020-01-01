@@ -150,33 +150,29 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByGeocodeNotLoggedIn() {
-        withMockedLoginDo(new Runnable() {
+        withMockedLoginDo(() -> {
+            // non premium cache
+            MockedCache cache = new GC3FJ5F();
 
-            @Override
-            public void run() {
-                // non premium cache
-                MockedCache cache = new GC3FJ5F();
+            deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                deleteCacheFromDBAndLogout(cache.getGeocode());
+            SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
+            assertThat(search).isNotNull();
+            assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
+            final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            // coords must be null if the user is not logged in
+            assertThat(searchedCache).isNotNull();
+            assert searchedCache != null; // eclipse bug
+            assertThat(searchedCache.getCoords()).isNull();
 
-                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
-                final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-                // coords must be null if the user is not logged in
-                assertThat(searchedCache).isNotNull();
-                assert searchedCache != null; // eclipse bug
-                assertThat(searchedCache.getCoords()).isNull();
+            // premium cache. Not visible to guests
+            cache = new GC2JVEH();
 
-                // premium cache. Not visible to guests
-                cache = new GC2JVEH();
+            deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                deleteCacheFromDBAndLogout(cache.getGeocode());
-
-                search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).isEmpty();
-            }
+            search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
+            assertThat(search).isNotNull();
+            assertThat(search.getGeocodes()).isEmpty();
         });
     }
 
@@ -207,15 +203,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByCoords() {
-        withMockedFilters(new Runnable() {
-
-            @Override
-            public void run() {
-                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
-                assertThat(search.getGeocodes()).contains("GC1HBMY");
-            }
+        withMockedFilters(() -> {
+            final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY);
+            assertThat(search).isNotNull();
+            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
+            assertThat(search.getGeocodes()).contains("GC1HBMY");
         });
     }
 
@@ -224,15 +216,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByOwner() {
-        withMockedFilters(new Runnable() {
-
-            @Override
-            public void run() {
-                final SearchResult search = GCParser.searchByOwner("Lineflyer", CacheType.EARTH);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).hasSize(5);
-                assertThat(search.getGeocodes()).contains("GC7J99X");
-            }
+        withMockedFilters(() -> {
+            final SearchResult search = GCParser.searchByOwner("Lineflyer", CacheType.EARTH);
+            assertThat(search).isNotNull();
+            assertThat(search.getGeocodes()).hasSize(5);
+            assertThat(search.getGeocodes()).contains("GC7J99X");
         });
     }
 
@@ -241,15 +229,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByUsername() {
-        withMockedFilters(new Runnable() {
-
-            @Override
-            public void run() {
-                final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM);
-                assertThat(search).isNotNull();
-                assertThat(search.getTotalCountGC()).isEqualTo(10);
-                assertThat(search.getGeocodes()).contains("GCP0A9");
-            }
+        withMockedFilters(() -> {
+            final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM);
+            assertThat(search).isNotNull();
+            assertThat(search.getTotalCountGC()).isEqualTo(10);
+            assertThat(search.getGeocodes()).contains("GCP0A9");
         });
     }
 
@@ -258,38 +242,34 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByViewport() {
-        withMockedFilters(new Runnable() {
+        withMockedFilters(() -> {
+            // backup user settings
+            final CacheType cacheType = Settings.getCacheType();
 
-            @Override
-            public void run() {
-                // backup user settings
-                final CacheType cacheType = Settings.getCacheType();
+            try {
+                // set up settings required for test
+                TestSettings.setExcludeMine(false);
+                Settings.setCacheType(CacheType.ALL);
 
-                try {
-                    // set up settings required for test
-                    TestSettings.setExcludeMine(false);
-                    Settings.setCacheType(CacheType.ALL);
+                final GC3FJ5F mockedCache = new GC3FJ5F();
+                deleteCacheFromDB(mockedCache.getGeocode());
 
-                    final GC3FJ5F mockedCache = new GC3FJ5F();
-                    deleteCacheFromDB(mockedCache.getGeocode());
+                final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
-                    final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
+                // check coords
+                final SearchResult search = ConnectorFactory.searchByViewport(viewport);
+                assertThat(search).isNotNull();
+                assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
+                Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                assert parsedCache != null;
+                assertThat(parsedCache).isNotNull();
 
-                    // check coords
-                    final SearchResult search = ConnectorFactory.searchByViewport(viewport);
-                    assertThat(search).isNotNull();
-                    assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
-                    Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                    assert parsedCache != null;
-                    assertThat(parsedCache).isNotNull();
+                assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
+                assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
 
-                    assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
-                    assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
-
-                } finally {
-                    // restore user settings
-                    Settings.setCacheType(cacheType);
-                }
+            } finally {
+                // restore user settings
+                Settings.setCacheType(cacheType);
             }
         });
     }

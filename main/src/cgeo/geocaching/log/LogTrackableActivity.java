@@ -34,7 +34,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.R.layout;
 import android.R.string;
@@ -67,7 +66,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -210,30 +208,24 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         createDisposables.add(AndroidRxUtils.bindActivity(this, ConnectorFactory.loadTrackable(geocode, null, null, brand))
                 .toSingle()
-                .subscribe(new Consumer<Trackable>() {
-            @Override
-            public void accept(final Trackable newTrackable) {
-                if (trackingCode != null) {
-                    newTrackable.setTrackingcode(trackingCode);
-                }
-                startLoader(newTrackable);
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(final Throwable throwable) throws Exception {
-                Log.e("cannot load trackable " + geocode, throwable);
-                showProgress(false);
+                .subscribe(newTrackable -> {
+                    if (trackingCode != null) {
+                        newTrackable.setTrackingcode(trackingCode);
+                    }
+                    startLoader(newTrackable);
+                }, throwable -> {
+                    Log.e("cannot load trackable " + geocode, throwable);
+                    showProgress(false);
 
-                if (StringUtils.isNotBlank(geocode)) {
-                    showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
-                } else {
-                    showToast(res.getString(R.string.err_tb_find_that));
-                }
+                    if (StringUtils.isNotBlank(geocode)) {
+                        showToast(res.getString(R.string.err_tb_find) + ' ' + geocode + '.');
+                    } else {
+                        showToast(res.getString(R.string.err_tb_find_that));
+                    }
 
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        }));
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }));
     }
 
     private void startLoader(@NonNull final Trackable newTrackable) {
@@ -350,13 +342,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsGeocode(input);
-            }
-        }));
+        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, input -> DataStore.getSuggestionsGeocode(input)));
     }
 
     @Override

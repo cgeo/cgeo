@@ -33,12 +33,10 @@ import androidx.annotation.StringRes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -377,12 +375,7 @@ public final class Dialogs {
 
         final AlertDialog dialog = builder.create();
         if (iconObservable != null) {
-            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Drawable>() {
-                @Override
-                public void accept(final Drawable drawable) {
-                    dialog.setIcon(drawable);
-                }
-            });
+            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(drawable -> dialog.setIcon(drawable));
         }
         dialog.show();
     }
@@ -576,12 +569,7 @@ public final class Dialogs {
         // then add all other cache types sorted alphabetically
         final List<CacheType> sorted = new ArrayList<>(Arrays.asList(CacheType.values()));
         sorted.removeAll(cacheTypes);
-        Collections.sort(sorted, new Comparator<CacheType>() {
-            @Override
-            public int compare(final CacheType left, final CacheType right) {
-                return TextUtils.COLLATOR.compare(left.getL10n(), right.getL10n());
-            }
-        });
+        Collections.sort(sorted, (left, right) -> TextUtils.COLLATOR.compare(left.getL10n(), right.getL10n()));
         cacheTypes.addAll(sorted);
 
         final int checkedItem = Math.max(0, cacheTypes.indexOf(Settings.getCacheType()));

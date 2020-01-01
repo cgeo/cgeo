@@ -5,7 +5,6 @@ import cgeo.geocaching.ui.AbstractMenuActionProvider;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
 
 import androidx.core.view.ActionProvider;
@@ -48,13 +47,9 @@ public class ListNavigationSelectionActionProvider extends AbstractMenuActionPro
         final List<CacheListApp> activeApps = CacheListApps.getActiveApps();
         for (int i = 0; i < activeApps.size(); i++) {
             final CacheListApp app = activeApps.get(i);
-            subMenu.add(Menu.NONE, i, Menu.NONE, app.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-                @Override
-                public boolean onMenuItemClick(final MenuItem item) {
-                    callback.onListNavigationSelected(app);
-                    return true;
-                }
+            subMenu.add(Menu.NONE, i, Menu.NONE, app.getName()).setOnMenuItemClickListener(item -> {
+                callback.onListNavigationSelected(app);
+                return true;
             });
         }
     }

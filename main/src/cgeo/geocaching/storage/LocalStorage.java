@@ -26,7 +26,6 @@ import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.CharEncoding;
@@ -339,36 +338,30 @@ public final class LocalStorage {
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
         final Progress progress = new Progress();
         progress.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
-        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
-            @Override
-            public Observable<Boolean> call() {
-                final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
-                final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
-                Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
-                final File[] files = currentDataDir.listFiles();
-                boolean success = true;
-                if (ArrayUtils.isNotEmpty(files)) {
-                    progress.setMaxProgressAndReset(files.length);
-                    progress.setProgress(0);
-                    for (final File geocacheDataDir : files) {
-                        success &= FileUtils.moveTo(geocacheDataDir, newDataDir);
-                        progress.incrementProgressBy(1);
-                    }
+        AndroidRxUtils.bindActivity(fromActivity, Observable.defer((Callable<Observable<Boolean>>) () -> {
+            final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
+            final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
+            Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());
+            final File[] files = currentDataDir.listFiles();
+            boolean success = true;
+            if (ArrayUtils.isNotEmpty(files)) {
+                progress.setMaxProgressAndReset(files.length);
+                progress.setProgress(0);
+                for (final File geocacheDataDir : files) {
+                    success &= FileUtils.moveTo(geocacheDataDir, newDataDir);
+                    progress.incrementProgressBy(1);
                 }
-
-                Settings.setExternalPrivateCgeoDirectory(newExtDir);
-                Log.i("Ext private c:geo dir was moved to " + newExtDir);
-
-                externalPrivateCgeoDirectory = new File(newExtDir);
-                return Observable.just(success);
             }
-        }).subscribeOn(Schedulers.io())).subscribe(new Consumer<Boolean>() {
-            @Override
-            public void accept(final Boolean success) {
-                progress.dismiss();
-                final String message = success ? fromActivity.getString(R.string.init_datadirmove_success) : fromActivity.getString(R.string.init_datadirmove_failed);
-                Dialogs.message(fromActivity, R.string.init_datadirmove_datadirmove, message);
-            }
+
+            Settings.setExternalPrivateCgeoDirectory(newExtDir);
+            Log.i("Ext private c:geo dir was moved to " + newExtDir);
+
+            externalPrivateCgeoDirectory = new File(newExtDir);
+            return Observable.just(success);
+        }).subscribeOn(Schedulers.io())).subscribe(success -> {
+            progress.dismiss();
+            final String message = success ? fromActivity.getString(R.string.init_datadirmove_success) : fromActivity.getString(R.string.init_datadirmove_failed);
+            Dialogs.message(fromActivity, R.string.init_datadirmove_datadirmove, message);
         });
     }
 

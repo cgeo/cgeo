@@ -83,7 +83,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -130,10 +129,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -282,20 +279,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void replaceCacheListFromSearch() {
         if (search != null) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    cacheList.clear();
+            runOnUiThread(() -> {
+                cacheList.clear();
 
-                    // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
-                    // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
-                    final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
+                // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
+                final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
 
-                    cacheList.addAll(cachesFromSearchResult);
-                    adapter.reFilter();
-                    updateTitle();
-                    showFooterMoreCaches();
-                }
+                cacheList.addAll(cachesFromSearchResult);
+                adapter.reFilter();
+                updateTitle();
+                showFooterMoreCaches();
             });
         }
     }
@@ -573,15 +567,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (actionBar != null) {
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
-                @Override
-                public boolean onNavigationItemSelected(final int i, final long l) {
-                    final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
-                    if (newListId != listId) {
-                        switchListById(newListId);
-                    }
-                    return true;
+            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, (i, l) -> {
+                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+                if (newListId != listId) {
+                    switchListById(newListId);
                 }
+                return true;
             });
         }
     }
@@ -624,13 +615,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpxAttachement() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title, new Action1<Integer>() {
-
-            @Override
-            public void call(final Integer listId) {
-                new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX();
-                switchListById(listId);
-            }
+        new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title, listId -> {
+            new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX();
+            switchListById(listId);
         }, true, 0, listNameMemento);
     }
 
@@ -691,30 +678,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
         sortProvider.setIsEventsOnly(adapter.isEventsOnly());
-        sortProvider.setClickListener(new Action1<CacheComparator>() {
-
-            @Override
-            public void call(final CacheComparator selectedComparator) {
-                final CacheComparator oldComparator = adapter.getCacheComparator();
-                // selecting the same sorting twice will toggle the order
-                if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
-                    adapter.toggleInverseSort();
-                } else {
-                    // always reset the inversion for a new sorting criteria
-                    adapter.resetInverseSort();
-                }
-                setComparator(selectedComparator);
-                sortProvider.setSelection(selectedComparator);
+        sortProvider.setClickListener(selectedComparator -> {
+            final CacheComparator oldComparator = adapter.getCacheComparator();
+            // selecting the same sorting twice will toggle the order
+            if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
+                adapter.toggleInverseSort();
+            } else {
+                // always reset the inversion for a new sorting criteria
+                adapter.resetInverseSort();
             }
+            setComparator(selectedComparator);
+            sortProvider.setSelection(selectedComparator);
         });
 
-        ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), new ListNavigationSelectionActionProvider.Callback() {
-
-            @Override
-            public void onListNavigationSelected(final CacheListApp app) {
-                app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch());
-            }
-        });
+        ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
 
         return true;
     }
@@ -1065,12 +1042,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void showFilterMenu(final View view) {
         if (view != null && Settings.getCacheType() != CacheType.ALL) {
-            Dialogs.selectGlobalTypeFilter(this, new Action1<CacheType>() {
-                @Override
-                public void call(final CacheType cacheType) {
-                    refreshCurrentList();
-                    prepareFilterBar();
-                }
+            Dialogs.selectGlobalTypeFilter(this, cacheType -> {
+                refreshCurrentList();
+                prepareFilterBar();
             });
         } else {
             FilterActivity.selectFilter(this);
@@ -1221,14 +1195,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 // https://code.google.com/p/android/issues/detail?id=7139
                 lastMenuInfo = info;
                 final View selectedView = adapterInfo.targetView;
-                LoggingUI.onMenuItemSelected(item, this, cache, new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(final DialogInterface dialog) {
-                        if (selectedView != null) {
-                            final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
-                            if (holder != null) {
-                                CacheListAdapter.updateViewHolder(holder, cache, res);
-                            }
+                LoggingUI.onMenuItemSelected(item, this, cache, dialog -> {
+                    if (selectedView != null) {
+                        final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
+                        if (holder != null) {
+                            CacheListAdapter.updateViewHolder(holder, cache, res);
                         }
                     }
                 });
@@ -1415,12 +1386,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (Settings.getChooseList() && type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    new Action1<Set<Integer>>() {
-                        @Override
-                        public void call(final Set<Integer> selectedListIds) {
-                            refreshStoredInternal(caches, selectedListIds);
-                        }
-                    }, true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento, false);
+                    selectedListIds -> refreshStoredInternal(caches, selectedListIds), true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento, false);
         } else {
             final Set<Integer> additionalListIds = new HashSet<>();
             if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
@@ -1496,25 +1462,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void loadDetails(final DisposableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
         final Observable<Geocache> allCaches;
         allCaches = Observable.fromIterable(caches);
-        final Observable<Geocache> loaded = allCaches.flatMap(new Function<Geocache, Observable<Geocache>>() {
-            @Override
-            public Observable<Geocache> apply(final Geocache cache) {
-                return Observable.create(new ObservableOnSubscribe<Geocache>() {
-                    @Override
-                    public void subscribe(final ObservableEmitter<Geocache> emitter) throws Exception {
-                        cache.refreshSynchronous(null, additionalListIds);
-                        detailProgress.incrementAndGet();
-                        handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
-                        emitter.onComplete();
-                    }
-                }).subscribeOn(AndroidRxUtils.refreshScheduler);
-            }
-        }).doOnComplete(new Action() {
-            @Override
-            public void run() {
-                handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
-            }
-        });
+        final Observable<Geocache> loaded = allCaches.flatMap((Function<Geocache, Observable<Geocache>>) cache -> Observable.create((ObservableOnSubscribe<Geocache>) emitter -> {
+            cache.refreshSynchronous(null, additionalListIds);
+            detailProgress.incrementAndGet();
+            handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
+            emitter.onComplete();
+        }).subscribeOn(AndroidRxUtils.refreshScheduler)).doOnComplete(() -> handler.sendEmptyMessage(DownloadProgress.MSG_DONE));
         handler.add(loaded.subscribe());
     }
 
@@ -1619,13 +1572,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @NonNull
     private Action1<Integer> getListSwitchingRunnable() {
-        return new Action1<Integer>() {
-
-            @Override
-            public void call(final Integer selectedListId) {
-                switchListById(selectedListId);
-            }
-        };
+        return selectedListId -> switchListById(selectedListId);
     }
 
     private void switchListById(final int id) {

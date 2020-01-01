@@ -17,7 +17,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil;
-import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -66,7 +65,6 @@ import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
@@ -383,26 +381,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         AndroidRxUtils.bindActivity(this,
             // Obtain the actives connectors
             Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
-            .flatMap(new Function<TrackableConnector, Observable<TrackableLog>>() {
-                @Override
-                public Observable<TrackableLog> apply(final TrackableConnector trackableConnector) {
-                    return Observable.defer(new Callable<Observable<TrackableLog>>() {
-                        @Override
-                        public Observable<TrackableLog> call() {
-                            return trackableConnector.trackableLogInventory();
-                        }
-                    }).subscribeOn(AndroidRxUtils.networkScheduler);
-                }
-            }).toList()
-        ).subscribe(new Consumer<List<TrackableLog>>() {
-            @Override
-            public void accept(final List<TrackableLog> trackableLogs) {
-                // Store trackables
-                trackables.addAll(trackableLogs);
-                // Update the UI
-                initializeTrackablesAction();
-                updateTrackablesList();
-            }
+            .flatMap((Function<TrackableConnector, Observable<TrackableLog>>) trackableConnector -> Observable.defer((Callable<Observable<TrackableLog>>) () -> trackableConnector.trackableLogInventory()).subscribeOn(AndroidRxUtils.networkScheduler)).toList()
+        ).subscribe(trackableLogs -> {
+            // Store trackables
+            trackables.addAll(trackableLogs);
+            // Update the UI
+            initializeTrackablesAction();
+            updateTrackablesList();
         });
 
         requestKeyboardForLogging();
@@ -427,13 +412,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void initializeRatingBar() {
         if (GCVote.isVotingPossible(cache)) {
-            GCVoteRatingBarUtil.initializeRatingBar(cache, getWindow().getDecorView().getRootView(), new OnRatingChangeListener() {
-
-                @Override
-                public void onRatingChanged(final float stars) {
-                    rating = stars;
-                }
-            });
+            GCVoteRatingBarUtil.initializeRatingBar(cache, getWindow().getDecorView().getRootView(), stars -> rating = stars);
         }
     }
 
