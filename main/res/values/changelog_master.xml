@@ -13,6 +13,7 @@
     · Change: Use waypoints of a user defined cache in \"Go to\" menu\n
     · Change: Link from offline map \"More info\" page to the new offline map tutorial\n
     · Change: Updated compatibility libraries from support libraries to AndroidX\n
+    · Fix: Initial zoom on cache map not covering its waypoints\n
     · Fix: Internal code corrections and optimizations\n
     · Fix: Support for geochecker gc-apps.com\n
     · Fix: Internal database cleanup improvements\n
