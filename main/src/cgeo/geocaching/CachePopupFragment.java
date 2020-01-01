@@ -15,7 +15,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -198,12 +197,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (Settings.getChooseList() || cache.isOffline()) {
                 // let user select list to store cache in
                 new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
-                        new Action1<Set<Integer>>() {
-                            @Override
-                            public void call(final Set<Integer> selectedListIds) {
-                                storeCacheOnLists(selectedListIds);
-                            }
-                        }, true, cache.getLists(), fastStoreOnLastSelection);
+                        selectedListIds -> storeCacheOnLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 storeCacheOnLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
             }

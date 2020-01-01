@@ -169,17 +169,14 @@ public class EditButton extends RelativeLayout {
             }
         });
 
-        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(final View v, final boolean hasFocus) {
-                if (!hasFocus) {
-                    edit.setVisibility(View.INVISIBLE);
-                    butt.setVisibility(View.VISIBLE);
-                    imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+        edit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                edit.setVisibility(View.INVISIBLE);
+                butt.setVisibility(View.VISIBLE);
+                imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
 
-                    for (final LongClickCompleteCallback callback : longClickCompleteCallbacks) {
-                        callback.onLongClickCompleteCallback();
-                    }
+                for (final LongClickCompleteCallback callback : longClickCompleteCallbacks) {
+                    callback.onLongClickCompleteCallback();
                 }
             }
         });

@@ -40,7 +40,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.internal.disposables.CancellableDisposable;
 import io.reactivex.processors.PublishProcessor;
 import okhttp3.Response;
@@ -85,12 +84,7 @@ public class HtmlImage implements Html.ImageGetter {
     final WeakReference<TextView> viewRef;
     private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
-    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Function<String, Observable<BitmapDrawable>>() {
-        @Override
-        public Observable<BitmapDrawable> apply(final String url) {
-            return fetchDrawableUncached(url);
-        }
-    });
+    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(url -> fetchDrawableUncached(url));
 
     // Background loading
     // .cache() is not yet available on Completable instances as of RxJava 2.0.0, so we have to go back
@@ -201,12 +195,9 @@ public class HtmlImage implements Html.ImageGetter {
         // Explicit local file URLs are loaded from the filesystem regardless of their age. The IO part is short
         // enough to make the whole operation on the computation scheduler.
         if (FileUtils.isFileUrl(url)) {
-            return Observable.defer(new Callable<Observable<BitmapDrawable>>() {
-                @Override
-                public Observable<BitmapDrawable> call() {
-                    final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
-                    return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
-                }
+            return Observable.defer((Callable<Observable<BitmapDrawable>>) () -> {
+                final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
+                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 

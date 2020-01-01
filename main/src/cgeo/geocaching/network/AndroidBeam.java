@@ -10,7 +10,6 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
-import android.nfc.NfcEvent;
 
 import androidx.annotation.Nullable;
 
@@ -65,21 +64,18 @@ public class AndroidBeam {
     }
 
     private static CreateNdefMessageCallback createMessageCallback(final ActivitySharingInterface sharingInterface) {
-        return new NfcAdapter.CreateNdefMessageCallback() {
-            @Override
-            public NdefMessage createNdefMessage(final NfcEvent event) {
-                String uri = sharingInterface.getAndroidBeamUri();
-                if (uri == null) {
-                    return null;
-                }
-                // normalize our modified URLs for beaming
-                uri = StringUtils.replace(uri, "geocaching.com//", "geocaching.com/");
-                final NdefRecord[] records = {
-                        NdefRecord.createUri(uri),
-                        NdefRecord.createApplicationRecord(CgeoApplication.getInstance().getPackageName())
-                };
-                return new NdefMessage(records);
+        return event -> {
+            String uri = sharingInterface.getAndroidBeamUri();
+            if (uri == null) {
+                return null;
             }
+            // normalize our modified URLs for beaming
+            uri = StringUtils.replace(uri, "geocaching.com//", "geocaching.com/");
+            final NdefRecord[] records = {
+                    NdefRecord.createUri(uri),
+                    NdefRecord.createApplicationRecord(CgeoApplication.getInstance().getPackageName())
+            };
+            return new NdefMessage(records);
         };
     }
 

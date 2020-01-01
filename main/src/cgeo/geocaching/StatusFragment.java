@@ -21,7 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 public class StatusFragment extends Fragment {
 
@@ -39,46 +38,43 @@ public class StatusFragment extends Fragment {
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         unbinder = ButterKnife.bind(this, statusGroup);
         statusSubscription.add(AndroidRxUtils.bindFragment(this, StatusUpdater.LATEST_STATUS)
-                .subscribe(new Consumer<Status>() {
-                    @Override
-                    public void accept(final Status status) {
-                        if (status == Status.NO_STATUS) {
-                            statusGroup.setVisibility(View.INVISIBLE);
-                            return;
-                        }
+                .subscribe(status -> {
+                    if (status == Status.NO_STATUS) {
+                        statusGroup.setVisibility(View.INVISIBLE);
+                        return;
+                    }
 
-                        final Resources res = getResources();
-                        final String packageName = getActivity().getPackageName();
+                    final Resources res = getResources();
+                    final String packageName = getActivity().getPackageName();
 
-                        if (status.icon != null) {
-                            final int iconId = res.getIdentifier(status.icon, "drawable", packageName);
-                            if (iconId != 0) {
-                                statusIcon.setImageResource(iconId);
-                                statusIcon.setVisibility(View.VISIBLE);
-                            } else {
-                                Log.w("StatusHandler: could not find icon corresponding to @drawable/" + status.icon);
-                                statusIcon.setVisibility(View.GONE);
-                            }
+                    if (status.icon != null) {
+                        final int iconId = res.getIdentifier(status.icon, "drawable", packageName);
+                        if (iconId != 0) {
+                            statusIcon.setImageResource(iconId);
+                            statusIcon.setVisibility(View.VISIBLE);
                         } else {
+                            Log.w("StatusHandler: could not find icon corresponding to @drawable/" + status.icon);
                             statusIcon.setVisibility(View.GONE);
                         }
+                    } else {
+                        statusIcon.setVisibility(View.GONE);
+                    }
 
-                        String message = status.message;
-                        if (status.messageId != null) {
-                            final int messageId = res.getIdentifier(status.messageId, "string", packageName);
-                            if (messageId != 0) {
-                                message = res.getString(messageId);
-                            }
+                    String message = status.message;
+                    if (status.messageId != null) {
+                        final int messageId = res.getIdentifier(status.messageId, "string", packageName);
+                        if (messageId != 0) {
+                            message = res.getString(messageId);
                         }
+                    }
 
-                        statusMessage.setText(message);
-                        statusGroup.setVisibility(View.VISIBLE);
+                    statusMessage.setText(message);
+                    statusGroup.setVisibility(View.VISIBLE);
 
-                        if (status.url != null) {
-                            statusGroup.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url))));
-                        } else {
-                            statusGroup.setClickable(false);
-                        }
+                    if (status.url != null) {
+                        statusGroup.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url))));
+                    } else {
+                        statusGroup.setClickable(false);
                     }
                 }));
         return statusGroup;

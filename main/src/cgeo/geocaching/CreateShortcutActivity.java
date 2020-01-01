@@ -9,7 +9,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.Dialogs.ItemWithIcon;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
@@ -84,27 +83,17 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         shortcuts.add(new Shortcut(R.string.any_button, R.drawable.main_any, new Intent(this, NavigateAnyPointActivity.class)));
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.main_stored, CacheListActivity.getHistoryIntent(this)));
 
-        Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, new Action1<Shortcut>() {
-
-            @Override
-            public void call(final Shortcut shortcut) {
-                if (offlineShortcut.equals(shortcut)) {
-                    promptForListShortcut();
-                } else {
-                    createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);
-                }
+        Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, shortcut -> {
+            if (offlineShortcut.equals(shortcut)) {
+                promptForListShortcut();
+            } else {
+                createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);
             }
         });
     }
 
     protected void promptForListShortcut() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut, new Action1<Integer>() {
-
-            @Override
-            public void call(final Integer listId) {
-                createOfflineListShortcut(listId);
-            }
-        }, true, PseudoList.NEW_LIST.id);
+        new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut, listId -> createOfflineListShortcut(listId), true, PseudoList.NEW_LIST.id);
     }
 
     protected void createOfflineListShortcut(final int listId) {

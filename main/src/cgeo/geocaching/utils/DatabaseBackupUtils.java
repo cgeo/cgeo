@@ -13,10 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
-import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
@@ -87,24 +85,16 @@ public class DatabaseBackupUtils {
         final ProgressDialog dialog = ProgressDialog.show(activity,
                 activity.getString(R.string.init_backup),
                 activity.getString(R.string.init_backup_running), true, false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), new Callable<String>() {
-            @Override
-            public String call() {
-                return DataStore.backupDatabaseInternal();
-            }
-        }, new Consumer<String>() {
-            @Override
-            public void accept(final String backupFileName) {
-                dialog.dismiss();
-                Dialogs.message(activity,
-                        R.string.init_backup_backup,
-                        backupFileName != null
-                                ? activity.getString(R.string.init_backup_success)
-                                + "\n" + backupFileName
-                                : activity.getString(R.string.init_backup_failed));
-                if (runAfterwards != null) {
-                    runAfterwards.run();
-                }
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.backupDatabaseInternal(), backupFileName -> {
+            dialog.dismiss();
+            Dialogs.message(activity,
+                    R.string.init_backup_backup,
+                    backupFileName != null
+                            ? activity.getString(R.string.init_backup_success)
+                            + "\n" + backupFileName
+                            : activity.getString(R.string.init_backup_failed));
+            if (runAfterwards != null) {
+                runAfterwards.run();
             }
         });
     }

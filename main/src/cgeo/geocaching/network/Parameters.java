@@ -32,12 +32,9 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
         put(keyValues);
     }
 
-    private static final Comparator<ImmutablePair<String, String>> comparator = new Comparator<ImmutablePair<String, String>>() {
-        @Override
-        public int compare(final ImmutablePair<String, String> nv1, final ImmutablePair<String, String> nv2) {
-            final int comparedKeys = nv1.left.compareTo(nv2.left);
-            return comparedKeys != 0 ? comparedKeys : nv1.right.compareTo(nv2.right);
-        }
+    private static final Comparator<ImmutablePair<String, String>> comparator = (nv1, nv2) -> {
+        final int comparedKeys = nv1.left.compareTo(nv2.left);
+        return comparedKeys != 0 ? comparedKeys : nv1.right.compareTo(nv2.right);
     };
 
     /**

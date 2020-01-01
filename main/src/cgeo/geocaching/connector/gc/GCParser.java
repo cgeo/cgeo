@@ -45,7 +45,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -65,11 +64,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Single;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
@@ -292,12 +287,7 @@ public final class GCParser {
 
         if (!cids.isEmpty() && Settings.isGCPremiumMember()) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
-            final Observable<Set<Geocache>> storedCaches = Observable.defer(new Callable<Observable<Set<Geocache>>>() {
-                @Override
-                public Observable<Set<Geocache>> call() {
-                    return Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB));
-                }
-            }).subscribeOn(Schedulers.io()).cache();
+            final Observable<Set<Geocache>> storedCaches = Observable.defer((Callable<Observable<Set<Geocache>>>) () -> Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB))).subscribeOn(Schedulers.io()).cache();
             storedCaches.subscribe();  // Force asynchronous start of database loading
 
             try {
@@ -1013,50 +1003,41 @@ public final class GCParser {
      * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
      * Executes on the network scheduler.
      */
-    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(new Callable<Observable<List<PocketQuery>>>() {
-        @Override
-        public Observable<List<PocketQuery>> call() {
-            final Parameters params = new Parameters();
+    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer((Callable<Observable<List<PocketQuery>>>) () -> {
+        final Parameters params = new Parameters();
 
-            final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
-            if (StringUtils.isBlank(page)) {
-                Log.e("GCParser.searchPocketQueryList: No data from server");
-                return Observable.just(Collections.<PocketQuery>emptyList());
-            }
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
+        if (StringUtils.isBlank(page)) {
+            Log.e("GCParser.searchPocketQueryList: No data from server");
+            return Observable.just(Collections.<PocketQuery>emptyList());
+        }
 
-            try {
-                final Document document = Jsoup.parse(page);
-                final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
-                final List<PocketQuery> list = new ArrayList<>(downloadablePocketQueries.values());
+        try {
+            final Document document = Jsoup.parse(page);
+            final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
+            final List<PocketQuery> list = new ArrayList<>(downloadablePocketQueries.values());
 
-                final Elements rows = document.select("#pqRepeater tr:has(td)");
-                for (final Element row : rows) {
-                    if (row == rows.last()) {
-                        break; // skip footer
-                    }
-                    final Element link = row.select("td:eq(3) > a").first();
-                    final Uri uri = Uri.parse(link.attr("href"));
-                    final String guid = uri.getQueryParameter("guid");
-                    if (!downloadablePocketQueries.containsKey(guid)) {
-                        final String name = link.attr("title");
-                        final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, 0, -1);
-                        list.add(pocketQuery);
-                    }
+            final Elements rows = document.select("#pqRepeater tr:has(td)");
+            for (final Element row : rows) {
+                if (row == rows.last()) {
+                    break; // skip footer
                 }
-
-                Collections.sort(list, new Comparator<PocketQuery>() {
-
-                    @Override
-                    public int compare(final PocketQuery left, final PocketQuery right) {
-                        return TextUtils.COLLATOR.compare(left.getName(), right.getName());
-                    }
-                });
-
-                return Observable.just(list);
-            } catch (final Exception e) {
-                Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
-                return Observable.error(e);
+                final Element link = row.select("td:eq(3) > a").first();
+                final Uri uri = Uri.parse(link.attr("href"));
+                final String guid = uri.getQueryParameter("guid");
+                if (!downloadablePocketQueries.containsKey(guid)) {
+                    final String name = link.attr("title");
+                    final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, 0, -1);
+                    list.add(pocketQuery);
+                }
             }
+
+            Collections.sort(list, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
+
+            return Observable.just(list);
+        } catch (final Exception e) {
+            Log.e("GCParser.searchPocketQueryList: error parsing parsing html page", e);
+            return Observable.error(e);
         }
     }).subscribeOn(AndroidRxUtils.networkScheduler);
 
@@ -1602,92 +1583,86 @@ public final class GCParser {
             return Observable.empty();
         }
 
-        return Observable.defer(new Callable<Observable<LogEntry>>() {
-            @Override
-            public Observable<LogEntry> call() {
-                final Parameters params = new Parameters(
-                        "tkn", userToken,
-                        "idx", "1",
-                        "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
-                        "decrypt", "false"); // fetch encrypted logs as such
-                if (logType != Logs.ALL) {
-                    params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
-                }
-                try {
-                    final InputStream responseStream =
-                            Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params));
-                    if (responseStream == null) {
-                        Log.w("getLogs: no logs were returned");
-                        return Observable.empty();
-                    }
-                    return parseLogsAndClose(logType != Logs.ALL, responseStream);
-                } catch (final Exception e) {
-                    Log.w("unable to read logs", e);
+        return Observable.defer((Callable<Observable<LogEntry>>) () -> {
+            final Parameters params = new Parameters(
+                    "tkn", userToken,
+                    "idx", "1",
+                    "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
+                    "decrypt", "false"); // fetch encrypted logs as such
+            if (logType != Logs.ALL) {
+                params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
+            }
+            try {
+                final InputStream responseStream =
+                        Network.getResponseStream(Network.getRequest("https://www.geocaching.com/seek/geocache.logbook", params));
+                if (responseStream == null) {
+                    Log.w("getLogs: no logs were returned");
                     return Observable.empty();
                 }
+                return parseLogsAndClose(logType != Logs.ALL, responseStream);
+            } catch (final Exception e) {
+                Log.w("unable to read logs", e);
+                return Observable.empty();
             }
         }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static Observable<LogEntry> parseLogsAndClose(final boolean markAsFriendsLog, @Nonnull final InputStream responseStream) {
-        return Observable.create(new ObservableOnSubscribe<LogEntry>() {
-            @Override
-            public void subscribe(final ObservableEmitter<LogEntry> emitter) throws Exception {
-                try {
-                    final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
-                    if (!resp.path("status").asText().equals("success")) {
-                        Log.w("GCParser.parseLogsAndClose: status is " + resp.path("status").asText("[absent]"));
-                        emitter.onComplete();
-                        return;
-                    }
-
-                    final ArrayNode data = (ArrayNode) resp.get("data");
-                    for (final JsonNode entry: data) {
-                        final String logType = entry.path("LogType").asText();
-
-                        final long date;
-                        try {
-                            date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
-                        } catch (ParseException | NullPointerException e) {
-                            Log.e("Failed to parse log date", e);
-                            continue;
-                        }
-
-                        // TODO: we should update our log data structure to be able to record
-                        // proper coordinates, and make them clickable. In the meantime, it is
-                        // better to integrate those coordinates into the text rather than not
-                        // display them at all.
-                        final String latLon = entry.path("LatLonString").asText();
-                        final String logText = (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
-                        final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
-                                .setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText()))
-                                .setDate(date)
-                                .setLogType(LogType.getByType(logType))
-                                .setLog(logText)
-                                .setFound(entry.path("GeocacheFindCount").asInt())
-                                .setFriend(markAsFriendsLog);
-
-                        final ArrayNode images = (ArrayNode) entry.get("Images");
-                        for (final JsonNode image: images) {
-                            final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
-                            final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
-                            String description = image.path("Descr").asText();
-                            if (StringUtils.contains(description, "Geocaching®") && description.length() < 60) {
-                                description = null;
-                            }
-                            final Image logImage = new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
-                            logDoneBuilder.addLogImage(logImage);
-                        }
-
-                        emitter.onNext(logDoneBuilder.build());
-                    }
-                } catch (final IOException e) {
-                    Log.w("Failed to parse cache logs", e);
-                } finally {
-                    IOUtils.closeQuietly(responseStream);
+        return Observable.create(emitter -> {
+            try {
+                final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
+                if (!resp.path("status").asText().equals("success")) {
+                    Log.w("GCParser.parseLogsAndClose: status is " + resp.path("status").asText("[absent]"));
+                    emitter.onComplete();
+                    return;
                 }
-                emitter.onComplete();
+
+                final ArrayNode data = (ArrayNode) resp.get("data");
+                for (final JsonNode entry: data) {
+                    final String logType = entry.path("LogType").asText();
+
+                    final long date;
+                    try {
+                        date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
+                    } catch (ParseException | NullPointerException e) {
+                        Log.e("Failed to parse log date", e);
+                        continue;
+                    }
+
+                    // TODO: we should update our log data structure to be able to record
+                    // proper coordinates, and make them clickable. In the meantime, it is
+                    // better to integrate those coordinates into the text rather than not
+                    // display them at all.
+                    final String latLon = entry.path("LatLonString").asText();
+                    final String logText = (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
+                    final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
+                            .setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText()))
+                            .setDate(date)
+                            .setLogType(LogType.getByType(logType))
+                            .setLog(logText)
+                            .setFound(entry.path("GeocacheFindCount").asInt())
+                            .setFriend(markAsFriendsLog);
+
+                    final ArrayNode images = (ArrayNode) entry.get("Images");
+                    for (final JsonNode image: images) {
+                        final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
+                        final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
+                        String description = image.path("Descr").asText();
+                        if (StringUtils.contains(description, "Geocaching®") && description.length() < 60) {
+                            description = null;
+                        }
+                        final Image logImage = new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
+                        logDoneBuilder.addLogImage(logImage);
+                    }
+
+                    emitter.onNext(logDoneBuilder.build());
+                }
+            } catch (final IOException e) {
+                Log.w("Failed to parse cache logs", e);
+            } finally {
+                IOUtils.closeQuietly(responseStream);
             }
+            emitter.onComplete();
         });
     }
 
@@ -1785,26 +1760,15 @@ public final class GCParser {
         final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
                 Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
         final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), specialLogs.toList(),
-                new BiFunction<List<LogEntry>, List<LogEntry>, List<LogEntry>>() {
-                    @Override
-                    public List<LogEntry> apply(final List<LogEntry> logEntries, final List<LogEntry> specialLogEntries) {
-                        mergeFriendsLogs(logEntries, specialLogEntries);
-                        return logEntries;
-                    }
+                (logEntries, specialLogEntries) -> {
+                    mergeFriendsLogs(logEntries, specialLogEntries);
+                    return logEntries;
                 }).cache();
-        mergedLogs.subscribe(new Consumer<List<LogEntry>>() {
-                                 @Override
-                                 public void accept(final List<LogEntry> logEntries) {
-                                     DataStore.saveLogs(cache.getGeocode(), logEntries);
-                                 }
-                             });
+        mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries));
         if (cache.isFound() && cache.getVisitedDate() == 0) {
-            ownLogs.subscribe(new Consumer<LogEntry>() {
-                @Override
-                public void accept(final LogEntry logEntry) {
-                    if (logEntry.getType().isFoundLog()) {
-                        cache.setVisitedDate(logEntry.date);
-                    }
+            ownLogs.subscribe(logEntry -> {
+                if (logEntry.getType().isFoundLog()) {
+                    cache.setVisitedDate(logEntry.date);
                 }
             });
         }

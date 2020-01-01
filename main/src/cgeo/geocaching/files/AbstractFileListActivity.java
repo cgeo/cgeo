@@ -14,7 +14,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -119,18 +118,15 @@ public abstract class AbstractFileListActivity<T extends RecyclerView.Adapter<? 
                 res.getString(R.string.file_searching),
                 true,
                 true,
-                new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(final DialogInterface arg0) {
-                        if (searchingThread != null && searchingThread.isAlive()) {
-                            searchingThread.notifyEnd();
-                        }
-                        if (files.isEmpty() && requireFiles()) {
-                            finish();
-                        }
+                arg0 -> {
+                    if (searchingThread != null && searchingThread.isAlive()) {
+                        searchingThread.notifyEnd();
+                    }
+                    if (files.isEmpty() && requireFiles()) {
+                        finish();
                     }
                 }
-                );
+        );
 
         searchingThread = new SearchFilesThread();
         searchingThread.start();

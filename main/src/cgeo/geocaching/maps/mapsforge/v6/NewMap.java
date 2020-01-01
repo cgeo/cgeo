@@ -51,7 +51,6 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -492,12 +491,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             if (Settings.getChooseList()) {
                 // let user select list to store cache in
-                new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title, new Action1<Set<Integer>>() {
-                    @Override
-                    public void call(final Set<Integer> selectedListIds) {
-                        storeCaches(geocodes, selectedListIds);
-                    }
-                }, true, Collections.<Integer>emptySet(), false);
+                new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodes, selectedListIds), true, Collections.<Integer>emptySet(), false);
             } else {
                 storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
             }

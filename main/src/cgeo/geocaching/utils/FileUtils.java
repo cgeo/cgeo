@@ -201,12 +201,7 @@ public final class FileUtils {
      *            The filename prefix
      */
     public static void deleteFilesWithPrefix(@NonNull final File directory, @NonNull final String prefix) {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, @NonNull final String filename) {
-                return filename.startsWith(prefix);
-            }
-        };
+        final FilenameFilter filter = (dir, filename) -> filename.startsWith(prefix);
         final File[] filesToDelete = directory.listFiles(filter);
         if (filesToDelete == null) {
             return;

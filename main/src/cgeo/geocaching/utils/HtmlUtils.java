@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,13 +45,7 @@ public final class HtmlUtils {
             }
 
             // sort reversed and delete image spans
-            Collections.sort(removals, new Comparator<Pair<Integer, Integer>>() {
-
-                @Override
-                public int compare(final Pair<Integer, Integer> lhs, final Pair<Integer, Integer> rhs) {
-                    return rhs.getRight().compareTo(lhs.getRight());
-                }
-            });
+            Collections.sort(removals, (lhs, rhs) -> rhs.getRight().compareTo(lhs.getRight()));
             result = text.toString();
             for (final Pair<Integer, Integer> removal : removals) {
                 result = result.substring(0, removal.getLeft()) + result.substring(removal.getRight());

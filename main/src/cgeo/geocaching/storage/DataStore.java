@@ -62,7 +62,6 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -80,9 +79,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -105,19 +102,9 @@ public class DataStore {
         DATABASE,
     }
 
-    private static final Func1<Cursor, String> GET_STRING_0 = new Func1<Cursor, String>() {
-        @Override
-        public String call(final Cursor cursor) {
-            return cursor.getString(0);
-        }
-    };
+    private static final Func1<Cursor, String> GET_STRING_0 = cursor -> cursor.getString(0);
 
-    private static final Func1<Cursor, Integer> GET_INTEGER_0 = new Func1<Cursor, Integer>() {
-        @Override
-        public Integer call(final Cursor cursor) {
-            return cursor.getInt(0);
-        }
-    };
+    private static final Func1<Cursor, Integer> GET_INTEGER_0 = cursor -> cursor.getInt(0);
 
     // Columns and indices for the cache data
     private static final String QUERY_CACHE_DATA =
@@ -366,12 +353,9 @@ public class DataStore {
         // utility class
     }
 
-    private static final Single<Integer> allCachesCountObservable = Single.create(new SingleOnSubscribe<Integer>() {
-        @Override
-        public void subscribe(final SingleEmitter<Integer> emitter) throws Exception {
-            if (isInitialized()) {
-                emitter.onSuccess(getAllCachesCount());
-            }
+    private static final Single<Integer> allCachesCountObservable = Single.create((SingleOnSubscribe<Integer>) emitter -> {
+        if (isInitialized()) {
+            emitter.onSuccess(getAllCachesCount());
         }
     }).timeout(500, TimeUnit.MILLISECONDS).retry(10).subscribeOn(Schedulers.io());
 
@@ -462,38 +446,32 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(new Callable<Observable<Boolean>>() {
-            @Override
-            public Observable<Boolean> call() {
-                if (!LocalStorage.isExternalStorageAvailable()) {
-                    Log.w("Database was not moved: external memory not available");
-                    return Observable.just(false);
-                }
-                closeDb();
+        AndroidRxUtils.bindActivity(fromActivity, Observable.defer((Callable<Observable<Boolean>>) () -> {
+            if (!LocalStorage.isExternalStorageAvailable()) {
+                Log.w("Database was not moved: external memory not available");
+                return Observable.just(false);
+            }
+            closeDb();
 
-                final File source = databasePath();
-                final File target = databaseAlternatePath();
-                if (!FileUtils.copy(source, target)) {
-                    Log.e("Database could not be moved to " + target);
-                    init();
-                    return Observable.just(false);
-                }
-                if (!FileUtils.delete(source)) {
-                    Log.e("Original database could not be deleted during move");
-                }
-                Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
-                Log.i("Database was moved to " + target);
-
+            final File source = databasePath();
+            final File target = databaseAlternatePath();
+            if (!FileUtils.copy(source, target)) {
+                Log.e("Database could not be moved to " + target);
                 init();
-                return Observable.just(true);
+                return Observable.just(false);
             }
-        }).subscribeOn(Schedulers.io())).subscribe(new Consumer<Boolean>() {
-            @Override
-            public void accept(final Boolean success) {
-                dialog.dismiss();
-                final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
-                Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
+            if (!FileUtils.delete(source)) {
+                Log.e("Original database could not be deleted during move");
             }
+            Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
+            Log.i("Database was moved to " + target);
+
+            init();
+            return Observable.just(true);
+        }).subscribeOn(Schedulers.io())).subscribe(success -> {
+            dialog.dismiss();
+            final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
+            Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
         });
     }
 
@@ -998,12 +976,7 @@ public class DataStore {
         private static void removeDoubleUnderscoreMapFiles() {
             final File[] geocodeDirs = LocalStorage.getGeocacheDataDirectory().listFiles();
             if (ArrayUtils.isNotEmpty(geocodeDirs)) {
-                final FilenameFilter filter = new FilenameFilter() {
-                    @Override
-                    public boolean accept(final File dir, final String filename) {
-                        return filename.startsWith("map_") && filename.contains("__");
-                    }
-                };
+                final FilenameFilter filter = (dir, filename) -> filename.startsWith("map_") && filename.contains("__");
                 for (final File dir : geocodeDirs) {
                     final File[] wrongFiles = dir.listFiles(filter);
                     if (wrongFiles != null) {
@@ -2209,12 +2182,7 @@ public class DataStore {
                 "_id",
                 null,
                 new LinkedList<Waypoint>(),
-                new Func1<Cursor, Waypoint>() {
-                    @Override
-                    public Waypoint call(final Cursor cursor) {
-                        return createWaypointFromDatabaseContent(cursor);
-                    }
-                });
+                cursor -> createWaypointFromDatabaseContent(cursor));
     }
 
     @NonNull
@@ -2250,16 +2218,11 @@ public class DataStore {
                 null,
                 "100",
                 new LinkedList<Image>(),
-                new Func1<Cursor, Image>() {
-                    @Override
-                    public Image call(final Cursor cursor) {
-                        return new Image.Builder()
-                                .setUrl(cursor.getString(0))
-                                .setTitle(cursor.getString(1))
-                                .setDescription(cursor.getString(2))
-                                .build();
-                    }
-                });
+                cursor -> new Image.Builder()
+                        .setUrl(cursor.getString(0))
+                        .setTitle(cursor.getString(1))
+                        .setDescription(cursor.getString(2))
+                        .build());
     }
 
     /**
@@ -2277,12 +2240,7 @@ public class DataStore {
                 "date DESC",
                 "100",
                 new LinkedList<Destination>(),
-                new Func1<Cursor, Destination>() {
-                    @Override
-                    public Destination call(final Cursor cursor) {
-                        return new Destination(cursor.getLong(0), cursor.getLong(1), getCoords(cursor, 2, 3));
-                    }
-                });
+                cursor -> new Destination(cursor.getLong(0), cursor.getLong(1), getCoords(cursor, 2, 3)));
     }
 
     public static boolean clearSearchedDestinations() {
@@ -2316,14 +2274,11 @@ public class DataStore {
                 "_id DESC",
                 String.valueOf(DbHelper.MAX_TRAILHISTORY_LENGTH),
                 new ArrayList<Location>(),
-                new Func1<Cursor, Location>() {
-                    @Override
-                    public Location call(final Cursor cursor) {
-                        final Location l = new Location("trailHistory");
-                        l.setLatitude(cursor.getDouble(1));
-                        l.setLongitude(cursor.getDouble(2));
-                        return l;
-                    }
+                cursor -> {
+                    final Location l = new Location("trailHistory");
+                    l.setLatitude(cursor.getDouble(1));
+                    l.setLongitude(cursor.getDouble(2));
+                    return l;
                 });
     }
 
@@ -3044,12 +2999,9 @@ public class DataStore {
         final int indexTitle = cursor.getColumnIndex("title");
         final int indexMarker = cursor.getColumnIndex("marker");
         final int indexCount = cursor.getColumnIndex("count");
-        return cursorToColl(cursor, new ArrayList<StoredList>(), new Func1<Cursor, StoredList>() {
-            @Override
-            public StoredList call(final Cursor cursor) {
-                final int count = indexCount != -1 ? cursor.getInt(indexCount) : 0;
-                return new StoredList(cursor.getInt(indexId) + customListIdOffset, cursor.getString(indexTitle), cursor.getInt(indexMarker), count);
-            }
+        return cursorToColl(cursor, new ArrayList<StoredList>(), cursor1 -> {
+            final int count = indexCount != -1 ? cursor1.getInt(indexCount) : 0;
+            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexMarker), count);
         });
     }
 
@@ -3500,12 +3452,7 @@ public class DataStore {
                 .append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where)
                 .append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));  // Hardcoded limit to avoid memory overflow
 
-        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), new Func1<Cursor, Waypoint>() {
-            @Override
-            public Waypoint call(final Cursor cursor) {
-                return createWaypointFromDatabaseContent(cursor);
-            }
-        });
+        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), cursor -> createWaypointFromDatabaseContent(cursor));
     }
 
     public static void saveChangedCache(final Geocache cache) {
@@ -3799,14 +3746,10 @@ public class DataStore {
 
         // order result set by time again
         final List<Geocache> caches = new ArrayList<>(cachesSet);
-        Collections.sort(caches, new Comparator<Geocache>() {
-
-            @Override
-            public int compare(final Geocache lhs, final Geocache rhs) {
-                final int lhsIndex = geocodes.indexOf(lhs.getGeocode());
-                final int rhsIndex = geocodes.indexOf(rhs.getGeocode());
-                return lhsIndex < rhsIndex ? -1 : (lhsIndex == rhsIndex ? 0 : 1);
-            }
+        Collections.sort(caches, (lhs, rhs) -> {
+            final int lhsIndex = geocodes.indexOf(lhs.getGeocode());
+            final int rhsIndex = geocodes.indexOf(rhs.getGeocode());
+            return lhsIndex < rhsIndex ? -1 : (lhsIndex == rhsIndex ? 0 : 1);
         });
         return caches;
     }

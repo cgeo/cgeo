@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -40,15 +39,12 @@ public class AndroidGeocoder {
         if (!Geocoder.isPresent()) {
             return Observable.error(new RuntimeException("no Android geocoder"));
         }
-        return Observable.defer(new Callable<ObservableSource<? extends Address>>() {
-            @Override
-            public Observable<Address> call() {
-                try {
-                    return addressesToObservable(geocoder.getFromLocationName(keyword, 20));
-                } catch (final Exception e) {
-                    Log.i("Unable to use Android reverse geocoder: " + e.getMessage());
-                    return Observable.error(e);
-                }
+        return Observable.defer(() -> {
+            try {
+                return addressesToObservable(geocoder.getFromLocationName(keyword, 20));
+            } catch (final Exception e) {
+                Log.i("Unable to use Android reverse geocoder: " + e.getMessage());
+                return Observable.error(e);
             }
         }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
@@ -63,15 +59,12 @@ public class AndroidGeocoder {
         if (!Geocoder.isPresent()) {
             return Single.error(new RuntimeException("no Android reverse geocoder"));
         }
-        return Observable.defer(new Callable<Observable<Address>>() {
-            @Override
-            public Observable<Address> call() {
-                try {
-                    return addressesToObservable(geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1));
-                } catch (final Exception e) {
-                    Log.i("Unable to use Android reverse geocoder: " + e.getMessage());
-                    return Observable.error(e);
-                }
+        return Observable.defer((Callable<Observable<Address>>) () -> {
+            try {
+                return addressesToObservable(geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1));
+            } catch (final Exception e) {
+                Log.i("Unable to use Android reverse geocoder: " + e.getMessage());
+                return Observable.error(e);
             }
         }).subscribeOn(AndroidRxUtils.networkScheduler).firstOrError();
     }

@@ -26,11 +26,9 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -320,30 +318,21 @@ public class SearchResult implements Parcelable {
      */
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
                                                                             final Function<C, SearchResult> func) {
-        return Observable.fromIterable(connectors).flatMapMaybe(new Function<C, Maybe<SearchResult>>() {
-            @Override
-            public Maybe<SearchResult> apply(final C connector) {
-                if (!connector.isActive()) {
-                    return Maybe.empty();
+        return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {
+            if (!connector.isActive()) {
+                return Maybe.empty();
+            }
+            return Maybe.fromCallable(() -> {
+                try {
+                    return func.apply(connector);
+                } catch (final Exception e) {
+                    Log.w("parallelCombineActive: swallowing error from connector " + connector, e);
+                    return null;
                 }
-                return Maybe.fromCallable(new Callable<SearchResult>() {
-                    @Override
-                    public SearchResult call() throws Exception {
-                        try {
-                            return func.apply(connector);
-                        } catch (final Exception e) {
-                            Log.w("parallelCombineActive: swallowing error from connector " + connector, e);
-                            return null;
-                        }
-                    }
-                }).subscribeOn(AndroidRxUtils.networkScheduler);
-            }
-        }).reduce(new SearchResult(), new BiFunction<SearchResult, SearchResult, SearchResult>() {
-            @Override
-            public SearchResult apply(final SearchResult searchResult, final SearchResult searchResult2) {
-                searchResult.addSearchResult(searchResult2);
-                return searchResult;
-            }
+            }).subscribeOn(AndroidRxUtils.networkScheduler);
+        }).reduce(new SearchResult(), (searchResult, searchResult2) -> {
+            searchResult.addSearchResult(searchResult2);
+            return searchResult;
         }).blockingGet();
     }
 

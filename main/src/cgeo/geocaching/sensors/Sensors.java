@@ -18,7 +18,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 
 public class Sensors {
 
@@ -34,19 +33,9 @@ public class Sensors {
         static final Sensors INSTANCE = new Sensors();
     }
 
-    private final Consumer<GeoData> rememberGeodataAction = new Consumer<GeoData>() {
-        @Override
-        public void accept(final GeoData geoData) {
-            currentGeo = geoData;
-        }
-    };
+    private final Consumer<GeoData> rememberGeodataAction = geoData -> currentGeo = geoData;
 
-    private final Consumer<Float> onNextrememberDirectionAction = new Consumer<Float>() {
-        @Override
-        public void accept(final Float direction) {
-            currentDirection = direction;
-        }
-    };
+    private final Consumer<Float> onNextrememberDirectionAction = direction -> currentDirection = direction;
 
     private Sensors() {
         final Application application = CgeoApplication.getInstance();
@@ -61,13 +50,10 @@ public class Sensors {
         return InstanceHolder.INSTANCE;
     }
 
-    private final Function<Throwable, Observable<GeoData>> fallbackToGeodataProvider = new Function<Throwable, Observable<GeoData>>() {
-        @Override
-        public Observable<GeoData> apply(final Throwable throwable) {
-            Log.e("Cannot use Play Services location provider, falling back to GeoDataProvider", throwable);
-            Settings.setUseGooglePlayServices(false);
-            return GeoDataProvider.create(CgeoApplication.getInstance());
-        }
+    private final Function<Throwable, Observable<GeoData>> fallbackToGeodataProvider = throwable -> {
+        Log.e("Cannot use Play Services location provider, falling back to GeoDataProvider", throwable);
+        Settings.setUseGooglePlayServices(false);
+        return GeoDataProvider.create(CgeoApplication.getInstance());
     };
 
     public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
@@ -88,12 +74,7 @@ public class Sensors {
         }
     }
 
-    private static final Function<GeoData, Float> GPS_TO_DIRECTION = new Function<GeoData, Float>() {
-        @Override
-        public Float apply(final GeoData geoData) {
-            return AngleUtils.reverseDirectionNow(geoData.getBearing());
-        }
-    };
+    private static final Function<GeoData, Float> GPS_TO_DIRECTION = geoData -> AngleUtils.reverseDirectionNow(geoData.getBearing());
 
     public void setupDirectionObservable() {
         if (directionObservable != null) {
@@ -122,27 +103,16 @@ public class Sensors {
             sensorDirectionObservable = MagnetometerAndAccelerometerProvider.create(application);
         }
 
-        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Function<Throwable, Observable<Float>>() {
-            @Override
-            public Observable<Float> apply(final Throwable throwable) {
-                Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
-                Settings.setUseCompass(false);
-                return Observable.<Float>never().startWith(0.0f);
-            }
-        }).filter(new Predicate<Float>() {
-            @Override
-            public boolean test(final Float aFloat) {
-                return Settings.isUseCompass() && !useDirectionFromGps.get();
-            }
-        });
+        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext((Function<Throwable, Observable<Float>>) throwable -> {
+            Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
+            Settings.setUseCompass(false);
+            return Observable.<Float>never().startWith(0.0f);
+        }).filter(aFloat -> Settings.isUseCompass() && !useDirectionFromGps.get());
 
-        final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(new Predicate<GeoData>() {
-            @Override
-            public boolean test(final GeoData geoData) {
-                final boolean useGps = geoData.getSpeed() > 5.0f;
-                useDirectionFromGps.set(useGps);
-                return useGps || !Settings.isUseCompass();
-            }
+        final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(geoData -> {
+            final boolean useGps = geoData.getSpeed() > 5.0f;
+            useDirectionFromGps.set(useGps);
+            return useGps || !Settings.isUseCompass();
         }).map(GPS_TO_DIRECTION);
 
         directionObservable = RxUtils.rememberLast(Observable.merge(magneticDirectionObservable, directionFromGpsObservable).doOnNext(onNextrememberDirectionAction), 0f);

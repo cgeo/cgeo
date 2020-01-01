@@ -11,7 +11,6 @@ import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.preference.Preference;
 import android.util.AttributeSet;
 
 public class OAuthPreference extends AbstractClickablePreference {
@@ -77,18 +76,15 @@ public class OAuthPreference extends AbstractClickablePreference {
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
         activity.setAuthTitle(oAuthMapping.prefKeyId);
-        return new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                if (oAuthMapping.authActivity != null && oAuthMapping.authParams != null) {
-                    final Intent authIntent = new Intent(preference.getContext(),
-                            oAuthMapping.authActivity);
-                    oAuthMapping.authParams.setOAuthExtras(authIntent);
-                    activity.startActivityForResult(authIntent,
-                            oAuthMapping.prefKeyId);
-                }
-                return false; // no shared preference has to be changed
+        return preference -> {
+            if (oAuthMapping.authActivity != null && oAuthMapping.authParams != null) {
+                final Intent authIntent = new Intent(preference.getContext(),
+                        oAuthMapping.authActivity);
+                oAuthMapping.authParams.setOAuthExtras(authIntent);
+                activity.startActivityForResult(authIntent,
+                        oAuthMapping.prefKeyId);
             }
+            return false; // no shared preference has to be changed
         };
 
     }

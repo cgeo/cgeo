@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.preference.Preference;
 import android.util.AttributeSet;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,18 +55,15 @@ public class TokenPreference extends AbstractClickablePreference {
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
         activity.setAuthTitle(tokenMapping.prefKeyId);
-        return new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                if (tokenMapping.authActivity != null) {
-                    final Intent authIntent = new Intent(preference.getContext(),
-                            tokenMapping.authActivity);
-                    tokenMapping.authParams.setTokenAuthExtras(authIntent);
-                    activity.startActivityForResult(authIntent,
-                            tokenMapping.prefKeyId);
-                }
-                return false; // no shared preference has to be changed
+        return preference -> {
+            if (tokenMapping.authActivity != null) {
+                final Intent authIntent = new Intent(preference.getContext(),
+                        tokenMapping.authActivity);
+                tokenMapping.authParams.setTokenAuthExtras(authIntent);
+                activity.startActivityForResult(authIntent,
+                        tokenMapping.prefKeyId);
             }
+            return false; // no shared preference has to be changed
         };
 
     }

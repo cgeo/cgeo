@@ -60,9 +60,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -162,11 +160,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         Dialogs.moveCursorToEnd(userNote);
                     }
-                    AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-                        DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY);
-                    }, () -> {
-                        activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode));
-                    });
+                    AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.loadCache(activity.geocode, LoadFlags.LOAD_CACHE_ONLY), () -> activity.setCoordsModificationVisibility(ConnectorFactory.getConnector(activity.geocode)));
                 }
 
                 if (activity.own) {
@@ -419,20 +413,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 // button text is blank when creating new waypoint
             }
             final Geopoint geopoint = gp;
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), new Callable<Geocache>() {
-                @Override
-                public Geocache call() throws Exception {
-                    return DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-                }
-
-            }, new Consumer<Geocache>() {
-                @Override
-                public void accept(final Geocache geocache) throws Exception {
-                    if (waypoint == null || waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty()) {
-                        showCoordinatesInputDialog(geopoint, cache);
-                    } else {
-                        showCoordinateOptionsDialog(view, geopoint, cache);
-                    }
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS), geocache -> {
+                if (waypoint == null || waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty()) {
+                    showCoordinatesInputDialog(geopoint, cache);
+                } else {
+                    showCoordinateOptionsDialog(view, geopoint, cache);
                 }
             });
 

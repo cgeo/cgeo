@@ -120,7 +120,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -155,7 +154,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -312,24 +310,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             savedInstanceState != null ?
                 savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
                 Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
-        createViewPager(pageToOpen, new OnPageSelectedListener() {
+        createViewPager(pageToOpen, position -> {
+            if (Settings.isOpenLastDetailsPage()) {
+                Settings.setLastDetailsPage(position);
+            }
+            // lazy loading of cache images
+            if (getPage(position) == Page.IMAGES) {
+                loadCacheImages();
+            }
+            requireGeodata = getPage(position) == Page.DETAILS;
+            startOrStopGeoDataListener(false);
 
-            @Override
-            public void onPageSelected(final int position) {
-                if (Settings.isOpenLastDetailsPage()) {
-                    Settings.setLastDetailsPage(position);
-                }
-                // lazy loading of cache images
-                if (getPage(position) == Page.IMAGES) {
-                    loadCacheImages();
-                }
-                requireGeodata = getPage(position) == Page.DETAILS;
-                startOrStopGeoDataListener(false);
-
-                // dispose contextual actions on page change
-                if (currentActionMode != null) {
-                    currentActionMode.finish();
-                }
+            // dispose contextual actions on page change
+            if (currentActionMode != null) {
+                currentActionMode.finish();
             }
         });
         requireGeodata = pageToOpen == 1;
@@ -345,29 +339,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (StringUtils.isNotBlank(geocode)) {
             AndroidRxUtils.bindActivity(this,
             // Obtain the active connectors and load trackables in parallel.
-                    Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap(new Function<TrackableConnector, Observable<Trackable>>() {
-                @Override
-                public Observable<Trackable> apply(final TrackableConnector trackableConnector) {
-                    processedBrands.add(trackableConnector.getBrand());
-                    return Observable.defer(new Callable<Observable<Trackable>>() {
-                        @Override
-                        public Observable<Trackable> call() {
-                            return Observable.fromIterable(trackableConnector.searchTrackables(geocode));
+                    Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
+                        processedBrands.add(trackableConnector.getBrand());
+                        return Observable.defer((Callable<Observable<Trackable>>) () -> Observable.fromIterable(trackableConnector.searchTrackables(geocode))).subscribeOn(AndroidRxUtils.networkScheduler);
+                    }).toList()).subscribe(trackables -> {
+                        // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
+                        // Store trackables.
+                        genericTrackables.addAll(trackables);
+                        if (!trackables.isEmpty()) {
+                            // Update the UI if any trackables were found.
+                            notifyDataSetChanged();
                         }
-                    }).subscribeOn(AndroidRxUtils.networkScheduler);
-                }
-            }).toList()).subscribe(new Consumer<List<Trackable>>() {
-                @Override
-                public void accept(final List<Trackable> trackables) {
-                    // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
-                    // Store trackables.
-                    genericTrackables.addAll(trackables);
-                    if (!trackables.isEmpty()) {
-                        // Update the UI if any trackables were found.
-                        notifyDataSetChanged();
-                    }
-                }
-            });
+                    });
         }
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
@@ -1011,12 +994,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (Settings.getChooseList() || cache.isOffline()) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    new Action1<Set<Integer>>() {
-                        @Override
-                        public void call(final Set<Integer> selectedListIds) {
-                            storeCacheInLists(selectedListIds);
-                        }
-                    }, true, cache.getLists(), fastStoreOnLastSelection);
+                    selectedListIds -> storeCacheInLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
@@ -1214,12 +1192,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             gridView.setAdapter(new AttributesGridAdapter(CacheDetailActivity.this, cache));
             gridView.setVisibility(View.VISIBLE);
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-                    toggleAttributesView();
-                }
-            });
+            gridView.setOnItemClickListener((parent, view, position, id) -> toggleAttributesView());
         }
 
         protected void toggleAttributesView() {
@@ -1318,12 +1291,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        new Action1<SimpleDisposableHandler>() {
-                            @Override
-                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
-                                watchListAdd(simpleCancellableHandler);
-                            }
-                        });
+                        simpleCancellableHandler -> watchListAdd(simpleCancellableHandler));
             }
         }
 
@@ -1335,12 +1303,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        new Action1<SimpleDisposableHandler>() {
-                            @Override
-                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
-                                watchListRemove(simpleCancellableHandler);
-                            }
-                        });
+                        simpleCancellableHandler -> watchListRemove(simpleCancellableHandler));
             }
         }
 
@@ -1390,12 +1353,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        new Action1<SimpleDisposableHandler>() {
-                            @Override
-                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
-                                favoriteAdd(simpleCancellableHandler);
-                            }
-                        });
+                        simpleCancellableHandler -> favoriteAdd(simpleCancellableHandler));
             }
         }
 
@@ -1407,12 +1365,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        new Action1<SimpleDisposableHandler>() {
-                            @Override
-                            public void call(final SimpleDisposableHandler simpleCancellableHandler) {
-                                favoriteRemove(simpleCancellableHandler);
-                            }
-                        });
+                        simpleCancellableHandler -> favoriteRemove(simpleCancellableHandler));
             }
         }
 
@@ -1953,13 +1906,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // this copy is modified to respect the text color
             RecyclerViewProvider.provideRecyclerView(CacheDetailActivity.this, recyclerView, true, true);
             cache.mergeInventory(genericTrackables, processedBrands);
-            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(cache.getInventory(), new TrackableListAdapter.TrackableClickListener() {
-
-                @Override
-                public void onTrackableClicked(final Trackable trackable) {
-                    TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode(), trackable.getBrand().getId());
-                }
-            });
+            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(cache.getInventory(), trackable -> TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode(), trackable.getBrand().getId()));
             recyclerView.setAdapter(adapterTrackables);
             cache.mergeInventory(genericTrackables, processedBrands);
 
@@ -2039,92 +1986,88 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void addContextMenu(final View view) {
-        view.setOnLongClickListener(new OnLongClickListener() {
+        view.setOnLongClickListener(v -> {
+            if (view.getId() == R.id.description || view.getId() == R.id.hint) {
+                selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
+                mSelectionModeActive = true;
+                return false;
+            }
+            currentActionMode = startSupportActionMode(new ActionMode.Callback() {
 
-            @Override
-            public boolean onLongClick(final View v) {
-                if (view.getId() == R.id.description || view.getId() == R.id.hint) {
-                    selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
-                    mSelectionModeActive = true;
+                @Override
+                public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
+                    return prepareClipboardActionMode(view, actionMode, menu);
+                }
+
+                private boolean prepareClipboardActionMode(final View view1, final ActionMode actionMode, final Menu menu) {
+                    switch (view1.getId()) {
+                        case R.id.value: // coordinates, gc-code, name
+                            clickedItemText = ((TextView) view1).getText();
+                            final CharSequence itemTitle = ((TextView) ((View) view1.getParent()).findViewById(R.id.name)).getText();
+                            if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
+                                clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
+                            }
+                            buildDetailsContextMenu(actionMode, menu, itemTitle, true);
+                            return true;
+                        case R.id.description:
+                            // combine short and long description
+                            final String shortDesc = cache.getShortDescription();
+                            if (StringUtils.isBlank(shortDesc)) {
+                                clickedItemText = cache.getDescription();
+                            } else {
+                                clickedItemText = shortDesc + "\n\n" + cache.getDescription();
+                            }
+                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
+                            return true;
+                        case R.id.personalnote:
+                            clickedItemText = cache.getPersonalNote();
+                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
+                            return true;
+                        case R.id.hint:
+                            clickedItemText = cache.getHint();
+                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
+                            return true;
+                        case R.id.log:
+                            clickedItemText = ((TextView) view1).getText();
+                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
+                            return true;
+                        case R.id.date: // event date
+                            clickedItemText = Formatter.formatHiddenDate(cache);
+                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
+                            menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+                            return true;
+                    }
                     return false;
                 }
-                currentActionMode = startSupportActionMode(new ActionMode.Callback() {
 
-                    @Override
-                    public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
-                        return prepareClipboardActionMode(view, actionMode, menu);
-                    }
+                @Override
+                public void onDestroyActionMode(final ActionMode actionMode) {
+                    currentActionMode = null;
+                }
 
-                    private boolean prepareClipboardActionMode(final View view, final ActionMode actionMode, final Menu menu) {
-                        switch (view.getId()) {
-                            case R.id.value: // coordinates, gc-code, name
-                                clickedItemText = ((TextView) view).getText();
-                                final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                                if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
-                                    clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
-                                }
-                                buildDetailsContextMenu(actionMode, menu, itemTitle, true);
-                                return true;
-                            case R.id.description:
-                                // combine short and long description
-                                final String shortDesc = cache.getShortDescription();
-                                if (StringUtils.isBlank(shortDesc)) {
-                                    clickedItemText = cache.getDescription();
-                                } else {
-                                    clickedItemText = shortDesc + "\n\n" + cache.getDescription();
-                                }
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
-                                return true;
-                            case R.id.personalnote:
-                                clickedItemText = cache.getPersonalNote();
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
-                                return true;
-                            case R.id.hint:
-                                clickedItemText = cache.getHint();
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
-                                return true;
-                            case R.id.log:
-                                clickedItemText = ((TextView) view).getText();
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
-                                return true;
-                            case R.id.date: // event date
-                                clickedItemText = Formatter.formatHiddenDate(cache);
-                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
-                                menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
-                                return true;
-                        }
-                        return false;
-                    }
+                @Override
+                public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
+                    actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
+                    prepareClipboardActionMode(view, actionMode, menu);
+                    // Return true so that the action mode is shown
+                    return true;
+                }
 
-                    @Override
-                    public void onDestroyActionMode(final ActionMode actionMode) {
-                        currentActionMode = null;
+                @Override
+                public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        // detail fields
+                        case R.id.menu_calendar:
+                            CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
+                            actionMode.finish();
+                            return true;
+                        // handle clipboard actions in base
+                        default:
+                            return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
                     }
-
-                    @Override
-                    public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
-                        actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
-                        prepareClipboardActionMode(view, actionMode, menu);
-                        // Return true so that the action mode is shown
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            // detail fields
-                            case R.id.menu_calendar:
-                                CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
-                                actionMode.finish();
-                                return true;
-                            // handle clipboard actions in base
-                            default:
-                                return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
-                        }
-                    }
-                });
-                return true;
-            }
+                }
+            });
+            return true;
         });
     }
 

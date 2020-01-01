@@ -5,7 +5,6 @@ import cgeo.geocaching.models.Geocache;
 
 import android.view.View;
 import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,19 +29,15 @@ public final class GCVoteRatingBarUtil {
             final TextView label = parentView.findViewById(R.id.gcvoteLabel);
             ratingBar.setVisibility(View.VISIBLE);
             label.setVisibility(View.VISIBLE);
-            ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-
-                @Override
-                public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
-                    // 0.5 is not a valid rating, therefore we must limit
-                    final float rating = GCVote.isValidRating(stars) ? stars : 0;
-                    if (rating < stars) {
-                        ratingBar.setRating(rating);
-                    }
-                    label.setText(GCVote.getDescription(rating));
-                    if (changeListener != null) {
-                        changeListener.onRatingChanged(rating);
-                    }
+            ratingBar.setOnRatingBarChangeListener((ratingBar1, stars, fromUser) -> {
+                // 0.5 is not a valid rating, therefore we must limit
+                final float rating = GCVote.isValidRating(stars) ? stars : 0;
+                if (rating < stars) {
+                    ratingBar1.setRating(rating);
+                }
+                label.setText(GCVote.getDescription(rating));
+                if (changeListener != null) {
+                    changeListener.onRatingChanged(rating);
                 }
             });
             ratingBar.setRating(cache.getMyVote());

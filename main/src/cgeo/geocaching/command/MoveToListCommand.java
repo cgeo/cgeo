@@ -5,7 +5,6 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 
@@ -27,18 +26,13 @@ public abstract class MoveToListCommand extends AbstractCachesCommand {
     @Override
     public void execute() {
         // as we cannot show the dialog inside the background doCommand, we override execute to ask in the UI thread
-        new StoredList.UserInterface(getContext()).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
-
-
-            @Override
-            public void call(final Integer newListId) {
-                MoveToListCommand.this.newListId = newListId;
-                final AbstractList list = AbstractList.getListById(newListId);
-                if (list != null) {
-                    final String newListName = list.getTitle();
-                    setProgressMessage(getContext().getString(R.string.command_move_caches_progress, newListName));
-                    MoveToListCommand.super.execute();
-                }
+        new StoredList.UserInterface(getContext()).promptForListSelection(R.string.cache_menu_move_list, newListId -> {
+            MoveToListCommand.this.newListId = newListId;
+            final AbstractList list = AbstractList.getListById(newListId);
+            if (list != null) {
+                final String newListName = list.getTitle();
+                setProgressMessage(getContext().getString(R.string.command_move_caches_progress, newListName));
+                MoveToListCommand.super.execute();
             }
         }, true, currentListId);
     }

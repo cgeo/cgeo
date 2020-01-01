@@ -14,8 +14,6 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.concurrent.Callable;
-
 import io.reactivex.Maybe;
 import org.apache.commons.lang3.StringUtils;
 
@@ -158,12 +156,9 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         // host.tld/viewcache.php?cacheid=cacheid
         final String id = uri.getPath().startsWith("/viewcache.php") ? uri.getQueryParameter("cacheid") : "";
         if (StringUtils.isNotBlank(id)) {
-            final String geocode = Maybe.fromCallable(new Callable<String>() {
-                @Override
-                public String call() throws Exception {
-                    final String normalizedUrl = StringUtils.replaceIgnoreCase(url, getShortHost(), getShortHost());
-                    return OkapiClient.getGeocodeByUrl(OCApiConnector.this, normalizedUrl);
-                }
+            final String geocode = Maybe.fromCallable(() -> {
+                final String normalizedUrl = StringUtils.replaceIgnoreCase(url, getShortHost(), getShortHost());
+                return OkapiClient.getGeocodeByUrl(OCApiConnector.this, normalizedUrl);
             }).subscribeOn(AndroidRxUtils.networkScheduler).blockingGet();
 
             if (geocode != null && canHandle(geocode)) {

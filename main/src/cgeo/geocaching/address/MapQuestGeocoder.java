@@ -14,8 +14,6 @@ import java.util.Locale;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import org.apache.commons.lang3.StringUtils;
@@ -55,29 +53,23 @@ public class MapQuestGeocoder {
     private static Observable<Address> get(@NonNull final String method, @NonNull final Parameters parameters) {
         return Network.requestJSON("https://open.mapquestapi.com/geocoding/v1/" + method,
                 parameters.put("key", MAPQUEST_KEY))
-                .flatMapObservable(new Function<ObjectNode, Observable<Address>>() {
-                    @Override
-                    public Observable<Address> apply(final ObjectNode response) {
-                        final int statusCode = response.path("info").path("statuscode").asInt(-1);
-                        if (statusCode != 0) {
-                            Log.w("MapQuest decoder error: statuscode is not 0");
-                            throw new IllegalStateException("no correct answer from MapQuest geocoder");
-                        }
-                        return Observable.create(new ObservableOnSubscribe<Address>() {
-                            @Override
-                            public void subscribe(final ObservableEmitter<Address> emitter) throws Exception {
-                                try {
-                                    for (final JsonNode address : response.get("results").get(0).get("locations")) {
-                                        emitter.onNext(mapquestToAddress(address));
-                                    }
-                                    emitter.onComplete();
-                                } catch (final Exception e) {
-                                    Log.e("Error decoding MapQuest address", e);
-                                    emitter.onError(e);
-                                }
-                            }
-                        });
+                .flatMapObservable((Function<ObjectNode, Observable<Address>>) response -> {
+                    final int statusCode = response.path("info").path("statuscode").asInt(-1);
+                    if (statusCode != 0) {
+                        Log.w("MapQuest decoder error: statuscode is not 0");
+                        throw new IllegalStateException("no correct answer from MapQuest geocoder");
                     }
+                    return Observable.create(emitter -> {
+                        try {
+                            for (final JsonNode address : response.get("results").get(0).get("locations")) {
+                                emitter.onNext(mapquestToAddress(address));
+                            }
+                            emitter.onComplete();
+                        } catch (final Exception e) {
+                            Log.e("Error decoding MapQuest address", e);
+                            emitter.onError(e);
+                        }
+                    });
                 });
     }
 

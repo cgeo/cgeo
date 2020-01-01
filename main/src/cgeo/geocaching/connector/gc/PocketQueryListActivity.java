@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.functions.Consumer;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class PocketQueryListActivity extends AbstractActionBarActivity {
@@ -47,33 +46,27 @@ public class PocketQueryListActivity extends AbstractActionBarActivity {
     }
 
     private void loadInBackground(final PocketQueryListAdapter adapter, final ProgressDialog waitDialog) {
-        AndroidRxUtils.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(new Consumer<List<PocketQuery>>() {
-            @Override
-            public void accept(final List<PocketQuery> pocketQueryList) {
-                waitDialog.dismiss();
-                if (onlyDownloadable) {
-                    for (final PocketQuery pq : pocketQueryList) {
-                        if (pq.isDownloadable()) {
-                            pocketQueries.add(pq);
-                        }
+        AndroidRxUtils.bindActivity(this, GCParser.searchPocketQueryListObservable).subscribe(pocketQueryList -> {
+            waitDialog.dismiss();
+            if (onlyDownloadable) {
+                for (final PocketQuery pq : pocketQueryList) {
+                    if (pq.isDownloadable()) {
+                        pocketQueries.add(pq);
                     }
-                } else {
-                    pocketQueries.addAll(pocketQueryList);
                 }
-
-                if (CollectionUtils.isEmpty(pocketQueryList)) {
-                    ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.warn_no_pocket_query_found));
-                    finish();
-                }
-
-                adapter.notifyItemRangeInserted(0, pocketQueryList.size());
+            } else {
+                pocketQueries.addAll(pocketQueryList);
             }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(final Throwable e) {
-                ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_pocket_query_list));
+
+            if (CollectionUtils.isEmpty(pocketQueryList)) {
+                ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.warn_no_pocket_query_found));
                 finish();
             }
+
+            adapter.notifyItemRangeInserted(0, pocketQueryList.size());
+        }, e -> {
+            ActivityMixin.showToast(PocketQueryListActivity.this, getString(R.string.err_read_pocket_query_list));
+            finish();
         });
     }
 

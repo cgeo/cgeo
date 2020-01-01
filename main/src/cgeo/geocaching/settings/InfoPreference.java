@@ -6,7 +6,6 @@ import cgeo.geocaching.ui.UrlPopup;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,14 +76,10 @@ public class InfoPreference extends AbstractAttributeBasedPreference {
         super.onCreateView(parent);   // call super to make lint happy
 
         // show popup when clicked
-        setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                new UrlPopup(preference.getContext()).show(preference.getTitle().toString(), text, url, urlButton);
-                // don't update the preference value
-                return false;
-            }
+        setOnPreferenceClickListener(preference -> {
+            new UrlPopup(preference.getContext()).show(preference.getTitle().toString(), text, url, urlButton);
+            // don't update the preference value
+            return false;
         });
 
         return addInfoIcon(parent);

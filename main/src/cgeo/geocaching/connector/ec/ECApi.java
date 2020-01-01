@@ -161,14 +161,11 @@ final class ECApi {
         final Single<Response> response = Network.getRequest(API_HOST + uri, params);
 
         // retry at most one time
-        return response.flatMap(new Function<Response, Single<Response>>() {
-            @Override
-            public Single<Response> apply(final Response response) {
-                if (!isRetry && response.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
-                    return apiRequest(uri, params, true);
-                }
-                return Single.just(response);
+        return response.flatMap((Function<Response, Single<Response>>) response1 -> {
+            if (!isRetry && response1.code() == 403 && ecLogin.login() == StatusCode.NO_ERROR) {
+                return apiRequest(uri, params, true);
             }
+            return Single.just(response1);
         });
     }
 

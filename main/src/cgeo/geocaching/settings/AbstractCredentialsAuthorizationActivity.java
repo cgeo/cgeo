@@ -30,7 +30,6 @@ import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractCredentialsAuthorizationActivity extends AbstractActivity {
@@ -103,28 +102,20 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 res.getString(R.string.init_login_popup), getAuthDialogWait(), true);
         loginDialog.setCancelable(false);
 
-        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(new Callable<Observable<StatusCode>>() {
-            @Override
-            public Observable<StatusCode> call() {
-                return Observable.just(checkCredentials(credentials));
-            }
-        })).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(new Consumer<StatusCode>() {
-            @Override
-            public void accept(final StatusCode statusCode) {
-                loginDialog.dismiss();
-                if (statusCode == StatusCode.NO_ERROR) {
-                    setCredentials(credentials);
-                    showToast(getAuthDialogCompleted());
-                    setResult(RESULT_OK);
-                    finish();
-                } else {
-                    Dialogs.message(authorizationActivity, R.string.init_login_popup,
-                        res.getString(R.string.init_login_popup_failed_reason, statusCode.getErrorString(res))
-                    );
-                    checkButton.setText(getAuthCheckAgain());
-                    checkButton.setOnClickListener(new CheckListener());
-                    checkButton.setEnabled(true);
-                }
+        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer((Callable<Observable<StatusCode>>) () -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
+            loginDialog.dismiss();
+            if (statusCode == StatusCode.NO_ERROR) {
+                setCredentials(credentials);
+                showToast(getAuthDialogCompleted());
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                Dialogs.message(authorizationActivity, R.string.init_login_popup,
+                    res.getString(R.string.init_login_popup_failed_reason, statusCode.getErrorString(res))
+                );
+                checkButton.setText(getAuthCheckAgain());
+                checkButton.setOnClickListener(new CheckListener());
+                checkButton.setEnabled(true);
             }
         });
     }

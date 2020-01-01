@@ -15,8 +15,6 @@ import android.os.Build.VERSION_CODES;
 import androidx.annotation.RequiresApi;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 
 public class GnssStatusProvider {
 
@@ -40,45 +38,42 @@ public class GnssStatusProvider {
 
     @RequiresApi(VERSION_CODES.N)
     private static Observable<Status> createGNSSObservable(final Context context) {
-        return Observable.create(new ObservableOnSubscribe<Status>() {
-            @Override
-            public void subscribe(final ObservableEmitter<Status> subscriber) throws Exception {
-                final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                final Callback callback = new Callback() {
-                    Status latest = NO_GNSS;
+        return Observable.create(subscriber -> {
+            final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            final Callback callback = new Callback() {
+                Status latest = NO_GNSS;
 
-                    @Override
-                    public void onSatelliteStatusChanged(final GnssStatus status) {
-                        final int visible = status.getSatelliteCount();
-                        int fixed = 0;
-                        for (int satelliteIndex = 0; satelliteIndex < visible; satelliteIndex++) {
-                            if (status.usedInFix(satelliteIndex)) {
-                                fixed++;
-                            }
+                @Override
+                public void onSatelliteStatusChanged(final GnssStatus status) {
+                    final int visible = status.getSatelliteCount();
+                    int fixed = 0;
+                    for (int satelliteIndex = 0; satelliteIndex < visible; satelliteIndex++) {
+                        if (status.usedInFix(satelliteIndex)) {
+                            fixed++;
                         }
-                        if (visible == latest.satellitesVisible && fixed == latest.satellitesFixed) {
-                            return;
-                        }
-                        latest = new Status(true, visible, fixed);
-                        subscriber.onNext(latest);
                     }
+                    if (visible == latest.satellitesVisible && fixed == latest.satellitesFixed) {
+                        return;
+                    }
+                    latest = new Status(true, visible, fixed);
+                    subscriber.onNext(latest);
+                }
 
-                    @Override
-                    public void onStarted() {
-                        latest = new Status(true, 0, 0);
-                        subscriber.onNext(latest);
-                    }
+                @Override
+                public void onStarted() {
+                    latest = new Status(true, 0, 0);
+                    subscriber.onNext(latest);
+                }
 
-                    @Override
-                    public void onStopped() {
-                        latest = NO_GNSS;
-                        subscriber.onNext(latest);
-                    }
-                };
-                subscriber.onNext(NO_GNSS);
-                geoManager.registerGnssStatusCallback(callback);
-                subscriber.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> geoManager.unregisterGnssStatusCallback(callback)));
-            }
+                @Override
+                public void onStopped() {
+                    latest = NO_GNSS;
+                    subscriber.onNext(latest);
+                }
+            };
+            subscriber.onNext(NO_GNSS);
+            geoManager.registerGnssStatusCallback(callback);
+            subscriber.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> geoManager.unregisterGnssStatusCallback(callback)));
         });
     }
 

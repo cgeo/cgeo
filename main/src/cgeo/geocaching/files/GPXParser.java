@@ -33,7 +33,6 @@ import android.sax.Element;
 import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
-import android.sax.StartElementListener;
 import android.util.Xml;
 
 import androidx.annotation.NonNull;
@@ -57,7 +56,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 abstract class GPXParser extends FileParser {
@@ -200,40 +198,24 @@ abstract class GPXParser extends FileParser {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 
-        root.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
+        root.getChild(namespace, "url").setEndTextElementListener(body -> scriptUrl = body);
 
-            @Override
-            public void end(final String body) {
-                scriptUrl = body;
-            }
-        });
-
-        root.getChild(namespace, "creator").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                scriptUrl = body;
-            }
-        });
+        root.getChild(namespace, "creator").setEndTextElementListener(body -> scriptUrl = body);
 
         // waypoint - attributes
-        waypoint.setStartElementListener(new StartElementListener() {
-
-            @Override
-            public void start(final Attributes attrs) {
-                try {
-                    if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
-                        final String latitude = attrs.getValue("lat");
-                        final String longitude = attrs.getValue("lon");
-                        // latitude and longitude are required attributes, but we export them empty for waypoints without coordinates
-                        if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-                            cache.setCoords(new Geopoint(Double.parseDouble(latitude),
-                                    Double.parseDouble(longitude)));
-                        }
+        waypoint.setStartElementListener(attrs -> {
+            try {
+                if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
+                    final String latitude = attrs.getValue("lat");
+                    final String longitude = attrs.getValue("lon");
+                    // latitude and longitude are required attributes, but we export them empty for waypoints without coordinates
+                    if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
+                        cache.setCoords(new Geopoint(Double.parseDouble(latitude),
+                                Double.parseDouble(longitude)));
                     }
-                } catch (final NumberFormatException e) {
-                    Log.w("Failed to parse waypoint's latitude and/or longitude", e);
                 }
+            } catch (final NumberFormatException e) {
+                Log.w("Failed to parse waypoint's latitude and/or longitude", e);
             }
         });
 
@@ -336,115 +318,81 @@ abstract class GPXParser extends FileParser {
         });
 
         // waypoint.time
-        waypoint.getChild(namespace, "time").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                try {
-                    cache.setHidden(parseDate(body));
-                } catch (final Exception e) {
-                    Log.w("Failed to parse cache date", e);
-                }
+        waypoint.getChild(namespace, "time").setEndTextElementListener(body -> {
+            try {
+                cache.setHidden(parseDate(body));
+            } catch (final Exception e) {
+                Log.w("Failed to parse cache date", e);
             }
         });
 
         // waypoint.name
-        waypoint.getChild(namespace, "name").setEndTextElementListener(new EndTextElementListener() {
+        waypoint.getChild(namespace, "name").setEndTextElementListener(body -> {
+            name = body;
 
-            @Override
-            public void end(final String body) {
-                name = body;
+            String content = body.trim();
 
-                String content = body.trim();
-
-                // extremcaching.com manipulates the GC code by adding GC in front of ECxxx
-                if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
-                    content = content.substring(2);
-                }
-
-                cache.setName(content);
-
-                findGeoCode(cache.getName());
+            // extremcaching.com manipulates the GC code by adding GC in front of ECxxx
+            if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
+                content = content.substring(2);
             }
+
+            cache.setName(content);
+
+            findGeoCode(cache.getName());
         });
 
         // waypoint.desc
-        waypoint.getChild(namespace, "desc").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                desc = body;
-
-                cache.setShortDescription(validate(body));
-            }
+        waypoint.getChild(namespace, "desc").setEndTextElementListener(body -> {
+            desc = body;
+            cache.setShortDescription(validate(body));
         });
 
         // waypoint.cmt
-        waypoint.getChild(namespace, "cmt").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                cmt = body;
-
-                cache.setDescription(validate(body));
-            }
+        waypoint.getChild(namespace, "cmt").setEndTextElementListener(body -> {
+            cmt = body;
+            cache.setDescription(validate(body));
         });
 
         // waypoint.getType()
-        waypoint.getChild(namespace, "type").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                final String[] content = StringUtils.split(body, '|');
-                if (content.length > 0) {
-                    type = content[0].toLowerCase(Locale.US).trim();
-                    if (content.length > 1) {
-                        subtype = content[1].toLowerCase(Locale.US).trim();
-                    }
+        waypoint.getChild(namespace, "type").setEndTextElementListener(body -> {
+            final String[] content = StringUtils.split(body, '|');
+            if (content.length > 0) {
+                type = content[0].toLowerCase(Locale.US).trim();
+                if (content.length > 1) {
+                    subtype = content[1].toLowerCase(Locale.US).trim();
                 }
             }
         });
 
         // waypoint.sym
-        waypoint.getChild(namespace, "sym").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                sym = body.toLowerCase(Locale.US);
-                if (sym.contains("geocache") && sym.contains("found")) {
-                    cache.setFound(true);
-                }
+        waypoint.getChild(namespace, "sym").setEndTextElementListener(body -> {
+            sym = body.toLowerCase(Locale.US);
+            if (sym.contains("geocache") && sym.contains("found")) {
+                cache.setFound(true);
             }
         });
 
         // waypoint.url
-        waypoint.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String url) {
-                final MatcherWrapper matcher = new MatcherWrapper(PATTERN_GUID, url);
-                if (matcher.matches()) {
-                    final String guid = matcher.group(1);
-                    if (StringUtils.isNotBlank(guid)) {
-                        cache.setGuid(guid);
-                    }
+        waypoint.getChild(namespace, "url").setEndTextElementListener(url -> {
+            final MatcherWrapper matcher = new MatcherWrapper(PATTERN_GUID, url);
+            if (matcher.matches()) {
+                final String guid = matcher.group(1);
+                if (StringUtils.isNotBlank(guid)) {
+                    cache.setGuid(guid);
                 }
-                final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
-                if (matcherCode.matches()) {
-                    final String geocode = matcherCode.group(1);
-                    cache.setGeocode(geocode);
-                }
+            }
+            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
+            if (matcherCode.matches()) {
+                final String geocode = matcherCode.group(1);
+                cache.setGeocode(geocode);
             }
         });
 
         // waypoint.urlname (name for waymarks)
-        waypoint.getChild(namespace, "urlname").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String urlName) {
-                if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
-                    cache.setName(StringUtils.trim(urlName));
-                }
+        waypoint.getChild(namespace, "urlname").setEndTextElementListener(urlName -> {
+            if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
+                cache.setName(StringUtils.trim(urlName));
             }
         });
 
@@ -462,75 +410,43 @@ abstract class GPXParser extends FileParser {
             // waypoints.cache
             final Element gcCache = cacheParent.getChild(nsGC, "cache");
 
-            gcCache.setStartElementListener(new StartElementListener() {
-
-                @Override
-                public void start(final Attributes attrs) {
-                    try {
-                        if (attrs.getIndex("id") > -1) {
-                            cache.setCacheId(attrs.getValue("id"));
-                        }
-                        if (attrs.getIndex("archived") > -1) {
-                            cache.setArchived(attrs.getValue("archived").equalsIgnoreCase("true"));
-                        }
-                        if (attrs.getIndex("available") > -1) {
-                            cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
-                        }
-                    } catch (final RuntimeException e) {
-                        Log.w("Failed to parse cache attributes", e);
+            gcCache.setStartElementListener(attrs -> {
+                try {
+                    if (attrs.getIndex("id") > -1) {
+                        cache.setCacheId(attrs.getValue("id"));
                     }
+                    if (attrs.getIndex("archived") > -1) {
+                        cache.setArchived(attrs.getValue("archived").equalsIgnoreCase("true"));
+                    }
+                    if (attrs.getIndex("available") > -1) {
+                        cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
+                    }
+                } catch (final RuntimeException e) {
+                    Log.w("Failed to parse cache attributes", e);
                 }
             });
 
             // waypoint.cache.getName()
-            gcCache.getChild(nsGC, "name").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String cacheName) {
-                    cache.setName(validate(cacheName));
-                }
-            });
+            gcCache.getChild(nsGC, "name").setEndTextElementListener(cacheName -> cache.setName(validate(cacheName)));
 
             // waypoint.cache.getOwner()
-            gcCache.getChild(nsGC, "owner").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String ownerUserId) {
-                    cache.setOwnerUserId(validate(ownerUserId));
-                }
-            });
+            gcCache.getChild(nsGC, "owner").setEndTextElementListener(ownerUserId -> cache.setOwnerUserId(validate(ownerUserId)));
 
             // waypoint.cache.getOwner()
-            gcCache.getChild(nsGC, "placed_by").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String ownerDisplayName) {
-                    cache.setOwnerDisplayName(validate(ownerDisplayName));
-                }
-            });
+            gcCache.getChild(nsGC, "placed_by").setEndTextElementListener(ownerDisplayName -> cache.setOwnerDisplayName(validate(ownerDisplayName)));
 
             // waypoint.cache.getType()
-            gcCache.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String bodyIn) {
-                    String body = validate(bodyIn);
-                    // lab caches wrongly contain a prefix in the type
-                    if (body.startsWith("Geocache|")) {
-                        body = StringUtils.substringAfter(body, "Geocache|").trim();
-                    }
-                    cache.setType(CacheType.getByPattern(body));
+            gcCache.getChild(nsGC, "type").setEndTextElementListener(bodyIn -> {
+                String body = validate(bodyIn);
+                // lab caches wrongly contain a prefix in the type
+                if (body.startsWith("Geocache|")) {
+                    body = StringUtils.substringAfter(body, "Geocache|").trim();
                 }
+                cache.setType(CacheType.getByPattern(body));
             });
 
             // waypoint.cache.container
-            gcCache.getChild(nsGC, "container").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String body) {
-                    cache.setSize(CacheSize.getById(validate(body)));
-                }
-            });
+            gcCache.getChild(nsGC, "container").setEndTextElementListener(body -> cache.setSize(CacheSize.getById(validate(body))));
 
             // waypoint.cache.getAttributes()
             // @see issue #299
@@ -545,103 +461,66 @@ abstract class GPXParser extends FileParser {
             // waypoint.cache.attribute
             final Element gcAttribute = gcAttributes.getChild(nsGC, "attribute");
 
-            gcAttribute.setStartElementListener(new StartElementListener() {
-                @Override
-                public void start(final Attributes attrs) {
-                    try {
-                        if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
-                            final int attributeId = Integer.parseInt(attrs.getValue("id"));
-                            final boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
-                            final CacheAttribute attribute = CacheAttribute.getById(attributeId);
-                            if (attribute != null) {
-                                cache.getAttributes().add(attribute.getValue(attributeActive));
-                            }
+            gcAttribute.setStartElementListener(attrs -> {
+                try {
+                    if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
+                        final int attributeId = Integer.parseInt(attrs.getValue("id"));
+                        final boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
+                        final CacheAttribute attribute = CacheAttribute.getById(attributeId);
+                        if (attribute != null) {
+                            cache.getAttributes().add(attribute.getValue(attributeActive));
                         }
-                    } catch (final NumberFormatException ignored) {
-                        // nothing
                     }
+                } catch (final NumberFormatException ignored) {
+                    // nothing
                 }
             });
 
             // waypoint.cache.getDifficulty()
-            gcCache.getChild(nsGC, "difficulty").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String body) {
-                    try {
-                        cache.setDifficulty(Float.parseFloat(body));
-                    } catch (final NumberFormatException e) {
-                        Log.w("Failed to parse difficulty", e);
-                    }
+            gcCache.getChild(nsGC, "difficulty").setEndTextElementListener(body -> {
+                try {
+                    cache.setDifficulty(Float.parseFloat(body));
+                } catch (final NumberFormatException e) {
+                    Log.w("Failed to parse difficulty", e);
                 }
             });
 
             // waypoint.cache.getTerrain()
-            gcCache.getChild(nsGC, "terrain").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String body) {
-                    try {
-                        cache.setTerrain(Float.parseFloat(body));
-                    } catch (final NumberFormatException e) {
-                        Log.w("Failed to parse terrain", e);
-                    }
+            gcCache.getChild(nsGC, "terrain").setEndTextElementListener(body -> {
+                try {
+                    cache.setTerrain(Float.parseFloat(body));
+                } catch (final NumberFormatException e) {
+                    Log.w("Failed to parse terrain", e);
                 }
             });
 
             // waypoint.cache.country
-            gcCache.getChild(nsGC, "country").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String country) {
-                    if (StringUtils.isBlank(cache.getLocation())) {
-                        cache.setLocation(validate(country));
-                    } else {
-                        cache.setLocation(cache.getLocation() + ", " + country.trim());
-                    }
+            gcCache.getChild(nsGC, "country").setEndTextElementListener(country -> {
+                if (StringUtils.isBlank(cache.getLocation())) {
+                    cache.setLocation(validate(country));
+                } else {
+                    cache.setLocation(cache.getLocation() + ", " + country.trim());
                 }
             });
 
             // waypoint.cache.state
-            gcCache.getChild(nsGC, "state").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String state) {
-                    final String trimmedState = state.trim();
-                    if (StringUtils.isNotEmpty(trimmedState)) { // state can be completely empty
-                        if (StringUtils.isBlank(cache.getLocation())) {
-                            cache.setLocation(validate(state));
-                        } else {
-                            cache.setLocation(trimmedState + ", " + cache.getLocation());
-                        }
+            gcCache.getChild(nsGC, "state").setEndTextElementListener(state -> {
+                final String trimmedState = state.trim();
+                if (StringUtils.isNotEmpty(trimmedState)) { // state can be completely empty
+                    if (StringUtils.isBlank(cache.getLocation())) {
+                        cache.setLocation(validate(state));
+                    } else {
+                        cache.setLocation(trimmedState + ", " + cache.getLocation());
                     }
                 }
             });
 
             // waypoint.cache.encoded_hints
-            gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(new EndTextElementListener() {
+            gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(encoded -> cache.setHint(validate(encoded)));
 
-                @Override
-                public void end(final String encoded) {
-                    cache.setHint(validate(encoded));
-                }
-            });
+            gcCache.getChild(nsGC, "short_description").setEndTextElementListener(shortDesc -> cache.setShortDescription(validate(shortDesc)));
 
-            gcCache.getChild(nsGC, "short_description").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String shortDesc) {
-                    cache.setShortDescription(validate(shortDesc));
-                }
-            });
-
-            gcCache.getChild(nsGC, "long_description").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String desc) {
-                    cache.setDescription(validate(desc));
-                }
-            });
+            gcCache.getChild(nsGC, "long_description").setEndTextElementListener(desc -> cache.setDescription(validate(desc)));
 
             // waypoint.cache.travelbugs
             final Element gcTBs = gcCache.getChild(nsGC, "travelbugs");
@@ -650,40 +529,26 @@ abstract class GPXParser extends FileParser {
             final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
 
             // waypoint.cache.travelbugs.travelbug
-            gcTB.setStartElementListener(new StartElementListener() {
+            gcTB.setStartElementListener(attrs -> {
+                trackable = new Trackable();
 
-                @Override
-                public void start(final Attributes attrs) {
-                    trackable = new Trackable();
-
-                    try {
-                        if (attrs.getIndex("ref") > -1) {
-                            trackable.setGeocode(attrs.getValue("ref"));
-                        }
-                    } catch (final RuntimeException ignored) {
-                        // nothing
+                try {
+                    if (attrs.getIndex("ref") > -1) {
+                        trackable.setGeocode(attrs.getValue("ref"));
                     }
+                } catch (final RuntimeException ignored) {
+                    // nothing
                 }
             });
 
-            gcTB.setEndElementListener(new EndElementListener() {
-
-                @Override
-                public void end() {
-                    if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
-                        cache.addInventoryItem(trackable);
-                    }
+            gcTB.setEndElementListener(() -> {
+                if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
+                    cache.addInventoryItem(trackable);
                 }
             });
 
             // waypoint.cache.travelbugs.travelbug.getName()
-            gcTB.getChild(nsGC, "name").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String tbName) {
-                    trackable.setName(validate(tbName));
-                }
-            });
+            gcTB.getChild(nsGC, "name").setEndTextElementListener(tbName -> trackable.setName(validate(tbName)));
 
             // waypoint.cache.logs
             final Element gcLogs = gcCache.getChild(nsGC, "logs");
@@ -691,80 +556,52 @@ abstract class GPXParser extends FileParser {
             // waypoint.cache.log
             final Element gcLog = gcLogs.getChild(nsGC, "log");
 
-            gcLog.setStartElementListener(new StartElementListener() {
+            gcLog.setStartElementListener(attrs -> {
+                logBuilder = new LogEntry.Builder();
 
-                @Override
-                public void start(final Attributes attrs) {
-                    logBuilder = new LogEntry.Builder();
-
-                    try {
-                        if (attrs.getIndex("id") > -1) {
-                            logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
-                        }
-                    } catch (final NumberFormatException ignored) {
-                        // nothing
+                try {
+                    if (attrs.getIndex("id") > -1) {
+                        logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
                     }
+                } catch (final NumberFormatException ignored) {
+                    // nothing
                 }
             });
 
-            gcLog.setEndElementListener(new EndElementListener() {
-
-                @Override
-                public void end() {
-                    final LogEntry log = logBuilder.build();
-                    if (log.getType() != LogType.UNKNOWN) {
-                        if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
-                            final IConnector connector = ConnectorFactory.getConnector(cache);
-                            if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
-                                cache.setFound(true);
-                                cache.setVisitedDate(log.date);
-                            }
+            gcLog.setEndElementListener(() -> {
+                final LogEntry log = logBuilder.build();
+                if (log.getType() != LogType.UNKNOWN) {
+                    if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                        final IConnector connector = ConnectorFactory.getConnector(cache);
+                        if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                            cache.setFound(true);
+                            cache.setVisitedDate(log.date);
                         }
-                        logs.add(log);
                     }
+                    logs.add(log);
                 }
             });
 
             // waypoint.cache.logs.log.date
-            gcLog.getChild(nsGC, "date").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String body) {
-                    try {
-                        logBuilder.setDate(parseDate(body).getTime());
-                    } catch (final Exception e) {
-                        Log.w("Failed to parse log date", e);
-                    }
+            gcLog.getChild(nsGC, "date").setEndTextElementListener(body -> {
+                try {
+                    logBuilder.setDate(parseDate(body).getTime());
+                } catch (final Exception e) {
+                    Log.w("Failed to parse log date", e);
                 }
             });
 
             // waypoint.cache.logs.log.getType()
-            gcLog.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String body) {
-                    final String logType = validate(body);
-                    logBuilder.setLogType(LogType.getByType(logType));
-                }
+            gcLog.getChild(nsGC, "type").setEndTextElementListener(body -> {
+                final String logType = validate(body);
+                logBuilder.setLogType(LogType.getByType(logType));
             });
 
             // waypoint.cache.logs.log.finder
-            gcLog.getChild(nsGC, "finder").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String finderName) {
-                    logBuilder.setAuthor(validate(finderName));
-                }
-            });
+            gcLog.getChild(nsGC, "finder").setEndTextElementListener(finderName -> logBuilder.setAuthor(validate(finderName)));
 
             // waypoint.cache.logs.log.text
-            gcLog.getChild(nsGC, "text").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String logText) {
-                    logBuilder.setLog(validate(logText));
-                }
-            });
+            gcLog.getChild(nsGC, "text").setEndTextElementListener(logText -> logBuilder.setLog(validate(logText)));
         }
 
         try {
@@ -784,13 +621,7 @@ abstract class GPXParser extends FileParser {
     private void registerGsakExtensions(final Element cacheParent) {
         for (final String gsakNamespace : GSAK_NS) {
             final Element gsak = cacheParent.getChild(gsakNamespace, "wptExtension");
-            gsak.getChild(gsakNamespace, "Watch").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String watchList) {
-                    cache.setOnWatchlist(Boolean.parseBoolean(watchList.trim()));
-                }
-            });
+            gsak.getChild(gsakNamespace, "Watch").setEndTextElementListener(watchList -> cache.setOnWatchlist(Boolean.parseBoolean(watchList.trim())));
 
             gsak.getChild(gsakNamespace, "UserData").setEndTextElementListener(new UserDataListener(1));
 
@@ -798,67 +629,33 @@ abstract class GPXParser extends FileParser {
                 gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new UserDataListener(i));
             }
 
-            gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(new EndTextElementListener() {
+            gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(body -> parentCacheCode = body);
 
-                @Override
-                public void end(final String body) {
-                    parentCacheCode = body;
+            gsak.getChild(gsakNamespace, "FavPoints").setEndTextElementListener(favoritePoints -> {
+                try {
+                    cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+                } catch (final NumberFormatException e) {
+                    Log.w("Failed to parse favorite points", e);
                 }
             });
 
-            gsak.getChild(gsakNamespace, "FavPoints").setEndTextElementListener(new EndTextElementListener() {
+            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(personalNote -> cache.setPersonalNote(StringUtils.trim(personalNote)));
 
-                @Override
-                public void end(final String favoritePoints) {
-                    try {
-                        cache.setFavoritePoints(Integer.parseInt(favoritePoints));
-                    } catch (final NumberFormatException e) {
-                        Log.w("Failed to parse favorite points", e);
-                    }
-                }
+            gsak.getChild(gsakNamespace, "IsPremium").setEndTextElementListener(premium -> cache.setPremiumMembersOnly(Boolean.parseBoolean(premium)));
+
+            gsak.getChild(gsakNamespace, "LatBeforeCorrect").setEndTextElementListener(latitude -> {
+                originalLat = latitude;
+                addOriginalCoordinates();
             });
 
-            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String personalNote) {
-                    cache.setPersonalNote(StringUtils.trim(personalNote));
-                }
+            gsak.getChild(gsakNamespace, "LonBeforeCorrect").setEndTextElementListener(longitude -> {
+                originalLon = longitude;
+                addOriginalCoordinates();
             });
 
-            gsak.getChild(gsakNamespace, "IsPremium").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String premium) {
-                    cache.setPremiumMembersOnly(Boolean.parseBoolean(premium));
-                }
-            });
-
-            gsak.getChild(gsakNamespace, "LatBeforeCorrect").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String latitude) {
-                    originalLat = latitude;
-                    addOriginalCoordinates();
-                }
-            });
-
-            gsak.getChild(gsakNamespace, "LonBeforeCorrect").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String longitude) {
-                    originalLon = longitude;
-                    addOriginalCoordinates();
-                }
-            });
-
-            gsak.getChild(gsakNamespace, "Code").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String geocode) {
-                    if (StringUtils.isNotBlank(geocode)) {
-                        cache.setGeocode(StringUtils.trim(geocode));
-                    }
+            gsak.getChild(gsakNamespace, "Code").setEndTextElementListener(geocode -> {
+                if (StringUtils.isNotBlank(geocode)) {
+                    cache.setGeocode(StringUtils.trim(geocode));
                 }
             });
 
@@ -873,157 +670,84 @@ abstract class GPXParser extends FileParser {
         final String terraNamespace = "http://www.TerraCaching.com/GPX/1/0";
         final Element terraCache = cacheParent.getChild(terraNamespace, "terracache");
 
-        terraCache.getChild(terraNamespace, "name").setEndTextElementListener(new EndTextElementListener() {
+        terraCache.getChild(terraNamespace, "name").setEndTextElementListener(name -> cache.setName(StringUtils.trim(name)));
 
-            @Override
-            public void end(final String name) {
-                cache.setName(StringUtils.trim(name));
+        terraCache.getChild(terraNamespace, "owner").setEndTextElementListener(ownerName -> cache.setOwnerDisplayName(validate(ownerName)));
+
+        terraCache.getChild(terraNamespace, "style").setEndTextElementListener(style -> cache.setType(TerraCachingType.getCacheType(style)));
+
+        terraCache.getChild(terraNamespace, "size").setEndTextElementListener(size -> cache.setSize(CacheSize.getById(size)));
+
+        terraCache.getChild(terraNamespace, "country").setEndTextElementListener(country -> {
+            if (StringUtils.isNotBlank(country)) {
+                cache.setLocation(StringUtils.trim(country));
             }
         });
 
-        terraCache.getChild(terraNamespace, "owner").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String ownerName) {
-                cache.setOwnerDisplayName(validate(ownerName));
-            }
-        });
-
-        terraCache.getChild(terraNamespace, "style").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String style) {
-                cache.setType(TerraCachingType.getCacheType(style));
-            }
-        });
-
-        terraCache.getChild(terraNamespace, "size").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String size) {
-                cache.setSize(CacheSize.getById(size));
-            }
-        });
-
-        terraCache.getChild(terraNamespace, "country").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String country) {
-                if (StringUtils.isNotBlank(country)) {
-                    cache.setLocation(StringUtils.trim(country));
+        terraCache.getChild(terraNamespace, "state").setEndTextElementListener(state -> {
+            final String trimmedState = state.trim();
+            if (StringUtils.isNotEmpty(trimmedState)) {
+                if (StringUtils.isBlank(cache.getLocation())) {
+                    cache.setLocation(validate(state));
+                } else {
+                    cache.setLocation(trimmedState + ", " + cache.getLocation());
                 }
             }
         });
 
-        terraCache.getChild(terraNamespace, "state").setEndTextElementListener(new EndTextElementListener() {
+        terraCache.getChild(terraNamespace, "description").setEndTextElementListener(description -> cache.setDescription(trimHtml(description)));
 
-            @Override
-            public void end(final String state) {
-                final String trimmedState = state.trim();
-                if (StringUtils.isNotEmpty(trimmedState)) {
-                    if (StringUtils.isBlank(cache.getLocation())) {
-                        cache.setLocation(validate(state));
-                    } else {
-                        cache.setLocation(trimmedState + ", " + cache.getLocation());
-                    }
-                }
-            }
-        });
-
-        terraCache.getChild(terraNamespace, "description").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String description) {
-                cache.setDescription(trimHtml(description));
-            }
-        });
-
-        terraCache.getChild(terraNamespace, "hint").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String hint) {
-                cache.setHint(HtmlUtils.extractText(hint));
-            }
-        });
+        terraCache.getChild(terraNamespace, "hint").setEndTextElementListener(hint -> cache.setHint(HtmlUtils.extractText(hint)));
 
         final Element terraLogs = terraCache.getChild(terraNamespace, "logs");
         final Element terraLog = terraLogs.getChild(terraNamespace, "log");
 
-        terraLog.setStartElementListener(new StartElementListener() {
+        terraLog.setStartElementListener(attrs -> {
+            logBuilder = new LogEntry.Builder();
 
-            @Override
-            public void start(final Attributes attrs) {
-                logBuilder = new LogEntry.Builder();
-
-                try {
-                    if (attrs.getIndex("id") > -1) {
-                        logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // nothing
+            try {
+                if (attrs.getIndex("id") > -1) {
+                    logBuilder.setId(Integer.parseInt(attrs.getValue("id")));
                 }
+            } catch (final NumberFormatException ignored) {
+                // nothing
             }
         });
 
-        terraLog.setEndElementListener(new EndElementListener() {
-
-            @Override
-            public void end() {
-                    final LogEntry log = logBuilder.build();
-                if (log.getType() != LogType.UNKNOWN) {
-                    if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
-                        final IConnector connector = ConnectorFactory.getConnector(cache);
-                        if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
-                            cache.setFound(true);
-                            cache.setVisitedDate(log.date);
-                        }
+        terraLog.setEndElementListener(() -> {
+                final LogEntry log = logBuilder.build();
+            if (log.getType() != LogType.UNKNOWN) {
+                if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                        cache.setFound(true);
+                        cache.setVisitedDate(log.date);
                     }
-                    logs.add(log);
                 }
+                logs.add(log);
             }
         });
 
         // waypoint.cache.logs.log.date
-        terraLog.getChild(terraNamespace, "date").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                try {
-                    logBuilder.setDate(parseDate(body).getTime());
-                } catch (final Exception e) {
-                    Log.w("Failed to parse log date", e);
-                }
+        terraLog.getChild(terraNamespace, "date").setEndTextElementListener(body -> {
+            try {
+                logBuilder.setDate(parseDate(body).getTime());
+            } catch (final Exception e) {
+                Log.w("Failed to parse log date", e);
             }
         });
 
         // waypoint.cache.logs.log.type
-        terraLog.getChild(terraNamespace, "type").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String body) {
-                final String logType = validate(body);
-                logBuilder.setLogType(TerraCachingLogType.getLogType(logType));
-            }
+        terraLog.getChild(terraNamespace, "type").setEndTextElementListener(body -> {
+            final String logType = validate(body);
+            logBuilder.setLogType(TerraCachingLogType.getLogType(logType));
         });
 
         // waypoint.cache.logs.log.finder
-        terraLog.getChild(terraNamespace, "user").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String finderName) {
-                logBuilder.setAuthor(validate(finderName));
-            }
-        });
+        terraLog.getChild(terraNamespace, "user").setEndTextElementListener(finderName -> logBuilder.setAuthor(validate(finderName)));
 
         // waypoint.cache.logs.log.text
-        terraLog.getChild(terraNamespace, "entry").setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(final String entry) {
-                logBuilder.setLog(trimHtml(validate(entry)));
-            }
-
-        });
+        terraLog.getChild(terraNamespace, "entry").setEndTextElementListener(entry -> logBuilder.setLog(trimHtml(validate(entry))));
     }
 
     private static String trimHtml(final String html) {
@@ -1047,23 +771,11 @@ abstract class GPXParser extends FileParser {
         for (final String cgeoNamespace : CGEO_NS) {
             final Element cgeoVisited = cacheParent.getChild(cgeoNamespace, "visited");
 
-            cgeoVisited.setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String visited) {
-                    wptVisited = Boolean.parseBoolean(visited.trim());
-                }
-            });
+            cgeoVisited.setEndTextElementListener(visited -> wptVisited = Boolean.parseBoolean(visited.trim()));
 
             final Element cgeoUserDefined = cacheParent.getChild(cgeoNamespace, "userdefined");
 
-            cgeoUserDefined.setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String userDefined) {
-                    wptUserDefined = Boolean.parseBoolean(userDefined.trim());
-                }
-            });
+            cgeoUserDefined.setEndTextElementListener(userDefined -> wptUserDefined = Boolean.parseBoolean(userDefined.trim()));
         }
     }
 
@@ -1077,32 +789,16 @@ abstract class GPXParser extends FileParser {
             final Element ocCache = cacheParent.getChild(namespace, "cache");
             final Element requiresPassword = ocCache.getChild(namespace, "requires_password");
 
-            requiresPassword.setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String requiresPassword) {
-                    logPasswordRequired = Boolean.parseBoolean(requiresPassword.trim());
-                }
-            });
+            requiresPassword.setEndTextElementListener(requiresPassword1 -> logPasswordRequired = Boolean.parseBoolean(requiresPassword1.trim()));
 
             final Element otherCode = ocCache.getChild(namespace, "other_code");
-            otherCode.setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String otherCode) {
-                    descriptionPrefix = Geocache.getAlternativeListingText(otherCode.trim());
-                }
-            });
+            otherCode.setEndTextElementListener(otherCode1 -> descriptionPrefix = Geocache.getAlternativeListingText(otherCode1.trim()));
 
             final Element ocSize = ocCache.getChild(namespace, "size");
-            ocSize.setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String ocSize) {
-                    final CacheSize size = CacheSize.getById(ocSize);
-                    if (size != CacheSize.UNKNOWN) {
-                        cache.setSize(size);
-                    }
+            ocSize.setEndTextElementListener(ocSize1 -> {
+                final CacheSize size = CacheSize.getById(ocSize1);
+                if (size != CacheSize.UNKNOWN) {
+                    cache.setSize(size);
                 }
             });
         }

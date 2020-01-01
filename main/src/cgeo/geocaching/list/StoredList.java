@@ -22,7 +22,6 @@ import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -189,75 +188,61 @@ public final class StoredList extends AbstractList {
         private static List<StoredList> getSortedLists(final Set<Integer> selectedLists) {
             final Collator collator = Collator.getInstance();
             final List<StoredList> lists = DataStore.getLists();
-            Collections.sort(lists, new Comparator<StoredList>() {
-
-                @Override
-                public int compare(final StoredList lhs, final StoredList rhs) {
-                    if (selectedLists.contains(lhs.id) && !selectedLists.contains(rhs.id)) {
-                        return -1;
-                    }
-                    if (selectedLists.contains(rhs.id) && !selectedLists.contains(lhs.id)) {
-                        return 1;
-                    }
-                    // have the standard list at the top
-                    if (lhs.id == STANDARD_LIST_ID) {
-                        return -1;
-                    }
-                    if (rhs.id == STANDARD_LIST_ID) {
-                        return 1;
-                    }
-                    // otherwise sort alphabetical
-                    return collator.compare(lhs.getTitle(), rhs.getTitle());
+            Collections.sort(lists, (lhs, rhs) -> {
+                if (selectedLists.contains(lhs.id) && !selectedLists.contains(rhs.id)) {
+                    return -1;
                 }
+                if (selectedLists.contains(rhs.id) && !selectedLists.contains(lhs.id)) {
+                    return 1;
+                }
+                // have the standard list at the top
+                if (lhs.id == STANDARD_LIST_ID) {
+                    return -1;
+                }
+                if (rhs.id == STANDARD_LIST_ID) {
+                    return 1;
+                }
+                // otherwise sort alphabetical
+                return collator.compare(lhs.getTitle(), rhs.getTitle());
             });
             return lists;
         }
 
         public void promptForListCreation(@NonNull final Action1<Integer> runAfterwards, final String newListName) {
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new Action1<String>() {
+            // We need to update the list cache by creating a new StoredList object here.
+            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, listName -> {
+                final Activity activity = activityRef.get();
+                if (activity == null) {
+                    return;
+                }
+                final int newId = DataStore.createList(listName);
+                new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
 
-                // We need to update the list cache by creating a new StoredList object here.
-                @SuppressWarnings("unused")
-                @Override
-                public void call(final String listName) {
-                    final Activity activity = activityRef.get();
-                    if (activity == null) {
-                        return;
-                    }
-                    final int newId = DataStore.createList(listName);
-                    new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
-
-                    if (newId >= DataStore.customListIdOffset) {
-                        runAfterwards.call(newId);
-                    } else {
-                        ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
-                    }
+                if (newId >= DataStore.customListIdOffset) {
+                    runAfterwards.call(newId);
+                } else {
+                    ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
                 }
             });
         }
 
         public void promptForListCreation(@NonNull final Action1<Set<Integer>> runAfterwards, final Set<Integer> selectedLists, final String newListName) {
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new Action1<String>() {
+            // We need to update the list cache by creating a new StoredList object here.
+            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, listName -> {
+                final Activity activity = activityRef.get();
+                if (activity == null) {
+                    return;
+                }
+                final int newId = DataStore.createList(listName);
+                new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
 
-                // We need to update the list cache by creating a new StoredList object here.
-                @SuppressWarnings("unused")
-                @Override
-                public void call(final String listName) {
-                    final Activity activity = activityRef.get();
-                    if (activity == null) {
-                        return;
-                    }
-                    final int newId = DataStore.createList(listName);
-                    new StoredList(newId, listName, ListMarker.NO_MARKER.markerId, 0);
-
-                    if (newId >= DataStore.customListIdOffset) {
-                        selectedLists.remove(PseudoList.NEW_LIST.id);
-                        selectedLists.add(newId);
-                        Settings.setLastSelectedLists(selectedLists);
-                        runAfterwards.call(selectedLists);
-                    } else {
-                        ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
-                    }
+                if (newId >= DataStore.customListIdOffset) {
+                    selectedLists.remove(PseudoList.NEW_LIST.id);
+                    selectedLists.add(newId);
+                    Settings.setLastSelectedLists(selectedLists);
+                    runAfterwards.call(selectedLists);
+                } else {
+                    ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
                 }
             });
         }
@@ -267,28 +252,20 @@ public final class StoredList extends AbstractList {
             if (activity == null) {
                 return;
             }
-            Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, new Action1<String>() {
-
-                @Override
-                public void call(final String input) {
-                    // remove whitespaces added by autocompletion of Android keyboard
-                    final String listName = StringUtils.trim(input);
-                    if (StringUtils.isNotBlank(listName)) {
-                        runnable.call(listName);
-                    }
+            Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, input -> {
+                // remove whitespaces added by autocompletion of Android keyboard
+                final String listName = StringUtils.trim(input);
+                if (StringUtils.isNotBlank(listName)) {
+                    runnable.call(listName);
                 }
             });
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
             final StoredList list = DataStore.getList(listId);
-            handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new Action1<String>() {
-
-                @Override
-                public void call(final String listName) {
-                    DataStore.renameList(listId, listName);
-                    runAfterRename.run();
-                }
+            handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, listName -> {
+                DataStore.renameList(listId, listName);
+                runAfterRename.run();
             });
         }
 

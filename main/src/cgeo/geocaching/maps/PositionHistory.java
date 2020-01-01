@@ -32,9 +32,7 @@ public class PositionHistory {
 
     // save current coords to permanent storage
     private void saveToStorage(final Location coordinates) {
-        Schedulers.io().scheduleDirect(() -> {
-            DataStore.saveTrailpoint(coordinates);
-        });
+        Schedulers.io().scheduleDirect(() -> DataStore.saveTrailpoint(coordinates));
     }
 
     // clear position history (in memory and on permanent storage)
