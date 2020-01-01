@@ -84,14 +84,15 @@ public class GooglePositionAndHistory implements PositionAndHistory {
                 if (null != lastBearingCoordinates) {
                     final GoogleMap map = mapRef.get();
                     if (null != map) {
+                        final CameraPosition currentCameraPosition = map.getCameraPosition();
                         final float bearing = AngleUtils.normalize(lastBearingCoordinates.bearingTo(coordinates));
-                        final float bearingDiff = AngleUtils.normalize(bearing - map.getCameraPosition().bearing);
-                        if (bearingDiff > 15.0f && bearingDiff < 345.0f) {  // at least 15° diff
+                        final float bearingDiff = Math.abs(AngleUtils.difference(bearing, currentCameraPosition.bearing));
+                        if (bearingDiff > 15.0f) {
                             lastBearingCoordinates = coordinates;
-                            // adjust bearing of map
+                            // adjust bearing of map, keep position and zoom level
                             final CameraPosition cameraPosition = new CameraPosition.Builder()
-                                    .target(new LatLng(coordinates.getLatitude(), coordinates.getLongitude()))
-                                    .zoom(map.getCameraPosition().zoom)
+                                    .target(currentCameraPosition.target)
+                                    .zoom(currentCameraPosition.zoom)
                                     .bearing(bearing)
                                     .tilt(0)
                                     .build();
