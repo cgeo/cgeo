@@ -26,7 +26,7 @@ usage() {
     exit 1
 }
 
-alllangs=`find ../../res/values-* -name "strings.xml" | sed "s/^.*values-\(..\).*$/    \1/"`
+alllangs=`find ../../res/values-* -name "strings.xml" | sed "s/^.*values-\(.*\)\/.*$/    \1/"`
 
 if [ $# -ne 1 ]; then
     usage
