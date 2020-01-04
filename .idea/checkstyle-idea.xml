@@ -10,7 +10,7 @@
         <entry key="location-1" value="BUNDLED:(bundled):Google Checks" />
         <entry key="location-2" value="PROJECT_RELATIVE:$PROJECT_DIR$/checkstyle.xml:cgeo" />
         <entry key="scan-before-checkin" value="true" />
-        <entry key="scanscope" value="JavaOnly" />
+        <entry key="scanscope" value="JavaOnlyWithTests" />
         <entry key="suppress-errors" value="false" />
       </map>
     </option>

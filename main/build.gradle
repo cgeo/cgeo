@@ -9,10 +9,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
  * Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
  */
 apply plugin: 'com.android.application'
-/*
- * https://github.com/KeepSafe/dexcount-gradle-plugin. dex counting can take several seconds, therefore do this only on the CI server
- */
 
+/*
+ * https://github.com/KeepSafe/dexcount-gradle-plugin
+ * dex counting can take several seconds, therefore do this only on the CI server
+ */
 if (isContinuousIntegrationServer()) {
     apply plugin: 'com.getkeepsafe.dexcount'
 }
@@ -587,11 +588,17 @@ tasks.whenTaskAdded { theTask ->
     }
 }
 
+/*
+ * own checkstyle configuration
+ * Android plugin doesn't interoperate with the Checkstyle plugin
+ */
 apply plugin: 'checkstyle'
 
 tasks.register('checkstyle', Checkstyle) {
     configFile file("${project.rootDir}/checkstyle.xml")
     source 'src'
+    source '../tests/src'
+    source '../tests/src-android'
     include '**/*.java'
 
     classpath = files()
