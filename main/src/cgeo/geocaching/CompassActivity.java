@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -284,6 +285,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         cacheInfoView.setText(description);
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateDistanceInfo(final GeoData geo) {
         if (dstCoords == null) {
             return;
@@ -294,6 +296,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
+    @SuppressLint("SetTextI18n")
     private final Consumer<Status> gpsStatusHandler = new Consumer<Status>() {
         @Override
         public void accept(final Status gpsStatus) {
@@ -308,6 +311,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private static double altitudeReadings[] = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
     private static int altitudeReadingPos = 0;
 
+    @SuppressLint("SetTextI18n")
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoDir(@NonNull final GeoData geo, final float dir) {

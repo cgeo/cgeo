@@ -82,6 +82,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -2221,6 +2222,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
+    @SuppressLint("SetTextI18n")
+    static boolean setOfflineHintText(final OnClickListener showHintClickListener, final TextView offlineHintTextView, final String hint, final String personalNote) {
+        if (null != showHintClickListener) {
+            final boolean hintGiven = !StringUtils.isEmpty(hint);
+            final boolean personalNoteGiven = !StringUtils.isEmpty(personalNote);
+            if (hintGiven || personalNoteGiven) {
+                offlineHintTextView.setText((hintGiven ? hint + (personalNoteGiven ? "\r\n" : "") : "") + (personalNoteGiven ? personalNote : ""));
+                return true;
+            }
+        }
+        return false;
+    }
+
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
             final OnClickListener refreshCacheClickListener,
             final OnClickListener dropCacheClickListener,
@@ -2235,18 +2249,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final ImageButton offlineEdit = view.findViewById(R.id.offline_edit);
 
         // check if hint is available and set onClickListener and hint button visibility accordingly
-        boolean hintButtonEnabled = false;
-        if (null != showHintClickListener) {
-            final String hint = cache.getHint();
-            final boolean hintGiven = !StringUtils.isEmpty(hint);
-            final String personalNote = cache.getPersonalNote();
-            final boolean personalNoteGiven = !StringUtils.isEmpty(personalNote);
-            if (hintGiven || personalNoteGiven) {
-                hintButtonEnabled = true;
-                final TextView offlineHintText = view.findViewById(R.id.offline_hint_text);
-                offlineHintText.setText((hintGiven ? hint + (personalNoteGiven ? "\r\n" : "") : "") + (personalNoteGiven ? personalNote : ""));
-            }
-        }
+        final boolean hintButtonEnabled = setOfflineHintText(showHintClickListener, view.findViewById(R.id.offline_hint_text), cache.getHint(), cache.getPersonalNote());
         final ImageButton offlineHint = view.findViewById(R.id.offline_hint);
         if (null != offlineHint) {
             if (hintButtonEnabled) {
