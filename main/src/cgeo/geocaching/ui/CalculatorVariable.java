@@ -1,11 +1,10 @@
 package cgeo.geocaching.ui;
 
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.models.CalcState.ERROR_STRING;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CalculationUtils;
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import static cgeo.geocaching.models.CalcState.ERROR_STRING;
 
 import android.content.Context;
 import android.graphics.Typeface;

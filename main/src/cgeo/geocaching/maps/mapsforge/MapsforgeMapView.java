@@ -1,7 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -17,6 +15,7 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
 
 import android.content.Context;
 import android.graphics.Canvas;

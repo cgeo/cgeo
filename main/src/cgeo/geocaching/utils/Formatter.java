@@ -1,7 +1,5 @@
 package cgeo.geocaching.utils;
 
-import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -12,6 +10,7 @@ import cgeo.geocaching.models.Waypoint;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

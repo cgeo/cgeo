@@ -1,7 +1,5 @@
 package cgeo.geocaching.settings;
 
-import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -33,6 +31,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.SharedPrefsBackupUtils;
+import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
 
 import android.R.string;
 import android.app.AlertDialog;
