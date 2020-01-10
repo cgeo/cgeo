@@ -1,10 +1,5 @@
 package cgeo.geocaching.ui.dialog;
 
-import static cgeo.geocaching.R.id.PlainFormat;
-import static cgeo.geocaching.R.id.coordTable;
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
-
 import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
@@ -18,6 +13,10 @@ import cgeo.geocaching.ui.CalculateButton;
 import cgeo.geocaching.ui.CalculatorVariable;
 import cgeo.geocaching.ui.EditButton;
 import cgeo.geocaching.utils.CalculationUtils;
+import static cgeo.geocaching.R.id.PlainFormat;
+import static cgeo.geocaching.R.id.coordTable;
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
+import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 
 import android.app.Dialog;
 import android.os.Bundle;

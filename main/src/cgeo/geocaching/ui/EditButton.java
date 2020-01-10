@@ -1,8 +1,5 @@
 package cgeo.geocaching.ui;
 
-import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
-import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.ClickCompleteCallback;
 import cgeo.geocaching.ui.dialog.LongClickCompleteCallback;
@@ -20,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
 
 import java.util.ArrayList;
 

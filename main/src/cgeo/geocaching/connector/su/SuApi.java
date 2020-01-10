@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.su;
 
-import static android.util.Base64.DEFAULT;
-
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ImageResult;
@@ -24,6 +22,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import android.util.Base64;
+import static android.util.Base64.DEFAULT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

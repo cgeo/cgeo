@@ -1,9 +1,8 @@
 package cgeo.geocaching.ui;
 
-import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 
 import android.content.Context;
 import android.graphics.Typeface;
