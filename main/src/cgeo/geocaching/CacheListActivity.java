@@ -79,6 +79,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -835,6 +836,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             this.context = context;
         }
 
+        @SuppressLint("SetTextI18n")
+        private void setLabel(final TextView tv, final String label, final boolean selected) {
+            tv.setText(label + (selected ? " " + getString(R.string.caches_listmarker_selected) : ""));
+        }
+
         public View getView(final int position, final View convertView, final ViewGroup parent) {
             View v = convertView;
 
@@ -848,10 +854,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final TextView tv = (TextView) v.findViewById(R.id.listmarker_item_text);
                 if (item.markerId == ListMarker.NO_MARKER.markerId) {
                     iv.setImageBitmap(null);
-                    tv.setText(context.getString(R.string.caches_listmarker_none) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
+                    setLabel(tv, context.getString(R.string.caches_listmarker_none), item.markerId == markerId);
                 } else {
                     iv.setImageResource(item.resDrawable);
-                    tv.setText(getString(item.resLabel) + (item.markerId == markerId ? " " + context.getString(R.string.caches_listmarker_selected) : ""));
+                    setLabel(tv, getString(item.resLabel), item.markerId == markerId);
                 }
             }
             return v;
@@ -1279,6 +1285,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         listFooter.setOnClickListener(null);
     }
 
+    @SuppressLint("SetTextI18n")
+    private void setListFooterText(final String label, final int size) {
+        listFooterText.setText(label + (size > 0 ? " (" + res.getString(R.string.caches_more_caches_currently) + ": " + size + ")" : ""));
+    }
+
     private void showFooterMoreCaches() {
         // no footer in offline lists
         if (listFooter == null) {
@@ -1293,7 +1304,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         listFooter.setClickable(enableMore);
         if (enableMore) {
-            listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
+            setListFooterText(res.getString(R.string.caches_more_caches), cacheList.size());
             listFooter.setOnClickListener(new MoreCachesListener());
         } else if (type != CacheListType.OFFLINE) {
             listFooterText.setText(res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no));

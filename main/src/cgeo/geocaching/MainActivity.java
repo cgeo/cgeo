@@ -37,6 +37,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -68,6 +69,7 @@ import androidx.core.view.MenuItemCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -210,6 +212,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
     private final Consumer<GnssStatusProvider.Status> satellitesHandler = new Consumer<Status>() {
         @Override
+        @SuppressLint("SetTextI18n")
         public void accept(final Status gnssStatus) {
             if (gnssStatus.gnssEnabled) {
                 navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gnssStatus.satellitesFixed + '/' + gnssStatus.satellitesVisible);
@@ -587,7 +590,7 @@ public class MainActivity extends AbstractActionBarActivity {
             if (countBubbleCnt1 == 0) {
                 countBubble.setVisibility(View.GONE);
             } else {
-                countBubble.setText(Integer.toString(countBubbleCnt1));
+                countBubble.setText(String.format(Locale.getDefault(), "%d", countBubbleCnt1));
                 countBubble.bringToFront();
                 countBubble.setVisibility(View.VISIBLE);
             }
@@ -618,6 +621,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private class UpdateLocation extends GeoDirHandler {
 
         @Override
+        @SuppressLint("SetTextI18n")
         public void updateGeoData(final GeoData geo) {
             if (!nearestView.isClickable()) {
                 nearestView.setFocusable(true);
