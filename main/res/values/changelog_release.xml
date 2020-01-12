@@ -2,21 +2,24 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2019.12.30:</b>\n
-	· Fix: Avoid app freeze when mapping large lists on OSM maps\n
-	\n
-	\n 
-    <b>2019.11.28:</b>\n
-    · Fix: Update distance info on Google Maps while moving\n
-    \n
-    \n
-    <b>2019.11.11:</b>\n
-    · New: Updated Google Maps API to v2 and enable Google Maps again for Android 10\n
-    · New: Set targetSDK to 28 to comply with upcoming Play Store requirements\n
-    · New: Show warning on main screen if not logged in\n
-    · New: Extend compact icon mode to Google Maps\n
-    · Fixed: Several issues with the history trail\n
-    · Fixed: Parsing empty waypoint notes used for navigation\n
+    <b>Beta version:</b>\n
+	· New: Auto rotate for Google Maps\n
+    · New: Ability to create user defined caches\n
+	· New: Use waypoints of a user defined cache in \"Go to\" menu\n
+    · New: Proximity notification messages as Android system notifications\n
+    · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
+    · New: Option to disable Google Maps controls for manual screen rotation\n
+    · New: Support cache type \"Locationless (Reverse) Geocache\" (no logging support yet)\n
+    · New: Show current elevation in compass\n
+    · Change: Link from offline map \"More info\" page to the new offline map tutorial\n
+    · Change: Updated compatibility libraries from support libraries to AndroidX\n
+    · Fix: Initial zoom on cache map not covering its waypoints\n
+    · Fix: Internal code corrections and optimizations\n
+    · Fix: Support for geochecker gc-apps.com\n
+    · Fix: Internal database cleanup improvements\n
+    · Fix: Removed no longer used menu entry \"Cache list\" - \"Show on map\" - \"Mapsforge Beta\"\n
+    · Fix: Ignore waypoint threshold setting when on a single cache OSM map\n
+    · Fix: Improved error message when wrong offline map version is used\n
     \n
     \n
 </string>
