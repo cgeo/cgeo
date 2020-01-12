@@ -934,6 +934,22 @@ public class DataStore {
                     // migrate "go to" history to waypoints of user defined cache (only the 5 most recent entries!) & delete old history table
                     if (oldVersion < 78) {
                         try {
+                            // check if history UDC already exists
+                            boolean zz0Exists = false;
+                            try (Cursor c = db.rawQuery("SELECT geocode FROM " + dbTableCaches + " WHERE geocode='" + InternalConnector.GEOCODE_HISTORY_CACHE + "'", null)) {
+                                if (c.moveToFirst()) {
+                                    zz0Exists = true;
+                                }
+                            }
+
+                            // if not: manually create history UDC stub
+                            if (!zz0Exists) {
+                                db.execSQL("INSERT INTO " + dbTableCaches + " (updated, detailed, detailedupdate, visiteddate, geocode, reason, cacheid, guid, type, name, owner, owner_real, hidden, hint, size, difficulty, terrain, location, direction, distance, latitude, longitude, reliable_latlon, personal_note, shortdesc, description, favourite_cnt, rating, votes, myvote)"
+                                        + " VALUES (datetime(), 1, 0, 0, '" + InternalConnector.GEOCODE_HISTORY_CACHE + "', 1, '', '', '" + CacheType.USER_DEFINED.id + "', '''Go to'' targets', 'You', '', 0, '', '" + CacheSize.UNKNOWN.id + "', 0.0, 0.0, '', NULL, NULL, NULL, NULL, 1, NULL, '', 'This cache stores your recent ''Go to'' targets', -1, 0.0, 0, 0.0)");
+                                db.execSQL("INSERT INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (" + PseudoList.UDC_LIST.id + ",'" + InternalConnector.GEOCODE_HISTORY_CACHE + "')");
+                            }
+
+                            // migrate most recent history waypoints (up to 5)
                             final String sql = "INSERT INTO " + dbTableWaypoints + " (geocode, updated, type, prefix, lookup, name, latitude, longitude, note, own, visited, user_note, org_coords_empty, calc_state)"
                                     + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                             final SQLiteStatement statement = db.compileStatement(sql);
