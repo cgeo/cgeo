@@ -312,6 +312,16 @@ public class Settings {
         return sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
     }
 
+    // workaround for int prefs, originally saved as string
+    private static int getIntFromString(final int prefKeyId, final int defaultValue) {
+        try {
+            return Integer.parseInt(getString(prefKeyId, String.valueOf(defaultValue)));
+        } catch (Exception e) {
+            return defaultValue;
+        }
+
+    }
+
     private static long getLong(final int prefKeyId, final long defaultValue) {
         return sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
     }
@@ -1117,15 +1127,11 @@ public class Settings {
     }
 
     public static int getDefaultNavigationTool() {
-        return Integer.parseInt(getString(
-                R.string.pref_defaultNavigationTool,
-                String.valueOf(NavigationAppsEnum.COMPASS.id)));
+        return getIntFromString(R.string.pref_defaultNavigationTool, NavigationAppsEnum.COMPASS.id);
     }
 
     public static int getDefaultNavigationTool2() {
-        return Integer.parseInt(getString(
-                R.string.pref_defaultNavigationTool2,
-                String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
+        return getIntFromString(R.string.pref_defaultNavigationTool2, NavigationAppsEnum.INTERNAL_MAP.id);
     }
 
     public static boolean isDebug() {
