@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -164,7 +165,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 77;
+    private static final int dbVersion = 78;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -929,6 +930,42 @@ public class DataStore {
                             Log.e("Failed to upgrade to ver. 77", e);
                         }
                     }
+
+                    // migrate "go to" history to waypoints of user defined cache (only the 5 most recent entries!) & delete old history table
+                    if (oldVersion < 78) {
+                        try {
+                            final String sql = "INSERT INTO " + dbTableWaypoints + " (geocode, updated, type, prefix, lookup, name, latitude, longitude, note, own, visited, user_note, org_coords_empty, calc_state)"
+                                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            final SQLiteStatement statement = db.compileStatement(sql);
+
+                            try (Cursor cursor = db.query(dbTableSearchDestinationHistory, new String[]{"_id", "date", "latitude", "longitude"}, null, null, null, null, "_id DESC", "5")) {
+                                int sequence = cursor.getCount();
+                                while (cursor.moveToNext()) {
+                                    statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
+                                    statement.bindLong      (2, cursor.getLong(cursor.getColumnIndex("date")));  // updated
+                                    statement.bindString    (3, "waypoint");                         // type
+                                    statement.bindString    (4, "00");                               // prefix
+                                    statement.bindString    (5, "---");                              // lookup
+                                    statement.bindString    (6, "Reference Point " + sequence);      // name
+                                    statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndex("latitude")));
+                                    statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndex("longitude")));
+                                    statement.bindString    (9, "");                                 // note
+                                    statement.bindLong      (10, 1);                                 // own
+                                    statement.bindLong      (11, 0);                                 // visited
+                                    statement.bindString    (12, "");                                // user note
+                                    statement.bindLong      (13, 0);                                 // org_coords_empty
+                                    statement.bindNull      (14);                                          // calc_state
+                                    statement.executeInsert();
+                                    sequence--;
+                                }
+                            }
+
+                            db.execSQL("DROP TABLE " + dbTableSearchDestinationHistory);
+
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 78", e);
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -961,12 +998,7 @@ public class DataStore {
          * @param db the database to perform sanity checks against
          */
         private static void sanityChecks(final SQLiteDatabase db) {
-            // Check that the history of searches is well formed as some dates seem to be missing according
-            // to NPE traces.
-            final int staleHistorySearches = db.delete(dbTableSearchDestinationHistory, "date IS NULL", null);
-            if (staleHistorySearches > 0) {
-                Log.w(String.format(Locale.getDefault(), "DataStore.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
-            }
+            // currently unused
         }
 
         /**
