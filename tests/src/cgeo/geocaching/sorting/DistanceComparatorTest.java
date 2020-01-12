@@ -1,13 +1,13 @@
 package cgeo.geocaching.sorting;
 
-import org.junit.Test;
-
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Test;
 
 public class DistanceComparatorTest {
 

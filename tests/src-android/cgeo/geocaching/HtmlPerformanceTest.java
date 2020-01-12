@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -10,6 +8,7 @@ import android.test.AndroidTestCase;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.text.StringEscapeUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class HtmlPerformanceTest extends AndroidTestCase {
     private String input;

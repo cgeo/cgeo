@@ -1,7 +1,5 @@
 package cgeo.geocaching.sensors;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
@@ -11,6 +9,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> {
 

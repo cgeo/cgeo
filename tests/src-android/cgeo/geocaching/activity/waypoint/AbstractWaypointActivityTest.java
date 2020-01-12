@@ -1,7 +1,5 @@
 package cgeo.geocaching.activity.waypoint;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.EditWaypointActivity_;
 import cgeo.geocaching.activity.AbstractEspressoTest;
 import cgeo.geocaching.enumerations.CacheType;
@@ -11,6 +9,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
 import java.util.Collections;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class AbstractWaypointActivityTest extends AbstractEspressoTest<EditWaypointActivity_> {
 

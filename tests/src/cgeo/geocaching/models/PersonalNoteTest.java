@@ -1,7 +1,6 @@
 package cgeo.geocaching.models;
 
 import org.junit.Test;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class PersonalNoteTest {

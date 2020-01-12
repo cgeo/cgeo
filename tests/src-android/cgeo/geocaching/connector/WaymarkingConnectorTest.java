@@ -1,10 +1,9 @@
 package cgeo.geocaching.connector;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import java.util.Set;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class WaymarkingConnectorTest extends TestCase {
 

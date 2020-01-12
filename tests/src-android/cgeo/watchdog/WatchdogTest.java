@@ -1,7 +1,5 @@
 package cgeo.watchdog;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -15,6 +13,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.NotForIntegrationTests;
 
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * This test is intended to run regularly on our CI server, to verify the availability of several geocaching websites

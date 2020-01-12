@@ -1,13 +1,12 @@
 package cgeo.geocaching.apps.navi;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class NavigationAppFactoryTest extends TestCase {
 

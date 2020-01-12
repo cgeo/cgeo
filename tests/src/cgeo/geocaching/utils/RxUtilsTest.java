@@ -1,18 +1,15 @@
 package cgeo.geocaching.utils;
 
-import org.junit.Test;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Function;
 import io.reactivex.subjects.PublishSubject;
+import org.junit.Test;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 
 public class RxUtilsTest {
 

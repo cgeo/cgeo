@@ -1,9 +1,8 @@
 package cgeo.geocaching.list;
 
-import junit.framework.TestCase;
-
 import cgeo.geocaching.storage.DataStore;
 
+import junit.framework.TestCase;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class StoredListTest extends TestCase {

@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import androidx.annotation.StringRes;
-
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
+
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.startsWith;
 

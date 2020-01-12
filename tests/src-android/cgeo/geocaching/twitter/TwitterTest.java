@@ -1,7 +1,5 @@
 package cgeo.geocaching.twitter;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -10,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class TwitterTest extends TestCase {
 

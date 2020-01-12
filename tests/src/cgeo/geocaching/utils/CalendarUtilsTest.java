@@ -1,12 +1,11 @@
 package cgeo.geocaching.utils;
 
-import org.junit.Test;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.models.Geocache;
 
 import java.util.Calendar;
 
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.enumerations.CacheType;
-
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CalendarUtilsTest {

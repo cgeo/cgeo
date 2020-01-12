@@ -1,10 +1,9 @@
 package cgeo.geocaching.connector.trackable;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.models.Trackable;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeolutinsConnectorTest extends TestCase {
 

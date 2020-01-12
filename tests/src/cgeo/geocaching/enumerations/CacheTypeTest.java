@@ -1,12 +1,11 @@
 package cgeo.geocaching.enumerations;
 
-import org.junit.Test;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.models.Geocache;
 
 import java.util.Locale;
+
+import org.junit.Test;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CacheTypeTest {
 

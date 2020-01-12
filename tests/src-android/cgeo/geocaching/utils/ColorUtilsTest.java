@@ -1,10 +1,9 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import android.graphics.Color;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ColorUtilsTest extends TestCase {
 

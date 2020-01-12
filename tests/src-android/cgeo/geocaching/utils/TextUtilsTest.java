@@ -1,12 +1,6 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.gc.GCConstants;
-
-import junit.framework.TestCase;
-import org.apache.commons.io.IOUtils;
-import org.assertj.core.api.Assertions;
 
 import android.text.SpannableString;
 
@@ -15,6 +9,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
+
+import junit.framework.TestCase;
+import org.apache.commons.io.IOUtils;
+import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 
 public class TextUtilsTest extends TestCase {
 

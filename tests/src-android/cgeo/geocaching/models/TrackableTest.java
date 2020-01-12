@@ -1,7 +1,5 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -11,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class TrackableTest extends TestCase {
 

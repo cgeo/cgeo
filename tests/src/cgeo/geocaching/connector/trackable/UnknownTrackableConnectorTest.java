@@ -1,12 +1,11 @@
 package cgeo.geocaching.connector.trackable;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.models.Trackable;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UnknownTrackableConnectorTest {
 

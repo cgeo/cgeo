@@ -1,7 +1,5 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -27,6 +25,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private TestHandler importStepHandler;

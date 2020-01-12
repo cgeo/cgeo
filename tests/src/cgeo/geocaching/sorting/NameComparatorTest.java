@@ -1,13 +1,12 @@
 package cgeo.geocaching.sorting;
 
-import org.junit.Test;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.models.Geocache;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import org.junit.Test;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class NameComparatorTest {
 

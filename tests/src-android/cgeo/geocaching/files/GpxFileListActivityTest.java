@@ -1,10 +1,10 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import android.annotation.TargetApi;
 import android.os.Looper;
 import android.test.ActivityInstrumentationTestCase2;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @TargetApi(8)
 public class GpxFileListActivityTest extends ActivityInstrumentationTestCase2<GpxFileListActivity> {

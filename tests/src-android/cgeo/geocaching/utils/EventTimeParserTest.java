@@ -1,7 +1,5 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
@@ -9,6 +7,7 @@ import cgeo.geocaching.models.Geocache;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class EventTimeParserTest extends TestCase {
 

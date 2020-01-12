@@ -1,7 +1,5 @@
 package cgeo.test;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -10,8 +8,8 @@ import cgeo.geocaching.utils.TextUtils;
 
 import java.util.Date;
 
-
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class Compare {
 

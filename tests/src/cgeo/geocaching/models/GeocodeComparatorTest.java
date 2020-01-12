@@ -4,12 +4,11 @@ import cgeo.geocaching.sorting.GeocodeComparator;
 
 import androidx.annotation.NonNull;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeocodeComparatorTest {

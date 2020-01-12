@@ -1,7 +1,6 @@
 package cgeo.geocaching.list;
 
 import junit.framework.TestCase;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class PseudoListTest extends TestCase {

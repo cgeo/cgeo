@@ -1,13 +1,13 @@
 package cgeo.geocaching;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.utils.LazyInitializedList;
 
 import android.test.AndroidTestCase;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LazyInitializedListTest extends AndroidTestCase {
 

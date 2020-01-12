@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class IConnectorTest extends AbstractResourceInstrumentationTestCase {
 

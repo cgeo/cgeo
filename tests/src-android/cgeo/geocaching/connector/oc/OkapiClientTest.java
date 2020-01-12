@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.oc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -12,6 +10,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 
 import java.util.Locale;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class OkapiClientTest extends CGeoTestCase {
 

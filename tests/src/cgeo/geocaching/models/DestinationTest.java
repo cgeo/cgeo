@@ -1,11 +1,10 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.location.Geopoint;
+
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
-
-import cgeo.geocaching.location.Geopoint;
 
 public class DestinationTest {
 

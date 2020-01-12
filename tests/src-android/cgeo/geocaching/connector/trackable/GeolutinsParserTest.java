@@ -1,17 +1,16 @@
 package cgeo.geocaching.connector.trackable;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import org.apache.commons.compress.utils.IOUtils;
-import org.xml.sax.InputSource;
-
 import java.io.InputStream;
 import java.util.List;
+
+import org.apache.commons.compress.utils.IOUtils;
+import org.xml.sax.InputSource;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeolutinsParserTest extends AbstractResourceInstrumentationTestCase {
 

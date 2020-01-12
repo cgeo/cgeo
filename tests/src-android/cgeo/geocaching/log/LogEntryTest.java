@@ -1,7 +1,5 @@
 package cgeo.geocaching.log;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -11,6 +9,8 @@ import cgeo.geocaching.settings.Settings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * LogEntry unit tests
