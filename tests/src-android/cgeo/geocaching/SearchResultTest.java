@@ -1,12 +1,12 @@
 package cgeo.geocaching;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import android.os.Parcel;
 import android.test.AndroidTestCase;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SearchResultTest extends AndroidTestCase {
     public static void testCreateFromGeocodes() {

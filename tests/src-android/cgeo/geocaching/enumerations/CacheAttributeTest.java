@@ -1,10 +1,9 @@
 package cgeo.geocaching.enumerations;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import android.test.AndroidTestCase;
 
 import org.apache.commons.lang3.StringUtils;
-
-import android.test.AndroidTestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CacheAttributeTest extends AndroidTestCase {
 

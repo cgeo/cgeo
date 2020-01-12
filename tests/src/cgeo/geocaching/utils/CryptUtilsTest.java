@@ -1,9 +1,8 @@
 package cgeo.geocaching.utils;
 
-import org.junit.Test;
-
 import cgeo.geocaching.connector.gc.GCConstants;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CryptUtilsTest {

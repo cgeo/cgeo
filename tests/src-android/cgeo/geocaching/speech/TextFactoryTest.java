@@ -1,7 +1,5 @@
 package cgeo.geocaching.speech;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -12,6 +10,8 @@ import android.content.res.Resources;
 import android.test.AndroidTestCase;
 
 import java.util.Locale;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class TextFactoryTest extends AndroidTestCase {
 

@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.su;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -18,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 

@@ -1,14 +1,13 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
-import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.test.AndroidTestCase;
 import android.util.Xml;
 
 import java.io.StringReader;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class InvalidXMLCharacterFilterReaderTest extends AndroidTestCase {
 

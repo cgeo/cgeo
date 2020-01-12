@@ -1,15 +1,13 @@
 package cgeo.geocaching.test;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * This test is meant for performance measurements of different whitespace replacement implementations.

@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
@@ -11,6 +9,8 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.TextUtils;
 
 import java.util.List;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 

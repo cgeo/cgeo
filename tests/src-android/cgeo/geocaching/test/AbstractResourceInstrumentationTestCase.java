@@ -27,7 +27,6 @@ import java.util.EnumSet;
 import java.util.Scanner;
 
 import org.apache.commons.compress.utils.IOUtils;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class AbstractResourceInstrumentationTestCase extends InstrumentationTestCase {

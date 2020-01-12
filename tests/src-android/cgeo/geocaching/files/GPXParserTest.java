@@ -35,7 +35,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.compress.utils.IOUtils;
-
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {

@@ -1,6 +1,7 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.models.ICoordinates;
+import static cgeo.geocaching.location.Viewport.containing;
 
 import android.annotation.SuppressLint;
 
@@ -9,11 +10,9 @@ import androidx.annotation.NonNull;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import static java.util.Collections.singleton;
 
 import org.junit.Test;
-
-import static cgeo.geocaching.location.Viewport.containing;
-import static java.util.Collections.singleton;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ViewportTest {

@@ -1,9 +1,8 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
-
 import cgeo.geocaching.models.Geocache;
 
+import junit.framework.TestCase;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CheckerUtilsTest extends TestCase {

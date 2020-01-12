@@ -1,12 +1,12 @@
 package cgeo.geocaching;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @TargetApi(8)
 public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity> {

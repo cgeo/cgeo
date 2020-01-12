@@ -1,9 +1,8 @@
 package cgeo.geocaching.files;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ProgressInputStreamTest {
 

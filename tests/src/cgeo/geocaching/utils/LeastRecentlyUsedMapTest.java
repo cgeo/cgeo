@@ -1,11 +1,10 @@
 package cgeo.geocaching.utils;
 
-import org.junit.Test;
+import cgeo.geocaching.models.Geocache;
 
 import java.util.Map;
 
-import cgeo.geocaching.models.Geocache;
-
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LeastRecentlyUsedMapTest {

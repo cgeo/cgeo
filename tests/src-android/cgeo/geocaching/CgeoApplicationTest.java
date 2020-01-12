@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCLogin;
@@ -30,6 +28,8 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import java.util.GregorianCalendar;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -260,7 +260,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 final SearchResult search = ConnectorFactory.searchByViewport(viewport);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
-                Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 assert parsedCache != null;
                 assertThat(parsedCache).isNotNull();
 

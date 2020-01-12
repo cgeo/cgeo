@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.trackable;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -20,6 +18,7 @@ import java.util.TimeZone;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
 

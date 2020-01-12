@@ -1,11 +1,10 @@
 package cgeo.geocaching.location;
 
+import org.junit.Test;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.within;
-
-import org.junit.Test;
 
 public class GeoPointParserTest {
 

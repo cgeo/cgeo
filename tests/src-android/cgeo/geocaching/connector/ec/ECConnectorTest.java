@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.ec;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.log.LogType;
@@ -11,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ECConnectorTest extends TestCase {
 

@@ -1,17 +1,15 @@
 package cgeo.geocaching.utils;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
-
 import org.apache.commons.lang3.CharEncoding;
 import org.junit.Before;
 import org.junit.Test;
 import org.xmlpull.v1.XmlSerializer;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class XmlUtilsTest {
 

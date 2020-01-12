@@ -1,11 +1,11 @@
 package cgeo.geocaching.activity;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.AboutActivity;
 
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * This test uses the about activity to avoid side effects like network and GPS being triggered by the main activity.

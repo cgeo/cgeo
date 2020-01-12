@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.TextUtils;
@@ -10,6 +8,7 @@ import android.test.suitebuilder.annotation.Suppress;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GCLoginTest extends TestCase {
 

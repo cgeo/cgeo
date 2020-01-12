@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class WaypointsTest extends CGeoTestCase {
 

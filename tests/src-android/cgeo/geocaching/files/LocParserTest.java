@@ -4,6 +4,11 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import static cgeo.geocaching.enumerations.CacheSize.MICRO;
+import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;
+import static cgeo.geocaching.test.R.raw.gc1bkp3_loc;
+import static cgeo.geocaching.test.R.raw.oc5952_loc;
+import static cgeo.geocaching.test.R.raw.waymarking_loc;
 
 import androidx.annotation.RawRes;
 
@@ -14,12 +19,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-
-import static cgeo.geocaching.enumerations.CacheSize.MICRO;
-import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;
-import static cgeo.geocaching.test.R.raw.gc1bkp3_loc;
-import static cgeo.geocaching.test.R.raw.oc5952_loc;
-import static cgeo.geocaching.test.R.raw.waymarking_loc;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {

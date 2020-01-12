@@ -1,8 +1,8 @@
 package cgeo.geocaching.enumerations;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import android.test.AndroidTestCase;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class WaypointTypeTest extends AndroidTestCase {
 

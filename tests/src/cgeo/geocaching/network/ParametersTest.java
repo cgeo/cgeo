@@ -1,12 +1,11 @@
 package cgeo.geocaching.network;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ParametersTest {
 

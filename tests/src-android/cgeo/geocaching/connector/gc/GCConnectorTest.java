@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
@@ -17,6 +15,8 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import java.util.Set;
 
 import org.assertj.core.api.AbstractBooleanAssert;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 
 public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 

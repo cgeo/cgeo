@@ -1,12 +1,11 @@
 package cgeo.geocaching.location;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UnitsTest extends CGeoTestCase {
 

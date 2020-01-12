@@ -1,7 +1,5 @@
 package cgeo.geocaching.log;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
@@ -11,6 +9,7 @@ import cgeo.geocaching.settings.TestSettings;
 import java.util.Calendar;
 
 import junit.framework.TestCase;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LogTemplateProviderTest extends TestCase {
 

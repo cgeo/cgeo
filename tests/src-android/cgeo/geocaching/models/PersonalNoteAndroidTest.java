@@ -1,12 +1,11 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.list.StoredList;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class PersonalNoteAndroidTest extends TestCase {
 

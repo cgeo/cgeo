@@ -1,20 +1,19 @@
 package cgeo.geocaching.address;
 
-import android.location.Address;
-import android.location.Geocoder;
-import android.test.suitebuilder.annotation.Suppress;
-
-import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.data.Offset;
-
-import java.util.Locale;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
-import io.reactivex.Single;
 
+import android.location.Address;
+import android.location.Geocoder;
+import android.test.suitebuilder.annotation.Suppress;
+
+import java.util.Locale;
+
+import io.reactivex.Single;
+import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.data.Offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GeocoderTest extends CGeoTestCase {

@@ -1,7 +1,5 @@
 package cgeo.geocaching.models;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.utils.FileUtils;
 
@@ -9,6 +7,8 @@ import android.net.Uri;
 import android.os.Parcel;
 
 import java.io.File;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * ImageTest unit tests

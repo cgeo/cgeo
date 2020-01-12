@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector.gc;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.test.AndroidTestCase;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GCConstantsTest extends AndroidTestCase {
 

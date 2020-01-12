@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
@@ -12,6 +10,8 @@ import cgeo.geocaching.test.mock.GC1ZXX2;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 
