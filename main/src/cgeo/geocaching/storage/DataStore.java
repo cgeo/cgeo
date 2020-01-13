@@ -946,7 +946,7 @@ public class DataStore {
                             if (!zz0Exists) {
                                 db.execSQL("INSERT INTO " + dbTableCaches + " (updated, detailed, detailedupdate, visiteddate, geocode, reason, cacheid, guid, type, name, owner, owner_real, hidden, hint, size, difficulty, terrain, location, direction, distance, latitude, longitude, reliable_latlon, personal_note, shortdesc, description, favourite_cnt, rating, votes, myvote)"
                                         + " VALUES (datetime(), 1, 0, 0, '" + InternalConnector.GEOCODE_HISTORY_CACHE + "', 1, '', '', '" + CacheType.USER_DEFINED.id + "', '''Go to'' targets', 'You', '', 0, '', '" + CacheSize.UNKNOWN.id + "', 0.0, 0.0, '', NULL, NULL, NULL, NULL, 1, NULL, '', 'This cache stores your recent ''Go to'' targets', -1, 0.0, 0, 0.0)");
-                                db.execSQL("INSERT INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (" + PseudoList.UDC_LIST.id + ",'" + InternalConnector.GEOCODE_HISTORY_CACHE + "')");
+                                db.execSQL("INSERT INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (" + StoredList.STANDARD_LIST_ID + ",'" + InternalConnector.GEOCODE_HISTORY_CACHE + "')");
                             }
 
                             // migrate most recent history waypoints (up to 5)
