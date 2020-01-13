@@ -463,7 +463,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.repaintRequired(null);
 
-        if (mapOptions.geocode != null) {
+        if (mapOptions.geocode != null && !viewport.topRight.equals(viewport.bottomLeft)) {
             mapView.zoomToBounds(viewport, mapItemFactory.getGeoPointBase(viewport.center));
         } else {
             setZoom(Settings.getMapZoom(mapOptions.mapMode));
