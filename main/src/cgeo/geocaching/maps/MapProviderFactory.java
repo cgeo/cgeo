@@ -116,7 +116,7 @@ public class MapProviderFactory {
     public static void deleteOfflineMapSources() {
         final List<MapSource> deletion = new ArrayList<>();
         for (final MapSource mapSource : mapSources) {
-            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
+            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource || mapSource instanceof MapsforgeMapProvider.OfflineMultiMapSource) {
                 deletion.add(mapSource);
             }
         }

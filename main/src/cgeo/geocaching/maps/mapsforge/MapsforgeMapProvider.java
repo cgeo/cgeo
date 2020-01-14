@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.MultiRendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
@@ -154,7 +155,46 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             }
             return null;
         }
+    }
 
+    public static final class OfflineMultiMapSource extends MapsforgeMapSource {
+        private final List<String> fileNames;
+
+        public OfflineMultiMapSource(final List<String> fileNames, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+            super(StringUtils.join(fileNames, ";"), mapProvider, name, generator);
+            this.fileNames = fileNames;
+        }
+
+        @Override
+        public boolean isAvailable() {
+            boolean isValid = true;
+
+            for (String fileName : fileNames) {
+                isValid &= isValidMapFile(fileName);
+            }
+            return isValid;
+        }
+
+        public String getFileName() {
+            return fileNames.get(0);
+        }
+
+        /**
+         * Create new render layer, if mapfiles exist
+         */
+        @Override
+        public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
+            final List<MapFile> mapFiles = new ArrayList<>();
+            for (String fileName : fileNames) {
+                final File mapFile = new File(fileName);
+                if (mapFile.exists()) {
+                    mapFiles.add(new MapFile(mapFile));
+                }
+            }
+
+            return new MultiRendererLayer(tileCache, mapFiles, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
+
+        }
     }
 
     public void updateOfflineMaps() {
@@ -164,6 +204,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         for (final String mapFile : offlineMaps) {
             final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
             registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
+        }
+        if (offlineMaps.size() > 1) {
+            registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined), MapGeneratorInternal.DATABASE_RENDERER));
         }
     }
 }
