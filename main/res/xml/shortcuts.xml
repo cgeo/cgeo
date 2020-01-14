@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="live_map"
+        android:enabled="true"
+        android:icon="@drawable/main_live"
+        android:shortcutShortLabel="@string/live_map_button">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="cgeo.geocaching"
+            android:targetClass="cgeo.geocaching.maps.MapActivity" />
+    </shortcut>
+</shortcuts>
