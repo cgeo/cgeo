@@ -102,7 +102,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             final int waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
             final Waypoint waypoint = DataStore.loadWaypoint(waypointId);
             if (waypoint != null) {
-                setTarget(waypoint);
+                setTarget(waypoint, cache);
             }
         } else if (extras.containsKey(Intents.EXTRA_COORDS)) {
             setTarget(extras.<Geopoint> getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
@@ -199,7 +199,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
             @Override
             public void onWaypointSelected(final Waypoint waypoint) {
-                setTarget(waypoint);
+                setTarget(waypoint, null);
             }
 
             @Override
@@ -251,11 +251,11 @@ public class CompassActivity extends AbstractActionBarActivity {
         Log.d("destination set: " + newDescription + " (" + dstCoords + ")");
     }
 
-    private void setTarget(@NonNull final Waypoint waypointIn) {
+    private void setTarget(@NonNull final Waypoint waypointIn, @Nullable final Geocache cache) {
         waypoint = waypointIn;
         final Geopoint coordinates = waypointIn.getCoords();
         if (coordinates != null) { // handled by WaypointSelectionActionProvider, but the compiler doesn't know
-            setTarget(coordinates, waypointIn.getName());
+            setTarget(coordinates, waypointIn.getName() + (null != cache ? Formatter.SEPARATOR + Formatter.formatCacheInfoShort(cache) : ""));
         }
     }
 
