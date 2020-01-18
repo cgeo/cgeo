@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="live_map"
+        android:enabled="true"
+        android:icon="@drawable/main_live"
+        android:shortcutShortLabel="@string/live_map_button">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="cgeo.geocaching"
+            android:targetClass="cgeo.geocaching.maps.MapActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="nearby"
+        android:enabled="true"
+        android:icon="@drawable/main_nearby"
+        android:shortcutShortLabel="@string/caches_nearby_button">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="cgeo.geocaching"
+            android:targetClass="cgeo.geocaching.CacheListActivity">
+            <extra android:name="cgeo.geocaching.intent.extra.list_type" android:value="NEAREST" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="stored"
+        android:enabled="true"
+        android:icon="@drawable/main_stored"
+        android:shortcutShortLabel="@string/stored_caches_button">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="cgeo.geocaching"
+            android:targetClass="cgeo.geocaching.CacheListActivity">
+            <extra android:name="cgeo.geocaching.intent.extra.list_type" android:value="OFFLINE" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="search"
+        android:enabled="true"
+        android:icon="@drawable/main_search"
+        android:shortcutShortLabel="@string/advanced_search_button">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="cgeo.geocaching"
+            android:targetClass="cgeo.geocaching.SearchActivity">
+        </intent>
+    </shortcut>
+</shortcuts>

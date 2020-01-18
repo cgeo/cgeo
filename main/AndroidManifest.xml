@@ -109,6 +109,8 @@
                 <!-- ProcessPhoenix uses the default flag to recognize which activity to use after restart -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".SearchActivity"
