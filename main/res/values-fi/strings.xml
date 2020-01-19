@@ -164,7 +164,7 @@
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
     <string name="err_login_failed_toast">c:geo ei onnistu kirjautumaan sisään. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt. Tarkista kirjautumistiedot tai kytke internet-yhteytesi päälle.</string>
-    <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_unknown">Tuntematon virhe. Vilkaise <a href="https://www.cgeo.org/faq#login-failed">usein kysytyt kysymykset (englanniksi)</a> avun saamikseksi.</string>
     <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
     <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">Käyttäjätunnusta ja/tai salasanaa ei ole asetettu</string>
@@ -239,7 +239,7 @@
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
-    <string name="warn_notloggedin_title">Offline mode</string>
+    <string name="warn_notloggedin_title">Offline-tila</string>
     <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally.</string>
     <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
     <string name="err_read_pocket_query_list">Virhe luettaessa Pocket Query -listausta.</string>
@@ -340,9 +340,9 @@
     <string name="caches_remove_selected">Poista valitut</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
-    <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
-    <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
-    <string name="caches_upload_allcoords_dialogtitle">WARNING - Uploading all coordinates</string>
+    <string name="caches_upload_modifiedcoords_warning">Haluatko lähettää muokatut koordinaatit kaikille (valituille) kätköille ja tallentaa ne palvelimella olevien koordinaattien päälle? Toimintoa ei voi peruuttaa.</string>
+    <string name="caches_upload_allcoords">Lähetä kaikkien kätköjen koordinaatit</string>
+    <string name="caches_upload_allcoords_dialogtitle">VAROITUS: Lähetetään kaikki koordinaatit</string>
     <string name="caches_upload_allcoords_warning">This will overwrite the existing coordinates on the server for all (selected) caches of your list with the current listing coordinates in c:geo! This is to be used only in special cases, e. g. when you imported a GPX file which contains corrected coordinates as listing coordinates. This cannot be undone and you should only use it, if you know what you are doing. In normal cases you might rather want to use the function \"Upload modified coordinates\" in the same menu.</string>
     <string name="caches_refresh_selected">Päivitä valitut</string>
     <string name="caches_refresh_all">Päivitä kaikki</string>
@@ -405,7 +405,7 @@
     <string name="about_changelog">Muutoshistoria</string>
     <string name="about_system">Järjestelmä</string>
     <string name="about_donate">Tue meitä</string>
-    <string name="about_donation_more">Visit website for info</string>
+    <string name="about_donation_more">Webbisivuilla on lisää tietoa</string>
     <string name="about_contributors">Avustajat</string>
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
@@ -413,30 +413,30 @@
     <string name="about_starting">Aloitus</string>
     <string name="about_starting_head">Aloitus</string>
     <string name="about_starting_text_basics_head">Geokätköilyn perusteet</string>
-    <string name="about_starting_text_basics_text">Geocaching is an outdoor game to search and find so-called \"caches\". This app can be used to play this game.\n\nYou can read more about <b>c:geo Basics</b> in our user guide: https://manual.cgeo.org/en/basicuse</string>
+    <string name="about_starting_text_basics_text">Geokätköily on ulkona pelattava peli, jossa etsitään niin kutsuttuja \"kätköjä\". Tätä sovellusta voidaan käyttää pelaamaan tätä peliä.\n\nVoit lukea lisää <b>c:geon perusteista</b> käyttöoppaassamme: https://manual.cgeo.org/fi/basicuse</string>
     <string name="about_starting_text_device_head">c:geo laitteen käyttöoikeudet</string>
     <string name="about_starting_text_device_text">c:geo needs certain permissions on your device:\n<b>Location</b>: access to the GPS to locate your position and calculate distance and direction to geocaches\n<b>Storage</b>:  write data onto your phone storage when you save geocaches for offline use, for import/export of files and reading of offline maps\n\nWithout these permissions you will not be able to use c:geo.</string>
-    <string name="about_starting_text_first_head">First steps with c:geo</string>
+    <string name="about_starting_text_first_head">c:geon käytön aloitus</string>
     <string name="about_starting_text_first_text">In order to use c:geo, you need an account for a geocaching platform of your choice (independent of this app). You have to configure this account in c:geo service settings before you can use c:geo!\n\nYou can read more about <b>c:geo First steps</b> in our user guide: https://manual.cgeo.org/en/firststeps</string>
-    <string name="open_services_page">Configure your geocaching platform(s)</string>
+    <string name="open_services_page">Määritä geokätköilypalvelu(t)</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
     <string name="about_system_info_send_chooser">Lähetä järjestelmän tiedot</string>
     <string name="changelog_github">Kaikki muutokset</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
-    <string name="about_contributors_carnerodetails">as the father of c:geo</string>
-    <string name="about_contributors_recent">2018/2019 contributors</string>
-    <string name="about_contributors_specialthanks">Special thanks to</string>
-    <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
-    <string name="about_contributors_other">Contributors from before 2018</string>
-    <string name="about_components">Components</string>
-    <string name="contribution_code">code</string>
-    <string name="contribution_tester">tester</string>
-    <string name="contribution_support">support</string>
-    <string name="contribution_documentation">documentation</string>
-    <string name="contribution_projectleader">open source project leader</string>
-    <string name="contribution_graphics">graphics</string>
+    <string name="about_contributors_carnerodetails">c:geon luojana</string>
+    <string name="about_contributors_recent">Recent contributors</string>
+    <string name="about_contributors_specialthanks">Erikoiskiitokset</string>
+    <string name="about_contributors_specialthanksdetails">· kaikki kääntäjämme sivustolla <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· kaikki ongelmien tutkijat\n· sekä kaikki muut tukijat.\n</string>
+    <string name="about_contributors_other">Other contributors</string>
+    <string name="about_components">Komponentit</string>
+    <string name="contribution_code">koodi</string>
+    <string name="contribution_tester">testaaja</string>
+    <string name="contribution_support">tuki</string>
+    <string name="contribution_documentation">dokumentaatio</string>
+    <string name="contribution_projectleader">avoimen lähdekoodin projektin johtaja</string>
+    <string name="contribution_graphics">grafiikat</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -469,8 +469,8 @@
     <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
     <string name="settings_category_browser">Selain</string>
-    <string name="settings_category_geocaching_platform">Geocaching Platform</string>
-    <string name="settings_category_geocaching_additionals">Further services and addon</string>
+    <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
+    <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut lokkausasetukset</string>
     <string name="settings_goto_url_button">Lisää…</string>
@@ -564,8 +564,8 @@
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_brouterThreshold">Laske reitti</string>
     <string name="init_brouterThreshold_description">Maksimietäisyys, jonka sisällä brouter-apusovellus (jos asennettuna) laskee reitin.</string>
-    <string name="init_brouterShowBothDistances">Show straight distance</string>
-    <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
+    <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
+    <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
@@ -583,7 +583,7 @@
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
     <string name="init_backup_running">Luodaan varmuuskopiota kätkötietokannasta…</string>
-    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
+    <string name="init_backup_note">Huomaathan, että tämä toiminto varmuuskopioi/palauttaa tietokannan, joka sisältää vain kätköt ja niiden reittipisteet, mutta ei sinun kätkökuvia tai ohjelman asetuksia.</string>
     <string name="init_backup_restore">Palauta</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
@@ -599,16 +599,16 @@
     <string name="init_backup_last">Varmuuskopio ajalta:</string>
     <string name="init_backup_last_no">Mikään tiedosto ei sisällä varmuuskopiota.</string>
     <string name="settings_title_backup">Varmuuskopioi / Palauta</string>
-    <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
-    <string name="init_backup_settings">Backup program settings</string>
+    <string name="settings_summary_backup">Tee varmuuskopio ja palauta kätköjen/reittipisteiden tiedot ja ohjelman asetukset.</string>
+    <string name="init_backup_settings">Varmuuskopioi ohjelman asetukset</string>
     <string name="init_backup_settings_backup_light">Varmuuskopioi asetukset (ilman käyttäjätunnuksia)</string>
     <string name="init_backup_settings_backup_full">Varmuuskopioi asetukset (kaikki)</string>
-    <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
+    <string name="init_backup_settings_backup_full_confirm">Haluatko tallentaa arkaluontoiset tiliin liittyvät tiedot? Nämä saattavat olla muiden sovellusten luettavissa.</string>
     <string name="settings_savingerror">Virhe asetusten tallentamisessa</string>
     <string name="settings_saved">Settings successfully saved to:</string>
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="init_backup_settings_restore_confirm">Haluatko korvata nykyiset asetuksesi?</string>
-    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
+    <string name="init_backup_settings_restore_no">Asetusten varmuuskopiota ei saatavilla</string>
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restored">Asetukset palautettu</string>
     <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
@@ -630,7 +630,7 @@
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
     <string name="init_maptrail">Näytä reitti</string>
     <string name="init_summary_maptrail">Näytä reitti kartalla</string>
-    <string name="init_trailcolor">Trail color</string>
+    <string name="init_trailcolor">Reitin väri</string>
     <string name="init_share_after_export">Avaa jakovalikko GPX-tiedoston tuomisen jälkeen</string>
     <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
     <string name="init_trackautovisit">Reissaajien vierailu</string>
@@ -707,22 +707,23 @@
     <string name="init_mfold_api">Vanha Mapsforge V3</string>
     <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
     <!-- proximity notification -->
-    <string name="settings_title_proximityNotification">Proximity notification</string>
-    <string name="init_proximityNotificationGeneral">General proximity notification on map</string>
-    <string name="init_summary_proximityNotificationGeneral">Play a single notification if any cache or waypoint currently visible on the map is closer than far distance or near distance. Different tones are used for the two distances.</string>
+    <string name="settings_title_proximityNotification">Läheisyysilmoitus</string>
+    <string name="init_proximityNotificationGeneral">Yleinen läheisyysilmoitus kartalla</string>
+    <string name="init_summary_proximityNotificationGeneral">Näytä yksittäinen ilmoitus jos mikä tahansa näkyvissä oleva kätkö tai reittipiste on lähempänä kuin \"pitkä etäisyys\" tai \"lyhyt etäisyys\". Eri ääniä käytetään kyseisille etäisyyksille.</string>
     <string name="init_proximityNotificationSpecific">Specific waypoint proximity notification</string>
     <string name="init_summary_proximityNotificationSpecific">Play a repeated notification if the currently selected cache or waypoint is closer than far distance or near distance. Works if cache or waypoint details are opened, cache or waypoint popups on map are shown or compass is active. Different tones are used for the two distances.</string>
     <string name="far_distance">Far distance</string>
     <string name="near_distance">Near distance</string>
-    <string name="init_proximity_notification_type">Type of notification</string>
-    <string name="pn_tone_only">Tone only</string>
-    <string name="pn_text_only">Text only</string>
-    <string name="pn_tone_and_text">Tone + text</string>
+    <string name="init_proximity_notification_type">Ilmoituksen tyyppi</string>
+    <string name="pn_tone_only">Vain ääni</string>
+    <string name="pn_text_only">Vain teksti</string>
+    <string name="pn_tone_and_text">Ääni + teksti</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
     <string name="map_source_osm_mapnik">OSM: Kartta</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
     <string name="init_sendToCgeo_name">Laitteen nimi</string>
@@ -908,7 +909,7 @@
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
-    <string name="cache_stored">Stored</string>
+    <string name="cache_stored">Tallennettu</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
@@ -920,10 +921,10 @@
     <string name="cache_status_not_premium">Kaikille</string>
     <string name="cache_status_stored">Tallennettu</string>
     <string name="cache_status_not_stored">Ei tallennettu</string>
-    <string name="cache_status_stored_lasteighthours">Within last eight hours</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Within last twenty-four hours</string>
-    <string name="cache_status_stored_lastsevendays">Within last seven days</string>
-    <string name="cache_status_stored_lastthirtydays">Within last thirty days</string>
+    <string name="cache_status_stored_lasteighthours">8 tunnin sisällä</string>
+    <string name="cache_status_stored_lasttwentyfourhours">24 tunnin sisällä</string>
+    <string name="cache_status_stored_lastsevendays">7 päivän sisällä</string>
+    <string name="cache_status_stored_lastthirtydays">30 päivän sisällä</string>
     <string name="cache_status_stored_morethaneighthours">Before last eight hours</string>
     <string name="cache_status_stored_morethantwentyfourhours">Before last twenty-four hours</string>
     <string name="cache_status_stored_morethansevendays">Before last seven days</string>
@@ -975,7 +976,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Etsitään tiedostoja\nkohteesta</string>
@@ -1579,18 +1580,18 @@
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
     <string name="storage_permission_needed">This function is not possible without storage permission.</string>
     <!-- colors -->
-    <string name="color_blue">Blue</string>
-    <string name="color_green">Green</string>
-    <string name="color_grey">Grey</string>
-    <string name="color_orange">Orange</string>
-    <string name="color_red">Red</string>
-    <string name="color_turquoise">Turquoise</string>
-    <string name="color_black">Black</string>
+    <string name="color_blue">Sininen</string>
+    <string name="color_green">Vihreä</string>
+    <string name="color_grey">Harmaa</string>
+    <string name="color_orange">Oranssi</string>
+    <string name="color_red">Punainen</string>
+    <string name="color_turquoise">Turkoosi</string>
+    <string name="color_black">Musta</string>
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
     <string name="number_input_err_boundarymin">Entered value is too small - reset to min value</string>
     <string name="number_input_err_boundarymax">Entered value is too large - reset to max value</string>
-    <string name="number_input_err_format">Invalid number format</string>
+    <string name="number_input_err_format">Väärä numeromuoto</string>
     <!-- text notification channel infos & proximity notification title -->
     <string name="notification_channel_name">c:geo notifications</string>
     <string name="notification_channel_description">notifications from c:geo geocaching app</string>
