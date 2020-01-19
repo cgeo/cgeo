@@ -426,10 +426,10 @@
     <string name="changelog_github">Összes változtatás listázása</string>
     <string name="about_nutshellmanual">Online kézikönyv</string>
     <string name="about_contributors_carnerodetails">mint a c:geo szülőatyja</string>
-    <string name="about_contributors_recent">2018/2019-es közreműködők</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Külön köszönet</string>
     <string name="about_contributors_specialthanksdetails">· a fordításban segédkezőknek a <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>-en!\n· a hibák megtalálóinak\n· és minden támogatónknak.\n</string>
-    <string name="about_contributors_other">2018 előtti közreműködők</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Komponensek</string>
     <string name="contribution_code">kódolás</string>
     <string name="contribution_tester">tesztelés</string>
@@ -583,7 +583,7 @@
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
     <string name="init_backup_running">A ládaadatbázis biztonsági mentése…</string>
-    <string name="init_backup_note">Ez a funkció a ládákat és útpontokat tartalmazó adatbázist menti el / állítja vissza, a láda képeit és az alkalmazásbeállításokat nem.</string>
+    <string name="init_backup_note">Ez a funkció a ládákat és útpontokat tartalmazó adatbázist menti el / állítja vissza, a láda képeit és az alkalmazás beállításait nem.</string>
     <string name="init_backup_restore">Visszaállítás</string>
     <string name="init_backup_success">A c:geo adatbázisának mentése sikerült:</string>
     <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
@@ -723,6 +723,7 @@
     <string name="map_source_google_satellite">Google: Műholdkép</string>
     <string name="map_source_osm_mapnik">OSM: Térkép</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Információ a send2cgeo-ról</string>
     <string name="init_sendToCgeo_name">Készüléked neve</string>
@@ -975,7 +976,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Fájlok keresése\nitt</string>

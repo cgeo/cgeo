@@ -426,10 +426,10 @@
     <string name="changelog_github">Lijst met alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
-    <string name="about_contributors_recent">2018/2019 bijdragers</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Speciale dank aan</string>
     <string name="about_contributors_specialthanksdetails">· al onze vertalingsbijdragers op <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle bevinding makers\n· en alle andere ondersteuners.\n</string>
-    <string name="about_contributors_other">Bijdragers van voor 2018</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Onderdelen</string>
     <string name="contribution_code">code</string>
     <string name="contribution_tester">tester</string>
@@ -452,7 +452,7 @@
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
-    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
+    <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
     <string name="settings_title_map_content">Kaartinhoud</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
@@ -619,10 +619,10 @@
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="settings_title_scale_map_text">Tekst op kaart schalen</string>
     <string name="settings_summary_scale_map_text">Tekst labels op offline kaart schalen n.a.v. DPI apparaat</string>
-    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
+    <string name="settings_title_map_manualrotation_disabled">Handmatige kaartrotatie uitschakelen</string>
     <string name="settings_summary_map_manualrotation_disabled">Schakel bediening uit voor handmatige kaart rotatie</string>
-    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
-    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
+    <string name="settings_title_map_autorotation_disabled">Automatische kaartrotatie uitschakelen</string>
+    <string name="settings_summary_map_autorotation_disabled">Automatische kaartrotatie uitschakelen</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_gpx_exportdir">GPX Export map</string>
     <string name="init_gpx_importdir">GPX Import map</string>
@@ -714,15 +714,16 @@
     <string name="init_summary_proximityNotificationSpecific">Speel een herhalende melding wanneer de huidige geselecteerde cache of waypoint dichterbij is dan de veraf- of dichtbij afstand. Werkt als de cache- of waypoint details worden geopend, cache of waypoint popups op de kaart worden weergegeven of wanneer het kompas actief is. Verschillende tonen worden gebruikt voor de twee afstanden.</string>
     <string name="far_distance">Veraf afstand</string>
     <string name="near_distance">Dichtbij afstand</string>
-    <string name="init_proximity_notification_type">Type of notification</string>
-    <string name="pn_tone_only">Tone only</string>
-    <string name="pn_text_only">Text only</string>
-    <string name="pn_tone_and_text">Tone + text</string>
+    <string name="init_proximity_notification_type">Type melding</string>
+    <string name="pn_tone_only">Alleen toon</string>
+    <string name="pn_text_only">Alleen tekst</string>
+    <string name="pn_tone_and_text">Toon en tekst</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_osm_mapnik">OSM: Kaart</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
     <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
@@ -972,10 +973,10 @@
     <string name="init_longtap_udc">Lange tik op de kaart</string>
     <string name="init_summary_longtap_udc">Lange tik op de kaart om een gebruiker gedefinieerde cache te maken</string>
     <!-- coordinate calculator hints -->
-    <string name="cc_hint_degrees">degrees</string>
-    <string name="cc_hint_minutes">minutes</string>
-    <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_degrees">graden</string>
+    <string name="cc_hint_minutes">minuten</string>
+    <string name="cc_hint_seconds">seconden</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Zoeken naar bestanden\nin</string>
@@ -1066,7 +1067,7 @@
     <string name="map_modes">Kaartinstellingen</string>
     <string name="map_trail_show">Toon spoor</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
-    <string name="map_autorotate">Map autorotate</string>
+    <string name="map_autorotate">Kaart automatisch roteren</string>
     <string name="map_circles_show">Laat cirkels zien</string>
     <string name="map_mycaches_hide">Verbergen eigen/gevonden caches</string>
     <string name="map_disabled_hide">Verbergen uitgeschakelde caches</string>
@@ -1592,7 +1593,7 @@
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
     <string name="number_input_err_format">Ongeldig numeriek formaat</string>
     <!-- text notification channel infos & proximity notification title -->
-    <string name="notification_channel_name">c:geo notifications</string>
-    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo proximity notification</string>
+    <string name="notification_channel_name">c:geo meldingen</string>
+    <string name="notification_channel_description">meldingen van c:geo geocaching app</string>
+    <string name="proximity_notification_title">c:geo nabijheidsmelding</string>
 </resources>

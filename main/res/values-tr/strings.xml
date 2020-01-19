@@ -426,10 +426,10 @@
     <string name="changelog_github">Tüm değişiklikler listesi</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
-    <string name="about_contributors_recent">2018/2019 katkıda bulunanlar</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Özel teşekkür:</string>
     <string name="about_contributors_specialthanksdetails">· all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· all issue creators\n· and all other supporters.\n</string>
-    <string name="about_contributors_other">2018\'den önce katkıda bulunanlar</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Bileşenler</string>
     <string name="contribution_code">kod</string>
     <string name="contribution_tester">test kullanıcısı</string>
@@ -723,6 +723,7 @@
     <string name="map_source_google_satellite">Google: Uydu</string>
     <string name="map_source_osm_mapnik">OSM: Harita</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo hakkında bilgi</string>
     <string name="init_sendToCgeo_name">Cihazınızın adı</string>
@@ -975,7 +976,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Dosyalar aranıyor\n</string>
