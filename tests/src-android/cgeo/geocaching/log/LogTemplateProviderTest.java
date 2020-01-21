@@ -22,7 +22,7 @@ public class LogTemplateProviderTest extends TestCase {
 
     public static void testApplyTemplates() {
         // This test can occasionally fail if the current year changes right after the next line.
-        final String currentYear = Integer.toString(Calendar.YEAR);
+        final String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
         final String signature = LogTemplateProvider.applyTemplates("[DATE]", new LogContext(null, null, true));
         assertThat(signature).contains(currentYear);
     }
@@ -39,7 +39,7 @@ public class LogTemplateProviderTest extends TestCase {
             final String signature = LogTemplateProvider.applyTemplates(signatureTemplate, new LogContext(null, null, true));
             assertThat(signature).isEqualTo("Signature " + currentDate);
 
-            final String currentYear = Integer.toString(Calendar.YEAR);
+            final String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
             assertThat(signature).contains(currentYear);
         } finally {
             TestSettings.setSignature(oldSignature);
