@@ -426,10 +426,10 @@
     <string name="changelog_github">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
-    <string name="about_contributors_recent">Mitwirkende 2018/2019</string>
+    <string name="about_contributors_recent">Neueste Mitwirkende</string>
     <string name="about_contributors_specialthanks">Besonderer Dank an</string>
     <string name="about_contributors_specialthanksdetails">· Alle Mitwirkende an der Übersetzung auf <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle Issue-Ersteller\n· und alle anderen Unterstützer.\n</string>
-    <string name="about_contributors_other">Mitwirkende vor 2018</string>
+    <string name="about_contributors_other">Weitere Mitwirkende</string>
     <string name="about_components">Komponenten</string>
     <string name="contribution_code">Code</string>
     <string name="contribution_tester">Tester</string>
@@ -723,6 +723,7 @@
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_osm_mapnik">OSM: Karte</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
     <string name="init_sendToCgeo_name">Name des Endgerätes</string>
@@ -972,10 +973,10 @@
     <string name="init_longtap_udc">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_udc">Langes Tippen auf Karte um einen benutzerdefinierten Cache anzulegen</string>
     <!-- coordinate calculator hints -->
-    <string name="cc_hint_degrees">degrees</string>
-    <string name="cc_hint_minutes">minutes</string>
-    <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_degrees">Grad</string>
+    <string name="cc_hint_minutes">Minuten</string>
+    <string name="cc_hint_seconds">Sekunden</string>
+    <string name="cc_hint_fraction">Bruchteil</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Suche nach Dateien\nin</string>

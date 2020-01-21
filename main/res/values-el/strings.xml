@@ -426,10 +426,10 @@
     <string name="changelog_github">Λίστα με όλες τις αλλαγές</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
-    <string name="about_contributors_recent">συντελεστές 2018/2019</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
     <string name="about_contributors_specialthanksdetails">· όλους τους συνεργάτες μας στη μετάφραση στο <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· όλους τους δημιουργούς της έκδοσης\n· και όλους τους άλλους υποστηρικτές.\n</string>
-    <string name="about_contributors_other">Συντελεστές πριν το 2018</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Στοιχεία</string>
     <string name="contribution_code">κωδικός</string>
     <string name="contribution_tester">υπεύθυνος δοκιμών</string>
@@ -723,6 +723,7 @@
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
     <string name="map_source_osm_mapnik">OSM: Χάρτης</string>
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
     <string name="settings_info_send2cgeo_title">Σχετικά με το send2cgeo</string>
     <string name="init_sendToCgeo_name">Όνομα της συσκευής σας</string>
@@ -975,7 +976,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Γίνεται αναζήτηση αρχείων \n σε</string>

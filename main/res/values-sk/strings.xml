@@ -428,10 +428,10 @@
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
-    <string name="about_contributors_recent">Prispievatelia 2018/2019</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Zvláštne poďakovanie pre</string>
     <string name="about_contributors_specialthanksdetails">· všetkým našim prekladateľom na <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· všetkým oznamovateľom problémov\n· a všetkým ostatným podporovateľom.\n</string>
-    <string name="about_contributors_other">Prispievatelia pred rokom 2018</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Súčasti</string>
     <string name="contribution_code">kód</string>
     <string name="contribution_tester">tester</string>
@@ -725,6 +725,7 @@
     <string name="map_source_google_satellite">Google: Satelit</string>
     <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o send2cgeo</string>
     <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
@@ -991,7 +992,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Vyhľadávanie súborov\nv</string>

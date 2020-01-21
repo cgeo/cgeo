@@ -426,10 +426,10 @@
     <string name="changelog_github">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
-    <string name="about_contributors_recent">Contributeurs 2018 / 2019</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Remerciements spéciaux à</string>
     <string name="about_contributors_specialthanksdetails">· tous nos contributeurs de traduction sur <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· tous les créateurs de fiches\n· et tous les autres supporters.\n</string>
-    <string name="about_contributors_other">Contributeurs avant 2018</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Composants</string>
     <string name="contribution_code">code</string>
     <string name="contribution_tester">testeur</string>
@@ -723,6 +723,7 @@
     <string name="map_source_google_satellite">Google Maps : satellite</string>
     <string name="map_source_osm_mapnik">OSM : Carte</string>
     <string name="map_source_osm_offline">hors-ligne</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
     <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
     <string name="init_sendToCgeo_name">Le nom de votre appareil</string>
@@ -975,7 +976,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Recherche de fichiers\nin</string>

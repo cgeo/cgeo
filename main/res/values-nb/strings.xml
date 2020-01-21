@@ -426,10 +426,10 @@
     <string name="changelog_github">Liste over alle endringer</string>
     <string name="about_nutshellmanual">Elektronisk håndbok</string>
     <string name="about_contributors_carnerodetails">som faren til c:geo</string>
-    <string name="about_contributors_recent">2018/2019 bidragsytere</string>
+    <string name="about_contributors_recent">Recent contributors</string>
     <string name="about_contributors_specialthanks">Spesielt takk til</string>
     <string name="about_contributors_specialthanksdetails">alle våre bidragsytere til oversettelser på <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>\n, alle som sender inn problemer\n og alle andre supportere\n</string>
-    <string name="about_contributors_other">Bidragsytere fra før 2018</string>
+    <string name="about_contributors_other">Other contributors</string>
     <string name="about_components">Komponenter</string>
     <string name="contribution_code">kode</string>
     <string name="contribution_tester">tester</string>
@@ -723,6 +723,7 @@
     <string name="map_source_google_satellite">Google: satellittbilder</string>
     <string name="map_source_osm_mapnik">OSM: Kart</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Send til c:geo</string>
     <string name="settings_info_send2cgeo_title">Informasjon om send2cgeo</string>
     <string name="init_sendToCgeo_name">Navn på enheten</string>
@@ -975,7 +976,7 @@
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_secfractions">fraction of seconds</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Søker etter filer i\n</string>
