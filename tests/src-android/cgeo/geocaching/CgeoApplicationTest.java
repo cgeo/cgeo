@@ -78,7 +78,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(tb.getOrigin()).isEqualTo("Niedersachsen, Germany");
         assertThat(tb.getOwner()).isEqualTo("blafoo");
         assertThat(tb.getOwnerGuid()).isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");
-        assertThat(tb.getGoal()).isEqualTo("Kinder erfreuen.<br[><br]>Make children happy.");
+        assertThat(tb.getGoal()).isEqualTo("Kinder erfreuen.<br><br>Make children happy.");
         assertThat(tb.getDetails()).startsWith("Auf der CD sind");
         // the host of the image can vary
         assertThat(tb.getImage()).endsWith("geocaching.com/track/large/38382780-87a7-4393-8393-78841678ee8c.jpg");
