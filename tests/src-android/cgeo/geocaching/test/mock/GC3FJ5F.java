@@ -76,12 +76,12 @@ public class GC3FJ5F extends MockedCache {
 
     @Override
     public String getDescription() {
-        return "<b>Update 31.12.2014:</b><br /> Koordinaten für Station 2 neu eingemessen.<br />";
+        return "<b>Update 31.12.2014:</b><br> Koordinaten für Station 2 neu eingemessen.<br>";
     }
 
     @Override
     public String getShortDescription() {
-        return "<b>Spaziergang durch den Velberter Herminghauspark.</b><br /> <br /> Ich möchte euch einen Besuch im Velberter Herminghauspark nahelegen. Hier wurde in den letzten Jahren viel getan um den Park attraktiv für Besucher und insbesondere für Familien zu machen. Aber seht selbst...<br />";
+        return "<b>Spaziergang durch den Velberter Herminghauspark.</b><br> <br> Ich möchte euch einen Besuch im Velberter Herminghauspark nahelegen. Hier wurde in den letzten Jahren viel getan um den Park attraktiv für Besucher und insbesondere für Familien zu machen. Aber seht selbst...<br>";
     }
 
     @Override
