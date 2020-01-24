@@ -164,7 +164,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 77;
+    private static final int dbVersion = 79;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -927,6 +927,22 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableLists + " ADD COLUMN marker INTEGER NOT NULL DEFAULT 0");
                         } catch (final Exception e) {
                             Log.e("Failed to upgrade to ver. 77", e);
+                        }
+                    }
+
+                    // 78 has been revoked
+
+                    // next one is needed only for users with version 78, therefore using "==" instead of the regular "<"
+                    if (oldVersion == 78) {
+                        try {
+                            db.execSQL("CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
+                                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                + "date LONG NOT NULL, "
+                                + "latitude DOUBLE, "
+                                + "longitude DOUBLE "
+                                + ")");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 79", e);
                         }
                     }
 
