@@ -80,6 +80,13 @@
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
+                android:id="@+id/menu_archived_mode"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_archived"
+                android:title="@string/map_archived_hide"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
                 android:id="@+id/menu_direction_line"
                 android:checkable="true"
                 android:icon="@drawable/ic_menu_goto"

@@ -3479,14 +3479,16 @@ public class DataStore {
      */
 
     @NonNull
-    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeDisabled, final CacheType type) {
+    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeDisabled, final boolean excludeArchived, final CacheType type) {
         final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
         if (excludeMine) {
             where.append(" AND ").append(dbTableCaches).append(".found == 0");
         }
+        if (excludeArchived || excludeDisabled) {
+            where.append(" AND ").append(dbTableCaches).append(".archived == 0");
+        }
         if (excludeDisabled) {
             where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
-            where.append(" AND ").append(dbTableCaches).append(".archived == 0");
         }
         if (type != CacheType.ALL) {
             where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');

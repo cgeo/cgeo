@@ -1131,6 +1131,7 @@
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
     <string name="map_disabled_hide">Hide disabled caches</string>
+    <string name="map_archived_hide">Hide archived caches</string>
     <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>

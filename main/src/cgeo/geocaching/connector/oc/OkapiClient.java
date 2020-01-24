@@ -948,7 +948,7 @@ final class OkapiClient {
     }
 
     private static void addFilterParams(@NonNull final Map<String, String> valueMap, @NonNull final OCApiConnector connector, final boolean my) {
-        if (!Settings.isExcludeDisabledCaches()) {
+        if (!Settings.isExcludeDisabledCaches() && !Settings.isExcludeArchivedCaches()) {
             valueMap.put("status", "Available|Temporarily unavailable");
         }
         if (!my && Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {

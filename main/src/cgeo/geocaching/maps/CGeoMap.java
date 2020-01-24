@@ -687,6 +687,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
+            menu.findItem(R.id.menu_archived_mode).setChecked(Settings.isExcludeArchivedCaches());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
@@ -787,6 +788,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 markersInvalidated = true;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 if (!Settings.isExcludeDisabledCaches()) {
+                    Tile.cache.clear();
+                }
+                return true;
+            case R.id.menu_archived_mode:
+                Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
+                markersInvalidated = true;
+                ActivityMixin.invalidateOptionsMenu(activity);
+                if (!Settings.isExcludeArchivedCaches()) {
                     Tile.cache.clear();
                 }
                 return true;
@@ -1256,6 +1265,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             final boolean excludeMine = Settings.isExcludeMyCaches();
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+            final boolean excludeArchived = Settings.isExcludeArchivedCaches();
             if (mapMode == MapMode.LIVE) {
                 synchronized (caches) {
                     MapUtils.filter(caches);
@@ -1268,7 +1278,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 if (mapOptions.isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
                     //All visible waypoints
                     final CacheType type = Settings.getCacheType();
-                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, type);
+                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, excludeArchived, type);
                     MapUtils.filter(waypointsInViewport);
                     waypoints.addAll(waypointsInViewport);
                 } else {

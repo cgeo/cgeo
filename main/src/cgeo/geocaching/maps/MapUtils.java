@@ -39,14 +39,15 @@ public class MapUtils {
     public static void filter(final Collection<Geocache> caches) {
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+        final boolean excludeArchived = Settings.isExcludeArchivedCaches();
 
         // filtering required?
-        if (!excludeMine && !excludeDisabled) {
+        if (!excludeMine && !excludeDisabled && !excludeArchived) {
             return;
         }
         final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
+            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived()) || (excludeArchived && cache.isArchived())) {
                 removeList.add(cache);
             }
         }

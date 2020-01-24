@@ -172,6 +172,12 @@ public final class GCParser {
                 continue;
             }
 
+            if (Settings.isExcludeArchivedCaches() && cache.isArchived()) {
+                // skip archived caches
+                excludedCaches++;
+                continue;
+            }
+
             cache.setGeocode(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
 
             // cache type
@@ -897,7 +903,7 @@ public final class GCParser {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), cacheType);
+        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeArchivedCaches(), cacheType);
 
         GCLogin.getInstance().getLoginStatus(page);
 
