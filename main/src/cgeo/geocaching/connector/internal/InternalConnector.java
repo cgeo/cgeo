@@ -146,6 +146,12 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             // add more fields if needed
 
             DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
+
+            // temporary workaround for on demand migration of the old "go to" history
+            // should be removed after some grace period (maybe summer 2020?)
+            if (id == ID_HISTORY_CACHE) {
+                DataStore.migrateGotoHistory(context);
+            }
         }
     }
 
