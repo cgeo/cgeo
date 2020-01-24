@@ -3,7 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Beta version:</b>\n
-    · New: Auto rotate for Google Maps\n
+    · New: Auto rotate for Google Maps (experimental)\n
     · New: Ability to create user defined caches\n
     · New: Proximity notification messages as Android system notifications\n
     · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
