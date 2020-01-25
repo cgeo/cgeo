@@ -66,6 +66,50 @@
         app:showAsAction="ifRoom|withText">
         <menu>
             <item
+                android:id="@+id/menu_direction_line"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_goto"
+                android:title="@string/map_direction"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_circle_mode"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_circle"
+                android:title="@string/map_circles_show"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_trail_mode"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_trail"
+                android:title="@string/map_trail_show"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_dot_mode"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_dot_mode"
+                android:title="@string/map_dot_mode"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_map_autorotate"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_rotate"
+                android:title="@string/map_autorotate"
+                android:visible="false"
+                app:showAsAction="ifRoom|withText">
+            </item>
+
+        </menu>
+    </item>
+    <item
+        android:id="@+id/submenu_hide"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/map_hide" >
+        <menu>
+            <item
                 android:id="@+id/menu_mycaches_mode"
                 android:checkable="true"
                 android:icon="@android:drawable/ic_menu_myplaces"
@@ -107,43 +151,6 @@
                 android:title="@string/map_hidewp_visited"
                 app:showAsAction="ifRoom|withText">
             </item>
-            <item
-                android:id="@+id/menu_direction_line"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_goto"
-                android:title="@string/map_direction"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_circle_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_circle"
-                android:title="@string/map_circles_show"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_trail_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_trail"
-                android:title="@string/map_trail_show"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_dot_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_dot_mode"
-                android:title="@string/map_dot_mode"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_map_autorotate"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_rotate"
-                android:title="@string/map_autorotate"
-                android:visible="false"
-                app:showAsAction="ifRoom|withText">
-            </item>
-
         </menu>
     </item>
     <item

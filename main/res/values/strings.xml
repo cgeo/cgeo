@@ -1125,6 +1125,7 @@
     <string name="map_live">Live map</string>
     <string name="map_view_map">Map view</string>
     <string name="map_modes">Map settings</string>
+    <string name="map_hide">Hide</string>
     <string name="map_trail_show">Show trail</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_autorotate">Map autorotate</string>
