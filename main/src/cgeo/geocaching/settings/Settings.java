@@ -608,7 +608,7 @@ public class Settings {
     }
 
     public static boolean isMapAutoRotationDisabled() {
-        return getBoolean(R.string.pref_map_autorotation_disabled, false);
+        return getBoolean(R.string.pref_map_autorotation_disabled, true);
     }
 
     public static void setMapAutoRotationDisabled(final boolean disabled) {

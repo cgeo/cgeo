@@ -6,7 +6,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.Tile;
-import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -165,7 +164,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 78;
+    private static final int dbVersion = 79;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -931,57 +930,22 @@ public class DataStore {
                         }
                     }
 
-                    // migrate "go to" history to waypoints of user defined cache (only the 5 most recent entries!) & delete old history table
-                    if (oldVersion < 78) {
+                    // 78 has been revoked
+
+                    // next one is needed only for users with version 78, therefore using "==" instead of the regular "<"
+                    if (oldVersion == 78) {
                         try {
-                            // check if history UDC already exists
-                            boolean zz0Exists = false;
-                            try (Cursor c = db.rawQuery("SELECT geocode FROM " + dbTableCaches + " WHERE geocode='" + InternalConnector.GEOCODE_HISTORY_CACHE + "'", null)) {
-                                if (c.moveToFirst()) {
-                                    zz0Exists = true;
-                                }
-                            }
-
-                            // if not: manually create history UDC stub
-                            if (!zz0Exists) {
-                                db.execSQL("INSERT INTO " + dbTableCaches + " (updated, detailed, detailedupdate, visiteddate, geocode, reason, cacheid, guid, type, name, owner, owner_real, hidden, hint, size, difficulty, terrain, location, direction, distance, latitude, longitude, reliable_latlon, personal_note, shortdesc, description, favourite_cnt, rating, votes, myvote)"
-                                        + " VALUES (" + System.currentTimeMillis() + ", 1, 0, 0, '" + InternalConnector.GEOCODE_HISTORY_CACHE + "', 1, '', '', '" + CacheType.USER_DEFINED.id + "', '''Go to'' targets', 'You', '', 0, '', '" + CacheSize.UNKNOWN.id + "', 0.0, 0.0, '', NULL, NULL, NULL, NULL, 1, NULL, '', 'This cache stores your recent ''Go to'' targets', -1, 0.0, 0, 0.0)");
-                                db.execSQL("INSERT INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (" + StoredList.STANDARD_LIST_ID + ",'" + InternalConnector.GEOCODE_HISTORY_CACHE + "')");
-                            }
-
-                            // migrate most recent history waypoints (up to 5)
-                            final String sql = "INSERT INTO " + dbTableWaypoints + " (geocode, updated, type, prefix, lookup, name, latitude, longitude, note, own, visited, user_note, org_coords_empty, calc_state)"
-                                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                            final SQLiteStatement statement = db.compileStatement(sql);
-
-                            try (Cursor cursor = db.query(dbTableSearchDestinationHistory, new String[]{"_id", "date", "latitude", "longitude"}, null, null, null, null, "_id DESC", "5")) {
-                                int sequence = cursor.getCount();
-                                while (cursor.moveToNext()) {
-                                    statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
-                                    statement.bindLong      (2, cursor.getLong(cursor.getColumnIndex("date")));  // updated
-                                    statement.bindString    (3, "waypoint");                         // type
-                                    statement.bindString    (4, "00");                               // prefix
-                                    statement.bindString    (5, "---");                              // lookup
-                                    statement.bindString    (6, "Reference Point " + sequence);      // name
-                                    statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndex("latitude")));
-                                    statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndex("longitude")));
-                                    statement.bindString    (9, "");                                 // note
-                                    statement.bindLong      (10, 1);                                 // own
-                                    statement.bindLong      (11, 0);                                 // visited
-                                    statement.bindString    (12, "");                                // user note
-                                    statement.bindLong      (13, 0);                                 // org_coords_empty
-                                    statement.bindNull      (14);                                          // calc_state
-                                    statement.executeInsert();
-                                    sequence--;
-                                }
-                            }
-
-                            db.execSQL("DROP TABLE " + dbTableSearchDestinationHistory);
-
+                            db.execSQL("CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
+                                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                + "date LONG NOT NULL, "
+                                + "latitude DOUBLE, "
+                                + "longitude DOUBLE "
+                                + ")");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 78", e);
+                            Log.e("Failed to upgrade to ver. 79", e);
                         }
                     }
+
                 }
 
                 db.setTransactionSuccessful();
@@ -3800,6 +3764,45 @@ public class DataStore {
             return lhsIndex < rhsIndex ? -1 : (lhsIndex == rhsIndex ? 0 : 1);
         });
         return caches;
+    }
+
+    /**
+     * migrate most recent history waypoints (up to 5)
+     * (temporary workaround for on demand migration of the old "go to" history,
+     * should be removed after some grace period, probably end of 2020?)
+     */
+    public static void migrateGotoHistory(final Context context) {
+        init();
+
+        final String sql = "INSERT INTO " + dbTableWaypoints + " (geocode, updated, type, prefix, lookup, name, latitude, longitude, note, own, visited, user_note, org_coords_empty, calc_state)"
+                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        final SQLiteStatement statement = database.compileStatement(sql);
+
+        try (Cursor cursor = database.query(dbTableSearchDestinationHistory, new String[]{"_id", "date", "latitude", "longitude"}, null, null, null, null, "_id DESC", "5")) {
+            int sequence = cursor.getCount();
+            while (cursor.moveToNext()) {
+                statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
+                statement.bindLong      (2, cursor.getLong(cursor.getColumnIndex("date")));  // updated
+                statement.bindString    (3, "waypoint");                         // type
+                statement.bindString    (4, "00");                               // prefix
+                statement.bindString    (5, "---");                              // lookup
+                statement.bindString    (6, context.getString(R.string.wp_waypoint) + " " + sequence);     // name
+                statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndex("latitude")));
+                statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndex("longitude")));
+                statement.bindString    (9, "");                                 // note
+                statement.bindLong      (10, 1);                                 // own
+                statement.bindLong      (11, 0);                                 // visited
+                statement.bindString    (12, "");                                // user note
+                statement.bindLong      (13, 0);                                 // org_coords_empty
+                statement.bindNull      (14);                                          // calc_state
+                statement.executeInsert();
+                sequence--;
+            }
+        }
+
+        // clear old history
+        database.execSQL("DELETE FROM " + dbTableSearchDestinationHistory);
+
     }
 
 }

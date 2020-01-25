@@ -74,7 +74,7 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public String getDescription() {
-        return "SLO:<br />";
+        return "SLO:<br>";
     }
 
     @Override
@@ -141,7 +141,7 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public String getShortDescription() {
-        return "Kadar zbolimo nam pomaga...<br /> <br /> When we get sick, they are helpful...";
+        return "Kadar zbolimo nam pomaga...<br> <br> When we get sick, they are helpful...";
     }
 
     @Override
