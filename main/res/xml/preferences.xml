@@ -526,6 +526,11 @@
             android:key="@string/pref_excludedisabled"
             android:summary="@string/init_summary_disabled"
             android:title="@string/init_disabled" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_excludearchived"
+            android:summary="@string/init_summary_archived"
+            android:title="@string/init_archived" />
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -586,6 +591,20 @@
             <cgeo.geocaching.settings.WpThresholdPreference
                 android:key="@string/pref_showwaypointsthreshold"
                 android:layout="@layout/preference_seekbar" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludeWpOriginal"
+                android:summary="@string/init_summary_hidewp_original"
+                android:title="@string/init_hidewp" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludeWpParking"
+                android:summary="@string/init_summary_hidewp_parking" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludeWpVisited"
+                android:summary="@string/init_summary_hidewp_visited" />
+
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="@string/pref_map_direction"

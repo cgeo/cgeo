@@ -595,6 +595,8 @@
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Exclude Disabled</string>
     <string name="init_summary_disabled">Exclude disabled caches</string>
+    <string name="init_archived">Exclude Archived</string>
+    <string name="init_summary_archived">Exclude archived caches</string>
     <string name="init_save_log_img">Save Images</string>
     <string name="init_summary_save_log_img">Save Images from Logs</string>
     <string name="init_units">Use Imperial Units</string>
@@ -1136,6 +1138,10 @@
     <string name="map_hidewp_original">Hide original waypoints</string>
     <string name="map_hidewp_parking">Hide parking waypoints</string>
     <string name="map_hidewp_visited">Hide visited waypoints</string>
+    <string name="init_hidewp">Hide waypoints</string>
+    <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
+    <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
+    <string name="init_summary_hidewp_visited">Hide visited waypoints on the map</string>
     <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>
