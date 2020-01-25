@@ -87,6 +87,27 @@
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
+                android:id="@+id/menu_hidewp_original"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_waypoint"
+                android:title="@string/map_hidewp_original"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_hidewp_parking"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_parking"
+                android:title="@string/map_hidewp_parking"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_hidewp_visited"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_visited"
+                android:title="@string/map_hidewp_visited"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
                 android:id="@+id/menu_direction_line"
                 android:checkable="true"
                 android:icon="@drawable/ic_menu_goto"

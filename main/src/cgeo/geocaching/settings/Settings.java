@@ -672,6 +672,18 @@ public class Settings {
         return getBoolean(R.string.pref_excludearchived, false);
     }
 
+    public static boolean isExcludeWpOriginal() {
+        return getBoolean(R.string.pref_excludeWpOriginal, false);
+    }
+
+    public static boolean isExcludeWpParking() {
+        return getBoolean(R.string.pref_excludeWpParking, false);
+    }
+
+    public static boolean isExcludeWpVisited() {
+        return getBoolean(R.string.pref_excludeWpVisited, false);
+    }
+
     public static boolean isStoreLogImages() {
         return getBoolean(R.string.pref_logimages, false);
     }
@@ -1328,6 +1340,18 @@ public class Settings {
 
     public static void setExcludeArchived(final boolean exclude) {
         putBoolean(R.string.pref_excludearchived, exclude);
+    }
+
+    public static void setExcludeWpOriginal(final boolean exclude) {
+        putBoolean(R.string.pref_excludeWpOriginal, exclude);
+    }
+
+    public static void setExcludeWpParking(final boolean exclude) {
+        putBoolean(R.string.pref_excludeWpParking, exclude);
+    }
+
+    public static void setExcludeWpVisited(final boolean exclude) {
+        putBoolean(R.string.pref_excludeWpVisited, exclude);
     }
 
     static void setLogin(final String username, final String password) {

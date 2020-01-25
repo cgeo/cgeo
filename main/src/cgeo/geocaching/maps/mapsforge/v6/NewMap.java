@@ -313,6 +313,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
             menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
             menu.findItem(R.id.menu_archived_mode).setChecked(Settings.isExcludeArchivedCaches());
+            menu.findItem(R.id.menu_hidewp_original).setChecked(Settings.isExcludeWpOriginal());
+            menu.findItem(R.id.menu_hidewp_parking).setChecked(Settings.isExcludeWpParking());
+            menu.findItem(R.id.menu_hidewp_visited).setChecked(Settings.isExcludeWpVisited());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
@@ -421,6 +424,30 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 caches.invalidate();
                 ActivityMixin.invalidateOptionsMenu(this);
                 if (!Settings.isExcludeArchivedCaches()) {
+                    Tile.cache.clear();
+                }
+                return true;
+            case R.id.menu_hidewp_original:
+                Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
+                caches.invalidate();
+                ActivityMixin.invalidateOptionsMenu(this);
+                if (!Settings.isExcludeWpOriginal()) {
+                    Tile.cache.clear();
+                }
+                return true;
+            case R.id.menu_hidewp_parking:
+                Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
+                caches.invalidate();
+                ActivityMixin.invalidateOptionsMenu(this);
+                if (!Settings.isExcludeWpParking()) {
+                    Tile.cache.clear();
+                }
+                return true;
+            case R.id.menu_hidewp_visited:
+                Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
+                caches.invalidate();
+                ActivityMixin.invalidateOptionsMenu(this);
+                if (!Settings.isExcludeWpVisited()) {
                     Tile.cache.clear();
                 }
                 return true;
