@@ -227,7 +227,7 @@ public class SearchResult implements Parcelable {
         int excluded = 0;
         for (final Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
-            final boolean excludeCache = (excludeDisabled && (cache.isDisabled() || cache.isArchived())) || (excludeArchived && cache.isArchived()) || !cacheType.contains(cache);
+            final boolean excludeCache = (excludeDisabled && cache.isDisabled()) || (excludeArchived && cache.isArchived()) || !cacheType.contains(cache);
             if (excludeCache) {
                 excluded++;
             } else {

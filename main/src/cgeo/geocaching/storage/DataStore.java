@@ -3484,11 +3484,11 @@ public class DataStore {
         if (excludeMine) {
             where.append(" AND ").append(dbTableCaches).append(".found == 0");
         }
-        if (excludeArchived || excludeDisabled) {
-            where.append(" AND ").append(dbTableCaches).append(".archived == 0");
-        }
         if (excludeDisabled) {
             where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
+        }
+        if (excludeArchived) {
+            where.append(" AND ").append(dbTableCaches).append(".archived == 0");
         }
         if (type != CacheType.ALL) {
             where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');

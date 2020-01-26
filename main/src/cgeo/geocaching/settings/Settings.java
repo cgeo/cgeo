@@ -669,7 +669,7 @@ public class Settings {
     }
 
     public static boolean isExcludeArchivedCaches() {
-        return getBoolean(R.string.pref_excludearchived, false);
+        return getBoolean(R.string.pref_excludearchived, isExcludeDisabledCaches());
     }
 
     public static boolean isExcludeWpOriginal() {

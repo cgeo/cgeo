@@ -166,8 +166,8 @@ public final class GCParser {
                 Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data", e);
             }
 
-            if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
-                // skip disabled and archived caches
+            if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
+                // skip disabled caches
                 excludedCaches++;
                 continue;
             }
