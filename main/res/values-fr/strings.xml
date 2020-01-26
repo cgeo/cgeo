@@ -969,10 +969,10 @@
     <string name="internal_cache_default_description">This is a user defined cache</string>
     <string name="internal_cache_default_owner">You</string>
     <string name="internal_goto_targets_title">\'Go to\' targets</string>
-    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
+    <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points intermédiaires de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points intermédiaires. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_udc">Long tap on map</string>
     <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
-    <string name="goto_targets_list">Internal caches</string>
+    <string name="goto_targets_list">Caches internes</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
