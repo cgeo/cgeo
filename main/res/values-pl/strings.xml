@@ -725,7 +725,7 @@
     <string name="map_source_google_satellite">Google: Satelita</string>
     <string name="map_source_osm_mapnik">OSM: Mapnik</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
+    <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
@@ -886,10 +886,10 @@
     <string name="cache_dialog_favorite_remove_title">Ulubione</string>
     <string name="cache_dialog_favorite_remove_message">Usuwam skrzynkę z listy ulubionych…</string>
     <string name="cache_menu_navigate">Nawiguj</string>
-    <string name="cache_menu_navigation_drive">Nawigacja (jazda)</string>
+    <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
     <string name="cache_menu_navigation_drive_select_target">Skrzynka czy parking?</string>
     <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
-    <string name="cache_menu_navigation_transit">Nawigacja (Tranzyt)</string>
+    <string name="cache_menu_navigation_transit">Nawigacja (Transport publiczny)</string>
     <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
     <string name="cache_menu_maps_directions">Kierunki map Google</string>
     <string name="cache_menu_osmand">OsmAnd</string>
@@ -985,14 +985,15 @@
     <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
-    <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \'Idź do\'</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_udc">Przytrzymaj dłużej na mapie</string>
     <string name="init_summary_longtap_udc">Przytrzymaj dłużej na mapie aby utworzyć skrzynkę zdefiniowaną przez użytkownika</string>
+    <string name="goto_targets_list">Internal caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrees</string>
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
-    <string name="cc_hint_fraction">fraction</string>
+    <string name="cc_hint_fraction">część ułamkowa</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Szukam plików\nw</string>

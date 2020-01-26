@@ -426,10 +426,10 @@
     <string name="changelog_github">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
-    <string name="about_contributors_recent">Recent contributors</string>
+    <string name="about_contributors_recent">Contributori recenti</string>
     <string name="about_contributors_specialthanks">Ringraziamenti speciali a</string>
     <string name="about_contributors_specialthanksdetails">· tutti i nostri collaboratori per le traduzioni su <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· tutti i bug tester\n· e tutti gli altri sostenitori.\n</string>
-    <string name="about_contributors_other">Other contributors</string>
+    <string name="about_contributors_other">Altri contributori</string>
     <string name="about_components">Componenti</string>
     <string name="contribution_code">codice</string>
     <string name="contribution_tester">tester</string>
@@ -723,7 +723,7 @@
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_osm_mapnik">OSM: Mappa</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
+    <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome dispositivo</string>
@@ -969,14 +969,15 @@
     <string name="internal_cache_default_description">Questo è un cache definito dall\'utente</string>
     <string name="internal_cache_default_owner">Tu</string>
     <string name="internal_goto_targets_title">Obiettivi \"Vai a\"</string>
-    <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\"</string>
+    <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
     <string name="init_longtap_udc">Tocca a lungo sulla mappa</string>
     <string name="init_summary_longtap_udc">Toccare a lungo sulla mappa per creare un cache definito dall\'utente</string>
+    <string name="goto_targets_list">Cache interni</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">gradi</string>
     <string name="cc_hint_minutes">minuti</string>
     <string name="cc_hint_seconds">secondi</string>
-    <string name="cc_hint_fraction">fraction</string>
+    <string name="cc_hint_fraction">frazione</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Ricerca file\nin</string>
@@ -1534,8 +1535,8 @@
     </plurals>
     <string name="command_copy_caches_progress">Copia cache nella lista %1s</string>
     <plurals name="command_copy_caches_result">
-        <item quantity="one">Cache %d copiata</item>
-        <item quantity="other">Cache %d copiate</item>
+        <item quantity="one">Copiato %d cache</item>
+        <item quantity="other">Copiati %d cache</item>
     </plurals>
     <string name="command_delete_caches_progress">Cancellazione cache</string>
     <plurals name="command_delete_caches_result">
