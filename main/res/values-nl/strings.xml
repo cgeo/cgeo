@@ -426,10 +426,10 @@
     <string name="changelog_github">Lijst met alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
-    <string name="about_contributors_recent">Recent contributors</string>
+    <string name="about_contributors_recent">Recente bijdragers</string>
     <string name="about_contributors_specialthanks">Speciale dank aan</string>
     <string name="about_contributors_specialthanksdetails">· al onze vertalingsbijdragers op <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· alle bevinding makers\n· en alle andere ondersteuners.\n</string>
-    <string name="about_contributors_other">Other contributors</string>
+    <string name="about_contributors_other">Andere bijdragers</string>
     <string name="about_components">Onderdelen</string>
     <string name="contribution_code">code</string>
     <string name="contribution_tester">tester</string>
@@ -723,7 +723,7 @@
     <string name="map_source_google_satellite">Google: Satellite</string>
     <string name="map_source_osm_mapnik">OSM: Kaart</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
+    <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
     <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
@@ -969,14 +969,15 @@
     <string name="internal_cache_default_description">Dit is een door de gebruiker gedefinieerde cache</string>
     <string name="internal_cache_default_owner">Jij</string>
     <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
-    <string name="internal_goto_targets_description">Deze cache slaat je recente \'Ga naar\' doelen op</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_udc">Lange tik op de kaart</string>
     <string name="init_summary_longtap_udc">Lange tik op de kaart om een gebruiker gedefinieerde cache te maken</string>
+    <string name="goto_targets_list">Internal caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
     <string name="cc_hint_minutes">minuten</string>
     <string name="cc_hint_seconds">seconden</string>
-    <string name="cc_hint_fraction">fraction</string>
+    <string name="cc_hint_fraction">fractie</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Zoeken naar bestanden\nin</string>

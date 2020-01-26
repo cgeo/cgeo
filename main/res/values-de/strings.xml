@@ -969,9 +969,10 @@
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
-    <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \'Gehe zu\' Ziele</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_udc">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_udc">Langes Tippen auf Karte um einen benutzerdefinierten Cache anzulegen</string>
+    <string name="goto_targets_list">Internal caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Grad</string>
     <string name="cc_hint_minutes">Minuten</string>
@@ -1534,7 +1535,7 @@
     </plurals>
     <string name="command_copy_caches_progress">Kopiere Caches zu Liste %1s</string>
     <plurals name="command_copy_caches_result">
-        <item quantity="one">%d Cache kopiert</item>
+        <item quantity="one">Einen Cache kopiert</item>
         <item quantity="other">%d Caches kopiert</item>
     </plurals>
     <string name="command_delete_caches_progress">Lösche Caches</string>
@@ -1559,7 +1560,7 @@
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
-        <item quantity="one">%d Wegpunkt extrahiert</item>
+        <item quantity="one">Einen Wegpunkt extrahiert</item>
         <item quantity="other">%d Wegpunkte extrahiert</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com Koordinatenchecker im Browser verfügbar</string>

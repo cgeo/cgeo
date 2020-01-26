@@ -985,9 +985,10 @@
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
-    <string name="internal_goto_targets_description">Tato keška ukládá vaše nedávné cíle \"Přejít na\"</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_udc">Dlouhé klapnutí na mapu</string>
     <string name="init_summary_longtap_udc">Dlouhým klepnutím na mapu vytvořte uživatelem definovanou kešku</string>
+    <string name="goto_targets_list">Internal caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
     <string name="cc_hint_minutes">minuty</string>

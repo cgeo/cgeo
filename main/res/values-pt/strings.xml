@@ -427,10 +427,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="changelog_github">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
-    <string name="about_contributors_recent">Recent contributors</string>
+    <string name="about_contributors_recent">Colaboradores recentes</string>
     <string name="about_contributors_specialthanks">Agradecimentos especiais a</string>
     <string name="about_contributors_specialthanksdetails">· todos os contribuidores de tradução em <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· todos os geradores de questões\n· e todos os outros apoiantes.\n</string>
-    <string name="about_contributors_other">Other contributors</string>
+    <string name="about_contributors_other">Outros colaboradores</string>
     <string name="about_components">Componentes</string>
     <string name="contribution_code">programação</string>
     <string name="contribution_tester">testador</string>
@@ -628,7 +628,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
     <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
-    <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
+    <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, …) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar rasto</string>
     <string name="init_summary_maptrail">Mostra o rasto no mapa</string>
     <string name="init_trailcolor">Cor do rasto</string>
@@ -724,7 +724,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
     <string name="map_source_osm_mapnik">OSM: Mapa</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_combined">Combined (Offline)</string>
+    <string name="map_source_osm_offline_combined">Combinado (offline)</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
@@ -970,14 +970,15 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
     <string name="internal_cache_default_owner">Você</string>
     <string name="internal_goto_targets_title">Destinos \'Ir para\'</string>
-    <string name="internal_goto_targets_description">Esta cache armazena os seus destinos recentes em \'Ir para\'</string>
+    <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_udc">Toque longo no mapa</string>
     <string name="init_summary_longtap_udc">Toque longo no mapa para criar uma cache definida pelo utilizador</string>
+    <string name="goto_targets_list">Internal caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graus</string>
     <string name="cc_hint_minutes">minutos</string>
     <string name="cc_hint_seconds">segundos</string>
-    <string name="cc_hint_fraction">fraction</string>
+    <string name="cc_hint_fraction">parcial</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">A procurar ficheiros\nem</string>
@@ -1375,11 +1376,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_moving_target_no">Não é objecto em movimento</string>
     <string name="attribute_webcam_yes">Webcam</string>
     <string name="attribute_webcam_no">Sem webcam</string>
-    <string name="attribute_inside_yes">Dentro de locais fechados (grutas, edifícios, etc...)</string>
+    <string name="attribute_inside_yes">Dentro de locais fechados (grutas, edifícios, etc.)</string>
     <string name="attribute_inside_no">Não está em locais fechados</string>
     <string name="attribute_in_water_yes">Na água</string>
     <string name="attribute_in_water_no">Não está na água</string>
-    <string name="attribute_no_gps_yes">Sem GPS (caso das letterbox, uso de bússola, etc...)</string>
+    <string name="attribute_no_gps_yes">Sem GPS (caso das letterbox, uso de bússola, …)</string>
     <string name="attribute_no_gps_no">Com GPS</string>
     <string name="attribute_overnight_yes">Necessário pernoitar</string>
     <string name="attribute_overnight_no">Não é necessário pernoitar</string>
@@ -1429,7 +1430,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_specific_access_no">Disponível a qualquer hora</string>
     <string name="attribute_pedestrian_only_yes">Acessível apenas a pé</string>
     <string name="attribute_pedestrian_only_no">Não é apenas acessível a pé</string>
-    <string name="attribute_nature_cache_yes">Escondida no meio natural (florestas, montanhas, etc...)</string>
+    <string name="attribute_nature_cache_yes">Escondida no meio natural (florestas, montanhas, etc.)</string>
     <string name="attribute_nature_cache_no">Não está escondida no meio natural</string>
     <string name="attribute_byop_yes">Leve algo para escrever</string>
     <string name="attribute_byop_no">Não é necessário levar lápis</string>
@@ -1595,6 +1596,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="number_input_err_format">Formato de número inválido</string>
     <!-- text notification channel infos & proximity notification title -->
     <string name="notification_channel_name">notificações do c:geo</string>
-    <string name="notification_channel_description">notifications from c:geo geocaching app</string>
-    <string name="proximity_notification_title">c:geo proximity notification</string>
+    <string name="notification_channel_description">notificações da aplicação c:geo</string>
+    <string name="proximity_notification_title">notificação de proximidade</string>
 </resources>
