@@ -297,13 +297,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Leak Canary, memory leak detection
-    def leakCanaryVersion = '1.6.3'
+    def leakCanaryVersion = '2.1'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    nightlyImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    rcImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    legacyImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
-    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
     // Locus Maps integration
     implementation "com.asamm:locus-api-android:0.3.17"

@@ -22,8 +22,6 @@ import androidx.annotation.NonNull;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import com.squareup.leakcanary.LeakCanary;
-
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
@@ -50,7 +48,6 @@ public class CgeoApplication extends Application {
             fixUserManagerMemoryLeak();
         }
 
-        LeakCanary.install(this);
         showOverflowMenu();
 
         initApplicationLocale();
