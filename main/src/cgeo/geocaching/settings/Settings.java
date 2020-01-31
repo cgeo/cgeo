@@ -648,10 +648,6 @@ public class Settings {
                 GCConstants.DEFAULT_GC_DATE);
     }
 
-    public static boolean isExcludeMyCaches() {
-        return getBoolean(R.string.pref_excludemine, false);
-    }
-
     public static boolean useEnglish() {
         return getBoolean(R.string.pref_useenglish, false);
     }
@@ -664,8 +660,28 @@ public class Settings {
         return getBoolean(R.string.pref_showaddress, true);
     }
 
+    public static boolean isExcludeMyCaches() {
+        return getBoolean(R.string.pref_excludemine, false);
+    }
+
     public static boolean isExcludeDisabledCaches() {
         return getBoolean(R.string.pref_excludedisabled, false);
+    }
+
+    public static boolean isExcludeArchivedCaches() {
+        return getBoolean(R.string.pref_excludearchived, isExcludeDisabledCaches());
+    }
+
+    public static boolean isExcludeWpOriginal() {
+        return getBoolean(R.string.pref_excludeWpOriginal, false);
+    }
+
+    public static boolean isExcludeWpParking() {
+        return getBoolean(R.string.pref_excludeWpParking, false);
+    }
+
+    public static boolean isExcludeWpVisited() {
+        return getBoolean(R.string.pref_excludeWpVisited, false);
     }
 
     public static boolean isStoreLogImages() {
@@ -1320,6 +1336,22 @@ public class Settings {
 
     public static void setExcludeDisabled(final boolean exclude) {
         putBoolean(R.string.pref_excludedisabled, exclude);
+    }
+
+    public static void setExcludeArchived(final boolean exclude) {
+        putBoolean(R.string.pref_excludearchived, exclude);
+    }
+
+    public static void setExcludeWpOriginal(final boolean exclude) {
+        putBoolean(R.string.pref_excludeWpOriginal, exclude);
+    }
+
+    public static void setExcludeWpParking(final boolean exclude) {
+        putBoolean(R.string.pref_excludeWpParking, exclude);
+    }
+
+    public static void setExcludeWpVisited(final boolean exclude) {
+        putBoolean(R.string.pref_excludeWpVisited, exclude);
     }
 
     static void setLogin(final String username, final String password) {

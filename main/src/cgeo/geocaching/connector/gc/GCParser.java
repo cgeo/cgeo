@@ -166,8 +166,14 @@ public final class GCParser {
                 Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data", e);
             }
 
-            if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
-                // skip disabled and archived caches
+            if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
+                // skip disabled caches
+                excludedCaches++;
+                continue;
+            }
+
+            if (Settings.isExcludeArchivedCaches() && cache.isArchived()) {
+                // skip archived caches
                 excludedCaches++;
                 continue;
             }
@@ -897,7 +903,7 @@ public final class GCParser {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), cacheType);
+        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeArchivedCaches(), cacheType);
 
         GCLogin.getInstance().getLoginStatus(page);
 

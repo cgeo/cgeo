@@ -219,7 +219,7 @@ public class SearchResult implements Parcelable {
         this.totalCountGC = totalCountGC;
     }
 
-    public SearchResult filterSearchResults(final boolean excludeDisabled, final CacheType cacheType) {
+    public SearchResult filterSearchResults(final boolean excludeDisabled, final boolean excludeArchived, final CacheType cacheType) {
         final SearchResult result = new SearchResult(this);
         result.geocodes.clear();
         final List<Geocache> includedCaches = new ArrayList<>();
@@ -227,7 +227,7 @@ public class SearchResult implements Parcelable {
         int excluded = 0;
         for (final Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
-            final boolean excludeCache = (excludeDisabled && (cache.isDisabled() || cache.isArchived())) || !cacheType.contains(cache);
+            final boolean excludeCache = (excludeDisabled && cache.isDisabled()) || (excludeArchived && cache.isArchived()) || !cacheType.contains(cache);
             if (excludeCache) {
                 excluded++;
             } else {
