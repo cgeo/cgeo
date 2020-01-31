@@ -423,6 +423,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.onLowMemory();
     }
 
+    protected Geopoint getIntentCoords() {
+        if (mapOptions.coords != null) {
+            return mapOptions.coords;
+        } else
+        if (mapOptions.geocode != null) {
+            final Viewport bounds = DataStore.getBounds(mapOptions.geocode, false);
+            if (bounds != null) {
+                return bounds.center;
+            }
+        }
+        return null;
+    }
+
     protected Viewport getIntentViewport() {
         if (mapOptions.coords != null) {
             return new Viewport(mapOptions.coords);
@@ -452,7 +465,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         final Viewport viewport = getIntentViewport();
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(viewport != null ? viewport.center : null, mapOptions.geocode);
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(getIntentCoords(), mapOptions.geocode);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }
