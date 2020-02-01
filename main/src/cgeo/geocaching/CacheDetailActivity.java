@@ -663,6 +663,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
+        menu.findItem(R.id.menu_toggleWaypointsFromNote).setVisible(cache != null);
+        menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -709,6 +711,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_extract_waypoints:
                 final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
                 extractWaypoints(searchText, cache);
+                return true;
+            case R.id.menu_toggleWaypointsFromNote:
+                cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
+                item.setTitle(cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        return true;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            notifyDataSetChanged();
+                        }
+                    }
+                }.execute();
+
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);

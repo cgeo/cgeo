@@ -152,7 +152,8 @@ public class DataStore {
                     "cg_caches.inventorycoins,"      +   // 39
                     "cg_caches.inventorytags,"       +   // 40
                     "cg_caches.logPasswordRequired," +   // 41
-                    "cg_caches.watchlistCount";          // 42
+                    "cg_caches.watchlistCount,"      +   // 42
+                    "cg_caches.preventWaypointsFromNote";  // 43
 
     /** The list of fields needed for mapping. */
     private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state" };
@@ -165,7 +166,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 79;
+    private static final int dbVersion = 80;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -227,7 +228,8 @@ public class DataStore {
             + "coordsChanged INTEGER DEFAULT 0, "
             + "finalDefined INTEGER DEFAULT 0, "
             + "logPasswordRequired INTEGER DEFAULT 0,"
-            + "watchlistCount INTEGER DEFAULT -1"
+            + "watchlistCount INTEGER DEFAULT -1,"
+            + "preventWaypointsFromNote INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE " + dbTableLists + " ("
@@ -947,6 +949,14 @@ public class DataStore {
                         }
                     }
 
+                    if (oldVersion < 80) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN preventWaypointsFromNote INTEGER NOT NULL DEFAULT 0");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 80", e);
+                        }
+                    }
+
                 }
 
                 db.setTransactionSuccessful();
@@ -1428,6 +1438,7 @@ public class DataStore {
         values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
         values.put("logPasswordRequired", cache.isLogPasswordRequired() ? 1 : 0);
         values.put("watchlistCount", cache.getWatchlistCount());
+        values.put("preventWaypointsFromNote", cache.isPreventWaypointsFromNote() ? 1 : 0);
 
         init();
 
@@ -2086,6 +2097,7 @@ public class DataStore {
         cache.setFinalDefined(cursor.getInt(37) > 0);
         cache.setLogPasswordRequired(cursor.getInt(41) > 0);
         cache.setWatchlistCount(cursor.getInt(42));
+        cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
 
         Log.d("Loading " + cache.toString() + " from DB");
 

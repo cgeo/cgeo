@@ -170,6 +170,7 @@ public class Geocache implements IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
+    private boolean preventWaypointsFromNote = false;
     private LogEntry offlineLog = null;
     private Integer eventTimeMinutes = null;
 
@@ -1547,7 +1548,7 @@ public class Geocache implements IWaypoint {
      * Detect coordinates in the personal note and add them to user defined waypoints.
      */
     public boolean addWaypointsFromNote() {
-        return addWaypointsFromText(getPersonalNote(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note));
+        return addWaypointsFromText(getPersonalNote(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note), false);
     }
 
     /**
@@ -1557,12 +1558,14 @@ public class Geocache implements IWaypoint {
      * @param updateDb if true the added waypoints are stored in DB right away
      * @param namePrefix prefix for waypoint names
      */
-    public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix) {
+    public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
         boolean changed = false;
-        for (final Waypoint waypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
-            if (!hasIdenticalWaypoint(waypoint.getCoords())) {
-                addOrChangeWaypoint(waypoint, updateDb);
-                changed = true;
+        if (forceExtraction || !preventWaypointsFromNote) {
+            for (final Waypoint waypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
+                if (!hasIdenticalWaypoint(waypoint.getCoords())) {
+                    addOrChangeWaypoint(waypoint, updateDb);
+                    changed = true;
+                }
             }
         }
         return changed;
@@ -1905,6 +1908,14 @@ public class Geocache implements IWaypoint {
 
     public void setLogPasswordRequired(final boolean required) {
         logPasswordRequired = required;
+    }
+
+    public boolean isPreventWaypointsFromNote() {
+        return preventWaypointsFromNote;
+    }
+
+    public void setPreventWaypointsFromNote(final boolean preventWaypointsFromNote) {
+        this.preventWaypointsFromNote = preventWaypointsFromNote;
     }
 
     public String getWaypointGpxId(final String prefix) {
