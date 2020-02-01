@@ -11,6 +11,7 @@ import cgeo.geocaching.storage.DataStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -374,6 +375,32 @@ public class Waypoint implements IWaypoint {
         }
 
         throw new IllegalStateException("too many waypoints, unable to assign unique prefix");
+    }
+
+    /**
+     * Suffix the waypoint type with a running number to get a default name.
+     *
+     * @param type
+     *            type to create a new default name for
+     *
+     */
+    public static String getDefaultWaypointName(final Geocache cache, final WaypointType type) {
+        final ArrayList<String> wpNames = new ArrayList<>();
+        for (final Waypoint waypoint : cache.getWaypoints()) {
+            wpNames.add(waypoint.getName());
+        }
+        // try final and trailhead without index
+        if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n())) {
+            return type.getL10n();
+        }
+        // for other types add an index by default, which is highest found index + 1
+        int max = 0;
+        for (int i = 0; i < 30; i++) {
+            if (wpNames.contains(type.getL10n() + " " + i)) {
+                max = i;
+            }
+        }
+        return type.getL10n() + " " + (max + 1);
     }
 
 }

@@ -49,6 +49,7 @@ import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -1753,15 +1754,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, parentView, false);
             view.setClickable(true);
-            final View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_header, view, false);
-            view.addHeaderView(addWaypointButton);
-            addWaypointButton.setOnClickListener(v -> {
+            final View header = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_header, view, false);
+            view.addHeaderView(header);
+            final Button addWaypoint = header.findViewById(R.id.add_waypoint);
+            addWaypoint.setOnClickListener(v -> {
                 ensureSaved();
                 EditWaypointActivity.startActivityAddWaypoint(CacheDetailActivity.this, cache);
                 refreshOnResume = true;
             });
 
-            view.setAdapter(new ArrayAdapter<Waypoint>(CacheDetailActivity.this, R.layout.waypoint_item, sortedWaypoints) {
+            final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(CacheDetailActivity.this, R.layout.waypoint_item, sortedWaypoints) {
                 @Override
                 public View getView(final int position, final View convertView, final ViewGroup parent) {
                     View rowView = convertView;
@@ -1780,6 +1782,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     fillViewHolder(rowView, holder, waypoint);
                     return rowView;
                 }
+            };
+            view.setAdapter(adapter);
+
+            final Button addWaypointCurrent = header.findViewById(R.id.add_waypoint_currentlocation);
+            addWaypointCurrent.setOnClickListener(v -> {
+                ensureSaved();
+                final Waypoint waypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                waypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                waypoint.setGeocode(cache.getGeocode());
+                cache.addOrChangeWaypoint(waypoint, true);
+                // update listview
+                sortedWaypoints.add(waypoint);
+                Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
+                adapter.notifyDataSetChanged();
             });
 
             return view;
