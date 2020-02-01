@@ -31,6 +31,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
+        //noinspection OldTargetApi
         targetSdkVersion 28
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
@@ -142,11 +143,6 @@ android {
             manifest.srcFile '../tests/AndroidManifest.xml'
             java {
                 srcDir '../tests/src-android'
-
-                // TODO: espresso causes some dependency conflicts, therefore disable espresso tests temporarily
-                exclude '**/*EspressoTest.java'
-                exclude '**/*LogTrackableActivityTest.java'
-                exclude '**/activity/waypoint/*Waypoint*Test.java'
             }
             resources.srcDirs = ['../tests/src']
             res.srcDirs = ['../tests/res']
@@ -272,7 +268,7 @@ dependencies {
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
     // ButterKnife view injection, https://github.com/JakeWharton/butterknife
-    def butterKnifeVersion = '10.2.0'
+    def butterKnifeVersion = '10.2.1'
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
@@ -284,31 +280,30 @@ dependencies {
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.50'
 
     // Jackson XML processing
-    def jacksonVersion = '2.9.10'
-    def jacksonVersionPatch = '2.9.10.1'
+    def jacksonVersion = '2.10.2'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
-    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersionPatch"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
 
     // Jsoup HTML parsing
     implementation 'org.jsoup:jsoup:1.12.1'
 
     // Junit only needed for local unit tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
 
     // Leak Canary, memory leak detection
     def leakCanaryVersion = '2.1'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
 
     // Locus Maps integration
+    //noinspection GradleDependency
     implementation "com.asamm:locus-api-android:0.3.17"
 
     // Mapsforge old version
     implementation files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
-    implementation 'com.caverock:androidsvg:1.4'
 
     // Mapsforge new version
-    def mapsforgeVersion = '0.11.0'
+    def mapsforgeVersion = '0.13.0'
     implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
     implementation "org.mapsforge:mapsforge-map:$mapsforgeVersion"
     implementation "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
@@ -318,18 +313,22 @@ dependencies {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
 
+    // used by mapsforge old/new
+    implementation 'com.caverock:androidsvg:1.4'
+
     // Maps.ME integration
     implementation project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.12.0'
+    implementation 'com.drewnoakes:metadata-extractor:2.13.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
-    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    //noinspection GradleDependency
+    implementation 'com.squareup.okhttp3:okhttp:3.12.8'
 
     // Play Services
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
@@ -337,10 +336,8 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.14'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.17'
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-
-    // Support Libraries. All com.android.support.* libraries must use the same version
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -370,14 +367,12 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
 
     // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
-    // this is a fork of the original viewpager library which still works with android level 9. we can use 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar' when switching to min sdk 11.
+    //             url 'https://dl.bintray.com/alexeydanilov/maven'
+    // this is a fork of the original viewpager library
     implementation 'com.viewpagerindicator:viewpagerindicator:2.4.3'
 
     // Zxing barcode reader integration
     implementation 'com.google.zxing:android-integration:3.3.0'
-
-    // Espresso TODO: disabled because of causing proguard errors en masse (due to including hamcrest and what else as own dependencies)
-    // androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
 }
 
 /*

@@ -17,13 +17,8 @@
     <!-- we cannot use App Indexing with the GC website -->
     <issue id="GoogleAppIndexingWarning" severity="ignore" />
 
-    <!-- many plain Java libraries cannot be upgraded further -->
-    <issue id="GradleDependency" severity="ignore" />
-
-    <issue id="GradleOverrides" severity="ignore" />
     <issue id="IconDensities" severity="ignore" />
     <issue id="ImpliedQuantity" severity="ignore" />
-    <issue id="InvalidPackage" severity="ignore" />
 
     <!-- do not care about incomplete translations -->
     <issue id="MissingQuantity">
