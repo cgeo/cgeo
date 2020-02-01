@@ -139,4 +139,10 @@
         android:title="@string/cache_personal_note"
         android:visible="false">
     </item>
+    <item
+        android:id="@+id/menu_toggleWaypointsFromNote"
+        android:title="@string/cache_menu_preventWaypointsFromNote"
+        app:showAsAction="ifRoom"
+        android:visible="true">
+    </item>
 </menu>
