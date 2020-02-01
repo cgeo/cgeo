@@ -888,6 +888,7 @@
     </plurals>
 
     <string name="cache_waypoints_add">Add Waypoint</string>
+    <string name="cache_waypoints_add_currentLocation">Add current location</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">No hint available</string>
     <string name="cache_logs">Logbook</string>

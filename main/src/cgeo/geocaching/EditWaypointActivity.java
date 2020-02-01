@@ -29,6 +29,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
+import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -325,11 +326,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypointTypeSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View v, final int pos, final long id) {
-                final String oldDefaultName = waypointTypeSelectorPosition >= 0 ? getDefaultWaypointName(POSSIBLE_WAYPOINT_TYPES.get(waypointTypeSelectorPosition)) : StringUtils.EMPTY;
+                final String oldDefaultName = waypointTypeSelectorPosition >= 0 ? getDefaultWaypointName(cache, POSSIBLE_WAYPOINT_TYPES.get(waypointTypeSelectorPosition)) : StringUtils.EMPTY;
                 waypointTypeSelectorPosition = pos;
                 final String currentName = waypointName.getText().toString().trim();
                 if (StringUtils.isBlank(currentName) || oldDefaultName.equals(currentName)) {
-                    waypointName.setText(getDefaultWaypointName(getSelectedWaypointType()));
+                    waypointName.setText(getDefaultWaypointName(cache, getSelectedWaypointType()));
                 }
             }
 
@@ -498,32 +499,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         outState.putString(CALC_STATE_JSON, calcStateJson);
     }
 
-    /**
-     * Suffix the waypoint type with a running number to get a default name.
-     *
-     * @param type
-     *            type to create a new default name for
-     *
-     */
-    private String getDefaultWaypointName(final WaypointType type) {
-        final ArrayList<String> wpNames = new ArrayList<>();
-        for (final Waypoint waypoint : cache.getWaypoints()) {
-            wpNames.add(waypoint.getName());
-        }
-        // try final and trailhead without index
-        if ((type == WaypointType.FINAL || type == WaypointType.TRAILHEAD) && !wpNames.contains(type.getL10n())) {
-            return type.getL10n();
-        }
-        // for other types add an index by default, which is highest found index + 1
-        int max = 0;
-        for (int i = 0; i < 30; i++) {
-            if (wpNames.contains(type.getL10n() + " " + i)) {
-                max = i;
-            }
-        }
-        return type.getL10n() + " " + (max + 1);
-    }
-
     private WaypointType getSelectedWaypointType() {
         final int selectedTypeIndex = waypointTypeSelector.getSelectedItemPosition();
         return selectedTypeIndex >= 0 ? POSSIBLE_WAYPOINT_TYPES.get(selectedTypeIndex) : waypoint.getWaypointType();
@@ -591,7 +566,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         currentState.coords = coords;
 
         final String givenName = waypointName.getText().toString().trim();
-        currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(getSelectedWaypointType()));
+        currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(cache, getSelectedWaypointType()));
         if (own) {
             currentState.noteText = "";
         } else { // keep original note
