@@ -261,6 +261,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
         final boolean satellite = GoogleMapProvider.isSatelliteSource(Settings.getMapSource());
         googleMap.setMapType(satellite ? GoogleMap.MAP_TYPE_HYBRID : GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setIndoorEnabled(!satellite);
     }
 
     @Override
