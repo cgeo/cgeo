@@ -45,6 +45,23 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     // pattern for internal caches id
     @NonNull private static final Pattern PATTERN_GEOCODE = Pattern.compile("(" + PREFIX + ")[0-9A-Z]{1,4}", Pattern.CASE_INSENSITIVE);
 
+    private InternalConnector() {
+        // singleton
+    }
+
+    /**
+     * initialization on demand holder pattern
+     */
+    private static class Holder {
+        @NonNull private static final InternalConnector INSTANCE = new InternalConnector();
+    }
+
+    @NonNull
+    public static InternalConnector getInstance() {
+        return Holder.INSTANCE;
+    }
+
+
     public static String geocodeFromId (final long id) {
         return PREFIX + id;
     }
