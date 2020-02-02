@@ -133,6 +133,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         geocodes.add("GA5678");
         geocodes.add("TP5678");
 
+        geocodes.add("ZZ1");
         return geocodes;
     }
 

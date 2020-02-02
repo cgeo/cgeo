@@ -76,7 +76,7 @@ public final class ConnectorFactory {
             new TerraCachingConnector(),
             new WaymarkingConnector(),
             SuConnector.getInstance(),
-            new InternalConnector(),
+            InternalConnector.getInstance(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     ));
 
