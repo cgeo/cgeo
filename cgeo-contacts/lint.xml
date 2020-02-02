@@ -6,9 +6,6 @@
     <!-- we cannot use App Indexing with the GC website -->
     <issue id="GoogleAppIndexingWarning" severity="ignore" />
 
-    <!-- many plain Java libraries cannot be upgraded further -->
-    <issue id="GradleDependency" severity="ignore" />
-
     <issue id="IconMissingDensityFolder" severity="ignore" />
     <issue id="MissingTranslation" severity="ignore" />
 </lint>
