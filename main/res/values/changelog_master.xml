@@ -3,9 +3,11 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Added button "Add current location" to create standard waypoint\n
     · New: Added option to hide archived caches\n
     · New: Added map options to hide certain waypoint types\n
     · Change: Moved hide options to separate map submenu\n
     · Change: Separated impacts from \"hide disabled\" and \"hide archived\" options\n
+    · Change: Switch off indoor mode for Google Maps in satellite mode\n
   </string>
 </resources>
