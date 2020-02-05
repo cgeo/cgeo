@@ -860,6 +860,7 @@
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">Allow waypoints from note</string>
     <string name="cache_personal_note_edit">Edit</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Prevent waypoints extraction</string>
     <string name="cache_personal_note_limit">Personal note limit</string>
     <string name="cache_personal_note_truncation">This personal note will be truncated after %d characters by Geocaching.com.</string>
     <string name="cache_personal_note_upload">Upload</string>

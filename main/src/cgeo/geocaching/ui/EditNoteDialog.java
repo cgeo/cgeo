@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -21,11 +22,13 @@ import org.apache.commons.lang3.StringUtils;
 public class EditNoteDialog extends DialogFragment {
 
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
+    public static final String ARGUMENT_INITIAL_PREVENT = "initialPrevent";
 
     private EditText mEditText;
+    private CheckBox mPreventCheckbox;
 
     public interface EditNoteDialogListener {
-        void onFinishEditNoteDialog(String inputText);
+        void onFinishEditNoteDialog(String inputText, boolean preventWaypointsFromNote);
     }
 
     /**
@@ -34,11 +37,12 @@ public class EditNoteDialog extends DialogFragment {
      *
      * @param initialNote the initial note to insert in the edit dialog
      */
-    public static EditNoteDialog newInstance(final String initialNote) {
+    public static EditNoteDialog newInstance(final String initialNote, final boolean preventWaypointsFromNote) {
         final EditNoteDialog dialog = new EditNoteDialog();
 
         final Bundle arguments = new Bundle();
         arguments.putString(ARGUMENT_INITIAL_NOTE, initialNote);
+        arguments.putBoolean(ARGUMENT_INITIAL_PREVENT, preventWaypointsFromNote);
         dialog.setArguments(arguments);
 
         return dialog;
@@ -61,6 +65,9 @@ public class EditNoteDialog extends DialogFragment {
             Dialogs.moveCursorToEnd(mEditText);
             getArguments().remove(ARGUMENT_INITIAL_NOTE);
         }
+        mPreventCheckbox = view.findViewById(R.id.preventWaypointsFromNote);
+        final boolean preventWaypointsFromNote = getArguments().getBoolean(ARGUMENT_INITIAL_PREVENT);
+        mPreventCheckbox.setChecked(preventWaypointsFromNote);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setView(view);
@@ -79,7 +86,7 @@ public class EditNoteDialog extends DialogFragment {
         done.setOnClickListener(view12 -> {
             // trim note to avoid unnecessary uploads for whitespace only changes
             final String personalNote = StringUtils.trim(mEditText.getText().toString());
-            ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote);
+            ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(personalNote, mPreventCheckbox.isChecked());
             dialog.dismiss();
         });
         done.setVisibility(View.VISIBLE);

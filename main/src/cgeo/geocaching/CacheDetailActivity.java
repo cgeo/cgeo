@@ -201,6 +201,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private CharSequence clickedItemText = null;
 
+    private MenuItem menuItemToggleWaypointsFromNote = null;
+
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
      */
@@ -652,6 +654,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         return true;
     }
 
+    private void setMenuPreventWaypointsFromNote(final boolean preventWaypointsFromNote) {
+        if (null != menuItemToggleWaypointsFromNote) {
+            menuItemToggleWaypointsFromNote.setTitle(preventWaypointsFromNote ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
+        }
+    }
+
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
@@ -663,7 +671,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
-        menu.findItem(R.id.menu_toggleWaypointsFromNote).setVisible(cache != null);
+        menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
+        menuItemToggleWaypointsFromNote.setVisible(cache != null);
+        setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
         menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
@@ -714,7 +724,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_toggleWaypointsFromNote:
                 cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
-                item.setTitle(cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
+                setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
                 new AsyncTask<Void, Void, Boolean>() {
                     @Override
                     protected Boolean doInBackground(final Void... params) {
@@ -2419,19 +2429,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         final FragmentManager fm = activity.getSupportFragmentManager();
-        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
+        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote());
         dialog.show(fm, "fragment_edit_note");
     }
 
     @Override
-    public void onFinishEditNoteDialog(final String note) {
+    public void onFinishEditNoteDialog(final String note, final boolean preventWaypointsFromNote) {
         cache.setPersonalNote(note);
+        cache.setPreventWaypointsFromNote(preventWaypointsFromNote);
         if (cache.addWaypointsFromNote()) {
             final PageViewCreator wpViewCreator = getViewCreator(Page.WAYPOINTS);
             if (wpViewCreator != null) {
                 wpViewCreator.notifyDataSetChanged();
             }
         }
+        setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
 
         final TextView personalNoteView = findViewById(R.id.personalnote);
         if (personalNoteView != null) {
