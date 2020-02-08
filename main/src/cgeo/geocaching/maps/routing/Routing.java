@@ -122,6 +122,36 @@ public final class Routing {
         return ensureTrack(lastRoutingPoints, start, destination);
     }
 
+    /**
+     * Return a valid track (with at least two points, including the start and destination).
+     * no caching
+     *
+     * @param start the starting point
+     * @param destination the destination point
+     * @return a track with at least two points including the start and destination points
+     */
+    @NonNull
+    public static Geopoint[] getTrackNoCaching(final Geopoint start, final Geopoint destination) {
+        if (brouter == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
+            return defaultTrack(start, destination);
+        }
+
+        // Disable routing for huge distances
+        final int maxThresholdKm = Settings.getBrouterThreshold();
+        final float targetDistance = start.distanceTo(destination);
+        if (targetDistance > maxThresholdKm) {
+            return defaultTrack(start, destination);
+        }
+
+        // disable routing when near the target
+        if (targetDistance < MIN_ROUTING_DISTANCE_KILOMETERS) {
+            return defaultTrack(start, destination);
+        }
+
+        // now calculate a new route
+        return ensureTrack(calculateRouting(start, destination), start, destination);
+    }
+
     @NonNull
     private static Geopoint[] ensureTrack(@Nullable final Geopoint[] routingPoints, final Geopoint start, final Geopoint destination) {
         return routingPoints != null ? routingPoints : defaultTrack(start, destination);
@@ -170,7 +200,9 @@ public final class Routing {
             });
 
             // artificial straight line from track to target
-            result.add(destination);
+            if (destination != null) {
+                result.add(destination);
+            }
 
             return result.toArray(new Geopoint[result.size()]);
 

@@ -35,7 +35,9 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
+import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -122,6 +124,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private HistoryLayer historyLayer;
     private PositionLayer positionLayer;
     private NavigationLayer navigationLayer;
+    private RouteLayer routeLayer;
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
 
@@ -151,12 +154,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private CheckBox myLocSwitch;
     private MapOptions mapOptions;
     private TargetView targetView;
+    private Route route;
 
     private static boolean followMyLocation = true;
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
+    private static final String BUNDLE_ROUTE = "route";
 
     // Handler messages
     // DisplayHandler
@@ -167,6 +172,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     // LoadDetailsHandler
     public static final int UPDATE_PROGRESS = 0;
     public static final int FINISHED_LOADING_DETAILS = 1;
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -194,6 +200,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
+            route = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
@@ -744,6 +751,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Log.d("NewMap: onResume");
 
         resumeTileLayer();
+
+        if (routeLayer != null && this.route != null) {
+            this.route.updateRoute(routeLayer);
+        }
     }
 
     @Override
@@ -761,6 +772,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         // History Layer
         this.historyLayer = new HistoryLayer(trailHistory);
         this.mapView.getLayerManager().getLayers().add(this.historyLayer);
+
+        // RouteLayer
+        this.routeLayer = new RouteLayer(realRouteDistance -> {
+            if (null != this.distanceView) {
+                this.distanceView.setRouteDistance(realRouteDistance);
+            }
+        });
+        this.mapView.getLayerManager().getLayers().add(this.routeLayer);
 
         // NavigationLayer
         Geopoint navTarget = lastNavTarget;
@@ -805,7 +824,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.mapView.getLayerManager().getLayers().add(positionLayer);
 
         //Distance view
-        this.distanceView = new DistanceView(navTarget, (TextView) findViewById(R.id.distance1info), (TextView) findViewById(R.id.distance1), (TextView) findViewById(R.id.distance2info), (TextView) findViewById(R.id.distance2), Settings.isBrouterShowBothDistances());
+        this.distanceView = new DistanceView(navTarget, (TextView) findViewById(R.id.distance1info), (TextView) findViewById(R.id.distance1), (TextView) findViewById(R.id.distance2info), (TextView) findViewById(R.id.distance2), Settings.isBrouterShowBothDistances(), (TextView) findViewById(R.id.routeDistance));
 
         //Target view
         this.targetView = new TargetView((TextView) findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
@@ -856,6 +875,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.positionLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.navigationLayer);
         this.navigationLayer = null;
+        this.mapView.getLayerManager().getLayers().remove(this.routeLayer);
+        this.routeLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
         this.historyLayer = null;
 
@@ -933,6 +954,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
+        }
+        if (route != null) {
+            outState.putParcelable(BUNDLE_ROUTE, route);
         }
     }
 
@@ -1312,6 +1336,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                             map.historyLayer.setCoordinates(currentLocation);
                             map.navigationLayer.setCoordinates(currentLocation);
                             map.distanceView.setCoordinates(currentLocation);
+                            map.distanceView.showRouteDistance();
                             map.positionLayer.setCoordinates(currentLocation);
                             map.positionLayer.setHeading(currentHeading);
                             map.positionLayer.requestRedraw();
@@ -1383,13 +1408,17 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
     }
 
-    public void showSelection(@NonNull final List<GeoitemRef> items) {
+    public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
         if (items.isEmpty()) {
             return;
         }
 
         if (items.size() == 1) {
-            showPopup(items.get(0));
+            if (longPressMode) {
+                toggleRouteItem(items.get(0));
+            } else {
+                showPopup(items.get(0));
+            }
             return;
         }
         try {
@@ -1428,7 +1457,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             final AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle(res.getString(R.string.map_select_multiple_items))
-                    .setAdapter(adapter, new SelectionClickListener(sorted))
+                    .setAdapter(adapter, new SelectionClickListener(sorted, longPressMode))
                     .create();
             dialog.setCanceledOnTouchOutside(true);
             dialog.show();
@@ -1442,16 +1471,22 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         @NonNull
         private final List<GeoitemRef> items;
+        private final boolean longPressMode;
 
-        SelectionClickListener(@NonNull final List<GeoitemRef> items) {
+        SelectionClickListener(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
             this.items = items;
+            this.longPressMode = longPressMode;
         }
 
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             if (which >= 0 && which < items.size()) {
                 final GeoitemRef item = items.get(which);
-                showPopup(item);
+                if (longPressMode) {
+                    toggleRouteItem(item);
+                } else {
+                    showPopup(item);
+                }
             }
         }
 
@@ -1481,6 +1516,17 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         } catch (final NotFoundException e) {
             Log.e("NewMap.showPopup", e);
         }
+    }
+
+    private void toggleRouteItem(final GeoitemRef item) {
+        if (item == null || StringUtils.isEmpty(item.getGeocode())) {
+            return;
+        }
+        if (route == null) {
+            route = new Route();
+        }
+        route.toggleItem(this, item, routeLayer);
+        distanceView.showRouteDistance();
     }
 
     @Nullable

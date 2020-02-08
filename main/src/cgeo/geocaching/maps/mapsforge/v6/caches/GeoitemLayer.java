@@ -84,10 +84,20 @@ public class GeoitemLayer extends Marker {
 
     @Override
     public boolean onTap(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
+        tapHandler.setMode(false);
         if (isHit(layerXY, tapXY)) {
             tapHandler.setHit(item);
         }
         return super.onTap(tapLatLong, layerXY, tapXY);
+    }
+
+    @Override
+    public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
+        tapHandler.setMode(true);
+        if (isHit(layerXY, tapXY)) {
+            tapHandler.setHit(item);
+        }
+        return super.onLongPress(tapLatLong, layerXY, tapXY);
     }
 
     private boolean isHit(final Point layerXY, final Point tapXY) {
