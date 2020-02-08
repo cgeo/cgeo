@@ -15,6 +15,7 @@ public class DistanceView {
     private Geopoint destinationCoords;
     private float realDistance = 0.0f;
     private boolean showBothDistances = false;
+    private float routeDistance = 0.0f;
 
     private static final String STRAIGHT_LINE_SYMBOL = Character.toString((char) 0x007C);
     private static final String WAVY_LINE_SYMBOL = Character.toString((char) 0x2307);
@@ -23,13 +24,15 @@ public class DistanceView {
     @BindView(R.id.distance1) protected TextView distance1View;
     @BindView(R.id.distance2info) protected TextView distance2InfoView;
     @BindView(R.id.distance2) protected TextView distance2View;
+    @BindView(R.id.routeDistance) protected TextView routeDistanceView;
 
-    public DistanceView(final Geopoint destinationCoords, final TextView distance1InfoView, final TextView distance1View, final TextView distance2InfoView, final TextView distance2View, final boolean showBothDistances) {
+    public DistanceView(final Geopoint destinationCoords, final TextView distance1InfoView, final TextView distance1View, final TextView distance2InfoView, final TextView distance2View, final boolean showBothDistances, final TextView routeDistanceView) {
         this.distance1InfoView = distance1InfoView;
         this.distance1View = distance1View;
         this.distance2InfoView = distance2InfoView;
         this.distance2View = distance2View;
         this.showBothDistances = showBothDistances;
+        this.routeDistanceView = routeDistanceView;
 
         setDestination(destinationCoords);
     }
@@ -63,6 +66,18 @@ public class DistanceView {
             distance2View.setText(Units.getDistanceFromKilometers(realDistance));
         } else {
             distance1View.setText(Units.getDistanceFromKilometers(realDistance != 0.0f && distance != realDistance ? realDistance : distance));
+        }
+    }
+
+
+    public void setRouteDistance(final float routeDistance) {
+        this.routeDistance = routeDistance;
+    }
+
+    public void showRouteDistance() {
+        routeDistanceView.setVisibility(routeDistance != 0.0f ? View.VISIBLE : View.GONE);
+        if (routeDistance != 0.0f) {
+            routeDistanceView.setText(Units.getDistanceFromKilometers(routeDistance));
         }
     }
 }

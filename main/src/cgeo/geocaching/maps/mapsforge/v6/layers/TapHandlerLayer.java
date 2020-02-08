@@ -33,6 +33,7 @@ public class TapHandlerLayer extends Layer {
     public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
 
         tapHandler.onLongPress(tapLatLong);
+        tapHandler.finished();
 
         return true;
     }
