@@ -860,6 +860,10 @@ public class Settings {
                         getInt(R.string.pref_lastmaplon, 0) / 1e6));
     }
 
+    public static boolean getZoomIncludingWaypoints() {
+        return getBoolean(R.string.pref_zoomincludingwaypoints, false);
+    }
+
     public static void setMapCenter(final GeoPointImpl mapViewCenter) {
         if (mapViewCenter == null) {
             return;
