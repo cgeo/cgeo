@@ -441,7 +441,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return new Viewport(mapOptions.coords);
         } else
         if (mapOptions.geocode != null) {
-            return DataStore.getBounds(mapOptions.geocode, true);
+            return DataStore.getBounds(mapOptions.geocode, Settings.getZoomIncludingWaypoints());
         }
         return null;
     }

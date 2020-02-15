@@ -589,6 +589,8 @@
     <string name="init_summary_exclude">Exclude caches you own or have found</string>
     <string name="init_showwaypoints">Show Waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
+    <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
+    <string name="init_zoomincludingwaypoints_description">If mapping a single cache: Should zoom be adjusted to include all its waypoints?</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>

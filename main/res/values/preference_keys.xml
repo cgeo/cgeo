@@ -82,6 +82,7 @@
     <string translatable="false" name="pref_map_autorotation_disabled">map_autorotation_disabled</string>
     <string translatable="false" name="pref_renderthemepath">renderthemepath</string>
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
+    <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
     <string translatable="false" name="pref_brouterShowBothDistances">pref_brouterShowBothDistances</string>
     <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
