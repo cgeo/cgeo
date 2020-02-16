@@ -35,7 +35,9 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         final Set<Geocache> baseCaches = DataStore.loadCaches(baseGeoCodes, LoadFlags.LOAD_WAYPOINTS);
 
         for (final Geocache cache : baseCaches) {
-            waypoints.addAll(cache.getWaypoints());
+            final Set<Waypoint> filteredWaypoints = new HashSet<>(cache.getWaypoints());
+            MapUtils.filter(filteredWaypoints, true);
+            waypoints.addAll(filteredWaypoints);
         }
 
         if (showStored) {
@@ -45,7 +47,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             final CacheType type = Settings.getCacheType();
 
             final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeDisabled, excludeArchived, type);
-            MapUtils.filter(waypointsInViewport);
+            MapUtils.filter(waypointsInViewport, true);
             waypoints.addAll(waypointsInViewport);
         }
 

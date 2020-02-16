@@ -19,8 +19,8 @@ public class MapUtils {
     }
 
     // filter waypoints from owned caches or certain wp types if requested.
-    public static void filter(final Set<Waypoint> waypoints) {
-        final boolean excludeMine = Settings.isExcludeMyCaches();
+    public static void filter(final Set<Waypoint> waypoints, final boolean checkOwnership) {
+        final boolean excludeMine = checkOwnership && Settings.isExcludeMyCaches();
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
         final boolean excludeWpVisited = Settings.isExcludeWpVisited();

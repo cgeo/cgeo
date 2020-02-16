@@ -1306,12 +1306,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     //All visible waypoints
                     final CacheType type = Settings.getCacheType();
                     final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, excludeArchived, type);
-                    MapUtils.filter(waypointsInViewport);
+                    MapUtils.filter(waypointsInViewport, true);
                     waypoints.addAll(waypointsInViewport);
                 } else {
-                    //All waypoints from the viewed caches
+                    //All visible waypoints from the viewed caches
                     for (final Geocache c : caches.getAsList()) {
-                        waypoints.addAll(c.getWaypoints());
+                        final Set<Waypoint> filteredWaypoints = new HashSet<>(c.getWaypoints());
+                        MapUtils.filter(filteredWaypoints, false);
+                        waypoints.addAll(filteredWaypoints);
                     }
                 }
             }

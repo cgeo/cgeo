@@ -219,6 +219,12 @@ public class CachesBundle {
         if (liveOverlay != null) {
             liveOverlay.invalidate();
         }
+        if (wpOverlay != null) {
+            wpOverlay.invalidate();
+        }
+        if (baseOverlay != null) {
+            baseOverlay.invalidate();
+        }
     }
 
     public void invalidate(final Collection<String> geocodes) {
