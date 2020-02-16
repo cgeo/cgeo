@@ -51,6 +51,8 @@ public final class SystemInformation {
         } else {
             usedDirectionSensor = "magnetometer & accelerometer";
         }
+        final String hideCaches = (Settings.isExcludeMyCaches() ? "own/found " : "") + (Settings.isExcludeDisabledCaches() ? "disabled " : "") + (Settings.isExcludeArchivedCaches() ? "archived" : "");
+        final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("--- System information ---")
                 .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
                 .append("\nAndroid version: ").append(VERSION.RELEASE)
@@ -64,7 +66,8 @@ public final class SystemInformation {
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
                 .append("\nMagnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
                 .append("\nDirection sensor used: ").append(usedDirectionSensor)
-                .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
+                .append("\nHide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
+                .append("\nHide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
                 .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
                 .append("\nSystem language: ").append(Locale.getDefault());
