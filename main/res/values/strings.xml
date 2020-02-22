@@ -475,6 +475,7 @@
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
     <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
+    <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_gpx">GPX</string>
 
