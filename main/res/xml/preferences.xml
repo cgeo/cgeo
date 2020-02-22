@@ -477,6 +477,11 @@
             android:title="@string/init_skin" />
         <CheckBoxPreference
             android:defaultValue="true"
+            android:key="@string/pref_transparentBackground"
+            android:summary="@string/init_summary_transparentBackground"
+            android:title="@string/init_transparentBackground" />
+        <CheckBoxPreference
+            android:defaultValue="true"
             android:key="@string/pref_showaddress"
             android:summary="@string/init_summary_address"
             android:title="@string/init_address" />

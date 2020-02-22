@@ -580,7 +580,9 @@
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
     <string name="init_skin">Light Skin</string>
-    <string name="init_summary_skin">Use light skin (Restart needed)</string>
+    <string name="init_summary_skin">Use light skin (restart required)</string>
+    <string name="init_transparentBackground">Transparent background</string>
+    <string name="init_summary_transparentBackground">Use transparent background (restart required)</string>
     <string name="init_address">Show Address</string>
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_useenglish">Use English</string>

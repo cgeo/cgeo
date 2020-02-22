@@ -262,6 +262,10 @@ public class MainActivity extends AbstractActionBarActivity {
         }
 
         setContentView(R.layout.main_activity);
+        if (!Settings.isTransparentBackground()) {
+            final View mainscreen = findViewById(R.id.mainscreen);
+            mainscreen.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.background_light_notice : R.color.background_dark_notice));
+        }
         ButterKnife.bind(this);
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
