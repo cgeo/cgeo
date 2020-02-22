@@ -980,6 +980,10 @@ public class Settings {
         return getBoolean(R.string.pref_skin, false);
     }
 
+    public static boolean isTransparentBackground() {
+        return getBoolean(R.string.pref_transparentBackground, true);
+    }
+
     @NonNull
     public static String getTwitterKeyConsumerPublic() {
         return TWITTER_KEY_CONSUMER_PUBLIC;
