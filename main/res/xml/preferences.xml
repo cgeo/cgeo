@@ -577,7 +577,7 @@
                 android:title="@string/settings_title_map_autorotation_disabled" />
         </PreferenceCategory>
 
-        <PreferenceCategory android:title="@string/settings_title_map_content"
+        <PreferenceCategory android:title="@string/settings_title_waypoints"
             android:layout="@layout/preference_category" >
             <Preference
                 android:selectable="false"
@@ -591,6 +591,9 @@
                 android:key="@string/pref_zoomincludingwaypoints"
                 android:summary="@string/init_zoomincludingwaypoints_description"
                 android:title="@string/init_zoomincludingwaypoints" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/settings_title_map_content"
+            android:layout="@layout/preference_category" >
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="@string/pref_map_direction"
