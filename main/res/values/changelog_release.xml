@@ -10,11 +10,11 @@
     · New: Option to disable Google Maps controls for manual screen rotation\n
     · New: Support cache type \"Locationless (Reverse) Geocache\" (no logging support yet)\n
     · New: Show current elevation in compass\n
+    · New: Initial zoom on cache map to cover its waypoints (optional)\n
     · Change: Use waypoints of a user defined cache in \"Go to\" menu (instead of the old \"Go to\" history)\n
     · Change: Link from offline map \"More info\" page to the new offline map tutorial\n
     · Change: Updated compatibility libraries from support libraries to AndroidX\n
     · Fix: Accidental outzoom to world map when opening Google Maps cache map\n
-    · Fix: Initial zoom on cache map not covering its waypoints\n
     · Fix: Internal code corrections and optimizations\n
     · Fix: Support for geochecker gc-apps.com\n
     · Fix: Internal database cleanup improvements\n

@@ -3794,24 +3794,26 @@ public class DataStore {
         final SQLiteStatement statement = database.compileStatement(sql);
 
         try (Cursor cursor = database.query(dbTableSearchDestinationHistory, new String[]{"_id", "date", "latitude", "longitude"}, null, null, null, null, "_id DESC", "5")) {
-            int sequence = cursor.getCount();
-            while (cursor.moveToNext()) {
-                statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
-                statement.bindLong      (2, cursor.getLong(cursor.getColumnIndex("date")));  // updated
-                statement.bindString    (3, "waypoint");                         // type
-                statement.bindString    (4, "00");                               // prefix
-                statement.bindString    (5, "---");                              // lookup
-                statement.bindString    (6, context.getString(R.string.wp_waypoint) + " " + sequence);     // name
-                statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndex("latitude")));
-                statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndex("longitude")));
-                statement.bindString    (9, "");                                 // note
-                statement.bindLong      (10, 1);                                 // own
-                statement.bindLong      (11, 0);                                 // visited
-                statement.bindString    (12, "");                                // user note
-                statement.bindLong      (13, 0);                                 // org_coords_empty
-                statement.bindNull      (14);                                          // calc_state
-                statement.executeInsert();
-                sequence--;
+            int sequence = 1;
+            if (cursor.moveToLast()) {
+                do {
+                    statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
+                    statement.bindLong      (2, cursor.getLong(cursor.getColumnIndex("date")));  // updated
+                    statement.bindString    (3, "waypoint");                         // type
+                    statement.bindString    (4, "00");                               // prefix
+                    statement.bindString    (5, "---");                              // lookup
+                    statement.bindString    (6, context.getString(R.string.wp_waypoint) + " " + sequence);     // name
+                    statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndex("latitude")));
+                    statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndex("longitude")));
+                    statement.bindString    (9, "");                                 // note
+                    statement.bindLong      (10, 1);                                 // own
+                    statement.bindLong      (11, 0);                                 // visited
+                    statement.bindString    (12, "");                                // user note
+                    statement.bindLong      (13, 0);                                 // org_coords_empty
+                    statement.bindNull      (14);                                          // calc_state
+                    statement.executeInsert();
+                    sequence++;
+                } while (cursor.moveToPrevious());
             }
         }
 
