@@ -40,6 +40,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
+import okhttp3.CipherSuite;
 import okhttp3.ConnectionSpec;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
@@ -52,6 +53,8 @@ import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.TlsVersion;
+import okhttp3.internal.Util;
+
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
@@ -70,7 +73,18 @@ public final class Network {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
+    private static final CipherSuite[] OPENCACHING_CIPHER_SUITES = new CipherSuite[] {
+            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
+    };
+
     private static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
+
+
 
     private static OkHttpClient getNewHttpClient() {
         final OkHttpClient.Builder client = new OkHttpClient.Builder()
@@ -83,10 +97,22 @@ public final class Network {
                 .addInterceptor(new HeadersInterceptor())
                 .addInterceptor(new LoggingInterceptor());
 
-        return enableTls12OnPreLollipop(client).build();
+        return setConnectionSpecs(client).build();
     }
 
-    private static OkHttpClient.Builder enableTls12OnPreLollipop(final OkHttpClient.Builder builder) {
+    private static OkHttpClient.Builder setConnectionSpecs(final OkHttpClient.Builder builder) {
+        final List<ConnectionSpec> specs = new ArrayList<>(getConnectionSpecs(builder));
+
+        final ConnectionSpec ocCompatibility = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
+                .cipherSuites(OPENCACHING_CIPHER_SUITES)
+                .build();
+        specs.add(ocCompatibility);
+
+        builder.connectionSpecs(specs);
+        return builder;
+    }
+
+    private static List<ConnectionSpec> getConnectionSpecs(final OkHttpClient.Builder builder) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
             try {
                 final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
@@ -112,13 +138,14 @@ public final class Network {
                 specs.add(ConnectionSpec.COMPATIBLE_TLS);
                 specs.add(ConnectionSpec.CLEARTEXT);
 
-                builder.connectionSpecs(specs);
+                return specs;
             } catch (final Exception exc) {
                 Log.e("Error while setting TLS 1.2", exc);
             }
         }
 
-        return builder;
+        // DEFAULT_CONNECTION_SPECS
+        return Util.immutableList(ConnectionSpec.MODERN_TLS, ConnectionSpec.CLEARTEXT);
     }
 
     private static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
