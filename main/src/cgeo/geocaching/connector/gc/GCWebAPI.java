@@ -199,6 +199,8 @@ class GCWebAPI {
         String name;
         @JsonProperty("postedCoordinates")
         PostedCoordinates postedCoordinates;
+        @JsonProperty("userCorrectedCoordinates")
+        PostedCoordinates userCorrectedCoordinates;
         @JsonProperty("owner")
         CacheOwner owner;
         @JsonProperty("premiumOnly")

@@ -141,7 +141,13 @@ public class GCMap {
                     c.setReliableLatLon(true);
                     c.setGeocode(r.code);
                     c.setName(r.name);
-                    c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
+                    if (r.userCorrectedCoordinates != null) {
+                        c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
+                        c.setUserModifiedCoords(true);
+                    } else {
+                        c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
+                        c.setUserModifiedCoords(false);
+                    }
                     c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
                     c.setDifficulty(r.difficulty);
                     c.setTerrain(r.terrain);
