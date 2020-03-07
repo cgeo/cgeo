@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Beta version:</b>\n
+    <b>2020.03.07:</b>\n
     · New: Auto rotate for Google Maps (experimental)\n
     · New: Ability to create user defined caches\n
     · New: Proximity notification messages as Android system notifications\n
