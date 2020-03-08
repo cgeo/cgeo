@@ -24,7 +24,7 @@ Fork the [project source code](https://github.com/cgeo/cgeo), make changes to yo
 - **master** is for development of new features. Nightly builds are created from this branch.
 - **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
 
-Note: Regular merging of **release** to **master** (after changes have been done on **release**) are highly recommended to avoid unnecessary merge conflicts later on.
+Note: Regular merging of **release** to **master** (after changes have been done on **release**) is highly recommended to avoid unnecessary merge conflicts later on.
 
 A more complex bugfix can be first tested against the `master` branch and integrated in the nightly builds, while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release).
