@@ -38,6 +38,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.routing.Route;
+import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -1525,7 +1526,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (route == null) {
             route = new Route();
         }
-        route.toggleItem(this, item, routeLayer);
+        route.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
     }
 

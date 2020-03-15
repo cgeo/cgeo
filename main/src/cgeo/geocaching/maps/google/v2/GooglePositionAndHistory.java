@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
+import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
@@ -29,10 +30,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class GooglePositionAndHistory implements PositionAndHistory {
+public class GooglePositionAndHistory implements PositionAndHistory, Route.RouteUpdater {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION = 10;
+    public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
     public static final float ZINDEX_HISTORY_SHADOW = 1;
@@ -55,20 +57,27 @@ public class GooglePositionAndHistory implements PositionAndHistory {
     private WeakReference<GoogleMap> mapRef = null;
     private GoogleMapObjects positionObjs;
     private GoogleMapObjects historyObjs;
+    private GoogleMapObjects routeObjs;
     private GoogleMapView mapView;
     private final int trailColor;
     private GoogleMapView.PostRealDistance postRealDistance = null;
+    private GoogleMapView.PostRealDistance postRouteDistance = null;
 
     private static Bitmap locationIcon;
 
+    private ArrayList<LatLng> route = null;
+    private float distance = 0.0f;
 
-    public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance) {
+
+    public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
+        routeObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
         trailColor = Settings.getTrailColor();
         this.postRealDistance = postRealDistance;
+        this.postRouteDistance = postRouteDistance;
         updateMapAutoRotation();
     }
 
@@ -142,11 +151,26 @@ public class GooglePositionAndHistory implements PositionAndHistory {
     }
 
     @Override
+    public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
+        this.route = new ArrayList<LatLng>();
+        for (int i = 0; i < route.size(); i++) {
+            this.route.add(new LatLng(route.get(i).getLatitude(), route.get(i).getLongitude()));
+        }
+        this.distance = distance;
+
+        if (postRouteDistance != null) {
+            postRouteDistance.postRealDistance(distance);
+        }
+    }
+
+
+    @Override
     public void repaintRequired() {
         drawPosition();
         if (Settings.isMapTrail()) {
             drawHistory();
         }
+        drawRoute();
     }
 
 
@@ -273,4 +297,17 @@ public class GooglePositionAndHistory implements PositionAndHistory {
             }
         }
     }
+
+    private synchronized void drawRoute() {
+        routeObjs.removeAll();
+        if (route != null && route.size() > 1) {
+            routeObjs.addPolyline(new PolylineOptions()
+                    .addAll(route)
+                    .color(0xFF0000FF)
+                    .width(7)
+                    .zIndex(ZINDEX_ROUTE)
+            );
+        }
+    }
+
 }
