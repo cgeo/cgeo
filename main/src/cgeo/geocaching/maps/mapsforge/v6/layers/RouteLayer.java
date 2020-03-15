@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.routing.Route;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -20,7 +21,7 @@ import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 
-public class RouteLayer extends Layer {
+public class RouteLayer extends Layer implements Route.RouteUpdater {
 
     private final float width;
     private Paint line = null;

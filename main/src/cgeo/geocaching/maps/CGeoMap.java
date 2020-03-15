@@ -33,6 +33,8 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
+import cgeo.geocaching.maps.routing.Route;
+import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -131,6 +133,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
+    private static final String BUNDLE_ROUTE = "route";
 
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
@@ -144,6 +147,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private ProximityNotification proximityNotification;
+    private Route route;
+
     // status data
     /**
      * Last search result used for displaying header
@@ -416,6 +421,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
+        if (route != null) {
+            outState.putParcelable(BUNDLE_ROUTE, route);
+        }
     }
 
     @Override
@@ -521,6 +529,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapOptions.isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
+            route = savedInstanceState.getParcelable(BUNDLE_ROUTE);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
@@ -565,6 +574,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         prepareFilterBar();
 
         AndroidBeam.disable(activity);
+    }
+
+    public void toggleRouteItem(final IWaypoint item) {
+        if (item == null || StringUtils.isEmpty(item.getGeocode())) {
+            return;
+        }
+        if (route == null) {
+            route = new Route();
+        }
+        route.toggleItem(this.mapView.getContext(), new RouteItem(item), overlayPositionAndScale);
+        overlayPositionAndScale.repaintRequired();
     }
 
     private void initMyLocationSwitchButton(final CheckBox locSwitch) {

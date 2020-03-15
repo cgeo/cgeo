@@ -3,8 +3,6 @@ package cgeo.geocaching.maps.routing;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
-import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
@@ -18,14 +16,18 @@ import java.util.ArrayList;
 
 public class Route implements Parcelable {
 
+    public interface RouteUpdater {
+        void updateRoute(ArrayList<Geopoint> route, float distance);
+    }
+
     private static class RouteSegment implements Parcelable {
-        GeoitemRef ref = null;
+        RouteItem item = null;
         Geopoint point = null;
         ArrayList<Geopoint> points = null;
         float distance = 0.0f;
 
-        RouteSegment(final GeoitemRef item) {
-            ref = item;
+        RouteSegment(final RouteItem item) {
+            this.item = item;
 
             point = null;
             if (item.getType() == CoordinatesType.CACHE) {
@@ -44,6 +46,8 @@ public class Route implements Parcelable {
             distance = 0.0f;
         }
 
+        // Parcelable methods
+
         public static final Creator<RouteSegment> CREATOR = new Creator<RouteSegment>() {
 
             @Override
@@ -59,7 +63,7 @@ public class Route implements Parcelable {
         };
 
         RouteSegment (final Parcel parcel) {
-            ref = parcel.readParcelable(null);
+            item = parcel.readParcelable(null);
             point = parcel.readParcelable(null);
             points = parcel.readArrayList(null);
             distance = parcel.readFloat();
@@ -72,7 +76,7 @@ public class Route implements Parcelable {
 
         @Override
         public void writeToParcel(final Parcel dest, final int flags) {
-            dest.writeParcelable(ref, flags);
+            dest.writeParcelable(item, flags);
             dest.writeParcelable(point, flags);
             dest.writeList(points);
             dest.writeFloat(distance);
@@ -85,7 +89,7 @@ public class Route implements Parcelable {
     public Route() {
     }
 
-    public void toggleItem(final Context context, final GeoitemRef item, final RouteLayer routeLayer) {
+    public void toggleItem(final Context context, final RouteItem item, final RouteUpdater routeUpdater) {
         if (segments == null) {
             segments = new ArrayList<RouteSegment>();
         }
@@ -102,10 +106,10 @@ public class Route implements Parcelable {
             }
             Toast.makeText(context, "removed from route", Toast.LENGTH_SHORT).show();
         }
-        updateRoute(routeLayer);
+        updateRoute(routeUpdater);
     }
 
-    public void updateRoute(final RouteLayer routeLayer) {
+    public void updateRoute(final RouteUpdater routeUpdater) {
         final ArrayList<Geopoint> route = new ArrayList<>();
         float distance = 0.0f;
         if (segments != null) {
@@ -119,17 +123,17 @@ public class Route implements Parcelable {
                 distance += segment.distance;
             }
         }
-        routeLayer.updateRoute(route, distance);
-        routeLayer.requestRedraw();
+        routeUpdater.updateRoute(route, distance);
     }
 
-    private int pos(final GeoitemRef ref) {
+    private int pos(final RouteItem item) {
         if (segments == null || segments.size() == 0) {
             return -1;
         }
 
+        final String geocode = item.getGeocode();
         for (int i = 0; i < segments.size(); i++) {
-            if (segments.get(i).ref.getItemCode() == ref.getItemCode()) {
+            if (segments.get(i).item.getGeocode().equals(geocode)) {
                 return i;
             }
         }

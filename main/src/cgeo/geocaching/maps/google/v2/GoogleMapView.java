@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.DistanceDrawer;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.ScaleDrawer;
@@ -113,9 +114,24 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // ("The default behavior is for the camera to move to the marker and an info window to appear.")
             return true;
         });
-        if (Settings.isLongTapCreateUDC()) {
-            googleMap.setOnMapLongClickListener(tapLatLong -> InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID));
-        }
+        googleMap.setOnMapLongClickListener(tapLatLong -> {
+            boolean hitWaypoint = false;
+            final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+            if (closest != null) {
+                final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
+                final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
+                if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
+                    hitWaypoint = true;
+                    ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
+                    if (distanceDrawer == null) {
+                        this.distanceDrawer = new DistanceDrawer(this, null, Settings.isBrouterShowBothDistances());
+                    }
+                }
+            }
+            if (!hitWaypoint && Settings.isLongTapCreateUDC()) {
+                InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
+            }
+        });
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
             mapReadyCallback = null;
@@ -236,8 +252,15 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             throw new IllegalStateException("Google map not initialized yet"); // TODO check
         }
         final GoogleOverlay ovl = new GoogleOverlay(googleMap, this, realDistance -> {
-            distanceDrawer.setRealDistance(realDistance);
-            this.invalidate();
+            if (distanceDrawer != null) {
+                distanceDrawer.setRealDistance(realDistance);
+                this.invalidate();
+            }
+        }, routeDistance -> {
+            if (distanceDrawer != null) {
+                distanceDrawer.setRouteDistance(routeDistance);
+                this.invalidate();
+            }
         });
         setDestinationCoords(coords);
         return ovl.getBase();
@@ -310,6 +333,19 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         return 0;
     }
 
+    /** can be made static if nonstatic inner clases could have static methods */
+    private boolean insideCachePointDrawable(final Point p, final Point drawP, final Drawable d) {
+        final int width = d.getIntrinsicWidth();
+        final int height = d.getIntrinsicHeight();
+        final int diffX = p.x - drawP.x;
+        final int diffY = p.y - drawP.y;
+        // assume drawable is drawn above drawP
+        return
+                Math.abs(diffX) < width / 2 &&
+                        diffY > -height && diffY < 0;
+
+    }
+
     private class GestureListener extends SimpleOnGestureListener {
         @Override
         public boolean onDoubleTap(final MotionEvent e) {
@@ -318,19 +354,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 onDragListener.onDrag();
             }
             return false;
-        }
-
-        /** can be made static if nonstatic inner clases could have static methods */
-        private boolean insideCachePointDrawable(final Point p, final Point drawP, final Drawable d) {
-            final int width = d.getIntrinsicWidth();
-            final int height = d.getIntrinsicHeight();
-            final int diffX = p.x - drawP.x;
-            final int diffY = p.y - drawP.y;
-            // assume drawable is drawn above drawP
-            return
-                    Math.abs(diffX) < width / 2 &&
-                    diffY > -height && diffY < 0;
-
         }
 
         @Override

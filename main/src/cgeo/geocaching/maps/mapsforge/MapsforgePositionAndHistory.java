@@ -68,6 +68,12 @@ public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndH
     }
 
     @Override
+    public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
+        // do nothing - functionality not implemented for old Mapsforge map
+    }
+
+
+    @Override
     public void drawOverlayBitmap(final Canvas canvas, final Point drawPosition,
             final MapProjectionImpl projection, final byte drawZoomLevel) {
 

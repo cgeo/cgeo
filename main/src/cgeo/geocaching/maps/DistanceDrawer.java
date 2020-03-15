@@ -33,6 +33,9 @@ public class DistanceDrawer {
     private float distance = 0.0f;
     private float realDistance = 0.0f;
     private boolean showBothDistances = false;
+    private float routeDistance = 0.0f;
+
+    private int nextLine = 0;
 
     private static final char STRAIGHT_LINE_SYMBOL = (char) 0x007C;
     private static final char WAVY_LINE_SYMBOL = (char) 0x2307;
@@ -76,7 +79,11 @@ public class DistanceDrawer {
         this.realDistance = realDistance;
     }
 
-    private void setText(final Canvas canvas, final boolean firstLine, final char symbol, final String text) {
+    public void setRouteDistance(final float routeDistance) {
+        this.routeDistance = routeDistance;
+    }
+
+    private void setText(final Canvas canvas, final char symbol, final String text) {
         if (text == null) {
             return;
         }
@@ -119,7 +126,7 @@ public class DistanceDrawer {
 
         final float textX = (boxWidth - 3 * boxPadding - textBounds.width()) / 2 + boxX + 2 * boxPadding;
         final float textY = (boxHeight + textBounds.height()) / 2 + boxY;
-        final float yDelta = firstLine ? 0 : boxY + boxHeight + boxCornerRadius;
+        final float yDelta = nextLine++ * (boxY + boxHeight + boxCornerRadius);
 
         /* Paint background box */
         canvas.drawRoundRect(
@@ -147,11 +154,15 @@ public class DistanceDrawer {
     }
 
     public void drawDistance(final Canvas canvas) {
+        nextLine = 0;
         if (showBothDistances && realDistance != 0.0f && distance != realDistance) {
-            setText(canvas, true, STRAIGHT_LINE_SYMBOL, distanceText);
-            setText(canvas, false, WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));
+            setText(canvas, STRAIGHT_LINE_SYMBOL, distanceText);
+            setText(canvas, WAVY_LINE_SYMBOL, Units.getDistanceFromKilometers(realDistance));
         } else {
-            setText(canvas, true, ' ', realDistance != 0.0f && distance != realDistance ? Units.getDistanceFromKilometers(realDistance) : distanceText);
+            setText(canvas, ' ', realDistance != 0.0f && distance != realDistance ? Units.getDistanceFromKilometers(realDistance) : distanceText);
+        }
+        if (routeDistance != 0.0f) {
+            setText(canvas, ' ', Units.getDistanceFromKilometers(routeDistance));
         }
     }
 }
