@@ -2,17 +2,13 @@
 buildscript {
     repositories {
         jcenter()
-        // gradle build-scan for profiling our build script
-        maven {
-            url 'https://plugins.gradle.org/m2'
-        }
         google()
     }
     dependencies {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.1'
 
         // un-mocking of portable Android classes
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.3'
@@ -31,9 +27,6 @@ plugins {
 
     // check for updates of gradle plugin dependencies
     id 'com.github.ben-manes.versions' version '0.27.0'
-
-    // Build scan plugin, see https://plugins.gradle.org/plugin/com.gradle.build-scan
-    id 'com.gradle.build-scan' version '3.0'
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
     id 'com.github.spotbugs' version '3.0.0'
@@ -136,12 +129,6 @@ allprojects {
         // Android Support libraries are now in an online Maven repository
         google()
     }
-}
-
-
-buildScan {
-    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-    termsOfServiceAgree = 'yes'
 }
 
 
