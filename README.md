@@ -14,6 +14,7 @@ For example we have a collection of [urgent issues](https://github.com/cgeo/cgeo
 
 [![Build Status](http://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](http://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/3256314c8ba8457b9639bd2d4f4e7c91)](https://www.codacy.com/app/cgeo/cgeo)<br>
+[![Crowdin](https://badges.crowdin.net/cgeo/localized.svg)](http://translate.cgeo.org)
 
 ## Get the source
 
