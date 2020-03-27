@@ -204,6 +204,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             route = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
+            route = new Route();
+            route.loadRoute();
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }

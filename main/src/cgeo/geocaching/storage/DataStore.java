@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -23,6 +24,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.models.Destination;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -166,7 +168,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 80;
+    private static final int dbVersion = 81;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -182,6 +184,7 @@ public class DataStore {
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
+    @NonNull private static final String dbTableRoute = "cg_table_route";
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE " + dbTableCaches + " ("
@@ -348,6 +351,14 @@ public class DataStore {
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "latitude DOUBLE, "
             + "longitude DOUBLE "
+            + "); ";
+
+    private static final String dbCreateRoute
+            = "CREATE TABLE " + dbTableRoute + " ("
+            + "precedence INTEGER, "
+            + "type INTERGER, "
+            + "id INTEGER, "
+            + "geocode TEXT"
             + "); ";
 
     private static final String SEQUENCE_INTERNAL_CACHE = "seq_internal_cache";
@@ -957,6 +968,17 @@ public class DataStore {
                         }
                     }
 
+                    // add route table
+                    if (oldVersion < 81) {
+                        try {
+                            db.execSQL(dbCreateRoute);
+
+                            Log.i("Added table " + dbTableRoute + ".");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 81", e);
+                        }
+                    }
+
                 }
 
                 db.setTransactionSuccessful();
@@ -1040,6 +1062,7 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrackables);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableSearchDestinationHistory);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrailHistory);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableRoute);
         }
 
     }
@@ -2325,6 +2348,56 @@ public class DataStore {
     }
 
     /**
+     * Loads the route from the database
+     *
+     * @return A list of route items.
+     */
+    @NonNull
+    public static ArrayList<RouteItem> loadRoute() {
+        return queryToColl(dbTableRoute,
+                new String[]{"type", "id", "geocode"},
+                null,
+                null,
+                "precedence ASC",
+                null,
+                new ArrayList<RouteItem>(),
+                cursor -> {
+                    return new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1));
+                });
+    }
+
+    /**
+     * Persists the given {@code RouteItem} list into the database.
+     *
+     * @param routeItems
+     *            a route to save
+     */
+    public static void saveRoute(final ArrayList<RouteItem> routeItems) {
+        init();
+
+        database.beginTransaction();
+        try {
+            database.execSQL("DELETE FROM " + dbTableRoute);
+            final SQLiteStatement insertRouteItem = PreparedStatement.INSERT_ROUTEITEM.getStatement();
+            for (int i = 0; i < routeItems.size(); i++) {
+                final RouteItem item = routeItems.get(i);
+                insertRouteItem.bindLong(1, i);
+                insertRouteItem.bindLong(2, item.getType().ordinal());
+                insertRouteItem.bindLong(3, item.getId());
+                insertRouteItem.bindString(4, item.getGeocode());
+                insertRouteItem.executeInsert();
+            }
+            database.setTransactionSuccessful();
+        } catch (final Exception e) {
+            Log.e("Saving route failed", e);
+        } finally {
+            database.endTransaction();
+        }
+    }
+
+
+
+    /**
      * @return an immutable, non null list of logs
      */
     @NonNull
@@ -3510,6 +3583,7 @@ public class DataStore {
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
         INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude) VALUES (?, ?)"),
+        INSERT_ROUTEITEM("INSERT INTO " + dbTableRoute + " (precedence, type, id, geocode) VALUES (?, ?, ?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),

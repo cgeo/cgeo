@@ -477,6 +477,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }
+        if (route != null) {
+            route.updateRoute(overlayPositionAndScale);
+        }
 
         // prepare circular progress spinner
         spinner = (ProgressBar) activity.findViewById(R.id.map_progressbar);
@@ -533,6 +536,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
+            route = new Route();
+            route.loadRoute();
             trailHistory = null;
         }
         if (null != proximityNotification) {
