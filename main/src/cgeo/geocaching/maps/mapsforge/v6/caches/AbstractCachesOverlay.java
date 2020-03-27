@@ -114,16 +114,18 @@ public abstract class AbstractCachesOverlay {
     }
 
     void switchCircles() {
-        showCircles = Settings.getCircles();
-        final Layers layers = getLayers();
-        final int circleIndex = layers.indexOf(circleLayer) + 1;
-        for (final GeoitemLayer layer : layerList) {
-            final Layer circle = layer.getCircle();
-            if (circle != null) {
-                if (showCircles) {
-                    layers.add(circleIndex, circle);
-                } else {
-                    layers.remove(circle);
+        synchronized (this.bundleRef.get().getMapView()) {
+            showCircles = Settings.getCircles();
+            final Layers layers = getLayers();
+            final int circleIndex = layers.indexOf(circleLayer) + 1;
+            for (final GeoitemLayer layer : layerList) {
+                final Layer circle = layer.getCircle();
+                if (circle != null) {
+                    if (showCircles) {
+                        layers.add(circleIndex, circle);
+                    } else {
+                        layers.remove(circle);
+                    }
                 }
             }
         }
@@ -201,15 +203,17 @@ public abstract class AbstractCachesOverlay {
         if (layers == null) {
             return;
         }
-        int index = layers.indexOf(anchorLayer) + 1;
-        final int circleIndex = layers.indexOf(circleLayer) + 1;
-        for (final GeoitemLayer layer : layerList) {
-            layers.add(index, layer);
-            if (showCircles) {
-                final Layer circle = layer.getCircle();
-                if (circle != null) {
-                    layers.add(circleIndex, circle);
-                    index++;
+        synchronized (this.bundleRef.get().getMapView()) {
+            int index = layers.indexOf(anchorLayer) + 1;
+            final int circleIndex = layers.indexOf(circleLayer) + 1;
+            for (final GeoitemLayer layer : layerList) {
+                layers.add(index, layer);
+                if (showCircles) {
+                    final Layer circle = layer.getCircle();
+                    if (circle != null) {
+                        layers.add(circleIndex, circle);
+                        index++;
+                    }
                 }
             }
         }
@@ -265,12 +269,14 @@ public abstract class AbstractCachesOverlay {
             return;
         }
 
-        for (final GeoitemLayer layer : layerList) {
-            geoEntries.remove(new GeoEntry(layer.getItemCode(), overlayId));
-            layers.remove(layer);
-            final Layer circle = layer.getCircle();
-            if (circle != null) {
-                layers.remove(circle);
+        synchronized (this.bundleRef.get().getMapView()) {
+            for (final GeoitemLayer layer : layerList) {
+                geoEntries.remove(new GeoEntry(layer.getItemCode(), overlayId));
+                layers.remove(layer);
+                final Layer circle = layer.getCircle();
+                if (circle != null) {
+                    layers.remove(circle);
+                }
             }
         }
 
@@ -292,16 +298,18 @@ public abstract class AbstractCachesOverlay {
         }
 
         removeItems(removeCodes);
-        int index = layers.indexOf(anchorLayer) + 1;
-        final int circleIndex = layers.indexOf(circleLayer) + 1;
-        for (final String code : newCodes) {
-            final GeoitemLayer layer = layerList.getItem(code);
-            layers.add(index, layer);
-            if (showCircles) {
-                final Layer circle = layer.getCircle();
-                if (circle != null) {
-                    layers.add(circleIndex, circle);
-                    index++;
+        synchronized (this.bundleRef.get().getMapView()) {
+            int index = layers.indexOf(anchorLayer) + 1;
+            final int circleIndex = layers.indexOf(circleLayer) + 1;
+            for (final String code : newCodes) {
+                final GeoitemLayer layer = layerList.getItem(code);
+                layers.add(index, layer);
+                if (showCircles) {
+                    final Layer circle = layer.getCircle();
+                    if (circle != null) {
+                        layers.add(circleIndex, circle);
+                        index++;
+                    }
                 }
             }
         }
@@ -314,16 +322,18 @@ public abstract class AbstractCachesOverlay {
         if (layers == null) {
             return;
         }
-        for (final String code : removeCodes) {
-            final GeoitemLayer item = layerList.getItem(code);
-            if (item != null) {
-                geoEntries.remove(new GeoEntry(code, overlayId));
-                layers.remove(item);
-                final Layer circle = item.getCircle();
-                if (circle != null) {
-                    layers.remove(circle);
+        synchronized (this.bundleRef.get().getMapView()) {
+            for (final String code : removeCodes) {
+                final GeoitemLayer item = layerList.getItem(code);
+                if (item != null) {
+                    geoEntries.remove(new GeoEntry(code, overlayId));
+                    layers.remove(item);
+                    final Layer circle = item.getCircle();
+                    if (circle != null) {
+                        layers.remove(circle);
+                    }
+                    layerList.remove(item);
                 }
-                layerList.remove(item);
             }
         }
     }
