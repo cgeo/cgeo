@@ -107,7 +107,9 @@ public class MfMapView extends MapView {
     @Override
     public boolean onTouchEvent(final MotionEvent ev) {
         gestureDetector.onTouchEvent(ev);
-        return super.onTouchEvent(ev);
+        synchronized (this) {
+            return super.onTouchEvent(ev);
+        }
     }
 
     private class GestureListener extends SimpleOnGestureListener {

@@ -298,6 +298,10 @@ public class CachesBundle {
         return separators.get(CIRCLES_SEPARATOR);
     }
 
+    protected MfMapView getMapView() {
+        return mapView;
+    }
+
     public void handleWaypoints() {
         if (this.mapModeSingle || getVisibleCachesCount() < Settings.getWayPointsThreshold()) {
             Collection<String> baseGeocodes = Collections.emptyList();
