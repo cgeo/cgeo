@@ -50,7 +50,7 @@ public class RouteItem implements Parcelable {
 
     // parcelable methods
 
-    private RouteItem (final CoordinatesType type, final String geocode, final int id) {
+    public RouteItem (final CoordinatesType type, final String geocode, final int id) {
         this.type = type;
         this.geocode = geocode;
         this.id = id;

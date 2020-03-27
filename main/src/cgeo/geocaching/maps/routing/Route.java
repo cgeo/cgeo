@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
@@ -13,6 +14,8 @@ import android.os.Parcelable;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import io.reactivex.schedulers.Schedulers;
 
 public class Route implements Parcelable {
 
@@ -44,6 +47,10 @@ public class Route implements Parcelable {
 
             points = null;
             distance = 0.0f;
+        }
+
+        public boolean hasPoint() {
+            return point != null;
         }
 
         // Parcelable methods
@@ -84,32 +91,42 @@ public class Route implements Parcelable {
 
     }
 
+    private enum ToggleItemState {
+        ADDED,
+        REMOVED,
+        ERROR_NO_POINT
+    }
+
     private ArrayList<RouteSegment> segments = null;
+    private boolean loadingRoute = false;
 
     public Route() {
     }
 
     public void toggleItem(final Context context, final RouteItem item, final RouteUpdater routeUpdater) {
-        if (segments == null) {
-            segments = new ArrayList<RouteSegment>();
+        if (loadingRoute) {
+            return;
         }
-        final int pos = pos(item);
-        if (pos == -1) {
-            segments.add(new RouteSegment(item));
-            calculate(segments.size() - 1);
-            Toast.makeText(context, "added to route", Toast.LENGTH_SHORT).show();
-        } else {
-            segments.remove(pos);
-            calculate(pos);
-            if (pos < segments.size()) {
-                calculate(pos + 1);
-            }
-            Toast.makeText(context, "removed from route", Toast.LENGTH_SHORT).show();
+
+        switch (toggleItemInternal(item)) {
+            case ADDED:
+                Toast.makeText(context, R.string.individual_route_added, Toast.LENGTH_SHORT).show();
+                break;
+            case REMOVED:
+                Toast.makeText(context, R.string.individual_route_removed, Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(context, R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
         }
         updateRoute(routeUpdater);
+        saveRoute();
     }
 
     public void updateRoute(final RouteUpdater routeUpdater) {
+        if (loadingRoute) {
+            return;
+        }
+
         final ArrayList<Geopoint> route = new ArrayList<>();
         float distance = 0.0f;
         if (segments != null) {
@@ -124,6 +141,61 @@ public class Route implements Parcelable {
             }
         }
         routeUpdater.updateRoute(route, distance);
+    }
+
+    public void loadRoute() {
+        if (loadingRoute) {
+            return;
+        }
+        Schedulers.io().scheduleDirect(() -> loadRouteInternal());
+    }
+
+    private synchronized void loadRouteInternal() {
+        loadingRoute = true;
+        final ArrayList<RouteItem> routeItems = DataStore.loadRoute();
+        for (int i = 0; i < routeItems.size(); i++) {
+            toggleItemInternal(routeItems.get(i));
+        }
+        loadingRoute = false;
+    }
+
+    private synchronized void saveRoute() {
+        if (segments != null) {
+            final ArrayList<RouteItem> routeItems = new ArrayList<>();
+            for (int i = 0; i < segments.size(); i++) {
+                routeItems.add(segments.get(i).item);
+            }
+            Schedulers.io().scheduleDirect(() -> DataStore.saveRoute(routeItems));
+        }
+    }
+
+    /**
+     * adds or removes the item given
+     * @param item
+     * @return ToggleItemState
+     */
+    private ToggleItemState toggleItemInternal(final RouteItem item) {
+        if (segments == null) {
+            segments = new ArrayList<RouteSegment>();
+        }
+        final int pos = pos(item);
+        if (pos == -1) {
+            final RouteSegment segment = new RouteSegment(item);
+            if (segment.hasPoint()) {
+                segments.add(new RouteSegment(item));
+                calculate(segments.size() - 1);
+                return ToggleItemState.ADDED;
+            } else {
+                return ToggleItemState.ERROR_NO_POINT;
+            }
+        } else {
+            segments.remove(pos);
+            calculate(pos);
+            if (pos < segments.size()) {
+                calculate(pos + 1);
+            }
+            return ToggleItemState.REMOVED;
+        }
     }
 
     private int pos(final RouteItem item) {
@@ -153,7 +225,7 @@ public class Route implements Parcelable {
                 if (temp != null && temp.length > 0) {
                     for (int tempPos = 0; tempPos < temp.length; tempPos++) {
                         segment.points.add(temp[tempPos]);
-                        if (tempPos > 0) {
+                        if (tempPos > 0 && temp[tempPos - 1] != null && temp[tempPos] != null) {
                             segment.distance += temp[tempPos - 1].distanceTo(temp[tempPos]);
                         }
                     }
@@ -161,6 +233,8 @@ public class Route implements Parcelable {
             }
         }
     }
+
+    // Parcelable methods
 
     public static final Creator<Route> CREATOR = new Creator<Route>() {
 

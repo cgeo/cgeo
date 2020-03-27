@@ -1705,4 +1705,10 @@
     <string name="notification_channel_name">c:geo notifications</string>
     <string name="notification_channel_description">notifications from c:geo geocaching app</string>
     <string name="proximity_notification_title">c:geo proximity notification</string>
+
+    <!-- individual routes -->
+    <string name="individual_route_added">added to route</string>
+    <string name="individual_route_removed">removed from route</string>
+    <string name="individual_route_error_toggling_waypoint">error toggling waypoint</string>
+
 </resources>
