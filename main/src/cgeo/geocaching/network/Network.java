@@ -227,7 +227,7 @@ public final class Network {
     public static <T> Single<T> postJsonRequest(final String uri, final Class<T> clazz, final Object jsonObject) throws JsonProcessingException {
         final Builder request = new Builder().url(uri).post(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
                 mapper.writeValueAsString(jsonObject)));
-        Single<Response> response = RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
+        final Single<Response> response = RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
 
         return response.flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
     }

@@ -443,7 +443,7 @@ class GCWebAPI {
                     put("logText", logInfo).
                     put("usedFavoritePoint", formatBoolean(addToFavorites));
 
-            GeocacheLog geocacheLog = new GeocacheLog(geocache.getCacheId(), geocache.getGeocode(),
+            final GeocacheLog geocacheLog = new GeocacheLog(geocache.getCacheId(), geocache.getGeocode(),
                     latitude, longitude, addToFavorites, String.valueOf(logType.id),
                     geocache.isOwner(), logDate, logInfo, addToFavorites);
 
