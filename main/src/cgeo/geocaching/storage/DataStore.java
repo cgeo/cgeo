@@ -2395,6 +2395,19 @@ public class DataStore {
         }
     }
 
+    public static void clearRoute() {
+        init();
+
+        database.beginTransaction();
+        try {
+            database.execSQL("DELETE FROM " + dbTableRoute);
+            database.setTransactionSuccessful();
+        } catch (final Exception e) {
+            Log.e("Clearing route failed", e);
+        } finally {
+            database.endTransaction();
+        }
+    }
 
 
     /**
