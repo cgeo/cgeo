@@ -878,6 +878,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
                 return true;
             }
+            case R.id.menu_clear_individual_route: {
+                route.clearRoute(overlayPositionAndScale);
+                ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
+                return true;
+            }
             case R.id.menu_routing_straight: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.STRAIGHT);
