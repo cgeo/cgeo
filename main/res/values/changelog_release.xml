@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Beta version:</b>\n
+    · Fix: Submitting logs for caches not possible on geocaching.com\n
+    \n
+    \n
     <b>2020.03.07:</b>\n
     · New: Auto rotate for Google Maps (experimental)\n
     · New: Ability to create user defined caches\n

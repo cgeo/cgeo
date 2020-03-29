@@ -223,6 +223,15 @@ public final class Network {
         return RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
     }
 
+    @NonNull
+    public static <T> Single<T> postJsonRequest(final String uri, final Class<T> clazz, final Object jsonObject) throws JsonProcessingException {
+        final Builder request = new Builder().url(uri).post(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
+                mapper.writeValueAsString(jsonObject)));
+        final Single<Response> response = RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
+
+        return response.flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
+    }
+
     /**
      *  POST HTTP request with Json POST DATA
      *
@@ -250,7 +259,7 @@ public final class Network {
      */
     @NonNull
     public static Single<Response> postRequest(final String uri, final Parameters params, final Parameters headers,
-            final String fileFieldName, final String fileContentType, final File file) {
+                                               final String fileFieldName, final String fileContentType, final File file) {
         final MultipartBody.Builder entity = new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (final ImmutablePair<String, String> param : params) {
             entity.addFormDataPart(param.left, param.right);
@@ -406,7 +415,7 @@ public final class Network {
      */
     @NonNull
     public static <T> Single<T> getRequest(final String uri, final Class<T> clazz, @Nullable final Parameters params, @Nullable final Parameters headers) {
-         return getRequest(uri, params, headers).flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
+        return getRequest(uri, params, headers).flatMap(getResponseData).map(js -> mapper.readValue(js, clazz));
     }
 
     /**

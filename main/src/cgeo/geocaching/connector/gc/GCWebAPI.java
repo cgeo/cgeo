@@ -28,6 +28,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
 import io.reactivex.functions.Function;
@@ -234,6 +235,14 @@ class GCWebAPI {
         @JsonProperty("longitude")
         double longitude;
 
+        PostedCoordinates(final double latitude, final double longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        PostedCoordinates() {
+        }
+
         Geopoint toCoords() {
             return new Geopoint(latitude, longitude);
         }
@@ -242,6 +251,13 @@ class GCWebAPI {
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class CallerSpecific {
         boolean favorited;
+
+        CallerSpecific(final boolean favorited) {
+            this.favorited = favorited;
+        }
+
+        CallerSpecific() {
+        }
     }
 
     /**
@@ -289,6 +305,45 @@ class GCWebAPI {
         String type;
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class GeocacheLog {
+        Geocache geocache;
+        String logType;
+        boolean ownerIsViewing;
+        String logDate;
+        String logText;
+        boolean usedFavoritePoint;
+
+        GeocacheLog(final String id, final String referenceCode, final double latitude,
+                    final double longitude, final boolean favorited, final String logType,
+                    final boolean ownerIsViewing, final String logDate, final String logText,
+                    final boolean usedFavoritePoint) {
+            this.geocache = new Geocache(id, referenceCode, latitude, longitude, favorited);
+            this.logType = logType;
+            this.ownerIsViewing = ownerIsViewing;
+            this.logDate = logDate;
+            this.logText = logText;
+            this.usedFavoritePoint = usedFavoritePoint;
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        static final class Geocache {
+            String id;
+            String referenceCode;
+            PostedCoordinates postedCoordinates;
+            CallerSpecific callerSpecific;
+
+            Geocache(final String id, final String referenceCode, final double latitude,
+                     final double longitude, final boolean favorited) {
+                this.id = id;
+                this.referenceCode = referenceCode;
+                this.postedCoordinates = new PostedCoordinates(latitude, longitude);
+                this.callerSpecific = new CallerSpecific(favorited);
+            }
+        }
+
+    }
+
 
     private static <T> Single<T> getAPI(final String path, final Class<T> clazz) {
         return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.getRequest(API_URL + path, clazz, null, headers).subscribeOn(AndroidRxUtils.networkScheduler));
@@ -308,6 +363,10 @@ class GCWebAPI {
 
     private static <T> Single<T> postAPI(final String path, final Parameters parameters, final Class<T> clazz) {
         return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.postRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
+    }
+
+    private static <T> Single<T> postAPI(final String path, final Object jsonObject, final Class<T> clazz) throws JsonProcessingException {
+        return Network.postJsonRequest(API_URL + path, clazz, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static <T> Single<T> postAPI(final String path, final Parameters parameters,
@@ -391,7 +450,13 @@ class GCWebAPI {
                     put("logText", logInfo).
                     put("usedFavoritePoint", formatBoolean(addToFavorites));
 
-            final PostLogResponse response = postAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocache.getGeocode()) + "/GeocacheLog", params, PostLogResponse.class).blockingGet();
+            final GeocacheLog geocacheLog = new GeocacheLog(geocache.getCacheId(), geocache.getGeocode(),
+                    latitude, longitude, addToFavorites, String.valueOf(logType.id),
+                    geocache.isOwner(), logDate, logInfo, addToFavorites);
+
+            final PostLogResponse response =
+                    postAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocache.getGeocode())
+                            + "/GeocacheLog", geocacheLog, PostLogResponse.class).blockingGet();
 
             if (response.referenceCode == null) {
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
