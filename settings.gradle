@@ -1,3 +1,10 @@
+/*
+ * Enterprise plugin replaces Build scan plugin from gradle 6, see https://docs.gradle.com/enterprise/gradle-plugin/
+ */
+plugins {
+    id 'com.gradle.enterprise' version '3.1.1'
+}
+
 // Make the root project name independent of the directory name where we checked out the repository.
 // This can avoid problems with directory names like "cgeo pull request" containing blanks on CI.
 rootProject.name = "cgeo"
@@ -12,6 +19,13 @@ include ':cgeo-contacts'
 buildCache {
     local(DirectoryBuildCache) {
         directory = new File(rootDir, 'build-cache')
-        removeUnusedEntriesAfterDays = 10
+        removeUnusedEntriesAfterDays = 30
+    }
+}
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
     }
 }
