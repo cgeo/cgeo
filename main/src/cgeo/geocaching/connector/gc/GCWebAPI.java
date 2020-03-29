@@ -238,6 +238,8 @@ class GCWebAPI {
             this.longitude = longitude;
         }
 
+        PostedCoordinates() {}
+
         Geopoint toCoords() {
             return new Geopoint(latitude, longitude);
         }
@@ -250,6 +252,8 @@ class GCWebAPI {
         CallerSpecific(final boolean favorited) {
             this.favorited = favorited;
         }
+
+        CallerSpecific() {}
     }
 
     /**
