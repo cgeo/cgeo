@@ -66,7 +66,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private static Bitmap locationIcon;
 
     private ArrayList<LatLng> route = null;
-    private float distance = 0.0f;
 
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -156,7 +155,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         for (int i = 0; i < route.size(); i++) {
             this.route.add(new LatLng(route.get(i).getLatitude(), route.get(i).getLongitude()));
         }
-        this.distance = distance;
 
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(distance);
