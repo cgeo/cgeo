@@ -19,15 +19,24 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Route implements Parcelable {
 
+    private enum ToggleItemState {
+        ADDED,
+        REMOVED,
+        ERROR_NO_POINT
+    }
+
+    private ArrayList<RouteSegment> segments = null;
+    private boolean loadingRoute = false;
+
     public interface RouteUpdater {
         void updateRoute(ArrayList<Geopoint> route, float distance);
     }
 
     private static class RouteSegment implements Parcelable {
-        RouteItem item = null;
-        Geopoint point = null;
-        ArrayList<Geopoint> points = null;
-        float distance = 0.0f;
+        private RouteItem item = null;
+        private Geopoint point = null;
+        private ArrayList<Geopoint> points = null;
+        private float distance = 0.0f;
 
         RouteSegment(final RouteItem item) {
             this.item = item;
@@ -91,15 +100,6 @@ public class Route implements Parcelable {
 
     }
 
-    private enum ToggleItemState {
-        ADDED,
-        REMOVED,
-        ERROR_NO_POINT
-    }
-
-    private ArrayList<RouteSegment> segments = null;
-    private boolean loadingRoute = false;
-
     public Route() {
     }
 
@@ -117,6 +117,7 @@ public class Route implements Parcelable {
                 break;
             default:
                 Toast.makeText(context, R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
+                break;
         }
         updateRoute(routeUpdater);
         saveRoute();

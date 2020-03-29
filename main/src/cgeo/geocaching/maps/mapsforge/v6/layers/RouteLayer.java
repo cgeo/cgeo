@@ -33,11 +33,6 @@ public class RouteLayer extends Layer implements Route.RouteUpdater {
     private ArrayList<Pair<Integer, Integer>> pixelRoute = null;
     private long mapSize = 0;
 
-
-    public void draw(final Canvas canvas, final Paint line, final Point topLeftPoint) {
-
-    }
-
     public interface PostRealDistance {
         void postRealDistance (float realDistance);
     }
@@ -64,30 +59,22 @@ public class RouteLayer extends Layer implements Route.RouteUpdater {
 
     @Override
     public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
+        // no route or route too short?
         if (this.route == null || this.route.size() < 2) {
-            return; // no route or route too short
+            return;
         }
 
+        // still building cache?
         if (this.pixelRoute == null && this.mapSize > 0) {
-            return; // building cache
+            return;
         }
 
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
         if (this.pixelRoute == null || this.mapSize != mapSize) {
-            this.mapSize = mapSize;
-            this.pixelRoute = new ArrayList<Pair<Integer, Integer>>();
-            for (int i = 0; i < route.size(); i++) {
-                pixelRoute.add(translateToPixels(mapSize, this.route.get(i)));
-            }
+            translateRouteToPixels(mapSize);
         }
 
-        if (line == null) {
-            line = AndroidGraphicFactory.INSTANCE.createPaint();
-            line.setStrokeWidth(width);
-            line.setStyle(Style.STROKE);
-            line.setColor(0xD00000A0);
-            line.setTextSize(20);
-        }
+        prepareLine();
         for (int i = 1; i < pixelRoute.size(); i++) {
             final Pair<Integer, Integer> source = pixelRoute.get(i - 1);
             final Pair<Integer, Integer> destination = pixelRoute.get(i);
@@ -97,7 +84,24 @@ public class RouteLayer extends Layer implements Route.RouteUpdater {
         if (postRealRouteDistance != null) {
             postRealRouteDistance.postRealDistance(distance);
         }
+    }
 
+    private void translateRouteToPixels(final long mapSize) {
+        this.mapSize = mapSize;
+        this.pixelRoute = new ArrayList<Pair<Integer, Integer>>();
+        for (int i = 0; i < route.size(); i++) {
+            pixelRoute.add(translateToPixels(mapSize, this.route.get(i)));
+        }
+    }
+
+    private void prepareLine() {
+        if (line == null) {
+            line = AndroidGraphicFactory.INSTANCE.createPaint();
+            line.setStrokeWidth(width);
+            line.setStyle(Style.STROKE);
+            line.setColor(0xD00000A0);
+            line.setTextSize(20);
+        }
     }
 
     private static Pair<Integer, Integer> translateToPixels(final long mapSize, final Geopoint coords) {
