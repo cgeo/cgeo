@@ -136,17 +136,16 @@ public class MapsforgeMapView extends MapView implements MapViewImpl<MapsforgeCa
 
         int span = 0;
 
-        final Projection projection = getProjection();
+        final Projection projection =  getProjection();
 
         if (projection != null && getHeight() > 0) {
 
-            final GeoPoint low = projection.fromPixels(0, 0);
-            final GeoPoint high = projection.fromPixels(0, getHeight());
+            GeoPoint low = projection.fromPixels(0, 0);
+            GeoPoint high = projection.fromPixels(0, getHeight());
 
             if (low != null && high != null) {
                 span = Math.abs(high.latitudeE6 - low.latitudeE6);
-            }
-        }
+            }                                          }
 
         return span;
     }
