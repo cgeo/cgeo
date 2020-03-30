@@ -1,10 +1,16 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Point;
+import android.location.Location;
+
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.maps.AbstractItemizedOverlay;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
+
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
@@ -19,9 +25,7 @@ import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Point;
-import android.location.Location;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -144,8 +148,8 @@ public class MapsforgeCachesList extends AbstractItemizedOverlay {
      *
      */
     private int calculateDrawingRadius(final MapProjectionImpl projection) {
-        final float[] distanceArray = new float[1];
-        final Geopoint itemCoord = items.get(0).getCoord().getCoords();
+        float[] distanceArray = new float[1];
+        Geopoint itemCoord = items.get(0).getCoord().getCoords();
 
         Location.distanceBetween(itemCoord.getLatitude(), itemCoord.getLongitude(),
                 itemCoord.getLatitude(), itemCoord.getLongitude() + 1, distanceArray);
