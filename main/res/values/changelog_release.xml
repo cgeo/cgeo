@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Beta version:</b>\n
+    <b>2020.03.30:</b>\n
     · Fix: Submitting logs for caches not possible on geocaching.com\n
     · Fix: Blue arrow on map pointing to wrong position on some devices\n
     \n
