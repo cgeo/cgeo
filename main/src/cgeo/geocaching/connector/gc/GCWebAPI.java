@@ -344,7 +344,7 @@ class GCWebAPI {
 
 
     private static <T> Single<T> getAPI(final String path, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.getRequest(API_URL + path, clazz, null, headers).subscribeOn(AndroidRxUtils.networkScheduler));
+        return Network.getRequest(API_URL + path, clazz, null, null).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
     private static <T> Single<T> getAPI(final String path, final Parameters parameters, final Class<T> clazz) {
