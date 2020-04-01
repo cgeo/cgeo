@@ -114,35 +114,28 @@ allprojects {
             }
         }
     }
-
-    repositories {
-        mavenCentral()
-        jcenter()
-        // hosts e.g. viewpagerindicator
-        maven {
-            url "https://jitpack.io"
-        }
-        // viewpager fork
-        maven {
-            url 'https://dl.bintray.com/alexeydanilov/maven'
-        }
-        // Android Support libraries are now in an online Maven repository
-        google()
-    }
 }
-
 
 /*
  * common configuration for the Java projects
  */
 subprojects {
     repositories {
-        mavenCentral()
-        jcenter()
-        // hosts e.g. viewpagerindicator
+        // = mavenCentral()
         maven {
-            url "https://jitpack.io"
+            url 'https://repo1.maven.org/maven2'
+            // for undobar
+            metadataSources {
+                artifact()
+            }
         }
+        jcenter()
+        // viewpager fork
+        maven {
+            url 'https://dl.bintray.com/alexeydanilov/maven'
+        }
+        // Android Support libraries are now in an online Maven repository
+        google()
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
