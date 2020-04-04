@@ -171,6 +171,19 @@ public final class FileUtils {
     }
 
     /**
+     * Get the guessed filename from a path
+     *
+     * @param path
+     *          filename, optionally including path
+     * @return the filename without path
+     */
+    @NonNull
+    public static String getFilenameFromPath(@NonNull final String path) {
+        final int posSegment = path.lastIndexOf('/');
+        return (posSegment >= 0) ? path.substring(posSegment + 1) : path;
+    }
+
+    /**
      * Copy a file into another. The directory structure of target file will be created if needed.
      *
      * @param source

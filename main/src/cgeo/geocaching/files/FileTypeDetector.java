@@ -16,12 +16,12 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
-class FileTypeDetector {
+public class FileTypeDetector {
 
     private final ContentResolver contentResolver;
     private final Uri uri;
 
-    FileTypeDetector(final Uri uri, final ContentResolver contentResolver) {
+    public FileTypeDetector(final Uri uri, final ContentResolver contentResolver) {
         this.uri = uri;
         this.contentResolver = contentResolver;
     }
@@ -55,13 +55,15 @@ class FileTypeDetector {
         if (isZip(line)) {
             return FileType.ZIP;
         }
+        if (isMap(line)) {
+            return FileType.MAP;
+        }
         // scan at most 5 lines of a GPX file
         for (int i = 0; i < 5; i++) {
             line = StringUtils.trim(line);
             if (StringUtils.contains(line, "<loc")) {
                 return FileType.LOC;
-            }
-            if (StringUtils.contains(line, "<gpx")) {
+            } else if (StringUtils.contains(line, "<gpx")) {
                 return FileType.GPX;
             }
             line = reader.readLine();
@@ -75,4 +77,8 @@ class FileTypeDetector {
                 && line.charAt(3) == 4;
     }
 
+    private static boolean isMap(final String line) {
+        return StringUtils.length(line) >= 20
+                && StringUtils.startsWith(line, "mapsforge binary OSM");
+    }
 }
