@@ -161,6 +161,7 @@ public abstract class AbstractSeekbarPreference extends Preference {
                             Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
                         }
                         seekBar.setProgress(newValue);
+                        saveSetting(seekBar.getProgress());
                         valueView.setText(getValueString(newValue));
                     } catch (NumberFormatException e) {
                         Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
