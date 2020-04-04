@@ -555,6 +555,10 @@
                 android:title="@string/settings_info_offline_maps_title"
                 app:url="@string/settings_offline_maps_url"
                 app:urlButton="@string/settings_goto_url_button" />
+            <cgeo.geocaching.settings.InfoPreferenceMap
+                android:text="@string/downloadmap_info"
+                android:title="@string/downloadmap_title"
+                app:url="@string/mapserver_osm_v3" />
             <Preference
                 android:key="@string/pref_mapDirectory"
                 android:title="@string/init_map_directory_description" />

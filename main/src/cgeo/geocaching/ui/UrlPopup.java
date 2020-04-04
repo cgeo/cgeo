@@ -28,4 +28,18 @@ public class UrlPopup {
                 });
         builder.create().show();
     }
+
+    public void forward(final String title, final String message, final String url) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setTitle(title)
+                .setPositiveButton(R.string.err_none, (dialog, id) -> {
+                    final Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    context.startActivity(i);
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel());
+        builder.create().show();
+    }
 }
