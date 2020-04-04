@@ -7,7 +7,9 @@
     <TextView android:id="@android:id/title"
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:textSize="18sp" />
     <TextView android:id="@android:id/summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
