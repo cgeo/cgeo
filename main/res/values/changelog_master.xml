@@ -6,13 +6,14 @@
     · New: Added button "Add current location" to create standard waypoint\n
     · New: Added option to hide archived caches\n
     · New: Added map options to hide certain waypoint types\n
-    · New: Show (unsaved) caches on corrected coordinates on live map if applicable\n
+    · New: Show (unsaved) caches at corrected coordinates on live map if applicable\n
     · New: Create individual routes (by long pressing on icons in map)\n
     · Fix: Crash after "Remove all" in cache list\n
     · Fix: Crash after rapid movements on OSM map\n
+    · Fix: Store manually set values in seekbar preferences\n
     · Change: Moved hide options to separate map submenu\n
     · Change: Separated impacts from \"hide disabled\" and \"hide archived\" options\n
     · Change: Switch off indoor mode for Google Maps in satellite mode\n
-    
+    · Change: Improve visibility of subheadings in preferences\n
   </string>
 </resources>
