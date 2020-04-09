@@ -151,7 +151,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
             final File mapFile = new File(fileName);
             if (mapFile.exists()) {
-                return new RendererLayer(tileCache, new MapFile(mapFile), mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
+                final MapFile mf = new MapFile(mapFile, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
+                MapProviderFactory.setLanguages(mf.getMapLanguages());
+                return new RendererLayer(tileCache, mf, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
             }
             return null;
         }

@@ -1155,6 +1155,7 @@
     <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>
+    <string name="map_language">Map language</string>
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>
     <string name="map_as_list">Show as list</string>

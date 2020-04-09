@@ -949,6 +949,14 @@ public class Settings {
         mapSource = newMapSource;
     }
 
+    public static void setMapLanguage(final int languageId) {
+        putInt(R.string.pref_maplanguage, languageId);
+    }
+
+    public static int getMapLanguage() {
+        return getInt(R.string.pref_maplanguage, 0);
+    }
+
     public static void setAnyCoordinates(final Geopoint coords) {
         if (coords != null) {
             putFloat(R.string.pref_anylatitude, (float) coords.getLatitude());
