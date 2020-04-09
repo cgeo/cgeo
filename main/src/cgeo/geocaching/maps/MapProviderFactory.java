@@ -10,6 +10,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SubMenu;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 public class MapProviderFactory {
 
     private static final ArrayList<MapSource> mapSources = new ArrayList<>();
+    private static String[] languages;
 
     static {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
@@ -108,6 +110,50 @@ public class MapProviderFactory {
 
     public static MapSource getDefaultSource() {
         return mapSources.get(0);
+    }
+
+    /**
+     * Fills the "Map language" submenu with the languages provided by the current map
+     * Makes menu visible if more than one language is available, invisible if not
+     *
+     * @param menu
+     */
+    public static void addMapViewLanguageMenuItems(final Menu menu) {
+        final MenuItem parentMenu = menu.findItem(R.id.menu_select_language);
+        if (languages != null) {
+            final int currentLanguage = Settings.getMapLanguage();
+            final SubMenu subMenu = parentMenu.getSubMenu();
+            for (int i = 0; i < languages.length; i++) {
+                final int languageId = languages[i].hashCode();
+                subMenu.add(R.id.menu_group_map_languages, languageId, i, languages[i]).setCheckable(true).setChecked(languageId == currentLanguage);
+            }
+            subMenu.setGroupCheckable(R.id.menu_group_map_languages, true, true);
+            parentMenu.setVisible(languages.length > 1);
+        } else {
+            parentMenu.setVisible(false);
+        }
+    }
+
+    /**
+     * Return a language by id.
+     *
+     * @param id the language id
+     * @return the language, or <tt>null</tt> if <tt>id</tt> does not correspond to a registered language
+     */
+    @Nullable
+    public static String getLanguage(final int id) {
+        if (languages != null) {
+            for (final String language : languages) {
+                if (language.hashCode() == id) {
+                    return language;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void setLanguages (final String[] newLanguages) {
+        languages = newLanguages;
     }
 
     /**

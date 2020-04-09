@@ -199,6 +199,18 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_select_language"
+        android:title="@string/map_language"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
+        <menu>
+            <group
+                android:id="@+id/menu_group_map_languages"
+                android:checkableBehavior="single" >
+            </group>
+        </menu>
+    </item>
+    <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_agenda"
         android:title="@string/map_as_list">

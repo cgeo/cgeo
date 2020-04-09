@@ -283,6 +283,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         getMenuInflater().inflate(R.menu.map_activity, menu);
 
         MapProviderFactory.addMapviewMenuItems(menu);
+        MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
         myLocSwitch = new CheckBox(this);
@@ -511,11 +512,18 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                if (mapSource != null) {
+                final String language = MapProviderFactory.getLanguage(id);
+                if (language != null) {
                     item.setChecked(true);
-                    changeMapSource(mapSource);
+                    changeLanguage(id);
                     return true;
+                } else {
+                    final MapSource mapSource = MapProviderFactory.getMapSource(id);
+                    if (mapSource != null) {
+                        item.setChecked(true);
+                        changeMapSource(mapSource);
+                        return true;
+                    }
                 }
         }
         return false;
@@ -676,6 +684,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
     }
 
+    private void changeLanguage(final int languageId) {
+        Settings.setMapLanguage(languageId);
+        mapRestart();
+    }
+
     /**
      * Restart the current activity with the default map source.
      */
@@ -705,6 +718,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (newSource instanceof MapsforgeMapSource) {
             newLayer = ((MapsforgeMapSource) newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
         }
+        ActivityMixin.invalidateOptionsMenu(this);
 
         // Exchange layer
         if (newLayer != null) {
