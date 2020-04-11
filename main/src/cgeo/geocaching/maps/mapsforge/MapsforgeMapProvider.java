@@ -8,6 +8,7 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
+import cgeo.geocaching.maps.mapsforge.v6.layers.DownloadLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.MultiRendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
@@ -27,6 +28,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 import org.mapsforge.map.model.IMapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
@@ -35,12 +37,20 @@ import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     public static final String MAPSFORGE_MAPNIK_ID = "MAPSFORGE_MAPNIK";
+    public static final String MAPSFORGE_OSMDE_ID = "MAPSFORGE_OSMDE";
+    public static final String MAPSFORGE_CYCLOSM_ID = "MAPSFORGE_CYCLOSM";
+
     private MapItemFactory mapItemFactory = new MapsforgeMapItemFactory();
 
     private MapsforgeMapProvider() {
         final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
+
+        if (!Settings.useOldMapsforgeAPI()) {
+            registerMapSource(new OsmdeMapSource(MAPSFORGE_OSMDE_ID, this, resources.getString(R.string.map_source_osm_osmde), MapGeneratorInternal.MAPNIK));
+            registerMapSource(new CyclosmMapSource(MAPSFORGE_CYCLOSM_ID, this, resources.getString(R.string.map_source_osm_cyclosm), MapGeneratorInternal.MAPNIK));
+        }
 
         updateOfflineMaps();
     }
@@ -155,6 +165,36 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             }
             return null;
         }
+    }
+
+    public static final class CyclosmMapSource extends MapsforgeMapSource {
+
+        public CyclosmMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+            super(fileName, mapProvider, name, generator);
+        }
+
+        @Override
+        public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
+            final AbstractTileSource source = TileSourceCyclosm.INSTANCE;
+            source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
+            return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
+        }
+
+    }
+
+    public static final class OsmdeMapSource extends MapsforgeMapSource {
+
+        public OsmdeMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+            super(fileName, mapProvider, name, generator);
+        }
+
+        @Override
+        public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
+            final AbstractTileSource source = TileSourceOsmde.INSTANCE;
+            source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
+            return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
+        }
+
     }
 
     public static final class OfflineMultiMapSource extends MapsforgeMapSource {

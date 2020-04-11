@@ -760,7 +760,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OpenStreetMap</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="init_sendToCgeo">Send to c:geo</string>

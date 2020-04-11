@@ -720,6 +720,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             layers.add(index, newLayer.getTileLayer());
             this.tileLayer = newLayer;
             this.setMapTheme();
+            this.tileLayer.onResume();
         } else {
             this.tileLayer = null;
         }
