@@ -20,6 +20,7 @@ public class Progress {
     private ProgressDialog dialog;
     private int progress = 0;
     private final boolean hideAbsolute;
+    private DialogInterface.OnClickListener cancelListener;
 
     public Progress(final boolean hideAbsolute) {
         this.hideAbsolute = hideAbsolute;
@@ -64,6 +65,9 @@ public class Progress {
             dialog.setCancelable(true);
             dialog.setCancelMessage(cancelMessage);
             dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelMessage);
+        } else if (cancelListener != null) {
+            dialog.setCancelable(true);
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelListener);
         } else {
             dialog.setCancelable(false);
         }
@@ -109,4 +113,7 @@ public class Progress {
         setProgress(progress + increment);
     }
 
+    public void setOnCancelListener (final DialogInterface.OnClickListener cancelListener) {
+        this.cancelListener = cancelListener;
+    }
 }
