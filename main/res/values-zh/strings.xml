@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- basics -->
+    <!-- actionbar -->
+    <!-- caches -->
+    <!-- cache sizes -->
+    <!-- waypoints -->
+    <!-- logs -->
+    <!-- translation -->
+    <!-- errors, warnings, info toasts -->
+    <!-- location service -->
+    <!-- standard menu -->
+    <!-- main screen -->
+    <!-- caches -->
+    <!-- caches lists -->
+    <!-- about -->
+    <!-- settings -->
+    <!-- backup / restore -->
+    <!-- proximity notification -->
+    <!-- map sources -->
+    <!-- auth generic -->
+    <!-- auth credentials -->
+    <!-- auth token -->
+    <!-- auth Twitter -->
+    <!-- auth opencaching -->
+    <!-- auth geocaching.su -->
+    <!-- auth geokrety -->
+    <!-- cache -->
+    <!-- days remaining -->
+    <!-- coordinate calculator hints -->
+    <!-- editor dialog -->
+    <!-- file list base -->
+    <!-- simple_dir_chooser -->
+    <!-- gpx -->
+    <!-- map file select -->
+    <!-- theme file select -->
+    <!-- import -->
+    <!-- popup -->
+    <!-- waypoint -->
+    <!-- visit -->
+    <!-- map -->
+    <!-- search -->
+    <!-- trackable -->
+    <!-- user -->
+    <!-- navigation -->
+    <!-- license -->
+    <!-- helpers -->
+    <!-- export -->
+    <!-- GC attributes -->
+    <!-- next things -->
+    <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <!-- status (used via string based resource loading) -->
+    <!-- text-to-speech for compass view -->
+    <!-- various -->
+    <!-- shortcuts -->
+    <!-- Geokrety -->
+    <!-- distance units -->
+    <!-- calendar adder -->
+    <!-- permission handling -->
+    <!-- colors -->
+    <!-- number input -->
+    <!-- text notification channel infos & proximity notification title -->
+    <!-- individual routes -->
+</resources>
