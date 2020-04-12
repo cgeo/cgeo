@@ -1714,7 +1714,7 @@
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Local file handler</string>
     <string name="localfile_title">Open a local file</string>
-    <string name="localfile_cannot_handle">c:geo cannot handle this file</string>
+    <string name="localfile_cannot_handle">Error reading file or c:geo cannot handle this file type.</string>
     <string name="localfile_foundmap">found a map file</string>
 
     <!-- ReceiveMapFileActivity -->
@@ -1724,6 +1724,8 @@
     <string name="receivemapfile_alreadyexists">A file with this name already exists. Overwrite existing file or save new file under a different name?</string>
     <string name="receivemapfile_option_overwrite">Overwrite</string>
     <string name="receivemapfile_option_differentname">Different name</string>
+    <string name="receivemapfile_kb_copied">%d kB copied</string>
+    <string name="receivemapfile_cancelled">Map file transfer cancelled</string>
 
     <!-- Download map preference -->
     <string name="downloadmap_title">Download basic offline maps</string>

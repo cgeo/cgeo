@@ -10,7 +10,7 @@ import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.FileUtils;
 import static cgeo.geocaching.utils.FileUtils.getFilenameFromPath;
 
@@ -36,10 +36,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 public class ReceiveMapFileActivity extends AbstractActivity {
 
-    private final AtomicBoolean handledSuccessfully = new AtomicBoolean(true);
-    private File file = null;
     private Uri uri = null;
     private String mapDirectory = null;
+    private File file = null;
+    private String fileinfo = "";
 
     private static final String MAP_EXTENSION = ".map";
 
@@ -87,6 +87,10 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             if (file == null) {
                 createRandomlyNamedFile();
             }
+            fileinfo = getFilenameFromPath(file.getPath());
+            if (fileinfo != null) {
+                fileinfo = fileinfo.substring(0, fileinfo.length() - MAP_EXTENSION.length());
+            }
             return true;
         } catch (IOException e) {
             return false;
@@ -100,68 +104,83 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     .setCancelable(true)
                     .setMessage(R.string.receivemapfile_alreadyexists)
                     .setPositiveButton(R.string.receivemapfile_option_overwrite, (dialog3, button3) -> {
-                        receiveMapFileInBackground(activity);
+                        new CopyTask(this).execute();
                     })
-                    .setNegativeButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
+                    .setNeutralButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
                         createRandomlyNamedFile();
-                        receiveMapFileInBackground(activity);
+                        new CopyTask(this).execute();
+                    })
+                    .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> {
+                        activity.finish();
                     })
                     .create();
             dialog.setOwnerActivity(activity);
             dialog.show();
         } else {
-            receiveMapFileInBackground(activity);
+            new CopyTask(this).execute();
         }
     }
 
-    private void receiveMapFileInBackground(final Activity activity) {
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> handledSuccessfully.set(moveMapFile()), () -> {
-                String msg = getString(R.string.receivemapfile_error);
-                if (handledSuccessfully.get()) {
-                    String fileinfo = getFilenameFromPath(file.getPath());
-                    fileinfo = fileinfo.substring(0, fileinfo.length() - MAP_EXTENSION.length());
-                    msg = String.format(getString(R.string.receivemapfile_success), fileinfo);
-                }
-                Dialogs.message(activity, getString(R.string.receivemapfile_intenttitle), msg, getString(android.R.string.ok), (dialog, button) -> finish());
-            }
-        );
-    }
+    protected class CopyTask extends AsyncTaskWithProgressText<String, Boolean> {
+        private int bytesCopied = 0;
+        private final String progressFormat = getString(R.string.receivemapfile_kb_copied);
+        private AtomicBoolean cancelled = new AtomicBoolean(false);
+        private Activity context;
 
-    private boolean moveMapFile() {
-        try {
-            final InputStream inputStream = getContentResolver().openInputStream(uri);
+        CopyTask(final Activity activity) {
+            super(activity, activity.getString(R.string.receivemapfile_intenttitle), "");
+            setOnCancelListener((dialog, which) -> cancelled.set(true));
+            context = activity;
+        }
+
+        @Override
+        protected Boolean doInBackgroundInternal(final String[] logTexts) {
             try {
-                // copy file
-                file.setWritable(true, false);
-                final OutputStream outputStream = new FileOutputStream(file);
-                final byte buffer[] = new byte[4096];
-                int length = 0;
-                while ((length = inputStream.read(buffer)) > 0) {
-                    outputStream.write(buffer, 0, length);
-                }
-                inputStream.close();
-                outputStream.close();
-
-                // remember map file and set it as current map source
-                final String newMapPath = file.getPath();
-                Settings.setMapFile(newMapPath);
-                MapSource newMapSource = null;
-                for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
-                    if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && ((MapsforgeMapProvider.OfflineMapSource) mapSource).getFileName().equals(newMapPath)) {
-                        newMapSource = mapSource;
-                        break;
+                final InputStream inputStream = getContentResolver().openInputStream(uri);
+                try {
+                    // copy file
+                    file.setWritable(true, false);
+                    final OutputStream outputStream = new FileOutputStream(file);
+                    final byte buffer[] = new byte[4096];
+                    int length = 0;
+                    while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
+                        outputStream.write(buffer, 0, length);
+                        bytesCopied += length;
+                        publishProgress(String.format(progressFormat, bytesCopied >> 10));
                     }
-                }
-                if (newMapSource != null) {
-                    Settings.setMapSource(newMapSource);
-                }
+                    inputStream.close();
+                    outputStream.close();
 
-                return true;
-            } catch (IOException e) {
+                    // remember map file and set it as current map source
+                    if (!cancelled.get()) {
+                        final String newMapPath = file.getPath();
+                        Settings.setMapFile(newMapPath);
+                        MapSource newMapSource = null;
+                        for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
+                            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && ((MapsforgeMapProvider.OfflineMapSource) mapSource).getFileName().equals(newMapPath)) {
+                                newMapSource = mapSource;
+                                break;
+                            }
+                        }
+                        if (newMapSource != null) {
+                            Settings.setMapSource(newMapSource);
+                        }
+                    } else {
+                        file.delete();
+                    }
+
+                    return !cancelled.get();
+                } catch (IOException e) {
+                }
+            } catch (FileNotFoundException e) {
             }
-        } catch (FileNotFoundException e) {
+            return false;
         }
-        return false;
+
+        @Override
+        protected void onPostExecuteInternal(final Boolean success) {
+            Dialogs.message(context, getString(R.string.receivemapfile_intenttitle), cancelled.get() ? getString(R.string.receivemapfile_cancelled) : success ? String.format(getString(R.string.receivemapfile_success), fileinfo) : getString(R.string.receivemapfile_error), getString(android.R.string.ok), (dialog, button) -> finish());
+        }
     }
 
     private void createRandomlyNamedFile() {
