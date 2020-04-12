@@ -568,6 +568,7 @@ public class DataStore {
             db.execSQL(dbCreateTrackables);
             db.execSQL(dbCreateSearchDestinationHistory);
             db.execSQL(dbCreateTrailHistory);
+            db.execSQL(dbCreateRoute);
 
             createIndices(db);
         }
