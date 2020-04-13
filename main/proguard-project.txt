@@ -129,12 +129,6 @@
 # used in tests
 -keepclassmembers public class * extends io.reactivex.Observable { public ** blockingFirst(); }
 
-# Showcaseview ------------------------------------------------------------------------------------
-
-# ignore reflection warnings
--dontnote com.github.amlcurran.showcaseview.**
-
-
 # ViewPager Indicator -----------------------------------------------------------------------------
 -dontnote com.viewpagerindicator.TitlePageIndicator
 -dontnote com.viewpagerindicator.TabPageIndicator
