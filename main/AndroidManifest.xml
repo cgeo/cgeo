@@ -230,26 +230,28 @@
             android:name=".HandleLocalFilesActivity"
             android:exported="true"
             android:label="@string/localfile_intenttitle">
-            <!-- accept local files for further filtering -->
+            <!-- Accept local files for further filtering -->
             <!-- Android itself does not support filtering local files by file extension, and MIME Types are mostly unset or generic for the files c:geo uses -->
+            <!-- Sadly, every file management tool on Android seems to handle things a bit differently, so we need to use some seemingly overlapping alternatives... -->
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:mimeType="application/octet-stream" />
-
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="content" />
                 <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
             </intent-filter>
 
         </activity>
