@@ -1001,6 +1001,7 @@
     <string name="cache_hidden">Hidden</string>
     <string name="cache_event">Date</string>
     <string name="cache_location">Location</string>
+    <string name="cache_location_country">Country</string>
     <string name="cache_coordinates">Coordinates</string>
     <string name="cache_calculator">Calculator</string>
     <string name="cache_coordinates_original">Original Coordinates</string>

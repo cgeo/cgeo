@@ -67,6 +67,7 @@ public class FilterRegistry {
         register(R.string.caches_filter_popularity_ratio, PopularityRatioFilter.Factory.class);
         register(R.string.caches_filter_personal_data, PersonalDataFilterFactory.class);
         register(R.string.caches_filter_lists, ListFilterFactory.class);
+        register(R.string.cache_location_country, CountryFilterFactory.class);
     }
 
     public List<FactoryEntry> getFactories() {

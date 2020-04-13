@@ -3408,6 +3408,29 @@ public class DataStore {
         }
     }
 
+    public static List<String> getStoredLocations() {
+
+        final List<String> locations = new ArrayList<>();
+
+        init();
+
+        try (Cursor cursor = database.rawQuery("SELECT DISTINCT c.location FROM " + dbTableCaches + " c", new String[0]);) {
+
+            if (cursor.moveToFirst()) {
+                do {
+                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
+                } while (cursor.moveToNext());
+            }
+
+        } catch (final SQLiteDoneException ignored) {
+            // Do nothing, it only means we have no information on the cache
+        } catch (final Exception e) {
+            Log.e("DataStore.getStoredLocations", e);
+        }
+
+        return locations;
+    }
+
     public static void addToLists(final Collection<Geocache> caches, final Map<String, Set<Integer>> cachesLists) {
         if (caches.isEmpty() || cachesLists.isEmpty()) {
             return;
@@ -3646,6 +3669,8 @@ public class DataStore {
         }
 
     }
+
+
 
     public static void saveVisitDate(final String geocode, final long visitedDate) {
         setVisitDate(Collections.singletonList(geocode), visitedDate);
