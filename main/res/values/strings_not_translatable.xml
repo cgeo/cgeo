@@ -171,4 +171,12 @@
 
     <!-- notification channel -->
     <string translatable="false" name="notification_channel_id">c:geo notification channel</string>
+
+    <!-- link data to WhereYouGo - must be according to WhereYouGo configuration in their AndroidManifest.xml -->
+    <string translatable="false" name="whereyougo_package">menion.android.whereyougo</string>
+    <string translatable="false" name="whereyougo_action_Mapsforge">"menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"</string>
+
+    <!-- WhereYouGo helper - must be the same values as in WhereYouGo -->
+    <string translatable="false" name="cgeo_queryMapFile_resultParam">mapfile</string>
+    <string translatable="false" name="cgeo_queryMapFile_actionParam">forceAndFeedback</string>
 </resources>

@@ -168,6 +168,10 @@
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
         <activity
+            android:name="cgeo.geocaching.helper.QueryMapFile"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".twitter.TwitterAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/auth_twitter"
