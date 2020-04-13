@@ -21,6 +21,10 @@ android {
         minSdkVersion 16
         //noinspection OldTargetApi
         targetSdkVersion 28
+
+        // include only those language resources from libraries which we actively maintain ourselves in the translation project
+        // not yet enough translations (~50%): "is","iw" (="he"),"zh"
+        resConfigs "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr"
     }
 
     sourceSets {
