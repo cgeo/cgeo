@@ -47,7 +47,4 @@ main/gradle.properties
 # ignore AS layout captures
 captures/
 
-# ignor calendar res folder (for crowdin sync)
-/cgeo-calendar/res
-
 main/usage.txt
