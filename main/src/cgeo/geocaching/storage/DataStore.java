@@ -65,6 +65,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -77,6 +78,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -3430,6 +3433,86 @@ public class DataStore {
         }
     }
 
+    public static Set<String> getStoredLocationsInList(final int listId) {
+
+        final Set<String> locations = new TreeSet<>(String::compareTo);
+
+        init();
+
+        try (Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_IN_LIST.query, new String[] {Integer.toString(listId)})) {
+
+            if (cursor.moveToFirst()) {
+                do {
+                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
+                } while (cursor.moveToNext());
+            }
+
+        } catch (final SQLiteDoneException ignored) {
+            // Do nothing, it only means we have no information on the cache
+        } catch (final Exception e) {
+            Log.e("DataStore.getStoredLocationsInList", e);
+        }
+
+        return locations;
+    }
+
+    public static Set<String> getAllStoredLocations() {
+
+        final Set<String> locations = new TreeSet<>(String::compareTo);
+
+        init();
+
+        try (Cursor cursor = database.rawQuery(PreparedStatement.GET_ALL_STORED_LOCATIONS.query, new String[0])) {
+
+            if (cursor.moveToFirst()) {
+                do {
+                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
+                } while (cursor.moveToNext());
+            }
+
+        } catch (final SQLiteDoneException ignored) {
+            // Do nothing, it only means we have no information on the cache
+        } catch (final Exception e) {
+            Log.e("DataStore.getAllStoredLocations", e);
+        }
+
+        return locations;
+    }
+
+    public static Set<String> getStoredLocationsForSet(Set<String> geocodes) {
+
+        final Set<String> locations = new TreeSet<>(String::compareTo);
+
+        init();
+
+        final StringBuilder geoCodePlaceholderList = new StringBuilder();
+
+        final int length = geocodes.size();
+
+        for (int i = 0; i < length; i++) {
+            geoCodePlaceholderList.append("?");
+            if (i < length - 1) {
+                geoCodePlaceholderList.append(", ");
+            }
+        }
+
+        try (Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_IN_LIST.query.replace("%GEOCODE_LIST%", geoCodePlaceholderList), geocodes.toArray(new String[length]))) {
+
+            if (cursor.moveToFirst()) {
+                do {
+                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
+                } while (cursor.moveToNext());
+            }
+
+        } catch (final SQLiteDoneException ignored) {
+            // Do nothing, it only means we have no information on the cache
+        } catch (final Exception e) {
+            Log.e("DataStore.getStoredLocationsForSet", e);
+        }
+
+        return locations;
+    }
+
     public static void addToLists(final Collection<Geocache> caches, final Map<String, Set<Integer>> cachesLists) {
         if (caches.isEmpty() || cachesLists.isEmpty()) {
             return;
@@ -3627,7 +3710,10 @@ public class DataStore {
         CHECK_IF_PRESENT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE geocode = ?"),
         SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
-        SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)");
+        SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
+        GET_STORED_LOCATIONS_IN_LIST("SELECT c.location, c.geocode FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.location IS NOT NULL AND c.geocode = l.geocode AND l.list_id = ?"),
+        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
+        GET_STORED_LOCATIONS_FROM_GEOCODES("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL AND c.geocode IN (%GEOCODE_LIST%)");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
@@ -3668,6 +3754,8 @@ public class DataStore {
         }
 
     }
+
+
 
     public static void saveVisitDate(final String geocode, final long visitedDate) {
         setVisitDate(Collections.singletonList(geocode), visitedDate);
