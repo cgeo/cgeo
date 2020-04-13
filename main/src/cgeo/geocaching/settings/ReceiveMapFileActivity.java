@@ -27,8 +27,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 /**
  * Receives a map file via intent, moves it to the currently set map directory and sets it as current map source.
  * If no map directory is set currently, default map directory is used, created if needed, and saved as map directory in preferences.
