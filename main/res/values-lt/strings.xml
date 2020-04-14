@@ -701,7 +701,6 @@
     <string name="auth_dialog_completed_twitter">c:geo priregistruota ir jai leidžiama rašyti Twitter paskyroje.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo dabar registruota ir leidžiama naudotis %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo dabar registruota ir leidžiama naudotis %s.</string>
     <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
@@ -1111,10 +1110,8 @@
     <string name="helper_locus_description">Navigacijos programa Jūsų telefonui. Žiūrėkite išsaugotus topo žemėlapius, įrašykite savo maršrutą, ieškokite slėptuves, naudokite balso komandas ir dar daugiau.</string>
     <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
     <string name="helper_bluetoothgps_description">Leidžia naudoti išorinį GPS imtuvą tikslesnėms koordinatėms gauti ir taupyti jūsų prietaiso bateriją.</string>
-    <string name="helper_gps_locker_title">GPS užraktas</string>
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_barcode_description">Egzistuoja Greasemonkey įskiepiai ir svetainės, kurios  geo kodus paverčia brūkšniniu kodu. Su šia programa c:geo gali nuskaityti tokius kodus tiesiai iš kompiuterio ekrano.</string>
-    <string name="helper_pocketquery_title">Pocket Query kūrėjas</string>
     <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Pocket Query sąrašus pagal jūsų esamą vietą arba pasirinktą tašką žemėlapyje. Būtina Premium Geocaching.com narystė.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
@@ -1446,7 +1443,6 @@
     <string name="confirm_report_problem_message">Norite pranešti \'%s\'. Ar esate tikri?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktyvuoti</string>
-    <string name="init_geokrety">Geokrety.org</string>
     <string name="init_summary_geokrety">Įjungti keliauninkus iš GeoKrety.org</string>
     <string name="init_geokrety_description">Leiskite c:geo prisijungti prie GeoKrety.org tam, kad galėtumėt registruoti GeoKrety keliauninkus.</string>
     <string name="init_geokrety_userid">Vartotojo Id: %s</string>
@@ -1487,10 +1483,6 @@
         <item quantity="many">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
         <item quantity="other">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_ft">pėdos</string>
-    <string name="unit_yd">jardai</string>
-    <string name="unit_mi">mylios</string>
     <string name="pq_download_and_import">Importuoti Pocket query</string>
     <string name="caches_refresh_all_warning">Šis veiksmas gali išnaudoti daug tinklo srauto. Ar tikrai norite atnaujinti visas slėptuves?</string>
     <string name="list_list_headline">Sąrašas:</string>
@@ -1535,4 +1527,8 @@
     <string name="notification_channel_description">pranešimas iš c:geo geocaching programėlės</string>
     <string name="proximity_notification_title">c:geo priartėjimo pranešimas</string>
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">pėdos</string>
+    <string name="unit_yd">jardai</string>
+    <string name="unit_mi">mylios</string>
 </resources>
