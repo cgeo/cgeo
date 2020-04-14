@@ -607,7 +607,6 @@
     <string name="auth_dialog_completed_twitter">c:geo este acum autorizat să posteze pe Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo este acum autorizat să comunice cu %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo este acum autorizat să comunice cu %s.</string>
     <string name="err_auth_geokrety_bad_password">Numele de utilizator/parola incorect.</string>
@@ -730,7 +729,6 @@
     <string name="cache_menu_share">Distribuie geocutie</string>
     <string name="cache_menu_move_list">Mută în altă listă</string>
     <string name="cache_menu_copy_list">Copiază în altă listă</string>
-    <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
     <string name="cache_menu_vote">Votează</string>
     <string name="cache_menu_checker">Accesează Geochecker</string>
     <string name="cache_menu_challenge_checker">Caută provocări</string>
@@ -966,11 +964,8 @@
     <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
-    <string name="helper_bluetoothgps_title">GPS prin Bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
-    <string name="helper_barcode_title">Cititor de coduri de bare</string>
     <string name="helper_barcode_description">Există aplicaţii GreaseMonkey şi site-uri care pot afişa geocoduri sub formă de coduri de bare. Cu aceasta aplicaţie, c:geo poate citi aceste geocoduri direct de pe ecranul calculatorului.</string>
-    <string name="helper_pocketquery_title">Creator de \"Pocket Query\"</string>
     <string name="helper_pocketquery_description">Permite crearea de Pocket Queries centrate pe poziţia ta actuală sau a unui punct de pe hartă. Necesită cont premium pe Geocaching.com.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
@@ -1326,8 +1321,6 @@
         <item quantity="few">Adaugă această geocutie la favorite (%d disponibile)</item>
         <item quantity="other">Adaugă această geocutie la favorite (%d disponibile)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_yd">zd</string>
     <string name="pq_download_and_import">Importă căutare personalizată</string>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
     <string name="list_list_headline">Liste:</string>
@@ -1349,4 +1342,6 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_yd">zd</string>
 </resources>
