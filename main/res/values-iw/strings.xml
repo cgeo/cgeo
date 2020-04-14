@@ -436,7 +436,6 @@
     <!-- auth token -->
     <!-- auth Twitter -->
     <!-- auth opencaching -->
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
@@ -514,11 +513,11 @@
     <!-- various -->
     <!-- shortcuts -->
     <!-- Geokrety -->
-    <!-- distance units -->
     <!-- calendar adder -->
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
