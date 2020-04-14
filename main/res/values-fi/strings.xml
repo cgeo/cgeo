@@ -349,7 +349,6 @@
     <string name="caches_move_all">Siirrä kaikki</string>
     <string name="caches_copy_selected">Kopioi valitut</string>
     <string name="caches_copy_all">Kopioi kaikki</string>
-    <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Vie Locus:iin</string>
     <string name="caches_filter">Suodatin</string>
     <string name="caches_filter_title">Suodata</string>
@@ -474,8 +473,6 @@
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut lokkausasetukset</string>
     <string name="settings_goto_url_button">Lisää…</string>
-    <string name="settings_title_gc">Geocaching.com</string>
-    <string name="settings_title_ec">Extremcaching.com</string>
     <string name="settings_activate_gc">Aktivoi</string>
     <string name="settings_activate_ec">Aktivoi</string>
     <string name="settings_gc_legal_note">Käyttämällä geocaching.com -palvelua hyväksyt samalla Groundspeakin käyttöehdot.</string>
@@ -486,38 +483,29 @@
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
-    <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">Aktivoi</string>
     <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
     <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="init_oc_pl">Opencaching.pl</string>
     <string name="settings_activate_oc_pl">Aktivoi</string>
     <string name="init_summary_oc_pl">Lataa kätköt palvelusta opencaching.pl</string>
     <string name="init_oc_pl_description">Anna c:geolle lupa opencaching.pl:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="init_oc_nl">Opencaching.nl</string>
     <string name="settings_activate_oc_nl">Aktivoi</string>
     <string name="init_summary_oc_nl">Lataa kätköt palvelusta opencaching.nl</string>
     <string name="init_oc_nl_description">Anna c:geolle lupa opencaching.nl:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="init_oc_us">Opencaching.us</string>
     <string name="settings_activate_oc_us">Aktivoi</string>
     <string name="init_summary_oc_us">Lataa kätköt palvelusta opencaching.us</string>
     <string name="init_oc_us_description">Anna c:geolle lupa opencaching.us:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="init_oc_ro">Opencaching.ro</string>
     <string name="settings_activate_oc_ro">Aktivoi</string>
     <string name="init_summary_oc_ro">Lataa kätköt palvelusta opencaching.ro</string>
     <string name="init_oc_ro_description">Anna c:geolle lupa opencaching.ro:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="init_oc_uk">opencache.uk</string>
     <string name="settings_activate_oc_uk">Aktivoi</string>
     <string name="init_summary_oc_uk">Lataa kätköt palvelusta opencache.uk</string>
     <string name="init_oc_uk_description">Anna c:geolle lupa opencache.uk:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="init_su">Geocaching.su</string>
     <string name="init_summary_su">Lataa kätköt palvelusta Geocaching.su</string>
     <string name="settings_activate_su">Aktivoi</string>
-    <string name="init_gcvote">GCvote.com</string>
     <string name="init_gcvote_password_description">Voidaksesi arvostella kätköjä, seuraa ohjeita GCVote.com:ssa ja syötä GCvoten salasanasi tänne.</string>
     <string name="err_gcvote_send_rating">Virhe arvostelun lähettämisessä, tarkista GCVote:n salasana asetuksista tai poista arvostelu käytöstä tyhjentämällä salasana-kenttä.</string>
     <string name="gcvote_sent">Ääni lähetetty onnistuneesti</string>
-    <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktivoi</string>
     <string name="init_login_popup">Kirjaudu</string>
     <string name="init_login_popup_working">Kirjaudutaan sisään…</string>
@@ -741,7 +729,6 @@
     <string name="sendToCgeo_download_fail">c:geo ei onnistunut lataamaan kätköjä. Ei internet-yhteyttä tai send2cgeo on kaatunut.</string>
     <string name="sendToCgeo_no_registration">c:geo ei onnistunut latamaan kätköjä. Kirjautuminen kohteeseen send2cgeo vanhentunut. Kirjaudu uudelleen asetuksien kautta.</string>
     <!-- auth generic -->
-    <string name="auth_twitter">Twitter</string>
     <string name="auth_authorize">Valtuuta c:geo</string>
     <string name="auth_check">Tarkista todennus</string>
     <string name="auth_check_again">Tarkista todennus uudelleen</string>
@@ -765,15 +752,7 @@
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo on nyt valtuutettu julkaisemaan Twitterissä.</string>
     <!-- auth opencaching -->
-    <string name="auth_ocde">opencaching.de</string>
-    <string name="auth_ocpl">opencaching.pl</string>
-    <string name="auth_ocnl">opencaching.nl</string>
-    <string name="auth_ocus">opencaching.us</string>
-    <string name="auth_ocro">opencaching.ro</string>
-    <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
-    <!-- auth geocaching.su -->
-    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
     <string name="err_auth_geokrety_bad_password">Väärä käyttäjätunnus/salasana.</string>
@@ -908,10 +887,8 @@
     <string name="cache_menu_share">Jaa kätkö</string>
     <string name="cache_menu_move_list">Siirrä toiseen listaan</string>
     <string name="cache_menu_copy_list">Kopioi toiseen listaan</string>
-    <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_pebble">Peddle</string>
     <string name="cache_menu_vote">Anna ääni</string>
     <string name="cache_menu_checker">Avaa Geochecker</string>
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
@@ -1159,8 +1136,6 @@
     <string name="trackable_touch">Kosketa</string>
     <string name="trackable_not_activated">Reissaaja ei ole aktivoitu</string>
     <string name="trackable_travelbug">Matkalainen</string>
-    <string name="trackable_geokrety">GeoKrety</string>
-    <string name="trackable_geolutins">GeoLutinit</string>
     <string name="trackable_status">Tila</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Perinteinen</string>
@@ -1195,21 +1170,14 @@
     <string name="helper_contacts_title">c:geo yhteystiedot -lisäosa</string>
     <string name="helper_contacts_description">Voit avata kontaktit (puhelimen osoitekirjasta) suoraan kätkön sivulta, joten voit helpommin pyytää ystävän apua.</string>
     <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
-    <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, reititä, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
-    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
-    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
-    <string name="helper_gps_locker_title">GPS Locker</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
-    <string name="helper_barcode_title">Viivakoodinlukija</string>
     <string name="helper_barcode_description">Greasemonkey komentosarjan ja sivuston avulla pystyy lukemaan viiva- ja geokoodeja. Tämän sovelluksen avulla c:geo lukee viiva- ja geokoodeja.</string>
-    <string name="helper_pocketquery_title">Luo Pocket Query</string>
     <string name="helper_pocketquery_description">Tämän avulla on helppo luoda ja ladata Pocket Queryja nykyisestä sijainnistasi tai kartalta valitun pisteen ympäriltä. Vaatii Premium Geocaching.com-tilin.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
-    <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter tarjoaa offline-navigoinnin. Jos on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
@@ -1468,13 +1436,10 @@
     <string name="attribute_offset_cache_no">Ei ole monivaiheinen kätkö</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
-    <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Tuki</string>
     <string name="website_title">Verkkosivu</string>
-    <string name="facebook_title">Facebook</string>
     <string name="facebook_link"><a href="">c:geon sivu</a></string>
-    <string name="twitter_title">Twitter</string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo Google Play:ssä</a></string>
     <string name="about_twitter">Haluatko, että <b>c:geo</b> julkaisee uuden päivityksen Twitterissä aina kun loggaat kätkön?</string>
@@ -1536,7 +1501,6 @@
     <string name="confirm_report_problem_message">Haluat ilmoittaa \"%s\". Oletko varma?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktivoi</string>
-    <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
     <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
     <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
@@ -1569,12 +1533,6 @@
         <item quantity="one">Lisää kätkö suosikkeihin (%d jäljellä)</item>
         <item quantity="other">Lisää kätkö suosikkeihin (%d jäljellä)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_m">m</string>
-    <string name="unit_km">km</string>
-    <string name="unit_ft">ft</string>
-    <string name="unit_yd">yd</string>
-    <string name="unit_mi">mi</string>
     <string name="pq_download_and_import">Tuo Pocket Query</string>
     <string name="caches_refresh_all_warning">Tämä toiminto voi johtaa korkeaan verkkoyhteyden käyttöön. Haluatko todellakin päivittää kaikki kätköt?</string>
     <string name="list_list_headline">Listat:</string>
@@ -1622,4 +1580,10 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
     <string name="map_individual_route_cleared">Yksittäinen reitti tyhjennetty</string>
+    <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mi</string>
 </resources>
