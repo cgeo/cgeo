@@ -712,7 +712,6 @@
     <string name="auth_dialog_completed_twitter">Twitter: A c:geo engedélyt kapott bejegyzések küldésére.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">%s: A c:geo engedélyt kapott az együttműködésre.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <string name="err_auth_geokrety_bad_password">A felhasználóneved/jelszavad helytelennek tűnik.</string>
@@ -837,7 +836,6 @@
     <string name="cache_menu_share">Láda megosztása</string>
     <string name="cache_menu_move_list">Mozgatás másik listára</string>
     <string name="cache_menu_copy_list">Másolás másik listára</string>
-    <string name="cache_menu_pebble">Pebble (okosóra)</string>
     <string name="cache_menu_vote">Értékelés</string>
     <string name="cache_menu_checker">Geochecker megnyitása</string>
     <string name="cache_menu_challenge_checker">Kihívásellenőrző keresése</string>
@@ -1092,9 +1090,7 @@
     <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
     <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
     <string name="helper_gps_locker_description">A GPS Locker stabil GPS-jelről gondoskodik alkalmazások közötti váltáskor és készüléked képernyőjének kikapcsolása után is.</string>
-    <string name="helper_barcode_title">Vonalkódolvasó</string>
     <string name="helper_barcode_description">Léteznek olyan Greasemonkey szkriptek és weboldalak, melyek segítségével egy geokód megjeleníthető vonalkódként. Ezzel az app-pal a c:geo közvetlenül a számítógéped képernyőjéről tudja beolvasni ezeket a geokódokat.</string>
-    <string name="helper_pocketquery_title">Pocket lekérdezés készítő</string>
     <string name="helper_pocketquery_description">A jelenlegi pozíciód vagy egy kijelölt pont körüli pocket lekérdezések egyszerű létrehozása és letöltése. Csak prémium geocaching.com-os tagsággal használható.</string>
     <string name="helper_google_translate_title">Google Fordító</string>
     <string name="helper_google_translate_description">A Google Fordító alkalmazáshoz letöltött fordítócsomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
@@ -1418,7 +1414,6 @@
     <string name="confirm_report_problem_message">Jelenteni akarod: \'%s\'. Biztosan vagy benne?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktiválás</string>
-    <string name="init_geokrety">geokrety.org</string>
     <string name="init_summary_geokrety">GeoKrety utazók engedélyezése</string>
     <string name="init_geokrety_description">A c:geo hitelesítése a geokrety.org-on GeoKrety tárgyak logolásához.</string>
     <string name="init_geokrety_userid">Felhasználói azonosító: %s</string>
@@ -1451,7 +1446,6 @@
         <item quantity="one">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
         <item quantity="other">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Pocket lekérdezés importálása</string>
     <string name="caches_refresh_all_warning">Ez a művelet nagy hálózati forgalmat okozhat. Biztosan frissíteni akarod összes ládát?</string>
     <string name="list_list_headline">Listák:</string>
@@ -1488,4 +1482,5 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
