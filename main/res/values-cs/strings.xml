@@ -351,7 +351,6 @@
     <string name="caches_move_all">Přesunout vše</string>
     <string name="caches_copy_selected">Kopírovat vybrané</string>
     <string name="caches_copy_all">Kopírovat vše</string>
-    <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Exportovat do Locusu</string>
     <string name="caches_filter">Filtr</string>
     <string name="caches_filter_title">Filtrovat podle</string>
@@ -476,8 +475,6 @@
     <string name="settings_category_social">Sociální média</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
     <string name="settings_goto_url_button">více …</string>
-    <string name="settings_title_gc">Geocaching.com</string>
-    <string name="settings_title_ec">Extremcaching.com</string>
     <string name="settings_activate_gc">Aktivovat</string>
     <string name="settings_activate_ec">Aktivovat</string>
     <string name="settings_gc_legal_note">Používáním služeb Geocaching.com souhlasíš s Podmínkami použití společnosti Groundspeak.</string>
@@ -488,38 +485,29 @@
     <string name="settings_gc_description">Autorizovat c:geo pro hledání keší prostřednictvím geocaching.com.</string>
     <string name="settings_ec_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání keší prostřednictvím geocaching.su.</string>
-    <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">Aktivovat</string>
     <string name="init_summary_oc_de">Načíst keše z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.de.</string>
-    <string name="init_oc_pl">opencaching.pl</string>
     <string name="settings_activate_oc_pl">Aktivovat</string>
     <string name="init_summary_oc_pl">Načíst keše z opencaching.pl</string>
     <string name="init_oc_pl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.pl.</string>
-    <string name="init_oc_nl">Opencaching.nl</string>
     <string name="settings_activate_oc_nl">Aktivovat</string>
     <string name="init_summary_oc_nl">Načíst keše z opencaching.nl</string>
     <string name="init_oc_nl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.nl.</string>
-    <string name="init_oc_us">Opencaching.us</string>
     <string name="settings_activate_oc_us">Aktivovat</string>
     <string name="init_summary_oc_us">Načíst keše z opencaching.us</string>
     <string name="init_oc_us_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.us.</string>
-    <string name="init_oc_ro">Opencaching.ro</string>
     <string name="settings_activate_oc_ro">Aktivovat</string>
     <string name="init_summary_oc_ro">Načíst keše z opencaching.ro</string>
     <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
-    <string name="init_oc_uk">opencache.uk</string>
     <string name="settings_activate_oc_uk">Aktivovat</string>
     <string name="init_summary_oc_uk">Načíst keše z opencache.uk</string>
     <string name="init_oc_uk_description">Autorizovat c:geo s opencache.uk pro vyhledávání keší a přístup/filtrování nalezených keší.</string>
-    <string name="init_su">Geocaching.su</string>
     <string name="init_summary_su">Načíst keše z geocaching.su</string>
     <string name="settings_activate_su">Aktivovat</string>
-    <string name="init_gcvote">GCVote.com</string>
     <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
     <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>
     <string name="gcvote_sent">Hlas úspěšně odeslán</string>
-    <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Povolit</string>
     <string name="init_login_popup">Přihlášení</string>
     <string name="init_login_popup_working">Přihlašování…</string>
@@ -743,7 +731,6 @@
     <string name="sendToCgeo_download_fail">c:geo selhalo při stahování keší. Nefunguje internetové připojení nebo je služba send2cgeo vypnutá.</string>
     <string name="sendToCgeo_no_registration">c:geo selhalo při stahování keší. Registrace pro send2cgeo vypršela. Prosím, registruj se znova v nastavení.</string>
     <!-- auth generic -->
-    <string name="auth_twitter">Twitter</string>
     <string name="auth_authorize">Autorizovat c:geo</string>
     <string name="auth_check">Zkontrolovat pověření</string>
     <string name="auth_check_again">Znovu zkontrolovat pověření</string>
@@ -767,15 +754,7 @@
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_ocde">Opencaching.de</string>
-    <string name="auth_ocpl">opencaching.pl</string>
-    <string name="auth_ocnl">opencaching.nl</string>
-    <string name="auth_ocus">opencaching.us</string>
-    <string name="auth_ocro">opencaching.ro</string>
-    <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
-    <!-- auth geocaching.su -->
-    <string name="auth_su">geocaching.su</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo je nyní autorizováno pro interakce s %s.</string>
     <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
@@ -924,10 +903,8 @@
     <string name="cache_menu_share">Sdílet keš</string>
     <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
     <string name="cache_menu_copy_list">Kopírovat do jiného seznamu</string>
-    <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
-    <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_vote">Hlasovat</string>
     <string name="cache_menu_checker">Otevřít Geocheck</string>
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
@@ -1175,8 +1152,6 @@
     <string name="trackable_touch">Dotyk</string>
     <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
     <string name="trackable_travelbug">Travelbug</string>
-    <string name="trackable_geokrety">GeoKrety</string>
-    <string name="trackable_geolutins">Geolutiny</string>
     <string name="trackable_status">Stav</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradiční</string>
@@ -1211,21 +1186,14 @@
     <string name="helper_contacts_title">c:geo – Kontakty (doplněk)</string>
     <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
     <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
-    <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov geokeší, hlasová navigace a mnohem více.</string>
-    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
-    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
-    <string name="helper_gps_locker_title">GPS Locker</string>
     <string name="helper_gps_locker_description">GPS Locker udržuje GPS signál aktivní při přepínání aplikací a při vypnutí obrazovky vašeho zařízení.</string>
-    <string name="helper_barcode_title">Čtečka čárových kódů</string>
     <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
-    <string name="helper_pocketquery_title">Pocket Query Creator</string>
     <string name="helper_pocketquery_description">Umožňuje snadné vytváření a stažení PQ podle současné pozice nebo bodu na mapě. Vyžaduje Premium účet na Geocaching.com.</string>
     <string name="helper_google_translate_title">Překladač Google</string>
     <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy keší v c:geu dlouhým podržením textu (a to bez připojení k Internetu).</string>
-    <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání keší typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
     <string name="helper_brouter_title">BRouter offline navigace</string>
     <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke keši na interní mapě.</string>
@@ -1486,13 +1454,10 @@
     <string name="attribute_offset_cache_no">Není to Offset keš</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
-    <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Podpora</string>
     <string name="website_title">Webové stránky</string>
-    <string name="facebook_title">Facebook</string>
     <string name="facebook_link"><a href="">stránka c:geo</a></string>
-    <string name="twitter_title">Twitter</string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
     <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
@@ -1566,7 +1531,6 @@
     <string name="confirm_report_problem_message">Opravdu chceš nahlásit „%s“?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktivovat</string>
-    <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_summary_geokrety">Povolit sledovatelné předměty z GeoKrety.org</string>
     <string name="init_geokrety_description">Autorizovat c:geo pro logování sledovatelných předmětů služby Geokrety.org.</string>
     <string name="init_geokrety_userid">ID uživatele: %s</string>
@@ -1607,12 +1571,6 @@
         <item quantity="many">Přidat tyto keše do oblíbených (zbývá %d)</item>
         <item quantity="other">Přidat tuto keš do oblíbených (zbývá %d)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_m">m</string>
-    <string name="unit_km">km</string>
-    <string name="unit_ft">ft</string>
-    <string name="unit_yd">yd</string>
-    <string name="unit_mi">mil</string>
     <string name="pq_download_and_import">Importovat Pocket Query</string>
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech keší?</string>
     <string name="list_list_headline">Seznamy:</string>
@@ -1662,4 +1620,10 @@
     <string name="individual_route_error_toggling_waypoint">chyba přepínání waypointu</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
+    <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mil</string>
 </resources>
