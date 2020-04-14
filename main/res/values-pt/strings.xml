@@ -726,9 +726,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_ocpl">Opencaching.pl</string>
     <string name="auth_dialog_completed_oc">O c:geo está agora autorizado a interagir com %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">O c:geo está agora autorizado a interagir com %s.</string>
     <string name="err_auth_geokrety_bad_password">O seu nome de utilizador/palavra-passe parecem inválidos.</string>
@@ -849,7 +847,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_share">Partilhar cache</string>
     <string name="cache_menu_move_list">Mover para outra lista</string>
     <string name="cache_menu_copy_list">Copiar para uma lista diferente</string>
-    <string name="cache_menu_pebble">Seixo</string>
     <string name="cache_menu_vote">Voto</string>
     <string name="cache_menu_checker">Abrir Geochecker</string>
     <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
@@ -1117,12 +1114,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="helper_contacts_description">Permite-lhe que aceda directamente a um contacto (da sua lista de contactos), a partir de um registo feito numa geocache. Assim será mais fácil pedir ajuda aos seus amigos.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a geocaching.com, poderá enviar as geocaches directamente para o seu smartphone com o clique de um botão no navegador.</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
-    <string name="helper_gpsstatus_title">Status do GPS &amp; Ferramentas</string>
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
-    <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
-    <string name="helper_barcode_title">Leitor de código de barras</string>
     <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler, por exemplo, um código de barras directamente do ecrã do seu computador.</string>
     <string name="helper_pocketquery_description">Permite a fácil criação e transferência de Pocket Query, baseado na sua posição actual ou num ponto seleccionado no mapa. Requer uma conta Premium em \'Geocaching.com\'.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
@@ -1478,7 +1472,6 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="one">Adicionar esta cache aos favoritos (%d restante)</item>
         <item quantity="other">Adicionar esta cache aos favoritos (%d restantes)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="caches_refresh_all_warning">Esta acção pode originar um consumo de dados elevado. Tem a certeza que deseja actualizar todas as caches?</string>
     <string name="list_list_headline">Listas:</string>
@@ -1520,4 +1513,5 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="notification_channel_description">notificações da aplicação c:geo</string>
     <string name="proximity_notification_title">notificação de proximidade</string>
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
