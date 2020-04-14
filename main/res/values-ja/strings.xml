@@ -717,7 +717,6 @@
     <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました。</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geoは%sと連携するための認証を受けました。</string>
     <string name="err_auth_geokrety_bad_password">ユーザ名/パスワードが正しくないようです。</string>
@@ -1095,7 +1094,6 @@
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。その他、GPSに関するたくさんの情報が得られます。</string>
     <string name="helper_bluetoothgps_description">外部GPSデバイスを利用することができます。より正確な位置情報を得られ、アンドロイド端末のバッテリ消費が少なくなるかもしれません。</string>
     <string name="helper_gps_locker_description">GPS Locker は、アプリケーションを切り替えるときや、デバイスの画面がオフの場合に GPS 信号をアクティブのままにします。</string>
-    <string name="helper_barcode_title">QRコードスキャナー</string>
     <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます。</string>
     <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります。</string>
     <string name="helper_google_translate_title">Google 翻訳</string>
@@ -1430,7 +1428,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="fav_points_remaining">
         <item quantity="other">このキャッシュをお気に入りに追加 (残り %d)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">ポケット・クエリのインポート</string>
     <string name="caches_refresh_all_warning">この操作は、ネットワーク通信量が高くなる可能性があります。すべてのキャッシュを一括更新してもよろしいですか?</string>
     <string name="list_list_headline">リスト:</string>
@@ -1463,4 +1460,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="number_input_err_format">数の書式が正しくありません</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
