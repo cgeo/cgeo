@@ -297,7 +297,6 @@
     <string name="caches_move_all">Pindahkan semua</string>
     <string name="caches_copy_selected">Salin yang dipilih</string>
     <string name="caches_copy_all">Salin semua</string>
-    <string name="caches_map_locus">Lokus</string>
     <string name="caches_map_locus_export">Ekspor ke lokus</string>
     <string name="caches_filter_title">Filter menurut</string>
     <string name="caches_filter_size">Ukuran</string>
@@ -609,7 +608,6 @@
     <string name="auth_dialog_completed_twitter">c:geo sekarang resmi untuk posting di twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo sekarang resmi untuk berinteraksi dengan %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo sekarang resmi untuk berinteraksi dengan %s.</string>
     <string name="err_auth_geokrety_bad_password">Nama pengguna/Kata sandi anda sepertinya tidak cocok.</string>
@@ -719,9 +717,7 @@
     <string name="cache_menu_share">Bagikan cache</string>
     <string name="cache_menu_move_list">Pindahkan ke daftar yang berbeda</string>
     <string name="cache_menu_copy_list">Salin ke daftar yang berbeda</string>
-    <string name="cache_menu_whereyougo">Kemana kamu pergi</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
-    <string name="cache_menu_pebble">Kerikil</string>
     <string name="cache_menu_vote">Suara</string>
     <string name="cache_menu_checker">Buka Geochecker</string>
     <string name="cache_menu_challenge_checker">Cari pemeriksa penolakan</string>
@@ -959,17 +955,13 @@
     <string name="helper_contacts_title">c:geo kontak plugin</string>
     <string name="helper_contacts_description">Memungkinkan Anda untuk membuka kartu kontak (dari buku alamat Anda) langsung dari entri log, sehingga Anda dapat dengan mudah meminta bantuan kepada teman.</string>
     <string name="helper_sendtocgeo_description">Kirim ke c:geo adalah ekstensi browser <strong>untuk PC Anda</strong>. Saat browsing geocaching.com, Anda bisa mengirim cache ke smartphone Anda dengan satu klik tombol langsung di dalam browser.</string>
-    <string name="helper_locus_title">Lokus</string>
     <string name="helper_locus_description">Aplikasi navigasi luar ruang untuk ponsel anda atau tablet. Lihat peta topo offline, melacak rute anda, geocaches, menggunakan panduan suara dan melakukan bahkan lebih.</string>
     <string name="helper_gpsstatus_description">Anda dapat menggunakan radar di aplikasi ini bersamaan dengan c:geo. Ini juga menawarkan banyak informasi terkait GPS lainnya.</string>
     <string name="helper_bluetoothgps_description">Memungkinkan Anda untuk menggunakan penerima GPS eksternal untuk mendapatkan data lokasi yang lebih tepat, dan dapat menghemat baterai perangkat Anda.</string>
-    <string name="helper_barcode_title">Pemindai Kode Batang</string>
     <string name="helper_barcode_description">Ada script Greasemonkey dan situs web yang memungkinkan tampilan geocodes sebagai barcode. Dengan aplikasi ini, c:geo dapat membaca geocode tersebut secara langsung dari layar komputer Anda.</string>
-    <string name="helper_pocketquery_title">Pencipta kata kunci saku</string>
     <string name="helper_pocketquery_description">Memungkinkan pembuatan dan download mudah dari Pocket Queries yang berpusat pada posisi Anda saat ini atau titik yang dipilih dari sebuah peta. Membutuhkan akun Premium Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Terjemahan</string>
     <string name="helper_google_translate_description">Jika Anda mendownload paket terjemahan di aplikasi Google Terjemahan, Anda dapat dengan mudah menerjemahkan deskripsi cache di c:geo dengan ketukan panjang pada teks deskripsi cache (tanpa koneksi internet).</string>
-    <string name="helper_where_you_go_title">Kemana kamu pergi</string>
     <string name="helper_where_you_go_description">WhereYouGo memungkinkan bermain dan mencari geocaches dari tipe Wherigo. c:geo secara otomatis dapat memicu download kartrid dalam aplikasi ini.</string>
     <string name="helper_brouter_title">Navigasi BRouter Offline</string>
     <string name="helper_brouter_description">BRouter menyediakan routing diluar jaringan offline. Jika sudah diinstal dan berkas yang diperlukan di-download, c:geo akan otomatis menunjukkan rute ke cache pada peta internal.</string>
@@ -1223,7 +1215,6 @@
     <string name="support_title">Dukungan</string>
     <string name="website_title">Situs web</string>
     <string name="facebook_link"><a href="">c: halaman geo </a></string>
-    <string name="twitter_title">Twiter</string>
     <string name="market_link"><a href="">c: geo di Google Play</a></string>
     <string name="about_twitter">Harus <b>c:geo</b> mempublikasikan sebuah status baru di Twitter setiap kali anda log cache?</string>
     <string name="faq_title">Tanya jawab</string>
@@ -1299,7 +1290,6 @@
     <plurals name="fav_points_remaining">
         <item quantity="other">Tambahkan tembolok ini ke favorit (%d tersisa)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Impor kantong pertanyaan</string>
     <string name="caches_refresh_all_warning">Tindakan ini bisa menimbulkan lalu lintas jaringan yang tinggi. Apakah anda yakin ingin menggabungkan semua cache?</string>
     <string name="list_list_headline">Daftar:</string>
@@ -1319,4 +1309,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
