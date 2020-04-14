@@ -702,7 +702,6 @@
     <string name="auth_dialog_completed_twitter">c:geo şimdi Twitter\'da yayın yapmaya yetkili.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
     <string name="err_auth_geokrety_bad_password">Kullanıcı adınız/şifreniz geçersiz görünüyor.</string>
@@ -1083,11 +1082,8 @@
     <string name="helper_locus_description">Telefonunuz veya tabletiniz için kullanıma uygun navigasyon uygulaması. Topo haritaları çevrim dışı görüntüleme, rotanızı takip etme, Geocache bulma, sesli rehber kullanma ve daha fazlasını gerçekleştirebilirsiniz.</string>
     <string name="helper_gpsstatus_description">Radarı bu uygulama içinde c:geo ile birlikte kullanabilirsiniz. Ayrıca size diğer GPS\'lerle alakalı çok fazla bilgi sunar.</string>
     <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
-    <string name="helper_gps_locker_title">GPS Kilidi</string>
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
-    <string name="helper_barcode_title">Barkod Tarayıcısı</string>
     <string name="helper_barcode_description">Geokodların barkod olarak görüntülenmesini sağlayan Greasemonkey komut dosyaları ve internet siteleri var. Bu uygulamayla (c:geo) bu tür geokodları doğrudan bilgisayarınızda görüntüleyebilirsiniz.</string>
-    <string name="helper_pocketquery_title">Sorgulama Kaydı Yaratıcı</string>
     <string name="helper_pocketquery_description">Geçerli konumunuz veya bir haritadan seçilen bir başka konuma odaklanan Sorgulama Kaydı kolay oluşturmanızı ve indirmenizi sağlar. Premium Geocaching.com hesabı gerektirir.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
@@ -1442,7 +1438,6 @@
         <item quantity="one">Bu Geocache\'i favorilerilere ekle (kalan %d)</item>
         <item quantity="other">Bu Geocache\'leri favorilerilere ekle (kalan %d)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Sorgulama kaydı içe aktar</string>
     <string name="caches_refresh_all_warning">Bu seçim yüksek ağ yoğunluğuna neden olabilir. Tüm Geocache\'leri toplu yenilemek istediğinizden emin misiniz?</string>
     <string name="list_list_headline">Listeler:</string>
@@ -1478,4 +1473,5 @@
     <string name="number_input_err_format">Geçersiz sayı biçimi</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
