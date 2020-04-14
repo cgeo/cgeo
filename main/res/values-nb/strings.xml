@@ -468,7 +468,6 @@
     <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencache.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
     <string name="init_summary_su">Last cacher fra Geocaching.su</string>
     <string name="settings_activate_su">Aktiver</string>
-    <string name="init_gcvote">GCVote.com</string>
     <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
     <string name="err_gcvote_send_rating">Feil ved sending av vurdering. Sjekk at passordet for GCVote i innstillingene er riktig eller fjern passordet.</string>
     <string name="gcvote_sent">Stemmegivning sendt</string>
@@ -696,7 +695,6 @@
     <string name="auth_dialog_completed_twitter">c:geo har nå fått godkjenning til å kvitre på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
     <string name="err_auth_geokrety_bad_password">Brukernavn og/eller passord ser ut til å være feil.</string>
@@ -1063,9 +1061,7 @@
     <string name="helper_contacts_description">Gjør det mulig å åpne en kontakt (i telefonens adressebok) direkte fra en logg så du enklere kan be om hjelp fra dine venner.</string>
     <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
     <string name="helper_locus_description">App for utendørs navigasjon til din mobil eller tablet. I appen kan du se topo-kart offline, spore ruten din, lete etter turbokser, bruke en stemmeguide og mye annet.</string>
-    <string name="helper_gpsstatus_title">GPS-status &amp; Verktøykasse</string>
     <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
-    <string name="helper_bluetoothgps_title">Blåtann-GPS</string>
     <string name="helper_bluetoothgps_description">Lar deg bruke ekstern GPS-mottaker for å få mer nøyaktig posisjon og kan spare batteri på enheten.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS-signalet aktivt når du skifter mellom apper og når skjermen er av.</string>
     <string name="helper_barcode_description">Det finnes Greasemonkey-script og nettsider som viser GC-koder som strekkoder eller QR-koder. Med denne appen kan du skanne kodene rett fra skjermen på din datamaskin.</string>
@@ -1415,8 +1411,6 @@
         <item quantity="one">Legg denne cachen til favoritter (%d tilgjengelig)</item>
         <item quantity="other">Legg denne cachen til favoritter (%d tilgjengelig)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_ft">fot</string>
     <string name="pq_download_and_import">Importer Pocket Query</string>
     <string name="caches_refresh_all_warning">Dette kan føre til høy datatrafikk. Er du sikker på at du vil oppdaterer alle cachene?</string>
     <string name="list_list_headline">Lister:</string>
@@ -1452,4 +1446,6 @@
     <string name="number_input_err_format">Feil tallformat</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">fot</string>
 </resources>
