@@ -668,9 +668,7 @@
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo está autorizado ahora a publicar en Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_ocde">Opencaching.de</string>
     <string name="auth_dialog_completed_oc">c:geo está autorizado a interactuar con %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo está autorizado a interactuar con %s.</string>
     <string name="err_auth_geokrety_bad_password">Tu usuario/contraseña no es correcto.</string>
@@ -1034,11 +1032,8 @@
     <string name="helper_locus_description">App de navegación exterior para tu móvil o tableta. Puede visualizar mapas Topo sin conexión, marcar tu ruta, buscar geocachés, usar una guía de voz y mucho más.</string>
     <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
     <string name="helper_bluetoothgps_description">Te permite usar un GPS externo para tener mejor señal, más precisa y ahorrar batería en tu dispositivo.</string>
-    <string name="helper_gps_locker_title">Bloqueador de GPS</string>
     <string name="helper_gps_locker_description">GPS Locker mantiene activa la señal GPS al cambiar entre aplicaciones y cuando la pantalla de tu dispositivo está apagada.</string>
-    <string name="helper_barcode_title">Escáner de código de barras</string>
     <string name="helper_barcode_description">Hay scripts de Greasemonkey y sitios web que permiten mostrar geocódigos como códigos de barras. Con esta app, c:geo puede leer esos geocódigos directamente desde la pantalla de tu PC.</string>
-    <string name="helper_pocketquery_title">Creador de Pocket Query</string>
     <string name="helper_pocketquery_description">Permite crear y descargar de manera sencilla Pocket Queries centrados en tu posición actual o un punto seleecionado en el mapa. Requiere cuenta Premium en geocaching.com.</string>
     <string name="helper_google_translate_title">Traductor de Google</string>
     <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
@@ -1394,7 +1389,6 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">Añadir el caché a favoritos (te queda %d)</item>
         <item quantity="other">Añadir el caché a favoritos (te quedan %d)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="caches_refresh_all_warning">Esta acción puede ocasionar un alto tráfico de red. ¿Estás seguro de querer actualizar todos los cachés?</string>
     <string name="list_list_headline">Listas:</string>
@@ -1419,4 +1413,5 @@ Nombre de archivo:%2$s</string>
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
