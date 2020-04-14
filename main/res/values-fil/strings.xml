@@ -301,7 +301,6 @@
     <string name="caches_move_all">Ang lahat ay ilipat</string>
     <string name="caches_copy_selected">Kopyahin ang napili</string>
     <string name="caches_copy_all">Kopyahin lahat</string>
-    <string name="caches_map_locus">Lokus</string>
     <string name="caches_map_locus_export">Ang mga lokus ay I-eksport</string>
     <string name="caches_filter">Salain</string>
     <string name="caches_filter_title">Ang pagsasala ayon sa</string>
@@ -392,7 +391,6 @@
     <string name="settings_category_social">Ang panlipunan na media</string>
     <string name="settings_category_logging_other">Ang iba pang mga pag pipilian sa pag-login</string>
     <string name="settings_goto_url_button">ang marami&#8230;</string>
-    <string name="settings_title_ec">Ang Extremcatching.com</string>
     <string name="settings_activate_gc">Ang Isaaktibo</string>
     <string name="settings_activate_ec">Isaaktibo</string>
     <string name="settings_gc_legal_note">Sa paggamit ng serbisyo ng geocaching.com, tinanggap mo ang mga termino sa paggamit ng Groundspeak.</string>
@@ -422,11 +420,9 @@
     <string name="init_oc_uk_description">Pahintulot c:geo may opencache.uk para mag hanap ng cache at access/filter para sa iyong caches.</string>
     <string name="init_summary_su">Mag-load ng caches mula sa Geocaching.su</string>
     <string name="settings_activate_su">Gawing Aktibo</string>
-    <string name="init_gcvote">Sa GCvote.com</string>
     <string name="init_gcvote_password_description">Para mai-rate ang cache, kinakailangan mo sumunod sa mga tagubilin ng Gcvote.com at ipasok ang iyong GCvote password dito.</string>
     <string name="err_gcvote_send_rating">May maling nagaganap habang ipinapadala ang pagri-rate, rebisahin ang pasword ng GCVote sa mga setting o kaya ito ay walang laman.</string>
     <string name="gcvote_sent">Ang pagboto ay naipadala ng matagumpay</string>
-    <string name="init_twitter">Ang Twitter</string>
     <string name="settings_activate_twitter">Gawing Aktibo</string>
     <string name="init_login_popup">Mag-login</string>
     <string name="init_login_popup_working">Naglo-login sa&#8230;</string>
@@ -597,7 +593,6 @@
     <string name="sendToCgeo_download_fail">pumalya sa pagda-download ng mga cache ang c:geo. Walang koneksyon sa internet, o nag-down ang send2cgeo.</string>
     <string name="sendToCgeo_no_registration">ang c;geo ay Nabigo sa pagda-download ng mga cache. Nag-expire na ang rehistrasyon para sa send2cgeo. Mangyaring magrehistro sa mga setting.</string>
     <!-- auth generic -->
-    <string name="auth_twitter">Ang Twitter</string>
     <string name="auth_authorize">Ang Awtorisahan ang c:geo</string>
     <string name="auth_check">Pagpapatunay kung tama</string>
     <string name="auth_check_again">Pagpatunay kung tama uli</string>
@@ -621,7 +616,6 @@
     <string name="auth_dialog_completed_twitter">inawtorisahan maka pag post sa twitter ang c:geo.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">inawtorisahang makipagsalamuha ang c;geo sa ngayon sa %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">inawtorisahang makipag-ugnayan ngayon ang c;geo sa %s.</string>
     <string name="err_auth_geokrety_bad_password">Parehong imbalido ang iyong username/password.</string>
@@ -745,10 +739,8 @@
     <string name="cache_menu_share">Magbahagi ng cache</string>
     <string name="cache_menu_move_list">Ang lumipat sa iba\'t-ibang listahan</string>
     <string name="cache_menu_copy_list">Kopyahin sa ibang listahan</string>
-    <string name="cache_menu_whereyougo">Saan ka papunta</string>
     <string name="cache_menu_oruxmaps_online">Ang (Online) OruxMaps</string>
     <string name="cache_menu_oruxmaps_offline">Ang (Offline) OruxMaps</string>
-    <string name="cache_menu_pebble">Ang maliit na bato</string>
     <string name="cache_menu_vote">Ang Boto</string>
     <string name="cache_menu_checker">Ang Geochecker ay bukas</string>
     <string name="cache_menu_challenge_checker">Paghahanap ng hamon checker</string>
@@ -953,7 +945,6 @@
     <string name="trackable_touch">Ang hawak</string>
     <string name="trackable_not_activated">Hindi aktibo ang pagsusubaybay</string>
     <string name="trackable_travelbug">Ang travelbug</string>
-    <string name="trackable_geokrety">Ang GeoKrety</string>
     <string name="geokret_type_traditional">Ang tradisyonal</string>
     <string name="geokret_type_book_or_media">Ang aklat o kaya medyang elektroniko</string>
     <string name="geokret_type_human">Ang tao</string>
@@ -986,18 +977,13 @@
     <string name="helper_contacts_title">ang plugin sa mga kontak ng c:geo</string>
     <string name="helper_contacts_description">Nagbibigay-daan sa iyo na makapagbukas ng isang kard sa kontak (ng iyong libro ng address) direkta mula sa pasukan ng log, kaya ikaw ay maaaring mas madaling makapanghingi ng tulong sa iyong mga kaibigan.</string>
     <string name="helper_sendtocgeo_description">Ang Ipadala sa c:geo ay isang ekstensyon sa browser <strong>para sa iyong PC</strong>. Kapag nagba-browse sa geocaching.com, maaaring kang makapagpadala ng mga cache patungo sa iyong smartphone sa direktahang pagpindut sa pindutang nasa loob ng browser.</string>
-    <string name="helper_locus_title">Ang locus</string>
     <string name="helper_locus_description">Panglabas na app sa nabigasyon para sa iyong telepono o tablet. Tingnan ang mga mapang topo sa offline, subaybayan ang iyong ruta, maghanap ng mga geocache, gumamit ng isang gabay sa tunog at makakagawa ng mas higit pa.</string>
     <string name="helper_gpsstatus_description">Pwede kang gumamit ng radar sa aplikasyong ito kaugnay ng c:geo. Ito rin ay naghahandog ng marami pang ibang impormasyon na may kaugnayan sa GPS.</string>
-    <string name="helper_bluetoothgps_title">Ang bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Pinapayagan kang gumamit ng tagatanggap ng GPS na pangeksternal para makakuha ng mas wastong datos sa lokasyon, at maaaring makapagtira sa baterya ng iyong device.</string>
-    <string name="helper_barcode_title">Ang scanner ng Barcode</string>
     <string name="helper_barcode_description">Mayroong mga script na Greasemonkey at mga websayt na kung saan nagpapagana sa pagdispley ng mga geocode bilang mga barcode. Sa app na ito, ang c:geo ay maaaring makakabasa ng direktahan sa mga geocode na iyan mula sa iskren ng iyong kompyuter.</string>
-    <string name="helper_pocketquery_title">Ang tagapaglikha ng Katanungang Pocket</string>
     <string name="helper_pocketquery_description">Nagpapahintulot sa madaling paglilikha at pag-download ng mga Katanungang Pocket na nakasenteo sa iyong kasalukuyang posisyon o isang napagpiliang punto mula sa isang mapa. Nangangailangan ng isang account na Premium sa Geocaching.com.</string>
     <string name="helper_google_translate_title">Ang agsasalin ng Google</string>
     <string name="helper_google_translate_description">Kung kkaw ay nagdadownload sa mga package ng pagsasalin sa app na Google Translate, pagkatapos ikaw ay maaaring madaling makapagsalin sa mga deskripsyon ng c:geo sa pag-tap ng mataas sa teksto ng deskripsyon sa cache (na walang koneksyon sa Internet).</string>
-    <string name="helper_where_you_go_title">Saankapunta</string>
     <string name="helper_where_you_go_description">Ang WhereYouGo ay nagpapahintulot ng paglalaro at pagsasaliksik sa mga geocache ng klaseng Wherigo. Ang c:geo ay maaring makapag-gatilyo ng awtomatiko sa pagda-download ng mga cartridge sa loob ng app na ito.</string>
     <string name="helper_brouter_description">BRouter nagbibigay ng offline routing. Kung ito ay naka insatala at kinakailangan na ang file ay ma-download, c:geo ay awtomatikong magpapakita ng ruta papunta sa cache mula sa internal na mapa.</string>
     <!-- export -->
@@ -1336,7 +1322,6 @@
         <item quantity="one">Idagdag ang cache sa paborito (%d natitira)</item>
         <item quantity="other">Idagdag ang cache sa paborito (%d natitira)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Mag-angkat ng katanungan sa Pocket</string>
     <string name="caches_refresh_all_warning">Ang aksyon na ito ay maaaring humantong sa mataas na trapiko sa network. Sigurado ka bang gusto mong i-refresh ang lahat ng mga cache?</string>
     <string name="list_list_headline">Listahan:</string>
@@ -1357,4 +1342,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
