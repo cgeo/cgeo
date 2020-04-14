@@ -636,7 +636,6 @@
     <string name="auth_dialog_completed_twitter">El c:geo ara està autoritzat a publicar al Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">El c:geo ara està autoritzat a interactuar amb %s.</string>
     <string name="err_auth_geokrety_bad_password">El seu nom d\'usuari/contrasenya no és correcte.</string>
@@ -998,9 +997,7 @@
     <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
     <string name="helper_locus_description">Aplicació de navegació a l\'aire lliure per al vostre telèfon o tauleta. Podeu veure mapes topogràfics fora de línia, seguir una ruta, trobar geocatxés, utilitzar una guia de veu i molt més.</string>
     <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
-    <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
     <string name="helper_bluetoothgps_description">Permet utilitzar un receptor GPS extern per obtenir dades de localització més precises i estalviar bateria del dispositiu.</string>
-    <string name="helper_barcode_title">Escàner de codi de barres</string>
     <string name="helper_barcode_description">Hi ha scripts de Greasemonkey i llocs web que permeten mostrar els codis dels catxés com a codis de barres. Amb aquesta aplicació el c:geo pot llegir directament els codis dels catxés des de l\'ordinador.</string>
     <string name="helper_pocketquery_description">Permet la fàcil creació i descàrrega de pocket queries centrats en la posició actual o en un punt seleccionat al mapa. Requereix un compte Premium de Geocaching.com.</string>
     <string name="helper_google_translate_description">Si descarregueu paquets de traducció a l\'app Google Translate, llavors podeu traduir fàcilment les descripcions dels catxés al c:geo tocant uns segons sobre el text de la descripció del catxé (sense connexió a Internet).</string>
@@ -1256,7 +1253,6 @@
     <string name="attribute_offset_cache_no">No és un catxé offset</string>
     <!-- next things -->
     <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
-    <string name="powered_by">Carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Ajut</string>
     <string name="website_title">Lloc web</string>
@@ -1352,7 +1348,6 @@
         <item quantity="one">Afegeix aquest geoamagatall als preferits (%d restants)</item>
         <item quantity="other">Afegeix aquests geoamagatalls als preferits (%d restants)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Importa la Pocket query</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
     <string name="list_list_headline">Llistes:</string>
@@ -1374,4 +1369,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
