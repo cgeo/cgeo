@@ -716,7 +716,6 @@
     <string name="auth_dialog_completed_twitter">Το c:geo είναι τώρα εξουσιοδοτημένο να δημοσιεύει στο Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">Το c:geo είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">Το c:geo τώρα είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με το %s.</string>
     <string name="err_auth_geokrety_bad_password">Το όνομα χρήστη ή ο κωδικός πρόσβασης δεν είναι έγκυρα.</string>
@@ -1099,15 +1098,11 @@
     <string name="helper_contacts_title">Πρόσθετο επαφών στο c:geo</string>
     <string name="helper_contacts_description">Σας επιτρέπει να ανοίξετε μια κάρτα επαφής (από το βιβλίο διευθύνσεών σας) απευθείας από μια καταχώρηση αρχείου καταγραφής, ώστε να μπορείτε να ζητήσετε βοήθεια από φίλους πιο εύκολα.</string>
     <string name="helper_sendtocgeo_description">Αποστολή σε c:geo είναι μια επέκταση του προγράμματος περιήγησης <strong>για τον υπολογιστή σας</strong>. Κατά την περιήγηση στο geocaching.com, μπορείτε να στείλετε κρύπτες στο smartphone σας άμεσα μέσα στο πρόγραμμα περιήγησης με το πάτημα ενός κουμπιού.</string>
-    <string name="helper_locus_title">Γεωμετρικός τόπος</string>
     <string name="helper_locus_description">Εφαρμογή πλοήγησης σε εξωτερικούς χώρους για το τηλέφωνο ή το tablet σας. Δείτε τοπογραφικούς χάρτες χωρίς σύνδεση, ακολουθείστε τη διαδρομή σας, βρείτε κρύπτες, χρησιμοποιήστε φωνητικό οδηγό και κάνετε ακόμη περισσότερα.</string>
     <string name="helper_gpsstatus_description">Μπορείτε να χρησιμοποιήσετε το ραντάρ σε αυτήν την εφαρμογή σε συνδυασμό με το c:geo. Προσφέρει επίσης πολλές άλλες πληροφορίες που σχετίζονται με GPS.</string>
     <string name="helper_bluetoothgps_description">Σας επιτρέπει να χρησιμοποιήσετε έναν εξωτερικό δέκτη GPS για να πάρετε πιο ακριβή δεδομένα τοποθεσίας, και να κάνετε οικονομία στη μπαταρία της συσκευής σας.</string>
-    <string name="helper_gps_locker_title">Κλείδωμα GPS</string>
     <string name="helper_gps_locker_description">Το κλείδωμα GPS διατηρεί το σήμα του GPS ενεργό όταν εναλλάσσονται οι εφαρμογές ή όταν η οθόνη της συσκευής είναι σβηστή.</string>
-    <string name="helper_barcode_title">Ανιχνευτής γραμμωτού κώδικα</string>
     <string name="helper_barcode_description">Υπάρχουν σενάρια και ιστοσελίδες Greasemonkey που επιτρέπουν να εμφανίζονται οι γεωκωδικοί ως γραμμωτοί κώδικες. Με αυτή την εφαρμογή το c:geo μπορεί να διαβάζει τέτοιους γεωκωδικούς κατευθείαν από την οθόνη του υπολογιστή σας.</string>
-    <string name="helper_pocketquery_title">Δημιουργία Προσωπικής Αναζήτησης</string>
     <string name="helper_pocketquery_description">Επιτρέπει την εύκολη δημιουργία και λήψη Προσωπικών Αναζητήσεων με επίκεντρο την τρέχουσα τοποθεσία σας ή ένα σημείο στο χάρτη. Απαιτείται λογαριασμόςPremium στο Geocaching.com.</string>
     <string name="helper_google_translate_title">Μετάφραση Google</string>
     <string name="helper_google_translate_description">Αν κατεβάσετε πακέτα μετάφρασης στην εφαρμογή Google Translate, τότε μπορείτε να μεταφράσετε εύκολα περιγραφές κρυπτών στο c:geo, με ένα παρατεταμένο πάτημα στην περιγραφής της κρύπτης (χωρίς σύνδεση στο Internet).</string>
@@ -1464,7 +1459,6 @@
         <item quantity="one">Προσθήκη αυτής της κρύπτης στις αγαπημένες (απομένουν %d)</item>
         <item quantity="other">Προσθήκη αυτής της κρύπτης στις αγαπημένες (απομένουν %d)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Εισαγωγή προσωποποιημένης αναζήτησης</string>
     <string name="caches_refresh_all_warning">Αυτή η ενέργεια ενδέχεται να προκαλέσει μεγάλη κυκλοφορία δικτύου. Είναι βέβαιοι ότι θέλετε να ανανεώσετε μαζικά όλες τις κρύπτες;</string>
     <string name="list_list_headline">Λίστες:</string>
@@ -1500,4 +1494,5 @@
     <string name="number_input_err_format">Λάθος μορφή αριθμών</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>

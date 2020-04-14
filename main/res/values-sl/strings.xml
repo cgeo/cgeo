@@ -552,7 +552,6 @@
     <string name="auth_dialog_completed_twitter">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <!-- cache -->
     <plurals name="cache_counts">
@@ -1173,7 +1172,6 @@
     <string name="settings_activate_geokrety">Aktiviraj</string>
     <string name="command_copy_caches_progress">Kopiranje zakladov v seznam %1s</string>
     <string name="command_unique_list_result">Izbriši zaklade iz ostalih seznamov</string>
-    <!-- distance units -->
     <string name="caches_refresh_all_warning">To dejanje lahko povzroči veliko mrežnega prometa - prenosa podatkov. Ali ste prepričani, da želite osvežiti vse zaklade?</string>
     <string name="list_list_headline">Seznam:</string>
     <!-- calendar adder -->
@@ -1184,4 +1182,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>

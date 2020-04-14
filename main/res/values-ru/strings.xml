@@ -738,7 +738,6 @@
     <string name="auth_dialog_completed_twitter">c:geo теперь может размещать записи в Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo теперь может взаимодействовать с %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo теперь может взаимодействовать с %s.</string>
     <string name="err_auth_geokrety_bad_password">Логин и\или пароль неверны.</string>
@@ -1117,7 +1116,6 @@
     <string name="trackable_distance">Пройдено</string>
     <string name="trackable_touch">Отметить</string>
     <string name="trackable_not_activated">Трекабл не активирован</string>
-    <string name="trackable_geokrety">ГеоКрот</string>
     <string name="trackable_status">Статус</string>
     <string name="geokret_type_traditional">Традиционный</string>
     <string name="geokret_type_book_or_media">Книга, CD или DVD</string>
@@ -1532,12 +1530,6 @@
         <item quantity="many">Рекомендовать тайники (%d осталось)</item>
         <item quantity="other">Рекомендовать тайники (%d осталось)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_m">м</string>
-    <string name="unit_km">км</string>
-    <string name="unit_ft">фут</string>
-    <string name="unit_yd">ярд</string>
-    <string name="unit_mi">мил</string>
     <string name="pq_download_and_import">Импортировать выборку</string>
     <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
     <string name="list_list_headline">Списки:</string>
@@ -1580,4 +1572,10 @@
     <string name="notification_channel_description">уведомления из геокешинг-приложения c:geo</string>
     <string name="proximity_notification_title">уведомление о приближении c:geo</string>
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_m">м</string>
+    <string name="unit_km">км</string>
+    <string name="unit_ft">фут</string>
+    <string name="unit_yd">ярд</string>
+    <string name="unit_mi">мил</string>
 </resources>

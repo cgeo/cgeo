@@ -307,7 +307,6 @@
     <string name="caches_move_all">Tanggalin ang lahat</string>
     <string name="caches_copy_selected">Ang kopya ay pinili</string>
     <string name="caches_copy_all">Kopyahin lahat</string>
-    <string name="caches_map_locus">Lokus</string>
     <string name="caches_map_locus_export">I-luwas patungo sa lokus</string>
     <string name="caches_filter">Ang salaan</string>
     <string name="caches_filter_title">Sinala ng</string>
@@ -421,11 +420,9 @@
     <string name="settings_activate_oc_ro">Gawing aktibo</string>
     <string name="init_summary_oc_ro">Mag-load ng mga caches mula sa opencaching.ro</string>
     <string name="init_oc_ro_description">Pahintulutan ang c:geo kasama ang opencaching.ro para sa paghahanap ng mga cache at ang pag-access/filter ng iyong mga nahanap na mga cache.</string>
-    <string name="init_oc_uk">ang Bukasnacache.uk</string>
     <string name="settings_activate_oc_uk">Gawing aktibo</string>
     <string name="init_summary_oc_uk">Mag-load ng mga caches mula sa opencache.uk</string>
     <string name="init_oc_uk_description">Ang awtorisadong c:geo na may opencache.uk para magsaliksik sa mga caches at mag-akses/salain ang natagpuan mong mga caches.</string>
-    <string name="init_su">Ang geocaching.su</string>
     <string name="init_summary_su">Mag-load ng mga caches mula sa geocaching.su</string>
     <string name="settings_activate_su">Gawing aktibo</string>
     <string name="init_gcvote_password_description">Para maaaring markahan ang cache, kailangan mong sumunod sa mga pagtuturo na nasa GCVote.com at ipasok ang iyong GCVote password dito.</string>
@@ -620,9 +617,7 @@
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">ang c:geo ay awtorisadong nang magpost sa Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_ocuk">ang pagbukas sa cache.uk</string>
     <string name="auth_dialog_completed_oc">ang c:geo ay awtorisadong nang mag-interak kasama ang %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">ang c:geo ay awtorisadong nang mag-interak kasama ang %s.</string>
     <string name="err_auth_geokrety_bad_password">Ang iyong username/password ay mukhang hindi wasto.</string>
@@ -939,7 +934,6 @@
     <string name="trackable_touch">Hawakan</string>
     <string name="trackable_not_activated">Hindi aktibo ang trackable</string>
     <string name="trackable_travelbug">Ang travelbug</string>
-    <string name="trackable_geokrety">Ang geokrety</string>
     <string name="geokret_type_traditional">Tradisyonal</string>
     <string name="geokret_type_book_or_media">Libro o elektronikong pagpapahayag</string>
     <string name="geokret_type_human">Ang tao</string>
@@ -972,18 +966,13 @@
     <string name="helper_contacts_title">ang mga kontak ng c:geo ay isaksak</string>
     <string name="helper_contacts_description">Pinapagana mo upang buksan ang isang kontak kard (ng iyong address na libro) nang direkta mula sa isang entry ng log, kaya mas madali kang magtanong sa mga kaibigan para sa tulong.</string>
     <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay ang ekstensyon ng brawser <strong>para sa iyong PC </strong>. Kapag ang geocahing.com na brawsing, ay maaari kang magpadala ng mga cache sa iyong smartphone sa pag-klik ng buton sa loob na brawser.</string>
-    <string name="helper_locus_title">Ang lokus</string>
     <string name="helper_locus_description">Ang panlabas na nabigasyon na app para sa iyong smartphone at tablet. Tingnan ang topo na mapa sa offline, hanapin ang iyong ruta, hanapin ang geocache, gumamit ng boses na marka at ng marami pang iba.</string>
     <string name="helper_gpsstatus_description">Maaari mong gamitin ang radar sa aplikasyong ito kasabay ng c:geo. Ito rin ay mga nag-aalok ng maraming uri ng GPS kaugnay sa impormasyon.</string>
-    <string name="helper_bluetoothgps_title">Ang Bluetooth ng GPS</string>
     <string name="helper_bluetoothgps_description">Pinapayagan kang gumamit ng panlabas na GPS na tagatanggap para makakuha ng madaming wastong lokasyon ng datos, at itoy pwedeng pamalit sa baterya ng iyong aparato.</string>
-    <string name="helper_barcode_title">Ang iskaner ng barcode</string>
     <string name="helper_barcode_description">May mga Greasemonkey na mga iskrip at mga website na nagbibigay-daan sa pagpapakita ng mga geocode bilang mga barcode. Gamit ang app na ito, c:geo maaaring basahin ang naturang mga geocode nang direkta mula sa screen ng iyong kompyuter.</string>
-    <string name="helper_pocketquery_title">Bulsa ng mga lumilikha ng tanong</string>
     <string name="helper_pocketquery_description">Pinapayagan ang madaling paglikha at pag-download ng bulsa ng tanong sa gitna na kasalukuyang posisyon o tinutukoy mula sa mapa. Ito ay nangangailangan ng pangunahing geocaching.com na account.</string>
     <string name="helper_google_translate_title">Ang pagsasalin ng google</string>
     <string name="helper_google_translate_description">Kung ikaw ay nag-download ng pakite ng pagsasalin ng google na aplikasyon,magiging madali na ang iyong pagsasalin ng cache na paglalarawan sa c:geo sa pamamagitan ng mahabang paghanap ng paglalarawan na teksto ( ng walang koneksiyon sa internet).</string>
-    <string name="helper_where_you_go_title">Saankapupunta</string>
     <string name="helper_where_you_go_description">Saankapupunta ay payagan mong maglaro at magsaliksik ng geocache sa uri na Wherigo. c:geo awtomatikong maghuhudyat ang di-nownload na cartridges sa aplikasyon na ito.</string>
     <string name="helper_brouter_title">Ang brouter ay oplayn sa nabigasyon</string>
     <string name="helper_brouter_description">Ang brouter ay nagbibigay ng saradong linya sa routing. Kapag natapos ang pag-instol at ito ay kinakailangan sa mga payl na-naidownload, c:geo ay otomatikong lalabas ang ruta sa cache sa panloob na mapa.</string>
@@ -1239,9 +1228,7 @@
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Suporta</string>
     <string name="website_title">Ang website</string>
-    <string name="facebook_title">Ang facebook</string>
     <string name="facebook_link"><a href="">c:geo na pahina</a></string>
-    <string name="twitter_title">Ang twitter</string>
     <string name="market_title">Ang google play</string>
     <string name="market_link">&lt;a href=\'\"&gt;c:geo sa google play&lt;/a&gt;</string>
     <string name="about_twitter">Dapat ang <b>d:geo</b> ilathala ang bagong katayuan sa twitter bawat oras na iyong pag log ng cahce?</string>
@@ -1298,7 +1285,6 @@
     <string name="confirm_log_message">Kung nais mo mag log \'%s\'. Sigurado ka ba?</string>
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Aktibo</string>
-    <string name="init_geokrety">Ang GeoKrety.org</string>
     <string name="init_summary_geokrety">Gumagana ang mga trackable from GeoKrety.org</string>
     <string name="init_geokrety_description">Awtorizado c:geo GeoKrety.org para mag-log sa log GeoKrety na mga trackable.</string>
     <string name="init_geokrety_userid">Ang Id ng gumagamit: %s</string>
@@ -1331,7 +1317,6 @@
         <item quantity="one">Idagdag ang cache na ito sa mga paborito (%d ang natitira)</item>
         <item quantity="other">Idagdag ang cache na ito sa mga paborito (%d ang natitira)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Mag-import ng query sa pocket</string>
     <string name="caches_refresh_all_warning">Itong aksyon ay maaaring humantong sa mataas na trapiko sa network. Ikw ba ay sigurado na gusto mong i-refresh ang lahat ng mga cache?</string>
     <string name="list_list_headline">Ang mga listahan:</string>
@@ -1352,4 +1337,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>

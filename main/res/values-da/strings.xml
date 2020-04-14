@@ -680,7 +680,6 @@
     <string name="auth_dialog_completed_twitter">c:geo er nu godkendt til at lave opslag på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo er nu godkendt til at arbejde sammen med %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo er nu autoriseret til at interagere med %s.</string>
     <string name="err_auth_geokrety_bad_password">Brugernavn og adgangskode er muligvis ikke korrekte.</string>
@@ -1004,7 +1003,6 @@
     <string name="trackable_distance">Rejst</string>
     <string name="trackable_touch">Log</string>
     <string name="trackable_not_activated">Trackable ikke aktiveret</string>
-    <string name="trackable_geolutins">GeoLutiner</string>
     <string name="geokret_type_traditional">Traditionel</string>
     <string name="geokret_type_book_or_media">Bog eller elektronisk medium</string>
     <string name="geokret_type_human">Menneske</string>
@@ -1040,7 +1038,6 @@
     <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
     <string name="helper_bluetoothgps_description">Giver dig mulighed for at bruge en ekstern GPS-modtager som giver en mere præcis positionsbestemmelse og kan forlænge batteritiden på din enhed.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS modtageren aktiv, når du skifter mellem applikationer og når enhedens skærm er slukket.</string>
-    <string name="helper_barcode_title">Stregkodescanner</string>
     <string name="helper_barcode_description">Denne app kan skanne og afkode stregkoder med indlejrede geokoder.</string>
     <string name="helper_pocketquery_description">Giver mulighed for let at oprette og downloade Pocket Queries baseret på din position eller et valgt punkt på et kort. Kræver Premium-medlemskab på geocaching.com.</string>
     <string name="helper_google_translate_title">Google Oversæt</string>
@@ -1385,10 +1382,6 @@
         <item quantity="one">Tilføj denne cache til favoritter (%d resterende)</item>
         <item quantity="other">Tilføj denne cache til favoritter (%d resterende)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_ft">fod</string>
-    <string name="unit_yd">yards</string>
-    <string name="unit_mi">mil</string>
     <string name="pq_download_and_import">Importér Pocket Query</string>
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
     <string name="list_list_headline">Lister:</string>
@@ -1421,4 +1414,8 @@
     <string name="number_input_err_format">Ugyldigt talformat</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">fod</string>
+    <string name="unit_yd">yards</string>
+    <string name="unit_mi">mil</string>
 </resources>

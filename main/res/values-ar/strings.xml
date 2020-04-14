@@ -424,7 +424,6 @@
     <string name="init_gcvote_password_description">لتكون قادر على تقييم مخبئ، تحتاج إلى اتباع الإرشادات التي تظهر في GCvote.com و إدخال كلمة المرور الخاص بك في GCvote، هنا.</string>
     <string name="err_gcvote_send_rating">حدث خطأ أثناء إرسال لتقييم، تحقق من كلمة مرورك في GCVote داخل الإعدادات أو قم بمسحه.</string>
     <string name="gcvote_sent">تم ارسال التصويت بنجاح</string>
-    <string name="init_twitter">تويتر</string>
     <string name="settings_activate_twitter">تنشيط</string>
     <string name="init_login_popup">تسجيل الدخول</string>
     <string name="init_login_popup_working">جاري تسجيل الدخول&#8230;</string>
@@ -596,7 +595,6 @@
     <string name="sendToCgeo_download_fail">c:geo فشل في تحميل المخبآت. بسبب عدم وجود اتصال بالإنترنات أو يوجد مشكل في send2cgeo.</string>
     <string name="sendToCgeo_no_registration">c:geo فشل في تحميل المخبآت. انتهت مدة التسجيل في send2cgeo. الرجاء التسجيل في الإعدادات.</string>
     <!-- auth generic -->
-    <string name="auth_twitter">تويتر</string>
     <string name="auth_authorize">الترخيص لـ c:geo</string>
     <string name="auth_check">تحقق من المصادقة</string>
     <string name="auth_check_again">تحقق من المصادقة مجدداً</string>
@@ -620,7 +618,6 @@
     <string name="auth_dialog_completed_twitter">c:geo الآن مرخص له بالنشر على التويتر.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo الآن مرخص له بالتفاعل مع %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo الآن مرخص له بالتفاعل مع %s.</string>
     <string name="err_auth_geokrety_bad_password">يبدو أن اسم المستخدم أو كلمة مرورك غير صحيحين.</string>
@@ -717,7 +714,6 @@
     <string name="cache_menu_copy_list">النسخ إلى قائمة أخرى</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (اونلاين)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (في وضع عدم الاتصال)</string>
-    <string name="cache_menu_pebble">حصى</string>
     <string name="cache_menu_vote">قم بالتصويت</string>
     <string name="cache_menu_checker">افتح Geochecker</string>
     <string name="cache_menu_challenge_checker">البحث عن مدقق المخبآت</string>
@@ -958,11 +954,8 @@
     <string name="helper_sendtocgeo_description">الإرسال إلى c:geo هو ملحق في المتصفح <strong>لحاسوبك</strong>. أثناء تصفح geocaching.com، يمكنك إرسال المخبآت إلى هاتفك الذكي من خلال النقر على الزر مباشرة داخل المتصفح.</string>
     <string name="helper_locus_description">تطبيق الملاحة في الهواء الطلق لهاتفك أو الكمبيوتر اللوحي. و عرض خرائط topo في وضع عدم اتصال، و تعقب مسارك و مطارة على الأخرين و الدليل الصوتي و أكثر من ذالك.</string>
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
-    <string name="helper_bluetoothgps_title">GPS البلوتوث</string>
     <string name="helper_bluetoothgps_description">يتيح لك استخدام مستقبل GPS خارجي للحصول على بيانات مواقع أكثر دقة، و يمكنك من توفير استهلاك بطاريتك.</string>
-    <string name="helper_barcode_title">ماسح Barcode</string>
     <string name="helper_barcode_description">هناك مواقع و برامج تjتيح عرض كود المخبئ مثل كود QR، مثل هذا التطبيق. و بهذا c:geo يمكنه قراءة كود المخبئ مباشرة من شاشة حاسوبك.</string>
-    <string name="helper_pocketquery_title">منشئ الاستفسارات</string>
     <string name="helper_pocketquery_description">يسمح بإنشاء و تحميل الاستفسارات التي تتمحور حول موقعك الحالي أو النقط المحددة في الخريطة. يتطلب حساب برميوم في Geocaching.com.</string>
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
@@ -1217,9 +1210,7 @@
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">الدعم</string>
     <string name="website_title">الموقع</string>
-    <string name="facebook_title">الفايسبوك</string>
     <string name="facebook_link"><a href="">صفحة c:geo</a></string>
-    <string name="twitter_title">التويتر</string>
     <string name="market_link"><a href="">صفحة c:geo على Google Play</a></string>
     <string name="about_twitter">هل يجب على <b>c:geo</b> أن ينشر تغريدة جديدة في كل مرة تقوم فيها بتسجيل زيارة لمخبئ ما؟</string>
     <string name="faq_title">الأسئلة الشائعة</string>
@@ -1268,7 +1259,6 @@
     <string name="command_rename_list_result">تم إعادة تسمية القائمة</string>
     <string name="command_delete_list_result">تم حذف القائمة</string>
     <string name="command_unique_list_result">تم حذف المخبآت من القوائم الأخرى</string>
-    <!-- distance units -->
     <string name="pq_download_and_import">استيراد الاستفسارات</string>
     <string name="caches_refresh_all_warning">هذا الإجراء قد يؤدي إلى زحام كبير على الشبكة. هل أنت متأكد أنك تريد تحديث كل المخبآت؟</string>
     <string name="list_list_headline">القوائم:</string>
@@ -1285,4 +1275,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>

@@ -637,7 +637,6 @@
     <string name="auth_dialog_completed_twitter">c:geo tagad ir atļauja ziņot Twitter\'ī.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo tagad ir atļauja sazināties ar %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo tagad ir atļauja sazināties ar %s.</string>
     <string name="err_auth_geokrety_bad_password">Tavs lietotājvārds/parole, šķiet nederīgs.</string>
@@ -1010,9 +1009,7 @@
     <string name="helper_locus_description">Āra navigācijas aplikācija tālrunim vai planšetei. Ļauj skatīt bezsaistes topogrāfiskās kartes, izsekot maršrutu, meklēt slēpņus, lietot balss ceļvedi un darīt vēl daudz ko citu.</string>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
     <string name="helper_bluetoothgps_description">Lai iegūtu precīzāku atrašanās vietas datus, ļauj izmantot ārējo GPS uztvērēju, tas var ietaupīt ierīces akumulatoru.</string>
-    <string name="helper_barcode_title">Svītrkodu lasītājs</string>
     <string name="helper_barcode_description">Šie ir Greasemonkey skripti un tīmekļa vietnes, kas ļauj parādīt ģeokodus kā svītrkodus. Ar šo aplikāciju c:geo var lasīt šādu ģeokodus tieši no datora ekrāna.</string>
-    <string name="helper_pocketquery_title">Slēpņu atlašu veidošanas (PQ Creator) aplikācija</string>
     <string name="helper_pocketquery_description">Atļauj viegli izveidot un lejupielādēt Slēpņu atlasi (PQ), kas centrēta uz tavu pašreizējo atrašanās vietu vai atlasīta no punkta kartē. Nepieciešams Geocaching.com Premium lietotāja konts.</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
     <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>
@@ -1370,10 +1367,6 @@
         <item quantity="one">Pievienot šo slēpni favorītiem (%d atlicis)</item>
         <item quantity="other">Pievienot šos slēpņus favorītiem (%d atlikuši)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_ft">pēda</string>
-    <string name="unit_yd">jards</string>
-    <string name="unit_mi">jūdze</string>
     <string name="pq_download_and_import">Importēt Slēpņu atlasi (PQ)</string>
     <string name="caches_refresh_all_warning">Šī darbība var patērēt daudz interneta apjoma/tīkla trafika. Vai tiešām vēlaties uzsākt atjaunināt visus slēpņus?</string>
     <string name="list_list_headline">Saraksti:</string>
@@ -1396,4 +1389,8 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">pēda</string>
+    <string name="unit_yd">jards</string>
+    <string name="unit_mi">jūdze</string>
 </resources>

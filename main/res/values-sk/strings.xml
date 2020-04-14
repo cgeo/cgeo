@@ -704,7 +704,6 @@
     <string name="auth_dialog_completed_twitter">c:geo teraz môže posielať správy na váš Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:Geo je teraz autorizované komunikovať s %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo  je teraz autorizované pre prístup k %s.</string>
     <string name="err_auth_geokrety_bad_password">Tvoje používateľské meno/heslo je pravdepodobne nesprávne.</string>
@@ -1058,7 +1057,6 @@
     <string name="trackable_distance">Precestované</string>
     <string name="trackable_touch">Dotyk</string>
     <string name="trackable_not_activated">Trackable neaktivovaný</string>
-    <string name="trackable_geolutins">GeoLutiny</string>
     <string name="trackable_status">Stav</string>
     <string name="geokret_type_traditional">Tradičné</string>
     <string name="geokret_type_book_or_media">Kniha alebo elektronické médium</string>
@@ -1095,10 +1093,8 @@
     <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
     <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
     <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
-    <string name="helper_gps_locker_title">Zámok GPS</string>
     <string name="helper_gps_locker_description">Zámok GPS udržiava signál GPS aktívny pri prechádzaní medzi aplikáciami a pri zhasnutej obrazovke zariadenia.</string>
     <string name="helper_barcode_description">Existujú Greasemonkey skripty a stránky, ktoré geokód zobrazujú ako čiarový kód. S touto aplikáciou môže c:geo načítať geokód priamo z obrazovky vášho PC.</string>
-    <string name="helper_pocketquery_title">Vytvárač Pocket Query</string>
     <string name="helper_pocketquery_description">Umožňuje ľahké vytváranie a sťahovanie Pocket Query zamerané na vašu aktuálnu polohu alebo bod vybraný na mape. Vyžaduje Premium účet na Geocaching.com.</string>
     <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
@@ -1456,10 +1452,6 @@
         <item quantity="many">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
         <item quantity="other">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_ft">stopy</string>
-    <string name="unit_yd">yard</string>
-    <string name="unit_mi">míľa</string>
     <string name="pq_download_and_import">Importovať PQ</string>
     <string name="caches_refresh_all_warning">Táto akcia môže viesť k vysokej sieťovej prevádzke. Naozaj chceš dávkovo obnoviť všetky cache?</string>
     <string name="list_list_headline">Zoznamy:</string>
@@ -1497,4 +1489,8 @@
     <string name="number_input_err_format">Neplatný formát čísla</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">stopy</string>
+    <string name="unit_yd">yard</string>
+    <string name="unit_mi">míľa</string>
 </resources>

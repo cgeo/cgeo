@@ -725,7 +725,6 @@
     <string name="auth_dialog_completed_twitter">c:geo jest teraz autoryzowane do zamieszczania postów na Twitterze.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">Aplikacja c:geo jest teraz upoważniona do interakcji z %s.</string>
     <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
@@ -862,7 +861,6 @@
     <string name="cache_menu_share">Podziel się skrzynką</string>
     <string name="cache_menu_move_list">Przenieś do innej listy</string>
     <string name="cache_menu_copy_list">Skopiuj do innej listy</string>
-    <string name="cache_menu_pebble">Zegarek Pebble</string>
     <string name="cache_menu_vote">Głosuj</string>
     <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
     <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
@@ -1093,7 +1091,6 @@
     <string name="trackable_distance">W podróży</string>
     <string name="trackable_touch">TB-Akcja</string>
     <string name="trackable_not_activated">Przedmiot podróżny nie został zaktywowany</string>
-    <string name="trackable_geolutins">GeoLutiny</string>
     <string name="geokret_type_traditional">Tradycyjny</string>
     <string name="geokret_type_book_or_media">Książka lub media elektroniczne</string>
     <string name="geokret_type_human">Człowiek</string>
@@ -1131,7 +1128,6 @@
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
     <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
-    <string name="helper_pocketquery_title">Kreator Pocket Query</string>
     <string name="helper_pocketquery_description">Pozwala na łatwe tworzenie i pobieranie Pocket Queries wyśrodkowanych w Twoim aktualnym położeniu lub wybranym punkcie mapy. Wymaga konta Premium w Geocaching.com.</string>
     <string name="helper_google_translate_title">Tłumacz Google</string>
     <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
@@ -1508,7 +1504,6 @@
         <item quantity="many">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
         <item quantity="other">Dodaj tę skrzynkę do ulubionych (pozostało %d)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Importuj Pocket query</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrzynek?</string>
     <string name="list_list_headline">Lista:</string>
@@ -1553,4 +1548,5 @@
     <string name="notification_channel_description">powiadomienia z aplikacji c:geo</string>
     <string name="proximity_notification_title">Powiadomienie o bliskości</string>
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>

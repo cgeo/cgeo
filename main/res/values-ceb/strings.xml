@@ -292,7 +292,6 @@
     <string name="caches_move_all">I-isbog ang tanan</string>
     <string name="caches_copy_selected">Kopyang naselekta</string>
     <string name="caches_copy_all">Kopyahon tanan</string>
-    <string name="caches_map_locus">Lokus</string>
     <string name="caches_map_locus_export">I-eksport adto sa Locus</string>
     <string name="caches_filter">Pilter</string>
     <string name="caches_filter_title">Piltir sa</string>
@@ -592,7 +591,6 @@
     <string name="auth_dialog_completed_twitter">ang c:geo kay ge awtorisar nga maka-post sa Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">ang c:geo kay ge awtorisar para makig-interact kauban ang %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">ang c:geo kay ge awtorisar nga makig-interact kauban ang %s.</string>
     <string name="err_auth_geokrety_bad_password">Ang imohang username/password kay murag dili balido.</string>
@@ -698,8 +696,6 @@
     <string name="cache_menu_share">Ipanghatag ang cache</string>
     <string name="cache_menu_move_list">Balhin sa laing listahan</string>
     <string name="cache_menu_copy_list">Ikopya sa laing listahan</string>
-    <string name="cache_menu_whereyougo">Asakapadung</string>
-    <string name="cache_menu_pebble">Balas</string>
     <string name="cache_menu_vote">Boto</string>
     <string name="cache_menu_checker">Ablihi ang Geochecker</string>
     <string name="cache_menu_challenge_checker">Pagpangita sa hagit sa checker</string>
@@ -931,15 +927,11 @@
     <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay usa ka browser na ekstenyon <strong>para sa imung PC</strong>.Kung kag-browse ug geocaching.com, pwede ka magpadala ug mga cache sa imong cellphone kauban sa pagpislit sa pislitanan diretso sa sulod na browser.</string>
     <string name="helper_locus_description">Gawas sa nabigasyon app para sa imung cellphone ug tablet.. Tan-awa ang mga topo na mapa, sunda ang imung rota, pangitaa ang mga geocache, mugamit ug sundaanan sa tingof ug magbuhat ug lain pa.</string>
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
-    <string name="helper_bluetoothgps_title">GPS sa bluetooth</string>
     <string name="helper_bluetoothgps_description">Gisugtan ka na mugamit ug external GPS receiver para makuha paglaing nindot na lokasyong data, ug pwedeng makahabilin ug baterya sa imung device.</string>
-    <string name="helper_barcode_title">Ang Scanner ng barcode</string>
     <string name="helper_barcode_description">Naay mga Greasemonkey skript at website para paganahon sa pagpakita ug geocodes na ga ingon sa barcode. Sa app na ito, ang c:geo kay makabasa parehas sa geocodes diretso gikan sa screen sa imung kompyuter.</string>
-    <string name="helper_pocketquery_title">Ang gabuhat sa Pocket Query</string>
     <string name="helper_pocketquery_description">Gitugtan na madali sa pagbuhat ug pag-download ng mga query naka tunga sa imung kasamtangang posisyon o punto napili gikan sa mapa. Nangihanlan uh Premium Geocaching.com na akwant.</string>
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
-    <string name="helper_where_you_go_title">AsaManKaPadung</string>
     <string name="helper_where_you_go_description">Ang WhereYouGO kay magtugot og pagdula og pagpangita sa geocaches sa Wherigo na tipo. ang c:geo kay awtomatikong mo kablit sa mga bala sa download sa sulod ani nga app.</string>
     <string name="helper_brouter_title">Offline na BRouter na Nabigasyon</string>
     <string name="helper_brouter_description">BRouter kay naghatag ug offline nga kadaugan. Kung kana ma install ug naay gikinahanglan nga mga files nga gi download, ang c:geo kay awtomatikalong magpakita ug usa ka ruta sa cache adto sa pangsulod na mapa.</string>
@@ -1280,7 +1272,6 @@
         <item quantity="one">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
         <item quantity="other">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">I-mport ang Pocket query</string>
     <string name="caches_refresh_all_warning">Ang kani na aksyon mahimong modulong sa taas nga network trapik. Sigurado ba ka na ganahan ka i-grupo og bag-ohon ang tanan n mga caches?</string>
     <string name="list_list_headline">Mga lista:</string>
@@ -1301,4 +1292,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>

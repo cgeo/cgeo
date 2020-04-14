@@ -425,7 +425,6 @@
     <string name="auth_dialog_completed_twitter">c:geo má núna setja inn á Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo má núna eiga samskipti við %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo má núna eiga samskipti við %s.</string>
     <!-- cache -->
@@ -646,7 +645,6 @@
     <string name="helper_sendtocgeo_description">Senda í c:geo er viðbót í vafra <strong>fyrir tölvuna þína</strong>. Þegar þú ert að skoða geocaching.com, getur þú sent kassa í snjallsímann þinn beint úr netvafranum þínum.</string>
     <string name="helper_gpsstatus_description">Þú getur notað radarinn í þessu forriti samhliða c:geo. Forritið bíður einnig upp á mikið af öðrum GPS tengdum upplýsingum.</string>
     <string name="helper_bluetoothgps_description">Leyfir þér að nota utanáliggjandi GPS móttakara til þess að fá nákvæmari staðsetningarupplýsingar, og getur sparað rafhlöðuna í tækinu þínu.</string>
-    <string name="helper_barcode_title">Strikamerkjaskanni</string>
     <string name="helper_brouter_title">BRouter leiðarlýsing án nets</string>
     <!-- export -->
     <string name="export">Flytja út</string>
@@ -782,9 +780,6 @@
     </plurals>
     <string name="command_rename_list_result">Endurnefndur listi</string>
     <string name="command_delete_list_result">Eyddur listi</string>
-    <!-- distance units -->
-    <string name="unit_ft">fet</string>
-    <string name="unit_mi">mílur</string>
     <string name="caches_refresh_all_warning">Þessi aðgerð getur leitt til mikillar netnotkunar. Ertu viss um að þú viljir endurhlaða alla kassa?</string>
     <string name="list_list_headline">Listar:</string>
     <plurals name="extract_waypoints_result">
@@ -799,4 +794,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">fet</string>
+    <string name="unit_mi">mílur</string>
 </resources>
