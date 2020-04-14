@@ -688,7 +688,6 @@
     <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Absence de connexion Internet ou problème avec le site send2cgeo.</string>
     <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'enregistrement sur send2cgeo a expiré. Merci de vous réenregistrer en allant dans les Paramètres.</string>
     <!-- auth generic -->
-    <string name="auth_twitter">twitter</string>
     <string name="auth_authorize">autorisation de c:geo</string>
     <string name="auth_check">Vérifier l\'authentification</string>
     <string name="auth_check_again">Revérifier l\'authentification</string>
@@ -712,11 +711,7 @@
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
     <!-- auth opencaching -->
-    <string name="auth_ocnl">Opencaching.nl</string>
-    <string name="auth_ocus">Opencaching.us</string>
-    <string name="auth_ocro">Opencaching.ro</string>
     <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">Désormais c:geo est autorisé à utiliser %s.</string>
     <string name="err_auth_geokrety_bad_password">Votre nom d\'utilisateur ou votre mot de passe semble invalide.</string>
@@ -1095,11 +1090,8 @@
     <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre appareil Android équipé de c:geo en un simple clic sur un bouton apparaissant dans la page de description de la cache. Les caches ainsi envoyées seront téléchargées par c:geo puis disponibles localement comme si vous les aviez enregistrées directement dans c:geo.</string>
     <string name="helper_locus_description">Application pour la navigation en plein air pour téléphone ou tablette. Visualisez les cartes hors-lignes, enregistrez le chemin parcouru, cherchez les géocaches, utilisez le guidage vocal et plus.</string>
     <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
-    <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
     <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une localisation plus précise tout en économisant la batterie de votre appareil Android.</string>
-    <string name="helper_gps_locker_title">Verrouillage GPS</string>
     <string name="helper_gps_locker_description">Le verrouillage GPS conserve le signal GPS actif lors du basculement entre les applications ou si l\'écran de votre appareil s\'éteint.</string>
-    <string name="helper_barcode_title">Lecteur de code barre</string>
     <string name="helper_barcode_description">Il existe des programmes et des sites web permettant de générer un QR code contenant un géocode. En installant cette application, vous pourrez lire des QR codes et ouvrir les caches correspondantes dans c:geo.</string>
     <string name="helper_pocketquery_description">Permet la création facile et le téléchargement de Pocket Queries centrées sur votre position actuelle ou un point sélectionné sur la carte. Nécessite un compte Premium Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Traduction</string>
@@ -1455,10 +1447,6 @@
         <item quantity="one">Ajouter cette cache à vos favoris (%d restant)</item>
         <item quantity="other">Ajouter cette cache à vos favoris (%d restants)</item>
     </plurals>
-    <!-- distance units -->
-    <string name="unit_ft">pieds</string>
-    <string name="unit_yd">yards</string>
-    <string name="unit_mi">miles</string>
     <string name="pq_download_and_import">Importer la Pocket query</string>
     <string name="caches_refresh_all_warning">Cette action peut entraîner le téléchargement de gros volumes de données. Êtes-vous sûr(e) de vouloir actualiser toutes les caches ?</string>
     <string name="list_list_headline">Listes :</string>
@@ -1497,4 +1485,8 @@
     <string name="notification_channel_description">notifications de l\'application c:geo geocaching</string>
     <string name="proximity_notification_title">notification de proximité c:geo</string>
     <!-- individual routes -->
+    <!-- distance units -->
+    <string name="unit_ft">pieds</string>
+    <string name="unit_yd">yards</string>
+    <string name="unit_mi">miles</string>
 </resources>
