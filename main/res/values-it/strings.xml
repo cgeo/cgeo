@@ -717,7 +717,6 @@
     <string name="auth_dialog_completed_twitter">c:geo è ora autorizzato a postare su Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo è ora autorizzato ad interagire con %s.</string>
     <string name="err_auth_geokrety_bad_password">Il tuo nome utente o password non sembrano validi.</string>
@@ -1093,10 +1092,8 @@
     <string name="helper_locus_description">App per la navigazione in esterni per cellulare o tablet. Mostra mappe offline, traccia il tuo percorso, cerca geocache, usa una voce guida e molto altro.</string>
     <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
     <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del tuo dispositivo.</string>
-    <string name="helper_gps_locker_title">Blocco GPS</string>
     <string name="helper_gps_locker_description">Il blocco GPS mantiene attivo il segnale GPS quando si passa tra le applicazioni e quando lo schermo del dispositivo è spento.</string>
     <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
-    <string name="helper_pocketquery_title">Creatore di Pocket Query</string>
     <string name="helper_pocketquery_description">Consente di creare facilmente Pocket Queries centrate sulla tua posizione attuale o un punto scelto dalla mappa. Richiede un account premium su Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Traduttore</string>
     <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
@@ -1446,7 +1443,6 @@
         <item quantity="one">Aggiungi questo cache ai preferiti (%d restanti)</item>
         <item quantity="other">Aggiungi questo cache ai preferiti (%d restanti)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Importa una Pocket query</string>
     <string name="caches_refresh_all_warning">Questa azione può causare elevato traffico di rete. Sei sicuro di voler aggiornare tutti i cache?</string>
     <string name="list_list_headline">Liste:</string>
@@ -1488,4 +1484,5 @@
     <string name="notification_channel_description">notifiche dall\'app di geocaching c:geo</string>
     <string name="proximity_notification_title">Notifica di prossimità c:geo</string>
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
