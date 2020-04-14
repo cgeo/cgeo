@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="waypoint_coordinate_formats" translatable="false">
+    <string-array translatable="false" name="waypoint_coordinate_formats">
         <item>@string/waypoint_coordinate_formats_plain</item>
         <item>DDD.DDDDD°</item>
         <item>DDD°MM.MMM\'</item>
@@ -9,7 +9,7 @@
     </string-array>
 
     <!-- distance units -->
-    <string-array name="distance_units" translatable="false">
+    <string-array translatable="false" name="distance_units">
         <item>@string/unit_m</item>
         <item>@string/unit_km</item>
         <item>@string/unit_ft</item>
@@ -26,19 +26,20 @@
         <item>1024</item>
     </integer-array>
     
-    <string name="settings_gc_legal_note_url" translatable="false">https://www.geocaching.com/account/documents/termsofuse</string>
-    <string name="settings_offline_maps_url" translatable="false">https://manual.cgeo.org/en/offlinemaps</string>
-    <string name="settings_themes_url" translatable="false">https://manual.cgeo.org/en/offlinemaps</string>
-    <string name="settings_send2cgeo_url" translatable="false">https://send2.cgeo.org/</string>
-    <string name="settings_facebook_login_url" translatable="false">https://faq.cgeo.org/#facebook-login</string>
+    <string translatable="false" name="settings_gc_legal_note_url">https://www.geocaching.com/account/documents/termsofuse</string>
+    <string translatable="false" name="settings_offline_maps_url">https://manual.cgeo.org/en/offlinemaps</string>
+    <string translatable="false" name="settings_themes_url">https://manual.cgeo.org/en/offlinemaps</string>
+    <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
+    <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
 
     <!-- contributors -->
-    <string name="contributors_carnero" translatable="false">carnero</string>
+    <string translatable="false" name="contributors_carnero">carnero</string>
+    <string translatable="false" name="powered_by">carnero</string>
 
     <!-- recent contributors, meaning: this year + last year -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, p=project leader, s=support, t=testing) -->
-    <string name="contributors_recent" translatable="false">
+    <string translatable="false" name="contributors_recent">
     avogadogc|||
     Bananeweizen||c|
     bekuno||c|
@@ -60,7 +61,7 @@
 
     <!-- other contributors, meaning: before last year -->
     <!-- same format as contributors_recent string -->
-    <string name="contributors_other" translatable="false">
+    <string translatable="false" name="contributors_other">
     Arne Schwabe||c|
     bjdupuis||c|
     blafoo||c|
@@ -89,7 +90,7 @@
     zenobios||c|
     </string>
 
-    <string name="components" translatable="false">
+    <string translatable="false" name="components">
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons):\n
     &#160;&#160;&#160;· USB by Kenneth Von Alt from The Noun Project\n
@@ -107,29 +108,67 @@
 	</string>
 
     <!-- cache details -->
-    <string name="favorite_count" translatable="false">%1$d</string>
-    <string name="favorite_count_percent" translatable="false">%1$d (%2$.0f%%)</string>
+    <string translatable="false" name="favorite_count">%1$d</string>
+    <string translatable="false" name="favorite_count_percent">%1$d (%2$.0f%%)</string>
 
     <!-- cache menu -->
-    <string name="caches_map_mapswithme" translatable="false">Maps.me</string>
-    <string name="cache_menu_mapswithme" translatable="false">Maps.me</string>
-    <string name="faq_link" translatable="false"><a href="">faq.cgeo.org</a></string>
-    <string name="website_link" translatable="false"><a href="">cgeo.org</a></string>
-    <string name="twitter_link" translatable="false"><a href="">@android_GC</a></string>
-    <string name="support_link" translatable="false"><a href="">support@cgeo.org</a></string>
-    <string name="manual_link" translatable="false"><a href="">manual.cgeo.org</a></string>
+    <string translatable="false" name="caches_map_mapswithme">Maps.me</string>
+    <string translatable="false" name="cache_menu_mapswithme">Maps.me</string>
+    <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
+    <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
+    <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>
+    <string translatable="false" name="support_link"><a href="">support@cgeo.org</a></string>
+    <string translatable="false" name="manual_link"><a href="">manual.cgeo.org</a></string>
 
-    <string name="ellipsis" translatable="false">…</string>
-    <string name="triple_dash_vertical" translatable="false">┆</string>
+    <string translatable="false" name="ellipsis">…</string>
+    <string translatable="false" name="triple_dash_vertical">┆</string>
 
-    <string name="equation_hint" translatable="false">a + b</string>
-    <string name="free_variable_hint" translatable="false">2 + 2</string>
-    <string name="empty_equation_result" translatable="false">_</string>
-    <string name="equation_error_result" translatable="false">*</string>
+    <string translatable="false" name="equation_hint">a + b</string>
+    <string translatable="false" name="free_variable_hint">2 + 2</string>
+    <string translatable="false" name="empty_equation_result">_</string>
+    <string translatable="false" name="equation_error_result">*</string>
+
+    <!-- websites and product names -->
+    <string translatable="false" name="caches_map_locus">Locus</string>
+    <string translatable="false" name="settings_title_gc">Geocaching.com</string>
+    <string translatable="false" name="settings_title_ec">Extremcaching.com</string>
+    <string translatable="false" name="init_oc">Opencaching.de</string>
+    <string translatable="false" name="auth_ocde">opencaching.de</string>
+    <string translatable="false" name="init_oc_pl">Opencaching.pl</string>
+    <string translatable="false" name="auth_ocpl">opencaching.pl</string>
+    <string translatable="false" name="init_oc_nl">Opencaching.nl</string>
+    <string translatable="false" name="auth_ocnl">opencaching.nl</string>
+    <string translatable="false" name="init_oc_us">Opencaching.us</string>
+    <string translatable="false" name="auth_ocus">opencaching.us</string>
+    <string translatable="false" name="init_oc_ro">Opencaching.ro</string>
+    <string translatable="false" name="auth_ocro">opencaching.ro</string>
+    <string translatable="false" name="init_oc_uk">opencache.uk</string>
+    <string translatable="false" name="auth_ocuk">opencache.uk</string>
+    <string translatable="false" name="init_su">Geocaching.su</string>
+    <string translatable="false" name="auth_su">geocaching.su</string>
+    <string translatable="false" name="init_gcvote">GCvote.com</string>
+    <string translatable="false" name="facebook_title">Facebook</string>
+    <string translatable="false" name="twitter_title">Twitter</string>
+    <string translatable="false" name="init_twitter">Twitter</string>
+    <string translatable="false" name="auth_twitter">Twitter</string>
+    <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>
+    <string translatable="false" name="cache_menu_pebble">Pebble</string>
+    <string translatable="false" name="init_geokrety">GeoKrety.org</string>
+    <string translatable="false" name="trackable_geokrety">GeoKrety</string>
+    <string translatable="false" name="trackable_geolutins">GeoLutins</string>
+
+    <!-- helper app names -->
+    <string translatable="false" name="helper_locus_title">Locus</string>
+    <string translatable="false" name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
+    <string translatable="false" name="helper_bluetoothgps_title">Bluetooth GPS</string>
+    <string translatable="false" name="helper_gps_locker_title">GPS Locker</string>
+    <string translatable="false" name="helper_barcode_title">Barcode Scanner</string>
+    <string translatable="false" name="helper_pocketquery_title">Pocket Query Creator</string>
+    <string translatable="false" name="helper_where_you_go_title">WhereYouGo</string>
 
     <!-- fileprovider -->
-    <string name="file_provider_authority" translatable="false">org.cgeo.fileprovider</string>
+    <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
 
     <!-- notification channel -->
-    <string name="notification_channel_id" translatable="false">c:geo notification channel</string>
+    <string translatable="false" name="notification_channel_id">c:geo notification channel</string>
 </resources>

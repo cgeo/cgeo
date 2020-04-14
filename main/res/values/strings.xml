@@ -368,7 +368,6 @@
     <string name="caches_move_all">Move all</string>
     <string name="caches_copy_selected">Copy selected</string>
     <string name="caches_copy_all">Copy all</string>
-    <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Export to Locus</string>
     <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filter by</string>
@@ -502,8 +501,6 @@
 
     <string name="settings_goto_url_button">more …</string>
 
-    <string name="settings_title_gc">Geocaching.com</string>
-    <string name="settings_title_ec">Extremcaching.com</string>
     <string name="settings_activate_gc">Activate</string>
     <string name="settings_activate_ec">Activate</string>
     <string name="settings_gc_legal_note">With using the service of geocaching.com, you accept the Groundspeak Terms of Use.</string>
@@ -514,38 +511,29 @@
     <string name="settings_gc_description">Authorize c:geo with geocaching.com to search for caches.</string>
     <string name="settings_ec_description">Authorize c:geo with extremcaching.com to search for caches and access/filter your found caches.</string>
     <string name="settings_su_description">Authorize c:geo with geocaching.su to search for caches.</string>
-    <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">Activate</string>
     <string name="init_summary_oc_de">Load caches from opencaching.de</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
-    <string name="init_oc_pl">Opencaching.pl</string>
     <string name="settings_activate_oc_pl">Activate</string>
     <string name="init_summary_oc_pl">Load caches from opencaching.pl</string>
     <string name="init_oc_pl_description">Authorize c:geo with opencaching.pl to search for caches and access/filter your found caches.</string>
-    <string name="init_oc_nl">Opencaching.nl</string>
     <string name="settings_activate_oc_nl">Activate</string>
     <string name="init_summary_oc_nl">Load caches from opencaching.nl</string>
     <string name="init_oc_nl_description">Authorize c:geo with opencaching.nl to search for caches and access/filter your found caches.</string>
-    <string name="init_oc_us">Opencaching.us</string>
     <string name="settings_activate_oc_us">Activate</string>
     <string name="init_summary_oc_us">Load caches from opencaching.us</string>
     <string name="init_oc_us_description">Authorize c:geo with opencaching.us to search for caches and access/filter your found caches.</string>
-    <string name="init_oc_ro">Opencaching.ro</string>
     <string name="settings_activate_oc_ro">Activate</string>
     <string name="init_summary_oc_ro">Load caches from opencaching.ro</string>
     <string name="init_oc_ro_description">Authorize c:geo with opencaching.ro to search for caches and access/filter your found caches.</string>
-    <string name="init_oc_uk">opencache.uk</string>
     <string name="settings_activate_oc_uk">Activate</string>
     <string name="init_summary_oc_uk">Load caches from opencache.uk</string>
     <string name="init_oc_uk_description">Authorize c:geo with opencache.uk to search for caches and access/filter your found caches.</string>
-    <string name="init_su">Geocaching.su</string>
     <string name="init_summary_su">Load caches from Geocaching.su</string>
     <string name="settings_activate_su">Activate</string>
-    <string name="init_gcvote">GCvote.com</string>
     <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
     <string name="err_gcvote_send_rating">Error while sending rating, check GCVote password in settings or empty it.</string>
     <string name="gcvote_sent">Voting successfully sent</string>
-    <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging in…</string>
@@ -775,7 +763,6 @@
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
 
     <!-- auth generic -->
-    <string name="auth_twitter">Twitter</string>
     <string name="auth_authorize">Authorize c:geo</string>
     <string name="auth_check">Check authentication</string>
     <string name="auth_check_again">Check authentication again</string>
@@ -803,16 +790,7 @@
     <string name="auth_dialog_completed_twitter">c:geo is now authorized to post on Twitter.</string>
 
     <!-- auth opencaching -->
-    <string name="auth_ocde">opencaching.de</string>
-    <string name="auth_ocpl">opencaching.pl</string>
-    <string name="auth_ocnl">opencaching.nl</string>
-    <string name="auth_ocus">opencaching.us</string>
-    <string name="auth_ocro">opencaching.ro</string>
-    <string name="auth_ocuk">opencache.uk</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
-
-    <!-- auth geocaching.su -->
-    <string name="auth_su">geocaching.su</string>
 
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo is now authorized to interact with %s.</string>
@@ -953,10 +931,8 @@
     <string name="cache_menu_share">Share cache</string>
     <string name="cache_menu_move_list">Move to different list</string>
     <string name="cache_menu_copy_list">Copy to different list</string>
-    <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_vote">Vote</string>
     <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Search challenge checker</string>
@@ -1222,8 +1198,6 @@
     <string name="trackable_touch">Touch</string>
     <string name="trackable_not_activated">Trackable not activated</string>
     <string name="trackable_travelbug">Travelbug</string>
-    <string name="trackable_geokrety">GeoKrety</string>
-    <string name="trackable_geolutins">GeoLutins</string>
     <string name="trackable_status">Status</string>
     <string name="trackable_found">%1$s (%2$s)</string>
 
@@ -1263,21 +1237,14 @@
     <string name="helper_contacts_title">c:geo contacts plugin</string>
     <string name="helper_contacts_description">Enables you to open a contact card (of your address book) directly from a log entry, so you can more easily ask friends for help.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
-    <string name="helper_locus_title">Locus</string>
     <string name="helper_locus_description">Outdoor navigation app for your phone or tablet. View topo maps offline, track your route, hunt geocaches, use a voice guide and do even more.</string>
-    <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
-    <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string name="helper_bluetoothgps_description">Allows you to use an external GPS receiver to get more precise location data, and can spare battery of your device.</string>
-    <string name="helper_gps_locker_title">GPS Locker</string>
     <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
-    <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">There are Greasemonkey scripts and websites which enable display of geocodes as barcodes. With this app, c:geo can read such geocodes directly from the screen of your computer.</string>
-    <string name="helper_pocketquery_title">Pocket Query Creator</string>
     <string name="helper_pocketquery_description">Allows easy creation and download of Pocket Queries centred on your current position or a point selected from a map. Requires a Premium Geocaching.com account.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
-    <string name="helper_where_you_go_title">WhereYouGo</string>
     <string name="helper_where_you_go_description">WhereYouGo allows playing and searching geocaches of type Wherigo. c:geo can automatically trigger the download of cartridges within this app.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter provides offline routing. If it is installed and has the necessary files downloaded, c:geo will automatically show a route to the cache on the internal map.</string>
@@ -1539,13 +1506,10 @@
 
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
-    <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Support</string>
     <string name="website_title">Website</string>
-    <string name="facebook_title">Facebook</string>
     <string name="facebook_link"><a href="">c:geo page</a></string>
-    <string name="twitter_title">Twitter</string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
@@ -1615,7 +1579,6 @@
 
     <!-- Geokrety -->
     <string name="settings_activate_geokrety">Activate</string>
-    <string name="init_geokrety">GeoKrety.org</string>
     <string name="init_summary_geokrety">Enable trackables from GeoKrety.org</string>
     <string name="init_geokrety_description">Authorize c:geo with GeoKrety.org to log GeoKrety trackables.</string>
     <string name="init_geokrety_userid">User Id: %s</string>
@@ -1650,13 +1613,6 @@
         <item quantity="one">Add this cache to favorites (%d remaining)</item>
         <item quantity="other">Add this cache to favorites (%d remaining)</item>
     </plurals>
-
-    <!-- distance units -->
-    <string name="unit_m">m</string>
-    <string name="unit_km">km</string>
-    <string name="unit_ft">ft</string>
-    <string name="unit_yd">yd</string>
-    <string name="unit_mi">mi</string>
 
     <string name="pq_download_and_import">Import Pocket query</string>
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
@@ -1712,5 +1668,12 @@
     <string name="individual_route_error_toggling_waypoint">error toggling waypoint</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_individual_route_cleared">Individual route cleared</string>
+
+    <!-- distance units -->
+    <string translatable="false" name="unit_m">m</string>
+    <string translatable="false" name="unit_km">km</string>
+    <string translatable="false" name="unit_ft">ft</string>
+    <string translatable="false" name="unit_yd">yd</string>
+    <string translatable="false" name="unit_mi">mi</string>
 
 </resources>
