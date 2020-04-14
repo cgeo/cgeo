@@ -676,7 +676,6 @@
     <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
-    <!-- auth geocaching.su -->
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo är nu godkänd för att kommunicera med %s.</string>
     <string name="err_auth_geokrety_bad_password">Ditt användarnamn/lösenord verkar felaktigt.</string>
@@ -1047,7 +1046,6 @@
     <string name="helper_locus_description">App för navigering utomhus med telefon eller tablet. Visa topo-kartor offline, spåra din rutt, leta geocacher, använd guideröst och mycket mer.</string>
     <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
     <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
-    <string name="helper_barcode_title">Streckkodsläsare</string>
     <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
     <string name="helper_pocketquery_description">Gör det enkelt att skapa och ladda ner Pocket Queries baserade på din position eller plats som väljs på kartan. Kräver Premium konto hos Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Översätt</string>
@@ -1393,7 +1391,6 @@
         <item quantity="one">Lägg till cachen bland dina favoriter (%d kvar)</item>
         <item quantity="other">Lägg till cachen bland dina favoriter (%d kvar)</item>
     </plurals>
-    <!-- distance units -->
     <string name="pq_download_and_import">Importera Pocket Query</string>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
     <string name="list_list_headline">Listor:</string>
@@ -1422,4 +1419,5 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- distance units -->
 </resources>
