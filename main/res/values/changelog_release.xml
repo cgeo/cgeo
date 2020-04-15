@@ -2,30 +2,20 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2020.03.30:</b>\n
-    · Fix: Submitting logs for caches not possible on geocaching.com\n
-    · Fix: Blue arrow on map pointing to wrong position on some devices\n
-    \n
-    \n
-    <b>2020.03.07:</b>\n
-    · New: Auto rotate for Google Maps (experimental)\n
-    · New: Ability to create user defined caches\n
-    · New: Proximity notification messages as Android system notifications\n
-    · New: Add support for geocheckers of geocache-planer.de and geotjek.dk\n
-    · New: Option to disable Google Maps controls for manual screen rotation\n
-    · New: Support cache type \"Locationless (Reverse) Geocache\" (no logging support yet)\n
-    · New: Show current elevation in compass\n
-    · New: Initial zoom on cache map to cover its waypoints (optional)\n
-    · Change: Use waypoints of a user defined cache in \"Go to\" menu (instead of the old \"Go to\" history)\n
-    · Change: Link from offline map \"More info\" page to the new offline map tutorial\n
-    · Change: Updated compatibility libraries from support libraries to AndroidX\n
-    · Fix: Accidental outzoom to world map when opening Google Maps cache map\n
-    · Fix: Internal code corrections and optimizations\n
-    · Fix: Support for geochecker gc-apps.com\n
-    · Fix: Internal database cleanup improvements\n
-    · Fix: Removed no longer used menu entry \"Cache list\" - \"Show on map\" - \"Mapsforge Beta\"\n
-    · Fix: Ignore waypoint threshold setting when on a single cache OSM map\n
-    · Fix: Improved error message when wrong offline map version is used\n
+    <b>Beta feature release:</b>\n
+    · New: Added button \"Add current location\" to create standard waypoint\n
+    · New: Added option to hide archived caches\n
+    · New: Added map options to hide certain waypoint types\n
+    · New: Show (unsaved) caches at corrected coordinates on live map if applicable\n
+    · New: Create individual routes (by long pressing on icons in map)\n
+    · New: Added option to disable transparent background\n
+    · Fix: Crash after "Remove all" in cache list\n
+    · Fix: Crash after rapid movements on OSM map\n
+    · Fix: Store manually set values in seekbar preferences\n
+    · Change: Moved hide options to separate map submenu\n
+    · Change: Separated impacts from \"hide disabled\" and \"hide archived\" options\n
+    · Change: Switch off indoor mode for Google Maps in satellite mode\n
+    · Change: Improve visibility of subheadings in preferences\n
     \n
     \n
 </string>
