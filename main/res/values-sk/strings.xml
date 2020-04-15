@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="detail">Detail</string>
     <string name="search">Vyhľadávanie</string>
@@ -247,6 +248,7 @@
     <string name="confirm_discard_wp_changes">Zahodiť neuložené zmeny bodov trasy?</string>
     <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
     <string name="warn_log_load_additional_data">Aplikácii c:geo sa nepodarilo načítať ďalšie údaje (trasovateľné predmety/favoritné body) na logovanie.</string>
+    <string name="more_information">Ďalšie informácie</string>
     <!-- location service -->
     <string name="loc_last">posledná známa</string>
     <string name="loc_net">sieť</string>
@@ -264,6 +266,7 @@
     <string name="menu_settings">Nastavenia</string>
     <string name="menu_backup">Zálohovať/Obnoviť</string>
     <string name="menu_history">História</string>
+    <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Nasnímať geokód</string>
     <string name="menu_scan_description">c:geo dokáže skenovať geokódy, ak sú vo forme QR kódu. Potrebná aplikácia nie je nainštalovaná. Chcete otvoriť Google Play a nainštalovať ju?</string>
     <!-- main screen -->
@@ -363,6 +366,7 @@
     <string name="list_menu_create">Vytvoriť nový zoznam</string>
     <string name="list_menu_drop">Odstrániť tento zoznam</string>
     <string name="list_menu_rename">Premenovať tento zoznam</string>
+    <string name="list_menu_import">Import</string>
     <string name="list_title">Výber zoznamu</string>
     <string name="lists_title">Vyberte zoznamy</string>
     <string name="list_inbox">Uložené</string>
@@ -403,10 +407,13 @@
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
+    <string name="about_contributors_recent">Nedávni prispievatelia</string>
     <string name="about_contributors_specialthanks">Zvláštne poďakovanie pre</string>
     <string name="about_contributors_specialthanksdetails">· všetkým našim prekladateľom na <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· všetkým oznamovateľom problémov\n· a všetkým ostatným podporovateľom.\n</string>
+    <string name="about_contributors_other">Ďalší prispievatelia</string>
     <string name="about_components">Súčasti</string>
     <string name="contribution_code">kód</string>
+    <string name="contribution_tester">tester</string>
     <string name="contribution_support">podpora</string>
     <string name="contribution_documentation">dokumentácia</string>
     <string name="contribution_projectleader">líder projektu otvoreného zdrojového kódu</string>
@@ -426,6 +433,7 @@
     <string name="settings_summary_map">Nastavte zdroj mapy, možnosti offline máp a mapových detailov.</string>
     <string name="settings_title_map_data">Mapové podklady</string>
     <string name="settings_title_map_content">Obsah máp</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Adresár údajov skrýš</string>
     <string name="settings_title_data_dir_usage">Adresár údajov skrýš (%1$s využité)</string>
     <string name="calculate_dataDir_title">Využitie údajov skrýš</string>
@@ -503,6 +511,7 @@
     <string name="init_signature_template_name">Meno</string>
     <string name="init_signature_template_difficulty">Obtiažnosť</string>
     <string name="init_signature_template_terrain">Terén</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Pozícia pre zápis do logu</string>
     <string name="init_signature_template_size">Veľkosť</string>
     <string name="init_ratingwanted">GCvote hodnotenie</string>
@@ -1353,8 +1362,10 @@
     <string name="support_title">Podpora</string>
     <string name="website_title">Webová stránka</string>
     <string name="facebook_link"><a href="">stránka c:geo</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
     <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy, keď zapíšete nájdenie skrýše?</string>
+    <string name="faq_title">Najčastejšie otázky</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
@@ -1370,7 +1381,19 @@
     <string name="tts_stopped">Rozprávanie vypnuté</string>
     <string name="err_tts_lang_not_supported">Aktuálny jazyk nepodporuje prevod textu na reč.</string>
     <string name="tts_one_kilometer">jeden kilometer</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s kilometer</item>
+        <item quantity="few">%s kilometre</item>
+        <item quantity="many">%s kilometrov</item>
+        <item quantity="other">%s kilometrov</item>
+    </plurals>
     <string name="tts_one_meter">jeden meter</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s meter</item>
+        <item quantity="few">%s metre</item>
+        <item quantity="many">%s metrov</item>
+        <item quantity="other">%s metrov</item>
+    </plurals>
     <string name="tts_one_mile">jedna míľa</string>
     <plurals name="tts_miles">
         <item quantity="one">%s míľa</item>
@@ -1482,6 +1505,10 @@
     <string name="color_blue">Modrá</string>
     <string name="color_green">Zelená</string>
     <string name="color_grey">Sivá</string>
+    <string name="color_orange">Oranžová</string>
+    <string name="color_red">Červená</string>
+    <string name="color_turquoise">Tyrkysová</string>
+    <string name="color_black">Čierna</string>
     <!-- number input -->
     <string name="number_input_title">Zadajte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je príliš malá – obnovené na min. hodnotu</string>
