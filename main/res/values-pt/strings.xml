@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
+    <string name="cache">Cache</string>
     <string name="detail">Detalhes</string>
     <string name="search">Pesquisar</string>
     <string name="helpers">Aplicações úteis</string>
     <string name="about">Acerca do c:geo</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Definições c:geo</string>
     <!-- caches -->
     <string name="all_types">Todos os tipos de Geocaches</string>
     <string name="traditional">Geocache tradicional</string>
+    <string name="multi">Multi-cache</string>
     <string name="mystery">Geocache mistério</string>
     <string name="letterbox">Letterbox híbrida</string>
     <string name="event">Evento</string>
     <string name="mega">Mega Evento</string>
     <string name="giga">Giga Evento</string>
+    <string name="earth">Earthcache</string>
     <string name="cito">Evento Cache In Trash Out</string>
     <string name="webcam">Geocache webcam</string>
     <string name="virtual">Geocache Virtual</string>
     <string name="wherigo">Geocache Wherigo™</string>
     <string name="communceleb">Evento Comemoração da Comunidade</string>
     <string name="ape">Geocache Projecto A.P.E.</string>
+    <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Celebração Geocaching HQ</string>
     <string name="gps">Exibição das GPS Adventures</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Geocache Locationless (Reverse)</string>
     <string name="userdefined">Cache definida pelo utilizador</string>
     <string name="unknown">Tipo Desconhecido</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Pequeno</string>
+    <string name="cache_size_regular">Normal</string>
     <string name="cache_size_large">Grande</string>
     <string name="cache_size_other">Outro</string>
+    <string name="cache_size_virtual">Virtual</string>
     <string name="cache_size_notchosen">Não especificado</string>
     <string name="cache_size_unknown">Desconhecido</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Muito grande</string>
     <!-- waypoints -->
     <string name="wp_final">Localização final</string>
@@ -143,6 +155,7 @@
     <string name="translate_to_english">Traduzir para inglês</string>
     <string name="translate_length_warning">A tradução pode falhar se o texto for muito grande.</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
@@ -259,6 +272,8 @@
     <string name="loc_fused">Combinados</string>
     <string name="loc_low_power">Modo bateria fraca</string>
     <string name="loc_home">Coordenadas de casa</string>
+    <string name="loc_gps">GPS</string>
+    <string name="loc_sat">Satélite</string>
     <string name="loc_trying">A tentar localizar</string>
     <string name="loc_no_addr">Endereço desconhecido</string>
     <string name="loc_gps_disabled">GPS desactivado</string>
@@ -271,6 +286,7 @@
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Ler código GC</string>
+    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">O c:geo pode interpretar códigos GC impressos num código QR. A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
@@ -436,7 +452,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_summary_map">Definir a fonte do mapa, definições de mapa offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
+    <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Pasta de dados de geocache</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocache (%1$s em uso)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -450,6 +468,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuração do directório da aplicação e outras definições específicas do sistema.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
+    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
     <string name="settings_category_geocaching_additionals">Outros serviços e suplementos</string>
     <string name="settings_category_social">Redes sociais</string>
@@ -513,6 +532,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_signature_template_name">Nome</string>
     <string name="init_signature_template_difficulty">Dificuldade</string>
     <string name="init_signature_template_terrain">Terreno</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texto de registo</string>
     <string name="init_signature_template_size">Tamanho</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
@@ -523,6 +543,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_openlastdetailspage">Mostra a última página vista ao consultar os detalhes da cache</string>
     <string name="init_skin">Tema claro</string>
     <string name="init_summary_skin">Usar o tema claro (Requer reinício)</string>
+    <string name="init_transparentBackground">Fundo transparente</string>
+    <string name="init_summary_transparentBackground">Usar plano de fundo transparente (é necessário reiniciar)</string>
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_useenglish">Usar o idioma Inglês</string>
@@ -531,12 +553,16 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_exclude">Exclui as caches que lhe pertencem ou que tenha encontrado</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
+    <string name="init_zoomincludingwaypoints">O zoom inclui os pontos adicionais</string>
+    <string name="init_zoomincludingwaypoints_description">Ao mostrar apenas uma cache no mapa: Deve o zoom ser ajustado para que inclua todos os seus pontos adicionais?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar a distância em linha recta</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
     <string name="init_disabled">Excluir Desactivadas</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
+    <string name="init_archived">Excluir Arquivadas</string>
+    <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
     <string name="init_units">Usar unidades no Sistema Imperial</string>
@@ -691,6 +717,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
     <string name="map_source_osm_mapnik">OSM: Mapa</string>
+    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinado (offline)</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
@@ -732,6 +759,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="err_auth_geokrety_bad_password">O seu nome de utilizador/palavra-passe parecem inválidos.</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">Uma cache</item>
+        <item quantity="other">%1$d caches</item>
+    </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
         <item quantity="one">resta um dia</item>
@@ -762,12 +793,16 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="other">há cerca de %d meses</item>
     </plurals>
     <string name="cache_offline_about_time_year">há mais de um ano</string>
+    <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Atributos</string>
     <string name="cache_inventory">Inventário</string>
     <string name="cache_log_images_title">Imagens do registo</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota pessoal</string>
+    <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
+    <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
     <string name="cache_personal_note_truncation">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
     <string name="cache_personal_note_upload">Carregar</string>
@@ -796,6 +831,7 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="other">%d Pontos Adicionais</item>
     </plurals>
     <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
+    <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
     <string name="cache_logs">Registos</string>
@@ -809,7 +845,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_dialog_loading_details_status_gcvote">A carregar GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">A armazenar dados</string>
     <string name="cache_dialog_loading_details_status_render">A renderizar a vista</string>
+    <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">A guardar geocache para utilização offline…</string>
+    <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">A remover cache do armazenamento do dispositivo…</string>
     <string name="cache_dialog_refresh_title">Actualizar</string>
     <string name="cache_dialog_refresh_message">A recarregar a informação da geocache…</string>
@@ -828,9 +866,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_navigation_transit">Navegação (Transportes)</string>
     <string name="cache_menu_navigation_bike">Navegação (bicicleta)</string>
     <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
+    <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (caminhar)</string>
     <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mostrar no mapa</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Outras aplicações externas</string>
     <string name="cache_menu_streetview">Vista de rua</string>
     <string name="cache_menu_browser">Abrir no browser</string>
@@ -847,6 +888,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_share">Partilhar cache</string>
     <string name="cache_menu_move_list">Mover para outra lista</string>
     <string name="cache_menu_copy_list">Copiar para uma lista diferente</string>
+    <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+    <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Voto</string>
     <string name="cache_menu_checker">Abrir Geochecker</string>
     <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
@@ -906,6 +949,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_image_add_waypoint">Adicionar ponto adicional</string>
     <string name="cache_image_background">Imagem de fundo da descrição da cache</string>
     <string name="cache_share_field">Partilhar</string>
+    <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listada em %s</string>
     <string name="user_defined_caches">Caches definidas pelo utilizador</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
@@ -1010,12 +1054,21 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_live">Mapa on-line</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_modes">Modos de mapa</string>
+    <string name="map_hide">Ocultar</string>
     <string name="map_trail_show">Mostrar rasto</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_autorotate">Auto-rotação do mapa</string>
     <string name="map_circles_show">Mostrar círculos</string>
     <string name="map_mycaches_hide">Mostrar só por encontrar</string>
     <string name="map_disabled_hide">Ocultar as caches desactivadas</string>
+    <string name="map_archived_hide">Ocultar caches arquivadas</string>
+    <string name="map_hidewp_original">Ocultar os pontos adicionais originais</string>
+    <string name="map_hidewp_parking">Ocultar pontos adicionais de estacionamento</string>
+    <string name="map_hidewp_visited">Ocultar pontos adicionais visitados</string>
+    <string name="init_hidewp">Ocultar pontos adicionais</string>
+    <string name="init_summary_hidewp_original">Ocultar os pontos adicionais originais no mapa</string>
+    <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
+    <string name="init_summary_hidewp_visited">Ocultar os pontos adicionais visitados no mapa</string>
     <string name="map_theme_builtin">Padrão</string>
     <string name="map_theme_select">Seleccionar o tema de mapa</string>
     <string name="map_theme_options">Opções do Tema</string>
@@ -1048,14 +1101,17 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_hbu">Escondida pelos utilizadores</string>
     <string name="search_hbu_prefill">Dono</string>
     <string name="search_hbu_button">Pesquisar pelo dono</string>
+    <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
     <string name="search_destination">Destino</string>
     <string name="search_address_started">Pesquisar por lugares</string>
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
+    <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">A carregar lista de Pocket Queries</string>
     <!-- trackable -->
+    <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">A carregar detalhes do trackable…</string>
     <string name="trackable_log_touch">Registar contacto</string>
     <string name="trackable_browser_open">Abrir no browser</string>
@@ -1080,7 +1136,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="trackable_distance">Percorreu</string>
     <string name="trackable_touch">Contacto</string>
     <string name="trackable_not_activated">Trackable não activado</string>
+    <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_status">Situação</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicional</string>
     <string name="geokret_type_book_or_media">Livro ou média electrónica</string>
     <string name="geokret_type_human">Humano</string>
@@ -1122,6 +1180,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das geocaches no c:geo com um toque longo sobre o texto da descrição da geocache (mesmo sem ligação à Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
+    <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
     <!-- export -->
     <string name="export">Exportar</string>
@@ -1135,6 +1194,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_fieldnotes_upload_success">Envio para geocaching.com bem sucedido</string>
     <string name="export_fieldnotes_onlynew">Apenas a partir da última exportação</string>
     <string name="export_fieldnotes_creating">A criar as notas de campo…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">O ficheiro GPX vai ser exportado para %1$s com a data e a hora actual como nome de ficheiro.</string>
     <string name="export_gpx_to">Enviar GPX exportado para</string>
     <string name="export_confirm_title">A exportar %1$s</string>
@@ -1184,11 +1244,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_swimming_yes">Pode ser necessário nadar</string>
     <string name="attribute_swimming_no">Não é necessário nadar</string>
     <string name="attribute_available_yes">Disponível a qualquer hora</string>
-    <string name="attribute_available_no">Não disponível a qualquer hora</string>
+    <string name="attribute_available_no">Não está disponível a qualquer hora</string>
     <string name="attribute_night_yes">Recomendada à noite</string>
     <string name="attribute_night_no">Não recomendada à noite</string>
     <string name="attribute_winter_yes">Disponível no Inverno</string>
-    <string name="attribute_winter_no">Não disponível no Inverno</string>
+    <string name="attribute_winter_no">Não está disponível no Inverno</string>
     <string name="attribute_stealth_yes">É necessário ser discreto</string>
     <string name="attribute_stealth_no">Não é necessário ser discreto</string>
     <string name="attribute_firstaid_yes">Precisa de manutenção</string>
@@ -1256,11 +1316,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_hunting_yes">Caça</string>
     <string name="attribute_hunting_no">Sem caça</string>
     <string name="attribute_danger_yes">Área perigosa</string>
-    <string name="attribute_danger_no">Área não perigosa</string>
+    <string name="attribute_danger_no">Não é uma área perigosa</string>
     <string name="attribute_thorn_yes">Espinhos</string>
     <string name="attribute_thorn_no">Sem espinhos</string>
     <string name="attribute_wheelchair_yes">Acessível a cadeiras de rodas</string>
-    <string name="attribute_wheelchair_no">Não é acessível a cadeiras de rodas</string>
+    <string name="attribute_wheelchair_no">Não acessível a cadeiras de rodas</string>
     <string name="attribute_parking_yes">Estacionamento disponível</string>
     <string name="attribute_parking_no">Estacionamento não disponível</string>
     <string name="attribute_public_yes">Transporte público</string>
@@ -1294,13 +1354,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_swamp_yes">Pântano ou sapal</string>
     <string name="attribute_swamp_no">Sem pântano ou sapal</string>
     <string name="attribute_hills_yes">Área montanhosa</string>
-    <string name="attribute_hills_no">Área não montanhosa</string>
+    <string name="attribute_hills_no">Não é uma área montanhosa</string>
     <string name="attribute_easy_climbing_yes">Escalada leve</string>
     <string name="attribute_easy_climbing_no">Não é escalada leve</string>
     <string name="attribute_poi_yes">Ponto de interesse</string>
     <string name="attribute_poi_no">Não é ponto de interesse</string>
     <string name="attribute_moving_target_yes">Objecto em movimento</string>
     <string name="attribute_moving_target_no">Não é objecto em movimento</string>
+    <string name="attribute_webcam_yes">Webcam</string>
     <string name="attribute_webcam_no">Sem webcam</string>
     <string name="attribute_inside_yes">Dentro de locais fechados (grutas, edifícios, etc.)</string>
     <string name="attribute_inside_no">Não está em locais fechados</string>
@@ -1310,14 +1371,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_no_gps_no">Com GPS</string>
     <string name="attribute_overnight_yes">Necessário pernoitar</string>
     <string name="attribute_overnight_no">Não é necessário pernoitar</string>
-    <string name="attribute_specific_times_yes">Disponível apenas em determinados horários</string>
-    <string name="attribute_specific_times_no">Não está disponível apenas em determinados horários</string>
-    <string name="attribute_day_yes">Apenas de dia</string>
-    <string name="attribute_day_no">Não só de dia</string>
+    <string name="attribute_specific_times_yes">Apenas disponível em determinados períodos</string>
+    <string name="attribute_specific_times_no">Não está apenas disponível em determinados períodos</string>
+    <string name="attribute_day_yes">Apenas diurna</string>
+    <string name="attribute_day_no">Não é apenas diurna</string>
     <string name="attribute_tide_yes">Maré</string>
     <string name="attribute_tide_no">Sem maré</string>
     <string name="attribute_all_seasons_yes">Todas as estações</string>
-    <string name="attribute_all_seasons_no">Não disponível em todas as estações</string>
+    <string name="attribute_all_seasons_no">Não está disponível em todas as estações</string>
     <string name="attribute_breeding_yes">Época de reprodução / natureza protegida</string>
     <string name="attribute_breeding_no">Não tem época de reprodução / natureza protegida</string>
     <string name="attribute_snow_proof_yes">Esconderijo à prova de neve</string>
@@ -1380,6 +1441,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="support_title">Suporte</string>
     <string name="website_title">Página Web</string>
     <string name="facebook_link"><a href="">Página do c:geo</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo no Google Play</a></string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
     <string name="faq_title">Perguntas Frequentes</string>
@@ -1488,6 +1550,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
     <string name="err_select_logimage_upload_size">A imagem é muito grande. Por favor, seleccione uma resolução inferior.</string>
     <string name="err_logimage_caption_required">É necessária uma legenda para a imagem</string>
+    <string name="waypoint_latitude_null">N/S --° --.---</string>
     <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Fechar a aplicação</string>
@@ -1513,5 +1576,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="notification_channel_description">notificações da aplicação c:geo</string>
     <string name="proximity_notification_title">notificação de proximidade</string>
     <!-- individual routes -->
+    <string name="individual_route_added">adicionado à rota</string>
+    <string name="individual_route_removed">removido da rota</string>
+    <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
+    <string name="map_clear_individual_route">Limpar rota individual</string>
+    <string name="map_individual_route_cleared">Rota individual limpa</string>
     <!-- distance units -->
 </resources>

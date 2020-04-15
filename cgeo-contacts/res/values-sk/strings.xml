@@ -4,4 +4,7 @@
     <string name="contact_not_found">Kontakt s aliasom/prezývkou %s nebol nájdený. Najprv si ho pridaj do kontaktov.</string>
     <string name="multiple_matches">Viacnásobná zhoda</string>
     <!-- permission handling -->
+    <string name="ask_again">Nabudúce sa znova opýtať</string>
+    <string name="close">Zavrieť</string>
+    <string name="goto_app_details">Otvoriť info o aplikácii</string>
 </resources>
