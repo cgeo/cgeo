@@ -19,4 +19,11 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/cache_waypoints_add_currentLocation" />
+    <Button
+        android:id="@+id/add_waypoint_fromclipboard"
+        style="@style/button_full"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cache_waypoints_add_fromclipboard"
+        android:visibility="gone" />
 </LinearLayout>

@@ -878,6 +878,8 @@
 
     <string name="cache_waypoints_add">Add Waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Add current location</string>
+    <string name="cache_waypoints_add_fromclipboard">Add from clipboard</string>
+    <string name="cache_waypoints_remove_original_waypoint">Waypoint copied from clipboard to this cache.\n\nRemove original waypoint?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">No hint available</string>
     <string name="cache_logs">Logbook</string>
@@ -1106,6 +1108,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Cache coordinates on website have been modified to: %s.</string>
     <string name="waypoint_done">Done</string>
     <string name="waypoint_duplicate">Duplicate waypoint</string>
+    <string name="waypoint_toclipboard">Copy waypoint to clipboard</string>
     <string name="waypoint_copy_of">Copy of</string>
     <string name="waypointcalc_notes_prompt">Enter notes here…</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>

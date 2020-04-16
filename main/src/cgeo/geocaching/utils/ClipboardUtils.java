@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -44,4 +45,15 @@ public final class ClipboardUtils {
         return text != null ? text.toString() : null;
     }
 
+    /**
+     * clear clipboard content
+     * (up to API level 28: replace with empty string)
+     */
+    public static void clearClipboard() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            ((ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE)).clearPrimaryClip();
+        } else {
+            copyToClipboard("");
+        }
+    }
 }
