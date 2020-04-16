@@ -7,6 +7,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.ClipboardUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class Waypoint implements IWaypoint {
 
     public static final String PREFIX_OWN = "OWN";
+    public static final String CLIPBOARD_PREFIX = "c:geo:WAYPOINT:";
 
     private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int ORDER_UNDEFINED = -2;
@@ -403,4 +405,28 @@ public class Waypoint implements IWaypoint {
         return type.getL10n() + " " + (max + 1);
     }
 
+    /**
+     * returns a string with current waypoint's id to clipboard, preceeded by internal prefix
+     * this is to be pushed to clipboard
+     */
+    public CharSequence reformatForClipboard() {
+        return CLIPBOARD_PREFIX + getId();
+    }
+
+    /**
+     * tries to retrieve waypoint id from clipboard
+     * returns the id, or -1 if no waypoint (with internal prefix) found
+     */
+    public static int hasClipboardWaypoint() {
+        final int length = CLIPBOARD_PREFIX.length();
+        final String clip = StringUtils.defaultString(ClipboardUtils.getText());
+        if (clip.length() > length && clip.substring(0, length).equals(CLIPBOARD_PREFIX)) {
+            try {
+                return Integer.parseInt(clip.substring(CLIPBOARD_PREFIX.length()));
+            } catch (NumberFormatException e) {
+                return -1;
+            }
+        }
+        return -1;
+    }
 }

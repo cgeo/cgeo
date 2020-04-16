@@ -84,9 +84,11 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -458,6 +460,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
                 final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
                 menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
+                menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
                 break;
             default:
                 if (imagesList != null) {
@@ -533,6 +536,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }
                 }.execute();
+                return true;
+            case R.id.menu_waypoint_toclipboard:
+                if (selectedWaypoint != null) {
+                    ensureSaved();
+                    ClipboardUtils.copyToClipboard(selectedWaypoint.reformatForClipboard());
+                    showToast(getString(R.string.clipboard_copy_ok));
+                }
                 return true;
             case R.id.menu_waypoint_delete:
                 ensureSaved();
@@ -1772,6 +1782,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
         private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
 
+        private void setClipboardButtonVisibility(final Button createFromClipboard) {
+            createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.INVISIBLE);
+        }
+
+        private void addWaypointAndSort(final List<Waypoint> sortedWaypoints, final Waypoint newWaypoint) {
+            sortedWaypoints.add(newWaypoint);
+            Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
+        }
+
         @Override
         public ListView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
@@ -1823,11 +1842,46 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 waypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
                 waypoint.setGeocode(cache.getGeocode());
                 cache.addOrChangeWaypoint(waypoint, true);
-                // update listview
-                sortedWaypoints.add(waypoint);
-                Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
+                addWaypointAndSort(sortedWaypoints, waypoint);
                 adapter.notifyDataSetChanged();
             });
+
+            // read waypoint from clipboard
+            final Button addWaypointFromClipboard = header.findViewById(R.id.add_waypoint_fromclipboard);
+            setClipboardButtonVisibility(addWaypointFromClipboard);
+            addWaypointFromClipboard.setOnClickListener(v2 -> {
+                final Waypoint oldWaypoint = DataStore.loadWaypoint(Waypoint.hasClipboardWaypoint());
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (null != oldWaypoint) {
+                            ensureSaved();
+                            final Waypoint newWaypoint = cache.duplicateWaypoint(oldWaypoint);
+                            if (null != newWaypoint) {
+                                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                                addWaypointAndSort(sortedWaypoints, newWaypoint);
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            adapter.notifyDataSetChanged();
+                            if (oldWaypoint.isUserDefined()) {
+                                Dialogs.confirmYesNo((Activity) view.getContext(), R.string.cache_waypoints_add_fromclipboard, R.string.cache_waypoints_remove_original_waypoint, (dialog, which) -> {
+                                    DataStore.deleteWaypoint(oldWaypoint.getId());
+                                    ClipboardUtils.clearClipboard();
+                                });
+                            }
+                        }
+                    }
+                }.execute();
+            });
+            final ClipboardManager cliboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            cliboardManager.addPrimaryClipChangedListener(() -> setClipboardButtonVisibility(addWaypointFromClipboard));
 
             return view;
         }

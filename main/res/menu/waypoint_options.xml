@@ -27,6 +27,11 @@
         android:title="@string/waypoint_duplicate">
     </item>
     <item
+        android:id="@+id/menu_waypoint_toclipboard"
+        android:title="@string/waypoint_toclipboard"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_waypoint_delete"
         android:title="@string/waypoint_delete">
     </item>
