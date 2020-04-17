@@ -553,7 +553,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_exclude">Exclui as caches que lhe pertencem ou que tenha encontrado</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
-    <string name="init_zoomincludingwaypoints">O zoom inclui os pontos adicionais</string>
+    <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao mostrar apenas uma cache no mapa: Deve o zoom ser ajustado para que inclua todos os seus pontos adicionais?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
@@ -1059,12 +1059,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_autorotate">Auto-rotação do mapa</string>
     <string name="map_circles_show">Mostrar círculos</string>
-    <string name="map_mycaches_hide">Mostrar só por encontrar</string>
-    <string name="map_disabled_hide">Ocultar as caches desactivadas</string>
-    <string name="map_archived_hide">Ocultar caches arquivadas</string>
-    <string name="map_hidewp_original">Ocultar os pontos adicionais originais</string>
-    <string name="map_hidewp_parking">Ocultar pontos adicionais de estacionamento</string>
-    <string name="map_hidewp_visited">Ocultar pontos adicionais visitados</string>
+    <string name="map_mycaches_hide">Caches encontradas e/ou minhas</string>
+    <string name="map_disabled_hide">Caches desactivadas</string>
+    <string name="map_archived_hide">Caches arquivadas</string>
+    <string name="map_hidewp_original">Pontos adicionais originais</string>
+    <string name="map_hidewp_parking">Pontos adicionais de estacionamento</string>
+    <string name="map_hidewp_visited">Pontos adicionais visitados</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Ocultar os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
