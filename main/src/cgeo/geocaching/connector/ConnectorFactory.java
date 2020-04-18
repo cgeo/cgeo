@@ -33,6 +33,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -109,6 +110,11 @@ public final class ConnectorFactory {
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
     private static boolean forceRelog = false; // c:geo needs to log into cache providers
+
+    // for viewport searchResult caching
+    private static int counterSearchByViewport = 0;     // @todo delete this line after testing
+    private static Viewport lastViewportUsed = null;
+    private static SearchResult lastSearchResult = null;
 
     private ConnectorFactory() {
         // utility class
@@ -334,7 +340,18 @@ public final class ConnectorFactory {
     /** @see ISearchByViewPort#searchByViewport */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
+        if (null != lastViewportUsed && lastViewportUsed.includes(viewport)) {
+            Log.d("searchByViewport: saved searchResult reused");            // @todo delete this line after testing
+            return lastSearchResult;
+        }
+
+        // @todo delete next two lines after testing
+        counterSearchByViewport++;
+        Log.d("called searchByViewport #" + counterSearchByViewport);
+
+        lastViewportUsed = viewport.resize(3);
+        lastSearchResult = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(lastViewportUsed));
+        return lastSearchResult;
     }
 
     @Nullable
