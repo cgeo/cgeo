@@ -65,7 +65,6 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -3411,86 +3410,6 @@ public class DataStore {
         }
     }
 
-    public static Set<String> getStoredLocationsInList(final int listId) {
-
-        final Set<String> locations = new TreeSet<>(String::compareTo);
-
-        init();
-
-        try (Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_IN_LIST.query, new String[] {Integer.toString(listId)})) {
-
-            if (cursor.moveToFirst()) {
-                do {
-                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
-                } while (cursor.moveToNext());
-            }
-
-        } catch (final SQLiteDoneException ignored) {
-            // Do nothing, it only means we have no information on the cache
-        } catch (final Exception e) {
-            Log.e("DataStore.getStoredLocationsInList", e);
-        }
-
-        return locations;
-    }
-
-    public static Set<String> getAllStoredLocations() {
-
-        final Set<String> locations = new TreeSet<>(String::compareTo);
-
-        init();
-
-        try (Cursor cursor = database.rawQuery(PreparedStatement.GET_ALL_STORED_LOCATIONS.query, new String[0])) {
-
-            if (cursor.moveToFirst()) {
-                do {
-                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
-                } while (cursor.moveToNext());
-            }
-
-        } catch (final SQLiteDoneException ignored) {
-            // Do nothing, it only means we have no information on the cache
-        } catch (final Exception e) {
-            Log.e("DataStore.getAllStoredLocations", e);
-        }
-
-        return locations;
-    }
-
-    public static Set<String> getStoredLocationsForSet(Set<String> geocodes) {
-
-        final Set<String> locations = new TreeSet<>(String::compareTo);
-
-        init();
-
-        final StringBuilder geoCodePlaceholderList = new StringBuilder();
-
-        final int length = geocodes.size();
-
-        for (int i = 0; i < length; i++) {
-            geoCodePlaceholderList.append("?");
-            if (i < length - 1) {
-                geoCodePlaceholderList.append(", ");
-            }
-        }
-
-        try (Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_IN_LIST.query.replace("%GEOCODE_LIST%", geoCodePlaceholderList), geocodes.toArray(new String[length]))) {
-
-            if (cursor.moveToFirst()) {
-                do {
-                    locations.add(cursor.getString(cursor.getColumnIndex("location")));
-                } while (cursor.moveToNext());
-            }
-
-        } catch (final SQLiteDoneException ignored) {
-            // Do nothing, it only means we have no information on the cache
-        } catch (final Exception e) {
-            Log.e("DataStore.getStoredLocationsForSet", e);
-        }
-
-        return locations;
-    }
-
     public static void addToLists(final Collection<Geocache> caches, final Map<String, Set<Integer>> cachesLists) {
         if (caches.isEmpty() || cachesLists.isEmpty()) {
             return;
@@ -3518,6 +3437,54 @@ public class DataStore {
         } finally {
             database.endTransaction();
         }
+    }
+
+    private static String fetchLocation(final Cursor cursor) {
+        return cursor.getString(cursor.getColumnIndex("location"));
+    }
+
+    public static SortedSet<String> getStoredLocationsInList(final int listId) {
+
+        init();
+
+        final Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_IN_LIST.query, new String[] {Integer.toString(listId)});
+
+        return cursorToColl(cursor, new TreeSet<>(String::compareTo), DataStore::fetchLocation);
+    }
+
+    public static SortedSet<String> getAllStoredLocations() {
+
+        init();
+
+        final Cursor cursor = database.rawQuery(PreparedStatement.GET_ALL_STORED_LOCATIONS.query, new String[0]);
+
+        return cursorToColl(cursor, new TreeSet<>(String::compareTo), DataStore::fetchLocation);
+    }
+
+    public static SortedSet<String> getStoredLocationsForSet(final Set<String> geocodes) {
+
+        final SortedSet<String> locations = new TreeSet<>(String::compareTo);
+
+        if (geocodes.isEmpty()) {
+            return locations;
+        }
+
+        init();
+
+        final StringBuilder geoCodePlaceholderList = new StringBuilder();
+
+        final int length = geocodes.size();
+
+        for (int i = 0; i < length; i++) {
+            geoCodePlaceholderList.append("?");
+            if (i < length - 1) {
+                geoCodePlaceholderList.append(", ");
+            }
+        }
+
+        final Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_FROM_GEOCODES.query.replace("%GEOCODE_LIST%", geoCodePlaceholderList), geocodes.toArray(new String[length]));
+
+        return cursorToColl(cursor, locations, DataStore::fetchLocation);
     }
 
     public static boolean isInitialized() {
@@ -3732,8 +3699,6 @@ public class DataStore {
         }
 
     }
-
-
 
     public static void saveVisitDate(final String geocode, final long visitedDate) {
         setVisitDate(Collections.singletonList(geocode), visitedDate);
