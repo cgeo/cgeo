@@ -1395,7 +1395,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         try {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(mapView.getViewport().resize(0.8));
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(mapView.getViewport().resize(3.0));
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
