@@ -65,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -2015,5 +2016,10 @@ public class Geocache implements IWaypoint {
 
     public boolean isGotoHistoryUDC() {
         return geocode.equals(InternalConnector.GEOCODE_HISTORY_CACHE);
+    }
+
+    @NonNull
+    public Comparator<? super Waypoint> getWaypointComparator() {
+        return isGotoHistoryUDC() ? Waypoint.WAYPOINT_ID_COMPARATOR : Waypoint.WAYPOINT_COMPARATOR;
     }
 }

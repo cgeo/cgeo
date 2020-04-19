@@ -52,6 +52,19 @@ public class Waypoint implements IWaypoint {
     private String calcStateJson = null;
 
     /**
+     * Sort waypoints by their probable order (e.g. parking first, final last).
+     * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
+     */
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) (left, right) -> left.order() - right.order();
+
+    /**
+     * Sort waypoints by internal id descending (results in newest on top)
+     * used only for "goto history" UDC
+     * use Geocache::getWaypointComparator() to retrieve the adequate comparator for your cache
+     */
+    public static final Comparator<? super Waypoint> WAYPOINT_ID_COMPARATOR = (Comparator<Waypoint>) (left, right) -> right.id - left.id;
+
+    /**
      * require name and type for every waypoint
      *
      */
@@ -258,11 +271,6 @@ public class Waypoint implements IWaypoint {
         hash ^= waypointType.markerId;
         return (int) hash;
     }
-
-    /**
-     * Sort waypoints by their probable order (e.g. parking first, final last).
-     */
-    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = (Comparator<Waypoint>) (left, right) -> left.order() - right.order();
 
     /**
      * Delegates the creation of the waypoint-id for gpx-export to the waypoint
