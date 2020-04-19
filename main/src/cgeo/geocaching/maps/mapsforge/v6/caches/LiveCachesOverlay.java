@@ -94,7 +94,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(getViewport());
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(getViewport(), getMapZoomLevel() <= 14);
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             MapUtils.filter(result);

@@ -337,10 +337,15 @@ public final class ConnectorFactory {
         return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
 
-    /** @see ISearchByViewPort#searchByViewport */
+    /**
+     * @see ISearchByViewPort#searchByViewport
+     * @param forceByZoomlevel: reset cache if true and cached searchResult >= 400 results and requested viewport changed
+     *  */
     @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        if (null != lastViewportUsed && lastViewportUsed.includes(viewport)) {
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport, final boolean forceByZoomlevel) {
+        final boolean viewportChanged = (null == lastViewportUsed) || !viewport.equals(lastViewportUsed);
+        final boolean skipCache = forceByZoomlevel && null != lastSearchResult && lastSearchResult.getCount() >= 400 && viewportChanged;
+        if (null != lastViewportUsed && lastViewportUsed.includes(viewport) && !skipCache) {
             Log.d("searchByViewport: saved searchResult reused");            // @todo delete this line after testing
             return lastSearchResult;
         }
