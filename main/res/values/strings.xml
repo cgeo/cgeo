@@ -1006,6 +1006,8 @@
     <string name="init_longtap_map">Long tap on map</string>
     <string name="init_summary_longtap_map">Activate long tap on map icon (create an individual route) or on free map space (create a user defined cache)</string>
     <string name="goto_targets_list">Internal caches</string>
+    <string name="clear_goto_history_title">Clear goto history</string>
+    <string name="clear_goto_history">This will delete all historical waypoints except the five most recent</string>
 
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrees</string>

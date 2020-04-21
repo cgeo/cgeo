@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.gc.UncertainProperty;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -2010,5 +2011,9 @@ public class Geocache implements IWaypoint {
                 "\">" +
                 alternativeCode +
                 "</a><br /><br />";
+    }
+
+    public boolean isGotoHistoryUDC() {
+        return geocode.equals(InternalConnector.GEOCODE_HISTORY_CACHE);
     }
 }
