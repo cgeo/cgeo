@@ -718,6 +718,7 @@
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo hakkında bilgi</string>
     <string name="init_sendToCgeo_name">Cihazınızın adı</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b>, Firefox veya Chrome için özel bir eklenti kullanarak Geocache\'lerinizi doğrudan geocaching.com\'dan Android cihazınıza göndermenizi sağlar. Kaydolmadan önce lütfen <a href="https://send2.cgeo.org/">http://send2.cgeo.org/</a> adresine gidin. Send2cgeo\'yu kullanmak isterseniz kaydınızı yapmanız yeterlidir. C:geo, cihazınızı kaydettirmeden normal şekilde çalışır.</string>
     <string name="init_sendToCgeo_register">Kayıt Talep Et</string>
     <string name="init_sendToCgeo_registering">Cihazını send2cgeo\'ya kaydediliyor…</string>
     <string name="init_sendToCgeo_register_ok">Kayıt başarılı. Pin kodunuz %d. Bu pin kodunu cihazı tarayıcınıza bağlamak için c:geo web sitesinde kullanın.</string>
