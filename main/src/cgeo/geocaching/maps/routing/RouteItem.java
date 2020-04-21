@@ -56,14 +56,10 @@ public class RouteItem implements Parcelable {
         this.id = id;
     }
 
-    public static final Parcelable.Creator<RouteItem> CREATOR =
-            new Parcelable.Creator<RouteItem>() {
+    public static final Parcelable.Creator<RouteItem> CREATOR = new Parcelable.Creator<RouteItem>() {
                 @Override
                 public RouteItem createFromParcel(final Parcel in) {
-                    final CoordinatesType type = CoordinatesType.values()[in.readInt()];
-                    final String geocode = in.readString();
-                    final int id = in.readInt();
-                    return new RouteItem(type, geocode, id);
+                    return new RouteItem(in);
                 }
 
                 @Override
@@ -71,6 +67,12 @@ public class RouteItem implements Parcelable {
                     return new RouteItem[size];
                 }
             };
+
+    private RouteItem (final Parcel parcel) {
+        type = CoordinatesType.values()[parcel.readInt()];
+        geocode = parcel.readString();
+        id = parcel.readInt();
+    }
 
     @Override
     public int describeContents() {

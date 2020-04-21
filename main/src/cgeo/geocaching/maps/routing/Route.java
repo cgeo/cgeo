@@ -64,7 +64,7 @@ public class Route implements Parcelable {
 
         // Parcelable methods
 
-        public static final Creator<RouteSegment> CREATOR = new Creator<RouteSegment>() {
+        public static final Parcelable.Creator<RouteSegment> CREATOR = new Parcelable.Creator<RouteSegment>() {
 
             @Override
             public RouteSegment createFromParcel(final Parcel source) {
@@ -78,10 +78,10 @@ public class Route implements Parcelable {
 
         };
 
-        RouteSegment (final Parcel parcel) {
-            item = parcel.readParcelable(null);
-            point = parcel.readParcelable(null);
-            points = parcel.readArrayList(null);
+        private RouteSegment (final Parcel parcel) {
+            item = parcel.readParcelable(RouteItem.class.getClassLoader());
+            point = parcel.readParcelable(Geopoint.class.getClassLoader());
+            points = parcel.readArrayList(Geopoint.class.getClassLoader());
             distance = parcel.readFloat();
         }
 
@@ -257,8 +257,8 @@ public class Route implements Parcelable {
 
     };
 
-    Route (final Parcel parcel) {
-        segments = parcel.readArrayList(null);
+    private Route (final Parcel parcel) {
+        segments = parcel.readArrayList(RouteSegment.class.getClassLoader());
     }
 
     @Override
@@ -271,4 +271,3 @@ public class Route implements Parcelable {
         dest.writeList(segments);
     }
 }
-
