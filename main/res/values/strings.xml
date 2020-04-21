@@ -1005,6 +1005,8 @@
     <string name="init_longtap_udc">Long tap on map</string>
     <string name="init_summary_longtap_udc">Long tap on map to create a user defined cache</string>
     <string name="goto_targets_list">Internal caches</string>
+    <string name="clear_goto_history_title">Clear goto history</string>
+    <string name="clear_goto_history">This will delete all historical waypoints except the five most recent</string>
 
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrees</string>

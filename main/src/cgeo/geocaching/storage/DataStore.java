@@ -2310,6 +2310,28 @@ public class DataStore {
     }
 
     /**
+     * deletes all but the (up to) five most recent goto history entries
+     * @return true, if successful, false otherwise
+     */
+    public static boolean clearGotoHistory() {
+        init();
+        database.beginTransaction();
+        try {
+            final String sqlGetMostRecentHistoryWaypoints = "SELECT _id FROM " + dbTableWaypoints + " WHERE geocode='" + InternalConnector.GEOCODE_HISTORY_CACHE + "' ORDER BY _id DESC LIMIT 5";
+            final String sqlGetMinIdFromMostRecentHistoryWaypoints = "SELECT MIN(_id) minId FROM (" + sqlGetMostRecentHistoryWaypoints + ")";
+            final String sqlWhereDeleteOlderHistorywaypoints = "geocode='" + InternalConnector.GEOCODE_HISTORY_CACHE + "' AND _id < (" + sqlGetMinIdFromMostRecentHistoryWaypoints + ")";
+            database.delete(dbTableWaypoints, sqlWhereDeleteOlderHistorywaypoints, null);
+            database.setTransactionSuccessful();
+            return true;
+        } catch (final Exception e) {
+            Log.e("Unable to clear goto history", e);
+        } finally {
+            database.endTransaction();
+        }
+        return false;
+    }
+
+    /**
      * Loads the trail history from the database
      *
      * @return A list of previously trail points or an empty list.
