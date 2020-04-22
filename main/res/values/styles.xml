@@ -377,17 +377,13 @@
     </style>
 
     <!-- progress dialog theme -->
-    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="android:textColorPrimary">?text_color</item>
+    <style name="cgeoProgressdialogTheme_Base" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:textColor">?text_color</item>
         <item name="android:windowBackground">@drawable/border_straight</item>
-        <item name="buttonBarButtonStyle">@style/button_borderless</item>
     </style>
-    <style name="cgeoProgressdialogTheme_light" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColorPrimary">?text_color</item>
+    <style name="cgeoProgressdialogTheme_light_Base" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">?text_color</item>
         <item name="android:windowBackground">@drawable/border_straight_light</item>
-        <item name="buttonBarButtonStyle">@style/button_borderless</item>
     </style>
 
     <!-- map progressbar style -->
