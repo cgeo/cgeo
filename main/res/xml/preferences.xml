@@ -649,6 +649,15 @@
                 android:title="@string/init_brouterShowBothDistances" />
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/settings_title_map_behavior"
+            android:layout="@layout/preference_category" >
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_longTapOnMapActivated"
+                android:summary="@string/init_summary_longtap_map"
+                android:title="@string/init_longtap_map" />
+        </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/settings_title_proximityNotification"
             android:layout="@layout/preference_category" >
             <cgeo.geocaching.settings.ProximityFarPreference
@@ -674,15 +683,6 @@
                 android:defaultValue="@string/pref_value_pn_tone_only"
                 android:entries="@array/proximity_notification_types"
                 android:entryValues="@array/proximity_notification_values" />
-        </PreferenceCategory>
-
-        <PreferenceCategory android:title="@string/user_defined_caches"
-            android:layout="@layout/preference_category" >
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_longTapCreateUDC"
-                android:summary="@string/init_summary_longtap_udc"
-                android:title="@string/init_longtap_udc" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"

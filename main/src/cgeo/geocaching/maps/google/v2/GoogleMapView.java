@@ -114,24 +114,26 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // ("The default behavior is for the camera to move to the marker and an info window to appear.")
             return true;
         });
-        googleMap.setOnMapLongClickListener(tapLatLong -> {
-            boolean hitWaypoint = false;
-            final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
-            if (closest != null) {
-                final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
-                final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
-                if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
-                    hitWaypoint = true;
-                    ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
-                    if (distanceDrawer == null) {
-                        this.distanceDrawer = new DistanceDrawer(this, null, Settings.isBrouterShowBothDistances());
+        if (Settings.isLongTapOnMapActivated()) {
+            googleMap.setOnMapLongClickListener(tapLatLong -> {
+                boolean hitWaypoint = false;
+                final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+                if (closest != null) {
+                    final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
+                    final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
+                    if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
+                        hitWaypoint = true;
+                        ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
+                        if (distanceDrawer == null) {
+                            this.distanceDrawer = new DistanceDrawer(this, null, Settings.isBrouterShowBothDistances());
+                        }
                     }
                 }
-            }
-            if (!hitWaypoint && Settings.isLongTapCreateUDC()) {
-                InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
-            }
-        });
+                if (!hitWaypoint) {
+                    InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
+                }
+            });
+        }
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
             mapReadyCallback = null;
