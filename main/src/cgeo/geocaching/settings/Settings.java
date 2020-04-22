@@ -1075,8 +1075,8 @@ public class Settings {
         return pref.equals(ProximityNotification.NOTIFICATION_TYPE_TEXT_ONLY) || pref.equals(ProximityNotification.NOTIFICATION_TYPE_TONE_AND_TEXT);
     }
 
-    public static boolean isLongTapCreateUDC() {
-        return getBoolean(R.string.pref_longTapCreateUDC, false);
+    public static boolean isLongTapOnMapActivated() {
+        return getBoolean(R.string.pref_longTapOnMapActivated, false);
     }
 
     public static boolean isUseTwitter() {
