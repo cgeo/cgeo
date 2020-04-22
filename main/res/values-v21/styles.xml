@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- progress dialog theme -->
+    <style name="cgeoProgressdialogTheme" parent="cgeoProgressdialogTheme_Base">
+    </style>
+    <style name="cgeoProgressdialogTheme_light" parent="cgeoProgressdialogTheme_light_Base">
+    </style>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- progress dialog theme -->
+    <style name="cgeoProgressdialogTheme" parent="cgeoProgressdialogTheme_Base">
+        <item name="android:textColorPrimary">?text_color</item>
+        <item name="buttonBarButtonStyle">@style/button_borderless</item>
+    </style>
+    <style name="cgeoProgressdialogTheme_light" parent="cgeoProgressdialogTheme_light_Base">
+        <item name="android:textColorPrimary">?text_color</item>
+        <item name="buttonBarButtonStyle">@style/button_borderless</item>
+    </style>
+
+</resources>
