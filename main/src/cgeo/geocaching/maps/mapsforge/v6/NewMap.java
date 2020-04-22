@@ -1007,7 +1007,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         final Geocache cache = getCurrentTargetCache();
         if (cache != null) {
             EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
-        } else if (Settings.isLongTapCreateUDC()) {
+        } else if (Settings.isLongTapOnMapActivated()) {
             InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
         }
     }
@@ -1422,7 +1422,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         if (items.size() == 1) {
             if (longPressMode) {
-                toggleRouteItem(items.get(0));
+                if (Settings.isLongTapOnMapActivated()) {
+                    toggleRouteItem(items.get(0));
+                }
             } else {
                 showPopup(items.get(0));
             }
@@ -1490,7 +1492,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             if (which >= 0 && which < items.size()) {
                 final GeoitemRef item = items.get(which);
                 if (longPressMode) {
-                    toggleRouteItem(item);
+                    if (Settings.isLongTapOnMapActivated()) {
+                        toggleRouteItem(item);
+                    }
                 } else {
                     showPopup(item);
                 }
