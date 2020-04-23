@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
+    <string name="cache">Cache</string>
     <string name="detail">Détails</string>
     <string name="search">Rechercher</string>
     <string name="helpers">Applications utiles</string>
     <string name="about">À propos de c:geo</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Paramètres c:geo</string>
     <!-- caches -->
@@ -16,6 +20,7 @@
     <string name="event">Événement</string>
     <string name="mega">Méga-événement</string>
     <string name="giga">Giga-Événement</string>
+    <string name="earth">Earthcache</string>
     <string name="cito">Événement Cache In Trash Out</string>
     <string name="webcam">Webcam</string>
     <string name="virtual">Virtuelle</string>
@@ -30,6 +35,7 @@
     <string name="userdefined">Cache personnalisée</string>
     <string name="unknown">Type inconnu</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Petite</string>
     <string name="cache_size_regular">Normale</string>
     <string name="cache_size_large">Grande</string>
@@ -37,6 +43,7 @@
     <string name="cache_size_virtual">Virtuelle</string>
     <string name="cache_size_notchosen">Non renseignée</string>
     <string name="cache_size_unknown">Inconnue</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Très grande</string>
     <!-- waypoints -->
     <string name="wp_final">Étape finale</string>
@@ -77,6 +84,7 @@
     <string name="log_tb_sortby">Trier les objets voyageurs</string>
     <string name="log_tb_changeall">Tout modifier</string>
     <string name="log_tb_grabbed">Pris ailleurs</string>
+    <string name="log_tb_note">Note</string>
     <string name="log_tb_discovered">Découvert</string>
     <string name="log_tb_archived">Archivé</string>
     <string name="log_save">Enregistrer hors-ligne</string>
@@ -109,10 +117,12 @@
     <string name="log_today">Aujourd\'hui</string>
     <string name="log_yesterday">Hier</string>
     <string name="log_smilies">Sourillards</string>
+    <string name="log_image">Image</string>
     <string name="log_image_attach">Ajouter une image</string>
     <string name="log_image_stored">Existante</string>
     <string name="log_image_camera">Nouvelle</string>
     <string name="log_image_caption">Légende</string>
+    <string name="log_image_description">Description</string>
     <string name="log_image_scale">Mise à l\'échelle</string>
     <string name="log_password_title">Mot de passe pour la visite :</string>
     <string name="log_report_problem">Signaler un problème:</string>
@@ -262,6 +272,7 @@
     <string name="loc_fused">Unifié</string>
     <string name="loc_low_power">Éco</string>
     <string name="loc_home">Domicile</string>
+    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satellites</string>
     <string name="loc_trying">Localisation en cours…</string>
     <string name="loc_no_addr">Position inconnue</string>
@@ -275,6 +286,7 @@
     <string name="menu_history">Historique</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Scanner un géocode</string>
+    <string name="menu_pocket_queries">Pocket Queries</string>
     <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
     <!-- main screen -->
     <string name="live_map_button">Carte</string>
@@ -298,7 +310,9 @@
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
     <string name="caches_sort">Trier</string>
+    <string name="caches_sort_distance">Distance</string>
     <string name="caches_sort_difficulty">Difficulté</string>
+    <string name="caches_sort_terrain">Terrain</string>
     <string name="caches_sort_size">Taille</string>
     <string name="caches_sort_favorites">Favoris [nombre]</string>
     <string name="caches_sort_favorites_ratio">Favoris [%]</string>
@@ -335,11 +349,13 @@
     <string name="caches_filter">Filtrer</string>
     <string name="caches_filter_title">Filtrer par</string>
     <string name="caches_filter_size">Taille</string>
+    <string name="caches_filter_type">Type</string>
     <string name="caches_filter_track">Contenant des objets voyageurs</string>
     <string name="caches_filter_clear">Supprimer les filtres</string>
     <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
     <string name="caches_filter_offline_log">Avec visite hors-ligne</string>
     <string name="caches_filter_origin">Site web d\'origine</string>
+    <string name="caches_filter_distance">Distance</string>
     <string name="caches_filter_personal_note">Avec une note personnelle</string>
     <string name="caches_filter_popularity">Favoris [nombre]</string>
     <string name="caches_filter_popularity_ratio">Favoris [%]</string>
@@ -379,12 +395,14 @@
     <string name="list_dialog_rename">Renommer</string>
     <string name="list_not_available">La liste n\'est plus disponible, basculement vers la liste standard</string>
     <!-- about -->
+    <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
     <string name="about_system">Système</string>
     <string name="about_donate">Nous soutenir</string>
     <string name="about_donation_more">Visitez le site web pour plus d\'informations</string>
     <string name="about_contributors">Contributeurs</string>
     <string name="about_license">Licence</string>
+    <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
     <string name="about_starting">Premiers pas</string>
     <string name="about_starting_head">Premiers pas</string>
@@ -407,11 +425,15 @@
     <string name="about_contributors_specialthanksdetails">· tous nos contributeurs de traduction sur <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· tous les créateurs de fiches\n· et tous les autres supporters.\n</string>
     <string name="about_contributors_other">Autres contributeurs</string>
     <string name="about_components">Composants</string>
+    <string name="contribution_code">code</string>
     <string name="contribution_tester">testeur</string>
+    <string name="contribution_support">support</string>
+    <string name="contribution_documentation">documentation</string>
     <string name="contribution_projectleader">chef de projet open source</string>
     <string name="contribution_graphics">graphiques</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
+    <string name="settings_title_services">Services</string>
     <string name="settings_summary_services">Configurez vos comptes pour les différents services en ligne</string>
     <string name="settings_title_appearance">Apparence</string>
     <string name="settings_summary_appearance">Configurer les unités de distance, la langue et les couleurs.</string>
@@ -425,7 +447,10 @@
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
+    <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
+    <string name="settings_title_map_behavior">Comportement de la carte</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Dossier de stockage des Geocaches</string>
     <string name="settings_title_data_dir_usage">Dossier de stockage des Geocaches (actuellement %1$s)</string>
     <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>
@@ -434,6 +459,7 @@
     <string name="confirm_data_dir_move_title">Déplacer le dossier de données des caches ?</string>
     <string name="confirm_data_dir_move">Le déplacement du dossier de stockage des Geocaches peut être long et varie en fonction de votre appareil et du nombre de caches.</string>
     <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
+    <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externe.</string>
     <string name="settings_title_system">Système</string>
     <string name="settings_summary_system">Configurer les répertoires de l\'application et d\'autres paramètres spécifiques au système.</string>
@@ -490,8 +516,10 @@
     <string name="init_authorization_credential_password">Mot de passe</string>
     <string name="settings_service_active">Activé</string>
     <string name="settings_navigation_disabled">Cette application ne semble ne pas être installée</string>
+    <string name="init_signature">Signature</string>
     <string name="init_template_help">Les signets comme [NAME] seront évalués lors de l\'insertion de la signature.</string>
     <string name="init_signature_template_button">Ajouter un signet</string>
+    <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Heure</string>
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
     <string name="init_signature_template_user">Utilisateur</string>
@@ -499,6 +527,8 @@
     <string name="init_signature_template_owner">Propriétaire</string>
     <string name="init_signature_template_name">Nom de la cache</string>
     <string name="init_signature_template_difficulty">Difficulté</string>
+    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texte de la visite</string>
     <string name="init_signature_template_size">Taille</string>
     <string name="init_ratingwanted">Vote GCvote.com</string>
@@ -509,6 +539,8 @@
     <string name="init_summary_openlastdetailspage">A l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
     <string name="init_skin">Fond blanc</string>
     <string name="init_summary_skin">Fond blanc (nécessite le redémarrage de c:geo)</string>
+    <string name="init_transparentBackground">Arrière-plan transparent</string>
+    <string name="init_summary_transparentBackground">Utiliser un arrière-plan transparent (redémarrage nécessaire)</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
     <string name="init_useenglish">Anglais dans c:geo</string>
@@ -517,12 +549,16 @@
     <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_showwaypoints">Points intermédiaires</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte.</string>
+    <string name="init_zoomincludingwaypoints">Le zoom inclut les waypoints</string>
+    <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : doit-elle être ajustée pour inclure tous ses waypoints ?</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
     <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle l\'application tierce brouter (si installée) calculera un itinéraire.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
+    <string name="init_archived">Exclure les éléments archivés</string>
+    <string name="init_summary_archived">Exclure les caches archivées</string>
     <string name="init_save_log_img">Enregistrer les images</string>
     <string name="init_summary_save_log_img">Enregistrer les images des visites</string>
     <string name="init_units">Unités impériales</string>
@@ -618,6 +654,7 @@
     <string name="init_use_native_ua">Navigateur web Android</string>
     <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier thèmes cartes hors-ligne</string>
+    <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
     <string name="init_location">Géolocalisation</string>
@@ -638,6 +675,7 @@
     <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
     <string name="settings_open_geokretymap_website">Accéder au site GeoKretyMap.org</string>
     <string name="settings_settings">Paramètres</string>
+    <string name="settings_information">Information</string>
     <string name="settings_advanced">Paramètres avancés</string>
     <string name="settings_twitter_cache_message">Message pour une cache trouvée</string>
     <string name="settings_twitter_trackable_message">Message pour un objet voyageur trouvé</string>
@@ -747,11 +785,16 @@
         <item quantity="other">il y a environ %d mois</item>
     </plurals>
     <string name="cache_offline_about_time_year">il y a plus d\'un an</string>
+    <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Attributs</string>
     <string name="cache_inventory">Inventaire</string>
     <string name="cache_log_images_title">Image de la visite</string>
+    <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Note personnelle</string>
+    <string name="cache_menu_preventWaypointsFromNote">Empêcher les waypoints depuis la note</string>
+    <string name="cache_menu_allowWaypointExtraction">Autoriser les waypoints depuis la note</string>
     <string name="cache_personal_note_edit">Modifier</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des waypoints</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
     <string name="cache_personal_note_truncation">La note personnelle sera tronquée au delà de %d caractères par Geocaching.com.</string>
     <string name="cache_personal_note_upload">Envoyer</string>
@@ -759,6 +802,7 @@
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
     <string name="cache_personal_note_upload_error">Une erreur est survenue lors de l\'envoi de votre note personnelle</string>
     <string name="cache_personal_note_upload_cancelled">Envoi de la note personnelle annulé</string>
+    <string name="cache_description">Description</string>
     <string name="cache_description_table_note">La description peut contenir des mises en forme riches. Consultez le site %s pour visualiser toute la description.</string>
     <string name="cache_area_description">Description de la zone</string>
     <string name="cache_cache_description">Description de la cache</string>
@@ -772,12 +816,14 @@
     <string name="cache_favpoint_on">Cette cache est dans vos favoris.</string>
     <string name="cache_favpoint_not_on">Cette cache n\'est pas dans vos favoris.</string>
     <string name="cache_list_select_last">Dernière sélection</string>
+    <string name="cache_images">Images</string>
     <string name="cache_waypoints">Étapes</string>
     <plurals name="waypoints">
         <item quantity="one">%d étape</item>
         <item quantity="other">%d étapes</item>
     </plurals>
     <string name="cache_waypoints_add">Ajouter une étape</string>
+    <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
     <string name="cache_hint">Indice</string>
     <string name="cache_hint_not_available">Aucun indice disponible</string>
     <string name="cache_logs">Carnet de visites</string>
@@ -814,8 +860,10 @@
     <string name="cache_menu_maps_directions">Directions Google Maps</string>
     <string name="cache_menu_sygic_walk">Sygic (à pied)</string>
     <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
     <string name="cache_menu_map_ext">Autres applications externes</string>
+    <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
     <string name="cache_menu_visit_offline">Visite hors-ligne en un clic</string>
@@ -863,14 +911,18 @@
     <string name="cache_name">Nom</string>
     <string name="cache_name_set">Définir le nom de la cache</string>
     <string name="cache_name_updated">Nom de la cache mis à jour</string>
+    <string name="cache_type">Type</string>
     <string name="cache_size">Taille</string>
+    <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulté</string>
+    <string name="cache_terrain">Terrain</string>
     <string name="cache_rating">Évaluation</string>
     <string name="cache_own_rating">Votre évaluation</string>
     <string name="cache_rating_of">de</string>
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Propriétaire</string>
     <string name="cache_hidden">Cachée le</string>
+    <string name="cache_event">Date</string>
     <string name="cache_location">Localisation</string>
     <string name="cache_coordinates">Coordonnées</string>
     <string name="cache_calculator">Calculateur</string>
@@ -881,6 +933,7 @@
     <string name="cache_clear_history">Supprimer l\'historique</string>
     <string name="cache_remove_from_history">Supprimer de l\'historique</string>
     <string name="cache_license">Licence</string>
+    <string name="cache_image">Image</string>
     <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
     <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
     <string name="cache_image_add_waypoint">Ajouter une étape</string>
@@ -895,12 +948,14 @@
     <string name="internal_cache_default_owner">Vous</string>
     <string name="internal_goto_targets_title">Cibles \'Aller à\'</string>
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points intermédiaires de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points intermédiaires. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
-    <string name="init_longtap_udc">Appui long sur la carte</string>
-    <string name="init_summary_longtap_udc">Appui long sur la carte pour créer une cache personnalisée</string>
+    <string name="init_longtap_map">Appui long sur la carte</string>
+    <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache définie par l\'utilisateur)</string>
     <string name="goto_targets_list">Caches internes</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrés</string>
+    <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">secondes</string>
+    <string name="cc_hint_fraction">fraction</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Recherche de fichiers\nin</string>
@@ -918,6 +973,7 @@
     <string name="gpx_import_caches_imported_with_filename">%1$d caches importées de %2$s</string>
     <string name="gpx_import_static_maps_skipped">Chargement des cartes statiques interrompu</string>
     <string name="gpx_import_title_reading_file">Lecture du fichier</string>
+    <string name="gpx_import_title">Import GPX</string>
     <string name="gpx_import_title_caches_imported">Résultat</string>
     <string name="gpx_import_title_caches_import_failed">Échec de l\'import</string>
     <string name="gpx_import_error_io">Impossible de lire le fichier</string>
@@ -946,6 +1002,7 @@
     <string name="waypoint_custom">Personnalisé</string>
     <string name="waypoint_my_coordinates">Ma position</string>
     <string name="waypoint_bearing">Relèvement</string>
+    <string name="waypoint_distance">Distance</string>
     <string name="waypoint_name">Nom</string>
     <string name="waypoint_edit">Modifier</string>
     <string name="waypoint_copy_coordinates">Copier les coordonnées</string>
@@ -953,6 +1010,7 @@
     <string name="waypoint_delete">Supprimer</string>
     <string name="waypoint_edit_title">Modifier l\'étape</string>
     <string name="waypoint_add_title">Ajouter une étape</string>
+    <string name="waypoint_note">Note</string>
     <string name="waypoint_user_note">Note de l\'utilisateur</string>
     <string name="waypoint_visited">Marquer comme visité</string>
     <string name="waypoint_set_visited">Étape marquée comme visitée</string>
@@ -986,12 +1044,21 @@
     <string name="map_live">Carte temps réel</string>
     <string name="map_view_map">Afficher carte</string>
     <string name="map_modes">Paramètres carte</string>
+    <string name="map_hide">Masquer</string>
     <string name="map_trail_show">Afficher le parcours</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_autorotate">Rotation automatique de la carte</string>
     <string name="map_circles_show">Afficher les cercles</string>
     <string name="map_mycaches_hide">Masquer caches placées/trouvées</string>
     <string name="map_disabled_hide">Masquer caches désactivées</string>
+    <string name="map_archived_hide">Masquer les caches archivées</string>
+    <string name="map_hidewp_original">Masquer les waypoints d\'origine</string>
+    <string name="map_hidewp_parking">Masquer les waypoints de stationnement</string>
+    <string name="map_hidewp_visited">Masquer les waypoints visités</string>
+    <string name="init_hidewp">Masquer tous les waypoints</string>
+    <string name="init_summary_hidewp_original">Masquer les waypoints d\'origine sur la carte</string>
+    <string name="init_summary_hidewp_parking">Masquer les waypoints de stationnement sur la carte</string>
+    <string name="init_summary_hidewp_visited">Masquer les waypoints visités sur la carte</string>
     <string name="map_theme_builtin">Défault</string>
     <string name="map_theme_select">Sélectionner le thème</string>
     <string name="map_theme_options">Options de thème</string>
@@ -1027,9 +1094,11 @@
     <string name="search_tb">Objet voyageur</string>
     <string name="search_tb_hint">Code de l\'objet voyageur</string>
     <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
+    <string name="search_destination">Destination</string>
     <string name="search_address_started">Rechercher le lieu</string>
     <string name="search_address_result">Lieux trouvés</string>
     <string name="search_own_caches">Chercher mes caches</string>
+    <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Chargement d\'une liste de Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Objet voyageur</string>
@@ -1039,9 +1108,11 @@
     <string name="trackable_refresh">Actualiser</string>
     <string name="trackable_goal">But</string>
     <string name="trackable_details">Détails</string>
+    <string name="trackable_image">Image</string>
     <string name="trackable_code">Code de suivi</string>
     <string name="trackable_name">Nom</string>
     <string name="trackable_brand">Genre</string>
+    <string name="trackable_type">Type</string>
     <string name="trackable_owner">Propriétaire</string>
     <string name="trackable_spotted">Se situe</string>
     <string name="trackable_spotted_in_cache">Dans</string>
@@ -1071,6 +1142,7 @@
     <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
     <string name="user_unknown">Utilisateur inconnu</string>
     <!-- navigation -->
+    <string name="navigation">Navigation</string>
     <string name="compass_title">Boussole</string>
     <string name="use_gps">GPS uniquement</string>
     <string name="use_compass">GPS et champ magnétique</string>
@@ -1111,6 +1183,7 @@
     <string name="export_fieldnotes_upload_success">Envoi effectué avec succès</string>
     <string name="export_fieldnotes_onlynew">Uniquement les notes créées ou modifiées depuis le dernier export</string>
     <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Le fichier GPX sera exporté dans %1$s avec la date et l\'heure courantes comme nom de fichier.</string>
     <string name="export_gpx_to">Envoyer le GPX exporté vers</string>
     <string name="export_confirm_title">Export de %1$s</string>
@@ -1277,6 +1350,7 @@
     <string name="attribute_poi_no">Pas de point d\'intérêt</string>
     <string name="attribute_moving_target_yes">Cible mouvante</string>
     <string name="attribute_moving_target_no">Pas de cible mouvante</string>
+    <string name="attribute_webcam_yes">Webcam</string>
     <string name="attribute_webcam_no">Pas de webcam</string>
     <string name="attribute_inside_yes">Dans un endroit clos (grotte, bâtiment, etc.)</string>
     <string name="attribute_inside_no">Pas dans un endroit clos</string>
@@ -1356,8 +1430,10 @@
     <string name="support_title">Assistance</string>
     <string name="website_title">Site web</string>
     <string name="facebook_link"><a href="">Page de c:geo</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo sur Google Play</a></string>
     <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
+    <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez ici pour l\'installer.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Une nouvelle version de test est disponible.\nAppuyez ici pour l\'installer.</string>
@@ -1473,7 +1549,9 @@
     <string name="color_blue">Bleu</string>
     <string name="color_green">Vert</string>
     <string name="color_grey">Gris</string>
+    <string name="color_orange">Orange</string>
     <string name="color_red">Rouge</string>
+    <string name="color_turquoise">Turquoise</string>
     <string name="color_black">Noir</string>
     <!-- number input -->
     <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
@@ -1485,6 +1563,8 @@
     <string name="notification_channel_description">notifications de l\'application c:geo geocaching</string>
     <string name="proximity_notification_title">notification de proximité c:geo</string>
     <!-- individual routes -->
+    <string name="individual_route_added">Ajouté à la route</string>
+    <string name="individual_route_removed">Supprimé de la route</string>
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
