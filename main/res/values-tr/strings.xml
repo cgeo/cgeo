@@ -953,8 +953,6 @@
     <string name="internal_cache_default_description">Bu bir kullanıcı tanımlı Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">Gidilecek hedefler</string>
-    <string name="init_longtap_udc">Haritaya uzun basın</string>
-    <string name="init_summary_longtap_udc">Kullanıcı tanımlı Geocache oluşturmak için haritaya uzun basın</string>
     <string name="goto_targets_list">Dahili cacheler</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
