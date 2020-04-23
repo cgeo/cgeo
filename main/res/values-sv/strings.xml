@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
+    <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
     <string name="search">Sök</string>
     <string name="helpers">Användbara appar</string>
@@ -12,17 +14,23 @@
     <!-- caches -->
     <string name="all_types">Alla typer av cacher</string>
     <string name="traditional">Traditionell cache</string>
+    <string name="multi">Multi-cache</string>
     <string name="mystery">Mysterie-cache</string>
     <string name="letterbox">Letterbox hybrid</string>
     <string name="event">Event cache</string>
     <string name="mega">Mega-event cache</string>
     <string name="giga">Giga-Event cache</string>
+    <string name="earth">Earthcache</string>
     <string name="cito">Cache in trash out event</string>
     <string name="webcam">Webcam cache</string>
     <string name="virtual">Virtuell cache</string>
     <string name="wherigo">Wherigo cache</string>
+    <string name="communceleb">Community Celebration evenemang</string>
     <string name="ape">Projekt APE cache</string>
+    <string name="gchq">Geocaching HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="gps">GPS adventures utställning</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Platslös (omvänd) cache</string>
     <string name="userdefined">Användardefinierad cache</string>
     <string name="unknown">Okänd typ</string>
@@ -35,6 +43,7 @@
     <string name="cache_size_virtual">virtual</string>
     <string name="cache_size_notchosen">not chosen</string>
     <string name="cache_size_unknown">Okänd</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Extra large</string>
     <!-- waypoints -->
     <string name="wp_final">Slutlig plats</string>
@@ -231,6 +240,7 @@
     <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
     <string name="warn_notloggedin_title">Offline läge</string>
     <string name="warn_notloggedin_short">Ej inloggad. Live kartan kommer bara visa cacher som sparats lokalt i enheten.</string>
+    <string name="warn_notloggedin_long">Inte inloggad (ännu). Livekartan visar bara cacher lagrade lokalt och online-funktioner fungerar inte.\n\nAntingen finns det ingen nätverksanslutning, ett serverproblem eller så måste du (åter)konfigurera dina geocachingtjänster.\n\nVill du konfigurera tjänster nu?</string>
     <string name="err_read_pocket_query_list">Fel vid inläsning av Pocket Query-lista.</string>
     <string name="info_log_posted">c:geo har postat din logg.</string>
     <string name="info_log_saved">c:geo har sparat din logg.</string>
@@ -262,6 +272,8 @@
     <string name="loc_fused">Kombinerad</string>
     <string name="loc_low_power">Strömspar</string>
     <string name="loc_home">Hemkoordinater</string>
+    <string name="loc_gps">GPS</string>
+    <string name="loc_sat">Sat</string>
     <string name="loc_trying">Försöker hitta plats</string>
     <string name="loc_no_addr">Okänd adress</string>
     <string name="loc_gps_disabled">GPS avstängd</string>
@@ -272,7 +284,9 @@
     <string name="menu_settings">Inställningar</string>
     <string name="menu_backup">Säkerhetskopiera/återställa</string>
     <string name="menu_history">Hittade cacher</string>
+    <string name="menu_filter">Filtrera</string>
     <string name="menu_scan_geo">Scanna geokod</string>
+    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">c:geo kan skanna geocoder som skrivits som QR-koder. Den nödvändiga appen är inte installerad. Vill du öppna Google Play för att installera den?</string>
     <!-- main screen -->
     <string name="live_map_button">Live karta</string>
@@ -325,6 +339,10 @@
     <string name="caches_remove_selected">Ta bort valda</string>
     <string name="caches_delete_events">Ta bort gamla event</string>
     <string name="caches_upload_modifiedcoords">Ladda upp modifierade koordinater</string>
+    <string name="caches_upload_modifiedcoords_warning">Vill du ladda upp modifierade koordinater för alla (markerade) cacher och skriva över befintliga koordinater på servern? Detta kan inte ångras.</string>
+    <string name="caches_upload_allcoords">Ladda upp koordinater för alla cacher</string>
+    <string name="caches_upload_allcoords_dialogtitle">VARNING - Laddar upp alla koordinater</string>
+    <string name="caches_upload_allcoords_warning">Detta kommer att skriva över befintliga koordinater på servern för alla (valda) cacher i din lista med nuvarande listkoordinater i c:geo! Detta ska endast användas i särskilda fall, t.ex. när du importerade en GPX-fil som innehåller korrigerade koordinater som listningskoordinater. Detta kan inte ångras och du bör bara använda det om du vet vad du gör. I normala fall kanske du hellre vill använda funktionen \"Ladda upp modifierade koordinater\" ifrån samma meny.</string>
     <string name="caches_refresh_selected">Uppdatera valda</string>
     <string name="caches_refresh_all">Uppdatera alla</string>
     <string name="caches_move_selected">Flytta valda</string>
@@ -332,6 +350,7 @@
     <string name="caches_copy_selected">Kopiera valda</string>
     <string name="caches_copy_all">Kopiera alla</string>
     <string name="caches_map_locus_export">Exportera till Locus</string>
+    <string name="caches_filter">Filtrera</string>
     <string name="caches_filter_title">Filtrera efter</string>
     <string name="caches_filter_size">Storlek</string>
     <string name="caches_filter_type">Typ</string>
@@ -350,11 +369,14 @@
     <string name="caches_filter_multi_listing">Listade på flera sajter men inte loggad på alla</string>
     <string name="caches_filter_own_waypoint">Med egna punkter</string>
     <string name="caches_filter_missing_gcvote">Hittade cacher utan röster</string>
+    <string name="caches_filter_lists">Tilldelad till en lista</string>
     <string name="caches_removing_from_history">Tar bort från historik…</string>
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
+    <string name="caches_set_listmarker">Ange listmarkör</string>
+    <string name="caches_listmarker_none">Ingen markör</string>
     <string name="caches_listmarker_selected">(vald)</string>
     <!-- caches lists -->
     <string name="menu_lists">Hantera listor</string>
@@ -377,11 +399,14 @@
     <string name="list_dialog_rename">Byt namn</string>
     <string name="list_not_available">Listan är inte längre tillgänglig, byter till standardlistan</string>
     <!-- about -->
+    <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>
+    <string name="about_system">System</string>
     <string name="about_donate">Stöd oss</string>
     <string name="about_donation_more">Besök hemsidan för info</string>
     <string name="about_contributors">Medarbetare</string>
     <string name="about_license">Licens</string>
+    <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
     <string name="about_starting">Kom igång</string>
     <string name="about_starting_head">Kom igång</string>
@@ -397,6 +422,7 @@
     <string name="about_system_info">c:geo systeminformation</string>
     <string name="about_system_info_send_chooser">Skicka systeminformation</string>
     <string name="changelog_github">Lista över alla ändringar</string>
+    <string name="about_nutshellmanual">Hjälpmanualen på webben</string>
     <string name="about_contributors_carnerodetails">som skaparen av c:geo</string>
     <string name="about_contributors_recent">Senaste bidragsgivare</string>
     <string name="about_contributors_specialthanks">Särskilt tack till</string>
@@ -405,6 +431,7 @@
     <string name="about_components">Komponenter</string>
     <string name="contribution_code">kod</string>
     <string name="contribution_tester">testare</string>
+    <string name="contribution_support">support</string>
     <string name="contribution_documentation">dokumentation</string>
     <string name="contribution_projectleader">open source projektledare</string>
     <string name="contribution_graphics">grafik</string>
@@ -417,12 +444,17 @@
     <string name="settings_title_cachedetails">Cachedetaljer</string>
     <string name="settings_summary_cachedetails">Anpassa utseende på cacheinformation.</string>
     <string name="settings_title_offlinedata">Offlinedata</string>
+    <string name="settings_summary_offlinedata">Konfigurera data som ska sparas för offline-användning, lagringsplats och kataloger för GPX-filer.</string>
     <string name="settings_title_logging">Loggning</string>
     <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
     <string name="settings_title_map">Karta</string>
     <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
+    <string name="settings_title_map_rotation">Kartrotation (Google Maps)</string>
+    <string name="settings_title_waypoints">Vägpunkter</string>
     <string name="settings_title_map_content">Kartinnehåll</string>
+    <string name="settings_title_map_behavior">Kart-beteende</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Katalog för geocache-data</string>
     <string name="settings_title_data_dir_usage">Katalog för geocache-data (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -433,6 +465,8 @@
     <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
     <string name="settings_title_navigation">Navigering</string>
     <string name="settings_summary_navigation">Välj standardmetoder för navigering och välj externa navigationsappar.</string>
+    <string name="settings_title_system">System</string>
+    <string name="settings_summary_system">Konfigurera appkataloger och andra systemspecifika inställningar.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
     <string name="settings_category_browser">Webbläsare</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
@@ -498,6 +532,7 @@
     <string name="init_signature_template_name">Namn</string>
     <string name="init_signature_template_difficulty">Svårighet</string>
     <string name="init_signature_template_terrain">Terräng</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Loggtext</string>
     <string name="init_signature_template_size">Storlek</string>
     <string name="init_ratingwanted">GCvote.com</string>
@@ -508,6 +543,8 @@
     <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
     <string name="init_skin">Vitt skal</string>
     <string name="init_summary_skin">Vitt skal (kräver omstart av c:geo)</string>
+    <string name="init_transparentBackground">Genomskinlig bakgrund</string>
+    <string name="init_summary_transparentBackground">Använd genomskinlig bakgrund (omstart krävs)</string>
     <string name="init_address">Adress/koordinater</string>
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_useenglish">Språk</string>
@@ -516,10 +553,16 @@
     <string name="init_summary_exclude">Dölj egna och hittade cacher</string>
     <string name="init_showwaypoints">Extra punkter på kartan</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
+    <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
+    <string name="init_zoomincludingwaypoints_description">Om kartläggning av en enda cache: Bör zoom justeras för att inkludera alla dess vägpunkter?</string>
     <string name="init_brouterThreshold">Beräkna rutt</string>
     <string name="init_brouterThreshold_description">Maximalt avstånd upp till som brouter helper app (om installerat) beräknar en rutt.</string>
+    <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
+    <string name="init_summary_brouterShowBothDistances">Om rutten är aktiv: Visa den raka sträckan utöver den beräknade ruttlängden.</string>
     <string name="init_disabled">Inaktiva cacher</string>
     <string name="init_summary_disabled">Dölj inaktiva cacher</string>
+    <string name="init_archived">Exkludera arkiverade</string>
+    <string name="init_summary_archived">Exkludera arkiverade cacher</string>
     <string name="init_save_log_img">Loggbilder</string>
     <string name="init_summary_save_log_img">Spara bilder från loggar</string>
     <string name="init_units">Enheter</string>
@@ -528,11 +571,14 @@
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
     <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
+    <string name="init_listdisplay">Visa ytterligare listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
     <!-- backup / restore -->
+    <string name="init_backup">Säkerhetskopiera cacher / vägpunkter</string>
     <string name="init_backup_backup">Kopiera</string>
     <string name="init_backup_running">Skapar säkerhetskopia av databasen med cacher…</string>
+    <string name="init_backup_note">Observera att den här funktionen kommer att säkerhetskopiera/återställa en databas som endast innehåller cacher och vägpunkter, men inte dina cachebilder och inga programinställningar.</string>
     <string name="init_backup_restore">Återställ</string>
     <string name="init_backup_success">Databasen som används av c:geo har kopierats till filen</string>
     <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
@@ -541,19 +587,26 @@
     <string name="backup_confirm_overwrite">Vill du skriva över den befintliga säkerhetskopian från %s?</string>
     <string name="restore_confirm_overwrite">Vill du skriva över %s på enheten med säkerhetskopian?</string>
     <string name="init_restore_success">Återställning klar.</string>
+    <string name="init_restore_failed_dbrecreated">Återställning misslyckades: Backup fil skadad, databasen måste återskapas.</string>
     <string name="init_restore_failed">Återställningen misslyckades.</string>
     <string name="init_restore_running">Återställer databasen med cacher…</string>
     <string name="init_restore_confirm">Databasen är tom. Vill du återställa med säkerhetskopian du gjort tidigare?</string>
     <string name="init_backup_last">Tillgänglig kopia från</string>
     <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
     <string name="settings_title_backup">Säkerhetskopiera/återställa</string>
+    <string name="settings_summary_backup">Utför säkerhetskopiering och återställning av cache/vägpunkts-data och programinställningar.</string>
     <string name="init_backup_settings">Säkerhetskopiera programinställningar</string>
+    <string name="init_backup_settings_backup_light">Säkerhetskopierings inställningar (utan kontodata)</string>
     <string name="init_backup_settings_backup_full">Säkerhetskopiera inställningar (fullt)</string>
+    <string name="init_backup_settings_backup_full_confirm">Vill du lagra känsliga kontorelaterade data? De kan vara läsbara för andra program.</string>
     <string name="settings_savingerror">Fel vid sparande av inställningar</string>
     <string name="settings_saved">Inställningarna sparades i:</string>
     <string name="init_backup_settings_restore">Återställ inställningar</string>
+    <string name="init_backup_settings_restore_confirm">Vill du skriva över dina nuvarande inställningar?</string>
+    <string name="init_backup_settings_restore_no">Det finns ingen säkerhetskopia tillgänglig</string>
     <string name="settings_readingerror">Fel vid läsning av inställningar</string>
     <string name="settings_restored">Inställningar återställda</string>
+    <string name="settings_restart">c:geo måste startas om nu för att få igång laddade inställningar</string>
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo har stöd för offline-kartor. Du kan ladda ner kartor från Mapsforge eller skapa dina egna kartor från OSM data.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
@@ -561,6 +614,10 @@
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="settings_title_scale_map_text">Skala karttext</string>
     <string name="settings_summary_scale_map_text">Skala textetiketter på offlinekartor mot enhetens upplösning</string>
+    <string name="settings_title_map_manualrotation_disabled">Inaktivera manuell kartrotation</string>
+    <string name="settings_summary_map_manualrotation_disabled">Inaktivera kontroller för manuell kartrotation</string>
+    <string name="settings_title_map_autorotation_disabled">Inaktivera automatisk kartrotation</string>
+    <string name="settings_summary_map_autorotation_disabled">Inaktivera automatisk kartrotation</string>
     <string name="init_map_directory_description">Katalog med offline-kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
     <string name="init_gpx_importdir">GPX-importkatalog</string>
@@ -568,6 +625,7 @@
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
     <string name="init_maptrail">Spår på kartan</string>
     <string name="init_summary_maptrail">Visa spår på kartan</string>
+    <string name="init_trailcolor">Spårfärg</string>
     <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
     <string name="init_trackautovisit">Trackable</string>
@@ -581,6 +639,7 @@
     <string name="init_default_navigation_tool_select">Välj program</string>
     <string name="init_default_navigation_tool_2_description">Här kan du välja ditt andra förvalda navigeringsprogram. Det kan aktiveras genom att klicka länge på navigationsikonen i listen överst i en cachebeskrivning.</string>
     <string name="init_navigation_menu_description">Här kan du välja program som ska visas navigeringsmenyn i en cache eller punkt. Program som är gråa är inte installerade på enheten.</string>
+    <string name="init_debug_title">Felsöka information</string>
     <string name="init_debug_note">c:geo kan generera mycket debug-information. Den här inställningen påverkar c:geos stabilitet och är endast rekommenderad att aktivera ifall en utvecklare vill att du ska skicka en log. Vänligen ha debug-loggning avstängd under normal användning av c:geo!</string>
     <string name="init_debug">Generera debug info</string>
     <string name="init_dbonsdcard_title">Databasplacering</string>
@@ -602,6 +661,7 @@
     <string name="init_maintenance">Underhåll</string>
     <string name="init_maintenance_directories_note">c:geo lagrar bilder, loggbilder och andra filer relaterade till en cache i en separat katalog. I vissa fall (som vid importering/exportering av databasen) kan denna katalog innehålla inaktuella filer, som kan tas bort här.</string>
     <string name="init_maintenance_directories">Ta bort överblivna filer</string>
+    <string name="init_location">Geolokalisering</string>
     <string name="init_location_note">På enheter utrustade med Google Play-tjänster kan c:geo automatiskt använda en bättre tjänst för positionering. Detta hindrar emellertid användningen av en extern Bluetooth GPS-mottagare.</string>
     <string name="init_location_googleplayservices">Använd Google Play-tjänster</string>
     <string name="init_low_power">Strömsparläge</string>
@@ -619,6 +679,7 @@
     <string name="settings_open_website">Öppna hemsida</string>
     <string name="settings_open_geokretymap_website">Öppna GeoKretyMap.org hemsida</string>
     <string name="settings_settings">Inställningar</string>
+    <string name="settings_information">Information</string>
     <string name="settings_advanced">Avancerade inställningar</string>
     <string name="settings_twitter_cache_message">Meddelande för hittad cache</string>
     <string name="settings_twitter_trackable_message">Meddelande för hittad trackable</string>
@@ -637,15 +698,31 @@
     <string name="feature_search_geocode">Sök med geo-kod</string>
     <string name="feature_search_owner">Sök baserat på ägare</string>
     <string name="feature_search_finder">Sök baserat på hittare</string>
+    <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Gamla Mapsforge V3</string>
+    <string name="init_mfold_api_description">Vi använder en ny version av Mapsforge kartan som standard. Om du saknar några funktioner eller stöter på problem kan du gå tillbaka till den gamla versionen här.</string>
     <!-- proximity notification -->
+    <string name="settings_title_proximityNotification">Närhetsnotifikation</string>
+    <string name="init_proximityNotificationGeneral">Allmän närhetsnotifikation på kartan</string>
+    <string name="init_summary_proximityNotificationGeneral">Spela upp en enda avisering om någon cache eller vägpunkt som är synlig på kartan är närmare än långt avstånd eller nära avstånd. Olika toner används för de två avstånden.</string>
+    <string name="init_proximityNotificationSpecific">Särskilda vägpunkts närhetsnotifikation</string>
+    <string name="init_summary_proximityNotificationSpecific">Spela upp en upprepad avisering om den valda cachen eller vägpunkten är närmare än långt avstånd eller nära avstånd. Fungerar om information om cache eller vägpunkt detaljerna är öppna, om cache eller vägpunkt popup-info visas på kartan eller om kompassen är aktiv. Olika toner används för de två avstånden.</string>
+    <string name="far_distance">Långt avstånd</string>
+    <string name="near_distance">Nära avstånd</string>
+    <string name="init_proximity_notification_type">Typ av notifiering</string>
+    <string name="pn_tone_only">Endast tonen</string>
+    <string name="pn_text_only">Endast text</string>
+    <string name="pn_tone_and_text">Ton + text</string>
     <!-- map sources -->
+    <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
     <string name="map_source_osm_mapnik">OSM: karta</string>
+    <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
     <string name="settings_info_send2cgeo_title">Info om send2cgeo</string>
     <string name="init_sendToCgeo_name">Namnet på din enhet</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b> låter dig skicka cacher till din Android-enhet direkt från geocaching.com med hjälp av en speciell plugin för Firefox eller Chrome. Innan du registrerar dig, se <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. Du behöver bara registrera dig om du vill använda send2cgeo. c:geo fungerar normalt utan att registrera din enhet.</string>
     <string name="init_sendToCgeo_register">Registrera din enhet</string>
     <string name="init_sendToCgeo_registering">Registrerar din enhet för send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är %d. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
@@ -661,6 +738,7 @@
     <string name="auth_register">Skapa ett konto</string>
     <string name="auth_connected">Ansluten</string>
     <string name="auth_unconnected">Inte ansluten ännu</string>
+    <string name="auth_connected_as">Ansluten som %s.\nTryck här för att uppdatera eller långtryck för att ta bort behörighetsdata från c:geo.</string>
     <string name="auth_dialog_waiting">Väntar på %s…</string>
     <string name="auth_explain_short">Följande process kommer att tillåta <b>c:geo</b> att få tillgång till %s.</string>
     <string name="auth_explain_long">Genom att trycka på knappen \"tillåt c:geo\" kommer processen att startas. Denna process kommer att öppna en webbläsare med %s sida. Logga in på den här sidan och låt <b>c:geo</b> komma åt ditt konto. Det är allt.</string>
@@ -691,6 +769,7 @@
         <item quantity="other">%1$d dagar kvar</item>
     </plurals>
     <string name="last_day_available">sista dagen tillgänglig</string>
+    <string name="cache_offline">Frånkopplad</string>
     <string name="cache_offline_refresh">Uppdatera</string>
     <string name="cache_offline_drop">Ta bort</string>
     <string name="cache_offline_store">Spara</string>
@@ -714,12 +793,16 @@
         <item quantity="other">ungefär %d månader sedan</item>
     </plurals>
     <string name="cache_offline_about_time_year">över ett år sedan</string>
+    <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Attribut</string>
     <string name="cache_inventory">Innehåll</string>
     <string name="cache_log_images_title">Loggbild</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Personlig anteckning</string>
+    <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
+    <string name="cache_menu_allowWaypointExtraction">Tillåt vägpunkter från anteckning</string>
     <string name="cache_personal_note_edit">Redigera</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
     <string name="cache_personal_note_truncation">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
     <string name="cache_personal_note_upload">Ladda upp</string>
@@ -732,6 +815,8 @@
     <string name="cache_area_description">Områdesbeskrivning</string>
     <string name="cache_cache_description">Lång beskrivning</string>
     <string name="cache_virtual_description">Virtuell fråga</string>
+    <string name="cache_traditional_description">Traditionell del</string>
+    <string name="cache_box_description">Lådans innehåll</string>
     <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
     <string name="cache_watchlist_on_extra">Denna cache är på din bevakningslista. (Bevakare: %1d)</string>
     <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
@@ -746,6 +831,7 @@
         <item quantity="other">%d Punkter</item>
     </plurals>
     <string name="cache_waypoints_add">Lägg till punkt</string>
+    <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
     <string name="cache_hint">Tips</string>
     <string name="cache_hint_not_available">Ingen ledtråd tillgänglig</string>
     <string name="cache_logs">Loggbok</string>
@@ -759,11 +845,15 @@
     <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
     <string name="cache_dialog_loading_details_status_cache">Sparar information</string>
     <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
+    <string name="cache_dialog_offline_save_title">Frånkopplad</string>
     <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
+    <string name="cache_dialog_offline_drop_title">Frånkopplad</string>
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
     <string name="cache_dialog_refresh_title">Uppdatera</string>
     <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
+    <string name="cache_dialog_watchlist_add_title">Bevakningslista</string>
     <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
+    <string name="cache_dialog_watchlist_remove_title">Bevakningslista</string>
     <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
     <string name="cache_dialog_favorite_add_title">Favorit</string>
     <string name="cache_dialog_favorite_add_message">Lägger till cachen till dina favoriter…</string>
@@ -776,9 +866,12 @@
     <string name="cache_menu_navigation_transit">Navigering (kollektivt)</string>
     <string name="cache_menu_navigation_bike">Navigering (med cykel)</string>
     <string name="cache_menu_maps_directions">Google Maps Navigering</string>
+    <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (vandring)</string>
     <string name="cache_menu_sygic_drive">Sygic (körning)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Visa på karta</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andra externa program</string>
     <string name="cache_menu_streetview">Gatuvy</string>
     <string name="cache_menu_browser">Öppna i webbläsare</string>
@@ -795,12 +888,15 @@
     <string name="cache_menu_share">Skicka länk</string>
     <string name="cache_menu_move_list">Flytta till annan lista</string>
     <string name="cache_menu_copy_list">Kopiera till annan lista</string>
+    <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+    <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Rösta</string>
     <string name="cache_menu_checker">Öppna Geochecker</string>
     <string name="cache_menu_challenge_checker">Sök efter challenge checker</string>
     <string name="cache_menu_ignore">Ignorera cache</string>
     <string name="ignore_confirm_title">Var försiktig</string>
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
+    <string name="cache_status">Status</string>
     <string name="cache_stored">Sparad</string>
     <string name="cache_status_offline_log">Sparad logg</string>
     <string name="cache_status_found">Hittad</string>
@@ -823,6 +919,8 @@
     <string name="cache_status_stored_morethanthirtydays">Längre än 30 dagar sedan</string>
     <string name="cache_geocode">GC-kod</string>
     <string name="cache_name">Namn</string>
+    <string name="cache_name_set">Ställ in cachennamn</string>
+    <string name="cache_name_updated">Cachename uppdaterad</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Storlek</string>
     <string name="cache_distance">Avstånd</string>
@@ -853,7 +951,20 @@
     <string name="cache_share_field">Dela</string>
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
+    <string name="user_defined_caches">Användardefinierad cacher</string>
+    <string name="create_internal_cache">Skapa användardefinierad cache</string>
+    <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
+    <string name="internal_cache_default_description">Detta är en användardefinierad cache</string>
+    <string name="internal_cache_default_owner">Du</string>
+    <string name="internal_goto_targets_title">\'Gå till\' mål</string>
+    <string name="internal_goto_targets_description">Denna cache lagrar dina senaste \"Gå till\" mål. Den skapas automatiskt när du har använt funktionen \"Gå till\" i huvudmenyn. Koordinaterna som anges där kommer att lagras i vägpunkter för denna cache. Om du inte längre behöver dessa koordinater kan du ta bort cachen eller någon av dess vägpunkter på ett säkert sätt. Du kan också flytta cachen till någon annan lista som du väljer.</string>
+    <string name="init_longtap_map">Långtryck på kartan</string>
+    <string name="init_summary_longtap_map">Aktivera långtryck på kartikonen (skapa en enskild rutt) eller på ledigt kartutrymme (skapa en användardefinierad cache)</string>
+    <string name="goto_targets_list">Interna cacher</string>
     <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">grader</string>
+    <string name="cc_hint_minutes">minuter</string>
+    <string name="cc_hint_seconds">sekunder</string>
     <string name="cc_hint_fraction">bråk</string>
     <!-- editor dialog -->
     <!-- file list base -->
@@ -943,17 +1054,29 @@
     <string name="map_live">Live karta</string>
     <string name="map_view_map">Karttyp</string>
     <string name="map_modes">Kartlägen</string>
+    <string name="map_hide">Dölj</string>
     <string name="map_trail_show">Visa spår</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
+    <string name="map_autorotate">Autorotera kartan</string>
     <string name="map_circles_show">Visa cirklar</string>
     <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
     <string name="map_disabled_hide">Göm inaktiverade cacher</string>
+    <string name="map_archived_hide">Dölj arkiverade cacher</string>
+    <string name="map_hidewp_original">Dölj ursprungliga vägpunkter</string>
+    <string name="map_hidewp_parking">Dölj parkerings vägpunkter</string>
+    <string name="map_hidewp_visited">Dölj besökta vägpunkter</string>
+    <string name="init_hidewp">Dölj vägpunkter</string>
+    <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
+    <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
+    <string name="init_summary_hidewp_visited">Dölj besökta vägpunkter på kartan</string>
     <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Välj karttema</string>
     <string name="map_theme_options">Inställningar för teman</string>
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
+    <string name="map_clear_trailhistory">Rensa spårhistorik</string>
+    <string name="map_trailhistory_cleared">spårhistorik rensad</string>
     <string name="map_select_multiple_items">Välj objekt</string>
     <string name="map_routing">Navigering</string>
     <string name="map_routing_straight">Rak linje</string>
@@ -988,6 +1111,7 @@
     <string name="search_pocket_title">Pocket query</string>
     <string name="search_pocket_loading">Laddar en lista med Pocket queries</string>
     <!-- trackable -->
+    <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Laddar detaljer om trackable…</string>
     <string name="trackable_log_touch">Logga</string>
     <string name="trackable_browser_open">Öppna i webbläsare</string>
@@ -1012,10 +1136,14 @@
     <string name="trackable_distance">Rest sträcka</string>
     <string name="trackable_touch">Logga</string>
     <string name="trackable_not_activated">Trackable är inte aktiverad</string>
+    <string name="trackable_travelbug">Travelbug</string>
+    <string name="trackable_status">Status</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Traditionell</string>
     <string name="geokret_type_book_or_media">Bok eller elektronisk media</string>
     <string name="geokret_type_human">Mänsklig</string>
     <string name="geokret_type_coin">Mynt</string>
+    <string name="geokret_type_post">E-post</string>
     <!-- user -->
     <string name="user_menu_title">Om</string>
     <string name="user_menu_view_hidden">Gömda cacher</string>
@@ -1046,6 +1174,7 @@
     <string name="helper_locus_description">App för navigering utomhus med telefon eller tablet. Visa topo-kartor offline, spåra din rutt, leta geocacher, använd guideröst och mycket mer.</string>
     <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
     <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
+    <string name="helper_gps_locker_description">GPS Locker håller GPS-signalen aktiv när du växlar mellan applikationer och när enhetens skärm är avstängd.</string>
     <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
     <string name="helper_pocketquery_description">Gör det enkelt att skapa och ladda ner Pocket Queries baserade på din position eller plats som väljs på kartan. Kräver Premium konto hos Geocaching.com.</string>
     <string name="helper_google_translate_title">Google Översätt</string>
@@ -1058,12 +1187,14 @@
     <string name="export_progress">Exportera: %1$s</string>
     <string name="export_exportedto">exporterat till</string>
     <string name="export_failed">Exporteringen misslyckades</string>
+    <string name="export_fieldnotes">Field Notes</string>
     <string name="export_fieldnotes_info">Field Notes kommer att exporteras till /sdcard/field-notes med aktuellt datum och tid som filnamn.</string>
     <string name="export_fieldnotes_upload">Ladda upp till geocaching.com</string>
     <string name="export_fieldnotes_uploading">Laddar upp…</string>
     <string name="export_fieldnotes_upload_success">Uppladdningen till geocaching.com slutförd</string>
     <string name="export_fieldnotes_onlynew">Bara sedan senaste exporteringen</string>
     <string name="export_fieldnotes_creating">Skapar Field Notes…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX filen kommer att exporteras till %1$s med datum och tid i filnamnet.</string>
     <string name="export_gpx_to">Skicka exporterad GPX till</string>
     <string name="export_confirm_title">Exporterar %1$s</string>
@@ -1077,6 +1208,7 @@
     <string name="export_modifiedcoords">Modifierade koordinater</string>
     <string name="export_modifiedcoords_uploading">Laddar upp %1$d</string>
     <string name="export_modifiedcoords_success">Uppladdning slutförd</string>
+    <string name="export_modifiedcoords_result">Uppladdningen slutförd: %1$d misslyckades / %2$d ok</string>
     <string name="export_modifiedcoords_error">Uppladdning misslyckades</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Hundar tillåtna</string>
@@ -1145,6 +1277,7 @@
     <string name="attribute_frontyard_no">Inte en privat bostad</string>
     <string name="attribute_teamwork_yes">Lagarbete krävs</string>
     <string name="attribute_teamwork_no">Inget lagarbete krävs</string>
+    <string name="attribute_landf_yes">Lost and found tur</string>
     <string name="attribute_landf_no">Inte en Lost and found tour</string>
     <string name="attribute_partnership_yes">Partnerskapscache</string>
     <string name="attribute_partnership_no">Inte en partnerskapscache</string>
@@ -1276,6 +1409,7 @@
     <string name="attribute_historic_site_no">Ingen historisk plats</string>
     <string name="attribute_magnetic_yes">Magnetisk cache</string>
     <string name="attribute_magnetic_no">Inte en magnetisk cache</string>
+    <string name="attribute_usb_cache_yes">Dead drop USB cache</string>
     <string name="attribute_usb_cache_no">Inte dead drop USB cache</string>
     <string name="attribute_shovel_yes">Du kan behöva en spade</string>
     <string name="attribute_shovel_no">Du behöver ingen spade</string>
@@ -1287,22 +1421,30 @@
     <string name="attribute_nature_cache_no">Inte gömd i naturliga omgivningar</string>
     <string name="attribute_byop_yes">Ta med något att skriva med</string>
     <string name="attribute_byop_no">Egen penna behövs ej</string>
+    <string name="attribute_safari_cache_yes">Reverse cache</string>
     <string name="attribute_safari_cache_no">Inte en reverse cache</string>
     <string name="attribute_quick_cache_yes">Snabb cache</string>
     <string name="attribute_quick_cache_no">Inte en snabb cache</string>
+    <string name="attribute_wherigo_yes">Wherigo cache</string>
     <string name="attribute_wherigo_no">Ingen Wherigo cache</string>
     <string name="attribute_audio_cache_yes">Beskrivningen innehåller en ljudfil</string>
     <string name="attribute_audio_cache_no">Beskrivningen innehåller inte en ljudfil</string>
+    <string name="attribute_geohotel_yes">GeoHotel cache</string>
     <string name="attribute_geohotel_no">Inte en GeoHotel cache</string>
     <string name="attribute_survey_marker_yes">Nära en Survey Marker</string>
     <string name="attribute_survey_marker_no">Inte nära en Survey Marker</string>
+    <string name="attribute_offset_cache_yes">Offset cache</string>
     <string name="attribute_offset_cache_no">Ingen offset cache</string>
     <!-- next things -->
+    <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <string name="support_title">Support</string>
     <string name="website_title">Webbsida</string>
     <string name="facebook_link"><a href="">c:geo på Facebook</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo på Google Play</a></string>
     <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
+    <string name="faq_title">Vanliga frågor</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
@@ -1313,6 +1455,7 @@
     <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Du verkar använda en Android version som är äldre än 4.1. Framtida versioner av c:geo kommer troligtvis inte fungera på din telefon.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
+    <string name="tts_toggle">Växla samtal</string>
     <string name="tts_started">Påbörjade tal</string>
     <string name="tts_stopped">Avslutade tal</string>
     <string name="err_tts_lang_not_supported">Detta språk hanteras inte av text-to-speech.</string>
@@ -1407,17 +1550,36 @@
     <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
     <string name="err_select_logimage_upload_size">Bilden är för stor, vänligen välj en mindre skala.</string>
     <string name="err_logimage_caption_required">En text krävs till bilden</string>
+    <string name="waypoint_latitude_null">N/S --° --.---</string>
+    <string name="waypoint_longitude_null">E/W --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Stäng appen</string>
     <string name="ask_again">Fråga igen</string>
     <string name="location_permission_request_explanation">c:geo behöver tillgång till GPS på enheten för att hitta din position och beräkna avstånd och riktning till geocacher. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_request_explanation">c:geo kommer att skriva data på din telefonlagring eller SD-kortet så snart du sparar geocacher för användning offline. Vidare kommer c:geo att använda din telefonlagring för import och export av filer och läsning av offlinekartor. Det kan inte användas utan detta tillstånd.</string>
+    <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
     <string name="color_blue">Blå</string>
     <string name="color_green">Grön</string>
     <string name="color_grey">Grå</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_red">Röd</string>
+    <string name="color_turquoise">Turkos</string>
+    <string name="color_black">Svart</string>
     <!-- number input -->
+    <string name="number_input_title">Ange ett värde mellan %1$s och %2$s</string>
+    <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
+    <string name="number_input_err_boundarymax">Angivet värde är för stort - återställ till max värde</string>
+    <string name="number_input_err_format">Ogiltigt nummerformat</string>
     <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">c:geo notifieringar</string>
+    <string name="notification_channel_description">Notifieringar från c:geo geocaching-appen</string>
+    <string name="proximity_notification_title">c:geo närhetsnotifiering</string>
     <!-- individual routes -->
+    <string name="individual_route_added">tillagd till rutt</string>
+    <string name="individual_route_removed">borttagen från rutt</string>
+    <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
+    <string name="map_clear_individual_route">Rensa enskild rutt</string>
+    <string name="map_individual_route_cleared">Individuell rutt rensad</string>
     <!-- distance units -->
 </resources>
