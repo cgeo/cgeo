@@ -455,6 +455,7 @@
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
     <string name="settings_title_waypoints">Waypointy</string>
     <string name="settings_title_map_content">Obsah map</string>
+    <string name="settings_title_map_behavior">Chování mapy</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Umístění dat keše</string>
     <string name="settings_title_data_dir_usage">Adresář dat keše (%1$s použito)</string>
@@ -973,8 +974,8 @@
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako body trasy této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její body trasy odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
-    <string name="init_longtap_udc">Dlouhé klapnutí na mapu</string>
-    <string name="init_summary_longtap_udc">Dlouhým klepnutím na mapu vytvořte uživatelem definovanou kešku</string>
+    <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
+    <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
     <string name="goto_targets_list">Interní kešky</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>

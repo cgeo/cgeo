@@ -453,6 +453,7 @@
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
     <string name="settings_title_waypoints">Reittipisteet</string>
     <string name="settings_title_map_content">Kartan sisältö</string>
+    <string name="settings_title_map_behavior">Kartan käyttäytyminen</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Kätködatan kansio</string>
     <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
@@ -957,8 +958,8 @@
     <string name="internal_cache_default_owner">Sinä</string>
     <string name="internal_goto_targets_title">Kohteet joihin siirrytään</string>
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
-    <string name="init_longtap_udc">Kartan pitkä painallus</string>
-    <string name="init_summary_longtap_udc">Paina karttaa pitkään luodaksesi käyttäjän määrittämä kätkö</string>
+    <string name="init_longtap_map">Kartan pitkä painallus</string>
+    <string name="init_summary_longtap_map">Aktivoi pitkä painallus karttakuvakkeen päällä (luo yksittäinen reitti) tai kartan vapaassa kohdassa (luo käyttäjän luoma kätkö)</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>

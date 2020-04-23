@@ -453,6 +453,7 @@
     <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Kaartinhoud</string>
+    <string name="settings_title_map_behavior">Kaart gedrag</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
@@ -957,8 +958,8 @@
     <string name="internal_cache_default_owner">Jij</string>
     <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
     <string name="internal_goto_targets_description">Deze cache slaat je recente \"Ga naar\" doelen op. Deze wordt automatisch aangemaakt zodra je de \"ga naar\" functie in het hoofdmenu hebt gebruikt. De ingevoerde coördinaten zullen worden opgeslagen als waypoints van deze cache. Als je deze coördinaten niet meer nodig hebt, kan je deze cache of eventuele waypoints veilig verwijderen. Je kunt ook de cache verplaatsen naar elke andere lijst van jouw keuze.</string>
-    <string name="init_longtap_udc">Lange tik op de kaart</string>
-    <string name="init_summary_longtap_udc">Lange tik op de kaart om een gebruiker gedefinieerde cache te maken</string>
+    <string name="init_longtap_map">Lang drukken op kaart</string>
+    <string name="init_summary_longtap_map">Activeer lang tikken op kaart-pictogram (maak een individuele route) of op vrije ruimte op de kaart (maak een gebruiker gedefinieerde cache)</string>
     <string name="goto_targets_list">Interne caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
@@ -1057,9 +1058,9 @@
     <string name="map_trail_show">Toon spoor</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_autorotate">Kaart automatisch roteren</string>
-    <string name="map_circles_show">Laat cirkels zien</string>
-    <string name="map_mycaches_hide">Verbergen eigen/gevonden caches</string>
-    <string name="map_disabled_hide">Verbergen uitgeschakelde caches</string>
+    <string name="map_circles_show">Toon cirkels</string>
+    <string name="map_mycaches_hide">Verberg eigen/gevonden caches</string>
+    <string name="map_disabled_hide">Verberg uitgeschakelde caches</string>
     <string name="map_archived_hide">Gearchiveerde notities verbergen</string>
     <string name="map_hidewp_original">Originele waypoints verbergen</string>
     <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>

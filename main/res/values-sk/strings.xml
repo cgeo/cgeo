@@ -455,6 +455,7 @@
     <string name="settings_title_map_rotation">Otáčanie mapy (Google Mapy)</string>
     <string name="settings_title_waypoints">Body trasy</string>
     <string name="settings_title_map_content">Obsah máp</string>
+    <string name="settings_title_map_behavior">Nastavenie správania mapy</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Adresár údajov skrýš</string>
     <string name="settings_title_data_dir_usage">Adresár údajov skrýš (%1$s využité)</string>
@@ -973,8 +974,8 @@
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Ciele \"Choď k\"</string>
     <string name="internal_goto_targets_description">V tejto keške sú uložené všetky vaše nedávne ciele funkcie \"Choď k\". Vytvorí sa automaticky, keď v hlavnej ponuke použijete funkciu \"Choď k\". Zadané súradnice sa uložia ako body trasy tejto kešky. Ak už tieto súradnice nepotrebujete, môžete bez obáv túto kešku a všetky jej body trasy odstrániť. Podľa potreby tiež môžete túto kešku presunúť do nejakého iného zoznamu.</string>
-    <string name="init_longtap_udc">Ťuknutie na mapu a podržanie</string>
-    <string name="init_summary_longtap_udc">Ťuknutím na mapu a podržaním vytvoríte používateľom definovanú kešku</string>
+    <string name="init_longtap_map">Ťuknutie na mapu a podržanie</string>
+    <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku)</string>
     <string name="goto_targets_list">Interné kešky</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupne</string>
