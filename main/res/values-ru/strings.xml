@@ -949,8 +949,6 @@
     <string name="internal_cache_default_description">Это пользовательский тайник</string>
     <string name="internal_cache_default_owner">Вы</string>
     <string name="internal_goto_targets_title">\"Перейти к\" целям</string>
-    <string name="init_longtap_udc">Долгое нажатие на карту</string>
-    <string name="init_summary_longtap_udc">Длительное нажатие на карте для создания пользовательского тайника</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градусы</string>
     <string name="cc_hint_minutes">минуты</string>
