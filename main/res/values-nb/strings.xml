@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
+    <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
     <string name="search">Søk</string>
     <string name="helpers">Nyttige apper</string>
@@ -18,12 +20,15 @@
     <string name="event">Eventcache</string>
     <string name="mega">Megaevent-cache</string>
     <string name="giga">Gigaevent</string>
+    <string name="earth">Earthcache</string>
     <string name="cito">\"Cache in trash out\"-event</string>
     <string name="webcam">Webkameracache</string>
     <string name="virtual">Virtuell cache</string>
     <string name="wherigo">Wherigo-cache</string>
     <string name="communceleb">Samfunnsfeiringsevent</string>
     <string name="ape">\"Prosjekt A.P.E.\"-cache</string>
+    <string name="gchq">Geocaching HQ</string>
+    <string name="gchqceleb">Geocaching HQ Celebration</string>
     <string name="unknown">Ukjent Type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
@@ -34,6 +39,7 @@
     <string name="cache_size_virtual">Virtuell</string>
     <string name="cache_size_notchosen">Ikke valgt</string>
     <string name="cache_size_unknown">Ukjent</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Veldig stor</string>
     <!-- waypoints -->
     <string name="wp_final">Sluttpunkt</string>
@@ -74,6 +80,7 @@
     <string name="log_tb_sortby">Sorter sporbare</string>
     <string name="log_tb_changeall">Endre alle</string>
     <string name="log_tb_grabbed">Tatt fra en plass den ikke skulle vært</string>
+    <string name="log_tb_note">Notat</string>
     <string name="log_tb_discovered">Oppdaget</string>
     <string name="log_tb_archived">Arkivert</string>
     <string name="log_save">Lagre offline</string>
@@ -250,12 +257,15 @@
     <string name="confirm_discard_wp_changes">Forkaste ulagrede endringer i veipunktene?</string>
     <string name="err_request_popup_info">c:geo klarte ikke hente cachens popup-info.</string>
     <string name="warn_log_load_additional_data">c:geo kunne ikke laste tilleggsdata (trackables/favorittpoeng) for logging.</string>
+    <string name="more_information">Mer informasjon</string>
+    <string name="warn_gm_not_available">Google Maps er ikke tilgjengelig.</string>
     <!-- location service -->
     <string name="loc_last">Sist sett</string>
     <string name="loc_net">Nettverk</string>
     <string name="loc_fused">Kombinert</string>
     <string name="loc_low_power">Lavt strømforbruk</string>
     <string name="loc_home">Hjemkoordinater</string>
+    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Satellitter</string>
     <string name="loc_trying">Prøver å lokalisere</string>
     <string name="loc_no_addr">Ukjent adresse</string>
@@ -267,6 +277,7 @@
     <string name="menu_settings">Innstillinger</string>
     <string name="menu_backup">Sikkerhetskopiering/gjenoppretting</string>
     <string name="menu_history">Historikk</string>
+    <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skann GC-kode</string>
     <string name="menu_scan_description">c:geo kan skanne GC-koder fra QR-koder. Den nødvendige appen er ikke installert. Vil du åpne Google Play for å installere den?</string>
     <!-- main screen -->
@@ -331,8 +342,10 @@
     <string name="caches_copy_selected">Kopier de merkede</string>
     <string name="caches_copy_all">Kopier alle</string>
     <string name="caches_map_locus_export">Eksporter til Locus</string>
+    <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filter</string>
     <string name="caches_filter_size">Størrelse</string>
+    <string name="caches_filter_type">Type</string>
     <string name="caches_filter_track">Med sporbare</string>
     <string name="caches_filter_clear">Nullstill filtre</string>
     <string name="caches_filter_modified">Med korrigerte koordinater</string>
@@ -377,6 +390,7 @@
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>
+    <string name="about_system">System</string>
     <string name="about_donate">Støtt oss</string>
     <string name="about_donation_more">Besøk nettsiden for informasjon</string>
     <string name="about_contributors">Bidragsytere</string>
@@ -403,6 +417,8 @@
     <string name="about_contributors_specialthanksdetails">alle våre bidragsytere til oversettelser på <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>\n, alle som sender inn problemer\n og alle andre supportere\n</string>
     <string name="about_components">Komponenter</string>
     <string name="contribution_code">kode</string>
+    <string name="contribution_tester">tester</string>
+    <string name="contribution_support">Støtte</string>
     <string name="contribution_documentation">dokumentasjon</string>
     <string name="contribution_projectleader">open kildekode prosjektleder</string>
     <string name="contribution_graphics">grafikk</string>
@@ -415,11 +431,14 @@
     <string name="settings_title_cachedetails">Cache-detaljer</string>
     <string name="settings_summary_cachedetails">Tilpass visningen av cacheinformasjon.</string>
     <string name="settings_title_offlinedata">Offline-data</string>
+    <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
     <string name="settings_title_map">Vis på kartet</string>
     <string name="settings_summary_map">Angi kartkilde, instillinger for offline-kart og kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
+    <string name="settings_title_waypoints">Veipunkter</string>
     <string name="settings_title_map_content">Kartinnhold</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Mappe for geocache-data</string>
     <string name="settings_title_data_dir_usage">Mappe for geocache-data (%1$s brukt)</string>
     <string name="calculate_dataDir_title">Lagringsplass brukt på geocache-data</string>
@@ -430,6 +449,7 @@
     <string name="settings_title_basicmembers">Alternativer for Basic-medlemmer</string>
     <string name="settings_title_navigation">Navigasjon</string>
     <string name="settings_summary_navigation">Velg navigasjonsmetode og velg eksterne navigasjonsapper.</string>
+    <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Konfigurer app-mappe og andre systemspesifikke innstillinger.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
     <string name="settings_category_browser">Nettleser</string>
@@ -496,6 +516,7 @@
     <string name="init_signature_template_name">Navn</string>
     <string name="init_signature_template_difficulty">Vankelighetsgrad</string>
     <string name="init_signature_template_terrain">Terrenggrad</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Loggtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
     <string name="init_ratingwanted">GCvote-rangering</string>
@@ -506,6 +527,8 @@
     <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
     <string name="init_skin">Hvitt tema</string>
     <string name="init_summary_skin">Hvitt tema</string>
+    <string name="init_transparentBackground">Gjennomsiktig bakgrunn</string>
+    <string name="init_summary_transparentBackground">Bruk gjennomsiktig bakgrunn (krever omstart)</string>
     <string name="init_address">Vis adressen i menyen</string>
     <string name="init_summary_address">Vis adressen i menyen</string>
     <string name="init_useenglish">Bruk engelsk språk</string>
@@ -577,6 +600,7 @@
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
     <string name="init_maptrail">Vis spor</string>
     <string name="init_summary_maptrail">Vis spor på kart</string>
+    <string name="init_trailcolor">Farge på spor</string>
     <string name="init_share_after_export">Vis meny for å dele etter eksport av GPX</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
@@ -649,6 +673,7 @@
     <string name="feature_search_geocode">Søk med GC-kode</string>
     <string name="feature_search_owner">Søk med eier</string>
     <string name="feature_search_finder">Søk med finner</string>
+    <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Gamle Mapsforge V3</string>
     <string name="init_mfold_api_description">Vi bruker en ny versjon av Mapsforge-kart som standardinnstilling. Hvis du savner noen funksjon eller har problemer med det nye, kan du velge å gå tilbake til den gamle versjonen her.</string>
     <!-- proximity notification -->
@@ -767,6 +792,7 @@
         <item quantity="other">%d veipunkter</item>
     </plurals>
     <string name="cache_waypoints_add">Legg til veipunkter</string>
+    <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Ingen hint tilgjengelig</string>
     <string name="cache_logs">Loggbok</string>
     <string name="cache_logs_friends_and_own">Venners/egne logger</string>
@@ -800,7 +826,9 @@
     <string name="cache_menu_maps_directions">Google Maps-veibeskrivelse</string>
     <string name="cache_menu_sygic_walk">Sygic (Gå)</string>
     <string name="cache_menu_sygic_drive">Sygic (Kjøre)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Vis på kartet</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apper</string>
     <string name="cache_menu_streetview">Gatevisning</string>
     <string name="cache_menu_browser">Åpne i nettleseren</string>
@@ -817,6 +845,7 @@
     <string name="cache_menu_share">Del cachen</string>
     <string name="cache_menu_move_list">Flytt til annen liste</string>
     <string name="cache_menu_copy_list">Kopier til en annen liste</string>
+    <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (frakoblet)</string>
     <string name="cache_menu_vote">Avgi stemme</string>
     <string name="cache_menu_checker">Åpne Geochecker</string>
@@ -824,6 +853,8 @@
     <string name="cache_menu_ignore">Ignorer cache</string>
     <string name="ignore_confirm_title">Vær forsiktig</string>
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
+    <string name="cache_status">Status</string>
+    <string name="cache_stored">Lagret</string>
     <string name="cache_status_offline_log">Logg lagret</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
@@ -845,6 +876,8 @@
     <string name="cache_status_stored_morethanthirtydays">For mer enn 30 dager siden</string>
     <string name="cache_geocode">GC-kode</string>
     <string name="cache_name">Navn</string>
+    <string name="cache_name_set">Velg cachenavn</string>
+    <string name="cache_name_updated">Cachenavn er oppdatert</string>
     <string name="cache_size">Størrelse</string>
     <string name="cache_distance">Avstand</string>
     <string name="cache_difficulty">Vanskelighet</string>
@@ -874,7 +907,13 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Oppført på %s</string>
+    <string name="internal_cache_default_owner">Du</string>
+    <string name="goto_targets_list">Interne cacher</string>
     <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">grader</string>
+    <string name="cc_hint_minutes">minutter</string>
+    <string name="cc_hint_seconds">sekunder</string>
+    <string name="cc_hint_fraction">desimaler</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Søker etter filer i\n</string>
@@ -928,10 +967,13 @@
     <string name="waypoint_clear_coordinates">Fjern koordinater</string>
     <string name="waypoint_delete">Slett</string>
     <string name="waypoint_edit_title">Rediger veipunkt</string>
+    <string name="waypoint_add_title">Legg til veipunkt</string>
+    <string name="waypoint_note">Notat</string>
     <string name="waypoint_user_note">Personlig notat</string>
     <string name="waypoint_visited">Besøkte</string>
     <string name="waypoint_set_visited">Veipunkt satt til besøkt</string>
     <string name="waypoint_unset_visited">Veipunkt satt til ikke-besøkt</string>
+    <string name="waypoint_save">Lagre</string>
     <string name="waypoint_cancel_edit">Avbryt</string>
     <string name="waypoint_loading">Laster veipunkt…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Ingen endring i cachens koordinater</string>
@@ -960,11 +1002,15 @@
     <string name="map_live">Live-kart</string>
     <string name="map_view_map">Kart</string>
     <string name="map_modes">Kartinnstillinger</string>
+    <string name="map_hide">Skjul</string>
     <string name="map_trail_show">Vis spor</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
     <string name="map_circles_show">Vis sirkler</string>
     <string name="map_mycaches_hide">Skjul egne og funnede cacher</string>
     <string name="map_disabled_hide">Skjul deaktiverte cacher</string>
+    <string name="map_archived_hide">Skjul arkiverte cacher</string>
+    <string name="map_hidewp_parking">Skjul parkeringsveipunkter</string>
+    <string name="map_hidewp_visited">Skjul besøkte veipunkter</string>
     <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Velg karttema</string>
     <string name="map_theme_options">Valg for karttemaer</string>
@@ -1029,6 +1075,7 @@
     <string name="trackable_released">Sluppet</string>
     <string name="trackable_distance">Reiselengde</string>
     <string name="trackable_not_activated">Den sporbare er ikke aktivert</string>
+    <string name="trackable_status">Status</string>
     <string name="geokret_type_traditional">Tradisjonell</string>
     <string name="geokret_type_book_or_media">Bok eller elektronisk medium</string>
     <string name="geokret_type_human">Menneske</string>
@@ -1083,6 +1130,7 @@
     <string name="export_fieldnotes_upload_success">Opplasting til geocaching.com er fullført</string>
     <string name="export_fieldnotes_onlynew">Bare siden forrige eksportering</string>
     <string name="export_fieldnotes_creating">Lager feltnotater…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPX-filen blir eksportert til %1$s med dato og tidspunkt som filnavn.</string>
     <string name="export_gpx_to">Send eksportert GPX til</string>
     <string name="export_confirm_title">Eksporterer %1$s</string>
@@ -1328,6 +1376,7 @@
     <string name="support_title">Støtte</string>
     <string name="website_title">Nettside</string>
     <string name="facebook_link"><a href=""> c:geo-siden</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo i Google Play</a></string>
     <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
     <string name="faq_title">Ofte Stilte Spørsmål</string>
@@ -1347,6 +1396,10 @@
     <string name="err_tts_lang_not_supported">Dette språket er ikke støttet av text-to-speech.</string>
     <string name="tts_one_kilometer">en kilometer</string>
     <string name="tts_one_meter">en meter</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s meter</item>
+        <item quantity="other">%s meter</item>
+    </plurals>
     <string name="tts_one_mile">En enkelsk mil</string>
     <plurals name="tts_miles">
         <item quantity="one">%s engelsk mil</item>
@@ -1439,6 +1492,10 @@
     <string name="color_blue">Blå</string>
     <string name="color_green">Grønn</string>
     <string name="color_grey">Grå</string>
+    <string name="color_orange">Oransje</string>
+    <string name="color_red">Rød</string>
+    <string name="color_turquoise">Turkis</string>
+    <string name="color_black">Svart</string>
     <!-- number input -->
     <string name="number_input_title">Skriv inn en verdi mellom %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Verdien er for lav - settes til minimumsverdien</string>
@@ -1447,5 +1504,8 @@
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
     <string name="unit_ft">fot</string>
+    <string name="unit_yd">yd</string>
 </resources>
