@@ -453,6 +453,7 @@
     <string name="settings_title_map_rotation">Kartendrehung (Google Maps)</string>
     <string name="settings_title_waypoints">Wegpunkte</string>
     <string name="settings_title_map_content">Karteninhalt</string>
+    <string name="settings_title_map_behavior">Kartenverhalten</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache-Datenverzeichnis</string>
     <string name="settings_title_data_dir_usage">Geocache-Datenverzeichnis (%1$s genutzt)</string>
@@ -553,7 +554,7 @@
     <string name="init_showwaypoints">Wegpunkte zeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
-    <string name="init_zoomincludingwaypoints_description">Wenn ein einzelner Cache auf der Karte angezeigt werden soll: Soll der Zoom so eingestellt werden, dass alle Wegpunkte dargestellt werden?</string>
+    <string name="init_zoomincludingwaypoints_description">Wenn eine Karte für einen einzelnen Cache geöffnet wird: Soll der Zoom so eingestellt werden, dass alle Wegpunkte dargestellt werden?</string>
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher Brouter (falls installiert) eine Route berechnet.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
@@ -957,8 +958,8 @@
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
-    <string name="init_longtap_udc">Langes Tippen auf Karte</string>
-    <string name="init_summary_longtap_udc">Langes Tippen auf Karte um einen benutzerdefinierten Cache anzulegen</string>
+    <string name="init_longtap_map">Langes Tippen auf Karte</string>
+    <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache)</string>
     <string name="goto_targets_list">Interne Caches</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Grad</string>
