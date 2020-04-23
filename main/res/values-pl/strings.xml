@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Skrzynka</string>
     <string name="detail">Szczegóły</string>
@@ -19,11 +20,17 @@
     <string name="event">Wydarzenie</string>
     <string name="mega">Mega-Wydarzenie</string>
     <string name="giga">Giga-Wydarzenie</string>
+    <string name="earth">Earthcache</string>
     <string name="cito">CITO</string>
     <string name="webcam">Skrzynka Webcam</string>
     <string name="virtual">Wirtualna</string>
     <string name="wherigo">Scenariusz Wherigo</string>
+    <string name="communceleb">Święto Społeczności Geocaching</string>
     <string name="ape">Projekt APE</string>
+    <string name="gchq">Geocaching HQ</string>
+    <string name="gchqceleb">Święto Geocaching HQ</string>
+    <string name="gps">Labirynt Przygód GPS</string>
+    <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Skrzynka bez lokalizacji (Reverse)</string>
     <string name="userdefined">Skrzynka zdefiniowana przez użytkownika</string>
     <string name="unknown">Nietypowa</string>
@@ -36,6 +43,7 @@
     <string name="cache_size_virtual">Wirtualna</string>
     <string name="cache_size_notchosen">Nie wybrano</string>
     <string name="cache_size_unknown">Nieznana</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Bardzo duża</string>
     <!-- waypoints -->
     <string name="wp_final">Finał</string>
@@ -147,6 +155,7 @@
     <string name="translate_to_english">Przetłumacz na angielski</string>
     <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
@@ -263,6 +272,8 @@
     <string name="loc_fused">Połączona</string>
     <string name="loc_low_power">Niski pobór energii</string>
     <string name="loc_home">Koordynaty domowe</string>
+    <string name="loc_gps">GPS</string>
+    <string name="loc_sat">Sat</string>
     <string name="loc_trying">Próba lokalizacji</string>
     <string name="loc_no_addr">Nieznany adres</string>
     <string name="loc_gps_disabled">GPS wyłączony</string>
@@ -275,6 +286,7 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
+    <string name="menu_pocket_queries">Pocket queries</string>
     <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa online</string>
@@ -373,6 +385,7 @@
     <string name="list_menu_create">Utwórz nową listę</string>
     <string name="list_menu_drop">Usuń aktualną listę</string>
     <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
+    <string name="list_menu_import">Import</string>
     <string name="list_title">Wybierz listę</string>
     <string name="lists_title">Wybierz listy</string>
     <string name="list_inbox">Zapisane</string>
@@ -390,10 +403,12 @@
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
+    <string name="about_system">System</string>
     <string name="about_donate">Wesprzyj nas</string>
     <string name="about_donation_more">Odwiedź stronę po więcej informacji</string>
     <string name="about_contributors">Współpracownicy</string>
     <string name="about_license">Licencja</string>
+    <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
     <string name="about_starting">Wprowadzenie</string>
     <string name="about_starting_head">Wprowadzenie</string>
@@ -411,10 +426,13 @@
     <string name="changelog_github">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
+    <string name="about_contributors_recent">Ostatni współpracownicy</string>
     <string name="about_contributors_specialthanks">Specjalne podziękowania dla</string>
     <string name="about_contributors_specialthanksdetails">· wszystkich naszych tłumaczy na <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· wszystkich zgłaszających błędy\n· i wszystkich innych wspierających.\n</string>
+    <string name="about_contributors_other">Inni współpracownicy</string>
     <string name="about_components">Komponenty</string>
     <string name="contribution_code">kod</string>
+    <string name="contribution_tester">Testerzy</string>
     <string name="contribution_support">wsparcie</string>
     <string name="contribution_documentation">dokumentacja</string>
     <string name="contribution_projectleader">lider projektu open source</string>
@@ -435,7 +453,10 @@
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
+    <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
+    <string name="settings_title_map_behavior">Zachowanie mapy</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Katalog z danymi skrzynek</string>
     <string name="settings_title_data_dir_usage">Katalog z danymi skrzynek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
@@ -446,6 +467,7 @@
     <string name="settings_title_basicmembers">Opcje dla użytkowników Basic</string>
     <string name="settings_title_navigation">Nawigacja</string>
     <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
+    <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Skonfiguruj katalogi aplikacji i inne ustawienia specyficzne dla systemu.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_browser">Przeglądarka</string>
@@ -457,6 +479,7 @@
     <string name="settings_activate_gc">Aktywuj</string>
     <string name="settings_activate_ec">Aktywuj</string>
     <string name="settings_gc_legal_note">Używając serwisu geocaching.com, akceptujesz postanowienia licencyjne Groundspeak.</string>
+    <string name="settings_info_facebook_login_title">Logowanie na Facebooku</string>
     <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie…</string>
     <string name="settings_authorize">Autoryzuj c:geo</string>
     <string name="settings_reauthorize">Aktualizacja lub usunięcie autoryzacji</string>
@@ -511,6 +534,7 @@
     <string name="init_signature_template_name">Nazwa</string>
     <string name="init_signature_template_difficulty">Trudność</string>
     <string name="init_signature_template_terrain">Teren</string>
+    <string name="init_signature_template_url">Adres URL</string>
     <string name="init_signature_template_log">Wpis</string>
     <string name="init_signature_template_size">Rozmiar</string>
     <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
@@ -521,6 +545,8 @@
     <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
     <string name="init_skin">Light skin</string>
     <string name="init_summary_skin">Użyj light skin\n(wymaga restartu)</string>
+    <string name="init_transparentBackground">Przezroczyste tło</string>
+    <string name="init_summary_transparentBackground">Użyj przezroczystego tła (wymagany restart)</string>
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_useenglish">Użyj języka angielskiego</string>
@@ -529,12 +555,16 @@
     <string name="init_summary_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
+    <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
+    <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
     <string name="init_brouterThreshold_description">Maksymalna odległość, do której aplikacja dodatkowa brouter (jeśli jest zainstalowana) obliczy trasę.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
+    <string name="init_archived">Wyklucz zarchiwizowane</string>
+    <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
@@ -689,6 +719,7 @@
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
     <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+    <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
@@ -744,6 +775,7 @@
         <item quantity="other">zostało %1$d dni</item>
     </plurals>
     <string name="last_day_available">dostępne ostatni dzień</string>
+    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Odśwież</string>
     <string name="cache_offline_drop">Usuń</string>
     <string name="cache_offline_store">Zapisz</string>
@@ -775,12 +807,16 @@
         <item quantity="other">ok. %d miesięcy temu</item>
     </plurals>
     <string name="cache_offline_about_time_year">ponad rok temu</string>
+    <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Atrybuty</string>
     <string name="cache_inventory">Inwentarz</string>
     <string name="cache_log_images_title">Zdjęcie z wpisu</string>
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_personal_note">Notatka osobista</string>
+    <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
+    <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
     <string name="cache_personal_note_truncation">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
     <string name="cache_personal_note_upload">Wyślij</string>
@@ -811,6 +847,7 @@
         <item quantity="other">%d punktów nawigacji</item>
     </plurals>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
+    <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_hint">Wskazówka</string>
     <string name="cache_hint_not_available">Brak podpowiedzi</string>
     <string name="cache_logs">Dziennik</string>
@@ -824,7 +861,9 @@
     <string name="cache_dialog_loading_details_status_gcvote">Ładuję GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Zapisuję dane</string>
     <string name="cache_dialog_loading_details_status_render">Renderuję widok</string>
+    <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">Zapisuję skrzynkę do użytku offline…</string>
+    <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Usuwam skrzynkę z pamięci urządzenia…</string>
     <string name="cache_dialog_refresh_title">Odśwież</string>
     <string name="cache_dialog_refresh_message">Aktualizuję szczegóły skrzynki…</string>
@@ -843,10 +882,14 @@
     <string name="cache_menu_navigation_transit">Nawigacja (Transport publiczny)</string>
     <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
     <string name="cache_menu_maps_directions">Kierunki map Google</string>
+    <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
     <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
+    <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
     <string name="cache_menu_visit_offline">Wpisz wizytę offline</string>
@@ -861,12 +904,15 @@
     <string name="cache_menu_share">Podziel się skrzynką</string>
     <string name="cache_menu_move_list">Przenieś do innej listy</string>
     <string name="cache_menu_copy_list">Skopiuj do innej listy</string>
+    <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
+    <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Głosuj</string>
     <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
     <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
     <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
+    <string name="cache_status">Status</string>
     <string name="cache_stored">Przechowywany</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
@@ -927,9 +973,14 @@
     <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
-    <string name="init_longtap_udc">Przytrzymaj dłużej na mapie</string>
-    <string name="init_summary_longtap_udc">Przytrzymaj dłużej na mapie aby utworzyć skrzynkę zdefiniowaną przez użytkownika</string>
+    <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
+    <string name="init_longtap_map">Długie dotknięcie na mapie</string>
+    <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
+    <string name="goto_targets_list">Wewnętrzne skrzynki</string>
     <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">stopni(e)</string>
+    <string name="cc_hint_minutes">minut(y)</string>
+    <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">część ułamkowa</string>
     <!-- editor dialog -->
     <!-- file list base -->
@@ -1019,12 +1070,21 @@
     <string name="map_live">Mapa online</string>
     <string name="map_view_map">Widok mapy</string>
     <string name="map_modes">Tryb mapy</string>
+    <string name="map_hide">Ukryj</string>
     <string name="map_trail_show">Pokaż szlak</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
     <string name="map_autorotate">Autoobrót mapy</string>
     <string name="map_circles_show">Pokaż okręgi</string>
     <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
     <string name="map_disabled_hide">Ukryj nieaktywne skrzynki</string>
+    <string name="map_archived_hide">Ukryj zarchiwizowane skrzynki</string>
+    <string name="map_hidewp_original">Ukryj oryginalne punkty nawigacji</string>
+    <string name="map_hidewp_parking">Ukryj parkingi</string>
+    <string name="map_hidewp_visited">Ukryj odwiedzone punkty nawigacji</string>
+    <string name="init_hidewp">Ukryj punkty nawigacji</string>
+    <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
+    <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
+    <string name="init_summary_hidewp_visited">Ukryj odwiedzone punkty nawigacji na mapie</string>
     <string name="map_theme_builtin">Domyślny</string>
     <string name="map_theme_select">Wybierz motyw mapy</string>
     <string name="map_theme_options">Opcje motywu</string>
@@ -1064,6 +1124,7 @@
     <string name="search_address_started">Wyszukiwanie miejsc</string>
     <string name="search_address_result">Znalezione miejsca</string>
     <string name="search_own_caches">Szukaj moich skrzynek</string>
+    <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Wczytywanie listy Pocket Queries</string>
     <!-- trackable -->
     <string name="trackable">Przedmiot podróżny</string>
@@ -1091,6 +1152,9 @@
     <string name="trackable_distance">W podróży</string>
     <string name="trackable_touch">TB-Akcja</string>
     <string name="trackable_not_activated">Przedmiot podróżny nie został zaktywowany</string>
+    <string name="trackable_travelbug">Travelbug</string>
+    <string name="trackable_status">Status</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradycyjny</string>
     <string name="geokret_type_book_or_media">Książka lub media elektroniczne</string>
     <string name="geokret_type_human">Człowiek</string>
@@ -1146,6 +1210,7 @@
     <string name="export_fieldnotes_upload_success">Wysyłanie do geocaching.com zakończone sukcesem</string>
     <string name="export_fieldnotes_onlynew">Tylko od ostatniego eksportu</string>
     <string name="export_fieldnotes_creating">Tworzenie notatek…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_gpx_to">Wyślij wyeksportowany GPX do</string>
     <string name="export_confirm_title">Eksportowanie %1$s</string>
@@ -1212,6 +1277,7 @@
     <string name="attribute_field_puzzle_no">Bez zagadki terenowej</string>
     <string name="attribute_nightcache_yes">Skrzynka nocna</string>
     <string name="attribute_nightcache_no">Nie jest skrzynką nocną</string>
+    <string name="attribute_parkngrab_yes">Park and grab</string>
     <string name="attribute_parkngrab_no">Nie jest park and grab</string>
     <string name="attribute_abandonedbuilding_yes">Opuszczona budowla</string>
     <string name="attribute_abandonedbuilding_no">Nieopuszczona budowla</string>
@@ -1393,8 +1459,10 @@
     <string name="support_title">Pomoc</string>
     <string name="website_title">Adres strony</string>
     <string name="facebook_link"><a href="">c:geo na fb</a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo w Google Play</a></string>
     <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
+    <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa codzienna wersja.\nKliknij aby zainstalować.</string>
@@ -1548,5 +1616,15 @@
     <string name="notification_channel_description">powiadomienia z aplikacji c:geo</string>
     <string name="proximity_notification_title">Powiadomienie o bliskości</string>
     <!-- individual routes -->
+    <string name="individual_route_added">dodany do trasy</string>
+    <string name="individual_route_removed">usunięto z trasy</string>
+    <string name="individual_route_error_toggling_waypoint">błąd przełączenia punktu nawigacji</string>
+    <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
+    <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mile</string>
 </resources>
