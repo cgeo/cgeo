@@ -452,6 +452,7 @@
     <string name="settings_title_map_rotation">지도 회전 (구글 지도)</string>
     <string name="settings_title_waypoints">지점</string>
     <string name="settings_title_map_content">지도 내용</string>
+    <string name="settings_title_map_behavior">지도 동작</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">지오캐시 데이터 디렉토리</string>
     <string name="settings_title_data_dir_usage">지오캐시 데이터 디렉터리 (%1$s 사용)</string>
@@ -949,8 +950,8 @@
     <string name="internal_cache_default_owner">당신</string>
     <string name="internal_goto_targets_title">\'이동으로\' 목표</string>
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
-    <string name="init_longtap_udc">지도에서 길게 탭</string>
-    <string name="init_summary_longtap_udc">사용자 정의 캐시를 생성하기 위해 맵을 길게 탭</string>
+    <string name="init_longtap_map">지도에서 길게 탭</string>
+    <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시 작성) 길게 탭하는 게 활동시킵니다.</string>
     <string name="goto_targets_list">내부 캐시</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">각도</string>
