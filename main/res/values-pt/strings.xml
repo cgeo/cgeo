@@ -454,6 +454,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
+    <string name="settings_title_map_behavior">Comportamento do mapa</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Pasta de dados de geocache</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocache (%1$s em uso)</string>
@@ -557,7 +558,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_zoomincludingwaypoints_description">Ao mostrar apenas uma cache no mapa: Deve o zoom ser ajustado para que inclua todos os seus pontos adicionais?</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">A distância máxima até que uma aplicação auxiliar de ajuda (se instalada) calculará uma rota.</string>
-    <string name="init_brouterShowBothDistances">Mostrar a distância em linha recta</string>
+    <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
     <string name="init_disabled">Excluir Desactivadas</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
@@ -565,7 +566,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
-    <string name="init_units">Usar unidades no Sistema Imperial</string>
+    <string name="init_units">Usar Unidades Imperiais</string>
     <string name="init_summary_units">Utilizar as unidades no Sistema Imperial em vez do Sistema Métrico</string>
     <string name="init_log_offline">Registos Offline</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
@@ -595,7 +596,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro com uma cópia de segurança.</string>
     <string name="settings_title_backup">Cópia de Segurança / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings">Cópia de segurança das definições do programa</string>
+    <string name="init_backup_settings">Backup de definições do programa</string>
     <string name="init_backup_settings_backup_light">Criar cópia das definições (sem dados da conta)</string>
     <string name="init_backup_settings_backup_full">Criar cópia das definições (completo)</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
@@ -614,10 +615,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="settings_title_scale_map_text">Escala do texto no mapa</string>
     <string name="settings_summary_scale_map_text">Escala do texto das legendas nos mapas offline de acordo com resolução do dispositivo</string>
-    <string name="settings_title_map_manualrotation_disabled">Desactivar rotação manual do mapa</string>
-    <string name="settings_summary_map_manualrotation_disabled">Desactivar controlos para rotação manual do mapa</string>
+    <string name="settings_title_map_manualrotation_disabled">Desactivar rotação manual</string>
+    <string name="settings_summary_map_manualrotation_disabled">Desactiva os controlos para a rotação manual do mapa</string>
     <string name="settings_title_map_autorotation_disabled">Desactivar rotação automática do mapa</string>
-    <string name="settings_summary_map_autorotation_disabled">Desactivar rotação automática do mapa</string>
+    <string name="settings_summary_map_autorotation_disabled">Desactiva a rotação automática do mapa</string>
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
@@ -666,7 +667,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_location_googleplayservices">Utilizar Serviços do Google Play</string>
     <string name="init_low_power">Modo de baixo consumo de energia</string>
     <string name="init_low_power_note">O modo de baixo consumo de energia evita a utilização do GPS e do giroscópio quando não seja, de todo, necessária uma localização muito precisa, à custa de um tempo de determinação mais prolongado.</string>
-    <string name="init_low_power_mode">Activar o modo de baixo consumo de energia</string>
+    <string name="init_low_power_mode">Activar modo reduzido de energia</string>
     <string name="init_force_orientation_sensor_title">Sensor de orientação</string>
     <string name="init_force_orientation_sensor_note">Em alguns dispositivos, o sensor normal de rotação vectorial tem um comportamento errático, dando a direcção errada. Neste caso, um sensor alternativo (o sensor de orientação) pode proporcionar melhores resultados.</string>
     <string name="init_force_orientation_sensor">Forçar uso do sensor de orientação</string>
@@ -703,9 +704,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_mfold_api_description">Estamos a usar uma versão nova do mapa Mapsforge por predefinição. Se notar falta de alguma funcionalidade ou deparar-se com problemas, pode voltar para a versão antiga aqui.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificação de proximidade</string>
-    <string name="init_proximityNotificationGeneral">Notificação geral de proximidade no mapa</string>
+    <string name="init_proximityNotificationGeneral">Notificação geral de prox. no mapa</string>
     <string name="init_summary_proximityNotificationGeneral">Reproduz um som quando alguma geocache ou ponto adicional visível no mapa está mais próximo que a distância de \"longe\" ou de \"perto\". São utilizados diferentes sons para os dois tipos de distâncias.</string>
-    <string name="init_proximityNotificationSpecific">Notificação de prox. em pontos adicionais</string>
+    <string name="init_proximityNotificationSpecific">Notificação da prox. pontos adicionais</string>
     <string name="init_summary_proximityNotificationSpecific">Reproduz uma notificação repetida se a geocache ou o ponto adicional estiver mais próximo que a distância de \"longe\" ou de \"perto\". Entra em funcionamento se abrir os detalhes de uma geocache ou ponto adicional, num popup mostrado a partir de um mapa ou com o compasso em utilização. Diferentes sons são utilizados para os dois tipos de distâncias.</string>
     <string name="far_distance">Distância de longe</string>
     <string name="near_distance">Distância de perto</string>
@@ -958,8 +959,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="internal_cache_default_owner">Você</string>
     <string name="internal_goto_targets_title">Destinos \'Ir para\'</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que utilize a função \"Ir para\" do menu principal. As coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
-    <string name="init_longtap_udc">Toque longo no mapa</string>
-    <string name="init_summary_longtap_udc">Toque longo no mapa para criar uma cache definida pelo utilizador</string>
+    <string name="init_longtap_map">Toque sem soltar no mapa</string>
+    <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
     <string name="goto_targets_list">Caches internas</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graus</string>
@@ -1066,7 +1067,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_parking">Pontos adicionais de estacionamento</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
-    <string name="init_summary_hidewp_original">Ocultar os pontos adicionais originais no mapa</string>
+    <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
     <string name="init_summary_hidewp_visited">Ocultar os pontos adicionais visitados no mapa</string>
     <string name="map_theme_builtin">Padrão</string>
@@ -1178,7 +1179,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler, por exemplo, um código de barras directamente do ecrã do seu computador.</string>
     <string name="helper_pocketquery_description">Permite a fácil criação e transferência de Pocket Query, baseado na sua posição actual ou num ponto seleccionado no mapa. Requer uma conta Premium em \'Geocaching.com\'.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
-    <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das geocaches no c:geo com um toque longo sobre o texto da descrição da geocache (mesmo sem ligação à Internet).</string>
+    <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das geocaches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
