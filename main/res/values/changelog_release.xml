@@ -2,14 +2,14 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Beta feature release:</b>\n
+    <b>2020.04.24:</b>\n
+    · Fix: Optimize live map loading to avoid unneeded server requests\n
     · New: Added button \"Add current location\" to create standard waypoint\n
     · New: Added option to hide archived caches\n
     · New: Added map options to hide certain waypoint types\n
     · New: Show (unsaved) caches at corrected coordinates on live map if applicable\n
     · New: Create individual routes (by long pressing on icons in map)\n
     · New: Added option to disable transparent background\n
-    · Fix: Optimize live map loading to avoid unneeded server requests\n
     · Fix: Crash after "Remove all" in cache list\n
     · Fix: Crash after rapid movements on OSM map\n
     · Fix: Store manually set values in seekbar preferences\n
