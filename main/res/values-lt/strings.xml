@@ -908,7 +908,6 @@
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="internal_cache_default_name">Vartotojo nustatyta slėptuvė #%1$d</string>
     <string name="internal_cache_default_owner">Jūs</string>
-    <string name="init_longtap_udc">Ilgas paspaudimas ant žemėlapio</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
