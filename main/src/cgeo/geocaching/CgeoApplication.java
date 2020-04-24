@@ -11,6 +11,7 @@ import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -48,6 +50,8 @@ public class CgeoApplication extends Application {
             fixUserManagerMemoryLeak();
         }
 
+        fixGoogleMapZoomDataBug();
+
         showOverflowMenu();
 
         initApplicationLocale();
@@ -73,6 +77,23 @@ public class CgeoApplication extends Application {
             if (BuildConfig.DEBUG) {
                 throw new IllegalStateException("Cannot fix UserManager memory leak", e);
             }
+        }
+    }
+
+    /**
+     * https://issuetracker.google.com/issues/154855417
+     * delete corrupted map zoom data file once
+     * bug appeared 2020-04-22
+     */
+    private void fixGoogleMapZoomDataBug() {
+        final SharedPreferences googleBug = getSharedPreferences("google_bug_154855417", Context.MODE_PRIVATE);
+        if (!googleBug.contains("fixed")) {
+            try {
+                final File corruptedZoomTables = new File(getFilesDir(), "ZoomTables.data");
+                corruptedZoomTables.delete();
+            } catch (SecurityException e) {
+            }
+            googleBug.edit().putBoolean("fixed", true).apply();
         }
     }
 
