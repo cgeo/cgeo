@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
@@ -1827,6 +1828,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 sortedWaypoints.add(waypoint);
                 Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
                 adapter.notifyDataSetChanged();
+                ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
             });
 
             return view;

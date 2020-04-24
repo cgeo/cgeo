@@ -1078,6 +1078,7 @@
     <string name="waypoint_delete">Delete</string>
     <string name="waypoint_edit_title">Edit waypoint</string>
     <string name="waypoint_add_title">Add waypoint</string>
+    <string name="waypoint_added">Waypoint added</string>
     <string name="waypoint_note">Note</string>
     <string name="waypoint_user_note">User note</string>
     <string name="waypoint_visited">Visited</string>
