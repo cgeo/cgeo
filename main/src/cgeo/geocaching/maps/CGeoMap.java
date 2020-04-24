@@ -84,6 +84,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import java.io.File;
 import java.lang.ref.WeakReference;

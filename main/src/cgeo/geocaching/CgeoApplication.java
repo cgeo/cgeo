@@ -18,6 +18,7 @@ import android.os.UserManager;
 import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
