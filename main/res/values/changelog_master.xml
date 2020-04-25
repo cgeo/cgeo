@@ -10,6 +10,7 @@
     · New: Add support for multilingual OSM maps\n
     · New: Implemented Filtering by Country\n
     · New: Copy waypoints between caches\n
+    · New: Sort "goto history" waypoints by newest on top\n
     · Fix: Crash on moving data to SD card\n
   </string>
 </resources>
