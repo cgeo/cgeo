@@ -2,7 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2020.04.24:</b>\n
+    <b>2020.04.25:</b>\n
+    · Fix: Implement a workaround for a Google bug causing our map to crash\n
     · Fix: Optimize live map loading to avoid unneeded server requests\n
     · New: Added button \"Add current location\" to create standard waypoint\n
     · New: Added option to hide archived caches\n
