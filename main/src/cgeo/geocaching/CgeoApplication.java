@@ -82,18 +82,23 @@ public class CgeoApplication extends Application {
 
     /**
      * https://issuetracker.google.com/issues/154855417
-     * delete corrupted map zoom data file once
+     * delete corrupted map zoom data files once
      * bug appeared 2020-04-22
+     * workaround according to https://issuetracker.google.com/issues/154855417#comment398
      */
     private void fixGoogleMapZoomDataBug() {
-        final SharedPreferences googleBug = getSharedPreferences("google_bug_154855417", Context.MODE_PRIVATE);
-        if (!googleBug.contains("fixed")) {
-            try {
+        try {
+            final SharedPreferences hasFixedGoogleBug154855417 = getSharedPreferences("google_bug_154855417", Context.MODE_PRIVATE);
+            if (!hasFixedGoogleBug154855417.contains("fixed")) {
                 final File corruptedZoomTables = new File(getFilesDir(), "ZoomTables.data");
+                final File corruptedSavedClientParameters = new File(getFilesDir(), "SavedClientParameters.data.cs");
+                final File corruptedClientParametersData = new File(getFilesDir(), "DATA_ServerControlledParametersManager.data.v1." + getBaseContext().getPackageName());
                 corruptedZoomTables.delete();
-            } catch (SecurityException e) {
+                corruptedSavedClientParameters.delete();
+                corruptedClientParametersData.delete();
+                hasFixedGoogleBug154855417.edit().putBoolean("fixed", true).apply();
             }
-            googleBug.edit().putBoolean("fixed", true).apply();
+        } catch (Exception e) {
         }
     }
 
