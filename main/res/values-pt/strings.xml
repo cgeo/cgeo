@@ -572,7 +572,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
     <string name="init_choose_list">Escolher Lista</string>
     <string name="init_summary_choose_list">Perguntar em qual lista se guarda as geocaches</string>
-    <string name="init_listdisplay">Mostrar outras listas, na lista de caches</string>
+    <string name="init_listdisplay">Incluir info. de listas na listagem de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
