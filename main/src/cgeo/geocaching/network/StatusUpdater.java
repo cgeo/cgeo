@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Application;
+import android.os.Build;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,7 @@ public class StatusUpdater {
 
         public static final Status NO_STATUS = new Status(null, null, null, null);
         static final Status CLOSEOUT_STATUS =
-            new Status("", "status_closeout_warning_41", "attribute_abandonedbuilding", "https://www.cgeo.org/faq#legacy");
+            new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "https://www.cgeo.org/faq#legacy");
 
         public final String message;
         public final String messageId;
@@ -63,7 +64,7 @@ public class StatusUpdater {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return NO_STATUS;
+            return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? CLOSEOUT_STATUS : NO_STATUS;
         }
     }
 
