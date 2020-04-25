@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
+    <b>Next feature release:</b>\n
+    · Change: Added closeout message for systems running on Android < 5.0\n
   <string name="changelog_master" translatable="false">
   </string>
 </resources>
