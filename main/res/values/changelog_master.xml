@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
+  <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · Change: Added closeout message for systems running on Android < 5.0\n
-  <string name="changelog_master" translatable="false">
+    · New: Show info on completion of "add current location"\n
+    · New: Add option to clear the goto history\n
   </string>
 </resources>
