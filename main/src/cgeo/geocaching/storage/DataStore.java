@@ -25,7 +25,6 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.routing.RouteItem;
-import cgeo.geocaching.models.Destination;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
@@ -1537,31 +1536,6 @@ public class DataStore {
     }
 
     /**
-     * Persists the given {@code destination} into the database.
-     *
-     * @param destination
-     *            a destination to save
-     */
-    public static void saveSearchedDestination(final Destination destination) {
-        init();
-
-        database.beginTransaction();
-        try {
-            final SQLiteStatement insertDestination = PreparedStatement.INSERT_SEARCH_DESTINATION.getStatement();
-            insertDestination.bindLong(1, destination.getDate());
-            final Geopoint coords = destination.getCoords();
-            insertDestination.bindDouble(2, coords.getLatitude());
-            insertDestination.bindDouble(3, coords.getLongitude());
-            insertDestination.executeInsert();
-            database.setTransactionSuccessful();
-        } catch (final Exception e) {
-            Log.e("Updating searchedDestinations db failed", e);
-        } finally {
-            database.endTransaction();
-        }
-    }
-
-    /**
      * Persists the given {@code location} into the database.
      *
      * @param location
@@ -2274,41 +2248,6 @@ public class DataStore {
                         .setTitle(cursor.getString(1))
                         .setDescription(cursor.getString(2))
                         .build());
-    }
-
-    /**
-     * Loads the history of previously entered destinations from
-     * the database. If no destinations exist, an {@link Collections#emptyList()} will be returned.
-     *
-     * @return A list of previously entered destinations or an empty list.
-     */
-    @NonNull
-    public static List<Destination> loadHistoryOfSearchedLocations() {
-        return queryToColl(dbTableSearchDestinationHistory,
-                new String[]{"_id", "date", "latitude", "longitude"},
-                "latitude IS NOT NULL AND longitude IS NOT NULL",
-                null,
-                "date DESC",
-                "100",
-                new LinkedList<Destination>(),
-                cursor -> new Destination(cursor.getLong(0), cursor.getLong(1), getCoords(cursor, 2, 3)));
-    }
-
-    public static boolean clearSearchedDestinations() {
-        init();
-        database.beginTransaction();
-
-        try {
-            database.delete(dbTableSearchDestinationHistory, null, null);
-            database.setTransactionSuccessful();
-            return true;
-        } catch (final Exception e) {
-            Log.e("Unable to clear searched destinations", e);
-        } finally {
-            database.endTransaction();
-        }
-
-        return false;
     }
 
     /**
@@ -3513,26 +3452,6 @@ public class DataStore {
         return database != null;
     }
 
-    public static boolean removeSearchedDestination(final Destination destination) {
-        if (destination == null) {
-            return false;
-        }
-        init();
-
-        database.beginTransaction();
-        try {
-            database.delete(dbTableSearchDestinationHistory, "_id = " + destination.getId(), null);
-            database.setTransactionSuccessful();
-            return true;
-        } catch (final Exception e) {
-            Log.e("Unable to remove searched destination", e);
-        } finally {
-            database.endTransaction();
-        }
-
-        return false;
-    }
-
     /**
      * Load the lazily initialized fields of a cache and return them as partial cache (all other fields unset).
      *
@@ -3667,7 +3586,6 @@ public class DataStore {
         GUID_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.guid = ? AND c.geocode = l.geocode AND c.detailed = 1 AND list_id != " + StoredList.TEMPORARY_LIST.id),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
-        INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
         INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude) VALUES (?, ?)"),
         INSERT_ROUTEITEM("INSERT INTO " + dbTableRoute + " (precedence, type, id, geocode) VALUES (?, ?, ?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
