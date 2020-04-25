@@ -8,6 +8,7 @@
     · New: Add option to clear the goto history\n
     · New: Support other OSM based online map sources\n
     · New: Add support for multilingual OSM maps\n
-    · New: Implemented Filtering by Country
+    · New: Implemented Filtering by Country\n
+    · Fix: Crash on moving data to SD card\n
   </string>
 </resources>
