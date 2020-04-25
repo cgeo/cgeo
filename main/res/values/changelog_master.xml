@@ -6,5 +6,7 @@
     · Change: Added closeout message for systems running on Android < 5.0\n
     · New: Show info on completion of "add current location"\n
     · New: Add option to clear the goto history\n
+    · New: Support other OSM based online map sources\n
+    · New: Add support for multilingual OSM maps\n
   </string>
 </resources>
