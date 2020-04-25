@@ -9,6 +9,7 @@
     · New: Support other OSM based online map sources\n
     · New: Add support for multilingual OSM maps\n
     · New: Implemented Filtering by Country\n
+    · New: Copy waypoints between caches\n
     · Fix: Crash on moving data to SD card\n
   </string>
 </resources>
