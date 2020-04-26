@@ -290,6 +290,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
         item.setActionView(myLocSwitch);
         initMyLocationSwitchButton(myLocSwitch);
+        menu.findItem(R.id.menu_clear_individual_route).setVisible(route != null && !route.isEmpty());
 
         return result;
     }
@@ -483,6 +484,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 return true;
             case R.id.menu_clear_individual_route:
                 route.clearRoute(routeLayer);
+                ActivityMixin.invalidateOptionsMenu(this);
                 showToast(res.getString(R.string.map_individual_route_cleared));
                 return true;
             case R.id.menu_routing_straight:
@@ -1553,6 +1555,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
         route.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
+        ActivityMixin.invalidateOptionsMenu(this);
     }
 
     @Nullable
