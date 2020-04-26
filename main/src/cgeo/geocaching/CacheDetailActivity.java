@@ -683,7 +683,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
-        menu.findItem(R.id.menu_clear_goto_history).setVisible(cache.isGotoHistoryUDC());
+        menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
         menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
         menuItemToggleWaypointsFromNote.setVisible(cache != null);
         setMenuPreventWaypointsFromNote(cache != null && cache.isPreventWaypointsFromNote());
