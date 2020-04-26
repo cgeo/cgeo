@@ -603,7 +603,6 @@
     <string name="init_mfold_api">Vecais Mapsforge V3</string>
     <!-- proximity notification -->
     <!-- map sources -->
-    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Bezsaistes režīmā</string>
     <string name="settings_info_send2cgeo_title">Info par send2cgeo</string>
     <string name="init_sendToCgeo_name">Tavas ierīces nosaukums</string>
@@ -1279,7 +1278,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nesenās izmaiņas geocaching.com lapā \"salauza\" c:geo.\nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Dēļ izmaiņām geocaching.com lapā, traucēta tiešsaistes karšu darbība. \nMēs strādājam lai to salabotu, pārbaudiet pēc brīža.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tiek atjaunots. \nYou.Jūs varat saskarties ar dažādām nepilnībām.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Izskatās, ka tu lieto Android versiju, kas ir vecāka par 4.1 (Jelly Bean). Turpmākie c:geo atjauninājumi tavai ierīcei vairs var nebūt pieejami.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Runājošais kompass</string>
     <string name="tts_started">Sākta runa</string>
