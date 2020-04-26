@@ -712,7 +712,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
-    <string name="map_source_osm_mapnik">OSM: Harita</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="map_source_osm_offline_combined">Kombine (Çevrimdışı)</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
@@ -1445,7 +1444,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler c:geo bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com üzerindeki son değişikler canlı harita özelliğini bozdu.\n Üstünde çalışıyoruz, sonra tekrar deneyin.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com bakımda.\n Çeşitli sorunlarla karşılaşabilirsiniz.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Android 4.1 \'den daha eski bir sürüm kullanıyor olarak görünüyorsunuz. Gelecek c: geo sürümleri cihazınızda kullanılamayabilir.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
     <string name="tts_toggle">Konuşmaya başla</string>
