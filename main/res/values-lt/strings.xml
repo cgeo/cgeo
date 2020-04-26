@@ -666,7 +666,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
-    <string name="map_source_osm_mapnik">OSM: Žemėlapis</string>
     <string name="map_source_osm_offline">Išsaugotas</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacija apie send2cgeo</string>
@@ -1382,7 +1381,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino tiesioginio žemėlapio funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tinklapyje vyksta priežiūros darbai.\nJums gali kilti įvairių problemų.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Panašu, kad jūs naudojate Android versiją, senesnę nei 4.1. Būsimos c:geo versijos gali būti nebepasiekiamos jūsų prietaise.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Kalbantis kompasas</string>
     <string name="tts_toggle">Įjungti kalbėjimą</string>
