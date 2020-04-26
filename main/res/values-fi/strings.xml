@@ -716,7 +716,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
-    <string name="map_source_osm_mapnik">OSM: Kartta</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
@@ -1452,7 +1451,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com:issa rikkoivat c:geon. \n Korjaamme tilannetta, tarkistathan tilanteen pian uudestaan.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Käyttämäsi Android-versio näyttää olevan vanhempi kuin 4.1. Tulevat versiot c:geosta eivät ole välttämättä enää saatavissa sinun laitteellesi.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
