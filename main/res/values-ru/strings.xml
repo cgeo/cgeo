@@ -702,7 +702,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
-    <string name="map_source_osm_mapnik">OSM: Карта</string>
     <string name="map_source_osm_offline">Оффлайн</string>
     <string name="settings_info_send2cgeo_title">Подробная информация о send2cgeo</string>
     <string name="init_sendToCgeo_name">Название вашего устройства</string>
@@ -1426,7 +1425,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Последние изменения на geocaching.com сломали c:geo.\nМы работаем над этим, проверьте обновления через некоторое время.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Вы используете Android 4.1 или старее. Будущие версии c:geo могут быть недоступны на вашем устройстве.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Говорящий компас</string>
     <string name="tts_toggle">Включить говорилку</string>
