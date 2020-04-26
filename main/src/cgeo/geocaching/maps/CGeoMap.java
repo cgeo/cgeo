@@ -589,6 +589,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             route = new Route();
         }
         route.toggleItem(this.mapView.getContext(), new RouteItem(item), overlayPositionAndScale);
+        ActivityMixin.invalidateOptionsMenu(activity);
         overlayPositionAndScale.repaintRequired();
     }
 
@@ -700,6 +701,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
         item.setActionView(myLocSwitch);
         initMyLocationSwitchButton(myLocSwitch);
+        menu.findItem(R.id.menu_clear_individual_route).setVisible(route != null && !route.isEmpty());
         return true;
     }
 
@@ -880,6 +882,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             case R.id.menu_clear_individual_route: {
                 route.clearRoute(overlayPositionAndScale);
+                ActivityMixin.invalidateOptionsMenu(activity);
                 ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
                 return true;
             }
