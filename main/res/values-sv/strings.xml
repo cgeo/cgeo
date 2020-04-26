@@ -716,7 +716,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_mapnik">OSM: karta</string>
     <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
@@ -1452,7 +1451,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Du verkar använda en Android version som är äldre än 4.1. Framtida versioner av c:geo kommer troligtvis inte fungera på din telefon.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
     <string name="tts_toggle">Växla samtal</string>
