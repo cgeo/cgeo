@@ -677,7 +677,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Térkép</string>
     <string name="map_source_google_satellite">Google: Műholdkép</string>
-    <string name="map_source_osm_mapnik">OSM: Térkép</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Információ a send2cgeo-ról</string>
     <string name="init_sendToCgeo_name">Készüléked neve</string>
@@ -1365,7 +1364,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">A c:geo működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Az élő térkép működésképtelen a geocaching.com-on történt aktuális változások miatt.\nDolgozunk a megoldáson. Nézz vissza minél hamarabb!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">A geocaching.com karbantartás alatt van. \nEsetleg egyéb hiba lépett fel.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Úgy tűnik, az Android 4.1-es verziójánál régebbit használsz. Lehetséges, hogy a c:geo jövőbeli frissítései nem lesznek elérhetők az eszközödre.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Beszélő iránytű</string>
     <string name="tts_started">Beszéd elindítva</string>

@@ -716,7 +716,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OSM: Kaart</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
@@ -832,6 +834,8 @@
     </plurals>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
+    <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
+    <string name="cache_waypoints_remove_original_waypoint">Waypoint gekopieerd van klembord naar deze cache.\n\nOriginele waypoint verwijderen?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Geen hint beschikbaar</string>
     <string name="cache_logs">Logboek</string>
@@ -934,6 +938,7 @@
     <string name="cache_hidden">Verstopt</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Locatie</string>
+    <string name="cache_location_country">Land</string>
     <string name="cache_coordinates">Coördinaten</string>
     <string name="cache_calculator">Rekenmachine</string>
     <string name="cache_coordinates_original">Originele coordinaten</string>
@@ -961,6 +966,8 @@
     <string name="init_longtap_map">Lang drukken op kaart</string>
     <string name="init_summary_longtap_map">Activeer lang tikken op kaart-pictogram (maak een individuele route) of op vrije ruimte op de kaart (maak een gebruiker gedefinieerde cache)</string>
     <string name="goto_targets_list">Interne caches</string>
+    <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
+    <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
     <string name="cc_hint_minutes">minuten</string>
@@ -1020,6 +1027,7 @@
     <string name="waypoint_delete">Verwijderen</string>
     <string name="waypoint_edit_title">Waypoint bewerken</string>
     <string name="waypoint_add_title">Waypoint toevoegen</string>
+    <string name="waypoint_added">Waypoint toegevoegd</string>
     <string name="waypoint_note">Notitie</string>
     <string name="waypoint_user_note">Gebruikersnotitie</string>
     <string name="waypoint_visited">Bezocht</string>
@@ -1042,6 +1050,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Cachecoördinaten op de website zijn aangepast naar: %s.</string>
     <string name="waypoint_done">Afgerond</string>
     <string name="waypoint_duplicate">Dubbel waypoint</string>
+    <string name="waypoint_toclipboard">Kopieer waypoint naar klembord</string>
     <string name="waypoint_copy_of">Kopie van</string>
     <string name="waypointcalc_notes_prompt">Voer hier notities in…</string>
     <string name="waypoint_coordinate_formats_plain">Plat</string>
@@ -1072,6 +1081,7 @@
     <string name="map_theme_builtin">Standaard</string>
     <string name="map_theme_select">Selecteer mapthema</string>
     <string name="map_theme_options">Thema opties</string>
+    <string name="map_language">Kaart taal</string>
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
@@ -1452,7 +1462,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Je lijkt gebruik te maken van een Android versie ouder dan 4.1. Toekomstige releases zijn mogelijk niet beschikbaar voor je apparaat.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Toekomstige uitgaves van c:geo zijn mogelijk niet meer beschikbaar voor je apparaat.\nKlik op dit bericht voor meer informatie.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
     <string name="tts_toggle">Stemweergave in-/uitschakelen</string>

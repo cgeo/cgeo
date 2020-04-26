@@ -718,7 +718,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
-    <string name="map_source_osm_mapnik">OSM: Mapnik</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
@@ -1470,7 +1469,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Wygląda na to, że używasz wersji Androida starszej niż 4.1. Przyszłe wydania c:geo mogą być już niedostępne dla Twojego urządzenia.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
     <string name="tts_toggle">Przełącz mówienie</string>

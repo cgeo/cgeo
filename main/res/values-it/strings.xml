@@ -111,6 +111,7 @@
     <string name="log_stars_45_description">molto bene</string>
     <string name="log_stars_5_description">favoloso</string>
     <string name="log_webcam">Scattata foto Webcam</string>
+    <string name="log_new_log">Log</string>
     <string name="log_new_log_text">Testo Log</string>
     <string name="log_announcement">Annuncio</string>
     <string name="log_today">Oggi</string>
@@ -123,6 +124,7 @@
     <string name="log_image_caption">Didascalia</string>
     <string name="log_image_description">Descrizione</string>
     <string name="log_image_scale">Ridimensiona</string>
+    <string name="log_password_title">Password Log:</string>
     <string name="log_report_problem">Segnala un problema:</string>
     <string name="log_hint_log_password">Inserisci la password per il log</string>
     <string name="log_oc_team_comment">Commenti del Team OC</string>
@@ -266,6 +268,7 @@
     <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>
     <!-- location service -->
     <string name="loc_last">Ultima nota</string>
+    <string name="loc_net">Rete</string>
     <string name="loc_fused">Combinato</string>
     <string name="loc_low_power">Risparmio energetico</string>
     <string name="loc_home">Coordinate di casa</string>
@@ -448,7 +451,9 @@
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
     <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
+    <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
+    <string name="settings_title_map_behavior">Comportamento mappa</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Directory dati geocache</string>
     <string name="settings_title_data_dir_usage">Directory dati geocache (%1$s usati)</string>
@@ -539,6 +544,7 @@
     <string name="init_skin">Tema chiaro</string>
     <string name="init_summary_skin">Usa tema chiaro\n(richiede riavvio di c:geo)</string>
     <string name="init_transparentBackground">Sfondo trasparente</string>
+    <string name="init_summary_transparentBackground">Usa sfondo trasparente (necessario riavvio)</string>
     <string name="init_address">Visualizza indirizzo</string>
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_useenglish">Use English in c:geo</string>
@@ -547,12 +553,16 @@
     <string name="init_summary_exclude">Escludi i miei cache e queli che ho già trovato</string>
     <string name="init_showwaypoints">Mostra waypoints</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
+    <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
+    <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
     <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'helper della app brouter (se installata) calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_disabled">Escludi disattivati</string>
     <string name="init_summary_disabled">Escludi cache disattivati</string>
+    <string name="init_archived">Escludi archiviati</string>
+    <string name="init_summary_archived">Escludi cache archiviati</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
     <string name="init_units">Usa sistema imperiale</string>
@@ -706,7 +716,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
-    <string name="map_source_osm_mapnik">OSM: Mappa</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
@@ -789,7 +801,10 @@
     <string name="cache_log_images_title">Immagini Log</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Note personali</string>
+    <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
+    <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
     <string name="cache_personal_note_edit">Modifica</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
     <string name="cache_personal_note_truncation">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
     <string name="cache_personal_note_upload">Carica</string>
@@ -812,13 +827,18 @@
     <string name="cache_favpoint_not_on">Questo cache non è uno dei tuoi favoriti.</string>
     <string name="cache_list_select_last">Ultima selezione</string>
     <string name="cache_images">Immagini</string>
+    <string name="cache_waypoints">Waypoint</string>
     <plurals name="waypoints">
         <item quantity="one">1 Waypoint</item>
         <item quantity="other">%d Waypoint</item>
     </plurals>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
+    <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
+    <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
+    <string name="cache_waypoints_remove_original_waypoint">Waypoint copiato dagli appunti su questo cache.\n\nRimuovere il waypoint originale?</string>
     <string name="cache_hint">Aiuto (spoiler)</string>
     <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
+    <string name="cache_logs">Logbook</string>
     <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
     <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
@@ -835,7 +855,9 @@
     <string name="cache_dialog_offline_drop_message">Eliminazione del cache dalla memoria del dispositivo…</string>
     <string name="cache_dialog_refresh_title">Aggiorna</string>
     <string name="cache_dialog_refresh_message">Ricaricamento dettagli cache…</string>
+    <string name="cache_dialog_watchlist_add_title">Watchlist</string>
     <string name="cache_dialog_watchlist_add_message">Aggiunto il cache alla watchlist in corso…</string>
+    <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
     <string name="cache_dialog_watchlist_remove_message">Rimozione dei cache dalla tua watchlist…</string>
     <string name="cache_dialog_favorite_add_title">Preferiti</string>
     <string name="cache_dialog_favorite_add_message">Aggiungi il cache ai tuoi preferiti…</string>
@@ -851,6 +873,7 @@
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (a piedi)</string>
     <string name="cache_menu_sygic_drive">Sygic (guida)</string>
+    <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mappa c:geo</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
@@ -915,6 +938,7 @@
     <string name="cache_hidden">Nascosto il</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Luogo</string>
+    <string name="cache_location_country">Nazione</string>
     <string name="cache_coordinates">Coordinate</string>
     <string name="cache_calculator">Calcolatrice</string>
     <string name="cache_coordinates_original">Coordinate originali</string>
@@ -939,7 +963,11 @@
     <string name="internal_cache_default_owner">Tu</string>
     <string name="internal_goto_targets_title">Obiettivi \"Vai a\"</string>
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
+    <string name="init_longtap_map">Tocco lungo sulla mappa</string>
+    <string name="init_summary_longtap_map">Attiva tocco prolungato sull\'icona mappa (crea un percorso individuale) o sullo spazio libero sulla mappa (crea un cache definito dall\'utente)</string>
     <string name="goto_targets_list">Cache interni</string>
+    <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
+    <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">gradi</string>
     <string name="cc_hint_minutes">minuti</string>
@@ -954,6 +982,7 @@
     <string name="file_title_searching">Ricerca in corso</string>
     <!-- simple_dir_chooser -->
     <string name="simple_dir_chooser_title">Scegli cartella</string>
+    <string name="simple_dir_chooser_current_path">Percorso:</string>
     <string name="simple_dir_chooser_invalid_path">Percorso non valido</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Caricamento cache da %1$s</string>
@@ -983,6 +1012,7 @@
     <!-- popup -->
     <string name="popup_more">Altri dettagli</string>
     <!-- waypoint -->
+    <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coordinate</string>
     <string name="waypoint_cache_coordinates">Coordinate cache</string>
     <string name="waypoint_calculate_coordinates">Calcola coordinate</string>
@@ -997,6 +1027,7 @@
     <string name="waypoint_delete">Elimina</string>
     <string name="waypoint_edit_title">Modifica waypoint</string>
     <string name="waypoint_add_title">Aggiungi waypoint</string>
+    <string name="waypoint_added">Waypoint aggiunto</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota utente</string>
     <string name="waypoint_visited">Visitato</string>
@@ -1011,6 +1042,7 @@
     <string name="waypoint_reset_cache_coords">Resetta coordinate originali</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Le coordinates sono state resettate su web</string>
     <string name="waypoint_coordinates_being_reset_on_website">Le coordinate sono in fase di reset su web</string>
+    <string name="waypoint_reset">Reset</string>
     <string name="waypoint_localy_reset_cache_coords">Resetta in c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Resetta in c:geo e su web.</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Il sito web non supporta la modifica delle coordinate</string>
@@ -1018,8 +1050,10 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Le coordinate cache su web sono state modificate in: %s.</string>
     <string name="waypoint_done">Fatto</string>
     <string name="waypoint_duplicate">Duplica waypoint</string>
+    <string name="waypoint_toclipboard">Copia waypoint negli appunti</string>
     <string name="waypoint_copy_of">Copia di</string>
     <string name="waypointcalc_notes_prompt">Inserire le note qui…</string>
+    <string name="waypoint_coordinate_formats_plain">Normale</string>
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
     <!-- visit -->
@@ -1029,15 +1063,25 @@
     <string name="map_live">Mappa Live</string>
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_modes">Modi mappa</string>
+    <string name="map_hide">Nascondi</string>
     <string name="map_trail_show">Mostra scia</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_autorotate">Mappa autorotata</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
     <string name="map_disabled_hide">Nascondi le cache disabilitate</string>
+    <string name="map_archived_hide">Nascondi cache archiviati</string>
+    <string name="map_hidewp_original">Nascondi i waypoint originali</string>
+    <string name="map_hidewp_parking">Nascondi waypoint di parcheggio</string>
+    <string name="map_hidewp_visited">Nascondi i waypoint visitati</string>
+    <string name="init_hidewp">Nascondi tutti i waypoint</string>
+    <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
+    <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
+    <string name="init_summary_hidewp_visited">Nascondi i waypoint visitati sulla mappa</string>
     <string name="map_theme_builtin">Tema predefinito</string>
     <string name="map_theme_select">Scegli un tema mappa</string>
     <string name="map_theme_options">Opzioni Tema</string>
+    <string name="map_language">Lingua della mappa</string>
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
@@ -1074,6 +1118,7 @@
     <string name="search_address_started">Cerca per luoghi</string>
     <string name="search_address_result">Cerca luoghi</string>
     <string name="search_own_caches">Cerca i miei cache</string>
+    <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Caricamento di una lista di Pocket query</string>
     <!-- trackable -->
     <string name="trackable">Oggetto Trackable</string>
@@ -1101,7 +1146,9 @@
     <string name="trackable_distance">Portato</string>
     <string name="trackable_touch">Contatto</string>
     <string name="trackable_not_activated">Trackable non attivato</string>
+    <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_status">Stato</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradizionale</string>
     <string name="geokret_type_book_or_media">Libro o media elettronici</string>
     <string name="geokret_type_human">Umano</string>
@@ -1130,6 +1177,7 @@
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Evento passato</string>
     <string name="helper_calendar_pastevent_question">La data dell\'evento è nel passato. Aggiungerlo comunque?</string>
+    <string name="helper_sendtocgeo_title">Invia a c:geo</string>
     <string name="helper_contacts_title">c:geo - plugin Contatti</string>
     <string name="helper_contacts_description">Consente di aprire una scheda contatto (della tua rubrica) direttamente da un log, per permetterti di chiedere aiuto agli amici più facilmente.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
@@ -1156,6 +1204,7 @@
     <string name="export_fieldnotes_upload_success">Caricato su geocaching.com con successo</string>
     <string name="export_fieldnotes_onlynew">Solo quelli nuovi rispetto all\'ultima esportazione</string>
     <string name="export_fieldnotes_creating">Creazione Field Notes…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Il file GPX sarà esportato in %1$s con data ed ora correnti nel nome file.</string>
     <string name="export_gpx_to">Invia il GPX esportato a</string>
     <string name="export_confirm_title">Esportazione di %1$s</string>
@@ -1323,6 +1372,7 @@
     <string name="attribute_moving_target_yes">Obiettivo in movimento</string>
     <string name="attribute_moving_target_no">Obiettivo non in movimento</string>
     <string name="attribute_webcam_yes">Webcam</string>
+    <string name="attribute_webcam_no">Nessuna webcam</string>
     <string name="attribute_inside_yes">Con aree interne (cave, edifici etc.)</string>
     <string name="attribute_inside_no">Senza aree interne ad edifici</string>
     <string name="attribute_in_water_yes">In acqua</string>
@@ -1351,6 +1401,8 @@
     <string name="attribute_aircraft_no">Senza aereo</string>
     <string name="attribute_investigation_yes">Investigazione richiesta</string>
     <string name="attribute_investigation_no">Investigazione non richiesta</string>
+    <string name="attribute_puzzle_yes">Puzzle / Mystery</string>
+    <string name="attribute_puzzle_no">No puzzle / mystery</string>
     <string name="attribute_arithmetic_yes">Problema aritmetico</string>
     <string name="attribute_arithmetic_no">Problema non aritmetico</string>
     <string name="attribute_other_cache_yes">Cache di altro tipo</string>
@@ -1379,6 +1431,7 @@
     <string name="attribute_nature_cache_no">Non nascosto in un ambiente naturale</string>
     <string name="attribute_byop_yes">Portati qualcosa per scrivere</string>
     <string name="attribute_byop_no">Matita non necessaria</string>
+    <string name="attribute_safari_cache_yes">Reverse cache</string>
     <string name="attribute_safari_cache_no">Non è un reverse cache</string>
     <string name="attribute_quick_cache_yes">Cache veloce</string>
     <string name="attribute_quick_cache_no">Non è un cache veloce</string>
@@ -1390,6 +1443,7 @@
     <string name="attribute_geohotel_no">Non è un cache GeoHotel</string>
     <string name="attribute_survey_marker_yes">Vicino ad una targa o marcatore geodedico (Survey Marker)</string>
     <string name="attribute_survey_marker_no">Non è vicino ad una targa o marcatore geodedico (Survey Marker)</string>
+    <string name="attribute_offset_cache_yes">Offset cache</string>
     <string name="attribute_offset_cache_no">Non è un offset cache</string>
     <!-- next things -->
     <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
@@ -1400,6 +1454,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo su Google Play</a></string>
     <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
+    <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
@@ -1407,7 +1462,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 4.1. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione precedente di Android. Le versioni future di c:geo potrebbero non essere più disponibili per il tuo dispositivo.\nTocca questo messaggio per ulteriori informazioni.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
@@ -1531,5 +1586,15 @@
     <string name="notification_channel_description">notifiche dall\'app di geocaching c:geo</string>
     <string name="proximity_notification_title">Notifica di prossimità c:geo</string>
     <!-- individual routes -->
+    <string name="individual_route_added">aggiunto al percorso</string>
+    <string name="individual_route_removed">rimosso dal percorso</string>
+    <string name="individual_route_error_toggling_waypoint">errore cambiando lo stato waypoint</string>
+    <string name="map_clear_individual_route">Cancella percorso individuale</string>
+    <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
     <!-- distance units -->
+    <string name="unit_m">mt</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">piedi</string>
+    <string name="unit_yd">iarde</string>
+    <string name="unit_mi">miglia</string>
 </resources>

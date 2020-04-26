@@ -557,7 +557,6 @@
     <!-- proximity notification -->
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="init_sendToCgeo">Ipadala sa c:geo</string>
     <string name="settings_info_send2cgeo_title">Impormasyon sa send2cgeo</string>
     <string name="init_sendToCgeo_name">Ang pangalan sa imohang device</string>

@@ -572,14 +572,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
     <string name="init_choose_list">Escolher Lista</string>
     <string name="init_summary_choose_list">Perguntar em qual lista se guarda as geocaches</string>
-    <string name="init_listdisplay">Mostrar outras listas, na lista de caches</string>
+    <string name="init_listdisplay">Incluir info. de listas na listagem de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup">Backup de geocaches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_running">A criar uma cópia de segurança da base de dados de caches…</string>
-    <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados contendo geocaches e pontos adicionais, mas não as suas imagens da geocache e nenhuma definição do programa.</string>
+    <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados que contém as caches e os pontos adicionais, mas não das suas imagens em caches nem de qualquer definição do programa.</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
@@ -597,8 +597,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_title_backup">Cópia de Segurança / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
     <string name="init_backup_settings">Backup de definições do programa</string>
-    <string name="init_backup_settings_backup_light">Criar cópia das definições (sem dados da conta)</string>
-    <string name="init_backup_settings_backup_full">Criar cópia das definições (completo)</string>
+    <string name="init_backup_settings_backup_light">Cópia seg. definições (sem as contas)</string>
+    <string name="init_backup_settings_backup_full">Cópia seg. definições (completo)</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
@@ -638,7 +638,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_secondary_navigation_tool">Navegação secundária</string>
     <string name="init_default_navigation_tool_description">Aqui pode seleccionar o instrumento de navegação preferido.</string>
     <string name="init_default_navigation_tool_select">Escolher navegador</string>
-    <string name="init_default_navigation_tool_2_description">Aqui pode seleccionar a seu segundo instrumento de navegação preferido. Active-o com um toque longo no ícone de navegação ao lado do título da cache.</string>
+    <string name="init_default_navigation_tool_2_description">Aqui pode seleccionar o seu segundo instrumento de navegação preferido. Accione-o ao tocar sem soltar no ícone de navegação ao lado do título da cache.</string>
     <string name="init_navigation_menu_description">Aqui pode seleccionar quais dos modos de navegação disponíveis serão mostrados no menu de navegação para uma geocache ou um ponto adicional. As opções a cinzento não estão instaladas neste dispositivo.</string>
     <string name="init_debug_title">Informação de depuração</string>
     <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e só é recomendado se for solicitado o envio do registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
@@ -717,7 +717,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
-    <string name="map_source_osm_mapnik">OSM: Mapa</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinado (offline)</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
@@ -833,6 +835,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     </plurals>
     <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
+    <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
+    <string name="cache_waypoints_remove_original_waypoint">Ponto adicional copiado da área de transferência para esta cache.\n\nEliminar o ponto adicional original?</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
     <string name="cache_logs">Registos</string>
@@ -935,6 +939,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_hidden">Escondida</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Localização</string>
+    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenadas</string>
     <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originais</string>
@@ -957,11 +962,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
     <string name="internal_cache_default_owner">Você</string>
-    <string name="internal_goto_targets_title">Destinos \'Ir para\'</string>
-    <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que utilize a função \"Ir para\" do menu principal. As coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
+    <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
+    <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
     <string name="goto_targets_list">Caches internas</string>
+    <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
+    <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graus</string>
     <string name="cc_hint_minutes">minutos</string>
@@ -1021,6 +1028,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_delete">Apagar</string>
     <string name="waypoint_edit_title">Editar ponto adicional</string>
     <string name="waypoint_add_title">Adicionar ponto adicional</string>
+    <string name="waypoint_added">Foi adicionado o ponto adicional</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota do utilizador</string>
     <string name="waypoint_visited">Percorrido</string>
@@ -1043,6 +1051,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da cache no sítio web foram modificadas para: %s.</string>
     <string name="waypoint_done">Feito</string>
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>
+    <string name="waypoint_toclipboard">Copiar o ponto adicional para a área de transferência</string>
     <string name="waypoint_copy_of">Cópia de</string>
     <string name="waypointcalc_notes_prompt">Introduzir notas aqui…</string>
     <string name="waypoint_coordinate_formats_plain">Simples</string>
@@ -1064,7 +1073,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_disabled_hide">Caches desactivadas</string>
     <string name="map_archived_hide">Caches arquivadas</string>
     <string name="map_hidewp_original">Pontos adicionais originais</string>
-    <string name="map_hidewp_parking">Pontos adicionais de estacionamento</string>
+    <string name="map_hidewp_parking">Pontos adic. de estacionamento</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
@@ -1073,6 +1082,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_theme_builtin">Padrão</string>
     <string name="map_theme_select">Seleccionar o tema de mapa</string>
     <string name="map_theme_options">Opções do Tema</string>
+    <string name="map_language">Idioma do mapa</string>
     <string name="map_live_enable">Activar em tempo real</string>
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
@@ -1453,12 +1463,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Parece que utiliza uma versão de Android inferior a 4.1. Lançamentos futuros do c:geo podem não estar mais disponíveis para o seu dispositivo.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a utilizar uma versão antiga do Android. As próximas versões do c:geo poderão não estar disponíveis para o seu dispositivo.\nToque nesta mensagem para mais informações.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
     <string name="tts_started">Início das instruções de voz</string>
-    <string name="tts_stopped">Parou fala</string>
+    <string name="tts_stopped">Fala interrompida</string>
     <string name="err_tts_lang_not_supported">A linguagem actual não é suportada pela conversão de texto em voz.</string>
     <string name="tts_one_kilometer">um quilómetro</string>
     <plurals name="tts_kilometers">

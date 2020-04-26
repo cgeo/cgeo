@@ -644,7 +644,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
-    <string name="map_source_osm_mapnik">OSM: Kort</string>
     <string name="init_sendToCgeo">Send2c:geo</string>
     <string name="settings_info_send2cgeo_title">Beskrivelse af send2c:geo</string>
     <string name="init_sendToCgeo_name">Din enheds navn</string>
@@ -1309,7 +1308,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer c:geo i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ændringer på geocaching.com forhindrer Live-kortet i at fungere.\nVi arbejder på at løse problemet. Prøv igen senere.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Din enheds Androidinstallation er ældre end version 4.1 og fremtidige versioner af c:geo vil måske ikke længere være kompatible.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompas</string>
     <string name="tts_toggle">Skift tekst-til-tale-tilstand</string>

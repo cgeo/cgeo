@@ -679,7 +679,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
-    <string name="map_source_osm_mapnik">OSM: Χάρτης</string>
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
     <string name="settings_info_send2cgeo_title">Σχετικά με το send2cgeo</string>
@@ -1377,7 +1376,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Φαίνεται ότι χρησιμοποιείτε έκδοση Android παλαιότερη από την 4.1. Οι μελλοντικές εκδόσεις του c:geo ενδέχεται να μην είναι διαθέσιμες για την συσκευή σας.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
     <string name="tts_toggle">Φωνητική καθοδήγηση</string>

@@ -715,7 +715,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
-    <string name="map_source_osm_mapnik">OSM: 지도</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">오프라인</string>
     <string name="map_source_osm_offline_combined">결합 (오프라인)</string>
     <string name="init_sendToCgeo">c:geo로 보내기</string>
@@ -824,6 +826,8 @@
     </plurals>
     <string name="cache_waypoints_add">지점 추가</string>
     <string name="cache_waypoints_add_currentLocation">현재 위치 추가</string>
+    <string name="cache_waypoints_add_fromclipboard">클립보드에서 붙여넣기</string>
+    <string name="cache_waypoints_remove_original_waypoint">지점이 클립보드에서 이 캐시로 복사되었습니다.\n\n원래 지점을 삭제 하시겠습니까?</string>
     <string name="cache_hint">힌트</string>
     <string name="cache_hint_not_available">힌트가 없습니다.</string>
     <string name="cache_logs">방명록</string>
@@ -926,6 +930,7 @@
     <string name="cache_hidden">숨긴 날짜</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
+    <string name="cache_location_country">나라</string>
     <string name="cache_coordinates">좌표</string>
     <string name="cache_calculator">계산기</string>
     <string name="cache_coordinates_original">원래 좌표</string>
@@ -953,6 +958,8 @@
     <string name="init_longtap_map">지도에서 길게 탭</string>
     <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시 작성) 길게 탭하는 게 활동시킵니다.</string>
     <string name="goto_targets_list">내부 캐시</string>
+    <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
+    <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">각도</string>
     <string name="cc_hint_minutes">분</string>
@@ -1012,6 +1019,7 @@
     <string name="waypoint_delete">삭제</string>
     <string name="waypoint_edit_title">지점 편집하기</string>
     <string name="waypoint_add_title">지점 추가</string>
+    <string name="waypoint_added">지점 추가됨</string>
     <string name="waypoint_note">메모</string>
     <string name="waypoint_user_note">사용자 노트</string>
     <string name="waypoint_visited">방문했음</string>
@@ -1034,6 +1042,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">웹사이트의 캐시 좌표가 %s로 변경되었습니다.</string>
     <string name="waypoint_done">완료</string>
     <string name="waypoint_duplicate">웨이포인트 복제</string>
+    <string name="waypoint_toclipboard">지점을 클립보드에 복사</string>
     <string name="waypoint_copy_of">복사 :</string>
     <string name="waypointcalc_notes_prompt">여기에 메모를 입력…</string>
     <string name="waypoint_coordinate_formats_plain">간단히</string>
@@ -1064,6 +1073,7 @@
     <string name="map_theme_builtin">기본 설정</string>
     <string name="map_theme_select">지도 테마 선택</string>
     <string name="map_theme_options">테마 옵션</string>
+    <string name="map_language">지도 언어</string>
     <string name="map_live_enable">라이브 활성화</string>
     <string name="map_live_disable">라이브 비활성화</string>
     <string name="map_as_list">목록으로 보기</string>
@@ -1443,7 +1453,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 c:geo에 문제가 생겼습니다.\n작업중이오니, 조만간 확인해 보세요.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 라이브 지도기능에 문제가 생겼습니다.\n작업중이오니, 잠시 후 확인해 보세요.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">사용하시는 안드로이드 버전이 4.1 이하인 것 같습니다. 이후에는 새로운 c:geo 버전을 받지 못할 수 있습니다.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">이전 버전의 안드로이드를 사용하고있는 것 같습니다. c:geo의 다음 릴리스는 더 이상 장치에서 아마 사용할 수 없습니다.\n자세한 내용을 보려면이 메시지를 누르십시오.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
     <string name="tts_toggle">말하기 전환</string>

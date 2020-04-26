@@ -584,7 +584,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Mapa ng: google</string>
     <string name="map_source_google_satellite">Satelayt ng: google</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="init_sendToCgeo">Ipadala sa c:geo</string>
     <string name="settings_info_send2cgeo_title">Impormasyon na ipinadala sa 2cgeo</string>
     <string name="init_sendToCgeo_name">Ang pangalan ng iyong aparato</string>

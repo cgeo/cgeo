@@ -428,7 +428,6 @@
     <string name="feature_own_coordinates">אחסון נקודות ציון מעודכנות</string>
     <!-- proximity notification -->
     <!-- map sources -->
-    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
     <!-- auth generic -->
     <string name="auth_dialog_waiting">Waiting for %s&#8230;</string>
