@@ -241,7 +241,6 @@
     <string name="init_datadirmove_running">是否移动 geocache 数据目录？</string>
     <!-- proximity notification -->
     <!-- map sources -->
-    <string name="map_source_osm_mapnik">OSM: Map</string>
     <!-- auth generic -->
     <string name="auth_check">检查身份验证</string>
     <string name="auth_check_again">检查身份验证</string>
