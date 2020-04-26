@@ -681,7 +681,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>
-    <string name="map_source_osm_mapnik">OSM: マップ</string>
     <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
     <string name="settings_info_send2cgeo_title">send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -1357,7 +1356,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります。</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Android 4.1 よりも以前のバージョンを使用しているようです。c:geo の今後のリリースはお使いのデバイスで利用できない可能性があります。</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_toggle">トークの切り替え</string>
     <string name="tts_started">音声開始</string>
