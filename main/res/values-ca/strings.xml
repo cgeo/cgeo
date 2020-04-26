@@ -602,7 +602,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: mapa</string>
     <string name="map_source_google_satellite">Google: satèl·lit</string>
-    <string name="map_source_osm_mapnik">OSM: Map</string>
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">El nom del teu dispositiu</string>
@@ -1267,7 +1266,6 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Sembla que esteu utilitzant una versió d\'Android 2.1 o inferior. Futures versions del c:geo poden no estar disponibles per al vostre dispositiu.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
     <string name="tts_started">S\'ha iniciat el mode parlat</string>
