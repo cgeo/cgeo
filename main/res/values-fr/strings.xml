@@ -712,7 +712,6 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
-    <string name="map_source_osm_mapnik">OSM : Carte</string>
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
@@ -824,6 +823,7 @@
     </plurals>
     <string name="cache_waypoints_add">Ajouter une étape</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
+    <string name="cache_waypoints_add_fromclipboard">Ajouter depuis le presse-papiers</string>
     <string name="cache_hint">Indice</string>
     <string name="cache_hint_not_available">Aucun indice disponible</string>
     <string name="cache_logs">Carnet de visites</string>
@@ -924,6 +924,7 @@
     <string name="cache_hidden">Cachée le</string>
     <string name="cache_event">Date</string>
     <string name="cache_location">Localisation</string>
+    <string name="cache_location_country">Pays</string>
     <string name="cache_coordinates">Coordonnées</string>
     <string name="cache_calculator">Calculateur</string>
     <string name="cache_coordinates_original">Coordonnées d\'origine</string>
@@ -1032,6 +1033,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Les coordonnées de la cache ont été modifiées sur le site web en : %s</string>
     <string name="waypoint_done">Ok</string>
     <string name="waypoint_duplicate">Dupliquer le point de passage</string>
+    <string name="waypoint_toclipboard">Copier le point de passage dans le presse-papiers</string>
     <string name="waypoint_copy_of">Copie de</string>
     <string name="waypointcalc_notes_prompt">Entrez les notes ici…</string>
     <string name="waypoint_coordinate_formats_plain">Texte</string>
@@ -1062,6 +1064,7 @@
     <string name="map_theme_builtin">Défault</string>
     <string name="map_theme_select">Sélectionner le thème</string>
     <string name="map_theme_options">Options de thème</string>
+    <string name="map_language">Langue de la carte</string>
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
@@ -1441,7 +1444,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
-    <string name="status_closeout_warning_41" tools:ignore="UnusedResources">Votre version d\'Android semble antérieure à 4.1. Les prochaines versions de c:geo pourraient ne plus fonctionner sur votre appareil.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Il semble que vous utilisez une ancienne version d\'Android. Les prochaines versions de c:geo pourraient ne plus être disponibles pour votre appareil.\nAppuyez sur ce message pour plus d\'informations.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
     <string name="tts_toggle">Basculer la synthèse vocale</string>
