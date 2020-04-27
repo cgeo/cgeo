@@ -75,6 +75,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
     private OnCacheTapListener onCacheTapListener;
     private boolean showCircles = false;
+    private boolean canDisableAutoRotate = false;
 
     private Lock lock = new ReentrantLock();
 
@@ -138,6 +139,20 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                     InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
                 }
             }
+        });
+        googleMap.setOnCameraChangeListener(cameraPosition -> {
+            // check for tap on compass rose, which resets bearing to 0.0
+            // only active, if it has been not equal to 0.0 before
+            final float bearing = cameraPosition.bearing;
+            if (canDisableAutoRotate && bearing == 0.0f && Settings.getMapRotation() == Settings.MAPROTATION_AUTO) {
+                canDisableAutoRotate = false;
+                Dialogs.confirm((Activity) getContext(), "Disable map auto rotation?", "Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu", (dialog, which) -> {
+                    Settings.setMapRotation(Settings.MAPROTATION_MANUAL);
+                });
+            } else if (bearing != 0.0f) {
+                canDisableAutoRotate = true;
+            }
+            Log.e("bearing=" + cameraPosition.bearing + ", tilt=" + cameraPosition.tilt + ", canDisable=" + canDisableAutoRotate);
         });
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
