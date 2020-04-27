@@ -41,7 +41,7 @@ public class WhereYouGoApp extends AbstractGeneralApp {
      * @return {@code null} if there is no link to a cartridge, or if there are multiple different links
      */
     @Nullable
-    protected static String getWhereIGoUrl(final Geocache cache) {
+    public static String getWhereIGoUrl(final Geocache cache) {
         final Matcher matcher = PATTERN_CARTRIDGE.matcher(cache.getShortDescription() + " " + cache.getDescription());
         final Set<String> urls = new HashSet<>();
         while (matcher.find()) {

@@ -23,6 +23,7 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -79,11 +80,13 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
+import static cgeo.geocaching.apps.cache.WhereYouGoApp.getWhereIGoUrl;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -1214,6 +1217,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
+            // WhereYouGo
+            updateWhereYouGoBox();
+
             // favorite points
             final ImageButton buttonFavPointAdd = view.findViewById(R.id.add_to_favpoint);
             final ImageButton buttonFavPointRemove = view.findViewById(R.id.remove_from_favpoint);
@@ -1513,6 +1519,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
+        private void updateWhereYouGoBox() {
+            final boolean isEnabled = cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
+            final LinearLayout boxWYG = view.findViewById(R.id.whereyougo_box);
+            boxWYG.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            if (isEnabled) {
+                final ImageButton buttonWYG = view.findViewById(R.id.send_to_whereyougo);
+                buttonWYG.setOnClickListener(v -> {
+                    final Intent wig = ProcessUtils.getLaunchIntent(getString(R.string.whereyougo_package));
+                    if (null == wig) {
+                        Dialogs.confirm(CacheDetailActivity.this, R.string.start_whereyougo, R.string.need_whereyougo, (dialog, v3) -> {
+                            ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.whereyougo_package));
+                        });
+                    } else {
+                        Dialogs.confirm(CacheDetailActivity.this, R.string.start_whereyougo, R.string.redirect_whereyougo, (dialog, v2) -> {
+                            CacheDetailActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
+                        });
+                    }
+                });
+            }
+        }
     }
 
     /**
