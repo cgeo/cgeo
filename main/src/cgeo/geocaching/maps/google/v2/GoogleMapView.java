@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.google.v2;
 
+import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.list.StoredList;
@@ -20,6 +21,7 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
@@ -114,26 +116,31 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // ("The default behavior is for the camera to move to the marker and an info window to appear.")
             return true;
         });
-        if (Settings.isLongTapOnMapActivated()) {
-            googleMap.setOnMapLongClickListener(tapLatLong -> {
-                boolean hitWaypoint = false;
-                final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
-                if (closest != null) {
-                    final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
-                    final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
-                    if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
-                        hitWaypoint = true;
+        googleMap.setOnMapLongClickListener(tapLatLong -> {
+            boolean hitWaypoint = false;
+            final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+            if (closest != null) {
+                final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
+                final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
+                if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
+                    hitWaypoint = true;
+                    if (Settings.isLongTapOnMapActivated()) {
                         ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
                         if (distanceDrawer == null) {
                             this.distanceDrawer = new DistanceDrawer(this, null, Settings.isBrouterShowBothDistances());
                         }
                     }
                 }
-                if (!hitWaypoint) {
+            }
+            if (!hitWaypoint) {
+                final Geocache cache = ((CGeoMap) onCacheTapListener).getSingleModeCache();
+                if (null != cache) {
+                    EditWaypointActivity.startActivityAddWaypoint(this.getContext(), cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+                } else if (Settings.isLongTapOnMapActivated()) {
                     InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
                 }
-            });
-        }
+            }
+        });
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
             mapReadyCallback = null;

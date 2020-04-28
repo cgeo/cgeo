@@ -249,21 +249,21 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (mapOptions.isLiveEnabled) {
             return res.getString(R.string.map_live);
         }
-        if (mapOptions.mapMode == MapMode.SINGLE) {
-            final Geocache cache = getSingleModeCache();
-            if (cache != null) {
-                return cache.getName();
-            }
+        final Geocache cache = getSingleModeCache();
+        if (cache != null) {
+            return cache.getName();
         }
         return StringUtils.defaultIfEmpty(mapOptions.title, res.getString(R.string.map_map));
     }
 
     @Nullable
-    private Geocache getSingleModeCache() {
+    public Geocache getSingleModeCache() {
         // use a copy of the caches list to avoid concurrent modification
-        for (final Geocache geocache : caches.getAsList()) {
-            if (geocache.getGeocode().equals(mapOptions.geocode)) {
-                return geocache;
+        if (mapOptions.mapMode == MapMode.SINGLE) {
+            for (final Geocache geocache : caches.getAsList()) {
+                if (geocache.getGeocode().equals(mapOptions.geocode)) {
+                    return geocache;
+                }
             }
         }
         return null;
