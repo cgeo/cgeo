@@ -52,7 +52,11 @@ public class CountryFilterFactory implements IFilterFactory {
         public boolean accepts(@NonNull final Geocache cache) {
             final @NonNull String location = cache.getLocation();
 
-            return location != null && location.endsWith(this.location);
+            if (this.location.isEmpty()) {
+                return null == location || location.isEmpty();
+            } else {
+                return null != location && location.endsWith(this.location);
+            }
         }
 
     }
