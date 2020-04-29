@@ -646,10 +646,6 @@
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="settings_title_scale_map_text">Scale Map Text</string>
     <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
-    <string name="settings_title_map_manualrotation_disabled">Disable manual map rotation</string>
-    <string name="settings_summary_map_manualrotation_disabled">Disable controls for manual map rotation</string>
-    <string name="settings_title_map_autorotation_disabled">Disable automatic map rotation</string>
-    <string name="settings_summary_map_autorotation_disabled">Disable automatic map rotation</string>
     <string name="init_map_directory_description">Directory with offline maps</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>
@@ -1127,6 +1123,7 @@
     <string name="map_live">Live map</string>
     <string name="map_view_map">Map view</string>
     <string name="map_modes">Map settings</string>
+    <string name="map_rotation">Map rotation</string>
     <string name="map_hide">Hide</string>
     <string name="map_trail_show">Show trail</string>
     <string name="map_dot_mode">Use compact icons</string>
@@ -1691,4 +1688,8 @@
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
 
+    <!-- switch settings -->
+    <string name="switch_off">Off</string>
+    <string name="switch_manual">Manual</string>
+    <string name="switch_auto">Auto</string>
 </resources>
