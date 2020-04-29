@@ -80,6 +80,10 @@ public class Settings {
     public static final int PROXIMITY_NOTIFICATION_DISTANCE_FAR = 60;
     public static final int PROXIMITY_NOTIFICATION_DISTANCE_NEAR = 20;
 
+    public static final int MAPROTATION_OFF = 0;
+    public static final int MAPROTATION_MANUAL = 1;
+    public static final int MAPROTATION_AUTO = 2;
+
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -603,16 +607,31 @@ public class Settings {
         return getBoolean(R.string.pref_mapsforge_scale_text, true);
     }
 
-    public static boolean isMapManualRotationDisabled() {
-        return getBoolean(R.string.pref_map_manualrotation_disabled, false);
+    public static int getMapRotation() {
+        final String prefValue = getString(R.string.pref_mapRotation, "");
+        if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {
+            return MAPROTATION_OFF;
+        } else if (prefValue.equals(getKey(R.string.pref_maprotation_auto))) {
+            return MAPROTATION_AUTO;
+        }
+        return MAPROTATION_MANUAL;
     }
 
-    public static boolean isMapAutoRotationDisabled() {
-        return getBoolean(R.string.pref_map_autorotation_disabled, true);
-    }
-
-    public static void setMapAutoRotationDisabled(final boolean disabled) {
-        putBoolean(R.string.pref_map_autorotation_disabled, disabled);
+    public static void setMapRotation(final int mapRotation) {
+        switch (mapRotation) {
+            case MAPROTATION_OFF:
+                putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_off));
+                break;
+            case MAPROTATION_MANUAL:
+                putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_manual));
+                break;
+            case MAPROTATION_AUTO:
+                putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_auto));
+                break;
+            default:
+                // do nothing except satisfy static code analysis
+                break;
+        }
     }
 
     public static CoordInputFormatEnum getCoordInputFormat() {

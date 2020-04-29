@@ -7,6 +7,9 @@ import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.settings.Settings;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -129,7 +132,24 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     @Override
     public boolean superOnPrepareOptionsMenu(final Menu menu) {
         final boolean result = super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_map_autorotate).setVisible(true).setChecked(!Settings.isMapAutoRotationDisabled());
+
+        menu.findItem(R.id.menu_map_rotation).setVisible(true);
+
+        final int mapRotation = Settings.getMapRotation();
+        switch (mapRotation) {
+            case MAPROTATION_OFF:
+                menu.findItem(R.id.menu_map_rotation_off).setChecked(true);
+                break;
+            case MAPROTATION_MANUAL:
+                menu.findItem(R.id.menu_map_rotation_manual).setChecked(true);
+                break;
+            case MAPROTATION_AUTO:
+                menu.findItem(R.id.menu_map_rotation_auto).setChecked(true);
+                break;
+            default:
+                break;
+        }
+
         return result;
     }
 

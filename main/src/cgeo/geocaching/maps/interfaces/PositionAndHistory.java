@@ -24,5 +24,5 @@ public interface PositionAndHistory extends Route.RouteUpdater {
 
     void repaintRequired();
 
-    void updateMapAutoRotation();
+    void updateMapRotation();
 }

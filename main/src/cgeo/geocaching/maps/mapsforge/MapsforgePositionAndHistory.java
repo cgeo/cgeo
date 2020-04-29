@@ -118,6 +118,6 @@ public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndH
     }
 
     @Override
-    public void updateMapAutoRotation() {
+    public void updateMapRotation() {
     }
 }

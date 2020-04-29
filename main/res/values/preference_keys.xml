@@ -84,8 +84,7 @@
     <string translatable="false" name="pref_maplanguage">maplanguage</string>
     <string translatable="false" name="pref_mapDirectory">mapDirectory</string>
     <string translatable="false" name="pref_mapsforge_scale_text">mapsforgeScaleText</string>
-    <string translatable="false" name="pref_map_manualrotation_disabled">map_manualrotation_disabled</string>
-    <string translatable="false" name="pref_map_autorotation_disabled">map_autorotation_disabled</string>
+    <string translatable="false" name="pref_mapRotation">mapRotation</string>
     <string translatable="false" name="pref_renderthemepath">renderthemepath</string>
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
@@ -246,4 +245,8 @@
     <string translatable="false" name="pref_value_blue">blue</string>
     <string translatable="false" name="pref_value_green">green</string>
     <string translatable="false" name="pref_value_grey">grey</string>
+
+    <string translatable="false" name="pref_maprotation_off">off</string>
+    <string translatable="false" name="pref_maprotation_manual">manual</string>
+    <string translatable="false" name="pref_maprotation_auto">auto</string>
 </resources>

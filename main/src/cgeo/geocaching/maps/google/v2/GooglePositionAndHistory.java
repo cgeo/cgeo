@@ -9,6 +9,8 @@ import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -50,7 +52,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
-    private boolean isMapAutoRotationDisabled = false;
+    private int mapRotation = MAPROTATION_MANUAL;
 
     private static final int MAX_HISTORY_POINTS = 230; // TODO add alpha, make changeable in constructor?
 
@@ -77,7 +79,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         trailColor = Settings.getTrailColor();
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;
-        updateMapAutoRotation();
+        updateMapRotation();
     }
 
     @Override
@@ -88,7 +90,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             history.rememberTrailPosition(coordinates);
             mapView.setCoordinates(coordinates);
 
-            if (!isMapAutoRotationDisabled) {
+            if (mapRotation == MAPROTATION_AUTO) {
                 if (null != lastBearingCoordinates) {
                     final GoogleMap map = mapRef.get();
                     if (null != map) {
@@ -116,8 +118,12 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         }
     }
 
-    public void updateMapAutoRotation() {
-        this.isMapAutoRotationDisabled = Settings.isMapAutoRotationDisabled();
+    public void updateMapRotation() {
+        this.mapRotation = Settings.getMapRotation();
+        final GoogleMap map = mapRef.get();
+        if (null != map) {
+            map.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
+        }
     }
 
     @Override
