@@ -712,6 +712,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Harita</string>
     <string name="map_source_google_satellite">Google: Uydu</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Çevrimdışı</string>
     <string name="map_source_osm_offline_combined">Kombine (Çevrimdışı)</string>
     <string name="init_sendToCgeo">c:geo\'ya gönder</string>
@@ -827,6 +830,8 @@
     </plurals>
     <string name="cache_waypoints_add">Yol noktası ekle</string>
     <string name="cache_waypoints_add_currentLocation">Mevcut konumu ekle</string>
+    <string name="cache_waypoints_add_fromclipboard">Panodan ekle</string>
+    <string name="cache_waypoints_remove_original_waypoint">Yol noktası panodan bu cache\'e kopyalandı.\n\nOrijinal yol noktası kaldırılsın mı?</string>
     <string name="cache_hint">İpucu</string>
     <string name="cache_hint_not_available">İpucu yok</string>
     <string name="cache_logs">Kayıt defteri</string>
@@ -929,6 +934,7 @@
     <string name="cache_hidden">Yerleştirilme</string>
     <string name="cache_event">Saklanma Tarihi</string>
     <string name="cache_location">Konum</string>
+    <string name="cache_location_country">Ülke</string>
     <string name="cache_coordinates">Koordinatlar</string>
     <string name="cache_calculator">Hesap Makinesi</string>
     <string name="cache_coordinates_original">Orjinal koordinatlar</string>
@@ -952,7 +958,9 @@
     <string name="internal_cache_default_description">Bu bir kullanıcı tanımlı Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">Gidilecek hedefler</string>
+    <string name="init_longtap_map">Haritaya uzun basın</string>
     <string name="goto_targets_list">Dahili cacheler</string>
+    <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
     <string name="cc_hint_minutes">dakika</string>
@@ -1012,6 +1020,7 @@
     <string name="waypoint_delete">Sil</string>
     <string name="waypoint_edit_title">Yol noktasını düzenle</string>
     <string name="waypoint_add_title">Yol noktası ekle</string>
+    <string name="waypoint_added">Yol noktası eklendi</string>
     <string name="waypoint_note">Not</string>
     <string name="waypoint_user_note">Kullanıcı notu</string>
     <string name="waypoint_visited">Ziyaret Edildi</string>
@@ -1034,6 +1043,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Web sitesi üzerindeki Geocache koordinatları değiştirildi: %s.</string>
     <string name="waypoint_done">Bitti</string>
     <string name="waypoint_duplicate">Yol noktasını yinele</string>
+    <string name="waypoint_toclipboard">Yol noktasını panoya kopyala</string>
     <string name="waypoint_copy_of">Kopyası</string>
     <string name="waypointcalc_notes_prompt">Notları buraya giriniz…</string>
     <string name="waypoint_coordinate_formats_plain">Açık koordinat</string>
@@ -1064,6 +1074,7 @@
     <string name="map_theme_builtin">Varsayılan</string>
     <string name="map_theme_select">Harita temasını seçin</string>
     <string name="map_theme_options">Tema Seçenekleri</string>
+    <string name="map_language">Harita dili</string>
     <string name="map_live_enable">Anlık görüntü açık</string>
     <string name="map_live_disable">Anlık görüntü kapalı</string>
     <string name="map_as_list">Liste olarak göster</string>
