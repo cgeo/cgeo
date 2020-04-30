@@ -570,9 +570,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_units">Utilizar as unidades no Sistema Imperial em vez do Sistema Métrico</string>
     <string name="init_log_offline">Registos Offline</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
-    <string name="init_choose_list">Escolher Lista</string>
-    <string name="init_summary_choose_list">Perguntar em qual lista se guarda as geocaches</string>
-    <string name="init_listdisplay">Incluir info. de listas na listagem de caches</string>
+    <string name="init_choose_list">Pedir a escolha de lista</string>
+    <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
+    <string name="init_listdisplay">Indicar listas nas listagens de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
@@ -623,7 +623,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_gpx_exportdir">Directório para exportar GPX</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
     <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
-    <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, …) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
+    <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar rasto</string>
     <string name="init_summary_maptrail">Mostra o rasto no mapa</string>
     <string name="init_trailcolor">Cor do rasto</string>
