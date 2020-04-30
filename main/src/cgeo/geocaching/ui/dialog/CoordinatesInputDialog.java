@@ -412,9 +412,6 @@ public class CoordinatesInputDialog extends DialogFragment {
                 default:
                     break;
             }
-
-            // This will serve as a reminder to the user that the current coordinates might not be valid
-            areCurrentCoordinatesValid(true);
         }
     }
 
