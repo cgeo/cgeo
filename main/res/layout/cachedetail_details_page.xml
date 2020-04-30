@@ -227,7 +227,7 @@
 
                 <TextView
                     android:id="@+id/whereyougo_text"
-                    android:text="@string/cache_start_whereyougo"
+                    android:text="@string/cache_whereyougo_start"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

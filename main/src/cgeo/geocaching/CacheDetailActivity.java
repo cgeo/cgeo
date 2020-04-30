@@ -87,6 +87,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
 import static cgeo.geocaching.apps.cache.WhereYouGoApp.getWhereIGoUrl;
+import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -1523,18 +1524,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final boolean isEnabled = cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
             final LinearLayout boxWYG = view.findViewById(R.id.whereyougo_box);
             boxWYG.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            final TextView msgWYG = view.findViewById(R.id.whereyougo_text);
+            msgWYG.setText(isWhereYouGoInstalled() ? R.string.cache_whereyougo_start : R.string.cache_whereyougo_install);
             if (isEnabled) {
                 final ImageButton buttonWYG = view.findViewById(R.id.send_to_whereyougo);
                 buttonWYG.setOnClickListener(v -> {
-                    final Intent wig = ProcessUtils.getLaunchIntent(getString(R.string.whereyougo_package));
-                    if (null == wig) {
-                        Dialogs.confirm(CacheDetailActivity.this, R.string.start_whereyougo, R.string.need_whereyougo, (dialog, v3) -> {
-                            ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.whereyougo_package));
-                        });
+                    // re-check installation state, might have changed since creating the view
+                    if (isWhereYouGoInstalled()) {
+                        CacheDetailActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
                     } else {
-                        Dialogs.confirm(CacheDetailActivity.this, R.string.start_whereyougo, R.string.redirect_whereyougo, (dialog, v2) -> {
-                            CacheDetailActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
-                        });
+                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.whereyougo_package));
                     }
                 });
             }

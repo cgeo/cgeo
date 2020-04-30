@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -51,5 +52,9 @@ public class WhereYouGoApp extends AbstractGeneralApp {
             return urls.iterator().next();
         }
         return null;
+    }
+
+    public static boolean isWhereYouGoInstalled() {
+        return null != ProcessUtils.getLaunchIntent(getString(R.string.whereyougo_package));
     }
 }
