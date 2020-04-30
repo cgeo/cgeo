@@ -14,5 +14,6 @@
     · New: Sort "goto history" waypoints by newest on top\n
     · New: Add waypoint from single cache map added for Google Maps\n
     · Fix: Crash on moving data to SD card\n
+    · Fix: Empty country filter now filters for caches without a given location\n
   </string>
 </resources>
