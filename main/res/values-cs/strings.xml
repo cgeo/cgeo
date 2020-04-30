@@ -718,6 +718,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
@@ -847,6 +850,7 @@
     </plurals>
     <string name="cache_waypoints_add">Přidat bod trasy</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
+    <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
     <string name="cache_logs">Logbook</string>
