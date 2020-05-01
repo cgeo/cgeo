@@ -291,7 +291,7 @@ public class ImagesList {
                         "image/jpeg"
                 );
             }
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);
         } catch (final Exception e) {
             Log.e("ImagesList.viewImageInStandardApp", e);
