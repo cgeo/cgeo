@@ -3596,7 +3596,7 @@ public class DataStore {
         SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
-        GET_STORED_LOCATIONS_IN_LIST("SELECT c.location, c.geocode FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.location IS NOT NULL AND c.geocode = l.geocode AND l.list_id = ?"),
+        GET_STORED_LOCATIONS_IN_LIST("SELECT DISTINCT c.location FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.location IS NOT NULL AND c.geocode = l.geocode AND l.list_id = ?"),
         GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
         GET_STORED_LOCATIONS_FROM_GEOCODES("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL AND c.geocode IN (%GEOCODE_LIST%)");
 

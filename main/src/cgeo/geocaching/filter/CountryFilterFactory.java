@@ -10,15 +10,16 @@ import android.os.Parcel;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 
 public class CountryFilterFactory implements IFilterFactory {
 
 
     static class CountryFilter extends AbstractFilter {
-        private String location = null;
+        private String location;
 
         public static final Creator<CountryFilter> CREATOR
                 = new Creator<CountryFilter>() {
@@ -39,7 +40,7 @@ public class CountryFilterFactory implements IFilterFactory {
             this.location = location;
         }
 
-        protected CountryFilter(final Parcel in) {
+        CountryFilter(final Parcel in) {
             super(in);
             location = in.readString();
         }
@@ -67,19 +68,24 @@ public class CountryFilterFactory implements IFilterFactory {
     @NonNull
     public List<IFilter> getFilters() {
 
-        final Map<String, IFilter> filters = new HashMap<>();
+        final Map<String, IFilter> filters = new LinkedHashMap<>();
 
         final String separator = ", ";
 
-        // TODO: use DataStore.getStoredLocationsForSet(Set<String>)
-        for (final String location : DataStore.getAllStoredLocations()) {
+        final SortedSet<String> locations = DataStore.getAllStoredLocations();
 
+        for (final String location : locations) {
+
+            // extract the country as the last comma separated part in the location
             final int indexOfSeparator = location.lastIndexOf(separator);
-            final int subStringIndex = indexOfSeparator == -1 ? 0 : indexOfSeparator + separator.length();
+            final int keySubstringIndex = indexOfSeparator == -1 ? 0 : indexOfSeparator;
 
-            final String countryKey = location.substring(subStringIndex);
+            final String countryKey = location.substring(keySubstringIndex);
+
             if (!filters.containsKey(countryKey)) {
-                filters.put(countryKey, new CountryFilter(countryKey, countryKey.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : countryKey));
+                final String countryDisplay = countryKey.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : countryKey;
+
+                filters.put(countryKey, new CountryFilter(countryKey, countryDisplay));
             }
         }
 
