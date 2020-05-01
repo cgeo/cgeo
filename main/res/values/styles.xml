@@ -108,11 +108,12 @@
 
     <!-- button: letter -->
     <style name="button_letter" parent="button">
-        <item name="android:layout_width">40sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minWidth">40sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:layout_marginLeft">10dip</item>
-        <item name="android:layout_marginRight">10dip</item>
+        <item name="android:layout_marginLeft">5dip</item>
+        <item name="android:layout_marginRight">5dip</item>
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
