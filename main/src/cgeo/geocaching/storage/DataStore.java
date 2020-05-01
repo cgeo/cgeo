@@ -3597,7 +3597,7 @@ public class DataStore {
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
         GET_STORED_LOCATIONS_IN_LIST("SELECT c.location, c.geocode FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.location IS NOT NULL AND c.geocode = l.geocode AND l.list_id = ?"),
-        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
+        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT CASE WHEN INSTR(c.location, ', ') = 0 THEN c.location ELSE SUBSTR(c.location, INSTR(c.location, ', ')+2) END location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
         GET_STORED_LOCATIONS_FROM_GEOCODES("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL AND c.geocode IN (%GEOCODE_LIST%)");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();

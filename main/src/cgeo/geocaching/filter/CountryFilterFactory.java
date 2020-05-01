@@ -10,9 +10,8 @@ import android.os.Parcel;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CountryFilterFactory implements IFilterFactory {
 
@@ -67,11 +66,9 @@ public class CountryFilterFactory implements IFilterFactory {
     @NonNull
     public List<IFilter> getFilters() {
 
-        final Map<String, IFilter> filters = new HashMap<>();
-
+        final LinkedHashMap<String, IFilter> filters = new LinkedHashMap<>();
         final String separator = ", ";
 
-        // TODO: use DataStore.getStoredLocationsForSet(Set<String>)
         for (final String location : DataStore.getAllStoredLocations()) {
 
             final int indexOfSeparator = location.lastIndexOf(separator);
