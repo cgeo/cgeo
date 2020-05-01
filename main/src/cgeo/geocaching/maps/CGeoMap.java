@@ -882,6 +882,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             case R.id.menu_clear_individual_route: {
                 route.clearRoute(overlayPositionAndScale);
+                overlayPositionAndScale.repaintRequired();
                 ActivityMixin.invalidateOptionsMenu(activity);
                 ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
                 return true;
