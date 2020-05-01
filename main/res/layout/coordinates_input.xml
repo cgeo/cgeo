@@ -18,7 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:shrinkColumns="0,1,3,5,7"
+        android:shrinkColumns="1,3,5,7"
         android:stretchColumns="0,1,3,5,7" >
 
         <TableRow android:id="@+id/latRow" >
