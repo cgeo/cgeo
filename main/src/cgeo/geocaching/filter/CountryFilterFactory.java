@@ -10,18 +10,18 @@ import android.os.Parcel;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CountryFilterFactory implements IFilterFactory {
 
 
     static class CountryFilter extends AbstractFilter {
-        private String location = null;
+        private @NonNull String location;
 
-        public static final Creator<CountryFilter> CREATOR
-                = new Creator<CountryFilter>() {
+        public static final Creator<CountryFilter> CREATOR = new Creator<CountryFilter>() {
 
             @Override
             public CountryFilter createFromParcel(final Parcel in) {
@@ -36,12 +36,12 @@ public class CountryFilterFactory implements IFilterFactory {
 
         CountryFilter(final String location, final String title) {
             super(title);
-            this.location = location;
+            this.location = Objects.requireNonNull(location);
         }
 
-        protected CountryFilter(final Parcel in) {
+        CountryFilter(final Parcel in) {
             super(in);
-            location = in.readString();
+            location = Objects.requireNonNull(in.readString());
         }
 
         @Override
@@ -51,13 +51,13 @@ public class CountryFilterFactory implements IFilterFactory {
         }
 
         @Override
-        public boolean accepts(@NonNull final Geocache cache) {
+        public boolean accepts(final @NonNull Geocache cache) {
             final @NonNull String location = cache.getLocation();
 
             if (this.location.isEmpty()) {
-                return null == location || location.isEmpty();
+                return location.isEmpty();
             } else {
-                return null != location && location.endsWith(this.location);
+                return location.endsWith(this.location);
             }
         }
 
@@ -67,19 +67,14 @@ public class CountryFilterFactory implements IFilterFactory {
     @NonNull
     public List<IFilter> getFilters() {
 
-        final Map<String, IFilter> filters = new HashMap<>();
+        final Map<String, IFilter> filters = new LinkedHashMap<>();
 
-        final String separator = ", ";
+        for (final String country : DataStore.getAllStoredCountries()) {
 
-        // TODO: use DataStore.getStoredLocationsForSet(Set<String>)
-        for (final String location : DataStore.getAllStoredLocations()) {
+            if (!filters.containsKey(country)) {
+                final String countryDisplay = country.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : country;
 
-            final int indexOfSeparator = location.lastIndexOf(separator);
-            final int subStringIndex = indexOfSeparator == -1 ? 0 : indexOfSeparator + separator.length();
-
-            final String countryKey = location.substring(subStringIndex);
-            if (!filters.containsKey(countryKey)) {
-                filters.put(countryKey, new CountryFilter(countryKey, countryKey.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : countryKey));
+                filters.put(country, new CountryFilter(country, countryDisplay));
             }
         }
 
