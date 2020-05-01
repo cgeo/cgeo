@@ -12,9 +12,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import java.util.concurrent.Callable;
-
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,7 +47,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                     activity.getString(R.string.init_sendToCgeo_registering), true);
             progressDialog.setCancelable(false);
 
-            AndroidRxUtils.bindActivity(activity, Observable.defer((Callable<Observable<Integer>>) () -> {
+            AndroidRxUtils.bindActivity(activity, Observable.defer(() -> {
                 final String nam = StringUtils.defaultString(deviceName);
                 final String cod = StringUtils.defaultString(deviceCode);
 

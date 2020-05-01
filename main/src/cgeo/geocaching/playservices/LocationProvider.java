@@ -20,11 +20,10 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.disposables.Disposables;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.subjects.ReplaySubject;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observers.DisposableObserver;
+import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 public class LocationProvider extends LocationCallback implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -87,7 +86,7 @@ public class LocationProvider extends LocationCallback implements GoogleApiClien
                     emitter.onComplete();
                 }
             });
-            emitter.setDisposable(Disposables.fromRunnable(() -> {
+            emitter.setDisposable(Disposable.fromRunnable(() -> {
                 disposable.dispose();
                 AndroidRxUtils.looperCallbacksScheduler.scheduleDirect(() -> {
                     if (reference.decrementAndGet() == 0) {

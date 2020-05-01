@@ -14,7 +14,7 @@ import androidx.loader.content.AsyncTaskLoader;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.functions.Function;
 
 public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult> {
 

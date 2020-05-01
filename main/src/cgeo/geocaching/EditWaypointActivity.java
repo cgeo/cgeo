@@ -62,7 +62,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;

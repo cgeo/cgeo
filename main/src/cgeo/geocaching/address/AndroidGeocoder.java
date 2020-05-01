@@ -12,10 +12,9 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class AndroidGeocoder {
@@ -59,7 +58,7 @@ public class AndroidGeocoder {
         if (!Geocoder.isPresent()) {
             return Single.error(new RuntimeException("no Android reverse geocoder"));
         }
-        return Observable.defer((Callable<Observable<Address>>) () -> {
+        return Observable.defer(() -> {
             try {
                 return addressesToObservable(geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1));
             } catch (final Exception e) {

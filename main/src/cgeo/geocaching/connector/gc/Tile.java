@@ -19,8 +19,8 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import io.reactivex.Single;
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
 
 /**

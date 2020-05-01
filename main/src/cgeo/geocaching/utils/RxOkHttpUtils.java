@@ -3,8 +3,8 @@ package cgeo.geocaching.utils;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import io.reactivex.Single;
-import io.reactivex.disposables.Disposables;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -28,7 +28,7 @@ public class RxOkHttpUtils {
         return Single.create(singleEmitter -> {
             final Call call = client.newCall(request);
             final AtomicBoolean completed = new AtomicBoolean(false);
-            singleEmitter.setDisposable(Disposables.fromRunnable(() -> {
+            singleEmitter.setDisposable(Disposable.fromRunnable(() -> {
                 if (!completed.get()) {
                     call.cancel();
                 }

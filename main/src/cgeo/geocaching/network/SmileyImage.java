@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**

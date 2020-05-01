@@ -14,7 +14,7 @@ import android.os.Build.VERSION_CODES;
 
 import androidx.annotation.RequiresApi;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class GnssStatusProvider {
 

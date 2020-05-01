@@ -33,7 +33,7 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Set;
 
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
 public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {

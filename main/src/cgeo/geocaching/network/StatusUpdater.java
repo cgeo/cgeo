@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import org.apache.commons.lang3.StringUtils;
 
 public class StatusUpdater {

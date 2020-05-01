@@ -27,9 +27,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.core.Maybe;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -325,8 +325,8 @@ public class SearchResult implements Parcelable {
             return Maybe.fromCallable(() -> {
                 try {
                     return func.apply(connector);
-                } catch (final Exception e) {
-                    Log.w("parallelCombineActive: swallowing error from connector " + connector, e);
+                } catch (final Throwable t) {
+                    Log.w("parallelCombineActive: swallowing error from connector " + connector, t);
                     return null;
                 }
             }).subscribeOn(AndroidRxUtils.networkScheduler);

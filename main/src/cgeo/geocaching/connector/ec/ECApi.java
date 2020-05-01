@@ -31,8 +31,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.reactivex.Single;
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

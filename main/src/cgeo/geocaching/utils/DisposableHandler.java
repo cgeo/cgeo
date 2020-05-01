@@ -8,8 +8,8 @@ import android.os.Message;
 
 import androidx.annotation.StringRes;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * Handler with a dispose policy. Once disposed, the handler will not handle

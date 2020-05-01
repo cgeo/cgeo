@@ -20,7 +20,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
 /**
