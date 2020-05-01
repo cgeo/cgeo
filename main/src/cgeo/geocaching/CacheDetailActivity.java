@@ -1873,14 +1873,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final Button addWaypointCurrent = header.findViewById(R.id.add_waypoint_currentlocation);
             addWaypointCurrent.setOnClickListener(v -> {
-                ensureSaved();
-                final Waypoint waypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                waypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
-                waypoint.setGeocode(cache.getGeocode());
-                cache.addOrChangeWaypoint(waypoint, true);
-                addWaypointAndSort(sortedWaypoints, waypoint);
-                adapter.notifyDataSetChanged();
-                ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        ensureSaved();
+                        final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                        newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                        newWaypoint.setGeocode(cache.getGeocode());
+                        cache.addOrChangeWaypoint(newWaypoint, true);
+                        addWaypointAndSort(sortedWaypoints, newWaypoint);
+                        return true;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            adapter.notifyDataSetChanged();
+                            ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
+                        }
+                    }
+                }.execute();
             });
 
             // read waypoint from clipboard
