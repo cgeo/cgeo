@@ -10,6 +10,7 @@ import android.os.Parcel;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,23 +68,31 @@ public class CountryFilterFactory implements IFilterFactory {
     @NonNull
     public List<IFilter> getFilters() {
 
-        final Map<String, IFilter> filters = new HashMap<>();
-
+        // which countries do we have?
+        final Map<String, String> tempUnsorted = new HashMap<>();
         final String separator = ", ";
-
-        // TODO: use DataStore.getStoredLocationsForSet(Set<String>)
         for (final String location : DataStore.getAllStoredLocations()) {
-
             final int indexOfSeparator = location.lastIndexOf(separator);
             final int subStringIndex = indexOfSeparator == -1 ? 0 : indexOfSeparator + separator.length();
-
             final String countryKey = location.substring(subStringIndex);
-            if (!filters.containsKey(countryKey)) {
-                filters.put(countryKey, new CountryFilter(countryKey, countryKey.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : countryKey));
+            if (!tempUnsorted.containsKey(countryKey)) {
+                tempUnsorted.put(countryKey, countryKey);
             }
         }
 
-        return new ArrayList<>(filters.values());
+        // sort them
+        final List<String> tempSorted = new ArrayList<>(tempUnsorted.size());
+        for (final String countryKey : tempUnsorted.keySet()) {
+            tempSorted.add(countryKey);
+        }
+        Collections.sort(tempSorted);
+
+        // create filters and return sorted filter list
+        final List<IFilter> sorted = new ArrayList<>();
+        for (final String countryKey : tempSorted) {
+            sorted.add(new CountryFilter(countryKey, countryKey.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : countryKey));
+        }
+        return sorted;
     }
 
 }
