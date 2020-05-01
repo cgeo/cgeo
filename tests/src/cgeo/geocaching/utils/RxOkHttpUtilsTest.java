@@ -3,7 +3,7 @@ package cgeo.geocaching.utils;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;

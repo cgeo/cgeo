@@ -22,11 +22,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
@@ -338,7 +337,7 @@ public final class LocalStorage {
     public static void changeExternalPrivateCgeoDir(final SettingsActivity fromActivity, final String newExtDir) {
         final Progress progress = new Progress();
         progress.show(fromActivity, fromActivity.getString(R.string.init_datadirmove_datadirmove), fromActivity.getString(R.string.init_datadirmove_running), ProgressDialog.STYLE_HORIZONTAL, null);
-        AndroidRxUtils.bindActivity(fromActivity, Observable.defer((Callable<Observable<Boolean>>) () -> {
+        AndroidRxUtils.bindActivity(fromActivity, Observable.defer(() -> {
             final File newDataDir = new File(newExtDir, GEOCACHE_DATA_DIR_NAME);
             final File currentDataDir = new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
             Log.i("Moving geocache data to " + newDataDir.getAbsolutePath());

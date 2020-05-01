@@ -14,7 +14,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import io.reactivex.Maybe;
+import io.reactivex.rxjava3.core.Maybe;
 import org.apache.commons.lang3.StringUtils;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOAuthCapability {

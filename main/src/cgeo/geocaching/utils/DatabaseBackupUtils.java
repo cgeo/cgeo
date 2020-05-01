@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
 public class DatabaseBackupUtils {

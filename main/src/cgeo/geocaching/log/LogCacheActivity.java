@@ -61,11 +61,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
@@ -381,7 +380,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         AndroidRxUtils.bindActivity(this,
             // Obtain the actives connectors
             Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
-            .flatMap((Function<TrackableConnector, Observable<TrackableLog>>) trackableConnector -> Observable.defer((Callable<Observable<TrackableLog>>) () -> trackableConnector.trackableLogInventory()).subscribeOn(AndroidRxUtils.networkScheduler)).toList()
+            .flatMap((Function<TrackableConnector, Observable<TrackableLog>>) trackableConnector -> Observable.defer(() -> trackableConnector.trackableLogInventory()).subscribeOn(AndroidRxUtils.networkScheduler)).toList()
         ).subscribe(trackableLogs -> {
             // Store trackables
             trackables.addAll(trackableLogs);

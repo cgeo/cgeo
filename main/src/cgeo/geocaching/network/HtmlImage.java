@@ -32,16 +32,15 @@ import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Completable;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.disposables.CancellableDisposable;
-import io.reactivex.processors.PublishProcessor;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.internal.disposables.CancellableDisposable;
+import io.reactivex.rxjava3.processors.PublishProcessor;
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -195,7 +194,7 @@ public class HtmlImage implements Html.ImageGetter {
         // Explicit local file URLs are loaded from the filesystem regardless of their age. The IO part is short
         // enough to make the whole operation on the computation scheduler.
         if (FileUtils.isFileUrl(url)) {
-            return Observable.defer((Callable<Observable<BitmapDrawable>>) () -> {
+            return Observable.defer(() -> {
                 final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
                 return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);

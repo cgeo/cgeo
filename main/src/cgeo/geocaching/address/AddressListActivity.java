@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
 
 public class AddressListActivity extends AbstractActionBarActivity implements AddressClickListener {
@@ -43,7 +43,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
-                .onErrorResumeNext(MapQuestGeocoder.getFromLocationName(keyword));
+                .onErrorResumeWith(MapQuestGeocoder.getFromLocationName(keyword));
         AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(foundAddresses -> {
             waitDialog.dismiss();
             addresses.addAll(foundAddresses);

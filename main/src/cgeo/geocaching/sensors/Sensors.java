@@ -15,9 +15,10 @@ import androidx.annotation.NonNull;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 
 public class Sensors {
 
@@ -64,7 +65,7 @@ public class Sensors {
         if (useGooglePlayServices) {
             geoDataObservable = LocationProvider.getMostPrecise(application).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
             if (useLowPowerLocation) {
-                geoDataObservableLowPower = LocationProvider.getLowPower(application).doOnNext(rememberGeodataAction).onErrorResumeNext(geoDataObservable);
+                geoDataObservableLowPower = LocationProvider.getLowPower(application).doOnNext(rememberGeodataAction).onErrorResumeWith(geoDataObservable);
             } else {
                 geoDataObservableLowPower = geoDataObservable;
             }
@@ -106,7 +107,7 @@ public class Sensors {
         final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext((Function<Throwable, Observable<Float>>) throwable -> {
             Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
             Settings.setUseCompass(false);
-            return Observable.<Float>never().startWith(0.0f);
+            return Observable.<Float>never().startWith(Single.just(0.0f));
         }).filter(aFloat -> Settings.isUseCompass() && !useDirectionFromGps.get());
 
         final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(geoData -> {

@@ -26,10 +26,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.concurrent.Callable;
-
 import butterknife.BindView;
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractCredentialsAuthorizationActivity extends AbstractActivity {
@@ -102,7 +100,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 res.getString(R.string.init_login_popup), getAuthDialogWait(), true);
         loginDialog.setCancelable(false);
 
-        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer((Callable<Observable<StatusCode>>) () -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
+        AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(() -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
             loginDialog.dismiss();
             if (statusCode == StatusCode.NO_ERROR) {
                 setCredentials(credentials);

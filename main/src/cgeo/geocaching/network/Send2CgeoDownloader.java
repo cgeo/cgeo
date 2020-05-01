@@ -9,7 +9,7 @@ import cgeo.geocaching.utils.Log;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Scheduler;
+import io.reactivex.rxjava3.core.Scheduler;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 

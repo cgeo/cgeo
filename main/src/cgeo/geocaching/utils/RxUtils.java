@@ -2,18 +2,17 @@ package cgeo.geocaching.utils;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableOperator;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.internal.disposables.CancellableDisposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOperator;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.internal.disposables.CancellableDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RxUtils {
 
@@ -23,7 +22,7 @@ public class RxUtils {
 
     public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
         final AtomicReference<T> lastValue = new AtomicReference<>(initialValue);
-        return observable.doOnNext(value -> lastValue.set(value)).startWith(Observable.defer((Callable<Observable<T>>) () -> {
+        return observable.doOnNext(value -> lastValue.set(value)).startWith(Observable.defer(() -> {
             final T last = lastValue.get();
             return last != null ? Observable.just(last) : Observable.<T>empty();
         })).replay(1).refCount();
@@ -68,8 +67,8 @@ public class RxUtils {
                 final Observable<V> value = func.apply(key).replay(1).refCount();
                 cached.put(key, value);
                 return value;
-            } catch (final Exception e) {
-                final Observable<V> error = Observable.error(e);
+            } catch (final Throwable t) {
+                final Observable<V> error = Observable.error(t);
                 cached.put(key, error);
                 return error;
             }

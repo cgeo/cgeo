@@ -52,7 +52,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -61,9 +60,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -291,7 +290,7 @@ public final class GCParser {
 
         if (!cids.isEmpty() && Settings.isGCPremiumMember()) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
-            final Observable<Set<Geocache>> storedCaches = Observable.defer((Callable<Observable<Set<Geocache>>>) () -> Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB))).subscribeOn(Schedulers.io()).cache();
+            final Observable<Set<Geocache>> storedCaches = Observable.defer(() -> Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB))).subscribeOn(Schedulers.io()).cache();
             storedCaches.subscribe();  // Force asynchronous start of database loading
 
             try {
@@ -1007,7 +1006,7 @@ public final class GCParser {
      * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
      * Executes on the network scheduler.
      */
-    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer((Callable<Observable<List<PocketQuery>>>) () -> {
+    public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(() -> {
         final Parameters params = new Parameters();
 
         final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
@@ -1587,7 +1586,7 @@ public final class GCParser {
             return Observable.empty();
         }
 
-        return Observable.defer((Callable<Observable<LogEntry>>) () -> {
+        return Observable.defer(() -> {
             final Parameters params = new Parameters(
                     "tkn", userToken,
                     "idx", "1",
@@ -1788,7 +1787,7 @@ public final class GCParser {
         }
 
         // Wait for completion of logs parsing, retrieving and merging
-        mergedLogs.toCompletable().blockingAwait();
+        mergedLogs.ignoreElement().blockingAwait();
     }
 
     /**

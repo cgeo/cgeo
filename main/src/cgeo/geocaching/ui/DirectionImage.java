@@ -4,7 +4,7 @@ import cgeo.geocaching.network.HtmlImage;
 
 import android.graphics.drawable.BitmapDrawable;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class DirectionImage {
 
