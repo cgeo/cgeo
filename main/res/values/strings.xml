@@ -389,6 +389,7 @@
     <string name="caches_filter_own_waypoint">With user defined waypoints</string>
     <string name="caches_filter_missing_gcvote">Found caches not voted</string>
     <string name="caches_filter_lists">Assigned to a list</string>
+    <string name="caches_filter_empty">(empty)</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>

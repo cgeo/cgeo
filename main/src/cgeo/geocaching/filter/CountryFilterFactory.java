@@ -1,5 +1,7 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
@@ -76,9 +78,8 @@ public class CountryFilterFactory implements IFilterFactory {
             final int subStringIndex = indexOfSeparator == -1 ? 0 : indexOfSeparator + separator.length();
 
             final String countryKey = location.substring(subStringIndex);
-
             if (!filters.containsKey(countryKey)) {
-                filters.put(countryKey, new CountryFilter(countryKey, countryKey));
+                filters.put(countryKey, new CountryFilter(countryKey, countryKey.isEmpty() ? CgeoApplication.getInstance().getString(R.string.caches_filter_empty) : countryKey));
             }
         }
 
