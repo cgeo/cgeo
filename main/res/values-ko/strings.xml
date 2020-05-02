@@ -369,6 +369,7 @@
     <string name="caches_filter_own_waypoint">사용자 정의 지점을 사용하기</string>
     <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
     <string name="caches_filter_lists">목록에 할당</string>
+    <string name="caches_filter_empty">(없음)</string>
     <string name="caches_removing_from_history">이전 기록에서 제거중…</string>
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
