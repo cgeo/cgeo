@@ -16,6 +16,7 @@
     · New: Sort "goto history" waypoints by newest on top\n
     · New: Add waypoint from single cache map added for Google Maps\n
     · New: Allow starting WhereYouGo from cache detail's main page\n
+    · New: Open images from cache detail page in separate task (use long press)\n
     · Fix: Crash on moving data to SD card\n
     · Fix: A couple of minor issues\n
   </string>
