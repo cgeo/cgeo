@@ -7,15 +7,15 @@
     · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
     · Change: Coordinate editor: Validation deferred to save coordinates\n
-    · New: Show info on completion of "add current location"\n
+    · New: Show info on completion of \"add current location\"\n
     · New: Add option to clear the goto history\n
     · New: Support other OSM based online map sources\n
     · New: Add support for multilingual OSM maps\n
     · New: Implemented Filtering by Country\n
     · New: Copy waypoints between caches\n
-    · New: Sort "goto history" waypoints by newest on top\n
+    · New: Sort \"goto history\" waypoints by newest on top\n
     · New: Add waypoint from single cache map added for Google Maps\n
-    · New: Allow starting WhereYouGo from cache detail's main page\n
+    · New: Allow starting WhereYouGo from cache detail\'s main page\n
     · New: Open images from cache detail page in separate task (use long press)\n
     · Fix: Crash on moving data to SD card\n
     · Fix: A couple of minor issues\n
