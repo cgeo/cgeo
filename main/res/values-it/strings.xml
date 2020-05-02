@@ -370,6 +370,7 @@
     <string name="caches_filter_own_waypoint">Con waypoint definiti dall\'utente</string>
     <string name="caches_filter_missing_gcvote">Trovati cache non votati</string>
     <string name="caches_filter_lists">Assegnato a una lista</string>
+    <string name="caches_filter_empty">(vuoto)</string>
     <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
     <string name="caches_clear_offlinelogs">Cancella i log offline</string>
     <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
