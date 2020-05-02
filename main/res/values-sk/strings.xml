@@ -372,6 +372,7 @@
     <string name="caches_filter_own_waypoint">S vlastnými bodmi trasy (waypoint)</string>
     <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
     <string name="caches_filter_lists">Zaradené do zoznamu</string>
+    <string name="caches_filter_empty">(prázdny)</string>
     <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
     <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
