@@ -55,8 +55,6 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -1613,7 +1611,7 @@ public final class GCParser {
         }).subscribeOn(AndroidRxUtils.networkScheduler);
     }
 
-    private static Observable<LogEntry> parseLogsAndClose(final boolean markAsFriendsLog, @Nonnull final InputStream responseStream) {
+    private static Observable<LogEntry> parseLogsAndClose(final boolean markAsFriendsLog, @NonNull final InputStream responseStream) {
         return Observable.create(emitter -> {
             try {
                 final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
