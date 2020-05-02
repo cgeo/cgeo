@@ -370,6 +370,7 @@
     <string name="caches_filter_own_waypoint">Met door de gebruiker gedefinieerde waypoints</string>
     <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
     <string name="caches_filter_lists">Toegewezen aan een lijst</string>
+    <string name="caches_filter_empty">(leeg)</string>
     <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
