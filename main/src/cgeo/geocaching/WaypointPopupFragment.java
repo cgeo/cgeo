@@ -100,7 +100,14 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             //Waypoint geocode
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
             waypointDistance = details.addDistance(waypoint, waypointDistance);
-            details.addHtml(R.string.waypoint_note, waypoint.getNote(), waypoint.getGeocode());
+            final String note = waypoint.getNote();
+            if (StringUtils.isNotBlank(note)) {
+                details.addHtml(R.string.waypoint_note, note, waypoint.getGeocode());
+            }
+            final String userNote = waypoint.getUserNote();
+            if (StringUtils.isNotBlank(userNote)) {
+                details.addHtml(R.string.waypoint_user_note, userNote, waypoint.getGeocode());
+            }
 
             toggleVisited.setChecked(waypoint.isVisited());
             toggleVisited.setOnClickListener(arg1 -> {
