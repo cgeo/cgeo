@@ -370,6 +370,7 @@
     <string name="caches_filter_own_waypoint">Com waypoints definidos por si</string>
     <string name="caches_filter_missing_gcvote">Caches que encontrou por votar</string>
     <string name="caches_filter_lists">Atribuída a uma lista</string>
+    <string name="caches_filter_empty">(vazio)</string>
     <string name="caches_removing_from_history">A remover do histórico…</string>
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
