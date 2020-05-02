@@ -366,6 +366,7 @@
     <string name="caches_filter_own_waypoint">Avec points de passage définis par l’utilisateur</string>
     <string name="caches_filter_missing_gcvote">Caches trouvées et sans vote</string>
     <string name="caches_filter_lists">Assigné à une liste</string>
+    <string name="caches_filter_empty">(vide)</string>
     <string name="caches_removing_from_history">Suppression de l\'historique…</string>
     <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
     <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
