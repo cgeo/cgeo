@@ -370,6 +370,7 @@
     <string name="caches_filter_own_waypoint">Käyttäjän määrittämiä välipisteitä</string>
     <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
     <string name="caches_filter_lists">Asetettu listaan</string>
+    <string name="caches_filter_empty">(tyhjä)</string>
     <string name="caches_removing_from_history">Poistetaan historiasta…</string>
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
@@ -1070,7 +1071,7 @@
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
     <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
-    <string name="map_archived_hide">Piilosta arkistoidut kätköt</string>
+    <string name="map_archived_hide">Piilota arkistoidut kätköt</string>
     <string name="map_hidewp_original">Piilota alkuperäiset reittipisteet</string>
     <string name="map_hidewp_parking">Piilota parkkipaikka-reittipisteet</string>
     <string name="map_hidewp_visited">Piilota vieraillut reittipisteet</string>
