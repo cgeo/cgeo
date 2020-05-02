@@ -64,6 +64,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -3400,52 +3401,58 @@ public class DataStore {
         }
     }
 
-    private static String fetchLocation(final Cursor cursor) {
-        return cursor.getString(cursor.getColumnIndex("location"));
+    private static @NonNull String fetchLocation(final Cursor cursor) {
+        final String location = cursor.getString(cursor.getColumnIndex("location"));
+
+        return location == null ? "" : location;
     }
 
-    public static SortedSet<String> getStoredLocationsInList(final int listId) {
+    private static @NonNull String getCountry(final String location) {
+        final String separator = ", ";
 
-        init();
+        final int indexOfSeparator = location.lastIndexOf(separator);
 
-        final Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_IN_LIST.query, new String[] {Integer.toString(listId)});
-
-        return cursorToColl(cursor, new TreeSet<>(String::compareTo), DataStore::fetchLocation);
+        if (indexOfSeparator == -1) {
+            return location;
+        } else {
+            // extract the country as the last comma separated part in the location
+            return location.substring(indexOfSeparator + separator.length());
+        }
     }
+
+    private static @NonNull String fetchCountry(final Cursor cursor) {
+        return getCountry(fetchLocation(cursor));
+    }
+
+    // Sort the (empty) filter at the top
+    public static final Comparator<String> COUNTRY_SORT_ORDER = (a, b) -> a == null ? -1 : a.compareToIgnoreCase(b);
+
+    // Sort the (empty) filter at the top, then by country, then by rest of the location
+    public static final Comparator<String> LOCATION_SORT_ORDER = (a, b) -> {
+        final String countryA = getCountry(a), countryB = getCountry(b);
+        final int compare = a == null ? -1 : COUNTRY_SORT_ORDER.compare(countryA, countryB);
+
+        if (compare == 0) {
+            return a.compareToIgnoreCase(b);
+        } else {
+            return compare;
+        }
+    };
 
     public static SortedSet<String> getAllStoredLocations() {
-
         init();
 
         final Cursor cursor = database.rawQuery(PreparedStatement.GET_ALL_STORED_LOCATIONS.query, new String[0]);
 
-        return cursorToColl(cursor, new TreeSet<>(String::compareTo), DataStore::fetchLocation);
+        return cursorToColl(cursor, new TreeSet<>(LOCATION_SORT_ORDER), DataStore::fetchLocation);
     }
 
-    public static SortedSet<String> getStoredLocationsForSet(final Set<String> geocodes) {
-
-        final SortedSet<String> locations = new TreeSet<>(String::compareTo);
-
-        if (geocodes.isEmpty()) {
-            return locations;
-        }
-
+    public static SortedSet<String> getAllStoredCountries() {
         init();
 
-        final StringBuilder geoCodePlaceholderList = new StringBuilder();
+        final Cursor cursor = database.rawQuery(PreparedStatement.GET_ALL_STORED_LOCATIONS.query, new String[0]);
 
-        final int length = geocodes.size();
-
-        for (int i = 0; i < length; i++) {
-            geoCodePlaceholderList.append("?");
-            if (i < length - 1) {
-                geoCodePlaceholderList.append(", ");
-            }
-        }
-
-        final Cursor cursor = database.rawQuery(PreparedStatement.GET_STORED_LOCATIONS_FROM_GEOCODES.query.replace("%GEOCODE_LIST%", geoCodePlaceholderList), geocodes.toArray(new String[length]));
-
-        return cursorToColl(cursor, locations, DataStore::fetchLocation);
+        return cursorToColl(cursor, new TreeSet<>(COUNTRY_SORT_ORDER), DataStore::fetchCountry);
     }
 
     public static boolean isInitialized() {
@@ -3596,9 +3603,7 @@ public class DataStore {
         SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
-        GET_STORED_LOCATIONS_IN_LIST("SELECT c.location, c.geocode FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.location IS NOT NULL AND c.geocode = l.geocode AND l.list_id = ?"),
-        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
-        GET_STORED_LOCATIONS_FROM_GEOCODES("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL AND c.geocode IN (%GEOCODE_LIST%)");
+        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
