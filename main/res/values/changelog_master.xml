@@ -13,6 +13,7 @@
     · New: Copy waypoints between caches\n
     · New: Sort "goto history" waypoints by newest on top\n
     · New: Add waypoint from single cache map added for Google Maps\n
+    · New: Allow starting WhereYouGo from cache detail's main page\n
     · Fix: Crash on moving data to SD card\n
     · Fix: Empty country filter now filters for caches without a given location\n
   </string>
