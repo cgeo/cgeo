@@ -1391,4 +1391,5 @@
     <string name="unit_ft">pēda</string>
     <string name="unit_yd">jards</string>
     <string name="unit_mi">jūdze</string>
+    <!-- switch settings -->
 </resources>
