@@ -370,6 +370,7 @@
     <string name="caches_filter_own_waypoint">Mit eigenen Wegpunkten</string>
     <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
     <string name="caches_filter_lists">Einer Liste zugewiesen</string>
+    <string name="caches_filter_empty">(leer)</string>
     <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -614,10 +615,6 @@
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="settings_title_scale_map_text">Textgröße anpassen</string>
     <string name="settings_summary_scale_map_text">Textgröße der Bezeichnungen auf der Offline-Karte entsprechend der Bildschirmauflösung anpassen</string>
-    <string name="settings_title_map_manualrotation_disabled">Manuelle Kartendrehung deaktivieren</string>
-    <string name="settings_summary_map_manualrotation_disabled">Gesten für manuelle Kartenrotation deaktivieren</string>
-    <string name="settings_title_map_autorotation_disabled">Automatische Kartendrehung deaktivieren</string>
-    <string name="settings_summary_map_autorotation_disabled">Automatische Kartendrehung deaktivieren</string>
     <string name="init_map_directory_description">Verzeichnis mit Offline-Karten</string>
     <string name="init_gpx_exportdir">Verzeichnis für GPX-Exporte</string>
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
@@ -956,7 +953,8 @@
     <string name="cache_share_field">Weiterleiten</string>
     <string name="cache_time_full_hours">Uhr</string>
     <string name="cache_listed_on">Geführt auf %s</string>
-    <string name="user_defined_caches">Benutzerdefinierte Caches</string>
+    <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
+    <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="internal_cache_default_name">Benutzerdefinierter Cache #%1$d</string>
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
@@ -1063,10 +1061,10 @@
     <string name="map_live">Live-Karte</string>
     <string name="map_view_map">Karte</string>
     <string name="map_modes">Karteneinstellungen</string>
+    <string name="map_rotation">Kartendrehung</string>
     <string name="map_hide">Verbergen</string>
     <string name="map_trail_show">Spur einblenden</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
-    <string name="map_autorotate">Automatische Kartendrehung</string>
     <string name="map_circles_show">Kreise anzeigen</string>
     <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
     <string name="map_disabled_hide">Deaktivierte Caches ausblenden</string>
@@ -1597,4 +1595,8 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
+    <!-- switch settings -->
+    <string name="switch_off">Aus</string>
+    <string name="switch_manual">Manuell</string>
+    <string name="switch_auto">Auto</string>
 </resources>
