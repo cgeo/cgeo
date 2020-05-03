@@ -616,10 +616,6 @@
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="settings_title_scale_map_text">Měřítko textu mapy</string>
     <string name="settings_summary_scale_map_text">Velikost textových popisků offline mapy dle DPI zařízení</string>
-    <string name="settings_title_map_manualrotation_disabled">Zakázat ruční otáčení mapy</string>
-    <string name="settings_summary_map_manualrotation_disabled">Vypnout ovládací prvky pro ruční otáčení mapy</string>
-    <string name="settings_title_map_autorotation_disabled">Zakázat automatické otáčení mapy</string>
-    <string name="settings_summary_map_autorotation_disabled">Zakázat automatické otáčení mapy</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_gpx_exportdir">Složka pro GPX export</string>
     <string name="init_gpx_importdir">Složka pro GPX import</string>
@@ -970,7 +966,6 @@
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
-    <string name="user_defined_caches">Uživatelem definované kešky</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
@@ -1076,7 +1071,6 @@
     <string name="map_hide">Skrýt</string>
     <string name="map_trail_show">Zobrazit záznam trasy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
-    <string name="map_autorotate">Automatické otáčení mapy</string>
     <string name="map_circles_show">Zobrazit kruhy</string>
     <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
     <string name="map_disabled_hide">Skrýt deaktivované keše</string>
@@ -1629,4 +1623,5 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mil</string>
+    <!-- switch settings -->
 </resources>
