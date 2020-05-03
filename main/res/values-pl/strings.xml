@@ -616,10 +616,6 @@
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="settings_title_scale_map_text">Skaluj tekst na mapie</string>
     <string name="settings_summary_scale_map_text">Dostosowuje skalę tekstu na mapie offline do dpi urządzenia</string>
-    <string name="settings_title_map_manualrotation_disabled">Wyłącz ręczny obrót mapy</string>
-    <string name="settings_summary_map_manualrotation_disabled">Wyłącz przełączniki ręcznego obrotu mapy</string>
-    <string name="settings_title_map_autorotation_disabled">Wyłącz automatyczny obrót mapy</string>
-    <string name="settings_summary_map_autorotation_disabled">Wyłącz automatyczny obrót mapy</string>
     <string name="init_map_directory_description">Katalog z mapami offline</string>
     <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
     <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
@@ -966,7 +962,6 @@
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
-    <string name="user_defined_caches">Skrzynki zdefiniowane przez użytkownika</string>
     <string name="create_internal_cache">Utwórz skrzynkę zdefiniowaną przez użytkownika</string>
     <string name="internal_cache_default_name">Skrzynka zdefiniowana przez użytkownika #%1$d</string>
     <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
@@ -1072,7 +1067,6 @@
     <string name="map_hide">Ukryj</string>
     <string name="map_trail_show">Pokaż szlak</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
-    <string name="map_autorotate">Autoobrót mapy</string>
     <string name="map_circles_show">Pokaż okręgi</string>
     <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
     <string name="map_disabled_hide">Ukryj nieaktywne skrzynki</string>
@@ -1625,4 +1619,5 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mile</string>
+    <!-- switch settings -->
 </resources>
