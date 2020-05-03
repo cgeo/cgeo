@@ -1416,4 +1416,5 @@
     <string name="unit_ft">fod</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">mil</string>
+    <!-- switch settings -->
 </resources>
