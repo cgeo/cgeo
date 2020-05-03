@@ -617,10 +617,6 @@
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="settings_title_scale_map_text">Upraviť veľkosť textu</string>
     <string name="settings_summary_scale_map_text">Veľkosť textu označenia na mape v režime offline podľa dpi zariadenia</string>
-    <string name="settings_title_map_manualrotation_disabled">Vypnúť ručné otáčanie mapy</string>
-    <string name="settings_summary_map_manualrotation_disabled">Vypnúť ovládacie prvky na ručné otáčanie mapy</string>
-    <string name="settings_title_map_autorotation_disabled">Vypnúť automatické otáčanie mapy</string>
-    <string name="settings_summary_map_autorotation_disabled">Vypnúť automatické otáčanie mapy</string>
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_gpx_exportdir">Priečinok pre GPX Export</string>
     <string name="init_gpx_importdir">Priečinok pre GPX Import</string>
@@ -967,7 +963,6 @@
     <string name="cache_share_field">Zdieľať</string>
     <string name="cache_time_full_hours">hodín</string>
     <string name="cache_listed_on">Uvedené na %s</string>
-    <string name="user_defined_caches">Používateľom definované kešky</string>
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="internal_cache_default_name">Používateľom definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je používateľom definovaná keška</string>
@@ -1073,7 +1068,6 @@
     <string name="map_hide">Skryť</string>
     <string name="map_trail_show">Zobraziť záznam trasy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
-    <string name="map_autorotate">Automatické otáčanie mapy</string>
     <string name="map_circles_show">Zobraziť kruhy</string>
     <string name="map_mycaches_hide">Skryť vlastné/nájdené skrýše</string>
     <string name="map_disabled_hide">Nezobrazovať deaktivované skrýše</string>
@@ -1626,4 +1620,5 @@
     <string name="unit_ft">stopy</string>
     <string name="unit_yd">yard</string>
     <string name="unit_mi">míľa</string>
+    <!-- switch settings -->
 </resources>
