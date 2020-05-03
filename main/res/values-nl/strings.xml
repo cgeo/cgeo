@@ -615,10 +615,6 @@
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="settings_title_scale_map_text">Tekst op kaart schalen</string>
     <string name="settings_summary_scale_map_text">Tekst labels op offline kaart schalen n.a.v. DPI apparaat</string>
-    <string name="settings_title_map_manualrotation_disabled">Handmatige kaartrotatie uitschakelen</string>
-    <string name="settings_summary_map_manualrotation_disabled">Schakel bediening uit voor handmatige kaart rotatie</string>
-    <string name="settings_title_map_autorotation_disabled">Automatische kaartrotatie uitschakelen</string>
-    <string name="settings_summary_map_autorotation_disabled">Automatische kaartrotatie uitschakelen</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_gpx_exportdir">GPX Export map</string>
     <string name="init_gpx_importdir">GPX Import map</string>
@@ -957,7 +953,8 @@
     <string name="cache_share_field">Delen</string>
     <string name="cache_time_full_hours">uur</string>
     <string name="cache_listed_on">Opgenomen in %s</string>
-    <string name="user_defined_caches">Door de gebruiker gedefinieerde caches</string>
+    <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
+    <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
     <string name="internal_cache_default_description">Dit is een door de gebruiker gedefinieerde cache</string>
@@ -1064,10 +1061,10 @@
     <string name="map_live">Live kaart</string>
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_modes">Kaartinstellingen</string>
+    <string name="map_rotation">Kaart rotatie</string>
     <string name="map_hide">Verbergen</string>
     <string name="map_trail_show">Toon spoor</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
-    <string name="map_autorotate">Kaart automatisch roteren</string>
     <string name="map_circles_show">Toon cirkels</string>
     <string name="map_mycaches_hide">Verberg eigen/gevonden caches</string>
     <string name="map_disabled_hide">Verberg uitgeschakelde caches</string>
@@ -1598,4 +1595,8 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
+    <!-- switch settings -->
+    <string name="switch_off">Uit</string>
+    <string name="switch_manual">Handmatig</string>
+    <string name="switch_auto">Automatisch</string>
 </resources>
