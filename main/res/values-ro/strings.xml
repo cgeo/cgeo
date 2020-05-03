@@ -1343,4 +1343,5 @@
     <!-- individual routes -->
     <!-- distance units -->
     <string name="unit_yd">zd</string>
+    <!-- switch settings -->
 </resources>
