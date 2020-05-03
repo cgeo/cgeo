@@ -614,10 +614,6 @@
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="settings_title_scale_map_text">Skala karttext</string>
     <string name="settings_summary_scale_map_text">Skala textetiketter på offlinekartor mot enhetens upplösning</string>
-    <string name="settings_title_map_manualrotation_disabled">Inaktivera manuell kartrotation</string>
-    <string name="settings_summary_map_manualrotation_disabled">Inaktivera kontroller för manuell kartrotation</string>
-    <string name="settings_title_map_autorotation_disabled">Inaktivera automatisk kartrotation</string>
-    <string name="settings_summary_map_autorotation_disabled">Inaktivera automatisk kartrotation</string>
     <string name="init_map_directory_description">Katalog med offline-kartor</string>
     <string name="init_gpx_exportdir">GPX-exportkatalog</string>
     <string name="init_gpx_importdir">GPX-importkatalog</string>
@@ -716,6 +712,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
@@ -831,6 +830,8 @@
     </plurals>
     <string name="cache_waypoints_add">Lägg till punkt</string>
     <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
+    <string name="cache_waypoints_add_fromclipboard">Lägg till från urklipp</string>
+    <string name="cache_waypoints_remove_original_waypoint">Vägpunkt kopierad från urklipp till denna cache.\n\nTa bort ursprungliga vägpunkten?</string>
     <string name="cache_hint">Tips</string>
     <string name="cache_hint_not_available">Ingen ledtråd tillgänglig</string>
     <string name="cache_logs">Loggbok</string>
@@ -933,6 +934,7 @@
     <string name="cache_hidden">Gömd</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Plats</string>
+    <string name="cache_location_country">Land</string>
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_calculator">Kalkylator</string>
     <string name="cache_coordinates_original">Ursprungliga koordinater</string>
@@ -950,7 +952,6 @@
     <string name="cache_share_field">Dela</string>
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
-    <string name="user_defined_caches">Användardefinierad cacher</string>
     <string name="create_internal_cache">Skapa användardefinierad cache</string>
     <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
     <string name="internal_cache_default_description">Detta är en användardefinierad cache</string>
@@ -960,6 +961,8 @@
     <string name="init_longtap_map">Långtryck på kartan</string>
     <string name="init_summary_longtap_map">Aktivera långtryck på kartikonen (skapa en enskild rutt) eller på ledigt kartutrymme (skapa en användardefinierad cache)</string>
     <string name="goto_targets_list">Interna cacher</string>
+    <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
+    <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minuter</string>
@@ -1019,6 +1022,7 @@
     <string name="waypoint_delete">Ta bort</string>
     <string name="waypoint_edit_title">Redigera punkt</string>
     <string name="waypoint_add_title">Lägg till punkt</string>
+    <string name="waypoint_added">Vägpunkt tillagd</string>
     <string name="waypoint_note">Kommentar</string>
     <string name="waypoint_user_note">Personlig anteckning</string>
     <string name="waypoint_visited">Besökt</string>
@@ -1041,6 +1045,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Cachens koordinater på hemsidan har ändrats till: %s.</string>
     <string name="waypoint_done">Klar</string>
     <string name="waypoint_duplicate">Duplicera punkt</string>
+    <string name="waypoint_toclipboard">Kopiera vägpunkt till urklipp</string>
     <string name="waypoint_copy_of">Kopia av</string>
     <string name="waypointcalc_notes_prompt">Skriv anteckningar här&#8230;</string>
     <string name="waypoint_coordinate_formats_plain">Standard</string>
@@ -1056,7 +1061,6 @@
     <string name="map_hide">Dölj</string>
     <string name="map_trail_show">Visa spår</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
-    <string name="map_autorotate">Autorotera kartan</string>
     <string name="map_circles_show">Visa cirklar</string>
     <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
     <string name="map_disabled_hide">Göm inaktiverade cacher</string>
@@ -1071,6 +1075,7 @@
     <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Välj karttema</string>
     <string name="map_theme_options">Inställningar för teman</string>
+    <string name="map_language">Kartspråk</string>
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
@@ -1451,6 +1456,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en äldre version av Android. Framtida utgåvor av c:geo kanske inte längre är tillgängliga för din enhet.\nTryck på detta meddelande för ytterligare information.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
     <string name="tts_toggle">Växla samtal</string>
@@ -1580,4 +1586,5 @@
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
     <string name="map_individual_route_cleared">Individuell rutt rensad</string>
     <!-- distance units -->
+    <!-- switch settings -->
 </resources>
