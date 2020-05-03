@@ -615,10 +615,6 @@
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="settings_title_scale_map_text">Skaalaa kartan tekstit</string>
     <string name="settings_summary_scale_map_text">Tekstinimiöt offline-kartalla valitaan laitteen tarkkuuden mukaan</string>
-    <string name="settings_title_map_manualrotation_disabled">Kytke manuaalinen kartan kääntö pois päältä</string>
-    <string name="settings_summary_map_manualrotation_disabled">Kytke kartan manuaalisen käännön ohjaimet pois päältä</string>
-    <string name="settings_title_map_autorotation_disabled">Kytke automaattinen kartan kääntö pois päältä</string>
-    <string name="settings_summary_map_autorotation_disabled">Kytke automaattinen kartan kääntö pois päältä</string>
     <string name="init_map_directory_description">Offline-karttojen polku</string>
     <string name="init_gpx_exportdir">GPX:n vientikansio</string>
     <string name="init_gpx_importdir">GPX:n tuontikansio</string>
@@ -957,7 +953,8 @@
     <string name="cache_share_field">Jaa</string>
     <string name="cache_time_full_hours">Kello</string>
     <string name="cache_listed_on">Listattu %s</string>
-    <string name="user_defined_caches">Käyttäjän määrittämät kätköt</string>
+    <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
+    <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
@@ -1064,10 +1061,10 @@
     <string name="map_live">Live-kartta</string>
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_modes">Kartan asetukset</string>
+    <string name="map_rotation">Kartan kääntö</string>
     <string name="map_hide">Piilota</string>
     <string name="map_trail_show">Näytä reitti</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
-    <string name="map_autorotate">Kartan automaattinen kääntö</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
     <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
@@ -1598,4 +1595,8 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
+    <!-- switch settings -->
+    <string name="switch_off">Pois päältä</string>
+    <string name="switch_manual">Manuaalinen</string>
+    <string name="switch_auto">Automaattinen</string>
 </resources>
