@@ -569,10 +569,6 @@
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="settings_title_scale_map_text">Teksto dydis žemėlapyje</string>
     <string name="settings_summary_scale_map_text">Teksto dydis išsaugotame žemėlapyje nustatomas automatiškai pagal prietaiso dpi</string>
-    <string name="settings_title_map_manualrotation_disabled">Išjungti rankinį žemėlapio sukimą</string>
-    <string name="settings_summary_map_manualrotation_disabled">Išjungti rankinio žemėlapio sukimo valdymą</string>
-    <string name="settings_title_map_autorotation_disabled">Išjungti automatinį žemėlapio sukimą</string>
-    <string name="settings_summary_map_autorotation_disabled">Išjungti automatinį žemėlapio sukimą</string>
     <string name="init_map_directory_description">Katalogas su išsaugotais žemėlapiais</string>
     <string name="init_gpx_exportdir">GPX eksportavimo katalogas</string>
     <string name="init_gpx_importdir">GPX importavimo katalogas</string>
@@ -903,7 +899,6 @@
     <string name="cache_share_field">Bendrinti</string>
     <string name="cache_time_full_hours">valanda (-os)</string>
     <string name="cache_listed_on">Publikuota %s</string>
-    <string name="user_defined_caches">Vartotojo nustatytos slėptuvės</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="internal_cache_default_name">Vartotojo nustatyta slėptuvė #%1$d</string>
     <string name="internal_cache_default_owner">Jūs</string>
@@ -1001,7 +996,6 @@
     <string name="map_modes">Žemėlapio nustatymai</string>
     <string name="map_trail_show">Rodyti pėdsaką</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
-    <string name="map_autorotate">Žemėlapio autosukimas</string>
     <string name="map_circles_show">Rodyti apskritimus</string>
     <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
     <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
@@ -1528,4 +1522,5 @@
     <string name="unit_ft">pėdos</string>
     <string name="unit_yd">jardai</string>
     <string name="unit_mi">mylios</string>
+    <!-- switch settings -->
 </resources>
