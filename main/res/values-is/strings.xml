@@ -796,4 +796,5 @@
     <!-- distance units -->
     <string name="unit_ft">fet</string>
     <string name="unit_mi">mílur</string>
+    <!-- switch settings -->
 </resources>
