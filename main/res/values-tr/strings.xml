@@ -612,10 +612,6 @@
     <string name="init_mapsource_select">Harita kaynağı seçin</string>
     <string name="settings_title_scale_map_text">Harita metni ölçeği</string>
     <string name="settings_summary_scale_map_text">Çevrimdışı haritadaki metin etiketlerini aygıt çözünürlüğüne göre ölçeklendirme</string>
-    <string name="settings_title_map_manualrotation_disabled">Elle harita döndürmeyi devredışı bırak</string>
-    <string name="settings_summary_map_manualrotation_disabled">Manuel harita döndürme kontrollerini devredışı bırak</string>
-    <string name="settings_title_map_autorotation_disabled">Otomatik harita döndürmeyi devredışı bırak</string>
-    <string name="settings_summary_map_autorotation_disabled">Otomatik harita döndürmeyi devredışı bırak</string>
     <string name="init_map_directory_description">Çevrimdışı haritalar dizini</string>
     <string name="init_gpx_exportdir">GPX Dışa Aktarım Dizini</string>
     <string name="init_gpx_importdir">GPX İçe Aktarım Dizini</string>
@@ -952,7 +948,6 @@
     <string name="cache_share_field">Paylaş</string>
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
-    <string name="user_defined_caches">Kullanıcı tanımlı cache</string>
     <string name="create_internal_cache">Kullanıcı tanımlı cache oluştur</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_description">Bu bir kullanıcı tanımlı Geocache\'dir</string>
@@ -1059,7 +1054,6 @@
     <string name="map_hide">Sakla</string>
     <string name="map_trail_show">Trail\'i göster</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
-    <string name="map_autorotate">Harita otomatik döndür</string>
     <string name="map_circles_show">Çemberleri göster</string>
     <string name="map_mycaches_hide">Geocache\'lerimi/Bulduklarımı gizle</string>
     <string name="map_disabled_hide">Devredışı Geocache\'leri gizle</string>
@@ -1586,4 +1580,5 @@
     <string name="unit_ft">ft</string>
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mi</string>
+    <!-- switch settings -->
 </resources>
