@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Filter {@link Geocache}s if they have a user defined {@link Waypoint}.
+ * Filter {@link Geocache}s if they have a user-defined {@link Waypoint}.
  *
  */
 public class OwnWaypointFilter extends AbstractFilter implements IFilterFactory {

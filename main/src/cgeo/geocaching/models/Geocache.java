@@ -1458,7 +1458,7 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * delete a user defined waypoint
+     * delete a user-defined waypoint
      *
      * @param waypoint
      *            to be removed from cache
@@ -1547,14 +1547,14 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * Detect coordinates in the personal note and add them to user defined waypoints.
+     * Detect coordinates in the personal note and add them to user-defined waypoints.
      */
     public boolean addWaypointsFromNote() {
         return addWaypointsFromText(getPersonalNote(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note), false);
     }
 
     /**
-     * Detect coordinates in the given text and add them to user defined waypoints.
+     * Detect coordinates in the given text and add them to user-defined waypoints.
      *
      * @param text text which might contain coordinates
      * @param updateDb if true the added waypoints are stored in DB right away
