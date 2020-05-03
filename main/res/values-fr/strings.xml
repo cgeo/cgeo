@@ -611,10 +611,6 @@
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="settings_title_scale_map_text">Zoom du texte</string>
     <string name="settings_summary_scale_map_text">Mise à l\'échelle des textes sur la carte hors-ligne en fonction de la résolution de l\'appareil</string>
-    <string name="settings_title_map_manualrotation_disabled">Désactiver la rotation manuelle de la carte</string>
-    <string name="settings_summary_map_manualrotation_disabled">Désactiver les contrôles pour la rotation manuelle de la carte</string>
-    <string name="settings_title_map_autorotation_disabled">Désactiver la rotation automatique de la carte</string>
-    <string name="settings_summary_map_autorotation_disabled">Désactiver la rotation automatique de la carte</string>
     <string name="init_map_directory_description">Dossier cartes hors-ligne</string>
     <string name="init_gpx_exportdir">Dossier d\'export GPX</string>
     <string name="init_gpx_importdir">Dossier d\'import GPX</string>
@@ -943,7 +939,6 @@
     <string name="cache_share_field">Partager</string>
     <string name="cache_time_full_hours">heures</string>
     <string name="cache_listed_on">Listée le %s</string>
-    <string name="user_defined_caches">Caches personnalisées</string>
     <string name="create_internal_cache">Créer une cache personnalisée</string>
     <string name="internal_cache_default_name">Cache personnalisée #%1$d</string>
     <string name="internal_cache_default_description">Il s\'agit d\'une cache personnalisée</string>
@@ -1050,7 +1045,6 @@
     <string name="map_hide">Masquer</string>
     <string name="map_trail_show">Afficher le parcours</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
-    <string name="map_autorotate">Rotation automatique de la carte</string>
     <string name="map_circles_show">Afficher les cercles</string>
     <string name="map_mycaches_hide">Masquer caches placées/trouvées</string>
     <string name="map_disabled_hide">Masquer caches désactivées</string>
@@ -1573,4 +1567,5 @@
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">miles</string>
+    <!-- switch settings -->
 </resources>
