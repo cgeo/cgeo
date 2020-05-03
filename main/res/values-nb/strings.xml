@@ -1506,4 +1506,5 @@
     <string name="unit_km">km</string>
     <string name="unit_ft">fot</string>
     <string name="unit_yd">yd</string>
+    <!-- switch settings -->
 </resources>
