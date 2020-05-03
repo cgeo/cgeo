@@ -601,10 +601,6 @@
     <string name="init_mapsource_select">Выберите источник карт</string>
     <string name="settings_title_scale_map_text">Масштабировать текст</string>
     <string name="settings_summary_scale_map_text">Масштабировать текстовые метки на карте согласно DPI устройства</string>
-    <string name="settings_title_map_manualrotation_disabled">Отключить ручной поворот карт</string>
-    <string name="settings_summary_map_manualrotation_disabled">Отключить кнопки для ручного поворота карты</string>
-    <string name="settings_title_map_autorotation_disabled">Отключить автоповорот карт</string>
-    <string name="settings_summary_map_autorotation_disabled">Отключить автоповорот карт</string>
     <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
     <string name="init_gpx_exportdir">Папка для сохранения GPX</string>
     <string name="init_gpx_importdir">Папка импорта GPX</string>
@@ -942,7 +938,6 @@
     <string name="cache_share_field">Поделиться</string>
     <string name="cache_time_full_hours">часов</string>
     <string name="cache_listed_on">Упомянут на %s</string>
-    <string name="user_defined_caches">Пользовательский тайник</string>
     <string name="create_internal_cache">Создать пользовательский тайник</string>
     <string name="internal_cache_default_name">Пользовательский тайник #%1$d</string>
     <string name="internal_cache_default_description">Это пользовательский тайник</string>
@@ -1042,7 +1037,6 @@
     <string name="map_modes">Настройки карты</string>
     <string name="map_trail_show">Показать маршрут</string>
     <string name="map_dot_mode">Маленькие иконки</string>
-    <string name="map_autorotate">Авто-поворот карты</string>
     <string name="map_circles_show">Показать круги</string>
     <string name="map_mycaches_hide">Скрыть свои/посещенные</string>
     <string name="map_disabled_hide">Скрыть тайники вне игры</string>
@@ -1574,4 +1568,5 @@
     <string name="unit_ft">фут</string>
     <string name="unit_yd">ярд</string>
     <string name="unit_mi">мил</string>
+    <!-- switch settings -->
 </resources>
