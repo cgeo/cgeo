@@ -54,16 +54,6 @@ android {
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
         resConfigs "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr"
-
-        javaCompileOptions {
-            // workaround for build error "Could not find AndroidManifest.xml file using generation folder" when using Gradle plugin v3.5
-            // will be fixed with release of AndroidAnnotations 4.7.0 (see https://github.com/androidannotations/androidannotations/issues/2229)
-            annotationProcessorOptions {
-                arguments = [
-                        "androidManifestFile": "$projectDir/AndroidManifest.xml".toString()
-                ]
-            }
-        }
     }
 
     // signing is handled via private.properties
@@ -251,8 +241,7 @@ android {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    // remove the android.defaultConfig.javaCompileOptions.annotationProcessorOptions on version 4.7.0
-    def androidAnnotationsVersion = '4.6.0'
+    def androidAnnotationsVersion = '4.7.0'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
