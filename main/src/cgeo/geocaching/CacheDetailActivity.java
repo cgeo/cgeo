@@ -368,6 +368,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
+
+        // get notified on cache changes (e.g.: waypoint creation from map)
+        LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver, new IntentFilter(Intents.INTENT_CACHE_CHANGED));
     }
 
     @Override
@@ -393,13 +396,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (start) {
             geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver, new IntentFilter(Intents.INTENT_CACHE_CHANGED));
     }
 
     @Override
@@ -431,16 +427,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void onDestroy() {
         createDisposables.clear();
         SpeechService.stopService(this);
-        super.onDestroy();
-    }
-
-    @Override
-    public void onStop() {
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
         LocalBroadcastManager.getInstance(this).unregisterReceiver(updateReceiver);
-        super.onStop();
+        super.onDestroy();
     }
 
     @Override
