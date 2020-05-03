@@ -1001,7 +1001,6 @@
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
 
-    <string name="user_defined_caches">User defined caches</string>
     <string name="create_internal_cache">Create user defined cache</string>
     <string name="internal_cache_default_name">User defined cache #%1$d</string>
     <string name="internal_cache_default_description">This is a user defined cache</string>
@@ -1127,7 +1126,6 @@
     <string name="map_hide">Hide</string>
     <string name="map_trail_show">Show trail</string>
     <string name="map_dot_mode">Use compact icons</string>
-    <string name="map_autorotate">Map autorotate</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
     <string name="map_disabled_hide">Hide disabled caches</string>
