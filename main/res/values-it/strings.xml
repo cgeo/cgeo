@@ -615,10 +615,6 @@
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="settings_title_scale_map_text">Ridimensiona testo mappa</string>
     <string name="settings_summary_scale_map_text">Ridimensiona il testo della mappa offline a seconda del DPI del dispositivo</string>
-    <string name="settings_title_map_manualrotation_disabled">Disabilita la rotazione manuale della mappa</string>
-    <string name="settings_summary_map_manualrotation_disabled">Disabilita i controlli per la rotazione manuale delle mappe</string>
-    <string name="settings_title_map_autorotation_disabled">Disabilita rotazione automatica della mappa</string>
-    <string name="settings_summary_map_autorotation_disabled">Disabilita rotazione automatica della mappa</string>
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_gpx_exportdir">Cartella di export GPX</string>
     <string name="init_gpx_importdir">Cartella di import GPX</string>
@@ -957,7 +953,6 @@
     <string name="cache_share_field">Condividi</string>
     <string name="cache_time_full_hours">Precise</string>
     <string name="cache_listed_on">Elencato su %s</string>
-    <string name="user_defined_caches">Cache definiti dall\'utente</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="internal_cache_default_name">Cache definito dall\'utente #%1$d</string>
     <string name="internal_cache_default_description">Questo è un cache definito dall\'utente</string>
@@ -1067,7 +1062,6 @@
     <string name="map_hide">Nascondi</string>
     <string name="map_trail_show">Mostra scia</string>
     <string name="map_dot_mode">Usa icone compatte</string>
-    <string name="map_autorotate">Mappa autorotata</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
     <string name="map_disabled_hide">Nascondi le cache disabilitate</string>
@@ -1598,4 +1592,5 @@
     <string name="unit_ft">piedi</string>
     <string name="unit_yd">iarde</string>
     <string name="unit_mi">miglia</string>
+    <!-- switch settings -->
 </resources>
