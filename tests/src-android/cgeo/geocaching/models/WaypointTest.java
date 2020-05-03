@@ -159,7 +159,7 @@ public class WaypointTest extends CGeoTestCase {
         assertThat(server.getId()).isEqualTo(-1);
         assertThat(server.isUserDefined()).isFalse();
 
-        // local user defined wp got new prefix
+        // local user-defined wp got new prefix
         assertThat(local.getPrefix()).isNotEqualTo("01");
         assertThat(local.getCoords()).isEqualTo(new Geopoint("N 45°49.739 E 9°45.038"));
         assertThat(local.getNote()).isEqualTo("Note");

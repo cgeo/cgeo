@@ -291,7 +291,7 @@ public class Waypoint implements IWaypoint {
     }
 
     /**
-     * Detect coordinates in the given text and converts them to user defined waypoints.
+     * Detect coordinates in the given text and converts them to user-defined waypoints.
      * Works by rule of thumb.
      *
      * @param text Text to parse for waypoints
