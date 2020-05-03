@@ -614,10 +614,6 @@
     <string name="init_mapsource_select">지도 선택</string>
     <string name="settings_title_scale_map_text">지도의 문자 확대</string>
     <string name="settings_summary_scale_map_text">기기의 dpi 지원하는 만큼 오프라인 지도의 문자들을 확대합니다.</string>
-    <string name="settings_title_map_manualrotation_disabled">수동 지도 회전 비활성화</string>
-    <string name="settings_summary_map_manualrotation_disabled">수동 지도 회전에 대한 컨트롤 비활성화</string>
-    <string name="settings_title_map_autorotation_disabled">자동 지도 회전 비활성화</string>
-    <string name="settings_summary_map_autorotation_disabled">자동 지도 회전 비활성화</string>
     <string name="init_map_directory_description">오프라인 지도 폴더</string>
     <string name="init_gpx_exportdir">GPX 내보내기 폴더</string>
     <string name="init_gpx_importdir">GPX를 가져올 폴더</string>
@@ -949,7 +945,6 @@
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
     <string name="cache_listed_on">%s에 등록됨</string>
-    <string name="user_defined_caches">사용자 정의 캐시</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
@@ -1059,7 +1054,6 @@
     <string name="map_hide">숨기기</string>
     <string name="map_trail_show">트레일 보이기</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
-    <string name="map_autorotate">지도 자동 회전</string>
     <string name="map_circles_show">원 보이기</string>
     <string name="map_mycaches_hide">내캐시/찾은 캐시 숨기기</string>
     <string name="map_disabled_hide">일시정지된 캐시 숨기기</string>
@@ -1578,4 +1572,5 @@
     <string name="unit_ft">피트</string>
     <string name="unit_yd">야드</string>
     <string name="unit_mi">마일</string>
+    <!-- switch settings -->
 </resources>
