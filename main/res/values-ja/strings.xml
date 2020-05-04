@@ -355,7 +355,6 @@
     <string name="caches_filter_rating">評価あり</string>
     <string name="caches_filter_own_rating">自己評価あり</string>
     <string name="caches_filter_multi_listing">異なる状態で複数のリストに存在</string>
-    <string name="caches_filter_own_waypoint">ユーザー定義のウェイ ポイントを使用</string>
     <string name="caches_filter_missing_gcvote">発見したキャッシュは評価されていません</string>
     <string name="caches_filter_lists">リストに割り当てられました</string>
     <string name="caches_removing_from_history">履歴から削除中…</string>
