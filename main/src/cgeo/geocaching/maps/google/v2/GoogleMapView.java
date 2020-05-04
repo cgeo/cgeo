@@ -282,7 +282,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     public void zoomToBounds(final Viewport bounds, final GeoPointImpl center) {
         mapController.zoomToSpan(bounds.topRight.getLatitudeE6() - bounds.bottomLeft.getLatitudeE6(), bounds.topRight.getLongitudeE6() - bounds.bottomLeft.getLongitudeE6());
         mapController.animateTo(center);
-    };
+    }
 
     @Override
     public void setMapSource() {
