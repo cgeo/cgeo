@@ -310,7 +310,6 @@
     <string name="caches_filter_rating">Adunay grado</string>
     <string name="caches_filter_own_rating">Sa kaugalingong rating</string>
     <string name="caches_filter_multi_listing">Daghang mga listahan nga adunay lain-laing estado</string>
-    <string name="caches_filter_own_waypoint">Naay tig-gamit nga pinasabot nga waypoints</string>
     <string name="caches_filter_missing_gcvote">Nakit-ang mga cache nga wala nabotaran</string>
     <string name="caches_removing_from_history">Pagkuha gikan sa sauna…</string>
     <string name="caches_clear_offlinelogs">Hawani ang offline nga mga log</string>
