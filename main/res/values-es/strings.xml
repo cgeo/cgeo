@@ -339,7 +339,6 @@
     <string name="caches_filter_rating">Con puntuación</string>
     <string name="caches_filter_own_rating">Con puntuación propia</string>
     <string name="caches_filter_multi_listing">Multi ficha con distinto registro</string>
-    <string name="caches_filter_own_waypoint">Con waypoints definidos por el usuario</string>
     <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
     <string name="caches_removing_from_history">Borrando del historial…</string>
     <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
