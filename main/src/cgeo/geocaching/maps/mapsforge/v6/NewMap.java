@@ -490,21 +490,25 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             case R.id.menu_routing_straight:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.STRAIGHT);
+                route.reloadRoute(routeLayer);
                 navigationLayer.requestRedraw();
                 return true;
             case R.id.menu_routing_walk:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.WALK);
+                route.reloadRoute(routeLayer);
                 navigationLayer.requestRedraw();
                 return true;
             case R.id.menu_routing_bike:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.BIKE);
+                route.reloadRoute(routeLayer);
                 navigationLayer.requestRedraw();
                 return true;
             case R.id.menu_routing_car:
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.CAR);
+                route.reloadRoute(routeLayer);
                 navigationLayer.requestRedraw();
                 return true;
             case R.id.menu_hint:

@@ -7,6 +7,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -145,9 +146,12 @@ public class Route implements Parcelable {
     }
 
     public void clearRoute(final RouteUpdater routeUpdater) {
-        Schedulers.io().scheduleDirect(() -> DataStore.clearRoute());
-        segments = null;
-        routeUpdater.updateRoute(new ArrayList<>(), 0);
+        clearRouteInternal(routeUpdater, true);
+    }
+
+    public void reloadRoute(final RouteUpdater routeUpdater) {
+        clearRouteInternal(routeUpdater, false);
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> loadRouteInternal(), () -> updateRoute(routeUpdater));
     }
 
     public void loadRoute() {
@@ -159,6 +163,15 @@ public class Route implements Parcelable {
 
     public boolean isEmpty() {
         return segments == null || segments.size() < 1;
+    }
+
+    private void clearRouteInternal(final RouteUpdater routeUpdater, final boolean deleteInDatabase) {
+        if (deleteInDatabase) {
+            Schedulers.io().scheduleDirect(() -> DataStore.clearRoute());
+        }
+        segments = null;
+        routeUpdater.updateRoute(new ArrayList<>(), 0);
+
     }
 
     private synchronized void loadRouteInternal() {
