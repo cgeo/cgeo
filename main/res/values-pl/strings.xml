@@ -369,7 +369,6 @@
     <string name="caches_filter_rating">Z oceną</string>
     <string name="caches_filter_own_rating">Z własną oceną</string>
     <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
-    <string name="caches_filter_own_waypoint">Z punktami orientacyjnymi użytkownika</string>
     <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
     <string name="caches_filter_lists">Przypisane do listy</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
@@ -962,14 +961,11 @@
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
-    <string name="create_internal_cache">Utwórz skrzynkę zdefiniowaną przez użytkownika</string>
     <string name="internal_cache_default_name">Skrzynka zdefiniowana przez użytkownika #%1$d</string>
-    <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
     <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
-    <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
     <string name="goto_targets_list">Wewnętrzne skrzynki</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stopni(e)</string>
