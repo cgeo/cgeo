@@ -32,8 +32,8 @@ public final class MapMarkerUtils {
     // data for overlays
     private static final int[] FULLSIZE = { 0, 0, 0, 0 };
 
-    private enum VERTICAL { TOP, CENTER, BOTTOM };
-    private enum HORIZONTAL { LEFT, CENTER, RIGHT };
+    private enum VERTICAL { TOP, CENTER, BOTTOM }
+    private enum HORIZONTAL { LEFT, CENTER, RIGHT }
 
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
