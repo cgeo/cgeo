@@ -366,7 +366,6 @@
     <string name="caches_filter_rating">С рейтингом</string>
     <string name="caches_filter_own_rating">С собственным рейтингом</string>
     <string name="caches_filter_multi_listing">На разных сайтах с разными статусами</string>
-    <string name="caches_filter_own_waypoint">С пользовательскими точками</string>
     <string name="caches_filter_missing_gcvote">Найденные без оценок</string>
     <string name="caches_filter_lists">Приписан к списку</string>
     <string name="caches_removing_from_history">Очистка истории…</string>
@@ -938,9 +937,7 @@
     <string name="cache_share_field">Поделиться</string>
     <string name="cache_time_full_hours">часов</string>
     <string name="cache_listed_on">Упомянут на %s</string>
-    <string name="create_internal_cache">Создать пользовательский тайник</string>
     <string name="internal_cache_default_name">Пользовательский тайник #%1$d</string>
-    <string name="internal_cache_default_description">Это пользовательский тайник</string>
     <string name="internal_cache_default_owner">Вы</string>
     <string name="internal_goto_targets_title">\"Перейти к\" целям</string>
     <!-- coordinate calculator hints -->
