@@ -343,7 +343,6 @@
     <string name="caches_filter_rating">Su reitingu</string>
     <string name="caches_filter_own_rating">Su savo reitingu</string>
     <string name="caches_filter_multi_listing">Daugiafunkciniai sąrašai su skirtingu statusu</string>
-    <string name="caches_filter_own_waypoint">Su vartotojo nustatytais taškais</string>
     <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
     <string name="caches_filter_lists">Priskirtas sąrašui</string>
     <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
@@ -899,7 +898,6 @@
     <string name="cache_share_field">Bendrinti</string>
     <string name="cache_time_full_hours">valanda (-os)</string>
     <string name="cache_listed_on">Publikuota %s</string>
-    <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="internal_cache_default_name">Vartotojo nustatyta slėptuvė #%1$d</string>
     <string name="internal_cache_default_owner">Jūs</string>
     <!-- coordinate calculator hints -->
