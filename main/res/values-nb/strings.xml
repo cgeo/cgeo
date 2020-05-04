@@ -359,7 +359,6 @@
     <string name="caches_filter_rating">Med vurdering</string>
     <string name="caches_filter_own_rating">Med egen vurdering</string>
     <string name="caches_filter_multi_listing">Oppført på flere sider, men ikke logget på alle</string>
-    <string name="caches_filter_own_waypoint">Med brukerdefinerte veipunkter</string>
     <string name="caches_filter_missing_gcvote">Funnede cacher, ikke stemt på</string>
     <string name="caches_removing_from_history">Fjerner fra historikken…</string>
     <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
