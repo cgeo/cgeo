@@ -900,24 +900,28 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             case R.id.menu_routing_straight: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.STRAIGHT);
+                route.reloadRoute(overlayPositionAndScale);
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_routing_walk: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.WALK);
+                route.reloadRoute(overlayPositionAndScale);
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_routing_bike: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.BIKE);
+                route.reloadRoute(overlayPositionAndScale);
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }
             case R.id.menu_routing_car: {
                 item.setChecked(true);
                 Settings.setRoutingMode(RoutingMode.CAR);
+                route.reloadRoute(overlayPositionAndScale);
                 mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
                 return true;
             }

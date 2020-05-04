@@ -165,6 +165,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(distance);
         }
+        repaintRequired();
     }
 
 
