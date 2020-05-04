@@ -366,7 +366,6 @@
     <string name="caches_filter_rating">Derecelendirme ile</string>
     <string name="caches_filter_own_rating">Kendi derecelendirmem ile</string>
     <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
-    <string name="caches_filter_own_waypoint">Kullanıcı tanımlı yol noktaları ile</string>
     <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
     <string name="caches_filter_lists">Bir listeye eklendi</string>
     <string name="caches_removing_from_history">Geçmişten kaldırılıyor…</string>
@@ -948,9 +947,7 @@
     <string name="cache_share_field">Paylaş</string>
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
-    <string name="create_internal_cache">Kullanıcı tanımlı cache oluştur</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
-    <string name="internal_cache_default_description">Bu bir kullanıcı tanımlı Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">Gidilecek hedefler</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
