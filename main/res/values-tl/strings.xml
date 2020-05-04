@@ -325,7 +325,6 @@
     <string name="caches_filter_rating">May marka</string>
     <string name="caches_filter_own_rating">May sariling marka</string>
     <string name="caches_filter_multi_listing">Ang napakadaming lista ng may ibat-ibang esdado</string>
-    <string name="caches_filter_own_waypoint">Kasama ang gumagamit sa pag-depina ng tumbok na daan</string>
     <string name="caches_filter_missing_gcvote">Natagpuan ang mga caches ay hindi ibinoto</string>
     <string name="caches_removing_from_history">Ang pagtanggal sa kasaysayan&#8230;</string>
     <string name="caches_clear_offlinelogs">Linisin ang saradong mga sulat</string>
