@@ -335,7 +335,6 @@
     <string name="caches_filter_rating">Amb puntuació</string>
     <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
     <string name="caches_filter_multi_listing">Multi llista amb diferents estats</string>
-    <string name="caches_filter_own_waypoint">Amb fites definides per l\'usuari</string>
     <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
     <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
