@@ -367,7 +367,6 @@
     <string name="caches_filter_rating">Con valutazione (rating)</string>
     <string name="caches_filter_own_rating">Con propria valutazione (rating)</string>
     <string name="caches_filter_multi_listing">Lista cache con stato diverso tra i siti di logging</string>
-    <string name="caches_filter_own_waypoint">Con waypoint definiti dall\'utente</string>
     <string name="caches_filter_missing_gcvote">Trovati cache non votati</string>
     <string name="caches_filter_lists">Assegnato a una lista</string>
     <string name="caches_filter_empty">(vuoto)</string>
@@ -953,14 +952,11 @@
     <string name="cache_share_field">Condividi</string>
     <string name="cache_time_full_hours">Precise</string>
     <string name="cache_listed_on">Elencato su %s</string>
-    <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="internal_cache_default_name">Cache definito dall\'utente #%1$d</string>
-    <string name="internal_cache_default_description">Questo è un cache definito dall\'utente</string>
     <string name="internal_cache_default_owner">Tu</string>
     <string name="internal_goto_targets_title">Obiettivi \"Vai a\"</string>
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
     <string name="init_longtap_map">Tocco lungo sulla mappa</string>
-    <string name="init_summary_longtap_map">Attiva tocco prolungato sull\'icona mappa (crea un percorso individuale) o sullo spazio libero sulla mappa (crea un cache definito dall\'utente)</string>
     <string name="goto_targets_list">Cache interni</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
