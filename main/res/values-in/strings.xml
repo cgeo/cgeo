@@ -314,7 +314,6 @@
     <string name="caches_filter_rating">Dengan rating</string>
     <string name="caches_filter_own_rating">Dengan penilaian sendiri</string>
     <string name="caches_filter_multi_listing">Multi listing dengan keadaan berbeda</string>
-    <string name="caches_filter_own_waypoint">Dengan titik arah yang ditetapkan pengguna</string>
     <string name="caches_filter_missing_gcvote">Cache ditemukan tidak memilih</string>
     <string name="caches_removing_from_history">Menghapus dari riwayat&#8230;</string>
     <string name="caches_clear_offlinelogs">Hapus log offline</string>
