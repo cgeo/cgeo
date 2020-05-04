@@ -369,7 +369,6 @@
     <string name="caches_filter_rating">S hodnocením</string>
     <string name="caches_filter_own_rating">S vlastním hodnocením</string>
     <string name="caches_filter_multi_listing">Multi listing s různým stavem</string>
-    <string name="caches_filter_own_waypoint">S vlastními body trasy</string>
     <string name="caches_filter_missing_gcvote">Nalezené keše bez GCVote hlasů</string>
     <string name="caches_filter_lists">Zařazené do seznamu</string>
     <string name="caches_removing_from_history">Čištění Historie…</string>
@@ -966,14 +965,11 @@
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
-    <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
-    <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako body trasy této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její body trasy odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
-    <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
     <string name="goto_targets_list">Interní kešky</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
