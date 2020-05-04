@@ -319,7 +319,6 @@
     <string name="caches_filter_rating">Cu voturi</string>
     <string name="caches_filter_own_rating">Cu votul tău</string>
     <string name="caches_filter_multi_listing">Afişare multiplă cu statut diferit</string>
-    <string name="caches_filter_own_waypoint">Cu puncte definite de utilizator</string>
     <string name="caches_filter_missing_gcvote">Geocutii găsite, fără votul tău</string>
     <string name="caches_removing_from_history">Şterge din istoric…</string>
     <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>

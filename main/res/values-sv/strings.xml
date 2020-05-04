@@ -367,7 +367,6 @@
     <string name="caches_filter_rating">Med betyg</string>
     <string name="caches_filter_own_rating">Med eget betyg</string>
     <string name="caches_filter_multi_listing">Listade på flera sajter men inte loggad på alla</string>
-    <string name="caches_filter_own_waypoint">Med egna punkter</string>
     <string name="caches_filter_missing_gcvote">Hittade cacher utan röster</string>
     <string name="caches_filter_lists">Tilldelad till en lista</string>
     <string name="caches_removing_from_history">Tar bort från historik…</string>
@@ -952,14 +951,11 @@
     <string name="cache_share_field">Dela</string>
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
-    <string name="create_internal_cache">Skapa användardefinierad cache</string>
     <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
-    <string name="internal_cache_default_description">Detta är en användardefinierad cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
     <string name="internal_goto_targets_description">Denna cache lagrar dina senaste \"Gå till\" mål. Den skapas automatiskt när du har använt funktionen \"Gå till\" i huvudmenyn. Koordinaterna som anges där kommer att lagras i vägpunkter för denna cache. Om du inte längre behöver dessa koordinater kan du ta bort cachen eller någon av dess vägpunkter på ett säkert sätt. Du kan också flytta cachen till någon annan lista som du väljer.</string>
     <string name="init_longtap_map">Långtryck på kartan</string>
-    <string name="init_summary_longtap_map">Aktivera långtryck på kartikonen (skapa en enskild rutt) eller på ledigt kartutrymme (skapa en användardefinierad cache)</string>
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>

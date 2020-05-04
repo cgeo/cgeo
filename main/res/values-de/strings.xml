@@ -367,7 +367,7 @@
     <string name="caches_filter_rating">Mit Bewertung</string>
     <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
     <string name="caches_filter_multi_listing">Mehrfach gelistet mit unterschiedlichem Status</string>
-    <string name="caches_filter_own_waypoint">Mit eigenen Wegpunkten</string>
+    <string name="caches_filter_own_waypoint">Mit nutzerdefinierten Wegpunkten</string>
     <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
     <string name="caches_filter_lists">Einer Liste zugewiesen</string>
     <string name="caches_filter_empty">(leer)</string>

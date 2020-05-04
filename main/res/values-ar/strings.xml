@@ -321,7 +321,6 @@
     <string name="caches_filter_rating">مع التصنيف</string>
     <string name="caches_filter_own_rating">مع التصنيف الخاص</string>
     <string name="caches_filter_multi_listing">جدولة متعددة مع وضعية مختلفة</string>
-    <string name="caches_filter_own_waypoint">مع إحدثيات المستخدم المعرفة</string>
     <string name="caches_filter_missing_gcvote">العثور على مخبآت غير مصوت عليها</string>
     <string name="caches_removing_from_history">إزالة من التأريخ&#8230;</string>
     <string name="caches_clear_offlinelogs">مسح تسجيل الزيارة في وضع عدم الاتصال</string>

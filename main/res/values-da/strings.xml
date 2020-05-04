@@ -341,7 +341,6 @@
     <string name="caches_filter_rating">Med vurdering</string>
     <string name="caches_filter_own_rating">Med egen vurdering</string>
     <string name="caches_filter_multi_listing">Flere lister med forskellige tilstand</string>
-    <string name="caches_filter_own_waypoint">Med brugerdefinerede waypoints</string>
     <string name="caches_filter_missing_gcvote">Fundne cacher er ikke bedømt</string>
     <string name="caches_filter_lists">Tildelt til liste</string>
     <string name="caches_removing_from_history">Fjerner fra historik…</string>

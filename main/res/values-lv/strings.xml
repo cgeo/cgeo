@@ -340,7 +340,6 @@
     <string name="caches_filter_rating">Ar reitingu</string>
     <string name="caches_filter_own_rating">Ar paša vērtējumu</string>
     <string name="caches_filter_multi_listing">Vairākos saitos ar dažādiem statusiem</string>
-    <string name="caches_filter_own_waypoint">Ar lietotāja definētiem starpposmiem</string>
     <string name="caches_filter_missing_gcvote">Atrastie slēpņi bez vērtējuma</string>
     <string name="caches_removing_from_history">Dzēš no vēstures…</string>
     <string name="caches_clear_offlinelogs">Notīrīt bezsaistes ierakstus</string>

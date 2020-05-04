@@ -367,7 +367,6 @@
     <string name="caches_filter_rating">Luokitus</string>
     <string name="caches_filter_own_rating">Oma luokitus</string>
     <string name="caches_filter_multi_listing">Sama kätkö eri sivustoilla, osittain lokattu</string>
-    <string name="caches_filter_own_waypoint">Käyttäjän määrittämiä välipisteitä</string>
     <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
     <string name="caches_filter_lists">Asetettu listaan</string>
     <string name="caches_filter_empty">(tyhjä)</string>
@@ -955,14 +954,11 @@
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
-    <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
-    <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_owner">Sinä</string>
     <string name="internal_goto_targets_title">Kohteet joihin siirrytään</string>
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
-    <string name="init_summary_longtap_map">Aktivoi pitkä painallus karttakuvakkeen päällä (luo yksittäinen reitti) tai kartan vapaassa kohdassa (luo käyttäjän luoma kätkö)</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>

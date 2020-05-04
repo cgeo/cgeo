@@ -356,7 +356,6 @@
     <string name="caches_filter_rating">Με βαθμολογία</string>
     <string name="caches_filter_own_rating">Με τη δική μου βαθμολογία</string>
     <string name="caches_filter_multi_listing">Πολλαπλή καταχώριση με διαφορετική κατάσταση</string>
-    <string name="caches_filter_own_waypoint">Με σημεία διαδρομής αποθηκευμένα από το χρήστη</string>
     <string name="caches_filter_missing_gcvote">Οι κρύπτες που βρέθηκαν δεν έχουν αξιολογηθεί</string>
     <string name="caches_filter_lists">Κατανεμημένες σε μια λίστα</string>
     <string name="caches_removing_from_history">Κατάργηση από το ιστορικό…</string>

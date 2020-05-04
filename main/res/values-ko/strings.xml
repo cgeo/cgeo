@@ -945,6 +945,8 @@
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
     <string name="cache_listed_on">%s에 등록됨</string>
+    <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
+    <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
@@ -1051,6 +1053,7 @@
     <string name="map_live">라이브 지도</string>
     <string name="map_view_map">지도 보기</string>
     <string name="map_modes">지도 설정</string>
+    <string name="map_rotation">지도 회전</string>
     <string name="map_hide">숨기기</string>
     <string name="map_trail_show">트레일 보이기</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
@@ -1573,4 +1576,7 @@
     <string name="unit_yd">야드</string>
     <string name="unit_mi">마일</string>
     <!-- switch settings -->
+    <string name="switch_off">끄기</string>
+    <string name="switch_manual">수동</string>
+    <string name="switch_auto">자동</string>
 </resources>

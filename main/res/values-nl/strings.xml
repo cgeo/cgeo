@@ -367,7 +367,7 @@
     <string name="caches_filter_rating">Met rating</string>
     <string name="caches_filter_own_rating">Met eigen rating</string>
     <string name="caches_filter_multi_listing">Meerdere listings met verschillende status</string>
-    <string name="caches_filter_own_waypoint">Met door de gebruiker gedefinieerde waypoints</string>
+    <string name="caches_filter_own_waypoint">Met gebruiker gedefinieerde waypoints</string>
     <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
     <string name="caches_filter_lists">Toegewezen aan een lijst</string>
     <string name="caches_filter_empty">(leeg)</string>
@@ -957,7 +957,7 @@
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
-    <string name="internal_cache_default_description">Dit is een door de gebruiker gedefinieerde cache</string>
+    <string name="internal_cache_default_description">Dit is een gebruiker gedefinieerde cache</string>
     <string name="internal_cache_default_owner">Jij</string>
     <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
     <string name="internal_goto_targets_description">Deze cache slaat je recente \"Ga naar\" doelen op. Deze wordt automatisch aangemaakt zodra je de \"ga naar\" functie in het hoofdmenu hebt gebruikt. De ingevoerde coördinaten zullen worden opgeslagen als waypoints van deze cache. Als je deze coördinaten niet meer nodig hebt, kan je deze cache of eventuele waypoints veilig verwijderen. Je kunt ook de cache verplaatsen naar elke andere lijst van jouw keuze.</string>

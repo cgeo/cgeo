@@ -367,7 +367,7 @@
     <string name="caches_filter_rating">Com avaliação</string>
     <string name="caches_filter_own_rating">Com avaliação pessoal</string>
     <string name="caches_filter_multi_listing">Em múltiplas plataformas com registos discrepantes</string>
-    <string name="caches_filter_own_waypoint">Com waypoints definidos por si</string>
+    <string name="caches_filter_own_waypoint">Com pontos adicionais definidos pelo utilizador</string>
     <string name="caches_filter_missing_gcvote">Caches que encontrou por votar</string>
     <string name="caches_filter_lists">Atribuída a uma lista</string>
     <string name="caches_filter_empty">(vazio)</string>
@@ -954,6 +954,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_share_field">Partilhar</string>
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listada em %s</string>
+    <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
+    <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
@@ -1060,6 +1062,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_live">Mapa on-line</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_modes">Modos de mapa</string>
+    <string name="map_rotation">Rotação do mapa</string>
     <string name="map_hide">Ocultar</string>
     <string name="map_trail_show">Mostrar rasto</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
@@ -1589,4 +1592,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <!-- distance units -->
     <!-- switch settings -->
+    <string name="switch_off">Desligado</string>
+    <string name="switch_manual">Manual</string>
+    <string name="switch_auto">Automático</string>
 </resources>

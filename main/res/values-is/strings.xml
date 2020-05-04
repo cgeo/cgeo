@@ -256,7 +256,6 @@
     <string name="caches_filter_popularity">Eftirlæti</string>
     <string name="caches_filter_popularity_ratio">Eftirlæti [%]</string>
     <string name="caches_filter_personal_data">Hefur persónuleg gögn</string>
-    <string name="caches_filter_own_waypoint">Hafa vegpunkta eftir notanda</string>
     <string name="caches_removing_from_history">Fjarlægi af ferli…</string>
     <string name="caches_clear_offlinelogs">Hreinsa „án nets“ færslur</string>
     <string name="caches_clear_offlinelogs_message">Viltu hreinsa „án nets“ færslurnar?</string>

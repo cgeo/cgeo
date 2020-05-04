@@ -167,7 +167,6 @@
     <string name="caches_copy_selected">复制所选项</string>
     <string name="caches_copy_all">全部复制</string>
     <string name="caches_filter_own_rating">有任何评级</string>
-    <string name="caches_filter_own_waypoint">跟随用户自定义waypoints</string>
     <string name="caches_filter_missing_gcvote">找到的缓存未投票</string>
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
     <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
