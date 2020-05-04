@@ -319,7 +319,6 @@
     <string name="caches_filter_rating">May ni-rate</string>
     <string name="caches_filter_own_rating">May sariling ni-rate</string>
     <string name="caches_filter_multi_listing">Ang maraming listahan na may ibat\'-ibang estado</string>
-    <string name="caches_filter_own_waypoint">Ang user ay tumukoy sa waypoints</string>
     <string name="caches_filter_missing_gcvote">Nakahanap ng cache na hindi binoto</string>
     <string name="caches_removing_from_history">Ang pagtatanggal mula sa Historya&#8230;</string>
     <string name="caches_clear_offlinelogs">Linisin ang mga log kapag offline</string>
