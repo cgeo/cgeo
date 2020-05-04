@@ -369,7 +369,6 @@
     <string name="caches_filter_rating">S hodnotením</string>
     <string name="caches_filter_own_rating">S vlastným hodnotením</string>
     <string name="caches_filter_multi_listing">Viacnásobne zobrazená s rôznym statusom</string>
-    <string name="caches_filter_own_waypoint">S vlastnými bodmi trasy (waypoint)</string>
     <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
     <string name="caches_filter_lists">Zaradené do zoznamu</string>
     <string name="caches_filter_empty">(prázdny)</string>
@@ -963,14 +962,11 @@
     <string name="cache_share_field">Zdieľať</string>
     <string name="cache_time_full_hours">hodín</string>
     <string name="cache_listed_on">Uvedené na %s</string>
-    <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="internal_cache_default_name">Používateľom definovaná keška #%1$d</string>
-    <string name="internal_cache_default_description">Toto je používateľom definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Ciele \"Choď k\"</string>
     <string name="internal_goto_targets_description">V tejto keške sú uložené všetky vaše nedávne ciele funkcie \"Choď k\". Vytvorí sa automaticky, keď v hlavnej ponuke použijete funkciu \"Choď k\". Zadané súradnice sa uložia ako body trasy tejto kešky. Ak už tieto súradnice nepotrebujete, môžete bez obáv túto kešku a všetky jej body trasy odstrániť. Podľa potreby tiež môžete túto kešku presunúť do nejakého iného zoznamu.</string>
     <string name="init_longtap_map">Ťuknutie na mapu a podržanie</string>
-    <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku)</string>
     <string name="goto_targets_list">Interné kešky</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupne</string>
