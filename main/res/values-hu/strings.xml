@@ -357,7 +357,6 @@
     <string name="caches_filter_rating">Értékelve</string>
     <string name="caches_filter_own_rating">Saját értékelés</string>
     <string name="caches_filter_multi_listing">Különböző állapotú multik listázása</string>
-    <string name="caches_filter_own_waypoint">Saját útpont</string>
     <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
     <string name="caches_filter_lists">Listához csatolva</string>
     <string name="caches_removing_from_history">Törlés az Előzményekből…</string>
