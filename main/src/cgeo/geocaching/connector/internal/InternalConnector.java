@@ -111,7 +111,6 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
-    @NonNull
     public boolean supportsNamechange() {
         // this connector supports changing the name of a geocache
         return true;

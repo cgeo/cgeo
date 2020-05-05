@@ -99,7 +99,6 @@ public abstract class AbstractConnector implements IConnector {
         return new NoLoggingManager();
     }
 
-    @NonNull
     public boolean supportsNamechange() {
         return false;
     }
