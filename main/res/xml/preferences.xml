@@ -558,7 +558,7 @@
             <cgeo.geocaching.settings.InfoPreferenceMap
                 android:text="@string/downloadmap_info"
                 android:title="@string/downloadmap_title"
-                app:url="@string/mapserver_osm_v3" />
+                app:url="@string/mapserver_osm_v5" />
             <Preference
                 android:key="@string/pref_mapDirectory"
                 android:title="@string/init_map_directory_description" />
