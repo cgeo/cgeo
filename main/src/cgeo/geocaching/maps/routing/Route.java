@@ -108,6 +108,11 @@ public class Route implements Parcelable {
             return;
         }
 
+        if (item.getType() == CoordinatesType.WAYPOINT && item.getId() == -1) {
+            Toast.makeText(context, R.string.individual_route_error_single_waypoint_mode, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         switch (toggleItemInternal(item)) {
             case ADDED:
                 Toast.makeText(context, R.string.individual_route_added, Toast.LENGTH_SHORT).show();
