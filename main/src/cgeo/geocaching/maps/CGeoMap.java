@@ -477,7 +477,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }
-        if (route != null) {
+        if (null == route) {
+            route = new Route();
+            route.reloadRoute(overlayPositionAndScale);
+        } else {
             route.updateRoute(overlayPositionAndScale);
         }
 
@@ -536,8 +539,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
-            route = new Route();
-            route.loadRoute();
+            route = null;
             trailHistory = null;
         }
         if (null != proximityNotification) {
