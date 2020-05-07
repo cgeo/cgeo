@@ -32,7 +32,7 @@ public abstract class AbstractMap {
 
     public void onCreate(final Bundle savedInstanceState) {
         mapActivity.superOnCreate(savedInstanceState);
-        Routing.connect();
+        Routing.connect(null);
     }
 
     public void onResume() {

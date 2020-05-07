@@ -170,8 +170,9 @@ public class Route implements Parcelable {
             Schedulers.io().scheduleDirect(() -> DataStore.clearRoute());
         }
         segments = null;
-        routeUpdater.updateRoute(new ArrayList<>(), 0);
-
+        if (null != routeUpdater) {
+            routeUpdater.updateRoute(new ArrayList<>(), 0);
+        }
     }
 
     private synchronized void loadRouteInternal() {

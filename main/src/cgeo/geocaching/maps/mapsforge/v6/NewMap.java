@@ -204,8 +204,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             route = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
-            route = new Route();
-            route.loadRoute();
+            route = null;
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
@@ -270,7 +269,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
         prepareFilterBar();
-        Routing.connect();
+        Routing.connect(() -> resumeRoute(true));
     }
 
     private void postZoomToViewport(final Viewport viewport) {
@@ -773,16 +772,22 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         return false;
     }
 
+    private void resumeRoute(final boolean force) {
+        if (null == route || force) {
+            route = new Route();
+            route.reloadRoute(routeLayer);
+        } else {
+            route.updateRoute(routeLayer);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         Log.d("NewMap: onResume");
 
         resumeTileLayer();
-
-        if (routeLayer != null && this.route != null) {
-            this.route.updateRoute(routeLayer);
-        }
+        resumeRoute(false);
     }
 
     @Override

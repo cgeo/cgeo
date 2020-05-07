@@ -35,7 +35,7 @@ public final class Routing {
         // utility class
     }
 
-    public static synchronized void connect() {
+    public static synchronized void connect(final Runnable onServiceConnectedCallback) {
 
         connectCount++;
 
@@ -44,7 +44,7 @@ public final class Routing {
             return;
         }
 
-        brouter = new BRouterServiceConnection();
+        brouter = new BRouterServiceConnection(onServiceConnectedCallback);
         final Intent intent = new Intent();
         intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
 
@@ -149,7 +149,8 @@ public final class Routing {
         }
 
         // now calculate a new route
-        return ensureTrack(calculateRouting(start, destination), start, destination);
+        final Geopoint[] track = calculateRouting(start, destination);
+        return ensureTrack(track, start, destination);
     }
 
     @NonNull
