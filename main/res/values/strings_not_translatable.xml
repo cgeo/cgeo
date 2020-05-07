@@ -182,5 +182,5 @@
     <string translatable="false" name="cgeo_queryMapFile_actionParam">forceAndFeedback</string>
 
     <!-- map server urls -->
-    <string translatable="false" name="mapserver_osm_v3">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v3/</string>
+    <string translatable="false" name="mapserver_osm_v5">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/v5/</string>
 </resources>

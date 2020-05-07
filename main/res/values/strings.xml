@@ -1729,5 +1729,5 @@
 
     <!-- Download map preference -->
     <string name="downloadmap_title">Download basic offline maps</string>
-    <string name="downloadmap_info">You will be redirected to a download site for basic offline maps (no themeing support).\n\nChose the .map file for your region and tap on it to download the file.\n\nWhen downloading has completed, tap on the downloaded file to set this map als current map for c:geo</string>
+    <string name="downloadmap_info">You will be redirected to a download site for basic offline maps (no themeing support).\n\nChose the .map file for your region and tap on it to download the file.\n\nWhen downloading has completed, tap on the downloaded file to set this map as current map for c:geo</string>
 </resources>
