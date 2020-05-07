@@ -766,7 +766,7 @@
         <item quantity="other">%1$d dagar kvar</item>
     </plurals>
     <string name="last_day_available">sista dagen tillgänglig</string>
-    <string name="cache_offline">Frånkopplad</string>
+    <string name="cache_offline">Sparad lokalt</string>
     <string name="cache_offline_refresh">Uppdatera</string>
     <string name="cache_offline_drop">Ta bort</string>
     <string name="cache_offline_store">Spara</string>
@@ -844,9 +844,9 @@
     <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
     <string name="cache_dialog_loading_details_status_cache">Sparar information</string>
     <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
-    <string name="cache_dialog_offline_save_title">Frånkopplad</string>
+    <string name="cache_dialog_offline_save_title">Sparad lokalt</string>
     <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
-    <string name="cache_dialog_offline_drop_title">Frånkopplad</string>
+    <string name="cache_dialog_offline_drop_title">Sparad lokalt</string>
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
     <string name="cache_dialog_refresh_title">Uppdatera</string>
     <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
