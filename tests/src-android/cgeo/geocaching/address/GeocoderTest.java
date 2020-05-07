@@ -11,7 +11,7 @@ import android.test.suitebuilder.annotation.Suppress;
 
 import java.util.Locale;
 
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.data.Offset;
 import static org.assertj.core.api.Java6Assertions.assertThat;

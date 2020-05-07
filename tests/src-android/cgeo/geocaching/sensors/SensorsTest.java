@@ -8,7 +8,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> {
