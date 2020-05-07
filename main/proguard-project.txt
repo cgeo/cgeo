@@ -127,7 +127,7 @@
 -dontwarn org.junit.**
 
 # used in tests
--keepclassmembers public class * extends io.reactivex.Observable { public ** blockingFirst(); }
+-keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
 
 # ViewPager Indicator -----------------------------------------------------------------------------
 -dontnote com.viewpagerindicator.TitlePageIndicator
