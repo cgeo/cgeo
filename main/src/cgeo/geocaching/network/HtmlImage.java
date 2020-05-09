@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
@@ -170,8 +171,18 @@ public class HtmlImage implements Html.ImageGetter {
             cache.put(url, null);
             return null;
         }
+
+        BitmapDrawable result = null;
         final TextView textView = viewRef.get();
-        final BitmapDrawable result = textView == null ? drawable.blockingLast(null) : getContainerDrawable(textView, drawable);
+        if (textView != null) {
+            result = getContainerDrawable(textView, drawable);
+        } else {
+            final Maybe<BitmapDrawable> lastElement = drawable.lastElement();
+            if (!lastElement.isEmpty().blockingGet()) {
+                result = lastElement.blockingGet();
+            }
+        }
+
         cache.put(url, result);
         return result;
     }
