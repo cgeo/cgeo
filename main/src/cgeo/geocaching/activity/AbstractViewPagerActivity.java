@@ -265,6 +265,12 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      */
     protected abstract String getTitle(Page page);
 
+    protected final void reinitializePage(final Page page) {
+        final PageViewCreator detailsCreator = getViewCreator(page);
+        detailsCreator.notifyDataSetChanged();
+        viewPagerAdapter.notifyDataSetChanged();
+    }
+
     protected final void reinitializeViewPager() {
 
         // notify all creators that the data has changed
