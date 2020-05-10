@@ -339,10 +339,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         private void showProgress(final boolean show) {
             final CGeoMap map = mapRef.get();
-            if (map == null) {
-                return;
+            if (map != null && map.spinner != null) {
+                map.spinner.setVisibility(show ? View.VISIBLE : View.GONE);
             }
-            map.spinner.setVisibility(show ? View.VISIBLE : View.GONE);
         }
 
     }
