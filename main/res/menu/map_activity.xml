@@ -87,11 +87,25 @@
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
-                android:id="@+id/menu_dot_mode"
-                android:checkable="true"
+                android:id="@+id/menu_compactIconMode"
                 android:icon="@drawable/ic_menu_dot_mode"
                 android:title="@string/map_dot_mode"
                 app:showAsAction="ifRoom|withText">
+                <menu>
+                    <group
+                        android:id="@+id/menu_group_compactIconMode"
+                        android:checkableBehavior="single" >
+                        <item
+                            android:id="@+id/menu_map_compactIconModeOff"
+                            android:title="@string/switch_off" />
+                        <item
+                            android:id="@+id/menu_map_compactIconModeOn"
+                            android:title="@string/switch_on" />
+                        <item
+                            android:id="@+id/menu_map_compactIconModeAuto"
+                            android:title="@string/switch_auto" />
+                    </group>
+                </menu>
             </item>
         </menu>
     </item>

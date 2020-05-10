@@ -84,6 +84,10 @@ public class Settings {
     public static final int MAPROTATION_MANUAL = 1;
     public static final int MAPROTATION_AUTO = 2;
 
+    public static final int COMPACTICON_OFF = 0;
+    public static final int COMPACTICON_ON = 1;
+    public static final int COMPACTICON_AUTO = 2;
+
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -836,12 +840,31 @@ public class Settings {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
 
-    public static boolean isDotMode() {
-        return getBoolean(R.string.pref_dot_mode, false);
+    public static int getCompactIconMode() {
+        final String prefValue = getString(R.string.pref_compactIconMode, "");
+        if (prefValue.equals(getKey(R.string.pref_compacticon_on))) {
+            return COMPACTICON_ON;
+        } else if (prefValue.equals(getKey(R.string.pref_compacticon_auto))) {
+            return COMPACTICON_AUTO;
+        }
+        return COMPACTICON_OFF;
     }
 
-    public static void setDotMode(final boolean dotMode) {
-        putBoolean(R.string.pref_dot_mode, dotMode);
+    public static void setCompactIconMode(final int compactIconMode) {
+        switch (compactIconMode) {
+            case COMPACTICON_OFF:
+                putString(R.string.pref_compactIconMode, getKey(R.string.pref_compacticon_off));
+                break;
+            case COMPACTICON_ON:
+                putString(R.string.pref_compactIconMode, getKey(R.string.pref_compacticon_on));
+                break;
+            case COMPACTICON_AUTO:
+                putString(R.string.pref_compactIconMode, getKey(R.string.pref_compacticon_auto));
+                break;
+            default:
+                // do nothing except satisfy static code analysis
+                break;
+        }
     }
 
     /**

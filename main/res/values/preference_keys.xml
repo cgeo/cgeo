@@ -111,7 +111,7 @@
     <string translatable="false" name="pref_mapline_circlecolor">mapline_circlecolor</string>
     <string translatable="false" name="pref_mapline_circlefillcolor">mapline_circlefillcolor</string>
     <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>
-    <string translatable="false" name="pref_dot_mode">dot_mode</string>
+    <string translatable="false" name="pref_compactIconMode">compactIconMode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
     <string translatable="false" name="pref_gpxExportDir">gpxExportDir</string>
@@ -259,4 +259,8 @@
     <string translatable="false" name="pref_maprotation_off">off</string>
     <string translatable="false" name="pref_maprotation_manual">manual</string>
     <string translatable="false" name="pref_maprotation_auto">auto</string>
+
+    <string translatable="false" name="pref_compacticon_off">off</string>
+    <string translatable="false" name="pref_compacticon_on">manual</string>
+    <string translatable="false" name="pref_compacticon_auto">auto</string>
 </resources>

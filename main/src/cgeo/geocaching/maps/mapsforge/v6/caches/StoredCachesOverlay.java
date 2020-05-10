@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -24,8 +25,8 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
     private final Disposable timer;
 
-    public StoredCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
+    public StoredCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
         this.timer = startTimer();
     }
 
@@ -66,12 +67,12 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
                 if (moved) {
 
                     previousZoom = zoomNow;
-                    previousViewport = viewportNow;
                     overlay.load();
                     overlay.refreshed();
                 } else if (!previousViewport.equals(viewportNow)) {
                     overlay.updateTitle();
                 }
+                previousViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("StoredCachesOverlay.startLoadtimer.start", e);
             }

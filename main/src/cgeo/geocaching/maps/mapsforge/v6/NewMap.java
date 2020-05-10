@@ -53,10 +53,12 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -110,6 +112,7 @@ import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
+import org.mapsforge.map.model.common.Observer;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
@@ -120,7 +123,7 @@ import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
 import org.xmlpull.v1.XmlPullParserException;
 
 @SuppressLint("ClickableViewAccessibility")
-public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeMenuCallback, SharedPreferences.OnSharedPreferenceChangeListener {
+public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeMenuCallback, SharedPreferences.OnSharedPreferenceChangeListener, Observer {
 
     private MfMapView mapView;
     private TileCache tileCache;
@@ -179,6 +182,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     public static final int UPDATE_PROGRESS = 0;
     public static final int FINISHED_LOADING_DETAILS = 1;
 
+    private Viewport lastViewport = null;
+    private boolean lastCompactIconMode = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -275,6 +280,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
         prepareFilterBar();
         Routing.connect(() -> resumeRoute(true));
+        CompactIconModeUtils.setCompactIconModeThreshold(getResources());
     }
 
     private void postZoomToViewport(final Viewport viewport) {
@@ -335,7 +341,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
             menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
-            menu.findItem(R.id.menu_dot_mode).setChecked(Settings.isDotMode());
+
+            CompactIconModeUtils.onPrepareOptionsMenu(menu);
 
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
             menu.findItem(R.id.menu_theme_options).setVisible(styleMenu != null);
@@ -382,11 +389,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 historyLayer.requestRedraw();
                 ActivityMixin.invalidateOptionsMenu(this);
                 return true;
-            case R.id.menu_dot_mode:
-                Settings.setDotMode(!Settings.isDotMode());
-                caches.invalidateAll();     // redraw all cache markers
-                ActivityMixin.invalidateOptionsMenu(this);
-                return true;
             case R.id.menu_direction_line:
                 Settings.setMapDirection(!Settings.isMapDirection());
                 navigationLayer.requestRedraw();
@@ -401,8 +403,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 if (mapOptions.mapMode == MapMode.LIVE) {
                     Settings.setLiveMap(mapOptions.isLiveEnabled);
                 }
-                caches.enableStoredLayers(mapOptions.isStoredEnabled);
-                caches.handleLiveLayers(mapOptions.isLiveEnabled);
+                caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
+                caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
                 ActivityMixin.invalidateOptionsMenu(this);
                 if (mapOptions.mapMode != MapMode.SINGLE) {
                     mapOptions.title = StringUtils.EMPTY;
@@ -525,7 +527,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus)) {
+                if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus)
+                && !CompactIconModeUtils.onOptionsMenuItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
                         item.setChecked(true);
@@ -813,6 +816,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         resumeTileLayer();
         resumeRoute(false);
         resumeTrack();
+        mapView.getModel().mapViewPosition.addObserver(this);
     }
 
     @Override
@@ -867,19 +871,19 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         // Caches bundle
         if (mapOptions.searchResult != null) {
-            this.caches = new CachesBundle(mapOptions.searchResult, this.mapView, this.mapHandlers);
+            this.caches = new CachesBundle(this, mapOptions.searchResult, this.mapView, this.mapHandlers);
         } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
-            this.caches = new CachesBundle(mapOptions.geocode, this.mapView, this.mapHandlers);
+            this.caches = new CachesBundle(this, mapOptions.geocode, this.mapView, this.mapHandlers);
         } else if (mapOptions.coords != null) {
-            this.caches = new CachesBundle(mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers);
+            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers);
         } else {
-            caches = new CachesBundle(this.mapView, this.mapHandlers);
+            caches = new CachesBundle(this, this.mapView, this.mapHandlers);
         }
 
         // Stored enabled map
-        caches.enableStoredLayers(mapOptions.isStoredEnabled);
+        caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
         // Live enabled map
-        caches.handleLiveLayers(mapOptions.isLiveEnabled);
+        caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
 
         // Position layer
         this.positionLayer = new PositionLayer();
@@ -913,7 +917,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         savePrefs();
 
         pauseTileLayer();
-
+        mapView.getModel().mapViewPosition.removeObserver(this);
         super.onPause();
     }
 
@@ -1777,4 +1781,31 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
 
     }
+
+    public boolean getLastCompactIconMode() {
+        return lastCompactIconMode;
+    }
+
+    public boolean checkCompactIconMode(final int overlayId, final int newCount) {
+        boolean newCompactIconMode = lastCompactIconMode;
+        if (null != caches) {
+            newCompactIconMode = CompactIconModeUtils.forceCompactIconMode(caches.getVisibleCachesCount(overlayId, newCount));
+            if (lastCompactIconMode != newCompactIconMode) {
+                lastCompactIconMode = newCompactIconMode;
+                // @todo Exchanging & redrawing the icons would be sufficient, do not have to invalidate everything!
+                caches.invalidateAll(overlayId); // redraw all icons except for the given overlay
+            }
+        }
+        return newCompactIconMode;
+    }
+
+    // get notified for viewport changes (zoom/pan)
+    public void onChange() {
+        final Viewport newViewport = mapView.getViewport();
+        if (!newViewport.equals(lastViewport)) {
+            lastViewport = newViewport;
+            checkCompactIconMode(NO_OVERLAY_ID, 0);
+        }
+    }
+
 }

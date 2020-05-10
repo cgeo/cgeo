@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
@@ -33,8 +34,8 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
 
-    public LiveCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
+    public LiveCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.timer = startTimer();
     }
@@ -79,12 +80,12 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                     if (1000 < (currentTime - overlay.loadThreadRun)) {
                         overlay.downloading = true;
                         previousZoom = zoomNow;
-                        previousViewport = viewportNow;
                         overlay.download();
                     }
                 } else if (!previousViewport.equals(viewportNow)) {
                     overlay.updateTitle();
                 }
+                previousViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("LiveCachesOverlay.startLoadtimer.start", e);
             } finally {
