@@ -109,12 +109,12 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     @Override
     protected void init() {
         super.init();
-        if (null != proximityNotification) {
-            proximityNotification.setReferencePoint(cache.getCoords());
-            proximityNotification.setTextNotifications(getContext());
-        }
-
         try {
+            if (null != proximityNotification) {
+                proximityNotification.setReferencePoint(cache.getCoords());
+                proximityNotification.setTextNotifications(getContext());
+            }
+
             if (StringUtils.isNotBlank(cache.getName())) {
                 setTitle(TextUtils.coloredCacheText(cache, cache.getName()));
             } else {
