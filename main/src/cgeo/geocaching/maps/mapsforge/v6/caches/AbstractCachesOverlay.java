@@ -40,8 +40,9 @@ public abstract class AbstractCachesOverlay {
     private final MapHandlers mapHandlers;
     private boolean invalidated = true;
     private boolean showCircles = false;
+    private final WeakReference<NewMap> mapRef;
 
-    public AbstractCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+    public AbstractCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
         this.overlayId = overlayId;
         this.geoEntries = geoEntries;
         this.bundleRef = new WeakReference<>(bundle);
@@ -49,6 +50,7 @@ public abstract class AbstractCachesOverlay {
         this.mapHandlers = mapHandlers;
         this.circleLayer = bundle.getCirclesSeparator();
         this.showCircles = Settings.getCircles();
+        mapRef = new WeakReference<>(map);
         Log.d(String.format(Locale.ENGLISH, "AbstractCacheOverlay: construct overlay %d", overlayId));
     }
 
@@ -137,8 +139,16 @@ public abstract class AbstractCachesOverlay {
         final Collection<String> newCodes = new HashSet<>();
 
         if (!cachesToDisplay.isEmpty()) {
-            final boolean isDotMode = Settings.isDotMode();
-            Log.d(String.format(Locale.ENGLISH, "CachesToDisplay: %d", cachesToDisplay.size()));
+            final NewMap map = mapRef.get();
+            final boolean lastCompactIconMode = null != map && map.getLastCompactIconMode();
+            final boolean newCompactIconMode = null != map && map.checkCompactIconMode(overlayId, getViewport().count(cachesToDisplay));
+
+            if (lastCompactIconMode != newCompactIconMode) {
+                // remove all codes from this layer and restart
+                syncLayers(removeCodes, newCodes);
+                update(cachesToDisplay);
+                return;
+            }
 
             for (final Geocache cache : cachesToDisplay) {
 
@@ -151,7 +161,7 @@ public abstract class AbstractCachesOverlay {
                 }
                 if (removeCodes.contains(cache.getGeocode())) {
                     removeCodes.remove(cache.getGeocode());
-                } else if (addItem(cache, isDotMode)) {
+                } else if (addItem(cache, newCompactIconMode)) {
                     newCodes.add(cache.getGeocode());
                 }
             }

@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
@@ -18,8 +19,8 @@ import java.util.Set;
 import org.mapsforge.map.layer.Layer;
 
 public class WaypointsOverlay extends AbstractCachesOverlay {
-    public WaypointsOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
+    public WaypointsOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
     }
 
     void hideWaypoints() {
@@ -54,12 +55,10 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         return waypoints;
     }
 
-    void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored, final boolean checkOwnership) {
+    protected void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored, final boolean checkOwnership, final boolean forceCompactIconMode) {
         final Collection<String> removeCodes = getGeocodes();
         final Collection<String> newCodes = new HashSet<>();
-
         final Set<Waypoint> waypoints = filterWaypoints(baseGeoCodes, showStored, checkOwnership);
-        final boolean isDotMode = Settings.isDotMode();
 
         for (final Waypoint waypoint : waypoints) {
             if (waypoint == null || waypoint.getCoords() == null) {
@@ -68,7 +67,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             if (removeCodes.contains(waypoint.getGpxId())) {
                 removeCodes.remove(waypoint.getGpxId());
             } else {
-                if (addItem(waypoint, isDotMode)) {
+                if (addItem(waypoint, forceCompactIconMode)) {
                     newCodes.add(waypoint.getGpxId());
                 }
             }

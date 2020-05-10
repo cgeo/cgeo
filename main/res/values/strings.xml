@@ -1714,6 +1714,7 @@
 
     <!-- switch settings -->
     <string name="switch_off">Off</string>
+    <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automatic</string>
 
