@@ -1567,6 +1567,7 @@
     <string name="individual_route_added">경로에 추가했음</string>
     <string name="individual_route_removed">경로에서 제거</string>
     <string name="individual_route_error_toggling_waypoint">지점 토글 오류</string>
+    <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_clear_individual_route">개인 경로 지우기</string>
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
     <!-- distance units -->
