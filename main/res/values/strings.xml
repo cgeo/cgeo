@@ -443,6 +443,9 @@
     <string name="about_system_info_send_button">Send by mail…</string>
     <string name="about_system_info">c:geo system information</string>
     <string name="about_system_info_send_chooser">Send system information</string>
+    <string name="about_system_write_logcat">Generate logfile</string>
+    <string name="about_system_write_logcat_success">Logfile written to \"%1$s\" in \"%2$s\" dir</string>
+    <string name="about_system_write_logcat_error">Error writing logfile</string>
     <string name="changelog_github">List of all changes</string>
     <string name="about_nutshellmanual">Online manual</string>
 

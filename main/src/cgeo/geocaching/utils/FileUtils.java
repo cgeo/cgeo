@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.storage.LocalStorage;
 
 import android.os.Handler;
 import android.os.Message;
@@ -365,6 +366,16 @@ public final class FileUtils {
             }
         }
         throw new IllegalStateException("Unable to generate a non-existing file name");
+    }
+
+    /**
+     * Creates a uniquely named file in the "logfiles" dir with prefix/suffix as given
+     */
+    @NonNull
+    public static File getUniqueNamedLogfile(final String prefix, final String suffix) {
+        final File logfilesDirectory = LocalStorage.getLogfilesDirectory();
+        mkdirs(logfilesDirectory);
+        return getUniqueNamedFile(new File(logfilesDirectory, prefix + "_" + CalendarUtils.formatDateTime("yyyy-MM-dd_hh-mm") + "." + suffix));
     }
 
     /**

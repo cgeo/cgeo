@@ -483,12 +483,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.removeObsoleteGeocacheDataDirectories(), () -> dialog.dismiss());
             return true;
             });
-        final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
-        memoryDumpPref
-                .setOnPreferenceClickListener(preference -> {
-                    DebugUtils.createMemoryDump(SettingsActivity.this);
-                    return true;
-                });
+        getPreference(R.string.pref_memory_dump).setOnPreferenceClickListener(preference -> {
+            DebugUtils.createMemoryDump(SettingsActivity.this);
+            return true;
+        });
+        getPreference(R.string.pref_generate_logcat).setOnPreferenceClickListener(preference -> {
+            DebugUtils.createLogcat(SettingsActivity.this);
+            return true;
+        });
     }
 
     private static void initDeviceSpecificPreferences() {
