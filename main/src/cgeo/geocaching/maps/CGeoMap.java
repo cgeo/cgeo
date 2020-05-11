@@ -485,7 +485,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // prepare circular progress spinner
         spinner = (ProgressBar) activity.findViewById(R.id.map_progressbar);
-        spinner.setVisibility(View.GONE);
+        if (null != spinner) {
+            spinner.setVisibility(View.GONE);
+        }
 
         mapView.repaintRequired(null);
 
