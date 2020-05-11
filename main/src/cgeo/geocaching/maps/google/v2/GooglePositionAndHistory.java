@@ -255,6 +255,10 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
 
     private synchronized void drawHistory() {
+        if (null == coordinates) {
+            return;
+        }
+
         historyObjs.removeAll();
 
         // always add current position to drawn history to have a closed connection
