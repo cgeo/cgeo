@@ -1587,6 +1587,7 @@
     <string name="individual_route_added">toegevoegd aan route</string>
     <string name="individual_route_removed">verwijderd van route</string>
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
+    <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>
     <!-- distance units -->
