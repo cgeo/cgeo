@@ -2542,7 +2542,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (personalNoteView != null) {
             setPersonalNote(personalNoteView, note);
         } else {
-            reinitializeViewPager();
+            reinitializePage(Page.DESCRIPTION);
         }
 
         Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
