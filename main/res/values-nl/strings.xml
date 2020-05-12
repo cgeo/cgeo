@@ -478,8 +478,6 @@
     <string name="settings_activate_gc">Activeren</string>
     <string name="settings_activate_ec">Activeren</string>
     <string name="settings_gc_legal_note">Met het gebruik van de dienst van geocaching.com, accepteert u de gebruiksvoorwaarden van Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Facebook Login</string>
-    <string name="settings_info_facebook_login">U kunt c:geo login aanbrengen in geocaching.com met uw Facebook-account. Maar er is een eenvoudige alternatieve oplossing…</string>
     <string name="settings_authorize">Autoriseer c:geo</string>
     <string name="settings_reauthorize">Autorisatie bijwerken of verwijderen</string>
     <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
