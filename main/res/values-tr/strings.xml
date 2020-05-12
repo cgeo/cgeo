@@ -474,8 +474,6 @@
     <string name="settings_activate_gc">Etkinleştir</string>
     <string name="settings_activate_ec">Etkinleştir</string>
     <string name="settings_gc_legal_note">Geocaching.com hizmetini kullanmak için Groundspeak kullanım şartlarını kabul edin.</string>
-    <string name="settings_info_facebook_login_title">Facebook ile Giriş</string>
-    <string name="settings_info_facebook_login">Facebook hesabınızla c:geo üzerinden geocaching.com\'a giriş yapamazsınız. Ancak basit bir çözüm var…</string>
     <string name="settings_authorize">c:geo\'yu yetkilendir</string>
     <string name="settings_reauthorize">Yetkilendirmeyi güncelle veya kaldır</string>
     <string name="settings_gc_description">c:geo\'yu geocaching.com\'da Geocache arama yapmak için yetkilendir.</string>
