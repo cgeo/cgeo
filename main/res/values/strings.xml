@@ -506,8 +506,8 @@
     <string name="settings_activate_gc">Activate</string>
     <string name="settings_activate_ec">Activate</string>
     <string name="settings_gc_legal_note">With using the service of geocaching.com, you accept the Groundspeak Terms of Use.</string>
-    <string name="settings_info_facebook_login_title">Facebook Login</string>
-    <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround…</string>
+    <string name="settings_info_facebook_login_title">Login using Facebook or Google</string>
+    <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook or Google account. But there is a simple workaround…</string>
     <string name="settings_authorize">Authorize c:geo</string>
     <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Authorize c:geo with geocaching.com to search for caches.</string>
