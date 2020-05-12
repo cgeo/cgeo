@@ -398,8 +398,6 @@
     <string name="settings_activate_gc">Gawing aktibo</string>
     <string name="settings_activate_ec">Gawing aktibo</string>
     <string name="settings_gc_legal_note">Para magamit ang serbisyo ng geocaching.com, tanggapin mo ang tuntuning ng pagamit ng Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Maglog-in sa Facebook</string>
-    <string name="settings_info_facebook_login">Hindi mo pupwedeng i-login ang c:geo sa iyong Facebook account. Ngunit mayroong isang simpleng workaround&#8230;</string>
     <string name="settings_authorize">Pahintulutan ang c:geo</string>
     <string name="settings_gc_description">Ang autorisado ay c:geo namay geocaching.com para magsaliksik sa mga caches.</string>
     <string name="settings_ec_description">Ang awtorisado ay c:geo na may extremecaching.com para magsaliksik sa mga caches at mag-akses/salain ang iyong natagpuang mga caches.</string>
