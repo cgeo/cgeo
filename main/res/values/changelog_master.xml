@@ -6,7 +6,7 @@
     · Change: Added closeout message for systems running on Android &lt; 5.0\n
     · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
-    · Change: Coordinate editor: Validation deferred to save coordinates\n
+    · Change: Coordinate editor - Validation deferred to save coordinates\n
     · New: Show info on completion of \"add current location\"\n
     · New: Add option to clear the goto history\n
     · New: Support other OSM based online map sources\n
@@ -20,5 +20,10 @@
     · New: Show waypoint user note in waypoint popup\n
     · Fix: Crash on moving data to SD card\n
     · Fix: A couple of minor issues\n
+    · Fix: Cache gallery tab empty after editing personal note\n
+    · Fix: Crashes under sepcial circumstances on map\n
+    · Fix: Individual route did not consider change of routing type\n
+    · Fix: Individual route lost after resuming map\n
+    · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
   </string>
 </resources>
