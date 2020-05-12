@@ -479,8 +479,6 @@
     <string name="settings_activate_gc">Aktivovať</string>
     <string name="settings_activate_ec">Aktivovať</string>
     <string name="settings_gc_legal_note">Používaním služieb geocaching.com akceptujete podmienky používania Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Facebook prihlásenie</string>
-    <string name="settings_info_facebook_login">Nemôžete sa s c:geo prihlásiť na Geocaching.com pomocou účtu Facebook. Ale existuje jednoduché riešenie…</string>
     <string name="settings_authorize">Autorizovať c:geo</string>
     <string name="settings_reauthorize">Aktualizovať alebo odobrať poverenie</string>
     <string name="settings_gc_description">Autorizovať c:geo pre hľadanie skrýš geocaching.com.</string>
