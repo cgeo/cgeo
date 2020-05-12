@@ -385,8 +385,6 @@
     <string name="settings_activate_gc">הפעל</string>
     <string name="settings_activate_ec">הפעל</string>
     <string name="settings_gc_legal_note">עם השימוש בשירותי geocaching.com, אתה מסכים לתנאי השימוש של Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">כניסה ל-Facebook</string>
-    <string name="settings_info_facebook_login">לא ניתן להיכנס לgeocaching.com דרך c:geo עם חשבון הפייסבוק שלך. אבל יש פיתרון פשוט&#8230;</string>
     <string name="settings_authorize">בצע הרשאה לc:geo</string>
     <string name="settings_activate_oc">הפעל</string>
     <string name="init_oc_de_description">בצע הרשאה בc:geo עבור opencaching.de על מנת לחפש מטמונים ולראות את המטמונים שמצאת.</string>

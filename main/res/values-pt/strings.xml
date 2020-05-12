@@ -479,8 +479,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_activate_gc">Activar</string>
     <string name="settings_activate_ec">Activar</string>
     <string name="settings_gc_legal_note">Ao usar o serviço de geocaching.com, está a aceitar os Termos de Utilização da Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Início de Sessão em Facebook</string>
-    <string name="settings_info_facebook_login">Não consegue que o c:geo inicie a sessão em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
     <string name="settings_authorize">Autorizar c:geo</string>
     <string name="settings_reauthorize">Actualizar ou remover autorização</string>
     <string name="settings_gc_description">Autoriza o c:geo a pesquisar caches em \'geocaching.com\'.</string>
@@ -1588,6 +1586,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="individual_route_added">adicionado à rota</string>
     <string name="individual_route_removed">removido da rota</string>
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
+    <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <!-- distance units -->

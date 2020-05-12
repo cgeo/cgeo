@@ -367,8 +367,6 @@
     <string name="settings_activate_gc">Aktiviraj</string>
     <string name="settings_activate_ec">Aktiviraj</string>
     <string name="settings_gc_legal_note">Za uporabo storitev Geocaching.com se morate strinjati s pogoji uporabe podjetja Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Prijava s Facebookom</string>
-    <string name="settings_info_facebook_login">V c:geo se ne morete prijaviti s Facebook računom, obstaja pa druga enostavna rešitev…</string>
     <string name="settings_authorize">Poveži c:geo</string>
     <string name="settings_activate_oc">Aktiviraj</string>
     <string name="init_summary_oc_de">Naloži zaklade iz opencaching.de</string>

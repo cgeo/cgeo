@@ -446,8 +446,6 @@
     <string name="settings_activate_gc">Aktyvuoti</string>
     <string name="settings_activate_ec">Aktyvuoti</string>
     <string name="settings_gc_legal_note">Naudodamiesi geocaching.com paslaugomis, Jūs sutinkate su Groundspeak naudojimo taisyklėmis.</string>
-    <string name="settings_info_facebook_login_title">Facebook prisijungimas</string>
-    <string name="settings_info_facebook_login">c:geo negali prisijungti prie geocaching.com su jūsų Facebook paskyra. Bet yra paprastas problemos sprendimas…</string>
     <string name="settings_authorize">Leisti c:geo prisijungti</string>
     <string name="settings_gc_description">Leiskite c:geo prisijungti prie geocaching.com tam, kad galėtumėt ieškoti slėptuvių.</string>
     <string name="settings_ec_description">Leiskite c:geo prisijungti prie extremcaching.com tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>

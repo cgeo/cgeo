@@ -307,7 +307,6 @@
     <string name="settings_activate_gc">Virkja</string>
     <string name="settings_activate_ec">Virkja</string>
     <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Facebook innskráning</string>
     <string name="settings_authorize">Veita c:geo umboð</string>
     <string name="settings_gc_description">Veita c:geo aðgang að geocaching.com til að leita að kössum.</string>
     <string name="settings_ec_description">Veita c:geo aðgang að extremcaching.com til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>

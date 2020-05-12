@@ -459,7 +459,6 @@
     <string name="settings_activate_gc">有効化</string>
     <string name="settings_activate_ec">有効化</string>
     <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります。</string>
-    <string name="settings_info_facebook_login">c:geoからFacebookのアカウントでgeocaching.comにログインすることはできません。 しかし簡単に回避することはできます…</string>
     <string name="settings_authorize">c:geoを認証</string>
     <string name="settings_reauthorize">認証を更新または削除</string>
     <string name="settings_gc_description">geocaching.comでc:geoを認証し、キャッシュを検索します。</string>

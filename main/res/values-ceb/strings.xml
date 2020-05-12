@@ -378,8 +378,6 @@
     <string name="settings_activate_gc">Pag-aktibo</string>
     <string name="settings_activate_ec">Pag-aktibo</string>
     <string name="settings_gc_legal_note">Sa paggamit sa serbisyo sa geocaching.com, imohang gidawat ang termino sa paggamit sa Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Pagsulod sa facebook</string>
-    <string name="settings_info_facebook_login">Dili mahimo ang c:geo mo sulod sa geocaching.com gamit ang imohang Facebook nga account. Pero adunay simple nga mga pamaagi…</string>
     <string name="settings_authorize">I-awtorisar nga c:geo</string>
     <string name="settings_gc_description">Pagpasugot sa c:geo kuyog sa geocaching.com para mapangita ang mga cache.</string>
     <string name="settings_ec_description">Pagpatugot sa c:geo kuyog sa extremcaching.com para mapangita ang mga cache ug ma akses/filter nimo ang imong nakit-ang mga cache.</string>

@@ -477,8 +477,6 @@
     <string name="settings_activate_gc">활성화</string>
     <string name="settings_activate_ec">활성화</string>
     <string name="settings_gc_legal_note">geocaching.com 서비스를 사용하시면, 그라운드스픽사의 사용약관에 동의하시는 것입니다.</string>
-    <string name="settings_info_facebook_login_title">Facebook로그인</string>
-    <string name="settings_info_facebook_login">c:geo 에서 페이스북 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다…</string>
     <string name="settings_authorize">c:geo 인증받기</string>
     <string name="settings_reauthorize">인증 업데이트 또는 제거</string>
     <string name="settings_gc_description">캐시 검색을 위하여 geocaching.com에 c:geo를 인증하기</string>

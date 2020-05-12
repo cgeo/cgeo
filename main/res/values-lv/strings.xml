@@ -414,7 +414,6 @@
     <string name="settings_activate_gc">Aktivizēt</string>
     <string name="settings_activate_ec">Aktivizēt</string>
     <string name="settings_gc_legal_note">Izmantojot geocaching.com pakalpojumu, jūs piekrītat Groundspeak lietošanas noteikumiem.</string>
-    <string name="settings_info_facebook_login">Nevar veikt c:geo pieteikšanos ar savu Facebook kontu iekš geocaching.com. Bet tam ir vienkāršs risinājums…</string>
     <string name="settings_authorize">Atļaut c:geo</string>
     <string name="settings_gc_description">Autorizējies c:geo ar geocaching.com profilu, lai meklētu slēpņus.</string>
     <string name="settings_ec_description">Atļaut c:geo un extremcaching.com meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>

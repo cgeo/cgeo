@@ -388,7 +388,6 @@
     <string name="settings_activate_gc">Activează</string>
     <string name="settings_activate_ec">Activează</string>
     <string name="settings_gc_legal_note">Folosind serviciul Geocaching.com declari că ai accepţi condiţiile de utilizare ale Groundspeak Inc.</string>
-    <string name="settings_info_facebook_login">Nu poţi face c:geo să se autentifice la geocaching.com cu contul tău de Facebook. Dar există o soluţie simplă…</string>
     <string name="settings_authorize">Autorizează c:geo</string>
     <string name="settings_gc_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
     <string name="settings_ec_description">Autorizează c:geo la extremcaching.com pentru a putea căuta şi filtra selectiv geocutii şi pentru a-ţi vedea propriile geocutii găste.</string>

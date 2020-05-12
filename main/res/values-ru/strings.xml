@@ -470,8 +470,6 @@
     <string name="settings_activate_gc">Активировать</string>
     <string name="settings_activate_ec">Активировать</string>
     <string name="settings_gc_legal_note">Используя сервис geocaching.com, вы принимаете условия использования Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Вход с Facebook</string>
-    <string name="settings_info_facebook_login">Вы не можете войти в geocaching.com, используя учетную запись Facebook. Но есть простое решение…</string>
     <string name="settings_authorize">Авторизовать c:geo</string>
     <string name="settings_reauthorize">Обновить или удалить авторизацию</string>
     <string name="settings_gc_description">Авторизовать c:geo для поиска тайников geocaching.com.</string>

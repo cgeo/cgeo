@@ -458,8 +458,6 @@
     <string name="settings_activate_gc">Ενεργοποίηση</string>
     <string name="settings_activate_ec">Ενεργοποίηση</string>
     <string name="settings_gc_legal_note">Με την χρήση του geocaching.com, αποδέχεστε τους όρους χρήσης της Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Σύνδεση μέσω Facebook</string>
-    <string name="settings_info_facebook_login">Δεν μπορείτε να συνδεθείτε με το c:geo στο geocaching.com μέσω του λογαριασμού σας στο Facebook. Αλλά υπάρχει μια απλή λύση…</string>
     <string name="settings_authorize">Πιστοποίηση του c:geo</string>
     <string name="settings_reauthorize">Ενημέρωση ή κατάργηση εξουσιοδότησης</string>
     <string name="settings_gc_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.com.</string>
