@@ -462,8 +462,6 @@
     <string name="settings_activate_gc">Aktiválás</string>
     <string name="settings_activate_ec">Aktiválás</string>
     <string name="settings_gc_legal_note">A geocaching.com használatával elfogadod a Groundspeak Felhasználási Feltételeit.</string>
-    <string name="settings_info_facebook_login_title">Facebook-os bejelentkezés</string>
-    <string name="settings_info_facebook_login">Facebook-os azonosítóval nem hajtható végre c:geo-os bejelentkezés a geocaching.com-ra. De van egy egyszerű megoldás…</string>
     <string name="settings_authorize">A c:geo hitelesítése</string>
     <string name="settings_reauthorize">Engedély frissítése vagy törlése</string>
     <string name="settings_gc_description">A c:geo hitelesítése a geocaching.com-on ládák kereséséhez.</string>
