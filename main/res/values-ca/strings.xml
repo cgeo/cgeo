@@ -410,8 +410,6 @@
     <string name="settings_activate_gc">Activa</string>
     <string name="settings_activate_ec">Activa</string>
     <string name="settings_gc_legal_note">Amb l\'ús del servei de geocaching.com, estàs acceptant les condicions d\'ús de Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Connexió Facebook</string>
-    <string name="settings_info_facebook_login">No podeu fer que el c:geo es connecti a geocaching.com amb el compte de Facebook. Però hi ha una manera fàcil de solucionar-ho…</string>
     <string name="settings_authorize">Autoritza al c:geo</string>
     <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
     <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
