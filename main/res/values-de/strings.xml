@@ -478,8 +478,8 @@
     <string name="settings_activate_gc">Aktivieren</string>
     <string name="settings_activate_ec">Aktivieren</string>
     <string name="settings_gc_legal_note">Mit Benutzung der Dienste von Geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
-    <string name="settings_info_facebook_login_title">Facebook-Anmeldung</string>
-    <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com anmelden, aber es gibt eine einfache Abhilfe…</string>
+    <string name="settings_info_facebook_login_title">Mit Facebook oder Google anmelden</string>
+    <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook oder Google bei Geocaching.com anmelden, aber es gibt eine einfache Abhilfe…</string>
     <string name="settings_authorize">c:geo autorisieren</string>
     <string name="settings_reauthorize">Autorisierung aktualisieren oder entfernen</string>
     <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
@@ -1587,6 +1587,7 @@
     <string name="individual_route_added">zur Route hinzugefügt</string>
     <string name="individual_route_removed">von der Route entfernt</string>
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
+    <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <!-- distance units -->
