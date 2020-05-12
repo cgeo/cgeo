@@ -10,3 +10,6 @@ files:
   - source: /cgeo-contacts/project/playstore/description/_source/*.txt
     translation: /cgeo-contacts/project/playstore/description/%language%/%original_file_name%    
     content_segmentation: 1
+  - source: /main/project/playstore/description/_source/*.txt
+    translation: /main/project/playstore/description/%language%/%original_file_name%    
+    content_segmentation: 1
