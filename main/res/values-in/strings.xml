@@ -387,8 +387,6 @@
     <string name="settings_activate_gc">Aktifkan</string>
     <string name="settings_activate_ec">Aktifkan</string>
     <string name="settings_gc_legal_note">Dengan menggunakan layanan dari geocaching.com, anda menerima Syarat Penggunaan Groundspeak.</string>
-    <string name="settings_info_facebook_login_title">Login Facebook</string>
-    <string name="settings_info_facebook_login">Anda tidak bisa membuat c: geo masuk ke geocaching.com dengan akun Facebook anda. Tapi ada solusi sederhana&#8230;</string>
     <string name="settings_authorize">Mengizinkan c:geo</string>
     <string name="settings_gc_description">Otorisasi c:geo dengan geocaching.com untuk mencari cache.</string>
     <string name="settings_ec_description">Otorisasi c:geo dengan extremcaching.com untuk mencari cache dan akses/filter cache yang anda temukan.</string>
