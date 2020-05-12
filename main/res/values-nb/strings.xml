@@ -460,8 +460,6 @@
     <string name="settings_activate_gc">Aktiver</string>
     <string name="settings_activate_ec">Aktiver</string>
     <string name="settings_gc_legal_note">Ved bruk av tjenesten geocaching.com godtar du Groundspeaks vilkår for bruk.</string>
-    <string name="settings_info_facebook_login_title">Logg på med Facebook</string>
-    <string name="settings_info_facebook_login">Du kan ikke logge inn på geocaching.com i c:geo ved hjelp av facebook-kontoen. Men det finnes en løsning…</string>
     <string name="settings_authorize">Godkjenn c:geo</string>
     <string name="settings_reauthorize">Oppdater eller fjern tillatelse</string>
     <string name="settings_gc_description">Autoriser c:geo med geocaching.com for å søke etter cacher.</string>
