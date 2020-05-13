@@ -56,10 +56,6 @@ import com.google.android.gms.maps.model.VisibleRegion;
 
 public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOverlayItem>, OnMapReadyCallback {
 
-    public interface PostRealDistance {
-        void postRealDistance (float realDistance);
-    }
-
     private OnMapDragListener onDragListener;
     private final GoogleMapController mapController = new GoogleMapController();
     private GoogleMap googleMap;
@@ -81,6 +77,10 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
+
+    public interface PostRealDistance {
+        void postRealDistance (float realDistance);
+    }
 
     public GoogleMapView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
