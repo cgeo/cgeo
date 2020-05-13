@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">キャッシュ</string>
     <string name="detail">詳細</string>
@@ -29,6 +30,7 @@
     <string name="gchq">ジオキャッシング HQ</string>
     <string name="gchqceleb">ジオキャッシング HQ セレブレーション</string>
     <string name="block">ジオキャッシング HQ ブロックパーティー</string>
+    <string name="userdefined">ユーザー定義キャッシュ</string>
     <string name="unknown">不明なタイプ</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">マイクロ</string>
@@ -150,6 +152,7 @@
     <string name="translate_to_english">英語に翻訳</string>
     <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません。</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
@@ -256,6 +259,7 @@
     <string name="confirm_discard_wp_changes">保存されていないウェイポイントの変更を破棄しますか？</string>
     <string name="err_request_popup_info">c:geo がキャッシュ ポップアップ情報の取得に失敗しました。</string>
     <string name="warn_log_load_additional_data">c:geo は、ログの追加データ (トラッカブル/お気に入りポイント) を読み込めませんでした。</string>
+    <string name="warn_gm_not_available">Google マップは利用できません</string>
     <!-- location service -->
     <string name="loc_last">判明した最後の位置</string>
     <string name="loc_net">ネットワーク</string>
@@ -437,6 +441,7 @@
     <string name="settings_summary_map">地図ソースやオフライン地図の設定や地図の詳細の選択。</string>
     <string name="settings_title_map_data">地図データ</string>
     <string name="settings_title_map_content">地図表示</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">ジオキャッシュ データ ディレクトリ</string>
     <string name="settings_title_data_dir_usage">ジオキャッシュ データ ディレクトリ (%1$s 使用)</string>
     <string name="calculate_dataDir_title">ジオキャッシュ データ使用量</string>
@@ -512,6 +517,7 @@
     <string name="init_signature_template_name">名前</string>
     <string name="init_signature_template_difficulty">難易度</string>
     <string name="init_signature_template_terrain">地形</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">ログの本文</string>
     <string name="init_signature_template_size">サイズ</string>
     <string name="init_ratingwanted">GCvote評価</string>
@@ -536,6 +542,8 @@
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合: 計算されたルート長に加えて、直線距離を表示します。</string>
     <string name="init_disabled">無効化キャッシュ除外</string>
     <string name="init_summary_disabled">無効化キャッシュは除く</string>
+    <string name="init_archived">アーカイブ済みを除外</string>
+    <string name="init_summary_archived">アーカイブ済みキャッシュは除く</string>
     <string name="init_save_log_img">画像保存</string>
     <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
     <string name="init_units">マイル/フィート表示</string>
@@ -666,6 +674,7 @@
     <string name="feature_search_geocode">GCコードで検索</string>
     <string name="feature_search_owner">隠したユーザー名で検索</string>
     <string name="feature_search_finder">発見したユーザー名で検索</string>
+    <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">旧 Mapsforge V3</string>
     <string name="init_mfold_api_description">デフォルトで Mapsforge マップの新しいバージョンを使用しています。いくつかの機能が不足しているか問題が発生する場合は、以前のバージョンに戻ることができます。</string>
     <!-- proximity notification -->
@@ -676,6 +685,7 @@
     <string name="init_summary_proximityNotificationSpecific">現在選択されているキャッシュまたはウェイポイントが遠距離または近距離よりも近い場合、繰り返し通知を再生します。 キャッシュまたはウェイポイントの詳細が開かれている場合、マップ上のキャッシュまたはウェイポイントのポップアップが表示されている場合、またはコンパスがアクティブな場合に機能します。 2つの距離に別の音が使用されます。</string>
     <string name="far_distance">遠距離</string>
     <string name="near_distance">近距離</string>
+    <string name="pn_text_only">テキストのみ</string>
     <!-- map sources -->
     <string name="map_source_google_map">Googleマップ:地図</string>
     <string name="map_source_google_satellite">Googleマップ:航空写真</string>

@@ -363,6 +363,7 @@
     <string name="caches_filter_rating">Ayant reçu une évaluation</string>
     <string name="caches_filter_own_rating">Ayant reçu une évaluation de votre part</string>
     <string name="caches_filter_multi_listing">Listing multi-états</string>
+    <string name="caches_filter_own_waypoint">Avec points de passage définis par l’utilisateur</string>
     <string name="caches_filter_missing_gcvote">Caches trouvées et sans vote</string>
     <string name="caches_filter_lists">Assigné à une liste</string>
     <string name="caches_filter_empty">(vide)</string>
@@ -473,6 +474,7 @@
     <string name="settings_activate_gc">Activer</string>
     <string name="settings_activate_ec">Activer</string>
     <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
+    <string name="settings_info_facebook_login_title">Se connecter avec Facebook ou Google</string>
     <string name="settings_authorize">Autoriser c:geo</string>
     <string name="settings_reauthorize">Mettre à jour ou supprimer l\'autorisation</string>
     <string name="settings_gc_description">Autoriser c:geo à utiliser geocaching.com pour chercher des caches.</string>
@@ -706,6 +708,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">hors-ligne</string>
     <string name="map_source_osm_offline_combined">Combiné (Hors-ligne)</string>
     <string name="init_sendToCgeo">Envoyer vers c:geo</string>
@@ -818,6 +823,7 @@
     <string name="cache_waypoints_add">Ajouter une étape</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
     <string name="cache_waypoints_add_fromclipboard">Ajouter depuis le presse-papiers</string>
+    <string name="cache_waypoints_remove_original_waypoint">Point de passage copié, depuis le presse-papiers, dans la cache.\n\nSouhaitez-vous supprimer le point de passage d\'origine ?</string>
     <string name="cache_hint">Indice</string>
     <string name="cache_hint_not_available">Aucun indice disponible</string>
     <string name="cache_logs">Carnet de visites</string>
@@ -936,12 +942,19 @@
     <string name="cache_share_field">Partager</string>
     <string name="cache_time_full_hours">heures</string>
     <string name="cache_listed_on">Listée le %s</string>
+    <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
+    <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
+    <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="internal_cache_default_name">Cache personnalisée #%1$d</string>
+    <string name="internal_cache_default_description">Ceci est une cache personnelle</string>
     <string name="internal_cache_default_owner">Vous</string>
     <string name="internal_goto_targets_title">Cibles \'Aller à\'</string>
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points intermédiaires de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points intermédiaires. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
+    <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache personnelle à l\'utilisateur)</string>
     <string name="goto_targets_list">Caches internes</string>
+    <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
+    <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hors-mis les cinq plus récents</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrés</string>
     <string name="cc_hint_minutes">minutes</string>
@@ -1001,6 +1014,7 @@
     <string name="waypoint_delete">Supprimer</string>
     <string name="waypoint_edit_title">Modifier l\'étape</string>
     <string name="waypoint_add_title">Ajouter une étape</string>
+    <string name="waypoint_added">Point de passage ajouté</string>
     <string name="waypoint_note">Note</string>
     <string name="waypoint_user_note">Note de l\'utilisateur</string>
     <string name="waypoint_visited">Marquer comme visité</string>
@@ -1036,6 +1050,7 @@
     <string name="map_live">Carte temps réel</string>
     <string name="map_view_map">Afficher carte</string>
     <string name="map_modes">Paramètres carte</string>
+    <string name="map_rotation">Rotation de la carte</string>
     <string name="map_hide">Masquer</string>
     <string name="map_trail_show">Afficher le parcours</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
@@ -1557,9 +1572,13 @@
     <!-- individual routes -->
     <string name="individual_route_added">Ajouté à la route</string>
     <string name="individual_route_removed">Supprimé de la route</string>
+    <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">miles</string>
     <!-- switch settings -->
+    <string name="switch_off">Désactivé</string>
+    <string name="switch_manual">Manuel</string>
+    <string name="switch_auto">Automatique</string>
 </resources>
