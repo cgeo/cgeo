@@ -369,6 +369,7 @@
     <string name="caches_filter_multi_listing">Listade på flera sajter men inte loggad på alla</string>
     <string name="caches_filter_missing_gcvote">Hittade cacher utan röster</string>
     <string name="caches_filter_lists">Tilldelad till en lista</string>
+    <string name="caches_filter_empty">(tom)</string>
     <string name="caches_removing_from_history">Tar bort från historik…</string>
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
@@ -949,6 +950,8 @@
     <string name="cache_share_field">Dela</string>
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
+    <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
+    <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
@@ -1052,6 +1055,7 @@
     <string name="map_live">Live karta</string>
     <string name="map_view_map">Karttyp</string>
     <string name="map_modes">Kartlägen</string>
+    <string name="map_rotation">Kartrotering</string>
     <string name="map_hide">Dölj</string>
     <string name="map_trail_show">Visa spår</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
@@ -1577,8 +1581,12 @@
     <string name="individual_route_added">tillagd till rutt</string>
     <string name="individual_route_removed">borttagen från rutt</string>
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
+    <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
     <string name="map_individual_route_cleared">Individuell rutt rensad</string>
     <!-- distance units -->
     <!-- switch settings -->
+    <string name="switch_off">Av</string>
+    <string name="switch_manual">Manuellt</string>
+    <string name="switch_auto">Auto</string>
 </resources>
