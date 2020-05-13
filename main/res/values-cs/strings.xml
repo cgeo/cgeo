@@ -369,8 +369,10 @@
     <string name="caches_filter_rating">S hodnocením</string>
     <string name="caches_filter_own_rating">S vlastním hodnocením</string>
     <string name="caches_filter_multi_listing">Multi listing s různým stavem</string>
+    <string name="caches_filter_own_waypoint">S vlastními body trasy</string>
     <string name="caches_filter_missing_gcvote">Nalezené keše bez GCVote hlasů</string>
     <string name="caches_filter_lists">Zařazené do seznamu</string>
+    <string name="caches_filter_empty">(prázdný)</string>
     <string name="caches_removing_from_history">Čištění Historie…</string>
     <string name="caches_clear_offlinelogs">Smazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
@@ -478,6 +480,8 @@
     <string name="settings_activate_gc">Aktivovat</string>
     <string name="settings_activate_ec">Aktivovat</string>
     <string name="settings_gc_legal_note">Používáním služeb Geocaching.com souhlasíš s Podmínkami použití společnosti Groundspeak.</string>
+    <string name="settings_info_facebook_login_title">Přihlášení přes Facebook nebo Google</string>
+    <string name="settings_info_facebook_login">Přes c:geo se sice na Geocaching.com svým Facebook a Google účtem nepřihlásíš, ale je tu jednoduché řešení…</string>
     <string name="settings_authorize">Autorizovat c:geo</string>
     <string name="settings_reauthorize">Aktualizovat nebo odebrat ověření</string>
     <string name="settings_gc_description">Autorizovat c:geo pro hledání keší prostřednictvím geocaching.com.</string>
@@ -844,6 +848,7 @@
     <string name="cache_waypoints_add">Přidat bod trasy</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
+    <string name="cache_waypoints_remove_original_waypoint">Trasový bod zkopírován ze schránky do této keše.\n\nOdstranit původní trasový bod?</string>
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
     <string name="cache_logs">Logbook</string>
@@ -946,6 +951,7 @@
     <string name="cache_hidden">Skryta</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
+    <string name="cache_location_country">Stát</string>
     <string name="cache_coordinates">Souřadnice</string>
     <string name="cache_calculator">Kalkulačka</string>
     <string name="cache_coordinates_original">Původní souřadnice</string>
@@ -963,12 +969,19 @@
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
+    <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
+    <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
+    <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
+    <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako body trasy této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její body trasy odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
+    <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
     <string name="goto_targets_list">Interní kešky</string>
+    <string name="clear_goto_history_title">Vymazat historii Jít na</string>
+    <string name="clear_goto_history">Tímto se odstraní všechny historické body trasy kromě pěti posledních</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
     <string name="cc_hint_minutes">minuty</string>
@@ -1028,6 +1041,7 @@
     <string name="waypoint_delete">Smazat</string>
     <string name="waypoint_edit_title">Upravit bod trasy</string>
     <string name="waypoint_add_title">Přidat bod trasy</string>
+    <string name="waypoint_added">Bod trasy přidán</string>
     <string name="waypoint_note">Poznámka</string>
     <string name="waypoint_user_note">Osobní poznámka</string>
     <string name="waypoint_visited">Navštíven</string>
@@ -1050,6 +1064,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice keše na webu byly změněny na %s.</string>
     <string name="waypoint_done">Hotovo</string>
     <string name="waypoint_duplicate">Vytvořit kopii bodu trasy</string>
+    <string name="waypoint_toclipboard">Kopírovat trasový bod do schránky</string>
     <string name="waypoint_copy_of">Kopie</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
@@ -1062,6 +1077,7 @@
     <string name="map_live">Aktivní mapa</string>
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_modes">Režim mapy…</string>
+    <string name="map_rotation">Otáčení mapy</string>
     <string name="map_hide">Skrýt</string>
     <string name="map_trail_show">Zobrazit záznam trasy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
@@ -1079,6 +1095,7 @@
     <string name="map_theme_builtin">Výchozí</string>
     <string name="map_theme_select">Styl mapy…</string>
     <string name="map_theme_options">Možnosti vzhledu</string>
+    <string name="map_language">Jazyk mapy</string>
     <string name="map_live_enable">Povolit aktivní mapu</string>
     <string name="map_live_disable">Zakázat aktivní mapu</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
@@ -1461,6 +1478,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi Androidu. Budoucí vydání c:gea už možná nebudou dostupné pro vaše zařízení.\nKlikněte na tuto zprávu pro další informace.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mluvící kompas</string>
     <string name="tts_toggle">Přepnout hlasové pokyny</string>
@@ -1609,6 +1627,7 @@
     <string name="individual_route_added">přidáno do trasy</string>
     <string name="individual_route_removed">odstraněno z trasy</string>
     <string name="individual_route_error_toggling_waypoint">chyba přepínání waypointu</string>
+    <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <!-- distance units -->
@@ -1618,4 +1637,7 @@
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mil</string>
     <!-- switch settings -->
+    <string name="switch_off">Vypnuto</string>
+    <string name="switch_manual">Ručně</string>
+    <string name="switch_auto">Automaticky</string>
 </resources>
