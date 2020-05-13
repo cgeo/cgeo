@@ -17,11 +17,12 @@ import java.io.File;
 import org.apache.commons.lang3.StringUtils;
 
 public class ShareUtils {
+
+    public static final String TYPE_EMAIL = "vnd.android.cursor.dir/email";
+
     private ShareUtils() {
         // utility class
     }
-
-    public static final String TYPE_EMAIL = "vnd.android.cursor.dir/email";
 
     public static void share(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
         shareInternal(context, mimeType, null, null, file, titleResourceId);

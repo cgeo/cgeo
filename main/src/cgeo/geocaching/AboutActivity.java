@@ -199,7 +199,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             });
             share.setOnClickListener(view12 -> ShareUtils.shareAsEMail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
             logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
-
             return view;
         }
     }
