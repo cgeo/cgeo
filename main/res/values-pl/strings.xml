@@ -369,8 +369,10 @@
     <string name="caches_filter_rating">Z oceną</string>
     <string name="caches_filter_own_rating">Z własną oceną</string>
     <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
+    <string name="caches_filter_own_waypoint">Z punktami orientacyjnymi użytkownika</string>
     <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
     <string name="caches_filter_lists">Przypisane do listy</string>
+    <string name="caches_filter_empty">(pusty)</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -711,6 +713,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
@@ -840,6 +845,8 @@
     </plurals>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
+    <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
+    <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacyjny został skopiowany ze schowka do tej skrzynki.\n\nUsunąć oryginalny punkt?</string>
     <string name="cache_hint">Wskazówka</string>
     <string name="cache_hint_not_available">Brak podpowiedzi</string>
     <string name="cache_logs">Dziennik</string>
@@ -942,6 +949,7 @@
     <string name="cache_hidden">Ukryta</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Położenie</string>
+    <string name="cache_location_country">Kraj</string>
     <string name="cache_coordinates">Współrzędne</string>
     <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Oryginalne współrzędne</string>
@@ -959,12 +967,19 @@
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
+    <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
+    <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
+    <string name="create_internal_cache">Utwórz skrzynkę zdefiniowaną przez użytkownika</string>
     <string name="internal_cache_default_name">Skrzynka zdefiniowana przez użytkownika #%1$d</string>
+    <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
     <string name="internal_goto_targets_description">Ta skrzynka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrzynki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrzynkę lub jej dowolny punkt. Możesz również przenieść pamięć podręczną do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
+    <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz skrzynkę zdefiniowaną przez użytkownika)</string>
     <string name="goto_targets_list">Wewnętrzne skrzynki</string>
+    <string name="clear_goto_history_title">Wyczyść historię \'Idź do\'</string>
+    <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacyjnych z wyjątkiem pięciu najnowszych</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stopni(e)</string>
     <string name="cc_hint_minutes">minut(y)</string>
@@ -1024,6 +1039,7 @@
     <string name="waypoint_delete">Usuń</string>
     <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
     <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
+    <string name="waypoint_added">Punkt dodany</string>
     <string name="waypoint_note">Notatka</string>
     <string name="waypoint_user_note">Notatka użytkownika</string>
     <string name="waypoint_visited">Odwiedzony</string>
@@ -1046,6 +1062,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Współrzędne skrzynki zostały zmienione na stronie WWW na: %s.</string>
     <string name="waypoint_done">Wykonane</string>
     <string name="waypoint_duplicate">Duplikuj punkt orientacyjny</string>
+    <string name="waypoint_toclipboard">Skopiuj punkt nawigacyjny do schowka</string>
     <string name="waypoint_copy_of">Kopia</string>
     <string name="waypointcalc_notes_prompt">Wprowadź uwagi tutaj…</string>
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
@@ -1058,6 +1075,7 @@
     <string name="map_live">Mapa online</string>
     <string name="map_view_map">Widok mapy</string>
     <string name="map_modes">Tryb mapy</string>
+    <string name="map_rotation">Obrót mapy</string>
     <string name="map_hide">Ukryj</string>
     <string name="map_trail_show">Pokaż szlak</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
@@ -1075,6 +1093,7 @@
     <string name="map_theme_builtin">Domyślny</string>
     <string name="map_theme_select">Wybierz motyw mapy</string>
     <string name="map_theme_options">Opcje motywu</string>
+    <string name="map_language">Język mapy</string>
     <string name="map_live_enable">Włącz online</string>
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
@@ -1457,6 +1476,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda na to, że używasz starszej wersji Androida. Przyszłe wydania c:geo mogą nie być już dłużej dostępne dla Twojego urządzenia.\nDotknij tej wiadomości, aby uzyskać więcej informacji.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
     <string name="tts_toggle">Przełącz mówienie</string>
@@ -1605,6 +1625,7 @@
     <string name="individual_route_added">dodany do trasy</string>
     <string name="individual_route_removed">usunięto z trasy</string>
     <string name="individual_route_error_toggling_waypoint">błąd przełączenia punktu nawigacji</string>
+    <string name="individual_route_error_single_waypoint_mode">Niedostępne w trybie pojedynczego punktu nawigacyjnego</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
     <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
     <!-- distance units -->
@@ -1614,4 +1635,7 @@
     <string name="unit_yd">yd</string>
     <string name="unit_mi">mile</string>
     <!-- switch settings -->
+    <string name="switch_off">Wyłączony</string>
+    <string name="switch_manual">Ręcznie</string>
+    <string name="switch_auto">Automatycznie</string>
 </resources>
