@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public final class CalendarUtils {
 
@@ -64,4 +67,14 @@ public final class CalendarUtils {
         activity.startActivity(intent);
     }
 
+    /**
+     * returns current date/time formatted according to the supplied {SimpleDateFormat} string
+     * @param format string
+     * @return formatted date
+     */
+    public static String formatDateTime(final String format) {
+        final Date date = Calendar.getInstance().getTime();
+        final DateFormat dateFormat = new SimpleDateFormat(format, Locale.getDefault());
+        return dateFormat.format(date);
+    }
 }

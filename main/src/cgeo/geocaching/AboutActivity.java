@@ -5,7 +5,9 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
 import cgeo.geocaching.utils.Version;
 
@@ -181,6 +183,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @BindView(R.id.system) protected TextView system;
         @BindView(R.id.copy) protected Button copy;
         @BindView(R.id.share) protected Button share;
+        @BindView(R.id.logcat) protected Button logcat;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -194,14 +197,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 ClipboardUtils.copyToClipboard(systemInfo);
                 showShortToast(getString(R.string.clipboard_copy_ok));
             });
-            share.setOnClickListener(view12 -> {
-                ClipboardUtils.copyToClipboard(systemInfo);
-                final Intent share = new Intent(Intent.ACTION_SENDTO);
-                share.setData(Uri.parse("mailto:"));
-                share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_system_info));
-                share.putExtra(Intent.EXTRA_TEXT, systemInfo);
-                startActivity(Intent.createChooser(share, getString(R.string.about_system_info_send_chooser)));
-            });
+            share.setOnClickListener(view12 -> ShareUtils.shareAsEMail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
+            logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
             return view;
         }
     }

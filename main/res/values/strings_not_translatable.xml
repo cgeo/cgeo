@@ -118,7 +118,7 @@
     <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
     <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
     <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>
-    <string translatable="false" name="support_link"><a href="">support@cgeo.org</a></string>
+    <string translatable="false" name="support_mail"><a href="">support@cgeo.org</a></string>
     <string translatable="false" name="manual_link"><a href="">manual.cgeo.org</a></string>
 
     <string translatable="false" name="ellipsis">…</string>

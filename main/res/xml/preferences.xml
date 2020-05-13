@@ -969,6 +969,9 @@
                 android:key="@string/pref_debug"
                 android:title="@string/init_debug" />
             <Preference
+                android:key="@string/pref_generate_logcat"
+                android:title="@string/about_system_write_logcat" />
+            <Preference
                 android:key="@string/pref_memory_dump"
                 android:title="@string/init_create_memory_dump" />
         </PreferenceCategory>

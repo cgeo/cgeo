@@ -263,7 +263,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:linksClickable="false"
-                    android:text="@string/support_link"
+                    android:text="@string/support_mail"
                     android:textColor="?text_color"
                     android:textColorLink="?text_color_link"
                     android:textSize="14sp" />

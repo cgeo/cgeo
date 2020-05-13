@@ -49,6 +49,12 @@
             android:textIsSelectable="true"
             android:textSize="12sp"
             tools:text="long list of system properties"/>
+
+        <Button android:id="@+id/logcat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_system_write_logcat"
+            android:padding="12dp" />
     </LinearLayout>
 
 </ScrollView>
