@@ -422,6 +422,10 @@
     <string name="about_system_info_send_button">Verzenden via mail…</string>
     <string name="about_system_info">c:geo systeeminformatie</string>
     <string name="about_system_info_send_chooser">Verzend systeeminformatie</string>
+    <string name="about_system_write_logcat">Logbestand genereren</string>
+    <string name="about_system_write_logcat_success">Logbestand geschreven naar \"%1$s\" in \"%2$s\" map</string>
+    <string name="about_system_write_logcat_empty">Logbestand is leeg</string>
+    <string name="about_system_write_logcat_error">Fout bij schrijven naar logbestand</string>
     <string name="changelog_github">Lijst met alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>

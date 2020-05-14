@@ -421,6 +421,10 @@
     <string name="about_system_info_send_button">메일로 보내기…</string>
     <string name="about_system_info">c:geo 시스템 정보</string>
     <string name="about_system_info_send_chooser">시스템 정보 보내기</string>
+    <string name="about_system_write_logcat">로그 파일 생성</string>
+    <string name="about_system_write_logcat_success">\"%2$s\" 디렉토리의 \"%1$s\"에 기록된 로그 파일</string>
+    <string name="about_system_write_logcat_empty">로그 파일이 비어 있습니다</string>
+    <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
     <string name="changelog_github">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
@@ -477,6 +481,8 @@
     <string name="settings_activate_gc">활성화</string>
     <string name="settings_activate_ec">활성화</string>
     <string name="settings_gc_legal_note">geocaching.com 서비스를 사용하시면, 그라운드스픽사의 사용약관에 동의하시는 것입니다.</string>
+    <string name="settings_info_facebook_login_title">페이스북 또는 구글을 사용하여 로그인</string>
+    <string name="settings_info_facebook_login">c:geo 에서 페이스북 또는 구글 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다…</string>
     <string name="settings_authorize">c:geo 인증받기</string>
     <string name="settings_reauthorize">인증 업데이트 또는 제거</string>
     <string name="settings_gc_description">캐시 검색을 위하여 geocaching.com에 c:geo를 인증하기</string>

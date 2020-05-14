@@ -422,6 +422,10 @@
     <string name="about_system_info_send_button">Per E-Mail versenden…</string>
     <string name="about_system_info">c:geo Systeminformationen</string>
     <string name="about_system_info_send_chooser">Systeminformationen senden</string>
+    <string name="about_system_write_logcat">Logdatei erstellen</string>
+    <string name="about_system_write_logcat_success">Logdatei gespeichert unter \"%1$s\" im Verzeichnis \"%2$s\"</string>
+    <string name="about_system_write_logcat_empty">Logdatei ist leer</string>
+    <string name="about_system_write_logcat_error">Fehler beim Schreiben der Logdatei</string>
     <string name="changelog_github">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
