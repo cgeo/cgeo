@@ -423,6 +423,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="about_system_info_send_button">Enviar por email…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
     <string name="about_system_info_send_chooser">Enviar Informação sobre o sistema</string>
+    <string name="about_system_write_logcat">Gerar ficheiro de depuração</string>
+    <string name="about_system_write_logcat_success">O ficheiro de depuração para \"%1$s\", encontra-se em \"%2$s\"</string>
+    <string name="about_system_write_logcat_empty">O ficheiro de depuração está vazio</string>
+    <string name="about_system_write_logcat_error">Erro ao escrever no ficheiro de depuração</string>
     <string name="changelog_github">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
