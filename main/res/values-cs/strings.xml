@@ -424,6 +424,10 @@
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
     <string name="about_system_info">c:geo systémové informace</string>
     <string name="about_system_info_send_chooser">Odeslat systémové informace</string>
+    <string name="about_system_write_logcat">Generovat soubor protokolu</string>
+    <string name="about_system_write_logcat_success">Soubor protokolu uložen jako %1$s v adresáři %2$s</string>
+    <string name="about_system_write_logcat_empty">Soubor protokolu je prázdný</string>
+    <string name="about_system_write_logcat_error">Chyba při zápisu souboru protokolu</string>
     <string name="changelog_github">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
