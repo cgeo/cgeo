@@ -2,11 +2,13 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AndroidRuntimeException;
 import android.view.Window;
 
 import androidx.fragment.app.DialogFragment;
@@ -20,10 +22,12 @@ public class WaypointPopup extends AbstractActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-
+        try {
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        } catch (final AndroidRuntimeException ex) {
+            Log.e("Error requesting no title feature", ex);
+        }
         this.setTheme(ActivityMixin.getDialogTheme());
-
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -31,7 +35,6 @@ public class WaypointPopup extends AbstractActivity {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
         }
         showDialog();
-
     }
 
     public static void startActivity(final Context context, final int waypointId, final String geocode) {
