@@ -1,4 +1,4 @@
-[c:geo](http://www.cgeo.org) is an open source, full-featured, always ready-to-go client for geocaching.com (unofficial) and offers basic support for other geocaching platforms.
+[c:geo](https://www.cgeo.org) is an open source, full-featured, always ready-to-go client for geocaching.com (unofficial) and offers basic support for other geocaching platforms.
 It does not require a web browser or exports - just download and start right away.
 
 ## You want to contribute?
@@ -12,9 +12,9 @@ For example we have a collection of [urgent issues](https://github.com/cgeo/cgeo
 
 ## Project status
 
-[![Build Status](http://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](http://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
+[![Build Status](https://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](https://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/3256314c8ba8457b9639bd2d4f4e7c91)](https://www.codacy.com/app/cgeo/cgeo)<br>
-[![Crowdin](https://badges.crowdin.net/cgeo/localized.svg)](http://translate.cgeo.org)
+[![Crowdin](https://badges.crowdin.net/cgeo/localized.svg)](https://crowdin.com/project/cgeo)
 
 ## Get the source
 
@@ -42,8 +42,8 @@ Details for setting up the IDE is described in the wiki (https://github.com/cgeo
 
 ### Prerequisites
 
-- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs (at least) V26, Google repository and Android support repository. (File => Settings, Appearance & Behaviour => System Settings => Android SDK, Check "Show Package Details" on "SDK Platforms" tab and check subpackages as needed.)
-- If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone.
+- [Android SDK](https://developer.android.com/sdk) (latest version) including Google APIs (at least) V26, Google repository and Android support repository. (File => Settings, Appearance & Behaviour => System Settings => Android SDK, Check "Show Package Details" on "SDK Platforms" tab and check subpackages as needed.)
+- If you use Microsoft Windows, [Google USB Driver](https://developer.android.com/sdk/win-usb.html) to install the application on the smartphone.
 - You need to provide several API keys for compiling the app. See next sections for details.
 
 ### API keys
@@ -58,13 +58,13 @@ The key itself is free, and you don't have to enter any credit card info, althou
 
 Also to be able to use Google Maps you need to use a Google API enabled image, so make sure to select the right image for your emulator/device, otherwise Google Maps won't be offered as map provider in c:geo. 
 
-Request your personal API key for the various [OpenCaching](http://www.opencaching.eu/) sites we support. If you leave these blank, then those networks will remain disabled.
-* [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
-* [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
-* [opencaching.ro OKAPI signup](http://www.opencaching.ro/okapi/signup.html)
-* [opencaching.nl OKAPI signup](http://www.opencaching.nl/okapi/signup.html)
-* [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
-* [opencache.uk OKAPI signup](http://www.opencache.uk/okapi/signup.html)
+Request your personal API key for the various [OpenCaching](https://www.opencaching.eu/) sites we support. If you leave these blank, then those networks will remain disabled.
+* [opencaching.de OKAPI signup](https://www.opencaching.de/okapi/signup.html)
+* [opencaching.pl OKAPI signup](https://www.opencaching.pl/okapi/signup.html)
+* [opencaching.ro OKAPI signup](https://www.opencaching.ro/okapi/signup.html)
+* [opencaching.nl OKAPI signup](https://www.opencaching.nl/okapi/signup.html)
+* [opencaching.us OKAPI signup](https://www.opencaching.us/okapi/signup.html)
+* [opencache.uk OKAPI signup](https://www.opencache.uk/okapi/signup.html)
 
 To obtain API key for [geocaching.su](https://geocaching.su) you need to request access from [administration](https://geocaching.su/?pn=1), keys are generated manually on request.
 
@@ -110,10 +110,10 @@ c:geo is distributed under [Apache License, Version 2.0](https://www.apache.org/
 
 ## Contact
 
-- Website: http://www.cgeo.org/
+- Website: https://www.cgeo.org/
 - Support: support@cgeo.org
-- Twitter: http://twitter.com/android_gc
-- Facebook: http://www.facebook.com/android.geocaching
+- Twitter: https://twitter.com/android_gc
+- Facebook: https://www.facebook.com/android.geocaching
 - Google Play: https://play.google.com/store/apps/details?id=cgeo.geocaching
-- Live status: http://status.cgeo.org/
+- Live status: https://status.cgeo.org/
 - Developer chat: [#cgeo on freenode.net](https://webchat.freenode.net/?channels=%23cgeo)
