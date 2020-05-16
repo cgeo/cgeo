@@ -309,7 +309,7 @@ public class CachesBundle {
                 baseGeocodes = baseOverlay.getCacheGeocodes();
             }
             final boolean showStored = storedOverlay != null;
-            wpOverlay.showWaypoints(baseGeocodes, showStored);
+            wpOverlay.showWaypoints(baseGeocodes, showStored, !this.mapModeSingle);
         } else {
             wpOverlay.hideWaypoints();
         }

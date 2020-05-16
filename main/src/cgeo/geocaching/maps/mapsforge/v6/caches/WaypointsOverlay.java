@@ -29,14 +29,14 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         syncLayers(removeCodes, newCodes);
     }
 
-    private Set<Waypoint> filterWaypoints(final Collection<String> baseGeoCodes, final boolean showStored) {
+    private Set<Waypoint> filterWaypoints(final Collection<String> baseGeoCodes, final boolean showStored, final boolean checkOwnership) {
         final Set<Waypoint> waypoints = new HashSet<>();
 
         final Set<Geocache> baseCaches = DataStore.loadCaches(baseGeoCodes, LoadFlags.LOAD_WAYPOINTS);
 
         for (final Geocache cache : baseCaches) {
             final Set<Waypoint> filteredWaypoints = new HashSet<>(cache.getWaypoints());
-            MapUtils.filter(filteredWaypoints, true);
+            MapUtils.filter(filteredWaypoints, checkOwnership);
             waypoints.addAll(filteredWaypoints);
         }
 
@@ -47,18 +47,18 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             final CacheType type = Settings.getCacheType();
 
             final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeDisabled, excludeArchived, type);
-            MapUtils.filter(waypointsInViewport, true);
+            MapUtils.filter(waypointsInViewport, checkOwnership);
             waypoints.addAll(waypointsInViewport);
         }
 
         return waypoints;
     }
 
-    void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored) {
+    void showWaypoints(final Collection<String> baseGeoCodes, final boolean showStored, final boolean checkOwnership) {
         final Collection<String> removeCodes = getGeocodes();
         final Collection<String> newCodes = new HashSet<>();
 
-        final Set<Waypoint> waypoints = filterWaypoints(baseGeoCodes, showStored);
+        final Set<Waypoint> waypoints = filterWaypoints(baseGeoCodes, showStored, checkOwnership);
         final boolean isDotMode = Settings.isDotMode();
 
         for (final Waypoint waypoint : waypoints) {
