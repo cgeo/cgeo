@@ -1357,7 +1357,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final boolean excludeMine = Settings.isExcludeMyCaches();
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             final boolean excludeArchived = Settings.isExcludeArchivedCaches();
-            if (mapMode == MapMode.LIVE) {
+            if (mapMode == MapMode.LIVE || mapOptions.isLiveEnabled) {
                 synchronized (caches) {
                     MapUtils.filter(caches);
                 }
