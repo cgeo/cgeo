@@ -247,9 +247,12 @@ dependencies {
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
-    implementation 'org.apache.commons:commons-compress:1.19'
+    implementation 'org.apache.commons:commons-compress:1.20'
+    //noinspection GradleDependency
     implementation 'commons-io:commons-io:2.5'
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-lang3:3.5'
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-text:1.1'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
