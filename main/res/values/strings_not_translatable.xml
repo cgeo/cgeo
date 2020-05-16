@@ -48,14 +48,14 @@
     HolgerJeromin|||
     jonas-koeritz||c|
     Lineflyer|https://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6|tsd|
-    moving-bits|http://github.com/moving-bits|cg|
+    moving-bits|https://github.com/moving-bits|cg|
     msperkowski|||
     mucek4||cp|
     okainov||c|
     Peter Storch||c|
     Rainer S.||c|
-    SammysHP|http://www.sammyshp.de/||
-    Samuel Tardieu|http://www.rfc1149.net/sam.html||
+    SammysHP|https://www.sammyshp.de/||
+    Samuel Tardieu|https://www.rfc1149.net/sam.html||
     UniQP||c|
     </string>
 
@@ -70,9 +70,9 @@
     Eisbehr||c|
     Filipe C.||c|
     Iiro Jäppinen||g|
-    Jan Žatecký|http://www.jaytech.cz/|g|
-    JoWi24|http://joachim-wilke.de/|c|
-    Karsten Priegnitz|http://github.com/koem|cg|
+    Jan Žatecký|https://www.jaytech.cz/|g|
+    JoWi24|https://joachim-wilke.de/|c|
+    Karsten Priegnitz|https://github.com/koem|cg|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
     lazydays79||c|
     marco-dev||c|
@@ -91,18 +91,18 @@
     </string>
 
     <string translatable="false" name="components">
-    · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
-    · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons):\n
+    · <a href="https://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
+    · <a href="https://thenounproject.com/">The Noun Project</a> (basis for attribute icons):\n
     &#160;&#160;&#160;· USB by Kenneth Von Alt from The Noun Project\n
     &#160;&#160;&#160;· new-idea by Artem Korotkikh from The Noun Project\n
     &#160;&#160;&#160;· Arrow by Jamison Wieser from The Noun Project\n
-    · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
-    · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
-    · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
-    · <a href="http://iconfindr.com/1mNr3rl">Layers icon by Cole Bemis</a> (<a href="http://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
+    · <a href="https://commons.apache.org/">The Apache Commons Project</a>\n
+    · <a href="https://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
+    · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
+    · <a href="https://iconfindr.com/1mNr3rl">Layers icon by Cole Bemis</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
     · <a href="https://material.io/tools/icons/">Google Material Design Icons</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache license version 2.0</a>)\n
-    · <a href="http://www.mapquest.com/">Geocoding courtesy of MapQuest</a>\n
-    · <a href="http://www.openstreetmap.org/">Geocoding data from OpenStreetMap</a>\n
+    · <a href="https://www.mapquest.com/">Geocoding courtesy of MapQuest</a>\n
+    · <a href="https://www.openstreetmap.org/">Geocoding data from OpenStreetMap</a>\n
     · The <a href="http://tango.freedesktop.org/Tango_Desktop_Project">Tango! Desktop Project</a> (Public Domain)\n
     · OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data <a href="http://www.openstreetmap.org/copyright/en">licensed</a> under Creative Commons 2.0 BY-SA.\n
     · More maps based on OpenStreetMap cartography: © <a href="https://www.openstreetmap.de/">openstreetmap.de</a> and © <a href="https://www.cyclosm.org/">cyclosm.org</a>.\n

@@ -245,11 +245,11 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
             setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
                     "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
-            setClickListener(website, "http://www.cgeo.org/");
+            setClickListener(website, "https://www.cgeo.org/");
             setClickListener(facebook, "https://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "https://twitter.com/android_gc");
             setClickListener(nutshellmanual, "https://manual.cgeo.org/");
-            setClickListener(faq, "http://faq.cgeo.org/");
+            setClickListener(faq, "https://faq.cgeo.org/");
             market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
             return view;
         }
