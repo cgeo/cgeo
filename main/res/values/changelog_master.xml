@@ -7,6 +7,7 @@
     · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
     · Change: Coordinate editor - Validation deferred to save coordinates\n
+    · Change: Updated several links to https\n
     · New: Show info on completion of \"add current location\"\n
     · New: Add option to clear the goto history\n
     · New: Support other OSM based online map sources\n
@@ -25,5 +26,6 @@
     · Fix: Individual route did not consider change of routing type\n
     · Fix: Individual route lost after resuming map\n
     · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
+    · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
   </string>
 </resources>
