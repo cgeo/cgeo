@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 public final class UsefulAppsActivity extends AbstractActionBarActivity {
 
     private static final HelperApp[] HELPER_APPS = {
-            new HelperApp(R.string.helper_sendtocgeo_title, R.string.helper_sendtocgeo_description, R.drawable.cgeo_sendto, "http://send2.cgeo.org"),
+            new HelperApp(R.string.helper_sendtocgeo_title, R.string.helper_sendtocgeo_description, R.drawable.cgeo_sendto, "https://send2.cgeo.org"),
             new HelperApp(R.string.helper_contacts_title, R.string.helper_contacts_description, R.drawable.cgeo_contacts, "cgeo.contacts"),
             new HelperApp(R.string.helper_brouter_title, R.string.helper_brouter_description, R.drawable.helper_brouter, "btools.routingapp"),
             new HelperApp(R.string.helper_pocketquery_title, R.string.helper_pocketquery_description, R.drawable.helper_pocketquery, "org.pquery"),
