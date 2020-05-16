@@ -19,13 +19,14 @@
     · New: Allow starting WhereYouGo from cache detail\'s main page\n
     · New: Open images from cache detail page in separate task\n
     · New: Show waypoint user note in waypoint popup\n
+    · New: Added function to write debug logfile (\"LogCat\")\n
     · Fix: Crash on moving data to SD card\n
-    · Fix: A couple of minor issues\n
     · Fix: Cache gallery tab empty after editing personal note\n
     · Fix: Crashes under special circumstances on map\n
     · Fix: Individual route did not consider change of routing type\n
     · Fix: Individual route lost after resuming map\n
     · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
     · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
+    · Fix: A couple of minor issues\n
   </string>
 </resources>
