@@ -147,7 +147,9 @@ public class Route implements Parcelable {
                 distance += segment.distance;
             }
         }
-        routeUpdater.updateRoute(route, distance);
+        if (null != routeUpdater) {
+            routeUpdater.updateRoute(route, distance);
+        }
     }
 
     public void clearRoute(final RouteUpdater routeUpdater) {
