@@ -1,6 +1,8 @@
 package cgeo.geocaching.connector.su;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
+import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.Loaders;
@@ -15,6 +17,7 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +29,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class SuLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
+public class SuLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String>, ILoggingWithFavorites {
 
     @NonNull
     private final SuConnector connector;
@@ -34,6 +37,9 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
     private final Geocache cache;
     @NonNull
     private final LogCacheActivity activity;
+
+    private boolean hasFavPointLoadError = true;
+    private int recommendationsCount;
 
     SuLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final SuConnector connector, @NonNull final Geocache cache) {
         this.connector = connector;
@@ -49,12 +55,20 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
     @Override
     @NonNull
     public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+        final LogResult result;
+        final boolean addFavorite = ((CheckBox) activity.findViewById(R.id.favorite_check)).isChecked();
         try {
-            return SuApi.postLog(cache, logType, date, log);
+            result = SuApi.postLog(cache, logType, date, log, addFavorite);
         } catch (final SuApi.SuApiException e) {
             Log.e("Logging manager SuApi.postLog exception: ", e);
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
+
+        if (addFavorite) {
+            cache.setFavorite(true);
+            cache.setFavoritePoints(cache.getFavoritePoints() + 1);
+        }
+        return result;
     }
 
     @Override
@@ -84,12 +98,26 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
 
     @Override
     public void onLoadFinished(@NonNull final Loader<String> loader, final String data) {
+        // Download fav points
+        recommendationsCount = SuApi.getAvailableRecommendations();
+        hasFavPointLoadError = false;
+
         activity.onLoadFinished();
     }
 
     @Override
     public void onLoaderReset(@NonNull final Loader<String> loader) {
         // nothing to do
+    }
+
+    @Override
+    public int getFavoritePoints() {
+        return (hasLoaderError() || hasFavPointLoadError()) ? 0 : recommendationsCount;
+    }
+
+    @Override
+    public boolean hasFavPointLoadError() {
+        return hasFavPointLoadError;
     }
 
     static class SuLoggingLoader extends AsyncTaskLoader<String> {
