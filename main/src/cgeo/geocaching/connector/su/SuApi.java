@@ -110,6 +110,19 @@ public class SuApi {
         return SuParser.parseCaches(result.data);
     }
 
+    @NonNull
+    public static List<Geocache> searchByOwner(final String owner, @NonNull final SuConnector connector) throws SuApiException {
+        if (owner.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        final Parameters params = new Parameters(
+                "owner", owner);
+
+        final JSONResult result = SuApi.getRequest(connector, SuApiEndpoint.CACHE_LIST_OWNER, params);
+        return SuParser.parseCaches(result.data);
+    }
+
     /**
      * Returns list of caches located around {@code center}
      *
