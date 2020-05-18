@@ -146,13 +146,13 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             final float bearing = cameraPosition.bearing;
             if (canDisableAutoRotate && bearing == 0.0f && Settings.getMapRotation() == Settings.MAPROTATION_AUTO) {
                 canDisableAutoRotate = false;
-                Dialogs.confirm((Activity) getContext(), "Disable map auto rotation?", "Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu", (dialog, which) -> {
+                Dialogs.confirm((Activity) getContext(), R.string.map_gm_autorotation, R.string.map_gm_autorotation_disable, (dialog, which) -> {
                     Settings.setMapRotation(Settings.MAPROTATION_MANUAL);
                 });
             } else if (bearing != 0.0f) {
                 canDisableAutoRotate = true;
             }
-            Log.e("bearing=" + cameraPosition.bearing + ", tilt=" + cameraPosition.tilt + ", canDisable=" + canDisableAutoRotate);
+            Log.d("bearing=" + cameraPosition.bearing + ", tilt=" + cameraPosition.tilt + ", canDisable=" + canDisableAutoRotate);
         });
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();
