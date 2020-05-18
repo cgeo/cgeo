@@ -5,6 +5,7 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -68,10 +69,6 @@ public abstract class AbstractConnector implements IConnector {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
-        return false;
-    }
 
     @Override
     public boolean supportsLogging() {
@@ -80,11 +77,6 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public boolean supportsLogImages() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsAddToFavorite(final Geocache cache, final LogType type) {
         return false;
     }
 
@@ -260,6 +252,7 @@ public abstract class AbstractConnector implements IConnector {
             list.add(feature(R.string.feature_own_coordinates));
         }
         addCapability(list, WatchListCapability.class, R.string.feature_watch_list);
+        addCapability(list, IFavoriteCapability.class, R.string.feature_favorite);
         return list;
     }
 

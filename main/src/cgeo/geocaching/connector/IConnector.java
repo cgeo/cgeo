@@ -53,12 +53,6 @@ public interface IConnector {
     String getLongCacheUrl(@NonNull Geocache cache);
 
     /**
-     * enable/disable favorite points controls in cache details
-     *
-     */
-    boolean supportsFavoritePoints(@NonNull Geocache cache);
-
-    /**
      * enable/disable logging controls in cache details
      *
      */
@@ -228,17 +222,6 @@ public interface IConnector {
 
     @NonNull
     List<UserAction> getUserActions(UserAction.UAContext user);
-
-    /**
-     * Check cache is eligible for adding to favorite
-     *
-     * @param cache
-     *         a cache that this connector must be able to handle
-     * @param type
-     *         a log type selected by the user
-     * @return true, when cache can be added to favorite
-     */
-    boolean supportsAddToFavorite(Geocache cache, LogType type);
 
     /**
      * @return the URL to register a new account or {@code null}

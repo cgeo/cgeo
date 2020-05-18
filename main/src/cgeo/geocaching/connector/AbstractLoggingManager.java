@@ -22,19 +22,9 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     }
 
     @Override
-    public boolean hasFavPointLoadError() {
-        return false;
-    }
-
-    @Override
     @NonNull
     public List<TrackableLog> getTrackables() {
         return Collections.emptyList();
-    }
-
-    @Override
-    public int getPremFavoritePoints() {
-        return 0;
     }
 
     @Override

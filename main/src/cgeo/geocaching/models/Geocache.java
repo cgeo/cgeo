@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.SimpleWebviewActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -570,7 +571,8 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean supportsFavoritePoints() {
-        return getConnector().supportsFavoritePoints(this);
+        final IConnector connector = getConnector();
+        return (connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsFavoritePoints(this);
     }
 
     public boolean supportsLogging() {
