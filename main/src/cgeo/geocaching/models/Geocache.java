@@ -408,21 +408,21 @@ public class Geocache implements IWaypoint {
                 ObjectUtils.equals(favorite, other.favorite) &&
                 favoritePoints == other.favoritePoints &&
                 ObjectUtils.equals(onWatchlist, other.onWatchlist) &&
-                (hidden != null ? hidden.equals(other.hidden) : other.hidden == null) &&
+                ObjectUtils.equals(hidden, other.hidden) &&
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
                 StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
-                (direction != null ? direction.equals(other.direction) : other.direction == null) &&
-                (distance != null ? distance.equals(other.distance) : other.distance == null) &&
+                ObjectUtils.equals(direction, other.direction) &&
+                ObjectUtils.equals(distance, other.distance) &&
                 rating == other.rating &&
                 votes == other.votes &&
                 myVote == other.myVote &&
                 inventoryItems == other.inventoryItems &&
-                attributes == other.attributes &&
-                waypoints == other.waypoints &&
-                spoilers == other.spoilers &&
-                inventory == other.inventory &&
-                logCounts == other.logCounts &&
+                ObjectUtils.equals(attributes, other.attributes) &&
+                ObjectUtils.equals(waypoints, other.waypoints) &&
+                ObjectUtils.equals(spoilers, other.spoilers) &&
+                ObjectUtils.equals(inventory, other.inventory) &&
+                ObjectUtils.equals(logCounts, other.logCounts) &&
                 ObjectUtils.equals(logOffline, other.logOffline) &&
                 finalDefined == other.finalDefined;
     }
