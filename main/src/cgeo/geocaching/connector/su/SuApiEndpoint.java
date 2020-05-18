@@ -9,6 +9,7 @@ enum SuApiEndpoint {
     CACHE("/api/geocache.php", OAuthLevel.Level1),
     CACHE_LIST("/api/list.php", OAuthLevel.Level1),
     CACHE_LIST_CENTER("/api/list_center.php", OAuthLevel.Level1),
+    CACHE_LIST_KEYWORD("/api/list_keyword.php", OAuthLevel.Level1),
     NOTE("/api/note.php", OAuthLevel.Level1),
     MARK("/api/mark.php", OAuthLevel.Level1),
     POST_IMAGE("/api/photo.php", OAuthLevel.Level1),

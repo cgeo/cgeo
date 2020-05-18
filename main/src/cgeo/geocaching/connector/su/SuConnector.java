@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -36,7 +37,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -316,6 +317,20 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public int getPersonalNoteMaxChars() {
         return 9500;
+    }
+
+    @Override
+    public SearchResult searchByKeyword(@NonNull String keyword) {
+        try {
+            return new SearchResult(SuApi.searchByKeyword(keyword, this));
+        } catch (final SuApi.NotAuthorizedException e) {
+            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+        } catch (final SuApi.ConnectionErrorException e) {
+            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByKeyword failed: ", e);
+            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+        }
     }
 
     /**

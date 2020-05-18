@@ -97,6 +97,18 @@ public class SuApi {
         return SuParser.parseCaches(result.data);
     }
 
+    @NonNull
+    public static List<Geocache> searchByKeyword(final String keyword, @NonNull final SuConnector connector) throws SuApiException {
+        if (keyword.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        final Parameters params = new Parameters(
+                "keyword", keyword);
+
+        final JSONResult result = SuApi.getRequest(connector, SuApiEndpoint.CACHE_LIST_KEYWORD, params);
+        return SuParser.parseCaches(result.data);
+    }
 
     /**
      * Returns list of caches located around {@code center}
