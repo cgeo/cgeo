@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Dit is een contacten-plugin voor c:geo, een open source geocaching app. Het werkt alleen met de c:geo app geïnstalleerd en staat directe toegang tot je telefoonboek toe wanneer je op een gebruikersnaam in c:geo klikt.
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+Gebruik:
+Wanneer je op een gebruikersnaam tikt in c:geo (bijv. in het cachelogboek) het menu zal een item bevatten om de contactpersoon uit de contactpersonen in je telefoon te openen. Hiermee kan je de gebruiker direct bellen of een bericht sturen.
 
-Remark: 
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Opmerking: 
+De gebruikersnaam van de persoon moet worden opgeslagen in het veld naam of alias van je contactpersonen. Alleen zo kan de plugin de geocaching gebruikersnaam en de contactpersoon met elkaar matchen.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Reacties in de PlayStore kunnen niet worden beantwoord! Als je problemen hebt bij het installeren of gebruiken van c:geo, kijk dan eerst naar onze FAQ: https://faq.cgeo.org
+Als er nog steeds problemen zijn, neem dan contact op met support via e-mail.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Als je wil weten waarom deze c:geo plugin de gevraagde machtigingen nodig heeft, kijk dan op https://www.cgeo.org/faq.html#plugin-contacts-privacy voor uitleg.
