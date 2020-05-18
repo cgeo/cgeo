@@ -8,8 +8,10 @@ import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
@@ -102,7 +104,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Calendar date;
     private Image image;
     private boolean sendButtonEnabled;
-    private int premFavPoints;
     private ReportProblemType reportProblemSelected = ReportProblemType.NO_PROBLEM;
     private LogEntry oldLog;
     private Bundle trackableState;
@@ -136,11 +137,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         if (!loggingManager.hasTrackableLoadError()) {
             trackables.addAll(loggingManager.getTrackables());
-        } else {
-            showErrorLoadingAdditionalData();
-        }
-        if (!loggingManager.hasFavPointLoadError()) {
-            premFavPoints = loggingManager.getPremFavoritePoints();
         } else {
             showErrorLoadingAdditionalData();
         }
@@ -340,7 +336,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
-            premFavPoints = savedInstanceState.getInt(SAVED_STATE_FAVPOINTS);
             reportProblemSelected = ReportProblemType.findByCode(savedInstanceState.getString(SAVED_STATE_PROBLEM));
             trackableState = savedInstanceState.getBundle(SAVED_STATE_TRACKABLES);
         } else {
@@ -415,11 +410,18 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
+    /**
+     * Checks whether there are favorite points available and sets the corresponding visibility of
+     * "add to favorite" checkbox.
+     */
     private void initializeFavoriteCheck() {
-        if (ConnectorFactory.getConnector(cache).supportsAddToFavorite(cache, typeSelected)) {
-            if (premFavPoints > 0) {
+        final IConnector connector = ConnectorFactory.getConnector(cache);
+
+        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, typeSelected) && loggingManager instanceof ILoggingWithFavorites) {
+            final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
+            if (favoritePoints > 0) {
                 favCheck.setVisibility(View.VISIBLE);
-                favCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, premFavPoints, premFavPoints));
+                favCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, favoritePoints, favoritePoints));
             }
         } else {
             favCheck.setVisibility(View.GONE);
@@ -473,7 +475,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
         outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
         outState.putParcelable(SAVED_STATE_IMAGE, image);
-        outState.putInt(SAVED_STATE_FAVPOINTS, premFavPoints);
         outState.putString(SAVED_STATE_PROBLEM, reportProblemSelected.code);
         // save state of trackables
         final Bundle outTrackables = new Bundle();

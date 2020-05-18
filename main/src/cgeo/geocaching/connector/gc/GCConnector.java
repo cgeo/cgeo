@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
@@ -52,7 +53,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability {
 
     @NonNull
     private static final String CACHE_URL_SHORT = "https://coord.info/";
@@ -256,8 +257,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      *            the cache to add
      * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
-
-    public static boolean addToFavorites(final Geocache cache) {
+    @Override
+    public boolean addToFavorites(@NonNull final Geocache cache) {
         final boolean added = GCParser.addToFavorites(cache);
         if (added) {
             DataStore.saveChangedCache(cache);
@@ -274,8 +275,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      *            the cache to add
      * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
-
-    public static boolean removeFromFavorites(final Geocache cache) {
+    @Override
+    public boolean removeFromFavorites(@NonNull final Geocache cache) {
         final boolean removed = GCParser.removeFromFavorites(cache);
         if (removed) {
             DataStore.saveChangedCache(cache);
@@ -322,12 +323,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
-        return !cache.getType().isEvent();
+        return Settings.isGCPremiumMember() && !cache.getType().isEvent()  && !cache.isOwner();
     }
 
     @Override
-    public boolean supportsAddToFavorite(final Geocache cache, final LogType type) {
-        return cache.supportsFavoritePoints() && Settings.isGCPremiumMember() && !cache.isOwner() && type.isFoundLog();
+    public boolean supportsAddToFavorite(@NonNull final Geocache cache, final LogType type) {
+        return cache.supportsFavoritePoints() && type.isFoundLog();
     }
 
     @Override

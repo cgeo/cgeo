@@ -14,11 +14,11 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
-import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -1381,7 +1381,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Add this cache to the favorite list of the user */
         private void favoriteAdd(final SimpleDisposableHandler handler) {
-            if (GCConnector.addToFavorites(cache)) {
+            final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
+            if (connector.addToFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
@@ -1390,7 +1391,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Remove this cache to the favorite list of the user */
         private void favoriteRemove(final SimpleDisposableHandler handler) {
-            if (GCConnector.removeFromFavorites(cache)) {
+            final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
+            if (connector.removeFromFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
@@ -1485,7 +1487,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout layout = view.findViewById(R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
+            if (!supportsFavoritePoints) {
                 return;
             }
             final ImageButton buttonAdd = view.findViewById(R.id.add_to_favpoint);

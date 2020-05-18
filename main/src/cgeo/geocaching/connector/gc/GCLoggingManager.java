@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractLoggingManager;
+import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -36,7 +37,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
+class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String>, ILoggingWithFavorites {
 
     private final LogCacheActivity activity;
     private final Geocache cache;
@@ -213,7 +214,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public int getPremFavoritePoints() {
+    public int getFavoritePoints() {
         return (hasLoaderError || hasFavPointLoadError) ? 0 : premFavcount;
     }
 

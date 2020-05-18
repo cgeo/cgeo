@@ -730,6 +730,7 @@
     <string name="feature_search_geocode">Search by geocode</string>
     <string name="feature_search_owner">Search by owner</string>
     <string name="feature_search_finder">Search by finder</string>
+    <string name="feature_favorite">Adding cache to favorites</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Old Mapsforge V3</string>
     <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
