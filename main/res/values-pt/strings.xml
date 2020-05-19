@@ -708,7 +708,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_proximityNotificationGeneral">Notificação geral de prox. no mapa</string>
     <string name="init_summary_proximityNotificationGeneral">Reproduz um som quando alguma geocache ou ponto adicional visível no mapa está mais próximo que a distância de \"longe\" ou de \"perto\". São utilizados diferentes sons para os dois tipos de distâncias.</string>
     <string name="init_proximityNotificationSpecific">Notificação da prox. pontos adicionais</string>
-    <string name="init_summary_proximityNotificationSpecific">Reproduz uma notificação repetida se a geocache ou o ponto adicional estiver mais próximo que a distância de \"longe\" ou de \"perto\". Entra em funcionamento se abrir os detalhes de uma geocache ou ponto adicional, num popup mostrado a partir de um mapa ou com o compasso em utilização. Diferentes sons são utilizados para os dois tipos de distâncias.</string>
+    <string name="init_summary_proximityNotificationSpecific">Reproduz uma notificação repetida se a cache ou o ponto adicional seleccionado estiver mais próximo que a distância de \"longe\" ou de \"perto\". Entra em funcionamento se abrir os detalhes de caches ou pontos adicionais, num popup mostrado a partir de um mapa ou com a bússola em utilização. Diferentes sons são utilizados para os dois tipos de distâncias.</string>
     <string name="far_distance">Distância de longe</string>
     <string name="near_distance">Distância de perto</string>
     <string name="init_proximity_notification_type">Tipo de notificação</string>
@@ -1380,7 +1380,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_inside_no">Não está em locais fechados</string>
     <string name="attribute_in_water_yes">Na água</string>
     <string name="attribute_in_water_no">Não está na água</string>
-    <string name="attribute_no_gps_yes">Sem GPS (caso das letterbox, uso de bússola, …)</string>
+    <string name="attribute_no_gps_yes">Sem GPS (em letterbox, orientação com bússola, etc...)</string>
     <string name="attribute_no_gps_no">Com GPS</string>
     <string name="attribute_overnight_yes">Necessário pernoitar</string>
     <string name="attribute_overnight_no">Não é necessário pernoitar</string>
