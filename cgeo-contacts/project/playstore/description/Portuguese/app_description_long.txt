@@ -1,4 +1,4 @@
-Este é uma extensão de contactos para o c:geo, uma aplicação de geocaching de código aberto. Só funcionará com a aplicação c:geo instalada e permite o acesso directo à sua lista telefónica ao clicar num nome de utilizador no c:geo.
+Esta é uma extensão de contactos para o c:geo, uma aplicação de geocaching de código aberto. Só funcionará com a aplicação c:geo instalada e permite o acesso directo à sua lista telefónica ao clicar num nome de utilizador no c:geo.
 
 Utilização:
 Quando clicar num nome de utilizador no c:geo (e.g. no livro de registos da cache) o menu terá um item para abrir o contacto correspondente nos seus contactos do telefone. Isso permitirá que ligue, ou envie uma mensagem, directamente ao utilizador.
