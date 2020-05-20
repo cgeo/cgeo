@@ -10,6 +10,7 @@ import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.location.Viewport.containing;
 
 import androidx.annotation.NonNull;
 
@@ -28,6 +29,9 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
     private final Disposable timer;
     private boolean downloading = false;
     public long loadThreadRun = -1;
+
+    private SearchResult lastSearchResult = null;
+    private Viewport lastViewport = null;
 
     public LiveCachesOverlay(final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
         super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
@@ -94,7 +98,9 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(getViewport(), getMapZoomLevel() <= 14);
+            final boolean useLastSearchResult = null != lastSearchResult && null != lastViewport && lastViewport.includes(getViewport());
+            final Viewport newViewport = getViewport().resize(3.0);
+            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             MapUtils.filter(result);
@@ -108,6 +114,12 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
             //render
             update(result);
+
+            lastSearchResult = searchResult;
+            if (null == lastViewport || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
+                lastViewport = containing(result);
+            }
+            Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
 
         } finally {
             hideProgress();

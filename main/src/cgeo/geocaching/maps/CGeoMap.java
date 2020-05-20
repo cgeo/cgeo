@@ -57,6 +57,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import static cgeo.geocaching.location.Viewport.containing;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -154,6 +155,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      * Last search result used for displaying header
      */
     private SearchResult lastSearchResult = null;
+    private Viewport lastViewport = null;
     private boolean noMapTokenShowed = false;
     // map status data
     private static boolean followMyLocation = true;
@@ -1416,11 +1418,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         try {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(mapView.getViewport(), mapView.getMapZoomLevel() <= 11);
+            final boolean useLastSearchResult = null != lastSearchResult && null != lastViewport && lastViewport.includes(mapView.getViewport());
+            final Viewport newViewport = mapView.getViewport().resize(3.0);
+            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             MapUtils.filter(result);
+
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
@@ -1430,7 +1435,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             // new collection type needs to remove first to refresh
             caches.removeAll(result);
             caches.addAll(result);
+
             lastSearchResult = searchResult;
+            if (null == lastViewport || (!caches.isEmpty() && lastSearchResult.getCount() > 400)) {
+                lastViewport = containing(caches);
+            }
+            Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
 
             //render
             displayExecutor.execute(new DisplayRunnable(this));
