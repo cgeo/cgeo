@@ -1,0 +1,30 @@
+c:geo is een open source, feature-rijk, altijd klaar-om-te-gebruiken cliënt voor geocaching.com (onofficieel) en het biedt ook basis-ondersteuning voor andere geocaching platformen (zoals OpenCaching). Er is geen webbrowser of export voor nodig - alleen installeren en je kan gelijk beginnen. 
+
+Belangrijkste functies:
+- Bekijk caches op een Live-map 
+- Gebruik Google Maps of OpenStreetMaps
+- Zoek caches op basis van verschillende criteria 
+- Log je vondsten online of offline
+- Sla de cache-gegevens op je apparaat op
+- Maak en beheer waypoints
+- Navigeer met behulp van kompas, kaart of andere apps
+- Importeer/exporteer GPX bestanden 
+- Volledige ondersteuning voor trackables
+- Offline caching functies inclusief offline kaarten
+
+c:geo is een eenvoudig te gebruiken maar krachtige geocaching client met veel extra functies. Alles wat je nodig hebt om te beginnen is een bestaand account op geocaching.com of een ander geocachingplatform (zoals Opencaching).
+Vind caches met behulp van de live kaart of met behulp van één van de vele zoekfuncties.
+
+Navigeer naar een cache of een waypoint met de ingebouwde kompasfunctie, de kaart of deel de coördinaten met verschillende externe apps (bv. Radar, Google Navigatie, StreetView, Locus, Navigon, Sygic en nog veel meer).
+
+Sla de cache-informatie op je apparaat op rechtstreeks vanuit geocaching.com of via GPX bestand om deze beschikbaar te hebben wanneer u maar wilt. 
+Je kan je opgeslagen caches in verschillende lijsten beheren en ze sorteren en filteren naar wens.
+Caches en offline kaarten of statische kaarten kunnen samen worden gebruikt om caches te vinden zonder internet connectie (bijv. bij roaming).
+Logs kunnen online worden geplaatst of offline worden opgeslagen voor latere online plaatsing of geëxporteerd via veldnotities.
+
+Zoek en ontdek trackables, beheer je trackable inventaris en drop een Trackable tijdens het plaatsen van een cache log.
+
+Als je problemen hebt met het installeren van c:geo raadpleeg dan eerst onze FAQ (https://faq.cgeo.org) of bekijk de gebruikershandleiding (https://manual.cgeo.org).
+Als er nog steeds problemen zijn, neem dan contact op met support via e-mail.
+
+Als je wil weten waarom c:geo de gevraagde machtigingen nodig heeft, kijk dan op https://www.cgeo.org voor uitleg.
