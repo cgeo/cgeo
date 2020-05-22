@@ -56,10 +56,6 @@ import com.google.android.gms.maps.model.VisibleRegion;
 
 public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOverlayItem>, OnMapReadyCallback {
 
-    public interface PostRealDistance {
-        void postRealDistance (float realDistance);
-    }
-
     private OnMapDragListener onDragListener;
     private final GoogleMapController mapController = new GoogleMapController();
     private GoogleMap googleMap;
@@ -75,11 +71,16 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
     private OnCacheTapListener onCacheTapListener;
     private boolean showCircles = false;
+    private boolean canDisableAutoRotate = false;
 
     private Lock lock = new ReentrantLock();
 
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
+
+    public interface PostRealDistance {
+        void postRealDistance (float realDistance);
+    }
 
     public GoogleMapView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
@@ -138,6 +139,20 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                     InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
                 }
             }
+        });
+        googleMap.setOnCameraChangeListener(cameraPosition -> {
+            // check for tap on compass rose, which resets bearing to 0.0
+            // only active, if it has been not equal to 0.0 before
+            final float bearing = cameraPosition.bearing;
+            if (canDisableAutoRotate && bearing == 0.0f && Settings.getMapRotation() == Settings.MAPROTATION_AUTO) {
+                canDisableAutoRotate = false;
+                Dialogs.confirm((Activity) getContext(), R.string.map_gm_autorotation, R.string.map_gm_autorotation_disable, (dialog, which) -> {
+                    Settings.setMapRotation(Settings.MAPROTATION_MANUAL);
+                });
+            } else if (bearing != 0.0f) {
+                canDisableAutoRotate = true;
+            }
+            Log.d("bearing=" + cameraPosition.bearing + ", tilt=" + cameraPosition.tilt + ", canDisable=" + canDisableAutoRotate);
         });
         if (mapReadyCallback != null) {
             mapReadyCallback.mapReady();

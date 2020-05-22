@@ -1156,6 +1156,8 @@
     <string name="map_routing_walk">Walk</string>
     <string name="map_routing_bike">Bicycle</string>
     <string name="map_routing_car">Car</string>
+    <string name="map_gm_autorotation">Map auto rotation</string>
+    <string name="map_gm_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
 
     <!-- search -->
     <string name="search_bar_hint">Search for caches</string>
