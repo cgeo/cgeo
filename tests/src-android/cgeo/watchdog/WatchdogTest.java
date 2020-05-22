@@ -4,6 +4,7 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -70,14 +71,6 @@ public class WatchdogTest extends CGeoTestCase {
     }
 
     private static void checkWebsite(final String connectorName, final String url) {    
-        
-        // temporarily disable extremcaching.com
-        // It fails if the SSL certificate of the API has expired, which happens quite regular due to bad maintenance of the site
-        // As it blocks more relevant test results we keep it disabled for the time being
-        if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com")) {
-            return;
-        }
-
         final String page = Network.getResponseData(Network.getRequest(url));
         assertThat(page).overridingErrorMessage("Failed to get response from " + connectorName).isNotEmpty();
     }
@@ -97,9 +90,13 @@ public class WatchdogTest extends CGeoTestCase {
     @NotForIntegrationTests
     public static void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
-            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) && !(connector instanceof InternalConnector)) {
+            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) && !(connector instanceof InternalConnector) && !(connector instanceof ECConnector)) {
                 checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());
             }
         }
+
+        // move website check for EC to the end to not block checking the other websites if EC is failing
+        final IConnector connector = ECConnector.getInstance();
+        checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());
     }
 }
