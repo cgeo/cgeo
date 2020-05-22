@@ -1,0 +1,30 @@
+c:geo è un client non ufficiale per geocaching.com open source, pienamente funzionante, subito pronto da usare, e offre supporto base anche per altre piattaforme di geocaching (come Opencaching). Non richiede un browser web o esportazioni - basta installarlo e avviarlo. 
+
+Caratteristiche principali:
+- Visualizza le cache su una Mappa Live 
+- Usa Google Maps o OpenStreetMaps
+- Cerca cache secondo vari criteri 
+- Registra i tuoi ritrovamenti online o offline
+- Memorizza informazioni cache sul tuo dispositivo
+- Crea e gestisci i waypoint
+- Naviga utilizzando bussola, mappa o altre applicazioni
+- Importa/Esporta file GPX 
+- Supporto completo per trackable
+- Funzioni di cache offline incluse le mappe offline
+
+c:geo è un semplice client di geocaching ma potenziato con molte funzionalità aggiuntive. Tutto quello che ti serve per iniziare è un account su geocaching.com o un'altra piattaforma di geocaching (come Opencaching).
+Trova le cache usando la mappa live o utilizzando una delle tante funzioni di ricerca.
+
+Naviga verso cache o waypoint con la funzione di bussola integrata e la mappa o passa le coordinate a varie applicazioni esterne (es. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic e molti altri).
+
+Memorizza le informazioni cache sul tuo dispositivo direttamente da geocaching.com così come tramite l'importazione di file GPX per renderle disponibili quando vuoi. 
+Puoi gestire i tuoi cache memorizzati in liste diverse e selezionarli in base alle tue esigenze.
+Cache salvati insieme a file di mappe offline o statiche possono essere utilizzati per trovare cache senza connessione internet (ad es. in roaming).
+I registri Log possono essere pubblicati online o memorizzati offline per un caricamento successivo o esportati tramite note di campo (field notes).
+
+Cerca e scopri trackables, gestisci il tuo inventario trackable e rilascia un trackable durante la pubblicazione di un log di cache.
+
+Se hai problemi ad installare o utilizzare c:geo, consulta le nostre FAQ (https://faq.cgeo.org) o consulta la guida utente (https://manual.cgeo.org).
+Se ci sono ancora problemi, contatta il supporto via email.
+
+Se vuoi sapere perché questo plugin c:geo ha bisogno delle autorizzazioni richieste, visita https://www.cgeo.org/faq.html#plugin-contacts-privacy per una spiegazione.
