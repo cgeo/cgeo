@@ -11,6 +11,8 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -36,7 +38,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -59,6 +61,18 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
 
     public static SuConnector getInstance() {
         return Holder.INSTANCE;
+    }
+
+    /**
+     * For geocaching.su geocode is not immutable because first two letters
+     * indicate cache type, which may change. However ID is immutable, that's why it's preferred
+     * to use ID in all the places
+     *
+     * @param geocode cache's geocode like MV15736
+     * @return cache ID, i.e. 15736
+     */
+    public static String geocodeToId(final String geocode) {
+        return geocode.substring(2);
     }
 
     public OAuthLevel getSupportedAuthLevel() {
@@ -318,24 +332,32 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         return 9500;
     }
 
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull
-        private static final SuConnector INSTANCE = new SuConnector();
+    @Override
+    public SearchResult searchByKeyword(@NonNull final String keyword) {
+        try {
+            return new SearchResult(SuApi.searchByKeyword(keyword, this));
+        } catch (final SuApi.NotAuthorizedException e) {
+            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+        } catch (final SuApi.ConnectionErrorException e) {
+            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByKeyword failed: ", e);
+            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+        }
     }
 
-    /**
-     * For geocaching.su geocode is not immutable because first two letters
-     * indicate cache type, which may change. However ID is immutable, that's why it's preferred
-     * to use ID in all the places
-     *
-     * @param geocode cache's geocode like MV15736
-     * @return cache ID, i.e. 15736
-     */
-    public static String geocodeToId(final String geocode) {
-        return geocode.substring(2);
+    @Override
+    public SearchResult searchByOwner(@NonNull final String owner) {
+        try {
+            return new SearchResult(SuApi.searchByOwner(owner, this));
+        } catch (final SuApi.NotAuthorizedException e) {
+            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+        } catch (final SuApi.ConnectionErrorException e) {
+            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+        } catch (final Exception e) {
+            Log.e("SuConnector.searchByOwner failed: ", e);
+            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+        }
     }
 
     /**
@@ -346,6 +368,14 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public String getCreateAccountUrl() {
         return StringUtils.join(getHostUrl(), "/?pn=14");
+    }
+
+    /**
+     * initialization on demand holder pattern
+     */
+    private static class Holder {
+        @NonNull
+        private static final SuConnector INSTANCE = new SuConnector();
     }
 
 }
