@@ -33,7 +33,7 @@ public class DirectionDrawer {
         this.destinationCoords = coords;
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
         this.postRealDistance = postRealDistance;
-        width = 8f * DisplayUtils.getDisplayDensity();
+        width = DisplayUtils.getThinLineWidth();
     }
 
     public void setCoordinates(final Location coordinatesIn) {
