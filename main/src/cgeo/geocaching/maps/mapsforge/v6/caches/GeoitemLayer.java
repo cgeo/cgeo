@@ -1,12 +1,10 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
+import cgeo.geocaching.utils.DisplayUtils;
 
-import android.content.Context;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import org.mapsforge.core.graphics.Bitmap;
 import org.mapsforge.core.graphics.Paint;
@@ -25,10 +23,7 @@ public class GeoitemLayer extends Marker {
 
     static {
 
-        final DisplayMetrics metrics = new DisplayMetrics();
-        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(metrics);
-
+        final DisplayMetrics metrics = DisplayUtils.getDisplayMetrics();
         tapSpanRadius = metrics.densityDpi * tapSpanInches / 2.0;
     }
 

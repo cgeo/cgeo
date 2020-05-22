@@ -1,19 +1,16 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Log;
 
-import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -26,10 +23,7 @@ public class ScaleDrawer {
     private float pixelDensity = 0;
 
     public ScaleDrawer() {
-        final DisplayMetrics metrics = new DisplayMetrics();
-        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(metrics);
-        pixelDensity = metrics.density;
+        pixelDensity = DisplayUtils.getDisplayDensity();
     }
 
     private static double keepSignificantDigit(final double distance) {

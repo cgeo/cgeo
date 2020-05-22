@@ -1,12 +1,8 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Route;
-
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import cgeo.geocaching.utils.DisplayUtils;
 
 import androidx.core.util.Pair;
 
@@ -39,11 +35,7 @@ public class RouteLayer extends Layer implements Route.RouteUpdater {
 
     public RouteLayer(final PostRealDistance postRealRouteDistance) {
         this.postRealRouteDistance = postRealRouteDistance;
-
-        final DisplayMetrics metrics = new DisplayMetrics();
-        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(metrics);
-        width = 8f * metrics.density;
+        width = 8f * DisplayUtils.getDisplayDensity();
     }
 
     public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
