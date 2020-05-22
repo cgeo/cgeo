@@ -1,20 +1,17 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CanvasUtils;
+import cgeo.geocaching.utils.DisplayUtils;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.location.Location;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 
@@ -36,13 +33,7 @@ public class DirectionDrawer {
         this.destinationCoords = coords;
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
         this.postRealDistance = postRealDistance;
-
-        final DisplayMetrics metrics = new DisplayMetrics();
-        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(metrics);
-
-        width = 8f * metrics.density;
-
+        width = 8f * DisplayUtils.getDisplayDensity();
     }
 
     public void setCoordinates(final Location coordinatesIn) {

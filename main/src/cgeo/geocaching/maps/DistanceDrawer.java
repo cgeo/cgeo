@@ -1,11 +1,10 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.utils.DisplayUtils;
 
-import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,7 +13,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 public class DistanceDrawer {
     private final Geopoint destinationCoords;
@@ -44,10 +42,7 @@ public class DistanceDrawer {
         this.destinationCoords = destinationCoords;
         this.showBothDistances = showBothDistances;
 
-        final DisplayMetrics metrics = new DisplayMetrics();
-        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(metrics);
-
+        final DisplayMetrics metrics = DisplayUtils.getDisplayMetrics();
         final float pixelDensity = metrics.density;
 
         boxPadding = 2;

@@ -9,15 +9,13 @@ import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.DisplayUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -187,12 +185,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     }
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
-        final DisplayMetrics metrics = new DisplayMetrics();
-        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(metrics);
-
         final PolylineOptions options = new PolylineOptions()
-                .width(5f * metrics.density)
+                .width(5f * DisplayUtils.getDisplayDensity())
                 .color(0x80EB391E)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
