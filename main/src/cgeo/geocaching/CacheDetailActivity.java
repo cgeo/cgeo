@@ -1521,7 +1521,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonWYG.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
                     if (isWhereYouGoInstalled()) {
-                        CacheDetailActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
+                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache)));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        CacheDetailActivity.this.startActivity(intent);
                     } else {
                         ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.whereyougo_package));
                     }
