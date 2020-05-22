@@ -186,7 +186,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
-                .width(5f * DisplayUtils.getDisplayDensity())
+                .width(DisplayUtils.getThinLineWidth())
                 .color(0x80EB391E)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
@@ -286,7 +286,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                 historyObjs.addPolyline(new PolylineOptions()
                     .addAll(points)
                     .color(0xFFFFFFFF)
-                    .width(3)
+                    .width(DisplayUtils.getThinLineInsetWidth())
                     .zIndex(ZINDEX_HISTORY)
                 );
 
@@ -294,7 +294,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                 historyObjs.addPolyline(new PolylineOptions()
                     .addAll(points)
                     .color(trailColor)
-                    .width(7)
+                    .width(DisplayUtils.getThinLineWidth())
                     .zIndex(ZINDEX_HISTORY_SHADOW)
                 );
             }
@@ -307,7 +307,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             routeObjs.addPolyline(new PolylineOptions()
                     .addAll(route)
                     .color(0xFF0000FF)
-                    .width(7)
+                    .width(DisplayUtils.getThinLineWidth())
                     .zIndex(ZINDEX_ROUTE)
             );
         }
