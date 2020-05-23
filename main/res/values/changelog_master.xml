@@ -8,6 +8,8 @@
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
     · Change: Coordinate editor - Validation deferred to save coordinates\n
     · Change: Updated several links to https\n
+    · New: Disable Google Maps autorotation by tap on compass rose\n
+    · New: Search by keyword and owner for geocaching.su\n
     · New: Show info on completion of \"add current location\"\n
     · New: Add option to clear the goto history\n
     · New: Support other OSM based online map sources\n
