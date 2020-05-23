@@ -697,6 +697,11 @@
                 android:value="cgeo.geocaching.settings.SettingsActivity" />
         </activity>
         <activity
+            android:name=".SelectTrackFileActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/track_file_select_title">
+        </activity>
+        <activity
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/waypoint"

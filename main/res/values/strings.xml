@@ -1033,10 +1033,11 @@
     <string name="file_searching">Searching for matching files</string>
     <string name="file_title_searching">Searching</string>
 
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Choose directory</string>
     <string name="simple_dir_chooser_current_path">Path:</string>
     <string name="simple_dir_chooser_invalid_path">Invalid Path</string>
+    <string name="simple_file_chooser_title">Choose file</string>
 
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
@@ -1056,10 +1057,10 @@
     <string name="gpx_import_select_list_title">Import GPX to list</string>
     <string name="gpx_import_android">Import from Android</string>
 
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Select map file</string>
+    <string name="track_file_select_title">Select track file</string>
 
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Import from send2cgeo</string>
     <string name="web_import_waiting">Waiting for new caches from send2cgeo…</string>
@@ -1138,6 +1139,8 @@
     <string name="map_hidewp_original">Hide original waypoints</string>
     <string name="map_hidewp_parking">Hide parking waypoints</string>
     <string name="map_hidewp_visited">Hide visited waypoints</string>
+    <string name="map_hide_track">Hide track</string>
+    <string name="map_load_track">Load track</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>

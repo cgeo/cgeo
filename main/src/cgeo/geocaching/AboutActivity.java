@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.files.GPXTrackImporter;
-import cgeo.geocaching.files.GPXTrackParser;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
@@ -12,6 +11,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
+import cgeo.geocaching.utils.TrackUtils;
 import cgeo.geocaching.utils.Version;
 
 import android.app.Activity;
@@ -31,8 +31,8 @@ import androidx.annotation.StringRes;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -210,7 +210,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             return view;
         }
 
-        private void consume(final LinkedList<GPXTrackParser.Track> tracks) {
+        private void consume(final ArrayList<TrackUtils.Track> tracks) {
             String info = "received #tracks: " + tracks.size();
             for (int i = 0; i < tracks.size(); i++) {
                 info += ", track #" + i + " \"" + tracks.get(i).trackName + "\": #points=" + tracks.get(i).track.size();

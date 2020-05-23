@@ -54,6 +54,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TrackUtils;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -356,6 +357,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             }
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
+            TrackUtils.onPrepareOptionsMenu(menu);
 
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
@@ -517,17 +519,19 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                final String language = MapProviderFactory.getLanguage(id);
-                if (language != null) {
-                    item.setChecked(true);
-                    changeLanguage(id);
-                    return true;
-                } else {
-                    final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                    if (mapSource != null) {
+                if (!TrackUtils.onOptionsItemSelected(this, id)) {
+                    final String language = MapProviderFactory.getLanguage(id);
+                    if (language != null) {
                         item.setChecked(true);
-                        changeMapSource(mapSource);
+                        changeLanguage(id);
                         return true;
+                    } else {
+                        final MapSource mapSource = MapProviderFactory.getMapSource(id);
+                        if (mapSource != null) {
+                            item.setChecked(true);
+                            changeMapSource(mapSource);
+                            return true;
+                        }
                     }
                 }
         }
@@ -1712,6 +1716,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 caches.invalidate(changedGeocodes);
             }
         }
+        TrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     private static class ResourceBitmapCacheMonitor {

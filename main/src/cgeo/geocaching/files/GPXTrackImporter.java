@@ -1,6 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TrackUtils;
 
 import android.app.Activity;
 
@@ -9,7 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -21,10 +22,10 @@ public class GPXTrackImporter {
     private GPXTrackImporter(final Activity activity) {
     }
 
-    public static void doImport(final File file, final Consumer<LinkedList<GPXTrackParser.Track>> callback) {
+    public static void doImport(final File file, final Consumer<ArrayList<TrackUtils.Track>> callback) {
         Schedulers.io().createWorker().schedule(() -> {
             try {
-                final LinkedList<GPXTrackParser.Track> value = doInBackground(file);
+                final ArrayList<TrackUtils.Track> value = doInBackground(file);
                 AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                     try {
                         callback.accept(value);
@@ -38,7 +39,7 @@ public class GPXTrackImporter {
         });
     }
 
-    private static LinkedList<GPXTrackParser.Track> doInBackground(final File file) {
+    private static ArrayList<TrackUtils.Track> doInBackground(final File file) {
         BufferedInputStream stream = null;
         try {
             stream = new BufferedInputStream(new FileInputStream(file));

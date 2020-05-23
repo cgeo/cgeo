@@ -1,6 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.utils.TrackUtils;
 
 import android.sax.Element;
 import android.sax.RootElement;
@@ -12,7 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
@@ -22,20 +23,10 @@ public class GPXTrackParser {
 
     protected final String namespace;
     private final String version;
-    private final LinkedList<Track> result = new LinkedList<>();
+    private final ArrayList<TrackUtils.Track> result = new ArrayList<>();
 
     // temporary variables
-    private Track temp;
-
-    public static class Track {
-        public String trackName;
-        public LinkedList<Geopoint> track;
-
-        public Track() {
-            trackName = "";
-            track = new LinkedList<>();
-        }
-    }
+    private TrackUtils.Track temp;
 
     protected GPXTrackParser(final String namespaceIn, final String versionIn) {
         namespace = namespaceIn;
@@ -43,7 +34,7 @@ public class GPXTrackParser {
     }
 
     @NonNull
-    public LinkedList<Track> parse(@NonNull final InputStream stream) throws IOException, ParserException {
+    public ArrayList<TrackUtils.Track> parse(@NonNull final InputStream stream) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element track = root.getChild(namespace, "trk");
         final Element trackSegment = track.getChild(namespace, "trkseg");
@@ -77,8 +68,7 @@ public class GPXTrackParser {
     }
 
     private void startNewTrack() {
-        temp = new Track();
+        temp = new TrackUtils.Track();
     }
 
 }
-

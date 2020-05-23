@@ -634,6 +634,14 @@ public class Settings {
         }
     }
 
+    public static String getTrackFile() {
+        return getString(R.string.pref_trackfile, null);
+    }
+
+    public static void setTrackFile(final String filename) {
+        putString(R.string.pref_trackfile, filename);
+    }
+
     public static CoordInputFormatEnum getCoordInputFormat() {
         return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.DEFAULT_INT_VALUE));
     }
@@ -701,6 +709,10 @@ public class Settings {
 
     public static boolean isExcludeWpVisited() {
         return getBoolean(R.string.pref_excludeWpVisited, false);
+    }
+
+    public static boolean isHideTrack() {
+        return getBoolean(R.string.pref_hide_track, false);
     }
 
     public static boolean isStoreLogImages() {
@@ -1387,6 +1399,10 @@ public class Settings {
 
     public static void setExcludeWpVisited(final boolean exclude) {
         putBoolean(R.string.pref_excludeWpVisited, exclude);
+    }
+
+    public static void setHideTrack(final boolean hide) {
+        putBoolean(R.string.pref_hide_track, hide);
     }
 
     static void setLogin(final String username, final String password) {

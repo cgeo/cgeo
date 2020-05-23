@@ -163,6 +163,13 @@
                 android:title="@string/map_hidewp_visited"
                 app:showAsAction="ifRoom|withText">
             </item>
+            <item
+                android:id="@+id/menu_hide_track"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_hidetrack"
+                android:title="@string/map_hide_track"
+                app:showAsAction="ifRoom|withText">
+            </item>
         </menu>
     </item>
     <item
@@ -194,6 +201,9 @@
 	        </group>
         </menu>
     </item>
+    <item
+        android:id="@+id/menu_load_track"
+        android:title="@string/map_load_track" />
     <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
