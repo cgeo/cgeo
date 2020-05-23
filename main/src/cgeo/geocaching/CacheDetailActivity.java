@@ -556,6 +556,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     protected void onPostExecute(final Boolean result) {
                         if (result) {
                             notifyDataSetChanged();
+                            LocalBroadcastManager.getInstance(CacheDetailActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
                         }
                     }
                 }.execute();
