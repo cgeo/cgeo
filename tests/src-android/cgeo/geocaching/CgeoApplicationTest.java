@@ -238,7 +238,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, boolean)}
      */
     @MediumTest
     public static void testSearchByViewport() {
