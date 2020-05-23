@@ -8,6 +8,7 @@
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
     · Change: Coordinate editor - Validation deferred to save coordinates\n
     · Change: Updated several links to https\n
+    · Change: Activate filter options on Google Maps single cache map when live map is enabled\n
     · New: Disable Google Maps autorotation by tap on compass rose\n
     · New: Search by keyword and owner for geocaching.su\n
     · New: Show info on completion of \"add current location\"\n
@@ -22,6 +23,7 @@
     · New: Open images from cache detail page in separate task\n
     · New: Show waypoint user note in waypoint popup\n
     · New: Added function to write debug logfile (\"LogCat\")\n
+    · Fix: Show waypoints of owned cache on OSM single cache map\n
     · Fix: Crash on moving data to SD card\n
     · Fix: Cache gallery tab empty after editing personal note\n
     · Fix: Crashes under special circumstances on map\n
