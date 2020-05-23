@@ -72,6 +72,7 @@
     <string translatable="false" name="pref_excludeWpOriginal">excludeWpOriginal</string>
     <string translatable="false" name="pref_excludeWpParking">excludeWpParking</string>
     <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>
+    <string translatable="false" name="pref_hide_track">hideTrack</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_signature">signature</string>
@@ -141,6 +142,7 @@
     <string translatable="false" name="pref_version">version</string>
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
+    <string translatable="false" name="pref_trackfile">trackfile</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
     <string translatable="false" name="pref_gccustomdate">gccustomdate</string>

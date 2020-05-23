@@ -1,77 +1,16 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.files.AbstractFileListActivity;
-import cgeo.geocaching.files.FileSelectionListAdapter;
-import cgeo.geocaching.files.IFileSelectionView;
-import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import java.io.File;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import org.openintents.intents.FileManagerIntents;
-
-public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectionListAdapter> implements IFileSelectionView {
-
-    private static final int REQUEST_DIRECTORY = 1;
-
-    @BindView(R.id.select_dir) protected Button selectDirectory;
-
-    private String mapFile;
+public class SelectMapfileActivity extends AbstractSelectFileActivity {
 
     public SelectMapfileActivity() {
-        super("map");
-    }
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-
-        mapFile = Settings.getMapFile();
-
-        selectDirectory.setOnClickListener(v -> {
-            try {
-                final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
-                dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
-                        getString(R.string.simple_dir_chooser_title));
-                dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
-                        getString(android.R.string.ok));
-                startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-            } catch (final RuntimeException ignored) {
-                // OI file manager not available
-                final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
-                dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getExternalPublicCgeoDirectory().getAbsolutePath());
-                startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-            }
-        });
-        selectDirectory.setText(getString(R.string.simple_dir_chooser_title));
-        selectDirectory.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void close() {
-
-        final Intent intent = new Intent();
-        intent.putExtra(Intents.EXTRA_MAP_FILE, mapFile);
-
-        setResult(RESULT_OK, intent);
-
-        finish();
-    }
-
-    @Override
-    protected FileSelectionListAdapter getAdapter(final List<File> files) {
-        return new FileSelectionListAdapter(this, files);
+        super("map", Intents.EXTRA_MAP_FILE, Settings.getMapFile(), true);
+        setContext(SelectMapfileActivity.this);
     }
 
     @Override
@@ -79,36 +18,4 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         return LocalStorage.getMapDirectories();
     }
 
-    @Override
-    public String getCurrentFile() {
-        return mapFile;
-    }
-
-    @Override
-    public void setCurrentFile(final String name) {
-        mapFile = name;
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
-
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-
-        if (requestCode == REQUEST_DIRECTORY) {
-            mapFile = new File(data.getData().getPath()).getAbsolutePath();
-            close();
-        }
-    }
-
-    @Override
-    protected boolean requireFiles() {
-        return false;
-    }
 }
