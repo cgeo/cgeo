@@ -415,10 +415,10 @@
     <string name="about_starting_text_basics_text">O Geocaching é um jogo ao ar livre para procurar e encontrar as chamadas \"caches\". Esta aplicação pode ser usada para jogar este jogo.\n\nPode ler mais sobre as <b>Noções básicas do c:geo</b> no nosso manual do utilizador:
 https://manual.cgeo.org/pt/basicuse</string>
     <string name="about_starting_text_device_head">Permissões do c:geo neste dispositivo</string>
-    <string name="about_starting_text_device_text">O c:geo precisa de determinadas permissões no seu dispositivo:\n<b>Localização</b>: acesso ao GPS para localizar a sua posição e calcular a distância e a direcção para as geocaches\n<b>Armazenamento</b>: escrita de dados no armazenamento do seu telefone quando guarda geocaches para uso offline, para importar/exportar ficheiros e leitura de mapas offline\n\nSem estas permissões não será capaz de usar o c:geo.</string>
+    <string name="about_starting_text_device_text">O c:geo precisa de determinadas permissões no seu dispositivo:\n<b>Localização</b>: acesso ao GPS para localizar a sua posição e assim permitir o cálculo da distância e da direcção para as geocaches\n<b>Armazenamento</b>: escrita de dados no armazenamento do seu telefone quando guarda geocaches para uso offline, para importar/exportar ficheiros e leitura de mapas offline\n\nSem estas permissões não será capaz de usar o c:geo.</string>
     <string name="about_starting_text_first_head">Primeiros passos com o c:geo</string>
     <string name="about_starting_text_first_text">De modo a utilizar o c:geo, precisa de uma conta para uma plataforma de geocaching à sua escolha (externa a esta aplicação). Essa conta tem de ser configurada nas definições do c:geo, na secção \"serviço\", antes de tirar proveito do c:geo!\n\nPode ler mais sobre os <b>Primeiros passos no c:geo</b> no nosso manual do utilizador: https://manual.cgeo.org/pt/firststeps</string>
-    <string name="open_services_page">Configure a(s) sua(s) plataforma(s) de Geocaching</string>
+    <string name="open_services_page">Configuração de serviços de geocaching</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
     <string name="about_system_info_send_button">Enviar por email…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
