@@ -1,11 +1,14 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.files.GPXTrackImporter;
+import cgeo.geocaching.files.GPXTrackParser;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
@@ -26,8 +29,10 @@ import android.widget.TextView;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -198,8 +203,19 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 showShortToast(getString(R.string.clipboard_copy_ok));
             });
             share.setOnClickListener(view12 -> ShareUtils.shareAsEMail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
-            logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
+            logcat.setOnClickListener(view13 -> {
+                // DebugUtils.createLogcat(AboutActivity.this)
+                GPXTrackImporter.doImport(new File(LocalStorage.getGpxImportDirectory() + "/IIer Tour.gpx"), result -> consume(result));
+            });
             return view;
+        }
+
+        private void consume(final LinkedList<GPXTrackParser.Track> tracks) {
+            String info = "received #tracks: " + tracks.size();
+            for (int i = 0; i < tracks.size(); i++) {
+                info += ", track #" + i + " \"" + tracks.get(i).trackName + "\": #points=" + tracks.get(i).track.size();
+            }
+            Log.e(info);
         }
     }
 
