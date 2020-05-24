@@ -1095,6 +1095,8 @@
     <string name="map_routing_walk">A piedi</string>
     <string name="map_routing_bike">Bicicletta</string>
     <string name="map_routing_car">Automobile</string>
+    <string name="map_gm_autorotation">Rotazione automatica mappa</string>
+    <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca cache</string>
     <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
