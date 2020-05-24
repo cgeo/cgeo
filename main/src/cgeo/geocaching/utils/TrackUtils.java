@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectTrackFileActivity;
+import cgeo.geocaching.files.GPXTrackImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
@@ -11,6 +12,8 @@ import android.content.Intent;
 import android.view.Menu;
 import static android.app.Activity.RESULT_OK;
 
+import androidx.annotation.Nullable;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -18,16 +21,64 @@ import org.apache.commons.lang3.StringUtils;
 
 public class TrackUtils {
 
-    public static final int REQUEST_CODE_GET_TRACKFILE = 47121;
+    private static final int REQUEST_CODE_GET_TRACKFILE = 47121;
 
     public static class Track {
-        public String trackName;
-        public ArrayList<Geopoint> track;
+        private String trackName;
+        private ArrayList<Geopoint> track;
 
         public Track() {
             trackName = "";
             track = new ArrayList<>();
         }
+
+        public String getTrackName() {
+            return trackName;
+        }
+
+        public void setTrackName(final String trackName) {
+            this.trackName = trackName;
+        }
+
+        public ArrayList<Geopoint> getTrack() {
+            return track;
+        }
+
+        public int getSize() {
+            return track.size();
+        }
+
+        public void add(final Geopoint geopoint) {
+            track.add(geopoint);
+        }
+    }
+
+    public static class Tracks {
+        private ArrayList<Track> tracks;
+
+        public Tracks() {
+            tracks = new ArrayList<>();
+        }
+
+        public void add(final Track track) {
+            tracks.add(track);
+        }
+
+        public int getSize() {
+            return tracks.size();
+        }
+
+        public Track get(final int i) {
+            return tracks.get(i);
+        }
+    }
+
+    public interface TrackUpdaterSingle {
+        void updateTrack(Track track);
+    }
+
+    public interface TrackUpdaterMulti {
+        void updateTracks(Tracks tracks);
     }
 
     protected TrackUtils() {
@@ -49,14 +100,14 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable hideOptionsChanged) {
         if (id == R.id.menu_load_track) {
             final Intent intent = new Intent(activity, SelectTrackFileActivity.class);
             activity.startActivityForResult(intent, REQUEST_CODE_GET_TRACKFILE);
             return true;
         } else if (id == R.id.menu_hide_track) {
             Settings.setHideTrack(!Settings.isHideTrack());
-            // @todo: feedback to caller?
+            hideOptionsChanged.run();
             return true;
         } else {
             return false;
@@ -70,18 +121,22 @@ public class TrackUtils {
      * @param data additional intent data delivered
      * @return true, if successfully selected track file / false else
      */
-    public static boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        if (requestCode == REQUEST_CODE_GET_TRACKFILE && resultCode == RESULT_OK) {
-            if (data.hasExtra(Intents.EXTRA_GPX_FILE)) {
-                final String filename = data.getStringExtra(Intents.EXTRA_GPX_FILE);
-                final File file = new File(filename);
-                if (!file.isDirectory()) {
-                    Settings.setTrackFile(filename);
+    public static boolean onActivityResult(final int requestCode, final int resultCode, final Intent data, @Nullable final TrackUpdaterMulti updateTracks) {
+        if (requestCode == REQUEST_CODE_GET_TRACKFILE && resultCode == RESULT_OK && data.hasExtra(Intents.EXTRA_GPX_FILE)) {
+            final String filename = data.getStringExtra(Intents.EXTRA_GPX_FILE);
+            final File file = new File(filename);
+            if (!file.isDirectory()) {
+                Settings.setTrackFile(filename);
+                if (null != updateTracks) {
+                    loadTracks(updateTracks);
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
 
+    public static void loadTracks(final TrackUpdaterMulti updateTracks) {
+        GPXTrackImporter.doImport(new File(Settings.getTrackFile()), updateTracks);
+    }
 }

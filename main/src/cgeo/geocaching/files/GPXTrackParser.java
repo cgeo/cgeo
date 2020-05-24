@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +22,7 @@ public class GPXTrackParser {
 
     protected final String namespace;
     private final String version;
-    private final ArrayList<TrackUtils.Track> result = new ArrayList<>();
+    private final TrackUtils.Tracks result = new TrackUtils.Tracks();
 
     // temporary variables
     private TrackUtils.Track temp;
@@ -34,14 +33,14 @@ public class GPXTrackParser {
     }
 
     @NonNull
-    public ArrayList<TrackUtils.Track> parse(@NonNull final InputStream stream) throws IOException, ParserException {
+    public TrackUtils.Tracks parse(@NonNull final InputStream stream) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element track = root.getChild(namespace, "trk");
         final Element trackSegment = track.getChild(namespace, "trkseg");
         final Element trackPoint = trackSegment.getChild(namespace, "trkpt");
 
         track.setStartElementListener(attrs -> startNewTrack());
-        track.getChild(namespace, "name").setEndTextElementListener(body -> temp.trackName = body);
+        track.getChild(namespace, "name").setEndTextElementListener(body -> temp.setTrackName(body));
         track.setEndElementListener(() -> {
             result.add(temp);
             temp = null;
@@ -52,7 +51,7 @@ public class GPXTrackParser {
                 final String latitude = attrs.getValue("lat");
                 final String longitude = attrs.getValue("lon");
                 if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-                    temp.track.add(new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude)));
+                    temp.add(new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude)));
                 }
             }
         });
