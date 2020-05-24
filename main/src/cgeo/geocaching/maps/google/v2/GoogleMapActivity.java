@@ -7,11 +7,13 @@ import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -149,8 +151,15 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
             default:
                 break;
         }
+        TrackUtils.onPrepareOptionsMenu(menu);
 
         return result;
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        TrackUtils.onActivityResult(requestCode, resultCode, data, mapBase::setTracks);
     }
 
     @Override

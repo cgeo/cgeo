@@ -58,6 +58,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ActionBar;
@@ -150,6 +151,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private ProximityNotification proximityNotification;
     private Route route;
+    private TrackUtils.Tracks tracks = null;
 
     // status data
     /**
@@ -628,6 +630,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
     }
 
+    private void resumeTrack() {
+        if (null == tracks) {
+            TrackUtils.loadTracks(this::setTracks);
+        } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory && tracks.getSize() > 0) {
+            ((GooglePositionAndHistory) overlayPositionAndScale).updateTrack(tracks.get(0));
+        }
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -663,6 +674,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
             });
         }
+        resumeTrack();
     }
 
     @Override
@@ -938,14 +950,26 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 menuCompass();
                 return true;
             default:
-                final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                if (mapSource != null) {
-                    item.setChecked(true);
-                    changeMapSource(mapSource);
-                    return true;
+                if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus)) {
+                    final MapSource mapSource = MapProviderFactory.getMapSource(id);
+                    if (mapSource != null) {
+                        item.setChecked(true);
+                        changeMapSource(mapSource);
+                        return true;
+                    }
                 }
         }
         return false;
+    }
+
+    @Override
+    public void setTracks(final TrackUtils.Tracks tracks) {
+        this.tracks = tracks;
+        resumeTrack();
+    }
+
+    private void updateTrackHideStatus() {
+        overlayPositionAndScale.repaintRequired();
     }
 
     private boolean storeCaches(final Set<String> geocodesInViewport) {
