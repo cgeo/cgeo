@@ -11,6 +11,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
@@ -31,10 +32,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class GooglePositionAndHistory implements PositionAndHistory, Route.RouteUpdater {
+public class GooglePositionAndHistory implements PositionAndHistory, Route.RouteUpdater, TrackUtils.TrackUpdaterSingle {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION = 10;
+    public static final float ZINDEX_TRACK = 6;
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
@@ -59,6 +61,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private GoogleMapObjects positionObjs;
     private GoogleMapObjects historyObjs;
     private GoogleMapObjects routeObjs;
+    private GoogleMapObjects trackObjs;
     private GoogleMapView mapView;
     private final int trailColor;
     private GoogleMapView.PostRealDistance postRealDistance = null;
@@ -68,13 +71,14 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private ArrayList<LatLng> route = null;
     private Viewport lastViewport = null;
-
+    private ArrayList<LatLng> track = null;
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         routeObjs = new GoogleMapObjects(googleMap);
+        trackObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
         trailColor = Settings.getTrailColor();
         this.postRealDistance = postRealDistance;
@@ -168,15 +172,23 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         repaintRequired();
     }
 
+    @Override
+    public void updateTrack(final TrackUtils.Track track) {
+        this.track = new ArrayList<>();
+        final ArrayList<Geopoint> temp = track.getTrack();
+        for (int i = 0; i < track.getSize(); i++) {
+            this.track.add(new LatLng(temp.get(i).getLatitude(), temp.get(i).getLongitude()));
+        }
+        repaintRequired();
+    }
 
     @Override
     public void repaintRequired() {
         drawPosition();
-        if (Settings.isMapTrail()) {
-            drawHistory();
-        }
+        drawHistory();
         drawRoute();
         drawViewport(lastViewport);
+        drawTrack();
     }
 
 
@@ -255,51 +267,52 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (null == coordinates) {
             return;
         }
-
         historyObjs.removeAll();
+        if (!Settings.isMapTrail()) {
 
-        // always add current position to drawn history to have a closed connection
-        final ArrayList<Location> paintHistory = getHistory();
-        paintHistory.add(coordinates);
+            // always add current position to drawn history to have a closed connection
+            final ArrayList<Location> paintHistory = getHistory();
+            paintHistory.add(coordinates);
 
-        final int size = paintHistory.size();
-        if (size == 1) {
-            return;
-        }
-
-        Location prev = paintHistory.get(0);
-        int current = 1;
-        while (current < size) {
-            final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
-            points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
-
-            boolean paint = false;
-            while (!paint && current < size) {
-                final Location now = paintHistory.get(current);
-                current++;
-                if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                    points.add(new LatLng(now.getLatitude(), now.getLongitude()));
-                } else {
-                    paint = true;
-                }
-                prev = now;
+            final int size = paintHistory.size();
+            if (size == 1) {
+                return;
             }
-            if (points.size() > 1) {
-                // history line
-                historyObjs.addPolyline(new PolylineOptions()
-                    .addAll(points)
-                    .color(0xFFFFFFFF)
-                    .width(DisplayUtils.getHistoryLineInsetWidth())
-                    .zIndex(ZINDEX_HISTORY)
-                );
 
-                // history line shadow
-                historyObjs.addPolyline(new PolylineOptions()
-                    .addAll(points)
-                    .color(trailColor)
-                    .width(DisplayUtils.getHistoryLineShadowWidth())
-                    .zIndex(ZINDEX_HISTORY_SHADOW)
-                );
+            Location prev = paintHistory.get(0);
+            int current = 1;
+            while (current < size) {
+                final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
+                points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
+
+                boolean paint = false;
+                while (!paint && current < size) {
+                    final Location now = paintHistory.get(current);
+                    current++;
+                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                        points.add(new LatLng(now.getLatitude(), now.getLongitude()));
+                    } else {
+                        paint = true;
+                    }
+                    prev = now;
+                }
+                if (points.size() > 1) {
+                    // history line
+                    historyObjs.addPolyline(new PolylineOptions()
+                            .addAll(points)
+                            .color(0xFFFFFFFF)
+                            .width(DisplayUtils.getHistoryLineInsetWidth())
+                            .zIndex(ZINDEX_HISTORY)
+                    );
+
+                    // history line shadow
+                    historyObjs.addPolyline(new PolylineOptions()
+                            .addAll(points)
+                            .color(trailColor)
+                            .width(DisplayUtils.getHistoryLineShadowWidth())
+                            .zIndex(ZINDEX_HISTORY_SHADOW)
+                    );
+                }
             }
         }
     }
@@ -332,6 +345,18 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
         positionObjs.addPolyline(options);
         lastViewport = viewport;
+    }
+
+    private synchronized void drawTrack() {
+        trackObjs.removeAll();
+        if (track != null && track.size() > 1 && !Settings.isHideTrack()) {
+            trackObjs.addPolyline(new PolylineOptions()
+                .addAll(track)
+                .color(0xFF00A000)
+                .width(DisplayUtils.getThinLineWidth())
+                .zIndex(ZINDEX_TRACK)
+            );
+        }
     }
 
 }
