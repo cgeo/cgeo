@@ -1,0 +1,30 @@
+c:geo on avoimeen lähdekoodiin perustuva, täysin toimiva, aina valmis epävirallinen sovellus geocaching.com:in käyttöön. Myös perustoiminnot muihin geokätköilypalveluihin (kuten Opencaching) ovat saatavilla. Se ei vaadi selainta tai tietojen tuomista - asenna ja käynnistä se heti. 
+
+Pääominaisuudet:
+- Selaa kätköjä Live Kartalla 
+- Käytä Google Mapsia tai OpenStreetMaps-karttaa
+- Etsi kätköjä erilaisilla kriteereillä 
+- Kirjaa löytösi online- tai offline-tilassa
+- Tallenna kätköjen tiedot laitteeseesi
+- Luo ja hallitse reittipisteitä
+- Navigoi käyttäen apuna kompassia, karttaa, tai muita sovelluksia
+- Tuo/Vie GPX-tiedostoja 
+- Täysi tuki matkaajien käsittelyyn
+- Toimintoja offline-kätköilyyn, mm. offline-kartat
+
+c:geo on yksinkertainen käyttää mutta on tehokas geokätköilysovellus, joka sisältää paljon lisätoimintoja. Kaikki mitä tarvitset päästäksesi alkuun on olemassa oleva tili geocaching.comissa tai toisessa geokätköilypalvelussa (kuten Opencaching).
+Etsi kätköjä käyttäen livekarttaa tai käyttäen yhtä monista hakutoiminnoista.
+
+Navigoi kätkölle tai kätkön reittipisteelle sisäänrakennetun kompassitoiminnon tai kartan avulla, tai välitä koordinaatit erilaisille ulkoisille sovelluksille (kuten Radar, Google Navigation, StreetView, Locus, Navigon, Sygic ja monia muita).
+
+Tallenna kätkön tiedot geocaching.comista laitteeseesi ja/tai GPX-tiedoston tuonnin avulla, jotta tiedot ovat saatavilla milloin tahansa kun haluat. 
+Voit hallita tallentamiasi kätköjä erilistoilla ja järjestää sekä suodattaa niitä tarpeesi mukaan.
+Tallennettuja kätköjä sekä offline- tai staattisia karttatiedostoja käyttäen voit etsiä kätköjä ilman internetyhteyttä (kuten  käytettäessä roamingia).
+Lokikirjauksia voidaan lähettää online-tilassa tai tallentaa offline-tilassa myöhempää (kenttämuistiinpanojen) lähetystä varten.
+
+Etsi ja kirjaa matkaajia nähdyksi, hallitse omaa matkaajaluetteloa ja pudota matkaaja samalla kun kirjaat kätkön lokia.
+
+Jos sinulla on ongelmia c:geon asentamisessa tai käyttämisessä, tarkistathan FAQ:n ensin (englanniksi): https://faq.cgeo.org tai tarkista, löytyykö ratkaisu käyttöoppaasta (https://manual.cgeo.org).
+Jos ongelmia esiintyy edelleen, ota yhteys meihin sähköpostilla.
+
+Jos haluat tietää, miksi c:geo tarvitsee pyydettyjä lupia, tarkan selonteon englanniksi löydät osoitteesta https://www.cgeo.org.
