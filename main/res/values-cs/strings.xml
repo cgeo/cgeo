@@ -1111,6 +1111,8 @@
     <string name="map_routing_walk">Chůze</string>
     <string name="map_routing_bike">Jízdní kolo</string>
     <string name="map_routing_car">Auto</string>
+    <string name="map_gm_autorotation">Automatické otáčení mapy</string>
+    <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <!-- search -->
     <string name="search_bar_hint">Hledaní kešek</string>
     <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
