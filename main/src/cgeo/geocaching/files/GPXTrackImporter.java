@@ -3,32 +3,28 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TrackUtils;
 
-import android.app.Activity;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.io.IOUtils;
 
 public class GPXTrackImporter {
 
-    private GPXTrackImporter(final Activity activity) {
+    private GPXTrackImporter() {
     }
 
-    public static void doImport(final File file, final Consumer<ArrayList<TrackUtils.Track>> callback) {
+    public static void doImport(final File file, final TrackUtils.TrackUpdaterMulti callback) {
         Schedulers.io().createWorker().schedule(() -> {
             try {
-                final ArrayList<TrackUtils.Track> value = doInBackground(file);
+                final TrackUtils.Tracks value = doInBackground(file);
                 AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                     try {
-                        callback.accept(value);
+                        callback.updateTracks(value);
                     } catch (final Throwable t) {
                         //
                     }
@@ -39,7 +35,7 @@ public class GPXTrackImporter {
         });
     }
 
-    private static ArrayList<TrackUtils.Track> doInBackground(final File file) {
+    private static TrackUtils.Tracks doInBackground(final File file) {
         BufferedInputStream stream = null;
         try {
             stream = new BufferedInputStream(new FileInputStream(file));

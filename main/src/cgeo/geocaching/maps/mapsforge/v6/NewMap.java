@@ -37,6 +37,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
+import cgeo.geocaching.maps.mapsforge.v6.layers.TrackLayer;
 import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.maps.routing.Routing;
@@ -127,6 +128,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private PositionLayer positionLayer;
     private NavigationLayer navigationLayer;
     private RouteLayer routeLayer;
+    private TrackLayer trackLayer;
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
 
@@ -157,6 +159,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private MapOptions mapOptions;
     private TargetView targetView;
     private Route route;
+    private TrackUtils.Tracks tracks = null;
 
     private static boolean followMyLocation = true;
 
@@ -519,7 +522,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(this, id)) {
+                if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus)) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
                         item.setChecked(true);
@@ -785,6 +788,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
     }
 
+    private void resumeTrack() {
+        if (null == tracks) {
+            TrackUtils.loadTracks(this::setTracks);
+        } else if (null != trackLayer && tracks.getSize() > 0) {
+            trackLayer.updateTrack(tracks.get(0));
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -792,6 +803,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         resumeTileLayer();
         resumeRoute(false);
+        resumeTrack();
     }
 
     @Override
@@ -817,6 +829,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             }
         });
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
+
+        // TrackLayer
+        this.trackLayer = new TrackLayer(Settings.isHideTrack());
+        this.mapView.getLayerManager().getLayers().add(this.trackLayer);
 
         // NavigationLayer
         Geopoint navTarget = lastNavTarget;
@@ -914,6 +930,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.navigationLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.routeLayer);
         this.routeLayer = null;
+        this.mapView.getLayerManager().getLayers().remove(this.trackLayer);
+        this.trackLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
         this.historyLayer = null;
 
@@ -1716,7 +1734,17 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 caches.invalidate(changedGeocodes);
             }
         }
-        TrackUtils.onActivityResult(requestCode, resultCode, data);
+        TrackUtils.onActivityResult(requestCode, resultCode, data, this::setTracks);
+    }
+
+    private void setTracks(final TrackUtils.Tracks tracks) {
+        this.tracks = tracks;
+        resumeTrack();
+    }
+
+    private void updateTrackHideStatus() {
+        trackLayer.setHidden(Settings.isHideTrack());
+        trackLayer.requestRedraw();
     }
 
     private static class ResourceBitmapCacheMonitor {
