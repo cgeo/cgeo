@@ -7,7 +7,7 @@ This table shall therefore provide an overview about the dates, where descriptio
 taken from Github and published on Google Play. 
 
 From time to time it needs to be manually checked whether more recent changes to the translation files are existsing on the 
-repository, which then need to be published on Google Play and this table being update afterwards.
+repository, which then need to be published on Google Play and this table being updated afterwards.
 
 ## Publish dates
 
