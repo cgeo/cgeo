@@ -13,23 +13,22 @@ repository, which then need to be published on Google Play and this table being 
 
 In alphabetical order of language name.
 
-Language | Publish date | Comment 
----|---|---
-Chinese | |
-Czech | |
-Danish | |
-Dutch | |
-Finnish | |
-French | |
-German | |
-Hungarian | |
-Italian | |
-Japanese | |
-Latvian | |
-Polish | |
-Portuguese | |
-Romanian | |
-Russian | |
-Swedish | |
-Spanish | |
-
+|Language  |Publish date|Comment| 
+|----------|------------|-------|
+|Chinese   |            |       |
+|Czech     |            |       |
+|Danish    |            |       |
+|Dutch     |            |       |
+|Finnish   |            |       |
+|French    |            |       |
+|German    |            |       |
+|Hungarian |            |       |
+|Italian   |            |       |
+|Japanese  |            |       |
+|Latvian   |            |       |
+|Polish    |            |       |
+|Portuguese|            |       |
+|Romanian  |            |       |
+|Russian   |            |       |
+|Swedish   |            |       |
+|Spanish   |            |       |
