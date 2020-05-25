@@ -1095,6 +1095,8 @@
     <string name="map_routing_walk">Gehen</string>
     <string name="map_routing_bike">Fahrrad</string>
     <string name="map_routing_car">Auto</string>
+    <string name="map_gm_autorotation">Automatische Kartendrehung</string>
+    <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <!-- search -->
     <string name="search_bar_hint">Suche nach Caches</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
@@ -1603,5 +1605,5 @@
     <!-- switch settings -->
     <string name="switch_off">Aus</string>
     <string name="switch_manual">Manuell</string>
-    <string name="switch_auto">Auto</string>
+    <string name="switch_auto">Automatisch</string>
 </resources>
