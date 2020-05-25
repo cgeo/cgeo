@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Route;
@@ -66,6 +67,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private static Bitmap locationIcon;
 
     private ArrayList<LatLng> route = null;
+    private Viewport lastViewport = null;
 
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -174,6 +176,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             drawHistory();
         }
         drawRoute();
+        drawViewport(lastViewport);
     }
 
 
@@ -311,6 +314,24 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                     .zIndex(ZINDEX_ROUTE)
             );
         }
+    }
+
+    public synchronized void drawViewport(final Viewport viewport) {
+        if (null == viewport) {
+            return;
+        }
+        final PolylineOptions options = new PolylineOptions()
+                .width(DisplayUtils.getThinLineWidth())
+                .color(0x80EB391E)
+                .zIndex(ZINDEX_DIRECTION_LINE)
+                .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMin()))
+                .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMax()))
+                .add(new LatLng(viewport.getLatitudeMax(), viewport.getLongitudeMax()))
+                .add(new LatLng(viewport.getLatitudeMax(), viewport.getLongitudeMin()))
+                .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMin()));
+
+        positionObjs.addPolyline(options);
+        lastViewport = viewport;
     }
 
 }

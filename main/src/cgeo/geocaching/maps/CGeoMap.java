@@ -21,6 +21,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
+import cgeo.geocaching.maps.google.v2.GooglePositionAndHistory;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -1439,6 +1440,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             lastSearchResult = searchResult;
             if (null == lastViewport || (!caches.isEmpty() && lastSearchResult.getCount() > 400)) {
                 lastViewport = containing(caches);
+                if (Settings.isDebug() && overlayPositionAndScale instanceof GooglePositionAndHistory) {
+                    ((GooglePositionAndHistory) overlayPositionAndScale).drawViewport(lastViewport);
+                }
             }
             Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
 
