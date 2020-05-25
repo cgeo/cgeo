@@ -1095,6 +1095,8 @@
     <string name="map_routing_walk">Wandelen</string>
     <string name="map_routing_bike">Fiets</string>
     <string name="map_routing_car">Auto</string>
+    <string name="map_gm_autorotation">Automatische kaartrotatie</string>
+    <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <!-- search -->
     <string name="search_bar_hint">Zoek naar caches</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
