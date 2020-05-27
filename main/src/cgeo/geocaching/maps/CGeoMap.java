@@ -58,7 +58,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
-import static cgeo.geocaching.location.Viewport.containing;
+import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -1439,7 +1439,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             lastSearchResult = searchResult;
             if (null == lastViewport || (!caches.isEmpty() && lastSearchResult.getCount() > 400)) {
-                lastViewport = containing(caches);
+                lastViewport = containingGCliveCaches(caches);
                 if (Settings.isDebug() && overlayPositionAndScale instanceof GooglePositionAndHistory) {
                     ((GooglePositionAndHistory) overlayPositionAndScale).drawViewport(lastViewport);
                 }
