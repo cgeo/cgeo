@@ -10,7 +10,7 @@ import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
-import static cgeo.geocaching.location.Viewport.containing;
+import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import androidx.annotation.NonNull;
 
@@ -117,7 +117,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
             lastSearchResult = searchResult;
             if (null == lastViewport || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
-                lastViewport = containing(result);
+                lastViewport = containingGCliveCaches(result);
             }
             Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
 

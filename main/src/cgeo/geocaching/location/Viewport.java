@@ -1,5 +1,6 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
@@ -182,6 +183,34 @@ public final class Viewport {
         for (final ICoordinates point : points) {
             if (point != null) {
                 final Geopoint coords = point.getCoords();
+                if (coords != null) {
+                    valid = true;
+                    final double latitude = coords.getLatitude();
+                    final double longitude = coords.getLongitude();
+                    latMin = Math.min(latMin, latitude);
+                    latMax = Math.max(latMax, latitude);
+                    lonMin = Math.min(lonMin, longitude);
+                    lonMax = Math.max(lonMax, longitude);
+                }
+            }
+        }
+        if (!valid) {
+            return null;
+        }
+        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
+    }
+
+    @Nullable
+    public static Viewport containingGCliveCaches(final Collection<Geocache> geocaches) {
+        boolean valid = false;
+        double latMin = Double.MAX_VALUE;
+        double latMax = -Double.MAX_VALUE;
+        double lonMin = Double.MAX_VALUE;
+        double lonMax = -Double.MAX_VALUE;
+        final GCConnector conn = GCConnector.getInstance();
+        for (final Geocache cache : geocaches) {
+            if (cache != null && conn.canHandle(cache.getGeocode()) && !cache.inDatabase()) {
+                final Geopoint coords = cache.getCoords();
                 if (coords != null) {
                     valid = true;
                     final double latitude = coords.getLatitude();
