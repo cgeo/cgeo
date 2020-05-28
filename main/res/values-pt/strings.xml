@@ -1096,6 +1096,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_routing_walk">Caminhar</string>
     <string name="map_routing_bike">Bicicleta</string>
     <string name="map_routing_car">Carro</string>
+    <string name="map_gm_autorotation">Rotação do mapa automática</string>
+    <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar geocaches</string>
     <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
@@ -1459,7 +1461,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
     <string name="faq_title">Perguntas Frequentes</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Nova versão disponível.\nClique para instalar.</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">Disponível uma nova versão.\nToque para instalar.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Nova \'nightly build\' disponível.\nClique para instalar.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
