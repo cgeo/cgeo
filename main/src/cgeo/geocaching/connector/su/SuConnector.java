@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -39,7 +40,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability, IVotingCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -413,6 +414,39 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public String getCreateAccountUrl() {
         return StringUtils.join(getHostUrl(), "/?pn=14");
+    }
+
+    @Override
+    public boolean canVote(@NonNull final Geocache cache, @NonNull final LogType logType) {
+        return logType == LogType.FOUND_IT;
+    }
+
+    @Override
+    public boolean supportsVoting(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public boolean isValidRating(final float rating) {
+        // Only integer votes are accepted
+        return ((int) rating) == rating;
+    }
+
+    @Override
+    public String getDescription(final float rating) {
+        return IVotingCapability.getDefaultFiveStarsDescription(rating);
+    }
+
+    /**
+     * Posts single request to update the vote only.
+     *
+     * @param cache  cache to vote for
+     * @param rating vote to set
+     * @return status of the request
+     */
+    @Override
+    public boolean postVote(@NonNull final Geocache cache, final float rating) {
+        return SuApi.postVote(cache, rating);
     }
 
     /**
