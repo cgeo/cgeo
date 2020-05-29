@@ -16,7 +16,7 @@
         tools:rating="2"/>
 
     <TextView
-        android:id="@+id/gcvoteLabel"
+        android:id="@+id/voteLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"

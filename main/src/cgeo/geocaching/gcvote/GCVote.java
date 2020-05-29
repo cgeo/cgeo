@@ -1,8 +1,10 @@
 package cgeo.geocaching.gcvote;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -14,7 +16,6 @@ import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,16 +45,9 @@ public final class GCVote implements ICredentials {
 
     private static final int MAX_CACHED_RATINGS = 1000;
     private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_RATINGS);
-    private static final float MIN_RATING = 1;
-    private static final float MAX_RATING = 5;
 
     private GCVote() {
         // utility class
-    }
-
-    private static class SingletonHolder {
-        @NonNull
-        private static final GCVote INSTANCE = new GCVote();
     }
 
     @NonNull
@@ -150,15 +144,20 @@ public final class GCVote implements ICredentials {
     /**
      * Transmit user vote to gcvote.com
      *
-     * @param cache the geocache (supported by GCVote)
+     * @param cache  the geocache (supported by GCVote)
      * @param rating the rating
      * @return {@code true} if the rating was submitted successfully
      */
     public static boolean setRating(@NonNull final Geocache cache, final float rating) {
-        if (!isVotingPossible(cache)) {
+        final IConnector connector = ConnectorFactory.getConnector(cache);
+        if (!(connector instanceof IVotingCapability)) {
+            throw new IllegalArgumentException("Service does not support voting" + cache);
+        }
+        final IVotingCapability votingConnector = (IVotingCapability) connector;
+        if (!votingConnector.supportsVoting(cache)) {
             throw new IllegalArgumentException("voting is not possible for " + cache);
         }
-        if (!isValidRating(rating)) {
+        if (!votingConnector.isValidRating(rating)) {
             throw new IllegalArgumentException("invalid rating " + rating);
         }
 
@@ -219,48 +218,14 @@ public final class GCVote implements ICredentials {
         final List<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
-            if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {
+
+            final IConnector connector = ConnectorFactory.getConnector(cache);
+
+            if (StringUtils.isNotBlank(geocode) && connector instanceof IVotingCapability && ((IVotingCapability) connector).supportsVoting(cache)) {
                 geocodes.add(geocode);
             }
         }
         return geocodes;
-    }
-
-    public static boolean isValidRating(final float rating) {
-        return rating >= MIN_RATING && rating <= MAX_RATING;
-    }
-
-    public static boolean isVotingPossible(@NonNull final Geocache cache) {
-        return Settings.isGCVoteLoginValid() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
-    }
-
-    static String getDescription(final float rating) {
-        switch (Math.round(rating * 2f)) {
-            case 2:
-                return getString(R.string.log_stars_1_description);
-            case 3:
-                return getString(R.string.log_stars_15_description);
-            case 4:
-                return getString(R.string.log_stars_2_description);
-            case 5:
-                return getString(R.string.log_stars_25_description);
-            case 6:
-                return getString(R.string.log_stars_3_description);
-            case 7:
-                return getString(R.string.log_stars_35_description);
-            case 8:
-                return getString(R.string.log_stars_4_description);
-            case 9:
-                return getString(R.string.log_stars_45_description);
-            case 10:
-                return getString(R.string.log_stars_5_description);
-            default:
-                return getString(R.string.log_no_rating);
-        }
-    }
-
-    private static String getString(@StringRes final int resId) {
-        return CgeoApplication.getInstance().getString(resId);
     }
 
     @NonNull
@@ -291,5 +256,10 @@ public final class GCVote implements ICredentials {
     @Override
     public Credentials getCredentials() {
         return Settings.getCredentials(R.string.pref_user_vote, R.string.pref_pass_vote);
+    }
+
+    private static class SingletonHolder {
+        @NonNull
+        private static final GCVote INSTANCE = new GCVote();
     }
 }

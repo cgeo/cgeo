@@ -15,6 +15,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
@@ -32,8 +33,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
-import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.gcvote.GCVoteDialog;
+import cgeo.geocaching.gcvote.VoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -675,7 +675,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
-        menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
@@ -691,6 +690,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
+            }
+            if (connector instanceof IVotingCapability) {
+                menu.findItem(R.id.menu_gcvote).setVisible(((IVotingCapability) connector).supportsVoting(cache));
             }
         }
         return super.onPrepareOptionsMenu(menu);
@@ -800,7 +802,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void showVoteDialog() {
-        GCVoteDialog.show(this, cache, () -> notifyDataSetChanged());
+        VoteDialog.show(this, cache, () -> notifyDataSetChanged());
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {

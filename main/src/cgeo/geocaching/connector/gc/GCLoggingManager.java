@@ -39,17 +39,16 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String>, ILoggingWithFavorites {
 
+    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
     private final LogCacheActivity activity;
     private final Geocache cache;
-
-    @NonNull private List<TrackableLog> trackables = Collections.emptyList();
+    @NonNull
+    private List<TrackableLog> trackables = Collections.emptyList();
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
     private boolean hasTrackableLoadError = true;
     private boolean hasFavPointLoadError = true;
     private int premFavcount;
-
-    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
 
     GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         this.activity = activity;

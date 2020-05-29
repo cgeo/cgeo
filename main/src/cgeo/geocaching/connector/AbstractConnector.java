@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
@@ -253,6 +254,7 @@ public abstract class AbstractConnector implements IConnector {
         }
         addCapability(list, WatchListCapability.class, R.string.feature_watch_list);
         addCapability(list, IFavoriteCapability.class, R.string.feature_favorite);
+        addCapability(list, IVotingCapability.class, R.string.feature_voting);
         return list;
     }
 

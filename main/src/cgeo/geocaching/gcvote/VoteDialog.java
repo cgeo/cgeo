@@ -2,6 +2,9 @@ package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -19,56 +22,60 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * Small dialog showing only a rating bar to vote on GCVote.com. Confirming the dialog will send the vote over the
+ * Small dialog showing only a rating bar to vote for the cache. Confirming the dialog will send the vote over the
  * network (in the background).
  */
-public class GCVoteDialog {
+public class VoteDialog {
 
-    private GCVoteDialog() {
+    private VoteDialog() {
         // prevents calls from subclass throw new UnsupportedOperationException();
     }
 
     public static void show(final Activity context, @NonNull final Geocache cache, @Nullable final Runnable afterVoteSent) {
-        final View votingLayout = View.inflate(context, R.layout.gcvote_dialog, null);
+        final View votingLayout = View.inflate(context, R.layout.vote_dialog, null);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(votingLayout);
-        builder.setPositiveButton(R.string.cache_menu_vote, (dialog, which) -> vote(cache, GCVoteRatingBarUtil.getRating(votingLayout), afterVoteSent));
+        builder.setPositiveButton(R.string.cache_menu_vote, (dialog, which) -> vote(cache, VotingBarUtil.getRating(votingLayout), afterVoteSent));
         builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
-        GCVoteRatingBarUtil.initializeRatingBar(cache, votingLayout, stars -> {
+        VotingBarUtil.initializeRatingBar(cache, votingLayout, stars -> {
             final Button button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
             // this listener might be fired already while the dialog is not yet shown
             if (button != null) {
-                button.setEnabled(GCVote.isValidRating(stars));
+                final IConnector connector = ConnectorFactory.getConnector(cache);
+
+                button.setEnabled(connector instanceof IVotingCapability && ((IVotingCapability) connector).isValidRating(stars));
             }
         });
         dialog.show();
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(GCVote.isValidRating(cache.getMyVote()));
+        final IConnector connector = ConnectorFactory.getConnector(cache);
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(connector instanceof IVotingCapability && ((IVotingCapability) connector).isValidRating(cache.getMyVote()));
     }
 
     private static void vote(@NonNull final Geocache cache, final float rating, @Nullable final Runnable afterVoteSent) {
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
             try {
-                if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
+                final IConnector connector = ConnectorFactory.getConnector(cache);
+                if (connector instanceof IVotingCapability && ((IVotingCapability) connector).isValidRating(rating) && ((IVotingCapability) connector).supportsVoting(cache)) {
                     // send over network
-                    if (GCVote.setRating(cache, rating)) {
+                    if (((IVotingCapability) connector).postVote(cache, rating)) {
                         // store locally
                         cache.setMyVote(rating);
                         DataStore.saveChangedCache(cache);
                         return true;
                     }
-                    Log.w("GCVoteDialog.vote: could not send vote");
+                    Log.w("VoteDialog.vote: could not send vote");
                 }
             } catch (final RuntimeException e) {
-                Log.e("GCVoteDialog.vote: could not send vote", e);
+                Log.e("VoteDialog.vote: could not send vote", e);
             }
 
             return false;
         }, status -> {
             final Application context = CgeoApplication.getInstance();
-            final String text = context.getString(status ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
+            final String text = context.getString(status ? R.string.vote_sent : R.string.err_vote_send_rating);
             Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
             if (afterVoteSent != null) {
                 afterVoteSent.run();

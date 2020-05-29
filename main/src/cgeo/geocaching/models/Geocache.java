@@ -800,10 +800,6 @@ public class Geocache implements IWaypoint {
         return getConnector().getCacheUrl(this);
     }
 
-    public boolean supportsGCVote() {
-        return StringUtils.startsWithIgnoreCase(geocode, "GC");
-    }
-
     public void setDescription(final String description) {
         this.description = description;
         this.eventTimeMinutes = null; // will be recalculated if/when necessary
