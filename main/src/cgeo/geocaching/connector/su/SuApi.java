@@ -242,7 +242,6 @@ public class SuApi {
         return true;
     }
 
-
     public static boolean setRecommendation(@NonNull final Geocache cache, final boolean status) {
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         params.add("recommend", status ? "true" : "false");
@@ -259,6 +258,27 @@ public class SuApi {
 
         cache.setFavorite(status);
         cache.setFavoritePoints(cache.getFavoritePoints() + (status ? 1 : -1));
+
+        DataStore.saveChangedCache(cache);
+
+        return true;
+    }
+
+    public static boolean postVote(@NonNull final Geocache cache, final float rating) {
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        params.add("value", String.valueOf(rating));
+
+        try {
+            postRequest(SuConnector.getInstance(), SuApiEndpoint.VALUE, params);
+        } catch (final SuApiException e) {
+            return false;
+        }
+
+        // TODO: get updated rating?
+        //cache.setRating(rating.getRating());
+
+        cache.setVotes(cache.getVotes() + 1);
+        cache.setMyVote(rating);
         DataStore.saveChangedCache(cache);
 
         return true;
