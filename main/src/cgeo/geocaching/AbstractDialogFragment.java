@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
@@ -13,10 +12,8 @@ import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -38,25 +35,19 @@ import android.widget.TextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.DialogFragment;
 
-import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
+    public static final int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
+    public static final int REQUEST_CODE_TARGET_INFO = 1;
+    protected static final String GEOCODE_ARG = "GEOCODE";
+    protected static final String WAYPOINT_ARG = "WAYPOINT";
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
-
-    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    private TextView cacheDistance = null;
-
-    protected static final String GEOCODE_ARG = "GEOCODE";
-    protected static final String WAYPOINT_ARG = "WAYPOINT";
-
     protected Geocache cache;
-
-    public static final int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
-    public static final int REQUEST_CODE_TARGET_INFO = 1;
-
+    private TextView cacheDistance = null;
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
         @Override
@@ -148,11 +139,11 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         PermissionHandler.executeIfLocationPermissionGranted(getActivity(),
                 new RestartLocationPermissionGrantedCallback(PermissionRequestContext.AbstractDialogFragment) {
 
-            @Override
-            public void executeAfter() {
-                resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
-            }
-        });
+                    @Override
+                    public void executeAfter() {
+                        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
+                    }
+                });
         init();
     }
 
@@ -161,22 +152,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     public void onPause() {
         resumeDisposables.clear();
         super.onPause();
-    }
-
-
-    private void acquireGCVote() {
-        if (!Settings.isRatingWanted()) {
-            return;
-        }
-        if (!cache.supportsGCVote()) {
-            return;
-        }
-        AndroidRxUtils.bindActivity(getActivity(), Maybe.fromCallable(() -> GCVote.getRating(cache.getGuid(), geocode))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(rating -> {
-            cache.setRating(rating.getRating());
-            cache.setVotes(rating.getVotes());
-            DataStore.saveChangedCache(cache);
-            details.addRating(cache);
-        });
     }
 
     protected final void addCacheDetails() {
@@ -198,8 +173,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         // rating
         if (cache.getRating() > 0) {
             details.addRating(cache);
-        } else {
-            acquireGCVote();
         }
 
         // favorite count
@@ -232,8 +205,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     /**
-     * @param geo
-     *            location
+     * @param geo location
      */
     protected void onUpdateGeoData(final GeoData geo) {
         // do nothing by default
@@ -326,9 +298,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     public static class TargetInfo implements Parcelable {
 
-        public final Geopoint coords;
-        public final String geocode;
-
         public static final Parcelable.Creator<TargetInfo> CREATOR = new Parcelable.Creator<TargetInfo>() {
             @Override
             public TargetInfo createFromParcel(final Parcel in) {
@@ -340,6 +309,8 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 return new TargetInfo[size];
             }
         };
+        public final Geopoint coords;
+        public final String geocode;
 
         TargetInfo(final Geopoint coords, final String geocode) {
             this.coords = coords;

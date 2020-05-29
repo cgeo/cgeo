@@ -99,7 +99,7 @@
     <string name="log_saving_and_uploading">Posting log and uploading image…</string>
     <string name="log_posting_log">Posting log…</string>
     <string name="log_posting_twitter">Posting tweet…</string>
-    <string name="log_posting_gcvote">Posting GCVote…</string>
+    <string name="log_posting_vote">Posting cache vote…</string>
     <string name="log_posting_image">Posting image…</string>
     <string name="log_posting_generic_trackable">Posting %1$s %2$d/%3$d</string>
     <string name="log_clear">Clear</string>
@@ -538,8 +538,8 @@
     <string name="init_summary_su">Load caches from Geocaching.su</string>
     <string name="settings_activate_su">Activate</string>
     <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
-    <string name="err_gcvote_send_rating">Error while sending rating, check GCVote password in settings or empty it.</string>
-    <string name="gcvote_sent">Voting successfully sent</string>
+    <string name="err_vote_send_rating">Error while sending rating.</string>
+    <string name="vote_sent">Voting successfully sent</string>
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logging in…</string>
@@ -731,6 +731,7 @@
     <string name="feature_search_owner">Search by owner</string>
     <string name="feature_search_finder">Search by finder</string>
     <string name="feature_favorite">Adding cache to favorites</string>
+    <string name="feature_voting">Voting for caches</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Old Mapsforge V3</string>
     <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>

@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
@@ -24,6 +25,7 @@ import cgeo.geocaching.connector.capability.SmileyCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -53,7 +55,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability {
+
+    private static final float MIN_RATING = 1;
+    private static final float MAX_RATING = 5;
 
     @NonNull
     private static final String CACHE_URL_SHORT = "https://coord.info/";
@@ -77,16 +82,58 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         // singleton
     }
 
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull private static final GCConnector INSTANCE = new GCConnector();
-    }
-
     @NonNull
     public static GCConnector getInstance() {
         return Holder.INSTANCE;
+    }
+
+    /**
+     * Indicates whether voting is possible for this cache for this type of log entry
+     *
+     * @param cache
+     * @param logType
+     */
+    @Override
+    public boolean canVote(@NonNull final Geocache cache, @NonNull final LogType logType) {
+        return Settings.isGCVoteLoginValid() && StringUtils.isNotBlank(cache.getGuid());
+    }
+
+    /**
+     * Indicates whether voting is possible for this cache in general
+     *
+     * @param cache
+     */
+    @Override
+    public boolean supportsVoting(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public String getDescription(final float rating) {
+        return IVotingCapability.getDefaultFiveStarsDescription(rating);
+    }
+
+    /**
+     * Posts single request to update the vote only.
+     *
+     * @param cache  cache to vote for
+     * @param rating vote to set
+     * @return status of the request
+     */
+    @Override
+    public boolean postVote(@NonNull final Geocache cache, final float rating) {
+        return GCVote.setRating(cache, rating);
+    }
+
+    /**
+     * Indicates whether the given rating is acceptable (i.e. one might accept only integer values or restrict some other values)
+     *
+     * @param rating rating given
+     * @return true if rating is acceptable, false if not
+     */
+    @Override
+    public boolean isValidRating(final float rating) {
+        return rating >= MIN_RATING && rating <= MAX_RATING;
     }
 
     @Override
@@ -539,6 +586,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             result.removeAll(Arrays.asList(LogType.FOUND_IT, LogType.ATTENDED, LogType.WEBCAM_PHOTO_TAKEN));
         }
         return result;
+    }
+
+    /**
+     * initialization on demand holder pattern
+     */
+    private static class Holder {
+        @NonNull
+        private static final GCConnector INSTANCE = new GCConnector();
     }
 
 }
