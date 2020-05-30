@@ -1,14 +1,11 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import java.io.InputStream;
 import java.util.List;
 
-import org.apache.commons.compress.utils.IOUtils;
 import org.xml.sax.InputSource;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -49,6 +46,13 @@ public class GeolutinsParserTest extends AbstractResourceInstrumentationTestCase
     }
 
     public static void testService() {
+        /*
+
+        disabled for now,
+        as the page throws a http 403
+        as of 2020-05-30
+
+
         final InputStream page = Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/api.php?G=GL007B8"));
         assertThat(page).isNotNull();
 
@@ -65,5 +69,6 @@ public class GeolutinsParserTest extends AbstractResourceInstrumentationTestCase
         } finally {
             IOUtils.closeQuietly(page);
         }
+        */
     }
 }
