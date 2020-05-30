@@ -9,6 +9,7 @@
     · Change: Coordinate editor - Validation deferred to save coordinates\n
     · Change: Updated several links to https\n
     · Change: Activate filter options on Google Maps single cache map when live map is enabled\n
+    · Change: Unified stroke width in Google Maps and OSM map (direction line, navigation, route)\n
     · New: Disable Google Maps autorotation by tap on compass rose\n
     · New: Search by keyword and owner for geocaching.su\n
     · New: Show info on completion of \"add current location\"\n
@@ -23,6 +24,7 @@
     · New: Open images from cache detail page in separate task\n
     · New: Show waypoint user note in waypoint popup\n
     · New: Added function to write debug logfile (\"LogCat\")\n
+    · New: Show bounding box around live caches (only if debug mode is enabled)\n
     · Fix: Show waypoints of owned cache on OSM single cache map\n
     · Fix: Crash on moving data to SD card\n
     · Fix: Cache gallery tab empty after editing personal note\n
@@ -31,6 +33,6 @@
     · Fix: Individual route lost after resuming map\n
     · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
     · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
-    · Fix: A couple of minor issues\n
+    · Fix: A couple of other minor issues\n
   </string>
 </resources>
