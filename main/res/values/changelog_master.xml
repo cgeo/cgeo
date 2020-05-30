@@ -10,13 +10,14 @@
     · Change: Updated several links to https\n
     · Change: Activate filter options on Google Maps single cache map when live map is enabled\n
     · Change: Unified stroke width in Google Maps and OSM map (direction line, navigation, route)\n
+    · Change: Caching of queries to live caches from geocaching.com\n
     · New: Disable Google Maps autorotation by tap on compass rose\n
     · New: Search by keyword and owner for geocaching.su\n
     · New: Show info on completion of \"add current location\"\n
     · New: Add option to clear the goto history\n
     · New: Support other OSM based online map sources\n
     · New: Add support for multilingual OSM maps\n
-    · New: Implemented Filtering by Country\n
+    · New: Implemented Filtering by country\n
     · New: Copy waypoints between caches\n
     · New: Sort \"goto history\" waypoints by newest on top\n
     · New: Add waypoint from single cache map added for Google Maps\n
@@ -32,6 +33,7 @@
     · Fix: Individual route did not consider change of routing type\n
     · Fix: Individual route lost after resuming map\n
     · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
+    · Fix: Update waypoint list after nested waypoint delete\n
     · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
     · Fix: A couple of other minor issues\n
   </string>
