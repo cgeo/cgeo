@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Κρύπτη</string>
     <string name="detail">Λεπτομέρειες</string>
@@ -19,6 +20,7 @@
     <string name="event">Κρύπτη Εκδήλωσης</string>
     <string name="mega">Κρύπτη Mega-εκδήλωσης</string>
     <string name="giga">Κρύπτη Giga-εκδήλωσης</string>
+    <string name="earth">Earthcache</string>
     <string name="cito">Κρύπτη CITO</string>
     <string name="webcam">Κρύπτη Κάμερα Web</string>
     <string name="virtual">Εικονική κρύπτη</string>
@@ -27,7 +29,10 @@
     <string name="ape">Κρύπτη Project APE</string>
     <string name="gchq">Κεντρικά Γραφεία Geocaching</string>
     <string name="gchqceleb">Γιορτή των Κεντρικών Γραφείων του Geocaching</string>
+    <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Block Party στα Κεντρικά Γραφεία Geocaching</string>
+    <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="userdefined">Κρύπτη ορισμένη από τον χρήστη</string>
     <string name="unknown">Άγνωστος τύπος</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Πολύ μικρό</string>
@@ -227,6 +232,7 @@
     <string name="warn_search_help_tb">Εισαγάγετε τον κωδικό του ανιχνεύσιμου. Για παράδειγμα, «TB29QMZ».</string>
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
+    <string name="warn_invalid_mapfile">Το επιλεγμένο αρχείο του χάρτη δεν είναι έγκυρο αρχείο mapsforge ή η έκδοση του δεν υποστηρίζεται.\n(Το c:geo μεχρι στιγμής υποστηρίζει τις εκδόσεις v3 έως v5 / η έκδοση v3 υποστηρίζετε εφόσον είναι επιλεγμένη η επιλογή \"Old Mapsforge V3\".)\n\nΟι χάρτες εκτός σύνδεσης δεν είναι διαθέσιμοι.</string>
     <string name="warn_nonexistant_mapfile">Δεν υπάρχει το αρχείο χάρτη που επιλέξατε.\nΟι χάρτες δεν είναι διαθέσιμοι εκτός σύνδεσης.</string>
     <string name="warn_rendertheme_missing">Το θέμα δεν βρέθηκε.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
@@ -256,12 +262,17 @@
     <string name="confirm_discard_wp_changes">Απόρριψη αλλαγών των μη αποθηκευμένων σημείων διαδρομής;</string>
     <string name="err_request_popup_info">το c:geo απέτυχε να ανακτήσει τις πληροφορίες της κρύπτης.</string>
     <string name="warn_log_load_additional_data">Το c:geo απέτυχε να φορτώσει πρόσθετα δεδομένα (ανιχνεύσιμα/αγαπημένα σημεία) για την καταγραφή.</string>
+    <string name="more_information">Περισσότερες πληροφορίες</string>
+    <string name="warn_gm_not_available">Το Google Maps δεν είναι διαθέσιμο.</string>
+    <string name="switch_to_mf">Η υπηρεσία Google Play είναι παρωχημένη. Αντ\'αυτής θέλετε να χρησιμοποιήσετε τον πάροχο χαρτών Mapsforge;</string>
+    <string name="switched_to_mf">Ο προεπιλεγμένος χάρτης άλλαξε στον πάροχο χαρτών Mapsforge. Επανεκκινήστε τον χάρτη σας.</string>
     <!-- location service -->
     <string name="loc_last">Τελευταία γνωστή</string>
     <string name="loc_net">Δίκτυο</string>
     <string name="loc_fused">Συνδυασμένο</string>
     <string name="loc_low_power">Χαμηλής ισχύος</string>
     <string name="loc_home">Συντεταγμένες κατοικίας</string>
+    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Δορυφόροι</string>
     <string name="loc_trying">Προσπάθεια εντοπισμού</string>
     <string name="loc_no_addr">Άγνωστη διεύθυνση</string>
@@ -356,8 +367,10 @@
     <string name="caches_filter_rating">Με βαθμολογία</string>
     <string name="caches_filter_own_rating">Με τη δική μου βαθμολογία</string>
     <string name="caches_filter_multi_listing">Πολλαπλή καταχώριση με διαφορετική κατάσταση</string>
+    <string name="caches_filter_own_waypoint">Με σημεία διαδρομής ορισμένα από το χρήστη</string>
     <string name="caches_filter_missing_gcvote">Οι κρύπτες που βρέθηκαν δεν έχουν αξιολογηθεί</string>
     <string name="caches_filter_lists">Κατανεμημένες σε μια λίστα</string>
+    <string name="caches_filter_empty">(κενό)</string>
     <string name="caches_removing_from_history">Κατάργηση από το ιστορικό…</string>
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
@@ -409,11 +422,17 @@
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
     <string name="about_system_info_send_chooser">Αποστολή πληροφοριών συστήματος</string>
+    <string name="about_system_write_logcat">Παραγωγή αρχείου εγγραφών</string>
+    <string name="about_system_write_logcat_success">Το αρχείο καταγραφών έγινε στο \"%1$s\" στον φάκελλο \"%2$s\"</string>
+    <string name="about_system_write_logcat_empty">Το αρχείο καταγραφών είναι άδειο</string>
+    <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
     <string name="changelog_github">Λίστα με όλες τις αλλαγές</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
+    <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
     <string name="about_contributors_specialthanksdetails">· όλους τους συνεργάτες μας στη μετάφραση στο <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n· όλους τους δημιουργούς της έκδοσης\n· και όλους τους άλλους υποστηρικτές.\n</string>
+    <string name="about_contributors_other">Άλλοι χρήστες που συνεισφέραν</string>
     <string name="about_components">Στοιχεία</string>
     <string name="contribution_code">κωδικός</string>
     <string name="contribution_tester">υπεύθυνος δοκιμών</string>
@@ -430,12 +449,17 @@
     <string name="settings_title_cachedetails">Λεπτομέρειες Κρύπτης</string>
     <string name="settings_summary_cachedetails">Προσαρμόστε την εμφάνιση πληροφοριών της κρύπτης.</string>
     <string name="settings_title_offlinedata">Δεδομένα χωρίς σύνδεση</string>
+    <string name="settings_summary_offlinedata">Ρυθμίστε ποια δεδομένα θα αποθηκεύονται για εκτός σύνδεσης χρήση, την θέση αποθήκευσης και τους φακέλους για τα αρχεία GPX.</string>
     <string name="settings_title_logging">Καταγραφή</string>
     <string name="settings_summary_logging">Ρύθμιση παραμέτρων υπογραφής και των επιλογών σας.</string>
     <string name="settings_title_map">Χάρτης</string>
     <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
+    <string name="settings_title_map_rotation">Περιστροφή χάρτη (Google Maps)</string>
+    <string name="settings_title_waypoints">Σημεία αναφοράς</string>
     <string name="settings_title_map_content">Περιεχόμενα Χάρτη</string>
+    <string name="settings_title_map_behavior">Συμπεριφορά χάρτη</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Κατάλογος δεδομένων κρύπτης</string>
     <string name="settings_title_data_dir_usage">Κατάλογος δεδομένων κρύπτης (%1$s χρησιμοποιείται)</string>
     <string name="calculate_dataDir_title">Χρήση δεδομένων της κρύπτης</string>
@@ -458,6 +482,8 @@
     <string name="settings_activate_gc">Ενεργοποίηση</string>
     <string name="settings_activate_ec">Ενεργοποίηση</string>
     <string name="settings_gc_legal_note">Με την χρήση του geocaching.com, αποδέχεστε τους όρους χρήσης της Groundspeak.</string>
+    <string name="settings_info_facebook_login_title">Σύνδεση με χρήση Facebook ή Google</string>
+    <string name="settings_info_facebook_login">Δεν μπορείτε να συνδεθείτε με το c:geo στο geocaching.com μέσω του λογαριασμού σας στο Facebook ή στο Google. Αλλά υπάρχει μια απλή λύση…</string>
     <string name="settings_authorize">Πιστοποίηση του c:geo</string>
     <string name="settings_reauthorize">Ενημέρωση ή κατάργηση εξουσιοδότησης</string>
     <string name="settings_gc_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.com.</string>
@@ -511,6 +537,7 @@
     <string name="init_signature_template_name">Όνομα</string>
     <string name="init_signature_template_difficulty">Δυσκολία</string>
     <string name="init_signature_template_terrain">Έδαφος</string>
+    <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Αρχείο καταγραφής κειμένου</string>
     <string name="init_signature_template_size">Μέγεθος</string>
     <string name="init_ratingwanted">Βαθμολογία GCvote</string>
@@ -521,6 +548,8 @@
     <string name="init_summary_openlastdetailspage">Λεπτομέρειες τελευταίας σελίδας που χρησιμοποιήσατε</string>
     <string name="init_skin">Ανοιχτόχρωμο θέμα</string>
     <string name="init_summary_skin">Χρήση ανοιχτόχρωμου θέματος (απαιτείται επανεκκίνηση)</string>
+    <string name="init_transparentBackground">Διαφανές φόντο</string>
+    <string name="init_summary_transparentBackground">Χρήση διαφανούς φόντου (απαραίτητη η επανεκκίνηση)</string>
     <string name="init_address">Προβολή διεύθυνσης</string>
     <string name="init_summary_address">Εμφάνιση διεύθυνσης αντί για συντεταγμένες στην κύρια οθόνη</string>
     <string name="init_useenglish">Χρήση Αγγλικών</string>
@@ -529,12 +558,16 @@
     <string name="init_summary_exclude">Εξαίρεση των δικών σας κρυπτών ή όσων έχετε βρει</string>
     <string name="init_showwaypoints">Προβολή σημείων αναφοράς</string>
     <string name="init_showwaypoint_description">Αν εμφανίζονται στον χάρτη λιγότερες από τις δεδομένες κρύπτες, εμφανίζονται επιπλέον και τα σημεία τους.</string>
+    <string name="init_zoomincludingwaypoints">Το επίπεδο εστίασης περιλαμβάνει τα waypoints</string>
+    <string name="init_zoomincludingwaypoints_description">Εάν προβάλλεται μια κρύπτη: Να γίνει ρύθμιση του επιπέδου μεγέθυνσης ώστε να περιλαμβάνονται όλα τα πρόσθετα σημεία;</string>
     <string name="init_brouterThreshold">Υπολογισμός διαδρομής</string>
     <string name="init_brouterThreshold_description">Η μέγιστη απόσταση που μια βοηθητική εφαρμογή brouter (αν είναι εγκατεστημένη) θα υπολογίσει σε μια διαδρομή.</string>
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
     <string name="init_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="init_summary_disabled">Εξαίρεση απενεργοποιημένων κρυπτών</string>
+    <string name="init_archived">Εξαίρεση των αρχειοθετημένων</string>
+    <string name="init_summary_archived">Εξαίρεση των αρχειοθετημένων κρυπτών</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
     <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>
     <string name="init_units">Αγγλοσαξονικές Μονάδες</string>
@@ -593,6 +626,7 @@
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
     <string name="init_maptrail">Εμφάνιση διαδρομής</string>
     <string name="init_summary_maptrail">Εμφάνιση διαδρομής στον χάρτη</string>
+    <string name="init_trailcolor">Χρώμα ίχνους</string>
     <string name="init_share_after_export">Ανοίξτε το μενού κοινής χρήσης μετά από εξαγωγή GPX</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
@@ -665,6 +699,7 @@
     <string name="feature_search_geocode">Αναζήτηση ανά γεωκωδικό</string>
     <string name="feature_search_owner">Αναζήτηση ανά ιδιοκτήτη</string>
     <string name="feature_search_finder">Αναζήτηση ανά άτομα που τη βρήκαν</string>
+    <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Παλιό Mapsforge V3</string>
     <string name="init_mfold_api_description">Χρησιμοποιούμε μια νέα έκδοση του χάρτη του Mapsforge ως προεπιλογή. Εάν χάνετε ορισμένες δυνατότητες ή αντιμετωπίζετε ζητήματα μπορείτε να πάτε πίσω στην παλιά έκδοση εδώ.</string>
     <!-- proximity notification -->
@@ -673,10 +708,20 @@
     <string name="init_summary_proximityNotificationGeneral">Απλός ήχος προσέγγισης αν κάποια κρύπτη ή σημείο ορατό στον χάρτη είναι πιο κοντά από την ορισθείσα ως μακρινή απόσταση ή ως κοντινή απόσταση. Χρησιμοποιείται διαφορετικός ήχος για κάθε απόσταση.</string>
     <string name="init_proximityNotificationSpecific">Ειδικό σήμα προσέγγισης σημείου ενδιαφέροντος</string>
     <string name="init_summary_proximityNotificationSpecific">Επαναλαμβανόμενος ήχος προσέγγισης αν η κρύπτη ή το σημείο είναι κοντύτερα από την κοντινή ή μακρινή απόσταση. Λειτουργεί αν οι λεπτομέρειες κρύπτης έχουν ενεργοποιηθεί, αν εμφανίζονται στον χάρτη ή η πυξίδα είναι ενεργή. Χρησιμοποιούνται διαφορετικοί ήχοι για τις δύο αποστάσεις.</string>
+    <string name="far_distance">Μακρινή απόσταση</string>
+    <string name="near_distance">Κοντινή απόσταση</string>
+    <string name="init_proximity_notification_type">Είδος ειδοποίησης</string>
+    <string name="pn_tone_only">Μόνο ήχος</string>
+    <string name="pn_text_only">Μόνο κείμενο</string>
+    <string name="pn_tone_and_text">Ήχος + κείμενο</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Χάρτης</string>
     <string name="map_source_google_satellite">Google: Δορυφόρος</string>
+    <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
+    <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
     <string name="settings_info_send2cgeo_title">Σχετικά με το send2cgeo</string>
     <string name="init_sendToCgeo_name">Όνομα της συσκευής σας</string>
@@ -751,12 +796,16 @@
         <item quantity="other">περίπου %d μήνες πριν</item>
     </plurals>
     <string name="cache_offline_about_time_year">πάνω από ένα χρόνο πριν</string>
+    <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Ιδιότητες</string>
     <string name="cache_inventory">Απόθεμα</string>
     <string name="cache_log_images_title">Αρχείο καταγραφής εικόνων</string>
     <string name="cache_log_image_default_title">Φωτογραφία</string>
     <string name="cache_personal_note">Προσωπική Σημείωση</string>
+    <string name="cache_menu_preventWaypointsFromNote">Εξαίρεση δημιουργίας waypoints από σημειώσεις</string>
+    <string name="cache_menu_allowWaypointExtraction">Δημιουργία waypoints από σημειώσεις</string>
     <string name="cache_personal_note_edit">Επεξεργασία</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Αποτροπή εξαγωγής των waypoints</string>
     <string name="cache_personal_note_limit">Όριο προσωπικής σημείωσης</string>
     <string name="cache_personal_note_truncation">Μετά τους %d χαρακτήρες, το κείμενο θα περικοπεί από την Geocaching.com.</string>
     <string name="cache_personal_note_upload">Ανέβασμα</string>
@@ -785,6 +834,9 @@
         <item quantity="other">%d Σημεία αναφοράς</item>
     </plurals>
     <string name="cache_waypoints_add">Προσθήκη Σημείου Αναφοράς</string>
+    <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
+    <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
+    <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
     <string name="cache_logs">Ημερολόγιο</string>
@@ -824,7 +876,9 @@
     <string name="cache_menu_sygic_drive">Sygic (Με αυτοκίνητο)</string>
     <string name="cache_menu_radar">Ραντάρ</string>
     <string name="cache_menu_map">Χάρτης</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Άλλες εξωτερικές εφαρμογές</string>
+    <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
     <string name="cache_menu_visit_offline">Καταγραφή εκτός σύνδεσης με ένα κλικ</string>
@@ -848,6 +902,7 @@
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
+    <string name="cache_stored">Αποθηκευμένη</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
@@ -869,6 +924,8 @@
     <string name="cache_status_stored_morethanthirtydays">Πρίν τις τελευταίες τριάντα ημέρες</string>
     <string name="cache_geocode">Κωδικός κρύπτης</string>
     <string name="cache_name">Όνομα</string>
+    <string name="cache_name_set">Τέθηκε όνομα κρύπτης</string>
+    <string name="cache_name_updated">Το όνομα κρύπτης άλλαξε</string>
     <string name="cache_type">Τύπος</string>
     <string name="cache_size">Μέγεθος</string>
     <string name="cache_distance">Απόσταση</string>
@@ -882,6 +939,7 @@
     <string name="cache_hidden">Κρυμμένη</string>
     <string name="cache_event">Ημερομηνία</string>
     <string name="cache_location">Τοποθεσία</string>
+    <string name="cache_location_country">Χώρα</string>
     <string name="cache_coordinates">Συντεταγμένες</string>
     <string name="cache_calculator">Αριθμομηχανή</string>
     <string name="cache_coordinates_original">Αρχικές Συντεταγμένες</string>
@@ -899,7 +957,24 @@
     <string name="cache_share_field">Κοινή χρήση</string>
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
+    <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
+    <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
+    <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
+    <string name="internal_cache_default_name">Κρύπτη ορισμένη από τον χρήστη #%1$d</string>
+    <string name="internal_cache_default_description">Αυτή είναι μια user-defined κρύπτη</string>
+    <string name="internal_cache_default_owner">Εσείς</string>
+    <string name="internal_goto_targets_title">\'Πήγαινε σε\' σημεία</string>
+    <string name="internal_goto_targets_description">Αυτή η κρύπτη αποθηκεύει τα πρόσφατα σας \"Πήγαινε σε\" σημεία. Δημιουργείται αυτόματα μόλις χρησιμοποιήσετε την δυνατότητα \"Πήγαινε σε\" στο κύριο μενού. Οι συντεταγμένες που εισάγονται εδώ θα αποθηκευτούν στα waypoints της παρούσας κρύπτης. Εάν πλέον δςν χρειάζεστε αυτές τις συντεταγμένες, μπορείτε να διαγράψετε αυτή την κρύπτη ή οποιοδήποτε από τα waypoints της. Επίσης μπορείτε να μεταφέρετε αυτήν την κρύπτη σε οποιαδήποτε λίστα της επιλογής σας.</string>
+    <string name="init_longtap_map">Πιέστε παρατεταμένα στον χάρτη</string>
+    <string name="init_summary_longtap_map">Ενεργοποίηση παρατεταμένου πατήματος στο εικονίδιο του χάρτη (δημιουργία ανεξάρτητης διαδρομής) ή στην επιφάνεια του χάρτη (δημιουργία κρύπτης user-defined)</string>
+    <string name="goto_targets_list">Internal caches</string>
+    <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
+    <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
     <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">Μοίρες</string>
+    <string name="cc_hint_minutes">Λεπτά</string>
+    <string name="cc_hint_seconds">Δευτερόλεπτα</string>
+    <string name="cc_hint_fraction">Κλάσμα</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Γίνεται αναζήτηση αρχείων \n σε</string>
@@ -954,6 +1029,7 @@
     <string name="waypoint_delete">Διαγραφή</string>
     <string name="waypoint_edit_title">Επεξεργασία σημείου αναφοράς</string>
     <string name="waypoint_add_title">Προσθήκη σημείου αναφοράς</string>
+    <string name="waypoint_added">Προστέθηκε ενδιάμεσο σημείο</string>
     <string name="waypoint_note">Σημείωση</string>
     <string name="waypoint_user_note">Σημείωση χρήστη</string>
     <string name="waypoint_visited">Επίσκεψη</string>
@@ -976,6 +1052,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">Οι συντεταγμένες της κρύπτης στην ιστοσελίδα έχουν μετατραπεί σε: %s.</string>
     <string name="waypoint_done">Ολοκληρώθηκε</string>
     <string name="waypoint_duplicate">Δημιουργία διπλού σημείου αναφοράς</string>
+    <string name="waypoint_toclipboard">Αντιγραφή ενδιαμέσου σημείου στο πρόχειρο</string>
     <string name="waypoint_copy_of">Αντίγραφο του</string>
     <string name="waypointcalc_notes_prompt">Εισάγετε σημειώσεις εδώ…</string>
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
@@ -988,14 +1065,25 @@
     <string name="map_live">Live Χάρτης</string>
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_modes">Ρυθμίσεις χάρτη</string>
+    <string name="map_rotation">Περιστροφή χάρτη</string>
+    <string name="map_hide">Απόκρυψη</string>
     <string name="map_trail_show">Εμφάνιση διαδρομής</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_circles_show">Εμφάνιση κύκλων</string>
     <string name="map_mycaches_hide">Απόκρυψη των δικών μου κρυπτών και των ευρέσεών μου</string>
     <string name="map_disabled_hide">Απόκρυψη απενεργοποιημένων κρυπτών</string>
+    <string name="map_archived_hide">Απόκρυψη αρχειοθετημένων κρυπτών</string>
+    <string name="map_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών</string>
+    <string name="map_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης</string>
+    <string name="map_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
+    <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
+    <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
+    <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
+    <string name="init_summary_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχουν δεχθεί επίσκεψη απο τον χάρτη</string>
     <string name="map_theme_builtin">Προεπιλογή</string>
     <string name="map_theme_select">Επιλογή θέματος χάρτη</string>
     <string name="map_theme_options">Επιλογές θέματος</string>
+    <string name="map_language">Γλώσσα χάρτη</string>
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
@@ -1007,6 +1095,8 @@
     <string name="map_routing_walk">Περπάτημα</string>
     <string name="map_routing_bike">Ποδήλατο</string>
     <string name="map_routing_car">Αυτοκίνητο</string>
+    <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
+    <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
     <!-- search -->
     <string name="search_bar_hint">Αναζήτηση κρυπτών</string>
     <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>
@@ -1062,6 +1152,7 @@
     <string name="trackable_not_activated">Το ανιχνεύσιμο δεν έχει ενεργοποιηθεί</string>
     <string name="trackable_travelbug">Ανιχνεύσιμο</string>
     <string name="trackable_status">Κατάσταση</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Παραδοσιακό</string>
     <string name="geokret_type_book_or_media">Βιβλίο ή ηλεκτρονικά μέσα</string>
     <string name="geokret_type_human">Άνθρωπος</string>
@@ -1117,6 +1208,7 @@
     <string name="export_fieldnotes_upload_success">Επιτυχής μεταφόρτωση στο geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Μόνο μετά την τελευταία εξαγωγή</string>
     <string name="export_fieldnotes_creating">Δημιουργία σημειώσεων πεδίου…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">Το αρχείο GPX θα εξαθεί στο %1$s με την τρέχουσα ημερομηνία και ώρα ως όνομα αρχείου.</string>
     <string name="export_gpx_to">Αποστολή εξαγομένων αρχείων GPX στο</string>
     <string name="export_confirm_title">Εξαγωγή %1$s</string>
@@ -1363,6 +1455,7 @@
     <string name="support_title">Υποστήριξη</string>
     <string name="website_title">Ιστοσελίδα</string>
     <string name="facebook_link"><a href=""> σελίδα c:geo </a></string>
+    <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo στο Google Play</a></string>
     <string name="about_twitter">Να δημοσιεύει το<b>c:geo</b> μια νέα κατάσταση στο Twitter κάθε φορά που καταγράφετε μια κρύπτη;</string>
     <string name="faq_title">Συχνές ερωτήσεις</string>
@@ -1373,6 +1466,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Φαίνεται ότι χρησιμοποιείτε μια παλαιότερη έκδοση του Android. Πιθανώς οι μελλοντικές εκδόσεις του c:geo να μην είναι συμβατές με την συσκευή σας.\nΠιέστε στο μήνυμα για περισσότερες πληροφορίες.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
     <string name="tts_toggle">Φωνητική καθοδήγηση</string>
@@ -1482,13 +1576,29 @@
     <string name="color_blue">Μπλέ</string>
     <string name="color_green">Πράσινο</string>
     <string name="color_grey">Γκρί</string>
+    <string name="color_orange">Πορτοκαλί</string>
+    <string name="color_red">Κόκκινο</string>
+    <string name="color_turquoise">Τυρκουάζ</string>
+    <string name="color_black">Μαύρο</string>
     <!-- number input -->
     <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
     <string name="number_input_err_boundarymax">Δώσατε πολύ μεγάλη - Μειώστε στην Μέγιστη επιτρεπτή</string>
     <string name="number_input_err_format">Λάθος μορφή αριθμών</string>
     <!-- text notification channel infos & proximity notification title -->
+    <string name="notification_channel_name">Ειδοποιήσεις από το c:geo</string>
+    <string name="notification_channel_description">Ειδοποιήσεις από την εφαρμογή για geocaching c:geo</string>
+    <string name="proximity_notification_title">Ειδοποίηση εγγύτητας του c:geo</string>
     <!-- individual routes -->
+    <string name="individual_route_added">Προσθήκη στη διαδρομή</string>
+    <string name="individual_route_removed">Αφαίρεση από τη διαδρομή</string>
+    <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
+    <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
+    <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
+    <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
     <!-- distance units -->
     <!-- switch settings -->
+    <string name="switch_off">Απενεργοποιημένο</string>
+    <string name="switch_manual">Χειροκίνητα</string>
+    <string name="switch_auto">Αυτόματα</string>
 </resources>
