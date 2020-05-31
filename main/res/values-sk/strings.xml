@@ -424,6 +424,10 @@
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
     <string name="about_system_info_send_chooser">Odoslať systémové informácie</string>
+    <string name="about_system_write_logcat">Vytvoriť súbor denníka</string>
+    <string name="about_system_write_logcat_success">Súbor denníka zapísaný do \"%1$s\" v priečinku \"%2$s\"</string>
+    <string name="about_system_write_logcat_empty">Súbor denníka je prázdny</string>
+    <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
     <string name="changelog_github">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
@@ -1107,6 +1111,8 @@
     <string name="map_routing_walk">Chôdza</string>
     <string name="map_routing_bike">Bicykel</string>
     <string name="map_routing_car">Auto</string>
+    <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
+    <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <!-- search -->
     <string name="search_bar_hint">Hľadanie skrýš</string>
     <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
