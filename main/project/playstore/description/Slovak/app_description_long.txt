@@ -1,0 +1,30 @@
+c:geo je neoficiálny klient pre geocaching.com. Je to plne vybavená aplikácia s otvoreným zdrojovým kódom a je vždy k dispozícii do terénu. Ponúka základnú podporu pre ďalšie geocachingové platformy (napríklad Opencaching). Nevyžaduje webový prehliadač ani exporty – stačí nainštalovať a môžete hneď začať. 
+
+Hlavné funkcie:
+– Zobrazenie kešiek na live mape 
+– Použitie Máp Google alebo OpenStreetMaps
+– Vyhľadávanie kešiek podľa rôznych kritérií 
+– Logovanie nálezov online alebo offline
+– Ukladanie informácií o keškách do zariadenia
+– Vytváranie a spravovanie bodov trasy
+– Navigácia pomocou kompasu, mapy alebo ďalších aplikácií
+– Import a export súborov GPX 
+– Plná podpora trasovateľných úredmetov
+– Funkcie offline kešovania vrátane offline máp
+
+c:geo je ľahko využiteľný, ale výkonný geocachingový klient s množstvom ďalších funkcií. Stačí mať existujúce konto na geocaching.com alebo inej geocachingovej platforme (napríklad Opencaching).
+Hľadanie kešiek pomocou live mapy alebo jednej z mnohých funkcií vyhľadávania.
+
+Navigácia ku keške alebo bodu trasy s funkciou zabudovaného kompasu, mapy alebo na súradnice rôznymi externými aplikáciami (napr. Radar, Navigácia Google, StreetView, Locus, Navigon, Sygic a mnohé ďalšie).
+
+Ukladanie informácií o keškách do zariadenia priamo z geocaching.com, ako aj cez import súboru GPX, aby ste ich mali kedykoľvek k dispozícii. 
+Uložené kešky môžete spravovať v rozličných zoznamoch a môžete ich zoradiť a filtrovať podľa svojich potrieb.
+Uložené kešky spolu so súbormi offline máp možno využiť na hľadanie kešiek bez internetového pripojenia (napr. v roamingu).
+Logy možno pridávať online alebo uložiť offline a odoslať ich neskôr, prípadne exportovať cez Field Notes.
+
+Vyhľadávanie a objavovanie trasovateľných predmetov, spravovanie inventára trasovateľných predmetov a vloženie trasovateľného predmetu pri pridávaní logu ku keške.
+
+Ak máte problémy s inštaláciou alebo používaním aplikácie c:geo, najprv sa pozrite na naše najčastejšie otázky (https://faq.cgeo.org) alebo si preštudujte návod na používanie (https://manual.cgeo.org).
+Ak problémy pretrvávajú. obráťte sa e-mailom na podporu.
+
+Ak potrebujete vedieť, prečo aplikácia c:geo vyžaduje požadované povolenia, vysvetlenie nájdete na https://www.cgeo.org.
