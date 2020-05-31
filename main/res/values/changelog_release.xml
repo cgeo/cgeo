@@ -2,22 +2,40 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2020.04.25:</b>\n
-    · Fix: Implement a workaround for a Google bug causing our map to crash\n
-    · Fix: Optimize live map loading to avoid unneeded server requests\n
-    · New: Added button \"Add current location\" to create standard waypoint\n
-    · New: Added option to hide archived caches\n
-    · New: Added map options to hide certain waypoint types\n
-    · New: Show (unsaved) caches at corrected coordinates on live map if applicable\n
-    · New: Create individual routes (by long pressing on icons in map)\n
-    · New: Added option to disable transparent background\n
-    · Fix: Crash after "Remove all" in cache list\n
-    · Fix: Crash after rapid movements on OSM map\n
-    · Fix: Store manually set values in seekbar preferences\n
-    · Change: Moved hide options to separate map submenu\n
-    · Change: Separated impacts from \"hide disabled\" and \"hide archived\" options\n
-    · Change: Switch off indoor mode for Google Maps in satellite mode\n
-    · Change: Improve visibility of subheadings in preferences\n
+     <b>2020.05.31-RC:</b>\n
+    · Change: Added closeout message for systems running on Android &lt; 5.0\n
+    · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
+    · Change: Allow max zoom on combined OpenStreetMap offline map\n
+    · Change: Coordinate editor - Validation deferred to save coordinates\n
+    · Change: Updated several links to https\n
+    · Change: Activate filter options on Google Maps single cache map when live map is enabled\n
+    · Change: Unified stroke width in Google Maps and OSM map (direction line, navigation, route)\n
+    · Change: Caching of queries to live caches from geocaching.com\n
+    · New: Disable Google Maps autorotation by tap on compass rose\n
+    · New: Search by keyword and owner for geocaching.su\n
+    · New: Show info on completion of \"add current location\"\n
+    · New: Add option to clear the goto history\n
+    · New: Support other OSM based online map sources\n
+    · New: Add support for multilingual OSM maps\n
+    · New: Implemented Filtering by country\n
+    · New: Copy waypoints between caches\n
+    · New: Sort \"goto history\" waypoints by newest on top\n
+    · New: Add waypoint from single cache map added for Google Maps\n
+    · New: Allow starting WhereYouGo from cache detail\'s main page\n
+    · New: Open images from cache detail page in separate task\n
+    · New: Show waypoint user note in waypoint popup\n
+    · New: Added function to write debug logfile (\"LogCat\")\n
+    · New: Show bounding box around live caches (only if debug mode is enabled)\n
+    · Fix: Show waypoints of owned cache on OSM single cache map\n
+    · Fix: Crash on moving data to SD card\n
+    · Fix: Cache gallery tab empty after editing personal note\n
+    · Fix: Crashes under special circumstances on map\n
+    · Fix: Individual route did not consider change of routing type\n
+    · Fix: Individual route lost after resuming map\n
+    · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
+    · Fix: Update waypoint list after nested waypoint delete\n
+    · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
+    · Fix: A couple of other minor issues\n
     \n
     \n
 </string>
