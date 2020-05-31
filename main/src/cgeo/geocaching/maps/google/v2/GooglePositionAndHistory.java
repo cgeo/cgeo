@@ -189,7 +189,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
-                .width(DisplayUtils.getThinLineWidth())
+                .width(DisplayUtils.getDirectionLineWidth())
                 .color(0x80EB391E)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
@@ -289,7 +289,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                 historyObjs.addPolyline(new PolylineOptions()
                     .addAll(points)
                     .color(0xFFFFFFFF)
-                    .width(DisplayUtils.getThinLineInsetWidth())
+                    .width(DisplayUtils.getHistoryLineInsetWidth())
                     .zIndex(ZINDEX_HISTORY)
                 );
 
@@ -297,7 +297,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                 historyObjs.addPolyline(new PolylineOptions()
                     .addAll(points)
                     .color(trailColor)
-                    .width(DisplayUtils.getThinLineWidth())
+                    .width(DisplayUtils.getHistoryLineShadowWidth())
                     .zIndex(ZINDEX_HISTORY_SHADOW)
                 );
             }
@@ -310,7 +310,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             routeObjs.addPolyline(new PolylineOptions()
                     .addAll(route)
                     .color(0xFF0000FF)
-                    .width(DisplayUtils.getThinLineWidth())
+                    .width(DisplayUtils.getRouteLineWidth())
                     .zIndex(ZINDEX_ROUTE)
             );
         }
@@ -321,7 +321,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             return;
         }
         final PolylineOptions options = new PolylineOptions()
-                .width(DisplayUtils.getThinLineWidth())
+                .width(DisplayUtils.getDirectionLineWidth())
                 .color(0x80EB391E)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMin()))

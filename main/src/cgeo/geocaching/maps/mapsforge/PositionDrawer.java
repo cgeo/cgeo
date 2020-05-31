@@ -8,6 +8,7 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.DisplayUtils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -64,14 +65,14 @@ public class PositionDrawer {
         if (historyLine == null) {
             historyLine = new Paint();
             historyLine.setAntiAlias(true);
-            historyLine.setStrokeWidth(3.0f);
+            historyLine.setStrokeWidth(DisplayUtils.getHistoryLineInsetWidth());
             historyLine.setColor(0xFFFFFFFF);
         }
 
         if (historyLineShadow == null) {
             historyLineShadow = new Paint();
             historyLineShadow.setAntiAlias(true);
-            historyLineShadow.setStrokeWidth(7.0f);
+            historyLineShadow.setStrokeWidth(DisplayUtils.getHistoryLineShadowWidth());
             historyLineShadow.setColor(trailColor);
         }
 

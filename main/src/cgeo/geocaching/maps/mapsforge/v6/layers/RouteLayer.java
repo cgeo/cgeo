@@ -35,7 +35,7 @@ public class RouteLayer extends Layer implements Route.RouteUpdater {
 
     public RouteLayer(final PostRealDistance postRealRouteDistance) {
         this.postRealRouteDistance = postRealRouteDistance;
-        width = DisplayUtils.getThinLineWidth();
+        width = DisplayUtils.getRouteLineWidth();
     }
 
     public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
