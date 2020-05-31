@@ -314,11 +314,11 @@ dependencies {
     implementation project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.13.0'
+    implementation 'com.drewnoakes:metadata-extractor:2.14.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
     //noinspection GradleDependency
-    implementation 'com.squareup.okhttp3:okhttp:3.12.8'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.12'
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:17.0.0'
