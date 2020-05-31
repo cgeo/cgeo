@@ -170,18 +170,55 @@ public final class Viewport {
      * Return the smallest viewport containing all the given points.
      *
      * @param points
-     *            a set of points. Point with null coordinates (or null themselves) will be ignored
+     *            a set of points. Points with null coordinates (or null themselves) will be ignored
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
      */
     @Nullable
     public static Viewport containing(final Collection<? extends ICoordinates> points) {
+        return containing(points, false, false);
+    }
+
+    /**
+     * Return the smallest viewport containing all those of the given geocaches,
+     * which are from geocaching.com and not stored in our database
+     *
+     * @param geocaches
+     *            a set of geocaches. Geocaches with null coordinates (or null themselves) will be ignored
+     * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
+     */
+    @Nullable
+    public static Viewport containingGCliveCaches(final Collection<Geocache> geocaches) {
+        return containing(geocaches, false, true);
+    }
+
+    /**
+     * Return the smallest viewport containing all given geocaches including all their waypoints
+     *
+     * @param geocaches
+     *            a set of geocaches. Geocaches/waypoints with null coordinates (or null themselves) will be ignored
+     * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
+     */
+    @Nullable
+    public static Viewport containingCachesAndWaypoints(final Collection<Geocache> geocaches) {
+        return containing(geocaches, true, false);
+    }
+
+    /**
+     * internal worker function for
+     * - containing(Points)
+     * - containingGCLiveCaches(Geocaches)
+     * - containingCachesAndWaypoints(Geocaches)
+     */
+    @Nullable
+    private static Viewport containing(final Collection<? extends ICoordinates> points, final boolean withWaypoints, final boolean gcLiveOnly) {
         boolean valid = false;
         double latMin = Double.MAX_VALUE;
         double latMax = -Double.MAX_VALUE;
         double lonMin = Double.MAX_VALUE;
         double lonMax = -Double.MAX_VALUE;
+        final GCConnector conn = GCConnector.getInstance();
         for (final ICoordinates point : points) {
-            if (point != null) {
+            if (point != null && (!gcLiveOnly || (conn.canHandle(((Geocache) point).getGeocode()) && !((Geocache) point).inDatabase()))) {
                 final Geopoint coords = point.getCoords();
                 if (coords != null) {
                     valid = true;
@@ -192,63 +229,8 @@ public final class Viewport {
                     lonMin = Math.min(lonMin, longitude);
                     lonMax = Math.max(lonMax, longitude);
                 }
-            }
-        }
-        if (!valid) {
-            return null;
-        }
-        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
-    }
-
-    @Nullable
-    public static Viewport containingGCliveCaches(final Collection<Geocache> geocaches) {
-        boolean valid = false;
-        double latMin = Double.MAX_VALUE;
-        double latMax = -Double.MAX_VALUE;
-        double lonMin = Double.MAX_VALUE;
-        double lonMax = -Double.MAX_VALUE;
-        final GCConnector conn = GCConnector.getInstance();
-        for (final Geocache cache : geocaches) {
-            if (cache != null && conn.canHandle(cache.getGeocode()) && !cache.inDatabase()) {
-                final Geopoint coords = cache.getCoords();
-                if (coords != null) {
-                    valid = true;
-                    final double latitude = coords.getLatitude();
-                    final double longitude = coords.getLongitude();
-                    latMin = Math.min(latMin, latitude);
-                    latMax = Math.max(latMax, latitude);
-                    lonMin = Math.min(lonMin, longitude);
-                    lonMax = Math.max(lonMax, longitude);
-                }
-            }
-        }
-        if (!valid) {
-            return null;
-        }
-        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
-    }
-
-    @Nullable
-    public static Viewport containingCachesAndWaypoints(final Collection<Geocache> caches) {
-        boolean valid = false;
-        double latMin = Double.MAX_VALUE;
-        double latMax = -Double.MAX_VALUE;
-        double lonMin = Double.MAX_VALUE;
-        double lonMax = -Double.MAX_VALUE;
-        for (final Geocache cache : caches) {
-            if (cache != null) {
-                final Geopoint coords = cache.getCoords();
-                if (coords != null) {
-                    valid = true;
-                    final double latitude = coords.getLatitude();
-                    final double longitude = coords.getLongitude();
-                    latMin = Math.min(latMin, latitude);
-                    latMax = Math.max(latMax, latitude);
-                    lonMin = Math.min(lonMin, longitude);
-                    lonMax = Math.max(lonMax, longitude);
-                }
-                if (cache.hasWaypoints()) {
-                    for (final Waypoint waypoint : cache.getWaypoints()) {
+                if (withWaypoints && ((Geocache) point).hasWaypoints()) {
+                    for (final Waypoint waypoint : ((Geocache) point).getWaypoints()) {
                         if (waypoint != null) {
                             final Geopoint wpcoords = waypoint.getCoords();
                             if (wpcoords != null) {
