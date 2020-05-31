@@ -37,7 +37,7 @@ public class NavigationLayer extends Layer {
 
         this.destinationCoords = coords;
         this.postRealDistance = postRealDistance;
-        width = DisplayUtils.getThinLineWidth();
+        width = DisplayUtils.getDirectionLineWidth();
     }
 
     public void setDestination(final Geopoint coords) {

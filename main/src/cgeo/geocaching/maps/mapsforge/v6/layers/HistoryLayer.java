@@ -50,13 +50,13 @@ public class HistoryLayer extends Layer {
 
         if (historyLine == null) {
             historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLine.setStrokeWidth(DisplayUtils.getThinLineInsetWidth());
+            historyLine.setStrokeWidth(DisplayUtils.getHistoryLineInsetWidth());
             historyLine.setColor(0xFFFFFFFF);
         }
 
         if (historyLineShadow == null) {
             historyLineShadow = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLineShadow.setStrokeWidth(DisplayUtils.getThinLineWidth());
+            historyLineShadow.setStrokeWidth(DisplayUtils.getHistoryLineShadowWidth());
             historyLineShadow.setColor(trailColor);
         }
 
