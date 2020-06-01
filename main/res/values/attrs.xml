@@ -44,7 +44,12 @@
     <attr name="url" format="string" />
     <attr name="urlButton" format="string" />
     <attr name="connector" format="string" />
-    
+
+    <!-- attributes for ColorpickerPreference -->
+    <declare-styleable name="ColorpickerPreference">
+        <attr name="showOpaquenessSlider" format="boolean" />
+    </declare-styleable>
+
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />
