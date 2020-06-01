@@ -22,6 +22,7 @@ In alphabetical order of language name.
 |Finnish   |25.05.2020  |                                                                |
 |French    |01.01.2018  |Historic description still in use until translation is completed|
 |German    |25.05.2020  |Typo fixed manually and also on Crowdin at 25.05.2020           |
+|Greek     |01.06.2020  |                                                                |
 |Hungarian |01.01.2018  |Historic description still in use until translation is completed|
 |Italian   |25.05.2020  |                                                                |
 |Japanese  |01.01.2018  |Historic description still in use until translation is completed|
@@ -30,5 +31,6 @@ In alphabetical order of language name.
 |Portuguese|25.05.2020  |                                                                |
 |Romanian  |01.01.2018  |Historic description still in use until translation is completed|
 |Russian   |25.05.2020  |                                                                |
+|Slovak    |01.60.2020  |                                                                |
 |Swedish   |01.01.2018  |Historic description still in use until translation is completed|
 |Spanish   |01.01.2018  |Historic description still in use until translation is completed|
