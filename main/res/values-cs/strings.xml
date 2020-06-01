@@ -816,8 +816,8 @@
     <string name="cache_log_images_title">Obrázky z logů</string>
     <string name="cache_log_image_default_title">Fotografie</string>
     <string name="cache_personal_note">Osobní poznámka</string>
-    <string name="cache_menu_preventWaypointsFromNote">Blokovat waypointy vytvořené z poznámek</string>
-    <string name="cache_menu_allowWaypointExtraction">Povolit waypointy vytvořené z poznámek</string>
+    <string name="cache_menu_preventWaypointsFromNote">Blokovat waypointy z poznámky</string>
+    <string name="cache_menu_allowWaypointExtraction">Povolit waypointy z poznámky</string>
     <string name="cache_personal_note_edit">Upravit</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabránit přenosu waypointů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
