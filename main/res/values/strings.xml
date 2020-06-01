@@ -1672,6 +1672,9 @@
     <string name="color_red">Red</string>
     <string name="color_turquoise">Turquoise</string>
     <string name="color_black">Black</string>
+    <string name="preference_colorpicker_select_color_scheme">Select color scheme</string>
+    <string name="preference_colorpicker_select_color">Select color</string>
+    <string name="preference_colorpicker_select_opaqueness">Select opaqueness</string>
 
     <!-- number input -->
     <string name="number_input_title">Enter a value between %1$s and %2$s</string>
