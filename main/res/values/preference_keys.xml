@@ -101,8 +101,13 @@
     <string translatable="false" name="pref_value_pn_tone_and_text">3</string>
     <string translatable="false" name="pref_maptrail">maptrail</string>
     <string translatable="false" name="pref_mapline_trailcolor">mapline_trailcolor</string>
+    <string translatable="false" name="pref_mapline_trailwidth">mapline_trailwidth</string>
     <string translatable="false" name="pref_mapline_directioncolor">mapline_directioncolor</string>
+    <string translatable="false" name="pref_mapline_directionwidth">mapline_directionwidth</string>
     <string translatable="false" name="pref_mapline_routecolor">mapline_routecolor</string>
+    <string translatable="false" name="pref_mapline_routewidth">mapline_routewidth</string>
+    <string translatable="false" name="pref_mapline_trackcolor">mapline_trackcolor</string>
+    <string translatable="false" name="pref_mapline_trackwidth">mapline_trackwidth</string>
     <string translatable="false" name="pref_mapline_circlecolor">mapline_circlecolor</string>
     <string translatable="false" name="pref_mapline_circlefillcolor">mapline_circlefillcolor</string>
     <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>

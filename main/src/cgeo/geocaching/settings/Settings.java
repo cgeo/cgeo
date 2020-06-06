@@ -832,24 +832,8 @@ public class Settings {
         putBoolean(R.string.pref_showListsInCacheList, showListsInCacheList);
     }
 
-    public static int getTrailColor() {
-        return getInt(R.string.pref_mapline_trailcolor, getKeyInt(R.color.default_trailcolor));
-    }
-
-    public static int getRouteColor() {
-        return getInt(R.string.pref_mapline_routecolor, getKeyInt(R.color.default_routecolor));
-    }
-
-    public static int getDirectionColor() {
-        return getInt(R.string.pref_mapline_directioncolor, getKeyInt(R.color.default_directioncolor));
-    }
-
-    public static int getCircleColor() {
-        return getInt(R.string.pref_mapline_circlecolor, getKeyInt(R.color.default_circlecolor));
-    }
-
-    public static int getCircleFillColor() {
-        return getInt(R.string.pref_mapline_circlefillcolor, getKeyInt(R.color.default_circlefillcolor));
+    public static int getMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
+        return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
 
     public static boolean isDotMode() {

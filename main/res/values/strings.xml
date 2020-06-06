@@ -659,8 +659,13 @@
     <string name="init_maptrail">Show Trail</string>
     <string name="init_summary_maptrail">Show trail on Map</string>
     <string name="init_trailcolor">History trail line color</string>
+    <string name="init_trailwidth">History trail line width</string>
     <string name="init_directioncolor">Direction line color</string>
+    <string name="init_directionwidth">Direction line width</string>
     <string name="init_routecolor">Route line color</string>
+    <string name="init_routewidth">Route line width</string>
+    <string name="init_trackcolor">Track line color</string>
+    <string name="init_trackwidth">Track line width</string>
     <string name="init_circlecolor">Circle line color</string>
     <string name="init_circlefillcolor">Circle fill color</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>

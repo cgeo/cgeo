@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.location.Location;
 
@@ -35,7 +35,7 @@ public class HistoryLayer extends Layer {
         if (locationHistory != null) {
             positionHistory.setHistory(locationHistory);
         }
-        trailColor = Settings.getTrailColor();
+        trailColor = MapLineUtils.getTrailColor();
     }
 
     public void reset() {
@@ -50,13 +50,13 @@ public class HistoryLayer extends Layer {
 
         if (historyLine == null) {
             historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLine.setStrokeWidth(DisplayUtils.getHistoryLineInsetWidth());
+            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineInsetWidth());
             historyLine.setColor(0xFFFFFFFF);
         }
 
         if (historyLineShadow == null) {
             historyLineShadow = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLineShadow.setStrokeWidth(DisplayUtils.getHistoryLineShadowWidth());
+            historyLineShadow.setStrokeWidth(MapLineUtils.getHistoryLineShadowWidth());
             historyLineShadow.setColor(trailColor);
         }
 
