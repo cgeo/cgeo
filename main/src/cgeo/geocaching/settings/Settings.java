@@ -304,6 +304,10 @@ public class Settings {
         return CgeoApplication.getInstance().getString(prefKeyId);
     }
 
+    private static int getKeyInt(final int prefKeyId) {
+        return CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
+    }
+
     static String getString(final int prefKeyId, final String defaultValue) {
         return sharedPrefs.getString(getKey(prefKeyId), defaultValue);
     }
@@ -829,16 +833,23 @@ public class Settings {
     }
 
     public static int getTrailColor() {
-        final Context baseContext = CgeoApplication.getInstance().getBaseContext();
-        final String defaultValue = baseContext.getString(R.string.pref_value_grey);
-        final String trailColor = getString(R.string.pref_trailcolor, defaultValue);
-        if (trailColor.equals(baseContext.getString(R.string.pref_value_blue))) {
-            return 0xff0000dd;
-        } else if (trailColor.equals(baseContext.getString(R.string.pref_value_green))) {
-            return 0xff006b00;
-        } else {
-            return 0x66000000;
-        }
+        return getInt(R.string.pref_mapline_trailcolor, getKeyInt(R.color.default_trailcolor));
+    }
+
+    public static int getRouteColor() {
+        return getInt(R.string.pref_mapline_routecolor, getKeyInt(R.color.default_routecolor));
+    }
+
+    public static int getDirectionColor() {
+        return getInt(R.string.pref_mapline_directioncolor, getKeyInt(R.color.default_directioncolor));
+    }
+
+    public static int getCircleColor() {
+        return getInt(R.string.pref_mapline_circlecolor, getKeyInt(R.color.default_circlecolor));
+    }
+
+    public static int getCircleFillColor() {
+        return getInt(R.string.pref_mapline_circlefillcolor, getKeyInt(R.color.default_circlefillcolor));
     }
 
     public static boolean isDotMode() {

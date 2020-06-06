@@ -64,6 +64,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private GoogleMapObjects trackObjs;
     private GoogleMapView mapView;
     private final int trailColor;
+    private final int routeColor;
+    private final int directionColor;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
 
@@ -81,6 +83,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         trackObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
         trailColor = Settings.getTrailColor();
+        routeColor = Settings.getRouteColor();
+        directionColor = Settings.getDirectionColor();
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;
         updateMapRotation();
@@ -202,7 +206,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
                 .width(DisplayUtils.getDirectionLineWidth())
-                .color(0x80EB391E)
+                .color(directionColor)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
 
@@ -322,7 +326,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (route != null && route.size() > 1) {
             routeObjs.addPolyline(new PolylineOptions()
                     .addAll(route)
-                    .color(0xFF0000FF)
+                    .color(routeColor)
                     .width(DisplayUtils.getRouteLineWidth())
                     .zIndex(ZINDEX_ROUTE)
             );

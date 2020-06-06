@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Route;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DisplayUtils;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class RouteLayer extends AbstractLineLayer implements Route.RouteUpdater 
 
     public RouteLayer(final PostRealDistance postRealRouteDistance) {
         super();
-        lineColor = 0xD00000A0;
+        lineColor = Settings.getRouteColor();
         this.postRealRouteDistance = postRealRouteDistance;
         width = DisplayUtils.getRouteLineWidth();
     }
@@ -43,5 +44,4 @@ public class RouteLayer extends AbstractLineLayer implements Route.RouteUpdater 
             postRealRouteDistance.postRealDistance(distance);
         }
     }
-
 }

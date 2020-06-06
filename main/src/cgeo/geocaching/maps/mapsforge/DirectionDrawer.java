@@ -54,7 +54,7 @@ public class DirectionDrawer {
             linePaint.setAntiAlias(true);
             linePaint.setStrokeWidth(width);
             linePaint.setStyle(Paint.Style.STROKE);
-            linePaint.setColor(0xD0EB391E);
+            linePaint.setColor(Settings.getDirectionColor());
         }
 
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);

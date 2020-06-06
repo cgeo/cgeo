@@ -100,7 +100,11 @@
     <string translatable="false" name="pref_value_pn_text_only">2</string>
     <string translatable="false" name="pref_value_pn_tone_and_text">3</string>
     <string translatable="false" name="pref_maptrail">maptrail</string>
-    <string translatable="false" name="pref_trailcolor">trailcolor</string>
+    <string translatable="false" name="pref_mapline_trailcolor">mapline_trailcolor</string>
+    <string translatable="false" name="pref_mapline_directioncolor">mapline_directioncolor</string>
+    <string translatable="false" name="pref_mapline_routecolor">mapline_routecolor</string>
+    <string translatable="false" name="pref_mapline_circlecolor">mapline_circlecolor</string>
+    <string translatable="false" name="pref_mapline_circlefillcolor">mapline_circlefillcolor</string>
     <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>
     <string translatable="false" name="pref_dot_mode">dot_mode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
@@ -245,10 +249,6 @@
     <string translatable="false" name="pref_map_direction">map_direction</string>
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
-
-    <string translatable="false" name="pref_value_blue">blue</string>
-    <string translatable="false" name="pref_value_green">green</string>
-    <string translatable="false" name="pref_value_grey">grey</string>
 
     <string translatable="false" name="pref_maprotation_off">off</string>
     <string translatable="false" name="pref_maprotation_manual">manual</string>
