@@ -10,7 +10,7 @@ import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -63,9 +63,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private GoogleMapObjects routeObjs;
     private GoogleMapObjects trackObjs;
     private GoogleMapView mapView;
-    private final int trailColor;
-    private final int routeColor;
-    private final int directionColor;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
 
@@ -82,9 +79,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         routeObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
-        trailColor = Settings.getTrailColor();
-        routeColor = Settings.getRouteColor();
-        directionColor = Settings.getDirectionColor();
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;
         updateMapRotation();
@@ -205,8 +199,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
-                .width(DisplayUtils.getDirectionLineWidth())
-                .color(directionColor)
+                .width(MapLineUtils.getDirectionLineWidth())
+                .color(MapLineUtils.getDirectionColor())
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
 
@@ -243,9 +237,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         // accuracy circle
         positionObjs.addCircle(new CircleOptions()
                 .center(latLng)
-                .strokeColor(0x66000000)
-                .strokeWidth(3)
-                .fillColor(0x08000000)
+                .strokeColor(MapLineUtils.getCircleColor())
+                .strokeWidth(MapLineUtils.getDefaultThinLineWidth())
+                .fillColor(MapLineUtils.getCircleFillColor())
                 .radius(coordinates.getAccuracy())
                 .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
         );
@@ -305,15 +299,15 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                     historyObjs.addPolyline(new PolylineOptions()
                             .addAll(points)
                             .color(0xFFFFFFFF)
-                            .width(DisplayUtils.getHistoryLineInsetWidth())
+                            .width(MapLineUtils.getHistoryLineInsetWidth())
                             .zIndex(ZINDEX_HISTORY)
                     );
 
                     // history line shadow
                     historyObjs.addPolyline(new PolylineOptions()
                             .addAll(points)
-                            .color(trailColor)
-                            .width(DisplayUtils.getHistoryLineShadowWidth())
+                            .color(MapLineUtils.getTrailColor())
+                            .width(MapLineUtils.getHistoryLineShadowWidth())
                             .zIndex(ZINDEX_HISTORY_SHADOW)
                     );
                 }
@@ -326,8 +320,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (route != null && route.size() > 1) {
             routeObjs.addPolyline(new PolylineOptions()
                     .addAll(route)
-                    .color(routeColor)
-                    .width(DisplayUtils.getRouteLineWidth())
+                    .color(MapLineUtils.getRouteColor())
+                    .width(MapLineUtils.getRouteLineWidth())
                     .zIndex(ZINDEX_ROUTE)
             );
         }
@@ -338,7 +332,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             return;
         }
         final PolylineOptions options = new PolylineOptions()
-                .width(DisplayUtils.getDirectionLineWidth())
+                .width(MapLineUtils.getDebugLineWidth())
                 .color(0x80EB391E)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMin()))
@@ -356,8 +350,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (track != null && track.size() > 1 && !Settings.isHideTrack()) {
             trackObjs.addPolyline(new PolylineOptions()
                 .addAll(track)
-                .color(0xFF00A000)
-                .width(DisplayUtils.getTrackLineWidth())
+                .color(MapLineUtils.getTrackColor())
+                .width(MapLineUtils.getTrackLineWidth())
                 .zIndex(ZINDEX_TRACK)
             );
         }

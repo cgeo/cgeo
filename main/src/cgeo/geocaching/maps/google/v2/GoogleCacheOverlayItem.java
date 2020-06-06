@@ -4,7 +4,7 @@ import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -66,9 +66,9 @@ public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectO
         if (showCircles && applyDistanceRule) {
             final CircleOptions circle = new CircleOptions()
                     .center(toLatLng(coord))
-                    .strokeColor(Settings.getCircleColor())
+                    .strokeColor(MapLineUtils.getCircleColor())
                     .strokeWidth(2)
-                    .fillColor(Settings.getCircleFillColor())
+                    .fillColor(MapLineUtils.getCircleFillColor())
                     .radius(GoogleCachesList.CIRCLE_RADIUS)
                     .zIndex(GoogleCachesList.ZINDEX_CIRCLE);
 

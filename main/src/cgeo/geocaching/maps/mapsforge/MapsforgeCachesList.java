@@ -13,6 +13,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Canvas;
@@ -123,12 +124,12 @@ public class MapsforgeCachesList extends AbstractItemizedOverlay {
                 projection.toPixels(itemGeo, center);
                 if (center.x > -radius && center.y > -radius && center.x < width + radius && center.y < height + radius) {
                     // dashed circle around the waypoint
-                    blockedCircle.setColor(Settings.getCircleColor());
+                    blockedCircle.setColor(MapLineUtils.getCircleColor());
                     blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
                     // filling the circle area with a transparent color
-                    blockedCircle.setColor(Settings.getCircleFillColor());
+                    blockedCircle.setColor(MapLineUtils.getCircleFillColor());
                     blockedCircle.setStyle(Style.FILL);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
                 }

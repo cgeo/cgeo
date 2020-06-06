@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import androidx.core.util.Pair;
 
@@ -28,7 +28,7 @@ abstract class AbstractLineLayer extends Layer {
     private long mapSize = 0;
 
     protected AbstractLineLayer() {
-        width = DisplayUtils.getDefaultThinLineWidth();
+        width = MapLineUtils.getDefaultThinLineWidth();
     }
 
     public void updateTrack(final ArrayList<Geopoint> track) {

@@ -6,7 +6,7 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CanvasUtils;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -33,7 +33,7 @@ public class DirectionDrawer {
         this.destinationCoords = coords;
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
         this.postRealDistance = postRealDistance;
-        width = DisplayUtils.getDirectionLineWidth();
+        width = MapLineUtils.getDirectionLineWidth();
     }
 
     public void setCoordinates(final Location coordinatesIn) {
@@ -54,7 +54,7 @@ public class DirectionDrawer {
             linePaint.setAntiAlias(true);
             linePaint.setStrokeWidth(width);
             linePaint.setStyle(Paint.Style.STROKE);
-            linePaint.setColor(Settings.getDirectionColor());
+            linePaint.setColor(MapLineUtils.getDirectionColor());
         }
 
         final Geopoint[] routingPoints = Routing.getTrack(currentCoords, destinationCoords);

@@ -3,7 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.location.Location;
 
@@ -37,7 +37,7 @@ public class NavigationLayer extends Layer {
 
         this.destinationCoords = coords;
         this.postRealDistance = postRealDistance;
-        width = DisplayUtils.getDirectionLineWidth();
+        width = MapLineUtils.getDirectionLineWidth();
     }
 
     public void setDestination(final Geopoint coords) {
@@ -58,7 +58,7 @@ public class NavigationLayer extends Layer {
             line = AndroidGraphicFactory.INSTANCE.createPaint();
             line.setStrokeWidth(width);
             line.setStyle(Style.STROKE);
-            line.setColor(Settings.getDirectionColor());
+            line.setColor(MapLineUtils.getDirectionColor());
             line.setTextSize(20);
         }
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());

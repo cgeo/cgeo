@@ -8,7 +8,7 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,7 +48,7 @@ public class PositionDrawer {
 
     public PositionDrawer() {
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
-        trailColor = Settings.getTrailColor();
+        trailColor = MapLineUtils.getTrailColor();
     }
 
     void drawPosition(final Canvas canvas, final MapProjectionImpl projection) {
@@ -65,14 +65,14 @@ public class PositionDrawer {
         if (historyLine == null) {
             historyLine = new Paint();
             historyLine.setAntiAlias(true);
-            historyLine.setStrokeWidth(DisplayUtils.getHistoryLineInsetWidth());
+            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineInsetWidth());
             historyLine.setColor(0xFFFFFFFF);
         }
 
         if (historyLineShadow == null) {
             historyLineShadow = new Paint();
             historyLineShadow.setAntiAlias(true);
-            historyLineShadow.setStrokeWidth(DisplayUtils.getHistoryLineShadowWidth());
+            historyLineShadow.setStrokeWidth(MapLineUtils.getHistoryLineShadowWidth());
             historyLineShadow.setColor(trailColor);
         }
 
