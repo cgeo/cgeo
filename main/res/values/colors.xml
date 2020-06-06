@@ -27,5 +27,10 @@
     <color name="button_default">#282828</color>
     <color name="steel">#675C68</color>
 
+    <color name="default_trailcolor">#80000000</color>
+    <color name="default_routecolor">#800000FF</color>
+    <color name="default_directioncolor">#80FF3333</color>
+    <color name="default_circlecolor">#44BB0000</color>
+    <color name="default_circlefillcolor">#66BB0000</color>
 
 </resources>

@@ -123,12 +123,12 @@ public class MapsforgeCachesList extends AbstractItemizedOverlay {
                 projection.toPixels(itemGeo, center);
                 if (center.x > -radius && center.y > -radius && center.x < width + radius && center.y < height + radius) {
                     // dashed circle around the waypoint
-                    blockedCircle.setColor(0x66BB0000);
+                    blockedCircle.setColor(Settings.getCircleColor());
                     blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
                     // filling the circle area with a transparent color
-                    blockedCircle.setColor(0x44BB0000);
+                    blockedCircle.setColor(Settings.getCircleFillColor());
                     blockedCircle.setStyle(Style.FILL);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
                 }

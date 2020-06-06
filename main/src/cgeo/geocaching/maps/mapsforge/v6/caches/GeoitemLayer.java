@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DisplayUtils;
 
 import android.util.DisplayMetrics;
@@ -42,11 +43,11 @@ public class GeoitemLayer extends Marker {
         strokePaint = AndroidGraphicFactory.INSTANCE.createPaint();
         strokePaint.setStrokeWidth(2.0f);
         strokePaint.setDashPathEffect(new float[] { 3, 2 });
-        strokePaint.setColor(0x66BB0000);
+        strokePaint.setColor(Settings.getCircleColor());
         strokePaint.setStyle(Style.STROKE);
 
         fillPaint = AndroidGraphicFactory.INSTANCE.createPaint();
-        fillPaint.setColor(0x44BB0000);
+        fillPaint.setColor(Settings.getCircleFillColor());
         fillPaint.setStyle(Style.FILL);
     }
 

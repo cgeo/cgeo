@@ -58,7 +58,7 @@ public class NavigationLayer extends Layer {
             line = AndroidGraphicFactory.INSTANCE.createPaint();
             line.setStrokeWidth(width);
             line.setStyle(Style.STROKE);
-            line.setColor(0xD0EB391E);
+            line.setColor(Settings.getDirectionColor());
             line.setTextSize(20);
         }
         final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());

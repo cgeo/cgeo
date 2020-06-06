@@ -624,14 +624,6 @@
                 android:key="@string/pref_maptrail"
                 android:summary="@string/init_summary_maptrail"
                 android:title="@string/init_maptrail" />
-            <ListPreference
-                android:title="@string/init_trailcolor"
-                android:summary="%s"
-                android:key="@string/pref_trailcolor"
-                android:defaultValue="@string/pref_value_grey"
-                android:dependency="@string/pref_maptrail"
-                android:entries="@array/trailcolors"
-                android:entryValues="@array/trailcolorValues" />
             <Preference
                 android:selectable="false"
                 android:summary="@string/init_brouterThreshold_description"
@@ -680,6 +672,36 @@
                 android:defaultValue="@string/pref_value_pn_tone_only"
                 android:entries="@array/proximity_notification_types"
                 android:entryValues="@array/proximity_notification_values" />
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/init_maplines_title"
+            android:layout="@layout/preference_category">
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_trailcolor"
+                android:key="@string/pref_mapline_trailcolor"
+                android:defaultValue="@color/default_trailcolor"
+                android:dependency="@string/pref_maptrail"
+                app:showOpaquenessSlider="true" />
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_directioncolor"
+                android:key="@string/pref_mapline_directioncolor"
+                android:defaultValue="@color/default_directioncolor"
+                app:showOpaquenessSlider="true" />
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_routecolor"
+                android:key="@string/pref_mapline_routecolor"
+                android:defaultValue="@color/default_routecolor"
+                app:showOpaquenessSlider="true" />
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_circlecolor"
+                android:key="@string/pref_mapline_circlecolor"
+                android:defaultValue="@color/default_circlecolor"
+                app:showOpaquenessSlider="true" />
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_circlefillcolor"
+                android:key="@string/pref_mapline_circlefillcolor"
+                android:defaultValue="@color/default_circlefillcolor"
+                app:showOpaquenessSlider="true" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
