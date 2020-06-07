@@ -52,7 +52,7 @@ For the full usability of c:geo you need some API keys - for Google Maps and the
 You can leave all entries in the configuration empty, but then Google Maps and the Opencaching sites don't work.
 
 For using the Google Maps function it is necessary to have a Google Maps API v2 key. For this follow 
-* [Maps SDK for Android: Get an API Key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
+* [Maps SDK for Android: Get an API Key](https://developers.google.com/places/web-service/get-api-key)
 
 The key itself is free, and you don't have to enter any credit card info, although the web form seems to force you to.
 
