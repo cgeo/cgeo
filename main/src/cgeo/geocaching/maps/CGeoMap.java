@@ -1439,7 +1439,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             lastSearchResult = searchResult;
             if (null == lastViewport || (!caches.isEmpty() && lastSearchResult.getCount() > 400)) {
-                lastViewport = containingGCliveCaches(caches);
+                lastViewport = containingGCliveCaches(caches.getAsList());
                 if (Settings.isDebug() && overlayPositionAndScale instanceof GooglePositionAndHistory) {
                     ((GooglePositionAndHistory) overlayPositionAndScale).drawViewport(lastViewport);
                 }
