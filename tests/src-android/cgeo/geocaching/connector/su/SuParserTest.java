@@ -22,6 +22,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 
     private static UserInfo user;
     private static String userJson = "{\"status\":{\"code\":\"OK\"},\"data\":{\"id\":68451,\"name\":\"lega4\",\"foundCaches\":594,\"hiddenCaches\":28}}";
+    private static String emptyUserJson = "{\"status\":{\"code\":\"OK\"},\"data\":{}}";
     private static Geocache cache;
     private static String cacheJson = "{\"status\":{\"code\":\"OK\"}," +
             "\"data\":{" +
@@ -367,5 +368,15 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
     public void testCanParseWatchStatus() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.isOnWatchlist()).isTrue();
+    }
+    public void testCanHandleWrongUserJson() throws Exception {
+        parseUser(emptyUserJson);
+
+        assertThat(user.getStatus()).isEqualTo(UserInfo.UserInfoStatus.FAILED);
+    }
+
+    public void testCanParseUserSuccessfully() throws Exception {
+        parseUser(userJson);
+        assertThat(user.getStatus()).isEqualTo(UserInfo.UserInfoStatus.SUCCESSFUL);
     }
 }

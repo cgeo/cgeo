@@ -35,6 +35,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.lang3.StringUtils;
 
 public class SuParser {
 
@@ -107,11 +108,14 @@ public class SuParser {
     public static UserInfo parseUser(final ObjectNode response) {
         final JsonNode data = response.get("data");
 
+        if (!(data.has(USER_FOUNDS) && data.has(USER_NAME))) {
+            // Either server issue or wrong response - looks suspicious, we need to retry logging in later
+            return new UserInfo(StringUtils.EMPTY, 0, UserInfo.UserInfoStatus.FAILED);
+        }
         final int finds = data.get(USER_FOUNDS).asInt();
         final String name = data.get(USER_NAME).asText();
 
         return new UserInfo(name, finds, UserInfo.UserInfoStatus.SUCCESSFUL);
-
     }
 
     @NonNull
