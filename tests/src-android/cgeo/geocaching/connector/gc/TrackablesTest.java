@@ -35,17 +35,16 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log).isNotNull();
         assertThat(log).hasSize(10);
 
-        // log entry 4 has several images; just check the first one
-        final List<Image> log4Images = log.get(4).getLogImages();
-        assertThat(log4Images).isNotNull();
-        assertThat(log4Images).hasSize(1);
-        assertThat(log4Images.get(0).getUrl()).isEqualTo("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
-        assertThat(log4Images.get(0).getTitle()).isEqualTo("@Osaka");
+        final List<Image> logImages = log.get(5).getLogImages();
+        assertThat(logImages).isNotNull();
+        assertThat(logImages).hasSize(1);
+        assertThat(logImages.get(0).getUrl()).isEqualTo("https://img.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
+        assertThat(logImages.get(0).getTitle()).isEqualTo("@Osaka");
 
         for (final LogEntry entry : log) {
             assertThat(entry.log.startsWith("<div>")).isFalse();
         }
-        assertThat(log.get(0).log).isEqualTo("Dropped in Una Bhan (GC49XCJ)");
+        assertThat(log.get(1).log).isEqualTo("Dropped in Una Bhan (GC49XCJ)");
     }
 
     public void testParseTrackableWithoutReleaseDate() {
