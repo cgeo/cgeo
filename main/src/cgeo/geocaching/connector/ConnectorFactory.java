@@ -28,6 +28,8 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
+import cgeo.geocaching.connector.unknown.UnknownConnector;
+import cgeo.geocaching.connector.wm.WaymarkingConnector;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;

@@ -1,5 +1,6 @@
-package cgeo.geocaching.connector;
+package cgeo.geocaching.connector.unknown;
 
+import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
@@ -7,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 
-class UnknownConnector extends AbstractConnector {
+public class UnknownConnector extends AbstractConnector {
 
     @Override
     @NonNull
