@@ -143,11 +143,6 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public boolean getHttps() {
-        return true;
-    }
-
-    @Override
     @NonNull
     public String getHost() {
         return "geocaching.su";
