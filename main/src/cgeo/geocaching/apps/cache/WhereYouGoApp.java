@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 public class WhereYouGoApp extends AbstractGeneralApp {
-    private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("(" + Pattern.quote("http://www.wherigo.com/cartridge/details.aspx?") + ".*?)" + Pattern.quote("\""));
+    private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("(https?" + Pattern.quote("://www.wherigo.com/cartridge/details.aspx?") + "[Cc][Gg][Uu][Ii][Dd]=[-0-9a-zA-Z]*)");
 
     public WhereYouGoApp() {
         super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
