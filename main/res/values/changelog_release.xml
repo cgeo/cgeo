@@ -26,6 +26,7 @@
     · New: Show waypoint user note in waypoint popup\n
     · New: Added function to write debug logfile (\"LogCat\")\n
     · New: Show bounding box around live caches (only if debug mode is enabled)\n
+    · New: Extended Whereigo URL detection to catch more situations, and to catch https links\n
     · Fix: Adapt to website changes for TB log images\n
     · Fix: Show waypoints of owned cache on OSM single cache map\n
     · Fix: Crash on moving data to SD card\n
