@@ -1698,4 +1698,14 @@
     <string name="switch_off">Off</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automatic</string>
+
+    <!-- view settings -->
+    <string name="view_settings">View settings</string>
+    <string name="delete_setting">Delete setting</string>
+    <string name="delete_setting_warning">Delete key \"%s\" from settings?\n\nThis operation cannot be undone.</string>
+    <string name="edit_setting">Edit setting \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Unknown setting type - editing not supported</string>
+    <string name="edit_setting_error_invalid_data">Invalid data \"%s\" entered. Setting\'s value unchanged.</string>
+    <string name="activate_editmode_title">Activate edit mode</string>
+    <string name="activate_editmode_warning">You are entering dangerous area here!\n\nChanging settings directly might confuse c:geo, might prevent further program starts or might your mobile make explode!\n\nAre you sure you want to proceed at your own risk?</string>
 </resources>

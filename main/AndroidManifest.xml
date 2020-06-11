@@ -225,6 +225,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
+        <activity android:name=".settings.ViewSettingsActivity" />
         <activity
             android:name=".CacheListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

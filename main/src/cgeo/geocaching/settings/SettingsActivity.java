@@ -491,6 +491,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             DebugUtils.createLogcat(SettingsActivity.this);
             return true;
         });
+        getPreference(R.string.pref_view_settings).setOnPreferenceClickListener(preference -> {
+            startActivity(new Intent(this, ViewSettingsActivity.class));
+            return true;
+        });
     }
 
     private static void initDeviceSpecificPreferences() {

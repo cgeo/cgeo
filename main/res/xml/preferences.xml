@@ -974,6 +974,9 @@
             <Preference
                 android:key="@string/pref_memory_dump"
                 android:title="@string/init_create_memory_dump" />
+            <Preference
+                android:key="@string/pref_view_settings"
+                android:title="@string/view_settings" />
         </PreferenceCategory>
     </PreferenceScreen>
 
