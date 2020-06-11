@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="40sp"
+    android:padding="3dp">
+
+    <TextView
+        android:id="@+id/settings_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10sp"
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/settings_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/settings_key"
+        tools:ignore="RelativeOverlap" />
+    <ImageButton
+        android:id="@+id/settings_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/settings_delete"
+        android:src="@drawable/ic_menu_edit"
+        android:visibility="gone" />
+    <ImageButton
+        android:id="@+id/settings_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu_delete"
+        android:visibility="gone" />
+
+</RelativeLayout>

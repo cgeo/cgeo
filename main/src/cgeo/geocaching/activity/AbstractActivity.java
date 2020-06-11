@@ -74,9 +74,17 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         ActivityMixin.showToast(this, text);
     }
 
+    public final void showToast(final int textId) {
+        showToast(getString(textId));
+    }
+
     @Override
     public final void showShortToast(final String text) {
         ActivityMixin.showShortToast(this, text);
+    }
+
+    public final void showShortToast(final int textId) {
+        showShortToast(getString(textId));
     }
 
     @Override

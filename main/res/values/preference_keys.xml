@@ -231,6 +231,7 @@
     <string translatable="false" name="pref_ec_icons">ec_icons</string>
     <string translatable="false" name="pref_memory_dump">memory_dump</string>
     <string translatable="false" name="pref_generate_logcat">generate_logcat</string>
+    <string translatable="false" name="pref_view_settings">view_settings</string>
     <string translatable="false" name="pref_appearance">pref_appearance</string>
     <string translatable="false" name="pref_changelog_last_checksum">changelog_last_checksum</string>
     <string translatable="false" name="pref_caches_history">caches_history</string>
