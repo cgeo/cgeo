@@ -40,6 +40,7 @@ import android.view.MotionEvent;
 
 import androidx.core.content.pm.PackageInfoCompat;
 
+import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -77,6 +78,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
+
+    private WeakReference<PositionAndHistory> positionAndHistoryRef;
 
     public interface PostRealDistance {
         void postRealDistance (float realDistance);
@@ -148,6 +151,14 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 canDisableAutoRotate = false;
                 Dialogs.confirm((Activity) getContext(), R.string.map_gm_autorotation, R.string.map_gm_autorotation_disable, (dialog, which) -> {
                     Settings.setMapRotation(Settings.MAPROTATION_MANUAL);
+
+                    // notify overlay
+                    if (null != positionAndHistoryRef) {
+                        final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
+                        if (null != positionAndHistory) {
+                            positionAndHistory.updateMapRotation();
+                        }
+                    }
                 });
             } else if (bearing != 0.0f) {
                 canDisableAutoRotate = true;
@@ -285,7 +296,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             }
         });
         setDestinationCoords(coords);
-        return ovl.getBase();
+        positionAndHistoryRef = new WeakReference<>(ovl.getBase());
+        return positionAndHistoryRef.get();
     }
 
     @Override

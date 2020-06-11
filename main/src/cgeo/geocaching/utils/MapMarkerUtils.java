@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.log.LogType;
@@ -117,9 +118,11 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint) {
+        final WaypointType waypointType = waypoint.getWaypointType();
+        final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
         final int hashcode = new HashCodeBuilder()
         .append(waypoint.isVisited())
-        .append(waypoint.getWaypointType().id)
+        .append(id)
         .toHashCode();
 
         synchronized (overlaysCache) {
