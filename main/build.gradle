@@ -247,9 +247,12 @@ dependencies {
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
-    implementation 'org.apache.commons:commons-compress:1.19'
+    implementation 'org.apache.commons:commons-compress:1.20'
+    //noinspection GradleDependency
     implementation 'commons-io:commons-io:2.5'
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-lang3:3.5'
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-text:1.1'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
@@ -264,14 +267,14 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:3.1.12'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.0.3'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.50'
 
     // Jackson XML processing
     def jacksonVersion = '2.9.10'
-    def jacksonVersionPatch = '2.9.10.3'
+    def jacksonVersionPatch = '2.9.10.4'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersionPatch"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -283,7 +286,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
 
     // Leak Canary, memory leak detection
-    def leakCanaryVersion = '2.1'
+    def leakCanaryVersion = '2.3'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
 
     // Locus Maps integration
@@ -311,11 +314,11 @@ dependencies {
     implementation project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.13.0'
+    implementation 'com.drewnoakes:metadata-extractor:2.14.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
     //noinspection GradleDependency
-    implementation 'com.squareup.okhttp3:okhttp:3.12.8'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.12'
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:17.0.0'
@@ -327,14 +330,14 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.1.0'
+    implementation 'androidx.exifinterface:exifinterface:1.2.0'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
