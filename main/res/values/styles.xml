@@ -378,11 +378,11 @@
     </style>
 
     <!-- progress dialog theme -->
-    <style name="cgeoProgressdialogTheme_Base" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:textColor">?text_color</item>
         <item name="android:windowBackground">@drawable/border_straight</item>
     </style>
-    <style name="cgeoProgressdialogTheme_light_Base" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="cgeoProgressdialogTheme_light" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">?text_color</item>
         <item name="android:windowBackground">@drawable/border_straight_light</item>
     </style>
