@@ -23,7 +23,7 @@
 
 
     <style name="cgeo_main" parent="cgeo_main.base">
-        <!-- gets modified in v19 to add translucent window decoration -->
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.ProgressBar">
