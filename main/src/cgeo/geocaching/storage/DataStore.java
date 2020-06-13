@@ -2294,6 +2294,24 @@ public class DataStore {
                 });
     }
 
+    public static Location[] loadTrailHistoryAsArray() {
+        init();
+        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id DESC", null);
+        final Location[] result = new Location[cursor.getCount()];
+        int iPosition = 0;
+        try {
+            while (cursor.moveToNext()) {
+                result[iPosition] = new Location("trailHistory");
+                result[iPosition].setLatitude(cursor.getDouble(1));
+                result[iPosition].setLongitude(cursor.getDouble(2));
+                iPosition++;
+            }
+        } finally {
+            cursor.close();
+        }
+        return result;
+    }
+
     public static boolean clearTrailHistory() {
         init();
         database.beginTransaction();

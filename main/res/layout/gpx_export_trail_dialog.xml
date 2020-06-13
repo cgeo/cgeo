@@ -10,8 +10,7 @@
     <include layout="@layout/gpx_export_fragment" />
 
     <CheckBox
-        android:id="@+id/include_found_status"
+        android:id="@+id/clear_trailhistory_after_export"
         style="@style/checkbox_full"
         android:text="@string/export_trailhistory_clear_after_export" />
-
 </LinearLayout>

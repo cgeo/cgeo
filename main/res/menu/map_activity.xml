@@ -234,18 +234,28 @@
         </menu>
     </item>
     <item
-        android:id="@+id/menu_as_list"
-        android:icon="@drawable/ic_menu_agenda"
-        android:title="@string/map_as_list">
-    </item>
-    <item
-        android:id="@+id/menu_clear_trailhistory"
-        android:title="@string/map_clear_trailhistory">
+        android:id="@+id/menu_trailhistory"
+        android:title="@string/trailhistory">
+        <menu>
+            <item
+                android:id="@+id/menu_clear_trailhistory"
+                android:title="@string/map_clear_trailhistory">
+            </item>
+            <item
+                android:id="@+id/menu_export_trailhistory"
+                android:title="@string/export_trailhistory_title">
+            </item>
+        </menu>
     </item>
     <item
         android:id="@+id/menu_clear_individual_route"
         android:title="@string/map_clear_individual_route"
         android:visible="false">
+    </item>
+    <item
+        android:id="@+id/menu_as_list"
+        android:icon="@drawable/ic_menu_agenda"
+        android:title="@string/map_as_list">
     </item>
 
 </menu>

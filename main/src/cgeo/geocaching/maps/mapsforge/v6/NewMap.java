@@ -18,6 +18,7 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.export.TrailHistoryExport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -341,7 +342,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            menu.findItem(R.id.menu_clear_trailhistory).setVisible(Settings.isMapTrail());
+            menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
 
             menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
             switch (Settings.getRoutingMode()) {
@@ -482,10 +483,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
                 return true;
             case R.id.menu_clear_trailhistory:
-                this.historyLayer.reset();
-                this.historyLayer.requestRedraw();
-                showToast(res.getString(R.string.map_trailhistory_cleared));
+                clearTrailHistory();
                 return true;
+            case R.id.menu_export_trailhistory: {
+                new TrailHistoryExport(this, this::clearTrailHistory);
+                return true;
+            }
             case R.id.menu_clear_individual_route:
                 route.clearRoute(routeLayer);
                 ActivityMixin.invalidateOptionsMenu(this);
@@ -539,6 +542,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 }
         }
         return false;
+    }
+
+    private void clearTrailHistory() {
+        this.historyLayer.reset();
+        this.historyLayer.requestRedraw();
+        showToast(res.getString(R.string.map_trailhistory_cleared));
     }
 
     private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
