@@ -15,8 +15,7 @@ public class HwAccel {
     }
 
     private static boolean hwAccelShouldBeDisabled() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 ||
-                StringUtils.equals(Build.MODEL, "HTC One X") || // HTC One X
+        return  StringUtils.equals(Build.MODEL, "HTC One X") || // HTC One X
                 StringUtils.equals(Build.MODEL, "HTC One S") || // HTC One S
                 StringUtils.equals(Build.MODEL, "GT-I8190") || // Samsung S3 mini
                 StringUtils.equals(Build.MODEL, "GT-S6310L") || // Samsung Galaxy Young

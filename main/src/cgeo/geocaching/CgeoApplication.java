@@ -7,7 +7,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
@@ -46,7 +45,7 @@ public class CgeoApplication extends Application {
 
         OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
             fixUserManagerMemoryLeak();
         }
 
@@ -65,8 +64,8 @@ public class CgeoApplication extends Application {
 
     /**
      * https://code.google.com/p/android/issues/detail?id=173789
+     * introduced with JELLY_BEAN_MR2 / fixed in October 2016
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void fixUserManagerMemoryLeak() {
         try {
             // invoke UserManager.get() via reflection

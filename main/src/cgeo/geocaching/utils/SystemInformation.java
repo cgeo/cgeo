@@ -16,7 +16,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -97,14 +96,11 @@ public final class SystemInformation {
                 .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
     }
 
-    @SuppressLint("NewApi")
     private static void appendDirectory(@NonNull final StringBuilder body, @NonNull final String label, @NonNull final File directory) {
         body.append(label).append(directory).append(" (").append(Formatter.formatBytes(FileUtils.getFreeDiskSpace(directory))).append(" free)");
         try {
             if (directory.getAbsolutePath().startsWith(LocalStorage.getInternalCgeoDirectory().getAbsolutePath())) {
                 body.append(" internal");
-            } else if (VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                body.append(" external");
             } else if (Environment.isExternalStorageRemovable(directory)) {
                 body.append(" external removable");
             } else {
