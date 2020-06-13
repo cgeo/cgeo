@@ -1541,7 +1541,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is under maintenance.\nYou might run into various issues.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">You appear to be using an older version of Android. This version of c:geo is no longer compatible with your device and might fail or behave unexpectedly!</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">You appear to be using an older version of Android. This version of c:geo is no longer compatible with your device and might fail or behave unexpectedly!\nTap on this message for further information.</string>
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talking compass</string>
