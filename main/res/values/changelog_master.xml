@@ -2,5 +2,9 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+     <b>Next release:</b>\n
+    · Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
+    · New: Upgraded several included libraries to reflect our new minimum system requirements\n
+    · Fix: Removed styles / themes workarounds used for older Android versions\n
   </string>
 </resources>
