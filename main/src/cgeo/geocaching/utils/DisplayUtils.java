@@ -52,6 +52,14 @@ public class DisplayUtils {
         return HISTORY_LINE_INSET * getDisplayDensity();
     }
 
+    public static float getTrackLineWidth() {
+        return THIN_LINE * getDisplayDensity();
+    }
+
+    public static float getDefaultThinLineWidth() {
+        return THIN_LINE * getDisplayDensity();
+    }
+
     // for drawing debug relevant lines
     public static float getDebugLineWidth() {
         return THIN_LINE * getDisplayDensity();

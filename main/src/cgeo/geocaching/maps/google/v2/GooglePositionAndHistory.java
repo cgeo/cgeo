@@ -353,7 +353,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             trackObjs.addPolyline(new PolylineOptions()
                 .addAll(track)
                 .color(0xFF00A000)
-                .width(DisplayUtils.getThinLineWidth())
+                .width(DisplayUtils.getTrackLineWidth())
                 .zIndex(ZINDEX_TRACK)
             );
         }
