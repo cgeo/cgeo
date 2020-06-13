@@ -1242,6 +1242,14 @@ public class Settings {
         putBoolean(R.string.pref_includefoundstatus, includeFoundStatus);
     }
 
+    public static boolean getClearTrailAfterExportStatus() {
+        return getBoolean(R.string.pref_cleartrailafterexportstatus, false);
+    }
+
+    public static void setClearTrailAfterExportStatus(final boolean clearTrailAfterExportStatus) {
+        putBoolean(R.string.pref_cleartrailafterexportstatus, clearTrailAfterExportStatus);
+    }
+
     /**
      * Get Trackable inventory sort method based on the last Trackable inventory sort method.
      *

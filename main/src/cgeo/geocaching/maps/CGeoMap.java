@@ -16,6 +16,7 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.export.TrailHistoryExport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -758,7 +759,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            menu.findItem(R.id.menu_clear_trailhistory).setVisible(Settings.isMapTrail());
+            menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
 
             menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
             switch (Settings.getRoutingMode()) {
@@ -902,10 +903,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 return true;
             }
             case R.id.menu_clear_trailhistory: {
-                DataStore.clearTrailHistory();
-                overlayPositionAndScale.setHistory(new ArrayList<Location>());
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
+                clearTrailHistory();
+                return true;
+            }
+            case R.id.menu_export_trailhistory: {
+                new TrailHistoryExport(activity, this::clearTrailHistory);
                 return true;
             }
             case R.id.menu_clear_individual_route: {
@@ -970,6 +972,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void updateTrackHideStatus() {
         overlayPositionAndScale.repaintRequired();
+    }
+
+    private void clearTrailHistory() {
+        DataStore.clearTrailHistory();
+        overlayPositionAndScale.setHistory(new ArrayList<Location>());
+        mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+        ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
     }
 
     private boolean storeCaches(final Set<String> geocodesInViewport) {
