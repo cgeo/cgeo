@@ -604,7 +604,8 @@
     <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
-    <string name="init_listdisplay">Show additional lists in cache list</string>
+    <string name="init_listdisplay">Additional lists</string>
+    <string name="init_summary_listdisplay">Show additional lists in cache list</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show direction of caches in the list</string>
 
