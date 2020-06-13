@@ -738,7 +738,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_showListsInCacheList"
-            android:title="@string/init_listdisplay" />
+            android:title="@string/init_listdisplay"
+            android:summary="@string/init_summary_listdisplay" />
 
         <PreferenceCategory android:title="@string/settings_title_gpx"
             android:layout="@layout/preference_category" >
