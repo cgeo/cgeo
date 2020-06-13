@@ -9,15 +9,11 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore.MediaColumns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -254,52 +250,21 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     showToast(getString(R.string.err_unsupported_image_format));
                     return;
                 }
-                if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
-                    final String[] filePathColumn = { MediaColumns.DATA };
-
-                    Cursor cursor = null;
-                    try {
-                        cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                        if (cursor == null) {
-                            showFailure();
-                            return;
-                        }
-                        cursor.moveToFirst();
-
-                        final int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                        final String filePath = cursor.getString(columnIndex);
-                        if (StringUtils.isBlank(filePath)) {
-                            showFailure();
-                            return;
-                        }
-                        image = new Image.Builder().setUrl(filePath).build();
-                    } catch (final Exception e) {
-                        Log.e("ImageSelectActivity.onActivityResult", e);
-                        showFailure();
-                    } finally {
-                        if (cursor != null) {
-                            cursor.close(); // no Closable Cursor below sdk 16
-                        }
+                InputStream input = null;
+                OutputStream output = null;
+                try {
+                    input = getContentResolver().openInputStream(selectedImage);
+                    final File outputFile = ImageUtils.getOutputImageFile();
+                    if (outputFile != null) {
+                        output = new FileOutputStream(outputFile);
+                        IOUtils.copy(input, output);
+                        image = new Image.Builder().setUrl(outputFile).build();
                     }
-
-                    Log.d("SELECT IMAGE data = " + data.toString());
-                } else {
-                    InputStream input = null;
-                    OutputStream output = null;
-                    try {
-                        input = getContentResolver().openInputStream(selectedImage);
-                        final File outputFile = ImageUtils.getOutputImageFile();
-                        if (outputFile != null) {
-                            output = new FileOutputStream(outputFile);
-                            IOUtils.copy(input, output);
-                            image = new Image.Builder().setUrl(outputFile).build();
-                        }
-                    } catch (final IOException e) {
-                        Log.e("ImageSelectActivity.onActivityResult", e);
-                    } finally {
-                        IOUtils.closeQuietly(input);
-                        IOUtils.closeQuietly(output);
-                    }
+                } catch (final IOException e) {
+                    Log.e("ImageSelectActivity.onActivityResult", e);
+                } finally {
+                    IOUtils.closeQuietly(input);
+                    IOUtils.closeQuietly(output);
                 }
             } else {
                 // Image capture failed, advise user
