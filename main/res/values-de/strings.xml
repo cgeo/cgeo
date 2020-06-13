@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">Sende Log und lade Bild hoch…</string>
     <string name="log_posting_log">Sende Log…</string>
     <string name="log_posting_twitter">Sende Tweet…</string>
-    <string name="log_posting_gcvote">Sende Bewertung…</string>
+    <string name="log_posting_vote">Sende Cache-Bewertung…</string>
     <string name="log_posting_image">Sende Bild…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
@@ -510,8 +510,8 @@
     <string name="init_summary_su">Caches von geocaching.su laden</string>
     <string name="settings_activate_su">Aktivieren</string>
     <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf GCVote.com und gib das GCVote-Passwort anschließend hier ein.</string>
-    <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
-    <string name="gcvote_sent">Bewertung erfolgreich gesendet</string>
+    <string name="err_vote_send_rating">Fehler beim Versenden der Bewertung.</string>
+    <string name="vote_sent">Bewertung erfolgreich gesendet</string>
     <string name="settings_activate_twitter">Aktivieren</string>
     <string name="init_login_popup">Anmeldung</string>
     <string name="init_login_popup_working">Anmeldung…</string>
@@ -576,7 +576,8 @@
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
-    <string name="init_listdisplay">Zusätzliche Listen in der Cacheliste anzeigen</string>
+    <string name="init_listdisplay">Zusätzliche Listen</string>
+    <string name="init_summary_listdisplay">Zeige Zugehörigkeit von Caches zu weiteren Listen in einer Cacheliste</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
     <!-- backup / restore -->
@@ -699,6 +700,8 @@
     <string name="feature_search_geocode">Suche mit Geocode</string>
     <string name="feature_search_owner">Suche nach Besitzer</string>
     <string name="feature_search_finder">Suche nach Finder</string>
+    <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
+    <string name="feature_voting">Cache bewerten</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Alte Mapsforge V3</string>
     <string name="init_mfold_api_description">Wir nutzen standardmäßig eine neue Version der Mapsforge-Karte. Wenn du einige Funktionen vermisst oder Fehler feststellst, kannst du hier zur alten Version zurückkehren.</string>
@@ -1606,4 +1609,13 @@
     <string name="switch_off">Aus</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
+    <!-- view settings -->
+    <string name="view_settings">Einstellungen anzeigen</string>
+    <string name="delete_setting">Einstellung löschen</string>
+    <string name="delete_setting_warning">Einstellung \"%s\" löschen?\n\nDieser Vorgang kann nicht rückgängig gemacht werden.</string>
+    <string name="edit_setting">Einstellung \"%s\" bearbeiten</string>
+    <string name="edit_setting_error_unknown_type">Unbekannter Einstellungstyp - Bearbeitung wird nicht unterstützt</string>
+    <string name="edit_setting_error_invalid_data">Ungültige Daten \"%s\" eingegeben. Einstellung bleibt unverändert.</string>
+    <string name="activate_editmode_title">Bearbeitungsmodus aktivieren</string>
+    <string name="activate_editmode_warning">Achtung Gefahr!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren, könnte weitere Programmstarts verhindern oder dein Handy explodieren lassen!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
 </resources>
