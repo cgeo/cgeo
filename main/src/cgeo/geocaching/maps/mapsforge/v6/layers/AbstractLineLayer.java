@@ -17,7 +17,7 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 
 abstract class AbstractLineLayer extends Layer {
-    protected final float width;
+    protected float width;
     private Paint line = null;
     protected int lineColor = 0xD00000A0;
     protected boolean isHidden = false;
@@ -28,7 +28,7 @@ abstract class AbstractLineLayer extends Layer {
     private long mapSize = 0;
 
     protected AbstractLineLayer() {
-        width = DisplayUtils.getThinLineWidth();
+        width = DisplayUtils.getDefaultThinLineWidth();
     }
 
     public void updateTrack(final ArrayList<Geopoint> track) {
