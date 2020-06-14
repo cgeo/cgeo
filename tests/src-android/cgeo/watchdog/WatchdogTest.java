@@ -6,7 +6,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
-import cgeo.geocaching.connector.trackable.GeolutinsConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
@@ -86,8 +85,7 @@ public class WatchdogTest extends CGeoTestCase {
     @NotForIntegrationTests
     public static void testTrackableWebsites() {
         for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-            // temporarily disable Geolutins connector
-            if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) && !(trackableConnector instanceof GeolutinsConnector)) {
+            if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
                 checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getTestUrl());
                 if (StringUtils.isNotBlank(trackableConnector.getProxyUrl())) {
                     checkWebsite("trackable website " + trackableConnector.getHost() + " proxy " + trackableConnector.getProxyUrl(), trackableConnector.getProxyUrl());
