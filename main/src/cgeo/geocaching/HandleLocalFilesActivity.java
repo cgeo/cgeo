@@ -11,6 +11,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import static cgeo.geocaching.files.GPXImporter.COMPRESSED_GPX_FILE_EXTENSION;
+import static cgeo.geocaching.files.GPXImporter.GPX_FILE_EXTENSION;
+import static cgeo.geocaching.files.GPXImporter.ZIP_FILE_EXTENSION;
+
 public class HandleLocalFilesActivity extends AbstractActivity {
 
     @Override
@@ -29,10 +33,10 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 final int startExtension = parsedUri.lastIndexOf('.');
                 if (startExtension > -1) {
                     final String extension = parsedUri.substring(startExtension).toLowerCase();
-                    if (".zip".equals(extension) || ".gpx".equals(extension) || ".gpx".equals(extension)) {
+                    if (extension.equals(ZIP_FILE_EXTENSION) || extension.equals(GPX_FILE_EXTENSION) || extension.equals(COMPRESSED_GPX_FILE_EXTENSION)) {
                         continueWith(CacheListActivity.class, intent);
                         finished = true;
-                    } else if (".map".equals(extension)) {
+                    } else if (extension.equals(".map")) {
                         continueWith(ReceiveMapFileActivity.class, intent);
                         finished = true;
                     }
