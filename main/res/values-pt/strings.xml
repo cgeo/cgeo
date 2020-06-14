@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">A publicar o registo e a enviar a imagem…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
-    <string name="log_posting_gcvote">A publicar GCVote…</string>
+    <string name="log_posting_vote">A publicar votação em caches…</string>
     <string name="log_posting_image">A publicar imagem…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
@@ -511,8 +511,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_su">Carregar caches a partir de \'geocaching.su\'</string>
     <string name="settings_activate_su">Activar</string>
     <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
-    <string name="err_gcvote_send_rating">Erro ao enviar a avaliação, verifique a palavra-passe do GCVote nas definições ou limpe a mesma.</string>
-    <string name="gcvote_sent">Votação enviada com sucesso</string>
+    <string name="err_vote_send_rating">Erro ao enviar a classificação.</string>
+    <string name="vote_sent">Votação enviada com sucesso</string>
     <string name="settings_activate_twitter">Activar</string>
     <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
@@ -577,7 +577,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
-    <string name="init_listdisplay">Indicar listas nas listagens de caches</string>
+    <string name="init_listdisplay">Listas adicionais</string>
+    <string name="init_summary_listdisplay">Indica o nome das listas que estão associadas a cada cache na vista de listagem de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
@@ -696,10 +697,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="feature_own_coordinates">Memorizar as coord. modificadas</string>
     <string name="feature_search_keyword">Pesquisa por palavra-chave</string>
     <string name="feature_search_live_map">Mapa em tempo real</string>
-    <string name="feature_search_center">Procura por posição</string>
+    <string name="feature_search_center">Pesquisa por posição</string>
     <string name="feature_search_geocode">Pesquisa por código GC</string>
-    <string name="feature_search_owner">Procura por dono</string>
+    <string name="feature_search_owner">Pesquisa por proprietário</string>
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
+    <string name="feature_favorite">Adicionar a cache aos favoritos</string>
+    <string name="feature_voting">Dar votação a caches</string>
     <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
     <string name="init_mfold_api">Antigo Mapsforge V3</string>
     <string name="init_mfold_api_description">Estamos a usar uma versão nova do mapa Mapsforge por predefinição. Se notar falta de alguma funcionalidade ou deparar-se com problemas, pode voltar para a versão antiga aqui.</string>
@@ -981,12 +984,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="file_searching_in">A procurar ficheiros\nem</string>
     <string name="file_searching_sdcard_in">Nenhum ficheiro encontrado nas pastas predefinidas:\n%1$s\n\nA procurar no cartão de memória por ficheiros:\n</string>
     <string name="file_list_no_files">O c:geo não encontrou ficheiros adequados.</string>
-    <string name="file_searching">A procurar ficheiros</string>
+    <string name="file_searching">A procurar ficheiros correspondentes</string>
     <string name="file_title_searching">A procurar</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Escolher pasta</string>
     <string name="simple_dir_chooser_current_path">Caminho:</string>
     <string name="simple_dir_chooser_invalid_path">Caminho inválido</string>
+    <string name="simple_file_chooser_title">Escolher ficheiro</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">A carregar pontos adicionais de %1$s</string>
@@ -1004,9 +1008,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="gpx_import_delete_message">Quer eliminar %s?</string>
     <string name="gpx_import_select_list_title">Importar GPX para lista</string>
     <string name="gpx_import_android">Importar do Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Seleccionar ficheiro de mapa</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Seleccionar ficheiro de percurso</string>
     <!-- import -->
     <string name="web_import_title">Importar de send2cgeo</string>
     <string name="web_import_waiting">A aguardar novas caches de send2cgeo…</string>
@@ -1077,6 +1081,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_original">Pontos adicionais originais</string>
     <string name="map_hidewp_parking">Pontos adic. de estacionamento</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
+    <string name="map_hide_track">Ocultar percurso</string>
+    <string name="map_load_track">Carregar percurso</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1110,12 +1116,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_kw">Palavras-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
-    <string name="search_fbu">Encontradas pelo utilizador</string>
+    <string name="search_fbu">Encontradas por um utilizador</string>
     <string name="search_fbu_prefill">Nome de utilizador</string>
     <string name="search_fbu_button">Pesquisar por utilizador</string>
-    <string name="search_hbu">Escondida pelos utilizadores</string>
-    <string name="search_hbu_prefill">Dono</string>
-    <string name="search_hbu_button">Pesquisar pelo dono</string>
+    <string name="search_hbu">Escondidas por um utilizador</string>
+    <string name="search_hbu_prefill">Proprietário</string>
+    <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
@@ -1467,7 +1473,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a utilizar uma versão antiga do Android. As próximas versões do c:geo poderão não estar disponíveis para o seu dispositivo.\nToque nesta mensagem para mais informações.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar, ou comportar-se inesperadamente!\nToque nesta mensagem para obter mais informações.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
@@ -1602,4 +1608,30 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="switch_off">Desligado</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
+    <!-- view settings -->
+    <string name="view_settings">Ver definições</string>
+    <string name="delete_setting">Excluir configuração</string>
+    <string name="delete_setting_warning">Eliminar a chave \"%s\" das definições?\n\nEsta operação não pode ser anulada.</string>
+    <string name="edit_setting">Editar a configuração \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Tipo de configuração desconhecido - não é suportado a edição</string>
+    <string name="edit_setting_error_invalid_data">Os dados introduzidos \"%s\" são inválidos. O valor da configuração ficou inalterado.</string>
+    <string name="activate_editmode_title">Activar o modo de edição</string>
+    <string name="activate_editmode_warning">Está a aceder a uma secção perigosa!\n\nAlterar directamente as definições pode criar conflitos no c:geo, podendo impedir o programa de iniciar no futuro ou fazer o seu dispositivo explodir!\n\nTem a certeza que pretende prosseguir por sua conta e risco?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">Processamento de ficheiros locais do c:geo</string>
+    <string name="localfile_title">Abrir um ficheiro local</string>
+    <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
+    <string name="localfile_foundmap">encontrado um ficheiro de mapa</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Recebido um ficheiro de mapa</string>
+    <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e guardado no directório de mapas</string>
+    <string name="receivemapfile_error">Erro ao receber ficheiro de mapa</string>
+    <string name="receivemapfile_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
+    <string name="receivemapfile_option_overwrite">Substituir</string>
+    <string name="receivemapfile_option_differentname">Nome diferente</string>
+    <string name="receivemapfile_kb_copied">%d kB copiados</string>
+    <string name="receivemapfile_cancelled">Transferência do ficheiro de mapa cancelada</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Transferir mapas offline simples</string>
+    <string name="downloadmap_info">Será redireccionado/a para um sítio de transferência de mapas offline simples (sem suporte de temas).\n\nEscolha o ficheiro .map para a sua região e toque no mesmo para a transferência do mapa.\n\nQuando a transferência for concluída, toque no ficheiro transferido para definir esse mapa como o mapa em utilização no c:geo</string>
 </resources>
