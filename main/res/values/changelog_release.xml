@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>2020.05.31-RC:</b>\n
+     <b>2020.06.14</b>\n
     · Change: Added closeout message for systems running on Android &lt; 5.0\n
     · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
