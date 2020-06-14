@@ -5,6 +5,9 @@
      <b>Next release:</b>\n
     · Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
     · Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
+    · New: Load GPX track files and show track on map\n
+    · New: Offer a link to download OpenStreetMap offline maps\n
+    · New: Integrate downloaded OpenStreetMap offline map files into c:geo after tapping on them\n
     · New: Support cache rating and managing of favorites for geocaching.su\n
     · New: Upgraded several included libraries to reflect our new minimum system requirements\n
     · New: Add debug view for program settings\n
