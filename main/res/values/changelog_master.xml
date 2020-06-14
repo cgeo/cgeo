@@ -4,8 +4,11 @@
   <string name="changelog_master" translatable="false">
      <b>Next release:</b>\n
     · Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
+    · Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
     · New: Support cache rating and managing of favorites for geocaching.su\n
     · New: Upgraded several included libraries to reflect our new minimum system requirements\n
+    · New: Add debug view for program settings\n
     · Fix: Removed styles / themes workarounds used for older Android versions\n
+    · Fix: Remove old program code no longer used for supported Android versions\n
   </string>
 </resources>
