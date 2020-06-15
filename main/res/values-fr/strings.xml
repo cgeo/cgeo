@@ -754,8 +754,8 @@
     <string name="err_auth_geokrety_unknown">%1$s a retourné : %2$s.</string>
     <!-- cache -->
 	<plurals name="cache_counts">
-        <item quantity="one">Une cache</item>
-        <item quantity="other">%1$d caches</item>
+		<item quantity="one">Une cache</item>
+		<item quantity="other">%1$d caches</item>
 	</plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
