@@ -753,10 +753,10 @@
     <string name="err_auth_geokrety_bad_password">Votre nom d\'utilisateur ou votre mot de passe semble invalide.</string>
     <string name="err_auth_geokrety_unknown">%1$s a retourné : %2$s.</string>
     <!-- cache -->
-	<plurals name="cache_counts">
-		<item quantity="one">Une cache</item>
-		<item quantity="other">%1$d caches</item>
-	</plurals>
+    <plurals name="cache_counts">
+        <item quantity="one">Une cache</item>
+        <item quantity="other">%1$d caches</item>
+    </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
         <item quantity="one">Un jour restant</item>
