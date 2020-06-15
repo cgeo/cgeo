@@ -124,11 +124,13 @@ public class TrackUtils {
     public static boolean onActivityResult(final int requestCode, final int resultCode, final Intent data, @Nullable final TrackUpdaterMulti updateTracks) {
         if (requestCode == REQUEST_CODE_GET_TRACKFILE && resultCode == RESULT_OK && data.hasExtra(Intents.EXTRA_GPX_FILE)) {
             final String filename = data.getStringExtra(Intents.EXTRA_GPX_FILE);
-            final File file = new File(filename);
-            if (!file.isDirectory()) {
-                Settings.setTrackFile(filename);
-                if (null != updateTracks) {
-                    loadTracks(updateTracks);
+            if (null != filename) {
+                final File file = new File(filename);
+                if (!file.isDirectory()) {
+                    Settings.setTrackFile(filename);
+                    if (null != updateTracks) {
+                        loadTracks(updateTracks);
+                    }
                 }
             }
             return true;
@@ -137,6 +139,9 @@ public class TrackUtils {
     }
 
     public static void loadTracks(final TrackUpdaterMulti updateTracks) {
-        GPXTrackImporter.doImport(new File(Settings.getTrackFile()), updateTracks);
+        final String trackfile = Settings.getTrackFile();
+        if (null != trackfile) {
+            GPXTrackImporter.doImport(new File(trackfile), updateTracks);
+        }
     }
 }
