@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">Envoi de la visite et de l\'image…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
     <string name="log_posting_twitter">Envoi du Tweet…</string>
-    <string name="log_posting_gcvote">Envoi sur GCVote…</string>
+    <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
     <string name="log_posting_image">Envoi de l\'image…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
@@ -303,6 +303,10 @@
     <string name="caches_more_caches_currently">trouvées</string>
     <string name="caches_downloading">Téléchargement des caches…\nRestant : </string>
     <string name="caches_eta_ltm">Moins d\'une minute</string>
+    <plurals name="caches_eta_mins">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
     <string name="caches_store_offline">Enregistrer localement</string>
     <string name="caches_store_all">Tout enregistrer</string>
     <string name="caches_store_unsaved">Enregistrer les non sauvegardées</string>
@@ -418,6 +422,10 @@
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
     <string name="about_system_info_send_chooser">Envoyer les informations système</string>
+    <string name="about_system_write_logcat">Générer le fichier de journal</string>
+    <string name="about_system_write_logcat_success">Fichier journal écrit dans le répertoire \"%1$s\" dans \"%2$s\"</string>
+    <string name="about_system_write_logcat_empty">Le fichier du journal est vide</string>
+    <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
     <string name="changelog_github">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
@@ -475,6 +483,7 @@
     <string name="settings_activate_ec">Activer</string>
     <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Se connecter avec Facebook ou Google</string>
+    <string name="settings_info_facebook_login">Vous ne pouvez pas faire c:geo se connecter à geocaching.com avec votre compte Facebook ou Google. Mais il y a une solution simple…</string>
     <string name="settings_authorize">Autoriser c:geo</string>
     <string name="settings_reauthorize">Mettre à jour ou supprimer l\'autorisation</string>
     <string name="settings_gc_description">Autoriser c:geo à utiliser geocaching.com pour chercher des caches.</string>
@@ -501,8 +510,8 @@
     <string name="init_summary_su">Charger les caches depuis Geocaching.su</string>
     <string name="settings_activate_su">Activer</string>
     <string name="init_gcvote_password_description">Afin de pouvoir attribuer un vote à une cache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
-    <string name="err_gcvote_send_rating">Erreur lors de l\'envoi du vote, vérifiez votre mot de passe GCVote dans les paramètres ou effacez le.</string>
-    <string name="gcvote_sent">Vote envoyé avec succès</string>
+    <string name="err_vote_send_rating">Erreur à l’envoi de l\'évaluation.</string>
+    <string name="vote_sent">Évaluation envoyée</string>
     <string name="settings_activate_twitter">Activer</string>
     <string name="init_login_popup">Authentification</string>
     <string name="init_login_popup_working">Connexion…</string>
@@ -567,7 +576,8 @@
     <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne pour les visites (même si vous êtes connectés vos visites ne seront pas envoyées automatiquement)</string>
     <string name="init_choose_list">Demander la liste</string>
     <string name="init_summary_choose_list">Demander dans quelle liste enregistrer les caches</string>
-    <string name="init_listdisplay">Afficher les listes supplémentaires dans la liste des caches</string>
+    <string name="init_listdisplay">Listes supplémentaires</string>
+    <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
     <!-- backup / restore -->
@@ -690,6 +700,8 @@
     <string name="feature_search_geocode">Rechercher ce code</string>
     <string name="feature_search_owner">Rechercher par Propriétaire</string>
     <string name="feature_search_finder">Rechercher par Découvreur</string>
+    <string name="feature_favorite">Ajout de la cache à vos favoris</string>
+    <string name="feature_voting">Évaluer les caches</string>
     <string name="init_mapsforge_api_title">API Mapsforge</string>
     <string name="init_mfold_api">Ancienne version Mapsforge V3</string>
     <string name="init_mfold_api_description">Par défaut nous utilisons une nouvelle version des cartes Mapsforge. Si certaines fonctionnalités vous manquent ou si vous rencontrez des problèmes, vous pouvez revenir à l\'ancienne version ici.</string>
@@ -753,10 +765,10 @@
     <string name="err_auth_geokrety_bad_password">Votre nom d\'utilisateur ou votre mot de passe semble invalide.</string>
     <string name="err_auth_geokrety_unknown">%1$s a retourné : %2$s.</string>
     <!-- cache -->
-	<plurals name="cache_counts">
+    <plurals name="cache_counts">
         <item quantity="one">Une cache</item>
         <item quantity="other">%1$d caches</item>
-	</plurals>
+    </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
         <item quantity="one">Un jour restant</item>
@@ -862,10 +874,12 @@
     <string name="cache_menu_navigation_transit">Navigation (transports publics)</string>
     <string name="cache_menu_navigation_bike">Navigation (vélo)</string>
     <string name="cache_menu_maps_directions">Directions Google Maps</string>
+    <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (à pied)</string>
     <string name="cache_menu_sygic_drive">Sygic (en voiture)</string>
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
+    <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Autres applications externes</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
@@ -971,10 +985,11 @@
     <string name="file_list_no_files">c:geo n\'a pas trouvé les fichiers nécessaires.</string>
     <string name="file_searching">Recherche des fichiers nécessaires</string>
     <string name="file_title_searching">Recherche en cours</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Choisir le dossier</string>
     <string name="simple_dir_chooser_current_path">Chemin :</string>
     <string name="simple_dir_chooser_invalid_path">Chemin d\'accès invalide</string>
+    <string name="simple_file_chooser_title">Sélectionnez un fichier</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points intermédiaires depuis %1$s</string>
@@ -992,9 +1007,9 @@
     <string name="gpx_import_delete_message">Voulez-vous supprimer %s ?</string>
     <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
     <string name="gpx_import_android">Import depuis Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Choisir un fichier carte</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Sélectionnez un fichier de trace</string>
     <!-- import -->
     <string name="web_import_title">Importer à partir de send2cgeo</string>
     <string name="web_import_waiting">En attente de nouvelles caches envoyées par send2cgeo…</string>
@@ -1065,6 +1080,8 @@
     <string name="map_hidewp_original">Masquer les waypoints d\'origine</string>
     <string name="map_hidewp_parking">Masquer les waypoints de stationnement</string>
     <string name="map_hidewp_visited">Masquer les waypoints visités</string>
+    <string name="map_hide_track">Masquer le parcours</string>
+    <string name="map_load_track">Charger le parcours</string>
     <string name="init_hidewp">Masquer tous les waypoints</string>
     <string name="init_summary_hidewp_original">Masquer les waypoints d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les waypoints de stationnement sur la carte</string>
@@ -1084,6 +1101,8 @@
     <string name="map_routing_walk">À pied</string>
     <string name="map_routing_bike">À vélo</string>
     <string name="map_routing_car">En voiture</string>
+    <string name="map_gm_autorotation">Rotation automatique de la carte</string>
+    <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <!-- search -->
     <string name="search_bar_hint">Recherche globale</string>
     <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
@@ -1139,6 +1158,7 @@
     <string name="trackable_not_activated">Objet voyageur non activé</string>
     <string name="trackable_travelbug">Objet voyageur</string>
     <string name="trackable_status">Statut</string>
+    <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Traditionnelle</string>
     <string name="geokret_type_book_or_media">Livre ou média électronique</string>
     <string name="geokret_type_human">Humain</string>
@@ -1452,7 +1472,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Il semble que vous utilisez une ancienne version d\'Android. Les prochaines versions de c:geo pourraient ne plus être disponibles pour votre appareil.\nAppuyez sur ce message pour plus d\'informations.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous semblez utiliser une ancienne version d\'Android. Cette version de c:geo n\'est plus compatible avec votre appareil et pourrait ne pas fonctionner ou se comporter de façon inattendue !\nAppuyez sur ce message pour plus d\'informations.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
     <string name="tts_toggle">Basculer la synthèse vocale</string>
@@ -1550,6 +1570,8 @@
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
     <string name="err_select_logimage_upload_size">Image trop grande, merci de sélectionner une résolution inférieure.</string>
     <string name="err_logimage_caption_required">Une légende est requise pour l’image</string>
+    <string name="waypoint_latitude_null">N/S --° --.---</string>
+    <string name="waypoint_longitude_null">E/O --° --.---</string>
     <!-- permission handling -->
     <string name="close_app">Fermer l\'application</string>
     <string name="ask_again">Demander plus tard</string>
@@ -1576,7 +1598,10 @@
     <!-- individual routes -->
     <string name="individual_route_added">Ajouté à la route</string>
     <string name="individual_route_removed">Supprimé de la route</string>
+    <string name="individual_route_error_toggling_waypoint">erreur du basculement du point d\'arrêt</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
+    <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
+    <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
@@ -1585,4 +1610,30 @@
     <string name="switch_off">Désactivé</string>
     <string name="switch_manual">Manuel</string>
     <string name="switch_auto">Automatique</string>
+    <!-- view settings -->
+    <string name="view_settings">Afficher les paramètres</string>
+    <string name="delete_setting">Supprimer le paramètre</string>
+    <string name="delete_setting_warning">Supprimer la clé \"%s\" des paramètres?\n\nCette opération ne peut pas être annulée.</string>
+    <string name="edit_setting">Modifier le paramètre \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Type de paramètre inconnu - édition non prise en charge</string>
+    <string name="edit_setting_error_invalid_data">Saisie \"%s\" invalide. La valeur du paramètre reste inchangée.</string>
+    <string name="activate_editmode_title">Activer le mode édition</string>
+    <string name="activate_editmode_warning">Vous entrez dans une zone dangereuse !\n\nModifier les paramètres directement peut perturber c:geo, comme par exemple empêcher le démarrage de l\'application ou faire exploser votre mobile !\n\nÊtes-vous certain de vouloir poursuivre (à vos risques et périls) ?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
+    <string name="localfile_title">Ouvrir un fichier local</string>
+    <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
+    <string name="localfile_foundmap">Fichier carte trouvé</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Carte en cours de réception</string>
+    <string name="receivemapfile_success">Fichier carte «%s» reçu avec succès et enregistré dans le dossier des cartes</string>
+    <string name="receivemapfile_error">Erreur lors de la réception du fichier carte</string>
+    <string name="receivemapfile_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
+    <string name="receivemapfile_option_overwrite">Écraser</string>
+    <string name="receivemapfile_option_differentname">Nouveau nom</string>
+    <string name="receivemapfile_kb_copied">%d Ko copiés</string>
+    <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Télécharger des cartes simples hors ligne</string>
+    <string name="downloadmap_info">Vous allez être redirigé vers un site de téléchargement de cartes hors ligne simples (sans support de thème).\n\nChoisissez le fichier .map de votre région puis appuyez pour le télécharger.\n\nUne fois le téléchargement terminé, appuyez sur le fichier téléchargé pour l\'utiliser comme carte courante de c:geo</string>
 </resources>
