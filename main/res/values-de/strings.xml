@@ -577,7 +577,7 @@
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
     <string name="init_listdisplay">Zusätzliche Listen</string>
-    <string name="init_summary_listdisplay">Zeige Zugehörigkeit von Caches zu weiteren Listen in einer Cacheliste</string>
+    <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
     <!-- backup / restore -->
@@ -985,10 +985,11 @@
     <string name="file_list_no_files">c:geo hat keine passenden Dateien gefunden.</string>
     <string name="file_searching">Suche nach passenden Dateien</string>
     <string name="file_title_searching">Suche</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Verzeichnis wählen</string>
     <string name="simple_dir_chooser_current_path">Pfad:</string>
     <string name="simple_dir_chooser_invalid_path">Ungültiger Pfad</string>
+    <string name="simple_file_chooser_title">Datei wählen</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
@@ -1006,9 +1007,9 @@
     <string name="gpx_import_delete_message">Datei %s löschen?</string>
     <string name="gpx_import_select_list_title">Importiere GPX nach</string>
     <string name="gpx_import_android">Import von Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Kartendatei wählen</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Wähle Track-Datei</string>
     <!-- import -->
     <string name="web_import_title">Importiere von send2cgeo</string>
     <string name="web_import_waiting">Warte auf neue Caches von send2cgeo…</string>
@@ -1079,6 +1080,8 @@
     <string name="map_hidewp_original">Originale Wegpunkte verbergen</string>
     <string name="map_hidewp_parking">Park-Wegpunkte verbergen</string>
     <string name="map_hidewp_visited">Besuchte Wegpunkte verbergen</string>
+    <string name="map_hide_track">Track ausblenden</string>
+    <string name="map_load_track">Track laden</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
@@ -1469,7 +1472,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit c:geo.\nWir arbeiten daran.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Du scheinst eine ältere Version von Android zu verwenden. Möglicherweise werden zukünftige Versionen von c:geo nicht mehr für dein Gerät verfügbar sein.\nTippe auf diese Nachricht für weitere Informationen.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Du scheinst eine ältere Version von Android zu verwenden. Diese Version von c:geo ist nicht mehr mit deinem Gerät kompatibel und kann Fehler produzieren oder sich unerwartet verhalten!\nTippe auf diese Nachricht für weitere Informationen.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
     <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
@@ -1618,4 +1621,21 @@
     <string name="edit_setting_error_invalid_data">Ungültige Daten \"%s\" eingegeben. Einstellung bleibt unverändert.</string>
     <string name="activate_editmode_title">Bearbeitungsmodus aktivieren</string>
     <string name="activate_editmode_warning">Achtung Gefahr!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren, könnte weitere Programmstarts verhindern oder dein Handy explodieren lassen!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Lokaler Dateimanager</string>
+    <string name="localfile_title">Eine lokale Datei öffnen</string>
+    <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
+    <string name="localfile_foundmap">Kartendatei gefunden</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Empfange Kartendatei</string>
+    <string name="receivemapfile_success">Kartendatei erfolgreich als \"%s\" emmpfangen und im lokalen Kartenverzeichnis gespeichert</string>
+    <string name="receivemapfile_error">Fehler beim Empfang der Kartendatei</string>
+    <string name="receivemapfile_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
+    <string name="receivemapfile_option_overwrite">Überschreiben</string>
+    <string name="receivemapfile_option_differentname">Anderer Name</string>
+    <string name="receivemapfile_kb_copied">%d kB kopiert</string>
+    <string name="receivemapfile_cancelled">Kartendatei-Empfang abgebrochen</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Grundlegende Offlinekarte herunterladen</string>
+    <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (oder Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
 </resources>
