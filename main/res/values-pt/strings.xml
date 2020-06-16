@@ -578,7 +578,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
-    <string name="init_summary_listdisplay">Indica o nome das listas que estão associadas a cada cache na vista de listagem de caches</string>
+    <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
@@ -1613,7 +1613,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="delete_setting">Excluir configuração</string>
     <string name="delete_setting_warning">Eliminar a chave \"%s\" das definições?\n\nEsta operação não pode ser anulada.</string>
     <string name="edit_setting">Editar a configuração \"%s\"</string>
-    <string name="edit_setting_error_unknown_type">Tipo de configuração desconhecido - não é suportado a edição</string>
+    <string name="edit_setting_error_unknown_type">Tipo de configuração desconhecido - edição não suportada</string>
     <string name="edit_setting_error_invalid_data">Os dados introduzidos \"%s\" são inválidos. O valor da configuração ficou inalterado.</string>
     <string name="activate_editmode_title">Activar o modo de edição</string>
     <string name="activate_editmode_warning">Está a aceder a uma secção perigosa!\n\nAlterar directamente as definições pode criar conflitos no c:geo, podendo impedir o programa de iniciar no futuro ou fazer o seu dispositivo explodir!\n\nTem a certeza que pretende prosseguir por sua conta e risco?</string>
@@ -1623,7 +1623,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
     <string name="localfile_foundmap">encontrado um ficheiro de mapa</string>
     <!-- ReceiveMapFileActivity -->
-    <string name="receivemapfile_intenttitle">Recebido um ficheiro de mapa</string>
+    <string name="receivemapfile_intenttitle">Receber um ficheiro de mapa</string>
     <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e guardado no directório de mapas</string>
     <string name="receivemapfile_error">Erro ao receber ficheiro de mapa</string>
     <string name="receivemapfile_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
