@@ -322,7 +322,11 @@
     <string name="caches_eta_ltm">Less than a minute</string>
 
     <plurals name="caches_eta_mins">
+        <item quantity="zero">%d minutes</item>
         <item quantity="one">%d minute</item>
+        <item quantity="two">%d minutes</item>
+        <item quantity="few">%d minutes</item>
+        <item quantity="many">%d minutes</item>
         <item quantity="other">%d minutes</item>
     </plurals>
 
@@ -816,13 +820,21 @@
 
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">One cache</item>
+        <item quantity="zero">%1$d caches</item>
+        <item quantity="one">%1$d cache</item>
+        <item quantity="two">%1$d caches</item>
+        <item quantity="few">%1$d caches</item>
+        <item quantity="many">%1$d caches</item>
         <item quantity="other">%1$d caches</item>
     </plurals>
 
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">one day remaining</item>
+        <item quantity="zero">%1$d days remaining</item>
+        <item quantity="one">%1$d day remaining</item>
+        <item quantity="two">%1$d days remaining</item>
+        <item quantity="few">%1$d days remaining</item>
+        <item quantity="many">%1$d days remaining</item>
         <item quantity="other">%1$d days remaining</item>
     </plurals>
     <string name="last_day_available">last day available</string>
@@ -835,19 +847,35 @@
     <string name="cache_offline_not_ready">Not available offline</string>
     <string name="cache_offline_time_mins_few">a few minutes ago</string>
     <plurals name="cache_offline_about_time_mins">
+        <item quantity="zero">about %d minutes ago</item>
 		<item quantity="one">about %d minute ago</item>
+        <item quantity="two">about %d minutes ago</item>
+        <item quantity="few">about %d minutes ago</item>
+        <item quantity="many">about %d minutes ago</item>
 		<item quantity="other">about %d minutes ago</item>
     </plurals>
     <plurals name="cache_offline_about_time_hours">
+        <item quantity="zero">about %d hours ago</item>
 		<item quantity="one">about %d hour ago</item>
+        <item quantity="two">about %d hours ago</item>
+        <item quantity="few">about %d hours ago</item>
+        <item quantity="many">about %d hours ago</item>
 		<item quantity="other">about %d hours ago</item>
     </plurals>
     <plurals name="cache_offline_about_time_days">
+        <item quantity="zero">about %d days ago</item>
 		<item quantity="one">about %d day ago</item>
+        <item quantity="two">about %d days ago</item>
+        <item quantity="few">about %d days ago</item>
+        <item quantity="many">about %d days ago</item>
 		<item quantity="other">about %d days ago</item>
     </plurals>
     <plurals name="cache_offline_about_time_months">
+        <item quantity="zero">about %d months ago</item>
         <item quantity="one">about %d month ago</item>
+        <item quantity="two">about %d months ago</item>
+        <item quantity="few">about %d months ago</item>
+        <item quantity="many">about %d months ago</item>
         <item quantity="other">about %d months ago</item>
     </plurals>
     <string name="cache_offline_about_time_year">over a year ago</string>
@@ -886,8 +914,12 @@
     <string name="cache_waypoints">Waypoints</string>
 
     <plurals name="waypoints">
-        <item quantity="one">1 Waypoint</item>
-        <item quantity="other">%d Waypoints</item>
+        <item quantity="zero">%d waypoints</item>
+        <item quantity="one">%d waypoint</item>
+        <item quantity="two">%d waypoints</item>
+        <item quantity="few">%d waypoints</item>
+        <item quantity="many">%d waypoints</item>
+        <item quantity="other">%d waypoints</item>
     </plurals>
 
     <string name="cache_waypoints_add">Add Waypoint</string>
@@ -1301,7 +1333,11 @@
     <string name="export_persnotes">Personal notes</string>
     <string name="export_persnotes_uploading">Uploading personal note %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Uploaded one note successfully</item>
+        <item quantity="zero">Uploaded %1$d notes successfully</item>
+        <item quantity="one">Uploaded %1$d note successfully</item>
+        <item quantity="two">Uploaded %1$d notes successfully</item>
+        <item quantity="few">Uploaded %1$d notes successfully</item>
+        <item quantity="many">Uploaded %1$d notes successfully</item>
         <item quantity="other">Uploaded %1$d notes successfully</item>
     </plurals>
     <string name="export_modifiedcoords">Modified coordinates</string>
@@ -1564,22 +1600,38 @@
     <string name="err_tts_lang_not_supported">The current language is not supported by text-to-speech.</string>
     <string name="tts_one_kilometer">one kilometer</string>
     <plurals name="tts_kilometers">
+        <item quantity="zero">%s kilometers</item>
         <item quantity="one">%s kilometer</item>
+        <item quantity="two">%s kilometers</item>
+        <item quantity="few">%s kilometers</item>
+        <item quantity="many">%s kilometers</item>
         <item quantity="other">%s kilometers</item>
     </plurals>
     <string name="tts_one_meter">one meter</string>
     <plurals name="tts_meters">
+        <item quantity="zero">%s meters</item>
         <item quantity="one">%s meter</item>
+        <item quantity="two">%s meters</item>
+        <item quantity="few">%s meters</item>
+        <item quantity="many">%s meters</item>
         <item quantity="other">%s meters</item>
     </plurals>
     <string name="tts_one_mile">one mile</string>
     <plurals name="tts_miles">
+        <item quantity="zero">%s miles</item>
         <item quantity="one">%s mile</item>
+        <item quantity="two">%s miles</item>
+        <item quantity="few">%s miles</item>
+        <item quantity="many">%s miles</item>
         <item quantity="other">%s miles</item>
     </plurals>
     <string name="tts_one_foot">one foot</string>
     <plurals name="tts_feet">
+        <item quantity="zero">%s feet</item>
         <item quantity="one">%s foot</item>
+        <item quantity="two">%s feet</item>
+        <item quantity="few">%s feet</item>
+        <item quantity="many">%s feet</item>
         <item quantity="other">%s feet</item>
     </plurals>
     <string name="tts_one_oclock">one o\'clock</string>
@@ -1589,11 +1641,19 @@
     <string name="clipboard_copy_ok">Copied to clipboard</string>
 
     <plurals name="days_ago">
+        <item quantity="zero">%d days ago</item>
         <item quantity="one">yesterday</item>
+        <item quantity="two">%d days ago</item>
+        <item quantity="few">%d days ago</item>
+        <item quantity="many">%d days ago</item>
         <item quantity="other">%d days ago</item>
     </plurals>
     <plurals name="favorite_points">
+        <item quantity="zero">%s favorites</item>
         <item quantity="one">%s favorite</item>
+        <item quantity="two">%s favorites</item>
+        <item quantity="few">%s favorites</item>
+        <item quantity="many">%s favorites</item>
         <item quantity="other">%s favorites</item>
     </plurals>
 
@@ -1625,24 +1685,40 @@
 
     <string name="command_move_caches_progress">Moving caches to list %1s</string>
     <plurals name="command_move_caches_result">
+        <item quantity="zero">Moved %d caches</item>
         <item quantity="one">Moved %d cache</item>
+        <item quantity="two">Moved %d caches</item>
+        <item quantity="few">Moved %d caches</item>
+        <item quantity="many">Moved %d caches</item>
         <item quantity="other">Moved %d caches</item>
     </plurals>
     <string name="command_copy_caches_progress">Copying caches to list %1s</string>
     <plurals name="command_copy_caches_result">
+        <item quantity="zero">Copied %d caches</item>
         <item quantity="one">Copied %d cache</item>
+        <item quantity="two">Copied %d caches</item>
+        <item quantity="few">Copied %d caches</item>
+        <item quantity="many">Copied %d caches</item>
         <item quantity="other">Copied %d caches</item>
     </plurals>
     <string name="command_delete_caches_progress">Deleting caches</string>
     <plurals name="command_delete_caches_result">
+        <item quantity="zero">Deleted %d caches</item>
         <item quantity="one">Deleted %d cache</item>
+        <item quantity="two">Deleted %d caches</item>
+        <item quantity="few">Deleted %d caches</item>
+        <item quantity="many">Deleted %d caches</item>
         <item quantity="other">Deleted %d caches</item>
     </plurals>
     <string name="command_rename_list_result">Renamed list</string>
     <string name="command_delete_list_result">Deleted list</string>
     <string name="command_unique_list_result">Deleted caches from other lists</string>
     <plurals name="fav_points_remaining">
+        <item quantity="zero">Add this cache to favorites (%d remaining)</item>
         <item quantity="one">Add this cache to favorites (%d remaining)</item>
+        <item quantity="two">Add this cache to favorites (%d remaining)</item>
+        <item quantity="few">Add this cache to favorites (%d remaining)</item>
+        <item quantity="many">Add this cache to favorites (%d remaining)</item>
         <item quantity="other">Add this cache to favorites (%d remaining)</item>
     </plurals>
 
@@ -1651,7 +1727,11 @@
 
     <string name="list_list_headline">Lists:</string>
     <plurals name="extract_waypoints_result">
+        <item quantity="zero">%d waypoints extracted</item>
         <item quantity="one">%d waypoint extracted</item>
+        <item quantity="two">%d waypoints extracted</item>
+        <item quantity="few">%d waypoints extracted</item>
+        <item quantity="many">%d waypoints extracted</item>
         <item quantity="other">%d waypoints extracted</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
