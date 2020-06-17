@@ -1726,7 +1726,7 @@
     <string name="edit_setting_error_unknown_type">Unknown setting type - editing not supported</string>
     <string name="edit_setting_error_invalid_data">Invalid data \"%s\" entered. Setting\'s value unchanged.</string>
     <string name="activate_editmode_title">Activate edit mode</string>
-    <string name="activate_editmode_warning">You are entering dangerous area here!\n\nChanging settings directly might confuse c:geo, might prevent further program starts or might your mobile make explode!\n\nAre you sure you want to proceed at your own risk?</string>
+    <string name="activate_editmode_warning">You are entering dangerous area here!\n\nChanging settings directly might confuse c:geo or might prevent further program starts, so be careful!\n\nAre you sure you want to proceed at your own risk?</string>
 
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Local file handler</string>
