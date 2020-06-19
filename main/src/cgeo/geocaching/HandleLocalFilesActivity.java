@@ -5,6 +5,11 @@ import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
 import cgeo.geocaching.settings.ReceiveMapFileActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import static cgeo.geocaching.utils.FileUtils.COMPRESSED_GPX_FILE_EXTENSION;
+import static cgeo.geocaching.utils.FileUtils.GPX_FILE_EXTENSION;
+import static cgeo.geocaching.utils.FileUtils.LOC_FILE_EXTENSION;
+import static cgeo.geocaching.utils.FileUtils.MAP_FILE_EXTENSION;
+import static cgeo.geocaching.utils.FileUtils.ZIP_FILE_EXTENSION;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -29,10 +34,10 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 final int startExtension = parsedUri.lastIndexOf('.');
                 if (startExtension > -1) {
                     final String extension = parsedUri.substring(startExtension).toLowerCase();
-                    if (".zip".equals(extension) || ".gpx".equals(extension) || ".gpx".equals(extension)) {
+                    if (extension.equals(ZIP_FILE_EXTENSION) || extension.equals(GPX_FILE_EXTENSION) || extension.equals(COMPRESSED_GPX_FILE_EXTENSION) || extension.equals(LOC_FILE_EXTENSION)) {
                         continueWith(CacheListActivity.class, intent);
                         finished = true;
-                    } else if (".map".equals(extension)) {
+                    } else if (extension.equals(MAP_FILE_EXTENSION)) {
                         continueWith(ReceiveMapFileActivity.class, intent);
                         finished = true;
                     }

@@ -39,6 +39,12 @@ public final class FileUtils {
     public static final String HEADER_LAST_MODIFIED = "last-modified";
     public static final String HEADER_ETAG = "etag";
 
+    public static final String GPX_FILE_EXTENSION = ".gpx";
+    public static final String LOC_FILE_EXTENSION = ".loc";
+    public static final String ZIP_FILE_EXTENSION = ".zip";
+    public static final String COMPRESSED_GPX_FILE_EXTENSION = ".ggz";
+    public static final String MAP_FILE_EXTENSION = ".map";
+
     private static final int MAX_DIRECTORY_SCAN_DEPTH = 30;
     private static final String FILE_PROTOCOL = "file://";
 
