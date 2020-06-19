@@ -9,6 +9,7 @@
     · New: Export trail history as GPX track file\n
     · New: Offer a link to download OpenStreetMap offline maps\n
     · New: Integrate downloaded OpenStreetMap offline map files into c:geo after tapping on them\n
+    · New: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
     · New: Support cache rating and managing of favorites for geocaching.su\n
     · New: Customize map line colors and widths\n
     · New: Upgraded several included libraries to reflect our new minimum system requirements\n
