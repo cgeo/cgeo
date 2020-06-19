@@ -134,7 +134,9 @@ public class ViewSettingsActivity extends AbstractActivity {
                     editor.apply();
                     debugAdapter.remove(keyValue);
                     debugAdapter.insert(new KeyValue(key, newValue, type), position);
-                } catch (XmlPullParserException | NumberFormatException e) {
+                } catch (XmlPullParserException e) {
+                    showToast(R.string.edit_setting_error_unknown_type);
+                } catch (NumberFormatException e) {
                     showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
                 }
             })
