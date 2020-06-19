@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">De log wordt gepost en de afbeelding geüpload…</string>
     <string name="log_posting_log">Posten log…</string>
     <string name="log_posting_twitter">Posten tweet…</string>
-    <string name="log_posting_gcvote">Posten GCVote…</string>
+    <string name="log_posting_vote">Cache stem posten…</string>
     <string name="log_posting_image">Posten afbeelding…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
@@ -510,8 +510,8 @@
     <string name="init_summary_su">Laad caches van Geocaching.su</string>
     <string name="settings_activate_su">Activeer</string>
     <string name="init_gcvote_password_description">Om een cache te kunnen beoordelen, volg de instructies op GCVote.com en geef hier uw GCVote wachtwoord op.</string>
-    <string name="err_gcvote_send_rating">Fout bij het verzenden van beoordeling, controleer het GCVote wachtwoord in instellingen of maak deze leeg.</string>
-    <string name="gcvote_sent">Stem succesvol verzonden</string>
+    <string name="err_vote_send_rating">Fout bij verzenden beoordeling.</string>
+    <string name="vote_sent">Stem succesvol verzonden</string>
     <string name="settings_activate_twitter">Activeren</string>
     <string name="init_login_popup">Inloggen</string>
     <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
@@ -576,7 +576,8 @@
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches</string>
-    <string name="init_listdisplay">Toon extra lijsten in cache lijst</string>
+    <string name="init_listdisplay">Extra lijsten</string>
+    <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon richting tot cache in lijst</string>
     <!-- backup / restore -->
@@ -626,7 +627,16 @@
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
     <string name="init_maptrail">Pad tonen</string>
     <string name="init_summary_maptrail">Laat pad op kaart zien</string>
-    <string name="init_trailcolor">Spoorkleur</string>
+    <string name="init_trailcolor">Spoorgeschiedenis lijnkleur</string>
+    <string name="init_trailwidth">Spoorgeschiedenis lijndikte</string>
+    <string name="init_directioncolor">Richting lijnkleur</string>
+    <string name="init_directionwidth">Richting lijndikte</string>
+    <string name="init_routecolor">Route lijnkleur</string>
+    <string name="init_routewidth">Route lijndikte</string>
+    <string name="init_trackcolor">Spoor lijnkleur</string>
+    <string name="init_trackwidth">Spoor lijndikte</string>
+    <string name="init_circlecolor">Cirkel lijnkleur</string>
+    <string name="init_circlefillcolor">Cirkel opvulkleur</string>
     <string name="init_share_after_export">Open deel-menu na GPX export</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
@@ -699,6 +709,9 @@
     <string name="feature_search_geocode">Zoek op geocode</string>
     <string name="feature_search_owner">Zoek op eigenaar</string>
     <string name="feature_search_finder">Zoek op vinder</string>
+    <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
+    <string name="feature_voting">Stemmen op caches</string>
+    <string name="init_maplines_title">Kaartlijn aanpassingen</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Oude Mapsforge V3</string>
     <string name="init_mfold_api_description">We gebruiken standaard een nieuwe versie van de Mapsforge kaart. Als je sommige functies mist of problemen tegenkomt, kun je hier terug naar de oude versie.</string>
@@ -982,10 +995,11 @@
     <string name="file_list_no_files">Sorry, c:geo heeft geen bestanden gevonden.</string>
     <string name="file_searching">Zoeken naar overeenkomende bestanden</string>
     <string name="file_title_searching">Bezig met zoeken</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Kies map</string>
     <string name="simple_dir_chooser_current_path">Pad:</string>
     <string name="simple_dir_chooser_invalid_path">Ongeldig pad</string>
+    <string name="simple_file_chooser_title">Bestand kiezen</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laden van caches uit %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laden van waypoints uit %1$s</string>
@@ -1003,9 +1017,9 @@
     <string name="gpx_import_delete_message">Weet je zeker dat je %s wil verwijderen?</string>
     <string name="gpx_import_select_list_title">Importeer GPX naar lijst</string>
     <string name="gpx_import_android">Importeer van Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Selecteer mapbestand</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Spoorbestand selecteren</string>
     <!-- import -->
     <string name="web_import_title">Importeer van send2cgeo</string>
     <string name="web_import_waiting">Wachten op nieuwe caches van send2cgeo…</string>
@@ -1076,6 +1090,8 @@
     <string name="map_hidewp_original">Originele waypoints verbergen</string>
     <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>
     <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
+    <string name="map_hide_track">Spoor verbergen</string>
+    <string name="map_load_track">Spoor laden</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
@@ -1466,7 +1482,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Toekomstige uitgaves van c:geo zijn mogelijk niet meer beschikbaar voor je apparaat.\nKlik op dit bericht voor meer informatie.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Deze versie van c:geo is niet langer compatibel met je apparaat en kan mogelijk niet werken of onverwacht gedrag vertonen.\nTik op dit bericht voor meer informatie.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
     <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
@@ -1580,6 +1596,9 @@
     <string name="color_red">Rood</string>
     <string name="color_turquoise">Turquoise</string>
     <string name="color_black">Zwart</string>
+    <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
+    <string name="preference_colorpicker_select_color">Kleur selecteren</string>
+    <string name="preference_colorpicker_select_opaqueness">Selecteer doorzichtigheid</string>
     <!-- number input -->
     <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
@@ -1604,6 +1623,38 @@
     <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">Uit</string>
+    <string name="switch_on">Aan</string>
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
+    <!-- view settings -->
+    <string name="view_settings">Instellingen bekijken</string>
+    <string name="delete_setting">Instelling verwijderen</string>
+    <string name="delete_setting_warning">Sleutel \"%s\" uit instellingen verwijderen?\n\nDeze bewerking kan niet ongedaan worden gemaakt.</string>
+    <string name="edit_setting">Instelling \"%s\" bewerken</string>
+    <string name="edit_setting_error_unknown_type">Onbekend instellingstype - bewerken niet ondersteund</string>
+    <string name="edit_setting_error_invalid_data">Ongeldige waarde \"%s\" ingevoerd. Instellingswaarde niet gewijzigd.</string>
+    <string name="activate_editmode_title">Activeer bewerkingsmodus</string>
+    <string name="activate_editmode_warning">Je betreedt gevaarlijk gebied!\n\nHet wijzigen van instellingen kan c:geo verwarren, kan voorkomen dat het programma nog start of kan je mobiele telefoon laten exploderen!\n\nWeet je zeker dat je verder wilt gaan op eigen risico?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Lokale bestandsafhandeling</string>
+    <string name="localfile_title">Lokaal bestand openen</string>
+    <string name="localfile_cannot_handle">Fout bij lezen van het bestand of c:geo kan dit bestandstype niet verwerken.</string>
+    <string name="localfile_foundmap">kaartbestand gevonden</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Kaartbestand ontvangen</string>
+    <string name="receivemapfile_success">Kaartbestand succesvol ontvangen als \"%s\" en opgeslagen in kaarten map</string>
+    <string name="receivemapfile_error">Fout bij het ontvangen van kaartbestand</string>
+    <string name="receivemapfile_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
+    <string name="receivemapfile_option_overwrite">Overschrijven</string>
+    <string name="receivemapfile_option_differentname">Andere naam</string>
+    <string name="receivemapfile_kb_copied">%d kB gekopieerd</string>
+    <string name="receivemapfile_cancelled">Kaartbestandsoverdracht geannuleerd</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Download standaard offline kaarten</string>
+    <string name="downloadmap_info">Je wordt doorverwezen naar een downloadsite voor basis offline kaarten (geen thema support).\n\nKies het .map bestand voor jouw regio en tik erop om het bestand te downloaden.\n\nAls het downloaden is voltooid, tik op het gedownloade bestand om deze kaart in te stellen als de huidige kaart voor c:geo</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Spoor geschiedenis</string>
+    <string name="export_trailhistory_title">Spoorgeschiedenis exporteren</string>
+    <string name="export_trailhistory_success">Spoorgeschiedenis geëxporteerd naar \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Spoorgeschiedenis wissen na export</string>
 </resources>
