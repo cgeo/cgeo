@@ -47,7 +47,7 @@ class MapLineWidthPreference extends AbstractSeekbarPreference {
 
     @Override
     protected View onCreateView(final ViewGroup parent) {
-        configure(0, 50, startValue, null, false);
+        configure(0, 100, startValue, null, false);
         return super.onCreateView(parent);
     }
 }
