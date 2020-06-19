@@ -71,7 +71,7 @@ public class TrailHistoryExport {
     private class Export extends AsyncTaskWithProgress<Location, File> {
 
         private static final String PREFIX_GPX = "";
-        private static final String NS_GPX = "http://www.topografix.com/GPX/1/0";
+        private static final String NS_GPX = "http://www.topografix.com/GPX/1/1";
         private static final String GPX_SCHEMA = NS_GPX + "/gpx.xsd";
 
         private static final String PREFIX_XSI = "xsi";
@@ -117,10 +117,10 @@ public class TrailHistoryExport {
                         XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + CalendarUtils.formatDateTime("yyyy-MM-dd hh-mm-ss"));
                         gpx.startTag(NS_GPX, "trkseg");
                             for (Location loc : trail) {
-                                gpx.startTag(NS_GPX, "trkpt");
-                                gpx.attribute(NS_GPX, "lat", String.valueOf(loc.getLatitude()));
-                                gpx.attribute(NS_GPX, "lat", String.valueOf(loc.getLongitude()));
-                                gpx.endTag(NS_GPX, "trkpt");
+                                gpx.startTag(null, "trkpt");
+                                gpx.attribute(null, "lat", String.valueOf(loc.getLatitude()));
+                                gpx.attribute(null, "lon", String.valueOf(loc.getLongitude()));
+                                gpx.endTag(null, "trkpt");
                                 countExported++;
                                 publishProgress(countExported);
                             }
