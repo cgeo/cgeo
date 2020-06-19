@@ -1623,6 +1623,7 @@
     <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">Aus</string>
+    <string name="switch_on">An</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
     <!-- view settings -->
@@ -1633,7 +1634,7 @@
     <string name="edit_setting_error_unknown_type">Unbekannter Einstellungstyp - Bearbeitung wird nicht unterstützt</string>
     <string name="edit_setting_error_invalid_data">Ungültige Daten \"%s\" eingegeben. Einstellung bleibt unverändert.</string>
     <string name="activate_editmode_title">Bearbeitungsmodus aktivieren</string>
-    <string name="activate_editmode_warning">Achtung Gefahr!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren, könnte weitere Programmstarts verhindern oder dein Handy explodieren lassen!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
+    <string name="activate_editmode_warning">Du betrittst hier einen gefährlichen Bereich!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren oder weitere Programmstarts verhindern, also sei vorsichtig!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Lokaler Dateimanager</string>
     <string name="localfile_title">Eine lokale Datei öffnen</string>
