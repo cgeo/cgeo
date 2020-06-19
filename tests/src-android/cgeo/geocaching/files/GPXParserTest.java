@@ -462,7 +462,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getOwnerDisplayName()).isEqualTo("Berengarius");
         assertThat(cache.getType()).isEqualTo(CacheType.VIRTUAL);
         assertThat(cache.getLocation()).isEqualTo("Baden-Wurttemberg, Germany");
-        assertThat(cache.getUrl()).isEqualTo("http://www.terracaching.com/Cache/TCEHL");
+        assertThat(cache.getUrl()).isEqualTo("https://play.terracaching.com/Cache/TCEHL");
         assertThat(cache.getDescription()).startsWith("<b> Hier ruht </b>");
         assertThat(cache.getHint()).isEmpty();
 

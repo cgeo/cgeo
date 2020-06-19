@@ -49,7 +49,7 @@ public class TerraCachingConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://www.terracaching.com/Cache/";
+        return "https://play.terracaching.com/Cache/";
     }
 
     @Override
