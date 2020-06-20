@@ -766,12 +766,12 @@
     <string name="err_auth_geokrety_unknown">%1$s a retourné : %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Une cache</item>
+        <item quantity="one">%1$d cache</item>
         <item quantity="other">%1$d caches</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">Un jour restant</item>
+        <item quantity="one">%1$d jour restant</item>
         <item quantity="other">%1$d jours restants</item>
     </plurals>
     <string name="last_day_available">dernier jour de disponibilité</string>
@@ -1222,7 +1222,7 @@
     <string name="export_persnotes">Notes personnelles</string>
     <string name="export_persnotes_uploading">Envoi de la note personnelle %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Une note envoyée avec succès</item>
+        <item quantity="one">%1$d note envoyée avec succès</item>
         <item quantity="other">%1$d notes envoyées avec succès</item>
     </plurals>
     <string name="export_modifiedcoords">Coordonnées modifiées</string>
