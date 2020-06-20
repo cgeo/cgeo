@@ -17,7 +17,6 @@ import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -773,7 +772,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
-            setEnabled(menu, R.id.menu_import_android, Compatibility.isStorageAccessFrameworkAvailable());
+            setEnabled(menu, R.id.menu_import_android, true);
             setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
 
             // Export
@@ -1321,7 +1320,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpxFromAndroid() {
-        Compatibility.importGpxFromStorageAccessFramework(this, REQUEST_CODE_IMPORT_GPX);
+        // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+        // Filter to only show results that can be "opened", such as a file (as opposed to a list
+        // of contacts or timezones)
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        // Mime type based filter, we use "*/*" as GPX does not have a good mime type anyway
+        intent.setType("*/*");
+
+        startActivityForResult(intent, REQUEST_CODE_IMPORT_GPX);
     }
 
     private void importPq() {
