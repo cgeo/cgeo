@@ -776,13 +776,13 @@
     <string name="err_auth_geokrety_unknown">%1$s antwortet: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Ein Cache</item>
+        <item quantity="one">%1$d Cache</item>
         <item quantity="other">%1$d Caches</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">noch ein Tag verfügbar</item>
-        <item quantity="other">noch %1$d Tage verfügbar</item>
+        <item quantity="one">noch %1$d Tag verbleibend</item>
+        <item quantity="other">noch %1$d Tage verbleibend</item>
     </plurals>
     <string name="last_day_available">letzter Tag verfügbar</string>
     <string name="cache_offline">Offline</string>
@@ -843,7 +843,7 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_waypoints">Wegpunkte</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Wegpunkt</item>
+        <item quantity="one">%d Wegpunkt</item>
         <item quantity="other">%d Wegpunkte</item>
     </plurals>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
@@ -1232,7 +1232,7 @@
     <string name="export_persnotes">Persönliche Notizen</string>
     <string name="export_persnotes_uploading">Persönliche Notiz %1$d wird gesendet</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Eine Notiz erfolgreich hochgeladen</item>
+        <item quantity="one">%1$d Notiz erfolgreich hochgeladen</item>
         <item quantity="other">%1$d Notizen erfolgreich hochgeladen</item>
     </plurals>
     <string name="export_modifiedcoords">Geänderte Koordinaten</string>
