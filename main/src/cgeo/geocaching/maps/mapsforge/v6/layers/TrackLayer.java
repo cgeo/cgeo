@@ -12,7 +12,7 @@ public class TrackLayer extends AbstractLineLayer implements TrackUtils.TrackUpd
     }
 
     public void updateTrack(final TrackUtils.Track track) {
-        super.updateTrack(track.getTrack());
-    }
+        super.updateTrack(null != track ? track.getTrack() : null);
+    };
 
 }

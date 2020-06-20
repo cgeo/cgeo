@@ -34,7 +34,7 @@ abstract class AbstractLineLayer extends Layer {
 
     public void updateTrack(final ArrayList<Geopoint> track) {
         synchronized (pixelTrackLock) {
-            this.track = new ArrayList<Geopoint>(track);
+            this.track = null == track ? null : new ArrayList<Geopoint>(track);
             this.pixelTrack = null;
             this.mapSize = 0;
         }

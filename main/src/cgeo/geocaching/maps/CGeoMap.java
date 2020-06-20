@@ -635,12 +635,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     private void resumeTrack(final boolean preventReloading) {
-        if (null == tracks) {
-            if (!preventReloading) {
-                TrackUtils.loadTracks(this::setTracks);
-            }
-        } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory && tracks.getSize() > 0) {
-            ((GooglePositionAndHistory) overlayPositionAndScale).updateTrack(tracks.get(0));
+        if (null == tracks && !preventReloading) {
+            TrackUtils.loadTracks(this::setTracks);
+        } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
+            ((GooglePositionAndHistory) overlayPositionAndScale).updateTrack(null != tracks && tracks.getSize() > 0 ? tracks.get(0) : null);
         }
     }
 
@@ -952,7 +950,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus)
+                if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsMenuItemSelected(id, this::compactIconModeChanged)) {
                     final MapSource mapSource = MapProviderFactory.getMapSource(id);
                     if (mapSource != null) {

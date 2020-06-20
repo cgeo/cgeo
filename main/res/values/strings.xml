@@ -1185,6 +1185,7 @@
     <string name="map_hidewp_visited">Hide visited waypoints</string>
     <string name="map_hide_track">Hide track</string>
     <string name="map_load_track">Load track</string>
+    <string name="map_unload_track">Unload track</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>

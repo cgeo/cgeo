@@ -173,9 +173,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     @Override
     public void updateTrack(final TrackUtils.Track track) {
         this.track = new ArrayList<>();
-        final ArrayList<Geopoint> temp = track.getTrack();
-        for (int i = 0; i < track.getSize(); i++) {
-            this.track.add(new LatLng(temp.get(i).getLatitude(), temp.get(i).getLongitude()));
+        if (null != track) {
+            final ArrayList<Geopoint> temp = track.getTrack();
+            for (int i = 0; i < track.getSize(); i++) {
+                this.track.add(new LatLng(temp.get(i).getLatitude(), temp.get(i).getLongitude()));
+            }
         }
         repaintRequired();
     }

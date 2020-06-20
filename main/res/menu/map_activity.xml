@@ -220,6 +220,10 @@
         android:id="@+id/menu_load_track"
         android:title="@string/map_load_track" />
     <item
+        android:id="@+id/menu_unload_track"
+        android:title="@string/map_unload_track"
+        android:visible="false"/>
+    <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom|withText"
