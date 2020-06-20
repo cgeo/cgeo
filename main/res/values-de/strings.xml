@@ -625,9 +625,18 @@
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
     <string name="init_dataDir">Geocache-Datenverzeichnis auswählen</string>
     <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
-    <string name="init_maptrail">Zeige Spur</string>
-    <string name="init_summary_maptrail">Zeige Spur auf Karte</string>
-    <string name="init_trailcolor">Spurfarbe</string>
+    <string name="init_maptrail">Zeige Standortverlauf</string>
+    <string name="init_summary_maptrail">Zeige einen Track des Standortverlaufes auf der Karte</string>
+    <string name="init_trailcolor">Farbe der Standortverlaufs-Linie</string>
+    <string name="init_trailwidth">Breite der Standortverlaufs-Linie</string>
+    <string name="init_directioncolor">Farbe für Richtungslinie</string>
+    <string name="init_directionwidth">Breite der Richtungslinie</string>
+    <string name="init_routecolor">Farbe der Routinglinie</string>
+    <string name="init_routewidth">Breite der Routinglinie</string>
+    <string name="init_trackcolor">Farbe der Tracklinie</string>
+    <string name="init_trackwidth">Breite der Tracklinie</string>
+    <string name="init_circlecolor">Farbe der Kreislinie</string>
+    <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
     <string name="init_trackautovisit">TBs besuchen</string>
@@ -702,6 +711,7 @@
     <string name="feature_search_finder">Suche nach Finder</string>
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
     <string name="feature_voting">Cache bewerten</string>
+    <string name="init_maplines_title">Anpassung der Kartenlinien</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Alte Mapsforge V3</string>
     <string name="init_mfold_api_description">Wir nutzen standardmäßig eine neue Version der Mapsforge-Karte. Wenn du einige Funktionen vermisst oder Fehler feststellst, kannst du hier zur alten Version zurückkehren.</string>
@@ -1071,7 +1081,7 @@
     <string name="map_modes">Karteneinstellungen</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_hide">Verbergen</string>
-    <string name="map_trail_show">Spur einblenden</string>
+    <string name="map_trail_show">Zeige Standortverlauf</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_circles_show">Kreise anzeigen</string>
     <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
@@ -1093,8 +1103,8 @@
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_as_list">Als Liste anzeigen</string>
-    <string name="map_clear_trailhistory">Spur-Historie löschen</string>
-    <string name="map_trailhistory_cleared">Spur-Historie gelöscht</string>
+    <string name="map_clear_trailhistory">Standortverlauf löschen</string>
+    <string name="map_trailhistory_cleared">Standortverlauf gelöscht</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Luftlinie</string>
@@ -1586,6 +1596,9 @@
     <string name="color_red">Rot</string>
     <string name="color_turquoise">Türkis</string>
     <string name="color_black">Schwarz</string>
+    <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
+    <string name="preference_colorpicker_select_color">Farbe auswählen</string>
+    <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
     <!-- number input -->
     <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
@@ -1610,6 +1623,7 @@
     <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">Aus</string>
+    <string name="switch_on">An</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
     <!-- view settings -->
@@ -1620,7 +1634,7 @@
     <string name="edit_setting_error_unknown_type">Unbekannter Einstellungstyp - Bearbeitung wird nicht unterstützt</string>
     <string name="edit_setting_error_invalid_data">Ungültige Daten \"%s\" eingegeben. Einstellung bleibt unverändert.</string>
     <string name="activate_editmode_title">Bearbeitungsmodus aktivieren</string>
-    <string name="activate_editmode_warning">Achtung Gefahr!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren, könnte weitere Programmstarts verhindern oder dein Handy explodieren lassen!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
+    <string name="activate_editmode_warning">Du betrittst hier einen gefährlichen Bereich!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren oder weitere Programmstarts verhindern, also sei vorsichtig!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Lokaler Dateimanager</string>
     <string name="localfile_title">Eine lokale Datei öffnen</string>
@@ -1638,4 +1652,9 @@
     <!-- Download map preference -->
     <string name="downloadmap_title">Grundlegende Offlinekarte herunterladen</string>
     <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (oder Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Standortverlaufs-Track</string>
+    <string name="export_trailhistory_title">Standorfverlaufs-Track exportieren</string>
+    <string name="export_trailhistory_success">Standortverlaufs-Track nach \"%s\" exportiert</string>
+    <string name="export_trailhistory_clear_after_export">Standortverlauf nach Export löschen</string>
 </resources>

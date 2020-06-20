@@ -628,7 +628,16 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar rasto</string>
     <string name="init_summary_maptrail">Mostra o rasto no mapa</string>
-    <string name="init_trailcolor">Cor do rasto</string>
+    <string name="init_trailcolor">Cor da linha do histórico do percurso</string>
+    <string name="init_trailwidth">Largura da linha do histórico do percurso</string>
+    <string name="init_directioncolor">Cor da linha de direcção</string>
+    <string name="init_directionwidth">Largura da linha de direcção</string>
+    <string name="init_routecolor">Cor da linha de rota</string>
+    <string name="init_routewidth">Largura da linha de rota</string>
+    <string name="init_trackcolor">Cor da linha de percurso</string>
+    <string name="init_trackwidth">Largura da linha do percurso</string>
+    <string name="init_circlecolor">Cor da linha do círculo</string>
+    <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Visitar TBs</string>
@@ -703,6 +712,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
     <string name="feature_voting">Dar votação a caches</string>
+    <string name="init_maplines_title">Personalização das linhas do mapa</string>
     <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
     <string name="init_mfold_api">Antigo Mapsforge V3</string>
     <string name="init_mfold_api_description">Estamos a usar uma versão nova do mapa Mapsforge por predefinição. Se notar falta de alguma funcionalidade ou deparar-se com problemas, pode voltar para a versão antiga aqui.</string>
@@ -1587,6 +1597,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="color_red">Vermelho</string>
     <string name="color_turquoise">Turquesa</string>
     <string name="color_black">Preto</string>
+    <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
+    <string name="preference_colorpicker_select_color">Seleccionar cor</string>
+    <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidade</string>
     <!-- number input -->
     <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
@@ -1606,6 +1619,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
+    <string name="switch_on">Ligado</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
     <!-- view settings -->
@@ -1616,7 +1630,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="edit_setting_error_unknown_type">Tipo de configuração desconhecido - edição não suportada</string>
     <string name="edit_setting_error_invalid_data">Os dados introduzidos \"%s\" são inválidos. O valor da configuração ficou inalterado.</string>
     <string name="activate_editmode_title">Activar o modo de edição</string>
-    <string name="activate_editmode_warning">Está a aceder a uma secção perigosa!\n\nAlterar directamente as definições pode criar conflitos no c:geo, podendo impedir o programa de iniciar no futuro ou fazer o seu dispositivo explodir!\n\nTem a certeza que pretende prosseguir por sua conta e risco?</string>
+    <string name="activate_editmode_warning">Está a aceder a uma secção perigosa!\n\nAlterar directamente as definições pode criar conflitos no c:geo ou impedir o programa de iniciar no futuro, por isso seja cauteloso!\n\nTem a certeza que pretende prosseguir por sua conta e risco?</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Processamento de ficheiros locais do c:geo</string>
     <string name="localfile_title">Abrir um ficheiro local</string>
@@ -1634,4 +1648,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- Download map preference -->
     <string name="downloadmap_title">Transferir mapas offline simples</string>
     <string name="downloadmap_info">Será redireccionado/a para um sítio de transferência de mapas offline simples (sem suporte de temas).\n\nEscolha o ficheiro .map para a sua região e toque no mesmo para a transferência do mapa.\n\nQuando a transferência for concluída, toque no ficheiro transferido para definir esse mapa como o mapa em utilização no c:geo</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Histórico do rasto</string>
+    <string name="export_trailhistory_title">Exportar histórico dos rastos</string>
+    <string name="export_trailhistory_success">Histórico de rastos exportado para\"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Limpar histórico dos rastos após a exportação</string>
 </resources>
