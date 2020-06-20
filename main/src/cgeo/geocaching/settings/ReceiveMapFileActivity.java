@@ -139,7 +139,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     // copy file
                     file.setWritable(true, false);
                     final OutputStream outputStream = new FileOutputStream(file);
-                    final byte buffer[] = new byte[4096];
+                    final byte[] buffer = new byte[4096];
                     int length = 0;
                     while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
                         outputStream.write(buffer, 0, length);
