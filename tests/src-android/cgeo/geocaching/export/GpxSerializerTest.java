@@ -10,7 +10,6 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.utils.Charsets;
 
 import androidx.annotation.NonNull;
 
@@ -18,12 +17,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -69,7 +68,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
         final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
 
-        final InputStream stream = new ByteArrayInputStream(gpxFirst.getBytes(CharEncoding.UTF_8));
+        final InputStream stream = new ByteArrayInputStream(gpxFirst.getBytes(StandardCharsets.UTF_8));
         final Collection<Geocache> caches = parser.parse(stream, null);
         assertThat(caches).isNotNull();
         assertThat(caches).hasSize(1);
@@ -139,7 +138,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         loadCacheFromResource(cacheResource);
 
         final String exported = getGPXFromCache("GC31J2H");
-        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8);
+        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8);
         assertEqualTags(imported, exported, "groundspeak:difficulty");
         assertEqualTags(imported, exported, "groundspeak:terrain");
     }
@@ -149,7 +148,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         loadCacheFromResource(cacheResource);
 
         final String exported = getGPXFromCache("GC31J2H");
-        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8);
+        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8);
         assertEqualTags(imported, exported, "groundspeak:type");
     }
 
@@ -158,7 +157,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         loadCacheFromResource(cacheResource);
 
         final String exported = extractWaypoint(getGPXFromCache("GC31J2H"));
-        final String imported = extractWaypoint(IOUtils.toString(getResourceStream(R.raw.gc31j2h), Charsets.UTF_8));
+        final String imported = extractWaypoint(IOUtils.toString(getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8));
 
         assertEqualTags(imported, exported, "time");
         assertEqualTags(imported, exported, "name");

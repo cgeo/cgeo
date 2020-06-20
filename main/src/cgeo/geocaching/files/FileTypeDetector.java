@@ -11,9 +11,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 public class FileTypeDetector {
@@ -36,7 +36,7 @@ public class FileTypeDetector {
             if (is == null) {
                 return FileType.UNKNOWN;
             }
-            reader = new BufferedReader(new InputStreamReader(is, CharEncoding.UTF_8));
+            reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             type = detectHeader(reader);
         } catch (final IOException e) {
             if (!uri.toString().startsWith("http")) {

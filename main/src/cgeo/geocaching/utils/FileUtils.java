@@ -21,13 +21,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -309,13 +308,7 @@ public final class FileUtils {
         if (header == null) {
             deleteIgnoringFailure(file);
         } else {
-            try {
-                saveToFile(new ByteArrayInputStream(header.getBytes("UTF-8")), file);
-            } catch (final UnsupportedEncodingException e) {
-                // Do not try to display the header in the log message, as our default encoding is
-                // likely to be UTF-8 and it will fail as well.
-                Log.e("FileUtils.saveHeader: unable to decode header", e);
-            }
+            saveToFile(new ByteArrayInputStream(header.getBytes(StandardCharsets.UTF_8)), file);
         }
     }
 
@@ -337,7 +330,7 @@ public final class FileUtils {
     public static String getSavedHeader(@NonNull final File baseFile, final String name) {
         try {
             final File file = filenameForHeader(baseFile, name);
-            final Reader reader = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
+            final Reader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
             try {
                 // No header will be more than 256 bytes
                 final char[] value = new char[256];
@@ -436,7 +429,7 @@ public final class FileUtils {
 
     public static boolean writeFileUTF16(final File file, final String content) {
         try {
-            org.apache.commons.io.FileUtils.write(file, content, CharEncoding.UTF_16);
+            org.apache.commons.io.FileUtils.write(file, content, StandardCharsets.UTF_16);
         } catch (final IOException e) {
             Log.e("FileUtils.writeFileUTF16", e);
             return false;
