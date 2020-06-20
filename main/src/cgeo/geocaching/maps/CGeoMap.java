@@ -634,9 +634,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
     }
 
-    private void resumeTrack() {
+    private void resumeTrack(final boolean preventReloading) {
         if (null == tracks) {
-            TrackUtils.loadTracks(this::setTracks);
+            if (!preventReloading) {
+                TrackUtils.loadTracks(this::setTracks);
+            }
         } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory && tracks.getSize() > 0) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateTrack(tracks.get(0));
         }
@@ -678,7 +680,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
             });
         }
-        resumeTrack();
+        resumeTrack(false);
     }
 
     @Override
@@ -971,7 +973,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public void setTracks(final TrackUtils.Tracks tracks) {
         this.tracks = tracks;
-        resumeTrack();
+        resumeTrack(null == tracks);
     }
 
     private void updateTrackHideStatus() {

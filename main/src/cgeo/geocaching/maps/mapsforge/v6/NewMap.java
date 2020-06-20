@@ -800,9 +800,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
     }
 
-    private void resumeTrack() {
+    private void resumeTrack(final boolean preventReloading) {
         if (null == tracks) {
-            TrackUtils.loadTracks(this::setTracks);
+            if (!preventReloading) {
+                TrackUtils.loadTracks(this::setTracks);
+            }
         } else if (null != trackLayer && tracks.getSize() > 0) {
             trackLayer.updateTrack(tracks.get(0));
         }
@@ -815,7 +817,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         resumeTileLayer();
         resumeRoute(false);
-        resumeTrack();
+        resumeTrack(false);
         mapView.getModel().mapViewPosition.addObserver(this);
     }
 
@@ -1752,7 +1754,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void setTracks(final TrackUtils.Tracks tracks) {
         this.tracks = tracks;
-        resumeTrack();
+        resumeTrack(null == tracks);
     }
 
     private void updateTrackHideStatus() {
