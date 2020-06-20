@@ -237,9 +237,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         // accuracy circle
         positionObjs.addCircle(new CircleOptions()
                 .center(latLng)
-                .strokeColor(MapLineUtils.getCircleColor())
-                .strokeWidth(MapLineUtils.getDefaultThinLineWidth())
-                .fillColor(MapLineUtils.getCircleFillColor())
+                .strokeColor(0x66000000)
+                .strokeWidth(3)
+                .fillColor(0x08000000)
                 .radius(coordinates.getAccuracy())
                 .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
         );
