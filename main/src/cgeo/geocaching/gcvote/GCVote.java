@@ -10,7 +10,6 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
@@ -19,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -112,7 +112,7 @@ public final class GCVote implements ICredentials {
         try {
             final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             final XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(response, Charsets.UTF_8.name());
+            xpp.setInput(response, StandardCharsets.UTF_8.name());
             boolean loggedIn = false;
             final Map<String, GCVoteRating> ratings = new HashMap<>();
             int eventType = xpp.getEventType();

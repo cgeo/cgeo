@@ -13,8 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
 
@@ -58,7 +58,7 @@ public class GPXTrackParser {
 
         try {
             final ProgressInputStream progressStream = new ProgressInputStream(stream);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, StandardCharsets.UTF_8));
             Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
             return result;
         } catch (final SAXException e) {

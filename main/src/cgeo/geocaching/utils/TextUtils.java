@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,9 +26,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
  */
 public final class TextUtils {
-
-    public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
-    public static final Charset CHARSET_ASCII = Charset.forName("US-ASCII");
 
     /**
      * a Collator instance appropriate for comparing strings using the default locale while ignoring the casing
@@ -193,7 +190,7 @@ public final class TextUtils {
      */
     public static long checksum(final String input) {
         final CRC32 checksum = new CRC32();
-        checksum.update(input.getBytes(CHARSET_UTF8));
+        checksum.update(input.getBytes(StandardCharsets.UTF_8));
         return checksum.getValue();
     }
 

@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +36,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 
 public class GpxExport extends AbstractExport {
 
@@ -135,7 +135,7 @@ public class GpxExport extends AbstractExport {
                 final File exportLocation = LocalStorage.getGpxExportDirectory();
                 FileUtils.mkdirs(exportLocation);
 
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), CharEncoding.UTF_8));
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), StandardCharsets.UTF_8));
                 new GpxSerializer().writeGPX(allGeocodes, writer, countExported -> ExportTask.this.publishProgress(countExported));
             } catch (final IOException e) {
                 Log.e("GpxExport.ExportTask export", e);
