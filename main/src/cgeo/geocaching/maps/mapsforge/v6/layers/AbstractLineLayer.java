@@ -21,6 +21,7 @@ abstract class AbstractLineLayer extends Layer {
     private Paint line = null;
     protected int lineColor = 0xD00000A0;
     protected boolean isHidden = false;
+    private final Boolean pixelTrackLock = true;
 
     // used for caching
     private ArrayList<Geopoint> track = null;
@@ -32,9 +33,11 @@ abstract class AbstractLineLayer extends Layer {
     }
 
     public void updateTrack(final ArrayList<Geopoint> track) {
-        this.track = new ArrayList<Geopoint>(track);
-        this.pixelTrack = null;
-        this.mapSize = 0;
+        synchronized (pixelTrackLock) {
+            this.track = new ArrayList<Geopoint>(track);
+            this.pixelTrack = null;
+            this.mapSize = 0;
+        }
     }
 
     public void setHidden(final boolean isHidden) {
@@ -52,21 +55,23 @@ abstract class AbstractLineLayer extends Layer {
             return;
         }
 
-        // still building cache?
-        if (this.pixelTrack == null && this.mapSize > 0) {
-            return;
-        }
-
-        final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
-        if (this.pixelTrack == null || this.mapSize != mapSize) {
-            translateRouteToPixels(mapSize);
-        }
-
         prepareLine();
-        for (int i = 1; i < pixelTrack.size(); i++) {
-            final Pair<Integer, Integer> source = pixelTrack.get(i - 1);
-            final Pair<Integer, Integer> destination = pixelTrack.get(i);
-            canvas.drawLine(source.first - (int) topLeftPoint.x, source.second - (int) topLeftPoint.y, destination.first - (int) topLeftPoint.x, destination.second - (int) topLeftPoint.y, line);
+        synchronized (pixelTrackLock) {
+            // still building cache?
+            if (this.pixelTrack == null && this.mapSize > 0) {
+                return;
+            }
+
+            final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
+            if (this.pixelTrack == null || this.mapSize != mapSize) {
+                translateRouteToPixels(mapSize);
+            }
+
+            for (int i = 1; i < pixelTrack.size(); i++) {
+                final Pair<Integer, Integer> source = pixelTrack.get(i - 1);
+                final Pair<Integer, Integer> destination = pixelTrack.get(i);
+                canvas.drawLine(source.first - (int) topLeftPoint.x, source.second - (int) topLeftPoint.y, destination.first - (int) topLeftPoint.x, destination.second - (int) topLeftPoint.y, line);
+            }
         }
     }
 
