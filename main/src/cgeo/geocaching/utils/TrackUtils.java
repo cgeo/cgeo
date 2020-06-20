@@ -92,6 +92,7 @@ public class TrackUtils {
         final boolean trackfileSet = StringUtils.isNotBlank(Settings.getTrackFile());
         menu.findItem(R.id.menu_hide_track).setVisible(trackfileSet);
         menu.findItem(R.id.menu_hide_track).setChecked(Settings.isHideTrack());
+        menu.findItem(R.id.menu_unload_track).setVisible(trackfileSet);
     }
 
     /**
@@ -100,17 +101,22 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable hideOptionsChanged) {
-        if (id == R.id.menu_load_track) {
-            final Intent intent = new Intent(activity, SelectTrackFileActivity.class);
-            activity.startActivityForResult(intent, REQUEST_CODE_GET_TRACKFILE);
-            return true;
-        } else if (id == R.id.menu_hide_track) {
-            Settings.setHideTrack(!Settings.isHideTrack());
-            hideOptionsChanged.run();
-            return true;
-        } else {
-            return false;
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable hideOptionsChanged, final TrackUpdaterMulti updateTracks) {
+        switch (id) {
+            case R.id.menu_load_track:
+                final Intent intent = new Intent(activity, SelectTrackFileActivity.class);
+                activity.startActivityForResult(intent, REQUEST_CODE_GET_TRACKFILE);
+                return true;
+            case R.id.menu_unload_track:
+                Settings.setTrackFile(null);
+                updateTracks.updateTracks(null);
+                return true;
+            case R.id.menu_hide_track:
+                Settings.setHideTrack(!Settings.isHideTrack());
+                hideOptionsChanged.run();
+                return true;
+            default:
+                return false;
         }
     }
 

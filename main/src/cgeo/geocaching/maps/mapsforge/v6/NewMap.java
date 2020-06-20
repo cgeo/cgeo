@@ -527,7 +527,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus)
+                if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsMenuItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
@@ -801,12 +801,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void resumeTrack(final boolean preventReloading) {
-        if (null == tracks) {
-            if (!preventReloading) {
-                TrackUtils.loadTracks(this::setTracks);
-            }
-        } else if (null != trackLayer && tracks.getSize() > 0) {
-            trackLayer.updateTrack(tracks.get(0));
+        if (null == tracks && !preventReloading) {
+            TrackUtils.loadTracks(this::setTracks);
+        } else if (null != trackLayer) {
+            trackLayer.updateTrack(null != tracks && tracks.getSize() > 0 ? tracks.get(0) : null);
         }
     }
 
