@@ -143,7 +143,7 @@ public class ViewSettingsActivity extends AbstractActivity {
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
             .show()
         ;
-    };
+    }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
