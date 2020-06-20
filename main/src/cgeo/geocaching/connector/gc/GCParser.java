@@ -1129,7 +1129,7 @@ public final class GCParser {
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode,
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", month + "/" + day + "/" + year,
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day),
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
@@ -1291,7 +1291,7 @@ public final class GCParser {
             return false;
         }
 
-        final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + Boolean.toString(add);
+        final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + add;
 
         try {
             Network.completeWithSuccess(Network.postRequest(uri, null));
