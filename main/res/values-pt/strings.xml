@@ -777,13 +777,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Uma cache</item>
+        <item quantity="one">%1$d cache</item>
         <item quantity="other">%1$d caches</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">resta um dia</item>
-        <item quantity="other">restam %1$d dias</item>
+        <item quantity="one">%1$d dia restante</item>
+        <item quantity="other">%1$d dias restantes</item>
     </plurals>
     <string name="last_day_available">último dia disponível</string>
     <string name="cache_offline">Armazenada</string>
@@ -844,8 +844,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_images">Imagens</string>
     <string name="cache_waypoints">Pontos adicionais</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Ponto Adicional</item>
-        <item quantity="other">%d Pontos Adicionais</item>
+        <item quantity="one">%d ponto adicional</item>
+        <item quantity="other">%d pontos adicionais</item>
     </plurals>
     <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
@@ -1093,6 +1093,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
     <string name="map_hide_track">Ocultar percurso</string>
     <string name="map_load_track">Carregar percurso</string>
+    <string name="load_track_success">Percurso carregado</string>
+    <string name="load_track_error">Erro ao carregar o percurso</string>
+    <string name="map_unload_track">Anular carregamento do percurso</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1233,7 +1236,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_persnotes">Notas pessoais</string>
     <string name="export_persnotes_uploading">A enviar nota pessoal %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Nota enviada com sucesso</item>
+        <item quantity="one">%1$d nota enviada com sucesso</item>
         <item quantity="other">%1$d notas enviadas com sucesso</item>
     </plurals>
     <string name="export_modifiedcoords">Coordenadas modificadas</string>
