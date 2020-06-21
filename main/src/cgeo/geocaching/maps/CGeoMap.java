@@ -636,7 +636,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            TrackUtils.loadTracks(this::setTracks);
+            TrackUtils.loadTracks(this.activity, this::setTracks);
         } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateTrack(null != tracks && tracks.getSize() > 0 ? tracks.get(0) : null);
         }
