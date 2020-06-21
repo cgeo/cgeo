@@ -42,7 +42,7 @@ public class InternalConnectorTest extends AbstractResourceInstrumentationTestCa
     }
 
     public void testCreateZZ0() {
-        InternalConnector.getInstance().assertHistoryCacheExists(CgeoApplication.getInstance());
+        InternalConnector.assertHistoryCacheExists(CgeoApplication.getInstance());
         final Geocache minimalCache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL));
         assert minimalCache != null;
         assertThat(minimalCache).isNotNull();
