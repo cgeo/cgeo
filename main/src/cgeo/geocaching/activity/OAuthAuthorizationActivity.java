@@ -318,7 +318,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 startButton.setOnClickListener(null);
 
                 actitity.setTempTokens(null, null);
-                AndroidRxUtils.networkScheduler.scheduleDirect(() -> actitity.requestToken());
+                AndroidRxUtils.networkScheduler.scheduleDirect(actitity::requestToken);
             }
         }
     }

@@ -305,7 +305,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private void init() {
         registerForContextMenu(typeButton);
-        typeButton.setOnClickListener(view -> openContextMenu(view));
+        typeButton.setOnClickListener(this::openContextMenu);
 
         setType(typeSelected);
         dateButton.setOnClickListener(new DateListener());
@@ -342,7 +342,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, input -> DataStore.getSuggestionsGeocode(input)));
+        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, DataStore::getSuggestionsGeocode));
     }
 
     @Override

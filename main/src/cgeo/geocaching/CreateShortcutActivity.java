@@ -93,7 +93,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     }
 
     protected void promptForListShortcut() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut, listId -> createOfflineListShortcut(listId), true, PseudoList.NEW_LIST.id);
+        new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut, this::createOfflineListShortcut, true, PseudoList.NEW_LIST.id);
     }
 
     protected void createOfflineListShortcut(final int listId) {

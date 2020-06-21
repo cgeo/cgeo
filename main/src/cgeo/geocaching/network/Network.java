@@ -634,7 +634,7 @@ public final class Network {
         Completable.fromSingle(response.flatMap(withSuccess)).blockingAwait();
     }
 
-    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(s -> TextUtils.replaceWhitespace(s));
+    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(TextUtils::replaceWhitespace);
 
     @Nullable
     public static String rfc3986URLEncode(final String text) {

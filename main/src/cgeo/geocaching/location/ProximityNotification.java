@@ -239,10 +239,10 @@ public class ProximityNotification implements Parcelable {
                 if (tone == TONE_NEAR) {
                     handler.postDelayed(() -> {
                         toneG.startTone(TONE_NEAR);
-                        handler.postDelayed(() -> toneG.release(), 350);
+                        handler.postDelayed(toneG::release, 350);
                     }, 350);
                 } else {
-                    handler.postDelayed(() -> toneG.release(), 350);
+                    handler.postDelayed(toneG::release, 350);
                 }
             }
         }

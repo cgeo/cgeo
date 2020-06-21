@@ -2207,7 +2207,7 @@ public class DataStore {
                 "_id",
                 null,
                 new LinkedList<Waypoint>(),
-                cursor -> createWaypointFromDatabaseContent(cursor));
+                DataStore::createWaypointFromDatabaseContent);
     }
 
     @NonNull
@@ -3581,7 +3581,7 @@ public class DataStore {
                 .append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where)
                 .append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));  // Hardcoded limit to avoid memory overflow
 
-        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), cursor -> createWaypointFromDatabaseContent(cursor));
+        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), DataStore::createWaypointFromDatabaseContent);
     }
 
     public static void saveChangedCache(final Geocache cache) {

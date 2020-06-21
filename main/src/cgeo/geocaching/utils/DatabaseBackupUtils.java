@@ -85,7 +85,7 @@ public class DatabaseBackupUtils {
         final ProgressDialog dialog = ProgressDialog.show(activity,
                 activity.getString(R.string.init_backup),
                 activity.getString(R.string.init_backup_running), true, false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.backupDatabaseInternal(), backupFileName -> {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::backupDatabaseInternal, backupFileName -> {
             dialog.dismiss();
             Dialogs.message(activity,
                     R.string.init_backup_backup,

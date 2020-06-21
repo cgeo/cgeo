@@ -23,7 +23,7 @@ public abstract class RenameListCommand extends AbstractCommand {
     public void execute() {
         final StoredList list = DataStore.getList(listId);
         oldName = list.getTitle();
-        new StoredList.UserInterface(getContext()).promptForListRename(listId, () -> RenameListCommand.super.execute());
+        new StoredList.UserInterface(getContext()).promptForListRename(listId, RenameListCommand.super::execute);
     }
 
     @Override

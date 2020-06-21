@@ -1592,7 +1592,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @NonNull
     private Action1<Integer> getListSwitchingRunnable() {
-        return selectedListId -> switchListById(selectedListId);
+        return this::switchListById;
     }
 
     private void switchListById(final int id) {

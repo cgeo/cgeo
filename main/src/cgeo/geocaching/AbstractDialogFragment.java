@@ -91,7 +91,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         }
 
         final View overflowActionBar = v.findViewById(R.id.overflowActionBar);
-        overflowActionBar.setOnClickListener(v14 -> showPopup(v14));
+        overflowActionBar.setOnClickListener(this::showPopup);
     }
 
     public final void setTitle(final CharSequence title) {
@@ -114,7 +114,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), popupMenu.getMenu(), cache);
         popupMenu.setOnMenuItemClickListener(
-                item -> AbstractDialogFragment.this.onMenuItemClick(item)
+                AbstractDialogFragment.this::onMenuItemClick
         );
         popupMenu.show();
     }

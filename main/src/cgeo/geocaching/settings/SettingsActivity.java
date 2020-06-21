@@ -480,7 +480,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             final Resources res = getResources();
             final SettingsActivity activity = SettingsActivity.this;
             final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.removeObsoleteGeocacheDataDirectories(), () -> dialog.dismiss());
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, dialog::dismiss);
             return true;
             });
         getPreference(R.string.pref_memory_dump).setOnPreferenceClickListener(preference -> {
