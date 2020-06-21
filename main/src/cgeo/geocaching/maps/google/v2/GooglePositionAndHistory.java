@@ -22,6 +22,7 @@ import android.location.Location;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -86,7 +87,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     @Override
     public void setCoordinates(final Location coord) {
-        final boolean coordChanged = coord == null ? coordinates != null : !coord.equals(coordinates);
+        final boolean coordChanged = !Objects.equals(coord, coordinates);
         coordinates = coord;
         if (coordChanged) {
             history.rememberTrailPosition(coordinates);
