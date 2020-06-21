@@ -2336,9 +2336,7 @@ public class DataStore {
                 "precedence ASC",
                 null,
                 new ArrayList<>(),
-                cursor -> {
-                    return new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1));
-                });
+                cursor -> new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1)));
     }
 
     /**
