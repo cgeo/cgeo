@@ -536,7 +536,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onSaveInstanceState(final Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
 
@@ -597,7 +597,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (currentLoader != null && currentLoader.isLoading()) {
             showFooterLoadingCaches();
@@ -840,7 +840,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             tv.setText(label + (selected ? " " + getString(R.string.caches_listmarker_selected) : ""));
         }
 
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
 
             if (v == null) {
@@ -1996,7 +1996,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onLoadFinished(final Loader<SearchResult> arg0, final SearchResult searchIn) {
+    public void onLoadFinished(@NonNull final Loader<SearchResult> arg0, final SearchResult searchIn) {
         // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
         // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
         if (searchIn != null) {
@@ -2023,7 +2023,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onLoaderReset(final Loader<SearchResult> arg0) {
+    public void onLoaderReset(@NonNull final Loader<SearchResult> arg0) {
         //Not interesting
     }
 

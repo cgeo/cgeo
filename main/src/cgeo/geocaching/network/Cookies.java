@@ -2,6 +2,8 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.settings.DiskCookieStore;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +23,7 @@ public final class Cookies {
         final HashMap<String, Cookie> allCookies = new HashMap<>();
 
         @Override
-        public synchronized void saveFromResponse(final HttpUrl url, final List<Cookie> cookies) {
+        public synchronized void saveFromResponse(@NonNull final HttpUrl url, final List<Cookie> cookies) {
             boolean needStoreUpdate = false;
             for (final Cookie cookie : cookies) {
                 needStoreUpdate |= addCookie(cookie);
@@ -42,7 +44,8 @@ public final class Cookies {
         }
 
         @Override
-        public List<Cookie> loadForRequest(final HttpUrl url) {
+        @NonNull
+        public List<Cookie> loadForRequest(@NonNull final HttpUrl url) {
             final List<Cookie> cookies = new LinkedList<>();
             synchronized (this) {
                 for (final Cookie cookie: allCookies.values()) {

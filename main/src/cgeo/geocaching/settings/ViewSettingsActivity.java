@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         Collections.sort(items, (o1, o2) -> o1.key.compareTo(o2.key));
 
         debugAdapter = new ArrayAdapter<KeyValue>(this, 0, items) {
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View v = convertView;
                 if (null == convertView) {
                     v = getLayoutInflater().inflate(R.layout.view_settings_item, null, false);

@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -159,7 +160,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         }
 
         @Override
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
             if (v == null) {
                 final LayoutInflater vi = LayoutInflater.from(context);

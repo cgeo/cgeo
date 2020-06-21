@@ -111,7 +111,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     @Override
-    public final void onConfigurationChanged(final Configuration newConfig) {
+    public final void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();

@@ -77,6 +77,7 @@ public abstract class UserClickListener implements View.OnClickListener {
         return new UserClickListener(new UAContext(userName, userName)) {
 
             @Override
+            @NonNull
             protected List<UserAction> createUserActions(final UserAction.UAContext user) {
                 return ConnectorFactory.getConnector(trackable).getUserActions(user);
             }
@@ -87,6 +88,7 @@ public abstract class UserClickListener implements View.OnClickListener {
         return new UserClickListener(new UAContext(userName, userId)) {
 
             @Override
+            @NonNull
             protected List<UserAction> createUserActions(final UserAction.UAContext user) {
                 return ConnectorFactory.getConnector(cache).getUserActions(user);
             }

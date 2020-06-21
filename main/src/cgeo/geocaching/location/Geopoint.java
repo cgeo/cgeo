@@ -266,6 +266,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @return formatted coordinates
      */
     @Override
+    @NonNull
     public String toString() {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }

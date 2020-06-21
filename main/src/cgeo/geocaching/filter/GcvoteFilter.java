@@ -9,6 +9,8 @@ import cgeo.geocaching.models.Geocache;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 /**
  * Filter to display found caches eligible for voting on GCVote.
  */
@@ -36,7 +38,7 @@ class GcvoteFilter extends AbstractFilter {
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         final IConnector connector = ConnectorFactory.getConnector(cache);
         return cache.isFound() && connector instanceof IVotingCapability && !((IVotingCapability) connector).isValidRating(cache.getMyVote()) && ((IVotingCapability) connector).supportsVoting(cache);
     }

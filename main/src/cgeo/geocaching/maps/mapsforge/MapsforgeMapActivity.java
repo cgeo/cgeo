@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import org.mapsforge.v3.android.maps.MapActivity;
 
 public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl, FilteredActivity {
@@ -43,7 +45,7 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
     }
 
@@ -68,12 +70,12 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         return mapBase.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
+    public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         return mapBase.onPrepareOptionsMenu(menu);
     }
 
@@ -83,12 +85,12 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     }
 
     @Override
-    public void superOnCreate(final Bundle savedInstanceState) {
+    public void superOnCreate(@NonNull final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public boolean superOnCreateOptionsMenu(final Menu menu) {
+    public boolean superOnCreateOptionsMenu(@NonNull final Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -98,7 +100,7 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     }
 
     @Override
-    public boolean superOnOptionsItemSelected(final MenuItem item) {
+    public boolean superOnOptionsItemSelected(@NonNull final MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
@@ -118,7 +120,7 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     }
 
     @Override
-    public boolean superOnPrepareOptionsMenu(final Menu menu) {
+    public boolean superOnPrepareOptionsMenu(@NonNull final Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
 

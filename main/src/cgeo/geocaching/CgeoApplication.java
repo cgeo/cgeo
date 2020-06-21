@@ -76,7 +76,7 @@ public class CgeoApplication extends Application {
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         initApplicationLocale();

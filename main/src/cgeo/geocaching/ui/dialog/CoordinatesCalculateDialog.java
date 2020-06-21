@@ -40,6 +40,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.gridlayout.widget.GridLayout;
@@ -538,7 +539,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
      */
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putByteArray(CALC_STATE, SerializationUtils.serialize(getCurrentState()));
     }

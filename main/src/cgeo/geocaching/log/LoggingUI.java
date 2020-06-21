@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public final class LoggingUI extends AbstractUIFactory {
         }
 
         @Override
+        @NonNull
         public String toString() {
             if (logType == null) {
                 return specialLogType.getL10n();

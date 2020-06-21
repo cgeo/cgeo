@@ -48,6 +48,7 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trackable_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);

@@ -131,7 +131,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 // Update UI
                 activity.infoArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
                     @Override
-                    public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
+                    public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
                         TextView rowView = (TextView) convertView;
                         if (rowView == null) {
                             rowView = (TextView) activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
@@ -344,7 +344,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();

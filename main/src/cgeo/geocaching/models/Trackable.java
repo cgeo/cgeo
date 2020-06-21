@@ -360,6 +360,7 @@ public class Trackable implements ILogable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         if (name != null) {
             return TextUtils.stripHtml(name);

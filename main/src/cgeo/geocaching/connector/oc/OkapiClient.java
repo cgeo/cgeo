@@ -1125,6 +1125,7 @@ final class OkapiClient {
         Long imageRcmdMaxPixels;
 
         @Override
+        @NonNull
         public String toString() {
             return "InstallationInformation{" +
                     "siteUrl='" + siteUrl + '\'' +

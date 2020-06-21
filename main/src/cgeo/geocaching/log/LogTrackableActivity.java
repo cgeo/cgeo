@@ -108,6 +108,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public static final int LOG_TRACKABLE = 1;
 
     @Override
+    @NonNull
     public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
         showProgress(true);
 
@@ -119,7 +120,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     @Override
-    public void onLoadFinished(final Loader<List<LogTypeTrackable>> listLoader, final List<LogTypeTrackable> logTypesTrackable) {
+    public void onLoadFinished(@NonNull final Loader<List<LogTypeTrackable>> listLoader, final List<LogTypeTrackable> logTypesTrackable) {
 
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
@@ -137,7 +138,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     @Override
-    public void onLoaderReset(final Loader<List<LogTypeTrackable>> listLoader) {
+    public void onLoaderReset(@NonNull final Loader<List<LogTypeTrackable>> listLoader) {
         // nothing
     }
 
@@ -271,7 +272,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();

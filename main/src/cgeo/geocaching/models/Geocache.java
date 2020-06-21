@@ -1589,6 +1589,7 @@ public class Geocache implements IWaypoint {
      * @see java.lang.Object#toString()
      */
     @Override
+    @NonNull
     public String toString() {
         return this.geocode + " " + this.name;
     }

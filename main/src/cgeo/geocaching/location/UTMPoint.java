@@ -120,6 +120,7 @@ public class UTMPoint {
      * @return String representation
      */
     @Override
+    @NonNull
     public String toString() {
         return String.format(Locale.getDefault(), "%d%c E %d N %d", zoneNumber, zoneLetter, Math.round(easting), Math.round(northing));
     }

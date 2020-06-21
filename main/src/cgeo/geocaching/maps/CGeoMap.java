@@ -418,7 +418,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         mapView.onSaveInstanceState(outState);
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putParcelable(BUNDLE_MAP_STATE, currentMapState());
@@ -712,7 +712,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         super.onCreateOptionsMenu(menu);
 
         MapProviderFactory.addMapviewMenuItems(menu);
@@ -728,7 +728,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
+    public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
             final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
@@ -790,7 +790,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
             case android.R.id.home:

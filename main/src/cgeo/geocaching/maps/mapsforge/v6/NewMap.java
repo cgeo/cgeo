@@ -288,7 +288,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
 
@@ -306,7 +306,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
+    public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
             final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
@@ -378,7 +378,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
@@ -1009,7 +1009,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
 
         Log.d("New map: onSaveInstanceState");

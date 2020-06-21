@@ -6,6 +6,8 @@ import cgeo.geocaching.location.Viewport;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import java.util.Collection;
 
 /**
@@ -100,6 +102,6 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
     void onResume();
     void onPause();
     void onDestroy();
-    void onSaveInstanceState(Bundle b);
+    void onSaveInstanceState(@NonNull Bundle b);
     void onLowMemory();
 }

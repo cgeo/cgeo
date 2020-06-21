@@ -55,13 +55,13 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
     }
 
     @Override
-    public void onClickAddress(final Address address) {
+    public void onClickAddress(@NonNull final Address address) {
         CacheListActivity.startActivityAddress(this, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
         finish();
     }
 
     @Override
-    public void onClickMapIcon(final Address address) {
+    public void onClickMapIcon(@NonNull final Address address) {
         DefaultMap.startActivityGeoCode(this, new Geopoint(address.getLatitude(), address.getLongitude()));
         finish();
     }

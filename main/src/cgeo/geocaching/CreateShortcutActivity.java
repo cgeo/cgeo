@@ -18,6 +18,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         }
 
         @Override
+        @NonNull
         public String toString() {
             return CgeoApplication.getInstance().getString(titleResourceId);
         }
