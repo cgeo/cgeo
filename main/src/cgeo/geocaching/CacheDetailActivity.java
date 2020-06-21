@@ -309,7 +309,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             String title = res.getString(R.string.cache);
             if (StringUtils.isNotBlank(name)) {
                 title = name;
-            } else if (geocode != null && StringUtils.isNotBlank(geocode)) { // can't be null, but the compiler doesn't understand StringUtils.isNotBlank()
+            } else if (StringUtils.isNotBlank(geocode)) {
                 title = geocode;
             }
             progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.disposeMessage());
