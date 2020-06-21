@@ -42,7 +42,7 @@ public class Tile {
     static {
         for (int z = ZOOMLEVEL_MIN; z <= ZOOMLEVEL_MAX; z++) {
             NUMBER_OF_TILES[z] = 1 << z;
-            NUMBER_OF_PIXELS[z] = TILE_SIZE * 1 << z;
+            NUMBER_OF_PIXELS[z] = TILE_SIZE << z;
         }
     }
 
