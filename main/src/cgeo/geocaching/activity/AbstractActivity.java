@@ -61,7 +61,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         try {
             ActivityMixin.showProgress(this, show);
         } catch (final Exception ex) {
-            Log.e(String.format("Error seeting progress: %b", show, Locale.US), ex);
+            Log.e(String.format(Locale.US, "Error seeting progress: %b", show), ex);
         }
     }
 
