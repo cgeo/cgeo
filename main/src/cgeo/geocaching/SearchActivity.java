@@ -192,12 +192,12 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         buttonSearchCoords.setOnClickListener(arg0 -> findByCoordsFn());
 
-        setSearchAction(addressEditText, buttonSearchAddress, () -> findByAddressFn(), null);
-        setSearchAction(geocodeEditText, buttonSearchGeocode, () -> findByGeocodeFn(), input -> DataStore.getSuggestionsGeocode(input));
-        setSearchAction(keywordEditText, buttonSearchKeyword, () -> findByKeywordFn(), input -> DataStore.getSuggestionsKeyword(input));
-        setSearchAction(finderNameEditText, buttonSearchFinder, () -> findByFinderFn(), input -> DataStore.getSuggestionsFinderName(input));
-        setSearchAction(ownerNameEditText, buttonSearchOwner, () -> findByOwnerFn(), input -> DataStore.getSuggestionsOwnerName(input));
-        setSearchAction(trackableEditText, buttonSearchTrackable, () -> findTrackableFn(), input -> DataStore.getSuggestionsTrackableCode(input));
+        setSearchAction(addressEditText, buttonSearchAddress, this::findByAddressFn, null);
+        setSearchAction(geocodeEditText, buttonSearchGeocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode);
+        setSearchAction(keywordEditText, buttonSearchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
+        setSearchAction(finderNameEditText, buttonSearchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
+        setSearchAction(ownerNameEditText, buttonSearchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
+        setSearchAction(trackableEditText, buttonSearchTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {

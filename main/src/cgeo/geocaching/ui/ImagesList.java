@@ -106,7 +106,7 @@ public class ImagesList {
     public Disposable loadImages(final View parentView, final Collection<Image> images) {
         // Start with a fresh disposable because of this method can be called several times if the
         // enclosing activity is stopped/restarted.
-        final CompositeDisposable disposables = new CompositeDisposable(new CancellableDisposable(() -> removeAllViews()));
+        final CompositeDisposable disposables = new CompositeDisposable(new CancellableDisposable(this::removeAllViews));
 
         imagesView = parentView.findViewById(R.id.spoiler_list);
 

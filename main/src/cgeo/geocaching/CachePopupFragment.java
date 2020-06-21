@@ -197,7 +197,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (Settings.getChooseList() || cache.isOffline()) {
                 // let user select list to store cache in
                 new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
-                        selectedListIds -> storeCacheOnLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
+                        this::storeCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 storeCacheOnLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
             }

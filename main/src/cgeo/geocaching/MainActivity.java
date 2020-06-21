@@ -311,7 +311,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         // infobox "not logged in" with link to service config; display delayed by 10 seconds
         final Handler handler = new Handler();
-        handler.postDelayed(() -> checkLoggedIn(), 10000);
+        handler.postDelayed(this::checkLoggedIn, 10000);
         notLoggedIn.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
     }
 
@@ -551,10 +551,10 @@ public class MainActivity extends AbstractActionBarActivity {
         initialized = true;
 
         findOnMap.setClickable(true);
-        findOnMap.setOnClickListener(v -> cgeoFindOnMap(v));
+        findOnMap.setOnClickListener(this::cgeoFindOnMap);
 
         findByOffline.setClickable(true);
-        findByOffline.setOnClickListener(v -> cgeoFindByOffline(v));
+        findByOffline.setOnClickListener(this::cgeoFindByOffline);
         findByOffline.setOnLongClickListener(v -> {
             new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, selectedListId -> {
                 Settings.setLastDisplayedList(selectedListId);
@@ -565,10 +565,10 @@ public class MainActivity extends AbstractActionBarActivity {
         findByOffline.setLongClickable(true);
 
         advanced.setClickable(true);
-        advanced.setOnClickListener(v -> cgeoSearch(v));
+        advanced.setOnClickListener(this::cgeoSearch);
 
         any.setClickable(true);
-        any.setOnClickListener(v -> cgeoPoint(v));
+        any.setOnClickListener(this::cgeoPoint);
 
         filter.setClickable(true);
         filter.setOnClickListener(v -> selectGlobalTypeFilter());
@@ -630,7 +630,7 @@ public class MainActivity extends AbstractActionBarActivity {
             if (!nearestView.isClickable()) {
                 nearestView.setFocusable(true);
                 nearestView.setClickable(true);
-                nearestView.setOnClickListener(v -> cgeoFindNearest(v));
+                nearestView.setOnClickListener(MainActivity.this::cgeoFindNearest);
                 nearestView.setBackgroundResource(R.drawable.main_nearby);
             }
 
@@ -650,7 +650,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 }
                 if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
                     addCoords = currentCoords;
-                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(address1 -> formatAddress(address1)).onErrorResumeWith(Single.just(currentCoords.toString()));
+                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
                     AndroidRxUtils.bindActivity(MainActivity.this, address)
                             .subscribeOn(AndroidRxUtils.networkScheduler)
                             .subscribe(address12 -> navLocation.setText(address12));

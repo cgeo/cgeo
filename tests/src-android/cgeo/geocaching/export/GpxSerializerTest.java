@@ -48,7 +48,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final Geocache cache = loadCacheFromResource(R.raw.gc1bkp3_gpx101);
         assertThat(cache).isNotNull();
 
-        new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"), writer, countExported -> importedCount.set(countExported));
+        new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"), writer, importedCount::set);
         assertEquals("Progress listener not called", 1, importedCount.get().intValue());
     }
 

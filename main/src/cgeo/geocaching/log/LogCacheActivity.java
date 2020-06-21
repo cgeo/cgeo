@@ -332,7 +332,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         AndroidRxUtils.bindActivity(this,
                 // Obtain the actives connectors
                 Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
-                        .flatMap((Function<TrackableConnector, Observable<TrackableLog>>) trackableConnector -> Observable.defer(() -> trackableConnector.trackableLogInventory()).subscribeOn(AndroidRxUtils.networkScheduler)).toList()
+                        .flatMap((Function<TrackableConnector, Observable<TrackableLog>>) trackableConnector -> Observable.defer(trackableConnector::trackableLogInventory).subscribeOn(AndroidRxUtils.networkScheduler)).toList()
         ).subscribe(trackableLogs -> {
             // Store trackables
             trackables.addAll(trackableLogs);

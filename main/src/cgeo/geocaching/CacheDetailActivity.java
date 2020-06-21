@@ -753,7 +753,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_clear_goto_history:
                 Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> {
-                    AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.clearGotoHistory(), () -> {
+                    AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
                         cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
                         notifyDataSetChanged();
                     });
@@ -802,7 +802,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void showVoteDialog() {
-        VoteDialog.show(this, cache, () -> notifyDataSetChanged());
+        VoteDialog.show(this, cache, this::notifyDataSetChanged);
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
@@ -1045,7 +1045,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (Settings.getChooseList() || cache.isOffline()) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    selectedListIds -> storeCacheInLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
+                    this::storeCacheInLists, true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
@@ -1345,7 +1345,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        simpleCancellableHandler -> watchListAdd(simpleCancellableHandler));
+                        DetailsViewCreator.this::watchListAdd);
             }
         }
 
@@ -1357,7 +1357,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        simpleCancellableHandler -> watchListRemove(simpleCancellableHandler));
+                        DetailsViewCreator.this::watchListRemove);
             }
         }
 
@@ -1409,7 +1409,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        simpleCancellableHandler -> favoriteAdd(simpleCancellableHandler));
+                        DetailsViewCreator.this::favoriteAdd);
             }
         }
 
@@ -1421,7 +1421,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        simpleCancellableHandler -> favoriteRemove(simpleCancellableHandler));
+                        DetailsViewCreator.this::favoriteRemove);
             }
         }
 

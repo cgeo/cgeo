@@ -392,7 +392,7 @@ public final class ImageUtils {
         private static final Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
         private static final LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
         private static final Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
-        private static final Runnable REDRAW_QUEUED_DRAWABLES = () -> redrawQueuedDrawables();
+        private static final Runnable REDRAW_QUEUED_DRAWABLES = ContainerDrawable::redrawQueuedDrawables;
 
         private Drawable drawable;
         protected final WeakReference<TextView> viewRef;

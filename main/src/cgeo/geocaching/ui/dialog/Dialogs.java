@@ -375,7 +375,7 @@ public final class Dialogs {
 
         final AlertDialog dialog = builder.create();
         if (iconObservable != null) {
-            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(drawable -> dialog.setIcon(drawable));
+            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
         }
         dialog.show();
     }

@@ -136,7 +136,7 @@ public class GpxExport extends AbstractExport {
                 FileUtils.mkdirs(exportLocation);
 
                 writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), StandardCharsets.UTF_8));
-                new GpxSerializer().writeGPX(allGeocodes, writer, countExported -> ExportTask.this.publishProgress(countExported));
+                new GpxSerializer().writeGPX(allGeocodes, writer, ExportTask.this::publishProgress);
             } catch (final IOException e) {
                 Log.e("GpxExport.ExportTask export", e);
                 // delete partial GPX file on error

@@ -158,14 +158,14 @@ public class Route implements Parcelable {
 
     public void reloadRoute(final RouteUpdater routeUpdater) {
         clearRouteInternal(routeUpdater, false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> loadRouteInternal(), () -> updateRoute(routeUpdater));
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal, () -> updateRoute(routeUpdater));
     }
 
     public void loadRoute() {
         if (loadingRoute) {
             return;
         }
-        Schedulers.io().scheduleDirect(() -> loadRouteInternal());
+        Schedulers.io().scheduleDirect(this::loadRouteInternal);
     }
 
     public boolean isEmpty() {
@@ -174,7 +174,7 @@ public class Route implements Parcelable {
 
     private void clearRouteInternal(final RouteUpdater routeUpdater, final boolean deleteInDatabase) {
         if (deleteInDatabase) {
-            Schedulers.io().scheduleDirect(() -> DataStore.clearRoute());
+            Schedulers.io().scheduleDirect(DataStore::clearRoute);
         }
         segments = null;
         if (null != routeUpdater) {

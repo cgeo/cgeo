@@ -574,7 +574,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 trackableImage.setClickable(true);
                 trackableImage.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage()))));
 
-                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(bitmapDrawable -> trackableImage.setImageDrawable(bitmapDrawable));
+                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 
                 imageView.addView(trackableImage);
             }
