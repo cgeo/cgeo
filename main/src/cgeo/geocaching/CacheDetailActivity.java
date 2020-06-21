@@ -380,7 +380,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_PAGE_INDEX, getCurrentItem());
     }
@@ -1848,7 +1848,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(CacheDetailActivity.this, R.layout.waypoint_item, sortedWaypoints) {
                 @Override
-                public View getView(final int position, final View convertView, final ViewGroup parent) {
+                public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     View rowView = convertView;
                     if (rowView == null) {
                         rowView = getLayoutInflater().inflate(R.layout.waypoint_item, parent, false);
@@ -2101,7 +2101,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSupportActionModeStarted(final ActionMode mode) {
+    public void onSupportActionModeStarted(@NonNull final ActionMode mode) {
         if (mSelectionModeActive && selectedTextView != null) {
             mSelectionModeActive = false;
             mActionMode = mode;
@@ -2121,7 +2121,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSupportActionModeFinished(final ActionMode mode) {
+    public void onSupportActionModeFinished(@NonNull final ActionMode mode) {
         mActionMode = null;
         if (selectedTextView != null) {
             selectedTextView.setWindowFocusWait(false);
@@ -2459,7 +2459,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         builder.append(DataStore.getList(listId).getTitle());
         builder.setSpan(new ClickableSpan() {
             @Override
-            public void onClick(final View widget) {
+            public void onClick(@NonNull final View widget) {
                 Settings.setLastDisplayedList(listId);
                 CacheListActivity.startActivityOffline(view.getContext());
             }

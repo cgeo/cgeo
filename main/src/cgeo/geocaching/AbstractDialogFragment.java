@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.DialogFragment;
 
@@ -223,14 +224,14 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         CacheMenuHandler.addMenuItems(inflater, menu, cache);
 
     }
 
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(@NonNull final ContextMenu menu, @NonNull final View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), menu, cache);
         for (int i = 0; i < menu.size(); i++) {
@@ -240,7 +241,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public boolean onContextItemSelected(final MenuItem item) {
+    public boolean onContextItemSelected(@NonNull final MenuItem item) {
         return onOptionsItemSelected(item);
     }
 
@@ -251,7 +252,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
             return true;
         }
@@ -263,7 +264,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public void onPrepareOptionsMenu(final Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
         try {
@@ -291,7 +292,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public void onCancel(final DialogInterface dialog) {
+    public void onCancel(@NonNull final DialogInterface dialog) {
         super.onCancel(dialog);
         getActivity().finish();
     }

@@ -158,7 +158,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         setContentView(R.layout.compass_activity);

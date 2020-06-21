@@ -302,14 +302,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private void initializeWaypointTypeSelector() {
         final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()])) {
             @Override
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 final View view = super.getView(position, convertView, parent);
                 addWaypointIcon(position, view);
                 return view;
             }
 
             @Override
-            public View getDropDownView(final int position, final View convertView, final ViewGroup parent) {
+            public View getDropDownView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 final View view = super.getDropDownView(position, convertView, parent);
                 addWaypointIcon(position, view);
                 return view;
@@ -494,7 +494,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
      * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
      */
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(CALC_STATE_JSON, calcStateJson);
     }

@@ -27,6 +27,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
@@ -527,7 +528,7 @@ public final class Dialogs {
                 android.R.id.text1,
                 items) {
             @Override
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 // standard list entry
                 final View v = super.getView(position, convertView, parent);
 

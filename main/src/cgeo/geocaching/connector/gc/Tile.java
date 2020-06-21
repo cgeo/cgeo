@@ -123,6 +123,7 @@ public class Tile {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return String.format(Locale.US, "(%d/%d), zoom=%d", tileX, tileY, zoomLevel);
     }

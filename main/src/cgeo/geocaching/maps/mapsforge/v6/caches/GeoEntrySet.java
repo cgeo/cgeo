@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
+import androidx.annotation.NonNull;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,11 +39,13 @@ class GeoEntrySet implements Set<GeoEntry> {
     }
 
     @Override
+    @NonNull
     public Object[] toArray() {
         return entries.values().toArray();
     }
 
     @Override
+    @NonNull
     public <T> T[] toArray(final T[] ts) {
         return entries.values().toArray(ts);
     }

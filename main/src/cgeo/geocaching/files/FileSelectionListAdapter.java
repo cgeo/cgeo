@@ -33,6 +33,7 @@ public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelection
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int position) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mapfile_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
@@ -46,7 +47,7 @@ public class FileSelectionListAdapter extends RecyclerView.Adapter<FileSelection
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final File file = files.get(position);
 
         final String currentFile = parentView.getCurrentFile();

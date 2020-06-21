@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import androidx.annotation.NonNull;
+
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +32,7 @@ public class ProgressInputStream extends FilterInputStream {
     }
 
     @Override
-    public int read(final byte[] buffer, final int offset, final int count) throws IOException {
+    public int read(@NonNull final byte[] buffer, final int offset, final int count) throws IOException {
         final int read = super.read(buffer, offset, count);
         progress += read;
         return read;

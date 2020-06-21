@@ -138,6 +138,7 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
+    @NonNull
     public List<Trackable> getInventory() {
         final ArrayList<Trackable> inventory = new ArrayList<>();
         inventory.add(new Trackable());

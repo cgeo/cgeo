@@ -58,6 +58,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -430,7 +432,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putDouble(SAVED_STATE_RATING, rating);
         outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
@@ -742,7 +744,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         @Override
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View rowView = convertView;
             if (rowView == null) {
                 rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);

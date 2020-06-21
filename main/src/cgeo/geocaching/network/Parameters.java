@@ -82,6 +82,7 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     }
 
     @Override
+    @NonNull
     public String toString() {
         if (percentEncoding) {
             if (isEmpty()) {

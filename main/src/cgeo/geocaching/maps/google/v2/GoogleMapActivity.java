@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 public class GoogleMapActivity extends Activity implements MapActivityImpl, FilteredActivity {
 
 
@@ -47,7 +49,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
     }
 
@@ -72,17 +74,17 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         return mapBase.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         return mapBase.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
+    public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         return mapBase.onPrepareOptionsMenu(menu);
     }
 
@@ -97,7 +99,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-    public boolean superOnCreateOptionsMenu(final Menu menu) {
+    public boolean superOnCreateOptionsMenu(@NonNull final Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -107,7 +109,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-    public boolean superOnOptionsItemSelected(final MenuItem item) {
+    public boolean superOnOptionsItemSelected(@NonNull final MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
@@ -132,7 +134,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
-    public boolean superOnPrepareOptionsMenu(final Menu menu) {
+    public boolean superOnPrepareOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onPrepareOptionsMenu(menu);
 
         menu.findItem(R.id.menu_map_rotation).setVisible(true);

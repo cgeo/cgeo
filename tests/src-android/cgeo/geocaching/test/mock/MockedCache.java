@@ -143,6 +143,7 @@ public abstract class MockedCache extends Geocache {
     }
 
     @Override
+    @NonNull
     public List<Trackable> getInventory() {
         return Collections.emptyList();
     }

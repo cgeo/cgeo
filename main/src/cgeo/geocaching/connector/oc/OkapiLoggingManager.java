@@ -63,7 +63,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
     }
 
     @Override
-    public void onLoadFinished(final Loader<OkapiClient.InstallationInformation> loader, final OkapiClient.InstallationInformation data) {
+    public void onLoadFinished(@NonNull final Loader<OkapiClient.InstallationInformation> loader, final OkapiClient.InstallationInformation data) {
         if (data == null) {
             hasLoaderError = true;
         } else {
@@ -76,7 +76,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
     }
 
     @Override
-    public void onLoaderReset(final Loader<OkapiClient.InstallationInformation> loader) {
+    public void onLoaderReset(@NonNull final Loader<OkapiClient.InstallationInformation> loader) {
         // nothing to do
     }
 

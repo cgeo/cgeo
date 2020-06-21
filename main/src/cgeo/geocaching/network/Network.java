@@ -335,6 +335,7 @@ public final class Network {
     private static class HeadersInterceptor implements Interceptor {
 
         @Override
+        @NonNull
         public Response intercept(final Interceptor.Chain chain) throws IOException {
             final Request request = chain.request().newBuilder()
                     .header("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7")
@@ -349,6 +350,7 @@ public final class Network {
     private static class LoggingInterceptor implements Interceptor {
 
         @Override
+        @NonNull
         public Response intercept(final Interceptor.Chain chain) throws IOException {
             final Request request = chain.request();
             final String reqLogStr = request.method() + " " + hidePassword(request.url().toString());

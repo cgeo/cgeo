@@ -12,6 +12,8 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +89,7 @@ public class ImagesActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    public boolean onContextItemSelected(final MenuItem item) {
+    public boolean onContextItemSelected(@NonNull final MenuItem item) {
         if (imagesList.onContextItemSelected(item)) {
             return true;
         }

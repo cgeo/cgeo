@@ -49,6 +49,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         }
 
         @Override
+        @NonNull
         public String toString() {
             return name;
         }
