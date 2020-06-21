@@ -1367,15 +1367,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private String getDisplayName(final Uri uri) {
-        Cursor cursor = null;
-        try {
-            cursor = getContentResolver().query(uri, new String[] { OpenableColumns.DISPLAY_NAME }, null, null, null);
+        try (Cursor cursor = getContentResolver().query(uri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null)) {
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close(); // no Closable Cursor below sdk 16
             }
         }
         return null;
