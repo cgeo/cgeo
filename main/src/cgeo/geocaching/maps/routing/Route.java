@@ -208,7 +208,7 @@ public class Route implements Parcelable {
      */
     private ToggleItemState toggleItemInternal(final RouteItem item) {
         if (segments == null) {
-            segments = new ArrayList<RouteSegment>();
+            segments = new ArrayList<>();
         }
         final int pos = pos(item);
         if (pos == -1) {

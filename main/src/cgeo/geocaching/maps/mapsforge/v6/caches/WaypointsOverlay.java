@@ -82,7 +82,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
      */
     public void invalidateWaypoints(final Collection<String> geocodes) {
         final Set<Geocache> baseCaches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_WAYPOINTS);
-        final Collection<String> invalidWpCodes = new ArrayList<String>();
+        final Collection<String> invalidWpCodes = new ArrayList<>();
         for (final Geocache cache : baseCaches) {
             final List<Waypoint> wl = cache.getWaypoints();
             for (final Waypoint w : wl) {

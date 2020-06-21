@@ -83,7 +83,7 @@ public class GeocacheTest extends CGeoTestCase {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
-        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        cache.setWaypoints(new ArrayList<>(), false);
         for (int i = 0; i < 2; i++) {
             cache.setPersonalNote(note);
             cache.addWaypointsFromNote();

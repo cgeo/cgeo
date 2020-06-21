@@ -2338,7 +2338,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
             pages.add(Page.IMAGES);
         }
-        return new ImmutablePair<List<? extends Page>, Integer>(pages, detailsIndex);
+        return new ImmutablePair<>(pages, detailsIndex);
     }
 
     @Override

@@ -196,7 +196,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     private static void assertWaypointsFromNote(final Geocache cache, final Geopoint[] expected, final String note) {
         cache.setPersonalNote(note);
-        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        cache.setWaypoints(new ArrayList<>(), false);
         cache.addWaypointsFromNote();
         final List<Waypoint> waypoints = cache.getWaypoints();
         assertThat(waypoints).hasSize(expected.length);
@@ -215,7 +215,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testNoteParsingWaypointTypes() {
         final Geocache cache = new Geocache();
-        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        cache.setWaypoints(new ArrayList<>(), false);
         cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" + "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" + "Get some ice cream at N 50° 40.555E 006° 58.000\"");
 
         cache.addWaypointsFromNote();

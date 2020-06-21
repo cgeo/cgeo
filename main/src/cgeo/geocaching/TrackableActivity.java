@@ -401,7 +401,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         if (CollectionUtils.isNotEmpty(trackable.getImages())) {
             pages.add(Page.IMAGES);
         }
-        return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
+        return new ImmutablePair<>(pages, 0);
     }
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {

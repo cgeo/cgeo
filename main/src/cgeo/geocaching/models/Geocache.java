@@ -152,13 +152,13 @@ public class Geocache implements IWaypoint {
     private final LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
-            return inDatabase() ? DataStore.loadAttributes(geocode) : new LinkedList<String>();
+            return inDatabase() ? DataStore.loadAttributes(geocode) : new LinkedList<>();
         }
     };
     private final LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         public List<Waypoint> call() {
-            return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<Waypoint>();
+            return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<>();
         }
     };
     private List<Image> spoilers = null;

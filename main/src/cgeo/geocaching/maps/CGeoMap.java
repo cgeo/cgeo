@@ -74,7 +74,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -423,7 +422,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putParcelable(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, mapOptions.isLiveEnabled);
-        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale == null ? new ArrayList<Parcelable>() : overlayPositionAndScale.getHistory());
+        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale == null ? new ArrayList<>() : overlayPositionAndScale.getHistory());
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
@@ -980,7 +979,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void clearTrailHistory() {
         DataStore.clearTrailHistory();
-        overlayPositionAndScale.setHistory(new ArrayList<Location>());
+        overlayPositionAndScale.setHistory(new ArrayList<>());
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
         ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
     }
