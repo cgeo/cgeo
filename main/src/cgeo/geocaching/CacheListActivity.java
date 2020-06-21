@@ -118,6 +118,7 @@ import androidx.loader.content.Loader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -864,10 +865,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void selectListMarker() {
-        final ArrayList<ListMarker> items = new ArrayList<>();
-        for (final ListMarker temp : ListMarker.values()) {
-            items.add(temp);
-        }
+        final ArrayList<ListMarker> items = new ArrayList<>(Arrays.asList(ListMarker.values()));
         final ListMarkerAdapter adapter2 = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.caches_set_listmarker);

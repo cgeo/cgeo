@@ -140,9 +140,7 @@ public class Route implements Parcelable {
             for (int i = 0; i < segments.size(); i++) {
                 final RouteSegment segment = segments.get(i);
                 if (segment.points != null) {
-                    for (int j = 0; j < segment.points.size(); j++) {
-                        route.add(segment.points.get(j));
-                    }
+                    route.addAll(segment.points);
                 }
                 distance += segment.distance;
             }
