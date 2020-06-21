@@ -160,7 +160,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     @Override
     public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
-        this.route = new ArrayList<LatLng>();
+        this.route = new ArrayList<>();
         for (int i = 0; i < route.size(); i++) {
             this.route.add(new LatLng(route.get(i).getLatitude(), route.get(i).getLongitude()));
         }

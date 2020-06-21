@@ -277,7 +277,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
                 .build();
 
         final String userUnknown = CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.user_unknown);
-        assertThat(GeokretyParser.getLastSpottedUsername(new ArrayList<LogEntry>())).isEqualTo(userUnknown);
+        assertThat(GeokretyParser.getLastSpottedUsername(new ArrayList<>())).isEqualTo(userUnknown);
 
         final List<LogEntry> logsEntries1 = new ArrayList<>();
         logsEntries1.add(note);

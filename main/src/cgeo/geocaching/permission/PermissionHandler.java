@@ -29,7 +29,7 @@ public class PermissionHandler {
         if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(activity, locationPermissions[1]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
-                callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
+                callbackRegistry.put(pk, new ArrayList<>());
                 ActivityCompat.requestPermissions(activity, locationPermissions, callback.getRequestCode());
             }
 
@@ -55,7 +55,7 @@ public class PermissionHandler {
 
         if (ContextCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
-                callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
+                callbackRegistry.put(pk, new ArrayList<>());
                 ActivityCompat.requestPermissions(activity, storagePermission, requestContext.getRequestCode());
             }
 

@@ -356,7 +356,7 @@ public class Trackable implements ILogable {
     }
 
     public void setLogs(final List<LogEntry> logs) {
-        this.logs = logs != null ? logs : new ArrayList<LogEntry>();
+        this.logs = logs != null ? logs : new ArrayList<>();
     }
 
     @Override

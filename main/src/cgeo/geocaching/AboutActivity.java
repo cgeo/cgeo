@@ -323,7 +323,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     @Override
     protected final Pair<List<? extends Page>, Integer> getOrderedPages() {
         final List<Page> pages = Arrays.asList(Page.values());
-        return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
+        return new ImmutablePair<>(pages, 0);
     }
 
     public static void showChangeLog(final Activity fromActivity) {

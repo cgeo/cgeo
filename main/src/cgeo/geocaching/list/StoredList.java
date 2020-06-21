@@ -158,7 +158,7 @@ public final class StoredList extends AbstractList {
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {
-            final List<AbstractList> lists = new ArrayList<AbstractList>(getSortedLists(selectedLists));
+            final List<AbstractList> lists = new ArrayList<>(getSortedLists(selectedLists));
 
             if (exceptListIds.contains(STANDARD_LIST_ID)) {
                 lists.remove(DataStore.getList(STANDARD_LIST_ID));
