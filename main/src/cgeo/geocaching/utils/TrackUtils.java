@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectTrackFileActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.GPXTrackImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -127,7 +128,7 @@ public class TrackUtils {
      * @param data additional intent data delivered
      * @return true, if successfully selected track file / false else
      */
-    public static boolean onActivityResult(final int requestCode, final int resultCode, final Intent data, @Nullable final TrackUpdaterMulti updateTracks) {
+    public static boolean onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent data, @Nullable final TrackUpdaterMulti updateTracks) {
         if (requestCode == REQUEST_CODE_GET_TRACKFILE && resultCode == RESULT_OK && data.hasExtra(Intents.EXTRA_GPX_FILE)) {
             final String filename = data.getStringExtra(Intents.EXTRA_GPX_FILE);
             if (null != filename) {
@@ -135,7 +136,7 @@ public class TrackUtils {
                 if (!file.isDirectory()) {
                     Settings.setTrackFile(filename);
                     if (null != updateTracks) {
-                        loadTracks(updateTracks);
+                        loadTracks(activity, updateTracks);
                     }
                 }
             }
@@ -144,10 +145,11 @@ public class TrackUtils {
         return false;
     }
 
-    public static void loadTracks(final TrackUpdaterMulti updateTracks) {
+    public static void loadTracks(final Activity activity, final TrackUpdaterMulti updateTracks) {
         final String trackfile = Settings.getTrackFile();
         if (null != trackfile) {
-            GPXTrackImporter.doImport(new File(trackfile), updateTracks);
+            GPXTrackImporter.doImport(activity, new File(trackfile), updateTracks);
         }
+        ActivityMixin.invalidateOptionsMenu(activity);
     }
 }

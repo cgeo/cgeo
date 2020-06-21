@@ -802,7 +802,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            TrackUtils.loadTracks(this::setTracks);
+            TrackUtils.loadTracks(this, this::setTracks);
         } else if (null != trackLayer) {
             trackLayer.updateTrack(null != tracks && tracks.getSize() > 0 ? tracks.get(0) : null);
         }
@@ -1747,7 +1747,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 caches.invalidate(changedGeocodes);
             }
         }
-        TrackUtils.onActivityResult(requestCode, resultCode, data, this::setTracks);
+        TrackUtils.onActivityResult(this, requestCode, resultCode, data, this::setTracks);
     }
 
     private void setTracks(final TrackUtils.Tracks tracks) {

@@ -1,13 +1,19 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TrackUtils;
+
+import android.content.Context;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -18,10 +24,12 @@ public class GPXTrackImporter {
     private GPXTrackImporter() {
     }
 
-    public static void doImport(final File file, final TrackUtils.TrackUpdaterMulti callback) {
-        Schedulers.io().createWorker().schedule(() -> {
+    public static void doImport(final Context context, final File file, final TrackUtils.TrackUpdaterMulti callback) {
+        final AtomicBoolean success = new AtomicBoolean(false);
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
                 final TrackUtils.Tracks value = doInBackground(file);
+                success.set(null != value);
                 AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                     try {
                         callback.updateTracks(value);
@@ -32,7 +40,7 @@ public class GPXTrackImporter {
             } catch (final Exception e) {
                 //
             }
-        });
+        }, () -> Toast.makeText(context, success.get() ? R.string.load_track_success : R.string.load_track_error, Toast.LENGTH_SHORT).show());
     }
 
     private static TrackUtils.Tracks doInBackground(final File file) {

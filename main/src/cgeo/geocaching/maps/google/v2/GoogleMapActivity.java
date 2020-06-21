@@ -159,7 +159,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        TrackUtils.onActivityResult(requestCode, resultCode, data, mapBase::setTracks);
+        TrackUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::setTracks);
     }
 
     @Override
