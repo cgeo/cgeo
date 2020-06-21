@@ -752,12 +752,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 return true;
             case R.id.menu_clear_goto_history:
-                Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> {
-                    AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
-                        cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
-                        notifyDataSetChanged();
-                    });
-                });
+                Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
+                    cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+                    notifyDataSetChanged();
+                }));
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);
@@ -1869,28 +1867,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view.setAdapter(adapter);
 
             final Button addWaypointCurrent = header.findViewById(R.id.add_waypoint_currentlocation);
-            addWaypointCurrent.setOnClickListener(v -> {
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        ensureSaved();
-                        final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                        newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
-                        newWaypoint.setGeocode(cache.getGeocode());
-                        cache.addOrChangeWaypoint(newWaypoint, true);
-                        addWaypointAndSort(sortedWaypoints, newWaypoint);
-                        return true;
-                    }
+            addWaypointCurrent.setOnClickListener(v -> new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(final Void... params) {
+                    ensureSaved();
+                    final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                    newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                    newWaypoint.setGeocode(cache.getGeocode());
+                    cache.addOrChangeWaypoint(newWaypoint, true);
+                    addWaypointAndSort(sortedWaypoints, newWaypoint);
+                    return true;
+                }
 
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            adapter.notifyDataSetChanged();
-                            ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
-                        }
+                @Override
+                protected void onPostExecute(final Boolean result) {
+                    if (result) {
+                        adapter.notifyDataSetChanged();
+                        ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
                     }
-                }.execute();
-            });
+                }
+            }.execute());
 
             // read waypoint from clipboard
             final Button addWaypointFromClipboard = header.findViewById(R.id.add_waypoint_fromclipboard);

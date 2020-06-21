@@ -101,9 +101,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
             final AlertDialog dialog = builder.setTitle(R.string.receivemapfile_intenttitle)
                     .setCancelable(true)
                     .setMessage(R.string.receivemapfile_alreadyexists)
-                    .setPositiveButton(R.string.receivemapfile_option_overwrite, (dialog3, button3) -> {
-                        new CopyTask(this).execute();
-                    })
+                    .setPositiveButton(R.string.receivemapfile_option_overwrite, (dialog3, button3) -> new CopyTask(this).execute())
                     .setNeutralButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
                         createRandomlyNamedFile();
                         new CopyTask(this).execute();
