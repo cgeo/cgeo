@@ -629,7 +629,16 @@
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro geocache (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
     <string name="init_maptrail">Zobrazovat trasu cesty</string>
     <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
-    <string name="init_trailcolor">Barva stopy</string>
+    <string name="init_trailcolor">Barva čáry historie trasy</string>
+    <string name="init_trailwidth">Šířka čáry historie trasy</string>
+    <string name="init_directioncolor">Barva směrové čáry</string>
+    <string name="init_directionwidth">Šířka směrové čáry</string>
+    <string name="init_routecolor">Barva čáry trasy</string>
+    <string name="init_routewidth">Šířka čáry trasy</string>
+    <string name="init_trackcolor">Barva čáry stopy</string>
+    <string name="init_trackwidth">Šířka čáry stopy</string>
+    <string name="init_circlecolor">Barva obrysu kruhu</string>
+    <string name="init_circlefillcolor">Barva výplně kruhu</string>
     <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
     <string name="init_include_found_status">Zahrnout stav „nalezeno“</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
@@ -704,6 +713,7 @@
     <string name="feature_search_finder">Hledat podle nálezce</string>
     <string name="feature_favorite">Přidání keše do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
+    <string name="init_maplines_title">Přizpůsobení čar na mapě</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Staré Mapsforge V3</string>
     <string name="init_mfold_api_description">Ve výchozím nastavení používáme novou verzi mapy Mapsforge, pokud si necháte ujít některé funkce nebo se setkáte s problémy, které se můžete vrátit zpět do staré verze.</string>
@@ -768,15 +778,15 @@
     <string name="err_auth_geokrety_unknown">%1$s hlásí: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Jedna keš</item>
+        <item quantity="one">%1$d keš</item>
         <item quantity="few">%1$d keše</item>
         <item quantity="many">%1$d keší</item>
         <item quantity="other">%1$d keší</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">zbývá jeden den</item>
-        <item quantity="few">zbývají %1$d dny</item>
+        <item quantity="one">zbývá %1$d den</item>
+        <item quantity="few">zbývá %1$d dnů</item>
         <item quantity="many">zbývá %1$d dnů</item>
         <item quantity="other">zbývá %1$d dnů</item>
     </plurals>
@@ -847,7 +857,7 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_waypoints">Body trasy</string>
     <plurals name="waypoints">
-        <item quantity="one">1 bod trasy</item>
+        <item quantity="one">%d bod trasy</item>
         <item quantity="few">%d body trasy</item>
         <item quantity="many">%d bodů trasy</item>
         <item quantity="other">%d bodů trasy</item>
@@ -1098,6 +1108,9 @@
     <string name="map_hidewp_visited">Skrýt navštívené waypointy</string>
     <string name="map_hide_track">Skrýt trasu</string>
     <string name="map_load_track">Načíst trasu</string>
+    <string name="load_track_success">Trasa načtena</string>
+    <string name="load_track_error">Chyba při načítání trasy</string>
+    <string name="map_unload_track">Uvolnit trasu</string>
     <string name="init_hidewp">Skrýt waypointy</string>
     <string name="init_summary_hidewp_original">Skrýt původní waypointy na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
@@ -1238,10 +1251,10 @@
     <string name="export_persnotes">Osobní poznámky</string>
     <string name="export_persnotes_uploading">Nahrávání osobní poznámky %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Poznámka byla úspěšně nahrána</item>
-        <item quantity="few">Poznámky (%1$d) byly úspěšně nahrány</item>
-        <item quantity="many">Tyto poznámky %1$d byly úspěšně nahrány</item>
-        <item quantity="other">Poznámky (%1$d) byly úspěšně nahrány</item>
+        <item quantity="one">%1$d poznámka byla úspěšně nahrána</item>
+        <item quantity="few">%1$d poznámky byly úspěšně nahrány</item>
+        <item quantity="many">%1$d poznámky byly úspěšně nahrány</item>
+        <item quantity="other">%1$d poznámky byly úspěšně nahrány</item>
     </plurals>
     <string name="export_modifiedcoords">Upravené souřadnice</string>
     <string name="export_modifiedcoords_uploading">Nahrávání %1$d</string>
@@ -1626,6 +1639,9 @@
     <string name="color_red">Červená</string>
     <string name="color_turquoise">Tyrkysová</string>
     <string name="color_black">Černá</string>
+    <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
+    <string name="preference_colorpicker_select_color">Zvolit barvu</string>
+    <string name="preference_colorpicker_select_opaqueness">Zvolit neprůhlednost</string>
     <!-- number input -->
     <string name="number_input_title">Zadejte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
@@ -1650,6 +1666,7 @@
     <string name="unit_mi">mil</string>
     <!-- switch settings -->
     <string name="switch_off">Vypnuto</string>
+    <string name="switch_on">Zapnuto</string>
     <string name="switch_manual">Ručně</string>
     <string name="switch_auto">Automatický</string>
     <!-- view settings -->
@@ -1660,7 +1677,7 @@
     <string name="edit_setting_error_unknown_type">Neznámý typ nastavení - úpravy nejsou podporovány</string>
     <string name="edit_setting_error_invalid_data">Byla zadána neplatná data \"%s\". Hodnota nastavení se nezměnila.</string>
     <string name="activate_editmode_title">Aktivovat režim úprav</string>
-    <string name="activate_editmode_warning">Vstupujete do nebezpečné oblasti!\n\nZměna nastavení může přímo zmást c:geo, může zabránit dalšímu spuštění programu nebo by mohlo dojít k explozi vašeho telefonu!\n\nJste si jisti, že chcete pokračovat na vlastní riziko?</string>
+    <string name="activate_editmode_warning">Vstupujete do nebezpečné oblasti!\n\nZměna nastavení může přímo zmást c:geo nebo může zabránit dalšímu spuštění programu, buďte opatrní!\n\nJste si jisti, že chcete pokračovat na vlastní riziko?</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Lokální správce souborů c:geo</string>
     <string name="localfile_title">Otevřít místní soubor</string>
@@ -1678,4 +1695,9 @@
     <!-- Download map preference -->
     <string name="downloadmap_title">Stáhnout základní offline mapy</string>
     <string name="downloadmap_info">Budete přesměrováni na web ke stažení základní offline mapy (bez podpory motivů).\n\nVyberte soubor .map pro vaši oblast a klepnutím na něj soubor stáhněte.\n\nPo dokončení stahování klepněte na stažený soubor a nastavte tuto mapu jako aktuální mapu pro c: geo</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Historie trasy</string>
+    <string name="export_trailhistory_title">Exportovat historii trasy</string>
+    <string name="export_trailhistory_success">Historie trasy exportována do \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Po exportu vymazat historii trasy</string>
 </resources>
