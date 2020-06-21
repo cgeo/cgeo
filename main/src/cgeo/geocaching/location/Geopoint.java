@@ -10,6 +10,8 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 import net.sf.geographiclib.Geodesic;
 import net.sf.geographiclib.GeodesicData;
 import net.sf.geographiclib.GeodesicMask;
@@ -545,7 +547,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *         <tt>false</tt> otherwise
      */
     public static boolean equals(@Nullable final Geopoint p1, @Nullable final Geopoint p2) {
-        return p1 == null ? p2 == null : p1.equals(p2);
+        return Objects.equals(p1, p2);
     }
 
     /**

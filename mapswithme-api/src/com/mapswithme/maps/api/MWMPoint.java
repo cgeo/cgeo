@@ -23,6 +23,7 @@
 package com.mapswithme.maps.api;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * POI wrapper object.
@@ -129,7 +130,7 @@ public final class MWMPoint implements Serializable
     if (Double.doubleToLongBits(mLon) != Double.doubleToLongBits(other.mLon))
       return false;
 
-    return mName == null ? other.mName == null : mName.equals(other.mName);
+    return Objects.equals(mName, other.mName);
   }
 
   /**
