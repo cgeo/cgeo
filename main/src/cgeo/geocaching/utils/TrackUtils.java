@@ -11,6 +11,7 @@ import cgeo.geocaching.settings.Settings;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.widget.Toast;
 import static android.app.Activity.RESULT_OK;
 
 import androidx.annotation.Nullable;
@@ -151,5 +152,15 @@ public class TrackUtils {
             GPXTrackImporter.doImport(activity, new File(trackfile), updateTracks);
         }
         ActivityMixin.invalidateOptionsMenu(activity);
+    }
+
+    public static void showTrackInfo(final Activity activity, final Tracks tracks) {
+        if (null != tracks && tracks.getSize() > 0) {
+            final Track track = tracks.get(0);
+            if (null != track) {
+                Toast.makeText(activity, activity.getResources().getQuantityString(R.plurals.load_track_success, track.getSize(), track.getSize()), Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }

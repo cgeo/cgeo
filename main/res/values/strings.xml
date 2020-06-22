@@ -1185,7 +1185,14 @@
     <string name="map_hidewp_visited">Hide visited waypoints</string>
     <string name="map_hide_track">Hide track</string>
     <string name="map_load_track">Load track</string>
-    <string name="load_track_success">Track loaded</string>
+    <plurals name="load_track_success">
+        <item quantity="zero">Track loaded (%d trackpoints)</item>
+        <item quantity="one">Track loaded (%d trackpoint)</item>
+        <item quantity="two">Track loaded (%d trackpoints)</item>
+        <item quantity="few">Track loaded (%d trackpoints)</item>
+        <item quantity="many">Track loaded (%d trackpoints)</item>
+        <item quantity="other">Track loaded (%d trackpoints)</item>
+    </plurals>
     <string name="load_track_error">Error loading track</string>
     <string name="map_unload_track">Unload track</string>
     <string name="init_hidewp">Hide waypoints</string>

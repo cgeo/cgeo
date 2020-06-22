@@ -1753,6 +1753,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private void setTracks(final TrackUtils.Tracks tracks) {
         this.tracks = tracks;
         resumeTrack(null == tracks);
+        TrackUtils.showTrackInfo(this, tracks);
     }
 
     private void updateTrackHideStatus() {
