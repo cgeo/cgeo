@@ -629,10 +629,10 @@
     <string name="init_summary_maptrail">Zeige einen Track des Standortverlaufes auf der Karte</string>
     <string name="init_trailcolor">Farbe der Standortverlaufs-Linie</string>
     <string name="init_trailwidth">Breite der Standortverlaufs-Linie</string>
-    <string name="init_directioncolor">Farbe für Richtungslinie</string>
+    <string name="init_directioncolor">Farbe der Richtungslinie</string>
     <string name="init_directionwidth">Breite der Richtungslinie</string>
-    <string name="init_routecolor">Farbe der Routinglinie</string>
-    <string name="init_routewidth">Breite der Routinglinie</string>
+    <string name="init_routecolor">Farbe der Routenlinie</string>
+    <string name="init_routewidth">Breite der Routenlinie</string>
     <string name="init_trackcolor">Farbe der Tracklinie</string>
     <string name="init_trackwidth">Breite der Tracklinie</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
@@ -1092,6 +1092,9 @@
     <string name="map_hidewp_visited">Besuchte Wegpunkte verbergen</string>
     <string name="map_hide_track">Track ausblenden</string>
     <string name="map_load_track">Track laden</string>
+    <string name="load_track_success">Track geladen</string>
+    <string name="load_track_error">Fehler beim Laden des Tracks</string>
+    <string name="map_unload_track">Track entfernen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
@@ -1651,7 +1654,7 @@
     <string name="receivemapfile_cancelled">Kartendatei-Empfang abgebrochen</string>
     <!-- Download map preference -->
     <string name="downloadmap_title">Grundlegende Offlinekarte herunterladen</string>
-    <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (oder Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
+    <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (ohne Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
     <!-- history trail export -->
     <string name="trailhistory">Standortverlaufs-Track</string>
     <string name="export_trailhistory_title">Standorfverlaufs-Track exportieren</string>
