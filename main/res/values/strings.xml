@@ -668,8 +668,8 @@
     <string name="init_trailwidth">History track line width</string>
     <string name="init_directioncolor">Direction line color</string>
     <string name="init_directionwidth">Direction line width</string>
-    <string name="init_routecolor">Route line color</string>
-    <string name="init_routewidth">Route line width</string>
+    <string name="init_routecolor">Individual route line color</string>
+    <string name="init_routewidth">Individual route line width</string>
     <string name="init_trackcolor">Individual track line color</string>
     <string name="init_trackwidth">Individual track line width</string>
     <string name="init_circlecolor">Circle line color</string>
