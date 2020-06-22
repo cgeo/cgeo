@@ -105,22 +105,27 @@ public class TrailHistoryExport {
                 gpx.setPrefix(PREFIX_XSI, NS_XSI);
 
                 gpx.startTag(NS_GPX, "gpx");
-                gpx.attribute("", "version", "1.0");
+                gpx.attribute("", "version", "1.1");
                 gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
                 gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
 
+                final String timeInfo = CalendarUtils.formatDateTime("yyyy-MM-dd") + "T" + CalendarUtils.formatDateTime("hh:mm:ss") + "Z";
+
                     gpx.startTag(NS_GPX, "metadata");
                     XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail");
-                    XmlUtils.simpleText(gpx, NS_GPX, "time", CalendarUtils.formatDateTime("yyyy-MM-dd hh-mm-ss"));
+                    XmlUtils.simpleText(gpx, NS_GPX, "time", timeInfo);
                     gpx.endTag(NS_GPX, "metadata");
 
                     gpx.startTag(NS_GPX, "trk");
-                        XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + CalendarUtils.formatDateTime("yyyy-MM-dd hh-mm-ss"));
+                        XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + timeInfo);
                         gpx.startTag(NS_GPX, "trkseg");
                             for (Location loc : trail) {
                                 gpx.startTag(null, "trkpt");
                                 gpx.attribute(null, "lat", String.valueOf(loc.getLatitude()));
                                 gpx.attribute(null, "lon", String.valueOf(loc.getLongitude()));
+                                // write additional dummy info to make track file importable by osm.org
+                                XmlUtils.simpleText(gpx, null, "ele", "0.0");
+                                XmlUtils.simpleText(gpx, null, "time", timeInfo);
                                 gpx.endTag(null, "trkpt");
                                 countExported++;
                                 publishProgress(countExported);
