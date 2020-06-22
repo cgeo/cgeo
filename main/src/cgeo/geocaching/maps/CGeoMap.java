@@ -971,6 +971,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void setTracks(final TrackUtils.Tracks tracks) {
         this.tracks = tracks;
         resumeTrack(null == tracks);
+        TrackUtils.showTrackInfo(activity, tracks);
     }
 
     private void updateTrackHideStatus() {

@@ -40,7 +40,11 @@ public class GPXTrackImporter {
             } catch (final Exception e) {
                 //
             }
-        }, () -> Toast.makeText(context, success.get() ? R.string.load_track_success : R.string.load_track_error, Toast.LENGTH_SHORT).show());
+        }, () -> {
+            if (!success.get()) {
+                Toast.makeText(context, R.string.load_track_error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private static TrackUtils.Tracks doInBackground(final File file) {
