@@ -79,7 +79,7 @@ public class MapLineUtils {
     // helper methods
 
     private static float getWidth(final int prefKeyId, final int defaultValueKeyId) {
-        return (Settings.getMapLineValue(prefKeyId, defaultValueKeyId) / 5.0f + 1.0f) * DisplayUtils.getDisplayDensity();
+        return (Settings.getMapLineValue(prefKeyId, defaultValueKeyId) / 2.0f + 1.0f) * DisplayUtils.getDisplayDensity();
     }
 
 }
