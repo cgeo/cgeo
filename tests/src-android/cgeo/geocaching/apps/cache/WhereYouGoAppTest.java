@@ -6,10 +6,19 @@ import junit.framework.TestCase;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class WhereYouGoAppTest extends TestCase {
+
+    // URL with "details.aspx"
     public static void testGetWhereIGoUrl() throws Exception {
         final Geocache cache = new Geocache();
         cache.setDescription("<p style=\"max-width:670px;\"><a href=\"http://www.wherigo.com/cartridge/details.aspx?CGUID=c4577c31-09e9-44f0-ae48-83737e57adbd\"><img class=\"InsideTable\"");
         assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo("http://www.wherigo.com/cartridge/details.aspx?CGUID=c4577c31-09e9-44f0-ae48-83737e57adbd");
+    }
+
+    // from GC461KF (URL with "download.aspx")
+    public static void testGetWhereIGoUrlDownload() throws Exception {
+        final Geocache cache = new Geocache();
+        cache.setDescription("<a href=\"http://www.wherigo.com/cartridge/download.aspx?CGUID=ec53c2bc-98dc-4d5f-bf9b-0709931d53bc\">Download Cartridge</a><br>");
+        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo("http://www.wherigo.com/cartridge/download.aspx?CGUID=ec53c2bc-98dc-4d5f-bf9b-0709931d53bc");
     }
 
     public static void testGetWhereIGoUrlMultipleURLs() throws Exception {
