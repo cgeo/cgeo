@@ -1092,7 +1092,10 @@
     <string name="map_hidewp_visited">Besuchte Wegpunkte verbergen</string>
     <string name="map_hide_track">Track ausblenden</string>
     <string name="map_load_track">Track laden</string>
-    <string name="load_track_success">Track geladen</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Track geladen (%d Trackpunkt)</item>
+        <item quantity="other">Track geladen (%d Trackpunkte)</item>
+    </plurals>
     <string name="load_track_error">Fehler beim Laden des Tracks</string>
     <string name="map_unload_track">Track entfernen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
