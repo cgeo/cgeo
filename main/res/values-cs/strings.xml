@@ -1108,7 +1108,12 @@
     <string name="map_hidewp_visited">Skrýt navštívené waypointy</string>
     <string name="map_hide_track">Skrýt trasu</string>
     <string name="map_load_track">Načíst trasu</string>
-    <string name="load_track_success">Trasa načtena</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Trasa načtena (%d trasový bod)</item>
+        <item quantity="few">Trasa načtena (%d trasové body)</item>
+        <item quantity="many">Trasa načtena (%d trasových bodů)</item>
+        <item quantity="other">Trasa načtena (%d trasových bodů)</item>
+    </plurals>
     <string name="load_track_error">Chyba při načítání trasy</string>
     <string name="map_unload_track">Uvolnit trasu</string>
     <string name="init_hidewp">Skrýt waypointy</string>
