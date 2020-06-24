@@ -1093,7 +1093,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
     <string name="map_hide_track">Ocultar percurso</string>
     <string name="map_load_track">Carregar percurso</string>
-    <string name="load_track_success">Percurso carregado</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Percurso carregado (%d ponto do percurso)</item>
+        <item quantity="other">Percurso carregado (%d pontos do percurso)</item>
+    </plurals>
     <string name="load_track_error">Erro ao carregar o percurso</string>
     <string name="map_unload_track">Anular carregamento do percurso</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
