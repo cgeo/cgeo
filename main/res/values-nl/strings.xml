@@ -776,13 +776,13 @@
     <string name="err_auth_geokrety_unknown">%1$s antwoord: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Een cache</item>
-        <item quantity="other">%1$d Caches</item>
+        <item quantity="one">%1$d cache</item>
+        <item quantity="other">%1$d caches</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">nog 1 dag over</item>
-        <item quantity="other">nog %1$d dagen over</item>
+        <item quantity="one">%1$d dag resterend</item>
+        <item quantity="other">%1$d dagen resterend</item>
     </plurals>
     <string name="last_day_available">laatste dag beschikbaar</string>
     <string name="cache_offline">Offline</string>
@@ -843,8 +843,8 @@
     <string name="cache_images">Afbeeldingen</string>
     <string name="cache_waypoints">Waypoints</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Waypoint</item>
-        <item quantity="other">%d Waypoints</item>
+        <item quantity="one">%d waypoint</item>
+        <item quantity="other">%d waypoints</item>
     </plurals>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
@@ -1092,6 +1092,12 @@
     <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
     <string name="map_hide_track">Spoor verbergen</string>
     <string name="map_load_track">Spoor laden</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Spoor geladen (%d spoorpunt)</item>
+        <item quantity="other">Spoor geladen (%d spoorpunten)</item>
+    </plurals>
+    <string name="load_track_error">Fout bij laden van spoor</string>
+    <string name="map_unload_track">Spoor ontladen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
@@ -1232,8 +1238,8 @@
     <string name="export_persnotes">Persoonlijke notities</string>
     <string name="export_persnotes_uploading">Uploaden van persoonlijke notitie %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Één notitie succesvol ge-upload</item>
-        <item quantity="other">%1$d notities succesvol ge-upload</item>
+        <item quantity="one">%1$d notitie succesvol geüpload</item>
+        <item quantity="other">%1$d notities succesvol geüpload</item>
     </plurals>
     <string name="export_modifiedcoords">Aangepaste coördinaten</string>
     <string name="export_modifiedcoords_uploading">Uploaden %1$d</string>
