@@ -23,7 +23,7 @@ abstract class AbstractSelectFileActivity extends AbstractFileListActivity<FileS
 
     protected static final int REQUEST_DIRECTORY = 1;
 
-    @BindView(R.id.select_dir) protected Button selectDirectory;
+    @BindView(R.id.select_dir) protected Button selectElement;
 
     protected String filename;
     protected String defaultFilename;
@@ -50,23 +50,22 @@ abstract class AbstractSelectFileActivity extends AbstractFileListActivity<FileS
 
         filename = defaultFilename;
 
-        selectDirectory.setOnClickListener(v -> {
+        selectElement.setOnClickListener(v -> {
             try {
                 final Intent dirChooser = new Intent(selectDir ? FileManagerIntents.ACTION_PICK_DIRECTORY : FileManagerIntents.ACTION_PICK_FILE);
-                dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
-                        getString(selectDir ? R.string.simple_dir_chooser_title : R.string.simple_file_chooser_title));
-                dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
-                        getString(android.R.string.ok));
+                dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE, getString(selectDir ? R.string.simple_dir_chooser_title : R.string.simple_file_chooser_title));
+                dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, getString(android.R.string.ok));
                 startActivityForResult(dirChooser, REQUEST_DIRECTORY);
             } catch (final RuntimeException ignored) {
-                // OI file manager not available
+                // No file manager supporting open intents available - use our own SimpleDirChooser then
                 final Intent dirChooser = new Intent(context, SimpleDirChooser.class);
                 dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getExternalPublicCgeoDirectory().getAbsolutePath());
+                dirChooser.putExtra(Intents.EXTRA_SELECTDIR, selectDir);
                 startActivityForResult(dirChooser, REQUEST_DIRECTORY);
             }
         });
-        selectDirectory.setText(getString(selectDir ? R.string.simple_dir_chooser_title : R.string.simple_file_chooser_title));
-        selectDirectory.setVisibility(View.VISIBLE);
+        selectElement.setText(getString(selectDir ? R.string.simple_dir_chooser_title : R.string.simple_file_chooser_title));
+        selectElement.setVisibility(View.VISIBLE);
     }
 
     @Override
