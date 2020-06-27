@@ -41,7 +41,7 @@ public class CachesBundle {
     private static final int INITIAL_ENTRY_COUNT = 200;
     private final Set<GeoEntry> geoEntries = Collections.synchronizedSet(new GeoEntrySet(INITIAL_ENTRY_COUNT));
 
-    private WaypointsOverlay wpOverlay;
+    private final WaypointsOverlay wpOverlay;
     private AbstractCachesOverlay baseOverlay;
     private AbstractCachesOverlay storedOverlay;
     private LiveCachesOverlay liveOverlay;

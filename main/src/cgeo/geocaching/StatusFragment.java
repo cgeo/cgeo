@@ -30,7 +30,7 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.status_message)
     protected TextView statusMessage;
 
-    private CompositeDisposable statusSubscription = new CompositeDisposable();
+    private final CompositeDisposable statusSubscription = new CompositeDisposable();
     private Unbinder unbinder;
 
     @Override

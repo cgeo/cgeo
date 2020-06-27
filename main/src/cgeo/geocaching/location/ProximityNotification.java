@@ -45,8 +45,8 @@ public class ProximityNotification implements Parcelable {
     // config options - get initialized in constructor
     protected int distanceFar;
     protected int distanceNear;
-    protected boolean twoDistances;
-    protected boolean repeatedSignal;
+    protected final boolean twoDistances;
+    protected final boolean repeatedSignal;
 
     // config options for types of notification - see resetValues() and setTextNotifications()
     protected boolean useToneNotifications = false;

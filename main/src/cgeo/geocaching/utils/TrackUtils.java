@@ -27,7 +27,7 @@ public class TrackUtils {
 
     public static class Track {
         private String trackName;
-        private ArrayList<Geopoint> track;
+        private final ArrayList<Geopoint> track;
 
         public Track() {
             trackName = "";
@@ -56,7 +56,7 @@ public class TrackUtils {
     }
 
     public static class Tracks {
-        private ArrayList<Track> tracks;
+        private final ArrayList<Track> tracks;
 
         public Tracks() {
             tracks = new ArrayList<>();

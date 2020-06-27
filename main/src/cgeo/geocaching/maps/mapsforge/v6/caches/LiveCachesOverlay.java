@@ -29,7 +29,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
     private final Disposable timer;
     private boolean downloading = false;
-    public long loadThreadRun = -1;
+    public final long loadThreadRun = -1;
 
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;

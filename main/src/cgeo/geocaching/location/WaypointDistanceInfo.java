@@ -1,8 +1,8 @@
 package cgeo.geocaching.location;
 
 public class WaypointDistanceInfo {
-    public String name;
-    public int meters;
+    public final String name;
+    public final int meters;
 
     public WaypointDistanceInfo (final String name, final int meters) {
         this.name = name;

@@ -74,7 +74,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private boolean showCircles = false;
     private boolean canDisableAutoRotate = false;
 
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;

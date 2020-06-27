@@ -27,7 +27,7 @@ public class CountryFilterFactory implements IFilterFactory {
     }
 
     static class CountryFilter extends AbstractFilter {
-        private @NonNull String country;
+        private @NonNull final String country;
 
         public static final Creator<CountryFilter> CREATOR = new Creator<CountryFilter>() {
 

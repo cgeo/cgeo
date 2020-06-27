@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 
 public class CacheMarker {
 
-    private int hashCode;
+    private final int hashCode;
     protected final Drawable drawable;
 
     public CacheMarker(final int hashCode, final Drawable drawable) {

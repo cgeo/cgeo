@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PermissionHandler {
 
-    private static HashMap<PermissionKey, List<PermissionGrantedCallback>> callbackRegistry = new HashMap<>();
+    private static final HashMap<PermissionKey, List<PermissionGrantedCallback>> callbackRegistry = new HashMap<>();
 
     private PermissionHandler() {
         // Utility class should not be instantiated externally
@@ -102,7 +102,7 @@ public class PermissionHandler {
     }
 
     private static class PermissionKey {
-        private String[] permissions;
+        private final String[] permissions;
 
         private PermissionKey(final String[] permissions) {
             this.permissions = permissions;

@@ -26,7 +26,7 @@ abstract class AbstractSelectFileActivity extends AbstractFileListActivity<FileS
     @BindView(R.id.select_dir) protected Button selectElement;
 
     protected String filename;
-    protected String defaultFilename;
+    protected final String defaultFilename;
     private String outIntent = "";
     private boolean selectDir = false;
     private Context context = null;
