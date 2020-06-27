@@ -151,7 +151,7 @@ public class GeocacheTest extends CGeoTestCase {
         download.setType(CacheType.MULTI);
         download.setCoords(new Geopoint(41.0, 9.0));
         download.setDescription("Test2");
-        download.setAttributes(Collections.<String>emptyList());
+        download.setAttributes(Collections.emptyList());
 
         download.gatherMissingFrom(stored);
 

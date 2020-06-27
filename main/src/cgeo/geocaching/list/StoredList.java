@@ -81,7 +81,7 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> currentListIds, final boolean fastStoreOnLastSelection) {
-            promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.<Integer>emptySet(), currentListIds, ListNameMemento.EMPTY, fastStoreOnLastSelection);
+            promptForMultiListSelection(titleId, runAfterwards, onlyConcreteLists, Collections.emptySet(), currentListIds, ListNameMemento.EMPTY, fastStoreOnLastSelection);
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, @NonNull final ListNameMemento listNameMemento) {
@@ -129,7 +129,7 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
-            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.<Integer>emptySet());
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.emptySet());
 
             final List<CharSequence> listsTitle = new ArrayList<>();
             for (final AbstractList list : lists) {
@@ -154,7 +154,7 @@ public final class StoredList extends AbstractList {
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
-            return getMenuLists(onlyConcreteLists, Collections.singleton(exceptListId), Collections.<Integer>emptySet());
+            return getMenuLists(onlyConcreteLists, Collections.singleton(exceptListId), Collections.emptySet());
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {

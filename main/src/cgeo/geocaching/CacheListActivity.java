@@ -1398,7 +1398,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (Settings.getChooseList() && type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    selectedListIds -> refreshStoredInternal(caches, selectedListIds), true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento, false);
+                    selectedListIds -> refreshStoredInternal(caches, selectedListIds), true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.emptySet(), listNameMemento, false);
         } else {
             final Set<Integer> additionalListIds = new HashSet<>();
             if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {

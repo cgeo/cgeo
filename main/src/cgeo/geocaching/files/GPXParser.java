@@ -888,8 +888,8 @@ abstract class GPXParser extends FileParser {
         final Geocache newCache = new Geocache();
 
         newCache.setReliableLatLon(true); // always assume correct coordinates, when importing from file instead of website
-        newCache.setAttributes(Collections.<String> emptyList()); // override the lazy initialized list
-        newCache.setWaypoints(Collections.<Waypoint> emptyList(), false); // override the lazy initialized list
+        newCache.setAttributes(Collections.emptyList()); // override the lazy initialized list
+        newCache.setWaypoints(Collections.emptyList(), false); // override the lazy initialized list
 
         return newCache;
     }

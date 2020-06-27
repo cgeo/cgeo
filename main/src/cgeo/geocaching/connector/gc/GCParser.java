@@ -733,7 +733,7 @@ public final class GCParser {
         }
 
         // waypoints - reset collection
-        cache.setWaypoints(Collections.<Waypoint> emptyList(), false);
+        cache.setWaypoints(Collections.emptyList(), false);
 
         // add waypoint for original coordinates in case of user-modified listing-coordinates
         try {
@@ -1761,7 +1761,7 @@ public final class GCParser {
         final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
         final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
         final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
-                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
+                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.empty();
         final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), specialLogs.toList(),
                 (logEntries, specialLogEntries) -> {
                     mergeFriendsLogs(logEntries, specialLogEntries);
