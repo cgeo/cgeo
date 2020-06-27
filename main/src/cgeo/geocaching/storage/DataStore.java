@@ -3870,7 +3870,7 @@ public class DataStore {
         Collections.sort(caches, (lhs, rhs) -> {
             final int lhsIndex = geocodes.indexOf(lhs.getGeocode());
             final int rhsIndex = geocodes.indexOf(rhs.getGeocode());
-            return lhsIndex < rhsIndex ? -1 : (lhsIndex == rhsIndex ? 0 : 1);
+            return Integer.compare(lhsIndex, rhsIndex);
         });
         return caches;
     }
