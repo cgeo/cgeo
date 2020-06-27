@@ -67,7 +67,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         }
     }
 
-    private void continueWith(final Class clazz, final Intent intent) {
+    private void continueWith(@SuppressWarnings("rawtypes") final Class clazz, final Intent intent) {
         final Intent forwarder = new Intent(intent);
         forwarder.setClass(this, clazz);
         startActivity(forwarder);
