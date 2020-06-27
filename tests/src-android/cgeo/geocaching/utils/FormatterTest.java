@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import junit.framework.TestCase;
+import org.apache.commons.lang3.StringUtils;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
@@ -94,6 +95,11 @@ public class FormatterTest extends TestCase {
     }
 
     public static void testFormatStoredAgo() {
+        // Skip test on non-English devices
+        if (!StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
+            return;
+        }
+
         assertThat(Formatter.formatStoredAgo(0)).isEqualTo("Stored in device\n");
         assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 10, "Stored in device\na few minutes ago");
         assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 20, "Stored in device\nabout 20 minutes ago");
