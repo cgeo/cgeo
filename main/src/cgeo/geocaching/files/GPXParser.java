@@ -45,6 +45,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -871,9 +872,7 @@ abstract class GPXParser extends FileParser {
         cache.setShortDescription("");
         cache.setHint("");
 
-        for (int i = 0; i < userData.length; i++) {
-            userData[i] = null;
-        }
+        Arrays.fill(userData, null);
         originalLon = null;
         originalLat = null;
         logPasswordRequired = false;
