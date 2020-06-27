@@ -387,7 +387,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         return StringUtils.leftPad(Integer.toString(value), len, '0');
     }
 
-    private class ButtonClickListener implements View.OnClickListener {
+    private static class ButtonClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(final View view) {

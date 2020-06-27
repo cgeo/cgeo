@@ -45,7 +45,7 @@ public class GCLogin extends AbstractLogin {
 
     private ServerParameters serverParameters = null;
 
-    private class StatusException extends RuntimeException {
+    private static class StatusException extends RuntimeException {
         private static final long serialVersionUID = -597420116705938433L;
         final StatusCode statusCode;
 
