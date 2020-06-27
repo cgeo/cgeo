@@ -215,6 +215,7 @@ public final class TextUtils {
         int i = length;
 
         // loop back to the first non-whitespace character
+        //noinspection StatementWithEmptyBody
         while (--i >= 0 && Character.isWhitespace(source.charAt(i))) {
         }
 
