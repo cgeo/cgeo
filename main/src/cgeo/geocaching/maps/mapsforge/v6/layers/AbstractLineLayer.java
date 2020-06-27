@@ -3,12 +3,12 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.MapLineUtils;
 
-import androidx.core.util.Pair;
-
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
+import org.mapsforge.core.graphics.Path;
 import org.mapsforge.core.graphics.Style;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.Point;
@@ -18,25 +18,26 @@ import org.mapsforge.map.layer.Layer;
 
 abstract class AbstractLineLayer extends Layer {
     protected float width;
-    private Paint line = null;
+    private Paint paint = null;
     protected int lineColor = 0xD00000A0;
     protected boolean isHidden = false;
-    private final Boolean pixelTrackLock = true;
+    private final Boolean pathLock = true;
 
     // used for caching
     private ArrayList<Geopoint> track = null;
-    private ArrayList<Pair<Integer, Integer>> pixelTrack = null;
-    private long mapSize = 0;
+    private Path path = null;
+    private long mapSize = -1;
+    private Point topLeftPoint = null;
 
     protected AbstractLineLayer() {
         width = MapLineUtils.getDefaultThinLineWidth();
     }
 
     public void updateTrack(final ArrayList<Geopoint> track) {
-        synchronized (pixelTrackLock) {
+        paint = prepareLine();
+        synchronized (pathLock) {
             this.track = null == track ? null : new ArrayList<>(track);
-            this.pixelTrack = null;
-            this.mapSize = 0;
+            this.path = null;
         }
     }
 
@@ -45,7 +46,7 @@ abstract class AbstractLineLayer extends Layer {
     }
 
     @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
+    public synchronized void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
         if (isHidden) {
             return;
         }
@@ -55,47 +56,44 @@ abstract class AbstractLineLayer extends Layer {
             return;
         }
 
-        prepareLine();
-        synchronized (pixelTrackLock) {
-            // still building cache?
-            if (this.pixelTrack == null && this.mapSize > 0) {
-                return;
+        final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
+        synchronized (pathLock) {
+            if (null == this.path || this.mapSize != mapSize || this.topLeftPoint != topLeftPoint) {
+                translateRouteToPath(mapSize, topLeftPoint);
             }
-
-            final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
-            if (this.pixelTrack == null || this.mapSize != mapSize) {
-                translateRouteToPixels(mapSize);
-            }
-
-            for (int i = 1; i < pixelTrack.size(); i++) {
-                final Pair<Integer, Integer> source = pixelTrack.get(i - 1);
-                final Pair<Integer, Integer> destination = pixelTrack.get(i);
-                canvas.drawLine(source.first - (int) topLeftPoint.x, source.second - (int) topLeftPoint.y, destination.first - (int) topLeftPoint.x, destination.second - (int) topLeftPoint.y, line);
-            }
+        }
+        if (null != this.path) {
+            canvas.drawPath(path, paint);
         }
     }
 
-    private void translateRouteToPixels(final long mapSize) {
+    private void translateRouteToPath(final long mapSize, final Point topLeftPoint) {
         this.mapSize = mapSize;
-        this.pixelTrack = new ArrayList<>();
-        for (int i = 0; i < track.size(); i++) {
-            pixelTrack.add(translateToPixels(mapSize, this.track.get(i)));
+        this.topLeftPoint = topLeftPoint;
+        this.path = null;
+
+        final Iterator<Geopoint> iterator = track.iterator();
+        if (!iterator.hasNext()) {
+            return;
+        }
+
+        Geopoint point = iterator.next();
+        path = AndroidGraphicFactory.INSTANCE.createPath();
+        path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+
+        while (iterator.hasNext()) {
+            point = iterator.next();
+            path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
         }
     }
 
-    private void prepareLine() {
-        if (line == null) {
-            line = AndroidGraphicFactory.INSTANCE.createPaint();
-            line.setStrokeWidth(width);
-            line.setStyle(Style.STROKE);
-            line.setColor(lineColor);
-            line.setTextSize(20);
-        }
+    private Paint prepareLine() {
+        final Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
+        paint.setStrokeWidth(width);
+        paint.setStyle(Style.STROKE);
+        paint.setColor(lineColor);
+        paint.setTextSize(20);
+        return paint;
     }
 
-    private static Pair<Integer, Integer> translateToPixels(final long mapSize, final Geopoint coords) {
-        final int posX = (int) (MercatorProjection.longitudeToPixelX(coords.getLongitude(), mapSize));
-        final int posY = (int) (MercatorProjection.latitudeToPixelY(coords.getLatitude(), mapSize));
-        return new Pair<>(posX, posY);
-    }
 }
