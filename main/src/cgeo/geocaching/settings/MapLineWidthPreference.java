@@ -37,6 +37,9 @@ class MapLineWidthPreference extends AbstractSeekbarPreference {
         if (callChangeListener(progress)) {
             persistInt(progress);
             notifyChanged();
+            // workaround for Android 7, as onCreateView() gets called unexpectedly after saveSetting(),
+            // and the the old startValue would be used, leading to a jumping slider
+            startValue = progress;
         }
     }
 
