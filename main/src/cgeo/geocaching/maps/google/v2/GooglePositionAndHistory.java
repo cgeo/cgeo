@@ -269,7 +269,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             return;
         }
         historyObjs.removeAll();
-        if (!Settings.isMapTrail()) {
+        if (Settings.isMapTrail()) {
 
             // always add current position to drawn history to have a closed connection
             final ArrayList<Location> paintHistory = getHistory();
