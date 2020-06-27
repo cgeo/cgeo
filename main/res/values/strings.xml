@@ -890,7 +890,7 @@
     <string name="cache_personal_note_edit">Edit</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevent waypoints extraction</string>
     <string name="cache_personal_note_limit">Personal note limit</string>
-    <string name="cache_personal_note_truncation">This personal note will be truncated after %d characters by Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">This personal note will be truncated after %d characters by Geocaching.com.</string>
     <string name="cache_personal_note_upload">Upload</string>
     <string name="cache_personal_note_uploading">Uploading personal note</string>
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
@@ -1086,7 +1086,14 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Loading caches from %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Loading waypoints from %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d caches imported from %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="zero">%1$d caches imported from %2$s</item>
+        <item quantity="one">%1$d cache imported from %2$s</item>
+        <item quantity="two">%1$d caches imported from %2$s</item>
+        <item quantity="few">%1$d caches imported from %2$s</item>
+        <item quantity="many">%1$d caches imported from %2$s</item>
+        <item quantity="other">%1$d caches imported from %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Download of static maps aborted</string>
     <string name="gpx_import_title_reading_file">Reading file</string>
     <string name="gpx_import_title">Import GPX</string>
@@ -1353,7 +1360,7 @@
     <string name="export_modifiedcoords">Modified coordinates</string>
     <string name="export_modifiedcoords_uploading">Uploading %1$d</string>
     <string name="export_modifiedcoords_success">Upload successful</string>
-    <string name="export_modifiedcoords_result">Upload finished: %1$d failed / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Upload finished: %1$d failed / %2$d ok</string>
     <string name="export_modifiedcoords_error">Upload failed</string>
 
     <!-- GC attributes -->
