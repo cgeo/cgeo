@@ -274,7 +274,7 @@ public class SuApi {
         if (!tokens.isValid()) {
             throw new NotAuthorizedException();
         }
-        OAuth.signOAuth(host, endpoint.methodName, method, connector.getHttps(), params, tokens, connector.getConsumerKey(), connector.getConsumerSecret());
+        OAuth.signOAuth(host, endpoint.methodName, method, connector.isHttps(), params, tokens, connector.getConsumerKey(), connector.getConsumerSecret());
 
         final String uri = connector.getHostUrl() + endpoint.methodName;
         final JSONResult result;
