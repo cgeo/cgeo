@@ -964,7 +964,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         super.setPreferenceScreen(preferenceScreen);
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "EmptyMethod"})
     @Override
     public PreferenceManager getPreferenceManager() {
         // TODO replace with fragment based code

@@ -97,6 +97,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
     private static final GeoDirHandler locationUpdater = new GeoDirHandler() {
+        @SuppressWarnings("EmptyMethod")
         @Override
         public void updateGeoData(final GeoData geoData) {
             // Do not do anything, as we just want to maintain the GPS on

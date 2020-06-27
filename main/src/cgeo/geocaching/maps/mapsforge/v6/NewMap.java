@@ -610,6 +610,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     /**
      * @param view Not used here, required by layout
      */
+    @SuppressWarnings("EmptyMethod")
     public void showFilterMenu(final View view) {
         // do nothing, the filter bar only shows the global filter
     }
