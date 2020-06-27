@@ -95,8 +95,7 @@ public class GeoitemRef implements Parcelable {
                     final int id = in.readInt();
                     final String name = in.readString();
                     final int markerId = in.readInt();
-                    final GeoitemRef l = new GeoitemRef(itemCode, type, geocode, id, name, markerId);
-                    return l;
+                    return new GeoitemRef(itemCode, type, geocode, id, name, markerId);
                 }
 
                 @Override

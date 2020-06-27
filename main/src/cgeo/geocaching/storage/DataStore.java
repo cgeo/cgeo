@@ -1099,14 +1099,13 @@ public class DataStore {
             }
         } catch (android.database.sqlite.SQLiteDoneException e) {
             // sequence identifier not yet in DB => create & set to the minValue given
-            final long newId = minValue;
             try {
                 final SQLiteStatement sequenceInsert = PreparedStatement.SEQUENCE_INSERT.getStatement();
                 sequenceInsert.bindString(1, sequence);
-                sequenceInsert.bindLong(2, newId);
+                sequenceInsert.bindLong(2, minValue);
                 sequenceInsert.executeInsert();
                 database.setTransactionSuccessful();
-                return newId;
+                return minValue;
             } catch (SQLiteException e2) {
                 Log.e("could not create sequence " + sequence);
                 throw new IllegalStateException();
