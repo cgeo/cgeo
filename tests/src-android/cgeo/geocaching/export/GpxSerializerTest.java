@@ -30,7 +30,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testWriteEmptyGPX() throws Exception {
         final StringWriter writer = new StringWriter();
-        new GpxSerializer().writeGPX(Collections.<String> emptyList(), writer, null);
+        new GpxSerializer().writeGPX(Collections.emptyList(), writer, null);
         assertThat(writer.getBuffer().toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
                 "<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" " +
                 "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd " +

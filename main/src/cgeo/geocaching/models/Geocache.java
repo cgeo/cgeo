@@ -1040,7 +1040,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<Trackable> getInventory() {
-        return inventory == null ? Collections.<Trackable> emptyList() : Collections.unmodifiableList(inventory);
+        return inventory == null ? Collections.emptyList() : Collections.unmodifiableList(inventory);
     }
 
     /**
@@ -1184,7 +1184,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<LogEntry> getLogs() {
-        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.<LogEntry>emptyList();
+        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.emptyList();
     }
 
     /**
@@ -1934,7 +1934,7 @@ public class Geocache implements IWaypoint {
      */
     public int getFindsCount() {
         if (getLogCounts().isEmpty()) {
-            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.<LogType, Integer>emptyMap());
+            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.emptyMap());
         }
         int sumFound = 0;
         for (final Entry<LogType, Integer> logCount : getLogCounts().entrySet()) {

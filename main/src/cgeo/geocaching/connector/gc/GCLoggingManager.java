@@ -154,7 +154,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             }
 
             if (reportProblem != ReportProblemType.NO_PROBLEM) {
-                GCWebAPI.postLog(cache, reportProblem.logType, date.getTime(), CgeoApplication.getInstance().getString(reportProblem.textId), Collections.<TrackableLog>emptyList(), false);
+                GCWebAPI.postLog(cache, reportProblem.logType, date.getTime(), CgeoApplication.getInstance().getString(reportProblem.textId), Collections.emptyList(), false);
             }
 
             return new LogResult(postResult.left, postResult.right);

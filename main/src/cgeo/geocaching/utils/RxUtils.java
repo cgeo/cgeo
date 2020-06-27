@@ -24,7 +24,7 @@ public class RxUtils {
         final AtomicReference<T> lastValue = new AtomicReference<>(initialValue);
         return observable.doOnNext(lastValue::set).startWith(Observable.defer(() -> {
             final T last = lastValue.get();
-            return last != null ? Observable.just(last) : Observable.<T>empty();
+            return last != null ? Observable.just(last) : Observable.empty();
         })).replay(1).refCount();
     }
 

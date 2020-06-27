@@ -105,7 +105,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                 setTarget(waypoint, cache);
             }
         } else if (extras.containsKey(Intents.EXTRA_COORDS)) {
-            setTarget(extras.<Geopoint> getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
+            setTarget(extras.getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
         } else if (cache != null) {
             setTarget(cache);
         } else {

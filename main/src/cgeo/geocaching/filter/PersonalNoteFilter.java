@@ -47,6 +47,6 @@ public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory
     @Override
     @NonNull
     public List<IFilter> getFilters() {
-        return Collections.<IFilter> singletonList(this);
+        return Collections.singletonList(this);
     }
 }
