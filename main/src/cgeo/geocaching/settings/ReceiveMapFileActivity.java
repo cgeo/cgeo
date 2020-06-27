@@ -106,9 +106,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                         createRandomlyNamedFile();
                         new CopyTask(this).execute();
                     })
-                    .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> {
-                        activity.finish();
-                    })
+                    .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> activity.finish())
                     .create();
             dialog.setOwnerActivity(activity);
             dialog.show();
