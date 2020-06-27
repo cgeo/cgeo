@@ -624,7 +624,7 @@ public final class Network {
     /**
      * Filter only successful responses for use with flatMap.
      */
-    public static final Function<Response, Single<Response>> withSuccess = response -> response.isSuccessful() ? Single.just(response) : Single.<Response>error(new IOException("unsuccessful response: " + response));
+    public static final Function<Response, Single<Response>> withSuccess = response -> response.isSuccessful() ? Single.just(response) : Single.error(new IOException("unsuccessful response: " + response));
 
     /**
      * Wait until a request has completed and check its response status. An exception will be thrown if the

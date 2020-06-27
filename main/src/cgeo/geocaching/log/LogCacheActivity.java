@@ -683,12 +683,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
         switch (Settings.getTrackableComparator()) {
-            case TRACKABLE_COMPARATOR_NAME:
-                menu.findItem(R.id.menu_sort_trackables_name).setChecked(true);
-                break;
             case TRACKABLE_COMPARATOR_TRACKCODE:
                 menu.findItem(R.id.menu_sort_trackables_code).setChecked(true);
                 break;
+            case TRACKABLE_COMPARATOR_NAME:
             default:
                 menu.findItem(R.id.menu_sort_trackables_name).setChecked(true);
         }
@@ -895,7 +893,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     final LogEntry logNow = logBuilder.build();
                     newLogs.add(0, logNow);
                     if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
-                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(Collections.<Image>emptyList()).setLogType(reportProblemSelected.logType).build();
+                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(Collections.emptyList()).setLogType(reportProblemSelected.logType).build();
                         newLogs.add(0, logProblem);
                     }
                     DataStore.saveLogs(cache.getGeocode(), newLogs);

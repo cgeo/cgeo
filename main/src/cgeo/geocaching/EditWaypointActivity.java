@@ -611,7 +611,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     ActivityMixin.showApplicationToast(activity.getString(R.string.waypoint_coordinates_has_been_modified_on_website, coords));
                     break;
                 case SUCCESS:
-                    break;
                 case UPLOAD_START:
                     break;
                 case UPLOAD_ERROR:

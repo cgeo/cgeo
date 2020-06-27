@@ -345,13 +345,11 @@ public class SuParser {
             case "1":
                 return LogType.FOUND_IT;
             case "2":
+            case "4":
                 return LogType.DIDNT_FIND_IT;
             case "3":
                 return LogType.NOTE;
-            case "4":
-                return LogType.DIDNT_FIND_IT;
             case "5":
-                return LogType.OWNER_MAINTENANCE;
             case "6":
                 return LogType.OWNER_MAINTENANCE;
             default:
@@ -361,8 +359,6 @@ public class SuParser {
 
     private static CacheSize parseSize(final String size) {
         switch (size) {
-            case "1":
-                return CacheSize.UNKNOWN;
             case "2":
                 return CacheSize.MICRO;
             case "3":
@@ -371,6 +367,7 @@ public class SuParser {
                 return CacheSize.REGULAR;
             case "5":
                 return CacheSize.OTHER;
+            case "1":
             default:
                 return CacheSize.UNKNOWN;
         }
@@ -389,7 +386,6 @@ public class SuParser {
             case "5":
                 return WaypointType.FINAL;
             case "6":
-                return WaypointType.WAYPOINT;
             default:
                 return WaypointType.WAYPOINT;
         }
@@ -421,22 +417,16 @@ public class SuParser {
             case 2:
                 return CacheType.MULTI;
             case 3:
+            case 7: // Virtual Multi-step
                 return CacheType.VIRTUAL;
             case 4:
+            case 8: // Contest
                 return CacheType.EVENT;
             case 5:
                 // Not used
                 return CacheType.WEBCAM;
-            case 7:
-                // Virtual Multi-step
-                return CacheType.VIRTUAL;
-            case 8:
-                // Contest
-                return CacheType.EVENT;
             case 9:
-                return CacheType.MYSTERY;
-            case 10:
-                // Mystery Virtual
+            case 10: // Mystery Virtual
                 return CacheType.MYSTERY;
             case 6:
                 // "Extreme cache", not used.

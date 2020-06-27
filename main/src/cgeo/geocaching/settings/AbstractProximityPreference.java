@@ -27,13 +27,13 @@ public abstract class AbstractProximityPreference extends AbstractSeekbarPrefere
     @Override
     protected int valueToProgress(final int value) {
         final int progress = valueToProgressHelper(value);
-        return progress < 0 ? 0 : progress > maxSeekbarLength ? maxSeekbarLength : progress;
+        return progress < 0 ? 0 : Math.min(progress, maxSeekbarLength);
     }
 
     @Override
     protected int progressToValue(final int progress) {
         final int value = (int) Math.pow(10, Double.valueOf(progress) / 250.0) - 1;
-        return value < 0 ? 0 : value > Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE ? Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE : value;
+        return value < 0 ? 0 : Math.min(value, Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE);
     }
 
     @Override

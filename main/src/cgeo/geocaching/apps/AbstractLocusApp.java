@@ -289,6 +289,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             case LETTERBOX:
                 return GeocachingData.CACHE_TYPE_LETTERBOX;
             case EVENT:
+            case BLOCK_PARTY:                                       // no special locus type for BLOCK_PARTY
                 return GeocachingData.CACHE_TYPE_EVENT;
             case MEGA_EVENT:
                 return GeocachingData.CACHE_TYPE_MEGA_EVENT;
@@ -314,8 +315,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_TYPE_LF_CELEBRATION;
             case GPS_EXHIBIT:
                 return GeocachingData.CACHE_TYPE_GPS_ADVENTURE;
-            case BLOCK_PARTY:
-                return GeocachingData.CACHE_TYPE_EVENT; // no special locus type
             case LOCATIONLESS:
                 return GeocachingData.CACHE_TYPE_LOCATIONLESS;
             default:
@@ -325,8 +324,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     private static int toLocusSize(final CacheSize cs) {
         switch (cs) {
-            case NANO:
-                return GeocachingData.CACHE_SIZE_MICRO; // used by OC only
+            case NANO:       // used by OC only
             case MICRO:
                 return GeocachingData.CACHE_SIZE_MICRO;
             case SMALL:
@@ -352,13 +350,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
             case FINAL:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL;
             case OWN:
+            case STAGE:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PHYSICAL_STAGE;
             case PARKING:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PARKING;
             case PUZZLE:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_VIRTUAL_STAGE;
-            case STAGE:
-                return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_PHYSICAL_STAGE;
             case TRAILHEAD:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_TRAILHEAD;
             case WAYPOINT:

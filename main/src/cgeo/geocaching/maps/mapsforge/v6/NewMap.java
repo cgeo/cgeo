@@ -573,7 +573,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             if (Settings.getChooseList()) {
                 // let user select list to store cache in
-                new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodes, selectedListIds), true, Collections.<Integer>emptySet(), false);
+                new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodes, selectedListIds), true, Collections.emptySet(), false);
             } else {
                 storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
             }

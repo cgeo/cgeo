@@ -999,7 +999,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             if (Settings.getChooseList()) {
                 // let user select list to store cache in
-                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodesInViewport, selectedListIds), true, Collections.<Integer>emptySet(), false);
+                new StoredList.UserInterface(activity).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodesInViewport, selectedListIds), true, Collections.emptySet(), false);
             } else {
                 storeCaches(geocodesInViewport, Collections.singleton(StoredList.STANDARD_LIST_ID));
             }

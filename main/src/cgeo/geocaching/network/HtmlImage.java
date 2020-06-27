@@ -207,7 +207,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (FileUtils.isFileUrl(url)) {
             return Observable.defer(() -> {
                 final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
-                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
+                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 

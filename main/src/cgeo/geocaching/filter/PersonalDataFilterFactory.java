@@ -10,7 +10,7 @@ public class PersonalDataFilterFactory implements IFilterFactory {
     @Override
     @NonNull
     public List<IFilter> getFilters() {
-        return Arrays.<IFilter> asList(
+        return Arrays.asList(
                 new OwnRatingFilter(), 
                 new PersonalNoteFilter(), 
                 new ModifiedFilter(), 

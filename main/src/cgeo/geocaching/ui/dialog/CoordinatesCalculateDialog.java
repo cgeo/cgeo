@@ -875,7 +875,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                 result = String.valueOf(resInt);
                             }
 
-                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1, returnValue.length());
+                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1);
                         } else {
                             // Reached end without finding enough closing brackets
                             throw new IllegalArgumentException("Unmatched opening bracket '" + returnValue.charAt(openIndex) + "' at index " + openIndex + " of \"" + returnValue + "\"/");

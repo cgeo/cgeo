@@ -622,21 +622,25 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                     return false;
                 }
 
-                // left to right swipe
-                if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-                    if (!adapter.selectMode) {
-                        adapter.switchSelectMode();
-                        cache.setStatusChecked(true);
-                    }
-                    return true;
-                }
+                // horizontal swipe
+                if (Math.abs(velocityX) > Math.abs(velocityY)) {
 
-                // right to left swipe
-                if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-                    if (adapter.selectMode) {
-                        adapter.switchSelectMode();
+                    // left to right swipe
+                    if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE) {
+                        if (!adapter.selectMode) {
+                            adapter.switchSelectMode();
+                            cache.setStatusChecked(true);
+                        }
+                        return true;
                     }
-                    return true;
+
+                    // right to left swipe
+                    if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE) {
+                        if (adapter.selectMode) {
+                            adapter.switchSelectMode();
+                        }
+                        return true;
+                    }
                 }
             } catch (final Exception e) {
                 Log.w("CacheListAdapter.FlingGesture.onFling", e);
