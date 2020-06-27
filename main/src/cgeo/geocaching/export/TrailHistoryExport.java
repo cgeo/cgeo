@@ -78,7 +78,7 @@ public class TrailHistoryExport {
         private static final String PREFIX_XSI = "xsi";
         private static final String NS_XSI = "http://www.w3.org/2001/XMLSchema-instance";
 
-        private Runnable clearTrailHistory;
+        private final Runnable clearTrailHistory;
 
         Export(final Activity activity, final Runnable clearTrailHistory) {
             super(activity, activity.getString(R.string.export_trailhistory_title));

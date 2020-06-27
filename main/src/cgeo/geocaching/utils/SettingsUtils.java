@@ -14,7 +14,7 @@ public class SettingsUtils {
         TYPE_FLOAT      ("float"),
         TYPE_UNKNOWN    ("unknown");
 
-        private String id;
+        private final String id;
 
         SettingsType(final String id) {
             this.id = id;

@@ -827,8 +827,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private class ListMarkerAdapter extends ArrayAdapter<ListMarker> {
 
-        private ArrayList<ListMarker> items;
-        private Context context;
+        private final ArrayList<ListMarker> items;
+        private final Context context;
 
         ListMarkerAdapter(final Context context, final int viewResId, final ArrayList<ListMarker> items) {
             super(context, viewResId, items);

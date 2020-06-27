@@ -50,7 +50,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private Location coordinates;
     private float heading;
-    private PositionHistory history = new PositionHistory();
+    private final PositionHistory history = new PositionHistory();
 
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
@@ -59,11 +59,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private static final int MAX_HISTORY_POINTS = 230; // TODO add alpha, make changeable in constructor?
 
     private WeakReference<GoogleMap> mapRef = null;
-    private GoogleMapObjects positionObjs;
-    private GoogleMapObjects historyObjs;
-    private GoogleMapObjects routeObjs;
-    private GoogleMapObjects trackObjs;
-    private GoogleMapView mapView;
+    private final GoogleMapObjects positionObjs;
+    private final GoogleMapObjects historyObjs;
+    private final GoogleMapObjects routeObjs;
+    private final GoogleMapObjects trackObjs;
+    private final GoogleMapView mapView;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
 

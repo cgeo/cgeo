@@ -308,7 +308,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
-    private static double[] altitudeReadings = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
+    private static final double[] altitudeReadings = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
     private static int altitudeReadingPos = 0;
 
     @SuppressLint("SetTextI18n")

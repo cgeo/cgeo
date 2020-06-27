@@ -37,9 +37,9 @@ public class ViewSettingsActivity extends AbstractActivity {
     private boolean editMode = false;
 
     private static class KeyValue {
-        public String key;
-        public String value;
-        public SettingsUtils.SettingsType type;
+        public final String key;
+        public final String value;
+        public final SettingsUtils.SettingsType type;
 
         KeyValue(final String key, final String value, final SettingsUtils.SettingsType type) {
             this.key = key;
