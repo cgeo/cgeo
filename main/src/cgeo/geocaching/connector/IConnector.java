@@ -87,7 +87,7 @@ public interface IConnector {
     /**
      * Return <tt>true<tt> if https must be used.
      */
-    boolean getHttps();
+    boolean isHttps();
 
     /**
      * Get url of the connector server for dynamic loading of data.

@@ -139,7 +139,7 @@ public abstract class AbstractConnector implements IConnector {
     protected abstract String getCacheUrlPrefix();
 
     @Override
-    public boolean getHttps() {
+    public boolean isHttps() {
         return true;
     }
 
@@ -149,7 +149,7 @@ public abstract class AbstractConnector implements IConnector {
         if (StringUtils.isBlank(getHost())) {
             return "";
         }
-        return (getHttps() ? "https://" : "http://") + getHost();
+        return (isHttps() ? "https://" : "http://") + getHost();
     }
 
     @Override

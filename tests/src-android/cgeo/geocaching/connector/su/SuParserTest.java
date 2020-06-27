@@ -72,12 +72,12 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
             "]," +
 
             "\"images\":[" +
-            "{\"id\":3749,\"type\":\"cachePhoto\",\"url\":\"http://www.geocaching.su/photos/caches/3749.jpg\"}," +
-            "{\"id\":15090,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15090.jpg\",\"description\":\"Ограда монастыря и собор\"}," +
-            "{\"id\":15091,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15091.jpg\",\"description\":\"Временная звонница и &quot;Васильевский&quot; келейный корпус\"}," +
-            "{\"id\":15092,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15092.jpg\",\"description\":\"Домик игуменьи\"}," +
-            "{\"id\":15093,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15093.jpg\",\"description\":\"Крестовоздвиженская церковь\"}," +
-            "{\"id\":15094,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15094.jpg\",\"description\":\"Памятный крест\"}]}}";
+            "{\"id\":3749,\"type\":\"cachePhoto\",\"url\":\"https://geocaching.su/photos/caches/3749.jpg\"}," +
+            "{\"id\":15090,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15090.jpg\",\"description\":\"Ограда монастыря и собор\"}," +
+            "{\"id\":15091,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15091.jpg\",\"description\":\"Временная звонница и &quot;Васильевский&quot; келейный корпус\"}," +
+            "{\"id\":15092,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15092.jpg\",\"description\":\"Домик игуменьи\"}," +
+            "{\"id\":15093,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15093.jpg\",\"description\":\"Крестовоздвиженская церковь\"}," +
+            "{\"id\":15094,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15094.jpg\",\"description\":\"Памятный крест\"}]}}";
     private static String simpleCache = "{\"status\":{\"code\":\"OK\"}," +
             "\"data\":{" +
             "\"id\":321," +

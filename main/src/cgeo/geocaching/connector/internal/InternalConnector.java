@@ -91,7 +91,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
-    public boolean getHttps() {
+    public boolean isHttps() {
         return false;
     }
 

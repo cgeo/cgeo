@@ -901,7 +901,7 @@ final class OkapiClient {
                 if (!tokens.isValid()) {
                     return new JSONResult("invalid oauth tokens");
                 }
-                OAuth.signOAuth(host, service.methodName, method, connector.getHttps(), params, tokens, connector.getCK(), connector.getCS());
+                OAuth.signOAuth(host, service.methodName, method, connector.isHttps(), params, tokens, connector.getCK(), connector.getCS());
                 break;
             }
             case Level1 : {
