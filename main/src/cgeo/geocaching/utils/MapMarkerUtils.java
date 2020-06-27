@@ -375,7 +375,7 @@ public final class MapMarkerUtils {
      *         True if the floppy overlay should be displayed
      */
     private static boolean showFloppyOverlay(@Nullable final CacheListType cacheListType) {
-        return cacheListType == null || cacheListType != CacheListType.OFFLINE;
+        return cacheListType != CacheListType.OFFLINE; // also covers null check
     }
 
     private static void readLists() {
