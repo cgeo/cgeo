@@ -1012,6 +1012,7 @@ public class DataStore {
          *
          * @param db the database to perform sanity checks against
          */
+        @SuppressWarnings("EmptyMethod")
         private static void sanityChecks(final SQLiteDatabase db) {
             // currently unused
         }

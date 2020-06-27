@@ -57,6 +57,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * This method should typically be overridden by final sub classes instead of {@link #onPreExecute()}.
      *
      */
+    @SuppressWarnings("EmptyMethod")
     protected void onPreExecuteInternal() {
         // empty by default
     }
