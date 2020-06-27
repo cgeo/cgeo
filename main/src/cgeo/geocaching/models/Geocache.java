@@ -1809,7 +1809,7 @@ public class Geocache implements IWaypoint {
         if (eventTimeMinutes == null) {
             eventTimeMinutes = guessEventTimeMinutes();
         }
-        return eventTimeMinutes.intValue();
+        return eventTimeMinutes;
     }
 
     /**
