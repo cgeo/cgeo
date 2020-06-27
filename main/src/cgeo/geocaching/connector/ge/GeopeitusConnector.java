@@ -46,6 +46,6 @@ public class GeopeitusConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://" + getHost() + "/aare/";
+        return getHostUrl() + "/aare/";
     }
 }
