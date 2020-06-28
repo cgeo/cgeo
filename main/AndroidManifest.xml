@@ -43,7 +43,7 @@
         android:name=".CgeoApplication"
         android:allowBackup="true"
         android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent"
-        android:icon="@drawable/cgeo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/cgeo"
         android:hardwareAccelerated="false"
