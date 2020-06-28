@@ -21,8 +21,6 @@ if (isContinuousIntegrationServer()) {
 android {
     compileSdkVersion 29
 
-    buildToolsVersion "28.0.3"
-
     compileOptions {
         // use the diamond operator and some other goodies in Android
         sourceCompatibility JavaVersion.VERSION_1_8
