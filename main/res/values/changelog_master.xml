@@ -5,6 +5,7 @@
      <b>Next release:</b>\n
     · Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
     · Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
+    · Change: Set all connectors to https\n
     · New: Load GPX track files and show track on map\n
     · New: Export trail history as GPX track file\n
     · New: Offer a link to download OpenStreetMap offline maps\n
