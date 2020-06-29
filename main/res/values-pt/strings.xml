@@ -821,7 +821,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_personal_note_edit">Editar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
-    <string name="cache_personal_note_truncation">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
     <string name="cache_personal_note_upload">Carregar</string>
     <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
@@ -1004,7 +1004,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">A carregar pontos adicionais de %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d caches importadas de %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d cache importada de %2$s</item>
+        <item quantity="other">%1$d caches importadas de %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Transferência dos mapas estáticos cancelada</string>
     <string name="gpx_import_title_reading_file">A ler o ficheiro</string>
     <string name="gpx_import_title">Importar GPX</string>
@@ -1245,7 +1248,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_modifiedcoords">Coordenadas modificadas</string>
     <string name="export_modifiedcoords_uploading">A enviar %1$d</string>
     <string name="export_modifiedcoords_success">Carregamento com êxito</string>
-    <string name="export_modifiedcoords_result">Carregamento concluído: %1$d falhou / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Carregamento concluído: %1$d falhou / %2$d ok</string>
     <string name="export_modifiedcoords_error">Falha no carregamento</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cães permitidos</string>
