@@ -834,7 +834,7 @@
     <string name="cache_personal_note_edit">Upravit</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabránit přenosu waypointů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
-    <string name="cache_personal_note_truncation">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
     <string name="cache_personal_note_upload">Nahrát</string>
     <string name="cache_personal_note_uploading">Nahrávání osobní poznámky</string>
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
@@ -1019,7 +1019,12 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Načítání keší z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Načítání bodů tras z %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d keší importováno z %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d keš importována z %2$s</item>
+        <item quantity="few">%1$d keše importovány z %2$s</item>
+        <item quantity="many">%1$d keší importováno z %2$s</item>
+        <item quantity="other">%1$d keší importováno z %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Stažení statických map zrušeno</string>
     <string name="gpx_import_title_reading_file">Čtení souboru</string>
     <string name="gpx_import_title">Importovat GPX</string>
@@ -1264,7 +1269,7 @@
     <string name="export_modifiedcoords">Upravené souřadnice</string>
     <string name="export_modifiedcoords_uploading">Nahrávání %1$d</string>
     <string name="export_modifiedcoords_success">Úspěšně nahráno</string>
-    <string name="export_modifiedcoords_result">Nahrávání dokončeno: %1$d z / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Nahrávání dokončeno: %1$d z / %2$d ok</string>
     <string name="export_modifiedcoords_error">Nahrávání selhalo</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Vstup se psy povolen</string>
