@@ -820,7 +820,7 @@
     <string name="cache_personal_note_edit">Bearbeiten</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Wegpunkt-Extraktion verhindern</string>
     <string name="cache_personal_note_limit">Upload der persönlicher Notiz ist begrenzt</string>
-    <string name="cache_personal_note_truncation">Diese persönliche Notiz wird von Geocaching.com nach %d Zeichen abgeschnitten.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Diese persönliche Notiz wird von Geocaching.com nach %d Zeichen abgeschnitten.</string>
     <string name="cache_personal_note_upload">Hochladen</string>
     <string name="cache_personal_note_uploading">Persönliche Notiz wird gesendet</string>
     <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
@@ -1003,7 +1003,10 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Lade Caches aus GPX-Datei %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Lade Wegpunkte aus GPX-Datei %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d Caches von %2$s importiert</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d Cache aus %2$s importiert</item>
+        <item quantity="other">%1$d Caches aus %2$s importiert</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Download statischer Karten abgebrochen</string>
     <string name="gpx_import_title_reading_file">Lese Datei</string>
     <string name="gpx_import_title">Importiere GPX-Datei</string>
@@ -1244,7 +1247,7 @@
     <string name="export_modifiedcoords">Geänderte Koordinaten</string>
     <string name="export_modifiedcoords_uploading">%1$d wird hochgeladen</string>
     <string name="export_modifiedcoords_success">Hochladen erfolgreich</string>
-    <string name="export_modifiedcoords_result">Hochladen abgeschlossen: %1$d fehlgeschlagen / %2$d OK</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Hochladen abgeschlossen: %1$d fehlgeschlagen / %2$d OK</string>
     <string name="export_modifiedcoords_error">Hochladen fehlgeschlagen</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Hunde erlaubt</string>
