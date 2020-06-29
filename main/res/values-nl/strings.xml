@@ -820,7 +820,7 @@
     <string name="cache_personal_note_edit">Wijzig</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Waypoint extractie voorkomen</string>
     <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
-    <string name="cache_personal_note_truncation">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
     <string name="cache_personal_note_upload">Uploaden</string>
     <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
@@ -1003,7 +1003,10 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laden van caches uit %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laden van waypoints uit %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d caches geïmporteerd uit %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d cache geïmporteerd uit %2$s</item>
+        <item quantity="other">%1$d caches geïmporteerd uit %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Downloaden van statische kaarten afgebroken</string>
     <string name="gpx_import_title_reading_file">Bestand lezen</string>
     <string name="gpx_import_title">Importeer GPX</string>
@@ -1244,7 +1247,7 @@
     <string name="export_modifiedcoords">Aangepaste coördinaten</string>
     <string name="export_modifiedcoords_uploading">Uploaden %1$d</string>
     <string name="export_modifiedcoords_success">Upload geslaagd</string>
-    <string name="export_modifiedcoords_result">Upload voltooid: %1$d is mislukt / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Upload voltooid: %1$d is mislukt / %2$d ok</string>
     <string name="export_modifiedcoords_error">Upload mislukt</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Honden toegestaan</string>
