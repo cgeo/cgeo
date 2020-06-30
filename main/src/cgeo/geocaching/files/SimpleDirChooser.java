@@ -235,7 +235,14 @@ public class SimpleDirChooser extends AbstractListActivity {
             } else {
                 lastPosition = -1;
             }
-            final boolean enabled = currentOption.isChecked() && !currentOption.getName().equals(PARENT_DIR);
+
+            boolean enabled = currentOption.isChecked() && (!currentOption.getName().equals(PARENT_DIR));
+            if (enabled && !selectDir) {
+                final File file = new File(currentOption.getPath());
+                if (!file.canRead() || !file.isFile()) {
+                    enabled = false;
+                }
+            }
             okButton.setEnabled(enabled);
             okButton.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
             adapter.notifyDataSetChanged();
