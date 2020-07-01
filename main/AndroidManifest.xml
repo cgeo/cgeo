@@ -673,6 +673,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/track_file_select_title">
         </activity>
+        <activity android:name=".maps.routing.RouteSortActivity" />
         <activity
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/route_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?background_color"
+    tools:context=".maps.routing.RouteSortActivity" >
+
+    <!-- cache name and icon -->
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="110dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingRight="3dip"
+        android:paddingTop="5dip"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="18sp"
+        tools:text="name"
+        android:maxLines="1" />
+
+    <!-- cache/waypoint attributes and other info -->
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="left"
+        android:layout_marginRight="110dip"
+        android:layout_below="@id/text"
+        android:ellipsize="end"
+        android:paddingBottom="5dip"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color_grey"
+        android:textIsSelectable="false"
+        android:textSize="12sp"
+        tools:text="terrain, difficulty and others" />
+
+    <ImageButton
+        android:id="@+id/routitem_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/routeitem_down"
+        android:src="@drawable/ic_menu_up"
+        android:visibility="gone" />
+    <ImageButton
+        android:id="@+id/routeitem_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu_down"
+        android:visibility="gone" />
+
+</RelativeLayout>

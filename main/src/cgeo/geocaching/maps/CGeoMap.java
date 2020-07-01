@@ -56,6 +56,7 @@ import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -721,7 +722,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
         item.setActionView(myLocSwitch);
         initMyLocationSwitchButton(myLocSwitch);
-        menu.findItem(R.id.menu_clear_individual_route).setVisible(route != null && !route.isEmpty());
         return true;
     }
 
@@ -762,6 +762,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
             menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
+
+            IndividualRouteUtils.onPrepareOptionsMenu(menu, route);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -894,13 +896,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 new TrailHistoryExport(activity, this::clearTrailHistory);
                 return true;
             }
-            case R.id.menu_clear_individual_route: {
-                route.clearRoute(overlayPositionAndScale);
-                overlayPositionAndScale.repaintRequired();
-                ActivityMixin.invalidateOptionsMenu(activity);
-                ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
+            case R.id.menu_clear_individual_route:
+                clearIndividualRoute();
                 return true;
-            }
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
@@ -910,7 +908,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             default:
                 if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
-                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)) {
+                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
+                && !IndividualRouteUtils.onOptionsItemSelected(activity, id, this::clearIndividualRoute)) {
                     final MapSource mapSource = MapProviderFactory.getMapSource(id);
                     if (mapSource != null) {
                         item.setChecked(true);
@@ -939,6 +938,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         TrackUtils.showTrackInfo(activity, tracks);
     }
 
+    @Override
+    public void reloadIndividualRoute() {
+        route.reloadRoute(overlayPositionAndScale);
+        mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+    }
+
     private void updateTrackHideStatus() {
         overlayPositionAndScale.repaintRequired();
     }
@@ -948,6 +953,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         overlayPositionAndScale.setHistory(new ArrayList<>());
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
         ActivityMixin.showToast(activity, res.getString(R.string.map_trailhistory_cleared));
+    }
+
+    private void clearIndividualRoute() {
+        route.clearRoute(overlayPositionAndScale);
+        overlayPositionAndScale.repaintRequired();
+        ActivityMixin.invalidateOptionsMenu(activity);
+        ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
     }
 
     private boolean storeCaches(final Set<String> geocodesInViewport) {

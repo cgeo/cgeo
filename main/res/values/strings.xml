@@ -1795,12 +1795,16 @@
     <string name="proximity_notification_title">c:geo proximity notification</string>
 
     <!-- individual routes -->
+    <string name="individual_route">Individual route</string>
     <string name="individual_route_added">added to route</string>
     <string name="individual_route_removed">removed from route</string>
     <string name="individual_route_error_toggling_waypoint">error toggling waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Not available in single waypoint mode</string>
+    <string name="map_sort_individual_route">Sort individual route</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_individual_route_cleared">Individual route cleared</string>
+    <string name="save_sorted_route">Save</string>
+    <string name="sorted_route_saved">Individual route saved</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>

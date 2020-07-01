@@ -76,4 +76,8 @@ public abstract class AbstractMap {
     public void setTracks(final TrackUtils.Tracks tracks) {
         //
     }
+
+    public void reloadIndividualRoute() {
+        //
+    }
 }

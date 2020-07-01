@@ -56,6 +56,7 @@ import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
@@ -70,6 +71,7 @@ import android.content.res.Resources.NotFoundException;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -300,8 +302,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
         item.setActionView(myLocSwitch);
         initMyLocationSwitchButton(myLocSwitch);
-        menu.findItem(R.id.menu_clear_individual_route).setVisible(route != null && !route.isEmpty());
-
         return result;
     }
 
@@ -350,6 +350,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
             menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
+
+            IndividualRouteUtils.onPrepareOptionsMenu(menu, route);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -478,9 +480,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 return true;
             }
             case R.id.menu_clear_individual_route:
-                route.clearRoute(routeLayer);
-                ActivityMixin.invalidateOptionsMenu(this);
-                showToast(res.getString(R.string.map_individual_route_cleared));
+                clearIndividualRoute();
                 return true;
             case R.id.menu_hint:
                 menuShowHint();
@@ -491,7 +491,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             default:
                 if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
-                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)) {
+                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
+                && !IndividualRouteUtils.onOptionsItemSelected(this, id, this::clearIndividualRoute)) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
                         item.setChecked(true);
@@ -519,6 +520,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.historyLayer.reset();
         this.historyLayer.requestRedraw();
         showToast(res.getString(R.string.map_trailhistory_cleared));
+    }
+
+    private void clearIndividualRoute() {
+        route.clearRoute(routeLayer);
+        ActivityMixin.invalidateOptionsMenu(this);
+        showToast(res.getString(R.string.map_individual_route_cleared));
     }
 
     private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
@@ -1717,6 +1724,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             }
         }
         TrackUtils.onActivityResult(this, requestCode, resultCode, data, this::setTracks);
+        IndividualRouteUtils.onActivityResult(this, requestCode, resultCode, data, this::reloadIndividualRoute);
     }
 
     private void setTracks(final TrackUtils.Tracks tracks) {
@@ -1728,6 +1736,15 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private void updateTrackHideStatus() {
         trackLayer.setHidden(Settings.isHideTrack());
         trackLayer.requestRedraw();
+    }
+
+    private void reloadIndividualRoute() {
+        if (null != routeLayer) {
+            route.reloadRoute(routeLayer);
+        } else {
+            // try again in 0.25 second
+            new Handler(Looper.getMainLooper()).postDelayed(this::reloadIndividualRoute, 250);
+        }
     }
 
     private static class ResourceBitmapCacheMonitor {
