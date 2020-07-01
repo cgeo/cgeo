@@ -660,16 +660,16 @@
     <string name="init_gpx_importdir">GPX Import Directory</string>
     <string name="init_dataDir">Select Geocache data directory</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
-    <string name="init_maptrail">Show Trail</string>
-    <string name="init_summary_maptrail">Show trail on Map</string>
-    <string name="init_trailcolor">History trail line color</string>
-    <string name="init_trailwidth">History trail line width</string>
+    <string name="init_maptrail">Show history track</string>
+    <string name="init_summary_maptrail">When activated (and GPS is on) c:geo saves the history of your movements as a track and displays it on the map.</string>
+    <string name="init_trailcolor">History track line color</string>
+    <string name="init_trailwidth">History track line width</string>
     <string name="init_directioncolor">Direction line color</string>
     <string name="init_directionwidth">Direction line width</string>
     <string name="init_routecolor">Route line color</string>
     <string name="init_routewidth">Route line width</string>
-    <string name="init_trackcolor">Track line color</string>
-    <string name="init_trackwidth">Track line width</string>
+    <string name="init_trackcolor">Individual track line color</string>
+    <string name="init_trackwidth">Individual track line width</string>
     <string name="init_circlecolor">Circle line color</string>
     <string name="init_circlefillcolor">Circle fill color</string>
     <string name="init_share_after_export">Open share menu after GPX export</string>
@@ -1181,7 +1181,7 @@
     <string name="map_modes">Map settings</string>
     <string name="map_rotation">Map rotation</string>
     <string name="map_hide">Hide</string>
-    <string name="map_trail_show">Show trail</string>
+    <string name="map_trail_show">Show history track</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
@@ -1190,18 +1190,18 @@
     <string name="map_hidewp_original">Hide original waypoints</string>
     <string name="map_hidewp_parking">Hide parking waypoints</string>
     <string name="map_hidewp_visited">Hide visited waypoints</string>
-    <string name="map_hide_track">Hide track</string>
-    <string name="map_load_track">Load track</string>
+    <string name="map_hide_track">Hide individual track</string>
+    <string name="map_load_track">Load individual track</string>
     <plurals name="load_track_success">
-        <item quantity="zero">Track loaded (%d trackpoints)</item>
-        <item quantity="one">Track loaded (%d trackpoint)</item>
-        <item quantity="two">Track loaded (%d trackpoints)</item>
-        <item quantity="few">Track loaded (%d trackpoints)</item>
-        <item quantity="many">Track loaded (%d trackpoints)</item>
-        <item quantity="other">Track loaded (%d trackpoints)</item>
+        <item quantity="zero">Individual track loaded (%d trackpoints)</item>
+        <item quantity="one">Individual track loaded (%d trackpoint)</item>
+        <item quantity="two">Individual track loaded (%d trackpoints)</item>
+        <item quantity="few">Individual track loaded (%d trackpoints)</item>
+        <item quantity="many">Individual track loaded (%d trackpoints)</item>
+        <item quantity="other">Individual track loaded (%d trackpoints)</item>
     </plurals>
-    <string name="load_track_error">Error loading track</string>
-    <string name="map_unload_track">Unload track</string>
+    <string name="load_track_error">Error loading individual track</string>
+    <string name="map_unload_track">Unload individual track</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
@@ -1213,8 +1213,8 @@
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>
     <string name="map_as_list">Show as list</string>
-    <string name="map_clear_trailhistory">Clear trail history</string>
-    <string name="map_trailhistory_cleared">trail history cleared</string>
+    <string name="map_clear_trailhistory">Clear history track</string>
+    <string name="map_trailhistory_cleared">History track cleared</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Straight line</string>
@@ -1846,9 +1846,9 @@
     <string name="downloadmap_info">You will be redirected to a download site for basic offline maps (no themeing support).\n\nChose the .map file for your region and tap on it to download the file.\n\nWhen downloading has completed, tap on the downloaded file to set this map as current map for c:geo</string>
 
     <!-- history trail export -->
-    <string name="trailhistory">Trail history</string>
-    <string name="export_trailhistory_title">Export trail history</string>
-    <string name="export_trailhistory_success">Exported trail history to \"%s\"</string>
-    <string name="export_trailhistory_clear_after_export">Clear trail history after export</string>
+    <string name="trailhistory">History track</string>
+    <string name="export_trailhistory_title">Export history track</string>
+    <string name="export_trailhistory_success">Exported history track to \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Clear history track after export</string>
 
 </resources>
