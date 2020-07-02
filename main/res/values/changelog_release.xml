@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next bugfix release:</b>\n
+     <b>2020.07.02:</b>\n
     · Fix: Wrong numbers in french language for amount of caches on lists\n
     · Fix: Wrong error message when login fails due to wrong username and/or password\n
     \n
