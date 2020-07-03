@@ -256,7 +256,7 @@ public class MainActivity extends AbstractActionBarActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
 
             // show c:geo logo
-            actionBar.setLogo(R.drawable.actionbar_cgeo);
+            actionBar.setLogo(R.drawable.cgeo_actionbar_squircle);
             actionBar.setDisplayUseLogoEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
