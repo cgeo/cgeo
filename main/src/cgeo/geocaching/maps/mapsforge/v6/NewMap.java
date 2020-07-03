@@ -528,7 +528,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 return true;
             default:
                 if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus, this::setTracks)
-                && !CompactIconModeUtils.onOptionsMenuItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))) {
+                && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
                         item.setChecked(true);

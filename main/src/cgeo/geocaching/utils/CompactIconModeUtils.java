@@ -34,7 +34,7 @@ public class CompactIconModeUtils {
         }
     }
 
-    public static boolean onOptionsMenuItemSelected(final int id, final Runnable setCompactIconMode) {
+    public static boolean onOptionsItemSelected(final int id, final Runnable setCompactIconMode) {
         switch (id) {
             case R.id.menu_map_compactIconModeOff:
                 Settings.setCompactIconMode(Settings.COMPACTICON_OFF);
