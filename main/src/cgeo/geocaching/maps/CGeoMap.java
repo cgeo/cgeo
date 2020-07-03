@@ -950,7 +950,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 return true;
             default:
                 if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
-                && !CompactIconModeUtils.onOptionsMenuItemSelected(id, this::compactIconModeChanged)) {
+                && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)) {
                     final MapSource mapSource = MapProviderFactory.getMapSource(id);
                     if (mapSource != null) {
                         item.setChecked(true);
