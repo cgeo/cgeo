@@ -37,8 +37,6 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.RouteItem;
-import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
@@ -54,6 +52,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
@@ -764,23 +763,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
 
-            menu.findItem(R.id.submenu_routing).setVisible(Routing.isAvailable());
-            switch (Settings.getRoutingMode()) {
-                case STRAIGHT:
-                    menu.findItem(R.id.menu_routing_straight).setChecked(true);
-                    break;
-                case WALK:
-                    menu.findItem(R.id.menu_routing_walk).setChecked(true);
-                    break;
-                case BIKE:
-                    menu.findItem(R.id.menu_routing_bike).setChecked(true);
-                    break;
-                case CAR:
-                    menu.findItem(R.id.menu_routing_car).setChecked(true);
-                    break;
-            }
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
+
+            // TrackUtils.onPrepareOptionsMenu is in maps/google/v2/GoogleMapActivity only
+            BRouterUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
@@ -914,34 +901,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
                 return true;
             }
-            case R.id.menu_routing_straight: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.STRAIGHT);
-                route.reloadRoute(overlayPositionAndScale);
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                return true;
-            }
-            case R.id.menu_routing_walk: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.WALK);
-                route.reloadRoute(overlayPositionAndScale);
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                return true;
-            }
-            case R.id.menu_routing_bike: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.BIKE);
-                route.reloadRoute(overlayPositionAndScale);
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                return true;
-            }
-            case R.id.menu_routing_car: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.CAR);
-                route.reloadRoute(overlayPositionAndScale);
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                return true;
-            }
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
@@ -950,7 +909,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 return true;
             default:
                 if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
-                && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)) {
+                && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
+                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)) {
                     final MapSource mapSource = MapProviderFactory.getMapSource(id);
                     if (mapSource != null) {
                         item.setChecked(true);
@@ -960,6 +920,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 }
         }
         return false;
+    }
+
+    private void routingModeChanged() {
+        route.reloadRoute(overlayPositionAndScale);
+        mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
     }
 
     private void compactIconModeChanged() {
