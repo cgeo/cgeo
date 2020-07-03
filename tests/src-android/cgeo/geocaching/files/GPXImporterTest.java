@@ -11,6 +11,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
@@ -23,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -52,8 +52,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
             // the "real" method check
             assertThat(GPXImporter.getWaypointsFileNameForGpxFile(gpx)).isEqualTo(wptsFileName);
             // they also need to be deleted, because of case sensitive tests that will not work correct on case insensitive file systems
-            FileUtils.deleteQuietly(gpx);
-            FileUtils.deleteQuietly(wpts);
+            FileUtils.delete(gpx);
+            FileUtils.delete(wpts);
         }
         final File gpx1 = new File(tempDir, "abc.gpx");
         assertThat(GPXImporter.getWaypointsFileNameForGpxFile(gpx1)).isNull();
@@ -341,7 +341,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(StringUtils.isNotBlank(globalTempDir)).overridingErrorMessage("java.io.tmpdir is not defined").isTrue();
 
         tempDir = new File(globalTempDir, "cgeogpxesTest");
-        cgeo.geocaching.utils.FileUtils.mkdirs(tempDir);
+        FileUtils.mkdirs(tempDir);
         assertThat(tempDir).overridingErrorMessage("Could not create directory %s", tempDir.getPath()).exists();
         // workaround to get storage initialized
         DataStore.getAllHistoryCachesCount();

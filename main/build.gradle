@@ -246,12 +246,9 @@ dependencies {
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
     implementation 'org.apache.commons:commons-compress:1.20'
-    //noinspection GradleDependency
-    implementation 'commons-io:commons-io:2.5'
-    //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-lang3:3.5'
-    //noinspection GradleDependency
-    implementation 'org.apache.commons:commons-text:1.1'
+    implementation 'commons-io:commons-io:2.7'
+    implementation 'org.apache.commons:commons-lang3:3.10'
+    implementation 'org.apache.commons:commons-text:1.8'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '2.9.1'
@@ -265,7 +262,7 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.0.3'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.0.6'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.50'
@@ -314,7 +311,6 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.14.0'
 
-    //noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:4.7.2'
 
     // Play Services

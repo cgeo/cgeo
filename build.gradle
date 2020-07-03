@@ -14,7 +14,7 @@ buildscript {
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.6'
 
         // monitor our application method limit
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.2'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
 
         // ribbonizer for easier distinction of non-release builds
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
@@ -94,18 +94,6 @@ allprojects {
                         // https://github.com/joel-costigliola/assertj-core/issues/345
                         if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
                             selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
-                        }
-                        // Apache Commons IO 2.6 fails in FileUtils.deleteDirectory()
-                        if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
-                            selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime.")
-                        }
-                        // Apache Commons lang3 3.6+ fails in StringUtils.join() for API < 19
-                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
-                            selection.reject("Apache Commons lang3 3.6+ calls methods not available in the Android runtime.")
-                        }
-                        // Apache Commons Text 1.2+ requires Apache Commons lang3 3.6+ (see above)
-                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-text' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 11) {
-                            selection.reject("Apache Commons text 1.2+ requires Apache Commons lang3 3.6+.")
                         }
                     }
                 }
