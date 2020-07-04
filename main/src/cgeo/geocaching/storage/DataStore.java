@@ -38,6 +38,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -547,7 +548,7 @@ public class DataStore {
     private static class DbHelper extends SQLiteOpenHelper {
 
         private static boolean firstRun = true;
-        public static final int MAX_TRAILHISTORY_LENGTH = 700;
+        public static final int MAX_TRAILHISTORY_LENGTH = getMaximumMapTrailLength();
 
         DbHelper(final Context context) {
             super(context, databasePath().getPath(), null, dbVersion);

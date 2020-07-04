@@ -815,6 +815,10 @@ public class Settings {
         putBoolean(R.string.pref_maptrail, showTrail);
     }
 
+    public static int getMaximumMapTrailLength() {
+        return getInt(R.string.pref_maptrail_length, getKeyInt(R.integer.historytrack_length_default));
+    }
+
     public static boolean showListsInCacheList() {
         return getBoolean(R.string.pref_showListsInCacheList, true);
     }
