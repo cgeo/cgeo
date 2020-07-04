@@ -3,22 +3,26 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.DisplayUtils;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.DialogPreference;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -107,6 +111,42 @@ public class ColorpickerPreference extends DialogPreference {
                         // nothing to do
                     }
                 });
+
+                opaquenessValue.setOnClickListener(v2 -> {
+                    final Context context = getContext();
+                    final EditText editText = new EditText(context);
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+                    editText.setText(String.valueOf(opaquenessSlider.getProgress()));
+
+                    final int min = 0;
+                    final int max = 255;
+
+                    new AlertDialog.Builder(context)
+                        .setTitle(String.format(context.getString(R.string.number_input_title), String.valueOf(min), String.valueOf(max)))
+                        .setView(editText)
+                        .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                            int newValue;
+                            try {
+                                newValue = Integer.parseInt(editText.getText().toString());
+                                if (newValue > max) {
+                                    newValue = max;
+                                    Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                                }
+                                if (newValue < min) {
+                                    newValue = min;
+                                    Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+                                }
+                                opaquenessSlider.setProgress(newValue);
+                                selectOpaqueness(opaquenessSlider.getProgress());
+                            } catch (NumberFormatException e) {
+                                Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
+                        .show()
+                    ;
+                });
+
             } else {
                 // without opaqueness slider don't use fully transparent colors
                 if (opaqueness == 0) {
