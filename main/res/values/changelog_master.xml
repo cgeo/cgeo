@@ -6,7 +6,7 @@
     · Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
     · Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
     · Change: Set all connectors to https\n
-    · Change: New adaptive launcher icon, following the new specs from Play store\n
+    · Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen)\n
     · Change: Open links in cache description as separate task\n
     · New: Load GPX track files and show track on map\n
     · New: Export trail history as GPX track file\n
