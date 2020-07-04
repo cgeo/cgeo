@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.SettingsUtils;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,9 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -65,30 +70,73 @@ public class ViewSettingsActivity extends AbstractActivity {
         }
         Collections.sort(items, (o1, o2) -> o1.key.compareTo(o2.key));
 
-        debugAdapter = new ArrayAdapter<KeyValue>(this, 0, items) {
-            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                View v = convertView;
-                if (null == convertView) {
-                    v = getLayoutInflater().inflate(R.layout.view_settings_item, null, false);
-                }
-                final KeyValue keyValue = items.get(position);
-                ((TextView) v.findViewById(R.id.settings_key)).setText(keyValue.key);
-                ((TextView) v.findViewById(R.id.settings_value)).setText(keyValue.value);
-
-                final View buttonDelete = v.findViewById(R.id.settings_delete);
-                buttonDelete.setOnClickListener(v2 -> deleteItem(position));
-                buttonDelete.setVisibility(editMode ? View.VISIBLE : View.GONE);
-
-                final View buttonEdit = v.findViewById(R.id.settings_edit);
-                buttonEdit.setOnClickListener(v3 -> editItem(position));
-                buttonEdit.setVisibility(editMode ? keyValue.type != SettingsUtils.SettingsType.TYPE_UNKNOWN ? View.VISIBLE : View.INVISIBLE : View.GONE);
-
-                return v;
-            }
-        };
+        debugAdapter = new SettingsAdapter(this);
         final ListView list = new ListView(this);
         setContentView(list);
         list.setAdapter(debugAdapter);
+        list.setFastScrollEnabled(true);
+    }
+
+    private class SettingsAdapter extends ArrayAdapter<KeyValue> implements SectionIndexer {
+        private HashMap<String, Integer> mapIndex;
+        private String[] sections;
+
+        SettingsAdapter(final Activity activity) {
+            super(activity, 0, items);
+            buildFastScrollIndex();
+        }
+
+        private void buildFastScrollIndex() {
+            mapIndex = new LinkedHashMap<>();
+            for (int x = 0; x < items.size(); x++) {
+                final String ch = items.get(x).key.substring(0, 1).toUpperCase(Locale.US);
+                if (!mapIndex.containsKey(ch)) {
+                    mapIndex.put(ch, x);
+                }
+            }
+            final ArrayList<String> sectionList = new ArrayList<>(mapIndex.keySet());
+            Collections.sort(sectionList);
+            sections = new String[sectionList.size()];
+            sectionList.toArray(sections);
+        }
+
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+            View v = convertView;
+            if (null == convertView) {
+                v = getLayoutInflater().inflate(R.layout.view_settings_item, null, false);
+            }
+            final KeyValue keyValue = items.get(position);
+            ((TextView) v.findViewById(R.id.settings_key)).setText(keyValue.key);
+            ((TextView) v.findViewById(R.id.settings_value)).setText(keyValue.value);
+
+            final View buttonDelete = v.findViewById(R.id.settings_delete);
+            buttonDelete.setOnClickListener(v2 -> deleteItem(position));
+            buttonDelete.setVisibility(editMode ? View.VISIBLE : View.GONE);
+
+            final View buttonEdit = v.findViewById(R.id.settings_edit);
+            buttonEdit.setOnClickListener(v3 -> editItem(position));
+            buttonEdit.setVisibility(editMode ? keyValue.type != SettingsUtils.SettingsType.TYPE_UNKNOWN ? View.VISIBLE : View.INVISIBLE : View.GONE);
+
+            return v;
+        }
+
+        public int getPositionForSection(final int section) {
+            return mapIndex.get(sections[section]);
+        }
+
+        public int getSectionForPosition(final int position) {
+            return 0;
+        }
+
+        public Object[] getSections() {
+            return sections;
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+            buildFastScrollIndex();
+        }
     }
 
     private void deleteItem(final int position) {
