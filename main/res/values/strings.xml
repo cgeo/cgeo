@@ -661,6 +661,8 @@
     <string name="init_dataDir">Select Geocache data directory</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
     <string name="init_maptrail">Show history track</string>
+    <string name="init_maptrail_length">History track max. length</string>
+    <string name="init_maptrail_length_summary">Set maximum length of history track (enforced on each startup of c:geo). Default value is 700 - adjust according to available memory.</string>
     <string name="init_summary_maptrail">When activated (and GPS is on) c:geo saves the history of your movements as a track and displays it on the map.</string>
     <string name="init_trailcolor">History track line color</string>
     <string name="init_trailwidth">History track line width</string>

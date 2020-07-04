@@ -628,6 +628,15 @@
                 android:title="@string/init_maptrail" />
             <Preference
                 android:selectable="false"
+                android:title="@string/init_maptrail_length"
+                android:summary="@string/init_maptrail_length_summary" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_maptrail_length"
+                app:min="100"
+                app:max="@integer/historytrack_length_max"
+                android:defaultValue="@integer/historytrack_length_default" />
+            <Preference
+                android:selectable="false"
                 android:summary="@string/init_brouterThreshold_description"
                 android:title="@string/init_brouterThreshold" />
             <cgeo.geocaching.settings.ProximityPreference
