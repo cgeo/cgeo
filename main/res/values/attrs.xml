@@ -50,6 +50,19 @@
         <attr name="showOpaquenessSlider" format="boolean" />
     </declare-styleable>
 
+    <!-- attributes for SeekbarPreference -->
+    <declare-styleable name="SeekbarPreference">
+        <attr name="min" format="integer" />
+        <attr name="max" format="integer" />
+        <attr name="label" format="string" />
+        <attr name="hasDecimals" format="boolean" />
+    </declare-styleable>
+
+    <!-- custom attributes for ProximityPreference -->
+    <declare-styleable name="ProximityPreference">
+        <attr name="highRes" format="boolean" />
+    </declare-styleable>
+
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />

@@ -71,15 +71,6 @@ public class Settings {
      */
     private static final char SEPARATOR_CHAR = ',';
 
-    private static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
-    public static final int SHOW_WP_THRESHOLD_MAX = 200;
-    private static final int BROUTER_THRESHOLD_DEFAULT = 10;
-    public static final int BROUTER_THRESHOLD_MAX = 120;
-
-    public static final int PROXIMITY_NOTIFICATION_MAX_DISTANCE = 1000;
-    public static final int PROXIMITY_NOTIFICATION_DISTANCE_FAR = 60;
-    public static final int PROXIMITY_NOTIFICATION_DISTANCE_NEAR = 20;
-
     public static final int MAPROTATION_OFF = 0;
     public static final int MAPROTATION_MANUAL = 1;
     public static final int MAPROTATION_AUTO = 2;
@@ -196,7 +187,7 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_choose_list), prefsV0.getBoolean(getKey(R.string.pref_choose_list), true));
             e.putBoolean(getKey(R.string.pref_loaddirectionimg), prefsV0.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
             e.putString(getKey(R.string.pref_gccustomdate), prefsV0.getString(getKey(R.string.pref_gccustomdate), GCConstants.DEFAULT_GC_DATE));
-            e.putInt(getKey(R.string.pref_showwaypointsthreshold), prefsV0.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
+            e.putInt(getKey(R.string.pref_showwaypointsthreshold), prefsV0.getInt(getKey(R.string.pref_showwaypointsthreshold), getKeyInt(R.integer.waypoint_threshold_default)));
             e.putBoolean(getKey(R.string.pref_opendetailslastpage), prefsV0.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
             e.putInt(getKey(R.string.pref_lastdetailspage), prefsV0.getInt(getKey(R.string.pref_lastdetailspage), 1));
             e.putInt(getKey(R.string.pref_defaultNavigationTool), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
@@ -214,12 +205,8 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_units_imperial), useImperialUnits());
 
             // show waypoints threshold now as a slider
-            int wpThreshold = getWayPointsThreshold();
-            if (wpThreshold < 0) {
-                wpThreshold = 0;
-            } else if (wpThreshold > SHOW_WP_THRESHOLD_MAX) {
-                wpThreshold = SHOW_WP_THRESHOLD_MAX;
-            }
+            int wpThreshold = Math.max(0, getWayPointsThreshold());
+            wpThreshold = Math.min(wpThreshold, getKeyInt(R.integer.waypoint_threshold_max));
             e.putInt(getKey(R.string.pref_showwaypointsthreshold), wpThreshold);
 
             // KEY_MAP_SOURCE must be string, because it is the key for a ListPreference now
@@ -308,7 +295,7 @@ public class Settings {
         return CgeoApplication.getInstance().getString(prefKeyId);
     }
 
-    private static int getKeyInt(final int prefKeyId) {
+    public static int getKeyInt(final int prefKeyId) {
         return CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
     }
 
@@ -1073,33 +1060,21 @@ public class Settings {
     }
 
     /**
-     * The Threshold for the showing of child waypoints
+     * The threshold for the showing of child waypoints
      */
     public static int getWayPointsThreshold() {
-        return getInt(R.string.pref_showwaypointsthreshold, SHOW_WP_THRESHOLD_DEFAULT);
-    }
-
-    static void setShowWaypointsThreshold(final int threshold) {
-        putInt(R.string.pref_showwaypointsthreshold, threshold);
+        return getInt(R.string.pref_showwaypointsthreshold, getKeyInt(R.integer.waypoint_threshold_default));
     }
 
     /**
-     * The Threshold for brouter routing (max. distance)
+     * The threshold for brouter routing (max. distance)
      */
     public static int getBrouterThreshold() {
-        return getInt(R.string.pref_brouterDistanceThreshold, BROUTER_THRESHOLD_DEFAULT);
-    }
-
-    static void setBrouterThreshold(final int threshold) {
-        putInt(R.string.pref_brouterDistanceThreshold, threshold);
+        return getInt(R.string.pref_brouterDistanceThreshold, getKeyInt(R.integer.brouter_threshold_default));
     }
 
     public static boolean isBrouterShowBothDistances() {
         return getBoolean(R.string.pref_brouterShowBothDistances, false);
-    }
-
-    static void setBrouterShowBothDistances(final boolean show) {
-        putBoolean(R.string.pref_brouterShowBothDistances, show);
     }
 
     /**
@@ -1115,11 +1090,7 @@ public class Settings {
     }
 
     public static int getProximityNotificationThreshold(final boolean farDistance) {
-        return getInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, farDistance ? PROXIMITY_NOTIFICATION_DISTANCE_FAR : PROXIMITY_NOTIFICATION_DISTANCE_NEAR);
-    }
-
-    public static void setProximityNotificationThreshold(final boolean farDistance, final int distance) {
-        putInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, distance);
+        return getInt(farDistance ? R.string.pref_proximityDistanceFar : R.string.pref_proximityDistanceNear, farDistance ? getKeyInt(R.integer.proximitynotification_far_default) : getKeyInt(R.integer.proximitynotification_near_default));
     }
 
     public static boolean isProximityNotificationTypeTone() {
