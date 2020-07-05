@@ -102,6 +102,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -184,6 +185,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
     };
+    private long mLastScroll = 0; // for fast scroll control
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -1263,6 +1265,28 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter.setInverseSort(currentInverseSort);
         adapter.forceSort();
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(final AbsListView absListView, final int state) {
+                if (state == SCROLL_STATE_IDLE && listView.isFastScrollEnabled()) {
+                    listView.postDelayed(() -> {
+                        if ((System.currentTimeMillis() - mLastScroll) > 1000) {
+                            listView.setFastScrollEnabled(false);
+                        }
+                    }, 1000);
+
+                }
+            }
+
+            @Override
+            public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
+                mLastScroll = System.currentTimeMillis();
+                if (!listView.isFastScrollEnabled()) {
+                    listView.setFastScrollEnabled(true);
+                }
+            }
+        });
     }
 
     private void updateAdapter() {
