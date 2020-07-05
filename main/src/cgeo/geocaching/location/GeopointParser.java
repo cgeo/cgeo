@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Parse coordinates.
@@ -571,11 +571,12 @@ public class GeopointParser {
      * Detects all coordinates in the given text.
      *
      * @param initialText Text to parse for coordinates
-     * @return a collection of parsed geopoints and their starting position in the given text
+     * @return a collection of parsed geopoints as well as their starting and ending position in the given text
+     *   'start' points at the first char of the coordinate text, 'end' points at the first char AFTER the coordinate text
      */
     @NonNull
-    public static Collection<ImmutablePair<Geopoint, Integer>> parseAll(@NonNull final String initialText) {
-        final List<ImmutablePair<Geopoint, Integer>> waypoints = new LinkedList<>();
+    public static Collection<ImmutableTriple<Geopoint, Integer, Integer>> parseAll(@NonNull final String initialText) {
+        final List<ImmutableTriple<Geopoint, Integer, Integer>> waypoints = new LinkedList<>();
 
         String text = initialText;
         int start = 0;
@@ -594,7 +595,7 @@ public class GeopointParser {
             }
 
             if (best != null) {
-                waypoints.add(new ImmutablePair<>(best.geopoint, start + best.matcherStart));
+                waypoints.add(new ImmutableTriple<>(best.geopoint, start + best.matcherStart, start + best.matcherStart + best.matcherLength));
 
                 final int nextOffset = best.matcherStart + best.matcherLength;
                 text = text.substring(nextOffset);

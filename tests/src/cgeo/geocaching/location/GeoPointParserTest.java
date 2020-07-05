@@ -1,5 +1,9 @@
 package cgeo.geocaching.location;
 
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.assertj.core.api.Assertions.offset;
@@ -317,4 +321,30 @@ public class GeoPointParserTest {
     public void test8589() {
         assertParsingFails("6, 12, 16, 29");
     }
+
+    public void parseMultipleCoordinatesWithCorrectStartEndPositions() {
+        Collection<ImmutableTriple<Geopoint, Integer, Integer>> parsed = GeopointParser.parseAll(
+                "@n1 (W) N 48° 01.194' · E 011° 43.814'\n" +
+                        "@n2 (W) N 48° 01.194' · E 011° 43.814'");
+        assertThat(parsed.size()).isEqualTo(2);
+        Iterator<ImmutableTriple<Geopoint, Integer, Integer>> it = parsed.iterator();
+        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 8, 38);
+        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 47, 77);
+
+        parsed = GeopointParser.parseAll(
+                "@n1 (W) N48 01.194 E011 43.814\n" +
+                        "@n2 (W) N48 01.194 E011 43.814");
+        assertThat(parsed.size()).isEqualTo(2);
+        it = parsed.iterator();
+        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 8, 30);
+        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 39, 61);
+
+    }
+
+    private static void assertGeopointTriple(final ImmutableTriple<Geopoint, Integer, Integer> triple, final Geopoint gp, final int start, final int end) {
+        assertThat(triple.getLeft()).isEqualTo(gp);
+        assertThat(triple.getMiddle()).isEqualTo(start);
+        assertThat(triple.getRight()).isEqualTo(end);
+    }
+
 }

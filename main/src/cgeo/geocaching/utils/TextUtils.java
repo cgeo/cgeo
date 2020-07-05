@@ -16,11 +16,17 @@ import androidx.core.content.ContextCompat;
 
 import java.nio.charset.StandardCharsets;
 import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -33,6 +39,11 @@ public final class TextUtils {
     public static final Collator COLLATOR = getCollator();
 
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
+
+    /**
+     * Internal cache for created Patterns (avoids parsing them unnecessarily often)
+     */
+    private static final Map<String, Pattern> PATTERN_CACHE = Collections.synchronizedMap(new HashMap<>());
 
     private TextUtils() {
         // utility class
@@ -246,4 +257,172 @@ public final class TextUtils {
         }
         return span;
     }
+
+    @NonNull
+    public static String getTextBeforeIndexUntil(final String text, final int idx, final String startToken) {
+        return getTextBeforeIndexUntil(text, idx, startToken, -1);
+    }
+
+    @NonNull
+    public static String getTextAfterIndexUntil(final String text, final int idx, final String endToken) {
+        return getTextAfterIndexUntil(text, idx, endToken, -1);
+    }
+
+    /**
+     * Returns substring of text before (and excluding) given 'idx' until one of given conditions is met
+     *
+     * @param text       text to work on
+     * @param idx        idx to start checking
+     * @param startToken if not null, return text until (and excluding) this token is found
+     * @param maxLength  if >=0, text is truncated to given max length
+     * @return found text or empty string. Never null.
+     */
+    @NonNull
+    public static String getTextBeforeIndexUntil(final String text, final int idx, final String startToken, final int maxLength) {
+        if (StringUtils.isEmpty(text) || idx <= 0) {
+            return "";
+        }
+        String before = text.substring(0, Math.min(idx, text.length()));
+
+        if (!StringUtils.isEmpty(startToken)) {
+            final int tokenIdx = before.lastIndexOf(startToken);
+            if (tokenIdx >= 0) {
+                before = before.substring(tokenIdx + startToken.length());
+            }
+        }
+        return (maxLength >= 0 && before.length() > maxLength) ? before.substring(before.length() - maxLength) : before;
+    }
+
+    /**
+     * Returns substring of text after (and excluding) given 'idx' until one of given conditions is met
+     *
+     * @param text      text to work on
+     * @param idx       idx to start checking
+     * @param endToken  if not null, return text until (and excluding) this token is found
+     * @param maxLength if >=0, text is truncated to given max length
+     * @return found text or empty string. Never null.
+     */
+    @NonNull
+    public static String getTextAfterIndexUntil(final String text, final int idx, final String endToken, final int maxLength) {
+        if (StringUtils.isEmpty(text) || idx >= text.length() - 1) {
+            return "";
+        }
+        String after = text.substring(idx < 0 ? 0 : idx + 1);
+        if (!StringUtils.isEmpty(endToken)) {
+            final int tokenIdx = after.indexOf(endToken);
+            if (tokenIdx >= 0) {
+                after = after.substring(0, tokenIdx);
+            }
+        }
+        return (maxLength >= 0 && after.length() > maxLength) ? after.substring(0, maxLength) : after;
+    }
+
+    /**
+     * Tries to find the next value in 'text' which is delimited (beginning and end) with given ÄdelimiterChar and
+     * returns text inside these delimiters. In this text, occurences of both 'escapedChar' or 'delimiterChar' can
+     * be escaped with 'escapedChar' to get them into the indelimited text.
+     * Method returns null if no delimited value is found.
+     * This is the 'inverse' function to {@link #createDelimitedValue(String, char, char)}
+     */
+    public static String parseNextDelimitedValue(@NonNull final String text, final char delimiterChar, final char escapeChar) {
+        final String quotedDelim = "\\" + delimiterChar;
+        final String quotedEsc = "\\" + escapeChar;
+
+        final Pattern findNextPattern =
+                compilePattern("(?s)" + quotedDelim +
+                        "((?:" + quotedEsc + ".|" +
+                        "[^" + quotedEsc + quotedDelim + "]++)*)" + quotedDelim);
+
+        final Matcher m = findNextPattern.matcher(text);
+        if (m.find()) {
+            return compilePattern(quotedEsc + "(.)").matcher(m.group(1)).replaceAll("$1");
+        }
+        return null;
+    }
+
+    /**
+     * Returns a delimited version of given 'text' using given 'delimiterChar'. Occurences of 'delimiterChar' are
+     * escaped with given 'escapeChar'. Occurences of 'escapedChar' are also escaped with 'escapedChar'.
+     * This is the 'inverse' function to {@link #parseNextDelimitedValue(String, char, char)}
+     */
+    @NonNull
+    public static String createDelimitedValue(@NonNull final String text, final char delimiterChar, final char escapeChar) {
+        final String quotedDelim = "\\" + delimiterChar;
+        final String quotedEsc = "\\" + escapeChar;
+        return delimiterChar + compilePattern("([" + quotedDelim + quotedEsc + "])").matcher(text).replaceAll(quotedEsc + "$1") + delimiterChar;
+    }
+
+    /**
+     * Returns text split into its single words (a word being a continuous group of non-whitespace-characters).
+     * Leadig/trailing whitespaces are omitted. blank string (or null string) results in empty array.
+     *
+     * @param text text to split
+     * @return splited into words
+     */
+    @NonNull
+    public static String[] getWords(final String text) {
+        final String theText = text == null ? "" : text.trim();
+        if (theText.isEmpty()) {
+            return new String[0];
+        }
+        return compilePattern("\\s+").split(theText);
+    }
+
+    /**
+     * Replaces all occurences of texts starting with 'startToken' and ending with 'endTOken' with given 'replacement'.
+     * Note that 'replacement' is interpreted as regex as defined in {@link String#replaceAll(String, String)}}.
+     * In replacmenent, '$1' may be used to reference the replaced text inside the tokens
+     * it is assured that for same parameters, matches are always the same as in {@link #getAll(String, String, String)}.
+     *
+     * @param text        text to do replacement in
+     * @param startToken  starttoken. if blank then "starttoken" is assumed to be start of text
+     * @param endToken    starttoken. if blank then "endtoken" is assumed to be end of text
+     * @param replacement replacements
+     * @return text with replacements
+     */
+    @NonNull
+    public static String replaceAll(final String text, final String startToken, final String endToken, final String replacement) {
+        if (text == null) {
+            return "";
+        }
+        return getTokenSearchPattern(startToken, endToken).matcher(text).replaceAll(replacement);
+    }
+
+    /**
+     * Gets all text occurences starting with 'startToken' and ending with 'endToken'.
+     * it is assured that for same parameters, matches are always the same as in {@link #replaceAll(String, String, String, String)}.
+     *
+     * @param text       text to search in
+     * @param startToken starttoken. if blank then "starttoken" is assumed to be start of text
+     * @param endToken   starttoken. if blank then "endtoken" is assumed to be end of text
+     * @return array of found matches
+     */
+    @NonNull
+    public static List<String> getAll(final String text, final String startToken, final String endToken) {
+        if (text == null) {
+            return Collections.emptyList();
+        }
+        final Matcher m = getTokenSearchPattern(startToken, endToken).matcher(text);
+        final List<String> result = new ArrayList<>();
+        while (m.find()) {
+            result.add(m.group(1));
+        }
+        return result;
+    }
+
+    private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {
+        return compilePattern("(?s)" + (StringUtils.isEmpty(startToken) ? "^" : Pattern.quote(startToken)) + "(.*?)" +
+                (StringUtils.isEmpty(endToken) ? "$" : Pattern.quote(endToken)));
+    }
+
+    private static Pattern compilePattern(final String patternString) {
+
+        Pattern pattern = PATTERN_CACHE.get(patternString);
+        if (pattern == null) {
+            pattern = Pattern.compile(patternString);
+            PATTERN_CACHE.put(patternString, pattern);
+        }
+        return pattern;
+    }
+
 }

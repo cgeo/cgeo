@@ -124,6 +124,11 @@
                 android:text="@string/cache_personal_note_edit" />
 
             <Button
+                android:id="@+id/storewaypoints_personalnote"
+                style="@style/button_small"
+                android:text="@string/cache_personal_note_storewaypoints" />
+
+            <Button
                 android:id="@+id/upload_personalnote"
                 style="@style/button_small"
                 android:text="@string/cache_personal_note_upload" />

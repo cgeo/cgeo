@@ -900,6 +900,11 @@
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">Allow waypoints from note</string>
     <string name="cache_personal_note_edit">Edit</string>
+    <string name="cache_personal_note_storewaypoints">Store Waypoints</string>
+    <string name="cache_personal_note_storewaypoints_success">Waypoints were added to personal note</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Waypoints were added to note but had to be shortened</string>
+    <string name="cache_personal_note_storewaypoints_failed">Waypoints could not be stored in note due to size limits</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">No user waypoints found</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevent waypoints extraction</string>
     <string name="cache_personal_note_limit">Personal note limit</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">This personal note will be truncated after %d characters by Geocaching.com.</string>

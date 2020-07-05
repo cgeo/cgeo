@@ -8,6 +8,7 @@ import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.jetbrains.annotations.NotNull;
 
 public class Waypoint implements IWaypoint {
 
@@ -33,6 +35,16 @@ public class Waypoint implements IWaypoint {
 
     private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int ORDER_UNDEFINED = -2;
+
+    //Constants for waypoint parsing
+    private static final String PARSING_NAME_PRAEFIX = "@";
+    private static final char PARSING_USERNOTE_DELIM = '"';
+    private static final char PARSING_USERNOTE_ESCAPE = '\\';
+    private static final String PARSING_USERNOTE_CONTINUED = "...";
+    private static final String PARSING_TYPE_OPEN = "(";
+    private static final String PARSING_TYPE_CLOSE = ")";
+    private static final String BACKUP_TAG_OPEN = "<----->";
+    private static final String BACKUP_TAG_CLOSE = "</----->";
 
     private int id = -1;
     private String geocode = "geocode";
@@ -66,7 +78,6 @@ public class Waypoint implements IWaypoint {
 
     /**
      * require name and type for every waypoint
-     *
      */
     public Waypoint(final String name, final WaypointType type, final boolean own) {
         this.name = name;
@@ -84,7 +95,6 @@ public class Waypoint implements IWaypoint {
 
     /**
      * copy constructor
-     *
      */
     public Waypoint(final Waypoint other) {
         merge(other);
@@ -275,7 +285,6 @@ public class Waypoint implements IWaypoint {
 
     /**
      * Delegates the creation of the waypoint-id for gpx-export to the waypoint
-     *
      */
     public String getGpxId() {
 
@@ -295,35 +304,114 @@ public class Waypoint implements IWaypoint {
      * Detect coordinates in the given text and converts them to user-defined waypoints.
      * Works by rule of thumb.
      *
-     * @param text Text to parse for waypoints
+     * @param text       Text to parse for waypoints
      * @param namePrefix Prefix of the name of the waypoint
      * @return a collection of found waypoints
      */
     public static Collection<Waypoint> parseWaypoints(@NonNull final String text, @NonNull final String namePrefix) {
         final List<Waypoint> waypoints = new LinkedList<>();
-        final Collection<ImmutablePair<Geopoint, Integer>> matches = GeopointParser.parseAll(text);
 
-        int count = 1;
-        for (final ImmutablePair<Geopoint, Integer> match : matches) {
-            final Geopoint point = match.getLeft();
-            final Integer start = match.getRight();
-            final String name = namePrefix + " " + count;
-            final String potentialWaypointType = text.substring(Math.max(0, start - 15));
-            final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), true);
-            waypoint.setCoords(point);
-            waypoints.add(waypoint);
-            count++;
+        //if a backup is found, we parse it first
+        for (final String backup : TextUtils.getAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE)) {
+            parseWaypoints(waypoints, backup, namePrefix);
         }
+        parseWaypoints(waypoints, TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, ""), namePrefix);
 
         return waypoints;
     }
 
+    private static void parseWaypoints(final Collection<Waypoint> waypoints, final String text, final String namePrefix) {
+        final Collection<ImmutableTriple<Geopoint, Integer, Integer>> matches = GeopointParser.parseAll(text);
+
+        int count = 1;
+        for (final ImmutableTriple<Geopoint, Integer, Integer> match : matches) {
+            final Geopoint point = match.getLeft();
+            final Integer start = match.getMiddle();
+            final Integer end = match.getRight();
+
+            final String[] wordsBefore = TextUtils.getWords(TextUtils.getTextBeforeIndexUntil(text, start, "\n"));
+            final String lastWordBefore = wordsBefore.length == 0 ? "" : wordsBefore[wordsBefore.length - 1];
+
+            //try to get a waypointType
+            final WaypointType wpType = parseWaypointType(text.substring(Math.max(0, start - 20), start), lastWordBefore);
+
+            //try to get a name
+            String name = parseName(wordsBefore, wpType);
+            if (name == null) {
+                name = namePrefix + " " + count;
+            }
+
+            //create the waypoint
+            final Waypoint waypoint = new Waypoint(name, wpType, true);
+            waypoint.setCoords(point);
+
+            //try to get a user note
+            final String userNote = parseUserNote(text, end);
+            if (!StringUtils.isBlank(userNote)) {
+                waypoint.setUserNote(userNote.trim());
+            }
+
+            waypoints.add(waypoint);
+            count++;
+        }
+    }
+
+    private static String parseUserNote(final String text, final int end) {
+        final String after = TextUtils.getTextAfterIndexUntil(text, end - 1, null).trim();
+        if (after.startsWith("" + PARSING_USERNOTE_DELIM)) {
+            return TextUtils.parseNextDelimitedValue(after, PARSING_USERNOTE_DELIM, PARSING_USERNOTE_ESCAPE);
+        }
+        return TextUtils.getTextAfterIndexUntil(text, end - 1, "\n");
+    }
+
     /**
-     * Detect waypoint types in the personal note text. It works by rule of thumb only.
+     * try to parse a name out of given words. If not possible, null is returned
      */
-    private static WaypointType parseWaypointType(final String input) {
-        final String lowerInput = StringUtils.substring(input, 0, 20).toLowerCase(Locale.getDefault());
+    @NotNull
+    private static String parseName(final String[] words, final WaypointType wpType) {
+        String name = "";
+        if (words.length > 0 && words[0].startsWith(PARSING_NAME_PRAEFIX)) {
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
+                //remove parsing_name_praefix in first word
+                if (i == 0) {
+                    word = word.substring(1);
+                }
+                //remove words which are in parenthesis
+                if (word.startsWith(PARSING_TYPE_OPEN) && word.endsWith(PARSING_TYPE_CLOSE)) {
+                    continue;
+                }
+                //remove last word if it is just the waypoint type id
+                if (i == words.length - 1 && word.toLowerCase(Locale.getDefault())
+                        .equals(wpType.getShortId().toLowerCase(Locale.getDefault()))) {
+                    continue;
+                }
+                if (!StringUtils.isBlank(word)) {
+                    if (name.length() > 0) {
+                        name += " ";
+                    }
+                    name += word;
+                }
+            }
+        }
+        return StringUtils.isBlank(name) ? null : name.trim();
+    }
+
+    /**
+     * Detect waypoint types in the personal note text. Tries to find various ways that
+     * the waypoints name or id is written in given text.
+     */
+    private static WaypointType parseWaypointType(final String input, final String lastWord) {
+        final String lowerInput = input.toLowerCase(Locale.getDefault());
+        final String lowerLastWord = lastWord.toLowerCase(Locale.getDefault());
         for (final WaypointType wpType : WaypointType.values()) {
+            final String lowerShortId = wpType.getShortId().toLowerCase(Locale.getDefault());
+            if (lowerLastWord.equals(lowerShortId)) {
+                return wpType;
+            }
+            if (lowerInput.contains(PARSING_TYPE_OPEN + lowerShortId + PARSING_TYPE_CLOSE)) {
+                return wpType;
+            }
             if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
                 return wpType;
             }
@@ -335,6 +423,131 @@ public class Waypoint implements IWaypoint {
             }
         }
         return WaypointType.WAYPOINT;
+    }
+
+    /**
+     * Replaces waypoints stored in text with the ones passed as parameter.
+     *
+     * @param text      text to search and replace waypoints in
+     * @param waypoints new waypoints to store
+     * @param maxSize   if >0 then total size of returned text may not exceed this parameter
+     * @return new text, or null if waypoints could not be placed due to size restrictions
+     */
+    public static String putParseableWaypointTextstore(final String text, final Collection<Waypoint> waypoints, final int maxSize) {
+        final String cleanText = TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "").trim() + "\n\n";
+        if (maxSize > -1 && cleanText.length() > maxSize) {
+            return null;
+        }
+        final String newWaypoints = getParseableText(waypoints, maxSize - cleanText.length(), true);
+        if (newWaypoints == null) {
+            return null;
+        }
+        return cleanText + newWaypoints;
+    }
+
+    /**
+     * Tries to create a parseable text containing all  information from given waypoints
+     * and meeting a given maximum text size. Different strategies are applied to meet
+     * that text size.
+     * if 'includeBackupTags' is set, then returned text is surrounded by tags
+     *
+     * @return parseable text for wayppints, or null if maxsize cannot be met
+     */
+    public static String getParseableText(final Collection<Waypoint> waypoints, final int maxSize, final boolean includeBackupTags) {
+        String text = getParseableText(waypoints, true, -1, includeBackupTags);
+        if (maxSize < 0 || text.length() <= maxSize) {
+            return text;
+        }
+
+        //try to shrink size using maximum user note length
+        for (int maxUserNoteLength = 50; maxUserNoteLength >= 0; maxUserNoteLength -= 10) {
+            text = getParseableText(waypoints, true, maxUserNoteLength, includeBackupTags);
+            if (text.length() <= maxSize) {
+                return text;
+            }
+        }
+
+        //try to shrink size by creating without user notes and name
+        text = getParseableText(waypoints, false, 0, includeBackupTags);
+        if (text.length() <= maxSize) {
+            return text;
+        }
+        //not possible to meet size requirements
+        return null;
+    }
+
+    public static String getParseableText(final Collection<Waypoint> waypoints, final boolean includeName, final int maxUserNoteSize, final boolean includeBackupTags) {
+        //no streaming allowed
+        final List<String> waypointsAsStrings = new ArrayList<>();
+        for (final Waypoint w : waypoints) {
+            waypointsAsStrings.add(w.getParseableText(includeName, maxUserNoteSize));
+        }
+        return (includeBackupTags ? BACKUP_TAG_OPEN + "\n" : "") +
+                StringUtils.join(waypointsAsStrings, "\n") +
+                (includeBackupTags ? "\n" + BACKUP_TAG_CLOSE : "");
+    }
+
+    /**
+     * creates parseable waypoint text
+     *
+     * @param includeName     if true, name will be included
+     * @param maxUserNoteSize if -1, user notes size is not limited. if 0, user note is omitted.
+     *                        if >0 user note size is limited to given size
+     * @return
+     */
+    public String getParseableText(final boolean includeName, final int maxUserNoteSize) {
+        final StringBuilder sb = new StringBuilder();
+        if (includeName) {
+            sb.append(PARSING_NAME_PRAEFIX).append(this.getName()).append(" ");
+        }
+        sb.append(PARSING_TYPE_OPEN).append(this.getWaypointType().getShortId().toUpperCase(Locale.US))
+                .append(PARSING_TYPE_CLOSE).append(" ");
+        sb.append(getCoords());
+        if (maxUserNoteSize != 0 && !StringUtils.isBlank(getUserNote())) {
+            String userNote = getUserNote();
+            if (maxUserNoteSize > 0 && userNote.length() > maxUserNoteSize) {
+                userNote = userNote.substring(0, maxUserNoteSize) + PARSING_USERNOTE_CONTINUED;
+            }
+            sb.append("\n").append(TextUtils.createDelimitedValue(userNote, PARSING_USERNOTE_DELIM, PARSING_USERNOTE_ESCAPE));
+        }
+        return sb.toString();
+    }
+
+    public boolean mergeFromParsedText(final Waypoint parsedWaypoint, final String parsePraefix) {
+        boolean changed = false;
+
+        final String waypointTypeName = getWaypointType().getL10n().toLowerCase(Locale.getDefault());
+
+        if (this.isUserDefined()) {
+            //type
+            if (this.getWaypointType() == WaypointType.WAYPOINT &&
+                    parsedWaypoint.getWaypointType() != WaypointType.WAYPOINT) {
+                changed = true;
+                waypointType = parsedWaypoint.getWaypointType();
+            }
+            //name: change when existing waypoint has a "default name"
+            if (startsWithAnyLower(getName(), parsePraefix, waypointTypeName) &
+                    !startsWithAnyLower(parsedWaypoint.getName(), parsePraefix, waypointTypeName)) {
+                this.setName(parsedWaypoint.getName());
+                changed = true;
+            }
+        }
+        //user note
+        if (StringUtils.isBlank(this.getUserNote()) && !StringUtils.isBlank(parsedWaypoint.getUserNote())) {
+            this.setUserNote(parsedWaypoint.getUserNote());
+            changed = true;
+        }
+        return changed;
+    }
+
+    private static boolean startsWithAnyLower(final String text, final String... compare) {
+        final String textLower = text.toLowerCase(Locale.getDefault());
+        for (String s : compare) {
+            if (textLower.startsWith(s.toLowerCase(Locale.getDefault()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public GeoitemRef getGeoitemRef() {
@@ -391,9 +604,7 @@ public class Waypoint implements IWaypoint {
     /**
      * Suffix the waypoint type with a running number to get a default name.
      *
-     * @param type
-     *            type to create a new default name for
-     *
+     * @param type type to create a new default name for
      */
     public static String getDefaultWaypointName(final Geocache cache, final WaypointType type) {
         final ArrayList<String> wpNames = new ArrayList<>();

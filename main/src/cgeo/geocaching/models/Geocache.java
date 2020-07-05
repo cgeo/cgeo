@@ -1548,34 +1548,44 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * Detect coordinates in the given text and add them to user-defined waypoints.
+     * Detect waypoints (identified by coordinates) in the given text and add them to user-defined waypoints
+     * or updates existing ones with meta information.
      *
      * @param text text which might contain coordinates
      * @param updateDb if true the added waypoints are stored in DB right away
-     * @param namePrefix prefix for waypoint names
+     * @param namePrefix prefix for default waypoint names (if names cannot be extracted from text)
+     * @param forceExtraction if extraction should be enforced, regardless of cache setting
      */
     public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
         boolean changed = false;
         if (forceExtraction || !preventWaypointsFromNote) {
-            for (final Waypoint waypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
-                if (!hasIdenticalWaypoint(waypoint.getCoords())) {
-                    addOrChangeWaypoint(waypoint, updateDb);
+            for (final Waypoint parsedWaypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
+                final Waypoint existingWaypoint = findWaypointWithSameCoords(parsedWaypoint.getCoords());
+                if (existingWaypoint == null) {
+                    //add as new waypoint
+                    addOrChangeWaypoint(parsedWaypoint, updateDb);
                     changed = true;
+                } else {
+                    //if parsed waypoint contains more up-to-date-information -> overwrite it
+                    changed = existingWaypoint.mergeFromParsedText(parsedWaypoint, namePrefix);
+                    if (changed) {
+                        addOrChangeWaypoint(existingWaypoint, updateDb);
+                    }
                 }
             }
         }
         return changed;
     }
 
-    private boolean hasIdenticalWaypoint(final Geopoint point) {
+    private Waypoint findWaypointWithSameCoords(final Geopoint point) {
         for (final Waypoint waypoint: waypoints) {
             // waypoint can have no coords such as a Final set by cache owner
             final Geopoint coords = waypoint.getCoords();
             if (coords != null && coords.equals(point)) {
-                return true;
+                return waypoint;
             }
         }
-        return false;
+        return null;
     }
 
     /*

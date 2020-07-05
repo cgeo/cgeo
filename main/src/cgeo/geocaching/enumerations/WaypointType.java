@@ -21,27 +21,31 @@ import org.apache.commons.lang3.StringUtils;
  * Enum listing waypoint types
  */
 public enum WaypointType {
-    FINAL("flag", "Final Location", R.string.wp_final, R.drawable.waypoint_flag, 3, R.drawable.dot_waypoint_flag),
-    OWN("own", "Own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, 5, R.drawable.dot_waypoint),
-    PARKING("pkg", "Parking Area", R.string.wp_pkg, R.drawable.waypoint_pkg, -1, R.drawable.dot_waypoint_pkg),
-    PUZZLE("puzzle", "Virtual Stage", R.string.wp_puzzle, R.drawable.waypoint_puzzle, 2, R.drawable.dot_waypoint),
-    STAGE("stage", "Physical Stage", R.string.wp_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint),
-    TRAILHEAD("trailhead", "Trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint),
-    WAYPOINT("waypoint", "Reference Point", R.string.wp_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_reference),
-    ORIGINAL("original", "Original Coordinates", R.string.wp_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_reference);
+    FINAL("flag", "f", "Final Location", R.string.wp_final, R.drawable.waypoint_flag, 3, R.drawable.dot_waypoint_flag),
+    OWN("own", "o", "Own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, 5, R.drawable.dot_waypoint),
+    PARKING("pkg", "p", "Parking Area", R.string.wp_pkg, R.drawable.waypoint_pkg, -1, R.drawable.dot_waypoint_pkg),
+    PUZZLE("puzzle", "x", "Virtual Stage", R.string.wp_puzzle, R.drawable.waypoint_puzzle, 2, R.drawable.dot_waypoint),
+    STAGE("stage", "s", "Physical Stage", R.string.wp_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint),
+    TRAILHEAD("trailhead", "t", "Trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint),
+    WAYPOINT("waypoint", "w", "Reference Point", R.string.wp_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_reference),
+    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_reference);
 
     @NonNull
     public final String id;
 
-    @NonNull public final String gpx;
+    public final String shortId;
+
+    @NonNull
+    public final String gpx;
     public final int stringId;
     public final int markerId;
 
     public final int order;
     public final int dotMarkerId;
 
-    WaypointType(@NonNull final String id, @NonNull final String gpx, final int stringId, final int markerId, final int order, final int dotMarkerId) {
+    WaypointType(@NonNull final String id, @NonNull final String shortId, @NonNull final String gpx, final int stringId, final int markerId, final int order, final int dotMarkerId) {
         this.id = id;
+        this.shortId = shortId;
         this.gpx = gpx;
         this.stringId = stringId;
         this.markerId = markerId;
@@ -54,11 +58,13 @@ public enum WaypointType {
      * non public so that {@code null} handling can be handled centrally in the enum type itself
      */
     private static final Map<String, WaypointType> FIND_BY_ID = new HashMap<>();
+
     static {
         for (final WaypointType wt : values()) {
             FIND_BY_ID.put(wt.id, wt);
         }
     }
+
     @NonNull
     public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes();
 
@@ -90,6 +96,11 @@ public enum WaypointType {
     @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getString(stringId);
+    }
+
+    @NonNull
+    public final String getShortId() {
+        return shortId;
     }
 
     @Override
