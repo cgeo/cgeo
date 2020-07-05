@@ -73,6 +73,25 @@ public class WaypointTest extends CGeoTestCase {
         assertWaypoint(waypoints.iterator().next(), "Prefix 1", new Geopoint("N 45°3.5 E 27°7.5"));
     }
 
+    private static void parseAndAssertFirstWaypoint(final String text, final String name, final WaypointType wpType, final String userNote) {
+        final Collection<Waypoint> coll = Waypoint.parseWaypoints(text, "Praefix");
+        assertThat(coll.size()).isEqualTo(1);
+        final Iterator<Waypoint> iterator = coll.iterator();
+        final Waypoint wp = iterator.next();
+        assertWaypoint(wp, name, wp.getCoords(), wpType, userNote);
+    }
+
+    private static void assertWaypoint(final Waypoint waypoint, final Waypoint expectedWaypoint) {
+        assertWaypoint(waypoint, expectedWaypoint.getName(), expectedWaypoint.getCoords(), expectedWaypoint.getWaypointType(), expectedWaypoint.getUserNote());
+    }
+
+    private static void assertWaypoint(final Waypoint waypoint, final String name, final Geopoint geopoint, final WaypointType wpType, final String userNote) {
+        assertWaypoint(waypoint, name, geopoint);
+        assertThat(waypoint.getWaypointType()).isEqualTo(wpType);
+        assertThat(waypoint.getUserNote()).isEqualTo(userNote);
+    }
+
+
     private static void assertWaypoint(final Waypoint waypoint, final String name, final Geopoint geopoint) {
         assertThat(waypoint.getName()).isEqualTo(name);
         assertThat(waypoint.getCoords()).isEqualTo(geopoint);
@@ -101,6 +120,144 @@ public class WaypointTest extends CGeoTestCase {
         assertWaypoint(iterator.next(), "Prefix 2", new Geopoint("N 45°50.305 E 9°43.991"));
         assertWaypoint(iterator.next(), "Prefix 3", new Geopoint("N 45°49.739 E 9°45.038"));
         assertWaypoint(iterator.next(), "Prefix 4", new Geopoint("N 45°50.305 E 9°43.991"));
+    }
+
+    public static void testParseWaypointWithNameAndDescription() {
+        final String note = "@WPName X N45 49.739 E9 45.038 this is the description\n\"this shall NOT be part of the note\"";
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        assertWaypoint(iterator.next(), "WPName", new Geopoint("N 45°49.739 E 9°45.038"), WaypointType.PUZZLE, "this is the description");
+    }
+
+    public static void testParseWaypointWithMultiwordNameAndMultilineDescription() {
+        final String note = "@ A   longer  name \twith (o) whitespaces  N45 49.739 E9 45.038 \"this is the \\\"description\\\"\nit goes on and on\" some more text";
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
+        assertThat(waypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        assertWaypoint(iterator.next(), "A longer name with whitespaces", new Geopoint("N 45°49.739 E 9°45.038"), WaypointType.OWN,
+                "this is the \"description\"\nit goes on and on");
+    }
+
+    public static void testCreateParseableWaypointTextAndParseIt() {
+        final Waypoint wp = new Waypoint("name", WaypointType.FINAL, true);
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        wp.setCoords(gp);
+        wp.setUserNote("user note with \"escaped\" text");
+        assertThat(wp.getParseableText(true, -1)).isEqualTo(
+                "@name (F) " + gp.toString() + "\n" +
+                        "\"user note with \\\"escaped\\\" text\"");
+
+        final Collection<Waypoint> parsedWaypoints = Waypoint.parseWaypoints(wp.getParseableText(true, -1), "Prefix");
+        assertThat(parsedWaypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
+        assertWaypoint(iterator.next(), wp);
+
+    }
+
+    public static void testCreateReducedParseableWaypointText() {
+        final Waypoint wp1 = new Waypoint("name", WaypointType.FINAL, true);
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        wp1.setCoords(gp);
+        wp1.setUserNote("This is a user note");
+        final Waypoint wp2 = new Waypoint("name2", WaypointType.ORIGINAL, true);
+        wp2.setCoords(gp);
+        wp2.setUserNote("This is a user note 2");
+
+        final Collection<Waypoint> wpColl = new ArrayList<>();
+        wpColl.add(wp1);
+        wpColl.add(wp2);
+        final String gpStr = gp.toString();
+
+        assertThat(Waypoint.getParseableText(wpColl, 10, false)).isNull();
+
+        final String fullExpected = "@name (F) " + gpStr + "\n\"This is a user note\"\n@name2 (H) " + gpStr + "\n\"This is a user note 2\"";
+        //no limits
+        assertThat(Waypoint.getParseableText(wpColl, -1, false)).isEqualTo(fullExpected);
+        final Collection<Waypoint> parsedWaypoints = Waypoint.parseWaypoints(Waypoint.getParseableText(wpColl, -1, false), "Prefix");
+        assertThat(parsedWaypoints).hasSize(2);
+        final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
+        assertWaypoint(iterator.next(), wp1);
+        assertWaypoint(iterator.next(), wp2);
+
+        //limited user notes
+        String expected = "@name (F) " + gpStr + "\n\"This is a ...\"\n@name2 (H) " + gpStr + "\n\"This is a ...\"";
+        assertThat(Waypoint.getParseableText(wpColl, expected.length(), false)).isEqualTo(expected);
+
+        //no user notes
+        expected = "@name (F) " + gpStr + "\n@name2 (H) " + gpStr;
+        assertThat(Waypoint.getParseableText(wpColl, expected.length(), false)).isEqualTo(expected);
+
+        //no names
+        expected = "(F) " + gpStr + "\n(H) " + gpStr;
+        assertThat(Waypoint.getParseableText(wpColl, expected.length(), false)).isEqualTo(expected);
+
+    }
+
+    public static void testParseMultipleWaypointsAtOnce() {
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        final String gpStr = gp.toString();
+        final Geopoint gp2 = new Geopoint("N 45°49.745 E 9°45.038");
+        final String gp2Str = gp2.toString();
+
+        final String note = "@wp1 (x)" + gpStr + "\n@wp2 (f)" + gp2Str;
+        Collection<Waypoint> wps = Waypoint.parseWaypoints(note, "Praefix");
+        assertThat(wps.size()).isEqualTo(2);
+        Iterator<Waypoint> it = wps.iterator();
+        assertWaypoint(it.next(), "wp1", gp, WaypointType.PUZZLE, "");
+        assertWaypoint(it.next(), "wp2", gp2, WaypointType.FINAL, "");
+
+        final String note2 = "<----->\n" +
+                "@Reference Point 1 (W) N 48° 01.194' · E 011° 43.814'\n" +
+                "@Reference Point 1 (W) N 48° 01.194' · E 011° 43.814'\n" +
+                "</----->\n";
+        final Geopoint gp3 = new Geopoint("N 48° 01.194' · E 011° 43.814'");
+        wps = Waypoint.parseWaypoints(note2, "Praefix");
+        assertThat(wps.size()).isEqualTo(2);
+        it = wps.iterator();
+        assertWaypoint(it.next(), "Reference Point 1", gp3, WaypointType.WAYPOINT, "");
+        assertWaypoint(it.next(), "Reference Point 1", gp3, WaypointType.WAYPOINT, "");
+
+
+    }
+
+    public static void testGetAndReplaceExistingStoredWaypoints() {
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        final String gpStr = gp.toString();
+        final Geopoint gp2 = new Geopoint("N 45°49.745 E 9°45.038");
+        final String gp2Str = gp2.toString();
+
+        final String waypoints = "@wp1 (X) " + gpStr + "\n\"note\"\n@wp2 (F) " + gp2Str + "\n\"note2\"";
+        final Collection<Waypoint> wps = Waypoint.parseWaypoints(waypoints, "Praefix");
+
+        final String note = "before <----->" + waypoints + "</-----> after";
+        final String noteAfter = Waypoint.putParseableWaypointTextstore(note, wps, -1);
+        assertThat(noteAfter).isEqualTo("before  after\n\n<----->\n" + waypoints + "\n</----->");
+
+        //check that continuous appliance of same waypoints will result in identical text
+        final String noteAfter2 = Waypoint.putParseableWaypointTextstore(noteAfter, wps, -1);
+        assertThat(noteAfter2).isEqualTo(noteAfter);
+    }
+
+    public static void testWaypointParseStability() {
+        //try to parse texts with empty input which should not lead to errors or waypoints
+        assertThat(Waypoint.parseWaypoints("", " Praefix")).isEmpty();
+        assertThat(Waypoint.parseWaypoints("@ ", " Praefix")).isEmpty();
+
+        final String gpStr = new Geopoint("N 45°49.739 E 9°45.038").toString();
+
+        //parse texts for waypoints which might lead to unexpected fillings (and NEVER to exceptions...)
+        parseAndAssertFirstWaypoint("@" + gpStr, "Praefix 1", WaypointType.WAYPOINT, "");
+        parseAndAssertFirstWaypoint("@ abc (f " + gpStr, "abc (f", WaypointType.WAYPOINT, "");
+        //waypoint selection
+        parseAndAssertFirstWaypoint("@ parking (f)" + gpStr, "parking", WaypointType.FINAL, "");
+        parseAndAssertFirstWaypoint("@ parking " + gpStr, "parking", WaypointType.PARKING, "");
+        //user notes
+        parseAndAssertFirstWaypoint("@  " + gpStr + "note", "Praefix 1", WaypointType.WAYPOINT, "note");
+        parseAndAssertFirstWaypoint(gpStr + "\n\"\\'note'\"", "Praefix 1", WaypointType.WAYPOINT, "'note'");
+        parseAndAssertFirstWaypoint(gpStr + "\n\"note\"", "Praefix 1", WaypointType.WAYPOINT, "note");
+        parseAndAssertFirstWaypoint(gpStr + "\nnote", "Praefix 1", WaypointType.WAYPOINT, "");
+
     }
 
     public static void testMerge() {

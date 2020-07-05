@@ -1577,6 +1577,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
             });
+            final Button storeWaypoints = view.findViewById(R.id.storewaypoints_personalnote);
+            storeWaypoints.setOnClickListener(v -> {
+                ensureSaved();
+                storeWaypointsInPersonalNote(cache, maxPersonalNotesChars);
+            });
             final Button personalNoteUpload = view.findViewById(R.id.upload_personalnote);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
@@ -2533,8 +2538,54 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onFinishEditNoteDialog(final String note, final boolean preventWaypointsFromNote) {
-        cache.setPersonalNote(note);
-        cache.setPreventWaypointsFromNote(preventWaypointsFromNote);
+        setNewPersonalNote(note, preventWaypointsFromNote);
+
+    }
+
+    public void storeWaypointsInPersonalNote(final Geocache cache, final int maxPersonalNotesChars) {
+        final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
+
+        //only user waypoints!
+        final List<Waypoint> userDefinedWaypoints = new ArrayList<>();
+        for (Waypoint w : cache.getWaypoints()) {
+            if (w.isUserDefined() && w.getCoords() != null) {
+                userDefinedWaypoints.add(w);
+            }
+        }
+        if (userDefinedWaypoints.isEmpty()) {
+            showShortToast(getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
+            return;
+        }
+
+        final String newNote = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, maxPersonalNotesChars);
+
+        if (newNote != null) {
+            setNewPersonalNote(newNote);
+            final String newNoteNonShorted = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, -1);
+            if (newNoteNonShorted.length() > newNote.length()) {
+                showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited));
+            } else {
+                showShortToast(getString(R.string.cache_personal_note_storewaypoints_success));
+            }
+        } else {
+            showShortToast(getString(R.string.cache_personal_note_storewaypoints_failed));
+        }
+
+    }
+
+    private void setNewPersonalNote(final String newNote) {
+        setNewPersonalNote(newNote, cache.isPreventWaypointsFromNote());
+    }
+
+    /**
+     * Internal method to set new personal note and update all corresponding entities (DB, dialogs etc)
+     *
+     * @param newNote                     new note to set
+     * @param newPreventWaypointsFromNote new preventWaypointsFromNote flag to set
+     */
+    private void setNewPersonalNote(final String newNote, final boolean newPreventWaypointsFromNote) {
+        cache.setPersonalNote(newNote);
+        cache.setPreventWaypointsFromNote(newPreventWaypointsFromNote);
         if (cache.addWaypointsFromNote()) {
             final PageViewCreator wpViewCreator = getViewCreator(Page.WAYPOINTS);
             if (wpViewCreator != null) {
@@ -2545,7 +2596,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final TextView personalNoteView = findViewById(R.id.personalnote);
         if (personalNoteView != null) {
-            setPersonalNote(personalNoteView, note);
+            setPersonalNote(personalNoteView, newNote);
         } else {
             reinitializePage(Page.DESCRIPTION);
         }
