@@ -625,16 +625,16 @@
     <string name="init_gpx_importdir">Verzeichnis für GPX-Importe</string>
     <string name="init_dataDir">Geocache-Datenverzeichnis auswählen</string>
     <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
-    <string name="init_maptrail">Zeige Standortverlauf</string>
-    <string name="init_summary_maptrail">Zeige einen Track des Standortverlaufes auf der Karte</string>
-    <string name="init_trailcolor">Farbe der Standortverlaufs-Linie</string>
-    <string name="init_trailwidth">Breite der Standortverlaufs-Linie</string>
+    <string name="init_maptrail">Zeige Positionsverlauf</string>
+    <string name="init_summary_maptrail">Wenn aktiviert (und GPS eingeschaltet ist) speichert c:geo den Verlauf deiner Bewegung als Track und zeigt ihn auf der Karte an.</string>
+    <string name="init_trailcolor">Farbe der Positionsverlaufs-Linie</string>
+    <string name="init_trailwidth">Breite der Positionsverlaufs-Linie</string>
     <string name="init_directioncolor">Farbe der Richtungslinie</string>
     <string name="init_directionwidth">Breite der Richtungslinie</string>
     <string name="init_routecolor">Farbe der Routenlinie</string>
     <string name="init_routewidth">Breite der Routenlinie</string>
-    <string name="init_trackcolor">Farbe der Tracklinie</string>
-    <string name="init_trackwidth">Breite der Tracklinie</string>
+    <string name="init_trackcolor">Farbe des individuellen Tracks</string>
+    <string name="init_trackwidth">Breite des individuellen Tracks</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
     <string name="init_share_after_export">Weiterleiten nach dem Export</string>
@@ -1084,7 +1084,7 @@
     <string name="map_modes">Karteneinstellungen</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_hide">Verbergen</string>
-    <string name="map_trail_show">Zeige Standortverlauf</string>
+    <string name="map_trail_show">Zeige Positionsverlauf</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_circles_show">Kreise anzeigen</string>
     <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
@@ -1093,14 +1093,14 @@
     <string name="map_hidewp_original">Originale Wegpunkte verbergen</string>
     <string name="map_hidewp_parking">Park-Wegpunkte verbergen</string>
     <string name="map_hidewp_visited">Besuchte Wegpunkte verbergen</string>
-    <string name="map_hide_track">Track ausblenden</string>
-    <string name="map_load_track">Track laden</string>
+    <string name="map_hide_track">Individuellen Track ausblenden</string>
+    <string name="map_load_track">Lade individuellen Track</string>
     <plurals name="load_track_success">
-        <item quantity="one">Track geladen (%d Trackpunkt)</item>
-        <item quantity="other">Track geladen (%d Trackpunkte)</item>
+        <item quantity="one">Individueller Track geladen (%d Wegpunkt)</item>
+        <item quantity="other">Individueller Track geladen (%d Wegpunkte)</item>
     </plurals>
-    <string name="load_track_error">Fehler beim Laden des Tracks</string>
-    <string name="map_unload_track">Track entfernen</string>
+    <string name="load_track_error">Fehler beim Laden des individuellen Tracks</string>
+    <string name="map_unload_track">Individuellen Track entfernt</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
@@ -1112,8 +1112,8 @@
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
     <string name="map_as_list">Als Liste anzeigen</string>
-    <string name="map_clear_trailhistory">Standortverlauf löschen</string>
-    <string name="map_trailhistory_cleared">Standortverlauf gelöscht</string>
+    <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
+    <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Luftlinie</string>
@@ -1618,12 +1618,16 @@
     <string name="notification_channel_description">Benachrichtigungen der c:geo Geocaching-App</string>
     <string name="proximity_notification_title">c:geo Annäherungsbenachrichtigung</string>
     <!-- individual routes -->
+    <string name="individual_route">Individuelle Route</string>
     <string name="individual_route_added">zur Route hinzugefügt</string>
     <string name="individual_route_removed">von der Route entfernt</string>
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
+    <string name="map_sort_individual_route">Individuelle Route sortieren</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
+    <string name="save_sorted_route">Speichern</string>
+    <string name="sorted_route_saved">Individuelle Route gespeichert</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1662,8 +1666,8 @@
     <string name="downloadmap_title">Grundlegende Offlinekarte herunterladen</string>
     <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (ohne Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
     <!-- history trail export -->
-    <string name="trailhistory">Standortverlaufs-Track</string>
-    <string name="export_trailhistory_title">Standorfverlaufs-Track exportieren</string>
-    <string name="export_trailhistory_success">Standortverlaufs-Track nach \"%s\" exportiert</string>
-    <string name="export_trailhistory_clear_after_export">Standortverlauf nach Export löschen</string>
+    <string name="trailhistory">Positionsverlauf</string>
+    <string name="export_trailhistory_title">Exportiere Positionsverlauf</string>
+    <string name="export_trailhistory_success">Positionsverlauf nach \"%s\" exportiert</string>
+    <string name="export_trailhistory_clear_after_export">Positionsverlauf nach Export löschen</string>
 </resources>
