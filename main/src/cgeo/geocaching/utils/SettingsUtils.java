@@ -10,6 +10,7 @@ public class SettingsUtils {
         TYPE_STRING     ("string"),
         TYPE_BOOLEAN    ("boolean"),
         TYPE_INTEGER    ("integer"),
+        TYPE_INTEGER_COMPATIBILITY ("int"),     // for reading compatibility with early backups
         TYPE_LONG       ("long"),
         TYPE_FLOAT      ("float"),
         TYPE_UNKNOWN    ("unknown");
@@ -62,6 +63,7 @@ public class SettingsUtils {
                 editor.putLong(key, Long.parseLong(value));
                 break;
             case TYPE_INTEGER:
+            case TYPE_INTEGER_COMPATIBILITY:
                 editor.putInt(key, Integer.parseInt(value));
                 break;
             case TYPE_BOOLEAN:
