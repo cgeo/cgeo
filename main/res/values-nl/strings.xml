@@ -625,16 +625,18 @@
     <string name="init_gpx_importdir">GPX Import map</string>
     <string name="init_dataDir">Selecteer Geocache gegevensmap</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
-    <string name="init_maptrail">Pad tonen</string>
-    <string name="init_summary_maptrail">Laat pad op kaart zien</string>
+    <string name="init_maptrail">Geschiedenisspoor tonen</string>
+    <string name="init_maptrail_length">Geschiedenisspoor max. lengte</string>
+    <string name="init_maptrail_length_summary">Stel de maximale lengte van het geschiedenisspoor in (afgedwongen bij het opstarten van c:geo). Standaard waarde is 700 - aanpassen aan het beschikbare geheugen.</string>
+    <string name="init_summary_maptrail">Wanneer geactiveerd (en GPS is ingeschakeld) bewaart c:geo de geschiedenis van je bewegingen als een spoor en geeft het weer op de kaart.</string>
     <string name="init_trailcolor">Spoorgeschiedenis lijnkleur</string>
     <string name="init_trailwidth">Spoorgeschiedenis lijndikte</string>
     <string name="init_directioncolor">Richting lijnkleur</string>
     <string name="init_directionwidth">Richting lijndikte</string>
     <string name="init_routecolor">Route lijnkleur</string>
     <string name="init_routewidth">Route lijndikte</string>
-    <string name="init_trackcolor">Spoor lijnkleur</string>
-    <string name="init_trackwidth">Spoor lijndikte</string>
+    <string name="init_trackcolor">Individuele spoorlijnkleur</string>
+    <string name="init_trackwidth">Individuele spoorlijnbreedte</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
     <string name="init_circlefillcolor">Cirkel opvulkleur</string>
     <string name="init_share_after_export">Open deel-menu na GPX export</string>
@@ -1084,7 +1086,7 @@
     <string name="map_modes">Kaartinstellingen</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_hide">Verbergen</string>
-    <string name="map_trail_show">Toon spoor</string>
+    <string name="map_trail_show">Geschiedenisspoor tonen</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_circles_show">Toon cirkels</string>
     <string name="map_mycaches_hide">Verberg eigen/gevonden caches</string>
@@ -1093,14 +1095,14 @@
     <string name="map_hidewp_original">Originele waypoints verbergen</string>
     <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>
     <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
-    <string name="map_hide_track">Spoor verbergen</string>
-    <string name="map_load_track">Spoor laden</string>
+    <string name="map_hide_track">Individuele spoor verbergen</string>
+    <string name="map_load_track">Individueel spoor laden</string>
     <plurals name="load_track_success">
-        <item quantity="one">Spoor geladen (%d spoorpunt)</item>
+        <item quantity="one">Individuele spoor geladen (%d spoorpunt)</item>
         <item quantity="other">Spoor geladen (%d spoorpunten)</item>
     </plurals>
-    <string name="load_track_error">Fout bij laden van spoor</string>
-    <string name="map_unload_track">Spoor ontladen</string>
+    <string name="load_track_error">Fout bij laden van individuele spoor</string>
+    <string name="map_unload_track">Individuele spoor ontladen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
@@ -1112,8 +1114,8 @@
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
-    <string name="map_clear_trailhistory">Spoor geschiedenis wissen</string>
-    <string name="map_trailhistory_cleared">spoor geschiedenis gewist</string>
+    <string name="map_clear_trailhistory">Spoorgeschiedenis wissen</string>
+    <string name="map_trailhistory_cleared">Geschiedenis spoor gewist</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
     <string name="map_routing_straight">Rechte lijn</string>
@@ -1618,12 +1620,16 @@
     <string name="notification_channel_description">meldingen van c:geo geocaching app</string>
     <string name="proximity_notification_title">c:geo nabijheidsmelding</string>
     <!-- individual routes -->
+    <string name="individual_route">Individuele route</string>
     <string name="individual_route_added">toegevoegd aan route</string>
     <string name="individual_route_removed">verwijderd van route</string>
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
+    <string name="map_sort_individual_route">Individuele route sorteren</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>
+    <string name="save_sorted_route">Opslaan</string>
+    <string name="sorted_route_saved">Individuele route opgeslagen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1662,8 +1668,8 @@
     <string name="downloadmap_title">Download standaard offline kaarten</string>
     <string name="downloadmap_info">Je wordt doorverwezen naar een downloadsite voor basis offline kaarten (geen thema support).\n\nKies het .map bestand voor jouw regio en tik erop om het bestand te downloaden.\n\nAls het downloaden is voltooid, tik op het gedownloade bestand om deze kaart in te stellen als de huidige kaart voor c:geo</string>
     <!-- history trail export -->
-    <string name="trailhistory">Spoor geschiedenis</string>
-    <string name="export_trailhistory_title">Spoorgeschiedenis exporteren</string>
+    <string name="trailhistory">Geschiedenis spoor</string>
+    <string name="export_trailhistory_title">Geschiedenisspoor exporteren</string>
     <string name="export_trailhistory_success">Spoorgeschiedenis geëxporteerd naar \"%s\"</string>
-    <string name="export_trailhistory_clear_after_export">Spoorgeschiedenis wissen na export</string>
+    <string name="export_trailhistory_clear_after_export">Geschiedenisspoor wissen na export</string>
 </resources>
