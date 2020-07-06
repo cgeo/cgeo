@@ -33,7 +33,7 @@
         android:cacheColorHint="?background_color"
         android:clipToPadding="false"
         android:dividerHeight="1dip"
-        android:fastScrollEnabled="true"
+        android:fastScrollEnabled="false"
         android:padding="0dip"
         android:scrollbarStyle="outsideOverlay"
         android:visibility="gone"

@@ -186,6 +186,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     };
     private long mLastScroll = 0; // for fast scroll control
+    private int mScrollState = 0;
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -1275,14 +1276,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                             listView.setFastScrollEnabled(false);
                         }
                     }, 1000);
-
                 }
+                mScrollState = state;
             }
 
             @Override
             public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
                 mLastScroll = System.currentTimeMillis();
-                if (!listView.isFastScrollEnabled()) {
+                if (mScrollState == SCROLL_STATE_FLING && !listView.isFastScrollEnabled()) {
                     listView.setFastScrollEnabled(true);
                 }
             }
