@@ -78,7 +78,8 @@ public class ViewSettingsActivity extends AbstractActivity {
     }
 
     private class SettingsAdapter extends ArrayAdapter<KeyValue> implements SectionIndexer {
-        private HashMap<String, Integer> mapIndex;
+        private HashMap<String, Integer> mapFirstPosition;
+        private HashMap<String, Integer> mapSection;
         private String[] sections;
 
         SettingsAdapter(final Activity activity) {
@@ -87,17 +88,21 @@ public class ViewSettingsActivity extends AbstractActivity {
         }
 
         private void buildFastScrollIndex() {
-            mapIndex = new LinkedHashMap<>();
+            mapFirstPosition = new LinkedHashMap<>();
             for (int x = 0; x < items.size(); x++) {
-                final String ch = items.get(x).key.substring(0, 1).toUpperCase(Locale.US);
-                if (!mapIndex.containsKey(ch)) {
-                    mapIndex.put(ch, x);
+                final String comparable = getComparable(x);
+                if (!mapFirstPosition.containsKey(comparable)) {
+                    mapFirstPosition.put(comparable, x);
                 }
             }
-            final ArrayList<String> sectionList = new ArrayList<>(mapIndex.keySet());
+            final ArrayList<String> sectionList = new ArrayList<>(mapFirstPosition.keySet());
             Collections.sort(sectionList);
             sections = new String[sectionList.size()];
             sectionList.toArray(sections);
+            mapSection = new LinkedHashMap<>();
+            for (int x = 0; x < sections.length; x++) {
+                mapSection.put(sections[x], x);
+            }
         }
 
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
@@ -121,15 +126,26 @@ public class ViewSettingsActivity extends AbstractActivity {
         }
 
         public int getPositionForSection(final int section) {
-            return mapIndex.get(sections[section]);
+            final Integer position = mapFirstPosition.get(sections[section]);
+            return null == position ? 0 : position;
         }
 
         public int getSectionForPosition(final int position) {
-            return 0;
+            final Integer section = mapSection.get(getComparable(position));
+            return null == section ? 0 : section;
         }
 
         public Object[] getSections() {
             return sections;
+        }
+
+        @NonNull
+        private String getComparable(final int position) {
+            try {
+                return items.get(position).key.substring(0, 1).toUpperCase(Locale.US);
+            } catch (NullPointerException e) {
+                return " ";
+            }
         }
 
         @Override
