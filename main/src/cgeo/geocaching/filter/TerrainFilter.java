@@ -12,12 +12,12 @@ import androidx.annotation.StringRes;
 import java.util.ArrayList;
 import java.util.List;
 
-class TerrainFilter extends AbstractRangeFilter {
+class TerrainFilter extends AbstractDTFilter {
 
-    private TerrainFilter(@StringRes final int name, final int terrain) {
+    private TerrainFilter(@StringRes final int name, final float terrain) {
         // do not inline the name constant. Android Lint has a bug which would lead to using the super super constructors
         // @StringRes annotation for the non-annotated terrain parameter of this constructor.
-        super(name, terrain, Factory.TERRAIN_MAX);
+        super(name, terrain);
     }
 
     protected TerrainFilter(final Parcel in) {
@@ -37,9 +37,9 @@ class TerrainFilter extends AbstractRangeFilter {
         @Override
         @NonNull
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<>(TERRAIN_MAX);
-            for (int terrain = TERRAIN_MIN; terrain <= TERRAIN_MAX; terrain++) {
-                filters.add(new TerrainFilter(R.string.cache_terrain, terrain));
+            final List<IFilter> filters = new ArrayList<>((TERRAIN_MAX - TERRAIN_MIN) * 2 + 1);
+            for (int terrain = TERRAIN_MIN * 2; terrain <= TERRAIN_MAX * 2; terrain++) {
+                filters.add(new TerrainFilter(R.string.cache_terrain, terrain / 2.0f));
             }
             return filters;
         }
