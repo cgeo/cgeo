@@ -12,7 +12,7 @@ import androidx.annotation.StringRes;
 import java.util.ArrayList;
 import java.util.List;
 
-class DifficultyFilter extends AbstractRangeFilter {
+class DifficultyFilter extends AbstractDTFilter {
 
     public static final Creator<DifficultyFilter> CREATOR = new Parcelable.Creator<DifficultyFilter>() {
 
@@ -27,10 +27,10 @@ class DifficultyFilter extends AbstractRangeFilter {
         }
     };
 
-    private DifficultyFilter(@StringRes final int name, final int difficulty) {
+    private DifficultyFilter(@StringRes final int name, final float difficulty) {
         // do not inline the name constant. Android Lint has a bug which would lead to using the super super constructors
         // @StringRes annotation for the non-annotated difficulty parameter of this constructor.
-        super(name, difficulty, Factory.DIFFICULTY_MAX);
+        super(name, difficulty);
     }
 
     protected DifficultyFilter(final Parcel in) {
@@ -51,9 +51,9 @@ class DifficultyFilter extends AbstractRangeFilter {
         @Override
         @NonNull
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<>(DIFFICULTY_MAX);
-            for (int difficulty = DIFFICULTY_MIN; difficulty <= DIFFICULTY_MAX; difficulty++) {
-                filters.add(new DifficultyFilter(R.string.cache_difficulty, difficulty));
+            final List<IFilter> filters = new ArrayList<>((DIFFICULTY_MAX - DIFFICULTY_MIN) * 2 + 1);
+            for (int difficulty = DIFFICULTY_MIN * 2; difficulty <= DIFFICULTY_MAX * 2; difficulty++) {
+                filters.add(new DifficultyFilter(R.string.cache_difficulty, difficulty / 2.0f));
             }
             return filters;
         }
