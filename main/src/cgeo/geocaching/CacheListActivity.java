@@ -187,6 +187,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     };
     private long mLastScroll = 0; // for fast scroll control
     private int mScrollState = 0;
+    private int mFlingStartPos = -1;
+
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -1274,6 +1276,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     listView.postDelayed(() -> {
                         if ((System.currentTimeMillis() - mLastScroll) > 1000) {
                             listView.setFastScrollEnabled(false);
+                            mFlingStartPos = -1;
+//                            Log.e("fastcroll deactivated");
                         }
                     }, 1000);
                 }
@@ -1284,7 +1288,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
                 mLastScroll = System.currentTimeMillis();
                 if (mScrollState == SCROLL_STATE_FLING && !listView.isFastScrollEnabled()) {
-                    listView.setFastScrollEnabled(true);
+//                    Log.e("FLING (isFastScrollEnabled=" + listView.isFastScrollEnabled() + ", diff=" + Math.abs(firstVisibleItem - mFlingStartPos) + ")");
+                    if (mFlingStartPos < 0) {
+                        mFlingStartPos = firstVisibleItem;
+                    } else if (Math.abs(firstVisibleItem - mFlingStartPos) > 10) {
+                        // must have moved at least 10 entries up or down in fling mode, before fastscroll gets enabled
+                        listView.setFastScrollEnabled(true);
+//                        Log.e("fastscroll enabled");
+                    }
                 }
             }
         });
