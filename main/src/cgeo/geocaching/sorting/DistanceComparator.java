@@ -1,13 +1,13 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * sorts caches by distance to given position
@@ -63,6 +63,6 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     public String getSortableSection(@NonNull final Geocache cache) {
-        return String.format(Locale.getDefault(), "%.2f", cache.getDistance());
+        return Units.getDistanceFromKilometers(cache.getDistance());
     }
 }
