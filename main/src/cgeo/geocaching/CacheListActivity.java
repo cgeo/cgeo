@@ -1277,7 +1277,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         if ((System.currentTimeMillis() - mLastScroll) > 1000) {
                             listView.setFastScrollEnabled(false);
                             mFlingStartPos = -1;
-//                            Log.e("fastcroll deactivated");
                         }
                     }, 1000);
                 }
@@ -1288,13 +1287,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
                 mLastScroll = System.currentTimeMillis();
                 if (mScrollState == SCROLL_STATE_FLING && !listView.isFastScrollEnabled()) {
-//                    Log.e("FLING (isFastScrollEnabled=" + listView.isFastScrollEnabled() + ", diff=" + Math.abs(firstVisibleItem - mFlingStartPos) + ")");
                     if (mFlingStartPos < 0) {
                         mFlingStartPos = firstVisibleItem;
-                    } else if (Math.abs(firstVisibleItem - mFlingStartPos) > 10) {
-                        // must have moved at least 10 entries up or down in fling mode, before fastscroll gets enabled
+                    } else if (Math.abs(firstVisibleItem - mFlingStartPos) > 2) {
+                        // must have moved at least 3 entries up or down in fling mode, before fastscroll gets enabled
                         listView.setFastScrollEnabled(true);
-//                        Log.e("fastscroll enabled");
                     }
                 }
             }
