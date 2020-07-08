@@ -246,9 +246,12 @@ dependencies {
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
     implementation 'org.apache.commons:commons-compress:1.20'
-    implementation 'commons-io:commons-io:2.7'
     implementation 'org.apache.commons:commons-lang3:3.10'
     implementation 'org.apache.commons:commons-text:1.8'
+    // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
+    // could be replaced by Storage Access Framework
+    //noinspection GradleDependency
+    implementation 'commons-io:commons-io:2.5'
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
     def assertJVersion = '2.9.1'
