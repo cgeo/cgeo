@@ -2,6 +2,8 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.NonNull;
+
 import java.util.Comparator;
 
 public interface CacheComparator extends Comparator<Geocache> {
@@ -11,5 +13,7 @@ public interface CacheComparator extends Comparator<Geocache> {
      * user.
      */
     boolean isAutoManaged();
+
+    String getSortableSection(@NonNull Geocache cache);
 
 }

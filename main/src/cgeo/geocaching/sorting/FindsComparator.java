@@ -2,6 +2,10 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
+
 class FindsComparator extends AbstractCacheComparator {
 
     @Override
@@ -16,4 +20,8 @@ class FindsComparator extends AbstractCacheComparator {
         return finds2 - finds1;
     }
 
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return String.format(Locale.getDefault(), "%d", cache.getFindsCount());
+    }
 }

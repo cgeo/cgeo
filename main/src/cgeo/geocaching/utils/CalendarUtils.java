@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
 public final class CalendarUtils {
 
     private CalendarUtils() {
@@ -77,4 +79,33 @@ public final class CalendarUtils {
         final DateFormat dateFormat = new SimpleDateFormat(format, Locale.getDefault());
         return dateFormat.format(date);
     }
+
+    /**
+     * returns given date in format yyyy-mm, or empty string if null given
+     * @param date Date to be formatted
+     * @return String formatted date
+     */
+    public static String yearMonth(@Nullable final Date date) {
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
+        if (null == date) {
+            return "";
+        } else {
+            return dateFormat.format(date);
+        }
+    }
+
+    /**
+     * returns given date in format yyyy-mm, or empty string if 0 given
+     * @param date Date to be formatted
+     * @return String formatted date
+     */
+    public static String yearMonth(final long date) {
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
+        if (0 == date) {
+            return "";
+        } else {
+            return dateFormat.format(date);
+        }
+    }
+
 }

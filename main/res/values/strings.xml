@@ -1011,6 +1011,7 @@
     <string name="cache_found_last_30_days">Found last 30 days</string>
     <string name="cache_status_archived">Archived</string>
     <string name="cache_status_disabled">Disabled</string>
+    <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Premium Members only</string>
     <string name="cache_status_not_premium">All Members Access</string>
     <string name="cache_status_stored">Stored</string>

@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -53,7 +56,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class CacheListAdapter extends ArrayAdapter<Geocache> {
+public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionIndexer {
 
     private LayoutInflater inflater = null;
     private static CacheComparator cacheComparator = null;
@@ -105,6 +108,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
     }
 
+    // variables for section indexer
+    private HashMap<String, Integer> mapFirstPosition;
+    private HashMap<String, Integer> mapSection;
+    private String[] sections;
+
     /**
      * view holder for the cache list adapter
      *
@@ -135,6 +143,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         this.list = list;
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
+        buildFastScrollIndex();
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -541,6 +550,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         super.notifyDataSetChanged();
         distances.clear();
         compasses.clear();
+        buildFastScrollIndex();
     }
 
     private static class SelectionCheckBoxListener implements View.OnClickListener {
@@ -733,4 +743,50 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     public boolean isEventsOnly() {
         return eventsOnly;
     }
+
+    // methods for section indexer
+
+    private void buildFastScrollIndex() {
+        mapFirstPosition = new LinkedHashMap<>();
+        final ArrayList<String> sectionList = new ArrayList<>();
+        String lastComparable = null;
+        for (int x = 0; x < list.size(); x++) {
+            final String comparable = getComparable(x);
+            if (!StringUtils.equals(lastComparable, comparable)) {
+                mapFirstPosition.put(comparable, x);
+                sectionList.add(comparable);
+                lastComparable = comparable;
+            }
+        }
+        sections = new String[sectionList.size()];
+        sectionList.toArray(sections);
+        mapSection = new LinkedHashMap<>();
+        for (int x = 0; x < sections.length; x++) {
+            mapSection.put(sections[x], x);
+        }
+    }
+
+    public int getPositionForSection(final int section) {
+        final Integer position = mapFirstPosition.get(sections[section]);
+        return null == position ? 0 : position;
+    }
+
+    public int getSectionForPosition(final int position) {
+        final Integer section = mapSection.get(getComparable(position));
+        return null == section ? 0 : section;
+    }
+
+    public Object[] getSections() {
+        return sections;
+    }
+
+    @NonNull
+    private String getComparable(final int position) {
+        try {
+            return getCacheComparator().getSortableSection(list.get(position));
+        } catch (NullPointerException e) {
+            return " ";
+        }
+    }
+
 }

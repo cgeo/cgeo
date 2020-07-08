@@ -2,6 +2,10 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
+
 /**
  * sorts caches by popularity ratio (favorites per find in %).
  */
@@ -22,5 +26,11 @@ class PopularityRatioComparator extends AbstractCacheComparator {
         }
 
         return Float.compare(ratio2, ratio1);
+    }
+
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        final int finds = cache.getFindsCount();
+        return 0 == finds ? "--" : String.format(Locale.getDefault(), "%.2f", ((float) cache.getFavoritePoints()) / finds);
     }
 }
