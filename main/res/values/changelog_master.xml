@@ -8,21 +8,27 @@
     · Change: Set all connectors to https\n
     · Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen)\n
     · Change: Open links in cache description as separate task\n
-    · New: Load GPX track files and show track on map\n
-    · New: Export trail history as GPX track file\n
-    · New: Offer a link to download OpenStreetMap offline maps\n
-    · New: Integrate downloaded OpenStreetMap offline map files into c:geo after tapping on them\n
-    · New: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
+    · Change: Cachelist: Difficulty and terrain filter match exact values only, no longer ranges\n
+    · Change: Cachelist: Fast scroll only gets enabled after fling gesture with minimum length\n
+    · Change: Map: Renamed trail / trail history / history trail to history track\n
+    · New: Load GPX track files and show individual track on map\n
+    · New: Track history: Allow export as GPX track file\n
+    · New: Track history: Make max. length configurable\n
+    · New: Individual routes: Allow sorting of route elements\n
+    · New: OpenStreetMap: Offer a link to download OpenStreetMap offline maps\n
+    · New: OpenStreetMap: Integrate downloaded OpenStreetMap offline map files into c:geo after tapping on them\n
+    · New: Map: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
+    · New: Map: Customize history track, circle, individual route and individual track map line colors and widths\n
     · New: Support cache rating and managing of favorites for geocaching.su\n
-    · New: Customize history, circle, route and track map line colors and widths\n
-    · New: Upgraded several included libraries to reflect our new minimum system requirements\n
     · New: Add debug view for program settings\n
-    · Fix: Removed styles / themes workarounds used for older Android versions\n
-    · Fix: Remove old program code no longer used for supported Android versions\n
+    · New: Internal: Upgraded several included libraries to reflect our new minimum system requirements\n
+    · Fix: Internal: Removed styles / themes workarounds used for older Android versions\n
+    · Fix: Internal: Remove old program code no longer used for supported Android versions\n
     · Fix: Fix for slider preference problem on Android 7\n
     · Fix: Fix translation issues for several plural forms\n
     · Fix: Adapt Whereigo URL checker to catch more Whereigo links\n
     · Fix: Adapt to updated terracaching details URL\n
+    · Fix: Allow restore of settings backup created with c:geo version 2020.03.30 or earlier\n
     · Fix: Other code cleanup\n
   </string>
 </resources>
