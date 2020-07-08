@@ -1,6 +1,9 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.CalendarUtils;
+
+import androidx.annotation.NonNull;
 
 class StorageTimeComparator extends AbstractCacheComparator {
 
@@ -9,4 +12,8 @@ class StorageTimeComparator extends AbstractCacheComparator {
         return Long.compare(cache1.getUpdated(), cache2.getUpdated());
     }
 
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return CalendarUtils.yearMonth(cache.getUpdated());
+    }
 }
