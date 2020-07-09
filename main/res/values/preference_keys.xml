@@ -264,4 +264,7 @@
     <string translatable="false" name="pref_compacticon_off">off</string>
     <string translatable="false" name="pref_compacticon_on">manual</string>
     <string translatable="false" name="pref_compacticon_auto">auto</string>
+
+    <string translatable="false" name="pref_found_num">cached_found_num</string>
+
 </resources>

@@ -1582,4 +1582,14 @@ public class Settings {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
+    public static int getCumulatedFounds() {
+
+        return getInt(R.string.pref_found_num, 0);
+    }
+
+    public static void setCumulatedFounds(final int num) {
+        putInt(R.string.pref_found_num, num);
+    }
 }
+
+

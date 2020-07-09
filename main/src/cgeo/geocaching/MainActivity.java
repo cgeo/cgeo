@@ -149,6 +149,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             userInfo.append(conn.getUserName());
                             if (conn.getCachesFound() >= 0) {
                                 userInfo.append(" (").append(conn.getCachesFound()).append(')');
+                                activity.updateFoundNum();
                             }
                             userInfo.append(Formatter.SEPARATOR);
                             activity.checkLoggedIn();
@@ -189,6 +190,19 @@ public class MainActivity extends AbstractActionBarActivity {
             }
         }
         notLoggedIn.setVisibility(View.VISIBLE);
+    }
+
+    public void updateFoundNum() {
+        final ILogin[] activeConnectors = ConnectorFactory.getActiveLiveConnectors();
+        int foundNum = 0;
+        for (final IConnector conn : activeConnectors) {
+            if (((ILogin) conn).isLoggedIn()) {
+                if (((ILogin) conn).getCachesFound() > 0) {
+                    foundNum += ((ILogin) conn).getCachesFound();
+                }
+            }
+        }
+        Settings.setCumulatedFounds(foundNum);
     }
 
     private static String formatAddress(final Address address) {
