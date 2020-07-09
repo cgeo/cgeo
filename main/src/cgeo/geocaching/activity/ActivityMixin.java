@@ -142,6 +142,10 @@ public final class ActivityMixin {
         postShowToast(activity, text, Toast.LENGTH_SHORT);
     }
 
+    public static void showShortToast(final Activity activity, @StringRes final int resId) {
+        postShowToast(activity, activity.getString(resId), Toast.LENGTH_SHORT);
+    }
+
     public static void onCreate(final Activity abstractActivity, final boolean keepScreenOn) {
         final Window window = abstractActivity.getWindow();
         if (keepScreenOn) {

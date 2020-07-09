@@ -16,6 +16,7 @@ import static cgeo.geocaching.utils.FileUtils.getFilenameFromPath;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -27,12 +28,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Receives a map file via intent, moves it to the currently set map directory and sets it as current map source.
  * If no map directory is set currently, default map directory is used, created if needed, and saved as map directory in preferences.
  * If the map file already exists under that name in the map directory, you have the option to either overwrite it or save it under a randomly generated name.
  */
 public class ReceiveMapFileActivity extends AbstractActivity {
+
+    public static final String EXTRA_FILENAME = "filename";
 
     private Uri uri = null;
     private String mapDirectory = null;
@@ -46,14 +51,16 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setTheme();
 
-        uri = getIntent().getData();
+        final Intent intent = getIntent();
+        uri = intent.getData();
+        final String preset = intent.getStringExtra(EXTRA_FILENAME);
         final AbstractActivity that = this;
 
         PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
             @Override
             protected void execute() {
                 determineTargetDirectory();
-                if (guessFilename()) {
+                if (guessFilename(preset)) {
                     handleMapFile(that);
                 }
             }
@@ -71,9 +78,9 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     }
 
     // try to guess a filename, otherwise chose randomized filename
-    private boolean guessFilename() {
+    private boolean guessFilename(final String preset) {
         try {
-            String filename = uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
+            String filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
             if (filename != null) {
                 filename = getFilenameFromPath(filename);
                 final int posExt = filename.lastIndexOf('.');

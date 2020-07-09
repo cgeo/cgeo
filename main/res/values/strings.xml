@@ -1863,9 +1863,11 @@
     <string name="receivemapfile_kb_copied">%d kB copied</string>
     <string name="receivemapfile_cancelled">Map file transfer cancelled</string>
 
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Download basic offline maps</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Download offline map</string>
     <string name="downloadmap_info">You will be redirected to a download site for basic offline maps (no themeing support).\n\nChose the .map file for your region and tap on it to download the file.\n\nWhen downloading has completed, tap on the downloaded file to set this map as current map for c:geo</string>
+    <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
+    <string name="download_started">Downloading started in background</string>
 
     <!-- history trail export -->
     <string name="trailhistory">History track</string>
