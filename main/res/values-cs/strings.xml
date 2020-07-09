@@ -951,6 +951,7 @@
     <string name="cache_found_last_30_days">Nalezeno za posledních 30 dní</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivována</string>
+    <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
     <string name="cache_status_not_premium">Přístupná všem uživatelům</string>
     <string name="cache_status_stored">Uložené</string>
