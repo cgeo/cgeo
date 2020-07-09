@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapdownloader_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dip"
+    android:background="?background_color"
+    android:paddingBottom="7dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="7dip"
+    tools:context=".settings.MapDownloadSelectorActivity">
+
+    <LinearLayout android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_menu_save"
+            android:gravity="left|center_vertical"
+            android:text="@null"/>
+
+        <Button
+            android:id="@+id/retrieve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:gravity="left|center_vertical"
+            android:text="@null"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="22sp"
+        android:paddingRight="5dip"
+        android:layout_toLeftOf="@id/buttons"
+        tools:text="name"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="12sp"
+        android:layout_below="@id/label"
+        android:layout_alignParentLeft="true"
+        tools:text="info"
+        android:maxLines="1" />
+
+</RelativeLayout>

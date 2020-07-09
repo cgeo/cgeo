@@ -110,7 +110,8 @@ public class DataStore {
 
     public enum DBExtensionType {
         // values for id must not be changed, as there are database entries depending on it
-        DBEXTENSION_INVALID(0);
+        DBEXTENSION_INVALID(0),
+        DBEXTENSION_PENDING_DOWNLOAD (1);
 
         public int id;
 

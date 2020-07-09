@@ -58,6 +58,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
@@ -513,7 +514,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
-                && !IndividualRouteUtils.onOptionsItemSelected(this, id, this::clearIndividualRoute)) {
+                && !IndividualRouteUtils.onOptionsItemSelected(this, id, this::clearIndividualRoute)
+                && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
                         item.setChecked(true);
@@ -1746,6 +1748,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
         TrackUtils.onActivityResult(this, requestCode, resultCode, data, this::setTracks);
         IndividualRouteUtils.onActivityResult(this, requestCode, resultCode, data, this::reloadIndividualRoute);
+        MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void setTracks(final TrackUtils.Tracks tracks) {

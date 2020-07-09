@@ -8,6 +8,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.IndividualRouteUtils;
+import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -164,6 +165,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
         super.onActivityResult(requestCode, resultCode, data);
         TrackUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::setTracks);
         IndividualRouteUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::reloadIndividualRoute);
+        MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override

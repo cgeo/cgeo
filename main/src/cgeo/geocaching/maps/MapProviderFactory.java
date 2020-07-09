@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import android.os.Build;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -77,6 +78,12 @@ public class MapProviderFactory {
             parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
+
+        // add extra menu entry for downloading offline maps beneath the existing map sources
+        parentMenu.add(Menu.NONE, R.id.menu_download_offlinemap, mapSources.size() + 1, R.string.downloadmap_title);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            parentMenu.setGroupDividerEnabled(true);
+        }
     }
 
     /**

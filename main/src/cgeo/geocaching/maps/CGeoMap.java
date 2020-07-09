@@ -59,6 +59,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
@@ -913,7 +914,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
-                && !IndividualRouteUtils.onOptionsItemSelected(activity, id, this::clearIndividualRoute)) {
+                && !IndividualRouteUtils.onOptionsItemSelected(activity, id, this::clearIndividualRoute)
+                && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
                     final MapSource mapSource = MapProviderFactory.getMapSource(id);
                     if (mapSource != null) {
                         item.setChecked(true);
