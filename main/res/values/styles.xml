@@ -380,17 +380,19 @@
     <!-- progress dialog theme -->
     <style name="cgeoProgressdialogTheme" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:textColor">?text_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@drawable/border_straight</item>
     </style>
     <style name="cgeoProgressdialogTheme_light" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColor">?text_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@drawable/border_straight_light</item>
     </style>
 
     <!-- map progressbar style -->
     <style name="map_progressbar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:height">8dp</item>
-        <item name="colorAccent">#007DD6</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:padding">0dp</item>
         <item name="android:layout_marginTop">-4dp</item>
     </style>
