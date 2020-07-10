@@ -51,6 +51,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1582,13 +1583,66 @@ public class Settings {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
-    public static int getCumulatedFounds() {
-
-        return getInt(R.string.pref_found_num, 0);
+    public static int getCachedFoundNum(final String nameAbbreviated) {
+        if (Objects.equals(nameAbbreviated, "GC")) {
+            return getInt(R.string.pref_found_num_GC, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "EC")) {
+            return getInt(R.string.pref_found_num_EC, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "GCAU")) {
+            return getInt(R.string.pref_found_num_GCAU, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "WM")) {
+            return getInt(R.string.pref_found_num_WM, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "TC")) {
+            return getInt(R.string.pref_found_num_TC, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "GC.SU")) {
+            return getInt(R.string.pref_found_num_GCSU, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "geopeitus.ee")) {
+            return getInt(R.string.pref_found_num_geopeitus, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "OC.CZ")) {
+            return getInt(R.string.pref_found_num_OCCZ, 0);
+        }
+        if (Objects.equals(nameAbbreviated, "OC.DE")) {
+            return getInt(R.string.pref_found_num_OCDE, 0);
+        }
+        return 0;
     }
 
-    public static void setCumulatedFounds(final int num) {
-        putInt(R.string.pref_found_num, num);
+    public static void setCachedFoundNum(final int num, final String nameAbbreviated) {
+        if (Objects.equals(nameAbbreviated, "GC")) {
+            putInt(R.string.pref_found_num_GC, num);
+        }
+        if (Objects.equals(nameAbbreviated, "EC")) {
+            putInt(R.string.pref_found_num_EC, num);
+        }
+        if (Objects.equals(nameAbbreviated, "GCAU")) {
+            putInt(R.string.pref_found_num_GCAU, num);
+        }
+        if (Objects.equals(nameAbbreviated, "WM")) {
+            putInt(R.string.pref_found_num_WM, num);
+        }
+        if (Objects.equals(nameAbbreviated, "TC")) {
+            putInt(R.string.pref_found_num_TC, num);
+        }
+        if (Objects.equals(nameAbbreviated, "GC.SU")) {
+            putInt(R.string.pref_found_num_GCSU, num);
+        }
+        if (Objects.equals(nameAbbreviated, "geopeitus.ee")) {
+            putInt(R.string.pref_found_num_geopeitus, num);
+        }
+        if (Objects.equals(nameAbbreviated, "OC.CZ")) {
+            putInt(R.string.pref_found_num_OCCZ, num);
+        }
+        if (Objects.equals(nameAbbreviated, "OC.DE")) {
+            putInt(R.string.pref_found_num_OCDE, num);
+        }
+
     }
 }
 

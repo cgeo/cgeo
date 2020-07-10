@@ -265,6 +265,14 @@
     <string translatable="false" name="pref_compacticon_on">manual</string>
     <string translatable="false" name="pref_compacticon_auto">auto</string>
 
-    <string translatable="false" name="pref_found_num">cached_found_num</string>
+    <string translatable="false" name="pref_found_num_GC">founds_gc</string>
+    <string translatable="false" name="pref_found_num_EC">founds_ec</string>
+    <string translatable="false" name="pref_found_num_GCAU">founds_gcau</string>
+    <string translatable="false" name="pref_found_num_WM">founds_wm</string>
+    <string translatable="false" name="pref_found_num_TC">founds_tc</string>
+    <string translatable="false" name="pref_found_num_GCSU">founds_gcsu</string>
+    <string translatable="false" name="pref_found_num_geopeitus">founds_geopeitus</string>
+    <string translatable="false" name="pref_found_num_OCCZ">founds_occz</string>
+    <string translatable="false" name="pref_found_num_OCDE">founds_ocde</string>
 
 </resources>
