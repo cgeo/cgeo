@@ -51,7 +51,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1582,38 +1581,5 @@ public class Settings {
     public static RoutingMode getRoutingMode() {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
-
-private static String getNumString (final String nameAbbreviated) {
-        if (Objects.equals(nameAbbreviated, "GC")) {
-            return R.string.pref_found_num_GC;
-        } else if (Objects.equals(nameAbbreviated, "EC")) {
-            return R.string.pref_found_num_EC;
-        } else if (Objects.equals(nameAbbreviated, "GCAU")) {
-            return R.string.pref_found_num_GCAU;
-        } else if (Objects.equals(nameAbbreviated, "WM")) {
-            return R.string.pref_found_num_WM;
-        } else if (Objects.equals(nameAbbreviated, "TC")) {
-            return R.string.pref_found_num_TC;
-        } else if (Objects.equals(nameAbbreviated, "GC.SU")) {
-            return R.string.pref_found_num_GCSU;
-        } else if (Objects.equals(nameAbbreviated, "geopeitus.ee")) {
-            return R.string.pref_found_num_geopeitus;
-        } else if (Objects.equals(nameAbbreviated, "OC.CZ")) {
-            return R.string.pref_found_num_OCCZ;
-        } else if (Objects.equals(nameAbbreviated, "OC.DE")) {
-            return R.string.pref_found_num_OCDE;
-        }
-        return;
-    }
-
-
-    public static int getCachedFoundNum(final String nameAbbreviated) {
-        return getInt(getNumString(nameAbbreviated), 0);
-    }
-
-    public static void setCachedFoundNum(final int num, final String nameAbbreviated) {
-        putInt(getNumString(nameAbbreviated), num);
-    }
+    
 }
-
-
