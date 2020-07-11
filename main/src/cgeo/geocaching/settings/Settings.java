@@ -1586,29 +1586,21 @@ public class Settings {
 private static String getNumString (final String nameAbbreviated) {
         if (Objects.equals(nameAbbreviated, "GC")) {
             return R.string.pref_found_num_GC;
-        }
-        else if (Objects.equals(nameAbbreviated, "EC")) {
+        } else if (Objects.equals(nameAbbreviated, "EC")) {
             return R.string.pref_found_num_EC;
-        }
-        else if (Objects.equals(nameAbbreviated, "GCAU")) {
+        } else if (Objects.equals(nameAbbreviated, "GCAU")) {
             return R.string.pref_found_num_GCAU;
-        }
-        else if (Objects.equals(nameAbbreviated, "WM")) {
+        } else if (Objects.equals(nameAbbreviated, "WM")) {
             return R.string.pref_found_num_WM;
-        }
-        else if (Objects.equals(nameAbbreviated, "TC")) {
+        } else if (Objects.equals(nameAbbreviated, "TC")) {
             return R.string.pref_found_num_TC;
-        }
-        else if (Objects.equals(nameAbbreviated, "GC.SU")) {
+        } else if (Objects.equals(nameAbbreviated, "GC.SU")) {
             return R.string.pref_found_num_GCSU;
-        }
-        else if (Objects.equals(nameAbbreviated, "geopeitus.ee")) {
+        } else if (Objects.equals(nameAbbreviated, "geopeitus.ee")) {
             return R.string.pref_found_num_geopeitus;
-        }
-        else if (Objects.equals(nameAbbreviated, "OC.CZ")) {
+        } else if (Objects.equals(nameAbbreviated, "OC.CZ")) {
             return R.string.pref_found_num_OCCZ;
-        }
-        else if (Objects.equals(nameAbbreviated, "OC.DE")) {
+        } else if (Objects.equals(nameAbbreviated, "OC.DE")) {
             return R.string.pref_found_num_OCDE;
         }
         return;
