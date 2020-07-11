@@ -1583,7 +1583,7 @@ public class Settings {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
-private static String getNumString (final String nameAbbreviated) {
+private static int getNumString (final String nameAbbreviated) {
         if (Objects.equals(nameAbbreviated, "GC")) {
             return R.string.pref_found_num_GC;
         } else if (Objects.equals(nameAbbreviated, "EC")) {
@@ -1603,7 +1603,7 @@ private static String getNumString (final String nameAbbreviated) {
         } else if (Objects.equals(nameAbbreviated, "OC.DE")) {
             return R.string.pref_found_num_OCDE;
         }
-        return;
+        return 0;
     }
 
 
