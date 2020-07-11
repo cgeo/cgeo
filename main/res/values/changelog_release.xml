@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the release branch -->
-  <string name="changelog_release" translatable="false">\n
-     <b>2020.07.02:</b>\n
+  <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+  <h1>2020.07.02:</h1>
+  <ul>
     · Fix: Wrong numbers in french language for amount of caches on lists\n
     · Fix: Wrong error message when login fails due to wrong username and/or password\n
-    \n
-    \n
-     <b>2020.06.14</b>\n
+  </ul>
+
+  <h1>2020.06.14</h1>
+  <ul>
     · Change: Added closeout message for systems running on Android &lt; 5.0\n
     · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
     · Change: Allow max zoom on combined OpenStreetMap offline map\n
@@ -43,7 +45,7 @@
     · Fix: Update waypoint list after nested waypoint delete\n
     · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
     · Fix: A couple of other minor issues\n
-    \n
-    \n
+  </ul>
+</div>]]></Data>
 </string>
 </resources>
