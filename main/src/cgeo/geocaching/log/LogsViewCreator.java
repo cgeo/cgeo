@@ -7,6 +7,7 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -65,6 +66,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
                 return rowView;
             }
         });
+        view.setOnScrollListener(new FastScrollListener(view));
 
         return view;
     }
