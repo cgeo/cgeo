@@ -628,6 +628,15 @@
                 android:title="@string/init_maptrail" />
             <Preference
                 android:selectable="false"
+                android:title="@string/init_maptrail_length"
+                android:summary="@string/init_maptrail_length_summary" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_maptrail_length"
+                app:min="100"
+                app:max="@integer/historytrack_length_max"
+                android:defaultValue="@integer/historytrack_length_default" />
+            <Preference
+                android:selectable="false"
                 android:summary="@string/init_brouterThreshold_description"
                 android:title="@string/init_brouterThreshold" />
             <cgeo.geocaching.settings.ProximityPreference
@@ -692,12 +701,14 @@
 
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_trailcolor"
+                android:summary="@string/init_trailcolor_summary"
                 android:key="@string/pref_mapline_trailcolor"
                 android:defaultValue="@color/default_trailcolor"
                 android:dependency="@string/pref_maptrail"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_trailwidth"
+                android:summary="@string/init_trailwidth_summary"
                 android:dependency="@string/pref_maptrail"
                 android:selectable="false" />
             <cgeo.geocaching.settings.SeekbarPreference
@@ -710,11 +721,13 @@
 
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_directioncolor"
+                android:summary="@string/init_directioncolor_summary"
                 android:key="@string/pref_mapline_directioncolor"
                 android:defaultValue="@color/default_directioncolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_directionwidth"
+                android:summary="@string/init_directionwidth_summary"
                 android:selectable="false" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapline_directionwidth"
@@ -726,11 +739,13 @@
 
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_routecolor"
+                android:summary="@string/init_routecolor_summary"
                 android:key="@string/pref_mapline_routecolor"
                 android:defaultValue="@color/default_routecolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_routewidth"
+                android:summary="@string/init_routewidth_summary"
                 android:selectable="false" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapline_routewidth"
@@ -742,11 +757,13 @@
 
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_trackcolor"
+                android:summary="@string/init_trackcolor_summary"
                 android:key="@string/pref_mapline_trackcolor"
                 android:defaultValue="@color/default_trackcolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_trackwidth"
+                android:summary="@string/init_trackwidth_summary"
                 android:selectable="false" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapline_trackwidth"
@@ -758,11 +775,13 @@
 
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_circlecolor"
+                android:summary="@string/init_circlecolor_summary"
                 android:key="@string/pref_mapline_circlecolor"
                 android:defaultValue="@color/default_circlecolor"
                 app:showOpaquenessSlider="true" />
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_circlefillcolor"
+                android:summary="@string/init_circlefillcolor_summary"
                 android:key="@string/pref_mapline_circlefillcolor"
                 android:defaultValue="@color/default_circlefillcolor"
                 app:showOpaquenessSlider="true" />

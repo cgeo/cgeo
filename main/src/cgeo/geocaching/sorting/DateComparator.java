@@ -2,6 +2,9 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.utils.CalendarUtils;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,5 +40,10 @@ class DateComparator extends AbstractCacheComparator {
         list.add(cache2);
         final DistanceComparator distanceComparator = new DistanceComparator(Sensors.getInstance().currentGeo().getCoords(), list);
         return distanceComparator.compare(cache1, cache2);
+    }
+
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return CalendarUtils.yearMonth(cache.getHiddenDate());
     }
 }

@@ -1,7 +1,10 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,4 +61,8 @@ public class DistanceComparator extends AbstractCacheComparator {
         return distance2 == null ? -1 : Float.compare(distance1, distance2);
     }
 
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return Units.getDistanceFromKilometers(cache.getDistance());
+    }
 }
