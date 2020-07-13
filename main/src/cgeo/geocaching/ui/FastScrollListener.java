@@ -16,6 +16,7 @@ public class FastScrollListener implements AbsListView.OnScrollListener {
     private long mLastScroll = 0;
     private int mScrollState = 0;
     private int mFlingStartPos = -1;
+    private int mLastFirstVisibleItem = -1;
     private ListView listView;
 
     public FastScrollListener(final ListView listView) {
@@ -24,27 +25,32 @@ public class FastScrollListener implements AbsListView.OnScrollListener {
 
     @Override
     public void onScrollStateChanged(final AbsListView absListView, final int state) {
-        if (state == SCROLL_STATE_IDLE && listView.isFastScrollEnabled()) {
-            listView.postDelayed(() -> {
-                if ((System.currentTimeMillis() - mLastScroll) > AUTO_DISABLE_ON_IDLE - 100) {
-                    listView.setFastScrollEnabled(false);
-                    mFlingStartPos = -1;
-                }
-            }, AUTO_DISABLE_ON_IDLE);
-        }
         mScrollState = state;
     }
 
     @Override
     public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
         mLastScroll = System.currentTimeMillis();
+        mLastFirstVisibleItem = firstVisibleItem;
         if (mScrollState == SCROLL_STATE_FLING && !listView.isFastScrollEnabled()) {
             if (mFlingStartPos < 0) {
                 mFlingStartPos = firstVisibleItem;
             } else if (Math.abs(firstVisibleItem - mFlingStartPos) >= MIN_COVERED_ENTRIES) {
                 // must have moved at least xx entries up or down in fling mode, before fastscroll gets enabled
                 listView.setFastScrollEnabled(true);
+                listView.setFastScrollAlwaysVisible(true);
+                listView.postDelayed(this::checkScrollState, AUTO_DISABLE_ON_IDLE);
             }
+        }
+    }
+
+    private void checkScrollState() {
+        if (listView.getFirstVisiblePosition() != mLastFirstVisibleItem || (Math.abs(System.currentTimeMillis() - mLastScroll) < AUTO_DISABLE_ON_IDLE)) {
+            listView.postDelayed(this::checkScrollState, AUTO_DISABLE_ON_IDLE);
+        } else {
+            listView.setFastScrollEnabled(false);
+            listView.setFastScrollAlwaysVisible(false);
+            mFlingStartPos = -1;
         }
     }
 }
