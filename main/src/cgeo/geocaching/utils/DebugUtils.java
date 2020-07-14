@@ -44,7 +44,7 @@ public class DebugUtils {
 
     public static void createLogcat(@NonNull final Activity activity) {
         final AtomicInteger result = new AtomicInteger(LogcatResults.LOGCAT_ERROR.ordinal());
-        final File file = FileUtils.getUniqueNamedLogfile("logcat", "log");
+        final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
         final String filename = file.getName();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
