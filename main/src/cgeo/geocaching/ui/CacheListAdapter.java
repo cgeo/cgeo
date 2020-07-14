@@ -767,7 +767,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public int getPositionForSection(final int section) {
-        final Integer position = mapFirstPosition.get(sections[section]);
+        final Integer position = mapFirstPosition.get(sections[Math.max(0, Math.min(section, sections.length - 1))]);
         return null == position ? 0 : position;
     }
 
