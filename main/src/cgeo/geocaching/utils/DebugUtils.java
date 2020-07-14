@@ -64,7 +64,10 @@ public class DebugUtils {
             }
         }, () -> {
             if (result.get() == LogcatResults.LOGCAT_OK.ordinal()) {
-                Dialogs.confirm(activity, activity.getString(R.string.about_system_write_logcat), String.format(activity.getString(R.string.about_system_write_logcat_success), filename, LocalStorage.LOGFILES_DIR_NAME), activity.getString(R.string.about_system_info_send_button), (dialog, which) -> {
+                Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
+                        String.format(activity.getString(R.string.about_system_write_logcat_success), filename, LocalStorage.LOGFILES_DIR_NAME),
+                        activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
+                        null, null, (dialog, which) -> {
                     final String systemInfo = SystemInformation.getSystemInformation(activity);
                     ShareUtils.shareAsEMail(activity, activity.getString(R.string.about_system_info), systemInfo, file, R.string.about_system_info_send_chooser);
                 });
