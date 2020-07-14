@@ -27,7 +27,6 @@ public class HistoryLayer extends Layer {
     private final PositionHistory positionHistory = new PositionHistory();
     private Location coordinates;
     private Paint historyLine;
-    private Paint historyLineShadow;
     private final int trailColor;
 
     public HistoryLayer(final ArrayList<Location> locationHistory) {
@@ -50,14 +49,8 @@ public class HistoryLayer extends Layer {
 
         if (historyLine == null) {
             historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineInsetWidth());
-            historyLine.setColor(0xFFFFFFFF);
-        }
-
-        if (historyLineShadow == null) {
-            historyLineShadow = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLineShadow.setStrokeWidth(MapLineUtils.getHistoryLineShadowWidth());
-            historyLineShadow.setColor(trailColor);
+            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
+            historyLine.setColor(trailColor);
         }
 
         positionHistory.rememberTrailPosition(coordinates);
@@ -80,7 +73,6 @@ public class HistoryLayer extends Layer {
 
                     // connect points by line, but only if distance between previous and current point is less than defined max
                     if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                        canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLineShadow);
                         canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLine);
                     }
 
