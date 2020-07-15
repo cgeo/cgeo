@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 
 import android.location.Location;
@@ -21,7 +22,7 @@ public class PositionHistory {
     /**
      * maximum number of positions to remember
      */
-    private static final int MAX_POSITIONS = 700;
+    private static final int MAX_POSITIONS = Settings.getMaximumMapTrailLength();
 
     private ArrayList<Location> history = new ArrayList<>();
 
