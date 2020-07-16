@@ -13,12 +13,8 @@ public class MapLineUtils {
 
     // history trail line
 
-    public static float getHistoryLineShadowWidth() {
+    public static float getHistoryLineWidth() {
         return getWidth(R.string.pref_mapline_trailwidth, R.integer.default_trailwidth);
-    }
-
-    public static float getHistoryLineInsetWidth() {
-        return getHistoryLineShadowWidth() / 2.0f;
     }
 
     public static int getTrailColor() {

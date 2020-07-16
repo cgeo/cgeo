@@ -41,7 +41,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
-    public static final float ZINDEX_HISTORY_SHADOW = 1;
 
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
@@ -301,17 +300,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                     // history line
                     historyObjs.addPolyline(new PolylineOptions()
                             .addAll(points)
-                            .color(0xFFFFFFFF)
-                            .width(MapLineUtils.getHistoryLineInsetWidth())
-                            .zIndex(ZINDEX_HISTORY)
-                    );
-
-                    // history line shadow
-                    historyObjs.addPolyline(new PolylineOptions()
-                            .addAll(points)
                             .color(MapLineUtils.getTrailColor())
-                            .width(MapLineUtils.getHistoryLineShadowWidth())
-                            .zIndex(ZINDEX_HISTORY_SHADOW)
+                            .width(MapLineUtils.getHistoryLineWidth())
+                            .zIndex(ZINDEX_HISTORY)
                     );
                 }
             }

@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LiUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
@@ -173,6 +174,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
             changeLogLink.setOnClickListener(v -> startUrl("https://github.com/cgeo/cgeo/releases"));
+
+            changeLogMaster.setText(LiUtils.formatHTML(getString(R.string.changelog_master)));
+            changeLogRelease.setText(LiUtils.formatHTML(getString(R.string.changelog_release)));
+
             return view;
         }
 
