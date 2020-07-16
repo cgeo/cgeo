@@ -640,7 +640,7 @@ abstract class GPXParser extends FileParser {
                 }
             });
 
-            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(personalNote -> cache.setPersonalNote(StringUtils.trim(personalNote)));
+            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(personalNote -> cache.setPersonalNote(StringUtils.trim(personalNote), true));
 
             gsak.getChild(gsakNamespace, "IsPremium").setEndTextElementListener(premium -> cache.setPremiumMembersOnly(Boolean.parseBoolean(premium)));
 
@@ -906,7 +906,7 @@ abstract class GPXParser extends FileParser {
             }
             final String note = buffer.toString().trim();
             if (StringUtils.isNotBlank(note)) {
-                cache.setPersonalNote(note);
+                cache.setPersonalNote(note, true);
             }
         }
     }

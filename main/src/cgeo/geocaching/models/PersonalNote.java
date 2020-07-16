@@ -1,94 +1,128 @@
 package cgeo.geocaching.models;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.StringUtils;
 
 
 public class PersonalNote {
+
     private static final String SEPARATOR = "\n--\n";
-    private String cgeoNote;
-    private String providerNote;
-    private boolean isOffline;
+    private static final Pattern PATTERN_SEPARATOR_SPLIT = Pattern.compile("\\s*" + SEPARATOR + "\\s*");
 
-    private PersonalNote() {
-        // only used for merging
+    private String note;
+    private boolean fromProvider;
+
+    public String getNote() {
+        // non premium members have no personal notes, premium members have an empty string by default.
+        // map both to null, so other code doesn't need to differentiate
+        return StringUtils.defaultIfBlank(note, null);
     }
 
-    public PersonalNote(final Geocache cache) {
-        this.isOffline = cache.isOffline();
-        final String personalNote = cache.getPersonalNote();
-        if (StringUtils.isBlank(personalNote)) {
-            return;
-        }
-        final String[] notes = StringUtils.splitByWholeSeparator(personalNote, SEPARATOR);
-        if (notes.length > 1) {
-            this.cgeoNote = StringUtils.trim(notes[0]);
-            this.providerNote = StringUtils.trim(notes[1]);
-        } else {
-            this.providerNote = StringUtils.trim(notes[0]);
-        }
+    public void setNote(final String note) {
+        this.note = StringUtils.trimToNull(note);
     }
 
-    public final PersonalNote mergeWith(final PersonalNote other) {
-        if (StringUtils.isEmpty(cgeoNote) && StringUtils.isEmpty(other.cgeoNote)) {
-            return mergeOnlyProviderNotes(other);
-        }
-        final PersonalNote result = new PersonalNote();
-        if (other.cgeoNote != null) {
-            result.cgeoNote = other.cgeoNote;
-        } else {
-            result.cgeoNote = cgeoNote;
-        }
-        if (providerNote != null) {
-            result.providerNote = providerNote;
-        } else {
-            result.providerNote = other.providerNote;
-        }
-        return result;
+    public void setFromProvider(final boolean fromProvider) {
+        this.fromProvider = fromProvider;
     }
 
-    /**
-     * Merge different provider notes from c:geo and provider.
-     *
-     * @param other
-     *            The note to merge
-     * @return PersonalNote The merged note
-     */
-    private PersonalNote mergeOnlyProviderNotes(final PersonalNote other) {
-        final PersonalNote result = new PersonalNote();
-        if (StringUtils.isNotEmpty(other.providerNote) && StringUtils.isNotEmpty(providerNote)) {
-            // Don't overwrite a stored personal note if provider note is different.
-            // Prevents the local personal note from being overwritten by a truncated note from GC.com.
-            if (StringUtils.startsWith(other.providerNote, providerNote)) {
-                result.providerNote = other.providerNote;
-                return result;
+    public final void gatherMissingDataFrom(final PersonalNote other) {
+        // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
+        if (note == null) {
+            note = other.note;
+        } else if (other.note != null && fromProvider && !other.fromProvider) {
+
+            //Special logic to prevent overriding of local note with remote provider note
+            // on cache refresh:
+            //if this is an original provider note and the other one is the last local note,
+            //then the LOCAL NOTE is preserved and the provider note's content is appended as needed
+            final StringBuilder newNote = new StringBuilder(other.note);
+
+            //Scan provider note entry-by-entry and preserve what is not already in local note
+            //(entry-by-entry-scan prevents provider notes to get duplicated on multiple cache refreshes with minimal changes on provider side)
+            if (!StringUtils.isEmpty(this.note)) {
+                for (String token : PATTERN_SEPARATOR_SPLIT.split(this.note)) {
+                    final String realToken = token.trim();
+                    if (!StringUtils.isEmpty(realToken) && !other.note.contains(realToken)) {
+                        newNote.append(SEPARATOR).append(realToken);
+                    }
+                }
             }
-            if (other.isOffline) {
-                result.cgeoNote = other.providerNote;
-                result.providerNote = providerNote;
-            } else {
-                result.cgeoNote = providerNote;
-                result.providerNote = other.providerNote;
-            }
+            this.note = newNote.toString();
+            //after above logic is applied, the resulting note is no longer the original one from provider
+            this.fromProvider = false;
+
         }
-        return result;
+    }
+//
+//
+//        if (StringUtils.isEmpty(cgeoNote) && StringUtils.isEmpty(other.cgeoNote)) {
+//            return mergeOnlyProviderNotes(other);
+//        }
+//        final PersonalNote result = new PersonalNote();
+//        if (other.cgeoNote != null) {
+//            result.cgeoNote = other.cgeoNote;
+//        } else {
+//            result.cgeoNote = cgeoNote;
+//        }
+//        if (providerNote != null) {
+//            result.providerNote = providerNote;
+//        } else {
+//            result.providerNote = other.providerNote;
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Merge different provider notes from c:geo and provider.
+//     *
+//     * @param other
+//     *            The note to merge
+//     * @return PersonalNote The merged note
+//     */
+//    private PersonalNote mergeOnlyProviderNotes(final PersonalNote other) {
+//        final PersonalNote result = new PersonalNote();
+//        if (StringUtils.isNotEmpty(other.providerNote) && StringUtils.isNotEmpty(providerNote)) {
+//            // Don't overwrite a stored personal note if provider note is different.
+//            // Prevents the local personal note from being overwritten by a truncated note from GC.com.
+//            if (StringUtils.startsWith(other.providerNote, providerNote)) {
+//                result.providerNote = other.providerNote;
+//                return result;
+//            }
+//            if (other.isOffline) {
+//                result.cgeoNote = other.providerNote;
+//                result.providerNote = providerNote;
+//            } else {
+//                result.cgeoNote = providerNote;
+//                result.providerNote = other.providerNote;
+//            }
+//        }
+//        return result;
+//    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final PersonalNote that = (PersonalNote) o;
+        return fromProvider == that.fromProvider &&
+                StringUtils.equalsIgnoreCase(note, that.note);
     }
 
     @Override
+    public int hashCode() {
+        return note == null ? 13 : note.hashCode();
+    }
+
+
+    @Override
     public final String toString() {
-        final StringBuilder builder = new StringBuilder();
-        if (cgeoNote != null) {
-            builder.append(cgeoNote).append(SEPARATOR);
-        }
-        builder.append(providerNote);
-        return builder.toString();
-    }
-
-    final String getCgeoNote() {
-        return cgeoNote;
-    }
-
-    final String getProviderNote() {
-        return providerNote;
+        return note;
     }
 
 }
