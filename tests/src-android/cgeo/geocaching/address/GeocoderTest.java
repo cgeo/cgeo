@@ -54,14 +54,27 @@ public class GeocoderTest extends CGeoTestCase {
     }
 
     public static void testGeocoder(final Single<Address> addressObservable, final String geocoder, final boolean withAddress) {
-        final Address address = addressObservable.blockingGet();
-        assertThat(address.getLatitude()).as(describe("latitude", geocoder)).isCloseTo(TEST_LATITUDE, TEST_OFFSET);
-        assertThat(address.getLongitude()).as(describe("longitude", geocoder)).isCloseTo(TEST_LONGITUDE, TEST_OFFSET);
-        if (withAddress) {
-            assertThat(StringUtils.lowerCase(address.getAddressLine(0))).as(describe("street address", geocoder)).contains("barrault");
-            assertThat(address.getLocality()).as(describe("locality", geocoder)).isEqualTo("Paris");
-            assertThat(address.getCountryCode()).as(describe("country code", geocoder)).isEqualTo("FR");
-            // don't assert on country name, as this can be localized, e.g. with the mapquest geocoder
+        try {
+            final Address address = addressObservable.blockingGet();
+            assertThat(address.getLatitude()).as(describe("latitude", geocoder)).isCloseTo(TEST_LATITUDE, TEST_OFFSET);
+            assertThat(address.getLongitude()).as(describe("longitude", geocoder)).isCloseTo(TEST_LONGITUDE, TEST_OFFSET);
+            if (withAddress) {
+                assertThat(StringUtils.lowerCase(address.getAddressLine(0))).as(describe("street address", geocoder)).contains("barrault");
+                assertThat(address.getLocality()).as(describe("locality", geocoder)).isEqualTo("Paris");
+                assertThat(address.getCountryCode()).as(describe("country code", geocoder)).isEqualTo("FR");
+                // don't assert on country name, as this can be localized, e.g. with the mapquest geocoder
+            }
+        } catch (RuntimeException re) {
+            //protect against known Android bug (as of July 2020). For more information see:
+            // https://stackoverflow.com/questions/47331480/geocoder-getfromlocation-grpc-failed-on-android-real-device?rq=1
+            // https://issuetracker.google.com/issues/64418751?pli=1
+            // https://issuetracker.google.com/issues/64247769
+            //Check may be removed when this bug is resolved
+            if (re.getMessage() != null && re.getMessage().endsWith("grpc failed")) {
+                Log.i("AndroidGeocoder test failed with known bug 'grpc failed', is ignored");
+            } else {
+                throw re;
+            }
         }
     }
 
