@@ -2,6 +2,8 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.NonNull;
+
 /**
  * sorts caches by geo code, therefore effectively sorting by cache age
  *
@@ -18,4 +20,10 @@ public class GeocodeComparator extends AbstractCacheComparator {
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         throw new IllegalStateException("should never be called");
     }
+
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return cache.getGeocode();
+    }
+
 }

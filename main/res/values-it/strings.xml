@@ -626,6 +626,8 @@
     <string name="init_dataDir">Seleziona la directory di dati Geocache</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
     <string name="init_maptrail">Mostra traccia cronologia movimenti</string>
+    <string name="init_maptrail_length">Lunghezza massima traccia cronologia</string>
+    <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 - regola in base alla memoria disponibile.</string>
     <string name="init_summary_maptrail">Quando attivato (e il GPS è acceso) c:geo salva la cronologia dei tuoi movimenti come traccia e la visualizza sulla mappa.</string>
     <string name="init_trailcolor">Colore traccia cronologia</string>
     <string name="init_trailwidth">Spessore traccia cronologia</string>

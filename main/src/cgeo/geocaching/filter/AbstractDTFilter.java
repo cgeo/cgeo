@@ -2,25 +2,27 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
 
+import android.annotation.SuppressLint;
 import android.os.Parcel;
 
 import androidx.annotation.StringRes;
 
 import java.util.Locale;
 
-abstract class AbstractRangeFilter extends AbstractFilter {
+abstract class AbstractDTFilter extends AbstractFilter {
 
     protected final float rangeMin;
     protected final float rangeMax;
 
-    protected AbstractRangeFilter(@StringRes final int resourceId, final int range, final int upperBound) {
-        super(CgeoApplication.getInstance().getString(resourceId) + ' ' +
-                (range == upperBound ? Integer.toString(upperBound) : range + " + " + String.format(Locale.getDefault(), "%.1f", range + 0.5)));
-        rangeMin = range;
-        rangeMax = rangeMin + 1f;
+    @SuppressLint("SetTextI18n")
+    protected AbstractDTFilter(@StringRes final int resourceId, final float value) {
+        super(CgeoApplication.getInstance().getString(resourceId) + ' ' + String.format(Locale.getDefault(), "%.1f", value));
+        // range to be chosen so that different D/T values do not overlap
+        rangeMin = value - 0.15f;
+        rangeMax = value + 0.15f;
     }
 
-    protected AbstractRangeFilter(final Parcel in) {
+    protected AbstractDTFilter(final Parcel in) {
         super(in);
         rangeMin = in.readFloat();
         rangeMax = in.readFloat();

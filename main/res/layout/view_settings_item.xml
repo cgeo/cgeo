@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="40sp"
-    android:padding="3dp">
+    android:paddingTop="3dp"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/settings_key"

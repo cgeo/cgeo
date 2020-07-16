@@ -2,6 +2,8 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.NonNull;
+
 /**
  * comparator which inverses the sort order of the given other comparator
  *
@@ -24,4 +26,8 @@ public class InverseComparator implements CacheComparator {
         return originalComparator.isAutoManaged();
     }
 
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return originalComparator.getSortableSection(cache);
+    }
 }

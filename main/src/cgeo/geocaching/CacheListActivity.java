@@ -102,6 +102,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -184,6 +185,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
     };
+    private long mLastScroll = 0; // for fast scroll control
+    private int mScrollState = 0;
+    private int mFlingStartPos = -1;
+
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -1263,6 +1268,34 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter.setInverseSort(currentInverseSort);
         adapter.forceSort();
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(final AbsListView absListView, final int state) {
+                if (state == SCROLL_STATE_IDLE && listView.isFastScrollEnabled()) {
+                    listView.postDelayed(() -> {
+                        if ((System.currentTimeMillis() - mLastScroll) > 1000) {
+                            listView.setFastScrollEnabled(false);
+                            mFlingStartPos = -1;
+                        }
+                    }, 1000);
+                }
+                mScrollState = state;
+            }
+
+            @Override
+            public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
+                mLastScroll = System.currentTimeMillis();
+                if (mScrollState == SCROLL_STATE_FLING && !listView.isFastScrollEnabled()) {
+                    if (mFlingStartPos < 0) {
+                        mFlingStartPos = firstVisibleItem;
+                    } else if (Math.abs(firstVisibleItem - mFlingStartPos) > 2) {
+                        // must have moved at least 3 entries up or down in fling mode, before fastscroll gets enabled
+                        listView.setFastScrollEnabled(true);
+                    }
+                }
+            }
+        });
     }
 
     private void updateAdapter() {

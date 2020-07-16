@@ -2,6 +2,10 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
+
 /**
  * sorts caches by gcvote.com rating
  *
@@ -30,4 +34,8 @@ class RatingComparator extends AbstractCacheComparator {
         return (votes * rating + AVERAGE_VOTES * AVERAGE_RATING) / (votes + AVERAGE_VOTES);
     }
 
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return String.format(Locale.getDefault(), "%.2f", getWeightedArithmeticMean(cache));
+    }
 }
