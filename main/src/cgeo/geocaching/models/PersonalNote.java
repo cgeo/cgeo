@@ -55,51 +55,6 @@ public class PersonalNote {
 
         }
     }
-//
-//
-//        if (StringUtils.isEmpty(cgeoNote) && StringUtils.isEmpty(other.cgeoNote)) {
-//            return mergeOnlyProviderNotes(other);
-//        }
-//        final PersonalNote result = new PersonalNote();
-//        if (other.cgeoNote != null) {
-//            result.cgeoNote = other.cgeoNote;
-//        } else {
-//            result.cgeoNote = cgeoNote;
-//        }
-//        if (providerNote != null) {
-//            result.providerNote = providerNote;
-//        } else {
-//            result.providerNote = other.providerNote;
-//        }
-//        return result;
-//    }
-//
-//    /**
-//     * Merge different provider notes from c:geo and provider.
-//     *
-//     * @param other
-//     *            The note to merge
-//     * @return PersonalNote The merged note
-//     */
-//    private PersonalNote mergeOnlyProviderNotes(final PersonalNote other) {
-//        final PersonalNote result = new PersonalNote();
-//        if (StringUtils.isNotEmpty(other.providerNote) && StringUtils.isNotEmpty(providerNote)) {
-//            // Don't overwrite a stored personal note if provider note is different.
-//            // Prevents the local personal note from being overwritten by a truncated note from GC.com.
-//            if (StringUtils.startsWith(other.providerNote, providerNote)) {
-//                result.providerNote = other.providerNote;
-//                return result;
-//            }
-//            if (other.isOffline) {
-//                result.cgeoNote = other.providerNote;
-//                result.providerNote = providerNote;
-//            } else {
-//                result.cgeoNote = providerNote;
-//                result.providerNote = other.providerNote;
-//            }
-//        }
-//        return result;
-//    }
 
     @Override
     public boolean equals(final Object o) {
@@ -116,9 +71,8 @@ public class PersonalNote {
 
     @Override
     public int hashCode() {
-        return note == null ? 13 : note.hashCode();
+        return note == null ? 13 : StringUtils.toRootLowerCase(note).hashCode();
     }
-
 
     @Override
     public final String toString() {
