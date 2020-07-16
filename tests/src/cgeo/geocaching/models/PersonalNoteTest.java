@@ -40,46 +40,12 @@ public class PersonalNoteTest {
         note.gatherMissingDataFrom(createNote("local note\n--\nprovider note one\n--\nprovider note two\n--\nprovider note four", false));
         assertThat(note.getNote()).isEqualTo("local note\n--\nprovider note one\n--\nprovider note two\n--\nprovider note four\n--\nprovider note three");
     }
-
-
-
-//    @Test
-//    public void testParse() {
-//        final String testString = "Simple cgeo note\n--\nSimple provider note";
-//        final Geocache cache = new Geocache();
-//        cache.setPersonalNote(testString);
-//        final PersonalNote parsedNote = new PersonalNote(cache);
-//        assertThat(parsedNote.toString()).isEqualTo(testString);
-//        assertPersonalNote(parsedNote, "Simple cgeo note", "Simple provider note");
-//
-//    }
-//
-//    @Test
-//    public void testParseProviderOnly() {
-//        final String testString = "Simple provider note";
-//        final Geocache cache = new Geocache();
-//        cache.setPersonalNote(testString);
-//        final PersonalNote parsedNote = new PersonalNote(cache);
-//        assertThat(parsedNote.toString()).isEqualTo(testString);
-//        assertPersonalNote(parsedNote, null, "Simple provider note");
-//    }
-//
-//    @Test
-//    public void testParseCgeoOnly() {
-//        final String testString = "Simple cgeo note";
-//        final Geocache cache = new Geocache();
-//        cache.setPersonalNote(testString);
-//        final PersonalNote parsedNote = new PersonalNote(cache);
-//        assertThat(parsedNote.toString()).isEqualTo("Simple cgeo note");
-//        assertPersonalNote(parsedNote, null, "Simple cgeo note");
-//    }
-
+    
     private static PersonalNote createNote(final String text, final boolean isFromProvider) {
         final PersonalNote note = new PersonalNote();
         note.setNote(text);
         note.setFromProvider(isFromProvider);
         return note;
     }
-
 
 }
