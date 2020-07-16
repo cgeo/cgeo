@@ -7,11 +7,13 @@ import cgeo.geocaching.utils.MapLineUtils;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
+import org.mapsforge.core.graphics.Path;
+import org.mapsforge.core.graphics.Style;
 import org.mapsforge.core.model.BoundingBox;
-import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -50,6 +52,7 @@ public class HistoryLayer extends Layer {
         if (historyLine == null) {
             historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
             historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
+            historyLine.setStyle(Style.STROKE);
             historyLine.setColor(trailColor);
         }
 
@@ -64,21 +67,28 @@ public class HistoryLayer extends Layer {
             if (size > 1) {
                 final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-                Location prev = paintHistory.get(0);
-                Point pointPrevious = MercatorProjection.getPixelRelative(new LatLong(prev.getLatitude(), prev.getLongitude()), mapSize, topLeftPoint);
+                final Iterator<Location> iterator = paintHistory.iterator();
+                if (!iterator.hasNext()) {
+                    return;
+                }
 
-                for (int cnt = 1; cnt < size; cnt++) {
-                    final Location now = paintHistory.get(cnt);
-                    final Point pointNow = MercatorProjection.getPixelRelative(new LatLong(now.getLatitude(), now.getLongitude()), mapSize, topLeftPoint);
+                Location point = iterator.next();
+                final Path path = AndroidGraphicFactory.INSTANCE.createPath();
+                path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+                Location prev = point;
+
+                while (iterator.hasNext()) {
+                    point = iterator.next();
 
                     // connect points by line, but only if distance between previous and current point is less than defined max
-                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                        canvas.drawLine((int) pointPrevious.x, (int) pointPrevious.y, (int) pointNow.x, (int) pointNow.y, historyLine);
+                    if (point.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                        path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+                    } else {
+                        path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
                     }
-
-                    prev = now;
-                    pointPrevious = pointNow;
+                    prev = point;
                 }
+                canvas.drawPath(path, historyLine);
             }
         }
     }
