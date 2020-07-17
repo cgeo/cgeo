@@ -59,37 +59,31 @@ public class HistoryLayer extends Layer {
         positionHistory.rememberTrailPosition(coordinates);
 
         if (Settings.isMapTrail()) {
-            // always add current position to drawn history to have a closed connection
             final ArrayList<Location> paintHistory = new ArrayList<>(positionHistory.getHistory());
-            paintHistory.add(coordinates);
+            final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-            final int size = paintHistory.size();
-            if (size > 1) {
-                final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
-
-                final Iterator<Location> iterator = paintHistory.iterator();
-                if (!iterator.hasNext()) {
-                    return;
-                }
-
-                Location point = iterator.next();
-                final Path path = AndroidGraphicFactory.INSTANCE.createPath();
-                path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
-                Location prev = point;
-
-                while (iterator.hasNext()) {
-                    point = iterator.next();
-
-                    // connect points by line, but only if distance between previous and current point is less than defined max
-                    if (point.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                        path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
-                    } else {
-                        path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
-                    }
-                    prev = point;
-                }
-                canvas.drawPath(path, historyLine);
+            final Iterator<Location> iterator = paintHistory.iterator();
+            if (!iterator.hasNext()) {
+                return;
             }
+
+            Location point = iterator.next();
+            final Path path = AndroidGraphicFactory.INSTANCE.createPath();
+            path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+            Location prev = point;
+
+            while (iterator.hasNext()) {
+                point = iterator.next();
+
+                // connect points by line, but only if distance between previous and current point is less than defined max
+                if (point.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                    path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+                } else {
+                    path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+                }
+                prev = point;
+            }
+            canvas.drawPath(path, historyLine);
         }
     }
 
