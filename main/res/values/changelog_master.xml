@@ -12,22 +12,26 @@
 · Change: Renamed trail / trail history / history trail to history track\n
 · New: History track: Allow export as GPX track file\n
 · New: History track: Make max. length configurable\n
+· Fix: History track: Remove superflous connection from start of track to current position\n
+· Change: History track: Remove "shadow" to make history track line consistent with other map lines\n
+· New: Customize history track, circle, individual route and individual track map line colors and widths\n
 · New: Load GPX track files and show individual track on map\n
 · New: Individual routes: Allow sorting of route elements\n
-· New: Customize history track, circle, individual route and individual track map line colors and widths\n
 </ul>
 
 <h4>Cache list:</h4>
 <ul>
 · Change: Difficulty and terrain filter match exact values only, no longer ranges\n
-· Change: Fast scroll only gets enabled after fling gesture with minimum length\n
 · New: Fast scroll thumbs (info on position in list)\n
+· Change: Fast scroll only gets enabled after fling gesture with minimum length\n
+· Moved menu entry \"Clear history\" to menu top level (history cache list only)\n
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
 · Change: Open links in cache description as separate task\n
 · Fix: Adapt Whereigo URL checker to catch more Whereigo links\n
+· Fix: Parsing of coords from user notes: Exclude some unwanted combinations by adding . and , as separators\n
 </ul>
 
 <h4>Supported geocaching platforms:</h4>
@@ -53,6 +57,8 @@
 · Fix: Fix for slider preference problem on Android 7\n
 · Fix: Fix translation issues for several plural forms\n
 · Fix: Allow restore of settings backup created with c:geo version 2020.03.30 or earlier\n
+· Change: Logcat logfile renamed to have \".txt\" file ending\n
+· Change Android accent color to \"c:geo orange\"\n
 · Fix: Other code cleanup\n
 </ul>
 
