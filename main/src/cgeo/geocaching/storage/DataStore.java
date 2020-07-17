@@ -2277,7 +2277,7 @@ public class DataStore {
                 new String[]{"_id", "latitude", "longitude"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
-                "_id DESC",
+                "_id ASC",
                 String.valueOf(DbHelper.MAX_TRAILHISTORY_LENGTH),
                 new ArrayList<>(),
                 cursor -> {
@@ -2290,7 +2290,7 @@ public class DataStore {
 
     public static Location[] loadTrailHistoryAsArray() {
         init();
-        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id DESC", null);
+        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id ASC", null);
         final Location[] result = new Location[cursor.getCount()];
         int iPosition = 0;
         try {
