@@ -56,7 +56,8 @@
 · New: Debug view for program settings (settings - system - view settings)\n
 · Fix: Fix for slider preference problem on Android 7\n
 · Fix: Fix translation issues for several plural forms\n
-· Fix: Allow restore of settings backup created with c:geo version 2020.03.30 or earlier\n
+· Fix: Settings backup: Allow restore of backups created with c:geo version 2020.03.30 or earlier\n
+· Fix: Settings backup: Geokrety auth token excluded from limited settings backup\n
 · Change: Logcat logfile renamed to have \".txt\" file ending\n
 · Change Android accent color to \"c:geo orange\"\n
 · Fix: Other code cleanup\n
