@@ -82,7 +82,8 @@ public class SharedPrefsBackupUtils extends Activity {
                 activityContext.getString(R.string.pref_ocus_tokensecret), activityContext.getString(R.string.pref_ocus_tokenpublic), activityContext.getString(R.string.pref_temp_ocus_token_secret), activityContext.getString(R.string.pref_temp_ocus_token_public),
                 activityContext.getString(R.string.pref_ocro_tokensecret), activityContext.getString(R.string.pref_ocro_tokenpublic), activityContext.getString(R.string.pref_temp_ocro_token_secret), activityContext.getString(R.string.pref_temp_ocro_token_public),
                 activityContext.getString(R.string.pref_ocuk2_tokensecret), activityContext.getString(R.string.pref_ocuk2_tokenpublic), activityContext.getString(R.string.pref_temp_ocuk2_token_secret), activityContext.getString(R.string.pref_temp_ocuk2_token_public),
-                activityContext.getString(R.string.pref_su_tokensecret), activityContext.getString(R.string.pref_su_tokenpublic), activityContext.getString(R.string.pref_temp_su_token_secret), activityContext.getString(R.string.pref_temp_su_token_public)
+                activityContext.getString(R.string.pref_su_tokensecret), activityContext.getString(R.string.pref_su_tokenpublic), activityContext.getString(R.string.pref_temp_su_token_secret), activityContext.getString(R.string.pref_temp_su_token_public),
+                activityContext.getString(R.string.pref_fakekey_geokrety_authorization)
             );
         }
 
