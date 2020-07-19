@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.SettingsUtils;
@@ -75,7 +76,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         final ListView list = new ListView(this);
         setContentView(list);
         list.setAdapter(debugAdapter);
-        list.setFastScrollEnabled(true);
+        list.setOnScrollListener(new FastScrollListener(list));
     }
 
     private class SettingsAdapter extends ArrayAdapter<KeyValue> implements SectionIndexer {
