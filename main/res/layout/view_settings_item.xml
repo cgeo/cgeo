@@ -25,6 +25,7 @@
         tools:ignore="RelativeOverlap" />
     <ImageButton
         android:id="@+id/settings_edit"
+        style="@style/button_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/settings_delete"
@@ -32,6 +33,7 @@
         android:visibility="gone" />
     <ImageButton
         android:id="@+id/settings_delete"
+        style="@style/button_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
