@@ -50,6 +50,7 @@
 
     <ImageButton
         android:id="@+id/routitem_up"
+        style="@style/button_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/routeitem_down"
@@ -57,6 +58,7 @@
         android:visibility="gone" />
     <ImageButton
         android:id="@+id/routeitem_down"
+        style="@style/button_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
