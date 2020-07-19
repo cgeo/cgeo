@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
@@ -108,17 +109,19 @@ public class ViewSettingsActivity extends AbstractActivity {
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
             if (null == convertView) {
-                v = getLayoutInflater().inflate(R.layout.view_settings_item, null, false);
+                v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, null, false);
+                ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_edit);
+                ((ImageButton) v.findViewById(R.id.button_right)).setImageResource(R.drawable.ic_menu_delete);
             }
             final KeyValue keyValue = items.get(position);
-            ((TextView) v.findViewById(R.id.settings_key)).setText(keyValue.key);
-            ((TextView) v.findViewById(R.id.settings_value)).setText(keyValue.value);
+            ((TextView) v.findViewById(R.id.title)).setText(keyValue.key);
+            ((TextView) v.findViewById(R.id.detail)).setText(keyValue.value);
 
-            final View buttonDelete = v.findViewById(R.id.settings_delete);
+            final View buttonDelete = v.findViewById(R.id.button_right);
             buttonDelete.setOnClickListener(v2 -> deleteItem(position));
             buttonDelete.setVisibility(editMode ? View.VISIBLE : View.GONE);
 
-            final View buttonEdit = v.findViewById(R.id.settings_edit);
+            final View buttonEdit = v.findViewById(R.id.button_left);
             buttonEdit.setOnClickListener(v3 -> editItem(position));
             buttonEdit.setVisibility(editMode ? keyValue.type != SettingsUtils.SettingsType.TYPE_UNKNOWN ? View.VISIBLE : View.INVISIBLE : View.GONE);
 
