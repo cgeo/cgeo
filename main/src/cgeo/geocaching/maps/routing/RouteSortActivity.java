@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,31 +52,33 @@ public class RouteSortActivity extends AbstractActivity {
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View v = convertView;
                 if (null == convertView) {
-                    v = getLayoutInflater().inflate(R.layout.route_item, null, false);
+                    v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, null, false);
+                    ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_up);
+                    ((ImageButton) v.findViewById(R.id.button_right)).setImageResource(R.drawable.ic_menu_down);
                 }
                 final RouteItem routeItem = routeItems.get(position);
                 final IWaypoint data = routeItem.getType() == CoordinatesType.CACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getId());
 
-                final TextView text = v.findViewById(R.id.text);
-                text.setText(data.getName());
+                final TextView title = v.findViewById(R.id.title);
+                title.setText(data.getName());
 
-                final TextView info = v.findViewById(R.id.info);
+                final TextView detail = v.findViewById(R.id.detail);
                 if (routeItem.getType() == CoordinatesType.CACHE) {
                     assert data instanceof Geocache;
-                    info.setText(Formatter.formatCacheInfoLong((Geocache) data));
-                    text.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                    detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
+                    title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
                 } else {
                     assert data instanceof Waypoint;
                     final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                    info.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
-                    text.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
+                    detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
+                    title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
                 }
 
-                final View buttonUp = v.findViewById(R.id.routitem_up);
+                final View buttonUp = v.findViewById(R.id.button_left);
                 buttonUp.setVisibility(position > 0 ? View.VISIBLE : View.INVISIBLE);
                 buttonUp.setOnClickListener(vUp -> swap(position, position - 1));
 
-                final View buttonDown = v.findViewById(R.id.routeitem_down);
+                final View buttonDown = v.findViewById(R.id.button_right);
                 buttonDown.setVisibility(position < routeItems.size() - 1 ? View.VISIBLE : View.INVISIBLE);
                 buttonDown.setOnClickListener(vDown -> swap(position, position + 1));
 
