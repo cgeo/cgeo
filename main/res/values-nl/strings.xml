@@ -630,15 +630,25 @@
     <string name="init_maptrail_length_summary">Stel de maximale lengte van het geschiedenisspoor in (afgedwongen bij het opstarten van c:geo). Standaard waarde is 700 - aanpassen aan het beschikbare geheugen.</string>
     <string name="init_summary_maptrail">Wanneer geactiveerd (en GPS is ingeschakeld) bewaart c:geo de geschiedenis van je bewegingen als een spoor en geeft het weer op de kaart.</string>
     <string name="init_trailcolor">Spoorgeschiedenis lijnkleur</string>
+    <string name="init_trailcolor_summary">Selecteer kleur en doorzichtigheid voor geschiedenisspoor</string>
     <string name="init_trailwidth">Spoorgeschiedenis lijndikte</string>
+    <string name="init_trailwidth_summary">Selecteer breedte voor geschiedenis spoor</string>
     <string name="init_directioncolor">Richting lijnkleur</string>
+    <string name="init_directioncolor_summary">Selecteer kleur en doorzichtigheid voor richting lijn. Richtingslijn toont een rechte lijn naar je geselecteerde navigatiedoel, of het specifieke gerouteerde navigatiepad als routering is ingeschakeld door de BRouter app te installeren.</string>
     <string name="init_directionwidth">Richting lijndikte</string>
-    <string name="init_routecolor">Route lijnkleur</string>
-    <string name="init_routewidth">Route lijndikte</string>
+    <string name="init_directionwidth_summary">Selecteer breedte voor richting lijn</string>
+    <string name="init_routecolor">Individuele route lijnkleur</string>
+    <string name="init_routecolor_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
+    <string name="init_routewidth">Individuele routelijnbreedte</string>
+    <string name="init_routewidth_summary">Selecteer breedte voor individuele routelijn</string>
     <string name="init_trackcolor">Individuele spoorlijnkleur</string>
+    <string name="init_trackcolor_summary">Selecteer kleur en doorzichtigheid voor spoorlijn. Een track bestaat uit verschillende waypoints en kan worden geladen via een spoor GPX bestand.</string>
     <string name="init_trackwidth">Individuele spoorlijnbreedte</string>
+    <string name="init_trackwidth_summary">Selecteer breedte voor individuele spoorlijn</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
+    <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel opvulkleur</string>
+    <string name="init_circlefillcolor_summary">Selecteer kleur en doorzichtigheid voor de cirkels die ingevuld moeten worden</string>
     <string name="init_share_after_export">Open deel-menu na GPX export</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
@@ -925,6 +935,7 @@
     <string name="cache_found_last_30_days">Gevonden tijdens de laatste 30 dagen</string>
     <string name="cache_status_archived">Gearchiveerd</string>
     <string name="cache_status_disabled">Uitgeschakeld</string>
+    <string name="cache_status_active">Actief</string>
     <string name="cache_status_premium">Alleen voor premium leden</string>
     <string name="cache_status_not_premium">Toegang voor alle leden</string>
     <string name="cache_status_stored">Opgeslagen</string>
@@ -1494,6 +1505,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Deze versie van c:geo is niet langer compatibel met je apparaat en kan mogelijk niet werken of onverwacht gedrag vertonen.\nTik op dit bericht voor meer informatie.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Je gebruikt een versie van c:geo die ouder lijkt te zijn dan één jaar. Sommige functies werken mogelijk niet meer vanwege de website of andere technische wijzigingen. Lees onze FAQ over hoe je kunt upgraden.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
     <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
