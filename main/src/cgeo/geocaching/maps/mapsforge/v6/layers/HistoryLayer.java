@@ -49,16 +49,16 @@ public class HistoryLayer extends Layer {
             return;
         }
 
-        if (historyLine == null) {
-            historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
-            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
-            historyLine.setStyle(Style.STROKE);
-            historyLine.setColor(trailColor);
-        }
-
         positionHistory.rememberTrailPosition(coordinates);
 
         if (Settings.isMapTrail()) {
+            if (historyLine == null) {
+                historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
+                historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
+                historyLine.setStyle(Style.STROKE);
+                historyLine.setColor(trailColor);
+            }
+
             final ArrayList<Location> paintHistory = new ArrayList<>(positionHistory.getHistory());
             final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
@@ -66,6 +66,9 @@ public class HistoryLayer extends Layer {
             if (!iterator.hasNext()) {
                 return;
             }
+
+            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+            paintHistory.add(coordinates);
 
             Location point = iterator.next();
             final Path path = AndroidGraphicFactory.INSTANCE.createPath();

@@ -274,6 +274,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             if (size < 2) {
                 return;
             }
+            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+            paintHistory.add(coordinates);
 
             Location prev = paintHistory.get(0);
             int current = 1;
