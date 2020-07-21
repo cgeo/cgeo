@@ -7,7 +7,6 @@ import cgeo.geocaching.utils.MapLineUtils;
 import android.location.Location;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
@@ -59,34 +58,38 @@ public class HistoryLayer extends Layer {
                 historyLine.setColor(trailColor);
             }
 
-            final ArrayList<Location> paintHistory = new ArrayList<>(positionHistory.getHistory());
-            final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
-
-            final Iterator<Location> iterator = paintHistory.iterator();
-            if (!iterator.hasNext()) {
+            final ArrayList<Location> paintHistory = getHistory();
+            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+            paintHistory.add(coordinates);
+            final int size = paintHistory.size();
+            if (size < 2) {
                 return;
             }
 
-            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
-            paintHistory.add(coordinates);
+            final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-            Location point = iterator.next();
+            Location prev = paintHistory.get(0);
             final Path path = AndroidGraphicFactory.INSTANCE.createPath();
-            path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
-            Location prev = point;
+            int current = 1;
+            while (current < size) {
+                path.moveTo((float) (MercatorProjection.longitudeToPixelX(prev.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(prev.getLatitude(), mapSize) - topLeftPoint.y));
 
-            while (iterator.hasNext()) {
-                point = iterator.next();
-
-                // connect points by line, but only if distance between previous and current point is less than defined max
-                if (point.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                    path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
-                } else {
-                    path.moveTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
+                boolean paint = false;
+                while (!paint && current < size) {
+                    final Location now = paintHistory.get(current);
+                    current++;
+                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                        path.lineTo((float) (MercatorProjection.longitudeToPixelX(now.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(now.getLatitude(), mapSize) - topLeftPoint.y));
+                    } else {
+                        paint = true;
+                    }
+                    prev = now;
                 }
-                prev = point;
+                if (!path.isEmpty()) {
+                    canvas.drawPath(path, historyLine);
+                    path.clear();
+                }
             }
-            canvas.drawPath(path, historyLine);
         }
     }
 
@@ -101,6 +104,5 @@ public class HistoryLayer extends Layer {
     public Location getCoordinates() {
         return coordinates;
     }
-
 
 }
