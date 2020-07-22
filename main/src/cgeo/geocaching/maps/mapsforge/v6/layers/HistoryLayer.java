@@ -58,7 +58,7 @@ public class HistoryLayer extends Layer {
                 historyLine.setColor(trailColor);
             }
 
-            final ArrayList<Location> paintHistory = getHistory();
+            final ArrayList<Location> paintHistory = new ArrayList<>(getHistory());
             // always add current position to drawn history to have a closed connection, even if it's not yet recorded
             paintHistory.add(coordinates);
             final int size = paintHistory.size();
