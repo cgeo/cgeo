@@ -2267,17 +2267,18 @@ public class DataStore {
     }
 
     /**
-     * Loads the trail history from the database
+     * Loads the trail history from the database, limited to allowed MAX_TRAILHISTORY_LENGTH
+     * Trail is returned in chronological order, oldest entry first.
      *
      * @return A list of previously trail points or an empty list.
      */
     @NonNull
     public static ArrayList<Location> loadTrailHistory() {
-        return queryToColl(dbTableTrailHistory,
+        final ArrayList<Location> temp = queryToColl(dbTableTrailHistory,
                 new String[]{"_id", "latitude", "longitude"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
-                "_id ASC",
+                "_id DESC",
                 String.valueOf(DbHelper.MAX_TRAILHISTORY_LENGTH),
                 new ArrayList<>(),
                 cursor -> {
@@ -2286,6 +2287,8 @@ public class DataStore {
                     l.setLongitude(cursor.getDouble(2));
                     return l;
                 });
+        Collections.reverse(temp);
+        return temp;
     }
 
     public static Location[] loadTrailHistoryAsArray() {
