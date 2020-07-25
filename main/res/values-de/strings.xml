@@ -1505,6 +1505,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Änderungen auf Geocaching.com führen zu Problemen mit der Live Map.\nWir arbeiten daran.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du scheinst eine ältere Version von Android zu verwenden. Diese Version von c:geo ist nicht mehr mit deinem Gerät kompatibel und kann Fehler produzieren oder sich unerwartet verhalten!\nTippe auf diese Nachricht für weitere Informationen.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Deine Version von c:geo scheint älter als ein Jahr zu sein. Möglicherweise funktionieren aufgrund von Webseiten- oder anderen technischen Änderungen einige Dinge nicht mehr. Lies unsere FAQ zum Thema Upgrade.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
     <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
@@ -1641,6 +1642,7 @@
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <string name="save_sorted_route">Speichern</string>
     <string name="sorted_route_saved">Individuelle Route gespeichert</string>
+    <string name="route_item_not_yet_loaded">Element noch nicht geladen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
