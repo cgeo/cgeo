@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+	 <b>2020.07.23-RC-legacy:</b>\n
+	· Change: This is a dedicated legacy version of c:geo as your device is running on an Android version between 4.1 and 4.4.\n
+	  Expect no further updates and consider using a device with a more recent Android version.\n
+	  For more info check our FAQ on www.cgeo.org\n
+	\n
+	\n
      <b>2020.07.02:</b>\n
     · Fix: Wrong numbers in french language for amount of caches on lists\n
     · Fix: Wrong error message when login fails due to wrong username and/or password\n
