@@ -48,11 +48,12 @@
 · New: Internal: Upgraded several included libraries to reflect our new minimum system requirements\n
 · Fix: Internal: Removed styles / themes workarounds used for older Android versions\n
 · Fix: Internal: Remove old program code no longer used for supported Android versions\n
+· New: Display a warning, if your c:geo version is older than about a year\n
 </ul>
 
 <h4>Other changes:</h4>
 <ul>
-· Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen)\n
+· Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen and about page)\n
 · New: Debug view for program settings (settings - system - view settings)\n
 · Fix: Fix for slider preference problem on Android 7\n
 · Fix: Fix translation issues for several plural forms\n
