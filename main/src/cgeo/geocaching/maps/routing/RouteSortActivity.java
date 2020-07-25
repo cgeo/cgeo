@@ -60,18 +60,22 @@ public class RouteSortActivity extends AbstractActivity {
                 final IWaypoint data = routeItem.getType() == CoordinatesType.CACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getId());
 
                 final TextView title = v.findViewById(R.id.title);
-                title.setText(data.getName());
-
                 final TextView detail = v.findViewById(R.id.detail);
-                if (routeItem.getType() == CoordinatesType.CACHE) {
-                    assert data instanceof Geocache;
-                    detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
-                    title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                if (null == data) {
+                    title.setText(routeItem.getGeocode());
+                    detail.setText(R.string.route_item_not_yet_loaded);
                 } else {
-                    assert data instanceof Waypoint;
-                    final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                    detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
-                    title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
+                    title.setText(data.getName());
+                    if (routeItem.getType() == CoordinatesType.CACHE) {
+                        assert data instanceof Geocache;
+                        detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
+                        title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                    } else {
+                        assert data instanceof Waypoint;
+                        final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                        detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
+                        title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
+                    }
                 }
 
                 final View buttonUp = v.findViewById(R.id.button_left);

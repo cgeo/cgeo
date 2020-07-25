@@ -1819,6 +1819,7 @@
     <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="save_sorted_route">Save</string>
     <string name="sorted_route_saved">Individual route saved</string>
+    <string name="route_item_not_yet_loaded">Route item not yet loaded</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>
