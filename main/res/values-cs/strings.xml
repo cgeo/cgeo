@@ -1686,6 +1686,7 @@
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <string name="save_sorted_route">Uložit</string>
     <string name="sorted_route_saved">Individuální trasa uložena</string>
+    <string name="route_item_not_yet_loaded">Soubor s trasou nebyl dosud načten</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
