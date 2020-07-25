@@ -1643,6 +1643,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <string name="save_sorted_route">Guardar</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
+    <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
