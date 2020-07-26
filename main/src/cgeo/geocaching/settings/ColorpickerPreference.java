@@ -31,6 +31,7 @@ public class ColorpickerPreference extends DialogPreference {
     private int colorScheme = 0;                    // currently selected color scheme
     private int color = 0xffff0000;                 // currently selected color (incl. opaqueness)
     private boolean showOpaquenessSlider = false;   // show opaqueness slider?
+    private int originalColor = 0xffff0000;         // remember color on instantiating or ok-ing the dialog
 
     private GridLayout colorSchemeGrid = null;
     private GridLayout colorGrid = null;
@@ -174,6 +175,7 @@ public class ColorpickerPreference extends DialogPreference {
 
     public void setValue(final int value) {
         if (callChangeListener(value)) {
+            originalColor = color;
             color = value;
             colorScheme = getColorScheme();
             if (null != opaquenessSlider) {
@@ -189,6 +191,8 @@ public class ColorpickerPreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
         if (positiveResult) {
             setValue(color);
+        } else {
+            color = originalColor;
         }
     }
 
