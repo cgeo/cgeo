@@ -1527,6 +1527,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vyzerá to tak, že používate staršiu verziu Androidu. Ďalšie vydania c:geo už pre vaše zariadenie nemusia byť dostupné.\nKliknite na túto správu pre ďalšie informácie.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Používate verziu c:geo, ktorá vyzerá byť staršia ako jeden rok. Niektoré funkcie už nemusia fungovať z dôvodu zmien webstránky alebo technických zmien. Prečítajte si náš FAQ na tému možnosti aktualizácie.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Hovoriaci kompas</string>
     <string name="tts_toggle">Prepnúť hlasové pokyny</string>
@@ -1685,6 +1686,7 @@
     <string name="map_individual_route_cleared">Individuálna trasa vymazaná</string>
     <string name="save_sorted_route">Uložiť</string>
     <string name="sorted_route_saved">Individuálna trasa uložená</string>
+    <string name="route_item_not_yet_loaded">Položka trasy zatiaľ nie je načítaná</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
