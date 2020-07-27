@@ -125,7 +125,7 @@ public class Geocache implements IWaypoint {
     private String location = null;
     private UncertainProperty<Geopoint> coords = new UncertainProperty<>(null);
     private boolean reliableLatLon = false;
-    private String personalNote = null;
+    private PersonalNote personalNote = new PersonalNote();
     /**
      * lazy initialized
      */
@@ -293,15 +293,8 @@ public class Geocache implements IWaypoint {
             location = other.getLocation();
         }
 
-        // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
-        if (personalNote == null) {
-            personalNote = other.personalNote;
-        } else if (other.personalNote != null && !personalNote.equals(other.personalNote)) {
-            final PersonalNote myNote = new PersonalNote(this);
-            final PersonalNote otherNote = new PersonalNote(other);
-            final PersonalNote mergedNote = myNote.mergeWith(otherNote);
-            personalNote = mergedNote.toString();
-        }
+        personalNote.gatherMissingDataFrom(other.personalNote);
+
         if (!detailed && StringUtils.isBlank(getShortDescription())) {
             shortdesc = other.getShortDescription();
         }
@@ -403,7 +396,7 @@ public class Geocache implements IWaypoint {
                 StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
                 StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
                 StringUtils.equalsIgnoreCase(getDescription(), other.getDescription()) &&
-                StringUtils.equalsIgnoreCase(personalNote, other.personalNote) &&
+                ObjectUtils.equals(personalNote, other.personalNote) &&
                 StringUtils.equalsIgnoreCase(getShortDescription(), other.getShortDescription()) &&
                 StringUtils.equalsIgnoreCase(getLocation(), other.getLocation()) &&
                 ObjectUtils.equals(favorite, other.favorite) &&
@@ -750,9 +743,7 @@ public class Geocache implements IWaypoint {
     }
 
     public String getPersonalNote() {
-        // non premium members have no personal notes, premium members have an empty string by default.
-        // map both to null, so other code doesn't need to differentiate
-        return StringUtils.defaultIfBlank(personalNote, null);
+        return this.personalNote.getNote();
     }
 
     public boolean supportsCachesAround() {
@@ -1270,7 +1261,12 @@ public class Geocache implements IWaypoint {
     }
 
     public void setPersonalNote(final String personalNote) {
-        this.personalNote = StringUtils.trimToNull(personalNote);
+        setPersonalNote(personalNote, false);
+    }
+
+    public void setPersonalNote(final String personalNote, final boolean isFromProvider) {
+        this.personalNote.setNote(personalNote);
+        this.personalNote.setFromProvider(isFromProvider);
     }
 
     public void setDisabled(final boolean disabled) {
