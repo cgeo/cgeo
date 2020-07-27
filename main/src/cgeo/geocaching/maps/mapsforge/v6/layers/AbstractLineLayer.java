@@ -34,11 +34,19 @@ abstract class AbstractLineLayer extends Layer {
     }
 
     public void updateTrack(final ArrayList<Geopoint> track) {
-        paint = prepareLine();
+        resetColors();
         synchronized (pathLock) {
             this.track = null == track ? null : new ArrayList<>(track);
             this.path = null;
         }
+    }
+
+    public void resetColors() {
+        paint = AndroidGraphicFactory.INSTANCE.createPaint();
+        paint.setStrokeWidth(width);
+        paint.setStyle(Style.STROKE);
+        paint.setColor(lineColor);
+        paint.setTextSize(20);
     }
 
     public void setHidden(final boolean isHidden) {
@@ -85,15 +93,6 @@ abstract class AbstractLineLayer extends Layer {
             point = iterator.next();
             path.lineTo((float) (MercatorProjection.longitudeToPixelX(point.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(point.getLatitude(), mapSize) - topLeftPoint.y));
         }
-    }
-
-    private Paint prepareLine() {
-        final Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
-        paint.setStrokeWidth(width);
-        paint.setStyle(Style.STROKE);
-        paint.setColor(lineColor);
-        paint.setTextSize(20);
-        return paint;
     }
 
 }

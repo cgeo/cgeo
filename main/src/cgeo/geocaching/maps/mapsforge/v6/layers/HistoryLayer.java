@@ -28,18 +28,24 @@ public class HistoryLayer extends Layer {
     private final PositionHistory positionHistory = new PositionHistory();
     private Location coordinates;
     private Paint historyLine;
-    private final int trailColor;
 
     public HistoryLayer(final ArrayList<Location> locationHistory) {
         super();
         if (locationHistory != null) {
             positionHistory.setHistory(locationHistory);
         }
-        trailColor = MapLineUtils.getTrailColor();
+        resetColor();
     }
 
     public void reset() {
         positionHistory.reset();
+    }
+
+    public void resetColor() {
+        historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
+        historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
+        historyLine.setStyle(Style.STROKE);
+        historyLine.setColor(MapLineUtils.getTrailColor());
     }
 
     @Override
@@ -51,13 +57,6 @@ public class HistoryLayer extends Layer {
         positionHistory.rememberTrailPosition(coordinates);
 
         if (Settings.isMapTrail()) {
-            if (historyLine == null) {
-                historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
-                historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
-                historyLine.setStyle(Style.STROKE);
-                historyLine.setColor(trailColor);
-            }
-
             final ArrayList<Location> paintHistory = new ArrayList<>(getHistory());
             // always add current position to drawn history to have a closed connection, even if it's not yet recorded
             paintHistory.add(coordinates);
