@@ -21,7 +21,7 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
             new HelperApp(R.string.helper_brouter_title, R.string.helper_brouter_description, R.drawable.helper_brouter, "btools.routingapp"),
             new HelperApp(R.string.helper_pocketquery_title, R.string.helper_pocketquery_description, R.drawable.helper_pocketquery, "org.pquery"),
             new HelperApp(R.string.helper_google_translate_title, R.string.helper_google_translate_description, R.drawable.helper_google_translate, "com.google.android.apps.translate"),
-            new HelperApp(R.string.helper_where_you_go_title, R.string.helper_where_you_go_description, R.drawable.helper_where_you_go, "menion.android.whereyougo"),
+            new HelperApp(R.string.helper_where_you_go_title, R.string.helper_where_you_go_description, R.mipmap.ic_launcher_whereyougo, "menion.android.whereyougo"),
             new HelperApp(R.string.helper_gpsstatus_title, R.string.helper_gpsstatus_description, R.drawable.helper_gpsstatus, "com.eclipsim.gpsstatus2"),
             new HelperApp(R.string.helper_bluetoothgps_title, R.string.helper_bluetoothgps_description, R.drawable.helper_bluetoothgps, "googoo.android.btgps"),
             new HelperApp(R.string.helper_gps_locker_title, R.string.helper_gps_locker_description, R.drawable.helper_gps_locker, "com.silentlexx.gpslock"),
