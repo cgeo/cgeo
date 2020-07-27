@@ -32,7 +32,15 @@ public class NavigationLayer extends Layer {
     public NavigationLayer(final Geopoint coords, final PostRealDistance postRealDistance) {
         this.destinationCoords = coords;
         this.postRealDistance = postRealDistance;
-        paint = prepareLine();
+        resetColor();
+    }
+
+    public void resetColor() {
+        paint = AndroidGraphicFactory.INSTANCE.createPaint();
+        paint.setStrokeWidth(MapLineUtils.getDirectionLineWidth());
+        paint.setStyle(Style.STROKE);
+        paint.setColor(MapLineUtils.getDirectionColor());
+        paint.setTextSize(20);
     }
 
     public void setDestination(final Geopoint coords) {
@@ -72,12 +80,4 @@ public class NavigationLayer extends Layer {
         }
     }
 
-    private Paint prepareLine() {
-        final Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
-        paint.setStrokeWidth(MapLineUtils.getDirectionLineWidth());
-        paint.setStyle(Style.STROKE);
-        paint.setColor(MapLineUtils.getDirectionColor());
-        paint.setTextSize(20);
-        return paint;
-    }
 }

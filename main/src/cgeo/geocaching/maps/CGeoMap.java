@@ -59,6 +59,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
@@ -904,6 +905,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 return true;
             case R.id.menu_compass:
                 menuCompass();
+                return true;
+            case R.id.menu_reset_linecolors:
+                MapLineUtils.resetLinecolors(activity, null);
                 return true;
             default:
                 if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)

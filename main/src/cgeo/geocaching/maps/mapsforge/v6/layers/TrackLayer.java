@@ -7,8 +7,13 @@ public class TrackLayer extends AbstractLineLayer implements TrackUtils.TrackUpd
 
     public TrackLayer(final boolean isHidden) {
         this.isHidden = isHidden;
-        lineColor = MapLineUtils.getTrackColor();
         width = MapLineUtils.getTrackLineWidth();
+        resetColor();
+    }
+
+    public void resetColor() {
+        lineColor = MapLineUtils.getTrackColor();
+        super.resetColors();
     }
 
     public void updateTrack(final TrackUtils.Track track) {
