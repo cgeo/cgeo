@@ -6,7 +6,6 @@
 
 <h4>Map:</h4>
 <ul>
-· New: Offer a link to download OpenStreetMap offline maps\n
 · New: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
 · Change: Renamed trail / trail history / history trail to history track\n
 · New: History track: Allow export as GPX track file\n
