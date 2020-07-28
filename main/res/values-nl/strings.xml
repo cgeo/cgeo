@@ -1642,6 +1642,7 @@
     <string name="map_individual_route_cleared">Individuele route gewist</string>
     <string name="save_sorted_route">Opslaan</string>
     <string name="sorted_route_saved">Individuele route opgeslagen</string>
+    <string name="route_item_not_yet_loaded">Route item nog niet geladen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
