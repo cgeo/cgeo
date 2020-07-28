@@ -2,6 +2,8 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
+<li>Add option in map menu to reset all map colors</li>
+<li>Changed sync logic for personal notes in caches</li>
 </div>]]></Data>
   </string>
 </resources>
