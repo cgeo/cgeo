@@ -733,7 +733,7 @@ public final class GCParser {
         }
 
         // waypoints - reset collection
-        cache.setWaypoints(Collections.<Waypoint> emptyList(), false);
+        cache.setWaypoints(Collections.emptyList(), false);
 
         // add waypoint for original coordinates in case of user-modified listing-coordinates
         try {
@@ -1129,7 +1129,7 @@ public final class GCParser {
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode,
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", month + "/" + day + "/" + year,
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day),
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
@@ -1291,7 +1291,7 @@ public final class GCParser {
             return false;
         }
 
-        final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + Boolean.toString(add);
+        final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + add;
 
         try {
             Network.completeWithSuccess(Network.postRequest(uri, null));
@@ -1761,7 +1761,7 @@ public final class GCParser {
         final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
         final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
         final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
-                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
+                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.empty();
         final Single<List<LogEntry>> mergedLogs = Single.zip(logs.toList(), specialLogs.toList(),
                 (logEntries, specialLogEntries) -> {
                     mergeFriendsLogs(logEntries, specialLogEntries);

@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -46,12 +47,14 @@ public class SimpleDirChooser extends AbstractListActivity {
     private Button okButton = null;
     private int lastPosition = -1;
     private boolean chooseForWriting = false;
+    private boolean selectDir = true;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
         currentDir = dirContaining(extras.getString(Intents.EXTRA_START_DIR));
+        selectDir = extras.getBoolean(Intents.EXTRA_SELECTDIR, true);
         chooseForWriting = extras.getBoolean(EXTRA_CHOOSE_FOR_WRITING, false);
 
         ActivityMixin.setTheme(this);
@@ -117,18 +120,18 @@ public class SimpleDirChooser extends AbstractListActivity {
         resetOkButton();
         final EditText path = findViewById(R.id.simple_dir_chooser_path);
         path.setText(this.getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
-        final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
-        final List<Option> listDirs = new ArrayList<>();
-        if (dirs != null) {
-            for (final File currentDir : dirs) {
-                listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath(), currentDir.canWrite()));
+        final File[] entries = dir.listFiles(selectDir ? new DirOnlyFilenameFilter() : new DirAndFilesFilter());
+        final List<Option> options = new ArrayList<>();
+        if (entries != null) {
+            for (final File entry : entries) {
+                options.add(new Option(entry.getName(), entry.getAbsolutePath(), entry.canWrite()));
             }
         }
-        Collections.sort(listDirs, Option.NAME_COMPARATOR);
+        Collections.sort(options, Option.NAME_COMPARATOR);
         if (dir.getParent() != null) {
-            listDirs.add(0, new Option(PARENT_DIR, dir.getParent(), false));
+            options.add(0, new Option(PARENT_DIR, dir.getParent(), false));
         }
-        this.adapter = new FileArrayAdapter(this, R.layout.simple_dir_item, listDirs);
+        this.adapter = new FileArrayAdapter(this, R.layout.simple_dir_item, options);
         this.setListAdapter(adapter);
     }
 
@@ -159,7 +162,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         }
 
         @Override
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
             if (v == null) {
                 final LayoutInflater vi = LayoutInflater.from(context);
@@ -203,7 +206,7 @@ public class SimpleDirChooser extends AbstractListActivity {
                 fill(currentDir);
             } else {
                 final File dir = new File(option.getPath());
-                final String[] subDirs = dir.list(new DirOnlyFilenameFilter());
+                final String[] subDirs = dir.list(selectDir ? new DirOnlyFilenameFilter() : new DirAndFilesFilter());
                 if (ArrayUtils.isNotEmpty(subDirs)) {
                     currentDir = dir;
                     fill(currentDir);
@@ -232,7 +235,14 @@ public class SimpleDirChooser extends AbstractListActivity {
             } else {
                 lastPosition = -1;
             }
-            final boolean enabled = currentOption.isChecked() && !currentOption.getName().equals(PARENT_DIR);
+
+            boolean enabled = currentOption.isChecked() && (!currentOption.getName().equals(PARENT_DIR));
+            if (enabled && !selectDir) {
+                final File file = new File(currentOption.getPath());
+                if (!file.canRead() || !file.isFile()) {
+                    enabled = false;
+                }
+            }
             okButton.setEnabled(enabled);
             okButton.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
             adapter.notifyDataSetChanged();
@@ -280,6 +290,16 @@ public class SimpleDirChooser extends AbstractListActivity {
         public boolean accept(final File dir, final String filename) {
             final File file = new File(dir, filename);
             return file.isDirectory() && file.canRead();
+        }
+
+    }
+
+    public static class DirAndFilesFilter implements FilenameFilter {
+
+        @Override
+        public boolean accept(final File dir, final String filename) {
+            final File file = new File(dir, filename);
+            return file.canRead() && (file.isDirectory() || file.isFile());
         }
 
     }

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,6 +38,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
     }
 
     @Override
+    @NonNull
     public Filter getFilter() {
         return new Filter() {
 

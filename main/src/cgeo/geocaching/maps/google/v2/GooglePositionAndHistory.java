@@ -10,7 +10,8 @@ import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.MapLineUtils;
+import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
@@ -21,6 +22,7 @@ import android.location.Location;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,14 +33,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class GooglePositionAndHistory implements PositionAndHistory, Route.RouteUpdater {
+public class GooglePositionAndHistory implements PositionAndHistory, Route.RouteUpdater, TrackUtils.TrackUpdaterSingle {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION = 10;
+    public static final float ZINDEX_TRACK = 6;
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
-    public static final float ZINDEX_HISTORY_SHADOW = 1;
 
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
@@ -47,7 +49,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private Location coordinates;
     private float heading;
-    private PositionHistory history = new PositionHistory();
+    private final PositionHistory history = new PositionHistory();
 
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
@@ -56,11 +58,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     private static final int MAX_HISTORY_POINTS = 230; // TODO add alpha, make changeable in constructor?
 
     private WeakReference<GoogleMap> mapRef = null;
-    private GoogleMapObjects positionObjs;
-    private GoogleMapObjects historyObjs;
-    private GoogleMapObjects routeObjs;
-    private GoogleMapView mapView;
-    private final int trailColor;
+    private final GoogleMapObjects positionObjs;
+    private final GoogleMapObjects historyObjs;
+    private final GoogleMapObjects routeObjs;
+    private final GoogleMapObjects trackObjs;
+    private final GoogleMapView mapView;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
 
@@ -68,15 +70,15 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private ArrayList<LatLng> route = null;
     private Viewport lastViewport = null;
-
+    private ArrayList<LatLng> track = null;
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         routeObjs = new GoogleMapObjects(googleMap);
+        trackObjs = new GoogleMapObjects(googleMap);
         this.mapView = mapView;
-        trailColor = Settings.getTrailColor();
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;
         updateMapRotation();
@@ -84,7 +86,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     @Override
     public void setCoordinates(final Location coord) {
-        final boolean coordChanged = coord == null ? coordinates != null : !coord.equals(coordinates);
+        final boolean coordChanged = !Objects.equals(coord, coordinates);
         coordinates = coord;
         if (coordChanged) {
             history.rememberTrailPosition(coordinates);
@@ -157,7 +159,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     @Override
     public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
-        this.route = new ArrayList<LatLng>();
+        this.route = new ArrayList<>();
         for (int i = 0; i < route.size(); i++) {
             this.route.add(new LatLng(route.get(i).getLatitude(), route.get(i).getLongitude()));
         }
@@ -168,15 +170,25 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         repaintRequired();
     }
 
+    @Override
+    public void updateTrack(final TrackUtils.Track track) {
+        this.track = new ArrayList<>();
+        if (null != track) {
+            final ArrayList<Geopoint> temp = track.getTrack();
+            for (int i = 0; i < track.getSize(); i++) {
+                this.track.add(new LatLng(temp.get(i).getLatitude(), temp.get(i).getLongitude()));
+            }
+        }
+        repaintRequired();
+    }
 
     @Override
     public void repaintRequired() {
         drawPosition();
-        if (Settings.isMapTrail()) {
-            drawHistory();
-        }
+        drawHistory();
         drawRoute();
         drawViewport(lastViewport);
+        drawTrack();
     }
 
 
@@ -189,8 +201,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
-                .width(DisplayUtils.getDirectionLineWidth())
-                .color(0x80EB391E)
+                .width(MapLineUtils.getDirectionLineWidth())
+                .color(MapLineUtils.getDirectionColor())
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
 
@@ -255,51 +267,42 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (null == coordinates) {
             return;
         }
-
         historyObjs.removeAll();
-
-        // always add current position to drawn history to have a closed connection
-        final ArrayList<Location> paintHistory = getHistory();
-        paintHistory.add(coordinates);
-
-        final int size = paintHistory.size();
-        if (size == 1) {
-            return;
-        }
-
-        Location prev = paintHistory.get(0);
-        int current = 1;
-        while (current < size) {
-            final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
-            points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
-
-            boolean paint = false;
-            while (!paint && current < size) {
-                final Location now = paintHistory.get(current);
-                current++;
-                if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                    points.add(new LatLng(now.getLatitude(), now.getLongitude()));
-                } else {
-                    paint = true;
-                }
-                prev = now;
+        if (Settings.isMapTrail()) {
+            final ArrayList<Location> paintHistory = new ArrayList<>(getHistory());
+            final int size = paintHistory.size();
+            if (size < 2) {
+                return;
             }
-            if (points.size() > 1) {
-                // history line
-                historyObjs.addPolyline(new PolylineOptions()
-                    .addAll(points)
-                    .color(0xFFFFFFFF)
-                    .width(DisplayUtils.getHistoryLineInsetWidth())
-                    .zIndex(ZINDEX_HISTORY)
-                );
+            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+            paintHistory.add(coordinates);
 
-                // history line shadow
-                historyObjs.addPolyline(new PolylineOptions()
-                    .addAll(points)
-                    .color(trailColor)
-                    .width(DisplayUtils.getHistoryLineShadowWidth())
-                    .zIndex(ZINDEX_HISTORY_SHADOW)
-                );
+            Location prev = paintHistory.get(0);
+            int current = 1;
+            while (current < size) {
+                final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
+                points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
+
+                boolean paint = false;
+                while (!paint && current < size) {
+                    final Location now = paintHistory.get(current);
+                    current++;
+                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                        points.add(new LatLng(now.getLatitude(), now.getLongitude()));
+                    } else {
+                        paint = true;
+                    }
+                    prev = now;
+                }
+                if (points.size() > 1) {
+                    // history line
+                    historyObjs.addPolyline(new PolylineOptions()
+                            .addAll(points)
+                            .color(MapLineUtils.getTrailColor())
+                            .width(MapLineUtils.getHistoryLineWidth())
+                            .zIndex(ZINDEX_HISTORY)
+                    );
+                }
             }
         }
     }
@@ -309,8 +312,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         if (route != null && route.size() > 1) {
             routeObjs.addPolyline(new PolylineOptions()
                     .addAll(route)
-                    .color(0xFF0000FF)
-                    .width(DisplayUtils.getRouteLineWidth())
+                    .color(MapLineUtils.getRouteColor())
+                    .width(MapLineUtils.getRouteLineWidth())
                     .zIndex(ZINDEX_ROUTE)
             );
         }
@@ -321,7 +324,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
             return;
         }
         final PolylineOptions options = new PolylineOptions()
-                .width(DisplayUtils.getDirectionLineWidth())
+                .width(MapLineUtils.getDebugLineWidth())
                 .color(0x80EB391E)
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMin()))
@@ -332,6 +335,18 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
 
         positionObjs.addPolyline(options);
         lastViewport = viewport;
+    }
+
+    private synchronized void drawTrack() {
+        trackObjs.removeAll();
+        if (track != null && track.size() > 1 && !Settings.isHideTrack()) {
+            trackObjs.addPolyline(new PolylineOptions()
+                .addAll(track)
+                .color(MapLineUtils.getTrackColor())
+                .width(MapLineUtils.getTrackLineWidth())
+                .zIndex(ZINDEX_TRACK)
+            );
+        }
     }
 
 }

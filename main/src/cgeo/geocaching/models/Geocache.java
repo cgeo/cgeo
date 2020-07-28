@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.SimpleWebviewActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -151,13 +152,13 @@ public class Geocache implements IWaypoint {
     private final LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
-            return inDatabase() ? DataStore.loadAttributes(geocode) : new LinkedList<String>();
+            return inDatabase() ? DataStore.loadAttributes(geocode) : new LinkedList<>();
         }
     };
     private final LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         public List<Waypoint> call() {
-            return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<Waypoint>();
+            return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<>();
         }
     };
     private List<Image> spoilers = null;
@@ -570,7 +571,8 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean supportsFavoritePoints() {
-        return getConnector().supportsFavoritePoints(this);
+        final IConnector connector = getConnector();
+        return (connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsFavoritePoints(this);
     }
 
     public boolean supportsLogging() {
@@ -796,10 +798,6 @@ public class Geocache implements IWaypoint {
     @Nullable
     public String getCgeoUrl() {
         return getConnector().getCacheUrl(this);
-    }
-
-    public boolean supportsGCVote() {
-        return StringUtils.startsWithIgnoreCase(geocode, "GC");
     }
 
     public void setDescription(final String description) {
@@ -1042,7 +1040,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<Trackable> getInventory() {
-        return inventory == null ? Collections.<Trackable> emptyList() : Collections.unmodifiableList(inventory);
+        return inventory == null ? Collections.emptyList() : Collections.unmodifiableList(inventory);
     }
 
     /**
@@ -1186,7 +1184,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<LogEntry> getLogs() {
-        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.<LogEntry>emptyList();
+        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.emptyList();
     }
 
     /**
@@ -1591,6 +1589,7 @@ public class Geocache implements IWaypoint {
      * @see java.lang.Object#toString()
      */
     @Override
+    @NonNull
     public String toString() {
         return this.geocode + " " + this.name;
     }
@@ -1810,7 +1809,7 @@ public class Geocache implements IWaypoint {
         if (eventTimeMinutes == null) {
             eventTimeMinutes = guessEventTimeMinutes();
         }
-        return eventTimeMinutes.intValue();
+        return eventTimeMinutes;
     }
 
     /**
@@ -1935,7 +1934,7 @@ public class Geocache implements IWaypoint {
      */
     public int getFindsCount() {
         if (getLogCounts().isEmpty()) {
-            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.<LogType, Integer>emptyMap());
+            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.emptyMap());
         }
         int sumFound = 0;
         for (final Entry<LogType, Integer> logCount : getLogCounts().entrySet()) {

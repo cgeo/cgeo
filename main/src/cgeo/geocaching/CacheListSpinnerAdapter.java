@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
 
     static class ViewHolder {
@@ -24,13 +26,13 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
 
 
     @Override
-    public View getView(final int position, final View convertView, final ViewGroup parent) {
+    public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 
 
     @Override
-    public View getDropDownView(final int position, final View convertView, final ViewGroup parent) {
+    public View getDropDownView(final int position, final View convertView, @NonNull final ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 

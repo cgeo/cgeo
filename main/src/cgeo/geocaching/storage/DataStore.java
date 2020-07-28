@@ -38,6 +38,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -547,7 +548,7 @@ public class DataStore {
     private static class DbHelper extends SQLiteOpenHelper {
 
         private static boolean firstRun = true;
-        public static final int MAX_TRAILHISTORY_LENGTH = 700;
+        public static final int MAX_TRAILHISTORY_LENGTH = getMaximumMapTrailLength();
 
         DbHelper(final Context context) {
             super(context, databasePath().getPath(), null, dbVersion);
@@ -1012,6 +1013,7 @@ public class DataStore {
          *
          * @param db the database to perform sanity checks against
          */
+        @SuppressWarnings("EmptyMethod")
         private static void sanityChecks(final SQLiteDatabase db) {
             // currently unused
         }
@@ -1099,14 +1101,13 @@ public class DataStore {
             }
         } catch (android.database.sqlite.SQLiteDoneException e) {
             // sequence identifier not yet in DB => create & set to the minValue given
-            final long newId = minValue;
             try {
                 final SQLiteStatement sequenceInsert = PreparedStatement.SEQUENCE_INSERT.getStatement();
                 sequenceInsert.bindString(1, sequence);
-                sequenceInsert.bindLong(2, newId);
+                sequenceInsert.bindLong(2, minValue);
                 sequenceInsert.executeInsert();
                 database.setTransactionSuccessful();
-                return newId;
+                return minValue;
             } catch (SQLiteException e2) {
                 Log.e("could not create sequence " + sequence);
                 throw new IllegalStateException();
@@ -1961,8 +1962,7 @@ public class DataStore {
         query.append(" WHERE ").append(dbTableCaches).append('.');
         query.append(whereGeocodeIn(geocodes));
 
-        final Cursor cursor = database.rawQuery(query.toString(), null);
-        try {
+        try (Cursor cursor = database.rawQuery(query.toString(), null)) {
             final Set<Geocache> caches = new HashSet<>();
             int logIndex = -1;
 
@@ -2020,8 +2020,6 @@ public class DataStore {
                 }
             }
             return caches;
-        } finally {
-            cursor.close();
         }
     }
 
@@ -2116,7 +2114,7 @@ public class DataStore {
                 new String[]{geocode},
                 null,
                 "100",
-                new LinkedList<String>(),
+                new LinkedList<>(),
                 GET_STRING_0);
     }
 
@@ -2132,7 +2130,7 @@ public class DataStore {
                 new String[]{geocode},
                 null,
                 "100",
-                new HashSet<Integer>(),
+                new HashSet<>(),
                 GET_INTEGER_0);
     }
 
@@ -2144,8 +2142,7 @@ public class DataStore {
                 " WHERE " +
                 whereGeocodeIn(geocodes);
 
-        final Cursor cursor = database.rawQuery(query, null);
-        try {
+        try (Cursor cursor = database.rawQuery(query, null)) {
             while (cursor.moveToNext()) {
                 final Integer listId = cursor.getInt(0);
                 final String geocode = cursor.getString(1);
@@ -2159,9 +2156,6 @@ public class DataStore {
                     cacheLists.put(geocode, listIds);
                 }
             }
-
-        } finally {
-            cursor.close();
         }
 
         return cacheLists;
@@ -2206,8 +2200,8 @@ public class DataStore {
                 new String[]{geocode},
                 "_id",
                 null,
-                new LinkedList<Waypoint>(),
-                cursor -> createWaypointFromDatabaseContent(cursor));
+                new LinkedList<>(),
+                DataStore::createWaypointFromDatabaseContent);
     }
 
     @NonNull
@@ -2242,7 +2236,7 @@ public class DataStore {
                 new String[]{geocode},
                 null,
                 "100",
-                new LinkedList<Image>(),
+                new LinkedList<>(),
                 cursor -> new Image.Builder()
                         .setUrl(cursor.getString(0))
                         .setTitle(cursor.getString(1))
@@ -2273,25 +2267,46 @@ public class DataStore {
     }
 
     /**
-     * Loads the trail history from the database
+     * Loads the trail history from the database, limited to allowed MAX_TRAILHISTORY_LENGTH
+     * Trail is returned in chronological order, oldest entry first.
      *
      * @return A list of previously trail points or an empty list.
      */
     @NonNull
     public static ArrayList<Location> loadTrailHistory() {
-        return queryToColl(dbTableTrailHistory,
+        final ArrayList<Location> temp = queryToColl(dbTableTrailHistory,
                 new String[]{"_id", "latitude", "longitude"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
                 "_id DESC",
                 String.valueOf(DbHelper.MAX_TRAILHISTORY_LENGTH),
-                new ArrayList<Location>(),
+                new ArrayList<>(),
                 cursor -> {
                     final Location l = new Location("trailHistory");
                     l.setLatitude(cursor.getDouble(1));
                     l.setLongitude(cursor.getDouble(2));
                     return l;
                 });
+        Collections.reverse(temp);
+        return temp;
+    }
+
+    public static Location[] loadTrailHistoryAsArray() {
+        init();
+        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id ASC", null);
+        final Location[] result = new Location[cursor.getCount()];
+        int iPosition = 0;
+        try {
+            while (cursor.moveToNext()) {
+                result[iPosition] = new Location("trailHistory");
+                result[iPosition].setLatitude(cursor.getDouble(1));
+                result[iPosition].setLongitude(cursor.getDouble(2));
+                iPosition++;
+            }
+        } finally {
+            cursor.close();
+        }
+        return result;
     }
 
     public static boolean clearTrailHistory() {
@@ -2324,10 +2339,8 @@ public class DataStore {
                 null,
                 "precedence ASC",
                 null,
-                new ArrayList<RouteItem>(),
-                cursor -> {
-                    return new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1));
-                });
+                new ArrayList<>(),
+                cursor -> new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1)));
     }
 
     /**
@@ -2656,7 +2669,7 @@ public class DataStore {
                         selectionArgs,
                         "dif",
                         null,
-                        new HashSet<String>(),
+                        new HashSet<>(),
                         GET_STRING_0);
             }
             return queryToColl(dbTableCaches,
@@ -2665,7 +2678,7 @@ public class DataStore {
                     selectionArgs,
                     "geocode",
                     null,
-                    new HashSet<String>(),
+                    new HashSet<>(),
                     GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfStoredGeocodes", e);
@@ -2687,7 +2700,7 @@ public class DataStore {
 
         try {
             final Cursor cursor = database.rawQuery("SELECT geocode FROM " + dbTableCaches + " WHERE " + selection, selectionArgs);
-            return cursorToColl(cursor, new HashSet<String>(), GET_STRING_0);
+            return cursorToColl(cursor, new HashSet<>(), GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
         }
@@ -2848,7 +2861,7 @@ public class DataStore {
                 null,
                 null,
                 null,
-                new LinkedList<String>(),
+                new LinkedList<>(),
                 GET_STRING_0);
         geocodes.removeAll(geocodesWithOfflineLog);
         return geocodes;
@@ -3074,7 +3087,7 @@ public class DataStore {
         final int indexTitle = cursor.getColumnIndex("title");
         final int indexMarker = cursor.getColumnIndex("marker");
         final int indexCount = cursor.getColumnIndex("count");
-        return cursorToColl(cursor, new ArrayList<StoredList>(), cursor1 -> {
+        return cursorToColl(cursor, new ArrayList<>(), cursor1 -> {
             final int count = indexCount != -1 ? cursor1.getInt(indexCount) : 0;
             return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexMarker), count);
         });
@@ -3561,9 +3574,9 @@ public class DataStore {
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints)
                 .append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where)
-                .append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));  // Hardcoded limit to avoid memory overflow
+                .append(" LIMIT " + (Settings.getKeyInt(R.integer.waypoint_threshold_max) * 2));  // Hardcoded limit to avoid memory overflow
 
-        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), cursor -> createWaypointFromDatabaseContent(cursor));
+        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<>(), DataStore::createWaypointFromDatabaseContent);
     }
 
     public static void saveChangedCache(final Geocache cache) {
@@ -3815,7 +3828,7 @@ public class DataStore {
                     + " FROM " + table
                     + " WHERE " + column + " LIKE ?"
                     + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
-            return cursorToColl(cursor, new LinkedList<String>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
+            return cursorToColl(cursor, new LinkedList<>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
         } catch (final RuntimeException e) {
             Log.e("cannot get suggestions from " + table + "->" + column + " for input '" + input + "'", e);
             return ArrayUtils.EMPTY_STRING_ARRAY;
@@ -3861,7 +3874,7 @@ public class DataStore {
         Collections.sort(caches, (lhs, rhs) -> {
             final int lhsIndex = geocodes.indexOf(lhs.getGeocode());
             final int rhsIndex = geocodes.indexOf(rhs.getGeocode());
-            return lhsIndex < rhsIndex ? -1 : (lhsIndex == rhsIndex ? 0 : 1);
+            return Integer.compare(lhsIndex, rhsIndex);
         });
         return caches;
     }

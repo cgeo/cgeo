@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
@@ -24,15 +25,15 @@ public class CachesOverlay extends AbstractCachesOverlay {
     private boolean firstRun = true;
     private boolean updating = false;
 
-    CachesOverlay(final SearchResult search, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
+    CachesOverlay(final NewMap map, final SearchResult search, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.search = search;
         this.timer = startTimer();
     }
 
-    CachesOverlay(final String geocode, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer layerAnchor, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, bundle, layerAnchor, mapHandlers);
+    CachesOverlay(final NewMap map, final String geocode, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer layerAnchor, final MapHandlers mapHandlers) {
+        super(map, overlayId, geoEntries, bundle, layerAnchor, mapHandlers);
 
         this.search = new SearchResult();
         this.search.addGeocode(geocode);

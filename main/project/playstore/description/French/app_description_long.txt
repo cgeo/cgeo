@@ -1,0 +1,30 @@
+c:geo est un client open source, non-officiel, complet et prêt à l'emploi pour geocaching.com. Il offre un support de base pour d'autres plates-formes de géocaching (comme Opencaching). c:geo ne nécessite ni exports ni navigateur web, il suffit d'installer l'application Android et vous pouvez l'utiliser immédiatement. 
+
+Fonctionnalités principales :
+- Voir les caches sur une carte en temps réel 
+- Utiliser Google Maps ou OpenStreetMaps
+- Rechercher des caches selon différents critères 
+- Enregistrer vos trouvailles en ligne ou hors ligne
+- Enregistrer des informations de cache sur votre appareil
+- Créer et gérer les points de passage
+- Naviguer en utilisant la boussole, une carte ou d'autres applications
+- Importer/Exporter des fichiers GPX 
+- Gestion complète des objets voyageurs
+- Fonctions de mise en cache hors-ligne incluant les cartes hors ligne
+
+c:geo est un client géocaching puissant mais simple à utiliser comprenant de nombreuses fonctions additionnelles. Tout ce dont vous avez besoin pour débuter est un compte actif sur geocaching.com ou une autre plateforme de géocaching (exemple Opencaching).
+Trouvez des caches en utilisant la carte instantanée ou en utilisant l'une des nombreuses fonctions de recherche.
+
+Naviguez vers une cache ou l'un de ses waypoints avec la fonction boussole intégrée, la carte ou à l'aide de diverses applications externes via la transmission de coordonnées (p. ex. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic et bien plus encore).
+
+Stockez les informations de cache directement sur votre appareil à partir de geocaching.com ainsi que via l'importation de fichiers GPX pour les rendre disponibles quand vous le souhaitez. 
+Vous pouvez gérer vos caches stockées à l'aide de différentes listes, les trier et les filtrer selon vos besoins.
+Les caches stockées ainsi que les cartes hors ligne ou des cartes statiques peuvent être utilisées pour trouver des caches sans connexion internet (p. ex. en itinérance).
+Vos logs peuvent être enregistrés et conservés hors ligne pour être publiés plus tard ou être exportés via des notes.
+
+Cherchez et découvrez des objets voyageurs, gérez les depuis votre inventaire et déposez les tout en postant un log de cache.
+
+Si vous rencontrez des problèmes d'installation ou d'utilisation de c:geo, veuillez d'abord consulter notre FAQ (https://faq.cgeo.org) ou consulter le guide de l'utilisateur (https://manual.cgeo.org).
+Si des problèmes persistent, contactez le support par courriel.
+
+Si vous souhaitez en savoir plus sur les autorisations requises par c:geo, veuillez consulter https://www.cgeo.org .

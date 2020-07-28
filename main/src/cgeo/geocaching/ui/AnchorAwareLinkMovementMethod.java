@@ -1,11 +1,18 @@
 package cgeo.geocaching.ui;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Browser;
 import android.text.Layout;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.method.Touch;
 import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -56,7 +63,22 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
 
                 if (link.length != 0) {
                     if (action == MotionEvent.ACTION_UP) {
-                        link[0].onClick(widget);
+                        if (link[0] instanceof URLSpan) {
+                            // copied from URLSpan.java
+                            final Uri uri = Uri.parse(((URLSpan) link[0]).getURL());
+                            final Context context = widget.getContext();
+                            final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                            intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this is different from the original!
+                            try {
+                                context.startActivity(intent);
+                            } catch (ActivityNotFoundException e) {
+                                Log.w("URLSpan", "Actvity was not found for intent, " + intent.toString());
+                            }
+                            // end copy from URLSpan.java
+                        } else {
+                            link[0].onClick(widget);
+                        }
                     } else {
                         Selection.setSelection(buffer,
                                 buffer.getSpanStart(link[0]),

@@ -87,11 +87,25 @@
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
-                android:id="@+id/menu_dot_mode"
-                android:checkable="true"
+                android:id="@+id/menu_compactIconMode"
                 android:icon="@drawable/ic_menu_dot_mode"
                 android:title="@string/map_dot_mode"
                 app:showAsAction="ifRoom|withText">
+                <menu>
+                    <group
+                        android:id="@+id/menu_group_compactIconMode"
+                        android:checkableBehavior="single" >
+                        <item
+                            android:id="@+id/menu_map_compactIconModeOff"
+                            android:title="@string/switch_off" />
+                        <item
+                            android:id="@+id/menu_map_compactIconModeOn"
+                            android:title="@string/switch_on" />
+                        <item
+                            android:id="@+id/menu_map_compactIconModeAuto"
+                            android:title="@string/switch_auto" />
+                    </group>
+                </menu>
             </item>
         </menu>
     </item>
@@ -163,6 +177,14 @@
                 android:title="@string/map_hidewp_visited"
                 app:showAsAction="ifRoom|withText">
             </item>
+            <item
+                android:id="@+id/menu_hide_track"
+                android:checkable="true"
+                android:icon="@drawable/ic_menu_hidetrack"
+                android:title="@string/map_hide_track"
+                android:visible="false"
+                app:showAsAction="ifRoom|withText">
+            </item>
         </menu>
     </item>
     <item
@@ -195,6 +217,13 @@
         </menu>
     </item>
     <item
+        android:id="@+id/menu_load_track"
+        android:title="@string/map_load_track" />
+    <item
+        android:id="@+id/menu_unload_track"
+        android:title="@string/map_unload_track"
+        android:visible="false"/>
+    <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom|withText"
@@ -223,18 +252,38 @@
         </menu>
     </item>
     <item
+        android:id="@+id/menu_trailhistory"
+        android:title="@string/trailhistory">
+        <menu>
+            <item
+                android:id="@+id/menu_clear_trailhistory"
+                android:title="@string/map_clear_trailhistory">
+            </item>
+            <item
+                android:id="@+id/menu_export_trailhistory"
+                android:title="@string/export_trailhistory_title">
+            </item>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_individual_route"
+        android:title="@string/individual_route"
+        android:visible="false">
+        <menu>
+            <item
+                android:id="@+id/menu_sort_individual_route"
+                android:title="@string/map_sort_individual_route">
+            </item>
+            <item
+                android:id="@+id/menu_clear_individual_route"
+                android:title="@string/map_clear_individual_route">
+            </item>
+        </menu>
+    </item>
+    <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_agenda"
         android:title="@string/map_as_list">
-    </item>
-    <item
-        android:id="@+id/menu_clear_trailhistory"
-        android:title="@string/map_clear_trailhistory">
-    </item>
-    <item
-        android:id="@+id/menu_clear_individual_route"
-        android:title="@string/map_clear_individual_route"
-        android:visible="false">
     </item>
 
 </menu>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    tools:context=".export.GpxExport" >
+
+    <TextView
+        android:id="@id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/export_gpx_info"
+        android:textColor="?text_color"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="8dp"/>
+
+    <CheckBox
+        android:id="@+id/share"
+        style="@style/checkbox_full"
+        android:text="@string/init_share_after_export" />
+
+</LinearLayout>

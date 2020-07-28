@@ -114,7 +114,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         // TODO: if current input is not committed in gp, read the current input into gp
         outState.putParcelable(GEOPOINT_ARG, gp);
@@ -226,7 +226,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     @Override
-    public void onAttach(final Activity activity) {
+    public void onAttach(@NonNull final Activity activity) {
         myContext = (FragmentActivity) activity;
         super.onAttach(activity);
     }
@@ -387,7 +387,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         return StringUtils.leftPad(Integer.toString(value), len, '0');
     }
 
-    private class ButtonClickListener implements View.OnClickListener {
+    private static class ButtonClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(final View view) {

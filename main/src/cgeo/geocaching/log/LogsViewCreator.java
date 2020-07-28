@@ -7,6 +7,7 @@ import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
+import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +47,8 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         view.setAdapter(new ArrayAdapter<LogEntry>(activity, R.layout.logs_item, logs) {
 
             @Override
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
+            @NonNull
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View rowView = convertView;
                 if (rowView == null) {
                     rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, parent, false);
@@ -62,6 +66,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
                 return rowView;
             }
         });
+        view.setOnScrollListener(new FastScrollListener(view));
 
         return view;
     }

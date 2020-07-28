@@ -1,6 +1,9 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.CalendarUtils;
+
+import androidx.annotation.NonNull;
 
 /**
  * sorts caches by last visited date
@@ -19,7 +22,11 @@ public class VisitComparator extends AbstractCacheComparator {
      * copy of Long#compare to avoid boxing
      */
     public static int compare(final long lhs, final long rhs) {
-        return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
+        return Long.compare(lhs, rhs);
     }
 
+    @Override
+    public String getSortableSection(@NonNull final Geocache cache) {
+        return CalendarUtils.yearMonth(cache.getVisitedDate());
+    }
 }

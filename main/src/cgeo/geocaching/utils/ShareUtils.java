@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,14 +38,10 @@ public class ShareUtils {
     private static void shareInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @StringRes final int titleResourceId) {
         Uri uri = null;
         if (null != file) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                uri = Uri.fromFile(file);
-            } else {
-                try {
-                    uri = FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
-                } catch (Exception e) {
-                    Log.e("error on LogCat sharing");
-                }
+            try {
+                uri = FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
+            } catch (Exception e) {
+                Log.e("error on LogCat sharing");
             }
         }
         if (null == file || null != uri) {

@@ -42,8 +42,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -54,7 +56,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
 
@@ -606,7 +607,7 @@ abstract class GPXParser extends FileParser {
 
         try {
             progressStream = new ProgressInputStream(stream);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, StandardCharsets.UTF_8));
             Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
             return DataStore.loadCaches(result, EnumSet.of(LoadFlag.DB_MINIMAL));
         } catch (final SAXException e) {
@@ -871,9 +872,7 @@ abstract class GPXParser extends FileParser {
         cache.setShortDescription("");
         cache.setHint("");
 
-        for (int i = 0; i < userData.length; i++) {
-            userData[i] = null;
-        }
+        Arrays.fill(userData, null);
         originalLon = null;
         originalLat = null;
         logPasswordRequired = false;
@@ -888,8 +887,8 @@ abstract class GPXParser extends FileParser {
         final Geocache newCache = new Geocache();
 
         newCache.setReliableLatLon(true); // always assume correct coordinates, when importing from file instead of website
-        newCache.setAttributes(Collections.<String> emptyList()); // override the lazy initialized list
-        newCache.setWaypoints(Collections.<Waypoint> emptyList(), false); // override the lazy initialized list
+        newCache.setAttributes(Collections.emptyList()); // override the lazy initialized list
+        newCache.setWaypoints(Collections.emptyList(), false); // override the lazy initialized list
 
         return newCache;
     }

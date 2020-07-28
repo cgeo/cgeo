@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LiUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
@@ -173,6 +174,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
             changeLogLink.setOnClickListener(v -> startUrl("https://github.com/cgeo/cgeo/releases"));
+
+            changeLogMaster.setText(LiUtils.formatHTML(getString(R.string.changelog_master)));
+            changeLogRelease.setText(LiUtils.formatHTML(getString(R.string.changelog_release)));
+
             return view;
         }
 
@@ -201,6 +206,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
             return view;
         }
+
     }
 
     class StartingViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -322,7 +328,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     @Override
     protected final Pair<List<? extends Page>, Integer> getOrderedPages() {
         final List<Page> pages = Arrays.asList(Page.values());
-        return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
+        return new ImmutablePair<>(pages, 0);
     }
 
     public static void showChangeLog(final Activity fromActivity) {

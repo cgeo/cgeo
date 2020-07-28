@@ -219,7 +219,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         withMockedFilters(() -> {
             final SearchResult search = GCParser.searchByOwner("Lineflyer", CacheType.EARTH);
             assertThat(search).isNotNull();
-            assertThat(search.getGeocodes()).hasSize(5);
+            assertThat(search.getGeocodes()).hasSize(6);
             assertThat(search.getGeocodes()).contains("GC7J99X");
         });
     }

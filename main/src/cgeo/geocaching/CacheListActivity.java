@@ -17,7 +17,6 @@ import cgeo.geocaching.command.MakeListUniqueCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -69,6 +68,7 @@ import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListAdapter;
+import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -119,6 +119,7 @@ import androidx.loader.content.Loader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -537,7 +538,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onSaveInstanceState(final Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
 
@@ -598,7 +599,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (currentLoader != null && currentLoader.isLoading()) {
             showFooterLoadingCaches();
@@ -773,7 +774,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
-            setEnabled(menu, R.id.menu_import_android, Compatibility.isStorageAccessFrameworkAvailable());
+            setEnabled(menu, R.id.menu_import_android, true);
             setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
 
             // Export
@@ -827,8 +828,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private class ListMarkerAdapter extends ArrayAdapter<ListMarker> {
 
-        private ArrayList<ListMarker> items;
-        private Context context;
+        private final ArrayList<ListMarker> items;
+        private final Context context;
 
         ListMarkerAdapter(final Context context, final int viewResId, final ArrayList<ListMarker> items) {
             super(context, viewResId, items);
@@ -841,7 +842,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             tv.setText(label + (selected ? " " + getString(R.string.caches_listmarker_selected) : ""));
         }
 
-        public View getView(final int position, final View convertView, final ViewGroup parent) {
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
 
             if (v == null) {
@@ -865,10 +866,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void selectListMarker() {
-        final ArrayList<ListMarker> items = new ArrayList<>();
-        for (final ListMarker temp : ListMarker.values()) {
-            items.add(temp);
-        }
+        final ArrayList<ListMarker> items = new ArrayList<>(Arrays.asList(ListMarker.values()));
         final ListMarkerAdapter adapter2 = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.caches_set_listmarker);
@@ -1266,6 +1264,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter.setInverseSort(currentInverseSort);
         adapter.forceSort();
+
+        listView.setOnScrollListener(new FastScrollListener(listView));
     }
 
     private void updateAdapter() {
@@ -1321,7 +1321,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpxFromAndroid() {
-        Compatibility.importGpxFromStorageAccessFramework(this, REQUEST_CODE_IMPORT_GPX);
+        // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+        // Filter to only show results that can be "opened", such as a file (as opposed to a list
+        // of contacts or timezones)
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        // Mime type based filter, we use "*/*" as GPX does not have a good mime type anyway
+        intent.setType("*/*");
+
+        startActivityForResult(intent, REQUEST_CODE_IMPORT_GPX);
     }
 
     private void importPq() {
@@ -1358,15 +1368,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private String getDisplayName(final Uri uri) {
-        Cursor cursor = null;
-        try {
-            cursor = getContentResolver().query(uri, new String[] { OpenableColumns.DISPLAY_NAME }, null, null, null);
+        try (Cursor cursor = getContentResolver().query(uri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null)) {
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close(); // no Closable Cursor below sdk 16
             }
         }
         return null;
@@ -1397,7 +1401,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (Settings.getChooseList() && type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    selectedListIds -> refreshStoredInternal(caches, selectedListIds), true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.<Integer>emptySet(), listNameMemento, false);
+                    selectedListIds -> refreshStoredInternal(caches, selectedListIds), true, Collections.singleton(StoredList.TEMPORARY_LIST.id), Collections.emptySet(), listNameMemento, false);
         } else {
             final Set<Integer> additionalListIds = new HashSet<>();
             if (type != CacheListType.OFFLINE && type != CacheListType.HISTORY) {
@@ -1583,7 +1587,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @NonNull
     private Action1<Integer> getListSwitchingRunnable() {
-        return selectedListId -> switchListById(selectedListId);
+        return this::switchListById;
     }
 
     private void switchListById(final int id) {
@@ -1987,7 +1991,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onLoadFinished(final Loader<SearchResult> arg0, final SearchResult searchIn) {
+    public void onLoadFinished(@NonNull final Loader<SearchResult> arg0, final SearchResult searchIn) {
         // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
         // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
         if (searchIn != null) {
@@ -2014,7 +2018,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onLoaderReset(final Loader<SearchResult> arg0) {
+    public void onLoaderReset(@NonNull final Loader<SearchResult> arg0) {
         //Not interesting
     }
 

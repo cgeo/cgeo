@@ -42,7 +42,6 @@ public interface ILoggingManager {
 
     void init();
 
-    int getPremFavoritePoints();
 
     Long getMaxImageUploadSize();
 
@@ -53,5 +52,4 @@ public interface ILoggingManager {
 
     boolean hasTrackableLoadError();
 
-    boolean hasFavPointLoadError();
 }

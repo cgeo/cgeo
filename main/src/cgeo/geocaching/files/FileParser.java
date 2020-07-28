@@ -17,12 +17,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 
 abstract class FileParser {
     /**
@@ -58,7 +58,7 @@ abstract class FileParser {
     protected static StringBuilder readStream(@NonNull final InputStream is, @Nullable final DisposableHandler progressHandler) throws IOException {
         final StringBuilder buffer = new StringBuilder();
         final ProgressInputStream progressInputStream = new ProgressInputStream(is);
-        final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream, CharEncoding.UTF_8));
+        final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream, StandardCharsets.UTF_8));
 
         try {
             String line;

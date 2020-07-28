@@ -14,13 +14,13 @@ public class TerrainFilterTest extends TestCase {
         final Geocache hard = new Geocache();
         hard.setTerrain(5f);
 
-        final TerrainFilter easyFilter = (TerrainFilter) new TerrainFilter.Factory().getFilters().get(0);
+        final TerrainFilter easyFilter = (TerrainFilter) new TerrainFilter.Factory().getFilters().get(1);
 
         assertThat(easyFilter.accepts(easy)).isTrue();
         assertThat(easyFilter.accepts(hard)).isFalse();
     }
 
     public static void testAllFilters() {
-        assertThat(new TerrainFilter.Factory().getFilters()).hasSize(7); // terrain ranges from 1 to 7 (due to ExtremCaching.com using that value)
+        assertThat(new TerrainFilter.Factory().getFilters()).hasSize(13); // terrain ranges from 1 to 7 (due to ExtremCaching.com using that value) in steps of 0.5
     }
 }

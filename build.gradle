@@ -11,10 +11,10 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.6.3'
 
         // un-mocking of portable Android classes
-        classpath 'de.mobilej.unmock:UnMockPlugin:0.7.3'
+        classpath 'de.mobilej.unmock:UnMockPlugin:0.7.6'
 
         // monitor our application method limit
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.2'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
 
         // ribbonizer for easier distinction of non-release builds
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
@@ -26,10 +26,10 @@ plugins {
     id 'idea'
 
     // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.27.0'
+    id 'com.github.ben-manes.versions' version '0.28.0'
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
-    id 'com.github.spotbugs' version '3.0.0'
+    id 'com.github.spotbugs' version '4.3.0'
 }
 
 /*
@@ -95,17 +95,11 @@ allprojects {
                         if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
                             selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
                         }
+
                         // Apache Commons IO 2.6 fails in FileUtils.deleteDirectory()
+                        // (uses java.nio.file.Path - which is first contained in Android API26)
                         if (selection.candidate.group == 'commons-io' && selection.candidate.module == 'commons-io' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 25) {
-                            selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime.")
-                        }
-                        // Apache Commons lang3 3.6+ fails in StringUtils.join() for API < 19
-                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-lang3' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 35) {
-                            selection.reject("Apache Commons lang3 3.6+ calls methods not available in the Android runtime.")
-                        }
-                        // Apache Commons Text 1.2+ requires Apache Commons lang3 3.6+ (see above)
-                        if (selection.candidate.group == 'org.apache.commons' && selection.candidate.module == 'commons-text' && selection.candidate.version.substring(0,1).toInteger()*10+selection.candidate.version.substring(2,3).toInteger() > 11) {
-                            selection.reject("Apache Commons text 1.2+ requires Apache Commons lang3 3.6+.")
+                            selection.reject("Apache Commons IO 2.6 calls methods not available in the Android runtime untli API26.")
                         }
                     }
                 }

@@ -89,14 +89,14 @@ public abstract class GeoDirHandler {
         final Sensors sensors = Sensors.getInstance();
 
         if ((flags & UPDATE_GEODATA) != 0) {
-            disposables.add(throttleIfNeeded(sensors.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(geoData -> updateGeoData(geoData)));
+            disposables.add(throttleIfNeeded(sensors.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(this::updateGeoData));
         }
         if ((flags & UPDATE_DIRECTION) != 0) {
-            disposables.add(throttleIfNeeded(sensors.directionObservable().observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(direction -> updateDirection(direction)));
+            disposables.add(throttleIfNeeded(sensors.directionObservable().observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(this::updateDirection));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
             // combineOnLatest() does not implement backpressure handling, so we need to explicitly use a backpressure operator there.
-            disposables.add(throttleIfNeeded(Observable.combineLatest(sensors.geoDataObservable(lowPower), sensors.directionObservable(), (geoData, direction) -> ImmutablePair.of(geoData, direction)).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(geoDir -> updateGeoDir(geoDir.left, geoDir.right)));
+            disposables.add(throttleIfNeeded(Observable.combineLatest(sensors.geoDataObservable(lowPower), sensors.directionObservable(), ImmutablePair::of).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(geoDir -> updateGeoDir(geoDir.left, geoDir.right)));
         }
         return disposables;
     }

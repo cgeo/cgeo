@@ -157,7 +157,7 @@ public class SuApi {
     }
 
     @NonNull
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) throws SuApiException {
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, final boolean addRecommendation) throws SuApiException {
         final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
         if (!(connector instanceof SuConnector)) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
@@ -168,6 +168,7 @@ public class SuApi {
         params.add("cacheID", cache.getCacheId());
         params.add("type", getSuLogType(logType));
         params.add("text", log);
+        params.add("add_recommendation", addRecommendation ? "true" : "false");
         params.add("find_date", LOG_DATE_FORMAT.format(date.getTime()));
 
         final ObjectNode data = postRequest(gcsuConnector, SuApiEndpoint.NOTE, params).data;
@@ -241,6 +242,66 @@ public class SuApi {
         return true;
     }
 
+    public static boolean setRecommendation(@NonNull final Geocache cache, final boolean status) {
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        params.add("recommend", status ? "true" : "false");
+
+        final ObjectNode data;
+        try {
+            data = postRequest(SuConnector.getInstance(), SuApiEndpoint.RECOMMENDATION, params).data;
+        } catch (final SuApiException e) {
+            return false;
+        }
+        if (data == null || data.get("status").get("code").toString().contains("ERROR")) {
+            return false;
+        }
+
+        cache.setFavorite(status);
+        cache.setFavoritePoints(cache.getFavoritePoints() + (status ? 1 : -1));
+
+        DataStore.saveChangedCache(cache);
+
+        return true;
+    }
+
+    public static boolean postVote(@NonNull final Geocache cache, final float rating) {
+        final Parameters params = new Parameters("cacheID", cache.getCacheId());
+        params.add("value", String.valueOf(rating));
+
+        try {
+            postRequest(SuConnector.getInstance(), SuApiEndpoint.VALUE, params);
+        } catch (final SuApiException e) {
+            return false;
+        }
+
+        // TODO: get updated rating?
+        //cache.setRating(rating.getRating());
+
+        cache.setVotes(cache.getVotes() + 1);
+        cache.setMyVote(rating);
+        DataStore.saveChangedCache(cache);
+
+        return true;
+    }
+
+
+    public static int getAvailableRecommendations() {
+        // Nothing here as we want to get info about current user
+        final Parameters params = new Parameters();
+
+        final ObjectNode data;
+        try {
+            data = postRequest(SuConnector.getInstance(), SuApiEndpoint.USER, params).data;
+        } catch (final SuApiException e) {
+            return 0;
+        }
+        if (data == null || data.get("status").get("code").toString().contains("ERROR")) {
+            return 0;
+        }
+
+        return data.get("data").get("recommendationsLeft").asInt();
+    }
+
     public static boolean uploadPersonalNote(final Geocache cache) {
         final String currentNote = StringUtils.defaultString(cache.getPersonalNote());
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
@@ -274,7 +335,7 @@ public class SuApi {
         if (!tokens.isValid()) {
             throw new NotAuthorizedException();
         }
-        OAuth.signOAuth(host, endpoint.methodName, method, connector.getHttps(), params, tokens, connector.getConsumerKey(), connector.getConsumerSecret());
+        OAuth.signOAuth(host, endpoint.methodName, method, connector.isHttps(), params, tokens, connector.getConsumerKey(), connector.getConsumerSecret());
 
         final String uri = connector.getHostUrl() + endpoint.methodName;
         final JSONResult result;

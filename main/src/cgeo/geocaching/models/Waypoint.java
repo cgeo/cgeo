@@ -237,6 +237,7 @@ public class Waypoint implements IWaypoint {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return name + " " + waypointType.getL10n();
     }

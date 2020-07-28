@@ -3,6 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.os.Handler;
@@ -38,7 +39,7 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
             int ignoredFiles = 0;
             for (ZipEntry zipEntry = zisPass1.getNextZipEntry(); zipEntry != null; zipEntry = zisPass1.getNextZipEntry()) {
                 gpxFileName = zipEntry.getName();
-                if (StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.GPX_FILE_EXTENSION)) {
+                if (StringUtils.endsWithIgnoreCase(gpxFileName, FileUtils.GPX_FILE_EXTENSION)) {
                     if (!StringUtils.endsWithIgnoreCase(gpxFileName, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
                         importStepHandler.sendMessage(importStepHandler.obtainMessage(GPXImporter.IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches_with_filename, (int) zipEntry.getSize(), getSourceDisplayName()));
                         caches = parser.parse(new NoCloseInputStream(zisPass1), progressHandler);

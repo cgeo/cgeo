@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -14,6 +15,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -38,7 +40,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, IFavoriteCapability, IVotingCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -140,11 +142,6 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + "&cid=" + cache.getCacheId();
-    }
-
-    @Override
-    public boolean getHttps() {
-        return true;
     }
 
     @Override
@@ -361,6 +358,50 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     /**
+     * Add the cache to favorites
+     *
+     * @param cache
+     * @return True - success/False - failure
+     */
+    @Override
+    public boolean addToFavorites(@NonNull final Geocache cache) {
+        return SuApi.setRecommendation(cache, true);
+    }
+
+    /**
+     * Remove the cache from favorites
+     *
+     * @param cache
+     * @return True - success/False - failure
+     */
+    @Override
+    public boolean removeFromFavorites(@NonNull final Geocache cache) {
+        return SuApi.setRecommendation(cache, false);
+    }
+
+    /**
+     * enable/disable favorite points controls in cache details
+     *
+     * @param cache
+     */
+    @Override
+    public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
+        return !cache.isOwner();
+    }
+
+    /**
+     * Check whether to show favorite controls during logging for the given log type
+     *
+     * @param cache a cache that this connector must be able to handle
+     * @param type  a log type selected by the user
+     * @return true, when cache can be added to favorite
+     */
+    @Override
+    public boolean supportsAddToFavorite(@NonNull final Geocache cache, final LogType type) {
+        return type == LogType.FOUND_IT && cache.supportsFavoritePoints();
+    }
+
+    /**
      * Returns the web address to create an account
      *
      * @return web address
@@ -368,6 +409,39 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public String getCreateAccountUrl() {
         return StringUtils.join(getHostUrl(), "/?pn=14");
+    }
+
+    @Override
+    public boolean canVote(@NonNull final Geocache cache, @NonNull final LogType logType) {
+        return logType == LogType.FOUND_IT;
+    }
+
+    @Override
+    public boolean supportsVoting(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public boolean isValidRating(final float rating) {
+        // Only integer votes are accepted
+        return ((int) rating) == rating;
+    }
+
+    @Override
+    public String getDescription(final float rating) {
+        return IVotingCapability.getDefaultFiveStarsDescription(rating);
+    }
+
+    /**
+     * Posts single request to update the vote only.
+     *
+     * @param cache  cache to vote for
+     * @param rating vote to set
+     * @return status of the request
+     */
+    @Override
+    public boolean postVote(@NonNull final Geocache cache, final float rating) {
+        return SuApi.postVote(cache, rating);
     }
 
     /**

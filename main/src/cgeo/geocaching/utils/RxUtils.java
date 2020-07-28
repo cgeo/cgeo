@@ -22,9 +22,9 @@ public class RxUtils {
 
     public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
         final AtomicReference<T> lastValue = new AtomicReference<>(initialValue);
-        return observable.doOnNext(value -> lastValue.set(value)).startWith(Observable.defer(() -> {
+        return observable.doOnNext(lastValue::set).startWith(Observable.defer(() -> {
             final T last = lastValue.get();
-            return last != null ? Observable.just(last) : Observable.<T>empty();
+            return last != null ? Observable.just(last) : Observable.empty();
         })).replay(1).refCount();
     }
 
@@ -96,7 +96,7 @@ public class RxUtils {
                 public void onSubscribe(final Disposable d) {
                     observer.onSubscribe(new CancellableDisposable(() -> {
                         canceled.set(true);
-                        Schedulers.computation().scheduleDirect(() -> d.dispose(), time, unit);
+                        Schedulers.computation().scheduleDirect(d::dispose, time, unit);
                     }));
                 }
 

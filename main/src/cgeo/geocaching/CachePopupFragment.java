@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -145,7 +146,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         if (super.onOptionsItemSelected(item)) {
             return true;
         }
@@ -170,7 +171,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();
@@ -197,7 +198,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (Settings.getChooseList() || cache.isOffline()) {
                 // let user select list to store cache in
                 new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
-                        selectedListIds -> storeCacheOnLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
+                        this::storeCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 storeCacheOnLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
             }
@@ -262,8 +263,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
     }
 
-    private class ShowHintClickListener implements View.OnClickListener {
-        private View anchorView;
+    private static class ShowHintClickListener implements View.OnClickListener {
+        private final View anchorView;
 
         ShowHintClickListener (final View view) {
             anchorView = view;

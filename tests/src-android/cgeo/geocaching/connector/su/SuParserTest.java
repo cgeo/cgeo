@@ -21,10 +21,10 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 
     private static UserInfo user;
-    private static String userJson = "{\"status\":{\"code\":\"OK\"},\"data\":{\"id\":68451,\"name\":\"lega4\",\"foundCaches\":594,\"hiddenCaches\":28}}";
-    private static String emptyUserJson = "{\"status\":{\"code\":\"OK\"},\"data\":{}}";
+    private static final String userJson = "{\"status\":{\"code\":\"OK\"},\"data\":{\"id\":68451,\"name\":\"lega4\",\"foundCaches\":594,\"hiddenCaches\":28}}";
+    private static final String emptyUserJson = "{\"status\":{\"code\":\"OK\"},\"data\":{}}";
     private static Geocache cache;
-    private static String cacheJson = "{\"status\":{\"code\":\"OK\"}," +
+    private static final String cacheJson = "{\"status\":{\"code\":\"OK\"}," +
             "\"data\":{" +
             "\"id\":3749," +
             "\"code\":\"TR3749\"," +
@@ -72,13 +72,13 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
             "]," +
 
             "\"images\":[" +
-            "{\"id\":3749,\"type\":\"cachePhoto\",\"url\":\"http://www.geocaching.su/photos/caches/3749.jpg\"}," +
-            "{\"id\":15090,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15090.jpg\",\"description\":\"Ограда монастыря и собор\"}," +
-            "{\"id\":15091,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15091.jpg\",\"description\":\"Временная звонница и &quot;Васильевский&quot; келейный корпус\"}," +
-            "{\"id\":15092,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15092.jpg\",\"description\":\"Домик игуменьи\"}," +
-            "{\"id\":15093,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15093.jpg\",\"description\":\"Крестовоздвиженская церковь\"}," +
-            "{\"id\":15094,\"type\":\"areaPhoto\",\"url\":\"http://www.geocaching.su/photos/areas/15094.jpg\",\"description\":\"Памятный крест\"}]}}";
-    private static String simpleCache = "{\"status\":{\"code\":\"OK\"}," +
+            "{\"id\":3749,\"type\":\"cachePhoto\",\"url\":\"https://geocaching.su/photos/caches/3749.jpg\"}," +
+            "{\"id\":15090,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15090.jpg\",\"description\":\"Ограда монастыря и собор\"}," +
+            "{\"id\":15091,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15091.jpg\",\"description\":\"Временная звонница и &quot;Васильевский&quot; келейный корпус\"}," +
+            "{\"id\":15092,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15092.jpg\",\"description\":\"Домик игуменьи\"}," +
+            "{\"id\":15093,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15093.jpg\",\"description\":\"Крестовоздвиженская церковь\"}," +
+            "{\"id\":15094,\"type\":\"areaPhoto\",\"url\":\"https://geocaching.su/photos/areas/15094.jpg\",\"description\":\"Памятный крест\"}]}}";
+    private static final String simpleCache = "{\"status\":{\"code\":\"OK\"}," +
             "\"data\":{" +
             "\"id\":321," +
             "\"code\":\"TR321\"," +
@@ -107,7 +107,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
             "\"isHtml\":true}" +
 
             "}}";
-    private static String cachesListJson = "{\"status\":{\"code\":\"OK\"}," +
+    private static final String cachesListJson = "{\"status\":{\"code\":\"OK\"}," +
             "\"data\":[" +
             "{\"id\":6989,\"name\":\"First cache\",\"author\":{\"id\":24219,\"name\":\"QQ\"},\"latitude\":59.9224833,\"longitude\":30.38655,\"type\":3,\"typeString\":\"Virtual\",\"subtype\":0,\"attributes\":[{\"id\":19,\"name\":\"watch\"},{\"id\":1,\"name\":\"hiking\"}],\"class\":\"2,6\",\"status\":1,\"statusString\":\"Active\",\"status2\":1,\"status2String\":\"Active\",\"difficulty\":1,\"area\":5,\"isFound\":false,\"size\":1,\"founds\":null,\"notfounds\":null,\"votes\":null,\"rating\":null,\"recommendations\":null,\"code\":\"VI6989\",\"dateHidden\":\"2009-12-06\",\"waypoints\":[]}," +
             "{\"id\":7582,\"name\":\"Something in 2010\",\"author\":{\"id\":22268,\"name\":\"-nz-\"},\"latitude\":59.9483334,\"longitude\":30.35,\"type\":9,\"typeString\":\"Logical\",\"subtype\":0,\"attributes\":[],\"class\":\"10\",\"status\":1,\"statusString\":\"Active\",\"status2\":1,\"status2String\":\"Active\",\"difficulty\":3,\"area\":3,\"isFound\":false,\"size\":1,\"founds\":null,\"notfounds\":null,\"votes\":null,\"rating\":null,\"recommendations\":null,\"code\":\"LT7582\",\"dateHidden\":\"2010-05-14\",\"waypoints\":[]}," +

@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="trailcolors">
-        <item>@string/color_grey</item>
-        <item>@string/color_blue</item>
-        <item>@string/color_green</item>
-    </string-array>
-
-    <string-array name="trailcolorValues">
-        <item>@string/pref_value_grey</item>
-        <item>@string/pref_value_blue</item>
-        <item>@string/pref_value_green</item>
-    </string-array>
-
     <string-array name="proximity_notification_types">
         <item>@string/pn_tone_only</item>
         <item>@string/pn_text_only</item>

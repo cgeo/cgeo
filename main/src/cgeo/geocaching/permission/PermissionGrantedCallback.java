@@ -1,7 +1,7 @@
 package cgeo.geocaching.permission;
 
 public abstract class PermissionGrantedCallback {
-    private PermissionRequestContext request;
+    private final PermissionRequestContext request;
 
     protected PermissionGrantedCallback(final PermissionRequestContext request) {
         this.request = request;

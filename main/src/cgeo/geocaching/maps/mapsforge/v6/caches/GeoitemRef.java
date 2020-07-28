@@ -6,6 +6,8 @@ import cgeo.geocaching.utils.TextUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.Comparator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,6 +49,7 @@ public class GeoitemRef implements Parcelable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         if (StringUtils.isEmpty(name)) {
             return itemCode;
@@ -92,8 +95,7 @@ public class GeoitemRef implements Parcelable {
                     final int id = in.readInt();
                     final String name = in.readString();
                     final int markerId = in.readInt();
-                    final GeoitemRef l = new GeoitemRef(itemCode, type, geocode, id, name, markerId);
-                    return l;
+                    return new GeoitemRef(itemCode, type, geocode, id, name, markerId);
                 }
 
                 @Override

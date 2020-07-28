@@ -51,9 +51,11 @@ public class Intents {
      */
     private static final String EXTRA_LIST_TYPE = PREFIX + "list_type";
     public static final String EXTRA_MAP_FILE = PREFIX + "map_file";
+    public static final String EXTRA_GPX_FILE = PREFIX + "gpx_file";
     public static final String EXTRA_NAME = PREFIX + "name";
     public static final String EXTRA_SEARCH = PREFIX + "search";
     public static final String EXTRA_START_DIR = PREFIX + "start_dir";
+    public static final String EXTRA_SELECTDIR = PREFIX + "selectDir";
     public static final String EXTRA_TRACKING_CODE = PREFIX + "tracking_code";
     public static final String EXTRA_USERNAME = PREFIX + "username";
     public static final String EXTRA_WAYPOINT_ID = PREFIX + "waypoint_id";

@@ -115,7 +115,7 @@ public class AndroidRxUtils {
     private static ExecutorService newFixedDiscardingThreadPool(final int nThreads, final String prefix) {
         return new ThreadPoolExecutor(nThreads, nThreads,
                 0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>(),
+                new LinkedBlockingQueue<>(),
                 new RxThreadFactory(prefix),
                 DISCARD_POLICY);
     }

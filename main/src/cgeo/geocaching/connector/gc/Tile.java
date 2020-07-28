@@ -42,7 +42,7 @@ public class Tile {
     static {
         for (int z = ZOOMLEVEL_MIN; z <= ZOOMLEVEL_MAX; z++) {
             NUMBER_OF_TILES[z] = 1 << z;
-            NUMBER_OF_PIXELS[z] = TILE_SIZE * 1 << z;
+            NUMBER_OF_PIXELS[z] = TILE_SIZE << z;
         }
     }
 
@@ -123,6 +123,7 @@ public class Tile {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return String.format(Locale.US, "(%d/%d), zoom=%d", tileX, tileY, zoomLevel);
     }

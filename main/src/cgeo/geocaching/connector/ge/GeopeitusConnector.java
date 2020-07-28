@@ -34,11 +34,6 @@ public class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean getHttps() {
-        return false;
-    }
-
-    @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
@@ -51,6 +46,6 @@ public class GeopeitusConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://" + getHost() + "/aare/";
+        return getHostUrl() + "/aare/";
     }
 }

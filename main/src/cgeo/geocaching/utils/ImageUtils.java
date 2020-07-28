@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -340,7 +341,7 @@ public final class ImageUtils {
     public static void decodeBase64ToStream(final String inString, final OutputStream out) throws IOException {
         Base64InputStream in = null;
         try {
-            in = new Base64InputStream(new ByteArrayInputStream(inString.getBytes(TextUtils.CHARSET_ASCII)), Base64.DEFAULT);
+            in = new Base64InputStream(new ByteArrayInputStream(inString.getBytes(StandardCharsets.US_ASCII)), Base64.DEFAULT);
             IOUtils.copy(in, out);
         } finally {
             IOUtils.closeQuietly(in);
@@ -391,7 +392,7 @@ public final class ImageUtils {
         private static final Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
         private static final LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
         private static final Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread, from redrawQueuedDrawables
-        private static final Runnable REDRAW_QUEUED_DRAWABLES = () -> redrawQueuedDrawables();
+        private static final Runnable REDRAW_QUEUED_DRAWABLES = ContainerDrawable::redrawQueuedDrawables;
 
         private Drawable drawable;
         protected final WeakReference<TextView> viewRef;

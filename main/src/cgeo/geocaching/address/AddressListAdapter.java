@@ -50,6 +50,7 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
     }
 
     @Override
+    @NonNull
     public AddressListHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addresslist_item, parent, false);
         final AddressListHolder viewHolder = new AddressListHolder(view);

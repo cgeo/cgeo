@@ -7,21 +7,11 @@
     android:padding="3dip"
     tools:context=".export.GpxExport" >
 
-    <TextView
-        android:id="@id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/export_gpx_info"
-        android:textColor="?text_color" />
-
-    <CheckBox
-        android:id="@+id/share"
-        style="@style/checkbox_full"
-        android:text="@string/init_share_after_export" />
+    <include layout="@layout/gpx_export_fragment" />
 
     <CheckBox
         android:id="@+id/include_found_status"
         style="@style/checkbox_full"
-        android:text="@string/init_include_found_status" />
+        android:text="@string/export_trailhistory_clear_after_export" />
 
 </LinearLayout>

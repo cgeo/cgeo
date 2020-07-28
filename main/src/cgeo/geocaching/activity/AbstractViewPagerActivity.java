@@ -107,7 +107,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     private class ViewPagerAdapter extends PagerAdapter {
 
         @Override
-        public void destroyItem(final ViewGroup container, final int position, final Object object) {
+        public void destroyItem(@NonNull final ViewGroup container, final int position, @NonNull final Object object) {
             if (position >= pageOrder.size()) {
                 return;
             }
@@ -126,7 +126,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public void finishUpdate(final ViewGroup container) {
+        public void finishUpdate(@NonNull final ViewGroup container) {
             // empty
         }
 
@@ -136,7 +136,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public Object instantiateItem(final ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
 
             final Page page = pageOrder.get(position);
 
@@ -171,7 +171,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public boolean isViewFromObject(final View view, final Object object) {
+        public boolean isViewFromObject(@NonNull final View view, @NonNull final Object object) {
             return view == object;
         }
 
@@ -186,12 +186,12 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public void startUpdate(final ViewGroup arg0) {
+        public void startUpdate(@NonNull final ViewGroup arg0) {
             // empty
         }
 
         @Override
-        public int getItemPosition(final Object object) {
+        public int getItemPosition(@NonNull final Object object) {
             // We are doing the caching. So pretend that the view is gone.
             // The ViewPager will get it back in instantiateItem()
             return POSITION_NONE;

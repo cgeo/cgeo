@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.google.v2;
 
+import java.util.Objects;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -62,7 +64,7 @@ public class MapObjectOptions {
     }
 
     protected static boolean objEquals(final Object a, final Object b) {
-        return (a == null) ? (b == null) : a.equals(b);
+        return Objects.equals(a, b);
     }
 
     protected static boolean equals(final MarkerOptions a, final MarkerOptions b) {

@@ -105,7 +105,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                 setTarget(waypoint, cache);
             }
         } else if (extras.containsKey(Intents.EXTRA_COORDS)) {
-            setTarget(extras.<Geopoint> getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
+            setTarget(extras.getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_COORD_DESCRIPTION));
         } else if (cache != null) {
             setTarget(cache);
         } else {
@@ -158,7 +158,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         setContentView(R.layout.compass_activity);
@@ -308,7 +308,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
-    private static double[] altitudeReadings = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
+    private static final double[] altitudeReadings = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
     private static int altitudeReadingPos = 0;
 
     @SuppressLint("SetTextI18n")

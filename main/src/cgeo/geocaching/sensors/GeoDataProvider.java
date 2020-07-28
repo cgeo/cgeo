@@ -49,7 +49,7 @@ public class GeoDataProvider {
                 geoManager.removeUpdates(gpsListener);
             }));
         });
-        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new RxUtils.DelayedUnsubscription<GeoData>(2500, TimeUnit.MILLISECONDS));
+        return observable.subscribeOn(AndroidRxUtils.looperCallbacksScheduler).share().lift(new RxUtils.DelayedUnsubscription<>(2500, TimeUnit.MILLISECONDS));
     }
 
     private static class Listener implements LocationListener {

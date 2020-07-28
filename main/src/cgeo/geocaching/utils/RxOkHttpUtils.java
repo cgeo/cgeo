@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -35,13 +37,13 @@ public class RxOkHttpUtils {
             }));
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(final Call call, final IOException e) {
+                public void onFailure(@NonNull final Call call, @NonNull final IOException e) {
                     completed.set(true);
                     singleEmitter.onError(e);
                 }
 
                 @Override
-                public void onResponse(final Call call, final Response response) throws IOException {
+                public void onResponse(@NonNull final Call call, @NonNull final Response response) throws IOException {
                     completed.set(true);
                     singleEmitter.onSuccess(response);
                 }

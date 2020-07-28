@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.activity.Progress;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -56,6 +57,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * This method should typically be overridden by final sub classes instead of {@link #onPreExecute()}.
      *
      */
+    @SuppressWarnings("EmptyMethod")
     protected void onPreExecuteInternal() {
         // empty by default
     }
@@ -140,4 +142,12 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      *          A result, defined by the subclass of this task.
      */
     protected abstract Result doInBackgroundInternal(Params[] params);
+
+    /**
+     * Instead of a message set with cancelMessage parameter you may set an cancelListener to the progress dialog
+     * @param cancelListener
+     */
+    public void setOnCancelListener (final DialogInterface.OnClickListener cancelListener) {
+        progress.setOnCancelListener(cancelListener);
+    }
 }

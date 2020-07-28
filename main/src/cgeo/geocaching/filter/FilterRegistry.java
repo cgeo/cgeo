@@ -38,6 +38,7 @@ public class FilterRegistry {
         }
 
         @Override
+        @NonNull
         public String toString() {
             return name;
         }

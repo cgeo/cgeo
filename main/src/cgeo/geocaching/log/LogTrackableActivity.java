@@ -108,6 +108,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public static final int LOG_TRACKABLE = 1;
 
     @Override
+    @NonNull
     public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
         showProgress(true);
 
@@ -119,7 +120,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     @Override
-    public void onLoadFinished(final Loader<List<LogTypeTrackable>> listLoader, final List<LogTypeTrackable> logTypesTrackable) {
+    public void onLoadFinished(@NonNull final Loader<List<LogTypeTrackable>> listLoader, final List<LogTypeTrackable> logTypesTrackable) {
 
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
@@ -137,7 +138,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     @Override
-    public void onLoaderReset(final Loader<List<LogTypeTrackable>> listLoader) {
+    public void onLoaderReset(@NonNull final Loader<List<LogTypeTrackable>> listLoader) {
         // nothing
     }
 
@@ -271,7 +272,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();
@@ -305,7 +306,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private void init() {
         registerForContextMenu(typeButton);
-        typeButton.setOnClickListener(view -> openContextMenu(view));
+        typeButton.setOnClickListener(this::openContextMenu);
 
         setType(typeSelected);
         dateButton.setOnClickListener(new DateListener());
@@ -342,7 +343,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, input -> DataStore.getSuggestionsGeocode(input)));
+        geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, DataStore::getSuggestionsGeocode));
     }
 
     @Override

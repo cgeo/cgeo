@@ -84,7 +84,7 @@ public class HtmlImage implements Html.ImageGetter {
     final WeakReference<TextView> viewRef;
     private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
-    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(url -> fetchDrawableUncached(url));
+    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(this::fetchDrawableUncached);
 
     // Background loading
     // .cache() is not yet available on Completable instances as of RxJava 2.0.0, so we have to go back
@@ -207,7 +207,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (FileUtils.isFileUrl(url)) {
             return Observable.defer(() -> {
                 final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
-                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
+                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 
@@ -218,7 +218,7 @@ public class HtmlImage implements Html.ImageGetter {
             @Override
             public void subscribe(final ObservableEmitter<BitmapDrawable> emitter) throws Exception {
                 // Canceling disposable must sever this connection
-                final CancellableDisposable aborter = new CancellableDisposable(() -> emitter.onComplete());
+                final CancellableDisposable aborter = new CancellableDisposable(emitter::onComplete);
                 disposable.add(aborter);
                 // Canceling this subscription must dispose the data retrieval
                 emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(() -> {

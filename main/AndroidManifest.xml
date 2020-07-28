@@ -43,13 +43,14 @@
         android:name=".CgeoApplication"
         android:allowBackup="true"
         android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent"
-        android:icon="@drawable/cgeo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/cgeo"
         android:hardwareAccelerated="false"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true">
 
         <!-- Samsung Multi-Window support -->
         <uses-library
@@ -225,6 +226,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
+        <activity android:name=".settings.ViewSettingsActivity" />
+        <activity
+            android:name=".settings.ReceiveMapFileActivity">
+        </activity>
         <activity
             android:name=".CacheListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -258,7 +263,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="*" />
@@ -295,7 +300,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                
+
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="*" />
@@ -305,7 +310,6 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
             </intent-filter>
-            
 
             <!-- intent filter for ZIP files -->
             <intent-filter>
@@ -695,6 +699,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.settings.SettingsActivity" />
         </activity>
+        <activity
+            android:name=".SelectTrackFileActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/track_file_select_title">
+        </activity>
+        <activity android:name=".maps.routing.RouteSortActivity" />
         <activity
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"

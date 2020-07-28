@@ -70,7 +70,7 @@ public class AndroidGeocoder {
 
     private static Observable<Address> addressesToObservable(final List<Address> addresses) {
         return CollectionUtils.isEmpty(addresses) ?
-                Observable.<Address>error(new RuntimeException("no result from Android geocoder")) :
+                Observable.error(new RuntimeException("no result from Android geocoder")) :
                 Observable.fromIterable(addresses);
     }
 

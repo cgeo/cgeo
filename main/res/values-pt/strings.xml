@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">A publicar o registo e a enviar a imagem…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
-    <string name="log_posting_gcvote">A publicar GCVote…</string>
+    <string name="log_posting_vote">A publicar votação em caches…</string>
     <string name="log_posting_image">A publicar imagem…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
@@ -511,8 +511,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_su">Carregar caches a partir de \'geocaching.su\'</string>
     <string name="settings_activate_su">Activar</string>
     <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
-    <string name="err_gcvote_send_rating">Erro ao enviar a avaliação, verifique a palavra-passe do GCVote nas definições ou limpe a mesma.</string>
-    <string name="gcvote_sent">Votação enviada com sucesso</string>
+    <string name="err_vote_send_rating">Erro ao enviar a classificação.</string>
+    <string name="vote_sent">Votação enviada com sucesso</string>
     <string name="settings_activate_twitter">Activar</string>
     <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
@@ -577,7 +577,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
-    <string name="init_listdisplay">Indicar listas nas listagens de caches</string>
+    <string name="init_listdisplay">Listas adicionais</string>
+    <string name="init_summary_listdisplay">Numa lista de caches, mostra o nome de outras listas a que cada cache armazenada esteja associada</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
@@ -625,9 +626,30 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
     <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
-    <string name="init_maptrail">Mostrar rasto</string>
-    <string name="init_summary_maptrail">Mostra o rasto no mapa</string>
-    <string name="init_trailcolor">Cor do rasto</string>
+    <string name="init_maptrail">Mostrar histórico do percurso</string>
+    <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
+    <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (forçado em cada arranque do c:geo). O valor padrão é 700 - ajustar de acordo com a memória disponível.</string>
+    <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
+    <string name="init_trailcolor">Cor da linha do histórico do percurso</string>
+    <string name="init_trailcolor_summary">Seleccionar a cor e opacidade para a linha do histórico do percurso</string>
+    <string name="init_trailwidth">Largura da linha do histórico do percurso</string>
+    <string name="init_trailwidth_summary">Seleccionar a largura para a linha do histórico do percurso</string>
+    <string name="init_directioncolor">Cor da linha de direcção</string>
+    <string name="init_directioncolor_summary">Seleccionar a cor e opacidade para a linha de direcção. A linha de direcção mostra uma linha recta para o alvo de navegação seleccionado, ou o caminho de navegação específico, se o encaminhamento estiver activado instalando a app BRouter.</string>
+    <string name="init_directionwidth">Largura da linha de direcção</string>
+    <string name="init_directionwidth_summary">Seleccionar a largura para a linha de direcção</string>
+    <string name="init_routecolor">Cor da linha do percurso individual</string>
+    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (Primeiro precisa de activar a função de \"toque sem soltar\", veja as configurações do mapa.)</string>
+    <string name="init_routewidth">Largura da linha do percurso individual</string>
+    <string name="init_routewidth_summary">Seleccionar a largura para a linha de rota individual</string>
+    <string name="init_trackcolor">Cor da linha do percurso individual</string>
+    <string name="init_trackcolor_summary">Seleccionar a cor e opacidade para a linha de trajectos. Um trajecto é constituído por vários pontos e pode ser carregado através de um arquivo GPX.</string>
+    <string name="init_trackwidth">Largura da linha do percurso individual</string>
+    <string name="init_trackwidth_summary">Seleccionar a largura para a linha do trajecto individual</string>
+    <string name="init_circlecolor">Cor da linha do círculo</string>
+    <string name="init_circlecolor_summary">Selecciona a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
+    <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
+    <string name="init_circlefillcolor_summary">Seleccionar a cor e opacidade para o preenchimento dos círculos</string>
     <string name="init_share_after_export">Abrir o menu de partilha depois da exportação GPX</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Visitar TBs</string>
@@ -696,10 +718,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="feature_own_coordinates">Memorizar as coord. modificadas</string>
     <string name="feature_search_keyword">Pesquisa por palavra-chave</string>
     <string name="feature_search_live_map">Mapa em tempo real</string>
-    <string name="feature_search_center">Procura por posição</string>
+    <string name="feature_search_center">Pesquisa por posição</string>
     <string name="feature_search_geocode">Pesquisa por código GC</string>
-    <string name="feature_search_owner">Procura por dono</string>
+    <string name="feature_search_owner">Pesquisa por proprietário</string>
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
+    <string name="feature_favorite">Adicionar a cache aos favoritos</string>
+    <string name="feature_voting">Dar votação a caches</string>
+    <string name="init_maplines_title">Personalização das linhas do mapa</string>
     <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
     <string name="init_mfold_api">Antigo Mapsforge V3</string>
     <string name="init_mfold_api_description">Estamos a usar uma versão nova do mapa Mapsforge por predefinição. Se notar falta de alguma funcionalidade ou deparar-se com problemas, pode voltar para a versão antiga aqui.</string>
@@ -764,13 +789,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Uma cache</item>
+        <item quantity="one">%1$d cache</item>
         <item quantity="other">%1$d caches</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">resta um dia</item>
-        <item quantity="other">restam %1$d dias</item>
+        <item quantity="one">%1$d dia restante</item>
+        <item quantity="other">%1$d dias restantes</item>
     </plurals>
     <string name="last_day_available">último dia disponível</string>
     <string name="cache_offline">Armazenada</string>
@@ -808,7 +833,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_personal_note_edit">Editar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
-    <string name="cache_personal_note_truncation">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
     <string name="cache_personal_note_upload">Carregar</string>
     <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
@@ -831,8 +856,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_images">Imagens</string>
     <string name="cache_waypoints">Pontos adicionais</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Ponto Adicional</item>
-        <item quantity="other">%d Pontos Adicionais</item>
+        <item quantity="one">%d ponto adicional</item>
+        <item quantity="other">%d pontos adicionais</item>
     </plurals>
     <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
@@ -911,6 +936,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_found_last_30_days">Encontradas nos últimos 30 dias</string>
     <string name="cache_status_archived">Arquivada</string>
     <string name="cache_status_disabled">Desactivada</string>
+    <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
     <string name="cache_status_not_premium">Disponível para todos os membros</string>
     <string name="cache_status_stored">Armazenada</string>
@@ -981,16 +1007,20 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="file_searching_in">A procurar ficheiros\nem</string>
     <string name="file_searching_sdcard_in">Nenhum ficheiro encontrado nas pastas predefinidas:\n%1$s\n\nA procurar no cartão de memória por ficheiros:\n</string>
     <string name="file_list_no_files">O c:geo não encontrou ficheiros adequados.</string>
-    <string name="file_searching">A procurar ficheiros</string>
+    <string name="file_searching">A procurar ficheiros correspondentes</string>
     <string name="file_title_searching">A procurar</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Escolher pasta</string>
     <string name="simple_dir_chooser_current_path">Caminho:</string>
     <string name="simple_dir_chooser_invalid_path">Caminho inválido</string>
+    <string name="simple_file_chooser_title">Escolher ficheiro</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">A carregar caches de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">A carregar pontos adicionais de %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d caches importadas de %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d cache importada de %2$s</item>
+        <item quantity="other">%1$d caches importadas de %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Transferência dos mapas estáticos cancelada</string>
     <string name="gpx_import_title_reading_file">A ler o ficheiro</string>
     <string name="gpx_import_title">Importar GPX</string>
@@ -1004,9 +1034,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="gpx_import_delete_message">Quer eliminar %s?</string>
     <string name="gpx_import_select_list_title">Importar GPX para lista</string>
     <string name="gpx_import_android">Importar do Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Seleccionar ficheiro de mapa</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Seleccionar ficheiro de percurso</string>
     <!-- import -->
     <string name="web_import_title">Importar de send2cgeo</string>
     <string name="web_import_waiting">A aguardar novas caches de send2cgeo…</string>
@@ -1068,7 +1098,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_modes">Modos de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_hide">Ocultar</string>
-    <string name="map_trail_show">Mostrar rasto</string>
+    <string name="map_trail_show">Mostrar histórico do percurso</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_circles_show">Mostrar círculos</string>
     <string name="map_mycaches_hide">Caches encontradas e/ou minhas</string>
@@ -1077,6 +1107,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_original">Pontos adicionais originais</string>
     <string name="map_hidewp_parking">Pontos adic. de estacionamento</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
+    <string name="map_hide_track">Ocultar o percurso individual</string>
+    <string name="map_load_track">Carregar o percurso individual</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Percurso individual carregado (%d ponto de percurso)</item>
+        <item quantity="other">Percurso individual carregado (%d pontos de percurso)</item>
+    </plurals>
+    <string name="load_track_error">Erro ao carregar o percurso individual</string>
+    <string name="map_unload_track">Anular carregamento do percurso individual</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1089,7 +1127,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_live_disable">Desactivar em tempo real</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_clear_trailhistory">Limpar o histórico do percurso</string>
-    <string name="map_trailhistory_cleared">o histórico do percurso foi limpo</string>
+    <string name="map_trailhistory_cleared">O histórico do percurso foi limpo</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
     <string name="map_routing">Rotas</string>
     <string name="map_routing_straight">Linha a direito</string>
@@ -1110,12 +1148,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_kw">Palavras-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
-    <string name="search_fbu">Encontradas pelo utilizador</string>
+    <string name="search_fbu">Encontradas por um utilizador</string>
     <string name="search_fbu_prefill">Nome de utilizador</string>
     <string name="search_fbu_button">Pesquisar por utilizador</string>
-    <string name="search_hbu">Escondida pelos utilizadores</string>
-    <string name="search_hbu_prefill">Dono</string>
-    <string name="search_hbu_button">Pesquisar pelo dono</string>
+    <string name="search_hbu">Escondidas por um utilizador</string>
+    <string name="search_hbu_prefill">Proprietário</string>
+    <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
@@ -1217,13 +1255,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_persnotes">Notas pessoais</string>
     <string name="export_persnotes_uploading">A enviar nota pessoal %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Nota enviada com sucesso</item>
+        <item quantity="one">%1$d nota enviada com sucesso</item>
         <item quantity="other">%1$d notas enviadas com sucesso</item>
     </plurals>
     <string name="export_modifiedcoords">Coordenadas modificadas</string>
     <string name="export_modifiedcoords_uploading">A enviar %1$d</string>
     <string name="export_modifiedcoords_success">Carregamento com êxito</string>
-    <string name="export_modifiedcoords_result">Carregamento concluído: %1$d falhou / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Carregamento concluído: %1$d falhou / %2$d ok</string>
     <string name="export_modifiedcoords_error">Falha no carregamento</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cães permitidos</string>
@@ -1467,7 +1505,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a utilizar uma versão antiga do Android. As próximas versões do c:geo poderão não estar disponíveis para o seu dispositivo.\nToque nesta mensagem para mais informações.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar, ou comportar-se inesperadamente!\nToque nesta mensagem para obter mais informações.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, devido ao sítio Web ou a outras alterações técnicas. Por favor, leia as nossas FAQ para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
@@ -1581,6 +1620,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="color_red">Vermelho</string>
     <string name="color_turquoise">Turquesa</string>
     <string name="color_black">Preto</string>
+    <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
+    <string name="preference_colorpicker_select_color">Seleccionar cor</string>
+    <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidade</string>
     <!-- number input -->
     <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
@@ -1591,15 +1633,52 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="notification_channel_description">notificações da aplicação c:geo</string>
     <string name="proximity_notification_title">notificação de proximidade</string>
     <!-- individual routes -->
+    <string name="individual_route">Rota individual</string>
     <string name="individual_route_added">adicionado à rota</string>
     <string name="individual_route_removed">removido da rota</string>
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
+    <string name="map_sort_individual_route">Ordenar por rota individual</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
+    <string name="save_sorted_route">Guardar</string>
+    <string name="sorted_route_saved">Rota individual guardada</string>
+    <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
+    <string name="switch_on">Ligado</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
+    <!-- view settings -->
+    <string name="view_settings">Ver definições</string>
+    <string name="delete_setting">Excluir configuração</string>
+    <string name="delete_setting_warning">Eliminar a chave \"%s\" das definições?\n\nEsta operação não pode ser anulada.</string>
+    <string name="edit_setting">Editar a configuração \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Tipo de configuração desconhecido - edição não suportada</string>
+    <string name="edit_setting_error_invalid_data">Os dados introduzidos \"%s\" são inválidos. O valor da configuração ficou inalterado.</string>
+    <string name="activate_editmode_title">Activar o modo de edição</string>
+    <string name="activate_editmode_warning">Está a aceder a uma secção perigosa!\n\nAlterar directamente as definições pode criar conflitos no c:geo ou impedir o programa de iniciar no futuro, por isso seja cauteloso!\n\nTem a certeza que pretende prosseguir por sua conta e risco?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">Processamento de ficheiros locais do c:geo</string>
+    <string name="localfile_title">Abrir um ficheiro local</string>
+    <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
+    <string name="localfile_foundmap">encontrado um ficheiro de mapa</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Receber um ficheiro de mapa</string>
+    <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e guardado no directório de mapas</string>
+    <string name="receivemapfile_error">Erro ao receber ficheiro de mapa</string>
+    <string name="receivemapfile_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
+    <string name="receivemapfile_option_overwrite">Substituir</string>
+    <string name="receivemapfile_option_differentname">Nome diferente</string>
+    <string name="receivemapfile_kb_copied">%d kB copiados</string>
+    <string name="receivemapfile_cancelled">Transferência do ficheiro de mapa cancelada</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Transferir mapas offline simples</string>
+    <string name="downloadmap_info">Será redireccionado/a para um sítio de transferência de mapas offline simples (sem suporte de temas).\n\nEscolha o ficheiro .map para a sua região e toque no mesmo para a transferência do mapa.\n\nQuando a transferência for concluída, toque no ficheiro transferido para definir esse mapa como o mapa em utilização no c:geo</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Percurso do histórico</string>
+    <string name="export_trailhistory_title">Exportar o percurso do histórico</string>
+    <string name="export_trailhistory_success">O percurso do histórico foi exportado como \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Limpar o percurso do histórico depois de exportar</string>
 </resources>

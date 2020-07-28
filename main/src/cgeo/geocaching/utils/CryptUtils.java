@@ -5,8 +5,8 @@ import android.text.SpannableStringBuilder;
 
 import androidx.annotation.NonNull;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,7 +14,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 public final class CryptUtils {
@@ -88,9 +87,9 @@ public final class CryptUtils {
     public static String md5(final String text) {
         try {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(text.getBytes(CharEncoding.UTF_8), 0, text.length());
+            digest.update(text.getBytes(StandardCharsets.UTF_8), 0, text.length());
             return new BigInteger(1, digest.digest()).toString(16);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException e) {
             Log.e("CryptUtils.md5", e);
         }
 
@@ -100,11 +99,11 @@ public final class CryptUtils {
     @NonNull
     public static byte[] hashHmac(final String text, final String salt) {
         try {
-            final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(CharEncoding.UTF_8), "HmacSHA1");
+            final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(StandardCharsets.UTF_8), "HmacSHA1");
             final Mac mac = Mac.getInstance("HmacSHA1");
             mac.init(secretKeySpec);
-            return mac.doFinal(text.getBytes(CharEncoding.UTF_8));
-        } catch (GeneralSecurityException | UnsupportedEncodingException e) {
+            return mac.doFinal(text.getBytes(StandardCharsets.UTF_8));
+        } catch (GeneralSecurityException e) {
             Log.e("CryptUtils.hashHmac", e);
             return EMPTY;
         }

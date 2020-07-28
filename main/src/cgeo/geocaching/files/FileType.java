@@ -1,8 +1,9 @@
 package cgeo.geocaching.files;
 
-enum FileType {
+public enum FileType {
     UNKNOWN,
     LOC,
     GPX,
-    ZIP
+    ZIP,
+    MAP
 }

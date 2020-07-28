@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import butterknife.BindView;
@@ -135,7 +136,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         if (super.onOptionsItemSelected(item)) {
             return true;
         }

@@ -7,11 +7,9 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -20,7 +18,6 @@ import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -46,11 +43,9 @@ public class CgeoApplication extends Application {
 
         OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
             fixUserManagerMemoryLeak();
         }
-
-        fixGoogleMapZoomDataBug();
 
         showOverflowMenu();
 
@@ -65,8 +60,8 @@ public class CgeoApplication extends Application {
 
     /**
      * https://code.google.com/p/android/issues/detail?id=173789
+     * introduced with JELLY_BEAN_MR2 / fixed in October 2016
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void fixUserManagerMemoryLeak() {
         try {
             // invoke UserManager.get() via reflection
@@ -80,30 +75,8 @@ public class CgeoApplication extends Application {
         }
     }
 
-    /**
-     * https://issuetracker.google.com/issues/154855417
-     * delete corrupted map zoom data files once
-     * bug appeared 2020-04-22
-     * workaround according to https://issuetracker.google.com/issues/154855417#comment398
-     */
-    private void fixGoogleMapZoomDataBug() {
-        try {
-            final SharedPreferences hasFixedGoogleBug154855417 = getSharedPreferences("google_bug_154855417", Context.MODE_PRIVATE);
-            if (!hasFixedGoogleBug154855417.contains("fixed")) {
-                final File corruptedZoomTables = new File(getFilesDir(), "ZoomTables.data");
-                final File corruptedSavedClientParameters = new File(getFilesDir(), "SavedClientParameters.data.cs");
-                final File corruptedClientParametersData = new File(getFilesDir(), "DATA_ServerControlledParametersManager.data.v1." + getBaseContext().getPackageName());
-                corruptedZoomTables.delete();
-                corruptedSavedClientParameters.delete();
-                corruptedClientParametersData.delete();
-                hasFixedGoogleBug154855417.edit().putBoolean("fixed", true).apply();
-            }
-        } catch (Exception e) {
-        }
-    }
-
     @Override
-    public void onConfigurationChanged(final Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         initApplicationLocale();

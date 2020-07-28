@@ -42,6 +42,7 @@ public final class LocalStorage {
     private static final String DATABASES_DIRNAME = "databases";
     private static final String BACKUP_DIR_NAME = "backup";
     public static final String LOGFILES_DIR_NAME = "logfiles";
+    private static final String MAP_DIR_NAME = "maps";
     private static final String GPX_DIR_NAME = "gpx";
     private static final String FIELD_NOTES_DIR_NAME = "field-notes";
     private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
@@ -267,6 +268,11 @@ public final class LocalStorage {
     @NonNull
     public static File getLegacyFieldNotesDirectory() {
         return new File(Environment.getExternalStorageDirectory(), FIELD_NOTES_DIR_NAME);
+    }
+
+    @NonNull
+    public static File getDefaultMapDirectory() {
+        return new File(getExternalPublicCgeoDirectory(), MAP_DIR_NAME);
     }
 
     @NonNull

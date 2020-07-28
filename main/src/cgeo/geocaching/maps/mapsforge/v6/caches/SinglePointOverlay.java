@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -15,13 +16,13 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
     private final Geopoint coords;
     private final WaypointType type;
 
-    public SinglePointOverlay(final Geopoint coords, final WaypointType type, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
-        super(overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
+    public SinglePointOverlay(final NewMap map, final Geopoint coords, final WaypointType type, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+        super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.coords = coords;
         this.type = type;
 
-        AndroidRxUtils.computationScheduler.scheduleDirect(() -> fill());
+        AndroidRxUtils.computationScheduler.scheduleDirect(this::fill);
     }
 
     @Override

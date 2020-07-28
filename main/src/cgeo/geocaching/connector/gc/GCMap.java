@@ -131,7 +131,7 @@ public class GCMap {
         }
 
         final GCWebAPI.MapSearchResultSet mapSearchResultSet = GCWebAPI.searchMap(viewport);
-        final List<Geocache> foundCaches = new ArrayList<Geocache>();
+        final List<Geocache> foundCaches = new ArrayList<>();
 
         if (mapSearchResultSet.results != null) {
             for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {

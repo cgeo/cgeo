@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -36,12 +37,8 @@ public class GPXImporter {
     static final int IMPORT_STEP_CANCELED = 8;
     static final int IMPORT_STEP_STATIC_MAPS_SKIPPED = 9;
 
-    public static final String GPX_FILE_EXTENSION = ".gpx";
-    public static final String LOC_FILE_EXTENSION = ".loc";
-    public static final String ZIP_FILE_EXTENSION = ".zip";
-    public static final String COMPRESSED_GPX_FILE_EXTENSION = ".ggz";
     public static final String WAYPOINTS_FILE_SUFFIX = "-wpts";
-    public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + GPX_FILE_EXTENSION;
+    public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + FileUtils.GPX_FILE_EXTENSION;
 
     private static final List<String> GPX_MIME_TYPES = Arrays.asList("text/xml", "application/xml");
     private static final List<String> ZIP_MIME_TYPES = Arrays.asList("application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream");
@@ -68,9 +65,9 @@ public class GPXImporter {
      *            the file to import
      */
     public void importGPX(final File file) {
-        if (StringUtils.endsWithIgnoreCase(file.getName(), GPX_FILE_EXTENSION)) {
+        if (StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.GPX_FILE_EXTENSION)) {
             new ImportGpxFileThread(file, listId, importStepHandler, progressHandler).start();
-        } else if (StringUtils.endsWithIgnoreCase(file.getName(), ZIP_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(file.getName(), COMPRESSED_GPX_FILE_EXTENSION)) {
+        } else if (StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.ZIP_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.COMPRESSED_GPX_FILE_EXTENSION)) {
             new ImportGpxZipFileThread(file, listId, importStepHandler, progressHandler).start();
         } else {
             new ImportLocFileThread(file, listId, importStepHandler, progressHandler).start();
@@ -114,11 +111,11 @@ public class GPXImporter {
     @NonNull
     private static FileType getFileTypeFromPathName(
             final String pathName) {
-        if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION)) {
+        if (StringUtils.endsWithIgnoreCase(pathName, FileUtils.GPX_FILE_EXTENSION)) {
             return FileType.GPX;
         }
 
-        if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
+        if (StringUtils.endsWithIgnoreCase(pathName, FileUtils.LOC_FILE_EXTENSION)) {
             return FileType.LOC;
         }
         return FileType.UNKNOWN;
@@ -225,13 +222,13 @@ public class GPXImporter {
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
                     disposeProgressHandler();
-                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_static_maps_skipped) + ", " + res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj));
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED:
                     progress.dismiss();
-                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getString(R.string.gpx_import_caches_imported_with_filename, msg.arg1, msg.obj));
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, res.getQuantityString(R.plurals.gpx_import_caches_imported_with_filename, msg.arg1, msg.arg1, msg.obj));
                     importFinished();
                     break;
 

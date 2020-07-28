@@ -37,11 +37,6 @@ public class TerraCachingConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean getHttps() {
-        return false;
-    }
-
-    @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
@@ -49,7 +44,7 @@ public class TerraCachingConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://www.terracaching.com/Cache/";
+        return "https://play.terracaching.com/Cache/";
     }
 
     @Override

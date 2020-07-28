@@ -9,6 +9,8 @@ import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap.RemoveHandler;
 import cgeo.geocaching.utils.Log;
 
+import androidx.annotation.NonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -96,6 +98,7 @@ public class CacheCache {
     }
 
     @Override
+    @NonNull
     public synchronized String toString() {
         return StringUtils.join(cachesCache.keySet(), ' ');
     }

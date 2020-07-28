@@ -42,6 +42,7 @@ class GPXListAdapter extends RecyclerView.Adapter<GPXListAdapter.ViewHolder> {
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(final ViewGroup parent, final int position) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gpx_item, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);

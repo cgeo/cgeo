@@ -29,6 +29,7 @@ public abstract class AbstractMapSource implements MapSource {
     }
 
     @Override
+    @NonNull
     public String toString() {
         // needed for adapter in selection lists
         return getName();

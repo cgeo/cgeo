@@ -555,6 +555,12 @@
                 android:title="@string/settings_info_offline_maps_title"
                 app:url="@string/settings_offline_maps_url"
                 app:urlButton="@string/settings_goto_url_button" />
+            <!-- disabled for now
+            <cgeo.geocaching.settings.InfoPreferenceMap
+                android:text="@string/downloadmap_info"
+                android:title="@string/downloadmap_title"
+                app:url="@string/mapserver_osm_v5" />
+                -->
             <Preference
                 android:key="@string/pref_mapDirectory"
                 android:title="@string/init_map_directory_description" />
@@ -586,9 +592,11 @@
                 android:selectable="false"
                 android:summary="@string/init_showwaypoint_description"
                 android:title="@string/init_showwaypoints" />
-            <cgeo.geocaching.settings.WpThresholdPreference
+            <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_showwaypointsthreshold"
-                android:layout="@layout/preference_seekbar" />
+                app:min="0"
+                app:max="@integer/waypoint_threshold_max"
+                android:defaultValue="@integer/waypoint_threshold_default" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_excludeWpOriginal"
@@ -620,21 +628,25 @@
                 android:key="@string/pref_maptrail"
                 android:summary="@string/init_summary_maptrail"
                 android:title="@string/init_maptrail" />
-            <ListPreference
-                android:title="@string/init_trailcolor"
-                android:summary="%s"
-                android:key="@string/pref_trailcolor"
-                android:defaultValue="@string/pref_value_grey"
-                android:dependency="@string/pref_maptrail"
-                android:entries="@array/trailcolors"
-                android:entryValues="@array/trailcolorValues" />
+            <Preference
+                android:selectable="false"
+                android:title="@string/init_maptrail_length"
+                android:summary="@string/init_maptrail_length_summary" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_maptrail_length"
+                app:min="100"
+                app:max="@integer/historytrack_length_max"
+                android:defaultValue="@integer/historytrack_length_default" />
             <Preference
                 android:selectable="false"
                 android:summary="@string/init_brouterThreshold_description"
                 android:title="@string/init_brouterThreshold" />
-            <cgeo.geocaching.settings.BrouterThresholdPreference
+            <cgeo.geocaching.settings.ProximityPreference
                 android:key="@string/pref_brouterDistanceThreshold"
-                android:layout="@layout/preference_seekbar" />
+                app:min="1"
+                app:max="@integer/brouter_threshold_max"
+                android:defaultValue="@integer/brouter_threshold_default"
+                app:highRes="false" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_brouterShowBothDistances"
@@ -653,12 +665,20 @@
 
         <PreferenceCategory android:title="@string/settings_title_proximityNotification"
             android:layout="@layout/preference_category" >
-            <cgeo.geocaching.settings.ProximityFarPreference
+            <cgeo.geocaching.settings.ProximityPreference
                 android:key="@string/pref_proximityDistanceFar"
-                android:layout="@layout/preference_seekbar" />
-            <cgeo.geocaching.settings.ProximityNearPreference
+                app:label="@string/far_distance"
+                app:min="1"
+                app:max="@integer/proximitynotification_distance_max"
+                android:defaultValue="@integer/proximitynotification_far_default"
+                app:highRes="true" />
+            <cgeo.geocaching.settings.ProximityPreference
                 android:key="@string/pref_proximityDistanceNear"
-                android:layout="@layout/preference_seekbar" />
+                app:label="@string/near_distance"
+                app:min="1"
+                app:max="@integer/proximitynotification_distance_max"
+                android:defaultValue="@integer/proximitynotification_near_default"
+                app:highRes="true" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_proximityNotificationGeneral"
@@ -676,6 +696,97 @@
                 android:defaultValue="@string/pref_value_pn_tone_only"
                 android:entries="@array/proximity_notification_types"
                 android:entryValues="@array/proximity_notification_values" />
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/init_maplines_title"
+            android:layout="@layout/preference_category">
+
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_trailcolor"
+                android:summary="@string/init_trailcolor_summary"
+                android:key="@string/pref_mapline_trailcolor"
+                android:defaultValue="@color/default_trailcolor"
+                android:dependency="@string/pref_maptrail"
+                app:showOpaquenessSlider="true" />
+            <Preference
+                android:title="@string/init_trailwidth"
+                android:summary="@string/init_trailwidth_summary"
+                android:dependency="@string/pref_maptrail"
+                android:selectable="false" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_mapline_trailwidth"
+                app:min="0"
+                app:max="100"
+                app:hasDecimals="false"
+                android:defaultValue="@integer/default_trailwidth"
+                android:dependency="@string/pref_maptrail" />
+
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_directioncolor"
+                android:summary="@string/init_directioncolor_summary"
+                android:key="@string/pref_mapline_directioncolor"
+                android:defaultValue="@color/default_directioncolor"
+                app:showOpaquenessSlider="true" />
+            <Preference
+                android:title="@string/init_directionwidth"
+                android:summary="@string/init_directionwidth_summary"
+                android:selectable="false" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_mapline_directionwidth"
+                app:min="0"
+                app:max="100"
+                app:hasDecimals="false"
+                android:defaultValue="@integer/default_directionwidth"
+                android:layout="@layout/preference_seekbar" />
+
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_routecolor"
+                android:summary="@string/init_routecolor_summary"
+                android:key="@string/pref_mapline_routecolor"
+                android:defaultValue="@color/default_routecolor"
+                app:showOpaquenessSlider="true" />
+            <Preference
+                android:title="@string/init_routewidth"
+                android:summary="@string/init_routewidth_summary"
+                android:selectable="false" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_mapline_routewidth"
+                app:min="0"
+                app:max="100"
+                app:hasDecimals="false"
+                android:defaultValue="@integer/default_routewidth"
+                android:layout="@layout/preference_seekbar" />
+
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_trackcolor"
+                android:summary="@string/init_trackcolor_summary"
+                android:key="@string/pref_mapline_trackcolor"
+                android:defaultValue="@color/default_trackcolor"
+                app:showOpaquenessSlider="true" />
+            <Preference
+                android:title="@string/init_trackwidth"
+                android:summary="@string/init_trackwidth_summary"
+                android:selectable="false" />
+            <cgeo.geocaching.settings.SeekbarPreference
+                android:key="@string/pref_mapline_trackwidth"
+                app:min="0"
+                app:max="100"
+                app:hasDecimals="false"
+                android:defaultValue="@integer/default_trackwidth"
+                android:layout="@layout/preference_seekbar" />
+
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_circlecolor"
+                android:summary="@string/init_circlecolor_summary"
+                android:key="@string/pref_mapline_circlecolor"
+                android:defaultValue="@color/default_circlecolor"
+                app:showOpaquenessSlider="true" />
+            <cgeo.geocaching.settings.ColorpickerPreference
+                android:title="@string/init_circlefillcolor"
+                android:summary="@string/init_circlefillcolor_summary"
+                android:key="@string/pref_mapline_circlefillcolor"
+                android:defaultValue="@color/default_circlefillcolor"
+                app:showOpaquenessSlider="true" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_mapsforge_api_title"
@@ -738,7 +849,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_showListsInCacheList"
-            android:title="@string/init_listdisplay" />
+            android:title="@string/init_listdisplay"
+            android:summary="@string/init_summary_listdisplay" />
 
         <PreferenceCategory android:title="@string/settings_title_gpx"
             android:layout="@layout/preference_category" >
@@ -974,6 +1086,9 @@
             <Preference
                 android:key="@string/pref_memory_dump"
                 android:title="@string/init_create_memory_dump" />
+            <Preference
+                android:key="@string/pref_view_settings"
+                android:title="@string/view_settings" />
         </PreferenceCategory>
     </PreferenceScreen>
 

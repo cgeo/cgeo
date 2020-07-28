@@ -40,6 +40,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.gridlayout.widget.GridLayout;
@@ -538,7 +539,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
      */
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putByteArray(CALC_STATE, SerializationUtils.serialize(getCurrentState()));
     }
@@ -874,7 +875,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                                 result = String.valueOf(resInt);
                             }
 
-                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1, returnValue.length());
+                            returnValue = returnValue.substring(0, openIndex) + result + returnValue.substring(closeIndex + 1);
                         } else {
                             // Reached end without finding enough closing brackets
                             throw new IllegalArgumentException("Unmatched opening bracket '" + returnValue.charAt(openIndex) + "' at index " + openIndex + " of \"" + returnValue + "\"/");

@@ -9,10 +9,6 @@ import android.view.WindowManager;
 
 public class DisplayUtils {
 
-    private static final float THIN_LINE = 4f;
-    private static final float HISTORY_LINE_SHADOW = 3f;
-    private static final float HISTORY_LINE_INSET = HISTORY_LINE_SHADOW / 2;
-
     private DisplayUtils() {
         // Utility class, do not instantiate
     }
@@ -36,24 +32,4 @@ public class DisplayUtils {
         return metrics;
     }
 
-    public static float getRouteLineWidth() {
-        return THIN_LINE * getDisplayDensity();
-    }
-
-    public static float getDirectionLineWidth() {
-        return THIN_LINE * getDisplayDensity();
-    }
-
-    public static float getHistoryLineShadowWidth() {
-        return HISTORY_LINE_SHADOW * getDisplayDensity();
-    }
-
-    public static float getHistoryLineInsetWidth() {
-        return HISTORY_LINE_INSET * getDisplayDensity();
-    }
-
-    // for drawing debug relevant lines
-    public static float getDebugLineWidth() {
-        return THIN_LINE * getDisplayDensity();
-    }
 }

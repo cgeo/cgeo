@@ -90,7 +90,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
             final LayoutInflater inflater = LayoutInflater.from(context);
             final ListAdapter adapter = new ArrayAdapter<IWaypoint>(context, R.layout.cacheslist_item_select, targets) {
                 @Override
-                public View getView(final int position, final View convertView, final ViewGroup parent) {
+                public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
 
                     final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
                     final TextView tv = (TextView) view.findViewById(R.id.text);

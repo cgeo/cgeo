@@ -72,6 +72,7 @@
     <string translatable="false" name="pref_excludeWpOriginal">excludeWpOriginal</string>
     <string translatable="false" name="pref_excludeWpParking">excludeWpParking</string>
     <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>
+    <string translatable="false" name="pref_hide_track">hideTrack</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_signature">signature</string>
@@ -99,9 +100,19 @@
     <string translatable="false" name="pref_value_pn_text_only">2</string>
     <string translatable="false" name="pref_value_pn_tone_and_text">3</string>
     <string translatable="false" name="pref_maptrail">maptrail</string>
-    <string translatable="false" name="pref_trailcolor">trailcolor</string>
+    <string translatable="false" name="pref_maptrail_length">maptrail_length</string>
+    <string translatable="false" name="pref_mapline_trailcolor">mapline_trailcolor</string>
+    <string translatable="false" name="pref_mapline_trailwidth">mapline_trailwidth</string>
+    <string translatable="false" name="pref_mapline_directioncolor">mapline_directioncolor</string>
+    <string translatable="false" name="pref_mapline_directionwidth">mapline_directionwidth</string>
+    <string translatable="false" name="pref_mapline_routecolor">mapline_routecolor</string>
+    <string translatable="false" name="pref_mapline_routewidth">mapline_routewidth</string>
+    <string translatable="false" name="pref_mapline_trackcolor">mapline_trackcolor</string>
+    <string translatable="false" name="pref_mapline_trackwidth">mapline_trackwidth</string>
+    <string translatable="false" name="pref_mapline_circlecolor">mapline_circlecolor</string>
+    <string translatable="false" name="pref_mapline_circlefillcolor">mapline_circlefillcolor</string>
     <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>
-    <string translatable="false" name="pref_dot_mode">dot_mode</string>
+    <string translatable="false" name="pref_compactIconMode">compactIconMode</string>
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
     <string translatable="false" name="pref_gpxExportDir">gpxExportDir</string>
@@ -141,6 +152,7 @@
     <string translatable="false" name="pref_version">version</string>
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
+    <string translatable="false" name="pref_trackfile">trackfile</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
     <string translatable="false" name="pref_gccustomdate">gccustomdate</string>
@@ -153,6 +165,7 @@
     <string translatable="false" name="pref_trackable_inventory_sort">trackableComparator</string>
     <string translatable="false" name="pref_shareafterexport">shareafterexport</string>
     <string translatable="false" name="pref_includefoundstatus">includefoundstatus</string>
+    <string translatable="false" name="pref_cleartrailafterexportstatus">cleartrailafterexportstatus</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
     <string translatable="false" name="pref_logImageScale">logImageScale</string>
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>
@@ -231,6 +244,7 @@
     <string translatable="false" name="pref_ec_icons">ec_icons</string>
     <string translatable="false" name="pref_memory_dump">memory_dump</string>
     <string translatable="false" name="pref_generate_logcat">generate_logcat</string>
+    <string translatable="false" name="pref_view_settings">view_settings</string>
     <string translatable="false" name="pref_appearance">pref_appearance</string>
     <string translatable="false" name="pref_changelog_last_checksum">changelog_last_checksum</string>
     <string translatable="false" name="pref_caches_history">caches_history</string>
@@ -243,11 +257,11 @@
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
 
-    <string translatable="false" name="pref_value_blue">blue</string>
-    <string translatable="false" name="pref_value_green">green</string>
-    <string translatable="false" name="pref_value_grey">grey</string>
-
     <string translatable="false" name="pref_maprotation_off">off</string>
     <string translatable="false" name="pref_maprotation_manual">manual</string>
     <string translatable="false" name="pref_maprotation_auto">auto</string>
+
+    <string translatable="false" name="pref_compacticon_off">off</string>
+    <string translatable="false" name="pref_compacticon_on">manual</string>
+    <string translatable="false" name="pref_compacticon_auto">auto</string>
 </resources>

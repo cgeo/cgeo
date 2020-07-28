@@ -74,7 +74,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private boolean showCircles = false;
     private boolean canDisableAutoRotate = false;
 
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
@@ -108,8 +108,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         mapController.setGoogleMap(googleMap);
 
         cachesList = new GoogleCachesList(googleMap);
-        googleMap.setOnCameraMoveListener(() -> recognizePositionChange());
-        googleMap.setOnCameraIdleListener(() -> recognizePositionChange());
+        googleMap.setOnCameraMoveListener(this::recognizePositionChange);
+        googleMap.setOnCameraIdleListener(this::recognizePositionChange);
         googleMap.setOnMarkerClickListener(marker -> {
             // onCacheTapListener will fire on onSingleTapUp event, not here, because this event
             // is fired 300 ms after map tap, which is too slow for UI

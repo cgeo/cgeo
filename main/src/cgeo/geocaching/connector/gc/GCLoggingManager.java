@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractLoggingManager;
+import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -36,19 +37,18 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
+class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String>, ILoggingWithFavorites {
 
+    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
     private final LogCacheActivity activity;
     private final Geocache cache;
-
-    @NonNull private List<TrackableLog> trackables = Collections.emptyList();
+    @NonNull
+    private List<TrackableLog> trackables = Collections.emptyList();
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
     private boolean hasTrackableLoadError = true;
     private boolean hasFavPointLoadError = true;
     private int premFavcount;
-
-    private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
 
     GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         this.activity = activity;
@@ -154,7 +154,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
             }
 
             if (reportProblem != ReportProblemType.NO_PROBLEM) {
-                GCWebAPI.postLog(cache, reportProblem.logType, date.getTime(), CgeoApplication.getInstance().getString(reportProblem.textId), Collections.<TrackableLog>emptyList(), false);
+                GCWebAPI.postLog(cache, reportProblem.logType, date.getTime(), CgeoApplication.getInstance().getString(reportProblem.textId), Collections.emptyList(), false);
             }
 
             return new LogResult(postResult.left, postResult.right);
@@ -213,7 +213,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public int getPremFavoritePoints() {
+    public int getFavoritePoints() {
         return (hasLoaderError || hasFavPointLoadError) ? 0 : premFavcount;
     }
 

@@ -335,6 +335,7 @@ public final class Network {
     private static class HeadersInterceptor implements Interceptor {
 
         @Override
+        @NonNull
         public Response intercept(final Interceptor.Chain chain) throws IOException {
             final Request request = chain.request().newBuilder()
                     .header("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7")
@@ -349,6 +350,7 @@ public final class Network {
     private static class LoggingInterceptor implements Interceptor {
 
         @Override
+        @NonNull
         public Response intercept(final Interceptor.Chain chain) throws IOException {
             final Request request = chain.request();
             final String reqLogStr = request.method() + " " + hidePassword(request.url().toString());
@@ -622,7 +624,7 @@ public final class Network {
     /**
      * Filter only successful responses for use with flatMap.
      */
-    public static final Function<Response, Single<Response>> withSuccess = response -> response.isSuccessful() ? Single.just(response) : Single.<Response>error(new IOException("unsuccessful response: " + response));
+    public static final Function<Response, Single<Response>> withSuccess = response -> response.isSuccessful() ? Single.just(response) : Single.error(new IOException("unsuccessful response: " + response));
 
     /**
      * Wait until a request has completed and check its response status. An exception will be thrown if the
@@ -634,7 +636,7 @@ public final class Network {
         Completable.fromSingle(response.flatMap(withSuccess)).blockingAwait();
     }
 
-    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(s -> TextUtils.replaceWhitespace(s));
+    public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(TextUtils::replaceWhitespace);
 
     @Nullable
     public static String rfc3986URLEncode(final String text) {

@@ -5,12 +5,14 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
@@ -68,10 +70,6 @@ public abstract class AbstractConnector implements IConnector {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
-        return false;
-    }
 
     @Override
     public boolean supportsLogging() {
@@ -80,11 +78,6 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public boolean supportsLogImages() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsAddToFavorite(final Geocache cache, final LogType type) {
         return false;
     }
 
@@ -146,7 +139,7 @@ public abstract class AbstractConnector implements IConnector {
     protected abstract String getCacheUrlPrefix();
 
     @Override
-    public boolean getHttps() {
+    public boolean isHttps() {
         return true;
     }
 
@@ -156,7 +149,7 @@ public abstract class AbstractConnector implements IConnector {
         if (StringUtils.isBlank(getHost())) {
             return "";
         }
-        return (getHttps() ? "https://" : "http://") + getHost();
+        return (isHttps() ? "https://" : "http://") + getHost();
     }
 
     @Override
@@ -260,6 +253,8 @@ public abstract class AbstractConnector implements IConnector {
             list.add(feature(R.string.feature_own_coordinates));
         }
         addCapability(list, WatchListCapability.class, R.string.feature_watch_list);
+        addCapability(list, IFavoriteCapability.class, R.string.feature_favorite);
+        addCapability(list, IVotingCapability.class, R.string.feature_voting);
         return list;
     }
 

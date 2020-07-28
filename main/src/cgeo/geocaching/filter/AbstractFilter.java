@@ -50,6 +50,7 @@ abstract class AbstractFilter implements IFilter {
      * @see java.lang.Object#toString()
      */
     @Override
+    @NonNull
     public String toString() {
         return getName();
     }

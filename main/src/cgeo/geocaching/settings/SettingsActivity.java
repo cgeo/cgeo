@@ -480,7 +480,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             final Resources res = getResources();
             final SettingsActivity activity = SettingsActivity.this;
             final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.removeObsoleteGeocacheDataDirectories(), () -> dialog.dismiss());
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, dialog::dismiss);
             return true;
             });
         getPreference(R.string.pref_memory_dump).setOnPreferenceClickListener(preference -> {
@@ -489,6 +489,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         });
         getPreference(R.string.pref_generate_logcat).setOnPreferenceClickListener(preference -> {
             DebugUtils.createLogcat(SettingsActivity.this);
+            return true;
+        });
+        getPreference(R.string.pref_view_settings).setOnPreferenceClickListener(preference -> {
+            startActivity(new Intent(this, ViewSettingsActivity.class));
             return true;
         });
     }
@@ -960,7 +964,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         super.setPreferenceScreen(preferenceScreen);
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "EmptyMethod"})
     @Override
     public PreferenceManager getPreferenceManager() {
         // TODO replace with fragment based code

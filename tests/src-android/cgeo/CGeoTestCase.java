@@ -16,6 +16,7 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
         super(CgeoApplication.class);
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     protected void setUp() throws Exception {
         super.setUp();

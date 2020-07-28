@@ -4,7 +4,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.Charsets;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -14,6 +13,7 @@ import androidx.annotation.Nullable;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,7 +67,7 @@ public final class LocParser extends FileParser {
 
     @NonNull
     private static Map<String, Geocache> parseLoc(final String content) {
-        return parseLoc(new ByteArrayInputStream(content.getBytes(Charsets.UTF_8)));
+        return parseLoc(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
     }
 
     @NonNull
@@ -75,7 +75,7 @@ public final class LocParser extends FileParser {
         try {
             final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             final XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(content, Charsets.UTF_8.name());
+            xpp.setInput(content, StandardCharsets.UTF_8.name());
             final Map<String, Geocache> caches = new HashMap<>();
             int eventType = xpp.getEventType();
             Geocache currentCache = DUMMY_GEOCACHE;

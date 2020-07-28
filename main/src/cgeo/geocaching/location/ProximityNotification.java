@@ -21,6 +21,7 @@ import androidx.core.app.NotificationManagerCompat;
 public class ProximityNotification implements Parcelable {
 
     protected static final int NOTIFICATION_ID = 4711;
+    protected static final int PROXIMITY_NOTIFICATION_MAX_DISTANCE = Settings.getKeyInt(R.integer.proximitynotification_distance_max);
 
     // notification types - correspond to @string/pref_value_pn_xxx
     public static final String NOTIFICATION_TYPE_TONE_ONLY = "1";
@@ -45,8 +46,8 @@ public class ProximityNotification implements Parcelable {
     // config options - get initialized in constructor
     protected int distanceFar;
     protected int distanceNear;
-    protected boolean twoDistances;
-    protected boolean repeatedSignal;
+    protected final boolean twoDistances;
+    protected final boolean repeatedSignal;
 
     // config options for types of notification - see resetValues() and setTextNotifications()
     protected boolean useToneNotifications = false;
@@ -108,11 +109,11 @@ public class ProximityNotification implements Parcelable {
     public ProximityNotification(final boolean twoDistances, final boolean repeatedSignal) {
         distanceFar = Settings.getProximityNotificationThreshold(true);
         if (distanceFar < 1) {
-            distanceFar = Settings.PROXIMITY_NOTIFICATION_DISTANCE_FAR;
+            distanceFar = Settings.getKeyInt(R.integer.proximitynotification_far_default);
         }
         distanceNear = Settings.getProximityNotificationThreshold(false);
         if (distanceNear < 1) {
-            distanceNear = Settings.PROXIMITY_NOTIFICATION_DISTANCE_NEAR;
+            distanceNear = Settings.getKeyInt(R.integer.proximitynotification_near_default);
         }
         this.twoDistances = twoDistances;
         this.repeatedSignal = repeatedSignal;
@@ -158,7 +159,7 @@ public class ProximityNotification implements Parcelable {
     }
 
     private void resetValues() {
-        lastDistance = Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE + 1;
+        lastDistance = PROXIMITY_NOTIFICATION_MAX_DISTANCE + 1;
         lastTimestamp = System.currentTimeMillis();
         lastTone = TONE_NONE;
         ignorePeaks = IGNORE_PEAKS;
@@ -190,10 +191,10 @@ public class ProximityNotification implements Parcelable {
 
     private int checkDistanceInternal (final int meters) {
         // no precise distances
-        if (meters > Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
+        if (meters > PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
             return TONE_NONE;
         }
-        if (lastDistance > Settings.PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
+        if (lastDistance > PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
             lastDistance = meters;
         }
         if (meters > lastDistance && ignorePeaks > 0) {
@@ -239,10 +240,10 @@ public class ProximityNotification implements Parcelable {
                 if (tone == TONE_NEAR) {
                     handler.postDelayed(() -> {
                         toneG.startTone(TONE_NEAR);
-                        handler.postDelayed(() -> toneG.release(), 350);
+                        handler.postDelayed(toneG::release, 350);
                     }, 350);
                 } else {
-                    handler.postDelayed(() -> toneG.release(), 350);
+                    handler.postDelayed(toneG::release, 350);
                 }
             }
         }

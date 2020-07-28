@@ -27,6 +27,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
@@ -218,6 +219,56 @@ public final class Dialogs {
     }
 
     /**
+     * Confirm using up to three configurable buttons "Positive", "Negative" and "Neutral". Buttons text are configurable.
+     *
+     * @param context
+     *            activity hosting the dialog
+     * @param title
+     *            dialog title
+     * @param msg
+     *            dialog message
+     * @param positiveTextButton
+     *            Text for the positive button
+     * @param negativeTextButton
+     *            Text for the negative button
+     * @param neutralTextButton
+     *            Text for the neutral button
+     * @param positiveListener
+     *            listener of the positive button
+     * @param negativeListener
+     *            listener of the negative button
+     * @param neutralListener
+     *            listener of the neutral button
+     */
+    public static AlertDialog.Builder confirmPositiveNegativeNeutral(final Activity context,
+                                                                     final String title,
+                                                                     final String msg,
+                                                                     final String positiveTextButton,
+                                                                     final String negativeTextButton,
+                                                                     final String neutralTextButton,
+                                                                     final OnClickListener positiveListener,
+                                                                     final OnClickListener negativeListener,
+                                                                     final OnClickListener neutralListener) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context)
+            .setTitle(title)
+            .setCancelable(true)
+            .setMessage(msg);
+        if (null != positiveTextButton) {
+            builder.setPositiveButton(positiveTextButton, positiveListener);
+        }
+        if (null != negativeTextButton) {
+            builder.setNegativeButton(negativeTextButton, negativeListener);
+        }
+        if (null != neutralTextButton) {
+            builder.setNeutralButton(neutralTextButton, neutralListener);
+        }
+        final AlertDialog dialog = builder.create();
+        dialog.setOwnerActivity(context);
+        dialog.show();
+        return builder;
+    }
+
+    /**
      * Confirm using three configurable buttons "Positive", "Negative" and "Neutral". Buttons text are configurable.
      *
      * @param context
@@ -375,7 +426,7 @@ public final class Dialogs {
 
         final AlertDialog dialog = builder.create();
         if (iconObservable != null) {
-            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(drawable -> dialog.setIcon(drawable));
+            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
         }
         dialog.show();
     }
@@ -527,7 +578,7 @@ public final class Dialogs {
                 android.R.id.text1,
                 items) {
             @Override
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 // standard list entry
                 final View v = super.getView(position, convertView, parent);
 

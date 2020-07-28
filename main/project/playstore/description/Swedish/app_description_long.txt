@@ -1,0 +1,30 @@
+c:geo baseras på öppen källkod och är en fullspäckad inofficiell klient för geocaching.com. Den står alltid redo för dig att köra igång. Den erbjuder även grundläggande stöd för andra geocaching-plattformar (t.ex. Opencaching). Den kräver ingen webbläsare eller exporter - bara installera och kör igång direkt. 
+
+Huvudfunktioner:
+- Visa cacher på en Live-karta 
+- Använd Google Maps eller OpenStreetMaps
+- Sök efter cacher utifrån olika kriterier 
+- Logga dina hittade online eller offline
+- Lagra cache-information på din enhet
+- Skapa och hantera waypoints
+- Navigera med kompass, karta eller andra appar
+- Importera/Exportera GPX-filer 
+- Fullt stöd för spårbara objekt
+- Offline caching-funktioner inklusive offline-kartor
+
+c:geo är en lättanvänd men kraftfull geocaching-klient med en hel del ytterligare funktioner. Allt du behöver för att komma igång är ett befintligt konto på geocaching.com eller en annan geocachingplattform (som Opencaching).
+Hitta cacher med hjälp av livekartan eller genom att använda en av de många sökfunktionerna.
+
+Navigera till en cache, eller en waypoint för en cache, med den inbyggda kompassen, kartan eller lämna över koordinaterna till olika externa appar (t.ex. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic och många fler).
+
+Lagra cache-information till din enhet direkt från geocaching.com samt via GPX-filimport för att få den tillgänglig när du vill. 
+Du kan hantera dina lagrade cacher i olika listor och kan sortera och filtrera dem efter dina behov.
+Lagrade cacher tillsammans med offline-kartfiler eller statiska kartor kan användas för att hitta cacher utan internetanslutning (t.ex. vid roaming).
+Loggar kan läggas upp online eller lagras offline för senare inlämning eller exporteras via fältanteckningar.
+
+Sök upp och registrera trackables, hantera din trackable-samling och lämna av en trackable när du postar en cachelogg.
+
+Om du har problem att installera eller använda c:geo så titta gärna i vår FAQ med vanliga frågor och svar (https://faq.cgeo.org) eller läs användarmanualen (https://manual.cgeo.org).
+Om du fortfarande har problem så kontakta vår support via e-post.
+
+Om du undrar varför c:geo kräver vissa app-behörigheter, vänligen läs på https://www.cgeo.org för en förklaring.

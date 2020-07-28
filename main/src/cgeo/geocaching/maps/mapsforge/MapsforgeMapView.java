@@ -361,7 +361,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl<MapsforgeCa
     @Override public void onDestroy() {
         // not implemented for mapsforge
     }
-    @Override public void onSaveInstanceState(final Bundle b) {
+    @Override public void onSaveInstanceState(@NonNull final Bundle b) {
         // not implemented for mapsforge
     }
     @Override public void onLowMemory() {

@@ -97,6 +97,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
     private static final GeoDirHandler locationUpdater = new GeoDirHandler() {
+        @SuppressWarnings("EmptyMethod")
         @Override
         public void updateGeoData(final GeoData geoData) {
             // Do not do anything, as we just want to maintain the GPS on
@@ -401,7 +402,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         if (CollectionUtils.isNotEmpty(trackable.getImages())) {
             pages.add(Page.IMAGES);
         }
-        return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
+        return new ImmutablePair<>(pages, 0);
     }
 
     public class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -574,7 +575,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 trackableImage.setClickable(true);
                 trackableImage.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage()))));
 
-                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(bitmapDrawable -> trackableImage.setImageDrawable(bitmapDrawable));
+                AndroidRxUtils.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 
                 imageView.addView(trackableImage);
             }

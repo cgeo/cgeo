@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PermissionHandler {
 
-    private static HashMap<PermissionKey, List<PermissionGrantedCallback>> callbackRegistry = new HashMap<>();
+    private static final HashMap<PermissionKey, List<PermissionGrantedCallback>> callbackRegistry = new HashMap<>();
 
     private PermissionHandler() {
         // Utility class should not be instantiated externally
@@ -29,7 +29,7 @@ public class PermissionHandler {
         if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(activity, locationPermissions[1]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
-                callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
+                callbackRegistry.put(pk, new ArrayList<>());
                 ActivityCompat.requestPermissions(activity, locationPermissions, callback.getRequestCode());
             }
 
@@ -55,7 +55,7 @@ public class PermissionHandler {
 
         if (ContextCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
-                callbackRegistry.put(pk, new ArrayList<PermissionGrantedCallback>());
+                callbackRegistry.put(pk, new ArrayList<>());
                 ActivityCompat.requestPermissions(activity, storagePermission, requestContext.getRequestCode());
             }
 
@@ -102,7 +102,7 @@ public class PermissionHandler {
     }
 
     private static class PermissionKey {
-        private String[] permissions;
+        private final String[] permissions;
 
         private PermissionKey(final String[] permissions) {
             this.permissions = permissions;

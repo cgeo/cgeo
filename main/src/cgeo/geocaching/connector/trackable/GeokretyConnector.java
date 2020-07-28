@@ -373,18 +373,18 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);
         if (trackableLog.brand != TrackableBrand.GEOKRETY) {
             Log.d("GeokretyConnector.postLogTrackable: received invalid brand");
-            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
+            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
         }
         if (trackableLog.action == LogTypeTrackable.DO_NOTHING) {
             Log.d("GeokretyConnector.postLogTrackable: received invalid logtype");
-            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
+            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
         }
         try {
             // SecId is mandatory when using API, anonymous log are only possible via website
             final String secId = Settings.getGeokretySecId();
             if (StringUtils.isEmpty(secId)) {
                 Log.d("GeokretyConnector.postLogTrackable: not authenticated");
-                return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.<String> emptyList());
+                return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.emptyList());
             }
 
             // Construct Post Parameters
@@ -419,13 +419,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final String page = Network.getResponseData(Network.postRequest(URL + "/ruchy.php", params));
             if (page == null) {
                 Log.d("GeokretyConnector.postLogTrackable: No data from server");
-                return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK, Collections.<String> emptyList());
+                return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK, Collections.emptyList());
             }
 
             final ImmutablePair<Integer, List<String>> response = GeokretyParser.parseResponse(page);
             if (response == null) {
                 Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
+                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
             }
 
             final List<String> errors = response.getRight();
@@ -436,10 +436,10 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, errors);
             }
             Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
-            return new ImmutablePair<>(StatusCode.NO_ERROR, Collections.<String> emptyList());
+            return new ImmutablePair<>(StatusCode.NO_ERROR, Collections.emptyList());
         } catch (final RuntimeException e) {
             Log.w("GeokretyConnector.searchTrackable", e);
-            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
+            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
         }
     }
 

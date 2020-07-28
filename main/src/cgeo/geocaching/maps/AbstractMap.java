@@ -3,12 +3,15 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.utils.TrackUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 
 /**
  * Base class for the map activity. Delegates base class calls to the
@@ -52,21 +55,29 @@ public abstract class AbstractMap {
         Routing.disconnect();
     }
 
-    public boolean onCreateOptionsMenu(final Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = mapActivity.superOnCreateOptionsMenu(menu);
         mapActivity.getActivity().getMenuInflater().inflate(R.menu.map_activity, menu);
         return result;
     }
 
-    public boolean onPrepareOptionsMenu(final Menu menu) {
+    public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         return mapActivity.superOnPrepareOptionsMenu(menu);
     }
 
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         return mapActivity.superOnOptionsItemSelected(item);
     }
 
-    public abstract void onSaveInstanceState(Bundle outState);
+    public abstract void onSaveInstanceState(@NonNull Bundle outState);
 
     public abstract void onLowMemory();
+
+    public void setTracks(final TrackUtils.Tracks tracks) {
+        //
+    }
+
+    public void reloadIndividualRoute() {
+        //
+    }
 }

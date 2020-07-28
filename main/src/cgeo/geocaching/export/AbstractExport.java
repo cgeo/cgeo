@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 
 import android.content.res.Resources;
 
+import androidx.annotation.NonNull;
+
 abstract class AbstractExport implements Export {
     private final String name;
     private final String progressTitle;
@@ -21,6 +23,7 @@ abstract class AbstractExport implements Export {
     }
 
     @Override
+    @NonNull
     public String toString() {
         // used in the array adapter of the dialog showing the exports
         return getName();

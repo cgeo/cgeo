@@ -3,6 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
+import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_UNKNOWN;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -28,13 +30,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 public class SharedPrefsBackupUtils extends Activity {
-
-    static final String TYPE_BOOLEAN    = "boolean";
-    static final String TYPE_FLOAT      = "float";
-    static final String TYPE_INTEGER    = "int";
-    static final String TYPE_LONG       = "long";
-    static final String TYPE_STRING     = "string";
-    static final String TYPE_UNKNOWN    = "unknown";
 
     static final String ATTRIBUTE_NAME  = "name";
     static final String ATTRIBUTE_VALUE = "value";
@@ -87,7 +82,8 @@ public class SharedPrefsBackupUtils extends Activity {
                 activityContext.getString(R.string.pref_ocus_tokensecret), activityContext.getString(R.string.pref_ocus_tokenpublic), activityContext.getString(R.string.pref_temp_ocus_token_secret), activityContext.getString(R.string.pref_temp_ocus_token_public),
                 activityContext.getString(R.string.pref_ocro_tokensecret), activityContext.getString(R.string.pref_ocro_tokenpublic), activityContext.getString(R.string.pref_temp_ocro_token_secret), activityContext.getString(R.string.pref_temp_ocro_token_public),
                 activityContext.getString(R.string.pref_ocuk2_tokensecret), activityContext.getString(R.string.pref_ocuk2_tokenpublic), activityContext.getString(R.string.pref_temp_ocuk2_token_secret), activityContext.getString(R.string.pref_temp_ocuk2_token_public),
-                activityContext.getString(R.string.pref_su_tokensecret), activityContext.getString(R.string.pref_su_tokenpublic), activityContext.getString(R.string.pref_temp_su_token_secret), activityContext.getString(R.string.pref_temp_su_token_public)
+                activityContext.getString(R.string.pref_su_tokensecret), activityContext.getString(R.string.pref_su_tokenpublic), activityContext.getString(R.string.pref_temp_su_token_secret), activityContext.getString(R.string.pref_temp_su_token_public),
+                activityContext.getString(R.string.pref_fakekey_geokrety_authorization)
             );
         }
 
@@ -105,28 +101,17 @@ public class SharedPrefsBackupUtils extends Activity {
                 final Object value = entry.getValue();
                 final String key = entry.getKey();
                 if (!ignoreKeys.contains(key)) {
-                    if (value instanceof String) {
-                        xmlSerializer.startTag(null, TYPE_STRING);
+                    final SettingsUtils.SettingsType type = SettingsUtils.getType(value);
+                    if (type == TYPE_STRING) {
+                        xmlSerializer.startTag(null, type.getId());
                         xmlSerializer.attribute(null, ATTRIBUTE_NAME, key);
                         xmlSerializer.text(value.toString());
-                        xmlSerializer.endTag(null, TYPE_STRING);
-                    } else {
-                        String type = TYPE_UNKNOWN;
-                        if (value instanceof Boolean) {
-                            type = TYPE_BOOLEAN;
-                        } else if (value instanceof Integer) {
-                            type = TYPE_INTEGER;
-                        } else if (value instanceof Long) {
-                            type = TYPE_LONG;
-                        } else if (value instanceof Float) {
-                            type = TYPE_FLOAT;
-                        }
-                        if (type != TYPE_UNKNOWN) {
-                            xmlSerializer.startTag(null, type);
-                            xmlSerializer.attribute(null, ATTRIBUTE_NAME, key);
-                            xmlSerializer.attribute(null, ATTRIBUTE_VALUE, value.toString());
-                            xmlSerializer.endTag(null, type);
-                        }
+                        xmlSerializer.endTag(null, type.getId());
+                    } else if (type != TYPE_UNKNOWN) {
+                        xmlSerializer.startTag(null, type.getId());
+                        xmlSerializer.attribute(null, ATTRIBUTE_NAME, key);
+                        xmlSerializer.attribute(null, ATTRIBUTE_VALUE, value.toString());
+                        xmlSerializer.endTag(null, type.getId());
                     }
                 }
             }
@@ -168,7 +153,7 @@ public class SharedPrefsBackupUtils extends Activity {
 
             // retrieve data
             Boolean inTag = false;
-            String type = TYPE_UNKNOWN;
+            SettingsUtils.SettingsType type = TYPE_UNKNOWN;
             String key = "";
             String value = "";
             int eventType = 0;
@@ -179,7 +164,7 @@ public class SharedPrefsBackupUtils extends Activity {
                     if (parser.getName().equals(TAG_MAP)) {
                         inTag = true;
                     } else if (inTag) {
-                        type = parser.getName();
+                        type = SettingsUtils.getType(parser.getName());
                         key = "";
                         value = "";
 
@@ -199,29 +184,11 @@ public class SharedPrefsBackupUtils extends Activity {
                     }
                 } else if (eventType == XmlPullParser.END_TAG) {
                     if (inTag) {
-                        if (parser.getName().equals(type)) {
-                            switch (type) {
-                                case TYPE_BOOLEAN:
-                                    editor.putBoolean(key, Boolean.parseBoolean(value));
-                                    break;
-                                case TYPE_FLOAT:
-                                    editor.putFloat(key, Float.parseFloat(value));
-                                    break;
-                                case TYPE_INTEGER:
-                                    editor.putInt(key, Integer.parseInt(value));
-                                    break;
-                                case TYPE_LONG:
-                                    editor.putLong(key, Long.parseLong(value));
-                                    break;
-                                case TYPE_STRING:
-                                    editor.putString(key, value);
-                                    break;
-                                default:
-                                    throw new XmlPullParserException("unknown type");
-                            }
-                            type = TYPE_UNKNOWN;
-                        } else if (parser.getName().equals(TAG_MAP)) {
+                        if (parser.getName().equals(TAG_MAP)) {
                             inTag = false;
+                        } else if (SettingsUtils.getType(parser.getName()) == type) {
+                            SettingsUtils.putValue(editor, type, key, value);
+                            type = TYPE_UNKNOWN;
                         } else {
                             throw new XmlPullParserException("invalid structure: unexpected closing tag " + parser.getName());
                         }
@@ -237,7 +204,7 @@ public class SharedPrefsBackupUtils extends Activity {
                 throw new XmlPullParserException("could not commit changed preferences");
             }
             return true;
-        } catch (IOException | XmlPullParserException e) {
+        } catch (IOException | XmlPullParserException | NumberFormatException e) {
             final String error = e.getMessage();
             if (null != error) {
                 Log.d("error reading settings file: " + error);

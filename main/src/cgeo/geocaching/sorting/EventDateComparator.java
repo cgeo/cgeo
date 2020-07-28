@@ -19,7 +19,7 @@ public class EventDateComparator extends DateComparator {
      *
      */
     private static int compare(final int left, final int right) {
-        return left < right ? -1 : (left == right ? 0 : 1);
+        return Integer.compare(left, right);
     }
 
     @Override

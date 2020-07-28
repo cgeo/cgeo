@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="40sp"
+    android:paddingTop="3dp"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="110dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingRight="3dip"
+        android:paddingTop="5dip"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="18sp"
+        tools:text="title"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="left"
+        android:layout_marginRight="110dip"
+        android:layout_below="@id/title"
+        android:ellipsize="end"
+        android:paddingBottom="5dip"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:textColor="?text_color_grey"
+        android:textIsSelectable="false"
+        android:textSize="12sp"
+        tools:text="detail info" />
+    <ImageButton
+        android:id="@+id/button_left"
+        style="@style/button_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/button_right"
+        android:visibility="gone" />
+    <ImageButton
+        android:id="@+id/button_right"
+        style="@style/button_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

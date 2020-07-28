@@ -14,11 +14,12 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
-import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -32,8 +33,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
-import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.gcvote.GCVoteDialog;
+import cgeo.geocaching.gcvote.VoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -63,6 +63,7 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditNoteDialog;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
+import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.NavigationActionProvider;
@@ -309,7 +310,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             String title = res.getString(R.string.cache);
             if (StringUtils.isNotBlank(name)) {
                 title = name;
-            } else if (geocode != null && StringUtils.isNotBlank(geocode)) { // can't be null, but the compiler doesn't understand StringUtils.isNotBlank()
+            } else if (StringUtils.isNotBlank(geocode)) {
                 title = geocode;
             }
             progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.disposeMessage());
@@ -380,7 +381,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSaveInstanceState(final Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_PAGE_INDEX, getCurrentItem());
     }
@@ -675,7 +676,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
-        menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
@@ -691,6 +691,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
+            }
+            if (connector instanceof IVotingCapability) {
+                menu.findItem(R.id.menu_gcvote).setVisible(((IVotingCapability) connector).supportsVoting(cache));
             }
         }
         return super.onPrepareOptionsMenu(menu);
@@ -750,12 +753,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 return true;
             case R.id.menu_clear_goto_history:
-                Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> {
-                    AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.clearGotoHistory(), () -> {
-                        cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
-                        notifyDataSetChanged();
-                    });
-                });
+                Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
+                    cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+                    notifyDataSetChanged();
+                }));
                 return true;
             case R.id.menu_export_gpx:
                 new GpxExport().export(Collections.singletonList(cache), this);
@@ -800,7 +801,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void showVoteDialog() {
-        GCVoteDialog.show(this, cache, () -> notifyDataSetChanged());
+        VoteDialog.show(this, cache, this::notifyDataSetChanged);
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
@@ -1043,7 +1044,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (Settings.getChooseList() || cache.isOffline()) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    selectedListIds -> storeCacheInLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
+                    this::storeCacheInLists, true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
@@ -1343,7 +1344,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        simpleCancellableHandler -> watchListAdd(simpleCancellableHandler));
+                        DetailsViewCreator.this::watchListAdd);
             }
         }
 
@@ -1355,7 +1356,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        simpleCancellableHandler -> watchListRemove(simpleCancellableHandler));
+                        DetailsViewCreator.this::watchListRemove);
             }
         }
 
@@ -1381,7 +1382,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Add this cache to the favorite list of the user */
         private void favoriteAdd(final SimpleDisposableHandler handler) {
-            if (GCConnector.addToFavorites(cache)) {
+            final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
+            if (connector.addToFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
@@ -1390,7 +1392,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /** Remove this cache to the favorite list of the user */
         private void favoriteRemove(final SimpleDisposableHandler handler) {
-            if (GCConnector.removeFromFavorites(cache)) {
+            final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
+            if (connector.removeFromFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
@@ -1405,7 +1408,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        simpleCancellableHandler -> favoriteAdd(simpleCancellableHandler));
+                        DetailsViewCreator.this::favoriteAdd);
             }
         }
 
@@ -1417,7 +1420,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        simpleCancellableHandler -> favoriteRemove(simpleCancellableHandler));
+                        DetailsViewCreator.this::favoriteRemove);
             }
         }
 
@@ -1485,7 +1488,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout layout = view.findViewById(R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
+            if (!supportsFavoritePoints) {
                 return;
             }
             final ImageButton buttonAdd = view.findViewById(R.id.add_to_favpoint);
@@ -1844,7 +1847,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(CacheDetailActivity.this, R.layout.waypoint_item, sortedWaypoints) {
                 @Override
-                public View getView(final int position, final View convertView, final ViewGroup parent) {
+                public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     View rowView = convertView;
                     if (rowView == null) {
                         rowView = getLayoutInflater().inflate(R.layout.waypoint_item, parent, false);
@@ -1863,30 +1866,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             };
             view.setAdapter(adapter);
+            view.setOnScrollListener(new FastScrollListener(view));
 
             final Button addWaypointCurrent = header.findViewById(R.id.add_waypoint_currentlocation);
-            addWaypointCurrent.setOnClickListener(v -> {
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        ensureSaved();
-                        final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                        newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
-                        newWaypoint.setGeocode(cache.getGeocode());
-                        cache.addOrChangeWaypoint(newWaypoint, true);
-                        addWaypointAndSort(sortedWaypoints, newWaypoint);
-                        return true;
-                    }
+            addWaypointCurrent.setOnClickListener(v -> new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(final Void... params) {
+                    ensureSaved();
+                    final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                    newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                    newWaypoint.setGeocode(cache.getGeocode());
+                    cache.addOrChangeWaypoint(newWaypoint, true);
+                    addWaypointAndSort(sortedWaypoints, newWaypoint);
+                    return true;
+                }
 
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            adapter.notifyDataSetChanged();
-                            ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
-                        }
+                @Override
+                protected void onPostExecute(final Boolean result) {
+                    if (result) {
+                        adapter.notifyDataSetChanged();
+                        ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
                     }
-                }.execute();
-            });
+                }
+            }.execute());
 
             // read waypoint from clipboard
             final Button addWaypointFromClipboard = header.findViewById(R.id.add_waypoint_fromclipboard);
@@ -2097,7 +2099,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSupportActionModeStarted(final ActionMode mode) {
+    public void onSupportActionModeStarted(@NonNull final ActionMode mode) {
         if (mSelectionModeActive && selectedTextView != null) {
             mSelectionModeActive = false;
             mActionMode = mode;
@@ -2117,7 +2119,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onSupportActionModeFinished(final ActionMode mode) {
+    public void onSupportActionModeFinished(@NonNull final ActionMode mode) {
         mActionMode = null;
         if (selectedTextView != null) {
             selectedTextView.setWindowFocusWait(false);
@@ -2334,7 +2336,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
             pages.add(Page.IMAGES);
         }
-        return new ImmutablePair<List<? extends Page>, Integer>(pages, detailsIndex);
+        return new ImmutablePair<>(pages, detailsIndex);
     }
 
     @Override
@@ -2455,7 +2457,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         builder.append(DataStore.getList(listId).getTitle());
         builder.setSpan(new ClickableSpan() {
             @Override
-            public void onClick(final View widget) {
+            public void onClick(@NonNull final View widget) {
                 Settings.setLastDisplayedList(listId);
                 CacheListActivity.startActivityOffline(view.getContext());
             }

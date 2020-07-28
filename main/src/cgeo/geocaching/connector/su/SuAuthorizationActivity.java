@@ -18,7 +18,7 @@ public class SuAuthorizationActivity extends OAuthAuthorizationActivity {
             "/api/oauth/request_token.php",
             "/api/oauth/authorize.php",
             "/api/oauth/access_token.php",
-            SuConnector.getInstance().getHttps(),
+            SuConnector.getInstance().isHttps(),
             CgeoApplication.getInstance().getString(R.string.su_consumer_key),
             CgeoApplication.getInstance().getString(R.string.su_consumer_secret),
             "callback://www.cgeo.org/geocachingsu/");

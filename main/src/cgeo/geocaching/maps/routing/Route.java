@@ -140,9 +140,7 @@ public class Route implements Parcelable {
             for (int i = 0; i < segments.size(); i++) {
                 final RouteSegment segment = segments.get(i);
                 if (segment.points != null) {
-                    for (int j = 0; j < segment.points.size(); j++) {
-                        route.add(segment.points.get(j));
-                    }
+                    route.addAll(segment.points);
                 }
                 distance += segment.distance;
             }
@@ -158,14 +156,14 @@ public class Route implements Parcelable {
 
     public void reloadRoute(final RouteUpdater routeUpdater) {
         clearRouteInternal(routeUpdater, false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> loadRouteInternal(), () -> updateRoute(routeUpdater));
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal, () -> updateRoute(routeUpdater));
     }
 
     public void loadRoute() {
         if (loadingRoute) {
             return;
         }
-        Schedulers.io().scheduleDirect(() -> loadRouteInternal());
+        Schedulers.io().scheduleDirect(this::loadRouteInternal);
     }
 
     public boolean isEmpty() {
@@ -174,7 +172,7 @@ public class Route implements Parcelable {
 
     private void clearRouteInternal(final RouteUpdater routeUpdater, final boolean deleteInDatabase) {
         if (deleteInDatabase) {
-            Schedulers.io().scheduleDirect(() -> DataStore.clearRoute());
+            Schedulers.io().scheduleDirect(DataStore::clearRoute);
         }
         segments = null;
         if (null != routeUpdater) {
@@ -208,7 +206,7 @@ public class Route implements Parcelable {
      */
     private ToggleItemState toggleItemInternal(final RouteItem item) {
         if (segments == null) {
-            segments = new ArrayList<RouteSegment>();
+            segments = new ArrayList<>();
         }
         final int pos = pos(item);
         if (pos == -1) {

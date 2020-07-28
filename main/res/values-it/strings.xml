@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">Pubblicazione log e caricamento immagine…</string>
     <string name="log_posting_log">Caricamento log…</string>
     <string name="log_posting_twitter">Caricamento tweet…</string>
-    <string name="log_posting_gcvote">Caricamento GCVote…</string>
+    <string name="log_posting_vote">Pubblicazione voto cache…</string>
     <string name="log_posting_image">Caricamento immagine…</string>
     <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Azzera</string>
@@ -510,8 +510,8 @@
     <string name="init_summary_su">Carica cache da Geocaching.su</string>
     <string name="settings_activate_su">Attiva</string>
     <string name="init_gcvote_password_description">Per poter votare un cache, è necessario seguire le istruzioni di GCVote.com e inserire la password di GCVote qui.</string>
-    <string name="err_gcvote_send_rating">Errore durante l\'invio del voto, verifica la password di GCVote nelle impostazioni oppure cancellala per disattivare GCVote.</string>
-    <string name="gcvote_sent">Voto inviato correttamente</string>
+    <string name="err_vote_send_rating">Errore durante l\'invio della valutazione.</string>
+    <string name="vote_sent">Voto inviato correttamente</string>
     <string name="settings_activate_twitter">Attiva</string>
     <string name="init_login_popup">Accesso</string>
     <string name="init_login_popup_working">Logging…</string>
@@ -576,7 +576,8 @@
     <string name="init_summary_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
     <string name="init_choose_list">Chiedi lista</string>
     <string name="init_summary_choose_list">Chiedi la lista quando salvi un cache</string>
-    <string name="init_listdisplay">Mostra liste aggiuntive nella lista cache</string>
+    <string name="init_listdisplay">Altre liste</string>
+    <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
     <!-- backup / restore -->
@@ -624,9 +625,20 @@
     <string name="init_gpx_importdir">Cartella di import GPX</string>
     <string name="init_dataDir">Seleziona la directory di dati Geocache</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
-    <string name="init_maptrail">Mostra scia</string>
-    <string name="init_summary_maptrail">Mostra la scia nella mappa</string>
-    <string name="init_trailcolor">Colore traccia</string>
+    <string name="init_maptrail">Mostra traccia cronologia movimenti</string>
+    <string name="init_maptrail_length">Lunghezza massima traccia cronologia</string>
+    <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 - regola in base alla memoria disponibile.</string>
+    <string name="init_summary_maptrail">Quando attivato (e il GPS è acceso) c:geo salva la cronologia dei tuoi movimenti come traccia e la visualizza sulla mappa.</string>
+    <string name="init_trailcolor">Colore traccia cronologia</string>
+    <string name="init_trailwidth">Spessore traccia cronologia</string>
+    <string name="init_directioncolor">Colore linea di direzione</string>
+    <string name="init_directionwidth">Spessore linea di direzione</string>
+    <string name="init_routecolor">Colore linea tracciato</string>
+    <string name="init_routewidth">Spessore linea tracciato</string>
+    <string name="init_trackcolor">Colore della linea di traccia individuale</string>
+    <string name="init_trackwidth">Spessore della linea di traccia individuale</string>
+    <string name="init_circlecolor">Colore del cerchio</string>
+    <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
     <string name="init_share_after_export">Apri menu condivisione dopo export GPX</string>
     <string name="init_include_found_status">Includi lo stato \"Trovato\"</string>
     <string name="init_trackautovisit">Visita TB</string>
@@ -699,6 +711,9 @@
     <string name="feature_search_geocode">Cerca per geocode</string>
     <string name="feature_search_owner">Cerca per proprietario</string>
     <string name="feature_search_finder">Cerca per ricercatore</string>
+    <string name="feature_favorite">Aggiunta del cache ai preferiti</string>
+    <string name="feature_voting">Votazione per i cache</string>
+    <string name="init_maplines_title">Personalizzazione delle linee della mappa</string>
     <string name="init_mapsforge_api_title">API Mapsforge</string>
     <string name="init_mfold_api">Vecchio Mapsforge V3</string>
     <string name="init_mfold_api_description">Stiamo utilizzando una nuova versione della mappa Mapsforge come impostazione predefinita. Se dovessero mancare alcune informazioni o riscontri problemi, puoi tornare alla vecchia versione qui.</string>
@@ -763,12 +778,12 @@
     <string name="err_auth_geokrety_unknown">%1$s ha risposto: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Un cache</item>
+        <item quantity="one">%1$d cache</item>
         <item quantity="other">%1$d cache</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">un giorno restante</item>
+        <item quantity="one">%1$d giorno rimanente</item>
         <item quantity="other">%1$d giorni rimanenti</item>
     </plurals>
     <string name="last_day_available">ultimo giorno disponibile</string>
@@ -807,7 +822,7 @@
     <string name="cache_personal_note_edit">Modifica</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
-    <string name="cache_personal_note_truncation">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
     <string name="cache_personal_note_upload">Carica</string>
     <string name="cache_personal_note_uploading">Nota personale in caricamento</string>
     <string name="cache_personal_note_upload_done">Nota personale caricata</string>
@@ -830,7 +845,7 @@
     <string name="cache_images">Immagini</string>
     <string name="cache_waypoints">Waypoint</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Waypoint</item>
+        <item quantity="one">%d Waypoint</item>
         <item quantity="other">%d Waypoint</item>
     </plurals>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
@@ -982,14 +997,18 @@
     <string name="file_list_no_files">c:geo non ha trovato file appropriati.</string>
     <string name="file_searching">Ricerca file corrispondenti</string>
     <string name="file_title_searching">Ricerca in corso</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Scegli cartella</string>
     <string name="simple_dir_chooser_current_path">Percorso:</string>
     <string name="simple_dir_chooser_invalid_path">Percorso non valido</string>
+    <string name="simple_file_chooser_title">Seleziona file</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Caricamento cache da %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Caricamento coordinate da %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d cache importati da %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d cache importato da %2$s</item>
+        <item quantity="other">%1$d cache importati da %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Download mappe statiche interrotto</string>
     <string name="gpx_import_title_reading_file">Lettura file</string>
     <string name="gpx_import_title">Importa GPX</string>
@@ -1003,9 +1022,9 @@
     <string name="gpx_import_delete_message">Vuoi cancellare %s?</string>
     <string name="gpx_import_select_list_title">Importa GPX nella lista</string>
     <string name="gpx_import_android">Importazione da Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Seleziona il file mappa</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Seleziona file di percorso</string>
     <!-- import -->
     <string name="web_import_title">Importa da send2cgeo</string>
     <string name="web_import_waiting">In attesa di nuovi cache da send2cgeo…</string>
@@ -1067,7 +1086,7 @@
     <string name="map_modes">Modi mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_hide">Nascondi</string>
-    <string name="map_trail_show">Mostra scia</string>
+    <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
@@ -1076,6 +1095,14 @@
     <string name="map_hidewp_original">Nascondi i waypoint originali</string>
     <string name="map_hidewp_parking">Nascondi waypoint di parcheggio</string>
     <string name="map_hidewp_visited">Nascondi i waypoint visitati</string>
+    <string name="map_hide_track">Nascondi traccia individuale</string>
+    <string name="map_load_track">Carica traccia individuale</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Traccia individuale caricata (%d trackpoint)</item>
+        <item quantity="other">Traccia individuale caricata (%d trackpoint)</item>
+    </plurals>
+    <string name="load_track_error">Errore nel caricare la traccia individuale</string>
+    <string name="map_unload_track">Rimuovi traccia individuale</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
@@ -1087,8 +1114,8 @@
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
-    <string name="map_clear_trailhistory">Cancella cronologia dei percorsi</string>
-    <string name="map_trailhistory_cleared">cronologia dei percorsi cancellata</string>
+    <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
+    <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Instradamento</string>
     <string name="map_routing_straight">Linea diretta</string>
@@ -1216,13 +1243,13 @@
     <string name="export_persnotes">Note personali</string>
     <string name="export_persnotes_uploading">Carico la nota personale %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Nota caricata con successo</item>
+        <item quantity="one">%1$d nota caricata con successo</item>
         <item quantity="other">%1$d note caricate con successo</item>
     </plurals>
     <string name="export_modifiedcoords">Coordinate modificate</string>
     <string name="export_modifiedcoords_uploading">Caricamento %1$d</string>
     <string name="export_modifiedcoords_success">Caricamento riuscito</string>
-    <string name="export_modifiedcoords_result">Caricamento terminato: %1$d falliti / %2$d OK</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Caricamento terminato: %1$d falliti / %2$d OK</string>
     <string name="export_modifiedcoords_error">Caricamento fallito</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cani permessi</string>
@@ -1466,7 +1493,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione precedente di Android. Le versioni future di c:geo potrebbero non essere più disponibili per il tuo dispositivo.\nTocca questo messaggio per ulteriori informazioni.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
@@ -1580,6 +1607,9 @@
     <string name="color_red">Rosso</string>
     <string name="color_turquoise">Turchese</string>
     <string name="color_black">Nero</string>
+    <string name="preference_colorpicker_select_color_scheme">Selezionare lo schema colori</string>
+    <string name="preference_colorpicker_select_color">Seleziona colore</string>
+    <string name="preference_colorpicker_select_opaqueness">Seleziona opacità</string>
     <!-- number input -->
     <string name="number_input_title">Inserisci un valore tra %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">Valore inserito è troppo piccolo - resettato al valore minimo</string>
@@ -1590,12 +1620,16 @@
     <string name="notification_channel_description">notifiche dall\'app di geocaching c:geo</string>
     <string name="proximity_notification_title">Notifica di prossimità c:geo</string>
     <!-- individual routes -->
+    <string name="individual_route">Percorso individuale</string>
     <string name="individual_route_added">aggiunto al percorso</string>
     <string name="individual_route_removed">rimosso dal percorso</string>
     <string name="individual_route_error_toggling_waypoint">errore cambiando lo stato waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
+    <string name="map_sort_individual_route">Ordina percorso individuale</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
+    <string name="save_sorted_route">Salva</string>
+    <string name="sorted_route_saved">Percorso individuale salvato</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
@@ -1604,6 +1638,38 @@
     <string name="unit_mi">miglia</string>
     <!-- switch settings -->
     <string name="switch_off">Off</string>
+    <string name="switch_on">Attivo</string>
     <string name="switch_manual">Manuale</string>
     <string name="switch_auto">Automatico</string>
+    <!-- view settings -->
+    <string name="view_settings">Impostazioni vista</string>
+    <string name="delete_setting">Elimina impostazioni</string>
+    <string name="delete_setting_warning">Eliminare la chiave \"%s\" dalle impostazioni?\n\nQuesta operazione non può essere annullata.</string>
+    <string name="edit_setting">Modifica impostazione \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Tipo di impostazione sconosciuto - modifica non supportata</string>
+    <string name="edit_setting_error_invalid_data">Dato inserito \"%s\" non valido. L\'impostazione non è stata modificata.</string>
+    <string name="activate_editmode_title">Attiva la modalità di modifica</string>
+    <string name="activate_editmode_warning">Stai entrando in una zona pericolosa!\n\nModificare le impostazioni direttamente potrebbe confondere c:geo, potrebbe impedire l\'avvio del programma, quindi fai attenzione!\n\nSei sicuro di voler procedere a tuo rischio?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Gestore file locale</string>
+    <string name="localfile_title">Apri un file locale</string>
+    <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
+    <string name="localfile_foundmap">trovato un file mappa</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Ricevi file mappa</string>
+    <string name="receivemapfile_success">File mappa ricevuto con successo come \"%s\" e memorizzato nella directory della mappa</string>
+    <string name="receivemapfile_error">Errore durante la ricezione del file mappa</string>
+    <string name="receivemapfile_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
+    <string name="receivemapfile_option_overwrite">Sovrascrivere</string>
+    <string name="receivemapfile_option_differentname">Nome diverso</string>
+    <string name="receivemapfile_kb_copied">%d kB copiati</string>
+    <string name="receivemapfile_cancelled">Trasferimento file mappa annullato</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Scarica mappe base offline</string>
+    <string name="downloadmap_info">Sarai reindirizzato a un sito di download per mappe offline di base (nessun supporto ai temi).\n\nScegli il file .map per la tua regione e tocca per scaricare il file.\n\nAl termine del download, tocca il file scaricato per impostare questa mappa come mappa attiva in c:geo</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Traccia cronologia</string>
+    <string name="export_trailhistory_title">Esporta traccia cronologia</string>
+    <string name="export_trailhistory_success">Cronologia esportata in \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Cancella traccia cronologia dopo l\'esportazione</string>
 </resources>

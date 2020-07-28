@@ -356,10 +356,11 @@ public class Trackable implements ILogable {
     }
 
     public void setLogs(final List<LogEntry> logs) {
-        this.logs = logs != null ? logs : new ArrayList<LogEntry>();
+        this.logs = logs != null ? logs : new ArrayList<>();
     }
 
     @Override
+    @NonNull
     public String toString() {
         if (name != null) {
             return TextUtils.stripHtml(name);
