@@ -38,6 +38,9 @@ public class MapOptions {
             waypointType = (WaypointType) extras.get(Intents.EXTRA_WPTTYPE);
             mapState = extras.getParcelable(Intents.EXTRA_MAPSTATE);
             title = extras.getString(Intents.EXTRA_TITLE);
+            if (null != coords && null == waypointType) {
+                waypointType = WaypointType.WAYPOINT;
+            }
         } else {
             mapMode = MapMode.LIVE;
             isStoredEnabled = true;
@@ -64,6 +67,7 @@ public class MapOptions {
     public MapOptions(final Geopoint coords) {
         mapMode = MapMode.LIVE;
         this.coords = coords;
+        this.waypointType = WaypointType.WAYPOINT;
         isStoredEnabled = true;
         isLiveEnabled = Settings.isLiveMap();
     }
