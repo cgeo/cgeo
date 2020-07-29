@@ -1098,6 +1098,9 @@
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_hide">Verbergen</string>
     <string name="map_trail_show">Geschiedenisspoor tonen</string>
+    <string name="map_reset_linecolors">Lijnkleuren resetten</string>
+    <string name="map_reset_linecolors_confirm">Wil je alle configureerbare kaartlijnen resetten naar hun standaard kleuren?</string>
+    <string name="map_reset_linecolors_ok">Lijnkleuren gereset</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_circles_show">Toon cirkels</string>
     <string name="map_mycaches_hide">Verberg eigen/gevonden caches</string>
