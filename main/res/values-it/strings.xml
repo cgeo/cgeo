@@ -630,15 +630,25 @@
     <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 - regola in base alla memoria disponibile.</string>
     <string name="init_summary_maptrail">Quando attivato (e il GPS è acceso) c:geo salva la cronologia dei tuoi movimenti come traccia e la visualizza sulla mappa.</string>
     <string name="init_trailcolor">Colore traccia cronologia</string>
+    <string name="init_trailcolor_summary">Seleziona colore e opacità della linea della traccia cronologica</string>
     <string name="init_trailwidth">Spessore traccia cronologia</string>
+    <string name="init_trailwidth_summary">Seleziona la larghezza della linea della traccia della cronologica</string>
     <string name="init_directioncolor">Colore linea di direzione</string>
+    <string name="init_directioncolor_summary">Seleziona colore e opacità della linea di direzione. La linea di direzione mostra una linea retta verso la destinazione di navigazione selezionata o il percorso di navigazione specifico, se il percorso è abilitato con l\'installazione dell\'app BRouter.</string>
     <string name="init_directionwidth">Spessore linea di direzione</string>
-    <string name="init_routecolor">Colore linea tracciato</string>
-    <string name="init_routewidth">Spessore linea tracciato</string>
+    <string name="init_directionwidth_summary">Seleziona la larghezza della linea di direzione</string>
+    <string name="init_routecolor">Colore linea percorso individuale</string>
+    <string name="init_routecolor_summary">Seleziona colore e opacità della linea di percorso individuale. Un percorso individuale è un insieme di waypoint e/o cache selezionati premendo a lungo sul waypoint/cache. (È necessario abilitare prima la funzione di pressione prolungata, vedere le impostazioni della mappa.)</string>
+    <string name="init_routewidth">Spessore della linea di percorso individuale</string>
+    <string name="init_routewidth_summary">Seleziona la larghezza della linea di percorso individuale</string>
     <string name="init_trackcolor">Colore della linea di traccia individuale</string>
+    <string name="init_trackcolor_summary">Seleziona colore e opacità della linea della traccia. Una traccia è composta da diversi waypoint e può essere caricata tramite un file GPX.</string>
     <string name="init_trackwidth">Spessore della linea di traccia individuale</string>
+    <string name="init_trackwidth_summary">Seleziona la larghezza della linea di percorso individuale</string>
     <string name="init_circlecolor">Colore del cerchio</string>
+    <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
     <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
+    <string name="init_circlefillcolor_summary">Seleziona colore e opacità per il riempimento dei cerchi</string>
     <string name="init_share_after_export">Apri menu condivisione dopo export GPX</string>
     <string name="init_include_found_status">Includi lo stato \"Trovato\"</string>
     <string name="init_trackautovisit">Visita TB</string>
@@ -925,6 +935,7 @@
     <string name="cache_found_last_30_days">Trovati negli ultimi 30 giorni</string>
     <string name="cache_status_archived">Archiviato</string>
     <string name="cache_status_disabled">Non attivo</string>
+    <string name="cache_status_active">Attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
     <string name="cache_status_not_premium">Per tutti gli utenti</string>
     <string name="cache_status_stored">Salvato</string>
@@ -1087,6 +1098,9 @@
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_hide">Nascondi</string>
     <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
+    <string name="map_reset_linecolors">Ripristina i colori delle linee</string>
+    <string name="map_reset_linecolors_confirm">Vuoi ripristinare tutte le linee della mappa configurabili ai loro colori predefiniti?</string>
+    <string name="map_reset_linecolors_ok">Ripristino dei colori delle linee</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
@@ -1494,6 +1508,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
@@ -1630,6 +1645,7 @@
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
     <string name="save_sorted_route">Salva</string>
     <string name="sorted_route_saved">Percorso individuale salvato</string>
+    <string name="route_item_not_yet_loaded">Elemento del percorso non ancora caricato</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
@@ -1664,9 +1680,11 @@
     <string name="receivemapfile_option_differentname">Nome diverso</string>
     <string name="receivemapfile_kb_copied">%d kB copiati</string>
     <string name="receivemapfile_cancelled">Trasferimento file mappa annullato</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Scarica mappe base offline</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Scarica mappa offline</string>
     <string name="downloadmap_info">Sarai reindirizzato a un sito di download per mappe offline di base (nessun supporto ai temi).\n\nScegli il file .map per la tua regione e tocca per scaricare il file.\n\nAl termine del download, tocca il file scaricato per impostare questa mappa come mappa attiva in c:geo</string>
+    <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
+    <string name="download_started">Download avviato in background</string>
     <!-- history trail export -->
     <string name="trailhistory">Traccia cronologia</string>
     <string name="export_trailhistory_title">Esporta traccia cronologia</string>
