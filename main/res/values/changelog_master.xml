@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h4>Map:</h4>
 <ul>
+<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu)</li>
 <li>Add option in map menu to reset all map colors</li>
 </ul>
 
