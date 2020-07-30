@@ -1098,6 +1098,9 @@
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_hide">Verbergen</string>
     <string name="map_trail_show">Zeige Positionsverlauf</string>
+    <string name="map_reset_linecolors">Linienfarben zurücksetzen</string>
+    <string name="map_reset_linecolors_confirm">Möchtest du alle konfigurierten Linienfarben auf die Standardfarben zurücksetzen?</string>
+    <string name="map_reset_linecolors_ok">Linienfarben zurückgesetzt</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_circles_show">Kreise anzeigen</string>
     <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
