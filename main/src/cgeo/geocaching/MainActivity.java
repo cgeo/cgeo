@@ -28,6 +28,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -149,7 +150,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             userInfo.append(conn.getUserName());
                             if (conn.getCachesFound() >= 0) {
                                 userInfo.append(" (").append(conn.getCachesFound()).append(')');
-                                // updateFoundNum(conn.getCachesFound(), conn.getNameAbbreviated());
+                                FoundNumCounter.updateFoundNum(conn.getNameAbbreviated(), conn.getCachesFound());
                             }
                             userInfo.append(Formatter.SEPARATOR);
                             activity.checkLoggedIn();
