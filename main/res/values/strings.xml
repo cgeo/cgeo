@@ -1195,6 +1195,9 @@
     <string name="map_rotation">Map rotation</string>
     <string name="map_hide">Hide</string>
     <string name="map_trail_show">Show history track</string>
+    <string name="map_reset_linecolors">Reset line colors</string>
+    <string name="map_reset_linecolors_confirm">Do you want to reset all configurable map lines to their default colors?</string>
+    <string name="map_reset_linecolors_ok">Line colors reset</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
@@ -1621,6 +1624,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is under maintenance.\nYou might run into various issues.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">You appear to be using an older version of Android. This version of c:geo is no longer compatible with your device and might fail or behave unexpectedly!\nTap on this message for further information.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">You are using a version of c:geo which seems to be older than one year. Some features may not work anymore due to website or other technical changes. Please read our FAQ on how to upgrade.</string>
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talking compass</string>
@@ -1818,6 +1822,7 @@
     <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="save_sorted_route">Save</string>
     <string name="sorted_route_saved">Individual route saved</string>
+    <string name="route_item_not_yet_loaded">Route item not yet loaded</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>

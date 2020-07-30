@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">Skickar logg och laddar upp bild…</string>
     <string name="log_posting_log">Skickar logg…</string>
     <string name="log_posting_twitter">Skickar tweet…</string>
-    <string name="log_posting_gcvote">Skickar GCVote…</string>
+    <string name="log_posting_vote">Skickar cache-röst…</string>
     <string name="log_posting_image">Skickar bild…</string>
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
     <string name="log_clear">Rensa</string>
@@ -367,6 +367,7 @@
     <string name="caches_filter_rating">Med betyg</string>
     <string name="caches_filter_own_rating">Med eget betyg</string>
     <string name="caches_filter_multi_listing">Listade på flera sajter men inte loggad på alla</string>
+    <string name="caches_filter_own_waypoint">Med egna punkter</string>
     <string name="caches_filter_missing_gcvote">Hittade cacher utan röster</string>
     <string name="caches_filter_lists">Tilldelad till en lista</string>
     <string name="caches_filter_empty">(tom)</string>
@@ -421,6 +422,10 @@
     <string name="about_system_info_send_button">Skicka via e-post…</string>
     <string name="about_system_info">c:geo systeminformation</string>
     <string name="about_system_info_send_chooser">Skicka systeminformation</string>
+    <string name="about_system_write_logcat">Skapa loggfil</string>
+    <string name="about_system_write_logcat_success">Loggfil skriven till \"%1$s\" i \"%2$s\" mappen</string>
+    <string name="about_system_write_logcat_empty">Loggfilen är tom</string>
+    <string name="about_system_write_logcat_error">Fel vid skrivning av loggfil</string>
     <string name="changelog_github">Lista över alla ändringar</string>
     <string name="about_nutshellmanual">Hjälpmanualen på webben</string>
     <string name="about_contributors_carnerodetails">som skaparen av c:geo</string>
@@ -477,6 +482,8 @@
     <string name="settings_activate_gc">Aktivera</string>
     <string name="settings_activate_ec">Aktivera</string>
     <string name="settings_gc_legal_note">Genom att använda tjänster hos geocaching.com godkänner du Groundspeaks användarvillkor.</string>
+    <string name="settings_info_facebook_login_title">Logga in med Facebook eller Google</string>
+    <string name="settings_info_facebook_login">Du kan inte logga in på geocaching.com med ditt Facebook eller Google-konto. Men det finns en enkel lösning…</string>
     <string name="settings_authorize">Tillåt c:geo</string>
     <string name="settings_reauthorize">Uppdatera eller ta bort auktorisering</string>
     <string name="settings_gc_description">Tillåt c:geo att söka efter cacher på geocaching.com.</string>
@@ -503,8 +510,8 @@
     <string name="init_summary_su">Ladda cacher från geocaching.su</string>
     <string name="settings_activate_su">Aktivera</string>
     <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
-    <string name="err_gcvote_send_rating">Fel uppstod när betyg skulle sparas, kontrollera eller ta bort lösenordet för GCVote i inställningarna.</string>
-    <string name="gcvote_sent">Röst skickades</string>
+    <string name="err_vote_send_rating">Fel uppstod när betyget skickades.</string>
+    <string name="vote_sent">Rösten har skickats</string>
     <string name="settings_activate_twitter">Aktivera</string>
     <string name="init_login_popup">Inloggning</string>
     <string name="init_login_popup_working">Loggar in…</string>
@@ -570,6 +577,7 @@
     <string name="init_choose_list">Listhantering</string>
     <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
     <string name="init_listdisplay">Visa ytterligare listor i cachelistan</string>
+    <string name="init_summary_listdisplay">Visa cachernas tillhörighet till andra listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa riktning till cacher i listan</string>
     <!-- backup / restore -->
@@ -617,9 +625,30 @@
     <string name="init_gpx_importdir">GPX-importkatalog</string>
     <string name="init_dataDir">Välj katalog för geocache-data</string>
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
-    <string name="init_maptrail">Spår på kartan</string>
-    <string name="init_summary_maptrail">Visa spår på kartan</string>
-    <string name="init_trailcolor">Spårfärg</string>
+    <string name="init_maptrail">Visa historikspår</string>
+    <string name="init_maptrail_length">Historiskt spår max. längd</string>
+    <string name="init_maptrail_length_summary">Ange maximal längd på historikspår (tillämpas vid varje start av c:geo). Standardvärdet är 700 - justera efter tillgängligt minne.</string>
+    <string name="init_summary_maptrail">När den aktiveras (och GPS är på) sparar c:geo historiken över dina rörelser som ett spår och visar den på kartan.</string>
+    <string name="init_trailcolor">Färg på spårlinje för historik</string>
+    <string name="init_trailcolor_summary">Välj färg och ogenomskinlighet för historikspårslinje</string>
+    <string name="init_trailwidth">Linjebredd på spårlinje för historik</string>
+    <string name="init_trailwidth_summary">Välj bredd för historikspårslinje</string>
+    <string name="init_directioncolor">Färg på riktningsspår</string>
+    <string name="init_directioncolor_summary">Välj färg och ogenomskinlighet för riktningslinje. Riktlinje visar en rak linje till ditt valda navigationsmål, eller den specifika navigationsvägen, om routing är aktiverad genom att installera BRouter appen.</string>
+    <string name="init_directionwidth">Bredd på riktningsspår</string>
+    <string name="init_directionwidth_summary">Välj bredd för riktlinje</string>
+    <string name="init_routecolor">Färg på individuell ruttlinje</string>
+    <string name="init_routecolor_summary">Välj färg och ogenomskinlighet för individuell ruttlinje. En enskild rutt är en samling av waypoints och/eller cacher du valt genom att långtrycka på waypoint/cache. (Du måste aktivera funktionen för långtryck först, se kartinställningar.)</string>
+    <string name="init_routewidth">Individuell ruttlinje bredd</string>
+    <string name="init_routewidth_summary">Välj bredd för individuell ruttlinje</string>
+    <string name="init_trackcolor">Individuell spårlinjefärg</string>
+    <string name="init_trackcolor_summary">Välj färg och ogenomskinlighet för spårlinje. Ett spår består av flera waypoints och kan laddas via en spår GPX-fil.</string>
+    <string name="init_trackwidth">Individuell spårlinje bredd</string>
+    <string name="init_trackwidth_summary">Välj bredd för individuell spårlinje</string>
+    <string name="init_circlecolor">Färg på linje runt cirklar</string>
+    <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
+    <string name="init_circlefillcolor">Färg inuti cirklar</string>
+    <string name="init_circlefillcolor_summary">Välj färg och ogenomskinlighet för de cirklar som ska fyllas med</string>
     <string name="init_share_after_export">Visa meny för att dela efter slutförd exportering</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
     <string name="init_trackautovisit">Trackable</string>
@@ -692,6 +721,9 @@
     <string name="feature_search_geocode">Sök med geo-kod</string>
     <string name="feature_search_owner">Sök baserat på ägare</string>
     <string name="feature_search_finder">Sök baserat på hittare</string>
+    <string name="feature_favorite">Lägger till cachen till dina favoriter</string>
+    <string name="feature_voting">Rösta på cacher</string>
+    <string name="init_maplines_title">Anpassa kartrader</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Gamla Mapsforge V3</string>
     <string name="init_mfold_api_description">Vi använder en ny version av Mapsforge kartan som standard. Om du saknar några funktioner eller stöter på problem kan du gå tillbaka till den gamla versionen här.</string>
@@ -756,12 +788,12 @@
     <string name="err_auth_geokrety_unknown">%1$s meddelande: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">En cache</item>
+        <item quantity="one">%1$d cache</item>
         <item quantity="other">%1$d cacher</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">en dag kvar</item>
+        <item quantity="one">%1$d dag kvar</item>
         <item quantity="other">%1$d dagar kvar</item>
     </plurals>
     <string name="last_day_available">sista dagen tillgänglig</string>
@@ -800,7 +832,7 @@
     <string name="cache_personal_note_edit">Redigera</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
-    <string name="cache_personal_note_truncation">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
     <string name="cache_personal_note_upload">Ladda upp</string>
     <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
     <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
@@ -823,8 +855,8 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_waypoints">Punkter</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Punkt</item>
-        <item quantity="other">%d Punkter</item>
+        <item quantity="one">%d punkt</item>
+        <item quantity="other">%d punkter</item>
     </plurals>
     <string name="cache_waypoints_add">Lägg till punkt</string>
     <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
@@ -903,6 +935,7 @@
     <string name="cache_found_last_30_days">Hittad de senaste 30 dagarna</string>
     <string name="cache_status_archived">Arkiverad</string>
     <string name="cache_status_disabled">Inaktiverad</string>
+    <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Enbart för Premium medlemmar</string>
     <string name="cache_status_not_premium">Tillgänglig för alla medlemmar</string>
     <string name="cache_status_stored">Sparad</string>
@@ -952,11 +985,14 @@
     <string name="cache_listed_on">Listad på %s</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
+    <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
+    <string name="internal_cache_default_description">Detta är en egen-definierad cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
     <string name="internal_goto_targets_description">Denna cache lagrar dina senaste \"Gå till\" mål. Den skapas automatiskt när du har använt funktionen \"Gå till\" i huvudmenyn. Koordinaterna som anges där kommer att lagras i vägpunkter för denna cache. Om du inte längre behöver dessa koordinater kan du ta bort cachen eller någon av dess vägpunkter på ett säkert sätt. Du kan också flytta cachen till någon annan lista som du väljer.</string>
     <string name="init_longtap_map">Långtryck på kartan</string>
+    <string name="init_summary_longtap_map">Aktivera långtryck på kart-ikonen (för att skapa en egen rutt) eller på själva kartan (för att skapa en egen-definierad cache)</string>
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
@@ -972,14 +1008,18 @@
     <string name="file_list_no_files">Tyvärr hittade c:geo inga lämpliga filer.</string>
     <string name="file_searching">Söker efter matchande filer</string>
     <string name="file_title_searching">Söker</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Välj katalog</string>
     <string name="simple_dir_chooser_current_path">Sökväg:</string>
     <string name="simple_dir_chooser_invalid_path">Ogiltig sökväg</string>
+    <string name="simple_file_chooser_title">Välj fil</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Laddar cacher från %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Laddar waypoints från %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d cacher importerade från %2$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d cache importerad från %2$s</item>
+        <item quantity="other">%1$d cacher importerade från %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Hämtningen av kartor avbröts</string>
     <string name="gpx_import_title_reading_file">Läser fil</string>
     <string name="gpx_import_title">Importera GPX</string>
@@ -993,9 +1033,9 @@
     <string name="gpx_import_delete_message">Vill du radera %s?</string>
     <string name="gpx_import_select_list_title">Importera GPX till lista</string>
     <string name="gpx_import_android">Importera från Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Välj kartfil</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Välj spårfil</string>
     <!-- import -->
     <string name="web_import_title">Importera från send2cgeo</string>
     <string name="web_import_waiting">Väntar på nya cacher från send2cgeo…</string>
@@ -1057,7 +1097,7 @@
     <string name="map_modes">Kartlägen</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_hide">Dölj</string>
-    <string name="map_trail_show">Visa spår</string>
+    <string name="map_trail_show">Visa historikspår</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_circles_show">Visa cirklar</string>
     <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
@@ -1066,6 +1106,14 @@
     <string name="map_hidewp_original">Dölj ursprungliga vägpunkter</string>
     <string name="map_hidewp_parking">Dölj parkerings vägpunkter</string>
     <string name="map_hidewp_visited">Dölj besökta vägpunkter</string>
+    <string name="map_hide_track">Dölj individuella spår</string>
+    <string name="map_load_track">Ladda individuellt spår</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Individuellt spår laddat (%d spårpunkt)</item>
+        <item quantity="other">Individuellt spår laddat (%d spårpunkter)</item>
+    </plurals>
+    <string name="load_track_error">Fel vid inläsning av enskilt spår</string>
+    <string name="map_unload_track">Dölj individuella spår</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
@@ -1077,14 +1125,16 @@
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
-    <string name="map_clear_trailhistory">Rensa spårhistorik</string>
-    <string name="map_trailhistory_cleared">spårhistorik rensad</string>
+    <string name="map_clear_trailhistory">Rensa historikspår</string>
+    <string name="map_trailhistory_cleared">Historikspåret rensat</string>
     <string name="map_select_multiple_items">Välj objekt</string>
     <string name="map_routing">Navigering</string>
     <string name="map_routing_straight">Rak linje</string>
     <string name="map_routing_walk">Fotgängare</string>
     <string name="map_routing_bike">Cykel</string>
     <string name="map_routing_car">Bil</string>
+    <string name="map_gm_autorotation">Rotera kartan automatiskt</string>
+    <string name="map_gm_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
     <!-- search -->
     <string name="search_bar_hint">Sök cache/TB</string>
     <string name="search_bar_desc">Cache (GC-kod, nyckelord), Trackable (TB-kod)</string>
@@ -1204,13 +1254,13 @@
     <string name="export_persnotes">Personliga anteckningar</string>
     <string name="export_persnotes_uploading">Laddar upp personlig anteckning %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Överförde en anteckning</item>
+        <item quantity="one">Överförde %1$d anteckning</item>
         <item quantity="other">Överförde %1$d anteckningar</item>
     </plurals>
     <string name="export_modifiedcoords">Modifierade koordinater</string>
     <string name="export_modifiedcoords_uploading">Laddar upp %1$d</string>
     <string name="export_modifiedcoords_success">Uppladdning slutförd</string>
-    <string name="export_modifiedcoords_result">Uppladdningen slutförd: %1$d misslyckades / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Uppladdningen slutförd: %1$d misslyckades / %2$d ok</string>
     <string name="export_modifiedcoords_error">Uppladdning misslyckades</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Hundar tillåtna</string>
@@ -1455,6 +1505,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en äldre version av Android. Framtida utgåvor av c:geo kanske inte längre är tillgängliga för din enhet.\nTryck på detta meddelande för ytterligare information.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Du använder en version av c:geo som verkar vara äldre än ett år. Vissa funktioner kanske inte fungerar längre på grund av förändringar på webbplatsen eller andra tekniska ändringar. Läs vår FAQ om hur du uppgraderar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
     <string name="tts_toggle">Växla samtal</string>
@@ -1568,6 +1619,9 @@
     <string name="color_red">Röd</string>
     <string name="color_turquoise">Turkos</string>
     <string name="color_black">Svart</string>
+    <string name="preference_colorpicker_select_color_scheme">Välj färgschema</string>
+    <string name="preference_colorpicker_select_color">Välj färg</string>
+    <string name="preference_colorpicker_select_opaqueness">Välj ogenomskinlighet</string>
     <!-- number input -->
     <string name="number_input_title">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
@@ -1578,15 +1632,52 @@
     <string name="notification_channel_description">Notifieringar från c:geo geocaching-appen</string>
     <string name="proximity_notification_title">c:geo närhetsnotifiering</string>
     <!-- individual routes -->
+    <string name="individual_route">Individuell rutt</string>
     <string name="individual_route_added">tillagd till rutt</string>
     <string name="individual_route_removed">borttagen från rutt</string>
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
+    <string name="map_sort_individual_route">Sortera individuell rutt</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
     <string name="map_individual_route_cleared">Individuell rutt rensad</string>
+    <string name="save_sorted_route">Spara</string>
+    <string name="sorted_route_saved">Individuell rutt sparad</string>
+    <string name="route_item_not_yet_loaded">Rutten är ännu inte inläst</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Av</string>
+    <string name="switch_on">På</string>
     <string name="switch_manual">Manuellt</string>
-    <string name="switch_auto">Auto</string>
+    <string name="switch_auto">Automatiskt</string>
+    <!-- view settings -->
+    <string name="view_settings">Visa inställningar</string>
+    <string name="delete_setting">Radera inställningar</string>
+    <string name="delete_setting_warning">Vill du radera värdet \"%s\" från inställningarna?\n\nDenna åtgärd kan inte ångras.</string>
+    <string name="edit_setting">Ändra inställning \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Okänd inställningstyp - redigering ej möjligt</string>
+    <string name="edit_setting_error_invalid_data">Ogiltigt värde \"%s\" angivet. Inställningens värde ändrades inte.</string>
+    <string name="activate_editmode_title">Aktivera redigeringsläge</string>
+    <string name="activate_editmode_warning">Varning, det här är riskabelt!\n\nAtt ändra inställningar manuellt kan förvirra c:geo eller förhindra att appen startar, så var försiktig!\n\nÄr du säker på att du vill fortsätta på egen risk?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Lokal filhanterare</string>
+    <string name="localfile_title">Välj en fil lokalt</string>
+    <string name="localfile_cannot_handle">Fel vid läsning av fil, eller så c:geo kan inte hantera denna filtyp.</string>
+    <string name="localfile_foundmap">hittade en kartfil</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Ta emot kartfil</string>
+    <string name="receivemapfile_success">Kartfilen togs emot korrekt som \"%s\" och lagrades i kartkatalogen</string>
+    <string name="receivemapfile_error">Fel uppstod när kartfilen togs emot</string>
+    <string name="receivemapfile_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
+    <string name="receivemapfile_option_overwrite">Skriv över</string>
+    <string name="receivemapfile_option_differentname">Annat namn</string>
+    <string name="receivemapfile_kb_copied">%d kB kopierat</string>
+    <string name="receivemapfile_cancelled">Kartöverföring avbruten</string>
+    <!-- Download map preference -->
+    <string name="downloadmap_title">Ladda ner baskartor för användning offline</string>
+    <string name="downloadmap_info">Du kommer att omdirigeras till en nedladdningsplats för grundläggande offline-kartor (inget stöd för teman).\n\nVälj .map-filen för din region och tryck på den för att ladda ner filen.\n\nNär nedladdningen har slutförts trycker du på den nedladdade filen för att ställa in denna karta som aktuell karta för c:geo</string>
+    <!-- history trail export -->
+    <string name="trailhistory">Historikspår</string>
+    <string name="export_trailhistory_title">Exportera historikspår</string>
+    <string name="export_trailhistory_success">Exporterade historikspår till \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Rensa historikspår efter export</string>
 </resources>

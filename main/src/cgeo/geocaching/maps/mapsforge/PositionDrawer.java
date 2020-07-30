@@ -34,7 +34,6 @@ public class PositionDrawer {
     private float heading = 0f;
     private Paint accuracyCircle = null;
     private Paint historyLine = null;
-    private Paint historyLineShadow = null;
     private final int trailColor;
     private final Point center = new Point();
     private final Point left = new Point();
@@ -65,15 +64,8 @@ public class PositionDrawer {
         if (historyLine == null) {
             historyLine = new Paint();
             historyLine.setAntiAlias(true);
-            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineInsetWidth());
-            historyLine.setColor(0xFFFFFFFF);
-        }
-
-        if (historyLineShadow == null) {
-            historyLineShadow = new Paint();
-            historyLineShadow.setAntiAlias(true);
-            historyLineShadow.setStrokeWidth(MapLineUtils.getHistoryLineShadowWidth());
-            historyLineShadow.setColor(trailColor);
+            historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
+            historyLine.setColor(trailColor);
         }
 
         if (setfil == null) {
@@ -138,12 +130,10 @@ public class PositionDrawer {
                         alpha = 255;
                     }
 
-                    historyLineShadow.setAlpha(alpha);
                     historyLine.setAlpha(alpha);
 
                     // connect points by line, but only if distance between previous and current point is less than defined max
                     if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                        canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLineShadow);
                         canvas.drawLine(pointPrevious.x, pointPrevious.y, pointNow.x, pointNow.y, historyLine);
                     }
 

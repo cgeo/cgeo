@@ -147,8 +147,9 @@ public final class MapMarkerUtils {
      */
     @NonNull
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint) {
+        final WaypointType waypointType = waypoint.getWaypointType();
         final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-        final Drawable inset = Compatibility.getDrawable(res, waypoint.getWaypointType().markerId);
+        final Drawable inset = Compatibility.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId);
         final Drawable[] layers = {
                 marker,
                 inset

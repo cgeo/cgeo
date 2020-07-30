@@ -7,7 +7,7 @@
     android:clickable="true"
     android:clipToPadding="false"
     android:divider="?background_color"
-    android:fastScrollEnabled="true"
+    android:fastScrollEnabled="false"
     android:focusable="false"
     android:footerDividersEnabled="false"
     android:headerDividersEnabled="false"

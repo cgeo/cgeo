@@ -41,7 +41,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
-    public static final float ZINDEX_HISTORY_SHADOW = 1;
 
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
@@ -270,15 +269,13 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
         }
         historyObjs.removeAll();
         if (Settings.isMapTrail()) {
-
-            // always add current position to drawn history to have a closed connection
-            final ArrayList<Location> paintHistory = getHistory();
-            paintHistory.add(coordinates);
-
+            final ArrayList<Location> paintHistory = new ArrayList<>(getHistory());
             final int size = paintHistory.size();
-            if (size == 1) {
+            if (size < 2) {
                 return;
             }
+            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+            paintHistory.add(coordinates);
 
             Location prev = paintHistory.get(0);
             int current = 1;
@@ -301,17 +298,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
                     // history line
                     historyObjs.addPolyline(new PolylineOptions()
                             .addAll(points)
-                            .color(0xFFFFFFFF)
-                            .width(MapLineUtils.getHistoryLineInsetWidth())
-                            .zIndex(ZINDEX_HISTORY)
-                    );
-
-                    // history line shadow
-                    historyObjs.addPolyline(new PolylineOptions()
-                            .addAll(points)
                             .color(MapLineUtils.getTrailColor())
-                            .width(MapLineUtils.getHistoryLineShadowWidth())
-                            .zIndex(ZINDEX_HISTORY_SHADOW)
+                            .width(MapLineUtils.getHistoryLineWidth())
+                            .zIndex(ZINDEX_HISTORY)
                     );
                 }
             }

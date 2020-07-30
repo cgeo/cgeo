@@ -588,7 +588,7 @@ public final class GCParser {
         cache.checkFields();
 
         // cache personal note
-        cache.setPersonalNote(personalNoteWithLineBreaks);
+        cache.setPersonalNote(personalNoteWithLineBreaks, true);
 
         // cache short description
         cache.setShortDescription(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));

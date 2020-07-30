@@ -83,11 +83,6 @@
                 android:enabled="false"
                 app:showAsAction="never|withText"/>
             <item
-                android:id="@+id/menu_remove_from_history"
-                android:title="@string/cache_clear_history"
-                android:enabled="false"
-                app:showAsAction="never|withText"/>
-            <item
                 android:id="@+id/menu_create_internal_cache"
                 android:title="@string/create_internal_cache"
                 app:showAsAction="ifRoom|withText"/>
@@ -158,4 +153,9 @@
                 android:title="@string/export_persnotes"/>
         </menu>
     </item>
+    <item
+        android:id="@+id/menu_remove_from_history"
+        android:title="@string/cache_clear_history"
+        android:enabled="false"
+        app:showAsAction="never|withText"/>
 </menu>

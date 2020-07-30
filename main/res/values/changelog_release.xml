@@ -1,49 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the release branch -->
-  <string name="changelog_release" translatable="false">\n
-     <b>2020.07.02:</b>\n
-    · Fix: Wrong numbers in french language for amount of caches on lists\n
-    · Fix: Wrong error message when login fails due to wrong username and/or password\n
-    \n
-    \n
-     <b>2020.06.14</b>\n
-    · Change: Added closeout message for systems running on Android &lt; 5.0\n
-    · Change: Unified Google Maps rotation settings into menu entry \"Map rotation\"\n
-    · Change: Allow max zoom on combined OpenStreetMap offline map\n
-    · Change: Coordinate editor - Validation deferred to save coordinates\n
-    · Change: Updated several links to https\n
-    · Change: Activate filter options on Google Maps single cache map when live map is enabled\n
-    · Change: Unified stroke width in Google Maps and OSM map (direction line, navigation, route)\n
-    · Change: Caching of queries to live caches from geocaching.com\n
-    · New: Disable Google Maps autorotation by tap on compass rose\n
-    · New: Search by keyword and owner for geocaching.su\n
-    · New: Show info on completion of \"add current location\"\n
-    · New: Add option to clear the goto history\n
-    · New: Support other OSM based online map sources\n
-    · New: Add support for multilingual OSM maps\n
-    · New: Implemented Filtering by country\n
-    · New: Copy waypoints between caches\n
-    · New: Sort \"goto history\" waypoints by newest on top\n
-    · New: Add waypoint from single cache map added for Google Maps\n
-    · New: Allow starting WhereYouGo from cache detail\'s main page\n
-    · New: Open images from cache detail page in separate task\n
-    · New: Show waypoint user note in waypoint popup\n
-    · New: Added function to write debug logfile (\"LogCat\")\n
-    · New: Show bounding box around live caches (only if debug mode is enabled)\n
-    · New: Extended Whereigo URL detection to catch more situations, and to catch https links\n
-    · Fix: Adapt to website changes for TB log images\n
-    · Fix: Show waypoints of owned cache on OSM single cache map\n
-    · Fix: Crash on moving data to SD card\n
-    · Fix: Cache gallery tab empty after editing personal note\n
-    · Fix: Crashes under special circumstances on map\n
-    · Fix: Individual route did not consider change of routing type\n
-    · Fix: Individual route lost after resuming map\n
-    · Fix: Show new waypoint in waypoint tab directly after creating it on map\n
-    · Fix: Update waypoint list after nested waypoint delete\n
-    · Fix: Updated useful apps icons for send2cgeo and cgeo contacts\n
-    · Fix: A couple of other minor issues\n
-    \n
-    \n
+  <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+ <h1>Beta release:</h1>
+
+<h4>Map:</h4>
+<ul>
+· New: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
+· Change: Renamed trail / trail history / history trail to history track\n
+· New: History track: Allow export as GPX track file\n
+· New: History track: Make max. length configurable\n
+· Fix: History track: Remove superflous connection from start of track to current position\n
+· Change: History track: Remove "shadow" to make history track line consistent with other map lines\n
+· New: Customize history track, circle, individual route and individual track map line colors and widths\n
+· New: Load GPX track files and show individual track on map\n
+· New: Individual routes: Allow sorting of route elements\n
+</ul>
+
+<h4>Cache list:</h4>
+<ul>
+· Change: Difficulty and terrain filter match exact values only, no longer ranges\n
+· New: Fast scroll thumbs (info on position in list)\n
+· Change: Fast scroll only gets enabled after fling gesture with minimum length\n
+· Moved menu entry \"Clear history\" to menu top level (history cache list only)\n
+</ul>
+
+<h4>Cache details:</h4>
+<ul>
+· Change: Open links in cache description as separate task\n
+· Fix: Adapt Whereigo URL checker to catch more Whereigo links\n
+· Fix: Parsing of coords from user notes: Exclude some unwanted combinations by adding . and , as separators\n
+</ul>
+
+<h4>Supported geocaching platforms:</h4>
+<ul>
+· Change: Set all connectors to https\n
+· New: Support cache rating and managing of favorites for geocaching.su\n
+· Fix: Adapt to updated terracaching details URL\n
+</ul>
+
+<h4>System requirements:</h4>
+<ul>
+· <b>Warning: c:geo is not yet compatible with Android 11!</b> - Either do not upgrade to Android 11 or stay at an older version of c:geo for now\n
+· Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
+· Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
+· New: Internal: Upgraded several included libraries to reflect our new minimum system requirements\n
+· Fix: Internal: Removed styles / themes workarounds used for older Android versions\n
+· Fix: Internal: Remove old program code no longer used for supported Android versions\n
+· New: Display a warning, if your c:geo version is older than about a year\n
+</ul>
+
+<h4>Other changes:</h4>
+<ul>
+· Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen and about page)\n
+· New: Debug view for program settings (settings - system - view settings)\n
+· Fix: Fix for slider preference problem on Android 7\n
+· Fix: Fix translation issues for several plural forms\n
+· Fix: Settings backup: Allow restore of backups created with c:geo version 2020.03.30 or earlier\n
+· Fix: Settings backup: Geokrety auth token excluded from limited settings backup\n
+· Change: Logcat logfile renamed to have \".txt\" file ending\n
+· Change Android accent color to \"c:geo orange\"\n
+· Fix: Other code cleanup\n
+</ul>
+</div>]]></Data>
 </string>
 </resources>

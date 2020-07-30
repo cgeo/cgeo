@@ -951,6 +951,7 @@
     <string name="cache_found_last_30_days">Nalezeno za posledních 30 dní</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivována</string>
+    <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
     <string name="cache_status_not_premium">Přístupná všem uživatelům</string>
     <string name="cache_status_stored">Uložené</string>
@@ -1526,6 +1527,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávné změny na geocaching.com rozbily Aktivní mapu c:geo.\nPracujeme na opravě, proveď kontrolu později.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi sytému Android. Tato verze c:geo již není kompatibilní s vaším zařízením a může selhávat nebo se chovat neočekávaně!\nKlepněte na tuto zprávu pro další informace.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Používáte verzi c:geo, která se zdá být starší než jeden rok. Některé funkce již nemusí fungovat kvůli změnám na webu nebo jiným technickým změnám. Přečtěte si prosím naše FAQ na téma jak aktualizovat na nejnovější verzi.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mluvící kompas</string>
     <string name="tts_toggle">Přepnout hlasové pokyny</string>
@@ -1684,6 +1686,7 @@
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <string name="save_sorted_route">Uložit</string>
     <string name="sorted_route_saved">Individuální trasa uložena</string>
+    <string name="route_item_not_yet_loaded">Soubor s trasou nebyl dosud načten</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>

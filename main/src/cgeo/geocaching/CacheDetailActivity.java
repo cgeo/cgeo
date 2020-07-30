@@ -63,6 +63,7 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditNoteDialog;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
+import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.NavigationActionProvider;
@@ -1865,6 +1866,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             };
             view.setAdapter(adapter);
+            view.setOnScrollListener(new FastScrollListener(view));
 
             final Button addWaypointCurrent = header.findViewById(R.id.add_waypoint_currentlocation);
             addWaypointCurrent.setOnClickListener(v -> new AsyncTask<Void, Void, Boolean>() {

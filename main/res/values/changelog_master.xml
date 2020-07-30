@@ -1,46 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false">
-     <b>Next release:</b>\n
-    \n
-<b>Map:</b>\n
-· New: Offer a link to download OpenStreetMap offline maps\n
-· New: Integrate downloaded OpenStreetMap offline map files into c:geo after tapping on them\n
-· New: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
-· Change: Renamed trail / trail history / history trail to history track\n
-· New: History track: Allow export as GPX track file\n
-· New: History track: Make max. length configurable\n
-· New: Load GPX track files and show individual track on map\n
-· New: Individual routes: Allow sorting of route elements\n
-· New: Customize history track, circle, individual route and individual track map line colors and widths\n
-\n
-<b>Cache list:</b>\n
-· Change: Difficulty and terrain filter match exact values only, no longer ranges\n
-· Change: Fast scroll only gets enabled after fling gesture with minimum length\n
-\n
-<b>Cache details:</b>\n
-· Change: Open links in cache description as separate task\n
-· Fix: Adapt Whereigo URL checker to catch more Whereigo links\n
-\n
-<b>Supported geocaching platforms:</b>\n
-· Change: Set all connectors to https\n
-· New: Support cache rating and managing of favorites for geocaching.su\n
-· Fix: Adapt to updated terracaching details URL\n
-\n
-<b>System requirements:</b>\n
-· Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
-· Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
-· New: Internal: Upgraded several included libraries to reflect our new minimum system requirements\n
-· Fix: Internal: Removed styles / themes workarounds used for older Android versions\n
-· Fix: Internal: Remove old program code no longer used for supported Android versions\n
-\n
-<b>Other changes:</b>\n
-· Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen)\n
-· New: Add debug view for program settings\n
-· Fix: Fix for slider preference problem on Android 7\n
-· Fix: Fix translation issues for several plural forms\n
-· Fix: Allow restore of settings backup created with c:geo version 2020.03.30 or earlier\n
-· Fix: Other code cleanup\n
+  <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
+<h4>Map:</h4>
+<ul>
+<li>Add option in map menu to reset all map colors</li>
+</ul>
+
+<h4>Cache details:</h4>
+<ul>
+<li>Changed sync logic for personal notes in caches</li>
+</ul>
+</div>]]></Data>
   </string>
 </resources>
