@@ -274,14 +274,14 @@ public abstract class AbstractConnector implements IConnector {
         final List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
-            actions.add(new UserAction(R.string.user_menu_view_hidden, context -> CacheListActivity.startActivityOwner(context.getContext(), context.displayName)));
+            actions.add(new UserAction(R.string.user_menu_view_hidden, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
         }
 
         if (this instanceof ISearchByFinder) {
-            actions.add(new UserAction(R.string.user_menu_view_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.displayName)));
+            actions.add(new UserAction(R.string.user_menu_view_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
         }
         actions.add(new UserAction(R.string.copy_to_clipboard, context -> {
-            ClipboardUtils.copyToClipboard(context.displayName);
+            ClipboardUtils.copyToClipboard(context.userName);
             ActivityMixin.showToast(context.getContext(), R.string.clipboard_copy_ok);
         }));
         return actions;
@@ -294,7 +294,7 @@ public abstract class AbstractConnector implements IConnector {
     public static List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
-            actions.add(new UserAction(R.string.user_menu_open_contact, context -> ContactsAddon.openContactCard(context.getContext(), context.displayName)));
+            actions.add(new UserAction(R.string.user_menu_open_contact, context -> ContactsAddon.openContactCard(context.getContext(), context.userName)));
         }
 
         return actions;
