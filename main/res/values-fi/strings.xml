@@ -1098,6 +1098,9 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_hide">Piilota</string>
     <string name="map_trail_show">Näytä reittihistoria</string>
+    <string name="map_reset_linecolors">Nollaa viivojen värit</string>
+    <string name="map_reset_linecolors_confirm">Haluatko nollata kaikki muokattavat viivojen värit niiden oletusväreihin?</string>
+    <string name="map_reset_linecolors_ok">Viivojen värit nollattu</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
@@ -1505,6 +1508,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Viimeaikaiset muutokset geocaching.com-sivulla hajoittivat livekartta-ominaisuuden.\nAsiaa korjataan, yritä lähiaikoina uudelleen.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Näyttää siltä, että käytät Android-käyttöjärjestelmän vanhempaa versiota. Voi olla, että päivitykset ja uusimmat ominaisuudet eivät ole välttämättä saatavilla laitteellesi.\nNapauta tästä saadaksesi lisätietoja.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
@@ -1641,6 +1645,7 @@
     <string name="map_individual_route_cleared">Yksittäinen reitti tyhjennetty</string>
     <string name="save_sorted_route">Tallenna</string>
     <string name="sorted_route_saved">Yksittäinen reitti tallennettu</string>
+    <string name="route_item_not_yet_loaded">Reitin asiaa ei ole vielä ladattu</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
