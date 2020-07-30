@@ -1113,7 +1113,7 @@
         <item quantity="other">Individueller Track geladen (%d Wegpunkte)</item>
     </plurals>
     <string name="load_track_error">Fehler beim Laden des individuellen Tracks</string>
-    <string name="map_unload_track">Individuellen Track entfernt</string>
+    <string name="map_unload_track">Individuellen Track entfernen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
