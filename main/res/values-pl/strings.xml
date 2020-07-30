@@ -984,7 +984,7 @@
     <string name="cc_hint_degrees">stopni(e)</string>
     <string name="cc_hint_minutes">minut(y)</string>
     <string name="cc_hint_seconds">sekund(y)</string>
-    <string name="cc_hint_fraction">część ułamkowa</string>
+    <string name="cc_hint_fraction">cz. ułamk.</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Szukam plików\nw</string>
