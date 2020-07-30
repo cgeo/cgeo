@@ -1116,6 +1116,9 @@
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_hide">Skryť</string>
     <string name="map_trail_show">Zobraziť históriu trasy</string>
+    <string name="map_reset_linecolors">Obnoviť farby čiar</string>
+    <string name="map_reset_linecolors_confirm">Chcete obnoviť všetky predvolené nastaviteľné čiary na mape?</string>
+    <string name="map_reset_linecolors_ok">Farby čiar obnovené</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_circles_show">Zobraziť kruhy</string>
     <string name="map_mycaches_hide">Skryť vlastné/nájdené skrýše</string>
@@ -1721,9 +1724,11 @@
     <string name="receivemapfile_option_differentname">Premenovať</string>
     <string name="receivemapfile_kb_copied">%d kB skopírovaných</string>
     <string name="receivemapfile_cancelled">Prenos mapového súboru bol zrušený</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Stiahnuť základné offline mapy</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Prevziať offline mapu</string>
     <string name="downloadmap_info">Dôjde k presmerovaniu na stránku umožňujúcu stiahnuť základné offline mapy (bez podpory tém).\n\nVyberte súbor .map podľa vášho regiónu a kliknite naň pre jeho stiahnutie.\n\nPo dokončení sťahovania kliknite na stiahnutý súbor pre jeho nastavenie ako aktuálnej mapy v c:geo</string>
+    <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
+    <string name="download_started">Prevzatie spustené na pozadí</string>
     <!-- history trail export -->
     <string name="trailhistory">História trasy</string>
     <string name="export_trailhistory_title">Exportovať históriu trasy</string>

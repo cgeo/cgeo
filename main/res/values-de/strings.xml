@@ -1680,9 +1680,11 @@
     <string name="receivemapfile_option_differentname">Anderer Name</string>
     <string name="receivemapfile_kb_copied">%d kB kopiert</string>
     <string name="receivemapfile_cancelled">Kartendatei-Empfang abgebrochen</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Grundlegende Offlinekarte herunterladen</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Offlinekarte herunterladen</string>
     <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (ohne Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
+    <string name="downloadmanager_not_available">Kartendatei kann nicht heruntergeladen werden, Download-Manager ist nicht verfügbar</string>
+    <string name="download_started">Download im Hintergrund gestartet</string>
     <!-- history trail export -->
     <string name="trailhistory">Positionsverlauf</string>
     <string name="export_trailhistory_title">Exportiere Positionsverlauf</string>
