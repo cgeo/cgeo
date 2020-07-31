@@ -183,7 +183,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 82;
+    private static final int dbVersion = 83;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -199,8 +199,8 @@ public class DataStore {
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
-    @NonNull private static final String dbTableRoute = "cg_table_route";
-    @NonNull private static final String dbTableExtension = "cg_table_extension";
+    @NonNull private static final String dbTableRoute = "cg_route";
+    @NonNull private static final String dbTableExtension = "cg_extension";
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE " + dbTableCaches + " ("
@@ -372,7 +372,7 @@ public class DataStore {
     private static final String dbCreateRoute
             = "CREATE TABLE " + dbTableRoute + " ("
             + "precedence INTEGER, "
-            + "type INTERGER, "
+            + "type INTEGER, "
             + "id INTEGER, "
             + "geocode TEXT"
             + "); ";
@@ -382,11 +382,14 @@ public class DataStore {
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "_type INTEGER DEFAULT " + DBEXTENSION_INVALID.id + ", "
             + "_key VARCHAR(50), "
-            + "long1 LONG DEFAULT 0, "
-            + "long2 LONG DEFAULT 0, "
+            + "long1 INTEGER DEFAULT 0, "
+            + "long2 INTEGER DEFAULT 0, "
             + "string1 TEXT, "
             + "string2 TEXT"
             + "); ";
+
+    // reminder to myself: when adding a new CREATE TABLE statement:
+    // make sure to add it to both onUpgrade() and onCreate()
 
     private static final String SEQUENCE_INTERNAL_CACHE = "seq_internal_cache";
 
@@ -748,6 +751,7 @@ public class DataStore {
             db.execSQL(dbCreateSearchDestinationHistory);
             db.execSQL(dbCreateTrailHistory);
             db.execSQL(dbCreateRoute);
+            db.execSQL(dbCreateExtension);
 
             createIndices(db);
         }
@@ -770,6 +774,7 @@ public class DataStore {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoff_geo ON " + dbTableLogsOffline + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_trck_geo ON " + dbTableTrackables + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_extension_key ON " + dbTableExtension + " (_key)");
         }
 
         @Override
@@ -1169,6 +1174,23 @@ public class DataStore {
                             Log.e("Failed to upgrade to ver. 82", e);
                         }
                     }
+
+                    // fix a few creation errors
+                    if (oldVersion < 83) {
+                        // remove "table" infix for route table by renaming table
+                        try {
+                            db.execSQL("ALTER TABLE cg_table_route RENAME TO " + dbTableRoute);
+                        } catch (final Exception e) {
+                            // ignore, because depending on your upgrade path, the statement above cannot work
+                        }
+                        // recreate extension table to remove "table" infix and to fix two column types
+                        try {
+                            db.execSQL("DROP TABLE IF EXISTS cg_table_extension;");
+                            db.execSQL(dbCreateExtension);
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to vers. 83", e);
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1255,6 +1277,9 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrailHistory);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableRoute);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableExtension);
+            // also delete tables which have old table names
+            db.execSQL("DROP TABLE IF EXISTS cg_table_route");
+            db.execSQL("DROP TABLE IF EXISTS cg_table_extension");
         }
 
     }
