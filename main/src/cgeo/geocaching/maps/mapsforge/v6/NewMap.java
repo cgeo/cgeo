@@ -59,7 +59,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
-import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
@@ -489,26 +488,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 return true;
             case R.id.menu_compass:
                 menuCompass();
-                return true;
-            case R.id.menu_reset_linecolors:
-                MapLineUtils.resetLinecolors(this, () -> {
-                    if (null != historyLayer) {
-                        historyLayer.resetColor();
-                        historyLayer.requestRedraw();
-                    }
-                    if (null != trackLayer) {
-                        trackLayer.resetColor();
-                        trackLayer.requestRedraw();
-                    }
-                    if (null != routeLayer) {
-                        routeLayer.resetColor();
-                        routeLayer.requestRedraw();
-                    }
-                    if (null != navigationLayer) {
-                        navigationLayer.resetColor();
-                        navigationLayer.requestRedraw();
-                    }
-                });
                 return true;
             default:
                 if (!TrackUtils.onOptionsItemSelected(this, id, this::updateTrackHideStatus, this::setTracks)

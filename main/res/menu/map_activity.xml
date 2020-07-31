@@ -110,11 +110,6 @@
                     </group>
                 </menu>
             </item>
-            <item
-                android:id="@+id/menu_reset_linecolors"
-                android:icon="@drawable/ic_menu_colors"
-                android:title="@string/map_reset_linecolors">
-            </item>
         </menu>
     </item>
     <item

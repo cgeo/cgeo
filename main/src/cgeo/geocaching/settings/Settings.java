@@ -831,10 +831,6 @@ public class Settings {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
 
-    public static void resetMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
-        putInt(prefKeyId, getKeyInt(defaultValueKeyId));
-    }
-
     public static int getCompactIconMode() {
         final String prefValue = getString(R.string.pref_compactIconMode, "");
         if (prefValue.equals(getKey(R.string.pref_compacticon_on))) {
