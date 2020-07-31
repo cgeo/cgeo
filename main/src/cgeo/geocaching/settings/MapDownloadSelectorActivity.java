@@ -119,7 +119,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
             super(activity, newSelectionTitle, "Retrieving directory data...");
             this.uri = uri;
             this.newSelectionTitle = newSelectionTitle;
-            Log.e("starting MapDownloaderTask: " + uri.toString());
+            Log.i("starting MapDownloaderTask: " + uri.toString());
         }
 
         @Override
