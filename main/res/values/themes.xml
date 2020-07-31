@@ -14,6 +14,8 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowShowWallpaper">true</item>
 
+        <item name="colorAccent">@color/colorAccent</item>
+
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
@@ -70,6 +72,8 @@
        <item name="android:editTextStyle">@style/edittext</item>
        <item name="android:windowContentOverlay">@null</item>
        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
+
+        <item name="colorAccent">@color/colorAccent</item>
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
@@ -177,6 +181,7 @@
 
     <style name="cgeo_popup" parent="cgeo.Translucent.Light">
         <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
      </style>
 
     <style name="popup_dark" parent="cgeo.Translucent">

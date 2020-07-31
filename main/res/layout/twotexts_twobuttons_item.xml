@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/route_item"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="?background_color"
-    tools:context=".maps.routing.RouteSortActivity" >
-
-    <!-- cache name and icon -->
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="40sp"
+    android:paddingTop="3dp"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="10dp">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
@@ -26,19 +26,17 @@
         android:textColor="?text_color"
         android:textIsSelectable="false"
         android:textSize="18sp"
-        tools:text="name"
+        tools:text="title"
         android:maxLines="1" />
 
-    <!-- cache/waypoint attributes and other info -->
-
     <TextView
-        android:id="@+id/info"
+        android:id="@+id/detail"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_gravity="left"
         android:layout_marginRight="110dip"
-        android:layout_below="@id/text"
+        android:layout_below="@id/title"
         android:ellipsize="end"
         android:paddingBottom="5dip"
         android:paddingRight="3dip"
@@ -46,21 +44,20 @@
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
         android:textSize="12sp"
-        tools:text="terrain, difficulty and others" />
-
+        tools:text="detail info" />
     <ImageButton
-        android:id="@+id/routitem_up"
+        android:id="@+id/button_left"
+        style="@style/button_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/routeitem_down"
-        android:src="@drawable/ic_menu_up"
+        android:layout_toLeftOf="@id/button_right"
         android:visibility="gone" />
     <ImageButton
-        android:id="@+id/routeitem_down"
+        android:id="@+id/button_right"
+        style="@style/button_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_menu_down"
         android:visibility="gone" />
 
 </RelativeLayout>

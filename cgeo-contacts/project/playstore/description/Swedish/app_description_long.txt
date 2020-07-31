@@ -1,0 +1,12 @@
+Detta är ett kontakttillägg för c:geo, en geocaching-app baserad på öppen källkod. Det fungerar bara med c:geo-appen installerad och ger direkt åtkomst till din telefonbok när du trycker på ett användarnamn i c:geo.
+
+Användning:
+När du klickar på ett användarnamn i c:geo (t.ex. i cachens loggbok) menyn innehåller ett objekt för att öppna motsvarande kontaktkort i dina telefonkontakter. Detta gör att du kan ringa eller skicka ett meddelade direkt till användaren.
+
+Notera följande: 
+Användarnamnet på personen måste finnas i namn- eller alias-fältet för dina kontakter för att tillägget ska kunna matcha geocaching-användarnamnet med kontakten.
+
+Kommentarer i PlayStore kan inte besvaras! Om du har problem med att installera eller använda c:geo, ta först en titt på vår FAQ: https://faq.cgeo.org
+Om det fortfarande finns problem, kontakta support via e-post.
+
+Om du vill veta varför detta c:geo-tillägg efterfrågar vissa app-behörigheter, vänligen läs på https://www.cgeo.org/faq.html#plugin-contacts-privacy för en förklaring.

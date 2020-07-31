@@ -161,11 +161,6 @@ public class GeoPointParserTest {
     }
 
     @Test
-    public void testDoubleComma() {
-        assertThat(GeopointParser.parse("47.648883,122.348067").equals(GeopointParser.parse("47.648883 122.348067")));
-    }
-
-    @Test
     public void testGerman() {
         assertThat(GeopointParser.parse("N 47° 38.933 O 122° 20.884")).isEqualTo(GeopointParser.parse("N 47° 38.933 E 122° 20.884"));
     }
@@ -313,4 +308,13 @@ public class GeoPointParserTest {
         }
     }
 
+    @Test
+    public void test8078() {
+        assertParsingFails("2.2.3.8");
+    }
+
+    @Test
+    public void test8589() {
+        assertParsingFails("6, 12, 16, 29");
+    }
 }

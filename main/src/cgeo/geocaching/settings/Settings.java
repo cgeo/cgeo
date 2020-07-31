@@ -51,7 +51,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -832,6 +831,10 @@ public class Settings {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
 
+    public static void resetMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
+        putInt(prefKeyId, getKeyInt(defaultValueKeyId));
+    }
+
     public static int getCompactIconMode() {
         final String prefValue = getString(R.string.pref_compactIconMode, "");
         if (prefValue.equals(getKey(R.string.pref_compacticon_on))) {
@@ -1582,38 +1585,5 @@ public class Settings {
     public static RoutingMode getRoutingMode() {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
-
-private static int getNumString (final String nameAbbreviated) {
-        if (Objects.equals(nameAbbreviated, "GC")) {
-            return R.string.pref_found_num_GC;
-        } else if (Objects.equals(nameAbbreviated, "EC")) {
-            return R.string.pref_found_num_EC;
-        } else if (Objects.equals(nameAbbreviated, "GCAU")) {
-            return R.string.pref_found_num_GCAU;
-        } else if (Objects.equals(nameAbbreviated, "WM")) {
-            return R.string.pref_found_num_WM;
-        } else if (Objects.equals(nameAbbreviated, "TC")) {
-            return R.string.pref_found_num_TC;
-        } else if (Objects.equals(nameAbbreviated, "GC.SU")) {
-            return R.string.pref_found_num_GCSU;
-        } else if (Objects.equals(nameAbbreviated, "geopeitus.ee")) {
-            return R.string.pref_found_num_geopeitus;
-        } else if (Objects.equals(nameAbbreviated, "OC.CZ")) {
-            return R.string.pref_found_num_OCCZ;
-        } else if (Objects.equals(nameAbbreviated, "OC.DE")) {
-            return R.string.pref_found_num_OCDE;
-        }
-        return 0;
-    }
-
-
-    public static int getCachedFoundNum(final String nameAbbreviated) {
-        return getInt(getNumString(nameAbbreviated), 0);
-    }
-
-    public static void setCachedFoundNum(final int num, final String nameAbbreviated) {
-        putInt(getNumString(nameAbbreviated), num);
-    }
+    
 }
-
-

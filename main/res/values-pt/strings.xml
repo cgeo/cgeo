@@ -936,6 +936,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_found_last_30_days">Encontradas nos últimos 30 dias</string>
     <string name="cache_status_archived">Arquivada</string>
     <string name="cache_status_disabled">Desactivada</string>
+    <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
     <string name="cache_status_not_premium">Disponível para todos os membros</string>
     <string name="cache_status_stored">Armazenada</string>
@@ -1505,6 +1506,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em \'geocaching.com\' fizeram com que o mapa da vista em tempo real não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar, ou comportar-se inesperadamente!\nToque nesta mensagem para obter mais informações.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, devido ao sítio Web ou a outras alterações técnicas. Por favor, leia as nossas FAQ para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
@@ -1641,6 +1643,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <string name="save_sorted_route">Guardar</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
+    <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>

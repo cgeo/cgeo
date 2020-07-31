@@ -39,6 +39,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
+import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -107,6 +108,18 @@ public class DataStore {
         DATABASE,
     }
 
+    public enum DBExtensionType {
+        // values for id must not be changed, as there are database entries depending on it
+        DBEXTENSION_INVALID(0), 
+        DBEXTENSION_FOUNDNUM(2);
+        
+        public int id;
+
+        DBExtensionType(final int id) {
+            this.id = id;
+        }
+    }
+
     private static final Func1<Cursor, String> GET_STRING_0 = cursor -> cursor.getString(0);
 
     private static final Func1<Cursor, Integer> GET_INTEGER_0 = cursor -> cursor.getInt(0);
@@ -170,7 +183,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 81;
+    private static final int dbVersion = 82;
     public static final int customListIdOffset = 10;
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -187,6 +200,7 @@ public class DataStore {
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
     @NonNull private static final String dbTableRoute = "cg_table_route";
+    @NonNull private static final String dbTableExtension = "cg_table_extension";
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE " + dbTableCaches + " ("
@@ -363,7 +377,170 @@ public class DataStore {
             + "geocode TEXT"
             + "); ";
 
+    private static final String dbCreateExtension
+            = "CREATE TABLE " + dbTableExtension + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "_type INTEGER DEFAULT " + DBEXTENSION_INVALID.id + ", "
+            + "_key VARCHAR(50), "
+            + "long1 LONG DEFAULT 0, "
+            + "long2 LONG DEFAULT 0, "
+            + "string1 TEXT, "
+            + "string2 TEXT"
+            + "); ";
+
     private static final String SEQUENCE_INTERNAL_CACHE = "seq_internal_cache";
+
+    public static class DBExtension {
+
+        // reflect actual database schema (+ type param)
+        protected long id;
+        protected String key;
+        protected long long1;
+        protected long long2;
+        protected String string1;
+        protected String string2;
+
+        protected DBExtension() {
+            // utility class
+        }
+
+        /**
+         * internal constructor for database queries
+         */
+        protected DBExtension(final long id, final String key, final long long1, final long long2, final String string1, final String string2) {
+            this.id = id;
+            this.key = key;
+            this.long1 = long1;
+            this.long2 = long2;
+            this.string1 = string1;
+            this.string2 = string2;
+        }
+
+        /**
+         * get the first entry for this key
+         */
+        @Nullable
+        protected static DBExtension load(final DBExtensionType type, @NonNull final String key) {
+            checkState(type, key, false);
+            init();
+            try (Cursor cursor = database.query(dbTableExtension,
+                    new String[]{"_id", "_key", "long1", "long2", "string1", "string2"},
+                    "_type = ? AND _key LIKE ?",
+                    new String[]{String.valueOf(type.id), key},
+                    null, null, "_id", "1")) {
+                if (cursor.moveToNext()) {
+                    return new DBExtension(cursor.getLong(0), cursor.getString(1), cursor.getLong(2), cursor.getLong(3), cursor.getString(4), cursor.getString(5));
+                }
+            }
+            return null;
+        }
+
+        /**
+         * get a list of all entries for this key (if key != null) / for this type (if key is null)
+         */
+        protected static ArrayList<DBExtension> getAll(final DBExtensionType type, @Nullable final String key) {
+            checkState(type, key, true);
+            init();
+            final ArrayList<DBExtension> result = new ArrayList<>();
+            try (Cursor cursor = database.query(dbTableExtension,
+                    new String[]{"_id", "_key", "long1", "long2", "string1", "string2"},
+                    "_type = ?" + (null == key ? "" : " AND _key LIKE ?"),
+                    null == key ? new String[]{String.valueOf(type)} : new String[]{String.valueOf(type), key},
+                    null, null, "_id", "1")) {
+                while (cursor.moveToNext()) {
+                    result.add(new DBExtension(cursor.getLong(1), cursor.getString(2), cursor.getLong(3), cursor.getLong(4), cursor.getString(5), cursor.getString(6)));
+                }
+            }
+            return result;
+        }
+
+        /**
+         * adds a new entry to database
+         */
+        protected static DBExtension add(final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
+            init();
+            try {
+                final SQLiteStatement sql = PreparedStatement.EXTENSION_INSERT.getStatement();
+                sql.bindAllArgsAsStrings(new String[]{String.valueOf(type.id), key, String.valueOf(long1), String.valueOf(long2), string1, string2});
+                final long id = sql.executeInsert();
+                return new DBExtension(id, key, long1, long2, string1, string2);
+            } catch (final Exception e) {
+                Log.e("DBExtension.add failed", e);
+            }
+            return null;
+        }
+
+        /**
+         * updates current object into database
+         */
+        protected void updateThis() {
+            if (id <= 0) {
+                throw new IllegalStateException("DBExtension.set: no id set");
+            }
+            init();
+            try {
+                final SQLiteStatement sql = PreparedStatement.EXTENSION_UPDATE.getStatement();
+                sql.bindAllArgsAsStrings(new String[]{String.valueOf(long1), String.valueOf(long2), string1, string2, String.valueOf(id)});
+                sql.executeUpdateDelete();
+            } catch (final Exception e) {
+                Log.e("DBExtension.set failed", e);
+            }
+        }
+
+        /**
+         * removes this element from database
+         */
+        public void removeThis() {
+            init();
+            if (id <= 0) {
+                throw new IllegalStateException("DBExtension.removeThis: id not set");
+            }
+            database.delete(dbTableExtension, "_id = ? AND key LIKE ?", new String[]{ String.valueOf(id), key });
+        }
+
+        /**
+         * removes all elements with this key from database
+         */
+        public static void removeAll(final DBExtensionType type, final String key) {
+            checkState(type, key, false);
+            init();
+            database.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{ String.valueOf(type.id), key });
+        }
+
+        private static void checkState(final DBExtensionType type, @Nullable final String key, final boolean nullable) {
+            if (type == DBEXTENSION_INVALID) {
+                throw new IllegalStateException("DBExtension: type must be set to valid type");
+            }
+            if (!StringUtils.isNotBlank(key) && !(nullable && null == key)) {
+                throw new IllegalStateException("DBExtension: key value must be set");
+            }
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public long getLong1() {
+            return long1;
+        }
+
+        public long getLong2() {
+            return long2;
+        }
+
+        public String getString1() {
+            return string1;
+        }
+
+        public String getString2() {
+            return string2;
+        }
+
+    }
 
     private DataStore() {
         // utility class
@@ -982,6 +1159,16 @@ public class DataStore {
                         }
                     }
 
+                    // add extension table
+                    if (oldVersion < 82) {
+                        try {
+                            db.execSQL(dbCreateExtension);
+
+                            Log.i("Added table " + dbTableExtension + ".");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 82", e);
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1067,6 +1254,7 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableSearchDestinationHistory);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrailHistory);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableRoute);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableExtension);
         }
 
     }
@@ -2267,13 +2455,14 @@ public class DataStore {
     }
 
     /**
-     * Loads the trail history from the database
+     * Loads the trail history from the database, limited to allowed MAX_TRAILHISTORY_LENGTH
+     * Trail is returned in chronological order, oldest entry first.
      *
      * @return A list of previously trail points or an empty list.
      */
     @NonNull
     public static ArrayList<Location> loadTrailHistory() {
-        return queryToColl(dbTableTrailHistory,
+        final ArrayList<Location> temp = queryToColl(dbTableTrailHistory,
                 new String[]{"_id", "latitude", "longitude"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
@@ -2286,11 +2475,13 @@ public class DataStore {
                     l.setLongitude(cursor.getDouble(2));
                     return l;
                 });
+        Collections.reverse(temp);
+        return temp;
     }
 
     public static Location[] loadTrailHistoryAsArray() {
         init();
-        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id DESC", null);
+        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id ASC", null);
         final Location[] result = new Location[cursor.getCount()];
         int iPosition = 0;
         try {
@@ -2840,6 +3031,17 @@ public class DataStore {
 
         Log.d("Database clean: removing non-existing logs from logimages");
         database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
+
+        Log.d("Database clean: remove non-existing extension values");
+        final DBExtensionType[] extensionValues = DBExtensionType.values();
+        if (extensionValues.length > 0) {
+            String keys = "";
+            for (DBExtensionType id : extensionValues) {
+                keys += (StringUtils.isNotBlank(keys) ? "," : "") + id.id;
+            }
+            database.delete(dbTableExtension, "_key NOT IN (" + keys + ")", null);
+        }
+        database.delete(dbTableExtension, "_key=" + DBEXTENSION_INVALID.id, null);
     }
 
     /**
@@ -3612,7 +3814,9 @@ public class DataStore {
         SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
-        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL");
+        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
+        EXTENSION_UPDATE("UPDATE " + dbTableExtension + " SET long1=?, long2=?, string1=? string2=? WHERE _id=?"),
+        EXTENSION_INSERT("INSERT INTO " + dbTableExtension + " (_type, _key, long1, long2, string1, string2) VALUES (?, ?, ?, ?, ?, ?)");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 

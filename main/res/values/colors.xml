@@ -27,6 +27,8 @@
     <color name="button_default">#282828</color>
     <color name="steel">#675C68</color>
 
+    <color name="colorAccent">#F5981D</color>
+
     <color name="default_trailcolor">#80000000</color>
     <color name="default_routecolor">#800000FF</color>
     <color name="default_trackcolor">#80008000</color>

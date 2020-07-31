@@ -178,7 +178,7 @@ public class SuParser {
         }
 
         if (data.has(CACHE_PERSONAL_NOTE)) {
-            cache.setPersonalNote(data.get(CACHE_PERSONAL_NOTE).asText());
+            cache.setPersonalNote(data.get(CACHE_PERSONAL_NOTE).asText(), true);
         }
 
         cache.setDescription(descriptionBuilder.toString());

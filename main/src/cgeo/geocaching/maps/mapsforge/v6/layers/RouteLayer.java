@@ -22,8 +22,13 @@ public class RouteLayer extends AbstractLineLayer implements Route.RouteUpdater 
     public RouteLayer(final PostRealDistance postRealRouteDistance) {
         super();
         this.postRealRouteDistance = postRealRouteDistance;
-        lineColor = MapLineUtils.getRouteColor();
+        resetColor();
         width = MapLineUtils.getRouteLineWidth();
+    }
+
+    public void resetColor() {
+        lineColor = MapLineUtils.getRouteColor();
+        super.resetColors();
     }
 
     public void updateRoute(final ArrayList<Geopoint> route, final float distance) {

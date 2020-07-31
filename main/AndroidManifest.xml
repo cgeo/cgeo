@@ -228,35 +228,6 @@
         </activity>
         <activity android:name=".settings.ViewSettingsActivity" />
         <activity
-            android:name=".HandleLocalFilesActivity"
-            android:exported="true"
-            android:label="@string/localfile_intenttitle">
-            <!-- Accept local files for further filtering -->
-            <!-- Android itself does not support filtering local files by file extension, and MIME Types are mostly unset or generic for the files c:geo uses -->
-            <!-- Sadly, every file management tool on Android seems to handle things a bit differently, so we need to use some seemingly overlapping alternatives... -->
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:mimeType="application/octet-stream" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="content" />
-                <data android:mimeType="*/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="content" />
-            </intent-filter>
-
-        </activity>
-        <activity
             android:name=".settings.ReceiveMapFileActivity">
         </activity>
         <activity
@@ -266,6 +237,26 @@
             android:label="@string/app_name">
             <!-- don't use fixed parent activity, since we may come from main activity, pocket query activity or search activity -->
 
+            <!-- intent filter for local gpx files -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+                
+                <data android:mimeType="*/*" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.gpx" />
+                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
+                <data android:pathPattern=".*\\..*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\..*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+            </intent-filter>
+            
             <!-- intent filter for all gpx links, independent of mime types -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -282,7 +273,27 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
             </intent-filter>
+            
+            <!-- intent filter for local ggz files -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+                
+                <data android:mimeType="*/*" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.ggz" />
+                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
+                <data android:pathPattern=".*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
+            </intent-filter>
+            
             <!-- intent filter for GGZ links, independent of mime types -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -300,6 +311,26 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
             </intent-filter>
 
+            <!-- intent filter for ZIP files -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+                
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/x-compressed" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <data android:mimeType="application/x-zip" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:pathPattern=".*\\.gpx" />
+                <data android:pathPattern=".*\\.zip" />
+                <data android:pathPattern=".*\\.ggz" />
+            </intent-filter>
         </activity>
         <activity
             android:exported="true"

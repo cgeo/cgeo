@@ -15,17 +15,18 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="10dip"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="@drawable/header">
 
             <ImageView
                 android:layout_width="200dip"
                 android:layout_height="200dip"
                 android:layout_gravity="center"
-                android:layout_margin="10dip"
+                android:layout_marginTop="25dip"
+                android:layout_marginBottom="10dip"
                 android:gravity="center"
                 android:scaleType="fitXY"
-                android:src="@drawable/cgeo_logo" />
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:layout_width="wrap_content"
