@@ -48,6 +48,7 @@
     <!-- attributes for ColorpickerPreference -->
     <declare-styleable name="ColorpickerPreference">
         <attr name="showOpaquenessSlider" format="boolean" />
+        <attr name="defaultColor" format="color" />
     </declare-styleable>
 
     <!-- attributes for SeekbarPreference -->

@@ -703,8 +703,8 @@
                 android:title="@string/init_trailcolor"
                 android:summary="@string/init_trailcolor_summary"
                 android:key="@string/pref_mapline_trailcolor"
-                android:defaultValue="@color/default_trailcolor"
                 android:dependency="@string/pref_maptrail"
+                app:defaultColor="@color/default_trailcolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_trailwidth"
@@ -723,7 +723,7 @@
                 android:title="@string/init_directioncolor"
                 android:summary="@string/init_directioncolor_summary"
                 android:key="@string/pref_mapline_directioncolor"
-                android:defaultValue="@color/default_directioncolor"
+                app:defaultColor="@color/default_directioncolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_directionwidth"
@@ -741,7 +741,7 @@
                 android:title="@string/init_routecolor"
                 android:summary="@string/init_routecolor_summary"
                 android:key="@string/pref_mapline_routecolor"
-                android:defaultValue="@color/default_routecolor"
+                app:defaultColor="@color/default_routecolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_routewidth"
@@ -759,7 +759,7 @@
                 android:title="@string/init_trackcolor"
                 android:summary="@string/init_trackcolor_summary"
                 android:key="@string/pref_mapline_trackcolor"
-                android:defaultValue="@color/default_trackcolor"
+                app:defaultColor="@color/default_trackcolor"
                 app:showOpaquenessSlider="true" />
             <Preference
                 android:title="@string/init_trackwidth"
@@ -777,13 +777,13 @@
                 android:title="@string/init_circlecolor"
                 android:summary="@string/init_circlecolor_summary"
                 android:key="@string/pref_mapline_circlecolor"
-                android:defaultValue="@color/default_circlecolor"
+                app:defaultColor="@color/default_circlecolor"
                 app:showOpaquenessSlider="true" />
             <cgeo.geocaching.settings.ColorpickerPreference
                 android:title="@string/init_circlefillcolor"
                 android:summary="@string/init_circlefillcolor_summary"
                 android:key="@string/pref_mapline_circlefillcolor"
-                android:defaultValue="@color/default_circlefillcolor"
+                app:defaultColor="@color/default_circlefillcolor"
                 app:showOpaquenessSlider="true" />
         </PreferenceCategory>
 
