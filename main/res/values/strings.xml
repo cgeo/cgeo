@@ -1195,9 +1195,6 @@
     <string name="map_rotation">Map rotation</string>
     <string name="map_hide">Hide</string>
     <string name="map_trail_show">Show history track</string>
-    <string name="map_reset_linecolors">Reset line colors</string>
-    <string name="map_reset_linecolors_confirm">Do you want to reset all configurable map lines to their default colors?</string>
-    <string name="map_reset_linecolors_ok">Line colors reset</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
