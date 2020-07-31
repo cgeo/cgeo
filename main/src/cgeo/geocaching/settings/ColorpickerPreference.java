@@ -5,10 +5,12 @@ import cgeo.geocaching.utils.DisplayUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -32,6 +34,8 @@ public class ColorpickerPreference extends DialogPreference {
     private int color = 0xffff0000;                 // currently selected color (incl. opaqueness)
     private boolean showOpaquenessSlider = false;   // show opaqueness slider?
     private int originalColor = 0xffff0000;         // remember color on instantiating or ok-ing the dialog
+    private int defaultColor = 0xffff0000;          // default value (for reset)
+    private boolean hasDefaultValue = false;
 
     private GridLayout colorSchemeGrid = null;
     private GridLayout colorGrid = null;
@@ -66,6 +70,11 @@ public class ColorpickerPreference extends DialogPreference {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ColorpickerPreference, defStyle, 0);
         try {
             showOpaquenessSlider = a.getBoolean(R.styleable.ColorpickerPreference_showOpaquenessSlider, false);
+            hasDefaultValue = a.hasValue(R.styleable.ColorpickerPreference_defaultColor);
+            if (hasDefaultValue) {
+                defaultColor = a.getColor(R.styleable.ColorpickerPreference_defaultColor, defaultColor);
+                color = defaultColor;
+            }
         } finally {
             a.recycle();
         }
@@ -164,13 +173,37 @@ public class ColorpickerPreference extends DialogPreference {
     }
 
     @Override
+    protected void onPrepareDialogBuilder(final AlertDialog.Builder builder) {
+        super.onPrepareDialogBuilder(builder);
+        if (hasDefaultValue) {
+            builder.setNeutralButton(R.string.reset_to_default, this);
+        }
+    }
+
+    @Override
+    protected void showDialog(final Bundle bundle) {
+        super.showDialog(bundle);
+        if (hasDefaultValue) {
+            // override onClick listener to prevent closing dialog on pressing the "default" button
+            ((AlertDialog) getDialog()).getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
+                color = defaultColor;
+                final int opaqueness = getOpaqueness();
+                if (null != opaquenessSlider) {
+                    opaquenessSlider.setProgress(opaqueness);
+                }
+                selectOpaqueness(opaqueness);
+            });
+        }
+    }
+
+    @Override
     protected Object onGetDefaultValue(final TypedArray a, final int index) {
-        return a.getInt(index, 0xffff0000);
+        return a.getInt(index, defaultColor);
     }
 
     @Override
     protected void onSetInitialValue(final boolean restoreValue, final Object defaultValue) {
-        setValue(restoreValue ? getPersistedInt(0) : (Integer) defaultValue);
+        setValue(restoreValue ? getPersistedInt(defaultColor) : (Integer) defaultValue);
     }
 
     public void setValue(final int value) {
