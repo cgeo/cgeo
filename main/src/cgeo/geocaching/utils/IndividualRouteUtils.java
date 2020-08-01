@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.export.IndividualRouteExport;
 import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 
@@ -33,11 +34,14 @@ public class IndividualRouteUtils {
      * @param id       menu entry id
      * @return true, if selected menu entry is individual route related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable clearIndividualRoute) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Route route, final Runnable clearIndividualRoute) {
         switch (id) {
             case R.id.menu_clear_individual_route:
                 clearIndividualRoute.run();
                 ActivityMixin.invalidateOptionsMenu(activity);
+                return true;
+            case R.id.menu_export_individual_route:
+                new IndividualRouteExport(activity, route);
                 return true;
             case R.id.menu_sort_individual_route:
                 activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);

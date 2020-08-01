@@ -907,7 +907,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
-                && !IndividualRouteUtils.onOptionsItemSelected(activity, id, this::clearIndividualRoute)
+                && !IndividualRouteUtils.onOptionsItemSelected(activity, id, route, this::clearIndividualRoute)
                 && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
                     final MapSource mapSource = MapProviderFactory.getMapSource(id);
                     if (mapSource != null) {
