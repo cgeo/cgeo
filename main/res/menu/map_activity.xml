@@ -278,6 +278,10 @@
                 android:title="@string/map_sort_individual_route">
             </item>
             <item
+                android:id="@+id/menu_export_individual_route"
+                android:title="@string/map_export_individual_route">
+            </item>
+            <item
                 android:id="@+id/menu_clear_individual_route"
                 android:title="@string/map_clear_individual_route">
             </item>
