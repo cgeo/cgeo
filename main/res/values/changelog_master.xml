@@ -4,13 +4,20 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h4>Map:</h4>
 <ul>
-<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu)</li>
+<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
+<li>New: Open local .map files in c:geo by tapping on them</li>
 <li>Add option in map menu to reset all map colors</li>
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
 <li>Changed sync logic for personal notes in caches</li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>Internal: Added extension table to database</li>
+<li>Internal: Fixed some issues with database structure</li>
 </ul>
 </div>]]></Data>
   </string>
