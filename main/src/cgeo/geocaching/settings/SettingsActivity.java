@@ -29,6 +29,7 @@ import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.SharedPrefsBackupUtils;
 import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
@@ -704,6 +705,11 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data)) {
+            return;
+        }
+
         if (resultCode != RESULT_OK) {
             return;
         }

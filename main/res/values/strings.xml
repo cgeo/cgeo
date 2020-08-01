@@ -1865,7 +1865,8 @@
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
-    <string name="downloadmap_info">You will be redirected to a download site for basic offline maps (no themeing support).\n\nChose the .map file for your region and tap on it to download the file.\n\nWhen downloading has completed, tap on the downloaded file to set this map as current map for c:geo</string>
+    <string name="downloadmap_info">Choose a map file for your region by tapping the \"Save\" icon.\n\nDownloading will run in the background. When downloading has completed, the downloaded file will be copied to c:geo\'s map directory and set as current map for c:geo.\n\nBe careful: Downloading a map can cause high network traffic!</string>
+    <string name="downloadmap_choose">Choose map</string>
     <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
 
