@@ -6,7 +6,7 @@
 <ul>
 <li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
 <li>New: Open local .map files in c:geo by tapping on them</li>
-<li>Add option in map menu to reset all map colors</li>
+<li>New: Colorpicker for map lines offers "default" button</li>
 </ul>
 
 <h4>Cache details:</h4>
