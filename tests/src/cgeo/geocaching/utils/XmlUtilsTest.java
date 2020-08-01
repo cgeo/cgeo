@@ -4,8 +4,8 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.lang3.CharEncoding;
 import org.junit.Before;
 import org.junit.Test;
 import org.xmlpull.v1.XmlSerializer;
@@ -22,7 +22,7 @@ public class XmlUtilsTest {
         stringWriter = new StringWriter();
         xml = new KXmlSerializer();
         xml.setOutput(stringWriter);
-        xml.startDocument(CharEncoding.UTF_8, null);
+        xml.startDocument(StandardCharsets.UTF_8.name(), null);
     }
 
     @Test

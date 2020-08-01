@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -27,7 +28,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
 
@@ -78,7 +78,7 @@ public final class GpxSerializer {
         this.progressListener = progressListener;
         gpx.setOutput(writer);
 
-        gpx.startDocument(CharEncoding.UTF_8, true);
+        gpx.startDocument(StandardCharsets.UTF_8.name(), true);
         gpx.setPrefix(PREFIX_GPX, NS_GPX);
         gpx.setPrefix(PREFIX_XSI, NS_XSI);
         gpx.setPrefix(PREFIX_GROUNDSPEAK, NS_GROUNDSPEAK);
