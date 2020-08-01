@@ -231,6 +231,31 @@
             android:name=".settings.ReceiveMapFileActivity">
         </activity>
         <activity
+            android:name=".HandleLocalFilesActivity"
+            android:exported="true"
+            android:label="@string/localfile_intenttitle">
+            <!-- don't use fixed parent activity, since we may come from main activity, pocket query activity or search activity -->
+            <!-- intent filter for local map files -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.map" />
+                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
+                <data android:pathPattern=".*\\..*\\.map" />
+                <data android:pathPattern=".*\\..*\\..*\\.map" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.map" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.map" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".CacheListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
