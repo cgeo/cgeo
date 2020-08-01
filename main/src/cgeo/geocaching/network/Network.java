@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +54,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.TlsVersion;
 import org.apache.commons.compress.utils.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.Jsoup;
@@ -647,7 +647,7 @@ public final class Network {
     @Nullable
     public static String decode(final String text) {
         try {
-            return URLDecoder.decode(text, CharEncoding.UTF_8);
+            return URLDecoder.decode(text, StandardCharsets.UTF_8.name());
         } catch (final UnsupportedEncodingException e) {
             Log.e("Network.decode", e);
         }
@@ -657,7 +657,7 @@ public final class Network {
     @Nullable
     public static String encode(final String text) {
         try {
-            return URLEncoder.encode(text, CharEncoding.UTF_8);
+            return URLEncoder.encode(text, StandardCharsets.UTF_8.name());
         } catch (final UnsupportedEncodingException e) {
             Log.e("Network.encode", e);
         }

@@ -20,6 +20,7 @@ import androidx.core.os.EnvironmentCompat;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -27,7 +28,6 @@ import java.util.regex.Pattern;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -216,7 +216,7 @@ public final class LocalStorage {
         final File file = new File(FILE_SYSTEM_TABLE_PATH);
         if (file.canRead()) {
             try {
-                for (final String str : org.apache.commons.io.FileUtils.readLines(file, CharEncoding.UTF_8)) {
+                for (final String str : org.apache.commons.io.FileUtils.readLines(file, StandardCharsets.UTF_8.name())) {
                     if (str.startsWith("dev_mount")) {
                         final String[] tokens = StringUtils.split(str);
                         if (tokens.length >= 3) {

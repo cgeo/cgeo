@@ -28,6 +28,7 @@ import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -35,7 +36,6 @@ import java.util.Scanner;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -63,7 +63,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             Scanner scanner = null;
             try {
                 ins = res.openRawResource(resourceId);
-                scanner = new Scanner(ins, CharEncoding.UTF_8);
+                scanner = new Scanner(ins, StandardCharsets.UTF_8.name());
                 return scanner.useDelimiter("\\A").next();
             } finally {
                 IOUtils.closeQuietly(ins);

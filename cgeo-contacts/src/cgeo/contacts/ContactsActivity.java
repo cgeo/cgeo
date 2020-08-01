@@ -20,10 +20,10 @@ import androidx.annotation.NonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 public final class ContactsActivity extends Activity {
@@ -158,7 +158,7 @@ public final class ContactsActivity extends Activity {
             if (param == null) {
                 return StringUtils.EMPTY;
             }
-            return URLDecoder.decode(param, CharEncoding.UTF_8).trim();
+            return URLDecoder.decode(param, StandardCharsets.UTF_8.name()).trim();
         } catch (final UnsupportedEncodingException e) {
             Log.e(LOG_TAG, "ContactsActivity.getParameter", e);
         }

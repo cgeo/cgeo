@@ -28,7 +28,6 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.xmlpull.v1.XmlSerializer;
 
 public class TrailHistoryExport {
@@ -100,7 +99,7 @@ public class TrailHistoryExport {
                 int countExported = 0;
                 gpx.setOutput(writer);
 
-                gpx.startDocument(CharEncoding.UTF_8, true);
+                gpx.startDocument(StandardCharsets.UTF_8.name(), true);
                 gpx.setPrefix(PREFIX_GPX, NS_GPX);
                 gpx.setPrefix(PREFIX_XSI, NS_XSI);
 
