@@ -2,8 +2,10 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.UrlPopup;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Preference which shows a dialog containing textual explanation. The dialog has two buttons, where one will open a
@@ -27,27 +31,25 @@ public abstract class AbstractInfoPreference extends AbstractAttributeBasedPrefe
      * Content of the dialog, filled from preferences XML.
      */
     protected String text;
-    /**
-     * URL for the second button, filled from preferences XML.
-     */
-    protected String url;
-    /**
-     * text for the second button to open an URL, filled from preferences XML.
-     */
     private String urlButton;
 
+    private boolean isIntent = false;
     protected int icon;
-    protected boolean forwarder = false;
     protected LayoutInflater inflater;
 
+    // for isIntent == true:
+    private Runnable startIntent;
+
+    // for isIntent == false:
+    protected String url;
+    protected boolean forwarder = false;
+
     public AbstractInfoPreference(final Context context) {
-        super(context);
-        init(context, R.layout.preference_info_icon, false);
+        this(context, null);
     }
 
     public AbstractInfoPreference(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
-        init(context, R.layout.preference_info_icon, false);
+        this(context, attrs, android.R.attr.preferenceStyle);
     }
 
     public AbstractInfoPreference(final Context context, final AttributeSet attrs, final int defStyle) {
@@ -56,9 +58,20 @@ public abstract class AbstractInfoPreference extends AbstractAttributeBasedPrefe
     }
 
     protected void init(final Context context, final int icon, final boolean forwarder) {
-        this.icon = icon;
+        this.isIntent = false;
         this.forwarder = forwarder;
+
+        this.icon = icon;
         inflater = LayoutInflater.from(context);
+        setPersistent(false);
+    }
+
+    protected void init(final Activity activity, final int icon, final Runnable startIntent) {
+        this.isIntent = true;
+        this.startIntent = startIntent;
+
+        this.icon = icon;
+        inflater = LayoutInflater.from(activity);
         setPersistent(false);
     }
 
@@ -81,10 +94,18 @@ public abstract class AbstractInfoPreference extends AbstractAttributeBasedPrefe
 
         // show popup when clicked
         setOnPreferenceClickListener(preference -> {
-            if (forwarder) {
-                new UrlPopup(preference.getContext()).forward(preference.getTitle().toString(), text, url);
+            if (isIntent) {
+                if (StringUtils.isNotBlank(text) && StringUtils.isNotBlank(urlButton)) {
+                    Dialogs.confirm((Activity) preference.getContext(), preference.getTitle().toString(), text, urlButton, (dialog, which) -> startIntent.run());
+                } else {
+                    startIntent.run();
+                }
             } else {
-                new UrlPopup(preference.getContext()).show(preference.getTitle().toString(), text, url, urlButton);
+                if (forwarder) {
+                    new UrlPopup(preference.getContext()).forward(preference.getTitle().toString(), text, url);
+                } else {
+                    new UrlPopup(preference.getContext()).show(preference.getTitle().toString(), text, url, urlButton);
+                }
             }
             // don't update the preference value
             return false;
