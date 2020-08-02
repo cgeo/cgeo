@@ -844,6 +844,11 @@
     <string name="cache_menu_preventWaypointsFromNote">Blokovat waypointy z poznámky</string>
     <string name="cache_menu_allowWaypointExtraction">Povolit waypointy z poznámky</string>
     <string name="cache_personal_note_edit">Upravit</string>
+    <string name="cache_personal_note_storewaypoints">Ukládat body trasy</string>
+    <string name="cache_personal_note_storewaypoints_success">Do osobní poznámky byly přidány trasové body</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Body trasy byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Body trasy nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nebyly nalezeny žádné uživatelské body trasy</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabránit přenosu waypointů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
@@ -1116,9 +1121,6 @@
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_hide">Skrýt</string>
     <string name="map_trail_show">Zobrazit historii trasy</string>
-    <string name="map_reset_linecolors">Obnovit barvy čar</string>
-    <string name="map_reset_linecolors_confirm">Chcete obnovit výchozí barvu u všech konfigurovatelných čar v mapě?</string>
-    <string name="map_reset_linecolors_ok">Barvy čar obnoveny</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
     <string name="map_circles_show">Zobrazit kruhy</string>
     <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
@@ -1669,6 +1671,7 @@
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
     <string name="preference_colorpicker_select_color">Zvolit barvu</string>
     <string name="preference_colorpicker_select_opaqueness">Zvolit neprůhlednost</string>
+    <string name="reset_to_default">Výchozí</string>
     <!-- number input -->
     <string name="number_input_title">Zadejte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je příliš malá – obnoveno na min. hodnotu</string>
@@ -1685,6 +1688,7 @@
     <string name="individual_route_error_toggling_waypoint">chyba přepínání waypointu</string>
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
+    <string name="map_export_individual_route">Exportovat individuální trasu</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <string name="save_sorted_route">Uložit</string>
@@ -1726,7 +1730,8 @@
     <string name="receivemapfile_cancelled">Přenos mapového souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
-    <string name="downloadmap_info">Budete přesměrováni na web ke stažení základní offline mapy (bez podpory motivů).\n\nVyberte soubor .map pro vaši oblast a klepnutím na něj soubor stáhněte.\n\nPo dokončení stahování klepněte na stažený soubor a nastavte tuto mapu jako aktuální mapu pro c: geo</string>
+    <string name="downloadmap_info">Klepnutím na ikonu „Uložit“ vyberte soubor mapy pro svůj region.\n\nZahájí se stahování na pozadí. Po dokončení stahování bude stažený soubor zkopírován do adresáře aplikace c:geo obsahující mapy a nastaven jako aktuální mapa pro c:geo.\n\nBuďte opatrní: Stahování mapy může mít za následek vysoký síťový provoz!</string>
+    <string name="downloadmap_choose">Vybrat mapu</string>
     <string name="downloadmanager_not_available">Soubor s mapou nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
     <!-- history trail export -->
@@ -1734,4 +1739,7 @@
     <string name="export_trailhistory_title">Exportovat historii trasy</string>
     <string name="export_trailhistory_success">Historie trasy exportována do \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Po exportu vymazat historii trasy</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Exportovat individuální trasu</string>
+    <string name="export_individualroute_success">Individuální trasa exportována do \"%s\"</string>
 </resources>
