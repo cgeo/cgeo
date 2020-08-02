@@ -1098,9 +1098,6 @@
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_hide">Piilota</string>
     <string name="map_trail_show">Näytä reittihistoria</string>
-    <string name="map_reset_linecolors">Nollaa viivojen värit</string>
-    <string name="map_reset_linecolors_confirm">Haluatko nollata kaikki muokattavat viivojen värit niiden oletusväreihin?</string>
-    <string name="map_reset_linecolors_ok">Viivojen värit nollattu</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>

@@ -993,7 +993,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points intermédiaires depuis %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d caches importées de %2$s</string>
     <string name="gpx_import_static_maps_skipped">Chargement des cartes statiques interrompu</string>
     <string name="gpx_import_title_reading_file">Lecture du fichier</string>
     <string name="gpx_import_title">Import GPX</string>

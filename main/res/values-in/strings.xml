@@ -80,7 +80,6 @@
     <string name="log_saving_and_uploading">Memposting log dan mengunggah gambar&#8230;</string>
     <string name="log_posting_log">Memposting log&#8230;</string>
     <string name="log_posting_twitter">Posting tweet&#8230;</string>
-    <string name="log_posting_gcvote">Memposting GCVote&#8230;</string>
     <string name="log_posting_image">Memposting gambar&#8230;</string>
     <string name="log_posting_generic_trackable">Mencatat %1$s %2$d/%3$d</string>
     <string name="log_clear">Bersihkan</string>
@@ -412,8 +411,6 @@
     <string name="init_summary_su">Muat cache dari Geocaching.su</string>
     <string name="settings_activate_su">Aktifkan</string>
     <string name="init_gcvote_password_description">Untuk bisa menilai sebuah cache, anda perlu mengikuti petunjuk di GCVote.com dan masukkan kata sandi GCVote anda di sini.</string>
-    <string name="err_gcvote_send_rating">Kesalahan ketika mengirim penilaian, periksa kata sandi GCVote di pengaturan atau kosongkan itu.</string>
-    <string name="gcvote_sent">Pemungutan suara berhasil dikirim</string>
     <string name="settings_activate_twitter">Aktifkan</string>
     <string name="init_login_popup_working">Sedang masuk&#8230;</string>
     <string name="init_login_popup_ok">Masuk Ok</string>
@@ -778,7 +775,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Memuat cache dri %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Memuat waypoints dari %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d cache diimpor dari %2$s</string>
     <string name="gpx_import_static_maps_skipped">Download peta statis dibatalkan</string>
     <string name="gpx_import_title_reading_file">Membaca file</string>
     <string name="gpx_import_title">Impor GPX</string>

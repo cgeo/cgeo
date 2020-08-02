@@ -80,7 +80,6 @@
     <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
     <string name="log_posting_log">Sender logbesked…</string>
     <string name="log_posting_twitter">Sender tweet…</string>
-    <string name="log_posting_gcvote">Sender GCVote…</string>
     <string name="log_posting_image">Sender billede…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
@@ -458,8 +457,6 @@
     <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
     <string name="settings_activate_su">Aktivér</string>
     <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
-    <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
-    <string name="gcvote_sent">Bedømmelse blev afsendt</string>
     <string name="settings_activate_twitter">Aktivér</string>
     <string name="init_login_popup_working">Logger ind…</string>
     <string name="init_login_popup_failed">Login fejlede</string>
@@ -860,7 +857,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Indlæser cacher fra %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Indlæser waypoints fra %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d cacher importeret fra %2$s</string>
     <string name="gpx_import_static_maps_skipped">Indlæsning af statiske kort blev afbrudt</string>
     <string name="gpx_import_title_reading_file">Indlæser fil</string>
     <string name="gpx_import_title">Importér GPX</string>

@@ -92,7 +92,6 @@
     <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
     <string name="log_posting_twitter">트위터에 올리는 중…</string>
-    <string name="log_posting_gcvote">GCVote에 올리는 중…</string>
     <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
@@ -509,8 +508,6 @@
     <string name="init_summary_su">Geocaching.su 에서 캐시 불러오기</string>
     <string name="settings_activate_su">활성화</string>
     <string name="init_gcvote_password_description">캐시를 평가하려면, GCVote.com의 지시사항에 따른 후, GCVOte의 비밀번호를 여기 입력하세요.</string>
-    <string name="err_gcvote_send_rating">평가를 보내는중 오류발생. 설정에서 GCVote 비밀번호를 확인하거나 없애세요.</string>
-    <string name="gcvote_sent">투표가 성공적으로 송신됨</string>
     <string name="settings_activate_twitter">활성화</string>
     <string name="init_login_popup">로그인</string>
     <string name="init_login_popup_working">로그인 중…</string>
@@ -981,7 +978,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s 에서 캐시 불러오는 중</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s 에서 웨이포인트 불러오는 중</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d 개의 캐시를 %2$s 에서 가져왔습니다.</string>
     <string name="gpx_import_static_maps_skipped">정적지도 다운로드가 중단됨</string>
     <string name="gpx_import_title_reading_file">파일 읽는 중</string>
     <string name="gpx_import_title">GPX 가져오기</string>

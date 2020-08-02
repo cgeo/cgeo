@@ -73,7 +73,6 @@
     <string name="log_saving_and_uploading">Set færslu inn og hleð upp mynd…</string>
     <string name="log_posting_log">Set færslu inn…</string>
     <string name="log_posting_twitter">Set tíst inn…</string>
-    <string name="log_posting_gcvote">Set inn GCVote…</string>
     <string name="log_posting_image">Set inn mynd…</string>
     <string name="log_posting_generic_trackable">Set inn %1$s %2$d/%3$d</string>
     <string name="log_clear">Hreinsa</string>

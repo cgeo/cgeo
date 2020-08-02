@@ -92,7 +92,6 @@
     <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
     <string name="log_posting_log">Wysyłanie wpisu…</string>
     <string name="log_posting_twitter">Wysyłanie tweetu…</string>
-    <string name="log_posting_gcvote">Wysyłanie GCVote…</string>
     <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
@@ -506,8 +505,6 @@
     <string name="init_summary_su">Załaduj skrzynki z Geocaching.su</string>
     <string name="settings_activate_su">Aktywuj</string>
     <string name="init_gcvote_password_description">Aby móc oceniać skrzynki, należy postępować zgodnie z instrukcjami zawartymi na  GCVote.com i podać swoje hasło do serwisu tutaj.</string>
-    <string name="err_gcvote_send_rating">Błąd podczas wysyłania oceny, sprawdź swoje hasło do GCVote w ustawieniach albo wyczyść je.</string>
-    <string name="gcvote_sent">Głos pomyślnie oddany</string>
     <string name="settings_activate_twitter">Aktywuj</string>
     <string name="init_login_popup">Nazwa użytkownika</string>
     <string name="init_login_popup_working">Logowanie…</string>
@@ -999,7 +996,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ładowanie skrzynek z %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ładowanie punktów orientacyjnych z %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d skrzynek zostało importowane z %2$s</string>
     <string name="gpx_import_static_maps_skipped">Pobieranie map statycznych wstrzymane</string>
     <string name="gpx_import_title_reading_file">Czytanie pliku</string>
     <string name="gpx_import_title">Importuj GPX</string>
