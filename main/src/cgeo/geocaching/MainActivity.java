@@ -259,6 +259,8 @@ public class MainActivity extends AbstractActionBarActivity {
             actionBar.setLogo(R.drawable.cgeo_actionbar_squircle);
             actionBar.setDisplayUseLogoEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
+
+            actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_transparent_example));
         }
 
         setContentView(R.layout.main_activity);

@@ -20,6 +20,7 @@
 <ul>
 <li>Internal: Added extension table to database</li>
 <li>Internal: Fixed some issues with database structure</li>
+<li>Apply c:geo's orange to start screen actionbar</li>
 </ul>
 </div>]]></Data>
   </string>
