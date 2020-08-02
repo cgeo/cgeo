@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -15,12 +16,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,22 +29,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageSelectActivity extends AbstractActionBarActivity {
 
     @BindView(R.id.caption) protected EditText captionView;
     @BindView(R.id.description) protected EditText descriptionView;
-    @BindView(R.id.logImageScale) protected Spinner scaleView;
     @BindView(R.id.camera) protected Button cameraButton;
     @BindView(R.id.stored) protected Button storedButton;
     @BindView(R.id.save) protected Button saveButton;
     @BindView(R.id.cancel) protected Button clearButton;
     @BindView(R.id.image_preview) protected ImageView imagePreview;
+
+    private final TextSpinner<Integer> imageScale = new TextSpinner<>();
 
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
@@ -58,7 +60,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     // Data to be saved while reconfiguring
     private Image image;
-    private int scaleChoiceIndex;
     private long maxImageUploadSize;
     private boolean imageCaptionMandatory;
 
@@ -67,13 +68,17 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         onCreate(savedInstanceState, R.layout.imageselect_activity);
         ButterKnife.bind(this);
 
-        scaleChoiceIndex = Settings.getLogImageScale();
+        imageScale.setSpinner(findViewById(R.id.logImageScale))
+                .setDisplayMapper(scaleSize -> scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) : getResources().getString(R.string.log_image_scale_option_entry, scaleSize))
+                .setChangeListener(scaleSize -> Settings.setLogImageScale(scaleSize))
+                .setValues(Arrays.asList(ArrayUtils.toObject(getResources().getIntArray(R.array.log_image_scale_values))));
+        imageScale.set(Settings.getLogImageScale());
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
-            scaleChoiceIndex = extras.getInt(Intents.EXTRA_SCALE, scaleChoiceIndex);
+            imageScale.set(extras.getInt(Intents.EXTRA_SCALE, imageScale.get()));
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = extras.getBoolean(Intents.EXTRA_IMAGE_CAPTION_MANDATORY);
             final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -83,7 +88,8 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // Restore previous state
         if (savedInstanceState != null) {
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
-            scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
+            imageScale.set(savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE));
+            //scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = savedInstanceState.getBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY);
         }
@@ -93,7 +99,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         }
 
         cameraButton.setOnClickListener(view -> selectImageFromCamera());
-
         storedButton.setOnClickListener(view -> selectImageFromStorage());
 
         if (image.hasTitle()) {
@@ -105,19 +110,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             descriptionView.setText(image.getDescription());
             Dialogs.moveCursorToEnd(captionView);
         }
-
-        scaleView.setSelection(scaleChoiceIndex);
-        scaleView.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
-                scaleChoiceIndex = scaleView.getSelectedItemPosition();
-                Settings.setLogImageScale(scaleChoiceIndex);
-            }
-
-            @Override
-            public void onNothingSelected(final AdapterView<?> arg0) {
-            }
-        });
 
         saveButton.setOnClickListener(v -> saveImageInfo(true));
 
@@ -131,7 +123,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         super.onSaveInstanceState(outState);
         syncEditTexts();
         outState.putParcelable(SAVED_STATE_IMAGE, image);
-        outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
+        outState.putInt(SAVED_STATE_IMAGE_SCALE, imageScale.get());
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
         outState.putBoolean(SAVED_STATE_IMAGE_CAPTION_MANDATORY, imageCaptionMandatory);
     }
@@ -167,7 +159,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         final Intent intent = new Intent();
                         syncEditTexts();
                         intent.putExtra(Intents.EXTRA_IMAGE, image);
-                        intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
+                        intent.putExtra(Intents.EXTRA_SCALE, imageScale.get());
                         setResult(RESULT_OK, intent);
                     } else {
                         showToast(res.getString(R.string.err_select_logimage_failed));
@@ -188,8 +180,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                 .setTitle(captionView.getText().toString())
                 .setDescription(descriptionView.getText().toString())
                 .build();
-
-        scaleChoiceIndex = scaleView.getSelectedItemPosition();
     }
 
     private void selectImageFromCamera() {
@@ -291,8 +281,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         if (filePath == null) {
             return null;
         }
-        scaleChoiceIndex = scaleView.getSelectedItemPosition();
-        final int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
+        final int maxXY = imageScale.get(); //getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
         return ImageUtils.readScaleAndWriteImage(filePath, maxXY);
     }
 
