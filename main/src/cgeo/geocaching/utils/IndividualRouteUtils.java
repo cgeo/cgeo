@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,8 +37,10 @@ public class IndividualRouteUtils {
     public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable clearIndividualRoute) {
         switch (id) {
             case R.id.menu_clear_individual_route:
-                clearIndividualRoute.run();
-                ActivityMixin.invalidateOptionsMenu(activity);
+                Dialogs.confirm(activity, R.string.map_clear_individual_route, R.string.map_clear_individual_route_confirm, (dialog, which) -> {
+                    clearIndividualRoute.run();
+                    ActivityMixin.invalidateOptionsMenu(activity);
+                });
                 return true;
             case R.id.menu_sort_individual_route:
                 activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
