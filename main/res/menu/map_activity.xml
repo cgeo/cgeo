@@ -270,12 +270,15 @@
     </item>
     <item
         android:id="@+id/menu_individual_route"
-        android:title="@string/individual_route"
-        android:visible="false">
+        android:title="@string/individual_route">
         <menu>
             <item
                 android:id="@+id/menu_sort_individual_route"
                 android:title="@string/map_sort_individual_route">
+            </item>
+            <item
+                android:id="@+id/menu_load_individual_route"
+                android:title="@string/map_load_individual_route">
             </item>
             <item
                 android:id="@+id/menu_export_individual_route"

@@ -36,6 +36,12 @@ public class RouteItem implements Parcelable {
         }
     }
 
+    public RouteItem (final CoordinatesType type, final String geocode) {
+        this.type = type;
+        this.geocode = geocode;
+        this.id = type == CoordinatesType.CACHE ? 0 : Integer.parseInt(geocode.substring(2));
+    }
+
     public CoordinatesType getType() {
         return this.type;
     }
