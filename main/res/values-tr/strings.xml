@@ -92,7 +92,6 @@
     <string name="log_saving_and_uploading">Kayıt gönderiliyor ve görüntü yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
     <string name="log_posting_twitter">Tweet gönderiliyor…</string>
-    <string name="log_posting_gcvote">GCVote gönderiliyor…</string>
     <string name="log_posting_image">Resim gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
@@ -500,8 +499,6 @@
     <string name="init_summary_su">Geocaching.su üzerinden Geocache\'leri yükle</string>
     <string name="settings_activate_su">Etkinleştir</string>
     <string name="init_gcvote_password_description">Bir Geocache\'i derecelendirmek için GCVote.com\'daki talimatları takip etmeniz ve buraya GCVote şifrenizi girmeniz gereklidir.</string>
-    <string name="err_gcvote_send_rating">Derecelendirme gönderilirken hata, ayarlardan GCVote şifresini kontrol edin veya şifreyi boş bırakın.</string>
-    <string name="gcvote_sent">Oylama başarıyla gönderildi</string>
     <string name="settings_activate_twitter">Etkinleştir</string>
     <string name="init_login_popup">Oturum açma</string>
     <string name="init_login_popup_working">Oturum açılıyor…</string>
@@ -970,7 +967,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Geocache\'ler %1$s\'den yükleniyor</string>
     <string name="gpx_import_loading_waypoints_with_filename">Yol noktaları %1$s\'den yükleniyor</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d Geocache %2$s\'den içe aktarıldı</string>
     <string name="gpx_import_static_maps_skipped">Statik haritaların indirilmesi iptal edildi</string>
     <string name="gpx_import_title_reading_file">Dosya okunuyor</string>
     <string name="gpx_import_title">GPX\'i İçe Aktar</string>

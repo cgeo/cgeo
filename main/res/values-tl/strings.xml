@@ -85,7 +85,6 @@
     <string name="log_saving_and_uploading">Pagsulat ng mensahe at pag-upload ng imahe&#8230;</string>
     <string name="log_posting_log">Ang pag-post ng log&#8230;</string>
     <string name="log_posting_twitter">Ang pag-post ng tweet&#8230;</string>
-    <string name="log_posting_gcvote">Ang pag-post ng GCvote&#8230;</string>
     <string name="log_posting_image">Ang pag-post ng imahe&#8230;</string>
     <string name="log_posting_generic_trackable">Ang pag-popost ay %1$s%2$d%3$d</string>
     <string name="log_clear">Malinaw</string>
@@ -423,8 +422,6 @@
     <string name="init_summary_su">Mag-load ng mga caches mula sa geocaching.su</string>
     <string name="settings_activate_su">Gawing aktibo</string>
     <string name="init_gcvote_password_description">Para maaaring markahan ang cache, kailangan mong sumunod sa mga pagtuturo na nasa GCVote.com at ipasok ang iyong GCVote password dito.</string>
-    <string name="err_gcvote_send_rating">May maling nangyari habang ipinapadala ang marka, suriin ang GCVote password na nasa mga setting o burahin ito.</string>
-    <string name="gcvote_sent">Matagumpay na naipadala ang iyong pagboto</string>
     <string name="settings_activate_twitter">Gawing aktibo</string>
     <string name="init_login_popup">Mag-login</string>
     <string name="init_login_popup_working">Naglo-login na&#8230;</string>
@@ -789,7 +786,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ang nag-loloading na mga caches sa %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Ang pag-loading a mga waypoints mula sa %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d na mga cache ay inangkat mula sa %2$s</string>
     <string name="gpx_import_static_maps_skipped">Ang pagdownload sa istatik na mapa ay naiurong</string>
     <string name="gpx_import_title_reading_file">Bumabasa na file</string>
     <string name="gpx_import_title">I-angkat ang GPX</string>

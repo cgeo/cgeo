@@ -84,7 +84,6 @@
     <string name="log_saving_and_uploading">מפרסם רישום ביומן ומעלה תמונה&#8230;</string>
     <string name="log_posting_log">מפרסם רישום ביומן&#8230;</string>
     <string name="log_posting_twitter">מפרסם ציוץ&#8230;</string>
-    <string name="log_posting_gcvote">מפרסם GCVote&#8230;</string>
     <string name="log_posting_image">מעלה תמונה&#8230;</string>
     <string name="log_posting_generic_trackable">מפרסם %1$s %2$d %3$d</string>
     <string name="log_clear">נקה</string>

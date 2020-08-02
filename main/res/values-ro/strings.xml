@@ -82,7 +82,6 @@
     <string name="log_saving_and_uploading">Se publică însemnarea şi imaginea…</string>
     <string name="log_posting_log">Se publică însemnarea…</string>
     <string name="log_posting_twitter">Se publică tweet…</string>
-    <string name="log_posting_gcvote">Se publică GCVote…</string>
     <string name="log_posting_image">Se publică imaginea…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
     <string name="log_clear">Şterge</string>
@@ -413,8 +412,6 @@
     <string name="init_summary_su">Încarcă geocutii de la Geocaching.su</string>
     <string name="settings_activate_su">Activează</string>
     <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
-    <string name="err_gcvote_send_rating">Eroare la trimiterea evaluării, verifică-ţi parola GCVote din configuraţie sau şterge această parolă.</string>
-    <string name="gcvote_sent">Votul a fost trimis</string>
     <string name="settings_activate_twitter">Activează</string>
     <string name="init_login_popup">Autentificare</string>
     <string name="init_login_popup_working">Autentificare în curs…</string>
@@ -789,7 +786,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Se încarcă punctele din %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d geocutii importate din %2$s</string>
     <string name="gpx_import_static_maps_skipped">Descărcarea hărţilor statice a fost anulată</string>
     <string name="gpx_import_title_reading_file">Citire fişier</string>
     <string name="gpx_import_title">Importă GPX</string>

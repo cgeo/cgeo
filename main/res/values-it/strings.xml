@@ -1098,9 +1098,6 @@
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_hide">Nascondi</string>
     <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
-    <string name="map_reset_linecolors">Ripristina i colori delle linee</string>
-    <string name="map_reset_linecolors_confirm">Vuoi ripristinare tutte le linee della mappa configurabili ai loro colori predefiniti?</string>
-    <string name="map_reset_linecolors_ok">Ripristino dei colori delle linee</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>

@@ -87,7 +87,6 @@
     <string name="log_saving_and_uploading">Log küldése és kép feltöltése…</string>
     <string name="log_posting_log">Log küldése…</string>
     <string name="log_posting_twitter">Twittelés…</string>
-    <string name="log_posting_gcvote">Értékelés küldése…</string>
     <string name="log_posting_image">Kép küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
     <string name="log_clear">Törlés</string>
@@ -488,8 +487,6 @@
     <string name="init_summary_su">Ládák letöltése a geocaching.su-ról</string>
     <string name="settings_activate_su">Aktiválás</string>
     <string name="init_gcvote_password_description">Ládák értékeléséhez itt add meg a GCVote jelszavad és kövesd az utasításokat a GCVote.com-on!</string>
-    <string name="err_gcvote_send_rating">Az értélkelés elküldése sikertelen. Ellenőrizd a GCVote jelszavad a beállításoknál! Próbálkozz a törlésével!</string>
-    <string name="gcvote_sent">Értékelés sikeresen elküldve</string>
     <string name="settings_activate_twitter">Aktiválás</string>
     <string name="init_login_popup">Bejelentkezés</string>
     <string name="init_login_popup_working">Bejelentkezés a geocaching.com-ra…</string>
@@ -908,7 +905,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s: útpontok betöltése</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d láda importálva %2$s fájlból</string>
     <string name="gpx_import_static_maps_skipped">A statikus térképek letöltése megszakítva.</string>
     <string name="gpx_import_title_reading_file">Fájl olvasása</string>
     <string name="gpx_import_title">GPX importálása</string>

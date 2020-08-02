@@ -1116,9 +1116,6 @@
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_hide">Skrýt</string>
     <string name="map_trail_show">Zobrazit historii trasy</string>
-    <string name="map_reset_linecolors">Obnovit barvy čar</string>
-    <string name="map_reset_linecolors_confirm">Chcete obnovit výchozí barvu u všech konfigurovatelných čar v mapě?</string>
-    <string name="map_reset_linecolors_ok">Barvy čar obnoveny</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
     <string name="map_circles_show">Zobrazit kruhy</string>
     <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>

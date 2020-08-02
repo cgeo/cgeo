@@ -89,7 +89,6 @@
     <string name="log_saving_and_uploading">ログを投稿し、画像をアップロード中…</string>
     <string name="log_posting_log">ログを投稿中…</string>
     <string name="log_posting_twitter">ツイートを投稿中…</string>
-    <string name="log_posting_gcvote">GCVoteを投稿中…</string>
     <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">消去</string>
@@ -490,8 +489,6 @@
     <string name="init_summary_su">Geocaching.su からキャッシュをロード</string>
     <string name="settings_activate_su">有効化</string>
     <string name="init_gcvote_password_description">キャッシュを評価するためにGCVote.comにある指図を従ってここにGCVoteのパスワードを入力してください。</string>
-    <string name="err_gcvote_send_rating">評価の送信が失敗しました。設定でGCVoteのパスワードを確認してください。</string>
-    <string name="gcvote_sent">評価の送信が完了しました</string>
     <string name="settings_activate_twitter">有効化</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
@@ -920,7 +917,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s からキャッシュをロード中</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s からウェイポイントをロード中</string>
-    <string name="gpx_import_caches_imported_with_filename">%2$s から %1$d キャッシュをインポートしました</string>
     <string name="gpx_import_static_maps_skipped">オフライン用地図のダウンロードを中止しました</string>
     <string name="gpx_import_title_reading_file">ファイル読み込み中</string>
     <string name="gpx_import_title">GPXファイルをインポート</string>

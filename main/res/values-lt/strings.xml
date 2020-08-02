@@ -84,7 +84,6 @@
     <string name="log_saving_and_uploading">Talpinamas įrašas ir įkeliamas paveiksliukas…</string>
     <string name="log_posting_log">Talpinamas įrašas…</string>
     <string name="log_posting_twitter">Skelbiamas Tweet…</string>
-    <string name="log_posting_gcvote">Skelbiama GCVote…</string>
     <string name="log_posting_image">Talpinamas vaizdas…</string>
     <string name="log_posting_generic_trackable">Talpinama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
@@ -471,8 +470,6 @@
     <string name="init_summary_su">Įkelti slėptuves iš Geocaching.su</string>
     <string name="settings_activate_su">Aktyvuoti</string>
     <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
-    <string name="err_gcvote_send_rating">Klaida siunčiant reitingą, patikrinkite GCVote slaptažodį parametruose arba jį ištrinkite.</string>
-    <string name="gcvote_sent">Balsas sėkmingai išsiųstas</string>
     <string name="settings_activate_twitter">Aktyvuoti</string>
     <string name="init_login_popup">Prisijungti</string>
     <string name="init_login_popup_working">Jungiamasi…</string>
@@ -916,7 +913,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Įkeliamos slėptuvės nuo %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Įkeliami papildomi taškai nuo %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d slėptuvės importuotos iš %2$s</string>
     <string name="gpx_import_static_maps_skipped">Statinių žemėlapių atsisiuntimas nutrauktas</string>
     <string name="gpx_import_title_reading_file">Skaitomas failas</string>
     <string name="gpx_import_title">Importuoti GPX</string>

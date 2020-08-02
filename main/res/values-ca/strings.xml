@@ -80,7 +80,6 @@
     <string name="log_saving_and_uploading">Publicant registre i carregant la imatge…</string>
     <string name="log_posting_log">Publicant registre…</string>
     <string name="log_posting_twitter">Publicant Tweet…</string>
-    <string name="log_posting_gcvote">Publicant GCvote…</string>
     <string name="log_posting_image">Publicant imatge…</string>
     <string name="log_posting_generic_trackable">Publicant %1$s %2$d/%3$d</string>
     <string name="log_clear">Esborra</string>
@@ -435,8 +434,6 @@
     <string name="init_summary_su">Carregar catxés des de Geocaching.su</string>
     <string name="settings_activate_su">Activa</string>
     <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
-    <string name="err_gcvote_send_rating">Hi ha un error al enviar la puntuació, comproveu la contrasenya de GCVote a les opcions  o deixeu-ho buit.</string>
-    <string name="gcvote_sent">Votació enviada correctament</string>
     <string name="settings_activate_twitter">Activa</string>
     <string name="init_login_popup">Accés</string>
     <string name="init_login_popup_working">S\'està accedint…</string>
@@ -819,7 +816,6 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Carregant catxés de %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Carregant fites de %1$s</string>
-    <string name="gpx_import_caches_imported_with_filename">%1$d catxés importats de %2$s</string>
     <string name="gpx_import_static_maps_skipped">La descarrega de mapes estàtics ha estat interrompuda</string>
     <string name="gpx_import_title_reading_file">S\'està llegint el fitxer</string>
     <string name="gpx_import_title">Importa GPX</string>
