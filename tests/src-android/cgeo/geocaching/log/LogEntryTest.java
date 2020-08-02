@@ -6,6 +6,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
- * LogEntry unit tests
+ * LogEntry and OfflineLogEntry unit tests
  */
 public class LogEntryTest extends CGeoTestCase {
 
@@ -122,4 +125,111 @@ public class LogEntryTest extends CGeoTestCase {
 
         assertThat(logList).containsExactly(logEntry2, logEntry1);
     }
+
+    public static void testOfflineLogEntry() {
+
+        final OfflineLogEntry.Builder<?> oleBuilder = new OfflineLogEntry.Builder<>()
+                //set a LogEntry-specific property
+                .setLog("some log message")
+                //set an OfflineLogEntry-specific property
+                .setImageTitlePraefix("ImagePraefix1")
+                //set again a LogEntry-specific property
+                .setId(1);
+
+        OfflineLogEntry logEntry = oleBuilder.build();
+
+        assertThat(logEntry.id).isEqualTo(1);
+        assertThat(logEntry.log).isEqualTo("some log message");
+        assertThat(logEntry.imageTitlePraefix).isEqualTo("ImagePraefix1");
+
+        //regain builder and add some more
+        logEntry = oleBuilder
+                //set a LogEntry-specific property
+                .setId(2)
+                //set an OfflineLogEntry-specific property
+                .setImageTitlePraefix("ImagePraefix2")
+                //set again a LogEntry-specific property
+                .setId(3)
+                //gain an OfflineLogEntry
+                .build();
+
+        assertThat(logEntry.id).isEqualTo(3);
+        assertThat(logEntry.log).isEqualTo("some log message");
+        assertThat(logEntry.imageTitlePraefix).isEqualTo("ImagePraefix2");
+    }
+
+    public static void testOfflineLogParcelable() {
+
+        //initialize a fully-fledged OfflineLogEntry
+        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>()
+                .setLog("log message")
+                .setLogType(LogType.DIDNT_FIND_IT)
+                .setDate(50)
+                .setFavorite(true)
+                .setTweet(true)
+                .setRating(5.0f)
+                .setImageScale(5)
+                .setImageTitlePraefix("praefix")
+                .addLogImage(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").build())
+                .addLogImage(new Image.Builder().setUrl("abc2").setTitle("def2").setDescription("ghi2").build())
+                .addTrackableAction("TBFake1", LogTypeTrackable.DROPPED_OFF)
+                .build();
+
+        //serialize and deserialize;
+        final byte[] parcel = marshall(logEntry);
+        final OfflineLogEntry otherLogEntry = unmarshall(parcel, OfflineLogEntry.CREATOR);
+
+        assertThat(otherLogEntry.log).isEqualTo("log message");
+        assertThat(otherLogEntry.logType).isEqualTo(LogType.DIDNT_FIND_IT);
+        assertThat(otherLogEntry.date).isEqualTo(50);
+        assertThat(otherLogEntry.favorite).isEqualTo(true);
+        assertThat(otherLogEntry.tweet).isEqualTo(true);
+        assertThat(otherLogEntry.rating).isEqualTo(5.0f);
+        assertThat(otherLogEntry.imageScale).isEqualTo(5);
+        assertThat(otherLogEntry.imageTitlePraefix).isEqualTo("praefix");
+
+        assertThat(otherLogEntry.logImages.size()).isEqualTo(2);
+        assertThat(otherLogEntry.logImages.get(0)).isEqualTo(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").build());
+        assertThat(otherLogEntry.logImages.get(1)).isEqualTo(new Image.Builder().setUrl("abc2").setTitle("def2").setDescription("ghi2").build());
+        assertThat(otherLogEntry.trackableActions.size()).isEqualTo(1);
+        assertThat(otherLogEntry.trackableActions.get("TBFake1")).isEqualTo(LogTypeTrackable.DROPPED_OFF);
+    }
+
+    public static void testEmptyOfflineLogParcelable() {
+
+        //initialize a fully-fledged OfflineLogEntry
+        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>().build();
+
+        //serialize and deserialize;
+        final byte[] parcel = marshall(logEntry);
+        final OfflineLogEntry otherLogEntry = unmarshall(parcel, OfflineLogEntry.CREATOR);
+
+        assertThat(otherLogEntry.rating).isNull();
+        assertThat(otherLogEntry.logImages.size()).isEqualTo(0);
+        assertThat(otherLogEntry.trackableActions.size()).isEqualTo(0);
+
+    }
+
+    public static byte[] marshall(final Parcelable parceable) {
+        final Parcel parcel = Parcel.obtain();
+        parceable.writeToParcel(parcel, 0);
+        final byte[] bytes = parcel.marshall();
+        parcel.recycle();
+        return bytes;
+    }
+
+    public static Parcel unmarshall(final byte[] bytes) {
+        final Parcel parcel = Parcel.obtain();
+        parcel.unmarshall(bytes, 0, bytes.length);
+        parcel.setDataPosition(0); // This is extremely important!
+        return parcel;
+    }
+
+    public static <T> T unmarshall(final byte[] bytes, final Parcelable.Creator<T> creator) {
+        final Parcel parcel = unmarshall(bytes);
+        final T result = creator.createFromParcel(parcel);
+        parcel.recycle();
+        return result;
+    }
+
 }

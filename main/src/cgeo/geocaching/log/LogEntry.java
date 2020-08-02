@@ -7,6 +7,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -24,18 +27,23 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * {@link LogEntry} Objects are immutable. They should be manipulated by {@link LogEntry.Builder}. Use {@link LogEntry#buildUpon()}
  * to create a {@link LogEntry.Builder} object capable of creating a new {@link LogEntry}.
+ *
+ * Class utilizes the Builder pattern as explained <a href="https://en.wikipedia.org/wiki/Builder_pattern">here</a>.
+ * To support inheritance, it utilizes the <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">Curiously Recursive Generic Pattern</a>
+ * (usage for java builders is explained e.g. <a href="https://stackoverflow.com/questions/17164375/subclassing-a-java-builder-class">here</a>)
+ *
  * This object should not be referenced directly from a Geocache object to reduce the memory usage
  * of the Geocache objects.
  *
  */
-public final class LogEntry {
+public class LogEntry implements Parcelable {
 
     private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
 
     /** Log id */
     public final int id;
     /** The {@link LogType} */
-    @NonNull private final LogType logType;
+    @NonNull public final LogType logType;
     /** The author */
     @NonNull public final String author;
     /** The log message */
@@ -51,7 +59,7 @@ public final class LogEntry {
     /** Report problem */
     public final ReportProblemType reportProblem;
     /** log {@link Image} List */
-    @NonNull private final List<Image> logImages;
+    @NonNull public final List<Image> logImages;
     /** Spotted cache name */
     @NonNull public final String cacheName; // used for trackables
     /** Spotted cache guid */
@@ -59,78 +67,99 @@ public final class LogEntry {
     /** Spotted cache geocode */
     @NonNull public final String cacheGeocode; // used for trackables
 
+    // Parcelable START
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected LogEntry(final Parcel in) {
+        id = in.readInt();
+        logType = (LogType) in.readSerializable();
+        author = in.readString();
+        log = in.readString();
+        date = in.readLong();
+        found = in.readInt();
+        friend = in.readInt() == 1;
+        reportProblem = (ReportProblemType) in.readSerializable();
+        logImages = new ArrayList();
+        in.readList(logImages, Image.class.getClassLoader());
+        cacheName = in.readString();
+        cacheGuid = in.readString();
+        cacheGeocode = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        dest.writeInt(id);
+        dest.writeSerializable(logType);
+        dest.writeString(author);
+        dest.writeString(log);
+        dest.writeLong(date);
+        dest.writeInt(found);
+        dest.writeInt(friend ? 1 : 0);
+        dest.writeSerializable(reportProblem);
+        dest.writeList(logImages);
+        dest.writeString(cacheName);
+        dest.writeString(cacheGuid);
+        dest.writeString(cacheGeocode);
+    }
+
+    public static final Parcelable.Creator<LogEntry> CREATOR = new Parcelable.Creator<LogEntry>() {
+        @Override
+        public LogEntry createFromParcel(final Parcel in) {
+            return new LogEntry(in);
+        }
+
+        @Override
+        public LogEntry[] newArray(final int size) {
+            return new LogEntry[size];
+        }
+    };
+
+    // Parcelable END
+
+
     /**
      * Helper class for building or manipulating {@link LogEntry} references.
      *
      * Use {@link #buildUpon()} to obtain a builder representing an existing {@link LogEntry}.
      */
-    public static class Builder {
-        /** Log id */
-        private int id;
-        /** The LogType */
+    public static class Builder<T extends Builder<T>> {
+        // see {@link LogEntry} for explanation of these properties
+        protected int id = 0;
         @NonNull
-        private LogType logType;
-        /** The author */
-        @NonNull private String author;
-        /** The log message */
-        @NonNull private String message;
-        /** The log date */
-        private long date;
-        /** Is a found log */
-        private int found;
-        /** Friend's log entry */
-        private boolean friend;
-        /** report problem */
-        @NonNull private ReportProblemType reportProblem;
-        /** log {@link Image} List */
-        @NonNull private List<Image> logImages;
-        /** Spotted cache name */
-        @NonNull private String cacheName; // used for trackables
-        /** Spotted cache guid */
-        @NonNull private String cacheGuid; // used for trackables
-        /** Spotted cache geocode */
-        @NonNull private String cacheGeocode; // used for trackables
+        protected LogType logType = LogType.UNKNOWN;
+        @NonNull protected String author = "";
+        @NonNull protected String log = "";
+        protected long date = 0;
+        protected int found = -1;
+        protected boolean friend = false;
+        @NonNull protected ReportProblemType reportProblem = ReportProblemType.NO_PROBLEM;
+        @NonNull protected List<Image> logImages = Collections.emptyList();
+        @NonNull protected String cacheName = ""; // used for trackables
+        @NonNull protected String cacheGuid = ""; // used for trackables
+        @NonNull protected String cacheGeocode = ""; // used for trackables
 
-
-        /**
-         * Create a new LogEntry.Builder.
-         *
-         */
-        public Builder() {
-            id = 0;
-            logType = LogType.UNKNOWN;
-            author = "";
-            message = "";
-            date = 0;
-            found = -1;
-            friend = false;
-            logImages = Collections.emptyList();
-            cacheName = "";
-            cacheGuid = "";
-            cacheGeocode = "";
-            reportProblem = ReportProblemType.NO_PROBLEM;
-        }
 
         /**
          * Build an immutable {@link LogEntry} Object.
-         *
          */
         @NonNull
         public LogEntry build() {
-            return new LogEntry(id, logType, StringUtils.defaultIfBlank(author, Settings.getUserName()),
-                    message, date, found, friend, logImages, cacheName, cacheGuid, cacheGeocode, reportProblem);
+            return new LogEntry(this);
         }
 
         /**
          * Set {@link LogEntry} id.
          *
-         * @param id
-         *          The log id
+         * @param id The log id
          */
         @NonNull
-        public Builder setId(final int id) {
+        public T setId(final int id) {
             this.id = id;
-            return this;
+            return (T) this;
         }
 
         /**
@@ -148,185 +177,160 @@ public final class LogEntry {
         /**
          * Set {@link LogEntry} {@link LogType}.
          *
-         * @param logType
-         *          The {@link LogType}
+         * @param logType The {@link LogType}
          */
         @NonNull
-        public Builder setLogType(@NonNull final LogType logType) {
+        public T setLogType(@NonNull final LogType logType) {
             this.logType = logType;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} author.
          *
-         * @param author
-         *          The author
+         * @param author The author
          */
         @NonNull
-        public Builder setAuthor(@NonNull final String author) {
+        public T setAuthor(@NonNull final String author) {
             this.author = author;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} log message.
          *
-         * @param message
-         *          The log message
+         * @param message The log message
          */
         @NonNull
-        public Builder setLog(@NonNull final String message) {
-            this.message = HtmlUtils.removeExtraTags(message);
-            return this;
+        public T setLog(@NonNull final String message) {
+            this.log = HtmlUtils.removeExtraTags(message);
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} date.
          *
-         * @param date
-         *      The log date
+         * @param date The log date
          */
         @NonNull
-        public Builder setDate(final long date) {
+        public T setDate(final long date) {
             this.date = date;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} found.
          *
-         * @param found
-         *      {@code true} if this is a found {@link LogType}
+         * @param found {@code true} if this is a found {@link LogType}
          */
         @NonNull
-        public Builder setFound(final int found) {
+        public T setFound(final int found) {
             this.found = found;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} friend.
          *
-         * @param friend
-         *          {@code true} if this is a log from current user himself or his friend
+         * @param friend {@code true} if this is a log from current user himself or his friend
          */
         @NonNull
-        public Builder setFriend(final boolean friend) {
+        public T setFriend(final boolean friend) {
             this.friend = friend;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} spotted cache name.
          *
-         * @param cacheName
-         *          The cache name
+         * @param cacheName The cache name
          */
         @NonNull
-        public Builder setCacheName(@NonNull final String cacheName) {
+        public T setCacheName(@NonNull final String cacheName) {
             this.cacheName = cacheName;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} spotted cache Guid.
          *
-         * @param cacheGuid
-         *          The cache guid
+         * @param cacheGuid The cache guid
          */
         @NonNull
-        public Builder setCacheGuid(@NonNull final String cacheGuid) {
+        public T setCacheGuid(@NonNull final String cacheGuid) {
             this.cacheGuid = cacheGuid;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} spotted cache Geocode.
          *
-         * @param cacheGeocode
-         *          The cache geocode
+         * @param cacheGeocode The cache geocode
          */
         @NonNull
-        public Builder setCacheGeocode(@NonNull final String cacheGeocode) {
+        public T setCacheGeocode(@NonNull final String cacheGeocode) {
             this.cacheGeocode = cacheGeocode;
-            return this;
+            return (T) this;
         }
 
         /**
          * Set {@link LogEntry} images.
          *
-         * @param logImages
-         *          The {@code Image}s List
+         * @param logImages The {@code Image}s List
          */
         @NonNull
-        public Builder setLogImages(@NonNull final List<Image> logImages) {
+        public T setLogImages(@NonNull final List<Image> logImages) {
             this.logImages = logImages;
-            return this;
+            return (T) this;
         }
 
         /**
          * Add a new {@link Image} to the {@link LogEntry}.
          *
-         * @param image
-         *          to be added to the {@link LogEntry}
+         * @param image to be added to the {@link LogEntry}
          */
-        public Builder addLogImage(final Image image) {
+        public T addLogImage(final Image image) {
             if (image.equals(Image.NONE)) {
-                return this;
+                return (T) this;
             }
 
             if (logImages.isEmpty()) {
                 logImages = new ArrayList<>();
             }
             logImages.add(image);
-            return this;
+            return (T) this;
         }
 
-        public Builder setReportProblem(@NonNull final String reportProblemCode) {
-            this.reportProblem = ReportProblemType.findByCode(reportProblemCode);
-            return this;
+        public T setReportProblem(@NonNull final ReportProblemType reportProblem) {
+            this.reportProblem = reportProblem;
+            return (T) this;
         }
     }
 
     /**
      * LogEntry main constructor.
      *
-     * @param id log id
-     * @param logType log {@link LogType}
-     * @param author log author
-     * @param log log message
-     * @param date log date
-     * @param found is a found log
-     * @param friend is a friend log
-     * @param logImages log images
-     * @param cacheName spotted cache name
-     * @param cacheGuid spotted cache guid
-     * @param cacheGeocode spotted cache geocode
+     * @param builder builder to contruct from
      */
-    private LogEntry(final int id, @NonNull final LogType logType, @NonNull final String author, @NonNull final String log,
-                     final long date, final int found, final boolean friend,
-                     @NonNull final List<Image> logImages,
-                     @NonNull final String cacheName, @NonNull final String cacheGuid, @NonNull final String cacheGeocode, @NonNull final ReportProblemType reportProblem) {
-        this.id = id;
-        this.logType = logType;
-        this.author = author;
-        this.log = log;
-        this.date = date;
-        this.found = found;
-        this.friend = friend;
-        this.logImages = logImages;
-        this.cacheName = cacheName;
-        this.cacheGuid = cacheGuid;
-        this.cacheGeocode = cacheGeocode;
-        this.reportProblem = reportProblem;
+    protected LogEntry(final Builder builder) {
+        this.id = builder.id;
+        this.logType = builder.logType;
+        this.author = StringUtils.defaultIfBlank(builder.author, Settings.getUserName());
+        this.log = builder.log;
+        this.date = builder.date;
+        this.found = builder.found;
+        this.friend = builder.friend;
+        this.logImages = Collections.unmodifiableList(builder.logImages);
+        this.cacheName = builder.cacheName;
+        this.cacheGuid = builder.cacheGuid;
+        this.cacheGeocode = builder.cacheGeocode;
+        this.reportProblem = builder.reportProblem;
     }
 
     /**
      * Constructs a new {@link LogEntry.Builder}, copying the attributes from this LogEntry.
      *
-     * @return
-     *          A new {@link LogEntry.Builder}
+     * @return A new {@link LogEntry.Builder}
      */
     public Builder buildUpon() {
         return new Builder()
@@ -337,19 +341,19 @@ public final class LogEntry {
                 .setDate(date)
                 .setFound(found)
                 .setFriend(friend)
-                .setLogImages(logImages)
+                .setLogImages(new ArrayList<>(logImages))
                 .setCacheName(cacheName)
                 .setCacheGuid(cacheGuid)
                 .setCacheGeocode(cacheGeocode);
-
     }
 
     /**
      * Get the {@link LogType}
      *
-     * @return
-     *          The {@link LogType}
+     * @return The {@link LogType}
+     * @deprecated use read-only property "logType" direclty
      */
+    @Deprecated
     public LogType getType() {
         return logType;
     }
@@ -357,10 +361,11 @@ public final class LogEntry {
     /**
      * Get the {@link Image} for log
      *
-     * @return
-     *          The {@link Image}s List
+     * @return The {@link Image}s List
+     * @deprecated use rad-only property "logImages" direclty
      */
     @NonNull
+    @Deprecated
     public List<Image> getLogImages() {
         return logImages;
     }
@@ -368,8 +373,7 @@ public final class LogEntry {
     /**
      * Get the hashCode of a LogEntry Object.
      *
-     * @return
-     *          The object's hash code
+     * @return The object's hash code
      */
     @Override
     public int hashCode() {
@@ -388,8 +392,7 @@ public final class LogEntry {
      * Return {@code true} if passed {@link LogType} Object is equal to the current {@link LogType} Object.
      * Object are also detected as equal if date, {@link LogType}, author and log are the same.
      *
-     * @return
-     *          {@code true} if objects are identical
+     * @return  {@code true} if objects are identical
      */
     @Override
     public boolean equals(final Object obj) {
@@ -410,8 +413,7 @@ public final class LogEntry {
      * Check if current LogType has Images.
      * Check if current {@link LogType} has {@link Image}.
      *
-     * @return
-     *          {@code true} if {@link LogType} has images
+     * @return  {@code true} if {@link LogType} has images
      */
     public boolean hasLogImages() {
         return CollectionUtils.isNotEmpty(logImages);
@@ -421,8 +423,7 @@ public final class LogEntry {
      * Get the images titles separated by commas.
      * If no titles are present, display a 'default title'
      *
-     * @return
-     *          {@link Image} titles separated by commas or 'default title'
+     * @return {@link Image} titles separated by commas or 'default title'
      */
     public CharSequence getImageTitles() {
         final List<String> titles = new ArrayList<>(5);
@@ -441,8 +442,7 @@ public final class LogEntry {
     /**
      * Get the log message to be displayed. Depending on the settings, color tags might be removed.
      *
-     * @return
-     *          Log message
+     * @return Log message
      */
     public String getDisplayText() {
         if (Settings.getPlainLogs()) {
@@ -455,8 +455,7 @@ public final class LogEntry {
     /**
      * Check if the LogEntry is owned by the current configured user on geocaching.com connector.
      *
-     * @return
-     *          {@code true} if LogEntry is from current user
+     * @return {@code true} if LogEntry is from current user
      */
     public boolean isOwn() {
         return author.equalsIgnoreCase(Settings.getUserName());
