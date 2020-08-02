@@ -2557,18 +2557,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        final String newNote = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, maxPersonalNotesChars);
+        //if given maxSize is obviously bogus, then make length unlimited
+        final int maxSize = maxPersonalNotesChars == 0 ? -1 : maxPersonalNotesChars;
+
+        final String newNote = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, maxSize);
 
         if (newNote != null) {
             setNewPersonalNote(newNote);
             final String newNoteNonShorted = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, -1);
             if (newNoteNonShorted.length() > newNote.length()) {
-                showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited));
+                showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited, maxSize));
             } else {
                 showShortToast(getString(R.string.cache_personal_note_storewaypoints_success));
             }
         } else {
-            showShortToast(getString(R.string.cache_personal_note_storewaypoints_failed));
+            showShortToast(getString(R.string.cache_personal_note_storewaypoints_failed, maxSize));
         }
 
     }
