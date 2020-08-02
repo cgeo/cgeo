@@ -3208,7 +3208,7 @@ public class DataStore {
                     .setLogType(LogType.getById(cursor.getInt(1)))
                     .setLog(cursor.getString(2))
                     .setId(cursor.getInt(0))
-                    .setReportProblem(cursor.getString(4))
+                    .setReportProblem(ReportProblemType.findByCode(cursor.getString(4)))
                     .build();
         }
 
