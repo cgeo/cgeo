@@ -150,7 +150,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             userInfo.append(conn.getUserName());
                             if (conn.getCachesFound() >= 0) {
                                 userInfo.append(" (").append(conn.getCachesFound()).append(')');
-                                FoundNumCounter.updateFoundNum(conn.getNameAbbreviated(), conn.getCachesFound());
+                                FoundNumCounter.updateFoundNum(conn.getName(), conn.getCachesFound());
                             }
                             userInfo.append(Formatter.SEPARATOR);
                             activity.checkLoggedIn();

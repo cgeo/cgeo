@@ -1585,5 +1585,5 @@ public class Settings {
     public static RoutingMode getRoutingMode() {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
-    
+
 }

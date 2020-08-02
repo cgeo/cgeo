@@ -11,6 +11,11 @@
 <ul>
 <li>Changed sync logic for personal notes in caches</li>
 </ul>
+
+<h4>Logging:</h4>
+<ul>
+<li>New: Log template [OFFLINENUM]</li>
+</ul>
 </div>]]></Data>
   </string>
 </resources>

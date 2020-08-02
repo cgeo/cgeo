@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 public class FoundNumCounter extends DataStore.DBExtension {
 
-    private static final DataStore.DBExtensionType type = DBEXTENSION_FOUNDNUM;
+    private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_FOUNDNUM;
 
     private FoundNumCounter(final DataStore.DBExtension copyFrom) {
         this.id = copyFrom.getId();
@@ -15,9 +15,7 @@ public class FoundNumCounter extends DataStore.DBExtension {
         this.long1 = copyFrom.getLong1();
     }
 
-    public Long getCounter() {
-        return getLong1();
-    }
+    public long getCounter(final boolean incrementCounter) { return incrementCounter ? getLong1() + 1 : getLong1(); }
 
     @Nullable
     public static FoundNumCounter load(final String serviceName) {
@@ -25,7 +23,7 @@ public class FoundNumCounter extends DataStore.DBExtension {
         return null == temp ? null : new FoundNumCounter(temp);
     }
 
-    public static void updateFoundNum(final String serviceName, @NonNull final Long foundNum) {
+    public static void updateFoundNum(final String serviceName, @NonNull final long foundNum) {
         removeAll(type, serviceName);
         add(type, serviceName, foundNum, 0, "", "");
     }
