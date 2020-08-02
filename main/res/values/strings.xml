@@ -1129,6 +1129,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Select map file</string>
     <string name="track_file_select_title">Select track file</string>
+    <string name="individual_route_file_select_title">Select individual route file</string>
 
     <!-- import -->
     <string name="web_import_title">Import from send2cgeo</string>
@@ -1822,12 +1823,23 @@
     <string name="individual_route_error_single_waypoint_mode">Not available in single waypoint mode</string>
     <string name="map_sort_individual_route">Sort individual route</string>
     <string name="map_export_individual_route">Export individual route</string>
+    <string name="map_load_individual_route">Load individual route</string>
+    <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>>
     <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="save_sorted_route">Save</string>
     <string name="sorted_route_saved">Individual route saved</string>
+    <string name="load_individual_route_error">Error loading individual route</string>
     <string name="route_item_not_yet_loaded">Route item not yet loaded</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="zero">Route loaded with %d route points</item>
+        <item quantity="one">Route loaded with %d route point</item>
+        <item quantity="two">Route loaded with %d route points</item>
+        <item quantity="few">Route loaded with %d route points</item>
+        <item quantity="many">Route loaded with %d route points</item>
+        <item quantity="other">Route loaded with %d route points</item>
+    </plurals>
 
     <!-- distance units -->
     <string name="unit_m">m</string>

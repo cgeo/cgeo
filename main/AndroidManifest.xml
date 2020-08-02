@@ -729,6 +729,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/track_file_select_title">
         </activity>
+        <activity
+            android:name=".SelectIndividualRouteFileActivity"
+            android:label="@string/individual_route_file_select_title">
+        </activity>
         <activity android:name=".maps.routing.RouteSortActivity" />
         <activity
             android:name="WaypointPopup"
