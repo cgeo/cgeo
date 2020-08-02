@@ -479,9 +479,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 new TrailHistoryExport(this, this::clearTrailHistory);
                 return true;
             }
-            case R.id.menu_clear_individual_route:
-                clearIndividualRoute();
-                return true;
             case R.id.menu_hint:
                 menuShowHint();
                 return true;

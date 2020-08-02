@@ -896,9 +896,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 new TrailHistoryExport(activity, this::clearTrailHistory);
                 return true;
             }
-            case R.id.menu_clear_individual_route:
-                clearIndividualRoute();
-                return true;
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
