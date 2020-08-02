@@ -23,16 +23,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
+import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
-import cgeo.geocaching.ui.dialog.DateDialog;
-import cgeo.geocaching.ui.dialog.DateDialog.DateDialogParent;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.TimeDialog;
-import cgeo.geocaching.ui.dialog.TimeDialog.TimeDialogParent;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import android.R.layout;
@@ -60,7 +56,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -69,11 +64,9 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
+public class LogTrackableActivity extends AbstractLoggingActivity implements CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
     @BindView(R.id.type) protected Button typeButton;
-    @BindView(R.id.date) protected Button dateButton;
-    @BindView(R.id.time) protected Button timeButton;
     @BindView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
     @BindView(R.id.coordinates) protected Button coordinatesButton;
     @BindView(R.id.tracking) protected EditText trackingEditText;
@@ -91,7 +84,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * As long as we still fetch the current state of the trackable from the Internet, the user cannot yet send a log.
      */
     private boolean postReady = true;
-    private Calendar date = Calendar.getInstance();
+    private final DateTimeEditor date = new DateTimeEditor();
     private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
     private Trackable trackable;
     private TrackableBrand brand;
@@ -146,6 +139,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.logtrackable_activity);
         ButterKnife.bind(this);
+
+        date.init(findViewById(R.id.date), findViewById(R.id.time), getSupportFragmentManager());
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -309,17 +304,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         typeButton.setOnClickListener(this::openContextMenu);
 
         setType(typeSelected);
-        dateButton.setOnClickListener(new DateListener());
-        setDate(date);
 
         // show/hide Time selector
-        if (loggingManager.canLogTime()) {
-            timeButton.setOnClickListener(new TimeListener());
-            setTime(date);
-            timeButton.setVisibility(View.VISIBLE);
-        } else {
-            timeButton.setVisibility(View.GONE);
-        }
+        date.setTimeVisible(loggingManager.canLogTime());
 
         // Register Coordinates Listener
         if (loggingManager.canLogCoordinates()) {
@@ -344,18 +331,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      */
     private void initGeocodeSuggestions() {
         geocodeEditText.setAdapter(new AutoCompleteAdapter(geocodeEditText.getContext(), layout.simple_dropdown_item_1line, DataStore::getSuggestionsGeocode));
-    }
-
-    @Override
-    public void setDate(final Calendar dateIn) {
-        date = dateIn;
-        dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
-    }
-
-    @Override
-    public void setTime(final Calendar dateIn) {
-        date = dateIn;
-        timeButton.setText(Formatter.formatTime(date.getTime().getTime()));
     }
 
     public void setType(final LogTypeTrackable type) {
@@ -411,25 +386,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         return false;
     }
 
-    private class DateListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View arg0) {
-            final DateDialog dateDialog = DateDialog.getInstance(date);
-            dateDialog.setCancelable(true);
-            dateDialog.show(getSupportFragmentManager(), "date_dialog");
-        }
-    }
-
-    private class TimeListener implements View.OnClickListener {
-        @Override
-        public void onClick(final View arg0) {
-            final TimeDialog timeDialog = TimeDialog.getInstance(date);
-            timeDialog.setCancelable(true);
-            timeDialog.show(getSupportFragmentManager(), "time_dialog");
-        }
-    }
-
     private class CoordinatesListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
@@ -469,7 +425,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 final TrackableLog trackableLog = new TrackableLog(trackable.getGeocode(), trackable.getTrackingcode(), trackable.getName(), 0, 0, trackable.getBrand());
                 trackableLog.setAction(typeSelected);
                 // Real call to post log
-                final LogResult logResult = loggingManager.postLog(geocache, trackableLog, date, logMsg);
+                final LogResult logResult = loggingManager.postLog(geocache, trackableLog, date.getCalendar(), logMsg);
 
                 // Now posting tweet if log is OK
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
@@ -477,7 +433,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                         // TODO oldLogType as a temp workaround...
                         final LogEntry logNow = new LogEntry.Builder()
-                                .setDate(date.getTimeInMillis())
+                                .setDate(date.getDate().getTime())
                                 .setLogType(typeSelected.oldLogtype)
                                 .setLog(logMsg)
                                 .build();
@@ -520,7 +476,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         private void addLocalTrackableLog(final String logText) {
             // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
             final LogEntry logEntry = new LogEntry.Builder()
-                    .setDate(date.getTimeInMillis())
+                    .setDate(date.getDate().getTime())
                     .setLogType(typeSelected.oldLogtype)
                     .setLog(logText)
                     .build();

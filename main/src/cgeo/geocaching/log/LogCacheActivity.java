@@ -27,19 +27,18 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
-import cgeo.geocaching.ui.dialog.DateDialog;
+import cgeo.geocaching.ui.DateTimeEditor;
+import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ViewUtils;
 
 import android.R.string;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -49,7 +48,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -73,7 +71,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
-public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+public class LogCacheActivity extends AbstractLoggingActivity {
 
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
@@ -85,7 +83,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private static final int SELECT_IMAGE = 101;
     private final Set<TrackableLog> trackables = new HashSet<>();
-    private final List<ReportProblemType> possibleReportProblemTypes = new ArrayList<>();
     @BindView(R.id.tweet)
     protected CheckBox tweetCheck;
     @BindView(R.id.log_password_box)
@@ -99,28 +96,20 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Geocache cache = null;
     private String geocode = null;
     private String text = null;
-    private List<LogType> possibleLogTypes = new ArrayList<>();
     private ILoggingManager loggingManager;
 
     // Data to be saved while reconfiguring
     private float rating;
-    private LogType typeSelected;
-    private Calendar date;
+    private final TextSpinner<LogType> logType = new TextSpinner<>();
+    private final DateTimeEditor date = new DateTimeEditor();
     private Image image;
     private boolean sendButtonEnabled;
-    private ReportProblemType reportProblemSelected = ReportProblemType.NO_PROBLEM;
+    private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private LogEntry oldLog;
     private Bundle trackableState;
+    private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
     private SaveMode saveMode = SaveMode.SMART;
-
-    private static String[] getTBLogTypes(final List<LogTypeTrackable> tbLogTypeValues) {
-        final String[] tbLogTypes = new String[tbLogTypeValues.size()];
-        for (int i = 0; i < tbLogTypes.length; i++) {
-            tbLogTypes[i] = tbLogTypeValues.get(i).getLabel();
-        }
-        return tbLogTypes;
-    }
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
@@ -151,15 +140,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             showErrorLoadingAdditionalData();
         }
 
-        possibleLogTypes = loggingManager.getPossibleLogTypes();
-
-        if (possibleLogTypes.isEmpty()) {
+        if (loggingManager.getPossibleLogTypes().isEmpty()) {
             showErrorLoadingData();
             return;
         }
 
-        verifySelectedLogType();
-        verifySelectedReportProblemType();
+       verifySelectedReportProblemType();
 
         initializeRatingBar();
 
@@ -172,40 +158,21 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         showProgress(false);
     }
 
-    /**
-     * Checks that the currently selected log type is still available as a possible log type. If it is not available,
-     * the selected log type will be set to the first possible type.
-     */
-    private void verifySelectedLogType() {
-        if (!possibleLogTypes.contains(typeSelected)) {
-            typeSelected = possibleLogTypes.get(0);
-            setType(typeSelected);
-
-            showToast(res.getString(R.string.info_log_type_changed));
-        }
-    }
-
     private void verifySelectedReportProblemType() {
-        possibleReportProblemTypes.clear();
+        final List<ReportProblemType> possibleReportProblemTypes = new ArrayList<>();
         possibleReportProblemTypes.add(ReportProblemType.NO_PROBLEM);
         for (final ReportProblemType reportProblem : loggingManager.getReportProblemTypes(cache)) {
-            if (reportProblem.isVisible(typeSelected, cache.getType())) {
+            if (reportProblem.isVisible(logType.get(), cache.getType())) {
                 possibleReportProblemTypes.add(reportProblem);
             }
         }
+        reportProblem.setValues(possibleReportProblemTypes);
 
         final View reportProblemBox = findViewById(R.id.report_problem_box);
         if (possibleReportProblemTypes.size() == 1) {
             reportProblemBox.setVisibility(View.GONE);
         } else {
             reportProblemBox.setVisibility(View.VISIBLE);
-        }
-
-        if (!possibleReportProblemTypes.contains(reportProblemSelected)) {
-            reportProblemSelected = possibleReportProblemTypes.get(0);
-            setReportProblem(reportProblemSelected);
-
-            showToast(res.getString(R.string.info_log_report_problem_changed));
         }
     }
 
@@ -244,9 +211,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final LinearLayout inventoryChangeAllView = findViewById(R.id.inventory_changeall);
         inventoryChangeAllView.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
 
-        final Button changeButton = inventoryChangeAllView.findViewById(R.id.changebutton);
-        changeButton.setOnClickListener(view -> selectAllTrackablesAction());
-    }
+        trackableActionsChangeAll.setTextDialogTitle(getString(R.string.log_tb_changeall) + " (" + trackables.size() + ")");
+   }
 
     private ArrayList<TrackableLog> getSortedTrackables() {
         final TrackableComparator comparator = Settings.getTrackableComparator();
@@ -263,6 +229,23 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public void onCreate(final Bundle savedInstanceState) {
         onCreate(savedInstanceState, R.layout.logcache_activity);
 
+        date.init(findViewById(R.id.date), null, getSupportFragmentManager());
+        logType.setTextView(findViewById(R.id.type)).setDisplayMapper(lt -> lt.getL10n());
+        reportProblem.setTextView(findViewById(R.id.report_problem))
+                .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
+                .setDisplayMapper(rp -> rp.getL10n());
+
+        //init trackable "change all" button
+        trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
+                .setTextDialogTitle(getString(R.string.log_tb_changeall))
+                .setTextDisplayMapper(lt -> getString(R.string.log_tb_changeall))
+                .setDisplayMapper(lt -> lt.getLabel())
+                .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
+                .setChangeListener(lt -> {
+                    CollectionStream.of(trackables).forEach(t -> t.action = lt);
+                    updateTrackablesList();
+                });
+
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -277,7 +260,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         invalidateOptionsMenuCompatible();
-        possibleLogTypes = cache.getPossibleLogTypes();
+        logType.setValues(cache.getPossibleLogTypes());
 
         setCacheTitleBar(cache);
 
@@ -292,10 +275,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Restore previous state
         if (savedInstanceState != null) {
             rating = savedInstanceState.getFloat(SAVED_STATE_RATING);
-            typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
-            date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
+            logType.set(LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE)));
+            date.setDate(new Date(savedInstanceState.getLong(SAVED_STATE_DATE)));
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
-            reportProblemSelected = ReportProblemType.findByCode(savedInstanceState.getString(SAVED_STATE_PROBLEM));
+            reportProblem.set(ReportProblemType.findByCode(savedInstanceState.getString(SAVED_STATE_PROBLEM)));
             trackableState = savedInstanceState.getBundle(SAVED_STATE_TRACKABLES);
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
@@ -309,26 +292,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // See https://github.com/cgeo/cgeo/issues/7188
         enablePostButton(false);
 
-        final TextView problemButton = findViewById(R.id.report_problem);
-        problemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
-        problemButton.setOnClickListener(view -> selectProblemType());
-
-        verifySelectedLogType();
-        final Button typeButton = findViewById(R.id.type);
-        typeButton.setText(typeSelected.getL10n());
-        typeButton.setOnClickListener(view -> selectLogType());
-
-        final Button dateButton = findViewById(R.id.date);
-        setDate(date);
-        dateButton.setOnClickListener(new DateListener());
-
         if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
             setLogText();
         }
 
         tweetCheck.setChecked(true);
-        updateTweetBox(typeSelected);
-        updateLogPasswordBox(typeSelected);
+        updateTweetBox(logType.get());
+        updateLogPasswordBox(logType.get());
 
         // Load Generic Trackables
         AndroidRxUtils.bindActivity(this,
@@ -354,10 +324,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void loadLogFromDatabase() {
         oldLog = DataStore.loadLogOffline(geocode);
         if (oldLog != null) {
-            typeSelected = oldLog.getType();
-            date.setTime(new Date(oldLog.date));
+            logType.set(oldLog.getType());
+            date.setDate(new Date(oldLog.date));
             text = oldLog.log;
-            reportProblemSelected = oldLog.reportProblem;
+            reportProblem.set(oldLog.reportProblem);
         } else if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
         }
@@ -365,7 +335,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void initializeRatingBar() {
         final IConnector connector = ConnectorFactory.getConnector(cache);
-        if (connector instanceof IVotingCapability && ((IVotingCapability) connector).canVote(cache, typeSelected)) {
+        if (connector instanceof IVotingCapability && ((IVotingCapability) connector).canVote(cache, logType.get())) {
             VotingBarUtil.initializeRatingBar(cache, getWindow().getDecorView().getRootView(), stars -> rating = stars);
         } else {
             votingBar.setVisibility(View.GONE);
@@ -380,7 +350,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void initializeFavoriteCheck() {
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
-        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, typeSelected) && loggingManager instanceof ILoggingWithFavorites) {
+        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
             final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
             if (favoritePoints > 0) {
                 favCheck.setVisibility(View.VISIBLE);
@@ -397,16 +367,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         final Calendar defaultDate = Calendar.getInstance();
         // it this is an attended event log, use the event date by default instead of the current date
-        if (cache.isEventCache() && CalendarUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
+        if (cache.isEventCache() && CalendarUtils.isPastEvent(cache) && logType.get() == LogType.ATTENDED) {
             defaultDate.setTime(cache.getHiddenDate());
         }
-        setDate(defaultDate);
+        date.setCalendar(defaultDate);
 
         text = null;
         image = Image.NONE;
 
         logEditText.setText(StringUtils.EMPTY);
-        setReportProblem(ReportProblemType.NO_PROBLEM);
+        reportProblem.set(ReportProblemType.NO_PROBLEM);
         oldLog = null;
 
         final EditText logPasswordView = LogCacheActivity.this.findViewById(R.id.log_password);
@@ -435,10 +405,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putDouble(SAVED_STATE_RATING, rating);
-        outState.putInt(SAVED_STATE_TYPE, typeSelected.id);
-        outState.putLong(SAVED_STATE_DATE, date.getTimeInMillis());
+        outState.putInt(SAVED_STATE_TYPE, logType.get().id);
+        outState.putLong(SAVED_STATE_DATE, date.getDate().getTime());
         outState.putParcelable(SAVED_STATE_IMAGE, image);
-        outState.putString(SAVED_STATE_PROBLEM, reportProblemSelected.code);
+        outState.putString(SAVED_STATE_PROBLEM, reportProblem.get().code);
         // save state of trackables
         final Bundle outTrackables = new Bundle();
         for (final TrackableLog trackable : trackables) {
@@ -447,32 +417,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         outState.putBundle(SAVED_STATE_TRACKABLES, outTrackables);
     }
 
-    @Override
-    public void setDate(final Calendar dateIn) {
-        date = dateIn;
-
-        final Button dateButton = findViewById(R.id.date);
-        dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
-    }
-
     public void setType(final LogType type) {
-        final Button typeButton = findViewById(R.id.type);
-
-        typeSelected = type;
-        typeButton.setText(typeSelected.getL10n());
-
+        logType.set(type);
         updateTweetBox(type);
         updateLogPasswordBox(type);
         initializeRatingBar();
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
-    }
-
-    public void setReportProblem(final ReportProblemType reportProblem) {
-        final TextView reportProblemButton = findViewById(R.id.report_problem);
-
-        reportProblemSelected = reportProblem;
-        reportProblemButton.setText(getString(reportProblemSelected.labelId) + " ▼");
     }
 
     private void updateTweetBox(final LogType type) {
@@ -504,13 +455,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // But if date or the reportProblemType has changed, then save anyway.
         if (saveMode == SaveMode.FORCE ||
                 (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text) && !StringUtils.equals(log, Settings.getSignature()))
-                || (oldLog != null && (oldLog.reportProblem != reportProblemSelected || oldLog.date != date.getTime().getTime()))
-                || (oldLog == null && reportProblemSelected != ReportProblemType.NO_PROBLEM)
+                || (oldLog != null && (oldLog.getType() != logType.get() || oldLog.reportProblem != reportProblem.get() || oldLog.date != date.getDate().getTime()))
+                || (oldLog == null && reportProblem.get() != ReportProblemType.NO_PROBLEM)
         ) {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(final Void... params) {
-                    cache.logOffline(LogCacheActivity.this, log, date, typeSelected, reportProblemSelected);
+                    cache.logOffline(LogCacheActivity.this, log, date.getCalendar(), logType.get(), reportProblem.get());
                     Settings.setLastCacheLog(log);
                     return null;
                 }
@@ -531,71 +482,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     @Override
     protected LogContext getLogContext() {
         return new LogContext(cache, null);
-    }
-
-    private void selectAllTrackablesAction() {
-        final Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(res.getString(R.string.log_tb_changeall) + " (" + trackables.size() + ')');
-
-        final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
-        final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
-        alert.setItems(tbLogTypes, (dialog, position) -> {
-            final LogTypeTrackable logType = tbLogTypeValues.get(position);
-            for (final TrackableLog tb : trackables) {
-                tb.action = logType;
-                Log.d("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
-            }
-            updateTrackablesList();
-            dialog.dismiss();
-        });
-        alert.create().show();
-    }
-
-    private void selectLogType() {
-        // use a local copy of the possible types, as that one might be modified in the background by the loader
-        final List<LogType> possible = new ArrayList<>(possibleLogTypes);
-
-        final Builder alert = new AlertDialog.Builder(this);
-        final String[] choices = new String[possible.size()];
-        for (int i = 0; i < choices.length; i++) {
-            choices[i] = possible.get(i).getL10n();
-        }
-        alert.setSingleChoiceItems(choices, possible.indexOf(typeSelected), (dialog, position) -> {
-            setType(possible.get(position));
-            dialog.dismiss();
-        });
-        alert.create().show();
-    }
-
-    private void selectProblemType() {
-        // use a local copy of the possible problem types, as that one might be modified in the background by the loader
-        final List<ReportProblemType> possible = new ArrayList<>(possibleReportProblemTypes);
-
-        final Builder alert = new AlertDialog.Builder(this);
-        final String[] choices = new String[possible.size()];
-        for (int i = 0; i < choices.length; i++) {
-            choices[i] = getString(possible.get(i).labelId);
-        }
-        alert.setSingleChoiceItems(choices, possible.indexOf(reportProblemSelected), (dialog, position) -> {
-            setReportProblem(possible.get(position));
-            dialog.dismiss();
-        });
-        alert.create().show();
-    }
-
-    private void selectTrackableAction(final TrackableLog trackable) {
-        final Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(trackable.name);
-        final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
-        final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
-        alert.setSingleChoiceItems(tbLogTypes, tbLogTypeValues.indexOf(trackable.action), (dialog, position) -> {
-            final LogTypeTrackable logType = tbLogTypeValues.get(position);
-            trackable.action = logType;
-            Log.d("Trackable " + trackable.trackCode + " (" + trackable.name + ") has new action: #" + logType);
-            updateTrackablesList();
-            dialog.dismiss();
-        });
-        alert.create().show();
     }
 
     private void selectImage() {
@@ -657,14 +543,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             Dialogs.message(this, R.string.log_post_not_possible);
             return;
         }
-        if (CalendarUtils.isFuture(date)) {
+        if (CalendarUtils.isFuture(date.getCalendar())) {
             Dialogs.message(this, R.string.log_date_future_not_allowed);
             return;
         }
-        if (typeSelected.mustConfirmLog()) {
-            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), (dialog, which) -> sendLogInternal());
-        } else if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
-            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblemSelected.getL10n()), (dialog, which) -> sendLogInternal());
+        if (logType.get().mustConfirmLog()) {
+            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, logType.get().getL10n()), (dialog, which) -> sendLogInternal());
+        } else if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
+            Dialogs.confirm(this, R.string.confirm_report_problem_title, res.getString(R.string.confirm_report_problem_message, reportProblem.get().getL10n()), (dialog, which) -> sendLogInternal());
         } else {
             sendLogInternal();
         }
@@ -728,8 +614,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         protected TextView codeView;
         @BindView(R.id.name)
         protected TextView nameView;
-        @BindView(R.id.action)
-        protected TextView actionButton;
+        //@BindView(R.id.action)
+        //protected TextView actionButton;
+        private final TextSpinner<LogTypeTrackable> trackableAction = new TextSpinner<>();
         @BindView(R.id.info)
         protected View infoView;
 
@@ -755,16 +642,26 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             }
 
             final TrackableLog trackable = getItem(position);
-            fillViewHolder(holder, trackable);
+            fillViewHolder(holder, trackable, rowView.findViewById(R.id.action));
             return rowView;
         }
 
-        private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable) {
+        private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable, final TextView action) {
             holder.brandView.setImageResource(trackable.brand.getIconResource());
             holder.codeView.setText(trackable.trackCode);
             holder.nameView.setText(trackable.name);
-            holder.actionButton.setText(trackable.action.getLabel() + " ▼");
-            holder.actionButton.setOnClickListener(view -> selectTrackableAction(trackable));
+
+            holder.trackableAction.setTextView(action)
+                    .setTextDialogTitle(trackable.name)
+                    .setTextDisplayMapper(lt -> lt.getLabel() + " ▼")
+                    .setDisplayMapper(lt -> lt.getLabel())
+                    .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
+                    .set(trackable.action)
+                    .setChangeListener(lt -> {
+                        trackable.action = lt;
+                        updateTrackablesList();
+                    });
+
 
             holder.infoView.setOnClickListener(view -> {
                 final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
@@ -792,9 +689,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         @Override
         protected void doCommand() {
             oldText = currentLogText();
-            oldType = typeSelected;
-            oldDate = date;
-            oldReportProblem = reportProblemSelected;
+            oldType = logType.get();
+            oldDate = date.getCalendar();
+            oldReportProblem = reportProblem.get();
             oldOldLog = oldLog;
             cache.clearOfflineLog();
         }
@@ -817,23 +714,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         @Override
         protected void onFinishedUndo() {
             text = oldText;
-            typeSelected = oldType;
-            date = oldDate;
+            setType(oldType);
+            date.setCalendar(oldDate);
             oldLog = oldOldLog;
-            setType(typeSelected);
-            setReportProblem(oldReportProblem);
-            setDate(date);
+
+            reportProblem.set(oldReportProblem);
             setLogText();
-        }
-    }
-
-    private class DateListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View arg0) {
-            final DateDialog dateDialog = DateDialog.getInstance(date);
-            dateDialog.setCancelable(true);
-            dateDialog.show(getSupportFragmentManager(), "date_dialog");
         }
     }
 
@@ -851,20 +737,21 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
 
             try {
-                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables), reportProblemSelected);
+                final LogResult logResult = loggingManager.postLog(logType.get(), date.getCalendar(),
+                        log, logPwd, new ArrayList<>(trackables), reportProblem.get());
                 ImageResult imageResult = null;
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
-                    if (typeSelected.isFoundLog()) {
+                    if (logType.get().isFoundLog()) {
                         cache.setFound(true);
-                        cache.setVisitedDate(date.getTimeInMillis());
+                        cache.setVisitedDate(date.getDate().getTime());
                     }
                     DataStore.saveChangedCache(cache);
 
                     final LogEntry.Builder logBuilder = new LogEntry.Builder()
-                            .setDate(date.getTimeInMillis())
-                            .setLogType(typeSelected)
+                            .setDate(date.getDate().getTime())
+                            .setLogType(logType.get())
                             .setLog(log)
                             .setFriend(true);
 
@@ -894,8 +781,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = logBuilder.build();
                     newLogs.add(0, logNow);
-                    if (reportProblemSelected != ReportProblemType.NO_PROBLEM) {
-                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblemSelected.textId)).setLogImages(Collections.emptyList()).setLogType(reportProblemSelected.logType).build();
+                    if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
+                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblem.get().textId)).setLogImages(Collections.emptyList()).setLogType(reportProblem.get().logType).build();
                         newLogs.add(0, logProblem);
                     }
                     DataStore.saveLogs(cache.getGeocode(), newLogs);
@@ -903,7 +790,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     // update offline log in DB
                     cache.clearOfflineLog();
 
-                    if (typeSelected == LogType.FOUND_IT && tweetCheck.isChecked() && tweetCheck.getVisibility() == View.VISIBLE) {
+                    if (logType.get() == LogType.FOUND_IT && tweetCheck.isChecked() && tweetCheck.getVisibility() == View.VISIBLE) {
                         publishProgress(res.getString(R.string.log_posting_twitter));
                         Twitter.postTweetCache(geocode, logNow);
                     }
@@ -939,7 +826,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             int trackableLogcounter = 1;
                             for (final TrackableLog trackableLog : trackablesMoved) {
                                 publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand.getLabel(), trackableLogcounter, trackablesMoved.size()));
-                                manager.postLog(cache, trackableLog, date, log);
+                                manager.postLog(cache, trackableLog, date.getCalendar(), log);
                                 trackableLogcounter++;
                             }
                         }

@@ -79,7 +79,6 @@
             android:id="@+id/logImageScale"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/log_image_scales"
             android:prompt="@string/log_image_scale"
             tools:listitem="@android:layout/simple_spinner_item" />
 
