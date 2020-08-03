@@ -831,6 +831,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
+    <string name="cache_personal_note_storewaypoints">Guardar Pontos Adicionais</string>
+    <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Pontos Adicionais não puderam ser armazenados na nota devido aos limites de tamanho (tamanho máximo da nota pessoal: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nenhum Ponto Adicional do utilizador encontrado</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
@@ -1623,6 +1628,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
     <string name="preference_colorpicker_select_color">Seleccionar cor</string>
     <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidade</string>
+    <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
     <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
@@ -1639,6 +1645,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
+    <string name="map_export_individual_route">Exportar rota individual</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <string name="save_sorted_route">Guardar</string>
@@ -1673,12 +1680,18 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="receivemapfile_option_differentname">Nome diferente</string>
     <string name="receivemapfile_kb_copied">%d kB copiados</string>
     <string name="receivemapfile_cancelled">Transferência do ficheiro de mapa cancelada</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Transferir mapas offline simples</string>
-    <string name="downloadmap_info">Será redireccionado/a para um sítio de transferência de mapas offline simples (sem suporte de temas).\n\nEscolha o ficheiro .map para a sua região e toque no mesmo para a transferência do mapa.\n\nQuando a transferência for concluída, toque no ficheiro transferido para definir esse mapa como o mapa em utilização no c:geo</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Transferir mapa offline</string>
+    <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual para a c:geo.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
+    <string name="downloadmap_choose">Escolher mapa</string>
+    <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
+    <string name="download_started">Transferência iniciada, em segundo plano</string>
     <!-- history trail export -->
     <string name="trailhistory">Percurso do histórico</string>
     <string name="export_trailhistory_title">Exportar o percurso do histórico</string>
     <string name="export_trailhistory_success">O percurso do histórico foi exportado como \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Limpar o percurso do histórico depois de exportar</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Exportar rota individual</string>
+    <string name="export_individualroute_success">Rota individual exportada para \"%s\"</string>
 </resources>
