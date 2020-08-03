@@ -29,14 +29,16 @@ public class GPXTrackImporter {
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
                 final TrackUtils.Tracks value = doInBackground(file);
-                success.set(null != value);
-                AndroidSchedulers.mainThread().createWorker().schedule(() -> {
-                    try {
-                        callback.updateTracks(value);
-                    } catch (final Throwable t) {
-                        //
-                    }
-                });
+                success.set(null != value && value.getSize() > 0);
+                if (success.get()) {
+                    AndroidSchedulers.mainThread().createWorker().schedule(() -> {
+                        try {
+                            callback.updateTracks(value);
+                        } catch (final Throwable t) {
+                            //
+                        }
+                    });
+                }
             } catch (final Exception e) {
                 //
             }
