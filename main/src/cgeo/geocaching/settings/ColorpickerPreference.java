@@ -203,7 +203,8 @@ public class ColorpickerPreference extends DialogPreference {
 
     @Override
     protected void onSetInitialValue(final boolean restoreValue, final Object defaultValue) {
-        setValue(restoreValue ? getPersistedInt(defaultColor) : (Integer) defaultValue);
+        color = restoreValue ? getPersistedInt(defaultColor) : (Integer) defaultValue;
+        setValue(color);
     }
 
     public void setValue(final int value) {
