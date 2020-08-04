@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>2020.07.23-RC-legacy:</b>\n
+     <b>2020.08.04-legacy:</b>\n
     · Change: This is a dedicated legacy version of c:geo as your device is running on an Android version between 4.1 and 4.4.\n
       Expect no further updates and consider using a device with a more recent Android version.\n
       For more info check our FAQ on www.cgeo.org\n
