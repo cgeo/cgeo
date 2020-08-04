@@ -1014,7 +1014,7 @@
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako body trasy této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její body trasy odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
-    <string name="goto_targets_list">Interní kešky</string>
+    <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické body trasy kromě pěti posledních</string>
     <!-- coordinate calculator hints -->
