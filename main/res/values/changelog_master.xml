@@ -2,22 +2,35 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
+<h1>Developer version:</h1>
+
 <h4>Map:</h4>
 <ul>
 <li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
 <li>New: Open local .map files in c:geo by tapping on them</li>
 <li>New: Colorpicker for map lines offers \"default\" button</li>
 <li>New: Export individual route as GPX route file</li>
+<li>New: Import individual route from GPX route file (having geocode as route point names)</li>
+<li>New: Show warning before clearing an individual route</li>
+<li>New: Show Warning before overwriting an existing track</li>
+<li>New: Show warning on \"load track\" if an empty track file or a GPX file containing a route was selected</li>
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
 <li>Changed sync logic for personal notes in caches</li>
-<li>Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"
+<li>Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
+</ul>
+
+<h4>Cache lists:</h4>
+<ul>
+<li>Change: \"New list\" entry moved to top of list creation/selection dialog</li>
+<li>Change: A newly created list for user-defined caches will now be named \"User-defined caches\" instead of \"Internal caches\" (does not change an existing list with user-defined caches)</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
+<li>Change: Set colorAccent on mainscreen to c:geo orange</li>
 <li>Internal: Added extension table to database</li>
 <li>Internal: Fixed some issues with database structure</li>
 </ul>
