@@ -830,6 +830,11 @@
     <string name="cache_menu_preventWaypointsFromNote">Wegpunkte aus Notiz verhindern</string>
     <string name="cache_menu_allowWaypointExtraction">Wegpunkte aus Notiz erlauben</string>
     <string name="cache_personal_note_edit">Bearbeiten</string>
+    <string name="cache_personal_note_storewaypoints">Wegpunkte speichern</string>
+    <string name="cache_personal_note_storewaypoints_success">Wegpunkte wurden zur persönlichen Notiz hinzugefügt</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Wegpunkte wurden zur Notiz hinzugefügt, mussten aber gekürzt werden (max. Größe der persönlichen Notiz: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Wegpunkte konnten aufgrund von Größenbeschränkungen (max. Größe der persönlichen Notiz: %1$d) nicht gespeichert werden</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Keine Benutzer-Wegpunkte gefunden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Wegpunkt-Extraktion verhindern</string>
     <string name="cache_personal_note_limit">Upload der persönlicher Notiz ist begrenzt</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Diese persönliche Notiz wird von Geocaching.com nach %d Zeichen abgeschnitten.</string>
@@ -993,7 +998,7 @@
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache)</string>
-    <string name="goto_targets_list">Interne Caches</string>
+    <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
     <!-- coordinate calculator hints -->
@@ -1622,6 +1627,7 @@
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
     <string name="preference_colorpicker_select_color">Farbe auswählen</string>
     <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
+    <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
     <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
@@ -1638,6 +1644,7 @@
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
+    <string name="map_export_individual_route">Exportiere individuelle Route</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <string name="save_sorted_route">Speichern</string>
@@ -1679,7 +1686,8 @@
     <string name="receivemapfile_cancelled">Kartendatei-Empfang abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offlinekarte herunterladen</string>
-    <string name="downloadmap_info">Du wirst weitergeleitet zu einer Download-Seite für grundlegende Offlinekarten (ohne Unterstützung von Themen).\n\nWähle die .map-Datei für deine Region und tippe darauf um die Datei herunterzuladen.\n\nWenn der Download abgeschlossen ist, tippe auf die heruntergeladene Datei um diese Karten als aktuelle Karte für c:geo zu setzen</string>
+    <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in das Kartenverzeichnis von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
+    <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmanager_not_available">Kartendatei kann nicht heruntergeladen werden, Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
     <!-- history trail export -->
@@ -1687,4 +1695,7 @@
     <string name="export_trailhistory_title">Exportiere Positionsverlauf</string>
     <string name="export_trailhistory_success">Positionsverlauf nach \"%s\" exportiert</string>
     <string name="export_trailhistory_clear_after_export">Positionsverlauf nach Export löschen</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Individuelle Route exportieren</string>
+    <string name="export_individualroute_success">Individuelle Route nach \"%s\" exportiert</string>
 </resources>
