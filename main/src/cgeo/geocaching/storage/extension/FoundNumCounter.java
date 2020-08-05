@@ -29,10 +29,8 @@ public class FoundNumCounter extends DataStore.DBExtension {
 
         //avoid recreation of same key/value pair
         final FoundNumCounter f = load(serviceName);
-        if (f != null) {
-            if (f.getCounter(false) == foundNum) {
-                return;
-            }
+        if (f != null && f.getCounter(false) == foundNum) {
+            return;
         }
 
         removeAll(type, serviceName);
