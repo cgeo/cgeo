@@ -179,7 +179,7 @@ public final class StoredList extends AbstractList {
                 }
             }
             if (!exceptListIds.contains(PseudoList.NEW_LIST.id)) {
-                lists.add(PseudoList.NEW_LIST);
+                lists.add(0, PseudoList.NEW_LIST);
             }
             return lists;
         }
