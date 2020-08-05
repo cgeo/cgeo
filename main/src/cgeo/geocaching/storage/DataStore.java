@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -111,7 +112,8 @@ public class DataStore {
     public enum DBExtensionType {
         // values for id must not be changed, as there are database entries depending on it
         DBEXTENSION_INVALID(0),
-        DBEXTENSION_PENDING_DOWNLOAD (1);
+        DBEXTENSION_PENDING_DOWNLOAD (1),
+        DBEXTENSION_FOUNDNUM(2);
 
         public int id;
 
@@ -2821,6 +2823,26 @@ public class DataStore {
         return 0;
     }
 
+    // get number of offline founds for a specific connector
+    public static int getFoundsOffline (final String serviceName) {
+        int counter = 0;
+
+        try {
+            final Cursor cursor = database.rawQuery("SELECT geocode FROM " + dbTableLogsOffline + " WHERE type = ?", new String[]{LogType.FOUND_IT.iconName});
+            final Set<String> geocodes = cursorToColl(cursor, new HashSet<>(), GET_STRING_0);
+
+            for (String geocode : geocodes) {
+                if (ConnectorFactory.getConnector(geocode).getName() == serviceName) {
+                    counter ++;
+                }
+            }
+        } catch (final Exception e) {
+            Log.e("DataStore.getFoundsOffline", e);
+        }
+
+        return counter;
+    }
+
     @NonNull
     private static<T, U extends Collection<? super T>> U queryToColl(@NonNull final String table,
                                                                      final String[] columns,
@@ -3060,13 +3082,13 @@ public class DataStore {
         Log.d("Database clean: remove non-existing extension values");
         final DBExtensionType[] extensionValues = DBExtensionType.values();
         if (extensionValues.length > 0) {
-            String keys = "";
+            String type = "";
             for (DBExtensionType id : extensionValues) {
-                keys += (StringUtils.isNotBlank(keys) ? "," : "") + id.id;
+                type += (StringUtils.isNotBlank(type) ? "," : "") + id.id;
             }
-            database.delete(dbTableExtension, "_key NOT IN (" + keys + ")", null);
+            database.delete(dbTableExtension, "_type NOT IN (" + type + ")", null);
         }
-        database.delete(dbTableExtension, "_key=" + DBEXTENSION_INVALID.id, null);
+        database.delete(dbTableExtension, "_type=" + DBEXTENSION_INVALID.id, null);
     }
 
     /**

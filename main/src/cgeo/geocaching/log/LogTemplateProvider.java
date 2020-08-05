@@ -7,6 +7,8 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.Formatter;
 
 import androidx.annotation.NonNull;
@@ -160,6 +162,33 @@ public final class LogTemplateProvider {
                 return getCounter(context, true);
             }
         });
+
+        templates.add(new LogTemplate("OFFLINENUM", R.string.init_signature_template_offlinenum) {
+
+            @Override
+            public String getValue(final LogContext context) {
+                final Geocache cache = context.getCache();
+                if (cache == null) {
+                    return StringUtils.EMPTY;
+                }
+                long counter;
+                final String onlineNum = getCounter(context, true);
+                final IConnector connector = ConnectorFactory.getConnector(cache);
+
+                if (onlineNum.equals(StringUtils.EMPTY)) {
+                    final FoundNumCounter f = FoundNumCounter.load(connector.getName());
+                    if (f == null) {
+                        return StringUtils.EMPTY;
+                    }
+                    counter = f.getCounter(true);
+                } else {
+                    counter = Long.parseLong(onlineNum);
+                }
+                counter += DataStore.getFoundsOffline(connector.getName());
+                return String.valueOf(counter);
+            }
+        });
+
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
 
             @Override
