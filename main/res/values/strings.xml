@@ -1210,17 +1210,6 @@
     <string name="map_hidewp_parking">Hide parking waypoints</string>
     <string name="map_hidewp_visited">Hide visited waypoints</string>
     <string name="map_hide_track">Hide individual track</string>
-    <string name="map_load_track">Load individual track</string>
-    <plurals name="load_track_success">
-        <item quantity="zero">Individual track loaded (%d trackpoints)</item>
-        <item quantity="one">Individual track loaded (%d trackpoint)</item>
-        <item quantity="two">Individual track loaded (%d trackpoints)</item>
-        <item quantity="few">Individual track loaded (%d trackpoints)</item>
-        <item quantity="many">Individual track loaded (%d trackpoints)</item>
-        <item quantity="other">Individual track loaded (%d trackpoints)</item>
-    </plurals>
-    <string name="load_track_error">Error loading individual track</string>
-    <string name="map_unload_track">Unload individual track</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
@@ -1840,6 +1829,20 @@
         <item quantity="many">Route loaded with %d route points</item>
         <item quantity="other">Route loaded with %d route points</item>
     </plurals>
+
+    <!-- individual track -->
+    <string name="map_load_track">Load individual track</string>
+    <string name="map_load_track_confirm">Overwrite existing track?</string>
+    <plurals name="load_track_success">
+        <item quantity="zero">Individual track loaded (%d trackpoints)</item>
+        <item quantity="one">Individual track loaded (%d trackpoint)</item>
+        <item quantity="two">Individual track loaded (%d trackpoints)</item>
+        <item quantity="few">Individual track loaded (%d trackpoints)</item>
+        <item quantity="many">Individual track loaded (%d trackpoints)</item>
+        <item quantity="other">Individual track loaded (%d trackpoints)</item>
+    </plurals>
+    <string name="load_track_error">Error loading individual track</string>
+    <string name="map_unload_track">Unload individual track</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>

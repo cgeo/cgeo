@@ -7,6 +7,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.GPXTrackImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -103,11 +104,14 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable hideOptionsChanged, final TrackUpdaterMulti updateTracks) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Tracks tracks, final Runnable hideOptionsChanged, final TrackUpdaterMulti updateTracks) {
         switch (id) {
             case R.id.menu_load_track:
-                final Intent intent = new Intent(activity, SelectTrackFileActivity.class);
-                activity.startActivityForResult(intent, REQUEST_CODE_GET_TRACKFILE);
+                if (null == tracks || tracks.getSize() == 0) {
+                    startIndividualTrackFileSelector(activity);
+                } else {
+                    Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) -> startIndividualTrackFileSelector(activity));
+                }
                 return true;
             case R.id.menu_unload_track:
                 Settings.setTrackFile(null);
@@ -120,6 +124,11 @@ public class TrackUtils {
             default:
                 return false;
         }
+    }
+
+    private static void startIndividualTrackFileSelector(final Activity activity) {
+        final Intent intent = new Intent(activity, SelectTrackFileActivity.class);
+        activity.startActivityForResult(intent, REQUEST_CODE_GET_TRACKFILE);
     }
 
     /**

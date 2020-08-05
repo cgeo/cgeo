@@ -904,7 +904,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(activity, id, this::updateTrackHideStatus, this::setTracks)
+                if (!TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
                 && !IndividualRouteUtils.onOptionsItemSelected(activity, id, route, this::clearIndividualRoute)
