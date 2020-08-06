@@ -3,6 +3,7 @@ package cgeo.geocaching.models;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -145,13 +146,18 @@ public class WaypointTest extends CGeoTestCase {
         wp.setCoords(gp);
         wp.setUserNote("user note with \"escaped\" text");
         assertThat(wp.getParseableText(true, -1)).isEqualTo(
-                "@name (F) " + gp.toString() + "\n" +
+                "@name (F) " + toParseableWpString(gp) + "\n" +
                         "\"user note with \\\"escaped\\\" text\"");
 
         final Collection<Waypoint> parsedWaypoints = Waypoint.parseWaypoints(wp.getParseableText(true, -1), "Prefix");
         assertThat(parsedWaypoints).hasSize(1);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
         assertWaypoint(iterator.next(), wp);
+
+    }
+
+    private static String toParseableWpString(final Geopoint gp) {
+        return gp.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT);
 
     }
 
@@ -167,7 +173,7 @@ public class WaypointTest extends CGeoTestCase {
         final Collection<Waypoint> wpColl = new ArrayList<>();
         wpColl.add(wp1);
         wpColl.add(wp2);
-        final String gpStr = gp.toString();
+        final String gpStr = toParseableWpString(gp);
 
         assertThat(Waypoint.getParseableText(wpColl, 10, false)).isNull();
 
@@ -223,9 +229,9 @@ public class WaypointTest extends CGeoTestCase {
 
     public static void testGetAndReplaceExistingStoredWaypoints() {
         final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
-        final String gpStr = gp.toString();
+        final String gpStr = toParseableWpString(gp);
         final Geopoint gp2 = new Geopoint("N 45°49.745 E 9°45.038");
-        final String gp2Str = gp2.toString();
+        final String gp2Str = toParseableWpString(gp2);
 
         final String waypoints = "@wp1 (X) " + gpStr + "\n\"note\"\n@wp2 (F) " + gp2Str + "\n\"note2\"";
         final Collection<Waypoint> wps = Waypoint.parseWaypoints(waypoints, "Praefix");
