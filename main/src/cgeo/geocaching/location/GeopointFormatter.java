@@ -26,6 +26,9 @@ public class GeopointFormatter {
         /** Example: "N 10° 12,345 · W 5° 12,345" */
         LAT_LON_DECMINUTE,
 
+        /** Example: "N10 12,345 W5 12,345" */
+        LAT_LON_DECMINUTE_SHORT,
+
         /** Example: "N 10° 12.345 W 5° 12.345" */
         LAT_LON_DECMINUTE_RAW,
 
@@ -89,6 +92,13 @@ public class GeopointFormatter {
             case LAT_LON_DECMINUTE: {
                 final Geopoint rgp = gp.roundedAt(60 * 1000);
                 return String.format(Locale.getDefault(), "%c %02d° %06.3f\'" + Formatter.SEPARATOR + "%c %03d° %06.3f\'",
+                        rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(),
+                        rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
+            }
+
+            case LAT_LON_DECMINUTE_SHORT: {
+                final Geopoint rgp = gp.roundedAt(60 * 1000);
+                return String.format(Locale.getDefault(), "%c%d %06.3f %c%d %06.3f",
                         rgp.getLatDir(), rgp.getLatDeg(), rgp.getLatMinRaw(),
                         rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
             }

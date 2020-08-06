@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
@@ -497,12 +498,16 @@ public class Waypoint implements IWaypoint {
      */
     public String getParseableText(final boolean includeName, final int maxUserNoteSize) {
         final StringBuilder sb = new StringBuilder();
+        //name
         if (includeName) {
             sb.append(PARSING_NAME_PRAEFIX).append(this.getName()).append(" ");
         }
+        //type
         sb.append(PARSING_TYPE_OPEN).append(this.getWaypointType().getShortId().toUpperCase(Locale.US))
                 .append(PARSING_TYPE_CLOSE).append(" ");
-        sb.append(getCoords());
+        //coordinate
+        sb.append(getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT));
+        //user note
         if (maxUserNoteSize != 0 && !StringUtils.isBlank(getUserNote())) {
             String userNote = getUserNote();
             if (maxUserNoteSize > 0 && userNote.length() > maxUserNoteSize) {
