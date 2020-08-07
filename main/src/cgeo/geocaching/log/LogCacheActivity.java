@@ -25,6 +25,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.DateTimeEditor;
@@ -559,6 +560,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private void sendLogInternal() {
         new Poster(this, res.getString(R.string.log_saving)).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
+
+        final IConnector cacheConnector = ConnectorFactory.getConnector(cache);
+        if (cacheConnector instanceof ILogin && ((ILogin) cacheConnector).isLoggedIn() && ((ILogin) cacheConnector).getCachesFound() >= 0) {
+            FoundNumCounter.updateFoundNum(((ILogin) cacheConnector).getName(), ((ILogin) cacheConnector).getCachesFound());
+        }
     }
 
     @Override
