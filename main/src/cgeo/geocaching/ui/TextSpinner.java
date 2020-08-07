@@ -34,8 +34,10 @@ import java.util.Objects;
  */
 public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
+    public static final String DISPLAY_VALUE_NULL = "--";
+
     private final List<T> values = new ArrayList<>();
-    private final List<String> stringValues = new ArrayList<>();
+    private final List<String> displayValues = new ArrayList<>();
     private final Map<T, Integer> valuesToPosition = new HashMap<>();
     private Func1<T, String> displayMapper;
     private Action1<T> changeListener;
@@ -58,7 +60,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     public TextSpinner<T> setValues(@Nullable final List<T> newValues) {
 
         this.values.clear();
-        this.stringValues.clear();
+        this.displayValues.clear();
         this.valuesToPosition.clear();
         if (newValues == null || newValues.isEmpty()) {
             this.values.add(null);
@@ -82,6 +84,22 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
         }
 
         return this;
+    }
+
+
+    /** returns current list of values */
+    public List<T> getValues() {
+        return Collections.unmodifiableList(this.values);
+    }
+
+    /** returns current list of DISPLAY values (note: used for unit testing) */
+    public List<String> getDisplayValues() {
+        return Collections.unmodifiableList(this.displayValues);
+    }
+
+    /** for textview: returns display value currently used for showing (note: used for unit testing) */
+    public String getTextDisplayValue() {
+        return itemToString(get(), true);
     }
 
      /**
@@ -127,7 +145,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     public TextSpinner<T> setSpinner(@NonNull final Spinner spinner) {
         this.spinner = spinner;
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.stringValues);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.spinner.setAdapter(adapter);
         this.spinner.setOnItemSelectedListener(this);
@@ -168,15 +186,15 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
     private void recalculateDisplayValues() {
         //optimization: use existing list as much as possible
-        if (this.values.size() < this.stringValues.size()) {
-            this.stringValues.clear();
+        if (this.values.size() < this.displayValues.size()) {
+            this.displayValues.clear();
         }
         int idx = 0;
         for (T v : this.values) {
-            if (idx < this.stringValues.size()) {
-                this.stringValues.set(idx++, itemToString(v, false));
+            if (idx < this.displayValues.size()) {
+                this.displayValues.set(idx++, itemToString(v, false));
             } else {
-                this.stringValues.add(itemToString(v, false));
+                this.displayValues.add(itemToString(v, false));
                 idx++;
             }
         }
@@ -188,7 +206,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
     private String itemToString(final T item, final boolean useTextDisplayMapper) {
         if (item == null) {
-            return "--";
+            return DISPLAY_VALUE_NULL;
         }
         final Func1<T, String> mapper = (useTextDisplayMapper && this.textDisplayMapper != null) ? this.textDisplayMapper : this.displayMapper;
         return mapper == null ? String.valueOf(item) : mapper.call(item);
@@ -223,7 +241,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             alert.setTitle(this.textDialogTitle);
         }
 
-        alert.setSingleChoiceItems(this.stringValues.toArray(new String[0]), getPositionFor(selectedItem, -1), (dialog, pos) -> {
+        alert.setSingleChoiceItems(this.displayValues.toArray(new String[0]), getPositionFor(selectedItem, -1), (dialog, pos) -> {
             set(values.get(pos));
             dialog.dismiss();
         });
