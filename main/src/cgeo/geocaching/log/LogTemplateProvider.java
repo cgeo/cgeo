@@ -159,14 +159,6 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                return getCounter(context, true);
-            }
-        });
-
-        templates.add(new LogTemplate("OFFLINENUM", R.string.init_signature_template_offlinenum) {
-
-            @Override
-            public String getValue(final LogContext context) {
                 final Geocache cache = context.getCache();
                 if (cache == null) {
                     return StringUtils.EMPTY;
@@ -188,7 +180,6 @@ public final class LogTemplateProvider {
                 return String.valueOf(counter);
             }
         });
-
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
 
             @Override
