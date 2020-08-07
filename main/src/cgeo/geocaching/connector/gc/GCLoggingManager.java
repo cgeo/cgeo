@@ -60,7 +60,8 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     public Loader<String> onCreateLoader(final int arg0, final Bundle arg1) {
         if (!Settings.hasGCCredentials()) { // allow offline logging
             ActivityMixin.showToast(activity, activity.getString(R.string.err_login));
-            return null;
+            //start the UrlLoader anyway, DON'T return null! (returning null will crash the activity, see #8761)
+            //The activity logic will handle this as if it were a "normal" network connectivity failure
         }
         activity.onLoadStarted();
         return new UrlLoader(activity.getBaseContext(), "https://www.geocaching.com/play/geocache/" + cache.getGeocode() + "/log", null);
