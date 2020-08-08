@@ -22,6 +22,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
+import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GooglePositionAndHistory;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -103,6 +104,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.google.android.gms.maps.model.LatLng;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -904,7 +906,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks)
+                if (!TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
                 && !IndividualRouteUtils.onOptionsItemSelected(activity, id, route, this::clearIndividualRoute)
@@ -935,6 +937,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         this.tracks = tracks;
         resumeTrack(null == tracks);
         TrackUtils.showTrackInfo(activity, tracks);
+    }
+
+    private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
+        followMyLocation = false;
+        switchMyLocationButton();
+        mapView.zoomToBounds(viewport, new GoogleGeoPoint(new LatLng(latitude, longitude)));
     }
 
     @Override

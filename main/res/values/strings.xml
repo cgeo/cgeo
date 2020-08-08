@@ -1826,6 +1826,7 @@
     </plurals>
 
     <!-- individual track -->
+    <string name="individual_track">Individual track</string>
     <string name="map_load_track">Load individual track</string>
     <string name="map_load_track_confirm">Overwrite existing track?</string>
     <plurals name="load_track_success">
@@ -1838,6 +1839,7 @@
     </plurals>
     <string name="load_track_error">Error loading individual track</string>
     <string name="map_unload_track">Unload individual track</string>
+    <string name="center_on_track">Center on track</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>

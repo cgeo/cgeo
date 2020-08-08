@@ -220,13 +220,6 @@
         </menu>
     </item>
     <item
-        android:id="@+id/menu_load_track"
-        android:title="@string/map_load_track" />
-    <item
-        android:id="@+id/menu_unload_track"
-        android:title="@string/map_unload_track"
-        android:visible="false"/>
-    <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom|withText"
@@ -266,6 +259,23 @@
                 android:id="@+id/menu_export_trailhistory"
                 android:title="@string/export_trailhistory_title">
             </item>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_individual_track"
+        android:title="@string/individual_track">
+        <menu>
+            <item
+                android:id="@+id/menu_load_track"
+                android:title="@string/map_load_track" />
+            <item
+                android:id="@+id/menu_unload_track"
+                android:title="@string/map_unload_track"
+                android:visible="false"/>
+            <item
+                android:id="@+id/menu_center_on_track"
+                android:title="@string/center_on_track"
+                android:visible="false" />
         </menu>
     </item>
     <item

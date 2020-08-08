@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -14,6 +15,10 @@ public final class MapUtils {
         // utility class
     }
 
+    public interface CenterOnPosition {
+        void centerOnPosition(double latitude, double longitude, Viewport viewport);
+    }
+
     public static void showInvalidMapfileMessage(final Context context) {
         Dialogs.messageNeutral((Activity) context, context.getString(R.string.warn_invalid_mapfile), R.string.more_information, (dialog, which) -> {
             final Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -22,4 +27,5 @@ public final class MapUtils {
             context.startActivity(intent);
         });
     }
+
 }

@@ -6,6 +6,7 @@ import cgeo.geocaching.SelectTrackFileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.GPXTrackImporter;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
@@ -95,6 +96,7 @@ public class TrackUtils {
         final boolean trackfileSet = StringUtils.isNotBlank(Settings.getTrackFile());
         menu.findItem(R.id.menu_hide_track).setVisible(trackfileSet);
         menu.findItem(R.id.menu_hide_track).setChecked(Settings.isHideTrack());
+        menu.findItem(R.id.menu_center_on_track).setVisible(trackfileSet);
         menu.findItem(R.id.menu_unload_track).setVisible(trackfileSet);
     }
 
@@ -104,7 +106,7 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Tracks tracks, final Runnable hideOptionsChanged, final TrackUpdaterMulti updateTracks) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Tracks tracks, final Runnable hideOptionsChanged, final TrackUpdaterMulti updateTracks, final MapUtils.CenterOnPosition centerOnPosition) {
         switch (id) {
             case R.id.menu_load_track:
                 if (null == tracks || tracks.getSize() == 0) {
@@ -120,6 +122,37 @@ public class TrackUtils {
             case R.id.menu_hide_track:
                 Settings.setHideTrack(!Settings.isHideTrack());
                 hideOptionsChanged.run();
+                return true;
+            case R.id.menu_center_on_track:
+                if (null != tracks && tracks.getSize() > 0) {
+                    final Track track = tracks.get(0);
+                    if (track.getSize() > 0) {
+                        // calculate center and boundaries of trackcmd
+                        final Geopoint first = track.track.get(0);
+                        double minLat = first.getLatitude();
+                        double maxLat = first.getLatitude();
+                        double minLon = first.getLongitude();
+                        double maxLon = first.getLongitude();
+
+                        double latitude = 0.0d;
+                        double longitude = 0.0d;
+                        for (Geopoint point : track.track) {
+                            final double lat = point.getLatitude();
+                            final double lon = point.getLongitude();
+
+                            latitude += point.getLatitude();
+                            longitude += point.getLongitude();
+                            Log.e("lat=" + latitude + ", lon=" + longitude);
+
+                            minLat = Math.min(minLat, lat);
+                            maxLat = Math.max(maxLat, lat);
+                            minLon = Math.min(minLon, lon);
+                            maxLon = Math.max(maxLon, lon);
+                        }
+                        Log.e("size=" + track.getSize() + ", lat=" + (latitude / track.getSize()) + ", lon=" + (longitude / track.getSize()));
+                        centerOnPosition.centerOnPosition(latitude / track.getSize(), longitude / track.getSize(), new Viewport(new Geopoint(minLat, minLon), new Geopoint(maxLat, maxLon)));
+                    }
+                }
                 return true;
             default:
                 return false;
