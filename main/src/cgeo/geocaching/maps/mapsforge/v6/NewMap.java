@@ -106,6 +106,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
+import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
@@ -487,7 +488,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks)
+                if (!TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
                 && !IndividualRouteUtils.onOptionsItemSelected(this, id, route, this::clearIndividualRoute)
@@ -525,6 +526,13 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         route.clearRoute(routeLayer);
         ActivityMixin.invalidateOptionsMenu(this);
         showToast(res.getString(R.string.map_individual_route_cleared));
+    }
+
+    private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
+        followMyLocation = false;
+        switchMyLocationButton();
+        mapView.getModel().mapViewPosition.setMapPosition(new MapPosition(new LatLong(latitude, longitude), (byte) mapView.getMapZoomLevel()));
+        postZoomToViewport(viewport);
     }
 
     private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
