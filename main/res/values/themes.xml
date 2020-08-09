@@ -221,11 +221,13 @@
     <style name="Dialog_Alert" parent="@style/Theme.AppCompat.Dialog.Alert">
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="Dialog_Alert_light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>
