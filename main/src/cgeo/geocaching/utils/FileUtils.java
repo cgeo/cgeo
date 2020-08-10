@@ -387,7 +387,7 @@ public final class FileUtils {
     public static File getUniqueNamedLogfile(final String prefix, final String suffix) {
         final File logfilesDirectory = LocalStorage.getLogfilesDirectory();
         mkdirs(logfilesDirectory);
-        return getUniqueNamedFile(new File(logfilesDirectory, prefix + "_" + CalendarUtils.formatDateTime("yyyy-MM-dd_hh-mm") + "." + suffix));
+        return getUniqueNamedFile(new File(logfilesDirectory, prefix + "_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm") + "." + suffix));
     }
 
     /**

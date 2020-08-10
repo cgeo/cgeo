@@ -40,7 +40,7 @@ public class IndividualRouteExport {
         if (!EnvironmentUtils.isExternalStorageAvailable()) {
             return;
         }
-        filename = "route_" + CalendarUtils.formatDateTime("yyyy-MM-dd_hh-mm-ss") + ".gpx";
+        filename = "route_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + ".gpx";
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.export_individualroute_title);

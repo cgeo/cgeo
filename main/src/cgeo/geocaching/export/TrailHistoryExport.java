@@ -39,7 +39,7 @@ public class TrailHistoryExport {
         if (!EnvironmentUtils.isExternalStorageAvailable()) {
             return;
         }
-        filename = "trail_" + CalendarUtils.formatDateTime("yyyy-MM-dd_hh-mm-ss") + ".gpx";
+        filename = "trail_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + ".gpx";
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.export_trailhistory_title);
