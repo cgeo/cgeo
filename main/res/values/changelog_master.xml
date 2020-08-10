@@ -12,8 +12,10 @@
 <li>New: Export individual route as GPX route file</li>
 <li>New: Import individual route from GPX route file (having geocode as route point names)</li>
 <li>New: Show warning before clearing an individual route</li>
+<li>New: Individual tracks: Option added to center on track</li>
 <li>New: Show Warning before overwriting an existing track</li>
 <li>New: Show warning on \"load track\" if an empty track file or a GPX file containing a route was selected</li>
+<li>Change: Group \"individual track\" related entries into its own sub menu</li>
 </ul>
 
 <h4>Cache details:</h4>
