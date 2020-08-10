@@ -443,6 +443,9 @@
     <string name="about_system_info">c:geo system information</string>
     <string name="about_system_info_send_chooser">Send system information</string>
     <string name="about_system_write_logcat">Generate logfile</string>
+    <string name="about_system_write_logcat_type">Create standard or extended logfile?\n\nStandard logfiles will be fine for most use cases.\nUse extended logfiles only when asked to do so.</string>
+    <string name="about_system_write_logcat_type_standard">Standard</string>
+    <string name="about_system_write_logcat_type_extended">Extended</string>
     <string name="about_system_write_logcat_success">Logfile written to \"%1$s\" in \"%2$s\" dir</string>
     <string name="about_system_write_logcat_empty">Logfile is empty</string>
     <string name="about_system_write_logcat_error">Error writing logfile</string>
