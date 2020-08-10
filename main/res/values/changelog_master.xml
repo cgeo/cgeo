@@ -34,6 +34,7 @@
 <h4>Other:</h4>
 <ul>
 <li>Change: Set colorAccent on mainscreen and cache list selector to c:geo orange</li>
+<li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Internal: Updated contributor\'s list</li>
 <li>Internal: Added extension table to database</li>
 <li>Internal: Fixed some issues with database structure</li>
