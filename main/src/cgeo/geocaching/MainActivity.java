@@ -147,14 +147,28 @@ public class MainActivity extends AbstractActionBarActivity {
                     private void fillView(final TextView connectorInfo, final ILogin conn) {
                         final StringBuilder userInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR);
                         if (conn.isLoggedIn()) {
-                            userInfo.append(conn.getUserName());
+                            userInfo.append(conn.getUserName()).append(" ");
                             if (conn.getCachesFound() >= 0) {
-                                userInfo.append(" (").append(conn.getCachesFound()).append(')');
                                 FoundNumCounter.updateFoundNum(conn.getName(), conn.getCachesFound());
                             }
-                            userInfo.append(Formatter.SEPARATOR);
                             activity.checkLoggedIn();
                         }
+
+                        final FoundNumCounter f = FoundNumCounter.load(conn.getName());
+                        if (f != null) {
+
+                            userInfo.append("(").append(f.getCounter(false));
+
+                            final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
+                            if (offlinefounds > 0) {
+                                userInfo.append('+').append(offlinefounds);
+                            }
+                            userInfo.append(')').append(Formatter.SEPARATOR);
+
+                        } else if (conn.isLoggedIn()) {
+                            userInfo.append(Formatter.SEPARATOR);
+                        }
+
                         userInfo.append(conn.getLoginStatusString());
 
                         connectorInfo.setText(userInfo);
