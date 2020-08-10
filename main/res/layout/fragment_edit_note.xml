@@ -15,17 +15,20 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:inputType="textMultiLine"
-        android:lines="8"
+        android:minLines="8"
         android:hint="@string/waypoint_note"
-        android:importantForAutofill="no"/>
+        android:importantForAutofill="no"
+        android:layout_weight="1"/>
 
     <View style="@style/action_bar_separator"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_weight="0"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0">
         <CheckBox
             android:id="@+id/preventWaypointsFromNote"
             android:layout_width="wrap_content"
