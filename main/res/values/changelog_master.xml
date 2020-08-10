@@ -20,6 +20,7 @@
 <ul>
 <li>Changed sync logic for personal notes in caches</li>
 <li>Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
+<li>Remembers offline found count for every connector and applies those values to the [NUMBER] parameter on logging</li>
 </ul>
 
 <h4>Cache lists:</h4>
@@ -30,7 +31,8 @@
 
 <h4>Other:</h4>
 <ul>
-<li>Change: Set colorAccent on mainscreen to c:geo orange</li>
+<li>Change: Set colorAccent on mainscreen and cache list selector to c:geo orange</li>
+<li>Internal: Updated contributor\'s list</li>
 <li>Internal: Added extension table to database</li>
 <li>Internal: Fixed some issues with database structure</li>
 </ul>
