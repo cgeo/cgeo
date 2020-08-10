@@ -43,6 +43,24 @@ public class DebugUtils {
     }
 
     public static void createLogcat(@NonNull final Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            // no differentiation possible on older systems, so no need to ask
+            createLogcatHelper(activity, true);
+        } else {
+            Dialogs.confirmPositiveNegativeNeutral(
+                    activity,
+                    activity.getString(R.string.about_system_write_logcat),
+                    activity.getString(R.string.about_system_write_logcat_type),
+                    activity.getString(R.string.about_system_write_logcat_type_standard),
+                    null,
+                    activity.getString(R.string.about_system_write_logcat_type_extended),
+                    (dialog, which) -> createLogcatHelper(activity, false),
+                    null,
+                    (dialog, which) -> createLogcatHelper(activity, true));
+        }
+    }
+
+    private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo) {
         final AtomicInteger result = new AtomicInteger(LogcatResults.LOGCAT_ERROR.ordinal());
         final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
         final String filename = file.getName();
@@ -52,7 +70,11 @@ public class DebugUtils {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                     builder.command("logcat", "-d", "-f", file.getAbsolutePath());
                 } else {
-                    builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "cgeo.geocachin:E", "*:S", "-f", file.getAbsolutePath());
+                    if (fullInfo) {
+                        builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
+                    } else {
+                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "cgeo.geocachin:E", "*:S", "-f", file.getAbsolutePath());
+                    }
                 }
                 final int returnCode = builder.start().waitFor();
                 if (returnCode == 0) {
@@ -68,13 +90,12 @@ public class DebugUtils {
                         String.format(activity.getString(R.string.about_system_write_logcat_success), filename, LocalStorage.LOGFILES_DIR_NAME),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
                         null, null, (dialog, which) -> {
-                    final String systemInfo = SystemInformation.getSystemInformation(activity);
-                    ShareUtils.shareAsEMail(activity, activity.getString(R.string.about_system_info), systemInfo, file, R.string.about_system_info_send_chooser);
-                });
+                            final String systemInfo = SystemInformation.getSystemInformation(activity);
+                            ShareUtils.shareAsEMail(activity, activity.getString(R.string.about_system_info), systemInfo, file, R.string.about_system_info_send_chooser);
+                        });
             } else {
                 ActivityMixin.showToast(activity, result.get() == LogcatResults.LOGCAT_EMPTY.ordinal() ? R.string.about_system_write_logcat_empty : R.string.about_system_write_logcat_error);
             }
         });
-
     }
 }
