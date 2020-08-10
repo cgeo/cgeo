@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -18,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -67,7 +67,7 @@ public final class Dialogs {
      *            listener of the positive button
      */
     public static AlertDialog.Builder confirm(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setTitle(title)
                 .setCancelable(true)
                 .setMessage(msg)
@@ -160,7 +160,7 @@ public final class Dialogs {
      *            listener of the positive button
      */
     public static AlertDialog.Builder confirmYesNo(final Activity context, final String title, final String msg, final OnClickListener yesListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setTitle(title)
                 .setCancelable(true)
                 .setMessage(msg)
@@ -299,7 +299,7 @@ public final class Dialogs {
                                                                      final OnClickListener positiveListener,
                                                                      final OnClickListener negativeListener,
                                                                      final OnClickListener neutralListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context)
+        final AlertDialog.Builder builder = newBuilder(context)
             .setTitle(title)
             .setCancelable(true)
             .setMessage(msg);
@@ -349,7 +349,7 @@ public final class Dialogs {
                                                                      final OnClickListener positiveListener,
                                                                      final OnClickListener negativeListener,
                                                                      final OnClickListener neutralListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setTitle(title)
                 .setCancelable(true)
                 .setMessage(msg)
@@ -377,7 +377,7 @@ public final class Dialogs {
      *            label for positive button
      */
     public static AlertDialog.Builder message(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setTitle(title)
                 .setCancelable(true)
                 .setMessage(msg)
@@ -465,7 +465,7 @@ public final class Dialogs {
      *            observable (may be <tt>null</tt>) containing the icon(s) to set
      */
     public static void message(final Activity context, @Nullable final String title, final String message, @Nullable final Observable<Drawable> iconObservable) {
-        final Builder builder = new AlertDialog.Builder(context)
+        final AlertDialog.Builder builder = newBuilder(context)
                 .setMessage(message)
                 .setCancelable(true)
                 .setPositiveButton(getString(android.R.string.ok), null);
@@ -538,7 +538,7 @@ public final class Dialogs {
      *            listener of the neutral button
      */
     public static AlertDialog.Builder messageNeutral(final Activity context, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setMessage(msg)
                 .setPositiveButton(android.R.string.ok, null)
                 .setNeutralButton(neutralTextButton, neutralListener)
@@ -567,7 +567,7 @@ public final class Dialogs {
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         builder.setTitle(title);
         builder.setView(input);
         builder.setPositiveButton(buttonTitle, (dialog, which) -> okayListener.call(input.getText().toString()));
@@ -644,7 +644,7 @@ public final class Dialogs {
             }
         };
 
-        new AlertDialog.Builder(activity)
+        newBuilder(activity)
                 .setTitle(title)
                 .setAdapter(adapter, (dialog, item) -> listener.call(items.get(item))).show();
     }
@@ -680,7 +680,7 @@ public final class Dialogs {
             items[i] = cacheTypes.get(i).getL10n();
         }
 
-        final Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = newBuilder(activity);
         builder.setTitle(R.string.menu_filter);
         builder.setSingleChoiceItems(items, checkedItem, (dialog, position) -> {
             final CacheType cacheType = cacheTypes.get(position);
@@ -689,6 +689,10 @@ public final class Dialogs {
             dialog.dismiss();
         });
         builder.create().show();
+    }
+
+    private static AlertDialog.Builder newBuilder(final Activity activity) {
+        return new AlertDialog.Builder(new ContextThemeWrapper(activity, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert));
     }
 
 }
