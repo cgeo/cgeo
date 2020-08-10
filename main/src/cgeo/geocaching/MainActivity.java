@@ -157,11 +157,11 @@ public class MainActivity extends AbstractActionBarActivity {
                         final FoundNumCounter f = FoundNumCounter.load(conn.getName());
                         if (f != null) {
 
-                            userInfo.append('(').append(f.getCounter(false));
+                            userInfo.append("(").append(f.getCounter(false));
 
                             final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
                             if (offlinefounds > 0) {
-                                userInfo.append(" + ").append(offlinefounds);
+                                userInfo.append('+').append(offlinefounds);
                             }
                             userInfo.append(')').append(Formatter.SEPARATOR);
 
