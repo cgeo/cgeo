@@ -98,6 +98,56 @@ public final class Dialogs {
     }
 
     /**
+     * Confirm using two buttons "yourText" and "Cancel", where both buttons have action listener.
+     *
+     * @param context
+     *            activity hosting the dialog
+     * @param title
+     *            dialog title
+     * @param msg
+     *            dialog message
+     * @param positiveButton
+     *            text of the positive button (which would typically be the OK button)
+     * @param okayListener
+     *            listener of the positive button
+     * @param cancelListener
+     *            listener of the negative button
+     */
+    public static AlertDialog.Builder confirm(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener, final DialogInterface.OnCancelListener cancelListener) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog dialog = builder.setTitle(title)
+                .setCancelable(true)
+                .setOnCancelListener(cancelListener)
+                .setMessage(msg)
+                .setPositiveButton(positiveButton, okayListener)
+                .setNegativeButton(android.R.string.cancel, (dialog1, which) -> dialog1.cancel())
+                .create();
+        dialog.setOwnerActivity(context);
+        dialog.show();
+        return builder;
+    }
+
+    /**
+     * Confirm using two buttons "yourText" and "Cancel", where both buttons have action listener.
+     *
+     * @param context
+     *            activity hosting the dialog
+     * @param title
+     *            dialog title
+     * @param msg
+     *            dialog message
+     * @param positiveButton
+     *            text of the positive button (which would typically be the OK button)
+     * @param okayListener
+     *            listener of the positive button
+     * @param cancelListener
+     *            listener of the negative button
+     */
+    public static AlertDialog.Builder confirm(final Activity context, final int title, final int msg, final int positiveButton, final OnClickListener okayListener, final DialogInterface.OnCancelListener cancelListener) {
+        return confirm(context, getString(title), getString(msg), getString(positiveButton), okayListener, cancelListener);
+    }
+
+    /**
      * Confirm using two buttons "Yes" and "No", where "No" just closes the dialog.
      *
      * @param context

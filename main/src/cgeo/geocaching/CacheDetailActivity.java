@@ -39,6 +39,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.CacheLogsViewCreator;
+import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
@@ -855,9 +856,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     final StatusCode error = activity.search.getError();
                     final Resources res = activity.getResources();
                     final String toastPrefix = error != StatusCode.CACHE_NOT_FOUND ? res.getString(R.string.err_dwld_details_failed) + " " : "";
-                    activity.showToast(toastPrefix + error.getErrorString(res));
-                    dismissProgress();
-                    finishActivity();
+
+                    if (error == StatusCode.PREMIUM_ONLY) {
+                        Dialogs.confirm(activity, R.string.cache_status_premium, R.string.err_detail_premium_log_found, R.string.cache_menu_visit, (dialog, which) -> {
+                            activity.startActivity(LogCacheActivity.getLogCacheIntent(activity, null, activity.geocode));
+                            finishActivity();
+                        }, dialog -> finishActivity());
+
+                        dismissProgress();
+
+                    } else {
+                        activity.showToast(toastPrefix + error.getErrorString(res));
+                        dismissProgress();
+                        finishActivity();
+                    }
                     return;
                 }
 
