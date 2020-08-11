@@ -143,13 +143,8 @@
     <string name="log_problem_other_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
-    <string-array name="log_image_scales">
-        <item>Dimensioni originali</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
+    <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduci in %s</string>
     <string name="translate_to_english">Traduci in inglese</string>
@@ -830,6 +825,11 @@
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
     <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
     <string name="cache_personal_note_edit">Modifica</string>
+    <string name="cache_personal_note_storewaypoints">Memorizza waypoint</string>
+    <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">I waypoint sono stati aggiunti alla nota ma hanno dovuto essere accorciati (lunghezza massima della nota: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">I waypoint non possono essere memorizzati nella nota a causa dei limiti di dimensione (lunghezza massima della nota: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nessun waypoint utente trovato</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
@@ -993,7 +993,7 @@
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
     <string name="init_longtap_map">Tocco lungo sulla mappa</string>
     <string name="init_summary_longtap_map">Attiva tocco prolungato sull\'icona mappa (crea un percorso individuale) o sullo spazio libero sulla mappa (crea un cache definito dall\'utente)</string>
-    <string name="goto_targets_list">Cache interni</string>
+    <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
     <!-- coordinate calculator hints -->
@@ -1036,6 +1036,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Seleziona il file mappa</string>
     <string name="track_file_select_title">Seleziona file di percorso</string>
+    <string name="individual_route_file_select_title">Seleziona file percorso individuale</string>
     <!-- import -->
     <string name="web_import_title">Importa da send2cgeo</string>
     <string name="web_import_waiting">In attesa di nuovi cache da send2cgeo…</string>
@@ -1107,13 +1108,6 @@
     <string name="map_hidewp_parking">Nascondi waypoint di parcheggio</string>
     <string name="map_hidewp_visited">Nascondi i waypoint visitati</string>
     <string name="map_hide_track">Nascondi traccia individuale</string>
-    <string name="map_load_track">Carica traccia individuale</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Traccia individuale caricata (%d trackpoint)</item>
-        <item quantity="other">Traccia individuale caricata (%d trackpoint)</item>
-    </plurals>
-    <string name="load_track_error">Errore nel caricare la traccia individuale</string>
-    <string name="map_unload_track">Rimuovi traccia individuale</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
@@ -1622,6 +1616,7 @@
     <string name="preference_colorpicker_select_color_scheme">Selezionare lo schema colori</string>
     <string name="preference_colorpicker_select_color">Seleziona colore</string>
     <string name="preference_colorpicker_select_opaqueness">Seleziona opacità</string>
+    <string name="reset_to_default">Predefinito</string>
     <!-- number input -->
     <string name="number_input_title">Inserisci un valore tra %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">Valore inserito è troppo piccolo - resettato al valore minimo</string>
@@ -1638,11 +1633,31 @@
     <string name="individual_route_error_toggling_waypoint">errore cambiando lo stato waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
     <string name="map_sort_individual_route">Ordina percorso individuale</string>
+    <string name="map_export_individual_route">Esporta percorso individuale</string>
+    <string name="map_load_individual_route">Carica percorso individuale</string>
+    <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
+    <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
     <string name="save_sorted_route">Salva</string>
     <string name="sorted_route_saved">Percorso individuale salvato</string>
+    <string name="load_individual_route_error">Errore caricando il percorso individuale</string>
     <string name="route_item_not_yet_loaded">Elemento del percorso non ancora caricato</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Percorso caricato con %d punto di rotta</item>
+        <item quantity="other">Percorso caricato con %d punti di rotta</item>
+    </plurals>
+    <!-- individual track -->
+    <string name="individual_track">Traccia individuale</string>
+    <string name="map_load_track">Carica traccia individuale</string>
+    <string name="map_load_track_confirm">Sovrascrivere traccia esistente?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Traccia individuale caricata (%d trackpoint)</item>
+        <item quantity="other">Traccia individuale caricata (%d trackpoint)</item>
+    </plurals>
+    <string name="load_track_error">Errore nel caricare la traccia individuale</string>
+    <string name="map_unload_track">Rimuovi traccia individuale</string>
+    <string name="center_on_track">Centra sulla traccia</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
@@ -1679,7 +1694,8 @@
     <string name="receivemapfile_cancelled">Trasferimento file mappa annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
-    <string name="downloadmap_info">Sarai reindirizzato a un sito di download per mappe offline di base (nessun supporto ai temi).\n\nScegli il file .map per la tua regione e tocca per scaricare il file.\n\nAl termine del download, tocca il file scaricato per impostare questa mappa come mappa attiva in c:geo</string>
+    <string name="downloadmap_info">Scegli un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download verrà eseguito in background. Una volta completato il download, il file scaricato verrà copiato nella directory della mappa di c:geo e impostato come mappa corrente per c:geo.\n\nAttenzione: il download di una mappa può causare un traffico di rete elevato!</string>
+    <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <!-- history trail export -->
@@ -1687,4 +1703,7 @@
     <string name="export_trailhistory_title">Esporta traccia cronologia</string>
     <string name="export_trailhistory_success">Cronologia esportata in \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Cancella traccia cronologia dopo l\'esportazione</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Esporta percorso individuale</string>
+    <string name="export_individualroute_success">Esporta percorso individuale in \"%s\"</string>
 </resources>
