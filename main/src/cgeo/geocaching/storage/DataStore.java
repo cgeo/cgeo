@@ -2828,7 +2828,7 @@ public class DataStore {
         int counter = 0;
 
         try {
-            final Cursor cursor = database.rawQuery("SELECT geocode FROM " + dbTableLogsOffline + " WHERE type = ? OR type = ? OR type = ?",
+            final Cursor cursor = database.rawQuery("SELECT geocode FROM " + dbTableLogsOffline + " WHERE geocode IN (SELECT geocode FROM " + dbTableCaches + ") AND (type = ? OR type = ? OR type = ?)",
                     new String[]{LogType.FOUND_IT.iconName, LogType.ATTENDED.iconName, LogType.WEBCAM_PHOTO_TAKEN.iconName});
             final Set<String> geocodes = cursorToColl(cursor, new HashSet<>(), GET_STRING_0);
 
