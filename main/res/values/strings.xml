@@ -187,6 +187,7 @@
     <string name="err_detail_cache_find_any">c:geo can\'t find any geocaches.</string>
     <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
     <string name="err_detail_still_working">Still working on another task.</string>
+    <string name="err_detail_premium_log_found">This Cache is only available to Geocaching.com Premium Members. Therefore the cache details could not be downloaded. \n\nIf you have already found the cache, you can log it here.</string>
     <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
     <string name="err_watchlist_failed">Changing your watchlist failed.</string>
     <string name="err_application_no">c:geo can\'t find any suitable application.</string>
