@@ -73,7 +73,7 @@ public class DebugUtils {
                     if (fullInfo) {
                         builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
                     } else {
-                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "cgeo.geocachin:E", "*:S", "-f", file.getAbsolutePath());
+                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "cgeo.geocachin:I", "*:S", "-f", file.getAbsolutePath());
                     }
                 }
                 final int returnCode = builder.start().waitFor();
