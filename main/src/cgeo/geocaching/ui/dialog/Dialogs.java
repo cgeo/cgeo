@@ -114,7 +114,7 @@ public final class Dialogs {
      *            listener of the negative button
      */
     public static AlertDialog.Builder confirm(final Activity context, final String title, final String msg, final String positiveButton, final OnClickListener okayListener, final DialogInterface.OnCancelListener cancelListener) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setTitle(title)
                 .setCancelable(true)
                 .setOnCancelListener(cancelListener)
