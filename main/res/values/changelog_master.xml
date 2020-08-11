@@ -21,6 +21,7 @@
 <h4>Cache details:</h4>
 <ul>
 <li>Changed sync logic for personal notes in caches</li>
+<li>New: Personal note editor will grow automatically for longer texts</li>
 <li>Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
 <li>Remembers offline found count for every connector and applies those values to the [NUMBER] parameter on logging</li>
 </ul>
@@ -29,11 +30,12 @@
 <ul>
 <li>Change: \"New list\" entry moved to top of list creation/selection dialog</li>
 <li>Change: A newly created list for user-defined caches will now be named \"User-defined caches\" instead of \"Internal caches\" (does not change an existing list with user-defined caches)</li>
+<li>New: Offer logging of premium caches from search for basic members of geocaching.com</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
-<li>Change: Set colorAccent on mainscreen and cache list selector to c:geo orange</li>
+<li>Change: Set colorAccent on mainscreen, cache list selector, and several dialogs to c:geo orange</li>
 <li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Internal: Updated contributor\'s list</li>
 <li>Internal: Added extension table to database</li>
