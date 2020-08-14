@@ -283,20 +283,27 @@
         android:title="@string/individual_route">
         <menu>
             <item
-                android:id="@+id/menu_sort_individual_route"
-                android:title="@string/map_sort_individual_route">
-            </item>
-            <item
                 android:id="@+id/menu_load_individual_route"
                 android:title="@string/map_load_individual_route">
             </item>
             <item
+                android:id="@+id/menu_sort_individual_route"
+                android:title="@string/map_sort_individual_route"
+                android:visible="false">
+            </item>
+            <item
+                android:id="@+id/menu_center_on_route"
+                android:title="@string/center_on_route"
+                android:visible="false" />
+            <item
                 android:id="@+id/menu_export_individual_route"
-                android:title="@string/map_export_individual_route">
+                android:title="@string/map_export_individual_route"
+                android:visible="false">
             </item>
             <item
                 android:id="@+id/menu_clear_individual_route"
-                android:title="@string/map_clear_individual_route">
+                android:title="@string/map_clear_individual_route"
+                android:visible="false">
             </item>
         </menu>
     </item>

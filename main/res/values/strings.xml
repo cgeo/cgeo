@@ -1828,6 +1828,7 @@
         <item quantity="many">Route loaded with %d route points</item>
         <item quantity="other">Route loaded with %d route points</item>
     </plurals>
+    <string name="center_on_route">Center on route</string>
 
     <!-- individual track -->
     <string name="individual_track">Individual track</string>
