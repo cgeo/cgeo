@@ -202,6 +202,8 @@
         <item name="settings_backup">@drawable/settings_backup_white</item>
         <item name="settings_info_icon">@drawable/settings_info_icon_white</item>
         <item name="settings_map_icon">@drawable/settings_map_white</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:alertDialogTheme">@style/Dialog_Alert</item>
     </style>
 
     <style name="settings.light" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
@@ -216,18 +218,22 @@
         <item name="settings_backup">@drawable/settings_backup_black</item>
         <item name="settings_info_icon">@drawable/settings_info_icon_black</item>
         <item name="settings_map_icon">@drawable/settings_map_white</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:alertDialogTheme">@style/Dialog_Alert_light</item>
     </style>
 
     <style name="Dialog_Alert" parent="@style/Theme.AppCompat.Dialog.Alert">
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">?android:colorBackground</item>
     </style>
 
     <style name="Dialog_Alert_light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">?android:colorBackground</item>
     </style>
 
 </resources>
