@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -80,6 +81,8 @@ public class RouteSortActivity extends AbstractActivity {
                         detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
                         title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
                     }
+                    title.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
+                    detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
                 }
                 title.setOnLongClickListener(v1 -> delete(position));
                 detail.setOnLongClickListener(v1 -> delete(position));
