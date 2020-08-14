@@ -142,14 +142,12 @@ public class TrackUtils {
 
                             latitude += point.getLatitude();
                             longitude += point.getLongitude();
-                            Log.e("lat=" + latitude + ", lon=" + longitude);
 
                             minLat = Math.min(minLat, lat);
                             maxLat = Math.max(maxLat, lat);
                             minLon = Math.min(minLon, lon);
                             maxLon = Math.max(maxLon, lon);
                         }
-                        Log.e("size=" + track.getSize() + ", lat=" + (latitude / track.getSize()) + ", lon=" + (longitude / track.getSize()));
                         centerOnPosition.centerOnPosition(latitude / track.getSize(), longitude / track.getSize(), new Viewport(new Geopoint(minLat, minLon), new Geopoint(maxLat, maxLon)));
                     }
                 }
