@@ -284,8 +284,9 @@ dependencies {
     testImplementation 'junit:junit:4.13'
 
     // Leak Canary, memory leak detection
-    def leakCanaryVersion = '2.3'
+    def leakCanaryVersion = '2.4'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // Locus Maps integration
     //noinspection GradleDependency
@@ -326,11 +327,11 @@ dependencies {
     implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.5'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 
     // Support Library ExifInterface
     implementation 'androidx.exifinterface:exifinterface:1.2.0'
