@@ -43,6 +43,11 @@ android {
         // set the default test runner to be used by IDE and command line
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+
         // by convention, the folder name "main" is used for the APK file name. we want cgeo instead
         archivesBaseName = "cgeo"
 
@@ -52,6 +57,10 @@ android {
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
         resConfigs "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr"
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
     // signing is handled via private.properties
