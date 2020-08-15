@@ -1833,6 +1833,7 @@
     <!-- individual track -->
     <string name="individual_track">Individual track</string>
     <string name="map_load_track">Load individual track</string>
+    <string name="map_load_track_wait">Loading individual track in background…</string>
     <string name="map_load_track_confirm">Overwrite existing track?</string>
     <plurals name="load_track_success">
         <item quantity="zero">Individual track loaded (%d trackpoints)</item>
