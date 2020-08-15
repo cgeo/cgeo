@@ -17,7 +17,7 @@ include ':cgeo-contacts'
 // Configure the built-in local build cache to a pre-defined directory.
 // Gradle will periodically clean-up by removing entries that have not been used recently
 buildCache {
-    local(DirectoryBuildCache) {
+    local() {
         directory = new File(rootDir, 'build-cache')
         removeUnusedEntriesAfterDays = 30
     }
