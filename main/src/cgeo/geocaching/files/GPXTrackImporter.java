@@ -1,9 +1,9 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TrackUtils;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -24,16 +24,16 @@ public class GPXTrackImporter {
     private GPXTrackImporter() {
     }
 
-    public static void doImport(final Context context, final File file, final TrackUtils.TrackUpdaterMulti callback) {
+    public static void doImport(final Context context, final File file, final Route.UpdateRoute callback) {
         final AtomicBoolean success = new AtomicBoolean(false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
-                final TrackUtils.Tracks value = doInBackground(file);
-                success.set(null != value && value.getSize() > 0);
+                final Route value = doInBackground(file);
+                success.set(null != value && value.getNumSegments() > 0);
                 if (success.get()) {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                         try {
-                            callback.updateTracks(value);
+                            callback.updateRoute(value);
                         } catch (final Throwable t) {
                             //
                         }
@@ -49,7 +49,7 @@ public class GPXTrackImporter {
         });
     }
 
-    private static TrackUtils.Tracks doInBackground(final File file) {
+    private static Route doInBackground(final File file) {
         BufferedInputStream stream = null;
         try {
             stream = new BufferedInputStream(new FileInputStream(file));

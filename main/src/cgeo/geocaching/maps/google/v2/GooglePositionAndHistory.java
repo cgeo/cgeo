@@ -6,12 +6,12 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
-import cgeo.geocaching.maps.routing.Route;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.MapLineUtils;
-import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class GooglePositionAndHistory implements PositionAndHistory, Route.RouteUpdater, TrackUtils.TrackUpdaterSingle {
+public class GooglePositionAndHistory implements PositionAndHistory, Route.UpdateRoute, ManualRoute.UpdateManualRoute {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION = 10;
@@ -158,27 +158,17 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Route
     }
 
     @Override
-    public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
-        this.route = new ArrayList<>();
-        for (int i = 0; i < route.size(); i++) {
-            this.route.add(new LatLng(route.get(i).getLatitude(), route.get(i).getLongitude()));
-        }
-
+    public void updateManualRoute(final Route route) {
+        this.route = route.getAllPointsLatLng();
         if (postRouteDistance != null) {
-            postRouteDistance.postRealDistance(distance);
+            postRouteDistance.postRealDistance(route.getDistance());
         }
         repaintRequired();
     }
 
     @Override
-    public void updateTrack(final TrackUtils.Track track) {
-        this.track = new ArrayList<>();
-        if (null != track) {
-            final ArrayList<Geopoint> temp = track.getTrack();
-            for (int i = 0; i < track.getSize(); i++) {
-                this.track.add(new LatLng(temp.get(i).getLatitude(), temp.get(i).getLongitude()));
-            }
-        }
+    public void updateRoute(final Route track) {
+        this.track = track.getAllPointsLatLng();
         repaintRequired();
     }
 

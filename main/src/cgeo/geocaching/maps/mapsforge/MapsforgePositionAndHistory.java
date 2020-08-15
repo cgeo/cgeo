@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
 
 import android.graphics.Canvas;
@@ -68,7 +69,7 @@ public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndH
     }
 
     @Override
-    public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
+    public void updateManualRoute(final Route route) {
         // do nothing - functionality not implemented for old Mapsforge map
     }
 

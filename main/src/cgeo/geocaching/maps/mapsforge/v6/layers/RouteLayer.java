@@ -1,16 +1,14 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.routing.Route;
+import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.MapLineUtils;
-
-import java.util.ArrayList;
 
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.Point;
 
-public class RouteLayer extends AbstractLineLayer implements Route.RouteUpdater {
+public class RouteLayer extends AbstractRouteLayer implements ManualRoute.UpdateManualRoute {
 
     private float distance = 0.0f;
     private PostRealDistance postRealRouteDistance = null;
@@ -28,12 +26,13 @@ public class RouteLayer extends AbstractLineLayer implements Route.RouteUpdater 
 
     public void resetColor() {
         lineColor = MapLineUtils.getRouteColor();
-        super.resetColors();
+        super.resetColor();
     }
 
-    public void updateRoute(final ArrayList<Geopoint> route, final float distance) {
-        super.updateTrack(route);
-        this.distance = distance;
+    @Override
+    public void updateManualRoute(final Route route) {
+        super.updateRoute(route);
+        this.distance = route.getDistance();
 
         if (postRealRouteDistance != null) {
             postRealRouteDistance.postRealDistance(distance);
