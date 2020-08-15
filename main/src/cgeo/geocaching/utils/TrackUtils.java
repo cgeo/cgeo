@@ -124,7 +124,9 @@ public class TrackUtils {
                 hideOptionsChanged.run();
                 return true;
             case R.id.menu_center_on_track:
-                tracks.setCenter(centerOnPosition);
+                if (null != tracks) {
+                    tracks.setCenter(centerOnPosition);
+                }
                 return true;
             default:
                 return false;
