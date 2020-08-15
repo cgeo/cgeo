@@ -4,7 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectTrackFileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.files.GPXTrackImporter;
+import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
@@ -163,7 +163,7 @@ public class TrackUtils {
     public static void loadTracks(final Activity activity, final Route.UpdateRoute updateRoute) {
         final String trackfile = Settings.getTrackFile();
         if (null != trackfile) {
-            GPXTrackImporter.doImport(activity, new File(trackfile), updateRoute);
+            GPXTrackOrRouteImporter.doImport(activity, new File(trackfile), updateRoute);
         }
         ActivityMixin.invalidateOptionsMenu(activity);
     }
