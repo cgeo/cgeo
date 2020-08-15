@@ -39,10 +39,11 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TrackLayer;
-import cgeo.geocaching.maps.routing.Route;
-import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -166,8 +167,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private CheckBox myLocSwitch;
     private MapOptions mapOptions;
     private TargetView targetView;
-    private Route route;
-    private TrackUtils.Tracks tracks = null;
+    private ManualRoute manualRoute = null;
+    private Route tracks = null;
 
     private static boolean followMyLocation = true;
 
@@ -215,10 +216,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            route = savedInstanceState.getParcelable(BUNDLE_ROUTE);
+            manualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
-            route = null;
+            manualRoute = null;
             followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
@@ -353,7 +354,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
 
-            IndividualRouteUtils.onPrepareOptionsMenu(menu, route);
+            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -491,7 +492,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 if (!TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
-                && !IndividualRouteUtils.onOptionsItemSelected(this, id, route, this::clearIndividualRoute, this::centerOnPosition)
+                && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
                 && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
                     final String language = MapProviderFactory.getLanguage(id);
                     if (language != null) {
@@ -512,7 +513,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void routingModeChanged() {
-        route.reloadRoute(routeLayer);
+        manualRoute.reloadRoute(routeLayer);
         navigationLayer.requestRedraw();
     }
 
@@ -523,7 +524,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void clearIndividualRoute() {
-        route.clearRoute(routeLayer);
+        manualRoute.clearRoute(routeLayer);
         ActivityMixin.invalidateOptionsMenu(this);
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
@@ -775,11 +776,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void resumeRoute(final boolean force) {
-        if (null == route || force) {
-            route = new Route();
-            route.reloadRoute(routeLayer);
+        if (null == manualRoute || force) {
+            manualRoute = new ManualRoute();
+            manualRoute.reloadRoute(routeLayer);
         } else {
-            route.updateRoute(routeLayer);
+            manualRoute.updateRoute(routeLayer);
         }
     }
 
@@ -787,7 +788,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (null == tracks && !preventReloading) {
             TrackUtils.loadTracks(this, this::setTracks);
         } else if (null != trackLayer) {
-            trackLayer.updateTrack(null != tracks && tracks.getSize() > 0 ? tracks.get(0) : null);
+            trackLayer.updateRoute(tracks);
         }
     }
 
@@ -1006,8 +1007,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
-        if (route != null) {
-            outState.putParcelable(BUNDLE_ROUTE, route);
+        if (manualRoute != null) {
+            outState.putParcelable(BUNDLE_ROUTE, manualRoute);
         }
     }
 
@@ -1577,10 +1578,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (item == null || StringUtils.isEmpty(item.getGeocode())) {
             return;
         }
-        if (route == null) {
-            route = new Route();
+        if (manualRoute == null) {
+            manualRoute = new ManualRoute();
         }
-        route.toggleItem(this, new RouteItem(item), routeLayer);
+        manualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
         ActivityMixin.invalidateOptionsMenu(this);
     }
@@ -1735,8 +1736,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
-    private void setTracks(final TrackUtils.Tracks tracks) {
-        this.tracks = tracks;
+    private void setTracks(final Route route) {
+        tracks = route;
         resumeTrack(null == tracks);
         TrackUtils.showTrackInfo(this, tracks);
     }
@@ -1748,7 +1749,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void reloadIndividualRoute() {
         if (null != routeLayer) {
-            route.reloadRoute(routeLayer);
+            manualRoute.reloadRoute(routeLayer);
         } else {
             // try again in 0.25 second
             new Handler(Looper.getMainLooper()).postDelayed(this::reloadIndividualRoute, 250);

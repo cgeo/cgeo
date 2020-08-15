@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.routing.RouteItem;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;

@@ -1,8 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.enumerations.CoordinatesType;
-import cgeo.geocaching.maps.routing.RouteItem;
+import cgeo.geocaching.models.RouteItem;
 
 import android.sax.Element;
 import android.sax.RootElement;
@@ -35,7 +34,7 @@ class GPXIndividualRouteParser {
         final Element route = root.getChild(namespace, "rte");
         final Element routePoint = route.getChild(namespace, "rtept");
 
-        routePoint.getChild(namespace, "name").setEndTextElementListener(body -> routeItems.add(new RouteItem(ConnectorFactory.canHandle(body) ? CoordinatesType.CACHE : CoordinatesType.WAYPOINT, body)));
+        routePoint.getChild(namespace, "name").setEndTextElementListener(body -> routeItems.add(new RouteItem(ConnectorFactory.canHandle(body) ? RouteItem.RouteItemType.GEOCACHE : RouteItem.RouteItemType.WAYPOINT, body)));
 
         try {
             final ProgressInputStream progressStream = new ProgressInputStream(stream);

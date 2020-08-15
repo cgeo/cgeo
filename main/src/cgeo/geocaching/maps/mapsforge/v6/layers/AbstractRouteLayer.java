@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 
-abstract class AbstractLineLayer extends Layer {
+abstract class AbstractRouteLayer extends Layer {
     protected float width;
     private Paint paint = null;
     protected int lineColor = 0xD00000A0;
@@ -29,19 +30,22 @@ abstract class AbstractLineLayer extends Layer {
     private long mapSize = -1;
     private Point topLeftPoint = null;
 
-    protected AbstractLineLayer() {
+    protected AbstractRouteLayer() {
         width = MapLineUtils.getDefaultThinLineWidth();
     }
 
-    public void updateTrack(final ArrayList<Geopoint> track) {
-        resetColors();
+    public void updateRoute(final Route route) {
+        resetColor();
         synchronized (pathLock) {
-            this.track = null == track ? null : new ArrayList<>(track);
+            this.track = null;
             this.path = null;
+            if (route != null) {
+                this.track = route.getAllPoints();
+            }
         }
     }
 
-    public void resetColors() {
+    public void resetColor() {
         paint = AndroidGraphicFactory.INSTANCE.createPaint();
         paint.setStrokeWidth(width);
         paint.setStyle(Style.STROKE);

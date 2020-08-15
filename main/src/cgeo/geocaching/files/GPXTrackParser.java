@@ -1,7 +1,9 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.utils.TrackUtils;
+import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteSegment;
 
 import android.sax.Element;
 import android.sax.RootElement;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;
@@ -22,10 +25,10 @@ public class GPXTrackParser {
 
     protected final String namespace;
     private final String version;
-    private final TrackUtils.Tracks result = new TrackUtils.Tracks();
+    private final Route result = new Route(false);
 
     // temporary variables
-    private TrackUtils.Track temp;
+    private ArrayList<Geopoint> temp;
 
     protected GPXTrackParser(final String namespaceIn, final String versionIn) {
         namespace = namespaceIn;
@@ -33,17 +36,19 @@ public class GPXTrackParser {
     }
 
     @NonNull
-    public TrackUtils.Tracks parse(@NonNull final InputStream stream) throws IOException, ParserException {
+    public Route parse(@NonNull final InputStream stream) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element track = root.getChild(namespace, "trk");
         final Element trackSegment = track.getChild(namespace, "trkseg");
         final Element trackPoint = trackSegment.getChild(namespace, "trkpt");
 
-        track.setStartElementListener(attrs -> startNewTrack());
-        track.getChild(namespace, "name").setEndTextElementListener(body -> temp.setTrackName(body));
+        track.setStartElementListener(attrs -> temp = new ArrayList<>());
+        track.getChild(namespace, "name").setEndTextElementListener(result::setName);
         track.setEndElementListener(() -> {
-            result.add(temp);
-            temp = null;
+            if (temp.size() > 0) {
+                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp));
+                temp = null;
+            }
         });
 
         trackPoint.setStartElementListener(attrs -> {
@@ -65,9 +70,4 @@ public class GPXTrackParser {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }
-
-    private void startNewTrack() {
-        temp = new TrackUtils.Track();
-    }
-
 }

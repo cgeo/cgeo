@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -62,7 +63,7 @@ public class RouteSortActivity extends AbstractActivity {
                 }
 
                 final RouteItem routeItem = routeItems.get(position);
-                final IWaypoint data = routeItem.getType() == CoordinatesType.CACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getId());
+                final IWaypoint data = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getId());
 
                 final TextView title = v.findViewById(R.id.title);
                 final TextView detail = v.findViewById(R.id.detail);
@@ -71,7 +72,7 @@ public class RouteSortActivity extends AbstractActivity {
                     detail.setText(R.string.route_item_not_yet_loaded);
                 } else {
                     title.setText(data.getName());
-                    if (routeItem.getType() == CoordinatesType.CACHE) {
+                    if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
                         assert data instanceof Geocache;
                         detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
                         title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);

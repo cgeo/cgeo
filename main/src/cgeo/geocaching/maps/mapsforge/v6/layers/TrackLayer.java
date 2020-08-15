@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.MapLineUtils;
-import cgeo.geocaching.utils.TrackUtils;
 
-public class TrackLayer extends AbstractLineLayer implements TrackUtils.TrackUpdaterSingle {
+public class TrackLayer extends AbstractRouteLayer implements Route.UpdateRoute {
 
     public TrackLayer(final boolean isHidden) {
         this.isHidden = isHidden;
@@ -13,11 +13,7 @@ public class TrackLayer extends AbstractLineLayer implements TrackUtils.TrackUpd
 
     public void resetColor() {
         lineColor = MapLineUtils.getTrackColor();
-        super.resetColors();
-    }
-
-    public void updateTrack(final TrackUtils.Track track) {
-        super.updateTrack(null != track ? track.getTrack() : null);
+        super.resetColor();
     }
 
 }

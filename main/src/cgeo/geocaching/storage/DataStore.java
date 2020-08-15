@@ -25,9 +25,9 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
@@ -2555,7 +2555,8 @@ public class DataStore {
                 "precedence ASC",
                 null,
                 new ArrayList<>(),
-                cursor -> new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1)));
+                cursor -> new RouteItem(RouteItem.RouteItemType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1))
+                );
     }
 
     /**
