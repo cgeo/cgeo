@@ -204,6 +204,7 @@
         <item name="settings_map_icon">@drawable/settings_map_white</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:alertDialogTheme">@style/Dialog_Alert</item>
+        <item name="text_color">@color/text_dark</item>
     </style>
 
     <style name="settings.light" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
@@ -220,6 +221,7 @@
         <item name="settings_map_icon">@drawable/settings_map_black</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:alertDialogTheme">@style/Dialog_Alert_light</item>
+        <item name="text_color">@color/text_light</item>
     </style>
 
     <style name="Dialog_Alert" parent="@style/Theme.AppCompat.Dialog.Alert">
