@@ -21,10 +21,6 @@ import org.xml.sax.SAXException;
 
 abstract class AbstractTrackOrRouteParser {
 
-    interface RouteParse {
-        Route parse(@NonNull InputStream stream) throws IOException, ParserException;
-    }
-
     protected final String namespace;
     private final String version;
     protected final Route result;
@@ -38,6 +34,10 @@ abstract class AbstractTrackOrRouteParser {
         namespace = namespaceIn;
         version = versionIn;
         result = new Route(routeable);
+    }
+
+    interface RouteParse {
+        Route parse(@NonNull InputStream stream) throws IOException, ParserException;
     }
 
     @NonNull
