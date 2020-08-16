@@ -4,7 +4,6 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;

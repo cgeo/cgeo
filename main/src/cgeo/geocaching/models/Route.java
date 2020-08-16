@@ -133,7 +133,7 @@ public class Route implements Parcelable {
         }
     }
 
-    void calculateNavigationRoute(final int pos) {
+    protected void calculateNavigationRoute(final int pos) {
         if (routeable && segments != null && pos < segments.size()) {
             final RouteSegment segment = segments.get(pos);
             distance -= segment.getDistance();
