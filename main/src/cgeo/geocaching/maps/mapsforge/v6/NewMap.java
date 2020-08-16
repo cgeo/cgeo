@@ -60,6 +60,7 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
 import android.annotation.SuppressLint;
@@ -494,7 +495,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 && !IndividualRouteUtils.onOptionsItemSelected(this, id, route, this::clearIndividualRoute, this::centerOnPosition)
                 && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
                     final String language = MapProviderFactory.getLanguage(id);
-                    if (language != null) {
+                    if (language != null || id == MAP_LANGUAGE_DEFAULT) {
                         item.setChecked(true);
                         changeLanguage(id);
                         return true;
@@ -609,7 +610,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
 
         final List<String> names = new ArrayList<>();
-        names.add(res.getString(R.string.map_theme_builtin));
+        names.add(res.getString(R.string.switch_default));
         int currentItem = 0;
         for (final File file : themeFiles) {
             if (currentTheme.equalsIgnoreCase(file.getName())) {

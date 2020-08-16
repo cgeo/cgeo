@@ -1213,7 +1213,6 @@
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
     <string name="init_summary_hidewp_visited">Hide visited waypoints on the map</string>
-    <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>
     <string name="map_language">Map language</string>
@@ -1858,6 +1857,7 @@
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automatic</string>
+    <string name="switch_default">(default)</string>
 
     <!-- view settings -->
     <string name="view_settings">View settings</string>

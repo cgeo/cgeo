@@ -1017,7 +1017,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         final List<String> names = new ArrayList<>();
-        names.add(res.getString(R.string.map_theme_builtin));
+        names.add(res.getString(R.string.switch_default));
         int currentItem = 0;
         for (final File file : themeFiles) {
             if (currentTheme.equalsIgnoreCase(file.getName())) {
