@@ -52,6 +52,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
@@ -86,6 +87,7 @@ import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -104,6 +106,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.model.LatLong;
@@ -513,7 +516,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void routingModeChanged() {
+        Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         manualRoute.reloadRoute(routeLayer);
+        if (null != tracks) {
+            AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
+                tracks.calculateNavigationRoute();
+                trackLayer.updateRoute(tracks);
+            }, () -> trackLayer.requestRedraw());
+        }
         navigationLayer.requestRedraw();
     }
 
