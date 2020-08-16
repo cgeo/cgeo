@@ -124,6 +124,15 @@ public class Route implements Parcelable {
         }
     }
 
+    public void calculateNavigationRoute() {
+        final int numSegments = getNumSegments();
+        if (routeable && numSegments > 0) {
+            for (int segment = 0; segment < numSegments; segment++) {
+                calculateNavigationRoute(segment);
+            }
+        }
+    }
+
     void calculateNavigationRoute(final int pos) {
         if (routeable && segments != null && pos < segments.size()) {
             final RouteSegment segment = segments.get(pos);

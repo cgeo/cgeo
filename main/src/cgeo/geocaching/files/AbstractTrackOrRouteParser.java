@@ -2,8 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.models.RouteItem;
-import cgeo.geocaching.models.RouteSegment;
 
 import android.sax.Element;
 import android.sax.RootElement;
@@ -24,33 +22,28 @@ import org.xml.sax.SAXException;
 abstract class AbstractTrackOrRouteParser {
 
     interface RouteParse {
-        Route parse(@NonNull final InputStream stream) throws IOException, ParserException;
+        Route parse(@NonNull InputStream stream) throws IOException, ParserException;
     }
 
     protected final String namespace;
     private final String version;
-    protected final Route result = new Route(false);
+    protected final Route result;
 
     // temporary variables
     protected ArrayList<Geopoint> temp;
     protected Element points;
     protected Element point;
 
-    protected AbstractTrackOrRouteParser(final String namespaceIn, final String versionIn) {
+    protected AbstractTrackOrRouteParser(final String namespaceIn, final String versionIn, final boolean routeable) {
         namespace = namespaceIn;
         version = versionIn;
+        result = new Route(routeable);
     }
 
     @NonNull
     public Route parse(@NonNull final InputStream stream, final RootElement root) throws IOException, ParserException {
         points.setStartElementListener(attrs -> temp = new ArrayList<>());
         points.getChild(namespace, "name").setEndTextElementListener(result::setName);
-        points.setEndElementListener(() -> {
-            if (temp.size() > 0) {
-                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp));
-                temp = null;
-            }
-        });
 
         point.setStartElementListener(attrs -> {
             if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
