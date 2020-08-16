@@ -4,6 +4,9 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Developer version:</h1>
 
+<h4>Android 11 notice:</h4>
+Android 11 enforces a new way for storing data, which c:geo does not support yet. If you switch your system to Android 11, c:geo will not be able to access part of its data. This will most likely disable storing offline maps, importing/exporting data as well as backing up/restoring c:geo\'s database. Other effects may occur. We recommend to not upgrade to Android 11 for the time being.
+
 <h4>Map:</h4>
 <ul>
 <li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
