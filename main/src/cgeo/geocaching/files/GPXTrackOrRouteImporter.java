@@ -63,6 +63,9 @@ public class GPXTrackOrRouteImporter {
         if (null == route) {
             route = parse(new GPXRouteParser("http://www.topografix.com/GPX/1/0", "1.0"), file);
         }
+        if (null != route) {
+            route.calculateNavigationRoute();
+        }
         return route;
     }
 
