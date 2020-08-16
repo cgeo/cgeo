@@ -594,6 +594,7 @@
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Exclude Disabled</string>
     <string name="init_summary_disabled">Exclude disabled caches</string>

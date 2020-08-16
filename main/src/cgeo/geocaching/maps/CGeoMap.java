@@ -87,6 +87,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import androidx.annotation.NonNull;
@@ -924,7 +925,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     private void routingModeChanged() {
+        Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         manualRoute.reloadRoute(overlayPositionAndScale);
+        if (null != tracks) {
+            AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
+                tracks.calculateNavigationRoute();
+                ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
+            }, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
+        }
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
     }
 
