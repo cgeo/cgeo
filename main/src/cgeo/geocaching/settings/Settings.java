@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -994,7 +995,7 @@ public class Settings {
     }
 
     public static int getMapLanguage() {
-        return getInt(R.string.pref_maplanguage, 0);
+        return getInt(R.string.pref_maplanguage, MAP_LANGUAGE_DEFAULT);
     }
 
     public static void setAnyCoordinates(final Geopoint coords) {

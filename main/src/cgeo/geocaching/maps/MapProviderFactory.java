@@ -24,6 +24,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class MapProviderFactory {
 
+    public static final int MAP_LANGUAGE_DEFAULT = 432198765;
+
     private static final ArrayList<MapSource> mapSources = new ArrayList<>();
     private static String[] languages;
 
@@ -130,6 +132,7 @@ public class MapProviderFactory {
         if (languages != null) {
             final int currentLanguage = Settings.getMapLanguage();
             final SubMenu subMenu = parentMenu.getSubMenu();
+            subMenu.add(R.id.menu_group_map_languages, MAP_LANGUAGE_DEFAULT, 0, R.string.switch_default).setCheckable(true).setChecked(MAP_LANGUAGE_DEFAULT == currentLanguage);
             for (int i = 0; i < languages.length; i++) {
                 final int languageId = languages[i].hashCode();
                 subMenu.add(R.id.menu_group_map_languages, languageId, i, languages[i]).setCheckable(true).setChecked(languageId == currentLanguage);
