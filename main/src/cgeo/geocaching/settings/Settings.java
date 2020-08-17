@@ -784,6 +784,9 @@ public class Settings {
     public static boolean isAutoInsertSignature() {
         return getBoolean(R.string.pref_sigautoinsert, false);
     }
+    public static boolean isDisplayOfflineLogsHomescreen() {
+        return getBoolean(R.string.pref_offlinelogs_homescreen, true);
+    }
 
     static void setUseImperialUnits(final boolean useImperialUnits) {
         putBoolean(R.string.pref_units_imperial, useImperialUnits);

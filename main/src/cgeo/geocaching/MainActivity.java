@@ -159,9 +159,11 @@ public class MainActivity extends AbstractActionBarActivity {
 
                             userInfo.append('(').append(f.getCounter(false));
 
-                            final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
-                            if (offlinefounds > 0) {
-                                userInfo.append(" + ").append(offlinefounds);
+                            if (Settings.isDisplayOfflineLogsHomescreen()) {
+                                final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
+                                if (offlinefounds > 0) {
+                                    userInfo.append(" + ").append(offlinefounds);
+                                }
                             }
                             userInfo.append(')').append(Formatter.SEPARATOR);
 
