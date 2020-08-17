@@ -262,6 +262,15 @@ public final class ImageUtils {
         return sizeOnlyOptions;
     }
 
+    @Nullable
+    public static ImmutablePair<Integer, Integer> getImageSize(@Nullable final File imgFile) {
+        if (imgFile == null || !imgFile.isFile()) {
+            return null;
+        }
+        final Bitmap bm = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        return bm == null ? null : new ImmutablePair<>(bm.getWidth(), bm.getHeight());
+    }
+
     /** Create a File for saving an image or video
      *
      * @return the temporary image file to use, or <tt>null</tt> if the media directory could
@@ -285,6 +294,16 @@ public final class ImageUtils {
         // Create a media file name
         final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+    }
+
+    @NonNull
+    public static String getRelativePathToOutputImageDir(final File file) {
+        final String basePath = LocalStorage.getLogPictureDirectory().getAbsolutePath();
+        final String filePath = file.getAbsolutePath();
+        if (filePath.startsWith(basePath)) {
+            return filePath.substring(basePath.length());
+        }
+        return filePath;
     }
 
     @Nullable

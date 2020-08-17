@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?background_color"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".log.LogCacheActivity" >
+    tools:context=".log.LogCacheActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -141,6 +142,81 @@
                 android:visibility="gone"
                 tools:visibility="visible"                />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/image_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="10dip"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <RelativeLayout style="@style/separator_horizontal_layout">
+                <View style="@style/separator_horizontal" />
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/log_images" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/log_image_add"
+                    style="@style/button_small"
+                    android:src="@drawable/ic_menu_add"
+                    android:layout_gravity="left"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    />
+
+                <EditText
+                    android:id="@+id/log_image_titleprefix"
+                    style="@style/edittext_full"
+                    android:layout_toRightOf="@+id/log_image_add"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:hint="@string/log_image_titleprefix_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"/>
+
+                </RelativeLayout>
+
+            <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+               work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                   app:spanCount="1" -->
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:orientation="vertical"
+                    android:nestedScrollingEnabled="false"
+
+                    android:id="@+id/image_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="?background_color"
+                    android:clipToPadding="false"
+                    android:divider="?background_color"
+                    android:footerDividersEnabled="false"
+                    android:headerDividersEnabled="false"
+                    android:listSelector="?background_color"
+                    android:padding="4dip"
+                    android:scrollbars="none"
+                    tools:ignore="NestedScrolling"
+                    tools:listitem="@layout/logcache_image_item">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout

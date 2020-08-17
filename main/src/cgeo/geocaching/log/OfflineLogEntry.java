@@ -7,7 +7,11 @@ import androidx.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
+
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -32,6 +36,8 @@ public final class OfflineLogEntry extends LogEntry {
     public final boolean tweet;
     /** cache rating to be set with this log */
     public final Float rating;
+    /** password to use for password-protected caches (e.g. Opencaching.de) */
+    public final String password;
     /** trackable trackable log settings:  "action" to invoke with log */
     public final Map<String, LogTypeTrackable> trackableActions;
 
@@ -44,6 +50,7 @@ public final class OfflineLogEntry extends LogEntry {
         favorite = in.readInt() == 1;
         tweet = in.readInt() == 1;
         rating = (Float) in.readValue(Float.class.getClassLoader());
+        password = in.readString();
         trackableActions = new HashMap<>();
         in.readMap(trackableActions, LogTypeTrackable.class.getClassLoader());
     }
@@ -56,6 +63,7 @@ public final class OfflineLogEntry extends LogEntry {
         dest.writeInt(favorite ? 1 : 0);
         dest.writeInt(tweet ? 1 : 0);
         dest.writeValue(rating);
+        dest.writeString(password);
         dest.writeMap(trackableActions);
     }
 
@@ -81,6 +89,7 @@ public final class OfflineLogEntry extends LogEntry {
         this.favorite = builder.favorite;
         this.tweet = builder.tweet;
         this.rating = builder.rating;
+        this.password = builder.password;
         this.trackableActions = Collections.unmodifiableMap(builder.trackableActions);
     }
 
@@ -98,6 +107,7 @@ public final class OfflineLogEntry extends LogEntry {
         private boolean favorite = false;
         private boolean tweet = false;
         private Float rating = null;
+        private String password = null;
         private final Map<String, LogTypeTrackable> trackableActions = new HashMap<>();
 
         /**
@@ -133,6 +143,11 @@ public final class OfflineLogEntry extends LogEntry {
             return (T) this;
         }
 
+        public T setPassword(final String password) {
+            this.password = password;
+            return (T) this;
+        }
+
         public T addTrackableAction(final String tbCode, final LogTypeTrackable action) {
             this.trackableActions.put(tbCode, action);
             return (T) this;
@@ -142,5 +157,48 @@ public final class OfflineLogEntry extends LogEntry {
             this.trackableActions.clear();
             return (T) this;
         }
+    }
+
+    /**
+     * Checks whether this instance contains changes relevant for saving the log
+     * compared to a given previous instance
+     * Note that this is NOT a hidden {@link #equals(Object)}-method!
+     */
+    public boolean hasSaveRelevantChanges(final OfflineLogEntry prev, final String signature) {
+
+        // Do not erase the saved log if the user has removed all the characters
+        // without using "Clear". This may be a manipulation mistake, and erasing
+        // again will be easy using "Clear" while retyping the text may not be.
+        boolean changed = StringUtils.isNotEmpty(log) && !StringUtils.equals(log, signature) && !StringUtils.equals(log, prev.log);
+        //other changes however lead to save anyway
+        changed |= !Objects.equals(logType, prev.logType);
+        changed |= !Objects.equals(reportProblem, prev.reportProblem);
+        changed |= !Objects.equals(date, prev.date);
+        changed |= favorite != prev.favorite;
+        changed |= tweet != prev.tweet;
+        changed |= !equalsFloat(rating, prev.rating, 0.2f);
+        changed |= !Objects.equals(password, prev.password);
+        changed |= !Objects.equals(imageScale, prev.imageScale);
+        changed |= !Objects.equals(imageTitlePraefix, prev.imageTitlePraefix);
+
+        changed |= logImages.size() != prev.logImages.size() || !new HashSet<>(logImages).equals(new HashSet<>(prev.logImages));
+        changed |= !Objects.equals(trackableActions, prev.trackableActions);
+
+        return changed;
+
+    }
+
+    private static boolean equalsFloat(final Float f1, final Float f2, final float prec) {
+        final boolean isF1Null = f1 == null;
+        final boolean isF2Null = f2 == null;
+        if (isF1Null != isF2Null) {
+            return false;
+        }
+        if (isF1Null && isF2Null) {
+            return true;
+        }
+
+        //if we come here, both are non-null
+        return Math.abs(f1 - f2) < prec;
     }
 }

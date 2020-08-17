@@ -100,6 +100,13 @@
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:text="@android:string/ok" />
+
+            <Button
+                android:id="@+id/delete"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@string/log_image_delete" />
         </LinearLayout>
     </LinearLayout>
 

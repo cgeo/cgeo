@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/logcache_image_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="1dp"
+    android:paddingBottom="10dip"
+    android:paddingLeft="0dip"
+    android:paddingRight="0dip"
+    tools:context=".log.LogCacheActivity">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal" >
+
+
+
+        <ImageView
+            android:id="@+id/log_image_thumbnail"
+            style="@style/action_bar_action"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_menu_add"
+            tools:src="@tools:sample/avatars"/>
+
+
+        <LinearLayout
+            android:layout_toRightOf="@id/log_image_thumbnail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp">
+
+            <TextView
+                android:id="@+id/log_image_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:textColor="?text_color"
+                android:textSize="18sp"
+                android:lines="1"
+                tools:visibility="visible"
+                tools:text="Title of the image, might be a bit longer"/>
+
+            <TextView
+                android:id="@+id/log_image_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:lines="2"
+                android:scrollHorizontally="true"
+                android:textColor="?text_color_headline"
+                android:textSize="14sp"
+                android:visibility="visible"
+                tools:visiblity="visible"
+                tools:text="Add info: size, Location and KB"/>
+
+            <TextView
+                android:id="@+id/log_image_description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:lines="2"
+                android:scrollHorizontally="true"
+                android:textColor="?text_color"
+                android:textSize="14sp"
+                android:visibility="visible"
+                tools:visiblity="visible"
+                tools:text="@tools:sample/lorem/random"
+                android:maxLines="2" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="9dp" />
+
+</LinearLayout>

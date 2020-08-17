@@ -33,6 +33,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.network.HtmlImage;
@@ -140,7 +141,6 @@ public class Geocache implements IWaypoint {
     private Boolean found = null;
     private Boolean favorite = null;
     private Boolean onWatchlist = null;
-    private Boolean logOffline = null;
     private int watchlistCount = -1; // valid numbers are larger than -1
     private int favoritePoints = -1; // valid numbers are larger than -1
     private float rating = 0; // valid ratings are larger than zero
@@ -174,7 +174,9 @@ public class Geocache implements IWaypoint {
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
     private boolean preventWaypointsFromNote = Settings.isGlobalWpExtractionDisabled();
-    private LogEntry offlineLog = null;
+
+    private Boolean hasLogOffline = null;
+    private OfflineLogEntry offlineLog = null;
     private Integer eventTimeMinutes = null;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
@@ -240,8 +242,8 @@ public class Geocache implements IWaypoint {
         if (onWatchlist == null) {
             onWatchlist = other.onWatchlist;
         }
-        if (logOffline == null) {
-            logOffline = other.logOffline;
+        if (hasLogOffline == null) {
+            hasLogOffline = other.hasLogOffline;
         }
         if (visitedDate == 0) {
             visitedDate = other.visitedDate;
@@ -417,7 +419,7 @@ public class Geocache implements IWaypoint {
                 ObjectUtils.equals(spoilers, other.spoilers) &&
                 ObjectUtils.equals(inventory, other.inventory) &&
                 ObjectUtils.equals(logCounts, other.logCounts) &&
-                ObjectUtils.equals(logOffline, other.logOffline) &&
+                ObjectUtils.equals(hasLogOffline, other.hasLogOffline) &&
                 finalDefined == other.finalDefined;
     }
 
@@ -453,14 +455,35 @@ public class Geocache implements IWaypoint {
         fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));
     }
 
+    @Deprecated //use hasLogOffline() instead
+    public boolean isLogOffline() {
+        return hasLogOffline();
+    }
+
+    public boolean hasLogOffline() {
+        return BooleanUtils.isTrue(hasLogOffline);
+    }
+
+    public void setHasLogOffline(final boolean hasLogOffline) {
+        this.hasLogOffline = hasLogOffline;
+    }
+
     public void logOffline(final Activity fromActivity, final LogType logType, final ReportProblemType reportProblem) {
         final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
         final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, null, true)) : "";
-        logOffline(fromActivity, initial, Calendar.getInstance(), logType, reportProblem);
+
+        logOffline(fromActivity, new OfflineLogEntry.Builder<>()
+            .setLog(initial)
+            .setDate(Calendar.getInstance().getTimeInMillis())
+            .setLogType(logType)
+            .setReportProblem(reportProblem)
+            .build()
+        );
     }
 
-    public void logOffline(final Activity fromActivity, final String log, final Calendar date, final LogType logType, final ReportProblemType reportProblem) {
-        if (logType == LogType.UNKNOWN) {
+    public void logOffline(final Activity fromActivity, final OfflineLogEntry logEntry) {
+
+        if (logEntry.logType == LogType.UNKNOWN) {
             return;
         }
 
@@ -469,15 +492,14 @@ public class Geocache implements IWaypoint {
             DataStore.saveCache(this, LoadFlags.SAVE_ALL);
         }
 
-        final boolean status = DataStore.saveLogOffline(geocode, date.getTime(), logType, log, reportProblem);
+        final boolean status = DataStore.saveLogOffline(geocode, logEntry);
 
         final Resources res = fromActivity.getResources();
         if (status) {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
-            DataStore.saveVisitDate(geocode, date.getTimeInMillis());
-            logOffline = Boolean.TRUE;
-
-            offlineLog = DataStore.loadLogOffline(geocode);
+            DataStore.saveVisitDate(geocode, logEntry.date);
+            hasLogOffline = Boolean.TRUE;
+            offlineLog = logEntry;
             notifyChange();
         } else {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.err_log_post_failed));
@@ -491,9 +513,10 @@ public class Geocache implements IWaypoint {
      *          The Offline LogEntry
      */
     @Nullable
-    public LogEntry getOfflineLog() {
-        if (isLogOffline() && offlineLog == null) {
+    public OfflineLogEntry getOfflineLog() {
+        if (!BooleanUtils.isFalse(hasLogOffline) && offlineLog == null) {
             offlineLog = DataStore.loadLogOffline(geocode);
+            setHasLogOffline(offlineLog != null);
         }
         return offlineLog;
     }
@@ -510,7 +533,7 @@ public class Geocache implements IWaypoint {
         if (offlineLog == null) {
             return null;
         }
-        return offlineLog.getType();
+        return offlineLog.logType;
     }
 
     /**
@@ -518,7 +541,7 @@ public class Geocache implements IWaypoint {
      */
     public void clearOfflineLog() {
         DataStore.clearLogOffline(geocode);
-        setLogOffline(false);
+        setHasLogOffline(false);
         notifyChange();
     }
 
@@ -1190,14 +1213,6 @@ public class Geocache implements IWaypoint {
             }
         }
         return Collections.unmodifiableList(friendLogs);
-    }
-
-    public boolean isLogOffline() {
-        return BooleanUtils.isTrue(logOffline);
-    }
-
-    public void setLogOffline(final boolean logOffline) {
-        this.logOffline = logOffline;
     }
 
     public boolean isStatusChecked() {
