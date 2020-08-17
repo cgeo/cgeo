@@ -827,6 +827,11 @@
                 android:key="@string/pref_log_offline"
                 android:summary="@string/init_summary_log_offline"
                 android:title="@string/init_log_offline" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_offlinelogs_homescreen"
+                android:summary="@string/init_summary_offlinelogs_homescreen"
+                android:title="@string/init_offlinelogs_homescreen" />
         </PreferenceCategory>
     </PreferenceScreen>
 

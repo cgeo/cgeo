@@ -77,6 +77,7 @@
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_signature">signature</string>
     <string translatable="false" name="pref_sigautoinsert">sigautoinsert</string>
+    <string translatable="false" name="pref_offlinelogs_homescreen">offlinelogs_homescreen</string>
     <string translatable="false" name="pref_trackautovisit">trackautovisit</string>
     <string translatable="false" name="pref_log_offline">log_offline</string>
     <string translatable="false" name="pref_logimages">logimages</string>
