@@ -23,6 +23,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
@@ -37,6 +39,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
@@ -95,6 +98,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class DataStore {
@@ -116,7 +120,7 @@ public class DataStore {
     public enum DBExtensionType {
         // values for id must not be changed, as there are database entries depending on it
         DBEXTENSION_INVALID(0),
-        DBEXTENSION_PENDING_DOWNLOAD (1),
+        DBEXTENSION_PENDING_DOWNLOAD(1),
         DBEXTENSION_FOUNDNUM(2),
         DBEXTENSION_DOWNGRADEABLE_DBVERSION(3);
 
@@ -190,7 +194,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 84;
+    private static final int dbVersion = 85;
     public static final int customListIdOffset = 10;
 
     /**
@@ -211,7 +215,7 @@ public class DataStore {
      * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
-            //empty for now
+            85 //adds offline logging columns/tables
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -224,6 +228,8 @@ public class DataStore {
     @NonNull private static final String dbTableLogCount = "cg_logCount";
     @NonNull private static final String dbTableLogImages = "cg_logImages";
     @NonNull private static final String dbTableLogsOffline = "cg_logs_offline";
+    @NonNull private static final String dbTableLogsOfflineImages = "cg_logs_offline_images";
+    @NonNull private static final String dbTableLogsOfflineTrackables = "cg_logs_offline_trackables";
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
@@ -363,8 +369,31 @@ public class DataStore {
             + "type INTEGER NOT NULL DEFAULT 4, "
             + "log TEXT, "
             + "date LONG, "
-            + "report_problem TEXT"
+            + "report_problem TEXT, "
+            //new for version 85
+            + "image_title_prefix TEXT, "
+            + "image_scale INTEGER, "
+            + "favorite INTEGER, "
+            + "rating FLOAT, "
+            + "password TEXT, "
+            + "tweet INTEGER"
             + "); ";
+    private static final String dbCreateLogsOfflineImages = ""
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineImages + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "logoffline_id INTEGER NOT NULL, "
+            + "url TEXT NOT NULL, "
+            + "title TEXT, "
+            + "description TEXT "
+            + "); ";
+    private static final String dbCreateLogsOfflineTrackables = ""
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineTrackables + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "logoffline_id INTEGER NOT NULL, "
+            + "tbcode TEXT NOT NULL, "
+            + "actioncode INTEGER "
+            + "); ";
+
     private static final String dbCreateTrackables = ""
             + "CREATE TABLE " + dbTableTrackables + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -676,7 +705,6 @@ public class DataStore {
     /**
      * Move the database to/from external cgdata in a new thread,
      * showing a progress window
-     *
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
@@ -785,6 +813,8 @@ public class DataStore {
             db.execSQL(dbCreateLogCount);
             db.execSQL(dbCreateLogImages);
             db.execSQL(dbCreateLogsOffline);
+            db.execSQL(dbCreateLogsOfflineImages);
+            db.execSQL(dbCreateLogsOfflineTrackables);
             db.execSQL(dbCreateTrackables);
             db.execSQL(dbCreateSearchDestinationHistory);
             db.execSQL(dbCreateTrailHistory);
@@ -810,6 +840,8 @@ public class DataStore {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logs_geo ON " + dbTableLogs + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logcount_geo ON " + dbTableLogCount + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoff_geo ON " + dbTableLogsOffline + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoffimages_geo ON " + dbTableLogsOfflineImages + " (logoffline_id)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logsofftrackables_geo ON " + dbTableLogsOfflineTrackables + " (logoffline_id)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_trck_geo ON " + dbTableTrackables + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_extension_key ON " + dbTableExtension + " (_key)");
@@ -1263,6 +1295,26 @@ public class DataStore {
                             onUpgradeError(e, 84);
                         }
                     }
+
+                    //enhance offline logging storage
+                    if (oldVersion < 85) {
+                        try {
+                            //add new columns
+                            createColumnIfNotExists(db, dbTableLogsOffline, "image_title_prefix TEXT");
+                            createColumnIfNotExists(db, dbTableLogsOffline, "image_scale INTEGER");
+                            createColumnIfNotExists(db, dbTableLogsOffline, "favorite INTEGER");
+                            createColumnIfNotExists(db, dbTableLogsOffline, "rating FLOAT");
+                            createColumnIfNotExists(db, dbTableLogsOffline, "password TEXT");
+                            createColumnIfNotExists(db, dbTableLogsOffline, "tweet INTEGER");
+                            //add new tables
+                            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOfflineImages);
+                            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOfflineTrackables);
+                            db.execSQL(dbCreateLogsOfflineImages);
+                            db.execSQL(dbCreateLogsOfflineTrackables);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 85);
+                        }
+                    }
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1287,6 +1339,9 @@ public class DataStore {
 
         @Override
         public void onOpen(final SQLiteDatabase db) {
+            //get user version
+            Log.i("[DB] Current Database Version: " + getUserVersion(db));
+
             if (firstRun) {
                 sanityChecks(db);
                 // limit number of records for trailHistory
@@ -1356,6 +1411,8 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogCount);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogImages);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOffline);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOfflineImages);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOfflineTrackables);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrackables);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableSearchDestinationHistory);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableTrailHistory);
@@ -1366,6 +1423,21 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS cg_table_extension");
         }
 
+        /**
+         * Helper for columns creation. This method ignores duplicate column errors
+         * and is useful for migration situations
+         */
+        public void createColumnIfNotExists(final SQLiteDatabase db, final String table, final String columnDefinition) {
+            try {
+                db.execSQL("ALTER TABLE " + table + " ADD COLUMN " + columnDefinition);
+                Log.i("[DB] Column '" + table + "'.'" + columnDefinition + "' created");
+            } catch (SQLiteException sle) {
+                if (!sle.getMessage().contains("duplicate column name")) {
+                    throw sle;
+                }
+                Log.i("[DB] Column '" + table + "'.'" + columnDefinition + "' NOT created because it already exists");
+            }
+        }
     }
 
     /**
@@ -1606,9 +1678,7 @@ public class DataStore {
     /**
      * Save/store a cache to the CacheCache
      *
-     * @param cache
-     *            the Cache to save in the CacheCache/DB
-     *
+     * @param cache the Cache to save in the CacheCache/DB
      */
     public static void saveCache(final Geocache cache, final Set<LoadFlags.SaveFlag> saveFlags) {
         saveCaches(Collections.singletonList(cache), saveFlags);
@@ -1617,9 +1687,7 @@ public class DataStore {
     /**
      * Save/store a cache to the CacheCache
      *
-     * @param caches
-     *            the caches to save in the CacheCache/DB
-     *
+     * @param caches the caches to save in the CacheCache/DB
      */
     public static void saveCaches(final Collection<Geocache> caches, final Set<LoadFlags.SaveFlag> saveFlags) {
         if (CollectionUtils.isEmpty(caches)) {
@@ -1836,8 +1904,7 @@ public class DataStore {
     /**
      * Persists the given {@code location} into the database.
      *
-     * @param location
-     *            a location to save
+     * @param location a location to save
      */
     public static void saveTrailpoint(final Location location) {
         init();
@@ -1896,8 +1963,7 @@ public class DataStore {
     /**
      * remove all waypoints of the given cache, where the id is not in the given list
      *
-     * @param remainingWaypointIds
-     *            ids of waypoints which shall not be deleted
+     * @param remainingWaypointIds ids of waypoints which shall not be deleted
      */
     private static void removeOutdatedWaypointsOfCache(@NonNull final Geocache cache, @NonNull final Collection<String> remainingWaypointIds) {
         final String idList = StringUtils.join(remainingWaypointIds, ',');
@@ -1907,10 +1973,8 @@ public class DataStore {
     /**
      * Save coordinates into a ContentValues
      *
-     * @param values
-     *            a ContentValues to save coordinates in
-     * @param coords
-     *            coordinates to save, or null to save empty coordinates
+     * @param values a ContentValues to save coordinates in
+     * @param coords coordinates to save, or null to save empty coordinates
      */
     private static void putCoords(final ContentValues values, final Geopoint coords) {
         values.put("latitude", coords == null ? null : coords.getLatitude());
@@ -1920,12 +1984,9 @@ public class DataStore {
     /**
      * Retrieve coordinates from a Cursor
      *
-     * @param cursor
-     *            a Cursor representing a row in the database
-     * @param indexLat
-     *            index of the latitude column
-     * @param indexLon
-     *            index of the longitude column
+     * @param cursor   a Cursor representing a row in the database
+     * @param indexLat index of the latitude column
+     * @param indexLon index of the longitude column
      * @return the coordinates, or null if latitude or longitude is null or the coordinates are invalid
      */
     @Nullable
@@ -2163,8 +2224,7 @@ public class DataStore {
     /**
      * Load a single Cache.
      *
-     * @param geocode
-     *            The Geocode GCXXXX
+     * @param geocode The Geocode GCXXXX
      * @return the loaded cache (if found). Can be null
      */
     @Nullable
@@ -2301,7 +2361,7 @@ public class DataStore {
                     if (logIndex < 0) {
                         logIndex = cursor.getColumnIndex("log");
                     }
-                    cache.setLogOffline(!cursor.isNull(logIndex));
+                    cache.setHasLogOffline(!cursor.isNull(logIndex));
                 }
                 cache.addStorageLocation(StorageLocation.DATABASE);
                 cacheCache.putCacheInCache(cache);
@@ -2323,7 +2383,6 @@ public class DataStore {
 
     /**
      * Builds a where for a viewport with the size enhanced by 50%.
-     *
      */
 
     @NonNull
@@ -2644,8 +2703,7 @@ public class DataStore {
     /**
      * Persists the given {@code Route} into the database.
      *
-     * @param route
-     *            a route to save
+     * @param route a route to save
      */
     public static void saveIndividualRoute(final Route route) {
         init();
@@ -2880,7 +2938,6 @@ public class DataStore {
 
     /**
      * Number of caches stored for a given type and/or list
-     *
      */
     public static int getAllStoredCachesCount(final CacheType cacheType, final int list) {
         if (cacheType == null) {
@@ -2954,14 +3011,14 @@ public class DataStore {
     }
 
     @NonNull
-    private static<T, U extends Collection<? super T>> U queryToColl(@NonNull final String table,
-                                                                     final String[] columns,
-                                                                     final String selection,
-                                                                     final String[] selectionArgs,
-                                                                     final String orderBy,
-                                                                     final String limit,
-                                                                     final U result,
-                                                                     final Func1<? super Cursor, ? extends T> func) {
+    private static <T, U extends Collection<? super T>> U queryToColl(@NonNull final String table,
+                                                                      final String[] columns,
+                                                                      final String selection,
+                                                                      final String[] selectionArgs,
+                                                                      final String orderBy,
+                                                                      final String limit,
+                                                                      final U result,
+                                                                      final Func1<? super Cursor, ? extends T> func) {
         init();
         final Cursor cursor = database.query(table, columns, selection, selectionArgs, null, null, orderBy, limit);
         return cursorToColl(cursor, result, func);
@@ -2981,8 +3038,7 @@ public class DataStore {
     /**
      * Return a batch of stored geocodes.
      *
-     * @param coords
-     *            the current coordinates to sort by distance, or null to sort by geocode
+     * @param coords the current coordinates to sort by distance, or null to sort by geocode
      * @return a non-null set of geocodes
      */
     @NonNull
@@ -3180,8 +3236,7 @@ public class DataStore {
         Log.d("Database clean: removing non-existing caches from logcount");
         database.delete(dbTableLogCount, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
 
-        Log.d("Database clean: removing non-existing caches from logs offline");
-        database.delete(dbTableLogsOffline, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+        DBLogOfflineUtils.cleanOrphanedRecords(database);
 
         Log.d("Database clean: removing non-existing caches from logs");
         database.delete(dbTableLogs, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
@@ -3203,7 +3258,6 @@ public class DataStore {
 
     /**
      * remove all geocodes from the given list of geocodes where an offline log exists
-     *
      */
     @NonNull
     private static Set<String> exceptCachesWithOfflineLog(@NonNull final Set<String> geocodes) {
@@ -3235,8 +3289,7 @@ public class DataStore {
     /**
      * Drop caches from the tables they are stored into, as well as the cache files
      *
-     * @param geocodes
-     *            list of geocodes to drop from cache
+     * @param geocodes list of geocodes to drop from cache
      */
     public static void removeCaches(final Set<String> geocodes, final EnumSet<LoadFlags.RemoveFlag> removeFlags) {
         if (CollectionUtils.isEmpty(geocodes)) {
@@ -3267,7 +3320,7 @@ public class DataStore {
                 database.delete(dbTableLogImages, "log_id IN (SELECT _id FROM " + dbTableLogs + " WHERE " + baseWhereClause + ")", null);
                 database.delete(dbTableLogs, baseWhereClause, null);
                 database.delete(dbTableLogCount, baseWhereClause, null);
-                database.delete(dbTableLogsOffline, baseWhereClause, null);
+                DBLogOfflineUtils.remove(database, baseWhereClause, null);
                 String wayPointClause = baseWhereClause;
                 if (!removeFlags.contains(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
                     wayPointClause += " AND type <> 'own'";
@@ -3286,112 +3339,33 @@ public class DataStore {
         }
     }
 
+    public static boolean saveLogOffline(final String geocode, final OfflineLogEntry entry) {
+        return DBLogOfflineUtils.save(geocode, entry);
+    }
+
+    @Deprecated
     public static boolean saveLogOffline(final String geocode, final Date date, final LogType type, final String log, final ReportProblemType reportProblem) {
-        if (StringUtils.isBlank(geocode)) {
-            Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
-            return false;
-        }
-        if (type == LogType.UNKNOWN && StringUtils.isBlank(log)) {
-            Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
-            return false;
-        }
-
-        init();
-
-        final ContentValues values = new ContentValues();
-        values.put("geocode", geocode);
-        values.put("updated", System.currentTimeMillis());
-        values.put("type", type.id);
-        values.put("log", log);
-        values.put("date", date.getTime());
-        values.put("report_problem", reportProblem.code);
-
-        if (hasLogOffline(geocode)) {
-            final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[] { geocode });
-            return rows > 0;
-        }
-        final long id = database.insert(dbTableLogsOffline, null, values);
-        return id != -1;
+        return DBLogOfflineUtils.save(geocode, new OfflineLogEntry.Builder<>()
+                .setCacheGeocode(geocode)
+                .setDate(date.getTime())
+                .setLogType(type)
+                .setLog(log)
+                .setReportProblem(reportProblem)
+                .build()
+        );
     }
 
     @Nullable
-    public static LogEntry loadLogOffline(final String geocode) {
-        if (StringUtils.isBlank(geocode)) {
-            return null;
-        }
-
-        init();
-
-
-        final Cursor cursor = database.query(
-                dbTableLogsOffline,
-                new String[]{"_id", "type", "log", "date", "report_problem"},
-                "geocode = ?",
-                new String[]{geocode},
-                null,
-                null,
-                "_id DESC",
-                "1");
-
-        LogEntry log = null;
-        if (cursor.moveToFirst()) {
-            log = new LogEntry.Builder()
-                    .setDate(cursor.getLong(3))
-                    .setLogType(LogType.getById(cursor.getInt(1)))
-                    .setLog(cursor.getString(2))
-                    .setId(cursor.getInt(0))
-                    .setReportProblem(ReportProblemType.findByCode(cursor.getString(4)))
-                    .build();
-        }
-
-        cursor.close();
-
-        return log;
+    public static OfflineLogEntry loadLogOffline(final String geocode) {
+        return DBLogOfflineUtils.load(geocode);
     }
 
-    public static void clearLogOffline(final String geocode) {
-        if (StringUtils.isBlank(geocode)) {
-            return;
-        }
-
-        init();
-
-        final String[] geocodeWhereArgs = {geocode};
-        database.delete(dbTableLogsOffline, "geocode = ?", geocodeWhereArgs);
+    public static boolean clearLogOffline(final String geocode) {
+        return DBLogOfflineUtils.remove(geocode);
     }
 
     public static void clearLogsOffline(final Collection<Geocache> caches) {
-        if (CollectionUtils.isEmpty(caches)) {
-            return;
-        }
-
-        init();
-
-        for (final Geocache cache : caches) {
-            cache.setLogOffline(false);
-        }
-
-        final String geocodes = whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
-        database.execSQL(String.format("DELETE FROM %s WHERE %s", dbTableLogsOffline, geocodes));
-    }
-
-    public static boolean hasLogOffline(final String geocode) {
-        if (StringUtils.isBlank(geocode)) {
-            return false;
-        }
-
-        init();
-        try {
-            final SQLiteStatement logCount = PreparedStatement.LOG_COUNT_OF_GEOCODE.getStatement();
-            synchronized (logCount) {
-                logCount.bindString(1, geocode);
-                return logCount.simpleQueryForLong() > 0;
-            }
-        } catch (final Exception e) {
-            Log.e("DataStore.hasLogOffline", e);
-        }
-
-        return false;
+        DBLogOfflineUtils.remove(caches);
     }
 
     private static void setVisitDate(final Collection<String> geocodes, final long visitedDate) {
@@ -3492,8 +3466,7 @@ public class DataStore {
     /**
      * Create a new list
      *
-     * @param name
-     *            Name
+     * @param name Name
      * @return new listId
      */
     public static int createList(final String name) {
@@ -3521,10 +3494,8 @@ public class DataStore {
     }
 
     /**
-     * @param listId
-     *            List to change
-     * @param name
-     *            New name of list
+     * @param listId List to change
+     * @param name   New name of list
      * @return Number of lists changed
      */
     public static int renameList(final int listId, final String name) {
@@ -3589,10 +3560,8 @@ public class DataStore {
     }
 
     /**
-     * @param listId
-     *            List to change
-     * @param markerId
-     *            Id of new marker
+     * @param listId   List to change
+     * @param markerId Id of new marker
      * @return Number of lists changed
      */
     public static int setListMarker(final int listId, final int markerId) {
@@ -3829,7 +3798,6 @@ public class DataStore {
 
     /**
      * Load the lazily initialized fields of a cache and return them as partial cache (all other fields unset).
-     *
      */
     @NonNull
     public static Geocache loadCacheTexts(final String geocode) {
@@ -3905,7 +3873,6 @@ public class DataStore {
 
     /**
      * Loads all Waypoints in the coordinate rectangle.
-     *
      */
 
     @NonNull
@@ -3951,7 +3918,7 @@ public class DataStore {
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
         REMOVE_SPOILERS("DELETE FROM " + dbTableSpoilers + " WHERE geocode = ?"),
-        LOG_COUNT_OF_GEOCODE("SELECT COUNT(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
+        OFFLINE_LOG_ID_OF_GEOCODE("SELECT _id FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
         INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
@@ -4217,7 +4184,6 @@ public class DataStore {
     }
 
     /**
-     *
      * @return list of last caches opened in the details view, ordered by most recent first
      */
     @NonNull
@@ -4275,5 +4241,361 @@ public class DataStore {
         database.execSQL("DELETE FROM " + dbTableSearchDestinationHistory);
 
     }
+
+    /**
+     * calculates and returns the current database version
+     */
+    public static int getUserVersion(final SQLiteDatabase db) {
+        try (Cursor c = db.rawQuery("PRAGMA user_version", null)) {
+            if (c.moveToFirst()) {
+                return c.getInt(0);
+            }
+            return -1;
+        }
+    }
+
+    /**
+     * Manually sets the database version.
+     * WARNING: for usage in test/development scenarios only!
+     */
+    public static void setUserVersion(final int newVersion) {
+        database.execSQL("PRAGMA user_version = " + newVersion);
+    }
+
+    /**
+     * Helper methods for Offline Logs
+     */
+    private static class DBLogOfflineUtils {
+
+        public static boolean save(final String geocode, final OfflineLogEntry logEntry) {
+            if (StringUtils.isBlank(geocode)) {
+                Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
+                return false;
+            }
+            if (logEntry.logType == LogType.UNKNOWN && StringUtils.isBlank(logEntry.log)) {
+                Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
+                return false;
+            }
+            if (!StringUtils.isBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
+                Log.e("DataStore.saveLogOffline: mismatch between geocode in LogENtry and provided geocode: " + geocode + "<->" + logEntry.cacheGeocode);
+                return false;
+            }
+
+
+            init();
+            database.beginTransaction();
+            try {
+
+                //main entry
+                final ContentValues values = new ContentValues();
+                values.put("geocode", geocode);
+                values.put("updated", System.currentTimeMillis());
+                values.put("type", logEntry.logType.id);
+                values.put("log", logEntry.log);
+                values.put("date", logEntry.date);
+                values.put("report_problem", logEntry.reportProblem.code);
+
+                values.put("image_title_prefix", logEntry.imageTitlePraefix);
+                values.put("image_scale", logEntry.imageScale);
+                values.put("tweet", logEntry.tweet ? 1 : 0);
+                values.put("favorite", logEntry.favorite ? 1 : 0);
+                values.put("rating", logEntry.rating);
+                values.put("password", logEntry.password);
+
+                long offlineLogId = getLogOfflineId(geocode);
+                if (offlineLogId >= 0) {
+                    final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[]{geocode});
+                    if (rows < 1) {
+                        return false;
+                    }
+                } else {
+                    offlineLogId = database.insert(dbTableLogsOffline, null, values);
+                    if (offlineLogId < 0) {
+                        return false;
+                    }
+                }
+                final long finalOfflineLogId = offlineLogId;
+
+                //image entries
+                final List<ContentValues> images = CollectionStream.of(logEntry.logImages).map(img -> {
+                    final ContentValues cv = new ContentValues();
+                    cv.put("logoffline_id", finalOfflineLogId);
+                    cv.put("url", img.getUrl());
+                    cv.put("description", img.getDescription());
+                    cv.put("title", img.getTitle());
+                    return cv;
+                }).toList();
+                updateRowset(database, dbTableLogsOfflineImages, images, "logoffline_id = " + offlineLogId, null);
+
+                //trackable entries
+                final List<ContentValues> trackables = CollectionStream.of(logEntry.trackableActions.entrySet()).map(tr -> {
+                    final ContentValues cv = new ContentValues();
+                    cv.put("logoffline_id", finalOfflineLogId);
+                    cv.put("tbcode", tr.getKey());
+                    cv.put("actioncode", tr.getValue().id);
+                    return cv;
+                }).toList();
+                updateRowset(database, dbTableLogsOfflineTrackables, trackables, "logoffline_id = " + offlineLogId, null);
+
+                database.setTransactionSuccessful();
+                return true;
+            } finally {
+                database.endTransaction();
+            }
+        }
+
+        private static void updateRowset(final SQLiteDatabase db, final String table, final List<ContentValues> newRows, final String whereSelectExisting, final String[] whereArgs) {
+
+            //make it easy for now: delete and re-insert everything
+            db.delete(table, whereSelectExisting, whereArgs);
+            for (final ContentValues cv : newRows) {
+                db.insert(table, null, cv);
+            }
+        }
+
+
+        //TODO
+        @Nullable
+        public static OfflineLogEntry load(final String geocode) {
+            if (StringUtils.isBlank(geocode)) {
+                return null;
+            }
+
+            init();
+
+            final DBQuery query = new DBQuery.Builder().setTable(dbTableLogsOffline)
+                    .setColumns(new String[]{"_id", "geocode", "updated", "type", "log", "report_problem", "image_title_prefix", "image_scale", "favorite", "tweet", "rating", "password"})
+                    .setWhereClause("geocode = ?").setWhereArgs(new String[]{geocode}).build();
+            final OfflineLogEntry.Builder<?> logBuilder = query.selectFirstRow(database,
+                    c -> new OfflineLogEntry.Builder<>()
+                            .setId(c.getInt(0))
+                            .setCacheGeocode(c.getString(1))
+                            .setDate(c.getLong(2))
+                            .setLogType(LogType.getById(c.getInt(3)))
+                            .setLog(c.getString(4))
+                            .setReportProblem(ReportProblemType.findByCode(c.getString(5)))
+                            .setImageTitlePraefix(c.getString(6))
+                            .setImageScale(c.getInt(7))
+                            .setFavorite(c.getInt(8) > 0)
+                            .setTweet(c.getInt(9) > 0)
+                            .setRating(c.isNull(10) ? null : c.getFloat(10))
+                            .setPassword(c.getString(11))
+            );
+
+            if (logBuilder == null) {
+                //no entry available in DB
+                return null;
+            }
+
+            final int logId = logBuilder.getId();
+
+            //images
+            final DBQuery queryImages = new DBQuery.Builder().setTable(dbTableLogsOfflineImages)
+                    .setColumns(new String[]{"url", "title", "description"})
+                    .setWhereClause("logoffline_id = " + logId).build();
+            queryImages.selectRows(database,
+                    c -> logBuilder.addLogImage(new Image.Builder()
+                            .setUrl(c.getString(0))
+                            .setTitle(c.getString(1))
+                            .setDescription(c.getString(2))
+                            .build())
+            );
+
+            //trackables
+            final DBQuery queryTrackables = new DBQuery.Builder().setTable(dbTableLogsOfflineTrackables)
+                    .setColumns(new String[]{"tbcode", "actioncode"})
+                    .setWhereClause("logoffline_id = " + logId).build();
+            queryTrackables.selectRows(database,
+                    c -> logBuilder.addTrackableAction(
+                            c.getString(0),
+                            LogTypeTrackable.getById(ObjectUtils.defaultIfNull(c.getInt(1), LogTypeTrackable.UNKNOWN.id))
+                    )
+            );
+
+            return logBuilder.build();
+        }
+
+        public static boolean remove(final String geocode) {
+            if (StringUtils.isBlank(geocode)) {
+                return false;
+            }
+
+            init();
+
+            final String[] geocodeWhereArgs = {geocode};
+            return DBLogOfflineUtils.remove(database, "geocode = ?", geocodeWhereArgs) > 0;
+        }
+
+        public static int remove(final Collection<Geocache> caches) {
+            if (CollectionUtils.isEmpty(caches)) {
+                return 0;
+            }
+
+            init();
+
+            final String geocodes = whereGeocodeIn(Geocache.getGeocodes(caches)).toString();
+            return DBLogOfflineUtils.remove(database, geocodes, null);
+        }
+
+        /**
+         * if returned id is < 0 then there is no offline log for given geocode
+         */
+        public static long getLogOfflineId(final String geocode) {
+            if (StringUtils.isBlank(geocode)) {
+                return -1;
+            }
+
+            init();
+            try {
+                final SQLiteStatement logIdStmt = PreparedStatement.OFFLINE_LOG_ID_OF_GEOCODE.getStatement();
+                synchronized (logIdStmt) {
+                    logIdStmt.bindString(1, geocode);
+                    return logIdStmt.simpleQueryForLong();
+                }
+            } catch (final Exception e) {
+                //ignore SQLiteDoneException, it is thrown when no row is returned which we expect here regularly
+                if (!(e instanceof SQLiteDoneException)) {
+                    Log.e("DataStore.hasLogOffline", e);
+                }
+            }
+
+            return -1;
+        }
+
+        private static int remove(final SQLiteDatabase db, final String whereClause, final String[] whereArgs) {
+            database.delete(dbTableLogsOfflineImages, "logoffline_id in (select _id from " + dbTableLogsOffline + " where " + whereClause + ")", whereArgs);
+            database.delete(dbTableLogsOfflineTrackables, "logoffline_id in (select _id from " + dbTableLogsOffline + " where " + whereClause + ")", whereArgs);
+            return database.delete(dbTableLogsOffline, whereClause, whereArgs);
+        }
+
+        public static void cleanOrphanedRecords(final SQLiteDatabase db) {
+            Log.d("Database clean: removing entries for non-existing caches from logs offline");
+            database.delete(dbTableLogsOffline, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+            database.delete(dbTableLogsOfflineImages, "logoffline_id NOT IN (SELECT _id FROM " + dbTableLogsOffline + ")", null);
+            database.delete(dbTableLogsOfflineTrackables, "logoffline_id NOT IN (SELECT _id FROM " + dbTableLogsOffline + ")", null);
+        }
+    }
+
+    public static class DBQuery {
+        public final String table;
+        public final String[] columns;
+        public final String whereClause;
+        public final String[] whereArgs;
+        public final String having;
+        public final String groupBy;
+        public final String orderBy;
+        public final String limit;
+
+        private DBQuery(final Builder builder) {
+            this.table = builder.table;
+            this.columns = builder.columns;
+            this.whereClause = builder.whereClause;
+            this.whereArgs = builder.whereArgs;
+            this.having = builder.having;
+            this.groupBy = builder.groupBy;
+            this.orderBy = builder.orderBy;
+            this.limit = builder.limit;
+        }
+
+        public <T> List<T> selectRows(final SQLiteDatabase db, final Func1<Cursor, T> mapper) {
+
+            Cursor c = null;
+            try {
+                c = openCursorFor(db, null);
+                final List<T> result = new ArrayList<>();
+                while (c.moveToNext()) {
+                    result.add(mapper.call(c));
+                }
+                return result;
+
+            } finally {
+                if (c != null) {
+                    c.close();
+                }
+            }
+        }
+
+        public <T> T selectFirstRow(final SQLiteDatabase db, final Func1<Cursor, T> mapper) {
+
+            Cursor c = null;
+            try {
+                c = openCursorFor(db, "1");
+                final List<T> result = new ArrayList<>();
+                if (c.moveToNext()) {
+                    return mapper.call(c);
+                }
+                return null;
+            } finally {
+                if (c != null) {
+                    c.close();
+                }
+            }
+        }
+
+        public Cursor openCursorFor(final SQLiteDatabase db, final String limitOverride) {
+            return db.query(
+                    this.table, this.columns, this.whereClause, this.whereArgs, this.groupBy, this.having,
+                    this.orderBy, limitOverride == null ? this.limit : limitOverride
+            );
+        }
+
+        public static class Builder {
+            private String table;
+            private String[] columns;
+            private String whereClause;
+            private String[] whereArgs;
+            private String having;
+            private String groupBy;
+            private String orderBy;
+            private String limit;
+
+            public DBQuery build() {
+                return new DBQuery(this);
+            }
+
+            public Builder setTable(final String table) {
+                this.table = table;
+                return this;
+            }
+
+            public Builder setColumns(final String[] columns) {
+                this.columns = columns;
+                return this;
+            }
+
+            public Builder setWhereClause(final String whereClause) {
+                this.whereClause = whereClause;
+                return this;
+            }
+
+            public Builder setWhereArgs(final String[] whereArgs) {
+                this.whereArgs = whereArgs;
+                return this;
+            }
+
+            public Builder setHaving(final String having) {
+                this.having = having;
+                return this;
+            }
+
+            public Builder setGroupBy(final String groupBy) {
+                this.groupBy = groupBy;
+                return this;
+            }
+
+            public Builder setOrderBy(final String orderBy) {
+                this.orderBy = orderBy;
+                return this;
+            }
+
+            public Builder setLimit(final String limit) {
+                this.limit = limit;
+                return this;
+            }
+        }
+
+
+    }
+
 
 }

@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -34,13 +35,15 @@ public class VoteDialog {
     public static void show(final Activity context, @NonNull final Geocache cache, @Nullable final Runnable afterVoteSent) {
         final View votingLayout = View.inflate(context, R.layout.vote_dialog, null);
 
+        final CacheVotingBar votingBar = new CacheVotingBar();
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(votingLayout);
-        builder.setPositiveButton(R.string.cache_menu_vote, (dialog, which) -> vote(cache, VotingBarUtil.getRating(votingLayout), afterVoteSent));
+        builder.setPositiveButton(R.string.cache_menu_vote, (dialog, which) -> vote(cache, votingBar.getRating(), afterVoteSent));
         builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
-        VotingBarUtil.initializeRatingBar(cache, votingLayout, stars -> {
+        votingBar.initialize(cache, votingLayout, stars -> {
             final Button button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
             // this listener might be fired already while the dialog is not yet shown
             if (button != null) {

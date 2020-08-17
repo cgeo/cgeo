@@ -11,11 +11,18 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.OfflineLogEntry;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
@@ -227,4 +234,126 @@ public class DataStoreTest extends CGeoTestCase {
         assertThat(filteredGeoCodes).contains(inTileLowZoom.getGeocode());
         assertThat(filteredGeoCodes).doesNotContain(inTileHighZoom.getGeocode(), otherConnector.getGeocode(), outTile.getGeocode(), main.getGeocode());
     }
+
+
+    public static void testOfflineLog() {
+        final String geocode = ARTIFICIAL_GEOCODE + "-O";
+        final Date logDate = new Date();
+        //ensure that we don't overwrite anything in database before starting this test
+        final OfflineLogEntry logEntry = DataStore.loadLogOffline(geocode);
+        assertThat(logEntry).isNull();
+        assertThat(DataStore.clearLogOffline(geocode)).isEqualTo(false);
+
+        try {
+            final OfflineLogEntry.Builder<?> builder = new OfflineLogEntry.Builder<>()
+                    .setCacheGeocode(geocode)
+                    .setDate(logDate.getTime())
+                    .setLogType(LogType.ARCHIVE)
+                    .setLog("this is my log message")
+                    .setReportProblem(ReportProblemType.MISSING)
+                    .setImageScale(123)
+                    .setImageTitlePraefix("ImagePraefix")
+                    .setFavorite(false)
+                    .setTweet(true)
+                    .setRating(4.5f)
+                    .addLogImage(new Image.Builder().setUrl("https://www.cgeo.org/images/logo.png").setTitle("The logo").setDescription("This is the logo").build())
+                    .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_multi.png").setTitle("Multicache icon").setDescription("This is the icon for a multicache").build())
+                    .addTrackableAction("TBFAKE1", LogTypeTrackable.VISITED)
+                    .addTrackableAction("TBFAKE2", LogTypeTrackable.DROPPED_OFF);
+
+            //test insert and reload
+            DataStore.saveLogOffline(geocode, builder.build());
+
+            OfflineLogEntry loadedLogEntry = DataStore.loadLogOffline(geocode);
+            assertEqualToBuilder(loadedLogEntry, builder);
+            final int logId = loadedLogEntry.id;
+
+            builder.setDate(logDate.getTime())
+                    .setLogType(LogType.DIDNT_FIND_IT)
+                    .setLog("this is my new log message")
+                    .setReportProblem(ReportProblemType.DAMAGED)
+                    .setImageScale(456)
+                    .setImageTitlePraefix("NewImagePraefix")
+                    .setFavorite(true)
+                    .setTweet(false)
+                    .setRating(1.0f)
+                    .setPassword("pwd")
+                    .setLogImages(new ArrayList<>())
+                    .addLogImage(new Image.Builder().setUrl("https://www.cgeo.org/images/logo.png").setTitle("The logo").setDescription("This is the logo").build())
+                    .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_virtual.png").setTitle("Virtual icon").setDescription("This is the icon for a virtualcache").build())
+                    .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_tradi.png").setTitle("Tradicache icon").setDescription("This is the icon for a traditionalcache").build())
+                    .clearTrackableActions()
+                    .addTrackableAction("TBFAKE1", LogTypeTrackable.DO_NOTHING)
+                    .addTrackableAction("TBFAKE3", LogTypeTrackable.ARCHIVED);
+
+            //test update and reload
+            DataStore.saveLogOffline(geocode, builder.build());
+
+            loadedLogEntry = DataStore.loadLogOffline(geocode);
+            assertThat(loadedLogEntry.id).isEqualTo(logId);
+            assertEqualToBuilder(loadedLogEntry, builder);
+
+            //remove
+            assertThat(DataStore.clearLogOffline(geocode)).isEqualTo(true);
+
+        } finally {
+            DataStore.clearLogOffline(geocode);
+        }
+    }
+
+    public static void testEmptyOfflineLog() {
+        final String geocode = ARTIFICIAL_GEOCODE + "-O";
+
+        //ensure that we don't overwrite anything in database before starting this test
+        final OfflineLogEntry logEntry = DataStore.loadLogOffline(geocode);
+        assertThat(logEntry).isNull();
+
+        try {
+            final OfflineLogEntry.Builder<?> builder = new OfflineLogEntry.Builder<>();
+            assertThat(DataStore.saveLogOffline(geocode, builder.build())).isEqualTo(false);
+
+            assertThat(DataStore.saveLogOffline(geocode, builder.setCacheGeocode(geocode).setLog("test").build())).isEqualTo(true);
+            final OfflineLogEntry loadedLogEntry = DataStore.loadLogOffline(geocode);
+            assertThat(loadedLogEntry.id).isGreaterThanOrEqualTo(0);
+            assertEqualToBuilder(loadedLogEntry, builder);
+
+        } finally {
+            DataStore.clearLogOffline(geocode);
+        }
+    }
+
+    private static void assertEqualToBuilder(final OfflineLogEntry dbLogEntry, final OfflineLogEntry.Builder<?> builder) {
+        final OfflineLogEntry expectedLogEntry = builder.build();
+
+        assertThat(dbLogEntry).isNotNull();
+        assertThat(dbLogEntry.id).isGreaterThanOrEqualTo(0);
+        assertThat(dbLogEntry.cacheGeocode).isEqualTo(expectedLogEntry.cacheGeocode);
+        assertThat(dbLogEntry.logType).isEqualTo(expectedLogEntry.logType);
+        assertThat(dbLogEntry.log).isEqualTo(expectedLogEntry.log);
+        assertThat(dbLogEntry.reportProblem).isEqualTo(expectedLogEntry.reportProblem);
+        assertThat(dbLogEntry.imageScale).isEqualTo(expectedLogEntry.imageScale);
+        assertThat(dbLogEntry.imageTitlePraefix).isEqualTo(expectedLogEntry.imageTitlePraefix);
+        assertThat(dbLogEntry.favorite).isEqualTo(expectedLogEntry.favorite);
+        assertThat(dbLogEntry.tweet).isEqualTo(expectedLogEntry.tweet);
+        assertThat(dbLogEntry.rating).isEqualTo(expectedLogEntry.rating);
+        assertThat(dbLogEntry.password).isEqualTo(expectedLogEntry.password);
+
+        assertThat(dbLogEntry.logImages.size()).isEqualTo(expectedLogEntry.logImages.size());
+        final List<Image> dbImages = new ArrayList<>(dbLogEntry.logImages);
+        final List<Image> expImages = new ArrayList<>(expectedLogEntry.logImages);
+        //ensure that the order of images is determined for valid content assertion: sort by title
+        final Comparator<Image> imgComp = (image, image2) -> image.getTitle().compareTo(image2.getTitle());
+        Collections.sort(dbImages, imgComp);
+        Collections.sort(expImages, imgComp);
+        for (int i = 0; i < dbImages.size(); i++) {
+            assertThat(dbImages.get(i).getTitle()).isEqualTo(expImages.get(i).getTitle());
+            assertThat(dbImages.get(i).getUrl()).isEqualTo(expImages.get(i).getUrl());
+            assertThat(dbImages.get(i).getDescription()).isEqualTo(expImages.get(i).getDescription());
+        }
+
+        assertThat(dbLogEntry.trackableActions).isEqualTo(expectedLogEntry.trackableActions);
+    }
+
+
+
 }

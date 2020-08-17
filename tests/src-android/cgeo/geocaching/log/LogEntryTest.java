@@ -168,6 +168,7 @@ public class LogEntryTest extends CGeoTestCase {
                 .setFavorite(true)
                 .setTweet(true)
                 .setRating(5.0f)
+                .setPassword("pwd")
                 .setImageScale(5)
                 .setImageTitlePraefix("praefix")
                 .addLogImage(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").build())
@@ -186,6 +187,7 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(otherLogEntry.tweet).isEqualTo(true);
         assertThat(otherLogEntry.rating).isEqualTo(5.0f);
         assertThat(otherLogEntry.imageScale).isEqualTo(5);
+        assertThat(otherLogEntry.password).isEqualTo("pwd");
         assertThat(otherLogEntry.imageTitlePraefix).isEqualTo("praefix");
 
         assertThat(otherLogEntry.logImages.size()).isEqualTo(2);
