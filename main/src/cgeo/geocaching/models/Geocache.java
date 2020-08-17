@@ -1560,7 +1560,7 @@ public class Geocache implements IWaypoint {
         boolean changed = false;
         if (forceExtraction || !preventWaypointsFromNote) {
             for (final Waypoint parsedWaypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
-                final Waypoint existingWaypoint = findWaypointWithSameCoords(parsedWaypoint.getCoords());
+                final Waypoint existingWaypoint = findWaypoint(parsedWaypoint.getPrefix(), parsedWaypoint.getCoords());
                 if (existingWaypoint == null) {
                     //add as new waypoint
                     addOrChangeWaypoint(parsedWaypoint, updateDb);
@@ -1577,11 +1577,20 @@ public class Geocache implements IWaypoint {
         return changed;
     }
 
-    private Waypoint findWaypointWithSameCoords(final Geopoint point) {
+    private Waypoint findWaypoint(final String prefix, final Geopoint point) {
+
+        //try to match prefix
+        for (final Waypoint waypoint: waypoints) {
+            if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
+                return waypoint;
+            }
+        }
+
+        //try to match coordinate
         for (final Waypoint waypoint: waypoints) {
             // waypoint can have no coords such as a Final set by cache owner
             final Geopoint coords = waypoint.getCoords();
-            if (coords != null && coords.equals(point)) {
+            if (coords != null && coords.equalsDecMinute(point)) {
                 return waypoint;
             }
         }
