@@ -12,6 +12,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.utils.FileUtils.getFilenameFromPath;
 
 import android.app.Activity;
@@ -137,6 +138,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         @Override
         protected Boolean doInBackgroundInternal(final String[] logTexts) {
             try {
+                Log.d("start receiving map file: " + file.getPath());
                 final InputStream inputStream = getContentResolver().openInputStream(uri);
                 try {
                     // copy file
@@ -172,8 +174,10 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
                     return !cancelled.get();
                 } catch (IOException e) {
+                    Log.e("IOException on receiving map file: " + e.getMessage());
                 }
             } catch (FileNotFoundException e) {
+                Log.e("FileNotFoundException on receiving map file: " + e.getMessage());
             }
             return false;
         }
