@@ -1200,7 +1200,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // cache coordinates
             if (cache.getCoords() != null) {
                 final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).right;
-                valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
+                new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(cache.getCoords());
                 addContextMenu(valueView);
             }
 
@@ -1952,8 +1952,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final TextView coordinatesView = holder.coordinatesView;
             final Geopoint coordinates = wpt.getCoords();
             if (coordinates != null) {
-                coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(coordinates));
-                coordinatesView.setText(coordinates.toString());
+                holder.setCoordinate(coordinates);
                 coordinatesView.setVisibility(View.VISIBLE);
             } else {
                 coordinatesView.setVisibility(View.GONE);
