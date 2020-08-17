@@ -11,7 +11,7 @@ import android.widget.TextView;
  * view click listener to automatically switch different coordinate formats
  *
  */
-public class CoordinatesFormatSwitcher implements OnClickListener {
+public class CoordinatesFormatSwitcher {
 
     private static final GeopointFormatter.Format[] availableFormats = {
             GeopointFormatter.Format.LAT_LON_DECMINUTE,
@@ -21,19 +21,32 @@ public class CoordinatesFormatSwitcher implements OnClickListener {
     };
 
     private int position = 0;
+    private Geopoint coordinates;
+    private TextView view;
 
-    private final Geopoint coordinates;
-
-    public CoordinatesFormatSwitcher(final Geopoint coordinates) {
-        this.coordinates = coordinates;
+    public CoordinatesFormatSwitcher setView(final TextView view) {
+        this.view = view;
+        this.view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                position = (position + 1) % availableFormats.length;
+                renderView();
+            }
+        });
+        renderView();
+        return this;
     }
 
-    @Override
-    public void onClick(final View view) {
-        position = (position + 1) % availableFormats.length;
-        final TextView textView = (TextView) view;
-        // rotate coordinate formats on click
-        textView.setText(coordinates.format(availableFormats[position]));
+    public CoordinatesFormatSwitcher setCoordinate(final Geopoint coordinate) {
+        this.coordinates = coordinate;
+        renderView();
+        return this;
+    }
+
+    private void renderView() {
+        if (this.view != null && this.coordinates != null) {
+            this.view.setText(coordinates.format(availableFormats[position]));
+        }
     }
 
 }
