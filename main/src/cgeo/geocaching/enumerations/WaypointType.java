@@ -95,6 +95,10 @@ public enum WaypointType {
 
     @NonNull
     public final String getL10n() {
+        //enable local unit testing
+        if (CgeoApplication.getInstance() == null) {
+            return "" + stringId;
+        }
         return CgeoApplication.getInstance().getBaseContext().getString(stringId);
     }
 

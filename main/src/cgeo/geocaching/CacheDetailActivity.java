@@ -1594,6 +1594,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ensureSaved();
                 storeWaypointsInPersonalNote(cache, maxPersonalNotesChars);
             });
+            final Button removeWaypoints = view.findViewById(R.id.deleteewaypoints_personalnote);
+            removeWaypoints.setOnClickListener(v -> {
+                ensureSaved();
+                removeWaypointsFromPersonalNote(cache);
+            });
             final Button personalNoteUpload = view.findViewById(R.id.upload_personalnote);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
@@ -2554,17 +2559,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
+    public void removeWaypointsFromPersonalNote(final Geocache cache) {
+        final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
+        final String newNote = Waypoint.removeParseableWaypointsFromText(note);
+        if (newNote != null) {
+            setNewPersonalNote(newNote);
+        }
+    }
+
     public void storeWaypointsInPersonalNote(final Geocache cache, final int maxPersonalNotesChars) {
         final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
 
-        //only user waypoints!
-        final List<Waypoint> userDefinedWaypoints = new ArrayList<>();
+        //only uer modified waypoints
+        final List<Waypoint> userModifiedWaypoints = new ArrayList<>();
         for (Waypoint w : cache.getWaypoints()) {
-            if (w.isUserDefined() && w.getCoords() != null) {
-                userDefinedWaypoints.add(w);
+            if (w.isUserModified()) {
+                userModifiedWaypoints.add(w);
             }
         }
-        if (userDefinedWaypoints.isEmpty()) {
+        if (userModifiedWaypoints.isEmpty()) {
             showShortToast(getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
             return;
         }
@@ -2572,11 +2585,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         //if given maxSize is obviously bogus, then make length unlimited
         final int maxSize = maxPersonalNotesChars == 0 ? -1 : maxPersonalNotesChars;
 
-        final String newNote = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, maxSize);
+        final String newNote = Waypoint.putParseableWaypointsInText(note, userModifiedWaypoints, maxSize);
 
         if (newNote != null) {
             setNewPersonalNote(newNote);
-            final String newNoteNonShorted = Waypoint.putParseableWaypointTextstore(note, userDefinedWaypoints, -1);
+            final String newNoteNonShorted = Waypoint.putParseableWaypointsInText(note, userModifiedWaypoints, -1);
             if (newNoteNonShorted.length() > newNote.length()) {
                 showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited, maxSize));
             } else {
