@@ -225,6 +225,7 @@
     </style>
 
     <style name="Dialog_Alert" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <item name="text_color">@color/text_dark</item>
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -232,6 +233,7 @@
     </style>
 
     <style name="Dialog_Alert_light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="text_color">@color/text_light</item>
         <item name="buttonBarButtonStyle">@style/button_borderless</item>
         <item name="background">?android:attr/selectableItemBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
