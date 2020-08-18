@@ -586,7 +586,7 @@ public class Settings {
         return null;
     }
 
-    static void setMapFileDirectory(final String mapFileDirectory) {
+    public static void setMapFileDirectory(final String mapFileDirectory) {
         putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
