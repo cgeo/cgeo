@@ -143,13 +143,8 @@
     <string name="log_problem_other_text">Tento hráč oznámil problém s keší.</string>
     <string name="log_problem_archive_label">Keš by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keš by měla být archivována. Reviewer byl informován.</string>
-    <string-array name="log_image_scales">
-        <item>Bez měřítka</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
+    <string name="log_image_scale_option_noscaling">Bez měřítka</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
     <string name="translate_to_english">Přeložit do angličtiny</string>
@@ -181,6 +176,7 @@
     <string name="err_detail_cache_find_any">c:geo nemůže najít žádnou geokeš.</string>
     <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto keš.</string>
     <string name="err_detail_still_working">Stále probíhá zpracování jiné úlohy.</string>
+    <string name="err_detail_premium_log_found">Tato keš je dostupná pouze pro prémiové členy geocaching.com. Informace o keši proto nelze zobrazit.\n\nPokud jste však již tuto keš nalezli, můžete ji zalogovat zde.</string>
     <string name="err_watchlist_still_managing">Stále probíhá zpracování tvého Watchlistu.</string>
     <string name="err_watchlist_failed">Změna tvého Watchlistu selhala.</string>
     <string name="err_application_no">c:geo nemůže najít žádnou vhodnou aplikaci.</string>
@@ -425,6 +421,9 @@
     <string name="about_system_info">c:geo systémové informace</string>
     <string name="about_system_info_send_chooser">Odeslat systémové informace</string>
     <string name="about_system_write_logcat">Generovat soubor protokolu</string>
+    <string name="about_system_write_logcat_type">Vytvořit standardní nebo rozšířený soubor protokolu?\n\nStandardní protokolové soubory budou ve většině případů v pořádku.\nRozšířené protokolové soubory používejte pouze na požádání.</string>
+    <string name="about_system_write_logcat_type_standard">Standardní</string>
+    <string name="about_system_write_logcat_type_extended">Rozšířený</string>
     <string name="about_system_write_logcat_success">Soubor protokolu uložen jako %1$s v adresáři %2$s</string>
     <string name="about_system_write_logcat_empty">Soubor protokolu je prázdný</string>
     <string name="about_system_write_logcat_error">Chyba při zápisu souboru protokolu</string>
@@ -565,6 +564,7 @@
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost do které pomocná aplikace brouter (pokud je nainstalovaná) vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
+    <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
@@ -629,7 +629,7 @@
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro geocache (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
     <string name="init_maptrail">Zobrazit historii trasy</string>
     <string name="init_maptrail_length">Max. délka historie trasy</string>
-    <string name="init_maptrail_length_summary">Nastavte maximální délku historie trasy (potřebné při každém spuštění c:geo). Výchozí hodnota je 700 - upravte podle dostupné paměti.</string>
+    <string name="init_maptrail_length_summary">Nastavte maximální délku historie trasy (potřebné při každém spuštění c:geo). Výchozí hodnota je 700 bodů - upravte podle dostupné paměti.</string>
     <string name="init_summary_maptrail">Když je to aktivováno (a GPS zapnuta), c:geo ukládá historii pohybů jako trasu a zobrazuje ji na mapě.</string>
     <string name="init_trailcolor">Barva čáry historie trasy</string>
     <string name="init_trailcolor_summary">Vyberte barvu a neprůhlednost pro čáru historie trasy</string>
@@ -656,6 +656,8 @@
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
     <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
+    <string name="init_offlinelogs_homescreen">Zobrazit offline logy</string>
+    <string name="init_summary_offlinelogs_homescreen">Pokud máte logy, které ještě nebyly odeslány, zobrazí se na vaší domovské obrazovce počitadlo offline logů (např. \"+1\").</string>
     <string name="init_loaddirectionimg">V případě potřeby stahovat směrový obrázek (pouze Běžní členové)</string>
     <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Běžní členové)</string>
     <string name="init_default_navigation_tool">Výchozí navigace</string>
@@ -844,11 +846,12 @@
     <string name="cache_menu_preventWaypointsFromNote">Blokovat waypointy z poznámky</string>
     <string name="cache_menu_allowWaypointExtraction">Povolit waypointy z poznámky</string>
     <string name="cache_personal_note_edit">Upravit</string>
-    <string name="cache_personal_note_storewaypoints">Ukládat body trasy</string>
+    <string name="cache_personal_note_storewaypoints">Přidat/aktualizovat trasové body</string>
+    <string name="cache_personal_note_removewaypoints">Odstranit trasové body</string>
     <string name="cache_personal_note_storewaypoints_success">Do osobní poznámky byly přidány trasové body</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Body trasy byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Body trasy nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">Nebyly nalezeny žádné uživatelské body trasy</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nebyly nalezeny žádné uložené trasové body</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabránit přenosu waypointů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
@@ -1059,6 +1062,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Vyber soubor map</string>
     <string name="track_file_select_title">Vybrat soubor s trasou</string>
+    <string name="individual_route_file_select_title">Vybrat soubor s individuální trasou</string>
     <!-- import -->
     <string name="web_import_title">Import z send2cgeo</string>
     <string name="web_import_waiting">Čekání na nové keše ze send2cgeo…</string>
@@ -1130,20 +1134,10 @@
     <string name="map_hidewp_parking">Skrýt místa k parkování</string>
     <string name="map_hidewp_visited">Skrýt navštívené waypointy</string>
     <string name="map_hide_track">Skrýt individuální trasu</string>
-    <string name="map_load_track">Načíst individuální trasu</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuální trasa načtena (%d trasový bod)</item>
-        <item quantity="few">Individuální trasa načtena (%d trasové body)</item>
-        <item quantity="many">Individuální trasa načtena (%d trasových bodů)</item>
-        <item quantity="other">Individuální trasa načtena (%d trasových bodů)</item>
-    </plurals>
-    <string name="load_track_error">Chyba při načítání individuální trasy</string>
-    <string name="map_unload_track">Zrušit načtenou individuální trasu</string>
     <string name="init_hidewp">Skrýt waypointy</string>
     <string name="init_summary_hidewp_original">Skrýt původní waypointy na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
     <string name="init_summary_hidewp_visited">Skrýt navštívené waypointy na mapě</string>
-    <string name="map_theme_builtin">Výchozí</string>
     <string name="map_theme_select">Styl mapy…</string>
     <string name="map_theme_options">Možnosti vzhledu</string>
     <string name="map_language">Jazyk mapy</string>
@@ -1533,6 +1527,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi sytému Android. Tato verze c:geo již není kompatibilní s vaším zařízením a může selhávat nebo se chovat neočekávaně!\nKlepněte na tuto zprávu pro další informace.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používáte verzi c:geo, která se zdá být starší než jeden rok. Některé funkce již nemusí fungovat kvůli změnám na webu nebo jiným technickým změnám. Přečtěte si prosím naše FAQ na téma jak aktualizovat na nejnovější verzi.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Zdá se, že používáte Android 11, který c:geo ještě plně nepodporuje. Přečtěte si prosím naše FAQ, abyste o tom získali více informací.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mluvící kompas</string>
     <string name="tts_toggle">Přepnout hlasové pokyny</string>
@@ -1689,11 +1684,36 @@
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
     <string name="map_export_individual_route">Exportovat individuální trasu</string>
+    <string name="map_load_individual_route">Načíst individuální trasu</string>
+    <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
+    <string name="map_clear_individual_route_confirm">Chcete odstranit všechny keše/trasové body z vaší individuální trasy?</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <string name="save_sorted_route">Uložit</string>
     <string name="sorted_route_saved">Individuální trasa uložena</string>
+    <string name="load_individual_route_error">Chyba při načítání individuální trasy</string>
     <string name="route_item_not_yet_loaded">Soubor s trasou nebyl dosud načten</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Trasa načtena s %d bodem trasy</item>
+        <item quantity="few">Trasa načtena s %d body trasy</item>
+        <item quantity="many">Trasa načtena s %d body trasy</item>
+        <item quantity="other">Trasa načtena s %d body trasy</item>
+    </plurals>
+    <string name="center_on_route">Vycentrovat na trasu</string>
+    <!-- individual track -->
+    <string name="individual_track">Individuální trasa</string>
+    <string name="map_load_track">Načíst individuální trasu</string>
+    <string name="map_load_track_wait">Načítání individuální trasy na pozadí…</string>
+    <string name="map_load_track_confirm">Přepsat existující trasu?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Individuální trasa načtena (%d trasový bod)</item>
+        <item quantity="few">Individuální trasa načtena (%d trasové body)</item>
+        <item quantity="many">Individuální trasa načtena (%d trasových bodů)</item>
+        <item quantity="other">Individuální trasa načtena (%d trasových bodů)</item>
+    </plurals>
+    <string name="load_track_error">Chyba při načítání individuální trasy</string>
+    <string name="map_unload_track">Zrušit načtenou individuální trasu</string>
+    <string name="center_on_track">Vycentrovat na trasu</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1705,6 +1725,7 @@
     <string name="switch_on">Zapnuto</string>
     <string name="switch_manual">Ručně</string>
     <string name="switch_auto">Automatický</string>
+    <string name="switch_default">(výchozí)</string>
     <!-- view settings -->
     <string name="view_settings">Zobrazit nastavení</string>
     <string name="delete_setting">Odstranit nastavení</string>
