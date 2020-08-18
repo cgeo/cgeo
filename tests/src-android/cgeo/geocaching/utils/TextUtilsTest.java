@@ -175,6 +175,7 @@ public class TextUtilsTest extends TestCase {
 
     }
 
+    @SafeVarargs
     private static <T> void assertThatListIsEqual(final List<T> list, final T... expected) {
         assertThat(list.size()).isEqualTo(expected.length);
         int cnt = 0;
