@@ -92,6 +92,7 @@
     <string name="log_saving_and_uploading">Καταχώρηση αρχείου καταγραφής και ανέβασμα εικόνας…</string>
     <string name="log_posting_log">Αποστολή καταγραφής…</string>
     <string name="log_posting_twitter">Αποστολή tweet…</string>
+    <string name="log_posting_vote">Δημοσίευση βαθμολογίας κρύπτης…</string>
     <string name="log_posting_image">Αποστολή εικόνας…</string>
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
@@ -142,13 +143,6 @@
     <string name="log_problem_other_text">Ο παίκτης ανέφερε ότι υπάρχει πρόβλημα με τη κρύπτη.</string>
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
-    <string-array name="log_image_scales">
-        <item>Χωρίς προσαρμογή μεγέθους</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
     <string name="translate_to_english">Μετάφραση στα Αγγλικά</string>
@@ -180,6 +174,7 @@
     <string name="err_detail_cache_find_any">Το c:geo δεν βρίσκει καμία κρύπτη.</string>
     <string name="err_detail_no_spoiler">Το c:geo δεν βρήκε spoiler εικόνες για αυτή την κρύπτη.</string>
     <string name="err_detail_still_working">Δεν έχει ολοκληρωθεί η προηγούμενη λειτουργία.</string>
+    <string name="err_detail_premium_log_found">Αυτή η κρύπτη είναι διαθέσιμη μόνο σε premium μέλη του geocaching.com. Επομένως, δεν είναι δυνατή η εμφάνιση των πληροφοριών της κρύπτη.\n\n Ωστόσο, εάν έχετε ήδη βρει αυτήν την κρύπτη, μπορείτε να την καταγράψετε εδώ.</string>
     <string name="err_watchlist_still_managing">Εξακολουθεί η διαχείριση της λίστας παρακολούθησής σας.</string>
     <string name="err_watchlist_failed">Η αλλαγή της λίστας παρακολούθησής σας απέτυχε.</string>
     <string name="err_application_no">Το c:geo δεν μπορεί να βρει μια κατάλληλη εφαρμογή.</string>
@@ -422,6 +417,9 @@
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
     <string name="about_system_info_send_chooser">Αποστολή πληροφοριών συστήματος</string>
     <string name="about_system_write_logcat">Παραγωγή αρχείου εγγραφών</string>
+    <string name="about_system_write_logcat_type">Δημιουργία τυπικού ή εκτεταμένου αρχείου καταγραφής;\n\nΤα τυπικά αρχεία καταγραφής θα είναι καλά για τις περισσότερες περιπτώσεις χρήσης.\nΧρησιμοποιήστε εκτεταμένα αρχεία καταγραφής μόνο όταν σας ζητηθεί να το κάνετε.</string>
+    <string name="about_system_write_logcat_type_standard">Τυπικό</string>
+    <string name="about_system_write_logcat_type_extended">Εκτεταμένο</string>
     <string name="about_system_write_logcat_success">Το αρχείο καταγραφών έγινε στο \"%1$s\" στον φάκελλο \"%2$s\"</string>
     <string name="about_system_write_logcat_empty">Το αρχείο καταγραφών είναι άδειο</string>
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
@@ -509,6 +507,8 @@
     <string name="init_summary_su">Φόρτωση κρυπτών από Geocaching.su</string>
     <string name="settings_activate_su">Ενεργοποίηση</string>
     <string name="init_gcvote_password_description">Για να είστε σε θέση να αξιολογήσετε μια κρύπτη, θα πρέπει να ακολουθήσετε τις οδηγίες στο GCVote.com και να εισάγετε εδώ τον κωδικό πρόσβασής σας GCVote.</string>
+    <string name="err_vote_send_rating">Σφάλμα κατά την αποστολή της βαθμολογίας.</string>
+    <string name="vote_sent">Η ψήφος δόθηκε επιτυχώς</string>
     <string name="settings_activate_twitter">Ενεργοποίηση</string>
     <string name="init_login_popup">Σύνδεση</string>
     <string name="init_login_popup_working">Συνδέεται με…</string>
@@ -573,7 +573,8 @@
     <string name="init_summary_log_offline">Ενεργοποίηση καταγραφής εκτός σύνδεσης (Δεν θα εμφανιστεί η οθόνη ηλεκτρονικού αρχείου κατά την καταγραφή, δεν θα μεταφορτωθούν αρχεία καταγραφής)</string>
     <string name="init_choose_list">Ζητήστε τη λίστα</string>
     <string name="init_summary_choose_list">Να ερωτώμαι σε ποια λίστα θα αποθηκεύονται οι κρύπτες</string>
-    <string name="init_listdisplay">Εμφάνιση επιπλέον λιστών σε μια λίστα κρυπτών</string>
+    <string name="init_listdisplay">Πρόσθετες λίστες</string>
+    <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Να φαίνεται στη λίστα η κατεύθυνση των κρύπτών</string>
     <!-- backup / restore -->
@@ -621,14 +622,36 @@
     <string name="init_gpx_importdir">Φάκελος εισαγωγής GPX</string>
     <string name="init_dataDir">Επιλέξτε φάκελο δεδομένων κρύπτης</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
-    <string name="init_maptrail">Εμφάνιση διαδρομής</string>
-    <string name="init_summary_maptrail">Εμφάνιση διαδρομής στον χάρτη</string>
-    <string name="init_trailcolor">Χρώμα ίχνους</string>
+    <string name="init_maptrail">Προβολή ιστορικού ιχνών</string>
+    <string name="init_maptrail_length">Μέγιστο μήκος ιστορικών διαδρομών</string>
+    <string name="init_maptrail_length_summary">Ορίστε το μέγιστο μήκος των ιστορικών διαδρομών (θα επιβάλλεται σε κάθε εκκίνηση του c:geo). Η προεπιλεγμένη τιμή είναι 700 - ρυθμίστε την ανάλογα με την διαθέσιμη μνήμη.</string>
+    <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
+    <string name="init_trailcolor">Χρώμα γραμμής ιστορικού διαδρομών</string>
+    <string name="init_trailcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της γραμμής των ιστορικών διαδρομών</string>
+    <string name="init_trailwidth">Πλάτος γραμμής ιστορικού διαδρομών</string>
+    <string name="init_trailwidth_summary">Επιλέξτε το πλάτος για την γραμμή ιστορικών διαδρομών</string>
+    <string name="init_directioncolor">Χρώμα γραμμής κίνησης</string>
+    <string name="init_directioncolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της γραμμής κατεύθυνσης. Η γραμμή κατεύθυνσης είναι μια ευθεία γραμμή μέχρι το επιλεγμένο σημείο στόχου, ή είναι μια διαδρομή δρομολόγησης εάν η δρομολόγηση είναι ενεργή έχοντας εγκαταστήσει την εφαρμογή BRouter.</string>
+    <string name="init_directionwidth">Πλάτος γραμμής κίνησης</string>
+    <string name="init_directionwidth_summary">Επιλέξτε το πλάτος για την γραμμή κατεύθυνσης</string>
+    <string name="init_routecolor">Χρώμα γραμμής ξεχωριστής διαδρομής</string>
+    <string name="init_routecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την γραμμή της ξεχωριστής διαδρομής. Μια ξεχωριστή διαδρομή είναι μια συλλογή από ενδιάμεσα σημεία και/ή κρύπτες που εσείς επιλέξατε πατώντας παρατεταμένα πάνω στο ενδιάμεσο σημείο/κρύπτη. (Αρχικά πρέπει να ενεργοποιήσετε την δυνατότητα παρατεταμένου πατήματος, δείτε στις ρυθμίσεις χάρτη.)</string>
+    <string name="init_routewidth">Πλάτος γραμμής ξεχωριστής διαδρομής</string>
+    <string name="init_routewidth_summary">Επιλέξτε το πλάτος γραμμής της ξεχωριστής διαδρομής</string>
+    <string name="init_trackcolor">Χρώμα γραμμής ξεχωριστού ίχνους</string>
+    <string name="init_trackcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της γραμμής ίχνους. Το ίχνος αποτελείται από πολλαπλά ενδιάμεσα σημεία και μπορεί να φορτωθεί μέσω ενός αρχείου GPX ίχνους.</string>
+    <string name="init_trackwidth">Πλάτος γραμμής ξεχωριστού ίχνους</string>
+    <string name="init_trackwidth_summary">Επιλέξτε το πλάτος γραμμής του ξεχωριστού ίχνους</string>
+    <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
+    <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
+    <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
     <string name="init_share_after_export">Ανοίξτε το μενού κοινής χρήσης μετά από εξαγωγή GPX</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
     <string name="init_summary_trackautovisit">Ορίστε προεπιλογή \"επίσκεψη\" στα ανιχνεύσιμα</string>
     <string name="init_sigautoinsert">Εισαγάγετε αυτόματα</string>
+    <string name="init_offlinelogs_homescreen">Εμφάνιση αρχείων καταγραφής εκτός σύνδεσης</string>
+    <string name="init_summary_offlinelogs_homescreen">Έκτός σύνδεσης, ένας μετρητής καταγραφών (π.χ. \"+ 1\") θα εμφανιστεί δίπλα στο πλήθος των εύρεσεων στην αρχική οθόνη, εάν έχετε αρχεία καταγραφής τα οποία δεν έχουν υποβληθεί ακόμη.</string>
     <string name="init_loaddirectionimg">Κατεύθυνση εικόνας</string>
     <string name="init_summary_loaddirectionimg">Λήψη εικόνας βέλους κατεύθυνσης εάν είναι απαραίτητο (απαιτείται μόνο για τα βασικά μέλη)</string>
     <string name="init_default_navigation_tool">Προεπιλεγμένη πλοήγηση</string>
@@ -696,6 +719,9 @@
     <string name="feature_search_geocode">Αναζήτηση ανά γεωκωδικό</string>
     <string name="feature_search_owner">Αναζήτηση ανά ιδιοκτήτη</string>
     <string name="feature_search_finder">Αναζήτηση ανά άτομα που τη βρήκαν</string>
+    <string name="feature_favorite">Προσθήκη της κρύπτης στις αγαπημένες</string>
+    <string name="feature_voting">Ψηφοφορία κρυπτών</string>
+    <string name="init_maplines_title">Προσαρμογή γραμμών χάρτη</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">Παλιό Mapsforge V3</string>
     <string name="init_mfold_api_description">Χρησιμοποιούμε μια νέα έκδοση του χάρτη του Mapsforge ως προεπιλογή. Εάν χάνετε ορισμένες δυνατότητες ή αντιμετωπίζετε ζητήματα μπορείτε να πάτε πίσω στην παλιά έκδοση εδώ.</string>
@@ -760,13 +786,13 @@
     <string name="err_auth_geokrety_unknown">%1$s επέστρεψε: %2$s.</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="one">Μία κρύπτη</item>
+        <item quantity="one">%1$d κρύπτη</item>
         <item quantity="other">%1$d κρύπτες</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="one">μία μέρα απομένει</item>
-        <item quantity="other">Απομένουν %1$d ημέρες</item>
+        <item quantity="one">%1$d ημέρα απομένει</item>
+        <item quantity="other">%1$d ημέρες απομένουν</item>
     </plurals>
     <string name="last_day_available">τελευταία διαθέσιμη ημέρα</string>
     <string name="cache_offline">Εκτός σύνδεσης</string>
@@ -802,9 +828,10 @@
     <string name="cache_menu_preventWaypointsFromNote">Εξαίρεση δημιουργίας waypoints από σημειώσεις</string>
     <string name="cache_menu_allowWaypointExtraction">Δημιουργία waypoints από σημειώσεις</string>
     <string name="cache_personal_note_edit">Επεξεργασία</string>
+    <string name="cache_personal_note_storewaypoints">Προσθήκη/Ενημέρωση Ενδιάμεσων σημείων</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Αποτροπή εξαγωγής των waypoints</string>
     <string name="cache_personal_note_limit">Όριο προσωπικής σημείωσης</string>
-    <string name="cache_personal_note_truncation">Μετά τους %d χαρακτήρες, το κείμενο θα περικοπεί από την Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Μετά τους %d χαρακτήρες, το κείμενο θα περικοπεί από την Geocaching.com.</string>
     <string name="cache_personal_note_upload">Ανέβασμα</string>
     <string name="cache_personal_note_uploading">Ανέβασμα προσωπικής σημείωσης</string>
     <string name="cache_personal_note_upload_done">Η προσωπική σημείωση ανέβηκε</string>
@@ -827,8 +854,8 @@
     <string name="cache_images">Εικόνες</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
     <plurals name="waypoints">
-        <item quantity="one">1 Σημείο αναφοράς</item>
-        <item quantity="other">%d Σημεία αναφοράς</item>
+        <item quantity="one">%d σημείο διαδρομής</item>
+        <item quantity="other">%d σημεία διαδρομής</item>
     </plurals>
     <string name="cache_waypoints_add">Προσθήκη Σημείου Αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
@@ -907,6 +934,7 @@
     <string name="cache_found_last_30_days">Βρέθηκαν τις τελευταίες 30 ημέρες</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
     <string name="cache_status_disabled">Απενεργοποιημένη</string>
+    <string name="cache_status_active">Ενεργή</string>
     <string name="cache_status_premium">Μόνο για Premium μέλη</string>
     <string name="cache_status_not_premium">Πρόσβαση από όλα τα μέλη</string>
     <string name="cache_status_stored">Αποθηκευμένες</string>
@@ -964,7 +992,6 @@
     <string name="internal_goto_targets_description">Αυτή η κρύπτη αποθηκεύει τα πρόσφατα σας \"Πήγαινε σε\" σημεία. Δημιουργείται αυτόματα μόλις χρησιμοποιήσετε την δυνατότητα \"Πήγαινε σε\" στο κύριο μενού. Οι συντεταγμένες που εισάγονται εδώ θα αποθηκευτούν στα waypoints της παρούσας κρύπτης. Εάν πλέον δςν χρειάζεστε αυτές τις συντεταγμένες, μπορείτε να διαγράψετε αυτή την κρύπτη ή οποιοδήποτε από τα waypoints της. Επίσης μπορείτε να μεταφέρετε αυτήν την κρύπτη σε οποιαδήποτε λίστα της επιλογής σας.</string>
     <string name="init_longtap_map">Πιέστε παρατεταμένα στον χάρτη</string>
     <string name="init_summary_longtap_map">Ενεργοποίηση παρατεταμένου πατήματος στο εικονίδιο του χάρτη (δημιουργία ανεξάρτητης διαδρομής) ή στην επιφάνεια του χάρτη (δημιουργία κρύπτης user-defined)</string>
-    <string name="goto_targets_list">Internal caches</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
     <!-- coordinate calculator hints -->
@@ -979,13 +1006,18 @@
     <string name="file_list_no_files">Το c:geo δεν βρήκε τα κατάλληλα αρχεία.</string>
     <string name="file_searching">Γίνεται αναζήτηση αρχείων που ταιριάζουν</string>
     <string name="file_title_searching">Γίνεται αναζήτηση</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Επιλέξτε φάκελο</string>
     <string name="simple_dir_chooser_current_path">Διαδρομή:</string>
     <string name="simple_dir_chooser_invalid_path">Μη έγκυρη διαδρομή</string>
+    <string name="simple_file_chooser_title">Επιλέξτε αρχείο</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Φόρτωση κρυπτών από %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Φόρτωση σημείων αναφοράς από %1$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d κρύπτη εισήχθη από %2$s</item>
+        <item quantity="other">%1$d κρύπτες εισήχθησαν από %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Το κατέβασμα των στατικών χαρτών ματαιώθηκε</string>
     <string name="gpx_import_title_reading_file">Ανάγνωση αρχείου</string>
     <string name="gpx_import_title">Εισαγωγή GPX</string>
@@ -999,9 +1031,10 @@
     <string name="gpx_import_delete_message">Θέλετε σίγουρα να διαγράψετε το %s;</string>
     <string name="gpx_import_select_list_title">Εισαγωγή GPX στη λίστα</string>
     <string name="gpx_import_android">Εισαγωγή από Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Επιλογή αρχείου χάρτη</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">Επιλογή αρχείου διαδρομής</string>
+    <string name="individual_route_file_select_title">Επιλέξτε αρχείο μεμονωμένης διαδρομής</string>
     <!-- import -->
     <string name="web_import_title">Εισαγωγή από send2cgeo</string>
     <string name="web_import_waiting">Εν αναμονή καινούριων κρυπτών από το send2cgeo…</string>
@@ -1063,7 +1096,6 @@
     <string name="map_modes">Ρυθμίσεις χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_hide">Απόκρυψη</string>
-    <string name="map_trail_show">Εμφάνιση διαδρομής</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_circles_show">Εμφάνιση κύκλων</string>
     <string name="map_mycaches_hide">Απόκρυψη των δικών μου κρυπτών και των ευρέσεών μου</string>
@@ -1076,15 +1108,12 @@
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
     <string name="init_summary_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχουν δεχθεί επίσκεψη απο τον χάρτη</string>
-    <string name="map_theme_builtin">Προεπιλογή</string>
     <string name="map_theme_select">Επιλογή θέματος χάρτη</string>
     <string name="map_theme_options">Επιλογές θέματος</string>
     <string name="map_language">Γλώσσα χάρτη</string>
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
-    <string name="map_clear_trailhistory">Καθαρισμός ιστορικού μονοπατιών</string>
-    <string name="map_trailhistory_cleared">έγινε εκκαθάριση ιστορικού μονοπατιών</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_routing_straight">Ευθεία γραμμή</string>
@@ -1212,13 +1241,13 @@
     <string name="export_persnotes">Προσωπικές σημειώσεις</string>
     <string name="export_persnotes_uploading">Φόρτωση προσωπικής σημείωσης %1$d</string>
     <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Επιτυχημένη φόρτωση μιας σημείωσης</item>
-        <item quantity="other">Επιτυχημένη φόρτωση %1$d σημειώσεων</item>
+        <item quantity="one">Μεταφορτώθηκε %1$d σημείωση επιτυχώς</item>
+        <item quantity="other">Μεταφορτώθηκαν %1$d σημειώσεις επιτυχώς</item>
     </plurals>
     <string name="export_modifiedcoords">Τροποποιημένες συντεταγμένες</string>
     <string name="export_modifiedcoords_uploading">Μεταφόρτωση %1$d</string>
     <string name="export_modifiedcoords_success">Επιτυχής μεταφόρτωση</string>
-    <string name="export_modifiedcoords_result">Τέλος μεταφόρτωσης: %1$d αποτυχία %2$d εντάξει</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Τέλος μεταφόρτωσης: %1$d αποτυχία %2$d εντάξει</string>
     <string name="export_modifiedcoords_error">Αποτυχία μεταμόρφωσης</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Επιτρέπονται οι σκύλοι</string>
@@ -1462,7 +1491,9 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν το c:geo.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Πρόσφατες αλλαγές στo geocaching.com χάλασαν τον χάρτη πραγματικού χρόνου.\nΤο δουλεύουμε, ελέγξτε ξανά σύντομα.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Φαίνεται ότι χρησιμοποιείτε μια παλαιότερη έκδοση του Android. Πιθανώς οι μελλοντικές εκδόσεις του c:geo να μην είναι συμβατές με την συσκευή σας.\nΠιέστε στο μήνυμα για περισσότερες πληροφορίες.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Αυτή η έκδοση του c: geo δεν είναι πλέον συμβατή με τη συσκευή σας και ενδέχεται να αποτύχει ή να συμπεριφερθεί απροσδόκητα! \nΠατήστε σε αυτό το μήνυμα για περισσότερες πληροφορίες.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Φαίνεται οτι χρησιμοποιείτε το Android 11, το οποίο όμως το c: geo δεν υποστηρίζει ακόμη πλήρως. Διαβάστε τις Συχνές Ερωτήσεις μας για περισσότερες πληροφορίες σχετικά με αυτό.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
     <string name="tts_toggle">Φωνητική καθοδήγηση</string>
@@ -1576,6 +1607,9 @@
     <string name="color_red">Κόκκινο</string>
     <string name="color_turquoise">Τυρκουάζ</string>
     <string name="color_black">Μαύρο</string>
+    <string name="preference_colorpicker_select_color_scheme">Επιλογή συνδυασμού χρωμάτων</string>
+    <string name="preference_colorpicker_select_color">Επιλέξτε χρώμα</string>
+    <string name="preference_colorpicker_select_opaqueness">Επιλογή ποσοστού αδιαφάνειας</string>
     <!-- number input -->
     <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
@@ -1590,11 +1624,48 @@
     <string name="individual_route_removed">Αφαίρεση από τη διαδρομή</string>
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
+    <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
+    <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
+    <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
     <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
+    <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
+    <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
+    <!-- individual track -->
+    <string name="individual_track">Μεμονωμένη διαδρομή</string>
+    <string name="map_load_track_confirm">Επανεγγραφή υπάρχουσας διαδρομής;</string>
+    <string name="center_on_track">Κεντράρισμα στην διαδρομή</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
+    <string name="switch_on">Ενεργό</string>
     <string name="switch_manual">Χειροκίνητα</string>
     <string name="switch_auto">Αυτόματα</string>
+    <string name="switch_default">(Προεπιλογή)</string>
+    <!-- view settings -->
+    <string name="view_settings">Ρυθμίσεις προβολής</string>
+    <string name="delete_setting">Διαγραφή ρύθμισης</string>
+    <string name="delete_setting_warning">Διαγραφή του \"%s\" από τις ρυθμίσεις?\n\nΗ λειτουργία αυτή δεν μπορεί να ανακληθεί.</string>
+    <string name="edit_setting">Επεξεργασία ρύθμισης \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">Αγνστος τύπος ρύθμισης - Δεν υποστηρίζεται αλλαγη</string>
+    <string name="edit_setting_error_invalid_data">Λάθος δεδομένα \"%s\". Δεν άλλαξαν οι τιμές.</string>
+    <string name="activate_editmode_title">Ενεργοποίηση κατάστασης αλλαγών</string>
+    <string name="activate_editmode_warning">Εισέρχεστε σε επικίνδυνη περιοχή!\n\nΗ απευθείας αλλαγή ρυθμίσεων μπορεί να φέρει σύγχιση στο c:geo, να μην μπορεί καν να ξεκινήσει, γιαυτό να είστε προσεκτικοί!\n\nΣίγουρα θέλετε να προχωρήσετε ρισκάροντάς το;</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo διαχειριστής τοπικού αρχείου</string>
+    <string name="localfile_title">Άνοιγμα τοπικού αρχείου</string>
+    <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
+    <string name="localfile_foundmap">Βρέθηκε ένα αρχείο χάρτη</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Λήψη αρχείου χάρτη</string>
+    <string name="receivemapfile_success">Η λήψη του αρχείου χάρτη ήταν επιτυχής και αποθηκεύτηκε ως \"%s\" στον κατάλογο των χαρτών</string>
+    <string name="receivemapfile_error">Σφάλμα κατά την λήψη του αρχείου χάρτη</string>
+    <string name="receivemapfile_alreadyexists">Ένα αρχείο με αυτό το όνομα υπάρχει ήδη. Να γίνει αντικατάσταση του υπάρχοντος αρχείου ή να γίνει αποθήκευση του νέου αρχείου με διαφορετικό όνομα;</string>
+    <string name="receivemapfile_option_overwrite">Αντικατάσταση</string>
+    <string name="receivemapfile_option_differentname">Διαφορετικό όνομα</string>
+    <string name="receivemapfile_kb_copied">%d kB αντιγράφησαν</string>
+    <string name="receivemapfile_cancelled">Η μεταφορά του αρχείου χάρτη ακυρώθηκε</string>
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>
