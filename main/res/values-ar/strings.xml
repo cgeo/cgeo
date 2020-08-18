@@ -121,13 +121,6 @@
     <string name="log_oc_team_comment">تعليق فريق OC</string>
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
-    <string-array name="log_image_scales">
-        <item>بدون تحجيم</item>
-        <item>512 بيكسل</item>
-        <item>640 بكسل</item>
-        <item>800 بكسل</item>
-        <item>1024 بكسل</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">ترجمة إلى %s</string>
     <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
@@ -499,8 +492,6 @@
     <string name="init_gpx_importdir">دليل استيراد من GPX</string>
     <string name="init_dataDir">حدد دفتر بيانات العلبة المخبئة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
-    <string name="init_maptrail">عرض الأثر</string>
-    <string name="init_summary_maptrail">عرض الأثر على الخريطة</string>
     <string name="init_share_after_export">افتح قائمة المشاركة بعد التصدير من GPX</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
@@ -633,7 +624,7 @@
     <string name="cache_personal_note">ملاحضة شخصية</string>
     <string name="cache_personal_note_edit">تعديل</string>
     <string name="cache_personal_note_limit">حد الملاحظة الشخصية</string>
-    <string name="cache_personal_note_truncation">هذه الملاحظة الشخصية بعد %d أحرف سيتم اقتطاعها بواسطة Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">هذه الملاحظة الشخصية بعد %d أحرف سيتم اقتطاعها بواسطة Geocaching.com.</string>
     <string name="cache_personal_note_upload">رفع</string>
     <string name="cache_personal_note_uploading">رفع الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload_done">تم رفع الملاحضة الشخصية</string>
@@ -765,7 +756,7 @@
     <string name="file_list_no_files">c:geo لم يعثر على ملفات مناسبة.</string>
     <string name="file_searching">البحث عن ملفات مطابقة</string>
     <string name="file_title_searching">البحث</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">اختر الدليل</string>
     <string name="simple_dir_chooser_current_path">المسار:</string>
     <string name="simple_dir_chooser_invalid_path">مسار غير صالح</string>
@@ -785,9 +776,8 @@
     <string name="gpx_import_delete_message">هل تريد حذف %s؟</string>
     <string name="gpx_import_select_list_title">استيراد GPX إلى القائمة</string>
     <string name="gpx_import_android">استيراد من الأندرويد</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">حدد ملف الخريطة</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">استيراد من send2cgeo</string>
     <string name="web_import_waiting">في انتظار المخبآت الجديدة من send2cgeo&#8230;</string>
@@ -843,11 +833,9 @@
     <string name="map_live">خريطة على نات</string>
     <string name="map_view_map">عرض الخريطة</string>
     <string name="map_modes">إعدادات الخريطة</string>
-    <string name="map_trail_show">عرض الأثر</string>
     <string name="map_circles_show">إظهار الدوائر</string>
     <string name="map_mycaches_hide">أخفي المخبآت الخاصة أو المعثور عليها</string>
     <string name="map_disabled_hide">إخفاء المخبآت المعطلة</string>
-    <string name="map_theme_builtin">افتراضي</string>
     <string name="map_theme_select">حدد ثيم الخريطة</string>
     <string name="map_live_enable">تمكين عرض مباشر</string>
     <string name="map_live_disable">تعطيل العرض المباشر</string>
@@ -1267,6 +1255,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>
