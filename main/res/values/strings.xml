@@ -1885,6 +1885,8 @@
     <string name="receivemapfile_intenttitle">Receive map file</string>
     <string name="receivemapfile_success">Map file successfully received as \"%s\" and stored to map directory</string>
     <string name="receivemapfile_error">Error while receiving map file</string>
+    <string name="receivemapfile_error_io_exception">I/O error while receiving map file. Is your map directory \"%s\" writable?</string>
+    <string name="receivemapfile_error_filenotfound_exception">File not found error while receiving map file.</string>
     <string name="receivemapfile_alreadyexists">A file with this name already exists. Overwrite existing file or save new file under a different name?</string>
     <string name="receivemapfile_option_overwrite">Overwrite</string>
     <string name="receivemapfile_option_differentname">Different name</string>
@@ -1897,6 +1899,7 @@
     <string name="downloadmap_choose">Choose map</string>
     <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
+    <string name="downloadmap_target_not_writable">Target \"%s\" is not writable - please select a different map file directory.</string>
 
     <!-- history trail export -->
     <string name="trailhistory">History track</string>

@@ -2,8 +2,14 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.permission.PermissionGrantedCallback;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.MapDownloadSelectorActivity;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.PendingDownload;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.app.DownloadManager;
@@ -11,6 +17,8 @@ import android.content.Intent;
 import android.net.Uri;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.DOWNLOAD_SERVICE;
+
+import java.io.File;
 
 public class MapDownloadUtils {
 
@@ -55,6 +63,32 @@ public class MapDownloadUtils {
             return true;
         }
         return false;
+    }
+
+    public interface DirectoryWritable {
+        void run (String path, boolean isWritable);
+    }
+
+    public static void checkMapDirectory(final Activity activity, final DirectoryWritable callback) {
+        PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
+            @Override
+            protected void execute() {
+                String mapDirectory = Settings.getMapFileDirectory();
+                if (mapDirectory == null) {
+                    final File file = LocalStorage.getDefaultMapDirectory();
+                    FileUtils.mkdirs(file);
+                    mapDirectory = file.getPath();
+                    Settings.setMapFileDirectory(mapDirectory);
+                }
+                final String mapFileDirectory = Settings.getMapFileDirectory();
+                final boolean canWrite = new File(mapFileDirectory).canWrite();
+                if (canWrite) {
+                    callback.run(mapFileDirectory, true);
+                } else {
+                    Dialogs.message(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(mapFileDirectory, false));
+                }
+            }
+        });
     }
 
 }

@@ -5,14 +5,10 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
-import cgeo.geocaching.permission.PermissionGrantedCallback;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
-import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapDownloadUtils;
 import static cgeo.geocaching.utils.FileUtils.getFilenameFromPath;
 
 import android.app.Activity;
@@ -47,6 +43,10 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     private static final String MAP_EXTENSION = ".map";
 
+    protected enum CopyStates {
+        SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, UNKNOWN_STATE
+    }
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,25 +57,16 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final String preset = intent.getStringExtra(EXTRA_FILENAME);
         final AbstractActivity that = this;
 
-        PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
-            @Override
-            protected void execute() {
-                determineTargetDirectory();
+        MapDownloadUtils.checkMapDirectory(this, (path, isWritable) -> {
+            if (isWritable) {
+                mapDirectory = Settings.getMapFileDirectory();
                 if (guessFilename(preset)) {
                     handleMapFile(that);
                 }
+            } else {
+                finish();
             }
         });
-    }
-
-    private void determineTargetDirectory() {
-        mapDirectory = Settings.getMapFileDirectory();
-        if (mapDirectory == null) {
-            final File file = LocalStorage.getDefaultMapDirectory();
-            FileUtils.mkdirs(file);
-            mapDirectory = file.getPath();
-            Settings.setMapFileDirectory(mapDirectory);
-        }
     }
 
     // try to guess a filename, otherwise chose randomized filename
@@ -123,7 +114,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         }
     }
 
-    protected class CopyTask extends AsyncTaskWithProgressText<String, Boolean> {
+    protected class CopyTask extends AsyncTaskWithProgressText<String, CopyStates> {
         private int bytesCopied = 0;
         private final String progressFormat = getString(R.string.receivemapfile_kb_copied);
         private final AtomicBoolean cancelled = new AtomicBoolean(false);
@@ -136,7 +127,8 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         }
 
         @Override
-        protected Boolean doInBackgroundInternal(final String[] logTexts) {
+        protected CopyStates doInBackgroundInternal(final String[] logTexts) {
+            CopyStates status = CopyStates.UNKNOWN_STATE;
             try {
                 Log.d("start receiving map file: " + file.getPath());
                 final InputStream inputStream = getContentResolver().openInputStream(uri);
@@ -168,24 +160,46 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                         if (newMapSource != null) {
                             Settings.setMapSource(newMapSource);
                         }
+                        status = CopyStates.SUCCESS;
                     } else {
                         file.delete();
+                        status = CopyStates.CANCELLED;
                     }
-
-                    return !cancelled.get();
                 } catch (IOException e) {
                     Log.e("IOException on receiving map file: " + e.getMessage());
+                    status = CopyStates.IO_EXCEPTION;
                 }
             } catch (FileNotFoundException e) {
                 Log.e("FileNotFoundException on receiving map file: " + e.getMessage());
+                status = CopyStates.FILENOTFOUND_EXCEPTION;
             }
-            return false;
+            return status;
         }
 
         @Override
-        protected void onPostExecuteInternal(final Boolean success) {
-            Dialogs.message(context, getString(R.string.receivemapfile_intenttitle), cancelled.get() ? getString(R.string.receivemapfile_cancelled) : success ? String.format(getString(R.string.receivemapfile_success), fileinfo) : getString(R.string.receivemapfile_error), getString(android.R.string.ok), (dialog, button) -> finish());
+        protected void onPostExecuteInternal(final CopyStates status) {
+            final String result;
+            switch (status) {
+                case SUCCESS:
+                    result = String.format(getString(R.string.receivemapfile_success), fileinfo);
+                    break;
+                case CANCELLED:
+                    result = getString(R.string.receivemapfile_cancelled);
+                    break;
+                case IO_EXCEPTION:
+                    result = String.format(getString(R.string.receivemapfile_error_io_exception), mapDirectory);
+                    break;
+                case FILENOTFOUND_EXCEPTION:
+                    result = getString(R.string.receivemapfile_error_filenotfound_exception);
+                    break;
+                default:
+                    result = getString(R.string.receivemapfile_error);
+                    break;
+
+            }
+            Dialogs.message(context, getString(R.string.receivemapfile_intenttitle), result, getString(android.R.string.ok), (dialog, button) -> finish());
         }
+
     }
 
     private void createRandomlyNamedFile() {
