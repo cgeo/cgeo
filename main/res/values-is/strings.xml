@@ -375,8 +375,6 @@
     <string name="init_restore_failed">Endurheimt tókst ekki.</string>
     <string name="settings_info_offline_maps_title">Upplýsingar um kort án nettengingar</string>
     <string name="settings_info_themes_title">Upplýsingar um kortaþemu</string>
-    <string name="init_maptrail">Sýna slóða</string>
-    <string name="init_summary_maptrail">Sýna slóða á korti</string>
     <string name="init_sigautoinsert">Setja inn sjálfkrafa</string>
     <string name="init_default_navigation_tool_select">Velja tól</string>
     <string name="init_debug_title">Aflúsunarupplýsingar</string>
@@ -424,15 +422,7 @@
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo má núna eiga samskipti við %s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">Einn kassi</item>
-        <item quantity="other">%1$d kassar</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">einn dagur eftir</item>
-        <item quantity="other">%1$d dagar eftir</item>
-    </plurals>
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline">Án netsambands</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
@@ -533,7 +523,7 @@
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_list_no_files">c:geo fann engar viðeigandi skrár.</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Hleð kössum úr %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Hleð vegpunktum úr %1$s</string>
@@ -544,9 +534,8 @@
     <string name="gpx_import_error_io">Get ekki lesið skrá</string>
     <string name="gpx_import_error_unexpected">Óvænt villa</string>
     <string name="gpx_import_delete_title">Eyða skrá</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Velja kortaskrá</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_downloading">Hleð niður</string>
     <!-- popup -->
@@ -578,7 +567,6 @@
     <string name="visit_tweet">Tilkynna fundinn á Twitter</string>
     <!-- map -->
     <string name="map_map">Kort</string>
-    <string name="map_theme_builtin">Sjálfgefið</string>
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <string name="map_routing">Vegvísun</string>
@@ -790,8 +778,15 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">fet</string>
     <string name="unit_mi">mílur</string>
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

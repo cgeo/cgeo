@@ -121,13 +121,6 @@
     <string name="log_oc_team_comment">Ang komento ng grupo na OC</string>
     <string name="log_your_saved_log">Ang iyong na-save na log</string>
     <string name="log_empty_logbook">Ang talaang libro ng cathe na ito ay walang laman.</string>
-    <string-array name="log_image_scales">
-        <item>Walang pag-eskala</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -500,8 +493,6 @@
     <string name="init_gpx_importdir">Ang GPX na import direktoryo</string>
     <string name="init_dataDir">Pumili ng geocahce na datos na direktori</string>
     <string name="init_dataDir_note">Maaari mong piliin pata ma-istor ang dagdag na mga geocaches sa (maninirang, sa log na imahe, &#8230;) saiyong panlabas na imbakan (ang pagtulad o tunay na panlabas na SD kard na nakadepende sa iyong aparato).</string>
-    <string name="init_maptrail">Ipakita ang trail</string>
-    <string name="init_summary_maptrail">Ipakita ang trail sa mapa</string>
     <string name="init_share_after_export">Buksan sa pagbahagi ang menu pagkatapos ng pag-luluwas sa GPX</string>
     <string name="init_include_found_status">Ang kaugnay ay \"natagpuan\" na estado</string>
     <string name="init_trackautovisit">Bisitahin ang TBs</string>
@@ -616,15 +607,7 @@
     <string name="err_auth_geokrety_bad_password">Ang iyong username/password ay mukhang hindi wasto.</string>
     <string name="err_auth_geokrety_unknown">Ang %1$s ay bumalik sa: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">Isang cache</item>
-        <item quantity="other">mga %1$d cache</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">isang araw ang natitira</item>
-        <item quantity="other">%1$d mga araw na natitira</item>
-    </plurals>
     <string name="last_day_available">huling araw available</string>
     <string name="cache_offline_refresh">I-refresh</string>
     <string name="cache_offline_drop">Tanggalin</string>
@@ -651,7 +634,7 @@
     <string name="cache_personal_note">Ang pansariling tala</string>
     <string name="cache_personal_note_edit">Baguhin</string>
     <string name="cache_personal_note_limit">Ang limitasyon ng pansariling tala</string>
-    <string name="cache_personal_note_truncation">Ang pansariling tala na ito ay napuputol matapos ang %d na mga karakter ng Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang pansariling tala na ito ay napuputol matapos ang %d na mga karakter ng Geocaching.com.</string>
     <string name="cache_personal_note_upload">I-upload</string>
     <string name="cache_personal_note_uploading">Ang pag-upload ng sariling tala</string>
     <string name="cache_personal_note_upload_done">Ang sariling tala ay nai-upload</string>
@@ -779,7 +762,7 @@
     <string name="file_list_no_files">ang c:geo ay natagpuang walang angkop na mga file.</string>
     <string name="file_searching">Ang pagsasaliksik para sa pagtugma ng mga file</string>
     <string name="file_title_searching">Nagsasaliksik</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Pumili ng direktoryo</string>
     <string name="simple_dir_chooser_current_path">Daan:</string>
     <string name="simple_dir_chooser_invalid_path">Hindi wastong daan</string>
@@ -799,9 +782,8 @@
     <string name="gpx_import_delete_message">Gusto mo bang burahin ang %s?</string>
     <string name="gpx_import_select_list_title">Pag-import ng GPX sa listahan</string>
     <string name="gpx_import_android">Pag-import mula sa Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Pumili ng file ng mapa</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Pag-import mula sa send2cgeo</string>
     <string name="web_import_waiting">Naghihintay ng mga bagong cache mula sa send2cgeo&#8230;</string>
@@ -857,11 +839,9 @@
     <string name="map_live">Ang live na mapa</string>
     <string name="map_view_map">Tingnan ang mapa</string>
     <string name="map_modes">Ang mga setting ng mapa</string>
-    <string name="map_trail_show">Ipakita ang trail</string>
     <string name="map_circles_show">Ipakita ang mga bilog</string>
     <string name="map_mycaches_hide">Itago ang sarili/natagpuan ang mga cache</string>
     <string name="map_disabled_hide">Itago ang mga hindi gumaganang mga cache</string>
-    <string name="map_theme_builtin">Naka-default</string>
     <string name="map_theme_select">Pumili ng tema na mapa</string>
     <string name="map_live_enable">Paganahin ang live</string>
     <string name="map_live_disable">Huwag paganahin ang live</string>
@@ -986,10 +966,6 @@
     <string name="export_confirm_message">Sa daan: %1$s\nfile na pangalan na: %2$s</string>
     <string name="export_persnotes">Mga pansariling notasyon</string>
     <string name="export_persnotes_uploading">Ang pag-aplwd ng sariling notasyon %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Matagumpay ang pag-aplowd sa isang notasyon</item>
-        <item quantity="other">Matagumpay ang pag-aplowd sa isang notasyon</item>
-    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Pinapayagan ang mga aso</string>
     <string name="attribute_dogs_no">Hindi pinapayagan ang mga aso</string>
@@ -1329,6 +1305,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

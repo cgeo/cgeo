@@ -134,13 +134,6 @@
     <string name="log_problem_other_text">Šis lobiautojas pranešė, kad su šia slėptuve yra problema.</string>
     <string name="log_problem_archive_label">Slėptuvė turėtų būti archyvuota</string>
     <string name="log_problem_archive_text">Šis lobiautojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
-    <string-array name="log_image_scales">
-        <item>Nekeisti dydžio</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Išversti į %s</string>
     <string name="translate_to_english">Išversti į anglų</string>
@@ -568,9 +561,6 @@
     <string name="init_gpx_importdir">GPX importavimo katalogas</string>
     <string name="init_dataDir">Pasirinkite slėptuvių duomenų katalogą</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, nuotraukas, …) išorinėje atmintinėje (pseudo ar tikroje išorinėje SD atmintinėje, priklausomai nuo jūsų įrenginio).</string>
-    <string name="init_maptrail">Rodyti pėdsaką</string>
-    <string name="init_summary_maptrail">Rodyti pėdsaką žemėlapyje</string>
-    <string name="init_trailcolor">Pėdsako spalva</string>
     <string name="init_share_after_export">Po GPX eksportavimo atidaryti bendrinimo meniu</string>
     <string name="init_include_found_status">Įtraukti \"Rasta\" būseną</string>
     <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
@@ -695,19 +685,7 @@
     <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
     <string name="err_auth_geokrety_unknown">%1$s gražinta: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">Viena slėptuvė</item>
-        <item quantity="few">%1$d slėptuvės</item>
-        <item quantity="many">%1$d slėptuvių</item>
-        <item quantity="other">%1$d slėptuvių</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">liko viena diena</item>
-        <item quantity="few">liko %1$d dienos</item>
-        <item quantity="many">liko %1$d dienų</item>
-        <item quantity="other">liko %1$d dienų</item>
-    </plurals>
     <string name="last_day_available">liko paskutine diena</string>
     <string name="cache_offline">Išsaugota</string>
     <string name="cache_offline_refresh">Naujinti</string>
@@ -748,7 +726,7 @@
     <string name="cache_personal_note">Asmeninė pastaba</string>
     <string name="cache_personal_note_edit">Redaguoti</string>
     <string name="cache_personal_note_limit">Asmeninės pastabos limitas</string>
-    <string name="cache_personal_note_truncation">Ši asmeninė pastaba bus sutrumpinta Geocaching.com svetainės iki %d simbolių.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ši asmeninė pastaba bus sutrumpinta Geocaching.com svetainės iki %d simbolių.</string>
     <string name="cache_personal_note_upload">Įkelti</string>
     <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
@@ -770,12 +748,6 @@
     <string name="cache_list_select_last">Paskutinis pasirinkimas</string>
     <string name="cache_images">Nuotraukos</string>
     <string name="cache_waypoints">Papildomi taškai</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d papildomas taškas</item>
-        <item quantity="few">%d papildomi taškai</item>
-        <item quantity="many">%d papildomų taškų</item>
-        <item quantity="other">%d papildomų taškų</item>
-    </plurals>
     <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
     <string name="cache_hint">Užuomina</string>
     <string name="cache_hint_not_available">Užuomina nepateikiama</string>
@@ -906,7 +878,7 @@
     <string name="file_list_no_files">c:geo tinkamų failų nerado.</string>
     <string name="file_searching">Ieškoma tinkamų failų</string>
     <string name="file_title_searching">Ieškoma</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Pasirinkite katalogą</string>
     <string name="simple_dir_chooser_current_path">Kelias:</string>
     <string name="simple_dir_chooser_invalid_path">Neteisingas kelias</string>
@@ -926,9 +898,8 @@
     <string name="gpx_import_delete_message">Ar tikrai norite ištrinti %s?</string>
     <string name="gpx_import_select_list_title">Importuoti GPX į sąrašą</string>
     <string name="gpx_import_android">Importuoti iš Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Pasirinkite žemėlapio failą</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Importuoti iš send2cgeo</string>
     <string name="web_import_waiting">Laukiama naujas slėptuvių iš send2cgeo…</string>
@@ -986,19 +957,15 @@
     <string name="map_live">Slėptuvės iš interneto</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_modes">Žemėlapio nustatymai</string>
-    <string name="map_trail_show">Rodyti pėdsaką</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
     <string name="map_circles_show">Rodyti apskritimus</string>
     <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
     <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
-    <string name="map_theme_builtin">Numatyta</string>
     <string name="map_theme_select">Pasirinkti žemėlapio temą</string>
     <string name="map_theme_options">Temos parinktys</string>
     <string name="map_live_enable">Slėptuvės tiesiogiai</string>
     <string name="map_live_disable">Slėptuvės netiesiogiai</string>
     <string name="map_as_list">Rodyti kaip sąrašą</string>
-    <string name="map_clear_trailhistory">Valyti pėdsako istoriją</string>
-    <string name="map_trailhistory_cleared">Pėdsako istorija išvalyta</string>
     <string name="map_select_multiple_items">Pasirinkite elementą</string>
     <string name="map_routing">Maršrutizavimas</string>
     <string name="map_routing_straight">Tiesi linija</string>
@@ -1119,16 +1086,10 @@
     <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
     <string name="export_persnotes">Asmeninės pastabos</string>
     <string name="export_persnotes_uploading">Įkeliama asmeninė pastaba %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Sėkmingai nusiųsta viena pastaba</item>
-        <item quantity="few">Sėkmingai nusiųstos %1$d pastabos</item>
-        <item quantity="many">Sėkmingai nusiųsta %1$d pastabų</item>
-        <item quantity="other">Sėkmingai nusiųsta %1$d pastabų</item>
-    </plurals>
     <string name="export_modifiedcoords">Modifikuotos koordinatės</string>
     <string name="export_modifiedcoords_uploading">Įkėlimas %1$d</string>
     <string name="export_modifiedcoords_success">Sėkmingai įkelta</string>
-    <string name="export_modifiedcoords_result">Įkėlimas užbaigtas: %1$d nepavyko / %2$d gerai</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Įkėlimas užbaigtas: %1$d nepavyko / %2$d gerai</string>
     <string name="export_modifiedcoords_error">Nepavyko įkelti</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Galima su šunimi</string>
@@ -1510,9 +1471,16 @@
     <string name="notification_channel_description">pranešimas iš c:geo geocaching programėlės</string>
     <string name="proximity_notification_title">c:geo priartėjimo pranešimas</string>
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pėdos</string>
     <string name="unit_yd">jardai</string>
     <string name="unit_mi">mylios</string>
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

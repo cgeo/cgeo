@@ -118,13 +118,6 @@
     <string name="log_oc_team_comment">Komentar ekipe OC</string>
     <string name="log_your_saved_log">Shranjen zapis</string>
     <string name="log_empty_logbook">Dnevnik zaklada je prazen.</string>
-    <string-array name="log_image_scales">
-        <item>Brez skaliranja</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
@@ -459,8 +452,6 @@
     <string name="init_map_directory_description">Mapa z zemljevidi</string>
     <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
     <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
-    <string name="init_maptrail">Pokaži sled</string>
-    <string name="init_summary_maptrail">Pokaži sled na zemljevidu</string>
     <string name="init_share_after_export">Po izvozu GPX datotek ponudi menu za deljenje</string>
     <string name="init_trackautovisit">Obisk pri zapisih</string>
     <string name="init_summary_trackautovisit">Pri sledljivčkih vedno uporabi obisk pri zapisih (\"Visited\")</string>
@@ -550,12 +541,6 @@
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
     <!-- auth geokrety -->
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">%1$d zaklad</item>
-        <item quantity="two">%1$d zaklada</item>
-        <item quantity="few">%1$d zakladi</item>
-        <item quantity="other">%1$d zakladov</item>
-    </plurals>
     <!-- days remaining -->
     <string name="cache_offline">Brez povezave</string>
     <string name="cache_offline_refresh">Osveži</string>
@@ -570,7 +555,7 @@
     <string name="cache_personal_note">Lastna opomba</string>
     <string name="cache_personal_note_edit">Uredi</string>
     <string name="cache_personal_note_limit">Omejitev osebnega zapisa</string>
-    <string name="cache_personal_note_truncation">Osebni zapis bo odrezan po %d znakih na Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osebni zapis bo odrezan po %d znakih na Geocaching.com.</string>
     <string name="cache_personal_note_upload">Naloži</string>
     <string name="cache_personal_note_uploading">Nalagam lastno opombo na spletno stran</string>
     <string name="cache_personal_note_upload_done">Lastna opomba je bila uspešno naložena na spletno stran</string>
@@ -584,12 +569,6 @@
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d dodatna točka</item>
-        <item quantity="two">%d dodatni točki</item>
-        <item quantity="few">%d dodatne točke</item>
-        <item quantity="other">%d dodatnih točk</item>
-    </plurals>
     <string name="cache_waypoints_add">Dodaj točko</string>
     <string name="cache_hint">Namig</string>
     <string name="cache_logs">Dnevnik zapisov</string>
@@ -691,7 +670,7 @@
     <string name="file_list_no_files">c:geo ni našel primernih datotek.</string>
     <string name="file_searching">Iskanje primernih datotek</string>
     <string name="file_title_searching">Iskanje</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Izberi mapo</string>
     <string name="simple_dir_chooser_current_path">Pot:</string>
     <string name="simple_dir_chooser_invalid_path">Neveljavna pot</string>
@@ -710,9 +689,8 @@
     <string name="gpx_import_delete_message">Ali želite izbrisati %s?</string>
     <string name="gpx_import_select_list_title">Uvozi GPX datoteko v seznam</string>
     <string name="gpx_import_android">Uvozi iz Androida</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Izbiranje datoteke z zemljevidi</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Uvoz iz send2cgeo</string>
     <string name="web_import_waiting">Čakanje na zaklade iz send2cgeo…</string>
@@ -765,11 +743,9 @@
     <string name="map_live">Zemljevid</string>
     <string name="map_view_map">Pogled zemljevida</string>
     <string name="map_modes">Možnosti</string>
-    <string name="map_trail_show">Pokaži sled</string>
     <string name="map_circles_show">Pokaži kroge</string>
     <string name="map_mycaches_hide">Skrij lastne ali najdene zaklade</string>
     <string name="map_disabled_hide">Skrij onemogočene zaklade</string>
-    <string name="map_theme_builtin">Privzeto</string>
     <string name="map_theme_select">Izberi temo zemljevida</string>
     <string name="map_live_enable">Vklopi podatke v živo</string>
     <string name="map_live_disable">Izklopi podatke v živo</string>
@@ -1178,6 +1154,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

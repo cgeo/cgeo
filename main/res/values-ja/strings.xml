@@ -139,13 +139,6 @@
     <string name="log_problem_other_text">このジオキャッシャ―が、このキャッシュに問題があることを報告しました。</string>
     <string name="log_problem_archive_label">キャッシュをアーカイブします</string>
     <string name="log_problem_archive_text">このジオキャッシャーが、このジオキャッシュをアーカイブすることを報告しました。コミュニティのボランティアレビューアーが通知されました。</string>
-    <string-array name="log_image_scales">
-        <item>実サイズ</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">%sに翻訳</string>
     <string name="translate_to_english">英語に翻訳</string>
@@ -265,6 +258,7 @@
     <string name="loc_fused">複合</string>
     <string name="loc_low_power">低消費電力</string>
     <string name="loc_home">本拠地の座標</string>
+    <string name="loc_gps">GPS</string>
     <string name="loc_sat">衛星</string>
     <string name="loc_trying">住所確認中</string>
     <string name="loc_no_addr">住所不明</string>
@@ -360,6 +354,7 @@
     <string name="caches_filter_multi_listing">異なる状態で複数のリストに存在</string>
     <string name="caches_filter_missing_gcvote">発見したキャッシュは評価されていません</string>
     <string name="caches_filter_lists">リストに割り当てられました</string>
+    <string name="caches_filter_empty">(空)</string>
     <string name="caches_removing_from_history">履歴から削除中…</string>
     <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインのログを削除します？</string>
@@ -396,6 +391,7 @@
     <string name="about_donation_more">ウェブサイトを訪問</string>
     <string name="about_contributors">貢献者</string>
     <string name="about_license">ライセンス</string>
+    <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
     <string name="about_starting">はじめましょう</string>
     <string name="about_starting_head">はじめましょう</string>
@@ -410,6 +406,9 @@
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geo システム情報</string>
     <string name="about_system_info_send_chooser">システム情報を送信</string>
+    <string name="about_system_write_logcat">ログファイルを生成</string>
+    <string name="about_system_write_logcat_empty">ログファイルが空です</string>
+    <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
     <string name="changelog_github">すべての変更の一覧</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geo の父として</string>
@@ -439,7 +438,10 @@
     <string name="settings_title_map">地図</string>
     <string name="settings_summary_map">地図ソースやオフライン地図の設定や地図の詳細の選択。</string>
     <string name="settings_title_map_data">地図データ</string>
+    <string name="settings_title_map_rotation">マップ回転 (Googleマップ)</string>
+    <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図表示</string>
+    <string name="settings_title_map_behavior">マップの動作</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">ジオキャッシュ データ ディレクトリ</string>
     <string name="settings_title_data_dir_usage">ジオキャッシュ データ ディレクトリ (%1$s 使用)</string>
@@ -597,8 +599,6 @@
     <string name="init_gpx_importdir">GPXインポートフォルダ</string>
     <string name="init_dataDir">ジオキャッシュ データ ディレクトリを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ (ネタバレ、ログの画像、…) の追加データを、外部ストレージ (お使いのデバイスに応じて、エミュレートまたは実際の外部 SD カード) に格納することができます。</string>
-    <string name="init_maptrail">軌跡表示</string>
-    <string name="init_summary_maptrail">地図に軌跡を表示</string>
     <string name="init_share_after_export">エクスポートした後に共有メニューを表示</string>
     <string name="init_include_found_status">\"見つかった\"ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブル「訪れた」設定</string>
@@ -726,13 +726,7 @@
     <string name="err_auth_geokrety_bad_password">ユーザ名/パスワードが正しくないようです。</string>
     <string name="err_auth_geokrety_unknown">%1$s の戻り: %2$s。</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="other">%1$d キャッシュ</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="other">あと %1$d 日</item>
-    </plurals>
     <string name="last_day_available">利用可能な最後の日</string>
     <string name="cache_offline">オフライン</string>
     <string name="cache_offline_refresh">更新</string>
@@ -762,7 +756,7 @@
     <string name="cache_personal_note">パーソナルノート</string>
     <string name="cache_personal_note_edit">編集</string>
     <string name="cache_personal_note_limit">パーソナルノートの制限</string>
-    <string name="cache_personal_note_truncation">このパーソナルノートはGeocaching.comにより %d 文字以降は切り捨てられます。</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">このパーソナルノートはGeocaching.comにより %d 文字以降は切り捨てられます。</string>
     <string name="cache_personal_note_upload">アップロード</string>
     <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
@@ -784,9 +778,6 @@
     <string name="cache_list_select_last">最後に選択</string>
     <string name="cache_images">画像</string>
     <string name="cache_waypoints">ウェイポイント</string>
-    <plurals name="waypoints">
-        <item quantity="other">%d ウェイポイント</item>
-    </plurals>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントがありません</string>
@@ -886,6 +877,7 @@
     <string name="cache_hidden">設置日</string>
     <string name="cache_event">イベント日付</string>
     <string name="cache_location">場所</string>
+    <string name="cache_location_country">国</string>
     <string name="cache_coordinates">座標</string>
     <string name="cache_calculator">計算機</string>
     <string name="cache_coordinates_original">オリジナル座標</string>
@@ -903,6 +895,9 @@
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
     <!-- coordinate calculator hints -->
+    <string name="cc_hint_degrees">度</string>
+    <string name="cc_hint_minutes">分</string>
+    <string name="cc_hint_seconds">秒</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">ファイルを検索中:\n</string>
@@ -910,7 +905,7 @@
     <string name="file_list_no_files">適切なファイルが見つかりませんでした。</string>
     <string name="file_searching">対応するファイルを調査中</string>
     <string name="file_title_searching">検索中</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">フォルダの選択</string>
     <string name="simple_dir_chooser_current_path">パス:</string>
     <string name="simple_dir_chooser_invalid_path">無効なパス</string>
@@ -930,9 +925,8 @@
     <string name="gpx_import_delete_message">%sを削除しますか?</string>
     <string name="gpx_import_select_list_title">GPXファイルをリストへインポート</string>
     <string name="gpx_import_android">アンドロイド端末からインポート</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">地図ファイルの選択</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">send2cgeoからインポート</string>
     <string name="web_import_waiting">send2cgeoから新しいキャッシュ情報を確認中…</string>
@@ -956,6 +950,7 @@
     <string name="waypoint_delete">削除</string>
     <string name="waypoint_edit_title">ウェイポイントを編集</string>
     <string name="waypoint_add_title">ウェイポイントを追加</string>
+    <string name="waypoint_added">ウェイポイントを追加しました</string>
     <string name="waypoint_note">メモ</string>
     <string name="waypoint_user_note">ユーザー メモ</string>
     <string name="waypoint_visited">訪問済み</string>
@@ -990,19 +985,17 @@
     <string name="map_live">オンライン地図</string>
     <string name="map_view_map">地図の変更</string>
     <string name="map_modes">表示切替</string>
-    <string name="map_trail_show">軌跡を表示</string>
+    <string name="map_rotation">マップの回転</string>
+    <string name="map_hide">非表示</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
     <string name="map_circles_show">0.1マイル円を表示</string>
     <string name="map_mycaches_hide">所有/見つけたキャッシュを非表示</string>
     <string name="map_disabled_hide">無効化キャッシュを非表示</string>
-    <string name="map_theme_builtin">デフォルト</string>
     <string name="map_theme_select">地図のテーマを選択</string>
     <string name="map_theme_options">テーマのオプション</string>
     <string name="map_live_enable">オンラインで取得</string>
     <string name="map_live_disable">保存済みキャッシュのみ</string>
     <string name="map_as_list">リスト表示</string>
-    <string name="map_clear_trailhistory">経路の履歴をクリア</string>
-    <string name="map_trailhistory_cleared">経路の履歴をクリアしました</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索</string>
     <string name="map_routing_straight">直線</string>
@@ -1123,13 +1116,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_confirm_message">パス: %1$s\nファイル名: %2$s</string>
     <string name="export_persnotes">パーソナルメモ</string>
     <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="other">%1$dノートを正常にアップロードしました</item>
-    </plurals>
     <string name="export_modifiedcoords">座標が更新されました</string>
     <string name="export_modifiedcoords_uploading">%1$d アップロードしています</string>
     <string name="export_modifiedcoords_success">アップロードが成功しました</string>
-    <string name="export_modifiedcoords_result">アップロードが完了しました: %1$d 失敗 / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">アップロードが完了しました: %1$d 失敗 / %2$d ok</string>
     <string name="export_modifiedcoords_error">アップロードに失敗しました</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">犬の同伴可</string>
@@ -1462,6 +1452,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="number_input_err_format">数の書式が正しくありません</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

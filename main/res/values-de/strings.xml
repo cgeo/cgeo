@@ -143,13 +143,8 @@
     <string name="log_problem_other_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
     <string name="log_problem_archive_label">Cache sollte archiviert werden</string>
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
-    <string-array name="log_image_scales">
-        <item>Keine Skalierung</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
+    <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
     <string name="translate_to_english">Übersetze in Englisch</string>
@@ -181,6 +176,7 @@
     <string name="err_detail_cache_find_any">c:geo konnte keine Caches finden.</string>
     <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
     <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
+    <string name="err_detail_premium_log_found">Dieser Cache ist nur für Premium-Mitglieder von Geocaching.com sichtbar. Daher können die Cache-Informationen nicht angezeigt werden.\n\nFalls du diesen Cache aber bereits gefunden hast, kannst du ihn hier loggen.</string>
     <string name="err_watchlist_still_managing">c:geo versucht noch immer die Watchlist zu aktualisieren.</string>
     <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
     <string name="err_application_no">c:geo konnte keine passende Anwendung finden.</string>
@@ -423,6 +419,9 @@
     <string name="about_system_info">c:geo Systeminformationen</string>
     <string name="about_system_info_send_chooser">Systeminformationen senden</string>
     <string name="about_system_write_logcat">Logdatei erstellen</string>
+    <string name="about_system_write_logcat_type">Standard- oder erweiterte Logdatei erstellen?\n\nStandard-Logdateien sind in den meisten Fällen ausreichend.\nVerwende erweiterte Logdateien nur, wenn du dazu aufgefordert wirst.</string>
+    <string name="about_system_write_logcat_type_standard">Standard</string>
+    <string name="about_system_write_logcat_type_extended">Erweitert</string>
     <string name="about_system_write_logcat_success">Logdatei gespeichert unter \"%1$s\" im Verzeichnis \"%2$s\"</string>
     <string name="about_system_write_logcat_empty">Logdatei ist leer</string>
     <string name="about_system_write_logcat_error">Fehler beim Schreiben der Logdatei</string>
@@ -563,6 +562,7 @@
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher Brouter (falls installiert) eine Route berechnet.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
+    <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
     <string name="init_disabled">Deaktivierte Caches</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
@@ -627,7 +627,7 @@
     <string name="init_dataDir_note">Sie können den Ablageort für die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf Ihrem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) wählen.</string>
     <string name="init_maptrail">Zeige Positionsverlauf</string>
     <string name="init_maptrail_length">Länge des Positionsverlaufs</string>
-    <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 - je nach verfügbarem Speicher anpassen.</string>
+    <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 Punkte - je nach verfügbarem Speicher anpassen.</string>
     <string name="init_summary_maptrail">Wenn aktiviert (und GPS eingeschaltet ist) speichert c:geo den Verlauf deiner Bewegung als Track und zeigt ihn auf der Karte an.</string>
     <string name="init_trailcolor">Farbe der Positionsverlaufs-Linie</string>
     <string name="init_trailcolor_summary">Farbe und Deckkraft für den Positionsverlauf einstellen</string>
@@ -654,6 +654,8 @@
     <string name="init_trackautovisit">TBs besuchen</string>
     <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
     <string name="init_sigautoinsert">Automatisch einfügen</string>
+    <string name="init_offlinelogs_homescreen">Offlinelogs anzeigen</string>
+    <string name="init_summary_offlinelogs_homescreen">Ein Offline-Logzähler (z.B. \"+ 1\") wird neben deinem Online-Fundzähler auf dem Startbildschirm angezeigt, wenn du Logs hast, die noch nicht übermittelt wurden.</string>
     <string name="init_loaddirectionimg">Richtungs-Grafik</string>
     <string name="init_summary_loaddirectionimg">Richtungs-Pfeil laden wenn nötig (nur Basis-Mitglieder)</string>
     <string name="init_default_navigation_tool">Standardnavigation</string>
@@ -830,11 +832,12 @@
     <string name="cache_menu_preventWaypointsFromNote">Wegpunkte aus Notiz verhindern</string>
     <string name="cache_menu_allowWaypointExtraction">Wegpunkte aus Notiz erlauben</string>
     <string name="cache_personal_note_edit">Bearbeiten</string>
-    <string name="cache_personal_note_storewaypoints">Wegpunkte speichern</string>
+    <string name="cache_personal_note_storewaypoints">Wegpunkte hinzufügen/aktualisieren</string>
+    <string name="cache_personal_note_removewaypoints">Wegpunkte entfernen</string>
     <string name="cache_personal_note_storewaypoints_success">Wegpunkte wurden zur persönlichen Notiz hinzugefügt</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Wegpunkte wurden zur Notiz hinzugefügt, mussten aber gekürzt werden (max. Größe der persönlichen Notiz: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Wegpunkte konnten aufgrund von Größenbeschränkungen (max. Größe der persönlichen Notiz: %1$d) nicht gespeichert werden</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">Keine Benutzer-Wegpunkte gefunden</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Keine speicherbaren Wegpunkte gefunden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Wegpunkt-Extraktion verhindern</string>
     <string name="cache_personal_note_limit">Upload der persönlicher Notiz ist begrenzt</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Diese persönliche Notiz wird von Geocaching.com nach %d Zeichen abgeschnitten.</string>
@@ -1041,6 +1044,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Kartendatei wählen</string>
     <string name="track_file_select_title">Wähle Track-Datei</string>
+    <string name="individual_route_file_select_title">Datei für individuelle Route auswählen</string>
     <!-- import -->
     <string name="web_import_title">Importiere von send2cgeo</string>
     <string name="web_import_waiting">Warte auf neue Caches von send2cgeo…</string>
@@ -1112,18 +1116,10 @@
     <string name="map_hidewp_parking">Park-Wegpunkte verbergen</string>
     <string name="map_hidewp_visited">Besuchte Wegpunkte verbergen</string>
     <string name="map_hide_track">Individuellen Track ausblenden</string>
-    <string name="map_load_track">Lade individuellen Track</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individueller Track geladen (%d Wegpunkt)</item>
-        <item quantity="other">Individueller Track geladen (%d Wegpunkte)</item>
-    </plurals>
-    <string name="load_track_error">Fehler beim Laden des individuellen Tracks</string>
-    <string name="map_unload_track">Individuellen Track entfernen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_visited">Besuchte Wegpunkte auf der Karte verbergen</string>
-    <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Kartenthema auswählen</string>
     <string name="map_theme_options">Themen-Optionen</string>
     <string name="map_language">Sprache der Karte</string>
@@ -1511,6 +1507,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du scheinst eine ältere Version von Android zu verwenden. Diese Version von c:geo ist nicht mehr mit deinem Gerät kompatibel und kann Fehler produzieren oder sich unerwartet verhalten!\nTippe auf diese Nachricht für weitere Informationen.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Deine Version von c:geo scheint älter als ein Jahr zu sein. Möglicherweise funktionieren aufgrund von Webseiten- oder anderen technischen Änderungen einige Dinge nicht mehr. Lies unsere FAQ zum Thema Upgrade.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Du scheinst Android 11 zu verwenden, was von c:geo noch nicht vollständig unterstützt wird. Bitte lies unsere FAQ für weitere Informationen.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
     <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
@@ -1645,11 +1642,32 @@
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
     <string name="map_export_individual_route">Exportiere individuelle Route</string>
+    <string name="map_load_individual_route">Individuelle Route laden</string>
+    <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
+    <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <string name="save_sorted_route">Speichern</string>
     <string name="sorted_route_saved">Individuelle Route gespeichert</string>
+    <string name="load_individual_route_error">Fehler beim Laden der individuellen Route</string>
     <string name="route_item_not_yet_loaded">Element noch nicht geladen</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Route geladen mit %d Punkt</item>
+        <item quantity="other">Route geladen mit %d Punkten</item>
+    </plurals>
+    <string name="center_on_route">Route zentrieren</string>
+    <!-- individual track -->
+    <string name="individual_track">Individueller Track</string>
+    <string name="map_load_track">Lade individuellen Track</string>
+    <string name="map_load_track_wait">Individueller Track wird im Hintergrund geladen…</string>
+    <string name="map_load_track_confirm">Vorhandenen Track überschreiben?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Individueller Track geladen (%d Wegpunkt)</item>
+        <item quantity="other">Individueller Track geladen (%d Wegpunkte)</item>
+    </plurals>
+    <string name="load_track_error">Fehler beim Laden des individuellen Tracks</string>
+    <string name="map_unload_track">Individuellen Track entfernen</string>
+    <string name="center_on_track">Track zentrieren</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1661,6 +1679,7 @@
     <string name="switch_on">An</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_default">(Standard)</string>
     <!-- view settings -->
     <string name="view_settings">Einstellungen anzeigen</string>
     <string name="delete_setting">Einstellung löschen</string>

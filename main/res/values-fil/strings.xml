@@ -113,13 +113,6 @@
     <string name="log_oc_team_comment">Ang kumento ng OC Team</string>
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
-    <string-array name="log_image_scales">
-        <item>Walang pag-iiskala</item>
-        <item>512 na px</item>
-        <item>640 na px</item>
-        <item>800 na px</item>
-        <item>1024 na px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -497,8 +490,6 @@
     <string name="init_gpx_importdir">Pag-import ng Direktoryo ng GPX</string>
     <string name="init_dataDir">Pumili ng Direktoryo ng datos sa Geocache</string>
     <string name="init_dataDir_note">Maari kang pumili upang iimbak na karagdagang datos para sa geocaches (spoilers, log images, &#8230;) sa iyong external na lagayan (emulated or real external SD card depende sa iyong aparato).</string>
-    <string name="init_maptrail">Ipakita ang daanan</string>
-    <string name="init_summary_maptrail">Ipakita ang daanan sa Mapa</string>
     <string name="init_share_after_export">Ipakita ang menu ng pagbabahagi pagkatapos na i-eksport ang GPX</string>
     <string name="init_include_found_status">Isama ang nakitang katayuan</string>
     <string name="init_trackautovisit">Bisitahin ang TBs</string>
@@ -614,15 +605,7 @@
     <string name="err_auth_geokrety_bad_password">Parehong imbalido ang iyong username/password.</string>
     <string name="err_auth_geokrety_unknown">Ang %1$s na naibalik: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">Ang isang cache</item>
-        <item quantity="other">%1$d mga cache</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">isang araw ang natira</item>
-        <item quantity="other">%1$d mga araw na natira</item>
-    </plurals>
     <string name="last_day_available">magagamit sa huling araw</string>
     <string name="cache_offline">I-offline</string>
     <string name="cache_offline_refresh">Mag-refresh</string>
@@ -651,7 +634,7 @@
     <string name="cache_personal_note">Pansariling tala</string>
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Ang limitadong pansariling tala</string>
-    <string name="cache_personal_note_truncation">Ang pansariling tala ay pinutol makalipas ang %d sa mga karakter ng Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang pansariling tala ay pinutol makalipas ang %d sa mga karakter ng Geocaching.com.</string>
     <string name="cache_personal_note_upload">Nag-upload</string>
     <string name="cache_personal_note_uploading">I-upload ang pansariling tala</string>
     <string name="cache_personal_note_upload_done">Ang pansariling tala ay nai-upload na</string>
@@ -668,14 +651,6 @@
     <string name="cache_list_select_last">Ang huling pagpipili</string>
     <string name="cache_images">Mga imahe</string>
     <string name="cache_waypoints">Mga waypoint</string>
-    <plurals name="waypoints">
-        <item quantity="one">Ang isang Waypoint
-
-%d Ang mga Waypoint</item>
-        <item quantity="other">Ang isang Waypoint
-
-%d Mga Waypoint</item>
-    </plurals>
     <string name="cache_waypoints_add">Magdagdag ng Waypoint</string>
     <string name="cache_hint">Nag-hint</string>
     <string name="cache_hint_not_available">Walang hint na maaaring magamit</string>
@@ -791,7 +766,7 @@
     <string name="file_list_no_files">nakahanap ang c:geo ng hindi angkop na mga payl.</string>
     <string name="file_searching">Paghahanap sa mga payl na nagtutugma</string>
     <string name="file_title_searching">Ang paghahanap</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Mamili ng direktoriya</string>
     <string name="simple_dir_chooser_current_path">Ang daanan:</string>
     <string name="simple_dir_chooser_invalid_path">Ang imbalidong Daanan</string>
@@ -811,9 +786,8 @@
     <string name="gpx_import_delete_message">Ang %s? ay gusto mo bang alisin?</string>
     <string name="gpx_import_select_list_title">Ang GPX ay i-import sa listahan</string>
     <string name="gpx_import_android">I-import mula sa Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Pumili ng payl ng mapa</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">I-import mula sa send2cgeo</string>
     <string name="web_import_waiting">Paghihintay para sa bagong mga cache mula sa send2cgeo&#8230;</string>
@@ -869,11 +843,9 @@
     <string name="map_live">Ang Live na mapa</string>
     <string name="map_view_map">Tanawin ang mapa</string>
     <string name="map_modes">Ang mga pagtakda sa mga mapa</string>
-    <string name="map_trail_show">Ipakita ang daan</string>
     <string name="map_circles_show">Ang mga bilog ay ipakita</string>
     <string name="map_mycaches_hide">Ang Sarili ay itago/matagpuan ang mga cache</string>
     <string name="map_disabled_hide">Itago ang hindi pinaganang caches</string>
-    <string name="map_theme_builtin">I-Default</string>
     <string name="map_theme_select">Ang Piliin ang tema ng mapa</string>
     <string name="map_live_enable">Ang Paganahin ng buhay</string>
     <string name="map_live_disable">Hindi paganahin ang buhay</string>
@@ -997,10 +969,6 @@
     <string name="export_confirm_message">Para sa Path: %1$s\n Ang Pangalan ng Payl: %2$s</string>
     <string name="export_persnotes">Personal na mga tala</string>
     <string name="export_persnotes_uploading">Pag-upload ng mga pansiriling tala %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Nag-upload ng tala na matagumpay</item>
-        <item quantity="other">Nag-upload ng tala na matagumpay</item>
-    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Pinapayagan Ang mga aso</string>
     <string name="attribute_dogs_no">Hindi pinapayagan ang mga aso</string>
@@ -1334,6 +1302,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>
