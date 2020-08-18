@@ -272,6 +272,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         // initialize with default values
         setDefaultValues();
+        logType.setChangeListener(lt -> adjustViewToLogType());
 
         // Restore previous state
         if (savedInstanceState != null) {
@@ -420,8 +421,12 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     public void setType(final LogType type) {
         logType.set(type);
-        updateTweetBox(type);
-        updateLogPasswordBox(type);
+        adjustViewToLogType();
+    }
+
+    private void adjustViewToLogType() {
+        updateTweetBox(logType.get());
+        updateLogPasswordBox(logType.get());
         initializeRatingBar();
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
