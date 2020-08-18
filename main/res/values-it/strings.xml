@@ -176,6 +176,7 @@
     <string name="err_detail_cache_find_any">c:geo non trova nessun geocache.</string>
     <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
     <string name="err_detail_still_working">Momentaneamente occupato a svolgere un altro compito.</string>
+    <string name="err_detail_premium_log_found">Questo cache è disponibile solo per i membri premium di geocaching.com. Pertanto, le informazioni non possono essere visualizzate.\n\nTuttavia, se hai già trovato questo cache, puoi registrarlo qui.</string>
     <string name="err_watchlist_still_managing">Sto ancora gestendo la tua watchlist.</string>
     <string name="err_watchlist_failed">La modifica alla tua watchlist è fallita.</string>
     <string name="err_application_no">c:geo non trova nessuna applicazione compatibile.</string>
@@ -418,6 +419,9 @@
     <string name="about_system_info">informazioni di sistema di c:geo</string>
     <string name="about_system_info_send_chooser">Invia le informazioni del sistema</string>
     <string name="about_system_write_logcat">Genera file di log</string>
+    <string name="about_system_write_logcat_type">Crea file di log standard o esteso?\n\nI file di log standard vanno bene per la maggior parte dei casi.\nUtilizzare i log estesi solo quando viene chiesto di farlo (ad esempio per una richiesta di diagnostica).</string>
+    <string name="about_system_write_logcat_type_standard">Standard</string>
+    <string name="about_system_write_logcat_type_extended">Esteso</string>
     <string name="about_system_write_logcat_success">File di log scritto in \"%1$s\" nella cartella \"%2$s\"</string>
     <string name="about_system_write_logcat_empty">File di log vuoto</string>
     <string name="about_system_write_logcat_error">Errore durante la scrittura del file di log</string>
@@ -558,6 +562,7 @@
     <string name="init_brouterThreshold">Calcola percorso</string>
     <string name="init_brouterThreshold_description">Distanza massima fino alla quale l\'helper della app brouter (se installata) calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
+    <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_disabled">Escludi disattivati</string>
     <string name="init_summary_disabled">Escludi cache disattivati</string>
@@ -622,7 +627,7 @@
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
     <string name="init_maptrail">Mostra traccia cronologia movimenti</string>
     <string name="init_maptrail_length">Lunghezza massima traccia cronologia</string>
-    <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 - regola in base alla memoria disponibile.</string>
+    <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 punti - regolato in base alla memoria disponibile.</string>
     <string name="init_summary_maptrail">Quando attivato (e il GPS è acceso) c:geo salva la cronologia dei tuoi movimenti come traccia e la visualizza sulla mappa.</string>
     <string name="init_trailcolor">Colore traccia cronologia</string>
     <string name="init_trailcolor_summary">Seleziona colore e opacità della linea della traccia cronologica</string>
@@ -825,11 +830,9 @@
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
     <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
     <string name="cache_personal_note_edit">Modifica</string>
-    <string name="cache_personal_note_storewaypoints">Memorizza waypoint</string>
     <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>
     <string name="cache_personal_note_storewaypoints_success_limited">I waypoint sono stati aggiunti alla nota ma hanno dovuto essere accorciati (lunghezza massima della nota: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">I waypoint non possono essere memorizzati nella nota a causa dei limiti di dimensione (lunghezza massima della nota: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">Nessun waypoint utente trovato</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
@@ -1112,7 +1115,6 @@
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
     <string name="init_summary_hidewp_visited">Nascondi i waypoint visitati sulla mappa</string>
-    <string name="map_theme_builtin">Tema predefinito</string>
     <string name="map_theme_select">Scegli un tema mappa</string>
     <string name="map_theme_options">Opzioni Tema</string>
     <string name="map_language">Lingua della mappa</string>
@@ -1647,9 +1649,11 @@
         <item quantity="one">Percorso caricato con %d punto di rotta</item>
         <item quantity="other">Percorso caricato con %d punti di rotta</item>
     </plurals>
+    <string name="center_on_route">Centra sul percorso</string>
     <!-- individual track -->
     <string name="individual_track">Traccia individuale</string>
     <string name="map_load_track">Carica traccia individuale</string>
+    <string name="map_load_track_wait">Caricamento traccia individuale in background…</string>
     <string name="map_load_track_confirm">Sovrascrivere traccia esistente?</string>
     <plurals name="load_track_success">
         <item quantity="one">Traccia individuale caricata (%d trackpoint)</item>
@@ -1669,6 +1673,7 @@
     <string name="switch_on">Attivo</string>
     <string name="switch_manual">Manuale</string>
     <string name="switch_auto">Automatico</string>
+    <string name="switch_default">(predefinito)</string>
     <!-- view settings -->
     <string name="view_settings">Impostazioni vista</string>
     <string name="delete_setting">Elimina impostazioni</string>
