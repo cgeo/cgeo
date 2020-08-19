@@ -52,6 +52,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <ul>
 <li>New: Include offline find counter on homescreen (configurable)</li>
 <li>New: Individual route sort view: Tap on item to open cache details</li>
+<li>New: Updated GPS Status helper app icon</li>
 <li>Change: Set colorAccent to c:geo orange in many more places</li>
 <li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Many other small fixes</li>
