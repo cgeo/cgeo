@@ -1264,7 +1264,6 @@
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
-    <string name="switch_default">(Standard)</string>
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
     <!-- ReceiveMapFileActivity -->
