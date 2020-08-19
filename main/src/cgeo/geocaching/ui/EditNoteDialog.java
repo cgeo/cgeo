@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -47,6 +48,7 @@ public class EditNoteDialog extends DialogFragment {
 
         return dialog;
     }
+
 
     @Override
     @androidx.annotation.NonNull
@@ -92,6 +94,10 @@ public class EditNoteDialog extends DialogFragment {
         done.setVisibility(View.VISIBLE);
 
         new Keyboard(activity).showDelayed(mEditText);
+
+        //prevent popup window to extend under the virtual keyboard or above the top of phone display (see #8793)
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         return dialog;
     }
 }
