@@ -13,13 +13,11 @@
 -optimizations !code/simplification/arithmetic,!code/allocation/variable
 
 -keep,includedescriptorclasses class cgeo.geocaching.** { *; }
--keep class android.support.v4.os.** { *; }
 
 # The backup agent class is not called from our code.
 -keep public class cgeo.geocaching.backup.CentralBackupAgent
 
 # action providers are only referenced from XML
--keep public class android.support.v7.widget.ShareActionProvider { *; }
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
 -keep public class cgeo.geocaching.apps.navi.NavigationSelectionActionProvider  { *; }
@@ -129,6 +127,11 @@
 # used in tests
 -keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
 
+# leakcanary --------------------------------------------------------------------------------------
+
+# skip warning: A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [leakcanary.internal.AppWatcherInstaller$MainProcess]
+-dontwarn cleakcanary.internal.AppWatcherInstaller$MainProcess
+
 # ViewPager Indicator -----------------------------------------------------------------------------
 -dontnote com.viewpagerindicator.TitlePageIndicator
 -dontnote com.viewpagerindicator.TabPageIndicator
@@ -154,5 +157,4 @@
 }
 
 # keep Emma code coverage during debug builds, and ignore related warnings
--keep class com.vladium.** { *; }
 -dontwarn com.vladium.**
