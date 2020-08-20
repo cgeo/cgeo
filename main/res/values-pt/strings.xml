@@ -176,7 +176,7 @@
     <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
     <string name="err_detail_no_spoiler">O c:geo não encontrou imagens spoiler para esta cache.</string>
     <string name="err_detail_still_working">Ainda se encontra a trabalhar noutra tarefa.</string>
-    <string name="err_detail_premium_log_found">Esta cache apenas está disponível a membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode regista-la aqui.</string>
+    <string name="err_detail_premium_log_found">Esta cache apenas está disponível a membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
     <string name="err_watchlist_still_managing">Ainda se encontra a gerir a sua lista de observação.</string>
     <string name="err_watchlist_failed">A alteração da sua lista de observação falhou.</string>
     <string name="err_application_no">O c:geo não encontra nenhuma aplicação compatível.</string>
@@ -655,6 +655,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_trackautovisit">Visitar TBs</string>
     <string name="init_summary_trackautovisit">Predefine a acção \"Visitar\" a todos os seus trackables</string>
     <string name="init_sigautoinsert">Inserir automaticamente</string>
+    <string name="init_offlinelogs_homescreen">Mostrar registos offline</string>
     <string name="init_summary_offlinelogs_homescreen">Um contador de registos offline (ex: \"+ 1\") será mostrado ao lado da contagem online das suas caches encontradas no ecrã principal, caso tenha registos que ainda não tenham sido submetidos.</string>
     <string name="init_loaddirectionimg">Imagem de direcção</string>
     <string name="init_summary_loaddirectionimg">Se necessário transfere a imagem da seta direccional (apenas necessário para membros básicos)</string>
@@ -1643,6 +1644,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
     <string name="map_export_individual_route">Exportar rota individual</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
+    <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
@@ -1650,16 +1652,23 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
     <string name="load_individual_route_error">Erro ao carregar a rota individual</string>
     <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Rota carregada com %d ponto de rota</item>
+        <item quantity="other">Rota carregada com %d pontos de rota</item>
+    </plurals>
+    <string name="center_on_route">Centrar na rota</string>
     <!-- individual track -->
     <string name="individual_track">Percurso individual</string>
     <string name="map_load_track">Carregar o percurso individual</string>
     <string name="map_load_track_wait">A carregar percurso individual em segundo plano…</string>
+    <string name="map_load_track_confirm">Substituir trajecto existente?</string>
     <plurals name="load_track_success">
         <item quantity="one">Percurso individual carregado (%d ponto de percurso)</item>
         <item quantity="other">Percurso individual carregado (%d pontos de percurso)</item>
     </plurals>
     <string name="load_track_error">Erro ao carregar o percurso individual</string>
     <string name="map_unload_track">Anular carregamento do percurso individual</string>
+    <string name="center_on_track">Centrar no percurso</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
