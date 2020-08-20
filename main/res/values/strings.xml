@@ -600,6 +600,8 @@
     <string name="init_summary_disabled">Exclude disabled caches</string>
     <string name="init_archived">Exclude Archived</string>
     <string name="init_summary_archived">Exclude archived caches</string>
+    <string name="init_global_wp_extraction_disable">Waypoint Extraction</string>
+    <string name="init_summary_global_wp_extraction_disable">Disable waypoint extraction from personal cache notes</string>
     <string name="init_save_log_img">Save Images</string>
     <string name="init_summary_save_log_img">Save Images from Logs</string>
     <string name="init_units">Use Imperial Units</string>
