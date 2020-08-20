@@ -1835,21 +1835,21 @@
     <string name="center_on_route">Center on route</string>
 
     <!-- individual track -->
-    <string name="individual_track">Individual track</string>
-    <string name="map_load_track">Load individual track</string>
-    <string name="map_load_track_wait">Loading individual track in background…</string>
-    <string name="map_load_track_confirm">Overwrite existing track?</string>
+    <string name="individual_track">GPX track/route</string>
+    <string name="map_load_track">Load track/route from GPX</string>
+    <string name="map_load_track_wait">Loading track/route in background…</string>
+    <string name="map_load_track_confirm">Overwrite existing track/route?</string>
     <plurals name="load_track_success">
-        <item quantity="zero">Individual track loaded (%d trackpoints)</item>
-        <item quantity="one">Individual track loaded (%d trackpoint)</item>
-        <item quantity="two">Individual track loaded (%d trackpoints)</item>
-        <item quantity="few">Individual track loaded (%d trackpoints)</item>
-        <item quantity="many">Individual track loaded (%d trackpoints)</item>
-        <item quantity="other">Individual track loaded (%d trackpoints)</item>
+        <item quantity="zero">Track/route loaded (%d trackpoints)</item>
+        <item quantity="one">Track/route loaded (%d trackpoint)</item>
+        <item quantity="two">Track/route loaded (%d trackpoints)</item>
+        <item quantity="few">Track/route loaded (%d trackpoints)</item>
+        <item quantity="many">Track/route loaded (%d trackpoints)</item>
+        <item quantity="other">Track/route loaded (%d trackpoints)</item>
     </plurals>
-    <string name="load_track_error">Error loading individual track</string>
-    <string name="map_unload_track">Unload individual track</string>
-    <string name="center_on_track">Center on track</string>
+    <string name="load_track_error">Error loading track/route</string>
+    <string name="map_unload_track">Unload track/route</string>
+    <string name="center_on_track">Center on track/route</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>
