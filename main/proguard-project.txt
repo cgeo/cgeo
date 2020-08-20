@@ -130,7 +130,7 @@
 # leakcanary --------------------------------------------------------------------------------------
 
 # skip warning: A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [leakcanary.internal.AppWatcherInstaller$MainProcess]
--dontwarn cleakcanary.internal.AppWatcherInstaller$MainProcess
+-dontwarn leakcanary.internal.AppWatcherInstaller$MainProcess
 
 # ViewPager Indicator -----------------------------------------------------------------------------
 -dontnote com.viewpagerindicator.TitlePageIndicator
