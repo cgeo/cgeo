@@ -69,6 +69,7 @@
     <string translatable="false" name="pref_excludemine">excludemine</string>
     <string translatable="false" name="pref_excludedisabled">excludedisabled</string>
     <string translatable="false" name="pref_excludearchived">excludearchived</string>
+    <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
     <string translatable="false" name="pref_excludeWpOriginal">excludeWpOriginal</string>
     <string translatable="false" name="pref_excludeWpParking">excludeWpParking</string>
     <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>
