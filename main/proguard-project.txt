@@ -127,11 +127,6 @@
 # used in tests
 -keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
 
-# leakcanary --------------------------------------------------------------------------------------
-
-# skip warning: A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [leakcanary.internal.AppWatcherInstaller$MainProcess]
--dontwarn leakcanary.internal.AppWatcherInstaller$MainProcess
-
 # ViewPager Indicator -----------------------------------------------------------------------------
 -dontnote com.viewpagerindicator.TitlePageIndicator
 -dontnote com.viewpagerindicator.TabPageIndicator
