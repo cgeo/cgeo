@@ -202,7 +202,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_defaultNavigationTool), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
             e.putInt(getKey(R.string.pref_defaultNavigationTool2), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
             e.putBoolean(getKey(R.string.pref_debug), prefsV0.getBoolean(getKey(R.string.pref_debug), false));
-            e.putBoolean(getKey(R.string.pref_global_wp_extraction_disable), prefsV0.getBoolean(getKey(R.string.pref_global_wp_extraction_disable), false));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
             e.apply();
