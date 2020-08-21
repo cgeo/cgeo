@@ -1698,6 +1698,8 @@
     <string name="receivemapfile_intenttitle">Kaartbestand ontvangen</string>
     <string name="receivemapfile_success">Kaartbestand succesvol ontvangen als \"%s\" en opgeslagen in kaarten map</string>
     <string name="receivemapfile_error">Fout bij het ontvangen van kaartbestand</string>
+    <string name="receivemapfile_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartmap \"%s\" beschrijfbaar?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van kaartbestand.</string>
     <string name="receivemapfile_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
     <string name="receivemapfile_option_overwrite">Overschrijven</string>
     <string name="receivemapfile_option_differentname">Andere naam</string>
@@ -1709,6 +1711,7 @@
     <string name="downloadmap_choose">Kies kaart</string>
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="downloadmap_target_not_writable">Doel \"%s\" is niet beschrijfbaar - selecteer een andere kaartbestand map.</string>
     <!-- history trail export -->
     <string name="trailhistory">Geschiedenisspoor</string>
     <string name="export_trailhistory_title">Geschiedenisspoor exporteren</string>
