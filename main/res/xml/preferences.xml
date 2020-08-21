@@ -544,7 +544,6 @@
 
     </PreferenceScreen>
 
-
     <PreferenceScreen
         android:icon="?attr/settings_map"
         android:title="@string/settings_title_map"
