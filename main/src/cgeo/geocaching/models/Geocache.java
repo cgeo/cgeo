@@ -173,7 +173,7 @@ public class Geocache implements IWaypoint {
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
     private boolean finalDefined = false;
     private boolean logPasswordRequired = false;
-    private boolean preventWaypointsFromNote = false;
+    private boolean preventWaypointsFromNote = Settings.isGlobalWpExtractionDisabled();
     private LogEntry offlineLog = null;
     private Integer eventTimeMinutes = null;
 
@@ -1558,7 +1558,7 @@ public class Geocache implements IWaypoint {
      */
     public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
         boolean changed = false;
-        if (forceExtraction || (!Settings.isGlobalWpExtractionDisabled() && !preventWaypointsFromNote)) {
+        if (forceExtraction || !preventWaypointsFromNote) {
             for (final Waypoint parsedWaypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
                 final Waypoint existingWaypoint = findWaypoint(parsedWaypoint.getPrefix(), parsedWaypoint.getCoords());
                 if (existingWaypoint == null) {
