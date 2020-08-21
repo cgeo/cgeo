@@ -1744,6 +1744,8 @@
     <string name="receivemapfile_intenttitle">Získat mapový soubor</string>
     <string name="receivemapfile_success">Mapový soubor byl úspěšně získán jako \"%s\" a uložen do adresáře s mapou</string>
     <string name="receivemapfile_error">Chyba při získávání mapového souboru</string>
+    <string name="receivemapfile_error_io_exception">I/O chyba při přijímání mapového souboru. Je váš adresář s mapami \"%s\" zapisovatelný?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Soubor nenalezen při příjmu mapového souboru.</string>
     <string name="receivemapfile_alreadyexists">Soubor s tímto názvem již existuje. Chcete přepsat existující soubor, nebo uložit nový soubor pod jiným názvem?</string>
     <string name="receivemapfile_option_overwrite">Přepsat</string>
     <string name="receivemapfile_option_differentname">Přejmenovat</string>
@@ -1755,6 +1757,7 @@
     <string name="downloadmap_choose">Vybrat mapu</string>
     <string name="downloadmanager_not_available">Soubor s mapou nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
+    <string name="downloadmap_target_not_writable">Cíl \"%s\" není zapisovatelný - vyberte prosím jiný adresář s mapou.</string>
     <!-- history trail export -->
     <string name="trailhistory">Historie trasy</string>
     <string name="export_trailhistory_title">Exportovat historii trasy</string>
