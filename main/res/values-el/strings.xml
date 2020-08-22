@@ -1632,9 +1632,6 @@
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
     <!-- individual track -->
-    <string name="individual_track">Μεμονωμένη διαδρομή</string>
-    <string name="map_load_track_confirm">Επανεγγραφή υπάρχουσας διαδρομής;</string>
-    <string name="center_on_track">Κεντράρισμα στην διαδρομή</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
