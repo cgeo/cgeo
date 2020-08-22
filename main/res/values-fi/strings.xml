@@ -1657,17 +1657,6 @@
     </plurals>
     <string name="center_on_route">Keskitä reittiin</string>
     <!-- individual track -->
-    <string name="individual_track">Yksittäinen rata</string>
-    <string name="map_load_track">Lataa yksittäinen reitti</string>
-    <string name="map_load_track_wait">Ladataan yksittäistä rataa taustalla…</string>
-    <string name="map_load_track_confirm">Korvataanko olemassa oleva rata?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Yksittäinen reitti ladattu (%d reittipiste)</item>
-        <item quantity="other">Yksittäinen reitti ladattu (%d reittipistettä)</item>
-    </plurals>
-    <string name="load_track_error">Virhe ladattaessa yksittäistä reittiä</string>
-    <string name="map_unload_track">Poista yksittäinen reitti</string>
-    <string name="center_on_track">Keskitä radalle</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
