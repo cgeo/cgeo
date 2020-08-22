@@ -1627,13 +1627,6 @@
     <string name="sorted_route_saved">Individuell rutt sparad</string>
     <string name="route_item_not_yet_loaded">Rutten är ännu inte inläst</string>
     <!-- individual track -->
-    <string name="map_load_track">Ladda individuellt spår</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuellt spår laddat (%d spårpunkt)</item>
-        <item quantity="other">Individuellt spår laddat (%d spårpunkter)</item>
-    </plurals>
-    <string name="load_track_error">Fel vid inläsning av enskilt spår</string>
-    <string name="map_unload_track">Dölj individuella spår</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Av</string>
