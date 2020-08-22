@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -52,21 +51,21 @@ public class GPXIndividualRouteImporter {
         }
         try {
             GPXIndividualRouteParser parser = new GPXIndividualRouteParser("http://www.topografix.com/GPX/1/1", "1.1");
-            ArrayList<RouteItem> routeItems = null;
+            Route route = null;
             try {
                 try {
-                    routeItems = parser.parse(stream);
+                    route = parser.parse(stream);
                 } catch (ParserException e) {
                     // retry with v1.0 format
                     parser = new GPXIndividualRouteParser("http://www.topografix.com/GPX/1/0", "1.0");
-                    routeItems = parser.parse(stream);
+                    route = parser.parse(stream);
                 }
             } catch (IOException | ParserException e) {
                 Log.e(e.getMessage());
             }
-            if (null != routeItems && routeItems.size() > 0) {
-                DataStore.saveRoute(routeItems);
-                return routeItems.size();
+            if (null != route && route.getNumSegments() > 0) {
+                DataStore.saveIndividualRoute(route);
+                return route.getNumSegments();
             }
         } finally {
             IOUtils.closeQuietly(stream);

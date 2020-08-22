@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
@@ -13,6 +14,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -48,7 +50,7 @@ public class RouteSortActivity extends AbstractActivity {
         setTheme();
         setTitle(getString(R.string.map_sort_individual_route));
 
-        routeItems = DataStore.loadRoute();
+        routeItems = DataStore.loadIndividualRoute();
 
         routeItemAdapter = new ArrayAdapter<RouteItem>(this, 0, routeItems) {
             @SuppressLint("SetTextI18n")
@@ -62,24 +64,35 @@ public class RouteSortActivity extends AbstractActivity {
                 }
 
                 final RouteItem routeItem = routeItems.get(position);
-                final IWaypoint data = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getId());
+                final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
+                final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
 
                 final TextView title = v.findViewById(R.id.title);
                 final TextView detail = v.findViewById(R.id.detail);
-                if (null == data) {
+                if (null == data && cacheOrWaypointType) {
                     title.setText(routeItem.getGeocode());
                     detail.setText(R.string.route_item_not_yet_loaded);
                 } else {
-                    title.setText(data.getName());
-                    if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
-                        assert data instanceof Geocache;
-                        detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
-                        title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
-                    } else {
-                        assert data instanceof Waypoint;
-                        final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
-                        title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
+                    title.setText(null == data ? "" : data.getName());
+                    switch (routeItem.getType()) {
+                        case GEOCACHE:
+                            assert data instanceof Geocache;
+                            detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
+                            title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                            break;
+                        case WAYPOINT:
+                            assert data instanceof Waypoint;
+                            final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                            detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
+                            title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
+                            break;
+                        case COORDS:
+                            // title.setText("Coordinates");
+                            detail.setText(GeopointFormatter.format(LAT_LON_DECMINUTE, routeItem.getPoint()));
+                            title.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
+                            break;
+                        default:
+                            throw new IllegalStateException("unknow RouteItemType in RouteSortActivity");
                     }
                     title.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
                     detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
@@ -128,7 +141,7 @@ public class RouteSortActivity extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == R.id.save_sorted_route) {
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveRoute(routeItems), () -> {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItems), () -> {
                 changed = false;
                 invalidateOptionsMenu();
                 Toast.makeText(this, R.string.sorted_route_saved, Toast.LENGTH_SHORT).show();
