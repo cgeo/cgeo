@@ -1701,19 +1701,19 @@
     </plurals>
     <string name="center_on_route">Vycentrovat na trasu</string>
     <!-- individual track -->
-    <string name="individual_track">Individuální trasa</string>
-    <string name="map_load_track">Načíst individuální trasu</string>
-    <string name="map_load_track_wait">Načítání individuální trasy na pozadí…</string>
-    <string name="map_load_track_confirm">Přepsat existující trasu?</string>
+    <string name="individual_track">GPX stopa/trasa</string>
+    <string name="map_load_track">Načíst stopu/trasu z GPX</string>
+    <string name="map_load_track_wait">Načítání stopy/trasy na pozadí…</string>
+    <string name="map_load_track_confirm">Přepsat existující stopu/trasu?</string>
     <plurals name="load_track_success">
-        <item quantity="one">Individuální trasa načtena (%d trasový bod)</item>
-        <item quantity="few">Individuální trasa načtena (%d trasové body)</item>
-        <item quantity="many">Individuální trasa načtena (%d trasových bodů)</item>
-        <item quantity="other">Individuální trasa načtena (%d trasových bodů)</item>
+        <item quantity="one">Stopa/trasa načtena (%d bod trasy)</item>
+        <item quantity="few">Stopa/trasa načtena (%d body trasy)</item>
+        <item quantity="many">Stopa/trasa načtena (%d body trasy)</item>
+        <item quantity="other">Stopa/trasa načtena (%d bodů trasy)</item>
     </plurals>
-    <string name="load_track_error">Chyba při načítání individuální trasy</string>
-    <string name="map_unload_track">Zrušit načtenou individuální trasu</string>
-    <string name="center_on_track">Vycentrovat na trasu</string>
+    <string name="load_track_error">Chyba při načítání stopy/trasy</string>
+    <string name="map_unload_track">Zrušit stopu/trasu</string>
+    <string name="center_on_track">Vycentrovat na stopu/trasu</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
