@@ -1658,17 +1658,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     </plurals>
     <string name="center_on_route">Centrar na rota</string>
     <!-- individual track -->
-    <string name="individual_track">Percurso individual</string>
-    <string name="map_load_track">Carregar o percurso individual</string>
-    <string name="map_load_track_wait">A carregar percurso individual em segundo plano…</string>
-    <string name="map_load_track_confirm">Substituir trajecto existente?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Percurso individual carregado (%d ponto de percurso)</item>
-        <item quantity="other">Percurso individual carregado (%d pontos de percurso)</item>
-    </plurals>
-    <string name="load_track_error">Erro ao carregar o percurso individual</string>
-    <string name="map_unload_track">Anular carregamento do percurso individual</string>
-    <string name="center_on_track">Centrar no percurso</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
