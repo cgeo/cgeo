@@ -1657,17 +1657,6 @@
     </plurals>
     <string name="center_on_route">Centreer op route</string>
     <!-- individual track -->
-    <string name="individual_track">Individueel spoor</string>
-    <string name="map_load_track">Individueel spoor laden</string>
-    <string name="map_load_track_wait">Individueel spoor op de achtergrond laden…</string>
-    <string name="map_load_track_confirm">Bestaande spoor overschrijven?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuele spoor geladen (%d spoorpunt)</item>
-        <item quantity="other">Spoor geladen (%d spoorpunten)</item>
-    </plurals>
-    <string name="load_track_error">Fout bij laden van individuele spoor</string>
-    <string name="map_unload_track">Individuele spoor ontladen</string>
-    <string name="center_on_track">Centreer op het spoor</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
