@@ -13,13 +13,11 @@
 -optimizations !code/simplification/arithmetic,!code/allocation/variable
 
 -keep,includedescriptorclasses class cgeo.geocaching.** { *; }
--keep class android.support.v4.os.** { *; }
 
 # The backup agent class is not called from our code.
 -keep public class cgeo.geocaching.backup.CentralBackupAgent
 
 # action providers are only referenced from XML
--keep public class android.support.v7.widget.ShareActionProvider { *; }
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
 -keep public class cgeo.geocaching.apps.navi.NavigationSelectionActionProvider  { *; }
@@ -154,5 +152,4 @@
 }
 
 # keep Emma code coverage during debug builds, and ignore related warnings
--keep class com.vladium.** { *; }
 -dontwarn com.vladium.**
