@@ -1651,17 +1651,6 @@
     </plurals>
     <string name="center_on_route">Centra sul percorso</string>
     <!-- individual track -->
-    <string name="individual_track">Traccia individuale</string>
-    <string name="map_load_track">Carica traccia individuale</string>
-    <string name="map_load_track_wait">Caricamento traccia individuale in background…</string>
-    <string name="map_load_track_confirm">Sovrascrivere traccia esistente?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Traccia individuale caricata (%d trackpoint)</item>
-        <item quantity="other">Traccia individuale caricata (%d trackpoint)</item>
-    </plurals>
-    <string name="load_track_error">Errore nel caricare la traccia individuale</string>
-    <string name="map_unload_track">Rimuovi traccia individuale</string>
-    <string name="center_on_track">Centra sulla traccia</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
