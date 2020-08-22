@@ -1669,15 +1669,6 @@
     <string name="sorted_route_saved">Individuálna trasa uložená</string>
     <string name="route_item_not_yet_loaded">Položka trasy zatiaľ nie je načítaná</string>
     <!-- individual track -->
-    <string name="map_load_track">Načítať individuálnu trasu</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuálna trasa načítaná (%d bod trasy)</item>
-        <item quantity="few">Individuálna trasa načítaná (%d body trasy)</item>
-        <item quantity="many">Individuálna trasa načítaná (%d bodov trasy)</item>
-        <item quantity="other">Individuálna trasa načítaná (%d bodov trasy)</item>
-    </plurals>
-    <string name="load_track_error">Chyba pri načítaní individuálnej trasy</string>
-    <string name="map_unload_track">Zrušiť načítanú individuálnu trasu</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
