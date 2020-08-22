@@ -1667,15 +1667,6 @@
     <string name="save_sorted_route">Сохранить</string>
     <string name="sorted_route_saved">Личный маршрут сохранён</string>
     <!-- individual track -->
-    <string name="map_load_track">Загрузить личный трек</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Личный трек загружен (%d точка трека)</item>
-        <item quantity="few">Личные треки загружены (%d точка трека)</item>
-        <item quantity="many">Личные треки загружены (%d точка трека)</item>
-        <item quantity="other">Личные треки загружены (%d точка трека)</item>
-    </plurals>
-    <string name="load_track_error">Ошибка при загрузки личного трека</string>
-    <string name="map_unload_track">Выгрузить личный трек</string>
     <!-- distance units -->
     <string name="unit_m">м</string>
     <string name="unit_km">км</string>
