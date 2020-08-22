@@ -1657,17 +1657,6 @@
     </plurals>
     <string name="center_on_route">Route zentrieren</string>
     <!-- individual track -->
-    <string name="individual_track">Individueller Track</string>
-    <string name="map_load_track">Lade individuellen Track</string>
-    <string name="map_load_track_wait">Individueller Track wird im Hintergrund geladen…</string>
-    <string name="map_load_track_confirm">Vorhandenen Track überschreiben?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individueller Track geladen (%d Wegpunkt)</item>
-        <item quantity="other">Individueller Track geladen (%d Wegpunkte)</item>
-    </plurals>
-    <string name="load_track_error">Fehler beim Laden des individuellen Tracks</string>
-    <string name="map_unload_track">Individuellen Track entfernen</string>
-    <string name="center_on_track">Track zentrieren</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
