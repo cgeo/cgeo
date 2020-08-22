@@ -34,7 +34,7 @@ public class ManualRoute extends Route {
             return;
         }
 
-        if (item.getType() == RouteItem.RouteItemType.WAYPOINT && item.getId() == -1) {
+        if (item.getType() == RouteItem.RouteItemType.WAYPOINT && item.getWaypointId() == -1) {
             Toast.makeText(context, R.string.individual_route_error_single_waypoint_mode, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -65,7 +65,7 @@ public class ManualRoute extends Route {
 
     private synchronized void loadRouteInternal() {
         loadingRoute = true;
-        final ArrayList<RouteItem> routeItems = DataStore.loadRoute();
+        final ArrayList<RouteItem> routeItems = DataStore.loadIndividualRoute();
         for (int i = 0; i < routeItems.size(); i++) {
             toggleItemInternal(routeItems.get(i));
         }
@@ -74,16 +74,12 @@ public class ManualRoute extends Route {
 
     private synchronized void saveRoute() {
         if (segments != null) {
-            final ArrayList<RouteItem> routeItems = new ArrayList<>();
-            for (int i = 0; i < segments.size(); i++) {
-                routeItems.add(segments.get(i).getItem());
-            }
-            Schedulers.io().scheduleDirect(() -> DataStore.saveRoute(routeItems));
+            Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
         }
     }
     private void clearRouteInternal(final UpdateManualRoute routeUpdater, final boolean deleteInDatabase) {
         if (deleteInDatabase) {
-            Schedulers.io().scheduleDirect(DataStore::clearRoute);
+            Schedulers.io().scheduleDirect(DataStore::clearIndividualRoute);
         }
         segments = null;
         if (null != routeUpdater) {
@@ -119,15 +115,13 @@ public class ManualRoute extends Route {
         }
     }
 
-    // @todo: Only works for GEOCACHE and WAYPOINT items yet
     private int pos(final RouteItem item) {
         if (segments == null || segments.size() == 0) {
             return -1;
         }
-
-        final String geocode = item.getGeocode();
+        final String identifier = item.getIdentifier();
         for (int i = 0; i < segments.size(); i++) {
-            if (segments.get(i).getItem().getGeocode().equals(geocode)) {
+            if (segments.get(i).getItem().getIdentifier().equals(identifier)) {
                 return i;
             }
         }

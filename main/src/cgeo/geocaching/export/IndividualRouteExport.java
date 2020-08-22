@@ -116,7 +116,7 @@ public class IndividualRouteExport {
                     final Geopoint point = loc.getPoint();
                     gpx.attribute(null, "lat", String.valueOf(point.getLatitude()));
                     gpx.attribute(null, "lon", String.valueOf(point.getLongitude()));
-                    XmlUtils.simpleText(gpx, null, "name", loc.getItem().getGeocode());
+                    XmlUtils.simpleText(gpx, null, "name", loc.getItem().getIdentifier());
                     gpx.endTag(null, "rtept");
                     countExported++;
                     publishProgress(countExported);
