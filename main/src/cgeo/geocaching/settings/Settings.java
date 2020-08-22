@@ -107,11 +107,14 @@ public class Settings {
         }
     }
 
-    private static final SharedPreferences sharedPrefs = PreferenceManager
+    //NO_APPLICATION_MODE will be true if Settings is used in context of local unit tests
+    private static final boolean NO_APPLICATION_MODE = CgeoApplication.getInstance() == null;
+
+    private static final SharedPreferences sharedPrefs = NO_APPLICATION_MODE ? null : PreferenceManager
             .getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
     static {
         migrateSettings();
-        Log.setDebug(sharedPrefs.getBoolean(getKey(R.string.pref_debug), false));
+        Log.setDebug(getBoolean(R.string.pref_debug, false));
     }
 
     /**
@@ -125,6 +128,11 @@ public class Settings {
     }
 
     private static void migrateSettings() {
+        //NO migration in NO_APP_MODE
+        if (NO_APPLICATION_MODE) {
+            return;
+        }
+
         final int latestPreferencesVersion = 4;
         final int currentVersion = getInt(R.string.pref_settingsversion, 0);
 
@@ -293,15 +301,15 @@ public class Settings {
     }
 
     private static String getKey(final int prefKeyId) {
-        return CgeoApplication.getInstance().getString(prefKeyId);
+        return CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getString(prefKeyId);
     }
 
     public static int getKeyInt(final int prefKeyId) {
-        return CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
+        return CgeoApplication.getInstance() == null ? -1 : CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
     }
 
     static String getString(final int prefKeyId, final String defaultValue) {
-        return sharedPrefs.getString(getKey(prefKeyId), defaultValue);
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getString(getKey(prefKeyId), defaultValue);
     }
 
     private static List<String> getStringList(final int prefKeyId, final String defaultValue) {
@@ -309,7 +317,7 @@ public class Settings {
     }
 
     private static int getInt(final int prefKeyId, final int defaultValue) {
-        return sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
     }
 
     // workaround for int prefs, originally saved as string
@@ -323,18 +331,21 @@ public class Settings {
     }
 
     private static long getLong(final int prefKeyId, final long defaultValue) {
-        return sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
     }
 
     private static boolean getBoolean(final int prefKeyId, final boolean defaultValue) {
-        return sharedPrefs.getBoolean(getKey(prefKeyId), defaultValue);
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getBoolean(getKey(prefKeyId), defaultValue);
     }
 
     private static float getFloat(final int prefKeyId, final float defaultValue) {
-        return sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
     }
 
     protected static void putString(final int prefKeyId, final String value) {
+        if (sharedPrefs == null) {
+            return;
+        }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putString(getKey(prefKeyId), value);
         edit.apply();
@@ -346,37 +357,52 @@ public class Settings {
 
 
     protected static void putBoolean(final int prefKeyId, final boolean value) {
+        if (sharedPrefs == null) {
+            return;
+        }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putBoolean(getKey(prefKeyId), value);
         edit.apply();
     }
 
     private static void putInt(final int prefKeyId, final int value) {
+        if (sharedPrefs == null) {
+            return;
+        }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putInt(getKey(prefKeyId), value);
         edit.apply();
     }
 
     private static void putLong(final int prefKeyId, final long value) {
+        if (sharedPrefs == null) {
+            return;
+        }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putLong(getKey(prefKeyId), value);
         edit.apply();
     }
 
     private static void putFloat(final int prefKeyId, final float value) {
+        if (sharedPrefs == null) {
+            return;
+        }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putFloat(getKey(prefKeyId), value);
         edit.apply();
     }
 
     private static void remove(final int prefKeyId) {
+        if (sharedPrefs == null) {
+            return;
+        }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.remove(getKey(prefKeyId));
         edit.apply();
     }
 
     private static boolean contains(final int prefKeyId) {
-        return sharedPrefs.contains(getKey(prefKeyId));
+        return sharedPrefs == null ? false : sharedPrefs.contains(getKey(prefKeyId));
     }
 
     public static boolean hasGCCredentials() {
