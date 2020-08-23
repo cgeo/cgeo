@@ -23,8 +23,12 @@ public class DBDowngradeableVersions extends DataStore.DBExtension {
     private DBDowngradeableVersions(final DataStore.DBExtension copyFrom) {
         try {
             for (String version : copyFrom.getString1().split(",")) {
-                final Integer vInt = Integer.parseInt(version);
-                downgradeableVersions.add(vInt);
+                try {
+                    final Integer vInt = Integer.parseInt(version);
+                    downgradeableVersions.add(vInt);
+                } catch (NumberFormatException nfe) {
+                    //can happen when string is completey empty in db, thus ignore
+                }
             }
         } catch (Exception e) {
             Log.w("Problems reading downgradeable versions from db ('" + copyFrom.getString1() + "'), aborting", e);
