@@ -36,7 +36,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Cache details:</h4>
 <ul>
 <li>Changed sync logic for personal notes in caches to avoid duplication of personal notes</li>
-<li>New: Option to globally deactive waypoint extraction from personal notes</li>
+<li>New: Option to globally deactivate waypoint extraction from personal notes</li>
 <li>New: Personal note editor will grow automatically for longer texts</li>
 <li>New: Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
 <li>New: Remembers offline found count for every connector and applies those values to the [NUMBER] parameter on logging</li>
