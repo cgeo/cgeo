@@ -12,6 +12,5 @@
     <CheckBox
         android:id="@+id/include_found_status"
         style="@style/checkbox_full"
-        android:text="@string/export_trailhistory_clear_after_export" />
-
+        android:text="@string/init_include_found_status" />
 </LinearLayout>
