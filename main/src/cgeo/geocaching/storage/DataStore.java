@@ -210,7 +210,7 @@ public class DataStore {
      * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
-            84 //adds offline logging columns/tables
+            //empty for now
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
