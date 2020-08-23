@@ -841,7 +841,7 @@ public class DataStore {
 
                             Log.i("Added table " + dbTableSearchDestinationHistory + ".");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 52", e);
+                            onUpgradeError(e, 52);
                         }
                     }
 
@@ -851,7 +851,7 @@ public class DataStore {
 
                             Log.i("Column onWatchlist added to " + dbTableCaches + ".");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 53", e);
+                            onUpgradeError(e, 53);
                         }
                     }
 
@@ -859,8 +859,7 @@ public class DataStore {
                         try {
                             db.execSQL(dbCreateLogImages);
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 54", e);
-
+                            onUpgradeError(e, 54);
                         }
                     }
 
@@ -868,7 +867,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN personal_note TEXT");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 55", e);
+                            onUpgradeError(e, 55);
                         }
                     }
 
@@ -880,7 +879,7 @@ public class DataStore {
                                     "LOWER(attribute) WHERE attribute LIKE \"%_yes\" " +
                                     "OR  attribute LIKE \"%_no\"");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 56", e);
+                            onUpgradeError(e, 56);
                         }
                     }
 
@@ -895,7 +894,7 @@ public class DataStore {
                             db.execSQL("DROP INDEX in_f");
                             createIndices(db);
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 57", e);
+                            onUpgradeError(e, 57);
                         }
                     }
 
@@ -982,7 +981,7 @@ public class DataStore {
 
                             Log.i("Removed latitude_string and longitude_string columns");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 58", e);
+                            onUpgradeError(e, 58);
                         } finally {
                             db.endTransaction();
                         }
@@ -994,7 +993,7 @@ public class DataStore {
                             createIndices(db);
                             removeObsoleteGeocacheDataDirectories();
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 59", e);
+                            onUpgradeError(e, 59);
                         }
                     }
 
@@ -1002,7 +1001,7 @@ public class DataStore {
                         try {
                             removeSecEmptyDirs();
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 60", e);
+                            onUpgradeError(e, 60);
                         }
                     }
                     if (oldVersion < 61) {
@@ -1010,8 +1009,7 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableLogs + " ADD COLUMN friend INTEGER");
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN coordsChanged INTEGER DEFAULT 0");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 61", e);
-
+                            onUpgradeError(e, 61);
                         }
                     }
                     // Introduces finalDefined on caches and own on waypoints
@@ -1021,16 +1019,14 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN own INTEGER DEFAULT 0");
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET own = 1 WHERE type = 'own'");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 62", e);
-
+                            onUpgradeError(e, 62);
                         }
                     }
                     if (oldVersion < 63) {
                         try {
                             removeDoubleUnderscoreMapFiles();
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 63", e);
-
+                            onUpgradeError(e, 63);
                         }
                     }
 
@@ -1041,7 +1037,7 @@ public class DataStore {
                             // of the problem. The problem was introduced in release 2012.06.01.
                             db.execSQL("UPDATE " + dbTableCaches + " SET reason=1 WHERE reason=2");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 64", e);
+                            onUpgradeError(e, 64);
                         }
                     }
 
@@ -1050,7 +1046,7 @@ public class DataStore {
                             // Set all waypoints where name is Original coordinates to type ORIGINAL
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET type='original', own=0 WHERE name='Original Coordinates'");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 65:", e);
+                            onUpgradeError(e, 65);
                         }
                     }
                     // Introduces visited feature on waypoints
@@ -1058,8 +1054,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN visited INTEGER DEFAULT 0");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 66", e);
-
+                            onUpgradeError(e, 66);
                         }
                     }
                     // issue2662 OC: Leichtes Klettern / Easy climbing
@@ -1068,8 +1063,7 @@ public class DataStore {
                             db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_yes' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_yes'");
                             db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_no' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_no'");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 67", e);
-
+                            onUpgradeError(e, 67);
                         }
                     }
                     // Introduces logPasswordRequired on caches
@@ -1077,8 +1071,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN logPasswordRequired INTEGER DEFAULT 0");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 68", e);
-
+                            onUpgradeError(e, 68);
                         }
                     }
                     // description for log Images
@@ -1086,7 +1079,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLogImages + " ADD COLUMN description TEXT");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 69", e);
+                            onUpgradeError(e, 69);
                         }
                     }
                     // Introduces watchListCount
@@ -1094,7 +1087,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN watchlistCount INTEGER DEFAULT -1");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 70", e);
+                            onUpgradeError(e, 70);
                         }
                     }
                     // Introduces cachesLists
@@ -1104,7 +1097,7 @@ public class DataStore {
                             createIndices(db);
                             db.execSQL("INSERT INTO " + dbTableCachesLists + " SELECT reason, geocode FROM " + dbTableCaches);
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 71", e);
+                            onUpgradeError(e, 71);
                         }
                     }
                     // User notes in waypoints and local coords changes of WPs without coords on server
@@ -1116,7 +1109,7 @@ public class DataStore {
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET note = ''");
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET org_coords_empty = 1 WHERE latitude IS NULL AND longitude IS NULL");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 72", e);
+                            onUpgradeError(e, 72);
                         }
                     }
                     // Adds coord calculator state to the waypoint
@@ -1124,7 +1117,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN calc_state TEXT");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 73", e);
+                            onUpgradeError(e, 73);
                         }
                     }
 
@@ -1133,7 +1126,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLogsOffline + " ADD COLUMN report_problem TEXT");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 74", e);
+                            onUpgradeError(e, 74);
                         }
                     }
 
@@ -1144,7 +1137,7 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_type INTEGER");
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_guid TEXT");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 75", e);
+                            onUpgradeError(e, 75);
                         }
                     }
 
@@ -1155,7 +1148,7 @@ public class DataStore {
 
                             Log.i("Added table " + dbTableTrailHistory + ".");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 76", e);
+                            onUpgradeError(e, 76);
                         }
                     }
 
@@ -1164,7 +1157,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLists + " ADD COLUMN marker INTEGER NOT NULL DEFAULT 0");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 77", e);
+                            onUpgradeError(e, 77);
                         }
                     }
 
@@ -1180,7 +1173,7 @@ public class DataStore {
                                 + "longitude DOUBLE "
                                 + ")");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 79", e);
+                            onUpgradeError(e, 79);
                         }
                     }
 
@@ -1188,7 +1181,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN preventWaypointsFromNote INTEGER NOT NULL DEFAULT 0");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 80", e);
+                            onUpgradeError(e, 80);
                         }
                     }
 
@@ -1199,7 +1192,7 @@ public class DataStore {
 
                             Log.i("Added table " + dbTableRoute + ".");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 81", e);
+                            onUpgradeError(e, 81);
                         }
                     }
 
@@ -1210,7 +1203,7 @@ public class DataStore {
 
                             Log.i("Added table " + dbTableExtension + ".");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 82", e);
+                            onUpgradeError(e, 82);
                         }
                     }
 
@@ -1227,7 +1220,7 @@ public class DataStore {
                             db.execSQL("DROP TABLE IF EXISTS cg_table_extension;");
                             db.execSQL(dbCreateExtension);
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 83", e);
+                            onUpgradeError(e, 83);
                         }
                     }
 
@@ -1249,12 +1242,12 @@ public class DataStore {
                             // drop temp table
                             db.execSQL("DROP TABLE IF EXISTS temp_route");
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to ver. 84", e);
+                            onUpgradeError(e, 84);
                         }
                     }
                 }
 
-                //at the very end of onupgrade: rewrite downgradeable versions in database
+                //at the very end of onUpgrade: rewrite downgradeable versions in database
                 try {
                     DBDowngradeableVersions.save(db, DBVERSIONS_DOWNWARD_COMPATIBLE);
                 } catch (final Exception e) {
@@ -1267,6 +1260,10 @@ public class DataStore {
             }
 
             Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
+        }
+
+        private void onUpgradeError(final Exception e, final int version) {
+            Log.e("Failed to upgrade to version " + version, e);
         }
 
         @Override
