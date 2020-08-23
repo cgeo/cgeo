@@ -18,18 +18,19 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Map: Individual routes:</h4>
 <ul>
 <li>New: Export route as GPX route file</li>
-<li>New: Import route from GPX route file (having geocode as route point names)</li>
+<li>New: Import route from GPX route file</li>
 <li>New: Option added to center on route</li>
 <li>New: Show warning before clearing a route</li>
 </ul>
 
-<h4>Map: Individual tracks:</h4>
+<h4>Map: GPX tracks/routes:</h4>
 <ul>
-<li>New: Option added to center on track</li>
-<li>New: Show Warning before overwriting an existing track</li>
-<li>New: Show warning on \"load track\" if an empty track file was selected</li>
+<li>Change: Renamed \"individual track\" to \"GPX track/route\"</li>
+<li>New: Option added to center on track/route</li>
+<li>New: Show Warning before overwriting an existing track/route</li>
+<li>New: Show warning on \"load track/route\" if an empty track/route file was selected</li>
 <li>New: Also load GPX files using the route format</li>
-<li>Change: Group \"individual track\" related entries into its own sub menu</li>
+<li>Change: Group \"individual track/route\" related entries into its own sub menu</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -50,9 +51,9 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Other:</h4>
 <ul>
-<li>New: Include offline find counter on homescreen (configurable)</li>
+<li>New: Include offline found counter on homescreen (configurable)</li>
 <li>New: Individual route sort view: Tap on item to open cache details</li>
-<li>New: Updated GPS Status helper app icon</li>
+<li>New: Updated send2cgeo and GPS Status helper app icons</li>
 <li>Change: Set colorAccent to c:geo orange in many more places</li>
 <li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Many other small fixes</li>
