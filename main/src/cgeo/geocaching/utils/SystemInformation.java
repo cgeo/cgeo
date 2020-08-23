@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
@@ -85,6 +86,7 @@ public final class SystemInformation {
             body.append("\nGeocaching.com date format: ").append(Settings.getGcCustomDate());
         }
         appendAddons(body);
+        body.append("\nBRouter connection available: ").append(Routing.isAvailable());
         body.append("\n--- End of system information ---\n");
         return body.toString();
     }
