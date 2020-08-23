@@ -93,6 +93,7 @@ public class EditNoteDialog extends DialogFragment {
         });
         done.setVisibility(View.VISIBLE);
 
+        mEditText.requestFocus();
         new Keyboard(activity).showDelayed(mEditText);
 
         //prevent popup window to extend under the virtual keyboard or above the top of phone display (see #8793)
