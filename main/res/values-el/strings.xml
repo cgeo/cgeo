@@ -1632,6 +1632,17 @@
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
     <!-- individual track -->
+    <string name="individual_track">GPX διαδρομή</string>
+    <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
+    <string name="map_load_track_wait">Φορτωση διαδρομής στο παρασκήνιο…</string>
+    <string name="map_load_track_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Η διαδρομη φορτώθηκε (%d σημείο αναφοράς)</item>
+        <item quantity="other">Η διαδρομη φορτώθηκε (%d σημεία αναφοράς)</item>
+    </plurals>
+    <string name="load_track_error">Σφάλμα κατά την φόρτωση της διαδρομής</string>
+    <string name="map_unload_track">Αποφόρτωση διαδρομής</string>
+    <string name="center_on_track">Κέντρο στην διαδρομή</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
