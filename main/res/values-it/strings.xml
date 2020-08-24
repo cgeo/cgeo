@@ -568,6 +568,8 @@
     <string name="init_summary_disabled">Escludi cache disattivati</string>
     <string name="init_archived">Escludi archiviati</string>
     <string name="init_summary_archived">Escludi cache archiviati</string>
+    <string name="init_global_wp_extraction_disable">Estrazione Waypoint</string>
+    <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
     <string name="init_units">Usa sistema imperiale</string>
@@ -654,6 +656,8 @@
     <string name="init_trackautovisit">Visita TB</string>
     <string name="init_summary_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
     <string name="init_sigautoinsert">Inserisce automaticamente</string>
+    <string name="init_offlinelogs_homescreen">Mostra log offline</string>
+    <string name="init_summary_offlinelogs_homescreen">Se si dispone di log che non sono ancora stati inviati, un contatore di log fuori rete (es. \"+ 1\") verrà mostrato accanto al numero ricerche online, sulla schermata iniziale.</string>
     <string name="init_loaddirectionimg">Immagine di direzione</string>
     <string name="init_summary_loaddirectionimg">Carica le immagini di direzione se necessario</string>
     <string name="init_default_navigation_tool">Navigatore preferito</string>
@@ -830,9 +834,12 @@
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
     <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
     <string name="cache_personal_note_edit">Modifica</string>
+    <string name="cache_personal_note_storewaypoints">Aggiungi/Aggiorna Waypoints</string>
+    <string name="cache_personal_note_removewaypoints">Rimuovi Waypoint</string>
     <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>
     <string name="cache_personal_note_storewaypoints_success_limited">I waypoint sono stati aggiunti alla nota ma hanno dovuto essere accorciati (lunghezza massima della nota: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">I waypoint non possono essere memorizzati nella nota a causa dei limiti di dimensione (lunghezza massima della nota: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Nessun waypoint memorizzabile trovato</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
@@ -1502,6 +1509,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Sembra che tu stia usando Android 11, che c:geo non supporta ancora completamente. Si prega di leggere le nostre FAQ per avere maggiori informazioni.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
@@ -1651,17 +1659,17 @@
     </plurals>
     <string name="center_on_route">Centra sul percorso</string>
     <!-- individual track -->
-    <string name="individual_track">Traccia individuale</string>
-    <string name="map_load_track">Carica traccia individuale</string>
-    <string name="map_load_track_wait">Caricamento traccia individuale in background…</string>
-    <string name="map_load_track_confirm">Sovrascrivere traccia esistente?</string>
+    <string name="individual_track">Traccia/percorso GPX</string>
+    <string name="map_load_track">Carica traccia/percorso da GPX</string>
+    <string name="map_load_track_wait">Caricamento traccia/percorso in background…</string>
+    <string name="map_load_track_confirm">Sovrascrivere traccia/percorso esistente?</string>
     <plurals name="load_track_success">
-        <item quantity="one">Traccia individuale caricata (%d trackpoint)</item>
-        <item quantity="other">Traccia individuale caricata (%d trackpoint)</item>
+        <item quantity="one">Traccia/percorso caricata (%d punto traccia)</item>
+        <item quantity="other">Traccia/percorso caricata (%d punti traccia)</item>
     </plurals>
-    <string name="load_track_error">Errore nel caricare la traccia individuale</string>
-    <string name="map_unload_track">Rimuovi traccia individuale</string>
-    <string name="center_on_track">Centra sulla traccia</string>
+    <string name="load_track_error">Errore nel caricare la traccia/percorso</string>
+    <string name="map_unload_track">Rimuove traccia/percorso dalla memoria</string>
+    <string name="center_on_track">Centra su traccia/percorso</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
@@ -1692,6 +1700,8 @@
     <string name="receivemapfile_intenttitle">Ricevi file mappa</string>
     <string name="receivemapfile_success">File mappa ricevuto con successo come \"%s\" e memorizzato nella directory della mappa</string>
     <string name="receivemapfile_error">Errore durante la ricezione del file mappa</string>
+    <string name="receivemapfile_error_io_exception">Errore I/O durante la ricezione del file mappa. La directory della mappa \"%s\" è scrivibile?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Errore di file non trovato durante la ricezione del file mappa.</string>
     <string name="receivemapfile_alreadyexists">Esiste già un file con questo nome. Sovrascrivere il file esistente o salvare il nuovo file con un nome diverso?</string>
     <string name="receivemapfile_option_overwrite">Sovrascrivere</string>
     <string name="receivemapfile_option_differentname">Nome diverso</string>
@@ -1703,6 +1713,7 @@
     <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
+    <string name="downloadmap_target_not_writable">La destinazione \"%s\" non è scrivibile - si prega di selezionare una directory diversa per il file mappa.</string>
     <!-- history trail export -->
     <string name="trailhistory">Traccia cronologia</string>
     <string name="export_trailhistory_title">Esporta traccia cronologia</string>
