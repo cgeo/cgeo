@@ -1620,10 +1620,6 @@
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <string name="save_sorted_route">Enregistrer</string>
     <!-- individual track -->
-    <string name="individual_track">Parcours individuel</string>
-    <string name="map_load_track">Charger un parcours individuel</string>
-    <string name="load_track_error">Erreur lors du chargement du parcours individuel</string>
-    <string name="center_on_track">Centrer sur la trace</string>
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
