@@ -569,6 +569,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
+    <string name="init_global_wp_extraction_disable">Extracção de pontos adicionais</string>
+    <string name="init_summary_global_wp_extraction_disable">Desactiva de forma geral a extracção de pontos adicionais a partir das notas pessoais em caches. Isto ainda pode ser activado para caches individuais ao desmarcar o visto abaixo da nota pessoal na cache</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
     <string name="init_units">Usar Unidades Imperiais</string>
@@ -833,7 +835,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
-    <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
+    <string name="cache_personal_note_storewaypoints">➕/🔄 Pont. adicionais</string>
     <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
@@ -1658,6 +1660,17 @@ https://manual.cgeo.org/pt/basicuse</string>
     </plurals>
     <string name="center_on_route">Centrar na rota</string>
     <!-- individual track -->
+    <string name="individual_track">Percurso/rota GPX</string>
+    <string name="map_load_track">Carregar percurso/rota do GPX</string>
+    <string name="map_load_track_wait">A carregar percurso/rota em segundo plano…</string>
+    <string name="map_load_track_confirm">Substituir percurso/rota existente?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Percurso/rota carregado (%d ponto do percurso)</item>
+        <item quantity="other">Percurso/rota carregado (%d pontos do percurso)</item>
+    </plurals>
+    <string name="load_track_error">Erro ao carregar o percurso/rota</string>
+    <string name="map_unload_track">Remover percurso/rota</string>
+    <string name="center_on_track">Centrar no percurso/rota</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
@@ -1683,6 +1696,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="receivemapfile_intenttitle">Receber um ficheiro de mapa</string>
     <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e guardado no directório de mapas</string>
     <string name="receivemapfile_error">Erro ao receber ficheiro de mapa</string>
+    <string name="receivemapfile_error_io_exception">Erro ao receber o ficheiro do mapa. O directório do mapa \"%s\" tem permissão de escrita?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Erro de ficheiro não encontrado, ao receber o ficheiro de mapa.</string>
     <string name="receivemapfile_alreadyexists">Já existe um ficheiro com este nome. Substituir o ficheiro existente ou guardar o novo ficheiro sob um nome diferente?</string>
     <string name="receivemapfile_option_overwrite">Substituir</string>
     <string name="receivemapfile_option_differentname">Nome diferente</string>
@@ -1694,6 +1709,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="downloadmap_choose">Escolher mapa</string>
     <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
+    <string name="downloadmap_target_not_writable">Não é possível gravar no destino \"%s\" - por favor, seleccione um directório de ficheiro de mapa diferente.</string>
     <!-- history trail export -->
     <string name="trailhistory">Percurso do histórico</string>
     <string name="export_trailhistory_title">Exportar o percurso do histórico</string>
