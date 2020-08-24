@@ -36,11 +36,11 @@
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
-    <string name="cache_size_small">Small</string>
+    <string name="cache_size_small">Klein</string>
     <string name="cache_size_regular">Regular</string>
-    <string name="cache_size_large">Large</string>
-    <string name="cache_size_other">Other</string>
-    <string name="cache_size_virtual">Virtual</string>
+    <string name="cache_size_large">Groot</string>
+    <string name="cache_size_other">Overig</string>
+    <string name="cache_size_virtual">Virtueel</string>
     <string name="cache_size_notchosen">Niet gekozen</string>
     <string name="cache_size_unknown">Onbekend</string>
     <string name="cache_size_nano">Nano</string>
@@ -568,6 +568,8 @@
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
+    <string name="init_global_wp_extraction_disable">Waypoint Extractie</string>
+    <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
@@ -1657,17 +1659,17 @@
     </plurals>
     <string name="center_on_route">Centreer op route</string>
     <!-- individual track -->
-    <string name="individual_track">Individueel spoor</string>
-    <string name="map_load_track">Individueel spoor laden</string>
-    <string name="map_load_track_wait">Individueel spoor op de achtergrond laden…</string>
-    <string name="map_load_track_confirm">Bestaande spoor overschrijven?</string>
+    <string name="individual_track">GPX spoor/route</string>
+    <string name="map_load_track">Spoor/route laden vanuit GPX</string>
+    <string name="map_load_track_wait">Spoor/route op achtergrond laden…</string>
+    <string name="map_load_track_confirm">Bestaande spoor/route overschrijven?</string>
     <plurals name="load_track_success">
-        <item quantity="one">Individuele spoor geladen (%d spoorpunt)</item>
-        <item quantity="other">Spoor geladen (%d spoorpunten)</item>
+        <item quantity="one">Spoor/route geladen (%d spoorpunten)</item>
+        <item quantity="other">Spoor/route geladen (%d spoorpunten)</item>
     </plurals>
-    <string name="load_track_error">Fout bij laden van individuele spoor</string>
-    <string name="map_unload_track">Individuele spoor ontladen</string>
-    <string name="center_on_track">Centreer op het spoor</string>
+    <string name="load_track_error">Fout bij het laden van spoor/route</string>
+    <string name="map_unload_track">Spoor/route ontladen</string>
+    <string name="center_on_track">Centreer op spoor/route</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1698,6 +1700,8 @@
     <string name="receivemapfile_intenttitle">Kaartbestand ontvangen</string>
     <string name="receivemapfile_success">Kaartbestand succesvol ontvangen als \"%s\" en opgeslagen in kaarten map</string>
     <string name="receivemapfile_error">Fout bij het ontvangen van kaartbestand</string>
+    <string name="receivemapfile_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartmap \"%s\" beschrijfbaar?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van kaartbestand.</string>
     <string name="receivemapfile_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
     <string name="receivemapfile_option_overwrite">Overschrijven</string>
     <string name="receivemapfile_option_differentname">Andere naam</string>
@@ -1709,6 +1713,7 @@
     <string name="downloadmap_choose">Kies kaart</string>
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="downloadmap_target_not_writable">Doel \"%s\" is niet beschrijfbaar - selecteer een andere kaartbestand map.</string>
     <!-- history trail export -->
     <string name="trailhistory">Geschiedenisspoor</string>
     <string name="export_trailhistory_title">Geschiedenisspoor exporteren</string>

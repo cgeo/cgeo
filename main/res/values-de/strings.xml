@@ -1657,17 +1657,6 @@
     </plurals>
     <string name="center_on_route">Route zentrieren</string>
     <!-- individual track -->
-    <string name="individual_track">Individueller Track</string>
-    <string name="map_load_track">Lade individuellen Track</string>
-    <string name="map_load_track_wait">Individueller Track wird im Hintergrund geladen…</string>
-    <string name="map_load_track_confirm">Vorhandenen Track überschreiben?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individueller Track geladen (%d Wegpunkt)</item>
-        <item quantity="other">Individueller Track geladen (%d Wegpunkte)</item>
-    </plurals>
-    <string name="load_track_error">Fehler beim Laden des individuellen Tracks</string>
-    <string name="map_unload_track">Individuellen Track entfernen</string>
-    <string name="center_on_track">Track zentrieren</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1698,6 +1687,8 @@
     <string name="receivemapfile_intenttitle">Empfange Kartendatei</string>
     <string name="receivemapfile_success">Kartendatei erfolgreich als \"%s\" emmpfangen und im lokalen Kartenverzeichnis gespeichert</string>
     <string name="receivemapfile_error">Fehler beim Empfang der Kartendatei</string>
+    <string name="receivemapfile_error_io_exception">E/A-Fehler beim Empfang der Kartendatei. Ist das Kartenverzeichnis \"%s\" beschreibbar?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Datei nicht gefunden beim Empfang der Kartendatei.</string>
     <string name="receivemapfile_alreadyexists">Eine Datei mit diesem Namen existiert bereits. Bestehende Datei überschreiben oder neue Datei unter anderem Namen speichern?</string>
     <string name="receivemapfile_option_overwrite">Überschreiben</string>
     <string name="receivemapfile_option_differentname">Anderer Name</string>
@@ -1709,6 +1700,7 @@
     <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmanager_not_available">Kartendatei kann nicht heruntergeladen werden, Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
+    <string name="downloadmap_target_not_writable">Ziel \"%s\" ist nicht beschreibbar - bitte ein anderes Kartenverzeichnis wählen.</string>
     <!-- history trail export -->
     <string name="trailhistory">Positionsverlauf</string>
     <string name="export_trailhistory_title">Exportiere Positionsverlauf</string>

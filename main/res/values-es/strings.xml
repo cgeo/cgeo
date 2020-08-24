@@ -1471,8 +1471,6 @@ Nombre de archivo:%2$s</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
     <!-- individual track -->
-    <string name="map_load_track">Cargar ruta individual</string>
-    <string name="load_track_error">Error al cargar la ruta individual</string>
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->

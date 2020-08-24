@@ -1701,19 +1701,6 @@
     </plurals>
     <string name="center_on_route">Wyśrodkuj na trasie</string>
     <!-- individual track -->
-    <string name="individual_track">Ścieżka indywidualna</string>
-    <string name="map_load_track">Załaduj indywidualną ścieżkę</string>
-    <string name="map_load_track_wait">Wczytywanie indywidualnych ścieżek w tle…</string>
-    <string name="map_load_track_confirm">Zastąpić istniejącą ścieżkę?</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Indywidualna ścieżka załadowana (%d punkt nawigacyjny)</item>
-        <item quantity="few">Indywidualna ścieżka załadowana (%d punkty nawigacyjne)</item>
-        <item quantity="many">Indywidualna ścieżka załadowana (%d punktów nawigacyjnych)</item>
-        <item quantity="other">Indywidualna ścieżka załadowana (%d punktów nawigacyjnych)</item>
-    </plurals>
-    <string name="load_track_error">Błąd ładowania poszczególnych ścieżek</string>
-    <string name="map_unload_track">Załaduj indywidualną ścieżkę</string>
-    <string name="center_on_track">Wyśrodkuj na ścieżce</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
