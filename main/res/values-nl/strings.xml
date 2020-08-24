@@ -36,11 +36,11 @@
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
-    <string name="cache_size_small">Small</string>
+    <string name="cache_size_small">Klein</string>
     <string name="cache_size_regular">Regular</string>
-    <string name="cache_size_large">Large</string>
-    <string name="cache_size_other">Other</string>
-    <string name="cache_size_virtual">Virtual</string>
+    <string name="cache_size_large">Groot</string>
+    <string name="cache_size_other">Overig</string>
+    <string name="cache_size_virtual">Virtueel</string>
     <string name="cache_size_notchosen">Niet gekozen</string>
     <string name="cache_size_unknown">Onbekend</string>
     <string name="cache_size_nano">Nano</string>
@@ -568,6 +568,8 @@
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
+    <string name="init_global_wp_extraction_disable">Waypoint Extractie</string>
+    <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
@@ -1657,6 +1659,17 @@
     </plurals>
     <string name="center_on_route">Centreer op route</string>
     <!-- individual track -->
+    <string name="individual_track">GPX spoor/route</string>
+    <string name="map_load_track">Spoor/route laden vanuit GPX</string>
+    <string name="map_load_track_wait">Spoor/route op achtergrond laden…</string>
+    <string name="map_load_track_confirm">Bestaande spoor/route overschrijven?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Spoor/route geladen (%d spoorpunten)</item>
+        <item quantity="other">Spoor/route geladen (%d spoorpunten)</item>
+    </plurals>
+    <string name="load_track_error">Fout bij het laden van spoor/route</string>
+    <string name="map_unload_track">Spoor/route ontladen</string>
+    <string name="center_on_track">Centreer op spoor/route</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
