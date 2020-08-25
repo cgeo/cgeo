@@ -843,7 +843,6 @@
     <string name="cache_menu_map_ext">Otras apps externas</string>
     <string name="cache_menu_browser">Abrir navegador</string>
     <string name="cache_menu_visit">Registrar visita</string>
-    <string name="cache_menu_visit_offline">Registro rápido sin conexión</string>
     <string name="cache_menu_spoilers">Revelaciones</string>
     <string name="cache_menu_around">Cachés cercanos</string>
     <string name="around">Cerca de %s</string>
