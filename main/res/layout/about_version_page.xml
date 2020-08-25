@@ -36,7 +36,7 @@
                 android:layout_marginRight="10dip"
                 android:layout_marginTop="5dip"
                 android:text="@string/quote"
-                android:textColor="?text_color"
+                android:textColor="@color/just_white"
                 android:textSize="14sp" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:text="@string/powered_by"
-                android:textColor="?text_color"
+                android:textColor="@color/just_white"
                 android:textSize="14sp" />
         </LinearLayout>
 
