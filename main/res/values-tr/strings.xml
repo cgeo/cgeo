@@ -854,7 +854,6 @@
     <string name="cache_menu_streetview">Sokak görünümü</string>
     <string name="cache_menu_browser">Tarayıcıda aç</string>
     <string name="cache_menu_visit">Ziyaretini Kaydet</string>
-    <string name="cache_menu_visit_offline">Tek işlemde çevrimdışı kayıt</string>
     <string name="cache_menu_spoilers">İpucu Görseller</string>
     <string name="cache_menu_around">Yakınlardaki Geocache\'ler</string>
     <string name="around">%s civarında</string>
