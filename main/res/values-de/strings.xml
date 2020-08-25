@@ -568,6 +568,8 @@
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
     <string name="init_archived">Archivierte ausschließen</string>
     <string name="init_summary_archived">Archivierte Caches ausschließen</string>
+    <string name="init_global_wp_extraction_disable">Wegpunkte auslesen</string>
+    <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
     <string name="init_units">Imperiale Einheiten</string>
@@ -1657,6 +1659,17 @@
     </plurals>
     <string name="center_on_route">Route zentrieren</string>
     <!-- individual track -->
+    <string name="individual_track">GPX-Track/Route</string>
+    <string name="map_load_track">Lade Track/Route aus GPX</string>
+    <string name="map_load_track_wait">Lade Track/Route im Hintergrund…</string>
+    <string name="map_load_track_confirm">Track/Route überschreiben?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Track/Route geladen (%d Wegpunkt)</item>
+        <item quantity="other">Track/Route geladen (%d Wegpunkte)</item>
+    </plurals>
+    <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
+    <string name="map_unload_track">Track/Route entladen</string>
+    <string name="center_on_track">Track/Route zentrieren</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
