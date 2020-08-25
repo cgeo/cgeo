@@ -739,7 +739,6 @@
     <string name="cache_menu_map_ext">Altres aplicacions externes</string>
     <string name="cache_menu_browser">Obre al navegador</string>
     <string name="cache_menu_visit">Registra visita</string>
-    <string name="cache_menu_visit_offline">Registra fora de línia amb un sol clic</string>
     <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
     <string name="cache_menu_around">Catxés propers</string>
     <string name="around">Al voltant de %s</string>
