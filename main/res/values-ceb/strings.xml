@@ -660,7 +660,6 @@
     <string name="cache_menu_streetview">Lantaw sa karsada</string>
     <string name="cache_menu_browser">Ablihi sa browser</string>
     <string name="cache_menu_visit">Bisita sa log</string>
-    <string name="cache_menu_visit_offline">Usa ka pindot offline log</string>
     <string name="cache_menu_spoilers">Spoiler nga mga imahe</string>
     <string name="cache_menu_around">Nagpalibot ang caches</string>
     <string name="around">Nagpalibot %s</string>
