@@ -907,7 +907,6 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
-    <string name="cache_menu_visit_offline">Καταγραφή εκτός σύνδεσης με ένα κλικ</string>
     <string name="cache_menu_spoilers">Βοηθητικές εικόνες</string>
     <string name="cache_menu_around">Κρύπτες τριγύρω</string>
     <string name="around">Γύρω από το %s</string>
