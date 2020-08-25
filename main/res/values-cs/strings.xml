@@ -932,7 +932,6 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
-    <string name="cache_menu_visit_offline">Rychlý offline log</string>
     <string name="cache_menu_spoilers">Obrázky</string>
     <string name="cache_menu_around">Keš v okolí</string>
     <string name="around">V okolí %s</string>
