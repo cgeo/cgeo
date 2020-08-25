@@ -872,7 +872,6 @@
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
     <string name="cache_menu_visit">로그하기</string>
-    <string name="cache_menu_visit_offline">원클릭 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
     <string name="cache_menu_around">주변의 캐시</string>
     <string name="around"> %s 주변</string>
