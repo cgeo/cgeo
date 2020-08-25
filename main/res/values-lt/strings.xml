@@ -790,7 +790,6 @@
     <string name="cache_menu_map_ext">Kitos išorinės programos</string>
     <string name="cache_menu_browser">Atidaryti naršyklėje</string>
     <string name="cache_menu_visit">Registruoti</string>
-    <string name="cache_menu_visit_offline">Vienu paspaudimu žurnalo įrašo išsaugojimas</string>
     <string name="cache_menu_spoilers">Užuominų nuotraukos</string>
     <string name="cache_menu_around">Slėptuvės aplink</string>
     <string name="around">Aplink %s</string>
