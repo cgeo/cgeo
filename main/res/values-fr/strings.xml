@@ -895,7 +895,6 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
-    <string name="cache_menu_visit_offline">Visite hors-ligne en un clic</string>
     <string name="cache_menu_spoilers">Images indices</string>
     <string name="cache_menu_around">Alentours</string>
     <string name="around">Autour de %s</string>
