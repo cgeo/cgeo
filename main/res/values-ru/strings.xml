@@ -913,7 +913,6 @@
     <string name="cache_menu_streetview">Просмотр улиц</string>
     <string name="cache_menu_browser">Открыть в браузере</string>
     <string name="cache_menu_visit">Записаться</string>
-    <string name="cache_menu_visit_offline">Записаться в 1 клик</string>
     <string name="cache_menu_spoilers">Фото в спойлере</string>
     <string name="cache_menu_around">Тайники неподалеку</string>
     <string name="around">Около %s</string>

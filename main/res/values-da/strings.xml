@@ -757,7 +757,6 @@
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_browser">Åbn i browser</string>
     <string name="cache_menu_visit">Log besøg</string>
-    <string name="cache_menu_visit_offline">Hurtig offline logbesked</string>
     <string name="cache_menu_spoilers">Spoilerbilleder</string>
     <string name="cache_menu_around">Cacher i nærheden</string>
     <string name="around">I nærheden af %s</string>

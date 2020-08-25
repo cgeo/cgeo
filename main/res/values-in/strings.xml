@@ -680,7 +680,6 @@
     <string name="cache_menu_streetview">Lihat Jalan</string>
     <string name="cache_menu_browser">Buka di browser</string>
     <string name="cache_menu_visit">Kunjungi Log</string>
-    <string name="cache_menu_visit_offline">Satu klik log offline</string>
     <string name="cache_menu_spoilers">Bocoran Gambar</string>
     <string name="cache_menu_around">Cache sekitar</string>
     <string name="around">Sekitar %s</string>

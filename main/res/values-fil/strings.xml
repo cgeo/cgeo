@@ -695,7 +695,6 @@
     <string name="cache_menu_streetview">Ang tanawin sa Kalye</string>
     <string name="cache_menu_browser">Ibukas sa browser</string>
     <string name="cache_menu_visit">Ang Pagbisita ng log</string>
-    <string name="cache_menu_visit_offline">Isang pindot para sa offline log</string>
     <string name="cache_menu_spoilers">Mga imahe ng spoiler</string>
     <string name="cache_menu_around">Mga cache sa paligid</string>
     <string name="around">Ang paligid %s</string>

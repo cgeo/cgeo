@@ -916,7 +916,6 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
     <string name="cache_menu_visit">Scrivi Log</string>
-    <string name="cache_menu_visit_offline">Log offline con un solo click</string>
     <string name="cache_menu_spoilers">Immagini spoiler</string>
     <string name="cache_menu_around">Cache qui intorno</string>
     <string name="around">Nei dintorni di %s</string>

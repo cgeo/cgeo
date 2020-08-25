@@ -684,7 +684,6 @@
     <string name="cache_menu_streetview">رؤية الشارع</string>
     <string name="cache_menu_browser">فتح في المتصفح</string>
     <string name="cache_menu_visit">تسجيل الزيارة</string>
-    <string name="cache_menu_visit_offline">نقرة واحدة لتسجيل الزيارة في وضع عدم الاتصال</string>
     <string name="cache_menu_spoilers">الصور المفسدة</string>
     <string name="cache_menu_around">مخبآت في الجوار</string>
     <string name="around">في جوار %s</string>

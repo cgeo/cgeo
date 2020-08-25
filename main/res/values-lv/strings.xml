@@ -724,7 +724,6 @@
     <string name="cache_menu_streetview">Ielas skats (Street View)</string>
     <string name="cache_menu_browser">Atvērt pārlūkprogrammā</string>
     <string name="cache_menu_visit">Reģistrēt atradumu</string>
-    <string name="cache_menu_visit_offline">Viena klikšķa bezsaistes apmeklējuma reģistrācija</string>
     <string name="cache_menu_spoilers">\"Spoiler\" bilde (-es)</string>
     <string name="cache_menu_around">Slēpņi apkārtnē</string>
     <string name="around">Apkārt %s</string>

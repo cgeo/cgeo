@@ -687,7 +687,6 @@
     <string name="cache_menu_streetview">Vedere stradală</string>
     <string name="cache_menu_browser">Afişează în browser</string>
     <string name="cache_menu_visit">Jurnal</string>
-    <string name="cache_menu_visit_offline">Însemnare locală cu un singur clic</string>
     <string name="cache_menu_spoilers">Imagini (indicii?)</string>
     <string name="cache_menu_around">Cutii din împrejurimi</string>
     <string name="around">Aproximativ %s</string>

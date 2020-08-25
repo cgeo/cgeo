@@ -914,7 +914,6 @@
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
-    <string name="cache_menu_visit_offline">Nopea offline-lokkaus</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
     <string name="cache_menu_around">Kätköt lähistöllä</string>
     <string name="around">%s:n ympärillä</string>

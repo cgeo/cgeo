@@ -916,7 +916,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Im Browser öffnen</string>
     <string name="cache_menu_visit">Besuch loggen</string>
-    <string name="cache_menu_visit_offline">Offline loggen</string>
+    <string name="cache_menu_visit_offline">Schneller Offline-Log</string>
     <string name="cache_menu_spoilers">Hinweisbild</string>
     <string name="cache_menu_around">Caches im Umkreis</string>
     <string name="around">In der Nähe von %s</string>
