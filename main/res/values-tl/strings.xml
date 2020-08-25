@@ -692,7 +692,6 @@
     <string name="cache_menu_streetview">Pag-view ng street</string>
     <string name="cache_menu_browser">Buksan sa browser</string>
     <string name="cache_menu_visit">Ang Log ng Pagbisita</string>
-    <string name="cache_menu_visit_offline">Isang pindot para sa offline log</string>
     <string name="cache_menu_spoilers">Mga imaheng spoiler</string>
     <string name="cache_menu_around">Mga Cache sa paligid</string>
     <string name="around">Nasa %s</string>
