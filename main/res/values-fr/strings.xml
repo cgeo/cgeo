@@ -449,7 +449,6 @@
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
-    <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
     <string name="settings_title_gpx">GPX</string>

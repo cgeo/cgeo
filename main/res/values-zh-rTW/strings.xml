@@ -1,24 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
+    <string name="cache">高速缓存</string>
+    <string name="detail">详细资料</string>
+    <string name="search">搜索</string>
+    <string name="helpers">有用的應用程式</string>
+    <string name="about">關於c:geo</string>
+    <string name="latitude">纬度</string>
+    <string name="longitude">经度</string>
     <!-- actionbar -->
+    <string name="settings_titlebar">c:geo設定</string>
     <!-- caches -->
+    <string name="all_types">全部销售类型</string>
+    <string name="traditional">国家首都</string>
+    <string name="multi">多重寶藏</string>
+    <string name="mystery">謎題寶藏</string>
+    <string name="letterbox">混合信箱</string>
+    <string name="event">活動寶藏</string>
+    <string name="mega">大型活動寶藏</string>
+    <string name="giga">巨型活動寶藏</string>
+    <string name="earth">地景寶藏</string>
+    <string name="webcam">删除标签</string>
+    <string name="virtual">虚拟机</string>
+    <string name="ape">缓存中项目</string>
+    <string name="unknown">未知类型</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">极小</string>
+    <string name="cache_size_small">小</string>
+    <string name="cache_size_regular">常规</string>
+    <string name="cache_size_large">大</string>
+    <string name="cache_size_other">其它</string>
+    <string name="cache_size_virtual">虚拟</string>
+    <string name="cache_size_notchosen">未選擇</string>
+    <string name="cache_size_unknown">未知</string>
+    <string name="cache_size_very_large">巨大</string>
     <!-- waypoints -->
+    <string name="wp_final">最后位置</string>
+    <string name="wp_puzzle">问答</string>
+    <string name="wp_pkg">停车场</string>
+    <string name="wp_trailhead">出发点</string>
+    <string name="wp_waypoint">引用点：</string>
+    <string name="wp_original">原始坐标</string>
     <!-- logs -->
+    <string name="log_found">发现它</string>
+    <string name="log_dnf">没有发现</string>
+    <string name="log_note">输入备注</string>
+    <string name="log_published">已发佈</string>
+    <string name="log_enabled">防火墙已启用</string>
+    <string name="log_disabled">已禁用</string>
+    <string name="log_tb_sortby">可追踪物排序</string>
+    <string name="log_tb_note">筆記</string>
+    <string name="log_save">離線儲存</string>
+    <string name="log_posting_generic_trackable">张贴 %1$s %2$d/%3$d</string>
+    <string name="log_clear">清除</string>
+    <string name="log_post_not_possible">数据下载中…\n请检查网络连接或稍后重试。</string>
+    <string name="log_add">添加</string>
+    <string name="log_no_rating">无评分</string>
+    <string name="log_stars_1_description">40 - 很一般</string>
+    <string name="log_stars_2_description">低于平均水平</string>
+    <string name="log_stars_25_description">不太好</string>
+    <string name="log_stars_3_description">平均</string>
+    <string name="log_stars_35_description">一次也没吐</string>
+    <string name="log_stars_45_description">极好</string>
+    <string name="log_stars_5_description">十分棒</string>
+    <string name="log_webcam">网络摄像头拍摄的照片</string>
+    <string name="log_new_log">登录</string>
+    <string name="log_new_log_text">日志记录</string>
+    <string name="log_announcement">通告</string>
+    <string name="log_today">今日</string>
+    <string name="log_yesterday">昨日</string>
+    <string name="log_smilies">表情符号 按钮</string>
+    <string name="log_image">镜像文件</string>
+    <string name="log_image_attach">附加图片</string>
+    <string name="log_image_stored">现有</string>
+    <string name="log_image_camera">#-#-#-#-# zh_CN. po #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (wxMaxima Head) #-#-#-#-#\n新建\n#-#-#-#-# amarok. po (amarok) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po #-#-#-#-#\n新样式\n#-#-#-#-# knotes. po (knotes) #-#-#-#-#\n新建\n#-#-#-#-# libkleopatra. po (libkleopatra) #-#-#-#-#\n新建\n#-#-#-#-# lokalize. po (lokalize) #-#-#-#-#\n新翻译\n#-#-#-#-# tellico. po (tellico) #-#-#-#-#\n新\n#-#-#-#-# konversation. po (konversation) #-#-#-#-#\n新建\n#-#-#-#-# kraft. po #-#-#-#-#\n新建\n#-#-#-#-# ksayit. po (ksayit) #-#-#-#-#\n新建\n#-#-#-#-# amarok. po (amarok) #-#-#-#-#\n新建\n#-#-#-#-# kphotoalbum. po (kphotoalbum) #-#-#-#-#\n新建\n#-#-#-#-# libakonadi. po (libakonadi) #-#-#-#-#\n新建\n#-#-#-#-# krossmodulesheets. po (krossmodulekspread) #-#-#-#-#\n新建\n#-#-#-#-# kexi. po (kexi) #-#-#-#-#\n新建\n#-#-#-#-# krita. po (krita) #-#-#-#-#\n新建\n#-#-#-#-# VariablesPlugin. po (VariablesPlugin) #-#-#-#-#\n新建\n#-#-#-#-# sheets. po (kspread) #-#-#-#-#\n新建\n#-#-#-#-# ginkgo. po (kdelibs4) #-#-#-#-#\n新建\n#-#-#-#-# kstyle_config. po (kstyle_hicontract_config) #-#-#-#-#\n新建\n#-#-#-#-# kdevplatform. po (kdevplatform) #-#-#-#-#\n新建\n#-#-#-#-# katebuild-plugin. po (katebuild-plugin) #-#-#-#-#\n新建\n#-#-#-#-# kio_man. po (kio_man) #-#-#-#-#\n新增部分\n#-#-#-#-# rocsvisualeditor. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# ktouch. po (Ktouch) #-#-#-#-#\n新建\n#-#-#-#-# kalzium. po (kalzium) #-#-#-#-#\n新建\n#-#-#-#-# parley. po (parley) #-#-#-#-#\n新建\n#-#-#-#-# rocs. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# kbruch. po (kbruch) #-#-#-#-#\n新建\n#-#-#-#-# marble. po (marble) #-#-#-#-#\n新建\n#-#-#-#-# rocscore. po (rocs) #-#-#-#-#\n新建\n#-#-#-#-# kdeqt. po (kdeqt) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (pinta) #-#-#-#-#\n新建\n#-#-#-#-# zh_CN. po (aMule 2.2.7) #-#-#-#-#\n新建</string>
+    <string name="log_image_caption">标题</string>
+    <string name="log_image_description">描述信心</string>
+    <string name="log_image_scale">缩放比例</string>
+    <string name="log_report_problem">报告问题</string>
+    <string name="log_hint_log_password">輸入您的新密碼</string>
+    <string name="log_empty_logbook">这个cache的签到簿是空的。</string>
+    <string name="log_problem_none">没问题</string>
+    <string name="log_problem_needs_maintenance_text">这个寻宝者报告此宝有问题。</string>
+    <string name="log_problem_log_full_label">签到簿已写满</string>
+    <string name="log_problem_log_full_text">这个寻宝者报告签到簿已写满。</string>
+    <string name="log_problem_damaged_label">容器已损坏</string>
+    <string name="log_problem_damaged_text">这个寻宝者报告容器已损坏。</string>
+    <string name="log_problem_missing_label">此宝可能已经丢失</string>
+    <string name="log_problem_missing_text">这个寻宝者报告此宝可能已经丢失。</string>
+    <string name="log_problem_other_label">其它</string>
+    <string name="log_problem_other_text">这个寻宝者报告此宝有问题。</string>
+    <string name="log_problem_archive_label">此宝应该被存档</string>
+    <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <!-- translation -->
+    <string name="translate_to_sys_lang">翻译为 %s</string>
+    <string name="translate_to_english">翻译为</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_none">确定</string>
+    <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
+    <string name="err_missing_auth">用户名或密码未设置</string>
+    <string name="err_wrong">错误的用户名或密码</string>
+    <string name="err_cache_not_found">未能找到所需的cache。</string>
+    <string name="err_unsupported_image_format">不支持的图像格式</string>
+    <string name="err_log_post_failed_ec">看来您的日志没有被张贴。请在 Extremcaching.com 检查一下。</string>
+    <string name="err_log_post_failed_gk">看来您的日志没有被张贴。请在 Extremcaching.com 检查一下。</string>
+    <string name="err_logimage_post_failed">似乎您的日志映像未上载。请在缓存源网站上进行检查。</string>
+    <string name="err_parse_lat">c: geo 不能解析纬度。</string>
+    <string name="err_parse_lon">c: geo 不能解析纬度。</string>
+    <string name="err_parse_dist">c: geo 不能解析纬度。</string>
+    <string name="err_parse_lat_lon">c: geo 不能解析纬度或经度。</string>
+    <string name="err_rendertheme_file_unreadable">无法加载所选的主题。切换至预置主题。</string>
+    <string name="err_rendertheme_invalid">所选的主题不适用于当前mapsforge版本。切换至预置主题。</string>
+    <string name="warn_save_nothing">没有什么可以挽救的。</string>
+    <string name="warn_no_cache_coord">没有带有坐标的缓存。</string>
+    <string name="warn_no_coordinates">没有给定的坐标。</string>
+    <string name="warn_no_keyword">未给定关键词。</string>
+    <string name="warn_no_username">未指定用户名。</string>
+    <string name="warn_no_connector">没有当前可用的geocaching服务来提供这种类型的搜索</string>
+    <string name="warn_search_help_title">需要帮助吗？</string>
+    <string name="warn_load_images">读取图片失败。</string>
+    <string name="warn_rendertheme_missing">未找到映射文件</string>
+    <string name="warn_invalid_character">字符必须是字母或数字</string>
+    <string name="info_log_post_failed_reason">原因：%s</string>
+    <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
+    <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
+    <string name="confirm_unsaved_changes_title">未保存更改</string>
+    <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
+    <string name="err_request_popup_info">c:geo获取cache信息失败</string>
     <!-- location service -->
+    <string name="loc_sat">六</string>
+    <string name="loc_no_addr">未知地址</string>
     <!-- standard menu -->
+    <string name="menu_helpers">客户端程序</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_backup">备份 / 还原</string>
+    <string name="menu_history">历史</string>
+    <string name="menu_filter">滤镜</string>
     <!-- main screen -->
+    <string name="caches_nearby_button">附近</string>
+    <string name="advanced_search_button">搜索</string>
+    <string name="stored_caches_button">已存储</string>
+    <string name="any_button">转到</string>
     <!-- caches -->
+    <string name="caches_no_cache">此处无文件</string>
+    <string name="caches_more_caches">载入更多答案</string>
+    <string name="caches_more_caches_no">载入更多答案</string>
+    <string name="caches_more_caches_loading">正在装入缓存</string>
+    <string name="caches_more_caches_currently">当前</string>
+    <string name="caches_eta_ltm">不到一分钟</string>
+    <plurals name="caches_eta_mins">
+        <item quantity="other">%d 分钟</item>
+    </plurals>
+    <string name="caches_store_offline">离线存储</string>
+    <string name="caches_store_all">全部存储</string>
+    <string name="caches_store_unsaved">存储未保存</string>
+    <string name="caches_history">查看历史</string>
+    <string name="caches_on_map">在地图上显示</string>
+    <string name="caches_sort">排序</string>
+    <string name="caches_sort_distance">游览路程</string>
+    <string name="caches_sort_difficulty">难度系数</string>
+    <string name="caches_sort_terrain">地形</string>
+    <string name="caches_sort_size">大小</string>
+    <string name="caches_sort_favorites">已被标记为喜爱</string>
+    <string name="caches_sort_name">应用名</string>
+    <string name="caches_sort_geocode">Geo 节点</string>
+    <string name="caches_sort_rating">评级</string>
+    <string name="caches_sort_date_hidden">隐藏日期</string>
+    <string name="caches_sort_finds">查找</string>
+    <string name="caches_sort_state">省份</string>
+    <string name="caches_sort_eventdate">事件日期</string>
+    <string name="caches_select_mode">选择模式：</string>
+    <string name="caches_upload_modifiedcoords">上传更改后的坐标</string>
+    <string name="caches_copy_selected">复制所选项</string>
+    <string name="caches_copy_all">全部复制</string>
+    <string name="caches_filter_own_rating">有任何评级</string>
+    <string name="caches_filter_missing_gcvote">找到的缓存未投票</string>
+    <string name="caches_clear_offlinelogs">清除离线服务器</string>
+    <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
+    <string name="caches_make_list_unique">使列表唯一</string>
     <!-- caches lists -->
+    <string name="menu_lists">管理列表</string>
+    <string name="list_menu_create">新的列表</string>
+    <string name="list_menu_drop">删除当前列表</string>
+    <string name="list_menu_rename">删除当前列表</string>
+    <string name="list_menu_import">导入</string>
+    <string name="list_title">選擇一個播放清單</string>
+    <string name="lists_title">选择列表</string>
+    <string name="list_inbox">已存储</string>
+    <string name="list_all_lists">所有缓存</string>
+    <string name="list_dialog_create_title">新的列表</string>
+    <string name="list_dialog_create">创建</string>
+    <string name="list_dialog_remove_title">删除此列表</string>
+    <string name="list_dialog_remove">移除</string>
+    <string name="list_dialog_rename_title">重命名列表</string>
+    <string name="list_dialog_rename">重命名</string>
     <!-- about -->
+    <string name="about_version">版本</string>
+    <string name="about_contributors">活动提供商</string>
+    <string name="about_license">许可</string>
+    <string name="about_help">帮助</string>
+    <string name="about_starting">开始使用</string>
+    <string name="about_starting_head">开始使用</string>
+    <string name="about_starting_text_basics_head">寻宝基础知识</string>
+    <string name="about_system_info_send_button">通过邮件发送…</string>
+    <string name="about_system_info">c:geo 系统信息</string>
+    <string name="about_system_info_send_chooser">发送系统信息</string>
+    <string name="changelog_github">全部标签列表</string>
     <!-- settings -->
+    <string name="settings_title_open_settings">開啟設置</string>
+    <string name="settings_title_services">服务</string>
+    <string name="settings_title_appearance">外观</string>
+    <string name="settings_summary_cachedetails">自定义缓存信息的显示。</string>
+    <string name="settings_title_offlinedata">离线延迟</string>
+    <string name="settings_title_logging">登陆</string>
+    <string name="settings_title_map">地图</string>
+    <string name="settings_title_map_content">地图内容</string>
+    <string name="settings_title_data_dir">Geocache 数据目录</string>
+    <string name="settings_title_data_dir_usage">Geocache 数据目录 (%1$s 使用)</string>
+    <string name="calculate_dataDir_title">Geocache 数据使用情况</string>
+    <string name="calculate_dataDir">计算 Geocache 数据磁盘使用情况</string>
+    <string name="settings_data_dir_item">%1$s (%2$s 免费)</string>
+    <string name="confirm_data_dir_move_title">是否移动 geocache 数据目录？</string>
+    <string name="confirm_data_dir_move">移动 geocache 数据可能需要很长时间, 具体取决于您的设备和数据量。</string>
+    <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索缓存。</string>
+    <string name="settings_ec_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
+    <string name="settings_su_description">授权 c: geo 与寻宝游戏搜索缓存。</string>
+    <string name="init_summary_oc_de">从 opencaching.de 加载缓存</string>
+    <string name="init_summary_oc_pl">从 opencaching.pl 加载缓存</string>
+    <string name="init_summary_oc_nl">从 opencaching.nl 加载缓存</string>
+    <string name="init_summary_oc_us">从 opencaching.us 加载缓存</string>
+    <string name="init_summary_oc_ro">从 opencaching 加载缓存</string>
+    <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
+    <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
+    <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
+    <string name="init_login_popup_failed_reason">登录失败。%s</string>
+    <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <!-- backup / restore -->
+    <string name="init_backup_no_backup_available">没有可用的资源。</string>
+    <string name="init_dataDir">Geocache 数据目录</string>
+    <string name="init_dataDir_note">您可以选择在外部存储上存储 geocaches (破坏者、日志图像、…) 的附加数据 (根据您的设备, 模拟或实际的外部 SD 卡)。</string>
+    <string name="init_include_found_status">包括 \"已找到\" 状态</string>
+    <string name="init_debug_note">c: geo 可以生成大量的调试信息。激活此设置将影响 c: geo 的稳定性, 只有在要求您向开发人员发送日志时才建议这样做。请保持调试日志禁用在正常使用 c: geo!</string>
+    <string name="init_dbonsdcard_note">您可以在内部或用户存储的目录中存储 c: 地理信息系统的数据库。将其放在用户存储上可能会释放一些内存, 但可能会丢失一些性能, c: 如果存储不可访问或您删除数据库文件, 则 geo 将无法正常工作。</string>
+    <string name="init_dbonsdcard">放在用户存储上</string>
+    <string name="init_datadirmove_datadirmove">是否移动 geocache 数据目录？</string>
+    <string name="init_datadirmove_running">是否移动 geocache 数据目录？</string>
     <!-- proximity notification -->
     <!-- map sources -->
     <!-- auth generic -->
+    <string name="auth_check">检查身份验证</string>
+    <string name="auth_check_again">检查身份验证</string>
+    <string name="auth_connected">已连接</string>
+    <string name="auth_unconnected">尚未连接</string>
     <!-- auth credentials -->
     <!-- auth token -->
     <!-- auth Twitter -->
@@ -26,6 +260,7 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_found_last_30_days">最近 30 天下载</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
     <!-- file list base -->
@@ -37,6 +272,7 @@
     <!-- waypoint -->
     <!-- visit -->
     <!-- map -->
+    <string name="map_routing_straight">直线</string>
     <!-- search -->
     <!-- trackable -->
     <!-- user -->
@@ -44,6 +280,10 @@
     <!-- license -->
     <!-- helpers -->
     <!-- export -->
+    <string name="export_modifiedcoords">更改后的坐标</string>
+    <string name="export_modifiedcoords_uploading">%1$d已上传</string>
+    <string name="export_modifiedcoords_success">上传成功</string>
+    <string name="export_modifiedcoords_error">上传失败</string>
     <!-- GC attributes -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -51,8 +291,16 @@
     <!-- text-to-speech for compass view -->
     <!-- various -->
     <!-- shortcuts -->
+    <string name="confirm_log_title">特殊日志类型</string>
+    <string name="confirm_report_problem_title">上报问题</string>
+    <string name="confirm_report_problem_message">您要报告 \'%s\'。确定吗？</string>
     <!-- Geokrety -->
+    <plurals name="command_copy_caches_result">
+        <item quantity="other">%d个宝已复制</item>
+    </plurals>
     <!-- calendar adder -->
+    <string name="event_fail">添加 uid 为“%1”的事件到日历失败</string>
+    <string name="init_low_disk_space">磁盘空间过低</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->

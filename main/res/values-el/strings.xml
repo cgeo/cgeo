@@ -143,6 +143,8 @@
     <string name="log_problem_other_text">Ο παίκτης ανέφερε ότι υπάρχει πρόβλημα με τη κρύπτη.</string>
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
+    <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
     <string name="translate_to_english">Μετάφραση στα Αγγλικά</string>
@@ -560,6 +562,7 @@
     <string name="init_brouterThreshold">Υπολογισμός διαδρομής</string>
     <string name="init_brouterThreshold_description">Η μέγιστη απόσταση που μια βοηθητική εφαρμογή brouter (αν είναι εγκατεστημένη) θα υπολογίσει σε μια διαδρομή.</string>
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
+    <string name="brouter_recalculating">Επανυπολογισμός διαδρομής στο παρασκήνιο…</string>
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
     <string name="init_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="init_summary_disabled">Εξαίρεση απενεργοποιημένων κρυπτών</string>
@@ -647,6 +650,7 @@
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
     <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
     <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
+    <string name="init_circlefillcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια των κύκλων</string>
     <string name="init_share_after_export">Ανοίξτε το μενού κοινής χρήσης μετά από εξαγωγή GPX</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
@@ -831,6 +835,11 @@
     <string name="cache_menu_allowWaypointExtraction">Δημιουργία waypoints από σημειώσεις</string>
     <string name="cache_personal_note_edit">Επεξεργασία</string>
     <string name="cache_personal_note_storewaypoints">Προσθήκη/Ενημέρωση Ενδιάμεσων σημείων</string>
+    <string name="cache_personal_note_removewaypoints">Αφαίρεση Ενδιάμεσων σημείων</string>
+    <string name="cache_personal_note_storewaypoints_success">Τα σημεία προστέθηκαν στην προσωπική σημείωση</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης:%1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Δεν βρέθηκαν αποθηκεύσιμα ενδιάμεσα σημεία</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Αποτροπή εξαγωγής των waypoints</string>
     <string name="cache_personal_note_limit">Όριο προσωπικής σημείωσης</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Μετά τους %d χαρακτήρες, το κείμενο θα περικοπεί από την Geocaching.com.</string>
@@ -907,6 +916,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
+    <string name="cache_menu_visit_offline">Γρήγορη καταγραφή εκτός σύνδεσης</string>
     <string name="cache_menu_spoilers">Βοηθητικές εικόνες</string>
     <string name="cache_menu_around">Κρύπτες τριγύρω</string>
     <string name="around">Γύρω από το %s</string>
@@ -993,6 +1003,7 @@
     <string name="internal_goto_targets_description">Αυτή η κρύπτη αποθηκεύει τα πρόσφατα σας \"Πήγαινε σε\" σημεία. Δημιουργείται αυτόματα μόλις χρησιμοποιήσετε την δυνατότητα \"Πήγαινε σε\" στο κύριο μενού. Οι συντεταγμένες που εισάγονται εδώ θα αποθηκευτούν στα waypoints της παρούσας κρύπτης. Εάν πλέον δςν χρειάζεστε αυτές τις συντεταγμένες, μπορείτε να διαγράψετε αυτή την κρύπτη ή οποιοδήποτε από τα waypoints της. Επίσης μπορείτε να μεταφέρετε αυτήν την κρύπτη σε οποιαδήποτε λίστα της επιλογής σας.</string>
     <string name="init_longtap_map">Πιέστε παρατεταμένα στον χάρτη</string>
     <string name="init_summary_longtap_map">Ενεργοποίηση παρατεταμένου πατήματος στο εικονίδιο του χάρτη (δημιουργία ανεξάρτητης διαδρομής) ή στην επιφάνεια του χάρτη (δημιουργία κρύπτης user-defined)</string>
+    <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
     <!-- coordinate calculator hints -->
@@ -1097,6 +1108,7 @@
     <string name="map_modes">Ρυθμίσεις χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_hide">Απόκρυψη</string>
+    <string name="map_trail_show">Προβολή ιστορικού ιχνών</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
     <string name="map_circles_show">Εμφάνιση κύκλων</string>
     <string name="map_mycaches_hide">Απόκρυψη των δικών μου κρυπτών και των ευρέσεών μου</string>
@@ -1105,6 +1117,7 @@
     <string name="map_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών</string>
     <string name="map_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης</string>
     <string name="map_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
+    <string name="map_hide_track">Απόκρυψη μεμονωμένων διαδρομών</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
@@ -1115,6 +1128,8 @@
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
+    <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
+    <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
     <string name="map_routing_straight">Ευθεία γραμμή</string>
@@ -1611,6 +1626,7 @@
     <string name="preference_colorpicker_select_color_scheme">Επιλογή συνδυασμού χρωμάτων</string>
     <string name="preference_colorpicker_select_color">Επιλέξτε χρώμα</string>
     <string name="preference_colorpicker_select_opaqueness">Επιλογή ποσοστού αδιαφάνειας</string>
+    <string name="reset_to_default">Προεπιλογή</string>
     <!-- number input -->
     <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
@@ -1621,17 +1637,27 @@
     <string name="notification_channel_description">Ειδοποιήσεις από την εφαρμογή για geocaching c:geo</string>
     <string name="proximity_notification_title">Ειδοποίηση εγγύτητας του c:geo</string>
     <!-- individual routes -->
+    <string name="individual_route">Μεμονωμένη διαδρομή</string>
     <string name="individual_route_added">Προσθήκη στη διαδρομή</string>
     <string name="individual_route_removed">Αφαίρεση από τη διαδρομή</string>
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
+    <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
+    <string name="map_export_individual_route">Εξαγωγή μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
     <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
+    <string name="save_sorted_route">Αποθήκευση</string>
+    <string name="sorted_route_saved">Έγινε αποθήκευση της μεμονωμένης διαδρομής</string>
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
+        <item quantity="other">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
+    </plurals>
+    <string name="center_on_route">Κέντρο στη διαδρομή</string>
     <!-- individual track -->
     <string name="individual_track">GPX διαδρομή</string>
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
@@ -1677,7 +1703,19 @@
     <string name="receivemapfile_kb_copied">%d kB αντιγράφησαν</string>
     <string name="receivemapfile_cancelled">Η μεταφορά του αρχείου χάρτη ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
+    <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n 
+Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί η λήψη, το ληφθέν αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης για το c: geo. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
+    <string name="downloadmap_choose">Επιλέξτε χάρτη</string>
+    <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου χάρτη, ο διαχειριστής λήψης συστήματος δεν είναι διαθέσιμος</string>
+    <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
     <string name="downloadmap_target_not_writable">Η θέση \"%s\" δεν είναι εγγράψιμη - παρακαλώ επιλέξτε μια διαφορετική θέση αποθήκευσης.</string>
     <!-- history trail export -->
+    <string name="trailhistory">Ιστορικό διαδρομών</string>
+    <string name="export_trailhistory_title">Εξαγωγή ιστορικού διαδρομών</string>
+    <string name="export_trailhistory_success">Εξήχθει το ιστορικό διαδρομών στο \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Εκκαθάριση ιστορικού διαδρομών μετά την εξαγωγή</string>
     <!-- individual route export -->
+    <string name="export_individualroute_title">Εξαγωγή μεμονωμένης διαδρομής</string>
+    <string name="export_individualroute_success">Εξαγωγή μεμονωμένης διαδρομής στο \"%s\"</string>
 </resources>

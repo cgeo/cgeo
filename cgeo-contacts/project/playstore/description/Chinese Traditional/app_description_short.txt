@@ -1,1 +1,1 @@
-This is a contacts plugin for c:geo
+這是c:geo的聯絡人插件
