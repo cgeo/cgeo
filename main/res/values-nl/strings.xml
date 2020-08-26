@@ -916,6 +916,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
     <string name="cache_menu_visit">Log bezoek</string>
+    <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
     <string name="cache_menu_around">Caches rondom</string>
     <string name="around">Rondom %s</string>
