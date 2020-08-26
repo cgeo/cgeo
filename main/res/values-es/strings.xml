@@ -748,7 +748,15 @@
     <string name="err_auth_geokrety_bad_password">Tu usuario/contraseña no es correcto.</string>
     <string name="err_auth_geokrety_unknown">%1$s ha devuelto: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">Un caché</item>
+        <item quantity="other">%1$d cachés</item>
+    </plurals>
     <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="one">queda %1$d día</item>
+        <item quantity="other">quedan %1$d días</item>
+    </plurals>
     <string name="last_day_available">último día disponible</string>
     <string name="cache_offline">Guardado</string>
     <string name="cache_offline_refresh">Actualizar</string>
@@ -843,6 +851,7 @@
     <string name="cache_menu_map_ext">Otras apps externas</string>
     <string name="cache_menu_browser">Abrir navegador</string>
     <string name="cache_menu_visit">Registrar visita</string>
+    <string name="cache_menu_visit_offline">Registro rápido sin conexión</string>
     <string name="cache_menu_spoilers">Revelaciones</string>
     <string name="cache_menu_around">Cachés cercanos</string>
     <string name="around">Cerca de %s</string>
@@ -999,6 +1008,8 @@
     <string name="map_live_enable">Activar en vivo</string>
     <string name="map_live_disable">Desactivar en vivo</string>
     <string name="map_as_list">Mostrar como lista</string>
+    <string name="map_clear_trailhistory">Borrar historial de ruta</string>
+    <string name="map_trailhistory_cleared">historial de ruta borrado</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <string name="map_routing">Enrutamiento</string>
     <string name="map_routing_straight">Línea recta</string>
@@ -1120,6 +1131,10 @@
 Nombre de archivo:%2$s</string>
     <string name="export_persnotes">Notas personales</string>
     <string name="export_persnotes_uploading">Subiendo nota personal %1$d</string>
+    <plurals name="export_persnotes_upload_success">
+        <item quantity="one">Se ha subido una nota correctamente</item>
+        <item quantity="other">Se han subido %1$d notas correctamente</item>
+    </plurals>
     <string name="export_modifiedcoords">Coordenadas modificadas</string>
     <string name="export_modifiedcoords_uploading">Subiendo %1$d</string>
     <string name="export_modifiedcoords_success">Subida exitosa</string>
