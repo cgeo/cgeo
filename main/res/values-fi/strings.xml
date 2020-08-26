@@ -568,6 +568,7 @@
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
+    <string name="init_global_wp_extraction_disable">Reittipisteen Poisto</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
@@ -914,6 +915,7 @@
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
+    <string name="cache_menu_visit_offline">Nopea offline-loki</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
     <string name="cache_menu_around">Kätköt lähistöllä</string>
     <string name="around">%s:n ympärillä</string>
