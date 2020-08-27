@@ -569,6 +569,7 @@
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
     <string name="init_global_wp_extraction_disable">Reittipisteen Poisto</string>
+    <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
@@ -1658,6 +1659,17 @@
     </plurals>
     <string name="center_on_route">Keskitä reittiin</string>
     <!-- individual track -->
+    <string name="individual_track">GPX jälki/reitti</string>
+    <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
+    <string name="map_load_track_wait">Ladataan jälkeä/reittiä taustalla…</string>
+    <string name="map_load_track_confirm">Korvataanko olemassa oleva jälki/reitti?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Jälki/reitti ladattu (%d reittipistettä)</item>
+        <item quantity="other">Jälki/reitti ladattu (%d reittipistettä)</item>
+    </plurals>
+    <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
+    <string name="map_unload_track">Poista jälki/reitti</string>
+    <string name="center_on_track">Keskitä jälkeen/reittiin</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
