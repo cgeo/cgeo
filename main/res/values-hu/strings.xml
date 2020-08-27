@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">c:geo</string>
     <!-- basics -->
     <string name="cache">Láda</string>
     <string name="detail">Adatok</string>
@@ -39,6 +40,7 @@
     <string name="cache_size_virtual">Virtuális</string>
     <string name="cache_size_notchosen">Nincs megadva</string>
     <string name="cache_size_unknown">Ismeretlen</string>
+    <string name="cache_size_nano">Nano</string>
     <string name="cache_size_very_large">Extra nagy</string>
     <!-- waypoints -->
     <string name="wp_final">Végső helyszín</string>
@@ -249,12 +251,14 @@
     <string name="confirm_discard_wp_changes">Elveted a nem mentett útpont változtatásokat?</string>
     <string name="err_request_popup_info">A láda előnézeti adatainak letöltése sikertelen.</string>
     <string name="warn_log_load_additional_data">A c:geo nem tudta betölteni a kiegészítő adatokat (utazók/kedvenc pontok) a logoláshoz.</string>
+    <string name="more_information">További információ</string>
     <!-- location service -->
     <string name="loc_last">Utolsó ismert</string>
     <string name="loc_net">Hálózat</string>
     <string name="loc_fused">Kombinált</string>
     <string name="loc_low_power">Takarékos üzemmód</string>
     <string name="loc_home">Otthon koordinátái</string>
+    <string name="loc_gps">GPS</string>
     <string name="loc_sat">Műhold</string>
     <string name="loc_trying">Keresés folyamatban</string>
     <string name="loc_no_addr">Ismeretlen cím</string>
@@ -351,6 +355,7 @@
     <string name="caches_filter_multi_listing">Különböző állapotú multik listázása</string>
     <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
     <string name="caches_filter_lists">Listához csatolva</string>
+    <string name="caches_filter_empty">(üres)</string>
     <string name="caches_removing_from_history">Törlés az Előzményekből…</string>
     <string name="caches_clear_offlinelogs">Offline logok törlése</string>
     <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
@@ -432,6 +437,7 @@
     <string name="settings_summary_map">Térképválasztás, offline térképek opcióinak beállítása</string>
     <string name="settings_title_map_data">Térképek beállításai</string>
     <string name="settings_title_map_content">Térképek részletessége</string>
+    <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Ládaadat mappa</string>
     <string name="settings_title_data_dir_usage">Ládaadat mappa (%1$s adat)</string>
     <string name="calculate_dataDir_title">Ládaadatok keresése</string>
