@@ -570,6 +570,8 @@
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_archived">Wyklucz zarchiwizowane</string>
     <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
+    <string name="init_global_wp_extraction_disable">Wyodrębnienie punktów nawigacji</string>
+    <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
@@ -930,6 +932,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
+    <string name="cache_menu_visit_offline">Szybki log offline</string>
     <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
     <string name="cache_menu_around">Skrzynki w pobliżu</string>
     <string name="around">W pobliżu %s</string>
@@ -1700,6 +1703,19 @@
     </plurals>
     <string name="center_on_route">Wyśrodkuj na trasie</string>
     <!-- individual track -->
+    <string name="individual_track">Ścieżka/trasa GPX</string>
+    <string name="map_load_track">Załaduj ścieżkę/trasę z GPX</string>
+    <string name="map_load_track_wait">Ładowanie ścieżki/trasy w tle…</string>
+    <string name="map_load_track_confirm">Zastąpić istniejącą ścieżkę/trasę?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Ścieżka/trasa załadowana (%d punkt trasy)</item>
+        <item quantity="few">Ścieżka/trasa załadowana (%d punktów trasy)</item>
+        <item quantity="many">Ścieżka/trasa załadowana (%d punktów trasy)</item>
+        <item quantity="other">Ścieżka/trasa załadowana (%d punktów trasy)</item>
+    </plurals>
+    <string name="load_track_error">Błąd ładowania ścieżki/trasy</string>
+    <string name="map_unload_track">Rozładuj ścieżkę/trasę</string>
+    <string name="center_on_track">Wyśrodkuj na ścieżce/trasie</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1730,6 +1746,8 @@
     <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
     <string name="receivemapfile_success">Pomyślnie odebrano plik mapy jako \"%s\" i zapisano go w katalogu mapy</string>
     <string name="receivemapfile_error">Błąd podczas odbierania pliku mapy</string>
+    <string name="receivemapfile_error_io_exception">Błąd I/O podczas odbierania pliku mapy. Czy katalog mapy \"%s\" jest zapisywalny?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku mapy.</string>
     <string name="receivemapfile_alreadyexists">Plik o tej nazwie już istnieje. Nadpisać istniejący plik lub zapisać nowy plik pod inną nazwą?</string>
     <string name="receivemapfile_option_overwrite">Nadpisz</string>
     <string name="receivemapfile_option_differentname">Inna nazwa</string>
@@ -1741,6 +1759,7 @@
     <string name="downloadmap_choose">Wybierz mapę</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
+    <string name="downloadmap_target_not_writable">Cel \"%s\" nie jest zapisywalny - wybierz inny katalog z mapą.</string>
     <!-- history trail export -->
     <string name="trailhistory">Historyczny tor</string>
     <string name="export_trailhistory_title">Pokaż historię ścieżki</string>
