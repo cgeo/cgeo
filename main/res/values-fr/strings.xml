@@ -143,6 +143,8 @@
     <string name="log_problem_other_text">Ce géocacheur a signalé qu’il y a un problème avec cette cache.</string>
     <string name="log_problem_archive_label">La cache devrait être archivée</string>
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
+    <string name="log_image_scale_option_noscaling">Pas de mise à l\'échelle</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduire en %s</string>
     <string name="translate_to_english">Traduire en anglais</string>
@@ -174,6 +176,7 @@
     <string name="err_detail_cache_find_any">c:geo ne trouve aucune cache.</string>
     <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
     <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
+    <string name="err_detail_premium_log_found">Cette géocache est uniquement disponible pour les membres premium de geocaching.com. Les informations de la géocache ne peuvent donc pas être affichées.\n\nCependant, si vous avez déjà trouvé cette géocache, vous pouvez enregistrer votre visite ici.</string>
     <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
     <string name="err_watchlist_failed">Échec lors de la modification de votre liste de suivi.</string>
     <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
@@ -194,8 +197,8 @@
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
     <string name="err_tb_find">c:geo ne peut pas trouver d\'objet voyageur.</string>
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
-    <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quel cache vous souhaitez ajouter une étape.</string>
-    <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à afficher l\'étape.</string>
+    <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quel cache vous souhaitez ajouter un point de passage.</string>
+    <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à ajouter votre point de passage.</string>
     <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
     <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
     <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
@@ -248,7 +251,7 @@
     <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
     <string name="info_stored_image">Nouvelle image sauvée dans :</string>
     <string name="info_cache_saved">La cache a été enregistrée en local</string>
-    <string name="warn_calculator_state_save">Veillez à enregistrer l\'étape si vous souhaitez conserver l\'état du calculateur.</string>
+    <string name="warn_calculator_state_save">Veillez à enregistrer points de passage si vous souhaitez conserver l\'état du calculateur.</string>
     <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
     <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
     <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
@@ -416,6 +419,9 @@
     <string name="about_system_info">Informations système de c:geo</string>
     <string name="about_system_info_send_chooser">Envoyer les informations système</string>
     <string name="about_system_write_logcat">Générer le fichier de journal</string>
+    <string name="about_system_write_logcat_type">Créer un fichier journal standard ou étendu ?\n\nLes fichiers journaux standard seront appropriés pour la plupart des cas d\'utilisation.\nUtiliser les fichiers journaux étendus uniquement lorsque cela est demandé.</string>
+    <string name="about_system_write_logcat_type_standard">Par défaut</string>
+    <string name="about_system_write_logcat_type_extended">Étendu</string>
     <string name="about_system_write_logcat_success">Fichier journal écrit dans le répertoire \"%1$s\" dans \"%2$s\"</string>
     <string name="about_system_write_logcat_empty">Le fichier du journal est vide</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
@@ -449,6 +455,7 @@
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
+    <string name="settings_title_waypoints">Points de passage</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
     <string name="settings_title_gpx">GPX</string>
@@ -548,18 +555,21 @@
     <string name="init_summary_useenglish">Utiliser la langue anglaise dans c:geo (nécessite le redémarrage de c:geo)</string>
     <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
-    <string name="init_showwaypoints">Points intermédiaires</string>
-    <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte.</string>
-    <string name="init_zoomincludingwaypoints">Le zoom inclut les waypoints</string>
-    <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : doit-elle être ajustée pour inclure tous ses waypoints ?</string>
+    <string name="init_showwaypoints">Afficher les points de passage</string>
+    <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points points de passage sont affichés en plus sur la carte.</string>
+    <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
+    <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : doit-elle être ajustée pour inclure tous ses points de passage?</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
     <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle l\'application tierce brouter (si installée) calculera un itinéraire.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
+    <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_archived">Exclure les éléments archivés</string>
     <string name="init_summary_archived">Exclure les caches archivées</string>
+    <string name="init_global_wp_extraction_disable">Extraction des points de passage</string>
+    <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_save_log_img">Enregistrer les images</string>
     <string name="init_summary_save_log_img">Enregistrer les images des visites</string>
     <string name="init_units">Unités impériales</string>
@@ -619,6 +629,7 @@
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
     <string name="init_maptrail">Afficher l\'historique du parcours</string>
     <string name="init_maptrail_length">Longueur max. de la trace de l\'historique</string>
+    <string name="init_maptrail_length_summary">Définir la longueur maximale de l\'historique (obligatoire à chaque démarrage de c:geo). La valeur par défaut est de 700 - à ajuster en fonction de la mémoire disponible.</string>
     <string name="init_summary_maptrail">Lorsqu\'il est activé (et que le GPS est activé), c:geo enregistre l\'historique de vos mouvements en tant que piste et l\'affiche sur la carte.</string>
     <string name="init_trailcolor">Couleur de la ligne de suivi du parcours</string>
     <string name="init_trailcolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de suivi du parcours</string>
@@ -629,12 +640,15 @@
     <string name="init_directionwidth">Largeur du trait de direction</string>
     <string name="init_directionwidth_summary">Sélectionner la largeur de la ligne de suivi du parcours</string>
     <string name="init_routecolor">Couleur de la ligne de route individuelle</string>
-    <string name="init_routecolor_summary">Sélectionnez la couleur et l\'opacité des itinéraires individuels. Un itinéraire individuel est une collection de waypoints et/ou de caches que vous avez sélectionnés en appuyant longuement sur le waypoint/cache. (Vous devez d\'abord activer la fonction d\'appui long, voir les paramètres de la carte.)</string>
+    <string name="init_routecolor_summary">Sélectionnez la couleur et l\'opacité des itinéraires individuels. Un itinéraire individuel est une collection de points de passage et/ou de caches que vous avez sélectionnés en appuyant longuement sur le point de passage/cache. (Vous devez d\'abord activer la fonction d\'appui long, voir les paramètres de la carte.)</string>
     <string name="init_routewidth">Largeur de la ligne d\'itinéraire individuelle</string>
     <string name="init_routewidth_summary">Sélectionnez la largeur pour les itinéraires individuels</string>
     <string name="init_trackcolor">Couleur de la route individuelle</string>
-    <string name="init_trackcolor_summary">Choisir la couleur et l\'opacité de la route. Une route est composée de plusieurs points de cheminement et peut être chargée depuis un fichier de trace GPX.</string>
+    <string name="init_trackcolor_summary">Choisir la couleur et l\'opacité de la route. Une route est composée de plusieurs points de passage et peut être chargée depuis un fichier de trace GPX.</string>
+    <string name="init_trackwidth">Largeur de la ligne d\'itinéraire individuelle</string>
+    <string name="init_trackwidth_summary">Sélectionnez la largeur de ligne de l\'itinéraire individuel</string>
     <string name="init_circlecolor">Couleur du trait de cercle</string>
+    <string name="init_circlecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de cercle. Les cercles sont utilisés comme représentation visuelle pour le rayon minimum autour d\'une cache ou d\'un point de passage physique, où aucune autre cache ou point de passage physique n\'est autorisée. (S\'applique à geocaching.com)</string>
     <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
     <string name="init_circlefillcolor_summary">Sélectionnez la couleur et l\'opacité de l\'intérieur des cercles</string>
     <string name="init_share_after_export">Ouvrir le menu de partage après les exports GPX</string>
@@ -642,6 +656,8 @@
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
     <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
+    <string name="init_offlinelogs_homescreen">Afficher les logs hors ligne</string>
+    <string name="init_summary_offlinelogs_homescreen">Un compteur de visites hors ligne (p. ex. \"+ 1\") sera affiché à côté de votre compteur en ligne sur l\'écran d\'accueil, si vous avez des visites qui n\'ont pas encore été chargées.</string>
     <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_summary_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_default_navigation_tool">Navigation par défaut</string>
@@ -649,7 +665,7 @@
     <string name="init_default_navigation_tool_description">Vous pouvez choisir ici l\'outil de navigation à utiliser par défaut.</string>
     <string name="init_default_navigation_tool_select">Sélectionner l\'outil</string>
     <string name="init_default_navigation_tool_2_description">Vous pouvez choisir ici votre deuxième outil de navigation préféré. Il sera activé par un appui long sur l\'icône de navigation situé près du nom de la cache.</string>
-    <string name="init_navigation_menu_description">Vous pouvez choisir ici les méthodes de navigation qui seront actives dans le menu de navigation d\'une géocache ou d\'un point intermédiaire. Les outils non sélectionnables ne sont pas installés sur cet appareil.</string>
+    <string name="init_navigation_menu_description">Vous pouvez choisir ici les méthodes de navigation qui seront actives dans le menu de navigation d\'une géocache ou d\'un point de passage. Les outils non sélectionnables ne sont pas installés sur cet appareil.</string>
     <string name="init_debug_title">Déverminage</string>
     <string name="init_debug_note">c:geo peut générer un grand nombre d’informations de débogage. L\'activation de ce paramètre affectera la stabilité de c:geo et n’est recommandé que si vous êtes invité à envoyer un journal aux développeurs. Veuillez garder la journalisation du débogage désactivée lors de l’utilisation normale de c:geo !</string>
     <string name="init_debug">Activer le débogage</string>
@@ -718,9 +734,9 @@
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notification de proximité</string>
     <string name="init_proximityNotificationGeneral">Notification générale de proximité sur la carte</string>
-    <string name="init_summary_proximityNotificationGeneral">Jouez une seule notification si une cache ou un waypoint actuellement visible sur la carte est plus proche de la distance proche ou de distance éloignée. Différentes tonalités sont utilisées pour les deux distances.</string>
+    <string name="init_summary_proximityNotificationGeneral">Jouez une seule notification si une cache ou un point de passage actuellement visible sur la carte est plus proche de la distance proche ou de distance éloignée. Différentes tonalités sont utilisées pour les deux distances.</string>
     <string name="init_proximityNotificationSpecific">Notification de proximité de point de passage spécifique</string>
-    <string name="init_summary_proximityNotificationSpecific">Joue à plusieurs reprises un son si la cache ou l\'étape actuellement sélectionnée est à une distance inférieure aux distances \"éloignée\" ou \"proche\". Fonctionne si les détails des caches ou des points de passage sont ouverts, les popups de caches et points de passage sont affichés sur la carte ou si la boussole est activée. Des sons différents sont utilisés pour les deux distances.</string>
+    <string name="init_summary_proximityNotificationSpecific">Joue à plusieurs reprises un son si la cache ou le point de passage actuellement sélectionné est à une distance inférieure aux distances \"éloignée\" ou \"proche\". Fonctionne si les détails des caches ou des points de passage sont ouverts, les popups de caches et points de passage sont affichés sur la carte ou si la boussole est activée. Des sons différents sont utilisés pour les deux distances.</string>
     <string name="far_distance">Distance éloignée</string>
     <string name="near_distance">Distance proche</string>
     <string name="init_proximity_notification_type">Type de notification</string>
@@ -815,10 +831,16 @@
     <string name="cache_log_images_title">Image de la visite</string>
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Note personnelle</string>
-    <string name="cache_menu_preventWaypointsFromNote">Empêcher les waypoints depuis la note</string>
-    <string name="cache_menu_allowWaypointExtraction">Autoriser les waypoints depuis la note</string>
+    <string name="cache_menu_preventWaypointsFromNote">Empêcher les points de passage depuis la note</string>
+    <string name="cache_menu_allowWaypointExtraction">Autoriser les points de passage depuis la note</string>
     <string name="cache_personal_note_edit">Modifier</string>
-    <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des waypoints</string>
+    <string name="cache_personal_note_storewaypoints">Ajouter/Mettre à jour les points de passage</string>
+    <string name="cache_personal_note_removewaypoints">Supprimer les points de passage</string>
+    <string name="cache_personal_note_storewaypoints_success">Les points de passage ont été ajoutés à la note personnelle</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Les points de passage ont été ajoutés à la note mais ont été raccourcis (taille maximale de la note personnelle : %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Les points de passage n\'ont pas pu être stockés dans la note en raison de la limite de taille (taille maximale de la note personnelle : %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Aucun point de passage enregistrable trouvé</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des points de passage</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">La note personnelle sera tronquée au delà de %d caractères par Geocaching.com.</string>
     <string name="cache_personal_note_upload">Envoyer</string>
@@ -841,12 +863,12 @@
     <string name="cache_favpoint_not_on">Cette cache n\'est pas dans vos favoris.</string>
     <string name="cache_list_select_last">Dernière sélection</string>
     <string name="cache_images">Images</string>
-    <string name="cache_waypoints">Étapes</string>
+    <string name="cache_waypoints">Points de passage</string>
     <plurals name="waypoints">
         <item quantity="one">%d points de passage</item>
         <item quantity="other">%d points de passage</item>
     </plurals>
-    <string name="cache_waypoints_add">Ajouter une étape</string>
+    <string name="cache_waypoints_add">Ajouter un point de passage</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
     <string name="cache_waypoints_add_fromclipboard">Ajouter depuis le presse-papiers</string>
     <string name="cache_waypoints_remove_original_waypoint">Point de passage copié, depuis le presse-papiers, dans la cache.\n\nSouhaitez-vous supprimer le point de passage d\'origine ?</string>
@@ -859,7 +881,7 @@
     <string name="cache_dialog_loading_details_status_details">Analyse</string>
     <string name="cache_dialog_loading_details_status_spoilers">Images indices</string>
     <string name="cache_dialog_loading_details_status_logs">Chargement des visites</string>
-    <string name="cache_dialog_loading_details_status_waypoints">Points intermédiaires</string>
+    <string name="cache_dialog_loading_details_status_waypoints">Traitement des points de passage</string>
     <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
     <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
     <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
@@ -894,6 +916,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
+    <string name="cache_menu_visit_offline">Visite rapide hors-ligne</string>
     <string name="cache_menu_spoilers">Images indices</string>
     <string name="cache_menu_around">Alentours</string>
     <string name="around">Autour de %s</string>
@@ -965,7 +988,7 @@
     <string name="cache_image">Image</string>
     <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
     <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
-    <string name="cache_image_add_waypoint">Ajouter une étape</string>
+    <string name="cache_image_add_waypoint">Ajouter un point de passage</string>
     <string name="cache_image_background">Image d\'arrière-plan pour la liste des caches</string>
     <string name="cache_share_field">Partager</string>
     <string name="cache_time_full_hours">heures</string>
@@ -977,9 +1000,10 @@
     <string name="internal_cache_default_description">Ceci est une cache personnelle</string>
     <string name="internal_cache_default_owner">Vous</string>
     <string name="internal_goto_targets_title">Cibles \'Aller à\'</string>
-    <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points intermédiaires de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points intermédiaires. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
+    <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points de passage de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points de passage. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
     <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache personnelle à l\'utilisateur)</string>
+    <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hors-mis les cinq plus récents</string>
     <!-- coordinate calculator hints -->
@@ -1001,7 +1025,7 @@
     <string name="simple_file_chooser_title">Sélectionnez un fichier</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
-    <string name="gpx_import_loading_waypoints_with_filename">Chargement des points intermédiaires depuis %1$s</string>
+    <string name="gpx_import_loading_waypoints_with_filename">Chargement des points de passages depuis %1$s</string>
     <plurals name="gpx_import_caches_imported_with_filename">
         <item quantity="one">%1$d cache importée de %2$s</item>
         <item quantity="other">%1$d caches importées de %2$s</item>
@@ -1022,6 +1046,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Choisir un fichier carte</string>
     <string name="track_file_select_title">Sélectionnez un fichier de trace</string>
+    <string name="individual_route_file_select_title">Sélectionner un fichier d\'itinéraire individuel</string>
     <!-- import -->
     <string name="web_import_title">Importer à partir de send2cgeo</string>
     <string name="web_import_waiting">En attente de nouvelles caches envoyées par send2cgeo…</string>
@@ -1043,7 +1068,7 @@
     <string name="waypoint_copy_coordinates">Copier les coordonnées</string>
     <string name="waypoint_clear_coordinates">Effacer les coordonnées</string>
     <string name="waypoint_delete">Supprimer</string>
-    <string name="waypoint_edit_title">Modifier l\'étape</string>
+    <string name="waypoint_edit_title">Modifier le point de passage</string>
     <string name="waypoint_add_title">Ajouter une étape</string>
     <string name="waypoint_added">Point de passage ajouté</string>
     <string name="waypoint_note">Note</string>
@@ -1484,6 +1509,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous semblez utiliser une ancienne version d\'Android. Cette version de c:geo n\'est plus compatible avec votre appareil et pourrait ne pas fonctionner ou se comporter de façon inattendue !\nAppuyez sur ce message pour plus d\'informations.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Vous utilisez une version de c:geo qui semble avoir plus d\'un an. Certaines fonctionnalités peuvent ne plus fonctionner en raison de modifications du site Web geocaching.com ou d\'autres modifications techniques. Veuillez lire notre FAQ pour savoir comment réaliser la mise à jour.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Il semble que vous utilisez Android 11, que c:geo ne supporte pas encore complètement. Veuillez lire notre FAQ pour obtenir plus d\'informations.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
     <string name="tts_toggle">Basculer la synthèse vocale</string>
@@ -1600,6 +1626,7 @@
     <string name="preference_colorpicker_select_color_scheme">Sélectionner le thème des couleurs</string>
     <string name="preference_colorpicker_select_color">Sélectionner la couleur</string>
     <string name="preference_colorpicker_select_opaqueness">Sélectionner l\'opacité</string>
+    <string name="reset_to_default">Par défaut</string>
     <!-- number input -->
     <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
@@ -1610,14 +1637,39 @@
     <string name="notification_channel_description">notifications de l\'application c:geo geocaching</string>
     <string name="proximity_notification_title">notification de proximité c:geo</string>
     <!-- individual routes -->
+    <string name="individual_route">Itinéraire individuel</string>
     <string name="individual_route_added">Ajouté à la route</string>
     <string name="individual_route_removed">Supprimé de la route</string>
     <string name="individual_route_error_toggling_waypoint">erreur du basculement du point d\'arrêt</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
+    <string name="map_sort_individual_route">Trier les itinéraires individuels</string>
+    <string name="map_export_individual_route">Exporter un itinéraire individuel</string>
+    <string name="map_load_individual_route">Charger un itinéraire individuel</string>
+    <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
+    <string name="map_clear_individual_route_confirm">Voulez-vous supprimer tous les caches/points de passage de votre itinéraire individuel?</string>
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <string name="save_sorted_route">Enregistrer</string>
+    <string name="sorted_route_saved">Itinéraire individuel sauvegardé</string>
+    <string name="load_individual_route_error">Erreur lors du chargement de l\'itinéraire individuel</string>
+    <string name="route_item_not_yet_loaded">Élément de l\'itinéraire pas encore chargé</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Itinéraire chargé avec %d points de passage</item>
+        <item quantity="other">Itinéraire chargé avec %d points de passage</item>
+    </plurals>
+    <string name="center_on_route">Centrer sur l\'itinéraire</string>
     <!-- individual track -->
+    <string name="individual_track">Trace/itinéraire GPX</string>
+    <string name="map_load_track">Charger trace/itinéraire GPX</string>
+    <string name="map_load_track_wait">Chargement de la trace/itinéraire GPX en tâche de fond …</string>
+    <string name="map_load_track_confirm">Remplacer l\'itinéraire/trace GPX existante ?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Trace/itinéraire chargé (%d trackpoint)</item>
+        <item quantity="other">Trace/itinéraire chargé (%d points de cheminement)</item>
+    </plurals>
+    <string name="load_track_error">Erreur lors du changement de la trace/itinéraire</string>
+    <string name="map_unload_track">Décharger la trace/itinéraire</string>
+    <string name="center_on_track">Centrer sur la trace/itinéraire</string>
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
@@ -1627,6 +1679,7 @@
     <string name="switch_on">Actif</string>
     <string name="switch_manual">Manuel</string>
     <string name="switch_auto">Automatique</string>
+    <string name="switch_default">(par défaut)</string>
     <!-- view settings -->
     <string name="view_settings">Afficher les paramètres</string>
     <string name="delete_setting">Supprimer le paramètre</string>
@@ -1645,12 +1698,26 @@
     <string name="receivemapfile_intenttitle">Carte en cours de réception</string>
     <string name="receivemapfile_success">Fichier carte «%s» reçu avec succès et enregistré dans le dossier des cartes</string>
     <string name="receivemapfile_error">Erreur lors de la réception du fichier carte</string>
+    <string name="receivemapfile_error_io_exception">Erreur d\'E/S lors de la réception du fichier de carte. Le répertoire de votre carte \"%s\" est-il accessible en écriture ?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Fichier introuvable lors de la réception du fichier de carte.</string>
     <string name="receivemapfile_alreadyexists">Un fichier portant ce nom existe déjà. Écraser le fichier existant ou enregistrer le nouveau fichier sous un autre nom ?</string>
     <string name="receivemapfile_option_overwrite">Écraser</string>
     <string name="receivemapfile_option_differentname">Nouveau nom</string>
     <string name="receivemapfile_kb_copied">%d Ko copiés</string>
     <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
+    <string name="downloadmap_info">Vous allez être redirigé vers un site de téléchargement de cartes hors ligne simples (sans support de thème).\n\nChoisissez le fichier .map de votre région puis appuyez pour le télécharger.\n\nUne fois le téléchargement terminé, appuyez sur le fichier téléchargé pour l\'utiliser comme carte courante de c:geo</string>
+    <string name="downloadmap_choose">Sélectionner la carte</string>
+    <string name="downloadmanager_not_available">Impossible de télécharger la carte, le gestionnaire système de téléchargement est indisponible</string>
+    <string name="download_started">Téléchargement démarré en arrière plan</string>
+    <string name="downloadmap_target_not_writable">Le dossier «%s» n\'est pas autorisé en écriture - veuillez sélectionner un dossier différent pour les cartes.</string>
     <!-- history trail export -->
+    <string name="trailhistory">Suivi de l\'historique</string>
+    <string name="export_trailhistory_title">Exporter l\'historique</string>
+    <string name="export_trailhistory_success">Historique exporté vers \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Effacer l\'historique après exportation</string>
     <!-- individual route export -->
+    <string name="export_individualroute_title">Exporter un itinéraire individuel</string>
+    <string name="export_individualroute_success">Itinéraire individuel exporté vers \"%s\"</string>
 </resources>
