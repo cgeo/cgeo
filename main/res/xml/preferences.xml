@@ -536,6 +536,12 @@
             android:key="@string/pref_excludearchived"
             android:summary="@string/init_summary_archived"
             android:title="@string/init_archived" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_global_wp_extraction_disable"
+            android:title="@string/init_global_wp_extraction_disable"
+            android:summary="@string/init_summary_global_wp_extraction_disable" />
+
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -827,6 +833,11 @@
                 android:key="@string/pref_log_offline"
                 android:summary="@string/init_summary_log_offline"
                 android:title="@string/init_log_offline" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_offlinelogs_homescreen"
+                android:summary="@string/init_summary_offlinelogs_homescreen"
+                android:title="@string/init_offlinelogs_homescreen" />
         </PreferenceCategory>
     </PreferenceScreen>
 

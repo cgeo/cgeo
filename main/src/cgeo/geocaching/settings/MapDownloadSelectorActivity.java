@@ -183,9 +183,15 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
-        final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.mapdownloader_list, true, true);
-        view.setAdapter(adapter);
-        new MapListTask(this, MAP_BASE, "").execute();
+        MapDownloadUtils.checkMapDirectory(this, (path, isWritable) -> {
+            if (isWritable) {
+                final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.mapdownloader_list, true, true);
+                view.setAdapter(adapter);
+                new MapListTask(this, MAP_BASE, "").execute();
+            } else {
+                finish();
+            }
+        });
     }
 
     public List<OfflineMap> getQueries() {

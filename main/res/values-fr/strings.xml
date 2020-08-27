@@ -143,13 +143,6 @@
     <string name="log_problem_other_text">Ce géocacheur a signalé qu’il y a un problème avec cette cache.</string>
     <string name="log_problem_archive_label">La cache devrait être archivée</string>
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
-    <string-array name="log_image_scales">
-        <item>Taille originale</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduire en %s</string>
     <string name="translate_to_english">Traduire en anglais</string>
@@ -456,7 +449,6 @@
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
-    <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
     <string name="settings_title_gpx">GPX</string>
@@ -625,9 +617,26 @@
     <string name="init_gpx_importdir">Dossier d\'import GPX</string>
     <string name="init_dataDir">Sélectionnez le dossier de stockage des Geocaches</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
-    <string name="init_maptrail">Afficher la trace</string>
-    <string name="init_summary_maptrail">Afficher la trace sur la carte</string>
-    <string name="init_trailcolor">Couleur de la trace</string>
+    <string name="init_maptrail">Afficher l\'historique du parcours</string>
+    <string name="init_maptrail_length">Longueur max. de la trace de l\'historique</string>
+    <string name="init_summary_maptrail">Lorsqu\'il est activé (et que le GPS est activé), c:geo enregistre l\'historique de vos mouvements en tant que piste et l\'affiche sur la carte.</string>
+    <string name="init_trailcolor">Couleur de la ligne de suivi du parcours</string>
+    <string name="init_trailcolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de suivi du parcours</string>
+    <string name="init_trailwidth">Couleur de la ligne de suivi du parcours</string>
+    <string name="init_trailwidth_summary">Sélectionner la largeur de la ligne de suivi du parcours</string>
+    <string name="init_directioncolor">Couleur du trait de direction</string>
+    <string name="init_directioncolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de direction. La ligne de direction montre une ligne droite vers la cible de navigation sélectionnée, ou le chemin de navigation routé spécifique, dans le cas où le routage est activé en installant l\'application BRouter.</string>
+    <string name="init_directionwidth">Largeur du trait de direction</string>
+    <string name="init_directionwidth_summary">Sélectionner la largeur de la ligne de suivi du parcours</string>
+    <string name="init_routecolor">Couleur de la ligne de route individuelle</string>
+    <string name="init_routecolor_summary">Sélectionnez la couleur et l\'opacité des itinéraires individuels. Un itinéraire individuel est une collection de waypoints et/ou de caches que vous avez sélectionnés en appuyant longuement sur le waypoint/cache. (Vous devez d\'abord activer la fonction d\'appui long, voir les paramètres de la carte.)</string>
+    <string name="init_routewidth">Largeur de la ligne d\'itinéraire individuelle</string>
+    <string name="init_routewidth_summary">Sélectionnez la largeur pour les itinéraires individuels</string>
+    <string name="init_trackcolor">Couleur de la route individuelle</string>
+    <string name="init_trackcolor_summary">Choisir la couleur et l\'opacité de la route. Une route est composée de plusieurs points de cheminement et peut être chargée depuis un fichier de trace GPX.</string>
+    <string name="init_circlecolor">Couleur du trait de cercle</string>
+    <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
+    <string name="init_circlefillcolor_summary">Sélectionnez la couleur et l\'opacité de l\'intérieur des cercles</string>
     <string name="init_share_after_export">Ouvrir le menu de partage après les exports GPX</string>
     <string name="init_include_found_status">Inclure le statut \"Trouvé\"</string>
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
@@ -702,6 +711,7 @@
     <string name="feature_search_finder">Rechercher par Découvreur</string>
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
+    <string name="init_maplines_title">Personnalisation des traits de la carte</string>
     <string name="init_mapsforge_api_title">API Mapsforge</string>
     <string name="init_mfold_api">Ancienne version Mapsforge V3</string>
     <string name="init_mfold_api_description">Par défaut nous utilisons une nouvelle version des cartes Mapsforge. Si certaines fonctionnalités vous manquent ou si vous rencontrez des problèmes, vous pouvez revenir à l\'ancienne version ici.</string>
@@ -810,7 +820,7 @@
     <string name="cache_personal_note_edit">Modifier</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des waypoints</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
-    <string name="cache_personal_note_truncation">La note personnelle sera tronquée au delà de %d caractères par Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">La note personnelle sera tronquée au delà de %d caractères par Geocaching.com.</string>
     <string name="cache_personal_note_upload">Envoyer</string>
     <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
@@ -833,8 +843,8 @@
     <string name="cache_images">Images</string>
     <string name="cache_waypoints">Étapes</string>
     <plurals name="waypoints">
-        <item quantity="one">%d étape</item>
-        <item quantity="other">%d étapes</item>
+        <item quantity="one">%d points de passage</item>
+        <item quantity="other">%d points de passage</item>
     </plurals>
     <string name="cache_waypoints_add">Ajouter une étape</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
@@ -884,7 +894,6 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
-    <string name="cache_menu_visit_offline">Visite hors-ligne en un clic</string>
     <string name="cache_menu_spoilers">Images indices</string>
     <string name="cache_menu_around">Alentours</string>
     <string name="around">Autour de %s</string>
@@ -913,6 +922,7 @@
     <string name="cache_found_last_30_days">Trouvé dans les 30 derniers jours</string>
     <string name="cache_status_archived">Archivée</string>
     <string name="cache_status_disabled">Désactivée</string>
+    <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Membres Premium seulement</string>
     <string name="cache_status_not_premium">Pour tous les membres</string>
     <string name="cache_status_stored">Enregistrée</string>
@@ -970,7 +980,6 @@
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points intermédiaires de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points intermédiaires. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
     <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache personnelle à l\'utilisateur)</string>
-    <string name="goto_targets_list">Caches internes</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hors-mis les cinq plus récents</string>
     <!-- coordinate calculator hints -->
@@ -993,6 +1002,10 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Chargement des caches depuis %1$s</string>
     <string name="gpx_import_loading_waypoints_with_filename">Chargement des points intermédiaires depuis %1$s</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%1$d cache importée de %2$s</item>
+        <item quantity="other">%1$d caches importées de %2$s</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Chargement des cartes statiques interrompu</string>
     <string name="gpx_import_title_reading_file">Lecture du fichier</string>
     <string name="gpx_import_title">Import GPX</string>
@@ -1070,7 +1083,7 @@
     <string name="map_modes">Paramètres carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_hide">Masquer</string>
-    <string name="map_trail_show">Afficher le parcours</string>
+    <string name="map_trail_show">Afficher l\'historique du parcours</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_circles_show">Afficher les cercles</string>
     <string name="map_mycaches_hide">Masquer caches placées/trouvées</string>
@@ -1079,21 +1092,19 @@
     <string name="map_hidewp_original">Masquer les waypoints d\'origine</string>
     <string name="map_hidewp_parking">Masquer les waypoints de stationnement</string>
     <string name="map_hidewp_visited">Masquer les waypoints visités</string>
-    <string name="map_hide_track">Masquer le parcours</string>
-    <string name="map_load_track">Charger le parcours</string>
+    <string name="map_hide_track">Cacher le parcours individuel</string>
     <string name="init_hidewp">Masquer tous les waypoints</string>
     <string name="init_summary_hidewp_original">Masquer les waypoints d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les waypoints de stationnement sur la carte</string>
     <string name="init_summary_hidewp_visited">Masquer les waypoints visités sur la carte</string>
-    <string name="map_theme_builtin">Défault</string>
     <string name="map_theme_select">Sélectionner le thème</string>
     <string name="map_theme_options">Options de thème</string>
     <string name="map_language">Langue de la carte</string>
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
-    <string name="map_clear_trailhistory">Effacer l\'historique des traces</string>
-    <string name="map_trailhistory_cleared">historique des traces effacé</string>
+    <string name="map_clear_trailhistory">Effacer l\'historique des parcours</string>
+    <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
     <string name="map_routing_straight">À vol d\'oiseau</string>
@@ -1227,7 +1238,7 @@
     <string name="export_modifiedcoords">Coordonnées modifiées</string>
     <string name="export_modifiedcoords_uploading">Envoi de %1$d</string>
     <string name="export_modifiedcoords_success">Envoi réussi</string>
-    <string name="export_modifiedcoords_result">Envoi terminé : %1$d échec / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Envoi terminé : %1$d échec / %2$d ok</string>
     <string name="export_modifiedcoords_error">Échec de l\'envoi</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Chiens autorisés</string>
@@ -1472,6 +1483,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte temps-réel.\nNous sommes en train de corriger. Revenez plus tard.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous semblez utiliser une ancienne version d\'Android. Cette version de c:geo n\'est plus compatible avec votre appareil et pourrait ne pas fonctionner ou se comporter de façon inattendue !\nAppuyez sur ce message pour plus d\'informations.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Vous utilisez une version de c:geo qui semble avoir plus d\'un an. Certaines fonctionnalités peuvent ne plus fonctionner en raison de modifications du site Web geocaching.com ou d\'autres modifications techniques. Veuillez lire notre FAQ pour savoir comment réaliser la mise à jour.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
     <string name="tts_toggle">Basculer la synthèse vocale</string>
@@ -1585,6 +1597,9 @@
     <string name="color_red">Rouge</string>
     <string name="color_turquoise">Turquoise</string>
     <string name="color_black">Noir</string>
+    <string name="preference_colorpicker_select_color_scheme">Sélectionner le thème des couleurs</string>
+    <string name="preference_colorpicker_select_color">Sélectionner la couleur</string>
+    <string name="preference_colorpicker_select_opaqueness">Sélectionner l\'opacité</string>
     <!-- number input -->
     <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
@@ -1601,12 +1616,15 @@
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
+    <string name="save_sorted_route">Enregistrer</string>
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">miles</string>
     <!-- switch settings -->
     <string name="switch_off">Désactivé</string>
+    <string name="switch_on">Actif</string>
     <string name="switch_manual">Manuel</string>
     <string name="switch_auto">Automatique</string>
     <!-- view settings -->
@@ -1617,7 +1635,7 @@
     <string name="edit_setting_error_unknown_type">Type de paramètre inconnu - édition non prise en charge</string>
     <string name="edit_setting_error_invalid_data">Saisie \"%s\" invalide. La valeur du paramètre reste inchangée.</string>
     <string name="activate_editmode_title">Activer le mode édition</string>
-    <string name="activate_editmode_warning">Vous entrez dans une zone dangereuse !\n\nModifier les paramètres directement peut perturber c:geo, comme par exemple empêcher le démarrage de l\'application ou faire exploser votre mobile !\n\nÊtes-vous certain de vouloir poursuivre (à vos risques et périls) ?</string>
+    <string name="activate_editmode_warning">Vous entrez dans une zone dangereuse !\n\nModifier les paramètres directement peut perturber c:geo et par exemple empêcher le démarrage de l\'application. Soyez prudents !\n\nÊtes-vous certain de vouloir continuer (à vos risques et périls) ?</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
     <string name="localfile_title">Ouvrir un fichier local</string>
@@ -1632,7 +1650,7 @@
     <string name="receivemapfile_option_differentname">Nouveau nom</string>
     <string name="receivemapfile_kb_copied">%d Ko copiés</string>
     <string name="receivemapfile_cancelled">Réception du fichier carte annulée</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Télécharger des cartes simples hors ligne</string>
-    <string name="downloadmap_info">Vous allez être redirigé vers un site de téléchargement de cartes hors ligne simples (sans support de thème).\n\nChoisissez le fichier .map de votre région puis appuyez pour le télécharger.\n\nUne fois le téléchargement terminé, appuyez sur le fichier téléchargé pour l\'utiliser comme carte courante de c:geo</string>
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

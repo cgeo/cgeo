@@ -36,11 +36,11 @@
     <string name="unknown">Onbekend type</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
-    <string name="cache_size_small">Small</string>
+    <string name="cache_size_small">Klein</string>
     <string name="cache_size_regular">Regular</string>
-    <string name="cache_size_large">Large</string>
-    <string name="cache_size_other">Other</string>
-    <string name="cache_size_virtual">Virtual</string>
+    <string name="cache_size_large">Groot</string>
+    <string name="cache_size_other">Overig</string>
+    <string name="cache_size_virtual">Virtueel</string>
     <string name="cache_size_notchosen">Niet gekozen</string>
     <string name="cache_size_unknown">Onbekend</string>
     <string name="cache_size_nano">Nano</string>
@@ -143,13 +143,8 @@
     <string name="log_problem_other_text">Deze geocacher heeft gemeld dat er een probleem is met deze cache.</string>
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
-    <string-array name="log_image_scales">
-        <item>Niet schalen</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
+    <string name="log_image_scale_option_noscaling">Niet schalen</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
     <string name="translate_to_english">Engels</string>
@@ -181,6 +176,7 @@
     <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
     <string name="err_detail_no_spoiler">c:geo heeft geen spoiler images gevonden voor deze cache.</string>
     <string name="err_detail_still_working">Nog bezig met een andere (achtergrond)taak.</string>
+    <string name="err_detail_premium_log_found">Deze cache is alleen beschikbaar voor premium leden van geocaching.com. Daarom kan de cache informatie niet worden weergegeven.\n\nAls je deze cache al hebt gevonden, kan je deze hier loggen.</string>
     <string name="err_watchlist_still_managing">Bezig je watchlist te beheren.</string>
     <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
     <string name="err_application_no">c:geo Kan geen geschikte applicatie vinden.</string>
@@ -423,6 +419,9 @@
     <string name="about_system_info">c:geo systeeminformatie</string>
     <string name="about_system_info_send_chooser">Verzend systeeminformatie</string>
     <string name="about_system_write_logcat">Logbestand genereren</string>
+    <string name="about_system_write_logcat_type">Maak standaard of uitgebreid logbestand?\n\nStandaard logbestanden zullen prima zijn in de meeste gevallen.\nGebruik uitgebreide logbestanden alleen op speciaal verzoek.</string>
+    <string name="about_system_write_logcat_type_standard">Standaard</string>
+    <string name="about_system_write_logcat_type_extended">Uitgebreid</string>
     <string name="about_system_write_logcat_success">Logbestand geschreven naar \"%1$s\" in \"%2$s\" map</string>
     <string name="about_system_write_logcat_empty">Logbestand is leeg</string>
     <string name="about_system_write_logcat_error">Fout bij schrijven naar logbestand</string>
@@ -563,11 +562,14 @@
     <string name="init_brouterThreshold">Route berekenen</string>
     <string name="init_brouterThreshold_description">Maximale afstand tot welke BRouter helper app (indien geïnstalleerd) een route zal berekenen.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
+    <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
+    <string name="init_global_wp_extraction_disable">Waypoint Extractie</string>
+    <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
@@ -627,12 +629,12 @@
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
     <string name="init_maptrail">Geschiedenisspoor tonen</string>
     <string name="init_maptrail_length">Geschiedenisspoor max. lengte</string>
-    <string name="init_maptrail_length_summary">Stel de maximale lengte van het geschiedenisspoor in (afgedwongen bij het opstarten van c:geo). Standaard waarde is 700 - aanpassen aan het beschikbare geheugen.</string>
+    <string name="init_maptrail_length_summary">Stel de maximale lengte van het geschiedenisspoor in (afgedwongen bij het opstarten van c:geo). Standaard waarde is 700 punten - aanpassen aan het beschikbare geheugen.</string>
     <string name="init_summary_maptrail">Wanneer geactiveerd (en GPS is ingeschakeld) bewaart c:geo de geschiedenis van je bewegingen als een spoor en geeft het weer op de kaart.</string>
-    <string name="init_trailcolor">Spoorgeschiedenis lijnkleur</string>
+    <string name="init_trailcolor">Geschiedenisspoor lijnkleur</string>
     <string name="init_trailcolor_summary">Selecteer kleur en doorzichtigheid voor geschiedenisspoor</string>
-    <string name="init_trailwidth">Spoorgeschiedenis lijndikte</string>
-    <string name="init_trailwidth_summary">Selecteer breedte voor geschiedenis spoor</string>
+    <string name="init_trailwidth">Geschiedenisspoor lijndikte</string>
+    <string name="init_trailwidth_summary">Selecteer breedte voor geschiedenisspoor</string>
     <string name="init_directioncolor">Richting lijnkleur</string>
     <string name="init_directioncolor_summary">Selecteer kleur en doorzichtigheid voor richting lijn. Richtingslijn toont een rechte lijn naar je geselecteerde navigatiedoel, of het specifieke gerouteerde navigatiepad als routering is ingeschakeld door de BRouter app te installeren.</string>
     <string name="init_directionwidth">Richting lijndikte</string>
@@ -654,6 +656,8 @@
     <string name="init_trackautovisit">Trackables bezoeken</string>
     <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
     <string name="init_sigautoinsert">Voeg automatisch toe</string>
+    <string name="init_offlinelogs_homescreen">Offline logs tonen</string>
+    <string name="init_summary_offlinelogs_homescreen">Een offline log teller (bijv. \"+ 1\") zal worden getoond naast het aantal online gevonden caches als je logs hebt die nog niet zijn ingediend.</string>
     <string name="init_loaddirectionimg">Richting-afbeelding</string>
     <string name="init_summary_loaddirectionimg">Laad de richting-afbeelding in, indien nodig (alleen basis-leden)</string>
     <string name="init_default_navigation_tool">Standaard navigatie</string>
@@ -830,6 +834,12 @@
     <string name="cache_menu_preventWaypointsFromNote">Waypoints uit notitie voorkomen</string>
     <string name="cache_menu_allowWaypointExtraction">Waypoints uit notitie toestaan</string>
     <string name="cache_personal_note_edit">Wijzig</string>
+    <string name="cache_personal_note_storewaypoints">Waypoints toevoegen/bijwerken</string>
+    <string name="cache_personal_note_removewaypoints">Waypoints verwijderen</string>
+    <string name="cache_personal_note_storewaypoints_success">Waypoints zijn toegevoegd aan persoonlijke notitie</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Waypoints zijn toegevoegd aan notitie, maar moesten worden ingekort (max. persoonlijke notitiegrootte: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Waypoints konden niet worden opgeslagen in notitie vanwege groottelimieten (max. persoonlijke notitiegrotte: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Geen waypoints gevonden die opgeslagen kunnen worden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Waypoint extractie voorkomen</string>
     <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
@@ -906,7 +916,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
     <string name="cache_menu_visit">Log bezoek</string>
-    <string name="cache_menu_visit_offline">Enkele klik offline log</string>
+    <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
     <string name="cache_menu_around">Caches rondom</string>
     <string name="around">Rondom %s</string>
@@ -993,7 +1003,7 @@
     <string name="internal_goto_targets_description">Deze cache slaat je recente \"Ga naar\" doelen op. Deze wordt automatisch aangemaakt zodra je de \"ga naar\" functie in het hoofdmenu hebt gebruikt. De ingevoerde coördinaten zullen worden opgeslagen als waypoints van deze cache. Als je deze coördinaten niet meer nodig hebt, kan je deze cache of eventuele waypoints veilig verwijderen. Je kunt ook de cache verplaatsen naar elke andere lijst van jouw keuze.</string>
     <string name="init_longtap_map">Lang drukken op kaart</string>
     <string name="init_summary_longtap_map">Activeer lang tikken op kaart-pictogram (maak een individuele route) of op vrije ruimte op de kaart (maak een gebruiker gedefinieerde cache)</string>
-    <string name="goto_targets_list">Interne caches</string>
+    <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
     <!-- coordinate calculator hints -->
@@ -1036,6 +1046,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Selecteer mapbestand</string>
     <string name="track_file_select_title">Spoorbestand selecteren</string>
+    <string name="individual_route_file_select_title">Selecteer individueel routebestand</string>
     <!-- import -->
     <string name="web_import_title">Importeer van send2cgeo</string>
     <string name="web_import_waiting">Wachten op nieuwe caches van send2cgeo…</string>
@@ -1107,26 +1118,18 @@
     <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>
     <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
     <string name="map_hide_track">Individuele spoor verbergen</string>
-    <string name="map_load_track">Individueel spoor laden</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuele spoor geladen (%d spoorpunt)</item>
-        <item quantity="other">Spoor geladen (%d spoorpunten)</item>
-    </plurals>
-    <string name="load_track_error">Fout bij laden van individuele spoor</string>
-    <string name="map_unload_track">Individuele spoor ontladen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_visited">Bezochte waypoints op de kaart verbergen</string>
-    <string name="map_theme_builtin">Standaard</string>
     <string name="map_theme_select">Selecteer mapthema</string>
     <string name="map_theme_options">Thema opties</string>
     <string name="map_language">Kaart taal</string>
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
-    <string name="map_clear_trailhistory">Spoorgeschiedenis wissen</string>
-    <string name="map_trailhistory_cleared">Geschiedenis spoor gewist</string>
+    <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
+    <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
     <string name="map_routing_straight">Rechte lijn</string>
@@ -1506,6 +1509,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Deze versie van c:geo is niet langer compatibel met je apparaat en kan mogelijk niet werken of onverwacht gedrag vertonen.\nTik op dit bericht voor meer informatie.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Je gebruikt een versie van c:geo die ouder lijkt te zijn dan één jaar. Sommige functies werken mogelijk niet meer vanwege de website of andere technische wijzigingen. Lees onze FAQ over hoe je kunt upgraden.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Je lijkt Android 11 te gebruiken, wat c:geo nog niet volledig ondersteunt. Lees onze FAQ voor meer info hierover.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
     <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
@@ -1622,6 +1626,7 @@
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
     <string name="preference_colorpicker_select_color">Kleur selecteren</string>
     <string name="preference_colorpicker_select_opaqueness">Selecteer doorzichtigheid</string>
+    <string name="reset_to_default">Standaard</string>
     <!-- number input -->
     <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
@@ -1638,11 +1643,33 @@
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
+    <string name="map_export_individual_route">Individuele route exporteren</string>
+    <string name="map_load_individual_route">Individuele route laden</string>
+    <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
+    <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>
     <string name="save_sorted_route">Opslaan</string>
     <string name="sorted_route_saved">Individuele route opgeslagen</string>
+    <string name="load_individual_route_error">Fout bij laden individuele route</string>
     <string name="route_item_not_yet_loaded">Route item nog niet geladen</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Route geladen met %d routepunt</item>
+        <item quantity="other">Route geladen met %d routepunten</item>
+    </plurals>
+    <string name="center_on_route">Centreer op route</string>
+    <!-- individual track -->
+    <string name="individual_track">GPX spoor/route</string>
+    <string name="map_load_track">Spoor/route laden vanuit GPX</string>
+    <string name="map_load_track_wait">Spoor/route op achtergrond laden…</string>
+    <string name="map_load_track_confirm">Bestaande spoor/route overschrijven?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Spoor/route geladen (%d spoorpunten)</item>
+        <item quantity="other">Spoor/route geladen (%d spoorpunten)</item>
+    </plurals>
+    <string name="load_track_error">Fout bij het laden van spoor/route</string>
+    <string name="map_unload_track">Spoor/route ontladen</string>
+    <string name="center_on_track">Centreer op spoor/route</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1654,6 +1681,7 @@
     <string name="switch_on">Aan</string>
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_default">(standaard)</string>
     <!-- view settings -->
     <string name="view_settings">Instellingen bekijken</string>
     <string name="delete_setting">Instelling verwijderen</string>
@@ -1672,6 +1700,8 @@
     <string name="receivemapfile_intenttitle">Kaartbestand ontvangen</string>
     <string name="receivemapfile_success">Kaartbestand succesvol ontvangen als \"%s\" en opgeslagen in kaarten map</string>
     <string name="receivemapfile_error">Fout bij het ontvangen van kaartbestand</string>
+    <string name="receivemapfile_error_io_exception">I/O fout tijdens het ontvangen van een kaartbestand. Is je kaartmap \"%s\" beschrijfbaar?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van kaartbestand.</string>
     <string name="receivemapfile_alreadyexists">Een bestand met deze naam bestaat al. Bestaande bestanden overschrijven of het bestand opslaan onder een andere naam?</string>
     <string name="receivemapfile_option_overwrite">Overschrijven</string>
     <string name="receivemapfile_option_differentname">Andere naam</string>
@@ -1679,12 +1709,17 @@
     <string name="receivemapfile_cancelled">Kaartbestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
-    <string name="downloadmap_info">Je wordt doorverwezen naar een downloadsite voor basis offline kaarten (geen thema support).\n\nKies het .map bestand voor jouw regio en tik erop om het bestand te downloaden.\n\nAls het downloaden is voltooid, tik op het gedownloade bestand om deze kaart in te stellen als de huidige kaart voor c:geo</string>
+    <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
+    <string name="downloadmap_choose">Kies kaart</string>
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="downloadmap_target_not_writable">Doel \"%s\" is niet beschrijfbaar - selecteer een andere kaartbestand map.</string>
     <!-- history trail export -->
-    <string name="trailhistory">Geschiedenis spoor</string>
+    <string name="trailhistory">Geschiedenisspoor</string>
     <string name="export_trailhistory_title">Geschiedenisspoor exporteren</string>
-    <string name="export_trailhistory_success">Spoorgeschiedenis geëxporteerd naar \"%s\"</string>
+    <string name="export_trailhistory_success">Geschiedenisspoor geëxporteerd naar \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Geschiedenisspoor wissen na export</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Individuele route exporteren</string>
+    <string name="export_individualroute_success">Individuele route geëxporteerd naar \"%s\"</string>
 </resources>

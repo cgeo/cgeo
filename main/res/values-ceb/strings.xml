@@ -110,13 +110,6 @@
     <string name="log_oc_team_comment">Ang komentaryo sa OC Team</string>
     <string name="log_your_saved_log">Ang imohang na-save nga log</string>
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
-    <string-array name="log_image_scales">
-        <item>Walay pagsaka</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
     <string name="translate_to_english">Ang paghubad sa Inglis</string>
@@ -479,8 +472,6 @@
     <string name="init_gpx_importdir">GPX Import nga Direktoryo</string>
     <string name="init_dataDir">Pagpili sa direktoryong data sa Geocache</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
-    <string name="init_maptrail">Ipakita ang dalan</string>
-    <string name="init_summary_maptrail">Ipakita ang dalan sa mapa</string>
     <string name="init_share_after_export">Ablihan ang ambit nga menu inig human sa GPX eksport</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
     <string name="init_trackautovisit">Bisitaha ang TBs</string>
@@ -589,15 +580,7 @@
     <string name="err_auth_geokrety_bad_password">Ang imohang username/password kay murag dili balido.</string>
     <string name="err_auth_geokrety_unknown">%1$s nibalik: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">Usa ka cache</item>
-        <item quantity="other">%1$d mga cache</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">usa ka adlaw ang nahibilin</item>
-        <item quantity="other">%1$d ka mga adlaw ang nahibilin</item>
-    </plurals>
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
     <string name="cache_offline_refresh">I-refresh</string>
     <string name="cache_offline_drop">Kuhaon</string>
@@ -624,7 +607,7 @@
     <string name="cache_personal_note">Personal nga sulat</string>
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Limitasyon sa personal nga nota</string>
-    <string name="cache_personal_note_truncation">Ang kaning personal nga note kay putlon inig human sa %d mga karakter pinaagi sa Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang kaning personal nga note kay putlon inig human sa %d mga karakter pinaagi sa Geocaching.com.</string>
     <string name="cache_personal_note_upload">I-upload</string>
     <string name="cache_personal_note_uploading">Pag-upload ug personal nga nota</string>
     <string name="cache_personal_note_upload_done">Ang personal nga nota kay na-upload</string>
@@ -677,7 +660,6 @@
     <string name="cache_menu_streetview">Lantaw sa karsada</string>
     <string name="cache_menu_browser">Ablihi sa browser</string>
     <string name="cache_menu_visit">Bisita sa log</string>
-    <string name="cache_menu_visit_offline">Usa ka pindot offline log</string>
     <string name="cache_menu_spoilers">Spoiler nga mga imahe</string>
     <string name="cache_menu_around">Nagpalibot ang caches</string>
     <string name="around">Nagpalibot %s</string>
@@ -746,7 +728,7 @@
     <string name="file_list_no_files">ang c:geo walay nakita na angay sa mga files.</string>
     <string name="file_searching">Pagpangita alang sa kaparehong mga files</string>
     <string name="file_title_searching">Ang pagpangita sa</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Ang pag-pili ug direktoryo</string>
     <string name="simple_dir_chooser_current_path">Ang dalan:</string>
     <string name="simple_dir_chooser_invalid_path">Ang dalan nga sayop</string>
@@ -766,9 +748,8 @@
     <string name="gpx_import_delete_message">Gusto nimong tangtangon ang %s?</string>
     <string name="gpx_import_select_list_title">I-import ang GPX padung sa listahan</string>
     <string name="gpx_import_android">I-import gekan sa Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Pagpili ug file nga Mapa</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">I-Import gekan sa send2cgeo</string>
     <string name="web_import_waiting">Naghuwat sa bag-o nga caches gekan sa send2cgeo…</string>
@@ -823,7 +804,6 @@
     <string name="map_live">Mga mapa nga live</string>
     <string name="map_view_map">View sa mapa</string>
     <string name="map_modes">Kahimtang sa mapa</string>
-    <string name="map_trail_show">Ipakita ang agianan</string>
     <string name="map_circles_show">Ipakita nag mga bilog</string>
     <string name="map_mycaches_hide">Itago ang gitagiya/nakit-an nga mga caches</string>
     <string name="map_disabled_hide">Tagu-i ang dili mu gana na mga cache</string>
@@ -945,10 +925,6 @@
     <string name="export_confirm_message">Sa padulngan: %1$s\nPangan sa File:%2$s</string>
     <string name="export_persnotes">Mga personal nga nota</string>
     <string name="export_persnotes_uploading">Gipang-upload nga personal na nota %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="one">Malampuson nga na upload ang usa ka nota</item>
-        <item quantity="other">Malampuson nga na upload ang mga notang %1$d</item>
-    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Pwede ra ang mga iro</string>
     <string name="attribute_dogs_no">Dile pwede ang mga iro</string>
@@ -1284,6 +1260,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

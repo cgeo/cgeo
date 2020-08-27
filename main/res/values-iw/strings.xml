@@ -126,13 +126,6 @@
     <string name="log_problem_damaged_label">המיכל פגום</string>
     <string name="log_problem_missing_label">ייתכן והמטמון נעלם</string>
     <string name="log_problem_other_label">אחר</string>
-    <string-array name="log_image_scales">
-        <item>אין שינוי קנה מידה</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">תרגם ל%s</string>
     <string name="translate_to_english">תרגם לאנגלית</string>
@@ -435,12 +428,6 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">יום אחד נותר</item>
-        <item quantity="two">נותרו %1$d ימים</item>
-        <item quantity="many">נותרו %1$d ימים</item>
-        <item quantity="other">נותרו %1$d ימים</item>
-    </plurals>
     <string name="last_day_available">היום האחרון הזמין</string>
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
@@ -457,10 +444,9 @@
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
     <!-- file list base -->
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- map file select -->
-    <!-- theme file select -->
+    <!-- file selectors -->
     <!-- import -->
     <string name="web_import_waiting">Waiting for new caches from send2cgeo&#8230;</string>
     <!-- popup -->
@@ -515,6 +501,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

@@ -143,13 +143,6 @@
     <string name="log_problem_other_text">Tento kešer nahlásil, že s touto keškou je možno nejaký problém.</string>
     <string name="log_problem_archive_label">Skrýša by mala byť archivovaná</string>
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
-    <string-array name="log_image_scales">
-        <item>Bez zmeny mierky</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
     <string name="translate_to_english">Preložiť do angličtiny</string>
@@ -629,7 +622,6 @@
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
     <string name="init_maptrail">Zobraziť trasu v histórii</string>
     <string name="init_maptrail_length">Max. dĺžka histórie trasy</string>
-    <string name="init_maptrail_length_summary">Nastavte maximálnu dĺžku histórie trasy (potrebné pri každom spustení c:geo). Predvolená hodnota je 700 – upravte podľa dostupnej pamäte.</string>
     <string name="init_summary_maptrail">Keď je to aktivované (a GPS zapnuté), c:geo ukladá históriu pohybov ako trasu a zobrazuje ju na mape.</string>
     <string name="init_trailcolor">Farba čiary histórie trasy</string>
     <string name="init_trailcolor_summary">Vyberte farbu a priehľadnosť čiary histórie trasy</string>
@@ -922,7 +914,6 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otvoriť v prehliadači</string>
     <string name="cache_menu_visit">Zalogovať návštevu</string>
-    <string name="cache_menu_visit_offline">Zalogovať offline</string>
     <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
     <string name="cache_menu_around">Skrýše v okolí</string>
     <string name="around">Okolo %s</string>
@@ -1009,7 +1000,6 @@
     <string name="internal_goto_targets_description">V tejto keške sú uložené všetky vaše nedávne ciele funkcie \"Choď k\". Vytvorí sa automaticky, keď v hlavnej ponuke použijete funkciu \"Choď k\". Zadané súradnice sa uložia ako body trasy tejto kešky. Ak už tieto súradnice nepotrebujete, môžete bez obáv túto kešku a všetky jej body trasy odstrániť. Podľa potreby tiež môžete túto kešku presunúť do nejakého iného zoznamu.</string>
     <string name="init_longtap_map">Ťuknutie na mapu a podržanie</string>
     <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku)</string>
-    <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
     <!-- coordinate calculator hints -->
@@ -1125,20 +1115,10 @@
     <string name="map_hidewp_parking">Skryť parkoviská</string>
     <string name="map_hidewp_visited">Skryť navštívené body trasy</string>
     <string name="map_hide_track">Skryť individuálnu trasu</string>
-    <string name="map_load_track">Načítať individuálnu trasu</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuálna trasa načítaná (%d bod trasy)</item>
-        <item quantity="few">Individuálna trasa načítaná (%d body trasy)</item>
-        <item quantity="many">Individuálna trasa načítaná (%d bodov trasy)</item>
-        <item quantity="other">Individuálna trasa načítaná (%d bodov trasy)</item>
-    </plurals>
-    <string name="load_track_error">Chyba pri načítaní individuálnej trasy</string>
-    <string name="map_unload_track">Zrušiť načítanú individuálnu trasu</string>
     <string name="init_hidewp">Skryť body trasy</string>
     <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
     <string name="init_summary_hidewp_parking">Skryť parkoviská na mape</string>
     <string name="init_summary_hidewp_visited">Skryť navštívené body trasy na mape</string>
-    <string name="map_theme_builtin">Predvolená</string>
     <string name="map_theme_select">Vybrať tému mapy</string>
     <string name="map_theme_options">Nastavenia Témy</string>
     <string name="map_language">Jazyk mapy</string>
@@ -1687,6 +1667,7 @@
     <string name="save_sorted_route">Uložiť</string>
     <string name="sorted_route_saved">Individuálna trasa uložená</string>
     <string name="route_item_not_yet_loaded">Položka trasy zatiaľ nie je načítaná</string>
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1723,7 +1704,6 @@
     <string name="receivemapfile_cancelled">Prenos mapového súboru bol zrušený</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
-    <string name="downloadmap_info">Dôjde k presmerovaniu na stránku umožňujúcu stiahnuť základné offline mapy (bez podpory tém).\n\nVyberte súbor .map podľa vášho regiónu a kliknite naň pre jeho stiahnutie.\n\nPo dokončení sťahovania kliknite na stiahnutý súbor pre jeho nastavenie ako aktuálnej mapy v c:geo</string>
     <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
     <!-- history trail export -->
@@ -1731,4 +1711,5 @@
     <string name="export_trailhistory_title">Exportovať históriu trasy</string>
     <string name="export_trailhistory_success">História trasy exportovaná do „%s“</string>
     <string name="export_trailhistory_clear_after_export">Po exporte vymazať históriu trasy</string>
+    <!-- individual route export -->
 </resources>

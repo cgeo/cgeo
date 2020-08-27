@@ -1,50 +1,38 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.enumerations.CoordinatesType;
-import cgeo.geocaching.maps.routing.RouteItem;
+import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteSegment;
 
-import android.sax.Element;
 import android.sax.RootElement;
-import android.util.Xml;
 
 import androidx.annotation.NonNull;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import org.xml.sax.SAXException;
-
-class GPXIndividualRouteParser {
-    protected final String namespace;
-    private final String version;
-    private final ArrayList<RouteItem> routeItems = new ArrayList<>();
+public class GPXIndividualRouteParser extends AbstractTrackOrRouteParser implements AbstractTrackOrRouteParser.RouteParse {
+    private String tempName = "";
 
     protected GPXIndividualRouteParser(final String namespaceIn, final String versionIn) {
-        namespace = namespaceIn;
-        version = versionIn;
+        super(namespaceIn, versionIn, true);
     }
 
     @NonNull
-    public ArrayList<RouteItem> parse(@NonNull final InputStream stream) throws IOException, ParserException {
+    public Route parse(@NonNull final InputStream stream) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
-        final Element route = root.getChild(namespace, "rte");
-        final Element routePoint = route.getChild(namespace, "rtept");
+        points = root.getChild(namespace, "rte");
+        point = points.getChild(namespace, "rtept");
 
-        routePoint.getChild(namespace, "name").setEndTextElementListener(body -> routeItems.add(new RouteItem(ConnectorFactory.canHandle(body) ? CoordinatesType.CACHE : CoordinatesType.WAYPOINT, body)));
+        point.getChild(namespace, "name").setEndTextElementListener(body -> tempName = body);
+        point.setEndElementListener(() -> {
+            if (temp.size() > 0) {
+                result.add(new RouteSegment(new RouteItem(tempName, temp.get(temp.size() - 1)), temp));
+                temp = new ArrayList<>();
+            }
+        });
 
-        try {
-            final ProgressInputStream progressStream = new ProgressInputStream(stream);
-            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, StandardCharsets.UTF_8));
-            Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
-            return routeItems;
-        } catch (final SAXException e) {
-            throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
-        }
+        return super.parse(stream, root);
     }
-
 }

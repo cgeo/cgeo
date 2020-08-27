@@ -143,13 +143,8 @@
     <string name="log_problem_other_text">Tämä kätköilijä ilmoitti, että kätkön kanssa saattaa olla ongelma.</string>
     <string name="log_problem_archive_label">Kätkö pitäisi arkistoida</string>
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
-    <string-array name="log_image_scales">
-        <item>Ei skaalausta</item>
-        <item>512 p</item>
-        <item>640 p</item>
-        <item>800 p</item>
-        <item>1024 p</item>
-    </string-array>
+    <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
     <string name="translate_to_english">Käännä englanniksi</string>
@@ -181,6 +176,7 @@
     <string name="err_detail_cache_find_any">c:geo ei löydä yhtään geokätköä.</string>
     <string name="err_detail_no_spoiler">c:geo ei löytänyt kätkön spoilerikuvia.</string>
     <string name="err_detail_still_working">Työstetään vielä toista tehtävää.</string>
+    <string name="err_detail_premium_log_found">Tämä kätkö on saatavilla vain geocaching.com premium-jäsenille. Tällöin kätkön tietoja ei voida näyttää.\n\n Mutta jos olet kuitenkin löytänyt tämän kätkön, voit kirjata löytösi täällä.</string>
     <string name="err_watchlist_still_managing">Käsitellään edelleen tarkkailulistaasi.</string>
     <string name="err_watchlist_failed">Tarkkailulistasi muuttaminen epäonnistui.</string>
     <string name="err_application_no">c:geo ei löydä sopivaa sovellusta.</string>
@@ -423,6 +419,9 @@
     <string name="about_system_info">c:geo järjestelmätiedot</string>
     <string name="about_system_info_send_chooser">Lähetä järjestelmän tiedot</string>
     <string name="about_system_write_logcat">Generoi lokitiedosto</string>
+    <string name="about_system_write_logcat_type">Luodaanko standardi vai laajennettu lokitiedosto?\n\nStandardit lokitiedostot riittävät useimmissa tapauksissa.\nKäytä laajennettuja lokitiedostoja vain pyydettäessä.</string>
+    <string name="about_system_write_logcat_type_standard">Standardi</string>
+    <string name="about_system_write_logcat_type_extended">Laajennettu</string>
     <string name="about_system_write_logcat_success">Lokitiedosto kirjoitettiin tiedostoon \"%1$s\" sijaintiin \"%2$s\".</string>
     <string name="about_system_write_logcat_empty">Lokitiedosto on tyhjä</string>
     <string name="about_system_write_logcat_error">Virhe kirjoitettaessa lokitiedostoa</string>
@@ -563,11 +562,13 @@
     <string name="init_brouterThreshold">Laske reitti</string>
     <string name="init_brouterThreshold_description">Maksimietäisyys, jonka sisällä brouter-apusovellus (jos asennettuna) laskee reitin.</string>
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
+    <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
+    <string name="init_global_wp_extraction_disable">Reittipisteen Poisto</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
@@ -654,6 +655,8 @@
     <string name="init_trackautovisit">Reissaajien vierailu</string>
     <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
     <string name="init_sigautoinsert">Lisää automaattisesti</string>
+    <string name="init_offlinelogs_homescreen">Näytä offline-lokit</string>
+    <string name="init_summary_offlinelogs_homescreen">Offline-tilassa olevien lokien laskuri (esim. \"+ 1\") näytetään verkkosivulla olevien löytöjesi vieressä aloitusnäytössä jos sinulla on lokeja, joita ei ole vielä lähetetty.</string>
     <string name="init_loaddirectionimg">Suuntakuva</string>
     <string name="init_summary_loaddirectionimg">Lataa suuntanuoli-kuva tarvittaessa (tarvitaan vain perusjäsenille)</string>
     <string name="init_default_navigation_tool">Ensisijainen navigointi</string>
@@ -830,6 +833,12 @@
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
     <string name="cache_menu_allowWaypointExtraction">Salli muistiinpanoista luodut reittipisteet</string>
     <string name="cache_personal_note_edit">Muokkaa</string>
+    <string name="cache_personal_note_storewaypoints">Lisää/Päivitä Reittipisteet</string>
+    <string name="cache_personal_note_removewaypoints">Poista Reittipisteet</string>
+    <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Reittipisteet lisättiin muistiinpanoon, mutta niitä piti lyhentää (maksimi henkilökohtainen muistiinpanon koko: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Reittipisteitä ei voitu tallentaa muistiinpanoon kokorajojen vuoksi (maksimi henkilökohtaisen merkinnän koko: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Tallennettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Estä reittipisteiden siirto</string>
     <string name="cache_personal_note_limit">Omien merkintöjen raja</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tämä oma muistiinpano katkaistaan %d merkin jälkeen Geocaching.com:n toimesta.</string>
@@ -906,7 +915,7 @@
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
-    <string name="cache_menu_visit_offline">Nopea offline-lokkaus</string>
+    <string name="cache_menu_visit_offline">Nopea offline-loki</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
     <string name="cache_menu_around">Kätköt lähistöllä</string>
     <string name="around">%s:n ympärillä</string>
@@ -1036,6 +1045,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Valitse karttatiedosto</string>
     <string name="track_file_select_title">Valitse reittitiedosto</string>
+    <string name="individual_route_file_select_title">Valitse yksittäinen reittitiedosto</string>
     <!-- import -->
     <string name="web_import_title">Tuo send2cgeo</string>
     <string name="web_import_waiting">Odotetaan uusia kätköjä send2cgeo…</string>
@@ -1107,18 +1117,10 @@
     <string name="map_hidewp_parking">Piilota parkkipaikka-reittipisteet</string>
     <string name="map_hidewp_visited">Piilota vieraillut reittipisteet</string>
     <string name="map_hide_track">Piilota yksittäinen reitti</string>
-    <string name="map_load_track">Lataa yksittäinen reitti</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Yksittäinen reitti ladattu (%d reittipiste)</item>
-        <item quantity="other">Yksittäinen reitti ladattu (%d reittipistettä)</item>
-    </plurals>
-    <string name="load_track_error">Virhe ladattaessa yksittäistä reittiä</string>
-    <string name="map_unload_track">Poista yksittäinen reitti</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
     <string name="init_summary_hidewp_visited">Piilota kartalta vieraillut reittipisteet</string>
-    <string name="map_theme_builtin">Oletus</string>
     <string name="map_theme_select">Valitse kartan ulkoasu</string>
     <string name="map_theme_options">Teema-asetukset</string>
     <string name="map_language">Kartan kieli</string>
@@ -1506,6 +1508,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Näyttää siltä, että käytät Android-käyttöjärjestelmän vanhempaa versiota. Voi olla, että päivitykset ja uusimmat ominaisuudet eivät ole välttämättä saatavilla laitteellesi.\nNapauta tästä saadaksesi lisätietoja.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Näytät käyttävän Android 11:ta, joka c:geo ei tue vielä kokonaan. Lue usein kysyttyjä kysymyksiä saadaksesi lisätietoja tästä.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
@@ -1622,6 +1625,7 @@
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
     <string name="preference_colorpicker_select_color">Valitse väri</string>
     <string name="preference_colorpicker_select_opaqueness">Valitse läpinäkyvyys</string>
+    <string name="reset_to_default">Oletus</string>
     <!-- number input -->
     <string name="number_input_title">Syötä arvo välillä %1$s ja %2$s</string>
     <string name="number_input_err_boundarymin">Syötetty arvo liian pieni - asetettu minimiarvoksi</string>
@@ -1638,11 +1642,22 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
+    <string name="map_export_individual_route">Vie yksittäinen reitti</string>
+    <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
+    <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
+    <string name="map_clear_individual_route_confirm">Haluatko poistaa kaikki kätköt / reittipisteet yksittäiseltä reittiltäsi?</string>
     <string name="map_individual_route_cleared">Yksittäinen reitti tyhjennetty</string>
     <string name="save_sorted_route">Tallenna</string>
     <string name="sorted_route_saved">Yksittäinen reitti tallennettu</string>
+    <string name="load_individual_route_error">Virhe ladattaessa yksittäistä reittiä</string>
     <string name="route_item_not_yet_loaded">Reitin asiaa ei ole vielä ladattu</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Reitti ladattu %d reittipisteellä</item>
+        <item quantity="other">Reitti ladattu %d reittipisteellä</item>
+    </plurals>
+    <string name="center_on_route">Keskitä reittiin</string>
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1654,6 +1669,7 @@
     <string name="switch_on">Päälle</string>
     <string name="switch_manual">Manuaalinen</string>
     <string name="switch_auto">Automaattinen</string>
+    <string name="switch_default">(oletus)</string>
     <!-- view settings -->
     <string name="view_settings">Näytä asetukset</string>
     <string name="delete_setting">Poista asetus</string>
@@ -1672,17 +1688,26 @@
     <string name="receivemapfile_intenttitle">Vastaanota karttatiedosto</string>
     <string name="receivemapfile_success">Karttatiedosto otettu vastaan onnistuneesti ja tallennettu karttahakemistoon, nimi on \"%s\"</string>
     <string name="receivemapfile_error">Virhe otettaessa karttatiedostoa vastaan</string>
+    <string name="receivemapfile_error_io_exception">I/O-virhe karttatiedostoa vastaanotettaessa. Onko karttahakemistosi \"%s\" kirjoitettavissa?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa karttatiedostoa.</string>
     <string name="receivemapfile_alreadyexists">Tämänniminen tiedosto on jo olemassa. Haluatko korvata olemassa olevan tiedoston vai tallentaa uuden tiedoston eri nimellä?</string>
     <string name="receivemapfile_option_overwrite">Korvaa</string>
     <string name="receivemapfile_option_differentname">Eri nimi</string>
     <string name="receivemapfile_kb_copied">%d kB kopioitu</string>
     <string name="receivemapfile_cancelled">Karttatiedoston siirto peruttu</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Lataa perusofflinekartat</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Lataa offline-kartta</string>
     <string name="downloadmap_info">Sinut ohjataan lataussivulle, joka sisältää peruskarttatiedostot (ei tukea teemoille).\n\nValitse .map-tiedosto alueellesi ja napauta sitä lataaksesi tiedoston.\n\nKun lataus on valmis, napauta ladattua tiedostoa asettaaksesi kyseisen kartan käytettäväksi c:geon kanssa</string>
+    <string name="downloadmap_choose">Valitse kartta</string>
+    <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
+    <string name="download_started">Lataus aloitettiin taustalla</string>
+    <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - valitse toinen karttatiedostohakemisto.</string>
     <!-- history trail export -->
     <string name="trailhistory">Reittihistoria</string>
     <string name="export_trailhistory_title">Vie reittihistoria</string>
     <string name="export_trailhistory_success">Reittihistoria viety kohteeseen \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Poista reittihistoria viennin jälkeen</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Vie yksittäinen reitti</string>
+    <string name="export_individualroute_success">Viety yksittäinen reitti kohteeseen \"%s\"</string>
 </resources>

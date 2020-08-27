@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -281,6 +282,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
 
+        Routing.connect(null);
+
         int startPage = Page.VERSION.ordinal();
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -288,6 +291,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         }
         createViewPager(startPage, position -> setTitle(res.getString(R.string.about) + " - " + getTitle(Page.values()[position])));
         reinitializeViewPager();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Routing.disconnect();
+        super.onDestroy();
     }
 
     public final void setClickListener(final View view, final String url) {

@@ -594,11 +594,14 @@
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which brouter helper app (if installed) will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
+    <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
     <string name="init_disabled">Exclude Disabled</string>
     <string name="init_summary_disabled">Exclude disabled caches</string>
     <string name="init_archived">Exclude Archived</string>
     <string name="init_summary_archived">Exclude archived caches</string>
+    <string name="init_global_wp_extraction_disable">Waypoint Extraction</string>
+    <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note</string>
     <string name="init_save_log_img">Save Images</string>
     <string name="init_summary_save_log_img">Save Images from Logs</string>
     <string name="init_units">Use Imperial Units</string>
@@ -688,6 +691,8 @@
     <string name="init_trackautovisit">Visit TBs</string>
     <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
     <string name="init_sigautoinsert">Insert automatically</string>
+    <string name="init_offlinelogs_homescreen">Show offline logs</string>
+    <string name="init_summary_offlinelogs_homescreen">An offline log counter (e.g. \"+ 1\") will be shown next to your online find count on the home screen if you have logs, that are not submitted yet.</string>
     <string name="init_loaddirectionimg">Direction Image</string>
     <string name="init_summary_loaddirectionimg">Download directional arrow image if necessary (only required for Basic Members)</string>
     <string name="init_default_navigation_tool">Default Navigation</string>
@@ -899,11 +904,12 @@
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">Allow waypoints from note</string>
     <string name="cache_personal_note_edit">Edit</string>
-    <string name="cache_personal_note_storewaypoints">Store Waypoints</string>
+    <string name="cache_personal_note_storewaypoints">Add/Update Waypoints</string>
+    <string name="cache_personal_note_removewaypoints">Remove Waypoints</string>
     <string name="cache_personal_note_storewaypoints_success">Waypoints were added to personal note</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Waypoints were added to note but had to be shortened (max personal note size: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Waypoints could not be stored in note due to size limits (max personal note size: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_nowaypoints">No user waypoints found</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">No storable waypoints found</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevent waypoints extraction</string>
     <string name="cache_personal_note_limit">Personal note limit</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">This personal note will be truncated after %d characters by Geocaching.com.</string>
@@ -986,7 +992,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Open in browser</string>
     <string name="cache_menu_visit">Log Visit</string>
-    <string name="cache_menu_visit_offline">One click offline log</string>
+    <string name="cache_menu_visit_offline">Quick offline log</string>
     <string name="cache_menu_spoilers">Spoiler images</string>
     <string name="cache_menu_around">Caches around</string>
     <string name="around">Around %s</string>
@@ -1213,7 +1219,6 @@
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
     <string name="init_summary_hidewp_visited">Hide visited waypoints on the map</string>
-    <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>
     <string name="map_language">Map language</string>
@@ -1616,6 +1621,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is under maintenance.\nYou might run into various issues.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">You appear to be using an older version of Android. This version of c:geo is no longer compatible with your device and might fail or behave unexpectedly!\nTap on this message for further information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">You are using a version of c:geo which seems to be older than one year. Some features may not work anymore due to website or other technical changes. Please read our FAQ on how to upgrade.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">You appear to be using Android 11, which c:geo does not support fully yet. Please read our FAQ to get more info on this.</string>
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talking compass</string>
@@ -1831,20 +1837,21 @@
     <string name="center_on_route">Center on route</string>
 
     <!-- individual track -->
-    <string name="individual_track">Individual track</string>
-    <string name="map_load_track">Load individual track</string>
-    <string name="map_load_track_confirm">Overwrite existing track?</string>
+    <string name="individual_track">GPX track/route</string>
+    <string name="map_load_track">Load track/route from GPX</string>
+    <string name="map_load_track_wait">Loading track/route in background…</string>
+    <string name="map_load_track_confirm">Overwrite existing track/route?</string>
     <plurals name="load_track_success">
-        <item quantity="zero">Individual track loaded (%d trackpoints)</item>
-        <item quantity="one">Individual track loaded (%d trackpoint)</item>
-        <item quantity="two">Individual track loaded (%d trackpoints)</item>
-        <item quantity="few">Individual track loaded (%d trackpoints)</item>
-        <item quantity="many">Individual track loaded (%d trackpoints)</item>
-        <item quantity="other">Individual track loaded (%d trackpoints)</item>
+        <item quantity="zero">Track/route loaded (%d trackpoints)</item>
+        <item quantity="one">Track/route loaded (%d trackpoint)</item>
+        <item quantity="two">Track/route loaded (%d trackpoints)</item>
+        <item quantity="few">Track/route loaded (%d trackpoints)</item>
+        <item quantity="many">Track/route loaded (%d trackpoints)</item>
+        <item quantity="other">Track/route loaded (%d trackpoints)</item>
     </plurals>
-    <string name="load_track_error">Error loading individual track</string>
-    <string name="map_unload_track">Unload individual track</string>
-    <string name="center_on_track">Center on track</string>
+    <string name="load_track_error">Error loading track/route</string>
+    <string name="map_unload_track">Unload track/route</string>
+    <string name="center_on_track">Center on track/route</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -1858,6 +1865,7 @@
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automatic</string>
+    <string name="switch_default">(default)</string>
 
     <!-- view settings -->
     <string name="view_settings">View settings</string>
@@ -1879,6 +1887,8 @@
     <string name="receivemapfile_intenttitle">Receive map file</string>
     <string name="receivemapfile_success">Map file successfully received as \"%s\" and stored to map directory</string>
     <string name="receivemapfile_error">Error while receiving map file</string>
+    <string name="receivemapfile_error_io_exception">I/O error while receiving map file. Is your map directory \"%s\" writable?</string>
+    <string name="receivemapfile_error_filenotfound_exception">File not found error while receiving map file.</string>
     <string name="receivemapfile_alreadyexists">A file with this name already exists. Overwrite existing file or save new file under a different name?</string>
     <string name="receivemapfile_option_overwrite">Overwrite</string>
     <string name="receivemapfile_option_differentname">Different name</string>
@@ -1891,6 +1901,7 @@
     <string name="downloadmap_choose">Choose map</string>
     <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
+    <string name="downloadmap_target_not_writable">Target \"%s\" is not writable - please select a different map file directory.</string>
 
     <!-- history trail export -->
     <string name="trailhistory">History track</string>

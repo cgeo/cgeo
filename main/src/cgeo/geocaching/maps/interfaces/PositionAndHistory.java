@@ -1,13 +1,12 @@
 package cgeo.geocaching.maps.interfaces;
 
-
-import cgeo.geocaching.maps.routing.Route;
+import cgeo.geocaching.models.ManualRoute;
 
 import android.location.Location;
 
 import java.util.ArrayList;
 
-public interface PositionAndHistory extends Route.RouteUpdater {
+public interface PositionAndHistory extends ManualRoute.UpdateManualRoute {
 
 
     void setCoordinates(Location coordinatesIn);

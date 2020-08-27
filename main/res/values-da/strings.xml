@@ -129,13 +129,6 @@
     <string name="log_problem_other_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
-    <string-array name="log_image_scales">
-        <item>Ingen skalering</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
     <string name="translate_to_english">Oversæt til engelsk</string>
@@ -512,7 +505,6 @@
     <string name="init_summary_log_offline">Aktivér offline logning (online logbeskeder vises ikke og logbeskeder uploades ikke)</string>
     <string name="init_choose_list">Listevalg</string>
     <string name="init_summary_choose_list">Spørg hvilken liste cacher skal gemmes i</string>
-    <string name="init_listdisplay">Vis yderligere lister i cacheliste</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <!-- backup / restore -->
@@ -559,8 +551,6 @@
     <string name="init_gpx_importdir">GPX importmappe</string>
     <string name="init_dataDir">Vælg geocache-datamappe</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
-    <string name="init_maptrail">Vis spor</string>
-    <string name="init_summary_maptrail">Vis dit spor på kortet</string>
     <string name="init_share_after_export">Åbn Del-menu efter GPX eksport</string>
     <string name="init_include_found_status">Inkludér \"Fundet\"-status</string>
     <string name="init_trackautovisit">Besøg automatisk Trackable</string>
@@ -678,15 +668,7 @@
     <string name="err_auth_geokrety_bad_password">Brugernavn og adgangskode er muligvis ikke korrekte.</string>
     <string name="err_auth_geokrety_unknown">%1$s svarede: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">En cache</item>
-        <item quantity="other">%1$d cacher</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">en dag tilbage</item>
-        <item quantity="other">%1$d dage tilbage</item>
-    </plurals>
     <string name="last_day_available">tilgængelig for sidste dag</string>
     <string name="cache_offline_refresh">Genindlæs</string>
     <string name="cache_offline_drop">Fjern</string>
@@ -718,7 +700,7 @@
     <string name="cache_personal_note">Personlig note</string>
     <string name="cache_personal_note_edit">Redigér</string>
     <string name="cache_personal_note_limit">Afkortning af personlig note</string>
-    <string name="cache_personal_note_truncation">Denne personlige note vil blive afkortet af geocaching.com efter %d tegn.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denne personlige note vil blive afkortet af geocaching.com efter %d tegn.</string>
     <string name="cache_personal_note_uploading">Upload personlig note</string>
     <string name="cache_personal_note_upload_done">Personlig note uploadet</string>
     <string name="cache_personal_note_upload_error">Fejl ved upload af personlig note</string>
@@ -738,10 +720,6 @@
     <string name="cache_favpoint_not_on">Denne cache er ikke blandt dine favoritter.</string>
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
-    <plurals name="waypoints">
-        <item quantity="one">1 waypoint</item>
-        <item quantity="other">%d waypoints</item>
-    </plurals>
     <string name="cache_waypoints_add">Tilføj waypoint</string>
     <string name="cache_hint_not_available">Intet hint tilgængeligt</string>
     <string name="cache_logs">Logbog</string>
@@ -779,7 +757,6 @@
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_browser">Åbn i browser</string>
     <string name="cache_menu_visit">Log besøg</string>
-    <string name="cache_menu_visit_offline">Hurtig offline logbesked</string>
     <string name="cache_menu_spoilers">Spoilerbilleder</string>
     <string name="cache_menu_around">Cacher i nærheden</string>
     <string name="around">I nærheden af %s</string>
@@ -850,7 +827,7 @@
     <string name="file_list_no_files">c:geo fandt ingen relevante filer.</string>
     <string name="file_searching">Søger efter filer, som opfylder kriterierne</string>
     <string name="file_title_searching">Søger</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Vælg mappe</string>
     <string name="simple_dir_chooser_current_path">Sti:</string>
     <string name="simple_dir_chooser_invalid_path">Ugyldig sti</string>
@@ -870,9 +847,8 @@
     <string name="gpx_import_delete_message">Vil du slette %s?</string>
     <string name="gpx_import_select_list_title">Importér GPX til liste</string>
     <string name="gpx_import_android">Importér fra Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Vælg kortfil</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Importér fra send2cgeo</string>
     <string name="web_import_waiting">Venter på nye cacher fra send2cgeo…</string>
@@ -928,19 +904,15 @@
     <string name="map_live">Live-kort</string>
     <string name="map_view_map">Kort-view</string>
     <string name="map_modes">Kortindstillinger</string>
-    <string name="map_trail_show">Vis spor</string>
     <string name="map_dot_mode">Brug små ikoner</string>
     <string name="map_circles_show">Vis cirkler</string>
     <string name="map_mycaches_hide">Skjul egne/fundne cacher</string>
     <string name="map_disabled_hide">Skjul deaktiverede cacher</string>
-    <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Vælg korttema</string>
     <string name="map_theme_options">Indstillinger for tema</string>
     <string name="map_live_enable">Aktivér live</string>
     <string name="map_live_disable">Deaktivér live</string>
     <string name="map_as_list">Vis som liste</string>
-    <string name="map_clear_trailhistory">Slet tidligere spor</string>
-    <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="map_routing">Navigation</string>
     <string name="map_routing_straight">Lige linje</string>
@@ -1055,14 +1027,10 @@
     <string name="export_confirm_message">Sti: %1$s\nFilnavn: %2$s</string>
     <string name="export_persnotes">Egne noter</string>
     <string name="export_persnotes_uploading">Uploader personlig note %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="one">%1$d personlig note blev uploadet</item>
-        <item quantity="other">%1$d personlige noter blev uploadet</item>
-    </plurals>
     <string name="export_modifiedcoords">Position ændret</string>
     <string name="export_modifiedcoords_uploading">Uploader %1$d</string>
     <string name="export_modifiedcoords_success">Upload udført</string>
-    <string name="export_modifiedcoords_result">Upload afsluttet: %1$d mislykkedes / %2$d ok</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Upload afsluttet: %1$d mislykkedes / %2$d ok</string>
     <string name="export_modifiedcoords_error">Upload mislykkedes</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Hunde tilladt</string>
@@ -1405,9 +1373,16 @@
     <string name="number_input_err_format">Ugyldigt talformat</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">fod</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">mil</string>
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

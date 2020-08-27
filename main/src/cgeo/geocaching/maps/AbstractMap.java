@@ -3,7 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.utils.TrackUtils;
+import cgeo.geocaching.models.Route;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -73,7 +73,7 @@ public abstract class AbstractMap {
 
     public abstract void onLowMemory();
 
-    public void setTracks(final TrackUtils.Tracks tracks) {
+    public void setTracks(final Route tracks) {
         //
     }
 

@@ -134,13 +134,6 @@
     <string name="log_problem_other_text">Šis slēpņotājs ziņoja, ka ar slēpni radusies kāda problēma.</string>
     <string name="log_problem_archive_label">Slēpni vēlams arhivēt</string>
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
-    <string-array name="log_image_scales">
-        <item>Bez samazināšanas</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot uz angļu valodu</string>
@@ -521,8 +514,6 @@
     <string name="init_gpx_importdir">GPX importa direktorija</string>
     <string name="init_dataDir">Izvēlies slēpņu datu direktoriju</string>
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
-    <string name="init_maptrail">Parādīt pārvietojumu</string>
-    <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
     <string name="init_share_after_export">Atvērt koplietošanas izvēlni pēc GPX eksporta</string>
     <string name="init_include_found_status">Pievienot \"Atrasts\" statusu</string>
     <string name="init_trackautovisit">Ceļotāju automātiska atzīmēšana</string>
@@ -636,17 +627,7 @@
     <string name="err_auth_geokrety_bad_password">Tavs lietotājvārds/parole, šķiet nederīgs.</string>
     <string name="err_auth_geokrety_unknown">%1$s atgriezts: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="zero">%1$d slēpnis</item>
-        <item quantity="one">%1$d slēpnis</item>
-        <item quantity="other">%1$d slēpņi</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="zero">atlikusi viena diena</item>
-        <item quantity="one">atlikusi viena diena</item>
-        <item quantity="other">atlikušas %1$d dienas</item>
-    </plurals>
     <string name="last_day_available">pieejama pēdējo dienu</string>
     <string name="cache_offline">Bezsaistes režīmā</string>
     <string name="cache_offline_refresh">Atjaunot</string>
@@ -683,7 +664,7 @@
     <string name="cache_personal_note">Personiska piezīme</string>
     <string name="cache_personal_note_edit">Rediģēt</string>
     <string name="cache_personal_note_limit">Personiskās piezīmes limits</string>
-    <string name="cache_personal_note_truncation">Šī personiskā piezīme tiks apcirsta iekš Geocaching.com pēc %d rakstzīmju.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Šī personiskā piezīme tiks apcirsta iekš Geocaching.com pēc %d rakstzīmju.</string>
     <string name="cache_personal_note_upload">Augšupielādēt</string>
     <string name="cache_personal_note_uploading">Augšupielādē personīgo piezīmi</string>
     <string name="cache_personal_note_upload_done">Personiskā piezīme ir augšupielādēta</string>
@@ -700,11 +681,6 @@
     <string name="cache_list_select_last">Iepriekšējā atlase</string>
     <string name="cache_images">Attēli</string>
     <string name="cache_waypoints">Starpposmi</string>
-    <plurals name="waypoints">
-        <item quantity="zero">%d Starpposmi</item>
-        <item quantity="one">1 Starpposms</item>
-        <item quantity="other">%d Starpposmi</item>
-    </plurals>
     <string name="cache_waypoints_add">Pievienot Starpposmu</string>
     <string name="cache_hint">Mājiens</string>
     <string name="cache_hint_not_available">Nekādi mājieni nav pieejami</string>
@@ -748,7 +724,6 @@
     <string name="cache_menu_streetview">Ielas skats (Street View)</string>
     <string name="cache_menu_browser">Atvērt pārlūkprogrammā</string>
     <string name="cache_menu_visit">Reģistrēt atradumu</string>
-    <string name="cache_menu_visit_offline">Viena klikšķa bezsaistes apmeklējuma reģistrācija</string>
     <string name="cache_menu_spoilers">\"Spoiler\" bilde (-es)</string>
     <string name="cache_menu_around">Slēpņi apkārtnē</string>
     <string name="around">Apkārt %s</string>
@@ -819,7 +794,7 @@
     <string name="file_list_no_files">c:geo neatrod atbilstošos failus.</string>
     <string name="file_searching">Atbilstošu failu meklēšana</string>
     <string name="file_title_searching">Meklē</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Izvēlēties direktoriju</string>
     <string name="simple_dir_chooser_current_path">Direktorija:</string>
     <string name="simple_dir_chooser_invalid_path">Nederīga direktorija</string>
@@ -839,9 +814,8 @@
     <string name="gpx_import_delete_message">Vai vēlaties dzēst %s?</string>
     <string name="gpx_import_select_list_title">GPX importēšana uz sarakstu</string>
     <string name="gpx_import_android">Importēt no Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Atlasiet kartes (map) failu</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Importēt no send2cgeo</string>
     <string name="web_import_waiting">Gaida jaunus slēpņus no send2cgeo…</string>
@@ -897,11 +871,9 @@
     <string name="map_live">TIešsaistes karte</string>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_modes">Kartes iestatījumi</string>
-    <string name="map_trail_show">Rādīt pārvietojumu</string>
     <string name="map_circles_show">Rādīt riņķus</string>
     <string name="map_mycaches_hide">Nerādīt savus/atrastos slēpņus</string>
     <string name="map_disabled_hide">Paslēpt izslēgtos slēpņus</string>
-    <string name="map_theme_builtin">Noklusējuma</string>
     <string name="map_theme_select">Atlasiet kartes dizainu</string>
     <string name="map_theme_options">Kartes motīva iestatījumi</string>
     <string name="map_live_enable">Atļaut tiešsaistē</string>
@@ -1026,11 +998,6 @@
     <string name="export_confirm_message">Direktorijs: %1$s\nFaila nosaukums: %2$s</string>
     <string name="export_persnotes">Personiskas piezīmes</string>
     <string name="export_persnotes_uploading">Augšupielādē personīgās piezīmes %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="zero">%1$d piezīmes veiksmīgi augšupielādētas</item>
-        <item quantity="one">Viena piezīme veiksmīgi augšupielādēta</item>
-        <item quantity="other">%1$d piezīmes veiksmīgi augšupielādētas</item>
-    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Suņi atļauti</string>
     <string name="attribute_dogs_no">Suņi aizliegti</string>
@@ -1381,9 +1348,16 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pēda</string>
     <string name="unit_yd">jards</string>
     <string name="unit_mi">jūdze</string>
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

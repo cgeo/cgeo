@@ -92,6 +92,7 @@
     <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
     <string name="log_posting_twitter">트위터에 올리는 중…</string>
+    <string name="log_posting_vote">캐시 투표 게시 중…</string>
     <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
@@ -142,13 +143,6 @@
     <string name="log_problem_other_text">이 지오캐셔가 이 캐시에 문제가 있다고 보고했습니다.</string>
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
-    <string-array name="log_image_scales">
-        <item>현재 크기</item>
-        <item>512픽셀</item>
-        <item>640픽셀</item>
-        <item>800픽셀</item>
-        <item>1024픽셀</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
     <string name="translate_to_english">영어로 번역하기</string>
@@ -508,6 +502,8 @@
     <string name="init_summary_su">Geocaching.su 에서 캐시 불러오기</string>
     <string name="settings_activate_su">활성화</string>
     <string name="init_gcvote_password_description">캐시를 평가하려면, GCVote.com의 지시사항에 따른 후, GCVOte의 비밀번호를 여기 입력하세요.</string>
+    <string name="err_vote_send_rating">등급을 보내는 중 오류가 발생했습니다.</string>
+    <string name="vote_sent">투표가 성공적으로 송신됨</string>
     <string name="settings_activate_twitter">활성화</string>
     <string name="init_login_popup">로그인</string>
     <string name="init_login_popup_working">로그인 중…</string>
@@ -572,7 +568,8 @@
     <string name="init_summary_log_offline">오프라인 로그를 활성화합니다.(로그할 때, 온라인 로그 화면이 표시되지 않고, 로그가 전송되지 않습니다)</string>
     <string name="init_choose_list">목록 물어보기</string>
     <string name="init_summary_choose_list">캐시를 저장할 때 어느 목록에 저장할지 물어봅니다.</string>
-    <string name="init_listdisplay">캐시 목록에 추가 목록 보기</string>
+    <string name="init_listdisplay">추가 목록</string>
+    <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록에서 캐시의 방향을 표시합니다.</string>
     <!-- backup / restore -->
@@ -620,9 +617,11 @@
     <string name="init_gpx_importdir">GPX를 가져올 폴더</string>
     <string name="init_dataDir">지오캐시 데이터 디렉토리 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
-    <string name="init_maptrail">트레일 보기</string>
-    <string name="init_summary_maptrail">지도에서 트레일이 나타나게 합니다.</string>
-    <string name="init_trailcolor">흔적 색상</string>
+    <string name="init_maptrail">최근 역사 트랙 표시</string>
+    <string name="init_directioncolor">방향선 색상</string>
+    <string name="init_directionwidth">방향선 너비</string>
+    <string name="init_circlecolor">원형선 색상</string>
+    <string name="init_circlefillcolor">원형 내부 색상</string>
     <string name="init_share_after_export">GPX 내보내기 후 공유메뉴 열기</string>
     <string name="init_include_found_status">\"찾음\" 상태 포함</string>
     <string name="init_trackautovisit">TB 방문하기</string>
@@ -695,6 +694,9 @@
     <string name="feature_search_geocode">주소로 검색</string>
     <string name="feature_search_owner">소유주로 검색</string>
     <string name="feature_search_finder">찾은분으로 검색</string>
+    <string name="feature_favorite">호감캐시로 추가중…</string>
+    <string name="feature_voting">캐시 투표하기</string>
+    <string name="init_maplines_title">지도선 맞춤</string>
     <string name="init_mapsforge_api_title">Mapsforge API</string>
     <string name="init_mfold_api">예전 Mapsforge V3</string>
     <string name="init_mfold_api_description">기본으로 새로운 Mapsforge 지도 버전을 사용합니다. 어떤 기능이 없거나, 문제점을 발견했다면 여기에서 예전 버전으로 되돌릴 수 있습니다.</string>
@@ -759,11 +761,11 @@
     <string name="err_auth_geokrety_unknown">%1$s 반환됨 : %2$s</string>
     <!-- cache -->
     <plurals name="cache_counts">
-        <item quantity="other">%1$d 개의 캐시</item>
+        <item quantity="other">%1$d 개 캐시</item>
     </plurals>
     <!-- days remaining -->
     <plurals name="days_remaining">
-        <item quantity="other">%1$d 일 남았습니다.</item>
+        <item quantity="other">%1$d 일 남음</item>
     </plurals>
     <string name="last_day_available">오늘만 가능합니다.</string>
     <string name="cache_offline">오프라인</string>
@@ -797,7 +799,7 @@
     <string name="cache_personal_note_edit">편집</string>
     <string name="cache_personal_note_preventWaypointsExtraction">지점 추출 방지</string>
     <string name="cache_personal_note_limit">개인 메모 한계 도달</string>
-    <string name="cache_personal_note_truncation">이 개인 메모는 Geocaching.com에서 %d 문자 이후는 잘립니다.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">이 개인 메모는 Geocaching.com에서 %d 문자 이후는 잘립니다.</string>
     <string name="cache_personal_note_upload">올리기</string>
     <string name="cache_personal_note_uploading">개인 메모 올리기</string>
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
@@ -870,7 +872,6 @@
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
     <string name="cache_menu_visit">로그하기</string>
-    <string name="cache_menu_visit_offline">원클릭 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
     <string name="cache_menu_around">주변의 캐시</string>
     <string name="around"> %s 주변</string>
@@ -956,7 +957,6 @@
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
     <string name="init_longtap_map">지도에서 길게 탭</string>
     <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시 작성) 길게 탭하는 게 활동시킵니다.</string>
-    <string name="goto_targets_list">내부 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
     <!-- coordinate calculator hints -->
@@ -971,10 +971,11 @@
     <string name="file_list_no_files">적절한 파일을 찾지 못했습니다.</string>
     <string name="file_searching">일치하는 파일 검색중</string>
     <string name="file_title_searching">검색중</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">폴더 선택</string>
     <string name="simple_dir_chooser_current_path">경로 :</string>
     <string name="simple_dir_chooser_invalid_path">잘못된 경로</string>
+    <string name="simple_file_chooser_title">파일 선택</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s 에서 캐시 불러오는 중</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s 에서 웨이포인트 불러오는 중</string>
@@ -991,9 +992,9 @@
     <string name="gpx_import_delete_message">%s을 삭제 하 시겠습니까?</string>
     <string name="gpx_import_select_list_title">GPX를 목록으로 가져오기</string>
     <string name="gpx_import_android">안드로이드에서 가져오기</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">지도 파일 선택</string>
-    <!-- theme file select -->
+    <string name="track_file_select_title">트랙 파일 선택</string>
     <!-- import -->
     <string name="web_import_title">send2cgeo에서 가져오기</string>
     <string name="web_import_waiting">send2cgeo에서 새로운 캐시를 기다리는 중…</string>
@@ -1055,7 +1056,6 @@
     <string name="map_modes">지도 설정</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_hide">숨기기</string>
-    <string name="map_trail_show">트레일 보이기</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
     <string name="map_circles_show">원 보이기</string>
     <string name="map_mycaches_hide">내캐시/찾은 캐시 숨기기</string>
@@ -1068,15 +1068,12 @@
     <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
     <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>
     <string name="init_summary_hidewp_visited">지도에서 방문한 지점 숨기기</string>
-    <string name="map_theme_builtin">기본 설정</string>
     <string name="map_theme_select">지도 테마 선택</string>
     <string name="map_theme_options">테마 옵션</string>
     <string name="map_language">지도 언어</string>
     <string name="map_live_enable">라이브 활성화</string>
     <string name="map_live_disable">라이브 비활성화</string>
     <string name="map_as_list">목록으로 보기</string>
-    <string name="map_clear_trailhistory">트레일 역사 지우기</string>
-    <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
     <string name="map_select_multiple_items">항목 선택</string>
     <string name="map_routing">길찾기</string>
     <string name="map_routing_straight">직선</string>
@@ -1209,7 +1206,7 @@
     <string name="export_modifiedcoords">수정된 좌표</string>
     <string name="export_modifiedcoords_uploading">%1$d 업로드 중</string>
     <string name="export_modifiedcoords_success">업로드 성공</string>
-    <string name="export_modifiedcoords_result">업도드 완료:%1$d 실패/%2$d 성공</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">업도드 완료:%1$d 실패/%2$d 성공</string>
     <string name="export_modifiedcoords_error">업로드 실패</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">강아지 허용</string>
@@ -1453,7 +1450,7 @@
     <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 c:geo에 문제가 생겼습니다.\n작업중이오니, 조만간 확인해 보세요.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 라이브 지도기능에 문제가 생겼습니다.\n작업중이오니, 잠시 후 확인해 보세요.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">이전 버전의 안드로이드를 사용하고있는 것 같습니다. c:geo의 다음 릴리스는 더 이상 장치에서 아마 사용할 수 없습니다.\n자세한 내용을 보려면이 메시지를 누르십시오.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">이전 버전의 안드로이드를 사용하고있는 것 같습니다. 이 c:geo 버전은 더 이상 장치와 호환되지 않으며 예기치 않게 작동하지 않을 수 있습니다!\n자세한 내용을 보려면이 메시지를 누르십시오.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
     <string name="tts_toggle">말하기 전환</string>
@@ -1556,6 +1553,9 @@
     <string name="color_red">빨간색</string>
     <string name="color_turquoise">청록색</string>
     <string name="color_black">검은색</string>
+    <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
+    <string name="preference_colorpicker_select_color">색상 선택</string>
+    <string name="preference_colorpicker_select_opaqueness">불투명체 선택</string>
     <!-- number input -->
     <string name="number_input_title">%1$s에서 %2$s 사이의 값을 입력하세요</string>
     <string name="number_input_err_boundarymin">입력한 값이 너무 작습니다-최소값으로 재설정</string>
@@ -1572,6 +1572,8 @@
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_clear_individual_route">개인 경로 지우기</string>
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
+    <string name="save_sorted_route">저장</string>
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1580,6 +1582,34 @@
     <string name="unit_mi">마일</string>
     <!-- switch settings -->
     <string name="switch_off">끄기</string>
+    <string name="switch_on">켜짐 </string>
     <string name="switch_manual">수동</string>
     <string name="switch_auto">자동</string>
+    <!-- view settings -->
+    <string name="view_settings">설정 보기</string>
+    <string name="delete_setting">설정 삭제</string>
+    <string name="delete_setting_warning">설정에서 키 \"%s\" 삭제하시겠습니까?\n\n이 작업은 취소 할 수 없습니다.</string>
+    <string name="edit_setting">설정 편집 \"%s\"</string>
+    <string name="edit_setting_error_unknown_type">알 수 없는 설정 유형 - 편집이 지원되지 않습니다</string>
+    <string name="edit_setting_error_invalid_data">잘못된 데이터 \"%s\"이 (가) 입력되었습니다. 설정 값은 변경되지 않았습니다.</string>
+    <string name="activate_editmode_title">편집 모드 활성화</string>
+    <string name="activate_editmode_warning">당신은 위험한 지역으로 여기에 들어오고 있습니다!\n\n설정을 직접 변경하면 c:geo를 혼동 시키거나 추가 프로그램 시작을 방해 할 수 있으므로 주의하십시오!\n\n당신 자신의 위험을 감수하고 싶습니까?</string>
+    <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo 로컬 파일 핸들러</string>
+    <string name="localfile_title">로컬 파일 열기</string>
+    <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
+    <string name="localfile_foundmap">지도 파일을 찾았습니다</string>
+    <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">지도 파일 받기</string>
+    <string name="receivemapfile_success">지도 파일이 \"%s\"(으)로 수신되어 지도 디렉토리에 저장되었습니다.</string>
+    <string name="receivemapfile_error">지도 파일을 받는 중 오류</string>
+    <string name="receivemapfile_alreadyexists">이 이름의 파일이 이미 존재합니다. 기존 파일을 덮어 쓰거나 다른 이름으로 새 파일을 저장 하시겠습니까?</string>
+    <string name="receivemapfile_option_overwrite">덮어쓰기</string>
+    <string name="receivemapfile_option_differentname">다른 이름</string>
+    <string name="receivemapfile_kb_copied">%d kB 복사됨</string>
+    <string name="receivemapfile_cancelled">지도 파일 전송이 취소되었습니다.</string>
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <string name="trailhistory">역사 트랙</string>
+    <!-- individual route export -->
 </resources>

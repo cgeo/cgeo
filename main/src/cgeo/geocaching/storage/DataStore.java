@@ -10,7 +10,6 @@ import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -25,14 +24,17 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.maps.routing.RouteItem;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteSegment;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.search.SearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -65,6 +67,7 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -113,7 +116,8 @@ public class DataStore {
         // values for id must not be changed, as there are database entries depending on it
         DBEXTENSION_INVALID(0),
         DBEXTENSION_PENDING_DOWNLOAD (1),
-        DBEXTENSION_FOUNDNUM(2);
+        DBEXTENSION_FOUNDNUM(2),
+        DBEXTENSION_DOWNGRADEABLE_DBVERSION(3);
 
         public int id;
 
@@ -185,8 +189,29 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 83;
+    private static final int dbVersion = 84;
     public static final int customListIdOffset = 10;
+
+    /**
+     * The following constant lists all DBVERSIONS whose changes with the previous version
+     * are DOWNWARD-COMPATIBLE. MOre precisely: if a version x shows up in this list, then this
+     * means that c:geo version written for DB version "x-1" can also work with this database.
+     *
+     * As a rule-of-thumb, a db version is downward compatible if:
+     * * it only adds columns which are nullable or provide default values (so previous c:geo-versions don't fail on insert/update)
+     * * it only adds tables which don't necessarily need an entry (because previous c:geo-versions will not write anything in there)
+     * * migration from "x-1" to x in {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} is programmed such that it can handle it if later
+     *    db is "upgraded" again from "x-1" to x (this is usually the case if adding tables/columns will not fail if oject already exists in db)
+     *
+     * The following changes usually make a DB change NOT downward compatible
+     * * changing name, type or other attributes for a column
+     * * adding columns which are not nullable
+     * * any change which also requires some sort of data migration
+     * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
+     */
+    private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
+            //empty for now
+    }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
     @NonNull private static final String dbTableLists = "cg_lists";
@@ -375,8 +400,9 @@ public class DataStore {
             = "CREATE TABLE " + dbTableRoute + " ("
             + "precedence INTEGER, "
             + "type INTEGER, "
-            + "id INTEGER, "
-            + "geocode TEXT"
+            + "id TEXT, "
+            + "latitude DOUBLE, "
+            + "longitude DOUBLE "
             + "); ";
 
     private static final String dbCreateExtension
@@ -421,14 +447,17 @@ public class DataStore {
             this.string2 = string2;
         }
 
-        /**
-         * get the first entry for this key
-         */
+        /** get the first entry for this key */
         @Nullable
         protected static DBExtension load(final DBExtensionType type, @NonNull final String key) {
-            checkState(type, key, false);
             init();
-            try (Cursor cursor = database.query(dbTableExtension,
+            return load(database, type, key);
+        }
+
+        @Nullable
+        protected static DBExtension load(final SQLiteDatabase db, final DBExtensionType type, @NonNull final String key) {
+            checkState(type, key, false);
+            try (Cursor cursor = db.query(dbTableExtension,
                     new String[]{"_id", "_key", "long1", "long2", "string1", "string2"},
                     "_type = ? AND _key LIKE ?",
                     new String[]{String.valueOf(type.id), key},
@@ -440,14 +469,17 @@ public class DataStore {
             return null;
         }
 
-        /**
-         * get a list of all entries for this key (if key != null) / for this type (if key is null)
-         */
+        /** get a list of all entries for this key (if key != null) / for this type (if key is null) */
         protected static ArrayList<DBExtension> getAll(final DBExtensionType type, @Nullable final String key) {
-            checkState(type, key, true);
             init();
+            return getAll(database, type, key);
+        }
+
+        /** get a list of all entries for this key (if key != null) / for this type (if key is null) */
+        protected static ArrayList<DBExtension> getAll(final SQLiteDatabase db, final DBExtensionType type, @Nullable final String key) {
+            checkState(type, key, true);
             final ArrayList<DBExtension> result = new ArrayList<>();
-            try (Cursor cursor = database.query(dbTableExtension,
+            try (Cursor cursor = db.query(dbTableExtension,
                     new String[]{"_id", "_key", "long1", "long2", "string1", "string2"},
                     "_type = ?" + (null == key ? "" : " AND _key LIKE ?"),
                     null == key ? new String[]{String.valueOf(type)} : new String[]{String.valueOf(type), key},
@@ -459,15 +491,15 @@ public class DataStore {
             return result;
         }
 
-        /**
-         * adds a new entry to database
-         */
+        /**adds a new entry to database */
         protected static DBExtension add(final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
             init();
+            return add(database, type, key, long1, long2, string1, string2);
+        }
+
+        protected static DBExtension add(final SQLiteDatabase db, final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
             try {
-                final SQLiteStatement sql = PreparedStatement.EXTENSION_INSERT.getStatement();
-                sql.bindAllArgsAsStrings(new String[]{String.valueOf(type.id), key, String.valueOf(long1), String.valueOf(long2), string1, string2});
-                final long id = sql.executeInsert();
+                final long id = db.insert(dbTableExtension, null, toValues(type, key, long1, long2, string1, string2));
                 return new DBExtension(id, key, long1, long2, string1, string2);
             } catch (final Exception e) {
                 Log.e("DBExtension.add failed", e);
@@ -475,41 +507,28 @@ public class DataStore {
             return null;
         }
 
-        /**
-         * updates current object into database
-         */
-        protected void updateThis() {
-            if (id <= 0) {
-                throw new IllegalStateException("DBExtension.set: no id set");
-            }
-            init();
-            try {
-                final SQLiteStatement sql = PreparedStatement.EXTENSION_UPDATE.getStatement();
-                sql.bindAllArgsAsStrings(new String[]{String.valueOf(long1), String.valueOf(long2), string1, string2, String.valueOf(id)});
-                sql.executeUpdateDelete();
-            } catch (final Exception e) {
-                Log.e("DBExtension.set failed", e);
-            }
-        }
-
-        /**
-         * removes this element from database
-         */
-        public void removeThis() {
-            init();
-            if (id <= 0) {
-                throw new IllegalStateException("DBExtension.removeThis: id not set");
-            }
-            database.delete(dbTableExtension, "_id = ? AND key LIKE ?", new String[]{ String.valueOf(id), key });
+        private static ContentValues toValues(final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
+            final ContentValues cv = new ContentValues();
+            cv.put("_type", String.valueOf(type.id));
+            cv.put("_key", key);
+            cv.put("long1", long1);
+            cv.put("long2", long2);
+            cv.put("string1", string1);
+            cv.put("string2", string2);
+            return cv;
         }
 
         /**
          * removes all elements with this key from database
          */
         public static void removeAll(final DBExtensionType type, final String key) {
-            checkState(type, key, false);
             init();
-            database.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{ String.valueOf(type.id), key });
+            removeAll(database, type, key);
+        }
+
+        public static void removeAll(final SQLiteDatabase db, final DBExtensionType type, final String key) {
+            checkState(type, key, false);
+            db.delete(dbTableExtension, "_type = ? AND _key LIKE ?", new String[]{ String.valueOf(type.id), key });
         }
 
         private static void checkState(final DBExtensionType type, @Nullable final String key, final boolean nullable) {
@@ -777,6 +796,24 @@ public class DataStore {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_trck_geo ON " + dbTableTrackables + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_extension_key ON " + dbTableExtension + " (_key)");
+        }
+
+        @Override
+        public void onDowngrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+            Log.i("Request to downgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
+
+            //ask the database for a list of downgradeable DB versions AT THE TIME THIS DB WAS LAST UPGRADED
+            //(which might be later than the current code version was written)
+            final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(db);
+
+            //allow downgrade if, and only if, all versions between oldVersion and newVersion are marked as "downward-compatible"
+            for (int version = oldVersion; version > newVersion; version--) {
+                if (!downgradeableVersions.contains(version)) {
+                    throw new SQLiteException("Can't downgrade database from version " + oldVersion + " to " + newVersion +
+                            ": " + version + " is not downward compatible");
+                }
+            }
+            Log.i("Downgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": allowed");
         }
 
         @Override
@@ -1190,9 +1227,38 @@ public class DataStore {
                             db.execSQL("DROP TABLE IF EXISTS cg_table_extension;");
                             db.execSQL(dbCreateExtension);
                         } catch (final Exception e) {
-                            Log.e("Failed to upgrade to vers. 83", e);
+                            Log.e("Failed to upgrade to ver. 83", e);
                         }
                     }
+
+                    // redefine & migrate route table
+                    if (oldVersion < 84) {
+                        try {
+                            db.execSQL("ALTER TABLE " + dbTableRoute + " RENAME TO temp_route");
+                            db.execSQL(dbCreateRoute);
+                            // migrate existing caches in individual route
+                            db.execSQL("INSERT INTO " + dbTableRoute + " (precedence, type, id, latitude, longitude)"
+                                + " SELECT precedence, " + RouteItem.RouteItemType.GEOCACHE.ordinal() + " type, geocode id, latitude, longitude"
+                                + " FROM temp_route LEFT JOIN " + dbTableCaches + " USING (geocode)"
+                                + " WHERE temp_route.type=1");
+                            // migrate existing waypoints in individual route
+                            db.execSQL("INSERT INTO " + dbTableRoute + " (precedence, type, id, latitude, longitude)"
+                                + " SELECT precedence, " + RouteItem.RouteItemType.WAYPOINT.ordinal() + " type, " + dbTableWaypoints + ".geocode || \"-\" || PREFIX id, latitude, longitude"
+                                + " FROM temp_route LEFT JOIN " + dbTableWaypoints + " ON (temp_route.id = " + dbTableWaypoints + "._id)"
+                                + " WHERE temp_route.type=0");
+                            // drop temp table
+                            db.execSQL("DROP TABLE IF EXISTS temp_route");
+                        } catch (final Exception e) {
+                            Log.e("Failed to upgrade to ver. 84", e);
+                        }
+                    }
+                }
+
+                //at the very end of onupgrade: rewrite downgradeable versions in database
+                try {
+                    DBDowngradeableVersions.save(db, DBVERSIONS_DOWNWARD_COMPATIBLE);
+                } catch (final Exception e) {
+                    Log.e("Failed to rewrite downgradeable versions to " + DBVERSIONS_DOWNWARD_COMPATIBLE, e);
                 }
 
                 db.setTransactionSuccessful();
@@ -2544,40 +2610,38 @@ public class DataStore {
     /**
      * Loads the route from the database
      *
-     * @return A list of route items.
+     * @return route.
      */
     @NonNull
-    public static ArrayList<RouteItem> loadRoute() {
+    public static ArrayList<RouteItem> loadIndividualRoute() {
         return queryToColl(dbTableRoute,
-                new String[]{"type", "id", "geocode"},
-                null,
-                null,
-                "precedence ASC",
-                null,
-                new ArrayList<>(),
-                cursor -> new RouteItem(CoordinatesType.values()[cursor.getInt(0)], cursor.getString(2), cursor.getInt(1)));
+            new String[]{"id", "latitude", "longitude"},
+            null,
+            null,
+            "precedence ASC",
+            null,
+            new ArrayList<>(),
+            cursor -> new RouteItem(cursor.getString(0), new Geopoint(cursor.getDouble(1), cursor.getDouble(2)))
+        );
     }
 
     /**
-     * Persists the given {@code RouteItem} list into the database.
+     * Persists the given {@code Route} into the database.
      *
-     * @param routeItems
+     * @param route
      *            a route to save
      */
-    public static void saveRoute(final ArrayList<RouteItem> routeItems) {
+    public static void saveIndividualRoute(final Route route) {
         init();
 
         database.beginTransaction();
         try {
             database.execSQL("DELETE FROM " + dbTableRoute);
+            final RouteSegment[] segments = route.getSegments();
             final SQLiteStatement insertRouteItem = PreparedStatement.INSERT_ROUTEITEM.getStatement();
-            for (int i = 0; i < routeItems.size(); i++) {
-                final RouteItem item = routeItems.get(i);
-                insertRouteItem.bindLong(1, i);
-                insertRouteItem.bindLong(2, item.getType().ordinal());
-                insertRouteItem.bindLong(3, item.getId());
-                insertRouteItem.bindString(4, item.getGeocode());
-                insertRouteItem.executeInsert();
+            for (int i = 0; i < segments.length; i++) {
+                final RouteItem item = segments[i].getItem();
+                insertRouteItemHelper(insertRouteItem, item, i);
             }
             database.setTransactionSuccessful();
         } catch (final Exception e) {
@@ -2587,7 +2651,36 @@ public class DataStore {
         }
     }
 
-    public static void clearRoute() {
+    public static void saveIndividualRoute(final ArrayList<RouteItem> routeItems) {
+        init();
+
+        database.beginTransaction();
+        try {
+            database.execSQL("DELETE FROM " + dbTableRoute);
+            final SQLiteStatement insertRouteItem = PreparedStatement.INSERT_ROUTEITEM.getStatement();
+            int precedence = 0;
+            for (RouteItem item : routeItems) {
+                insertRouteItemHelper(insertRouteItem, item, ++precedence);
+            }
+            database.setTransactionSuccessful();
+        } catch (final Exception e) {
+            Log.e("Saving route failed", e);
+        } finally {
+            database.endTransaction();
+        }
+    }
+
+    private static void insertRouteItemHelper(final SQLiteStatement statement, final RouteItem item, final int precedence) throws Exception {
+        final Geopoint point = item.getPoint();
+        statement.bindLong(1, precedence);
+        statement.bindLong(2, item.getType().ordinal());
+        statement.bindString(3, item.getIdentifier());
+        statement.bindDouble(4, point.getLatitude());
+        statement.bindDouble(5, point.getLongitude());
+        statement.executeInsert();
+    }
+
+    public static void clearIndividualRoute() {
         init();
 
         database.beginTransaction();
@@ -3853,7 +3946,7 @@ public class DataStore {
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude) VALUES (?, ?)"),
-        INSERT_ROUTEITEM("INSERT INTO " + dbTableRoute + " (precedence, type, id, geocode) VALUES (?, ?, ?, ?)"),
+        INSERT_ROUTEITEM("INSERT INTO " + dbTableRoute + " (precedence, type, id, latitude, longitude) VALUES (?, ?, ?, ?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),
@@ -3862,9 +3955,7 @@ public class DataStore {
         SEQUENCE_SELECT("SELECT seq FROM " + dbTableSequences + " WHERE name = ?"),
         SEQUENCE_UPDATE("UPDATE " + dbTableSequences + " SET seq = ? WHERE name = ?"),
         SEQUENCE_INSERT("INSERT INTO " + dbTableSequences + " (name, seq) VALUES (?, ?)"),
-        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL"),
-        EXTENSION_UPDATE("UPDATE " + dbTableExtension + " SET long1=?, long2=?, string1=? string2=? WHERE _id=?"),
-        EXTENSION_INSERT("INSERT INTO " + dbTableExtension + " (_type, _key, long1, long2, string1, string2) VALUES (?, ?, ?, ?, ?, ?)");
+        GET_ALL_STORED_LOCATIONS("SELECT DISTINCT c.location FROM " + dbTableCaches + " c WHERE c.location IS NOT NULL");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 

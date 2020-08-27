@@ -4,13 +4,13 @@
     android:id="@+id/detailScroll"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".CacheDetailActivity$DescriptionViewCreator" >
+    tools:context=".CacheDetailActivity$DescriptionViewCreator">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="4dip" >
+        android:padding="4dip">
 
         <!-- Description -->
 
@@ -18,22 +18,22 @@
             android:id="@+id/description"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dip"
             android:layout_marginTop="12dip"
+            android:layout_marginBottom="12dip"
             android:linksClickable="true"
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
             android:textIsSelectable="true"
             android:textSize="14sp"
             android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="This is the cache description. It might be very long..."/>
+            tools:text="This is the cache description. It might be very long..."
+            tools:visibility="visible" />
 
         <RelativeLayout
             android:id="@+id/loading"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ProgressBar
                 style="?progressSpinnerLarge"
@@ -56,7 +56,7 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
+            <RelativeLayout style="@style/separator_horizontal_layout">
 
                 <View style="@style/separator_horizontal" />
 
@@ -72,10 +72,10 @@
                 android:layout_gravity="left"
                 android:linksClickable="true"
                 android:textColor="?text_color"
-                android:textIsSelectable="true"
                 android:textColorLink="?text_color_link"
+                android:textIsSelectable="true"
                 android:textSize="14sp"
-                tools:text="A hint for finding the cache..."/>
+                tools:text="A hint for finding the cache..." />
 
             <TextView
                 android:id="@+id/hint_spoilerlink"
@@ -97,9 +97,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dip"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
+            <RelativeLayout style="@style/separator_horizontal_layout">
 
                 <View style="@style/separator_horizontal" />
 
@@ -116,22 +116,55 @@
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="14sp"
-                tools:text="Personal note text\nline 2\nline 3"/>
+                tools:text="Personal note text\nline 2\nline 3" />
 
-            <Button
-                android:id="@+id/edit_personalnote"
-                style="@style/button_small"
-                android:text="@string/cache_personal_note_edit" />
+            <View style="@style/separator_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
 
-            <Button
-                android:id="@+id/storewaypoints_personalnote"
-                style="@style/button_small"
-                android:text="@string/cache_personal_note_storewaypoints" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/upload_personalnote"
-                style="@style/button_small"
-                android:text="@string/cache_personal_note_upload" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/edit_personalnote"
+                        style="@style/button_small"
+                        android:text="@string/cache_personal_note_edit" />
+
+                    <Button
+                        android:id="@+id/upload_personalnote"
+                        style="@style/button_small"
+                        android:text="@string/cache_personal_note_upload" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/storewaypoints_personalnote"
+                        style="@style/button_small"
+                        android:layout_width="175dip"
+                        android:text="@string/cache_personal_note_storewaypoints" />
+
+                    <Button
+                        android:id="@+id/deleteewaypoints_personalnote"
+                        style="@style/button_small"
+                        android:layout_width="175dip"
+                        android:text="@string/cache_personal_note_removewaypoints" />
+
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 

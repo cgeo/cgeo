@@ -17,19 +17,19 @@
     <string name="multi">Multi-cache</string>
     <string name="mystery">Mysterie-cache</string>
     <string name="letterbox">Letterbox hybrid</string>
-    <string name="event">Event cache</string>
-    <string name="mega">Mega-event cache</string>
-    <string name="giga">Giga-Event cache</string>
-    <string name="earth">Earthcache</string>
+    <string name="event">Event-cache</string>
+    <string name="mega">Mega-event-cache</string>
+    <string name="giga">Giga-event-cache</string>
+    <string name="earth">Earth-cache</string>
     <string name="cito">Cache in trash out event</string>
-    <string name="webcam">Webcam cache</string>
+    <string name="webcam">Webcam-cache</string>
     <string name="virtual">Virtuell cache</string>
-    <string name="wherigo">Wherigo cache</string>
-    <string name="communceleb">Community Celebration evenemang</string>
-    <string name="ape">Projekt APE cache</string>
+    <string name="wherigo">Wherigo-cache</string>
+    <string name="communceleb">Community Celebration-evenemang</string>
+    <string name="ape">Projekt APE-cache</string>
     <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ Celebration</string>
-    <string name="gps">GPS adventures utställning</string>
+    <string name="gps">GPS adventures-utställning</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Platslös (omvänd) cache</string>
     <string name="userdefined">Användardefinierad cache</string>
@@ -143,13 +143,8 @@
     <string name="log_problem_other_text">Denna geocacharen rapporterade att det finns ett problem med cachen.</string>
     <string name="log_problem_archive_label">Cachen bör arkiveras</string>
     <string name="log_problem_archive_text">Denna geocacharen rapporterade att denna geocache bör arkiveras. En reviewer har blivit informerad.</string>
-    <string-array name="log_image_scales">
-        <item>Ingen skalning</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
+    <string name="log_image_scale_option_noscaling">Ingen skalning</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Översätt till %s</string>
     <string name="translate_to_english">Översätt till engelska</string>
@@ -181,6 +176,7 @@
     <string name="err_detail_cache_find_any">Tyvärr kan c:geo inte hitta någon geocache.</string>
     <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
     <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
+    <string name="err_detail_premium_log_found">Den här cachen är endast tillgänglig för premium-medlemmar på geocaching.com. Därav kan inte cache-informationen visas.\n\nMen om du redan har hittat den här cachen så kan du logga den här.</string>
     <string name="err_watchlist_still_managing">Hanterar fortfarande din watchlist.</string>
     <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
     <string name="err_application_no">c:geo kan inte hitta något lämpligt program.</string>
@@ -423,6 +419,9 @@
     <string name="about_system_info">c:geo systeminformation</string>
     <string name="about_system_info_send_chooser">Skicka systeminformation</string>
     <string name="about_system_write_logcat">Skapa loggfil</string>
+    <string name="about_system_write_logcat_type">Skapa en vanlig- eller utökad loggfil?\n\nVanliga loggfiler är bra i de flesta fall.\nAnvänd bara utökade loggfiler om du ombeds att göra så.</string>
+    <string name="about_system_write_logcat_type_standard">Vanlig</string>
+    <string name="about_system_write_logcat_type_extended">Utökad</string>
     <string name="about_system_write_logcat_success">Loggfil skriven till \"%1$s\" i \"%2$s\" mappen</string>
     <string name="about_system_write_logcat_empty">Loggfilen är tom</string>
     <string name="about_system_write_logcat_error">Fel vid skrivning av loggfil</string>
@@ -563,6 +562,7 @@
     <string name="init_brouterThreshold">Beräkna rutt</string>
     <string name="init_brouterThreshold_description">Maximalt avstånd upp till som brouter helper app (om installerat) beräknar en rutt.</string>
     <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
+    <string name="brouter_recalculating">Beräknar rutt i bakgrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Om rutten är aktiv: Visa den raka sträckan utöver den beräknade ruttlängden.</string>
     <string name="init_disabled">Inaktiva cacher</string>
     <string name="init_summary_disabled">Dölj inaktiva cacher</string>
@@ -830,6 +830,11 @@
     <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
     <string name="cache_menu_allowWaypointExtraction">Tillåt vägpunkter från anteckning</string>
     <string name="cache_personal_note_edit">Redigera</string>
+    <string name="cache_personal_note_storewaypoints">Lägg till/ändra punkter</string>
+    <string name="cache_personal_note_removewaypoints">Ta bort punkter</string>
+    <string name="cache_personal_note_storewaypoints_success">Punkterna är tillagda i personlig anteckning</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Punkterna är tillagda i personliga anteckningen men behövde förkortas (max längd för anteckning: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Punkterna kunde inte läggas till i den personliga anteckning p.g.a. storleksbegräsningar (max längd för anteckning: %1$d)</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
@@ -1036,6 +1041,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">Välj kartfil</string>
     <string name="track_file_select_title">Välj spårfil</string>
+    <string name="individual_route_file_select_title">Välj individuell rutt-fil</string>
     <!-- import -->
     <string name="web_import_title">Importera från send2cgeo</string>
     <string name="web_import_waiting">Väntar på nya cacher från send2cgeo…</string>
@@ -1107,18 +1113,10 @@
     <string name="map_hidewp_parking">Dölj parkerings vägpunkter</string>
     <string name="map_hidewp_visited">Dölj besökta vägpunkter</string>
     <string name="map_hide_track">Dölj individuella spår</string>
-    <string name="map_load_track">Ladda individuellt spår</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Individuellt spår laddat (%d spårpunkt)</item>
-        <item quantity="other">Individuellt spår laddat (%d spårpunkter)</item>
-    </plurals>
-    <string name="load_track_error">Fel vid inläsning av enskilt spår</string>
-    <string name="map_unload_track">Dölj individuella spår</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
     <string name="init_summary_hidewp_visited">Dölj besökta vägpunkter på kartan</string>
-    <string name="map_theme_builtin">Standard</string>
     <string name="map_theme_select">Välj karttema</string>
     <string name="map_theme_options">Inställningar för teman</string>
     <string name="map_language">Kartspråk</string>
@@ -1506,6 +1504,7 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en äldre version av Android. Framtida utgåvor av c:geo kanske inte längre är tillgängliga för din enhet.\nTryck på detta meddelande för ytterligare information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Du använder en version av c:geo som verkar vara äldre än ett år. Vissa funktioner kanske inte fungerar längre på grund av förändringar på webbplatsen eller andra tekniska ändringar. Läs vår FAQ om hur du uppgraderar.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">Du verkar använda Android 11, vilket c:geo inte har fullt stöd för ännu. Läs vår FAQ för att få mer information om detta.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
     <string name="tts_toggle">Växla samtal</string>
@@ -1622,6 +1621,7 @@
     <string name="preference_colorpicker_select_color_scheme">Välj färgschema</string>
     <string name="preference_colorpicker_select_color">Välj färg</string>
     <string name="preference_colorpicker_select_opaqueness">Välj ogenomskinlighet</string>
+    <string name="reset_to_default">Standard</string>
     <!-- number input -->
     <string name="number_input_title">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
@@ -1638,17 +1638,36 @@
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_sort_individual_route">Sortera individuell rutt</string>
+    <string name="map_export_individual_route">Sortera individuell rutt</string>
+    <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
+    <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_clear_individual_route">Rensa enskild rutt</string>
+    <string name="map_clear_individual_route_confirm">Vill du ta bort alla cacher/punkter från din individuella rutt?</string>
     <string name="map_individual_route_cleared">Individuell rutt rensad</string>
     <string name="save_sorted_route">Spara</string>
     <string name="sorted_route_saved">Individuell rutt sparad</string>
+    <string name="load_individual_route_error">Fel vid inläsning av individuell rutt</string>
     <string name="route_item_not_yet_loaded">Rutten är ännu inte inläst</string>
+    <string name="center_on_route">Centrera på rutt</string>
+    <!-- individual track -->
+    <string name="individual_track">GPX-spår/rutt</string>
+    <string name="map_load_track">Ladda spår/rutt från GPX</string>
+    <string name="map_load_track_wait">Laddar spår/rutt i bakgrunden…</string>
+    <string name="map_load_track_confirm">Vill du skriva över befintligt spår/rutt?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Spår/rutt laddad (%d punkt)</item>
+        <item quantity="other">Spår/rutt laddad (%d punkter)</item>
+    </plurals>
+    <string name="load_track_error">Fel uppstod när spåret/rutten laddades</string>
+    <string name="map_unload_track">Ta bort spår/rutt</string>
+    <string name="center_on_track">Centrera på spår/rutt</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Av</string>
     <string name="switch_on">På</string>
     <string name="switch_manual">Manuellt</string>
     <string name="switch_auto">Automatiskt</string>
+    <string name="switch_default">(förvald)</string>
     <!-- view settings -->
     <string name="view_settings">Visa inställningar</string>
     <string name="delete_setting">Radera inställningar</string>
@@ -1667,17 +1686,26 @@
     <string name="receivemapfile_intenttitle">Ta emot kartfil</string>
     <string name="receivemapfile_success">Kartfilen togs emot korrekt som \"%s\" och lagrades i kartkatalogen</string>
     <string name="receivemapfile_error">Fel uppstod när kartfilen togs emot</string>
+    <string name="receivemapfile_error_io_exception">Fel vid mottagande av kartfil. Är kartkatalogen \"%s\" skrivbar?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Filen hittades inte vid mottagandet av kartfilen.</string>
     <string name="receivemapfile_alreadyexists">En kartfil med detta namn finns redan. Ska filen skrivas över eller sparas med ett annat namn?</string>
     <string name="receivemapfile_option_overwrite">Skriv över</string>
     <string name="receivemapfile_option_differentname">Annat namn</string>
     <string name="receivemapfile_kb_copied">%d kB kopierat</string>
     <string name="receivemapfile_cancelled">Kartöverföring avbruten</string>
-    <!-- Download map preference -->
-    <string name="downloadmap_title">Ladda ner baskartor för användning offline</string>
+    <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
     <string name="downloadmap_info">Du kommer att omdirigeras till en nedladdningsplats för grundläggande offline-kartor (inget stöd för teman).\n\nVälj .map-filen för din region och tryck på den för att ladda ner filen.\n\nNär nedladdningen har slutförts trycker du på den nedladdade filen för att ställa in denna karta som aktuell karta för c:geo</string>
+    <string name="downloadmap_choose">Välj karta</string>
+    <string name="downloadmanager_not_available">Kartfilen kan inte laddas ner. Systemets program för nerladdningar är inte tillgängligt</string>
+    <string name="download_started">Nerladdningen startar i bakgrunden</string>
+    <string name="downloadmap_target_not_writable">\"%s\" är inte skrivbar - välj en annan katalog.</string>
     <!-- history trail export -->
     <string name="trailhistory">Historikspår</string>
     <string name="export_trailhistory_title">Exportera historikspår</string>
     <string name="export_trailhistory_success">Exporterade historikspår till \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Rensa historikspår efter export</string>
+    <!-- individual route export -->
+    <string name="export_individualroute_title">Exportera individuell rutt</string>
+    <string name="export_individualroute_success">Enskilda rutten exporterades till \"%s\"</string>
 </resources>

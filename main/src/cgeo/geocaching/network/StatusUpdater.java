@@ -43,6 +43,8 @@ public class StatusUpdater {
             new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "https://www.cgeo.org/faq#legacy");
         private static final Status VERSION_DEPRECATED_STATUS =
             new Status("", "status_version_deprecated", "attribute_abandonedbuilding", "https://www.cgeo.org/faq");
+        private static final Status ANDROID11NOTICE_STATUS =
+            new Status("", "status_android11notice", "attribute_abandonedbuilding", "https://www.cgeo.org/faq#android11");
 
         public final String message;
         public final String messageId;
@@ -79,7 +81,7 @@ public class StatusUpdater {
             } catch (NumberFormatException e) {
                 // skip version check if no parseable number returned
             }
-            return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? CLOSEOUT_STATUS : NO_STATUS;
+            return Build.VERSION.SDK_INT >= 30 ? ANDROID11NOTICE_STATUS : Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? CLOSEOUT_STATUS : NO_STATUS;
         }
     }
 

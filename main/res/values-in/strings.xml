@@ -116,13 +116,6 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
-    <string-array name="log_image_scales">
-        <item>Tidak ada penskalaan</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
@@ -490,8 +483,6 @@
     <string name="init_gpx_importdir">Direktori Impor GPX</string>
     <string name="init_dataDir">Pilih direktori data Geocache</string>
     <string name="init_dataDir_note">Anda dapat memilih untuk menyimpan data tambahan untuk geocaches (spoiler, log gambar, &#8230;) pada penyimpanan eksternal anda atau (kartu SD eksternal yang ditiru sebenarnya tergantung pada perangkat anda).</string>
-    <string name="init_maptrail">Tampilkan Jejak</string>
-    <string name="init_summary_maptrail">Tampilkan jejak pada Peta</string>
     <string name="init_share_after_export">Buka menu share setelah ekspor GPX</string>
     <string name="init_include_found_status">Termasuk \"Ditemukan\" status</string>
     <string name="init_trackautovisit">Kunjungi TBs</string>
@@ -606,13 +597,7 @@
     <string name="err_auth_geokrety_bad_password">Nama pengguna/Kata sandi anda sepertinya tidak cocok.</string>
     <string name="err_auth_geokrety_unknown">%1$s dikembalikan: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="other">%1$d cache</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="other">%1$d hari tersisa</item>
-    </plurals>
     <string name="last_day_available">tersedia dihari terakhir</string>
     <string name="cache_offline">Tidak aktif</string>
     <string name="cache_offline_refresh">Segarkan</string>
@@ -638,7 +623,7 @@
     <string name="cache_personal_note">Catatan pribadi</string>
     <string name="cache_personal_note_edit">Sunting</string>
     <string name="cache_personal_note_limit">Batas catatan pribadi</string>
-    <string name="cache_personal_note_truncation">Catatan pribadi ini akan dipotong setelah %d karakter oleh Geocaching.com.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Catatan pribadi ini akan dipotong setelah %d karakter oleh Geocaching.com.</string>
     <string name="cache_personal_note_upload">Unggah</string>
     <string name="cache_personal_note_uploading">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_done">Mengunggah catatan pribadi</string>
@@ -655,9 +640,6 @@
     <string name="cache_list_select_last">Pilihan terakhir</string>
     <string name="cache_images">Gambar</string>
     <string name="cache_waypoints">Titik arah</string>
-    <plurals name="waypoints">
-        <item quantity="other">%d Titik arah</item>
-    </plurals>
     <string name="cache_waypoints_add">Tambahkan titik arah</string>
     <string name="cache_hint">Petunjuk</string>
     <string name="cache_hint_not_available">Tidak ada petunjuk yang tersedia</string>
@@ -698,7 +680,6 @@
     <string name="cache_menu_streetview">Lihat Jalan</string>
     <string name="cache_menu_browser">Buka di browser</string>
     <string name="cache_menu_visit">Kunjungi Log</string>
-    <string name="cache_menu_visit_offline">Satu klik log offline</string>
     <string name="cache_menu_spoilers">Bocoran Gambar</string>
     <string name="cache_menu_around">Cache sekitar</string>
     <string name="around">Sekitar %s</string>
@@ -768,7 +749,7 @@
     <string name="file_list_no_files">c:geo menemukan berkas yang tidak sesuai.</string>
     <string name="file_searching">Mencari berkas yang cocok</string>
     <string name="file_title_searching">Mencari</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Pilih direktori</string>
     <string name="simple_dir_chooser_current_path">Jalan:</string>
     <string name="simple_dir_chooser_invalid_path">Jalan yang salah</string>
@@ -788,9 +769,8 @@
     <string name="gpx_import_delete_message">Apakah kamu ingin menghapus %s?</string>
     <string name="gpx_import_select_list_title">Impor GPX ke daftar</string>
     <string name="gpx_import_android">Impor dari Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Berkas peta dipilih</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Mengirim dari send2cgeo</string>
     <string name="web_import_waiting">Menunggu cache baru dari send2cgeo&#8230;</string>
@@ -846,11 +826,9 @@
     <string name="map_live">Peta hidup</string>
     <string name="map_view_map">Tampilan peta</string>
     <string name="map_modes">Pengaturan peta</string>
-    <string name="map_trail_show">Tampilkan jejak</string>
     <string name="map_circles_show">Tampilkan lingkaran</string>
     <string name="map_mycaches_hide">Menyembunyikan sendiri/cache ditemukan</string>
     <string name="map_disabled_hide">Menyembunyikan cache yang cacat</string>
-    <string name="map_theme_builtin">Bawaan</string>
     <string name="map_theme_select">Pilih tema peta</string>
     <string name="map_live_enable">Aktifkan hidup</string>
     <string name="map_live_disable">Nonaktifkan hidup</string>
@@ -975,9 +953,6 @@
     <string name="export_confirm_message">Untuk Path: %1$s\nNama Berkas: %2$s</string>
     <string name="export_persnotes">Catatan pribadi</string>
     <string name="export_persnotes_uploading">Mengunggah catatan pribadi %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="other">Mengupload %1$d notes dengan sukses</item>
-    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Anjing peliharaan diizinkan</string>
     <string name="attribute_dogs_no">Anjing peliharaan tidak diizinkan</string>
@@ -1301,6 +1276,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

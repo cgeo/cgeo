@@ -117,13 +117,6 @@
     <string name="log_oc_team_comment">Comentariu din partea echipei OC</string>
     <string name="log_your_saved_log">Însemnare salvată</string>
     <string name="log_empty_logbook">Jurnalul acestei geocutii este gol.</string>
-    <string-array name="log_image_scales">
-        <item>Fără redimensionare</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
@@ -491,8 +484,6 @@
     <string name="init_gpx_importdir">Dosar Importuri GPX</string>
     <string name="init_dataDir">Alege dosar geocutii</string>
     <string name="init_dataDir_note">Poţi alege să salvezi informaţii suplimentare despre geocutii (spoilere, imagini din jurnal, …) în spaţiul de stocare extern (SDcard real sau virtual, în funcţie de dispozitivul tău).</string>
-    <string name="init_maptrail">Arată traseul parcus</string>
-    <string name="init_summary_maptrail">Arată traseul parcus pe Hartă</string>
     <string name="init_share_after_export">Afişează meniul \"Distribuie\" după exportul GPX</string>
     <string name="init_include_found_status">Include starea \"Găsită\"</string>
     <string name="init_trackautovisit">TB vizitează</string>
@@ -606,17 +597,7 @@
     <string name="err_auth_geokrety_bad_password">Numele de utilizator/parola incorect.</string>
     <string name="err_auth_geokrety_unknown">%1$s a răspuns: %2$s.</string>
     <!-- cache -->
-    <plurals name="cache_counts">
-        <item quantity="one">o geocutie</item>
-        <item quantity="few">%1$d geocutii</item>
-        <item quantity="other">%1$d geocutii</item>
-    </plurals>
     <!-- days remaining -->
-    <plurals name="days_remaining">
-        <item quantity="one">a mai rămas o zi</item>
-        <item quantity="few">a mai rămas o zi</item>
-        <item quantity="other">au mai rămas %1$d zile</item>
-    </plurals>
     <string name="last_day_available">ultima zi disponibilă</string>
     <string name="cache_offline">Salvată</string>
     <string name="cache_offline_refresh">Împrospătează</string>
@@ -647,7 +628,7 @@
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
     <string name="cache_personal_note_limit">Limită pentru note personale</string>
-    <string name="cache_personal_note_truncation">Din această notă personală, Geocaching.com va păstra doar primele %d caractere.</string>
+    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Din această notă personală, Geocaching.com va păstra doar primele %d caractere.</string>
     <string name="cache_personal_note_upload">Încarcă</string>
     <string name="cache_personal_note_uploading">Încărcare notă personală</string>
     <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
@@ -664,11 +645,6 @@
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
     <string name="cache_waypoints">Puncte</string>
-    <plurals name="waypoints">
-        <item quantity="one">1 Punct</item>
-        <item quantity="few">%d Puncte</item>
-        <item quantity="other">%d Puncte</item>
-    </plurals>
     <string name="cache_waypoints_add">Adaugă punct</string>
     <string name="cache_hint">Indiciu</string>
     <string name="cache_hint_not_available">Fără indiciu</string>
@@ -711,7 +687,6 @@
     <string name="cache_menu_streetview">Vedere stradală</string>
     <string name="cache_menu_browser">Afişează în browser</string>
     <string name="cache_menu_visit">Jurnal</string>
-    <string name="cache_menu_visit_offline">Însemnare locală cu un singur clic</string>
     <string name="cache_menu_spoilers">Imagini (indicii?)</string>
     <string name="cache_menu_around">Cutii din împrejurimi</string>
     <string name="around">Aproximativ %s</string>
@@ -779,7 +754,7 @@
     <string name="file_list_no_files">c:geo nu a găsit fişierele corespunzătoare.</string>
     <string name="file_searching">Căutare după fişierele potrivite</string>
     <string name="file_title_searching">Căutare</string>
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <string name="simple_dir_chooser_title">Alege director</string>
     <string name="simple_dir_chooser_current_path">Cale:</string>
     <string name="simple_dir_chooser_invalid_path">Cale greşită</string>
@@ -799,9 +774,8 @@
     <string name="gpx_import_delete_message">Vrei să ştergi fişierul %s?</string>
     <string name="gpx_import_select_list_title">Importă GPX în listă</string>
     <string name="gpx_import_android">Importă din Android</string>
-    <!-- map file select -->
+    <!-- file selectors -->
     <string name="map_file_select_title">Format greşit sau fişier defect</string>
-    <!-- theme file select -->
     <!-- import -->
     <string name="web_import_title">Importă din send2cgeo</string>
     <string name="web_import_waiting">Aşteaptă geocutii de la send2cgeo…</string>
@@ -856,11 +830,9 @@
     <string name="map_live">Hartă</string>
     <string name="map_view_map">Hărţi</string>
     <string name="map_modes">Opţiuni hărţi</string>
-    <string name="map_trail_show">Arată traseu</string>
     <string name="map_circles_show">Arată cercurile</string>
     <string name="map_mycaches_hide">Ascunde geocutiile mele/găsite</string>
     <string name="map_disabled_hide">Ascunde geocutiile inactive</string>
-    <string name="map_theme_builtin">Implicit</string>
     <string name="map_theme_select">Alege un stil pentru hartă</string>
     <string name="map_live_enable">Ia de pe net</string>
     <string name="map_live_disable">Fără internet</string>
@@ -981,11 +953,6 @@
     <string name="export_confirm_message">Cale: %1$s\nNume fişier: %2$s</string>
     <string name="export_persnotes">Note personale</string>
     <string name="export_persnotes_uploading">Se încarcă nota personală %1$d</string>
-    <plurals name="export_persnotes_upload_success">
-        <item quantity="one">O notă personală încarcată cu succes</item>
-        <item quantity="few">%1$d note personale încarcate cu succes</item>
-        <item quantity="other">%1$d note personale încarcate cu succes</item>
-    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Permis cu câini</string>
     <string name="attribute_dogs_no">Interzis cu câini</string>
@@ -1335,7 +1302,14 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <string name="unit_yd">zd</string>
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>

@@ -248,6 +248,17 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
+     * Specialized {@link #equals(Object)} method which returns true if given object equals this object
+     * with regards to the Decimal-Minute-format.
+     * Note that this equals-method is NOT consistent with {@link #hashCode()}!
+     */
+    public boolean equalsDecMinute(final Geopoint other) {
+        return other != null && 
+                format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT)
+                        .equals(other.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT));
+    }
+
+    /**
      * Returns formatted coordinates.
      *
      * @param format

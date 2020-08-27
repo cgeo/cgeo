@@ -78,13 +78,6 @@
     <string name="log_problem_other_text">这个寻宝者报告此宝有问题。</string>
     <string name="log_problem_archive_label">此宝应该被存档</string>
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
-    <string-array name="log_image_scales">
-        <item>无缩放(&amp;N)</item>
-        <item>512 px</item>
-        <item>640 px</item>
-        <item>800 px</item>
-        <item>1024 px</item>
-    </string-array>
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
     <string name="translate_to_english">翻译为</string>
@@ -256,10 +249,9 @@
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
     <!-- file list base -->
-    <!-- simple_dir_chooser -->
+    <!-- simple dir / file chooser -->
     <!-- gpx -->
-    <!-- map file select -->
-    <!-- theme file select -->
+    <!-- file selectors -->
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
@@ -299,6 +291,13 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
+    <!-- view settings -->
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveMapFileActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history trail export -->
+    <!-- individual route export -->
 </resources>
