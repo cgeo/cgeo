@@ -10,6 +10,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -17,6 +18,7 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +38,7 @@ import java.util.Collections;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
+import com.mobeta.android.dslv.SimpleFloatViewManager;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RouteSortActivity extends AbstractActivity {
@@ -73,7 +76,7 @@ public class RouteSortActivity extends AbstractActivity {
                 if (null == convertView) {
                     v = getLayoutInflater().inflate(R.layout.twotexts_button_image_item, null, false);
                     ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_delete);
-                    ((ImageView) v.findViewById(R.id.img_right)).setImageResource(R.drawable.ic_menu_reorder);
+                    ((ImageView) v.findViewById(R.id.img_right)).setImageResource(Settings.isLightSkin() ? R.drawable.ic_menu_reorder_black : R.drawable.ic_menu_reorder);
                 }
 
                 final RouteItem routeItem = routeItems.get(position);
@@ -134,6 +137,12 @@ public class RouteSortActivity extends AbstractActivity {
         listView.setFloatViewManager(controller);
         listView.setOnTouchListener(controller);
         listView.setDragEnabled(true);
+
+        if (Settings.isLightSkin()) {
+        final SimpleFloatViewManager simpleFloatViewManager = new SimpleFloatViewManager(listView);
+        simpleFloatViewManager.setBackgroundColor(Color.GRAY);
+        listView.setFloatViewManager(simpleFloatViewManager);
+        }
 
     }
 
