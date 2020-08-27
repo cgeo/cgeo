@@ -34,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import com.mobeta.android.dslv.DragSortController;
 import com.mobeta.android.dslv.DragSortListView;
@@ -53,7 +52,10 @@ public class RouteSortActivity extends AbstractActivity {
         @Override
         public void drop(final int from, final int to) {
             if (from != to) {
-                swap(from, to);
+                routeItems.add(to, routeItems.remove(from));
+                routeItemAdapter.notifyDataSetChanged();
+                changed = true;
+                invalidateOptionsMenu();
             }
         }
     };
@@ -144,13 +146,6 @@ public class RouteSortActivity extends AbstractActivity {
         listView.setFloatViewManager(simpleFloatViewManager);
         }
 
-    }
-
-    private void swap(final int position1, final int position2) {
-        Collections.swap(routeItems, position1, position2);
-        routeItemAdapter.notifyDataSetChanged();
-        changed = true;
-        invalidateOptionsMenu();
     }
 
     private boolean delete(final int position) {
