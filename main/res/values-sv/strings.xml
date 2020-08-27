@@ -568,6 +568,8 @@
     <string name="init_summary_disabled">Dölj inaktiva cacher</string>
     <string name="init_archived">Exkludera arkiverade</string>
     <string name="init_summary_archived">Exkludera arkiverade cacher</string>
+    <string name="init_global_wp_extraction_disable">Extrahering av vägpunkter</string>
+    <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen</string>
     <string name="init_save_log_img">Loggbilder</string>
     <string name="init_summary_save_log_img">Spara bilder från loggar</string>
     <string name="init_units">Enheter</string>
@@ -654,6 +656,8 @@
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
     <string name="init_sigautoinsert">Infoga automatiskt</string>
+    <string name="init_offlinelogs_homescreen">Visa offline loggar</string>
+    <string name="init_summary_offlinelogs_homescreen">En offline loggräknare (t.ex. \"+ 1\") kommer att visas bredvid din siffran för antal hittade på startskärmen om du har loggar som ännu inte skickats.</string>
     <string name="init_loaddirectionimg">Riktningsbild</string>
     <string name="init_summary_loaddirectionimg">Ladda riktningsbild om det behövs (enbart Basic Member)</string>
     <string name="init_default_navigation_tool">Förvald navigering</string>
@@ -835,6 +839,7 @@
     <string name="cache_personal_note_storewaypoints_success">Punkterna är tillagda i personlig anteckning</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Punkterna är tillagda i personliga anteckningen men behövde förkortas (max längd för anteckning: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Punkterna kunde inte läggas till i den personliga anteckning p.g.a. storleksbegräsningar (max längd för anteckning: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Inga lagringsbara vägpunkter hittades</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
@@ -1648,6 +1653,10 @@
     <string name="sorted_route_saved">Individuell rutt sparad</string>
     <string name="load_individual_route_error">Fel vid inläsning av individuell rutt</string>
     <string name="route_item_not_yet_loaded">Rutten är ännu inte inläst</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Rutten lästes in med %d punkt</item>
+        <item quantity="other">Rutten lästes in med %d punkter</item>
+    </plurals>
     <string name="center_on_route">Centrera på rutt</string>
     <!-- individual track -->
     <string name="individual_track">GPX-spår/rutt</string>
