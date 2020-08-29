@@ -1244,7 +1244,7 @@ public class DataStore {
                             // migrate existing waypoints in individual route
                             db.execSQL("INSERT INTO " + dbTableRoute + " (precedence, type, id, latitude, longitude)"
                                 + " SELECT precedence, " + RouteItem.RouteItemType.WAYPOINT.ordinal() + " type, " + dbTableWaypoints + ".geocode || \"-\" || PREFIX id, latitude, longitude"
-                                + " FROM temp_route LEFT JOIN " + dbTableWaypoints + " ON (temp_route.id = " + dbTableWaypoints + "._id)"
+                                + " FROM temp_route INNER JOIN " + dbTableWaypoints + " ON (temp_route.id = " + dbTableWaypoints + "._id)"
                                 + " WHERE temp_route.type=0");
                             // drop temp table
                             db.execSQL("DROP TABLE IF EXISTS temp_route");
