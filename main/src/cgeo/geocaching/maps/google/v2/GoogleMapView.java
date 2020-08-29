@@ -321,6 +321,12 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     @Override
     public void repaintRequired(final GeneralOverlay overlay) {
         // FIXME add recheck/readd markers and overlay
+        if (null != positionAndHistoryRef) {
+            final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
+            if (null != positionAndHistory) {
+                positionAndHistory.repaintRequired();
+            }
+        }
     }
 
     @Override

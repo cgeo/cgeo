@@ -18,7 +18,6 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.export.TrailHistoryExport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -58,6 +57,7 @@ import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
@@ -347,7 +347,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_hidewp_visited).setChecked(Settings.isExcludeWpVisited());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
-            menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             CompactIconModeUtils.onPrepareOptionsMenu(menu);
 
@@ -356,12 +355,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
-
             IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
+            HistoryTrackUtils.onPrepareOptionsMenu(menu);
             TrackUtils.onPrepareOptionsMenu(menu);
             BRouterUtils.onPrepareOptionsMenu(menu);
 
@@ -378,11 +376,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         switch (id) {
             case android.R.id.home:
                 ActivityMixin.navigateUp(this);
-                return true;
-            case R.id.menu_trail_mode:
-                Settings.setMapTrail(!Settings.isMapTrail());
-                historyLayer.requestRedraw();
-                ActivityMixin.invalidateOptionsMenu(this);
                 return true;
             case R.id.menu_direction_line:
                 Settings.setMapDirection(!Settings.isMapDirection());
@@ -479,13 +472,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             case R.id.menu_as_list:
                 CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
                 return true;
-            case R.id.menu_clear_trailhistory:
-                clearTrailHistory();
-                return true;
-            case R.id.menu_export_trailhistory: {
-                new TrailHistoryExport(this, this::clearTrailHistory);
-                return true;
-            }
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
@@ -493,7 +479,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
+                if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
+                && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
                 && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)

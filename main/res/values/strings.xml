@@ -1206,7 +1206,6 @@
     <string name="map_modes">Map settings</string>
     <string name="map_rotation">Map rotation</string>
     <string name="map_hide">Hide</string>
-    <string name="map_trail_show">Show history track</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_circles_show">Show circles</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
@@ -1226,8 +1225,6 @@
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>
     <string name="map_as_list">Show as list</string>
-    <string name="map_clear_trailhistory">Clear history track</string>
-    <string name="map_trailhistory_cleared">History track cleared</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
     <string name="map_routing_straight">Straight line</string>
@@ -1904,7 +1901,13 @@
     <string name="download_started">Downloading started in background</string>
     <string name="downloadmap_target_not_writable">Target \"%s\" is not writable - please select a different map file directory.</string>
 
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Clear history track</string>
+    <string name="map_trailhistory_cleared">History track cleared</string>
+    <string name="map_trail_show">Show history track</string>
+    <string name="map_trail_hide">Hide history track</string>
+
+    <!-- history track export -->
     <string name="trailhistory">History track</string>
     <string name="export_trailhistory_title">Export history track</string>
     <string name="export_trailhistory_success">Exported history track to \"%s\"</string>
