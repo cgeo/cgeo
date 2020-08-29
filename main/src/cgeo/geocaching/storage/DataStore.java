@@ -53,6 +53,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
@@ -840,7 +841,7 @@ public class DataStore {
                             db.execSQL(dbCreateSearchDestinationHistory);
 
                             Log.i("Added table " + dbTableSearchDestinationHistory + ".");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 52);
                         }
                     }
@@ -850,7 +851,7 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN onWatchlist INTEGER");
 
                             Log.i("Column onWatchlist added to " + dbTableCaches + ".");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 53);
                         }
                     }
@@ -858,7 +859,7 @@ public class DataStore {
                     if (oldVersion < 54) { // update to 54
                         try {
                             db.execSQL(dbCreateLogImages);
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 54);
                         }
                     }
@@ -866,7 +867,7 @@ public class DataStore {
                     if (oldVersion < 55) { // update to 55
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN personal_note TEXT");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 55);
                         }
                     }
@@ -878,7 +879,7 @@ public class DataStore {
                             db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = " +
                                     "LOWER(attribute) WHERE attribute LIKE \"%_yes\" " +
                                     "OR  attribute LIKE \"%_no\"");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 56);
                         }
                     }
@@ -893,7 +894,7 @@ public class DataStore {
                             db.execSQL("DROP INDEX in_e");
                             db.execSQL("DROP INDEX in_f");
                             createIndices(db);
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 57);
                         }
                     }
@@ -980,7 +981,7 @@ public class DataStore {
                             db.setTransactionSuccessful();
 
                             Log.i("Removed latitude_string and longitude_string columns");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 58);
                         } finally {
                             db.endTransaction();
@@ -992,7 +993,7 @@ public class DataStore {
                             // Add new indices and remove obsolete cache files
                             createIndices(db);
                             removeObsoleteGeocacheDataDirectories();
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 59);
                         }
                     }
@@ -1000,7 +1001,7 @@ public class DataStore {
                     if (oldVersion < 60) {
                         try {
                             removeSecEmptyDirs();
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 60);
                         }
                     }
@@ -1008,7 +1009,7 @@ public class DataStore {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLogs + " ADD COLUMN friend INTEGER");
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN coordsChanged INTEGER DEFAULT 0");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 61);
                         }
                     }
@@ -1018,14 +1019,14 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN finalDefined INTEGER DEFAULT 0");
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN own INTEGER DEFAULT 0");
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET own = 1 WHERE type = 'own'");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 62);
                         }
                     }
                     if (oldVersion < 63) {
                         try {
                             removeDoubleUnderscoreMapFiles();
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 63);
                         }
                     }
@@ -1036,7 +1037,7 @@ public class DataStore {
                             // rather than symbolic ones because the fix must be applied with the values at the time
                             // of the problem. The problem was introduced in release 2012.06.01.
                             db.execSQL("UPDATE " + dbTableCaches + " SET reason=1 WHERE reason=2");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 64);
                         }
                     }
@@ -1045,7 +1046,7 @@ public class DataStore {
                         try {
                             // Set all waypoints where name is Original coordinates to type ORIGINAL
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET type='original', own=0 WHERE name='Original Coordinates'");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 65);
                         }
                     }
@@ -1053,7 +1054,7 @@ public class DataStore {
                     if (oldVersion < 66) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN visited INTEGER DEFAULT 0");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 66);
                         }
                     }
@@ -1062,7 +1063,7 @@ public class DataStore {
                         try {
                             db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_yes' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_yes'");
                             db.execSQL("UPDATE " + dbTableAttributes + " SET attribute = 'easy_climbing_no' WHERE geocode LIKE 'OC%' AND attribute = 'climbing_no'");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 67);
                         }
                     }
@@ -1070,7 +1071,7 @@ public class DataStore {
                     if (oldVersion < 68) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN logPasswordRequired INTEGER DEFAULT 0");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 68);
                         }
                     }
@@ -1078,7 +1079,7 @@ public class DataStore {
                     if (oldVersion < 69) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLogImages + " ADD COLUMN description TEXT");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 69);
                         }
                     }
@@ -1086,7 +1087,7 @@ public class DataStore {
                     if (oldVersion < 70) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN watchlistCount INTEGER DEFAULT -1");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 70);
                         }
                     }
@@ -1096,7 +1097,7 @@ public class DataStore {
                             db.execSQL(dbCreateCachesLists);
                             createIndices(db);
                             db.execSQL("INSERT INTO " + dbTableCachesLists + " SELECT reason, geocode FROM " + dbTableCaches);
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 71);
                         }
                     }
@@ -1108,7 +1109,7 @@ public class DataStore {
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET user_note = note");
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET note = ''");
                             db.execSQL("UPDATE " + dbTableWaypoints + " SET org_coords_empty = 1 WHERE latitude IS NULL AND longitude IS NULL");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 72);
                         }
                     }
@@ -1116,7 +1117,7 @@ public class DataStore {
                     if (oldVersion < 73) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableWaypoints + " ADD COLUMN calc_state TEXT");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 73);
                         }
                     }
@@ -1125,7 +1126,7 @@ public class DataStore {
                     if (oldVersion < 74) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLogsOffline + " ADD COLUMN report_problem TEXT");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 74);
                         }
                     }
@@ -1136,7 +1137,7 @@ public class DataStore {
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_date LONG");
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_type INTEGER");
                             db.execSQL("ALTER TABLE " + dbTableTrackables + " ADD COLUMN log_guid TEXT");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 75);
                         }
                     }
@@ -1147,7 +1148,7 @@ public class DataStore {
                             db.execSQL(dbCreateTrailHistory);
 
                             Log.i("Added table " + dbTableTrailHistory + ".");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 76);
                         }
                     }
@@ -1156,7 +1157,7 @@ public class DataStore {
                     if (oldVersion < 77) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableLists + " ADD COLUMN marker INTEGER NOT NULL DEFAULT 0");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 77);
                         }
                     }
@@ -1172,7 +1173,7 @@ public class DataStore {
                                 + "latitude DOUBLE, "
                                 + "longitude DOUBLE "
                                 + ")");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 79);
                         }
                     }
@@ -1180,7 +1181,7 @@ public class DataStore {
                     if (oldVersion < 80) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableCaches + " ADD COLUMN preventWaypointsFromNote INTEGER NOT NULL DEFAULT 0");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 80);
                         }
                     }
@@ -1191,7 +1192,7 @@ public class DataStore {
                             db.execSQL(dbCreateRoute);
 
                             Log.i("Added table " + dbTableRoute + ".");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 81);
                         }
                     }
@@ -1202,7 +1203,7 @@ public class DataStore {
                             db.execSQL(dbCreateExtension);
 
                             Log.i("Added table " + dbTableExtension + ".");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 82);
                         }
                     }
@@ -1212,14 +1213,14 @@ public class DataStore {
                         // remove "table" infix for route table by renaming table
                         try {
                             db.execSQL("ALTER TABLE cg_table_route RENAME TO " + dbTableRoute);
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             // ignore, because depending on your upgrade path, the statement above cannot work
                         }
                         // recreate extension table to remove "table" infix and to fix two column types
                         try {
                             db.execSQL("DROP TABLE IF EXISTS cg_table_extension;");
                             db.execSQL(dbCreateExtension);
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 83);
                         }
                     }
@@ -1241,7 +1242,7 @@ public class DataStore {
                                 + " WHERE temp_route.type=0");
                             // drop temp table
                             db.execSQL("DROP TABLE IF EXISTS temp_route");
-                        } catch (final Exception e) {
+                        } catch (final SQLException e) {
                             onUpgradeError(e, 84);
                         }
                     }
@@ -1262,8 +1263,9 @@ public class DataStore {
             Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
         }
 
-        private void onUpgradeError(final Exception e, final int version) {
+        private void onUpgradeError(final SQLException e, final int version) throws SQLException {
             Log.e("Failed to upgrade to version " + version, e);
+            throw e;
         }
 
         @Override
