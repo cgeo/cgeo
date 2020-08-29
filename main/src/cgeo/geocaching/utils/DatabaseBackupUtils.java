@@ -8,6 +8,9 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import static android.database.sqlite.SQLiteDatabase.OPEN_READONLY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,21 +49,33 @@ public class DatabaseBackupUtils {
     }
 
     private static void restoreDatabaseInternal(final Activity activity) {
-        final Resources res = activity.getResources();
-        final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
-        final AtomicInteger restoreSuccessful = new AtomicInteger(DataStore.RESTORE_FAILED_GENERAL);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal()), () -> {
-            dialog.dismiss();
-            final int restored = restoreSuccessful.get();
-            final String message =
-                    restored == DataStore.RESTORE_SUCCESSFUL ? res.getString(R.string.init_restore_success) :
-                    restored == DataStore.RESTORE_FAILED_DBRECREATED ? res.getString(R.string.init_restore_failed_dbrecreated) :
-                    res.getString(R.string.init_restore_failed);
-            Dialogs.message(activity, R.string.init_backup_restore, message);
-            if (activity instanceof MainActivity) {
-                ((MainActivity) activity).updateCacheCounter();
+        final File sourceFile = DataStore.getBackupFileInternal(true);
+        try {
+            final SQLiteDatabase backup = SQLiteDatabase.openDatabase(sourceFile.getPath(), null, OPEN_READONLY);
+            final int backupDbVersion = backup.getVersion();
+            final int expectedDbVersion = DataStore.getExpectedDBVersion();
+            if (!DataStore.versionsAreCompatible(backupDbVersion, expectedDbVersion)) {
+                Dialogs.message(activity, R.string.init_restore_failed, String.format(activity.getString(R.string.init_restore_version_error), expectedDbVersion, backupDbVersion));
+            } else {
+                final Resources res = activity.getResources();
+                final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
+                final AtomicInteger restoreSuccessful = new AtomicInteger(DataStore.RESTORE_FAILED_GENERAL);
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal()), () -> {
+                    dialog.dismiss();
+                    final int restored = restoreSuccessful.get();
+                    final String message =
+                            restored == DataStore.RESTORE_SUCCESSFUL ? res.getString(R.string.init_restore_success) :
+                                    restored == DataStore.RESTORE_FAILED_DBRECREATED ? res.getString(R.string.init_restore_failed_dbrecreated) :
+                                            res.getString(R.string.init_restore_failed);
+                    Dialogs.message(activity, R.string.init_backup_restore, message);
+                    if (activity instanceof MainActivity) {
+                        ((MainActivity) activity).updateCacheCounter();
+                    }
+                });
             }
-        });
+        } catch (SQLiteException e) {
+            // ignore
+        }
     }
 
     /**
