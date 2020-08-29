@@ -1341,6 +1341,7 @@
     <string name="helper_where_you_go_description">WhereYouGo allows playing and searching geocaches of type Wherigo. c:geo can automatically trigger the download of cartridges within this app.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter provides offline routing. If it is installed and has the necessary files downloaded, c:geo will automatically show a route to the cache on the internal map.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf allows you to read the data from ANT+/Garmin chirp tags, which is needed for ANT+/chirp geocaches.</string>
 
     <!-- export -->
     <string name="export">Export</string>
