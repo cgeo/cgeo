@@ -128,9 +128,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                     hitWaypoint = true;
                     if (Settings.isLongTapOnMapActivated()) {
                         ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
-                        if (distanceDrawer == null) {
-                            this.distanceDrawer = new DistanceDrawer(this, null, Settings.isBrouterShowBothDistances());
-                        }
                     }
                 }
             }
@@ -339,7 +336,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     public void setDestinationCoords(final Geopoint destCoords) {
-        this.distanceDrawer = destCoords != null ? new DistanceDrawer(this, destCoords, Settings.isBrouterShowBothDistances()) : null;
+        setDistanceDrawer(destCoords);
     }
 
     /**
@@ -461,6 +458,10 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         } finally {
             lock.unlock();
         }
+    }
+
+    public void setDistanceDrawer(final Geopoint destCoords) {
+        this.distanceDrawer = new DistanceDrawer(this, destCoords, Settings.isBrouterShowBothDistances());
     }
 
     public GoogleCacheOverlayItem closest(final Geopoint geopoint) {

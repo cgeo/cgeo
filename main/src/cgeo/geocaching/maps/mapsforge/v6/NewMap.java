@@ -536,6 +536,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void clearIndividualRoute() {
         manualRoute.clearRoute(routeLayer);
+        distanceView.showRouteDistance();
         ActivityMixin.invalidateOptionsMenu(this);
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
@@ -1602,7 +1603,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (StringUtils.isNotBlank(mapOptions.geocode)) {
             return DataStore.loadCache(mapOptions.geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
-
         return null;
     }
 

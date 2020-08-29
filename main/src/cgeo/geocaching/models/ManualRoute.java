@@ -78,6 +78,7 @@ public class ManualRoute extends Route {
         }
     }
     private void clearRouteInternal(final UpdateManualRoute routeUpdater, final boolean deleteInDatabase) {
+        distance = 0.0f;
         if (deleteInDatabase) {
             Schedulers.io().scheduleDirect(DataStore::clearIndividualRoute);
         }
