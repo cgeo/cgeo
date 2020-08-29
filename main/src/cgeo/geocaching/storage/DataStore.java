@@ -2616,7 +2616,7 @@ public class DataStore {
     public static ArrayList<RouteItem> loadIndividualRoute() {
         return queryToColl(dbTableRoute,
             new String[]{"id", "latitude", "longitude"},
-            null,
+            "id IS NOT NULL OR (latitude IS NOT NULL AND longitude IS NOT NULL)",
             null,
             "precedence ASC",
             null,

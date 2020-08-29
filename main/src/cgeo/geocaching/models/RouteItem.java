@@ -43,45 +43,47 @@ public class RouteItem implements Parcelable {
         setDetails(buildIdentifier(p), p, RouteItemType.COORDS, "", 0);
 
         // try to parse name string
-        final MatcherWrapper matches = new MatcherWrapper(GEOINFO_PATTERN, name);
-        if (matches.find()) {
+        if (StringUtils.isNotBlank(name)) {
+            final MatcherWrapper matches = new MatcherWrapper(GEOINFO_PATTERN, name);
+            if (matches.find()) {
 
-            // do we have a valid geocode, and a cache available for it?
-            final String temp = matches.group(1);
-            if (ConnectorFactory.canHandle(temp)) {
-                final Geocache cache = DataStore.loadCache(temp, LoadFlags.LOAD_CACHE_OR_DB);
-                if (null != cache) {
-                    cacheGeocode = temp;
+                // do we have a valid geocode, and a cache available for it?
+                final String temp = matches.group(1);
+                if (ConnectorFactory.canHandle(temp)) {
+                    final Geocache cache = DataStore.loadCache(temp, LoadFlags.LOAD_CACHE_OR_DB);
+                    if (null != cache) {
+                        cacheGeocode = temp;
 
-                    // if no waypoint data is available: stay with geocache
-                    if (matches.groupCount() < 3 || null == matches.group(3)) {
-                        setDetails(cache);
-                        return;
-                    }
+                        // if no waypoint data is available: stay with geocache
+                        if (matches.groupCount() < 3 || null == matches.group(3)) {
+                            setDetails(cache);
+                            return;
+                        }
 
-                    // try to extract waypoint data
-                    final String prefix = matches.group(3);
-                    if (StringUtils.isNotBlank(prefix)) {
-                        final List<Waypoint> waypoints = DataStore.loadWaypoints(cacheGeocode);
-                        if (null != waypoints && !waypoints.isEmpty()) {
-                            int counter = 0;
-                            Waypoint tempWaypoint = null;
-                            for (Waypoint waypoint : waypoints) {
-                                if (prefix.equals(waypoint.getPrefix())) {
-                                    tempWaypoint = waypoint;
-                                    counter++;
-                                }
-                            }
-                            if (counter == 1) {
-                                // unique prefix => use waypoint
-                                setDetails(tempWaypoint);
-                                return;
-                            } else if (counter > 1) {
-                                // for non-unique prefixes try to find a user-defined waypoint with the same coordinates
+                        // try to extract waypoint data
+                        final String prefix = matches.group(3);
+                        if (StringUtils.isNotBlank(prefix)) {
+                            final List<Waypoint> waypoints = DataStore.loadWaypoints(cacheGeocode);
+                            if (null != waypoints && !waypoints.isEmpty()) {
+                                int counter = 0;
+                                Waypoint tempWaypoint = null;
                                 for (Waypoint waypoint : waypoints) {
-                                    if (point.equalsDecMinute(waypoint.getCoords())) {
-                                        setDetails(waypoint);
-                                        return;
+                                    if (prefix.equals(waypoint.getPrefix())) {
+                                        tempWaypoint = waypoint;
+                                        counter++;
+                                    }
+                                }
+                                if (counter == 1) {
+                                    // unique prefix => use waypoint
+                                    setDetails(tempWaypoint);
+                                    return;
+                                } else if (counter > 1) {
+                                    // for non-unique prefixes try to find a user-defined waypoint with the same coordinates
+                                    for (Waypoint waypoint : waypoints) {
+                                        if (point.equalsDecMinute(waypoint.getCoords())) {
+                                            setDetails(waypoint);
+                                            return;
+                                        }
                                     }
                                 }
                             }
