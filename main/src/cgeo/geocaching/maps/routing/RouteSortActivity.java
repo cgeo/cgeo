@@ -10,6 +10,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -17,6 +18,7 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,17 +34,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
+import com.mobeta.android.dslv.DragSortController;
+import com.mobeta.android.dslv.DragSortListView;
+import com.mobeta.android.dslv.SimpleFloatViewManager;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RouteSortActivity extends AbstractActivity {
 
     private ArrayAdapter<RouteItem> routeItemAdapter;
     private ArrayList<RouteItem> routeItems;
-    private ListView listView;
+    private DragSortListView listView;
     private boolean changed = false;
     private int lastActivatedPosition = -1;
+
+    private DragSortListView.DropListener onDrop = new DragSortListView.DropListener() {
+        @Override
+        public void drop(final int from, final int to) {
+            if (from != to) {
+                routeItems.add(to, routeItems.remove(from));
+                routeItemAdapter.notifyDataSetChanged();
+                changed = true;
+                invalidateOptionsMenu();
+            }
+        }
+    };
 
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -51,6 +67,8 @@ public class RouteSortActivity extends AbstractActivity {
         setTitle(getString(R.string.map_sort_individual_route));
 
         routeItems = DataStore.loadIndividualRoute();
+        listView = new DragSortListView(this, null);
+        final DragSortController controller = new DragSortController(listView);
 
         routeItemAdapter = new ArrayAdapter<RouteItem>(this, 0, routeItems) {
             @SuppressLint("SetTextI18n")
@@ -58,9 +76,9 @@ public class RouteSortActivity extends AbstractActivity {
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View v = convertView;
                 if (null == convertView) {
-                    v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, null, false);
-                    ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_up);
-                    ((ImageButton) v.findViewById(R.id.button_right)).setImageResource(R.drawable.ic_menu_down);
+                    v = getLayoutInflater().inflate(R.layout.twotexts_button_image_item, null, false);
+                    ((ImageButton) v.findViewById(R.id.button_left)).setImageResource(R.drawable.ic_menu_delete);
+                    ((ImageView) v.findViewById(R.id.img_right)).setImageResource(Settings.isLightSkin() ? R.drawable.ic_menu_reorder_black : R.drawable.ic_menu_reorder);
                 }
 
                 final RouteItem routeItem = routeItems.get(position);
@@ -97,30 +115,37 @@ public class RouteSortActivity extends AbstractActivity {
                     title.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
                     detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
                 }
-                title.setOnLongClickListener(v1 -> delete(position));
-                detail.setOnLongClickListener(v1 -> delete(position));
 
-                final View buttonUp = v.findViewById(R.id.button_left);
-                buttonUp.setVisibility(position > 0 ? View.VISIBLE : View.INVISIBLE);
-                buttonUp.setOnClickListener(vUp -> swap(position, position - 1));
+                final View buttonDelete = v.findViewById(R.id.button_left);
+                buttonDelete.setVisibility(View.VISIBLE);
+                buttonDelete.setOnClickListener(vUp -> delete(position));
 
-                final ImageButton buttonDown = v.findViewById(R.id.button_right);
-                buttonDown.setVisibility(position < routeItems.size() - 1 ? View.VISIBLE : View.INVISIBLE);
-                buttonDown.setOnClickListener(vDown -> swap(position, position + 1));
+                final ImageView imgReorder = v.findViewById(R.id.img_right);
+                imgReorder.setVisibility(View.VISIBLE);
+                imgReorder.setOnTouchListener(controller);
 
                 return v;
             }
         };
-        listView = new ListView(this);
+
         setContentView(listView);
         listView.setAdapter(routeItemAdapter);
-    }
+        listView.setDropListener(onDrop);
 
-    private void swap(final int position1, final int position2) {
-        Collections.swap(routeItems, position1, position2);
-        routeItemAdapter.notifyDataSetChanged();
-        changed = true;
-        invalidateOptionsMenu();
+        controller.setDragHandleId(R.id.img_right);
+        controller.setRemoveEnabled(false);
+        controller.setSortEnabled(true);
+        controller.setDragInitMode(1);
+        listView.setFloatViewManager(controller);
+        listView.setOnTouchListener(controller);
+        listView.setDragEnabled(true);
+
+        if (Settings.isLightSkin()) {
+        final SimpleFloatViewManager simpleFloatViewManager = new SimpleFloatViewManager(listView);
+        simpleFloatViewManager.setBackgroundColor(Color.GRAY);
+        listView.setFloatViewManager(simpleFloatViewManager);
+        }
+
     }
 
     private boolean delete(final int position) {
