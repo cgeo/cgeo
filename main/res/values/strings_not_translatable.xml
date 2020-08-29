@@ -173,6 +173,7 @@
     <string translatable="false" name="helper_barcode_title">Barcode Scanner</string>
     <string translatable="false" name="helper_pocketquery_title">Pocket Query Creator</string>
     <string translatable="false" name="helper_where_you_go_title">WhereYouGo</string>
+    <string translatable="false" name="helper_chirpwolf">Chirp Wolf</string>
 
     <!-- fileprovider -->
     <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
