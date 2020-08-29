@@ -272,6 +272,17 @@
         <item name="android:layout_gravity">left</item>
     </style>
 
+    <!-- single degree -->
+    <style name="single_degree_style" parent="location_current_style">
+        <item name="android:textColor">?text_color_grey</item>
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:width">40dip</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
+        <item name="android:ellipsize">none</item>
+    </style>
+
     <!-- separators -->
     <style name="separator_horizontal">
         <item name="android:layout_width">fill_parent</item>

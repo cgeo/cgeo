@@ -41,7 +41,7 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
     }
 
     public void testDirectionObservable() {
-        assertDataAvailability(sensors.directionObservable());
+        assertDataAvailability(sensors.directionDataObservable());
     }
 
     public void testGeodataObservable() {

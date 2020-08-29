@@ -25,6 +25,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.playservices.GooglePlayServices;
+import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
@@ -89,6 +90,7 @@ public class Settings {
     @NonNull private static final String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     private static boolean useCompass = true;
+    private static DirectionData.DeviceOrientation deviceOrientationMode = DirectionData.DeviceOrientation.AUTO;
 
     public enum CoordInputFormatEnum {
         Plain,
@@ -1050,9 +1052,18 @@ public class Settings {
         return useCompass;
     }
 
+    public static void setDeviceOrientationMode(final DirectionData.DeviceOrientation value) {
+        deviceOrientationMode = value;
+    }
+
+    public static DirectionData.DeviceOrientation getDeviceOrientationMode() {
+        return deviceOrientationMode;
+    }
+
     public static void setUseCompass(final boolean value) {
         useCompass = value;
     }
+
 
     public static boolean isLightSkin() {
         return getBoolean(R.string.pref_skin, false);

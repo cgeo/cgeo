@@ -11,6 +11,10 @@ import android.hardware.SensorManager;
 
 import io.reactivex.rxjava3.core.Observable;
 
+/**
+ * Orientation values from deprecated Android-Sensor {@link Sensor#TYPE_LOW_LATENCY_OFFBODY_DETECT}.
+ * Kept only for backward compatibility (and only used if user explicitely wants it via Settings)
+ */
 public class OrientationProvider {
 
     private OrientationProvider() {
@@ -23,17 +27,17 @@ public class OrientationProvider {
     }
 
     @SuppressWarnings("deprecation")
-    public static Observable<Float> create(final Context context) {
+    public static Observable<DirectionData> create(final Context context) {
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         final Sensor orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         if (orientationSensor == null) {
             return Observable.error(new RuntimeException("no orientation sensor"));
         }
-        final Observable<Float> observable = Observable.create(emitter -> {
+        final Observable<DirectionData> observable = Observable.create(emitter -> {
             final SensorEventListener listener = new SensorEventListener() {
                 @Override
                 public void onSensorChanged(final SensorEvent sensorEvent) {
-                    emitter.onNext(sensorEvent.values[0]);
+                    emitter.onNext(DirectionData.createFor(sensorEvent.values[0], DirectionData.DeviceOrientation.UNKNOWN, sensorEvent.values, false));
                 }
 
                 @Override

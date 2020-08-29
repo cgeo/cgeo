@@ -24,10 +24,10 @@ public class Sensors {
 
     private Observable<GeoData> geoDataObservable;
     private Observable<GeoData> geoDataObservableLowPower;
-    private Observable<Float> directionObservable;
+    private Observable<DirectionData> directionDataObservable;
     private final Observable<Status> gpsStatusObservable;
     @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
-    private volatile float currentDirection = 0.0f;
+    private volatile DirectionData currentDirection = DirectionData.EMPTY;
     private final boolean hasCompassCapabilities;
 
     private static class InstanceHolder {
@@ -36,7 +36,7 @@ public class Sensors {
 
     private final Consumer<GeoData> rememberGeodataAction = geoData -> currentGeo = geoData;
 
-    private final Consumer<Float> onNextrememberDirectionAction = direction -> currentDirection = direction;
+    private final Consumer<DirectionData> onNextrememberDirectionAction = direction -> currentDirection = direction;
 
     private Sensors() {
         final Application application = CgeoApplication.getInstance();
@@ -75,16 +75,16 @@ public class Sensors {
         }
     }
 
-    private static final Function<GeoData, Float> GPS_TO_DIRECTION = geoData -> AngleUtils.reverseDirectionNow(geoData.getBearing());
+    private static final Function<GeoData, DirectionData> GPS_TO_DIRECTION = geoData -> DirectionData.createFor(AngleUtils.reverseDirectionNow(geoData.getBearing()));
 
     public void setupDirectionObservable() {
-        if (directionObservable != null) {
+        if (directionDataObservable != null) {
             return;
         }
         // If we have no magnetic sensor, there is no point in trying to setup any, we will always get the direction from the GPS.
         if (!hasCompassCapabilities) {
             Log.i("No compass capabilities, using only the GPS for the orientation");
-            directionObservable = RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction), 0f);
+            directionDataObservable = RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction), DirectionData.EMPTY);
             return;
         }
 
@@ -94,7 +94,7 @@ public class Sensors {
         // On some devices, the orientation sensor (Xperia and S4 running Lollipop) seems to have been deprecated for real.
         // Use the rotation sensor if it is available unless the orientatation sensor is forced by the user.
         // After updating Moto G there is no rotation sensor anymore. Use magnetic field and accelerometer instead.
-        final Observable<Float> sensorDirectionObservable;
+        final Observable<DirectionData> sensorDirectionObservable;
         final Application application = CgeoApplication.getInstance();
         if (Settings.useOrientationSensor(application)) {
             sensorDirectionObservable = OrientationProvider.create(application);
@@ -104,27 +104,27 @@ public class Sensors {
             sensorDirectionObservable = MagnetometerAndAccelerometerProvider.create(application);
         }
 
-        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext((Function<Throwable, Observable<Float>>) throwable -> {
+        final Observable<DirectionData> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext((Function<Throwable, Observable<DirectionData>>) throwable -> {
             Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
             Settings.setUseCompass(false);
-            return Observable.<Float>never().startWith(Single.just(0.0f));
-        }).filter(aFloat -> Settings.isUseCompass() && !useDirectionFromGps.get());
+            return Observable.<DirectionData>never().startWith(Single.just(DirectionData.EMPTY));
+        }).filter(dirData -> Settings.isUseCompass() && !useDirectionFromGps.get());
 
-        final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(geoData -> {
+        final Observable<DirectionData> directionFromGpsObservable = geoDataObservableLowPower.filter(geoData -> {
             final boolean useGps = geoData.getSpeed() > 5.0f;
             useDirectionFromGps.set(useGps);
             return useGps || !Settings.isUseCompass();
         }).map(GPS_TO_DIRECTION);
 
-        directionObservable = RxUtils.rememberLast(Observable.merge(magneticDirectionObservable, directionFromGpsObservable).doOnNext(onNextrememberDirectionAction), 0f);
+        directionDataObservable = RxUtils.rememberLast(Observable.merge(magneticDirectionObservable, directionFromGpsObservable).doOnNext(onNextrememberDirectionAction), DirectionData.EMPTY);
     }
 
     public Observable<GeoData> geoDataObservable(final boolean lowPower) {
         return lowPower ? geoDataObservableLowPower : geoDataObservable;
     }
 
-    public Observable<Float> directionObservable() {
-        return directionObservable;
+    public Observable<DirectionData> directionDataObservable() {
+        return directionDataObservable;
     }
 
     public Observable<Status> gpsStatusObservable() {
@@ -137,7 +137,7 @@ public class Sensors {
     }
 
     public float currentDirection() {
-        return currentDirection;
+        return currentDirection.getDirection();
     }
 
     public boolean hasCompassCapabilities() {

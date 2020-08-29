@@ -13,13 +13,14 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 
+
 public class MagnetometerAndAccelerometerProvider {
 
     private MagnetometerAndAccelerometerProvider() {
         // Utility class, not to be instantiated
     }
 
-    public static Observable<Float> create(final Context context) {
+    public static Observable<DirectionData> create(final Context context) {
 
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         final Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -27,16 +28,16 @@ public class MagnetometerAndAccelerometerProvider {
         if (magnetometerSensor == null || accelerometerSensor == null) {
             return Observable.error(new RuntimeException("no magnetic or accelerometer sensor"));
         }
-        final Observable<Float> observable = Observable.create(new ObservableOnSubscribe<Float>() {
+        final Observable<DirectionData> observable = Observable.create(new ObservableOnSubscribe<DirectionData>() {
             private final float[] lastAccelerometer = new float[3];
             private final float[] lastMagnetometer = new float[3];
             private boolean lastAccelerometerSet = false;
             private boolean lastMagnetometerSet = false;
             private final float[] rotateMatrix = new float[9];
-            private final float[] orientation = new float[3];
+            private final DirectionDataCalculator dirDataCalculator = new DirectionDataCalculator(rotateMatrix.length);
 
             @Override
-            public void subscribe(final ObservableEmitter<Float> emitter) throws Exception {
+            public void subscribe(final ObservableEmitter<DirectionData> emitter) {
                 final SensorEventListener listener = new SensorEventListener() {
                     @Override
                     public void onSensorChanged(final SensorEvent sensorEvent) {
@@ -50,8 +51,8 @@ public class MagnetometerAndAccelerometerProvider {
                         }
                         if (lastAccelerometerSet && lastMagnetometerSet) {
                             SensorManager.getRotationMatrix(rotateMatrix, null, lastAccelerometer, lastMagnetometer);
-                            SensorManager.getOrientation(rotateMatrix, orientation);
-                            emitter.onNext((float) (orientation[0] * 180 / Math.PI));
+
+                            emitter.onNext(dirDataCalculator.calculateDirectionData(rotateMatrix));
                         }
                     }
 
