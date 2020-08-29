@@ -1317,6 +1317,16 @@
     <string name="destination_select">Select destination</string>
     <string name="navigation_direct_navigation">Direct Navigation</string>
     <string name="osmand_marker_cgeo">Marker from c:geo</string>
+    <string name="device_heading_label">Device Heading:</string>
+    <string name="device_orientation">Device Orientation</string>
+    <string name="device_orientation_label">Orientation:</string>
+
+    <!-- device orientation types -->
+    <string name="do_unknown">Unknown</string>
+    <string name="do_auto">Auto</string>
+    <string name="do_flat">Flat</string>
+    <string name="do_upright">Upright</string>
+
 
     <!-- license -->
     <string name="license">License</string>

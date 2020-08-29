@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Checkable;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,6 +29,9 @@ import java.util.Objects;
  * In cgeo, this type of spinner comes in two visual representations: <ul>
  *     <li>As real spinner (eg. selecting coordinate type or image scale)</li>
  *     <li>As text button with self-made dialog on click (e.g. selecting log type)</li>
+ *     <li>As text button with onclick-change (selecting next item on click)</li>
+ *     <li>As checkable text button (same as text button, but additionally with setchecked option)</li>
+ *  *
  * </ul>
  * This class can handle both display cases
  * @param <T>
@@ -50,6 +54,8 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     private TextView textView;
     private Func1<T, String> textDisplayMapper;
     private String textDialogTitle;
+    private Func1<T, Boolean> setCheckedMapper;
+    private boolean textViewClickThroughMode = false;
 
     public TextSpinner() {
         //initialize lists with dummy value
@@ -122,7 +128,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     /** if spinner should be represented as a textview, use this method to set the view */
     public TextSpinner<T> setTextView(@NonNull final TextView textView) {
         this.textView = textView;
-        this.textView.setOnClickListener(l -> selectInAlertDialog());
+        this.textView.setOnClickListener(l -> selectTextViewItem());
         return this;
     }
 
@@ -138,6 +144,25 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
      */
     public TextSpinner<T> setTextDisplayMapper(@Nullable final Func1<T, String> textDisplayMapper) {
         this.textDisplayMapper = textDisplayMapper;
+        repaintDisplay();
+        return this;
+    }
+
+    /**
+     * if spinner is be represented as a {@link Checkable} textview (e.g. a {@link android.widget.ToggleButton},
+     * set whether checkable is turned on or off dependent on displayed value
+     */
+    public TextSpinner<T> setCheckedMapper(@Nullable final Func1<T, Boolean> setCheckedMapper) {
+        this.setCheckedMapper = setCheckedMapper;
+        return this;
+    }
+
+    /**
+     * if spinner is be represented as a textview, set whether to change item through an alert window (false)
+     * or by clicking through them (true)
+     */
+    public TextSpinner<T> setTextClickThrough(final boolean clickThroughMode) {
+        this.textViewClickThroughMode = clickThroughMode;
         return this;
     }
 
@@ -168,20 +193,31 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
         if (!this.valuesToPosition.containsKey(value) || (!force && Objects.equals(previousSelectedItem, value))) {
             return;
         }
-
         this.selectedItem = value;
+        repaintDisplay();
 
-        if (spinner != null && !this.values.isEmpty()) {
-            spinner.setSelection(getPositionFor(value, 0));
-        }
-        if (textView != null) {
-            textView.setText(itemToString(value, true));
-        }
-
-        if (this.changeListener != null && !Objects.equals(previousSelectedItem, value)) {
+        if (this.changeListener != null && !Objects.equals(previousSelectedItem, this.selectedItem)) {
             this.changeListener.call(selectedItem);
         }
         this.previousSelectedItem = this.selectedItem;
+    }
+
+    private void repaintDisplay() {
+
+        if (spinner != null && !this.values.isEmpty()) {
+            setChecked(spinner);
+            spinner.setSelection(getPositionFor(this.selectedItem, 0));
+        }
+        if (textView != null) {
+            setChecked(textView);
+            textView.setText(itemToString(this.selectedItem, true));
+        }
+    }
+
+    private void setChecked(final View view) {
+        if (view instanceof Checkable && this.setCheckedMapper != null) {
+            ((Checkable) view).setChecked(this.setCheckedMapper.call(this.selectedItem));
+        }
     }
 
     private void recalculateDisplayValues() {
@@ -234,18 +270,25 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     /** displays data for selection in alert dialog. Used for textview-representation */
-    private void selectInAlertDialog() {
+    private void selectTextViewItem() {
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(textView.getContext());
-        if (this.textDialogTitle != null) {
-            alert.setTitle(this.textDialogTitle);
+        if (this.textViewClickThroughMode) {
+            final int pos = getPositionFor(this.selectedItem, 0);
+            final int newPos = (pos + 1) % this.values.size();
+            set(values.get(newPos));
+        } else {
+
+            final AlertDialog.Builder alert = new AlertDialog.Builder(textView.getContext());
+            if (this.textDialogTitle != null) {
+                alert.setTitle(this.textDialogTitle);
+            }
+
+            alert.setSingleChoiceItems(this.displayValues.toArray(new String[0]), getPositionFor(selectedItem, -1), (dialog, pos) -> {
+                set(values.get(pos));
+                dialog.dismiss();
+            });
+            alert.create().show();
         }
-
-        alert.setSingleChoiceItems(this.displayValues.toArray(new String[0]), getPositionFor(selectedItem, -1), (dialog, pos) -> {
-            set(values.get(pos));
-            dialog.dismiss();
-        });
-        alert.create().show();
     }
 
 }

@@ -12,6 +12,7 @@ import android.hardware.SensorManager;
 
 import io.reactivex.rxjava3.core.Observable;
 
+
 public class RotationProvider {
 
     /**
@@ -31,18 +32,18 @@ public class RotationProvider {
     }
 
     @TargetApi(19)
-    public static Observable<Float> create(final Context context) {
+    public static Observable<DirectionData> create(final Context context) {
         final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         final Sensor rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         if (rotationSensor == null) {
             Log.w("RotationProvider: no rotation sensor on this device");
             return Observable.error(new RuntimeException("no rotation sensor"));
         }
-        final Observable<Float> observable = Observable.create(emitter -> {
+        final Observable<DirectionData> observable = Observable.create(emitter -> {
             final SensorEventListener listener = new SensorEventListener() {
 
                 private final float[] rotationMatrix = new float[16];
-                private final float[] orientation = new float[4];
+                private final DirectionDataCalculator dirDataCalculator = new DirectionDataCalculator(rotationMatrix.length);
                 private final float[] values = new float[4];
 
                 @Override
@@ -62,8 +63,7 @@ public class RotationProvider {
                             return;
                         }
                     }
-                    SensorManager.getOrientation(rotationMatrix, orientation);
-                    emitter.onNext((float) (orientation[0] * 180 / Math.PI));
+                    emitter.onNext(dirDataCalculator.calculateDirectionData(rotationMatrix));
                 }
 
                 @Override

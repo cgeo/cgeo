@@ -41,6 +41,58 @@
             android:textOn="@string/use_compass"
             android:textOff="@string/use_gps" />
 
+        <ToggleButton
+            android:id="@+id/device_orientation_mode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOn="@null"
+            android:textOff="@null" />
+
+         <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="16dip">
+
+             <TextView
+                 android:id="@+id/device_heading_label"
+                 style="@style/location_current_style"
+                 android:layout_alignParentLeft="true"
+                 android:textColor="?text_color_grey"
+                 android:text="@string/device_heading_label"/>
+
+             <TextView
+                 android:id="@+id/device_heading"
+                 style="@style/single_degree_style"
+                 android:width="36dip"
+                 android:layout_toRightOf="@+id/device_heading_label"/>
+
+             <TextView
+                 android:id="@+id/device_orientation_roll"
+                 style="@style/single_degree_style"
+                 android:width="28dip"
+                 android:layout_alignParentRight="true"
+                 />
+             <TextView
+                 android:id="@+id/device_orientation_pitch"
+                 style="@style/single_degree_style"
+                 android:width="36dip"
+                 android:layout_toLeftOf="@+id/device_orientation_roll"
+                 />
+             <TextView
+                 android:id="@+id/device_orientation_azimuth"
+                 style="@style/single_degree_style"
+                 android:width="36dip"
+                 android:layout_toLeftOf="@+id/device_orientation_pitch"
+                 />
+             <TextView
+                 android:id="@+id/device_orientation_label"
+                 style="@style/location_current_style"
+                 android:layout_toLeftOf="@+id/device_orientation_azimuth"
+                 android:textColor="?text_color_grey"
+                 android:text="@string/device_orientation_label"
+                 />
+        </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
