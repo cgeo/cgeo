@@ -421,6 +421,22 @@ public class DataStore {
 
     private static final String SEQUENCE_INTERNAL_CACHE = "seq_internal_cache";
 
+    public static int getExpectedDBVersion() {
+        return dbVersion;
+    }
+
+    public static boolean versionsAreCompatible(final int oldVersion, final int newVersion) {
+        final Set<Integer> downgradeableVersions = DBDowngradeableVersions.load(database);
+        if (newVersion < oldVersion) {
+            for (int version = oldVersion; version > newVersion; version--) {
+                if (!downgradeableVersions.contains(version)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static class DBExtension {
 
         // reflect actual database schema (+ type param)

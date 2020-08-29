@@ -634,6 +634,7 @@
     <string name="init_restore_confirm">Database is empty. Do you want to restore the database backup?</string>
     <string name="init_backup_last">Available backup from</string>
     <string name="init_backup_last_no">There is no file with a backup.</string>
+    <string name="init_restore_version_error">Unexpected format - cannot restore database.\n\nExpected version is %1$d,\nbackup has version %2$d</string>
 
     <string name="settings_title_backup">Backup / Restore</string>
     <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
