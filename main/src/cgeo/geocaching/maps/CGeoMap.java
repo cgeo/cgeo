@@ -16,7 +16,6 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.export.TrailHistoryExport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -58,6 +57,7 @@ import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
@@ -758,7 +758,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_hidewp_visited).setChecked(Settings.isExcludeWpVisited());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
-            menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             CompactIconModeUtils.onPrepareOptionsMenu(menu);
 
@@ -766,13 +765,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            menu.findItem(R.id.menu_trailhistory).setVisible(Settings.isMapTrail());
-
             IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
 
+            HistoryTrackUtils.onPrepareOptionsMenu(menu);
             // TrackUtils.onPrepareOptionsMenu is in maps/google/v2/GoogleMapActivity only
             BRouterUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
@@ -788,11 +786,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         switch (id) {
             case android.R.id.home:
                 ActivityMixin.navigateUp(activity);
-                return true;
-            case R.id.menu_trail_mode:
-                Settings.setMapTrail(!Settings.isMapTrail());
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case R.id.menu_map_rotation_off:
                 Settings.setMapRotation(Settings.MAPROTATION_OFF);
@@ -893,14 +886,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
                 return true;
             }
-            case R.id.menu_clear_trailhistory: {
-                clearTrailHistory();
-                return true;
-            }
-            case R.id.menu_export_trailhistory: {
-                new TrailHistoryExport(activity, this::clearTrailHistory);
-                return true;
-            }
             case R.id.menu_hint:
                 menuShowHint();
                 return true;
@@ -908,7 +893,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 menuCompass();
                 return true;
             default:
-                if (!TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
+                if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
+                && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
                 && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
                 && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
                 && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)

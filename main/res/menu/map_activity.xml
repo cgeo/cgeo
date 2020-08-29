@@ -83,13 +83,6 @@
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
-                android:id="@+id/menu_trail_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_trail"
-                android:title="@string/map_trail_show"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
                 android:id="@+id/menu_compactIconMode"
                 android:icon="@drawable/ic_menu_dot_mode"
                 android:title="@string/map_dot_mode"
@@ -252,12 +245,20 @@
         android:title="@string/trailhistory">
         <menu>
             <item
-                android:id="@+id/menu_clear_trailhistory"
-                android:title="@string/map_clear_trailhistory">
+                android:id="@+id/menu_trail_show"
+                android:title="@string/map_trail_show">
             </item>
             <item
                 android:id="@+id/menu_export_trailhistory"
                 android:title="@string/export_trailhistory_title">
+            </item>
+            <item
+                android:id="@+id/menu_trail_hide"
+                android:title="@string/map_trail_hide">
+            </item>
+            <item
+                android:id="@+id/menu_clear_trailhistory"
+                android:title="@string/map_clear_trailhistory">
             </item>
         </menu>
     </item>
@@ -269,13 +270,13 @@
                 android:id="@+id/menu_load_track"
                 android:title="@string/map_load_track" />
             <item
-                android:id="@+id/menu_unload_track"
-                android:title="@string/map_unload_track"
-                android:visible="false"/>
-            <item
                 android:id="@+id/menu_center_on_track"
                 android:title="@string/center_on_track"
                 android:visible="false" />
+            <item
+                android:id="@+id/menu_unload_track"
+                android:title="@string/map_unload_track"
+                android:visible="false"/>
         </menu>
     </item>
     <item
