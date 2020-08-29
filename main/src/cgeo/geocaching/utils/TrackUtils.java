@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SelectTrackFileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -19,71 +18,12 @@ import static android.app.Activity.RESULT_OK;
 import androidx.annotation.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class TrackUtils {
 
     private static final int REQUEST_CODE_GET_TRACKFILE = 47121;
-
-    public static class OldTrack {
-        private String trackName;
-        private final ArrayList<Geopoint> track;
-
-        public OldTrack() {
-            trackName = "";
-            track = new ArrayList<>();
-        }
-
-        public String getTrackName() {
-            return trackName;
-        }
-
-        public void setTrackName(final String trackName) {
-            this.trackName = trackName;
-        }
-
-        public ArrayList<Geopoint> getTrack() {
-            return track;
-        }
-
-        public int getSize() {
-            return track.size();
-        }
-
-        public void add(final Geopoint geopoint) {
-            track.add(geopoint);
-        }
-    }
-
-    public static class OldTracks {
-        private final ArrayList<OldTrack> tracks;
-
-        public OldTracks() {
-            tracks = new ArrayList<>();
-        }
-
-        public void add(final OldTrack track) {
-            tracks.add(track);
-        }
-
-        public int getSize() {
-            return tracks.size();
-        }
-
-        public OldTrack get(final int i) {
-            return tracks.get(i);
-        }
-    }
-
-    public interface TrackUpdaterSingle {
-        void updateTrack(OldTrack track);
-    }
-
-    public interface TrackUpdaterMulti {
-        void updateTracks(OldTracks tracks);
-    }
 
     protected TrackUtils() {
     }
