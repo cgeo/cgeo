@@ -81,6 +81,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
         this.mapView = mapView;
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;
+        mapView.setDistanceDrawer(null);
         updateMapRotation();
     }
 
