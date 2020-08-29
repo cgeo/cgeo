@@ -13,6 +13,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import static android.app.Activity.RESULT_OK;
 
 import java.io.File;
 
@@ -83,7 +84,7 @@ public class IndividualRouteUtils {
         if (requestCode == REQUEST_SORT_INDIVIDUAL_ROUTE) {
             reloadIndividualRoute.run();
             return true;
-        } else if (requestCode == REQUEST_CODE_GET_INDIVIDUALROUTEFILE) {
+        } else if (requestCode == REQUEST_CODE_GET_INDIVIDUALROUTEFILE && resultCode == RESULT_OK) {
             final String filename = data.getStringExtra(Intents.EXTRA_GPX_FILE);
             if (null != filename) {
                 final File file = new File(filename);
