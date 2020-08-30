@@ -1126,7 +1126,6 @@
     <string name="map_modes">Tryb mapy</string>
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_hide">Ukryj</string>
-    <string name="map_trail_show">Pokaż historię ścieżki</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
     <string name="map_circles_show">Pokaż okręgi</string>
     <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
@@ -1146,8 +1145,6 @@
     <string name="map_live_enable">Włącz online</string>
     <string name="map_live_disable">Wyłącz online</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
-    <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
-    <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Nawigacja</string>
     <string name="map_routing_straight">Linia prosta</string>
@@ -1760,7 +1757,11 @@
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="downloadmap_target_not_writable">Cel \"%s\" nie jest zapisywalny - wybierz inny katalog z mapą.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
+    <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
+    <string name="map_trail_show">Pokaż historię ścieżki</string>
+    <!-- history track export -->
     <string name="trailhistory">Historyczny tor</string>
     <string name="export_trailhistory_title">Pokaż historię ścieżki</string>
     <string name="export_trailhistory_success">Eksportowano historię toru do \"%s\"</string>
