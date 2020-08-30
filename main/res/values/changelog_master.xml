@@ -22,6 +22,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Option added to center on route</li>
 <li>New: Show warning before clearing a route</li>
 <li>Fix: Crash on loading empty route item</li>
+<li>Fix: Distance info still being displayed after clearing a route</li>
 </ul>
 
 <h4>Map: GPX tracks/routes:</h4>
@@ -58,6 +59,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Include offline found counter on homescreen (configurable)</li>
 <li>New: Individual route sort view: Tap on item to open cache details</li>
 <li>New: Individual route sort view: Reorder using drag & drop</li>
+<li>New: Display an error message when trying to restoring an incompatible database version</li>
 <li>New: Updated send2cgeo and GPS Status helper app icons</li>
 <li>New: Add status info on BRouter availability to about - system screen</li>
 <li>Change: Set colorAccent to c:geo orange in many more places</li>
