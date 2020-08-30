@@ -13,6 +13,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Open local .map files in c:geo by tapping on them</li>
 <li>New: Colorpicker for map lines offers \"default\" button</li>
 <li>New: OpenstreetMap offline maps support \"default\" language</li>
+<li>Change: Moved \"History track enable/disable\" checkbox to \"History track\" submenu as \"show\" / \"hide\" entries</li>
 </ul>
 
 <h4>Map: Individual routes:</h4>
@@ -59,14 +60,15 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Include offline found counter on homescreen (configurable)</li>
 <li>New: Individual route sort view: Tap on item to open cache details</li>
 <li>New: Individual route sort view: Reorder using drag & drop</li>
-<li>New: Display an error message when trying to restoring an incompatible database version</li>
+<li>New: Display an error message (instead of crashing) when trying to restore an incompatible database version</li>
 <li>New: Updated send2cgeo and GPS Status helper app icons</li>
 <li>New: Add status info on BRouter availability to about - system screen</li>
 <li>Change: Set colorAccent to c:geo orange in many more places</li>
 <li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Many other small fixes</li>
-<li>Logfile: Added more info levels to logfile</li>
-<li>Logfile: Added option to write extended logfile with even more info</li>
+<li>Logging: Added more info levels to logfile</li>
+<li>Logging: Added option to write extended logfile with even more info</li>
+<li>Logging: Read log settings from \"logfiles/log.properties\" (if present)</li>
 <li>Internal: Updated contributor\'s list</li>
 <li>Internal: Added extension table to database</li>
 <li>Internal: Fixed some issues with database structure</li>
