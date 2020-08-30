@@ -20,9 +20,9 @@
                 android:id="@+id/menu_group_map_sources"
                 android:checkableBehavior="single" >
             </group>
-            <group
-                android:id="@+id/menu_download_offlinemap">
-            </group>
+            <item
+                android:id="@+id/menu_download_offlinemap"
+                android:visible="false" />
         </menu>
     </item>
     <item
