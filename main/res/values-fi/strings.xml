@@ -1108,7 +1108,6 @@
     <string name="map_modes">Kartan asetukset</string>
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_hide">Piilota</string>
-    <string name="map_trail_show">Näytä reittihistoria</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
@@ -1128,8 +1127,6 @@
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
-    <string name="map_clear_trailhistory">Poista reittihistoria</string>
-    <string name="map_trailhistory_cleared">Reitthistoria poistettu</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
     <string name="map_routing_straight">Linnuntie</string>
@@ -1714,7 +1711,11 @@
     <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - valitse toinen karttatiedostohakemisto.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Poista reittihistoria</string>
+    <string name="map_trailhistory_cleared">Reitthistoria poistettu</string>
+    <string name="map_trail_show">Näytä reittihistoria</string>
+    <!-- history track export -->
     <string name="trailhistory">Reittihistoria</string>
     <string name="export_trailhistory_title">Vie reittihistoria</string>
     <string name="export_trailhistory_success">Reittihistoria viety kohteeseen \"%s\"</string>
