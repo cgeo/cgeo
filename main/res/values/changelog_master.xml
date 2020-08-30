@@ -63,6 +63,8 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Display an error message (instead of crashing) when trying to restore an incompatible database version</li>
 <li>New: Updated send2cgeo and GPS Status helper app icons</li>
 <li>New: Add status info on BRouter availability to about - system screen</li>
+<li>New: Added Chirp Wolf in useful apps list</li>
+<li>Fix: Trackable links openened from within some mail programs would not open</li>
 <li>Change: Set colorAccent to c:geo orange in many more places</li>
 <li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Many other small fixes</li>
