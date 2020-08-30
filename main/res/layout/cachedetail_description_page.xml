@@ -119,6 +119,7 @@
                 tools:text="Personal note text\nline 2\nline 3" />
 
             <View style="@style/separator_horizontal"
+                android:id="@+id/personalnote_button_separator"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
 

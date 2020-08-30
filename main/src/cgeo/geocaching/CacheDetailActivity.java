@@ -1581,11 +1581,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache personal note
-            setPersonalNote(personalNoteView, cache.getPersonalNote());
+            final View separator = view.findViewById(R.id.personalnote_button_separator);
+            setPersonalNote(personalNoteView, separator, cache.getPersonalNote());
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             addContextMenu(personalNoteView);
             final Button personalNoteEdit = view.findViewById(R.id.edit_personalnote);
             personalNoteEdit.setOnClickListener(v -> {
+                ensureSaved();
+                editPersonalNote(cache, CacheDetailActivity.this);
+            });
+            personalNoteView.setOnClickListener(v -> {
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
             });
@@ -2622,8 +2627,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
 
         final TextView personalNoteView = findViewById(R.id.personalnote);
+        final View separator = findViewById(R.id.personalnote_button_separator);
         if (personalNoteView != null) {
-            setPersonalNote(personalNoteView, newNote);
+            setPersonalNote(personalNoteView, separator, newNote);
         } else {
             reinitializePage(Page.DESCRIPTION);
         }
@@ -2631,13 +2637,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
     }
 
-    private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {
+    private static void setPersonalNote(final TextView personalNoteView, final View separator, final String personalNote) {
         personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
+            separator.setVisibility(View.VISIBLE);
             Linkify.addLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
         } else {
             personalNoteView.setVisibility(View.GONE);
+            separator.setVisibility(View.GONE);
         }
     }
 
