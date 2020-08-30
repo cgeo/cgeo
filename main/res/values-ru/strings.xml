@@ -1104,7 +1104,6 @@
     <string name="map_modes">Настройки карты</string>
     <string name="map_rotation">Вращение карты</string>
     <string name="map_hide">Скрыть</string>
-    <string name="map_trail_show">Показать историю трека</string>
     <string name="map_dot_mode">Маленькие иконки</string>
     <string name="map_circles_show">Показать круги</string>
     <string name="map_mycaches_hide">Скрыть свои/посещенные</string>
@@ -1124,8 +1123,6 @@
     <string name="map_live_enable">Подгружать тайники \"на лету\"</string>
     <string name="map_live_disable">Не подгружать тайники</string>
     <string name="map_as_list">Показать списком</string>
-    <string name="map_clear_trailhistory">Очистить историю трека</string>
-    <string name="map_trailhistory_cleared">История трека очищена</string>
     <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_routing">Навигация</string>
     <string name="map_routing_straight">Прямая</string>
@@ -1701,7 +1698,11 @@
     <string name="receivemapfile_kb_copied">%d КБ скопировано</string>
     <string name="receivemapfile_cancelled">Передача файла карты отменена</string>
     <!-- Download map preference and menu entry -->
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Очистить историю трека</string>
+    <string name="map_trailhistory_cleared">История трека очищена</string>
+    <string name="map_trail_show">Показать историю трека</string>
+    <!-- history track export -->
     <string name="trailhistory">История трека</string>
     <string name="export_trailhistory_title">Экспорт истории трека</string>
     <string name="export_trailhistory_success">Экспорт истории трека в \"%s\"</string>
