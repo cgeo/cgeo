@@ -1064,7 +1064,6 @@
     <string name="map_live">Mapa activo</string>
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_modes">Ajustes del mapa</string>
-    <string name="map_trail_show">Mostrar el historial de la ruta</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
     <string name="map_circles_show">Mostrar círculos</string>
     <string name="map_mycaches_hide">Ocultar propios/encontr.</string>
@@ -1083,8 +1082,6 @@
     <string name="map_live_enable">Activar en vivo</string>
     <string name="map_live_disable">Desactivar en vivo</string>
     <string name="map_as_list">Mostrar como lista</string>
-    <string name="map_clear_trailhistory">Borrar historial de ruta</string>
-    <string name="map_trailhistory_cleared">historial de ruta borrado</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <string name="map_routing">Enrutamiento</string>
     <string name="map_routing_straight">Línea recta</string>
@@ -1572,6 +1569,10 @@ Nombre de archivo:%2$s</string>
     <!-- HandleLocalFilesActivity -->
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Borrar historial de ruta</string>
+    <string name="map_trailhistory_cleared">historial de ruta borrado</string>
+    <string name="map_trail_show">Mostrar el historial de la ruta</string>
+    <!-- history track export -->
     <!-- individual route export -->
 </resources>
