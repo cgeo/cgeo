@@ -143,6 +143,7 @@
     <string name="log_problem_other_text">이 지오캐셔가 이 캐시에 문제가 있다고 보고했습니다.</string>
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
     <string name="translate_to_english">영어로 번역하기</string>
@@ -1556,6 +1557,7 @@
     <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
     <string name="preference_colorpicker_select_color">색상 선택</string>
     <string name="preference_colorpicker_select_opaqueness">불투명체 선택</string>
+    <string name="reset_to_default">기본 설정</string>
     <!-- number input -->
     <string name="number_input_title">%1$s에서 %2$s 사이의 값을 입력하세요</string>
     <string name="number_input_err_boundarymin">입력한 값이 너무 작습니다-최소값으로 재설정</string>
@@ -1609,7 +1611,8 @@
     <string name="receivemapfile_kb_copied">%d kB 복사됨</string>
     <string name="receivemapfile_cancelled">지도 파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
-    <!-- history trail export -->
+    <!-- history track -->
+    <!-- history track export -->
     <string name="trailhistory">역사 트랙</string>
     <!-- individual route export -->
 </resources>
