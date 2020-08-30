@@ -133,8 +133,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
         // try to get data from URI
         if (geocode == null && guid == null && id == null && uri != null) {
-            geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
-            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
+            // check if port part needs to be removed
+            String address = uri.toString();
+            if (uri.getPort() > 0) {
+                address = StringUtils.remove(address, ":" + uri.getPort());
+            }
+            geocode = ConnectorFactory.getTrackableFromURL(address);
+            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(address);
 
             final String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.endsWith("geocaching.com")) {
