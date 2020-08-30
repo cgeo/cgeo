@@ -1108,7 +1108,6 @@
     <string name="map_modes">Kartlägen</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_hide">Dölj</string>
-    <string name="map_trail_show">Visa historikspår</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_circles_show">Visa cirklar</string>
     <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
@@ -1128,8 +1127,6 @@
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
-    <string name="map_clear_trailhistory">Rensa historikspår</string>
-    <string name="map_trailhistory_cleared">Historikspåret rensat</string>
     <string name="map_select_multiple_items">Välj objekt</string>
     <string name="map_routing">Navigering</string>
     <string name="map_routing_straight">Rak linje</string>
@@ -1709,7 +1706,11 @@
     <string name="downloadmanager_not_available">Kartfilen kan inte laddas ner. Systemets program för nerladdningar är inte tillgängligt</string>
     <string name="download_started">Nerladdningen startar i bakgrunden</string>
     <string name="downloadmap_target_not_writable">\"%s\" är inte skrivbar - välj en annan katalog.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Rensa historikspår</string>
+    <string name="map_trailhistory_cleared">Historikspåret rensat</string>
+    <string name="map_trail_show">Visa historikspår</string>
+    <!-- history track export -->
     <string name="trailhistory">Historikspår</string>
     <string name="export_trailhistory_title">Exportera historikspår</string>
     <string name="export_trailhistory_success">Exporterade historikspår till \"%s\"</string>
