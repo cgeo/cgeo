@@ -1068,7 +1068,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_modes">Kartes iestatījumi</string>
     <string name="map_rotation">Kartes rotācija</string>
     <string name="map_hide">Slēpt</string>
-    <string name="map_trail_show">Rādīt pārvietojumu</string>
     <string name="map_circles_show">Rādīt riņķus</string>
     <string name="map_mycaches_hide">Nerādīt savus/atrastos slēpņus</string>
     <string name="map_disabled_hide">Paslēpt izslēgtos slēpņus</string>
@@ -1585,6 +1584,8 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- HandleLocalFilesActivity -->
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_trail_show">Rādīt pārvietojumu</string>
+    <!-- history track export -->
     <!-- individual route export -->
 </resources>
