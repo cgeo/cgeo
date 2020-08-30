@@ -247,12 +247,16 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
         );
 
         final Geopoint destCoords = mapView.getDestinationCoords();
-        if (destCoords != null && Settings.isMapDirection()) {
-            // draw direction line
-            positionObjs.addPolyline(getDirectionPolyline(new Geopoint(coordinates), destCoords));
+        if (destCoords != null) {
+            final Geopoint currentCoords = new Geopoint(coordinates);
+            if (Settings.isMapDirection()) {
+                // draw direction line
+                positionObjs.addPolyline(getDirectionPolyline(currentCoords, destCoords));
+            } else if (null != postRealDistance) {
+                postRealDistance.postRealDistance(destCoords.distanceTo(currentCoords));
+            }
         }
     }
-
 
     private synchronized void drawHistory() {
         if (null == coordinates) {
