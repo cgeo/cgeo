@@ -1108,7 +1108,6 @@
     <string name="map_modes">Modi mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_hide">Nascondi</string>
-    <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
     <string name="map_dot_mode">Usa icone compatte</string>
     <string name="map_circles_show">Mostra area cache</string>
     <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
@@ -1128,8 +1127,6 @@
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
     <string name="map_as_list">Mostra lista dei cache</string>
-    <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
-    <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Instradamento</string>
     <string name="map_routing_straight">Linea diretta</string>
@@ -1714,7 +1711,11 @@
     <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <string name="downloadmap_target_not_writable">La destinazione \"%s\" non è scrivibile - si prega di selezionare una directory diversa per il file mappa.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
+    <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
+    <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
+    <!-- history track export -->
     <string name="trailhistory">Traccia cronologia</string>
     <string name="export_trailhistory_title">Esporta traccia cronologia</string>
     <string name="export_trailhistory_success">Cronologia esportata in \"%s\"</string>
