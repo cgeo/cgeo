@@ -9,7 +9,7 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
-import android.os.Build;
+import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -70,7 +70,7 @@ public class MapProviderFactory {
         return provider1.equals(provider2) && provider1.isSameActivity(source1, source2);
     }
 
-    public static void addMapviewMenuItems(final Menu menu) {
+    public static void addMapviewMenuItems(final Activity activity, final Menu menu) {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
 
         final int currentSource = Settings.getMapSource().getNumericalId();
@@ -80,12 +80,7 @@ public class MapProviderFactory {
             parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
-
-        // add extra menu entry for downloading offline maps beneath the existing map sources
-        parentMenu.add(Menu.NONE, R.id.menu_download_offlinemap, mapSources.size() + 1, R.string.downloadmap_title);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            parentMenu.setGroupDividerEnabled(true);
-        }
+        parentMenu.add(R.id.menu_group_map_sources, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
     }
 
     /**

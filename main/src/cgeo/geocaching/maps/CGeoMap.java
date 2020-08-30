@@ -719,7 +719,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        MapProviderFactory.addMapviewMenuItems(menu);
+        MapProviderFactory.addMapviewMenuItems(activity, menu);
 
         /* if we have an Actionbar find the my position toggle */
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);

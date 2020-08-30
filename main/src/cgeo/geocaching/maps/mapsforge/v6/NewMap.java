@@ -301,7 +301,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
 
-        MapProviderFactory.addMapviewMenuItems(menu);
+        MapProviderFactory.addMapviewMenuItems(this, menu);
         MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
