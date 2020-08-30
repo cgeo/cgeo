@@ -1126,7 +1126,6 @@
     <string name="map_modes">Nastavenia mapy</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_hide">Skryť</string>
-    <string name="map_trail_show">Zobraziť históriu trasy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
     <string name="map_circles_show">Zobraziť kruhy</string>
     <string name="map_mycaches_hide">Skryť vlastné/nájdené skrýše</string>
@@ -1146,8 +1145,6 @@
     <string name="map_live_enable">Povoliť aktívnu mapu</string>
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
-    <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
-    <string name="map_trailhistory_cleared">História trasy vymazaná</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Navigácia</string>
     <string name="map_routing_straight">Priama čiara</string>
@@ -1760,7 +1757,11 @@
     <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
     <string name="downloadmap_target_not_writable">Do cieľa \"%s\" sa nedá zapisovať, vyberte iný priečinok s mapovým súborom.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
+    <string name="map_trailhistory_cleared">História trasy vymazaná</string>
+    <string name="map_trail_show">Zobraziť históriu trasy</string>
+    <!-- history track export -->
     <string name="trailhistory">História trasy</string>
     <string name="export_trailhistory_title">Exportovať históriu trasy</string>
     <string name="export_trailhistory_success">História trasy exportovaná do „%s“</string>
