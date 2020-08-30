@@ -965,7 +965,6 @@
     <string name="map_live">Live-kort</string>
     <string name="map_view_map">Kort-view</string>
     <string name="map_modes">Kortindstillinger</string>
-    <string name="map_trail_show">Vis spor</string>
     <string name="map_dot_mode">Brug små ikoner</string>
     <string name="map_circles_show">Vis cirkler</string>
     <string name="map_mycaches_hide">Skjul egne/fundne cacher</string>
@@ -975,8 +974,6 @@
     <string name="map_live_enable">Aktivér live</string>
     <string name="map_live_disable">Deaktivér live</string>
     <string name="map_as_list">Vis som liste</string>
-    <string name="map_clear_trailhistory">Slet tidligere spor</string>
-    <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="map_routing">Navigation</string>
     <string name="map_routing_straight">Lige linje</string>
@@ -1453,6 +1450,10 @@
     <!-- HandleLocalFilesActivity -->
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Slet tidligere spor</string>
+    <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
+    <string name="map_trail_show">Vis spor</string>
+    <!-- history track export -->
     <!-- individual route export -->
 </resources>
