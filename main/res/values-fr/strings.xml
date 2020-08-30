@@ -1108,7 +1108,6 @@
     <string name="map_modes">Paramètres carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_hide">Masquer</string>
-    <string name="map_trail_show">Afficher l\'historique du parcours</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
     <string name="map_circles_show">Afficher les cercles</string>
     <string name="map_mycaches_hide">Masquer caches placées/trouvées</string>
@@ -1128,8 +1127,6 @@
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
     <string name="map_as_list">Lister les caches</string>
-    <string name="map_clear_trailhistory">Effacer l\'historique des parcours</string>
-    <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
     <string name="map_routing_straight">À vol d\'oiseau</string>
@@ -1712,7 +1709,11 @@
     <string name="downloadmanager_not_available">Impossible de télécharger la carte, le gestionnaire système de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
     <string name="downloadmap_target_not_writable">Le dossier «%s» n\'est pas autorisé en écriture - veuillez sélectionner un dossier différent pour les cartes.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Effacer l\'historique des parcours</string>
+    <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
+    <string name="map_trail_show">Afficher l\'historique du parcours</string>
+    <!-- history track export -->
     <string name="trailhistory">Suivi de l\'historique</string>
     <string name="export_trailhistory_title">Exporter l\'historique</string>
     <string name="export_trailhistory_success">Historique exporté vers \"%s\"</string>
