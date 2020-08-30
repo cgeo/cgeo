@@ -169,7 +169,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     @Override
     public void updateRoute(final Route track) {
-        this.track = track.getAllPointsLatLng();
+        this.track = null == track ? null : track.getAllPointsLatLng();
         repaintRequired();
     }
 
