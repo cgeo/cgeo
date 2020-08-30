@@ -595,15 +595,13 @@ tasks.named('check') {
 /*
  * Ribbonizer, adds ribbons to launcher icon of debug builds
  * https://github.com/gfx/gradle-android-ribbonizer-plugin
+ * works fine until android 7.1, see https://github.com/cgeo/cgeo/issues/8896
  */
 apply plugin: 'com.github.gfx.ribbonizer'
 
 ribbonizer {
-    // ribbonize also the about page logo, not only the application icon
-    iconNames "@drawable/cgeo_logo"
-
-    // use yellowish ribbon instead of default green
+    // use blue ribbon instead of default green
     builder { variant, iconFile ->
-        return yellowRibbonFilter(variant, iconFile)
+        return customColorRibbonFilter(variant, iconFile, "#0000FF")
     }
 }
