@@ -1235,6 +1235,7 @@ public class DataStore {
                         // recreate extension table to remove "table" infix and to fix two column types
                         try {
                             db.execSQL("DROP TABLE IF EXISTS cg_table_extension;");
+                            db.execSQL("DROP TABLE IF EXISTS cg_extension;");
                             db.execSQL(dbCreateExtension);
                         } catch (final SQLException e) {
                             onUpgradeError(e, 83);
