@@ -568,6 +568,8 @@
     <string name="init_summary_disabled">Dölj inaktiva cacher</string>
     <string name="init_archived">Exkludera arkiverade</string>
     <string name="init_summary_archived">Exkludera arkiverade cacher</string>
+    <string name="init_global_wp_extraction_disable">Extrahering av vägpunkter</string>
+    <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen</string>
     <string name="init_save_log_img">Loggbilder</string>
     <string name="init_summary_save_log_img">Spara bilder från loggar</string>
     <string name="init_units">Enheter</string>
@@ -654,6 +656,8 @@
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
     <string name="init_sigautoinsert">Infoga automatiskt</string>
+    <string name="init_offlinelogs_homescreen">Visa offline loggar</string>
+    <string name="init_summary_offlinelogs_homescreen">En offline loggräknare (t.ex. \"+ 1\") kommer att visas bredvid din siffran för antal hittade på startskärmen om du har loggar som ännu inte skickats.</string>
     <string name="init_loaddirectionimg">Riktningsbild</string>
     <string name="init_summary_loaddirectionimg">Ladda riktningsbild om det behövs (enbart Basic Member)</string>
     <string name="init_default_navigation_tool">Förvald navigering</string>
@@ -835,6 +839,7 @@
     <string name="cache_personal_note_storewaypoints_success">Punkterna är tillagda i personlig anteckning</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Punkterna är tillagda i personliga anteckningen men behövde förkortas (max längd för anteckning: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Punkterna kunde inte läggas till i den personliga anteckning p.g.a. storleksbegräsningar (max längd för anteckning: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">Inga lagringsbara vägpunkter hittades</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
@@ -1103,7 +1108,6 @@
     <string name="map_modes">Kartlägen</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_hide">Dölj</string>
-    <string name="map_trail_show">Visa historikspår</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
     <string name="map_circles_show">Visa cirklar</string>
     <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
@@ -1123,8 +1127,6 @@
     <string name="map_live_enable">Aktivera live</string>
     <string name="map_live_disable">Inaktivera live</string>
     <string name="map_as_list">Visa som lista</string>
-    <string name="map_clear_trailhistory">Rensa historikspår</string>
-    <string name="map_trailhistory_cleared">Historikspåret rensat</string>
     <string name="map_select_multiple_items">Välj objekt</string>
     <string name="map_routing">Navigering</string>
     <string name="map_routing_straight">Rak linje</string>
@@ -1648,6 +1650,10 @@
     <string name="sorted_route_saved">Individuell rutt sparad</string>
     <string name="load_individual_route_error">Fel vid inläsning av individuell rutt</string>
     <string name="route_item_not_yet_loaded">Rutten är ännu inte inläst</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Rutten lästes in med %d punkt</item>
+        <item quantity="other">Rutten lästes in med %d punkter</item>
+    </plurals>
     <string name="center_on_route">Centrera på rutt</string>
     <!-- individual track -->
     <string name="individual_track">GPX-spår/rutt</string>
@@ -1700,7 +1706,11 @@
     <string name="downloadmanager_not_available">Kartfilen kan inte laddas ner. Systemets program för nerladdningar är inte tillgängligt</string>
     <string name="download_started">Nerladdningen startar i bakgrunden</string>
     <string name="downloadmap_target_not_writable">\"%s\" är inte skrivbar - välj en annan katalog.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Rensa historikspår</string>
+    <string name="map_trailhistory_cleared">Historikspåret rensat</string>
+    <string name="map_trail_show">Visa historikspår</string>
+    <!-- history track export -->
     <string name="trailhistory">Historikspår</string>
     <string name="export_trailhistory_title">Exportera historikspår</string>
     <string name="export_trailhistory_success">Exporterade historikspår till \"%s\"</string>

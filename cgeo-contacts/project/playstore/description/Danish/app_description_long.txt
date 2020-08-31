@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Dette er et plugin til at slå kontakter op med til c:geo, en open-source geocaching app. Det virker kun med c:geo appen installeret, og giver direkte adgang til din telefonbog når du klikker på et brugernavn i c:geo.
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+Anvendelse:
+Når du klikker på et brugernavn i c:geo (f.eks. i en geocaches log) vil der være et punkt i menuen som kan åbne den tilhørende kontakt i telefonens kontaktliste. Dermed kan du ringe op eller SMSe brugeren direkte.
 
-Remark: 
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Bemærkning: 
+Personens geocacher-navn skal stå i navne- eller alias-feltet i kontaktlisten for at plugin-et kan koble geocacheren til den rigtige kontakt.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Vi kan ikke besvare kommentarer i PlayStore! Har du problemer med at installere eller bruge c:geo kan du starte med at kigge i vores FAQ: https://faq.cgeo.org
+Hvis det ikke løser dit problem kan du kontakte support pr. email.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Her kan du læse hvorfor dette c:geo plugin har brug for de tilladelser, der anmodes om: https://www.cgeo.org/faq.html#plugin-contacts-privacy .

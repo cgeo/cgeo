@@ -1,30 +1,30 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away. 
+c:geo er en opensource, uofficiel klient til geocaching.com med et fuldt sæt faciliteter, som ydermere tilbyder grundlæggende støtte til andre geocaching-platforme (såsom Opencaching). Det kræver ikke en webbrowser, og henter selv sine data. Bare start op og gå i gang. 
 
-Main features:
-- View caches on a Live Map 
-- Use Google Maps or OpenStreetMaps
-- Search for caches by various criteria 
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files 
-- Full support for trackables
-- Offline caching functions including offline maps
+De vigtigste funktioner er:
+- Se caches på et opdateret kort 
+- Brug Google Maps eller OpenStreetMap
+- Find caches ud fra diverse kriterier 
+- Log dine fund online eller offline
+- Gem cache-data på din smartphone/tablet
+- Opret og administrér waypoints
+- Navigér med kompas, kort eller andre apps
+- Importér/eksportér GPX-filer 
+- Fuld understøttelse af trackables
+- Understøtter caching uden dataforbindelse, bl.a. med offline kort
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geo er en simpel, men stærk geocaching app med masser af muligheder. Du skal kun bruge en konto på geocaching.com eller en anden geocaching-service (som f.eks. opencaching).
+Find caches med det opdaterede kort eller med en af de mange søgefunktioner.
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+Navigér til en geocache eller et waypoint med appens indbyggede kompas, med kortet, eller ved at sende koordinaterne til forskellige eksterne apps (f.eks. Radar, Google Navigation, Streetview, Locus, Navigon, Sygic og mange andre).
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want. 
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+Gem cachedata på din smartphone/tablet direkte fra geocaching.com eller fra en .GPX-fil, så de ligger klar når du skal bruge dem. 
+Du kan organisere dine gemte caches i forskellige lister og filtrere dem efter behov.
+De gemte caches kan, sammen med offline kort eller statiske kort, bruges til at finde caches uden internetforbindelse (f.eks. under dataroaming).
+Logs kan sendes direkte eller gemmes lokalt til senere afsendelse, eller de kan eksporteres som field notes.
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+Søg og find trackables, styr din trackable-beholdning og læg en trackable sammen med cache-logningen.
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+Har du problemer med at installere eller bruge c:geo skal du først kigge i vores FAQ (https://faq.cgeo.org) eller brugervejledningen (https://manual.cgeo.org).
+Hvis du stadig har problemer kan du skrive til vores support på e-mail.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+Hvis du gerne vil vide hvorfor c:geo har brug for de tilladelser, der er anmodet om, så læs på https://www.cgeo.org.

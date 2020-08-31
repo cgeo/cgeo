@@ -601,6 +601,7 @@
     <string name="init_restore_confirm">De database is leeg, wil je een database-backup herstellen?</string>
     <string name="init_backup_last">Backup beschikbaar van</string>
     <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
+    <string name="init_restore_version_error">Onverwacht formaat - kan database niet terugzetten.\n\nVerwachtte versie is %1$d,\nback-up heeft versie %2$d</string>
     <string name="settings_title_backup">Back-up maken/terugzetten</string>
     <string name="settings_summary_backup">Back-up maken en terugzetten van cache- en waypoint-gegevens en programma-instellingen.</string>
     <string name="init_backup_settings">Back-up maken van programma-instellingen</string>
@@ -1108,7 +1109,6 @@
     <string name="map_modes">Kaartinstellingen</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_hide">Verbergen</string>
-    <string name="map_trail_show">Geschiedenisspoor tonen</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
     <string name="map_circles_show">Toon cirkels</string>
     <string name="map_mycaches_hide">Verberg eigen/gevonden caches</string>
@@ -1128,8 +1128,6 @@
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
     <string name="map_as_list">Laat zien als lijst</string>
-    <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
-    <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
     <string name="map_routing_straight">Rechte lijn</string>
@@ -1237,6 +1235,7 @@
     <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
     <string name="helper_brouter_title">BRouter Offline navigatie</string>
     <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
+    <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <!-- export -->
     <string name="export">Exporteren</string>
     <string name="export_progress">Exporteer: %1$s</string>
@@ -1714,7 +1713,12 @@
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
     <string name="downloadmap_target_not_writable">Doel \"%s\" is niet beschrijfbaar - selecteer een andere kaartbestand map.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
+    <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
+    <string name="map_trail_show">Geschiedenisspoor tonen</string>
+    <string name="map_trail_hide">Geschiedenisspoor verbergen</string>
+    <!-- history track export -->
     <string name="trailhistory">Geschiedenisspoor</string>
     <string name="export_trailhistory_title">Geschiedenisspoor exporteren</string>
     <string name="export_trailhistory_success">Geschiedenisspoor geëxporteerd naar \"%s\"</string>

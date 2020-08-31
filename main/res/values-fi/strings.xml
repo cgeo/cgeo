@@ -569,6 +569,7 @@
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
     <string name="init_global_wp_extraction_disable">Reittipisteen Poisto</string>
+    <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
@@ -1107,7 +1108,6 @@
     <string name="map_modes">Kartan asetukset</string>
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_hide">Piilota</string>
-    <string name="map_trail_show">Näytä reittihistoria</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
     <string name="map_circles_show">Näytä ympyrät</string>
     <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
@@ -1127,8 +1127,6 @@
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
     <string name="map_as_list">Näytä luettelona</string>
-    <string name="map_clear_trailhistory">Poista reittihistoria</string>
-    <string name="map_trailhistory_cleared">Reitthistoria poistettu</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
     <string name="map_routing_straight">Linnuntie</string>
@@ -1658,6 +1656,17 @@
     </plurals>
     <string name="center_on_route">Keskitä reittiin</string>
     <!-- individual track -->
+    <string name="individual_track">GPX jälki/reitti</string>
+    <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
+    <string name="map_load_track_wait">Ladataan jälkeä/reittiä taustalla…</string>
+    <string name="map_load_track_confirm">Korvataanko olemassa oleva jälki/reitti?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Jälki/reitti ladattu (%d reittipistettä)</item>
+        <item quantity="other">Jälki/reitti ladattu (%d reittipistettä)</item>
+    </plurals>
+    <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
+    <string name="map_unload_track">Poista jälki/reitti</string>
+    <string name="center_on_track">Keskitä jälkeen/reittiin</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1702,7 +1711,11 @@
     <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - valitse toinen karttatiedostohakemisto.</string>
-    <!-- history trail export -->
+    <!-- history track -->
+    <string name="map_clear_trailhistory">Poista reittihistoria</string>
+    <string name="map_trailhistory_cleared">Reitthistoria poistettu</string>
+    <string name="map_trail_show">Näytä reittihistoria</string>
+    <!-- history track export -->
     <string name="trailhistory">Reittihistoria</string>
     <string name="export_trailhistory_title">Vie reittihistoria</string>
     <string name="export_trailhistory_success">Reittihistoria viety kohteeseen \"%s\"</string>
