@@ -603,6 +603,7 @@
     <string name="init_restore_confirm">Databáze je prázdná, chceš ji obnovit ze zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
     <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
+    <string name="init_restore_version_error">Neočekávaný formát - databázi nelze obnovit.\n\nOčekávaná verze je %1$d,\nzáloha má verzi %2$d</string>
     <string name="settings_title_backup">Zálohovat / Obnovit</string>
     <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/bodech trasy a nastavení programu.</string>
     <string name="init_backup_settings">Zálohovat nastavení systému</string>
@@ -1252,6 +1253,7 @@
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání keší typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
     <string name="helper_brouter_title">BRouter offline navigace</string>
     <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke keši na interní mapě.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf vám umožňuje číst data z ANT+/Garmin chirp tagů, což je potřeba pro ANT+/chirp kešky.</string>
     <!-- export -->
     <string name="export">Export</string>
     <string name="export_progress">Export: %1$s</string>
@@ -1761,6 +1763,7 @@
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
     <string name="map_trail_show">Zobrazit historii trasy</string>
+    <string name="map_trail_hide">Skrýt historii trasy</string>
     <!-- history track export -->
     <string name="trailhistory">Historie trasy</string>
     <string name="export_trailhistory_title">Exportovat historii trasy</string>
