@@ -1222,8 +1222,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
-            // WhereYouGo
+            // WhereYouGo and ChirpWolf
             updateWhereYouGoBox();
+            updateChirpWolfBox();
 
             // favorite points
             final ImageButton buttonFavPointAdd = view.findViewById(R.id.add_to_favpoint);
@@ -1542,6 +1543,35 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         CacheDetailActivity.this.startActivity(intent);
                     } else {
                         ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.whereyougo_package));
+                    }
+                });
+            }
+        }
+
+        private void updateChirpWolfBox() {
+            final Intent chirpWolf = ProcessUtils.getLaunchIntent(getString(R.string.chirpwolf_package));
+            final String compare = CacheAttribute.WIRELESSBEACON.getValue(true);
+            boolean isEnabled = false;
+            for (String current : cache.getAttributes()) {
+                if (StringUtils.equals(current, compare)) {
+                    isEnabled = true;
+                    break;
+                }
+            }
+            final LinearLayout boxCW = view.findViewById(R.id.chirp_box);
+            boxCW.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            final TextView msgCW = view.findViewById(R.id.chirp_text);
+            msgCW.setText(null != chirpWolf ? R.string.cache_chirpwolf_start : R.string.cache_chirpwolf_install);
+            if (isEnabled) {
+                final ImageButton buttonCW = view.findViewById(R.id.send_to_chirp);
+                buttonCW.setOnClickListener(v -> {
+                    // re-check installation state, might have changed since creating the view
+                    final Intent chirpWolf2 = ProcessUtils.getLaunchIntent(getString(R.string.chirpwolf_package));
+                    if (null != chirpWolf2) {
+                        chirpWolf2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        CacheDetailActivity.this.startActivity(chirpWolf2);
+                    } else {
+                        ProcessUtils.openMarket(CacheDetailActivity.this, getString(R.string.chirpwolf_package));
                     }
                 });
             }

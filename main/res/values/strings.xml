@@ -1073,6 +1073,8 @@
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
+    <string name="cache_chirpwolf_start">Open Chirp Wolf to read the chirp data for this cache</string>
+    <string name="cache_chirpwolf_install">Install Chirp Wolf to be able to read chirp data</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="internal_cache_default_name">User defined cache #%1$d</string>
