@@ -602,15 +602,17 @@ apply plugin: 'com.github.gfx.ribbonizer'
 ribbonizer {
     // use blue ribbon instead of default green
     builder { variant, iconFile ->
+        def filter = customColorRibbonFilter(variant, iconFile, "#0000FF")
         if (variant.buildType.name == "debug") {
-            return customColorRibbonFilter(variant, iconFile, "#0000FF")
+            return filter
         } else if (variant.buildType.name == "nightly") {
-            return customColorRibbonFilter(variant, iconFile, "#FF00FF")
-        } else if (variant.buildType.name == "legacy") {
-            return grayScaleFilter(variant, iconFile)
+            return filter
+        } else if (variant.buildType.name == "rc") {
+            filter.label = "beta"
+            return filter
         }
     }
 
-    //we will force specific variants to be ribbonized
-    forcedVariantsNames "basicNightly", "basicLegacy"
+    // force specific variants to be ribbonized
+    forcedVariantsNames "basicNightly", "basicRc"
 }
