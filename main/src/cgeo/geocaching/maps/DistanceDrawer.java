@@ -62,8 +62,8 @@ public class DistanceDrawer {
     public void setCoordinates(final Location location) {
         final Geopoint currentCoords = new Geopoint(location);
 
-        distance = currentCoords.distanceTo(destinationCoords);
-        distanceText = Units.getDistanceFromKilometers(distance);
+        distance = null != destinationCoords ? currentCoords.distanceTo(destinationCoords) : 0.0f;
+        distanceText = null != destinationCoords ? Units.getDistanceFromKilometers(distance) : null;
     }
 
     public Geopoint getDestinationCoords() {
