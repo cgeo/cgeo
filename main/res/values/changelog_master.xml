@@ -42,9 +42,11 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Option to globally deactivate waypoint extraction from personal notes</li>
 <li>New: Personal note editor will grow automatically for longer texts</li>
 <li>New: Personal note editor: Directly activate keyboard on opening</li>
+<li>New: Personal note editor: Activate edit by tapping on text</li>
 <li>New: Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
 <li>New: Remembers offline found count for every connector and applies those values to the [NUMBER] parameter on logging</li>
 <li>Fix: Remembers waypoint coordinate format while scrolling in list</li>
+<li>New: Offer Chirp Wolf app for chirp caches</li>
 </ul>
 
 <h4>Cache lists:</h4>
