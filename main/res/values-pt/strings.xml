@@ -1712,6 +1712,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_clear_trailhistory">Limpar o histórico do percurso</string>
     <string name="map_trailhistory_cleared">O histórico do percurso foi limpo</string>
     <string name="map_trail_show">Mostrar histórico do percurso</string>
+    <string name="map_trail_hide">Ocultar histórico do percurso</string>
     <!-- history track export -->
     <string name="trailhistory">Percurso do histórico</string>
     <string name="export_trailhistory_title">Exportar o percurso do histórico</string>
