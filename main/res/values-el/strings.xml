@@ -601,6 +601,7 @@
     <string name="init_restore_confirm">Η βάση δεδομένων είναι κενή. Θέλετε να επαναφέρετε τα αντίγραφα ασφαλείας της βάσης δεδομένων;</string>
     <string name="init_backup_last">Διαθέσιμα αντίγραφα ασφαλείας από</string>
     <string name="init_backup_last_no">Δεν υπάρχει κανένα αρχείο με αντίγραφο ασφαλείας.</string>
+    <string name="init_restore_version_error">Μη αναμενόμενη διαμόρφωση - δεν μπορεί να γίνει επαναφορά της βάσης δεδομένων.\n\nΗ αναμενόμενη έκδοση είναι η %1$d,\nτο αντίγραφο ασφαλείας είναι έκδοσης %2$d</string>
     <string name="settings_title_backup">Αντίγραφα ασφαλείας / Επαναφορά</string>
     <string name="settings_summary_backup">Εκτέλεση δημιουργίας αντιγράφων ασφαλείας και επαναφορά δεδομένων κρυπτών/σημείων και ρυθμίσεων.</string>
     <string name="init_backup_settings">Αντίγραφο ασφαλείας ρυθμίσεων</string>
@@ -1234,6 +1235,7 @@
     <string name="helper_where_you_go_description">Το WhereYouGo επιτρέπει την αναζήτηση κρυπτών του τύπου Wherigo, Το c:geo αυτόματα ενεργοποιεί τη φόρτωση των cartridges μέσα στην εφαρμογή.</string>
     <string name="helper_brouter_title">Πλοήγηση εκτός σύνδεσης με BRouter</string>
     <string name="helper_brouter_description">Το BRouter παρέχει δρομολόγηση εκτός σύνδεσης. Εάν έχει εγκατασταθεί και έχετε κατεβάσει τα απαραίτητα αρχεία, το c:geo θα εμφανίσει στον χάρτη μια διαδρομή προς την κρύπτη.</string>
+    <string name="helper_chirpwolf_description">Το Chirp Wolf σας επιτρέπει να διαβάσετε δεδομένα από ANT+/Garmin chirp ταμπέλες, οι οποιες χρειάζονται για κρύπτες ANT+/chirp.</string>
     <!-- export -->
     <string name="export">Εξαγωγή</string>
     <string name="export_progress">Εξαγωγή: %1$s</string>
@@ -1711,6 +1713,7 @@
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
     <string name="map_trail_show">Προβολή ιστορικού ιχνών</string>
+    <string name="map_trail_hide">Απόκρυψη ιστορικού διαδρομών</string>
     <!-- history track export -->
     <string name="trailhistory">Ιστορικό διαδρομών</string>
     <string name="export_trailhistory_title">Εξαγωγή ιστορικού διαδρομών</string>
