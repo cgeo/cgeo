@@ -601,6 +601,7 @@
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar vom</string>
     <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
+    <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nBackup hat Version %2$d</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
     <string name="init_backup_settings">Sichern der Programmeinstellungen</string>
@@ -995,6 +996,8 @@
     <string name="cache_listed_on">Geführt auf %s</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
+    <string name="cache_chirpwolf_start">Öffne Chirp Wolf, um die Chirp-Daten für diesen Cache zu empfangen</string>
+    <string name="cache_chirpwolf_install">Installiere Chirp Wolf, um Chirp-Daten empfangen zu können</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="internal_cache_default_name">Benutzerdefinierter Cache #%1$d</string>
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
@@ -1234,6 +1237,7 @@
     <string name="helper_where_you_go_description">Mit WhereYouGo kannst du Caches vom Typ Wherigo suchen. c:geo kann das Herunterladen von Cartridges in WhereYouGo automatisch starten.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">BRouter ermöglicht offline routing. Wenn es installiert ist und die notwendigen Dateien heruntergeladen wurden, wird c:geo automatisch eine Route zum Cache auf der internen Karte zeigen.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf ermöglicht es, die Daten von ANT+/Garmin Chirp Tags zu lesen, die für ANT+/Chirp Geocaches benötigt werden.</string>
     <!-- export -->
     <string name="export">Exportieren</string>
     <string name="export_progress">Export: %1$s</string>
@@ -1715,6 +1719,7 @@
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
     <string name="map_trail_show">Zeige Positionsverlauf</string>
+    <string name="map_trail_hide">Positionsverlauf ausblenden</string>
     <!-- history track export -->
     <string name="trailhistory">Positionsverlauf</string>
     <string name="export_trailhistory_title">Exportiere Positionsverlauf</string>
