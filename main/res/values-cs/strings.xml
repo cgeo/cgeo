@@ -1012,6 +1012,8 @@
     <string name="cache_listed_on">Zveřejněno na %s</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
+    <string name="cache_chirpwolf_start">Otevřete Chirp Wolf a přečtěte údaje chirpu pro tuto keš</string>
+    <string name="cache_chirpwolf_install">Nainstalujte Chirp Wolf a budete moci číst údaje chirpu</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>

@@ -996,6 +996,8 @@
     <string name="cache_listed_on">Opgenomen in %s</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
+    <string name="cache_chirpwolf_start">Open Chirp Wolf om de chirp-gegevens voor deze cache te lezen</string>
+    <string name="cache_chirpwolf_install">Installeer Chirp Wolf om chirp-gegevens te kunnen lezen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
     <string name="internal_cache_default_description">Dit is een gebruiker gedefinieerde cache</string>

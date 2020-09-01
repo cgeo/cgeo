@@ -601,6 +601,7 @@
     <string name="init_restore_confirm">Databasen är tom. Vill du återställa med säkerhetskopian du gjort tidigare?</string>
     <string name="init_backup_last">Tillgänglig kopia från</string>
     <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
+    <string name="init_restore_version_error">Oväntat format - kan inte återställa databasen.\n\nFörväntad version är %1$d,\nbackupen har version %2$d</string>
     <string name="settings_title_backup">Säkerhetskopiera/återställa</string>
     <string name="settings_summary_backup">Utför säkerhetskopiering och återställning av cache/vägpunkts-data och programinställningar.</string>
     <string name="init_backup_settings">Säkerhetskopiera programinställningar</string>
@@ -995,6 +996,8 @@
     <string name="cache_listed_on">Listad på %s</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
+    <string name="cache_chirpwolf_start">Öppna Chirp Wolf för att läsa chirp-data för denna cache</string>
+    <string name="cache_chirpwolf_install">Installera Chirp Wolf för att kunna läsa chirp-data</string>
     <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
     <string name="internal_cache_default_description">Detta är en egen-definierad cache</string>
@@ -1234,6 +1237,7 @@
     <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
     <string name="helper_brouter_title">BRouter Offline-navigering</string>
     <string name="helper_brouter_description">BRouter tillhandahåller offline-navigering. Om det är installerat och de nödvändiga filerna har laddats ned kommer c:geo automatiskt visa en rutt till cachen på den interna kartan.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf låter dig läsa data från ANT+/Garmin chirp tags, vilket behövs för ANT+/chirp geocacher.</string>
     <!-- export -->
     <string name="export">Exportera</string>
     <string name="export_progress">Exportera: %1$s</string>
@@ -1710,6 +1714,7 @@
     <string name="map_clear_trailhistory">Rensa historikspår</string>
     <string name="map_trailhistory_cleared">Historikspåret rensat</string>
     <string name="map_trail_show">Visa historikspår</string>
+    <string name="map_trail_hide">Dölj historikspår</string>
     <!-- history track export -->
     <string name="trailhistory">Historikspår</string>
     <string name="export_trailhistory_title">Exportera historikspår</string>

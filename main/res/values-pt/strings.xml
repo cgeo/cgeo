@@ -629,14 +629,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_gpx_importdir">Directório para importar GPX</string>
     <string name="init_dataDir">Seleccione a pasta de dados das Geocaches</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
-    <string name="init_maptrail">Mostrar histórico do percurso</string>
+    <string name="init_maptrail">Mostrar histórico de percurso</string>
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
     <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos - ajuste de acordo com a memória disponível.</string>
     <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
-    <string name="init_trailcolor">Cor da linha do histórico do percurso</string>
-    <string name="init_trailcolor_summary">Seleccionar a cor e opacidade para a linha do histórico do percurso</string>
-    <string name="init_trailwidth">Largura da linha do histórico do percurso</string>
-    <string name="init_trailwidth_summary">Seleccionar a largura para a linha do histórico do percurso</string>
+    <string name="init_trailcolor">Cor da linha do histórico de percurso</string>
+    <string name="init_trailcolor_summary">Seleccionar a cor e opacidade para a linha do histórico de percurso</string>
+    <string name="init_trailwidth">Largura da linha do histórico de percurso</string>
+    <string name="init_trailwidth_summary">Seleccionar a largura para a linha do histórico de percurso</string>
     <string name="init_directioncolor">Cor da linha de direcção</string>
     <string name="init_directioncolor_summary">Seleccionar a cor e opacidade para a linha de direcção. A linha de direcção mostra uma linha recta para o alvo de navegação seleccionado, ou o caminho de navegação específico, se o encaminhamento estiver activado instalando a app BRouter.</string>
     <string name="init_directionwidth">Largura da linha de direcção</string>
@@ -984,7 +984,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_spoiler_images_title">Imagens spoiler</string>
     <string name="cache_log_types">Tipos de registo</string>
     <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string>
-    <string name="cache_clear_history">Apagar histórico</string>
+    <string name="cache_clear_history">Limpar histórico</string>
     <string name="cache_remove_from_history">Remover do histórico</string>
     <string name="cache_license">Licença</string>
     <string name="cache_image">Imagem</string>
@@ -997,6 +997,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_listed_on">Listada em %s</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
+    <string name="cache_chirpwolf_start">Abrir a aplicação Chirp Wolf para ler os dados chirp nesta cache</string>
+    <string name="cache_chirpwolf_install">Instalar a aplicação Chirp Wolf para poder ler os dados chirp</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
@@ -1236,6 +1238,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
     <string name="helper_brouter_description">O BRouter fornece cálculo de percursos off-line. Se estiver instalado e tiver os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a geocache no mapa interno.</string>
+    <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <!-- export -->
     <string name="export">Exportar</string>
     <string name="export_progress">Exportar: %1$s</string>
@@ -1709,15 +1712,15 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
     <string name="downloadmap_target_not_writable">Não é possível gravar no destino \"%s\" - por favor, seleccione um directório de ficheiro de mapa diferente.</string>
     <!-- history track -->
-    <string name="map_clear_trailhistory">Limpar o histórico do percurso</string>
-    <string name="map_trailhistory_cleared">O histórico do percurso foi limpo</string>
-    <string name="map_trail_show">Mostrar histórico do percurso</string>
-    <string name="map_trail_hide">Ocultar histórico do percurso</string>
+    <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
+    <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
+    <string name="map_trail_show">Mostrar histórico de percurso</string>
+    <string name="map_trail_hide">Ocultar histórico de percurso</string>
     <!-- history track export -->
-    <string name="trailhistory">Percurso do histórico</string>
-    <string name="export_trailhistory_title">Exportar o percurso do histórico</string>
-    <string name="export_trailhistory_success">O percurso do histórico foi exportado como \"%s\"</string>
-    <string name="export_trailhistory_clear_after_export">Limpar o percurso do histórico depois de exportar</string>
+    <string name="trailhistory">Histórico de percurso</string>
+    <string name="export_trailhistory_title">Exportar histórico de percurso</string>
+    <string name="export_trailhistory_success">O histórico de percurso foi exportado como \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Limpar o histórico de percurso depois de exportar</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Exportar rota individual</string>
     <string name="export_individualroute_success">Rota individual exportada para \"%s\"</string>
