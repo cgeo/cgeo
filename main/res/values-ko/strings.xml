@@ -143,6 +143,7 @@
     <string name="log_problem_other_text">이 지오캐셔가 이 캐시에 문제가 있다고 보고했습니다.</string>
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
+    <string name="log_image_scale_option_noscaling">스케일링 없음</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
@@ -175,6 +176,7 @@
     <string name="err_detail_cache_find_any">아무런 지오캐시가 없습니다.</string>
     <string name="err_detail_no_spoiler">이 캐시의 스포일러 사진을 찾을 수 없습니다.</string>
     <string name="err_detail_still_working">현재 다른 작업중입니다.</string>
+    <string name="err_detail_premium_log_found">이 캐시는 geocaching.com의 프리미엄 회원만 사용할 수 있습니다. 따라서 캐시 정보를 표시 할 수 없습니다.\n\n그렇지만 이 캐시를 이미 찾은 경우 여기에 로그할 수 있습니다.</string>
     <string name="err_watchlist_still_managing">현재 관심목록을 관리중입니다.</string>
     <string name="err_watchlist_failed">관심목록을 바꾸지 못했습니다.</string>
     <string name="err_application_no">적절한 응용프로그램을 찾지 못했습니다.</string>
@@ -416,6 +418,9 @@
     <string name="about_system_info">c:geo 시스템 정보</string>
     <string name="about_system_info_send_chooser">시스템 정보 보내기</string>
     <string name="about_system_write_logcat">로그 파일 생성</string>
+    <string name="about_system_write_logcat_type">표준 또는 확장 로그 파일을 만드시겠습니까?\n\n표준 로그 파일은 대부분의 사용 사례에 적합합니다.\n요청시에만 확장 로그 파일을 사용하십시오.</string>
+    <string name="about_system_write_logcat_type_standard">표준</string>
+    <string name="about_system_write_logcat_type_extended">확장</string>
     <string name="about_system_write_logcat_success">\"%2$s\" 디렉토리의 \"%1$s\"에 기록된 로그 파일</string>
     <string name="about_system_write_logcat_empty">로그 파일이 비어 있습니다</string>
     <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
@@ -556,11 +561,14 @@
     <string name="init_brouterThreshold">경로 계산</string>
     <string name="init_brouterThreshold_description">brouter helper 앱(설치되었을 경우)이 경로를 계산할 수 있는 최대 거리</string>
     <string name="init_brouterShowBothDistances">직선 거리 보기</string>
+    <string name="brouter_recalculating">백그라운드에서 경로를 다시 계산하는 중…</string>
     <string name="init_summary_brouterShowBothDistances">라우팅이 활성화 된 경우 : 계산된 경로 길이 외에 직선 거리를 표시합니다.</string>
     <string name="init_disabled">비활성캐시 제외하기</string>
     <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
     <string name="init_archived">영구보관 제외</string>
     <string name="init_summary_archived">영구보관 캐시 제외</string>
+    <string name="init_global_wp_extraction_disable">지점 추출</string>
+    <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_save_log_img">사진 저장하기</string>
     <string name="init_summary_save_log_img">로그에 있는 사진을 저장합니다.</string>
     <string name="init_units">영미식 단위 사용하기</string>
@@ -592,6 +600,7 @@
     <string name="init_restore_confirm">데이터베이스가 비었습니다. 데이터베이스 백업본으로 복구하시겠습니까?</string>
     <string name="init_backup_last">사용가능한 백업 :</string>
     <string name="init_backup_last_no">백업할 파일이 없습니다.</string>
+    <string name="init_restore_version_error">예기치 않은 형식-데이터베이스를 복원 할 수 없습니다.\n\n예상 버전은 %1$d이고\n백업 버전은 %2$d입니다.</string>
     <string name="settings_title_backup">백업 / 복원</string>
     <string name="settings_summary_backup">캐시 / 웨이포인트 데이터 및 프로그램 설정의 백업 및 복원을 수행합니다.</string>
     <string name="init_backup_settings">백업 프로그램 설정</string>
@@ -619,15 +628,36 @@
     <string name="init_dataDir">지오캐시 데이터 디렉토리 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
     <string name="init_maptrail">최근 역사 트랙 표시</string>
+    <string name="init_maptrail_length">역사 트랙 최대 길이</string>
+    <string name="init_maptrail_length_summary">역사 트랙의 최대 길이를 설정합니다 (c:geo를 시작할 때마다 적용됨) 기본값은 700 포인트입니다. 사용 가능한 메모리에 따라 조정하십시오.</string>
+    <string name="init_summary_maptrail">활성화되면 (및 GPS가 켜짐) c:geo는 이동 기록을 트랙으로 저장하고 지도에 표시합니다.</string>
+    <string name="init_trailcolor">역사 트랙선 색상</string>
+    <string name="init_trailcolor_summary">역사 트랙선의 색상 및 불투명도 선택</string>
+    <string name="init_trailwidth">역사 트랙선 너비</string>
+    <string name="init_trailwidth_summary">역사 트랙선의 너비 선택</string>
     <string name="init_directioncolor">방향선 색상</string>
+    <string name="init_directioncolor_summary">방향선의 색상과 불투명도를 선택합니다. 방향선은 BRouter 앱을 설치하여 라우팅을 활성화한 경우 선택한 탐색 대상 또는 특정 라우팅 된 탐색 경로에 대한 직선을 표시합니다.</string>
     <string name="init_directionwidth">방향선 너비</string>
+    <string name="init_directionwidth_summary">방향선 너비 선택</string>
+    <string name="init_routecolor">개별 노선 색상</string>
+    <string name="init_routecolor_summary">개별 경로선에 대한 색상 및 불투명도를 선택합니다. 개별 경로는 경유지 / 캐시를 길게 눌러 선택한 경유지 및 / 또는 캐시 모음입니다. (먼저 길게 누르기 기능을 활성화해야합니다. 지도 설정을 참조하십시오.)</string>
+    <string name="init_routewidth">개별 경로선 너비</string>
+    <string name="init_routewidth_summary">개별 경로선의 너비 선택</string>
+    <string name="init_trackcolor">개별 트랙선 색상</string>
+    <string name="init_trackcolor_summary">트랙선의 색상과 불투명도를 선택합니다. 트랙은 여러 지점으로 구성되며 트랙 GPX 파일을 통해 로드할 수 있습니다.</string>
+    <string name="init_trackwidth">개별 트랙선 너비</string>
+    <string name="init_trackwidth_summary">개별 트랙선의 너비 선택</string>
     <string name="init_circlecolor">원형선 색상</string>
+    <string name="init_circlecolor_summary">원형선의 색상과 불투명도를 선택합니다. 원형은 캐시 또는 물리적 지점 주변의 최소 반경에 대한 시각적 표현으로 사용되며 다른 캐시 또는 물리적 지점은 허용되지 않습니다. (geocaching.com에 적용)</string>
     <string name="init_circlefillcolor">원형 내부 색상</string>
+    <string name="init_circlefillcolor_summary">채울 원형의 색상 및 불투명도를 선택하십시오.</string>
     <string name="init_share_after_export">GPX 내보내기 후 공유메뉴 열기</string>
     <string name="init_include_found_status">\"찾음\" 상태 포함</string>
     <string name="init_trackautovisit">TB 방문하기</string>
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
     <string name="init_sigautoinsert">자동으로 입력하기</string>
+    <string name="init_offlinelogs_homescreen">오프라인 로그 표시</string>
+    <string name="init_summary_offlinelogs_homescreen">아직 제출하지 않은 로그가있는 경우 홈 화면의 온라인 찾기 수 옆에 오프라인 로그 카운터 (예 \"+1\")가 표시됩니다.</string>
     <string name="init_loaddirectionimg">이미지 방향</string>
     <string name="init_summary_loaddirectionimg">필요시 방향 화살표 이미지를 다운로드 받습니다.(일반회원만 필요함)</string>
     <string name="init_default_navigation_tool">기본 길찾기</string>
@@ -798,6 +828,12 @@
     <string name="cache_menu_preventWaypointsFromNote">지점이 메모에서 방지하기</string>
     <string name="cache_menu_allowWaypointExtraction">지점이 메모에서 허락하기</string>
     <string name="cache_personal_note_edit">편집</string>
+    <string name="cache_personal_note_storewaypoints">지점 추가/업데이트</string>
+    <string name="cache_personal_note_removewaypoints">지점 제거</string>
+    <string name="cache_personal_note_storewaypoints_success">개인 메모에 지점이 추가되었습니다.</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">지점이 메모에 추가되었지만 단축되어야했습니다 (최대 개인 메모 크기: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">크기 제한으로 인해 지점을 메모에 저장할 수 없습니다 (최대 개인 메모 크기: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_nowaypoints">저장 가능한 지점을 찾을 수 없습니다.</string>
     <string name="cache_personal_note_preventWaypointsExtraction">지점 추출 방지</string>
     <string name="cache_personal_note_limit">개인 메모 한계 도달</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">이 개인 메모는 Geocaching.com에서 %d 문자 이후는 잘립니다.</string>
@@ -873,6 +909,7 @@
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
     <string name="cache_menu_visit">로그하기</string>
+    <string name="cache_menu_visit_offline">빠른 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
     <string name="cache_menu_around">주변의 캐시</string>
     <string name="around"> %s 주변</string>
@@ -901,6 +938,7 @@
     <string name="cache_found_last_30_days">최근 30일간 찾은 캐시</string>
     <string name="cache_status_archived">영구보관됨</string>
     <string name="cache_status_disabled">일시정지됨</string>
+    <string name="cache_status_active">활성</string>
     <string name="cache_status_premium">프리미엄 회원 전용</string>
     <string name="cache_status_not_premium">모든 회원 접근가능</string>
     <string name="cache_status_stored">저장됨</string>
@@ -950,6 +988,8 @@
     <string name="cache_listed_on">%s에 등록됨</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
+    <string name="cache_chirpwolf_start">이 캐시에 대한 처프 데이터를 읽으려면 Chirp Wolf를 엽니다.</string>
+    <string name="cache_chirpwolf_install">처프 데이터를 읽을 수 있도록 Chirp Wolf 설치하십시오</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
@@ -958,6 +998,7 @@
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
     <string name="init_longtap_map">지도에서 길게 탭</string>
     <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시 작성) 길게 탭하는 게 활동시킵니다.</string>
+    <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
     <!-- coordinate calculator hints -->
@@ -980,6 +1021,9 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s 에서 캐시 불러오는 중</string>
     <string name="gpx_import_loading_waypoints_with_filename">%1$s 에서 웨이포인트 불러오는 중</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="other">%1$d 개의 캐시를 %2$s에서 가져왔습니다.</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">정적지도 다운로드가 중단됨</string>
     <string name="gpx_import_title_reading_file">파일 읽는 중</string>
     <string name="gpx_import_title">GPX 가져오기</string>
@@ -996,6 +1040,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">지도 파일 선택</string>
     <string name="track_file_select_title">트랙 파일 선택</string>
+    <string name="individual_route_file_select_title">개별 경로 파일 선택</string>
     <!-- import -->
     <string name="web_import_title">send2cgeo에서 가져오기</string>
     <string name="web_import_waiting">send2cgeo에서 새로운 캐시를 기다리는 중…</string>
@@ -1065,6 +1110,7 @@
     <string name="map_hidewp_original">최초의 지점 숨기기</string>
     <string name="map_hidewp_parking">주차 지점 숨기기</string>
     <string name="map_hidewp_visited">방문한 지점 숨기기</string>
+    <string name="map_hide_track">개별 트랙 숨기기</string>
     <string name="init_hidewp">지점 숨기기</string>
     <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
     <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>
@@ -1182,6 +1228,7 @@
     <string name="helper_where_you_go_description">WhereYouGo를 사용하면 Wherigo 유형의 지오캐시를 검색하고 즐길 수 있습니다. c:geo는 자동적으로 카트리지를 다운로드 받습니다.</string>
     <string name="helper_brouter_title">BRouter 오프라인 내비게이션</string>
     <string name="helper_brouter_description">BRouter는 오프라인 길찾기를 제공합니다. 설치하고 필요한 파일을 받으면 c:geo가 자동적으로 캐시로 가는 길을 보여줍니다.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf를 사용하면 ANT+/처프 지오캐시에 필요한 ANT+/Garmin 처프 태그에서 데이터를 읽을 수 있습니다.</string>
     <!-- export -->
     <string name="export">내보내기</string>
     <string name="export_progress">내보내기 : %1$s</string>
@@ -1452,6 +1499,8 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.com 의 최근변화로 라이브 지도기능에 문제가 생겼습니다.\n작업중이오니, 잠시 후 확인해 보세요.</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">이전 버전의 안드로이드를 사용하고있는 것 같습니다. 이 c:geo 버전은 더 이상 장치와 호환되지 않으며 예기치 않게 작동하지 않을 수 있습니다!\n자세한 내용을 보려면이 메시지를 누르십시오.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">1 년 이상 된 것으로 보이는 c:geo 버전을 사용하고 있습니다. 일부 기능은 웹 사이트 또는 기타 기술 변경으로 인해 더 이상 작동하지 않을 수 있습니다. 업그레이드 방법에 대한 FAQ를 읽어보십시오.</string>
+    <string name="status_android11notice" tools:ignore="UnusedResources">c:geo가 아직 완전히 지원하지 않는 안드로이드 11을 사용중인 것 같습니다. 안드로이드 지원에 대한 자세한 정보는 FAQ를 참조하십시오.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
     <string name="tts_toggle">말하기 전환</string>
@@ -1568,14 +1617,36 @@
     <string name="notification_channel_description">c:geo 지오캐싱 앱의 알림</string>
     <string name="proximity_notification_title">c:geo 근접성 알림</string>
     <!-- individual routes -->
+    <string name="individual_route">개별 경로</string>
     <string name="individual_route_added">경로에 추가했음</string>
     <string name="individual_route_removed">경로에서 제거</string>
     <string name="individual_route_error_toggling_waypoint">지점 토글 오류</string>
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
+    <string name="map_sort_individual_route">개별 경로 정렬</string>
+    <string name="map_export_individual_route">개별 경로 내보내기</string>
+    <string name="map_load_individual_route">개별 경로 로드하기</string>
+    <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
     <string name="map_clear_individual_route">개인 경로 지우기</string>
+    <string name="map_clear_individual_route_confirm">개별 경로에서 모든 캐시/지점을 제거 하시겠습니까?</string>
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
     <string name="save_sorted_route">저장</string>
+    <string name="sorted_route_saved">개인 경로가 저장되었습니다.</string>
+    <string name="load_individual_route_error">개인 경로를 로드하는 중에 오류가 발생했습니다.</string>
+    <string name="route_item_not_yet_loaded">경로 항목이 아직 로드되지 않았습니다.</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="other">경로는 %d 개의 경로점이 로드되었습니다.</item>
+    </plurals>
+    <string name="center_on_route">경로 중심</string>
     <!-- individual track -->
+    <string name="individual_track">GPX 트랙/경로</string>
+    <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
+    <string name="map_load_track_wait">백그라운드에서 트랙/경로 로딩중…</string>
+    <string name="map_load_track_confirm">기존 경로/트랙 덮어 쓰시겠습니까?</string>
+    <plurals name="load_track_success">
+        <item quantity="other">트랙 / 경로 로드됨 (%d 트랙점)</item>
+    </plurals>
+    <string name="load_track_error">트랙/경로 로딩중 오류</string>
+    <string name="map_unload_track">트랙/경로 언로드</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1612,6 +1683,9 @@
     <string name="receivemapfile_cancelled">지도 파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
     <!-- history track -->
+    <string name="map_clear_trailhistory">트레일 역사 지우기</string>
+    <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
+    <string name="map_trail_show">트레일 보이기</string>
     <!-- history track export -->
     <string name="trailhistory">역사 트랙</string>
     <!-- individual route export -->
