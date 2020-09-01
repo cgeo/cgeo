@@ -197,7 +197,7 @@
     <string name="err_tb_not_loggable">Denne trackable kan ikke logges.</string>
     <string name="err_tb_find">c:geo kan ikke finde den forespurgte Trackable</string>
     <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
-    <string name="err_waypoint_cache_unknown">c: geo ved ikke hvilken cache, du ønsker at tilføje et waypoint til.</string>
+    <string name="err_waypoint_cache_unknown">c:geo ved ikke hvilken cache, du ønsker at tilføje et rutepunkt til.</string>
     <string name="err_waypoint_add_failed">c: geo kunne ikke tilføje waypoint.</string>
     <string name="err_point_bear_and_dist_title">Har du brug for hjælp?</string>
     <string name="err_point_bear_and_dist">Udfyld både pejling og afstand. Pejlingen er en kompasvinkel mellem 0 og 360 grader i forhold til nord. Afstanden kræver ikke enheder.</string>
@@ -251,7 +251,7 @@
     <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
     <string name="info_stored_image">Nyt billede gemt til:</string>
     <string name="info_cache_saved">Cachen blev gemt lokalt</string>
-    <string name="warn_calculator_state_save">Husk at gemme waypoint, hvis du vil beholde lommeregnerens tilstand.</string>
+    <string name="warn_calculator_state_save">Husk at gemme rutepunkt, hvis du vil beholde lommeregnerens tilstand.</string>
     <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
     <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
@@ -363,7 +363,7 @@
     <string name="caches_filter_rating">Med vurdering</string>
     <string name="caches_filter_own_rating">Med egen vurdering</string>
     <string name="caches_filter_multi_listing">Flere lister med forskellige tilstand</string>
-    <string name="caches_filter_own_waypoint">Med brugerdefinerede waypoints</string>
+    <string name="caches_filter_own_waypoint">Med brugerdefinerede rutepunkter</string>
     <string name="caches_filter_missing_gcvote">Fundne cacher er ikke bedømt</string>
     <string name="caches_filter_lists">Tildelt til liste</string>
     <string name="caches_filter_empty">(tom)</string>
@@ -440,6 +440,7 @@
     <string name="settings_title_map">Kort</string>
     <string name="settings_summary_map">Vælg kortkilde samt offline kortindstillinger og -detaljer.</string>
     <string name="settings_title_map_data">Kortdata</string>
+    <string name="settings_title_waypoints">Rutepunkter</string>
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache-datamappe</string>
@@ -534,10 +535,10 @@
     <string name="init_summary_useenglish">Brug engelsk i c:geo (kræver genstart af c:geo)</string>
     <string name="init_exclude">Udelad egne og fundne cacher</string>
     <string name="init_summary_exclude">Udelad egne og fundne cacher</string>
-    <string name="init_showwaypoints">Vis waypoints</string>
-    <string name="init_showwaypoint_description">Hvis der vises færre end dette antal cacher på kortet, vil de tilhørende waypoints også blive vist.</string>
-    <string name="init_zoomincludingwaypoints">Medtag alle waypoints i zoom</string>
-    <string name="init_zoomincludingwaypoints_description">Når kortet viser én cache: Skal kortudsnittet justeres så alle waypoints er med?</string>
+    <string name="init_showwaypoints">Vis rutepunkter</string>
+    <string name="init_showwaypoint_description">Hvis der vises færre end dette antal cacher på kortet, vil de tilhørende rutepunkter også blive vist.</string>
+    <string name="init_zoomincludingwaypoints">Medtag alle rutepunkter i zoom</string>
+    <string name="init_zoomincludingwaypoints_description">Når kortet viser én cache: Skal kortudsnittet justeres så alle rutepunkter er synlige?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
     <string name="init_brouterThreshold_description">Maksimal afstand, som kan bruges til ruteberegning i ekstern brouter app.</string>
     <string name="init_brouterShowBothDistances">Vis afstand i lige linje</string>
@@ -559,9 +560,9 @@
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <!-- backup / restore -->
-    <string name="init_backup">Backup af cache- og waypointdata</string>
+    <string name="init_backup">Backup af cache- og rutepunktdata</string>
     <string name="init_backup_running">Opretter backup af cache-database…</string>
-    <string name="init_backup_note">Denne funktion vil udføre en backup at databasen indeholdende cache- og waypointdata, men ikke af cachebilleder eller app-indstillinger.</string>
+    <string name="init_backup_note">Denne funktion vil udføre en backup at databasen indeholdende cache- og rutepunktdata, men ikke af cachebilleder eller app-indstillinger.</string>
     <string name="init_backup_restore">Gendan fra backup</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
@@ -577,7 +578,7 @@
     <string name="init_backup_last">Dato for sidste backup</string>
     <string name="init_backup_last_no">Der er ikke tidligere taget backup.</string>
     <string name="settings_title_backup">Backup/gendannelse</string>
-    <string name="settings_summary_backup">Udfør backup og gendannelse af cache- og waypointdata samt app-indstillinger.</string>
+    <string name="settings_summary_backup">Udfør backup og gendannelse af cache- og rutepunktdata samt app-indstillinger.</string>
     <string name="init_backup_settings">Backup af app-indstillinger</string>
     <string name="init_backup_settings_backup_light">Backup af indstillinger (uden kontodata)</string>
     <string name="init_backup_settings_backup_full">Backup af indstillinger (fuld)</string>
@@ -616,7 +617,7 @@
     <string name="init_default_navigation_tool_description">Her kan du vælge din foretrukne navigationsmetode.</string>
     <string name="init_default_navigation_tool_select">Vælg metode</string>
     <string name="init_default_navigation_tool_2_description">Her kan du vælge din sekundære navigationsmetode. Aktivér den ved at holde på navigationssymbolet det vises i cachens titel.</string>
-    <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et waypoint. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
+    <string name="init_navigation_menu_description">Her kan du vælge hvilke af de tilgængelige navigationsmetoder, der skal vises i navigationsmenuen for en cache eller et rutepunkt. Metoder som ikke er installeret på denne enhed kan ikke vælges.</string>
     <string name="init_debug_title">Fejlfindingsoplysninger</string>
     <string name="init_debug_note">c:geo kan indsamle en mængde fejlfindingsoplysninger. Aktivering af denne indstilling vil påvirke stabiliteten af c:geo og kan kun anbefales, hvis du bliver bedt om at sende en fejlfindingslog til udviklerne. Denne indstilling bør være deaktiveret under normal brug af c:geo!</string>
     <string name="init_debug">Aktivér indsamling af fejlfindingsoplysningner</string>
@@ -678,9 +679,12 @@
     <string name="init_mfold_api">Tidligere Mapsforge V3</string>
     <string name="init_mfold_api_description">Den aktuelle udgave af c:geo benytter en beta version af det nye Mapsforge kortformat. Hvis du mangler funktionalitet eller oplever problemer kan du vælge at bruge den tidligere version af Mapsforge kortformat her.</string>
     <!-- proximity notification -->
+    <string name="init_summary_proximityNotificationSpecific">Afspil en gentagen notifikation, hvis den valgte cache eller rutepunkt er tættere på end lang afstand eller nær afstand. Fungerer, hvis cache- eller rutepunktdetaljer åbnes, cache- eller waypointpopups er vist på kortet, eller kompasset er aktivt. Der anvendes forskellige toner til de to afstande.</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Kort</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
+    <string name="map_source_osm_osmde">OpenStreetMap.de</string>
+    <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="init_sendToCgeo">Send2c:geo</string>
     <string name="settings_info_send2cgeo_title">Beskrivelse af send2c:geo</string>
     <string name="init_sendToCgeo_name">Din enheds navn</string>
@@ -781,7 +785,12 @@
     <string name="cache_favpoint_not_on">Denne cache er ikke blandt dine favoritter.</string>
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
-    <string name="cache_waypoints_add">Tilføj waypoint</string>
+    <plurals name="waypoints">
+        <item quantity="one">%d rutepunkt</item>
+        <item quantity="other">%d rutepunkter</item>
+    </plurals>
+    <string name="cache_waypoints_add">Tilføj rutepunkt</string>
+    <string name="cache_waypoints_remove_original_waypoint">Rutepunkt kopieret fra udklipsholder til denne cache.\n\nFjern originalt rutepunkt?</string>
     <string name="cache_hint_not_available">Intet hint tilgængeligt</string>
     <string name="cache_logs">Logbog</string>
     <string name="cache_logs_friends_and_own">Venners/egne logbeskeder</string>
@@ -790,7 +799,7 @@
     <string name="cache_dialog_loading_details_status_details">Bearbejder detaljer</string>
     <string name="cache_dialog_loading_details_status_spoilers">Loader spoilerbilleder</string>
     <string name="cache_dialog_loading_details_status_logs">Loader logbeskeder</string>
-    <string name="cache_dialog_loading_details_status_waypoints">Bearbejder waypoints</string>
+    <string name="cache_dialog_loading_details_status_waypoints">Bearbejder rutepunkter</string>
     <string name="cache_dialog_loading_details_status_gcvote">Loader GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Lagrer data</string>
     <string name="cache_dialog_loading_details_status_render">Tegner side</string>
@@ -823,7 +832,7 @@
     <string name="around">I nærheden af %s</string>
     <string name="menu_caches">Administrér cacher</string>
     <string name="cache_menu_event">Tilføj til kalender</string>
-    <string name="cache_menu_extract_waypoints">Udtræk waypoints</string>
+    <string name="cache_menu_extract_waypoints">Udtræk rutepunkter</string>
     <string name="cache_menu_details">Detaljer</string>
     <string name="cache_menu_refresh">Genindlæs</string>
     <string name="cache_menu_share">Del cache</string>
@@ -875,7 +884,7 @@
     <string name="cache_image">Billede</string>
     <string name="cache_image_open_file">Åbn som fil</string>
     <string name="cache_image_open_browser">Åbn i browser</string>
-    <string name="cache_image_add_waypoint">Tilføj waypoint</string>
+    <string name="cache_image_add_waypoint">Tilføj rutepunkt</string>
     <string name="cache_image_background">Baggrundsbillede til cacheliste</string>
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
@@ -894,7 +903,7 @@
     <string name="simple_dir_chooser_invalid_path">Ugyldig sti</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Indlæser cacher fra %1$s</string>
-    <string name="gpx_import_loading_waypoints_with_filename">Indlæser waypoints fra %1$s</string>
+    <string name="gpx_import_loading_waypoints_with_filename">Indlæser rutepunkter fra %1$s</string>
     <string name="gpx_import_static_maps_skipped">Indlæsning af statiske kort blev afbrudt</string>
     <string name="gpx_import_title_reading_file">Indlæser fil</string>
     <string name="gpx_import_title">Importér GPX</string>
@@ -930,12 +939,12 @@
     <string name="waypoint_copy_coordinates">Kopiér koordinater</string>
     <string name="waypoint_clear_coordinates">Nulstil position</string>
     <string name="waypoint_delete">Slet</string>
-    <string name="waypoint_edit_title">Rediger waypoint</string>
-    <string name="waypoint_add_title">Tilføj waypoint</string>
+    <string name="waypoint_edit_title">Redigér rutepunkt</string>
+    <string name="waypoint_add_title">Tilføj rutepunkt</string>
     <string name="waypoint_user_note">Brugernotat</string>
     <string name="waypoint_visited">Besøgt</string>
-    <string name="waypoint_set_visited">Waypoint markeret som besøgt</string>
-    <string name="waypoint_unset_visited">Waypoint markeret som ikke besøgt</string>
+    <string name="waypoint_set_visited">Rutepunkt markeret som besøgt</string>
+    <string name="waypoint_unset_visited">Rutepunkt markeret som ikke besøgt</string>
     <string name="waypoint_save">Gem</string>
     <string name="waypoint_cancel_edit">Annullér</string>
     <string name="waypoint_loading">Indlæser waypoint…</string>
@@ -952,7 +961,7 @@
     <string name="waypoint_coordinates_upload_error">Der opstod en fejl under ændring af positionen på websitet.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Cachepositionen på websitet blev ændret til: %s.</string>
     <string name="waypoint_done">Udført</string>
-    <string name="waypoint_duplicate">Duplikér waypoint</string>
+    <string name="waypoint_duplicate">Duplikér rutepunkt</string>
     <string name="waypoint_copy_of">Kopi af</string>
     <string name="waypointcalc_notes_prompt">Indtast noter her…</string>
     <string name="waypoint_coordinate_formats_plain">Simpel</string>
@@ -1410,7 +1419,7 @@
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
     <string name="list_list_headline">Lister:</string>
     <plurals name="extract_waypoints_result">
-        <item quantity="one">%d waypoint udtrukket</item>
+        <item quantity="one">%d rutepunkter udtrukket</item>
         <item quantity="other">%d waypoints udtrukket</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com positionschecker er tilgængelig via browser</string>
