@@ -601,6 +601,7 @@
     <string name="init_restore_confirm">Il database è vuoto. Vuoi ripristinare il backup?</string>
     <string name="init_backup_last">Disponibile Backup di </string>
     <string name="init_backup_last_no">Non esiste il file con il backup.</string>
+    <string name="init_restore_version_error">Formato non previsto - non è possibile ripristinare il database.\n\nLa versione prevista è %1$d,\nmentre il backup ha la versione %2$d</string>
     <string name="settings_title_backup">Backup / Ripristino</string>
     <string name="settings_summary_backup">Esegui il backup e ripristino dei cache/waypoint e le impostazioni del programma.</string>
     <string name="init_backup_settings">Backup impostazioni del programma</string>
@@ -995,6 +996,8 @@
     <string name="cache_listed_on">Elencato su %s</string>
     <string name="cache_whereyougo_start">Apri WhereYouGo per scaricare e avviare questa cartuccia</string>
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
+    <string name="cache_chirpwolf_start">Apri Chirp Wolf per leggere i dati del chirp per questo cache</string>
+    <string name="cache_chirpwolf_install">Installa Chirp Wolf per poter leggere i dati chirp</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="internal_cache_default_name">Cache definito dall\'utente #%1$d</string>
     <string name="internal_cache_default_description">Questo è un cache definito dall\'utente</string>
@@ -1234,6 +1237,7 @@
     <string name="helper_where_you_go_description">WhereYouGo permette di giocare e cercare geocache di tipo Wherigo. c:geo può automaticamente scaricare le schede tramite questa app.</string>
     <string name="helper_brouter_title">BRouter Navigazione Offline</string>
     <string name="helper_brouter_description">BRouter fornisce il routing non in linea. Se è installato e ha scaricato i file necessari, c:geo mostrerà automaticamente un percorso per il cache sulla mappa interna.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
     <!-- export -->
     <string name="export">Esportazione</string>
     <string name="export_progress">Esporta: %1$s</string>
@@ -1715,6 +1719,7 @@
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
     <string name="map_trail_show">Mostra traccia cronologia movimenti</string>
+    <string name="map_trail_hide">Nascondi traccia cronologia</string>
     <!-- history track export -->
     <string name="trailhistory">Traccia cronologia</string>
     <string name="export_trailhistory_title">Esporta traccia cronologia</string>
