@@ -996,6 +996,8 @@
     <string name="cache_listed_on">Listée le %s</string>
     <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
+    <string name="cache_chirpwolf_start">Lancer Chirp Wolf afin de lire les données chirp de cette cache</string>
+    <string name="cache_chirpwolf_install">Installer Chirp Wolf afin de pouvoir lire les données chirp</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="internal_cache_default_name">Cache personnalisée #%1$d</string>
     <string name="internal_cache_default_description">Ceci est une cache personnelle</string>

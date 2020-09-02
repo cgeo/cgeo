@@ -1,12 +1,12 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Es tracta d’un plugin de contactes per a c: geo, una aplicació de geocatxing de codi obert. Només funcionarà amb l'aplicació c: geo instal·lada i permet l'accés directe a la vostra agenda quan feu clic a un nom d'usuari a c: geo.
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+Ús:
+Quan feu clic a un nom d’usuari a c: geo (ex,,. al registre d'un catxé) el menú contindrà un element per obrir la targeta de contacte corresponent als contactes del telèfon. Això us permetrà trucar directament o enviar missatges a l’usuari.
 
-Remark: 
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+Observacions: 
+El nom d’usuari de la persona s’ha d’emmagatzemar al camp de nom o àlies dels vostres contactes perquè el connector coincideixi amb el nom d’usuari de geocatxing amb el contacte.
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Els comentaris a PlayStore no es poden respondre! Si teniu problemes per instal·lar o utilitzar c: geo, primer consulteu les nostres FAQ: https://faq.cgeo.org
+Si encara hi ha problemes, poseu-vos en contacte amb el servei d'assistència per corre electrònic.
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+Si voleu saber per què aquest connector c: geo necessita els permisos sol·licitats, consulteu https://www.cgeo.org/faq.html#plugin-contacts-privacy per obtenir una explicació.

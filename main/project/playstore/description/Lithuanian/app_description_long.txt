@@ -1,30 +1,30 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away. 
+c:geo yra atviro kodo, funkcionali, visada paruošta neoficiali geocaching.com programėlė, taip pat palaikanti kitas lobiavimo platformas (pvz. Opencaching). Nereikalauja naršyklės arba duomenų eksporto - tiesiog įdiek ir naudokis. 
 
-Main features:
-- View caches on a Live Map 
-- Use Google Maps or OpenStreetMaps
-- Search for caches by various criteria 
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files 
-- Full support for trackables
-- Offline caching functions including offline maps
+Pagrindinės funkcijos:
+- Lobių peržiūra tiesiogiai iš žemėlapio 
+- Naudoti Google Maps arba OpenStreetMaps
+- Lobių paieška pagal įvairius kriterijus 
+- Surastų lobių registracija prisijungus arba neprisijungus prie interneto
+- Išsaugoti slėptuvės informaciją jūsų prietaise
+- Kurti ir tvarkyti taškus
+- Naviguoti kompasu, žemėlapiu ar kitomis programėlėmis
+- Importuoti/eksportuoti GPX failus 
+- Visapusiškas keliauninkų palaikymas
+- Lobiavimas ir žemėlapiai neprisijungus
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geo - paprasta ir galinga lobiavimo programėlė su daug papildomų funkcijų. Jums tereikia tik paskyros lobiavimo platformoje - geocaching.com, Opencaching ar kitoje.
+Ieškoti lobių tiesiogiai per žemėlapį ar paieškos funkcijas.
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+Keliaukite link lobio ar jo taško su kompaso, žemėlapio ar išorinių programėlių pagalba (pvz.: Radar, Google Navigation, StreetView, Locus, Navigon, Sygic ar kitų).
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want. 
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+Parsisiųskite lobių informaciją tiesiai iš geocaching.com ar GPX failų, kad visada ją turėtumėte šalia. 
+Galite tvarkyti lobius - perkelti juos į skirtingus sąrašus, rikiuoti ir filtruoti pagal poreikį.
+Išsaugoti lobiai, žemėlapiai neprisijungus ar statiniai žemėlapiai naudojami lobių paieškoms neprisijungus (pvz.: lobiaujant užsienyje).
+Įrašus galima paskelbti internetu, išsaugoti paskelbimui vėliau ar eksportuoti per lauko užrašus.
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+Ieškoti bei atrasti keliauninkus, tvarkyti jų inventorių bei palikti keliauninką per lobio įrašą.
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+Jei iškyla bėdų su c:geo diegtimi ar naudojimu, peržvelkite mūsų DUK (https://faq.cgeo.org) ar žinyną (https://manual.cgeo.org).
+Jeigu nepavyksta sutvarkyti bėdų, kreipkitės el. paštu.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+Jeigu neaišku, kodėl c:geo reikalingi šie leidimai, peržiūrėkite https://www.cgeo.org
