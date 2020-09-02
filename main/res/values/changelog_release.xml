@@ -2,65 +2,80 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
- <h1>2020.08.04:</h1>
+<h1>Beta version 2020.09.02-RC:</h1>
+
+<h4>Android 11 notice:</h4>
+Android 11 enforces a new way for storing data, which c:geo does not support yet. If you switch your system to Android 11, c:geo will not be able to access part of its data. This will most likely disable storing offline maps, importing/exporting data as well as backing up/restoring c:geo\'s database. Other effects may occur. We recommend to not upgrade to Android 11 for the time being.
 
 <h4>Map:</h4>
 <ul>
-· New: Optionally switch between compact and regular icon modes automatically depending on amount of caches displayed\n
-· Change: Renamed trail / trail history / history trail to history track\n
-· New: History track: Allow export as GPX track file\n
-· New: History track: Make max. length configurable\n
-· Fix: History track: Remove superflous connection from start of track to current position\n
-· Change: History track: Remove "shadow" to make history track line consistent with other map lines\n
-· New: Customize history track, circle, individual route and individual track map line colors and widths\n
-· New: Load GPX track files and show individual track on map\n
-· New: Individual routes - Allow sorting of route elements\n
+<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
+<li>New: Open local .map files in c:geo by tapping on them</li>
+<li>New: Colorpicker for map lines offers \"default\" button</li>
+<li>New: OpenstreetMap offline maps support \"default\" language</li>
+<li>Change: Moved \"History track enable/disable\" checkbox to \"History track\" submenu as \"show\" / \"hide\" entries</li>
 </ul>
 
-<h4>Cache list:</h4>
+<h4>Map: Individual routes:</h4>
 <ul>
-· Change: Difficulty and terrain filter match exact values only, no longer ranges\n
-· New: Fast scroll thumbs (info on position in list)\n
-· Change: Fast scroll only gets enabled after fling gesture with minimum length\n
-· Moved menu entry \"Clear history\" to menu top level (history cache list only)\n
+<li>New: Export route as GPX route file</li>
+<li>New: Import route from GPX route file</li>
+<li>New: Option added to center on route</li>
+<li>New: Show warning before clearing a route</li>
+<li>Fix: Crash on loading empty route item</li>
+<li>Fix: Distance info still being displayed after clearing a route</li>
+</ul>
+
+<h4>Map: GPX tracks/routes:</h4>
+<ul>
+<li>Change: Renamed \"individual track\" to \"GPX track/route\"</li>
+<li>New: Also load GPX files using the route format</li>
+<li>New: Option added to center on track/route</li>
+<li>New: Show Warning before overwriting an existing track/route</li>
+<li>New: Show warning on \"load track/route\" if an empty track/route file was selected</li>
+<li>Change: Group \"GPX track/route\" related entries into its own sub menu</li>
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
-· Change: Open links in cache description as separate task\n
-· Fix: Adapt Whereigo URL checker to catch more Whereigo links\n
-· Fix: Parsing of coords from user notes: Exclude some unwanted combinations by adding . and , as separators\n
+<li>Changed sync logic for personal notes in caches to avoid duplication of personal notes</li>
+<li>New: Option to globally deactivate waypoint extraction from personal notes</li>
+<li>New: Personal note editor will grow automatically for longer texts</li>
+<li>New: Personal note editor: Directly activate keyboard on opening</li>
+<li>New: Personal note editor: Activate edit by tapping on text</li>
+<li>New: Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
+<li>New: Remembers offline found count for every connector and applies those values to the [NUMBER] parameter on logging</li>
+<li>Fix: Remembers waypoint coordinate format while scrolling in list</li>
+<li>New: Offer Chirp Wolf app for chirp caches</li>
 </ul>
 
-<h4>Supported geocaching platforms:</h4>
+<h4>Cache lists:</h4>
 <ul>
-· Change: Set all connectors to https\n
-· New: Support cache rating and managing of favorites for geocaching.su\n
-· Fix: Adapt to updated terracaching details URL\n
+<li>Fix: GPX export - label for checkbox \"Include found status\"</li>
+<li>Change: \"New list\" entry moved to top of list creation/selection dialog</li>
+<li>Change: A newly created list for user-defined caches will now be named \"User-defined caches\" instead of \"Internal caches\" (does not change an existing list with user-defined caches)</li>
+<li>New: Offer logging of premium caches from search for basic members of geocaching.com</li>
 </ul>
 
-<h4>System requirements:</h4>
+<h4>Other:</h4>
 <ul>
-· <b>Warning: c:geo is not yet compatible with Android 11!</b> - Either do not upgrade to Android 11 or stay at an older version of c:geo for now\n
-· Change: System requirements: c:geo now requires your system to run at least Android 5.0\n
-· Change: Set target SDK to 29 to comply with upcoming requirements for Play store\n
-· New: Internal: Upgraded several included libraries to reflect our new minimum system requirements\n
-· Fix: Internal: Removed styles / themes workarounds used for older Android versions\n
-· Fix: Internal: Remove old program code no longer used for supported Android versions\n
-· New: Display a warning, if your c:geo version is older than about a year\n
-</ul>
-
-<h4>Other changes:</h4>
-<ul>
-· Change: New adaptive launcher icon, following the new specs from Play store (also used on mainscreen and about page)\n
-· New: Debug view for program settings (settings - system - view settings)\n
-· Fix: Fix for slider preference problem on Android 7\n
-· Fix: Fix translation issues for several plural forms\n
-· Fix: Settings backup: Allow restore of backups created with c:geo version 2020.03.30 or earlier\n
-· Fix: Settings backup: Geokrety auth token excluded from limited settings backup\n
-· Change: Logcat logfile renamed to have \".txt\" file ending\n
-· Change Android accent color to \"c:geo orange\"\n
-· Fix: Other code cleanup\n
+<li>New: Include offline found counter on homescreen (configurable)</li>
+<li>New: Individual route sort view: Tap on item to open cache details</li>
+<li>New: Individual route sort view: Reorder using drag & drop</li>
+<li>New: Display an error message (instead of crashing) when trying to restore an incompatible database version</li>
+<li>New: Updated send2cgeo and GPS Status helper app icons</li>
+<li>New: Add status info on BRouter availability to about - system screen</li>
+<li>New: Added Chirp Wolf in useful apps list</li>
+<li>Fix: Trackable links openened from within some mail programs would not open</li>
+<li>Change: Set colorAccent to c:geo orange in many more places</li>
+<li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
+<li>Many other small fixes</li>
+<li>Logging: Added more info levels to logfile</li>
+<li>Logging: Added option to write extended logfile with even more info</li>
+<li>Logging: Read log settings from \"logfiles/log.properties\" (if present)</li>
+<li>Internal: Updated contributor\'s list</li>
+<li>Internal: Added extension table to database</li>
+<li>Internal: Fixed some issues with database structure</li>
 </ul>
 </div>]]></Data>
 </string>
