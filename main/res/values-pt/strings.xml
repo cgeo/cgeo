@@ -576,7 +576,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_units">Usar Unidades Imperiais</string>
     <string name="init_summary_units">Utilizar as unidades no Sistema Imperial em vez do Sistema Métrico</string>
     <string name="init_log_offline">Registos Offline</string>
-    <string name="init_summary_log_offline">Activa os registos em modo offline (Não aparecerá a vista com os registos online, nem poderá submeter registos)</string>
+    <string name="init_summary_log_offline">Activa os registos off-line (não será mostrada a vista de registos on-line, não os podendo publicar)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_listdisplay">Listas adicionais</string>
@@ -1093,7 +1093,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_localy_reset_cache_coords">Repor no c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Repor no c:geo e no website</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">O sítio web não suporta a modificação das coordenadas da cache.</string>
-    <string name="waypoint_coordinates_upload_error">Ocorreu um erro ao modificar as coordenadas no site.</string>
+    <string name="waypoint_coordinates_upload_error">Ocorreu um erro ao modificar as coordenadas no sítio web.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da cache no sítio web foram modificadas para: %s.</string>
     <string name="waypoint_done">Feito</string>
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>

@@ -996,6 +996,8 @@
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
+    <string name="cache_chirpwolf_start">Ανοίχτε το Chirp Wolf ώστε να διαβάσετε τα δεδομένα chirp της κρύπτης</string>
+    <string name="cache_chirpwolf_install">Εγκαταστήστε το Chirp Wolf ώστε να μπορείτε να διαβάσετε δεδομένα chirp</string>
     <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
     <string name="internal_cache_default_name">Κρύπτη ορισμένη από τον χρήστη #%1$d</string>
     <string name="internal_cache_default_description">Αυτή είναι μια user-defined κρύπτη</string>
