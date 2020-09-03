@@ -1233,6 +1233,7 @@
     <string name="destination_select">Выберите пункт назначения</string>
     <string name="navigation_direct_navigation">Прямая навигация</string>
     <string name="osmand_marker_cgeo">Маркер из c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Лицензия</string>
     <string name="license_show">Показать лицензию</string>
