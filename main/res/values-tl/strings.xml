@@ -926,6 +926,7 @@
     <string name="destination_select">Pumili ng destinasyon</string>
     <string name="navigation_direct_navigation">Direktang nabigasyon</string>
     <string name="osmand_marker_cgeo">Taga-marka mula sa c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Ang lisensya</string>
     <string name="license_show">Ipakita ang lisensya</string>
