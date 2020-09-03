@@ -601,6 +601,7 @@
     <string name="init_restore_confirm">Tietokanta on tyhjä. Haluatko palauttaa varmuuskopion?</string>
     <string name="init_backup_last">Varmuuskopio ajalta:</string>
     <string name="init_backup_last_no">Mikään tiedosto ei sisällä varmuuskopiota.</string>
+    <string name="init_restore_version_error">Odottamaton muoto - ei voi palauttaa tietokantaa.\n\nOdotettu versio on %1$d,\nvarmuuskopiolla on versio %2$d</string>
     <string name="settings_title_backup">Varmuuskopioi / Palauta</string>
     <string name="settings_summary_backup">Tee varmuuskopio ja palauta kätköjen/reittipisteiden tiedot ja ohjelman asetukset.</string>
     <string name="init_backup_settings">Varmuuskopioi ohjelman asetukset</string>
@@ -627,14 +628,14 @@
     <string name="init_gpx_importdir">GPX:n tuontikansio</string>
     <string name="init_dataDir">Valitse kätködatan kansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
-    <string name="init_maptrail">Näytä reittihistoria</string>
-    <string name="init_maptrail_length">Reittihistorian maksimipituus</string>
-    <string name="init_maptrail_length_summary">Aseta reittihistorian maksimipituus (pakotetaan jokaisen c:geon käynnistyksen yhteydessä). Oletusarvo on 700 - säädä saatavilla olevan muistin mukaisesti.</string>
-    <string name="init_summary_maptrail">Kun tämä (sekä GPS) on aktivoitu, c:geo tallettaa liikkeidesi historian reittinä ja näyttää kyseisen reitin kartalla.</string>
-    <string name="init_trailcolor">Reittihistorian viivan väri</string>
-    <string name="init_trailcolor_summary">Valitse reittihistorian väri ja läpinäkyvyys</string>
-    <string name="init_trailwidth">Reittihistorian viivan leveys</string>
-    <string name="init_trailwidth_summary">Valitse reittihistorian viivan leveys</string>
+    <string name="init_maptrail">Näytä jälkihistoria</string>
+    <string name="init_maptrail_length">Jälkihistorian maksimipituus</string>
+    <string name="init_maptrail_length_summary">Aseta jälkihistorian maksimipituus (pakotetaan jokaisen c:geon käynnistyksen yhteydessä). Oletusarvo on 700 - säädä saatavilla olevan muistin mukaisesti.</string>
+    <string name="init_summary_maptrail">Kun tämä (sekä GPS) on aktivoitu, c:geo tallettaa liikkeidesi historian jälkenä ja näyttää sen kartalla.</string>
+    <string name="init_trailcolor">Jälkihistorian viivan väri</string>
+    <string name="init_trailcolor_summary">Valitse jälkihistorian väri ja läpinäkyvyys</string>
+    <string name="init_trailwidth">Jälkihistorian viivan leveys</string>
+    <string name="init_trailwidth_summary">Valitse jälkihistorian viivan leveys</string>
     <string name="init_directioncolor">Suuntaviivan väri</string>
     <string name="init_directioncolor_summary">Valitse suuntaviivan väri ja läpinäkyvyys. Suuntaviiva näyttää suoran viivan valitsemaasi navigointikohteeseen, tai reititetyn navigointiviivan, jos reititys on käytettävissä BRouter-sovelluksen avulla.</string>
     <string name="init_directionwidth">Suuntaviivan leveys</string>
@@ -643,10 +644,10 @@
     <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
     <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
-    <string name="init_trackcolor">Yksittäisen reittiviivan väri</string>
-    <string name="init_trackcolor_summary">Valitse reittiviivan väri ja läpinäkyvyys. Reitti koostuu useista reittipisteistä ja voidaan ladata reitin sisältävältä GPX-tiedostosta.</string>
-    <string name="init_trackwidth">Yksittäisen reittiviivan leveys</string>
-    <string name="init_trackwidth_summary">Valitse yksittäisen reittiviivan leveys</string>
+    <string name="init_trackcolor">Yksittäisen jälkiviivan väri</string>
+    <string name="init_trackcolor_summary">Valitse rataviivan väri ja läpinäkyvyys. Rata koostuu useista reittipisteistä ja voidaan ladata radan sisältävältä GPX-tiedostosta.</string>
+    <string name="init_trackwidth">Yksittäisen rataviivan leveys</string>
+    <string name="init_trackwidth_summary">Valitse yksittäisen jälkiviivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
@@ -995,6 +996,8 @@
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
+    <string name="cache_chirpwolf_start">Avaa Chirp Wolf lukeaksesi chirpin tiedot tälle kätkölle</string>
+    <string name="cache_chirpwolf_install">Asenna Chirp Wolf pystyäksesi lukemaan chirpin tietoja</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
@@ -1045,7 +1048,7 @@
     <string name="gpx_import_android">Tuo Androidista</string>
     <!-- file selectors -->
     <string name="map_file_select_title">Valitse karttatiedosto</string>
-    <string name="track_file_select_title">Valitse reittitiedosto</string>
+    <string name="track_file_select_title">Valitse jälkitiedosto</string>
     <string name="individual_route_file_select_title">Valitse yksittäinen reittitiedosto</string>
     <!-- import -->
     <string name="web_import_title">Tuo send2cgeo</string>
@@ -1116,7 +1119,7 @@
     <string name="map_hidewp_original">Piilota alkuperäiset reittipisteet</string>
     <string name="map_hidewp_parking">Piilota parkkipaikka-reittipisteet</string>
     <string name="map_hidewp_visited">Piilota vieraillut reittipisteet</string>
-    <string name="map_hide_track">Piilota yksittäinen reitti</string>
+    <string name="map_hide_track">Piilota yksittäinen jälki</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
@@ -1212,6 +1215,7 @@
     <string name="destination_select">Valitse kohde</string>
     <string name="navigation_direct_navigation">Suora navigointi</string>
     <string name="osmand_marker_cgeo">Merkki c:geosta</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Lisenssi</string>
     <string name="license_show">Näytä lisenssi</string>
@@ -1233,7 +1237,8 @@
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouter tarjoaa offline-navigoinnin. Jos on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
+    <string name="helper_brouter_description">BRouter tarjoaa offline-reitityksen. Jos se on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
     <!-- export -->
     <string name="export">Vienti</string>
     <string name="export_progress">Vienti: %1$s</string>
@@ -1649,7 +1654,7 @@
     <string name="save_sorted_route">Tallenna</string>
     <string name="sorted_route_saved">Yksittäinen reitti tallennettu</string>
     <string name="load_individual_route_error">Virhe ladattaessa yksittäistä reittiä</string>
-    <string name="route_item_not_yet_loaded">Reitin asiaa ei ole vielä ladattu</string>
+    <string name="route_item_not_yet_loaded">Reittikohdetta ei ole vielä ladattu</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Reitti ladattu %d reittipisteellä</item>
         <item quantity="other">Reitti ladattu %d reittipisteellä</item>
@@ -1712,14 +1717,15 @@
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - valitse toinen karttatiedostohakemisto.</string>
     <!-- history track -->
-    <string name="map_clear_trailhistory">Poista reittihistoria</string>
-    <string name="map_trailhistory_cleared">Reitthistoria poistettu</string>
-    <string name="map_trail_show">Näytä reittihistoria</string>
+    <string name="map_clear_trailhistory">Poista jälkihistoria</string>
+    <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
+    <string name="map_trail_show">Näytä jälkihistoria</string>
+    <string name="map_trail_hide">Piilota jälkihistoria</string>
     <!-- history track export -->
-    <string name="trailhistory">Reittihistoria</string>
-    <string name="export_trailhistory_title">Vie reittihistoria</string>
-    <string name="export_trailhistory_success">Reittihistoria viety kohteeseen \"%s\"</string>
-    <string name="export_trailhistory_clear_after_export">Poista reittihistoria viennin jälkeen</string>
+    <string name="trailhistory">Jälkihistoria</string>
+    <string name="export_trailhistory_title">Vie jälkihistoria</string>
+    <string name="export_trailhistory_success">Jälkihistoria viety kohteeseen \"%s\"</string>
+    <string name="export_trailhistory_clear_after_export">Poista jälkihistoria viennin jälkeen</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Vie yksittäinen reitti</string>
     <string name="export_individualroute_success">Viety yksittäinen reitti kohteeseen \"%s\"</string>
