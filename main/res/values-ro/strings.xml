@@ -916,6 +916,7 @@
     <string name="destination_select">Alege destinaţia</string>
     <string name="navigation_direct_navigation">Navigare directă</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licenţă</string>
     <string name="license_show">Afişează licenţa</string>
