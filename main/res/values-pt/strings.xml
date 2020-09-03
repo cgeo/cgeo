@@ -1216,6 +1216,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licença</string>
     <string name="license_show">Mostrar licença</string>
