@@ -1117,6 +1117,7 @@
     <string name="destination_select">Velg destinasjon</string>
     <string name="navigation_direct_navigation">Direkte navigering</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Lisens</string>
     <string name="license_show">Vis lisens</string>

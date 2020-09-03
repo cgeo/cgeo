@@ -619,6 +619,7 @@
     <string name="use_gps">Aðeins nota GPS</string>
     <string name="use_compass">Nota GPS og seguláttavita</string>
     <string name="destination_select">Velja áfangastað</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Leyfi</string>
     <string name="license_show">Sýna leyfi</string>

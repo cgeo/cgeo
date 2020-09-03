@@ -825,6 +825,7 @@
     <string name="destination_select">Izbira destinacije</string>
     <string name="navigation_direct_navigation">Direktna navigacija</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licenca</string>
     <string name="license_show">Pokaži licenco</string>

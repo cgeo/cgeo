@@ -1206,6 +1206,7 @@
     <string name="destination_select">목적지 선택</string>
     <string name="navigation_direct_navigation">직접 길찾기</string>
     <string name="osmand_marker_cgeo">c:geo 마커</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">라이센스</string>
     <string name="license_show">라이선스 보기</string>

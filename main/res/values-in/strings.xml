@@ -914,6 +914,7 @@
     <string name="destination_select">Pilih tujuan</string>
     <string name="navigation_direct_navigation">Navigasi langsung</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Lisensi</string>
     <string name="license_show">Menunjukkan lisensi</string>

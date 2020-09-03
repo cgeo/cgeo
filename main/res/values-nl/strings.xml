@@ -118,9 +118,11 @@
     <string name="log_yesterday">Gisteren</string>
     <string name="log_smilies">Smilies</string>
     <string name="log_image">Foto</string>
+    <string name="log_images">Afbeeldingen</string>
     <string name="log_image_attach">Foto koppelen</string>
     <string name="log_image_stored">Bestaande</string>
     <string name="log_image_camera">Nieuw</string>
+    <string name="log_image_delete">Verwijderen</string>
     <string name="log_image_caption">Bijschrift</string>
     <string name="log_image_description">Omschrijving</string>
     <string name="log_image_scale">Schalen</string>
@@ -145,6 +147,9 @@
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">Afbeelding</string>
+    <string name="log_image_titleprefix_hint">Voorvoegsel afbeeldingstitel</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
     <string name="translate_to_english">Engels</string>
@@ -1215,6 +1220,14 @@
     <string name="destination_select">Selecteer bestemming</string>
     <string name="navigation_direct_navigation">Directe navigatie</string>
     <string name="osmand_marker_cgeo">Markering van c:geo</string>
+    <string name="device_heading_label">Apparaat koers:</string>
+    <string name="device_orientation">Apparaat Oriëntatie</string>
+    <string name="device_orientation_label">Oriëntatie:</string>
+    <!-- device orientation types -->
+    <string name="do_unknown">Onbekend</string>
+    <string name="do_auto">Automatisch</string>
+    <string name="do_flat">Plat</string>
+    <string name="do_upright">Rechtop</string>
     <!-- license -->
     <string name="license">Licentie</string>
     <string name="license_show">Toon licentie</string>

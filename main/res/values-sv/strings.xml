@@ -1215,6 +1215,7 @@
     <string name="destination_select">Välj målpunkt</string>
     <string name="navigation_direct_navigation">Direkt navigering</string>
     <string name="osmand_marker_cgeo">Markör från c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licens</string>
     <string name="license_show">Visa licens</string>

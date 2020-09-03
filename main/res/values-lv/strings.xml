@@ -1174,6 +1174,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="destination_select">Izvēlieties galamērķi</string>
     <string name="navigation_direct_navigation">Tiešā navigācija</string>
     <string name="osmand_marker_cgeo">Kartes atzīme no c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Rādīt licenci</string>

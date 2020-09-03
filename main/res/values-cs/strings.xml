@@ -118,9 +118,11 @@
     <string name="log_yesterday">Včera</string>
     <string name="log_smilies">Smajlíci</string>
     <string name="log_image">Obrázek</string>
+    <string name="log_images">Obrázky</string>
     <string name="log_image_attach">Připojit obrázek</string>
     <string name="log_image_stored">Existující</string>
     <string name="log_image_camera">Nový</string>
+    <string name="log_image_delete">Smazat</string>
     <string name="log_image_caption">Titulek</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Měřítko</string>
@@ -145,6 +147,9 @@
     <string name="log_problem_archive_text">Tento hráč oznámil, že keš by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">Obrázek</string>
+    <string name="log_image_titleprefix_hint">Předpona názvu obrázku</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
     <string name="translate_to_english">Přeložit do angličtiny</string>
@@ -1233,6 +1238,12 @@
     <string name="destination_select">Vyber cíl</string>
     <string name="navigation_direct_navigation">Přímá navigace</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
+    <string name="device_heading_label">Název zařízení:</string>
+    <string name="device_orientation">Orientace zařízení</string>
+    <string name="device_orientation_label">Orientace:</string>
+    <!-- device orientation types -->
+    <string name="do_unknown">Neznámá</string>
+    <string name="do_auto">Automaticky</string>
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Zobrazit licenci</string>
