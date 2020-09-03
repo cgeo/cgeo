@@ -1215,6 +1215,7 @@
     <string name="destination_select">Scegli destinazione</string>
     <string name="navigation_direct_navigation">Navigazione diretta</string>
     <string name="osmand_marker_cgeo">Indicatore da c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licenza</string>
     <string name="license_show">Mostra licenza</string>
