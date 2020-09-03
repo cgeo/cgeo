@@ -791,12 +791,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.SimpleWebviewActivity"
-                android:label="c:geo internal browser"
-                android:icon="@drawable/ic_launcher_browser">
-
-        </activity>
-
         <activity
             android:name=".filter.FilterActivity_"
             android:label="@string/caches_filter_title" >
@@ -913,6 +907,9 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+
+        <!-- Receiver for custom tabs share intent -->
+        <receiver android:name=".settings.ShareBroadcastReceiver"/>
     </application>
 
 </manifest>
