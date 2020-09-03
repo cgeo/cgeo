@@ -1230,6 +1230,7 @@
     <string name="destination_select">Vyberte cieľ</string>
     <string name="navigation_direct_navigation">Priama navigácia</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licencia</string>
     <string name="license_show">Zobraziť licenciu</string>
