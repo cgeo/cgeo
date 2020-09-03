@@ -346,7 +346,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         date.setDate(new Date(logEntry.date));
         setLogText(logEntry.log);
         reportProblem.set(logEntry.reportProblem);
-        cacheVotingBar.setRating(logEntry.rating);
+        cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
         favCheck.setChecked(logEntry.favorite);
         tweetCheck.setChecked(logEntry.tweet);
         logPassword.setText(logEntry.password);
