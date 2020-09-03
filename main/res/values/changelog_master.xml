@@ -2,5 +2,25 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+<h1>Nightly build:</h1>
+<h4>Android 11 notice:</h4>
+Android 11 enforces a new way for storing data, which c:geo does not support yet. If you switch your system to Android 11, c:geo will not be able to access part of its data. This will most likely disable storing offline maps, importing/exporting data as well as backing up/restoring c:geo\'s database. Other effects may occur. We recommend to not upgrade to Android 11 for the time being.
+<h4>Map:</h4>
+<ul>
+<li>.</li>
+</ul>
+<h4>Cache details:</h4>
+<ul>
+<li>.</li>
+</ul>
+<h4>Cache lists:</h4>
+<ul>
+  <li>.</li>
+</ul>
+<h4>Other:</h4>
+<ul>
+<li>.</li>
+</ul>
+</div>]]></Data>
   </string>
 </resources>
