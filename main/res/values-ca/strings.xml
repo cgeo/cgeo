@@ -1022,6 +1022,7 @@
     <string name="destination_select">Tria destinació</string>
     <string name="navigation_direct_navigation">Navegació directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Llicència</string>
     <string name="license_show">Mostra la llicència</string>
