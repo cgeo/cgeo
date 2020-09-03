@@ -920,6 +920,7 @@
     <string name="destination_select">حدد الاتجاه</string>
     <string name="navigation_direct_navigation">الملاحة مباشرة</string>
     <string name="osmand_marker_cgeo">علامة من c:geo</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">الترخيص</string>
     <string name="license_show">عرض الترخيص</string>
