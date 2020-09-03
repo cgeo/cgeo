@@ -1075,6 +1075,7 @@
     <string name="use_compass">GPS と磁気コンパスを使用</string>
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">ライセンス</string>
     <string name="license_show">ライセンスを表示</string>
