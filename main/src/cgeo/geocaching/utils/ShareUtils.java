@@ -2,17 +2,18 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.SimpleWebviewActivity;
+import cgeo.geocaching.settings.ShareBroadcastReceiver;
 
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -98,7 +99,7 @@ public class ShareUtils {
 
     }
 
-    public static void openUrl(final Context context, final String url, final boolean forceOutsideCgeo) {
+    public static void openUrl(final Context context, final String url, final boolean forceIntentChooser) {
         if (StringUtils.isBlank(url)) {
             return;
         }
@@ -106,14 +107,10 @@ public class ShareUtils {
         try {
             final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 
-            // Check if cgeo is the default, show the chooser to let the user choose a browser
-            if (forceOutsideCgeo && viewIntent.resolveActivity(context.getPackageManager()).getPackageName().equals(context.getPackageName())) {
+            // Always shows an application chooser with all possible targets
+            if (forceIntentChooser) {
                 final Intent chooser = Intent.createChooser(viewIntent, context.getString(R.string.cache_menu_browser));
-
-                final Intent internalBrowser = new Intent(context, SimpleWebviewActivity.class);
-                internalBrowser.setData(Uri.parse(url));
-
-                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {internalBrowser});
+                chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 context.startActivity(chooser);
             } else {
                 context.startActivity(viewIntent);
@@ -125,4 +122,26 @@ public class ShareUtils {
         }
     }
 
+    public static void openCustomTab(final Context context, final String url) {
+        if (ProcessUtils.isLaunchable("com.android.chrome")) {
+
+            final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+
+            builder.enableUrlBarHiding();
+            builder.setShowTitle(true);
+            builder.addDefaultShareMenuItem();
+
+            final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
+            final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
+
+            final CustomTabsIntent customTabsIntent = builder.build();
+            // custom tabs API was restricted to chrome as other browsers like firefox may loop back to c:geo (as of September 2020)
+            customTabsIntent.intent.setPackage("com.android.chrome");
+            customTabsIntent.launchUrl(context, Uri.parse(url));
+
+        } else {
+            openUrl(context, url, true);
+        }
+    }
 }
