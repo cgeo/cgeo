@@ -1130,6 +1130,7 @@
     <string name="destination_select">Varış yeri seç</string>
     <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
+    <!-- device orientation types -->
     <!-- license -->
     <string name="license">Lisans</string>
     <string name="license_show">Lisansı göster</string>
