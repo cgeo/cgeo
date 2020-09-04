@@ -564,6 +564,7 @@
     <string name="init_signature_template_datetime">Date &amp; Time</string>
     <string name="init_signature_template_user">User</string>
     <string name="init_signature_template_number">Number</string>
+    <string name="init_signature_template_number_legacy">Number (ignore offline logs)</string>
     <string name="init_signature_template_owner">Owner</string>
     <string name="init_signature_template_name">Name</string>
     <string name="init_signature_template_difficulty">Difficulty</string>
