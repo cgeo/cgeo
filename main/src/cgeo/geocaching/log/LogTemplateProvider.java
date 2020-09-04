@@ -180,6 +180,14 @@ public final class LogTemplateProvider {
                 return String.valueOf(counter);
             }
         });
+        templates.add(new LogTemplate("ONLINENUM", R.string.init_signature_template_number_legacy) {
+            // this option can be removed when [number] template checks, if some logs are newer as the cache-log and if it's the case ignores them
+
+            @Override
+            public String getValue(final LogContext context) {
+                return getCounter(context, true);
+            }
+        });
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {
 
             @Override

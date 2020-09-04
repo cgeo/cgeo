@@ -45,6 +45,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     private final Map<T, Integer> valuesToPosition = new HashMap<>();
     private Func1<T, String> displayMapper;
     private Action1<T> changeListener;
+    private boolean fireOnChangeOnly;
 
     private T selectedItem;
     private T previousSelectedItem;
@@ -119,9 +120,18 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
         return this;
     }
 
-    /** called whenever the selected value changes (by user or programmatically) */
+    /** called whenever the selected value changes (by user or programmatically). */
     public TextSpinner<T> setChangeListener(@Nullable final Action1<T> changeListener) {
+        return setChangeListener(changeListener, true);
+    }
+
+    /**
+     * called whenever the selected value changes (by user or programmatically).
+     * If fireOnChangeOnly is false, then changelistener will also fire when user selects already selected value again
+     */
+    public TextSpinner<T> setChangeListener(@Nullable final Action1<T> changeListener, final boolean fireOnChangeOnly) {
         this.changeListener = changeListener;
+        this.fireOnChangeOnly = fireOnChangeOnly;
         return this;
     }
 
@@ -190,13 +200,14 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     private void set(final T value, final boolean force) {
-        if (!this.valuesToPosition.containsKey(value) || (!force && Objects.equals(previousSelectedItem, value))) {
+        if (!this.valuesToPosition.containsKey(value)) {
             return;
         }
-        this.selectedItem = value;
-        repaintDisplay();
-
-        if (this.changeListener != null && !Objects.equals(previousSelectedItem, this.selectedItem)) {
+        if (force || !Objects.equals(previousSelectedItem, value)) {
+            this.selectedItem = value;
+            repaintDisplay();
+        }
+        if (this.changeListener != null && (!this.fireOnChangeOnly || !Objects.equals(previousSelectedItem, value))) {
             this.changeListener.call(selectedItem);
         }
         this.previousSelectedItem = this.selectedItem;
