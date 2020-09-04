@@ -242,10 +242,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setTextDisplayMapper(lt -> getString(R.string.log_tb_changeall))
                 .setDisplayMapper(lt -> lt.getLabel())
                 .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
+                .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
                 .setChangeListener(lt -> {
                     CollectionStream.of(trackables).forEach(t -> t.action = lt);
                     updateTrackablesList();
-                });
+                }, false);
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
