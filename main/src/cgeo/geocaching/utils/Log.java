@@ -60,6 +60,10 @@ public final class Log {
         return isDebug;
     }
 
+    public static boolean isEnabled(final LogLevel level) {
+        return SETTING_DO_LOGGING[level.ordinal()];
+    }
+
     /**
      * Save a copy of the debug flag from the settings for performance reasons.
      *

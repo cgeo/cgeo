@@ -40,6 +40,7 @@ import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
@@ -4268,79 +4269,84 @@ public class DataStore {
     private static class DBLogOfflineUtils {
 
         public static boolean save(final String geocode, final OfflineLogEntry logEntry) {
-            if (StringUtils.isBlank(geocode)) {
-                Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
-                return false;
-            }
-            if (logEntry.logType == LogType.UNKNOWN && StringUtils.isBlank(logEntry.log)) {
-                Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
-                return false;
-            }
-            if (!StringUtils.isBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
-                Log.e("DataStore.saveLogOffline: mismatch between geocode in LogENtry and provided geocode: " + geocode + "<->" + logEntry.cacheGeocode);
-                return false;
-            }
-
-
-            init();
-            database.beginTransaction();
-            try {
-
-                //main entry
-                final ContentValues values = new ContentValues();
-                values.put("geocode", geocode);
-                values.put("updated", System.currentTimeMillis());
-                values.put("type", logEntry.logType.id);
-                values.put("log", logEntry.log);
-                values.put("date", logEntry.date);
-                values.put("report_problem", logEntry.reportProblem.code);
-
-                values.put("image_title_prefix", logEntry.imageTitlePraefix);
-                values.put("image_scale", logEntry.imageScale);
-                values.put("tweet", logEntry.tweet ? 1 : 0);
-                values.put("favorite", logEntry.favorite ? 1 : 0);
-                values.put("rating", logEntry.rating);
-                values.put("password", logEntry.password);
-
-                long offlineLogId = getLogOfflineId(geocode);
-                if (offlineLogId >= 0) {
-                    final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[]{geocode});
-                    if (rows < 1) {
-                        return false;
-                    }
-                } else {
-                    offlineLogId = database.insert(dbTableLogsOffline, null, values);
-                    if (offlineLogId < 0) {
-                        return false;
-                    }
+            try (ContextLogger cLog = new ContextLogger("DBLogOfflineUtils.save(geocode=%s)", geocode)) {
+                if (StringUtils.isBlank(geocode)) {
+                    Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
+                    return false;
                 }
-                final long finalOfflineLogId = offlineLogId;
+                if (logEntry.logType == LogType.UNKNOWN && StringUtils.isBlank(logEntry.log)) {
+                    Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
+                    return false;
+                }
+                if (!StringUtils.isBlank(logEntry.cacheGeocode) && !logEntry.cacheGeocode.equals(geocode)) {
+                    Log.e("DataStore.saveLogOffline: mismatch between geocode in LogENtry and provided geocode: " + geocode + "<->" + logEntry.cacheGeocode);
+                    return false;
+                }
 
-                //image entries
-                final List<ContentValues> images = CollectionStream.of(logEntry.logImages).map(img -> {
-                    final ContentValues cv = new ContentValues();
-                    cv.put("logoffline_id", finalOfflineLogId);
-                    cv.put("url", img.getUrl());
-                    cv.put("description", img.getDescription());
-                    cv.put("title", img.getTitle());
-                    return cv;
-                }).toList();
-                updateRowset(database, dbTableLogsOfflineImages, images, "logoffline_id = " + offlineLogId, null);
 
-                //trackable entries
-                final List<ContentValues> trackables = CollectionStream.of(logEntry.trackableActions.entrySet()).map(tr -> {
-                    final ContentValues cv = new ContentValues();
-                    cv.put("logoffline_id", finalOfflineLogId);
-                    cv.put("tbcode", tr.getKey());
-                    cv.put("actioncode", tr.getValue().id);
-                    return cv;
-                }).toList();
-                updateRowset(database, dbTableLogsOfflineTrackables, trackables, "logoffline_id = " + offlineLogId, null);
+                init();
+                database.beginTransaction();
+                try {
 
-                database.setTransactionSuccessful();
-                return true;
-            } finally {
-                database.endTransaction();
+                    //main entry
+                    final ContentValues values = new ContentValues();
+                    values.put("geocode", geocode);
+                    values.put("updated", System.currentTimeMillis());
+                    values.put("type", logEntry.logType.id);
+                    values.put("log", logEntry.log);
+                    values.put("date", logEntry.date);
+                    values.put("report_problem", logEntry.reportProblem.code);
+
+                    values.put("image_title_prefix", logEntry.imageTitlePraefix);
+                    values.put("image_scale", logEntry.imageScale);
+                    values.put("tweet", logEntry.tweet ? 1 : 0);
+                    values.put("favorite", logEntry.favorite ? 1 : 0);
+                    values.put("rating", logEntry.rating);
+                    values.put("password", logEntry.password);
+
+                    long offlineLogId = getLogOfflineId(geocode);
+                    if (offlineLogId >= 0) {
+                        final int rows = database.update(dbTableLogsOffline, values, "geocode = ?", new String[]{geocode});
+                        if (rows < 1) {
+                            return false;
+                        }
+                    } else {
+                        offlineLogId = database.insert(dbTableLogsOffline, null, values);
+                        if (offlineLogId < 0) {
+                            return false;
+                        }
+                    }
+                    final long finalOfflineLogId = offlineLogId;
+                    cLog.add("logId=%s", finalOfflineLogId);
+
+                    //image entries
+                    final List<ContentValues> images = CollectionStream.of(logEntry.logImages).map(img -> {
+                        final ContentValues cv = new ContentValues();
+                        cv.put("logoffline_id", finalOfflineLogId);
+                        cv.put("url", img.getUrl());
+                        cv.put("description", img.getDescription());
+                        cv.put("title", img.getTitle());
+                        return cv;
+                    }).toList();
+                    updateRowset(database, dbTableLogsOfflineImages, images, "logoffline_id = " + offlineLogId, null);
+                    cLog.add("images:%s", images.size());
+
+                    //trackable entries
+                    final List<ContentValues> trackables = CollectionStream.of(logEntry.trackableActions.entrySet()).map(tr -> {
+                        final ContentValues cv = new ContentValues();
+                        cv.put("logoffline_id", finalOfflineLogId);
+                        cv.put("tbcode", tr.getKey());
+                        cv.put("actioncode", tr.getValue().id);
+                        return cv;
+                    }).toList();
+                    updateRowset(database, dbTableLogsOfflineTrackables, trackables, "logoffline_id = " + offlineLogId, null);
+                    cLog.add("trackables:%s", trackables.size());
+
+                    database.setTransactionSuccessful();
+                    return true;
+                } finally {
+                    database.endTransaction();
+                }
             }
         }
 
@@ -4357,62 +4363,67 @@ public class DataStore {
         //TODO
         @Nullable
         public static OfflineLogEntry load(final String geocode) {
-            if (StringUtils.isBlank(geocode)) {
-                return null;
+
+            try (ContextLogger cLog = new ContextLogger("DBLogOfflineUtils.load(geocode=%s)", geocode)) {
+                if (StringUtils.isBlank(geocode)) {
+                    return null;
+                }
+
+                init();
+
+                final DBQuery query = new DBQuery.Builder().setTable(dbTableLogsOffline)
+                        .setColumns(new String[]{"_id", "geocode", "date", "type", "log", "report_problem", "image_title_prefix", "image_scale", "favorite", "tweet", "rating", "password"})
+                        .setWhereClause("geocode = ?").setWhereArgs(new String[]{geocode}).build();
+                final OfflineLogEntry.Builder<?> logBuilder = query.selectFirstRow(database,
+                        c -> new OfflineLogEntry.Builder<>()
+                                .setId(c.getInt(0))
+                                .setCacheGeocode(c.getString(1))
+                                .setDate(c.getLong(2))
+                                .setLogType(LogType.getById(c.getInt(3)))
+                                .setLog(c.getString(4))
+                                .setReportProblem(ReportProblemType.findByCode(c.getString(5)))
+                                .setImageTitlePraefix(c.getString(6))
+                                .setImageScale(c.getInt(7))
+                                .setFavorite(c.getInt(8) > 0)
+                                .setTweet(c.getInt(9) > 0)
+                                .setRating(c.isNull(10) ? null : c.getFloat(10))
+                                .setPassword(c.getString(11))
+                );
+
+                if (logBuilder == null) {
+                    //no entry available in DB
+                    cLog.add("not found");
+                    return null;
+                }
+
+                final int logId = logBuilder.getId();
+                cLog.addReturnValue("LogId:" + logId);
+
+                //images
+                final DBQuery queryImages = new DBQuery.Builder().setTable(dbTableLogsOfflineImages)
+                        .setColumns(new String[]{"url", "title", "description"})
+                        .setWhereClause("logoffline_id = " + logId).build();
+                queryImages.selectRows(database,
+                        c -> logBuilder.addLogImage(new Image.Builder()
+                                .setUrl(c.getString(0))
+                                .setTitle(c.getString(1))
+                                .setDescription(c.getString(2))
+                                .build())
+                );
+
+                //trackables
+                final DBQuery queryTrackables = new DBQuery.Builder().setTable(dbTableLogsOfflineTrackables)
+                        .setColumns(new String[]{"tbcode", "actioncode"})
+                        .setWhereClause("logoffline_id = " + logId).build();
+                queryTrackables.selectRows(database,
+                        c -> logBuilder.addTrackableAction(
+                                c.getString(0),
+                                LogTypeTrackable.getById(ObjectUtils.defaultIfNull(c.getInt(1), LogTypeTrackable.UNKNOWN.id))
+                        )
+                );
+
+                return logBuilder.build();
             }
-
-            init();
-
-            final DBQuery query = new DBQuery.Builder().setTable(dbTableLogsOffline)
-                    .setColumns(new String[]{"_id", "geocode", "date", "type", "log", "report_problem", "image_title_prefix", "image_scale", "favorite", "tweet", "rating", "password"})
-                    .setWhereClause("geocode = ?").setWhereArgs(new String[]{geocode}).build();
-            final OfflineLogEntry.Builder<?> logBuilder = query.selectFirstRow(database,
-                    c -> new OfflineLogEntry.Builder<>()
-                            .setId(c.getInt(0))
-                            .setCacheGeocode(c.getString(1))
-                            .setDate(c.getLong(2))
-                            .setLogType(LogType.getById(c.getInt(3)))
-                            .setLog(c.getString(4))
-                            .setReportProblem(ReportProblemType.findByCode(c.getString(5)))
-                            .setImageTitlePraefix(c.getString(6))
-                            .setImageScale(c.getInt(7))
-                            .setFavorite(c.getInt(8) > 0)
-                            .setTweet(c.getInt(9) > 0)
-                            .setRating(c.isNull(10) ? null : c.getFloat(10))
-                            .setPassword(c.getString(11))
-            );
-
-            if (logBuilder == null) {
-                //no entry available in DB
-                return null;
-            }
-
-            final int logId = logBuilder.getId();
-
-            //images
-            final DBQuery queryImages = new DBQuery.Builder().setTable(dbTableLogsOfflineImages)
-                    .setColumns(new String[]{"url", "title", "description"})
-                    .setWhereClause("logoffline_id = " + logId).build();
-            queryImages.selectRows(database,
-                    c -> logBuilder.addLogImage(new Image.Builder()
-                            .setUrl(c.getString(0))
-                            .setTitle(c.getString(1))
-                            .setDescription(c.getString(2))
-                            .build())
-            );
-
-            //trackables
-            final DBQuery queryTrackables = new DBQuery.Builder().setTable(dbTableLogsOfflineTrackables)
-                    .setColumns(new String[]{"tbcode", "actioncode"})
-                    .setWhereClause("logoffline_id = " + logId).build();
-            queryTrackables.selectRows(database,
-                    c -> logBuilder.addTrackableAction(
-                            c.getString(0),
-                            LogTypeTrackable.getById(ObjectUtils.defaultIfNull(c.getInt(1), LogTypeTrackable.UNKNOWN.id))
-                    )
-            );
-
-            return logBuilder.build();
         }
 
         public static boolean remove(final String geocode) {

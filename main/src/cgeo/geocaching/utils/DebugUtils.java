@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -97,5 +98,31 @@ public class DebugUtils {
                 ActivityMixin.showToast(activity, result.get() == LogcatResults.LOGCAT_EMPTY.ordinal() ? R.string.about_system_write_logcat_empty : R.string.about_system_write_logcat_error);
             }
         });
+    }
+
+    public static void logClassInformation(final String className) {
+        if (Log.isEnabled(Log.LogLevel.VERBOSE)) {
+            Log.v(String.format("Class info: %s", getClassInformation(className)));
+        }
+    }
+
+    public static String getClassInformation(final String className) {
+        final StringBuilder sb = new StringBuilder("Class[" + className + "]:");
+        try {
+            final Class<?> c = Class.forName(className);
+            sb.append("Cons:[");
+            for (Constructor<?> con : c.getDeclaredConstructors()) {
+                sb.append(con.getName()).append("(").append(CollectionStream.of(con.getParameterTypes()).map(p -> p.getName()).toJoinedString(",")).append(");");
+            }
+            sb.append("]");
+
+        } catch (ClassNotFoundException cnfe) {
+            sb.append(" NOT EXISTING");
+        } catch (Exception ex) {
+            //something unexpected happened
+            Log.w("Unexpected exception while trying to get class information for '" + className + "' (gathered so far: " + sb.toString() + ")", ex);
+        }
+        return sb.toString();
+
     }
 }
