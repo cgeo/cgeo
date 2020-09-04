@@ -118,9 +118,11 @@
     <string name="log_yesterday">Gestern</string>
     <string name="log_smilies">Smileys</string>
     <string name="log_image">Bild</string>
+    <string name="log_images">Bilder</string>
     <string name="log_image_attach">Bild hinzufügen</string>
     <string name="log_image_stored">Vorhanden</string>
     <string name="log_image_camera">Neu</string>
+    <string name="log_image_delete">Löschen</string>
     <string name="log_image_caption">Überschrift</string>
     <string name="log_image_description">Beschreibung</string>
     <string name="log_image_scale">Skalierung</string>
@@ -145,6 +147,9 @@
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">Bild</string>
+    <string name="log_image_titleprefix_hint">Bildtitel Präfix</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
     <string name="translate_to_english">Übersetze in Englisch</string>
@@ -1215,7 +1220,14 @@
     <string name="destination_select">Ziel auswählen</string>
     <string name="navigation_direct_navigation">Direkte Navigation</string>
     <string name="osmand_marker_cgeo">Markierung von c:geo</string>
+    <string name="device_heading_label">Geräterichtung:</string>
+    <string name="device_orientation">Geräteausrichtung</string>
+    <string name="device_orientation_label">Ausrichtung:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Unbekannt</string>
+    <string name="do_auto">Auto</string>
+    <string name="do_flat">Flach</string>
+    <string name="do_upright">Aufrecht</string>
     <!-- license -->
     <string name="license">Lizenz</string>
     <string name="license_show">Zeige Lizenz</string>
