@@ -118,9 +118,11 @@
     <string name="log_yesterday">I går</string>
     <string name="log_smilies">Smileyer</string>
     <string name="log_image">Billede</string>
+    <string name="log_images">Billeder</string>
     <string name="log_image_attach">Vedhæft billede</string>
     <string name="log_image_stored">Eksisterende</string>
     <string name="log_image_camera">Nyt</string>
+    <string name="log_image_delete">Slet</string>
     <string name="log_image_caption">Billedtekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -145,6 +147,8 @@
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d kB\n%4$s</string>
+    <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
     <string name="translate_to_english">Oversæt til engelsk</string>
@@ -886,7 +890,9 @@
     <string name="cache_dialog_loading_details_status_gcvote">Loader GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Lagrer data</string>
     <string name="cache_dialog_loading_details_status_render">Tegner side</string>
+    <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug…</string>
+    <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen…</string>
     <string name="cache_dialog_refresh_title">Genindlæs</string>
     <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
@@ -1211,6 +1217,10 @@
     <string name="navigation_direct_navigation">Direkte navigation</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Ukendt</string>
+    <string name="do_auto">Automatisk</string>
+    <string name="do_flat">Flad</string>
+    <string name="do_upright">Opretstående</string>
     <!-- license -->
     <string name="license">Licens</string>
     <string name="license_show">Vis licens</string>
@@ -1489,6 +1499,7 @@
     <!-- next things -->
     <string name="quote">Gør geocaching nemmere, gør brugere mere dovne.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <string name="support_title">Hjælp</string>
     <string name="website_title">Websted</string>
     <string name="facebook_link"><a href="">c:geo webside</a></string>
     <string name="market_title">Google Play</string>
@@ -1658,6 +1669,10 @@
     <string name="map_load_track">Indlæs spor/rute fra GPX</string>
     <string name="map_load_track_wait">Indlæser spor/rute i baggrunden…</string>
     <string name="map_load_track_confirm">Overskriv eksisterende spor/rute?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Spor/rute indlæst (%d rutepunkt)</item>
+        <item quantity="other">Spor/rute indlæst (%d rutepunkter)</item>
+    </plurals>
     <string name="load_track_error">Fejl ved indlæsning af spor/rute</string>
     <string name="map_unload_track">Fjern spor/rute</string>
     <string name="center_on_track">Centrér på spor/rute</string>
@@ -1678,12 +1693,24 @@
     <string name="edit_setting">Redigér indstilling \"%s\"</string>
     <string name="edit_setting_error_unknown_type">Ukendt indstillingstype - kan ikke redigeres</string>
     <string name="activate_editmode_title">Aktivér redigeringstilstand</string>
+    <string name="activate_editmode_warning">Her skal du træde forsigtigt!\n\nÆndringer direkte i indstillingerne kan forhindre programmet i at fungere eller starte, så vær forsigtig!\n\nEr du sikker på, at du vil fortsætte på egen risiko?</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_title">Åbn en lokal fil</string>
+    <string name="localfile_cannot_handle">Fejl ved læsning af fil eller filen har et ukendt format.</string>
+    <string name="localfile_foundmap">kortfil fundet</string>
     <!-- ReceiveMapFileActivity -->
+    <string name="receivemapfile_intenttitle">Modtag kortfil</string>
+    <string name="receivemapfile_error">Fejl under modtagelse af kortfil</string>
+    <string name="receivemapfile_error_io_exception">I/O fejl under modtagelse af kortfil. Må du skrive til kortmappen \"%s\"?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Fejl: Filen blev ikke fundet under modtagelse af kortfil.</string>
+    <string name="receivemapfile_alreadyexists">En fil med dette navn findes allerede. Overskriv eksisterende fil eller angiv et andet navn?</string>
     <string name="receivemapfile_option_overwrite">Overskriv</string>
     <string name="receivemapfile_option_differentname">Andet navn</string>
+    <string name="receivemapfile_kb_copied">%d kB kopieret</string>
+    <string name="receivemapfile_cancelled">Overførsel af kortfil annulleret</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Hent kort til offline brug</string>
+    <string name="downloadmap_choose">Vælg kort</string>
     <string name="download_started">Download kører i baggrunden</string>
     <string name="downloadmap_target_not_writable">Kan ikke skrive til \"%s\" - vælg venligst en anden folder til kort.</string>
     <!-- history track -->
