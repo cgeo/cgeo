@@ -35,6 +35,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ViewUtils;
@@ -120,7 +121,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private LogImageAdapter imageListAdapter;
 
-    private SaveMode saveMode = SaveMode.SMART;
+    //private SaveMode saveMode = SaveMode.SMART;
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
@@ -417,8 +418,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         logPasswordView.setText(StringUtils.EMPTY);
 
         CollectionStream.of(trackables).forEach(tl -> initializeTrackableAction(tl, null));
-
-        saveMode = SaveMode.SMART;
     }
 
     private void clearLog() {
@@ -476,13 +475,17 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void saveLog() {
-        if (saveMode == SaveMode.SKIP) {
-            return;
-        }
+
+        //this is not such a good place, but it has to do for now...
+        DebugUtils.logClassInformation(LogCacheActivity.class.getName()); //test to see whether it is working
+        DebugUtils.logClassInformation("androidx.appcompat.widget.ShareActionProvider"); //real wanted check
+
 
         final OfflineLogEntry logEntry = getEntryFromView();
 
-        if (saveMode == SaveMode.FORCE || logEntry.hasSaveRelevantChanges(lastSavedState, Settings.getSignature())) {
+        final boolean doSave = logEntry.hasSaveRelevantChanges(lastSavedState, Settings.getSignature());
+
+        if (doSave) {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(final Void... params) {
@@ -555,7 +558,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 addOrEditImage(-1);
                 return true;
             case R.id.save:
-                saveMode = SaveMode.FORCE;
                 finish();
                 return true;
             case R.id.clear:
@@ -987,11 +989,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             if (status == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
                 // No need to save the log when quitting if it has been posted.
-                saveMode = SaveMode.SKIP;
                 finish();
             } else if (status == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
-                saveMode = SaveMode.SKIP;
                 finish();
             } else {
                 Dialogs.confirmPositiveNegativeNeutral(activity, R.string.info_log_post_failed,
@@ -1005,7 +1005,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         null,
                         // Neutral Button: SaveLog
                         (dialogInterface, i) -> {
-                            saveMode = SaveMode.FORCE;
                             finish();
                         });
             }
