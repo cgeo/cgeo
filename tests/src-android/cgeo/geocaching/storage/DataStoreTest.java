@@ -238,8 +238,9 @@ public class DataStoreTest extends CGeoTestCase {
 
     public static void testOfflineLog() {
         final String geocode = ARTIFICIAL_GEOCODE + "-O";
-        final Date logDate = new Date();
+        final Date logDate = new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 3);
         //ensure that we don't overwrite anything in database before starting this test
+        DataStore.clearLogOffline(geocode);
         final OfflineLogEntry logEntry = DataStore.loadLogOffline(geocode);
         assertThat(logEntry).isNull();
         assertThat(DataStore.clearLogOffline(geocode)).isEqualTo(false);
@@ -305,6 +306,7 @@ public class DataStoreTest extends CGeoTestCase {
         final String geocode = ARTIFICIAL_GEOCODE + "-O";
 
         //ensure that we don't overwrite anything in database before starting this test
+        DataStore.clearLogOffline(geocode);
         final OfflineLogEntry logEntry = DataStore.loadLogOffline(geocode);
         assertThat(logEntry).isNull();
 
@@ -330,6 +332,7 @@ public class DataStoreTest extends CGeoTestCase {
         assertThat(dbLogEntry.cacheGeocode).isEqualTo(expectedLogEntry.cacheGeocode);
         assertThat(dbLogEntry.logType).isEqualTo(expectedLogEntry.logType);
         assertThat(dbLogEntry.log).isEqualTo(expectedLogEntry.log);
+        assertThat(dbLogEntry.date).isEqualTo(expectedLogEntry.date);
         assertThat(dbLogEntry.reportProblem).isEqualTo(expectedLogEntry.reportProblem);
         assertThat(dbLogEntry.imageScale).isEqualTo(expectedLogEntry.imageScale);
         assertThat(dbLogEntry.imageTitlePraefix).isEqualTo(expectedLogEntry.imageTitlePraefix);
