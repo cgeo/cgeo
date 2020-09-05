@@ -1159,7 +1159,6 @@
     <string name="search_tb">Trackables</string>
     <string name="search_tb_hint">Identifiering av trackable</string>
     <string name="search_tb_button">Sök efter trackable</string>
-    <string name="search_destination">Mål</string>
     <string name="search_address_started">Söker efter platser</string>
     <string name="search_address_result">Hittade platser</string>
     <string name="search_own_caches">Sök egna cacher</string>
@@ -1710,7 +1709,6 @@
     <string name="downloadmap_choose">Välj karta</string>
     <string name="downloadmanager_not_available">Kartfilen kan inte laddas ner. Systemets program för nerladdningar är inte tillgängligt</string>
     <string name="download_started">Nerladdningen startar i bakgrunden</string>
-    <string name="downloadmap_target_not_writable">\"%s\" är inte skrivbar - välj en annan katalog.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Rensa historikspår</string>
     <string name="map_trailhistory_cleared">Historikspåret rensat</string>
