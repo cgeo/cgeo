@@ -1105,7 +1105,6 @@
     <string name="search_tb">Keliauninkas</string>
     <string name="search_tb_hint">Keliauninko identifikavimas</string>
     <string name="search_tb_button">Ieškoti keliauninko</string>
-    <string name="search_destination">Tikslas</string>
     <string name="search_address_started">Ieškoma vietų</string>
     <string name="search_address_result">Rastos vietos</string>
     <string name="search_own_caches">Ieškoti mano slėptuvių</string>
