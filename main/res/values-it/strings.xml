@@ -1159,7 +1159,6 @@
     <string name="search_tb">Oggetto Trackable</string>
     <string name="search_tb_hint">Identificativo Trackable</string>
     <string name="search_tb_button">Cerca per trackable</string>
-    <string name="search_destination">Destinazione</string>
     <string name="search_address_started">Cerca per luoghi</string>
     <string name="search_address_result">Cerca luoghi</string>
     <string name="search_own_caches">Cerca i miei cache</string>
@@ -1715,7 +1714,6 @@
     <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
-    <string name="downloadmap_target_not_writable">La destinazione \"%s\" non è scrivibile - si prega di selezionare una directory diversa per il file mappa.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
