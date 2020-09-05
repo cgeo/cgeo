@@ -1022,7 +1022,6 @@
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>
-    <string name="search_destination">目的地</string>
     <string name="search_address_started">場所を検索中</string>
     <string name="search_address_result">検索結果:場所</string>
     <string name="search_own_caches">自分のキャッシュを検索</string>
