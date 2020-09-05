@@ -90,7 +90,6 @@ public class RouteSegment implements Parcelable {
         item = parcel.readParcelable(RouteItem.class.getClassLoader());
         distance = parcel.readFloat();
         points = parcel.readArrayList(Geopoint.class.getClassLoader());
-        points = parcel.readArrayList(RouteSegment.class.getClassLoader());
     }
 
     @Override
