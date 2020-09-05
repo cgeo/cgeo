@@ -5,13 +5,15 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ManualRoute extends Route {
+public class ManualRoute extends Route implements Parcelable {
 
     private enum ToggleItemState {
         ADDED,
@@ -129,4 +131,33 @@ public class ManualRoute extends Route {
         return -1;
     }
 
+    // Parcelable methods
+
+    public static final Creator<ManualRoute> CREATOR = new Creator<ManualRoute>() {
+
+        @Override
+        public ManualRoute createFromParcel(final Parcel source) {
+            return new ManualRoute(source);
+        }
+
+        @Override
+        public ManualRoute[] newArray(final int size) {
+            return new ManualRoute[size];
+        }
+
+    };
+
+    protected ManualRoute(final Parcel parcel) {
+        super(parcel);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(final Parcel dest, final int flags) {
+        super.writeToParcel(dest, flags);
+    }
 }
