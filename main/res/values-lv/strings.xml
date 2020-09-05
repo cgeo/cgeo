@@ -1118,7 +1118,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="search_tb">Ceļotājs</string>
     <string name="search_tb_hint">Ceļotāja identifikācija</string>
     <string name="search_tb_button">Meklēt ceļotāju</string>
-    <string name="search_destination">Galamērķis</string>
     <string name="search_address_started">Meklē vietu</string>
     <string name="search_address_result">Atrastās vietas</string>
     <string name="search_own_caches">Meklēt manus slēpņus</string>
