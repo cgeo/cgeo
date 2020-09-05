@@ -1164,7 +1164,6 @@
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
-    <string name="search_destination">Ziel</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
     <string name="search_own_caches">Meine Caches suchen</string>
@@ -1727,7 +1726,6 @@
     <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmanager_not_available">Kartendatei kann nicht heruntergeladen werden, Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
-    <string name="downloadmap_target_not_writable">Ziel \"%s\" ist nicht beschreibbar - bitte ein anderes Kartenverzeichnis wählen.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
