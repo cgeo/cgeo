@@ -590,7 +590,6 @@
     <string name="search_hbu_prefill">Eigandi</string>
     <string name="search_hbu_button">Leita eftir nafni eiganda</string>
     <string name="search_tb_button">Leita að ferðalangi</string>
-    <string name="search_destination">Áfangastaður</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Sæki upplýsingar um ferðalang…</string>
     <string name="trackable_browser_open">Opna í vafra</string>
