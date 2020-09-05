@@ -97,7 +97,7 @@ public final class Log {
     }
 
     private static void adjustSettings() {
-        setLevel(SETTING_DO_LOGGING, isDebug() && minLogLevel.ordinal() < LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel);
+        setLevel(SETTING_DO_LOGGING, isDebug() && minLogLevel.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel);
         setLevel(SETTING_ADD_CLASSINFO, minLogAddCallerINfo);
         settingThrowExceptionOnError = logThrowExceptionOnError || isDebug;
         android.util.Log.i(TAG, "[Log] Logging set: minLevel=" + minLogLevel + ", minAddCallerInfo=" +  minLogAddCallerINfo + ", throwOnError=" + logThrowExceptionOnError);
