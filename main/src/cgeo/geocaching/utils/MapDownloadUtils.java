@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
@@ -47,11 +48,13 @@ public class MapDownloadUtils {
                     filename = "default.map";
                 }
                 final DownloadManager.Request request = new DownloadManager.Request(uri)
-                        .setTitle(activity.getString(R.string.downloadmap_title))
-                        .setDescription("Downloading" + filename)
+                        .setTitle(filename)
+                        .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
                         .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
                         .setAllowedOverMetered(true)
                         .setAllowedOverRoaming(true);
+                Log.i("Map download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
                 final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                 if (null != downloadManager) {
                     PendingDownload.add(downloadManager.enqueue(request), filename);
@@ -69,7 +72,7 @@ public class MapDownloadUtils {
         void run (String path, boolean isWritable);
     }
 
-    public static void checkMapDirectory(final Activity activity, final DirectoryWritable callback) {
+    public static void checkMapDirectory(final Activity activity, final boolean beforeDownload, final DirectoryWritable callback) {
         PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
             @Override
             protected void execute() {
@@ -84,6 +87,9 @@ public class MapDownloadUtils {
                 final boolean canWrite = new File(mapFileDirectory).canWrite();
                 if (canWrite) {
                     callback.run(mapFileDirectory, true);
+                } else if (beforeDownload) {
+                    Dialogs.confirm(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), "Continue",
+                            (dialog, which) -> callback.run(mapFileDirectory, true), dialog -> callback.run(mapFileDirectory, false));
                 } else {
                     Dialogs.message(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(mapFileDirectory, false));
                 }

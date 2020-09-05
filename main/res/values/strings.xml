@@ -1917,9 +1917,10 @@
     <string name="downloadmap_title">Download offline map</string>
     <string name="downloadmap_info">Choose a map file for your region by tapping the \"Save\" icon.\n\nDownloading will run in the background. When downloading has completed, the downloaded file will be copied to c:geo\'s map directory and set as current map for c:geo.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_choose">Choose map</string>
+    <string name="downloadmap_filename">Downloading %s</string>
     <string name="downloadmanager_not_available">Map file cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
-    <string name="downloadmap_target_not_writable">Target \"%s\" is not writable - please select a different map file directory.</string>
+    <string name="downloadmap_target_not_writable">Target \"%s\" is not writable - downloaded map file will be stored in system download directory and has to be moved manually to the map directory.</string>
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>

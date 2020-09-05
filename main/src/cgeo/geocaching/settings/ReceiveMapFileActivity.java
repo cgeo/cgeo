@@ -57,7 +57,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         final String preset = intent.getStringExtra(EXTRA_FILENAME);
         final AbstractActivity that = this;
 
-        MapDownloadUtils.checkMapDirectory(this, (path, isWritable) -> {
+        MapDownloadUtils.checkMapDirectory(this, false, (path, isWritable) -> {
             if (isWritable) {
                 mapDirectory = Settings.getMapFileDirectory();
                 if (guessFilename(preset)) {
