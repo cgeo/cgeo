@@ -860,7 +860,6 @@
     <string name="search_tb">Dilacak</string>
     <string name="search_tb_hint">Identifikasi dilacak</string>
     <string name="search_tb_button">Cari untuk dilacak</string>
-    <string name="search_destination">Tujuan</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>
     <string name="search_own_caches">Pencarian cache saya</string>
