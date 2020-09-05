@@ -995,7 +995,6 @@
     <string name="search_tb">Utazó</string>
     <string name="search_tb_hint">Utazó azonosítója</string>
     <string name="search_tb_button">Utazó keresése</string>
-    <string name="search_destination">Cél</string>
     <string name="search_address_started">Helyek keresése</string>
     <string name="search_address_result">Megtalált helyek</string>
     <string name="search_own_caches">Saját ládák keresése</string>
