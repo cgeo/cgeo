@@ -864,7 +864,6 @@
     <string name="search_tb">Obiect călător</string>
     <string name="search_tb_hint">Codul obiectului călător</string>
     <string name="search_tb_button">Caută obiect călător</string>
-    <string name="search_destination">Destinaţie</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
     <string name="search_own_caches">Caută cutiile mele</string>
