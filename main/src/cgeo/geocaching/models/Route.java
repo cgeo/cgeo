@@ -168,7 +168,7 @@ public class Route implements Parcelable {
 
     };
 
-    private Route(final Parcel parcel) {
+    protected Route(final Parcel parcel) {
         name = parcel.readString();
         segments = parcel.readArrayList(RouteSegment.class.getClassLoader());
         routeable = parcel.readInt() != 0;
