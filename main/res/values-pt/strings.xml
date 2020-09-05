@@ -1163,7 +1163,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
-    <string name="search_destination">Destino</string>
     <string name="search_address_started">Pesquisar por lugares</string>
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
@@ -1717,7 +1716,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="downloadmap_choose">Escolher mapa</string>
     <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
-    <string name="downloadmap_target_not_writable">Não é possível gravar no destino \"%s\" - por favor, seleccione um directório de ficheiro de mapa diferente.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
