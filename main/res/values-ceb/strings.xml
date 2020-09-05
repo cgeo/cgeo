@@ -837,7 +837,6 @@
     <string name="search_tb">Masundan</string>
     <string name="search_tb_hint">Idintipikasyon sa trackable</string>
     <string name="search_tb_button">Mangita og mga trackable</string>
-    <string name="search_destination">Padulngan</string>
     <string name="search_address_started">Pagpangita sa mga lugar</string>
     <string name="search_address_result">Nakit-ang mga lugar</string>
     <string name="search_own_caches">Pangitaa ang akong mga cache</string>
