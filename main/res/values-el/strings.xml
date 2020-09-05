@@ -1164,7 +1164,6 @@
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
-    <string name="search_destination">Προορισμός</string>
     <string name="search_address_started">Αναζήτηση τοποθεσιών</string>
     <string name="search_address_result">Τοποθεσίες που βρέθηκαν</string>
     <string name="search_own_caches">Αναζήτηση των κρυπτών μου</string>
@@ -1723,7 +1722,6 @@
     <string name="downloadmap_choose">Επιλέξτε χάρτη</string>
     <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου χάρτη, ο διαχειριστής λήψης συστήματος δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
-    <string name="downloadmap_target_not_writable">Η θέση \"%s\" δεν είναι εγγράψιμη - παρακαλώ επιλέξτε μια διαφορετική θέση αποθήκευσης.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
