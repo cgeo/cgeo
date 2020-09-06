@@ -29,6 +29,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -78,6 +79,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -145,6 +147,8 @@ public class MainActivity extends AbstractActionBarActivity {
                     }
 
                     private void fillView(final TextView connectorInfo, final ILogin conn) {
+                        boolean offlineFoundsAvailable = false;
+
                         final StringBuilder userInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR);
                         if (conn.isLoggedIn()) {
                             userInfo.append(conn.getUserName()).append(" ");
@@ -163,6 +167,8 @@ public class MainActivity extends AbstractActionBarActivity {
                                 final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
                                 if (offlinefounds > 0) {
                                     userInfo.append(" + ").append(offlinefounds);
+
+                                    offlineFoundsAvailable = true;
                                 }
                             }
                             userInfo.append(')').append(Formatter.SEPARATOR);
@@ -175,6 +181,13 @@ public class MainActivity extends AbstractActionBarActivity {
 
                         connectorInfo.setText(userInfo);
                         connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+
+                        if (offlineFoundsAvailable && OneTimeDialogs.getStatus(OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER,
+                                OneTimeDialogs.DialogStatus.DIALOG_SHOW) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
+
+                            OneTimeDialogs.setStatus(OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+                            Dialogs.message((Activity) getContext(), R.string.settings_information, R.string.info_feature_offline_counter, Observable.just(getContext().getResources().getDrawable(R.drawable.ic_info_blue)));
+                        }
                     }
                 });
             }
