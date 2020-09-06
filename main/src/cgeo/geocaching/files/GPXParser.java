@@ -660,6 +660,7 @@ abstract class GPXParser extends FileParser {
                 }
             });
 
+            gsak.getChild(gsakNamespace, "Child_ByGSAK").setEndTextElementListener(userDefined -> wptUserDefined |= Boolean.parseBoolean(userDefined.trim()));
         }
     }
 
