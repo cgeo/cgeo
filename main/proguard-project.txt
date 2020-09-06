@@ -40,6 +40,8 @@
 -dontnote org.apache.http.conn.ConnectTimeoutException
 -dontnote org.apache.http.params.HttpParams
 
+-keep class androidx.appcompat.widget.ShareActionProvider { <init>(...); }
+
 # Apache commons ----------------------------------------------------------------------------------
 
 # apache.commons.collections has some bean related collections, which are undefined in Android
