@@ -537,6 +537,7 @@
     <string name="init_signature_template_datetime">Datum &amp; tijd</string>
     <string name="init_signature_template_user">Gebruiker</string>
     <string name="init_signature_template_number">Nummer</string>
+    <string name="init_signature_template_number_legacy">Nummer (negeer offline logs)</string>
     <string name="init_signature_template_owner">Eigenaar</string>
     <string name="init_signature_template_name">Naam</string>
     <string name="init_signature_template_difficulty">Moeilijkheid</string>
@@ -1164,6 +1165,7 @@
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identificatie</string>
     <string name="search_tb_button">Zoeken naar trackable</string>
+    <string name="search_destination">Open bestemming in c:geo</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
     <string name="search_address_result">Gevonden plaatsen</string>
     <string name="search_own_caches">Zoek mijn eigen caches</string>
@@ -1724,8 +1726,10 @@
     <string name="downloadmap_title">Offline kaart downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_choose">Kies kaart</string>
+    <string name="downloadmap_filename">%s downloaden</string>
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="downloadmap_target_not_writable">Doel \"%s\" is niet schrijfbaar - gedownload kaartbestand zal worden opgeslagen in de download map en dient handmatig te worden verplaatst naar de \"map\" map.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
