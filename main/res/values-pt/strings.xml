@@ -148,6 +148,7 @@
     <string name="log_image_scale_option_noscaling">Não redimensionar</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
     <string name="log_image_titleprefix">Imagem</string>
+    <string name="log_image_titleprefix_hint">Prefixo do Título da Imagem</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduzir para %s</string>
     <string name="translate_to_english">Traduzir para inglês</string>
@@ -536,6 +537,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_signature_template_datetime">Data &amp; Hora</string>
     <string name="init_signature_template_user">Utilizador</string>
     <string name="init_signature_template_number">Número</string>
+    <string name="init_signature_template_number_legacy">Número (ignorar registos offline)</string>
     <string name="init_signature_template_owner">Dono</string>
     <string name="init_signature_template_name">Nome</string>
     <string name="init_signature_template_difficulty">Dificuldade</string>
@@ -1163,6 +1165,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
+    <string name="search_destination">Abrir pasta de destino no c:geo</string>
     <string name="search_address_started">Pesquisar por lugares</string>
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
@@ -1218,6 +1221,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
+    <string name="device_orientation">Orientação do dispositivo</string>
     <string name="device_orientation_label">Orientação:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
