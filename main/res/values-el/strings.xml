@@ -537,6 +537,7 @@
     <string name="init_signature_template_datetime">Ημερομηνία &amp; Ώρα</string>
     <string name="init_signature_template_user">Χρήστης</string>
     <string name="init_signature_template_number">Αριθμός</string>
+    <string name="init_signature_template_number_legacy">Αριθμός (αγνόησε τις καταγραφές εκτός σύνδεσης)</string>
     <string name="init_signature_template_owner">Ιδιοκτήτης</string>
     <string name="init_signature_template_name">Όνομα</string>
     <string name="init_signature_template_difficulty">Δυσκολία</string>
@@ -1164,6 +1165,7 @@
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
+    <string name="search_destination">Άνοιγμα προορισμού στο c:geo</string>
     <string name="search_address_started">Αναζήτηση τοποθεσιών</string>
     <string name="search_address_result">Τοποθεσίες που βρέθηκαν</string>
     <string name="search_own_caches">Αναζήτηση των κρυπτών μου</string>
