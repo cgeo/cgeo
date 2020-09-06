@@ -171,6 +171,35 @@ public final class GpxSerializer {
         gpx.endTag(NS_GSAK, "wptExtension");
     }
 
+    private void writeGsakExtensions(@NonNull final Waypoint waypoint) throws IOException {
+        gpx.startTag(NS_GSAK, "wptExtension");
+
+        gpx.startTag(NS_GSAK, "Parent");
+        gpx.text(waypoint.getGeocode());
+        gpx.endTag(NS_GSAK, "Parent");
+
+        if (waypoint.isUserDefined()) {
+            gpx.startTag(NS_GSAK, "Child_ByGSAK");
+            gpx.text("true");
+            gpx.endTag(NS_GSAK, "Child_ByGSAK");
+        }
+
+        gpx.endTag(NS_GSAK, "wptExtension");
+    }
+
+    private void writeCGeoAttributes(@NonNull final Waypoint waypoint) throws IOException {
+        if (waypoint.isVisited()) {
+            gpx.startTag(NS_CGEO, "visited");
+            gpx.text("true");
+            gpx.endTag(NS_CGEO, "visited");
+        }
+        if (waypoint.isUserDefined()) {
+            gpx.startTag(NS_CGEO, "userdefined");
+            gpx.text("true");
+            gpx.endTag(NS_CGEO, "userdefined");
+        }
+    }
+
     /**
      * @return XML schema compliant boolean representation of the boolean flag. This must be either true, false, 0 or 1,
      *         but no other value (also not upper case True/False).
@@ -225,25 +254,15 @@ public final class GpxSerializer {
             gpx.startTag(NS_GPX, "wpt");
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
+
             final String waypointTypeGpx = wp.getWaypointType().gpx;
             XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", wp.getNote(), "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
-            // add parent reference the GSAK-way
-            gpx.startTag(NS_GSAK, "wptExtension");
-            gpx.startTag(NS_GSAK, "Parent");
-            gpx.text(wp.getGeocode());
-            gpx.endTag(NS_GSAK, "Parent");
-            gpx.endTag(NS_GSAK, "wptExtension");
 
-            if (wp.isVisited()) {
-                gpx.startTag(NS_CGEO, "visited");
-                gpx.text("true");
-                gpx.endTag(NS_CGEO, "visited");
-            }
-            if (wp.isUserDefined()) {
-                gpx.startTag(NS_CGEO, "userdefined");
-                gpx.text("true");
-                gpx.endTag(NS_CGEO, "userdefined");
-            }
+            // add parent reference the GSAK-way
+            writeGsakExtensions(wp);
+
+            writeCGeoAttributes(wp);
+
             gpx.endTag(NS_GPX, "wpt");
         }
     }
