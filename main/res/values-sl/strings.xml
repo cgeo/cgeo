@@ -776,7 +776,6 @@
     <string name="search_tb">Sledljivčki</string>
     <string name="search_tb_hint">Koda sledljivčka</string>
     <string name="search_tb_button">Iskanje sledljivčka</string>
-    <string name="search_destination">Destinacija</string>
     <string name="search_address_started">Iskanje mest</string>
     <string name="search_address_result">Najdena mesta</string>
     <string name="search_own_caches">Iskanje mojih zakladov</string>

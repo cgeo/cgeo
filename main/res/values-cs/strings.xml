@@ -539,6 +539,7 @@
     <string name="init_signature_template_datetime">Datum a čas</string>
     <string name="init_signature_template_user">Uživatel</string>
     <string name="init_signature_template_number">Číslo nálezu</string>
+    <string name="init_signature_template_number_legacy">Číslo (ignorovat offline logy)</string>
     <string name="init_signature_template_owner">Vlastník</string>
     <string name="init_signature_template_name">Název</string>
     <string name="init_signature_template_difficulty">Obtížnost</string>
@@ -1182,7 +1183,7 @@
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
-    <string name="search_destination">Cíl</string>
+    <string name="search_destination">Otevřít cíl v c:geo</string>
     <string name="search_address_started">Vyhledávání míst</string>
     <string name="search_address_result">Nalezená místa</string>
     <string name="search_own_caches">Hledat moje keše</string>
@@ -1769,9 +1770,10 @@
     <string name="downloadmap_title">Stáhnout offline mapu</string>
     <string name="downloadmap_info">Klepnutím na ikonu „Uložit“ vyberte soubor mapy pro svůj region.\n\nZahájí se stahování na pozadí. Po dokončení stahování bude stažený soubor zkopírován do adresáře aplikace c:geo obsahující mapy a nastaven jako aktuální mapa pro c:geo.\n\nBuďte opatrní: Stahování mapy může mít za následek vysoký síťový provoz!</string>
     <string name="downloadmap_choose">Vybrat mapu</string>
+    <string name="downloadmap_filename">Stahování %s</string>
     <string name="downloadmanager_not_available">Soubor s mapou nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
-    <string name="downloadmap_target_not_writable">Cíl \"%s\" není zapisovatelný - vyberte prosím jiný adresář s mapou.</string>
+    <string name="downloadmap_target_not_writable">Cíl \"%s\" není zapisovatelný - stažený mapový soubor bude uložen v systémovém adresáři pro stahování souborů a musí být přesunut ručně do adresáře s mapami.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>

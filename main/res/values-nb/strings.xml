@@ -1062,7 +1062,6 @@
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
     <string name="search_tb_button">Søk etter sporbare</string>
-    <string name="search_destination">Lokaliser ved hjelp av koordinater</string>
     <string name="search_address_started">Søker etter steder</string>
     <string name="search_address_result">Fant plasser</string>
     <string name="search_own_caches">Søk egne cacher</string>

@@ -875,7 +875,6 @@
     <string name="search_tb">Ang Pagsusubaybay</string>
     <string name="search_tb_hint">Pagkakakilanlan ng pagsusubaybay</string>
     <string name="search_tb_button">Ang Hanapin para sa pagsusubaybay</string>
-    <string name="search_destination">Ang Destinasyon</string>
     <string name="search_address_started">Ang pagsasaliksik para sa mga lugar</string>
     <string name="search_address_result">Ang matagpuan na mga lugar</string>
     <string name="search_own_caches">Hanapin ang aking mga cache</string>

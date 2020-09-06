@@ -1074,7 +1074,6 @@
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
-    <string name="search_destination">Hedef</string>
     <string name="search_address_started">Yerler aranıyor</string>
     <string name="search_address_result">Bulunan yerler</string>
     <string name="search_own_caches">Geocache\'lerimi ara</string>
