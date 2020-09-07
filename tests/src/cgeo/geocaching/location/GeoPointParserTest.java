@@ -277,7 +277,7 @@ public class GeoPointParserTest {
         GeopointParser.parse("N52 36.123 E010 06.456");
         GeopointParser.parse("52° 10°");
         GeopointParser.parse("52° -10°");
-        GeopointParser.parse("52.55123 10,56789");
+        GeopointParser.parse("52,55123 10,56789");
         GeopointParser.parse("52.55123° 10.56789°");
     }
 
@@ -320,6 +320,13 @@ public class GeoPointParserTest {
     @Test
     public void test8589() {
         assertParsingFails("6, 12, 16, 29");
+    }
+
+    @Test
+    public void test8845() {
+        final Geopoint ref = new Geopoint("N", "49", "56", "31", "E", "8", "38", "564");
+        final Geopoint point = GeopointParser.parse("N49° 56.031', E08° 38.564'");
+        assertThat(point).isEqualTo(ref);
     }
 
     public void parseMultipleCoordinatesWithCorrectStartEndPositions() {
