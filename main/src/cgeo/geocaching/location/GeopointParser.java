@@ -1,5 +1,6 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +22,8 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
  */
 public class GeopointParser {
 
-    private static final Pattern PATTERN_BAD_BLANK = Pattern.compile("(\\d)[,.] (\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), (\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. (\\d{2,})");
 
     private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser());
 
@@ -107,17 +110,17 @@ public class GeopointParser {
         @Nullable
         Double createCoordinate(@NonNull final String signGroup, @NonNull final String degreesGroup, @NonNull final String minutesGroup, @NonNull final String secondsGroup) {
             try {
-                final double seconds = Double.parseDouble(StringUtils.defaultIfEmpty(secondsGroup.replace(",", "."), "0"));
+                final double seconds = Double.parseDouble(StringUtils.defaultIfEmpty(secondsGroup, "0"));
                 if (seconds >= 60.0) {
                     return null;
                 }
 
-                final double minutes = Double.parseDouble(StringUtils.defaultIfEmpty(minutesGroup.replace(",", "."), "0"));
+                final double minutes = Double.parseDouble(StringUtils.defaultIfEmpty(minutesGroup, "0"));
                 if (minutes >= 60.0) {
                     return null;
                 }
 
-                final double degrees = Double.parseDouble(StringUtils.defaultIfEmpty(degreesGroup.replace(",", "."), "0"));
+                final double degrees = Double.parseDouble(StringUtils.defaultIfEmpty(degreesGroup, "0"));
                 final double sign = signGroup.equalsIgnoreCase("S") || signGroup.equalsIgnoreCase("W") ? -1.0 : 1.0;
                 return sign * (degrees + minutes / 60.0 + seconds / 3600.0);
             } catch (final NumberFormatException ignored) {
@@ -163,8 +166,7 @@ public class GeopointParser {
         @Override
         @Nullable
         final GeopointWrapper parse(@NonNull final String text) {
-            final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
-            final MatcherWrapper matcher = new MatcherWrapper(latLonPattern, withoutSpaceAfterComma);
+            final MatcherWrapper matcher = new MatcherWrapper(latLonPattern, text);
             if (matcher.find()) {
                 final int groupCount = matcher.groupCount();
                 final int partCount = groupCount / 2;
@@ -289,12 +291,12 @@ public class GeopointParser {
      * Parser for MinDec format: X DD° MM.MMM'.
      */
     private static final class MinDecParser extends AbstractLatLonParser {
-        //                                           (  1  )    (    2    )    (       3      )
-        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++°?|°)\\s*(\\d++[.,]\\d++)['′]?";
+        //                                           (  1  )    (    2    )    (      3      )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++°?|°)\\s*(\\d++\\.\\d++)['′]?";
 
-        //                                        (   1  )    (    2    )    (       3      )
-        private static final String STRING_LON = "([WEO]?)\\s*(\\d++°?|°)\\s*(\\d++[.,]\\d++)\\b['′]?";
-        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.,]*";
+        //                                        (   1  )    (    2    )    (      3      )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++°?|°)\\s*(\\d++\\.\\d++)\\b['′]?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.]*";
         private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
@@ -328,12 +330,12 @@ public class GeopointParser {
      * Parser for DMS format: X DD° MM' SS.SS".
      */
     private static final class DMSParser extends AbstractLatLonParser {
-        //                                           (  1  )    (  2  )( 3)    (  4  )         (       5      )
-        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++[.,]\\d++)(?:''|\"|″)?";
+        //                                           (  1  )    (  2  )( 3)    (  4  )         (      5      )
+        private static final String STRING_LAT = "\\b([NS]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++\\.\\d++)(?:''|\"|″)?";
 
-        //                                        (   1  )    (  2  )( 3)    (  4  )         (       5      )
-        private static final String STRING_LON = "([WEO]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++[.,]\\d++)\\b(?:''|\"|″)?";
-        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.,]*";
+        //                                        (   1  )    (  2  )( 3)    (  4  )         (      5      )
+        private static final String STRING_LON = "([WEO]?)\\s*(\\d++)(°?)\\s*(\\d++)['′]?\\s*(\\d++\\.\\d++)\\b(?:''|\"|″)?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.]*";
         private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LON = Pattern.compile("\\b" + STRING_LON, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
@@ -404,12 +406,12 @@ public class GeopointParser {
      * Parser for DegDec format: DD.DDDDDDD°.
      */
     private static final class DegDecParser extends AbstractLatLonParser {
-        //                                        (        1       )
-        private static final String STRING_LAT = "(-?\\d++[.,]\\d++)°?";
+        //                                        (       1       )
+        private static final String STRING_LAT = "(-?\\d++\\.\\d++)°?";
 
-        //                                        (        1       )
-        private static final String STRING_LON = "(-?\\d++[.,]\\d++)\\b°?";
-        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.,-]*";
+        //                                        (       1       )
+        private static final String STRING_LON = "(-?\\d++\\.\\d++)\\b°?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.-]*";
         private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
@@ -492,6 +494,22 @@ public class GeopointParser {
     }
 
     /**
+     * Returns a set of parser inputs for a given text
+     *
+     * The generated inputs use different delimiters for fractional numbers.
+     *
+     * @param text
+     *            the text to parse
+     * @return the set of parser inputs
+     */
+    @NonNull
+    private static Set<String> getParseInputs(@NonNull final String text) {
+        final String inputDot = removeSpaceAfterSeparators(text);
+        final String inputComma = swapDotAndComma(inputDot);
+        return CollectionStream.of(new String[]{inputDot, inputComma}).toSet();
+    }
+
+    /**
      * Removes all single spaces after a comma (see #2404)
      *
      * @param text
@@ -499,8 +517,22 @@ public class GeopointParser {
      * @return the substituted string without the single spaces
      */
     @NonNull
-    private static String removeAllSpaceAfterComma(@NonNull final String text) {
-        return new MatcherWrapper(PATTERN_BAD_BLANK, text).replaceAll("$1.$2");
+    private static String removeSpaceAfterSeparators(@NonNull final String text) {
+        final String replacedComma = new MatcherWrapper(PATTERN_BAD_BLANK_COMMA, text).replaceAll("$1,$2");
+        return new MatcherWrapper(PATTERN_BAD_BLANK_DOT, replacedComma).replaceAll("$1.$2");
+    }
+
+    private static String swapDotAndComma(@NonNull final String text) {
+        final char characterArray[] = text.toCharArray();
+        for (int i = 0; i < characterArray.length; i++) {
+            if (characterArray[i] == '.') {
+                characterArray[i] = ',';
+            } else if (characterArray[i] == ',') {
+                characterArray[i] = '.';
+            }
+        }
+
+        return new String(characterArray);
     }
 
     /**
@@ -514,12 +546,13 @@ public class GeopointParser {
      */
     @Nullable
     private static ResultWrapper parseHelper(@NonNull final String text, @NonNull final LatLon latlon) {
-        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text.trim());
-
+        final Set<String> inputs = getParseInputs(text.trim());
         for (final AbstractParser parser : parsers) {
-            final ResultWrapper wrapper = parser.parse(withoutSpaceAfterComma, latlon);
-            if (wrapper != null && wrapper.matcherLength == withoutSpaceAfterComma.length()) {
-                return wrapper;
+            for (final String input : inputs) {
+                final ResultWrapper wrapper = parser.parse(input, latlon);
+                if (wrapper != null && wrapper.matcherLength == input.length()) {
+                    return wrapper;
+                }
             }
         }
 
@@ -548,15 +581,17 @@ public class GeopointParser {
      */
     @NonNull
     public static Geopoint parse(@NonNull final String text) {
-        final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
+        final Set<String> inputs = getParseInputs(text.trim());
         GeopointWrapper best = null;
         for (final AbstractParser parser : parsers) {
-            final GeopointWrapper geopointWrapper = parser.parse(withoutSpaceAfterComma);
-            if (geopointWrapper == null) {
-                continue;
-            }
-            if (best == null || geopointWrapper.matcherLength > best.matcherLength) {
-                best = geopointWrapper;
+            for (final String input : inputs) {
+                final GeopointWrapper geopointWrapper = parser.parse(input);
+                if (geopointWrapper == null) {
+                    continue;
+                }
+                if (best == null || geopointWrapper.matcherLength > best.matcherLength) {
+                    best = geopointWrapper;
+                }
             }
         }
 
@@ -583,14 +618,16 @@ public class GeopointParser {
         GeopointWrapper best;
         do {
             best = null;
-            final String withoutSpaceAfterComma = removeAllSpaceAfterComma(text);
+            final Set<String> inputs = getParseInputs(text);
             for (final AbstractParser parser : parsers) {
-                final GeopointWrapper geopointWrapper = parser.parse(withoutSpaceAfterComma);
-                if (geopointWrapper == null) {
-                    continue;
-                }
-                if (best == null || geopointWrapper.matcherStart < best.matcherStart || (geopointWrapper.matcherStart == best.matcherStart && geopointWrapper.matcherLength > best.matcherLength)) {
-                    best = geopointWrapper;
+                for (final String input : inputs) {
+                    final GeopointWrapper geopointWrapper = parser.parse(input);
+                    if (geopointWrapper == null) {
+                        continue;
+                    }
+                    if (best == null || geopointWrapper.matcherStart < best.matcherStart || (geopointWrapper.matcherStart == best.matcherStart && geopointWrapper.matcherLength > best.matcherLength)) {
+                        best = geopointWrapper;
+                    }
                 }
             }
 
