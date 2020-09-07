@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;
@@ -85,6 +86,7 @@ public final class ActivityMixin {
     }
 
     private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
+        Log.v("[" + context.getClass().getName() + "].showToast(" + text + "){" + toastDuration + "}");
         final Toast toast = Toast.makeText(context, text, toastDuration);
         toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
         toast.show();

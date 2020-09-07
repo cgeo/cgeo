@@ -49,6 +49,8 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private boolean keepScreenOn = false;
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
+    private final String logToken = "[" + this.getClass().getName() + "]";
+
     protected AbstractActivity() {
         this(false);
     }
@@ -79,7 +81,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     @Override
-    public final void showShortToast(final String text) {
+    public final void showShortToast(final String text) { 
         ActivityMixin.showShortToast(this, text);
     }
 
@@ -89,6 +91,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
+        Log.v(logToken + ".onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         if (item.getItemId() == android.R.id.home) {
             return ActivityMixin.navigateUp(this);
         }
@@ -101,6 +104,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     @Override
     public void onPause() {
+        Log.v(logToken + ".onPause");
         resumeDisposable.clear();
         super.onPause();
     }
@@ -120,16 +124,19 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     @Override
     public void invalidateOptionsMenuCompatible() {
+        Log.v(logToken + ".invalidateOptionsMenuCompatible");
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        Log.v(logToken + ".onCreate(Bundle)");
         super.onCreate(savedInstanceState);
         onCreateCommon();
     }
 
     protected void onCreate(final Bundle savedInstanceState, @LayoutRes final int resourceLayoutID) {
+        Log.v(logToken + ".onCreate(Bundle, resourceLayoutId=" + resourceLayoutID + ")");
         super.onCreate(savedInstanceState);
         onCreateCommon();
 
@@ -166,6 +173,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     @Override
     public void setContentView(@LayoutRes final int layoutResID) {
+        Log.v(logToken + ".setContentView(" + layoutResID + ")");
         super.setContentView(layoutResID);
 
         // initialize the action bar title with the activity title for single source
@@ -187,6 +195,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     protected boolean onClipboardItemSelected(@NonNull final ActionMode actionMode, final MenuItem item, final CharSequence clickedItemText, @Nullable final Geocache cache) {
+        Log.v(logToken + ".onClipboardItemSelected: " + clickedItemText);
         if (clickedItemText == null) {
             return false;
         }
@@ -286,5 +295,35 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             return;
         }
         setCacheTitleBar(cache);
+    }
+
+    @Override
+    public void finish() {
+        Log.v(logToken + ".finish()");
+        super.finish();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.v(logToken + ".onStop()");
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.v(logToken + ".onStart()");
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.v(logToken + ".onResume()");
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.v(logToken + ".onRestart()");
+        super.onResume();
     }
 }
