@@ -35,7 +35,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ViewUtils;
@@ -88,6 +88,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
 
+    private enum SaveMode { NORMAL, FORCE, SKIP }
+
     private static final int SELECT_IMAGE = 101;
     private final Set<TrackableLog> trackables = new HashSet<>();
     @BindView(R.id.tweet)
@@ -134,6 +136,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
      * Hook called at the beginning of onCreateLoader().
      */
     public void onLoadStarted() {
+        Log.v("LogCacheActivity.onLoadStarted()");
         showProgress(true);
     }
 
@@ -141,6 +144,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
      * Hook called at the beginning of onLoadFinished().
      */
     public void onLoadFinished() {
+        Log.v("LogCacheActivity.onLoadFinished()");
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
@@ -426,7 +430,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     @Override
     public void finish() {
-        saveLog();
+        finish(SaveMode.NORMAL);
+    }
+
+    public void finish(final SaveMode saveMode) {
+        saveLog(saveMode);
         super.finish();
     }
 
@@ -451,7 +459,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         updateTweetBox(logType.get());
         updateLogPasswordBox(logType.get());
         cacheVotingBar.validateVisibility(cache, logType.get());
-        //initializeRatingBar();
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
         updateTrackablesList();
@@ -475,26 +482,33 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void saveLog() {
+        saveLog(SaveMode.NORMAL);
+    }
 
-        //this is not such a good place, but it has to do for now...
-        DebugUtils.logClassInformation(LogCacheActivity.class.getName()); //test to see whether it is working
-        DebugUtils.logClassInformation("androidx.appcompat.widget.ShareActionProvider"); //real wanted check
+    private void saveLog(final SaveMode saveMode) {
 
+        try (ContextLogger cLog = new ContextLogger("LogCacheActivity.saveLog(mode=%s)", saveMode)) {
 
-        final OfflineLogEntry logEntry = getEntryFromView();
+            final OfflineLogEntry logEntry = getEntryFromView();
 
-        final boolean doSave = logEntry.hasSaveRelevantChanges(lastSavedState, Settings.getSignature());
+            final boolean logChanged = logEntry.hasSaveRelevantChanges(lastSavedState, Settings.getSignature());
+            final boolean doSave = SaveMode.FORCE.equals(saveMode) || (!SaveMode.SKIP.equals(saveMode) && logChanged);
+            cLog.add("logChanged=%b, doSave=%b", logChanged, doSave);
 
-        if (doSave) {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(final Void... params) {
-                    cache.logOffline(LogCacheActivity.this, logEntry);
-                    Settings.setLastCacheLog(logEntry.log);
-                    lastSavedState = logEntry;
-                    return null;
-                }
-            }.execute();
+            if (doSave) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(final Void... params) {
+                        try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
+                            cache.logOffline(LogCacheActivity.this, logEntry);
+                            Settings.setLastCacheLog(logEntry.log);
+                            lastSavedState = logEntry;
+                            ccLog.add("log=%s", logEntry.log);
+                            return null;
+                        }
+                    }
+                }.execute();
+            }
         }
     }
 
@@ -550,6 +564,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
+        Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         switch (item.getItemId()) {
             case R.id.menu_send:
                 sendLogAndConfirm();
@@ -558,17 +573,15 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 addOrEditImage(-1);
                 return true;
             case R.id.save:
-                finish();
+                finish(SaveMode.FORCE);
                 return true;
             case R.id.clear:
                 clearLog();
                 return true;
             case R.id.menu_sort_trackables_name:
-//                item.setChecked(true);
                 sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_NAME);
                 return true;
             case R.id.menu_sort_trackables_code:
-//                item.setChecked(true);
                 sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_TRACKCODE);
                 return true;
             default:
@@ -635,21 +648,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Settings.setTrackableComparator(comparator);
         updateTrackablesList();
         invalidateOptionsMenuCompatible();
-    }
-
-    private enum SaveMode {
-        /**
-         * save when relevant changes are detected
-         */
-        SMART,
-        /**
-         * explicitly save, via menu or saveLog button
-         */
-        FORCE,
-        /**
-         * when log was posted and offline log cleared
-         */
-        SKIP
     }
 
     protected static class ViewHolder extends AbstractViewHolder {
@@ -868,9 +866,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         @Override
         protected StatusCode doInBackgroundInternal(final String[] logTexts) {
+
             final String log = logTexts[0];
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
 
+            final ContextLogger cLog = new ContextLogger("LCA.Poster.doInBackgroundInternal(%s)", log);
             try {
                 final LogResult logResult = loggingManager.postLog(logType.get(), date.getCalendar(),
                         log, logPwd, new ArrayList<>(trackables), reportProblem.get());
@@ -978,7 +978,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 }
                 return logResult.getPostLogResult();
             } catch (final RuntimeException e) {
+                cLog.setException(e);
                 Log.e("LogCacheActivity.Poster.doInBackgroundInternal", e);
+            } finally {
+                cLog.endLog();
             }
 
             return StatusCode.LOG_POST_ERROR;
@@ -988,11 +991,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         protected void onPostExecuteInternal(final StatusCode status) {
             if (status == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
-                // No need to save the log when quitting if it has been posted.
-                finish();
+                // Prevent from saving log after it was sent successfully.
+                finish(SaveMode.SKIP);
             } else if (status == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
-                finish();
+                finish(SaveMode.SKIP);
             } else {
                 Dialogs.confirmPositiveNegativeNeutral(activity, R.string.info_log_post_failed,
                         res.getString(R.string.info_log_post_failed_reason, status.getErrorString(res)),
