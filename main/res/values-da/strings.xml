@@ -1710,6 +1710,7 @@
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Hent kort til offline brug</string>
     <string name="downloadmap_choose">Vælg kort</string>
+    <string name="downloadmap_filename">Henter %s</string>
     <string name="download_started">Download kører i baggrunden</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
@@ -1722,5 +1723,6 @@
     <string name="export_trailhistory_success">Spor eksporteret til \"%s\"</string>
     <string name="export_trailhistory_clear_after_export">Slet sporet efter eksport</string>
     <!-- individual route export -->
+    <string name="export_individualroute_title">Eksportér individuel rute</string>
     <string name="export_individualroute_success">Individuel rute eksporteret til \"%s\"</string>
 </resources>

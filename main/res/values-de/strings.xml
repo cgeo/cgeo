@@ -537,6 +537,7 @@
     <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
     <string name="init_signature_template_user">Benutzer</string>
     <string name="init_signature_template_number">Nummer</string>
+    <string name="init_signature_template_number_legacy">Nummer (Offline-Logs ignorieren)</string>
     <string name="init_signature_template_owner">Besitzer</string>
     <string name="init_signature_template_name">Name</string>
     <string name="init_signature_template_difficulty">Schwierigkeit</string>
@@ -1164,6 +1165,7 @@
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
+    <string name="search_destination">Öffne Ziel in c:geo</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
     <string name="search_own_caches">Meine Caches suchen</string>
