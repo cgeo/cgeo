@@ -87,10 +87,10 @@ allprojects {
             resolutionStrategy {
                 componentSelection {
                     all { ComponentSelection selection ->
-/*                        if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
+                        if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
                             selection.reject('Release candidate')
                         }
-*/
+
                         // https://github.com/joel-costigliola/assertj-core/issues/345
                         if (selection.candidate.group == 'org.assertj' && selection.candidate.module == 'assertj-core' && selection.candidate.version.substring(0,1).toInteger() > 2) {
                             selection.reject("assertj 3.x or higher requires Java 7 SE classes not available in Android")
