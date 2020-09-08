@@ -128,6 +128,29 @@ public final class GCParser {
         }
     }).subscribeOn(AndroidRxUtils.networkScheduler);
 
+    public static Single<String> getUserRecipientId (final String username) {
+        final Parameters params = new Parameters();
+        params.add("u", "geoFM1");
+
+        return Network.getResponseDocument(Network.getRequest("https://www.geocaching.com/p/default.aspx", params))
+                .map(document -> {
+                    try {
+                    //final Document innerHtml = Jsoup.parse(document.getElementById("tplSearchCoords").html());
+                    //return innerHtml.select("input.search-coordinates").attr("value");
+
+                        Log.i(document.html());
+
+                        final String uri = document.getElementById("ctl00_ProfileHead_ProfileHeader_lnkGiftSubscription").attr("href");
+
+                        final String uguid = uri.split("uguid=")[1];
+                        return uguid;
+                    } catch (final Exception e) {
+                        Log.e("GCParser.getUserRecipientId: error while parsing html page", e);
+                        return StringUtils.EMPTY;
+                    }
+                });
+    }
+
     private GCParser() {
         // Utility class
     }
