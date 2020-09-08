@@ -157,5 +157,5 @@ tasks.named('dependencyUpdates') {
     checkForGradleUpdate = true
     revision = "release"
     gradleReleaseChannel = "current"
-    outputFormatter = "plain,html"
+    outputFormatter = "plain, html"
 }
