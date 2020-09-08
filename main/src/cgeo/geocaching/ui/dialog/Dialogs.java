@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -523,6 +524,50 @@ public final class Dialogs {
      */
     public static void message(final Activity context, final int title, final int message, final Observable<Drawable> iconObservable) {
         message(context, getString(title), getString(message), iconObservable);
+    }
+
+    /**
+     * Show a message dialog with title icon, "OK" and an additional positive button with an event listener.
+     *
+     * @param context
+     *            activity owning the dialog
+     * @param title
+     *            message dialog title
+     * @param message
+     *            message dialog content
+     * @param positiveTextButton
+     *            Text for the neutral button
+     * @param positiveListener
+     *            listener of the neutral button
+     * @param iconObservable
+     *            observable (may be <tt>null</tt>) containing the icon(s) to set
+     */
+    public static void message(final Activity context, @Nullable final String title, final String message, final int positiveTextButton, final OnClickListener positiveListener, @Nullable final Observable<Drawable> iconObservable) {
+        final AlertDialog.Builder builder = newBuilder(context)
+                .setMessage(message)
+                .setNeutralButton(android.R.string.ok, null)
+                .setPositiveButton(positiveTextButton, positiveListener);
+        if (title != null) {
+            builder.setTitle(title);
+        }
+
+        builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
+
+        final AlertDialog dialog = builder.create();
+        dialog.setOwnerActivity(context);
+
+        if (iconObservable != null) {
+            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
+        }
+        dialog.show();
+    }
+
+    public static void basicOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final OneTimeDialogs.DialogStatus fallbackStatus) {
+        if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
+            OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+            message(context, getString(dialogType.messageTitle), getString(dialogType.messageText), R.string.remind_later, (dialog, which) -> OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW), Observable.just(context.getResources().getDrawable(R.drawable.ic_info_blue)));
+
+        }
     }
 
     /**

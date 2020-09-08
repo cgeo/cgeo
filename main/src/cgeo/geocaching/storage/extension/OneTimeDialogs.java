@@ -1,6 +1,10 @@
 package cgeo.geocaching.storage.extension;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.storage.DataStore;
+
+import java.util.ArrayList;
+
 
 
 public class OneTimeDialogs extends DataStore.DBExtension {
@@ -11,18 +15,28 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         this.id = copyFrom.getId();
         this.key = copyFrom.getKey();
         this.long1 = copyFrom.getLong1();
+        this.long2 = copyFrom.getLong2();
     }
 
     public enum DialogType {
         // names must not be changed, as there are database entries depending on it
 
-        EXPLAIN_OFFLINE_FOUND_COUNTER;
+        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.info_feature_offline_counter);
+
+        public int messageTitle;
+        public int messageText;
+
+        DialogType(final int messageTitle, final int messageText) {
+            this.messageTitle = messageTitle;
+            this.messageText = messageText;
+        }
     }
 
     public enum DialogStatus {
         // values for id must not be changed, as there are database entries depending on it
-        DIALOG_SHOW(0),
-        DIALOG_HIDE (1);
+        NONE(0),
+        DIALOG_SHOW(1),
+        DIALOG_HIDE (2);
 
         public int id;
 
@@ -46,11 +60,29 @@ public class OneTimeDialogs extends DataStore.DBExtension {
             return defaultStatus;
         }
         final OneTimeDialogs dialog = new OneTimeDialogs(temp);
-        return getStatusById((int) dialog.getLong1());
+        final DialogStatus status = getStatusById((int) dialog.getLong1());
+        return status == DialogStatus.NONE ? defaultStatus : status;
     }
 
     public static void setStatus(final DialogType dialogType, final DialogStatus status) {
         removeAll(type, dialogType.name());
         add(type, dialogType.name(), status.id, 0, "", "");
+    }
+
+    public static void setStatus(final DialogType dialogType, final DialogStatus currentStatus, final DialogStatus nextStatus) {
+        removeAll(type, dialogType.name());
+        add(type, dialogType.name(), currentStatus.id, nextStatus.id, "", "");
+    }
+
+    public static void nextStatus() {
+
+        final ArrayList <DataStore.DBExtension> elements = getAll(type, null);
+
+        for (DataStore.DBExtension element : elements) {
+            if (getStatusById((int) element.getLong2()) != DialogStatus.NONE) {
+                removeAll(type, element.getKey());
+                add(type, element.getKey(), element.getLong2(), 0, "", "");
+            }
+        }
     }
 }

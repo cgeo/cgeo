@@ -79,7 +79,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -182,11 +181,8 @@ public class MainActivity extends AbstractActionBarActivity {
                         connectorInfo.setText(userInfo);
                         connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
-                        if (offlineFoundsAvailable && OneTimeDialogs.getStatus(OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER,
-                                OneTimeDialogs.DialogStatus.DIALOG_SHOW) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
-
-                            OneTimeDialogs.setStatus(OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
-                            Dialogs.message((Activity) getContext(), R.string.settings_information, R.string.info_feature_offline_counter, Observable.just(getContext().getResources().getDrawable(R.drawable.ic_info_blue)));
+                        if (offlineFoundsAvailable) {
+                            Dialogs.basicOneTimeMessage((Activity) getContext(), OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
                         }
                     }
                 });
@@ -346,6 +342,9 @@ public class MainActivity extends AbstractActionBarActivity {
         final Handler handler = new Handler();
         handler.postDelayed(this::checkLoggedIn, 10000);
         notLoggedIn.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+
+        // reactivate dialogs which are set to show later
+        OneTimeDialogs.nextStatus();
     }
 
     @Override
