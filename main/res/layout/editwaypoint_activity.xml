@@ -35,7 +35,7 @@
                 android:id="@+id/bearing"
                 style="@style/edittext_full"
                 android:hint="@string/waypoint_bearing"
-                android:inputType="numberDecimal"
+                android:inputType="numberDecimal|numberSigned"
                 android:enabled="false"/>
 
             <LinearLayout
