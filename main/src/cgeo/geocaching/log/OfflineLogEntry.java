@@ -164,12 +164,12 @@ public final class OfflineLogEntry extends LogEntry {
      * compared to a given previous instance
      * Note that this is NOT a hidden {@link #equals(Object)}-method!
      */
-    public boolean hasSaveRelevantChanges(final OfflineLogEntry prev, final String signature) {
+    public boolean hasSaveRelevantChanges(final OfflineLogEntry prev) {
 
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
         // again will be easy using "Clear" while retyping the text may not be.
-        boolean changed = StringUtils.isNotEmpty(log) && !StringUtils.equals(log, signature) && !StringUtils.equals(log, prev.log);
+        boolean changed = StringUtils.isNotEmpty(log) && !StringUtils.equals(log, prev.log);
         //other changes however lead to save anyway
         changed |= !Objects.equals(logType, prev.logType);
         changed |= !Objects.equals(reportProblem, prev.reportProblem);

@@ -300,7 +300,17 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         // Restore previous state
         lastSavedState = restorePreviousLogEntry(savedInstanceState);
-        fillViewFromEntry(lastSavedState);
+        if (lastSavedState == null) {
+            //this means there is no previous entry
+            lastSavedState = getEntryFromView();
+            //set initial signature. Setting this AFTER setting lastSavedState and GUI leads to the signature being a change-to-save as requested in #8973
+            if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
+                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
+            }
+        } else {
+            fillViewFromEntry(lastSavedState);
+        }
+
 
         // TODO: Why is it disabled in onCreate?
         // Probably it should be disabled only when there is some explicit issue.
@@ -338,12 +348,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (entry == null) {
             entry = DataStore.loadLogOffline(geocode);
         }
-        if (entry == null) {
-            if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
-                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
-            }
-            entry = getEntryFromView();
-        }
+
         return entry;
     }
 
@@ -491,24 +496,24 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
             final OfflineLogEntry logEntry = getEntryFromView();
 
-            final boolean logChanged = logEntry.hasSaveRelevantChanges(lastSavedState, Settings.getSignature());
+            final boolean logChanged = logEntry.hasSaveRelevantChanges(lastSavedState);
             final boolean doSave = SaveMode.FORCE.equals(saveMode) || (!SaveMode.SKIP.equals(saveMode) && logChanged);
             cLog.add("logChanged=%b, doSave=%b", logChanged, doSave);
 
             if (doSave) {
+                lastSavedState = logEntry;
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(final Void... params) {
                         try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                             cache.logOffline(LogCacheActivity.this, logEntry);
                             Settings.setLastCacheLog(logEntry.log);
-                            lastSavedState = logEntry;
                             ccLog.add("log=%s", logEntry.log);
                             return null;
                         }
                     }
                 }.execute();
-            }
+        }
         }
     }
 
@@ -610,6 +615,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void sendLogInternal() {
+        lastSavedState = getEntryFromView();
         new Poster(this, res.getString(R.string.log_saving)).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
 
@@ -1008,7 +1014,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         null,
                         // Neutral Button: SaveLog
                         (dialogInterface, i) -> {
-                            finish();
+                            finish(SaveMode.FORCE);
                         });
             }
         }
