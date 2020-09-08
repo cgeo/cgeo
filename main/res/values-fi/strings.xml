@@ -118,9 +118,11 @@
     <string name="log_yesterday">Eilen</string>
     <string name="log_smilies">Hymiöt</string>
     <string name="log_image">Kuva</string>
+    <string name="log_images">Kuvat</string>
     <string name="log_image_attach">Liitä kuva</string>
     <string name="log_image_stored">Selaa…</string>
     <string name="log_image_camera">Uusi</string>
+    <string name="log_image_delete">Poista</string>
     <string name="log_image_caption">Kuvateksti</string>
     <string name="log_image_description">Kuvaus</string>
     <string name="log_image_scale">Skaalaus</string>
@@ -145,6 +147,9 @@
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">Kuva</string>
+    <string name="log_image_titleprefix_hint">Kuvan otsikon etuliite</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
     <string name="translate_to_english">Käännä englanniksi</string>
@@ -532,6 +537,7 @@
     <string name="init_signature_template_datetime">Päivämäärä &amp; aika</string>
     <string name="init_signature_template_user">Käyttäjä</string>
     <string name="init_signature_template_number">Numero</string>
+    <string name="init_signature_template_number_legacy">Numero (ohita offline-lokit)</string>
     <string name="init_signature_template_owner">Omistaja</string>
     <string name="init_signature_template_name">Nimi</string>
     <string name="init_signature_template_difficulty">Vaikeusaste</string>
@@ -1159,6 +1165,7 @@
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
+    <string name="search_destination">Avaa kohde c:geossa</string>
     <string name="search_address_started">Etsitään paikkoja</string>
     <string name="search_address_result">Löydetyt paikat</string>
     <string name="search_own_caches">Etsi minun kätköni</string>
@@ -1214,7 +1221,14 @@
     <string name="destination_select">Valitse kohde</string>
     <string name="navigation_direct_navigation">Suora navigointi</string>
     <string name="osmand_marker_cgeo">Merkki c:geosta</string>
+    <string name="device_heading_label">Laitteen kulkusuunta:</string>
+    <string name="device_orientation">Laitteen asento</string>
+    <string name="device_orientation_label">Suunta:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Tuntematon</string>
+    <string name="do_auto">Automaattinen</string>
+    <string name="do_flat">Vaaka</string>
+    <string name="do_upright">Pysty</string>
     <!-- license -->
     <string name="license">Lisenssi</string>
     <string name="license_show">Näytä lisenssi</string>
@@ -1712,8 +1726,10 @@
     <string name="downloadmap_title">Lataa offline-kartta</string>
     <string name="downloadmap_info">Sinut ohjataan lataussivulle, joka sisältää peruskarttatiedostot (ei tukea teemoille).\n\nValitse .map-tiedosto alueellesi ja napauta sitä lataaksesi tiedoston.\n\nKun lataus on valmis, napauta ladattua tiedostoa asettaaksesi kyseisen kartan käytettäväksi c:geon kanssa</string>
     <string name="downloadmap_choose">Valitse kartta</string>
+    <string name="downloadmap_filename">Ladataan %s</string>
     <string name="downloadmanager_not_available">Karttatiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
+    <string name="downloadmap_target_not_writable">Kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto tallennetaan järjestelmän lataushakemistoon ja se on siirrettävä manuaalisesti karttahakemistoon.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
