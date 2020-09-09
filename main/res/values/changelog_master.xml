@@ -11,7 +11,10 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 </ul>
 <h4>Cache details:</h4>
 <ul>
-<li>.</li>
+<li>New: Allow negative bearing angles for waypoint projection</li>
+<li>New: Voice output: Estimate device orientation and transform coords when mobile is upright</li>
+<li>Fix: Offline log remembers selected image</li>
+<li>New: Offline logging now supports adding multiple images</li>
 </ul>
 <h4>Cache lists:</h4>
 <ul>
@@ -19,7 +22,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 </ul>
 <h4>Other:</h4>
 <ul>
-<li>.</li>
+<li>New: Offer c:geo for navigation intents (eg.: from Lab Adventure app)</li>
 </ul>
 </div>]]></Data>
   </string>
