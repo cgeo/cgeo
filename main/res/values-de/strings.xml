@@ -251,7 +251,7 @@
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
-    <string name="info_feature_offline_counter">Du hast Offline-Logs, die noch nicht hochgeladen wurden. Daher wird ein Zähler (z.B. \"+ 1\") angezeigt. Wenn dir der Zähler nicht gefäfft, kannst du ihn unter Einstellungen > Loggen deaktivieren.\n\nUm noch ausstehende Logs einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" > \"Mit Offline-Log\"</string>
+    <string name="info_feature_offline_counter">Du hast Offline-Logs, die noch nicht hochgeladen wurden. Daher wird ein Zähler (z.B. \"+ 1\") angezeigt. Falls dir der Zähler nicht gefällt, kannst du ihn unter Einstellungen > Loggen deaktivieren.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" > \"Mit Offline-Log\"</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
