@@ -564,6 +564,16 @@ public final class Dialogs {
         dialog.show();
     }
 
+    /**
+     * Message dialog which is shown only one time. Please define your dialog name/message at OneTimeDialogs.DialogType.
+     *
+     * @param context
+     *            activity owning the dialog
+     * @param dialogType
+     *            for setting title and message of the dialog and for storing the dialog status in DB
+     * @param fallbackStatus
+     *            if no status is stored in the database use DIALOG_SHOW or DIALOG_HIDE as fallback
+     */
     public static void basicOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final OneTimeDialogs.DialogStatus fallbackStatus) {
         if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
