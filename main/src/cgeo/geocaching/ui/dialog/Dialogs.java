@@ -545,8 +545,10 @@ public final class Dialogs {
     public static void message(final Activity context, @Nullable final String title, final String message, final int positiveTextButton, final OnClickListener positiveListener, @Nullable final Observable<Drawable> iconObservable) {
         final AlertDialog.Builder builder = newBuilder(context)
                 .setMessage(message)
+                .setCancelable(false)
                 .setNeutralButton(android.R.string.ok, null)
                 .setPositiveButton(positiveTextButton, positiveListener);
+
         if (title != null) {
             builder.setTitle(title);
         }

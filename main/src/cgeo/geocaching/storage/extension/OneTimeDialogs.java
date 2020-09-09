@@ -3,9 +3,6 @@ package cgeo.geocaching.storage.extension;
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.DataStore;
 
-import java.util.ArrayList;
-
-
 
 public class OneTimeDialogs extends DataStore.DBExtension {
 
@@ -76,12 +73,16 @@ public class OneTimeDialogs extends DataStore.DBExtension {
 
     public static void nextStatus() {
 
-        final ArrayList <DataStore.DBExtension> elements = getAll(type, null);
+        for (DialogType key : DialogType.values()) {
+            final DataStore.DBExtension temp = load(type, key.name());
 
-        for (DataStore.DBExtension element : elements) {
-            if (getStatusById((int) element.getLong2()) != DialogStatus.NONE) {
-                removeAll(type, element.getKey());
-                add(type, element.getKey(), element.getLong2(), 0, "", "");
+            if (null != temp) {
+                final OneTimeDialogs dialog = new OneTimeDialogs(temp);
+
+                if (getStatusById((int) dialog.getLong2()) != DialogStatus.NONE) {
+                    removeAll(type, key.name());
+                    add(type, key.name(), dialog.getLong2(), 0, "", "");
+                }
             }
         }
     }
