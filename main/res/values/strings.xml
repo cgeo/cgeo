@@ -268,6 +268,7 @@
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
+    <string name="info_feature_offline_counter">You have offline logs, which are not yet uploaded. Therefore a counter (eg. \"+ 1\") will be displayed. If you don\'t like the counter, you can disable it under Settings > Logging.\n\nTo easily find remaining offline logs, goto \"history list\" and filter for \"With personal data\" > \"With offline log\"</string>
     <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
     <string name="err_trackable_no_preference_activity">Sorry, cannot find a suitable preference screen.</string>
@@ -276,6 +277,7 @@
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
+    <string name="remind_later">Remind me later</string>
 
     <string name="warn_gm_not_available">Google Maps not available.</string>
     <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>

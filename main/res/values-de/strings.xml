@@ -256,6 +256,7 @@
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
+    <string name="info_feature_offline_counter">Du hast Offline-Logs, die noch nicht hochgeladen wurden. Daher wird ein Zähler (z.B. \"+ 1\") angezeigt. Falls dir der Zähler nicht gefällt, kannst du ihn unter Einstellungen > Loggen deaktivieren.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" > \"Mit Offline-Log\"</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
@@ -264,6 +265,7 @@
     <string name="err_request_popup_info">c:geo konnte die Cache-Popup Informationen nicht herunterladen.</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
+    <string name="remind_later">Später erinnern</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
