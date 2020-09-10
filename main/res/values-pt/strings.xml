@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Este geocacher reportou que esta geocache deve ser arquivada. Um revisor voluntário da comunidade foi notificado.</string>
     <string name="log_image_scale_option_noscaling">Não redimensionar</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">Imagem</string>
     <string name="log_image_titleprefix_hint">Prefixo do Título da Imagem</string>
     <!-- translation -->
@@ -255,6 +256,8 @@
     <string name="info_select_logimage_cancelled">Foi cancelada a selecção ou captura de imagem.</string>
     <string name="info_stored_image">Nova imagem guardada em:</string>
     <string name="info_cache_saved">A cache foi armazenada localmente</string>
+    <string name="info_feature_offline_counter">Tem registos offline que não foram submetidos.
+Por essa razão um contador (ex: \"+ 1\") será mostrado. Se não gostar do contador, pode desactiva-lo em Definições &gt; Registos.\n\nPara encontrar facilmente os registos offline que restam, vá a \"lista do histórico\" e filtre por \"Com informação pessoal\" &gt; \"Com registo offline\"</string>
     <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
     <string name="err_trackable_log_not_anonymous">Não é possível registar %1$s de forma anónima a partir do c:geo. Quer abrir as definições para preencher as suas credenciais de %2$s?</string>
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
@@ -263,6 +266,7 @@
     <string name="err_request_popup_info">O c:geo não conseguiu obter as informações resumidas da geocache.</string>
     <string name="warn_log_load_additional_data">O c:geo falhou ao carregar dados adicionais (de trackables/pontos de favoritos) para o registo.</string>
     <string name="more_information">Mais informação</string>
+    <string name="remind_later">Lembrar-me mais tarde</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
@@ -552,13 +556,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_openlastdetailspage">Último separador de detalhes visto</string>
     <string name="init_summary_openlastdetailspage">Mostra a última página vista ao consultar os detalhes da cache</string>
     <string name="init_skin">Tema claro</string>
-    <string name="init_summary_skin">Usar o tema claro (Requer reinício)</string>
+    <string name="init_summary_skin">Utilização do tema claro (requer reinício)</string>
     <string name="init_transparentBackground">Fundo transparente</string>
-    <string name="init_summary_transparentBackground">Usar plano de fundo transparente (é necessário reiniciar)</string>
+    <string name="init_summary_transparentBackground">Torna a imagem de fundo transparente (requer reinício)</string>
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_useenglish">Usar o idioma Inglês</string>
-    <string name="init_summary_useenglish">Utilizar o c:geo no idioma Inglês (Requer reinício)</string>
+    <string name="init_summary_useenglish">Aplicação do idioma Inglês no c:geo (requer reinício)</string>
     <string name="init_exclude">Excluir Encontradas e Minhas</string>
     <string name="init_summary_exclude">Exclui as caches que lhe pertencem ou que tenha encontrado</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
@@ -575,11 +579,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
     <string name="init_global_wp_extraction_disable">Extracção de pontos adicionais</string>
-    <string name="init_summary_global_wp_extraction_disable">Desactiva de forma geral a extracção de pontos adicionais a partir das notas pessoais em caches. Isto ainda pode ser activado para caches individuais ao desmarcar o visto abaixo da nota pessoal na cache</string>
+    <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
     <string name="init_units">Usar Unidades Imperiais</string>
-    <string name="init_summary_units">Utilizar as unidades no Sistema Imperial em vez do Sistema Métrico</string>
+    <string name="init_summary_units">Utiliza as unidades no Sistema Imperial em vez do Sistema Métrico</string>
     <string name="init_log_offline">Registos Offline</string>
     <string name="init_summary_log_offline">Activa os registos off-line (não será mostrada a vista de registos on-line, não os podendo publicar)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
@@ -591,7 +595,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- backup / restore -->
     <string name="init_backup">Backup de geocaches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
-    <string name="init_backup_running">A criar uma cópia de segurança da base de dados de caches…</string>
+    <string name="init_backup_running">A criar cópia de segurança da base de dados das caches…</string>
     <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados que contém as caches e os pontos adicionais, mas não das suas imagens em caches nem de qualquer definição do programa.</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
@@ -704,7 +708,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_force_orientation_sensor_title">Sensor de orientação</string>
     <string name="init_force_orientation_sensor_note">Em alguns dispositivos, o sensor normal de rotação vectorial tem um comportamento errático, dando a direcção errada. Neste caso, um sensor alternativo (o sensor de orientação) pode proporcionar melhores resultados.</string>
     <string name="init_force_orientation_sensor">Forçar uso do sensor de orientação</string>
-    <string name="init_create_memory_dump">Criar uma imagem de erro da memória</string>
+    <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
     <string name="init_memory_dump">Imagem de erro da memória</string>
     <string name="init_memory_dumped">Imagem de erro da memória em %s</string>
     <string name="init_hardware_acceleration_title">Renderização acelerada por hardware</string>
@@ -1718,8 +1722,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="downloadmap_title">Transferir mapa offline</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual para a c:geo.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_choose">Escolher mapa</string>
+    <string name="downloadmap_filename">A transferir %s</string>
     <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
+    <string name="downloadmap_target_not_writable">O destino \"%s\" não aceita gravação - o mapa transferido será armazenado no directório de transferências do sistema e tem que ser movido manualmente para o directório dos mapas.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
