@@ -29,6 +29,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -145,6 +146,8 @@ public class MainActivity extends AbstractActionBarActivity {
                     }
 
                     private void fillView(final TextView connectorInfo, final ILogin conn) {
+                        boolean offlineFoundsAvailable = false;
+
                         final StringBuilder userInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR);
                         if (conn.isLoggedIn()) {
                             userInfo.append(conn.getUserName()).append(" ");
@@ -163,6 +166,8 @@ public class MainActivity extends AbstractActionBarActivity {
                                 final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
                                 if (offlinefounds > 0) {
                                     userInfo.append(" + ").append(offlinefounds);
+
+                                    offlineFoundsAvailable = true;
                                 }
                             }
                             userInfo.append(')').append(Formatter.SEPARATOR);
@@ -175,6 +180,10 @@ public class MainActivity extends AbstractActionBarActivity {
 
                         connectorInfo.setText(userInfo);
                         connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+
+                        if (offlineFoundsAvailable) {
+                            Dialogs.basicOneTimeMessage((Activity) getContext(), OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+                        }
                     }
                 });
             }
@@ -333,6 +342,9 @@ public class MainActivity extends AbstractActionBarActivity {
         final Handler handler = new Handler();
         handler.postDelayed(this::checkLoggedIn, 10000);
         notLoggedIn.setOnClickListener(v -> Dialogs.confirmYesNo(this, R.string.warn_notloggedin_title, R.string.warn_notloggedin_long, (dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+
+        // reactivate dialogs which are set to show later
+        OneTimeDialogs.nextStatus();
     }
 
     @Override
