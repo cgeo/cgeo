@@ -23,6 +23,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Other:</h4>
 <ul>
 <li>New: Offer c:geo for navigation intents (eg.: from Lab Adventure app)</li>
+<li>Change: Replace outdated undobar with snackbar</li>
 </ul>
 </div>]]></Data>
   </string>
