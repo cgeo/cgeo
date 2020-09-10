@@ -71,6 +71,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>Change: Set colorAccent to c:geo orange in many more places</li>
 <li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
 <li>Many other small fixes</li>
+<li>New: Added one-time messages framework</li>
 <li>Logging: Added more info levels to logfile</li>
 <li>Logging: Added option to write extended logfile with even more info</li>
 <li>Logging: Read log settings from \"logfiles/log.properties\" (if present)</li>
