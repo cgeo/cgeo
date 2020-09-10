@@ -118,9 +118,11 @@
     <string name="log_yesterday">어제</string>
     <string name="log_smilies">스마일</string>
     <string name="log_image">사진</string>
+    <string name="log_images">이미지</string>
     <string name="log_image_attach">사진 첨부</string>
     <string name="log_image_stored">사진첩</string>
     <string name="log_image_camera">촬영하기</string>
+    <string name="log_image_delete">삭제</string>
     <string name="log_image_caption">제목</string>
     <string name="log_image_description">설명</string>
     <string name="log_image_scale">크기 조정</string>
@@ -145,6 +147,9 @@
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">이미지</string>
+    <string name="log_image_titleprefix_hint">이미지 제목 접두사</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
     <string name="translate_to_english">영어로 번역하기</string>
@@ -531,6 +536,7 @@
     <string name="init_signature_template_datetime">날짜 및 시간</string>
     <string name="init_signature_template_user">사용자</string>
     <string name="init_signature_template_number">찾은 캐시수</string>
+    <string name="init_signature_template_number_legacy">숫자 (오프라인 로그 무시)</string>
     <string name="init_signature_template_owner">소유주</string>
     <string name="init_signature_template_name">제목</string>
     <string name="init_signature_template_difficulty">난이도</string>
@@ -1150,6 +1156,7 @@
     <string name="search_tb">추적아이템</string>
     <string name="search_tb_hint">추적 코드</string>
     <string name="search_tb_button">추적아이템 검색</string>
+    <string name="search_destination">c:geo에서 대상 열기</string>
     <string name="search_address_started">장소 검색 중</string>
     <string name="search_address_result">장소 찾기</string>
     <string name="search_own_caches">내 캐시 검색</string>
@@ -1205,7 +1212,14 @@
     <string name="destination_select">목적지 선택</string>
     <string name="navigation_direct_navigation">직접 길찾기</string>
     <string name="osmand_marker_cgeo">c:geo 마커</string>
+    <string name="device_heading_label">장치 방향:</string>
+    <string name="device_orientation">디바이스 지향</string>
+    <string name="device_orientation_label">지향:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">알 수 없음</string>
+    <string name="do_auto">자동</string>
+    <string name="do_flat">평평한</string>
+    <string name="do_upright">수직으로 세워 둔</string>
     <!-- license -->
     <string name="license">라이센스</string>
     <string name="license_show">라이선스 보기</string>
@@ -1689,8 +1703,10 @@
     <string name="downloadmap_title">오프라인 지도 다운로드</string>
     <string name="downloadmap_info">\"저장\"아이콘을 눌러 해당 지역의 지도 파일을 선택하십시오.\n\n다운로드는 백그라운드에서 실행됩니다. 다운로드가 완료되면 다운로드 한 파일이 c:geo의 지도 디렉토리에 복사되고 c:geo의 현재 지도로 설정됩니다.\n\n주의: 지도를 다운로드하면 네트워크 트래픽이 높아질 수 있습니다!</string>
     <string name="downloadmap_choose">지도 선택</string>
+    <string name="downloadmap_filename">다운로드 중 %s</string>
     <string name="downloadmanager_not_available">지도 파일을 다운로드 할 수 없습니다. 시스템 다운로드 관리자를 사용할 수 없습니다.</string>
     <string name="download_started">백그라운드에서 다운로드 시작합니다.</string>
+    <string name="downloadmap_target_not_writable">대상 \"%s\"에 쓰기가 불가능합니다. 다운로드 된 지도 파일은 시스템 다운로드 디렉토리에 저장되며 수동으로 지도 디렉토리로 이동해야합니다.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
     <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
