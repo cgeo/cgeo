@@ -267,6 +267,7 @@ Por essa razão um contador (ex: \"+ 1\") será mostrado. Se não gostar do cont
     <string name="warn_log_load_additional_data">O c:geo falhou ao carregar dados adicionais (de trackables/pontos de favoritos) para o registo.</string>
     <string name="more_information">Mais informação</string>
     <string name="remind_later">Lembrar-me mais tarde</string>
+    <string name="undo">Anular</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>

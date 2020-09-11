@@ -256,6 +256,7 @@
     <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
     <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
     <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
+    <string name="info_feature_offline_counter">Je hebt offline logs die nog niet zijn geüpload. Daarom wordt een teller (bijv. \"+ 1\") weergegeven. Als je de teller niet leuk vindt, kun je deze uitschakelen onder Instellingen &gt; Loggen.\n\nOm eenvoudig overige offline logs te vinden ga je naar de \"geschiedenis\" lijst en filter op \"Met persoonlijke gegevens\" &gt; \"Met offline log\"</string>
     <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
     <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
@@ -264,6 +265,8 @@
     <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
     <string name="more_information">Meer informatie</string>
+    <string name="remind_later">Herinner mij later</string>
+    <string name="undo">Ongedaan maken</string>
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
     <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>

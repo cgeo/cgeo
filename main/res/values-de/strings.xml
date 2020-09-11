@@ -266,6 +266,7 @@
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
     <string name="remind_later">Später erinnern</string>
+    <string name="undo">Rückgängig</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
