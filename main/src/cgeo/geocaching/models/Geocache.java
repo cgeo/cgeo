@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.SimpleWebviewActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -48,15 +47,14 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.text.Html;
 
 import androidx.annotation.NonNull;
@@ -551,25 +549,11 @@ public class Geocache implements IWaypoint {
     }
 
     public void openInBrowser(final Context context) {
-        if (getUrl() == null) {
-            return;
-        }
-        final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getLongUrl()));
+        ShareUtils.openUrl(context, getUrl(), true);
+    }
 
-        // Check if cgeo is the default, show the chooser to let the user choose a browser
-        if (viewIntent.resolveActivity(context.getPackageManager()).getPackageName().equals(context.getPackageName())) {
-            final Intent chooser = Intent.createChooser(viewIntent, context.getString(R.string.cache_menu_browser));
-
-            final Intent internalBrowser = new Intent(context, SimpleWebviewActivity.class);
-            internalBrowser.setData(Uri.parse(getUrl()));
-
-            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {internalBrowser});
-
-
-            context.startActivity(chooser);
-        } else {
-            context.startActivity(viewIntent);
-        }
+    public void openLogInBrowser(final Context context, final LogEntry logEntry) {
+        ShareUtils.openUrl(context, getConnector().getCacheLogUrl(this, logEntry), true);
     }
 
     @NonNull
@@ -777,26 +761,37 @@ public class Geocache implements IWaypoint {
         return getConnector().supportsNamechange();
     }
 
-    public void shareCache(@NonNull final Activity fromActivity, final Resources res) {
-        final Intent intent = getShareIntent();
-
-        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.cache_menu_share)));
-    }
-
-    @NonNull
-    public Intent getShareIntent() {
+    private String getShareSubject() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);
         if (StringUtils.isNotBlank(name)) {
             subject.append(" - ").append(name);
         }
+        return subject.toString();
+    }
 
-        final Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
-        intent.putExtra(Intent.EXTRA_TEXT, StringUtils.defaultString(getUrl()));
+    public void shareCache(@NonNull final Activity fromActivity, final Resources res) {
+        ShareUtils.shareLink(fromActivity, getShareSubject(), getUrl());
+    }
 
-        return intent;
+    public boolean canShareLog(final LogEntry logEntry) {
+        return !StringUtils.isBlank(getConnector().getCacheLogUrl(this, logEntry));
+    }
+
+    public String getServiceSpecificLogId(final LogEntry logEntry) {
+        if (logEntry == null) {
+            return null;
+        }
+        return getConnector().getServiceSpecificLogId(logEntry.serviceLogId);
+    }
+
+    public void shareLog(@NonNull final Activity fromActivity, final LogEntry logEntry) {
+        ShareUtils.shareLink(fromActivity, getShareSubject(), getConnector().getCacheLogUrl(this, logEntry));
+    }
+
+    @NonNull
+    public Intent getShareIntent() {
+        return ShareUtils.getShareLinkIntent(getShareSubject(), getUrl());
     }
 
     @Nullable

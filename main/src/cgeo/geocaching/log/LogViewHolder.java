@@ -18,6 +18,7 @@ public class LogViewHolder extends AbstractViewHolder {
     @BindView(R.id.log) protected TextView text;
     @BindView(R.id.log_images) protected TextView images;
     @BindView(R.id.log_mark) protected ImageView marker;
+    @BindView(R.id.detail_box) protected View detailBox;
 
     private int position;
 

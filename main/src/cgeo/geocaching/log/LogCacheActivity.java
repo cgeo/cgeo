@@ -863,6 +863,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     DataStore.saveChangedCache(cache);
 
                     final LogEntry.Builder logBuilder = new LogEntry.Builder()
+                            .setServiceLogId(logResult.getServiceLogId())
                             .setDate(date.getDate().getTime())
                             .setLogType(logType.get())
                             .setLog(log)

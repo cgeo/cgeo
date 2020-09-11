@@ -162,6 +162,7 @@ public class LogEntryTest extends CGeoTestCase {
 
         //initialize a fully-fledged OfflineLogEntry
         final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>()
+                .setServiceLogId("pid")
                 .setLog("log message")
                 .setLogType(LogType.DIDNT_FIND_IT)
                 .setDate(50)
@@ -181,6 +182,7 @@ public class LogEntryTest extends CGeoTestCase {
         final OfflineLogEntry otherLogEntry = unmarshall(parcel, OfflineLogEntry.CREATOR);
 
         assertThat(otherLogEntry.log).isEqualTo("log message");
+        assertThat(otherLogEntry.serviceLogId).isEqualTo("pid");
         assertThat(otherLogEntry.logType).isEqualTo(LogType.DIDNT_FIND_IT);
         assertThat(otherLogEntry.date).isEqualTo(50);
         assertThat(otherLogEntry.favorite).isEqualTo(true);

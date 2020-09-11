@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
@@ -51,6 +52,21 @@ public interface IConnector {
      */
     @Nullable
     String getLongCacheUrl(@NonNull Geocache cache);
+
+    /**
+     * Get the browser URL for the given LogEntry. May return null if no url available or identifiable.
+     */
+    @Nullable
+    String getCacheLogUrl(@NonNull Geocache cache, @NonNull LogEntry logEntry);
+
+    /**
+     * For a given service-log-id (as assigned by this IConnector and stored as service log id in log entries),
+     * returns the logid ready for usage in scenarios such as GUI display or GPX export
+     * May return null if there is no such log id.
+     */
+    @Nullable
+    String getServiceSpecificLogId(@Nullable String serviceLogId);
+
 
     /**
      * enable/disable logging controls in cache details

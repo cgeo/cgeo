@@ -8,8 +8,13 @@ import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.text.Html;
@@ -23,7 +28,9 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCreator {
@@ -60,9 +67,9 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
                 holder.setPosition(position);
 
                 final LogEntry log = getItem(position);
-                fillViewHolder(convertView, holder, log);
-                final View logView = rowView.findViewById(R.id.log);
-                activity.addContextMenu(logView);
+                if (log != null) {
+                    fillViewHolder(convertView, holder, log);
+                }
                 return rowView;
             }
         });
@@ -79,7 +86,10 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.date.setVisibility(View.GONE);
         }
 
-        holder.type.setText(log.getType().getL10n());
+        holder.type.setText(log.logType.getL10n());
+
+        final String serviceSpecificLogId = getServiceSpecificLogId(log);
+
         holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
         fillCountOrLocation(holder, log);
@@ -96,13 +106,13 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         if (log.hasLogImages()) {
             holder.images.setText(log.getImageTitles());
             holder.images.setVisibility(View.VISIBLE);
-            holder.images.setOnClickListener(v -> ImagesActivity.startActivity(activity, getGeocode(), new ArrayList<>(log.getLogImages())));
+            holder.images.setOnClickListener(v -> ImagesActivity.startActivity(activity, getGeocode(), new ArrayList<>(log.logImages)));
         } else {
             holder.images.setVisibility(View.GONE);
         }
 
         // colored marker
-        final int marker = log.getType().markerId;
+        final int marker = log.logType.markerId;
         if (marker != 0) {
             holder.marker.setVisibility(View.VISIBLE);
             holder.marker.setImageResource(marker);
@@ -112,8 +122,44 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
         holder.author.setOnClickListener(createUserActionsListener(log));
         holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-        holder.text.setOnClickListener(new DecryptTextClickListener(holder.text));
-        activity.registerForContextMenu(holder.text);
+
+        final View.OnClickListener logContextMenuClickListener = v -> {
+            final String dateStr = Formatter.formatShortDateVerbally(log.date);
+            final String logIdPlusSpace = StringUtils.isBlank(serviceSpecificLogId) ? "" : (serviceSpecificLogId + " ");
+            final String author = StringEscapeUtils.unescapeHtml4(log.author);
+            final String title = activity.getString(R.string.cache_log_menu_title, logIdPlusSpace, author, dateStr);
+
+            final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity)
+                    .setTitle(title)
+                    .addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.text))
+                    .addItem(activity.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
+                        ClipboardUtils.copyToClipboard(holder.text.getText().toString());
+                        activity.showToast(activity.getString(R.string.clipboard_copy_ok));
+                    })
+                    .addItem(R.string.context_share_as_text, R.drawable.ic_menu_share, it ->
+                            ShareUtils.sharePlainText(activity, holder.text.getText().toString()))
+                    .addItem(activity.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()),
+                            R.drawable.ic_menu_translate, it -> TranslationUtils.startActivityTranslate(activity, Locale.getDefault().getLanguage(), HtmlUtils.extractText(log.log)));
+            final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
+
+            if (!localeIsEnglish) {
+                ctxMenu.addItem(R.string.translate_to_english, R.drawable.ic_menu_translate, it ->
+                        TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
+            }
+            extendContextMenu(ctxMenu, log).show();
+        };
+
+        holder.text.setOnClickListener(logContextMenuClickListener);
+        holder.detailBox.setOnClickListener(logContextMenuClickListener);
+    }
+
+    /** for subclasses to overwrite and add own entries */
+    protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
+        return ctxMenu;
+    }
+
+    protected String getServiceSpecificLogId(final LogEntry log) {
+        return log.serviceLogId;
     }
 
     protected abstract View.OnClickListener createUserActionsListener(LogEntry log);

@@ -1,5 +1,6 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
@@ -276,9 +277,21 @@ public final class GpxSerializer {
 
         for (final LogEntry log : logs) {
             gpx.startTag(NS_GROUNDSPEAK, "log");
-            gpx.attribute("", "id", Integer.toString(log.id));
 
-            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "date", dateFormatZ.format(new Date(log.date)), "type", log.getType().type);
+            String logId = cache.getServiceSpecificLogId(log);
+            //GC.Com-specifics
+            final long gcLogId = GCUtils.logCodeToLogId(logId);
+            if (gcLogId > 0) {
+                logId = Long.toString(gcLogId);
+            }
+            //fall back to internal id if we have no service-specific id
+            if (StringUtils.isBlank(logId)) {
+                logId = Integer.toString(log.id);
+            }
+
+           gpx.attribute("", "id", logId);
+
+            XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "date", dateFormatZ.format(new Date(log.date)), "type", log.logType.type);
 
             gpx.startTag(NS_GROUNDSPEAK, "finder");
             gpx.attribute("", "id", "");

@@ -18,6 +18,7 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -165,6 +166,18 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    @Nullable
+    public String getCacheLogUrl(@NonNull final Geocache cache, @NonNull final LogEntry logEntry) {
+        return null; //by default, Connector does not support log urls
+    }
+
+    @Override
+    @Nullable
+    public String getServiceSpecificLogId(@Nullable final String serviceLogId) {
+        return serviceLogId; //by default, log id is directly usable
+    }
+
+    @Override
     public boolean isActive() {
         return false;
     }
@@ -280,7 +293,7 @@ public abstract class AbstractConnector implements IConnector {
         if (this instanceof ISearchByFinder) {
             actions.add(new UserAction(R.string.user_menu_view_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
         }
-        actions.add(new UserAction(R.string.copy_to_clipboard, context -> {
+        actions.add(new UserAction(R.string.copy_to_clipboard, R.drawable.ic_menu_copy, context -> {
             ClipboardUtils.copyToClipboard(context.userName);
             ActivityMixin.showToast(context.getContext(), R.string.clipboard_copy_ok);
         }));

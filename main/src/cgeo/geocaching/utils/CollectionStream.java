@@ -127,6 +127,13 @@ public class CollectionStream<T> {
     }
 
     /**
+     * mimics {@link java.util.stream.Stream#count}
+     */
+    public long count() {
+        return getCollectionForRead().size();
+    }
+
+    /**
      * mimics {@link Collectors#toList()}
      */
     public List<T> toList() {

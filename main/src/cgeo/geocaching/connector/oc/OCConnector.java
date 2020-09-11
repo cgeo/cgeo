@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.Smiley;
 import cgeo.geocaching.connector.capability.SmileyCapability;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
@@ -65,6 +66,30 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
+    }
+
+    @Override
+    @Nullable
+    public String getCacheLogUrl(@NonNull final Geocache cache, final @NonNull LogEntry logEntry) {
+        final String internalId = getServiceSpecificLogId(logEntry.serviceLogId);
+        if (!StringUtils.isBlank(internalId)) {
+            return getCacheUrl(cache) + "&log=A#log" + internalId;
+        }
+        return null;
+    }
+
+    @Override
+    public String getServiceSpecificLogId(final String logId) {
+        //OC serviceLogId has format: 'log_uuid:internal_id', 'internal_id' may be missing
+        //the id usable in other contexts is the internal_id
+        if (StringUtils.isBlank(logId)) {
+            return null;
+        }
+        final int idx = logId.lastIndexOf(":");
+        if (idx >= 0) {
+            return logId.substring(idx + 1);
+        }
+        return null; //do not display uuid
     }
 
     @Override

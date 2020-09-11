@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
@@ -219,10 +220,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                 actionMode.finish();
                 return true;
             case R.id.menu_cache_share_field:
-                final Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
-                startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
+                ShareUtils.sharePlainText(this, clickedItemText.toString());
                 actionMode.finish();
                 return true;
             default:

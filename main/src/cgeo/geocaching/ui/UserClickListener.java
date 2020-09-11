@@ -6,8 +6,8 @@ import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.UserAction.UAContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
@@ -15,7 +15,6 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class UserClickListener implements View.OnClickListener {
@@ -52,17 +51,14 @@ public abstract class UserClickListener implements View.OnClickListener {
 
         final Resources res = context.getResources();
 
-        final ArrayList<String> labels = new ArrayList<>(userActions.size());
-        for (final UserAction action : userActions) {
-            labels.add(res.getString(action.displayResourceId));
-        }
-        final CharSequence[] items = labels.toArray(new String[labels.size()]);
+        final ContextMenuDialog dialog = new ContextMenuDialog(context);
+        dialog.setTitle(res.getString(R.string.user_menu_title) + " " + user.userName);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(res.getString(R.string.user_menu_title) + " " + user.userName);
-        builder.setItems(items, (dialog, item) -> userActions.get(item).run(user));
-        final AlertDialog alert = builder.create();
-        alert.show();
+        for (UserAction action : userActions) {
+            dialog.addItem(action.displayResourceId, action.iconId, null);
+        }
+        dialog.setOnClickListener((d, item) -> userActions.get(item).run(user));
+        dialog.show();
     }
 
     public static UserClickListener forOwnerOf(final Geocache cache) {
