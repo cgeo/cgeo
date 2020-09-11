@@ -59,7 +59,7 @@ public class CollectionStream<T> {
 
     /**
      * mimics {@link java.util.stream.Stream#map(Function)}
-     * Note that mapping is immediately executed and a new CollectionStream object is created as a result.
+     * Note that mapping is immediately executed .
      */
     public <U> CollectionStream<U> map(final Func1<T, U> mapper) {
         if (mapper != null) {
@@ -75,7 +75,7 @@ public class CollectionStream<T> {
 
     /**
      * mimics {@link java.util.stream.Stream#filter(Predicate)}
-     * Note that mapping is immediately executed and a new CollectionStream object is created as a result.
+     * Note that filtering is immediately executed.
      */
     public CollectionStream<T> filter(final Func1<T, Boolean> filter) {
         if (filter != null) {
@@ -87,6 +87,18 @@ public class CollectionStream<T> {
                     it.remove();
                 }
             }
+        }
+        return this;
+    }
+
+    /**
+     * mimics {@link java.util.stream.Stream#limit(long)}
+     * Note that limiting is immediately executed.
+     */
+    public CollectionStream<T> limit(final long maxSize) {
+        final LinkedList<Object> coll = getCollectionForWrite();
+        while (coll.size() > maxSize) {
+            coll.removeLast();
         }
         return this;
     }

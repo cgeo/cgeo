@@ -1,9 +1,12 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.utils.functions.Func1;
+
 import java.io.Closeable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 
 /**
  * Helper class to construct log messages. Optimized to log what is happening in a method,
@@ -35,6 +38,21 @@ public class ContextLogger implements Closeable {
         } else {
             this.contextString = null;
         }
+    }
+
+    public boolean isActive() {
+        return this.doLog;
+    }
+
+    public <T> String  toStringLimited(final Collection<T> collection, final int limit) {
+        return toStringLimited(collection, limit, o -> String.valueOf(o));
+    }
+
+    public <T> String  toStringLimited(final Collection<T> collection, final int limit, final Func1<T, String> mapper) {
+        if (collection == null || !isActive()) {
+            return "#-[]";
+        }
+        return "#" + collection.size() + "[" + CollectionStream.of(collection).limit(limit).map(c -> mapper.call(c)).toJoinedString(",") + "]";
     }
 
     public ContextLogger add(final String msg, final Object ... params) {

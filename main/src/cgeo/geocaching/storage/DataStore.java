@@ -1695,59 +1695,66 @@ public class DataStore {
         if (CollectionUtils.isEmpty(caches)) {
             return;
         }
-        final List<String> cachesFromDatabase = new ArrayList<>();
-        final Map<String, Geocache> existingCaches = new HashMap<>();
 
-        // first check which caches are in the memory cache
-        for (final Geocache cache : caches) {
-            final String geocode = cache.getGeocode();
-            final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
-            if (cacheFromCache == null) {
-                cachesFromDatabase.add(geocode);
-            } else {
-                existingCaches.put(geocode, cacheFromCache);
+        try (ContextLogger cLog = new ContextLogger("DataStore.saveCaches(#%d,flags:%s)", caches.size(), saveFlags)) {
+
+            cLog.add("gc" + cLog.toStringLimited(caches, 10, c -> c == null ? "-" : c.getGeocode()));
+
+            final List<String> cachesFromDatabase = new ArrayList<>();
+            final Map<String, Geocache> existingCaches = new HashMap<>();
+
+            // first check which caches are in the memory cache
+            for (final Geocache cache : caches) {
+                final String geocode = cache.getGeocode();
+                final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
+                if (cacheFromCache == null) {
+                    cachesFromDatabase.add(geocode);
+                } else {
+                    existingCaches.put(geocode, cacheFromCache);
+                }
+            }
+
+            // then load all remaining caches from the database in one step
+            for (final Geocache cacheFromDatabase : loadCaches(cachesFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
+                existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
+            }
+
+            final List<Geocache> toBeStored = new ArrayList<>();
+            final List<Geocache> toBeUpdated = new ArrayList<>();
+            // Merge with the data already stored in the CacheCache or in the database if
+            // the cache had not been loaded before, and update the CacheCache.
+            // Also, a DB update is required if the merge data comes from the CacheCache
+            // (as it may be more recent than the version in the database), or if the
+            // version coming from the database is different than the version we are entering
+            // into the cache (that includes absence from the database).
+            for (final Geocache cache : caches) {
+                final String geocode = cache.getGeocode();
+                final Geocache existingCache = existingCaches.get(geocode);
+                boolean dbUpdateRequired = !cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
+                // parse the note AFTER merging the local information in
+                dbUpdateRequired |= cache.addWaypointsFromNote();
+                cache.addStorageLocation(StorageLocation.CACHE);
+                cacheCache.putCacheInCache(cache);
+
+                // Only save the cache in the database if it is requested by the caller and
+                // the cache contains detailed information.
+                if (saveFlags.contains(SaveFlag.DB) && dbUpdateRequired) {
+                    toBeStored.add(cache);
+                } else if (existingCache != null && existingCache.isDisabled() != cache.isDisabled()) {
+                    // Update the disabled status in the database if it changed
+                    toBeUpdated.add(cache);
+                }
+            }
+
+            for (final Geocache geocache : toBeStored) {
+                storeIntoDatabase(geocache);
+            }
+
+            for (final Geocache geocache : toBeUpdated) {
+                updateDisabledStatus(geocache);
             }
         }
 
-        // then load all remaining caches from the database in one step
-        for (final Geocache cacheFromDatabase : loadCaches(cachesFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
-            existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
-        }
-
-        final List<Geocache> toBeStored = new ArrayList<>();
-        final List<Geocache> toBeUpdated = new ArrayList<>();
-        // Merge with the data already stored in the CacheCache or in the database if
-        // the cache had not been loaded before, and update the CacheCache.
-        // Also, a DB update is required if the merge data comes from the CacheCache
-        // (as it may be more recent than the version in the database), or if the
-        // version coming from the database is different than the version we are entering
-        // into the cache (that includes absence from the database).
-        for (final Geocache cache : caches) {
-            final String geocode = cache.getGeocode();
-            final Geocache existingCache = existingCaches.get(geocode);
-            boolean dbUpdateRequired = !cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
-            // parse the note AFTER merging the local information in
-            dbUpdateRequired |= cache.addWaypointsFromNote();
-            cache.addStorageLocation(StorageLocation.CACHE);
-            cacheCache.putCacheInCache(cache);
-
-            // Only save the cache in the database if it is requested by the caller and
-            // the cache contains detailed information.
-            if (saveFlags.contains(SaveFlag.DB) && dbUpdateRequired) {
-                toBeStored.add(cache);
-            } else if (existingCache != null && existingCache.isDisabled() != cache.isDisabled()) {
-                // Update the disabled status in the database if it changed
-                toBeUpdated.add(cache);
-            }
-        }
-
-        for (final Geocache geocache : toBeStored) {
-            storeIntoDatabase(geocache);
-        }
-
-        for (final Geocache geocache : toBeUpdated) {
-            updateDisabledStatus(geocache);
-        }
     }
 
     private static boolean updateDisabledStatus(final Geocache cache) {
@@ -2093,34 +2100,41 @@ public class DataStore {
     }
 
     private static void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs) {
-        if (!logs.iterator().hasNext()) {
-            return;
-        }
-        // TODO delete logimages referring these logs
-        database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
+        try (ContextLogger cLog = new ContextLogger("DataStore.saveLogsWithoutTransaction(%s)", geocode)) {
+            if (!logs.iterator().hasNext()) {
+                return;
+            }
+            // TODO delete logimages referring these logs
+            database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
-        final SQLiteStatement insertLog = PreparedStatement.INSERT_LOG.getStatement();
-        final long timestamp = System.currentTimeMillis();
-        for (final LogEntry log : logs) {
-            insertLog.bindString(1, geocode);
-            insertLog.bindLong(2, timestamp);
-            insertLog.bindLong(3, log.getType().id);
-            insertLog.bindString(4, log.author);
-            insertLog.bindString(5, log.log);
-            insertLog.bindLong(6, log.date);
-            insertLog.bindLong(7, log.found);
-            insertLog.bindLong(8, log.friend ? 1 : 0);
-            final long logId = insertLog.executeInsert();
-            if (log.hasLogImages()) {
-                final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
-                for (final Image img : log.getLogImages()) {
-                    insertImage.bindLong(1, logId);
-                    insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
-                    insertImage.bindString(3, img.getUrl());
-                    insertImage.bindString(4, StringUtils.defaultIfBlank(img.getDescription(), ""));
-                    insertImage.executeInsert();
+            final SQLiteStatement insertLog = PreparedStatement.INSERT_LOG.getStatement();
+            final long timestamp = System.currentTimeMillis();
+            int logCnt = 0;
+            int imgCnt = 0;
+            for (final LogEntry log : logs) {
+                logCnt++;
+                insertLog.bindString(1, geocode);
+                insertLog.bindLong(2, timestamp);
+                insertLog.bindLong(3, log.getType().id);
+                insertLog.bindString(4, log.author);
+                insertLog.bindString(5, log.log);
+                insertLog.bindLong(6, log.date);
+                insertLog.bindLong(7, log.found);
+                insertLog.bindLong(8, log.friend ? 1 : 0);
+                final long logId = insertLog.executeInsert();
+                if (log.hasLogImages()) {
+                    final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
+                    for (final Image img : log.getLogImages()) {
+                        imgCnt++;
+                        insertImage.bindLong(1, logId);
+                        insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
+                        insertImage.bindString(3, img.getUrl());
+                        insertImage.bindString(4, StringUtils.defaultIfBlank(img.getDescription(), ""));
+                        insertImage.executeInsert();
+                    }
                 }
             }
+            cLog.add("logs:%d, imgs:%d", logCnt, imgCnt);
         }
     }
 
@@ -2301,84 +2315,92 @@ public class DataStore {
      */
     @NonNull
     private static Set<Geocache> loadCachesFromGeocodes(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
+
         if (CollectionUtils.isEmpty(geocodes)) {
             return Collections.emptySet();
         }
 
-        // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
-        init();
+        try (ContextLogger cLog = new ContextLogger("DataStore.loadCachesFromGeoCodes(#%d)", geocodes.size())) {
+            cLog.add("flags:%s", loadFlags);
 
-        final StringBuilder query = new StringBuilder(QUERY_CACHE_DATA);
-        if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
-            query.append(',').append(dbTableLogsOffline).append(".log");
-        }
+            // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
+            cLog.add("gc" + cLog.toStringLimited(geocodes, 10));
 
-        query.append(" FROM ").append(dbTableCaches);
-        if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
-            query.append(" LEFT OUTER JOIN ").append(dbTableLogsOffline).append(" ON ( ").append(dbTableCaches).append(".geocode == ").append(dbTableLogsOffline).append(".geocode) ");
-        }
+            init();
 
-        query.append(" WHERE ").append(dbTableCaches).append('.');
-        query.append(whereGeocodeIn(geocodes));
-
-        try (Cursor cursor = database.rawQuery(query.toString(), null)) {
-            final Set<Geocache> caches = new HashSet<>();
-            int logIndex = -1;
-
-            while (cursor.moveToNext()) {
-                final Geocache cache = createCacheFromDatabaseContent(cursor);
-
-                if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
-                    cache.setAttributes(loadAttributes(cache.getGeocode()));
-                }
-
-                if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
-                    final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
-                    if (CollectionUtils.isNotEmpty(waypoints)) {
-                        cache.setWaypoints(waypoints, false);
-                    }
-                }
-
-                if (loadFlags.contains(LoadFlag.SPOILERS)) {
-                    final List<Image> spoilers = loadSpoilers(cache.getGeocode());
-                    cache.setSpoilers(spoilers);
-                }
-
-                if (loadFlags.contains(LoadFlag.LOGS)) {
-                    final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
-                    if (MapUtils.isNotEmpty(logCounts)) {
-                        cache.getLogCounts().clear();
-                        cache.getLogCounts().putAll(logCounts);
-                    }
-                }
-
-                if (loadFlags.contains(LoadFlag.INVENTORY)) {
-                    final List<Trackable> inventory = loadInventory(cache.getGeocode());
-                    if (CollectionUtils.isNotEmpty(inventory)) {
-                        cache.setInventory(inventory);
-                    }
-                }
-
-                if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
-                    if (logIndex < 0) {
-                        logIndex = cursor.getColumnIndex("log");
-                    }
-                    cache.setHasLogOffline(!cursor.isNull(logIndex));
-                }
-                cache.addStorageLocation(StorageLocation.DATABASE);
-                cacheCache.putCacheInCache(cache);
-
-                caches.add(cache);
+            final StringBuilder query = new StringBuilder(QUERY_CACHE_DATA);
+            if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
+                query.append(',').append(dbTableLogsOffline).append(".log");
             }
 
-            final Map<String, Set<Integer>> cacheLists = loadLists(geocodes);
-            for (final Geocache geocache : caches) {
-                final Set<Integer> listIds = cacheLists.get(geocache.getGeocode());
-                if (listIds != null) {
-                    geocache.setLists(listIds);
-                }
+            query.append(" FROM ").append(dbTableCaches);
+            if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
+                query.append(" LEFT OUTER JOIN ").append(dbTableLogsOffline).append(" ON ( ").append(dbTableCaches).append(".geocode == ").append(dbTableLogsOffline).append(".geocode) ");
             }
-            return caches;
+
+            query.append(" WHERE ").append(dbTableCaches).append('.');
+            query.append(whereGeocodeIn(geocodes));
+
+            try (Cursor cursor = database.rawQuery(query.toString(), null)) {
+                final Set<Geocache> caches = new HashSet<>();
+                int logIndex = -1;
+
+                while (cursor.moveToNext()) {
+                    final Geocache cache = createCacheFromDatabaseContent(cursor);
+
+                    if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
+                        cache.setAttributes(loadAttributes(cache.getGeocode()));
+                    }
+
+                    if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
+                        final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(waypoints)) {
+                            cache.setWaypoints(waypoints, false);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.SPOILERS)) {
+                        final List<Image> spoilers = loadSpoilers(cache.getGeocode());
+                        cache.setSpoilers(spoilers);
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOGS)) {
+                        final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
+                        if (MapUtils.isNotEmpty(logCounts)) {
+                            cache.getLogCounts().clear();
+                            cache.getLogCounts().putAll(logCounts);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.INVENTORY)) {
+                        final List<Trackable> inventory = loadInventory(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(inventory)) {
+                            cache.setInventory(inventory);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
+                        if (logIndex < 0) {
+                            logIndex = cursor.getColumnIndex("log");
+                        }
+                        cache.setHasLogOffline(!cursor.isNull(logIndex));
+                    }
+                    cache.addStorageLocation(StorageLocation.DATABASE);
+                    cacheCache.putCacheInCache(cache);
+
+                    caches.add(cache);
+                }
+
+                final Map<String, Set<Integer>> cacheLists = loadLists(geocodes);
+                for (final Geocache geocache : caches) {
+                    final Set<Integer> listIds = cacheLists.get(geocache.getGeocode());
+                    if (listIds != null) {
+                        geocache.setLists(listIds);
+                    }
+                }
+                cLog.addReturnValue("#" + caches.size());
+                return caches;
+            }
         }
     }
 
@@ -2776,50 +2798,56 @@ public class DataStore {
      */
     @NonNull
     public static List<LogEntry> loadLogs(final String geocode) {
-        final List<LogEntry> logs = new ArrayList<>();
+        try (ContextLogger cLog = new ContextLogger("DataStore.loadLogs(%s)", geocode)) {
+            final List<LogEntry> logs = new ArrayList<>();
 
-        if (StringUtils.isBlank(geocode)) {
-            return logs;
-        }
+            if (StringUtils.isBlank(geocode)) {
+                return logs;
+            }
 
-        init();
+            init();
 
-        final Cursor cursor = database.rawQuery(
-                //                           0       1      2      3    4      5      6                                                7       8      9     10     11
-                "SELECT cg_logs._id AS cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
-                        + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
-                        + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
+            final Cursor cursor = database.rawQuery(
+                    //                           0       1      2      3    4      5      6                                                7       8      9     10     11
+                    "SELECT cg_logs._id AS cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
+                            + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
+                            + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
 
-        LogEntry.Builder log = null;
-        while (cursor.moveToNext() && logs.size() < 100) {
-            if (log == null || log.getId() != cursor.getInt(0)) {
-                // Start of a new log entry group (we may have several entries if the log has several images).
-                if (log != null) {
-                    logs.add(log.build());
-                }
-                log = new LogEntry.Builder()
-                        .setAuthor(cursor.getString(2))
-                        .setDate(cursor.getLong(4))
-                        .setLogType(LogType.getById(cursor.getInt(1)))
-                        .setLog(cursor.getString(3))
-                        .setId(cursor.getInt(0))
-                        .setFound(cursor.getInt(5))
-                        .setFriend(cursor.getInt(6) == 1);
-                if (!cursor.isNull(7)) {
+            LogEntry.Builder log = null;
+            int cnt = 0;
+            while (cursor.moveToNext() && logs.size() < 100) {
+                cnt ++;
+                if (log == null || log.getId() != cursor.getInt(0)) {
+                    // Start of a new log entry group (we may have several entries if the log has several images).
+                    if (log != null) {
+                        logs.add(log.build());
+                    }
+                    log = new LogEntry.Builder()
+                            .setAuthor(cursor.getString(2))
+                            .setDate(cursor.getLong(4))
+                            .setLogType(LogType.getById(cursor.getInt(1)))
+                            .setLog(cursor.getString(3))
+                            .setId(cursor.getInt(0))
+                            .setFound(cursor.getInt(5))
+                            .setFriend(cursor.getInt(6) == 1);
+                    if (!cursor.isNull(7)) {
+                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
+                    }
+                } else {
+                    // We cannot get several lines for the same log entry if it does not contain an image.
                     log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
                 }
-            } else {
-                // We cannot get several lines for the same log entry if it does not contain an image.
-                log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
             }
-        }
-        if (log != null) {
-            logs.add(log.build());
-        }
+            if (log != null) {
+                logs.add(log.build());
+            }
 
-        cursor.close();
+            cursor.close();
 
-        return Collections.unmodifiableList(logs);
+            cLog.add("l:%d,#:%d", cnt, logs.size());
+
+            return Collections.unmodifiableList(logs);
+        }
     }
 
     @Nullable
@@ -3133,42 +3161,51 @@ public class DataStore {
      */
     @NonNull
     private static SearchResult loadInViewport(final boolean stored, final Viewport viewport, final CacheType cacheType) {
-        final Set<String> geocodes = new HashSet<>();
+        try (ContextLogger cLog = new ContextLogger("DataStore.loadInViewport()")) {
+            cLog.add("stored=%b,vp=%s,ct=%s", stored, viewport, cacheType);
 
-        // if not stored only, get codes from CacheCache as well
-        if (!stored) {
-            geocodes.addAll(cacheCache.getInViewport(viewport, cacheType));
+            final Set<String> geocodes = new HashSet<>();
+
+            // if not stored only, get codes from CacheCache as well
+            if (!stored) {
+                geocodes.addAll(cacheCache.getInViewport(viewport, cacheType));
+            }
+
+            // viewport limitation
+            final StringBuilder selection = buildCoordinateWhere(dbTableCaches, viewport);
+
+            // cacheType limitation
+            String[] selectionArgs = null;
+            if (cacheType != CacheType.ALL) {
+                selection.append(" AND type = ?");
+                selectionArgs = new String[] { String.valueOf(cacheType.id) };
+            }
+
+            // offline caches only
+            if (stored) {
+                selection.append(" AND geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID + ")");
+            }
+
+            cLog.add("gc" + cLog.toStringLimited(geocodes, 10));
+
+            try {
+                final SearchResult sr = new SearchResult(queryToColl(dbTableCaches,
+                        new String[]{"geocode"},
+                        selection.toString(),
+                        selectionArgs,
+                        null,
+                        "500",
+                        geocodes,
+                        GET_STRING_0));
+                cLog.addReturnValue(sr.getCount());
+                return sr;
+
+            } catch (final Exception e) {
+                Log.e("DataStore.loadInViewport", e);
+            }
+
+            return new SearchResult();
         }
-
-        // viewport limitation
-        final StringBuilder selection = buildCoordinateWhere(dbTableCaches, viewport);
-
-        // cacheType limitation
-        String[] selectionArgs = null;
-        if (cacheType != CacheType.ALL) {
-            selection.append(" AND type = ?");
-            selectionArgs = new String[] { String.valueOf(cacheType.id) };
-        }
-
-        // offline caches only
-        if (stored) {
-            selection.append(" AND geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID + ")");
-        }
-
-        try {
-            return new SearchResult(queryToColl(dbTableCaches,
-                    new String[]{"geocode"},
-                    selection.toString(),
-                    selectionArgs,
-                    null,
-                    "500",
-                    geocodes,
-                    GET_STRING_0));
-        } catch (final Exception e) {
-            Log.e("DataStore.loadInViewport", e);
-        }
-
-        return new SearchResult();
     }
 
     /**
