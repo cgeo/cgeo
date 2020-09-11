@@ -256,6 +256,7 @@
     <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
     <string name="info_stored_image">새로운 사진 저장 위치 :</string>
     <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
+    <string name="info_feature_offline_counter">아직 업로드되지 않은 오프라인 로그가 있습니다. 따라서 카운터 (예: \"+ 1\")가 표시됩니다. 카운터가 마음에 들지 않으면 설정 &gt; 로깅에서 비활성화 할 수 있습니다.\n\n남아있는 오프라인 로그를 쉽게 찾으려면 \"역사 목록\"으로 이동하여 \"개인 데이터 사용\" &gt; \"오프라인 로그 사용\"으로 필터링하십시오.</string>
     <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
     <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
     <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>
@@ -264,6 +265,8 @@
     <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
     <string name="more_information">자세한 정보 보기</string>
+    <string name="remind_later">나중에 다시 보기</string>
+    <string name="undo">실행취소</string>
     <string name="warn_gm_not_available">구글 지도를 사용할 수 없습니다.</string>
     <string name="switch_to_mf">구글 프레이 서비스가 오래되었습니다. 대신 Mapsforge 지도 제공자로 전환 하시겠습니까?</string>
     <string name="switched_to_mf">기본 지도가 Mapsforge 지도 제공자로 전환되었습니다. 지금지도를 다시 시작하세요.</string>
