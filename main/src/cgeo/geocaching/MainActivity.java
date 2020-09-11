@@ -274,6 +274,8 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        // apply theme without launcher background image
+        setTheme(R.style.cgeo_main);
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 

@@ -28,6 +28,10 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="cgeo_main.Launcher">
+        <item name="android:windowBackground">@drawable/launcher_background</item>
+    </style>
+
     <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.ProgressBar">
         <item name="android:minWidth">32dip</item>
         <item name="android:maxWidth">32dip</item>

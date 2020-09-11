@@ -99,7 +99,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/cgeo_main"
+            android:theme="@style/cgeo_main.Launcher"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
