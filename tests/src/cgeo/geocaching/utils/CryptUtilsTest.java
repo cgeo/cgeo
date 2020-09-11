@@ -1,7 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.connector.gc.GCConstants;
-
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -14,13 +12,6 @@ public class CryptUtilsTest {
         assertThat(CryptUtils.rot13("Cache [plain] hint")).isEqualTo("Pnpur [plain] uvag");
         assertThat(CryptUtils.rot13("[all plain]")).isEqualTo("[all plain]");
         assertThat(CryptUtils.rot13("123")).isEqualTo("123");
-    }
-
-    @Test
-    public void testConvertToGcBase31() {
-        assertThat(GCConstants.gccodeToGCId("GC1PKK9")).isEqualTo(1186660);
-        assertThat(GCConstants.gccodeToGCId("GC1234")).isEqualTo(4660);
-        assertThat(GCConstants.gccodeToGCId("GCF123")).isEqualTo(61731);
     }
 
     @Test

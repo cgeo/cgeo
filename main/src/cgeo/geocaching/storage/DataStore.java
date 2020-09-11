@@ -196,7 +196,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 86;
+    private static final int dbVersion = 87;
     public static final int customListIdOffset = 10;
 
     /**
@@ -218,7 +218,8 @@ public class DataStore {
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
             85, //adds offline logging columns/tables
-            86 // (re)create indices on c_logs and c_logImages
+            86, // (re)create indices on c_logs and c_logImages
+            87  //adds service log id to logging tables
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -339,6 +340,7 @@ public class DataStore {
             + "CREATE TABLE " + dbTableLogs + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
+            + "service_log_id TEXT," //added with db version 86
             + "updated LONG NOT NULL, " // date of save
             + "type INTEGER NOT NULL DEFAULT 4, "
             + "author TEXT, "
@@ -369,6 +371,7 @@ public class DataStore {
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
+            + "service_log_id TEXT," //added with db version 86
             + "type INTEGER NOT NULL DEFAULT 4, "
             + "log TEXT, "
             + "date LONG, "
@@ -1325,6 +1328,18 @@ public class DataStore {
                         db.execSQL("DROP INDEX in_logs_geo");
                         createIndices(db);
                     }
+
+                    //add service log id
+                    if (oldVersion < 87) {
+                        try {
+                            //add new columns
+                            createColumnIfNotExists(db, dbTableLogsOffline, "service_log_id TEXT");
+                            createColumnIfNotExists(db, dbTableLogs, "service_log_id TEXT");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 86);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1349,6 +1364,7 @@ public class DataStore {
 
         @Override
         public void onOpen(final SQLiteDatabase db) {
+
             //get user version
             Log.iForce("[DB] Current Database Version: " + db.getVersion());
 
@@ -2124,12 +2140,17 @@ public class DataStore {
                 logCnt++;
                 insertLog.bindString(1, geocode);
                 insertLog.bindLong(2, timestamp);
-                insertLog.bindLong(3, log.getType().id);
-                insertLog.bindString(4, log.author);
-                insertLog.bindString(5, log.log);
-                insertLog.bindLong(6, log.date);
-                insertLog.bindLong(7, log.found);
-                insertLog.bindLong(8, log.friend ? 1 : 0);
+                if (log.serviceLogId == null) {
+                    insertLog.bindNull(3);
+                } else {
+                    insertLog.bindString(3, log.serviceLogId);
+                }
+                insertLog.bindLong(4, log.logType.id);
+                insertLog.bindString(5, log.author);
+                insertLog.bindString(6, log.log);
+                insertLog.bindLong(7, log.date);
+                insertLog.bindLong(8, log.found);
+                insertLog.bindLong(9, log.friend ? 1 : 0);
                 final long logId = insertLog.executeInsert();
                 if (log.hasLogImages()) {
                     final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
@@ -2815,8 +2836,8 @@ public class DataStore {
             init();
 
             final Cursor cursor = database.rawQuery(
-                    //                           0       1      2      3    4      5      6                                                7       8      9     10     11
-                    "SELECT cg_logs._id AS cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
+                //                           0          1           2     3        4    5     6      7                                                8      9        10    11    12
+                "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
                             + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                             + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
 
@@ -2830,19 +2851,20 @@ public class DataStore {
                         logs.add(log.build());
                     }
                     log = new LogEntry.Builder()
-                            .setAuthor(cursor.getString(2))
-                            .setDate(cursor.getLong(4))
-                            .setLogType(LogType.getById(cursor.getInt(1)))
-                            .setLog(cursor.getString(3))
                             .setId(cursor.getInt(0))
-                            .setFound(cursor.getInt(5))
-                            .setFriend(cursor.getInt(6) == 1);
-                    if (!cursor.isNull(7)) {
-                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
+                            .setServiceLogId(cursor.getString(1))
+                            .setLogType(LogType.getById(cursor.getInt(2)))
+                            .setAuthor(cursor.getString(3))
+                            .setLog(cursor.getString(4))
+                            .setDate(cursor.getLong(5))
+                            .setFound(cursor.getInt(6))
+                            .setFriend(cursor.getInt(7) == 1);
+                    if (!cursor.isNull(8)) {
+                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(11)).setTitle(cursor.getString(10)).setDescription(cursor.getString(12)).build());
                     }
                 } else {
                     // We cannot get several lines for the same log entry if it does not contain an image.
-                    log.addLogImage(new Image.Builder().setUrl(cursor.getString(10)).setTitle(cursor.getString(9)).setDescription(cursor.getString(11)).build());
+                  log.addLogImage(new Image.Builder().setUrl(cursor.getString(11)).setTitle(cursor.getString(10)).setDescription(cursor.getString(12)).build());
                 }
             }
             if (log != null) {
@@ -3958,7 +3980,7 @@ public class DataStore {
         OFFLINE_LOG_ID_OF_GEOCODE("SELECT _id FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
-        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
+        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"),
         INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
         ADD_TO_LIST("INSERT OR REPLACE INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (?, ?)"),
         GEOCODE_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.geocode = ? AND c.geocode = l.geocode AND c.detailed = 1 AND l.list_id != " + StoredList.TEMPORARY_LIST.id),
@@ -4307,6 +4329,7 @@ public class DataStore {
                     final ContentValues values = new ContentValues();
                     values.put("geocode", geocode);
                     values.put("updated", System.currentTimeMillis());
+                    values.put("service_log_id", logEntry.serviceLogId);
                     values.put("type", logEntry.logType.id);
                     values.put("log", logEntry.log);
                     values.put("date", logEntry.date);
@@ -4387,22 +4410,23 @@ public class DataStore {
                 init();
 
                 final DBQuery query = new DBQuery.Builder().setTable(dbTableLogsOffline)
-                        .setColumns(new String[]{"_id", "geocode", "date", "type", "log", "report_problem", "image_title_prefix", "image_scale", "favorite", "tweet", "rating", "password"})
+                        .setColumns(new String[]{"_id", "geocode", "date", "service_log_id", "type", "log", "report_problem", "image_title_prefix", "image_scale", "favorite", "tweet", "rating", "password"})
                         .setWhereClause("geocode = ?").setWhereArgs(new String[]{geocode}).build();
                 final OfflineLogEntry.Builder<?> logBuilder = query.selectFirstRow(database,
                         c -> new OfflineLogEntry.Builder<>()
                                 .setId(c.getInt(0))
                                 .setCacheGeocode(c.getString(1))
                                 .setDate(c.getLong(2))
-                                .setLogType(LogType.getById(c.getInt(3)))
-                                .setLog(c.getString(4))
-                                .setReportProblem(ReportProblemType.findByCode(c.getString(5)))
-                                .setImageTitlePraefix(c.getString(6))
-                                .setImageScale(c.getInt(7))
-                                .setFavorite(c.getInt(8) > 0)
-                                .setTweet(c.getInt(9) > 0)
-                                .setRating(c.isNull(10) ? null : c.getFloat(10))
-                                .setPassword(c.getString(11))
+                                .setServiceLogId(c.getString(3))
+                                .setLogType(LogType.getById(c.getInt(4)))
+                                .setLog(c.getString(5))
+                                .setReportProblem(ReportProblemType.findByCode(c.getString(6)))
+                                .setImageTitlePraefix(c.getString(7))
+                                .setImageScale(c.getInt(8))
+                                .setFavorite(c.getInt(9) > 0)
+                                .setTweet(c.getInt(10) > 0)
+                                .setRating(c.isNull(11) ? null : c.getFloat(11))
+                                .setPassword(c.getString(12))
                 );
 
                 if (logBuilder == null) {

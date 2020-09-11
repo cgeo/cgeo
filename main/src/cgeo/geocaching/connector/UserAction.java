@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
@@ -15,6 +16,7 @@ import java.lang.ref.WeakReference;
 public class UserAction {
 
     @StringRes public final int displayResourceId;
+    @DrawableRes public final int iconId;
     @NonNull private final Action1<UAContext> runnable;
 
     public static class UAContext {
@@ -50,7 +52,12 @@ public class UserAction {
     }
 
     public UserAction(@StringRes final int displayResourceId, @NonNull final Action1<UAContext> runnable) {
+        this(displayResourceId, 0, runnable);
+    }
+
+    public UserAction(@StringRes final int displayResourceId, @DrawableRes final int iconId, @NonNull final Action1<UAContext> runnable) {
         this.displayResourceId = displayResourceId;
+        this.iconId = iconId;
         this.runnable = runnable;
     }
 

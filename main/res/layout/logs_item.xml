@@ -40,6 +40,7 @@
                 <TextView
                     android:id="@+id/count_or_location"
                     style="@style/logitem_property"/>
+
             </LinearLayout>
 
             <ImageView

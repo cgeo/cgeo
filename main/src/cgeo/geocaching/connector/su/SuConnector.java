@@ -23,6 +23,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -143,6 +144,15 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + "&cid=" + cache.getCacheId();
     }
+
+    @Override
+    public String getCacheLogUrl(@NonNull final Geocache cache, @NonNull final LogEntry logEntry) {
+        if (!StringUtils.isBlank(logEntry.serviceLogId)) {
+            return getCacheUrl(cache) + "#p" + logEntry.serviceLogId;
+        }
+        return null;
+    }
+
 
     @Override
     @NonNull

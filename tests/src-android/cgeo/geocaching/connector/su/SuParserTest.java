@@ -224,6 +224,11 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getLogs().get(0).author).isEqualTo("LE");
     }
 
+    public void testCanParseLogServiceLogId() throws Exception {
+        parseCache(cacheJson);
+        assertThat(cache.getLogs().get(0).serviceLogId).isEqualTo("407324");
+    }
+
     public void testCanParseLogText() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(0).log).contains("Рыть глубоко");

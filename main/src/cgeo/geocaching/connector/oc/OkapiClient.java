@@ -84,7 +84,7 @@ final class OkapiClient {
     private static final String PARAMETER_LOGCOUNT_VALUE = "all";
 
     private static final String PARAMETER_LOG_FIELDS_KEY = "log_fields";
-    private static final String PARAMETER_LOG_FIELDS_VALUE = "uuid|date|user|type|comment|images";
+    private static final String PARAMETER_LOG_FIELDS_VALUE = "uuid|date|user|type|comment|images|internal_id";
 
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
@@ -135,11 +135,13 @@ final class OkapiClient {
     private static final String TRK_GEOCODE = "code";
     private static final String TRK_NAME = "name";
 
+    private static final String LOG_UUID = "uuid";
     private static final String LOG_TYPE = "type";
     private static final String LOG_COMMENT = "comment";
     private static final String LOG_DATE = "date";
     private static final String LOG_USER = "user";
     private static final String LOG_IMAGES = "images";
+    private static final String LOG_INTERNAL_ID = "internal_id";
 
     private static final String USER_UUID = "uuid";
     private static final String USER_USERNAME = "username";
@@ -342,6 +344,7 @@ final class OkapiClient {
 
         try {
             if (data.get("success").asBoolean()) {
+                //unfortunately we only have the uuid here (not the internal id)
                 return new LogResult(StatusCode.NO_ERROR, data.get("log_uuid").asText());
             }
 
@@ -596,6 +599,7 @@ final class OkapiClient {
                     continue;
                 }
                 final LogEntry log = new LogEntry.Builder()
+                        .setServiceLogId(logResponse.get(LOG_UUID).asText().trim() + ":" + logResponse.get(LOG_INTERNAL_ID).asText().trim())
                         .setAuthor(parseUser(logResponse.get(LOG_USER)))
                         .setDate(date.getTime())
                         .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))

@@ -42,6 +42,8 @@ public class LogEntry implements Parcelable {
 
     /** Log id */
     public final int id;
+    /** service-specific log id (only filled if log was loaded from a service) */
+    public final String serviceLogId;
     /** The {@link LogType} */
     @NonNull public final LogType logType;
     /** The author */
@@ -76,6 +78,7 @@ public class LogEntry implements Parcelable {
 
     protected LogEntry(final Parcel in) {
         id = in.readInt();
+        serviceLogId = in.readString();
         logType = (LogType) in.readSerializable();
         author = in.readString();
         log = in.readString();
@@ -93,6 +96,7 @@ public class LogEntry implements Parcelable {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeInt(id);
+        dest.writeString(serviceLogId);
         dest.writeSerializable(logType);
         dest.writeString(author);
         dest.writeString(log);
@@ -129,6 +133,7 @@ public class LogEntry implements Parcelable {
     public static class Builder<T extends Builder<T>> {
         // see {@link LogEntry} for explanation of these properties
         protected int id = 0;
+        protected String serviceLogId = null;
         @NonNull
         protected LogType logType = LogType.UNKNOWN;
         @NonNull protected String author = "";
@@ -159,6 +164,11 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setId(final int id) {
             this.id = id;
+            return (T) this;
+        }
+
+        public T setServiceLogId(final String serviceLogId) {
+            this.serviceLogId = serviceLogId;
             return (T) this;
         }
 
@@ -314,6 +324,7 @@ public class LogEntry implements Parcelable {
      */
     protected LogEntry(final Builder builder) {
         this.id = builder.id;
+        this.serviceLogId = builder.serviceLogId;
         this.logType = builder.logType;
         this.author = StringUtils.defaultIfBlank(builder.author, Settings.getUserName());
         this.log = builder.log;
@@ -335,6 +346,7 @@ public class LogEntry implements Parcelable {
     public Builder buildUpon() {
         return new Builder()
                 .setId(id)
+                .setServiceLogId(serviceLogId)
                 .setLogType(logType)
                 .setAuthor(author)
                 .setLog(log)

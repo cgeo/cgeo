@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.UserClickListener;
+import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 
 import android.content.res.Resources;
 import android.view.View;
@@ -93,6 +94,25 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
+    protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
+        if (getCache().canShareLog(log)) {
+            ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> getCache().shareLog(cacheDetailActivity, log));
+            ctxMenu.addItem(cacheDetailActivity.getString(R.string.cache_menu_browser),
+                    R.drawable.ic_menu_info_details, it -> getCache().openLogInBrowser(cacheDetailActivity, log));
+        }
+        if (isOfflineLog(log)) {
+            ctxMenu.addItem(R.string.cache_personal_note_edit, R.drawable.ic_menu_edit, it -> new EditOfflineLogListener(getCache(), cacheDetailActivity).onClick(null));
+        }
+        return ctxMenu;
+    }
+
+    @Override
+    protected String getServiceSpecificLogId(final LogEntry log) {
+        return getCache().getServiceSpecificLogId(log);
+    }
+
+
+    @Override
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         // finds count
         if (log.found == -1) {
@@ -108,7 +128,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         super.fillViewHolder(convertView, holder, log);
         if (isOfflineLog(log)) {
             holder.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
-            holder.text.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
             holder.marker.setVisibility(View.VISIBLE);
             holder.marker.setImageResource(R.drawable.mark_orange);
         }

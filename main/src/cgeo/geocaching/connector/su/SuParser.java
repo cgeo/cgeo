@@ -73,6 +73,7 @@ public class SuParser {
     private static final String CACHE_FOUNDS = "founds";
 
     private static final String CACHE_LATEST_LOGS = "logs";
+    private static final String LOG_ID = "id";
     private static final String LOG_TYPE = "type";
     private static final String LOG_COMMENT = "text";
     private static final String LOG_DATE = "date";
@@ -260,6 +261,7 @@ public class SuParser {
             final boolean isOwnLog = logResponse.has(LOG_OWN) && logResponse.get(LOG_OWN).asInt() == 1;
 
             final LogEntry log = new LogEntry.Builder()
+                    .setServiceLogId(logResponse.get(LOG_ID).asText().trim())
                     .setAuthor(parseUser(logResponse.get(LOG_USER)))
                     .setDate(date.getTime())
                     .setLogType(parseLogType(logResponse.get(LOG_TYPE).asText()))

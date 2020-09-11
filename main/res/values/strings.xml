@@ -1026,6 +1026,8 @@
     <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Search challenge checker</string>
     <string name="cache_menu_ignore">Ignore cache</string>
+    <string name="cache_log_menu_decrypt">Decrypt/Encrypt</string>
+    <string name="cache_log_menu_title">Log %s of %s</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
     <string name="cache_status">Status</string>
@@ -1086,10 +1088,16 @@
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listed on %s</string>
 
+
+
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
     <string name="cache_chirpwolf_start">Open Chirp Wolf to read the chirp data for this cache</string>
     <string name="cache_chirpwolf_install">Install Chirp Wolf to be able to read chirp data</string>
+
+    <string name="context_share_as_text">Share text</string>
+    <string name="context_share_as_link">Share link</string>
+
 
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="internal_cache_default_name">User defined cache #%1$d</string>

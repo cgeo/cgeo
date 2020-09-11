@@ -200,4 +200,27 @@ public class TextUtilsTest extends TestCase {
         assertThat(TextUtils.replaceAll("before <@@@@@> middle </@@@@@> after", "<@@@@@>", "</@@@@@>", "")).isEqualTo("before  after");
 
     }
+
+    public static void testShortenText() {
+        //normal cases
+        assertThat(TextUtils.shortenText("1234567890", 9, 1)).isEqualTo("123456...");
+        assertThat(TextUtils.shortenText("1234567890", 9, 0)).isEqualTo("...567890");
+        assertThat(TextUtils.shortenText("1234567890", 9, 0.5f)).isEqualTo("123...890");
+
+        //out-of-bound-distributions
+        assertThat(TextUtils.shortenText("1234567890", 9, 10)).isEqualTo("123456...");
+        assertThat(TextUtils.shortenText("1234567890", 9, -5)).isEqualTo("...567890");
+
+        //corner cases
+        assertThat(TextUtils.shortenText("1234567890", 10, 1)).isEqualTo("1234567890");
+        assertThat(TextUtils.shortenText("1234567890", 11, 1)).isEqualTo("1234567890");
+        assertThat(TextUtils.shortenText("1234567890", 2, 1)).isEqualTo("12");
+        assertThat(TextUtils.shortenText("1234567890", 0, 1)).isEqualTo("");
+
+        //robustness
+        assertThat(TextUtils.shortenText(null, 5, 1)).isEqualTo("");
+        assertThat(TextUtils.shortenText("", 5, 1)).isEqualTo("");
+        assertThat(TextUtils.shortenText("", -5, 1)).isEqualTo("");
+
+    }
 }

@@ -29,6 +29,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
@@ -151,6 +152,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
         return CACHE_URL_SHORT + cache.getGeocode();
+    }
+
+    @Override
+    public String getCacheLogUrl(@NonNull final Geocache cache, @NonNull final LogEntry logEntry) {
+        if (!StringUtils.isBlank(logEntry.serviceLogId)) {
+            return CACHE_URL_SHORT + logEntry.serviceLogId;
+        }
+        return null;
     }
 
     @Override
@@ -495,8 +504,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public List<UserAction> getUserActions(final UserAction.UAContext user) {
         final List<UserAction> actions = super.getUserActions(user);
-        actions.add(new UserAction(R.string.user_menu_open_browser, context -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userName))))));
-        actions.add(new UserAction(R.string.user_menu_send_message, context -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))))));
+        actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userName))))));
+        actions.add(new UserAction(R.string.user_menu_send_message, R.drawable.ic_menu_email, context -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.geocaching.com/email/?u=" + Network.encode(context.userName))))));
         return actions;
     }
 

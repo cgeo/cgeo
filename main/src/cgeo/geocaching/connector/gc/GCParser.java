@@ -1638,7 +1638,9 @@ public final class GCParser {
                     // display them at all.
                     final String latLon = entry.path("LatLonString").asText();
                     final String logText = (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.path("LogText").asText());
+                    final String logCode = GCUtils.logIdToLogCode(entry.path("LogID").asLong());
                     final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
+                            .setServiceLogId(logCode)
                             .setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText()))
                             .setDate(date)
                             .setLogType(LogType.getByType(logType))

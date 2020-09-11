@@ -410,6 +410,34 @@ public final class TextUtils {
         return result;
     }
 
+    /**
+     * Shortens a given text to a maximum given number of characters. In case the text is too long it
+     * is shortened according to a given begin-end-distribution-value. Deleted text part is marked with '...'
+     * @param text text to shorten. If text is shorter than maxLength it remains unchanged
+     * @param maxLength maxLength to shorten text to.
+     * @param beginEndDistribution begin-end-distribution to obey on shortening. If >=1 then text is shortened at the end.
+     *      If <=0 then text is shortened at the beginning. If between 0-1 then text is shortened at beginning and end in relation to this value.
+     * @return the shortened text
+     */
+    @NonNull
+    public static String shortenText(final String text, final int maxLength, final float beginEndDistribution) {
+        final String separator = "...";
+        if (StringUtils.isBlank(text) || maxLength < 0) {
+            return "";
+        }
+        if (text.length() <= maxLength) {
+            return text;
+        }
+        if (maxLength < separator.length()) {
+            return text.substring(0, maxLength);
+        }
+        final int charsAtBegin = Math.max(0, Math.min(maxLength - separator.length(), (int) ((maxLength - separator.length()) * beginEndDistribution)));
+        final int charsAtEnd = maxLength - separator.length() - charsAtBegin;
+
+        return text.substring(0, charsAtBegin) + separator + text.substring(text.length() - charsAtEnd);
+
+    }
+
     private static Pattern getTokenSearchPattern(final String startToken, final String endToken) {
         return compilePattern("(?s)" + (StringUtils.isEmpty(startToken) ? "^" : Pattern.quote(startToken)) + "(.*?)" +
                 (StringUtils.isEmpty(endToken) ? "$" : Pattern.quote(endToken)));
