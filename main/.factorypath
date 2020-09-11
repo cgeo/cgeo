@@ -1,4 +1,0 @@
-<factorypath>
-    <factorypathentry kind="WKSPJAR" id="/main/compile-libs/androidannotations-3.3.2.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="WKSPJAR" id="/main/libs/butterknife-8.2.1-aar.jar" enabled="true" runInBatchMode="false"/>
-</factorypath>

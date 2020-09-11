@@ -1,8 +1,0 @@
-# This is an AutoDeriv file to automatically mark files as derived in Eclipse
-# https://nodj.github.io/AutoDeriv/
-
-# Eclipse build
-bin
-
-# gradle build
-build
