@@ -120,7 +120,7 @@ public final class Log {
 
         //callerinfo
         if (SETTING_ADD_CLASSINFO[level.ordinal()]) {
-            return "[" + shortName + "]{" + getCallerInfo() + "} " + msg;
+            return "[" + shortName + "] " + msg + " {" + getCallerInfo(4) + "}";
         }
         return "[" + shortName + "] " + msg;
 
@@ -200,19 +200,32 @@ public final class Log {
      * Returns compact info about caller of Log method. Note: this method is considerably slow
      * and shall be used with care (only when explicitely turned on)
      */
-    private static String getCallerInfo() {
+    private static String getCallerInfo(final int maxDepth) {
         final String logClassName = Log.class.getName();
+        final String contextLoggerClassname = ContextLogger.class.getName();
+        final StringBuilder sb = new StringBuilder();
+        int cnt = 0;
         for (final StackTraceElement st : new RuntimeException().getStackTrace()) {
-            if (!st.getClassName().equals(logClassName)) {
-                String shortClassName = st.getClassName();
-                final int idx = shortClassName.lastIndexOf(".");
-                if (idx >= 0) {
-                    shortClassName = shortClassName.substring(idx + 1);
+            if (!st.getClassName().equals(logClassName) && !st.getClassName().equals(contextLoggerClassname)) {
+                if (sb.length() > 0) {
+                    sb.append("/");
                 }
-                return shortClassName + "." + st.getMethodName() + ":" + st.getLineNumber();
+                sb.append(stackTraceElementToString(st));
+                if (++cnt >= maxDepth) {
+                    break;
+                }
             }
         }
-        return "<none>";
+        return sb.length() == 0 ? "<none>" : sb.toString();
+    }
+
+    private static String stackTraceElementToString(final StackTraceElement st) {
+        String shortClassName = st.getClassName();
+        final int idx = shortClassName.lastIndexOf(".");
+        if (idx >= 0) {
+            shortClassName = shortClassName.substring(idx + 1);
+        }
+        return shortClassName + "." + st.getMethodName() + ":" + st.getLineNumber();
     }
 
 }
