@@ -50,9 +50,9 @@ public class CacheVotingBar {
     }
 
     public void setRating(final float stars) {
-        final float rating = votingConnector.isValidRating(stars) ? stars : 0;
+        final float rating = votingConnector != null && votingConnector.isValidRating(stars) ? stars : 0;
         ratingBar.setRating(rating);
-        label.setText(votingConnector.getDescription(rating));
+        label.setText(votingConnector == null ? "--" : votingConnector.getDescription(rating));
         this.rating = rating;
         if (changeListener != null) {
             changeListener.onRatingChanged(rating);
