@@ -851,7 +851,7 @@ public class DataStore {
 
         @Override
         public void onDowngrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
-            Log.i("Request to downgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
+            Log.iForce("[DB] Request to downgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
 
             //ask the database for a list of downgradeable DB versions AT THE TIME THIS DB WAS LAST UPGRADED
             //(which might be later than the current code version was written)
@@ -864,12 +864,12 @@ public class DataStore {
                             ": " + version + " is not downward compatible");
                 }
             }
-            Log.i("Downgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": allowed");
+            Log.iForce("[DB] Downgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": allowed");
         }
 
         @Override
         public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
-            Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
+            Log.iForce("[DB] Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": start");
 
             try {
                 if (db.isReadOnly()) {
@@ -1331,7 +1331,7 @@ public class DataStore {
                 db.endTransaction();
             }
 
-            Log.i("Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
+            Log.iForce("[DB] Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
         }
 
         private void onUpgradeError(final SQLException e, final int version) throws SQLException {
@@ -1342,8 +1342,7 @@ public class DataStore {
         @Override
         public void onOpen(final SQLiteDatabase db) {
             //get user version
-            Log.i("[DB] Current Database Version: " + getUserVersion(db));
-
+            Log.iForce("[DB] Current Database Version: " + getUserVersion(db));
             if (firstRun) {
                 sanityChecks(db);
                 // limit number of records for trailHistory
