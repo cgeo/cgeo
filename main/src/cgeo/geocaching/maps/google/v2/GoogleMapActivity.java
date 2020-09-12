@@ -10,6 +10,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
@@ -138,22 +139,24 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     @Override
     public boolean superOnPrepareOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onPrepareOptionsMenu(menu);
+        final boolean isGoogleMapsAvailable = isGoogleMapsAvailable(this);
 
-        menu.findItem(R.id.menu_map_rotation).setVisible(true);
-
-        final int mapRotation = Settings.getMapRotation();
-        switch (mapRotation) {
-            case MAPROTATION_OFF:
-                menu.findItem(R.id.menu_map_rotation_off).setChecked(true);
-                break;
-            case MAPROTATION_MANUAL:
-                menu.findItem(R.id.menu_map_rotation_manual).setChecked(true);
-                break;
-            case MAPROTATION_AUTO:
-                menu.findItem(R.id.menu_map_rotation_auto).setChecked(true);
-                break;
-            default:
-                break;
+        menu.findItem(R.id.menu_map_rotation).setVisible(isGoogleMapsAvailable);
+        if (isGoogleMapsAvailable) {
+            final int mapRotation = Settings.getMapRotation();
+            switch (mapRotation) {
+                case MAPROTATION_OFF:
+                    menu.findItem(R.id.menu_map_rotation_off).setChecked(true);
+                    break;
+                case MAPROTATION_MANUAL:
+                    menu.findItem(R.id.menu_map_rotation_manual).setChecked(true);
+                    break;
+                case MAPROTATION_AUTO:
+                    menu.findItem(R.id.menu_map_rotation_auto).setChecked(true);
+                    break;
+                default:
+                    break;
+            }
         }
         TrackUtils.onPrepareOptionsMenu(menu);
 

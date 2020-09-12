@@ -311,8 +311,6 @@ public class GCLogin extends AbstractLogin {
             setActualUserName(Settings.getUserName());
             // number of caches found is not part of this page
             return true;
-        } else {
-            Log.d("setLoginStatus: PATTERN_LOGIN_NAME_LOGIN_PAGE not matched, page is:\n" + page);
         }
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));

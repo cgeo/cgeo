@@ -25,10 +25,10 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -38,8 +38,6 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
-import androidx.core.content.pm.PackageInfoCompat;
-
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Iterator;
@@ -47,7 +45,6 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -186,15 +183,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return;
         }
 
-        // check if Google Play Services support the current Google Maps API version
-        try {
-            final long version = PackageInfoCompat.getLongVersionCode(context.getPackageManager().getPackageInfo(GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE, 0));
-            if (version < GoogleApiAvailability.GOOGLE_PLAY_SERVICES_VERSION_CODE) {
-                throw new PackageManager.NameNotFoundException("found version " + version);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
+        if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
-            Log.d("play services version too old / " + e.getMessage() + " / at least version " + GoogleApiAvailability.GOOGLE_PLAY_SERVICES_VERSION_CODE + " required");
             Dialogs.confirmYesNo((Activity) context, R.string.warn_gm_not_available, R.string.switch_to_mf, (dialog, whichButton) -> {
                 // switch to first Mapsforge mapsource found
                 final List<MapSource> mapSources = MapProviderFactory.getMapSources();
