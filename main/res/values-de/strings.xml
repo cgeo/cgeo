@@ -1731,6 +1731,7 @@
     <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmanager_not_available">Kartendatei kann nicht heruntergeladen werden, Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
+    <string name="downloadmap_target_not_writable">Verzeichnis \"%s\" ist nicht beschreibbar - Datei wird im System-Download-Verzeichnis gespeichert und muss manuell in das Kartenverzeichnis von c:geo verschoben werden.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
