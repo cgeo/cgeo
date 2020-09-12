@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.ListMarker;
 import cgeo.geocaching.list.StoredList;
@@ -26,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
@@ -120,15 +122,24 @@ public final class MapMarkerUtils {
     public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint) {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
+        int assignedMarkers = 0;
+        final String geocode = waypoint.getGeocode();
+        if (StringUtils.isNotBlank(geocode)) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (null != cache) {
+                assignedMarkers = getAssignedMarkers(cache);
+            }
+        }
         final int hashcode = new HashCodeBuilder()
-        .append(waypoint.isVisited())
-        .append(id)
-        .toHashCode();
+            .append(waypoint.isVisited())
+            .append(id)
+            .append(assignedMarkers)
+            .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint));
+                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers));
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -146,19 +157,45 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint) {
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final int assignedMarkers) {
         final WaypointType waypointType = waypoint.getWaypointType();
-        final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-        final Drawable inset = Compatibility.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId);
-        final Drawable[] layers = {
-                marker,
-                inset
-        };
-        final LayerDrawable drawable = new LayerDrawable(layers);
+        final List<Drawable> layers = new ArrayList<>(2);
+        final List<int[]> insets = new ArrayList<>(2);
 
-        final int[] insetPadding = insetHelper(marker.getIntrinsicWidth(), marker.getIntrinsicHeight(), inset, VERTICAL.CENTER, HORIZONTAL.CENTER);
-        drawable.setLayerInset(1, insetPadding[0], insetPadding[1], insetPadding[2], insetPadding[3]);
-        return drawable;
+        final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
+        layers.add(marker);
+        insets.add(FULLSIZE);
+
+        // get actual layer size in px
+        final int width = marker.getIntrinsicWidth();
+        final int height = marker.getIntrinsicHeight();
+
+        Drawable inset = Compatibility.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId);
+        layers.add(inset);
+        insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.CENTER));
+
+        // assigned lists with markers
+        int markerId = assignedMarkers & ListMarker.BITMASK;
+        if (markerId > 0) {
+            inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
+            layers.add(inset);
+            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.LEFT));
+        }
+
+        markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
+        if (markerId > 0) {
+            inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
+            layers.add(inset);
+            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.RIGHT));
+        }
+
+        final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+
+        int index = 0;
+        for (final int[] temp : insets) {
+            ld.setLayerInset(index++, temp[0], temp[1], temp[2], temp[3]);
+        }
+        return ld;
     }
 
     /**
