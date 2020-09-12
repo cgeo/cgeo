@@ -1342,7 +1342,8 @@ public class DataStore {
         @Override
         public void onOpen(final SQLiteDatabase db) {
             //get user version
-            Log.iForce("[DB] Current Database Version: " + getUserVersion(db));
+            Log.iForce("[DB] Current Database Version: " + db.getVersion());
+
             if (firstRun) {
                 sanityChecks(db);
                 // limit number of records for trailHistory
@@ -1436,7 +1437,8 @@ public class DataStore {
                 if (!sle.getMessage().contains("duplicate column name")) {
                     throw sle;
                 }
-                Log.i("[DB] Column '" + table + "'.'" + columnDefinition + "' NOT created because it already exists");
+                Log.iForce("[DB] Column '" + table + "'.'" + columnDefinition + "' was not created because it already exists. " +
+                        "It is expected that this can happen and not an error.");
             }
         }
     }
@@ -3381,18 +3383,6 @@ public class DataStore {
         return DBLogOfflineUtils.save(geocode, entry);
     }
 
-    @Deprecated
-    public static boolean saveLogOffline(final String geocode, final Date date, final LogType type, final String log, final ReportProblemType reportProblem) {
-        return DBLogOfflineUtils.save(geocode, new OfflineLogEntry.Builder<>()
-                .setCacheGeocode(geocode)
-                .setDate(date.getTime())
-                .setLogType(type)
-                .setLog(log)
-                .setReportProblem(reportProblem)
-                .build()
-        );
-    }
-
     @Nullable
     public static OfflineLogEntry loadLogOffline(final String geocode) {
         return DBLogOfflineUtils.load(geocode);
@@ -4277,27 +4267,6 @@ public class DataStore {
 
         // clear old history
         database.execSQL("DELETE FROM " + dbTableSearchDestinationHistory);
-
-    }
-
-    /**
-     * calculates and returns the current database version
-     */
-    public static int getUserVersion(final SQLiteDatabase db) {
-        try (Cursor c = db.rawQuery("PRAGMA user_version", null)) {
-            if (c.moveToFirst()) {
-                return c.getInt(0);
-            }
-            return -1;
-        }
-    }
-
-    /**
-     * Manually sets the database version.
-     * WARNING: for usage in test/development scenarios only!
-     */
-    public static void setUserVersion(final int newVersion) {
-        database.execSQL("PRAGMA user_version = " + newVersion);
     }
 
     /**
