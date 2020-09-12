@@ -8,7 +8,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Map:</h4>
 <ul>
-<li>.</li>
+<li>Show list markers also on waypoints</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -21,7 +21,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Cache lists:</h4>
 <ul>
-  <li>Change: Allow cache title to wrap to multi-line</li>
+<li>Change: Allow cache title to wrap to multi-line</li>
 </ul>
 
 <h4>Other:</h4>
