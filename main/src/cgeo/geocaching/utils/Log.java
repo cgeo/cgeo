@@ -13,11 +13,13 @@ public final class Log {
     public enum LogLevel { VERBOSE, DEBUG, INFO, WARN, ERROR, NONE }
 
     /** Name of File containing Log properties which will be searched for in logfiles-directory */
-    private static final String LOGPROPERTY_FILENAME = "log.properties";
+    private static final String LOGPROPERTY_FILENAME = "log-properties.txt";
     /** Minimum log level. Value should be one of {@link LogLevel} in textual form */
     public static final String PROP_MIN_LOG_LEVEL = "logging.minlevel";
     /** Minimum log level to add callerinfo to log message. Value should be one of {@link LogLevel} in textual form */
     public static final String PROP_MIN_CALLERINFO_LEVEL = "logging.mincallerinfolevel";
+    /** max stack trace depth to log when caller info is logged */
+    public static final String PROP_CALLERINFO_MAXDEPTH = "logging.callerinfomaxdepth";
     /** Whether to throw an exception when an error is logged. Value should be true or false */
     public static final String PROP_THROW_ON_ERROR_LOG = "logging.throwonerror";
 
@@ -29,7 +31,8 @@ public final class Log {
 
     private static LogLevel minLogLevel = LogLevel.WARN;
     private static boolean logThrowExceptionOnError = false;
-    private static LogLevel minLogAddCallerINfo = LogLevel.NONE;
+    private static LogLevel minLogAddCallerInfo = LogLevel.NONE;
+    private static int addCallerInfoMaxDepth = 4;
 
     private static final boolean[] SETTING_DO_LOGGING = new boolean[LogLevel.values().length];
     private static boolean settingThrowExceptionOnError = true;
@@ -60,13 +63,19 @@ public final class Log {
         return isDebug;
     }
 
+    public static boolean isEnabled(final LogLevel level) {
+        return SETTING_DO_LOGGING[level.ordinal()];
+    }
+
     /**
      * Save a copy of the debug flag from the settings for performance reasons.
      *
      */
     public static void setDebug(final boolean isDebug) {
-        Log.isDebug = isDebug;
-        adjustSettings();
+        if (Log.isDebug() != isDebug) {
+            Log.isDebug = isDebug;
+            adjustSettings();
+        }
     }
 
     public static void setProperties(final Properties logProps) {
@@ -77,7 +86,14 @@ public final class Log {
             }
             level = readLogLevel(logProps, PROP_MIN_CALLERINFO_LEVEL);
             if (level != null) {
-                minLogAddCallerINfo = level;
+                minLogAddCallerInfo = level;
+            }
+            if (logProps.containsKey(PROP_CALLERINFO_MAXDEPTH)) {
+                try {
+                    addCallerInfoMaxDepth = Integer.valueOf(logProps.getProperty(PROP_CALLERINFO_MAXDEPTH));
+                } catch (NumberFormatException nfe) {
+                    //no valid maxDepth in prop file, ignore this
+                }
             }
             logThrowExceptionOnError = "true".equalsIgnoreCase(logProps.getProperty(PROP_THROW_ON_ERROR_LOG));
             adjustSettings();
@@ -98,9 +114,10 @@ public final class Log {
 
     private static void adjustSettings() {
         setLevel(SETTING_DO_LOGGING, isDebug() && minLogLevel.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel);
-        setLevel(SETTING_ADD_CLASSINFO, minLogAddCallerINfo);
+        setLevel(SETTING_ADD_CLASSINFO, minLogAddCallerInfo);
         settingThrowExceptionOnError = logThrowExceptionOnError || isDebug;
-        android.util.Log.i(TAG, "[Log] Logging set: minLevel=" + minLogLevel + ", minAddCallerInfo=" +  minLogAddCallerINfo + ", throwOnError=" + logThrowExceptionOnError);
+        android.util.Log.i(TAG, "[Log] Logging set: minLevel=" + minLogLevel + ", minAddCallerInfo=" + minLogAddCallerInfo +
+                ", addCallerInfoMaxDepth=" + addCallerInfoMaxDepth + ", throwOnError=" + logThrowExceptionOnError);
     }
 
     private static void setLevel(final boolean[] settings, final LogLevel level) {
@@ -116,7 +133,7 @@ public final class Log {
 
         //callerinfo
         if (SETTING_ADD_CLASSINFO[level.ordinal()]) {
-            return "[" + shortName + "]{" + getCallerInfo() + "} " + msg;
+            return "[" + shortName + "] " + msg + " {" + getCallerInfo(addCallerInfoMaxDepth) + "}";
         }
         return "[" + shortName + "] " + msg;
 
@@ -145,6 +162,14 @@ public final class Log {
         if (SETTING_DO_LOGGING[LogLevel.DEBUG.ordinal()]) {
             android.util.Log.d(TAG, adjustMessage(msg, LogLevel.DEBUG), t);
         }
+    }
+
+    /**
+     * Use this to log a FORCED message on info level. This message will be logged
+     * regardless of the log level set, so use with care!
+     */
+    public static void iForce(final String msg) {
+        android.util.Log.i(TAG, adjustMessage(msg, LogLevel.INFO));
     }
 
     public static void i(final String msg) {
@@ -196,19 +221,31 @@ public final class Log {
      * Returns compact info about caller of Log method. Note: this method is considerably slow
      * and shall be used with care (only when explicitely turned on)
      */
-    private static String getCallerInfo() {
+    private static String getCallerInfo(final int maxDepth) {
         final String logClassName = Log.class.getName();
+        final StringBuilder sb = new StringBuilder();
+        int cnt = 0;
         for (final StackTraceElement st : new RuntimeException().getStackTrace()) {
             if (!st.getClassName().equals(logClassName)) {
-                String shortClassName = st.getClassName();
-                final int idx = shortClassName.lastIndexOf(".");
-                if (idx >= 0) {
-                    shortClassName = shortClassName.substring(idx + 1);
+                if (sb.length() > 0) {
+                    sb.append("/");
                 }
-                return shortClassName + "." + st.getMethodName() + ":" + st.getLineNumber();
+                sb.append(stackTraceElementToString(st));
+                if (++cnt >= maxDepth) {
+                    break;
+                }
             }
         }
-        return "<none>";
+        return sb.length() == 0 ? "<none>" : sb.toString();
+    }
+
+    private static String stackTraceElementToString(final StackTraceElement st) {
+        String shortClassName = st.getClassName();
+        final int idx = shortClassName.lastIndexOf(".");
+        if (idx >= 0) {
+            shortClassName = shortClassName.substring(idx + 1);
+        }
+        return shortClassName + "." + st.getMethodName() + ":" + st.getLineNumber();
     }
 
 }
