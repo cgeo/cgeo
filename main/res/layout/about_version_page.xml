@@ -12,44 +12,54 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:background="@drawable/header">
+            android:layout_height="fill_parent" >
 
             <ImageView
-                android:layout_width="200dip"
-                android:layout_height="200dip"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dip"
-                android:layout_marginBottom="10dip"
-                android:gravity="center"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="5dip"
-                android:text="@string/quote"
-                android:textColor="@color/just_white"
-                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginBottom="5dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:text="@string/powered_by"
-                android:textColor="@color/just_white"
-                android:textSize="14sp" />
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="200dip"
+                    android:layout_height="200dip"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dip"
+                    android:layout_marginBottom="10dip"
+                    android:gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:text="@string/quote"
+                    android:textColor="@color/just_white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:text="@string/powered_by"
+                    android:textColor="@color/just_white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </FrameLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
 
