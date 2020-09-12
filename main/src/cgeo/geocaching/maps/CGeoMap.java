@@ -788,19 +788,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 ActivityMixin.navigateUp(activity);
                 return true;
             case R.id.menu_map_rotation_off:
-                Settings.setMapRotation(Settings.MAPROTATION_OFF);
-                overlayPositionAndScale.updateMapRotation();
-                item.setChecked(true);
+                setMapRotation(item, Settings.MAPROTATION_OFF);
                 return true;
             case R.id.menu_map_rotation_manual:
-                Settings.setMapRotation(Settings.MAPROTATION_MANUAL);
-                overlayPositionAndScale.updateMapRotation();
-                item.setChecked(true);
+                setMapRotation(item, Settings.MAPROTATION_MANUAL);
                 return true;
             case R.id.menu_map_rotation_auto:
-                Settings.setMapRotation(Settings.MAPROTATION_AUTO);
-                overlayPositionAndScale.updateMapRotation();
-                item.setChecked(true);
+                setMapRotation(item, Settings.MAPROTATION_AUTO);
                 return true;
             case R.id.menu_direction_line:
                 Settings.setMapDirection(!Settings.isMapDirection());
@@ -962,6 +956,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         overlayPositionAndScale.repaintRequired();
         ActivityMixin.invalidateOptionsMenu(activity);
         ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
+    }
+
+    private void setMapRotation(final MenuItem item, final int rotation) {
+        Settings.setMapRotation(rotation);
+        if (null != overlayPositionAndScale) {
+            overlayPositionAndScale.updateMapRotation();
+        }
+        item.setChecked(true);
     }
 
     private boolean storeCaches(final Set<String> geocodesInViewport) {
