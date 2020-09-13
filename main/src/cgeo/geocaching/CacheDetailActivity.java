@@ -1615,7 +1615,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             setPersonalNote(personalNoteView, separator, cache.getPersonalNote());
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             addContextMenu(personalNoteView);
-            final Button personalNoteEdit = view.findViewById(R.id.edit_personalnote);
+            final ImageButton personalNoteEdit = view.findViewById(R.id.edit_personalnote);
             personalNoteEdit.setOnClickListener(v -> {
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
@@ -1624,17 +1624,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
             });
-            final Button storeWaypoints = view.findViewById(R.id.storewaypoints_personalnote);
+            final ImageButton storeWaypoints = view.findViewById(R.id.storewaypoints_personalnote);
             storeWaypoints.setOnClickListener(v -> {
                 ensureSaved();
                 storeWaypointsInPersonalNote(cache, maxPersonalNotesChars);
             });
-            final Button removeWaypoints = view.findViewById(R.id.deleteewaypoints_personalnote);
+            final ImageButton removeWaypoints = view.findViewById(R.id.deleteewaypoints_personalnote);
             removeWaypoints.setOnClickListener(v -> {
                 ensureSaved();
                 removeWaypointsFromPersonalNote(cache);
             });
-            final Button personalNoteUpload = view.findViewById(R.id.upload_personalnote);
+            final ImageButton personalNoteUpload = view.findViewById(R.id.upload_personalnote);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 maxPersonalNotesChars = connector.getPersonalNoteMaxChars();

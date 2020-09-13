@@ -132,17 +132,21 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:gravity="right"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/edit_personalnote"
-                        style="@style/button_small"
-                        android:text="@string/cache_personal_note_edit" />
-
-                    <Button
+                    <ImageButton
                         android:id="@+id/upload_personalnote"
                         style="@style/button_small"
-                        android:text="@string/cache_personal_note_upload" />
+                        android:src="@drawable/ic_menu_upload"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"/>
+
+                    <ImageButton
+                        android:id="@+id/edit_personalnote"
+                        style="@style/button_small"
+                        android:src="@drawable/ic_menu_edit"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -150,19 +154,21 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:gravity="left"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/storewaypoints_personalnote"
                         style="@style/button_small"
-                        android:layout_width="175dip"
-                        android:text="@string/cache_personal_note_storewaypoints" />
+                        android:src="@drawable/ic_menu_waypoint_sync"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"/>
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/deleteewaypoints_personalnote"
                         style="@style/button_small"
-                        android:layout_width="175dip"
-                        android:text="@string/cache_personal_note_removewaypoints" />
+                        android:src="@drawable/ic_menu_waypoint_delete"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"/>
 
                 </LinearLayout>
             </RelativeLayout>
