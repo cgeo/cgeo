@@ -196,7 +196,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 85;
+    private static final int dbVersion = 86;
     public static final int customListIdOffset = 10;
 
     /**
@@ -217,7 +217,8 @@ public class DataStore {
      * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
-            85 //adds offline logging columns/tables
+            85, //adds offline logging columns/tables
+            86 // (re)create indices on c_logs and c_logImages
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -839,7 +840,8 @@ public class DataStore {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo ON " + dbTableWaypoints + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo_type ON " + dbTableWaypoints + " (geocode, type)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_spoil_geo ON " + dbTableSpoilers + " (geocode)");
-            db.execSQL("CREATE INDEX IF NOT EXISTS in_logs_geo ON " + dbTableLogs + " (geocode)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logs_geo ON " + dbTableLogs + " (geocode, date desc)");
+            db.execSQL("CREATE INDEX IF NOT EXISTS in_logimagess_logid ON " + dbTableLogImages + " (log_id)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logcount_geo ON " + dbTableLogCount + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoff_geo ON " + dbTableLogsOffline + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoffimages_geo ON " + dbTableLogsOfflineImages + " (logoffline_id)");
@@ -1316,6 +1318,12 @@ public class DataStore {
                         } catch (final SQLException e) {
                             onUpgradeError(e, 85);
                         }
+                    }
+
+                    //(re)create indices for logging tables
+                    if (oldVersion < 86) {
+                        db.execSQL("DROP INDEX in_logs_geo");
+                        createIndices(db);
                     }
                 }
 
@@ -4610,9 +4618,6 @@ public class DataStore {
                 return this;
             }
         }
-
-
     }
-
 
 }
