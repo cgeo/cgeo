@@ -34,7 +34,6 @@ Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/Ho
 
 The standard IDE for Android projects is Android Studio, which is based on IntelliJ IDEA.
 We use it for the development of c:geo.
-It is also possible to use eclipse for writing code/testing and Android Studio for building. This is not supported officially anymore.
 
 Details for setting up the IDE is described in the wiki (https://github.com/cgeo/cgeo/wiki/IDE).
 
