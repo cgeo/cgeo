@@ -120,6 +120,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     public static class ViewHolder extends AbstractViewHolder {
         @BindView(R.id.checkbox) protected CheckBox checkbox;
         @BindView(R.id.log_status_mark) protected ImageView logStatusMark;
+        @BindView(R.id.text_icon) protected ImageView textIcon;
         @BindView(R.id.text) protected TextView text;
         @BindView(R.id.distance) protected DistanceView distance;
         @BindView(R.id.favorite) protected TextView favorite;
@@ -398,7 +399,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         } else {
             holder.logStatusMark.setImageResource(R.drawable.mark_transparent);
         }
-        holder.text.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType).getDrawable(), null, null, null);
+        holder.textIcon.setImageDrawable(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType).getDrawable());
     }
 
     @Override
