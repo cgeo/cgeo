@@ -256,6 +256,7 @@
     <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
     <string name="info_stored_image">Nuova immagine salvata su:</string>
     <string name="info_cache_saved">Il cache è stato salvato localmente</string>
+    <string name="info_feature_offline_counter">Hai dei log offline, che non sono ancora stati caricati. Pertanto verrà visualizzato un contatore (ad esempio \"+ 1\"). Se non ti piace, puoi disabilitarlo sotto Impostazioni &gt; Registro log.\n\nPer trovare facilmente i log offline, vai nella \"Cronologia\" e filtra per \"Con dati personali\" &gt; \"Con log offline\"</string>
     <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
@@ -264,6 +265,8 @@
     <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
     <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
     <string name="more_information">Ulterioni informazioni</string>
+    <string name="remind_later">Ricordamelo più tardi</string>
+    <string name="undo">Annulla</string>
     <string name="warn_gm_not_available">Google Maps non disponibile.</string>
     <string name="switch_to_mf">Il tuo servizio Google Play non è aggiornato. Vuoi passare al provider delle mappe di Mapsforge?</string>
     <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>

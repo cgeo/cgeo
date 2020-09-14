@@ -264,6 +264,8 @@
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
     <string name="more_information">Lisätietoja</string>
+    <string name="remind_later">Muistuta minua myöhemmin</string>
+    <string name="undo">Kumoa</string>
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
     <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>

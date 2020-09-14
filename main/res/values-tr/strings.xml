@@ -92,6 +92,7 @@
     <string name="log_saving_and_uploading">Kayıt gönderiliyor ve görüntü yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
     <string name="log_posting_twitter">Tweet gönderiliyor…</string>
+    <string name="log_posting_vote">Cache puanı gönderiliyor…</string>
     <string name="log_posting_image">Resim gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
@@ -117,9 +118,11 @@
     <string name="log_yesterday">Dün</string>
     <string name="log_smilies">İfadeler</string>
     <string name="log_image">Resim</string>
+    <string name="log_images">Resimler</string>
     <string name="log_image_attach">Resim ekle</string>
     <string name="log_image_stored">Var olan</string>
     <string name="log_image_camera">Yeni</string>
+    <string name="log_image_delete">Sil</string>
     <string name="log_image_caption">Başlık</string>
     <string name="log_image_description">Açıklama</string>
     <string name="log_image_scale">Ölçekleme</string>
@@ -142,6 +145,10 @@
     <string name="log_problem_other_text">Bu Geocacher kutu ile ilgili bir sorun olduğunu bildirdi.</string>
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
+    <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
+    <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">Resim</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s\'e çevir</string>
     <string name="translate_to_english">İngilizceye Çevir</string>
@@ -255,6 +262,8 @@
     <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
     <string name="warn_log_load_additional_data">c:geo kayıt için ek bilgileri (trackable\'lar/favori puanları) yüklemede başarısız oldu.</string>
     <string name="more_information">Daha fazla bilgi</string>
+    <string name="remind_later">Daha sonra hatırlat</string>
+    <string name="undo">Geri al</string>
     <string name="warn_gm_not_available">Google Maps mevcut değildir.</string>
     <string name="switch_to_mf">Google Play hizmetiniz güncel değil. Bunun yerine harita sağlayıcınızı Mapsforge olarak değiştirmek ister misiniz?</string>
     <string name="switched_to_mf">Varsayılan harita sağlayıcısı Mapsforge olarak belirlendi. Haritanızı yeniden başlatın.</string>
@@ -412,6 +421,9 @@
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
     <string name="about_system_info">c:geo sistem bilgisi</string>
     <string name="about_system_info_send_chooser">Sistem bilgisini gönder</string>
+    <string name="about_system_write_logcat">Kayıt dosyası oluştur</string>
+    <string name="about_system_write_logcat_type_standard">Standart</string>
+    <string name="about_system_write_logcat_type_extended">Genişletilmiş</string>
     <string name="about_system_write_logcat_empty">Kayıt dosyası boş</string>
     <string name="changelog_github">Tüm değişiklikler listesi</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
@@ -494,6 +506,8 @@
     <string name="init_summary_su">Geocaching.su üzerinden Geocache\'leri yükle</string>
     <string name="settings_activate_su">Etkinleştir</string>
     <string name="init_gcvote_password_description">Bir Geocache\'i derecelendirmek için GCVote.com\'daki talimatları takip etmeniz ve buraya GCVote şifrenizi girmeniz gereklidir.</string>
+    <string name="err_vote_send_rating">Puan gönderilirken hata oluştu.</string>
+    <string name="vote_sent">Puanlama başarıyla gönderildi</string>
     <string name="settings_activate_twitter">Etkinleştir</string>
     <string name="init_login_popup">Oturum açma</string>
     <string name="init_login_popup_working">Oturum açılıyor…</string>
@@ -606,11 +620,16 @@
     <string name="init_gpx_importdir">GPX İçe Aktarım Dizini</string>
     <string name="init_dataDir">Geocache veri dizinini seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
+    <string name="init_maptrail">Geçmiş İz\'i göster</string>
+    <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
+    <string name="init_trailcolor">Geçmiş İz rengi</string>
+    <string name="init_circlefillcolor">Daire dolgu rengi</string>
     <string name="init_share_after_export">GPX Dışa aktarmadan sonra paylaşım menüsünü aç</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
     <string name="init_trackautovisit">TB\'leri Ziyaret Ettir</string>
     <string name="init_summary_trackautovisit">Trackable\'ları varsayılan olarak \'\'Ziyaret Edildi\'\' şeklinde ayarla</string>
     <string name="init_sigautoinsert">Otomatik olarak ekle</string>
+    <string name="init_offlinelogs_homescreen">Çevrimdışı kayıtları göster</string>
     <string name="init_loaddirectionimg">Yön görüntüsü</string>
     <string name="init_summary_loaddirectionimg">Gerekirse yön oku görüntüsünü indir (sadece Temel Üyeler için gereklidir)</string>
     <string name="init_default_navigation_tool">Varsayılan Navigasyon</string>
@@ -744,6 +763,10 @@
         <item quantity="other">%1$d cache</item>
     </plurals>
     <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d gün kaldı</item>
+        <item quantity="other">%1$d gün kaldı</item>
+    </plurals>
     <string name="last_day_available">mevcut olan son gün</string>
     <string name="cache_offline">Çevrimdışı</string>
     <string name="cache_offline_refresh">Yenile</string>
@@ -778,6 +801,9 @@
     <string name="cache_menu_preventWaypointsFromNote">Notlardan yol noktası oluşturulmasını engelle</string>
     <string name="cache_menu_allowWaypointExtraction">Notlardan yol noktası oluşturulmasına izin ver</string>
     <string name="cache_personal_note_edit">Düzenle</string>
+    <string name="cache_personal_note_removewaypoints">Yol noktalarını kaldır</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Yol noktaları boyut sınırlamalarından dolayı notlarda saklanamaz (max kişisel not boyutu:%1$d)</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Yol noktası çıkarmayı engelle</string>
     <string name="cache_personal_note_limit">Kişisel not sınırı</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Bu kişisel not, %d karakterden sonra Geocaching.com tarafından kesilecek.</string>
@@ -854,6 +880,7 @@
     <string name="cache_menu_streetview">Sokak görünümü</string>
     <string name="cache_menu_browser">Tarayıcıda aç</string>
     <string name="cache_menu_visit">Ziyaretini Kaydet</string>
+    <string name="cache_menu_visit_offline">Hızlı çevrimdışı kayıt</string>
     <string name="cache_menu_spoilers">İpucu Görseller</string>
     <string name="cache_menu_around">Yakınlardaki Geocache\'ler</string>
     <string name="around">%s civarında</string>
@@ -882,6 +909,7 @@
     <string name="cache_found_last_30_days">Son 30 gün içerisinde bulunanlar</string>
     <string name="cache_status_archived">Arşivlendi</string>
     <string name="cache_status_disabled">Devredışı</string>
+    <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Sadece Premium üyeler</string>
     <string name="cache_status_not_premium">Tüm Üyelere Erişim</string>
     <string name="cache_status_stored">Kaydedilmiş</string>
@@ -933,6 +961,7 @@
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">Gidilecek hedefler</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
+    <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
@@ -954,6 +983,10 @@
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Geocache\'ler %1$s\'den yükleniyor</string>
     <string name="gpx_import_loading_waypoints_with_filename">Yol noktaları %1$s\'den yükleniyor</string>
+    <plurals name="gpx_import_caches_imported_with_filename">
+        <item quantity="one">%2$s\'den %1$d cache içe aktarıldı</item>
+        <item quantity="other">%2$s\'den %1$d cache içe aktarıldı</item>
+    </plurals>
     <string name="gpx_import_static_maps_skipped">Statik haritaların indirilmesi iptal edildi</string>
     <string name="gpx_import_title_reading_file">Dosya okunuyor</string>
     <string name="gpx_import_title">GPX\'i İçe Aktar</string>
@@ -1130,6 +1163,8 @@
     <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Bilinmeyen</string>
+    <string name="do_auto">Otomatik</string>
     <!-- license -->
     <string name="license">Lisans</string>
     <string name="license_show">Lisansı göster</string>
@@ -1171,6 +1206,10 @@
     <string name="export_confirm_message">Yol: %1$s\n Dosya İsmi: %2$s</string>
     <string name="export_persnotes">Kişisel notlar</string>
     <string name="export_persnotes_uploading">Kişisel notlar yükleniyor %1$d</string>
+    <plurals name="export_persnotes_upload_success">
+        <item quantity="one">%1$d not başarıyla yüklendi</item>
+        <item quantity="other">%1$d not başarıyla yüklendi</item>
+    </plurals>
     <string name="export_modifiedcoords">Düzenlenmiş koordinatlar</string>
     <string name="export_modifiedcoords_uploading">Yükleniyor %1$d</string>
     <string name="export_modifiedcoords_success">Yükleme başarılı</string>
@@ -1532,6 +1571,7 @@
     <string name="color_turquoise">Turkuaz</string>
     <string name="color_black">Siyah</string>
     <string name="preference_colorpicker_select_color">Renk seç</string>
+    <string name="reset_to_default">Varsayılan</string>
     <!-- number input -->
     <string name="number_input_title">%1$s ve %2$s arasında bir değer girin</string>
     <string name="number_input_err_boundarymin">Girilen rakam çok küçük-en küçük rakama ayarla</string>
@@ -1544,6 +1584,7 @@
     <!-- individual routes -->
     <string name="individual_route_added">rotaya eklendi</string>
     <string name="individual_route_removed">rotadan çıkartıldı</string>
+    <string name="save_sorted_route">Kaydet</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -1556,6 +1597,7 @@
     <string name="switch_on">Aç</string>
     <string name="switch_manual">Elle</string>
     <string name="switch_auto">Otomatik</string>
+    <string name="switch_default">(varsayılan)</string>
     <!-- view settings -->
     <string name="view_settings">Görünüm ayarları</string>
     <string name="delete_setting">Ayarları sil</string>
@@ -1566,7 +1608,12 @@
     <string name="receivemapfile_option_differentname">Farklı isim</string>
     <string name="receivemapfile_kb_copied">%d kB kopyalandı</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_choose">Harita seç</string>
+    <string name="downloadmap_filename">%s İndiriliyor</string>
     <!-- history track -->
+    <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
+    <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
+    <string name="map_trail_show">Geçmiş İz\'i göster</string>
     <!-- history track export -->
     <!-- individual route export -->
 </resources>
