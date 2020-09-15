@@ -626,23 +626,38 @@
     <string name="init_summary_livelist">Show direction of caches in the list</string>
 
     <!-- backup / restore -->
+    <string name="init_backup_title">Create Backup</string>
+    <string name="init_backup_summary">Please note that this feature can backup caches, waypoints &amp; settings, but no cache images.</string>
+    <string name="init_restore_title">Restore Backup</string>
+    <string name="init_backup_caches">caches and waypoints</string>
+    <string name="init_backup_program_settings">program settings</string>
+    <string name="init_backup_logins">include account data</string>
     <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Backup</string>
+    <string name="init_backup_finished">Backup finished</string>
+    <string name="init_backup_now">Start backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
     <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Restore</string>
+    <string name="init_restore_restored">Restoration completed</string>
+    <string name="init_backup_start_restore">Start restoration</string>
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
+    <string name="init_backup_canceled">Database backup was canceled, therefore no changes were made.</string>
     <string name="init_backup_no_backup_available">There is no backup file available.</string>
     <string name="backup_confirm_overwrite">Do you want to overwrite the existing backup from %s?</string>
-    <string name="restore_confirm_overwrite">Do you want to overwrite %s on your device with the backup?</string>
+    <string name="restore_confirm_overwrite_database">WARNING: This will overwrite %s on your device!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">WARNING: This will overwrite %s and your current settings on your device!</string>
+    <string name="restore_confirm_overwrite_settings">WARNING: This will overwrite your current settings on your device!</string>
+    <string name="restore_information">Please select what you want to restore:</string>
     <string name="init_restore_success">Restoration completed.</string>
     <string name="init_restore_failed_dbrecreated">Restoration failed: Backup file corrupt, database had to be recreated.</string>
     <string name="init_restore_failed">Restoration failed.</string>
     <string name="init_restore_running">Restoring cache database…</string>
     <string name="init_restore_confirm">Database is empty. Do you want to restore the database backup?</string>
     <string name="init_backup_last">Available backup from</string>
+    <string name="init_backup_unavailable">not available</string>
     <string name="init_backup_last_no">There is no file with a backup.</string>
     <string name="init_restore_version_error">Unexpected format - cannot restore database.\n\nExpected version is %1$d,\nbackup has version %2$d</string>
 
@@ -651,14 +666,13 @@
     <string name="init_backup_settings">Backup program settings</string>
     <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
     <string name="init_backup_settings_backup_full">Backup settings (full)</string>
+    <string name="init_backup_settings_logins">Backup account data</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
     <string name="settings_saved">Settings successfully saved to:</string>
     <string name="init_backup_settings_restore">Restore settings</string>
-    <string name="init_backup_settings_restore_confirm">Do you want to overwrite your current settings?</string>
     <string name="init_backup_settings_restore_no">There is no settings backup available</string>
     <string name="settings_readingerror">Error reading settings</string>
-    <string name="settings_restored">Settings restored</string>
     <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
 
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>

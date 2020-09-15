@@ -33,7 +33,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -107,6 +107,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private MenuItem searchItem;
     private Geopoint addCoords = null;
     private boolean initialized = false;
+    private boolean restoreMessageShown = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
@@ -634,24 +635,28 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkRestore() {
-        if (!DataStore.isNewlyCreatedDatebase() || DatabaseBackupUtils.getRestoreFile() == null) {
-            return;
+        final BackupUtils backupUtils = new BackupUtils(MainActivity.this);
+
+        if (DataStore.isNewlyCreatedDatebase() && BackupUtils.hasBackup() && !restoreMessageShown) {
+            restoreMessageShown = true;
+
+            new AlertDialog.Builder(this)
+                    .setTitle(res.getString(R.string.init_backup_restore))
+                    .setMessage(res.getString(R.string.init_restore_confirm))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
+                        dialog.dismiss();
+                        DataStore.resetNewlyCreatedDatabase();
+                        backupUtils.restore();
+                    })
+                    .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
+                        dialog.cancel();
+                        DataStore.resetNewlyCreatedDatabase();
+                    })
+                    .create()
+                    .show();
+
         }
-        new AlertDialog.Builder(this)
-                .setTitle(res.getString(R.string.init_backup_restore))
-                .setMessage(res.getString(R.string.init_restore_confirm))
-                .setCancelable(false)
-                .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
-                    dialog.dismiss();
-                    DataStore.resetNewlyCreatedDatabase();
-                    DatabaseBackupUtils.restoreDatabase(MainActivity.this);
-                })
-                .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
-                    dialog.cancel();
-                    DataStore.resetNewlyCreatedDatabase();
-                })
-                .create()
-                .show();
     }
 
     private class UpdateLocation extends GeoDirHandler {

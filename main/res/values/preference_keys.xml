@@ -127,6 +127,9 @@
     <string translatable="false" name="pref_fakekey_preference_backupsettings_full">fakekey_preference_backupsettings_full</string>
     <string translatable="false" name="pref_fakekey_preference_restoresettings">fakekey_preference_restoresettings</string>
     <string translatable="false" name="pref_fakekey_preference_restore">fakekey_preference_restore</string>
+    <string translatable="false" name="pref_backup_caches">backup_caches_enabled</string>
+    <string translatable="false" name="pref_backup_settings">backup_settings_enabled</string>
+    <string translatable="false" name="pref_backup_logins">backup_logins_enabled</string>
     <string translatable="false" name="pref_fakekey_preference_maintenance_directories">pref_fakekey_preference_maintenance_directories</string>
     <string translatable="false" name="pref_dbonsdcard">dbonsdcard</string>
     <string translatable="false" name="pref_debug">debug</string>
