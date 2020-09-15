@@ -161,7 +161,7 @@ public final class LogTemplateProvider {
             public String getValue(final LogContext context) {
 
                 final boolean increment;
-                if (null != context.logEntry && (context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN)) {
+                if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
                     increment = true;
                 } else {
                     increment = false;
@@ -194,7 +194,7 @@ public final class LogTemplateProvider {
             @Override
             public String getValue(final LogContext context) {
 
-                if (null != context.logEntry && (context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN)) {
+                if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
                     return getCounter(context, true);
                 } else {
                     return getCounter(context, false);
