@@ -577,7 +577,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     public boolean onCreateOptionsMenu(final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         for (final LogTemplate template : LogTemplateProvider.getTemplatesWithoutSignature()) {
-            if (template.getTemplateString().equals("NUMBER")) {
+            if (template.getTemplateString().equals("NUMBER") || template.getTemplateString().equals("ONLINENUM")) {
                 menu.findItem(R.id.menu_templates).getSubMenu().removeItem(template.getItemId());
             }
         }

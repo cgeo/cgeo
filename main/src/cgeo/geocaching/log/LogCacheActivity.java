@@ -305,7 +305,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             lastSavedState = getEntryFromView();
             //set initial signature. Setting this AFTER setting lastSavedState and GUI leads to the signature being a change-to-save as requested in #8973
             if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
-                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
+                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, lastSavedState)), false);
             }
         } else {
             fillViewFromEntry(lastSavedState);
@@ -527,7 +527,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     @Override
     protected LogContext getLogContext() {
-        return new LogContext(cache, null);
+        return new LogContext(cache, getEntryFromView());
     }
 
     private void addOrEditImage(final int imageIndex) {

@@ -159,12 +159,20 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
+
+                final boolean increment;
+                if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
+                    increment = true;
+                } else {
+                    increment = false;
+                }
+
                 final Geocache cache = context.getCache();
                 if (cache == null) {
                     return StringUtils.EMPTY;
                 }
                 long counter;
-                final String onlineNum = getCounter(context, true);
+                final String onlineNum = getCounter(context, increment);
                 final IConnector connector = ConnectorFactory.getConnector(cache);
 
                 if (onlineNum.equals(StringUtils.EMPTY)) {
@@ -172,7 +180,7 @@ public final class LogTemplateProvider {
                     if (f == null) {
                         return StringUtils.EMPTY;
                     }
-                    counter = f.getCounter(true);
+                    counter = f.getCounter(increment);
                 } else {
                     counter = Long.parseLong(onlineNum);
                 }
@@ -185,7 +193,12 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                return getCounter(context, true);
+
+                if (null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN) {
+                    return getCounter(context, true);
+                } else {
+                    return getCounter(context, false);
+                }
             }
         });
         templates.add(new LogTemplate("OWNER", R.string.init_signature_template_owner) {

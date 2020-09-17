@@ -63,12 +63,25 @@ public class LogTemplateProviderTest extends TestCase {
     public static void testNoNumberIncrement() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC45GGA");
-        final LogContext context = new LogContext(cache, new LogEntry.Builder().build());
+        final LogContext context = new LogContext(cache, new LogEntry.Builder().setLogType(LogType.FOUND_IT).build());
         final String template = "[NUMBER]";
         final String withIncrement = LogTemplateProvider.applyTemplates(template, context);
         final String withoutIncrement = LogTemplateProvider.applyTemplatesNoIncrement(template, context);
 
         // both strings represent integers with an offset of one.
+        assertThat(Integer.parseInt(withIncrement) - Integer.parseInt(withoutIncrement)).isEqualTo(1);
+    }
+
+    public static void testNumberLogTypeIncrement() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC45GGA");
+        final LogContext context = new LogContext(cache, new LogEntry.Builder().setLogType(LogType.FOUND_IT).build());
+        final LogContext context2 = new LogContext(cache, new LogEntry.Builder().setLogType(LogType.DIDNT_FIND_IT).build());
+        final String template = "[NUMBER]";
+        final String withIncrement = LogTemplateProvider.applyTemplates(template, context);
+        final String withoutIncrement = LogTemplateProvider.applyTemplates(template, context2);
+
+        // both strings represent integers - the number template should not increase if the log type is not FOUND_IT or something equal
         assertThat(Integer.parseInt(withIncrement) - Integer.parseInt(withoutIncrement)).isEqualTo(1);
     }
 
