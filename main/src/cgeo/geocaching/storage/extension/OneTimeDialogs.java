@@ -18,7 +18,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
     public enum DialogType {
         // names must not be changed, as there are database entries depending on it
 
-        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.info_feature_offline_counter);
+        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter);
 
         public int messageTitle;
         public int messageText;
