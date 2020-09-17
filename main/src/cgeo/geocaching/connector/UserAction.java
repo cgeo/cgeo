@@ -23,11 +23,13 @@ public class UserAction {
         @NonNull
         public final String displayName;
         public final String userName;
+        public final String userGUID;
         public WeakReference<Context> contextRef;
 
-        public UAContext(@NonNull final String displayName, @NonNull final String userName) {
+        public UAContext(@NonNull final String displayName, @NonNull final String userName, @NonNull final String userGUID) {
             this.displayName = displayName;
             this.userName = userName;
+            this.userGUID = userGUID;
         }
 
         public void startActivity(final Intent intent) {

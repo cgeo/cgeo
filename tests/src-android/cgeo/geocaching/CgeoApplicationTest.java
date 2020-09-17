@@ -301,6 +301,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         final Geocache gc1zxez = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
         assertThat(gc1zxez).isNotNull();
         assertThat(gc1zxez.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");
+        assertThat(gc1zxez.getOwnerGuid()).isEqualTo("b66a625c-0266-43a7-9e7c-efecb9b2929a");
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */

@@ -141,50 +141,51 @@ public class DataStore {
     // Columns and indices for the cache data
     private static final String QUERY_CACHE_DATA =
             "SELECT " +
-                    "cg_caches.updated,"             +   // 0
-                    "cg_caches.reason,"              +   // 1
-                    "cg_caches.detailed,"            +   // 2
-                    "cg_caches.detailedupdate,"      +   // 3
-                    "cg_caches.visiteddate,"         +   // 4
-                    "cg_caches.geocode,"             +   // 5
-                    "cg_caches.cacheid,"             +   // 6
-                    "cg_caches.guid,"                +   // 7
-                    "cg_caches.type,"                +   // 8
-                    "cg_caches.name,"                +   // 9
-                    "cg_caches.owner,"               +   // 10
-                    "cg_caches.owner_real,"          +   // 11
-                    "cg_caches.hidden,"              +   // 12
-                    "cg_caches.hint,"                +   // 13
-                    "cg_caches.size,"                +   // 14
-                    "cg_caches.difficulty,"          +   // 15
-                    "cg_caches.direction,"           +   // 16
-                    "cg_caches.distance,"            +   // 17
-                    "cg_caches.terrain,"             +   // 18
-                    "cg_caches.location,"            +   // 19
-                    "cg_caches.personal_note,"       +   // 20
-                    "cg_caches.shortdesc,"           +   // 21
-                    "cg_caches.favourite_cnt,"       +   // 22
-                    "cg_caches.rating,"              +   // 23
-                    "cg_caches.votes,"               +   // 24
-                    "cg_caches.myvote,"              +   // 25
-                    "cg_caches.disabled,"            +   // 26
-                    "cg_caches.archived,"            +   // 27
-                    "cg_caches.members,"             +   // 28
-                    "cg_caches.found,"               +   // 29
-                    "cg_caches.favourite,"           +   // 30
-                    "cg_caches.inventoryunknown,"    +   // 31
-                    "cg_caches.onWatchlist,"         +   // 32
-                    "cg_caches.reliable_latlon,"     +   // 33
-                    "cg_caches.coordsChanged,"       +   // 34
-                    "cg_caches.latitude,"            +   // 35
-                    "cg_caches.longitude,"           +   // 36
-                    "cg_caches.finalDefined,"        +   // 37
-                    "cg_caches._id,"                 +   // 38
-                    "cg_caches.inventorycoins,"      +   // 39
-                    "cg_caches.inventorytags,"       +   // 40
-                    "cg_caches.logPasswordRequired," +   // 41
-                    "cg_caches.watchlistCount,"      +   // 42
-                    "cg_caches.preventWaypointsFromNote";  // 43
+                    "cg_caches.updated,"                  +  //  0
+                    "cg_caches.reason,"                   +  //  1
+                    "cg_caches.detailed,"                 +  //  2
+                    "cg_caches.detailedupdate,"           +  //  3
+                    "cg_caches.visiteddate,"              +  //  4
+                    "cg_caches.geocode,"                  +  //  5
+                    "cg_caches.cacheid,"                  +  //  6
+                    "cg_caches.guid,"                     +  //  7
+                    "cg_caches.type,"                     +  //  8
+                    "cg_caches.name,"                     +  //  9
+                    "cg_caches.owner,"                    +  // 10
+                    "cg_caches.owner_real,"               +  // 11
+                    "cg_caches.hidden,"                   +  // 12
+                    "cg_caches.hint,"                     +  // 13
+                    "cg_caches.size,"                     +  // 14
+                    "cg_caches.difficulty,"               +  // 15
+                    "cg_caches.direction,"                +  // 16
+                    "cg_caches.distance,"                 +  // 17
+                    "cg_caches.terrain,"                  +  // 18
+                    "cg_caches.location,"                 +  // 19
+                    "cg_caches.personal_note,"            +  // 20
+                    "cg_caches.shortdesc,"                +  // 21
+                    "cg_caches.favourite_cnt,"            +  // 22
+                    "cg_caches.rating,"                   +  // 23
+                    "cg_caches.votes,"                    +  // 24
+                    "cg_caches.myvote,"                   +  // 25
+                    "cg_caches.disabled,"                 +  // 26
+                    "cg_caches.archived,"                 +  // 27
+                    "cg_caches.members,"                  +  // 28
+                    "cg_caches.found,"                    +  // 29
+                    "cg_caches.favourite,"                +  // 30
+                    "cg_caches.inventoryunknown,"         +  // 31
+                    "cg_caches.onWatchlist,"              +  // 32
+                    "cg_caches.reliable_latlon,"          +  // 33
+                    "cg_caches.coordsChanged,"            +  // 34
+                    "cg_caches.latitude,"                 +  // 35
+                    "cg_caches.longitude,"                +  // 36
+                    "cg_caches.finalDefined,"             +  // 37
+                    "cg_caches._id,"                      +  // 38
+                    "cg_caches.inventorycoins,"           +  // 39
+                    "cg_caches.inventorytags,"            +  // 40
+                    "cg_caches.logPasswordRequired,"      +  // 41
+                    "cg_caches.watchlistCount,"           +  // 42
+                    "cg_caches.preventWaypointsFromNote," +  // 43
+                    "cg_caches.owner_guid";                  // 44
 
     /** The list of fields needed for mapping. */
     private static final String[] WAYPOINT_COLUMNS = { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state" };
@@ -197,7 +198,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 89;
+    private static final int dbVersion = 90;
     public static final int customListIdOffset = 10;
 
     /**
@@ -222,7 +223,8 @@ public class DataStore {
             86, //(re)create indices on c_logs and c_logImages
             87, //adds service log id to logging tables
             88, //add timestamp to trail history
-            89  //add altitude to trail history
+            89, //add altitude to trail history
+            90  //add user guid to caches and logs
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -289,7 +291,8 @@ public class DataStore {
             + "finalDefined INTEGER DEFAULT 0, "
             + "logPasswordRequired INTEGER DEFAULT 0,"
             + "watchlistCount INTEGER DEFAULT -1,"
-            + "preventWaypointsFromNote INTEGER DEFAULT 0"
+            + "preventWaypointsFromNote INTEGER DEFAULT 0,"
+            + "owner_guid TEXT NOT NULL DEFAULT ''"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
@@ -347,6 +350,7 @@ public class DataStore {
             + "updated LONG NOT NULL, " // date of save
             + "type INTEGER NOT NULL DEFAULT 4, "
             + "author TEXT, "
+            + "author_guid TEXT NOT NULL DEFAULT '', "
             + "log TEXT, "
             + "date LONG, "
             + "found INTEGER NOT NULL DEFAULT 0, "
@@ -1380,6 +1384,16 @@ public class DataStore {
                         }
                     }
 
+                    // add user guid to caches and logs
+                    if (oldVersion < 90) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "owner_guid TEXT NOT NULL DEFAULT ''");
+                            createColumnIfNotExists(db, dbTableLogs, "author_guid TEXT NOT NULL DEFAULT ''");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 90);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1904,6 +1918,7 @@ public class DataStore {
         values.put("logPasswordRequired", cache.isLogPasswordRequired() ? 1 : 0);
         values.put("watchlistCount", cache.getWatchlistCount());
         values.put("preventWaypointsFromNote", cache.isPreventWaypointsFromNote() ? 1 : 0);
+        values.put("owner_guid", cache.getOwnerGuid());
 
         init();
 
@@ -2189,10 +2204,11 @@ public class DataStore {
                 }
                 insertLog.bindLong(4, log.logType.id);
                 insertLog.bindString(5, log.author);
-                insertLog.bindString(6, log.log);
-                insertLog.bindLong(7, log.date);
-                insertLog.bindLong(8, log.found);
-                insertLog.bindLong(9, log.friend ? 1 : 0);
+                insertLog.bindString(6, log.authorGuid);
+                insertLog.bindString(7, log.log);
+                insertLog.bindLong(8, log.date);
+                insertLog.bindLong(9, log.found);
+                insertLog.bindLong(10, log.friend ? 1 : 0);
                 final long logId = insertLog.executeInsert();
                 if (log.hasLogImages()) {
                     final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
@@ -2548,6 +2564,7 @@ public class DataStore {
         cache.setLogPasswordRequired(cursor.getInt(41) > 0);
         cache.setWatchlistCount(cursor.getInt(42));
         cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
+        cache.setOwnerGuid(cursor.getString(44));
 
         return cache;
     }
@@ -2872,8 +2889,8 @@ public class DataStore {
             init();
 
             final Cursor cursor = database.rawQuery(
-                //                           0          1           2     3        4    5     6      7                                                8      9        10    11    12
-                "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
+                //                           0          1               2     3       4            5    6     7      8                                       9                10      11     12   13
+                "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
                             + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                             + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
 
@@ -2891,16 +2908,17 @@ public class DataStore {
                             .setServiceLogId(cursor.getString(1))
                             .setLogType(LogType.getById(cursor.getInt(2)))
                             .setAuthor(cursor.getString(3))
-                            .setLog(cursor.getString(4))
-                            .setDate(cursor.getLong(5))
-                            .setFound(cursor.getInt(6))
-                            .setFriend(cursor.getInt(7) == 1);
-                    if (!cursor.isNull(8)) {
-                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(11)).setTitle(cursor.getString(10)).setDescription(cursor.getString(12)).build());
+                            .setAuthorGuid(cursor.getString(4))
+                            .setLog(cursor.getString(5))
+                            .setDate(cursor.getLong(6))
+                            .setFound(cursor.getInt(7))
+                            .setFriend(cursor.getInt(8) == 1);
+                    if (!cursor.isNull(9)) {
+                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
                     }
                 } else {
                     // We cannot get several lines for the same log entry if it does not contain an image.
-                  log.addLogImage(new Image.Builder().setUrl(cursor.getString(11)).setTitle(cursor.getString(10)).setDescription(cursor.getString(12)).build());
+                  log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
                 }
             }
             if (log != null) {
@@ -4016,7 +4034,7 @@ public class DataStore {
         OFFLINE_LOG_ID_OF_GEOCODE("SELECT _id FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT COUNT(geocode) FROM " + dbTableCachesLists + " WHERE list_id = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT COUNT(DISTINCT(geocode)) FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID),
-        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"),
+        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, author_guid, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
         INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
         ADD_TO_LIST("INSERT OR REPLACE INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (?, ?)"),
         GEOCODE_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.geocode = ? AND c.geocode = l.geocode AND c.detailed = 1 AND l.list_id != " + StoredList.TEMPORARY_LIST.id),

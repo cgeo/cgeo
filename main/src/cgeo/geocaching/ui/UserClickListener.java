@@ -62,15 +62,15 @@ public abstract class UserClickListener implements View.OnClickListener {
     }
 
     public static UserClickListener forOwnerOf(final Geocache cache) {
-        return forUser(cache, cache.getOwnerDisplayName(), cache.getOwnerUserId());
+        return forUser(cache, cache.getOwnerDisplayName(), cache.getOwnerUserId(), cache.getOwnerGuid());
     }
 
     public static OnClickListener forOwnerOf(final Trackable trackable) {
-        return forUser(trackable, trackable.getOwner());
+        return forUser(trackable, trackable.getOwner(), trackable.getOwnerGuid());
     }
 
-    public static OnClickListener forUser(final Trackable trackable, final String userName) {
-        return new UserClickListener(new UAContext(userName, userName)) {
+    public static OnClickListener forUser(final Trackable trackable, final String userName, final String userGuid) {
+        return new UserClickListener(new UAContext(userName, userName, userGuid)) {
 
             @Override
             @NonNull
@@ -80,8 +80,8 @@ public abstract class UserClickListener implements View.OnClickListener {
         };
     }
 
-    public static UserClickListener forUser(final Geocache cache, final String userName, final String userId) {
-        return new UserClickListener(new UAContext(userName, userId)) {
+    public static UserClickListener forUser(final Geocache cache, final String userName, final String userId, final String userGuid) {
+        return new UserClickListener(new UAContext(userName, userId, userGuid)) {
 
             @Override
             @NonNull
