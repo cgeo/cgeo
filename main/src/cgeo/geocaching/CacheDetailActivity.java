@@ -157,6 +157,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -676,6 +677,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
         menu.findItem(R.id.menu_store_in_list).setVisible(cache != null);
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
+        menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache != null && cache.isOffline() && cache.hasUserdefinedWaypoints());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
@@ -711,6 +713,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         switch (menuItem) {
             case R.id.menu_delete:
                 dropCache();
+                return true;
+            case R.id.menu_delete_userdefined_waypoints:
+                dropUserdefinedWaypoints();
                 return true;
             case R.id.menu_store_in_list:
                 storeCache(false);
@@ -1045,6 +1050,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
         cache.drop(new ChangeNotificationHandler(this, progress));
+    }
+
+    private void dropUserdefinedWaypoints() {
+        if (null != cache && cache.hasUserdefinedWaypoints()) {
+            Dialogs.confirm(this, R.string.cache_delete_userdefined_waypoints, R.string.cache_delete_userdefined_waypoints_confirm, (dialog, which) -> {
+                for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
+                    if (waypoint.isUserDefined()) {
+                        cache.deleteWaypoint(waypoint);
+                    }
+                }
+                ActivityMixin.showShortToast(this, R.string.cache_delete_userdefined_waypoints_success);
+                invalidateOptionsMenu();
+                reinitializePage(Page.WAYPOINTS);
+            });
+        }
     }
 
     private void storeCache(final boolean fastStoreOnLastSelection) {

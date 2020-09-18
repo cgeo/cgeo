@@ -1417,6 +1417,15 @@ public class Geocache implements IWaypoint {
         return !waypoints.isEmpty();
     }
 
+    public boolean hasUserdefinedWaypoints() {
+        for (Waypoint waypoint : waypoints) {
+            if (waypoint.isUserDefined()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasFinalDefined() {
         return finalDefined;
     }

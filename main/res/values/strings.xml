@@ -869,6 +869,9 @@
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Refresh</string>
     <string name="cache_offline_drop">Remove</string>
+    <string name="cache_delete_userdefined_waypoints">Remove user-defined waypoints</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Remove all user-defined waypoints of this cache?\n\nWaypoints will be deleted immediately, there is no undo.</string>
+    <string name="cache_delete_userdefined_waypoints_success">User-defined waypoints deleted</string>
     <string name="cache_offline_store">Store</string>
     <string name="cache_offline_stored">Stored in device</string>
     <string name="cache_offline_not_ready">Not available offline</string>
