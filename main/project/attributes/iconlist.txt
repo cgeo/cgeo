@@ -128,3 +128,7 @@ audio_cache       |      |      |     7 |     | PD      | Michael Martin-Smucker
 geohotel          |      |      |     5 |     | CCBYNCSA| rsudev, Marcela Machuca, geokrety.org | http://thenounproject.com/term/hotel/12799/, geokrety.org
 survey_marker     |      |      |     2 |     | PD      | rsudev                    | selfmade
 offset_cache      |      |      |     8 |     | PD      | rsudev, S.Shohei          | selfmade, http://thenounproject.com/term/arrow/5582/
+bonuscache        |  69  |      |       |     | CCBY    | Susannanova               | https://thenounproject.com/term/add/2640238/
+powertrail        |  70  |      |       |     | CCBY    | Martina Krasnayová        | https://thenounproject.com/term/trail/689645/
+challengecache    |  71  |      |       |     | CCBY    | Adrien Coquet             | https://thenounproject.com/term/challenge/3203889/
+hqsolutionchecker |  72  |      |       |     | CCBY    | Adrien Coquet             | https://thenounproject.com/term/solution/2998552/
