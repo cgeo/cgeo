@@ -77,6 +77,11 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:id="@+id/menu_delete_userdefined_waypoints"
+        android:title="@string/cache_delete_userdefined_waypoints"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_gcvote"
         android:title="@string/cache_menu_vote"
         android:visible="false"
