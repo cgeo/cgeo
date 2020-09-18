@@ -84,6 +84,10 @@ public enum CacheAttribute {
     FRONTYARD(65, -1, "frontyard", R.drawable.attribute_frontyard, R.string.attribute_frontyard_yes, R.string.attribute_frontyard_no),
     TEAMWORK(66, -1, "teamwork", R.drawable.attribute_teamwork, R.string.attribute_teamwork_yes, R.string.attribute_teamwork_no),
     GEOTOUR(67, -1, "geotour", R.drawable.attribute_geotour, R.string.attribute_geotour_yes, R.string.attribute_geotour_no),
+    BONUSCACHE(69, -1, "bonuscache", R.drawable.attribute_bonuscache, R.string.attribute_bonuscache_yes, R.string.attribute_bonuscache_no),
+    POWERTRAIL(70, -1, "powertrail", R.drawable.attribute_powertrail, R.string.attribute_powertrail_yes, R.string.attribute_powertrail_no),
+    CHALLENGECACHE(71, -1, "challengecache", R.drawable.attribute_challengecache, R.string.attribute_challengecache_yes, R.string.attribute_challengecache_no),
+    HQSOLUTIONCHECKER(72, -1, "hqsolutionchecker", R.drawable.attribute_hqsolutionchecker, R.string.attribute_hqsolutionchecker_yes, R.string.attribute_hqsolutionchecker_no),
 
     // opencaching attributes following. GPX attributes use ids of 100+ and are not complete
     OC_ONLY(106, 1, "oc_only", R.drawable.attribute_oc_only, R.string.attribute_oc_only_yes, R.string.attribute_oc_only_no),
