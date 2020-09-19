@@ -871,6 +871,7 @@
     <string name="cache_offline_drop">Remove</string>
     <string name="cache_delete_userdefined_waypoints">Remove user-defined waypoints</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Remove all user-defined waypoints of this cache?\n\nWaypoints will be deleted immediately, there is no undo.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Note: You have \"waypoints from note\" enabled. If you have coordinates in your personal note recognized by c:geo, waypoints will be recreated for them automatically. You can disable this in the personal note edit dialog.</string>
     <string name="cache_delete_userdefined_waypoints_success">User-defined waypoints deleted</string>
     <string name="cache_offline_store">Store</string>
     <string name="cache_offline_stored">Stored in device</string>

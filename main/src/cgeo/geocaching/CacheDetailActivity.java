@@ -1054,7 +1054,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private void dropUserdefinedWaypoints() {
         if (null != cache && cache.hasUserdefinedWaypoints()) {
-            Dialogs.confirm(this, R.string.cache_delete_userdefined_waypoints, R.string.cache_delete_userdefined_waypoints_confirm, (dialog, which) -> {
+            String info = getString(R.string.cache_delete_userdefined_waypoints_confirm);
+            if (!cache.isPreventWaypointsFromNote()) {
+                info += "\n\n" + getString(R.string.cache_delete_userdefined_waypoints_note);
+            }
+            Dialogs.confirm(this, getString(R.string.cache_delete_userdefined_waypoints), info, (dialog, which) -> {
                 for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
                     if (waypoint.isUserDefined()) {
                         cache.deleteWaypoint(waypoint);
