@@ -17,6 +17,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Voice output: Estimate device orientation and transform coords when mobile is upright</li>
 <li>Fix: Offline log remembers selected image</li>
 <li>New: Offline logging now supports adding multiple images</li>
+<li>New: Support the 4 new attributes at geocaching.com</li>
 </ul>
 
 <h4>Cache lists:</h4>
