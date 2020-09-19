@@ -96,11 +96,11 @@
     <string name="log_tb_archived">Archived</string>
     <string name="log_save">Save offline</string>
     <string name="log_saving">Sending log…</string>
-    <string name="log_saving_and_uploading">Posting log and uploading image…</string>
+    <string name="log_saving_and_uploading">Posting log and uploading images…</string>
     <string name="log_posting_log">Posting log…</string>
     <string name="log_posting_twitter">Posting tweet…</string>
     <string name="log_posting_vote">Posting cache vote…</string>
-    <string name="log_posting_image">Posting image…</string>
+    <string name="log_posting_image">Posting images…</string>
     <string name="log_posting_generic_trackable">Posting %1$s %2$d/%3$d</string>
     <string name="log_clear">Clear</string>
     <string name="log_post_not_possible">Download of data in progress…\nPlease try again in a few seconds or check your internet connection.</string>
