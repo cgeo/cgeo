@@ -295,7 +295,7 @@ dependencies {
     implementation files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     // Mapsforge new version
-    def mapsforgeVersion = '0.13.0'
+    def mapsforgeVersion = '0.14.0'
     implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
     implementation "org.mapsforge:mapsforge-map:$mapsforgeVersion"
     implementation "org.mapsforge:mapsforge-map-android:$mapsforgeVersion"
@@ -314,7 +314,7 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.14.0'
 
-    implementation 'com.squareup.okhttp3:okhttp:4.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:17.0.0'
@@ -336,7 +336,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.2.0'
+    implementation 'androidx.exifinterface:exifinterface:1.3.0'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
