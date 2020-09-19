@@ -20,6 +20,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>Fix: Sped up offline logging with large cache lists</li>
 <li>Fix: [NUMBER] only adds +1 for types found it / attended / webcam photo taken</li>
 <li>New: Support the 4 new attributes at geocaching.com</li>
+<li>New: Added option to remove all user-defined waypoints of a cache in one step</li>
 </ul>
 
 <h4>Cache lists:</h4>
