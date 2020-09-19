@@ -1,14 +1,14 @@
-c:geo je neoficiálny klient pre geocaching.com. Je to plne vybavená aplikácia s otvoreným zdrojovým kódom a je vždy k dispozícii do terénu. Ponúka základnú podporu pre ďalšie geocachingové platformy (napríklad Opencaching). Nevyžaduje webový prehliadač ani exporty – stačí nainštalovať a môžete hneď začať. 
+c:geo je neoficiálny klient pre geocaching.com. Je to plne vybavená aplikácia s otvoreným zdrojovým kódom a je vždy k dispozícii do terénu. Ponúka základnú podporu pre ďalšie geocachingové platformy (napríklad Opencaching). Nevyžaduje webový prehliadač ani exporty – stačí nainštalovať a môžete hneď začať.
 
 Hlavné funkcie:
-– Zobrazenie kešiek na live mape 
+– Zobrazenie kešiek na live mape
 – Použitie Máp Google alebo OpenStreetMaps
-– Vyhľadávanie kešiek podľa rôznych kritérií 
+– Vyhľadávanie kešiek podľa rôznych kritérií
 – Logovanie nálezov online alebo offline
 – Ukladanie informácií o keškách do zariadenia
 – Vytváranie a spravovanie bodov trasy
 – Navigácia pomocou kompasu, mapy alebo ďalších aplikácií
-– Import a export súborov GPX 
+– Import a export súborov GPX
 – Plná podpora trasovateľných úredmetov
 – Funkcie offline kešovania vrátane offline máp
 
@@ -17,7 +17,7 @@ Hľadanie kešiek pomocou live mapy alebo jednej z mnohých funkcií vyhľadáva
 
 Navigácia ku keške alebo bodu trasy s funkciou zabudovaného kompasu, mapy alebo na súradnice rôznymi externými aplikáciami (napr. Radar, Navigácia Google, StreetView, Locus, Navigon, Sygic a mnohé ďalšie).
 
-Ukladanie informácií o keškách do zariadenia priamo z geocaching.com, ako aj cez import súboru GPX, aby ste ich mali kedykoľvek k dispozícii. 
+Ukladanie informácií o keškách do zariadenia priamo z geocaching.com, ako aj cez import súboru GPX, aby ste ich mali kedykoľvek k dispozícii.
 Uložené kešky môžete spravovať v rozličných zoznamoch a môžete ich zoradiť a filtrovať podľa svojich potrieb.
 Uložené kešky spolu so súbormi offline máp možno využiť na hľadanie kešiek bez internetového pripojenia (napr. v roamingu).
 Logy možno pridávať online alebo uložiť offline a odoslať ich neskôr, prípadne exportovať cez Field Notes.

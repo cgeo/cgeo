@@ -3,7 +3,7 @@ Dies ist ein Kontakte-Plugin für c:geo. Es funktioniert nur, wenn c:geo install
 Verwendung:
 Wenn ein Benutzername (z.B. im Cache-Logbuch) angeklickt wird, wird im Menü das Öffnen des Kontaktes angeboten. Dies erlaubt es den Benutzer direkt anzurufen oder anzuschreiben.
 
-Anmerkung: 
+Anmerkung:
 Damit das Plugin den Benutzernamen zu einem Adressbuch-Eintrag zuordnen kann, muss der Benutzername im Namens- oder Spitznamen-Feld eingetragen sein.
 
 Kommentare im PlayStore können nicht beantwortet werden! Wenn du Probleme bei der Installation oder Nutzung von c:geo hast, lies zuerst unsere FAQ: https://faq.cgeo.org

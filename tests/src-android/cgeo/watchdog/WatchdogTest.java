@@ -70,7 +70,7 @@ public class WatchdogTest extends CGeoTestCase {
         assertThat(geocache.getGeocode()).isEqualTo(geocode);
     }
 
-    private static void checkWebsite(final String connectorName, final String url) {    
+    private static void checkWebsite(final String connectorName, final String url) {
 
         // temporarily disable extremcaching.com
         // It fails if the SSL certificate of the API has expired, which happens quite regular due to bad maintenance of the site

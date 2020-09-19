@@ -1,14 +1,14 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away. 
+c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away.
 
 主な機能:
-- ライブマップでキャッシュを表示 
+- ライブマップでキャッシュを表示
 - GoogleマップまたはOpenStreetMapsを使用する
-- 様々な条件でキャッシュを検索 
+- 様々な条件でキャッシュを検索
 - オンラインまたはオフラインでログを記録する
 - 端末にキャッシュ情報を保存する
 - ウェイポイントの作成と管理
 - コンパス、マップ、またはその他のアプリを使用して案内
-- GPXファイルのインポート/エクスポート 
+- GPXファイルのインポート/エクスポート
 - トラッカブルのフルサポート
 - オフライン地図を含むオフラインキャッシュ機能
 
@@ -17,7 +17,7 @@ Find caches using the live map or by using one of the many search functions.
 
 Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want. 
+Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want.
 You can manage your stored caches in different lists and can sort and filter them according to your needs.
 Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
 Logs can be posted online or stored offline for later submission or exported via field notes.

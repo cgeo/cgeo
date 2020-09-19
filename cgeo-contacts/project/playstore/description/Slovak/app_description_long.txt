@@ -3,7 +3,7 @@ Toto je doplnok na kontakty pre c:geo, čo je geocachingová aplikácia s otvore
 Využitie:
 Keď kliknete na meno používateľa v c:geo (napr. v logbooku kešky), ponuka obsahuje položku na otvorenie príslušnej vizitky kontaktu v zozname kontaktov v telefóne. Vďaka tomu je možné priamo zavolať alebo poslať správu používateľovi.
 
-Poznámka: 
+Poznámka:
 Meno používateľa danej osoby musí byť uložené v políčku pre meno alebo prezývku vo vašich kontaktoch, aby mohol doplnok nájsť zhodu s geocachingovým menom používateľa a kontaktom.
 
 Na komentáre v Obchode Play sa nedá odpovedať! Ak máte problémy s inštaláciou alebo používaním aplikácie c:geo, pozrite sa najprv na najčastejšie otázky: https://faq.cgeo.org

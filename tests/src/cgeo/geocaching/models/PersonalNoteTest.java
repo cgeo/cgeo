@@ -40,7 +40,7 @@ public class PersonalNoteTest {
         note.gatherMissingDataFrom(createNote("local note\n--\nprovider note one\n--\nprovider note two\n--\nprovider note four", false));
         assertThat(note.getNote()).isEqualTo("local note\n--\nprovider note one\n--\nprovider note two\n--\nprovider note four\n--\nprovider note three");
     }
-    
+
     private static PersonalNote createNote(final String text, final boolean isFromProvider) {
         final PersonalNote note = new PersonalNote();
         note.setNote(text);

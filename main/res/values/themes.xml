@@ -21,7 +21,7 @@
         <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
         <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
 
-    </style>    
+    </style>
 
 
     <style name="cgeo_main" parent="cgeo_main.base">
@@ -162,7 +162,7 @@
         <item name="compass">1</item>
     </style>
 
-    
+
     <style name="cgeo.Translucent.Light" parent="light">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -189,7 +189,7 @@
 
     <style name="popup_light" parent="cgeo_popup">
     </style>
-    
+
     <style name="settings" parent="@android:style/Theme.DeviceDefault">
         <item name="settings_cloud">@drawable/settings_cloud_white</item>
         <item name="settings_details">@drawable/settings_details_white</item>

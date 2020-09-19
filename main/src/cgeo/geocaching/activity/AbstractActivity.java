@@ -82,7 +82,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     }
 
     @Override
-    public final void showShortToast(final String text) { 
+    public final void showShortToast(final String text) {
         ActivityMixin.showShortToast(this, text);
     }
 

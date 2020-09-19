@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <ImageButton
         android:id="@+id/default_navigation_action"
         android:layout_width="wrap_content"
@@ -11,5 +11,5 @@
         android:scaleType="centerInside"
         android:src="@drawable/ic_menu_compass"
         android:background="@drawable/actionbar_button" />
-    
+
 </LinearLayout>

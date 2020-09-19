@@ -635,7 +635,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
                 // horizontal swipe
                 if (Math.abs(velocityX) > Math.abs(velocityY)) {
-                    
+
                     // left to right swipe
                     if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE) {
                         if (!adapter.selectMode) {

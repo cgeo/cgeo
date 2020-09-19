@@ -11,9 +11,9 @@ public class PersonalDataFilterFactory implements IFilterFactory {
     @NonNull
     public List<IFilter> getFilters() {
         return Arrays.asList(
-                new OwnRatingFilter(), 
-                new PersonalNoteFilter(), 
-                new ModifiedFilter(), 
+                new OwnRatingFilter(),
+                new PersonalNoteFilter(),
+                new ModifiedFilter(),
                 new OfflineLogFilter(),
                 new GcvoteFilter(),
                 new OwnWaypointFilter());

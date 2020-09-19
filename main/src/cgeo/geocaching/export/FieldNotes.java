@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
- * 
+ *
  * <pre>
  * GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"
  * </pre>

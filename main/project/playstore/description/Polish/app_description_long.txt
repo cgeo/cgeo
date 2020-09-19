@@ -1,14 +1,14 @@
-c: geo jest otwartym, w pełni funkcjonalnym, zawsze gotowym do użycia nieoficjalnym klientem dla geocaching.com i oferuje podstawowe wsparcie dla innych platform geocachingowych (takich jak Opencaching). Nie wymaga przeglądarki internetowej ani eksportu - po prostu zainstaluj ją i zacznij od razu. 
+c: geo jest otwartym, w pełni funkcjonalnym, zawsze gotowym do użycia nieoficjalnym klientem dla geocaching.com i oferuje podstawowe wsparcie dla innych platform geocachingowych (takich jak Opencaching). Nie wymaga przeglądarki internetowej ani eksportu - po prostu zainstaluj ją i zacznij od razu.
 
 Główne funkcje:
-- Przeglądaj skrzynki na mapie na żywo 
+- Przeglądaj skrzynki na mapie na żywo
 - Używaj Map Google lub OpenStreetMap
-- Wyszukaj skrzynki według różnych kryteriów 
+- Wyszukaj skrzynki według różnych kryteriów
 - Zaloguj swoje znaleziska online lub offline
 - Przechowuj informacje o pamięci podręcznej na swoim urządzeniu
 - Twórz punkty i zarządzaj nimi
 - Nawiguj używając kompasu, mapy lub innej aplikacji
-- Importuj / eksportuj pliki GPX 
+- Importuj / eksportuj pliki GPX
 - Pełne wsparcie dla śledzenia (trackables)
 - Funkcje buforowania offline, w tym mapy offline
 
@@ -17,7 +17,7 @@ Znajdź skrzynki przy użyciu mapy na żywo lub jednej z wielu funkcji wyszukiwa
 
 Nawiguj do skrzynki lub do punktu pośredniego skrzynki za pomocą wbudowanej funkcji kompasu, mapy lub przekaż współrzędne do różnych aplikacji zewnętrznych (np. Radar, Nawigacja Google, StreetView, Locus, Navigon, Sygic i wiele innych).
 
-Przechowuj informacje o skrzynkach na swoim urządzeniu bezpośrednio z geocaching.com, a także za pomocą importu plików GPX, aby były dostępne w dowolnym momencie. 
+Przechowuj informacje o skrzynkach na swoim urządzeniu bezpośrednio z geocaching.com, a także za pomocą importu plików GPX, aby były dostępne w dowolnym momencie.
 Możesz zarządzać przechowywanymi skrzynkami na różnych listach oraz sortować i filtrować je zgodnie z własnymi potrzebami.
 Przechowywane skrzynki wraz z plikami map offline lub mapami statycznymi mogą służyć do znajdowania skrzynek bez połączenia z Internetem (np. kiedy jesteś poza krajem).
 Logowania mogą być publikowane online lub przechowywane offline w celu późniejszego przesłania lub eksportowane za pomocą notatek terenowych.
