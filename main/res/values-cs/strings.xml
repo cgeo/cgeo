@@ -1528,6 +1528,14 @@
     <string name="attribute_survey_marker_no">Není v blízkosti měřičské značky</string>
     <string name="attribute_offset_cache_yes">Offset keš</string>
     <string name="attribute_offset_cache_no">Není to Offset keš</string>
+    <string name="attribute_bonuscache_yes">Bonusová keš</string>
+    <string name="attribute_bonuscache_no">Není bonusovou keší</string>
+    <string name="attribute_powertrail_yes">Součást powertrailu</string>
+    <string name="attribute_powertrail_no">Není součástí powertrailu</string>
+    <string name="attribute_challengecache_yes">Challenge keš</string>
+    <string name="attribute_challengecache_no">Není challenge keší</string>
+    <string name="attribute_hqsolutionchecker_yes">Kontrola řešení na Geocaching.com povolena</string>
+    <string name="attribute_hqsolutionchecker_no">Kontrola řešení na Geocaching.com zakázána</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

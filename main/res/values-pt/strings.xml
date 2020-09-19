@@ -533,7 +533,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_authorization_credential_username">Utilizador</string>
     <string name="init_authorization_credential_password">Palavra-passe</string>
     <string name="settings_service_active">Activo</string>
-    <string name="settings_navigation_disabled">Esta aplicação parece não estar instalada</string>
+    <string name="settings_navigation_disabled">Parece que esta aplicação não está instalada</string>
     <string name="init_signature">Assinatura</string>
     <string name="init_template_help">Sequências de caracteres como [NAME] serão expandidas mais tarde quando este modelo for usado.</string>
     <string name="init_signature_template_button">Inserir modelo</string>
@@ -594,7 +594,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
-    <string name="init_backup">Backup de geocaches / waypoints</string>
+    <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_running">A criar cópia de segurança da base de dados das caches…</string>
     <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados que contém as caches e os pontos adicionais, mas não das suas imagens em caches nem de qualquer definição do programa.</string>
@@ -613,7 +613,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_last">Disponível cópia de segurança de</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro com uma cópia de segurança.</string>
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
-    <string name="settings_title_backup">Cópia de Segurança / Restauro</string>
+    <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
     <string name="init_backup_settings">Backup de definições do programa</string>
     <string name="init_backup_settings_backup_light">Cópia seg. definições (sem as contas)</string>
@@ -1226,11 +1226,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
+    <string name="device_heading_label">Orientação do dispositivo:</string>
     <string name="device_orientation">Orientação do dispositivo</string>
     <string name="device_orientation_label">Orientação:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
     <string name="do_auto">Automático</string>
+    <string name="do_flat">Horizontal</string>
+    <string name="do_upright">Vertical</string>
     <!-- license -->
     <string name="license">Licença</string>
     <string name="license_show">Mostrar licença</string>

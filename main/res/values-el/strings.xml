@@ -1506,6 +1506,14 @@
     <string name="attribute_survey_marker_no">Όχι κοντά σε γεωδαιτικό σημείο</string>
     <string name="attribute_offset_cache_yes">Μετατοπισμένη κρύπτη</string>
     <string name="attribute_offset_cache_no">Μη μετατοπισμένη κρύπτη</string>
+    <string name="attribute_bonuscache_yes">Κρύπτη Δώρο</string>
+    <string name="attribute_bonuscache_no">Χωρίς Κρύπτη Δώρο</string>
+    <string name="attribute_powertrail_yes">Τμήμα ενός power trail</string>
+    <string name="attribute_powertrail_no">Δεν είναι τμήμα ενός power trail</string>
+    <string name="attribute_challengecache_yes">Κρύπτη Challenge</string>
+    <string name="attribute_challengecache_no">Δεν είναι Κρύπτη Challenge</string>
+    <string name="attribute_hqsolutionchecker_yes">Ενεργοποιημένος ο ελεγκτής λύσης της Geocaching.com</string>
+    <string name="attribute_hqsolutionchecker_no">Απενεργοποιημένος ο ελεγκτής λύσης της Geocaching.com</string>
     <!-- next things -->
     <string name="quote">Για να γίνουν οι γεωκρύπτες πιο εύκολες και οι χρήστες πιο τεμπέληδες.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
