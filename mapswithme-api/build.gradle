@@ -15,4 +15,12 @@ android {
     java.srcDirs = ['src']
     res.srcDirs = ['res']
   }
+
+  lintOptions {
+    // generally we accept lint errors when building
+    abortOnError false
+
+    // abort release builds in case of FATAL errors
+    checkReleaseBuilds true
+  }
 }
