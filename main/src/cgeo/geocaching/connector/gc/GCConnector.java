@@ -522,7 +522,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
 
         final String uri = "https://www.geocaching.com/my/uploadfieldnotes.aspx";
-        final String page = GCLogin.getInstance().getRequestLogged(uri, null);
+        final String page = GCLogin.getInstance().getRequestLogged(uri, null, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("FieldNoteExport.ExportTask get page: No data from server");

@@ -10,6 +10,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LogWriter;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -159,19 +160,22 @@ public class GCLogin extends AbstractLogin {
         }
 
         final String username = credentials.getUserName();
+        final LogWriter logWriter = new LogWriter("login");
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         try {
             final String tryLoggedInData = getLoginPage();
+            logWriter.log("get login page:\n" + tryLoggedInData);
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                Log.w("Login.login: Failed to retrieve login page (1st)");
+                logWriter.w("Login.login: Failed to retrieve login page (1st)");
                 return StatusCode.CONNECTION_FAILED; // no login page
             }
 
-            if (getLoginStatus(tryLoggedInData)) {
-                Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-                if (switchToEnglish(tryLoggedInData) && retry) {
+            if (getLoginStatus(tryLoggedInData, logWriter)) {
+                logWriter.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
+                if (switchToEnglish(tryLoggedInData, logWriter) && retry) {
+                    logWriter.log("already logged in, switched to English");
                     return login(false, credentials);
                 }
                 return completeLoginProcess();
@@ -179,48 +183,53 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                Log.w("GCLogin.login: failed to find request verification token");
+                logWriter.w("GCLogin.login: failed to find request verification token");
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                Log.w("Login.login: Failed to retrieve login page (2nd)");
+                logWriter.w("Login.login: Failed to retrieve login page (2nd)");
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
             assert loginData != null;  // Caught above
 
-            if (getLoginStatus(loginData)) {
-                if (switchToEnglish(loginData) && retry) {
+            if (getLoginStatus(loginData, logWriter)) {
+                if (switchToEnglish(loginData, logWriter) && retry) {
+                    logWriter.log("logged in, switched to English");
                     return login(false, credentials);
                 }
-                Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
+                logWriter.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 return completeLoginProcess();
             }
 
             if (loginData.contains("Your password or username/email is incorrect")) {
-                Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
+                logWriter.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
             if (loginData.contains("You must validate your account before you can log in.")) {
-                Log.i("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
+                logWriter.i("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
-            Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
+            logWriter.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
             if (retry) {
-                switchToEnglish(loginData);
+                switchToEnglish(loginData, logWriter);
                 return login(false, credentials);
             }
 
+            logWriter.log("could not login due to some unknown reason");
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
         } catch (final StatusException status) {
+            logWriter.log("could not login / status exception: " + status.getMessage());
             return status.statusCode;
         } catch (final Exception ignored) {
-            Log.w("Login.login: communication error");
+            logWriter.w("Login.login: communication error");
             return StatusCode.CONNECTION_FAILED;
+        } finally {
+            logWriter.close();
         }
     }
 
@@ -277,44 +286,56 @@ public class GCLogin extends AbstractLogin {
      *
      * @return {@code true} if user is logged in, {@code false} otherwise
      */
-    boolean getLoginStatus(@Nullable final String page) {
-        if (StringUtils.isBlank(page)) {
-            Log.w("Login.checkLogin: No page given");
-            return false;
-        }
-        assert page != null;
-
-        if (TextUtils.matches(page, GCConstants.PATTERN_MAP_LOGGED_IN)) {
-            return true;
-        }
-
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
-
-        // on every page except login page
-        final String username = GCParser.getUsername(page);
-        setActualLoginStatus(StringUtils.isNotBlank(username));
-        if (isActualLoginStatus()) {
-            setActualUserName(username);
-            int cachesCount = 0;
-            try {
-                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
-            } catch (final NumberFormatException e) {
-                Log.e("getLoginStatus: bad cache count", e);
+    protected boolean getLoginStatus(@Nullable final String page, final LogWriter logWriterGiven) {
+        final LogWriter logWriter = null == logWriterGiven ? new LogWriter("login") : logWriterGiven;
+        try {
+            if (StringUtils.isBlank(page)) {
+                logWriter.w("Login.checkLogin: No page given");
+                return false;
             }
-            setActualCachesFound(cachesCount);
-            return true;
-        }
+            assert page != null;
+            logWriter.log(page);
 
-        // login page
-        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
-        if (isActualLoginStatus()) {
-            setActualUserName(Settings.getUserName());
-            // number of caches found is not part of this page
-            return true;
-        }
+            if (TextUtils.matches(page, GCConstants.PATTERN_MAP_LOGGED_IN)) {
+                logWriter.log("logged in");
+                return true;
+            }
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
-        return false;
+            setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
+
+            // on every page except login page
+            final String username = GCParser.getUsername(page);
+            setActualLoginStatus(StringUtils.isNotBlank(username));
+            if (isActualLoginStatus()) {
+                setActualUserName(username);
+                int cachesCount = 0;
+                try {
+                    cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
+                } catch (final NumberFormatException e) {
+                    Log.e("getLoginStatus: bad cache count", e);
+                }
+                setActualCachesFound(cachesCount);
+                return true;
+            }
+
+            // login page
+            setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+            if (isActualLoginStatus()) {
+                setActualUserName(Settings.getUserName());
+                // number of caches found is not part of this page
+                logWriter.log("loginname found");
+                return true;
+            } else {
+                logWriter.d("setLoginStatus: PATTERN_LOGIN_NAME_LOGIN_PAGE not matched, page is:\n" + page);
+            }
+
+            setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
+            return false;
+        } finally {
+            if (null == logWriterGiven) {
+                logWriter.close();
+            }
+        }
     }
 
     private boolean isLanguageEnglish(@NonNull final String page) {
@@ -329,16 +350,16 @@ public class GCLogin extends AbstractLogin {
      *            the content of the last loaded page
      * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
      */
-    private boolean switchToEnglish(final String previousPage) {
+    private boolean switchToEnglish(final String previousPage, final LogWriter logWriter) {
         if (previousPage != null && isLanguageEnglish(previousPage)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
-            getLoginStatus(previousPage);
+            getLoginStatus(previousPage, logWriter);
         } else {
             try {
                 final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
                 Log.i("changed language on geocaching.com to English");
-                getLoginStatus(page);
+                getLoginStatus(page, logWriter);
                 return true;
             } catch (final Exception ignored) {
                 Log.e("Failed to set geocaching.com language to English");
@@ -552,7 +573,7 @@ public class GCLogin extends AbstractLogin {
     String postRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.postRequest(uri, params));
 
-        if (getLoginStatus(data)) {
+        if (getLoginStatus(data, null)) {
             return data;
         }
 
@@ -569,25 +590,32 @@ public class GCLogin extends AbstractLogin {
      *
      */
     @Nullable
-    String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
+    String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params, final LogWriter logWriterGiven) {
+        final LogWriter logWriter = null == logWriterGiven ? new LogWriter("login") : logWriterGiven;
         try {
-            final Response response = Network.getRequest(uri, params).blockingGet();
-            final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
+            try {
+                final Response response = Network.getRequest(uri, params).blockingGet();
+                final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
 
-            // A page not found will not be found if the user logs in either
-            if (response.code() == 404 || getLoginStatus(data)) {
+                // A page not found will not be found if the user logs in either
+                if (response.code() == 404 || getLoginStatus(data, logWriter)) {
+                    return data;
+                }
+
+                if (login() == StatusCode.NO_ERROR) {
+                    return Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
+                }
+
+                Log.w("Working as guest.");
                 return data;
+            } catch (final Exception ignored) {
+                // FIXME: propagate the exception instead
+                return null;
             }
-
-            if (login() == StatusCode.NO_ERROR) {
-                return Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
+        } finally {
+            if (null == logWriterGiven) {
+                logWriter.close();
             }
-
-            Log.w("Working as guest.");
-            return data;
-        } catch (final Exception ignored) {
-            // FIXME: propagate the exception instead
-            return null;
         }
     }
 

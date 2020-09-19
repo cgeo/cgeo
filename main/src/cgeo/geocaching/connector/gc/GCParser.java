@@ -93,7 +93,7 @@ public final class GCParser {
     public static final Observable<List<PocketQuery>> searchPocketQueryListObservable = Observable.defer(() -> {
         final Parameters params = new Parameters();
 
-        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params);
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", params, null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchPocketQueryList: No data from server");
             return Observable.just(Collections.<PocketQuery>emptyList());
@@ -874,7 +874,7 @@ public final class GCParser {
         GCLogin.putViewstates(params, viewstates);
 
         final String page = GCLogin.getInstance().postRequestLogged(url, params);
-        if (!GCLogin.getInstance().getLoginStatus(page)) {
+        if (!GCLogin.getInstance().getLoginStatus(page, null)) {
             Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return search;
         }
@@ -927,7 +927,7 @@ public final class GCParser {
 
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
         final Parameters paramsWithF = addFToParams(params, my);
-        final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF);
+        final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF, null);
 
         if (StringUtils.isBlank(page)) {
             Log.w("GCParser.searchByAny: No data from server");
@@ -944,7 +944,7 @@ public final class GCParser {
 
         final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeArchivedCaches(), cacheType);
 
-        GCLogin.getInstance().getLoginStatus(page);
+        GCLogin.getInstance().getLoginStatus(page, null);
 
         return search;
     }
@@ -1027,7 +1027,7 @@ public final class GCParser {
             params.put("id", id);
         }
 
-        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/track/details.aspx", params);
+        final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/track/details.aspx", params, null);
 
         if (StringUtils.isBlank(page)) {
             Log.w("GCParser.searchTrackable: No data from server");
@@ -1138,7 +1138,7 @@ public final class GCParser {
 
         final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         final String page = GCLogin.getInstance().postRequestLogged(uri, params);
-        if (!GCLogin.getInstance().getLoginStatus(page)) {
+        if (!GCLogin.getInstance().getLoginStatus(page, null)) {
             Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
             return StatusCode.NOT_LOGGED_IN;
         }
@@ -1269,7 +1269,7 @@ public final class GCParser {
         params.put("log", log);
         params.put("numlogs", "0");
 
-        return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params);
+        return GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/seek/cache_details.aspx", params, null);
     }
 
     /**
