@@ -1,14 +1,14 @@
-c:geo is een open source, feature-rijk, altijd klaar-om-te-gebruiken cliënt voor geocaching.com (onofficieel) en het biedt ook basis-ondersteuning voor andere geocaching platformen (zoals OpenCaching). Er is geen webbrowser of export voor nodig - alleen installeren en je kan gelijk beginnen. 
+c:geo is een open source, feature-rijk, altijd klaar-om-te-gebruiken cliënt voor geocaching.com (onofficieel) en het biedt ook basis-ondersteuning voor andere geocaching platformen (zoals OpenCaching). Er is geen webbrowser of export voor nodig - alleen installeren en je kan gelijk beginnen.
 
 Belangrijkste functies:
-- Bekijk caches op een Live-map 
+- Bekijk caches op een Live-map
 - Gebruik Google Maps of OpenStreetMaps
-- Zoek caches op basis van verschillende criteria 
+- Zoek caches op basis van verschillende criteria
 - Log je vondsten online of offline
 - Sla de cache-gegevens op je apparaat op
 - Maak en beheer waypoints
 - Navigeer met behulp van kompas, kaart of andere apps
-- Importeer/exporteer GPX bestanden 
+- Importeer/exporteer GPX bestanden
 - Volledige ondersteuning voor trackables
 - Offline caching functies inclusief offline kaarten
 
@@ -17,7 +17,7 @@ Vind caches met behulp van de live kaart of met behulp van één van de vele zoe
 
 Navigeer naar een cache of een waypoint met de ingebouwde kompasfunctie, de kaart of deel de coördinaten met verschillende externe apps (bv. Radar, Google Navigatie, StreetView, Locus, Navigon, Sygic en nog veel meer).
 
-Sla de cache-informatie op je apparaat op rechtstreeks vanuit geocaching.com of via GPX bestand om deze beschikbaar te hebben wanneer u maar wilt. 
+Sla de cache-informatie op je apparaat op rechtstreeks vanuit geocaching.com of via GPX bestand om deze beschikbaar te hebben wanneer u maar wilt.
 Je kan je opgeslagen caches in verschillende lijsten beheren en ze sorteren en filteren naar wens.
 Caches en offline kaarten of statische kaarten kunnen samen worden gebruikt om caches te vinden zonder internet connectie (bijv. bij roaming).
 Logs kunnen online worden geplaatst of offline worden opgeslagen voor latere online plaatsing of geëxporteerd via veldnotities.

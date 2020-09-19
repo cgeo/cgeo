@@ -3,19 +3,19 @@
 ## Working mode
 
 At the moment publishing of playstore descriptions is done manually. As the source texts for these app descriptions should not change frequently, the manual process should be sufficient.
-This table shall therefore provide an overview about the dates, where description texts for individual languages have been 
-taken from Github and published on Google Play. 
+This table shall therefore provide an overview about the dates, where description texts for individual languages have been
+taken from Github and published on Google Play.
 
-From time to time it needs to be manually checked whether more recent changes to the translation files are existsing on the 
+From time to time it needs to be manually checked whether more recent changes to the translation files are existsing on the
 repository, which then need to be published on Google Play and this table being updated afterwards.
 
 ## Publish dates
 
 In alphabetical order of language name.
 
-|Language  |Publish date|Comment                                                         | 
+|Language  |Publish date|Comment                                                         |
 |----------|------------|----------------------------------------------------------------|
-|Chinese   |01.01.2018  |Historic description still in use until translation is completed| 
+|Chinese   |01.01.2018  |Historic description still in use until translation is completed|
 |Czech     |25.05.2020  |                                                                |
 |Danish    |01.01.2018  |Historic description still in use until translation is completed|
 |Dutch     |25.05.2020  |                                                                |

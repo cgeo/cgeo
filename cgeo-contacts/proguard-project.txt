@@ -1,6 +1,6 @@
 # We use the general android proguard config. See project.properties for details.
 
-# Suppress notes about classes from the general config, which we don't use at all. 
+# Suppress notes about classes from the general config, which we don't use at all.
 -dontnote **.ILicensingService
 
 -optimizationpasses 2

@@ -1,14 +1,14 @@
-c:geo è un client non ufficiale per geocaching.com open source, pienamente funzionante, subito pronto da usare, e offre supporto base anche per altre piattaforme di geocaching (come Opencaching). Non richiede un browser web o esportazioni - basta installarlo e avviarlo. 
+c:geo è un client non ufficiale per geocaching.com open source, pienamente funzionante, subito pronto da usare, e offre supporto base anche per altre piattaforme di geocaching (come Opencaching). Non richiede un browser web o esportazioni - basta installarlo e avviarlo.
 
 Caratteristiche principali:
-- Visualizza le cache su una Mappa Live 
+- Visualizza le cache su una Mappa Live
 - Usa Google Maps o OpenStreetMaps
-- Cerca cache secondo vari criteri 
+- Cerca cache secondo vari criteri
 - Registra i tuoi ritrovamenti online o offline
 - Memorizza informazioni cache sul tuo dispositivo
 - Crea e gestisci i waypoint
 - Naviga utilizzando bussola, mappa o altre applicazioni
-- Importa/Esporta file GPX 
+- Importa/Esporta file GPX
 - Supporto completo per trackable
 - Funzioni di cache offline incluse le mappe offline
 
@@ -17,7 +17,7 @@ Trova le cache usando la mappa live o utilizzando una delle tante funzioni di ri
 
 Naviga verso cache o waypoint con la funzione di bussola integrata e la mappa o passa le coordinate a varie applicazioni esterne (es. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic e molti altri).
 
-Memorizza le informazioni cache sul tuo dispositivo direttamente da geocaching.com così come tramite l'importazione di file GPX per renderle disponibili quando vuoi. 
+Memorizza le informazioni cache sul tuo dispositivo direttamente da geocaching.com così come tramite l'importazione di file GPX per renderle disponibili quando vuoi.
 Puoi gestire i tuoi cache memorizzati in liste diverse e selezionarli in base alle tue esigenze.
 Cache salvati insieme a file di mappe offline o statiche possono essere utilizzati per trovare cache senza connessione internet (ad es. in roaming).
 I registri Log possono essere pubblicati online o memorizzati offline per un caricamento successivo o esportati tramite note di campo (field notes).

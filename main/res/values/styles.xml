@@ -349,7 +349,7 @@
         <item name="android:layout_gravity">left|top</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:lines">1</item>
-        <item name="android:scrollHorizontally">true</item> 
+        <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?text_color</item>
         <item name="android:textSize">18sp</item>

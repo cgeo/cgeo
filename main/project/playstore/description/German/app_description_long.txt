@@ -1,14 +1,14 @@
-c:geo ist eine umfangreiche, jederzeit einsatzbereite open-source Geocaching-Anwendung für geocaching.com (inoffiziell) und enthält auch grundlegenen Support für andere Geocaching-Plattformen (z.B. Opencaching). Sie benötigt keinen Browser oder Exporte - einfach herunterladen und direkt starten. 
+c:geo ist eine umfangreiche, jederzeit einsatzbereite open-source Geocaching-Anwendung für geocaching.com (inoffiziell) und enthält auch grundlegenen Support für andere Geocaching-Plattformen (z.B. Opencaching). Sie benötigt keinen Browser oder Exporte - einfach herunterladen und direkt starten.
 
 Hauptmerkmale:
-- Suche nach Caches auf einer Live-Karte 
+- Suche nach Caches auf einer Live-Karte
 - Karten von Google Maps oder OpenStreetMap
-- Suche nach Caches anhand diverser Kriterien 
+- Suche nach Caches anhand diverser Kriterien
 - Logge deine Funde online oder offline
 - Speichere Caches auf deinem Gerät
 - Erstelle und verwalte Wegpunkte
 - Navigiere mit Kompass, Karte oder externen Apps
-- Import/Export von GPX-Dateien 
+- Import/Export von GPX-Dateien
 - Volle Unterstützung von Trackables
 - Offline-Caching-Funktionen inklusive Offline-Karten
 
@@ -17,7 +17,7 @@ Finde Caches mit der Live-Karte oder den vielfältigen Suchfunktionen.
 
 Navigiere zu einem Cache oder Wegpunkt eines Caches mit der eingebauten Kompass-Funktion, der Karte oder übergib die Koordinaten an diverse externe Anwendungen (z.B. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic und viele weitere).
 
-Speichere Cache-Informationen auf deinem Gerät direkt von geocaching.com oder durch Import einer GPX-Datei um sie immer verfügbar zu haben. 
+Speichere Cache-Informationen auf deinem Gerät direkt von geocaching.com oder durch Import einer GPX-Datei um sie immer verfügbar zu haben.
 Du kannst die gespeicherten Caches auf Listen ganz nach deinen Wünschen verwalten, sortieren und filtern.
 Gespeicherte Caches ermöglichen zusammen mit Offline-Karten oder statischen Karten das Suchen nach Caches ganz ohne Internetverbindung (z.B. im Ausland).
 Logs können direkt online übertragen oder offline gespeichert werden um sie später zu übertragen oder als Field-Note zu exportieren.

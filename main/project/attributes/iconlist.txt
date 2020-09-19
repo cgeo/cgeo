@@ -1,5 +1,5 @@
 # Definitions for attributes:
-# - internal name: used as 
+# - internal name: used as
 #   a) for GC caches this is the ID with which it is found in c:geo
 #   b) name of string, prefixed with "attribute_"
 #   c) name of icon, prefixed with "attribute_"

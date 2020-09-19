@@ -42,7 +42,7 @@
             android:textSize="18sp"
             android:visibility="gone"
             android:maxLines="1" />
-        
+
         <TextView
             android:id="@+id/distance1"
             android:layout_marginTop="-8dp"

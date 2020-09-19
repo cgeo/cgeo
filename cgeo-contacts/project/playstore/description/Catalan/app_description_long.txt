@@ -3,7 +3,7 @@ Es tracta d’un plugin de contactes per a c: geo, una aplicació de geocatxing 
 Ús:
 Quan feu clic a un nom d’usuari a c: geo (ex,,. al registre d'un catxé) el menú contindrà un element per obrir la targeta de contacte corresponent als contactes del telèfon. Això us permetrà trucar directament o enviar missatges a l’usuari.
 
-Observacions: 
+Observacions:
 El nom d’usuari de la persona s’ha d’emmagatzemar al camp de nom o àlies dels vostres contactes perquè el connector coincideixi amb el nom d’usuari de geocatxing amb el contacte.
 
 Els comentaris a PlayStore no es poden respondre! Si teniu problemes per instal·lar o utilitzar c: geo, primer consulteu les nostres FAQ: https://faq.cgeo.org

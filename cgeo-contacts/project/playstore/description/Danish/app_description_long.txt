@@ -3,7 +3,7 @@ Dette er et plugin til at slå kontakter op med til c:geo, en open-source geocac
 Anvendelse:
 Når du klikker på et brugernavn i c:geo (f.eks. i en geocaches log) vil der være et punkt i menuen som kan åbne den tilhørende kontakt i telefonens kontaktliste. Dermed kan du ringe op eller SMSe brugeren direkte.
 
-Bemærkning: 
+Bemærkning:
 Personens geocacher-navn skal stå i navne- eller alias-feltet i kontaktlisten for at plugin-et kan koble geocacheren til den rigtige kontakt.
 
 Vi kan ikke besvare kommentarer i PlayStore! Har du problemer med at installere eller bruge c:geo kan du starte med at kigge i vores FAQ: https://faq.cgeo.org

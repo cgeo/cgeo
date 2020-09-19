@@ -1,14 +1,14 @@
-O c:geo é um utilitário de código aberto, repleto de funcionalidades, sempre pronto a utilizar para geocaching.com (não oficial) e oferece suporte a outras plataformas de geocaching (como o Opencaching). Isto não requer um browser web ou exportação - basta instalar e começar a utilizar. 
+O c:geo é um utilitário de código aberto, repleto de funcionalidades, sempre pronto a utilizar para geocaching.com (não oficial) e oferece suporte a outras plataformas de geocaching (como o Opencaching). Isto não requer um browser web ou exportação - basta instalar e começar a utilizar.
 
 Principais funcionalidades:
-- Ver caches num Mapa (em tempo real) 
+- Ver caches num Mapa (em tempo real)
 - Usar o Google Maps ou o OpenStreetMaps
-- Pesquisar por caches com diferentes critérios 
+- Pesquisar por caches com diferentes critérios
 - Registar as caches que encontra, tanto online ou offline
 - Armazenar informações de caches no seu dispositivo
 - Criar e fazer a gestão dos pontos adicionais
 - Navegar usando a bússola, mapa ou outras aplicações
-- Importar/Exportar ficheiros GPX 
+- Importar/Exportar ficheiros GPX
 - Suporte completo para trackables
 - Funções de 'cachar' offline que incluem mapas offline
 
@@ -17,7 +17,7 @@ Encontre caches utilizando o mapa em tempo real ou usando uma das várias funcio
 
 Navegue até uma cache ou a um ponto adicional de uma cache com a funcionalidade incorporada de bússola, via mapa ou transmitir as coordenadas para várias aplicações externas (ex: Radar, Google Navigation, StreetView, Locus, Navigon, Sygic e muitas mais).
 
-Armazene as informações da cache no seu dispositivo directamente de geocaching.com, bem como através da importação de ficheiros GPX para que estejam disponíveis sempre que desejar. 
+Armazene as informações da cache no seu dispositivo directamente de geocaching.com, bem como através da importação de ficheiros GPX para que estejam disponíveis sempre que desejar.
 Pode gerir as suas caches armazenados em diferentes listas e pode ordená-las e filtrá-las de acordo com suas necessidades.
 Caches armazenadas, juntamente com ficheiros de mapas offline ou mapas estáticos, podem ser usados para encontrar caches sem uma ligação à internet (por exemplo, quando em roaming).
 Os registos podem ser submetidos online ou armazenados offline para posterior submissão, ou exportados através de notas de campo.

@@ -1,14 +1,14 @@
-c:geo je neoficiální klient pro geocaching.com. Je to plně vybavená aplikace s otevřeným zdrojovým kódem a je vám vždy k dispozici, kdykoliv se chystáte do terénu. Nabízí základní podporu pro další geocachingové platformy (například Opencaching). Nevyžaduje webový prohlížeč ani export - stačí jej nainstalovat a můžete začít ihned. 
+c:geo je neoficiální klient pro geocaching.com. Je to plně vybavená aplikace s otevřeným zdrojovým kódem a je vám vždy k dispozici, kdykoliv se chystáte do terénu. Nabízí základní podporu pro další geocachingové platformy (například Opencaching). Nevyžaduje webový prohlížeč ani export - stačí jej nainstalovat a můžete začít ihned.
 
 Hlavní funkce:
-- Zobrazení kešek na aktivní mapě 
+- Zobrazení kešek na aktivní mapě
 - Používání Map Google nebo OpenStreetMaps
-- Hledání kešek podle různých kritérií 
+- Hledání kešek podle různých kritérií
 - Logování nálezů online nebo offline
 - Ukládání informací o keškách do zařízení
 - Tvorba a správa trasových bodů
 - Navigace pomocí kompasu, mapy nebo dalších aplikací
-- Import a export souborů GPX 
+- Import a export souborů GPX
 - Plná podpora trasovatelných předmětů
 - Funkce offline kešování včetně offline map
 
@@ -17,7 +17,7 @@ Hledejte kešky pomocí aktivní mapy nebo pomocí jedné z mnoha vyhledávacíc
 
 Navigujte se ke kešce nebo trasovému bodu pomocí zabudovaného kompasu, mapy anebo souřadnic prostřednictvím externích aplikací (např. Radar, Navigace Google, StreetView, Locus, Navigon, Sygic a mnohé další).
 
-Ukládejte informace o keškách do zařízení přímo z geocahing.com, tak jako přes import souboru GPX, aby jste je měly kdykoliv k dispozici. 
+Ukládejte informace o keškách do zařízení přímo z geocahing.com, tak jako přes import souboru GPX, aby jste je měly kdykoliv k dispozici.
 Uložené kešky můžete spravovat v rozličných seznamech a můžete je řadit a filtrovat podle svých potřeb.
 Uložené kešky spolu se soubory offline map můžete využít pro hledání kešek bez připojení k internetu (např. v roamingu).
 Logy můžete přidávat online anebo uložit offline a odeslat je později, případně exportovat přes Filed Notes.

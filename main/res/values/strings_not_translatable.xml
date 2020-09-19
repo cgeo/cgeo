@@ -25,7 +25,7 @@
         <item>800</item>
         <item>1024</item>
     </integer-array>
-    
+
     <string translatable="false" name="settings_gc_legal_note_url">https://www.geocaching.com/account/documents/termsofuse</string>
     <string translatable="false" name="settings_offline_maps_url">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="settings_themes_url">https://manual.cgeo.org/en/offlinemaps</string>

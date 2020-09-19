@@ -1,14 +1,14 @@
-c:geo yra atviro kodo, funkcionali, visada paruošta neoficiali geocaching.com programėlė, taip pat palaikanti kitas lobiavimo platformas (pvz. Opencaching). Nereikalauja naršyklės arba duomenų eksporto - tiesiog įdiek ir naudokis. 
+c:geo yra atviro kodo, funkcionali, visada paruošta neoficiali geocaching.com programėlė, taip pat palaikanti kitas lobiavimo platformas (pvz. Opencaching). Nereikalauja naršyklės arba duomenų eksporto - tiesiog įdiek ir naudokis.
 
 Pagrindinės funkcijos:
-- Lobių peržiūra tiesiogiai iš žemėlapio 
+- Lobių peržiūra tiesiogiai iš žemėlapio
 - Naudoti Google Maps arba OpenStreetMaps
-- Lobių paieška pagal įvairius kriterijus 
+- Lobių paieška pagal įvairius kriterijus
 - Surastų lobių registracija prisijungus arba neprisijungus prie interneto
 - Išsaugoti slėptuvės informaciją jūsų prietaise
 - Kurti ir tvarkyti taškus
 - Naviguoti kompasu, žemėlapiu ar kitomis programėlėmis
-- Importuoti/eksportuoti GPX failus 
+- Importuoti/eksportuoti GPX failus
 - Visapusiškas keliauninkų palaikymas
 - Lobiavimas ir žemėlapiai neprisijungus
 
@@ -17,7 +17,7 @@ Ieškoti lobių tiesiogiai per žemėlapį ar paieškos funkcijas.
 
 Keliaukite link lobio ar jo taško su kompaso, žemėlapio ar išorinių programėlių pagalba (pvz.: Radar, Google Navigation, StreetView, Locus, Navigon, Sygic ar kitų).
 
-Parsisiųskite lobių informaciją tiesiai iš geocaching.com ar GPX failų, kad visada ją turėtumėte šalia. 
+Parsisiųskite lobių informaciją tiesiai iš geocaching.com ar GPX failų, kad visada ją turėtumėte šalia.
 Galite tvarkyti lobius - perkelti juos į skirtingus sąrašus, rikiuoti ir filtruoti pagal poreikį.
 Išsaugoti lobiai, žemėlapiai neprisijungus ar statiniai žemėlapiai naudojami lobių paieškoms neprisijungus (pvz.: lobiaujant užsienyje).
 Įrašus galima paskelbti internetu, išsaugoti paskelbimui vėliau ar eksportuoti per lauko užrašus.

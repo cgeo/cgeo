@@ -1,14 +1,14 @@
-c: geo és un client no oficial de codi obert, amb funcions completes per geocaching.com i que ofereix suport bàsic per a altres plataformes de geocaching (com Opencaching). No requereix un navegador web; només cal instal·lar-lo i començar. 
+c: geo és un client no oficial de codi obert, amb funcions completes per geocaching.com i que ofereix suport bàsic per a altres plataformes de geocaching (com Opencaching). No requereix un navegador web; només cal instal·lar-lo i començar.
 
 Característiques principals:
-- Veure catxés en un mapa en viu 
+- Veure catxés en un mapa en viu
 - Utilitzeu Google Maps o OpenStreetMaps
-- Cerqueu catxés segons diversos criteris 
+- Cerqueu catxés segons diversos criteris
 - Registreu les vostres troballes en línia o fora de línia
 - Emmagatzemeu informació de catxés al dispositiu
 - Crear i gestionar waypoints
 - Navegueu mitjançant brúixola, mapa o altres aplicacions
-- Importar/Exportar fitxers GPX 
+- Importar/Exportar fitxers GPX
 - Suport complet per als rastrejables
 - Funcions de catxés fora de línia, inclosos mapes fora de línia
 
@@ -17,7 +17,7 @@ Cerqueu catxés mitjançant el mapa en viu o mitjançant una de les moltes funci
 
 Navegueu fins a un catxé o un punt de pas amb la funció de brúixola integrada, el mapa o envieu les coordenades a diverses aplicacions externes (per exemple, Radar, Google Navigation, StreetView, Locus, Navigon, Sygic i molts altres).
 
-Emmagatzemeu informació del catxé al vostre dispositiu directament des de geocaching.com, així com mitjançant la importació de fitxers GPX per tenir-la disponible sempre que vulgueu. 
+Emmagatzemeu informació del catxé al vostre dispositiu directament des de geocaching.com, així com mitjançant la importació de fitxers GPX per tenir-la disponible sempre que vulgueu.
 Podeu gestionar els catxés emmagatzemats en diferents llistes i ordenar-les i filtrar-les segons les vostres necessitats.
 Els catxés emmagatzemats juntament amb fitxers de mapes fora de línia o mapes estàtics es poden utilitzar per trobar catxés sense connexió a Internet (ex, en itinerància).
 Els registres es poden publicar en línia o emmagatzemar fora de línia per enviar-los posteriorment o exportar-los mitjançant notes de camp.

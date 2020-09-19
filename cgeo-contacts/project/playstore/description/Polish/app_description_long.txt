@@ -3,7 +3,7 @@ To jest wtyczka kontaktów dla c:geo, otwartoźródłowej aplikacji geocaching. 
 Sposób użycia:
 Po kliknięciu nazwy użytkownika w c:geo (np. w logbooku skrzynki) menu będzie zawierało element umożliwiający otwarcie karty odpowiedniego kontaktu w książce telefonicznej Twojego telefonu. Pozwoli to na bezpośrednie zadzwonienie lub wysłanie wiadomości do użytkownika.
 
-Uwagi: 
+Uwagi:
 Nazwa użytkownika musi być przechowywana w polu imienia Twoich kontaktów, aby wtyczka dopasowała nazwę użytkownika geocachingu do kontaktu.
 
 Komentarze w PlayStore nie mogą być odpowiedzią! Jeśli masz problemy z instalacją lub korzystaniem z c:geo, najpierw zapoznaj się z naszym FAQ: https://faq.cgeo.org

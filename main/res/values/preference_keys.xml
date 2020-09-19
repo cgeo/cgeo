@@ -2,8 +2,8 @@
 <resources>
 
     <!--
-    Preferences used in settings are defined as strings here, so we can use them in the preferences.xml 
-    and in the Java code as constants and avoid code duplication. 
+    Preferences used in settings are defined as strings here, so we can use them in the preferences.xml
+    and in the Java code as constants and avoid code duplication.
     -->
 
     <string translatable="false" name="preference_screen_main">fakekey_main_screen</string>
