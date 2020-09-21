@@ -46,8 +46,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -104,8 +102,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     protected EditText logEditText;
     @BindView(R.id.log_image_add)
     protected View logImageAddButton;
-    @BindView(R.id.log_image_titleprefix)
-    protected EditText logImageTitlePrefix;
 
     private Geocache cache = null;
     private String geocode = null;
@@ -242,22 +238,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setDisplayMapper(rp -> rp.getL10n());
         initializeImageList();
         this.logImageAddButton.setOnClickListener(v -> addOrEditImage(-1));
-        this.logImageTitlePrefix.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                //intentionally empty
-            }
-            @Override
-            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                //intentionally empty
-            }
-            @Override
-            public void afterTextChanged(final Editable s) {
-                if (imageListAdapter != null) {
-                    imageListAdapter.notifyDataSetChanged();
-                }
-            }
-        });
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
@@ -365,7 +345,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         images.clear();
         images.addAll(logEntry.logImages);
         updateImageList();
-        logImageTitlePrefix.setText(logEntry.imageTitlePraefix);
 
         CollectionStream.of(trackables).forEach(t -> initializeTrackableAction(t, logEntry));
         updateTrackablesList();
@@ -380,8 +359,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setRating(cacheVotingBar.getRating())
                 .setFavorite(favCheck.isChecked())
                 .setTweet(tweetCheck.isChecked())
-                .setPassword(logPassword.getText().toString())
-                .setImageTitlePraefix(logImageTitlePrefix.getText().toString());
+                .setPassword(logPassword.getText().toString());
         CollectionStream.of(images).forEach(i -> builder.addLogImage(i));
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
 
@@ -420,8 +398,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         tweetCheck.setChecked(true);
         favCheck.setChecked(false);
         logPassword.setText(StringUtils.EMPTY);
-
-        logImageTitlePrefix.setText(getString(R.string.log_image_titleprefix));
 
         final EditText logPasswordView = LogCacheActivity.this.findViewById(R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
@@ -741,11 +717,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (!StringUtils.isBlank(image.getTitle())) {
             return image.getTitle();
         }
-        String titlePrefix = logImageTitlePrefix.getText().toString();
-        if (StringUtils.isBlank(titlePrefix)) {
-            titlePrefix = getString(R.string.log_image_titleprefix);
-        }
-        return titlePrefix + " " + (position + 1);
+        return getString(R.string.log_image_titleprefix) + " " + (position + 1);
     }
 
 
