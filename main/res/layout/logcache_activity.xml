@@ -174,17 +174,6 @@
                     android:layout_height="40dip"
                     />
 
-                <EditText
-                    android:id="@+id/log_image_titleprefix"
-                    style="@style/edittext_full"
-                    android:layout_toRightOf="@+id/log_image_add"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="10dp"
-                    android:hint="@string/log_image_titleprefix_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dip"/>
-
                 </RelativeLayout>
 
             <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
