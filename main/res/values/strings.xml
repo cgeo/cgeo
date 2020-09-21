@@ -272,7 +272,7 @@
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
     <string name="remind_later">Remind me later</string>
-    <string name="dont_shown_again">Don\'t shown again</string>
+    <string name="dont_show_again">Don\'t show again</string>
 
     <string name="warn_gm_not_available">Google Maps not available.</string>
     <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
