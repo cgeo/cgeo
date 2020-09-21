@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
@@ -23,6 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -527,7 +530,8 @@ public final class Dialogs {
     }
 
     /**
-     * Show a message dialog with title icon, "OK" and an additional positive button with an event listener.
+     * Show a onetime message dialog with title icon, "OK" and an "don't shown again" checkbox.
+     * The check if the message should be shown is not done by this function, so be aware when using it!
      *
      * @param context
      *            activity owning the dialog
@@ -535,22 +539,47 @@ public final class Dialogs {
      *            message dialog title
      * @param message
      *            message dialog content
-     * @param positiveTextButton
-     *            Text for the neutral button
-     * @param positiveListener
-     *            listener of the neutral button
+     * @param dialogType
+     *            the dialogs individual identification type
      * @param iconObservable
      *            observable (may be <tt>null</tt>) containing the icon(s) to set
+     * @param cancellable
+     *            if true, a cancel button will be displayed additionally
+     * @param runAfterwards
+     *            runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
-    public static void message(final Activity context, @Nullable final String title, final String message, final int positiveTextButton, final OnClickListener positiveListener, @Nullable final Observable<Drawable> iconObservable) {
+    public static void internalOneTimeMessage(final Activity context, @Nullable final String title, final String message, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
+        final View content = context.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
+        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
+        final TextView textView = (TextView) content.findViewById(R.id.message);
+        textView.setText(message);
+
+        if (Settings.isLightSkin()) {
+            textView.setTextColor(context.getResources().getColor(R.color.text_light));
+            checkbox.setTextColor(context.getResources().getColor(R.color.text_light));
+            final int[][] states = {{android.R.attr.state_checked}, {}};
+            final int[] colors = {context.getResources().getColor(R.color.colorAccent), context.getResources().getColor(R.color.steel)};
+            checkbox.setButtonTintList(new ColorStateList(states, colors));
+        }
+
         final AlertDialog.Builder builder = newBuilder(context)
-                .setMessage(message)
-                .setCancelable(false)
-                .setNeutralButton(android.R.string.ok, null)
-                .setPositiveButton(positiveTextButton, positiveListener);
+                .setView(content)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    if (checkbox.isChecked()) {
+                        OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+                    }
+                    if (runAfterwards != null) {
+                        runAfterwards.run();
+                    }
+                });
 
         if (title != null) {
             builder.setTitle(title);
+        }
+
+        if (cancellable) {
+            builder.setNeutralButton(android.R.string.cancel, null);
         }
 
         builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
@@ -562,10 +591,22 @@ public final class Dialogs {
             iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(dialog::setIcon);
         }
         dialog.show();
+
+        if (cancellable) {
+            checkbox.setOnClickListener(result -> {
+                final Button button = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+                if (checkbox.isChecked()) {
+                    button.setEnabled(false);
+                } else {
+                    button.setEnabled(true);
+                }
+            });
+        }
     }
 
     /**
-     * Message dialog which is shown only one time. Please define your dialog name/message at OneTimeDialogs.DialogType.
+     * Message dialog which is shown max one time each c:geo session, until "don't shown again" is checked.
+     * Please define your dialog name/message strings at OneTimeDialogs.DialogType.
      *
      * @param context
      *            activity owning the dialog
@@ -575,10 +616,10 @@ public final class Dialogs {
      *            if no status is stored in the database use DIALOG_SHOW or DIALOG_HIDE as fallback
      */
     public static void basicOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final OneTimeDialogs.DialogStatus fallbackStatus) {
-        if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
-            OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
-            message(context, getString(dialogType.messageTitle), getString(dialogType.messageText), R.string.remind_later, (dialog, which) -> OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW), Observable.just(context.getResources().getDrawable(R.drawable.ic_info_blue)));
 
+        if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
+            OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType, Observable.just(context.getResources().getDrawable(R.drawable.ic_info_blue)), false, null);
         }
     }
 
