@@ -814,6 +814,9 @@
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Verversen</string>
     <string name="cache_offline_drop">Verwijderen</string>
+    <string name="cache_delete_userdefined_waypoints">Gebruiker gedefinieerde waypoints verwijderen</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Verwijder alle gebruiker gedefinieerde waypoints van deze cache?\n\nWaypoints worden definitief verwijderd, dit kan niet ongedaan worden gemaakt.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Gebruiker gedefinieerde waypoints verwijderd</string>
     <string name="cache_offline_store">Opslaan</string>
     <string name="cache_offline_stored">Opgeslagen in apparaat</string>
     <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
@@ -1508,6 +1511,14 @@
     <string name="attribute_survey_marker_no">Niet nabij een Survey Marker</string>
     <string name="attribute_offset_cache_yes">Offset cache</string>
     <string name="attribute_offset_cache_no">Geen offset cache</string>
+    <string name="attribute_bonuscache_yes">Bonus cache</string>
+    <string name="attribute_bonuscache_no">Geen bonus cache</string>
+    <string name="attribute_powertrail_yes">Deel van een powertrail</string>
+    <string name="attribute_powertrail_no">Geen deel van een powertrail</string>
+    <string name="attribute_challengecache_yes">Challenge cache</string>
+    <string name="attribute_challengecache_no">Geen challenge cache</string>
+    <string name="attribute_hqsolutionchecker_yes">Geocaching.com oplossing checker ingeschakeld</string>
+    <string name="attribute_hqsolutionchecker_no">Geocaching.com oplossing checker niet ingeschakeld</string>
     <!-- next things -->
     <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

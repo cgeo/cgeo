@@ -816,6 +816,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_offline">Armazenada</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Remover</string>
+    <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Os pontos adicionais definidos pelo utilizador foram removidos</string>
     <string name="cache_offline_store">Armazenar</string>
     <string name="cache_offline_stored">Armazenada no dispositivo</string>
     <string name="cache_offline_not_ready">Não está pronta\npara utilização offline</string>
@@ -1510,6 +1513,14 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_survey_marker_no">Não está perto de um ponto geodésico</string>
     <string name="attribute_offset_cache_yes">Cache noutra localização</string>
     <string name="attribute_offset_cache_no">A cache não está noutra localização</string>
+    <string name="attribute_bonuscache_yes">Cache bónus</string>
+    <string name="attribute_bonuscache_no">Não é cache bónus</string>
+    <string name="attribute_powertrail_yes">Parte de um PT</string>
+    <string name="attribute_powertrail_no">Não faz parte de um PT</string>
+    <string name="attribute_challengecache_yes">Cache Challenge (desafio)</string>
+    <string name="attribute_challengecache_no">Não é Cache Challenge (desafio)</string>
+    <string name="attribute_hqsolutionchecker_yes">Contém o verificador de soluções \'geocaching.com\' (oficial)</string>
+    <string name="attribute_hqsolutionchecker_no">Não contém o verificador de soluções \'geocaching.com\' (oficial)</string>
     <!-- next things -->
     <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

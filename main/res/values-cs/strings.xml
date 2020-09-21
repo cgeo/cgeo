@@ -202,8 +202,8 @@
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
     <string name="err_tb_find">c:geo nemůže najít sledovatelný předmět.</string>
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
-    <string name="err_waypoint_cache_unknown">c:geo neví k jaké keši chceš přidat bod trasy.</string>
-    <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj bod trasy.</string>
+    <string name="err_waypoint_cache_unknown">c:geo neví, k jaké keši chceš přidat trasový bod.</string>
+    <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj trasový bod.</string>
     <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
     <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
@@ -257,11 +257,11 @@
     <string name="info_stored_image">Nový obrázek uložen do:</string>
     <string name="info_cache_saved">Keš uložena pro lokální použití</string>
     <string name="info_feature_offline_counter">Máte offline logy, které ještě nejsou nahrány. Proto bude zobrazeno počítadlo (např. \"+ 1\"). Pokud se vám počítadlo nelíbí, můžete jej vypnout v nastavení &gt; Logování.\n\nChcete-li snadno najít zbývající offline logy, přejděte do \"seznamu historie\" a filtrujte \"S osobními údaji\" &gt; \"S offline logem\"</string>
-    <string name="warn_calculator_state_save">Nezapomeň si uložit bod trasy, chceš-li zachovat stav kalkulačky.</string>
+    <string name="warn_calculator_state_save">Nezapomeň si uložit trasový bod, chceš-li zachovat stav kalkulačky.</string>
     <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
     <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
-    <string name="confirm_discard_wp_changes">Zahodit neuložené změny?</string>
+    <string name="confirm_discard_wp_changes">Zahodit neuložené změny trasových bodů?</string>
     <string name="err_request_popup_info">c:geu se nepodařilo otevřít informace o keši.</string>
     <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
     <string name="more_information">Další informace</string>
@@ -373,7 +373,7 @@
     <string name="caches_filter_rating">S hodnocením</string>
     <string name="caches_filter_own_rating">S vlastním hodnocením</string>
     <string name="caches_filter_multi_listing">Multi listing s různým stavem</string>
-    <string name="caches_filter_own_waypoint">S vlastními body trasy</string>
+    <string name="caches_filter_own_waypoint">S uživatelsky definovatelnými trasovými body</string>
     <string name="caches_filter_missing_gcvote">Nalezené keše bez GCVote hlasů</string>
     <string name="caches_filter_lists">Zařazené do seznamu</string>
     <string name="caches_filter_empty">(prázdný)</string>
@@ -465,7 +465,7 @@
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
-    <string name="settings_title_waypoints">Waypointy</string>
+    <string name="settings_title_waypoints">Trasové body</string>
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_map_behavior">Chování mapy</string>
     <string name="settings_title_gpx">GPX</string>
@@ -566,10 +566,10 @@
     <string name="init_summary_useenglish">Používat angličtinu pro c:geo\n(Vyžaduje restart)</string>
     <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
     <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
-    <string name="init_showwaypoints">Zobrazovat body trasy na Aktivní mapě</string>
-    <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich body trasy.</string>
-    <string name="init_zoomincludingwaypoints">Přiblížit obsažené waypointy</string>
-    <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné keše: Měl by být zoom upraven tak, aby zahrnoval všechny její waypointy?</string>
+    <string name="init_showwaypoints">Zobrazit trasové body</string>
+    <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet keší, zobrazují se i jejich trasové body.</string>
+    <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
+    <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné keše: Měl by být zoom upraven tak, aby zahrnoval všechny její trasové body?</string>
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost do které pomocná aplikace brouter (pokud je nainstalovaná) vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
@@ -580,7 +580,7 @@
     <string name="init_archived">Vyloučit archivované</string>
     <string name="init_summary_archived">Vyloučit archivované keše</string>
     <string name="init_global_wp_extraction_disable">Extrakce trasového bodu</string>
-    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci bodu trasy z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
+    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky</string>
@@ -594,10 +594,10 @@
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
     <!-- backup / restore -->
-    <string name="init_backup">Zálohovat kešky / body trasy</string>
+    <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
-    <string name="init_backup_note">Mějte na paměti, že tato funkce zálohuje/obnovuje databázi obsahující jen kešky a body trasy, ale ne obrázky z kešek ani nastavení programu.</string>
+    <string name="init_backup_note">Mějte na paměti, že tato funkce zálohuje/obnovuje databázi obsahující jen kešky a trasové body, ale ne obrázky z kešek ani nastavení programu.</string>
     <string name="init_backup_restore">Obnovit</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
@@ -614,7 +614,7 @@
     <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
     <string name="init_restore_version_error">Neočekávaný formát - databázi nelze obnovit.\n\nOčekávaná verze je %1$d,\nzáloha má verzi %2$d</string>
     <string name="settings_title_backup">Zálohovat / Obnovit</string>
-    <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/bodech trasy a nastavení programu.</string>
+    <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/trasových bodech a nastavení programu.</string>
     <string name="init_backup_settings">Zálohovat nastavení systému</string>
     <string name="init_backup_settings_backup_light">Zálohovat nastavení (bez údajů o účtu)</string>
     <string name="init_backup_settings_backup_full">Zálohovat nastavení (úplné)</string>
@@ -677,7 +677,7 @@
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
     <string name="init_default_navigation_tool_select">Vyber nástroj</string>
     <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu keše.</string>
-    <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo bodu trasy. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
+    <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo trasového bodu. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
     <string name="init_debug_title">Ladící informace</string>
     <string name="init_debug_note">c:geo umí generovat mnoho ladících informací. Aktivace tohoto nastavení se dotkne stability c:geo a doporučuje se pouze tehdy, jste-li požádáni o poslání záznamu vývojářům. Prosím nechte toto nastavení vypnuté při normálním používání c:geo!</string>
     <string name="init_debug">Aktivovat ladící protokolování</string>
@@ -747,7 +747,7 @@
     <string name="settings_title_proximityNotification">Upozornění na vzdálenost</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornění na vzdálenost na mapě</string>
     <string name="init_summary_proximityNotificationGeneral">Přehraje jedno oznámení, pokud je jakákoli keška nebo trasový bod aktuálně viditelný na mapě bližší než dlouhá vzdálenost nebo krátká vzdálenost. Pro tyto dvě vzdálenosti se používají různé tóny.</string>
-    <string name="init_proximityNotificationSpecific">Upozornění na vzdálenost konkrétního bodu trasy</string>
+    <string name="init_proximityNotificationSpecific">Upozornění na vzdálenost konkrétního trasového bodu</string>
     <string name="init_summary_proximityNotificationSpecific">Přehraje opakované oznámení, pokud je aktuálně vybraná keška nebo trasový bod blíže než dlouhá vzdálenost nebo krátká vzdálenost. Funguje, pokud jsou otevřeny podrobnosti o kešce nebo trasovém bodu, když je na mapě zobrazeno kontextové okno s keškou nebo trasovým bodem, případně když je aktivní kompas. Pro tyto dvě vzdálenosti se používají různé tóny.</string>
     <string name="far_distance">Dlouhá vzdálenost</string>
     <string name="near_distance">Krátká vzdálenost</string>
@@ -820,6 +820,9 @@
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Aktualizovat</string>
     <string name="cache_offline_drop">Odstranit</string>
+    <string name="cache_delete_userdefined_waypoints">Odstranit uživatelsky definovatelné trasové body</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Odstranit všechny uživatelsky definovatelné trasové body u této keše?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Uživatelsky definovatelné trasové body smazány</string>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_stored">Uloženo v zařízení</string>
     <string name="cache_offline_not_ready">Nedostupné offline</string>
@@ -855,16 +858,16 @@
     <string name="cache_log_images_title">Obrázky z logů</string>
     <string name="cache_log_image_default_title">Fotografie</string>
     <string name="cache_personal_note">Osobní poznámka</string>
-    <string name="cache_menu_preventWaypointsFromNote">Blokovat waypointy z poznámky</string>
-    <string name="cache_menu_allowWaypointExtraction">Povolit waypointy z poznámky</string>
+    <string name="cache_menu_preventWaypointsFromNote">Blokovat trasové body z poznámky</string>
+    <string name="cache_menu_allowWaypointExtraction">Povolit trasové body z poznámky</string>
     <string name="cache_personal_note_edit">Upravit</string>
     <string name="cache_personal_note_storewaypoints">Přidat/aktualizovat trasové body</string>
     <string name="cache_personal_note_removewaypoints">Odstranit trasové body</string>
     <string name="cache_personal_note_storewaypoints_success">Do osobní poznámky byly přidány trasové body</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Body trasy byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Body trasy nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_success_limited">Trasové body byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_failed">Trasové body nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nebyly nalezeny žádné uložené trasové body</string>
-    <string name="cache_personal_note_preventWaypointsExtraction">Zabránit přenosu waypointů</string>
+    <string name="cache_personal_note_preventWaypointsExtraction">Zabránit extrakci trasových bodů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
     <string name="cache_personal_note_upload">Nahrát</string>
@@ -887,14 +890,14 @@
     <string name="cache_favpoint_not_on">Tato keš není mezi tvými Oblíbenými.</string>
     <string name="cache_list_select_last">Poslední výběr</string>
     <string name="cache_images">Obrázky</string>
-    <string name="cache_waypoints">Body trasy</string>
+    <string name="cache_waypoints">Trasové body</string>
     <plurals name="waypoints">
         <item quantity="one">%d bod trasy</item>
         <item quantity="few">%d body trasy</item>
         <item quantity="many">%d bodů trasy</item>
         <item quantity="other">%d bodů trasy</item>
     </plurals>
-    <string name="cache_waypoints_add">Přidat bod trasy</string>
+    <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
     <string name="cache_waypoints_remove_original_waypoint">Trasový bod zkopírován ze schránky do této keše.\n\nOdstranit původní trasový bod?</string>
@@ -907,7 +910,7 @@
     <string name="cache_dialog_loading_details_status_details">Zpracovávání podrobností</string>
     <string name="cache_dialog_loading_details_status_spoilers">Načítání spoilerových obrázků</string>
     <string name="cache_dialog_loading_details_status_logs">Načítání logů</string>
-    <string name="cache_dialog_loading_details_status_waypoints">Zpracovávání bodů trasy</string>
+    <string name="cache_dialog_loading_details_status_waypoints">Zpracovávání trasových bodů</string>
     <string name="cache_dialog_loading_details_status_gcvote">Načítání GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Ukládání do mezipaměti</string>
     <string name="cache_dialog_loading_details_status_render">Vykreslování pohledu</string>
@@ -948,7 +951,7 @@
     <string name="around">V okolí %s</string>
     <string name="menu_caches">Spravovat keše</string>
     <string name="cache_menu_event">Přidat do kalendáře</string>
-    <string name="cache_menu_extract_waypoints">Extrahovat body trasy</string>
+    <string name="cache_menu_extract_waypoints">Extrahovat trasové body</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
     <string name="cache_menu_share">Sdílet keš</string>
@@ -1014,7 +1017,7 @@
     <string name="cache_image">Obrázek</string>
     <string name="cache_image_open_file">Otevřít jako soubor</string>
     <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
-    <string name="cache_image_add_waypoint">Přidat bod trasy</string>
+    <string name="cache_image_add_waypoint">Přidat trasový bod</string>
     <string name="cache_image_background">Obrázek na pozadí popisu keše</string>
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
@@ -1028,12 +1031,12 @@
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
-    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako body trasy této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její body trasy odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
+    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
-    <string name="clear_goto_history">Tímto se odstraní všechny historické body trasy kromě pěti posledních</string>
+    <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
     <string name="cc_hint_minutes">minuty</string>
@@ -1053,7 +1056,7 @@
     <string name="simple_file_chooser_title">Vybrat soubor</string>
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Načítání keší z %1$s</string>
-    <string name="gpx_import_loading_waypoints_with_filename">Načítání bodů tras z %1$s</string>
+    <string name="gpx_import_loading_waypoints_with_filename">Načítání trasových bodů z %1$s</string>
     <plurals name="gpx_import_caches_imported_with_filename">
         <item quantity="one">%1$d keš importována z %2$s</item>
         <item quantity="few">%1$d keše importovány z %2$s</item>
@@ -1085,7 +1088,7 @@
     <!-- popup -->
     <string name="popup_more">Více detailů</string>
     <!-- waypoint -->
-    <string name="waypoint">Bod trasy</string>
+    <string name="waypoint">Trasový bod</string>
     <string name="waypoint_coordinates">Souřadnice</string>
     <string name="waypoint_cache_coordinates">Souřadnice keše</string>
     <string name="waypoint_calculate_coordinates">Výpočet souřadnic</string>
@@ -1098,17 +1101,17 @@
     <string name="waypoint_copy_coordinates">Kopírovat souřadnice</string>
     <string name="waypoint_clear_coordinates">Vymazat souřadnice</string>
     <string name="waypoint_delete">Smazat</string>
-    <string name="waypoint_edit_title">Upravit bod trasy</string>
-    <string name="waypoint_add_title">Přidat bod trasy</string>
-    <string name="waypoint_added">Bod trasy přidán</string>
+    <string name="waypoint_edit_title">Upravit trasový bod</string>
+    <string name="waypoint_add_title">Přidat trasový bod</string>
+    <string name="waypoint_added">Trasový bod přidán</string>
     <string name="waypoint_note">Poznámka</string>
     <string name="waypoint_user_note">Osobní poznámka</string>
     <string name="waypoint_visited">Navštíven</string>
-    <string name="waypoint_set_visited">Bod trasy nastavený jako navštívený</string>
-    <string name="waypoint_unset_visited">Bod trasy nastavený jako nenavštívený</string>
+    <string name="waypoint_set_visited">Trasový bod nastaven jako navštívený</string>
+    <string name="waypoint_unset_visited">Trasový bod nastaven jako nenavštívený</string>
     <string name="waypoint_save">Uložit</string>
     <string name="waypoint_cancel_edit">Zrušit</string>
-    <string name="waypoint_loading">Načítání bodu trasy…</string>
+    <string name="waypoint_loading">Načítání trasového bodu…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Neměnit souřadnice keše</string>
     <string name="waypoint_set_as_cache_coords">Nastavit jako souřadnice keše v c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Nastavit jako souřadnice keše v c:geo a na webu</string>
@@ -1122,7 +1125,7 @@
     <string name="waypoint_coordinates_upload_error">Při nahrávání souřadnic na web se vyskytla chyba.</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">Souřadnice keše na webu byly změněny na %s.</string>
     <string name="waypoint_done">Hotovo</string>
-    <string name="waypoint_duplicate">Vytvořit kopii bodu trasy</string>
+    <string name="waypoint_duplicate">Duplikovat trasový bod</string>
     <string name="waypoint_toclipboard">Kopírovat trasový bod do schránky</string>
     <string name="waypoint_copy_of">Kopie</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
@@ -1143,14 +1146,14 @@
     <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
     <string name="map_disabled_hide">Skrýt deaktivované keše</string>
     <string name="map_archived_hide">Skrýt archivované keše</string>
-    <string name="map_hidewp_original">Skrýt původní waypointy</string>
-    <string name="map_hidewp_parking">Skrýt místa k parkování</string>
-    <string name="map_hidewp_visited">Skrýt navštívené waypointy</string>
+    <string name="map_hidewp_original">Skrýt původní trasové body</string>
+    <string name="map_hidewp_parking">Skrýt parkovací místa</string>
+    <string name="map_hidewp_visited">Skrýt navštívené trasové body</string>
     <string name="map_hide_track">Skrýt individuální trasu</string>
-    <string name="init_hidewp">Skrýt waypointy</string>
-    <string name="init_summary_hidewp_original">Skrýt původní waypointy na mapě</string>
+    <string name="init_hidewp">Skrýt trasové body</string>
+    <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
-    <string name="init_summary_hidewp_visited">Skrýt navštívené waypointy na mapě</string>
+    <string name="init_summary_hidewp_visited">Skrýt navštívené trasové body na mapě</string>
     <string name="map_theme_select">Styl mapy…</string>
     <string name="map_theme_options">Možnosti vzhledu</string>
     <string name="map_language">Jazyk mapy</string>
@@ -1661,10 +1664,10 @@
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech keší?</string>
     <string name="list_list_headline">Seznamy:</string>
     <plurals name="extract_waypoints_result">
-        <item quantity="one">%d bod trasy extrahován</item>
-        <item quantity="few">%d body trasy extrahovány</item>
-        <item quantity="many">Tyto %d body trasy extrahovány</item>
-        <item quantity="other">%d bodů trasy extrahováno</item>
+        <item quantity="one">%d trasový bod extrahován</item>
+        <item quantity="few">%d trasové body extrahovány</item>
+        <item quantity="many">Tyto %d trasové body extrahovány</item>
+        <item quantity="other">%d trasových bodů extrahováno</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com ověřovač souřadnic dostupný přes prohlížeč</string>
     <!-- calendar adder -->
@@ -1708,7 +1711,7 @@
     <string name="individual_route">Individuální trasa</string>
     <string name="individual_route_added">přidáno do trasy</string>
     <string name="individual_route_removed">odstraněno z trasy</string>
-    <string name="individual_route_error_toggling_waypoint">chyba přepínání waypointu</string>
+    <string name="individual_route_error_toggling_waypoint">chyba při přepínání trasového bodu</string>
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
     <string name="map_export_individual_route">Exportovat individuální trasu</string>
