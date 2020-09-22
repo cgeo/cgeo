@@ -199,7 +199,7 @@ public class GCLogin extends AbstractLogin {
                 return completeLoginProcess();
             }
 
-            if (loginData.contains("Your password or username/email is incorrect")) {
+            if (loginData.contains("id=\"signup-validation-error\"")) {
                 Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
