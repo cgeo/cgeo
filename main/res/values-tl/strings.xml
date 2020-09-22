@@ -82,10 +82,8 @@
     <string name="log_tb_archived">Naka-archive</string>
     <string name="log_save">I-save ang offline</string>
     <string name="log_saving">Ang pagpadala ng mensahe&#8230;</string>
-    <string name="log_saving_and_uploading">Pagsulat ng mensahe at pag-upload ng imahe&#8230;</string>
     <string name="log_posting_log">Ang pag-post ng log&#8230;</string>
     <string name="log_posting_twitter">Ang pag-post ng tweet&#8230;</string>
-    <string name="log_posting_image">Ang pag-post ng imahe&#8230;</string>
     <string name="log_posting_generic_trackable">Ang pag-popost ay %1$s%2$d%3$d</string>
     <string name="log_clear">Malinaw</string>
     <string name="log_post_not_possible">Ang pag-download ng datos ay nasa pag-unlad&#8230;\nMaaaring subukang muli makalipas ang ilang minuto o suriin ang iyong internet koneksiyon.</string>
