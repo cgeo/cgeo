@@ -89,11 +89,9 @@
     <string name="log_tb_archived">Archivované</string>
     <string name="log_save">Uložiť offline</string>
     <string name="log_saving">Ukladanie logu…</string>
-    <string name="log_saving_and_uploading">Odosielanie logu a obrázka…</string>
     <string name="log_posting_log">Odosielanie logu…</string>
     <string name="log_posting_twitter">Odosielanie tweetu…</string>
     <string name="log_posting_vote">Pridáva sa hlas keške…</string>
-    <string name="log_posting_image">Odosielanie obrázka…</string>
     <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistiť</string>
     <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
