@@ -89,11 +89,9 @@
     <string name="log_tb_archived">Archiviert</string>
     <string name="log_save">Offline speichern</string>
     <string name="log_saving">Log wird gesendet…</string>
-    <string name="log_saving_and_uploading">Sende Log und lade Bild hoch…</string>
     <string name="log_posting_log">Sende Log…</string>
     <string name="log_posting_twitter">Sende Tweet…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
-    <string name="log_posting_image">Sende Bild…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
@@ -256,7 +254,6 @@
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
-    <string name="info_feature_offline_counter">Du hast Offline-Logs, die noch nicht hochgeladen wurden. Daher wird ein Zähler (z.B. \"+ 1\") angezeigt. Falls dir der Zähler nicht gefällt, kannst du ihn unter Einstellungen > Loggen deaktivieren.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" > \"Mit Offline-Log\"</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
