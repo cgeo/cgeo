@@ -89,11 +89,9 @@
     <string name="log_tb_archived">Zarchiwizowana</string>
     <string name="log_save">Zapisz offline</string>
     <string name="log_saving">Zapisuję w dzienniku…</string>
-    <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
     <string name="log_posting_log">Wysyłanie wpisu…</string>
     <string name="log_posting_twitter">Wysyłanie tweetu…</string>
     <string name="log_posting_vote">Wysyłanie oceny skrzynki…</string>
-    <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
     <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
