@@ -1064,7 +1064,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         cache.deleteWaypoint(waypoint);
                     }
                 }
-                cache.addWaypointsFromNote();
+                if (cache.addWaypointsFromNote()) {
+                    Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
+                }
                 ActivityMixin.showShortToast(this, R.string.cache_delete_userdefined_waypoints_success);
                 invalidateOptionsMenu();
                 reinitializePage(Page.WAYPOINTS);
