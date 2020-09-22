@@ -89,11 +89,11 @@
     <string name="log_tb_archived">Archivé</string>
     <string name="log_save">Enregistrer hors-ligne</string>
     <string name="log_saving">Enregistrement en cours…</string>
-    <string name="log_saving_and_uploading">Envoi de la visite et de l\'image…</string>
+    <string name="log_saving_and_uploading">Envoi de la visite et des images…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
     <string name="log_posting_twitter">Envoi du Tweet…</string>
     <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
-    <string name="log_posting_image">Envoi de l\'image…</string>
+    <string name="log_posting_image">Envoi des images…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez dans quelques secondes ou vérifiez votre connexion à Internet.</string>
@@ -252,6 +252,7 @@
     <string name="info_stored_image">Nouvelle image sauvée dans :</string>
     <string name="info_cache_saved">La cache a été enregistrée en local</string>
     <string name="warn_calculator_state_save">Veillez à enregistrer le point de passage si vous souhaitez conserver l\'état du calculateur.</string>
+    <string name="feature_info_offline_counter">Vous avez des visites de caches enregistrées hors-ligne qui pourraient ne pas avoir été envoyées. Pour votre confort, le nombre de ces visites s\'affiche comme \"+ x\" après le nombre de caches trouvées en bas de la page d\'accueil de c:geo. \n\nDe plus, ces \"x\" visites seront ajoutées au modèle \"Nombre de visites\" que vous pouvez utiliser comme signature de vos logs. \n\nSi vous n\'aimez pas cet affichage, vous pouvez le désactiver sous \"Paramètres\" &gt; \"Visites\" et/ou utiliser le modèle \"Nombre de visites (sans les visites hors-ligne)\". \n\nPour trouver facilement les visites hors-ligne non envoyées, allez dans \"Historique\" et activez le filtre \"Avec des données personnelles\" &gt; \"Avec visite hors-ligne\".</string>
     <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
     <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
     <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
@@ -259,6 +260,7 @@
     <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
     <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger les données supplémentaires (objets voyageurs / points de favori) pour loguer.</string>
     <string name="more_information">Plus d\'informations</string>
+    <string name="dont_show_again">Ne plus afficher</string>
     <string name="warn_gm_not_available">Google Maps n\'est pas disponible.</string>
     <string name="switch_to_mf">Votre version de Google Play Services est obsolète. Voulez-vous basculer vers les cartes Mapsforge ?</string>
     <string name="switched_to_mf">Carte par défaut basculée à Mapsforge. Merci de redémarrer votre carte.</string>
