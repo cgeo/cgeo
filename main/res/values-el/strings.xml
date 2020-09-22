@@ -89,11 +89,11 @@
     <string name="log_tb_archived">Αρχειοθετημένο</string>
     <string name="log_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="log_saving">Αποστολή αρχείου καταγραφής…</string>
-    <string name="log_saving_and_uploading">Καταχώρηση αρχείου καταγραφής και ανέβασμα εικόνας…</string>
+    <string name="log_saving_and_uploading">Καταχώρηση αρχείου καταγραφής και μεταφόρτωση εικόνων…</string>
     <string name="log_posting_log">Αποστολή καταγραφής…</string>
     <string name="log_posting_twitter">Αποστολή tweet…</string>
     <string name="log_posting_vote">Δημοσίευση βαθμολογίας κρύπτης…</string>
-    <string name="log_posting_image">Αποστολή εικόνας…</string>
+    <string name="log_posting_image">Μεταφόρτωση εικόνων…</string>
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
     <string name="log_post_not_possible">Γίνεται λήψη δεδομένων…\nΠαρακαλώ δοκιμάστε ξανά σε λίγα δευτερόλεπτα ή ελέγξτε τη σύνδεσή σας στο internet.</string>
@@ -257,6 +257,7 @@
     <string name="info_stored_image">Η νέα εικόνα αποθηκεύτηκε στο:</string>
     <string name="info_cache_saved">Η κρύπτη έχει αποθηκευτεί τοπικά</string>
     <string name="warn_calculator_state_save">Βεβαιωθείτε ότι θα αποθηκεύσετε το σημείο διαδρομής, εάν θέλετε να παραμείνετε στη φάση υπολογισμού.</string>
+    <string name="feature_info_offline_counter">Έχετε μερικές κρύπτες με ένα αποθηκευμένο \'\'αρχείο καταγραφής εκτός σύνδεσης\'\', το οποίο δεν ανέβηκε λόγω μη σύνδεσης στο διαδίκτυο. Για περισσότερη άνεση, ο αριθμός αυτών των αρχείων καταγράφεται ως \"+ x\" πίσω από τον αριθμό των αποθηκευμένων κρυπτών, στο υποσέλιδο, στην κύρια σελίδα του c: geo.\n\nΕπιπλέον, αυτά τα αρχεία καταγραφής \"x\" θα προστεθούν στο πρότυπο \"ΑΡΙΘΜΟΣ\" που μπορεί να χρησιμοποιήσετε στην υπογραφή σας.\n\nΑν δεν σας αρέσει αυτή η επέκταση μετρητή, μπορείτε να την απενεργοποιήσετε στην ενότητα \"Ρυθμίσεις\" &gt;\"Καταγραφή\" ή / και να χρησιμοποιήσετε το πρότυπο \"ΑΡΙΘΜΟΣ (χωρίς αρχεία καταγραφής εκτός σύνδεσης)\".\n\nΓια να βρείτε εύκολα τα υπόλοιπα \"Με αρχεία καταγραφής εκτός σύνδεσης\", μεταβείτε στη λίστα \"Ιστορικό\" και φιλτράρετε για \"Με προσωπικά δεδομένα\" &gt;\"Με αρχείο καταγραφής εκτός σύνδεσης\".</string>
     <string name="err_trackable_log_not_anonymous">Η καταγραφή %1$s από το c:geo δεν μπορεί να γίνει ανώνυμα. Θέλετε να ανοίξετε τις ρυθμίσεις για να συμπληρώσετε τα διαπιστευτήριά σας από την %2$s;</string>
     <string name="err_trackable_no_preference_activity">Συγνώμη, δεν είναι δυνατό να βρεθεί μία κατάλληλη οθόνη προτίμησης.</string>
     <string name="confirm_unsaved_changes_title">Μη αποθηκευμένες αλλαγές</string>
@@ -265,6 +266,7 @@
     <string name="warn_log_load_additional_data">Το c:geo απέτυχε να φορτώσει πρόσθετα δεδομένα (ανιχνεύσιμα/αγαπημένα σημεία) για την καταγραφή.</string>
     <string name="more_information">Περισσότερες πληροφορίες</string>
     <string name="undo">Αναίρεση</string>
+    <string name="dont_show_again">Να μην εμφανιστεί ξανά</string>
     <string name="warn_gm_not_available">Το Google Maps δεν είναι διαθέσιμο.</string>
     <string name="switch_to_mf">Η υπηρεσία Google Play είναι παρωχημένη. Αντ\'αυτής θέλετε να χρησιμοποιήσετε τον πάροχο χαρτών Mapsforge;</string>
     <string name="switched_to_mf">Ο προεπιλεγμένος χάρτης άλλαξε στον πάροχο χαρτών Mapsforge. Επανεκκινήστε τον χάρτη σας.</string>

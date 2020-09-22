@@ -93,7 +93,7 @@
     <string name="log_posting_log">Odesílání logu…</string>
     <string name="log_posting_twitter">Odesílání tweetu…</string>
     <string name="log_posting_vote">Přidává se hlas kešce…</string>
-    <string name="log_posting_image">Odesílání obrázku…</string>
+    <string name="log_posting_image">Odesílání obrázků…</string>
     <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistit</string>
     <string name="log_post_not_possible">Probíhá stahování dat…\nProsím, zkus to znovu za chvíli nebo zkontroluj připojení k internetu.</string>
@@ -256,8 +256,8 @@
     <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
     <string name="info_stored_image">Nový obrázek uložen do:</string>
     <string name="info_cache_saved">Keš uložena pro lokální použití</string>
-    <string name="info_feature_offline_counter">Máte offline logy, které ještě nejsou nahrány. Proto bude zobrazeno počítadlo (např. \"+ 1\"). Pokud se vám počítadlo nelíbí, můžete jej vypnout v nastavení &gt; Logování.\n\nChcete-li snadno najít zbývající offline logy, přejděte do \"seznamu historie\" a filtrujte \"S osobními údaji\" &gt; \"S offline logem\"</string>
     <string name="warn_calculator_state_save">Nezapomeň si uložit trasový bod, chceš-li zachovat stav kalkulačky.</string>
+    <string name="feature_info_offline_counter">Máte některé kešky s offline uloženým logem, které nemusí být zatím zveřejněny. Pro vaše pohodlí je počet těchto logů zobrazen jako \"+ x\" za počtem nalezených keší v zápatí na hlavní stránce c:geo. \n\nKromě toho budou tyto logy \"x\" přidány do šablony \"NUMBER\", kterou můžete použít ve vašem logu. \n\nPokud se vám toto rozšíření nelíbí můžete jej zakázat v části \"Nastavení\" &gt; \"Logování\" a/nebo použít šablonu \"NUMBER (bez offline logů)\". \n\nChcete-li snadno najít zbývající offline logy, přejděte do seznamu \"Historie\" a filtrujte \"S osobními údaji\" &gt; \"S offline logem\".</string>
     <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
     <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
@@ -267,6 +267,7 @@
     <string name="more_information">Další informace</string>
     <string name="remind_later">Připomenout později</string>
     <string name="undo">Zpět</string>
+    <string name="dont_show_again">Znovu nezobrazovat</string>
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
     <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
@@ -394,7 +395,7 @@
     <string name="list_title">Vyber seznam</string>
     <string name="lists_title">Vyber seznamy</string>
     <string name="list_inbox">Uložené</string>
-    <string name="list_all_lists">Všechny keše</string>
+    <string name="list_all_lists">Všechny kešky</string>
     <string name="list_dialog_create_title">Nový seznam</string>
     <string name="list_dialog_create">Vytvořit</string>
     <string name="list_dialog_create_err">c:geo nedokázalo vytvořit nový seznam</string>
@@ -822,6 +823,7 @@
     <string name="cache_offline_drop">Odstranit</string>
     <string name="cache_delete_userdefined_waypoints">Odstranit uživatelsky definovatelné trasové body</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Odstranit všechny uživatelsky definovatelné trasové body u této keše?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povoleny „trasové body z poznámky“. Pokud máte souřadnice v osobní poznámce rozpoznané aplikací c:geo, budou pro ně automaticky vytvořeny trasové body. Tuto funkci můžete deaktivovat v dialogovém okně pro úpravu osobní poznámky.</string>
     <string name="cache_delete_userdefined_waypoints_success">Uživatelsky definovatelné trasové body smazány</string>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_stored">Uloženo v zařízení</string>

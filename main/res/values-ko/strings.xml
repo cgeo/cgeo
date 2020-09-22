@@ -89,11 +89,9 @@
     <string name="log_tb_archived">영구보관됨</string>
     <string name="log_save">오프라인 저장</string>
     <string name="log_saving">로그 발송중…</string>
-    <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
     <string name="log_posting_twitter">트위터에 올리는 중…</string>
     <string name="log_posting_vote">캐시 투표 게시 중…</string>
-    <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
     <string name="log_post_not_possible">데이터 다운로드 진행 중…\n몇초 후 다시 시도해 보거나, 인터넷 연결상태를 확인 해 보세요.</string>
@@ -256,7 +254,6 @@
     <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
     <string name="info_stored_image">새로운 사진 저장 위치 :</string>
     <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
-    <string name="info_feature_offline_counter">아직 업로드되지 않은 오프라인 로그가 있습니다. 따라서 카운터 (예: \"+ 1\")가 표시됩니다. 카운터가 마음에 들지 않으면 설정 &gt; 로깅에서 비활성화 할 수 있습니다.\n\n남아있는 오프라인 로그를 쉽게 찾으려면 \"역사 목록\"으로 이동하여 \"개인 데이터 사용\" &gt; \"오프라인 로그 사용\"으로 필터링하십시오.</string>
     <string name="warn_calculator_state_save">계산기 상태를 유지하려면 웨이포인트를 저장해야 합니다.</string>
     <string name="err_trackable_log_not_anonymous">c:geo에서 익명으로 %1$s를 로그할 수 없습니다. 설정을 열어 %2$s 의 계정정보를 입력하시겠습니까?</string>
     <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>

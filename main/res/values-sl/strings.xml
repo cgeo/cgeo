@@ -80,10 +80,8 @@
     <string name="log_tb_archived">Arhiviran</string>
     <string name="log_save">Shrani za delo brez povezave</string>
     <string name="log_saving">Pošiljam…</string>
-    <string name="log_saving_and_uploading">Pošiljam zapis in nalagam sliko…</string>
     <string name="log_posting_log">Pošiljam zapis…</string>
     <string name="log_posting_twitter">Pošiljam na Twitter…</string>
-    <string name="log_posting_image">Nalagam sliko…</string>
     <string name="log_clear">Počisti</string>
     <string name="log_post_not_possible">Prenos podatkov je v teku…\nPoskusite znova čez nekaj sekund ali preverite vašo povezavo z internetom.</string>
     <string name="log_date_future_not_allowed">Vnaprejšnji datumi niso dovoljeni.</string>

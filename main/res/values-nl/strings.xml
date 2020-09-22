@@ -89,11 +89,11 @@
     <string name="log_tb_archived">Gearchiveerd</string>
     <string name="log_save">Off line opslaan</string>
     <string name="log_saving">Log opslaan…</string>
-    <string name="log_saving_and_uploading">De log wordt gepost en de afbeelding geüpload…</string>
+    <string name="log_saving_and_uploading">Log posten en afbeeldingen uploaden…</string>
     <string name="log_posting_log">Posten log…</string>
     <string name="log_posting_twitter">Posten tweet…</string>
     <string name="log_posting_vote">Cache stem posten…</string>
-    <string name="log_posting_image">Posten afbeelding…</string>
+    <string name="log_posting_image">Afbeeldingen posten…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
@@ -256,8 +256,8 @@
     <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
     <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
     <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
-    <string name="info_feature_offline_counter">Je hebt offline logs die nog niet zijn geüpload. Daarom wordt een teller (bijv. \"+ 1\") weergegeven. Als je de teller niet leuk vindt, kun je deze uitschakelen onder Instellingen &gt; Loggen.\n\nOm eenvoudig overige offline logs te vinden ga je naar de \"geschiedenis\" lijst en filter op \"Met persoonlijke gegevens\" &gt; \"Met offline log\"</string>
     <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
+    <string name="feature_info_offline_counter">Je hebt enkele caches met een offline opgeslagen log, die mogelijk nog niet online gelogd zijn. Voor het gemak wordt de hoeveelheid van deze logs weergegeven als \"+ x\" achter het aantal gevonden caches onderin c:geo\'s hoofdpagina. \n\nDeze \"x\" logs worden toegevoegd aan de \"NUMBER\" template die je zou kunnen gebruiken in je log handtekening. \n\nAls deze teller-extensie je niet bevalt, kan je deze uitschakelen onder \"Instellingen\" &gt; \"Logging\" en/of in plaats daarvan het \"NUMBER (zonder offline logs)\"-sjabloon gebruiken. \n\nOm gemakkelijk de resterende offline logs te vinden, ga naar de lijst \"Geschiedenis\" en filter op \"Met persoonlijke gegevens\" &gt; \"Met offline log\".</string>
     <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
@@ -267,6 +267,7 @@
     <string name="more_information">Meer informatie</string>
     <string name="remind_later">Herinner mij later</string>
     <string name="undo">Ongedaan maken</string>
+    <string name="dont_show_again">Niet meer weergeven</string>
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
     <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
@@ -816,6 +817,7 @@
     <string name="cache_offline_drop">Verwijderen</string>
     <string name="cache_delete_userdefined_waypoints">Gebruiker gedefinieerde waypoints verwijderen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Verwijder alle gebruiker gedefinieerde waypoints van deze cache?\n\nWaypoints worden definitief verwijderd, dit kan niet ongedaan worden gemaakt.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Opmerking: Je hebt \"waypoints van notitie\" ingeschakeld. Als er coördinaten in je persoonlijke notitie worden herkend door c:geo, worden hiervan automatisch waypoints aangemaakt. Je kunt dit uitschakelen in het persoonlijke notitiebewerkingsvenster.</string>
     <string name="cache_delete_userdefined_waypoints_success">Gebruiker gedefinieerde waypoints verwijderd</string>
     <string name="cache_offline_store">Opslaan</string>
     <string name="cache_offline_stored">Opgeslagen in apparaat</string>

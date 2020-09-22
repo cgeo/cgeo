@@ -82,10 +82,8 @@
     <string name="log_tb_archived">تم أرشفته</string>
     <string name="log_save">حفظ بدون اتصال</string>
     <string name="log_saving">إرسال السجل&#8230;</string>
-    <string name="log_saving_and_uploading">جاري نشر السجل و تحميل الصورة&#8230;</string>
     <string name="log_posting_log">جاري نشر السجل&#8230;</string>
     <string name="log_posting_twitter">جاري نشر التغريدة&#8230;</string>
-    <string name="log_posting_image">نشر الصورة&#8230;</string>
     <string name="log_posting_generic_trackable">نشر %1$s %2$d/%3$d</string>
     <string name="log_clear">مسح</string>
     <string name="log_post_not_possible">جاري تحميل البيانات&#8230;\nيرجى المحاولة مرة أخر بعد ثوان أو تحقق من إتصالك بالإنترنات.</string>

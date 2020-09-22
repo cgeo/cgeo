@@ -89,11 +89,9 @@
     <string name="log_tb_archived">Arquivado</string>
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
-    <string name="log_saving_and_uploading">A publicar o registo e a enviar a imagem…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
     <string name="log_posting_vote">A publicar votação em caches…</string>
-    <string name="log_posting_image">A publicar imagem…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à Internet.</string>
@@ -256,8 +254,6 @@
     <string name="info_select_logimage_cancelled">Foi cancelada a selecção ou captura de imagem.</string>
     <string name="info_stored_image">Nova imagem guardada em:</string>
     <string name="info_cache_saved">A cache foi armazenada localmente</string>
-    <string name="info_feature_offline_counter">Tem registos offline que não foram submetidos.
-Por essa razão um contador (ex: \"+ 1\") será mostrado. Se não gostar do contador, pode desactiva-lo em Definições &gt; Registos.\n\nPara encontrar facilmente os registos offline que restam, vá a \"lista do histórico\" e filtre por \"Com informação pessoal\" &gt; \"Com registo offline\"</string>
     <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
     <string name="err_trackable_log_not_anonymous">Não é possível registar %1$s de forma anónima a partir do c:geo. Quer abrir as definições para preencher as suas credenciais de %2$s?</string>
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>

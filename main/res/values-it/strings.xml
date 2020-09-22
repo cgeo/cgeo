@@ -89,11 +89,11 @@
     <string name="log_tb_archived">Archiviato</string>
     <string name="log_save">Salva offline</string>
     <string name="log_saving">Invio log…</string>
-    <string name="log_saving_and_uploading">Pubblicazione log e caricamento immagine…</string>
+    <string name="log_saving_and_uploading">Pubblicazione di log e caricamento di immagini…</string>
     <string name="log_posting_log">Caricamento log…</string>
     <string name="log_posting_twitter">Caricamento tweet…</string>
     <string name="log_posting_vote">Pubblicazione voto cache…</string>
-    <string name="log_posting_image">Caricamento immagine…</string>
+    <string name="log_posting_image">Pubblicazione immagini…</string>
     <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Azzera</string>
     <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
@@ -256,8 +256,8 @@
     <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
     <string name="info_stored_image">Nuova immagine salvata su:</string>
     <string name="info_cache_saved">Il cache è stato salvato localmente</string>
-    <string name="info_feature_offline_counter">Hai dei log offline, che non sono ancora stati caricati. Pertanto verrà visualizzato un contatore (ad esempio \"+ 1\"). Se non ti piace, puoi disabilitarlo sotto Impostazioni &gt; Registro log.\n\nPer trovare facilmente i log offline, vai nella \"Cronologia\" e filtra per \"Con dati personali\" &gt; \"Con log offline\"</string>
     <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
+    <string name="feature_info_offline_counter">Hai alcuni cache con un Log salvato offline, che potrebbero non essere ancora stati caricati online. Per la tua comodità il numero di questi Log viene visualizzato come \"+ x\" dietro il tuo numero di cache trovati in calce alla pagina principale di c:geo. \n\nInoltre questi registri \"x\" saranno aggiunti al modello \"NUMBER\" che potresti usare nella tua firma Log. \n\nSe non ti piace questa estensione con il contatore, puoi disabilitarlo in \"Impostazioni\" &gt; \"Registro Log\" e/o usare invece il modello \"NUMBER (senza log offline)\". \n\nPer trovare facilmente i Log offline rimanenti, vai alla lista \"Cronologia\" e filtra per \"Con dati personali\" &gt; \"Con log offline\".</string>
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
@@ -267,6 +267,7 @@
     <string name="more_information">Ulterioni informazioni</string>
     <string name="remind_later">Ricordamelo più tardi</string>
     <string name="undo">Annulla</string>
+    <string name="dont_show_again">Non mostrare ancora</string>
     <string name="warn_gm_not_available">Google Maps non disponibile.</string>
     <string name="switch_to_mf">Il tuo servizio Google Play non è aggiornato. Vuoi passare al provider delle mappe di Mapsforge?</string>
     <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>
@@ -816,6 +817,7 @@
     <string name="cache_offline_drop">Rimuovi</string>
     <string name="cache_delete_userdefined_waypoints">Rimuovi waypoint definiti dall\'utente</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Rimuovere tutti i waypoint definiti dall\'utente di questa cache?\n\nWaypoints verranno eliminati immediatamente, non puoi annullare.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Nota: è abilitata la funzione \"Estrazione Waypoint\". Se hai coordinate nelle tue note personali riconosciute da c:geo, i waypoint verranno ricreati automaticamente. Puoi disabilitare questo nella finestra di modifica delle note personali.</string>
     <string name="cache_delete_userdefined_waypoints_success">waypoint definiti dall\'utente cancellati</string>
     <string name="cache_offline_store">Salva</string>
     <string name="cache_offline_stored">Salvato nel dispositivo</string>

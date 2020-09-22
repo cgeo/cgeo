@@ -89,11 +89,9 @@
     <string name="log_tb_archived">Archyvuota</string>
     <string name="log_save">Išsaugoti neprisijungus</string>
     <string name="log_saving">Siunčiamas įrašas…</string>
-    <string name="log_saving_and_uploading">Talpinamas įrašas ir įkeliamas paveiksliukas…</string>
     <string name="log_posting_log">Talpinamas įrašas…</string>
     <string name="log_posting_twitter">Skelbiamas Tweet…</string>
     <string name="log_posting_vote">Skelbiamas lobio įvertinimas…</string>
-    <string name="log_posting_image">Talpinamas vaizdas…</string>
     <string name="log_posting_generic_trackable">Talpinama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>

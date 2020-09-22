@@ -89,11 +89,9 @@
     <string name="log_tb_archived">Arkistoitu</string>
     <string name="log_save">Offline-tallennus</string>
     <string name="log_saving">Lähetetään merkintää…</string>
-    <string name="log_saving_and_uploading">Lähetetään lokia ja kuvaa…</string>
     <string name="log_posting_log">Lähetetään lokia…</string>
     <string name="log_posting_twitter">Lähetetään twiittiä…</string>
     <string name="log_posting_vote">Lähetetään kätkön arvostelua…</string>
-    <string name="log_posting_image">Lähetetään kuvaa…</string>
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
     <string name="log_clear">Tyhjennä</string>
     <string name="log_post_not_possible">Datan lataus käynnissä…\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>

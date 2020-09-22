@@ -81,10 +81,8 @@
     <string name="log_tb_archived">אורכן</string>
     <string name="log_save">שמור באופן לא מקוון</string>
     <string name="log_saving">שולח לוג&#8230;</string>
-    <string name="log_saving_and_uploading">מפרסם רישום ביומן ומעלה תמונה&#8230;</string>
     <string name="log_posting_log">מפרסם רישום ביומן&#8230;</string>
     <string name="log_posting_twitter">מפרסם ציוץ&#8230;</string>
-    <string name="log_posting_image">מעלה תמונה&#8230;</string>
     <string name="log_posting_generic_trackable">מפרסם %1$s %2$d %3$d</string>
     <string name="log_clear">נקה</string>
     <string name="log_post_not_possible">הורדת נתונים&#8230;\n נסו שוב בעוד מספר שניות או בדקו את החיבור לרשת.</string>

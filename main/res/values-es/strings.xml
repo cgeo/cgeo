@@ -88,11 +88,9 @@
     <string name="log_tb_archived">Archivado</string>
     <string name="log_save">Guardar sin conexión</string>
     <string name="log_saving">Enviando registro…</string>
-    <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
     <string name="log_posting_log">Enviando registro…</string>
     <string name="log_posting_twitter">Publicando tweet…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
-    <string name="log_posting_image">Publicando imagen…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
     <string name="log_post_not_possible">Descarga de datos en curso…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
