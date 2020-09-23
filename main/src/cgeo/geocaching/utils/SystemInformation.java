@@ -80,6 +80,13 @@ public final class SystemInformation {
         appendDirectory(body, "\nUser storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendDatabase(body);
+        body
+                .append("\nGPX import path: ").append(Settings.getGpxImportDir())
+                .append("\nGPX export path: ").append(Settings.getGpxExportDir())
+                .append("\nOffline maps path: ").append(Settings.getMapFileDirectory())
+                .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
+                .append("\nLive map mode: ").append(Settings.isLiveMap())
+                .append("\nGlobal filter: ").append(Settings.getCacheType().pattern);
         appendPermissions(context, body);
         appendConnectors(body);
         if (GCConnector.getInstance().isActive()) {
