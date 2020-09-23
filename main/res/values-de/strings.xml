@@ -147,7 +147,6 @@
     <string name="log_image_scale_option_entry">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">Bild</string>
-    <string name="log_image_titleprefix_hint">Bildtitel Präfix</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
     <string name="translate_to_english">Übersetze in Englisch</string>
