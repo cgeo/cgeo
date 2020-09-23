@@ -1,30 +1,30 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away. 
+c: geo és un client no oficial de codi obert, amb funcions completes per geocaching.com i que ofereix suport bàsic per a altres plataformes de geocaching (com Opencaching). No requereix un navegador web; només cal instal·lar-lo i començar. 
 
-Main features:
-- View caches on a Live Map 
-- Use Google Maps or OpenStreetMaps
-- Search for caches by various criteria 
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files 
-- Full support for trackables
-- Offline caching functions including offline maps
+Característiques principals:
+- Veure catxés en un mapa en viu 
+- Utilitzeu Google Maps o OpenStreetMaps
+- Cerqueu catxés segons diversos criteris 
+- Registreu les vostres troballes en línia o fora de línia
+- Emmagatzemeu informació de catxés al dispositiu
+- Crear i gestionar waypoints
+- Navegueu mitjançant brúixola, mapa o altres aplicacions
+- Importar/Exportar fitxers GPX 
+- Suport complet per als rastrejables
+- Funcions de catxés fora de línia, inclosos mapes fora de línia
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c: geo és una app senzilla de geocatxing però potent amb moltes funcions addicionals. Tot el que necessiteu per començar és un compte de geocaching.com o una altra plataforma de geocatxing (com Opencaching).
+Cerqueu catxés mitjançant el mapa en viu o mitjançant una de les moltes funcions de cerca.
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+Navegueu fins a un catxé o un punt de pas amb la funció de brúixola integrada, el mapa o envieu les coordenades a diverses aplicacions externes (per exemple, Radar, Google Navigation, StreetView, Locus, Navigon, Sygic i molts altres).
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want. 
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+Emmagatzemeu informació del catxé al vostre dispositiu directament des de geocaching.com, així com mitjançant la importació de fitxers GPX per tenir-la disponible sempre que vulgueu. 
+Podeu gestionar els catxés emmagatzemats en diferents llistes i ordenar-les i filtrar-les segons les vostres necessitats.
+Els catxés emmagatzemats juntament amb fitxers de mapes fora de línia o mapes estàtics es poden utilitzar per trobar catxés sense connexió a Internet (ex, en itinerància).
+Els registres es poden publicar en línia o emmagatzemar fora de línia per enviar-los posteriorment o exportar-los mitjançant notes de camp.
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+Cerqueu i descobriu rastrejables, gestioneu el vostre inventari rastrejable i deixeu anar un rastrejable mentre publiqueu un registre.
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+Si teniu problemes per instal·lar o utilitzar c: geo, primer consulteu les nostres FAQ (https://faq.cgeo.org) o consulteu la guia de l'usuari (https://manual.cgeo.org).
+Si encara hi ha problemes, poseu-vos en contacte amb el servei d'assistència per correu electrònic.
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+Si voleu saber per què aquest  plugin de c: geo necessita els permisos sol·licitats, consulteu https://www.cgeo.org/faq.html#plugin-contacts-privacy per obtenir una explicació.

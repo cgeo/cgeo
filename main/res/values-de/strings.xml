@@ -89,9 +89,11 @@
     <string name="log_tb_archived">Archiviert</string>
     <string name="log_save">Offline speichern</string>
     <string name="log_saving">Log wird gesendet…</string>
+    <string name="log_saving_and_uploading">Sende Log und Bilder…</string>
     <string name="log_posting_log">Sende Log…</string>
     <string name="log_posting_twitter">Sende Tweet…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
+    <string name="log_posting_image">Sende Bilder…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
@@ -147,7 +149,6 @@
     <string name="log_image_scale_option_entry">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">Bild</string>
-    <string name="log_image_titleprefix_hint">Bildtitel Präfix</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Übersetze in %s</string>
     <string name="translate_to_english">Übersetze in Englisch</string>
@@ -255,6 +256,7 @@
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
+    <string name="feature_info_offline_counter">Du hast einige Caches mit Offline-Logs, die evtl. noch nicht hochgeladen wurden. Daher wird als Erinnerung ein Zähler (z.B. \"+ 1\") auf dem Hauptbildschirm angezeigt.\n\nWeiterhin werden diese \"x\" Logs zur \"NUMMER\"-Vorlage addiert, die du evtl. in deiner Signatur nutzt.\n\nFalls dir der Zähler nicht gefällt, kannst du ihn unter \"Einstellungen\" &gt; \"Loggen\" deaktivieren und/oder stattdessen die \"NUMMER (ohne Offline-Logs)\"-Vorlage nutzen.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" > \"Mit Offline-Log\".</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
@@ -264,6 +266,7 @@
     <string name="more_information">Mehr Informationen</string>
     <string name="remind_later">Später erinnern</string>
     <string name="undo">Rückgängig</string>
+    <string name="dont_show_again">Nicht erneut anzeigen</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
@@ -813,6 +816,7 @@
     <string name="cache_offline_drop">Entfernen</string>
     <string name="cache_delete_userdefined_waypoints">Benutzerdefinierte Wegpunkte löschen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Alle benutzerdefinierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, es gibt keine Wiederherstellen-Funktion.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Hinweis: Du hast \"Wegpunkte aus der Notiz\" aktiviert. Wenn du Koordinaten in deiner persönlichen Notiz hast, werden diese von c:geo erkannt und Wegpunkte automatisch wiederhergestellt. Du kannst dies im Beareitungsfenster der persönlichen Notiz deaktivieren.</string>
     <string name="cache_delete_userdefined_waypoints_success">Benutzerdefinierte Wegpunkte gelöscht</string>
     <string name="cache_offline_store">Speichern</string>
     <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>

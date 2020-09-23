@@ -89,9 +89,11 @@
     <string name="log_tb_archived">Arquivado</string>
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
+    <string name="log_saving_and_uploading">A publicar o registo e a enviar as imagens…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
     <string name="log_posting_vote">A publicar votação em caches…</string>
+    <string name="log_posting_image">A publicar imagens…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à Internet.</string>
@@ -147,7 +149,6 @@
     <string name="log_image_scale_option_entry">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">Imagem</string>
-    <string name="log_image_titleprefix_hint">Prefixo do Título da Imagem</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduzir para %s</string>
     <string name="translate_to_english">Traduzir para inglês</string>
@@ -255,6 +256,7 @@
     <string name="info_stored_image">Nova imagem guardada em:</string>
     <string name="info_cache_saved">A cache foi armazenada localmente</string>
     <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
+    <string name="feature_info_offline_counter">Tem algumas caches com um registo offline gravado, que podem ainda não ter sido registadas online. Para seu conforto, a contagem desses registos é exibida como \"+ x\" a seguir ao seu número de caches encontradas, no rodapé na página principal do c:geo. \n\nAlém disso, caso utilize o modelo \"Número\" na composição da sua assinatura de registo, estes \"x\" número de registos serão-lhe acrescentados. \n\nSe não gosta desta extensão do contador, pode desactiva-la em \"Definições\" &gt; \"Registos\" e/ou usar em alternativa o modelo \"Número (sem registos offline)\". \n\nPara encontrar facilmente os registos offline pendentes, aceda à lista \"Histórico\" e filtre por \"Com informação pessoal\" &gt; \"Com registo offline\".</string>
     <string name="err_trackable_log_not_anonymous">Não é possível registar %1$s de forma anónima a partir do c:geo. Quer abrir as definições para preencher as suas credenciais de %2$s?</string>
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
     <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
@@ -264,6 +266,7 @@
     <string name="more_information">Mais informação</string>
     <string name="remind_later">Lembrar-me mais tarde</string>
     <string name="undo">Anular</string>
+    <string name="dont_show_again">Não mostrar novamente</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
@@ -814,6 +817,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_offline_drop">Remover</string>
     <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Nota: Tem a opção \"pontos adicionais da nota\" activado. Se tiver coordenadas na sua nota pessoal, reconhecidas pelo c:geo, os pontos adicionais serão recriados automaticamente para elas. Pode desactivar isto na caixa de diálogo de editar anotações pessoais.</string>
     <string name="cache_delete_userdefined_waypoints_success">Os pontos adicionais definidos pelo utilizador foram removidos</string>
     <string name="cache_offline_store">Armazenar</string>
     <string name="cache_offline_stored">Armazenada no dispositivo</string>
