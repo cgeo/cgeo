@@ -89,7 +89,7 @@
     <string name="log_tb_archived">Archiviert</string>
     <string name="log_save">Offline speichern</string>
     <string name="log_saving">Log wird gesendet…</string>
-    <string name="log_saving_and_uploading">Sende Log und lade Bilder hoch…</string>
+    <string name="log_saving_and_uploading">Sende Log und Bilder…</string>
     <string name="log_posting_log">Sende Log…</string>
     <string name="log_posting_twitter">Sende Tweet…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
