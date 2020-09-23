@@ -28,7 +28,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testTrackableWithLogImages() {
-        final Trackable trackable = getTBXATG();
+        final Trackable trackable = parseTrackable(R.raw.tbxatg);
         assertThat(trackable.getGeocode()).isEqualTo("TBXATG");
 
         final List<LogEntry> log = trackable.getLogs();
@@ -138,10 +138,6 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     private Trackable getTB2R124() {
         return parseTrackable(R.raw.trackable_tb2r124);
-    }
-
-    private Trackable getTBXATG() {
-        return parseTrackable(R.raw.trackable_tbxatg);
     }
 
     public void testParseTrackableNotExisting() {
