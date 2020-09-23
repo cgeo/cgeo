@@ -807,6 +807,7 @@
     <string name="cache_offline">Hors-ligne</string>
     <string name="cache_offline_refresh">Actualiser</string>
     <string name="cache_offline_drop">Supprimer</string>
+    <string name="cache_delete_userdefined_waypoints">Supprimer les points de passage définis par l\'utilisateur</string>
     <string name="cache_offline_store">Enregistrer</string>
     <string name="cache_offline_stored">Enregistrée</string>
     <string name="cache_offline_not_ready">Hors-ligne indisponible</string>
