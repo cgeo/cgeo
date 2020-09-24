@@ -9,6 +9,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Map:</h4>
 <ul>
 <li>Show list markers also on waypoints</li>
+<li>Fix zoom difference when switching between Google and OSM maps</li>
 </ul>
 
 <h4>Cache details:</h4>
