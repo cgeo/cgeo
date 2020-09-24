@@ -82,11 +82,11 @@ public class MfMapView extends MapView {
     }
 
     public int getMapZoomLevel() {
-        return getModel().mapViewPosition.getZoomLevel() + 3;
+        return getModel().mapViewPosition.getZoomLevel() /* + 3 */;
     }
 
     public void setMapZoomLevel(final int zoomLevel) {
-        getModel().mapViewPosition.setZoomLevel((byte) (zoomLevel - 3));
+        getModel().mapViewPosition.setZoomLevel((byte) (zoomLevel /* - 3 */));
     }
 
     public void zoomToViewport(final Viewport viewport) {
