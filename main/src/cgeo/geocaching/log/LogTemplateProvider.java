@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
@@ -281,6 +282,17 @@ public final class LogTemplateProvider {
                 final LogEntry logEntry = context.getLogEntry();
                 if (logEntry != null) {
                     return logEntry.getDisplayText();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("TYPE",  R.string.init_signature_template_type) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Geocache cache = context.getCache();
+                if (cache != null) {
+                    final CacheType cacheType = cache.getType();
+                    return cacheType.getL10n();
                 }
                 return StringUtils.EMPTY;
             }
