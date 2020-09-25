@@ -1328,12 +1328,12 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Compass</string>
     <string name="use_gps">GPS only used</string>
-    <string name="use_compass">GPS and Magnetic Compass used</string>
+    <string name="use_compass">All Sensors used</string>
     <string name="destination_select">Select destination</string>
     <string name="navigation_direct_navigation">Direct Navigation</string>
     <string name="osmand_marker_cgeo">Marker from c:geo</string>
-    <string name="device_heading_label">Device Heading:</string>
-    <string name="device_orientation">Device Orientation</string>
+    <string name="device_heading_label">Device:</string>
+    <string name="device_orientation">Orientation</string>
     <string name="device_orientation_label">Orientation:</string>
 
     <!-- device orientation types -->

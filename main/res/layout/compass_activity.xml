@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textOn="@string/use_compass"
+            android:maxLines="1"
             android:textOff="@string/use_gps" />
 
         <ToggleButton
@@ -46,6 +47,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:maxLines="1"
             android:textOn="@null"
             android:textOff="@null" />
 

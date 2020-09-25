@@ -46,6 +46,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
+            android:maxLines="1"
             android:textOn="@string/use_compass"
             android:textOff="@string/use_gps" />
 
@@ -59,6 +60,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
+            android:maxLines="1"
             android:textOn="@null"
             android:textOff="@null" />
 
