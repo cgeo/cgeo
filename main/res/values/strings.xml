@@ -582,6 +582,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Log text</string>
     <string name="init_signature_template_size">Size</string>
+    <string name="init_signature_template_type">Type</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
