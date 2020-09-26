@@ -1209,7 +1209,6 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">GPS i brug</string>
-    <string name="use_compass">GPS og magnetisk kompas i brug</string>
     <string name="destination_select">Vælg destination</string>
     <string name="navigation_direct_navigation">Direkte navigation</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
