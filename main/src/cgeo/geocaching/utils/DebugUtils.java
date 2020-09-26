@@ -77,6 +77,7 @@ public class DebugUtils {
                         builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "cgeo.geocachin:I", "*:S", "-f", file.getAbsolutePath());
                     }
                 }
+                Log.iForce("[LogCat]Issuing command: " + builder.command());
                 final int returnCode = builder.start().waitFor();
                 if (returnCode == 0) {
                     result.set(file.exists() ? LogcatResults.LOGCAT_OK.ordinal() : LogcatResults.LOGCAT_EMPTY.ordinal());

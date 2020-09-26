@@ -2329,7 +2329,7 @@ public class DataStore {
             return Collections.emptySet();
         }
 
-        try (ContextLogger cLog = new ContextLogger("DataStore.loadCachesFromGeoCodes(#%d)", geocodes.size())) {
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadCachesFromGeoCodes(#%d)", geocodes.size())) {
             cLog.add("flags:%s", loadFlags);
 
             // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
@@ -2485,8 +2485,6 @@ public class DataStore {
         cache.setLogPasswordRequired(cursor.getInt(41) > 0);
         cache.setWatchlistCount(cursor.getInt(42));
         cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
-
-        Log.d("Loading " + cache.toString() + " from DB");
 
         return cache;
     }
@@ -3085,22 +3083,25 @@ public class DataStore {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
-        final StringBuilder selection = new StringBuilder();
 
-        String[] selectionArgs = null;
-        if (cacheType != CacheType.ALL) {
-            selection.append(" type = ? AND");
-            selectionArgs = new String[] { String.valueOf(cacheType.id) };
-        }
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadBatchOfStoredGeocodes(coords=%s, type=%s, list=%d)",
+                String.valueOf(coords), String.valueOf(cacheType), listId)) {
+            final StringBuilder selection = new StringBuilder();
 
-        selection.append(" geocode IN (SELECT geocode FROM ");
-        selection.append(dbTableCachesLists);
-        selection.append(" WHERE list_id ");
-        selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
-        selection.append(')');
+            String[] selectionArgs = null;
+            if (cacheType != CacheType.ALL) {
+                selection.append(" type = ? AND");
+                selectionArgs = new String[] { String.valueOf(cacheType.id) };
+            }
 
+            selection.append(" geocode IN (SELECT geocode FROM ");
+            selection.append(dbTableCachesLists);
+            selection.append(" WHERE list_id ");
+            selection.append(listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
+            selection.append(')');
 
-        try {
+            cLog.add("Sel:" + selection);
+
             if (coords != null) {
                 return queryToColl(dbTableCaches,
                         new String[]{"geocode", "(ABS(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
