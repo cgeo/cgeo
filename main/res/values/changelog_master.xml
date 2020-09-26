@@ -8,11 +8,13 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Map:</h4>
 <ul>
-<li>Show list markers also on waypoints</li>
+<li>Change: Show list markers also on waypoints</li>
+<li>Fix: Zoom level difference between Google Maps and OpenStreetMap maps</li>
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
+<li>Fix: Adapt to website change for trackable logbook on geocaching.com</li>
 <li>New: Allow negative bearing angles for waypoint projection</li>
 <li>New: Voice output: Estimate device orientation and transform coords when mobile is upright</li>
 <li>Fix: Offline log remembers selected image</li>
@@ -26,10 +28,13 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Cache lists:</h4>
 <ul>
 <li>Change: Allow cache title to wrap to multi-line</li>
+<li>Change: Widened colored found/offline log marker and removed textual "Offline" marker</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
+<li>New: Detect and report captcha on login to geocaching.com</li>
+<li>Fix: Correctly detect wrong username/password on login to geocaching.com</li>
 <li>New: Offer c:geo for navigation intents (eg.: from Lab Adventure app)</li>
 <li>Change: Replace outdated undobar with snackbar</li>
 </ul>
