@@ -1223,7 +1223,6 @@
     <string name="navigation">Navigácia</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Použité iba GPS</string>
-    <string name="use_compass">Používa GPS a magnetický kompas</string>
     <string name="destination_select">Vyberte cieľ</string>
     <string name="navigation_direct_navigation">Priama navigácia</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
