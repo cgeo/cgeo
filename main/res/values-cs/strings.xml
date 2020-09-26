@@ -1242,12 +1242,9 @@
     <string name="navigation">Navigace</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Použita pouze GPS</string>
-    <string name="use_compass">Použita GPS a kompas</string>
     <string name="destination_select">Vyber cíl</string>
     <string name="navigation_direct_navigation">Přímá navigace</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
-    <string name="device_heading_label">Název zařízení:</string>
-    <string name="device_orientation">Orientace zařízení</string>
     <string name="device_orientation_label">Orientace:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Neznámá</string>
