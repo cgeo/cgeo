@@ -1226,7 +1226,6 @@
     <string name="navigation">Навигация</string>
     <string name="compass_title">Компас</string>
     <string name="use_gps">Только GPS</string>
-    <string name="use_compass">GPS и компас</string>
     <string name="destination_select">Выберите пункт назначения</string>
     <string name="navigation_direct_navigation">Прямая навигация</string>
     <string name="osmand_marker_cgeo">Маркер из c:geo</string>

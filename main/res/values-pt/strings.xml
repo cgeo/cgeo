@@ -1225,12 +1225,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="navigation">Navegação</string>
     <string name="compass_title">Bússola</string>
     <string name="use_gps">Apenas GPS</string>
-    <string name="use_compass">GPS e Bússola Magnética</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
-    <string name="device_heading_label">Orientação do dispositivo:</string>
-    <string name="device_orientation">Orientação do dispositivo</string>
     <string name="device_orientation_label">Orientação:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>

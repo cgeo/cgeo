@@ -1216,12 +1216,9 @@
     <string name="navigation">Navigointi</string>
     <string name="compass_title">Kompassi</string>
     <string name="use_gps">Vain GPS käytössä</string>
-    <string name="use_compass">GPS ja magneettinen kompassi käytössä</string>
     <string name="destination_select">Valitse kohde</string>
     <string name="navigation_direct_navigation">Suora navigointi</string>
     <string name="osmand_marker_cgeo">Merkki c:geosta</string>
-    <string name="device_heading_label">Laitteen kulkusuunta:</string>
-    <string name="device_orientation">Laitteen asento</string>
     <string name="device_orientation_label">Suunta:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Tuntematon</string>

@@ -1207,12 +1207,9 @@
     <string name="navigation">길찾기</string>
     <string name="compass_title">나침반</string>
     <string name="use_gps">GPS만 사용</string>
-    <string name="use_compass">GPS와 전자나침반 사용</string>
     <string name="destination_select">목적지 선택</string>
     <string name="navigation_direct_navigation">직접 길찾기</string>
     <string name="osmand_marker_cgeo">c:geo 마커</string>
-    <string name="device_heading_label">장치 방향:</string>
-    <string name="device_orientation">디바이스 지향</string>
     <string name="device_orientation_label">지향:</string>
     <!-- device orientation types -->
     <string name="do_unknown">알 수 없음</string>

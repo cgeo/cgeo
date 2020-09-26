@@ -152,6 +152,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
+    <string name="err_captcha">Captcha obligatoire. Veuillez consulter notre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pour en savoir plus.</string>
     <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
@@ -1213,10 +1214,11 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Boussole</string>
     <string name="use_gps">GPS uniquement</string>
-    <string name="use_compass">GPS et champ magnétique</string>
     <string name="destination_select">Sélectionnez une destination</string>
     <string name="navigation_direct_navigation">Navigation directe</string>
     <string name="osmand_marker_cgeo">Repère de c:geo</string>
+    <string name="device_heading_label">Appareil :</string>
+    <string name="device_orientation">Orientation</string>
     <!-- device orientation types -->
     <!-- license -->
     <string name="license">Licence</string>

@@ -1069,7 +1069,6 @@
     <string name="navigation">ナビゲーション</string>
     <string name="compass_title">コンパス</string>
     <string name="use_gps">GPS のみ使用</string>
-    <string name="use_compass">GPS と磁気コンパスを使用</string>
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
     <!-- device orientation types -->

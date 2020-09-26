@@ -614,7 +614,6 @@
     <!-- navigation -->
     <string name="compass_title">Áttaviti</string>
     <string name="use_gps">Aðeins nota GPS</string>
-    <string name="use_compass">Nota GPS og seguláttavita</string>
     <string name="destination_select">Velja áfangastað</string>
     <!-- device orientation types -->
     <!-- license -->

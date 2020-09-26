@@ -1223,7 +1223,6 @@
     <string name="navigation">Nawigacja</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Tylko GPS</string>
-    <string name="use_compass">GPS i kompas magnetyczny</string>
     <string name="destination_select">Wybierz cel</string>
     <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
     <string name="osmand_marker_cgeo">Marker z c:geo</string>
