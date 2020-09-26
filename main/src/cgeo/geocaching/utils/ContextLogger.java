@@ -12,7 +12,7 @@ import java.util.Collection;
  * Helper class to construct log messages. Optimized to log what is happening in a method,
  * but can be used in other situations as well.
  *
- * All logging is done on VERBOSE level.
+ * All logging is done on level given in constructor, default is VERBOSE level.
  */
 public class ContextLogger implements Closeable {
 
@@ -27,14 +27,20 @@ public class ContextLogger implements Closeable {
     private final String contextString;
 
     private final boolean doLog;
+    private final Log.LogLevel logLevel;
     private boolean hasLogged = false;
 
     public ContextLogger(final String context, final Object ... params) {
+        this(Log.LogLevel.VERBOSE, context, params);
+    }
+
+    public ContextLogger(final Log.LogLevel logLevel, final String context, final Object ... params) {
         this.startTime = System.currentTimeMillis();
-        this.doLog = Log.isEnabled(Log.LogLevel.VERBOSE);
+        this.logLevel = logLevel;
+        this.doLog = Log.isEnabled(logLevel);
         if (this.doLog) {
             this.contextString = String.format(context, params) + ":";
-            Log.v(contextString + "START");
+            Log.log(logLevel, contextString + "START");
         } else {
             this.contextString = null;
         }
@@ -75,13 +81,12 @@ public class ContextLogger implements Closeable {
     public void endLog() {
         if (doLog) {
             hasLogged = true;
-            final String logMsg = this.contextString + "END " + message.toString() +
-                    (this.exception == null ? "" : "EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]") +
-                    "(" + (System.currentTimeMillis() - startTime) + "ms)";
+            final String logMsg = this.contextString + "END (" + (System.currentTimeMillis() - startTime) + "ms)" + message.toString() +
+                    (this.exception == null ? "" : "EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]");
             if (this.exception == null) {
-                Log.v(logMsg);
+                Log.log(logLevel, logMsg);
             } else {
-                Log.v(logMsg, this.exception);
+                Log.log(logLevel, logMsg, this.exception);
             }
         }
     }

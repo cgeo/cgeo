@@ -29,13 +29,19 @@ abstract class AbstractFilter implements IFilter {
 
     @Override
     public void filter(@NonNull final List<Geocache> list) {
-        final List<Geocache> itemsToRemove = new ArrayList<>();
+
+        //method must be performant when used with very large lists (e.g. 50000 elements) filtered into very short lists (e.g. 30 elements)
+        //be aware that "list" most likely is an ArrayList, thus "get(i)" is very performant but "remove" is definitely not -> don't use it!
+
+        final List<Geocache> itemsToKeep = new ArrayList<>();
         for (final Geocache item : list) {
-            if (!accepts(item)) {
-                itemsToRemove.add(item);
+            if (accepts(item)) {
+                itemsToKeep.add(item);
             }
         }
-        list.removeAll(itemsToRemove);
+
+        list.clear();
+        list.addAll(itemsToKeep);
     }
 
     @Override

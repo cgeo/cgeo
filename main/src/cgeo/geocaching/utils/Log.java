@@ -136,8 +136,6 @@ public final class Log {
             return "[" + shortName + "] " + msg + " {" + getCallerInfo(addCallerInfoMaxDepth) + "}";
         }
         return "[" + shortName + "] " + msg;
-
-
     }
 
     public static void v(final String msg) {
@@ -161,6 +159,32 @@ public final class Log {
     public static void d(final String msg, final Throwable t) {
         if (SETTING_DO_LOGGING[LogLevel.DEBUG.ordinal()]) {
             android.util.Log.d(TAG, adjustMessage(msg, LogLevel.DEBUG), t);
+        }
+    }
+
+    public static void log(final LogLevel level, final String msg) {
+        if (SETTING_DO_LOGGING[level.ordinal()]) {
+            switch (level) {
+                case ERROR: e(msg); break;
+                case WARN:  w(msg); break;
+                case INFO:  i(msg); break;
+                case DEBUG: d(msg); break;
+                case VERBOSE:
+                default: v(msg); break;
+            }
+        }
+    }
+
+    public static void log(final LogLevel level, final String msg, final Throwable thr) {
+        if (SETTING_DO_LOGGING[level.ordinal()]) {
+            switch (level) {
+                case ERROR: e(msg, thr); break;
+                case WARN:  w(msg, thr); break;
+                case INFO:  i(msg, thr); break;
+                case DEBUG: d(msg, thr); break;
+                case VERBOSE:
+                default: v(msg, thr); break;
+            }
         }
     }
 
