@@ -907,7 +907,6 @@
     <string name="navigation">Navigasi</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Hanya menggunakan GPS</string>
-    <string name="use_compass">GPS dan Magnetic Compass digunakan</string>
     <string name="destination_select">Pilih tujuan</string>
     <string name="navigation_direct_navigation">Navigasi langsung</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
