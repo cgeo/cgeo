@@ -1224,12 +1224,9 @@
     <string name="navigation">Navigazione</string>
     <string name="compass_title">Bussola</string>
     <string name="use_gps">Usa solo GPS</string>
-    <string name="use_compass">Usa GPS e bussola magnetica</string>
     <string name="destination_select">Scegli destinazione</string>
     <string name="navigation_direct_navigation">Navigazione diretta</string>
     <string name="osmand_marker_cgeo">Indicatore da c:geo</string>
-    <string name="device_heading_label">Direzione del dispositivo:</string>
-    <string name="device_orientation">Orientamento del dispositivo</string>
     <string name="device_orientation_label">Orientamento:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Sconosciuto</string>
