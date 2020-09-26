@@ -36,14 +36,19 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.ViewUtils;
 
 import android.R.string;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +60,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -74,6 +80,7 @@ import org.apache.commons.lang3.StringUtils;
 public class LogCacheActivity extends AbstractLoggingActivity {
 
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
+    private static final int LOG_MAX_LENGTH = 4000;
 
     private enum SaveMode { NORMAL, FORCE, SKIP }
 
@@ -88,6 +95,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     protected CheckBox favCheck;
     @BindView(R.id.log)
     protected EditText logEditText;
+    @BindView(R.id.log_characters_counter)
+    protected TextView logCharactersCounter;
 
     protected ImageListFragment imageListFragment;
 
@@ -223,6 +232,38 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setDisplayMapper(ReportProblemType::getL10n);
 
         this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
+
+        // show remaining characters
+        logEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int st, final int c, final int a) {
+                // do nothing
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s, final int st, final int b, final int c) {
+                // do nothing
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void afterTextChanged(final Editable editable) {
+                final int count = TextUtils.getNormalizedStringLength(editable.toString());
+
+                if (count >= 3000) {
+                    logCharactersCounter.setVisibility(View.VISIBLE);
+                    logCharactersCounter.setText(count + "/" + LOG_MAX_LENGTH);
+                    logCharactersCounter.setTextColor(count > LOG_MAX_LENGTH ? Color.RED : getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
+
+                } else {
+                    logCharactersCounter.setVisibility(View.GONE);
+                }
+            }
+
+
+
+        });
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
@@ -504,7 +545,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         switch (item.getItemId()) {
             case R.id.menu_send:
-                sendLogAndConfirm();
+                if (TextUtils.getNormalizedStringLength(logEditText.getText().toString()) <= LOG_MAX_LENGTH) {
+                    sendLogAndConfirm();
+                } else {
+                    Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+                }
                 return true;
             case R.id.menu_image:
                 imageListFragment.startAddImageDialog();

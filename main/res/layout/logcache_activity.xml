@@ -51,6 +51,16 @@
                 android:minLines="5"
                 tools:text="The log text is limited to 4000 characters."/>
 
+            <TextView
+                android:id="@+id/log_characters_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:layout_gravity="right"
+                android:visibility="gone"
+                android:textColor="?text_color"
+                android:textSize="14sp" />
+
             <LinearLayout
                 android:id="@+id/log_password_box"
                 android:layout_width="fill_parent"
