@@ -27,6 +27,7 @@ import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -168,6 +169,16 @@ public final class TextUtils {
             }
         }
         return String.valueOf(chars, 0, resultSize);
+    }
+
+    /**
+     * @param str input string
+     *            As of performance reasons we non't use a REGEX here. Don't use this function for strings which could contain new-line characters like "\r\n" or "\r"
+     * @return normalized String Length like it is counted at the gc website (count UNIX new-line character "\n" as two characters)
+     */
+    public static int getNormalizedStringLength (@NotNull final String str) {
+        final String newStr = str.trim();
+        return StringUtils.countMatches(newStr, "\n") + newStr.length();
     }
 
     /**
