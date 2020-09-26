@@ -1156,7 +1156,6 @@
     <string name="navigation">Navegación</string>
     <string name="compass_title">Brújula</string>
     <string name="use_gps">Usar sólo GPS</string>
-    <string name="use_compass">Usar GPS y brújula</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegación directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
