@@ -1,43 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
-<h1>Nightly build:</h1>
-<h4>Android 11 notice:</h4>
-Android 11 enforces a new way for storing data, which c:geo does not support yet. If you switch your system to Android 11, c:geo will not be able to access part of its data. This will most likely disable storing offline maps, importing/exporting data as well as backing up/restoring c:geo\'s database. Other effects may occur. We recommend to not upgrade to Android 11 for the time being.
-
-<h4>Map:</h4>
-<ul>
-<li>Change: Show list markers also on waypoints</li>
-<li>Fix: Zoom level difference between Google Maps and OpenStreetMap maps</li>
-</ul>
-
-<h4>Cache details:</h4>
-<ul>
-<li>Fix: Adapt to website change for trackable logbook on geocaching.com</li>
-<li>New: Allow negative bearing angles for waypoint projection</li>
-<li>New: Voice output: Estimate device orientation and transform coords when mobile is upright</li>
-<li>Fix: Offline log remembers selected image</li>
-<li>New: Offline logging now supports adding multiple images</li>
-<li>Fix: Sped up offline logging with large cache lists</li>
-<li>Fix: [NUMBER] only adds +1 for types found it / attended / webcam photo taken</li>
-<li>New: Support the 4 new attributes at geocaching.com</li>
-<li>New: Added option to remove all user-defined waypoints of a cache in one step</li>
-</ul>
-
-<h4>Cache lists:</h4>
-<ul>
-<li>Change: Allow cache title to wrap to multi-line</li>
-<li>Change: Widened colored found/offline log marker and removed textual \"Offline\" marker</li>
-</ul>
-
-<h4>Other:</h4>
-<ul>
-<li>New: Detect and report captcha on login to geocaching.com</li>
-<li>Fix: Correctly detect wrong username/password on login to geocaching.com</li>
-<li>New: Offer c:geo for navigation intents (eg.: from Lab Adventure app)</li>
-<li>Change: Replace outdated undobar with snackbar</li>
-</ul>
-</div>]]></Data>
+  <string name="changelog_master" translatable="false">
   </string>
 </resources>

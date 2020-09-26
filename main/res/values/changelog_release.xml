@@ -9,6 +9,8 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Map:</h4>
 <ul>
+<li>Change: Show list markers also on waypoints</li>
+<li>Fix: Zoom level difference between Google Maps and OpenStreetMap maps</li>
 <li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
 <li>New: Open local .map files in c:geo by tapping on them</li>
 <li>New: Colorpicker for map lines offers \"default\" button</li>
@@ -38,6 +40,15 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Cache details:</h4>
 <ul>
+<li>Fix: Adapt to website change for trackable logbook on geocaching.com</li>
+<li>New: Allow negative bearing angles for waypoint projection</li>
+<li>New: Voice output: Estimate device orientation and transform coords when mobile is upright</li>
+<li>Fix: Offline log remembers selected image</li>
+<li>New: Offline logging now supports adding multiple images</li>
+<li>Fix: Sped up offline logging with large cache lists</li>
+<li>Fix: [NUMBER] only adds +1 for types found it / attended / webcam photo taken</li>
+<li>New: Support the 4 new attributes at geocaching.com</li>
+<li>New: Added option to remove all user-defined waypoints of a cache in one step</li>
 <li>Changed sync logic for personal notes in caches to avoid duplication of personal notes</li>
 <li>New: Option to globally deactivate waypoint extraction from personal notes</li>
 <li>New: Personal note editor will grow automatically for longer texts</li>
@@ -52,6 +63,8 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Cache lists:</h4>
 <ul>
+<li>Change: Allow cache title to wrap to multi-line</li>
+<li>Change: Widened colored found/offline log marker and removed textual \"Offline\" marker</li>
 <li>Fix: GPX export - label for checkbox \"Include found status\"</li>
 <li>Change: \"New list\" entry moved to top of list creation/selection dialog</li>
 <li>Change: A newly created list for user-defined caches will now be named \"User-defined caches\" instead of \"Internal caches\" (does not change an existing list with user-defined caches)</li>
@@ -60,6 +73,10 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Other:</h4>
 <ul>
+<li>New: Detect and report captcha on login to geocaching.com</li>
+<li>Fix: Correctly detect wrong username/password on login to geocaching.com</li>
+<li>New: Offer c:geo for navigation intents (eg.: from Lab Adventure app)</li>
+<li>Change: Replace outdated undobar with snackbar</li>
 <li>New: Include offline found counter on homescreen (configurable)</li>
 <li>New: Individual route sort view: Tap on item to open cache details</li>
 <li>New: Individual route sort view: Reorder using drag & drop</li>
