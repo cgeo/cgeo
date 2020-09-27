@@ -8,17 +8,6 @@
     android:background="?background_color"
     tools:context=".ui.CacheListAdapter">
 
-    <!-- selection mode checkbox -->
-    <CheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:gravity="left|center_horizontal"
-        android:paddingRight="5dip"
-        android:visibility="gone"
-        tools:visibility="visible"/>
-
     <!-- "found" marker, vertical green/red line -->
     <ImageView
         android:id="@+id/log_status_mark"
@@ -33,6 +22,18 @@
         android:visibility="visible"
         tools:visibility="visible" />
 
+    <!-- selection mode checkbox -->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left"
+        android:gravity="left|center_horizontal"
+        android:paddingRight="5dip"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <!-- cache icon -->
     <ImageView
         android:id="@+id/text_icon"
         android:layout_width="wrap_content"
@@ -44,7 +45,6 @@
         android:visibility="visible"
         tools:visibility="visible" />
 
-    <!-- cache icon -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
         android:layout_marginBottom="1dip"
         android:layout_marginRight="1dip"
         android:layout_marginTop="1dip"
-        android:layout_gravity="right">
+        android:layout_gravity="right|center_vertical">
 
         <view
             android:id="@+id/distance"
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dip"
         android:layout_marginTop="1dip"
-        android:layout_gravity="right">
+        android:layout_gravity="right|center_vertical">
 
         <TextView
             android:id="@+id/inventory"
@@ -167,10 +167,10 @@
             android:layout_width="35dip"
             android:layout_height="22dp"
             android:layout_gravity="center"
-            android:layout_marginTop="22dip"
             android:background="?favorite"
             android:ellipsize="end"
             android:gravity="center"
+            android:layout_below="@id/inventory"
             android:lines="1"
             android:maxLines="1"
             android:paddingLeft="3dip"
