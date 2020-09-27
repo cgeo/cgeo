@@ -302,7 +302,9 @@ abstract class GPXParser extends FileParser {
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
                         waypoint.setCoords(cache.getCoords());
-                        waypoint.setNote(cache.getDescription());
+
+                        waypoint.updateNoteAndUserNote(cache.getDescription());
+
                         waypoint.setVisited(wptVisited);
                         final List<Waypoint> mergedWayPoints = new ArrayList<>(cacheForWaypoint.getWaypoints());
 

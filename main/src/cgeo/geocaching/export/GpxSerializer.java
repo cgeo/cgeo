@@ -256,8 +256,10 @@ public final class GpxSerializer {
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
 
             final String waypointTypeGpx = wp.getWaypointType().gpx;
-            XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", wp.getNote(), "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
-
+            // combine note and user note with SEPARATOR "\n--\n"
+            final String waypointNote = wp.getCombinedNoteAndUserNote();
+            XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
+            
             // add parent reference the GSAK-way
             writeGsakExtensions(wp);
 
