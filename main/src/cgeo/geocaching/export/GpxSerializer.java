@@ -199,11 +199,16 @@ public final class GpxSerializer {
             gpx.text("true");
             gpx.endTag(NS_CGEO, "userdefined");
         }
+        if (waypoint.getCoords() == null || waypoint.isOriginalCoordsEmpty()) {
+            gpx.startTag(NS_CGEO, "originalCoordsEmpty");
+            gpx.text("true");
+            gpx.endTag(NS_CGEO, "originalCoordsEmpty");
+        }        
     }
 
     /**
      * @return XML schema compliant boolean representation of the boolean flag. This must be either true, false, 0 or 1,
-     *         but no other value (also not upper case True/False).
+     * but no other value (also not upper case True/False).
      */
     private static String gpxBoolean(final boolean boolFlag) {
         return boolFlag ? "true" : "false";
@@ -249,25 +254,36 @@ public final class GpxSerializer {
      * Writes one waypoint entry for cache waypoint.
      */
     private void writeCacheWaypoint(@NonNull final Waypoint wp) throws IOException {
+        gpx.startTag(NS_GPX, "wpt");
+
         final Geopoint coords = wp.getCoords();
-        // TODO: create some extension to GPX to include waypoint without coords
         if (coords != null) {
-            gpx.startTag(NS_GPX, "wpt");
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
-
-            final String waypointTypeGpx = wp.getWaypointType().gpx;
-            // combine note and user note with SEPARATOR "\n--\n"
-            final String waypointNote = wp.getCombinedNoteAndUserNote();
-            XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
-
-            // add parent reference the GSAK-way
-            writeGsakExtensions(wp);
-
-            writeCGeoAttributes(wp);
-
-            gpx.endTag(NS_GPX, "wpt");
+        } else {
+            // coords are required information
+            // "xsi:nil" is not supported by schema, hence use 0/0 as GSAK does.
+            gpx.attribute("", "lat", Double.toString(0.0));
+            gpx.attribute("", "lon", Double.toString(0.0));
         }
+
+        final String waypointTypeGpx = wp.getWaypointType().gpx;
+        // combine note and user note with SEPARATOR "\n--\n"
+        final String waypointNote = wp.getCombinedNoteAndUserNote();
+        XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
+        // add parent reference the GSAK-way
+        writeGsakExtensions(wp);
+
+        // combine note and user note with SEPARATOR "\n--\n"
+        final String waypointNote = wp.getCombinedNoteAndUserNote();
+        XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
+
+        // add parent reference the GSAK-way
+        writeGsakExtensions(wp);
+
+        writeCGeoAttributes(wp);
+
+        gpx.endTag(NS_GPX, "wpt");
     }
 
     private void writeLogs(@NonNull final Geocache cache) throws IOException {
