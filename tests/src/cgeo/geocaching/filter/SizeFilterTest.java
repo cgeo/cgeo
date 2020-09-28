@@ -52,7 +52,7 @@ public class SizeFilterTest {
     }
 
     @Test(timeout = 5000) //filtering large lists in memory should take only MILLISECONDS. we set a very generous timeout of 5s here
-    public void testFilteringPerformanceOnLargeLists() {
+    public void testFilteringPerformanceOnLargeListToSmallList() {
         //filter a very large list such that is becomes a very short list
         final List<Geocache> list = new ArrayList<>();
         for (int i = 0; i < 50000; i++) {
@@ -71,6 +71,28 @@ public class SizeFilterTest {
 
         microFilter.filter(list);
         assertThat(list).hasSize(50);
+    }
+
+    @Test(timeout = 5000) //filtering large lists in memory should take only MILLISECONDS. we set a very generous timeout of 5s here
+    public void testFilteringPerformanceOnLargeListToLargeList() {
+        //filter a very large list such that is becomes a very short list
+        final List<Geocache> list = new ArrayList<>();
+        for (int i = 0; i < 50000; i++) {
+            final Geocache microGc = new Geocache();
+            microGc.setGeocode("GCFAKE" + i);
+            microGc.setSize(CacheSize.MICRO);
+            list.add(microGc);
+            if (i % 1000 == 0) {
+                final Geocache regularGc = new Geocache();
+                regularGc.setGeocode("GCFAKE" + i);
+                regularGc.setSize(CacheSize.REGULAR);
+                list.add(regularGc);
+            }
+        }
+        assertThat(list).hasSize(50000 + 50);
+
+        microFilter.filter(list);
+        assertThat(list).hasSize(50000);
     }
 
 }
