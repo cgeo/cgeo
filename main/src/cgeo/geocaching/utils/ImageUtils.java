@@ -106,7 +106,7 @@ public final class ImageUtils {
     }
 
     /**
-     * Scales a bitmap to the given bounds if it is larger, otherwise returns the original bitmap.
+     * Scales a bitmap to the given bounds if it is larger, otherwise returns the original bitmap (except when "force" is set to true)
      *
      * @param image
      *            The bitmap to scale
@@ -118,9 +118,12 @@ public final class ImageUtils {
         Bitmap result = image;
         int width = image.getWidth();
         int height = image.getHeight();
+        final int realMaxWidth = maxWidth <= 0 ? width : maxWidth;
+        final int realMaxHeight = maxHeight <= 0 ? height : maxHeight;
+        final boolean imageTooLarge = width > realMaxWidth || height > realMaxHeight;
 
-        if (width > maxWidth || height > maxHeight) {
-            final double ratio = Math.min((double) maxHeight / (double) height, (double) maxWidth / (double) width);
+        if (imageTooLarge) {
+            final double ratio = Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width);
             width = (int) Math.ceil(width * ratio);
             height = (int) Math.ceil(height * ratio);
             result = Bitmap.createScaledBitmap(image, width, height, true);
@@ -128,6 +131,7 @@ public final class ImageUtils {
 
         final BitmapDrawable resultDrawable = new BitmapDrawable(app.getResources(), result);
         resultDrawable.setBounds(new Rect(0, 0, width, height));
+
         return resultDrawable;
     }
 
@@ -182,17 +186,20 @@ public final class ImageUtils {
     }
 
     /**
-     * Scales an image to the desired bounds and encodes to file.
+     * This method will COPY the given image file to a new location, sample it down, scales it to given bounds
+     * and remove EXIF information.
      *
-     * @param filePath
-     *            Image to read
-     * @param maxXY
-     *            bounds
+     * Also, if wanted, it scales an image to the desired bounds.
+     *
+     * @param filePath Image to read
+     * @param maxXY bounds. If <= 0 then no scaling will happen. Rest depends on parameter 'forceCopy'
+     * @param forceCopy if maxXY is <=0 but forceCopy is true, then image will be copied, sampled down and EXIF removed nevertheless
+     * @param deleteOldInSameFolder if true: if we make a copy AND that copy is in the same folder then the old file is deleted
      * @return scale image result with filename and size, <tt>null</tt> if something fails
      */
     @Nullable
-    public static ScaleImageResult readScaleAndWriteImage(@NonNull final String filePath, final int maxXY) {
-        if (maxXY <= 0) {
+    public static ScaleImageResult readScaleAndWriteImage(@NonNull final String filePath, final int maxXY, final boolean forceCopy, final boolean deleteOldInSameFolder) {
+        if (maxXY <= 0 && !forceCopy) {
             final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
             return new ScaleImageResult(filePath, sizeOnlyOptions.outWidth, sizeOnlyOptions.outHeight);
         }
@@ -210,22 +217,24 @@ public final class ImageUtils {
 
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
         storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
+        if (deleteOldInSameFolder && tempImageFile.getParentFile().equals(new File(filePath).getParentFile())) {
+            //previous file is in same folder and we made a copy -> delete outdated older file
+            new File(filePath).delete();
+        }
         return new ScaleImageResult(uploadFilename, scaledImage.getBitmap().getWidth(), scaledImage.getBitmap().getHeight());
     }
 
     /**
      * Reads and scales an image file with downsampling in one step to prevent memory consumption.
      *
-     * @param filePath
-     *            The file to read
-     * @param maxX
-     *            The desired width
-     * @param maxY
-     *            The desired height
+     * @param filePath The file to read
+     * @param maxX The desired width. If <= 0 then actual bitmap width is used
+     * @param maxY The desired height. If <= 0 then actual bitmap height is used
      * @return Bitmap the image or null if file can't be read
      */
     @Nullable
-    public static Bitmap readDownsampledImage(@NonNull final String filePath, final int maxX, final int maxY) {
+    private static Bitmap readDownsampledImage(@NonNull final String filePath, final int maxX, final int maxY) {
+
         int orientation = ExifInterface.ORIENTATION_NORMAL;
         try {
             final ExifInterface exif = new ExifInterface(filePath);
@@ -235,12 +244,13 @@ public final class ImageUtils {
         }
         final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
-        final int maxXY = Math.max(maxX, maxY);
+        final int maxXY = Math.max(maxX <= 0 ? sizeOnlyOptions.outWidth : maxX, maxY <= 0 ? sizeOnlyOptions.outHeight : maxY);
         final int sampleSize = myMaxXY / maxXY;
         final BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
         if (sampleSize > 1) {
             sampleOptions.inSampleSize = sampleSize;
         }
+
         final Bitmap decodedImage = BitmapFactory.decodeFile(filePath, sampleOptions);
         if (decodedImage != null) {
             for (int i = 0; i < ORIENTATIONS.length; i++) {
@@ -259,6 +269,7 @@ public final class ImageUtils {
         final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
         sizeOnlyOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
+
         return sizeOnlyOptions;
     }
 

@@ -28,6 +28,7 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
+import cgeo.geocaching.ui.ImageActivityHelper;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
@@ -80,7 +81,6 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jetbrains.annotations.NotNull;
 
 public class LogCacheActivity extends AbstractLoggingActivity {
 
@@ -108,18 +108,18 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private ILoggingManager loggingManager;
 
     private OfflineLogEntry lastSavedState = null;
+    private final Set<String> lastSavedStateImagePaths = new HashSet<>();
 
     private CacheVotingBar cacheVotingBar = new CacheVotingBar();
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
     private final List<Image> images = new ArrayList<>();
+
     private boolean sendButtonEnabled;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
     private LogImageAdapter imageListAdapter;
-
-    //private SaveMode saveMode = SaveMode.SMART;
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
@@ -232,10 +232,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         onCreate(savedInstanceState, R.layout.logcache_activity);
 
         date.init(findViewById(R.id.date), null, getSupportFragmentManager());
-        logType.setTextView(findViewById(R.id.type)).setDisplayMapper(lt -> lt.getL10n());
+        logType.setTextView(findViewById(R.id.type)).setDisplayMapper(LogType::getL10n);
         reportProblem.setTextView(findViewById(R.id.report_problem))
                 .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
-                .setDisplayMapper(rp -> rp.getL10n());
+                .setDisplayMapper(ReportProblemType::getL10n);
         initializeImageList();
         this.logImageAddButton.setOnClickListener(v -> addOrEditImage(-1));
 
@@ -243,7 +243,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
                 .setTextDialogTitle(getString(R.string.log_tb_changeall))
                 .setTextDisplayMapper(lt -> getString(R.string.log_tb_changeall))
-                .setDisplayMapper(lt -> lt.getLabel())
+                .setDisplayMapper(LogTypeTrackable::getLabel)
                 .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
                 .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
                 .setChangeListener(lt -> {
@@ -283,6 +283,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (lastSavedState == null) {
             //this means there is no previous entry
             lastSavedState = getEntryFromView();
+            lastSavedStateImagePaths.clear();
             //set initial signature. Setting this AFTER setting lastSavedState and GUI leads to the signature being a change-to-save as requested in #8973
             if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, lastSavedState)), false);
@@ -290,7 +291,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else {
             fillViewFromEntry(lastSavedState);
         }
-
+        adjustImageStateTo(lastSavedState, false);
 
         // TODO: Why is it disabled in onCreate?
         // Probably it should be disabled only when there is some explicit issue.
@@ -319,7 +320,26 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Dialogs.moveCursorToEnd(logEditText);
     }
 
-    @NotNull
+    private void adjustImageStateTo(final LogEntry entry, final boolean deleteOld) {
+        if (deleteOld) {
+            //delete all images on device which are in old state but not in new
+            final Set<String> existingPaths = CollectionStream.of(entry.logImages).map(img -> img.getPath()).toSet();
+            for (final String oldPath : lastSavedStateImagePaths) {
+                if (!existingPaths.contains(oldPath)) {
+                    final boolean result = new File(oldPath).delete();
+                    Log.i("Deleting log image " + oldPath + " (result: " + result + ")");
+                }
+            }
+        }
+        //refill image state
+        lastSavedStateImagePaths.clear();
+        for (final Image img : entry.logImages) {
+            if (!img.getPath().isEmpty()) {
+                lastSavedStateImagePaths.add(img.getPath());
+            }
+        }
+    }
+
     private OfflineLogEntry restorePreviousLogEntry(final Bundle savedInstanceState) {
         OfflineLogEntry entry = null;
         if (savedInstanceState != null) {
@@ -360,7 +380,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setFavorite(favCheck.isChecked())
                 .setTweet(tweetCheck.isChecked())
                 .setPassword(logPassword.getText().toString());
-        CollectionStream.of(images).forEach(i -> builder.addLogImage(i));
+        CollectionStream.of(images).forEach(builder::addLogImage);
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
 
         return builder.build();
@@ -486,6 +506,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                             cache.logOffline(LogCacheActivity.this, logEntry);
                             Settings.setLastCacheLog(logEntry.log);
                             ccLog.add("log=%s", logEntry.log);
+                            adjustImageStateTo(lastSavedState, true);
                             return null;
                         }
                     }
@@ -640,8 +661,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         protected TextView codeView;
         @BindView(R.id.name)
         protected TextView nameView;
-        //@BindView(R.id.action)
-        //protected TextView actionButton;
         private final TextSpinner<LogTypeTrackable> trackableAction = new TextSpinner<>();
         @BindView(R.id.info)
         protected View infoView;
@@ -680,7 +699,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             holder.trackableAction.setTextView(action)
                     .setTextDialogTitle(trackable.name)
                     .setTextDisplayMapper(lt -> lt.getLabel() + " ▼")
-                    .setDisplayMapper(lt -> lt.getLabel())
+                    .setDisplayMapper(LogTypeTrackable::getLabel)
                     .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
                     .set(trackable.action)
                     .setChangeListener(lt -> {
@@ -705,6 +724,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         final List<Image> newImages = new ArrayList<>();
         newImages.addAll(images);
         imageListAdapter.submitList(newImages);
+        imageListAdapter.notifyDataSetChanged();
     }
 
     private void initializeImageList() {
@@ -758,7 +778,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             if (image == null || holder.imageThumbnail == null) {
                 return;
             }
-            holder.imageThumbnail.setImageURI(image.getUri());
+            //holder.imageThumbnail.setImageURI(image.getUri());
+            ImageActivityHelper.displayImageAsync(image, holder.imageThumbnail);
             holder.imageTitle.setText(getImageTitle(image, position));
             holder.imageDescription.setText(image.getDescription());
             holder.imageInfo.setText(getImageInfo(image));
@@ -766,8 +787,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         private String getImageInfo(final Image image) {
             final File imgFile = image.getFile();
-            if (imgFile == null || !imgFile.exists()) {
+            if (imgFile == null) {
                 return "---";
+            }
+            if (!imgFile.exists()) {
+                return ImageUtils.getRelativePathToOutputImageDir(imgFile);
             }
             int width = 0;
             int height = 0;
@@ -791,8 +815,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         @Override
         public void onBindViewHolder(@NonNull final LogImageViewHolder holder, final int position) {
             fillViewHolder(holder, getItem(position), position);
-
         }
+
     }
 
 
