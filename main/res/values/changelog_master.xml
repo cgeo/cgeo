@@ -10,6 +10,7 @@
 
 <h4>Cache details:</h4>
 <ul>
+<li>Change: Combine note and user note for export waypoint to GPX, on import split them up</li>
 </ul>
 
 <h4>Cache lists:</h4>
