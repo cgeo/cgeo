@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
+    <string name="err_captcha">Captcha richiesto. Si prega di fare riferimento alla nostra <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per una guida.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
@@ -1224,9 +1225,12 @@
     <string name="navigation">Navigazione</string>
     <string name="compass_title">Bussola</string>
     <string name="use_gps">Usa solo GPS</string>
+    <string name="use_compass">Tutti i sensori utilizzati</string>
     <string name="destination_select">Scegli destinazione</string>
     <string name="navigation_direct_navigation">Navigazione diretta</string>
     <string name="osmand_marker_cgeo">Indicatore da c:geo</string>
+    <string name="device_heading_label">Dispositivo:</string>
+    <string name="device_orientation">Orientamento</string>
     <string name="device_orientation_label">Orientamento:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Sconosciuto</string>

@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
+    <string name="err_captcha">Captcha necessário. Por favor, consulte as <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para obter instruções.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -1225,9 +1226,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="navigation">Navegação</string>
     <string name="compass_title">Bússola</string>
     <string name="use_gps">Apenas GPS</string>
+    <string name="use_compass">Todos os sensores utilizados</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
+    <string name="device_heading_label">Dispositivo:</string>
+    <string name="device_orientation">Orientação</string>
     <string name="device_orientation_label">Orientação:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
