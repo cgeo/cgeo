@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
+    <string name="err_captcha">Captcha is vereist. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_su">Verbinding met Geocaching.su mislukt (geen verbinding of server niet bereikbaar).</string>
@@ -1224,9 +1225,12 @@
     <string name="navigation">Navigatie</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Alleen GPS gebruikt</string>
+    <string name="use_compass">Alle sensoren gebruikt</string>
     <string name="destination_select">Selecteer bestemming</string>
     <string name="navigation_direct_navigation">Directe navigatie</string>
     <string name="osmand_marker_cgeo">Markering van c:geo</string>
+    <string name="device_heading_label">Apparaat:</string>
+    <string name="device_orientation">Oriëntatie</string>
     <string name="device_orientation_label">Oriëntatie:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Onbekend</string>
