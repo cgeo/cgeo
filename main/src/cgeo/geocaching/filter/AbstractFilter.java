@@ -30,7 +30,8 @@ abstract class AbstractFilter implements IFilter {
     @Override
     public void filter(@NonNull final List<Geocache> list) {
 
-        //method must be performant when used with very large lists (e.g. 50000 elements) filtered into very short lists (e.g. 30 elements)
+        //method must be performant when used with very large lists (e.g. 50000 elements)
+        // filtered into very large lists and also very short lists (e.g. 30 elements)
         //be aware that "list" most likely is an ArrayList, thus "get(i)" is very performant but "remove" is definitely not -> don't use it!
 
         final List<Geocache> itemsToKeep = new ArrayList<>();
@@ -41,6 +42,7 @@ abstract class AbstractFilter implements IFilter {
         }
 
         list.clear();
+        //note that since both "list" and "itemsToKeep" are ArrayLists, the addAll-operation is very fast (two arraycopies of the references)
         list.addAll(itemsToKeep);
     }
 
