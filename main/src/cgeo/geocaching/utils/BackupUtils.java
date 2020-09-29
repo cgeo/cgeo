@@ -48,12 +48,10 @@ import org.xmlpull.v1.XmlSerializer;
 
 
 public class BackupUtils extends Activity {
-    static final String ATTRIBUTE_NAME  = "name";
-    static final String ATTRIBUTE_VALUE = "value";
-
-    static final String TAG_MAP = "map";
-
-    static final String SETTINGS_FILENAME = "cgeo-settings.xml";
+    private static final String ATTRIBUTE_NAME  = "name";
+    private static final String ATTRIBUTE_VALUE = "value";
+    private static final String TAG_MAP = "map";
+    private static final String SETTINGS_FILENAME = "cgeo-settings.xml";
 
     private Activity activityContext;
 
@@ -115,31 +113,32 @@ public class BackupUtils extends Activity {
             dialog.setOwnerActivity(activityContext);
             dialog.show();
 
-            final Runnable updateDialog = () -> {
-                final Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            final Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 
-                if (databaseCheckbox.isChecked() || settingsCheckbox.isChecked()) {
-                    button.setEnabled(true);
-                } else {
-                    button.setEnabled(false);
+            updateRestoreDialog(button, databaseCheckbox, settingsCheckbox, warningText);
+            databaseCheckbox.setOnClickListener(checkbox -> updateRestoreDialog(button, databaseCheckbox, settingsCheckbox, warningText));
+            settingsCheckbox.setOnClickListener(checkbox -> updateRestoreDialog(button, databaseCheckbox, settingsCheckbox, warningText));
 
-                }
-                final int caches = DataStore.getAllCachesCount();
-                if (databaseCheckbox.isChecked() && caches > 0) {
-                    warningText.setVisibility(View.VISIBLE);
-                    warningText.setText(activityContext.getString(settingsCheckbox.isChecked() ? R.string.restore_confirm_overwrite_database_and_settings : R.string.restore_confirm_overwrite_database, activityContext.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)));
-                } else if (settingsCheckbox.isChecked() && caches > 0) {
-                    warningText.setVisibility(View.VISIBLE);
-                    warningText.setText(R.string.restore_confirm_overwrite_settings);
-                } else {
-                    warningText.setVisibility(View.GONE);
-                }
-            };
+        }
+    }
 
-            updateDialog.run();
-            databaseCheckbox.setOnClickListener(checkbox -> updateDialog.run());
-            settingsCheckbox.setOnClickListener(checkbox -> updateDialog.run());
+    private void updateRestoreDialog (final Button button, final CheckBox databaseCheckbox, final CheckBox settingsCheckbox, final TextView warningText) {
 
+        if (databaseCheckbox.isChecked() || settingsCheckbox.isChecked()) {
+            button.setEnabled(true);
+        } else {
+            button.setEnabled(false);
+        }
+
+        final int caches = DataStore.getAllCachesCount();
+        if (databaseCheckbox.isChecked() && caches > 0) {
+            warningText.setVisibility(View.VISIBLE);
+            warningText.setText(activityContext.getString(settingsCheckbox.isChecked() ? R.string.restore_confirm_overwrite_database_and_settings : R.string.restore_confirm_overwrite_database, activityContext.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)));
+        } else if (settingsCheckbox.isChecked() && caches > 0) {
+            warningText.setVisibility(View.VISIBLE);
+            warningText.setText(R.string.restore_confirm_overwrite_settings);
+        } else {
+            warningText.setVisibility(View.GONE);
         }
     }
 
