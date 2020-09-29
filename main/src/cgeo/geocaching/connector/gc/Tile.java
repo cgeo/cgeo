@@ -5,22 +5,16 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import androidx.annotation.NonNull;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
 
 /**
@@ -238,33 +232,6 @@ public class Tile {
         try {
             final Response response = Network.getRequest(url, params, new Parameters("Referer", referer)).blockingGet();
             return Single.just(response).flatMap(Network.getResponseData);
-        } catch (final Exception e) {
-            return Single.error(e);
-        }
-    }
-
-    /** Request .png image for a tile. Return as soon as the request has been made, before the answer has been
-     * read and processed.
-     *
-     * @return A single with one element, or an IOException
-     */
-    static Single<Bitmap> requestMapTile(final Parameters params) {
-        try {
-            final Response response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP)).blockingGet();
-            return Single.just(response)
-                    .flatMap((Function<Response, Single<Bitmap>>) response1 -> {
-                        try {
-                            if (response1.isSuccessful()) {
-                                final Bitmap bitmap = BitmapFactory.decodeStream(response1.body().byteStream());
-                                if (bitmap != null) {
-                                    return Single.just(bitmap);
-                                }
-                            }
-                            return Single.error(new IOException("could not decode bitmap"));
-                        } finally {
-                            response1.close();
-                        }
-                    }).subscribeOn(AndroidRxUtils.computationScheduler);
         } catch (final Exception e) {
             return Single.error(e);
         }
