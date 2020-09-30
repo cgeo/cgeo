@@ -1137,6 +1137,14 @@
                 android:key="@string/pref_fakekey_preference_restore"
                 android:title="@string/init_backup_start_restore" />
         </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/settings_advanced"
+            android:layout="@layout/preference_category">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_backups_backup_history"
+                android:title="@string/init_backup_create_backup_history" />
+        </PreferenceCategory>
     </PreferenceScreen>
 
     </PreferenceScreen>

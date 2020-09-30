@@ -1638,4 +1638,8 @@ public class Settings {
     public static boolean getBackupDatabase() {
         return getBoolean(R.string.pref_backup_caches, true);
     }
+
+    public static boolean allowMultipleBackups() {
+        return getBoolean(R.string.pref_backups_backup_history, false);
+    }
 }

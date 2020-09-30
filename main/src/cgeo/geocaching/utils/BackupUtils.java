@@ -142,6 +142,37 @@ public class BackupUtils extends Activity {
         }
     }
 
+    public void deleteBackupHistoryDialog() {
+
+        final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
+        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
+        final TextView textView = (TextView) content.findViewById(R.id.message);
+        textView.setText(R.string.init_backup_history_disabled);
+        checkbox.setText(R.string.init_user_confirmation);
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
+                .setView(content)
+                .setTitle(R.string.init_backup_backup_history)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> LocalStorage.deleteOldBackupDirectory())
+                .setNeutralButton(android.R.string.cancel, null)
+                .create();
+
+        alertDialog.show();
+        alertDialog.setOwnerActivity(activityContext);
+
+        final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        button.setEnabled(false);
+        checkbox.setOnClickListener(check -> {
+            if (checkbox.isChecked()) {
+                button.setEnabled(true);
+            } else {
+                button.setEnabled(false);
+            }
+        });
+
+    }
+
     /**
      * Create a backup after confirming to overwrite the existing backup.
      *
@@ -151,8 +182,12 @@ public class BackupUtils extends Activity {
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
-            Dialogs.message(activityContext, R.string.init_backup_backup, activityContext.getString(R.string.init_backup_unnecessary));
+            Toast.makeText(activityContext, R.string.init_backup_unnecessary, Toast.LENGTH_LONG).show();
             return;
+        }
+
+        if (hasBackup() && Settings.allowMultipleBackups() && !LocalStorage.moveOldBackup()) {
+            Toast.makeText(activityContext, R.string.init_backup_move_directory_error, Toast.LENGTH_LONG).show();
         }
 
         if ((Settings.getBackupDatabase() && getDatabaseFile() != null) || (Settings.getBackupSettings() && getSettingsFile() != null)) {
@@ -421,9 +456,13 @@ public class BackupUtils extends Activity {
         return file.lastModified();
     }
 
+    public static long getNewestBackupTime() {
+        return Math.max(getDatabaseBackupTime(), getSettingsBackupTime());
+    }
+
     @NonNull
     public static String getNewestBackupDateTime() {
-        final long time = Math.max(getDatabaseBackupTime(), getSettingsBackupTime());
+        final long time = getNewestBackupTime();
         if (time == 0) {
             return StringUtils.EMPTY;
         }

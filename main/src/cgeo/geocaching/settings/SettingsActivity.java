@@ -476,6 +476,16 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         backupButtonsEnabler(backup, loginData);
         onPreferenceChange(getPreference(R.string.pref_fakekey_preference_restore), "");
 
+        final CheckBoxPreference keepOld = (CheckBoxPreference) getPreference(R.string.pref_backups_backup_history);
+        keepOld.setSummaryOn(getString(R.string.init_backup_backup_history_summary, LocalStorage.getOldBackupsDirectory() + "/<timestamp>"));
+        keepOld.setOnPreferenceClickListener(preference -> {
+            if (!Settings.allowMultipleBackups() && LocalStorage.getOldBackupsDirectory().isDirectory()) {
+                backupUtils.deleteBackupHistoryDialog();
+            }
+            return true;
+        });
+
+
     }
 
     private void backupButtonsEnabler(final Preference backup, final CheckBoxPreference loginData) {
