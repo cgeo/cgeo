@@ -353,7 +353,7 @@
     <string name="caches_move_selected">Mover seleccionada(s)</string>
     <string name="caches_move_all">Mover todas</string>
     <string name="caches_copy_selected">Copiar seleccionada(s)</string>
-    <string name="caches_copy_all">Copiar tudo</string>
+    <string name="caches_copy_all">Copiar todas</string>
     <string name="caches_map_locus_export">Exportar para Locus</string>
     <string name="caches_filter">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
@@ -1236,7 +1236,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
     <string name="do_auto">Automático</string>
-    <string name="do_flat">Horizontal</string>
+    <string name="do_flat" comment="Yes, it is about the orientation of the device. Laying flat or standing upright">Horizontal</string>
     <string name="do_upright">Vertical</string>
     <!-- license -->
     <string name="license">Licença</string>
