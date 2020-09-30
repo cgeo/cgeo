@@ -642,7 +642,12 @@ public class DataStore {
                 database = dbHelper.getWritableDatabase();
             } catch (final Exception e) {
                 Log.e("DataStore.init: unable to open database for R/W", e);
-                recreateDatabase(dbHelper);
+                if (!recreateDatabase(dbHelper)) {
+                    //if we land here we could neither open the DB nor could we recreate it and database remains null
+                    //=> failfast here by rethrowing original exception. This might give us better error analysis possibilities
+                    throw new RuntimeException("DataStore.init: Unrecoverable problem opening database ('" +
+                            databasePath().getAbsolutePath() + "')", e);
+                }
             }
         }
     }
@@ -652,7 +657,7 @@ public class DataStore {
      *
      * @param dbHelper dbHelper to use to reopen the database
      */
-    private static void recreateDatabase(final DbHelper dbHelper) {
+    private static boolean recreateDatabase(final DbHelper dbHelper) {
         final File dbPath = databasePath();
         final File corruptedPath = new File(LocalStorage.getBackupDirectory(), dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION);
         if (FileUtils.copy(dbPath, corruptedPath)) {
@@ -662,9 +667,11 @@ public class DataStore {
         }
         try {
             database = dbHelper.getWritableDatabase();
+            return true;
         } catch (final Exception f) {
             Log.e("DataStore.init: unable to recreate database and open it for R/W", f);
         }
+        return false;
     }
 
     public static synchronized void closeDb() {
