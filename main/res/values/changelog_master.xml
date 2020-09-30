@@ -11,6 +11,8 @@
 <h4>Cache details:</h4>
 <ul>
 <li>Change: Combine note and user note for export waypoint to GPX, on import split them up</li>
+<li>New: provide direct log link ability for gc.com/oc.*/gc.su</li>
+<li>Change: Disable cache detail share menu for user-defined caches</li>
 </ul>
 
 <h4>Cache lists:</h4>
@@ -20,6 +22,8 @@
 
 <h4>Other:</h4>
 <ul>
+<li>Change: Backup / restore caches and settings in one step</li>
+<li>New: Preserve multiple backups of caches and settings</li>
 <li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
 </ul>
 </div>]]></Data>
