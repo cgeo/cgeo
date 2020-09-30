@@ -637,14 +637,12 @@
     <string name="init_backup_finished">Backup finished</string>
     <string name="init_backup_now">Start backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
-    <string name="init_backup_note">Please note that this feature will backup/restore a database containing caches and waypoints only, but not your cache images and no program settings.</string>
     <string name="init_backup_restore">Restore</string>
     <string name="init_restore_restored">Restoration completed</string>
-    <string name="init_backup_start_restore">Start restoration</string>
+    <string name="init_backup_start_restore">Start restore</string>
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
-    <string name="init_backup_canceled">Database backup was canceled, therefore no changes were made.</string>
     <string name="init_backup_no_backup_available">There is no backup file available.</string>
     <string name="backup_confirm_overwrite">Do you want to overwrite the existing backup from %s?</string>
     <string name="restore_confirm_overwrite_database">WARNING: This will overwrite %s on your device!</string>
@@ -663,15 +661,11 @@
 
     <string name="settings_title_backup">Backup / Restore</string>
     <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
-    <string name="init_backup_settings">Backup program settings</string>
-    <string name="init_backup_settings_backup_light">Backup settings (without account data)</string>
-    <string name="init_backup_settings_backup_full">Backup settings (full)</string>
     <string name="init_backup_settings_logins">Backup account data</string>
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
     <string name="settings_saved">Settings successfully saved to:</string>
     <string name="init_backup_settings_restore">Restore settings</string>
-    <string name="init_backup_settings_restore_no">There is no settings backup available</string>
     <string name="settings_readingerror">Error reading settings</string>
     <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
 
