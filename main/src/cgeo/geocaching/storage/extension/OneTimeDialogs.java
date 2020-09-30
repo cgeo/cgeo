@@ -17,13 +17,15 @@ public class OneTimeDialogs extends DataStore.DBExtension {
 
     public enum DialogType {
         // names must not be changed, as there are database entries depending on it
+        // title and text must be set when using the basicOneTimeMessage() function
 
-        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter);
+        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter),
+        DATABASE_CONFIRM_OVERWRITE(null, null);
 
-        public int messageTitle;
-        public int messageText;
+        public Integer messageTitle;
+        public Integer messageText;
 
-        DialogType(final int messageTitle, final int messageText) {
+        DialogType(final Integer messageTitle, final Integer messageText) {
             this.messageTitle = messageTitle;
             this.messageText = messageText;
         }

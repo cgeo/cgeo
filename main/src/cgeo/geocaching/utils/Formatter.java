@@ -95,6 +95,18 @@ public final class Formatter {
     }
 
     /**
+     * Generate a numeric date string with date format "yyyy-MM-dd"
+     *
+     * @param date
+     *            milliseconds since the epoch
+     * @return the formatted string
+     */
+    @NonNull
+    public static String formatDateForFilename(final long date) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
+
+    /**
      * Generate a numeric date string according to system-wide settings (locale, date format)
      * such as "10/20/2010".
      *

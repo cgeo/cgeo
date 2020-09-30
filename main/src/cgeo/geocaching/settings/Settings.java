@@ -1627,4 +1627,19 @@ public class Settings {
         return RoutingMode.fromString(getString(R.string.pref_map_routing, "foot"));
     }
 
+    public static boolean getBackupLoginData() {
+        return getBoolean(R.string.pref_backup_logins, false);
+    }
+
+    public static boolean getBackupSettings() {
+        return getBoolean(R.string.pref_backup_settings, true);
+    }
+
+    public static boolean getBackupDatabase() {
+        return getBoolean(R.string.pref_backup_caches, true);
+    }
+
+    public static boolean allowMultipleBackups() {
+        return getBoolean(R.string.pref_backups_backup_history, false);
+    }
 }

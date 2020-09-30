@@ -1107,29 +1107,44 @@
         android:key="@string/preference_screen_backup"
         android:summary="@string/settings_summary_backup" >
 
-        <PreferenceCategory android:title="@string/init_backup"
+        <PreferenceCategory android:title="@string/init_backup_title"
             android:layout="@layout/preference_category"
-            android:summary="@string/init_backup_note">
+            android:summary="@string/init_backup_summary">
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_backup_caches"
+                android:summary="@string/init_backup_caches"
+                android:iconSpaceReserved="true" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_backup_settings"
+                android:summary="@string/init_backup_program_settings"
+                android:iconSpaceReserved="true" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_backup_logins"
+                android:summary="@string/init_backup_logins"
+                android:iconSpaceReserved="true" />
             <Preference
                 android:key="@string/pref_fakekey_preference_backup"
-                android:title="@string/init_backup_backup" />
-            <Preference
-                android:key="@string/pref_fakekey_preference_restore"
-                android:title="@string/init_backup_restore" />
-        </PreferenceCategory>
-        <PreferenceCategory android:title="@string/init_backup_settings"
-            android:layout="@layout/preference_category">
-            <Preference
-                android:key="@string/pref_fakekey_preference_backupsettings_light"
-                android:title="@string/init_backup_settings_backup_light" />
-            <Preference
-                android:key="@string/pref_fakekey_preference_backupsettings_full"
-                android:title="@string/init_backup_settings_backup_full" />
-            <Preference
-                android:key="@string/pref_fakekey_preference_restoresettings"
-                android:title="@string/init_backup_settings_restore" />
+                android:title="@string/init_backup_now" />
         </PreferenceCategory>
 
+        <PreferenceCategory android:title="@string/init_restore_title"
+            android:layout="@layout/preference_category">
+            <Preference
+                android:key="@string/pref_fakekey_preference_restore"
+                android:title="@string/init_backup_start_restore" />
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/settings_advanced"
+            android:layout="@layout/preference_category">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_backups_backup_history"
+                android:title="@string/init_backup_create_backup_history" />
+        </PreferenceCategory>
     </PreferenceScreen>
 
     </PreferenceScreen>

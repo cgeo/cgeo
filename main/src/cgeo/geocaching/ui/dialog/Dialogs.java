@@ -625,6 +625,23 @@ public final class Dialogs {
     }
 
     /**
+     * OK (+ cancel) dialog which is shown, until "don't shown again" is checked. Title, text, icon and runAfterwards can be set.
+     * If "don't shown again" is selected for this dialog, runAfterwards will be executed directly.
+     *
+     * @param dialogType
+     *            for setting title and message of the dialog and for storing the dialog status in DB
+     * @param fallbackStatus
+     *            if no status is stored in the database use DIALOG_SHOW or DIALOG_HIDE as fallback
+     */
+    public static void advancedOneTimeMessage(final Activity context, final OneTimeDialogs.DialogType dialogType, final OneTimeDialogs.DialogStatus fallbackStatus, final String title, final String message, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, final Runnable runAfterwards) {
+        if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
+            internalOneTimeMessage(context, title, message, dialogType, iconObservable, cancellable, runAfterwards);
+        } else {
+            runAfterwards.run();
+        }
+    }
+
+    /**
      * Standard message box + additional neutral button.
      *
      * @param context

@@ -694,6 +694,7 @@ public class DataStore {
     }
 
     public static String backupDatabaseInternal() {
+        final long timestamp = System.currentTimeMillis();
         final File target = getBackupFileInternal(false);
         closeDb();
         final boolean backupDone = FileUtils.copy(databasePath(), target);
@@ -705,6 +706,7 @@ public class DataStore {
         }
 
         Log.i("Database was copied to " + target);
+        target.setLastModified(timestamp);
         return target.getPath();
     }
 

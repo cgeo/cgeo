@@ -24,14 +24,13 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.SharedPrefsBackupUtils;
 import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
 
 import android.R.string;
@@ -43,6 +42,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -438,38 +438,72 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initBackupButtons() {
+        final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
+
         final Preference backup = getPreference(R.string.pref_fakekey_preference_backup);
         backup.setOnPreferenceClickListener(preference -> {
-            DatabaseBackupUtils.createBackup(SettingsActivity.this, () -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backup), ""));
+            backupUtils.backup(() -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_restore), ""));
             return true;
         });
 
         final Preference restore = getPreference(R.string.pref_fakekey_preference_restore);
         restore.setOnPreferenceClickListener(preference -> {
-            DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);
+            backupUtils.restore();
             return true;
         });
 
-        final Preference backupSettingsLight = getPreference(R.string.pref_fakekey_preference_backupsettings_light);
-        backupSettingsLight.setOnPreferenceClickListener(preference -> {
-            final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
-            spb.backup(false, () -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backupsettings_light), ""));
+        final CheckBoxPreference loginData = (CheckBoxPreference) getPreference(R.string.pref_backup_logins);
+        loginData.setOnPreferenceClickListener(preference -> {
+            if (Settings.getBackupLoginData()) {
+                loginData.setChecked(false);
+                Dialogs.confirm(SettingsActivity.this, R.string.init_backup_settings_logins, R.string.init_backup_settings_backup_full_confirm, (dialog, which) -> loginData.setChecked(true));
+            }
             return true;
         });
 
-        final Preference backupSettingsFull = getPreference(R.string.pref_fakekey_preference_backupsettings_full);
-        backupSettingsFull.setOnPreferenceClickListener(preference -> {
-            final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
-            spb.backup(true, () -> onPreferenceChange(getPreference(R.string.pref_fakekey_preference_backupsettings_full), ""));
+        final CheckBoxPreference settings = (CheckBoxPreference) getPreference(R.string.pref_backup_settings);
+        settings.setOnPreferenceClickListener(preference -> {
+            backupButtonsEnabler(backup, loginData);
             return true;
         });
 
-        final Preference restoreSettings = getPreference(R.string.pref_fakekey_preference_restoresettings);
-        restoreSettings.setOnPreferenceClickListener(preference -> {
-            final SharedPrefsBackupUtils spb = new SharedPrefsBackupUtils(SettingsActivity.this);
-            spb.restore();
+        final CheckBoxPreference caches = (CheckBoxPreference) getPreference(R.string.pref_backup_caches);
+        caches.setOnPreferenceClickListener(preference -> {
+            backupButtonsEnabler(backup, loginData);
             return true;
         });
+
+        backupButtonsEnabler(backup, loginData);
+        onPreferenceChange(getPreference(R.string.pref_fakekey_preference_restore), "");
+
+        final CheckBoxPreference keepOld = (CheckBoxPreference) getPreference(R.string.pref_backups_backup_history);
+        keepOld.setSummaryOn(getString(R.string.init_backup_backup_history_summary, LocalStorage.getOldBackupsDirectory() + "/<timestamp>"));
+        keepOld.setOnPreferenceClickListener(preference -> {
+            if (!Settings.allowMultipleBackups() && LocalStorage.getOldBackupsDirectory().isDirectory()) {
+                backupUtils.deleteBackupHistoryDialog();
+            }
+            return true;
+        });
+
+
+    }
+
+    private void backupButtonsEnabler(final Preference backup, final CheckBoxPreference loginData) {
+        if (Settings.getBackupSettings()) {
+            loginData.setKey(loginData.getContext().getString(R.string.pref_backup_logins));
+            loginData.setEnabled(true);
+            loginData.setChecked(Settings.getBackupLoginData());
+        } else {
+            loginData.setKey("fakekey_placeholder_no_real_value");
+            loginData.setEnabled(false);
+            loginData.setChecked(false);
+        }
+
+        if (Settings.getBackupSettings() || Settings.getBackupDatabase()) {
+            backup.setEnabled(true);
+        } else {
+            backup.setEnabled(false);
+        }
     }
 
     private void initMaintenanceButtons() {
@@ -865,32 +899,15 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     index >= 0
                             ? listPreference.getEntries()[index]
                             : null);
-        } else if (isPreference(preference, R.string.pref_fakekey_preference_backup)) {
-            final String textBackup;
+        } else if (isPreference(preference, R.string.pref_fakekey_preference_restore)) {
             final String textRestore;
-            if (DatabaseBackupUtils.hasBackup()) {
-                textBackup = "";
+            if (BackupUtils.hasBackup()) {
                 textRestore = preference.getContext().getString(R.string.init_backup_last) + " "
-                        + DatabaseBackupUtils.getBackupDateTime();
+                        + BackupUtils.getNewestBackupDateTime();
             } else {
-                textBackup = preference.getContext().getString(R.string.init_backup_last_no);
-                textRestore = "";
+                textRestore = preference.getContext().getString(R.string.init_backup_last_no);
             }
-            preference.setSummary(textBackup);
-            preferenceManager.findPreference(getKey(R.string.pref_fakekey_preference_restore)).setSummary(textRestore);
-        } else if (isPreference(preference, R.string.pref_fakekey_preference_backupsettings_full) || isPreference(preference, R.string.pref_fakekey_preference_backupsettings_light)) {
-            final String textBackup;
-            final String textRestore;
-            if (SharedPrefsBackupUtils.hasBackup()) {
-                textBackup = "";
-                textRestore = preference.getContext().getString(R.string.init_backup_last) + " "
-                        + SharedPrefsBackupUtils.getBackupDateTime();
-            } else {
-                textBackup = preference.getContext().getString(R.string.init_backup_settings_restore_no);
-                textRestore = "";
-            }
-            preference.setSummary(textBackup);
-            preferenceManager.findPreference(getKey(R.string.pref_fakekey_preference_restoresettings)).setSummary(textRestore);
+            preference.setSummary(textRestore);
         } else if (isPreference(preference, R.string.pref_ratingwanted)) {
             preferenceManager.findPreference(getKey(R.string.preference_screen_gcvote)).setSummary(getServiceSummary((Boolean) value));
             redrawScreen(preferenceManager.findPreference(getKey(R.string.preference_screen_services)));
