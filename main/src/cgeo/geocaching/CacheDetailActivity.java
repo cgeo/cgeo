@@ -148,6 +148,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -1643,6 +1644,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             addContextMenu(personalNoteView);
             final ImageButton personalNoteEdit = view.findViewById(R.id.edit_personalnote);
+            TooltipCompat.setTooltipText(personalNoteEdit, getString(R.string.cache_personal_note_edit));
             personalNoteEdit.setOnClickListener(v -> {
                 ensureSaved();
                 editPersonalNote(cache, CacheDetailActivity.this);
@@ -1652,11 +1654,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 editPersonalNote(cache, CacheDetailActivity.this);
             });
             final ImageButton storeWaypoints = view.findViewById(R.id.storewaypoints_personalnote);
+            TooltipCompat.setTooltipText(storeWaypoints, getString(R.string.cache_personal_note_storewaypoints));
             storeWaypoints.setOnClickListener(v -> {
                 ensureSaved();
                 storeWaypointsInPersonalNote(cache, maxPersonalNotesChars);
             });
             final ImageButton removeWaypoints = view.findViewById(R.id.deleteewaypoints_personalnote);
+            TooltipCompat.setTooltipText(removeWaypoints, getString(R.string.cache_personal_note_removewaypoints));
             removeWaypoints.setOnClickListener(v -> {
                 ensureSaved();
                 removeWaypointsFromPersonalNote(cache);
@@ -1666,6 +1670,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
                 personalNoteUpload.setVisibility(View.VISIBLE);
+                TooltipCompat.setTooltipText(personalNoteUpload, getString(R.string.cache_personal_note_upload));
                 personalNoteUpload.setOnClickListener(v -> {
                     if (StringUtils.length(cache.getPersonalNote()) > maxPersonalNotesChars) {
                         warnPersonalNoteExceedsLimit();
