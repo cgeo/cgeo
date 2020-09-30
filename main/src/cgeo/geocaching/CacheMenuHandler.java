@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractUIFactory;
@@ -92,6 +93,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
         menu.findItem(R.id.menu_delete).setVisible(cache.isOffline());
+        menu.findItem(R.id.menu_share).setVisible(!InternalConnector.getInstance().canHandle(cache.getGeocode()));
         menu.findItem(R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
