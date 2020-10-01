@@ -4,4 +4,5 @@
     <string name="contact_not_found">%s nick-/felhasználónév nem található a névjegyek között. Először add hozzá a névjegyzékhez.</string>
     <string name="multiple_matches">Több egyező bejegyzés</string>
     <!-- permission handling -->
+    <string name="ask_again">Újrakérdezés</string>
 </resources>
