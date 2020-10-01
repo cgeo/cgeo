@@ -67,10 +67,10 @@
     <string name="log_tb_drop">Ang huloganan</string>
     <string name="log_tb_sortby">Klaseng dali ra makit-an</string>
     <string name="log_tb_changeall">Ang tanan kay usba</string>
-    <string name="log_tb_grabbed">Nabira sa usa ka dapit</string>
+    <string name="log_tb_grabbed">Nabira sa Usa ka Dapit</string>
     <string name="log_tb_note">Sulati</string>
-    <string name="log_tb_discovered">Nadiskobrehan</string>
-    <string name="log_tb_archived">Na-arkibo</string>
+    <string name="log_tb_discovered">Nadiskubre</string>
+    <string name="log_tb_archived">Naarkibo</string>
     <string name="log_saving">Pagpasa sa log…</string>
     <string name="log_posting_log">Ang pag-post sa log…</string>
     <string name="log_posting_twitter">Ang pag-post sa tweet…</string>
@@ -97,9 +97,11 @@
     <string name="log_yesterday">Kagahapon</string>
     <string name="log_smilies">Ang mga Smilies</string>
     <string name="log_image">Ang larawan</string>
+    <string name="log_images">Mga imahe</string>
     <string name="log_image_attach">Ang imahe kay ibutang</string>
     <string name="log_image_stored">Anaa na</string>
     <string name="log_image_camera">Bag-o</string>
+    <string name="log_image_delete">Tangtanga</string>
     <string name="log_image_caption">Kapsyon</string>
     <string name="log_image_description">Paghulagway</string>
     <string name="log_image_scale">Pagsaka</string>
@@ -108,6 +110,9 @@
     <string name="log_oc_team_comment">Ang komentaryo sa OC Team</string>
     <string name="log_your_saved_log">Ang imohang na-save nga log</string>
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
+    <string name="log_problem_needs_maintenance_label">Nanginahanglan og Pagmintinar</string>
+    <string name="log_problem_other_label">Uban</string>
+    <string name="log_image_titleprefix">Ang larawan</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
     <string name="translate_to_english">Ang paghubad sa Inglis</string>
@@ -177,7 +182,7 @@
     <string name="warn_no_keyword">Walay gihatag nga Keyword.</string>
     <string name="warn_no_username">Walay gihatag nga Username.</string>
     <string name="warn_no_connector">Walay naka-activate pa nga geocaching nga mga serbisyo nga gihatag para sa kani nga pagpangita.</string>
-    <string name="warn_search_help_title">Nagkinahanglan kag tabang?</string>
+    <string name="warn_search_help_title">Nanginahanglan kag tabang?</string>
     <string name="warn_search_help_address">Pagpasulod sa adres ug ngalan sa lokasyon. Pananglitan gamit ang usa ka postal adres \"Radlicka 100, Prague, Czech Republic,\" ngalan sa syudad \"Berlin\" o usa lamang ka ngalan pareha sa \"Yellowston Park\".</string>
     <string name="warn_search_help_gccode">Pagpasulod sa code para sa geocache. Pananglitan \"GC1VCAZ\".</string>
     <string name="warn_search_help_keyword">Pagpasulod sa tanang bahin sa geocache\'s ngalan. Pananglitan \"Gabie nga Cache\".</string>
@@ -196,7 +201,6 @@
     <string name="info_log_post_failed">Napakyas ang pagbutang sa log.</string>
     <string name="info_log_post_failed_reason">Rason: %s</string>
     <string name="info_log_post_retry">Suwayi og balik</string>
-    <string name="info_log_post_save">I-save sa offline</string>
     <string name="info_log_cleared">Ang log kay gihawanan.</string>
     <string name="info_waypoint_coordinates_cleared">Nalimpyo nga mga tiganos.</string>
     <string name="info_log_type_changed">Ang matang sa log kay giusab!</string>
@@ -219,7 +223,7 @@
     <string name="loc_gps_disabled">Wala gipagana ang GPS</string>
     <string name="menu_centerposition">Ang tunga sa akong posisyon</string>
     <!-- standard menu -->
-    <string name="menu_about">Ang mahitungod sa c:geo</string>
+    <string name="menu_about">Mahitungod sa c:geo</string>
     <string name="menu_helpers">Ang utility nga mga programa</string>
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang mga niaagi</string>
@@ -283,19 +287,18 @@
     <string name="caches_copy_selected">Kopyang naselekta</string>
     <string name="caches_copy_all">Kopyahon tanan</string>
     <string name="caches_map_locus_export">I-eksport adto sa Locus</string>
-    <string name="caches_filter">Pilter</string>
     <string name="caches_filter_title">Piltir sa</string>
-    <string name="caches_filter_size">Ang gidak-on</string>
+    <string name="caches_filter_size">Gidak-on</string>
     <string name="caches_filter_type">Ang matang</string>
     <string name="caches_filter_track">Adunay mga Trackable</string>
     <string name="caches_filter_clear">I-klaro ang mga pilter</string>
     <string name="caches_filter_modified">Adunay mausab na mga koordinar</string>
     <string name="caches_filter_offline_log">Adunay offline log</string>
     <string name="caches_filter_origin">Sinugdanan</string>
-    <string name="caches_filter_distance">Distansiya</string>
+    <string name="caches_filter_distance">Distansya</string>
     <string name="caches_filter_personal_note">Adunay personal na nota</string>
-    <string name="caches_filter_popularity">Ang mga paborito</string>
-    <string name="caches_filter_popularity_ratio">Ang mga paborito [%]</string>
+    <string name="caches_filter_popularity">Mga paborito</string>
+    <string name="caches_filter_popularity_ratio">Mga paborito [%]</string>
     <string name="caches_filter_personal_data">Adunay personal na datos</string>
     <string name="caches_filter_rating">Adunay grado</string>
     <string name="caches_filter_own_rating">Sa kaugalingong rating</string>
@@ -414,7 +417,10 @@
     <string name="init_signature_template_number">Numero</string>
     <string name="init_signature_template_owner">Tag-iya</string>
     <string name="init_signature_template_name">Pangalan</string>
+    <string name="init_signature_template_difficulty">Kalisud</string>
+    <string name="init_signature_template_terrain">Yuta</string>
     <string name="init_signature_template_log">Ang teksto sa log</string>
+    <string name="init_signature_template_size">Gidak-on</string>
     <string name="init_ratingwanted">Rating sa GCvote</string>
     <string name="init_summary_ratingwanted">Ang pag-load sa rating sa cache gikan sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ang pagpakita sa mga Higala/Kaugalingon</string>
@@ -451,7 +457,6 @@
     <string name="init_backup_unnecessary">Walay sulod ang database, dili kinahanglan ang tabang.</string>
     <string name="init_backup_no_backup_available">Wala syay backup file na pwedeng maggamit.</string>
     <string name="backup_confirm_overwrite">Ginahan ka nga hulipan ang anaa nga tabang gekan sa %s?</string>
-    <string name="restore_confirm_overwrite">Gusto nimo hulipan ang %s gekan sa imong aparato nga adunay tabang?</string>
     <string name="init_restore_success">Ang pagtarung kay sakto.</string>
     <string name="init_restore_failed">Napakyas ang pagpasig-uli.</string>
     <string name="init_restore_running">Pagbalik sa cache database…</string>
@@ -490,7 +495,7 @@
     <string name="init_dbonsdcard_note">Pwede nimong matago ang database sa imong c:geo sa bisan-asa kung sa sulod man sa sistema o sa direktoryo sa imong tig-gamit nga hipusanan. Kung naa sya sa taga-gamit nga tagu-anan pwede sya makapahawa ug ubang memorya, pero pwede sad na mawala gamay na pirpormans ug ang c:geo kay di mugana kung ang tagu-anan kay dili pwede maka akses o imong giwala ang file sa database.</string>
     <string name="init_dbonsdcard">Sa tagagamit na imbakan</string>
     <string name="init_dbmove_dbmove">I-isbog and database</string>
-    <string name="init_dbmove_running">I-isbog ang database</string>
+    <string name="init_dbmove_running">I-isbog and database</string>
     <string name="init_dbmove_success">Malamposon ang pag isbog sa database.</string>
     <string name="init_dbmove_failed">Napakyas ang pag isbog sa database</string>
     <string name="init_datadirmove_datadirmove">Pagbalhin sa direktoryong data sa Geocache</string>
@@ -519,7 +524,7 @@
     <string name="init_hardware_acceleration">Pag-enable sa accelaration sa hardware</string>
     <string name="settings_open_website">Pag-abli og website</string>
     <string name="settings_open_geokretymap_website">Pag-abli sa website sa GeoKrety.org</string>
-    <string name="settings_settings">Mga Setting</string>
+    <string name="settings_settings">Ang mga setting</string>
     <string name="settings_information">Impormasyon</string>
     <string name="settings_twitter_cache_message">Mensahe alang sa nakit-an nga cache</string>
     <string name="settings_twitter_trackable_message">Mensahe alang sa nakit-an nga trackable</string>
@@ -532,7 +537,7 @@
     <string name="feature_watch_list">Tanawa ang lista</string>
     <string name="feature_own_coordinates">Pagtipig sa bag-o nga mga koordinetor</string>
     <string name="feature_search_keyword">Pagpangita pinaagi sa keyword</string>
-    <string name="feature_search_live_map">Live nga mapa</string>
+    <string name="feature_search_live_map">Buhi nga mapa</string>
     <string name="feature_search_center">Pagpangita pinaagi sa posisyon</string>
     <string name="feature_search_geocode">Pagpangita pinaagi sa geocode</string>
     <string name="feature_search_owner">Pagpangita pinaagi sa tag-iya</string>
@@ -550,7 +555,7 @@
     <string name="sendToCgeo_download_fail">c:geo napakyas ang pag-dowbload sa caches. Walay koneksyon sa internet, o send2cgeo kay ubos pa.</string>
     <string name="sendToCgeo_no_registration">napakyas ang c:geo sa pag-download sa mga caches. Ang pagparehistro para sa send2cgeo kay natapos. Palihug parehistro sa mga kahimtangan.</string>
     <!-- auth generic -->
-    <string name="auth_authorize">I-awtorisar ang c:geo</string>
+    <string name="auth_authorize">I-awtorisar nga c:geo</string>
     <string name="auth_check">I-check ang pagpamatuod</string>
     <string name="auth_check_again">I-check ang pagpamatuod ug balik</string>
     <string name="auth_start">Sugdi ang pag-awtorisar</string>
@@ -564,24 +569,24 @@
     <string name="auth_forget_title">Nakalimot sa pagpamatuod?</string>
     <string name="auth_forget_message">Madiskonek ka sa kani nga service. Ang imong gi-save na credentials karon kay mawala.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Ang sunod nga proseso kay magtugot sa <b>c:geo</b> nga maka-access %s.</string>
+    <string name="auth_credentials_explain_short">Ang kani nga proseso kay nagtugot <b>c:geo</b> maka-access %s.</string>
     <string name="auth_credentials_explain_long">Pagpuno sa imong mga kredensyal ug pagpindut sa \"I-check ang pagpamatuod\" na pindutanan para masugdan ang proseso. Kani nga proseso kay makonek sa %s ug mag validate sa imong mga kredensyal. Mao rana tanan.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">Ang kani nga proseso kay nagtugot sa <b>c:geo</b> nga maka-access %s.</string>
+    <string name="auth_token_explain_short">Ang kani nga proseso kay nagtugot <b>c:geo</b> maka-access %s.</string>
     <string name="auth_token_explain_long">Pag-file sa imohang kredensyal og pag pindot sa \"awtorisa c:geo\"button mo sugod ang proses. Ang kani nga proseso mo konek sa %s og mo bawi sa mga pamatuod nga token. mao ra ang tanan.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">ang c:geo kay ge awtorisar nga maka-post sa Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">ang c:geo kay ge awtorisar para makig-interact kauban ang %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">ang c:geo kay ge awtorisar nga makig-interact kauban ang %s.</string>
+    <string name="auth_dialog_completed_geokrety">ang c:geo kay ge awtorisar para makig-interact kauban ang %s.</string>
     <string name="err_auth_geokrety_bad_password">Ang imohang username/password kay murag dili balido.</string>
     <string name="err_auth_geokrety_unknown">%1$s nibalik: %2$s.</string>
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
     <string name="cache_offline_refresh">I-refresh</string>
-    <string name="cache_offline_drop">Kuhaon</string>
+    <string name="cache_offline_drop">Tangtanga</string>
     <string name="cache_offline_store">Gitipigan</string>
     <string name="cache_offline_stored">Gitipigan sa usa ka aparato</string>
     <string name="cache_offline_not_ready">Dili anaa basta offline</string>
@@ -602,7 +607,7 @@
     <string name="cache_inventory">Imbentaryo</string>
     <string name="cache_log_images_title">Mga imahe sa Log</string>
     <string name="cache_log_image_default_title">Litrato</string>
-    <string name="cache_personal_note">Personal nga sulat</string>
+    <string name="cache_personal_note">Kaugalingong sulat</string>
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Limitasyon sa personal nga nota</string>
     <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang kaning personal nga note kay putlon inig human sa %d mga karakter pinaagi sa Geocaching.com.</string>
@@ -664,7 +669,7 @@
     <string name="menu_caches">Pagpamuno sa mga cache</string>
     <string name="cache_menu_event">Idungag sa kalendaryo</string>
     <string name="cache_menu_extract_waypoints">Pagwagtang sa waypoints</string>
-    <string name="cache_menu_details">Mga detalye</string>
+    <string name="cache_menu_details">Mga Detalye</string>
     <string name="cache_menu_refresh">I-refresh</string>
     <string name="cache_menu_share">Ipanghatag ang cache</string>
     <string name="cache_menu_move_list">Balhin sa laing listahan</string>
@@ -676,41 +681,43 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Gitipigan</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_never_found">Wala nakit-an</string>
     <string name="cache_found_last_30_days">Nakit-an ang uwahi nga 30 ka mga adlaw</string>
-    <string name="cache_status_archived">Ge-arkibo</string>
+    <string name="cache_status_archived">Naarkibo</string>
     <string name="cache_status_disabled">Wala gipagana</string>
+    <string name="cache_status_active">Pag-aktibo</string>
     <string name="cache_status_premium">Premium nga myembro lamang</string>
     <string name="cache_status_not_premium">Tanang miyembro maka-access</string>
     <string name="cache_status_stored">Gitipigan</string>
     <string name="cache_status_not_stored">Wala tipigi</string>
     <string name="cache_geocode">Code sa Geo</string>
     <string name="cache_name">Pangalan</string>
-    <string name="cache_type">Matang</string>
+    <string name="cache_type">Ang matang</string>
     <string name="cache_size">Gidak-on</string>
     <string name="cache_distance">Distansya</string>
     <string name="cache_difficulty">Kalisud</string>
-    <string name="cache_terrain">Patag</string>
-    <string name="cache_rating">Marka</string>
+    <string name="cache_terrain">Yuta</string>
+    <string name="cache_rating">Grado</string>
     <string name="cache_own_rating">Imong marka</string>
     <string name="cache_rating_of">sa</string>
     <string name="cache_favorite">Paborito</string>
     <string name="cache_owner">Tag-iya</string>
     <string name="cache_hidden">Nakatago</string>
-    <string name="cache_event">Petsa</string>
+    <string name="cache_event">Pitsa</string>
     <string name="cache_location">Lokasyon</string>
     <string name="cache_coordinates">Mga coordinates</string>
     <string name="cache_calculator">Kalkulator</string>
-    <string name="cache_coordinates_original">Orihinal nga coordinates</string>
-    <string name="cache_spoiler_images_title">Spoiler nga imahe</string>
+    <string name="cache_coordinates_original">Ang mga coordinate nga orihinal</string>
+    <string name="cache_spoiler_images_title">Spoiler nga mga imahe</string>
     <string name="cache_log_types">Klase sa log</string>
     <string name="cache_coordinates_no">Ang kani nga cache kay walay coordinates.</string>
     <string name="cache_clear_history">Hawanon ang kasaysayan</string>
     <string name="cache_remove_from_history">Kuhaa gikan sa mga niaging panahon</string>
-    <string name="cache_license">Lisensya</string>
-    <string name="cache_image">Litrato</string>
+    <string name="cache_license">Ang Lisensya</string>
+    <string name="cache_image">Ang larawan</string>
     <string name="cache_image_open_file">Ablihi nga usa ka file</string>
     <string name="cache_image_open_browser">Ablihi sa browser</string>
     <string name="cache_image_add_waypoint">Magdugang og Waypoint</string>
@@ -756,7 +763,7 @@
     <!-- popup -->
     <string name="popup_more">Uban pang mga detalye</string>
     <!-- waypoint -->
-    <string name="waypoint_coordinates">Mga Koordinetor</string>
+    <string name="waypoint_coordinates">Mga coordinates</string>
     <string name="waypoint_cache_coordinates">Mga koordinetor sa cache</string>
     <string name="waypoint_calculate_coordinates">Pagkalkula sa mga koordineyt</string>
     <string name="waypoint_custom">Kustom</string>
@@ -769,8 +776,8 @@
     <string name="waypoint_clear_coordinates">Tin-aw na mga koordineyt</string>
     <string name="waypoint_delete">Tangtanga</string>
     <string name="waypoint_edit_title">Pag-edit sa waypoint</string>
-    <string name="waypoint_add_title">Pagdugang sa waypoint</string>
-    <string name="waypoint_note">Sulat</string>
+    <string name="waypoint_add_title">Magdugang og Waypoint</string>
+    <string name="waypoint_note">Sulati</string>
     <string name="waypoint_user_note">Nota sa tiggamit</string>
     <string name="waypoint_visited">Gibisita</string>
     <string name="waypoint_save">I-save</string>
@@ -799,7 +806,7 @@
     <string name="visit_tweet">I-post ning nakit-an sa Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mga mapa nga live</string>
+    <string name="map_live">Buhi nga mapa</string>
     <string name="map_view_map">View sa mapa</string>
     <string name="map_modes">Kahimtang sa mapa</string>
     <string name="map_circles_show">Ipakita nag mga bilog</string>
@@ -817,7 +824,7 @@
     <!-- search -->
     <string name="search_bar_hint">Pangitaa para sa mga cache</string>
     <string name="search_bar_desc">Mga cache (geo code, keyword), Trackable (TB code)</string>
-    <string name="search_coordinates">Mga koordinate</string>
+    <string name="search_coordinates">Mga coordinates</string>
     <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
     <string name="search_address">Lugar</string>
     <string name="search_address_button">Pangitaa sa pamaagi ng lugar</string>
@@ -845,25 +852,26 @@
     <string name="trackable_browser_open">Ablihi sa Browser</string>
     <string name="trackable_refresh">I-refresh</string>
     <string name="trackable_goal">Tumong</string>
-    <string name="trackable_details">Mga detalye</string>
-    <string name="trackable_image">Litrato</string>
+    <string name="trackable_details">Mga Detalye</string>
+    <string name="trackable_image">Ang larawan</string>
     <string name="trackable_code">Tracking code</string>
-    <string name="trackable_name">Pangan</string>
+    <string name="trackable_name">Pangalan</string>
     <string name="trackable_brand">Marka</string>
-    <string name="trackable_type">Klase</string>
+    <string name="trackable_type">Ang matang</string>
     <string name="trackable_owner">Tag-iya</string>
     <string name="trackable_spotted">Na-aktohan</string>
     <string name="trackable_spotted_in_cache">Sulod</string>
     <string name="trackable_spotted_at_user">Sa kamot ng</string>
     <string name="trackable_spotted_unknown_location">Wala ma-ilhing lokasyon</string>
     <string name="trackable_spotted_owner">Sa mga kamot ng tag-iya niini</string>
-    <string name="trackable_spotted_archived">I-archive</string>
+    <string name="trackable_spotted_archived">Naarkibo</string>
     <string name="trackable_origin">Sinugdanan</string>
-    <string name="trackable_unknown">Wala ma-ilhi</string>
+    <string name="trackable_unknown">Wala nailhan</string>
     <string name="trackable_released">Gipagawas</string>
     <string name="trackable_distance">Lakbay</string>
     <string name="trackable_touch">Hikap</string>
     <string name="trackable_not_activated">Ang trackable wala na palihok</string>
+    <string name="trackable_status">Estado</string>
     <string name="geokret_type_traditional">Tradisyonal</string>
     <string name="geokret_type_book_or_media">Libro ng electronic media</string>
     <string name="geokret_type_human">Tao</string>
@@ -877,15 +885,15 @@
     <string name="user_menu_open_contact">Ablihi ang kontak kard</string>
     <string name="user_unknown">Wa mailhi na tiggamit</string>
     <!-- navigation -->
-    <string name="navigation">Nabigasyon</string>
+    <string name="navigation">Pag-navigate</string>
     <string name="use_gps">Ang GPS ra maoy gamiton</string>
-    <string name="use_compass">GPS ug Magnetic Compass ang gigamit</string>
     <string name="destination_select">Pili ug destinasyon</string>
     <string name="navigation_direct_navigation">Diretsong nabigasyon</string>
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Wala nailhan</string>
     <!-- license -->
-    <string name="license">Lisensya</string>
+    <string name="license">Ang Lisensya</string>
     <string name="license_show">Ipakita ang lisensya</string>
     <string name="license_dismiss">Wagtangon</string>
     <!-- helpers -->
@@ -1095,7 +1103,6 @@
     <string name="attribute_breeding_no">Walay panahon sa pagpaliwat / protektado nga naturalisa</string>
     <string name="attribute_snow_proof_yes">Esno-pruyba na tagoanan nga lugar</string>
     <string name="attribute_snow_proof_no">Walay esno-pruyba nga tagoanan nga lugar</string>
-    <string name="attribute_compass_yes">Kompas</string>
     <string name="attribute_compass_no">Walay kompas</string>
     <string name="attribute_cave_yes">Ekipo sa langob</string>
     <string name="attribute_cave_no">Walay ekipo para langob</string>
@@ -1126,7 +1133,7 @@
     <string name="attribute_shovel_yes">Basin maggamit ka og pala</string>
     <string name="attribute_shovel_no">Dili ka kailangan og pala</string>
     <string name="attribute_specific_access_yes">Magamit sa mga gibungat na oras ( basin kinahanglan og bayad sa pagsulod)</string>
-    <string name="attribute_specific_access_no">Maggamit sa bisag unsang orasa</string>
+    <string name="attribute_specific_access_no">Available pirme bisan unsang orasa</string>
     <string name="attribute_pedestrian_only_yes">Masudlan lang pinaagi sa paglakaw</string>
     <string name="attribute_pedestrian_only_no">Puwede ra masudlan dili lang sa paglakaw</string>
     <string name="attribute_nature_cache_yes">Natago sa natural na palibot (Kalasangan, kabukiran, etc)</string>
@@ -1205,7 +1212,7 @@
     <string name="confirm_log_title">Espesyal nga porma sa log</string>
     <string name="confirm_log_message">Ganahan ka i-log ang %s\'. Sigurado ka?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">I-aktibo</string>
+    <string name="settings_activate_geokrety">Pag-aktibo</string>
     <string name="init_summary_geokrety">Ipahimo ang trackables gikan sa GeoKrety.org</string>
     <string name="init_geokrety_description">I-awtorisar ang c:geo uban ang GeoKrety.org para i-log ang GeoKrety na mga trackables.</string>
     <string name="init_geokrety_userid">Id sa tagagamit: %s</string>
@@ -1258,6 +1265,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">I-save</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
