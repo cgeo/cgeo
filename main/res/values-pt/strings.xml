@@ -594,38 +594,52 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Criar Cópia de Segurança</string>
+    <string name="init_backup_summary">Observe que esta funcionalidade pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas não às imagens em caches.</string>
+    <string name="init_restore_title">Restaurar Cópia de Segurança</string>
+    <string name="init_backup_caches">caches e pontos adicionais</string>
+    <string name="init_backup_program_settings">definições de programa</string>
+    <string name="init_backup_logins">incluir dados da conta</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
+    <string name="init_backup_finished">Cópia de segurança concluída</string>
+    <string name="init_backup_now">Iniciar cópia de segurança</string>
     <string name="init_backup_running">A criar cópia de segurança da base de dados das caches…</string>
-    <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados que contém as caches e os pontos adicionais, mas não das suas imagens em caches nem de qualquer definição do programa.</string>
     <string name="init_backup_restore">Restaurar</string>
+    <string name="init_restore_restored">Restauro concluído</string>
+    <string name="init_backup_start_restore">Iniciar restauro</string>
+    <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
+    <string name="init_backup_create_backup_history">Criar histórico de cópias de segurança</string>
+    <string name="init_backup_history_disabled">Histórico de cópias de segurança desactivado. Deseja remover todas as cópias de segurança arquivadas?</string>
+    <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
+    <string name="init_backup_backup_history_summary">A cópia de segurança anterior será movida para %s ao criar uma nova. Dependendo do tamanho da cópia de segurança, isso pode levar a alto uso de disco!</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
     <string name="init_backup_unnecessary">A base de dados está vazia, não é necessária uma cópia de segurança.</string>
+    <string name="init_backup_move_directory_error">Não foi possível mover os ficheiros da cópia de segurança para a pasta de arquivos. Provavelmente existem várias cópias de segurança criadas no mesmo dia.</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
     <string name="backup_confirm_overwrite">Quer substituir a cópia de segurança existente de %s?</string>
-    <string name="restore_confirm_overwrite">Quer substituir %s no seu dispositivo com a cópia de segurança?</string>
+    <string name="restore_confirm_overwrite_database">AVISO: Isto irá sobrescrever %s no seu dispositivo!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">AVISO: Isto irá sobrescrever %s e as suas configurações actuais no seu dispositivo!</string>
+    <string name="restore_confirm_overwrite_settings">AVISO: Isto irá sobrescrever as suas configurações actuais no seu dispositivo!</string>
+    <string name="restore_information">Por favor, seleccione o que pretende restaurar:</string>
     <string name="init_restore_success">Restauro concluído.</string>
     <string name="init_restore_failed_dbrecreated">Falha no restauro: ficheiro de cópia de segurança corrompido, a base de dados teve de ser recriada.</string>
     <string name="init_restore_failed">O restauro falhou.</string>
     <string name="init_restore_running">A restaurar a base de dados de caches…</string>
     <string name="init_restore_confirm">A base de dados está vazia. Quer restaurar a cópia de segurança da base de dados?</string>
     <string name="init_backup_last">Disponível cópia de segurança de</string>
+    <string name="init_backup_unavailable">não disponível</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro com uma cópia de segurança.</string>
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings">Backup de definições do programa</string>
-    <string name="init_backup_settings_backup_light">Cópia seg. definições (sem as contas)</string>
-    <string name="init_backup_settings_backup_full">Cópia seg. definições (completo)</string>
+    <string name="init_backup_settings_logins">Cópia de seg. das credenciais de contas</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
     <string name="init_backup_settings_restore">Restaurar definições</string>
-    <string name="init_backup_settings_restore_confirm">Deseja substituir as suas actuais definições?</string>
-    <string name="init_backup_settings_restore_no">Não está disponível cópia de segurança das definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
-    <string name="settings_restored">Definições restauradas</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo permite a utilização de mapas offline. Poderá transferir mapas do Mapsforge ou até criar os seus próprios mapas a partir de ficheiros OSM. Para a funcionalidade de mapas offline estar disponível, primeiro precisa de seleccionar o directório dos mapas offline.</string>
@@ -950,6 +964,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_checker">Abrir Geochecker</string>
     <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
     <string name="cache_menu_ignore">Ignorar a cache</string>
+    <string name="cache_log_menu_decrypt">Decifrar/Cifrar</string>
+    <string name="cache_log_menu_title">Registo %s de %s</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
@@ -1013,6 +1029,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Abrir a aplicação Chirp Wolf para ler os dados chirp nesta cache</string>
     <string name="cache_chirpwolf_install">Instalar a aplicação Chirp Wolf para poder ler os dados chirp</string>
+    <string name="context_share_as_text">Partilhar texto</string>
+    <string name="context_share_as_link">Partilhar hiperligação</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
@@ -1236,7 +1254,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
     <string name="do_auto">Automático</string>
-    <string name="do_flat" comment="Yes, it is about the orientation of the device. Laying flat or standing upright">Horizontal</string>
+    <string name="do_flat">Horizontal</string>
     <string name="do_upright">Vertical</string>
     <!-- license -->
     <string name="license">Licença</string>
