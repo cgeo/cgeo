@@ -116,9 +116,11 @@
     <string name="log_yesterday">Vakar</string>
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Nuotrauka</string>
+    <string name="log_images">Nuotraukos</string>
     <string name="log_image_attach">Pridėti nuotrauką</string>
     <string name="log_image_stored">Esamą</string>
     <string name="log_image_camera">Naują</string>
+    <string name="log_image_delete">Ištrinti</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
@@ -137,12 +139,13 @@
     <string name="log_problem_damaged_text">Šis lobiautojas pranešė, kad talpykla yra pažeista.</string>
     <string name="log_problem_missing_label">Slėptuvė gali būti dingusi</string>
     <string name="log_problem_missing_text">Šis lobiautojas pranešė, kad slėptuvė gali būti dingusi.</string>
-    <string name="log_problem_other_label">Kita</string>
+    <string name="log_problem_other_label">Kitas</string>
     <string name="log_problem_other_text">Šis lobiautojas pranešė, kad su šia slėptuve yra problema.</string>
     <string name="log_problem_archive_label">Slėptuvė turėtų būti archyvuota</string>
     <string name="log_problem_archive_text">Šis lobiautojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
     <string name="log_image_scale_option_noscaling">Nekeisti dydžio</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Nuotrauka</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Išversti į %s</string>
     <string name="translate_to_english">Išversti į anglų</string>
@@ -345,7 +348,7 @@
     <string name="caches_copy_selected">Kopijuoti pasirinktas</string>
     <string name="caches_copy_all">Kopijuoti visas</string>
     <string name="caches_map_locus_export">Eksportuoti į Locus</string>
-    <string name="caches_filter">Filtruoti</string>
+    <string name="caches_filter">Filtras</string>
     <string name="caches_filter_title">Filtruoti</string>
     <string name="caches_filter_size">Dydis</string>
     <string name="caches_filter_type">Tipas</string>
@@ -356,8 +359,8 @@
     <string name="caches_filter_origin">Šaltinis</string>
     <string name="caches_filter_distance">Atstumas</string>
     <string name="caches_filter_personal_note">Su asmenine pastaba</string>
-    <string name="caches_filter_popularity">Kaip mėgiamos</string>
-    <string name="caches_filter_popularity_ratio">Kaip mėgiamos [%]</string>
+    <string name="caches_filter_popularity">Kiek mėgsta</string>
+    <string name="caches_filter_popularity_ratio">Kiek mėgsta [%]</string>
     <string name="caches_filter_personal_data">Su asmeniniais duomenimis</string>
     <string name="caches_filter_rating">Su reitingu</string>
     <string name="caches_filter_own_rating">Su savo reitingu</string>
@@ -580,7 +583,6 @@
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
     <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
-    <string name="restore_confirm_overwrite">Ar norite perrašyti %s įrenginyje su atsargine kopija?</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed">Atkurti nepavyko.</string>
     <string name="init_restore_running">Atkuriama slėptuvių duomenų bazė…</string>
@@ -588,16 +590,10 @@
     <string name="init_backup_last">Galima atkurti nuo</string>
     <string name="init_backup_last_no">Nėra atsarginės kopijos failo.</string>
     <string name="settings_title_backup">Atsarginė kopija / Atkurti</string>
-    <string name="init_backup_settings">Sukurti atsarginę programos nustatymų kopiją</string>
-    <string name="init_backup_settings_backup_light">Sukurti nustatymų kopiją (be paskyros duomenų)</string>
-    <string name="init_backup_settings_backup_full">Sukurti nustatymų kopiją (visų)</string>
     <string name="settings_savingerror">Išsaugant nustatymus įvyko klaida</string>
     <string name="settings_saved">Nustatymai sėkmingai išsaugoti į:</string>
     <string name="init_backup_settings_restore">Atkurti nustatymus</string>
-    <string name="init_backup_settings_restore_confirm">Ar norite perrašyti dabartinius nustatymus?</string>
-    <string name="init_backup_settings_restore_no">Nėra nustatymų atsarginės kopijos</string>
     <string name="settings_readingerror">Skaitant nustatymus įvyko klaida</string>
-    <string name="settings_restored">Nustatymai atkurti</string>
     <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
     <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
     <string name="settings_info_offline_maps">c:geo palaiko išsaugotus žemėlapius kurie veikia be interneto. Žemėlapius galite atsisiųsti iš Mapsforge arba susikurti nuosavus naudodami OSM duomenis. Norėdami įgalinti tokių žemėlapių palaikymą jūs turite pasirinkti katalogą jiems saugoti.</string>
@@ -685,7 +681,7 @@
     <string name="feature_watch_list">Peržiūrėti įrašus</string>
     <string name="feature_own_coordinates">Pakeistų koordinačių išsaugojimas</string>
     <string name="feature_search_keyword">Paieška pagal raktinį žodžį</string>
-    <string name="feature_search_live_map">Slėptuvės ir žemėlapis tiesiogiai iš interneto</string>
+    <string name="feature_search_live_map">Žemėlapis</string>
     <string name="feature_search_center">Paieška pagal poziciją</string>
     <string name="feature_search_geocode">Paieška pagal geo kodą</string>
     <string name="feature_search_owner">Paieška pagal savininką</string>
@@ -763,7 +759,7 @@
         <item quantity="other">liko %1$d dienų</item>
     </plurals>
     <string name="last_day_available">liko paskutine diena</string>
-    <string name="cache_offline">Išsaugota</string>
+    <string name="cache_offline">Išsaugotas</string>
     <string name="cache_offline_refresh">Naujinti</string>
     <string name="cache_offline_drop">Pašalinti</string>
     <string name="cache_offline_store">Saugoti</string>
@@ -848,19 +844,19 @@
     <string name="cache_dialog_loading_details_status_gcvote">Įkeliama GCVote informacija</string>
     <string name="cache_dialog_loading_details_status_cache">Išsaugomi duomenys</string>
     <string name="cache_dialog_loading_details_status_render">Generuojamas vaizdas</string>
-    <string name="cache_dialog_offline_save_title">Išsaugoma</string>
+    <string name="cache_dialog_offline_save_title">Išsaugotas</string>
     <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui be interneto…</string>
-    <string name="cache_dialog_offline_drop_title">Pašalinti</string>
+    <string name="cache_dialog_offline_drop_title">Išsaugotas</string>
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš prietaiso atminties…</string>
-    <string name="cache_dialog_refresh_title">Atnaujinama</string>
+    <string name="cache_dialog_refresh_title">Naujinti</string>
     <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
     <string name="cache_dialog_watchlist_add_title">Įtraukti į stebimų slėptuvių sąrašą</string>
     <string name="cache_dialog_watchlist_add_message">Slėptuvė įtraukiama į stebimų slėptuvių sąrašą…</string>
-    <string name="cache_dialog_watchlist_remove_title">Pašalinti iš stebimų slėptuvių sąrašo</string>
+    <string name="cache_dialog_watchlist_remove_title">Įtraukti į stebimų slėptuvių sąrašą</string>
     <string name="cache_dialog_watchlist_remove_message">Slėptuvė šalinama iš stebimų slėptuvių sąrašo…</string>
     <string name="cache_dialog_favorite_add_title">Įtraukti į mėgiamų slėptuvių sąrašą</string>
     <string name="cache_dialog_favorite_add_message">Slėptuvė įtraukiama į Jūsų mėgiamų sąrašą…</string>
-    <string name="cache_dialog_favorite_remove_title">Pašalinti iš mėgiamų sąrašo</string>
+    <string name="cache_dialog_favorite_remove_title">Įtraukti į mėgiamų slėptuvių sąrašą</string>
     <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgiamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_navigation_drive">Navigacija (važiuoti)</string>
@@ -886,7 +882,7 @@
     <string name="cache_menu_event">Įtraukti į kalendorių</string>
     <string name="cache_menu_extract_waypoints">Išskleisti nuorodų taškus</string>
     <string name="cache_menu_details">Informacija</string>
-    <string name="cache_menu_refresh">Atnaujinti</string>
+    <string name="cache_menu_refresh">Naujinti</string>
     <string name="cache_menu_share">Bendrinti slėptuvę</string>
     <string name="cache_menu_move_list">Perkelti į kitą sąrašą</string>
     <string name="cache_menu_copy_list">Kopijuoti į kitą sąrašą</string>
@@ -905,9 +901,9 @@
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_never_found">Niekada nesurastos</string>
     <string name="cache_found_last_30_days">Rasti per paskutines 30 dienų</string>
-    <string name="cache_status_archived">Suarchyvuota</string>
+    <string name="cache_status_archived">Archyvuota</string>
     <string name="cache_status_disabled">Išjungta</string>
-    <string name="cache_status_active">Aktyvus</string>
+    <string name="cache_status_active">Aktyvuota</string>
     <string name="cache_status_premium">Tik Premium nariams</string>
     <string name="cache_status_not_premium">Prieinama visiems nariams</string>
     <string name="cache_status_stored">Išsaugota</string>
@@ -932,7 +928,7 @@
     <string name="cache_rating">Reitingas</string>
     <string name="cache_own_rating">Jūsų reitingas</string>
     <string name="cache_rating_of">iš</string>
-    <string name="cache_favorite">Mėgiama</string>
+    <string name="cache_favorite">Įtraukti į mėgiamų slėptuvių sąrašą</string>
     <string name="cache_owner">Savininkas</string>
     <string name="cache_hidden">Paslėpta</string>
     <string name="cache_event">Data</string>
@@ -1029,7 +1025,7 @@
     <string name="waypoint_added">Papildomas taškas pridėtas</string>
     <string name="waypoint_note">Pastaba</string>
     <string name="waypoint_user_note">Vartotojo pastabos</string>
-    <string name="waypoint_visited">Aplankytas</string>
+    <string name="waypoint_visited">Apsilankė</string>
     <string name="waypoint_set_visited">Kelio taškas nustatytas kaip aplankytas</string>
     <string name="waypoint_unset_visited">Kelio taškas nustatytas kaip neaplankytas</string>
     <string name="waypoint_save">Išsaugoti</string>
@@ -1058,8 +1054,8 @@
     <!-- visit -->
     <string name="visit_tweet">Skelbti radybas Twitter paskytoje</string>
     <!-- map -->
-    <string name="map_map">Išsaugotos slėptuvės</string>
-    <string name="map_live">Slėptuvės iš interneto</string>
+    <string name="map_map">Žemėlapis</string>
+    <string name="map_live">Žemėlapis</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_modes">Žemėlapio nustatymai</string>
     <string name="map_rotation">Žemėlapio sukimas</string>
@@ -1112,7 +1108,7 @@
     <string name="trackable_details_loading">Įkeliama keliauninko informacija…</string>
     <string name="trackable_log_touch">Paliesti keliauninką</string>
     <string name="trackable_browser_open">Atidaryti naršyklėje</string>
-    <string name="trackable_refresh">Atnaujinti</string>
+    <string name="trackable_refresh">Naujinti</string>
     <string name="trackable_goal">Tikslas</string>
     <string name="trackable_details">Informacija</string>
     <string name="trackable_image">Nuotrauka</string>
@@ -1126,9 +1122,9 @@
     <string name="trackable_spotted_at_user">Rankose</string>
     <string name="trackable_spotted_unknown_location">Vieta nežinoma</string>
     <string name="trackable_spotted_owner">Savininko rankose</string>
-    <string name="trackable_spotted_archived">Suarchyvuota</string>
-    <string name="trackable_origin">Kilmė</string>
-    <string name="trackable_unknown">Nenurodyta</string>
+    <string name="trackable_spotted_archived">Archyvuota</string>
+    <string name="trackable_origin">Šaltinis</string>
+    <string name="trackable_unknown">Nežinomas</string>
     <string name="trackable_released">Išleistas</string>
     <string name="trackable_distance">Nukeliauta</string>
     <string name="trackable_touch">Registruoti</string>
@@ -1153,11 +1149,11 @@
     <string name="navigation">Navigacija</string>
     <string name="compass_title">Kompasas</string>
     <string name="use_gps">Naudojamas tik GPS</string>
-    <string name="use_compass">Naudojamas GPS ir magnetinis kompasas</string>
     <string name="destination_select">Pasirinkite tikslą</string>
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nežinomas</string>
     <!-- license -->
     <string name="license">Licencija</string>
     <string name="license_show">Rodyti licenciją</string>
@@ -1382,7 +1378,7 @@
     <string name="attribute_breeding_no">Nėra poravimosi sezono / saugomos gamtos</string>
     <string name="attribute_snow_proof_yes">Nuo sniego apsaugota slėpimo vieta</string>
     <string name="attribute_snow_proof_no">Nuo sniego neapsaugota slėpimo vieta</string>
-    <string name="attribute_compass_yes">Reikalingas kompasas</string>
+    <string name="attribute_compass_yes">Kompasas</string>
     <string name="attribute_compass_no">Kompasas nereikalingas</string>
     <string name="attribute_cave_yes">Požeminių olų įranga</string>
     <string name="attribute_cave_no">Nereikia požeminių olų įrangos</string>
