@@ -89,9 +89,11 @@
     <string name="log_tb_archived">Arkistoitu</string>
     <string name="log_save">Offline-tallennus</string>
     <string name="log_saving">Lähetetään merkintää…</string>
+    <string name="log_saving_and_uploading">Lähetetään lokia ja kuvia…</string>
     <string name="log_posting_log">Lähetetään lokia…</string>
     <string name="log_posting_twitter">Lähetetään twiittiä…</string>
     <string name="log_posting_vote">Lähetetään kätkön arvostelua…</string>
+    <string name="log_posting_image">Kuvia lähetetään…</string>
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
     <string name="log_clear">Tyhjennä</string>
     <string name="log_post_not_possible">Datan lataus käynnissä…\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
@@ -154,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
+    <string name="err_captcha">Captcha vaaditaan. Ole hyvä ja katso <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> saadaksesi opastusta.</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
@@ -254,6 +257,7 @@
     <string name="info_stored_image">Uusi kuva tallennettu paikkaan:</string>
     <string name="info_cache_saved">Kätkö tallennettu paikallisesti</string>
     <string name="warn_calculator_state_save">Muista tallentaa reittipiste jos haluat säilyttää laskimen tilan.</string>
+    <string name="feature_info_offline_counter">Sinulla on kätköjä, joissa on offline-tilassa tallennettu loki, joita ei ole vielä mahdollisesti lähetetty. Näiden määrä näytetään kätevästi aloitusnäytön alaosassa löytämiesi kätköjen määrän jälkeen muodossa \"+ x\". \n\nLisäksi \"x\" lokia lisätään \"NUMBER\"-mallineeseen jota saatat käyttää lokisi allekirjoituksessa. \n\nJos et tykkää tästä laskimen lisäyksestä, voit kytkeä sen pois päältä kohdassa \"Asetukset\" &gt; \"Kirjaus\" ja/tai käyttää sen sijaan mallinetta \"NUMBER (without offline logs)\". \n\nLöytääksesi jäljellä olevat offline-tilassa olevat kirjaukset, mene \"Historia\"-listaan ja käytä suodatinta \"Omia tietoja\" &gt; \"Offline-lokeja\".</string>
     <string name="err_trackable_log_not_anonymous">Kirjautumista %1$s c:geosta ei voi tehdä anonyymisti. Haluatko avata asetukset täyttääksesi tarvittavat tiedot %2$s?</string>
     <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
@@ -263,6 +267,7 @@
     <string name="more_information">Lisätietoja</string>
     <string name="remind_later">Muistuta minua myöhemmin</string>
     <string name="undo">Kumoa</string>
+    <string name="dont_show_again">Älä näytä uudelleen</string>
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
     <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
@@ -588,25 +593,47 @@
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Suunta kätkölle näytetään listauksessa</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Luo varmuuskopio</string>
+    <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköt, reittipisteet &amp; asetukset, mutta ei kätkökuvia.</string>
+    <string name="init_restore_title">Palauta varmuuskopio</string>
+    <string name="init_backup_caches">Kätköllä ei ole reittipisteitä</string>
+    <string name="init_backup_program_settings">ohjelman asetukset</string>
+    <string name="init_backup_logins">sisällytä käyttäjätiedot</string>
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
+    <string name="init_backup_finished">Varmuuskopiointi valmis</string>
+    <string name="init_backup_now">Aloita varmuuskopiointi</string>
     <string name="init_backup_running">Luodaan varmuuskopiota kätkötietokannasta…</string>
     <string name="init_backup_restore">Palauta</string>
+    <string name="init_restore_restored">Palautus valmis</string>
+    <string name="init_backup_start_restore">Aloita palautus</string>
+    <string name="init_backup_backup_history">Varmuuskopioi historia</string>
+    <string name="init_backup_create_backup_history">Luo varmuuskopiohistoria</string>
+    <string name="init_backup_history_disabled">Varmuuskopiointi poistettu käytöstä. Haluatko poistaa kaikki arkistoidut varmuuskopiot?</string>
+    <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
+    <string name="init_backup_backup_history_summary">Edellinen varmuuskopio siirretään kohteeseen %s samalla kun luodaan uusi. Varmuuskopion koosta riippuen tämä voi johtaa suureen levyn käyttöön!</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
+    <string name="init_backup_move_directory_error">Varmuuskopiotiedostoja ei voitu siirtää arkistokansioon. Samana päivänä luotiin todennäköisesti useita varmuuskopioita.</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
     <string name="backup_confirm_overwrite">Haluatko korvata olemassa olevan varmuuskopion %s?</string>
+    <string name="restore_confirm_overwrite_database">VAROITUS: Tämä korvaa kohteen %s laitteellasi!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">VAROITUS: Tämä korvaa kohteen %s ja nykyiset asetuksesi laitteellasi!</string>
+    <string name="restore_confirm_overwrite_settings">VAROITUS: Tämä korvaa nykyiset asetuksesi laitteellasi!</string>
+    <string name="restore_information">Valitse mitä haluat palauttaa:</string>
     <string name="init_restore_success">Palautus valmis.</string>
     <string name="init_restore_failed_dbrecreated">Palautus epäonnistui: Varmuuskopio korruptoitunut, tietokanta piti luoda tyhjästä.</string>
     <string name="init_restore_failed">Palautus epäonnistui.</string>
     <string name="init_restore_running">Palautetaan kätkötietokantaa…</string>
     <string name="init_restore_confirm">Tietokanta on tyhjä. Haluatko palauttaa varmuuskopion?</string>
     <string name="init_backup_last">Varmuuskopio ajalta:</string>
+    <string name="init_backup_unavailable">ei saatavilla</string>
     <string name="init_backup_last_no">Mikään tiedosto ei sisällä varmuuskopiota.</string>
     <string name="init_restore_version_error">Odottamaton muoto - ei voi palauttaa tietokantaa.\n\nOdotettu versio on %1$d,\nvarmuuskopiolla on versio %2$d</string>
     <string name="settings_title_backup">Varmuuskopioi / Palauta</string>
     <string name="settings_summary_backup">Tee varmuuskopio ja palauta kätköjen/reittipisteiden tiedot ja ohjelman asetukset.</string>
+    <string name="init_backup_settings_logins">Varmuuskopioi käyttäjätiedot</string>
     <string name="init_backup_settings_backup_full_confirm">Haluatko tallentaa arkaluontoiset tiliin liittyvät tiedot? Nämä saattavat olla muiden sovellusten luettavissa.</string>
     <string name="settings_savingerror">Virhe asetusten tallentamisessa</string>
     <string name="settings_saved">Asetukset asennettu onnistuneesti sijaintiin:</string>
@@ -802,6 +829,10 @@
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Päivitä</string>
     <string name="cache_offline_drop">Poista</string>
+    <string name="cache_delete_userdefined_waypoints">Poista käyttäjän määrittämät reittipisteet</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Poistetaanko kaikki käyttäjän määrittämät reittipisteet tästä kätköstä?\n\nReittipisteet poistetaan välittömästi, eikä sitä voi perua.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Huomautus: Sinulla on asetus \"reittipisteet muistiinpanoista\" käytössä. Jos sinulla on koordinaatit henkilökohtaisessa muistiossasi, jonka c:geo tunnistaa, reittipisteet luodaan niihin automaattisesti. Voit poistaa tämän käytöstä henkilökohtaisen muistiinpanon muokkausikkunassa.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Käyttäjän määrittämät reittipisteet poistettu</string>
     <string name="cache_offline_store">Tallenna</string>
     <string name="cache_offline_stored">Tallennettu laitteeseen</string>
     <string name="cache_offline_not_ready">Ei käytettävissä offline-tilassa</string>
@@ -932,6 +963,8 @@
     <string name="cache_menu_checker">Avaa Geochecker</string>
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
     <string name="cache_menu_ignore">Ohita kätkö</string>
+    <string name="cache_log_menu_decrypt">Pura salaus/Salaa</string>
+    <string name="cache_log_menu_title">Loki %s / %s</string>
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
@@ -995,6 +1028,8 @@
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Avaa Chirp Wolf lukeaksesi chirpin tiedot tälle kätkölle</string>
     <string name="cache_chirpwolf_install">Asenna Chirp Wolf pystyäksesi lukemaan chirpin tietoja</string>
+    <string name="context_share_as_text">Jaa teksti</string>
+    <string name="context_share_as_link">Jaa linkki</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
@@ -1208,9 +1243,12 @@
     <string name="navigation">Navigointi</string>
     <string name="compass_title">Kompassi</string>
     <string name="use_gps">Vain GPS käytössä</string>
+    <string name="use_compass">Kaikki sensorit käytössä</string>
     <string name="destination_select">Valitse kohde</string>
     <string name="navigation_direct_navigation">Suora navigointi</string>
     <string name="osmand_marker_cgeo">Merkki c:geosta</string>
+    <string name="device_heading_label">Laite:</string>
+    <string name="device_orientation">Suunta</string>
     <string name="device_orientation_label">Suunta:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Tuntematon</string>
@@ -1493,6 +1531,14 @@
     <string name="attribute_survey_marker_no">Ei lähellä maamerkkiä</string>
     <string name="attribute_offset_cache_yes">Monivaiheinen kätkö</string>
     <string name="attribute_offset_cache_no">Ei ole monivaiheinen kätkö</string>
+    <string name="attribute_bonuscache_yes">Bonuskätkö</string>
+    <string name="attribute_bonuscache_no">Ei bonuskätkö</string>
+    <string name="attribute_powertrail_yes">Osa powertrailia</string>
+    <string name="attribute_powertrail_no">Ei osa powertrailia</string>
+    <string name="attribute_challengecache_yes">Haastekätkö</string>
+    <string name="attribute_challengecache_no">Ei haastekätkö</string>
+    <string name="attribute_hqsolutionchecker_yes">Geocaching.com:in tarkistin saatavilla</string>
+    <string name="attribute_hqsolutionchecker_no">Geocaching.com:in tarkistin ei saatavilla</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
