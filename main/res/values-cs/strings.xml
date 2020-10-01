@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
+    <string name="err_captcha">Je vyžadována Captcha. Pomoc najdete v našem <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_su">Nelze se připojit na Geocaching.su. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
@@ -597,14 +598,12 @@
     <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
-    <string name="init_backup_note">Mějte na paměti, že tato funkce zálohuje/obnovuje databázi obsahující jen kešky a trasové body, ale ne obrázky z kešek ani nastavení programu.</string>
     <string name="init_backup_restore">Obnovit</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
     <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Opravdu chceš přesat existující zálohu z %s?</string>
-    <string name="restore_confirm_overwrite">Chceš přepsat %s na svém zařízení zálohou?</string>
     <string name="init_restore_success">Obnova dokončena.</string>
     <string name="init_restore_failed_dbrecreated">Obnova se nezdařila: Záložní soubor je poškozen, databáze musela být znovu vytvořena.</string>
     <string name="init_restore_failed">Obnova selhala.</string>
@@ -615,17 +614,11 @@
     <string name="init_restore_version_error">Neočekávaný formát - databázi nelze obnovit.\n\nOčekávaná verze je %1$d,\nzáloha má verzi %2$d</string>
     <string name="settings_title_backup">Zálohovat / Obnovit</string>
     <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/trasových bodech a nastavení programu.</string>
-    <string name="init_backup_settings">Zálohovat nastavení systému</string>
-    <string name="init_backup_settings_backup_light">Zálohovat nastavení (bez údajů o účtu)</string>
-    <string name="init_backup_settings_backup_full">Zálohovat nastavení (úplné)</string>
     <string name="init_backup_settings_backup_full_confirm">Chcete uložit důvěrné údaje o účtu? Jiné aplikace je mohou přečíst.</string>
     <string name="settings_savingerror">Chyba při ukládaní nastavení</string>
     <string name="settings_saved">Nastavení bylo úspěšně uloženo do:</string>
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
-    <string name="init_backup_settings_restore_confirm">Chcete přepsat aktuální nastavení?</string>
-    <string name="init_backup_settings_restore_no">Není k dispozici žádná záloha s nastaveními</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
-    <string name="settings_restored">Nastavení obnoveno</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline mapových podkladů, které si můžeš stáhnout z Mapsforge a nebo si vytvořit vlastní z dat Open Street Map (OSM). Aby bylo možné offline mapy používat, musíš nejprve zvolit místo jejich umístění (volba „Složka s offline mapami“).</string>
@@ -1242,12 +1235,12 @@
     <string name="navigation">Navigace</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Použita pouze GPS</string>
-    <string name="use_compass">Použita GPS a kompas</string>
+    <string name="use_compass">Všechny senzory využity</string>
     <string name="destination_select">Vyber cíl</string>
     <string name="navigation_direct_navigation">Přímá navigace</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
-    <string name="device_heading_label">Název zařízení:</string>
-    <string name="device_orientation">Orientace zařízení</string>
+    <string name="device_heading_label">Zařízení:</string>
+    <string name="device_orientation">Orientace</string>
     <string name="device_orientation_label">Orientace:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Neznámá</string>
