@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
+    <string name="err_captcha">Captcha necessário. Por favor, consulte as <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para obter instruções.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -352,7 +353,7 @@
     <string name="caches_move_selected">Mover seleccionada(s)</string>
     <string name="caches_move_all">Mover todas</string>
     <string name="caches_copy_selected">Copiar seleccionada(s)</string>
-    <string name="caches_copy_all">Copiar tudo</string>
+    <string name="caches_copy_all">Copiar todas</string>
     <string name="caches_map_locus_export">Exportar para Locus</string>
     <string name="caches_filter">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
@@ -596,14 +597,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_running">A criar cópia de segurança da base de dados das caches…</string>
-    <string name="init_backup_note">Tenha em consideração que esta funcionalidade apenas fará cópia de segurança/restauro da base de dados que contém as caches e os pontos adicionais, mas não das suas imagens em caches nem de qualquer definição do programa.</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
     <string name="init_backup_unnecessary">A base de dados está vazia, não é necessária uma cópia de segurança.</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
     <string name="backup_confirm_overwrite">Quer substituir a cópia de segurança existente de %s?</string>
-    <string name="restore_confirm_overwrite">Quer substituir %s no seu dispositivo com a cópia de segurança?</string>
     <string name="init_restore_success">Restauro concluído.</string>
     <string name="init_restore_failed_dbrecreated">Falha no restauro: ficheiro de cópia de segurança corrompido, a base de dados teve de ser recriada.</string>
     <string name="init_restore_failed">O restauro falhou.</string>
@@ -614,17 +613,11 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings">Backup de definições do programa</string>
-    <string name="init_backup_settings_backup_light">Cópia seg. definições (sem as contas)</string>
-    <string name="init_backup_settings_backup_full">Cópia seg. definições (completo)</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
     <string name="init_backup_settings_restore">Restaurar definições</string>
-    <string name="init_backup_settings_restore_confirm">Deseja substituir as suas actuais definições?</string>
-    <string name="init_backup_settings_restore_no">Não está disponível cópia de segurança das definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
-    <string name="settings_restored">Definições restauradas</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo permite a utilização de mapas offline. Poderá transferir mapas do Mapsforge ou até criar os seus próprios mapas a partir de ficheiros OSM. Para a funcionalidade de mapas offline estar disponível, primeiro precisa de seleccionar o directório dos mapas offline.</string>
@@ -1225,12 +1218,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="navigation">Navegação</string>
     <string name="compass_title">Bússola</string>
     <string name="use_gps">Apenas GPS</string>
-    <string name="use_compass">GPS e Bússola Magnética</string>
+    <string name="use_compass">Todos os sensores utilizados</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
-    <string name="device_heading_label">Orientação do dispositivo:</string>
-    <string name="device_orientation">Orientação do dispositivo</string>
+    <string name="device_heading_label">Dispositivo:</string>
+    <string name="device_orientation">Orientação</string>
     <string name="device_orientation_label">Orientação:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
