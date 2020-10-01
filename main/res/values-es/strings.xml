@@ -115,9 +115,11 @@
     <string name="log_yesterday">Ayer</string>
     <string name="log_smilies">Emoticonos</string>
     <string name="log_image">Imagen</string>
+    <string name="log_images">Imágenes</string>
     <string name="log_image_attach">Adjuntar imagen</string>
     <string name="log_image_stored">Galería</string>
     <string name="log_image_camera">Tomar foto</string>
+    <string name="log_image_delete">Borrar</string>
     <string name="log_image_caption">Título</string>
     <string name="log_image_description">Descripción</string>
     <string name="log_image_scale">Redimensionamiento</string>
@@ -142,6 +144,7 @@
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Imagen</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
     <string name="translate_to_english">Traducir al inglés</string>
@@ -838,6 +841,7 @@
     <string name="cache_favpoint_not_on">Este caché no es uno de tus favoritos.</string>
     <string name="cache_list_select_last">Última selección</string>
     <string name="cache_images">Imágenes</string>
+    <string name="cache_waypoints">Waypoints</string>
     <string name="cache_waypoints_add">Añadir waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Añadir ubicación actual</string>
     <string name="cache_waypoints_add_fromclipboard">Añadir desde el portapapeles</string>
@@ -900,6 +904,7 @@
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Guardados</string>
     <string name="cache_status_offline_log">Registro guardado</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
@@ -907,6 +912,7 @@
     <string name="cache_found_last_30_days">Encontrado en los últimos 30 días</string>
     <string name="cache_status_archived">Archivado</string>
     <string name="cache_status_disabled">Desactivado</string>
+    <string name="cache_status_active">Activo</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
     <string name="cache_status_not_premium">Acceso a todos los miembros</string>
     <string name="cache_status_stored">Guardado</string>
@@ -1152,6 +1158,7 @@
     <string name="navigation_direct_navigation">Navegación directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Desconocido</string>
     <!-- license -->
     <string name="license">Licencia</string>
     <string name="license_show">Mostrar licencia</string>
@@ -1186,6 +1193,7 @@
     <string name="export_fieldnotes_upload_success">Subido con éxito a geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Solo desde la última exportación</string>
     <string name="export_fieldnotes_creating">Creando notas de campo…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">El archivo GPX será exportado a %1$s con la fecha y hora actual como su nombre de archivo.</string>
     <string name="export_gpx_to">Enviar GPX exportado a</string>
     <string name="export_confirm_title">Exportando %1$s</string>
@@ -1551,6 +1559,7 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>
+    <string name="save_sorted_route">Guardar</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
