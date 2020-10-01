@@ -818,7 +818,6 @@
     <string name="navigation">Navigacija</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">V uporabi je samo GPS</string>
-    <string name="use_compass">V uporabi je GPS in magnetni kompas</string>
     <string name="destination_select">Izbira destinacije</string>
     <string name="navigation_direct_navigation">Direktna navigacija</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
