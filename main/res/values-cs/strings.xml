@@ -86,7 +86,7 @@
     <string name="log_tb_grabbed">Převzat</string>
     <string name="log_tb_note">Poznámka</string>
     <string name="log_tb_discovered">Spatřen</string>
-    <string name="log_tb_archived">Archivován</string>
+    <string name="log_tb_archived">Archivována</string>
     <string name="log_save">Uložit offline</string>
     <string name="log_saving">Odesílání logu…</string>
     <string name="log_saving_and_uploading">Odesílání logu a nahrávání obrázků…</string>
@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
+    <string name="err_captcha">Je vyžadována Captcha. Pomoc najdete v našem <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_su">Nelze se připojit na Geocaching.su. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
@@ -224,7 +225,7 @@
     <string name="warn_no_keyword">Nenalezena žádná klíčová slova</string>
     <string name="warn_no_username">Nenalezeno žádné uživatelské jméno</string>
     <string name="warn_no_connector">Tento typ vyhledávání nepodporuje žádná z aktivovaných geocachingových služeb.</string>
-    <string name="warn_search_help_title">Potřebuješ pomoct?</string>
+    <string name="warn_search_help_title">Potřebuješ poradit?</string>
     <string name="warn_search_help_address">Zadej adresu nebo název oblasti. Můžeš použít například název ulice „Radlicka 100, Praha, Ceska republika“, název města „Berlín“ nebo název místa „Yellowstone Park“.</string>
     <string name="warn_search_help_gccode">Zadej kód keše. Například „GC1VCAZ“.</string>
     <string name="warn_search_help_keyword">Zadej slovo, které je použito v názvu keše, kterou se pokoušíš najít.</string>
@@ -295,7 +296,7 @@
     <!-- main screen -->
     <string name="live_map_button">Aktivní mapa</string>
     <string name="caches_nearby_button">Nejbližší</string>
-    <string name="advanced_search_button">Hledání</string>
+    <string name="advanced_search_button">Vyhledávání</string>
     <string name="stored_caches_button">Uložené</string>
     <string name="any_button">Přejít</string>
     <string name="unknown_scan">Ve výsledku skenu nenalezen žádný geokód.</string>
@@ -521,7 +522,7 @@
     <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
     <string name="err_vote_send_rating">Chyba při odesílání hodnocení.</string>
     <string name="vote_sent">Hlasování úspěšně odesláno</string>
-    <string name="settings_activate_twitter">Povolit</string>
+    <string name="settings_activate_twitter">Aktivovat</string>
     <string name="init_login_popup">Přihlášení</string>
     <string name="init_login_popup_working">Přihlašování…</string>
     <string name="init_login_popup_ok">Přihlášení bylo úspěšné</string>
@@ -597,14 +598,12 @@
     <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
-    <string name="init_backup_note">Mějte na paměti, že tato funkce zálohuje/obnovuje databázi obsahující jen kešky a trasové body, ale ne obrázky z kešek ani nastavení programu.</string>
     <string name="init_backup_restore">Obnovit</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
     <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Opravdu chceš přesat existující zálohu z %s?</string>
-    <string name="restore_confirm_overwrite">Chceš přepsat %s na svém zařízení zálohou?</string>
     <string name="init_restore_success">Obnova dokončena.</string>
     <string name="init_restore_failed_dbrecreated">Obnova se nezdařila: Záložní soubor je poškozen, databáze musela být znovu vytvořena.</string>
     <string name="init_restore_failed">Obnova selhala.</string>
@@ -615,17 +614,11 @@
     <string name="init_restore_version_error">Neočekávaný formát - databázi nelze obnovit.\n\nOčekávaná verze je %1$d,\nzáloha má verzi %2$d</string>
     <string name="settings_title_backup">Zálohovat / Obnovit</string>
     <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/trasových bodech a nastavení programu.</string>
-    <string name="init_backup_settings">Zálohovat nastavení systému</string>
-    <string name="init_backup_settings_backup_light">Zálohovat nastavení (bez údajů o účtu)</string>
-    <string name="init_backup_settings_backup_full">Zálohovat nastavení (úplné)</string>
     <string name="init_backup_settings_backup_full_confirm">Chcete uložit důvěrné údaje o účtu? Jiné aplikace je mohou přečíst.</string>
     <string name="settings_savingerror">Chyba při ukládaní nastavení</string>
     <string name="settings_saved">Nastavení bylo úspěšně uloženo do:</string>
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
-    <string name="init_backup_settings_restore_confirm">Chcete přepsat aktuální nastavení?</string>
-    <string name="init_backup_settings_restore_no">Není k dispozici žádná záloha s nastaveními</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
-    <string name="settings_restored">Nastavení obnoveno</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline mapových podkladů, které si můžeš stáhnout z Mapsforge a nebo si vytvořit vlastní z dat Open Street Map (OSM). Aby bylo možné offline mapy používat, musíš nejprve zvolit místo jejich umístění (volba „Složka s offline mapami“).</string>
@@ -685,7 +678,7 @@
     <string name="init_dbonsdcard_note">Databáze c:geo může být uložena v interním souborovém systému nebo v adresáři veřejného souborového systému. V závislosti na nastavení souborového systému tvého zařízení, může uložení databáze ve veřejném souborovém systému ušetřit část vnitřní paměti. Může to však mít vliv na výkon a c:geo nebude s databází pracovat, pokud bude externí souborový systém nedostupný nebo pokud bude soubor databáze odstraněn.</string>
     <string name="init_dbonsdcard">Na úložišti uživatele</string>
     <string name="init_dbmove_dbmove">Přesun databáze</string>
-    <string name="init_dbmove_running">Přesouvání databáze</string>
+    <string name="init_dbmove_running">Přesun databáze</string>
     <string name="init_dbmove_success">Databáze úspěšně přesunuta.</string>
     <string name="init_dbmove_failed">Přesun databáze selhal</string>
     <string name="init_datadirmove_datadirmove">Přesouvání adresáře dat keší</string>
@@ -915,7 +908,7 @@
     <string name="cache_dialog_loading_details_status_gcvote">Načítání GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Ukládání do mezipaměti</string>
     <string name="cache_dialog_loading_details_status_render">Vykreslování pohledu</string>
-    <string name="cache_dialog_offline_save_title">Offline použití</string>
+    <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">Ukládání keše pro offline použití…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňování keše z paměti zařízení…</string>
@@ -940,7 +933,7 @@
     <string name="cache_menu_sygic_walk">Sygic (chůze)</string>
     <string name="cache_menu_sygic_drive">Sygic (řízení)</string>
     <string name="cache_menu_radar">Radar</string>
-    <string name="cache_menu_map">Zobrazit na mapě</string>
+    <string name="cache_menu_map">Mapa</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -967,14 +960,14 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace keše znamená, že tato keš nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak keš znovu zobrazit je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uloženo</string>
+    <string name="cache_stored">Uložené</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_never_found">Nikdy nenalezena</string>
     <string name="cache_found_last_30_days">Nalezeno za posledních 30 dní</string>
     <string name="cache_status_archived">Archivována</string>
-    <string name="cache_status_disabled">Deaktivována</string>
+    <string name="cache_status_disabled">Deaktivováno</string>
     <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
     <string name="cache_status_not_premium">Přístupná všem uživatelům</string>
@@ -1000,8 +993,8 @@
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
     <string name="cache_rating_of">z</string>
-    <string name="cache_favorite">Oblíbená</string>
-    <string name="cache_owner">Zakladatel</string>
+    <string name="cache_favorite">Oblíbené</string>
+    <string name="cache_owner">Vlastník</string>
     <string name="cache_hidden">Skryta</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
@@ -1009,7 +1002,7 @@
     <string name="cache_coordinates">Souřadnice</string>
     <string name="cache_calculator">Kalkulačka</string>
     <string name="cache_coordinates_original">Původní souřadnice</string>
-    <string name="cache_spoiler_images_title">Obrázky s nápovědou</string>
+    <string name="cache_spoiler_images_title">Obrázky</string>
     <string name="cache_log_types">Typy zápisů</string>
     <string name="cache_coordinates_no">Tato keš nemá souřadnice.</string>
     <string name="cache_clear_history">Vymazat historii</string>
@@ -1107,7 +1100,7 @@
     <string name="waypoint_added">Trasový bod přidán</string>
     <string name="waypoint_note">Poznámka</string>
     <string name="waypoint_user_note">Osobní poznámka</string>
-    <string name="waypoint_visited">Navštíven</string>
+    <string name="waypoint_visited">Navštíveno</string>
     <string name="waypoint_set_visited">Trasový bod nastaven jako navštívený</string>
     <string name="waypoint_unset_visited">Trasový bod nastaven jako nenavštívený</string>
     <string name="waypoint_save">Uložit</string>
@@ -1176,7 +1169,7 @@
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
     <string name="search_address_button">Hledat podle adresy</string>
-    <string name="search_geo">Geokód</string>
+    <string name="search_geo">GC kód</string>
     <string name="search_geo_button">Hledat podle geokódu</string>
     <string name="search_kw">Klíčová slova</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
@@ -1215,9 +1208,9 @@
     <string name="trackable_spotted_at_user">V rukou</string>
     <string name="trackable_spotted_unknown_location">Neznámé umístění</string>
     <string name="trackable_spotted_owner">V rukou vlastníka</string>
-    <string name="trackable_spotted_archived">Archivován</string>
-    <string name="trackable_origin">Původ</string>
-    <string name="trackable_unknown">Neznámý</string>
+    <string name="trackable_spotted_archived">Archivována</string>
+    <string name="trackable_origin">Původ keše</string>
+    <string name="trackable_unknown">Neznámá</string>
     <string name="trackable_released">Vypuštění</string>
     <string name="trackable_distance">Nacestoval</string>
     <string name="trackable_touch">Dotyk</string>
@@ -1242,12 +1235,12 @@
     <string name="navigation">Navigace</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Použita pouze GPS</string>
-    <string name="use_compass">Použita GPS a kompas</string>
+    <string name="use_compass">Všechny senzory využity</string>
     <string name="destination_select">Vyber cíl</string>
     <string name="navigation_direct_navigation">Přímá navigace</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
-    <string name="device_heading_label">Název zařízení:</string>
-    <string name="device_orientation">Orientace zařízení</string>
+    <string name="device_heading_label">Zařízení:</string>
+    <string name="device_orientation">Orientace</string>
     <string name="device_orientation_label">Orientace:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Neznámá</string>
