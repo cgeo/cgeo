@@ -25,6 +25,6 @@ Logs can be posted online or stored offline for later submission or exported via
 Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
 
 If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+如果您仍然有問題，請以電子郵件聯絡我們。
 
 If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
