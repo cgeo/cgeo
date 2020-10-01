@@ -116,9 +116,11 @@
     <string name="log_yesterday">Vakar</string>
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Nuotrauka</string>
+    <string name="log_images">Nuotraukos</string>
     <string name="log_image_attach">Pridėti nuotrauką</string>
     <string name="log_image_stored">Esamą</string>
     <string name="log_image_camera">Naują</string>
+    <string name="log_image_delete">Ištrinti</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Šis lobiautojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
     <string name="log_image_scale_option_noscaling">Nekeisti dydžio</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Nuotrauka</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Išversti į %s</string>
     <string name="translate_to_english">Išversti į anglų</string>
@@ -1150,6 +1153,7 @@
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nežinomas</string>
     <!-- license -->
     <string name="license">Licencija</string>
     <string name="license_show">Rodyti licenciją</string>
