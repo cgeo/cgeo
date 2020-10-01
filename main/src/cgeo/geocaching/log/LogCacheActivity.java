@@ -402,7 +402,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         final EditText logPasswordView = LogCacheActivity.this.findViewById(R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
 
-        CollectionStream.of(trackables).forEach(tl -> initializeTrackableAction(tl, null));
+        //force copy due to #9101
+        CollectionStream.of(trackables, true).forEach(tl -> initializeTrackableAction(tl, null));
     }
 
     private void clearLog() {
