@@ -142,7 +142,7 @@
     <string name="log_problem_missing_label">Η κρύπτη πιθανόν να χάθηκε</string>
     <string name="log_problem_missing_text">Ο παίκτης ανέφερε ότι η κρύπτη πιθανόν να χάθηκε.</string>
     <string name="log_problem_other_label">Άλλο</string>
-    <string name="log_problem_other_text">Ο παίκτης ανέφερε ότι υπάρχει πρόβλημα με τη κρύπτη.</string>
+    <string name="log_problem_other_text">O παίκτης ανέφερε ότι υπάρχει πρόβλημα με τη κρύπτη.</string>
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
+    <string name="err_captcha">Απαιτείται Captcha. Παρακαλώ ανατρέξτε στις<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>για οδηγίες.</string>
     <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_su">Η επικοινωνία με το Geocaching.su απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
@@ -594,14 +595,12 @@
     <string name="init_backup">Αποθηκευμένες κρύπτες / σημεία</string>
     <string name="init_backup_backup">Αντίγραφα ασφαλείας</string>
     <string name="init_backup_running">Δημιουργία αντιγράφων ασφαλείας της βάσης δεδομένων των κρυπτών…</string>
-    <string name="init_backup_note">Παρακαλούμε σημειώστε ότι αυτή η λειτουργία θα αποθηκεύσει/επαναφέρει μόνο τα δεδομένα κρυπτών και σημείων, όχι όμως φωτογραφιών της κρύπτης ή ρυθμίσεων.</string>
     <string name="init_backup_restore">Επαναφορά</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
     <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζονται αντίγραφα ασφαλείας.</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
     <string name="backup_confirm_overwrite">Θέλετε να αντικαταστήσετε το υπάρχον αντίγραφο ασφαλείας του %s;</string>
-    <string name="restore_confirm_overwrite">Θέλετε να αντικαταστήσετε το %s στη συσκευή σας με το αντίγραφο ασφαλείας;</string>
     <string name="init_restore_success">Η επαναφορά ολοκληρώθηκε.</string>
     <string name="init_restore_failed_dbrecreated">Αποτυχία επαναφοράς: κατεστραμμένο αρχείο αντιγράφου, υποχρεωτική επαναδημιουργία της βάσης δεδομένων.</string>
     <string name="init_restore_failed">Η επαναφορά απέτυχε.</string>
@@ -612,17 +611,11 @@
     <string name="init_restore_version_error">Μη αναμενόμενη διαμόρφωση - δεν μπορεί να γίνει επαναφορά της βάσης δεδομένων.\n\nΗ αναμενόμενη έκδοση είναι η %1$d,\nτο αντίγραφο ασφαλείας είναι έκδοσης %2$d</string>
     <string name="settings_title_backup">Αντίγραφα ασφαλείας / Επαναφορά</string>
     <string name="settings_summary_backup">Εκτέλεση δημιουργίας αντιγράφων ασφαλείας και επαναφορά δεδομένων κρυπτών/σημείων και ρυθμίσεων.</string>
-    <string name="init_backup_settings">Αντίγραφο ασφαλείας ρυθμίσεων</string>
-    <string name="init_backup_settings_backup_light">Αντίγραφο ασφαλείας ρυθμίσεων (χωρίς δεδομένα λογαριασμού)</string>
-    <string name="init_backup_settings_backup_full">Αντίγραφο ασφαλείας ρυθμίσεων (πλήρες)</string>
     <string name="init_backup_settings_backup_full_confirm">Θέλετε να αποθηκεύσετε ευαίσθητα δεδομένα του λογαριασμού σας; Αυτά μπορεί να είναι ορατά σε άλλες εφαρμογές.</string>
     <string name="settings_savingerror">Ρυθμίσεις αποθήκευσης σφαλμάτων</string>
     <string name="settings_saved">Επιτυχής αποθήκευση ρυθμίσεων σε:</string>
     <string name="init_backup_settings_restore">Επαναφορά ρυθμίσεων</string>
-    <string name="init_backup_settings_restore_confirm">Θέλετε να αντικαταστήσετε τις υπάρχουσες ρυθμίσεις σας;</string>
-    <string name="init_backup_settings_restore_no">Η δημιουργία αντιγράφων ασφαλείας των ρυθμίσεων δεν είναι διαθέσιμη</string>
     <string name="settings_readingerror">Ρυθμίσεις ανάγνωσης σφαλμάτων</string>
-    <string name="settings_restored">Έγινε επαναφορά ρυθμίσεων</string>
     <string name="settings_restart">Το c:geo χρειάζεται επανεκκίνηση για την ενεργοποίηση των νέων ρυθμίσεων</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να κατεβάσετε χάρτες από το Mapsforge ή ακόμη και να δημιουργήσετε δικούς σας από τα δεδομένα των OSM. Χρειάζεται πρώτα να επιλέξετε τον κατάλογο των εκτός χρήσης χαρτών για να λάβετε υποστήριξη για χάρτες εκτός σύνδεσης.</string>
@@ -729,7 +722,7 @@
     <string name="feature_watch_list">Λίστα παρακολούθησης</string>
     <string name="feature_own_coordinates">Αποθήκευση των τροποποιημένων συντεταγμένων</string>
     <string name="feature_search_keyword">Αναζήτηση με λέξη-κλειδί</string>
-    <string name="feature_search_live_map">Live χάρτης</string>
+    <string name="feature_search_live_map">Live Χάρτης</string>
     <string name="feature_search_center">Αναζήτηση ανά θέση</string>
     <string name="feature_search_geocode">Αναζήτηση ανά γεωκωδικό</string>
     <string name="feature_search_owner">Αναζήτηση ανά ιδιοκτήτη</string>
@@ -771,7 +764,7 @@
     <string name="sendToCgeo_download_fail">Το c:geo απέτυχε να κατεβάσει κρύπτες. Είτε δεν υπάρχει σύνδεση είτε το send2cgeo δεν λειτουργεί.</string>
     <string name="sendToCgeo_no_registration">Το c:geo απέτυχε να κατεβάσει κρύπτες. Η εγγραφή για το send2cgeo έληξε. Παρακαλούμε να εγγραφείτε στις ρυθμίσεις.</string>
     <!-- auth generic -->
-    <string name="auth_authorize">Εξουσιοδοτήστε το c:geo</string>
+    <string name="auth_authorize">Πιστοποίηση του c:geo</string>
     <string name="auth_check">Έλεγχος διαπίστευσης</string>
     <string name="auth_check_again">Επανέλεγχος διαπίστευσης</string>
     <string name="auth_start">Έναρξη εξουσιοδότησης</string>
@@ -786,17 +779,17 @@
     <string name="auth_forget_title">Εγκαταλείπετε τη διαπίστευση;</string>
     <string name="auth_forget_message">Θα αποσυνδεθείτε από την υπηρεσία αυτή. Τα τρέχοντα αποθηκευμένα διαπιστευτήριά σας θα χαθούν.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
+    <string name="auth_credentials_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσετε πρόσβαση σε %s.</string>
     <string name="auth_credentials_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «Έλεγχος ταυτότητας», θα ξεκινήσει η διαδικασία που θα σας συνδέσει με το %s και θα επικυρώσει τις πιστοποιήσεις σας. Αυτό είναι όλο.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
+    <string name="auth_token_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσετε πρόσβαση σε %s.</string>
     <string name="auth_token_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «εξουσιοδοτήστε το c:geo», θα ξεκινήσει η διαδικασία. Με αυτή θα συνδεθείτε με το %s και θα ανακτήσετε έναν κωδικό πιστοποίησης. Αυτό είναι όλο.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">Το c:geo είναι τώρα εξουσιοδοτημένο να δημοσιεύει στο Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">Το c:geo είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">Το c:geo τώρα είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με το %s.</string>
+    <string name="auth_dialog_completed_geokrety">Το c:geo είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με %s.</string>
     <string name="err_auth_geokrety_bad_password">Το όνομα χρήστη ή ο κωδικός πρόσβασης δεν είναι έγκυρα.</string>
     <string name="err_auth_geokrety_unknown">%1$s επέστρεψε: %2$s.</string>
     <!-- cache -->
@@ -810,9 +803,10 @@
         <item quantity="other">%1$d ημέρες απομένουν</item>
     </plurals>
     <string name="last_day_available">τελευταία διαθέσιμη ημέρα</string>
-    <string name="cache_offline">Εκτός σύνδεσης</string>
+    <string name="cache_offline">Χωρίς σύνδεση</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
     <string name="cache_offline_drop">Διαγραφή</string>
+    <string name="cache_delete_userdefined_waypoints_note">Σημείωση: Έχετε ενεργοποιήμενη την επιλογή \"σημεία ενδιαφέροντος από τις σημειωσεις\". Εάν το c:geo αναγνωρίσει συντεταγμένες στις προσωπικές σημειώσεις, θα δημιουργήσει αυτόματα σημεία ενδιαφέροντος από αυτές. Μπορείτε να απενεργοποιήσετε την επιλογή αυτή από την επεξεργασία της προσωπικής σημείωσης.</string>
     <string name="cache_offline_store">Αποθήκευση</string>
     <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
@@ -894,9 +888,9 @@
     <string name="cache_dialog_loading_details_status_gcvote">Φόρτωση του GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Προσωρινή αποθήκευση δεδομένων</string>
     <string name="cache_dialog_loading_details_status_render">Εμφάνιση σελίδας</string>
-    <string name="cache_dialog_offline_save_title">Εκτός σύνδεσης</string>
+    <string name="cache_dialog_offline_save_title">Χωρίς σύνδεση</string>
     <string name="cache_dialog_offline_save_message">Αποθηκεύει την κρύπτη για χρήση εκτός σύνδεσης…</string>
-    <string name="cache_dialog_offline_drop_title">Εκτός σύνδεσης</string>
+    <string name="cache_dialog_offline_drop_title">Χωρίς σύνδεση</string>
     <string name="cache_dialog_offline_drop_message">Αφαιρείται η κρύπτη από τη μνήμη της συσκευής…</string>
     <string name="cache_dialog_refresh_title">Ανανέωση</string>
     <string name="cache_dialog_refresh_message">Επαναφορτώνει τις λεπτομέρειες της κρύπτης…</string>
@@ -946,18 +940,18 @@
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
-    <string name="cache_stored">Αποθηκευμένη</string>
+    <string name="cache_stored">Αποθηκευμένα</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
     <string name="cache_never_found">Δεν βρέθηκε ποτέ</string>
     <string name="cache_found_last_30_days">Βρέθηκαν τις τελευταίες 30 ημέρες</string>
-    <string name="cache_status_archived">Αρχειοθετημένη</string>
-    <string name="cache_status_disabled">Απενεργοποιημένη</string>
+    <string name="cache_status_archived">Αρχειοθετημένο</string>
+    <string name="cache_status_disabled">Απενεργοποιημένο</string>
     <string name="cache_status_active">Ενεργή</string>
     <string name="cache_status_premium">Μόνο για Premium μέλη</string>
     <string name="cache_status_not_premium">Πρόσβαση από όλα τα μέλη</string>
-    <string name="cache_status_stored">Αποθηκευμένες</string>
+    <string name="cache_status_stored">Αποθηκευμένα</string>
     <string name="cache_status_not_stored">Μη αποθηκευμένες</string>
     <string name="cache_status_stored_lasteighthours">Μέσα στις τελευταίες οκτώ ώρες</string>
     <string name="cache_status_stored_lasttwentyfourhours">Μέσα στις τελευταίες εικοσιτέσερεις ώρες</string>
@@ -987,8 +981,8 @@
     <string name="cache_location_country">Χώρα</string>
     <string name="cache_coordinates">Συντεταγμένες</string>
     <string name="cache_calculator">Αριθμομηχανή</string>
-    <string name="cache_coordinates_original">Αρχικές Συντεταγμένες</string>
-    <string name="cache_spoiler_images_title">Εικόνες spoiler</string>
+    <string name="cache_coordinates_original">Αρχικές συντεταγμένες</string>
+    <string name="cache_spoiler_images_title">Βοηθητικές εικόνες</string>
     <string name="cache_log_types">Τύποι αρχείων καταγραφής</string>
     <string name="cache_coordinates_no">Αυτή η κρύπτη δεν έχει συντεταγμένες.</string>
     <string name="cache_clear_history">Εκκαθάριση ιστορικού</string>
@@ -1080,7 +1074,7 @@
     <string name="waypoint_clear_coordinates">Διαγραφή συντεταγμένων</string>
     <string name="waypoint_delete">Διαγραφή</string>
     <string name="waypoint_edit_title">Επεξεργασία σημείου αναφοράς</string>
-    <string name="waypoint_add_title">Προσθήκη σημείου αναφοράς</string>
+    <string name="waypoint_add_title">Προσθήκη Σημείου Αναφοράς</string>
     <string name="waypoint_added">Προστέθηκε ενδιάμεσο σημείο</string>
     <string name="waypoint_note">Σημείωση</string>
     <string name="waypoint_user_note">Σημείωση χρήστη</string>
@@ -1153,7 +1147,7 @@
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
     <string name="search_address">Διεύθυνση</string>
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
-    <string name="search_geo">Γεωκωδικός</string>
+    <string name="search_geo">Κωδικός κρύπτης</string>
     <string name="search_geo_button">Αναζήτηση με γεωκωδικό</string>
     <string name="search_kw">Λέξεις-κλειδιά</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
@@ -1219,15 +1213,15 @@
     <string name="navigation">Πλοήγηση</string>
     <string name="compass_title">Πυξίδα</string>
     <string name="use_gps">Χρήση μόνο GPS</string>
-    <string name="use_compass">Χρήση GPS και μαγνητικής πυξίδας</string>
+    <string name="use_compass">Χρήση όλων των αισθητήρων</string>
     <string name="destination_select">Επιλογή προορισμού</string>
     <string name="navigation_direct_navigation">Άμεση πλοήγηση</string>
     <string name="osmand_marker_cgeo">Επιλογέας από c:geo</string>
-    <string name="device_heading_label">Κατεύθυνση συσκευής:</string>
-    <string name="device_orientation">Προσανατολισμός συσκευής</string>
+    <string name="device_heading_label">Συσκευή:</string>
+    <string name="device_orientation">Προσανατολισμός</string>
     <string name="device_orientation_label">Προσανατολισμός:</string>
     <!-- device orientation types -->
-    <string name="do_unknown">Άγνωστος</string>
+    <string name="do_unknown">Άγνωστo</string>
     <string name="do_auto">Αυτόματα</string>
     <string name="do_flat">Επίπεδο</string>
     <string name="do_upright">Κατακόρυφος</string>
