@@ -1225,12 +1225,9 @@
     <string name="navigation">Navegació</string>
     <string name="compass_title">Brúixola</string>
     <string name="use_gps">Utilitzar només el GPS</string>
-    <string name="use_compass">Utilitzar el GPS i la brúixola magnètica</string>
     <string name="destination_select">Tria destinació</string>
     <string name="navigation_direct_navigation">Navegació directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
-    <string name="device_heading_label">Capçalera del dispositiu:</string>
-    <string name="device_orientation">Orientació del dispositiu</string>
     <string name="device_orientation_label">Orientació:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconegut</string>
