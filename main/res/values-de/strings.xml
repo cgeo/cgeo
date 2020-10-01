@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
+    <string name="err_captcha">Captcha erforderlich. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> für weitere Hilfe.</string>
     <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
     <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden (Server oder Verbindung inaktiv?).</string>
@@ -609,7 +610,7 @@
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar vom</string>
-    <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
+    <string name="init_backup_last_no">Keine Sicherungsdatei gefunden.</string>
     <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nBackup hat Version %2$d</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
@@ -1224,12 +1225,12 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Kompass</string>
     <string name="use_gps">Nur GPS</string>
-    <string name="use_compass">GPS und Magnetkompass</string>
+    <string name="use_compass">Alle Sensoren</string>
     <string name="destination_select">Ziel auswählen</string>
     <string name="navigation_direct_navigation">Direkte Navigation</string>
     <string name="osmand_marker_cgeo">Markierung von c:geo</string>
-    <string name="device_heading_label">Geräterichtung:</string>
-    <string name="device_orientation">Geräteausrichtung</string>
+    <string name="device_heading_label">Gerät:</string>
+    <string name="device_orientation">Ausrichtung</string>
     <string name="device_orientation_label">Ausrichtung:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Unbekannt</string>
