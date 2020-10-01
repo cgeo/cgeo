@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
+    <string name="err_captcha">Je vyžadována Captcha. Pomoc najdete v našem <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_su">Nelze se připojit na Geocaching.su. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
@@ -1242,12 +1243,12 @@
     <string name="navigation">Navigace</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Použita pouze GPS</string>
-    <string name="use_compass">Použita GPS a kompas</string>
+    <string name="use_compass">Všechny senzory využity</string>
     <string name="destination_select">Vyber cíl</string>
     <string name="navigation_direct_navigation">Přímá navigace</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
-    <string name="device_heading_label">Název zařízení:</string>
-    <string name="device_orientation">Orientace zařízení</string>
+    <string name="device_heading_label">Zařízení:</string>
+    <string name="device_orientation">Orientace</string>
     <string name="device_orientation_label">Orientace:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Neznámá</string>
