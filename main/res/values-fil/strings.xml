@@ -469,7 +469,6 @@
     <string name="init_backup_unnecessary">Walang laman ang database, walang mga kinakailangan na backup.</string>
     <string name="init_backup_no_backup_available">Walang back-up file ang handa.</string>
     <string name="backup_confirm_overwrite">Ang eksisting na backup mula sa %s ay nais mo bang i-overwrite?</string>
-    <string name="restore_confirm_overwrite">Iyo bang nais i-overwrite ang %s sa iyong aparato na may kasamang backup?</string>
     <string name="init_restore_success">Ang muling pagbabalik ay nakumpleto na.</string>
     <string name="init_restore_failed">Ang muling pagbabalik ay bigo.</string>
     <string name="init_restore_running">Ipinapanumbalik ang cache database&#8230;</string>
