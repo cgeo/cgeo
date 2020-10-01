@@ -25,6 +25,6 @@ Logy můžete přidávat online anebo uložit offline a odeslat je později, př
 Vyhledávání a objevování trasovatelných předmětů, spravování inventářů trasovatelných předmětů a vkládání trasovatelných předmětů při přidávání logů ke keškám.
 
 Pokud máte problémy s instalací anebo používáním aplikace c:geo, nejprve se prosím podívejte na nejčastější otázky (https://faq.cgeo.org), nebo si projděte návod na používání https://manual.cgeo.org).
-Pokud problémy přetrvávají, kontaktujte e-mailem naší podporu.
+Pokud problémy přetrvávají, obraťte se e-mailem na naši podporu.
 
 Pokud potřebujete vědět, proč aplikace c:geo vyžaduje požadovaná oprávnění, vysvětlení najdete na https://www.cgeo.org.
