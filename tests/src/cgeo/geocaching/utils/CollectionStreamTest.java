@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,6 +29,16 @@ public class CollectionStreamTest {
         assertThat(CollectionStream.of((Collection<Object>) null).toJoinedString(",")).isEqualTo("");
         assertThat(CollectionStream.of(new Integer[]{1, 2}).map(null).filter(null).toJoinedString(",")).isEqualTo("1,2");
         assertThat(CollectionStream.of(new Integer[]{1, 2}).toJoinedString(null)).isEqualTo("12");
+    }
+
+    @Test
+    public void testReadOnModifiedCollections() {
+        final List<String> list = new ArrayList<>(Arrays.asList(new String[]{"one", "two"}));
+        final CollectionStream<String> csWithCopy = CollectionStream.of(list, true);
+        final CollectionStream<String> csWithoutCopy = CollectionStream.of(list, false);
+        list.add("three");
+        assertThat(csWithCopy.toJoinedString(",")).isEqualTo("one,two");
+        assertThat(csWithoutCopy.toJoinedString(",")).isEqualTo("one,two,three");
     }
 
     @Test

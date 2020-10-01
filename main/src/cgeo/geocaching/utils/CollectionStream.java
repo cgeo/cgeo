@@ -3,6 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 
+import androidx.annotation.NonNull;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,7 +37,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unchecked")
 public class CollectionStream<T> {
 
-    private final Collection<?> originalCollection;
+    private final Collection<Object> originalCollection;
     //LinkedList can be used most efficiently for 'map' and 'filter' methods
     private LinkedList<Object> collection;
 
@@ -43,18 +45,32 @@ public class CollectionStream<T> {
      * creates CollectionStream with a Collection as its source
      */
     public static <TT> CollectionStream<TT> of(final Collection<TT> coll) {
-        return new CollectionStream<>(coll);
+        return of(coll, false);
+    }
+
+    /**
+     * creates CollectionStream with a Collection as its source
+     * if forceCopy is true, then given coll is copied even if only read operations are performed on it.
+     */
+    public static <TT> CollectionStream<TT> of(final Collection<TT> coll, final boolean forceCopy) {
+        return new CollectionStream<>((Collection<Object>) coll, forceCopy);
     }
 
     /**
      * creates CollectionStream with an array as its source
+     *
      */
     public static <TT> CollectionStream<TT> of(final TT[] coll) {
-        return new CollectionStream<>(Arrays.asList(coll));
+        return new CollectionStream<>(Arrays.asList(coll), false);
     }
 
-    private CollectionStream(final Collection<?> coll) {
-        this.originalCollection = coll == null ? Collections.emptyList() : coll;
+    private CollectionStream(final Collection<Object> coll, final boolean forceCopy) {
+        if (forceCopy) {
+            this.originalCollection = Collections.emptyList(); // do not store link to original collection
+            this.collection = new LinkedList<>(coll == null ? Collections.emptyList() : coll);
+        } else {
+            this.originalCollection = coll == null ? Collections.emptyList() : coll;
+        }
     }
 
     /**
@@ -102,7 +118,6 @@ public class CollectionStream<T> {
         }
         return this;
     }
-
     /**
      * mimics {@link java.util.stream.Collectors#joining()}
      */
@@ -125,7 +140,6 @@ public class CollectionStream<T> {
         }
         return sb.toString();
     }
-
     /**
      * mimics {@link Collectors#toList()}
      */
@@ -176,10 +190,15 @@ public class CollectionStream<T> {
         }
     }
 
+    @NonNull
     private Collection<Object> getCollectionForRead() {
-        return this.collection == null ? (Collection<Object>) this.originalCollection : this.collection;
+        if (this.collection != null) {
+            return this.collection;
+        }
+        return this.originalCollection == null ? Collections.emptyList() : this.originalCollection;
     }
 
+    @NonNull
     private LinkedList<Object> getCollectionForWrite() {
         if (this.collection == null) {
             this.collection = new LinkedList<>(this.originalCollection);
