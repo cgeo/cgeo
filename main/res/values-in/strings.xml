@@ -73,8 +73,8 @@
     <string name="log_tb_changeall">Ubah semua</string>
     <string name="log_tb_grabbed">Meraih pada suatu tempat</string>
     <string name="log_tb_note">Catatan</string>
-    <string name="log_tb_discovered">Ditentukan</string>
-    <string name="log_tb_archived">Arsip</string>
+    <string name="log_tb_discovered">Ditemukan</string>
+    <string name="log_tb_archived">Diarsipkan</string>
     <string name="log_save">Simpan offline</string>
     <string name="log_saving">Mengirim catatan&#8230;</string>
     <string name="log_posting_log">Memposting log&#8230;</string>
@@ -103,9 +103,11 @@
     <string name="log_yesterday">Kemarin</string>
     <string name="log_smilies">Smile</string>
     <string name="log_image">Gambar</string>
+    <string name="log_images">Gambar</string>
     <string name="log_image_attach">Lampirkan Gambar</string>
     <string name="log_image_stored">Telah ada</string>
     <string name="log_image_camera">Baru</string>
+    <string name="log_image_delete">Hapus</string>
     <string name="log_image_caption">Keterangan</string>
     <string name="log_image_description">Penjelasan</string>
     <string name="log_image_scale">Penskalaan</string>
@@ -114,6 +116,9 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
+    <string name="log_problem_needs_maintenance_label">Kebutuhan Pemeliharaan</string>
+    <string name="log_problem_other_label">Lain</string>
+    <string name="log_image_titleprefix">Gambar</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
@@ -235,7 +240,7 @@
     <!-- main screen -->
     <string name="live_map_button">Peta online</string>
     <string name="caches_nearby_button">Dekat</string>
-    <string name="advanced_search_button">Cari</string>
+    <string name="advanced_search_button">Pencarian</string>
     <string name="stored_caches_button">Disimpan</string>
     <string name="any_button">Pergi ke</string>
     <string name="unknown_scan">Tidak menemukan geocode apapun dalam hasil pemindaian.</string>
@@ -318,7 +323,7 @@
     <string name="list_menu_import">Impor</string>
     <string name="list_title">Pilih sebuah daftar</string>
     <string name="lists_title">Pilih daftarnya</string>
-    <string name="list_inbox">Penyimpanan</string>
+    <string name="list_inbox">Disimpan</string>
     <string name="list_all_lists">Semua cache</string>
     <string name="list_dialog_create_title">Daftar baru</string>
     <string name="list_dialog_create">Membuat</string>
@@ -393,7 +398,7 @@
     <string name="settings_activate_oc_us">Aktifkan</string>
     <string name="init_summary_oc_us">Muat cache dari opencaching.us</string>
     <string name="init_oc_us_description">Otorisasi c:geo dengan opencaching.kami untuk mencari cache dan akses/filter anda menemukan cache.</string>
-    <string name="settings_activate_oc_ro">Mengaktifkan</string>
+    <string name="settings_activate_oc_ro">Aktifkan</string>
     <string name="init_summary_oc_ro">Muat cache dari opencaching.ro</string>
     <string name="init_oc_ro_description">Mengizinkan c:geo dengan opencaching.ro untuk mencari cache dan akses/filter anda menemukan cache.</string>
     <string name="settings_activate_oc_uk">Aktifkan</string>
@@ -424,7 +429,10 @@
     <string name="init_signature_template_number">Nomor</string>
     <string name="init_signature_template_owner">Pemilik</string>
     <string name="init_signature_template_name">Nama</string>
+    <string name="init_signature_template_difficulty">Kesulitan</string>
+    <string name="init_signature_template_terrain">Medan</string>
     <string name="init_signature_template_log">Teks log</string>
+    <string name="init_signature_template_size">Ukuran</string>
     <string name="init_ratingwanted">Rating GCvote</string>
     <string name="init_summary_ratingwanted">Muat penilaian cache dari GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Tampilan Teman/Milik Sendiri</string>
@@ -462,7 +470,6 @@
     <string name="init_backup_unnecessary">Database kosong, tidak perlu cadangan.</string>
     <string name="init_backup_no_backup_available">Tidak ada file cadangan yang tersedia.</string>
     <string name="backup_confirm_overwrite">Apakah anda ingin menimpa data cadangan yang ada dari %s?</string>
-    <string name="restore_confirm_overwrite">Apakah anda ingin menimpa %s pada perangkat anda dengan data cadangan?</string>
     <string name="init_restore_success">Pemulihan selesai.</string>
     <string name="init_restore_failed">Pemulihan telah gagal.</string>
     <string name="init_restore_running">Pemulihan cache database&#8230;</string>
@@ -501,11 +508,11 @@
     <string name="init_dbonsdcard_note">Anda bisa menyimpan database c:geo baik secara sistem internal maupun dalam direktori penyimpanan pengguna anda. Setelah itu pada penyimpanan pengguna mungkin dapat membebaskan beberapa memori, namun anda akan kehilangan sedikit kinerja dan c:geo tidak akan berfungsi jika penyimpanan tidak dapat diakses atau anda telah menghapus file database.</string>
     <string name="init_dbonsdcard">Pada penyimpanan pengguna</string>
     <string name="init_dbmove_dbmove">Memindahkan Basisdata</string>
-    <string name="init_dbmove_running">Memindahkan basisdata</string>
+    <string name="init_dbmove_running">Memindahkan Basisdata</string>
     <string name="init_dbmove_success">Berhasil memindahkan database.</string>
     <string name="init_dbmove_failed">Gagal memindahkan database</string>
     <string name="init_datadirmove_datadirmove">Memindahkan direktori data Geocache</string>
-    <string name="init_datadirmove_running">Data Geocache direktori bergerak</string>
+    <string name="init_datadirmove_running">Memindahkan direktori data Geocache</string>
     <string name="init_datadirmove_success">Berhasil memindahkan direktori data Geocache.</string>
     <string name="init_datadirmove_failed">Gagal memindahkan sebagian atau seluruhnya direktori data geocache. Silahkan periksa direktori lama dan baru dan pindahkan dengan tangan jika perlu.</string>
     <string name="init_plain_logs">Log polos</string>
@@ -584,7 +591,7 @@
     <string name="auth_credentials_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
     <string name="auth_credentials_explain_long">Mengisi kredensial anda dan menekan tombol \"periksa otentikasi\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan memvalidasi kredensial anda. Itu saja.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">Proses berikut akan memungkinkan <b>c:geo</b> untuk mengakses %s.</string>
+    <string name="auth_token_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
     <string name="auth_token_explain_long">Mengisi kredensial anda dan menekan tombol \"mengesahkan c:geo\" tombol akan memulai proses. Proses ini akan terhubung ke %s dan mengambil token otentikasi. Itu semua.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo sekarang resmi untuk posting di twitter.</string>
@@ -599,7 +606,7 @@
     <string name="last_day_available">tersedia dihari terakhir</string>
     <string name="cache_offline">Tidak aktif</string>
     <string name="cache_offline_refresh">Segarkan</string>
-    <string name="cache_offline_drop">Hapus</string>
+    <string name="cache_offline_drop">Menghapus</string>
     <string name="cache_offline_store">Toko</string>
     <string name="cache_offline_stored">Disimpan dalam perangkat</string>
     <string name="cache_offline_not_ready">Tidak tersedia secara offline</string>
@@ -627,7 +634,7 @@
     <string name="cache_personal_note_upload_done">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_error">Gagal mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_cancelled">Batalkan pengunggahan catatan pribadi</string>
-    <string name="cache_description">Deskripsi</string>
+    <string name="cache_description">Penjelasan</string>
     <string name="cache_description_table_note">Format tabel berisi deskripsi yang mungkin perlu dilihat pada %s harus dilihat dengan benar.</string>
     <string name="cache_watchlist_on">Cache ini ada pada daftar pantauan anda.</string>
     <string name="cache_watchlist_on_extra">Cache ini ada pada daftar pantauan anda (Pengamat: %1d).</string>
@@ -637,7 +644,6 @@
     <string name="cache_favpoint_not_on">Cache ini tidak termasuk favorit anda.</string>
     <string name="cache_list_select_last">Pilihan terakhir</string>
     <string name="cache_images">Gambar</string>
-    <string name="cache_waypoints">Titik arah</string>
     <string name="cache_waypoints_add">Tambahkan titik arah</string>
     <string name="cache_hint">Petunjuk</string>
     <string name="cache_hint_not_available">Tidak ada petunjuk yang tersedia</string>
@@ -652,13 +658,15 @@
     <string name="cache_dialog_loading_details_status_gcvote">Memuat GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Data caching</string>
     <string name="cache_dialog_loading_details_status_render">Tampilan render</string>
+    <string name="cache_dialog_offline_save_title">Tidak aktif</string>
     <string name="cache_dialog_offline_save_message">Simpan cache untuk penggunaan offline&#8230;</string>
+    <string name="cache_dialog_offline_drop_title">Tidak aktif</string>
     <string name="cache_dialog_offline_drop_message">Menghapus cache dari memori perangkat&#8230;</string>
-    <string name="cache_dialog_refresh_title">Menyegarkan</string>
+    <string name="cache_dialog_refresh_title">Segarkan</string>
     <string name="cache_dialog_refresh_message">Memuat ulang rincian cache&#8230;</string>
     <string name="cache_dialog_watchlist_add_title">Daftar Pantauan</string>
     <string name="cache_dialog_watchlist_add_message">Menambahkan cache ke daftar pantauan anda&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">Daftar tontonan</string>
+    <string name="cache_dialog_watchlist_remove_title">Daftar Pantauan</string>
     <string name="cache_dialog_watchlist_remove_message">Menghapus cache dari daftar pantauan anda&#8230;</string>
     <string name="cache_dialog_favorite_add_title">Favorit</string>
     <string name="cache_dialog_favorite_add_message">Menambahkan cache ke favorit anda&#8230;</string>
@@ -685,7 +693,7 @@
     <string name="cache_menu_event">Tambah ke kalender</string>
     <string name="cache_menu_extract_waypoints">Jalur titik arah</string>
     <string name="cache_menu_details">Rincian</string>
-    <string name="cache_menu_refresh">Menyegarkan</string>
+    <string name="cache_menu_refresh">Segarkan</string>
     <string name="cache_menu_share">Bagikan cache</string>
     <string name="cache_menu_move_list">Pindahkan ke daftar yang berbeda</string>
     <string name="cache_menu_copy_list">Salin ke daftar yang berbeda</string>
@@ -696,13 +704,15 @@
     <string name="cache_menu_ignore">Mengabaikan cache</string>
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
+    <string name="cache_stored">Disimpan</string>
     <string name="cache_status_offline_log">Log disimpan</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_never_found">Tidak Pernah Ditemukan</string>
     <string name="cache_found_last_30_days">Berdasarkan 30 hari terakhir</string>
     <string name="cache_status_archived">Diarsipkan</string>
-    <string name="cache_status_disabled">Cacat</string>
+    <string name="cache_status_disabled">Telah di Nonaktifkan</string>
+    <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Anggota Premium saja</string>
     <string name="cache_status_not_premium">Semua Akses Anggota</string>
     <string name="cache_status_stored">Disimpan</string>
@@ -725,7 +735,7 @@
     <string name="cache_coordinates">Koordinat</string>
     <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Koordinat Asli</string>
-    <string name="cache_spoiler_images_title">Gambar spoiler</string>
+    <string name="cache_spoiler_images_title">Bocoran Gambar</string>
     <string name="cache_log_types">Tipe log</string>
     <string name="cache_coordinates_no">Cache ini tidak memiliki koordinat.</string>
     <string name="cache_clear_history">Hapus riwayat</string>
@@ -786,15 +796,15 @@
     <string name="waypoint_bearing">Bearing dalam °</string>
     <string name="waypoint_distance">Jarak</string>
     <string name="waypoint_name">Nama</string>
-    <string name="waypoint_edit">Ubah</string>
+    <string name="waypoint_edit">Sunting</string>
     <string name="waypoint_copy_coordinates">Salin koordinat</string>
     <string name="waypoint_clear_coordinates">Membersihkan koordinat</string>
     <string name="waypoint_delete">Hapus</string>
     <string name="waypoint_edit_title">Mengubah waypoint</string>
-    <string name="waypoint_add_title">Tambahkan waypoint</string>
+    <string name="waypoint_add_title">Menambahkan waypoints</string>
     <string name="waypoint_note">Catatan</string>
     <string name="waypoint_user_note">Cacatan pengguna</string>
-    <string name="waypoint_visited">Telah Dikunjungi</string>
+    <string name="waypoint_visited">Dikunjungi</string>
     <string name="waypoint_save">Simpan</string>
     <string name="waypoint_cancel_edit">Batal</string>
     <string name="waypoint_loading">Memuat waypoint&#8230;</string>
@@ -821,7 +831,7 @@
     <string name="visit_tweet">Poskan ini ke kericau</string>
     <!-- map -->
     <string name="map_map">Peta</string>
-    <string name="map_live">Peta hidup</string>
+    <string name="map_live">Peta online</string>
     <string name="map_view_map">Tampilan peta</string>
     <string name="map_modes">Pengaturan peta</string>
     <string name="map_circles_show">Tampilkan lingkaran</string>
@@ -844,11 +854,11 @@
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
     <string name="search_address">Alamat</string>
     <string name="search_address_button">Cari berdasarkan alamat</string>
-    <string name="search_geo">Kode Geo</string>
+    <string name="search_geo">Kode geo</string>
     <string name="search_geo_button">Cari berdasarkan kode geo</string>
     <string name="search_kw">Kata kunci</string>
     <string name="search_kw_prefill">Kata kunci</string>
-    <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
+    <string name="search_kw_button">Cari dengan kata kunci</string>
     <string name="search_fbu">Ditemukan oleh pengguna</string>
     <string name="search_fbu_prefill">Nama pengguna</string>
     <string name="search_fbu_button">Pencarian berdasarkan nama pengguna</string>
@@ -864,7 +874,7 @@
     <string name="search_pocket_title">Kantong Pertanyaan</string>
     <string name="search_pocket_loading">Memuat daftar Pertanyaan Pocket</string>
     <!-- trackable -->
-    <string name="trackable">Bisa dilacak</string>
+    <string name="trackable">Dilacak</string>
     <string name="trackable_details_loading">Memuat rincian yang dilacak&#8230;</string>
     <string name="trackable_log_touch">Menyentuh log</string>
     <string name="trackable_browser_open">Buka di browser</string>
@@ -882,9 +892,9 @@
     <string name="trackable_spotted_at_user">Di tangan dari</string>
     <string name="trackable_spotted_unknown_location">Lokasi tidak diketahui</string>
     <string name="trackable_spotted_owner">Di tangan pemiliknya</string>
-    <string name="trackable_spotted_archived">Arsip</string>
+    <string name="trackable_spotted_archived">Diarsipkan</string>
     <string name="trackable_origin">Asal</string>
-    <string name="trackable_unknown">Tidak diketahui</string>
+    <string name="trackable_unknown">Tidak Diketahui</string>
     <string name="trackable_released">Dirilis</string>
     <string name="trackable_distance">Berpergian</string>
     <string name="trackable_touch">Menyentuh</string>
@@ -907,11 +917,11 @@
     <string name="navigation">Navigasi</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Hanya menggunakan GPS</string>
-    <string name="use_compass">GPS dan Magnetic Compass digunakan</string>
     <string name="destination_select">Pilih tujuan</string>
     <string name="navigation_direct_navigation">Navigasi langsung</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Tidak Diketahui</string>
     <!-- license -->
     <string name="license">Lisensi</string>
     <string name="license_show">Menunjukkan lisensi</string>
@@ -919,7 +929,7 @@
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Peristiwa yang lalu</string>
     <string name="helper_calendar_pastevent_question">Tanggal acara adalah di masa lalu. Tambahkan saja?</string>
-    <string name="helper_sendtocgeo_title">Kirim ke c:geo</string>
+    <string name="helper_sendtocgeo_title">Mengirim untuk c:geo</string>
     <string name="helper_contacts_title">c:geo kontak plugin</string>
     <string name="helper_contacts_description">Memungkinkan Anda untuk membuka kartu kontak (dari buku alamat Anda) langsung dari entri log, sehingga Anda dapat dengan mudah meminta bantuan kepada teman.</string>
     <string name="helper_sendtocgeo_description">Kirim ke c:geo adalah ekstensi browser <strong>untuk PC Anda</strong>. Saat browsing geocaching.com, Anda bisa mengirim cache ke smartphone Anda dengan satu klik tombol langsung di dalam browser.</string>
@@ -1274,6 +1284,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Simpan</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
