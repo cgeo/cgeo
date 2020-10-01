@@ -116,9 +116,11 @@
     <string name="log_yesterday">Včera</string>
     <string name="log_smilies">Smajlíci</string>
     <string name="log_image">Obrázok</string>
+    <string name="log_images">Obrázky</string>
     <string name="log_image_attach">Pripojiť obrázok</string>
     <string name="log_image_stored">Existujúci</string>
     <string name="log_image_camera">Nový</string>
+    <string name="log_image_delete">Zmazať</string>
     <string name="log_image_caption">Titulok</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Mierka</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Obrázok</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
     <string name="translate_to_english">Preložiť do angličtiny</string>
@@ -1219,6 +1222,7 @@
     <string name="navigation_direct_navigation">Priama navigácia</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">neznáma</string>
     <!-- license -->
     <string name="license">Licencia</string>
     <string name="license_show">Zobraziť licenciu</string>
