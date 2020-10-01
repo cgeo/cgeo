@@ -116,9 +116,11 @@
     <string name="log_yesterday">Igår</string>
     <string name="log_smilies">Smileys</string>
     <string name="log_image">Bild</string>
+    <string name="log_images">Bilder</string>
     <string name="log_image_attach">Lägg till bild</string>
     <string name="log_image_stored">Från fil</string>
     <string name="log_image_camera">Ny</string>
+    <string name="log_image_delete">Ta bort</string>
     <string name="log_image_caption">Bildtext</string>
     <string name="log_image_description">Beskrivning</string>
     <string name="log_image_scale">Skalning</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Denna geocacharen rapporterade att denna geocache bör arkiveras. En reviewer har blivit informerad.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalning</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Bild</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Översätt till %s</string>
     <string name="translate_to_english">Översätt till engelska</string>
@@ -1204,6 +1207,7 @@
     <string name="navigation_direct_navigation">Direkt navigering</string>
     <string name="osmand_marker_cgeo">Markör från c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Okänd</string>
     <!-- license -->
     <string name="license">Licens</string>
     <string name="license_show">Visa licens</string>
