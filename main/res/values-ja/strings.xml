@@ -112,9 +112,11 @@
     <string name="log_yesterday">昨日</string>
     <string name="log_smilies">スマイルマーク</string>
     <string name="log_image">画像</string>
+    <string name="log_images">画像</string>
     <string name="log_image_attach">画像を添付</string>
     <string name="log_image_stored">ファイル選択</string>
     <string name="log_image_camera">撮影</string>
+    <string name="log_image_delete">削除</string>
     <string name="log_image_caption">タイトル</string>
     <string name="log_image_description">説明</string>
     <string name="log_image_scale">拡大縮小</string>
@@ -137,6 +139,7 @@
     <string name="log_problem_other_text">このジオキャッシャ―が、このキャッシュに問題があることを報告しました。</string>
     <string name="log_problem_archive_label">キャッシュをアーカイブします</string>
     <string name="log_problem_archive_text">このジオキャッシャーが、このジオキャッシュをアーカイブすることを報告しました。コミュニティのボランティアレビューアーが通知されました。</string>
+    <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%sに翻訳</string>
     <string name="translate_to_english">英語に翻訳</string>
@@ -839,6 +842,7 @@
     <string name="cache_found_last_30_days">過去 30 日間に発見</string>
     <string name="cache_status_archived">アーカイブ済み</string>
     <string name="cache_status_disabled">無効化</string>
+    <string name="cache_status_active">アクティブ</string>
     <string name="cache_status_premium">プレミア会員のみ</string>
     <string name="cache_status_not_premium">全ての会員に閲覧可</string>
     <string name="cache_status_stored">保存済み</string>
@@ -1064,6 +1068,7 @@
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
     <!-- device orientation types -->
+    <string name="do_unknown">不明</string>
     <!-- license -->
     <string name="license">ライセンス</string>
     <string name="license_show">ライセンスを表示</string>
@@ -1098,6 +1103,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_fieldnotes_upload_success">geocaching.comにアップロードしました</string>
     <string name="export_fieldnotes_onlynew">最後にエクスポートした時から更新がある場合のみ</string>
     <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります。</string>
     <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
     <string name="export_confirm_title">エクスポート中 %1$s</string>
@@ -1273,6 +1279,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_all_seasons_no">オールシーズンではない</string>
     <string name="attribute_breeding_yes">繁殖期または保護期間</string>
     <string name="attribute_breeding_no">繁殖期や保護期間ではない</string>
+    <string name="attribute_compass_yes">コンパス</string>
     <string name="attribute_cave_yes">洞窟の知識や準備が必要</string>
     <string name="attribute_cave_no">洞窟の知識や準備は不要</string>
     <string name="attribute_aircraft_yes">航空機</string>
@@ -1440,6 +1447,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="number_input_err_format">数の書式が正しくありません</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">保存</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
