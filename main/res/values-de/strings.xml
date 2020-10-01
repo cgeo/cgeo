@@ -628,6 +628,7 @@
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar vom</string>
+    <string name="init_backup_unavailable">nicht vorhanden</string>
     <string name="init_backup_last_no">Keine Sicherungsdatei gefunden.</string>
     <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nBackup hat Version %2$d</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
