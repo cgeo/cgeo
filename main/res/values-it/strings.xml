@@ -83,7 +83,7 @@
     <string name="log_tb_drop">Lasciato</string>
     <string name="log_tb_sortby">Ordinamento Trackable</string>
     <string name="log_tb_changeall">Cambia tutto</string>
-    <string name="log_tb_grabbed">Preso da qualche parte</string>
+    <string name="log_tb_grabbed">Prelevato da qualche parte</string>
     <string name="log_tb_note">Nota</string>
     <string name="log_tb_discovered">Scoperto</string>
     <string name="log_tb_archived">Archiviato</string>
@@ -133,7 +133,7 @@
     <string name="log_your_saved_log">I tuoi log salvati</string>
     <string name="log_empty_logbook">Il logbook di questo cache è vuoto.</string>
     <string name="log_problem_none">Nessun problema</string>
-    <string name="log_problem_needs_maintenance_label">Ha bisogno di manutenzione</string>
+    <string name="log_problem_needs_maintenance_label">Richiede manutenzione</string>
     <string name="log_problem_needs_maintenance_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
     <string name="log_problem_log_full_label">Il logbook è pieno</string>
     <string name="log_problem_log_full_text">Questo geocacher ha segnalato che il logbook è pieno.</string>
@@ -141,7 +141,7 @@
     <string name="log_problem_damaged_text">Questo geocacher ha segnalato che il contenitore è danneggiato.</string>
     <string name="log_problem_missing_label">Il cache potrebbe non essere presente</string>
     <string name="log_problem_missing_text">Questo geocacher ha segnalato che il cache potrebbe essere sparito.</string>
-    <string name="log_problem_other_label">Altro</string>
+    <string name="log_problem_other_label">altro</string>
     <string name="log_problem_other_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
+    <string name="err_captcha">Captcha richiesto. Si prega di fare riferimento alla nostra <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per una guida.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
@@ -283,7 +284,7 @@
     <string name="loc_gps_disabled">GPS non attivo</string>
     <string name="menu_centerposition">Centra sulla mia posizione</string>
     <!-- standard menu -->
-    <string name="menu_about">Info su c:geo</string>
+    <string name="menu_about">Info c:geo</string>
     <string name="menu_helpers">Programmi utili</string>
     <string name="menu_settings">Impostazioni</string>
     <string name="menu_backup">Backup / Ripristino</string>
@@ -338,7 +339,7 @@
     <string name="caches_select_mode">Modo Selezione</string>
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
-    <string name="caches_nearby">Qui vicino</string>
+    <string name="caches_nearby">Vicini</string>
     <string name="caches_remove_all">Elimina tutti</string>
     <string name="caches_remove_selected">Elimina selezionati</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
@@ -354,7 +355,7 @@
     <string name="caches_copy_selected">Copia la selezione</string>
     <string name="caches_copy_all">Copia tutto</string>
     <string name="caches_map_locus_export">Esporta in Locus</string>
-    <string name="caches_filter">Filtra</string>
+    <string name="caches_filter">Filtri</string>
     <string name="caches_filter_title">Filtra per</string>
     <string name="caches_filter_size">Dimensione</string>
     <string name="caches_filter_type">Tipo</string>
@@ -391,7 +392,7 @@
     <string name="list_menu_import">Importazione</string>
     <string name="list_title">Seleziona una lista</string>
     <string name="lists_title">Scegli una lista</string>
-    <string name="list_inbox">Salvate</string>
+    <string name="list_inbox">Salvati</string>
     <string name="list_all_lists">Tutti i cache</string>
     <string name="list_dialog_create_title">Nuova lista</string>
     <string name="list_dialog_create">Crea</string>
@@ -414,7 +415,7 @@
     <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
     <string name="about_help">Guida</string>
     <string name="about_starting">Come iniziare</string>
-    <string name="about_starting_head">Guida introduttiva</string>
+    <string name="about_starting_head">Come iniziare</string>
     <string name="about_starting_text_basics_head">Nozioni di base sul Geocaching</string>
     <string name="about_starting_text_basics_text">Il Geocaching è un gioco all\'aperto per cercare e trovare le cosiddette \"cache\". Questa app può essere utilizzata per giocare a questo gioco.\n\nPuoi saperne di più su <b>c:geo Basics</b> nella nostra guida utente: https://manual.cgeo.org/en/basicuse</string>
     <string name="about_starting_text_device_head">Permessi dispositivo per c:geo</string>
@@ -595,14 +596,12 @@
     <string name="init_backup">Backup cache / waypoint</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Creazione del backup del database dei cache in corso…</string>
-    <string name="init_backup_note">Si prega di notare che questa funzione salverà/ripristinerà un database contenente solo cache e waypoint, ma non le tue immagini nei cache e nessuna impostazione del programma.</string>
     <string name="init_backup_restore">Ripristino</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
     <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
     <string name="backup_confirm_overwrite">Vuoi sovrascrivere il backup esistente da %s?</string>
-    <string name="restore_confirm_overwrite">Vuoi sovrascrivere %s sul tuo dispositivo con il backup?</string>
     <string name="init_restore_success">Ripristino completato.</string>
     <string name="init_restore_failed_dbrecreated">Ripristino fallito: file di backup danneggiato, il database deve essere ricreato.</string>
     <string name="init_restore_failed">Ripristino fallito.</string>
@@ -613,17 +612,11 @@
     <string name="init_restore_version_error">Formato non previsto - non è possibile ripristinare il database.\n\nLa versione prevista è %1$d,\nmentre il backup ha la versione %2$d</string>
     <string name="settings_title_backup">Backup / Ripristino</string>
     <string name="settings_summary_backup">Esegui il backup e ripristino dei cache/waypoint e le impostazioni del programma.</string>
-    <string name="init_backup_settings">Backup impostazioni del programma</string>
-    <string name="init_backup_settings_backup_light">Impostazioni di backup (senza dati account)</string>
-    <string name="init_backup_settings_backup_full">Impostazioni di backup (complete)</string>
     <string name="init_backup_settings_backup_full_confirm">Vuoi memorizzare dati sensibili relativi all\'account? Questi possono essere leggibili da altre applicazioni.</string>
     <string name="settings_savingerror">Errore durante il salvataggio della configurazione</string>
     <string name="settings_saved">Impostazioni salvate con successo in:</string>
     <string name="init_backup_settings_restore">Ripristina impostazioni</string>
-    <string name="init_backup_settings_restore_confirm">Vuoi sovrascrivere le impostazioni attuali?</string>
-    <string name="init_backup_settings_restore_no">Non c\'è nessun backup delle impostazioni disponibile</string>
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
-    <string name="settings_restored">Impostazioni ripristinate</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'utilizzo offline. Puoi scaricare le mappe da Mapsforge o addirittura creare le tue mappe dai dati di OpenStreetMap. È necessario selezionare la cartella locale dove cercare le mappe offline per attivare questa funzionalità.</string>
@@ -730,7 +723,7 @@
     <string name="feature_watch_list">Watchlist</string>
     <string name="feature_own_coordinates">Memorizzazione delle coordinate modificate</string>
     <string name="feature_search_keyword">Ricerca per parola chiave</string>
-    <string name="feature_search_live_map">Mappa Live</string>
+    <string name="feature_search_live_map">Mappa</string>
     <string name="feature_search_center">Cerca per posizione</string>
     <string name="feature_search_geocode">Cerca per geocode</string>
     <string name="feature_search_owner">Cerca per proprietario</string>
@@ -787,7 +780,7 @@
     <string name="auth_forget_title">Hai dimenticato l\'autorizzazione?</string>
     <string name="auth_forget_message">Verrai disconnesso da questo servizio. Le tue identificazioni attualmente salvate andranno perse.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Il seguente processo permetterà a <b>c:geo</b> di accedere a %s.</string>
+    <string name="auth_credentials_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
     <string name="auth_credentials_explain_long">Riempendo le identificazioni e premendo il pulsante \"Controllo autenticazione\" verrà avviato il processo. Questo processo ti connetterà a %s per convalidare le identificazioni. Questo è tutto.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
@@ -797,7 +790,7 @@
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">c:geo è ora autorizzato ad interagire con %s.</string>
+    <string name="auth_dialog_completed_geokrety">c:geo è ora autorizzato ad accedere a %s.</string>
     <string name="err_auth_geokrety_bad_password">Il tuo nome utente o password non sembrano validi.</string>
     <string name="err_auth_geokrety_unknown">%1$s ha risposto: %2$s.</string>
     <!-- cache -->
@@ -924,7 +917,7 @@
     <string name="cache_menu_sygic_walk">Sygic (a piedi)</string>
     <string name="cache_menu_sygic_drive">Sygic (guida)</string>
     <string name="cache_menu_radar">Radar</string>
-    <string name="cache_menu_map">Mappa c:geo</string>
+    <string name="cache_menu_map">Mappa</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -937,7 +930,7 @@
     <string name="menu_caches">Gestisci i cache</string>
     <string name="cache_menu_event">Aggiungi al calendario</string>
     <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
-    <string name="cache_menu_details">Dettagli</string>
+    <string name="cache_menu_details">Dettaglio</string>
     <string name="cache_menu_refresh">Aggiorna</string>
     <string name="cache_menu_share">Condividi cache</string>
     <string name="cache_menu_move_list">Muovi in un\'altra lista</string>
@@ -951,7 +944,7 @@
     <string name="ignore_confirm_title">Stai attento</string>
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
-    <string name="cache_stored">Salvato</string>
+    <string name="cache_stored">Salvati</string>
     <string name="cache_status_offline_log">Log salvato</string>
     <string name="cache_status_found">Trovato</string>
     <string name="cache_not_status_found">Non trovato</string>
@@ -959,10 +952,10 @@
     <string name="cache_found_last_30_days">Trovati negli ultimi 30 giorni</string>
     <string name="cache_status_archived">Archiviato</string>
     <string name="cache_status_disabled">Non attivo</string>
-    <string name="cache_status_active">Attivo</string>
+    <string name="cache_status_active">Attiva</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
     <string name="cache_status_not_premium">Per tutti gli utenti</string>
-    <string name="cache_status_stored">Salvato</string>
+    <string name="cache_status_stored">Salvati</string>
     <string name="cache_status_not_stored">Non salvato</string>
     <string name="cache_status_stored_lasteighthours">Nelle ultime otto ore</string>
     <string name="cache_status_stored_lasttwentyfourhours">Nelle ultime 24 ore</string>
@@ -984,7 +977,7 @@
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
     <string name="cache_rating_of">di</string>
-    <string name="cache_favorite">Popolarità</string>
+    <string name="cache_favorite">Preferiti</string>
     <string name="cache_owner">Proprietario</string>
     <string name="cache_hidden">Nascosto il</string>
     <string name="cache_event">Data</string>
@@ -1119,7 +1112,7 @@
     <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
     <!-- map -->
     <string name="map_map">Mappa</string>
-    <string name="map_live">Mappa Live</string>
+    <string name="map_live">Mappa</string>
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_modes">Modi mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
@@ -1162,7 +1155,7 @@
     <string name="search_geo_button">Cerca per geo code</string>
     <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
-    <string name="search_kw_button">Cerca per parola chiave</string>
+    <string name="search_kw_button">Ricerca per parola chiave</string>
     <string name="search_fbu">Trovata dall\'utente</string>
     <string name="search_fbu_prefill">Nome utente</string>
     <string name="search_fbu_button">Cerca per nome utente</string>
@@ -1185,7 +1178,7 @@
     <string name="trackable_browser_open">Apri nel Browser</string>
     <string name="trackable_refresh">Aggiorna</string>
     <string name="trackable_goal">Obiettivo</string>
-    <string name="trackable_details">Dettagli</string>
+    <string name="trackable_details">Dettaglio</string>
     <string name="trackable_image">Immagine</string>
     <string name="trackable_code">Codice di tracking</string>
     <string name="trackable_name">Nome</string>
@@ -1199,7 +1192,7 @@
     <string name="trackable_spotted_owner">Nelle mani del proprietario</string>
     <string name="trackable_spotted_archived">Archiviato</string>
     <string name="trackable_origin">Origine</string>
-    <string name="trackable_unknown">Sconosciuto</string>
+    <string name="trackable_unknown">sconosciuto</string>
     <string name="trackable_released">Rilasciato</string>
     <string name="trackable_distance">Portato</string>
     <string name="trackable_touch">Contatto</string>
@@ -1224,15 +1217,15 @@
     <string name="navigation">Navigazione</string>
     <string name="compass_title">Bussola</string>
     <string name="use_gps">Usa solo GPS</string>
-    <string name="use_compass">Usa GPS e bussola magnetica</string>
+    <string name="use_compass">Tutti i sensori utilizzati</string>
     <string name="destination_select">Scegli destinazione</string>
     <string name="navigation_direct_navigation">Navigazione diretta</string>
     <string name="osmand_marker_cgeo">Indicatore da c:geo</string>
-    <string name="device_heading_label">Direzione del dispositivo:</string>
-    <string name="device_orientation">Orientamento del dispositivo</string>
+    <string name="device_heading_label">Dispositivo:</string>
+    <string name="device_orientation">Orientamento</string>
     <string name="device_orientation_label">Orientamento:</string>
     <!-- device orientation types -->
-    <string name="do_unknown">Sconosciuto</string>
+    <string name="do_unknown">sconosciuto</string>
     <string name="do_auto">Automatico</string>
     <string name="do_flat">Piatto</string>
     <string name="do_upright">Verticale</string>
@@ -1243,7 +1236,7 @@
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Evento passato</string>
     <string name="helper_calendar_pastevent_question">La data dell\'evento è nel passato. Aggiungerlo comunque?</string>
-    <string name="helper_sendtocgeo_title">Invia a c:geo</string>
+    <string name="helper_sendtocgeo_title">Send to c:geo</string>
     <string name="helper_contacts_title">c:geo - plugin Contatti</string>
     <string name="helper_contacts_description">Consente di aprire una scheda contatto (della tua rubrica) direttamente da un log, per permetterti di chiedere aiuto agli amici più facilmente.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
