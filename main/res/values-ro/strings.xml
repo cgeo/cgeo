@@ -463,7 +463,6 @@
     <string name="init_backup_unnecessary">Baza de date este goală. Nu este necesară o salvare de siguranţă.</string>
     <string name="init_backup_no_backup_available">Nu există nici o salvare de siguranţă.</string>
     <string name="backup_confirm_overwrite">Vrei să scrii peste salvarea de siguranţă din %s?</string>
-    <string name="restore_confirm_overwrite">Vrei să înlocuieşti %s din dispozitivul tău cu cele din salvarea de siguranţă?</string>
     <string name="init_restore_success">Restaurare finalizată.</string>
     <string name="init_restore_failed">Restaurarea nu a reușit.</string>
     <string name="init_restore_running">Restaurare bază de date cutii…</string>
@@ -909,7 +908,6 @@
     <string name="navigation">Navigare</string>
     <string name="compass_title">Busolă</string>
     <string name="use_gps">Foloseşte doar GPS</string>
-    <string name="use_compass">Foloseşte GPS şi busolă magnetică</string>
     <string name="destination_select">Alege destinaţia</string>
     <string name="navigation_direct_navigation">Navigare directă</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
