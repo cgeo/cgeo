@@ -89,6 +89,7 @@
     <string name="log_tb_archived">Arkistoitu</string>
     <string name="log_save">Offline-tallennus</string>
     <string name="log_saving">Lähetetään merkintää…</string>
+    <string name="log_saving_and_uploading">Lähetetään lokia ja kuvia…</string>
     <string name="log_posting_log">Lähetetään lokia…</string>
     <string name="log_posting_twitter">Lähetetään twiittiä…</string>
     <string name="log_posting_vote">Lähetetään kätkön arvostelua…</string>
@@ -154,6 +155,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
+    <string name="err_captcha">Captcha vaaditaan. Ole hyvä ja katso <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> saadaksesi opastusta.</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
@@ -591,14 +593,14 @@
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
     <string name="init_backup_running">Luodaan varmuuskopiota kätkötietokannasta…</string>
-    <string name="init_backup_note">Huomaathan, että tämä toiminto varmuuskopioi/palauttaa tietokannan, joka sisältää vain kätköt ja niiden reittipisteet, mutta ei sinun kätkökuvia tai ohjelman asetuksia.</string>
+    <string name="init_backup_note">Huomaathan, että tämä toiminto varmuuskopioi/palauttaa tietokannan, joka sisältää kätköt ja niiden reittipisteet, mutta ei sinun kätkökuvia tai ohjelman asetuksia.</string>
     <string name="init_backup_restore">Palauta</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
     <string name="backup_confirm_overwrite">Haluatko korvata olemassa olevan varmuuskopion %s?</string>
-    <string name="restore_confirm_overwrite">Haluatko korvata laitteessasi olevan %s varmuuskopiolla?</string>
+    <string name="restore_confirm_overwrite">Haluatko korvata laitteessasi olevan \"%s\" varmuuskopiolla?</string>
     <string name="init_restore_success">Palautus valmis.</string>
     <string name="init_restore_failed_dbrecreated">Palautus epäonnistui: Varmuuskopio korruptoitunut, tietokanta piti luoda tyhjästä.</string>
     <string name="init_restore_failed">Palautus epäonnistui.</string>
@@ -1216,12 +1218,9 @@
     <string name="navigation">Navigointi</string>
     <string name="compass_title">Kompassi</string>
     <string name="use_gps">Vain GPS käytössä</string>
-    <string name="use_compass">GPS ja magneettinen kompassi käytössä</string>
     <string name="destination_select">Valitse kohde</string>
     <string name="navigation_direct_navigation">Suora navigointi</string>
     <string name="osmand_marker_cgeo">Merkki c:geosta</string>
-    <string name="device_heading_label">Laitteen kulkusuunta:</string>
-    <string name="device_orientation">Laitteen asento</string>
     <string name="device_orientation_label">Suunta:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Tuntematon</string>
