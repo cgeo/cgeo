@@ -100,9 +100,11 @@
     <string name="log_today">Ngayong araw</string>
     <string name="log_yesterday">Kahapon</string>
     <string name="log_image">Imahe</string>
+    <string name="log_images">Mga imahe</string>
     <string name="log_image_attach">Maglakip ng mga Imahe</string>
     <string name="log_image_stored">Umiiral</string>
     <string name="log_image_camera">Bago</string>
+    <string name="log_image_delete">Tangalin</string>
     <string name="log_image_caption">Kapsyon</string>
     <string name="log_image_description">Paglalarawan</string>
     <string name="log_image_scale">Pag-iiskala</string>
@@ -111,6 +113,9 @@
     <string name="log_oc_team_comment">Ang kumento ng OC Team</string>
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
+    <string name="log_problem_needs_maintenance_label">Nangangailangan ng Pagpapanatili</string>
+    <string name="log_problem_other_label">Iba pa</string>
+    <string name="log_image_titleprefix">Imahe</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -431,7 +436,10 @@
     <string name="init_signature_template_number">Ang Numero</string>
     <string name="init_signature_template_owner">Ang May-ari</string>
     <string name="init_signature_template_name">Pangalan</string>
+    <string name="init_signature_template_difficulty">Pagpapakahirap</string>
+    <string name="init_signature_template_terrain">Lupain</string>
     <string name="init_signature_template_log">Ang teksto ng log</string>
+    <string name="init_signature_template_size">Sukat</string>
     <string name="init_ratingwanted">Ang rate ng GCvote</string>
     <string name="init_summary_ratingwanted">I-load ang rating ng cache mula sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ipakita ang mga Sarili at/mga Kaibigan</string>
@@ -712,6 +720,7 @@
     <string name="ignore_confirm_title">Maging maingat ka</string>
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
+    <string name="cache_stored">Inimbak</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
@@ -719,6 +728,7 @@
     <string name="cache_found_last_30_days">Nakita nuong huling 30 araw</string>
     <string name="cache_status_archived">Ang naka-archive</string>
     <string name="cache_status_disabled">Ang hindi umiiral</string>
+    <string name="cache_status_active">Gawing Aktibo</string>
     <string name="cache_status_premium">Ang premium na mga miyembro lamang</string>
     <string name="cache_status_not_premium">Ang akses sa Lahat ng mga Miyembro</string>
     <string name="cache_status_stored">Ang nakaimbak</string>
@@ -904,6 +914,7 @@
     <string name="trackable_touch">Ang hawak</string>
     <string name="trackable_not_activated">Hindi aktibo ang pagsusubaybay</string>
     <string name="trackable_travelbug">Ang travelbug</string>
+    <string name="trackable_status">Ang estado</string>
     <string name="geokret_type_traditional">Ang tradisyonal</string>
     <string name="geokret_type_book_or_media">Ang aklat o kaya medyang elektroniko</string>
     <string name="geokret_type_human">Ang tao</string>
@@ -925,6 +936,7 @@
     <string name="navigation_direct_navigation">Ang direktang Nabigasyon</string>
     <string name="osmand_marker_cgeo">Tanda mula sa c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Hindi kilala</string>
     <!-- license -->
     <string name="license">Ang lisensya</string>
     <string name="license_show">Ang lisensya ay ipakita</string>
@@ -1297,6 +1309,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">I-seyb</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
