@@ -116,9 +116,11 @@
     <string name="log_yesterday">Vakar</string>
     <string name="log_smilies">Smaidiņi</string>
     <string name="log_image">Attēls</string>
+    <string name="log_images">Attēli</string>
     <string name="log_image_attach">Pievienot attēlu</string>
     <string name="log_image_stored">Esošo</string>
     <string name="log_image_camera">Jaunu</string>
+    <string name="log_image_delete">Dzēst</string>
     <string name="log_image_caption">Nosaukums</string>
     <string name="log_image_description">Apraksts</string>
     <string name="log_image_scale">Izšķirtspēja</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Attēls</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot angļu valodā</string>
@@ -1164,6 +1167,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="navigation_direct_navigation">Tiešā navigācija</string>
     <string name="osmand_marker_cgeo">Kartes atzīme no c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nezināms</string>
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Rādīt licenci</string>
@@ -1576,6 +1580,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Saglabāt</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pēda</string>
