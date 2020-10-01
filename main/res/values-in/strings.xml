@@ -103,9 +103,11 @@
     <string name="log_yesterday">Kemarin</string>
     <string name="log_smilies">Smile</string>
     <string name="log_image">Gambar</string>
+    <string name="log_images">Gambar</string>
     <string name="log_image_attach">Lampirkan Gambar</string>
     <string name="log_image_stored">Telah ada</string>
     <string name="log_image_camera">Baru</string>
+    <string name="log_image_delete">Hapus</string>
     <string name="log_image_caption">Keterangan</string>
     <string name="log_image_description">Penjelasan</string>
     <string name="log_image_scale">Penskalaan</string>
@@ -114,6 +116,9 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
+    <string name="log_problem_needs_maintenance_label">Kebutuhan Pemeliharaan</string>
+    <string name="log_problem_other_label">Lain</string>
+    <string name="log_image_titleprefix">Gambar</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
@@ -424,7 +429,10 @@
     <string name="init_signature_template_number">Nomor</string>
     <string name="init_signature_template_owner">Pemilik</string>
     <string name="init_signature_template_name">Nama</string>
+    <string name="init_signature_template_difficulty">Kesulitan</string>
+    <string name="init_signature_template_terrain">Medan</string>
     <string name="init_signature_template_log">Teks log</string>
+    <string name="init_signature_template_size">Ukuran</string>
     <string name="init_ratingwanted">Rating GCvote</string>
     <string name="init_summary_ratingwanted">Muat penilaian cache dari GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Tampilan Teman/Milik Sendiri</string>
@@ -651,7 +659,9 @@
     <string name="cache_dialog_loading_details_status_gcvote">Memuat GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Data caching</string>
     <string name="cache_dialog_loading_details_status_render">Tampilan render</string>
+    <string name="cache_dialog_offline_save_title">Tidak aktif</string>
     <string name="cache_dialog_offline_save_message">Simpan cache untuk penggunaan offline&#8230;</string>
+    <string name="cache_dialog_offline_drop_title">Tidak aktif</string>
     <string name="cache_dialog_offline_drop_message">Menghapus cache dari memori perangkat&#8230;</string>
     <string name="cache_dialog_refresh_title">Menyegarkan</string>
     <string name="cache_dialog_refresh_message">Memuat ulang rincian cache&#8230;</string>
@@ -695,6 +705,7 @@
     <string name="cache_menu_ignore">Mengabaikan cache</string>
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
+    <string name="cache_stored">Disimpan</string>
     <string name="cache_status_offline_log">Log disimpan</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
@@ -702,6 +713,7 @@
     <string name="cache_found_last_30_days">Berdasarkan 30 hari terakhir</string>
     <string name="cache_status_archived">Diarsipkan</string>
     <string name="cache_status_disabled">Cacat</string>
+    <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Anggota Premium saja</string>
     <string name="cache_status_not_premium">Semua Akses Anggota</string>
     <string name="cache_status_stored">Disimpan</string>
@@ -910,6 +922,7 @@
     <string name="navigation_direct_navigation">Navigasi langsung</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Tidak Diketahui</string>
     <!-- license -->
     <string name="license">Lisensi</string>
     <string name="license_show">Menunjukkan lisensi</string>
@@ -1272,6 +1285,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Simpan</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
