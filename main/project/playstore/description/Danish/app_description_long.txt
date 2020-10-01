@@ -25,6 +25,6 @@ Logs kan sendes direkte eller gemmes lokalt til senere afsendelse, eller de kan 
 Søg og find trackables, styr din trackable-beholdning og læg en trackable sammen med cache-logningen.
 
 Har du problemer med at installere eller bruge c:geo skal du først kigge i vores FAQ (https://faq.cgeo.org) eller brugervejledningen (https://manual.cgeo.org).
-Hvis du stadig har problemer kan du skrive til vores support på e-mail.
+Hvis det ikke løser dit problem kan du kontakte support pr. email.
 
 Hvis du gerne vil vide hvorfor c:geo har brug for de tilladelser, der er anmodet om, så læs på https://www.cgeo.org.
