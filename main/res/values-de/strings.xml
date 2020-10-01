@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
+    <string name="err_captcha">Captcha erforderlich. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> für weitere Hilfe.</string>
     <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
     <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden (Server oder Verbindung inaktiv?).</string>
@@ -595,35 +596,26 @@
     <string name="init_backup">Caches / Wegpunkte sichern</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
-    <string name="init_backup_note">Bitte beachte, dass diese Funktion nur die Datenbank mit Caches und Wegpunkten sichert/wiederherstellt, aber keine Bilder oder Einstellungen.</string>
     <string name="init_backup_restore">Wiederherstellung</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
     <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
     <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
-    <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
     <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Backup-Datei ist beschädigt, Datenbank musste neu erstellt werden.</string>
     <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
     <string name="init_backup_last">Backup verfügbar vom</string>
-    <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
     <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nBackup hat Version %2$d</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
-    <string name="init_backup_settings">Sichern der Programmeinstellungen</string>
-    <string name="init_backup_settings_backup_light">Einstellungen sichern (ohne Anmeldedaten)</string>
-    <string name="init_backup_settings_backup_full">Einstellungen sichern (komplett)</string>
     <string name="init_backup_settings_backup_full_confirm">Möchtest du sensible Anmeldedaten speichern? Sie könnten eventuell von anderen Apps gelesen werden.</string>
     <string name="settings_savingerror">Fehler beim Speichern der Einstellungen</string>
     <string name="settings_saved">Einstellungen erfolgreich gespeichert nach:</string>
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
-    <string name="init_backup_settings_restore_confirm">Möchtest du die aktuellen Einstellungen löschen?</string>
-    <string name="init_backup_settings_restore_no">Es ist kein Backup der Einstellungen verfügbar</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
-    <string name="settings_restored">Einstellungen wiederhergestellt</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
@@ -1224,12 +1216,12 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Kompass</string>
     <string name="use_gps">Nur GPS</string>
-    <string name="use_compass">GPS und Magnetkompass</string>
+    <string name="use_compass">Alle Sensoren</string>
     <string name="destination_select">Ziel auswählen</string>
     <string name="navigation_direct_navigation">Direkte Navigation</string>
     <string name="osmand_marker_cgeo">Markierung von c:geo</string>
-    <string name="device_heading_label">Geräterichtung:</string>
-    <string name="device_orientation">Geräteausrichtung</string>
+    <string name="device_heading_label">Gerät:</string>
+    <string name="device_orientation">Ausrichtung</string>
     <string name="device_orientation_label">Ausrichtung:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Unbekannt</string>
