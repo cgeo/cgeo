@@ -76,7 +76,7 @@
     <string name="log_tb_grabbed">Preluat de undeva</string>
     <string name="log_tb_note">Notă</string>
     <string name="log_tb_discovered">Descoperit</string>
-    <string name="log_tb_archived">Arhivată</string>
+    <string name="log_tb_archived">Arhivat</string>
     <string name="log_save">Salvează local</string>
     <string name="log_saving">Trimitere jurnal…</string>
     <string name="log_posting_log">Se publică însemnarea…</string>
@@ -104,9 +104,11 @@
     <string name="log_today">Azi</string>
     <string name="log_yesterday">Ieri</string>
     <string name="log_image">Imagine</string>
+    <string name="log_images">Imagini</string>
     <string name="log_image_attach">Ataşează imagine</string>
     <string name="log_image_stored">Existentă</string>
     <string name="log_image_camera">Nouă</string>
+    <string name="log_image_delete">Şterge</string>
     <string name="log_image_caption">Titlu</string>
     <string name="log_image_description">Descriere</string>
     <string name="log_image_scale">Mărire</string>
@@ -115,6 +117,9 @@
     <string name="log_oc_team_comment">Comentariu din partea echipei OC</string>
     <string name="log_your_saved_log">Însemnare salvată</string>
     <string name="log_empty_logbook">Jurnalul acestei geocutii este gol.</string>
+    <string name="log_problem_needs_maintenance_label">Are nevoie de întreţinere</string>
+    <string name="log_problem_other_label">Alta</string>
+    <string name="log_image_titleprefix">Imagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
@@ -322,7 +327,7 @@
     <string name="list_menu_rename">Redenumeşte lista curentă</string>
     <string name="list_title">Alege o listă</string>
     <string name="lists_title">Alege listele</string>
-    <string name="list_inbox">Salvate</string>
+    <string name="list_inbox">Stocate</string>
     <string name="list_all_lists">Toate cutiile</string>
     <string name="list_dialog_create_title">Listă nouă</string>
     <string name="list_dialog_create">Crează</string>
@@ -426,7 +431,10 @@
     <string name="init_signature_template_number">Număr</string>
     <string name="init_signature_template_owner">Proprietar</string>
     <string name="init_signature_template_name">Nume</string>
+    <string name="init_signature_template_difficulty">Dificultate</string>
+    <string name="init_signature_template_terrain">Teren</string>
     <string name="init_signature_template_log">Text însemnare</string>
+    <string name="init_signature_template_size">Dimensiune</string>
     <string name="init_ratingwanted">Voturi GCvote</string>
     <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Arată ale mele/ale prietenilor</string>
@@ -463,7 +471,6 @@
     <string name="init_backup_unnecessary">Baza de date este goală. Nu este necesară o salvare de siguranţă.</string>
     <string name="init_backup_no_backup_available">Nu există nici o salvare de siguranţă.</string>
     <string name="backup_confirm_overwrite">Vrei să scrii peste salvarea de siguranţă din %s?</string>
-    <string name="restore_confirm_overwrite">Vrei să înlocuieşti %s din dispozitivul tău cu cele din salvarea de siguranţă?</string>
     <string name="init_restore_success">Restaurare finalizată.</string>
     <string name="init_restore_failed">Restaurarea nu a reușit.</string>
     <string name="init_restore_running">Restaurare bază de date cutii…</string>
@@ -502,11 +509,11 @@
     <string name="init_dbonsdcard_note">Poţi păstra baza de date a c:geo fie în memoria internă, fie într-un dosar în spaţiul de stocare accesibil utilizatorului. Alegând a doua opţiune îţi va elibera din memoria internă, dar va funcţiona cu o performaţă mai redusă, iar c:geo va înceta să mai funcţioneze daca ştergi fişierul bazei de date sau suportul de stocare extern nu este accesibil (de ex. ai scos SDcard-ul).</string>
     <string name="init_dbonsdcard">Spaţiu stocare utilizator</string>
     <string name="init_dbmove_dbmove">Mutare bază de date</string>
-    <string name="init_dbmove_running">Mutare bază de date în curs</string>
+    <string name="init_dbmove_running">Mutare bază de date</string>
     <string name="init_dbmove_success">Baza de date a fost mutată.</string>
     <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
     <string name="init_datadirmove_datadirmove">Mutare dosar cu geocutii</string>
-    <string name="init_datadirmove_running">Mutare dosar geocutii în curs</string>
+    <string name="init_datadirmove_running">Mutare dosar cu geocutii</string>
     <string name="init_datadirmove_success">A fost mutat dosarul cu geocutii.</string>
     <string name="init_datadirmove_failed">Mutarea dosarului cu geocutii a eşuat parţial sau total. Te rog verifică atât dosarul vechi cât şi cel nou şi mută fişierele manual, dacă este necesar.</string>
     <string name="init_plain_logs">Însemnări simple</string>
@@ -534,7 +541,7 @@
     <string name="init_hardware_acceleration">Activează accelerarea hardware</string>
     <string name="settings_open_website">Intră pe site</string>
     <string name="settings_open_geokretymap_website">Deschide site-ul GeoKretyMap.org</string>
-    <string name="settings_settings">Opţiuni</string>
+    <string name="settings_settings">Setări</string>
     <string name="settings_information">Informaţii</string>
     <string name="settings_advanced">Setări avansate</string>
     <string name="settings_twitter_cache_message">Mesaj pentru cutie găsită</string>
@@ -549,7 +556,7 @@
     <string name="feature_watch_list">Listă cutii urmărite</string>
     <string name="feature_own_coordinates">Salvare coordonate modificate</string>
     <string name="feature_search_keyword">Caută după cuvânt cheie</string>
-    <string name="feature_search_live_map">Hartă*</string>
+    <string name="feature_search_live_map">Harta</string>
     <string name="feature_search_center">Caută după poziţie</string>
     <string name="feature_search_geocode">Caută după geocod</string>
     <string name="feature_search_owner">Caută după proprietar</string>
@@ -642,7 +649,6 @@
     <string name="cache_favpoint_not_on">Cutia nu este printre favoritele tale.</string>
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
-    <string name="cache_waypoints">Puncte</string>
     <string name="cache_waypoints_add">Adaugă punct</string>
     <string name="cache_hint">Indiciu</string>
     <string name="cache_hint_not_available">Fără indiciu</string>
@@ -657,11 +663,11 @@
     <string name="cache_dialog_loading_details_status_gcvote">Încărcare GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Informaţii cutie</string>
     <string name="cache_dialog_loading_details_status_render">Generez paginile</string>
-    <string name="cache_dialog_offline_save_title">Cutie salvată</string>
+    <string name="cache_dialog_offline_save_title">Salvată</string>
     <string name="cache_dialog_offline_save_message">Salvare pentru uz fără internet…</string>
-    <string name="cache_dialog_offline_drop_title">Cutie salvată</string>
+    <string name="cache_dialog_offline_drop_title">Salvată</string>
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
-    <string name="cache_dialog_refresh_title">Reîncarcă</string>
+    <string name="cache_dialog_refresh_title">Împrospătează</string>
     <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
     <string name="cache_dialog_watchlist_add_title">Listă cutii urmărite</string>
     <string name="cache_dialog_watchlist_add_message">Adăugare cutie în lista de cutii urmărite…</string>
@@ -703,33 +709,36 @@
     <string name="ignore_confirm_title">Atenţie</string>
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
+    <string name="cache_stored">Stocate</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
     <string name="cache_never_found">Negăsită</string>
     <string name="cache_found_last_30_days">Găsite în ultimele 30 de zile</string>
-    <string name="cache_status_archived">Arhivată</string>
-    <string name="cache_status_disabled">Inactivă</string>
+    <string name="cache_status_archived">Arhivat</string>
+    <string name="cache_status_disabled">Inactiv</string>
+    <string name="cache_status_active">Activ</string>
     <string name="cache_status_premium">Doar membrii Premium</string>
     <string name="cache_status_not_premium">Acces pentru toţi membrii</string>
-    <string name="cache_status_stored">Salvată</string>
+    <string name="cache_status_stored">Stocate</string>
     <string name="cache_status_not_stored">Nesalvată</string>
     <string name="cache_geocode">Geocod</string>
     <string name="cache_name">Nume</string>
     <string name="cache_type">Tip</string>
     <string name="cache_size">Dimensiune</string>
     <string name="cache_distance">Distanţă</string>
-    <string name="cache_difficulty">Dificulate</string>
+    <string name="cache_difficulty">Dificultate</string>
     <string name="cache_terrain">Teren</string>
     <string name="cache_rating">Voturi</string>
     <string name="cache_own_rating">Votul tău</string>
     <string name="cache_rating_of">din</string>
+    <string name="cache_favorite">Favorită</string>
     <string name="cache_owner">Proprietar</string>
     <string name="cache_hidden">Ascunsă</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Locaţie</string>
     <string name="cache_coordinates">Coordonate</string>
-    <string name="cache_coordinates_original">Coordonatele iniţiale</string>
+    <string name="cache_coordinates_original">Coordonatele originale</string>
     <string name="cache_spoiler_images_title">Imagini (indicii?)</string>
     <string name="cache_log_types">Tipuri de însemnări</string>
     <string name="cache_coordinates_no">Această cutie nu are coordonate.</string>
@@ -738,7 +747,7 @@
     <string name="cache_license">Licenţă</string>
     <string name="cache_image">Imagine</string>
     <string name="cache_image_open_file">Deschide ca fişier</string>
-    <string name="cache_image_open_browser">Deschide în browser</string>
+    <string name="cache_image_open_browser">Afişează în browser</string>
     <string name="cache_image_add_waypoint">Adaugă punct</string>
     <string name="cache_image_background">Imagine de fundal pentru descrierea geocutiei</string>
     <string name="cache_share_field">ora</string>
@@ -825,7 +834,7 @@
     <string name="visit_tweet">Publică pe Twitter</string>
     <!-- map -->
     <string name="map_map">Hartă</string>
-    <string name="map_live">Hartă</string>
+    <string name="map_live">Harta</string>
     <string name="map_view_map">Hărţi</string>
     <string name="map_modes">Opţiuni hărţi</string>
     <string name="map_circles_show">Arată cercurile</string>
@@ -848,7 +857,7 @@
     <string name="search_coordinates_button">Caută după coordonate</string>
     <string name="search_address">Adresă</string>
     <string name="search_address_button">Caută după adresă</string>
-    <string name="search_geo">Geo cod</string>
+    <string name="search_geo">Geocod</string>
     <string name="search_geo_button">Caută după cod GC</string>
     <string name="search_kw">Cuvinte cheie</string>
     <string name="search_kw_prefill">Cuvânt cheie</string>
@@ -867,11 +876,11 @@
     <string name="search_own_caches">Caută cutiile mele</string>
     <string name="search_pocket_loading">Încărcare listă de \"Pocket Queries\"</string>
     <!-- trackable -->
-    <string name="trackable">Obiecte călătoare</string>
+    <string name="trackable">Obiect călător</string>
     <string name="trackable_details_loading">Încărcare detalii obiect călător…</string>
     <string name="trackable_log_touch">Descoperă</string>
     <string name="trackable_browser_open">Afişează în Browser</string>
-    <string name="trackable_refresh">Actualizează</string>
+    <string name="trackable_refresh">Împrospătează</string>
     <string name="trackable_goal">Ţel</string>
     <string name="trackable_details">Detalii</string>
     <string name="trackable_image">Imagine</string>
@@ -885,13 +894,14 @@
     <string name="trackable_spotted_at_user">În posesia utilizatorului</string>
     <string name="trackable_spotted_unknown_location">Locaţie necunoscută</string>
     <string name="trackable_spotted_owner">În posesia proprietarului</string>
-    <string name="trackable_spotted_archived">Arhivată</string>
+    <string name="trackable_spotted_archived">Arhivat</string>
     <string name="trackable_origin">Origine</string>
-    <string name="trackable_unknown">Necunoscut</string>
+    <string name="trackable_unknown">Necunoscută</string>
     <string name="trackable_released">Lansat</string>
     <string name="trackable_distance">A călătorit</string>
     <string name="trackable_touch">Descoperă</string>
     <string name="trackable_not_activated">Obiectul călător nu a fost activat</string>
+    <string name="trackable_status">Stare</string>
     <string name="geokret_type_traditional">Tradiţional</string>
     <string name="geokret_type_book_or_media">Carte sau memorie electronică</string>
     <string name="geokret_type_human">Persoană</string>
@@ -909,11 +919,11 @@
     <string name="navigation">Navigare</string>
     <string name="compass_title">Busolă</string>
     <string name="use_gps">Foloseşte doar GPS</string>
-    <string name="use_compass">Foloseşte GPS şi busolă magnetică</string>
     <string name="destination_select">Alege destinaţia</string>
     <string name="navigation_direct_navigation">Navigare directă</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Necunoscută</string>
     <!-- license -->
     <string name="license">Licenţă</string>
     <string name="license_show">Afişează licenţa</string>
@@ -921,7 +931,6 @@
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Eveniment trecut</string>
     <string name="helper_calendar_pastevent_question">Data evenimentului este în trecut. Adaugă-l oricum?</string>
-    <string name="helper_sendtocgeo_title">Trimite la c:geo</string>
     <string name="helper_contacts_title">c:geo - contacte (extensie)</string>
     <string name="helper_contacts_description">Permite să afişezi contacte (din agenda de contacte) direct din formularul pentru însemnări, astfel încţt să ăti poţi întreba mai uşor prietenii.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
@@ -1300,6 +1309,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Salvează</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_yd">zd</string>
