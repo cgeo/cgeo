@@ -131,7 +131,7 @@
     <string name="log_your_saved_log">Din gemte log</string>
     <string name="log_empty_logbook">Logbogen for denne cache er tom.</string>
     <string name="log_problem_none">Intet problem</string>
-    <string name="log_problem_needs_maintenance_label">Kræver vedligeholdelse</string>
+    <string name="log_problem_needs_maintenance_label">Mangler vedligeholdelse</string>
     <string name="log_problem_needs_maintenance_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
     <string name="log_problem_log_full_label">Logbogen er fuld</string>
     <string name="log_problem_log_full_text">Denne geocacher rapporterede, at logbogen er fuld.</string>
@@ -139,7 +139,7 @@
     <string name="log_problem_damaged_text">Denne geocacher rapporterede, at beholderen er beskadiget.</string>
     <string name="log_problem_missing_label">Geocachen kan være forsvundet</string>
     <string name="log_problem_missing_text">Denne geocacher rapporterede, at cachen kan være forsvundet.</string>
-    <string name="log_problem_other_label">Anden</string>
+    <string name="log_problem_other_label">Andet</string>
     <string name="log_problem_other_text">Denne geocacher rapporterede, at der er et problem med denne geocache.</string>
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
@@ -222,7 +222,7 @@
     <string name="warn_no_keyword">Nøgleord er ikke angivet.</string>
     <string name="warn_no_username">Brugernavn er ikke angivet.</string>
     <string name="warn_no_connector">Ingen af de aktiverede geocaching-tjenester understøtter denne type søgning.</string>
-    <string name="warn_search_help_title">Brug for hjælp?</string>
+    <string name="warn_search_help_title">Har du brug for hjælp?</string>
     <string name="warn_search_help_address">Indtast en adresse eller et stednavn. For eksempel en postadresse (\"Jernbanegade 5, Århus, Denmark\"), et bynavn (\"Gundsømagle\") eller blot et stednavn (\"Søparken\").</string>
     <string name="warn_search_help_gccode">Skriv en geokode på en cache. For eksempel \"GC1VCAZ\".</string>
     <string name="warn_search_help_keyword">Indtast navnet på en geocache eller en del heraf. For eksempel \"Natcache\".</string>
@@ -588,14 +588,12 @@
     <string name="init_backup">Backup af cache- og rutepunktdata</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_running">Opretter backup af cache-database…</string>
-    <string name="init_backup_note">Denne funktion vil udføre en backup at databasen indeholdende cache- og rutepunktdata, men ikke af cachebilleder eller app-indstillinger.</string>
     <string name="init_backup_restore">Gendan fra backup</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
     <string name="init_backup_unnecessary">Databasen er tom og det er ikke nødvendigt at tage backup.</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
     <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende backup fra %s?</string>
-    <string name="restore_confirm_overwrite">Vil du overskrive %s på din enhed med denne backup?</string>
     <string name="init_restore_success">Gendannelse fuldført.</string>
     <string name="init_restore_failed_dbrecreated">Gendannelse mislykkedes: Der er fejl i backupfilen og databasen blev i stedet genskabt.</string>
     <string name="init_restore_failed">Gendannelse fejlede.</string>
@@ -606,17 +604,11 @@
     <string name="init_restore_version_error">Uventet format - databasen kan ikke indlæses.\n\nForventet version er %1$d,\nbackup-en er version %2$d</string>
     <string name="settings_title_backup">Backup/gendannelse</string>
     <string name="settings_summary_backup">Udfør backup og gendannelse af cache- og rutepunktdata samt app-indstillinger.</string>
-    <string name="init_backup_settings">Backup af app-indstillinger</string>
-    <string name="init_backup_settings_backup_light">Backup af indstillinger (uden kontodata)</string>
-    <string name="init_backup_settings_backup_full">Backup af indstillinger (fuld)</string>
     <string name="init_backup_settings_backup_full_confirm">Ønsker du at gemme følsomme kontoindstillinger? Disse data kan være tilgængelige for andre apps.</string>
     <string name="settings_savingerror">Fejl under lagring af indstillinger</string>
     <string name="settings_saved">Indstillingerne blev gemt til:</string>
     <string name="init_backup_settings_restore">Gendan opsætning</string>
-    <string name="init_backup_settings_restore_confirm">Vil du overskrive dine eksisterende indstillinger?</string>
-    <string name="init_backup_settings_restore_no">Ingen backup af indstillinger tilgængelig</string>
     <string name="settings_readingerror">Fejl ved indlæsning af indstillinger</string>
-    <string name="settings_restored">Indstillinger genindlæst</string>
     <string name="settings_restart">c:geo skal genstartes før at de indlæste indstillinger tager effekt</string>
     <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
     <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
@@ -780,17 +772,17 @@
     <string name="auth_forget_title">Glem autorisering?</string>
     <string name="auth_forget_message">Forbindelsen til servicen bliver afbrudt. Dine aktuelle gemte legitimationsoplysninger vil gå tabt.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Den følgende opsætningsguide vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
+    <string name="auth_credentials_explain_short">Den følgende proces vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
     <string name="auth_credentials_explain_long">Ved at udfylde dine legitimationsoplysninger og trykke på \"Kontrollér autentifikation\" starter opsætningen. Under opsætningen vil der blive hentet autentifikationsoplysninger fra %s.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
+    <string name="auth_token_explain_short">Den følgende proces vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
     <string name="auth_token_explain_long">Ved at udfylde dine legitimationsoplysninger og aktivere \"Autorisér c:geo\"-knappen starter opsætningen. Under opsætningen vil der blive hentet et autentifikationsobjekt fra %s.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo er nu godkendt til at lave opslag på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo er nu godkendt til at arbejde sammen med %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">c:geo er nu autoriseret til at interagere med %s.</string>
+    <string name="auth_dialog_completed_geokrety">c:geo er nu godkendt til at arbejde sammen med %s.</string>
     <string name="err_auth_geokrety_bad_password">Brugernavn og adgangskode er muligvis ikke korrekte.</string>
     <string name="err_auth_geokrety_unknown">%1$s svarede: %2$s.</string>
     <!-- cache -->
@@ -912,7 +904,7 @@
     <string name="cache_menu_sygic_walk">Sygic (til fods)</string>
     <string name="cache_menu_sygic_drive">Sygic (kørsel)</string>
     <string name="cache_menu_radar">Radar</string>
-    <string name="cache_menu_map">Vis på kort</string>
+    <string name="cache_menu_map">Kort</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -939,7 +931,7 @@
     <string name="ignore_confirm_title">Vær forsigtig</string>
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Gemt</string>
+    <string name="cache_stored">Gemte</string>
     <string name="cache_status_offline_log">Log gemt</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
@@ -950,7 +942,7 @@
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun premium-medlemmer</string>
     <string name="cache_status_not_premium">Adgang for alle medlemmer</string>
-    <string name="cache_status_stored">Gemt</string>
+    <string name="cache_status_stored">Gemte</string>
     <string name="cache_status_not_stored">Ikke gemt</string>
     <string name="cache_status_stored_lasteighthours">Indenfor sidste 8 timer</string>
     <string name="cache_status_stored_lasttwentyfourhours">Indenfor sidste døgn</string>
@@ -980,8 +972,8 @@
     <string name="cache_location_country">Land</string>
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_calculator">Lommeregner</string>
-    <string name="cache_coordinates_original">Oprindelig position</string>
-    <string name="cache_spoiler_images_title">Spoiler-billeder</string>
+    <string name="cache_coordinates_original">Oprindelige koordinater</string>
+    <string name="cache_spoiler_images_title">Spoilerbilleder</string>
     <string name="cache_log_types">Logbeskedtyper</string>
     <string name="cache_coordinates_no">Denne cache har ingen position.</string>
     <string name="cache_clear_history">Slet historik</string>
@@ -1058,7 +1050,7 @@
     <string name="popup_more">Flere detaljer</string>
     <!-- waypoint -->
     <string name="waypoint">Rutepunkt</string>
-    <string name="waypoint_coordinates">Position</string>
+    <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cacheposition</string>
     <string name="waypoint_calculate_coordinates">Beregn position</string>
     <string name="waypoint_custom">Tilpasset</string>
@@ -1066,7 +1058,7 @@
     <string name="waypoint_bearing">Kompasretning</string>
     <string name="waypoint_distance">Afstand</string>
     <string name="waypoint_name">Navn</string>
-    <string name="waypoint_edit">Rediger</string>
+    <string name="waypoint_edit">Redigér</string>
     <string name="waypoint_copy_coordinates">Kopiér koordinater</string>
     <string name="waypoint_clear_coordinates">Nulstil position</string>
     <string name="waypoint_delete">Slet</string>
@@ -1144,7 +1136,7 @@
     <string name="search_coordinates_button">Søg fra koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søg adresse</string>
-    <string name="search_geo">Geocode</string>
+    <string name="search_geo">geo code</string>
     <string name="search_geo_button">Søg geocode</string>
     <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
@@ -1168,7 +1160,7 @@
     <string name="trackable_details_loading">Indlæser detaljer om Trackable…</string>
     <string name="trackable_log_touch">Log Trackable</string>
     <string name="trackable_browser_open">Åbn i browser</string>
-    <string name="trackable_refresh">Opdatér</string>
+    <string name="trackable_refresh">Genindlæs</string>
     <string name="trackable_goal">Mål</string>
     <string name="trackable_details">Detaljer</string>
     <string name="trackable_image">Billede</string>
@@ -1183,7 +1175,7 @@
     <string name="trackable_spotted_unknown_location">Ukendt sted</string>
     <string name="trackable_spotted_owner">Hos ejer</string>
     <string name="trackable_spotted_archived">Arkiveret</string>
-    <string name="trackable_origin">Oprindelsessted</string>
+    <string name="trackable_origin">Kilde</string>
     <string name="trackable_unknown">Ukendt</string>
     <string name="trackable_released">Frigivet</string>
     <string name="trackable_distance">Rejst</string>
@@ -1209,7 +1201,6 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">GPS i brug</string>
-    <string name="use_compass">GPS og magnetisk kompas i brug</string>
     <string name="destination_select">Vælg destination</string>
     <string name="navigation_direct_navigation">Direkte navigation</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
@@ -1472,7 +1463,7 @@
     <string name="attribute_shovel_yes">Skovl måske nødvendig</string>
     <string name="attribute_shovel_no">Du skal ikke bruge en skovl</string>
     <string name="attribute_specific_access_yes">Kun tilgængelig på de angivne tidspunkter (kan kræve betaling)</string>
-    <string name="attribute_specific_access_no">Tilgængelig på alle tidspunkter</string>
+    <string name="attribute_specific_access_no">Altid tilgængelig</string>
     <string name="attribute_pedestrian_only_yes">Kun tilgængelig til fods</string>
     <string name="attribute_pedestrian_only_no">Ikke kun tilgængelig til fods</string>
     <string name="attribute_nature_cache_yes">Skjult i naturlige omgivelser (skov, bjerge osv.)</string>
