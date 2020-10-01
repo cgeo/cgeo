@@ -4,7 +4,7 @@
     <string name="contact_not_found">El contacto con alias %s no se ha encontrado. Primero añádelo a tu aplicación de contactos.</string>
     <string name="multiple_matches">Múltiples coincidencias</string>
     <!-- permission handling -->
-    <string name="ask_again">Preguntame de nuevo</string>
+    <string name="ask_again">Preguntarme de nuevo</string>
     <string name="close">Cerrar</string>
     <string name="goto_app_details">Abrir información de la aplicación</string>
     <string name="contacts_permission_request_denied">Debes dar permiso de lectura a \"c:geo - contactos\" para que tu libreta de direcciones busque el nombre del cacher allí.</string>
