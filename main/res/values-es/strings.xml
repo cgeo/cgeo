@@ -115,9 +115,11 @@
     <string name="log_yesterday">Ayer</string>
     <string name="log_smilies">Emoticonos</string>
     <string name="log_image">Imagen</string>
+    <string name="log_images">Imágenes</string>
     <string name="log_image_attach">Adjuntar imagen</string>
     <string name="log_image_stored">Galería</string>
     <string name="log_image_camera">Tomar foto</string>
+    <string name="log_image_delete">Borrar</string>
     <string name="log_image_caption">Título</string>
     <string name="log_image_description">Descripción</string>
     <string name="log_image_scale">Redimensionamiento</string>
@@ -142,6 +144,7 @@
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Imagen</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
     <string name="translate_to_english">Traducir al inglés</string>
@@ -343,7 +346,7 @@
     <string name="caches_copy_selected">Copiar seleccionados</string>
     <string name="caches_copy_all">Copiar todos</string>
     <string name="caches_map_locus_export">Exportar a Locus</string>
-    <string name="caches_filter">Filtrar</string>
+    <string name="caches_filter">Filtro</string>
     <string name="caches_filter_title">Filtrar por</string>
     <string name="caches_filter_size">Tamaño</string>
     <string name="caches_filter_type">Tipo</string>
@@ -582,14 +585,12 @@
     <string name="init_backup">Hacer copia de seguridad de cachés /waypoints</string>
     <string name="init_backup_backup">Copia de seguridad</string>
     <string name="init_backup_running">Creando copia de seguridad de la base de datos de cachés…</string>
-    <string name="init_backup_note">Tenga en cuenta que esta función guardará/restaurará una base de datos que sólo contendrá cachés y waypoints, pero no las imágenes de caché ni ajustes del programa.</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
     <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad.</string>
     <string name="init_backup_no_backup_available">No hay ningún archivo de copia de seguridad disponible.</string>
     <string name="backup_confirm_overwrite">¿Quieres sobreescribir la copia de seguridad existente de %s?</string>
-    <string name="restore_confirm_overwrite">¿Quieres sobreescribir %s en tu dispositivo con la copia de seguridad?</string>
     <string name="init_restore_success">Restauración completa.</string>
     <string name="init_restore_failed_dbrecreated">Restauración fallida: Copia de seguridad corrupta, base de datos tenía que ser recreada.</string>
     <string name="init_restore_failed">Restauración errónea.</string>
@@ -599,17 +600,11 @@
     <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
     <string name="settings_title_backup">Copia de seguridad / Restauración</string>
     <string name="settings_summary_backup">Realizar copia de seguridad y restauración de los datos de caché/waypoint y de los ajustes del programa.</string>
-    <string name="init_backup_settings">Realizar copia de seguridad de los ajustes del programa</string>
-    <string name="init_backup_settings_backup_light">Ajustes de copia de seguridad (sin datos de cuenta)</string>
-    <string name="init_backup_settings_backup_full">Ajustes de copia de seguridad (completa)</string>
     <string name="init_backup_settings_backup_full_confirm">¿Desea almacenar datos sensibles relacionados con la cuenta? Estos pueden ser leídos por otras aplicaciones.</string>
     <string name="settings_savingerror">Error al guardar los ajustes</string>
     <string name="settings_saved">Configuración guardada correctamente en:</string>
     <string name="init_backup_settings_restore">Restablecer ajustes</string>
-    <string name="init_backup_settings_restore_confirm">¿Quieres sobreescribir tus ajustes actuales?</string>
-    <string name="init_backup_settings_restore_no">No hay disponible ninguna copia de seguridad de los ajustes</string>
     <string name="settings_readingerror">Error leyendo los ajustes</string>
-    <string name="settings_restored">Ajustes restablecidos</string>
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
     <string name="settings_info_offline_maps">c:geo permite el uso de mapas sin conexión. Puedes descargar mapas desde Mapsforge o incluso crear los tuyos propios desde los datos de OSM (Open Street Map). Necesitas seleccionar primero el directorio con los mapas sin conexión para poder usarlos.</string>
@@ -708,7 +703,7 @@
     <string name="feature_watch_list">Lista de seguimiento</string>
     <string name="feature_own_coordinates">Almacenar coordenadas modificadas</string>
     <string name="feature_search_keyword">Buscar por palabra clave</string>
-    <string name="feature_search_live_map">Mapa en vivo</string>
+    <string name="feature_search_live_map">Mapa</string>
     <string name="feature_search_center">Búsqueda por posición</string>
     <string name="feature_search_geocode">Buscar por código GC</string>
     <string name="feature_search_owner">Búsqueda por dueño</string>
@@ -787,9 +782,9 @@
         <item quantity="other">quedan %1$d días</item>
     </plurals>
     <string name="last_day_available">último día disponible</string>
-    <string name="cache_offline">Guardado</string>
+    <string name="cache_offline">Desconectado</string>
     <string name="cache_offline_refresh">Actualizar</string>
-    <string name="cache_offline_drop">Eliminar</string>
+    <string name="cache_offline_drop">Borrar</string>
     <string name="cache_offline_store">Guardar</string>
     <string name="cache_offline_stored">Guardado en el dispositivo</string>
     <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
@@ -846,6 +841,7 @@
     <string name="cache_favpoint_not_on">Este caché no es uno de tus favoritos.</string>
     <string name="cache_list_select_last">Última selección</string>
     <string name="cache_images">Imágenes</string>
+    <string name="cache_waypoints">Waypoints</string>
     <string name="cache_waypoints_add">Añadir waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Añadir ubicación actual</string>
     <string name="cache_waypoints_add_fromclipboard">Añadir desde el portapapeles</string>
@@ -885,7 +881,7 @@
     <string name="cache_menu_maps_directions">Direcciones de Google Maps</string>
     <string name="cache_menu_sygic_walk">Sygic (A pie)</string>
     <string name="cache_menu_sygic_drive">Sygic (Coche)</string>
-    <string name="cache_menu_map">Ver en mapa</string>
+    <string name="cache_menu_map">Mapa</string>
     <string name="cache_menu_map_ext">Otras apps externas</string>
     <string name="cache_menu_browser">Abrir navegador</string>
     <string name="cache_menu_visit">Registrar visita</string>
@@ -908,6 +904,7 @@
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Guardados</string>
     <string name="cache_status_offline_log">Registro guardado</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
@@ -915,9 +912,10 @@
     <string name="cache_found_last_30_days">Encontrado en los últimos 30 días</string>
     <string name="cache_status_archived">Archivado</string>
     <string name="cache_status_disabled">Desactivado</string>
+    <string name="cache_status_active">Activo</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
     <string name="cache_status_not_premium">Acceso a todos los miembros</string>
-    <string name="cache_status_stored">Guardado</string>
+    <string name="cache_status_stored">Guardados</string>
     <string name="cache_status_not_stored">No guardado</string>
     <string name="cache_status_stored_lastthirtydays">En los últimos treinta días</string>
     <string name="cache_status_stored_morethaneighthours">Antes de las últimas ocho horas</string>
@@ -933,7 +931,7 @@
     <string name="cache_distance">Distancia</string>
     <string name="cache_difficulty">Dificultad</string>
     <string name="cache_terrain">Terreno</string>
-    <string name="cache_rating">Puntuación</string>
+    <string name="cache_rating">Valoración</string>
     <string name="cache_own_rating">Tu puntuación</string>
     <string name="cache_rating_of">de</string>
     <string name="cache_favorite">Favorito</string>
@@ -945,7 +943,7 @@
     <string name="cache_coordinates">Coordenadas</string>
     <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originales</string>
-    <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
+    <string name="cache_spoiler_images_title">Revelaciones</string>
     <string name="cache_log_types">Tipos de registro</string>
     <string name="cache_coordinates_no">Este caché no tiene coordenadas.</string>
     <string name="cache_clear_history">Borrar historial</string>
@@ -953,7 +951,7 @@
     <string name="cache_license">Licencia</string>
     <string name="cache_image">Imagen</string>
     <string name="cache_image_open_file">Abrir como archivo</string>
-    <string name="cache_image_open_browser">Abrir en el navegador</string>
+    <string name="cache_image_open_browser">Abrir navegador</string>
     <string name="cache_image_add_waypoint">Añadir waypoint</string>
     <string name="cache_image_background">Imagen de fondo del caché</string>
     <string name="cache_share_field">Compartir</string>
@@ -1059,7 +1057,7 @@
     <string name="visit_tweet">Publicar en Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa activo</string>
+    <string name="map_live">Mapa</string>
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_modes">Ajustes del mapa</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
@@ -1131,7 +1129,7 @@
     <string name="trackable_spotted_unknown_location">Ubicación desconocida</string>
     <string name="trackable_spotted_owner">En manos del propietario</string>
     <string name="trackable_spotted_archived">Archivado</string>
-    <string name="trackable_origin">Origen</string>
+    <string name="trackable_origin">Coordenadas originales</string>
     <string name="trackable_unknown">Desconocido</string>
     <string name="trackable_released">Activado</string>
     <string name="trackable_distance">Recorrido</string>
@@ -1156,11 +1154,11 @@
     <string name="navigation">Navegación</string>
     <string name="compass_title">Brújula</string>
     <string name="use_gps">Usar sólo GPS</string>
-    <string name="use_compass">Usar GPS y brújula</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegación directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Desconocido</string>
     <!-- license -->
     <string name="license">Licencia</string>
     <string name="license_show">Mostrar licencia</string>
@@ -1195,6 +1193,7 @@
     <string name="export_fieldnotes_upload_success">Subido con éxito a geocaching.com</string>
     <string name="export_fieldnotes_onlynew">Solo desde la última exportación</string>
     <string name="export_fieldnotes_creating">Creando notas de campo…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">El archivo GPX será exportado a %1$s con la fecha y hora actual como su nombre de archivo.</string>
     <string name="export_gpx_to">Enviar GPX exportado a</string>
     <string name="export_confirm_title">Exportando %1$s</string>
@@ -1414,7 +1413,7 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_shovel_yes">Puede que necesites una pala</string>
     <string name="attribute_shovel_no">No necesitas una pala</string>
     <string name="attribute_specific_access_yes">Disponible sólo en horas determinadas (puede requerir cuota de acceso)</string>
-    <string name="attribute_specific_access_no">Disponible a todas horas</string>
+    <string name="attribute_specific_access_no">Siempre disponible</string>
     <string name="attribute_pedestrian_only_yes">Solo accesible a pie</string>
     <string name="attribute_pedestrian_only_no">Acceso no solo a pie</string>
     <string name="attribute_nature_cache_yes">Escondido en el entorno natural (bosques, montañas, etc.)</string>
@@ -1560,6 +1559,7 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>
+    <string name="save_sorted_route">Guardar</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
@@ -1570,7 +1570,7 @@ Nombre de archivo:%2$s</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Borrar historial de ruta</string>
     <string name="map_trailhistory_cleared">historial de ruta borrado</string>
-    <string name="map_trail_show">Mostrar el historial de la ruta</string>
+    <string name="map_trail_show">Mostrar histórico de rutas</string>
     <!-- history track export -->
     <!-- individual route export -->
 </resources>
