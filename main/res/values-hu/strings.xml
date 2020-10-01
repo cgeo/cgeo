@@ -83,7 +83,7 @@
     <string name="log_tb_grabbed">Mástól átvéve</string>
     <string name="log_tb_note">Megjegyzés</string>
     <string name="log_tb_discovered">Felfedezve</string>
-    <string name="log_tb_archived">Archiválva</string>
+    <string name="log_tb_archived">Archiválás</string>
     <string name="log_save">Offline mentés</string>
     <string name="log_saving">Log mentése…</string>
     <string name="log_posting_log">Log küldése…</string>
@@ -112,9 +112,11 @@
     <string name="log_yesterday">Tegnap</string>
     <string name="log_smilies">Hangulatjelek</string>
     <string name="log_image">Kép</string>
+    <string name="log_images">Képek</string>
     <string name="log_image_attach">Kép csatolása</string>
     <string name="log_image_stored">Meglévő</string>
     <string name="log_image_camera">Új</string>
+    <string name="log_image_delete">Törlés</string>
     <string name="log_image_caption">Felirat</string>
     <string name="log_image_description">Leírás</string>
     <string name="log_image_scale">Méretezés</string>
@@ -137,6 +139,7 @@
     <string name="log_problem_other_text">Ez a játékos azt jelezte, hogy probléma van a ládával.</string>
     <string name="log_problem_archive_label">Megszüntetendő láda</string>
     <string name="log_problem_archive_text">Ez a játékos azt jelezte, hogy meg kell szüntetni a ládát. A ládaellenőr értesült erről.</string>
+    <string name="log_image_titleprefix">Kép</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Fordítás erre: %s</string>
     <string name="translate_to_english">Fordítás angolra</string>
@@ -318,7 +321,7 @@
     <string name="caches_select_mode">Kijelölés</string>
     <string name="caches_select_mode_exit">Kijelölés vége</string>
     <string name="caches_select_invert">Kijelölés megfordítása</string>
-    <string name="caches_nearby">Közeli</string>
+    <string name="caches_nearby">A közelben</string>
     <string name="caches_remove_all">Összes törlése</string>
     <string name="caches_remove_selected">Kijelöltek törlése</string>
     <string name="caches_delete_events">Elmúlt események törlése</string>
@@ -546,14 +549,12 @@
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
     <string name="init_backup_running">A ládaadatbázis biztonsági mentése…</string>
-    <string name="init_backup_note">Ez a funkció a ládákat és útpontokat tartalmazó adatbázist menti el / állítja vissza, a láda képeit és az alkalmazás beállításait nem.</string>
     <string name="init_backup_restore">Visszaállítás</string>
     <string name="init_backup_success">A c:geo adatbázisának mentése sikerült:</string>
     <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
     <string name="init_backup_unnecessary">Az adatbázis üres, biztonsági mentés nem szükséges.</string>
     <string name="init_backup_no_backup_available">Nincs elérhető biztonsági mentés.</string>
     <string name="backup_confirm_overwrite">Felülírod a következő időpontról származó mentést: %s?</string>
-    <string name="restore_confirm_overwrite">Felülírod az adatbázist (%s) a mentéssel?</string>
     <string name="init_restore_success">Visszaállítás kész.</string>
     <string name="init_restore_failed">A visszaállítás sikertelen.</string>
     <string name="init_restore_running">A ládaadatbázis visszaállítása…</string>
@@ -562,17 +563,11 @@
     <string name="init_backup_last_no">Nem található biztonsági mentés.</string>
     <string name="settings_title_backup">Biztonsági mentés / Visszaállítás</string>
     <string name="settings_summary_backup">Ládák / útpontok és alkalmazásbeállítások biztonsági mentése és visszaállítása</string>
-    <string name="init_backup_settings">Alkalmazásbeállítások mentése</string>
-    <string name="init_backup_settings_backup_light">Beállítások mentése (fiók adatai nélkül)</string>
-    <string name="init_backup_settings_backup_full">Beállítások mentése (teljes)</string>
     <string name="init_backup_settings_backup_full_confirm">Mented a fiókoddal kapcsolatos érzékeny adatokat? Ezeket más alkalmazások is olvashatják.</string>
     <string name="settings_savingerror">Hiba a beállítások mentésekor</string>
     <string name="settings_saved">A beállítások mentése sikerült:</string>
     <string name="init_backup_settings_restore">Beállítások visszaállítása</string>
-    <string name="init_backup_settings_restore_confirm">Felülírod a jelenlegi beállításokat?</string>
-    <string name="init_backup_settings_restore_no">Nincs elérhető biztonsági mentés a beállításokhoz.</string>
     <string name="settings_readingerror">Hiba a beállítások olvasásakor</string>
-    <string name="settings_restored">Beállítások visszaállítva</string>
     <string name="settings_restart">A c:geo-t most újra kell indítani a betöltött beállítások használatához</string>
     <string name="settings_info_offline_maps_title">Offline térképek adatai</string>
     <string name="settings_info_offline_maps">A c:geo támogatja a kapcsolat nélküli (offline) térképhasználatot. Térképeket a Mapsforge-ról tölthetsz le, vagy létrehozhatsz saját térképeket is OSM adatokból. A funkció használatához meg kell adnod az offline térképek mappáját.</string>
@@ -759,7 +754,6 @@
     <string name="cache_favpoint_not_on">Ez a láda nem szerepel a kedvenceid között.</string>
     <string name="cache_list_select_last">Utolsó választás</string>
     <string name="cache_images">Képek</string>
-    <string name="cache_waypoints">Útpontok</string>
     <string name="cache_waypoints_add">Útpont hozzáadása</string>
     <string name="cache_hint">Segítség</string>
     <string name="cache_hint_not_available">Nincs segítség megadva</string>
@@ -818,17 +812,18 @@
     <string name="ignore_confirm_title">Légy óvatos</string>
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
-    <string name="cache_stored">Elmentve</string>
+    <string name="cache_stored">Mentett</string>
     <string name="cache_status_offline_log">Offline log</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_never_found">Szűz láda</string>
     <string name="cache_found_last_30_days">Megtalálva az elmúlt 30 napban</string>
-    <string name="cache_status_archived">Archiválva</string>
-    <string name="cache_status_disabled">Letiltva</string>
+    <string name="cache_status_archived">Archiválás</string>
+    <string name="cache_status_disabled">Letiltás</string>
+    <string name="cache_status_active">Aktív</string>
     <string name="cache_status_premium">Csak prémium tagoknak</string>
     <string name="cache_status_not_premium">Minden tag számára</string>
-    <string name="cache_status_stored">Elmentve</string>
+    <string name="cache_status_stored">Mentett</string>
     <string name="cache_status_not_stored">Nincs elmentve</string>
     <string name="cache_status_stored_lasteighthours">Az elmúlt 8 órában</string>
     <string name="cache_status_stored_lasttwentyfourhours">Az elmúlt 24 órában</string>
@@ -927,7 +922,7 @@
     <string name="waypoint_add_title">Útpont hozzáadása</string>
     <string name="waypoint_note">Megjegyzés</string>
     <string name="waypoint_user_note">Felhasználói megjegyzés</string>
-    <string name="waypoint_visited">Meglátogatva</string>
+    <string name="waypoint_visited">Látogatás</string>
     <string name="waypoint_save">Mentés</string>
     <string name="waypoint_cancel_edit">Mégsem</string>
     <string name="waypoint_loading">Útpont betöltése…</string>
@@ -983,7 +978,7 @@
     <string name="search_geo_button">Keresés geokód alapján</string>
     <string name="search_kw">Kulcsszavak</string>
     <string name="search_kw_prefill">Kulcsszó</string>
-    <string name="search_kw_button">Keresés kulcsszóval</string>
+    <string name="search_kw_button">Keresés kulcsszó alapján</string>
     <string name="search_fbu">Felhasználó által megtalált</string>
     <string name="search_fbu_prefill">Felhasználónév</string>
     <string name="search_fbu_button">Keresés felhasználónév szerint</string>
@@ -1016,8 +1011,8 @@
     <string name="trackable_spotted_in_cache"> </string>
     <string name="trackable_spotted_unknown_location">Ismeretlen helyen</string>
     <string name="trackable_spotted_owner">A tulajdonosnál</string>
-    <string name="trackable_spotted_archived">Archiválva</string>
-    <string name="trackable_origin">Indítás helye</string>
+    <string name="trackable_spotted_archived">Archiválás</string>
+    <string name="trackable_origin">Származás</string>
     <string name="trackable_unknown">Ismeretlen</string>
     <string name="trackable_released">Indítás ideje</string>
     <string name="trackable_distance">Megtett táv</string>
@@ -1039,11 +1034,11 @@
     <string name="navigation">Navigáció</string>
     <string name="compass_title">Iránytű</string>
     <string name="use_gps">Csak GPS használata</string>
-    <string name="use_compass">GPS és mágneses iránytű használata</string>
     <string name="destination_select">Cél kiválasztása</string>
     <string name="navigation_direct_navigation">Közvetlen navigáció</string>
     <string name="osmand_marker_cgeo">c:geo jelölő</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Ismeretlen</string>
     <!-- license -->
     <string name="license">Licenc</string>
     <string name="license_show">Licenc mutatása</string>
@@ -1078,6 +1073,7 @@
     <string name="export_fieldnotes_upload_success">Sikeres feltöltés a geocaching.com-ra</string>
     <string name="export_fieldnotes_onlynew">Csak az utolsó export óta</string>
     <string name="export_fieldnotes_creating">Offline logok exportálása…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">A GPX fájl ide lesz exportálva: %1$s a jelenlegi dátummal és időponttal a fájl nevében.</string>
     <string name="export_gpx_to">Az exportált GPX küldése ide</string>
     <string name="export_confirm_title">%1$s exportálása</string>
@@ -1262,7 +1258,7 @@
     <string name="attribute_breeding_no">Nincs szaporodási időszak / nem védett környezet</string>
     <string name="attribute_snow_proof_yes">Hóbiztos rejtekhely</string>
     <string name="attribute_snow_proof_no">Nem hóbiztos rejtekhely</string>
-    <string name="attribute_compass_yes">Iránytű szükséges</string>
+    <string name="attribute_compass_yes">Iránytű</string>
     <string name="attribute_compass_no">Iránytű nem szükséges</string>
     <string name="attribute_cave_yes">Barlangász felszerelés szükséges</string>
     <string name="attribute_cave_no">Nem szükséges barlangász felszerelés</string>
@@ -1293,7 +1289,7 @@
     <string name="attribute_shovel_yes">Lapátra lehet szükséged</string>
     <string name="attribute_shovel_no">Lapátra nem lesz szükséged</string>
     <string name="attribute_specific_access_yes">Csak bizonyos időszakban (esetleg belépődíj ellenében) érhető el</string>
-    <string name="attribute_specific_access_no">Bármikor elérhető</string>
+    <string name="attribute_specific_access_no">Mindig hozzáférhető</string>
     <string name="attribute_pedestrian_only_yes">Csak gyalogosan elérhető</string>
     <string name="attribute_pedestrian_only_no">Nem csak gyalogosan érhető el</string>
     <string name="attribute_nature_cache_yes">Természetes környezetben van elrejtve (pl. erdő, hegyek, stb.)</string>
@@ -1387,7 +1383,7 @@
     <string name="geokrety_parsing_failed">Nem sikerült értelmezni a GeoKrety választ.</string>
     <string name="settings_map_direction">Irány mutatása</string>
     <string name="settings_summary_map_direction">Navigációs cél irányvonalának megjelenítse</string>
-    <string name="map_direction">Irány be</string>
+    <string name="map_direction">Irány mutatása</string>
     <string name="command_move_caches_progress">Ládák áthelyezése a(z) %1s listára</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">%d láda áthelyezve</item>
@@ -1446,6 +1442,7 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Mentés</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
