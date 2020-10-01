@@ -4,7 +4,7 @@
     <string name="contact_not_found">Δεν βρέθηκαν στοιχεία για την επαφή με το ψευδώνυμο %s. Προσθέστε την στην εφαρμογή \'Επαφές\' πρώτα.</string>
     <string name="multiple_matches">Πολλαπλά αποτελέσματα</string>
     <!-- permission handling -->
-    <string name="ask_again">Ρωτήστε με πάλι</string>
+    <string name="ask_again">Ερώτηση ξανά</string>
     <string name="close">Κλείσιμο</string>
     <string name="goto_app_details">Άνοιγμα πληροφοριών εφαρμογής</string>
     <string name="contacts_permission_request_denied">Πρέπει να επιτρέψετε στο \"c:geo - contacts\" την πρόσβαση στον τηλεφωνικό σας κατάλογο ώστε να εντοπίσει το όνομα του χρήστη.</string>
