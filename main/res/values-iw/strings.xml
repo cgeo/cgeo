@@ -124,6 +124,8 @@
     <string name="log_problem_damaged_label">המיכל פגום</string>
     <string name="log_problem_missing_label">ייתכן והמטמון נעלם</string>
     <string name="log_problem_other_label">אחר</string>
+    <string name="log_problem_other_text">המשתמש דיווח שיש בעיה עם המטמון הזה.</string>
+    <string name="log_image_titleprefix">תמונה</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">תרגם ל%s</string>
     <string name="translate_to_english">תרגם לאנגלית</string>
@@ -388,6 +390,7 @@
     <string name="init_oc_ro_description">בצע הרשאה בc:geo עבור opencaching.ro על מנת לחפש מטמונים ולראות את המטמונים שמצאת.</string>
     <string name="settings_activate_oc_uk">הפעל</string>
     <string name="settings_activate_su">הפעל</string>
+    <string name="settings_activate_twitter">הפעל</string>
     <string name="init_login_popup_working">Logging in&#8230;</string>
     <string name="init_login_popup_invalid_timestamp">זמן מקומי לא תקין, שנה את הזמן במכשיר</string>
     <string name="init_authorization_credential_username">שם משתמש</string>
@@ -403,7 +406,10 @@
     <string name="init_signature_template_number">מספר</string>
     <string name="init_signature_template_owner">בעלים</string>
     <string name="init_signature_template_name">שם</string>
+    <string name="init_signature_template_difficulty">רמת קושי</string>
+    <string name="init_signature_template_terrain">שטח</string>
     <string name="init_signature_template_url">כתובת אינטרנט</string>
+    <string name="init_signature_template_size">גודל</string>
     <string name="init_ratingwanted">דירוג GCvote</string>
     <string name="init_skin">ערכת נושא קלה</string>
     <string name="init_summary_skin">השתמש בערכת נושא קלה (דרושה הפעלה מחדש)</string>
@@ -413,11 +419,14 @@
     <string name="init_backup_running">Creating backup of cache database&#8230;</string>
     <string name="init_restore_running">Restoring cache database&#8230;</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, &#8230;) on your external storage (emulated or real external SD card depending on your device).</string>
+    <string name="settings_settings">הגדרות</string>
     <string name="feature_own_coordinates">אחסון נקודות ציון מעודכנות</string>
+    <string name="feature_search_live_map">מפה</string>
     <!-- proximity notification -->
     <!-- map sources -->
     <string name="init_sendToCgeo_registering">Registering your device for send2cgeo&#8230;</string>
     <!-- auth generic -->
+    <string name="auth_authorize">בצע הרשאה לc:geo</string>
     <string name="auth_dialog_waiting">Waiting for %s&#8230;</string>
     <!-- auth credentials -->
     <!-- auth token -->
@@ -427,6 +436,8 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">היום האחרון הזמין</string>
+    <string name="cache_offline_drop">הסר</string>
+    <string name="cache_description">תאור</string>
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
@@ -435,10 +446,28 @@
     <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist&#8230;</string>
     <string name="cache_dialog_favorite_add_message">Adding cache to your favorites&#8230;</string>
     <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites&#8230;</string>
+    <string name="cache_menu_map">מפה</string>
+    <string name="cache_menu_details">פירוט</string>
+    <string name="cache_stored">מאוחסן</string>
     <string name="cache_found_last_30_days">נמצאו ב30 הימים האחרונים</string>
+    <string name="cache_status_archived">אורכב</string>
+    <string name="cache_status_disabled">בוטל זמנית</string>
+    <string name="cache_status_active">פעיל</string>
+    <string name="cache_status_stored">מאוחסן</string>
+    <string name="cache_name">שם</string>
+    <string name="cache_type">סוג</string>
+    <string name="cache_size">גודל</string>
+    <string name="cache_distance">מרחק</string>
+    <string name="cache_difficulty">רמת קושי</string>
+    <string name="cache_terrain">שטח</string>
+    <string name="cache_rating">דירוג</string>
+    <string name="cache_owner">בעלים</string>
+    <string name="cache_event">תאריך</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
+    <string name="cache_license">רישיון</string>
+    <string name="cache_image">תמונה</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
     <!-- file list base -->
@@ -452,7 +481,11 @@
     <string name="waypoint_coordinates">נקודות ציון</string>
     <string name="waypoint_cache_coordinates">נקודות ציון של המטמון</string>
     <string name="waypoint_my_coordinates">נקוודת הציון שלי</string>
+    <string name="waypoint_distance">מרחק</string>
+    <string name="waypoint_name">שם</string>
     <string name="waypoint_copy_coordinates">העתק נקודות ציון</string>
+    <string name="waypoint_note">הערה</string>
+    <string name="waypoint_visited">ביקר</string>
     <string name="waypoint_loading">Loading waypoint&#8230;</string>
     <string name="waypoint_do_not_touch_cache_coordinates">אין שינוי לנקודות ציון של המטמון</string>
     <string name="waypoint_set_as_cache_coords">הגדר כנקודות ציון של מטמון בc:geo</string>
@@ -470,21 +503,36 @@
     <string name="waypoint_coordinate_formats_plain">פשוט</string>
     <!-- visit -->
     <!-- map -->
+    <string name="map_map">מפה</string>
+    <string name="map_live">מפה</string>
     <string name="map_routing_straight">קו ישר</string>
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
+    <string name="search_hbu_prefill">בעלים</string>
     <!-- trackable -->
     <string name="trackable_details_loading">Loading trackable details&#8230;</string>
+    <string name="trackable_details">פירוט</string>
+    <string name="trackable_image">תמונה</string>
+    <string name="trackable_name">שם</string>
     <string name="trackable_brand">מותג</string>
+    <string name="trackable_type">סוג</string>
+    <string name="trackable_owner">בעלים</string>
+    <string name="trackable_spotted_archived">אורכב</string>
+    <string name="trackable_origin">מקור</string>
+    <string name="trackable_unknown">לא ידוע</string>
     <!-- user -->
     <!-- navigation -->
+    <string name="navigation">ניווט</string>
     <!-- device orientation types -->
+    <string name="do_unknown">לא ידוע</string>
     <!-- license -->
+    <string name="license">רישיון</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_fieldnotes_uploading">Uploading&#8230;</string>
     <string name="export_fieldnotes_creating">Creating Field Notes&#8230;</string>
+    <string name="export_gpx">GPx</string>
     <!-- GC attributes -->
     <string name="attribute_no_gps_yes">Without GPS (letterboxes, compass juggling, &#8230;)</string>
     <!-- next things -->
@@ -494,6 +542,7 @@
     <!-- various -->
     <!-- shortcuts -->
     <!-- Geokrety -->
+    <string name="settings_activate_geokrety">הפעל</string>
     <!-- calendar adder -->
     <!-- permission handling -->
     <!-- colors -->
