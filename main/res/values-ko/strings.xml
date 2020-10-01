@@ -116,7 +116,7 @@
     <string name="log_yesterday">어제</string>
     <string name="log_smilies">스마일</string>
     <string name="log_image">사진</string>
-    <string name="log_images">이미지</string>
+    <string name="log_images">사진</string>
     <string name="log_image_attach">사진 첨부</string>
     <string name="log_image_stored">사진첩</string>
     <string name="log_image_camera">촬영하기</string>
@@ -146,7 +146,7 @@
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
     <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
-    <string name="log_image_titleprefix">이미지</string>
+    <string name="log_image_titleprefix">사진</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s로 번역하기</string>
     <string name="translate_to_english">영어로 번역하기</string>
@@ -539,7 +539,7 @@
     <string name="init_signature_template_owner">소유주</string>
     <string name="init_signature_template_name">제목</string>
     <string name="init_signature_template_difficulty">난이도</string>
-    <string name="init_signature_template_terrain">지형등급</string>
+    <string name="init_signature_template_terrain">지형난이도</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">로그 작성</string>
     <string name="init_signature_template_size">크기</string>
@@ -590,14 +590,12 @@
     <string name="init_backup">백업 캐시 / 웨이포인트</string>
     <string name="init_backup_backup">백업하기</string>
     <string name="init_backup_running">캐시 데이터베이스의 백업본 생성중…</string>
-    <string name="init_backup_note">이 기능은 캐시 및 웨이 포인트 만 포함하고 데이터베이스 이미지는 캐시하지 않으며 프로그램 설정은 포함하지 않는 데이터베이스를 백업/복원합니다.</string>
     <string name="init_backup_restore">복원하기</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
     <string name="init_backup_unnecessary">데이터베이스가 없습니다. 백업이 불필요합니다.</string>
     <string name="init_backup_no_backup_available">백업할 파일이 없습니다.</string>
     <string name="backup_confirm_overwrite">%s 에 있는 기존 백업을 덮어쓰시겠습니까?</string>
-    <string name="restore_confirm_overwrite">기기에 있는 %s를 백업본으로 덮어쓰시겠습니까?</string>
     <string name="init_restore_success">복원이 완료되었습니다.</string>
     <string name="init_restore_failed_dbrecreated">복원 실패 : 백업 파일이 손상되어 데이터베이스를 다시 만들어야했습니다.</string>
     <string name="init_restore_failed">복원에 실패하였습니다.</string>
@@ -608,17 +606,11 @@
     <string name="init_restore_version_error">예기치 않은 형식-데이터베이스를 복원 할 수 없습니다.\n\n예상 버전은 %1$d이고\n백업 버전은 %2$d입니다.</string>
     <string name="settings_title_backup">백업 / 복원</string>
     <string name="settings_summary_backup">캐시 / 웨이포인트 데이터 및 프로그램 설정의 백업 및 복원을 수행합니다.</string>
-    <string name="init_backup_settings">백업 프로그램 설정</string>
-    <string name="init_backup_settings_backup_light">백업 설정 (계정 데이터 없음)</string>
-    <string name="init_backup_settings_backup_full">백업 설정 (전체)</string>
     <string name="init_backup_settings_backup_full_confirm">민감한 계정 관련 데이터를 저장 하시겠습니까? 다른 응용 프로그램에서 읽을 수 있습니다.</string>
     <string name="settings_savingerror">설정 저장 오류</string>
     <string name="settings_saved">설정이 성공적으로 저장되었습니다</string>
     <string name="init_backup_settings_restore">설정 복원</string>
-    <string name="init_backup_settings_restore_confirm">현재 설정을 덮어 쓰시겠습니까?</string>
-    <string name="init_backup_settings_restore_no">사용 가능한 설정 백업이 없습니다</string>
     <string name="settings_readingerror">설정 읽기 오류</string>
-    <string name="settings_restored">설정이 복원됨</string>
     <string name="settings_restart">로드 된 설정을 적용하려면 c:geo를 다시 시작해야합니다.</string>
     <string name="settings_info_offline_maps_title">오프라인 지도에 대한 정보</string>
     <string name="settings_info_offline_maps">c:geo 는 오프라인용 지도를 지원합니다. Mapsforge 로부터 지도를 다운받거나, OSM 데이터로부터 지도를 생성할 수도 있습니다. 오프라인 지도를 지원받으려면 먼저 오프라인 지도를 선택하셔야 합니다.</string>
@@ -782,10 +774,10 @@
     <string name="auth_forget_title">인증을 잊으셨나요?</string>
     <string name="auth_forget_message">이 서비스 연결이 끊어집니다. 현재 저장된 정보도 사라집니다.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
+    <string name="auth_credentials_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다</string>
     <string name="auth_credentials_explain_long">사용자 정보를 입력하고 \"인증 확인\" 버튼을 누르면 시작됩니다. 이 절차를 마치면 %s 에 연결되고, 사용자 정보를 인증받습니다.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
+    <string name="auth_token_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다</string>
     <string name="auth_token_explain_long">사용자 정보를 입력하고 \"c: geo 인증하기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 에 연결되고, 인증 토큰을 받아오게됩니다. </string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">이제 c:geo에서 트위터에 글을 올리도록 허용되었습니다.</string>
@@ -921,7 +913,7 @@
     <string name="menu_caches">캐시 관리</string>
     <string name="cache_menu_event">캘린더에 추가</string>
     <string name="cache_menu_extract_waypoints">중간 지점 추출</string>
-    <string name="cache_menu_details">상세내용</string>
+    <string name="cache_menu_details">상세표시</string>
     <string name="cache_menu_refresh">새로 고침</string>
     <string name="cache_menu_share">캐시 공유</string>
     <string name="cache_menu_move_list">다른 목록으로 이동</string>
@@ -935,18 +927,18 @@
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
-    <string name="cache_stored">저장됨</string>
+    <string name="cache_stored">저장된 캐시</string>
     <string name="cache_status_offline_log">저장된 로그</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
     <string name="cache_never_found">찾지 못함</string>
     <string name="cache_found_last_30_days">최근 30일간 찾은 캐시</string>
     <string name="cache_status_archived">영구보관됨</string>
-    <string name="cache_status_disabled">일시정지됨</string>
+    <string name="cache_status_disabled">비활성화됨</string>
     <string name="cache_status_active">활성</string>
     <string name="cache_status_premium">프리미엄 회원 전용</string>
     <string name="cache_status_not_premium">모든 회원 접근가능</string>
-    <string name="cache_status_stored">저장됨</string>
+    <string name="cache_status_stored">저장된 캐시</string>
     <string name="cache_status_not_stored">저장되지 않음</string>
     <string name="cache_status_stored_lasteighthours">지난 8 시간 이내</string>
     <string name="cache_status_stored_lasttwentyfourhours">지난 24 시간 이내</string>
@@ -964,11 +956,11 @@
     <string name="cache_size">크기</string>
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
-    <string name="cache_terrain">지형등급</string>
+    <string name="cache_terrain">지형난이도</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
     <string name="cache_rating_of">/</string>
-    <string name="cache_favorite">호감점수</string>
+    <string name="cache_favorite">호감캐시</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>
     <string name="cache_event">날짜</string>
@@ -976,7 +968,7 @@
     <string name="cache_location_country">나라</string>
     <string name="cache_coordinates">좌표</string>
     <string name="cache_calculator">계산기</string>
-    <string name="cache_coordinates_original">원래 좌표</string>
+    <string name="cache_coordinates_original">오리지날 좌표</string>
     <string name="cache_spoiler_images_title">스포일러 사진</string>
     <string name="cache_log_types">로그 유형</string>
     <string name="cache_coordinates_no">이 캐시에는 좌표가 없습니다.</string>
@@ -1062,7 +1054,7 @@
     <string name="waypoint_my_coordinates">내 위치</string>
     <string name="waypoint_bearing">방위각(°)</string>
     <string name="waypoint_distance">거리</string>
-    <string name="waypoint_name">이름</string>
+    <string name="waypoint_name">제목</string>
     <string name="waypoint_edit">편집</string>
     <string name="waypoint_copy_coordinates">좌표 복사하기</string>
     <string name="waypoint_clear_coordinates">좌표 삭제</string>
@@ -1168,7 +1160,7 @@
     <string name="trackable_browser_open">브라우저에서 열기</string>
     <string name="trackable_refresh">새로 고침</string>
     <string name="trackable_goal">목표</string>
-    <string name="trackable_details">상세내용</string>
+    <string name="trackable_details">상세표시</string>
     <string name="trackable_image">사진</string>
     <string name="trackable_code">추적 코드</string>
     <string name="trackable_name">제목</string>
@@ -1181,8 +1173,8 @@
     <string name="trackable_spotted_unknown_location">알 수 없는 위치</string>
     <string name="trackable_spotted_owner">소유주가 가지고 있음</string>
     <string name="trackable_spotted_archived">영구보관됨</string>
-    <string name="trackable_origin">출발지</string>
-    <string name="trackable_unknown">알 수 없음</string>
+    <string name="trackable_origin">출처</string>
+    <string name="trackable_unknown">모름</string>
     <string name="trackable_released">발행일</string>
     <string name="trackable_distance">여행거리</string>
     <string name="trackable_touch">로그하기</string>
@@ -1207,15 +1199,12 @@
     <string name="navigation">길찾기</string>
     <string name="compass_title">나침반</string>
     <string name="use_gps">GPS만 사용</string>
-    <string name="use_compass">GPS와 전자나침반 사용</string>
     <string name="destination_select">목적지 선택</string>
     <string name="navigation_direct_navigation">직접 길찾기</string>
     <string name="osmand_marker_cgeo">c:geo 마커</string>
-    <string name="device_heading_label">장치 방향:</string>
-    <string name="device_orientation">디바이스 지향</string>
     <string name="device_orientation_label">지향:</string>
     <!-- device orientation types -->
-    <string name="do_unknown">알 수 없음</string>
+    <string name="do_unknown">모름</string>
     <string name="do_auto">자동</string>
     <string name="do_flat">평평한</string>
     <string name="do_upright">수직으로 세워 둔</string>
@@ -1442,7 +1431,7 @@
     <string name="attribute_breeding_no">번식 계절/자연 보호 아님</string>
     <string name="attribute_snow_proof_yes">눈이 없는 은닉처</string>
     <string name="attribute_snow_proof_no">눈이 없는 은닉처 아님</string>
-    <string name="attribute_compass_yes">나침반 필요</string>
+    <string name="attribute_compass_yes">나침반</string>
     <string name="attribute_compass_no">나침반 불필요</string>
     <string name="attribute_cave_yes">동굴용 장비</string>
     <string name="attribute_cave_no">동굴용 장비 필요없음</string>
@@ -1709,7 +1698,7 @@
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
     <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
-    <string name="map_trail_show">트레일 보이기</string>
+    <string name="map_trail_show">최근 역사 트랙 표시</string>
     <string name="map_trail_hide">역사 트랙 숨기기</string>
     <!-- history track export -->
     <string name="trailhistory">역사 트랙</string>
