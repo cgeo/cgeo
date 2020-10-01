@@ -25,6 +25,6 @@ Los registros pueden ser publicados en línea o almacenados sin conexión para s
 Busca y descubre rastreables, gestiona tu inventario de rastreables y deja un rastreable mientras publicas un registro de caché.
 
 Si tienes problemas al instalar o usar c:geo por favor echa un vistazo a nuestras Preguntas Frecuentes (https://faq.cgeo.org) o consulta la guía de usuario (https://manual.cgeo.org).
-Si todavía tiene problemas póngase en contacto con el servicio de soporte por correo electrónico.
+Si todavía hay problemas, póngase en contacto con el servicio de soporte por correo electrónico.
 
 Si quieres saber por qué c:geo necesita los permisos solicitados, consulta https://www.cgeo.org para obtener una explicación.
