@@ -113,9 +113,11 @@
     <string name="log_yesterday">I går</string>
     <string name="log_smilies">Smilefjes</string>
     <string name="log_image">Bilde</string>
+    <string name="log_images">Bilder</string>
     <string name="log_image_attach">Legg ved bilde</string>
     <string name="log_image_stored">Eksisterende</string>
     <string name="log_image_camera">Nytt</string>
+    <string name="log_image_delete">Slett</string>
     <string name="log_image_caption">Bildetekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -134,10 +136,11 @@
     <string name="log_problem_damaged_text">Denne geocacheren rapporterte at beholderen er skadet.</string>
     <string name="log_problem_missing_label">Cachen kan ha forsvunnet</string>
     <string name="log_problem_missing_text">Denne geocacheren rapporterte at cachen kan ha forsvunnet.</string>
-    <string name="log_problem_other_label">Andre</string>
+    <string name="log_problem_other_label">Annet</string>
     <string name="log_problem_other_text">Denne geocacheren rapporterte at det er et problem med denne cachen.</string>
     <string name="log_problem_archive_label">Cachen bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacheren rapporterte at geocachen bør arkiveres. En frivillig kontrollør blir varslet.</string>
+    <string name="log_image_titleprefix">Bilde</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversett til %s</string>
     <string name="translate_to_english">Oversett til engelsk</string>
@@ -512,8 +515,8 @@
     <string name="init_signature_template_number">Antall funn</string>
     <string name="init_signature_template_owner">Eier</string>
     <string name="init_signature_template_name">Navn</string>
-    <string name="init_signature_template_difficulty">Vankelighetsgrad</string>
-    <string name="init_signature_template_terrain">Terrenggrad</string>
+    <string name="init_signature_template_difficulty">Vanskelighet</string>
+    <string name="init_signature_template_terrain">Terreng</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Loggtekst</string>
     <string name="init_signature_template_size">Størrelse</string>
@@ -555,14 +558,12 @@
     <string name="init_backup">Sikkerhetskopier cacher / veipunkter</string>
     <string name="init_backup_backup">Lag sikkerhetskopi</string>
     <string name="init_backup_running">Oppretter sikkerhetskopi av database…</string>
-    <string name="init_backup_note">Vennligst bemerk at dette vil sikkerhetskopiere/gjenopprette en database som KUN inneholder cacher og veipunkter, men ikke dine cachebilder eller programinnstillinger.</string>
     <string name="init_backup_restore">Gjenopprett fra sikkerhetskopi</string>
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
     <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
     <string name="init_backup_no_backup_available">Det finnes ingen fil med sikkerhetskopi nå.</string>
     <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende sikkerhetskopien fra %s?</string>
-    <string name="restore_confirm_overwrite">Vil du overskrive %s på enheten din med sikkerhetskopien?</string>
     <string name="init_restore_success">Gjenoppretting fullført.</string>
     <string name="init_restore_failed_dbrecreated">Gjenoppretting feilet. Sikkerhetskopien er skadet og databasen ble satt opp på nytt.</string>
     <string name="init_restore_failed">Gjenoppretting mislyktes.</string>
@@ -572,17 +573,11 @@
     <string name="init_backup_last_no">Det finnes ingen sikkerhetskopi.</string>
     <string name="settings_title_backup">Sikkerhetskopier/Gjenopprett</string>
     <string name="settings_summary_backup">Utfør sikkerhetskopiering og gjenoppretting av cache/veipunkt-data og programinnstillinger.</string>
-    <string name="init_backup_settings">Sikkerhetskopier programinnstillinger</string>
-    <string name="init_backup_settings_backup_light">Sikkerhetskopier innstillinger (uten kontodata)</string>
-    <string name="init_backup_settings_backup_full">Sikkerhetskopier innstillinger (alt)</string>
     <string name="init_backup_settings_backup_full_confirm">Vil du lagre sensitive kontorelaterte data? Disse kan muligens lese av andre applikasjoner.</string>
     <string name="settings_savingerror">Feil under lagring av innstillinger</string>
     <string name="settings_saved">Innstillinger ble lagret til:</string>
     <string name="init_backup_settings_restore">Gjenopprett innstillinger</string>
-    <string name="init_backup_settings_restore_confirm">Vil du overskrive dine nåværende innstillinger?</string>
-    <string name="init_backup_settings_restore_no">Det er ingen innstillinger å gjenopprette</string>
     <string name="settings_readingerror">Feil ved lesing av innstillinger</string>
-    <string name="settings_restored">Innstillere gjenopprettet</string>
     <string name="settings_restart">c:geo må restartes for å bruke de innlastede innstillingene</string>
     <string name="settings_info_offline_maps_title">Info på kart lagret lokalt</string>
     <string name="settings_info_offline_maps">c:geo støtter kart lagret lokalt. Du kan laste ned kart fra Mapsforge eller opprette egne kart fra OpenStreetMap. Du må velge en mappe hvor kartfilene lagres.</string>
@@ -721,7 +716,7 @@
     <string name="auth_forget_title">Glemt brukernavn?</string>
     <string name="auth_forget_message">Du vil bli koblet fra denne tjenesten. Lagrede innloggingsdetaljer går tapt.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Dette vil gi <b>c:geo</b> tilgang til %s.</string>
+    <string name="auth_credentials_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
     <string name="auth_credentials_explain_long">Du starter prosessen ved å fylle inn brukernavn og passord og trykke \"Godkjenne c:geo\". Denne prosessen vil koble til %s og hente et token for godkjenning. Verre er det ikke.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
@@ -871,6 +866,7 @@
     <string name="cache_found_last_30_days">Funnet siste 30 dager</string>
     <string name="cache_status_archived">Arkivert</string>
     <string name="cache_status_disabled">Deaktivert</string>
+    <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun for premium-medlemmer</string>
     <string name="cache_status_not_premium">Tilgjengelig for alle medlemmer</string>
     <string name="cache_status_stored">Lagret</string>
@@ -904,7 +900,7 @@
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Opprinnelige koordinater</string>
-    <string name="cache_spoiler_images_title">Spoiler-bilder</string>
+    <string name="cache_spoiler_images_title">Bilder</string>
     <string name="cache_log_types">Loggtyper</string>
     <string name="cache_coordinates_no">Denne cacher har ingen koordinater.</string>
     <string name="cache_clear_history">Slett historikk</string>
@@ -912,7 +908,7 @@
     <string name="cache_license">Lisens</string>
     <string name="cache_image">Bilde</string>
     <string name="cache_image_open_file">Åpne som fil</string>
-    <string name="cache_image_open_browser">Åpne i nettleser</string>
+    <string name="cache_image_open_browser">Åpne i nettleseren</string>
     <string name="cache_image_add_waypoint">Legg til veipunkt</string>
     <string name="cache_image_background">Bakgrunnsbilde fra cachebeskrivelsen</string>
     <string name="cache_share_field">Del</string>
@@ -1007,7 +1003,7 @@
     <!-- visit -->
     <string name="visit_tweet">Del dette funnet på Twitter</string>
     <!-- map -->
-    <string name="map_map">Kart</string>
+    <string name="map_map">Vis på kartet</string>
     <string name="map_live">Live-kart</string>
     <string name="map_view_map">Kart</string>
     <string name="map_modes">Kartinnstillinger</string>
@@ -1046,7 +1042,7 @@
     <string name="search_coordinates_button">Søk med koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søk med adresse</string>
-    <string name="search_geo">Geokode</string>
+    <string name="search_geo">GC-kode</string>
     <string name="search_geo_button">Søk med geokode</string>
     <string name="search_kw">Nøkkelord</string>
     <string name="search_kw_prefill">Nøkkelord</string>
@@ -1065,13 +1061,13 @@
     <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_loading">Laster en liste med Pocket Queries</string>
     <!-- trackable -->
-    <string name="trackable">Sporbar (TB eller coin)</string>
+    <string name="trackable">Sporbar (trackable)</string>
     <string name="trackable_details_loading">Laster detaljene til den sporbare…</string>
     <string name="trackable_log_touch">Logg sporbar</string>
     <string name="trackable_browser_open">Åpne i nettleseren</string>
     <string name="trackable_refresh">Oppdater</string>
     <string name="trackable_goal">Mål</string>
-    <string name="trackable_details">Detailjer</string>
+    <string name="trackable_details">Detaljer</string>
     <string name="trackable_image">Bilde</string>
     <string name="trackable_code">Sporingskode</string>
     <string name="trackable_name">Navn</string>
@@ -1084,7 +1080,7 @@
     <string name="trackable_spotted_unknown_location">Ukjent sted</string>
     <string name="trackable_spotted_owner">I hendene på eieren</string>
     <string name="trackable_spotted_archived">Arkivert</string>
-    <string name="trackable_origin">Start</string>
+    <string name="trackable_origin">Opprinnelig posisjon</string>
     <string name="trackable_unknown">Ukjent</string>
     <string name="trackable_released">Sluppet</string>
     <string name="trackable_distance">Reiselengde</string>
@@ -1110,11 +1106,11 @@
     <string name="navigation">Navigasjon</string>
     <string name="compass_title">Kompass</string>
     <string name="use_gps">Kun GPS i bruk</string>
-    <string name="use_compass">GPS og magnetisk kompass i bruk</string>
     <string name="destination_select">Velg destinasjon</string>
     <string name="navigation_direct_navigation">Direkte navigering</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Ukjent</string>
     <!-- license -->
     <string name="license">Lisens</string>
     <string name="license_show">Vis lisens</string>
@@ -1527,6 +1523,7 @@
     <string name="individual_route_added">Legg til i ruten</string>
     <string name="individual_route_removed">Fjernet fra ruten</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
+    <string name="save_sorted_route">Lagre</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_m">m</string>
