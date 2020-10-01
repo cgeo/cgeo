@@ -556,14 +556,12 @@
     <string name="init_backup">キャッシュ / ウェイポイントをバックアップ</string>
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
-    <string name="init_backup_note">この機能は、キャッシュとウェイポイントのみのデータベースのバックアップ/復元を行います。キャッシュ画像とプログラム設定は含まれません。</string>
     <string name="init_backup_restore">リストア</string>
     <string name="init_backup_success">キャッシュのデータベースは正常にバックアップされました。</string>
     <string name="init_backup_failed">キャッシュのデータベースをバックアップできませんでした。</string>
     <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません。</string>
     <string name="init_backup_no_backup_available">バックアップ ファイルはありません。</string>
     <string name="backup_confirm_overwrite">%sの既存バックアップを上書きしますか？</string>
-    <string name="restore_confirm_overwrite">バックアップでお使いのデバイス上の %s を上書きしますか?</string>
     <string name="init_restore_success">キャッシュのデータベースは正常にリストアされました。</string>
     <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました。</string>
     <string name="init_restore_failed">キャッシュのデータベースをリストアできませんでした。</string>
@@ -573,17 +571,11 @@
     <string name="init_backup_last_no">まだバックアップを取ったことがありません。</string>
     <string name="settings_title_backup">バックアップ / 復元</string>
     <string name="settings_summary_backup">キャッシュ/ウェイポイントデータと、プログラム設定のバックアップと復元を実行します。</string>
-    <string name="init_backup_settings">プログラム設定のバックアップ</string>
-    <string name="init_backup_settings_backup_light">設定のバックアップ (アカウントデータなし)</string>
-    <string name="init_backup_settings_backup_full">設定のバックアップ (全て)</string>
     <string name="init_backup_settings_backup_full_confirm">機密のアカウントに関連するデータを保存しますか? これらは他のアプリケーションで読み取られる可能性があります。</string>
     <string name="settings_savingerror">設定の保存エラー</string>
     <string name="settings_saved">設定が保存されました:</string>
     <string name="init_backup_settings_restore">復元の設定</string>
-    <string name="init_backup_settings_restore_confirm">現在の設定を上書きしますか?</string>
-    <string name="init_backup_settings_restore_no">利用可能な設定のバックアップはありません</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
-    <string name="settings_restored">設定を復元しました</string>
     <string name="settings_restart">読み込まれた設定を有効にするには、c:geoを再起動する必要があります</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図に対応しています。Mapsforgeからダウンロードした地図やOSMのデータから自作した地図などを使用できます。最初にオフライン地図フォルダを選択しておく必要があります。</string>
@@ -1069,7 +1061,6 @@
     <string name="navigation">ナビゲーション</string>
     <string name="compass_title">コンパス</string>
     <string name="use_gps">GPS のみ使用</string>
-    <string name="use_compass">GPS と磁気コンパスを使用</string>
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
     <!-- device orientation types -->
