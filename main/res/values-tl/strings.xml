@@ -108,9 +108,11 @@
     <string name="log_yesterday">Kahapon</string>
     <string name="log_smilies">Ang Smilies</string>
     <string name="log_image">Ang imahe</string>
+    <string name="log_images">Mga imahe</string>
     <string name="log_image_attach">Ilakip ang imahe</string>
     <string name="log_image_stored">Umiiral na</string>
     <string name="log_image_camera">Bago</string>
+    <string name="log_image_delete">Burahin</string>
     <string name="log_image_caption">Ang kapsyon</string>
     <string name="log_image_description">Ang paglalarawan</string>
     <string name="log_image_scale">Pag-iskala</string>
@@ -119,6 +121,9 @@
     <string name="log_oc_team_comment">Ang komento ng grupo na OC</string>
     <string name="log_your_saved_log">Ang iyong na-save na log</string>
     <string name="log_empty_logbook">Ang talaang libro ng cathe na ito ay walang laman.</string>
+    <string name="log_problem_needs_maintenance_label">Kailangan ng tagapagpanatili</string>
+    <string name="log_problem_other_label">Iba pa</string>
+    <string name="log_image_titleprefix">Ang imahe</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -434,7 +439,10 @@
     <string name="init_signature_template_number">Numero</string>
     <string name="init_signature_template_owner">Ang may-ari</string>
     <string name="init_signature_template_name">Pangalan</string>
+    <string name="init_signature_template_difficulty">Ang mahirap</string>
+    <string name="init_signature_template_terrain">Ang lupain</string>
     <string name="init_signature_template_log">Ang teksto ng log</string>
+    <string name="init_signature_template_size">Sukat</string>
     <string name="init_ratingwanted">Ang Marka ng GCvote</string>
     <string name="init_summary_ratingwanted">I-load ang marka ng cache mula sa Gcvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Tingnan ang mga Kaibigan/pagmamay-ari</string>
@@ -707,6 +715,7 @@
     <string name="ignore_confirm_title">Mag-ingat</string>
     <string name="ignore_confirm_message">Ang pag-ignore sa cache ay nangangahulugang ang cache na ito hindi na magaganap pa habang nagloload ng datos mula sa geocaching.com. Maaari mo lang makitang muli ang cache sa pag-unignore nito sa website.</string>
     <string name="cache_status">Katayuan</string>
+    <string name="cache_stored">Itago</string>
     <string name="cache_status_offline_log">Naka-save na Log</string>
     <string name="cache_status_found">Nahanap</string>
     <string name="cache_not_status_found">Hindi nahanap</string>
@@ -714,6 +723,7 @@
     <string name="cache_found_last_30_days">Nakita sa nakaraang 30 na araw</string>
     <string name="cache_status_archived">Naka-archive</string>
     <string name="cache_status_disabled">Hindi pinagana</string>
+    <string name="cache_status_active">Gawing aktibo</string>
     <string name="cache_status_premium">Mga Premyadong Miyembro lamang</string>
     <string name="cache_status_not_premium">Makaka-access ang Lahat ng mga Miyembro</string>
     <string name="cache_status_stored">Naka-imbak</string>
@@ -901,6 +911,7 @@
     <string name="trackable_touch">Hawakan</string>
     <string name="trackable_not_activated">Hindi aktibo ang trackable</string>
     <string name="trackable_travelbug">Ang travelbug</string>
+    <string name="trackable_status">Katayuan</string>
     <string name="geokret_type_traditional">Tradisyonal</string>
     <string name="geokret_type_book_or_media">Libro o elektronikong pagpapahayag</string>
     <string name="geokret_type_human">Ang tao</string>
@@ -922,6 +933,7 @@
     <string name="navigation_direct_navigation">Direktang nabigasyon</string>
     <string name="osmand_marker_cgeo">Taga-marka mula sa c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Hindi nakikilala</string>
     <!-- license -->
     <string name="license">Ang lisensya</string>
     <string name="license_show">Ipakita ang lisensya</string>
@@ -955,6 +967,7 @@
     <string name="export_fieldnotes_upload_success">Ang pag-upload sa geocaching.com ay matagumpay</string>
     <string name="export_fieldnotes_onlynew">Kailan lang nagsimula ang huling pag-luluwas</string>
     <string name="export_fieldnotes_creating">Ang paglikha ng sulat sa field&#8230;</string>
+    <string name="export_gpx">Ang GPX</string>
     <string name="export_gpx_info">Ang Gpx na file ay dapat mai-luwas sa %1$s namay kasalukuyang petsa at oras at ng kanyang pangalan sa file.</string>
     <string name="export_gpx_to">Ipadala ang ini-luwas na GPx sa</string>
     <string name="export_confirm_title">Ang pag-luluwas sa %1$s</string>
@@ -1300,6 +1313,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">I-save</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
