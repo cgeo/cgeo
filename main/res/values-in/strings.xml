@@ -462,6 +462,7 @@
     <string name="init_backup_unnecessary">Database kosong, tidak perlu cadangan.</string>
     <string name="init_backup_no_backup_available">Tidak ada file cadangan yang tersedia.</string>
     <string name="backup_confirm_overwrite">Apakah anda ingin menimpa data cadangan yang ada dari %s?</string>
+    <string name="restore_confirm_overwrite">Apakah anda ingin menimpa %s pada perangkat anda dengan data cadangan?</string>
     <string name="init_restore_success">Pemulihan selesai.</string>
     <string name="init_restore_failed">Pemulihan telah gagal.</string>
     <string name="init_restore_running">Pemulihan cache database&#8230;</string>
