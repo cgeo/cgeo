@@ -105,9 +105,11 @@
     <string name="log_yesterday">Včeraj</string>
     <string name="log_smilies">Smeškoti</string>
     <string name="log_image">Slika</string>
+    <string name="log_images">Slike</string>
     <string name="log_image_attach">Dodaj sliko</string>
     <string name="log_image_stored">Obstoječa</string>
     <string name="log_image_camera">Nova</string>
+    <string name="log_image_delete">Izbriši</string>
     <string name="log_image_caption">Naslov</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skaliranje</string>
@@ -116,6 +118,9 @@
     <string name="log_oc_team_comment">Komentar ekipe OC</string>
     <string name="log_your_saved_log">Shranjen zapis</string>
     <string name="log_empty_logbook">Dnevnik zaklada je prazen.</string>
+    <string name="log_problem_needs_maintenance_label">Potrebuje vzdrževanje</string>
+    <string name="log_problem_other_label">drugo</string>
+    <string name="log_image_titleprefix">Slika</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
@@ -397,8 +402,11 @@
     <string name="init_signature_template_number">Število najdb</string>
     <string name="init_signature_template_owner">Uporabniško ime lastnika zaklada</string>
     <string name="init_signature_template_name">Ime</string>
+    <string name="init_signature_template_difficulty">Težavnost</string>
+    <string name="init_signature_template_terrain">Teren</string>
     <string name="init_signature_template_url">URL naslov</string>
     <string name="init_signature_template_log">Vsebina zapisa</string>
+    <string name="init_signature_template_size">Velikost</string>
     <string name="init_ratingwanted">GCvote ocene</string>
     <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Prikaže svoje/prijateljeve</string>
@@ -532,16 +540,20 @@
     <string name="auth_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
     <string name="auth_explain_long">S pritiskom na gumb \"poveži c:geo\" se bo začel postopek. Postopek bo najprej odprl spletno stran %s. Prijavite se na to spletno stran in dovolite <b>c:geo</b>tu dostop do vašega računa. To je vse.</string>
     <!-- auth credentials -->
+    <string name="auth_credentials_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
     <!-- auth token -->
+    <string name="auth_token_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
     <!-- auth geokrety -->
+    <string name="auth_dialog_completed_geokrety">c:geo je sedaj povezan z %s.</string>
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_offline">Brez povezave</string>
     <string name="cache_offline_refresh">Osveži</string>
+    <string name="cache_offline_drop">Odstrani</string>
     <string name="cache_offline_store">Shrani</string>
     <string name="cache_offline_stored">Shranjeno na napravi</string>
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
@@ -617,6 +629,7 @@
     <string name="cache_menu_challenge_checker">Poišči Challenge-Checker</string>
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
+    <string name="cache_stored">Shranjeni</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
@@ -624,6 +637,7 @@
     <string name="cache_found_last_30_days">Najdbe zadnjih 30 dni</string>
     <string name="cache_status_archived">Arhiviran</string>
     <string name="cache_status_disabled">Onemogočen</string>
+    <string name="cache_status_active">Aktivno</string>
     <string name="cache_status_premium">Samo za Premium člane</string>
     <string name="cache_status_not_premium">Za vse člane</string>
     <string name="cache_status_stored">Shranjen</string>
@@ -698,6 +712,7 @@
     <string name="popup_more">Več informacij</string>
     <!-- waypoint -->
     <string name="waypoint">Dodatna točka</string>
+    <string name="waypoint_coordinates">Koordinate</string>
     <string name="waypoint_cache_coordinates">Koordinate zaklada</string>
     <string name="waypoint_calculate_coordinates">Izračunaj koordinate</string>
     <string name="waypoint_custom">Posebno</string>
@@ -795,6 +810,7 @@
     <string name="trackable_spotted_at_user">V rokah</string>
     <string name="trackable_spotted_unknown_location">Neznana lokacija</string>
     <string name="trackable_spotted_owner">Pri lastniku</string>
+    <string name="trackable_spotted_archived">Arhiviran</string>
     <string name="trackable_origin">Vir</string>
     <string name="trackable_unknown">Neznano</string>
     <string name="trackable_released">Objavljen</string>
@@ -822,6 +838,7 @@
     <string name="navigation_direct_navigation">Direktna navigacija</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">neznano</string>
     <!-- license -->
     <string name="license">Licenca</string>
     <string name="license_show">Pokaži licenco</string>
@@ -1151,6 +1168,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Shrani</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
