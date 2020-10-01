@@ -104,9 +104,11 @@
     <string name="log_today">Azi</string>
     <string name="log_yesterday">Ieri</string>
     <string name="log_image">Imagine</string>
+    <string name="log_images">Imagini</string>
     <string name="log_image_attach">Ataşează imagine</string>
     <string name="log_image_stored">Existentă</string>
     <string name="log_image_camera">Nouă</string>
+    <string name="log_image_delete">Şterge</string>
     <string name="log_image_caption">Titlu</string>
     <string name="log_image_description">Descriere</string>
     <string name="log_image_scale">Mărire</string>
@@ -115,6 +117,9 @@
     <string name="log_oc_team_comment">Comentariu din partea echipei OC</string>
     <string name="log_your_saved_log">Însemnare salvată</string>
     <string name="log_empty_logbook">Jurnalul acestei geocutii este gol.</string>
+    <string name="log_problem_needs_maintenance_label">Are nevoie de întreţinere</string>
+    <string name="log_problem_other_label">Alta</string>
+    <string name="log_image_titleprefix">Imagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
@@ -426,7 +431,10 @@
     <string name="init_signature_template_number">Număr</string>
     <string name="init_signature_template_owner">Proprietar</string>
     <string name="init_signature_template_name">Nume</string>
+    <string name="init_signature_template_difficulty">Dificultate</string>
+    <string name="init_signature_template_terrain">Teren</string>
     <string name="init_signature_template_log">Text însemnare</string>
+    <string name="init_signature_template_size">Dimensiune</string>
     <string name="init_ratingwanted">Voturi GCvote</string>
     <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Arată ale mele/ale prietenilor</string>
@@ -702,6 +710,7 @@
     <string name="ignore_confirm_title">Atenţie</string>
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
+    <string name="cache_stored">Stocate</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
@@ -709,6 +718,7 @@
     <string name="cache_found_last_30_days">Găsite în ultimele 30 de zile</string>
     <string name="cache_status_archived">Arhivată</string>
     <string name="cache_status_disabled">Inactivă</string>
+    <string name="cache_status_active">Activ</string>
     <string name="cache_status_premium">Doar membrii Premium</string>
     <string name="cache_status_not_premium">Acces pentru toţi membrii</string>
     <string name="cache_status_stored">Salvată</string>
@@ -723,6 +733,7 @@
     <string name="cache_rating">Voturi</string>
     <string name="cache_own_rating">Votul tău</string>
     <string name="cache_rating_of">din</string>
+    <string name="cache_favorite">Favorită</string>
     <string name="cache_owner">Proprietar</string>
     <string name="cache_hidden">Ascunsă</string>
     <string name="cache_event">Data</string>
@@ -891,6 +902,7 @@
     <string name="trackable_distance">A călătorit</string>
     <string name="trackable_touch">Descoperă</string>
     <string name="trackable_not_activated">Obiectul călător nu a fost activat</string>
+    <string name="trackable_status">Stare</string>
     <string name="geokret_type_traditional">Tradiţional</string>
     <string name="geokret_type_book_or_media">Carte sau memorie electronică</string>
     <string name="geokret_type_human">Persoană</string>
@@ -912,6 +924,7 @@
     <string name="navigation_direct_navigation">Navigare directă</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Necunoscută</string>
     <!-- license -->
     <string name="license">Licenţă</string>
     <string name="license_show">Afişează licenţa</string>
@@ -1298,6 +1311,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Salvează</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_yd">zd</string>
