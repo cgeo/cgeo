@@ -25,6 +25,6 @@ Els registres es poden publicar en línia o emmagatzemar fora de línia per envi
 Cerqueu i descobriu rastrejables, gestioneu el vostre inventari rastrejable i deixeu anar un rastrejable mentre publiqueu un registre.
 
 Si teniu problemes per instal·lar o utilitzar c: geo, primer consulteu les nostres FAQ (https://faq.cgeo.org) o consulteu la guia de l'usuari (https://manual.cgeo.org).
-Si encara hi ha problemes, poseu-vos en contacte amb el servei d'assistència per correu electrònic.
+Si encara hi ha problemes, poseu-vos en contacte amb el servei d'assistència per corre electrònic.
 
 Si voleu saber per què aquest  plugin de c: geo necessita els permisos sol·licitats, consulteu https://www.cgeo.org/faq.html#plugin-contacts-privacy per obtenir una explicació.
