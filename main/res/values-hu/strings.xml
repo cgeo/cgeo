@@ -112,9 +112,11 @@
     <string name="log_yesterday">Tegnap</string>
     <string name="log_smilies">Hangulatjelek</string>
     <string name="log_image">Kép</string>
+    <string name="log_images">Képek</string>
     <string name="log_image_attach">Kép csatolása</string>
     <string name="log_image_stored">Meglévő</string>
     <string name="log_image_camera">Új</string>
+    <string name="log_image_delete">Törlés</string>
     <string name="log_image_caption">Felirat</string>
     <string name="log_image_description">Leírás</string>
     <string name="log_image_scale">Méretezés</string>
@@ -137,6 +139,7 @@
     <string name="log_problem_other_text">Ez a játékos azt jelezte, hogy probléma van a ládával.</string>
     <string name="log_problem_archive_label">Megszüntetendő láda</string>
     <string name="log_problem_archive_text">Ez a játékos azt jelezte, hogy meg kell szüntetni a ládát. A ládaellenőr értesült erről.</string>
+    <string name="log_image_titleprefix">Kép</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Fordítás erre: %s</string>
     <string name="translate_to_english">Fordítás angolra</string>
@@ -818,6 +821,7 @@
     <string name="cache_found_last_30_days">Megtalálva az elmúlt 30 napban</string>
     <string name="cache_status_archived">Archiválva</string>
     <string name="cache_status_disabled">Letiltva</string>
+    <string name="cache_status_active">Aktív</string>
     <string name="cache_status_premium">Csak prémium tagoknak</string>
     <string name="cache_status_not_premium">Minden tag számára</string>
     <string name="cache_status_stored">Elmentve</string>
@@ -1035,6 +1039,7 @@
     <string name="navigation_direct_navigation">Közvetlen navigáció</string>
     <string name="osmand_marker_cgeo">c:geo jelölő</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Ismeretlen</string>
     <!-- license -->
     <string name="license">Licenc</string>
     <string name="license_show">Licenc mutatása</string>
@@ -1069,6 +1074,7 @@
     <string name="export_fieldnotes_upload_success">Sikeres feltöltés a geocaching.com-ra</string>
     <string name="export_fieldnotes_onlynew">Csak az utolsó export óta</string>
     <string name="export_fieldnotes_creating">Offline logok exportálása…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">A GPX fájl ide lesz exportálva: %1$s a jelenlegi dátummal és időponttal a fájl nevében.</string>
     <string name="export_gpx_to">Az exportált GPX küldése ide</string>
     <string name="export_confirm_title">%1$s exportálása</string>
@@ -1437,6 +1443,7 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Mentés</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
