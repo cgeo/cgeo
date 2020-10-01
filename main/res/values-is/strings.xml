@@ -67,7 +67,9 @@
     <string name="log_tb_visit">Heimsótt</string>
     <string name="log_tb_drop">Skilið eftir</string>
     <string name="log_tb_changeall">Breyta öllu</string>
+    <string name="log_tb_grabbed">Tekinn einhversstaðar</string>
     <string name="log_tb_note">Athugasemd</string>
+    <string name="log_tb_discovered">Uppgötvað</string>
     <string name="log_tb_archived">Í geymslu</string>
     <string name="log_saving">Færsla í innsendingu…</string>
     <string name="log_posting_log">Set færslu inn…</string>
@@ -96,9 +98,11 @@
     <string name="log_yesterday">Í gær</string>
     <string name="log_smilies">Broskarlar</string>
     <string name="log_image">Mynd</string>
+    <string name="log_images">Myndir</string>
     <string name="log_image_attach">Festa mynd við</string>
     <string name="log_image_stored">úr safni</string>
     <string name="log_image_camera">Ný</string>
+    <string name="log_image_delete">Eyða</string>
     <string name="log_image_caption">Fyrirsögn</string>
     <string name="log_image_description">Lýsing</string>
     <string name="log_image_scale">Breyta stærð</string>
@@ -108,6 +112,7 @@
     <string name="log_empty_logbook">Dagbók þessa kassa er tóm.</string>
     <string name="log_problem_needs_maintenance_label">Þarfnast viðhalds</string>
     <string name="log_problem_other_label">Annað</string>
+    <string name="log_image_titleprefix">Mynd</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Þýtt að %s</string>
     <string name="translate_to_english">Þýða yfir á ensku</string>
@@ -342,8 +347,11 @@
     <string name="init_signature_template_number">Númer</string>
     <string name="init_signature_template_owner">Eigandi</string>
     <string name="init_signature_template_name">Nafn</string>
+    <string name="init_signature_template_difficulty">Erfiðleikastig</string>
+    <string name="init_signature_template_terrain">Landslag</string>
     <string name="init_signature_template_url">Slóð</string>
     <string name="init_signature_template_log">Færslutexti</string>
+    <string name="init_signature_template_size">Stærð</string>
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
     <string name="init_skin">Ljós hamur</string>
@@ -424,6 +432,7 @@
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline">Án netsambands</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
+    <string name="cache_offline_drop">Eyða</string>
     <string name="cache_offline_store">Vista</string>
     <string name="cache_offline_stored">Vistað í tæki</string>
     <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>
@@ -456,7 +465,10 @@
     <string name="cache_hint">Vísbending</string>
     <string name="cache_hint_not_available">Engin vísbending í boði</string>
     <string name="cache_logs">Færslubók</string>
+    <string name="cache_dialog_offline_save_title">Utan netsambands</string>
+    <string name="cache_dialog_offline_drop_title">Utan netsambands</string>
     <string name="cache_dialog_offline_drop_message">Fjarlægja cache úr minni tækis…</string>
+    <string name="cache_dialog_refresh_title">Endurhlaða</string>
     <string name="cache_menu_navigation_drive">Leiðsögn (keyrandi)</string>
     <string name="cache_menu_navigation_walk">Leiðsögn (gangandi)</string>
     <string name="cache_menu_navigation_transit">Leiðsögn (almenningssamgöngur)</string>
@@ -479,6 +491,7 @@
     <string name="cache_menu_checker">Opna Geochecker</string>
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
+    <string name="cache_stored">Vistað</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
@@ -540,6 +553,7 @@
     <string name="popup_more">Fleiri upplýsingar</string>
     <!-- waypoint -->
     <string name="waypoint">Vegpunktur</string>
+    <string name="waypoint_coordinates">Staðsetningarhnit</string>
     <string name="waypoint_custom">Sérsniðinn</string>
     <string name="waypoint_my_coordinates">Hnitin mín</string>
     <string name="waypoint_bearing">Lega í °</string>
@@ -565,6 +579,7 @@
     <string name="visit_tweet">Tilkynna fundinn á Twitter</string>
     <!-- map -->
     <string name="map_map">Kort</string>
+    <string name="map_live">Virkt kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <string name="map_routing">Vegvísun</string>
@@ -575,6 +590,7 @@
     <!-- search -->
     <string name="search_bar_hint">Leita að kössum</string>
     <string name="search_bar_desc">Kassar (geokóði, leitarorð), Ferðalangar (TB kóði)</string>
+    <string name="search_coordinates">Staðsetningarhnit</string>
     <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>
     <string name="search_address_button">Leita eftir heimilisfangi</string>
@@ -603,6 +619,8 @@
     <string name="trackable_spotted_at_user">Í höndum</string>
     <string name="trackable_spotted_unknown_location">Staðsetning ókunn</string>
     <string name="trackable_spotted_owner">Í höndum eiganda</string>
+    <string name="trackable_spotted_archived">Í geymslu</string>
+    <string name="trackable_unknown">Óþekkt</string>
     <string name="trackable_released">Sleppt</string>
     <string name="trackable_distance">Ferðast</string>
     <string name="trackable_not_activated">Ferðalangur ekki virkur</string>
@@ -612,10 +630,12 @@
     <string name="user_menu_send_message">Senda skilaboð</string>
     <string name="user_unknown">Óþekktur notandi</string>
     <!-- navigation -->
+    <string name="navigation">Leiðsögn</string>
     <string name="compass_title">Áttaviti</string>
     <string name="use_gps">Aðeins nota GPS</string>
     <string name="destination_select">Velja áfangastað</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Óþekkt</string>
     <!-- license -->
     <string name="license">Leyfi</string>
     <string name="license_show">Sýna leyfi</string>
@@ -696,6 +716,7 @@
     <string name="attribute_food_yes">Matur nálægt</string>
     <string name="attribute_food_no">Enginn matur nálægt</string>
     <string name="attribute_no_gps_no">Með GPS</string>
+    <string name="attribute_compass_yes">Áttaviti</string>
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Aðstoð</string>
@@ -738,6 +759,7 @@
     <string name="create_shortcut">Búa til flýtileið</string>
     <string name="send">Senda</string>
     <!-- Geokrety -->
+    <string name="settings_activate_geokrety">Virkja</string>
     <string name="init_geokrety_description">Heimila c:geo með GeoKrety.org að skrá GeoKrety ferðalanga.</string>
     <string name="init_geokrety_userid">Notandaauðkenni: %s</string>
     <string name="trackable_title_log_without_geocode">Geokóði ekki skilgreindur</string>
@@ -775,6 +797,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Vista</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">fet</string>
