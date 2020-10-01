@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
+    <string name="err_captcha">Απαιτείται Captcha. Παρακαλώ ανατρέξτε στις<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>για οδηγίες.</string>
     <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_su">Η επικοινωνία με το Geocaching.su απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
@@ -813,6 +814,7 @@
     <string name="cache_offline">Εκτός σύνδεσης</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
     <string name="cache_offline_drop">Διαγραφή</string>
+    <string name="cache_delete_userdefined_waypoints_note">Σημείωση: Έχετε ενεργοποιήμενη την επιλογή \"σημεία ενδιαφέροντος από τις σημειωσεις\". Εάν το c:geo αναγνωρίσει συντεταγμένες στις προσωπικές σημειώσεις, θα δημιουργήσει αυτόματα σημεία ενδιαφέροντος από αυτές. Μπορείτε να απενεργοποιήσετε την επιλογή αυτή από την επεξεργασία της προσωπικής σημείωσης.</string>
     <string name="cache_offline_store">Αποθήκευση</string>
     <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
@@ -1219,12 +1221,12 @@
     <string name="navigation">Πλοήγηση</string>
     <string name="compass_title">Πυξίδα</string>
     <string name="use_gps">Χρήση μόνο GPS</string>
-    <string name="use_compass">Χρήση GPS και μαγνητικής πυξίδας</string>
+    <string name="use_compass">Χρήση όλων των αισθητήρων</string>
     <string name="destination_select">Επιλογή προορισμού</string>
     <string name="navigation_direct_navigation">Άμεση πλοήγηση</string>
     <string name="osmand_marker_cgeo">Επιλογέας από c:geo</string>
-    <string name="device_heading_label">Κατεύθυνση συσκευής:</string>
-    <string name="device_orientation">Προσανατολισμός συσκευής</string>
+    <string name="device_heading_label">Συσκευή:</string>
+    <string name="device_orientation">Προσανατολισμός</string>
     <string name="device_orientation_label">Προσανατολισμός:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Άγνωστος</string>
