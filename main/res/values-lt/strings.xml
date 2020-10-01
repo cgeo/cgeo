@@ -1153,7 +1153,6 @@
     <string name="navigation">Navigacija</string>
     <string name="compass_title">Kompasas</string>
     <string name="use_gps">Naudojamas tik GPS</string>
-    <string name="use_compass">Naudojamas GPS ir magnetinis kompasas</string>
     <string name="destination_select">Pasirinkite tikslą</string>
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>

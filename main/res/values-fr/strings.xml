@@ -118,9 +118,11 @@
     <string name="log_yesterday">Hier</string>
     <string name="log_smilies">Sourillards</string>
     <string name="log_image">Image</string>
+    <string name="log_images">Images</string>
     <string name="log_image_attach">Ajouter une image</string>
     <string name="log_image_stored">Existante</string>
     <string name="log_image_camera">Nouvelle</string>
+    <string name="log_image_delete">Supprimer</string>
     <string name="log_image_caption">Légende</string>
     <string name="log_image_description">Description</string>
     <string name="log_image_scale">Mise à l\'échelle</string>
@@ -145,6 +147,8 @@
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
     <string name="log_image_scale_option_noscaling">Pas de mise à l\'échelle</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d Ko\n%4$s</string>
+    <string name="log_image_titleprefix">Image</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduire en %s</string>
     <string name="translate_to_english">Traduire en anglais</string>
@@ -152,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
+    <string name="err_captcha">Captcha obligatoire. Veuillez consulter notre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pour en savoir plus.</string>
     <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
@@ -260,6 +265,8 @@
     <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
     <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger les données supplémentaires (objets voyageurs / points de favori) pour loguer.</string>
     <string name="more_information">Plus d\'informations</string>
+    <string name="remind_later">Me le rappeler plus tard</string>
+    <string name="undo">Annuler</string>
     <string name="dont_show_again">Ne plus afficher</string>
     <string name="warn_gm_not_available">Google Maps n\'est pas disponible.</string>
     <string name="switch_to_mf">Votre version de Google Play Services est obsolète. Voulez-vous basculer vers les cartes Mapsforge ?</string>
@@ -534,6 +541,7 @@
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
     <string name="init_signature_template_user">Utilisateur</string>
     <string name="init_signature_template_number">Numéro de visite</string>
+    <string name="init_signature_template_number_legacy">Numéro (visites hors-ligne ignorées)</string>
     <string name="init_signature_template_owner">Propriétaire</string>
     <string name="init_signature_template_name">Nom de la cache</string>
     <string name="init_signature_template_difficulty">Difficulté</string>
@@ -808,6 +816,9 @@
     <string name="cache_offline_refresh">Actualiser</string>
     <string name="cache_offline_drop">Supprimer</string>
     <string name="cache_delete_userdefined_waypoints">Supprimer les points de passage définis par l\'utilisateur</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Supprimer tous les points de passage définis par l\'utilisateur de cette cache ?\n\nLes points de passage seront immédiatement supprimés, cette action est irréversible.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Note : vous avez activé \"extraction des points de passage depuis la note\". Si votre note personnelle contient des coordonnées reconnues par c:geo, les points de passage seront recréés automatiquement. Vous pouvez désactiver ce fonctionnement dans la fenêtre d\'édition de la note personnelle.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Les points de passage définis par l\'utilisateur ont été supprimés</string>
     <string name="cache_offline_store">Enregistrer</string>
     <string name="cache_offline_stored">Enregistrée</string>
     <string name="cache_offline_not_ready">Hors-ligne indisponible</string>
@@ -1162,6 +1173,7 @@
     <string name="search_tb">Objet voyageur</string>
     <string name="search_tb_hint">Code de l\'objet voyageur</string>
     <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
+    <string name="search_destination">Ouvrir la destination dans c:geo</string>
     <string name="search_address_started">Rechercher le lieu</string>
     <string name="search_address_result">Lieux trouvés</string>
     <string name="search_own_caches">Chercher mes caches</string>
@@ -1213,11 +1225,18 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Boussole</string>
     <string name="use_gps">GPS uniquement</string>
-    <string name="use_compass">GPS et champ magnétique</string>
+    <string name="use_compass">Tous les capteurs utilisés</string>
     <string name="destination_select">Sélectionnez une destination</string>
     <string name="navigation_direct_navigation">Navigation directe</string>
     <string name="osmand_marker_cgeo">Repère de c:geo</string>
+    <string name="device_heading_label">Appareil:</string>
+    <string name="device_orientation">Orientation</string>
+    <string name="device_orientation_label">Orientation:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Inconnu</string>
+    <string name="do_auto">Auto</string>
+    <string name="do_flat">à plat</string>
+    <string name="do_upright">droit</string>
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Afficher la licence</string>
@@ -1494,6 +1513,14 @@
     <string name="attribute_survey_marker_no">Pas près d\'un repère d\'arpentage</string>
     <string name="attribute_offset_cache_yes">Cache relative</string>
     <string name="attribute_offset_cache_no">Pas de cache relative</string>
+    <string name="attribute_bonuscache_yes">Cache bonus</string>
+    <string name="attribute_bonuscache_no">N\'est pas une cache bonus</string>
+    <string name="attribute_powertrail_yes">Fait partie d\'un power trail</string>
+    <string name="attribute_powertrail_no">Ne fait pas partie d\'un power trail</string>
+    <string name="attribute_challengecache_yes">Cache Challenge</string>
+    <string name="attribute_challengecache_no">N\'est pas une cache challenge</string>
+    <string name="attribute_hqsolutionchecker_yes">Checker Geocaching.com activé</string>
+    <string name="attribute_hqsolutionchecker_no">Checker Geocaching.com désactivé</string>
     <!-- next things -->
     <string name="quote">Pour faciliter le géocaching.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1713,8 +1740,10 @@
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
     <string name="downloadmap_info">Vous allez être redirigé vers un site de téléchargement de cartes hors ligne simples (sans support de thème).\n\nChoisissez le fichier .map de votre région puis appuyez pour le télécharger.\n\nUne fois le téléchargement terminé, appuyez sur le fichier téléchargé pour l\'utiliser comme carte courante de c:geo</string>
     <string name="downloadmap_choose">Sélectionner la carte</string>
+    <string name="downloadmap_filename">Téléchargement de %s</string>
     <string name="downloadmanager_not_available">Impossible de télécharger la carte, le gestionnaire système de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
+    <string name="downloadmap_target_not_writable">L\'emplacement «%s» n\'est pas accessible en écriture - la carte téléchargée sera stockée dans le dossier de téléchargements de l\'appareil et devra être placée manuellement dans le dossier des cartes.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
     <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>

@@ -919,7 +919,6 @@
     <string name="navigation">Nabigasyon</string>
     <string name="compass_title">Kumpas</string>
     <string name="use_gps">GPS lamang ang ginamit</string>
-    <string name="use_compass">GPS at Magnetik na kumpas ang ginamit</string>
     <string name="destination_select">Pumili ng destinasyon</string>
     <string name="navigation_direct_navigation">Direktang nabigasyon</string>
     <string name="osmand_marker_cgeo">Taga-marka mula sa c:geo</string>
