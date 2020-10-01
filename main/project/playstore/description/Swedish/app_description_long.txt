@@ -25,6 +25,6 @@ Loggar kan läggas upp online eller lagras offline för senare inlämning eller 
 Sök upp och registrera trackables, hantera din trackable-samling och lämna av en trackable när du postar en cachelogg.
 
 Om du har problem att installera eller använda c:geo så titta gärna i vår FAQ med vanliga frågor och svar (https://faq.cgeo.org) eller läs användarmanualen (https://manual.cgeo.org).
-Om du fortfarande har problem så kontakta vår support via e-post.
+Om det fortfarande finns problem, kontakta support via e-post.
 
 Om du undrar varför c:geo kräver vissa app-behörigheter, vänligen läs på https://www.cgeo.org för en förklaring.
