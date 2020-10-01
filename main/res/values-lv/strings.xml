@@ -116,9 +116,11 @@
     <string name="log_yesterday">Vakar</string>
     <string name="log_smilies">Smaidiņi</string>
     <string name="log_image">Attēls</string>
+    <string name="log_images">Attēli</string>
     <string name="log_image_attach">Pievienot attēlu</string>
     <string name="log_image_stored">Esošo</string>
     <string name="log_image_camera">Jaunu</string>
+    <string name="log_image_delete">Dzēst</string>
     <string name="log_image_caption">Nosaukums</string>
     <string name="log_image_description">Apraksts</string>
     <string name="log_image_scale">Izšķirtspēja</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Attēls</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot angļu valodā</string>
@@ -285,7 +288,7 @@
     <!-- main screen -->
     <string name="live_map_button">Karte</string>
     <string name="caches_nearby_button">Tuvumā</string>
-    <string name="advanced_search_button">Meklēt</string>
+    <string name="advanced_search_button">Meklēšana</string>
     <string name="stored_caches_button">Saglabātie bezsaistē</string>
     <string name="any_button">Doties uz</string>
     <string name="unknown_scan">Skenēšanas rezultātā neviens ģeokods netika atrasts.</string>
@@ -406,7 +409,7 @@
     <string name="about_apache_license"><a href=""> Apache License, Version 2.0</a></string>
     <string name="about_help">Palīdzība</string>
     <string name="about_starting">Sāksim!</string>
-    <string name="about_starting_head">Sāksim</string>
+    <string name="about_starting_head">Sāksim!</string>
     <string name="about_starting_text_basics_head">Geocaching pamati</string>
     <string name="about_starting_text_basics_text">Geocaching ir tā saukto slēpņu meklēšanas spēle brīvā dabā. Šī aplikācija var tikt izmantota, lai spēlētu šo spēli. \n\nJūs varat izlasīt vairāk par <b>c:geo pamatiem</b> mūsu lietotāja rokasgramatā:
 https://manual.cgeo.org/en/basicuse</string>
@@ -534,12 +537,12 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="init_signature_template_user">Lietotājs</string>
     <string name="init_signature_template_number">Numurs</string>
     <string name="init_signature_template_owner">Īpašnieks</string>
-    <string name="init_signature_template_name">Vārds</string>
-    <string name="init_signature_template_difficulty">Sarežģītība</string>
-    <string name="init_signature_template_terrain">Piekļuve</string>
+    <string name="init_signature_template_name">Vēc nosaukuma</string>
+    <string name="init_signature_template_difficulty">Pēc sarežģītības</string>
+    <string name="init_signature_template_terrain">Pēc piekļuves grūtības</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Ieraksta teksts</string>
-    <string name="init_signature_template_size">Izmērs</string>
+    <string name="init_signature_template_size">Pēc lieluma</string>
     <string name="init_ratingwanted">GCvote reitings</string>
     <string name="init_summary_ratingwanted">Ielādēt slēpņu novērtējumus no GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rādīt draugu / savus</string>
@@ -591,7 +594,6 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="init_backup_unnecessary">Datubāze ir tukša, rezerves kopija nav nepieciešama.</string>
     <string name="init_backup_no_backup_available">Nav pieejams backup fails.</string>
     <string name="backup_confirm_overwrite">Vai vēlaties pārrakstīt esošo rezerves kopiju no %s?</string>
-    <string name="restore_confirm_overwrite">Vai vēlies aizstāt %s uz savas iekārtas ar rezerves kopiju?</string>
     <string name="init_restore_success">Atjaunošana pabeigta.</string>
     <string name="init_restore_failed_dbrecreated">Atjaunošana nav izdevusies: Dublētais fails ir bojāts, datu bāzi bija nepieciešams izveidot no jauna.</string>
     <string name="init_restore_failed">Atjaunošana neizdevās.</string>
@@ -602,17 +604,11 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="init_restore_version_error">Neparedzēts formāts - nevar atjaunot datubāzi.\n\nVēlamā versija ir %1$d,\nrezerves kopijas versija bija %2$d</string>
     <string name="settings_title_backup">Dublēt / Atjaunot</string>
     <string name="settings_summary_backup">Dublēt un atjaunot slēpņa / ceļa punktu datus un programmas iestatījumus.</string>
-    <string name="init_backup_settings">Dublēt aplikācijas iestatījumus</string>
-    <string name="init_backup_settings_backup_light">Dublēt iestatījumus (bez konta / profila datiem)</string>
-    <string name="init_backup_settings_backup_full">Dublēt iestatījumus (visus)</string>
     <string name="init_backup_settings_backup_full_confirm">Vai vēlaties saglabāt ar kontu saistītus sensitīvus datus? Tie var būt lasāmi citām aplikācijām.</string>
     <string name="settings_savingerror">Kļūda saglabājot iestatījumus</string>
     <string name="settings_saved">Iestatījumi veiksmīgi saglabāti:</string>
     <string name="init_backup_settings_restore">Atjaunot iestatījumus</string>
-    <string name="init_backup_settings_restore_confirm">Vai Jūs vēlaties pārrakstīt savus pašreizējos iestatījumus?</string>
-    <string name="init_backup_settings_restore_no">Iestatījumu dublēšana nav iespējama</string>
     <string name="settings_readingerror">Kļūda lasot iestatījumus</string>
-    <string name="settings_restored">Iestatījumi atjaunoti</string>
     <string name="settings_restart">Restartē c:geo, lai lietotu jaunos iestatījumus</string>
     <string name="settings_info_offline_maps_title">Info uz bezsaistes kartēm</string>
     <string name="settings_info_offline_maps">c:geo atbalsta kartes lietošanai bezsaistē. Tu vari lejupielādēt kartes no Mapsforge vai pat izveidot savas kartes no OSM datiem. Vispirms jāatlasa bezsaistes karšu direktorija, lai iegūtu karti ar bezsaistes atbalstu.</string>
@@ -661,7 +657,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="init_dbmove_success">Datu bāze ir veiksmīgi pārvietota.</string>
     <string name="init_dbmove_failed">Neizdevās pārvietot datu bāzi</string>
     <string name="init_datadirmove_datadirmove">Slēpņu datu direktorija pārvietošana</string>
-    <string name="init_datadirmove_running">Pārvieto slēpņu datu direktoriju</string>
+    <string name="init_datadirmove_running">Slēpņu datu direktorija pārvietošana</string>
     <string name="init_datadirmove_success">Datu direktorijs veiksmīgi pārvietots.</string>
     <string name="init_datadirmove_failed">Slēpņu datu direktorija pārvietošana daļēji vai pilnībā neizdevās. Lūdzu, pārbaudiet gan veco, gan jauno direktoriju, un pārvietojiet to manuāli, ja nepieciešams.</string>
     <string name="init_plain_logs">Vienkārši ieraksti</string>
@@ -704,7 +700,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="feature_watch_list">Skatīties sarakstu</string>
     <string name="feature_own_coordinates">Saglabāt modificētās koordinātas</string>
     <string name="feature_search_keyword">Meklēt pēc atslēgvārda</string>
-    <string name="feature_search_live_map">TIešsaistes karte</string>
+    <string name="feature_search_live_map">Karte</string>
     <string name="feature_search_center">Meklēt pēc atrašanās vietas</string>
     <string name="feature_search_geocode">Meklēt pēc Geo code</string>
     <string name="feature_search_owner">Meklēt pēc īpašnieka</string>
@@ -748,7 +744,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="auth_forget_title">Aizmirsi autorizācijas datus?</string>
     <string name="auth_forget_message">Jūs atvienos no šī pakalpojuma. Jūsu pašlaik saglabātie dati tiks zaudēti.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Šis process ļaus <b>c:geo</b> piekļūt %s.</string>
+    <string name="auth_credentials_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
     <string name="auth_credentials_explain_long">Aizpildot datus un nospiežot \"Autorizēties\" pogu sāksies process, kas savienosies ar %s un pārbaudīs tavus datus. Tas arī viss.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
@@ -776,7 +772,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="last_day_available">pieejama pēdējo dienu</string>
     <string name="cache_offline">Bezsaistes režīmā</string>
     <string name="cache_offline_refresh">Atjaunot</string>
-    <string name="cache_offline_drop">Noņemt</string>
+    <string name="cache_offline_drop">Dzēst</string>
     <string name="cache_offline_store">Saglabāt</string>
     <string name="cache_offline_stored">Saglabāts bezsaistē tavā ierīcē</string>
     <string name="cache_offline_not_ready">Nav pieejams bezsaistē</string>
@@ -833,7 +829,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="cache_favpoint_not_on">Šis slēpnis nav pievienots taviem favorītiem.</string>
     <string name="cache_list_select_last">Iepriekšējā atlase</string>
     <string name="cache_images">Attēli</string>
-    <string name="cache_waypoints">Starpposmi</string>
+    <string name="cache_waypoints">Ceļa punkti</string>
     <plurals name="waypoints">
         <item quantity="zero">%d Starpposmi</item>
         <item quantity="one">1 Starpposms</item>
@@ -893,8 +889,8 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="menu_caches">Pārvaldīt slēpņus</string>
     <string name="cache_menu_event">Pievienot kalendāram</string>
     <string name="cache_menu_extract_waypoints">Izvilkt pievienotos punktus</string>
-    <string name="cache_menu_details">Sīkāka informācija</string>
-    <string name="cache_menu_refresh">Atsvaidzināt</string>
+    <string name="cache_menu_details">Informācija</string>
+    <string name="cache_menu_refresh">Atjaunot</string>
     <string name="cache_menu_share">Dalīties ar slēpni</string>
     <string name="cache_menu_move_list">Pārvietot uz citu sarakstu</string>
     <string name="cache_menu_copy_list">Kopēt uz citu sarakstu</string>
@@ -907,7 +903,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
-    <string name="cache_stored">Saglabāts</string>
+    <string name="cache_stored">Saglabātie bezsaistē</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
@@ -918,7 +914,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="cache_status_active">Aktīvs</string>
     <string name="cache_status_premium">TIkai Premium lietotājiem</string>
     <string name="cache_status_not_premium">Pieejams visiem lietotājiem</string>
-    <string name="cache_status_stored">Saglabāts</string>
+    <string name="cache_status_stored">Saglabātie bezsaistē</string>
     <string name="cache_status_not_stored">Nav saglabāti</string>
     <string name="cache_status_stored_lasteighthours">Pēdējo astoņu stundu laikā</string>
     <string name="cache_status_stored_lasttwentyfourhours">Pēdējo divdesmit četru stundu laikā</string>
@@ -929,18 +925,18 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="cache_status_stored_morethansevendays">Pirms vairāk kā septiņām dienām</string>
     <string name="cache_status_stored_morethanthirtydays">Pirms vairāl kā trīsdesmit dienām</string>
     <string name="cache_geocode">Geo kods</string>
-    <string name="cache_name">Nosaukums</string>
+    <string name="cache_name">Vēc nosaukuma</string>
     <string name="cache_name_set">Iestatīt slēpņa nosaukumu</string>
     <string name="cache_name_updated">Slēpņa nosaukums atjaunināts</string>
-    <string name="cache_type">Tips</string>
-    <string name="cache_size">Izmērs</string>
-    <string name="cache_distance">Attālums</string>
-    <string name="cache_difficulty">Sarežģītība</string>
-    <string name="cache_terrain">Piekļuve</string>
-    <string name="cache_rating">Vērtējums</string>
+    <string name="cache_type">Pēc tipa</string>
+    <string name="cache_size">Pēc lieluma</string>
+    <string name="cache_distance">Pēc attāluma</string>
+    <string name="cache_difficulty">Pēc sarežģītības</string>
+    <string name="cache_terrain">Pēc piekļuves grūtības</string>
+    <string name="cache_rating">Pēc vērtējuma</string>
     <string name="cache_own_rating">Tavs vērtējums</string>
     <string name="cache_rating_of">no</string>
-    <string name="cache_favorite">Favorīti</string>
+    <string name="cache_favorite">Favorīts</string>
     <string name="cache_owner">Īpašnieks</string>
     <string name="cache_hidden">Paslēpts</string>
     <string name="cache_event">Datums</string>
@@ -954,7 +950,7 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="cache_coordinates_no">Šim slēpnim nav koordinātu.</string>
     <string name="cache_clear_history">Notīrīt vēsturi</string>
     <string name="cache_remove_from_history">Noņemt no vēstures</string>
-    <string name="cache_license">Licence</string>
+    <string name="cache_license">Licences</string>
     <string name="cache_image">Attēls</string>
     <string name="cache_image_open_file">Atvērt kā failu</string>
     <string name="cache_image_open_browser">Atvērt pārlūkprogrammā</string>
@@ -1030,8 +1026,8 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_custom">Uzstādīt</string>
     <string name="waypoint_my_coordinates">Manas koordinātas</string>
     <string name="waypoint_bearing">Pagrieziena leņķis °</string>
-    <string name="waypoint_distance">Attālums</string>
-    <string name="waypoint_name">Nosaukums</string>
+    <string name="waypoint_distance">Pēc attāluma</string>
+    <string name="waypoint_name">Vēc nosaukuma</string>
     <string name="waypoint_edit">Rediģēt</string>
     <string name="waypoint_copy_coordinates">Kopēt koordinātas</string>
     <string name="waypoint_clear_coordinates">Dzēst koordinātas</string>
@@ -1041,7 +1037,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_added">Ceļa punkts pievienots</string>
     <string name="waypoint_note">Piezīme</string>
     <string name="waypoint_user_note">Lietotāja piezīme</string>
-    <string name="waypoint_visited">Apmeklēts</string>
+    <string name="waypoint_visited">Apmeklēja</string>
     <string name="waypoint_save">Saglabāt</string>
     <string name="waypoint_cancel_edit">Atcelt</string>
     <string name="waypoint_loading">Notiek starpposma ielāde…</string>
@@ -1069,7 +1065,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="visit_tweet">Publicēt šo atradumu Twitter\'ī</string>
     <!-- map -->
     <string name="map_map">Karte</string>
-    <string name="map_live">TIešsaistes karte</string>
+    <string name="map_live">Karte</string>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_modes">Kartes iestatījumi</string>
     <string name="map_rotation">Kartes rotācija</string>
@@ -1131,9 +1127,9 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="trackable_details">Informācija</string>
     <string name="trackable_image">Attēls</string>
     <string name="trackable_code">Izsekošanas kods</string>
-    <string name="trackable_name">Nosaukums</string>
+    <string name="trackable_name">Vēc nosaukuma</string>
     <string name="trackable_brand">Zīmols</string>
-    <string name="trackable_type">Veids</string>
+    <string name="trackable_type">Pēc tipa</string>
     <string name="trackable_owner">Īpašnieks</string>
     <string name="trackable_spotted">Pamanīts</string>
     <string name="trackable_spotted_in_cache">Iekš</string>
@@ -1141,7 +1137,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="trackable_spotted_unknown_location">Atrašanās nav zināma</string>
     <string name="trackable_spotted_owner">Pie īpašnieka</string>
     <string name="trackable_spotted_archived">Arhivēts</string>
-    <string name="trackable_origin">Izcelsme</string>
+    <string name="trackable_origin">Pēc izcelsmes</string>
     <string name="trackable_unknown">Nezināms</string>
     <string name="trackable_released">Palaists</string>
     <string name="trackable_distance">Noceļojis</string>
@@ -1167,13 +1163,13 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="navigation">Navigācija</string>
     <string name="compass_title">Kompass</string>
     <string name="use_gps">Izmantot tikai GPS</string>
-    <string name="use_compass">GPS un magnētiskais kompass tiek izmantots</string>
     <string name="destination_select">Izvēlieties galamērķi</string>
     <string name="navigation_direct_navigation">Tiešā navigācija</string>
     <string name="osmand_marker_cgeo">Kartes atzīme no c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nezināms</string>
     <!-- license -->
-    <string name="license">Licence</string>
+    <string name="license">Licences</string>
     <string name="license_show">Rādīt licenci</string>
     <string name="license_dismiss">Izlaist</string>
     <!-- helpers -->
@@ -1394,7 +1390,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_breeding_no">Nav pārošanās sezona / aizsargāta daba</string>
     <string name="attribute_snow_proof_yes">Drošs pret sniegu</string>
     <string name="attribute_snow_proof_no">Nav sniega drošs</string>
-    <string name="attribute_compass_yes">Nepieciešams kompass</string>
+    <string name="attribute_compass_yes">Kompass</string>
     <string name="attribute_compass_no">Nav nepieciešams kompass</string>
     <string name="attribute_cave_yes">Speleoloģijas ekipējums</string>
     <string name="attribute_cave_no">Nav speleoloģijas ekipējums</string>
@@ -1425,7 +1421,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_shovel_yes">Vajadzīga lāpsta</string>
     <string name="attribute_shovel_no">Nav nepieciešama lāpsta</string>
     <string name="attribute_specific_access_yes">Pieejams norādītajā laikā (iespējams maksas)</string>
-    <string name="attribute_specific_access_no">Pieejams vienmēr</string>
+    <string name="attribute_specific_access_no">Pieejams jebkurā laikā</string>
     <string name="attribute_pedestrian_only_yes">Pieeja tikai ejot</string>
     <string name="attribute_pedestrian_only_no">Pieeja ne tikai ejot</string>
     <string name="attribute_nature_cache_yes">Noslēpts dabiskā vidē (meži, kalni, utt.)</string>
@@ -1584,6 +1580,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Saglabāt</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pēda</string>
@@ -1595,7 +1592,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- ReceiveMapFileActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
-    <string name="map_trail_show">Rādīt pārvietojumu</string>
+    <string name="map_trail_show">Parādīt pārvietojumu</string>
     <!-- history track export -->
     <!-- individual route export -->
 </resources>
