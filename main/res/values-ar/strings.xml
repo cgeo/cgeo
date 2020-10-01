@@ -108,9 +108,11 @@
     <string name="log_yesterday">أمس</string>
     <string name="log_smilies">الابتسامات</string>
     <string name="log_image">صورة</string>
+    <string name="log_images">الصور</string>
     <string name="log_image_attach">إرفاق صورة</string>
     <string name="log_image_stored">موجود</string>
     <string name="log_image_camera">جديد</string>
+    <string name="log_image_delete">حذف</string>
     <string name="log_image_caption">التسمية</string>
     <string name="log_image_description">الوصف</string>
     <string name="log_image_scale">تحجيم</string>
@@ -119,6 +121,9 @@
     <string name="log_oc_team_comment">تعليق فريق OC</string>
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
+    <string name="log_problem_needs_maintenance_label">يحتاج إلى صيانة</string>
+    <string name="log_problem_other_label">أخرى</string>
+    <string name="log_image_titleprefix">صورة</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">ترجمة إلى %s</string>
     <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
@@ -432,8 +437,11 @@
     <string name="init_signature_template_number">عدد</string>
     <string name="init_signature_template_owner">مالك</string>
     <string name="init_signature_template_name">الاسم</string>
+    <string name="init_signature_template_difficulty">الصعوبة</string>
+    <string name="init_signature_template_terrain">تضاريس</string>
     <string name="init_signature_template_url">عنوان URL</string>
     <string name="init_signature_template_log">نص تسجيل الزيارة</string>
+    <string name="init_signature_template_size">الحجم</string>
     <string name="init_ratingwanted">تقييم GcVote</string>
     <string name="init_summary_ratingwanted">تحميل تقييم المخبئ من GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">إظهار زياراتك/ زيارات الأصدقاء</string>
@@ -701,6 +709,7 @@
     <string name="ignore_confirm_title">انتبه</string>
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
+    <string name="cache_stored">تم التخزين</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
@@ -708,6 +717,7 @@
     <string name="cache_found_last_30_days">تم العثور على آخر 30 يوما</string>
     <string name="cache_status_archived">تم أرشفته</string>
     <string name="cache_status_disabled">معطل</string>
+    <string name="cache_status_active">مفعل</string>
     <string name="cache_status_premium">أعضاء برميوم فقط</string>
     <string name="cache_status_not_premium">لكافة الأعضاء</string>
     <string name="cache_status_stored">تم تخزينه</string>
@@ -895,6 +905,7 @@
     <string name="trackable_touch">المس</string>
     <string name="trackable_not_activated">لم يتم تنشيط أمتعة السفر</string>
     <string name="trackable_travelbug">أمتعة السفر</string>
+    <string name="trackable_status">الوضع</string>
     <string name="geokret_type_traditional">تقليدي</string>
     <string name="geokret_type_book_or_media">كتاب أو جهاز اعلامي الكتروني</string>
     <string name="geokret_type_human">إنسان</string>
@@ -916,6 +927,7 @@
     <string name="navigation_direct_navigation">الملاحة مباشرة</string>
     <string name="osmand_marker_cgeo">علامة من c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">غير معروف</string>
     <!-- license -->
     <string name="license">الترخيص</string>
     <string name="license_show">عرض الترخيص</string>
@@ -1250,6 +1262,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">حفظ</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
