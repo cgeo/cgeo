@@ -116,9 +116,11 @@
     <string name="log_yesterday">Вчера</string>
     <string name="log_smilies">Смайлики</string>
     <string name="log_image">Добавить фото</string>
+    <string name="log_images">Изображения</string>
     <string name="log_image_attach">Прикрепить изображение</string>
     <string name="log_image_stored">Выбрать</string>
     <string name="log_image_camera">Камера</string>
+    <string name="log_image_delete">Удалить</string>
     <string name="log_image_caption">Заголовок</string>
     <string name="log_image_description">Описание</string>
     <string name="log_image_scale">Масштабирование</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Этот пользователь сообщил, что тайник должен быть заархивирован. Сообщество добровольцев было уведомлено.</string>
     <string name="log_image_scale_option_noscaling">Без масштабирования</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Добавить фото</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перевести на %s</string>
     <string name="translate_to_english">Перевести на английский</string>
@@ -1222,6 +1225,7 @@
     <string name="navigation_direct_navigation">Прямая навигация</string>
     <string name="osmand_marker_cgeo">Маркер из c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Неизвестный</string>
     <!-- license -->
     <string name="license">Лицензия</string>
     <string name="license_show">Показать лицензию</string>
