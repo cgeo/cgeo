@@ -97,9 +97,11 @@
     <string name="log_yesterday">Kagahapon</string>
     <string name="log_smilies">Ang mga Smilies</string>
     <string name="log_image">Ang larawan</string>
+    <string name="log_images">Mga imahe</string>
     <string name="log_image_attach">Ang imahe kay ibutang</string>
     <string name="log_image_stored">Anaa na</string>
     <string name="log_image_camera">Bag-o</string>
+    <string name="log_image_delete">Tangtanga</string>
     <string name="log_image_caption">Kapsyon</string>
     <string name="log_image_description">Paghulagway</string>
     <string name="log_image_scale">Pagsaka</string>
@@ -108,6 +110,9 @@
     <string name="log_oc_team_comment">Ang komentaryo sa OC Team</string>
     <string name="log_your_saved_log">Ang imohang na-save nga log</string>
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
+    <string name="log_problem_needs_maintenance_label">Nanginahanglan og Pagmintinar</string>
+    <string name="log_problem_other_label">Uban</string>
+    <string name="log_image_titleprefix">Ang larawan</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
     <string name="translate_to_english">Ang paghubad sa Inglis</string>
@@ -414,7 +419,10 @@
     <string name="init_signature_template_number">Numero</string>
     <string name="init_signature_template_owner">Tag-iya</string>
     <string name="init_signature_template_name">Pangalan</string>
+    <string name="init_signature_template_difficulty">Kalisud</string>
+    <string name="init_signature_template_terrain">Yuta</string>
     <string name="init_signature_template_log">Ang teksto sa log</string>
+    <string name="init_signature_template_size">Gidak-on</string>
     <string name="init_ratingwanted">Rating sa GCvote</string>
     <string name="init_summary_ratingwanted">Ang pag-load sa rating sa cache gikan sa GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Ang pagpakita sa mga Higala/Kaugalingon</string>
@@ -675,12 +683,14 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Gitipigan</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_never_found">Wala nakit-an</string>
     <string name="cache_found_last_30_days">Nakit-an ang uwahi nga 30 ka mga adlaw</string>
     <string name="cache_status_archived">Ge-arkibo</string>
     <string name="cache_status_disabled">Wala gipagana</string>
+    <string name="cache_status_active">Pag-aktibo</string>
     <string name="cache_status_premium">Premium nga myembro lamang</string>
     <string name="cache_status_not_premium">Tanang miyembro maka-access</string>
     <string name="cache_status_stored">Gitipigan</string>
@@ -863,6 +873,7 @@
     <string name="trackable_distance">Lakbay</string>
     <string name="trackable_touch">Hikap</string>
     <string name="trackable_not_activated">Ang trackable wala na palihok</string>
+    <string name="trackable_status">Estado</string>
     <string name="geokret_type_traditional">Tradisyonal</string>
     <string name="geokret_type_book_or_media">Libro ng electronic media</string>
     <string name="geokret_type_human">Tao</string>
@@ -882,6 +893,7 @@
     <string name="navigation_direct_navigation">Diretsong nabigasyon</string>
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Wala nailhan</string>
     <!-- license -->
     <string name="license">Lisensya</string>
     <string name="license_show">Ipakita ang lisensya</string>
@@ -1256,6 +1268,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">I-save</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
