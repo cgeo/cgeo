@@ -596,14 +596,12 @@
     <string name="init_backup">Cópia  seguretat Catxés / Punts de ruta</string>
     <string name="init_backup_backup">Còpia de seguretat</string>
     <string name="init_backup_running">S\'està creant una còpia de seguretat de la base de dades dels catxés…</string>
-    <string name="init_backup_note">Aquesta funció realitzarà una còpia de seguretat / restauració d’una base de dades que conté només catxés i punts de ruta, però no les imatges dels catxés ni cap configuració de programa.</string>
     <string name="init_backup_restore">Restaura</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
     <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
     <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent de %s?</string>
-    <string name="restore_confirm_overwrite">Voleu sobreescriure %s al dispositiu amb la còpia de seguretat?</string>
     <string name="init_restore_success">La restauració s\'ha completat.</string>
     <string name="init_restore_failed_dbrecreated">La restauració ha fallat: El fitxer de còpia de seguretat està malmès i s\'ha hagut de recrear la base de dades.</string>
     <string name="init_restore_failed">Ha fallat la restauració.</string>
@@ -614,17 +612,11 @@
     <string name="init_restore_version_error">Format inesperat: no es pot restaurar la base de dades.\n\nLa versió esperada és %1$d,\nla còpia de seguretat té la versió %2$d</string>
     <string name="settings_title_backup">Còpia de Seguretat / Restaurar</string>
     <string name="settings_summary_backup">Realitzeu còpia de seguretat i restauració de dades dels catxés / punts de ruta i configuracions del programa.</string>
-    <string name="init_backup_settings">Cópia de seguretat dels ajustaments del programa</string>
-    <string name="init_backup_settings_backup_light">Configuració de còpia de seguretat (sense dades del compte)</string>
-    <string name="init_backup_settings_backup_full">Configuració de còpia de seguretat (completa)</string>
     <string name="init_backup_settings_backup_full_confirm">Voleu emmagatzemar dades relacionades amb el compte? Es poden llegir per altres aplicacions.</string>
     <string name="settings_savingerror">Error en desar la configuració</string>
     <string name="settings_saved">Configuració desada correctament a:</string>
     <string name="init_backup_settings_restore">Restablir la configuració</string>
-    <string name="init_backup_settings_restore_confirm">Voleu sobreescriure la vostra configuració actual?</string>
-    <string name="init_backup_settings_restore_no">No hi ha disponible cap còpia de seguretat de configuració</string>
     <string name="settings_readingerror">S\'ha produït un error en llegir la configuració</string>
-    <string name="settings_restored">S\'ha restaurat la configuració</string>
     <string name="settings_restart">c:geo s\'ha de reiniciar  per fer efectiva la nova configuració</string>
     <string name="settings_info_offline_maps_title">Informació als mapes fora línia</string>
     <string name="settings_info_offline_maps">El c:geo admet mapes per ser utilitzats fora línia. Podeu descarregar els mapes de Mapsforge o fins i tot crear els vostres propis mapes a partir de dades OSM. Per utilitzar els mapes fora línia, primer cal seleccionar un directori pels mapes.</string>
@@ -731,7 +723,7 @@
     <string name="feature_watch_list">Llista de seguiment</string>
     <string name="feature_own_coordinates">S\'estan desant les coordenades modificades</string>
     <string name="feature_search_keyword">Cerca per paraula clau</string>
-    <string name="feature_search_live_map">Mapa en viu</string>
+    <string name="feature_search_live_map">Mapa</string>
     <string name="feature_search_center">Cerca per posició</string>
     <string name="feature_search_geocode">Cerca per geocodi</string>
     <string name="feature_search_owner">Cerca per propietari</string>
@@ -788,7 +780,7 @@
     <string name="auth_forget_title">Oblidar l\'autorització?</string>
     <string name="auth_forget_message">Seràs desconnectat d\'aquest servei. Les teves credencials desades es perdran.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">El següent procés permetrà a <b>c:geo</b> accedir a %s.</string>
+    <string name="auth_credentials_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
     <string name="auth_credentials_explain_long">Emplena les teves dades, prem el botó \"Comprovar autenticació\" i començarà el procés. Aquest procés es connecta a %s i validarà les teves credencials. Això és tot.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
@@ -814,7 +806,7 @@
     <string name="last_day_available">darrer dia disponible</string>
     <string name="cache_offline">Fora de línia</string>
     <string name="cache_offline_refresh">Actualitza</string>
-    <string name="cache_offline_drop">Esborra</string>
+    <string name="cache_offline_drop">Elimina</string>
     <string name="cache_delete_userdefined_waypoints">Elimineu els punts de ruta definits per l\'usuari</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Voleu eliminar tots els punts de ruta definits per l\'usuari d\'aquest catxé? \n\nEls punts de ruta se suprimiran immediatament, no es pot desfer.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: teniu activat el \"punts de ruta des de la nota\". Si teniu coordenades a la vostra nota personal reconegudes per c: geo, els punts de ruta es recrearan automàticament per a ells. Podeu desactivar-ho al quadre d\'edició de notes personals.</string>
@@ -878,7 +870,7 @@
     <string name="cache_favpoint_not_on">Aquest catxé no és un dels vostres preferits.</string>
     <string name="cache_list_select_last">Darrera selecció</string>
     <string name="cache_images">Imatges</string>
-    <string name="cache_waypoints">Fites</string>
+    <string name="cache_waypoints">Punts de ruta</string>
     <plurals name="waypoints">
         <item quantity="one">%d fita</item>
         <item quantity="other">%d fites</item>
@@ -952,7 +944,7 @@
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
-    <string name="cache_stored">Desat</string>
+    <string name="cache_stored">Desats</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
@@ -963,7 +955,7 @@
     <string name="cache_status_active">Actiu</string>
     <string name="cache_status_premium">Només per membres Premium</string>
     <string name="cache_status_not_premium">Per a tots els membres</string>
-    <string name="cache_status_stored">Desat</string>
+    <string name="cache_status_stored">Desats</string>
     <string name="cache_status_not_stored">No desat</string>
     <string name="cache_status_stored_lasteighthours">En les darreres vuit hores</string>
     <string name="cache_status_stored_lasttwentyfourhours">En les darreres vint-i-quatre hores</string>
@@ -1120,7 +1112,7 @@
     <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa en viu</string>
+    <string name="map_live">Mapa</string>
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_modes">Configuració del mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
@@ -1159,7 +1151,7 @@
     <string name="search_coordinates_button">Cerca per coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_address_button">Cerca per l\'adreça</string>
-    <string name="search_geo">Codi del catxé</string>
+    <string name="search_geo">Geocodi</string>
     <string name="search_geo_button">Cerca pel codi del catxé</string>
     <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
@@ -1225,12 +1217,9 @@
     <string name="navigation">Navegació</string>
     <string name="compass_title">Brúixola</string>
     <string name="use_gps">Utilitzar només el GPS</string>
-    <string name="use_compass">Utilitzar el GPS i la brúixola magnètica</string>
     <string name="destination_select">Tria destinació</string>
     <string name="navigation_direct_navigation">Navegació directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
-    <string name="device_heading_label">Capçalera del dispositiu:</string>
-    <string name="device_orientation">Orientació del dispositiu</string>
     <string name="device_orientation_label">Orientació:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconegut</string>
@@ -1461,7 +1450,7 @@
     <string name="attribute_breeding_no">No temporada de cria/ Natura protegida</string>
     <string name="attribute_snow_proof_yes">Està amagat protegit de la neu</string>
     <string name="attribute_snow_proof_no">No està amagat protegit de la neu</string>
-    <string name="attribute_compass_yes">Cal brúixola</string>
+    <string name="attribute_compass_yes">Brúixola</string>
     <string name="attribute_compass_no">No cal brúixola</string>
     <string name="attribute_cave_yes">Cal equipament per coves</string>
     <string name="attribute_cave_no">No cal equipament per coves</string>
@@ -1492,7 +1481,7 @@
     <string name="attribute_shovel_yes">Podeu necessitar una pala</string>
     <string name="attribute_shovel_no">No necessiteu una pala</string>
     <string name="attribute_specific_access_yes">Està disponible només a hores específiques (pot requerir una quota d\'accés)</string>
-    <string name="attribute_specific_access_no">Disponible en tot moment</string>
+    <string name="attribute_specific_access_no">Està disponible en qualsevol horari</string>
     <string name="attribute_pedestrian_only_yes">Accés només  a peu</string>
     <string name="attribute_pedestrian_only_no">Accés no només a peu</string>
     <string name="attribute_nature_cache_yes">Està amagat en un entorn natural (boscos, muntanyes, etc.)</string>
@@ -1745,7 +1734,7 @@
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
-    <string name="map_trail_show">Mostra la ruta</string>
+    <string name="map_trail_show">Mostra el traçat</string>
     <string name="map_trail_hide">Amaga el traçat</string>
     <!-- history track export -->
     <string name="trailhistory">Traçat</string>
