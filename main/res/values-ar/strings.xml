@@ -108,9 +108,11 @@
     <string name="log_yesterday">أمس</string>
     <string name="log_smilies">الابتسامات</string>
     <string name="log_image">صورة</string>
+    <string name="log_images">الصور</string>
     <string name="log_image_attach">إرفاق صورة</string>
     <string name="log_image_stored">موجود</string>
     <string name="log_image_camera">جديد</string>
+    <string name="log_image_delete">حذف</string>
     <string name="log_image_caption">التسمية</string>
     <string name="log_image_description">الوصف</string>
     <string name="log_image_scale">تحجيم</string>
@@ -119,6 +121,9 @@
     <string name="log_oc_team_comment">تعليق فريق OC</string>
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
+    <string name="log_problem_needs_maintenance_label">يحتاج إلى صيانة</string>
+    <string name="log_problem_other_label">أخرى</string>
+    <string name="log_image_titleprefix">صورة</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">ترجمة إلى %s</string>
     <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
@@ -208,7 +213,7 @@
     <string name="info_log_post_failed">فشل في نشر سجل الزيارة.</string>
     <string name="info_log_post_failed_reason">السبب: %s</string>
     <string name="info_log_post_retry">أعد المحاولة</string>
-    <string name="info_log_post_save">حفظ في وضع عدم الاتصال</string>
+    <string name="info_log_post_save">حفظ بدون اتصال</string>
     <string name="info_log_cleared">تم مسح سجل تسجيل الزيارة.</string>
     <string name="info_waypoint_coordinates_cleared">تم مسح الإحداثيات.</string>
     <string name="info_log_type_changed">تم تغيير نوع سجل الزيارة!</string>
@@ -244,7 +249,7 @@
     <!-- main screen -->
     <string name="live_map_button">خريطة على نات</string>
     <string name="caches_nearby_button">قريب</string>
-    <string name="advanced_search_button">بحث</string>
+    <string name="advanced_search_button">ابحث</string>
     <string name="stored_caches_button">تم التخزين</string>
     <string name="any_button">اذهب إلى</string>
     <string name="unknown_scan">لم تجد أي كود للمخبآت في نتائج المسح.</string>
@@ -432,8 +437,11 @@
     <string name="init_signature_template_number">عدد</string>
     <string name="init_signature_template_owner">مالك</string>
     <string name="init_signature_template_name">الاسم</string>
+    <string name="init_signature_template_difficulty">الصعوبة</string>
+    <string name="init_signature_template_terrain">تضاريس</string>
     <string name="init_signature_template_url">عنوان URL</string>
     <string name="init_signature_template_log">نص تسجيل الزيارة</string>
+    <string name="init_signature_template_size">الحجم</string>
     <string name="init_ratingwanted">تقييم GcVote</string>
     <string name="init_summary_ratingwanted">تحميل تقييم المخبئ من GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">إظهار زياراتك/ زيارات الأصدقاء</string>
@@ -471,7 +479,6 @@
     <string name="init_backup_unnecessary">البيانات فارغة، ليس ضروري عمل نسخ احتياطي.</string>
     <string name="init_backup_no_backup_available">لا يتوفر ملف النسخ الاحتياطي.</string>
     <string name="backup_confirm_overwrite">هل تريد الكتابة فوق النسخة الاحتياطية الموجودة في %s؟</string>
-    <string name="restore_confirm_overwrite">هل تريد الكتابة فوق %s على النسخة الاحتياطي على جهازك؟</string>
     <string name="init_restore_success">اكتملت الاستعادة.</string>
     <string name="init_restore_failed">فشل في الاستعادة.</string>
     <string name="init_restore_running">استعادة بيانات المخبئ&#8230;</string>
@@ -514,7 +521,7 @@
     <string name="init_dbmove_success">تم نقل قاعدة البيانات بنجاح.</string>
     <string name="init_dbmove_failed">فشل في نقل قاعدة البيانات</string>
     <string name="init_datadirmove_datadirmove">نقل دليل بيانات العلبة المخبئة</string>
-    <string name="init_datadirmove_running">نقل دفتر بيانات العلبة المخبئة</string>
+    <string name="init_datadirmove_running">نقل دليل بيانات العلبة المخبئة</string>
     <string name="init_datadirmove_success">تم بنجاح نقل دليل بيانات العلبة المخبئة.</string>
     <string name="init_datadirmove_failed">فشل نقل دليل بيانات العلبة المخبئة سوء جزئياً أو كلياً. الرجاء تحديد الدليل القديم و الجديد و نقلهم يدوياً إذا لزم الأمر.</string>
     <string name="init_plain_logs">سجلات بسيطة</string>
@@ -638,7 +645,6 @@
     <string name="cache_favpoint_not_on">هذا المخبئ من المفضلات عندك.</string>
     <string name="cache_list_select_last">التحديد الأخير</string>
     <string name="cache_images">الصور</string>
-    <string name="cache_waypoints">إحدثيات الطريق</string>
     <string name="cache_waypoints_add">أضف إحداثية طريق</string>
     <string name="cache_hint">تلميح</string>
     <string name="cache_hint_not_available">لا يوجد تليمح متاح</string>
@@ -702,16 +708,18 @@
     <string name="ignore_confirm_title">انتبه</string>
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
+    <string name="cache_stored">تم التخزين</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
     <string name="cache_never_found">لم يتم العثور عليه أبداً</string>
     <string name="cache_found_last_30_days">تم العثور على آخر 30 يوما</string>
     <string name="cache_status_archived">تم أرشفته</string>
-    <string name="cache_status_disabled">معطل</string>
+    <string name="cache_status_disabled">معطّل</string>
+    <string name="cache_status_active">مفعل</string>
     <string name="cache_status_premium">أعضاء برميوم فقط</string>
     <string name="cache_status_not_premium">لكافة الأعضاء</string>
-    <string name="cache_status_stored">تم تخزينه</string>
+    <string name="cache_status_stored">تم التخزين</string>
     <string name="cache_status_not_stored">لم يتم تخزينه</string>
     <string name="cache_geocode">كود المخبئ</string>
     <string name="cache_name">الاسم</string>
@@ -724,13 +732,13 @@
     <string name="cache_own_rating">تقييمك</string>
     <string name="cache_rating_of">من</string>
     <string name="cache_favorite">المفضل</string>
-    <string name="cache_owner">المالك</string>
+    <string name="cache_owner">مالك</string>
     <string name="cache_hidden">مخفي</string>
     <string name="cache_event">التاريخ</string>
     <string name="cache_location">الموقع</string>
     <string name="cache_coordinates">الإحداثيات</string>
     <string name="cache_calculator">العداد</string>
-    <string name="cache_coordinates_original">الإحدثيات الأصلية</string>
+    <string name="cache_coordinates_original">الإحداثيات الأصلية</string>
     <string name="cache_spoiler_images_title">الصور المفسدة</string>
     <string name="cache_log_types">أنوع تسجيل الزيارات</string>
     <string name="cache_coordinates_no">هذا المخبئ ليس لديه إحدثيات.</string>
@@ -800,7 +808,7 @@
     <string name="waypoint_add_title">أضف إحداثية الطريق</string>
     <string name="waypoint_note">ملاحظة</string>
     <string name="waypoint_user_note">ملاحظة المستخدم</string>
-    <string name="waypoint_visited">تمت زيارته</string>
+    <string name="waypoint_visited">تمت الزيارة</string>
     <string name="waypoint_save">حفظ</string>
     <string name="waypoint_cancel_edit">إلغاء</string>
     <string name="waypoint_loading">تحميل إحدثيات الطريق&#8230;</string>
@@ -854,12 +862,12 @@
     <string name="search_geo_button">البحث بواسطة كود المخبئ</string>
     <string name="search_kw">الكلمات المفتاحية</string>
     <string name="search_kw_prefill">كلمة مفتاحية</string>
-    <string name="search_kw_button">البحث بواسطة الكلمة المفتاحية</string>
+    <string name="search_kw_button">البحث بواسطة الكلمات المفتاحية</string>
     <string name="search_fbu">وجدت بواسطة المستخدم</string>
     <string name="search_fbu_prefill">اسم المستخدم</string>
     <string name="search_fbu_button">البحث بواسطة اسم المستخدم</string>
     <string name="search_hbu">مخفي بواسطة المستخدمين</string>
-    <string name="search_hbu_prefill">المالك</string>
+    <string name="search_hbu_prefill">مالك</string>
     <string name="search_hbu_button">البحث بواسطة اسم المالك</string>
     <string name="search_tb">أمتعة السفر</string>
     <string name="search_tb_hint">تعريف أمتعة السفر</string>
@@ -877,12 +885,12 @@
     <string name="trackable_refresh">تحديث</string>
     <string name="trackable_goal">الهدف</string>
     <string name="trackable_details">التفاصيل</string>
-    <string name="trackable_image">الصورة</string>
+    <string name="trackable_image">صورة</string>
     <string name="trackable_code">كود التتبع</string>
     <string name="trackable_name">الاسم</string>
     <string name="trackable_brand">الصنف</string>
     <string name="trackable_type">النوع</string>
-    <string name="trackable_owner">المالك</string>
+    <string name="trackable_owner">مالك</string>
     <string name="trackable_spotted">تم رصده</string>
     <string name="trackable_spotted_in_cache">في</string>
     <string name="trackable_spotted_at_user">في أيدي</string>
@@ -896,6 +904,7 @@
     <string name="trackable_touch">المس</string>
     <string name="trackable_not_activated">لم يتم تنشيط أمتعة السفر</string>
     <string name="trackable_travelbug">أمتعة السفر</string>
+    <string name="trackable_status">الوضع</string>
     <string name="geokret_type_traditional">تقليدي</string>
     <string name="geokret_type_book_or_media">كتاب أو جهاز اعلامي الكتروني</string>
     <string name="geokret_type_human">إنسان</string>
@@ -913,11 +922,11 @@
     <string name="navigation">الملاحة</string>
     <string name="compass_title">البوصلة</string>
     <string name="use_gps">يستعمل GPS فقط</string>
-    <string name="use_compass">يستعمل GPS و البوصلة المغناطسية فقط</string>
     <string name="destination_select">حدد الاتجاه</string>
     <string name="navigation_direct_navigation">الملاحة مباشرة</string>
     <string name="osmand_marker_cgeo">علامة من c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">غير معروف</string>
     <!-- license -->
     <string name="license">الترخيص</string>
     <string name="license_show">عرض الترخيص</string>
@@ -1161,7 +1170,7 @@
     <string name="attribute_shovel_yes">قد تحتاج إلى مجرفة</string>
     <string name="attribute_shovel_no">لا تحتاج إلى مجرفة</string>
     <string name="attribute_specific_access_yes">متاح في ساعات محددة (قد يتطلب رسوم الوصول)</string>
-    <string name="attribute_specific_access_no">متاح في كل الأوقات</string>
+    <string name="attribute_specific_access_no">متوفر في جميع الأوقات</string>
     <string name="attribute_pedestrian_only_yes">الوصول فقط سيراً على الأقدام</string>
     <string name="attribute_pedestrian_only_no">الوصول ليس فقط سيراً على الأقدام</string>
     <string name="attribute_nature_cache_yes">مخفية في بيئاتها الطبيعية (الغابات و الجبال إلخ)</string>
@@ -1252,6 +1261,7 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">حفظ</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
