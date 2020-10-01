@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
+    <string name="err_captcha">Απαιτείται Captcha. Παρακαλώ ανατρέξτε στις<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>για οδηγίες.</string>
     <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_su">Η επικοινωνία με το Geocaching.su απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
@@ -594,14 +595,12 @@
     <string name="init_backup">Αποθηκευμένες κρύπτες / σημεία</string>
     <string name="init_backup_backup">Αντίγραφα ασφαλείας</string>
     <string name="init_backup_running">Δημιουργία αντιγράφων ασφαλείας της βάσης δεδομένων των κρυπτών…</string>
-    <string name="init_backup_note">Παρακαλούμε σημειώστε ότι αυτή η λειτουργία θα αποθηκεύσει/επαναφέρει μόνο τα δεδομένα κρυπτών και σημείων, όχι όμως φωτογραφιών της κρύπτης ή ρυθμίσεων.</string>
     <string name="init_backup_restore">Επαναφορά</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
     <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζονται αντίγραφα ασφαλείας.</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
     <string name="backup_confirm_overwrite">Θέλετε να αντικαταστήσετε το υπάρχον αντίγραφο ασφαλείας του %s;</string>
-    <string name="restore_confirm_overwrite">Θέλετε να αντικαταστήσετε το %s στη συσκευή σας με το αντίγραφο ασφαλείας;</string>
     <string name="init_restore_success">Η επαναφορά ολοκληρώθηκε.</string>
     <string name="init_restore_failed_dbrecreated">Αποτυχία επαναφοράς: κατεστραμμένο αρχείο αντιγράφου, υποχρεωτική επαναδημιουργία της βάσης δεδομένων.</string>
     <string name="init_restore_failed">Η επαναφορά απέτυχε.</string>
@@ -612,17 +611,11 @@
     <string name="init_restore_version_error">Μη αναμενόμενη διαμόρφωση - δεν μπορεί να γίνει επαναφορά της βάσης δεδομένων.\n\nΗ αναμενόμενη έκδοση είναι η %1$d,\nτο αντίγραφο ασφαλείας είναι έκδοσης %2$d</string>
     <string name="settings_title_backup">Αντίγραφα ασφαλείας / Επαναφορά</string>
     <string name="settings_summary_backup">Εκτέλεση δημιουργίας αντιγράφων ασφαλείας και επαναφορά δεδομένων κρυπτών/σημείων και ρυθμίσεων.</string>
-    <string name="init_backup_settings">Αντίγραφο ασφαλείας ρυθμίσεων</string>
-    <string name="init_backup_settings_backup_light">Αντίγραφο ασφαλείας ρυθμίσεων (χωρίς δεδομένα λογαριασμού)</string>
-    <string name="init_backup_settings_backup_full">Αντίγραφο ασφαλείας ρυθμίσεων (πλήρες)</string>
     <string name="init_backup_settings_backup_full_confirm">Θέλετε να αποθηκεύσετε ευαίσθητα δεδομένα του λογαριασμού σας; Αυτά μπορεί να είναι ορατά σε άλλες εφαρμογές.</string>
     <string name="settings_savingerror">Ρυθμίσεις αποθήκευσης σφαλμάτων</string>
     <string name="settings_saved">Επιτυχής αποθήκευση ρυθμίσεων σε:</string>
     <string name="init_backup_settings_restore">Επαναφορά ρυθμίσεων</string>
-    <string name="init_backup_settings_restore_confirm">Θέλετε να αντικαταστήσετε τις υπάρχουσες ρυθμίσεις σας;</string>
-    <string name="init_backup_settings_restore_no">Η δημιουργία αντιγράφων ασφαλείας των ρυθμίσεων δεν είναι διαθέσιμη</string>
     <string name="settings_readingerror">Ρυθμίσεις ανάγνωσης σφαλμάτων</string>
-    <string name="settings_restored">Έγινε επαναφορά ρυθμίσεων</string>
     <string name="settings_restart">Το c:geo χρειάζεται επανεκκίνηση για την ενεργοποίηση των νέων ρυθμίσεων</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να κατεβάσετε χάρτες από το Mapsforge ή ακόμη και να δημιουργήσετε δικούς σας από τα δεδομένα των OSM. Χρειάζεται πρώτα να επιλέξετε τον κατάλογο των εκτός χρήσης χαρτών για να λάβετε υποστήριξη για χάρτες εκτός σύνδεσης.</string>
@@ -813,6 +806,7 @@
     <string name="cache_offline">Εκτός σύνδεσης</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
     <string name="cache_offline_drop">Διαγραφή</string>
+    <string name="cache_delete_userdefined_waypoints_note">Σημείωση: Έχετε ενεργοποιήμενη την επιλογή \"σημεία ενδιαφέροντος από τις σημειωσεις\". Εάν το c:geo αναγνωρίσει συντεταγμένες στις προσωπικές σημειώσεις, θα δημιουργήσει αυτόματα σημεία ενδιαφέροντος από αυτές. Μπορείτε να απενεργοποιήσετε την επιλογή αυτή από την επεξεργασία της προσωπικής σημείωσης.</string>
     <string name="cache_offline_store">Αποθήκευση</string>
     <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
@@ -1219,12 +1213,12 @@
     <string name="navigation">Πλοήγηση</string>
     <string name="compass_title">Πυξίδα</string>
     <string name="use_gps">Χρήση μόνο GPS</string>
-    <string name="use_compass">Χρήση GPS και μαγνητικής πυξίδας</string>
+    <string name="use_compass">Χρήση όλων των αισθητήρων</string>
     <string name="destination_select">Επιλογή προορισμού</string>
     <string name="navigation_direct_navigation">Άμεση πλοήγηση</string>
     <string name="osmand_marker_cgeo">Επιλογέας από c:geo</string>
-    <string name="device_heading_label">Κατεύθυνση συσκευής:</string>
-    <string name="device_orientation">Προσανατολισμός συσκευής</string>
+    <string name="device_heading_label">Συσκευή:</string>
+    <string name="device_orientation">Προσανατολισμός</string>
     <string name="device_orientation_label">Προσανατολισμός:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Άγνωστος</string>
