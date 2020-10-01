@@ -83,10 +83,10 @@
     <string name="log_tb_drop">Bırakıldı</string>
     <string name="log_tb_sortby">Trackable\'ları sırala</string>
     <string name="log_tb_changeall">Hepsini Değiştir</string>
-    <string name="log_tb_grabbed">Bir yerlerden alındı</string>
+    <string name="log_tb_grabbed">Herhangibir Yerden Alındı</string>
     <string name="log_tb_note">Not</string>
-    <string name="log_tb_discovered">Keşfedildi</string>
-    <string name="log_tb_archived">Arşivlendi</string>
+    <string name="log_tb_discovered">Görüldü</string>
+    <string name="log_tb_archived">Arşivenlendi</string>
     <string name="log_save">Çevrimdışı kaydet</string>
     <string name="log_saving">Kayıt gönderiliyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
@@ -116,7 +116,7 @@
     <string name="log_yesterday">Dün</string>
     <string name="log_smilies">İfadeler</string>
     <string name="log_image">Resim</string>
-    <string name="log_images">Resimler</string>
+    <string name="log_images">Görseller</string>
     <string name="log_image_attach">Resim ekle</string>
     <string name="log_image_stored">Var olan</string>
     <string name="log_image_camera">Yeni</string>
@@ -131,7 +131,7 @@
     <string name="log_your_saved_log">Saklanan kaydınız</string>
     <string name="log_empty_logbook">Bu Geocache\'in kayıt defteri boş.</string>
     <string name="log_problem_none">Sorun Yok</string>
-    <string name="log_problem_needs_maintenance_label">Bakım Gerekli</string>
+    <string name="log_problem_needs_maintenance_label">Bakım gerekli</string>
     <string name="log_problem_needs_maintenance_text">Bu Geocacher bu kutu ile ilgili bir sorun olduğunu bildirdi.</string>
     <string name="log_problem_log_full_label">Kayıt sayfası dolu</string>
     <string name="log_problem_log_full_text">Bu Geocacher kayıt sayfasının dolu olduğunu bildirdi.</string>
@@ -140,7 +140,7 @@
     <string name="log_problem_missing_label">Geocache kaybolmuş olabilir</string>
     <string name="log_problem_missing_text">Bu Geocacher kutunun kayıp olabileceğini bildirdi.</string>
     <string name="log_problem_other_label">Diğer</string>
-    <string name="log_problem_other_text">Bu Geocacher kutu ile ilgili bir sorun olduğunu bildirdi.</string>
+    <string name="log_problem_other_text">Bu Geocacher bu kutu ile ilgili bir sorun olduğunu bildirdi.</string>
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
@@ -221,7 +221,7 @@
     <string name="warn_no_keyword">Anahtar kelime girilmedi.</string>
     <string name="warn_no_username">Kullanıcı adı girilmedi.</string>
     <string name="warn_no_connector">Şu anda aktif Geocaching servisleri bu arama türünü sağlamaz.</string>
-    <string name="warn_search_help_title">Yardıma ihtiyacınız var mı?</string>
+    <string name="warn_search_help_title">Yardıma ihtiyacın var mı?</string>
     <string name="warn_search_help_address">Bir adres veya yer adı girin. Örneğin; bir posta adresi \"Serasker Caddesi no 100 Kadıköy, Istanbul, Türkiye\", bir şehir adı \"Artvin\" veya sadece \"Maçka Parkı\" gibi ad kullanın.</string>
     <string name="warn_search_help_gccode">Geocache için kodu girin. Örneğin; \"GC1VCAZ\".</string>
     <string name="warn_search_help_keyword">Geocache\'nin tam adını veya bir kısmını girin. Örneğin; \"Gece Cache\'i\".</string>
@@ -290,7 +290,7 @@
     <!-- main screen -->
     <string name="live_map_button">Canlı harita</string>
     <string name="caches_nearby_button">Yakınlarda</string>
-    <string name="advanced_search_button">Ara</string>
+    <string name="advanced_search_button">Arama</string>
     <string name="stored_caches_button">Kaydedilmiş</string>
     <string name="any_button">Git</string>
     <string name="unknown_scan">Tarama sonucunda herhangi bir Geocode bulamadı.</string>
@@ -528,7 +528,7 @@
     <string name="init_signature_template_user">Kullanıcı</string>
     <string name="init_signature_template_number">Bulma sırası</string>
     <string name="init_signature_template_owner">Sahibi</string>
-    <string name="init_signature_template_name">İsim</string>
+    <string name="init_signature_template_name">Ad</string>
     <string name="init_signature_template_difficulty">Zorluk</string>
     <string name="init_signature_template_terrain">Arazi</string>
     <string name="init_signature_template_url">URL</string>
@@ -577,14 +577,12 @@
     <string name="init_backup">Cache\'leri/ yol noktalarını yedekle</string>
     <string name="init_backup_backup">Yedekle</string>
     <string name="init_backup_running">Geocache veritabanı yedeklemesi oluşturuluyor…</string>
-    <string name="init_backup_note">Bu özelliğin Geocache ve yol noktalarını içeren verileri yedekleyeceğini/geri yükleyeceğini, fakat görsellerinizi ve uygulama ayarlarınızı yedeklemeyeceğini/geri yüklemeyeceğini unutmayın.</string>
     <string name="init_backup_restore">Geri Yükleme</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
     <string name="init_backup_unnecessary">Veri tabanı boş, yedekleme gerekli değil.</string>
     <string name="init_backup_no_backup_available">Mevcut yedekleme dosyası bulunmuyor.</string>
     <string name="backup_confirm_overwrite">%s\'den mevcut yedeklemenizin üzerine yazmak ister misiniz?</string>
-    <string name="restore_confirm_overwrite">Yedeklemenizi cihazınızdaki %s\'in üzerine yazmak istiyor musunuz?</string>
     <string name="init_restore_success">Geri getirme tamamlandı.</string>
     <string name="init_restore_failed_dbrecreated">Geri yükleme başarısız: Yedek dosyası zarar görmüş, veri tabanı yeniden oluşturulmalı.</string>
     <string name="init_restore_failed">Geri getirme başarısız oldu.</string>
@@ -594,17 +592,11 @@
     <string name="init_backup_last_no">Yedeklenmiş bir dosya yok.</string>
     <string name="settings_title_backup">Yedekle /yeniden yükle</string>
     <string name="settings_summary_backup">Yedekleme oluşturun ve Cache/yol noktası verilerini ve program ayarlarını yeniden yükleyin.</string>
-    <string name="init_backup_settings">Ayarları yedekle</string>
-    <string name="init_backup_settings_backup_light">Ayarları yedekle (hesap bilgisi olmadan)</string>
-    <string name="init_backup_settings_backup_full">Ayarları yedekle (hepsini)</string>
     <string name="init_backup_settings_backup_full_confirm">Hesabınızla alakalı önemli verileri saklamak istiyor musunuz? Bu veriler diğer uygulamalar tarafından da okunabilir.</string>
     <string name="settings_savingerror">Ayarları kaydetme hatası</string>
     <string name="settings_saved">Ayarlar başarıyla kaydedildi:</string>
     <string name="init_backup_settings_restore">Ayarları geri yükle</string>
-    <string name="init_backup_settings_restore_confirm">Güncel ayarların üzerine yazmak istediğinize emin misiniz?</string>
-    <string name="init_backup_settings_restore_no">Ayar yedeği bulunmuyor</string>
     <string name="settings_readingerror">Ayarları okuma hatası</string>
-    <string name="settings_restored">Ayarlar kaydedildi</string>
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo çevrimdışı kullanım için haritalar destekler. Mapsforge \'den harita indirebilir ve hatta OSM verilerinden kendi haritalarını oluşturabilirsiniz. Çevrimdışı harita desteğini almak için önce çevrimdışı harita dizinini seçmeniz gerekir.</string>
@@ -643,7 +635,7 @@
     <string name="init_dbonsdcard_note">c:geo veri tabanını dahili sisteme ya da kullanıcı depolama alanınızda ki dizine depolayabilirsiniz. Kullanıcı depolama alanını kullanmak belleği biraz boşaltabilir, ama biraz performans kaybı yaşayabilirsiniz ve depolama alanınız ulaşılabilir değilse veya veri tabanı dosyasını kaldırırsanız c:geo çalışmaz.</string>
     <string name="init_dbonsdcard">Kullanıcı hafızasında</string>
     <string name="init_dbmove_dbmove">Veritabanı Taşıma</string>
-    <string name="init_dbmove_running">Veritabanı Taşınıyor</string>
+    <string name="init_dbmove_running">Veritabanı Taşıma</string>
     <string name="init_dbmove_success">Veritabanına başarıyla taşındı.</string>
     <string name="init_dbmove_failed">Veritabanına taşınamadı</string>
     <string name="init_datadirmove_datadirmove">Geocache veri dizini taşınıyor</string>
@@ -742,10 +734,10 @@
     <string name="auth_forget_title">Yetkilendirme unutulsun mu?</string>
     <string name="auth_forget_message">Bu servisle bağlantınız kesilecek. Şu anda kaydettiğiniz kimlik bilgileri kaybolacaktır.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
+    <string name="auth_credentials_explain_short">Sıradaki işlem, <b>c:geo</b>\'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_credentials_explain_long">Kimlik bilgilerinizi doldurmak ve \"Kimliği doğrulayın\" butonuna basmak işlemi başlatacaktır. Bu işlem %s\'e bağlanarak kimlik bilgilerinizi doğrulayacaktır. Hepsi bu kadar.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
+    <string name="auth_token_explain_short">Sıradaki işlem, <b>c:geo</b>\'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_token_explain_long">Kimlik bilgilerinizi doldurup \"c: geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem %s\'ye bağlanacak ve bir kimlik doğrulama belirteci alacaktır. Bu kadar.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo şimdi Twitter\'da yayın yapmaya yetkili.</string>
@@ -768,7 +760,7 @@
     <string name="last_day_available">mevcut olan son gün</string>
     <string name="cache_offline">Çevrimdışı</string>
     <string name="cache_offline_refresh">Yenile</string>
-    <string name="cache_offline_drop">Sil</string>
+    <string name="cache_offline_drop">Kaldır</string>
     <string name="cache_offline_store">Kaydet</string>
     <string name="cache_offline_stored">Cihazda depolandı</string>
     <string name="cache_offline_not_ready">Çevrimdışı kullanılamıyor</string>
@@ -905,8 +897,8 @@
     <string name="cache_not_status_found">Bulunmadı</string>
     <string name="cache_never_found">Hiçbir bulunmadı</string>
     <string name="cache_found_last_30_days">Son 30 gün içerisinde bulunanlar</string>
-    <string name="cache_status_archived">Arşivlendi</string>
-    <string name="cache_status_disabled">Devredışı</string>
+    <string name="cache_status_archived">Arşivenlendi</string>
+    <string name="cache_status_disabled">Geçici olarak kapatıldı</string>
     <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Sadece Premium üyeler</string>
     <string name="cache_status_not_premium">Tüm Üyelere Erişim</string>
@@ -921,7 +913,7 @@
     <string name="cache_status_stored_morethansevendays">Son yedi günden önce</string>
     <string name="cache_status_stored_morethanthirtydays">Son otuz günden önce</string>
     <string name="cache_geocode">Geo kodu</string>
-    <string name="cache_name">İsim</string>
+    <string name="cache_name">Ad</string>
     <string name="cache_name_set">Cache ismi ayarla</string>
     <string name="cache_name_updated">Cache ismi güncellendi</string>
     <string name="cache_type">Tür</string>
@@ -935,19 +927,19 @@
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Sahibi</string>
     <string name="cache_hidden">Yerleştirilme</string>
-    <string name="cache_event">Saklanma Tarihi</string>
+    <string name="cache_event">Tarih</string>
     <string name="cache_location">Konum</string>
     <string name="cache_location_country">Ülke</string>
     <string name="cache_coordinates">Koordinatlar</string>
     <string name="cache_calculator">Hesap Makinesi</string>
-    <string name="cache_coordinates_original">Orjinal koordinatlar</string>
-    <string name="cache_spoiler_images_title">İpucu görselleri</string>
+    <string name="cache_coordinates_original">Orijinal Koordinatlar</string>
+    <string name="cache_spoiler_images_title">İpucu Görseller</string>
     <string name="cache_log_types">Kayıt türleri</string>
     <string name="cache_coordinates_no">Bu Geocache\'in koordinatı yok.</string>
     <string name="cache_clear_history">Geçmişi temizle</string>
     <string name="cache_remove_from_history">Geçmişten kaldır</string>
     <string name="cache_license">Lisans</string>
-    <string name="cache_image">Görsel</string>
+    <string name="cache_image">Resim</string>
     <string name="cache_image_open_file">Dosya olarak aç</string>
     <string name="cache_image_open_browser">Tarayıcıda aç</string>
     <string name="cache_image_add_waypoint">Yol noktası ekle</string>
@@ -1016,7 +1008,7 @@
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
     <string name="waypoint_bearing">Azimut açısı</string>
     <string name="waypoint_distance">Mesafe</string>
-    <string name="waypoint_name">İsim</string>
+    <string name="waypoint_name">Ad</string>
     <string name="waypoint_edit">Düzenle</string>
     <string name="waypoint_copy_coordinates">Koordinatları kopyala</string>
     <string name="waypoint_clear_coordinates">Koordinatları temizle</string>
@@ -1026,7 +1018,7 @@
     <string name="waypoint_added">Yol noktası eklendi</string>
     <string name="waypoint_note">Not</string>
     <string name="waypoint_user_note">Kullanıcı notu</string>
-    <string name="waypoint_visited">Ziyaret Edildi</string>
+    <string name="waypoint_visited">Ziyaret edildi</string>
     <string name="waypoint_set_visited">Yol noktası ziyaret edilmiş olarak ayarlandı</string>
     <string name="waypoint_unset_visited">Yol noktası ziyaret edilmemiş olarak ayarlandı</string>
     <string name="waypoint_save">Kaydet</string>
@@ -1056,7 +1048,7 @@
     <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
     <string name="map_map">Harita</string>
-    <string name="map_live">Canlı Harita</string>
+    <string name="map_live">Canlı harita</string>
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_modes">Harita ayarları</string>
     <string name="map_hide">Sakla</string>
@@ -1091,11 +1083,11 @@
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>
     <string name="search_address_button">Adrese göre ara</string>
-    <string name="search_geo">Geo kod</string>
+    <string name="search_geo">Geo kodu</string>
     <string name="search_geo_button">Geo koduna göre ara</string>
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
-    <string name="search_kw_button">Anahtar kelimeye göre ara</string>
+    <string name="search_kw_button">Anahtar kelime ile ara</string>
     <string name="search_fbu">Kullanıcı tarafından bulunan</string>
     <string name="search_fbu_prefill">Kullanıcı adı</string>
     <string name="search_fbu_button">Kullanıcı adına göre ara</string>
@@ -1118,9 +1110,9 @@
     <string name="trackable_refresh">Yenile</string>
     <string name="trackable_goal">Hedef</string>
     <string name="trackable_details">Detaylar</string>
-    <string name="trackable_image">Görsel</string>
+    <string name="trackable_image">Resim</string>
     <string name="trackable_code">Takip kodu</string>
-    <string name="trackable_name">İsim</string>
+    <string name="trackable_name">Ad</string>
     <string name="trackable_brand">Marka</string>
     <string name="trackable_type">Tür</string>
     <string name="trackable_owner">Sahibi</string>
@@ -1129,8 +1121,8 @@
     <string name="trackable_spotted_at_user">Elinde</string>
     <string name="trackable_spotted_unknown_location">Bilinmeyen lokasyon</string>
     <string name="trackable_spotted_owner">Sahibinin elinde</string>
-    <string name="trackable_spotted_archived">Arşivlendi</string>
-    <string name="trackable_origin">Başlangıç noktası</string>
+    <string name="trackable_spotted_archived">Arşivenlendi</string>
+    <string name="trackable_origin">Başlangıç Noktası</string>
     <string name="trackable_unknown">Bilinmeyen</string>
     <string name="trackable_released">Serbest bırakılma tarihi</string>
     <string name="trackable_distance">Seyahat Mesafesi</string>
@@ -1156,7 +1148,6 @@
     <string name="navigation">Navigasyon</string>
     <string name="compass_title">Pusula</string>
     <string name="use_gps">Sadece GPS kullanıldı</string>
-    <string name="use_compass">Gps ve Manyetik pusula kullanıldı</string>
     <string name="destination_select">Varış yeri seç</string>
     <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
