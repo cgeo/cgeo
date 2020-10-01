@@ -86,7 +86,7 @@
     <string name="log_tb_grabbed">Recolhido algures</string>
     <string name="log_tb_note">Nota</string>
     <string name="log_tb_discovered">Visto</string>
-    <string name="log_tb_archived">Arquivado</string>
+    <string name="log_tb_archived">Arquivada</string>
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
     <string name="log_saving_and_uploading">A publicar o registo e a enviar as imagens…</string>
@@ -122,7 +122,7 @@
     <string name="log_image_attach">Anexar Imagem</string>
     <string name="log_image_stored">Existente</string>
     <string name="log_image_camera">Nova</string>
-    <string name="log_image_delete">Eliminar</string>
+    <string name="log_image_delete">Apagar</string>
     <string name="log_image_caption">Legenda</string>
     <string name="log_image_description">Descrição</string>
     <string name="log_image_scale">Resolução</string>
@@ -142,7 +142,7 @@
     <string name="log_problem_missing_label">A geocache poderá não estar no local</string>
     <string name="log_problem_missing_text">Este geocacher reportou que a geocache poderá não estar no local.</string>
     <string name="log_problem_other_label">Outro</string>
-    <string name="log_problem_other_text">Este geocacher reportou que existe um problema com esta geocache.</string>
+    <string name="log_problem_other_text">Este geocacher reportou que existe um problema com esta cache.</string>
     <string name="log_problem_archive_label">A geocache deve ser arquivada</string>
     <string name="log_problem_archive_text">Este geocacher reportou que esta geocache deve ser arquivada. Um revisor voluntário da comunidade foi notificado.</string>
     <string name="log_image_scale_option_noscaling">Não redimensionar</string>
@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
+    <string name="err_captcha">Captcha necessário. Por favor, consulte as <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para obter instruções.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -352,9 +353,9 @@
     <string name="caches_move_selected">Mover seleccionada(s)</string>
     <string name="caches_move_all">Mover todas</string>
     <string name="caches_copy_selected">Copiar seleccionada(s)</string>
-    <string name="caches_copy_all">Copiar tudo</string>
+    <string name="caches_copy_all">Copiar todas</string>
     <string name="caches_map_locus_export">Exportar para Locus</string>
-    <string name="caches_filter">Filtrar</string>
+    <string name="caches_filter">Filtro</string>
     <string name="caches_filter_title">Filtrar por</string>
     <string name="caches_filter_size">Tamanho</string>
     <string name="caches_filter_type">Tipo</string>
@@ -391,7 +392,7 @@
     <string name="list_menu_import">Importar</string>
     <string name="list_title">Escolha uma lista</string>
     <string name="lists_title">Escolha as listas</string>
-    <string name="list_inbox">Lista geral</string>
+    <string name="list_inbox">Armazenadas</string>
     <string name="list_all_lists">Todas as caches</string>
     <string name="list_dialog_create_title">Nova lista</string>
     <string name="list_dialog_create">Criar</string>
@@ -731,7 +732,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="feature_watch_list">Lista de observação</string>
     <string name="feature_own_coordinates">Memorizar as coord. modificadas</string>
     <string name="feature_search_keyword">Pesquisa por palavra-chave</string>
-    <string name="feature_search_live_map">Mapa em tempo real</string>
+    <string name="feature_search_live_map">Mapa</string>
     <string name="feature_search_center">Pesquisa por posição</string>
     <string name="feature_search_geocode">Pesquisa por código GC</string>
     <string name="feature_search_owner">Pesquisa por proprietário</string>
@@ -812,7 +813,7 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="other">%1$d dias restantes</item>
     </plurals>
     <string name="last_day_available">último dia disponível</string>
-    <string name="cache_offline">Armazenada</string>
+    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Remover</string>
     <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
@@ -925,7 +926,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_sygic_walk">Sygic (caminhar)</string>
     <string name="cache_menu_sygic_drive">Sygic (conduzir)</string>
     <string name="cache_menu_radar">Radar</string>
-    <string name="cache_menu_map">Mostrar no mapa</string>
+    <string name="cache_menu_map">Mapa</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Outras aplicações externas</string>
     <string name="cache_menu_streetview">Vista de rua</string>
@@ -952,7 +953,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Armazenada</string>
+    <string name="cache_stored">Armazenadas</string>
     <string name="cache_status_offline_log">Registo gravado</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
@@ -960,10 +961,10 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_found_last_30_days">Encontradas nos últimos 30 dias</string>
     <string name="cache_status_archived">Arquivada</string>
     <string name="cache_status_disabled">Desactivada</string>
-    <string name="cache_status_active">Activa</string>
+    <string name="cache_status_active">Activo</string>
     <string name="cache_status_premium">Apenas membros premium</string>
     <string name="cache_status_not_premium">Disponível para todos os membros</string>
-    <string name="cache_status_stored">Armazenada</string>
+    <string name="cache_status_stored">Armazenadas</string>
     <string name="cache_status_not_stored">Não está armazenada</string>
     <string name="cache_status_stored_lasteighthours">Dentro das últimas oito horas</string>
     <string name="cache_status_stored_lasttwentyfourhours">Dentro das últimas vinte e quatro horas</string>
@@ -985,7 +986,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
     <string name="cache_rating_of">de</string>
-    <string name="cache_favorite">Favoritos</string>
+    <string name="cache_favorite">Favorita</string>
     <string name="cache_owner">Dono</string>
     <string name="cache_hidden">Escondida</string>
     <string name="cache_event">Data</string>
@@ -1090,7 +1091,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_added">Foi adicionado o ponto adicional</string>
     <string name="waypoint_note">Nota</string>
     <string name="waypoint_user_note">Nota do utilizador</string>
-    <string name="waypoint_visited">Percorrido</string>
+    <string name="waypoint_visited">Visitar</string>
     <string name="waypoint_set_visited">Ponto adicional definido como visitado</string>
     <string name="waypoint_unset_visited">Ponto adicional definido como não visitado</string>
     <string name="waypoint_save">Guardar</string>
@@ -1120,7 +1121,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa on-line</string>
+    <string name="map_live">Mapa</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_modes">Modos de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
@@ -1163,12 +1164,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_geo_button">Pesquisar por código GC</string>
     <string name="search_kw">Palavras-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
-    <string name="search_kw_button">Pesquisar por palavra-chave</string>
+    <string name="search_kw_button">Pesquisa por palavra-chave</string>
     <string name="search_fbu">Encontradas por um utilizador</string>
     <string name="search_fbu_prefill">Nome de utilizador</string>
     <string name="search_fbu_button">Pesquisar por utilizador</string>
     <string name="search_hbu">Escondidas por um utilizador</string>
-    <string name="search_hbu_prefill">Proprietário</string>
+    <string name="search_hbu_prefill">Dono</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
@@ -1198,7 +1199,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="trackable_spotted_at_user">Nas mãos de</string>
     <string name="trackable_spotted_unknown_location">Localização desconhecida</string>
     <string name="trackable_spotted_owner">Nas mãos do dono</string>
-    <string name="trackable_spotted_archived">Arquivado</string>
+    <string name="trackable_spotted_archived">Arquivada</string>
     <string name="trackable_origin">Origem</string>
     <string name="trackable_unknown">Desconhecido</string>
     <string name="trackable_released">Lançado</string>
@@ -1206,7 +1207,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="trackable_touch">Contacto</string>
     <string name="trackable_not_activated">Trackable não activado</string>
     <string name="trackable_travelbug">Travelbug</string>
-    <string name="trackable_status">Situação</string>
+    <string name="trackable_status">Estado</string>
     <string name="trackable_found">%1$s (%2$s)</string>
     <string name="geokret_type_traditional">Tradicional</string>
     <string name="geokret_type_book_or_media">Livro ou média electrónica</string>
@@ -1225,12 +1226,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="navigation">Navegação</string>
     <string name="compass_title">Bússola</string>
     <string name="use_gps">Apenas GPS</string>
-    <string name="use_compass">GPS e Bússola Magnética</string>
+    <string name="use_compass">Todos os sensores utilizados</string>
     <string name="destination_select">Seleccionar destino</string>
     <string name="navigation_direct_navigation">Navegação directa</string>
     <string name="osmand_marker_cgeo">Marcador vindo do c:geo</string>
-    <string name="device_heading_label">Orientação do dispositivo:</string>
-    <string name="device_orientation">Orientação do dispositivo</string>
+    <string name="device_heading_label">Dispositivo:</string>
+    <string name="device_orientation">Orientação</string>
     <string name="device_orientation_label">Orientação:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconhecido</string>
