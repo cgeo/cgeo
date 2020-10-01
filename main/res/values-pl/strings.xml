@@ -116,9 +116,11 @@
     <string name="log_yesterday">Wczoraj</string>
     <string name="log_smilies">Uśmiechy</string>
     <string name="log_image">Obraz</string>
+    <string name="log_images">Zdjęcia</string>
     <string name="log_image_attach">Załącz obraz</string>
     <string name="log_image_stored">Zapisany</string>
     <string name="log_image_camera">Nowy</string>
+    <string name="log_image_delete">Usuń</string>
     <string name="log_image_caption">Podpis</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skalowanie obrazu</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Obraz</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
     <string name="translate_to_english">Przetłumacz na angielski</string>
@@ -1219,6 +1222,7 @@
     <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
     <string name="osmand_marker_cgeo">Marker z c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nieznana</string>
     <!-- license -->
     <string name="license">Licencja</string>
     <string name="license_show">Pokaż licencję</string>
