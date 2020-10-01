@@ -603,7 +603,7 @@
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
     <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
     <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
-    <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit der Sicherung überschreiben?</string>
+    <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
     <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Backup-Datei ist beschädigt, Datenbank musste neu erstellt werden.</string>
     <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
@@ -621,8 +621,8 @@
     <string name="settings_savingerror">Fehler beim Speichern der Einstellungen</string>
     <string name="settings_saved">Einstellungen erfolgreich gespeichert nach:</string>
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
-    <string name="init_backup_settings_restore_confirm">Möchtest du die aktuellen Einstellungen überschreiben?</string>
-    <string name="init_backup_settings_restore_no">Es ist keine Sicherung der Einstellungen verfügbar</string>
+    <string name="init_backup_settings_restore_confirm">Möchtest du die aktuellen Einstellungen löschen?</string>
+    <string name="init_backup_settings_restore_no">Es ist kein Backup der Einstellungen verfügbar</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restored">Einstellungen wiederhergestellt</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
