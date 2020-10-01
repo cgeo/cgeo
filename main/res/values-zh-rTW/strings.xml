@@ -93,6 +93,7 @@
     <string name="log_problem_other_text">这个寻宝者报告此宝有问题。</string>
     <string name="log_problem_archive_label">此宝应该被存档</string>
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
+    <string name="log_image_titleprefix">镜像文件</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
     <string name="translate_to_english">翻译为</string>
@@ -118,11 +119,11 @@
     <string name="warn_no_keyword">未给定关键词。</string>
     <string name="warn_no_username">未指定用户名。</string>
     <string name="warn_no_connector">没有当前可用的geocaching服务来提供这种类型的搜索</string>
-    <string name="warn_search_help_title">需要帮助吗？</string>
     <string name="warn_load_images">读取图片失败。</string>
     <string name="warn_rendertheme_missing">未找到映射文件</string>
     <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="info_log_post_failed_reason">原因：%s</string>
+    <string name="info_log_post_save">離線儲存</string>
     <string name="info_waypoint_coordinates_cleared">坐标已清除。</string>
     <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
     <string name="confirm_unsaved_changes_title">未保存更改</string>
@@ -132,6 +133,7 @@
     <string name="loc_sat">六</string>
     <string name="loc_no_addr">未知地址</string>
     <!-- standard menu -->
+    <string name="menu_about">關於c:geo</string>
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
@@ -155,7 +157,7 @@
     <string name="caches_store_offline">离线存储</string>
     <string name="caches_store_all">全部存储</string>
     <string name="caches_store_unsaved">存储未保存</string>
-    <string name="caches_history">查看历史</string>
+    <string name="caches_history">历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
     <string name="caches_sort_distance">游览路程</string>
@@ -171,9 +173,14 @@
     <string name="caches_sort_state">省份</string>
     <string name="caches_sort_eventdate">事件日期</string>
     <string name="caches_select_mode">选择模式：</string>
+    <string name="caches_nearby">附近</string>
     <string name="caches_upload_modifiedcoords">上传更改后的坐标</string>
     <string name="caches_copy_selected">复制所选项</string>
     <string name="caches_copy_all">全部复制</string>
+    <string name="caches_filter">滤镜</string>
+    <string name="caches_filter_size">大小</string>
+    <string name="caches_filter_distance">游览路程</string>
+    <string name="caches_filter_popularity">已被标记为喜爱</string>
     <string name="caches_filter_own_rating">有任何评级</string>
     <string name="caches_filter_missing_gcvote">找到的缓存未投票</string>
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
@@ -235,6 +242,10 @@
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
     <string name="init_login_popup_failed_reason">登录失败。%s</string>
+    <string name="init_signature_template_name">应用名</string>
+    <string name="init_signature_template_difficulty">难度系数</string>
+    <string name="init_signature_template_terrain">地形</string>
+    <string name="init_signature_template_size">大小</string>
     <string name="init_summary_skin">Use light skin (Restart needed)</string>
     <!-- backup / restore -->
     <string name="init_backup_no_backup_available">没有可用的资源。</string>
@@ -246,6 +257,7 @@
     <string name="init_dbonsdcard">放在用户存储上</string>
     <string name="init_datadirmove_datadirmove">是否移动 geocache 数据目录？</string>
     <string name="init_datadirmove_running">是否移动 geocache 数据目录？</string>
+    <string name="settings_settings">设置</string>
     <!-- proximity notification -->
     <!-- map sources -->
     <!-- auth generic -->
@@ -260,7 +272,23 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_offline_drop">移除</string>
+    <string name="cache_description">描述信心</string>
+    <string name="cache_menu_map">地图</string>
+    <string name="cache_menu_details">详细资料</string>
+    <string name="cache_stored">已存储</string>
     <string name="cache_found_last_30_days">最近 30 天下载</string>
+    <string name="cache_status_disabled">已禁用</string>
+    <string name="cache_status_stored">已存储</string>
+    <string name="cache_name">应用名</string>
+    <string name="cache_size">大小</string>
+    <string name="cache_distance">游览路程</string>
+    <string name="cache_difficulty">难度系数</string>
+    <string name="cache_terrain">地形</string>
+    <string name="cache_rating">评级</string>
+    <string name="cache_coordinates_original">原始坐标</string>
+    <string name="cache_license">许可</string>
+    <string name="cache_image">镜像文件</string>
     <!-- coordinate calculator hints -->
     <!-- editor dialog -->
     <!-- file list base -->
@@ -270,15 +298,25 @@
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
+    <string name="waypoint_distance">游览路程</string>
+    <string name="waypoint_name">应用名</string>
+    <string name="waypoint_note">筆記</string>
     <!-- visit -->
     <!-- map -->
+    <string name="map_map">地图</string>
     <string name="map_routing_straight">直线</string>
     <!-- search -->
     <!-- trackable -->
+    <string name="trackable_details">详细资料</string>
+    <string name="trackable_image">镜像文件</string>
+    <string name="trackable_name">应用名</string>
+    <string name="trackable_unknown">未知</string>
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
+    <string name="do_unknown">未知</string>
     <!-- license -->
+    <string name="license">许可</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>
