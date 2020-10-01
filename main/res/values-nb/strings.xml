@@ -113,9 +113,11 @@
     <string name="log_yesterday">I går</string>
     <string name="log_smilies">Smilefjes</string>
     <string name="log_image">Bilde</string>
+    <string name="log_images">Bilder</string>
     <string name="log_image_attach">Legg ved bilde</string>
     <string name="log_image_stored">Eksisterende</string>
     <string name="log_image_camera">Nytt</string>
+    <string name="log_image_delete">Slett</string>
     <string name="log_image_caption">Bildetekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -138,6 +140,7 @@
     <string name="log_problem_other_text">Denne geocacheren rapporterte at det er et problem med denne cachen.</string>
     <string name="log_problem_archive_label">Cachen bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacheren rapporterte at geocachen bør arkiveres. En frivillig kontrollør blir varslet.</string>
+    <string name="log_image_titleprefix">Bilde</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversett til %s</string>
     <string name="translate_to_english">Oversett til engelsk</string>
@@ -863,6 +866,7 @@
     <string name="cache_found_last_30_days">Funnet siste 30 dager</string>
     <string name="cache_status_archived">Arkivert</string>
     <string name="cache_status_disabled">Deaktivert</string>
+    <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun for premium-medlemmer</string>
     <string name="cache_status_not_premium">Tilgjengelig for alle medlemmer</string>
     <string name="cache_status_stored">Lagret</string>
@@ -1106,6 +1110,7 @@
     <string name="navigation_direct_navigation">Direkte navigering</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Ukjent</string>
     <!-- license -->
     <string name="license">Lisens</string>
     <string name="license_show">Vis lisens</string>
@@ -1518,6 +1523,7 @@
     <string name="individual_route_added">Legg til i ruten</string>
     <string name="individual_route_removed">Fjernet fra ruten</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
+    <string name="save_sorted_route">Lagre</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_m">m</string>
