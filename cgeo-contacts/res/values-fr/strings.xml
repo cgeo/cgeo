@@ -4,7 +4,7 @@
     <string name="contact_not_found">Aucun contact avec %s comme pseudo trouvé. Ajoutez le à vos contacts.</string>
     <string name="multiple_matches">Plusieurs correspondances</string>
     <!-- permission handling -->
-    <string name="ask_again">Demandez-moi à nouveau</string>
+    <string name="ask_again">Demander plus tard</string>
     <string name="close">Ferme</string>
     <string name="goto_app_details">Ouvre l\'information de l\'Application</string>
     <string name="contacts_permission_request_denied">Vous devez donner à \"c:geo - contacts\" l\'autorisation de lire vos carnets d\'adresses pour rechercher le nom du cacheur.</string>
