@@ -116,9 +116,11 @@
     <string name="log_yesterday">Wczoraj</string>
     <string name="log_smilies">Uśmiechy</string>
     <string name="log_image">Obraz</string>
+    <string name="log_images">Zdjęcia</string>
     <string name="log_image_attach">Załącz obraz</string>
     <string name="log_image_stored">Zapisany</string>
     <string name="log_image_camera">Nowy</string>
+    <string name="log_image_delete">Usuń</string>
     <string name="log_image_caption">Podpis</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skalowanie obrazu</string>
@@ -129,7 +131,7 @@
     <string name="log_your_saved_log">Twój zapisany wpis</string>
     <string name="log_empty_logbook">Logbook tej skrzynki jest pusty.</string>
     <string name="log_problem_none">Brak problemów</string>
-    <string name="log_problem_needs_maintenance_label">Wymagany serwis skrzynki</string>
+    <string name="log_problem_needs_maintenance_label">Wymaga przeglądu</string>
     <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tym cachem.</string>
     <string name="log_problem_log_full_label">Logbook jest pełny</string>
     <string name="log_problem_log_full_text">Ten geocacher poinformował, że logbook jest pełny.</string>
@@ -137,12 +139,13 @@
     <string name="log_problem_damaged_text">Ten geocacher poinformował, że pojemnik jest uszkodzony.</string>
     <string name="log_problem_missing_label">Cache mógł zniknąć</string>
     <string name="log_problem_missing_text">Ten geocacher poinformował, że cache mógł zniknąć.</string>
-    <string name="log_problem_other_label">Inne</string>
+    <string name="log_problem_other_label">Inna</string>
     <string name="log_problem_other_text">Ten geocacher poinformował, że jest problem z tym cachem.</string>
     <string name="log_problem_archive_label">Cache powinien zostać archiwizowany</string>
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Obraz</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
     <string name="translate_to_english">Przetłumacz na angielski</string>
@@ -586,14 +589,12 @@
     <string name="init_backup">Kopia skrzynek i punktów nawigacyjnych</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>
-    <string name="init_backup_note">Zwróć uwagę, że ta opcja wykonuje tylko kopię zapasową/odzyskiwanie bazy danych zawierającą skrzynki i punkty nawigacyjne, ale bez zdjęć ze skrzynek i ustawień programu.</string>
     <string name="init_backup_restore">Przywróć</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
     <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
     <string name="backup_confirm_overwrite">Czy chcesz nadpisać aktualną kopię zapasową z %s?</string>
-    <string name="restore_confirm_overwrite">Czy chcesz nadpisać %s w twoim urządzeniu kopią zapasową?</string>
     <string name="init_restore_success">Odzyskiwanie zakończone.</string>
     <string name="init_restore_failed_dbrecreated">Przywracanie nie powiodło się. Plik kopii zapasowej został uszkodzony. Baza danych musiała zostać ponownie utworzona.</string>
     <string name="init_restore_failed">Odzyskiwanie nie powiodło się.</string>
@@ -603,17 +604,11 @@
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
     <string name="settings_title_backup">Kopia zapasowa / przywracanie</string>
     <string name="settings_summary_backup">Wykonaj kopię zapasową i przywrócenie danych o skrzynkach/punktach nawigacyjnych oraz ustawień programu.</string>
-    <string name="init_backup_settings">Ustawienia kopii zapasowych</string>
-    <string name="init_backup_settings_backup_light">Kopia zapasowa ustawień (bez danych konta)</string>
-    <string name="init_backup_settings_backup_full">Kopia zapasowa ustawień (pełna)</string>
     <string name="init_backup_settings_backup_full_confirm">Czy na pewno chcesz zachować wrażliwe dane dotyczące konta? Takie dane mogą być odczytane przez inne aplikacje.</string>
     <string name="settings_savingerror">Błąd podczas zapisywania ustawień</string>
     <string name="settings_saved">Ustawienia zapisano w:</string>
     <string name="init_backup_settings_restore">Przywróć ustawienia</string>
-    <string name="init_backup_settings_restore_confirm">Czy chcesz nadpisać obecne ustawienia?</string>
-    <string name="init_backup_settings_restore_no">Brak kopii zapasowej ustawień</string>
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
-    <string name="settings_restored">Ustawienia przywrócone</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy również w trybie offline. Możesz pobrać mapy z Mapsforge lub stworzyć własne z danych OSM. Aby uzyskać wsparcie map w trybie offline trzeba najpierw wybrać katalog w którym są one przechowywane.</string>
@@ -720,7 +715,7 @@
     <string name="feature_watch_list">Listy obserwowanych skrzynek</string>
     <string name="feature_own_coordinates">Przechowywanie zmodyfikowanych współrzędnych</string>
     <string name="feature_search_keyword">Szukanie po słowie kluczowym</string>
-    <string name="feature_search_live_map">Mapa skrzynek online</string>
+    <string name="feature_search_live_map">Mapa online</string>
     <string name="feature_search_center">Szukanie po lokalizacji</string>
     <string name="feature_search_geocode">Szukanie po numerze skrzynki</string>
     <string name="feature_search_owner">Szukaj wg właściciela</string>
@@ -762,7 +757,7 @@
     <string name="sendToCgeo_download_fail">c:geo nie może pobrać skrzynek. Brak połączenia z internetem lub narzędzie send2cgeo jest wyłączone.</string>
     <string name="sendToCgeo_no_registration">c:geo nie może pobrać skrzynek. Rejestracja do send2cgeo wygasła. Proszę zarejestrować urządzenie w Ustawieniach.</string>
     <!-- auth generic -->
-    <string name="auth_authorize">Autoryzacja c:geo</string>
+    <string name="auth_authorize">Autoryzuj c:geo</string>
     <string name="auth_check">Sprawdź uwierzytelnienie</string>
     <string name="auth_check_again">Sprawdź uwierzytelnienie ponownie</string>
     <string name="auth_start">Rozpoczynam autoryzację</string>
@@ -777,17 +772,17 @@
     <string name="auth_forget_title">Zapomnij uwierzytelnienie?</string>
     <string name="auth_forget_message">Zostaniesz rozłączony z tego serwisu. Twoje dane uwierzytelniające zostaną utracone.</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">Poniższy proces umożliwi <b>c:geo</b> dostęp do %s.</string>
+    <string name="auth_credentials_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
     <string name="auth_credentials_explain_long">Uzupełnienie danych i naciśnięcie przycisku \"Sprawdź uwierzytelnienie\" rozpocznie proces uwierzytelniający. Aplikacja połączy się z %s i sprawdzi Twoje dane uwierzytelniające. To wszystko.</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
+    <string name="auth_token_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
     <string name="auth_token_explain_long">Po uzupełnieniu danych użytkownika i naciśnięciu przycisku \"authorize c:geo\" proces uwierzytelnienia zostanie rozpoczęty. Aplikacja połączy się z %s i otrzyma token uwierzytelniający. To wszytko.</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo jest teraz autoryzowane do zamieszczania postów na Twitterze.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
     <!-- auth geokrety -->
-    <string name="auth_dialog_completed_geokrety">Aplikacja c:geo jest teraz upoważniona do interakcji z %s.</string>
+    <string name="auth_dialog_completed_geokrety">c:geo został zautoryzowany by komunikować się z %s.</string>
     <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
     <string name="err_auth_geokrety_unknown">%1$s zwrócił: %2$s.</string>
     <!-- cache -->
@@ -924,7 +919,7 @@
     <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
     <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
     <string name="cache_menu_radar">Radar</string>
-    <string name="cache_menu_map">Pokaż na mapie</string>
+    <string name="cache_menu_map">Mapa</string>
     <string name="cache_menu_rmaps">Rmaps</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
     <string name="cache_menu_streetview">Street View</string>
@@ -951,18 +946,18 @@
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Przechowywany</string>
+    <string name="cache_stored">Zapisane</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_never_found">Nigdy nie znaleziona</string>
     <string name="cache_found_last_30_days">Znalezione przez ostatnie 30 dni</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
-    <string name="cache_status_disabled">Niedostępna</string>
+    <string name="cache_status_disabled">Nieaktywny</string>
     <string name="cache_status_active">Aktywna</string>
     <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
     <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
-    <string name="cache_status_stored">Zapisano</string>
+    <string name="cache_status_stored">Zapisane</string>
     <string name="cache_status_not_stored">Nie zapisano</string>
     <string name="cache_status_stored_lasteighthours">W ciągu ostatnich ośmiu godzin</string>
     <string name="cache_status_stored_lasttwentyfourhours">W ciągu ostatnich dwudziestu czterech godzin</string>
@@ -984,7 +979,7 @@
     <string name="cache_rating">Ocena</string>
     <string name="cache_own_rating">Własna ocena</string>
     <string name="cache_rating_of">z</string>
-    <string name="cache_favorite">Ulubiona</string>
+    <string name="cache_favorite">Ulubione</string>
     <string name="cache_owner">Właściciel</string>
     <string name="cache_hidden">Ukryta</string>
     <string name="cache_event">Data</string>
@@ -999,7 +994,7 @@
     <string name="cache_clear_history">Usuń historię</string>
     <string name="cache_remove_from_history">Usuń z historii</string>
     <string name="cache_license">Licencja</string>
-    <string name="cache_image">Zdjęcie</string>
+    <string name="cache_image">Obraz</string>
     <string name="cache_image_open_file">Otwórz jako plik</string>
     <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
     <string name="cache_image_add_waypoint">Dodaj punkt nawigacyjny</string>
@@ -1085,7 +1080,7 @@
     <string name="waypoint_clear_coordinates">Wyczyść współrzędne</string>
     <string name="waypoint_delete">Usuń</string>
     <string name="waypoint_edit_title">Edytuj punkt nawigacji</string>
-    <string name="waypoint_add_title">Dodaj punkt nawigacji</string>
+    <string name="waypoint_add_title">Dodaj punkt nawigacyjny</string>
     <string name="waypoint_added">Punkt dodany</string>
     <string name="waypoint_note">Notatka</string>
     <string name="waypoint_user_note">Notatka użytkownika</string>
@@ -1162,7 +1157,7 @@
     <string name="search_geo_button">Szukaj według  kodu skrzynki</string>
     <string name="search_kw">Słowa kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
-    <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
+    <string name="search_kw_button">Szukanie po słowie kluczowym</string>
     <string name="search_fbu">Znalezione przez użytkownika</string>
     <string name="search_fbu_prefill">Nazwa użytkownika</string>
     <string name="search_fbu_button">Szukaj według nazwy użytkownika</string>
@@ -1178,14 +1173,14 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_pocket_loading">Wczytywanie listy Pocket Queries</string>
     <!-- trackable -->
-    <string name="trackable">Przedmiot podróżny</string>
+    <string name="trackable">Przedmioty podróżne</string>
     <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
     <string name="trackable_log_touch">Wpisz odkrycie</string>
     <string name="trackable_browser_open">Otwórz w przeglądarce</string>
     <string name="trackable_refresh">Odśwież</string>
     <string name="trackable_goal">Cel</string>
     <string name="trackable_details">Szczegóły</string>
-    <string name="trackable_image">Zdjęcie</string>
+    <string name="trackable_image">Obraz</string>
     <string name="trackable_code">Kod przedmiotu podróżnego</string>
     <string name="trackable_name">Nazwa</string>
     <string name="trackable_brand">Marka</string>
@@ -1196,9 +1191,9 @@
     <string name="trackable_spotted_at_user">W rękach</string>
     <string name="trackable_spotted_unknown_location">Nieznana lokalizacja</string>
     <string name="trackable_spotted_owner">U właściciela</string>
-    <string name="trackable_spotted_archived">Zarchiwizowany</string>
-    <string name="trackable_origin">Pochodzenie</string>
-    <string name="trackable_unknown">Nieznany</string>
+    <string name="trackable_spotted_archived">Zarchiwizowana</string>
+    <string name="trackable_origin">Źródło</string>
+    <string name="trackable_unknown">Nieznana</string>
     <string name="trackable_released">Wydany</string>
     <string name="trackable_distance">W podróży</string>
     <string name="trackable_touch">TB-Akcja</string>
@@ -1223,11 +1218,11 @@
     <string name="navigation">Nawigacja</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Tylko GPS</string>
-    <string name="use_compass">GPS i kompas magnetyczny</string>
     <string name="destination_select">Wybierz cel</string>
     <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
     <string name="osmand_marker_cgeo">Marker z c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nieznana</string>
     <!-- license -->
     <string name="license">Licencja</string>
     <string name="license_show">Pokaż licencję</string>
@@ -1484,7 +1479,7 @@
     <string name="attribute_shovel_yes">Zakopana</string>
     <string name="attribute_shovel_no">Nie potrzebna łopatka</string>
     <string name="attribute_specific_access_yes">Dostępna o określonych godzinach (może wymagać opłaty)</string>
-    <string name="attribute_specific_access_no">Dostępna zawsze</string>
+    <string name="attribute_specific_access_no">Dostępna przez cały czas</string>
     <string name="attribute_pedestrian_only_yes">Dostępna tylko pieszo</string>
     <string name="attribute_pedestrian_only_no">Dostępna różnymi środkami lokomocji</string>
     <string name="attribute_nature_cache_yes">Umiejscowiona na łonie natury (góry, lasy, rzeki itp.)</string>
@@ -1595,7 +1590,7 @@
     <string name="geokrety_parsing_failed">Nie udało się odczytać odpowiedzi GeoKrety.</string>
     <string name="settings_map_direction">Pokazuj kierunek</string>
     <string name="settings_summary_map_direction">Pokazuj linię kierunku do punktu nawigacyjnego</string>
-    <string name="map_direction">Pokaż kierunek</string>
+    <string name="map_direction">Pokazuj kierunek</string>
     <string name="command_move_caches_progress">Przenoszę skrzynki do listy %1s</string>
     <plurals name="command_move_caches_result">
         <item quantity="one">Przeniesiono %d skrzynkę</item>
@@ -1757,7 +1752,7 @@
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
-    <string name="map_trail_show">Pokaż historię ścieżki</string>
+    <string name="map_trail_show">Pokaż historię</string>
     <!-- history track export -->
     <string name="trailhistory">Historyczny tor</string>
     <string name="export_trailhistory_title">Pokaż historię ścieżki</string>
