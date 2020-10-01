@@ -879,7 +879,6 @@
     <!-- navigation -->
     <string name="navigation">Nabigasyon</string>
     <string name="use_gps">Ang GPS ra maoy gamiton</string>
-    <string name="use_compass">GPS ug Magnetic Compass ang gigamit</string>
     <string name="destination_select">Pili ug destinasyon</string>
     <string name="navigation_direct_navigation">Diretsong nabigasyon</string>
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
