@@ -596,14 +596,14 @@
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
     <string name="init_backup_running">Luodaan varmuuskopiota kätkötietokannasta…</string>
-    <string name="init_backup_note">Huomaathan, että tämä toiminto varmuuskopioi/palauttaa tietokannan, joka sisältää kätköt ja niiden reittipisteet, mutta ei sinun kätkökuvia tai ohjelman asetuksia.</string>
+    <string name="init_backup_note">Huomaathan, että tämä toiminto varmuuskopioi/palauttaa tietokannan, joka sisältää vain kätköt ja niiden reittipisteet, mutta ei sinun kätkökuvia tai ohjelman asetuksia.</string>
     <string name="init_backup_restore">Palauta</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
     <string name="backup_confirm_overwrite">Haluatko korvata olemassa olevan varmuuskopion %s?</string>
-    <string name="restore_confirm_overwrite">Haluatko korvata laitteessasi olevan \"%s\" varmuuskopiolla?</string>
+    <string name="restore_confirm_overwrite">Haluatko korvata laitteessasi olevan %s varmuuskopiolla?</string>
     <string name="init_restore_success">Palautus valmis.</string>
     <string name="init_restore_failed_dbrecreated">Palautus epäonnistui: Varmuuskopio korruptoitunut, tietokanta piti luoda tyhjästä.</string>
     <string name="init_restore_failed">Palautus epäonnistui.</string>
