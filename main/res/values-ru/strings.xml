@@ -83,10 +83,10 @@
     <string name="log_tb_drop">Оставлен</string>
     <string name="log_tb_sortby">Отсортировать трэкаблы</string>
     <string name="log_tb_changeall">Изменить все</string>
-    <string name="log_tb_grabbed">Где-то найден</string>
+    <string name="log_tb_grabbed">Схватил где-то</string>
     <string name="log_tb_note">Запись</string>
     <string name="log_tb_discovered">Обнаружен</string>
-    <string name="log_tb_archived">Архивирован</string>
+    <string name="log_tb_archived">Aрхивирован</string>
     <string name="log_save">Сохранить оффлайн</string>
     <string name="log_saving">Отправка записи…</string>
     <string name="log_posting_log">Отправка записи…</string>
@@ -116,9 +116,11 @@
     <string name="log_yesterday">Вчера</string>
     <string name="log_smilies">Смайлики</string>
     <string name="log_image">Добавить фото</string>
+    <string name="log_images">Изображения</string>
     <string name="log_image_attach">Прикрепить изображение</string>
     <string name="log_image_stored">Выбрать</string>
     <string name="log_image_camera">Камера</string>
+    <string name="log_image_delete">Удалить</string>
     <string name="log_image_caption">Заголовок</string>
     <string name="log_image_description">Описание</string>
     <string name="log_image_scale">Масштабирование</string>
@@ -137,12 +139,13 @@
     <string name="log_problem_damaged_text">Этот пользователь сообщил, что контейнер повреждён.</string>
     <string name="log_problem_missing_label">Тайник может отсутствовать</string>
     <string name="log_problem_missing_text">Этот пользователь сообщил, что тайник может отсутствовать.</string>
-    <string name="log_problem_other_label">Другое</string>
+    <string name="log_problem_other_label">Другой</string>
     <string name="log_problem_other_text">Этот пользователь сообщил, что есть проблема с тайником.</string>
     <string name="log_problem_archive_label">Тайник должен быть заархивирован</string>
     <string name="log_problem_archive_text">Этот пользователь сообщил, что тайник должен быть заархивирован. Сообщество добровольцев было уведомлено.</string>
     <string name="log_image_scale_option_noscaling">Без масштабирования</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Добавить фото</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перевести на %s</string>
     <string name="translate_to_english">Перевести на английский</string>
@@ -330,7 +333,7 @@
     <string name="caches_select_mode">Режим выделения</string>
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
-    <string name="caches_nearby">Поблизости</string>
+    <string name="caches_nearby">Рядом</string>
     <string name="caches_remove_all">Удалить все</string>
     <string name="caches_remove_selected">Удалить выбранные</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
@@ -355,7 +358,7 @@
     <string name="caches_filter_modified">С измененными координатами</string>
     <string name="caches_filter_offline_log">С сохраненными записями</string>
     <string name="caches_filter_origin">Происхождение</string>
-    <string name="caches_filter_distance">Расстоянию</string>
+    <string name="caches_filter_distance">Расстояние</string>
     <string name="caches_filter_personal_note">С личными записями</string>
     <string name="caches_filter_popularity">Рекомендации</string>
     <string name="caches_filter_popularity_ratio">Рекомендации [%]</string>
@@ -533,7 +536,7 @@
     <string name="init_signature_template_user">Пользователь</string>
     <string name="init_signature_template_number">Номер тайника</string>
     <string name="init_signature_template_owner">Создатель</string>
-    <string name="init_signature_template_name">Название тайника</string>
+    <string name="init_signature_template_name">Название</string>
     <string name="init_signature_template_difficulty">Сложность</string>
     <string name="init_signature_template_terrain">Местность</string>
     <string name="init_signature_template_url">URL</string>
@@ -586,14 +589,12 @@
     <string name="init_backup">Резервное копирование тайников / точек</string>
     <string name="init_backup_backup">Сохранить</string>
     <string name="init_backup_running">Создание резервной копии…</string>
-    <string name="init_backup_note">Обратите внимание, что эта функция сохранит\восстановит только базу данных, содержащую только тайники и точки, но не сохранит фотографии и настройки.</string>
     <string name="init_backup_restore">Восстановить</string>
     <string name="init_backup_success">База данных c:geo была успешно скопирована в:</string>
     <string name="init_backup_failed">Резервное копирование не удалось.</string>
     <string name="init_backup_unnecessary">База данных пуста, резервное копирование не нужно.</string>
     <string name="init_backup_no_backup_available">Отсутствует файл резервной копии.</string>
     <string name="backup_confirm_overwrite">Вы хотите перезаписать существующую резервную копию от %s?</string>
-    <string name="restore_confirm_overwrite">Вы хотите перезаписать %s на вашем устройстве резервной копией?</string>
     <string name="init_restore_success">Восстановление завершено.</string>
     <string name="init_restore_failed_dbrecreated">Ошибка при восстановлении: файл резервной копии поврежден, база данных должна была быть пересоздана.</string>
     <string name="init_restore_failed">Восстановление не удалось.</string>
@@ -604,17 +605,11 @@
     <string name="init_restore_version_error">Неожиданный формат - невозможно восстановить базу данных.\n\nОжидаемая версия %1$d,\nрезервная копия имеет версию %2$d</string>
     <string name="settings_title_backup">Резервная копия / восстановление</string>
     <string name="settings_summary_backup">Выполняет резервное копирование и восстановление тайников\точек и настроек приложения.</string>
-    <string name="init_backup_settings">Резервное копирование настроек</string>
-    <string name="init_backup_settings_backup_light">Резервная копия настроек (без данных аккаунтов)</string>
-    <string name="init_backup_settings_backup_full">Резервная копия настроек (полная)</string>
     <string name="init_backup_settings_backup_full_confirm">Вы точно хотите сохранить персональные данные аккаунтов? Они могут быть прочитаны другими приложениями.</string>
     <string name="settings_savingerror">Ошибка сохранения настроек</string>
     <string name="settings_saved">Настройки успешно сохранены в:</string>
     <string name="init_backup_settings_restore">Восстановить настройки</string>
-    <string name="init_backup_settings_restore_confirm">Вы точно хотите перезаписать текущие настройки?</string>
-    <string name="init_backup_settings_restore_no">Нет резервной копии настроек</string>
     <string name="settings_readingerror">Ошибка чтения настроек</string>
-    <string name="settings_restored">Настройки восстановлены</string>
     <string name="settings_restart">c:geo необходим перезапуск, чтобы восстановленные настройки активировались</string>
     <string name="settings_info_offline_maps_title">Информация про оффлайновые карты</string>
     <string name="settings_info_offline_maps">c:geo предлагает карты для оффлайнового использования. Вы можете загрузить карты с Mapsforge или даже создать свои собственные, используя данные OSM. Для работы с оффлайновыми картами, выберите папку с картами.</string>
@@ -721,7 +716,7 @@
     <string name="feature_watch_list">Список отслеживаемых</string>
     <string name="feature_own_coordinates">Сохранение измененных координат</string>
     <string name="feature_search_keyword">Поиск по ключевым словам</string>
-    <string name="feature_search_live_map">Онлайн карта</string>
+    <string name="feature_search_live_map">Карта</string>
     <string name="feature_search_center">Поиск по местоположению</string>
     <string name="feature_search_geocode">Поиск по геокоду</string>
     <string name="feature_search_owner">Поиск по создателю</string>
@@ -843,7 +838,7 @@
     <string name="cache_inventory">Инвентарь</string>
     <string name="cache_log_images_title">Фотографии в блокноте</string>
     <string name="cache_log_image_default_title">Фото</string>
-    <string name="cache_personal_note">Персональные заметки</string>
+    <string name="cache_personal_note">Личные заметки</string>
     <string name="cache_menu_preventWaypointsFromNote">Не создавать точки из текста</string>
     <string name="cache_menu_allowWaypointExtraction">Создавать точки из текста</string>
     <string name="cache_personal_note_edit">Редактировать</string>
@@ -900,11 +895,11 @@
     <string name="cache_dialog_loading_details_status_gcvote">Загрузка GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Кэширование данных</string>
     <string name="cache_dialog_loading_details_status_render">Отрисовка</string>
-    <string name="cache_dialog_offline_save_title">Сохранение</string>
+    <string name="cache_dialog_offline_save_title">Оффлайн</string>
     <string name="cache_dialog_offline_save_message">Сохранение тайника для оффлайнового использования…</string>
-    <string name="cache_dialog_offline_drop_title">Удаление</string>
+    <string name="cache_dialog_offline_drop_title">Оффлайн</string>
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
-    <string name="cache_dialog_refresh_title">Обновление</string>
+    <string name="cache_dialog_refresh_title">Обновить</string>
     <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
     <string name="cache_dialog_watchlist_add_title">Список Отслеживаемых</string>
     <string name="cache_dialog_watchlist_add_message">Добавление тайника в список Отслеживаемых…</string>
@@ -952,18 +947,18 @@
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">Сохранено</string>
+    <string name="cache_stored">Сохраненные</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
     <string name="cache_never_found">Никем не найденные</string>
     <string name="cache_found_last_30_days">Найденные за 30 дней</string>
-    <string name="cache_status_archived">В архиве</string>
+    <string name="cache_status_archived">Aрхивирован</string>
     <string name="cache_status_disabled">Вне игры</string>
-    <string name="cache_status_active">Активный</string>
+    <string name="cache_status_active">Активен</string>
     <string name="cache_status_premium">Только для Премиум участников</string>
     <string name="cache_status_not_premium">Доступно всем участникам</string>
-    <string name="cache_status_stored">Сохранен</string>
+    <string name="cache_status_stored">Сохраненные</string>
     <string name="cache_status_not_stored">Не сохранен</string>
     <string name="cache_status_stored_lasteighthours">За последние 8 часов</string>
     <string name="cache_status_stored_lasttwentyfourhours">За последние 24 часа</string>
@@ -985,7 +980,7 @@
     <string name="cache_rating">Рейтинг</string>
     <string name="cache_own_rating">Ваш рейтинг</string>
     <string name="cache_rating_of">из</string>
-    <string name="cache_favorite">Рекомендуют</string>
+    <string name="cache_favorite">Рекомендации</string>
     <string name="cache_owner">Создатель</string>
     <string name="cache_hidden">Спрятано</string>
     <string name="cache_event">Дата</string>
@@ -1000,7 +995,7 @@
     <string name="cache_clear_history">Очистить историю</string>
     <string name="cache_remove_from_history">Удалить из истории</string>
     <string name="cache_license">Лицензия</string>
-    <string name="cache_image">Изображение</string>
+    <string name="cache_image">Добавить фото</string>
     <string name="cache_image_open_file">Открыть файл</string>
     <string name="cache_image_open_browser">Открыть в браузере</string>
     <string name="cache_image_add_waypoint">Добавить путевую точку</string>
@@ -1088,11 +1083,11 @@
     <string name="waypoint_clear_coordinates">Очистить координаты</string>
     <string name="waypoint_delete">Удалить</string>
     <string name="waypoint_edit_title">Редактирование путевой точки</string>
-    <string name="waypoint_add_title">Добавление путевой точки</string>
+    <string name="waypoint_add_title">Добавить путевую точку</string>
     <string name="waypoint_added">Точка добавлена</string>
-    <string name="waypoint_note">Заметки</string>
+    <string name="waypoint_note">Запись</string>
     <string name="waypoint_user_note">Пользовательские заметки</string>
-    <string name="waypoint_visited">Посещено</string>
+    <string name="waypoint_visited">Посещён</string>
     <string name="waypoint_set_visited">Путевая точка отмечена как посещённая</string>
     <string name="waypoint_unset_visited">Путевая точка отмечена как не посещённая</string>
     <string name="waypoint_save">Сохранить</string>
@@ -1122,7 +1117,7 @@
     <string name="visit_tweet">Отправить в Twitter</string>
     <!-- map -->
     <string name="map_map">Карта</string>
-    <string name="map_live">Онлайн карта</string>
+    <string name="map_live">Карта</string>
     <string name="map_view_map">Тип карты</string>
     <string name="map_modes">Настройки карты</string>
     <string name="map_rotation">Вращение карты</string>
@@ -1165,7 +1160,7 @@
     <string name="search_geo_button">Поиск по коду</string>
     <string name="search_kw">Ключевые слова</string>
     <string name="search_kw_prefill">Ключевое слово</string>
-    <string name="search_kw_button">Искать по ключевым словам</string>
+    <string name="search_kw_button">Поиск по ключевым словам</string>
     <string name="search_fbu">Найдено пользователем</string>
     <string name="search_fbu_prefill">Имя пользователя</string>
     <string name="search_fbu_button">Поиск по пользователю</string>
@@ -1188,7 +1183,7 @@
     <string name="trackable_refresh">Обновить</string>
     <string name="trackable_goal">Цель</string>
     <string name="trackable_details">Детали</string>
-    <string name="trackable_image">Фотография</string>
+    <string name="trackable_image">Добавить фото</string>
     <string name="trackable_code">Код слежения</string>
     <string name="trackable_name">Название</string>
     <string name="trackable_brand">Тип</string>
@@ -1199,9 +1194,9 @@
     <string name="trackable_spotted_at_user">У</string>
     <string name="trackable_spotted_unknown_location">Неизвестно</string>
     <string name="trackable_spotted_owner">У создателя</string>
-    <string name="trackable_spotted_archived">В архиве</string>
-    <string name="trackable_origin">Родина</string>
-    <string name="trackable_unknown">Неизвестно</string>
+    <string name="trackable_spotted_archived">Aрхивирован</string>
+    <string name="trackable_origin">Происхождение</string>
+    <string name="trackable_unknown">Неизвестный</string>
     <string name="trackable_released">Создано</string>
     <string name="trackable_distance">Пройдено</string>
     <string name="trackable_touch">Отметить</string>
@@ -1226,11 +1221,11 @@
     <string name="navigation">Навигация</string>
     <string name="compass_title">Компас</string>
     <string name="use_gps">Только GPS</string>
-    <string name="use_compass">GPS и компас</string>
     <string name="destination_select">Выберите пункт назначения</string>
     <string name="navigation_direct_navigation">Прямая навигация</string>
     <string name="osmand_marker_cgeo">Маркер из c:geo</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Неизвестный</string>
     <!-- license -->
     <string name="license">Лицензия</string>
     <string name="license_show">Показать лицензию</string>
@@ -1457,7 +1452,7 @@
     <string name="attribute_breeding_no">Нет брачного сезона / не заповедник</string>
     <string name="attribute_snow_proof_yes">Снегоустойчивое место закладки</string>
     <string name="attribute_snow_proof_no">Не снегоустойчивое место закладки</string>
-    <string name="attribute_compass_yes">Нужен компас</string>
+    <string name="attribute_compass_yes">Компас</string>
     <string name="attribute_compass_no">Можно без компаса</string>
     <string name="attribute_cave_yes">Требуется пещерное снаряжение</string>
     <string name="attribute_cave_no">Не требуется пещерное снаряжение</string>
