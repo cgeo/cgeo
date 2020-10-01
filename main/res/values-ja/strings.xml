@@ -112,9 +112,11 @@
     <string name="log_yesterday">昨日</string>
     <string name="log_smilies">スマイルマーク</string>
     <string name="log_image">画像</string>
+    <string name="log_images">画像</string>
     <string name="log_image_attach">画像を添付</string>
     <string name="log_image_stored">ファイル選択</string>
     <string name="log_image_camera">撮影</string>
+    <string name="log_image_delete">削除</string>
     <string name="log_image_caption">タイトル</string>
     <string name="log_image_description">説明</string>
     <string name="log_image_scale">拡大縮小</string>
@@ -137,6 +139,7 @@
     <string name="log_problem_other_text">このジオキャッシャ―が、このキャッシュに問題があることを報告しました。</string>
     <string name="log_problem_archive_label">キャッシュをアーカイブします</string>
     <string name="log_problem_archive_text">このジオキャッシャーが、このジオキャッシュをアーカイブすることを報告しました。コミュニティのボランティアレビューアーが通知されました。</string>
+    <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%sに翻訳</string>
     <string name="translate_to_english">英語に翻訳</string>
@@ -317,7 +320,7 @@
     <string name="caches_select_mode">選択モード</string>
     <string name="caches_select_mode_exit">選択モードを終わる</string>
     <string name="caches_select_invert">選択を反転</string>
-    <string name="caches_nearby">現在地の近く</string>
+    <string name="caches_nearby">近く</string>
     <string name="caches_remove_all">すべての項目を削除</string>
     <string name="caches_remove_selected">選択した項目を削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
@@ -556,14 +559,12 @@
     <string name="init_backup">キャッシュ / ウェイポイントをバックアップ</string>
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
-    <string name="init_backup_note">この機能は、キャッシュとウェイポイントのみのデータベースのバックアップ/復元を行います。キャッシュ画像とプログラム設定は含まれません。</string>
     <string name="init_backup_restore">リストア</string>
     <string name="init_backup_success">キャッシュのデータベースは正常にバックアップされました。</string>
     <string name="init_backup_failed">キャッシュのデータベースをバックアップできませんでした。</string>
     <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません。</string>
     <string name="init_backup_no_backup_available">バックアップ ファイルはありません。</string>
     <string name="backup_confirm_overwrite">%sの既存バックアップを上書きしますか？</string>
-    <string name="restore_confirm_overwrite">バックアップでお使いのデバイス上の %s を上書きしますか?</string>
     <string name="init_restore_success">キャッシュのデータベースは正常にリストアされました。</string>
     <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました。</string>
     <string name="init_restore_failed">キャッシュのデータベースをリストアできませんでした。</string>
@@ -573,17 +574,11 @@
     <string name="init_backup_last_no">まだバックアップを取ったことがありません。</string>
     <string name="settings_title_backup">バックアップ / 復元</string>
     <string name="settings_summary_backup">キャッシュ/ウェイポイントデータと、プログラム設定のバックアップと復元を実行します。</string>
-    <string name="init_backup_settings">プログラム設定のバックアップ</string>
-    <string name="init_backup_settings_backup_light">設定のバックアップ (アカウントデータなし)</string>
-    <string name="init_backup_settings_backup_full">設定のバックアップ (全て)</string>
     <string name="init_backup_settings_backup_full_confirm">機密のアカウントに関連するデータを保存しますか? これらは他のアプリケーションで読み取られる可能性があります。</string>
     <string name="settings_savingerror">設定の保存エラー</string>
     <string name="settings_saved">設定が保存されました:</string>
     <string name="init_backup_settings_restore">復元の設定</string>
-    <string name="init_backup_settings_restore_confirm">現在の設定を上書きしますか?</string>
-    <string name="init_backup_settings_restore_no">利用可能な設定のバックアップはありません</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
-    <string name="settings_restored">設定を復元しました</string>
     <string name="settings_restart">読み込まれた設定を有効にするには、c:geoを再起動する必要があります</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図に対応しています。Mapsforgeからダウンロードした地図やOSMのデータから自作した地図などを使用できます。最初にオフライン地図フォルダを選択しておく必要があります。</string>
@@ -617,7 +612,7 @@
     <string name="init_dbonsdcard_note">c:geo のデータベースは、システム内部またはユーザーストレージのディレクトリに保存することができます。 ユーザーストレージに格納すると、メモリを少し解放することができますが、パフォーマンスが少し悪化することがあり、ストレージにアクセスできないか、データベース ファイルを削除した場合は、c:geo は動作しません。</string>
     <string name="init_dbonsdcard">ユーザーストレージに</string>
     <string name="init_dbmove_dbmove">データベースの移動</string>
-    <string name="init_dbmove_running">データベースの移動中</string>
+    <string name="init_dbmove_running">データベースの移動</string>
     <string name="init_dbmove_success">データベースを移動しました。</string>
     <string name="init_dbmove_failed">データベースの移動に失敗しました</string>
     <string name="init_datadirmove_datadirmove">ジオキャッシュ データ ディレクトリを移動中</string>
@@ -664,7 +659,7 @@
     <string name="feature_watch_list">ウォッチリスト</string>
     <string name="feature_own_coordinates">変更した座標の保存</string>
     <string name="feature_search_keyword">キーワードで検索</string>
-    <string name="feature_search_live_map">ライブ地図</string>
+    <string name="feature_search_live_map">地図</string>
     <string name="feature_search_center">位置で検索</string>
     <string name="feature_search_geocode">GCコードで検索</string>
     <string name="feature_search_owner">隠したユーザー名で検索</string>
@@ -710,10 +705,10 @@
     <string name="auth_forget_title">認証を忘れますか?</string>
     <string name="auth_forget_message">このサービスから切断します。現在保存されている資格情報は失われます。</string>
     <!-- auth credentials -->
-    <string name="auth_credentials_explain_short">次の処理で、<b>c:geo</b> が %s にアクセスできるようになります。</string>
+    <string name="auth_credentials_explain_short">次のプロセスは<b>c:geo</b>に%sへのアクセスを許可させる。</string>
     <string name="auth_credentials_explain_long">資格情報を入力して、「認証を確認」ボタンを押すと処理を開始します。この処理は %s に接続し、資格情報を検証します。以上です。</string>
     <!-- auth token -->
-    <string name="auth_token_explain_short">次の処理で、<b>c:geo</b> が %s にアクセスできるようになります。</string>
+    <string name="auth_token_explain_short">次のプロセスは<b>c:geo</b>に%sへのアクセスを許可させる。</string>
     <string name="auth_token_explain_long">資格情報を入力して「c:geoを承認」ボタンを押すと、処理を開始します。この処理は %s に接続して、認証トークンを取得します。以上です。</string>
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました。</string>
@@ -726,9 +721,9 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">利用可能な最後の日</string>
-    <string name="cache_offline">オフライン</string>
+    <string name="cache_offline">OpenStreetMap:オフライン用</string>
     <string name="cache_offline_refresh">更新</string>
-    <string name="cache_offline_drop">削除</string>
+    <string name="cache_offline_drop">消去</string>
     <string name="cache_offline_store">保存</string>
     <string name="cache_offline_stored">デバイスに保存済み</string>
     <string name="cache_offline_not_ready">オフライン用に保存されていません</string>
@@ -790,9 +785,9 @@
     <string name="cache_dialog_loading_details_status_gcvote">GCVoteをロード中</string>
     <string name="cache_dialog_loading_details_status_cache">データのキャッシュ中</string>
     <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
-    <string name="cache_dialog_offline_save_title">オフライン</string>
+    <string name="cache_dialog_offline_save_title">OpenStreetMap:オフライン用</string>
     <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
-    <string name="cache_dialog_offline_drop_title">オフライン</string>
+    <string name="cache_dialog_offline_drop_title">OpenStreetMap:オフライン用</string>
     <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
     <string name="cache_dialog_refresh_title">更新</string>
     <string name="cache_dialog_refresh_message">キャッシュの詳細を再ロード中…</string>
@@ -845,8 +840,9 @@
     <string name="cache_not_status_found">未発見</string>
     <string name="cache_never_found">未発見</string>
     <string name="cache_found_last_30_days">過去 30 日間に発見</string>
-    <string name="cache_status_archived">アーカイブ済み</string>
+    <string name="cache_status_archived">アーカイブされた</string>
     <string name="cache_status_disabled">無効化</string>
+    <string name="cache_status_active">アクティブ</string>
     <string name="cache_status_premium">プレミア会員のみ</string>
     <string name="cache_status_not_premium">全ての会員に閲覧可</string>
     <string name="cache_status_stored">保存済み</string>
@@ -872,7 +868,7 @@
     <string name="cache_favorite">お気に入り</string>
     <string name="cache_owner">オーナー</string>
     <string name="cache_hidden">設置日</string>
-    <string name="cache_event">イベント日付</string>
+    <string name="cache_event">日付</string>
     <string name="cache_location">場所</string>
     <string name="cache_location_country">国</string>
     <string name="cache_coordinates">座標</string>
@@ -950,7 +946,7 @@
     <string name="waypoint_added">ウェイポイントを追加しました</string>
     <string name="waypoint_note">メモ</string>
     <string name="waypoint_user_note">ユーザー メモ</string>
-    <string name="waypoint_visited">訪問済み</string>
+    <string name="waypoint_visited">訪れた</string>
     <string name="waypoint_set_visited">ウェイポイントを訪問済に設定しました</string>
     <string name="waypoint_unset_visited">ウェイポイントを未訪問に設定しました</string>
     <string name="waypoint_save">保存</string>
@@ -979,7 +975,7 @@
     <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
     <string name="map_map">地図</string>
-    <string name="map_live">オンライン地図</string>
+    <string name="map_live">地図</string>
     <string name="map_view_map">地図の変更</string>
     <string name="map_modes">表示切替</string>
     <string name="map_rotation">マップの回転</string>
@@ -1015,7 +1011,7 @@
     <string name="search_fbu_prefill">ユーザ名</string>
     <string name="search_fbu_button">ユーザ名で検索</string>
     <string name="search_hbu">キャッシュを隠したユーザ名</string>
-    <string name="search_hbu_prefill">オーナー名</string>
+    <string name="search_hbu_prefill">オーナー</string>
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
@@ -1044,8 +1040,8 @@
     <string name="trackable_spotted_at_user">持っている人:</string>
     <string name="trackable_spotted_unknown_location">不明</string>
     <string name="trackable_spotted_owner">オーナーの手元</string>
-    <string name="trackable_spotted_archived">アーカイブ済み</string>
-    <string name="trackable_origin">出発地</string>
+    <string name="trackable_spotted_archived">アーカイブされた</string>
+    <string name="trackable_origin">原点</string>
     <string name="trackable_unknown">不明</string>
     <string name="trackable_released">リリース</string>
     <string name="trackable_distance">総移動距離</string>
@@ -1069,10 +1065,10 @@
     <string name="navigation">ナビゲーション</string>
     <string name="compass_title">コンパス</string>
     <string name="use_gps">GPS のみ使用</string>
-    <string name="use_compass">GPS と磁気コンパスを使用</string>
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
     <!-- device orientation types -->
+    <string name="do_unknown">不明</string>
     <!-- license -->
     <string name="license">ライセンス</string>
     <string name="license_show">ライセンスを表示</string>
@@ -1107,6 +1103,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_fieldnotes_upload_success">geocaching.comにアップロードしました</string>
     <string name="export_fieldnotes_onlynew">最後にエクスポートした時から更新がある場合のみ</string>
     <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
+    <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります。</string>
     <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
     <string name="export_confirm_title">エクスポート中 %1$s</string>
@@ -1282,6 +1279,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_all_seasons_no">オールシーズンではない</string>
     <string name="attribute_breeding_yes">繁殖期または保護期間</string>
     <string name="attribute_breeding_no">繁殖期や保護期間ではない</string>
+    <string name="attribute_compass_yes">コンパス</string>
     <string name="attribute_cave_yes">洞窟の知識や準備が必要</string>
     <string name="attribute_cave_no">洞窟の知識や準備は不要</string>
     <string name="attribute_aircraft_yes">航空機</string>
@@ -1449,6 +1447,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="number_input_err_format">数の書式が正しくありません</string>
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="save_sorted_route">保存</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
