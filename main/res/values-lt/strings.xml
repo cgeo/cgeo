@@ -580,7 +580,6 @@
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
     <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
-    <string name="restore_confirm_overwrite">Ar norite perrašyti %s įrenginyje su atsargine kopija?</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed">Atkurti nepavyko.</string>
     <string name="init_restore_running">Atkuriama slėptuvių duomenų bazė…</string>
@@ -588,16 +587,10 @@
     <string name="init_backup_last">Galima atkurti nuo</string>
     <string name="init_backup_last_no">Nėra atsarginės kopijos failo.</string>
     <string name="settings_title_backup">Atsarginė kopija / Atkurti</string>
-    <string name="init_backup_settings">Sukurti atsarginę programos nustatymų kopiją</string>
-    <string name="init_backup_settings_backup_light">Sukurti nustatymų kopiją (be paskyros duomenų)</string>
-    <string name="init_backup_settings_backup_full">Sukurti nustatymų kopiją (visų)</string>
     <string name="settings_savingerror">Išsaugant nustatymus įvyko klaida</string>
     <string name="settings_saved">Nustatymai sėkmingai išsaugoti į:</string>
     <string name="init_backup_settings_restore">Atkurti nustatymus</string>
-    <string name="init_backup_settings_restore_confirm">Ar norite perrašyti dabartinius nustatymus?</string>
-    <string name="init_backup_settings_restore_no">Nėra nustatymų atsarginės kopijos</string>
     <string name="settings_readingerror">Skaitant nustatymus įvyko klaida</string>
-    <string name="settings_restored">Nustatymai atkurti</string>
     <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
     <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
     <string name="settings_info_offline_maps">c:geo palaiko išsaugotus žemėlapius kurie veikia be interneto. Žemėlapius galite atsisiųsti iš Mapsforge arba susikurti nuosavus naudodami OSM duomenis. Norėdami įgalinti tokių žemėlapių palaikymą jūs turite pasirinkti katalogą jiems saugoti.</string>
@@ -1153,7 +1146,6 @@
     <string name="navigation">Navigacija</string>
     <string name="compass_title">Kompasas</string>
     <string name="use_gps">Naudojamas tik GPS</string>
-    <string name="use_compass">Naudojamas GPS ir magnetinis kompasas</string>
     <string name="destination_select">Pasirinkite tikslą</string>
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
