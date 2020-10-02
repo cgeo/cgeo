@@ -6,6 +6,7 @@
 
 <h4>Map:</h4>
 <ul>
+<li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -14,6 +15,7 @@
 <li>New: provide direct log link ability for gc.com/oc.*/gc.su</li>
 <li>Change: Disable cache detail share menu for user-defined caches</li>
 <li>New: Support [TYPE] in signature</li>
+<li>Fix: Hint is not displayed on compass view, when launched directly from map</li>
 </ul>
 
 <h4>Cache lists:</h4>
