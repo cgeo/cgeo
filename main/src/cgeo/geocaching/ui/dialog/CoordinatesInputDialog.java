@@ -283,10 +283,10 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonMin.setGravity(Gravity.NO_GRAVITY);
 
                 if (gp != null) {
-                    eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
-                    eLatMin.setText(addZeros(gp.getLatDegFrac(), 5));
-                    eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
-                    eLonMin.setText(addZeros(gp.getLonDegFrac(), 5));
+                    eLatDeg.setText(addZeros(gp.getDecDegreeLatDeg(), 2));
+                    eLatMin.setText(addZeros(gp.getDecDegreeLatDegFrac(), 5));
+                    eLonDeg.setText(addZeros(gp.getDecDegreeLonDeg(), 3));
+                    eLonMin.setText(addZeros(gp.getDecDegreeLonDegFrac(), 5));
                 }
                 break;
             case Min: // DDD° MM.MMM
@@ -316,12 +316,12 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonMin.setGravity(Gravity.RIGHT);
 
                 if (gp != null) {
-                    eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
-                    eLatMin.setText(addZeros(gp.getLatMin(), 2));
-                    eLatSec.setText(addZeros(gp.getLatMinFrac(), 3));
-                    eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
-                    eLonMin.setText(addZeros(gp.getLonMin(), 2));
-                    eLonSec.setText(addZeros(gp.getLonMinFrac(), 3));
+                    eLatDeg.setText(addZeros(gp.getDecMinuteLatDeg(), 2));
+                    eLatMin.setText(addZeros(gp.getDecMinuteLatMin(), 2));
+                    eLatSec.setText(addZeros(gp.getDecMinuteLatMinFrac(), 3));
+                    eLonDeg.setText(addZeros(gp.getDecMinuteLonDeg(), 3));
+                    eLonMin.setText(addZeros(gp.getDecMinuteLonMin(), 2));
+                    eLonSec.setText(addZeros(gp.getDecMinuteLonMinFrac(), 3));
                 }
                 break;
             case Sec: // DDD° MM SS.SSS
@@ -353,14 +353,14 @@ public class CoordinatesInputDialog extends DialogFragment {
                 eLonMin.setGravity(Gravity.RIGHT);
 
                 if (gp != null) {
-                    eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
-                    eLatMin.setText(addZeros(gp.getLatMin(), 2));
-                    eLatSec.setText(addZeros(gp.getLatSec(), 2));
-                    eLatSub.setText(addZeros(gp.getLatSecFrac(), 3));
-                    eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
-                    eLonMin.setText(addZeros(gp.getLonMin(), 2));
-                    eLonSec.setText(addZeros(gp.getLonSec(), 2));
-                    eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
+                    eLatDeg.setText(addZeros(gp.getDMSLatDeg(), 2));
+                    eLatMin.setText(addZeros(gp.getDMSLatMin(), 2));
+                    eLatSec.setText(addZeros(gp.getDMSLatSec(), 2));
+                    eLatSub.setText(addZeros(gp.getDMSLatSecFrac(), 3));
+                    eLonDeg.setText(addZeros(gp.getDMSLonDeg(), 3));
+                    eLonMin.setText(addZeros(gp.getDMSLonMin(), 2));
+                    eLonSec.setText(addZeros(gp.getDMSLonSec(), 2));
+                    eLonSub.setText(addZeros(gp.getDMSLonSecFrac(), 3));
                 }
                 break;
         }
