@@ -32,6 +32,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.search.SearchSuggestionCursor;
@@ -196,7 +197,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 87;
+    private static final int dbVersion = 88;
     public static final int customListIdOffset = 10;
 
     /**
@@ -218,8 +219,9 @@ public class DataStore {
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
             85, //adds offline logging columns/tables
-            86, // (re)create indices on c_logs and c_logImages
-            87  //adds service log id to logging tables
+            86, //(re)create indices on c_logs and c_logImages
+            87, //adds service log id to logging tables
+            88  //add timestamp to trail history
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -429,7 +431,8 @@ public class DataStore {
             = "CREATE TABLE IF NOT EXISTS " + dbTableTrailHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "latitude DOUBLE, "
-            + "longitude DOUBLE "
+            + "longitude DOUBLE, "
+            + "timestamp LONG"
             + "); ";
 
     private static final String dbCreateRoute
@@ -1355,6 +1358,16 @@ public class DataStore {
                         }
                     }
 
+                    // add timestamp to cg_trail_history
+                    if (oldVersion < 88) {
+                        try {
+                            createColumnIfNotExists(db, dbTableTrailHistory, "timestamp INTEGER DEFAULT 0");
+                            db.execSQL("UPDATE " + dbTableTrailHistory + " SET timestamp =" + System.currentTimeMillis());
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 88);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1963,6 +1976,7 @@ public class DataStore {
             final SQLiteStatement insertTrailpoint = PreparedStatement.INSERT_TRAILPOINT.getStatement();
             insertTrailpoint.bindDouble(1, location.getLatitude());
             insertTrailpoint.bindDouble(2, location.getLongitude());
+            insertTrailpoint.bindLong(3, System.currentTimeMillis());
             insertTrailpoint.executeInsert();
             database.setTransactionSuccessful();
         } catch (final Exception e) {
@@ -2696,34 +2710,28 @@ public class DataStore {
      * @return A list of previously trail points or an empty list.
      */
     @NonNull
-    public static ArrayList<Location> loadTrailHistory() {
-        final ArrayList<Location> temp = queryToColl(dbTableTrailHistory,
-                new String[]{"_id", "latitude", "longitude"},
+    public static ArrayList<TrailHistoryElement> loadTrailHistory() {
+        final ArrayList<TrailHistoryElement> temp = queryToColl(dbTableTrailHistory,
+                new String[]{"_id", "latitude", "longitude", "timestamp"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
                 "_id DESC",
                 String.valueOf(DbHelper.MAX_TRAILHISTORY_LENGTH),
                 new ArrayList<>(),
-                cursor -> {
-                    final Location l = new Location("trailHistory");
-                    l.setLatitude(cursor.getDouble(1));
-                    l.setLongitude(cursor.getDouble(2));
-                    return l;
-                });
+                cursor -> new TrailHistoryElement(cursor.getDouble(1), cursor.getDouble(2), cursor.getLong(3))
+            );
         Collections.reverse(temp);
         return temp;
     }
 
-    public static Location[] loadTrailHistoryAsArray() {
+    public static TrailHistoryElement[] loadTrailHistoryAsArray() {
         init();
-        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id ASC", null);
-        final Location[] result = new Location[cursor.getCount()];
+        final Cursor cursor = database.query(dbTableTrailHistory, new String[]{"_id", "latitude", "longitude", "timestamp"}, "latitude IS NOT NULL AND longitude IS NOT NULL", null, null, null, "_id ASC", null);
+        final TrailHistoryElement[] result = new TrailHistoryElement[cursor.getCount()];
         int iPosition = 0;
         try {
             while (cursor.moveToNext()) {
-                result[iPosition] = new Location("trailHistory");
-                result[iPosition].setLatitude(cursor.getDouble(1));
-                result[iPosition].setLongitude(cursor.getDouble(2));
+                result[iPosition] = new TrailHistoryElement(cursor.getDouble(1), cursor.getDouble(2), cursor.getLong(3));
                 iPosition++;
             }
         } finally {
@@ -4002,7 +4010,7 @@ public class DataStore {
         GUID_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.guid = ? AND c.geocode = l.geocode AND c.detailed = 1 AND list_id != " + StoredList.TEMPORARY_LIST.id),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
-        INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude) VALUES (?, ?)"),
+        INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude, timestamp) VALUES (?, ?, ?)"),
         INSERT_ROUTEITEM("INSERT INTO " + dbTableRoute + " (precedence, type, id, latitude, longitude) VALUES (?, ?, ?, ?, ?)"),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization

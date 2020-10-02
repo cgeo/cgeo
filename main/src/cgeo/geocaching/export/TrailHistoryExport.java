@@ -2,6 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -15,7 +16,6 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.location.Location;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -26,6 +26,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.xmlpull.v1.XmlSerializer;
@@ -68,7 +70,7 @@ public class TrailHistoryExport {
         builder.create().show();
     }
 
-    private class Export extends AsyncTaskWithProgress<Location, File> {
+    private class Export extends AsyncTaskWithProgress<TrailHistoryElement, File> {
 
         private static final String PREFIX_GPX = "";
         private static final String NS_GPX = "http://www.topografix.com/GPX/1/1";
@@ -85,7 +87,7 @@ public class TrailHistoryExport {
         }
 
         @Override
-        protected File doInBackgroundInternal(final Location[] trail) {
+        protected File doInBackgroundInternal(final TrailHistoryElement[] trail) {
             BufferedWriter writer = null;
             final File exportFile = new File(LocalStorage.getGpxExportDirectory(), filename);
 
@@ -108,23 +110,23 @@ public class TrailHistoryExport {
                 gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
                 gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
 
-                final String timeInfo = CalendarUtils.formatDateTime("yyyy-MM-dd") + "T" + CalendarUtils.formatDateTime("hh:mm:ss") + "Z";
+                    final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
                     gpx.startTag(NS_GPX, "metadata");
                     XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail");
-                    XmlUtils.simpleText(gpx, NS_GPX, "time", timeInfo);
+                    XmlUtils.simpleText(gpx, NS_GPX, "time", formatter.format(new Date()));
                     gpx.endTag(NS_GPX, "metadata");
 
                     gpx.startTag(NS_GPX, "trk");
-                        XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + timeInfo);
+                        XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail " + formatter.format(new Date()));
                         gpx.startTag(NS_GPX, "trkseg");
-                            for (Location loc : trail) {
+                            for (TrailHistoryElement trailHistoryElement : trail) {
                                 gpx.startTag(null, "trkpt");
-                                gpx.attribute(null, "lat", String.valueOf(loc.getLatitude()));
-                                gpx.attribute(null, "lon", String.valueOf(loc.getLongitude()));
-                                // write additional dummy info to make track file importable by osm.org
-                                XmlUtils.simpleText(gpx, null, "ele", "0.0");
-                                XmlUtils.simpleText(gpx, null, "time", timeInfo);
+                                    gpx.attribute(null, "lat", String.valueOf(trailHistoryElement.getLatitude()));
+                                    gpx.attribute(null, "lon", String.valueOf(trailHistoryElement.getLongitude()));
+                                    XmlUtils.simpleText(gpx, null, "time", formatter.format(trailHistoryElement.getTimestamp()));
+                                    // write additional dummy elevation info to make track file importable by osm.org
+                                    XmlUtils.simpleText(gpx, null, "ele", "0.0");
                                 gpx.endTag(null, "trkpt");
                                 countExported++;
                                 publishProgress(countExported);
