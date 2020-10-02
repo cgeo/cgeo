@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
     <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
+    <string name="err_captcha">Es requereix captcha. Consulteu les nostres <a href="https://www.cgeo.org/faq#login-failed"> FAQ</a> per obtenir més informació.</string>
     <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_su">No es pot contactar amb Geocaching.su. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
@@ -1217,9 +1218,12 @@
     <string name="navigation">Navegació</string>
     <string name="compass_title">Brúixola</string>
     <string name="use_gps">Utilitzar només el GPS</string>
+    <string name="use_compass">Tots els sensors utilitzats</string>
     <string name="destination_select">Tria destinació</string>
     <string name="navigation_direct_navigation">Navegació directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
+    <string name="device_heading_label">Dispositiu:</string>
+    <string name="device_orientation">Orientació</string>
     <string name="device_orientation_label">Orientació:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Desconegut</string>
