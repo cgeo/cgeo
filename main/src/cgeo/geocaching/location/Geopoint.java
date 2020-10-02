@@ -163,18 +163,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return longitudeE6 / 1e6;
     }
 
-    /*
-     * Return a waypoint which is the copy of this one rounded to the given limit.
-     * For example, to get a waypoint adapter to a display with 3 digits after the
-     * seconds decimal point, a rounding factor of 3600*1000 would be appropriate.
-     */
-    Geopoint roundedAt(final long factor) {
-        final double df = 1e6d / factor;
-        return new Geopoint((int) Math.round(Math.round(getLatitudeE6() / df) * df),
-                (int) Math.round(Math.round(getLongitudeE6() / df) * df),
-                this);
-    }
-
     /**
      * Get longitude in microdegree.
      *
@@ -253,7 +241,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * Note that this equals-method is NOT consistent with {@link #hashCode()}!
      */
     public boolean equalsDecMinute(final Geopoint other) {
-        return other != null && 
+        return other != null &&
                 format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT)
                         .equals(other.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT));
     }
@@ -350,83 +338,107 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Get the integral non-negative latitude degrees.
+     * Get the integral non-negative latitude degrees (Decimal Degree format).
      *
      */
-    public int getLatDeg() {
-        return getDeg(getLatitudeE6());
+    public int getDecDegreeLatDeg() {
+        return getDecDegreeDeg(getLatitudeE6());
     }
 
     /**
-     * Get the integral non-negative longitude degrees.
+     * Get the integral non-negative longitude degrees (Decimal Degree format).
      *
      */
-    public int getLonDeg() {
-        return getDeg(getLongitudeE6());
+    public int getDecDegreeLonDeg() {
+        return getDecDegreeDeg(getLongitudeE6());
     }
 
-    private static int getDeg(final int degE6) {
+    private static int getDecDegreeDeg(final int degE6) {
         return Math.abs(degE6 / 1000000);
     }
 
     /**
-     * Get the fractional part of the latitude degrees scaled up by 10^5.
+     * Get the fractional part of the latitude degrees scaled up by 10^5 (Decimal Degree format).
      *
      */
-    public int getLatDegFrac() {
-        return getDegFrac(getLatitudeE6());
+    public int getDecDegreeLatDegFrac() {
+        return getDecDegreeDegFrac(getLatitudeE6());
     }
 
     /**
-     * Get the fractional part of the longitude degrees scaled up by 10^5.
+     * Get the fractional part of the longitude degrees scaled up by 10^5 (Decimal Degree format).
      *
      */
-    public int getLonDegFrac() {
-        return getDegFrac(getLongitudeE6());
+    public int getDecDegreeLonDegFrac() {
+        return getDecDegreeDegFrac(getLongitudeE6());
     }
 
-    private static int getDegFrac(final int degE6) {
-        return Math.min(99999, (int) Math.round((Math.abs(degE6) % 1000000) / 10.0d));
+    private static int getDecDegreeDegFrac(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 100000L);
+        return (int) (rounded % 100000L);
     }
 
     /**
-     * Get the integral latitude minutes.
+     * Get the integral non-negative latitude degrees (Decimal Minute format).
      *
      */
-    public int getLatMin() {
-        return getMin(getLatitudeE6());
+    public int getDecMinuteLatDeg() {
+        return getDecMinuteDeg(getLatitudeE6());
     }
 
     /**
-     * Get the integral longitude minutes.
+     * Get the integral non-negative longitude degrees (Decimal Minute format).
      *
      */
-    public int getLonMin() {
-        return getMin(getLongitudeE6());
+    public int getDecMinuteLonDeg() {
+        return getDecMinuteDeg(getLongitudeE6());
     }
 
-    private static int getMin(final int degE6) {
-        return (int) ((Math.abs(degE6) * 60L / 1000000L) % 60L);
+    private static int getDecMinuteDeg(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 60000L);
+        return (int) (rounded / 60000L);
     }
 
     /**
-     * Get the fractional part of the latitude minutes scaled up by 1000.
+     * Get the integral latitude minutes (Decimal Minute format).
      *
      */
-    public int getLatMinFrac() {
-        return getMinFrac(getLatitudeE6());
+    public int getDecMinuteLatMin() {
+        return getDecMinuteMin(getLatitudeE6());
     }
 
     /**
-     * Get the fractional part of the longitude minutes scaled up by 1000.
+     * Get the integral longitude minutes (Decimal Minute format).
      *
      */
-    public int getLonMinFrac() {
-        return getMinFrac(getLongitudeE6());
+    public int getDecMinuteLonMin() {
+        return getDecMinuteMin(getLongitudeE6());
     }
 
-    private static int getMinFrac(final int degE6) {
-        return (int) Math.min(999L, Math.round((Math.abs(degE6) * 60L) % 1000000L / 1000d));
+    private static int getDecMinuteMin(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 60000L);
+        return (int) (rounded / 1000L % 60L);
+    }
+
+    /**
+     * Get the fractional part of the latitude minutes scaled up by 1000 (Decimal Minute format).
+     *
+     */
+    public int getDecMinuteLatMinFrac() {
+        return getDecMinuteMinFrac(getLatitudeE6());
+    }
+
+    /**
+     * Get the fractional part of the longitude minutes scaled up by 1000 (Decimal Minute format).
+     *
+     */
+    public int getDecMinuteLonMinFrac() {
+        return getDecMinuteMinFrac(getLongitudeE6());
+    }
+
+    private static int getDecMinuteMinFrac(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 60000L);
+        return (int) (rounded % 1000L);
     }
 
     /**
@@ -450,65 +462,91 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Get the integral part of the latitude seconds.
+     * Get the integral non-negative latitude degrees (DMS format).
      *
      */
-    public int getLatSec() {
-        return getSec(getLatitudeE6());
+    public int getDMSLatDeg() {
+        return getDMSDeg(getLatitudeE6());
     }
 
     /**
-     * Get the integral part of the longitude seconds.
+     * Get the integral non-negative longitude degrees (DMS format).
      *
      */
-    public int getLonSec() {
-        return getSec(getLongitudeE6());
+    public int getDMSLonDeg() {
+        return getDMSDeg(getLongitudeE6());
     }
 
-    private static int getSec(final int degE6) {
-        return (int) ((Math.abs(degE6) * 3600L / 1000000L) % 60L);
+    private static int getDMSDeg(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 3600000L);
+        return (int) (rounded / 3600000L);
     }
 
     /**
-     * Get the fractional part of the latitude seconds scaled up by 1000.
+     * Get the integral latitude minutes (DMS format).
      *
      */
-
-    public int getLatSecFrac() {
-        return getSecFrac(getLatitudeE6());
+    public int getDMSLatMin() {
+        return getDMSMin(getLatitudeE6());
     }
 
     /**
-     * Get the fractional part of the longitude seconds scaled up by 1000.
+     * Get the integral longitude minutes (DMS format).
      *
      */
-
-    public int getLonSecFrac() {
-        return getSecFrac(getLongitudeE6());
+    public int getDMSLonMin() {
+        return getDMSMin(getLongitudeE6());
     }
 
-    private static int getSecFrac(final int degE6) {
-        return (int) (Math.min(999L, Math.round(Math.abs(degE6) * 3600L % 1000000L) / 1000d));
+    private static int getDMSMin(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 3600000L);
+        return (int) (rounded / 60000L % 60L);
     }
 
     /**
-     * Get the latitude seconds.
+     * Get the integral part of the latitude seconds (DMS format).
      *
      */
-    public double getLatSecRaw() {
-        return getSecRaw(getLatitudeE6());
+    public int getDMSLatSec() {
+        return getDMSSec(getLatitudeE6());
     }
 
     /**
-     * Get the longitude seconds.
+     * Get the integral part of the longitude seconds (DMS format).
      *
      */
-    public double getLonSecRaw() {
-        return getSecRaw(getLongitudeE6());
+    public int getDMSLonSec() {
+        return getDMSSec(getLongitudeE6());
     }
 
-    private static double getSecRaw(final int degE6) {
-        return ((Math.abs(degE6) * 3600L) % 60000000L) / 1000000d;
+    private static int getDMSSec(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 3600000L);
+        return (int) (rounded / 1000L % 60L);
+    }
+
+    /**
+     * Get the fractional part of the latitude seconds scaled up by 1000 (DMS format).
+     *
+     */
+    public int getDMSLatSecFrac() {
+        return getDMSSecFrac(getLatitudeE6());
+    }
+
+    /**
+     * Get the fractional part of the longitude seconds scaled up by 1000 (DMS format).
+     *
+     */
+    public int getDMSLonSecFrac() {
+        return getDMSSecFrac(getLongitudeE6());
+    }
+
+    private static int getDMSSecFrac(final int degE6) {
+        final long rounded = roundToPrecision(degE6, 3600000L);
+        return (int) (rounded % 1000L);
+    }
+
+    private static int roundToPrecision(final int degE6, final long factor) {
+        return (int) ((Math.abs(degE6) * factor + 500000L) / 1000000L);
     }
 
     private static String addZeros(final String value, final int len) {

@@ -560,32 +560,50 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private void setButtonInputValuesFromGP() {
         inputLatHem = String.valueOf(gp.getLatDir());
         bLatHem.setText(inputLatHem);
-        setCoordValue(gp.getLatDeg(), bLatDeg[0], bLatDeg[1]);
-        setCoordValue(gp.getLatMin(), bLatMin[0], bLatMin[1]);
-        setCoordValue(gp.getLatSec(), bLatSec[0], bLatSec[1]);
 
         inputLonHem = String.valueOf(gp.getLonDir());
         bLatHem.setText(inputLonHem);
-        setCoordValue(gp.getLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
-        setCoordValue(gp.getLonMin(), bLonMin[0], bLonMin[1]);
-        setCoordValue(gp.getLonSec(), bLonSec[0], bLonSec[1]);
 
         switch (currentFormat) {
             case Deg:
-                setCoordValue(gp.getLatDegFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2], bLatPnt[3], bLatPnt[4]);
-                setCoordValue(gp.getLonDegFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2], bLonPnt[3], bLonPnt[4]);
+                setDegCoordValues();
                 break;
 
             case Min:
-                setCoordValue(gp.getLatMinFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
-                setCoordValue(gp.getLonMinFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+                setMinCoordValues();
                 break;
 
             case Sec:
-                setCoordValue(gp.getLatSecFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
-                setCoordValue(gp.getLonSecFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+                setSecCoordValues();
                 break;
         }
+    }
+
+    private void setDegCoordValues() {
+        setCoordValue(gp.getDecDegreeLatDeg(), bLatDeg[0], bLatDeg[1]);
+        setCoordValue(gp.getDecDegreeLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
+        setCoordValue(gp.getDecDegreeLatDegFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2], bLatPnt[3], bLatPnt[4]);
+        setCoordValue(gp.getDecDegreeLonDegFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2], bLonPnt[3], bLonPnt[4]);
+    }
+
+    private void setMinCoordValues() {
+        setCoordValue(gp.getDecMinuteLatDeg(), bLatDeg[0], bLatDeg[1]);
+        setCoordValue(gp.getDecMinuteLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
+        setCoordValue(gp.getDecMinuteLatMin(), bLatMin[0], bLatMin[1]);
+        setCoordValue(gp.getDecMinuteLonMin(), bLonMin[0], bLonMin[1]);
+        setCoordValue(gp.getDecMinuteLatMinFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
+        setCoordValue(gp.getDecMinuteLonMinFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+    }
+
+    private void setSecCoordValues() {
+        setCoordValue(gp.getDMSLatDeg(), bLatDeg[0], bLatDeg[1]);
+        setCoordValue(gp.getDMSLonDeg(), bLonDeg[0], bLonDeg[1], bLonDeg[2]);
+        setCoordValue(gp.getDMSLatMin(), bLatMin[0], bLatMin[1]);
+        setCoordValue(gp.getDMSLonMin(), bLonMin[0], bLonMin[1]);
+        setCoordValue(gp.getDMSLatSec(), bLatSec[0], bLatSec[1]);
+        setCoordValue(gp.getDMSLonSec(), bLonSec[0], bLonSec[1]);
+        setCoordValue(gp.getDMSLatSecFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
+        setCoordValue(gp.getDMSLonSecFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
     }
 
     private String addLeadingZerosToDecimal(final String coordinate, final boolean lat) {
@@ -1133,8 +1151,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     view.setText(SYMBOL_DEG);
                 }
 
-                setCoordValue(gp.getLatDegFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2], bLatPnt[3], bLatPnt[4]);
-                setCoordValue(gp.getLonDegFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2], bLonPnt[3], bLonPnt[4]);
+                setDegCoordValues();
                 break;
 
             case Min: // DDD° MM.MMM'
@@ -1154,8 +1171,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     view.setText(SYMBOL_MIN);
                 }
 
-                setCoordValue(gp.getLatMinFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
-                setCoordValue(gp.getLonMinFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+                setMinCoordValues();
                 break;
 
             case Sec: // DDD° MM' SS.SSS"
@@ -1175,8 +1191,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     view.setText(SYMBOL_SEC);
                 }
 
-                setCoordValue(gp.getLatSecFrac(), bLatPnt[0], bLatPnt[1], bLatPnt[2]);
-                setCoordValue(gp.getLonSecFrac(), bLonPnt[0], bLonPnt[1], bLonPnt[2]);
+                setSecCoordValues();
                 break;
         }
     }
