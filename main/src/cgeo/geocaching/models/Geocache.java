@@ -220,6 +220,16 @@ public class Geocache implements IWaypoint {
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
             reliableLatLon = other.reliableLatLon;
             finalDefined = other.finalDefined;
+
+            if (StringUtils.isBlank(getHint())) {
+                hint = other.getHint();
+            }
+            if (StringUtils.isBlank(getShortDescription())) {
+                shortdesc = other.getShortDescription();
+            }
+            if (attributes.isEmpty() && other.attributes != null) {
+                attributes.addAll(other.attributes);
+            }
         }
 
         if (premiumMembersOnly == null) {
@@ -271,9 +281,6 @@ public class Geocache implements IWaypoint {
         if (hidden == null) {
             hidden = other.hidden;
         }
-        if (!detailed && StringUtils.isBlank(getHint())) {
-            hint = other.getHint();
-        }
         if (size == CacheSize.UNKNOWN) {
             size = other.size;
         }
@@ -295,9 +302,6 @@ public class Geocache implements IWaypoint {
 
         personalNote.gatherMissingDataFrom(other.personalNote);
 
-        if (!detailed && StringUtils.isBlank(getShortDescription())) {
-            shortdesc = other.getShortDescription();
-        }
         if (StringUtils.isBlank(getDescription())) {
             description = other.getDescription();
         }
@@ -312,9 +316,6 @@ public class Geocache implements IWaypoint {
         }
         if (myVote == 0) {
             myVote = other.myVote;
-        }
-        if (!detailed && attributes.isEmpty() && other.attributes != null) {
-            attributes.addAll(other.attributes);
         }
         if (waypoints.isEmpty()) {
             this.setWaypoints(other.waypoints, false);
