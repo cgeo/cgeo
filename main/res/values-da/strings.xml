@@ -89,9 +89,11 @@
     <string name="log_tb_archived">Arkiveret</string>
     <string name="log_save">Gem offline</string>
     <string name="log_saving">Sender logbesked…</string>
+    <string name="log_saving_and_uploading">Sender logs og billeder…</string>
     <string name="log_posting_log">Sender logbesked…</string>
     <string name="log_posting_twitter">Sender tweet…</string>
     <string name="log_posting_vote">Sender din stemme på cachen…</string>
+    <string name="log_posting_image">Sender billeder…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
     <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
@@ -254,6 +256,7 @@
     <string name="info_stored_image">Nyt billede gemt til:</string>
     <string name="info_cache_saved">Cachen blev gemt lokalt</string>
     <string name="warn_calculator_state_save">Husk at gemme rutepunkt, hvis du vil beholde lommeregnerens tilstand.</string>
+    <string name="feature_info_offline_counter">Du har offline logs på telefonen/tabletten, som muligvis ikke er overført til Geocaching.com. Disse logs er vist som \"+ x\" forneden på c:geo hovedskærmen.\n\nDisse logs bliver også talt med i \"NUMBER\"-feltet, som du kan bruge i din log-signatur.\n\nHvis du ikke vil have disse logs markeret, kan du slå det fra under \"Indstillinger\" &gt; \"Logning\", og du kan bruge \"Antal fund (uden offline logs)\"-feltet.\n\nDu kan finde disse offline logs ved at gå i listen \"Historik\" og filtrere efter \"Med personlige data\" &gt; \"med offline log\".</string>
     <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
     <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
@@ -261,6 +264,9 @@
     <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
     <string name="more_information">Mere information</string>
+    <string name="remind_later">Påmind mig senere</string>
+    <string name="undo">Fortryd</string>
+    <string name="dont_show_again">Vis ikke dette igen</string>
     <string name="warn_gm_not_available">Google Maps er ikke tilgængelig.</string>
     <string name="switch_to_mf">Google Play Tjenesten er forældet. Ønsker du at skifte til Mapsforge korttjenesten i stedet?</string>
     <string name="switched_to_mf">Standardkort er skiftet til Mapsforge korttjenesten. Genstart dit kort nu.</string>
@@ -534,6 +540,7 @@
     <string name="init_signature_template_datetime">Dato &amp; tidspunkt</string>
     <string name="init_signature_template_user">Bruger</string>
     <string name="init_signature_template_number">Antal fund</string>
+    <string name="init_signature_template_number_legacy">Nummer (ignorér offline logbeskeder)</string>
     <string name="init_signature_template_owner">Ejer</string>
     <string name="init_signature_template_name">Navn</string>
     <string name="init_signature_template_difficulty">Sværhedsgrad</string>
@@ -807,6 +814,9 @@
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Genindlæs</string>
     <string name="cache_offline_drop">Fjern</string>
+    <string name="cache_delete_userdefined_waypoints">Slet brugerdefinerede waypoints</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Slet alle cachens brugerdefinerede waypoints?\n\nSletningen kan ikke fortrydes.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Brugerdefinerede waypoints er slettet</string>
     <string name="cache_offline_store">Gem</string>
     <string name="cache_offline_stored">Gemt i telefon</string>
     <string name="cache_offline_not_ready">Ikke klar\ntil offline brug</string>
@@ -906,6 +916,7 @@
     <string name="cache_menu_navigation_drive">Navigation (bil)</string>
     <string name="cache_menu_navigation_drive_select_target">Cache eller parkeringsplads?</string>
     <string name="cache_menu_navigation_walk">Navigation (til fods)</string>
+    <string name="cache_menu_navigation_transit">Navigation (transit)</string>
     <string name="cache_menu_navigation_bike">Navigation (cykel)</string>
     <string name="cache_menu_maps_directions">Google Maps rutevejledning</string>
     <string name="cache_menu_osmand">OsmAnd</string>
@@ -1003,6 +1014,7 @@
     <string name="internal_cache_default_name">Brugerdefineret cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brugerdefineret cache</string>
     <string name="internal_cache_default_owner">Dig</string>
+    <string name="internal_goto_targets_title">\'Gå til\' mål</string>
     <string name="internal_goto_targets_description">Denne cache gemmer dine seneste \"Gå til\" mål. Den oprettes automatisk, når du har brugt funktionen \"Gå til\" i hovedmenuen. Den indtastede position vil blive gemt i rutepunkter for denne cache. Hvis du ikke længere har brug for disse positioner, kan du sikkert slette denne cache eller nogen af dens rutepunkter. Du kan også flytte cachen til enhver anden liste efter eget valg.</string>
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
     <string name="init_summary_longtap_map">Aktivér tryk-og-hold på et ikon (opret rute) eller et tomt område (opret brugerdefineret cache)</string>
@@ -1158,6 +1170,7 @@
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable id</string>
     <string name="search_tb_button">Søg trackable</string>
+    <string name="search_destination">Åbn destinationen i c:geo</string>
     <string name="search_address_started">Søger efter steder</string>
     <string name="search_address_result">Fundne steder</string>
     <string name="search_own_caches">Søg i mine cacher</string>
@@ -1212,6 +1225,7 @@
     <string name="destination_select">Vælg destination</string>
     <string name="navigation_direct_navigation">Direkte navigation</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
+    <string name="device_orientation_label">Orientering:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Ukendt</string>
     <string name="do_auto">Automatisk</string>
@@ -1492,6 +1506,14 @@
     <string name="attribute_survey_marker_no">Ikke nær fikspunkt</string>
     <string name="attribute_offset_cache_yes">Offset-cache</string>
     <string name="attribute_offset_cache_no">Ikke en offset-cache</string>
+    <string name="attribute_bonuscache_yes">Bonuscache</string>
+    <string name="attribute_bonuscache_no">Ikke bonuscache</string>
+    <string name="attribute_powertrail_yes">Del af et powertrail</string>
+    <string name="attribute_powertrail_no">Ikke del af et powertrail</string>
+    <string name="attribute_challengecache_yes">Challengecache</string>
+    <string name="attribute_challengecache_no">Ikke challengecache</string>
+    <string name="attribute_hqsolutionchecker_yes">Geocaching.com løsningstjekker</string>
+    <string name="attribute_hqsolutionchecker_no">Ingen Geocaching.com løsningstjekker</string>
     <!-- next things -->
     <string name="quote">Gør geocaching nemmere, gør brugere mere dovne.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1688,14 +1710,17 @@
     <string name="delete_setting_warning">Slet nøgle \"%s\" fra indstillingerne?\n\nDenne handling kan ikke fortrydes.</string>
     <string name="edit_setting">Redigér indstilling \"%s\"</string>
     <string name="edit_setting_error_unknown_type">Ukendt indstillingstype - kan ikke redigeres</string>
+    <string name="edit_setting_error_invalid_data">Ugyldig indtastning \"%s\". Indstillingens værdi er ikke ændret.</string>
     <string name="activate_editmode_title">Aktivér redigeringstilstand</string>
     <string name="activate_editmode_warning">Her skal du træde forsigtigt!\n\nÆndringer direkte i indstillingerne kan forhindre programmet i at fungere eller starte, så vær forsigtig!\n\nEr du sikker på, at du vil fortsætte på egen risiko?</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">Intern filhåndtering</string>
     <string name="localfile_title">Åbn en lokal fil</string>
     <string name="localfile_cannot_handle">Fejl ved læsning af fil eller filen har et ukendt format.</string>
     <string name="localfile_foundmap">kortfil fundet</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Modtag kortfil</string>
+    <string name="receivemapfile_success">Kortfil blev modtaget og gemt som \"%s\" i kortmappen</string>
     <string name="receivemapfile_error">Fejl under modtagelse af kortfil</string>
     <string name="receivemapfile_error_io_exception">I/O fejl under modtagelse af kortfil. Må du skrive til kortmappen \"%s\"?</string>
     <string name="receivemapfile_error_filenotfound_exception">Fejl: Filen blev ikke fundet under modtagelse af kortfil.</string>
@@ -1706,9 +1731,12 @@
     <string name="receivemapfile_cancelled">Overførsel af kortfil annulleret</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Hent kort til offline brug</string>
+    <string name="downloadmap_info">Vælg en kortfil for din region ved at trykke på ikonet \"Gem\".\n\nDownload vil foregå i baggrunden. Når download er afsluttet, vil den downloadede fil blive kopieret til kortmappen og valgt som aktivt kort.\n\nVær opmærksom på at download af kortfilen kan bevirke stort dataforbrug!</string>
     <string name="downloadmap_choose">Vælg kort</string>
     <string name="downloadmap_filename">Henter %s</string>
+    <string name="downloadmanager_not_available">Kortfil kan ikke downloades, systemets download-håndtering er ikke tilgængelig</string>
     <string name="download_started">Download kører i baggrunden</string>
+    <string name="downloadmap_target_not_writable">Kan ikke skrive til \"%s\" - den hentede fil bliver gemt i telefonens mappe til hentede filer. Du skal selv flytte den til kortmappen.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slet tidligere spor</string>
     <string name="map_trailhistory_cleared">Tidligere spor slettet</string>
