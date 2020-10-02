@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 
@@ -24,7 +25,7 @@ public class PositionHistory {
      */
     private static final int MAX_POSITIONS = Settings.getMaximumMapTrailLength();
 
-    private ArrayList<Location> history = new ArrayList<>();
+    private ArrayList<TrailHistoryElement> history = new ArrayList<>();
 
     // load data from permanent storage
     public PositionHistory() {
@@ -56,17 +57,17 @@ public class PositionHistory {
         }
         if (history.isEmpty()) {
             saveToStorage(coordinates);
-            history.add(coordinates);
+            history.add(new TrailHistoryElement(coordinates));
             return;
         }
 
-        final Location historyRecent = history.get(history.size() - 1);
+        final TrailHistoryElement historyRecent = history.get(history.size() - 1);
         if (historyRecent.distanceTo(coordinates) <= MINIMUM_DISTANCE_METERS) {
             return;
         }
 
         saveToStorage(coordinates);
-        history.add(coordinates);
+        history.add(new TrailHistoryElement(coordinates));
 
         // avoid running out of memory
         final int itemsToRemove = getHistory().size() - MAX_POSITIONS;
@@ -77,11 +78,11 @@ public class PositionHistory {
         }
     }
 
-    public ArrayList<Location> getHistory() {
+    public ArrayList<TrailHistoryElement> getHistory() {
         return history;
     }
 
-    public void setHistory(final ArrayList<Location> history) {
+    public void setHistory(final ArrayList<TrailHistoryElement> history) {
         this.history = history;
     }
 

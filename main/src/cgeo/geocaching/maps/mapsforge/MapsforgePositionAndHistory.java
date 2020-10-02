@@ -10,6 +10,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.storage.DataStore;
 
 import android.graphics.Canvas;
@@ -104,12 +105,12 @@ public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndH
     }
 
     @Override
-    public ArrayList<Location> getHistory() {
+    public ArrayList<TrailHistoryElement> getHistory() {
         return positionDrawer.getHistory();
     }
 
     @Override
-    public void setHistory(final ArrayList<Location> history) {
+    public void setHistory(final ArrayList<TrailHistoryElement> history) {
         positionDrawer.setHistory(history);
     }
 

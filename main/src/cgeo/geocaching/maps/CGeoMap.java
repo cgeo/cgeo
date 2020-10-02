@@ -40,6 +40,7 @@ import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -464,7 +465,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         return null;
     }
 
-    protected void initializeMap(final ArrayList<Location> trailHistory) {
+    protected void initializeMap(final ArrayList<TrailHistoryElement> trailHistory) {
 
         mapView.setMapSource();
         mapView.setBuiltInZoomControls(true);
@@ -540,7 +541,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final Bundle extras = activity.getIntent().getExtras();
         mapOptions = new MapOptions(activity, extras);
 
-        final ArrayList<Location> trailHistory;
+        final ArrayList<TrailHistoryElement> trailHistory;
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {

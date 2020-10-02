@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -104,8 +105,8 @@ public class PositionDrawer {
 
         if (Settings.isMapTrail()) {
             // always add current position to drawn history to have a closed connection
-            final ArrayList<Location> paintHistory = new ArrayList<>(positionHistory.getHistory());
-            paintHistory.add(coordinates);
+            final ArrayList<TrailHistoryElement> paintHistory = new ArrayList<>(positionHistory.getHistory());
+            paintHistory.add(new TrailHistoryElement(coordinates));
 
             final int size = paintHistory.size();
             if (size > 1) {
@@ -116,11 +117,11 @@ public class PositionDrawer {
 
                 final Point pointNow = new Point();
                 final Point pointPrevious = new Point();
-                final Location prev = paintHistory.get(0);
+                final Location prev = paintHistory.get(0).getLocation();
                 projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), pointPrevious);
 
                 for (int cnt = 1; cnt < size; cnt++) {
-                    final Location now = paintHistory.get(cnt);
+                    final Location now = paintHistory.get(cnt).getLocation();
                     projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), pointNow);
 
                     final int alpha;
@@ -160,11 +161,11 @@ public class PositionDrawer {
         canvas.setDrawFilter(remfil);
     }
 
-    public ArrayList<Location> getHistory() {
+    public ArrayList<TrailHistoryElement> getHistory() {
         return positionHistory.getHistory();
     }
 
-    public void setHistory(final ArrayList<Location> history) {
+    public void setHistory(final ArrayList<TrailHistoryElement> history) {
         positionHistory.setHistory(history);
     }
 

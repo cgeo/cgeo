@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.maps.PositionHistory;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -29,7 +30,7 @@ public class HistoryLayer extends Layer {
     private Location coordinates;
     private Paint historyLine;
 
-    public HistoryLayer(final ArrayList<Location> locationHistory) {
+    public HistoryLayer(final ArrayList<TrailHistoryElement> locationHistory) {
         super();
         if (locationHistory != null) {
             positionHistory.setHistory(locationHistory);
@@ -57,9 +58,9 @@ public class HistoryLayer extends Layer {
         positionHistory.rememberTrailPosition(coordinates);
 
         if (Settings.isMapTrail()) {
-            final ArrayList<Location> paintHistory = new ArrayList<>(getHistory());
+            final ArrayList<TrailHistoryElement> paintHistory = new ArrayList<>(getHistory());
             // always add current position to drawn history to have a closed connection, even if it's not yet recorded
-            paintHistory.add(coordinates);
+            paintHistory.add(new TrailHistoryElement(coordinates));
             final int size = paintHistory.size();
             if (size < 2) {
                 return;
@@ -67,7 +68,7 @@ public class HistoryLayer extends Layer {
 
             final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
 
-            Location prev = paintHistory.get(0);
+            Location prev = paintHistory.get(0).getLocation();
             final Path path = AndroidGraphicFactory.INSTANCE.createPath();
             int current = 1;
             while (current < size) {
@@ -75,7 +76,7 @@ public class HistoryLayer extends Layer {
 
                 boolean paint = false;
                 while (!paint && current < size) {
-                    final Location now = paintHistory.get(current);
+                    final Location now = paintHistory.get(current).getLocation();
                     current++;
                     if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
                         path.lineTo((float) (MercatorProjection.longitudeToPixelX(now.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(now.getLatitude(), mapSize) - topLeftPoint.y));
@@ -92,7 +93,7 @@ public class HistoryLayer extends Layer {
         }
     }
 
-    public ArrayList<Location> getHistory() {
+    public ArrayList<TrailHistoryElement> getHistory() {
         return positionHistory.getHistory();
     }
 

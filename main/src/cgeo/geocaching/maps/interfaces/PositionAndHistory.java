@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.models.ManualRoute;
+import cgeo.geocaching.models.TrailHistoryElement;
 
 import android.location.Location;
 
@@ -17,9 +18,9 @@ public interface PositionAndHistory extends ManualRoute.UpdateManualRoute {
 
     float getHeading();
 
-    ArrayList<Location> getHistory();
+    ArrayList<TrailHistoryElement> getHistory();
 
-    void setHistory(ArrayList<Location> history);
+    void setHistory(ArrayList<TrailHistoryElement> history);
 
     void repaintRequired();
 

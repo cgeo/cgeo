@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.MapLineUtils;
@@ -147,12 +148,12 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
     }
 
     @Override
-    public ArrayList<Location> getHistory() {
+    public ArrayList<TrailHistoryElement> getHistory() {
         return history.getHistory();
     }
 
     @Override
-    public void setHistory(final ArrayList<Location> history) {
+    public void setHistory(final ArrayList<TrailHistoryElement> history) {
         if (history != this.history.getHistory()) {
             this.history.setHistory(history);
         }
@@ -264,15 +265,15 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
         }
         historyObjs.removeAll();
         if (Settings.isMapTrail()) {
-            final ArrayList<Location> paintHistory = new ArrayList<>(getHistory());
+            final ArrayList<TrailHistoryElement> paintHistory = new ArrayList<>(getHistory());
             final int size = paintHistory.size();
             if (size < 2) {
                 return;
             }
             // always add current position to drawn history to have a closed connection, even if it's not yet recorded
-            paintHistory.add(coordinates);
+            paintHistory.add(new TrailHistoryElement(coordinates));
 
-            Location prev = paintHistory.get(0);
+            Location prev = paintHistory.get(0).getLocation();
             int current = 1;
             while (current < size) {
                 final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
@@ -280,7 +281,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
                 boolean paint = false;
                 while (!paint && current < size) {
-                    final Location now = paintHistory.get(current);
+                    final Location now = paintHistory.get(current).getLocation();
                     current++;
                     if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
                         points.add(new LatLng(now.getLatitude(), now.getLongitude()));

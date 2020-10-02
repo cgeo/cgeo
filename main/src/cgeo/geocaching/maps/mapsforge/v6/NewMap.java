@@ -43,6 +43,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -150,7 +151,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private DistanceView distanceView;
 
-    private ArrayList<Location> trailHistory = null;
+    private ArrayList<TrailHistoryElement> trailHistory = null;
 
     private String targetGeocode = null;
     private Geopoint lastNavTarget = null;
