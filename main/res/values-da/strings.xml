@@ -592,10 +592,20 @@
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Opret Sikkerhedskopi</string>
+    <string name="init_backup_summary">Bemærk venligst at denne funktion kan sikkerhedskopiere caches, waypoints og indstillinger, men ikke cachebilleder.</string>
+    <string name="init_restore_title">Genskab fra sikkerhedskopi</string>
+    <string name="init_backup_caches">caches og waypoints</string>
+    <string name="init_backup_program_settings">programindstillinger</string>
+    <string name="init_backup_logins">medtag kontooplysninger</string>
     <string name="init_backup">Backup af cache- og rutepunktdata</string>
     <string name="init_backup_backup">Backup</string>
+    <string name="init_backup_finished">Sikkerhedskopiering færdig</string>
+    <string name="init_backup_now">Start sikkerhedskopiering</string>
     <string name="init_backup_running">Opretter backup af cache-database…</string>
     <string name="init_backup_restore">Gendan fra backup</string>
+    <string name="init_restore_restored">Gendannelse fuldført</string>
+    <string name="init_backup_start_restore">Start gendannelse</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
     <string name="init_backup_unnecessary">Databasen er tom og det er ikke nødvendigt at tage backup.</string>
@@ -939,6 +949,7 @@
     <string name="cache_menu_checker">Åben Geochecker</string>
     <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
     <string name="cache_menu_ignore">Ignorér cache</string>
+    <string name="cache_log_menu_title">Log %s af %s</string>
     <string name="ignore_confirm_title">Vær forsigtig</string>
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
@@ -1002,6 +1013,8 @@
     <string name="cache_whereyougo_install">Installér WhereYouGo for at hente og starte denne cartridge</string>
     <string name="cache_chirpwolf_start">Brug Chirp Wolf til at læse chirp-data for denne cache</string>
     <string name="cache_chirpwolf_install">Installér Chirp Wolf for at læse chirp data</string>
+    <string name="context_share_as_text">Del tekst</string>
+    <string name="context_share_as_link">Del link</string>
     <string name="create_internal_cache">Opret brugerdefineret cache</string>
     <string name="internal_cache_default_name">Brugerdefineret cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brugerdefineret cache</string>
