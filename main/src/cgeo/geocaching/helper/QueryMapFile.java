@@ -2,6 +2,7 @@ package cgeo.geocaching.helper;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.PublicLocalFolder;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -21,7 +22,7 @@ public class QueryMapFile extends Activity {
         final Bundle bundle = getIntent().getExtras();
         final boolean forceAndFeedback = null != bundle && bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam));
 
-        final String mapFile = Settings.getMapFileDirectory();
+        final String mapFile = Settings.getPublicLocalFolderUri(PublicLocalFolder.OFFLINE_MAPS).toString();
         if (forceAndFeedback || (mapFile != null && !"".equals(mapFile))) {
             try {
                 final Intent intent = new Intent(Intent.ACTION_SENDTO);

@@ -2,11 +2,13 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,17 +21,12 @@ import androidx.core.text.HtmlCompat;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DebugUtils {
 
-    private enum LogcatResults {
-        LOGCAT_OK,
-        LOGCAT_EMPTY,
-        LOGCAT_ERROR
-    }
+public class DebugUtils {
 
     private DebugUtils() {
         // utility class
@@ -90,8 +87,10 @@ public class DebugUtils {
     }
 
     private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
-        final AtomicInteger result = new AtomicInteger(LogcatResults.LOGCAT_ERROR.ordinal());
-        final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
+        final AtomicReference<Uri> result = new AtomicReference(null);
+
+        final File file = PublicLocalStorage.get().createTempFile();
+
         final String filename = file.getName();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
@@ -107,33 +106,36 @@ public class DebugUtils {
                 }
                 Log.iForce("[LogCat]Issuing command: " + builder.command());
                 final int returnCode = builder.start().waitFor();
-                if (returnCode == 0) {
-                    result.set(file.exists() ? LogcatResults.LOGCAT_OK.ordinal() : LogcatResults.LOGCAT_EMPTY.ordinal());
+                if (returnCode == 0 && file.isFile()) {
+                    final Uri logfileUri = PublicLocalStorage.get().writeFileToFolder(PublicLocalFolder.LOGFILES, FileNameCreator.LOGFILE, file, true);
+                    result.set(logfileUri);
+                } else {
+                    Log.w("Problem creating logfile " + file + " (returnCode=" + returnCode + ", isFile=" + file.isFile() + ")");
                 }
 
             } catch (IOException | InterruptedException e) {
                 Log.e("error calling logcat: " + e.getMessage());
             }
         }, () -> {
-            if (result.get() == LogcatResults.LOGCAT_OK.ordinal()) {
+            if (result.get() != null) {
                 if (forceEmail) {
-                    shareLogfileAsEmail(activity, additionalMessage, file);
+                    shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
                     Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
-                        String.format(activity.getString(R.string.about_system_write_logcat_success), filename, LocalStorage.LOGFILES_DIR_NAME),
+                        String.format(activity.getString(R.string.about_system_write_logcat_success), UriUtils.getFileName(result.get()), PublicLocalFolder.LOGFILES.getLocation().toUserDisplayableString()),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
-                        null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, file));
+                        null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get()));
                 }
             } else {
-                ActivityMixin.showToast(activity, result.get() == LogcatResults.LOGCAT_EMPTY.ordinal() ? R.string.about_system_write_logcat_empty : R.string.about_system_write_logcat_error);
+                ActivityMixin.showToast(activity, R.string.about_system_write_logcat_error);
             }
         });
     }
 
-    private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final File file) {
+    private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final Uri logfileUri) {
         final String systemInfo = SystemInformation.getSystemInformation(activity);
         final String emailText = additionalMessage == null ? systemInfo : additionalMessage + "\n\n" + systemInfo;
-        ShareUtils.shareAsEmail(activity, activity.getString(R.string.about_system_info), emailText, file, R.string.about_system_info_send_chooser);
+        ShareUtils.shareAsEmail(activity, activity.getString(R.string.about_system_info), emailText, logfileUri, R.string.about_system_info_send_chooser);
     }
 
 
