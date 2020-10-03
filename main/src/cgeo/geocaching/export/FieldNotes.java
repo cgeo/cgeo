@@ -4,14 +4,24 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import java.io.File;
+import android.net.Uri;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -47,16 +57,38 @@ class FieldNotes {
         return buffer.toString();
     }
 
-    File writeToDirectory(final File exportLocation, final String fileName) {
-        FileUtils.mkdirs(exportLocation);
+    public Uri writeToFolder(final Folder folder, final String filename) {
 
-        final File exportFile = new File(exportLocation.toString() + '/' + fileName);
+        final Charset encoding = StandardCharsets.UTF_16LE;
 
-        if (!FileUtils.writeFileUTF16(exportFile, getContent())) {
+        final String content = getContent();
+
+        final Uri uri = ContentStorage.get().create(folder, filename);
+        if (uri == null) {
             return null;
         }
 
-        return exportFile;
+        Writer writer = null;
+        try {
+            final OutputStream os = ContentStorage.get().openForWrite(uri);
+            if (os == null) {
+                return null;
+            }
+
+            writer = new OutputStreamWriter(os, encoding);
+            IOUtils.write(content, writer);
+            writer.flush();
+        } catch (final IOException e) {
+            Log.e("writing field notes failed", e);
+            // delete partial file on error
+            ContentStorage.get().delete(uri);
+
+            return null;
+        } finally {
+            IOUtils.closeQuietly(writer);
+        }
+
+        return uri;
     }
 
     public int size() {

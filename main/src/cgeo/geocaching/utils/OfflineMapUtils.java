@@ -1,16 +1,21 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
+
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +47,8 @@ public class OfflineMapUtils {
     }
 
     public static void writeInfo(@NonNull final String remoteUrl, @NonNull final String localFilename, @NonNull final String displayName, final long date) {
-        try (OutputStream output = new FileOutputStream(LocalStorage.getOrCreateMapDirectory() + "/" + localFilename + INFOFILE_SUFFIX)) {
+        final Uri infoFile = ContentStorage.get().create(PersistableFolder.OFFLINE_MAPS, localFilename + INFOFILE_SUFFIX);
+        try (OutputStream output = ContentStorage.get().openForWrite(infoFile)) {
             final int i = remoteUrl.lastIndexOf("/");
             final String remotePage = i != -1 ? remoteUrl.substring(0, i) : remoteUrl;
             final String remoteFile = i != -1 ? remoteUrl.substring(i + 1) : localFilename;
@@ -66,9 +72,18 @@ public class OfflineMapUtils {
      */
     public static ArrayList<OfflineMapData> availableOfflineMaps() {
         final ArrayList<OfflineMapData> result = new ArrayList<>();
-        final String mapDir = LocalStorage.getOrCreateMapDirectory();
 
-        for (String filename : FileUtils.listFiles(new File(mapDir).toPath(), INFOFILE_SUFFIX)) {
+        final List<ContentStorage.FileInformation> mapDirContent = ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS);
+        final Map<String, Uri> mapDirMap = new HashMap<>();
+        for (ContentStorage.FileInformation fi : mapDirContent) {
+            mapDirMap.put(fi.name, fi.uri);
+        }
+
+        for (ContentStorage.FileInformation fi : mapDirContent) {
+            final String filename = fi.name;
+            if (!filename.endsWith(INFOFILE_SUFFIX)) {
+                continue;
+            }
             try (InputStream input = new FileInputStream(new File(filename))) {
                 final OfflineMapData offlineMapData = new OfflineMapData();
                 final Properties prop = new Properties();
@@ -80,11 +95,8 @@ public class OfflineMapUtils {
                 offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
                 offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
 
-                if (StringUtils.isNotBlank(offlineMapData.localFile)) {
-                    final File test = new File(mapDir + "/" + offlineMapData.localFile);
-                    if (test.canRead() && test.isFile()) {
-                        result.add(offlineMapData);
-                    }
+                if (StringUtils.isNotBlank(offlineMapData.localFile) && mapDirMap.containsKey(offlineMapData.localFile)) {
+                    result.add(offlineMapData);
                 }
             } catch (IOException | NumberFormatException e) {
                 Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
