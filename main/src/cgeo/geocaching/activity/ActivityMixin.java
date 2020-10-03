@@ -87,9 +87,14 @@ public final class ActivityMixin {
 
     private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
         Log.v("[" + context.getClass().getName() + "].showToast(" + text + "){" + toastDuration + "}");
-        final Toast toast = Toast.makeText(context, text, toastDuration);
-        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-        toast.show();
+        try {
+            final Toast toast = Toast.makeText(context, text, toastDuration);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+            toast.show();
+        } catch (RuntimeException re) {
+            //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
+            Log.w("Could not show toast '" + text + "' to user", re);
+        }
     }
 
     private static void postShowToast(final Activity activity, final String text, final int toastDuration) {

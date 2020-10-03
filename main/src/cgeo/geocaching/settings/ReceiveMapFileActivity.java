@@ -3,27 +3,28 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.OfflineMapUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -36,8 +37,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     public static final String EXTRA_FILENAME = "filename";
 
     private Uri uri = null;
-    private String mapDirectory = null;
-    private File file = null;
+    private String filename = null;
     private String fileinfo = "";
 
     private String sourceURL = "";
@@ -61,11 +61,10 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         sourceDate = intent.getLongExtra(MapDownloadUtils.RESULT_DATE, 0);
         final AbstractActivity that = this;
 
-        MapDownloadUtils.checkMapDirectory(this, false, (path, isWritable) -> {
+        MapDownloadUtils.checkMapDirectory(this, false, (folder, isWritable) -> {
             if (isWritable) {
-                mapDirectory = Settings.getMapFileDirectory();
                 if (guessFilename(preset)) {
-                    handleMapFile(that);
+                    handleMapFile();
                 }
             } else {
                 finish();
@@ -75,47 +74,27 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     // try to guess a filename, otherwise chose randomized filename
     private boolean guessFilename(final String preset) {
-        try {
-            String filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
-            if (filename != null) {
-                filename = FileUtils.getFilenameFromPath(filename);
-                final int posExt = filename.lastIndexOf('.');
-                if (posExt == -1 || !(MAP_EXTENSION.equals(filename.substring(posExt)))) {
-                    filename += MAP_EXTENSION;
-                }
-                file = (new File(mapDirectory, filename)).getCanonicalFile();
+        filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
+        if (filename != null) {
+            filename = FileUtils.getFilenameFromPath(filename);
+            final int posExt = filename.lastIndexOf('.');
+            if (posExt == -1 || !(MAP_EXTENSION.equals(filename.substring(posExt)))) {
+                filename += MAP_EXTENSION;
             }
-            if (file == null) {
-                createRandomlyNamedFile();
-            }
-            fileinfo = FileUtils.getFilenameFromPath(file.getPath());
-            if (fileinfo != null) {
-                fileinfo = fileinfo.substring(0, fileinfo.length() - MAP_EXTENSION.length());
-            }
-            return true;
-        } catch (IOException e) {
-            return false;
         }
+        if (filename == null) {
+            filename = FileNameCreator.OFFLINE_MAPS.createName();
+        }
+        fileinfo = filename;
+        if (fileinfo != null) {
+            fileinfo = fileinfo.substring(0, fileinfo.length() - MAP_EXTENSION.length());
+        }
+        return true;
     }
 
-    private void handleMapFile(final Activity activity) {
-        if (file.exists()) {
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-            final AlertDialog dialog = builder.setTitle(R.string.receivemapfile_intenttitle)
-                    .setCancelable(true)
-                    .setMessage(R.string.receivemapfile_alreadyexists)
-                    .setPositiveButton(R.string.receivemapfile_option_overwrite, (dialog3, button3) -> new CopyTask(this).execute())
-                    .setNeutralButton(R.string.receivemapfile_option_differentname, (dialog2, button2) -> {
-                        createRandomlyNamedFile();
-                        new CopyTask(this).execute();
-                    })
-                    .setNegativeButton(android.R.string.cancel, (dialog4, which4) -> activity.finish())
-                    .create();
-            dialog.setOwnerActivity(activity);
-            dialog.show();
-        } else {
-            new CopyTask(this).execute();
-        }
+    private void handleMapFile() {
+        //duplicate filenames are handled by FolderStorage automatically
+        new CopyTask(this).execute();
     }
 
     protected class CopyTask extends AsyncTaskWithProgressText<String, CopyStates> {
@@ -133,44 +112,47 @@ public class ReceiveMapFileActivity extends AbstractActivity {
         @Override
         protected CopyStates doInBackgroundInternal(final String[] logTexts) {
             CopyStates status = CopyStates.UNKNOWN_STATE;
-            try {
-                Log.d("start receiving map file: " + file.getPath());
-                final InputStream inputStream = getContentResolver().openInputStream(uri);
-                try {
-                    // copy file
-                    file.setWritable(true, false);
-                    final OutputStream outputStream = new FileOutputStream(file);
-                    final byte[] buffer = new byte[32 << 10];
-                    int length = 0;
-                    while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
-                        outputStream.write(buffer, 0, length);
-                        bytesCopied += length;
-                        publishProgress(String.format(progressFormat, bytesCopied >> 10));
-                    }
-                    inputStream.close();
-                    outputStream.close();
 
-                    // clean up and refresh available map list
-                    if (!cancelled.get()) {
-                        MapsforgeMapProvider.getInstance().updateOfflineMaps(Uri.fromFile(file));
-                        status = CopyStates.SUCCESS;
-                        try {
-                            getContentResolver().delete(uri, null, null);
-                        } catch (IllegalArgumentException iae) {
-                            Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
-                        }
-                    } else {
-                        file.delete();
-                        status = CopyStates.CANCELLED;
+            Log.d("start receiving map file: " + filename);
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            try {
+                inputStream = getContentResolver().openInputStream(uri);
+                // copy file
+                final Uri outputUri = FolderStorage.get().create(ConfigurableFolder.OFFLINE_MAPS, filename);
+                outputStream = FolderStorage.get().openForWrite(outputUri);
+                final byte[] buffer = new byte[32 << 10];
+                int length = 0;
+                while (!cancelled.get() && (length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                    bytesCopied += length;
+                    publishProgress(String.format(progressFormat, bytesCopied >> 10));
+                }
+
+                // clean up and refresh available map list
+                if (!cancelled.get()) {
+                    status = CopyStates.SUCCESS;
+                    try {
+                        getContentResolver().delete(uri, null, null);
+                    } catch (IllegalArgumentException iae) {
+                        Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
                     }
-                } catch (IOException e) {
-                    Log.e("IOException on receiving map file: " + e.getMessage());
-                    status = CopyStates.IO_EXCEPTION;
+                    //update offline maps AFTER deleting source file. This handles the very special case when Map Folder = Download Folder
+                    MapsforgeMapProvider.getInstance().updateOfflineMaps(outputUri);
+                } else {
+                    FolderStorage.get().delete(outputUri);
+                    status = CopyStates.CANCELLED;
                 }
             } catch (FileNotFoundException e) {
                 Log.e("FileNotFoundException on receiving map file: " + e.getMessage());
                 status = CopyStates.FILENOTFOUND_EXCEPTION;
+            } catch (IOException e) {
+                Log.e("IOException on receiving map file: " + e.getMessage());
+                status = CopyStates.IO_EXCEPTION;
+            } finally {
+                IOUtils.closeQuietly(inputStream, outputStream);
             }
+
             return status;
         }
 
@@ -181,14 +163,14 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                 case SUCCESS:
                     result = String.format(getString(R.string.receivemapfile_success), fileinfo);
                     if (StringUtils.isNotBlank(sourceURL)) {
-                        OfflineMapUtils.writeInfo(sourceURL, FileUtils.getFilenameFromPath(file.getPath()), OfflineMapUtils.getDisplayName(fileinfo), sourceDate);
+                        OfflineMapUtils.writeInfo(sourceURL, filename, OfflineMapUtils.getDisplayName(fileinfo), sourceDate);
                     }
                     break;
                 case CANCELLED:
                     result = getString(R.string.receivemapfile_cancelled);
                     break;
                 case IO_EXCEPTION:
-                    result = String.format(getString(R.string.receivemapfile_error_io_exception), mapDirectory);
+                    result = String.format(getString(R.string.receivemapfile_error_io_exception), ConfigurableFolder.OFFLINE_MAPS);
                     break;
                 case FILENOTFOUND_EXCEPTION:
                     result = getString(R.string.receivemapfile_error_filenotfound_exception);
@@ -203,11 +185,4 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     }
 
-    private void createRandomlyNamedFile() {
-        try {
-            file = File.createTempFile("map-", MAP_EXTENSION, new File(mapDirectory));
-        } catch (IOException e) {
-            file = null;
-        }
-    }
 }

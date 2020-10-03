@@ -4,7 +4,6 @@ import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -21,6 +20,8 @@ import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -47,6 +48,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.view.View;
@@ -88,6 +90,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     public static final int RESTART_NEEDED = 2;
 
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
+
+    private final ConfigurableFolderStorageActivityHelper configFolderStorageHelper = new ConfigurableFolderStorageActivityHelper(this);
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -179,13 +183,17 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_fakekey_dataDir,
-                R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
+                R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message,
                 R.string.pref_twitter_trackable_message, R.string.pref_ec_icons, R.string.pref_selected_language }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
+
+        //PublicFolder initialization
+        initPublicFolders(ConfigurableFolder.values());
+
     }
 
     /**
@@ -393,6 +401,41 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         defaultNavigationTool2.setEntryValues(values);
     }
 
+    private void initPublicFolders(final ConfigurableFolder[] folders) {
+
+        if (!Settings.isDebug()) {
+            hidePreference(getPreference(ConfigurableFolder.TEST_FOLDER.getPrefKeyId()), R.string.pref_group_localfilesystem);
+        }
+
+        for (ConfigurableFolder folder : folders) {
+            final Preference pref = getPreference(folder.getPrefKeyId());
+            if (pref == null) {
+                continue;
+            }
+
+            bindSummaryToValue(pref, folder.toUserDisplayableValue());
+            pref.setOnPreferenceClickListener(p -> {
+                configFolderStorageHelper.selectFolderUri(folder, f -> p.setSummary(f.toUserDisplayableValue()));
+                return false;
+            });
+            folder.registerChangeListener(this, f -> pref.setSummary(f.toUserDisplayableValue()));
+        }
+    }
+
+    private void hidePreference(final Preference prefToHide, @AnyRes final int prefGroupId) {
+        if (prefToHide == null) {
+            return;
+        }
+        prefToHide.setEnabled(false);
+        if (prefGroupId != 0) {
+            //Before API26/O there are tricks necessary to get the prefereneGroup
+            final Preference prefGroup = getPreference(prefGroupId);
+            if (prefGroup instanceof PreferenceGroup) {
+                ((PreferenceGroup) prefGroup).removePreference(prefToHide);
+            }
+        }
+    }
+
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
 
@@ -402,14 +445,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         return false;
                     });
         }
-
-        getPreference(R.string.pref_mapDirectory).setOnPreferenceClickListener(
-                preference -> {
-                    final Intent intent = new Intent(SettingsActivity.this,
-                            SelectMapfileActivity.class);
-                    startActivityForResult(intent, R.string.pref_mapDirectory);
-                    return false;
-                });
     }
 
     /**
@@ -742,6 +777,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (configFolderStorageHelper.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
         if (MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data)) {
             return;
         }
@@ -763,18 +802,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
 
         switch (requestCode) {
-            case R.string.pref_mapDirectory:
-                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
-                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
-                    final File file = new File(mapFile);
-                    if (!file.isDirectory()) {
-                        Settings.setMapFileDirectory(file.getParent());
-                    } else {
-                        Settings.setMapFileDirectory(mapFile);
-                    }
-                }
-                getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
-                break;
             case R.string.pref_fakekey_dataDir:
                 getPreference(R.string.pref_fakekey_dataDir).setSummary(Settings.getExternalPrivateCgeoDirectory());
                 break;
