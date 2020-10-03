@@ -3,6 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -20,6 +22,7 @@ import java.lang.reflect.Constructor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
+
 
 public class DebugUtils {
 
@@ -87,7 +90,14 @@ public class DebugUtils {
 
     private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
         final AtomicInteger result = new AtomicInteger(LogcatResults.LOGCAT_ERROR.ordinal());
-        final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
+
+       // File cgeoDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "cgeo");
+        //File file = new File(cgeoDir, "logfile_"+System.currentTimeMillis()+".txt");
+        //try: /storage/emulated/0/cgeo
+        //final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
+
+        final File file = PublicLocalStorage.get().createTempFile();
+
         final String filename = file.getName();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
@@ -105,6 +115,8 @@ public class DebugUtils {
                 final int returnCode = builder.start().waitFor();
                 if (returnCode == 0) {
                     result.set(file.exists() ? LogcatResults.LOGCAT_OK.ordinal() : LogcatResults.LOGCAT_EMPTY.ordinal());
+
+                    PublicLocalStorage.get().writeTempFileToStorage(PublicLocalFolder.LOGFILES, null, file);
                 }
 
             } catch (IOException | InterruptedException e) {

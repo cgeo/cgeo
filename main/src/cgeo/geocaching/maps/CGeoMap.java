@@ -604,6 +604,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         prepareFilterBar();
 
         AndroidBeam.disable(activity);
+
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
 
     public void toggleRouteItem(final IWaypoint item) {
