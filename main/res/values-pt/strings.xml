@@ -292,7 +292,7 @@
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Ler código GC</string>
     <string name="menu_pocket_queries">Pocket queries</string>
-    <string name="menu_scan_description">O c:geo pode interpretar códigos GC impressos num código QR. A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
+    <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Por perto</string>
@@ -550,6 +550,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texto de registo</string>
     <string name="init_signature_template_size">Tamanho</string>
+    <string name="init_signature_template_type">Tipo</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/individuais</string>
@@ -595,7 +596,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Observe que esta funcionalidade pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas não às imagens em caches.</string>
+    <string name="init_backup_summary">Observe que esta funcionalidade pode fazer a cópia de segurança de caches, assim como de pontos adicionais &amp; configurações, mas não de imagens de caches.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -1129,12 +1130,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="waypoint_coordinates_has_been_modified_on_website">As coordenadas da cache no sítio web foram modificadas para: %s.</string>
     <string name="waypoint_done">Feito</string>
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>
-    <string name="waypoint_toclipboard">Copiar o ponto adicional para a área de transferência</string>
+    <string name="waypoint_toclipboard">Copiar waypoint p/ área de transferência</string>
     <string name="waypoint_copy_of">Cópia de</string>
     <string name="waypointcalc_notes_prompt">Introduzir notas aqui…</string>
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
-    <string name="copy_to_clipboard">Copiar para área de transferência</string>
+    <string name="copy_to_clipboard">Copiar para a área de transferência</string>
     <!-- visit -->
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
