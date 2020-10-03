@@ -19,7 +19,6 @@ import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.network.HtmlImage;
@@ -30,6 +29,7 @@ import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -40,6 +40,7 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -313,6 +314,12 @@ public class Settings {
         return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
     }
 
+    @Nullable
+    private static Uri getUri(final int prefKeyId) {
+        final String pref = getString(prefKeyId, null);
+        return StringUtils.isNotBlank(pref) ? Uri.parse(pref) : null;
+    }
+
     private static int getInt(final int prefKeyId, final int defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
     }
@@ -352,6 +359,9 @@ public class Settings {
         putString(prefKeyId, StringUtils.join(elements, SEPARATOR_CHAR));
     }
 
+    private static void putUri(@NonNull final int prefKeyId, @Nullable final Uri uri) {
+        putString(prefKeyId, uri == null ? null : uri.toString());
+    }
 
     protected static void putBoolean(final int prefKeyId, final boolean value) {
         if (sharedPrefs == null) {
@@ -584,19 +594,6 @@ public class Settings {
 
     public static MapProvider getMapProvider() {
         return getMapSource().getMapProvider();
-    }
-
-     public static String getMapFileDirectory() {
-        final String mapDir = getString(R.string.pref_mapDirectory, null);
-        if (mapDir != null) {
-            return mapDir;
-        }
-        return null;
-    }
-
-    public static void setMapFileDirectory(final String mapFileDirectory) {
-        putString(R.string.pref_mapDirectory, mapFileDirectory);
-        MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
 
     public static boolean isScaleMapsforgeText() {
@@ -1586,6 +1583,17 @@ public class Settings {
 
     public static int allowedBackupsNumber() {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
+    }
+
+    /** sets the user-defined uri for a public folder. If null, this means that default shall be used (=hard-named subfolder of base public folder) */
+    public static void setPublicFolderUri(@NonNull final PublicLocalFolder folder, @Nullable final Uri uri) {
+        putUri(folder.getPrefKeyId(), uri);
+    }
+
+    /** gets the user-defined uri for a public folder. If null, this means that default shall be used (=hard-named subfolder of base public folder) */
+    @Nullable
+    public static Uri getPublicFolderUri(@NonNull final PublicLocalFolder folder) {
+        return getUri(folder.getPrefKeyId());
     }
 
     public static boolean getUseCustomTabs() {

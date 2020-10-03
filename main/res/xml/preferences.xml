@@ -572,7 +572,7 @@
                 android:title="@string/downloadmap_title"
                 app:urlButton="@string/downloadmap_choose" />
             <Preference
-                android:key="@string/pref_mapDirectory"
+                android:key="@string/pref_publicfolder_offlinemaps"
                 android:title="@string/init_map_directory_description" />
             <cgeo.geocaching.settings.InfoPreference
                 android:text="@string/settings_info_themes"
@@ -1047,6 +1047,13 @@
         android:icon="?attr/settings_nut"
         android:title="@string/settings_title_system"
         android:summary="@string/settings_summary_system" >
+
+        <PreferenceCategory android:title="@string/init_local_file_syytem"
+            android:layout="@layout/preference_category" >
+            <Preference
+                android:key="@string/pref_publicfolder_basedir"
+                android:title="@string/init_base_directory_description" />
+        </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/init_location"
             android:layout="@layout/preference_category"
