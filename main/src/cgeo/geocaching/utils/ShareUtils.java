@@ -40,27 +40,31 @@ public class ShareUtils {
     /**
      * Standard message box + additional share button for file sharing
      */
+    @Deprecated
     public static void shareFileOrDismissDialog(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int title, final String msg) {
+        shareOrDismissDialog(context, fileToUri(context, file), mimeType, title, msg);
+    }
+
+    public static void shareOrDismissDialog(final Context context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
         Dialogs.messageNeutral(context, context.getString(title), msg, R.string.cache_share_field,
-            (dialog, which) -> shareInternal(context, file, mimeType, title));
+            (dialog, which) -> {
+                final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
+                shareInternal(context, intent, title);
+            });
     }
 
-    private static void shareInternal(final Context context, @NonNull final File file, @NonNull final String mimeType, @StringRes final int titleResourceId) {
-        shareInternal(context, mimeType, null, null, file, titleResourceId);
+    public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId) {
+        shareAsEmail(context, subject, body, uri, titleResourceId, null);
     }
 
-    public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        shareAsEmail(context, subject, body, file, titleResourceId, null);
-    }
-
-    public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId, final String receiver) {
+    private static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId, final String receiver) {
         final String usedReceiver = receiver == null ? context.getString(R.string.support_mail) : receiver;
-        final Intent intent = createShareIntentInternal(context, TYPE_EMAIL, subject, body, file, usedReceiver);
+        final Intent intent = createShareIntentInternal(context, TYPE_EMAIL, subject, body, uri, usedReceiver);
         shareInternal(context, intent, titleResourceId);
     }
 
     private static void shareInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        final Intent intent = createShareIntentInternal(context, mimeType, subject, body, file, null);
+        final Intent intent = createShareIntentInternal(context, mimeType, subject, body, fileToUri(context, file), null);
         shareInternal(context, intent, titleResourceId);
     }
 
@@ -70,37 +74,44 @@ public class ShareUtils {
         }
     }
 
-    /** context needs to be filled only when file is not null */
-    private static Intent createShareIntentInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @Nullable final String receiver) {
-        Uri uri = null;
-        if (null != file) {
+    @Nullable
+    private static Uri fileToUri(@NonNull final Context context, @Nullable final File file) {
+        if (file != null) {
             try {
-                uri = FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
+                return FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file);
             } catch (Exception e) {
-                Log.e("error on LogCat sharing");
+                Log.e("error converting file to uri:" + file, e);
             }
         }
-        if (null == file || null != uri) {
-            final Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType(mimeType);
-            if (StringUtils.isNotBlank(subject)) {
-                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-            }
-            if (StringUtils.isNotBlank(body)) {
-                intent.putExtra(Intent.EXTRA_TEXT, body);
-            }
-            if (StringUtils.isNotBlank(receiver)) {
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{receiver});
-            }
-            if (null != file) {
-                // Grant temporary read permission to the content URI.
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            }
-            return intent;
-        }
-
         return null;
+    }
+
+    /** context needs to be filled only when file is not null */
+    private static Intent createShareIntentInternal(@NonNull final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final Uri uri, @Nullable final String receiver) {
+
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(mimeType);
+        if (StringUtils.isNotBlank(subject)) {
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        }
+        if (StringUtils.isNotBlank(body)) {
+            intent.putExtra(Intent.EXTRA_TEXT, body);
+        }
+        if (StringUtils.isNotBlank(receiver)) {
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{receiver});
+        }
+        if (null != uri) {
+            Uri uriToUse = uri;
+            final File uriFile = UriUtils.toFile(uri);
+            if (uriFile != null) {
+                uriToUse = fileToUri(context, uriFile);
+            }
+
+            // Grant temporary read permission to the content URI.
+            intent.putExtra(Intent.EXTRA_STREAM, uriToUse);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
+        return intent;
     }
 
     public static void sharePlainText(final Context context, final String text) {
@@ -108,15 +119,15 @@ public class ShareUtils {
     }
 
     public static void shareLink(final Context context, final String subject, final String url) {
-        shareInternal(context, getShareLinkIntent(subject, url), R.string.context_share_as_link);
+        shareInternal(context, getShareLinkIntent(context, subject, url), R.string.context_share_as_link);
     }
 
-    public static Intent getShareLinkIntent(final String subject, final String url) {
-        return createShareIntentInternal(null, TYPE_TEXT, subject, StringUtils.defaultString(url), null, null);
+    private static Intent getShareLinkIntent(final Context context, final String subject, final String url) {
+        return createShareIntentInternal(context, TYPE_TEXT, subject, StringUtils.defaultString(url), null, null);
     }
 
     public static void shareMultipleFiles(final Context context, @NonNull final List<File> files, @StringRes final int titleResourceId) {
-        final ArrayList<Uri> uris = new ArrayList<Uri>();
+        final ArrayList<Uri> uris = new ArrayList<>();
 
         try {
             for (File file : files) {

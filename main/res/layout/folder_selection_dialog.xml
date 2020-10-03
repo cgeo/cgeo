@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dip"
+    android:paddingBottom="10dip"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="?text_color"
+                tools:text="This is a text text">
+            </TextView>
+
+            <RadioGroup
+                android:id="@+id/copymovechoices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp"
+                >
+
+                <RadioButton
+                    android:id="@+id/copymove_do_nothing"
+                    android:checked="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/folderstorage_selectfolder_dialog_choice_nocopy" />
+
+                <RadioButton
+                    android:id="@+id/copymove_copy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/folderstorage_selectfolder_dialog_choice_copy" />
+
+                <RadioButton
+                    android:id="@+id/copymove_move"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/folderstorage_selectfolder_dialog_choice_move" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+    </ScrollView>
+<!--
+    <RelativeLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel"
+        android:layout_alignParentLeft="true"
+        style="@style/button"
+        />
+
+    <Button
+        android:id="@+id/usedefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/configurablefolder_usertype_default"
+        android:layout_toLeftOf="@+id/userdefined"
+        android:paddingRight="10dip"
+        style="@style/button"
+       />
+
+    <Button
+        android:id="@+id/userdefined"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/configurablefolder_usertype_userdefined"
+        android:layout_alignParentRight="true"
+        style="@style/button"/>
+    </RelativeLayout>
+-->
+</LinearLayout>

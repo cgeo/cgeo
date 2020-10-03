@@ -135,6 +135,7 @@ public class GPXImporter {
 
     private AbstractImportThread getImporterFromFileType(final Uri uri,
             final ContentResolver contentResolver, final FileType fileType) {
+
         switch (fileType) {
             case ZIP:
                 return new ImportGpxZipAttachmentThread(uri, contentResolver,
