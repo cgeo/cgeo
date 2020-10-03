@@ -40,6 +40,7 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -1641,5 +1642,16 @@ public class Settings {
 
     public static boolean allowMultipleBackups() {
         return getBoolean(R.string.pref_backups_backup_history, false);
+    }
+
+    public static void setBaseDir(final Uri uri) {
+        putString(R.string.pref_granted_basedir, uri.getPath());
+        LocalStorage.resetExternalPublicCgeoDirectory();
+    }
+
+    @Nullable
+    public static File getBaseDir() {
+        final String pref = getString(R.string.pref_granted_basedir, "");
+        return StringUtils.isNotBlank(pref) ? new File(pref) : null;
     }
 }
