@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -23,8 +24,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class MapSettingsUtils {
 
@@ -50,7 +49,7 @@ public class MapSettingsUtils {
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_original, R.drawable.ic_menu_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_parking, R.drawable.ic_menu_parking, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_visited, R.drawable.ic_menu_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true));
-        if (StringUtils.isNotBlank(Settings.getTrackFile())) {
+        if (PersistableUri.TRACK.hasValue()) {
             settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true));
         }
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, isShowCircles, Settings::setShowCircles, false));

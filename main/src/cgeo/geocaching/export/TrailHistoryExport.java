@@ -4,27 +4,28 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
-import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.net.Uri;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,7 @@ public class TrailHistoryExport {
         if (!EnvironmentUtils.isExternalStorageAvailable()) {
             return;
         }
-        filename = "trail_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + ".gpx";
+        filename = FileNameCreator.TRAIL_HISTORY.createName();
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.export_trailhistory_title);
@@ -53,7 +54,7 @@ public class TrailHistoryExport {
         builder.setView(layout);
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), filename));
+        text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename));
 
         final CheckBox clearAfterExport = layout.findViewById(R.id.clear_trailhistory_after_export);
         clearAfterExport.setChecked(Settings.getClearTrailAfterExportStatus());
@@ -69,7 +70,7 @@ public class TrailHistoryExport {
         builder.create().show();
     }
 
-    private class Export extends AsyncTaskWithProgress<TrailHistoryElement, File> {
+    private class Export extends AsyncTaskWithProgress<TrailHistoryElement, Uri> {
 
         private static final String PREFIX_GPX = "";
         private static final String NS_GPX = "http://www.topografix.com/GPX/1/1";
@@ -86,17 +87,22 @@ public class TrailHistoryExport {
         }
 
         @Override
-        protected File doInBackgroundInternal(final TrailHistoryElement[] trail) {
-            BufferedWriter writer = null;
-            final File exportFile = new File(LocalStorage.getGpxExportDirectory(), filename);
+        protected Uri doInBackgroundInternal(final TrailHistoryElement[] trail) {
 
-            try {
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), StandardCharsets.UTF_8));
-            } catch (IOException e) {
+            final Uri uri = ContentStorage.get().create(PersistableFolder.GPX, filename);
+            if (uri == null) {
                 return null;
             }
-            final XmlSerializer gpx = new KXmlSerializer();
-            try {
+
+            BufferedWriter writer = null;
+            try (OutputStream os = ContentStorage.get().openForWrite(uri)) {
+                if (os == null) {
+                    return null;
+                }
+                writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+
+                final XmlSerializer gpx = new KXmlSerializer();
+
                 int countExported = 0;
                 gpx.setOutput(writer);
                 gpx.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
@@ -137,21 +143,19 @@ public class TrailHistoryExport {
                 gpx.endTag(NS_GPX, "gpx");
             } catch (final IOException e) {
                 // delete partial GPX file on error
-                if (exportFile.exists()) {
-                    FileUtils.deleteIgnoringFailure(exportFile);
-                }
+                ContentStorage.get().delete(uri);
                 return null;
             } finally {
                 IOUtils.closeQuietly(writer);
             }
-            return exportFile;
+            return uri;
         }
 
         @Override
-        protected void onPostExecuteInternal(final File exportFile) {
+        protected void onPostExecuteInternal(final Uri uri) {
             if (null != activity) {
-                if (null != exportFile) {
-                    ShareUtils.shareFileOrDismissDialog(activity, exportFile, "application/xml", R.string.export, String.format(activity.getString(R.string.export_trailhistory_success), exportFile.toString()));
+                if (null != uri) {
+                    ShareUtils.shareOrDismissDialog(activity, uri, ShareUtils.TYPE_XML, R.string.export, String.format(activity.getString(R.string.export_trailhistory_success), UriUtils.toUserDisplayableString(uri)));
                     if (Settings.getClearTrailAfterExportStatus()) {
                         clearTrailHistory.run();
                     }

@@ -37,6 +37,9 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
 
     private final AbstractMap mapBase;
 
+    private final TrackUtils trackUtils = new TrackUtils(this);
+    private final IndividualRouteUtils individualRouteUtils = new IndividualRouteUtils(this);
+
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
     }
@@ -47,6 +50,14 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
         } else {
             super.setTheme(R.style.cgeo_gmap);
         }
+    }
+
+    public TrackUtils getTrackUtils() {
+        return trackUtils;
+    }
+
+    public IndividualRouteUtils getIndividualRouteUtils() {
+        return individualRouteUtils;
     }
 
     @Override
@@ -182,7 +193,7 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
                     break;
             }
         }
-        TrackUtils.onPrepareOptionsMenu(menu);
+        this.trackUtils.onPrepareOptionsMenu(menu);
 
         return result;
     }
@@ -211,8 +222,8 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
             }
             */
         }
-        TrackUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::setTracks);
-        IndividualRouteUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::reloadIndividualRoute);
+        this.trackUtils.onActivityResult(requestCode, resultCode, data);
+        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data, mapBase::reloadIndividualRoute);
         MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 

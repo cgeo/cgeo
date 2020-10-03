@@ -19,7 +19,6 @@ import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.network.HtmlImage;
@@ -30,6 +29,8 @@ import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -228,10 +229,6 @@ public class Settings {
             e.putString(getKey(R.string.pref_defaultNavigationTool), String.valueOf(dnt1));
             e.putString(getKey(R.string.pref_defaultNavigationTool2), String.valueOf(dnt2));
 
-            // defaults for gpx directories
-            e.putString(getKey(R.string.pref_gpxImportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-            e.putString(getKey(R.string.pref_gpxExportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-
             e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
             e.apply();
         }
@@ -243,13 +240,8 @@ public class Settings {
             FileUtils.move(LocalStorage.getLegacyFieldNotesDirectory(), LocalStorage.getFieldNotesDirectory());
 
             Log.i("Moving gpx ex- and import dirs");
-            if (getGpxExportDir().equals(LocalStorage.getLegacyGpxDirectory().getPath())) {
-                e.putString(getKey(R.string.pref_gpxExportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-            }
-            if (getGpxImportDir().equals(LocalStorage.getLegacyGpxDirectory().getPath())) {
-                e.putString(getKey(R.string.pref_gpxImportDir), LocalStorage.getDefaultGpxDirectory().getPath());
-            }
             FileUtils.move(LocalStorage.getLegacyGpxDirectory(), LocalStorage.getDefaultGpxDirectory());
+
 
             Log.i("Moving local spoilers");
             FileUtils.move(LocalStorage.getLegacyLocalSpoilersDirectory(), LocalStorage.getLocalSpoilersDirectory());
@@ -305,9 +297,14 @@ public class Settings {
         return CgeoApplication.getInstance() == null ? -1 : CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
     }
 
-    static String getString(final int prefKeyId, final String defaultValue) {
-        return sharedPrefs == null ? defaultValue : sharedPrefs.getString(getKey(prefKeyId), defaultValue);
+    protected static String getString(final int prefKeyId, final String defaultValue) {
+        return getStringDirect(getKey(prefKeyId), defaultValue);
     }
+
+    private static String getStringDirect(final String prefKey, final String defaultValue) {
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getString(prefKey, defaultValue);
+    }
+
 
     private static List<String> getStringList(final int prefKeyId, final String defaultValue) {
         return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
@@ -351,7 +348,6 @@ public class Settings {
     private static void putStringList(final int prefKeyId, final Iterable<?> elements) {
         putString(prefKeyId, StringUtils.join(elements, SEPARATOR_CHAR));
     }
-
 
     protected static void putBoolean(final int prefKeyId, final boolean value) {
         if (sharedPrefs == null) {
@@ -590,19 +586,6 @@ public class Settings {
         return getMapSource().getMapProvider();
     }
 
-     public static String getMapFileDirectory() {
-        final String mapDir = getString(R.string.pref_mapDirectory, null);
-        if (mapDir != null) {
-            return mapDir;
-        }
-        return null;
-    }
-
-    public static void setMapFileDirectory(final String mapFileDirectory) {
-        putString(R.string.pref_mapDirectory, mapFileDirectory);
-        MapsforgeMapProvider.getInstance().updateOfflineMaps();
-    }
-
     public static int getMapRotation() {
         final String prefValue = getString(R.string.pref_mapRotation, "");
         if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {
@@ -636,14 +619,6 @@ public class Settings {
 
     public static void setAutotargetIndividualRoute(final boolean autotargetIndividualRoute) {
         putBoolean(R.string.pref_autotarget_individualroute, autotargetIndividualRoute);
-    }
-
-    public static String getTrackFile() {
-        return getString(R.string.pref_trackfile, null);
-    }
-
-    public static void setTrackFile(final String filename) {
-        putString(R.string.pref_trackfile, filename);
     }
 
     public static CoordInputFormatEnum getCoordInputFormat() {
@@ -1194,16 +1169,6 @@ public class Settings {
         putBoolean(R.string.pref_dbonsdcard, dbOnSDCard);
     }
 
-    public static String getGpxExportDir() {
-        return getString(R.string.pref_gpxExportDir,
-                LocalStorage.getDefaultGpxDirectory().getPath());
-    }
-
-    public static String getGpxImportDir() {
-        return getString(R.string.pref_gpxImportDir,
-                LocalStorage.getDefaultGpxDirectory().getPath());
-    }
-
     public static String getExternalPrivateCgeoDirectory() {
         return getString(R.string.pref_dataDir, null);
     }
@@ -1585,6 +1550,49 @@ public class Settings {
 
     public static int allowedBackupsNumber() {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
+    }
+
+    /** sets the user-defined folder-config for a persistable folder. Can be set to null */
+    public static void setPersistableFolder(@NonNull final PersistableFolder folder, @Nullable final String folderString) {
+        putString(folder.getPrefKeyId(), folderString);
+    }
+
+    /** gets the user-defined uri for a persistable folder. Can be null */
+    @Nullable
+    public static String getPersistableFolder(@NonNull final PersistableFolder folder) {
+        return getString(folder.getPrefKeyId(), getLegacyValueForPersistableFolder(folder.getPrefKeyId()));
+    }
+
+    /** sets Uri for persistable uris. Can be set to null */
+    public static void setPersistableUri(@NonNull final PersistableUri persistedUri, @Nullable final String uri) {
+        putString(persistedUri.getPrefKeyId(), uri);
+    }
+
+    /** gets the persisted uri for a persistable uris. Can be null */
+    @Nullable
+    public static String getPersistableUri(@NonNull final PersistableUri persistedUri) {
+        return getString(persistedUri.getPrefKeyId(), getLegacyValueForPersistableUri(persistedUri.getPrefKeyId()));
+    }
+
+    /** For Migration towards Android 11: returns any legacy value which might be stored in old settings for certain folders */
+    private static String getLegacyValueForPersistableFolder(@NonNull final int prefKeyId) {
+        if (prefKeyId == R.string.pref_persistablefolder_offlinemaps) {
+            return getStringDirect("mapDirectory", null);
+        } else if (prefKeyId == R.string.pref_persistablefolder_offlinemapthemes) {
+            return getStringDirect("renderthemepath", null);
+        } else if (prefKeyId == R.string.pref_persistablefolder_gpx) {
+            return getStringDirect("pref_gpxImportDir",
+                getStringDirect("pref_gpxExportDir",
+                    LocalStorage.getDefaultGpxDirectory().getPath()));
+        }
+        return null;
+    }
+
+    private static String getLegacyValueForPersistableUri(@NonNull final int prefKeyId) {
+        if (prefKeyId == R.string.pref_persistableuri_track) {
+            return getStringDirect("pref_trackfile", null);
+        }
+        return null;
     }
 
     public static boolean getUseCustomTabs() {
