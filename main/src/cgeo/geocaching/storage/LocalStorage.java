@@ -43,9 +43,9 @@ public final class LocalStorage {
     private static final String CGEO_DIRNAME = "cgeo";
     private static final String DATABASES_DIRNAME = "databases";
     private static final String BACKUP_DIR_NAME = "backup";
-    public static final String LOGFILES_DIR_NAME = "logfiles";
-    private static final String MAP_DIR_NAME = "maps";
-    private static final String GPX_DIR_NAME = "gpx";
+    //public static final String LOGFILES_DIR_NAME = "logfiles";
+    //private static final String MAP_DIR_NAME = "maps";
+    //private static final String GPX_DIR_NAME = "gpx";
     private static final String FIELD_NOTES_DIR_NAME = "field-notes";
     private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
     private static final String GEOCACHE_PHOTOS_DIR_NAME = "GeocachePhotos";
@@ -273,43 +273,6 @@ public final class LocalStorage {
     }
 
     @NonNull
-    public static String getOrCreateMapDirectory() {
-        String mapDirectory = Settings.getMapFileDirectory();
-        if (mapDirectory == null) {
-            final File file = new File(getExternalPublicCgeoDirectory(), MAP_DIR_NAME);
-            FileUtils.mkdirs(file);
-            mapDirectory = file.getPath();
-            Settings.setMapFileDirectory(mapDirectory);
-        }
-        return mapDirectory;
-    }
-
-    @NonNull
-    public static File getDefaultGpxDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), GPX_DIR_NAME);
-    }
-
-    @NonNull
-    public static File getGpxExportDirectory() {
-        final File gpxExportDir =  new File(Settings.getGpxExportDir());
-        FileUtils.mkdirs(gpxExportDir);
-        if (!gpxExportDir.isDirectory() || !gpxExportDir.canWrite()) {
-            return getDefaultGpxDirectory();
-        }
-        return gpxExportDir;
-    }
-
-    @NonNull
-    public static File getGpxImportDirectory() {
-        return new File(Settings.getGpxImportDir());
-    }
-
-    @NonNull
-    public static File getLegacyGpxDirectory() {
-        return new File(Environment.getExternalStorageDirectory(), GPX_DIR_NAME);
-    }
-
-    @NonNull
     public static File getLegacyExternalCgeoDirectory() {
         return new File(Environment.getExternalStorageDirectory(), LEGACY_CGEO_DIR_NAME);
     }
@@ -332,11 +295,6 @@ public final class LocalStorage {
     }
 
     @NonNull
-    public static File getLogfilesDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), LOGFILES_DIR_NAME);
-    }
-
-    @NonNull
     public static File getGeocacheDataDirectory() {
         return new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
     }
@@ -349,17 +307,6 @@ public final class LocalStorage {
     @NonNull
     public static File getLegacyLocalSpoilersDirectory() {
         return new File(Environment.getExternalStorageDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
-    }
-
-    @NonNull
-    public static List<File> getMapDirectories() {
-        final List<File> folders = new ArrayList<>();
-        for (final File dir : getStorages()) {
-            folders.add(new File(dir, "mfmaps"));
-            folders.add(new File(new File(dir, "Locus"), "mapsVector"));
-            folders.add(new File(dir, CGEO_DIRNAME));
-        }
-        return folders;
     }
 
     @NonNull

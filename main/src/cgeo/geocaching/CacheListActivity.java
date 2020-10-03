@@ -30,7 +30,6 @@ import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.files.GpxFileListActivity;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.list.AbstractList;
@@ -68,7 +67,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.SortActionProvider;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -90,13 +91,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -146,8 +145,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
-    private static final int REQUEST_CODE_IMPORT_GPX = 1;
-    private static final int REQUEST_CODE_RESTART = 2;
+    //private static final int REQUEST_CODE_IMPORT_GPX = 1;
+    //private static final int REQUEST_CODE_RESTART = 2;
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
     private static final String STATE_FILTER = "currentFilter";
@@ -778,7 +777,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
-            setEnabled(menu, R.id.menu_import_android, true);
             setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
 
             // Export
@@ -913,9 +911,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_gpx) {
             importGpx();
-            invalidateOptionsMenuCompatible();
-        } else if (menuItem == R.id.menu_import_android) {
-            importGpxFromAndroid();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_create_list) {
             new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
@@ -1298,21 +1293,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpx() {
-        GpxFileListActivity.startSubActivity(this, listId, REQUEST_CODE_RESTART);
-    }
-
-    private void importGpxFromAndroid() {
-        // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
-        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
-        // Filter to only show results that can be "opened", such as a file (as opposed to a list
-        // of contacts or timezones)
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        // Mime type based filter, we use "*/*" as GPX does not have a good mime type anyway
-        intent.setType("*/*");
-
-        startActivityForResult(intent, REQUEST_CODE_IMPORT_GPX);
+        getContentStorageHelper().selectMultipleFiles(null, PersistableFolder.GPX.getUri(), uris -> {
+            final GPXImporter importer = new GPXImporter(this, listId, importGpxAttachementFinishedHandler);
+            for (Uri uri : uris) {
+                importer.importGPX(uri, null, ContentStorage.get().getName(uri));
+            }
+        });
     }
 
     private void importPq() {
@@ -1323,15 +1309,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_IMPORT_GPX && resultCode == Activity.RESULT_OK) {
-            // The document selected by the user won't be returned in the intent.
-            // Instead, a URI to that document will be contained in the return intent
-            // provided to this method as a parameter.  Pull that uri using "resultData.getData()"
-            if (data != null) {
-                final Uri uri = data.getData();
-                new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, null, getDisplayName(uri));
-            }
-        } else if (requestCode == REQUEST_CODE_IMPORT_PQ && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CODE_IMPORT_PQ && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 final Uri uri = data.getData();
                 new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, data.getType(), null);
@@ -1339,22 +1317,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
-        } else if (requestCode == REQUEST_CODE_RESTART && resultCode == Activity.RESULT_OK) {
-            restartActivity();
         }
 
-        if (type == CacheListType.OFFLINE && requestCode != REQUEST_CODE_RESTART) {
+        if (type == CacheListType.OFFLINE) {
             refreshCurrentList();
         }
-    }
-
-    private String getDisplayName(final Uri uri) {
-        try (Cursor cursor = getContentResolver().query(uri, new String[]{OpenableColumns.DISPLAY_NAME}, null, null, null)) {
-            if (cursor != null && cursor.moveToFirst()) {
-                return cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-            }
-        }
-        return null;
     }
 
     public void refreshStored(final List<Geocache> caches) {
