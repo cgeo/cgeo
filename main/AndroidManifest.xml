@@ -50,7 +50,7 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:requestLegacyExternalStorage="true">
+        android:requestLegacyExternalStorage="false">
 
         <!-- Samsung Multi-Window support -->
         <uses-library
