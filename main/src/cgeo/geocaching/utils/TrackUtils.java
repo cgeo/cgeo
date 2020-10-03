@@ -1,39 +1,37 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SelectTrackFileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
+import cgeo.geocaching.storage.FolderStorage;
+import cgeo.geocaching.storage.PersistedDocumentUri;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.Menu;
 import android.widget.Toast;
-import static android.app.Activity.RESULT_OK;
-
-import androidx.annotation.Nullable;
-
-import java.io.File;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class TrackUtils {
 
-    private static final int REQUEST_CODE_GET_TRACKFILE = 47121;
+    private final Activity activity;
 
-    protected TrackUtils() {
+    private final ConfigurableFolderStorageActivityHelper fileSelector;
+
+    public TrackUtils(final Activity activity) {
+        this.activity = activity;
+        this.fileSelector = new ConfigurableFolderStorageActivityHelper(activity);
     }
 
     /**
      * Enable/disable track related menu entries
      * @param menu menu to be configured
      */
-    public static void onPrepareOptionsMenu(final Menu menu) {
-        final boolean trackfileSet = StringUtils.isNotBlank(Settings.getTrackFile());
+    public void onPrepareOptionsMenu(final Menu menu) {
+        final boolean trackfileSet = PersistedDocumentUri.TRACK.hasValue();
         menu.findItem(R.id.menu_center_on_track).setVisible(trackfileSet);
         menu.findItem(R.id.menu_unload_track).setVisible(trackfileSet);
     }
@@ -44,15 +42,16 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Route tracks, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
+    public boolean onOptionsItemSelected(final int id, final Route tracks, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
         if (id == R.id.menu_load_track) {
             if (null == tracks || tracks.getNumSegments() == 0) {
-                startIndividualTrackFileSelector(activity);
+                startIndividualTrackFileSelector(updateTracks);
             } else {
-                Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) -> startIndividualTrackFileSelector(activity));
+                Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) ->
+                    startIndividualTrackFileSelector(updateTracks));
             }
         } else if (id == R.id.menu_unload_track) {
-            Settings.setTrackFile(null);
+            FolderStorage.get().setPersistedDocumentUri(PersistedDocumentUri.TRACK, null);
             updateTracks.updateRoute(null);
         } else if (id == R.id.menu_center_on_track) {
             if (null != tracks) {
@@ -64,9 +63,13 @@ public class TrackUtils {
         return true;
     }
 
-    private static void startIndividualTrackFileSelector(final Activity activity) {
-        final Intent intent = new Intent(activity, SelectTrackFileActivity.class);
-        activity.startActivityForResult(intent, REQUEST_CODE_GET_TRACKFILE);
+    private void startIndividualTrackFileSelector(final Route.UpdateRoute updateTracks) {
+
+        fileSelector.selectPersistedUri(PersistedDocumentUri.TRACK, uri -> {
+            if (uri != null && updateTracks != null) {
+                loadTracks(updateTracks);
+            }
+        });
     }
 
     /**
@@ -76,32 +79,19 @@ public class TrackUtils {
      * @param data additional intent data delivered
      * @return true, if successfully selected track file / false else
      */
-    public static boolean onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent data, @Nullable final Route.UpdateRoute updateRoute) {
-        if (requestCode == REQUEST_CODE_GET_TRACKFILE && resultCode == RESULT_OK && data.hasExtra(Intents.EXTRA_GPX_FILE)) {
-            final String filename = data.getStringExtra(Intents.EXTRA_GPX_FILE);
-            if (null != filename) {
-                final File file = new File(filename);
-                if (!file.isDirectory()) {
-                    Settings.setTrackFile(filename);
-                    if (null != updateRoute) {
-                        loadTracks(activity, updateRoute);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+    public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        return fileSelector.onActivityResult(requestCode, resultCode, data);
     }
 
-    public static void loadTracks(final Activity activity, final Route.UpdateRoute updateRoute) {
-        final String trackfile = Settings.getTrackFile();
-        if (null != trackfile) {
-            GPXTrackOrRouteImporter.doImport(activity, new File(trackfile), updateRoute);
+    public void loadTracks(final Route.UpdateRoute updateRoute) {
+        final Uri uri = PersistedDocumentUri.TRACK.getUri();
+        if (null != uri) {
+            GPXTrackOrRouteImporter.doImport(activity, PersistedDocumentUri.TRACK.getUri(), updateRoute);
         }
         ActivityMixin.invalidateOptionsMenu(activity);
     }
 
-    public static void showTrackInfo(final Activity activity, final Route route) {
+    public void showTrackInfo(final Route route) {
         if (null != route) {
             final int numPoints = route.getNumPoints();
             Toast.makeText(activity, activity.getResources().getQuantityString(R.plurals.load_track_success, numPoints, numPoints), Toast.LENGTH_SHORT).show();

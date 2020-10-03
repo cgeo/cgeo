@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.storage.ConfigurableFolderStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -52,6 +53,8 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
+
+    private ConfigurableFolderStorageActivityHelper configFolderStorageHelper = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -115,15 +118,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         EditUtils.disableSuggestions(edit);
     }
 
-    protected void restartActivity() {
-        final Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-    }
-
     @Override
     public void invalidateOptionsMenuCompatible() {
         Log.v(logToken + ".invalidateOptionsMenuCompatible");
@@ -150,6 +144,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
         // create view variables
         ButterKnife.bind(this);
+
     }
 
     /**
@@ -290,6 +285,21 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             return;
         }
         setCacheTitleBar(cache);
+    }
+
+    protected ConfigurableFolderStorageActivityHelper getConfigFolderStorageHelper() {
+        if (this.configFolderStorageHelper == null) {
+            this.configFolderStorageHelper = new ConfigurableFolderStorageActivityHelper(this);
+        }
+        return this.configFolderStorageHelper;
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (this.configFolderStorageHelper != null) {
+            this.configFolderStorageHelper.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

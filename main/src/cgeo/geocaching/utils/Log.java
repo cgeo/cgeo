@@ -1,11 +1,15 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.storage.ConfigurableFolder;
+import cgeo.geocaching.storage.FolderStorage;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Locale;
 import java.util.Properties;
+
+import org.apache.commons.io.IOUtils;
 
 public final class Log {
 
@@ -40,20 +44,27 @@ public final class Log {
     private static final boolean[] SETTING_ADD_CLASSINFO = new boolean[LogLevel.values().length];
 
     static {
+        InputStream propFile = null;
         try {
-            final File propFile = new File(LocalStorage.getLogfilesDirectory(), LOGPROPERTY_FILENAME);
-            if (!propFile.exists()) {
+            String logfileFolder = "(unknown, no cgeo app)";
+            if (CgeoApplication.getInstance() != null) {
+                propFile = FolderStorage.get().openForRead(ConfigurableFolder.LOGFILES.getFolder(), LOGPROPERTY_FILENAME);
+                logfileFolder = String.valueOf(ConfigurableFolder.LOGFILES.getFolder());
+            }
+            if (propFile == null) {
                 adjustSettings();
-                android.util.Log.i(TAG, "[Log] No logging config found at " + propFile + ", using defaults");
+                android.util.Log.i(TAG, "[Log] No logging config file '" + LOGPROPERTY_FILENAME + "' found at " + logfileFolder + ", using defaults");
             } else {
-                android.util.Log.i(TAG, "[Log] Logging config found at " + propFile + ", try to apply");
+                android.util.Log.i(TAG, "[Log] Logging config file '" + LOGPROPERTY_FILENAME + "'found at " + logfileFolder + ", try to apply");
                 final Properties logProps = new Properties();
-                logProps.load(new FileReader(propFile));
+                logProps.load(new InputStreamReader(propFile));
                 setProperties(logProps);
             }
         } catch (Exception ex) {
             android.util.Log.e(TAG, "[Log] Failed to set up Logging", ex);
-        }
+        } finally {
+                IOUtils.closeQuietly(propFile);
+            }
     }
 
     private Log() {
