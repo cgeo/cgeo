@@ -241,7 +241,7 @@ public class DataStore {
     @NonNull private static final String dbTableExtension = "cg_extension";
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
     @NonNull private static final String dbCreateCaches = ""
-            + "CREATE TABLE " + dbTableCaches + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableCaches + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "updated LONG NOT NULL, "
             + "detailed INTEGER NOT NULL DEFAULT 0, "
@@ -289,20 +289,20 @@ public class DataStore {
             + "preventWaypointsFromNote INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateLists = ""
-            + "CREATE TABLE " + dbTableLists + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "title TEXT NOT NULL, "
             + "updated LONG NOT NULL,"
             + "marker INTEGER NOT NULL"
             + "); ";
     private static final String dbCreateCachesLists = ""
-            + "CREATE TABLE " + dbTableCachesLists + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
             + "list_id INTEGER NOT NULL, "
             + "geocode TEXT NOT NULL, "
             + "PRIMARY KEY (list_id, geocode)"
             + "); ";
     private static final String dbCreateAttributes = ""
-            + "CREATE TABLE " + dbTableAttributes + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableAttributes + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -310,7 +310,7 @@ public class DataStore {
             + "); ";
 
     private static final String dbCreateWaypoints = ""
-            + "CREATE TABLE " + dbTableWaypoints + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableWaypoints + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -328,7 +328,7 @@ public class DataStore {
             + "calc_state TEXT"
             + "); ";
     private static final String dbCreateSpoilers = ""
-            + "CREATE TABLE " + dbTableSpoilers + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableSpoilers + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -337,7 +337,7 @@ public class DataStore {
             + "description TEXT "
             + "); ";
     private static final String dbCreateLogs = ""
-            + "CREATE TABLE " + dbTableLogs + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLogs + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "service_log_id TEXT," //added with db version 86
@@ -351,7 +351,7 @@ public class DataStore {
             + "); ";
 
     private static final String dbCreateLogCount = ""
-            + "CREATE TABLE " + dbTableLogCount + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLogCount + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -359,7 +359,7 @@ public class DataStore {
             + "count INTEGER NOT NULL DEFAULT 0 "
             + "); ";
     private static final String dbCreateLogImages = ""
-            + "CREATE TABLE " + dbTableLogImages + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLogImages + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "log_id INTEGER NOT NULL, "
             + "title TEXT NOT NULL, "
@@ -367,7 +367,7 @@ public class DataStore {
             + "description TEXT "
             + "); ";
     private static final String dbCreateLogsOffline = ""
-            + "CREATE TABLE " + dbTableLogsOffline + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOffline + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
@@ -401,7 +401,7 @@ public class DataStore {
             + "); ";
 
     private static final String dbCreateTrackables = ""
-            + "CREATE TABLE " + dbTableTrackables + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableTrackables + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "updated LONG NOT NULL, " // date of save
             + "tbcode TEXT NOT NULL, "
@@ -418,7 +418,7 @@ public class DataStore {
             + "); ";
 
     private static final String dbCreateSearchDestinationHistory = ""
-            + "CREATE TABLE " + dbTableSearchDestinationHistory + " ("
+            + "CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "date LONG NOT NULL, "
             + "latitude DOUBLE, "
@@ -426,14 +426,14 @@ public class DataStore {
             + "); ";
 
     private static final String dbCreateTrailHistory
-            = "CREATE TABLE " + dbTableTrailHistory + " ("
+            = "CREATE TABLE IF NOT EXISTS " + dbTableTrailHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "latitude DOUBLE, "
             + "longitude DOUBLE "
             + "); ";
 
     private static final String dbCreateRoute
-            = "CREATE TABLE " + dbTableRoute + " ("
+            = "CREATE TABLE IF NOT EXISTS " + dbTableRoute + " ("
             + "precedence INTEGER, "
             + "type INTEGER, "
             + "id TEXT, "
@@ -442,7 +442,7 @@ public class DataStore {
             + "); ";
 
     private static final String dbCreateExtension
-            = "CREATE TABLE " + dbTableExtension + " ("
+            = "CREATE TABLE IF NOT EXISTS " + dbTableExtension + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "_type INTEGER DEFAULT " + DBEXTENSION_INVALID.id + ", "
             + "_key VARCHAR(50), "
@@ -836,10 +836,10 @@ public class DataStore {
             db.execSQL(dbCreateRoute);
             db.execSQL(dbCreateExtension);
 
-            createIndices(db);
+            createIndices(db, dbVersion);
         }
 
-        private static void createIndices(final SQLiteDatabase db) {
+        private static void createIndices(final SQLiteDatabase db, final int currentVersion) {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_geo ON " + dbTableCaches + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_guid ON " + dbTableCaches + " (guid)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_caches_lat ON " + dbTableCaches + " (latitude)");
@@ -853,14 +853,20 @@ public class DataStore {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_wpts_geo_type ON " + dbTableWaypoints + " (geocode, type)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_spoil_geo ON " + dbTableSpoilers + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logs_geo ON " + dbTableLogs + " (geocode, date desc)");
-            db.execSQL("CREATE INDEX IF NOT EXISTS in_logimagess_logid ON " + dbTableLogImages + " (log_id)");
+            if (currentVersion >= 54) {
+                db.execSQL("CREATE INDEX IF NOT EXISTS in_logimagess_logid ON " + dbTableLogImages + " (log_id)");
+            }
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logcount_geo ON " + dbTableLogCount + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoff_geo ON " + dbTableLogsOffline + " (geocode)");
-            db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoffimages_geo ON " + dbTableLogsOfflineImages + " (logoffline_id)");
-            db.execSQL("CREATE INDEX IF NOT EXISTS in_logsofftrackables_geo ON " + dbTableLogsOfflineTrackables + " (logoffline_id)");
+            if (currentVersion >= 85) {
+                db.execSQL("CREATE INDEX IF NOT EXISTS in_logsoffimages_geo ON " + dbTableLogsOfflineImages + " (logoffline_id)");
+                db.execSQL("CREATE INDEX IF NOT EXISTS in_logsofftrackables_geo ON " + dbTableLogsOfflineTrackables + " (logoffline_id)");
+            }
             db.execSQL("CREATE INDEX IF NOT EXISTS in_trck_geo ON " + dbTableTrackables + " (geocode)");
             db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
-            db.execSQL("CREATE INDEX IF NOT EXISTS in_extension_key ON " + dbTableExtension + " (_key)");
+            if (currentVersion >= 82) {
+                db.execSQL("CREATE INDEX IF NOT EXISTS in_extension_key ON " + dbTableExtension + " (_key)");
+            }
         }
 
         @Override
@@ -957,7 +963,7 @@ public class DataStore {
                             db.execSQL("DROP INDEX in_d");
                             db.execSQL("DROP INDEX in_e");
                             db.execSQL("DROP INDEX in_f");
-                            createIndices(db);
+                            createIndices(db, 57);
                         } catch (final SQLException e) {
                             onUpgradeError(e, 57);
                         }
@@ -1040,7 +1046,7 @@ public class DataStore {
                             db.execSQL("DROP TABLE " + dbTableWaypoints);
                             db.execSQL("ALTER TABLE " + dbTableWaypointsTemp + " RENAME TO " + dbTableWaypoints);
 
-                            createIndices(db);
+                            createIndices(db, 58);
 
                             db.setTransactionSuccessful();
 
@@ -1055,7 +1061,7 @@ public class DataStore {
                     if (oldVersion < 59) {
                         try {
                             // Add new indices and remove obsolete cache files
-                            createIndices(db);
+                            createIndices(db, 59);
                             removeObsoleteGeocacheDataDirectories();
                         } catch (final SQLException e) {
                             onUpgradeError(e, 59);
@@ -1159,7 +1165,7 @@ public class DataStore {
                     if (oldVersion < 71) {
                         try {
                             db.execSQL(dbCreateCachesLists);
-                            createIndices(db);
+                            createIndices(db, 71);
                             db.execSQL("INSERT INTO " + dbTableCachesLists + " SELECT reason, geocode FROM " + dbTableCaches);
                         } catch (final SQLException e) {
                             onUpgradeError(e, 71);
@@ -1291,7 +1297,7 @@ public class DataStore {
                     }
 
                     // redefine & migrate route table
-                    if (oldVersion < 84) {
+                    if (oldVersion < 84 && oldVersion > 80) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableRoute + " RENAME TO temp_route");
                             db.execSQL(dbCreateRoute);
@@ -1335,7 +1341,7 @@ public class DataStore {
                     //(re)create indices for logging tables
                     if (oldVersion < 86) {
                         db.execSQL("DROP INDEX in_logs_geo");
-                        createIndices(db);
+                        createIndices(db, 86);
                     }
 
                     //add service log id
@@ -1345,7 +1351,7 @@ public class DataStore {
                             createColumnIfNotExists(db, dbTableLogsOffline, "service_log_id TEXT");
                             createColumnIfNotExists(db, dbTableLogs, "service_log_id TEXT");
                         } catch (final SQLException e) {
-                            onUpgradeError(e, 86);
+                            onUpgradeError(e, 87);
                         }
                     }
 
