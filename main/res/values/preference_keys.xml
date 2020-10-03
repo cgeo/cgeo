@@ -260,6 +260,13 @@
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
 
+
+
+
+    <!-- store the base directory where the user has granted c:geo access to (relevant for Android 10+ scoped storage -->
+    <string translatable="false" name="pref_granted_basedir">granted_basedir</string>
+
+    <!-- preference values -->
     <string translatable="false" name="pref_maprotation_off">off</string>
     <string translatable="false" name="pref_maprotation_manual">manual</string>
     <string translatable="false" name="pref_maprotation_auto">auto</string>

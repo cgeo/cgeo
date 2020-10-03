@@ -1628,4 +1628,15 @@ public class Settings {
     public static int allowedBackupsNumber() {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
+
+    public static void setBaseDir(final Uri uri) {
+        putString(R.string.pref_granted_basedir, uri.getPath());
+        LocalStorage.resetExternalPublicCgeoDirectory();
+    }
+
+    @Nullable
+    public static File getBaseDir() {
+        final String pref = getString(R.string.pref_granted_basedir, "");
+        return StringUtils.isNotBlank(pref) ? new File(pref) : null;
+    }
 }

@@ -247,7 +247,12 @@ public final class LocalStorage {
     @NonNull
     public static File getExternalPublicCgeoDirectory() {
         if (externalPublicCgeoDirectory == null) {
-            externalPublicCgeoDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                final File baseDir = Settings.getBaseDir();
+                externalPublicCgeoDirectory = null != baseDir ? baseDir : new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), CGEO_DIRNAME);
+            } else {
+                externalPublicCgeoDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
+            }
             FileUtils.mkdirs(externalPublicCgeoDirectory);
             if (!externalPublicCgeoDirectory.exists() || !externalPublicCgeoDirectory.canWrite()) {
                 Log.w("External public cgeo directory '" + externalPublicCgeoDirectory + "' not available");
