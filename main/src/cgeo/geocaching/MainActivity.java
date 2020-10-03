@@ -34,6 +34,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -51,9 +52,12 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.DocumentsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,6 +73,7 @@ import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.appcompat.widget.SearchView.OnSuggestionListener;
 import androidx.core.view.MenuItemCompat;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -99,6 +104,8 @@ public class MainActivity extends AbstractActionBarActivity {
     @BindView(R.id.offline_count) protected TextView countBubble;
     @BindView(R.id.info_area) protected ListView infoArea;
     @BindView(R.id.info_notloggedin) protected View notLoggedIn;
+
+    private static final int REQUEST_CODE_GRANT_ACCESS_CGEOBASEDIR = 9999;
 
     /**
      * view of the action bar search
@@ -551,6 +558,15 @@ public class MainActivity extends AbstractActionBarActivity {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
                 ProcessPhoenix.triggerRebirth(this);
             }
+        } else if (requestCode == REQUEST_CODE_GRANT_ACCESS_CGEOBASEDIR) {
+            if (resultCode == Activity.RESULT_OK && intent != null) {
+                final Uri uri = intent.getData();
+                if (uri != null) {
+                    getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    Log.e("permissions: " + uri.getPath());
+                    Settings.setBaseDir(uri);
+                }
+            }
         } else {
             final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
             if (scanResult != null) {
@@ -616,6 +632,24 @@ public class MainActivity extends AbstractActionBarActivity {
         setFilterTitle();
         checkRestore();
         DataStore.cleanIfNeeded(this);
+
+        /* check basic dir access if running on Android 10+ */
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q && Settings.getBaseDir() == null) {
+            // create (new) public base dir for c:geo
+            final File cgeo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "cgeo");
+            FileUtils.mkdirs(cgeo);
+            Log.d("cgeo public base dir: " + cgeo.getPath() + ", exists=" + cgeo.exists() + ", canWrite=" + cgeo.canWrite());
+            // request access to this dir
+            Dialogs.message(this, "c:geo base directory", "Due to new Android system requirements c:geo needs to request directory access permissions for its base directory. Please select 'Download', then 'cgeo' and confirm your selection", getString(android.R.string.ok), (dialog, which) -> {
+                final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                Log.e("uri dir: " + cgeo.getPath());
+                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.fromFile(cgeo));
+                startActivityForResult(intent, REQUEST_CODE_GRANT_ACCESS_CGEOBASEDIR);
+                dialog.dismiss();
+            });
+        }
     }
 
     protected void selectGlobalTypeFilter() {

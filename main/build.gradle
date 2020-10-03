@@ -30,7 +30,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         //noinspection OldTargetApi
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
 
