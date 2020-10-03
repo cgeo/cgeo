@@ -50,7 +50,7 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:requestLegacyExternalStorage="true">
+        android:requestLegacyExternalStorage="true"> <!-- TODO SAF: leave 'android:requestLegacyExternalStorage="true"' until done, remove completely when done -->
 
         <!-- Samsung Multi-Window support -->
         <uses-library

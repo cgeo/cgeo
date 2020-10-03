@@ -4,7 +4,6 @@ import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -23,6 +22,8 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -62,8 +63,10 @@ import androidx.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -88,6 +91,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     public static final int RESTART_NEEDED = 2;
 
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
+
+    private final PublicLocalStorageActivityHelper publicLocalStorage = new PublicLocalStorageActivityHelper(this);
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -179,13 +184,17 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_fakekey_dataDir,
-                R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
+                R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message,
                 R.string.pref_twitter_trackable_message, R.string.pref_ec_icons, R.string.pref_selected_language }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
+
+        //PublicFolder initialization
+        initPublicFolders(PublicLocalFolder.values());
+
     }
 
     /**
@@ -393,6 +402,35 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         defaultNavigationTool2.setEntryValues(values);
     }
 
+    private void initPublicFolders(final PublicLocalFolder[] folders) {
+
+        final Map<Integer, PublicLocalFolder> prefMap = new HashMap<>();
+        for (PublicLocalFolder folder : folders) {
+            final Preference pref = getPreference(folder.getPrefKeyId());
+            if (pref != null) {
+                prefMap.put(folder.getPrefKeyId(), folder);
+            }
+        }
+
+        for (Integer prefKeyId : prefMap.keySet()) {
+            final Preference pref = getPreference(prefKeyId);
+            final PublicLocalFolder folder = prefMap.get(prefKeyId);
+            bindSummaryToValue(pref, folder.getUserDisplayableName());
+            pref.setOnPreferenceClickListener(
+                preference -> {
+                    publicLocalStorage.selectFolderUri(folder,
+                        plf -> {
+                        for (Integer pkId : prefMap.keySet()) {
+                            final Preference p = getPreference(pkId);
+                            final PublicLocalFolder f = prefMap.get(pkId);
+                            p.setSummary(f.getUserDisplayableName());
+                        }
+                    });
+                    return false;
+                });
+        }
+    }
+
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
 
@@ -402,14 +440,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         return false;
                     });
         }
-
-        getPreference(R.string.pref_mapDirectory).setOnPreferenceClickListener(
-                preference -> {
-                    final Intent intent = new Intent(SettingsActivity.this,
-                            SelectMapfileActivity.class);
-                    startActivityForResult(intent, R.string.pref_mapDirectory);
-                    return false;
-                });
     }
 
     /**
@@ -742,6 +772,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (publicLocalStorage.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
         if (MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data)) {
             return;
         }
@@ -763,18 +797,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
 
         switch (requestCode) {
-            case R.string.pref_mapDirectory:
-                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
-                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
-                    final File file = new File(mapFile);
-                    if (!file.isDirectory()) {
-                        Settings.setMapFileDirectory(file.getParent());
-                    } else {
-                        Settings.setMapFileDirectory(mapFile);
-                    }
-                }
-                getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
-                break;
             case R.string.pref_fakekey_dataDir:
                 getPreference(R.string.pref_fakekey_dataDir).setSummary(Settings.getExternalPrivateCgeoDirectory());
                 break;
