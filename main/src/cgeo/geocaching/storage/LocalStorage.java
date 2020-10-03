@@ -43,8 +43,6 @@ public final class LocalStorage {
     private static final String CGEO_DIRNAME = "cgeo";
     private static final String DATABASES_DIRNAME = "databases";
     private static final String BACKUP_DIR_NAME = "backup";
-    public static final String LOGFILES_DIR_NAME = "logfiles";
-    private static final String MAP_DIR_NAME = "maps";
     private static final String GPX_DIR_NAME = "gpx";
     private static final String FIELD_NOTES_DIR_NAME = "field-notes";
     private static final String LEGACY_CGEO_DIR_NAME = ".cgeo";
@@ -55,6 +53,7 @@ public final class LocalStorage {
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
     private static File externalPublicCgeoDirectory;
+
 
     private LocalStorage() {
         // utility class
@@ -211,6 +210,7 @@ public final class LocalStorage {
      * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
      */
     @NonNull
+    @Deprecated // do not use
     public static List<File> getStorages() {
         final String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
         final List<File> storages = new ArrayList<>();
@@ -234,7 +234,7 @@ public final class LocalStorage {
                 }
             } catch (final IOException e) {
                 Log.e("Could not get additional mount points for user content. " +
-                        "Proceeding with external storage only (" + extStorage + ")", e);
+                    "Proceeding with external storage only (" + extStorage + ")", e);
             }
         }
         return storages;
@@ -245,6 +245,7 @@ public final class LocalStorage {
      * It falls back to the internal cgeo directory if the external is not available.
      */
     @NonNull
+    @Deprecated // use ContentStorage to access public dirs
     public static File getExternalPublicCgeoDirectory() {
         if (externalPublicCgeoDirectory == null) {
             externalPublicCgeoDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
@@ -258,58 +259,37 @@ public final class LocalStorage {
         return externalPublicCgeoDirectory;
     }
 
+    @Deprecated // use ContentStorage to access public dirs
     public static void resetExternalPublicCgeoDirectory() {
         externalPublicCgeoDirectory = null;
     }
 
     @NonNull
+    @Deprecated // Use PersistableFolder.FIELD_NOTES instead
     public static File getFieldNotesDirectory() {
         return new File(getExternalPublicCgeoDirectory(), FIELD_NOTES_DIR_NAME);
     }
 
     @NonNull
+    @Deprecated // Use PersistableFolder.FIELD_NOTES instead
     public static File getLegacyFieldNotesDirectory() {
         return new File(Environment.getExternalStorageDirectory(), FIELD_NOTES_DIR_NAME);
     }
 
     @NonNull
-    public static String getOrCreateMapDirectory() {
-        String mapDirectory = Settings.getMapFileDirectory();
-        if (mapDirectory == null) {
-            final File file = new File(getExternalPublicCgeoDirectory(), MAP_DIR_NAME);
-            FileUtils.mkdirs(file);
-            mapDirectory = file.getPath();
-            Settings.setMapFileDirectory(mapDirectory);
-        }
-        return mapDirectory;
-    }
-
-    @NonNull
+    @Deprecated // Use PersistableFolder.GPX instead
     public static File getDefaultGpxDirectory() {
         return new File(getExternalPublicCgeoDirectory(), GPX_DIR_NAME);
     }
 
     @NonNull
-    public static File getGpxExportDirectory() {
-        final File gpxExportDir =  new File(Settings.getGpxExportDir());
-        FileUtils.mkdirs(gpxExportDir);
-        if (!gpxExportDir.isDirectory() || !gpxExportDir.canWrite()) {
-            return getDefaultGpxDirectory();
-        }
-        return gpxExportDir;
-    }
-
-    @NonNull
-    public static File getGpxImportDirectory() {
-        return new File(Settings.getGpxImportDir());
-    }
-
-    @NonNull
+    @Deprecated // Use PersistableFolder.GPX instead
     public static File getLegacyGpxDirectory() {
         return new File(Environment.getExternalStorageDirectory(), GPX_DIR_NAME);
     }
 
     @NonNull
+    @Deprecated // Use external dirs through ContentStorage
     public static File getLegacyExternalCgeoDirectory() {
         return new File(Environment.getExternalStorageDirectory(), LEGACY_CGEO_DIR_NAME);
     }
@@ -332,11 +312,6 @@ public final class LocalStorage {
     }
 
     @NonNull
-    public static File getLogfilesDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), LOGFILES_DIR_NAME);
-    }
-
-    @NonNull
     public static File getGeocacheDataDirectory() {
         return new File(getExternalPrivateCgeoDirectory(), GEOCACHE_DATA_DIR_NAME);
     }
@@ -349,17 +324,6 @@ public final class LocalStorage {
     @NonNull
     public static File getLegacyLocalSpoilersDirectory() {
         return new File(Environment.getExternalStorageDirectory(), GEOCACHE_PHOTOS_DIR_NAME);
-    }
-
-    @NonNull
-    public static List<File> getMapDirectories() {
-        final List<File> folders = new ArrayList<>();
-        for (final File dir : getStorages()) {
-            folders.add(new File(dir, "mfmaps"));
-            folders.add(new File(new File(dir, "Locus"), "mapsVector"));
-            folders.add(new File(dir, CGEO_DIRNAME));
-        }
-        return folders;
     }
 
     @NonNull

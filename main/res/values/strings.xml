@@ -696,9 +696,12 @@
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.</string>
     <string name="init_mapsource_select">Select Map Source</string>
+    <string name="settings_title_scale_map_text">Scale Map Text</string>
+    <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
+    <string name="init_local_file_syytem">Local File System</string>
+    <string name="init_base_directory_description">Base Directory for public local data</string>
     <string name="init_map_directory_description">Directory with offline maps</string>
-    <string name="init_gpx_exportdir">GPX Export Directory</string>
-    <string name="init_gpx_importdir">GPX Import Directory</string>
+    <string name="init_gpx_importexportdir">GPX Directory</string>
     <string name="init_dataDir">Select Geocache data directory</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
     <string name="init_maptrail">Show history track</string>
@@ -839,6 +842,49 @@
     <string name="init_sendToCgeo_register_fail">Registration failed.</string>
     <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2cgeo is down.</string>
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
+
+    <!-- Content Storage -->
+    <string name="contentstorage_grantaccess_dialog_title">Grant access for data storage</string>
+    <string name="contentstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store data like GPX files, backups and field notes. Latest with Android 11 the permission to use this folder needs to be explicitely granted by the user. Therefore c:geo from now on uses this new method to store your data.</p><p>In the following dialog, please select or create such a folder on your device. If you upgraded c:geo from a previous version, select the existing folder "cgeo" on root level of your device storage.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_title">Change Folder %s</string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_folderdata"><![CDATA[<p>Folder %s is currently set to \'%s\' and contains %d file(s) and %d subfolder(s).</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_defaultfolder"><![CDATA[<p>You may choose to use default folder \'%s\' or to pick a user-defined folder.</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_msg_html_moveorcopy"><![CDATA[<p>Please select whether to copy/move content on change:</p>]]></string>
+    <string name="contentstorage_selectfolder_dialog_choice_nocopy">Do not copy or move item(s)</string>
+    <string name="contentstorage_selectfolder_dialog_choice_copy">Copy items(s)</string>
+    <string name="contentstorage_selectfolder_dialog_choice_move">Move item(s)</string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_title">Folder %s: Copy/Move done</string>
+    <string name="contentstorage_selectfolder_dialog_copy_move_finished_msg_html"><![CDATA[<p>Copy/Move had result %s. %d file(s) and %d subdirectories were copied/moved.</p><p>Click \'ok\' finalize the directory change.</p>]]></string>
+    <string name="contentstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
+    <string name="contentstorage_folder_selection_failed">Selected folder not accessible, aborting selection. Folder is \'%s\'</string>
+    <string name="contentstorage_folder_selection_success">Folder set to \'%s\'</string>
+    <string name="contentstorage_file_selection_aborted">Aborting file selection</string>
+    <string name="contentstorage_file_selection_success">File selected: \'%s\'</string>
+    <string name="contentstorage_err_publicfolder_inaccessible_falling_back">Folder %s: \'%s\' is not accessible, falling back to \'%s\'</string>
+    <string name="contentstorage_err_read_failed">File \'%s\' could not be read, see logfile for details</string>
+    <string name="contentstorage_err_write_failed">File \'%s\' could not be written, see logfile for details</string>
+    <string name="contentstorage_err_create_failed">File \'%s\' in \'%s\' could not be created, see logfile for details</string>
+    <string name="contentstorage_err_delete_failed">File \'%s\' could not be deleted, see logfile for details</string>
+    <string name="contentstorage_err_list_failed">Files in Folder \'%s\' could not be listed, see logfile for details</string>
+    <string name="contentstorage_err_folder_access_failed">Folder \'%s\' could not be accessed, see logfile for details</string>
+    <string name="contentstorage_err_copy_failed">File \'%s\' could not be copied/moved to \'%s\' (move=%s), see logfile for details</string>
+
+    <!-- Persistable Folders -->
+    <string name="persistablefolder_usertype_userdefined">User-defined</string>
+    <string name="persistablefolder_usertype_default">Default</string>
+    <string name="persistablefolder_legacy">Legacy</string>
+    <string name="persistablefolder_pickfolder">Pick Folder</string>
+    <string name="persistablefolder_usedefault">Use Default</string>
+
+
+    <string name="persistablefolder_base">Base</string>
+    <string name="persistablefolder_offline_maps">Offline Maps</string>
+    <string name="persistablefolder_offline_maps_themes">Map Themes</string>
+    <string name="persistablefolder_gpx">GPX</string>
+    <string name="persistablefolder_backup">Backup</string>
+    <string name="persistablefolder_logfiles">Logfiles</string>
+    <string name="persistablefolder_fieldnotes">Field Notes</string>
+    <string name="persistablefolder_images">Log Images</string>
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

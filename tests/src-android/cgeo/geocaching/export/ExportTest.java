@@ -1,5 +1,6 @@
 package cgeo.geocaching.export;
 
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -7,16 +8,19 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.FileUtils;
 
-import java.io.File;
+import android.net.Uri;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ExportTest extends CGeoTestCase {
@@ -65,7 +69,7 @@ public class ExportTest extends CGeoTestCase {
 
         final List<Geocache> exportList = Collections.singletonList(cache);
         final GpxExportTester gpxExport = new GpxExportTester();
-        File result = null;
+        Uri result = null;
         try {
             result = gpxExport.testExportSync(exportList);
         } finally {
@@ -75,7 +79,8 @@ public class ExportTest extends CGeoTestCase {
         assertThat(result).isNotNull();
 
         // make sure we actually exported waypoints
-        final String gpx = org.apache.commons.io.FileUtils.readFileToString(result, (String) null);
+        final String gpx = IOUtils.toString(ContentStorage.get().openForRead(result), Charsets.toCharset((String) null));
+        //final String gpx = org.apache.commons.io.FileUtils.readFileToString(result, (String) null);
         assertThat(gpx).contains("<wpt");
         assertThat(gpx).contains(cache.getGeocode());
         if (cache.getUrl() != null) {
@@ -84,12 +89,13 @@ public class ExportTest extends CGeoTestCase {
             assertThat(gpx).doesNotContain("<url>");
         }
 
-        FileUtils.deleteIgnoringFailure(result);
+        ContentStorage.get().delete(result);
+        //FileUtils.deleteIgnoringFailure(result);
     }
 
     private static class GpxExportTester extends GpxExport {
 
-        public File testExportSync(final List<Geocache> caches) throws InterruptedException, ExecutionException {
+        public Uri testExportSync(final List<Geocache> caches) throws InterruptedException, ExecutionException {
             final ArrayList<String> geocodes = new ArrayList<>(caches.size());
             for (final Geocache cache : caches) {
                 geocodes.add(cache.getGeocode());

@@ -2,18 +2,18 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -28,11 +28,11 @@ public class GPXIndividualRouteImporter {
     private GPXIndividualRouteImporter() {
     }
 
-    public static void doImport(final Context context, final File file) {
+    public static void doImport(final Context context, final Uri uri) {
         final AtomicInteger size = new AtomicInteger(0);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
-                size.set(doInBackground(file));
+                size.set(doInBackground(uri));
             } catch (final Exception e) {
                 //
             }
@@ -42,14 +42,15 @@ public class GPXIndividualRouteImporter {
     }
 
     // returns the length of the parsed route / 0 on empty or error
-    private static int doInBackground(final File file) {
+    private static int doInBackground(final Uri uri) {
         BufferedInputStream stream = null;
         try {
-            stream = new BufferedInputStream(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
-            return 0;
-        }
-        try {
+            final InputStream is = ContentStorage.get().openForRead(uri);
+            if (is == null) {
+                return 0;
+            }
+            stream = new BufferedInputStream(is);
+
             GPXIndividualRouteParser parser = new GPXIndividualRouteParser("http://www.topografix.com/GPX/1/1", "1.1");
             Route route = null;
             try {

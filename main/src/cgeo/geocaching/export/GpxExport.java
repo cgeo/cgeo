@@ -5,17 +5,19 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.EnvironmentUtils;
-import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.net.Uri;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -24,17 +26,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 
@@ -66,11 +64,8 @@ public class GpxExport extends AbstractExport {
             // geocode as file name
             fileName = geocodes[0] + ".gpx";
         } else {
-            // date and time as file name
-            final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            fileName = "export_" + fileNameDateFormat.format(new Date()) + ".gpx";
+            fileName = FileNameCreator.GPX_EXPORT.createName();
         }
-        fileName = FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(), fileName)).getName();
     }
 
     private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
@@ -81,7 +76,7 @@ public class GpxExport extends AbstractExport {
         builder.setView(layout);
 
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), fileName));
+        text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), fileName));
 
         final CheckBox includeFoundStatus = layout.findViewById(R.id.include_found_status);
         includeFoundStatus.setChecked(Settings.getIncludeFoundStatus());
@@ -99,7 +94,7 @@ public class GpxExport extends AbstractExport {
         return Geocache.getGeocodes(caches).toArray(new String[caches.size()]);
     }
 
-    protected class ExportTask extends AsyncTaskWithProgress<String, File> {
+    protected class ExportTask extends AsyncTaskWithProgress<String, Uri> {
 
         /**
          * Instantiates and configures the task for exporting field notes.
@@ -111,50 +106,44 @@ public class GpxExport extends AbstractExport {
             super(activity, getProgressTitle());
         }
 
-        private File getExportFile() {
-            return FileUtils.getUniqueNamedFile(new File(LocalStorage.getGpxExportDirectory(), fileName));
-        }
-
         @Override
-        protected File doInBackgroundInternal(final String[] geocodes) {
-            // quick check for being able to write the GPX file
-            if (!EnvironmentUtils.isExternalStorageAvailable()) {
-                return null;
-            }
-
+        protected Uri doInBackgroundInternal(final String[] geocodes) {
             final List<String> allGeocodes = new ArrayList<>(Arrays.asList(geocodes));
 
             setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 
-            final File exportFile = getExportFile();
-            BufferedWriter writer = null;
-            try {
-                final File exportLocation = LocalStorage.getGpxExportDirectory();
-                FileUtils.mkdirs(exportLocation);
+            final Uri uri = ContentStorage.get().create(PersistableFolder.GPX, fileName);
+            if (uri == null) {
+                return null;
+            }
 
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(exportFile), StandardCharsets.UTF_8));
+            BufferedWriter writer = null;
+            try (OutputStream os = ContentStorage.get().openForWrite(uri)) {
+                if (os == null) {
+                    return null;
+                }
+
+                writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
                 new GpxSerializer().writeGPX(allGeocodes, writer, ExportTask.this::publishProgress);
             } catch (final IOException e) {
                 Log.e("GpxExport.ExportTask export", e);
                 // delete partial GPX file on error
-                if (exportFile.exists()) {
-                    FileUtils.deleteIgnoringFailure(exportFile);
-                }
+                ContentStorage.get().delete(uri);
 
                 return null;
             } finally {
                 IOUtils.closeQuietly(writer);
             }
 
-            return exportFile;
+            return uri;
         }
 
         @Override
-        protected void onPostExecuteInternal(final File exportFile) {
+        protected void onPostExecuteInternal(final Uri uri) {
             final Activity activityLocal = activity;
             if (activityLocal != null) {
-                if (exportFile != null) {
-                        ShareUtils.shareFileOrDismissDialog(activityLocal, exportFile, "application/xml", R.string.export, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                if (uri != null) {
+                        ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
                 } else {
                     ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
                 }
