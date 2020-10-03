@@ -6,8 +6,8 @@ import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.MapDownloadSelectorActivity;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
@@ -22,8 +22,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.DOWNLOAD_SERVICE;
-
-import java.io.File;
 
 public class MapDownloadUtils {
 
@@ -94,29 +92,23 @@ public class MapDownloadUtils {
     }
 
     public interface DirectoryWritable {
-        void run (String path, boolean isWritable);
+        void run (PublicLocalFolder folder, boolean isAvailable);
     }
 
     public static void checkMapDirectory(final Activity activity, final boolean beforeDownload, final DirectoryWritable callback) {
         PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
             @Override
             protected void execute() {
-                String mapDirectory = Settings.getMapFileDirectory();
-                if (mapDirectory == null) {
-                    final File file = LocalStorage.getDefaultMapDirectory();
-                    FileUtils.mkdirs(file);
-                    mapDirectory = file.getPath();
-                    Settings.setMapFileDirectory(mapDirectory);
-                }
-                final String mapFileDirectory = Settings.getMapFileDirectory();
-                final boolean canWrite = new File(mapFileDirectory).canWrite();
-                if (canWrite) {
-                    callback.run(mapFileDirectory, true);
+                final PublicLocalFolder folder = PublicLocalFolder.OFFLINE_MAPS;
+                final boolean mapDirIsReady = PublicLocalStorage.get().checkAndAdjustAvailability(folder);
+
+                if (mapDirIsReady) {
+                    callback.run(folder, true);
                 } else if (beforeDownload) {
-                    Dialogs.confirm(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), activity.getString(R.string.button_continue),
-                            (dialog, which) -> callback.run(mapFileDirectory, true), dialog -> callback.run(mapFileDirectory, false));
+                    Dialogs.confirm(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(R.string.button_continue),
+                            (dialog, which) -> callback.run(folder, true), dialog -> callback.run(folder, false));
                 } else {
-                    Dialogs.message(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(mapFileDirectory, false));
+                    Dialogs.message(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), folder), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(folder, false));
                 }
             }
         });

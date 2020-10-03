@@ -14,10 +14,14 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Build.VERSION;
@@ -34,6 +38,7 @@ import java.util.Locale;
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public final class SystemInformation {
 
@@ -76,12 +81,14 @@ public final class SystemInformation {
         appendDirectory(body, "\nSystem internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
         appendDirectory(body, "\nUser storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());
+        appendPublicFolders(body);
+        appendPersistedUriPermission(body, context);
         appendDatabase(body);
         body
                 .append("\nLast backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
                 .append("\nGPX import path: ").append(Settings.getGpxImportDir())
                 .append("\nGPX export path: ").append(Settings.getGpxExportDir())
-                .append("\nOffline maps path: ").append(Settings.getMapFileDirectory())
+                .append("\nOffline maps path: ").append(PublicLocalFolder.OFFLINE_MAPS)
                 .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
                 .append("\nLive map mode: ").append(Settings.isLiveMap())
                 .append("\nGlobal filter: ").append(Settings.getCacheType().pattern)
@@ -117,6 +124,26 @@ public final class SystemInformation {
         } catch (final IllegalArgumentException ignored) {
             // thrown if the directory isn't pointing to an external storage
             body.append(" internal");
+        }
+    }
+
+    private static void appendPublicFolders(@NonNull final StringBuilder body) {
+        body.append("\nPublic Folders: #").append(PublicLocalFolder.values().length);
+        for (PublicLocalFolder folder : PublicLocalFolder.values()) {
+            final boolean isAvailable = PublicLocalStorage.get().checkAndAdjustAvailability(folder);
+            final ImmutablePair<Integer, Integer> files = FolderUtils.get().getFolderInfo(folder.getFolder());
+            final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
+            body.append("\n- ").append(folder.toString())
+                .append(" (Available:").append(isAvailable).append(", Fiies: ").append(files.left).append(", subdirs:").append(files.right)
+                .append(" free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on devivce: ").append(freeSpace.right).append(")");
+        }
+    }
+
+    private static void appendPersistedUriPermission(@NonNull final StringBuilder body, @NonNull  final Context context) {
+        final List<UriPermission> uriPerms = context.getContentResolver().getPersistedUriPermissions();
+        body.append("\nPersisted Uri Permissions: #").append(uriPerms.size());
+        for (UriPermission uriPerm : uriPerms) {
+            body.append("\n- ").append(UriUtils.uriPermissionToString(uriPerm));
         }
     }
 
