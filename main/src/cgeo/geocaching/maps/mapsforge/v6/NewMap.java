@@ -326,6 +326,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
+
         Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
     }
 

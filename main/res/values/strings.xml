@@ -687,6 +687,8 @@
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="settings_title_scale_map_text">Scale Map Text</string>
     <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
+    <string name="init_local_file_syytem">Local File System</string>
+    <string name="init_base_directory_description">Base Directory for public local data</string>
     <string name="init_map_directory_description">Directory with offline maps</string>
     <string name="init_gpx_exportdir">GPX Export Directory</string>
     <string name="init_gpx_importdir">GPX Import Directory</string>
@@ -830,6 +832,29 @@
     <string name="init_sendToCgeo_register_fail">Registration failed.</string>
     <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2cgeo is down.</string>
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2cgeo expired. Please register in settings.</string>
+
+    <!-- Public Local Storage -->
+    <string name="publiclocalstorage_userdefined">User-Defined</string>
+    <string name="publiclocalstorage_default">Default</string>
+    <string name="publiclocalstorage_grantaccess_dialog_title">Please grant access to folder</string>
+    <string name="publiclocalstorage_grantaccess_dialog_msg_basedir_html"><![CDATA[<p>c:geo needs a local folder to store its public data. Starting with Android 11 / SDK30, permissions to use this folder needs to be explicitely granted by end user.</p><p>Please select or create such a folder on your device (click ok to start). If you upgraded c:geo from a previous version, we advise you to select folder "cgeo" on your device root.</p><p>Until then c:geo tries to use a deprecated API to write files to \'%s\'</p>]]></string>
+    <string name="publiclocalstorage_selectfolder_dialog_user_or_default_title">User-defined or default?</string>
+    <string name="publiclocalstorage_selectfolder_dialog_user_or_default_msg">Do you want to use the default location \'%s\' or select a user-defined folder?</string>
+    <string name="publiclocalstorage_folder_selection_aborted">Aborting folder selection, folder is \'%s\'</string>
+    <string name="publiclocalstorage_folder_selection_failed">Selected folder not accessible, aborting selection. Folder is \'%s\'</string>
+    <string name="publiclocalstorage_folder_selection_success">Folder set to \'%s\'</string>
+    <string name="publiclocalstorage_file_selection_aborted">Aborting file selection</string>
+    <string name="publiclocalstorage_file_selection_success">File selected: \'%s\'</string>
+    <string name="publiclocalstorage_err_folders_inaccessable_abort">Folders \'%s\' and default \'%s\' are both inaccessible, aborting access</string>
+    <string name="publiclocalstorage_err_userdefinedfolder_inaccessable_usedefault">Userdefined folder \'%s\' inaccessible, using default \'%s\'</string>
+    <string name="publiclocalstorage_err_folder_not_a_directory_abort">Folder \'%s\' inaccessible or not a directory, aborting access</string>
+    <string name="publiclocalstorage_err_subfolder_not_a_directory_usebase">\'%s\' in folder \'%s\' is not a folder, using base folder instead"</string>
+    <string name="publiclocalstorage_err_subfolder_creation_problem_usebase">Subfolder \'%s\' in folder \'%s\' could not be created, using base folder instead</string>
+    <string name="publiclocalstorage_err_reading_file_does_not_exist">File \'%s\' could not be read, it doesn\'t seem to exist</string>
+    <string name="publiclocalstorage_err_reading_file_no_permission">File \'%s\' could not be read, insufficient permissions</string>
+    <string name="publiclocalstorage_err_writing_file_Io_problem">File \'%s\' could not be written, an IO problem occured</string>
+    <string name="publiclocalstorage_err_writing_file_no_permission">File \'%s\' could not be written, insufficient permissions</string>
+
 
     <!-- auth generic -->
     <string name="auth_authorize">Authorize c:geo</string>

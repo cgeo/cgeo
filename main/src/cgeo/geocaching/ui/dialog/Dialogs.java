@@ -330,7 +330,7 @@ public final class Dialogs {
         return builder;
     }
 
-    private static void makeLinksClickable(final AlertDialog dialog) {
+    public static void makeLinksClickable(final AlertDialog dialog) {
         try {
             // Make the URLs in TextView clickable. Must be called after show()
             // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
