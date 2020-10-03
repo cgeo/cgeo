@@ -273,18 +273,6 @@ public final class LocalStorage {
     }
 
     @NonNull
-    public static String getOrCreateMapDirectory() {
-        String mapDirectory = Settings.getMapFileDirectory();
-        if (mapDirectory == null) {
-            final File file = new File(getExternalPublicCgeoDirectory(), MAP_DIR_NAME);
-            FileUtils.mkdirs(file);
-            mapDirectory = file.getPath();
-            Settings.setMapFileDirectory(mapDirectory);
-        }
-        return mapDirectory;
-    }
-
-    @NonNull
     public static File getDefaultGpxDirectory() {
         return new File(getExternalPublicCgeoDirectory(), GPX_DIR_NAME);
     }
