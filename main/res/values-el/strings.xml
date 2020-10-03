@@ -265,6 +265,7 @@
     <string name="err_request_popup_info">το c:geo απέτυχε να ανακτήσει τις πληροφορίες της κρύπτης.</string>
     <string name="warn_log_load_additional_data">Το c:geo απέτυχε να φορτώσει πρόσθετα δεδομένα (ανιχνεύσιμα/αγαπημένα σημεία) για την καταγραφή.</string>
     <string name="more_information">Περισσότερες πληροφορίες</string>
+    <string name="remind_later">Υπενθύμιση αργότερα</string>
     <string name="undo">Αναίρεση</string>
     <string name="dont_show_again">Να μην εμφανιστεί ξανά</string>
     <string name="warn_gm_not_available">Το Google Maps δεν είναι διαθέσιμο.</string>
@@ -814,7 +815,10 @@
     <string name="cache_offline">Εκτός σύνδεσης</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
     <string name="cache_offline_drop">Διαγραφή</string>
+    <string name="cache_delete_userdefined_waypoints">Κατάργηση σημείων που ορίσθηκαν από τον χρήστη</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
     <string name="cache_delete_userdefined_waypoints_note">Σημείωση: Έχετε ενεργοποιήμενη την επιλογή \"σημεία ενδιαφέροντος από τις σημειωσεις\". Εάν το c:geo αναγνωρίσει συντεταγμένες στις προσωπικές σημειώσεις, θα δημιουργήσει αυτόματα σημεία ενδιαφέροντος από αυτές. Μπορείτε να απενεργοποιήσετε την επιλογή αυτή από την επεξεργασία της προσωπικής σημείωσης.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Διεγράφησαν σημεία διαδρομης του χρήστη</string>
     <string name="cache_offline_store">Αποθήκευση</string>
     <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
@@ -1734,8 +1738,10 @@
     <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n 
 Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί η λήψη, το ληφθέν αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης για το c: geo. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
     <string name="downloadmap_choose">Επιλέξτε χάρτη</string>
+    <string name="downloadmap_filename">Γίνεται λήψη του %s</string>
     <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου χάρτη, ο διαχειριστής λήψης συστήματος δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
+    <string name="downloadmap_target_not_writable">Η θέση προορισμού \"%s\" δεν είναι εγγράψιμη - το μεταφορτωμένο αρχείο χάρτη θα αποθηκευτεί στον φάκελο λήψεων του συστήματος και πρέπει χειροκίνητα να μεταφερθεί στο φάκελο αποθήκευσης των χαρτών.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
