@@ -115,6 +115,19 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertGc31j2hWaypoints(cache);
     }
 
+    public void testGc31j2hWptsEmptyCoord() throws IOException, ParserException {
+        removeCacheCompletely("GC31J2H");
+        final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts_empty_coord);
+        assertThat(caches).hasSize(1);
+        final Geocache cache = caches.get(0);
+        assertGc31j2h(cache);
+
+        final List<Waypoint> waypointList = cache.getWaypoints();
+        assertThat(waypointList).isNotNull();
+        assertThat(waypointList).hasSize(2);
+        assertThat(waypointList.get(1).getCoords()).isNull();
+    }
+
     private static void checkWaypointType(final Collection<Geocache> caches, final String geocode, final int wpIndex, final WaypointType waypointType) {
         for (final Geocache cache : caches) {
             if (cache.getGeocode().equals(geocode)) {

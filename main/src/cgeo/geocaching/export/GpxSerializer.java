@@ -262,7 +262,7 @@ public final class GpxSerializer {
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
         } else {
             // coords are required information
-            // "xsi:nil" is not supported by schema, hence use 0/0 as GSAK does.
+            // "xsi:nil" is not supported by schema, hence use 0/0 as OKAPI does.
             gpx.attribute("", "lat", Double.toString(0.0));
             gpx.attribute("", "lon", Double.toString(0.0));
         }

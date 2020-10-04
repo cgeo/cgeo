@@ -791,7 +791,7 @@ abstract class GPXParser extends FileParser {
             cgeoUserDefined.setEndTextElementListener(userDefined -> wptUserDefined = Boolean.parseBoolean(userDefined.trim()));
 
             final Element cgeoEmptyCoords = cacheParent.getChild(cgeoNamespace, "originalCoordsEmpty");
-            cgeoEmptyCoords.setEndTextElementListener(emptyCoords -> wptEmptyCoordinates = Boolean.parseBoolean(emptyCoords.trim()));
+            cgeoEmptyCoords.setEndTextElementListener(originalCoordsEmpty -> wptEmptyCoordinates = Boolean.parseBoolean(originalCoordsEmpty.trim()));
         }
     }
 
