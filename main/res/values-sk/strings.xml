@@ -89,9 +89,11 @@
     <string name="log_tb_archived">Archivované</string>
     <string name="log_save">Uložiť offline</string>
     <string name="log_saving">Ukladanie logu…</string>
+    <string name="log_saving_and_uploading">Pridáva sa log a obrázky…</string>
     <string name="log_posting_log">Odosielanie logu…</string>
     <string name="log_posting_twitter">Odosielanie tweetu…</string>
     <string name="log_posting_vote">Pridáva sa hlas keške…</string>
+    <string name="log_posting_image">Pridávajú sa obrázky…</string>
     <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistiť</string>
     <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
@@ -116,9 +118,11 @@
     <string name="log_yesterday">Včera</string>
     <string name="log_smilies">Smajlíci</string>
     <string name="log_image">Obrázok</string>
+    <string name="log_images">Obrázky</string>
     <string name="log_image_attach">Pripojiť obrázok</string>
     <string name="log_image_stored">Existujúci</string>
     <string name="log_image_camera">Nový</string>
+    <string name="log_image_delete">Odstrániť</string>
     <string name="log_image_caption">Titulok</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Mierka</string>
@@ -143,6 +147,8 @@
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_titleprefix">Obrázok</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
     <string name="translate_to_english">Preložiť do angličtiny</string>
@@ -150,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
+    <string name="err_captcha">Potrebné overenie Captcha. Návod nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Najčastejších otázkach</a>.</string>
     <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_su">Zlyhalo pripojenie k serveru Geocaching.su. Webová stránka je možno nefunkčná, prípadne nefunguje internetové pripojenie.</string>
@@ -250,6 +257,7 @@
     <string name="info_stored_image">Nový obrázok uložený do:</string>
     <string name="info_cache_saved">Skrýša bola uložená v zariadení</string>
     <string name="warn_calculator_state_save">Nezabudnite uložiť bod trasy, ak chcete zachovať stav kalkulačky.</string>
+    <string name="feature_info_offline_counter">Máte nejaké kešky s logom uloženým offline, ktoré ešte asi neboli zalogované online. Pre vašu informáciu sa počet týchto logov zobrazuje ako \"+ x\" za počtom nájdených kešiek naspodku hlavnej stránky c:geo. \n\nOkrem toho sa tento počet logov \"x\" pridáva do šablóny \"POČET\", ktorú môžete používať v podpise logu. \n\nAk nechcete toto rozšírenie počítadla, môžete ho deaktivovať v ponuke \"Nastavenie\" &gt; \"Logovanie\" a(alebo použiť namiesto toho šablónu \"POČET (bez offline logov)\". \n\nAk chcete ľahko nájsť zostávajúce offline logy, prejdite do zoznamu \"História\" a filtrujte na \"S osobnými údajmi\" &gt; \"S offline logom\".</string>
     <string name="err_trackable_log_not_anonymous">V c:geo nie je možné zalogovať %1$s anonymne. Chcete otvoriť nastavenia a vyplniť prihlasovacie údaje pre %2$s?</string>
     <string name="err_trackable_no_preference_activity">Prepáčte, c:geo nedokáže nájsť príslušnú obrazovku s nastaveniami.</string>
     <string name="confirm_unsaved_changes_title">Neuložené zmeny</string>
@@ -257,6 +265,9 @@
     <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
     <string name="warn_log_load_additional_data">Aplikácii c:geo sa nepodarilo načítať ďalšie údaje (trasovateľné predmety/favoritné body) na logovanie.</string>
     <string name="more_information">Ďalšie informácie</string>
+    <string name="remind_later">Pripomenúť mi neskôr</string>
+    <string name="undo">Späť</string>
+    <string name="dont_show_again">Nabudúce nezobrazovať</string>
     <string name="warn_gm_not_available">Mapy Google sú nedostupné.</string>
     <string name="switch_to_mf">Vaša služba Google Play je zastaraná. Chcete namiesto toho prepnúť na poskytovateľa mapy Mapsforge?</string>
     <string name="switched_to_mf">Predvolená mapa zmenená na poskytovateľa Mapsforge. Teraz mapu reštartujte.</string>
@@ -532,6 +543,7 @@
     <string name="init_signature_template_datetime">Dátum a čas</string>
     <string name="init_signature_template_user">Používateľ</string>
     <string name="init_signature_template_number">Číslo nálezu</string>
+    <string name="init_signature_template_number_legacy">Počet (ignorovať offline logy)</string>
     <string name="init_signature_template_owner">Vlastník</string>
     <string name="init_signature_template_name">Meno</string>
     <string name="init_signature_template_difficulty">Obtiažnosť</string>
@@ -592,6 +604,7 @@
     <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
     <string name="backup_confirm_overwrite">Naozaj chceš prepísať existujúcu zálohu z %s?</string>
+    <string name="restore_confirm_overwrite">Chcete prepísať %s na svojom zariadení zálohou?</string>
     <string name="init_restore_success">Úspešne obnovené.</string>
     <string name="init_restore_failed_dbrecreated">Nepodarilo sa obnoviť: súbor so zálohou je poškodený, databáza sa nedá znova vytvoriť.</string>
     <string name="init_restore_failed">Obnova zlyhala.</string>
@@ -599,6 +612,7 @@
     <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
     <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
+    <string name="init_restore_version_error">Neočakávaný formát – databáza sa nedá obnoviť. \n\nOčakávaná verzia je %1$d,\nzáloha má verziu %2$d</string>
     <string name="settings_title_backup">Zálohovanie/Obnovenie</string>
     <string name="settings_summary_backup">Robí zálohu a obnovuje údaje o keškách/bodoch trasy a nastavenia programu.</string>
     <string name="init_backup_settings_backup_full_confirm">Chcete uložiť dôverné údaje o konte? Iné aplikácie ich môžu prečítať.</string>
@@ -800,6 +814,10 @@
     <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Obnoviť</string>
     <string name="cache_offline_drop">Odstrániť</string>
+    <string name="cache_delete_userdefined_waypoints">Odstrániť vlastné body trasy</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Odstrániť všetky vlastné body trasy tejto kešky?\n\nBody trasy budú ihneď vymazané, nie je možné vrátiť do späť.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povolené \"body trasy z poznámky\". Ak máte v osobnej poznámke súradnice rozpoznané programom c:geo, body trasy sa automaticky znova vytvoria. Môžete to zakázať v dialógovom okne úpravy osobnej poznámky.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Vlastné body trasy odstránené</string>
     <string name="cache_offline_store">Uložiť</string>
     <string name="cache_offline_stored">Uložená v zariadení</string>
     <string name="cache_offline_not_ready">Nie je pripravená\nna použitie offline</string>
@@ -1001,6 +1019,8 @@
     <string name="cache_listed_on">Uvedené na %s</string>
     <string name="cache_whereyougo_start">Otvorte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_whereyougo_install">Nainštalujte WhereYouGo a stiahnite si a spustite cartridge</string>
+    <string name="cache_chirpwolf_start">Otvorte Chirp Wolf a prečítajte údaje chirpu tejto kešky</string>
+    <string name="cache_chirpwolf_install">Nainštalujte Chirp Wolf a budete môcť čítať údaje chirpu</string>
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="internal_cache_default_name">Používateľom definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je používateľom definovaná keška</string>
@@ -1164,6 +1184,7 @@
     <string name="search_tb">Trasovateľné predmety</string>
     <string name="search_tb_hint">Identifikácia trasovateľného predmetu</string>
     <string name="search_tb_button">Hľadať trasov. predmety</string>
+    <string name="search_destination">Otvoriť cieľ v c:geo</string>
     <string name="search_address_started">Vyhľadávanie miest</string>
     <string name="search_address_result">Nájdené miesta</string>
     <string name="search_own_caches">Hľadať v mojich skrýšach</string>
@@ -1215,10 +1236,18 @@
     <string name="navigation">Navigácia</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Použité iba GPS</string>
+    <string name="use_compass">Všetky snímače využité</string>
     <string name="destination_select">Vyberte cieľ</string>
     <string name="navigation_direct_navigation">Priama navigácia</string>
     <string name="osmand_marker_cgeo">Značka z c:geo</string>
+    <string name="device_heading_label">Zariadenie:</string>
+    <string name="device_orientation">Orientácia</string>
+    <string name="device_orientation_label">Orientácia:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Neznáma</string>
+    <string name="do_auto">Automaticky</string>
+    <string name="do_flat">Ploché</string>
+    <string name="do_upright">Vzpriamené</string>
     <!-- license -->
     <string name="license">Licencia</string>
     <string name="license_show">Zobraziť licenciu</string>
@@ -1241,6 +1270,7 @@
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
     <string name="helper_brouter_title">Offline navigácia BRouter</string>
     <string name="helper_brouter_description">BRouter poskytuje offline navigáciu. Ak je nainštalovaný a má stiahnuté potrebné súbory, c:geo automaticky zobrazí cestu ku skrýši na internej mape.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf umožňuje čítať údaje z chirp tagov ANT+/Garmin, ktoré sú potrebné pre kešky ANT+/chirp.</string>
     <!-- export -->
     <string name="export">Export</string>
     <string name="export_progress">Export: %1$s</string>
@@ -1496,6 +1526,14 @@
     <string name="attribute_survey_marker_no">Nie v blízkosti geodetického značenia</string>
     <string name="attribute_offset_cache_yes">Offset keška</string>
     <string name="attribute_offset_cache_no">Nie je offset cache</string>
+    <string name="attribute_bonuscache_yes">Bonusová keška</string>
+    <string name="attribute_bonuscache_no">Nie bonusová keška</string>
+    <string name="attribute_powertrail_yes">Časť powertrailu</string>
+    <string name="attribute_powertrail_no">Nie časť powetrailu</string>
+    <string name="attribute_challengecache_yes">Challenge keška</string>
+    <string name="attribute_challengecache_no">Nie challenge keška</string>
+    <string name="attribute_hqsolutionchecker_yes">Overovač na geocaching.com povolený</string>
+    <string name="attribute_hqsolutionchecker_no">Overovač na geocaching.com zakázaný</string>
     <!-- next things -->
     <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1743,12 +1781,15 @@
     <string name="downloadmap_title">Prevziať offline mapu</string>
     <string name="downloadmap_info">Dôjde k presmerovaniu na stránku umožňujúcu stiahnuť základné offline mapy (bez podpory tém).\n\nVyberte súbor .map podľa vášho regiónu a kliknite naň pre jeho stiahnutie.\n\nPo dokončení sťahovania kliknite na stiahnutý súbor pre jeho nastavenie ako aktuálnej mapy v c:geo</string>
     <string name="downloadmap_choose">Zvoľte mapu</string>
+    <string name="downloadmap_filename">Preberá sa %s</string>
     <string name="downloadmanager_not_available">Súbor s mapou sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
+    <string name="downloadmap_target_not_writable">Do cieľového miesta „%s“ sa nedá zapisovať – prevzatý mapový súbor bude uložený do systémového priečinka prevzatých súborov a treba ho ručne presunúť do priečinka máp.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">História trasy vymazaná</string>
     <string name="map_trail_show">Zobraziť históriu trasy</string>
+    <string name="map_trail_hide">Ukryť históriu trasy</string>
     <!-- history track export -->
     <string name="trailhistory">História trasy</string>
     <string name="export_trailhistory_title">Exportovať históriu trasy</string>
