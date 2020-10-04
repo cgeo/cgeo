@@ -16,6 +16,7 @@
 <li>Change: Disable cache detail share menu for user-defined caches</li>
 <li>New: Support [TYPE] in signature</li>
 <li>Fix: Hint is not displayed on compass view, when launched directly from map</li>
+<li>New: Image upload on logging: always remove EXIF data</li>
 </ul>
 
 <h4>Cache lists:</h4>
@@ -25,10 +26,13 @@
 
 <h4>Other:</h4>
 <ul>
+<li>GPX export of position history: added timestamps</li>
 <li>Change: Backup / restore caches and settings in one step</li>
 <li>New: Preserve multiple backups of caches and settings</li>
 <li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
-<li>Change: Throw a runtime error if db can neither opened nor created</li>
+<li>Change: Throw a runtime error if db can neither be opened nor created</li>
+<li>New: Automatically convert search input to upper case</li>
+<li>Change: Updated widget icons</li>
 </ul>
 </div>]]></Data>
   </string>
