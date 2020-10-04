@@ -11,7 +11,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <ul>
 <li>Change: Show list markers also on waypoints</li>
 <li>Fix: Zoom level difference between Google Maps and OpenStreetMap maps</li>
-<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and settings - map)</li>
+<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and Settings - Map)</li>
 <li>New: Open local .map files in c:geo by tapping on them</li>
 <li>New: Colorpicker for map lines offers \"default\" button</li>
 <li>New: OpenstreetMap offline maps support \"default\" language</li>
