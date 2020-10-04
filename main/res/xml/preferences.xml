@@ -1139,6 +1139,7 @@
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_advanced"
+            android:key="@string/pref_fakekey_advanced_backup_preferences"
             android:layout="@layout/preference_category">
             <CheckBoxPreference
                 android:defaultValue="false"

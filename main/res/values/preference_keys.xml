@@ -126,6 +126,7 @@
     <string translatable="false" name="pref_fakekey_preference_backupsettings_light">fakekey_preference_backupsettings_light</string>
     <string translatable="false" name="pref_fakekey_preference_backupsettings_full">fakekey_preference_backupsettings_full</string>
     <string translatable="false" name="pref_fakekey_preference_restoresettings">fakekey_preference_restoresettings</string>
+    <string translatable="false" name="pref_fakekey_advanced_backup_preferences">fakekey_advanced_backup_preferences</string>
     <string translatable="false" name="pref_fakekey_preference_restore">fakekey_preference_restore</string>
     <string translatable="false" name="pref_backups_backup_history">backups_backup_history</string>
     <string translatable="false" name="pref_backup_caches">backup_caches_enabled</string>

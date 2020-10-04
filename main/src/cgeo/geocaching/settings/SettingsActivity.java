@@ -486,6 +486,15 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         });
 
 
+        // TODO: If statement should be removed when advanced settings are good enough for our normal users
+        if (!Settings.allowMultipleBackups()) {
+            try {
+                ((PreferenceScreen) getPreference(R.string.preference_screen_backup)).removePreference(getPreference(R.string.pref_fakekey_advanced_backup_preferences));
+            } catch (Exception e) {
+                Log.e("Hiding backup history option not possible: ", e); // better safe than sorry  ;-)
+            }
+        }
+
     }
 
     private void backupButtonsEnabler(final Preference backup, final CheckBoxPreference loginData) {
