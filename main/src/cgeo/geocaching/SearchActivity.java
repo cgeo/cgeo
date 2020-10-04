@@ -24,6 +24,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
@@ -198,6 +199,9 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         setSearchAction(finderNameEditText, buttonSearchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
         setSearchAction(ownerNameEditText, buttonSearchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
         setSearchAction(trackableEditText, buttonSearchTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
+
+        geocodeEditText.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        trackableEditText.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
