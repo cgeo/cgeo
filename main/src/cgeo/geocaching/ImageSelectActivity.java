@@ -268,7 +268,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                 IOUtils.closeQuietly(input);
                 IOUtils.closeQuietly(output);
             }
-        } else {
+        } else if (requestCode == SELECT_STORED_IMAGE) {
             // Image capture failed, advise user
             showFailure();
             return;
