@@ -124,10 +124,9 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
         final View.OnClickListener logContextMenuClickListener = v -> {
-            final String dateStr = Formatter.formatShortDateVerbally(log.date);
             final String logIdPlusSpace = StringUtils.isBlank(serviceSpecificLogId) ? "" : (serviceSpecificLogId + " ");
             final String author = StringEscapeUtils.unescapeHtml4(log.author);
-            final String title = activity.getString(R.string.cache_log_menu_title, logIdPlusSpace, author, dateStr);
+            final String title = activity.getString(R.string.cache_log_menu_title, logIdPlusSpace, author);
 
             final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity)
                     .setTitle(title)
