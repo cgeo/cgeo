@@ -549,6 +549,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Log tekst</string>
     <string name="init_signature_template_size">Grootte</string>
+    <string name="init_signature_template_type">Type</string>
     <string name="init_ratingwanted">GCvote.com waardering</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
