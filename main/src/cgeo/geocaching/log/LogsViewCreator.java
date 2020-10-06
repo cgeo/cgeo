@@ -88,8 +88,6 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
         holder.type.setText(log.logType.getL10n());
 
-        final String serviceSpecificLogId = getServiceSpecificLogId(log);
-
         holder.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
         fillCountOrLocation(holder, log);
@@ -123,7 +121,15 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         holder.author.setOnClickListener(createUserActionsListener(log));
         holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
 
-        final View.OnClickListener logContextMenuClickListener = v -> {
+        final View.OnClickListener logContextMenuClickListener = createOnLogClickListener(holder, log);
+
+        holder.text.setOnClickListener(logContextMenuClickListener);
+        holder.detailBox.setOnClickListener(logContextMenuClickListener);
+    }
+
+    protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
+        final String serviceSpecificLogId = getServiceSpecificLogId(log);
+        return v -> {
             final String logIdPlusSpace = StringUtils.isBlank(serviceSpecificLogId) ? "" : (serviceSpecificLogId + " ");
             final String author = StringEscapeUtils.unescapeHtml4(log.author);
             final String title = activity.getString(R.string.cache_log_menu_title, logIdPlusSpace, author);
@@ -148,8 +154,6 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             extendContextMenu(ctxMenu, log).show();
         };
 
-        holder.text.setOnClickListener(logContextMenuClickListener);
-        holder.detailBox.setOnClickListener(logContextMenuClickListener);
     }
 
     /** for subclasses to overwrite and add own entries */
