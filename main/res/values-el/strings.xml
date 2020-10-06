@@ -549,6 +549,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Αρχείο καταγραφής κειμένου</string>
     <string name="init_signature_template_size">Μέγεθος</string>
+    <string name="init_signature_template_type">Τύπος</string>
     <string name="init_ratingwanted">Βαθμολογία GCvote</string>
     <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
@@ -964,7 +965,6 @@
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
     <string name="cache_log_menu_decrypt">Αποκρυπτογράφιση/Κρυπτογράφιση</string>
-    <string name="cache_log_menu_title">Καταγραφή %s από %s</string>
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
