@@ -84,7 +84,7 @@ public final class GCConstants {
 
     // Patterns for parsing trackables
 
-    static final Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" title=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
+    static final Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" aria-labelledby=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile(Pattern.quote("CoordInfoCode\">") + "(TB[0-9A-Z&&[^ILOSU]]+)<");
 
     // multiple error codes, depending on the search term for the trackable code
