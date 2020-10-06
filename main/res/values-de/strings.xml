@@ -964,7 +964,7 @@
     <string name="cache_menu_challenge_checker">Suche Challenge-Checker</string>
     <string name="cache_menu_ignore">Cache ignorieren</string>
     <string name="cache_log_menu_decrypt">Ver- / Entschlüsseln</string>
-    <string name="cache_log_menu_title">Log %s von %s</string>
+    <string name="cache_log_menu_title">Log %1$s von %2$s</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
