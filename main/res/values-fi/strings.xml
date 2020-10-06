@@ -549,6 +549,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Lokiteksti</string>
     <string name="init_signature_template_size">Koko</string>
+    <string name="init_signature_template_type">Tyyppi</string>
     <string name="init_ratingwanted">GCVote-arvostelu</string>
     <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
     <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
@@ -964,7 +965,6 @@
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
     <string name="cache_menu_ignore">Ohita kätkö</string>
     <string name="cache_log_menu_decrypt">Pura salaus/Salaa</string>
-    <string name="cache_log_menu_title">Loki %s / %s</string>
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
