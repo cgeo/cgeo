@@ -1667,6 +1667,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
+    <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
 
     <!-- status (used via string based resource loading) -->

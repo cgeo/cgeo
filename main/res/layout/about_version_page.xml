@@ -316,6 +316,34 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/github_title"
+                    android:textColor="?text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/github"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:linksClickable="false"
+                    android:text="@string/github_link"
+                    android:textColor="?text_color"
+                    android:textColorLink="?text_color_link"
+                    android:textSize="14sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/market_title"
                     android:textColor="?text_color"
                     android:textSize="14sp" />

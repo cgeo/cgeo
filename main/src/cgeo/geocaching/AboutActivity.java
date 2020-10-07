@@ -238,6 +238,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @BindView(R.id.nutshellmanual) protected TextView nutshellmanual;
         @BindView(R.id.market) protected TextView market;
         @BindView(R.id.faq) protected TextView faq;
+        @BindView(R.id.github) protected TextView github;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -257,6 +258,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             setClickListener(twitter, "https://twitter.com/android_gc");
             setClickListener(nutshellmanual, "https://manual.cgeo.org/");
             setClickListener(faq, "https://faq.cgeo.org/");
+            setClickListener(github, "https://github.com/cgeo/cgeo/issues");
             market.setOnClickListener(v -> ProcessUtils.openMarket(AboutActivity.this, getPackageName()));
             return view;
         }
