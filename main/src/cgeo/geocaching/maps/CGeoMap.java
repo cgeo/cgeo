@@ -103,6 +103,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -908,10 +909,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         manualRoute.reloadRoute(overlayPositionAndScale);
         if (null != tracks) {
-            AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
-                tracks.calculateNavigationRoute();
-                ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
-            }, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
+            try {
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
+                    tracks.calculateNavigationRoute();
+                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
+                }, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
+            } catch (RejectedExecutionException e) {
+                Log.e("CGeoMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
+            }
         }
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
     }

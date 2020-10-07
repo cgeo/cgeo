@@ -105,6 +105,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.RejectedExecutionException;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -507,10 +508,14 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         manualRoute.reloadRoute(routeLayer);
         if (null != tracks) {
-            AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
-                tracks.calculateNavigationRoute();
-                trackLayer.updateRoute(tracks);
-            }, () -> trackLayer.requestRedraw());
+            try {
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
+                    tracks.calculateNavigationRoute();
+                    trackLayer.updateRoute(tracks);
+                }, () -> trackLayer.requestRedraw());
+            } catch (RejectedExecutionException e) {
+                Log.e("NewMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
+            }
         }
         navigationLayer.requestRedraw();
     }
