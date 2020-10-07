@@ -359,7 +359,7 @@ public class GCLogin extends AbstractLogin {
      */
     public String getAvatarUrl() {
         try {
-            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/my/")));
+            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/dashboard")));
             final String profile = TextUtils.replaceWhitespace(responseData);
 
             setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));
