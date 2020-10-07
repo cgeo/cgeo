@@ -289,10 +289,6 @@ public class GCLogin extends AbstractLogin {
         }
         assert page != null;
 
-        if (TextUtils.matches(page, GCConstants.PATTERN_MAP_LOGGED_IN)) {
-            return true;
-        }
-
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
