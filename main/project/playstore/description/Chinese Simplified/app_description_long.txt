@@ -1,30 +1,30 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away. 
+c:geo是geocaching.com的一个非官方客户端，它不仅开源、全能、随时可用，还支持其它geocaching平台（例如Opencaching）。 它不需要依赖web浏览器或导出记录—只需要安装并启动它即可。 
 
-Main features:
-- View caches on a Live Map 
-- Use Google Maps or OpenStreetMaps
-- Search for caches by various criteria 
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files 
-- Full support for trackables
-- Offline caching functions including offline maps
+主要功能：
+- 在实时地图上查看藏点 
+- 支持Google Maps或OpenStreetMaps
+- 使用各种条件搜索藏点 
+- 在线或离线记录你找到的藏点
+- 将藏点信息保存到设备上
+- 创建并管理路径点
+- 使用指南针、地图或其它应用进行导航
+- 导入/导出 GPX 文件 
+- 对可跟踪物的完全支持
+- 包括离线地图在内的离线寻宝功能
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geo易用且强大，具有很多额外的功能。 只需要一个geocaching.com或其它geocaching平台（比如Opencaching）的账号，你就可以开始玩耍了。
+你可以使用实时地图或其它搜索功能来寻找藏点。
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+你可以使用内置指南针、地图或其他外部应用（Radar、Google Navigation、StreetView、Locus、Navigon、Sygic等）导航去藏点或路径点。
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want. 
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+除了直接将藏点信息从geocaching.com保存到你的设备上外，你也可以随时通过导入GPX文件来使藏点信息生效。 
+你可以管理不同列表中保存的藏点，按需进行排序及过滤。
+同时保存藏点和离线地图文件（或静态地图）可以让你在没有网络连接的情况下也能进行寻宝活动（例如： 漫游时）。
+日志可以直接在线发布，也可以为稍后发布而离线保存，还可以通过笔记导出。
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+搜索并发现可追踪物，管理你的可追踪物仓库以及在发布藏点日志时放下它。
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+如果你在安装或使用c:geo的过程中遇到了问题，请先看一下我们的FAQ（https://faq.cgeo.org）或者查阅用户指南（https://manual.cgeo.org）。
+如果以上两个都没有解决你的问题，那就通过电子邮件联系支持吧。
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+如果你想知道c:geo所请求的权限信息，请查看http://www.cgeo.org。
