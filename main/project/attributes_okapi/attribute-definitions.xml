@@ -6,6 +6,12 @@ include any attribute used by at least one of the Opencaching installations.
 If you'd like to get the write access to our repository (to submit your
 translations), contact us: Submit a new issue in our issue tracker.
 
+DOCUMENTATION
+=============
+
+A comprehensive documentation of attribute assignments can be found at:
+https://wiki.opencaching.eu/index.php?title=Cache_attributes
+
 
 NOTES FOR EXTERNAL APP DEVELOPERS
 =================================
@@ -50,8 +56,22 @@ Legend and field usage:
 - NAME      Attribute name.
             (use <groundspeak ... name="NAME" .../>)
 
-Note: in Opencaching implementations all attributes are either ON or OFF.
-Inverse meaning is handled by a different attribute.
+Notes:
+- All OC implementations have attributes either ON or OFF.
+  Inverse meaning is handled by a different attribute.
+- GPX exports retain Groundspeak compatibility by providing a properly set `inc` flag
+  for all attributes, including OC attributes that have the inverse meaning of another.
+- each OC implementation provides two types of GPX exports:
+  * one via OKAPI
+  * one via OC implementation's own code
+- OCDE implements internally the `inc` flag (in the database) for GS compatibility
+  of it's own GPX exports (for the representation of the inverse meaning of an attribute):
+  YES <=> inc=1
+  NO  <=> inc=0
+- OCPL generates the `inc` innternally in the code for GS compatibility of
+  it's own GPX exports.
+
+Groundspeak attributes:
 
 ID  YES NO  IMAGE               NAME
 ===========================================================================
@@ -95,7 +115,7 @@ ID  YES NO  IMAGE               NAME
 39  YES     thorn               Thorns
 40  YES NO  stealth             Stealth required
 41  YES NO  stroller            Stroller accessible
-42  YES     firstaid            Needs maintenance
+42  YES     firstaid            Needs maintenance **
 43  YES     cow                 Watch for livestock
 44  YES     flashlight          Flashlight required
 45  YES     landf               Lost And Found Tour ***
@@ -129,14 +149,20 @@ Attributes according to Geocaching.com:
 https://www.geocaching.com/about/icons.aspx
 gcTour GreaseMonkey script:
 https://gist.github.com/DieBatzen/5814dc7368c1034470c8/
+and based on:
+https://forums.geocaching.com/GC/index.php?/topic/282652-groundspeak-gpx/&tab=comments#comment-4855718
 
+**  This attribute is not user editable, instead used as maintenance flag.
 *** These are special attributes, not available to the regular user.
 
 For Opencaching attributes which have no Groundspeak equivalents, additional
 Pseudo-Groundspeak IDs ("ocgs" IDs) have been defined, which are used to
 store these attributes in GPX <groundspeak:attribute> elements.
-See OCDE htdocs/lib2/search/search.gpx.inc.php and OCPL lib/format.gpx.inc.php
-for the original implementations.
+"ocgs" IDs are unique and do not overlap with Groundspeak attribute IDs.
+- See OCDE htdocs/lib2/search/search.gpx.inc.php for OCDE equivalence usage
+  OCDE stores both internal ID (referenced here as <opencaching schema="OCDE" id="xxx" />)
+  and Groundspeak equivalent (referenced here as either <groundspeak id="xxx" or <ocgs id="xxx")
+- See OCPL lib/search.gpx.inc.php for partial initial implementation.
 
 -->
 
@@ -149,9 +175,10 @@ for the original implementations.
     <attr acode="A1" categories="de-listing">
         <ocgs id="106" inc="true" />
         <opencaching schema="OCDE" id="6" />
-        <opencaching schema="OCNL" id="6" />
-        <opencaching schema="OCRO" id="6" />
-        <opencaching schema="OCUK" id="6" />
+        <opencaching schema="OCNL" id="106" />
+        <opencaching schema="OCRO" id="106" />
+        <opencaching schema="OCUK" id="106" />
+        <opencaching schema="OCUS" id="106" />
         <lang id="en">
             <name>Listed at Opencaching only</name>
             <desc>
@@ -206,10 +233,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A2" categories="de-cache-types">
-        <ocgs id="117" inc="true" />
-        <opencaching schema="OCPL" id="54" />
-        <opencaching schema="OCNL" id="54" />
-        <opencaching schema="OCRO" id="54" />
+        <ocgs id="208" inc="true" />
+        <opencaching schema="OCPL" id="208" />
+        <opencaching schema="OCNL" id="208" />
+        <opencaching schema="OCRO" id="208" />
+        <opencaching schema="OCUS" id="208" />
         <lang id="en">
             <name>Near a Survey Marker</name>
             <desc>
@@ -247,9 +275,9 @@ for the original implementations.
     </attr>
 
     <attr acode="A3" categories="de-cache-types">
-        <ocgs id="118" inc="true" />
-        <opencaching schema="OCPL" id="55" />
-        <opencaching schema="OCRO" id="55" />
+        <ocgs id="209" inc="true" />
+        <opencaching schema="OCPL" id="209" />
+        <opencaching schema="OCRO" id="209" />
         <lang id="en">
             <name>Wherigo Cache</name>
             <desc>
@@ -298,10 +326,11 @@ for the original implementations.
     <attr acode="A4" categories="de-cache-types">
         <ocgs id="108" inc="true" />
         <opencaching schema="OCDE" id="8" />
-        <opencaching schema="OCPL" id="56" />
-        <opencaching schema="OCNL" id="56" />
-        <opencaching schema="OCRO" id="8" />
-        <opencaching schema="OCUK" id="8" />
+        <opencaching schema="OCPL" id="108" />
+        <opencaching schema="OCNL" id="108" />
+        <opencaching schema="OCRO" id="108" />
+        <opencaching schema="OCUK" id="108" />
+        <opencaching schema="OCUS" id="108" />
         <lang id="en">
             <name>Letterbox Cache</name>
             <desc>
@@ -371,10 +400,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A5" categories="de-cache-types">
-        <ocgs id="112" inc="true" />
-        <opencaching schema="OCPL" id="43" />
-        <opencaching schema="OCRO" id="43" />
-        <opencaching schema="OCNL" id="43" />
+        <ocgs id="202" inc="true" />
+        <opencaching schema="OCPL" id="202" />
+        <opencaching schema="OCNL" id="202" />
+        <opencaching schema="OCRO" id="202" />
+        <opencaching schema="OCUS" id="202" />
         <lang id="en">
             <name>GeoHotel Cache</name>
             <desc>
@@ -414,10 +444,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A6" categories="de-cache-types">
-        <ocgs id="149" inc="true" />
-        <opencaching schema="OCPL" id="49" />
-        <opencaching schema="OCRO" id="49" />
-        <opencaching schema="OCNL" id="49" />
+        <ocgs id="204" inc="true" />
+        <opencaching schema="OCPL" id="204" />
+        <opencaching schema="OCNL" id="204" />
+        <opencaching schema="OCRO" id="204" />
+        <opencaching schema="OCUS" id="204" />
         <lang id="en">
             <name>Magnetic Cache</name>
             <desc>
@@ -451,10 +482,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A7" categories="de-cache-types">
-        <ocgs id="114" inc="true" />
-        <opencaching schema="OCPL" id="50" />
-        <opencaching schema="OCRO" id="50" />
-        <opencaching schema="OCNL" id="50" />
+        <ocgs id="205" inc="true" />
+        <opencaching schema="OCPL" id="205" />
+        <opencaching schema="OCNL" id="205" />
+        <opencaching schema="OCRO" id="205" />
+        <opencaching schema="OCUS" id="205" />
         <lang id="en">
             <name>Description contains an audio file</name>
             <desc>
@@ -495,9 +527,10 @@ for the original implementations.
     </attr>
 
     <attr acode="A8" categories="de-cache-types">
-        <ocgs id="115" inc="true" />
-        <opencaching schema="OCPL" id="51" />
-        <opencaching schema="OCRO" id="51" />
+        <ocgs id="206" inc="true" />
+        <opencaching schema="OCPL" id="206" />
+        <opencaching schema="OCRO" id="206" />
+        <opencaching schema="OCUS" id="206" />
         <lang id="en">
             <name>Offset cache</name>
             <desc>
@@ -542,9 +575,10 @@ for the original implementations.
 
     <attr acode="A9" categories="de-cache-types">
         <groundspeak id="60" inc="true" name="Wireless Beacon" />
-        <opencaching schema="OCPL" id="52" />
-        <opencaching schema="OCRO" id="52" />
-        <opencaching schema="OCNL" id="52" />
+        <opencaching schema="OCPL" id="60" />
+        <opencaching schema="OCNL" id="60" />
+        <opencaching schema="OCRO" id="60" />
+        <opencaching schema="OCUS" id="60" />
         <lang id="en">
             <name>Garmin's wireless beacon</name>
             <desc>
@@ -581,10 +615,10 @@ for the original implementations.
     </attr>
 
     <attr acode="A10" categories="de-cache-types">
-        <ocgs id="116" inc="true" />
-        <opencaching schema="OCPL" id="53" />
-        <opencaching schema="OCRO" id="53" />
-        <opencaching schema="OCNL" id="53" />
+        <ocgs id="207" inc="true" />
+        <opencaching schema="OCPL" id="207" />
+        <opencaching schema="OCNL" id="207" />
+        <opencaching schema="OCRO" id="207" />
         <lang id="en">
             <name>Dead Drop USB cache</name>
             <desc>
@@ -633,7 +667,6 @@ for the original implementations.
     <attr acode="A11" categories="de-cache-types">
         <ocgs id="131" inc="true" />
         <opencaching schema="OCDE" id="31" />
-        <opencaching schema="OCUK" id="31" />
         <lang id="en">
             <name>Has a moving target</name>
             <desc>
@@ -696,7 +729,6 @@ for the original implementations.
     <attr acode="A12" categories="de-cache-types">
         <ocgs id="132" inc="true" />
         <opencaching schema="OCDE" id="32" />
-        <opencaching schema="OCUK" id="32" />
         <lang id="en">
             <name>a webcam is involved</name>
             <desc>
@@ -757,10 +789,9 @@ for the original implementations.
         </lang>
     </attr>
 
-    <attr acode="A13" categories="de-cache-types">
+    <attr acode="A13" categories="de-listing">
         <ocgs id="157" inc="true" />
         <opencaching schema="OCDE" id="57" />
-        <opencaching schema="OCUK" id="57" />
         <lang id="en">
             <name>Other cache type</name>
             <desc>
@@ -809,7 +840,6 @@ for the original implementations.
     <attr acode="A14" categories="de-preconditions">
         <ocgs id="154" inc="true" />
         <opencaching schema="OCDE" id="54" />
-        <opencaching schema="OCUK" id="54" />
         <lang id="en">
             <name>Investigation required</name>
             <desc>
@@ -855,8 +885,8 @@ for the original implementations.
     <attr acode="A15" categories="de-preconditions">
         <groundspeak id="47" inc="true" name="Field puzzle" />
         <opencaching schema="OCDE" id="55" />
-        <opencaching schema="OCRO" id="155" />
-        <opencaching schema="OCUK" id="155" />
+        <opencaching schema="OCRO" id="47" />
+        <opencaching schema="OCUK" id="47" />
         <lang id="en">
             <name>Field Puzzle / Mystery</name>
             <desc>
@@ -913,7 +943,6 @@ for the original implementations.
     <attr acode="A16" categories="de-preconditions">
         <ocgs id="156" inc="true" />
         <opencaching schema="OCDE" id="56" />
-        <opencaching schema="OCUK" id="56" />
         <lang id="en">
             <name>Mathematical problem</name>
             <desc>
@@ -964,7 +993,6 @@ for the original implementations.
     <attr acode="A17" categories="de-preconditions">
         <ocgs id="158" inc="true" />
         <opencaching schema="OCDE" id="58" />
-        <opencaching schema="OCUK" id="58" />
         <lang id="en">
             <name>Ask owner for start conditions</name>
             <desc>
@@ -1012,9 +1040,12 @@ for the original implementations.
 
     <attr acode="A18" categories="de-accessibility">
         <groundspeak id="24" inc="true" name="Wheelchair accessible" />
-        <opencaching schema="OCPL" id="44" />
-        <opencaching schema="OCNL" id="44" />
-        <opencaching schema="OCRO" id="44" />
+        <opencaching schema="OCPL" id="24" />
+        <opencaching schema="OCNL" id="24" />
+        <opencaching schema="OCRO" id="24" />
+        <opencaching schema="OCUK" id="24" />
+        <opencaching schema="OCUS" id="24" />
+        <opencaching schema="OCDE" id="63" />
         <lang id="en">
             <name>Wheelchair accessible</name>
             <desc>
@@ -1032,9 +1063,9 @@ for the original implementations.
             </desc>
         </lang>
         <lang id="de">
-            <name>rollstuhltauglich</name>
+            <name>Handicap: Rollstuhl</name>
             <desc>
-                Der Cache ist so versteckt, dass er mit dem Rollstuhl erreichbar ist.
+                Der Cache ist mit Rollstuhl/Rollator/Kiderwagen erreichbar.
             </desc>
         </lang>
         <lang id="nl">
@@ -1056,7 +1087,7 @@ for the original implementations.
     <attr acode="A19" categories="de-accessibility">
         <groundspeak id="53" inc="true" name="Park and grab" />
         <opencaching schema="OCDE" id="24" />
-        <opencaching schema="OCUK" id="24" />
+        <opencaching schema="OCUK" id="53" />
         <lang id="en">
             <name>Park and grab</name>
             <desc>
@@ -1101,10 +1132,12 @@ for the original implementations.
     </attr>
 
     <attr acode="A20" categories="de-accessibility">
-        <ocgs id="122" inc="true" />
-        <opencaching schema="OCPL" id="84" />
-        <opencaching schema="OCRO" id="84" />
-        <opencaching schema="OCNL" id="84" />
+        <ocgs id="213" inc="true" />
+        <opencaching schema="OCPL" id="213" />
+        <opencaching schema="OCNL" id="213" />
+        <opencaching schema="OCRO" id="213" />
+        <opencaching schema="OCUK" id="213" />
+        <opencaching schema="OCUS" id="213" />
         <lang id="en">
             <name>Access only on foot</name>
             <desc>
@@ -1140,9 +1173,9 @@ for the original implementations.
     <attr acode="A21" categories="de-accessibility">
         <groundspeak id="9" inc="true" name="Significant Hike" />
         <opencaching schema="OCDE" id="25" />
-        <opencaching schema="OCNL" id="25" />
-        <opencaching schema="OCRO" id="25" />
-        <opencaching schema="OCUK" id="25" />
+        <opencaching schema="OCNL" id="9" />
+        <opencaching schema="OCRO" id="9" />
+        <opencaching schema="OCUK" id="9" />
         <lang id="en">
             <name>Long walk</name>
             <desc>
@@ -1209,7 +1242,7 @@ for the original implementations.
     <attr acode="A22" categories="de-accessibility">
         <groundspeak id="11" inc="true" name="May require wading" />
         <opencaching schema="OCDE" id="26" />
-        <opencaching schema="OCUK" id="26" />
+        <opencaching schema="OCUK" id="11" />
         <lang id="en">
             <name>Swamp, marsh or wading</name>
             <desc>
@@ -1263,7 +1296,7 @@ for the original implementations.
     <attr acode="A23" categories="de-accessibility">
         <ocgs id="127" inc="true" />
         <opencaching schema="OCDE" id="27" />
-        <opencaching schema="OCUK" id="27" />
+        <opencaching schema="OCUK" id="127" />
         <lang id="en">
             <name>Hilly area</name>
             <desc>
@@ -1306,7 +1339,8 @@ for the original implementations.
     <attr acode="A24" categories="de-accessibility">
         <groundspeak id="10" inc="true" name="Difficult climbing" />
         <opencaching schema="OCDE" id="28" />
-        <opencaching schema="OCUK" id="28" />
+        <opencaching schema="OCRO" id="10" />
+        <opencaching schema="OCUK" id="10" />
         <lang id="en">
             <name>Some climbing (no gear needed)</name>
             <desc>
@@ -1364,7 +1398,7 @@ for the original implementations.
     <attr acode="A25" categories="de-accessibility">
         <groundspeak id="12" inc="true" name="May require swimming" />
         <opencaching schema="OCDE" id="29" />
-        <opencaching schema="OCUK" id="29" />
+        <opencaching schema="OCUK" id="12" />
         <lang id="en">
             <name>Swimming required</name>
             <desc>
@@ -1418,7 +1452,10 @@ for the original implementations.
     <attr acode="A26" categories="de-accessibility">
         <groundspeak id="2" inc="true" name="Access or parking fee" />
         <opencaching schema="OCDE" id="36" />
-        <opencaching schema="OCUK" id="36" />
+        <opencaching schema="OCPL" id="2" />
+        <opencaching schema="OCRO" id="2" />
+        <opencaching schema="OCUK" id="2" />
+        <opencaching schema="OCUS" id="2" />
         <lang id="en">
             <name>Access or parking fee</name>
             <desc>
@@ -1463,9 +1500,10 @@ for the original implementations.
 
     <attr acode="A27" categories="de-accessibility">
         <groundspeak id="32" inc="true" name="Bicycles" />
-        <opencaching schema="OCPL" id="85" />
-        <opencaching schema="OCRO" id="85" />
-        <opencaching schema="OCNL" id="85" />
+        <opencaching schema="OCPL" id="32" />
+        <opencaching schema="OCNL" id="32" />
+        <opencaching schema="OCRO" id="32" />
+        <opencaching schema="OCUK" id="32" />
         <lang id="en">
             <name>Bikes allowed</name>
             <desc>
@@ -1499,10 +1537,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A28" categories="de-location">
-        <ocgs id="119" inc="true" />
-        <opencaching schema="OCPL" id="60" />
-        <opencaching schema="OCNL" id="60" />
-        <opencaching schema="OCRO" id="60" />
+        <ocgs id="210" inc="true" />
+        <opencaching schema="OCPL" id="210" />
+        <opencaching schema="OCNL" id="210" />
+        <opencaching schema="OCRO" id="210" />
+        <opencaching schema="OCUS" id="210" />
         <lang id="en">
             <name>Hidden in natural surroundings (forests, mountains, etc.)</name>
             <desc>
@@ -1540,10 +1579,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A29" categories="de-location">
-        <ocgs id="120" inc="true" />
-        <opencaching schema="OCPL" id="61" />
-        <opencaching schema="OCNL" id="61" />
-        <opencaching schema="OCRO" id="61" />
+        <ocgs id="211" inc="true" />
+        <opencaching schema="OCPL" id="211" />
+        <opencaching schema="OCNL" id="211" />
+        <opencaching schema="OCRO" id="211" />
+        <opencaching schema="OCUS" id="211" />
         <lang id="en">
             <name>Historic site</name>
             <desc>
@@ -1584,7 +1624,7 @@ for the original implementations.
     <attr acode="A30" categories="de-location">
         <ocgs id="130" inc="true" />
         <opencaching schema="OCDE" id="30" />
-        <opencaching schema="OCUK" id="30" />
+        <opencaching schema="OCUK" id="130" />
         <lang id="en">
             <name>Point of interest</name>
             <desc>
@@ -1647,7 +1687,8 @@ for the original implementations.
     <attr acode="A31" categories="de-location">
         <ocgs id="133" inc="true" />
         <opencaching schema="OCDE" id="33" />
-        <opencaching schema="OCUK" id="33" />
+        <opencaching schema="OCRO" id="133" />
+        <opencaching schema="OCUK" id="133" />
         <lang id="en">
             <name>Hidden wihin enclosed rooms (caves, buildings etc.)</name>
             <desc>
@@ -1695,7 +1736,8 @@ for the original implementations.
     <attr acode="A32" categories="de-location">
         <ocgs id="134" inc="true" />
         <opencaching schema="OCDE" id="34" />
-        <opencaching schema="OCUK" id="34" />
+        <opencaching schema="OCRO" id="134" />
+        <opencaching schema="OCUK" id="134" />
         <lang id="en">
             <name>Hidden under water</name>
             <desc>
@@ -1740,9 +1782,9 @@ for the original implementations.
     <attr acode="A33" categories="de-facilities">
         <groundspeak id="25" inc="true" name="Parking available" />
         <opencaching schema="OCDE" id="18" />
-        <opencaching schema="OCNL" id="18" />
-        <opencaching schema="OCRO" id="18" />
-        <opencaching schema="OCUK" id="18" />
+        <opencaching schema="OCNL" id="25" />
+        <opencaching schema="OCRO" id="25" />
+        <opencaching schema="OCUK" id="25" />
         <lang id="en">
             <name>Parking area nearby</name>
             <desc>
@@ -1794,7 +1836,7 @@ for the original implementations.
     <attr acode="A34" categories="de-facilities">
         <groundspeak id="26" inc="true" name="Public transportation" />
         <opencaching schema="OCDE" id="19" />
-        <opencaching schema="OCUK" id="19" />
+        <opencaching schema="OCUK" id="26" />
         <lang id="en">
             <name>Public transportation</name>
             <desc>
@@ -1838,8 +1880,8 @@ for the original implementations.
     <attr acode="A35" categories="de-facilities">
         <groundspeak id="27" inc="true" name="Drinking water nearby" />
         <opencaching schema="OCDE" id="20" />
-        <opencaching schema="OCRO" id="20" />
-        <opencaching schema="OCUK" id="20" />
+        <opencaching schema="OCRO" id="27" />
+        <opencaching schema="OCUK" id="27" />
         <lang id="en">
             <name>Drinking water nearby</name>
             <desc>
@@ -1897,7 +1939,7 @@ for the original implementations.
     <attr acode="A36" categories="de-facilities">
         <groundspeak id="28" inc="true" name="Public restrooms nearby" />
         <opencaching schema="OCDE" id="21" />
-        <opencaching schema="OCUK" id="21" />
+        <opencaching schema="OCUK" id="28" />
         <lang id="en">
             <name>Public restrooms nearby</name>
             <desc>
@@ -1938,7 +1980,6 @@ for the original implementations.
     <attr acode="A37" categories="de-facilities">
         <groundspeak id="29" inc="true" name="Telephone nearby" />
         <opencaching schema="OCDE" id="22" />
-        <opencaching schema="OCUK" id="22" />
         <lang id="en">
             <name>Public phone nearby</name>
             <desc>
@@ -1981,7 +2022,7 @@ for the original implementations.
     <attr acode="A38" categories="de-facilities">
         <ocgs id="123" inc="true" />
         <opencaching schema="OCDE" id="23" />
-        <opencaching schema="OCUK" id="23" />
+        <opencaching schema="OCUK" id="123" />
         <lang id="en">
             <name>First aid available</name>
             <desc>
@@ -2025,9 +2066,8 @@ for the original implementations.
     <attr acode="A39" categories="de-time-and-seasons">
         <groundspeak id="13" inc="true" name="Available at all times" />
         <opencaching schema="OCDE" id="38" />
-        <opencaching schema="OCNL" id="38" />
-        <opencaching schema="OCRO" id="38" />
-        <opencaching schema="OCUK" id="38" />
+        <opencaching schema="OCNL" id="13" />
+        <opencaching schema="OCUK" id="13" />
         <lang id="en">
             <name>Available 24/7</name>
             <desc>
@@ -2076,9 +2116,10 @@ for the original implementations.
     <attr acode="A40" categories="de-time-and-seasons">
         <groundspeak id="13" inc="false" name="Available at all times" />
         <opencaching schema="OCDE" id="39" />
-        <opencaching schema="OCNL" id="39" />
-        <opencaching schema="OCRO" id="39" />
-        <opencaching schema="OCUK" id="39" />
+        <opencaching schema="OCNL" id="9013" />
+        <opencaching schema="OCRO" id="9013" />
+        <opencaching schema="OCUK" id="9013" />
+        <opencaching schema="OCUS" id="9013" />
         <lang id="en">
             <name>Not available 24/7</name>
             <desc>
@@ -2129,7 +2170,7 @@ for the original implementations.
     <attr acode="A41" categories="de-time-and-seasons">
         <groundspeak id="14" inc="false" name="Recommended at night" />
         <opencaching schema="OCDE" id="40" />
-        <opencaching schema="OCUK" id="40" />
+        <opencaching schema="OCUK" id="9014" />
         <lang id="en">
             <name>Not recommended at night</name>
             <desc>
@@ -2179,9 +2220,9 @@ for the original implementations.
 
     <attr acode="A42" categories="de-time-and-seasons">
         <groundspeak id="14" inc="true" name="Recommended at night" />
-        <opencaching schema="OCPL" id="91" />
-        <opencaching schema="OCRO" id="91" />
-        <opencaching schema="OCNL" id="91" />
+        <opencaching schema="OCPL" id="14" />
+        <opencaching schema="OCNL" id="14" />
+        <opencaching schema="OCRO" id="14" />
         <lang id="en">
             <name>Recommended at night</name>
             <desc>
@@ -2222,7 +2263,9 @@ for the original implementations.
     <attr acode="A43" categories="de-time-and-seasons">
         <groundspeak id="52" inc="true" name="Night Cache" />
         <opencaching schema="OCDE" id="1" />
-        <opencaching schema="OCUK" id="1" />
+        <opencaching schema="OCRO" id="52" />
+        <opencaching schema="OCUK" id="52" />
+        <opencaching schema="OCUS" id="52" />
         <lang id="en">
             <name>Only at night</name>
             <desc>
@@ -2275,7 +2318,7 @@ for the original implementations.
     <attr acode="A44" categories="de-time-and-seasons">
         <groundspeak id="62" inc="false" name="Seasonal access" />
         <opencaching schema="OCDE" id="42" />
-        <opencaching schema="OCUK" id="42" />
+        <opencaching schema="OCUK" id="9062" />
         <lang id="en">
             <name>All seasons</name>
             <desc>
@@ -2359,7 +2402,7 @@ for the original implementations.
     <attr acode="A46" categories="de-time-and-seasons">
         <ocgs id="143" inc="true" />
         <opencaching schema="OCDE" id="43" />
-        <opencaching schema="OCUK" id="43" />
+        <opencaching schema="OCUK" id="143" />
         <lang id="en">
             <name>Nature preserve / Breeding season</name>
             <desc>
@@ -2409,7 +2452,8 @@ for the original implementations.
     <attr acode="A47" categories="de-time-and-seasons">
         <groundspeak id="15" inc="true" name="Available during winter" />
         <opencaching schema="OCDE" id="44" />
-        <opencaching schema="OCUK" id="44" />
+        <opencaching schema="OCUK" id="15" />
+        <opencaching schema="OCUS" id="15" />
         <lang id="en">
             <name>Available during winter</name>
             <desc>
@@ -2460,7 +2504,7 @@ for the original implementations.
     <attr acode="A48" categories="de-time-and-seasons">
         <ocgs id="142" inc="true" />
         <opencaching schema="OCDE" id="41" />
-        <opencaching schema="OCUK" id="41" />
+        <opencaching schema="OCUK" id="142" />
         <lang id="en">
             <name>Not available during high tide</name>
             <desc>
@@ -2490,11 +2534,12 @@ for the original implementations.
 
     <attr acode="A49" categories="de-tools">
         <ocgs id="147" inc="true" />
-        <opencaching schema="OCPL" id="47" />
         <opencaching schema="OCDE" id="47" />
-        <opencaching schema="OCNL" id="47" />
-        <opencaching schema="OCRO" id="47" />
-        <opencaching schema="OCUK" id="47" />
+        <opencaching schema="OCPL" id="147" />
+        <opencaching schema="OCNL" id="147" />
+        <opencaching schema="OCRO" id="147" />
+        <opencaching schema="OCUK" id="147" />
+        <opencaching schema="OCUS" id="147" />
         <lang id="en">
             <name>Compass required</name>
             <desc>
@@ -2542,10 +2587,12 @@ for the original implementations.
     </attr>
 
     <attr acode="A50" categories="de-tools">
-        <ocgs id="113" inc="true" />
-        <opencaching schema="OCPL" id="48" />
-        <opencaching schema="OCNL" id="48" />
-        <opencaching schema="OCRO" id="48" />
+        <ocgs id="203" inc="true" />
+        <opencaching schema="OCPL" id="203" />
+        <opencaching schema="OCNL" id="203" />
+        <opencaching schema="OCRO" id="203" />
+        <opencaching schema="OCUK" id="203" />
+        <opencaching schema="OCUS" id="203" />
         <lang id="en">
             <name>Bring your own pen</name>
             <desc>
@@ -2580,10 +2627,10 @@ for the original implementations.
     </attr>
 
     <attr acode="A51" categories="de-tools">
-        <ocgs id="121" inc="true" />
-        <opencaching schema="OCPL" id="81" />
-        <opencaching schema="OCRO" id="81" />
-        <opencaching schema="OCNL" id="81" />
+        <ocgs id="212" inc="true" />
+        <opencaching schema="OCPL" id="212" />
+        <opencaching schema="OCNL" id="212" />
+        <opencaching schema="OCRO" id="212" />
         <lang id="en">
             <name>You may need a shovel</name>
             <desc>
@@ -2620,10 +2667,11 @@ for the original implementations.
     <attr acode="A52" categories="de-tools">
         <groundspeak id="44" inc="true" name="Flashlight required" />
         <opencaching schema="OCDE" id="48" />
-        <opencaching schema="OCPL" id="82" />
-        <opencaching schema="OCNL" id="82" />
-        <opencaching schema="OCRO" id="82" />
-        <opencaching schema="OCUK" id="82" />
+        <opencaching schema="OCPL" id="44" />
+        <opencaching schema="OCNL" id="44" />
+        <opencaching schema="OCRO" id="44" />
+        <opencaching schema="OCUK" id="44" />
+        <opencaching schema="OCUS" id="44" />
         <lang id="en">
             <name>Flashlight required</name>
             <desc>
@@ -2674,7 +2722,8 @@ for the original implementations.
     <attr acode="A53" categories="de-tools">
         <groundspeak id="3" inc="true" name="Climbing gear" />
         <opencaching schema="OCDE" id="49" />
-        <opencaching schema="OCUK" id="49" />
+        <opencaching schema="OCRO" id="3" />
+        <opencaching schema="OCUK" id="3" />
         <lang id="en">
             <name>Climbing gear required</name>
             <desc>
@@ -2731,7 +2780,7 @@ for the original implementations.
     <attr acode="A54" categories="de-tools">
         <ocgs id="150" inc="true" />
         <opencaching schema="OCDE" id="50" />
-        <opencaching schema="OCUK" id="50" />
+        <opencaching schema="OCUK" id="150" />
         <lang id="en">
             <name>Cave equipment required</name>
             <desc>
@@ -2795,7 +2844,7 @@ for the original implementations.
     <attr acode="A55" categories="de-tools">
         <groundspeak id="5" inc="true" name="Scuba gear" />
         <opencaching schema="OCDE" id="51" />
-        <opencaching schema="OCUK" id="51" />
+        <opencaching schema="OCUK" id="5" />
         <lang id="en">
             <name>Diving equipment required</name>
             <desc>
@@ -2858,12 +2907,13 @@ for the original implementations.
     </attr>
 
     <attr acode="A56" categories="de-tools">
-        <groundspeak id="51" inc="true" name="Special tool required" />
+        <groundspeak id="51" inc="true" name="Special Tool Required" />
         <opencaching schema="OCDE" id="46" />
-        <opencaching schema="OCPL" id="83" />
-        <opencaching schema="OCNL" id="83" />
-        <opencaching schema="OCRO" id="46" />
-        <opencaching schema="OCUK" id="46" />
+        <opencaching schema="OCPL" id="51" />
+        <opencaching schema="OCNL" id="51" />
+        <opencaching schema="OCRO" id="51" />
+        <opencaching schema="OCUK" id="51" />
+        <opencaching schema="OCUS" id="51" />
         <lang id="en">
             <name>Special tool required</name>
             <desc>
@@ -2916,10 +2966,11 @@ for the original implementations.
     <attr acode="A57" categories="de-tools">
         <groundspeak id="4" inc="true" name="Boat" />
         <opencaching schema="OCDE" id="52" />
-        <opencaching schema="OCPL" id="86" />
-        <opencaching schema="OCNL" id="86" />
-        <opencaching schema="OCRO" id="86" />
-        <opencaching schema="OCUK" id="86" />
+        <opencaching schema="OCPL" id="4" />
+        <opencaching schema="OCNL" id="4" />
+        <opencaching schema="OCRO" id="4" />
+        <opencaching schema="OCUK" id="4" />
+        <opencaching schema="OCUS" id="4" />
         <lang id="en">
             <name>Boat required</name>
             <desc>
@@ -2977,7 +3028,7 @@ for the original implementations.
     <attr acode="A58" categories="de-tools">
         <ocgs id="135" inc="true" />
         <opencaching schema="OCDE" id="35" />
-        <opencaching schema="OCUK" id="35" />
+        <opencaching schema="OCUK" id="135" />
         <lang id="en">
             <name>No GPS required</name>
             <desc>
@@ -3022,10 +3073,11 @@ for the original implementations.
     <attr acode="A59" categories="de-dangers">
         <groundspeak id="23" inc="true" name="Dangerous area" />
         <opencaching schema="OCDE" id="9" />
-        <opencaching schema="OCPL" id="90" />
-        <opencaching schema="OCNL" id="90" />
-        <opencaching schema="OCRO" id="9" />
-        <opencaching schema="OCUK" id="9" />
+        <opencaching schema="OCPL" id="23" />
+        <opencaching schema="OCNL" id="23" />
+        <opencaching schema="OCRO" id="23" />
+        <opencaching schema="OCUK" id="23" />
+        <opencaching schema="OCUS" id="23" />
         <lang id="en">
             <name>Dangerous area</name>
             <desc>
@@ -3091,7 +3143,7 @@ for the original implementations.
     <attr acode="A60" categories="de-dangers">
         <ocgs id="110" inc="true" />
         <opencaching schema="OCDE" id="10" />
-        <opencaching schema="OCUK" id="10" />
+        <opencaching schema="OCUK" id="110" />
         <lang id="en">
             <name>Active railway nearby</name>
             <desc>
@@ -3143,7 +3195,7 @@ for the original implementations.
     <attr acode="A61" categories="de-dangers">
         <groundspeak id="21" inc="true" name="Cliff / falling rocks" />
         <opencaching schema="OCDE" id="11" />
-        <opencaching schema="OCUK" id="11" />
+        <opencaching schema="OCUK" id="21" />
         <lang id="en">
             <name>Cliff / Rocks</name>
             <desc>
@@ -3210,9 +3262,9 @@ for the original implementations.
     <attr acode="A62" categories="de-dangers">
         <groundspeak id="22" inc="true" name="Hunting" />
         <opencaching schema="OCDE" id="12" />
-        <opencaching schema="OCNL" id="12" />
-        <opencaching schema="OCRO" id="12" />
-        <opencaching schema="OCUK" id="12" />
+        <opencaching schema="OCNL" id="22" />
+        <opencaching schema="OCRO" id="22" />
+        <opencaching schema="OCUK" id="22" />
         <lang id="en">
             <name>Hunting grounds</name>
             <desc>
@@ -3277,9 +3329,10 @@ for the original implementations.
     <attr acode="A63" categories="de-dangers">
         <groundspeak id="39" inc="true" name="Thorns" />
         <opencaching schema="OCDE" id="13" />
-        <opencaching schema="OCNL" id="13" />
-        <opencaching schema="OCRO" id="13" />
-        <opencaching schema="OCUK" id="13" />
+        <opencaching schema="OCNL" id="39" />
+        <opencaching schema="OCRO" id="39" />
+        <opencaching schema="OCUK" id="39" />
+        <opencaching schema="OCUS" id="39" />
         <lang id="en">
             <name>Look out for thorns</name>
             <desc>
@@ -3329,9 +3382,10 @@ for the original implementations.
     <attr acode="A64" categories="de-dangers">
         <groundspeak id="19" inc="true" name="Ticks" />
         <opencaching schema="OCDE" id="14" />
-        <opencaching schema="OCNL" id="14" />
-        <opencaching schema="OCRO" id="14" />
-        <opencaching schema="OCUK" id="14" />
+        <opencaching schema="OCNL" id="19" />
+        <opencaching schema="OCRO" id="19" />
+        <opencaching schema="OCUK" id="19" />
+        <opencaching schema="OCUS" id="19" />
         <lang id="en">
             <name>Look out for ticks</name>
             <desc>
@@ -3397,7 +3451,7 @@ for the original implementations.
     <attr acode="A65" categories="de-dangers">
         <groundspeak id="20" inc="true" name="Abandoned mines" />
         <opencaching schema="OCDE" id="15" />
-        <opencaching schema="OCUK" id="15" />
+        <opencaching schema="OCUK" id="20" />
         <lang id="en">
             <name>Abandoned mines</name>
             <desc>
@@ -3453,9 +3507,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A66" categories="de-dangers">
-        <groundspeak id="17" inc="true" name="Poisonous plants" />
+        <groundspeak id="17" inc="true" name="Poison plants" />
         <opencaching schema="OCDE" id="16" />
-        <opencaching schema="OCUK" id="16" />
+        <opencaching schema="OCRO" id="17" />
+        <opencaching schema="OCUK" id="17" />
+        <opencaching schema="OCUS" id="17" />
         <lang id="en">
             <name>Poisonous plants</name>
             <desc>
@@ -3498,9 +3554,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A67" categories="de-dangers">
-        <groundspeak id="18" inc="true" name="Dangerous animals" />
+        <groundspeak id="18" inc="true" name="Dangerous Animals" />
         <opencaching schema="OCDE" id="17" />
-        <opencaching schema="OCUK" id="17" />
+        <opencaching schema="OCRO" id="18" />
+        <opencaching schema="OCUK" id="18" />
+        <opencaching schema="OCUS" id="18" />
         <lang id="en">
             <name>Dangerous animals</name>
             <desc>
@@ -3543,10 +3601,11 @@ for the original implementations.
     </attr>
 
     <attr acode="A68" categories="de-rating">
-        <ocgs id="111" inc="true" />
-        <opencaching schema="OCPL" id="40" />
-        <opencaching schema="OCRO" id="40" />
-        <opencaching schema="OCNL" id="40" />
+        <ocgs id="201" inc="true" />
+        <opencaching schema="OCPL" id="201" />
+        <opencaching schema="OCNL" id="201" />
+        <opencaching schema="OCRO" id="201" />
+        <opencaching schema="OCUS" id="201" />
         <lang id="en">
             <name>Quick cache</name>
             <desc>
@@ -3582,7 +3641,6 @@ for the original implementations.
     <attr acode="A69" categories="de-rating">
         <ocgs id="137" inc="true" />
         <opencaching schema="OCDE" id="37" />
-        <opencaching schema="OCUK" id="37" />
         <lang id="en">
             <name>Overnight stay necessary</name>
             <desc>
@@ -3636,8 +3694,11 @@ for the original implementations.
 
     <attr acode="A70" categories="de-rating">
         <groundspeak id="6" inc="true" name="Recommended for kids" />
-        <opencaching schema="OCPL" id="41" />
-        <opencaching schema="OCNL" id="41" />
+        <opencaching schema="OCPL" id="6" />
+        <opencaching schema="OCNL" id="6" />
+        <opencaching schema="OCRO" id="6" />
+        <opencaching schema="OCUK" id="6" />
+        <opencaching schema="OCUS" id="6" />
         <lang id="en">
             <name>Bring your children</name>
             <desc>
@@ -3678,8 +3739,6 @@ for the original implementations.
     <attr acode="A71" categories="de-rating">
         <groundspeak id="6" inc="true" name="Recommended for kids" />
         <opencaching schema="OCDE" id="59" />
-        <opencaching schema="OCRO" id="59" />
-        <opencaching schema="OCUK" id="59" />
         <lang id="en">
             <name>Suitable for children (10-12 years)</name>
             <desc>
@@ -3734,7 +3793,7 @@ for the original implementations.
         <ocgs id="161" inc="true" />
         <opencaching schema="OCDE" id="61" />
         <lang id="en">
-            <name>Reverse Cache</name>
+            <name>Safari Cache</name>
             <desc>
                 This geocache can be found at different places. The places to look for
                 are explained in the cache description. They must be located "away
@@ -3769,8 +3828,6 @@ for the original implementations.
 
     <attr acode="A73" categories="de-time-and-seasons">
         <groundspeak id="13" inc="false" name="Available at all times" />
-        <opencaching schema="OCPL" id="80" />
-        <opencaching schema="OCRO" id="80" />
         <lang id="en">
             <name>Available at specified hours (may require access fee)</name>
             <desc>
@@ -3810,8 +3867,9 @@ for the original implementations.
 
     <attr acode="A74" categories="de-dangers">
         <groundspeak id="40" inc="true" name="Stealth required" />
-        <opencaching schema="OCNL" id="45" />
-        <opencaching schema="OCRO" id="45" />
+        <opencaching schema="OCNL" id="40" />
+        <opencaching schema="OCRO" id="40" />
+        <opencaching schema="OCUS" id="40" />
         <lang id="en">
             <name>Stealth required</name>
             <desc>
@@ -3852,7 +3910,6 @@ for the original implementations.
     <attr acode="A75" categories="de-tools">
         <ocgs id="153" inc="true" />
         <opencaching schema="OCDE" id="53" />
-        <opencaching schema="OCUK" id="156" />
         <lang id="en">
             <name>Aircraft required</name>
             <desc>
@@ -3895,8 +3952,8 @@ for the original implementations.
     </attr>
 
     <attr acode="A76" categories="de-accessibility">
-        <ocgs id="125" inc="true" />
-        <opencaching schema="OCUK" id="157" />
+        <ocgs id="214" inc="true" />
+        <opencaching schema="OCUK" id="214" />
         <lang id="en">
             <name>Rated on Handicaching.com</name>
             <desc>
@@ -3939,8 +3996,8 @@ for the original implementations.
     </attr>
 
     <attr acode="A77" categories="de-cache-types">
-        <ocgs id="126" inc="true" />
-        <opencaching schema="OCUK" id="158" />
+        <ocgs id="215" inc="true" />
+        <opencaching schema="OCUK" id="215" />
         <lang id="en">
             <name>Contains a Munzee</name>
             <desc>
@@ -3972,6 +4029,145 @@ for the original implementations.
             <desc>
                 Geocutia conţine un Munzee sau există un Munzee în imediata
                 apropiere a acesteia.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A78" categories="de-cache-types">
+        <ocgs id="216" inc="true" />
+        <opencaching schema="OCUS" id="216" />
+        <lang id="en">
+            <name>Contains advertising</name>
+            <desc>
+                The cache contains commercial advertising and was likely placed by a business.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A79" categories="de-cache-types">
+        <ocgs id="217" inc="true" />
+        <opencaching schema="OCUK" id="217" />
+        <lang id="en">
+            <name>Military training area</name>
+            <desc>
+                Military training area, some access restrictions - check before visit.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A80" categories="de-cache-types">
+        <ocgs id="218" inc="true" />
+        <opencaching schema="OCRO" id="218" />
+        <lang id="en">
+            <name>Video surveillance</name>
+            <desc>
+                Area under video surveillance. Exercise caution.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A81" categories="de-cache-types">
+        <ocgs id="219" inc="true" />
+        <opencaching schema="OCRO" id="219" />
+        <lang id="en">
+            <name>Trackables</name>
+            <desc>
+                Suitable to hold trackables.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A82" categories="de-cache-types">
+        <groundspeak id="54" inc="true" name="Abandoned structure" />
+        <opencaching schema="OCRO" id="54" />
+        <lang id="en">
+            <name>Ruin</name>
+            <desc>
+                Abandoned structure / ruin.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A83" categories="de-cache-types">
+        <groundspeak id="48" inc="true" name="UV Light Required" />
+        <opencaching schema="OCRO" id="48" />
+        <lang id="en">
+            <name>UV Light Required</name>
+            <desc>
+                UV Light is required to find clues to the cache location.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A84" categories="de-cache-types">
+        <groundspeak id="15" inc="false" name="Available during winter" />
+        <opencaching schema="OCUS" id="9015" />
+        <lang id="en">
+            <name>NOT available during winter</name>
+            <desc>
+                NOT available during winter.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A85" categories="de-cache-types">
+        <groundspeak id="1" inc="false" name="Dogs" />
+        <opencaching schema="OCNL" id="9001" />
+        <lang id="en">
+            <name>No dogs</name>
+            <desc>
+                Dogs not allowed.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A86" categories="de-cache-types">
+        <groundspeak id="46" inc="true" name="Truck Driver/RV" />
+        <opencaching schema="OCUS" id="46" />
+        <lang id="en">
+            <name>Truck / RV</name>
+            <desc>
+                Truck / RV allowed.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A87" categories="de-cache-types">
+        <ocgs id="220" inc="true" />
+        <opencaching schema="OCRO" id="220" />
+        <lang id="en">
+            <name>Historic</name>
+            <desc>
+                Officially designated historical monument.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A88" categories="de-cache-types">
+        <groundspeak id="64" inc="true" name="Tree Climbing" />
+        <opencaching schema="OCRO" id="64" />
+        <opencaching schema="OCUK" id="64" />
+        <lang id="en">
+            <name>Treeclimbing</name>
+            <desc>
+                Tree climbing required.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A89" categories="de-cache-types">
+        <ocgs id="162" inc="true" />
+        <opencaching schema="OCDE" id="62" />
+        <lang id="en">
+            <name>Handicap: Blind</name>
+            <desc>
+                This Cache can be found by blind people.
+            </desc>
+        </lang>
+        <lang id="de">
+            <name>Handicap: Blind</name>
+            <desc>
+                Dieser Cache kann von Menschen mit Sehbehinderung gefunden werden.
             </desc>
         </lang>
     </attr>

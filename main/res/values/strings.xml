@@ -1657,6 +1657,22 @@
     <string name="attribute_challengecache_no">No challenge cache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com solution checker enabled</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com solution checker not enabled</string>
+    <string name="attribute_handicaching_yes">Rated on Handicaching.com</string>
+    <string name="attribute_handicaching_no">Not rated on Handicaching.com</string>
+    <string name="attribute_munzee_yes">Contains a Munzee</string>
+    <string name="attribute_munzee_no">Contains no Munzee</string>
+    <string name="attribute_ads_yes">Contains advertising</string>
+    <string name="attribute_ads_no">Contains no advertising</string>
+    <string name="attribute_military_area_yes">Military training area</string>
+    <string name="attribute_military_area_no">No military training area</string>
+    <string name="attribute_video_surveil_yes">Video surveillance</string>
+    <string name="attribute_video_surveil_no">No video surveillance</string>
+    <string name="attribute_trackables_yes">Trackables</string>
+    <string name="attribute_trackables_no">Trackables</string>
+    <string name="attribute_historic_yes">Historic</string>
+    <string name="attribute_historic_no">Not historic</string>
+    <string name="attribute_blind_people_yes">Handicap: Blind</string>
+    <string name="attribute_blind_people_no">No handicap: Blind</string>
 
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
