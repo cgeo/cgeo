@@ -289,10 +289,6 @@ public class GCLogin extends AbstractLogin {
         }
         assert page != null;
 
-        if (TextUtils.matches(page, GCConstants.PATTERN_MAP_LOGGED_IN)) {
-            return true;
-        }
-
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
@@ -359,7 +355,7 @@ public class GCLogin extends AbstractLogin {
      */
     public String getAvatarUrl() {
         try {
-            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/my/")));
+            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/dashboard")));
             final String profile = TextUtils.replaceWhitespace(responseData);
 
             setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));
