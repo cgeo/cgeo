@@ -964,7 +964,6 @@
     <string name="cache_menu_challenge_checker">Cerca le sfide (challenge)</string>
     <string name="cache_menu_ignore">Ignora cache</string>
     <string name="cache_log_menu_decrypt">Decifra/Cifra</string>
-    <string name="cache_log_menu_title">Log %s di %s</string>
     <string name="ignore_confirm_title">Stai attento</string>
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
