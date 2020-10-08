@@ -9,7 +9,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Trackable:</h4>
 <ul>
-<li>Fix: Adapte to website change fixing trackable logging</li>
+<li>Fix: Adapt to website change, fixing trackable logging</li>
 </ul>
 
 <h4>Logging:</h4>
