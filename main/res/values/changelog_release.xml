@@ -17,6 +17,11 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>Fix: Crash when adding picture from camera</li>
 </ul>
 
+<h4>Other:</h4>
+<ul>
+<li>Fix: Prepare for website change regarding avatar loading</li>
+</ul>
+
 <h1>Version 2020.10.04:</h1>
 
 <h4>Android 11 notice:</h4>
