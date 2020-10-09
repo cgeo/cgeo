@@ -1746,7 +1746,7 @@
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
-    <string name="map_trail_show">Mostra la ruta</string>
+    <string name="map_trail_show">Mostra el traçat</string>
     <string name="map_trail_hide">Amaga el traçat</string>
     <!-- history track export -->
     <string name="trailhistory">Traçat</string>
