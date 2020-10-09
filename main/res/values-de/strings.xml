@@ -549,6 +549,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Logtext</string>
     <string name="init_signature_template_size">Größe</string>
+    <string name="init_signature_template_type">Typ</string>
     <string name="init_ratingwanted">GCVote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
