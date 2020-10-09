@@ -549,6 +549,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Texte de la visite</string>
     <string name="init_signature_template_size">Taille</string>
+    <string name="init_signature_template_type">Type</string>
     <string name="init_ratingwanted">Vote GCvote.com</string>
     <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
@@ -964,6 +965,7 @@
     <string name="cache_menu_challenge_checker">Chercher le vérificateur de défis</string>
     <string name="cache_menu_ignore">Ignorer la cache</string>
     <string name="cache_log_menu_decrypt">Déchiffrer/Chiffrer</string>
+    <string name="cache_log_menu_title">Log %1$s sur %2$s</string>
     <string name="ignore_confirm_title">Soyez prudent</string>
     <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
     <string name="cache_status">Statut</string>
