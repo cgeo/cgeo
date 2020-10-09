@@ -550,6 +550,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Text del registre</string>
     <string name="init_signature_template_size">Mida</string>
+    <string name="init_signature_template_type">Tipus</string>
     <string name="init_ratingwanted">Valoració del GCvote</string>
     <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
@@ -965,6 +966,7 @@
     <string name="cache_menu_challenge_checker">Cerca comprovador de reptes</string>
     <string name="cache_menu_ignore">Ignora el catxé</string>
     <string name="cache_log_menu_decrypt">Desxifra / Xifra</string>
+    <string name="cache_log_menu_title">Registre %1$s de %2$s</string>
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
@@ -1763,7 +1765,7 @@
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
-    <string name="map_trail_show">Mostra la ruta</string>
+    <string name="map_trail_show">Mostra el traçat</string>
     <string name="map_trail_hide">Amaga el traçat</string>
     <!-- history track export -->
     <string name="trailhistory">Traçat</string>
