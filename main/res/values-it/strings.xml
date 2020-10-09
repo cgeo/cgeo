@@ -549,6 +549,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Testo di Log</string>
     <string name="init_signature_template_size">Dimensione</string>
+    <string name="init_signature_template_type">Tipo</string>
     <string name="init_ratingwanted">Rating da GCvote.com</string>
     <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
@@ -964,6 +965,7 @@
     <string name="cache_menu_challenge_checker">Cerca le sfide (challenge)</string>
     <string name="cache_menu_ignore">Ignora cache</string>
     <string name="cache_log_menu_decrypt">Decifra/Cifra</string>
+    <string name="cache_log_menu_title">Log %1$s di %2$s</string>
     <string name="ignore_confirm_title">Stai attento</string>
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
@@ -1547,6 +1549,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo su Google Play</a></string>
     <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
+    <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
