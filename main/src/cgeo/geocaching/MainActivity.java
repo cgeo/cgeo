@@ -637,7 +637,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private void checkRestore() {
         final BackupUtils backupUtils = new BackupUtils(MainActivity.this);
 
-        if (DataStore.isNewlyCreatedDatebase() && BackupUtils.hasBackup() && !restoreMessageShown) {
+        if (DataStore.isNewlyCreatedDatebase() && BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) && !restoreMessageShown) {
             restoreMessageShown = true;
 
             new AlertDialog.Builder(this)
@@ -647,7 +647,7 @@ public class MainActivity extends AbstractActionBarActivity {
                     .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
                         dialog.dismiss();
                         DataStore.resetNewlyCreatedDatabase();
-                        backupUtils.restore();
+                        backupUtils.restore(BackupUtils.newestBackupFolder());
                     })
                     .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
                         dialog.cancel();

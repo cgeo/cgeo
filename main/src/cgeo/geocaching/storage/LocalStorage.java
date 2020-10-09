@@ -7,7 +7,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -17,6 +16,7 @@ import android.app.ProgressDialog;
 import android.os.Environment;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.EnvironmentCompat;
 
@@ -43,7 +43,6 @@ public final class LocalStorage {
     private static final String CGEO_DIRNAME = "cgeo";
     private static final String DATABASES_DIRNAME = "databases";
     private static final String BACKUP_DIR_NAME = "backup";
-    private static final String OLD_BACKUPS_DIR_NAME = "old_backups";
     public static final String LOGFILES_DIR_NAME = "logfiles";
     private static final String MAP_DIR_NAME = "maps";
     private static final String GPX_DIR_NAME = "gpx";
@@ -308,14 +307,21 @@ public final class LocalStorage {
         return new File(Environment.getExternalStorageDirectory(), LEGACY_CGEO_DIR_NAME);
     }
 
-    @NonNull
-    public static File getBackupDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), BACKUP_DIR_NAME);
+    @Nullable
+    public static File getNewBackupDirectory(final long timestamp) {
+        final File newFolder = new File(getBackupRootDirectory(), Formatter.formatDateForFilename(timestamp));
+
+        if (newFolder.exists()) {
+            return null; // We don't want to overwrite a existing backup
+        }
+
+        FileUtils.mkdirs(newFolder);
+        return newFolder;
     }
 
     @NonNull
-    public static File getOldBackupsDirectory() {
-        return new File(getExternalPublicCgeoDirectory(), OLD_BACKUPS_DIR_NAME);
+    public static File getBackupRootDirectory() {
+        return new File(getExternalPublicCgeoDirectory(), BACKUP_DIR_NAME);
     }
 
     @NonNull
@@ -354,15 +360,9 @@ public final class LocalStorage {
         return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), CGEO_DIRNAME);
     }
 
-    public static boolean moveOldBackup() {
-        final File oldFolder = getBackupDirectory();
-        FileUtils.mkdirs(getOldBackupsDirectory());
-        final File newFolder = new File(getOldBackupsDirectory(), Formatter.formatDateForFilename(BackupUtils.getNewestBackupTime()));
-        return oldFolder.renameTo(newFolder);
-    }
-
-    public static void deleteOldBackupDirectory() {
-        deleteRecursive(getOldBackupsDirectory());
+    // TODO: Don't delete complete folder
+    public static void deleteBackupDirectory() {
+        deleteRecursive(getBackupRootDirectory());
     }
 
     private static void deleteRecursive(final File fileOrDirectory) {

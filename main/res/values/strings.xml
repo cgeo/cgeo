@@ -650,7 +650,7 @@
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
-    <string name="init_backup_move_directory_error">Couldn\'t move backup files to the archive folder. There are probably multiple backups created on the same day.</string>
+    <string name="init_backup_folder_exists_error">Couldn\'t create a new backup directory. Have you already made a backup in the last minute?</string>
     <string name="init_backup_no_backup_available">There is no backup file available.</string>
     <string name="backup_confirm_overwrite">Do you want to overwrite the existing backup from %s?</string>
     <string name="restore_confirm_overwrite_database">WARNING: This will overwrite %s on your device!</string>

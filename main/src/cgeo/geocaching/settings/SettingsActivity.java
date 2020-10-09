@@ -448,7 +448,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         final Preference restore = getPreference(R.string.pref_fakekey_preference_restore);
         restore.setOnPreferenceClickListener(preference -> {
-            backupUtils.restore();
+            backupUtils.restore(BackupUtils.newestBackupFolder());
             return true;
         });
 
@@ -461,58 +461,22 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return true;
         });
 
-        final CheckBoxPreference settings = (CheckBoxPreference) getPreference(R.string.pref_backup_settings);
-        settings.setOnPreferenceClickListener(preference -> {
-            backupButtonsEnabler(backup, loginData);
-            return true;
-        });
-
-        final CheckBoxPreference caches = (CheckBoxPreference) getPreference(R.string.pref_backup_caches);
-        caches.setOnPreferenceClickListener(preference -> {
-            backupButtonsEnabler(backup, loginData);
-            return true;
-        });
-
-        backupButtonsEnabler(backup, loginData);
+        BackupUtils.moveBackupIntoNewFolderStructureIfNeeded();
         onPreferenceChange(getPreference(R.string.pref_fakekey_preference_restore), "");
 
         final CheckBoxPreference keepOld = (CheckBoxPreference) getPreference(R.string.pref_backups_backup_history);
-        keepOld.setSummaryOn(getString(R.string.init_backup_backup_history_summary, LocalStorage.getOldBackupsDirectory() + "/<timestamp>"));
+        keepOld.setSummary(getString(R.string.init_backup_backup_history_summary, LocalStorage.getBackupRootDirectory() + "/<timestamp>"));
+        keepOld.setEnabled(false);
+        keepOld.setChecked(true);
         keepOld.setOnPreferenceClickListener(preference -> {
-            if (!Settings.allowMultipleBackups() && LocalStorage.getOldBackupsDirectory().isDirectory()) {
+
+            // TODO: Change needed
+            if (!Settings.allowMultipleBackups() && LocalStorage.getBackupRootDirectory().isDirectory()) {
                 backupUtils.deleteBackupHistoryDialog();
             }
             return true;
         });
 
-
-        // TODO: If statement should be removed when advanced settings are good enough for our normal users
-        if (!Settings.allowMultipleBackups()) {
-            try {
-                ((PreferenceScreen) getPreference(R.string.preference_screen_backup)).removePreference(getPreference(R.string.pref_fakekey_advanced_backup_preferences));
-            } catch (Exception e) {
-                Log.e("Hiding backup history option not possible: ", e); // better safe than sorry  ;-)
-            }
-        }
-
-    }
-
-    private void backupButtonsEnabler(final Preference backup, final CheckBoxPreference loginData) {
-        if (Settings.getBackupSettings()) {
-            loginData.setKey(loginData.getContext().getString(R.string.pref_backup_logins));
-            loginData.setEnabled(true);
-            loginData.setChecked(Settings.getBackupLoginData());
-        } else {
-            loginData.setKey("fakekey_placeholder_no_real_value");
-            loginData.setEnabled(false);
-            loginData.setChecked(false);
-        }
-
-        if (Settings.getBackupSettings() || Settings.getBackupDatabase()) {
-            backup.setEnabled(true);
-        } else {
-            backup.setEnabled(false);
-        }
     }
 
     private void initMaintenanceButtons() {
@@ -910,7 +874,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                             : null);
         } else if (isPreference(preference, R.string.pref_fakekey_preference_restore)) {
             final String textRestore;
-            if (BackupUtils.hasBackup()) {
+            if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
                 textRestore = preference.getContext().getString(R.string.init_backup_last) + " "
                         + BackupUtils.getNewestBackupDateTime();
             } else {

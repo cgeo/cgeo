@@ -1110,17 +1110,6 @@
         <PreferenceCategory android:title="@string/init_backup_title"
             android:layout="@layout/preference_category"
             android:summary="@string/init_backup_summary">
-
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="@string/pref_backup_caches"
-                android:summary="@string/init_backup_caches"
-                android:iconSpaceReserved="true" />
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="@string/pref_backup_settings"
-                android:summary="@string/init_backup_program_settings"
-                android:iconSpaceReserved="true" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_backup_logins"
@@ -1139,7 +1128,6 @@
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_advanced"
-            android:key="@string/pref_fakekey_advanced_backup_preferences"
             android:layout="@layout/preference_category">
             <CheckBoxPreference
                 android:defaultValue="false"
@@ -1148,4 +1136,4 @@
         </PreferenceCategory>
     </PreferenceScreen>
 
-    </PreferenceScreen>
+</PreferenceScreen>
