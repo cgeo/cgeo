@@ -95,7 +95,7 @@ the class under test.
 Every class can be run with `Run '<class name>'` or debugged with `Debug '<class name>'`) as an [Android JUnit Test](https://developer.android.com/training/testing/fundamentals.html).
 To run all tests use the same `Run 'Tests in <package name>'` menu item from the context menu of a package in the test project.
 
-For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be a premium member.
+For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successful the account needs to be a premium member.
 
 Tests may also be launched from command line. Use `gradlew assembleBasicDebug` from the root directory of the git repository.
 
