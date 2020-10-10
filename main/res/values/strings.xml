@@ -629,7 +629,7 @@
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>
-    <string name="init_backup_summary">Please note that this feature can backup caches, waypoints &amp; settings, but no cache images.</string>
+    <string name="init_backup_summary">Please note that this feature can backup caches, waypoints &amp; settings, but no cache images. In order to be able to restore the data even after losing your phone, the backup files should be copied to an independent location.</string>
     <string name="init_restore_title">Restore Backup</string>
     <string name="init_backup_caches">caches and waypoints</string>
     <string name="init_backup_program_settings">program settings</string>

@@ -488,17 +488,10 @@ public class BackupUtils extends Activity {
 
     public void moveBackupIntoNewFolderStructureIfNeeded() {
         final File oldFolder = LocalStorage.getBackupRootDirectory();
+        final File databaseFile = DataStore.getBackupFileInternal(oldFolder, true);
+        final File settingsFile = new File(LocalStorage.getBackupRootDirectory(), SETTINGS_FILENAME);
 
-        File databaseFile = DataStore.getBackupFileInternal(oldFolder, true);
-        if (!databaseFile.exists() && databaseFile.length() == 0) {
-            databaseFile = null;
-        }
-        File settingsFile = new File(LocalStorage.getBackupRootDirectory(), SETTINGS_FILENAME);
-        if (!settingsFile.exists() && settingsFile.length() == 0) {
-            settingsFile = null;
-        }
-
-        final long timestamp = Math.max(databaseFile != null ? databaseFile.lastModified() : 0, settingsFile != null ? settingsFile.lastModified() : 0);
+        final long timestamp = getBackupTime(oldFolder);
         if (timestamp == 0) {
             return;
         }
@@ -506,12 +499,10 @@ public class BackupUtils extends Activity {
         if (newFolder == null) {
             return;
         }
-
-        if (databaseFile != null && databaseFile.renameTo(new File(newFolder, databaseFile.getName()))) {
+        if (databaseFile.exists() && databaseFile.length() != 0 && databaseFile.renameTo(new File(newFolder, databaseFile.getName()))) {
             Toast.makeText(activityContext, activityContext.getString(R.string.init_backup_database_moved_to_new_folder, newFolder.getPath()), Toast.LENGTH_LONG).show();
         }
-
-        if (settingsFile != null && settingsFile.renameTo(new File(newFolder, settingsFile.getName()))) {
+        if (settingsFile.exists() && settingsFile.length() != 0 && settingsFile.renameTo(new File(newFolder, settingsFile.getName()))) {
             Toast.makeText(activityContext, activityContext.getString(R.string.init_backup_settings_moved_to_new_folder, newFolder.getPath()), Toast.LENGTH_LONG).show();
         }
 
