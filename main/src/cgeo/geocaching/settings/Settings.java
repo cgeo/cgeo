@@ -1631,7 +1631,7 @@ public class Settings {
         return getBoolean(R.string.pref_backup_logins, false);
     }
 
-    public static boolean allowMultipleBackups() {
-        return getBoolean(R.string.pref_backups_backup_history, false);
+    public static int allowedBackupsNumber() {
+        return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 }

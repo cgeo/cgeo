@@ -637,25 +637,28 @@ public class MainActivity extends AbstractActionBarActivity {
     private void checkRestore() {
         final BackupUtils backupUtils = new BackupUtils(MainActivity.this);
 
-        if (DataStore.isNewlyCreatedDatebase() && BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) && !restoreMessageShown) {
-            restoreMessageShown = true;
+        if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown) {
 
-            new AlertDialog.Builder(this)
-                    .setTitle(res.getString(R.string.init_backup_restore))
-                    .setMessage(res.getString(R.string.init_restore_confirm))
-                    .setCancelable(false)
-                    .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
-                        dialog.dismiss();
-                        DataStore.resetNewlyCreatedDatabase();
-                        backupUtils.restore(BackupUtils.newestBackupFolder());
-                    })
-                    .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
-                        dialog.cancel();
-                        DataStore.resetNewlyCreatedDatabase();
-                    })
-                    .create()
-                    .show();
+            backupUtils.moveBackupIntoNewFolderStructureIfNeeded();
+            if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
 
+                restoreMessageShown = true;
+                new AlertDialog.Builder(this)
+                        .setTitle(res.getString(R.string.init_backup_restore))
+                        .setMessage(res.getString(R.string.init_restore_confirm))
+                        .setCancelable(false)
+                        .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
+                            dialog.dismiss();
+                            DataStore.resetNewlyCreatedDatabase();
+                            backupUtils.restore(BackupUtils.newestBackupFolder());
+                        })
+                        .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
+                            dialog.cancel();
+                            DataStore.resetNewlyCreatedDatabase();
+                        })
+                        .create()
+                        .show();
+            }
         }
     }
 

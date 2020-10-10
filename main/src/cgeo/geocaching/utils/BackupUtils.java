@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -144,34 +145,38 @@ public class BackupUtils extends Activity {
         }
     }
 
-    public void deleteBackupHistoryDialog() {
+    public void deleteBackupHistoryDialog(final BackupSeekbarPreference preference, final int newValue) {
+        final File[] dirs = getDirsToRemove(newValue + 1);
 
-        final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
-        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-        final TextView textView = (TextView) content.findViewById(R.id.message);
-        textView.setText(R.string.init_backup_history_disabled);
-        checkbox.setText(R.string.init_user_confirmation);
+        if (dirs != null) {
+            final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
+            final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
+            final TextView textView = (TextView) content.findViewById(R.id.message);
+            textView.setText(R.string.init_backup_history_delete_warning);
+            checkbox.setText(R.string.init_user_confirmation);
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
+            final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
                 .setView(content)
                 .setTitle(R.string.init_backup_backup_history)
                 .setCancelable(true)
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> LocalStorage.deleteBackupDirectory())
-                .setNeutralButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> LocalStorage.deleteFilesOrDirectories(dirs))
+                .setNeutralButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
+                .setOnCancelListener(dialog -> preference.setValue(Math.min(newValue + dirs.length, activityContext.getResources().getInteger(R.integer.backup_history_length_max))))
                 .create();
 
-        alertDialog.show();
-        alertDialog.setOwnerActivity(activityContext);
+            alertDialog.show();
+            alertDialog.setOwnerActivity(activityContext);
 
-        final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        button.setEnabled(false);
-        checkbox.setOnClickListener(check -> {
-            if (checkbox.isChecked()) {
-                button.setEnabled(true);
-            } else {
-                button.setEnabled(false);
-            }
-        });
+            final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setEnabled(false);
+            checkbox.setOnClickListener(check -> {
+                if (checkbox.isChecked()) {
+                    button.setEnabled(true);
+                } else {
+                    button.setEnabled(false);
+                }
+            });
+        }
 
     }
 
@@ -187,12 +192,13 @@ public class BackupUtils extends Activity {
             return;
         }
 
-//        if (hasBackup() && Settings.allowMultipleBackups() && !LocalStorage.moveOldBackup()) { //Todo: delete old backups here if not allowMultipleBackups
-//            Toast.makeText(activityContext, R.string.init_backup_move_directory_error, Toast.LENGTH_LONG).show();
-//        }
 
-        if (true) { // hasBackup()
-            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, OneTimeDialogs.DialogStatus.DIALOG_SHOW, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getNewestBackupDateTime()), true, null, () -> backupInternal(runAfterwards));
+        final File[] dirs = getDirsToRemove(Settings.allowedBackupsNumber());
+        if (dirs != null) {
+            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, OneTimeDialogs.DialogStatus.DIALOG_SHOW, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs[dirs.length - 1])), true, null, () -> {
+                LocalStorage.deleteFilesOrDirectories(dirs);
+                backupInternal(runAfterwards);
+            });
         } else {
             backupInternal(runAfterwards);
         }
@@ -362,7 +368,6 @@ public class BackupUtils extends Activity {
 
         try {
             final File backupfn = new File(backupDir, SETTINGS_FILENAME);
-            // FileUtils.mkdirs(backupfn.getParentFile());
             final FileOutputStream file = new FileOutputStream(backupfn);
             final XmlSerializer xmlSerializer = Xml.newSerializer();
             final StringWriter writer = new StringWriter();
@@ -462,14 +467,18 @@ public class BackupUtils extends Activity {
         return file.lastModified();
     }
 
-    public static long getNewestBackupTime() {
-        final File backupDir = newestBackupFolder();
+    public static long getBackupTime(final File backupDir) {
         return backupDir == null ? 0 : Math.max(getDatabaseBackupTime(backupDir), getSettingsBackupTime(backupDir));
     }
 
     @NonNull
     public static String getNewestBackupDateTime() {
-        final long time = getNewestBackupTime();
+        return getBackupDateTime(newestBackupFolder());
+    }
+
+    @NonNull
+    public static String getBackupDateTime(final File backupDir) {
+        final long time = getBackupTime(backupDir);
         if (time == 0) {
             return StringUtils.EMPTY;
         }
@@ -477,7 +486,7 @@ public class BackupUtils extends Activity {
     }
 
 
-    public static void moveBackupIntoNewFolderStructureIfNeeded() {
+    public void moveBackupIntoNewFolderStructureIfNeeded() {
         final File oldFolder = LocalStorage.getBackupRootDirectory();
 
         File databaseFile = DataStore.getBackupFileInternal(oldFolder, true);
@@ -494,29 +503,52 @@ public class BackupUtils extends Activity {
             return;
         }
         final File newFolder = LocalStorage.getNewBackupDirectory(timestamp);
-
-        if (databaseFile != null) {
-            databaseFile.renameTo(new File(newFolder, databaseFile.getName()));
+        if (newFolder == null) {
+            return;
         }
 
-        if (settingsFile != null) {
-            settingsFile.renameTo(new File(newFolder, settingsFile.getName()));
+        if (databaseFile != null && databaseFile.renameTo(new File(newFolder, databaseFile.getName()))) {
+            Toast.makeText(activityContext, activityContext.getString(R.string.init_backup_database_moved_to_new_folder, newFolder.getPath()), Toast.LENGTH_LONG).show();
+        }
+
+        if (settingsFile != null && settingsFile.renameTo(new File(newFolder, settingsFile.getName()))) {
+            Toast.makeText(activityContext, activityContext.getString(R.string.init_backup_settings_moved_to_new_folder, newFolder.getPath()), Toast.LENGTH_LONG).show();
         }
 
     }
 
+    @Nullable
     public static File newestBackupFolder() {
+        final File[] files = getExistingBackupFoldersSorted();
 
+        if (files == null) {
+            return null;
+        }
+
+        return files [files.length - 1];
+    }
+
+    @Nullable
+    public static File[] getExistingBackupFoldersSorted() {
         final File[] files = LocalStorage.getBackupRootDirectory().listFiles(s -> s.getName().matches("^[0-9]{4}-[0-9]{2}-[0-9]{2} (20|21|22|23|[01]\\d|\\d)((-[0-5]\\d){1,2})$"));
 
         if (files == null || files.length == 0) {
             return null;
         }
-
         Arrays.sort(files);
-        return files [files.length - 1];
-
+        return files;
     }
 
+    @Nullable
+    public File[] getDirsToRemove(final int maxBackupNumber) {
+        final File[] dirs = getExistingBackupFoldersSorted();
+
+        if (dirs == null || dirs.length <= maxBackupNumber || maxBackupNumber >= activityContext.getResources().getInteger(R.integer.backup_history_length_max)) {
+            Log.e("nothing to remove");
+            return null;
+        }
+        Log.e("files for to remove");
+        return Arrays.copyOfRange(dirs, 0, dirs.length - maxBackupNumber);
+    }
 
 }

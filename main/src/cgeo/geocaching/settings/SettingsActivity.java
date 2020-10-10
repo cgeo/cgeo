@@ -85,6 +85,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     public static final int NO_RESTART_NEEDED = 1;
     public static final int RESTART_NEEDED = 2;
 
+    private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
+
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
      * directory and preference key in onActivityResult() easily just by knowing
@@ -95,7 +97,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 LocalStorage.getGpxImportDirectory().getPath(), false),
         GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,
                 LocalStorage.getGpxExportDirectory().getPath(), true),
-        THEMES_DIR(3, R.string.pref_renderthemepath, "", false);
+        THEMES_DIR(3, R.string.pref_renderthemepath, "", false),
+        BACKUP_DIR(4, R.string.pref_fakekey_preference_restore_dirselect,
+                       LocalStorage.getBackupRootDirectory().getPath() + "/", false);
         public final int requestCode;
         public final int keyId;
         public final String defaultValue;
@@ -173,8 +177,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_fakekey_dataDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup, R.string.pref_fakekey_preference_backupsettings_full, R.string.pref_fakekey_preference_backupsettings_light, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
-                R.string.pref_ec_icons }) {
+                R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message,
+                R.string.pref_twitter_trackable_message, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
@@ -438,7 +442,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initBackupButtons() {
-        final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
 
         final Preference backup = getPreference(R.string.pref_fakekey_preference_backup);
         backup.setOnPreferenceClickListener(preference -> {
@@ -461,19 +464,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return true;
         });
 
-        BackupUtils.moveBackupIntoNewFolderStructureIfNeeded();
+        backupUtils.moveBackupIntoNewFolderStructureIfNeeded();
         onPreferenceChange(getPreference(R.string.pref_fakekey_preference_restore), "");
 
-        final CheckBoxPreference keepOld = (CheckBoxPreference) getPreference(R.string.pref_backups_backup_history);
-        keepOld.setSummary(getString(R.string.init_backup_backup_history_summary, LocalStorage.getBackupRootDirectory() + "/<timestamp>"));
-        keepOld.setEnabled(false);
-        keepOld.setChecked(true);
-        keepOld.setOnPreferenceClickListener(preference -> {
+        final BackupSeekbarPreference keepOld = (BackupSeekbarPreference) getPreference(R.string.pref_backups_backup_history_length);
 
-            // TODO: Change needed
-            if (!Settings.allowMultipleBackups() && LocalStorage.getBackupRootDirectory().isDirectory()) {
-                backupUtils.deleteBackupHistoryDialog();
-            }
+        keepOld.setOnPreferenceChangeListener((preference, value) -> {
+            backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value);
             return true;
         });
 
@@ -718,6 +715,11 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
 
         if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == DirChooserType.BACKUP_DIR.requestCode) {
+            backupUtils.restore(new File(data.getData().getPath()));
             return;
         }
 

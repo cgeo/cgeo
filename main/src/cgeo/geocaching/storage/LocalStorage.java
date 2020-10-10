@@ -360,9 +360,13 @@ public final class LocalStorage {
         return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), CGEO_DIRNAME);
     }
 
-    // TODO: Don't delete complete folder
-    public static void deleteBackupDirectory() {
-        deleteRecursive(getBackupRootDirectory());
+    public static void deleteFilesOrDirectories(final File[] files) {
+        if (files == null) {
+            return;
+        }
+        for (File file : files) {
+            deleteRecursive(file);
+        }
     }
 
     private static void deleteRecursive(final File fileOrDirectory) {
