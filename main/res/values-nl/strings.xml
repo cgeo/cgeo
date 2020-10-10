@@ -1549,6 +1549,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo op Google Play</a></string>
     <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
+    <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe versie beschikbaar.\nTik om te installeren.</string>
