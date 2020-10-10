@@ -2,12 +2,16 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2020.10.04-legacy:</b>\n
+    <b>2020.10.10-legacy:</b>\n
     · Note:\n
       This is a dedicated legacy version of c:geo as your device is running on an Android version between 4.1 and 4.4.\n
       Expect no further updates and consider using a device with a more recent Android version.\n
       For more info check our FAQ on www.cgeo.org\n
     \n
+    · Fix: Adapt to website change, fixed trackable logging\n
+    \n
+    \n
+    <b>2020.10.04-legacy:</b>\n
     · Fix: Show correct error message for login failures\n
     \n
     \n
