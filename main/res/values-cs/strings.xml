@@ -551,6 +551,7 @@
     <string name="init_signature_template_url">URL adresa</string>
     <string name="init_signature_template_log">Text logu</string>
     <string name="init_signature_template_size">Velikost</string>
+    <string name="init_signature_template_type">Typ</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
@@ -595,25 +596,47 @@
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Vytvořit zálohu</string>
+    <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat keše, trasové body &amp; nastavení, ale žádné obrázky z keší.</string>
+    <string name="init_restore_title">Obnovit zálohu</string>
+    <string name="init_backup_caches">keše a trasové body</string>
+    <string name="init_backup_program_settings">nastavení programu</string>
+    <string name="init_backup_logins">zahrnout údaje o účtu</string>
     <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
+    <string name="init_backup_finished">Zálohování dokončeno</string>
+    <string name="init_backup_now">Spustit zálohování</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
     <string name="init_backup_restore">Obnovit</string>
+    <string name="init_restore_restored">Obnova dokončena</string>
+    <string name="init_backup_start_restore">Spustit obnovení</string>
+    <string name="init_backup_backup_history">Historie záloh</string>
+    <string name="init_backup_create_backup_history">Vytvořit historii záloh</string>
+    <string name="init_backup_history_disabled">Historie záloh je zakázána. Chcete odstranit všechny vaše archivované zálohy?</string>
+    <string name="init_user_confirmation">Vím, co dělám</string>
+    <string name="init_backup_backup_history_summary">Při vytváření nové zálohy bude předchozí záloha přesunuta do %s. V závislosti na velikosti zálohy by to mohlo vést k vysokému využití disku!</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
     <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
+    <string name="init_backup_move_directory_error">Nelze přesunout záložní soubory do složky archivu. Pravděpodobně existuje více záloh vytvořených ve stejný den.</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Opravdu chceš přesat existující zálohu z %s?</string>
+    <string name="restore_confirm_overwrite_database">VAROVÁNÍ: Toto přepíše %s na vašem zařízení!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">VAROVÁNÍ: Toto přepíše %s a vaše aktuální nastavení na vašem zařízení!</string>
+    <string name="restore_confirm_overwrite_settings">VAROVÁNÍ: Toto přepíše vaše aktuální nastavení na vašem zařízení!</string>
+    <string name="restore_information">Vyberte prosím, co chcete obnovit:</string>
     <string name="init_restore_success">Obnova dokončena.</string>
     <string name="init_restore_failed_dbrecreated">Obnova se nezdařila: Záložní soubor je poškozen, databáze musela být znovu vytvořena.</string>
     <string name="init_restore_failed">Obnova selhala.</string>
     <string name="init_restore_running">Obnovování databáze keší…</string>
     <string name="init_restore_confirm">Databáze je prázdná, chceš ji obnovit ze zálohy?</string>
     <string name="init_backup_last">Dostupná záloha z</string>
+    <string name="init_backup_unavailable">není k dispozici</string>
     <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
     <string name="init_restore_version_error">Neočekávaný formát - databázi nelze obnovit.\n\nOčekávaná verze je %1$d,\nzáloha má verzi %2$d</string>
     <string name="settings_title_backup">Zálohovat / Obnovit</string>
     <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/trasových bodech a nastavení programu.</string>
+    <string name="init_backup_settings_logins">Zálohovat data o účtu</string>
     <string name="init_backup_settings_backup_full_confirm">Chcete uložit důvěrné údaje o účtu? Jiné aplikace je mohou přečíst.</string>
     <string name="settings_savingerror">Chyba při ukládaní nastavení</string>
     <string name="settings_saved">Nastavení bylo úspěšně uloženo do:</string>
@@ -957,6 +980,8 @@
     <string name="cache_menu_checker">Otevřít Geocheck</string>
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
     <string name="cache_menu_ignore">Ignorovat keš</string>
+    <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
+    <string name="cache_log_menu_title">Log %1$s z %2$s</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace keše znamená, že tato keš nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak keš znovu zobrazit je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
@@ -1020,6 +1045,8 @@
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Otevřete Chirp Wolf a přečtěte údaje chirpu pro tuto keš</string>
     <string name="cache_chirpwolf_install">Nainstalujte Chirp Wolf a budete moci číst údaje chirpu</string>
+    <string name="context_share_as_text">Sdílet text</string>
+    <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
@@ -1542,6 +1569,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
     <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
+    <string name="github_title">Sledování chyb</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>
