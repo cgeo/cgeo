@@ -487,25 +487,26 @@ public class BackupUtils extends Activity {
 
 
     public void moveBackupIntoNewFolderStructureIfNeeded() {
-        final File oldFolder = LocalStorage.getBackupRootDirectory();
-        final File databaseFile = DataStore.getBackupFileInternal(oldFolder, true);
-        final File settingsFile = new File(LocalStorage.getBackupRootDirectory(), SETTINGS_FILENAME);
+        if (getExistingBackupFoldersSorted() == null) {
+            final File oldFolder = LocalStorage.getBackupRootDirectory();
+            final File databaseFile = DataStore.getBackupFileInternal(oldFolder, true);
+            final File settingsFile = new File(LocalStorage.getBackupRootDirectory(), SETTINGS_FILENAME);
 
-        final long timestamp = getBackupTime(oldFolder);
-        if (timestamp == 0) {
-            return;
+            final long timestamp = getBackupTime(oldFolder);
+            if (timestamp == 0) {
+                return;
+            }
+            final File newFolder = LocalStorage.getNewBackupDirectory(timestamp);
+            if (newFolder == null) {
+                return;
+            }
+            if (databaseFile.exists() && databaseFile.length() != 0 && databaseFile.renameTo(new File(newFolder, databaseFile.getName()))) {
+                Log.iForce("The existing database backup was moved to " + newFolder.getPath());
+            }
+            if (settingsFile.exists() && settingsFile.length() != 0 && settingsFile.renameTo(new File(newFolder, settingsFile.getName()))) {
+                Log.iForce("The existing settings backup was moved to " + newFolder.getPath());
+            }
         }
-        final File newFolder = LocalStorage.getNewBackupDirectory(timestamp);
-        if (newFolder == null) {
-            return;
-        }
-        if (databaseFile.exists() && databaseFile.length() != 0 && databaseFile.renameTo(new File(newFolder, databaseFile.getName()))) {
-            Toast.makeText(activityContext, activityContext.getString(R.string.init_backup_database_moved_to_new_folder, newFolder.getPath()), Toast.LENGTH_LONG).show();
-        }
-        if (settingsFile.exists() && settingsFile.length() != 0 && settingsFile.renameTo(new File(newFolder, settingsFile.getName()))) {
-            Toast.makeText(activityContext, activityContext.getString(R.string.init_backup_settings_moved_to_new_folder, newFolder.getPath()), Toast.LENGTH_LONG).show();
-        }
-
     }
 
     @Nullable
