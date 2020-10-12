@@ -1665,12 +1665,12 @@
     <string name="attribute_ads_no">Contains no advertising</string>
     <string name="attribute_military_area_yes">Military training area</string>
     <string name="attribute_military_area_no">No military training area</string>
-    <string name="attribute_video_surveil_yes">Video surveillance</string>
-    <string name="attribute_video_surveil_no">No video surveillance</string>
-    <string name="attribute_trackables_yes">Trackables</string>
-    <string name="attribute_trackables_no">Trackables</string>
-    <string name="attribute_historic_yes">Historic</string>
-    <string name="attribute_historic_no">Not historic</string>
+    <string name="attribute_video_surveil_yes">Area under video surveillance</string>
+    <string name="attribute_video_surveil_no">Area not under video surveillance</string>
+    <string name="attribute_trackables_yes">Suitable to hold trackables</string>
+    <string name="attribute_trackables_no">Not suitable to hold trackables</string>
+    <string name="attribute_historic_yes">Abandoned structure / Ruin</string>
+    <string name="attribute_historic_no">No abandoned structure / No ruin</string>
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">No handicap: Blind</string>
 
