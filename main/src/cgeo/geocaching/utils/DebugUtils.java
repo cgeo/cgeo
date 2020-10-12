@@ -25,7 +25,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.io.IOUtils;
-import org.mapsforge.map.reader.MapFile;
 
 
 public class DebugUtils {
@@ -113,7 +112,6 @@ public class DebugUtils {
                     // Create a new file in the directory and copy logfile content to it
                     final DocumentFile pickedDir = DocumentFile.fromTreeUri(activity, cgeoUri);
                     final DocumentFile newFile = pickedDir.createFile("text/plain", file.getName());
-                    MapFile mf = null;
                     final OutputStream out = activity.getContentResolver().openOutputStream(newFile.getUri());
                     out.write("Copy of logcat file starts...".getBytes()); //add this line in the copied logfile just for debug purposes
                     final InputStream in = new FileInputStream(file);
