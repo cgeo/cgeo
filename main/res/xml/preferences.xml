@@ -1123,7 +1123,8 @@
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_backup_logins"
-                android:summary="@string/init_backup_logins" />
+                android:title="@string/init_backup_logins"
+                android:summary="@string/init_backup_logins_summary" />
             <Preference
                 android:key="@string/pref_fakekey_preference_backup"
                 android:title="@string/init_backup_now" />

@@ -633,7 +633,8 @@
     <string name="init_restore_title">Restore Backup</string>
     <string name="init_backup_caches">caches and waypoints</string>
     <string name="init_backup_program_settings">program settings</string>
-    <string name="init_backup_logins">include account data</string>
+    <string name="init_backup_logins">Include account data</string>
+    <string name="init_backup_logins_summary">This will store your entered login credentials within the backup.</string>
     <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Backup finished</string>
@@ -645,7 +646,7 @@
     <string name="init_backup_restore_different_backup">Restore a different backup</string>
     <string name="init_backup_backup_history">Backup history</string>
     <string name="init_backup_history_length_title">Maximum stored backups</string>
-    <string name="init_backup_history_length_summary">Decide how many backups should be saved. When the limit is reached, the oldest ones are automatically deleted.</string>
+    <string name="init_backup_history_length_summary">Decide how many backups should be kept. When the limit is reached, the oldest ones will be deleted automatically.</string>
     <string name="init_backup_history_length_min">Only recent</string>
     <string name="init_backup_history_length_max">Keep all</string>
     <string name="init_backup_history_delete_warning">You have saved more backups than your configured maximum value allows. Do you really want to remove all excess backups?</string>
