@@ -317,6 +317,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         prepareFilterBar();
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
+
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
+
     }
 
     private void postZoomToViewport(final Viewport viewport) {

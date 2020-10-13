@@ -86,7 +86,6 @@
     <string translatable="false" name="pref_choose_list">choose_list</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
     <string translatable="false" name="pref_maplanguage">maplanguage</string>
-    <string translatable="false" name="pref_mapDirectory">mapDirectory</string>
     <string translatable="false" name="pref_mapsforge_scale_text">mapsforgeScaleText</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
     <string translatable="false" name="pref_renderthemepath">renderthemepath</string>
@@ -266,6 +265,13 @@
 
     <!-- store the base directory where the user has granted c:geo access to (relevant for Android 10+ scoped storage -->
     <string translatable="false" name="pref_granted_basedir">granted_basedir</string>
+
+    <!-- ids for public folder prefs -->
+    <string translatable="false" name="pref_publicfolder_basedir">publicfolder_basedir</string>
+    <string translatable="false" name="pref_publicfolder_logfiles">publicfolder_logfiles</string>
+    <string translatable="false" name="pref_publicfolder_offlinemaps">publicfolder_offlinemaps</string>
+    <string translatable="false" name="pref_publicfolder_offlinemapthemes">publicfolder_offlinemapthemes</string>
+
 
     <!-- preference values -->
     <string translatable="false" name="pref_maprotation_off">off</string>
