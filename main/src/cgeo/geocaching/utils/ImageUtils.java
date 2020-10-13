@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -57,6 +58,8 @@ public final class ImageUtils {
             ExifInterface.ORIENTATION_ROTATE_180,
             ExifInterface.ORIENTATION_ROTATE_270
     };
+
+    private static final AtomicLong IMG_COUNTER = new AtomicLong(0);
 
     private static final int[] ROTATION = { 90, 180, 270 };
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
@@ -303,8 +306,8 @@ public final class ImageUtils {
         }
 
         // Create a media file name
-        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        final String timeStamp = new SimpleDateFormat("yyMMdd_HHmmss", Locale.US).format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "-" + IMG_COUNTER.addAndGet(1) + ".jpg");
     }
 
     @NonNull
