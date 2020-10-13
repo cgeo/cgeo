@@ -166,9 +166,19 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/log_image_add"
+                    android:id="@+id/log_image_add_multi"
                     style="@style/button_small"
-                    android:src="@drawable/ic_menu_add"
+                    android:src="@drawable/ic_menu_image_multi"
+                    android:layout_gravity="left"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    />
+
+                <ImageButton
+                    android:id="@+id/log_image_add_camera"
+                    style="@style/button_small"
+                    android:src="@drawable/ic_menu_camera"
+                    android:layout_toRightOf="@+id/log_image_add_multi"
                     android:layout_gravity="left"
                     android:layout_width="40dip"
                     android:layout_height="40dip"

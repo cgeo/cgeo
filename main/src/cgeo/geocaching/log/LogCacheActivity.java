@@ -100,12 +100,15 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     protected CheckBox favCheck;
     @BindView(R.id.log)
     protected EditText logEditText;
-    @BindView(R.id.log_image_add)
-    protected View logImageAddButton;
+    @BindView(R.id.log_image_add_multi)
+    protected View logImageAddMultiButton;
+    @BindView(R.id.log_image_add_camera)
+    protected View logImageAddCameraButton;
 
     private Geocache cache = null;
     private String geocode = null;
     private ILoggingManager loggingManager;
+    private final ImageActivityHelper imageHelper = new ImageActivityHelper(this, 3000);
 
     private OfflineLogEntry lastSavedState = null;
     private final Set<String> lastSavedStateImagePaths = new HashSet<>();
@@ -237,7 +240,16 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
                 .setDisplayMapper(ReportProblemType::getL10n);
         initializeImageList();
-        this.logImageAddButton.setOnClickListener(v -> addOrEditImage(-1));
+        this.logImageAddMultiButton.setOnClickListener(v ->
+            imageHelper.getMultipleImagesFromStorage(getFastImageAutoScale(), true, false, imgs -> {
+                    images.addAll(imgs);
+                    updateImageList();
+                }));
+        this.logImageAddCameraButton.setOnClickListener(v ->
+            imageHelper.getImageFromCamera(getFastImageAutoScale(), true, false, img -> {
+                images.add(img);
+                updateImageList();
+            }));
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
@@ -318,6 +330,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private void setLogText(final String newText) {
         logEditText.setText(newText == null ? StringUtils.EMPTY : newText);
         Dialogs.moveCursorToEnd(logEditText);
+    }
+
+    private int getFastImageAutoScale() {
+        int scale = Settings.getLogImageScale();
+        if (scale <= 0) {
+            scale = 1024;
+        }
+        return scale;
     }
 
     private void adjustImageStateTo(final LogEntry entry, final boolean deleteOld) {
@@ -544,6 +564,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
+        if (imageHelper.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == RESULT_OK) {
                 final int imageIndex = data.getIntExtra(Intents.EXTRA_INDEX, -1);
@@ -723,8 +746,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         //must create NEW (!) image list, otherwise update of list view will not work!
         final List<Image> newImages = new ArrayList<>();
         newImages.addAll(images);
-        imageListAdapter.submitList(newImages);
-        imageListAdapter.notifyDataSetChanged();
+        imageListAdapter.submitList(newImages,
+            //following itemrangechanged event is necessary to update default image name counts (eg "Image 1", "Image 2", ...)
+            () -> imageListAdapter.notifyItemRangeChanged(0, imageListAdapter.getItemCount()));
     }
 
     private void initializeImageList() {
@@ -751,6 +775,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         protected TextView imageDescription;
         @BindView(R.id.log_image_info)
         protected TextView imageInfo;
+        @BindView(R.id.log_image_delete)
+        protected View imageDeleteButton;
 
         public LogImageViewHolder(final View rowView) {
             super(rowView);
@@ -809,6 +835,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.logcache_image_item, parent, false);
             final LogImageViewHolder viewHolder = new LogImageViewHolder(view);
             viewHolder.itemView.setOnClickListener(view1 -> addOrEditImage(viewHolder.getAdapterPosition()));
+            viewHolder.imageDeleteButton.setOnClickListener(v -> {
+                images.remove(viewHolder.getAdapterPosition());
+                updateImageList();
+            });
             return viewHolder;
         }
 
