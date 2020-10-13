@@ -19,7 +19,7 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     compileOptions {
         // use the diamond operator and some other goodies in Android
