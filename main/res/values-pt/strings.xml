@@ -1550,6 +1550,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo no Google Play</a></string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
+    <string name="github_title">Rastreador de erros</string>
     <string name="faq_title">Perguntas Frequentes</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Disponível uma nova versão.\nToque para instalar.</string>

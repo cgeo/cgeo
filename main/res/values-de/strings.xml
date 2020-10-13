@@ -1748,7 +1748,7 @@
     <string name="localfile_foundmap">Kartendatei gefunden</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Empfange Kartendatei</string>
-    <string name="receivemapfile_success">Kartendatei erfolgreich als \"%s\" emmpfangen und im lokalen Kartenverzeichnis gespeichert</string>
+    <string name="receivemapfile_success">Kartendatei erfolgreich als \"%s\" empfangen und im lokalen Kartenverzeichnis gespeichert</string>
     <string name="receivemapfile_error">Fehler beim Empfang der Kartendatei</string>
     <string name="receivemapfile_error_io_exception">E/A-Fehler beim Empfang der Kartendatei. Ist das Kartenverzeichnis \"%s\" beschreibbar?</string>
     <string name="receivemapfile_error_filenotfound_exception">Datei nicht gefunden beim Empfang der Kartendatei.</string>
