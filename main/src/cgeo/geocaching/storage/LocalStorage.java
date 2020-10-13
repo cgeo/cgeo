@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Environment;
 
 import androidx.annotation.NonNull;
@@ -248,8 +249,8 @@ public final class LocalStorage {
     public static File getExternalPublicCgeoDirectory() {
         if (externalPublicCgeoDirectory == null) {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                final File baseDir = Settings.getBaseDir();
-                externalPublicCgeoDirectory = null != baseDir ? baseDir : new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), CGEO_DIRNAME);
+                final Uri baseDir = Settings.getBaseDir();
+                externalPublicCgeoDirectory = null != baseDir && null != baseDir.getPath() ? new File(baseDir.getPath()) : new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), CGEO_DIRNAME);
             } else {
                 externalPublicCgeoDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), CGEO_DIRNAME);
             }

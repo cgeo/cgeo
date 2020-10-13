@@ -7,17 +7,25 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.documentfile.provider.DocumentFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.apache.commons.io.IOUtils;
+
 
 public class DebugUtils {
 
@@ -63,6 +71,11 @@ public class DebugUtils {
 
     private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo) {
         final AtomicInteger result = new AtomicInteger(LogcatResults.LOGCAT_ERROR.ordinal());
+
+       // File cgeoDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "cgeo");
+        //File file = new File(cgeoDir, "logfile_"+System.currentTimeMillis()+".txt");
+
+        //try: /storage/emulated/0/cgeo
         final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
         final String filename = file.getName();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
@@ -81,6 +94,31 @@ public class DebugUtils {
                 final int returnCode = builder.start().waitFor();
                 if (returnCode == 0) {
                     result.set(file.exists() ? LogcatResults.LOGCAT_OK.ordinal() : LogcatResults.LOGCAT_EMPTY.ordinal());
+
+
+                    //the following code COPIES the created log file to the public folder as chosen y user in MainActivity
+                    //TODO: this code is a hack and just to try out the concepts of the storage framework
+
+                    Log.w("Available URIs with persisted permissions: " +
+                                    CollectionStream.of(activity.getContentResolver().getPersistedUriPermissions()).map(u -> u.getUri().getPath()).toJoinedString(","));
+
+                    //get the uri which was granted access before (NOTE: if there's no such URL then this fails of course!)
+                    final Uri cgeoUri = activity.getContentResolver().getPersistedUriPermissions().get(0).getUri();
+                    //"take" access rights
+                    activity.getContentResolver().takePersistableUriPermission(cgeoUri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION |
+                                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+                    // Create a new file in the directory and copy logfile content to it
+                    final DocumentFile pickedDir = DocumentFile.fromTreeUri(activity, cgeoUri);
+                    final DocumentFile newFile = pickedDir.createFile("text/plain", file.getName());
+                    final OutputStream out = activity.getContentResolver().openOutputStream(newFile.getUri());
+                    out.write("Copy of logcat file starts...".getBytes()); //add this line in the copied logfile just for debug purposes
+                    final InputStream in = new FileInputStream(file);
+                    IOUtils.copy(in, out);
+                    in.close(); //TODO: closing w/o being in final block would e unacceptable in production!
+                    out.close(); //TODO: closing w/o being in final block would e unacceptable in production!
+                    //hack end
                 }
 
             } catch (IOException | InterruptedException e) {
