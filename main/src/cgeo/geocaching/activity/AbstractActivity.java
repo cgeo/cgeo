@@ -10,6 +10,8 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
@@ -51,6 +53,8 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
+
+    private PublicLocalStorageActivityHelper publicLocalStorage = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -293,6 +297,25 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             return;
         }
         setCacheTitleBar(cache);
+    }
+
+    protected PublicLocalStorageActivityHelper getPublicLocalStorage() {
+        if (this.publicLocalStorage == null) {
+            this.publicLocalStorage = new PublicLocalStorageActivityHelper(this);
+        }
+        return this.publicLocalStorage;
+    }
+
+    protected void checkAndGrantPublicFolderAccess(final PublicLocalFolder ... folders) {
+        getPublicLocalStorage().checkAndGrantFolderAccess(folders);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (this.publicLocalStorage != null) {
+            this.publicLocalStorage.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

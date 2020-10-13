@@ -1630,13 +1630,13 @@ public class Settings {
     }
 
     public static void setBaseDir(final Uri uri) {
-        putString(R.string.pref_granted_basedir, uri.getPath());
+        putString(R.string.pref_granted_basedir, uri.toString());
         LocalStorage.resetExternalPublicCgeoDirectory();
     }
 
     @Nullable
-    public static File getBaseDir() {
+    public static Uri getBaseDir() {
         final String pref = getString(R.string.pref_granted_basedir, "");
-        return StringUtils.isNotBlank(pref) ? new File(pref) : null;
+        return StringUtils.isNotBlank(pref) ? Uri.parse(pref) : null;
     }
 }

@@ -52,6 +52,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BRouterUtils;
@@ -213,6 +214,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         super.onCreate(savedInstanceState);
 
         Log.d("NewMap: onCreate");
+
+        checkAndGrantPublicFolderAccess(PublicLocalFolder.OFFLINE_MAP_DEFAULT);
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
