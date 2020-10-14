@@ -965,6 +965,7 @@
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
     <string name="cache_menu_ignore">Ohita kätkö</string>
     <string name="cache_log_menu_decrypt">Pura salaus/Salaa</string>
+    <string name="cache_log_menu_title">Loki %1$s, %2$s lokista</string>
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
@@ -1548,6 +1549,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo Google Play:ssä</a></string>
     <string name="about_twitter">Haluatko, että <b>c:geo</b> julkaisee uuden päivityksen Twitterissä aina kun loggaat kätkön?</string>
+    <string name="github_title">Vianjäljitys</string>
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Uusi versio saatavilla.\nKlikkaa asentaaksesi.</string>
