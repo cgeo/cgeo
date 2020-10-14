@@ -47,7 +47,7 @@ Add a new line or change an existing one.
 Don't mess up the structure of this file. It is used to automatically create missing strings, html-pages and enumerations.
 The first column contains the name of the attribute. In case of geocaching.com, this also is their internal id and is used for parsing websites in c:geo. So don't change any IDs!
 The second is the "groundspeak:attribute id" from a gpx file. You can get them from a cache gpx export.
-The third is the ACOCDE, the "opencaching id". This you will get from their attribute-definitions.xml. To prepare this part follow ../attributes_okapi/readme.txt.
+The third is the ACODE, the "opencaching id". This you will get from their attribute-definitions.xml. To prepare this part follow ../attributes_okapi/readme.txt.
 
 
 4. create a list of strings that are (not) missing
