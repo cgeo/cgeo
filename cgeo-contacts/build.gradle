@@ -5,7 +5,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     // signing is handled via private.properties
     signingConfigs {
@@ -20,7 +20,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         //noinspection OldTargetApi
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
