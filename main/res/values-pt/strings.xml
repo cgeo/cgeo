@@ -1541,6 +1541,22 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="attribute_challengecache_no">Não é Cache Challenge (desafio)</string>
     <string name="attribute_hqsolutionchecker_yes">Contém o verificador de soluções \'geocaching.com\' (oficial)</string>
     <string name="attribute_hqsolutionchecker_no">Não contém o verificador de soluções \'geocaching.com\' (oficial)</string>
+    <string name="attribute_handicaching_yes">Classificada em Handicaching.com</string>
+    <string name="attribute_handicaching_no">Não foi classificada em Handicaching.com</string>
+    <string name="attribute_munzee_yes">Possui uma Munzee</string>
+    <string name="attribute_munzee_no">Não possui uma Munzee</string>
+    <string name="attribute_ads_yes">Contém publicidade</string>
+    <string name="attribute_ads_no">Não contém publicidade</string>
+    <string name="attribute_military_area_yes">Área de treino militar</string>
+    <string name="attribute_military_area_no">Não é uma área de treino militar</string>
+    <string name="attribute_video_surveil_yes">Área sob vigilância de vídeo</string>
+    <string name="attribute_video_surveil_no">Não é uma área sob vigilância de vídeo</string>
+    <string name="attribute_trackables_yes">Adequada para armazenar trackables</string>
+    <string name="attribute_trackables_no">Não é adequada para armazenar trackables</string>
+    <string name="attribute_historic_yes">Estrutura abandonada / Ruína</string>
+    <string name="attribute_historic_no">Não é uma estrutura abandonada ou ruína</string>
+    <string name="attribute_blind_people_yes">Adequa-se a pessoas cegas</string>
+    <string name="attribute_blind_people_no">Não é adequada a pessoas cegas</string>
     <!-- next things -->
     <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
