@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.xml.parsers.SAXParser;
@@ -15,133 +16,143 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class GenerateAttributes {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
 
-		final File inFile = new File(args[0]);
-		InputStream inputStream;
+        final File inFile = new File(args[0]);
+        InputStream inputStream;
 
-		try {
+        try {
+            writeHeader();
 
-			writeHeader();
+            inputStream = new FileInputStream(inFile);
+            final Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 
-			inputStream = new FileInputStream(inFile);
-			final Reader reader = new InputStreamReader(inputStream, "UTF-8");
+            final InputSource is = new InputSource(reader);
+            is.setEncoding("UTF-8");
 
-			final InputSource is = new InputSource(reader);
-			is.setEncoding("UTF-8");
+            parseAttributes(is);
 
-			parseAttributes(is);
+            writeTrailer();
 
-			writeTrailer();
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private static void writeHeader() {
+        System.out.print("// This is a generated file, do not change manually!\n" + "\n"
+            + "# internal name   | gcid | ocid(de) | acode | ocid(pl) | ocid(nl) | ocid(ro) | ocid(uk) | ocid(us) |\n");
+    }
 
-	private static void writeHeader() {
-		System.out.print("// This is a generated file, do not change manually!\n" + "\n"
-				+ "# internal name   | gcid | ocid | acode | man | license | copyright holder | URL\n");
-	}
+    private static String formattedId(int id, int width) {
+        final String result = "                            ".substring(0, width - 1) + id;
+        return result.substring(result.length() - width);
+    }
 
-	private static String formattedId(int id, int width) {
-		final String result = "                            ".substring(0, width - 1) + id;
-		return result.substring(result.length() - width);
-	}
+    private static void writeAttr(AttrInfo attr) {
 
-	private static void writeAttr(AttrInfo attr) {
+        System.out.println("                  | " + formattedId(attr.idGC, 4) + " | " + formattedId(attr.idOCDE, 8)
+            + " | " + formattedId(attr.acode, 5) + " | " + formattedId(attr.idOCPL, 8)
+            + " | " + formattedId(attr.idOCNL, 8) + " | " + formattedId(attr.idOCRO, 8)
+            + " | " + formattedId(attr.idOCUK, 8) + " | " + formattedId(attr.idOCUS, 8) + " |");
+    }
 
-		System.out.println("                  | " + formattedId(attr.gc_id, 4) + " | " + formattedId(attr.oc_de_id, 4)
-				+ " | " + formattedId(attr.acode, 5) + " |");
-	}
+    private static void writeTrailer() {
+        System.out.println();
+    }
 
-	private static void writeTrailer() {
-		System.out.println();
-	}
+    private static void parseAttributes(InputSource stream) {
 
-	private static void parseAttributes(InputSource stream) {
+        try {
+            final SAXParserFactory factory = SAXParserFactory.newInstance();
+            final SAXParser saxParser = factory.newSAXParser();
 
-		try {
+            final DefaultHandler handler = new DefaultHandler() {
 
-			final SAXParserFactory factory = SAXParserFactory.newInstance();
-			final SAXParser saxParser = factory.newSAXParser();
+                AttrInfo attr;
+                ArrayList<String> names;
+                boolean readingName;
 
-			final DefaultHandler handler = new DefaultHandler() {
+                @Override
+                public void startElement(String uri, String localName, String qName, Attributes attributes)
+                    throws SAXException {
 
-				AttrInfo attr;
-				ArrayList<String> names;
-				boolean readingName;
+                    if (qName.equalsIgnoreCase("attr")) {
+                        attr = new AttrInfo();
+                        names = new ArrayList<String>();
+                        attr.acode = Integer.parseInt(attributes.getValue("acode").substring(1));
+                    }
 
-				@Override
-				public void startElement(String uri, String localName, String qName, Attributes attributes)
-						throws SAXException {
+                    if (attr != null && qName.equalsIgnoreCase("opencaching")) {
+                        final String schema = attributes.getValue("schema");
+                        final int id = Integer.parseInt(attributes.getValue("id"));
+                        if ("OCDE".equalsIgnoreCase(schema)) {
+                            attr.idOCDE = id;
+                        } else if ("OCPL".equalsIgnoreCase(schema)) {
+                            attr.idOCPL = id;
+                        } else if ("OCNL".equalsIgnoreCase(schema)) {
+                            attr.idOCNL = id;
+                        } else if ("OCRO".equalsIgnoreCase(schema)) {
+                            attr.idOCRO = id;
+                        } else if ("OCUK".equalsIgnoreCase(schema)) {
+                            attr.idOCUK = id;
+                        } else if ("OCUS".equalsIgnoreCase(schema)) {
+                            attr.idOCUS = id;
+                        }
+                    }
 
-					if (qName.equalsIgnoreCase("attr")) {
-						attr = new AttrInfo();
-						names = new ArrayList<String>();
-						attr.acode = Integer.parseInt(attributes.getValue("acode").substring(1));
-					}
+                    if (attr != null && qName.equalsIgnoreCase("groundspeak")) {
+                        attr.idGC = Integer.parseInt(attributes.getValue("id"));
+                    }
 
-					if (attr != null && qName.equalsIgnoreCase("opencaching")) {
-						if ("http://www.opencaching.de/".equalsIgnoreCase(attributes.getValue("schema"))) {
-							attr.oc_de_id = Integer.parseInt(attributes.getValue("id"));
-						} else if ("http://opencaching.pl/".equalsIgnoreCase(attributes.getValue("schema"))) {
-							attr.oc_pl_id = Integer.parseInt(attributes.getValue("id"));
-						} else if ("http://www.opencaching.nl/".equalsIgnoreCase(attributes.getValue("schema"))) {
-							attr.oc_nl_id = Integer.parseInt(attributes.getValue("id"));
-						}
-					}
+                    if (attr != null && qName.equalsIgnoreCase("lang") && "en".equalsIgnoreCase(attributes.getValue("id"))) {
+                        // TODO read english name
+                        readingName = true;
+                    }
+                }
 
-					if (attr != null && qName.equalsIgnoreCase("groundspeak")) {
-						attr.gc_id = Integer.parseInt(attributes.getValue("id"));
-					}
+                @Override
+                public void endElement(final String uri, final String localName, final String qName) throws SAXException {
 
-					if (names != null && qName.equalsIgnoreCase("name")) {
-						readingName = true;
-					}
-				}
+                    if (attr != null && qName.equalsIgnoreCase("name")) {
+                        attr.names = names.toArray(new String[] {});
+                        names = null;
+                        writeAttr(attr);
+                        attr = null;
+                    }
 
-				@Override
-				public void endElement(String uri, String localName, String qName) throws SAXException {
+                    readingName = false;
+                }
 
-					if (attr != null && qName.equalsIgnoreCase("attr")) {
-						attr.names = names.toArray(new String[] {});
-						names = null;
-						writeAttr(attr);
-						attr = null;
-					}
+                @Override
+                public void characters(final char[] ch, final int start, final int length) throws SAXException {
 
-					readingName = false;
-				}
+                    if (readingName) {
+                        names.add(new String(ch, start, length));
+                    }
+                }
 
-				@Override
-				public void characters(char ch[], int start, int length) throws SAXException {
+            };
 
-					if (readingName) {
-						names.add(new String(ch, start, length));
-					}
-				}
+            saxParser.parse(stream, handler);
 
-			};
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-			saxParser.parse(stream, handler);
-
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	static class AttrInfo {
-		public int oc_de_id;
-		public int oc_nl_id;
-		public int oc_pl_id;
-		public int acode;
-		public int gc_id;
-		public String[] names;
-	}
-
+    static class AttrInfo {
+        public int acode;
+        public int idGC;
+        public int idOCDE;
+        public int idOCPL;
+        public int idOCNL;
+        public int idOCRO;
+        public int idOCUK;
+        public int idOCUS;
+        public String[] names;
+    }
 }

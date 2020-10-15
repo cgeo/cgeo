@@ -18,7 +18,7 @@ public enum CacheAttribute {
     // read project/attributes/readme.txt
 
     // known geocaching.com attributes following
-    DOGS(1, -1, "dogs", R.drawable.attribute_dogs, R.string.attribute_dogs_yes, R.string.attribute_dogs_no),
+    DOGS(1, 85, "dogs", R.drawable.attribute_dogs, R.string.attribute_dogs_yes, R.string.attribute_dogs_no),
     FEE(2, 26, "fee", R.drawable.attribute_fee, R.string.attribute_fee_yes, R.string.attribute_fee_no),
     RAPPELLING(3, 53, "rappelling", R.drawable.attribute_rappelling, R.string.attribute_rappelling_yes, R.string.attribute_rappelling_no),
     BOAT(4, 57, "boat", R.drawable.attribute_boat, R.string.attribute_boat_yes, R.string.attribute_boat_no),
@@ -32,7 +32,7 @@ public enum CacheAttribute {
     SWIMMING(12, 25, "swimming", R.drawable.attribute_swimming, R.string.attribute_swimming_yes, R.string.attribute_swimming_no),
     AVAILABLE(13, 39, "available", R.drawable.attribute_available, R.string.attribute_available_yes, R.string.attribute_available_no),
     NIGHT(14, 42, "night", R.drawable.attribute_night, R.string.attribute_night_yes, R.string.attribute_night_no),
-    WINTER(15, -1, "winter", R.drawable.attribute_winter, R.string.attribute_winter_yes, R.string.attribute_winter_no),
+    WINTER(15, 84, "winter", R.drawable.attribute_winter, R.string.attribute_winter_yes, R.string.attribute_winter_no),
     POISONOAK(17, 66, "poisonoak", R.drawable.attribute_poisonoak, R.string.attribute_poisonoak_yes, R.string.attribute_poisonoak_no),
     DANGEROUSANIMALS(18, 67, "dangerousanimals", R.drawable.attribute_dangerousanimals, R.string.attribute_dangerousanimals_yes, R.string.attribute_dangerousanimals_no),
     TICKS(19, 64, "ticks", R.drawable.attribute_ticks, R.string.attribute_ticks_yes, R.string.attribute_ticks_no),
@@ -62,15 +62,15 @@ public enum CacheAttribute {
     COW(43, -1, "cow", R.drawable.attribute_cow, R.string.attribute_cow_yes, R.string.attribute_cow_no),
     FLASHLIGHT(44, 52, "flashlight", R.drawable.attribute_flashlight, R.string.attribute_flashlight_yes, R.string.attribute_flashlight_no),
     LANDF(45, -1, "landf", R.drawable.attribute_landf, R.string.attribute_landf_yes, R.string.attribute_landf_no),
-    RV(46, -1, "rv", R.drawable.attribute_rv, R.string.attribute_rv_yes, R.string.attribute_rv_no),
+    RV(46, 86, "rv", R.drawable.attribute_rv, R.string.attribute_rv_yes, R.string.attribute_rv_no),
     FIELD_PUZZLE(47, -1, "field_puzzle", R.drawable.attribute_field_puzzle, R.string.attribute_field_puzzle_yes, R.string.attribute_field_puzzle_no),
-    UV(48,  -1, "uv", R.drawable.attribute_uv, R.string.attribute_uv_yes, R.string.attribute_uv_no),
+    UV(48, 83, "uv", R.drawable.attribute_uv, R.string.attribute_uv_yes, R.string.attribute_uv_no),
     SNOWSHOES(49, -1, "snowshoes", R.drawable.attribute_snowshoes, R.string.attribute_snowshoes_yes, R.string.attribute_snowshoes_no),
     SKIIS(50, -1, "skiis", R.drawable.attribute_skiis, R.string.attribute_skiis_yes, R.string.attribute_skiis_no),
     S_TOOL(51, 56, "s_tool", R.drawable.attribute_s_tool, R.string.attribute_s_tool_yes, R.string.attribute_s_tool_no),
     NIGHTCACHE(52, 43, "nightcache", R.drawable.attribute_nightcache, R.string.attribute_nightcache_yes, R.string.attribute_nightcache_no),
     PARKNGRAB(53, 19, "parkngrab", R.drawable.attribute_parkngrab, R.string.attribute_parkngrab_yes, R.string.attribute_parkngrab_no),
-    ABANDONEDBUILDING(54, -1, "abandonedbuilding", R.drawable.attribute_abandonedbuilding, R.string.attribute_abandonedbuilding_yes, R.string.attribute_abandonedbuilding_no),
+    ABANDONEDBUILDING(54, 82, "abandonedbuilding", R.drawable.attribute_abandonedbuilding, R.string.attribute_abandonedbuilding_yes, R.string.attribute_abandonedbuilding_no),
     HIKE_SHORT(55, -1, "hike_short", R.drawable.attribute_hike_short, R.string.attribute_hike_short_yes, R.string.attribute_hike_short_no),
     HIKE_MED(56, -1, "hike_med", R.drawable.attribute_hike_med, R.string.attribute_hike_med_yes, R.string.attribute_hike_med_no),
     HIKE_LONG(57, -1, "hike_long", R.drawable.attribute_hike_long, R.string.attribute_hike_long_yes, R.string.attribute_hike_long_no),
@@ -80,7 +80,7 @@ public enum CacheAttribute {
     PARTNERSHIP(61, -1, "partnership", R.drawable.attribute_partnership, R.string.attribute_partnership_yes, R.string.attribute_partnership_no),
     SEASONAL(62, 45, "seasonal", R.drawable.attribute_seasonal, R.string.attribute_seasonal_yes, R.string.attribute_seasonal_no),
     TOURISTOK(63, -1, "touristok", R.drawable.attribute_touristok, R.string.attribute_touristok_yes, R.string.attribute_touristok_no),
-    TREECLIMBING(64, -1, "treeclimbing", R.drawable.attribute_treeclimbing, R.string.attribute_treeclimbing_yes, R.string.attribute_treeclimbing_no),
+    TREECLIMBING(64, 88, "treeclimbing", R.drawable.attribute_treeclimbing, R.string.attribute_treeclimbing_yes, R.string.attribute_treeclimbing_no),
     FRONTYARD(65, -1, "frontyard", R.drawable.attribute_frontyard, R.string.attribute_frontyard_yes, R.string.attribute_frontyard_no),
     TEAMWORK(66, -1, "teamwork", R.drawable.attribute_teamwork, R.string.attribute_teamwork_yes, R.string.attribute_teamwork_no),
     GEOTOUR(67, -1, "geotour", R.drawable.attribute_geotour, R.string.attribute_geotour_yes, R.string.attribute_geotour_no),
@@ -135,7 +135,15 @@ public enum CacheAttribute {
     AUDIO_CACHE(-1, 7, "audio_cache", R.drawable.attribute_audio_cache, R.string.attribute_audio_cache_yes, R.string.attribute_audio_cache_no),
     GEOHOTEL(-1, 5, "geohotel", R.drawable.attribute_geohotel, R.string.attribute_geohotel_yes, R.string.attribute_geohotel_no),
     SURVEY_MARKER(-1, 2, "survey_marker", R.drawable.attribute_survey_marker, R.string.attribute_survey_marker_yes, R.string.attribute_survey_marker_no),
-    OFFSET_CACHE(-1, 8, "offset_cache", R.drawable.attribute_offset_cache, R.string.attribute_offset_cache_yes, R.string.attribute_offset_cache_no);
+    OFFSET_CACHE(-1, 8, "offset_cache", R.drawable.attribute_offset_cache, R.string.attribute_offset_cache_yes, R.string.attribute_offset_cache_no),
+    HANDICACHING(-1, 76, "handicaching", R.drawable.attribute_handicaching, R.string.attribute_handicaching_yes, R.string.attribute_handicaching_no),
+    MUNZEE(-1, 77, "munzee", R.drawable.attribute_munzee, R.string.attribute_munzee_yes, R.string.attribute_munzee_no),
+    ADS(-1, 78, "ads", R.drawable.attribute_ads, R.string.attribute_ads_yes, R.string.attribute_ads_no),
+    MILITARY_AREA(-1, 79, "military_area", R.drawable.attribute_military_area, R.string.attribute_military_area_yes, R.string.attribute_military_area_no),
+    VIDEO_SURVEIL(-1, 80, "video_surveil", R.drawable.attribute_video_surveil, R.string.attribute_video_surveil_yes, R.string.attribute_video_surveil_no),
+    TRACKABLES(-1, 81, "trackables", R.drawable.attribute_trackables, R.string.attribute_trackables_yes, R.string.attribute_trackables_no),
+    HISTORIC(-1, 87, "historic", R.drawable.attribute_historic, R.string.attribute_historic_yes, R.string.attribute_historic_no),
+    BLIND_PEOPLE(-1, 89, "blind_people", R.drawable.attribute_blind_people, R.string.attribute_blind_people_yes, R.string.attribute_blind_people_no);
 
     @NonNull
     private static final String INTERNAL_YES = "_yes";

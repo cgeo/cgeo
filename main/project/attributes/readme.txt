@@ -12,7 +12,7 @@ An html overview is in ocicons.html
 1. Creating SVGs with Inkscape
 ------------------------------
 
-old script, does not wotk with current server structure - let them as reference and for later change:
+Old script, does not work with current server structure - let them as reference and for later change:
     For SVGs from thenounproject.com you can use the script ./nounwork
     Example: ./nounwork day http://thenounproject.com/download/zipped/svg_76.zip
     This will download the SVG and start Inkscape. Edit it and save. The canvas color is set automatically (just that you can see the painted things later on) and the resulting day.svg will be put into the folder "new".
@@ -45,8 +45,9 @@ Icons are written to directory ./drawable-mdpi. Copy them to res/drawable-mdpi w
 
 Add a new line or change an existing one.
 Don't mess up the structure of this file. It is used to automatically create missing strings, html-pages and enumerations.
-The first column contains the name of the attribute. In case of gc.com, this also is their internal id and is used for parsing websites in c:geo. So don't change any IDs!
+The first column contains the name of the attribute. In case of geocaching.com, this also is their internal id and is used for parsing websites in c:geo. So don't change any IDs!
 The second is the "groundspeak:attribute id" from a gpx file. You can get them from a cache gpx export.
+The third is the ACODE, the "opencaching id". This you will get from their attribute-definitions.xml. To prepare this part follow ../attributes_okapi/readme.txt.
 
 
 4. create a list of strings that are (not) missing

@@ -3,7 +3,7 @@
 # creates attribute icons in one resolution only
 
 require () {
-    hash $1 2>&- || { echo >&2 "I require $1 but it's not installed.  Aborting."; exit 1; }
+    hash "$1" 2>&- || { echo >&2 "I require $1 but it's not installed.  Aborting."; exit 1; }
 }
 
 require optipng
@@ -36,9 +36,8 @@ SCOL=\#c00000
 # file name of strike thru bar
 SFNAME="$ICONDIR/attribute__strikethru.png"
 
-#calculated values
-BNDIST=$(( ${ICONSIZE} - ${BDIST} ))
-res=48
+# calculated values
+BNDIST=$((ICONSIZE - BDIST))
 
 # create output directory if missing
 [ -d $ICONDIR ] || mkdir $ICONDIR
@@ -70,7 +69,7 @@ else
     svgs="svgs/*.svg"
 fi
 for s in $svgs; do
-    n=$ICONDIR/attribute_`basename "$s" | sed "s/\.svg//"`
+    n=$ICONDIR/attribute_$(basename "$s" | sed "s/\.svg//")
 
     # don't draw icons if svg is older than icon
     [ -f "${n}.png" ] && [ "$s" -ot "${n}.png" ] && continue
