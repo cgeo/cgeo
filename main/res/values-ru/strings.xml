@@ -1500,6 +1500,22 @@
     <string name="attribute_survey_marker_no">Далеко от геодезической отметки</string>
     <string name="attribute_offset_cache_yes">Смещенный тайник</string>
     <string name="attribute_offset_cache_no">Не смещенный тайник</string>
+    <string name="attribute_handicaching_yes">Оценен на Handicaching.com</string>
+    <string name="attribute_handicaching_no">Не оценен на Handicaching.com</string>
+    <string name="attribute_munzee_yes">Содержит Munzee</string>
+    <string name="attribute_munzee_no">Без Munzee</string>
+    <string name="attribute_ads_yes">Содержит рекламу</string>
+    <string name="attribute_ads_no">Без рекламы</string>
+    <string name="attribute_military_area_yes">Военная зона</string>
+    <string name="attribute_military_area_no">Не военная зона</string>
+    <string name="attribute_video_surveil_yes">Место под видеонаблюдением</string>
+    <string name="attribute_video_surveil_no">Место без видеонаблюдения</string>
+    <string name="attribute_trackables_yes">Подходит для трекаблов</string>
+    <string name="attribute_trackables_no">Не подходит для трекаблов</string>
+    <string name="attribute_historic_yes">Заброшка / Руины</string>
+    <string name="attribute_historic_no">Не заброшка или руины</string>
+    <string name="attribute_blind_people_yes">Подходит для слепых</string>
+    <string name="attribute_blind_people_no">Не подходит для слепых</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
