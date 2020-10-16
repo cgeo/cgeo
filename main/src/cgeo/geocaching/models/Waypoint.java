@@ -562,7 +562,7 @@ public class Waypoint implements IWaypoint {
         if (getCoords() == null) {
             sb.append(PARSING_COORD_EMPTY);
         } else {
-            sb.append(getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT));
+            sb.append(getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
         }
         //user note
         if (maxUserNoteSize != 0 && !StringUtils.isBlank(getUserNote())) {

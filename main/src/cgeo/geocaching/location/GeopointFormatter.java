@@ -30,6 +30,9 @@ public class GeopointFormatter {
         /** Example: "N10 12,345 W5 12,345" */
         LAT_LON_DECMINUTE_SHORT,
 
+        /** Example: "N10 12.345 W5 12.345" (unlocalized) */
+        LAT_LON_DECMINUTE_SHORT_RAW,
+
         /** Example: "N 10° 12.345 W 5° 12.345" */
         LAT_LON_DECMINUTE_RAW,
 
@@ -100,6 +103,11 @@ public class GeopointFormatter {
                 return String.format(Locale.getDefault(), "%c%d %02d%c%03d %c%d %02d%c%03d",
                         gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), decimalSeparator, gp.getDecMinuteLatMinFrac(),
                         gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), decimalSeparator, gp.getDecMinuteLonMinFrac());
+
+            case LAT_LON_DECMINUTE_SHORT_RAW:
+                return String.format((Locale) null, "%c%d %02d.%03d %c%d %02d.%03d",
+                    gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
+                    gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
 
             case LAT_LON_DECMINUTE_RAW:
                 return String.format((Locale) null, "%c %02d° %06.3f %c %03d° %06.3f",
