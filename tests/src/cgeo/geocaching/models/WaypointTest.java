@@ -184,7 +184,7 @@ public class WaypointTest {
     }
 
     private static String toParseableWpString(final Geopoint gp) {
-        return gp.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT);
+        return gp.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW);
 
     }
 
