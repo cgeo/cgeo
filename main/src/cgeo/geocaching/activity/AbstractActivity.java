@@ -324,6 +324,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     @Override
     protected void onRestart() {
         Log.v(logToken + ".onRestart()");
-        super.onResume();
+        super.onRestart();
     }
 }
