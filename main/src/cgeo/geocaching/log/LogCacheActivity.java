@@ -1,6 +1,5 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.ImageSelectActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableActivity;
@@ -28,16 +27,14 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
-import cgeo.geocaching.ui.ImageActivityHelper;
+import cgeo.geocaching.ui.ImageListFragment;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
-import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ViewUtils;
 
@@ -47,7 +44,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,26 +57,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import butterknife.BindView;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class LogCacheActivity extends AbstractLoggingActivity {
 
@@ -88,7 +77,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private enum SaveMode { NORMAL, FORCE, SKIP }
 
-    private static final int SELECT_IMAGE = 101;
     private final Set<TrackableLog> trackables = new HashSet<>();
     @BindView(R.id.tweet)
     protected CheckBox tweetCheck;
@@ -100,29 +88,23 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     protected CheckBox favCheck;
     @BindView(R.id.log)
     protected EditText logEditText;
-    @BindView(R.id.log_image_add_multi)
-    protected View logImageAddMultiButton;
-    @BindView(R.id.log_image_add_camera)
-    protected View logImageAddCameraButton;
+
+    protected ImageListFragment imageListFragment;
 
     private Geocache cache = null;
     private String geocode = null;
     private ILoggingManager loggingManager;
-    private final ImageActivityHelper imageHelper = new ImageActivityHelper(this, 3000);
 
     private OfflineLogEntry lastSavedState = null;
-    private final Set<String> lastSavedStateImagePaths = new HashSet<>();
 
     private CacheVotingBar cacheVotingBar = new CacheVotingBar();
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
-    private final List<Image> images = new ArrayList<>();
 
     private boolean sendButtonEnabled;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
-    private LogImageAdapter imageListAdapter;
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
@@ -239,17 +221,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.setTextView(findViewById(R.id.report_problem))
                 .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
                 .setDisplayMapper(ReportProblemType::getL10n);
-        initializeImageList();
-        this.logImageAddMultiButton.setOnClickListener(v ->
-            imageHelper.getMultipleImagesFromStorage(getFastImageAutoScale(), true, false, imgs -> {
-                    images.addAll(imgs);
-                    updateImageList();
-                }));
-        this.logImageAddCameraButton.setOnClickListener(v ->
-            imageHelper.getImageFromCamera(getFastImageAutoScale(), true, false, img -> {
-                images.add(img);
-                updateImageList();
-            }));
+
+        this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(findViewById(R.id.changebutton))
@@ -286,6 +259,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         loggingManager = cache.getLoggingManager(this);
         loggingManager.init();
 
+        this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize(), loggingManager.isImageCaptionMandatory());
+
         // initialize with default values
         resetValues();
         logType.setChangeListener(lt -> refreshGui());
@@ -295,7 +270,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (lastSavedState == null) {
             //this means there is no previous entry
             lastSavedState = getEntryFromView();
-            lastSavedStateImagePaths.clear();
             //set initial signature. Setting this AFTER setting lastSavedState and GUI leads to the signature being a change-to-save as requested in #8973
             if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, lastSavedState)), false);
@@ -303,7 +277,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else {
             fillViewFromEntry(lastSavedState);
         }
-        adjustImageStateTo(lastSavedState, false);
+        imageListFragment.setImagePersistentState(lastSavedState.logImages);
 
         // TODO: Why is it disabled in onCreate?
         // Probably it should be disabled only when there is some explicit issue.
@@ -332,34 +306,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Dialogs.moveCursorToEnd(logEditText);
     }
 
-    private int getFastImageAutoScale() {
-        int scale = Settings.getLogImageScale();
-        if (scale <= 0) {
-            scale = 1024;
-        }
-        return scale;
-    }
-
-    private void adjustImageStateTo(final LogEntry entry, final boolean deleteOld) {
-        if (deleteOld) {
-            //delete all images on device which are in old state but not in new
-            final Set<String> existingPaths = CollectionStream.of(entry.logImages).map(img -> img.getPath()).toSet();
-            for (final String oldPath : lastSavedStateImagePaths) {
-                if (!existingPaths.contains(oldPath)) {
-                    final boolean result = new File(oldPath).delete();
-                    Log.i("Deleting log image " + oldPath + " (result: " + result + ")");
-                }
-            }
-        }
-        //refill image state
-        lastSavedStateImagePaths.clear();
-        for (final Image img : entry.logImages) {
-            if (!img.getPath().isEmpty()) {
-                lastSavedStateImagePaths.add(img.getPath());
-            }
-        }
-    }
-
     private OfflineLogEntry restorePreviousLogEntry(final Bundle savedInstanceState) {
         OfflineLogEntry entry = null;
         if (savedInstanceState != null) {
@@ -382,9 +328,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         tweetCheck.setChecked(logEntry.tweet);
         logPassword.setText(logEntry.password);
 
-        images.clear();
-        images.addAll(logEntry.logImages);
-        updateImageList();
+        imageListFragment.setImages(logEntry.logImages);
 
         CollectionStream.of(trackables).forEach(t -> initializeTrackableAction(t, logEntry));
         updateTrackablesList();
@@ -400,7 +344,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setFavorite(favCheck.isChecked())
                 .setTweet(tweetCheck.isChecked())
                 .setPassword(logPassword.getText().toString());
-        CollectionStream.of(images).forEach(builder::addLogImage);
+        CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
 
         return builder.build();
@@ -434,7 +378,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         setLogText(null);
         reportProblem.set(ReportProblemType.NO_PROBLEM);
         cacheVotingBar.setRating(cache.getMyVote());
-        images.clear();
+        imageListFragment.clearImages();
         tweetCheck.setChecked(true);
         favCheck.setChecked(false);
         logPassword.setText(StringUtils.EMPTY);
@@ -484,7 +428,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
         updateTrackablesList();
-        updateImageList();
     }
 
     private void updateTweetBox(final LogType type) {
@@ -526,7 +469,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                             cache.logOffline(LogCacheActivity.this, logEntry);
                             Settings.setLastCacheLog(logEntry.log);
                             ccLog.add("log=%s", logEntry.log);
-                            adjustImageStateTo(lastSavedState, true);
+                            imageListFragment.adjustImagePersistentState(lastSavedState.logImages);
                             return null;
                         }
                     }
@@ -548,43 +491,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         return new LogContext(cache, getEntryFromView());
     }
 
-    private void addOrEditImage(final int imageIndex) {
-        final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
-        if (imageIndex >= 0 && imageIndex < images.size()) {
-            selectImageIntent.putExtra(Intents.EXTRA_IMAGE, images.get(imageIndex));
-        }
-        selectImageIntent.putExtra(Intents.EXTRA_INDEX, imageIndex);
-        selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
-        selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, loggingManager.getMaxImageUploadSize());
-        selectImageIntent.putExtra(Intents.EXTRA_IMAGE_CAPTION_MANDATORY, loggingManager.isImageCaptionMandatory());
-
-        startActivityForResult(selectImageIntent, SELECT_IMAGE);
-    }
-
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
-        if (imageHelper.onActivityResult(requestCode, resultCode, data)) {
+        if (imageListFragment.onParentActivityResult(requestCode, resultCode, data)) {
             return;
-        }
-        if (requestCode == SELECT_IMAGE) {
-            if (resultCode == RESULT_OK) {
-                final int imageIndex = data.getIntExtra(Intents.EXTRA_INDEX, -1);
-                final boolean indexIsValid = imageIndex >= 0 && imageIndex < images.size();
-                final boolean deleteFlag = data.getBooleanExtra(Intents.EXTRA_DELETE_FLAG, false);
-                final Image image = data.getParcelableExtra(Intents.EXTRA_IMAGE);
-                if (deleteFlag && indexIsValid) {
-                    images.remove(imageIndex);
-                } else if (image != null && indexIsValid) {
-                    images.set(imageIndex, image);
-                } else if (image != null) {
-                    images.add(image);
-                }
-                updateImageList();
-            } else if (resultCode != RESULT_CANCELED) {
-                // Image capture failed, advise user
-                showToast(getString(R.string.err_select_logimage_failed));
-            }
         }
     }
 
@@ -596,7 +507,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 sendLogAndConfirm();
                 return true;
             case R.id.menu_image:
-                addOrEditImage(-1);
+                imageListFragment.startAddImageDialog();
                 return true;
             case R.id.save:
                 finish(SaveMode.FORCE);
@@ -742,114 +653,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
     }
 
-    private void updateImageList() {
-        //must create NEW (!) image list, otherwise update of list view will not work!
-        final List<Image> newImages = new ArrayList<>();
-        newImages.addAll(images);
-        imageListAdapter.submitList(newImages,
-            //following itemrangechanged event is necessary to update default image name counts (eg "Image 1", "Image 2", ...)
-            () -> imageListAdapter.notifyItemRangeChanged(0, imageListAdapter.getItemCount()));
-    }
-
-    private void initializeImageList() {
-        imageListAdapter = new LogImageAdapter();
-        final RecyclerView imageList = findViewById(R.id.image_list);
-        imageList.setAdapter(imageListAdapter);
-        imageList.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private String getImageTitle(final Image image, final int position) {
-        if (!StringUtils.isBlank(image.getTitle())) {
-            return image.getTitle();
-        }
-        return getString(R.string.log_image_titleprefix) + " " + (position + 1);
-    }
-
-
-    protected static class LogImageViewHolder extends AbstractRecyclerViewHolder {
-        @BindView(R.id.log_image_thumbnail)
-        protected ImageView imageThumbnail;
-        @BindView(R.id.log_image_title)
-        protected TextView imageTitle;
-        @BindView(R.id.log_image_description)
-        protected TextView imageDescription;
-        @BindView(R.id.log_image_info)
-        protected TextView imageInfo;
-        @BindView(R.id.log_image_delete)
-        protected View imageDeleteButton;
-
-        public LogImageViewHolder(final View rowView) {
-            super(rowView);
-        }
-    }
-
-
-    private final class LogImageAdapter extends ListAdapter<Image, LogImageViewHolder> {
-
-        private LogImageAdapter() {
-            super(new DiffUtil.ItemCallback<Image>() {
-                @Override
-                public boolean areItemsTheSame(@NonNull final Image oldItem, @NonNull final Image newItem) {
-                    return Objects.equals(oldItem.getPath(), newItem.getPath());
-                }
-
-                @Override
-                public boolean areContentsTheSame(@NonNull final Image oldItem, @NonNull final Image newItem) {
-                    return Objects.equals(oldItem, newItem);
-                }
-            });
-        }
-
-        private void fillViewHolder(final LogImageViewHolder holder, final Image image, final int position) {
-            if (image == null || holder.imageThumbnail == null) {
-                return;
-            }
-            //holder.imageThumbnail.setImageURI(image.getUri());
-            ImageActivityHelper.displayImageAsync(image, holder.imageThumbnail);
-            holder.imageTitle.setText(getImageTitle(image, position));
-            holder.imageDescription.setText(image.getDescription());
-            holder.imageInfo.setText(getImageInfo(image));
-        }
-
-        private String getImageInfo(final Image image) {
-            final File imgFile = image.getFile();
-            if (imgFile == null) {
-                return "---";
-            }
-            if (!imgFile.exists()) {
-                return ImageUtils.getRelativePathToOutputImageDir(imgFile);
-            }
-            int width = 0;
-            int height = 0;
-            final ImmutablePair<Integer, Integer> widthHeight = ImageUtils.getImageSize(imgFile);
-            if (widthHeight != null) {
-                width = widthHeight.getLeft();
-                height = widthHeight.getRight();
-            }
-            return getString(R.string.log_image_info, width, height, imgFile.length() / 1024, ImageUtils.getRelativePathToOutputImageDir(imgFile));
-        }
-
-        @NonNull
-        @Override
-        public LogImageViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
-            final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.logcache_image_item, parent, false);
-            final LogImageViewHolder viewHolder = new LogImageViewHolder(view);
-            viewHolder.itemView.setOnClickListener(view1 -> addOrEditImage(viewHolder.getAdapterPosition()));
-            viewHolder.imageDeleteButton.setOnClickListener(v -> {
-                images.remove(viewHolder.getAdapterPosition());
-                updateImageList();
-            });
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull final LogImageViewHolder holder, final int position) {
-            fillViewHolder(holder, getItem(position), position);
-        }
-
-    }
-
-
     private final class ClearLogCommand extends AbstractCommand {
 
         private OfflineLogEntry previousState;
@@ -892,7 +695,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
 
         Poster(final Activity activity, final String progressMessage) {
-            super(activity, res.getString(images.isEmpty() ?
+            super(activity, res.getString(imageListFragment.getImages().isEmpty()  ?
                     R.string.log_posting_log :
                     R.string.log_saving_and_uploading), progressMessage);
         }
@@ -935,11 +738,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     }
 
                     // Posting image
-                    if (!images.isEmpty()) {
+                    if (!imageListFragment.getImages().isEmpty()) {
                         publishProgress(res.getString(R.string.log_posting_image));
                         int pos = 0;
-                        for (Image img : images) {
-                            final Image imgToSend = img.buildUpon().setTitle(getImageTitle(img, pos++)).build();
+                        for (Image img : imageListFragment.getImages()) {
+                            final Image imgToSend = img.buildUpon().setTitle(imageListFragment.getImageTitle(img, pos++)).build();
                             imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
                             final String uploadedImageUrl = imageResult.getImageUri();
                             if (StringUtils.isNotEmpty(uploadedImageUrl)) {
@@ -1047,5 +850,4 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             }
         }
     }
-
 }

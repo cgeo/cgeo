@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/image_box"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dip"
+    android:layout_marginBottom="10dip"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:visibility="visible">
+
+    <RelativeLayout style="@style/separator_horizontal_layout">
+
+        <View style="@style/separator_horizontal" />
+
+        <TextView
+            style="@style/separator_horizontal_headline"
+            android:text="@string/log_images" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/image_add_multi"
+            style="@style/button_small"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_menu_image_multi" />
+
+        <ImageButton
+            android:id="@+id/image_add_camera"
+            style="@style/button_small"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_gravity="left"
+            android:layout_toRightOf="@+id/image_add_multi"
+            android:src="@drawable/ic_menu_camera" />
+
+    </RelativeLayout>
+
+    <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+       work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                           app:spanCount="1" -->
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/image_list"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:cacheColorHint="?background_color"
+            android:clipToPadding="false"
+            android:divider="?background_color"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:listSelector="?background_color"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:padding="4dip"
+            android:scrollbars="none"
+            tools:ignore="NestedScrolling"
+            tools:listitem="@layout/imagelist_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+</LinearLayout>
+
