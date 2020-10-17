@@ -262,6 +262,7 @@
     <string name="more_information">Daha fazla bilgi</string>
     <string name="remind_later">Daha sonra hatırlat</string>
     <string name="undo">Geri al</string>
+    <string name="dont_show_again">Yeniden gösterme</string>
     <string name="warn_gm_not_available">Google Maps mevcut değildir.</string>
     <string name="switch_to_mf">Google Play hizmetiniz güncel değil. Bunun yerine harita sağlayıcınızı Mapsforge olarak değiştirmek ister misiniz?</string>
     <string name="switched_to_mf">Varsayılan harita sağlayıcısı Mapsforge olarak belirlendi. Haritanızı yeniden başlatın.</string>
@@ -1159,9 +1160,12 @@
     <string name="destination_select">Varış yeri seç</string>
     <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
+    <string name="device_heading_label">Cihaz:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Bilinmeyen</string>
     <string name="do_auto">Otomatik</string>
+    <string name="do_flat">Düz</string>
+    <string name="do_upright">Dik</string>
     <!-- license -->
     <string name="license">Lisans</string>
     <string name="license_show">Lisansı göster</string>
@@ -1437,6 +1441,8 @@
     <string name="attribute_survey_marker_no">Yer işareti yakınında değil</string>
     <string name="attribute_offset_cache_yes">Konumlamalı Cache</string>
     <string name="attribute_offset_cache_no">Konumlamalı Cache</string>
+    <string name="attribute_bonuscache_yes">Bonus cache</string>
+    <string name="attribute_bonuscache_no">Bonus cache değil</string>
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1600,6 +1606,7 @@
     <string name="delete_setting">Ayarları sil</string>
     <string name="edit_setting">\'\'%s\'\' ayarlarını düzenle</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_foundmap">bir harita dosyası bulundu</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_option_overwrite">Üzerine yaz</string>
     <string name="receivemapfile_option_differentname">Farklı isim</string>
