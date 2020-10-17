@@ -306,16 +306,20 @@ public final class ImageUtils {
         }
 
         // Create a media file name
-        final String timeStamp = new SimpleDateFormat("yyMMdd_HHmmss", Locale.US).format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + "-" + IMG_COUNTER.addAndGet(1) + ".jpg");
+        final String timeStamp = new SimpleDateFormat("yyMMdd-HHmmss", Locale.US).format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator + "IMG" + IMG_COUNTER.addAndGet(1) + "-" + timeStamp + ".jpg");
     }
 
     @NonNull
     public static String getRelativePathToOutputImageDir(final File file) {
         final String basePath = LocalStorage.getLogPictureDirectory().getAbsolutePath();
-        final String filePath = file.getAbsolutePath();
+        String filePath = file.getAbsolutePath();
         if (filePath.startsWith(basePath)) {
-            return filePath.substring(basePath.length());
+            filePath = filePath.substring(basePath.length());
+        }
+
+        if (filePath.length() > 1 && (filePath.charAt(0) == '\\' || filePath.charAt(0) == '/')) {
+            filePath = filePath.substring(1);
         }
         return filePath;
     }

@@ -391,4 +391,9 @@ public class Image implements Parcelable {
     public int hashCode() {
         return new HashCodeBuilder().append(uri).append(title).append(description).build();
     }
+
+    @Override
+    public String toString() {
+        return "[Uri:" + uri + "/Title:" + title + "/Desc:" + description + "]";
+    }
 }

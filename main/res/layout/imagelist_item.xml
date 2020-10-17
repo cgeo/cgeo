@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/logcache_image_item"
+    android:id="@+id/imagelist_item"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="1dp"
-    android:paddingBottom="10dip"
+    android:paddingTop="1dip"
+    android:paddingBottom="0dip"
     android:paddingLeft="0dip"
     android:paddingRight="0dip"
     tools:context=".log.LogCacheActivity">
@@ -20,20 +20,21 @@
 
 
         <ImageView
-            android:id="@+id/log_image_thumbnail"
+            android:id="@+id/image_thumbnail"
             style="@style/action_bar_action"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerInside"
             android:layout_alignParentLeft="true"
             android:layout_gravity="left"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_menu_add"
             tools:src="@tools:sample/avatars"/>
 
 
         <LinearLayout
-            android:layout_toRightOf="@id/log_image_thumbnail"
-            android:layout_toLeftOf="@+id/log_image_delete"
+            android:layout_toRightOf="@id/image_thumbnail"
+            android:layout_toLeftOf="@+id/image_delete"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:descendantFocusability="blocksDescendants"
@@ -41,7 +42,7 @@
             android:layout_marginLeft="12dp">
 
             <TextView
-                android:id="@+id/log_image_title"
+                android:id="@+id/image_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -52,7 +53,7 @@
                 tools:text="Title of the image, might be a bit longer"/>
 
             <TextView
-                android:id="@+id/log_image_info"
+                android:id="@+id/image_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -67,7 +68,7 @@
                 tools:text="Add info: size, Location and KB"/>
 
             <TextView
-                android:id="@+id/log_image_description"
+                android:id="@+id/image_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -84,23 +85,37 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/log_image_delete"
+            android:id="@+id/image_delete"
             style="@style/action_bar_action"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="6dp"
             android:scaleType="centerInside"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/image_drag"
             android:layout_gravity="left"
             android:src="@drawable/ic_menu_delete"
             tools:src="@drawable/ic_menu_delete"/>
+
+        <ImageView
+            android:id="@+id/image_drag"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_menu_reorder"
+            tools:src="@drawable/ic_menu_reorder"/>
+
     </RelativeLayout>
 
     <View
         style="@style/separator_horizontal"
-        android:layout_marginTop="9dp" />
+        android:layout_marginTop="1dp" />
 
 </LinearLayout>

@@ -1,8 +1,11 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageActivityHelper;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -72,11 +75,21 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
             originalImage = image;
             imageIndex = extras.getInt(Intents.EXTRA_INDEX, -1);
-            //imageScale.set(extras.getInt(Intents.EXTRA_SCALE, imageScale.get()));
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = extras.getBoolean(Intents.EXTRA_IMAGE_CAPTION_MANDATORY);
-            final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            setCacheTitleBar(geocode);
+
+            //try to find a good title from what we got
+            final String context = extras.getString(Intents.EXTRA_GEOCODE);
+            if (StringUtils.isBlank(context)) {
+                setTitle(getString(R.string.cache_image));
+            } else {
+                final Geocache cache = DataStore.loadCache(context, LoadFlags.LOAD_CACHE_OR_DB);
+                if (cache != null) {
+                    setCacheTitleBar(cache);
+                } else {
+                    setTitle(context + ": " + getString(R.string.cache_image));
+                }
+            }
         }
 
         // Restore previous state
