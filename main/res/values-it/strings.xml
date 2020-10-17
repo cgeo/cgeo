@@ -1540,6 +1540,22 @@
     <string name="attribute_challengecache_no">Nessuna cache di sfida</string>
     <string name="attribute_hqsolutionchecker_yes">Controllo delle soluzioni Geocaching.com abilitato</string>
     <string name="attribute_hqsolutionchecker_no">Controllo soluzioni Geocaching.com non abilitato</string>
+    <string name="attribute_handicaching_yes">Valutato su Handicaching.com</string>
+    <string name="attribute_handicaching_no">Non valutato su Handicaching.com</string>
+    <string name="attribute_munzee_yes">Contiene un Munzee</string>
+    <string name="attribute_munzee_no">Non contiene Munzee</string>
+    <string name="attribute_ads_yes">Contiene pubblicità</string>
+    <string name="attribute_ads_no">Non contiene pubblicità</string>
+    <string name="attribute_military_area_yes">Area di addestramento militare</string>
+    <string name="attribute_military_area_no">Nessuna area di addestramento militare</string>
+    <string name="attribute_video_surveil_yes">Area soggetta a videosorveglianza</string>
+    <string name="attribute_video_surveil_no">Area non soggetta a videosorveglianza</string>
+    <string name="attribute_trackables_yes">Adatto a tenere i trackables</string>
+    <string name="attribute_trackables_no">Non adatto a contenere trackables</string>
+    <string name="attribute_historic_yes">Struttura abbandonata / Rovina</string>
+    <string name="attribute_historic_no">Nessuna struttura abbandonata / Nessuna rovina</string>
+    <string name="attribute_blind_people_yes">Handicap: adatto ai ciechi</string>
+    <string name="attribute_blind_people_no">Handicap: non adatto ai ciechi</string>
     <!-- next things -->
     <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
