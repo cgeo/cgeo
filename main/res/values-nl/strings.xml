@@ -1540,6 +1540,22 @@
     <string name="attribute_challengecache_no">Geen challenge cache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com oplossing checker ingeschakeld</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com oplossing checker niet ingeschakeld</string>
+    <string name="attribute_handicaching_yes">Beoordeeld op Handicaching.com</string>
+    <string name="attribute_handicaching_no">Niet beoordeeld op Handicaching.com</string>
+    <string name="attribute_munzee_yes">Bevat een Munzee</string>
+    <string name="attribute_munzee_no">Bevat geen Munzee</string>
+    <string name="attribute_ads_yes">Bevat reclame</string>
+    <string name="attribute_ads_no">Bevat geen reclame</string>
+    <string name="attribute_military_area_yes">Militair oefengebied</string>
+    <string name="attribute_military_area_no">Geen militair oefengebied</string>
+    <string name="attribute_video_surveil_yes">Gebied met videobewaking</string>
+    <string name="attribute_video_surveil_no">Gebied zonder videobewaking</string>
+    <string name="attribute_trackables_yes">Geschikt voor trackables</string>
+    <string name="attribute_trackables_no">Niet geschikt voor trackables</string>
+    <string name="attribute_historic_yes">Verlaten gebouw / ruïne</string>
+    <string name="attribute_historic_no">Geen verlaten gebouw / ruïne</string>
+    <string name="attribute_blind_people_yes">Handicap: Blind</string>
+    <string name="attribute_blind_people_no">Geen handicap: Blind</string>
     <!-- next things -->
     <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
