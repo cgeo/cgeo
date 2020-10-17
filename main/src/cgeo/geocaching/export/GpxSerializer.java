@@ -203,7 +203,7 @@ public final class GpxSerializer {
             gpx.startTag(NS_CGEO, "originalCoordsEmpty");
             gpx.text("true");
             gpx.endTag(NS_CGEO, "originalCoordsEmpty");
-        }        
+        }
     }
 
     /**
@@ -271,16 +271,10 @@ public final class GpxSerializer {
         // combine note and user note with SEPARATOR "\n--\n"
         final String waypointNote = wp.getCombinedNoteAndUserNote();
         XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
-        // add parent reference the GSAK-way
-        writeGsakExtensions(wp);
-
-        // combine note and user note with SEPARATOR "\n--\n"
-        final String waypointNote = wp.getCombinedNoteAndUserNote();
-        XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
 
         // add parent reference the GSAK-way
         writeGsakExtensions(wp);
-
+        // add specific cgeo-attributes
         writeCGeoAttributes(wp);
 
         gpx.endTag(NS_GPX, "wpt");
