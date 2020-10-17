@@ -262,6 +262,7 @@
     <string name="more_information">Daha fazla bilgi</string>
     <string name="remind_later">Daha sonra hatırlat</string>
     <string name="undo">Geri al</string>
+    <string name="dont_show_again">Yeniden gösterme</string>
     <string name="warn_gm_not_available">Google Maps mevcut değildir.</string>
     <string name="switch_to_mf">Google Play hizmetiniz güncel değil. Bunun yerine harita sağlayıcınızı Mapsforge olarak değiştirmek ister misiniz?</string>
     <string name="switched_to_mf">Varsayılan harita sağlayıcısı Mapsforge olarak belirlendi. Haritanızı yeniden başlatın.</string>
@@ -534,6 +535,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Kayıt metni</string>
     <string name="init_signature_template_size">Boyut</string>
+    <string name="init_signature_template_type">Tür</string>
     <string name="init_ratingwanted">GCvote Derecelendirme</string>
     <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache derecelendirmesini yükle</string>
     <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
@@ -574,10 +576,13 @@
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki Geocache\'lerin yönünü göster</string>
     <!-- backup / restore -->
+    <string name="init_restore_title">Yedeklemeyi geri yükle</string>
     <string name="init_backup">Cache\'leri/ yol noktalarını yedekle</string>
     <string name="init_backup_backup">Yedekle</string>
+    <string name="init_backup_now">Yedeklemeyi başlat</string>
     <string name="init_backup_running">Geocache veritabanı yedeklemesi oluşturuluyor…</string>
     <string name="init_backup_restore">Geri Yükleme</string>
+    <string name="init_backup_backup_history">Yedekleme geçmişi</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
     <string name="init_backup_unnecessary">Veri tabanı boş, yedekleme gerekli değil.</string>
@@ -589,6 +594,7 @@
     <string name="init_restore_running">Geocache veritabanı geri yükleniyor…</string>
     <string name="init_restore_confirm">Veritabanı boş. Veritabanı yedeğini geri yüklemek istiyor musunuz?</string>
     <string name="init_backup_last">Tarihinden kullanabilir yedekleme</string>
+    <string name="init_backup_unavailable">mevcut değil</string>
     <string name="init_backup_last_no">Yedeklenmiş bir dosya yok.</string>
     <string name="settings_title_backup">Yedekle /yeniden yükle</string>
     <string name="settings_summary_backup">Yedekleme oluşturun ve Cache/yol noktası verilerini ve program ayarlarını yeniden yükleyin.</string>
@@ -947,6 +953,8 @@
     <string name="cache_share_field">Paylaş</string>
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
+    <string name="context_share_as_text">Metni paylaş</string>
+    <string name="context_share_as_link">Bağlantıyı paylaş</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">Gidilecek hedefler</string>
@@ -1151,9 +1159,12 @@
     <string name="destination_select">Varış yeri seç</string>
     <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
+    <string name="device_heading_label">Cihaz:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Bilinmeyen</string>
     <string name="do_auto">Otomatik</string>
+    <string name="do_flat">Düz</string>
+    <string name="do_upright">Dik</string>
     <!-- license -->
     <string name="license">Lisans</string>
     <string name="license_show">Lisansı göster</string>
@@ -1429,6 +1440,8 @@
     <string name="attribute_survey_marker_no">Yer işareti yakınında değil</string>
     <string name="attribute_offset_cache_yes">Konumlamalı Cache</string>
     <string name="attribute_offset_cache_no">Konumlamalı Cache</string>
+    <string name="attribute_bonuscache_yes">Bonus cache</string>
+    <string name="attribute_bonuscache_no">Bonus cache değil</string>
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1438,6 +1451,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Play\'de c:geo</a></string>
     <string name="about_twitter"><b>c:geo</b> her Geocache\'e kayıt girişinizde Twitter\'da yeni bir durum paylaşmalı mı?</string>
+    <string name="github_title">Bugtracker</string>
     <string name="faq_title">Sıkça Sorulan Sorular</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Yeni sürüm mevcut. \n Yüklemek için tıklayın.</string>
@@ -1592,6 +1606,7 @@
     <string name="delete_setting">Ayarları sil</string>
     <string name="edit_setting">\'\'%s\'\' ayarlarını düzenle</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_foundmap">bir harita dosyası bulundu</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_option_overwrite">Üzerine yaz</string>
     <string name="receivemapfile_option_differentname">Farklı isim</string>
