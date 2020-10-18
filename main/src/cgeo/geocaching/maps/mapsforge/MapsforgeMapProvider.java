@@ -243,12 +243,12 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         MapProviderFactory.deleteOfflineMapSources();
         final Resources resources = CgeoApplication.getInstance().getResources();
         final List<String> offlineMaps = getOfflineMaps();
+        if (offlineMaps.size() > 1) {
+            registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined), MapGeneratorInternal.DATABASE_RENDERER));
+        }
         for (final String mapFile : offlineMaps) {
             final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
             registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
-        }
-        if (offlineMaps.size() > 1) {
-            registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined), MapGeneratorInternal.DATABASE_RENDERER));
         }
     }
 }
