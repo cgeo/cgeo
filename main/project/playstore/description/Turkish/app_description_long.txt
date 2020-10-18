@@ -1,7 +1,7 @@
 c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away.
 
-Main features:
--Cache'leri cankı haritada görüntüleyin
+Temel özellikler:
+-Cache'leri cankı haritada görüntüleyin 
 -Google Haritaları veya OpenStreetMaps kullanın
 -Değişik kriterlere göre cache'leri arayın
 -Bulmalarınızı çevrimiçi veya çevrimdışı kaydedin
@@ -19,7 +19,7 @@ Navigate to a cache or a waypoint of a cache with the built-in compass function,
 
 Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want.
 You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
+Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. roaming yaparken).
 Logs can be posted online or stored offline for later submission or exported via field notes.
 
 Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
