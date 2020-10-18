@@ -8,12 +8,13 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:4.0.2'
+        classpath 'com.android.tools.build:gradle:4.1.0'
 
         // un-mocking of portable Android classes
         classpath 'de.mobilej.unmock:UnMockPlugin:0.7.6'
 
         // monitor our application method limit
+        //noinspection GradleDependency - see https://github.com/cgeo/cgeo/issues/9208
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
 
         // ribbonizer for easier distinction of non-release builds
@@ -105,6 +106,10 @@ allprojects {
                 }
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
                 force 'com.google.guava:guava:26.0-jre'
+
+                // force this version because of bug in gradle 4.1.0 (referencing 4.1.0-alpha01-6193524)
+                // TODO check after gradle update
+                force 'com.android.tools.build:aapt2-proto:4.1.0-6503028'
             }
         }
     }
