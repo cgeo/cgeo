@@ -1560,6 +1560,22 @@
     <string name="attribute_challengecache_no">Není challenge keší</string>
     <string name="attribute_hqsolutionchecker_yes">Kontrola řešení na Geocaching.com povolena</string>
     <string name="attribute_hqsolutionchecker_no">Kontrola řešení na Geocaching.com zakázána</string>
+    <string name="attribute_handicaching_yes">Hodnoceno na Handicaching.com</string>
+    <string name="attribute_handicaching_no">Nehodnoceno na Handicaching.com</string>
+    <string name="attribute_munzee_yes">Obsahuje Munzee</string>
+    <string name="attribute_munzee_no">Neobsahuje Munzee</string>
+    <string name="attribute_ads_yes">Obsahuje reklamu</string>
+    <string name="attribute_ads_no">Neobsahuje reklamu</string>
+    <string name="attribute_military_area_yes">Vojenský výcvikový prostor</string>
+    <string name="attribute_military_area_no">Není vojenským výcvikovým prostorem</string>
+    <string name="attribute_video_surveil_yes">Prostor pod kamerovým dohledem</string>
+    <string name="attribute_video_surveil_no">Prostor není pod kamerovým dohledem</string>
+    <string name="attribute_trackables_yes">Vhodné pro trackovací předměty</string>
+    <string name="attribute_trackables_no">Nevhodné pro trackovací předměty</string>
+    <string name="attribute_historic_yes">Opuštěná budova / Zřícenina</string>
+    <string name="attribute_historic_no">Není opuštěnou budovou / Zříceninou</string>
+    <string name="attribute_blind_people_yes">Postižení: Zrakové</string>
+    <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
