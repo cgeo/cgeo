@@ -1,12 +1,13 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+これはオープンソースのジオキャッシング用アプリc:geoのためのプラグインです。使用するにはc:geoのインストールが必要です。c:geoでユーザ名をクリックしたときに連絡帳(電話帳)を開くことができます。
 
-Usage:
-When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
+使い方:
+c:geoで(キャッシュのログブックなどで)ユーザ名をタップしてください。 メニューに「連絡帳(電話帳)で開く」があるので選択すれば連絡帳(電話帳)が開きます。 これで直接電話したりSMSなどを送れます。
 
-Remark: 
-The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
+注: 
+ジオキャッシングのユーザ名またはその別名が連絡帳(電話帳)に登録されている必要があります。
 
-Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
-If there are still problems, contact support via email.
+Playストアではコメントに返事が出来ません!
+(訳者注: 現在は可能ですがほぼ返答していないようです) c:geo用プラグインのインストール時や使っていて問題があったら最初にFAQ: https://faq.cgeo.org(英語)をご覧ください。
+それでも問題が解決しなければサポートにメールで連絡ください(英語、ドイツ語、フランス語かスロベニア語でお願いします)。
 
-If you would like to know why this c:geo plugin needs the permissions requested, please check https://www.cgeo.org/faq.html#plugin-contacts-privacy for an explanation.
+c:geo用プラグインが要求する権限についてはhttps://www.cgeo.org/faq.html#plugin-contacts-privacyでご確認ください。
