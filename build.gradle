@@ -1,5 +1,8 @@
 // first of all the buildscript block, then the plugins block
 buildscript {
+    //kotlin, see https://developer.android.com/kotlin/add-kotlin
+    ext.kotlin_version = '1.4.10'
+
     repositories {
         jcenter()
         google()
@@ -18,6 +21,9 @@ buildscript {
 
         // ribbonizer for easier distinction of non-release builds
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
+
+        // kotlin, see https://developer.android.com/kotlin/add-kotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 

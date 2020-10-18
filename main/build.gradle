@@ -10,6 +10,10 @@ import org.apache.tools.ant.filters.ReplaceTokens
  */
 apply plugin: 'com.android.application'
 
+// kotlin, see https://developer.android.com/kotlin/add-kotlin
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 /*
  * https://github.com/KeepSafe/dexcount-gradle-plugin
  * dex counting can take several seconds, therefore do this only on the CI server
@@ -238,6 +242,10 @@ android {
 }
 
 dependencies {
+    //kotlin, see https://developer.android.com/kotlin/add-kotlin
+    implementation "androidx.core:core-ktx:1.0.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
     def androidAnnotationsVersion = '4.7.0'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
