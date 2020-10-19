@@ -1,1 +1,1 @@
-This is a contacts plugin for c:geo
+これはc:geoの連絡帳プラグインです
