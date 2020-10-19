@@ -28,6 +28,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.commons.io.IOUtils;
@@ -124,11 +125,11 @@ public class TrailHistoryExport {
                         gpx.startTag(NS_GPX, "trkseg");
                             for (TrailHistoryElement trailHistoryElement : trail) {
                                 gpx.startTag(null, "trkpt");
+                                    // all decimal points have to be ".", thus use non-localizing methods
                                     gpx.attribute(null, "lat", String.valueOf(trailHistoryElement.getLatitude()));
                                     gpx.attribute(null, "lon", String.valueOf(trailHistoryElement.getLongitude()));
                                     XmlUtils.simpleText(gpx, null, "time", formatter.format(trailHistoryElement.getTimestamp()));
-                                    // write additional dummy elevation info to make track file importable by osm.org
-                                    XmlUtils.simpleText(gpx, null, "ele", "0.0");
+                                    XmlUtils.simpleText(gpx, null, "ele", String.format(Locale.US, "%.2f", trailHistoryElement.getAltitude()));
                                 gpx.endTag(null, "trkpt");
                                 countExported++;
                                 publishProgress(countExported);
