@@ -17,6 +17,8 @@
 <li>New: Support [TYPE] in signature</li>
 <li>Fix: Hint is not displayed on compass view, when launched directly from map</li>
 <li>New: Image upload on logging: always remove EXIF data</li>
+<li>New: Image upload on logging: allow resorting images</li>
+<li>New: Waypoint calculator: add option to lower-case all variables</li>
 </ul>
 
 <h4>Cache lists:</h4>
