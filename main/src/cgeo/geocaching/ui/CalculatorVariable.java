@@ -78,6 +78,10 @@ public class CalculatorVariable extends LinearLayout {
 
             return returnValue;
         }
+
+        public void switchToLowerCase() {
+            this.expression = this.expression.toLowerCase();
+        }
     }
 
     public static class VariableDataFactory implements JSONAbleFactory<VariableData> {
@@ -245,4 +249,9 @@ public class CalculatorVariable extends LinearLayout {
         return getCachedValue();
     }
 
+    public void switchToLowerCase() {
+        variableData.switchToLowerCase();
+        expression.setText(variableData.expression);
+        setCacheDirty();
+    }
 }
