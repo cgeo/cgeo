@@ -28,6 +28,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.apache.commons.io.IOUtils;
 import org.xmlpull.v1.XmlSerializer;
@@ -111,6 +112,7 @@ public class TrailHistoryExport {
                 gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
 
                     final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
                     gpx.startTag(NS_GPX, "metadata");
                     XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo history trail");
