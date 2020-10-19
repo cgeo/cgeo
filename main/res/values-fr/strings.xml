@@ -595,11 +595,9 @@
     <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
-    <string name="init_backup_summary">Veuillez noter que cette fonctionnalité peut sauvegarder les caches, les points de passage &amp; les paramètres, mais pas les images des caches.</string>
     <string name="init_restore_title">Restaurer une sauvegarde</string>
     <string name="init_backup_caches">caches et points de passage</string>
     <string name="init_backup_program_settings">Paramètres (du programme)</string>
-    <string name="init_backup_logins">inclure les données du compte</string>
     <string name="init_backup">Sauvegarde des caches / points de passage</string>
     <string name="init_backup_backup">Sauvegarde</string>
     <string name="init_backup_finished">Sauvegarde terminée</string>
@@ -609,16 +607,11 @@
     <string name="init_restore_restored">Restauration terminée</string>
     <string name="init_backup_start_restore">Démarrer la restauration</string>
     <string name="init_backup_backup_history">Historique des sauvegardes</string>
-    <string name="init_backup_create_backup_history">Créer un historique de sauvegarde</string>
-    <string name="init_backup_history_disabled">L\'historique de sauvegarde est désactivé. Voulez-vous supprimer toutes vos sauvegardes archivées ?</string>
     <string name="init_user_confirmation">Je sais ce que je fais</string>
-    <string name="init_backup_backup_history_summary">La sauvegarde précédente sera déplacée vers %s lors de la création d\'une nouvelle sauvegarde. Selon la taille de la sauvegarde, cela pourrait conduire à une utilisation élevée de l\'espace disque !</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
     <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
-    <string name="init_backup_move_directory_error">Impossible de déplacer les fichiers de sauvegarde vers le dossier d\'archive. Il y a probablement plusieurs sauvegardes créées le même jour.</string>
     <string name="init_backup_no_backup_available">Aucun fichier de sauvegarde n\'est disponible.</string>
-    <string name="backup_confirm_overwrite">Voulez-vous remplacer la sauvegarde existante de %s ?</string>
     <string name="restore_confirm_overwrite_database">AVERTISSEMENT : Ceci écrasera %s sur votre appareil !</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVERTISSEMENT : Ceci écrasera %s et vos paramètres actuels sur votre appareil!</string>
     <string name="restore_confirm_overwrite_settings">AVERTISSEMENT : Ceci écrasera vos paramètres actuels sur votre appareil!</string>
