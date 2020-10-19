@@ -7,6 +7,8 @@
 <h4>Map:</h4>
 <ul>
 <li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
+<li>Fix: Export position history based on GMT time zone</li>
+<li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -19,6 +21,7 @@
 <li>New: Image upload on logging: always remove EXIF data</li>
 <li>New: Image upload on logging: allow resorting images</li>
 <li>New: Waypoint calculator: add option to lower-case all variables</li>
+<li>Fix: Update list of waypoints on extract waypoints</li>
 </ul>
 
 <h4>Cache lists:</h4>
@@ -35,6 +38,7 @@
 <li>Change: Throw a runtime error if db can neither be opened nor created</li>
 <li>New: Automatically convert search input to upper case</li>
 <li>Change: Updated widget icons</li>
+<li>Updated list of contributors</li>
 </ul>
 </div>]]></Data>
   </string>
