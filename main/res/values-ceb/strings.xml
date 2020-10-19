@@ -450,7 +450,6 @@
     <string name="init_backup_failed">Napakyas ang pagtabang sa database sa c:geo.</string>
     <string name="init_backup_unnecessary">Walay sulod ang database, dili kinahanglan ang tabang.</string>
     <string name="init_backup_no_backup_available">Wala syay backup file na pwedeng maggamit.</string>
-    <string name="backup_confirm_overwrite">Ginahan ka nga hulipan ang anaa nga tabang gekan sa %s?</string>
     <string name="init_restore_success">Ang pagtarung kay sakto.</string>
     <string name="init_restore_failed">Napakyas ang pagpasig-uli.</string>
     <string name="init_restore_running">Pagbalik sa cache database…</string>
