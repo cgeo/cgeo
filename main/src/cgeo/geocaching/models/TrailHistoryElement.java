@@ -4,6 +4,8 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.TimeZone;
+
 public class TrailHistoryElement implements Parcelable {
     private Location location;
     private long timestamp;
@@ -17,7 +19,7 @@ public class TrailHistoryElement implements Parcelable {
 
     public TrailHistoryElement(final Location loc) {
         location = loc;
-        timestamp = System.currentTimeMillis();
+        timestamp = System.currentTimeMillis() - TimeZone.getDefault().getOffset(timestamp);
     }
 
     public Location getLocation() {
