@@ -261,9 +261,9 @@ public class Settings {
 
             Log.i("Moving db files");
             FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME), LocalStorage.getExternalDbDirectory());
-            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupDirectory());
-            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP), LocalStorage.getBackupDirectory());
-            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupDirectory());
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupRootDirectory());
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP), LocalStorage.getBackupRootDirectory());
+            FileUtils.moveTo(new File(LocalStorage.getLegacyExternalCgeoDirectory(), DataStore.DB_FILE_NAME_BACKUP + DataStore.DB_FILE_CORRUPTED_EXTENSION), LocalStorage.getBackupRootDirectory());
 
             Log.i("Moving geocache data");
             final FileFilter geocacheDirectories = pathname -> {
@@ -1631,15 +1631,7 @@ public class Settings {
         return getBoolean(R.string.pref_backup_logins, false);
     }
 
-    public static boolean getBackupSettings() {
-        return getBoolean(R.string.pref_backup_settings, true);
-    }
-
-    public static boolean getBackupDatabase() {
-        return getBoolean(R.string.pref_backup_caches, true);
-    }
-
-    public static boolean allowMultipleBackups() {
-        return getBoolean(R.string.pref_backups_backup_history, false);
+    public static int allowedBackupsNumber() {
+        return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 }

@@ -629,11 +629,12 @@
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>
-    <string name="init_backup_summary">Please note that this feature can backup caches, waypoints &amp; settings, but no cache images.</string>
+    <string name="init_backup_summary">Please note that this feature can backup caches, waypoints &amp; settings, but no cache images. \nIn order to be able to restore the data even after losing your phone, the backup files should be copied to an independent location.</string>
     <string name="init_restore_title">Restore Backup</string>
     <string name="init_backup_caches">caches and waypoints</string>
     <string name="init_backup_program_settings">program settings</string>
-    <string name="init_backup_logins">include account data</string>
+    <string name="init_backup_logins">Include account data</string>
+    <string name="init_backup_logins_summary">This will store your entered login credentials within the backup.</string>
     <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Backup finished</string>
@@ -642,17 +643,20 @@
     <string name="init_backup_restore">Restore</string>
     <string name="init_restore_restored">Restoration completed</string>
     <string name="init_backup_start_restore">Start restore</string>
+    <string name="init_backup_restore_different_backup">Restore a different backup</string>
     <string name="init_backup_backup_history">Backup history</string>
-    <string name="init_backup_create_backup_history">Create backup history</string>
-    <string name="init_backup_history_disabled">Backup history disabled. Do you want to remove all your archived backups?</string>
+    <string name="init_backup_history_length_title">Maximum stored backups</string>
+    <string name="init_backup_history_length_summary">Decide how many backups should be kept. When the limit is reached, the oldest ones will be deleted automatically.</string>
+    <string name="init_backup_history_length_min">Only recent</string>
+    <string name="init_backup_history_length_max">Keep all</string>
+    <string name="init_backup_history_delete_warning">You have saved more backups than your configured maximum value allows. Do you really want to remove all excess backups?</string>
     <string name="init_user_confirmation">I know what I\'m doing</string>
-    <string name="init_backup_backup_history_summary">The previous backup will be moved to %s while creating a new one. Depending on the backup size, this could lead to high disk usage!</string>
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
-    <string name="init_backup_move_directory_error">Couldn\'t move backup files to the archive folder. There are probably multiple backups created on the same day.</string>
+    <string name="init_backup_folder_exists_error">Couldn\'t create a new backup directory. Have you already made a backup in the last minute?</string>
     <string name="init_backup_no_backup_available">There is no backup file available.</string>
-    <string name="backup_confirm_overwrite">Do you want to overwrite the existing backup from %s?</string>
+    <string name="backup_confirm_overwrite">Do you want to overwrite your oldest existing backup from %s?</string>
     <string name="restore_confirm_overwrite_database">WARNING: This will overwrite %s on your device!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNING: This will overwrite %s and your current settings on your device!</string>
     <string name="restore_confirm_overwrite_settings">WARNING: This will overwrite your current settings on your device!</string>

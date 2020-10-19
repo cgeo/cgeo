@@ -665,7 +665,7 @@ public class DataStore {
      */
     private static boolean recreateDatabase(final DbHelper dbHelper) {
         final File dbPath = databasePath();
-        final File corruptedPath = new File(LocalStorage.getBackupDirectory(), dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION);
+        final File corruptedPath = new File(LocalStorage.getBackupRootDirectory(), dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION);
         if (FileUtils.copy(dbPath, corruptedPath)) {
             Log.i("DataStore.init: renamed " + dbPath + " into " + corruptedPath);
         } else {
@@ -692,8 +692,8 @@ public class DataStore {
     }
 
     @NonNull
-    public static File getBackupFileInternal(final boolean checkDeprecated) {
-        final File currentBackupFile = new File(LocalStorage.getBackupDirectory(), DB_FILE_NAME_BACKUP);
+    public static File getBackupFileInternal(final File backupDir, final boolean checkDeprecated) {
+        final File currentBackupFile = new File(backupDir, DB_FILE_NAME_BACKUP);
         if (!currentBackupFile.exists() && checkDeprecated) {
             final File deprecatedBackupFile = new File(LocalStorage.getLegacyExternalCgeoDirectory(), DB_FILE_NAME_BACKUP);
             if (deprecatedBackupFile.exists()) {
@@ -703,9 +703,9 @@ public class DataStore {
         return currentBackupFile;
     }
 
-    public static String backupDatabaseInternal() {
+    public static String backupDatabaseInternal(final File backupDir) {
         final long timestamp = System.currentTimeMillis();
-        final File target = getBackupFileInternal(false);
+        final File target = getBackupFileInternal(backupDir, false);
         closeDb();
         final boolean backupDone = FileUtils.copy(databasePath(), target);
         init();
@@ -770,8 +770,8 @@ public class DataStore {
         return databasePath(Settings.isDbOnSDCard());
     }
 
-    public static int restoreDatabaseInternal() {
-        final File sourceFile = getBackupFileInternal(true);
+    public static int restoreDatabaseInternal(final File backupDir) {
+        final File sourceFile = getBackupFileInternal(backupDir, true);
         closeDb();
         int result = FileUtils.copy(sourceFile, databasePath()) ? RESTORE_SUCCESSFUL : RESTORE_FAILED_GENERAL;
         init();

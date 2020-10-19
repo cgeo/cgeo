@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -34,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -48,7 +50,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 
 public class BackupUtils extends Activity {
-    private static final String ATTRIBUTE_NAME  = "name";
+    private static final String ATTRIBUTE_NAME = "name";
     private static final String ATTRIBUTE_VALUE = "value";
     private static final String TAG_MAP = "map";
     private static final String SETTINGS_FILENAME = "cgeo-settings.xml";
@@ -60,11 +62,12 @@ public class BackupUtils extends Activity {
     }
 
 
+    /**
+     * Public methods also containing question dialogs, etc
+     */
 
-    /** Public methods also containing question dialogs, etc */
-
-    public void restore() {
-        if (!hasBackup()) {
+    public void restore(final File backupDir) {
+        if (!hasBackup(backupDir)) {
             Toast.makeText(activityContext, R.string.init_backup_no_backup_available, Toast.LENGTH_LONG).show();
         } else {
 
@@ -73,15 +76,15 @@ public class BackupUtils extends Activity {
             final CheckBox settingsCheckbox = content.findViewById(R.id.settings_check_box);
             final TextView warningText = content.findViewById(R.id.warning);
 
-            if (getDatabaseBackupTime() != 0) {
-                databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + Formatter.formatShortDateTime(getDatabaseBackupTime()) + ")");
+            if (getDatabaseBackupTime(backupDir) != 0) {
+                databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + Formatter.formatShortDateTime(getDatabaseBackupTime(backupDir)) + ")");
                 databaseCheckbox.setEnabled(true);
                 databaseCheckbox.setChecked(true);
             } else {
                 databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + activityContext.getString(R.string.init_backup_unavailable) + ")");
             }
-            if (getSettingsBackupTime() != 0) {
-                settingsCheckbox.setText(activityContext.getString(R.string.init_backup_program_settings) + "\n(" + Formatter.formatShortDateTime(getSettingsBackupTime()) + ")");
+            if (getSettingsBackupTime(backupDir) != 0) {
+                settingsCheckbox.setText(activityContext.getString(R.string.init_backup_program_settings) + "\n(" + Formatter.formatShortDateTime(getSettingsBackupTime(backupDir)) + ")");
                 settingsCheckbox.setEnabled(true);
                 settingsCheckbox.setChecked(true);
             } else {
@@ -98,9 +101,9 @@ public class BackupUtils extends Activity {
                         alertDialog.dismiss();
 
                         if (database) {
-                            restoreDatabaseInternal(settings);
+                            restoreDatabaseInternal(backupDir, settings);
                         } else {
-                            if (restoreSettingsInternal()) {
+                            if (restoreSettingsInternal(backupDir)) {
                                 Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, R.string.settings_restart, (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
                             }
                         }
@@ -122,7 +125,7 @@ public class BackupUtils extends Activity {
         }
     }
 
-    private void updateRestoreDialog (final Button button, final CheckBox databaseCheckbox, final CheckBox settingsCheckbox, final TextView warningText) {
+    private void updateRestoreDialog(final Button button, final CheckBox databaseCheckbox, final CheckBox settingsCheckbox, final TextView warningText) {
 
         if (databaseCheckbox.isChecked() || settingsCheckbox.isChecked()) {
             button.setEnabled(true);
@@ -142,40 +145,43 @@ public class BackupUtils extends Activity {
         }
     }
 
-    public void deleteBackupHistoryDialog() {
+    public void deleteBackupHistoryDialog(final BackupSeekbarPreference preference, final int newValue) {
+        final File[] dirs = getDirsToRemove(newValue + 1);
 
-        final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
-        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-        final TextView textView = (TextView) content.findViewById(R.id.message);
-        textView.setText(R.string.init_backup_history_disabled);
-        checkbox.setText(R.string.init_user_confirmation);
+        if (dirs != null) {
+            final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
+            final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
+            final TextView textView = (TextView) content.findViewById(R.id.message);
+            textView.setText(R.string.init_backup_history_delete_warning);
+            checkbox.setText(R.string.init_user_confirmation);
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
+            final AlertDialog alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
                 .setView(content)
                 .setTitle(R.string.init_backup_backup_history)
                 .setCancelable(true)
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> LocalStorage.deleteOldBackupDirectory())
-                .setNeutralButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> LocalStorage.deleteFilesOrDirectories(dirs))
+                .setNeutralButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
+                .setOnCancelListener(dialog -> preference.setValue(Math.min(newValue + dirs.length, activityContext.getResources().getInteger(R.integer.backup_history_length_max))))
                 .create();
 
-        alertDialog.show();
-        alertDialog.setOwnerActivity(activityContext);
+            alertDialog.show();
+            alertDialog.setOwnerActivity(activityContext);
 
-        final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        button.setEnabled(false);
-        checkbox.setOnClickListener(check -> {
-            if (checkbox.isChecked()) {
-                button.setEnabled(true);
-            } else {
-                button.setEnabled(false);
-            }
-        });
+            final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setEnabled(false);
+            checkbox.setOnClickListener(check -> {
+                if (checkbox.isChecked()) {
+                    button.setEnabled(true);
+                } else {
+                    button.setEnabled(false);
+                }
+            });
+        }
 
     }
 
     /**
      * Create a backup after confirming to overwrite the existing backup.
-     *
      */
     public void backup(final Runnable runAfterwards) {
 
@@ -186,26 +192,28 @@ public class BackupUtils extends Activity {
             return;
         }
 
-        if (hasBackup() && Settings.allowMultipleBackups() && !LocalStorage.moveOldBackup()) {
-            Toast.makeText(activityContext, R.string.init_backup_move_directory_error, Toast.LENGTH_LONG).show();
-        }
 
-        if ((Settings.getBackupDatabase() && getDatabaseFile() != null) || (Settings.getBackupSettings() && getSettingsFile() != null)) {
-            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, OneTimeDialogs.DialogStatus.DIALOG_SHOW, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getNewestBackupDateTime()), true, null, () -> backupInternal(runAfterwards));
+        final File[] dirs = getDirsToRemove(Settings.allowedBackupsNumber());
+        if (dirs != null) {
+            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, OneTimeDialogs.DialogStatus.DIALOG_SHOW, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs[dirs.length - 1])), true, null, () -> {
+                LocalStorage.deleteFilesOrDirectories(dirs);
+                backupInternal(runAfterwards);
+            });
         } else {
             backupInternal(runAfterwards);
         }
     }
 
 
-
-    /** Private methods containing the real backup process */
+    /**
+     * Private methods containing the real backup process
+     */
 
     // returns true on success
-    private boolean restoreSettingsInternal() {
+    private boolean restoreSettingsInternal(final File backupDir) {
         try {
             // open file
-            final FileInputStream file = new FileInputStream (getSettingsFile());
+            final FileInputStream file = new FileInputStream(getSettingsFile(backupDir));
 
             // open shared prefs for writing
             final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
@@ -280,8 +288,8 @@ public class BackupUtils extends Activity {
         }
     }
 
-    private void restoreDatabaseInternal(final boolean settingsAfterwards) {
-        final File sourceFile = DataStore.getBackupFileInternal(true);
+    private void restoreDatabaseInternal(final File backupDir, final boolean settingsAfterwards) {
+        final File sourceFile = DataStore.getBackupFileInternal(backupDir, true);
         try {
             final SQLiteDatabase backup = SQLiteDatabase.openDatabase(sourceFile.getPath(), null, OPEN_READONLY);
             final int backupDbVersion = backup.getVersion();
@@ -292,7 +300,7 @@ public class BackupUtils extends Activity {
                 final Resources res = activityContext.getResources();
                 final ProgressDialog dialog = ProgressDialog.show(activityContext, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
                 final AtomicInteger restoreSuccessful = new AtomicInteger(DataStore.RESTORE_FAILED_GENERAL);
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal()), () -> {
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> restoreSuccessful.set(DataStore.restoreDatabaseInternal(backupDir)), () -> {
                     dialog.dismiss();
                     final int restored = restoreSuccessful.get();
                     final String message =
@@ -302,8 +310,8 @@ public class BackupUtils extends Activity {
                     if (activityContext instanceof MainActivity) {
                         ((MainActivity) activityContext).updateCacheCounter();
                     }
-                    if (settingsAfterwards && restoreSettingsInternal()) {
-                            Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, message + "\n\n" + res.getString(R.string.settings_restart), (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
+                    if (settingsAfterwards && restoreSettingsInternal(backupDir)) {
+                        Dialogs.confirmYesNo(activityContext, R.string.init_restore_restored, message + "\n\n" + res.getString(R.string.settings_restart), (dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
                     } else {
                         Dialogs.message(activityContext, R.string.init_restore_restored, message);
                     }
@@ -315,13 +323,16 @@ public class BackupUtils extends Activity {
     }
 
     private void backupInternal(final Runnable runAfterwards) {
-        String message = "";
-        if (Settings.getBackupSettings()) {
-            message = "\n\n" + createSettingsBackupInternal(Settings.getBackupLoginData());
+        final File backupDir = LocalStorage.getNewBackupDirectory(System.currentTimeMillis());
+        if (backupDir == null) {
+            Toast.makeText(activityContext, R.string.init_backup_folder_exists_error, Toast.LENGTH_LONG).show();
+            return;
         }
 
-        if (Settings.getBackupDatabase()) {
-            createDatabaseBackupInternal(message, runAfterwards);
+        final String message = "\n\n" + createSettingsBackupInternal(backupDir, Settings.getBackupLoginData());
+
+        if (DataStore.getAllCachesCount() != 0) {
+            createDatabaseBackupInternal(backupDir, message, runAfterwards);
         } else {
             Dialogs.message(activityContext, R.string.init_backup_finished, message.trim());
             if (runAfterwards != null) {
@@ -330,7 +341,7 @@ public class BackupUtils extends Activity {
         }
     }
 
-    private String createSettingsBackupInternal(final Boolean fullBackup) {
+    private String createSettingsBackupInternal(final File backupDir, final Boolean fullBackup) {
         String exitMessage;
 
         final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
@@ -356,9 +367,8 @@ public class BackupUtils extends Activity {
         }
 
         try {
-            final File backupfn = new File(LocalStorage.getBackupDirectory(), SETTINGS_FILENAME);
-            FileUtils.mkdirs(backupfn.getParentFile());
-            final FileOutputStream file = new FileOutputStream (backupfn);
+            final File backupfn = new File(backupDir, SETTINGS_FILENAME);
+            final FileOutputStream file = new FileOutputStream(backupfn);
             final XmlSerializer xmlSerializer = Xml.newSerializer();
             final StringWriter writer = new StringWriter();
             xmlSerializer.setOutput(writer);
@@ -402,11 +412,11 @@ public class BackupUtils extends Activity {
         return exitMessage;
     }
 
-    private void createDatabaseBackupInternal(final String additionalText, final Runnable runAfterwards) {
+    private void createDatabaseBackupInternal(final File backupDir, final String additionalText, final Runnable runAfterwards) {
         final ProgressDialog dialog = ProgressDialog.show(activityContext,
                 activityContext.getString(R.string.init_backup),
                 activityContext.getString(R.string.init_backup_running), true, false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::backupDatabaseInternal, backupFileName -> {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.backupDatabaseInternal(backupDir), backupFileName -> {
             dialog.dismiss();
             Dialogs.message(activityContext,
                     R.string.init_backup_finished,
@@ -421,52 +431,116 @@ public class BackupUtils extends Activity {
     }
 
 
+    /**
+     * Public methods for checking the backup availability
+     */
 
-    /** Public methods for checking the backup availability */
-
-    public static boolean hasBackup() {
-        return getDatabaseFile() != null || getSettingsFile() != null;
+    public static boolean hasBackup(final File backupDir) {
+        return getDatabaseFile(backupDir) != null || getSettingsFile(backupDir) != null;
     }
 
     @Nullable
-    public static File getDatabaseFile() {
-        final File fileSourceFile = DataStore.getBackupFileInternal(true);
+    public static File getDatabaseFile(final File backupDir) {
+        final File fileSourceFile = DataStore.getBackupFileInternal(backupDir, true);
         return fileSourceFile.exists() && fileSourceFile.length() > 0 ? fileSourceFile : null;
     }
 
     @Nullable
-    private static File getSettingsFile() {
-        final File fileSourceFile = new File(LocalStorage.getBackupDirectory(), SETTINGS_FILENAME);
+    private static File getSettingsFile(final File backupDir) {
+        final File fileSourceFile = new File(backupDir, SETTINGS_FILENAME);
         return fileSourceFile.exists() && fileSourceFile.length() > 0 ? fileSourceFile : null;
     }
 
-    public static long getDatabaseBackupTime() {
-        final File restoreFile = getDatabaseFile();
+    public static long getDatabaseBackupTime(final File backupDir) {
+        final File restoreFile = getDatabaseFile(backupDir);
         if (restoreFile == null) {
             return 0;
         }
         return restoreFile.lastModified();
     }
 
-    public static long getSettingsBackupTime() {
-        final File file = getSettingsFile();
+    public static long getSettingsBackupTime(final File backupDir) {
+        final File file = getSettingsFile(backupDir);
         if (file == null) {
             return 0;
         }
         return file.lastModified();
     }
 
-    public static long getNewestBackupTime() {
-        return Math.max(getDatabaseBackupTime(), getSettingsBackupTime());
+    public static long getBackupTime(final File backupDir) {
+        return backupDir == null ? 0 : Math.max(getDatabaseBackupTime(backupDir), getSettingsBackupTime(backupDir));
     }
 
     @NonNull
     public static String getNewestBackupDateTime() {
-        final long time = getNewestBackupTime();
+        return getBackupDateTime(newestBackupFolder());
+    }
+
+    @NonNull
+    public static String getBackupDateTime(final File backupDir) {
+        final long time = getBackupTime(backupDir);
         if (time == 0) {
             return StringUtils.EMPTY;
         }
         return Formatter.formatShortDateTime(time);
+    }
+
+
+    public void moveBackupIntoNewFolderStructureIfNeeded() {
+        if (getExistingBackupFoldersSorted() == null) {
+            final File oldFolder = LocalStorage.getBackupRootDirectory();
+            final File databaseFile = DataStore.getBackupFileInternal(oldFolder, true);
+            final File settingsFile = new File(LocalStorage.getBackupRootDirectory(), SETTINGS_FILENAME);
+
+            final long timestamp = getBackupTime(oldFolder);
+            if (timestamp == 0) {
+                return;
+            }
+            final File newFolder = LocalStorage.getNewBackupDirectory(timestamp);
+            if (newFolder == null) {
+                return;
+            }
+            if (databaseFile.exists() && databaseFile.length() != 0 && databaseFile.renameTo(new File(newFolder, databaseFile.getName()))) {
+                Log.iForce("The existing database backup was moved to " + newFolder.getPath());
+            }
+            if (settingsFile.exists() && settingsFile.length() != 0 && settingsFile.renameTo(new File(newFolder, settingsFile.getName()))) {
+                Log.iForce("The existing settings backup was moved to " + newFolder.getPath());
+            }
+        }
+    }
+
+    @Nullable
+    public static File newestBackupFolder() {
+        final File[] files = getExistingBackupFoldersSorted();
+
+        if (files == null) {
+            return null;
+        }
+
+        return files [files.length - 1];
+    }
+
+    @Nullable
+    public static File[] getExistingBackupFoldersSorted() {
+        final File[] files = LocalStorage.getBackupRootDirectory().listFiles(s -> s.getName().matches("^[0-9]{4}-[0-9]{2}-[0-9]{2} (20|21|22|23|[01]\\d|\\d)((-[0-5]\\d){1,2})$"));
+
+        if (files == null || files.length == 0) {
+            return null;
+        }
+        Arrays.sort(files);
+        return files;
+    }
+
+    @Nullable
+    public File[] getDirsToRemove(final int maxBackupNumber) {
+        final File[] dirs = getExistingBackupFoldersSorted();
+
+        if (dirs == null || dirs.length <= maxBackupNumber || maxBackupNumber >= activityContext.getResources().getInteger(R.integer.backup_history_length_max)) {
+            Log.e("nothing to remove");
+            return null;
+        }
+        Log.e("files for to remove");
+        return Arrays.copyOfRange(dirs, 0, dirs.length - maxBackupNumber);
     }
 
 }
