@@ -595,11 +595,9 @@
     <string name="init_summary_livelist">Suunta kätkölle näytetään listauksessa</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
-    <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköt, reittipisteet &amp; asetukset, mutta ei kätkökuvia.</string>
     <string name="init_restore_title">Palauta varmuuskopio</string>
     <string name="init_backup_caches">Kätköllä ei ole reittipisteitä</string>
     <string name="init_backup_program_settings">ohjelman asetukset</string>
-    <string name="init_backup_logins">sisällytä käyttäjätiedot</string>
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
     <string name="init_backup_finished">Varmuuskopiointi valmis</string>
@@ -609,16 +607,11 @@
     <string name="init_restore_restored">Palautus valmis</string>
     <string name="init_backup_start_restore">Aloita palautus</string>
     <string name="init_backup_backup_history">Varmuuskopioi historia</string>
-    <string name="init_backup_create_backup_history">Luo varmuuskopiohistoria</string>
-    <string name="init_backup_history_disabled">Varmuuskopiointi poistettu käytöstä. Haluatko poistaa kaikki arkistoidut varmuuskopiot?</string>
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
-    <string name="init_backup_backup_history_summary">Edellinen varmuuskopio siirretään kohteeseen %s samalla kun luodaan uusi. Varmuuskopion koosta riippuen tämä voi johtaa suureen levyn käyttöön!</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
-    <string name="init_backup_move_directory_error">Varmuuskopiotiedostoja ei voitu siirtää arkistokansioon. Samana päivänä luotiin todennäköisesti useita varmuuskopioita.</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
-    <string name="backup_confirm_overwrite">Haluatko korvata olemassa olevan varmuuskopion %s?</string>
     <string name="restore_confirm_overwrite_database">VAROITUS: Tämä korvaa kohteen %s laitteellasi!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROITUS: Tämä korvaa kohteen %s ja nykyiset asetuksesi laitteellasi!</string>
     <string name="restore_confirm_overwrite_settings">VAROITUS: Tämä korvaa nykyiset asetuksesi laitteellasi!</string>
