@@ -1540,6 +1540,22 @@
     <string name="attribute_challengecache_no">Kein Challenge-Cache</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com-Koordinatenprüfung aktiviert</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com Koordinatenprüfung nicht vorhanden</string>
+    <string name="attribute_handicaching_yes">Bewertet auf handicaching.com</string>
+    <string name="attribute_handicaching_no">Nicht bewertet auf handicaching.com</string>
+    <string name="attribute_munzee_yes">Enthält einen Munzee</string>
+    <string name="attribute_munzee_no">Enthält keinen Munzee</string>
+    <string name="attribute_ads_yes">Beinhaltet Werbung</string>
+    <string name="attribute_ads_no">Beinhaltet keine Werbung</string>
+    <string name="attribute_military_area_yes">Militärisches Übungsgebiet</string>
+    <string name="attribute_military_area_no">Kein militärisches Übungsgebiet</string>
+    <string name="attribute_video_surveil_yes">Gebiet unter Videoüberwachung</string>
+    <string name="attribute_video_surveil_no">Gebiet nicht unter Videoüberwachung</string>
+    <string name="attribute_trackables_yes">Geeignet für Trackables</string>
+    <string name="attribute_trackables_no">Nicht für Trackables geeignet</string>
+    <string name="attribute_historic_yes">Verlassenes Bauwerk / Ruine</string>
+    <string name="attribute_historic_no">Kein verlassenes Bauwerk / Ruine</string>
+    <string name="attribute_blind_people_yes">Handicap: Blind</string>
+    <string name="attribute_blind_people_no">Kein Handicap: Blind</string>
     <!-- next things -->
     <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1549,6 +1565,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo bei Google Play</a></string>
     <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
+    <string name="github_title">BugTracker</string>
     <string name="faq_title">FAQs</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Neue Version verfügbar.\nKlicken zum Installieren.</string>

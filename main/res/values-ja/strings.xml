@@ -91,7 +91,7 @@
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">消去</string>
     <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネットの接続をご確認ください。</string>
-    <string name="log_date_future_not_allowed">ログに将来の日付けを選べません</string>
+    <string name="log_date_future_not_allowed">ログには未来の日付けを設定できません</string>
     <string name="log_add">挿入</string>
     <string name="log_repeat">最後のログを繰り返す</string>
     <string name="log_no_rating">未評価</string>
@@ -112,9 +112,11 @@
     <string name="log_yesterday">昨日</string>
     <string name="log_smilies">スマイルマーク</string>
     <string name="log_image">画像</string>
+    <string name="log_images">画像</string>
     <string name="log_image_attach">画像を添付</string>
     <string name="log_image_stored">ファイル選択</string>
     <string name="log_image_camera">撮影</string>
+    <string name="log_image_delete">削除</string>
     <string name="log_image_caption">タイトル</string>
     <string name="log_image_description">説明</string>
     <string name="log_image_scale">拡大縮小</string>
@@ -144,15 +146,16 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
+    <string name="err_captcha">CAPTCHAの入力が必要です。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください。</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_server_su">Geocaching.suに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_server_gk">GeoKrety.orgに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
     <string name="err_login">ログイン情報が保存されていません</string>
     <string name="err_login_failed_toast">ログインできません。保存済みキャッシュのみでオフラインで動作します。 ログインの設定を確認したりネット接続を有効にしてください。</string>
-    <string name="err_unknown">不明なエラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問</a>をご確認ください。</string>
+    <string name="err_unknown">不明なエラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください。</string>
     <string name="err_unknown_address">c:geoがこのアドレスを既存の場所に合わせられませんでした</string>
-    <string name="err_comm">不明な通信エラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問</a>をご確認ください。</string>
+    <string name="err_comm">不明な通信エラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください。</string>
     <string name="err_missing_auth">ユーザ名またはパスワードが設定されていません</string>
     <string name="err_wrong">ユーザ名またはパスワードが間違っています</string>
     <string name="err_maintenance">Geocaching.comはメンテナンス中で接続できません。 保存済みキャッシュのみでオフラインで動作します。</string>
@@ -168,6 +171,7 @@
     <string name="err_detail_cache_find_any">キャッシュ情報が一つも見つかりません。</string>
     <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
     <string name="err_detail_still_working">他のタスクがまだ動作中です。</string>
+    <string name="err_detail_premium_log_found">このキャッシュはgeocaching.comのプレミアム会員のみ利用できます。そのためキャッシュ情報を表示することはできません。\n\nただし、このキャッシュをすでに見つけている場合は、こちらからログを書くことは出来ます。</string>
     <string name="err_watchlist_still_managing">まだウォッチリストを管理中です。</string>
     <string name="err_watchlist_failed">ウォッチリストの変更に失敗しました。</string>
     <string name="err_application_no">適切なアプリケーションが見つかりません。</string>
@@ -188,17 +192,17 @@
     <string name="err_tb_not_loggable">このトラッカブルをログすることができません。</string>
     <string name="err_tb_find">トラッカブルが見つかりません。</string>
     <string name="err_tb_find_that">トラッカブルが見つかりません。</string>
-    <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
+    <string name="err_waypoint_cache_unknown">ウェイポイントを追加するキャッシュが見つかりません。</string>
     <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした。</string>
     <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
-    <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>
+    <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表します。距離の単位は付けないでください。</string>
     <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
     <string name="err_log_post_missing_tracking_code">トラッキング・コードがありません。</string>
     <string name="err_log_post_missing_coordinates">座標がありません。</string>
-    <string name="err_log_post_failed">あなたのログが登録されてないようです。キャッシュのサイトで確認してください。</string>
+    <string name="err_log_post_failed">あなたのログが投稿されてないようです。キャッシュのwebサイトで確認してください。</string>
     <string name="err_log_post_failed_ec">ログを投稿することができなかったようです。Extremcaching.comで確認してください。</string>
     <string name="err_log_post_failed_gk">ログを投稿することができなかったようです。GeoKrety.orgで確認してください。</string>
-    <string name="err_logimage_post_failed">あなたの画像がアップされてないようです。キャッシュのサイトで確認してください。</string>
+    <string name="err_logimage_post_failed">あなたのログ画像がアップされてないようです。キャッシュのサイトで確認してください。</string>
     <string name="err_parse_lat">緯度の解析ができません。</string>
     <string name="err_parse_lon">経度の解析ができません。</string>
     <string name="err_parse_dist">距離の解析ができません。</string>
@@ -219,7 +223,7 @@
     <string name="warn_search_help_tb">トラッカブルのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」。</string>
     <string name="warn_log_text_fill">ログの本文を入力してください。</string>
     <string name="warn_load_images">画像をロードすることができませんでした。</string>
-    <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforge version 0.3.0フォーマットの地図ファイルではありません。\nオフライン地図は利用できません。</string>
+    <string name="warn_invalid_mapfile">選択した地図ファイルはMapsforgeの地図ファイルではないかサポートされていないバージョンです。\n(現在バージョン3から5まで使用できます。バージョン3を使用するには\"旧 Mapsforge V3\"設定を有効にする必要があります。)\n\nオフライン地図は利用できません。</string>
     <string name="warn_nonexistant_mapfile">選択した地図ファイルは存在しません。\nオフライン地図は利用できません。</string>
     <string name="warn_rendertheme_missing">地図のテーマファイルが見つかりません。</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません。</string>
@@ -243,13 +247,19 @@
     <string name="info_stored_image">新規画像ファイルの保存場所:</string>
     <string name="info_cache_saved">キャッシュはローカルディスクに保存されました</string>
     <string name="warn_calculator_state_save">計算した状態を保持したい場合は、ウェイポイントを保存してください。</string>
+    <string name="feature_info_offline_counter">オフラインで書いたログがありますが、まだ投稿されていません。c:geoメインページの下部のステータス情報には、\n\"ログインサイト名\"・\"ユーザ名\"(\"見つけたキャッシュ数\" + \"オフラインログキャッシュ数\") と表示されています。\n\nまた、ログの署名に使用する\"キャッシュ数\"[NUMBER]テンプレートにも反映されます。 \n\nお好みでなかったら\"設定\" &gt; \"ログ\" で表示を変えられます。また\"キャッシュ数(オフラインログを除く)\"[ONLINENUM]をお使いください。\n\n残っているオフラインログを確認するには\"履歴”(メインページ右上の時計マーク)のフィルター(ロートのマーク)で\"個人データあり\" &gt; \"オフラインログあり\"を選択してください。</string>
     <string name="err_trackable_log_not_anonymous">c:geoから%1$sに匿名によるログインはできません。設定を開き、%2$s からあなたの認証情報を入力しますか?</string>
     <string name="err_trackable_no_preference_activity">申し訳ありませんが、適切な環境設定の画面が見つかりませんでした。</string>
     <string name="confirm_unsaved_changes_title">変更が保存されていません</string>
     <string name="confirm_discard_wp_changes">保存されていないウェイポイントの変更を破棄しますか？</string>
     <string name="err_request_popup_info">c:geo がキャッシュ ポップアップ情報の取得に失敗しました。</string>
     <string name="warn_log_load_additional_data">c:geo は、ログの追加データ (トラッカブル/お気に入りポイント) を読み込めませんでした。</string>
+    <string name="remind_later">後で再通知する</string>
+    <string name="undo">元に戻す</string>
+    <string name="dont_show_again">今後表示しない</string>
     <string name="warn_gm_not_available">Google マップは利用できません</string>
+    <string name="switch_to_mf">Google Playサービスが古くなっています。代わりにMapsforgeのマッププロバイダに切り替えますか？</string>
+    <string name="switched_to_mf">デフォルトのマップが Mapsforge マッププロバイダーに切り替えられました。 今すぐマップを再起動してください。</string>
     <!-- location service -->
     <string name="loc_last">判明した最後の位置</string>
     <string name="loc_net">ネットワーク</string>
@@ -350,14 +360,15 @@
     <string name="caches_filter_rating">評価あり</string>
     <string name="caches_filter_own_rating">自己評価あり</string>
     <string name="caches_filter_multi_listing">異なる状態で複数のリストに存在</string>
+    <string name="caches_filter_own_waypoint">ユーザー定義ウェイ ポイントあり</string>
     <string name="caches_filter_missing_gcvote">発見したキャッシュは評価されていません</string>
     <string name="caches_filter_lists">リストに割り当てられました</string>
     <string name="caches_filter_empty">(空)</string>
     <string name="caches_removing_from_history">履歴から削除中…</string>
     <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
-    <string name="caches_clear_offlinelogs_message">オフラインのログを削除します？</string>
+    <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
     <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
-    <string name="caches_make_list_unique">リストを一意にする</string>
+    <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
     <string name="caches_listmarker_none">マーカーなし</string>
     <string name="caches_listmarker_selected">(選択済み)</string>
@@ -380,7 +391,7 @@
     <string name="list_dialog_remove">消去</string>
     <string name="list_dialog_rename_title">リスト名の変更</string>
     <string name="list_dialog_rename">変更</string>
-    <string name="list_not_available">対象したリストがもう存在してません。保存済みのリストへ移動します。</string>
+    <string name="list_not_available">リストが利用できません。保存済みのリストへ移動します。</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -394,15 +405,15 @@
     <string name="about_starting">はじめましょう</string>
     <string name="about_starting_head">はじめましょう</string>
     <string name="about_starting_text_basics_head">ジオキャッシングの基本</string>
-    <string name="about_starting_text_basics_text">ジオキャッシングは、いわゆる「キャッシュ」を探して見つける屋外ゲームです。このアプリを使って、このゲームをプレイできます。\n\n詳細は、ユーザー ガイド: https://manual.cgeo.org/en/basicuse で <b>c:geo の基本</b> についてをご覧ください</string>
-    <string name="about_starting_text_device_head">c:geo デバイスのアクセス許可</string>
-    <string name="about_starting_text_device_text">c:geo はお使いのデバイスで特定のアクセス許可が必要です:\n<b>位置情報</b>: GPS にアクセスして、あなたの位置を特定し、ジオキャッシュの方向と距離を計算します\n<b>ストレージ</b>: オフラインで使用するためにジオキャッシュを保存するとき、ファイルのインポート/エクスポート、オフラインマップの読み込みため、お使いの電話のストレージにデータを書き込みます。\n\nこれらのアクセス許可がないと c:geo を使用することができません。</string>
+    <string name="about_starting_text_basics_text">ジオキャッシングは、いわゆる「キャッシュ」を探して見つけるアウトドアゲームです。このアプリでお楽しみいただけます。\n\n詳細は、ユーザー ガイド: https://manual.cgeo.org/en/basicuse で <b>c:geo Basics(英語)</b> についてをご覧ください</string>
+    <string name="about_starting_text_device_head">c:geo アプリの権限</string>
+    <string name="about_starting_text_device_text">c:geo はお使いのデバイスで特定の権限が必要です:\n<b>位置情報</b>: GPS にアクセスして、あなたの位置を特定し、ジオキャッシュの方向と距離を計算します\n<b>ストレージ</b>: オフライン用にジオキャッシュを保存するため、ファイルのインポート/エクスポートするため、オフラインマップの読み込みため、お使いのデバイスのストレージにデータを書き込みます。\n\nこれらのアクセス許可がないと c:geo を使用することができません。</string>
     <string name="about_starting_text_first_head">c:geo の最初のステップ</string>
-    <string name="about_starting_text_first_text">c:geo を使用するために、(このアプリとは別に) お好みのジオキャッシング プラットフォーム用のアカウントが必要です。c:geo を使用する前に、c:geo のサービス設定でこのアカウントを設定する必要があります!\n\n詳細は、ユーザー ガイド: https://manual.cgeo.org/en/firststeps <b>c:geo の最初のステップ</b> をご覧ください</string>
-    <string name="open_services_page">ジオキャッシング プラットフォームを設定</string>
-    <string name="about_system_include">バグ報告を送信するときに、またはc:geoについてインフォを要求するときに次のシステムの情報を含めて送信してください：</string>
+    <string name="about_starting_text_first_text">c:geoを使用するには、(このアプリとは別に)お好みのジオキャッシング プラットフォーム用のアカウントが必要です。c:geoを使用する前に、c:geo の\"設定\"&gt;\"サービス\"でアカウントを設定する必要があります!\n\n詳細は、ユーザー ガイド: https://manual.cgeo.org/en/firststeps <b>First steps with c:geo(英語)</b> をご覧ください</string>
+    <string name="open_services_page">ジオキャッシング プラットフォーム設定</string>
+    <string name="about_system_include">バグ報告やお問い合わせする際は以下のシステム情報もお知らせください。</string>
     <string name="about_system_info_send_button">メールで送信…</string>
-    <string name="about_system_info">c:geo システム情報</string>
+    <string name="about_system_info">c:geoシステム情報</string>
     <string name="about_system_info_send_chooser">システム情報を送信</string>
     <string name="about_system_write_logcat">ログファイルを生成</string>
     <string name="about_system_write_logcat_empty">ログファイルが空です</string>
@@ -699,7 +710,7 @@
     <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
     <string name="auth_explain_short">次のプロセスは<b>c:geo</b>に%sへのアクセスを許可させる。</string>
     <string name="auth_explain_long">「c:geoを認証」ボタンを押すと、処理が開始されます。この処理は、webブラウザーで %s ページを開きます。このページにログインして、アカウントに <b>c:geo</b> のアクセスを許可します。以上です。</string>
-    <string name="auth_forget_title">認証を忘れますか?</string>
+    <string name="auth_forget_title">認証を削除しますか?</string>
     <string name="auth_forget_message">このサービスから切断します。現在保存されている資格情報は失われます。</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">次の処理で、<b>c:geo</b> が %s にアクセスできるようになります。</string>
@@ -1404,7 +1415,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     </plurals>
     <string name="command_rename_list_result">リスト名を変更しました</string>
     <string name="command_delete_list_result">リストを削除しました</string>
-    <string name="command_unique_list_result">他のリストからキャッシュを削除しました</string>
+    <string name="command_unique_list_result">他のリストから重複キャッシュを削除しました</string>
     <plurals name="fav_points_remaining">
         <item quantity="other">このキャッシュをお気に入りに追加 (残り %d)</item>
     </plurals>

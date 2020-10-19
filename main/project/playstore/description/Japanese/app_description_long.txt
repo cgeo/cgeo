@@ -1,4 +1,4 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away.
+c:geoはオープンソース、フル機能、いつでも出かけられるgeocachig.com用の非公式クライアントです。Opencachingなどの別のジオキャッシングプラットフォームのための基本的な機能もあります。 他にウェブブラウザやアプリは必要ありません。インストールするだけですぐに使用できます。
 
 主な機能:
 - ライブマップでキャッシュを表示
@@ -12,19 +12,19 @@ c:geo is an open source, full-featured, always ready-to-go unofficial client for
 - トラッカブルのフルサポート
 - オフライン地図を含むオフラインキャッシュ機能
 
-c:geoは簡単に使用できる、多くの追加機能を備えたパワフルなジオキャッシングクライアントです。 All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geoは簡単に使用でき、多くの機能を備えたパワフルなジオキャッシングクライアントです。 geocaching.comや他のジオキャッシングプラットフォーム(Opencachingなど)のアカウントがあればすぐに始まられます。
+ライブマップや充実した検索機能でキャッシュを探せます。
 
-Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
+キャッシュやウェイポイントへ内臓コンパスや地図でナビすることができます。また、外部アプリと連携してナビすることもできます(例:Radar、Googleマップナビ、Googleマップのストリートビュー、Locus、Navigon、Sygicなどなど)。
 
-Store cache information to your device directly from geocaching.com as well as via GPX file import to have it available whenever you want.
-You can manage your stored caches in different lists and can sort and filter them according to your needs.
-Stored caches together with offline map files or static maps can be used to find caches without an internet connection (e.g. when roaming).
-Logs can be posted online or stored offline for later submission or exported via field notes.
+geocaching.comからキャッシュ情報をデバイスに直接保存することができ、GPXファイルをインポートすることも可能です。
+保存したキャッシュ情報はリストで分類して管理したり、ソートやフィルター機能もあります。
+オフライン地図を使ったりオフライン用に地図を保存することもできるのでインターネット接続なしにキャッシュを探せます。 (ローミング時などに有用です)
+ログはオンラインで投稿することも、後で投稿するためにオフラインで保存することも、フィールドノートとしてエクスポートすることもできます。
 
-Search and discover trackables, manage your trackable inventory and drop a Trackable while posting a cache log.
+トラッカブルアイテムを検索したり、ご自身のトラッカブルアイテムを管理したり、トラッカブルアイテムのログを投稿することもできます。
 
-If you have problems installing or using c:geo please first have a look at our FAQ (https://faq.cgeo.org) or consult the user guide (https://manual.cgeo.org).
-If there are still problems, contact support via email.
+インストール時や使っていて問題があったら最初にFAQ (https://faq.cgeo.org)やユーザガイド(https://manual.cgeo.org)(英語)をご覧ください。
+それでも問題が解決しなければサポートにメールで連絡してください(英語、ドイツ語、フランス語かスロベニア語でお願いします)。
 
-If you would like to know why c:geo needs the permissions requested, please check https://www.cgeo.org for an explanation.
+c:geoが要求する権限についてはhttps://www.cgeo.orgでご確認ください。
