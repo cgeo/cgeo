@@ -1131,6 +1131,7 @@
     <string name="cc_hint_minutes">minutes</string>
     <string name="cc_hint_seconds">seconds</string>
     <string name="cc_hint_fraction">fraction</string>
+    <string name="lowercase">lower-case</string>
 
     <!-- editor dialog -->
 

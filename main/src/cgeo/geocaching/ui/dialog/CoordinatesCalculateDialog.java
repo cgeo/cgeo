@@ -119,6 +119,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private HorizontalScrollView variablesPanel;
     private View variablesScrollableContent, variableDivider;
     private GridLayout equationGrid, variableGrid;
+    private Button lowerCaseVariables;
 
     private TextView tLatResult, tLonResult;
 
@@ -432,6 +433,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         variableDivider = v.findViewById(R.id.VariableDivider);
         equationGrid = v.findViewById(R.id.EquationTable);
         variableGrid = v.findViewById(R.id.FreeVariableTable);
+        lowerCaseVariables = v.findViewById(R.id.LowerCaseVariables);
+        lowerCaseVariables.setOnClickListener(v1 -> {
+            switchVariablesInEquationsToLowerCase();
+        });
 
         tLatResult = v.findViewById(R.id.latRes);
         tLonResult = v.findViewById(R.id.lonRes);
@@ -1030,7 +1035,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         int id = startId;
 
         // If 'freeVariables' are to be displayed include a border around the tables
-        // such that it becomes apparent that their is a second table which may be off the screen.
+        // such that it becomes apparent that there is a second table which may be off the screen.
         if (freeVariables.isEmpty()) {
             variablesScrollableContent.setBackgroundResource(0);
             variableDivider.setVisibility(View.GONE);
@@ -1324,6 +1329,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         // replace the old equation list with a newly created ones
         equations = sortVariables(equations, coordinateChars, new CaseCheck(true), getString(R.string.equation_hint), new EquationWatcher());
         updateGrid(equations, equationGrid, 0);
+        lowerCaseVariables.setVisibility(equations.size() > 0 ? View.VISIBLE : View.GONE);
         resortFreeVariables();
     }
 
@@ -1340,6 +1346,13 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         // replace the old free variables list with a newly created ones.
         freeVariables = sortVariables(freeVariables, equationStrings, new CaseCheck(false), getString(R.string.free_variable_hint), new VariableWatcher());
         updateGrid(freeVariables, variableGrid, equations.size());
+    }
+
+    private void switchVariablesInEquationsToLowerCase() {
+        for (CalculatorVariable equation : equations) {
+            equation.switchToLowerCase();
+        }
+        resortEquations();
     }
 
     private void resetCalculator() {

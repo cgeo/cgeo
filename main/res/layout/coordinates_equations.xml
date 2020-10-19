@@ -20,14 +20,29 @@
         android:orientation="horizontal"
         android:padding="6dp" >
 
-        <androidx.gridlayout.widget.GridLayout
-
-            android:id="@+id/EquationTable"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:padding="0dp">
 
-            app:orientation="vertical"/>
-            <!--grid:columnCount="2"/>-->
+            <androidx.gridlayout.widget.GridLayout
+
+                android:id="@+id/EquationTable"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+
+                app:orientation="vertical"/>
+
+            <Button
+                android:id="@+id/LowerCaseVariables"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/EquationTable"
+                style="@style/button"
+                android:layout_marginTop="10dp"
+                android:text="@string/lowercase"
+                android:visibility="gone"/>
+        </RelativeLayout>
 
         <View
             android:id="@+id/VariableDivider"
