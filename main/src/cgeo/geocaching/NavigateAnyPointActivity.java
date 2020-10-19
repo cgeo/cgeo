@@ -15,6 +15,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +43,12 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                 match = new MatcherWrapper(PATTERN_COORDS_NAME, data);
                 if (match.find()) {
                     Log.i("Received a geo intent: lat=" + match.group(1) + ", lon=" + match.group(2) + ", name=" + match.group(4));
-                    createHistoryWaypoint(Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), match.group(4));
+                    try {
+                        createHistoryWaypoint(Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), URLDecoder.decode(match.group(4), "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        // try without URL decoding as fallback
+                        createHistoryWaypoint(Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), match.group(4));
+                    }
                 } else {
                     match = new MatcherWrapper(PATTERN_COORDS_ZOOM, data);
                     if (match.find()) {
