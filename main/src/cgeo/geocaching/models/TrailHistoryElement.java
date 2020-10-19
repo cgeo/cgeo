@@ -7,19 +7,22 @@ import android.os.Parcelable;
 import java.util.TimeZone;
 
 public class TrailHistoryElement implements Parcelable {
-    private Location location;
-    private long timestamp;
+    private final Location location;
+    private final long timestamp;
 
-    public TrailHistoryElement(final double latitude, final double longitude, final long timestamp) {
+    public TrailHistoryElement(final double latitude, final double longitude, final double altitude, final long timestamp) {
         location = new Location("trailHistory");
         location.setLatitude(latitude);
         location.setLongitude(longitude);
+        location.setAltitude(altitude);
         this.timestamp = timestamp;
     }
 
     public TrailHistoryElement(final Location loc) {
+        final long t = System.currentTimeMillis();
+
         location = loc;
-        timestamp = System.currentTimeMillis() - TimeZone.getDefault().getOffset(timestamp);
+        timestamp = t - TimeZone.getDefault().getOffset(t);
     }
 
     public Location getLocation() {
@@ -32,6 +35,10 @@ public class TrailHistoryElement implements Parcelable {
 
     public double getLongitude() {
         return location.getLongitude();
+    }
+
+    public double getAltitude() {
+        return location.getAltitude();
     }
 
     public long getTimestamp() {
