@@ -1587,9 +1587,9 @@ public class Geocache implements IWaypoint {
                     changed = true;
                 } else {
                     //if parsed waypoint contains more up-to-date-information -> overwrite it
-                    changed = existingWaypoint.mergeFromParsedText(parsedWaypoint, namePrefix);
-                    if (changed) {
+                    if (existingWaypoint.mergeFromParsedText(parsedWaypoint, namePrefix)) {
                         addOrChangeWaypoint(existingWaypoint, updateDb);
+                        changed = true;
                     }
                 }
             }
