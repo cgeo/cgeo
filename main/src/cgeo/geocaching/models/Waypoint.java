@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
+import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -28,7 +29,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.jetbrains.annotations.NotNull;
 
 public class Waypoint implements IWaypoint {
@@ -343,10 +343,10 @@ public class Waypoint implements IWaypoint {
     }
 
     private static void parseWaypoints(final Collection<Waypoint> waypoints, final String text, final String namePrefix) {
-        final Collection<ImmutableTriple<Geopoint, Integer, Integer>> matches = GeopointParser.parseAll(text);
+        final Collection<GeopointWrapper> matches = GeopointParser.parseAll(text);
         int count = 1;
-        for (final ImmutableTriple<Geopoint, Integer, Integer> match : matches) {
-            final Waypoint wp = parseSingleWaypoint(match, text, namePrefix, count);
+        for (final GeopointWrapper match : matches) {
+            final Waypoint wp = parseSingleWaypoint(match, namePrefix, count);
             if (wp != null) {
                 waypoints.add(wp);
                 count++;
@@ -356,8 +356,8 @@ public class Waypoint implements IWaypoint {
         // search waypoints with empty coordinates
         int idx = text.indexOf(PARSING_COORD_EMPTY);
         while (idx >= 0) {
-            final ImmutableTriple<Geopoint, Integer, Integer> match = new ImmutableTriple<>(null, idx, idx + PARSING_COORD_EMPTY.length());
-            final Waypoint wp = parseSingleWaypoint(match, text, namePrefix, count);
+            final GeopointWrapper match = new GeopointWrapper(null, idx, PARSING_COORD_EMPTY.length(), text);
+            final Waypoint wp = parseSingleWaypoint(match, namePrefix, count);
             if (wp != null) {
                 waypoints.add(wp);
                 count++;
@@ -366,11 +366,12 @@ public class Waypoint implements IWaypoint {
         }
     }
 
-    private static Waypoint parseSingleWaypoint(final ImmutableTriple<Geopoint, Integer, Integer> match, final String text, final String namePrefix, final int count) {
+    private static Waypoint parseSingleWaypoint(final GeopointWrapper match, final String namePrefix, final int count) {
 
-        final Geopoint point = match.getLeft();
-        final Integer start = match.getMiddle();
-        final Integer end = match.getRight();
+        final Geopoint point = match.getGeopoint();
+        final Integer start = match.getStart();
+        final Integer end = match.getEnd();
+        final String text = match.getText();
 
         final String[] wordsBefore = TextUtils.getWords(TextUtils.getTextBeforeIndexUntil(text, start, "\n"));
         final String lastWordBefore = wordsBefore.length == 0 ? "" : wordsBefore[wordsBefore.length - 1];

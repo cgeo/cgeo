@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Parse coordinates.
@@ -37,18 +36,6 @@ public class GeopointParser {
 
         ResultWrapper(final double result, final int stringLength) {
             this.result = result;
-            this.matcherLength = stringLength;
-        }
-    }
-
-    private static class GeopointWrapper {
-        final Geopoint geopoint;
-        final int matcherStart;
-        final int matcherLength;
-
-        GeopointWrapper(final Geopoint geopoint, final int stringStart, final int stringLength) {
-            this.geopoint = geopoint;
-            this.matcherStart = stringStart;
             this.matcherLength = stringLength;
         }
     }
@@ -181,7 +168,7 @@ public class GeopointParser {
                     return null;
                 }
 
-                return new GeopointWrapper(new Geopoint(lat, lon), matcher.start(), matcher.group().length());
+                return new GeopointWrapper(new Geopoint(lat, lon), matcher.start(), matcher.group().length(), text);
             }
 
             return null;
@@ -470,7 +457,7 @@ public class GeopointParser {
             if (matcher.find()) {
                 try {
                     final UTMPoint utmPoint = new UTMPoint(text);
-                    return new GeopointWrapper(utmPoint.toLatLong(), matcher.start(), matcher.group().length());
+                    return new GeopointWrapper(utmPoint.toLatLong(), matcher.start(), matcher.group().length(), text);
                 } catch (final Exception ignored) {
                     // Ignore parse errors
                 }
@@ -606,18 +593,19 @@ public class GeopointParser {
      * Detects all coordinates in the given text.
      *
      * @param initialText Text to parse for coordinates
-     * @return a collection of parsed geopoints as well as their starting and ending position in the given text
+     * @return a collection of parsed geopoints as well as their starting and ending position and the appropriate text
      *   'start' points at the first char of the coordinate text, 'end' points at the first char AFTER the coordinate text
      */
     @NonNull
-    public static Collection<ImmutableTriple<Geopoint, Integer, Integer>> parseAll(@NonNull final String initialText) {
-        final List<ImmutableTriple<Geopoint, Integer, Integer>> waypoints = new LinkedList<>();
+    public static Collection<GeopointWrapper> parseAll(@NonNull final String initialText) {
+        final List<GeopointWrapper> waypoints = new LinkedList<>();
 
         String text = initialText;
-        int start = 0;
-        GeopointWrapper best;
+        int startIndex = 0;
+        GeopointWrapper best = null;
         do {
             best = null;
+            text = text.substring(startIndex);
             final Set<String> inputs = getParseInputs(text);
             for (final AbstractParser parser : parsers) {
                 for (final String input : inputs) {
@@ -625,20 +613,19 @@ public class GeopointParser {
                     if (geopointWrapper == null) {
                         continue;
                     }
-                    if (best == null || geopointWrapper.matcherStart < best.matcherStart || (geopointWrapper.matcherStart == best.matcherStart && geopointWrapper.matcherLength > best.matcherLength)) {
+                    if (geopointWrapper.isBetterThan(best)) {
                         best = geopointWrapper;
+                        text = input;
+                        startIndex = best.getEnd();
                     }
                 }
             }
 
             if (best != null) {
-                waypoints.add(new ImmutableTriple<>(best.geopoint, start + best.matcherStart, start + best.matcherStart + best.matcherLength));
-
-                final int nextOffset = best.matcherStart + best.matcherLength;
-                text = text.substring(nextOffset);
-                start += nextOffset;
+                waypoints.add(best);
             }
-        } while (best != null);
+
+        } while (best != null && startIndex < text.length());
 
         return waypoints;
     }
