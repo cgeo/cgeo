@@ -126,6 +126,7 @@ abstract class GPXParser extends FileParser {
     private String parentCacheCode = null;
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
+    private boolean wptEmptyCoordinates = false;
     private List<LogEntry> logs = new ArrayList<>();
 
     /**
@@ -209,10 +210,14 @@ abstract class GPXParser extends FileParser {
                 if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
                     final String latitude = attrs.getValue("lat");
                     final String longitude = attrs.getValue("lon");
-                    // latitude and longitude are required attributes, but we export them empty for waypoints without coordinates
+                    // latitude and longitude are required attributes, but we export them (0/0) for waypoints without coordinates
                     if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-                        cache.setCoords(new Geopoint(Double.parseDouble(latitude),
-                                Double.parseDouble(longitude)));
+                        final Geopoint latLon = new Geopoint(Double.parseDouble(latitude),
+                                Double.parseDouble(longitude));
+                        final Geopoint pt0 = new Geopoint(0, 0);
+                        if (!latLon.equals(pt0)) {
+                            cache.setCoords(latLon);
+                        }
                     }
                 }
             } catch (final NumberFormatException e) {
@@ -301,7 +306,13 @@ abstract class GPXParser extends FileParser {
                         waypoint.setPrefix(cacheForWaypoint.getWaypointPrefix(cache.getName()));
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
-                        waypoint.setCoords(cache.getCoords());
+
+                        if (wptEmptyCoordinates) {
+                            waypoint.setCoords(null);
+                            waypoint.setOriginalCoordsEmpty(true);
+                        } else {
+                            waypoint.setCoords(cache.getCoords());
+                        }
 
                         waypoint.updateNoteAndUserNote(cache.getDescription());
 
@@ -774,12 +785,13 @@ abstract class GPXParser extends FileParser {
     private void registerCgeoExtensions(final Element cacheParent) {
         for (final String cgeoNamespace : CGEO_NS) {
             final Element cgeoVisited = cacheParent.getChild(cgeoNamespace, "visited");
-
             cgeoVisited.setEndTextElementListener(visited -> wptVisited = Boolean.parseBoolean(visited.trim()));
 
             final Element cgeoUserDefined = cacheParent.getChild(cgeoNamespace, "userdefined");
-
             cgeoUserDefined.setEndTextElementListener(userDefined -> wptUserDefined = Boolean.parseBoolean(userDefined.trim()));
+
+            final Element cgeoEmptyCoords = cacheParent.getChild(cgeoNamespace, "originalCoordsEmpty");
+            cgeoEmptyCoords.setEndTextElementListener(originalCoordsEmpty -> wptEmptyCoordinates = Boolean.parseBoolean(originalCoordsEmpty.trim()));
         }
     }
 
@@ -865,6 +877,7 @@ abstract class GPXParser extends FileParser {
         parentCacheCode = null;
         wptVisited = false;
         wptUserDefined = false;
+        wptEmptyCoordinates = false;
         logs = new ArrayList<>();
 
         cache = createCache();

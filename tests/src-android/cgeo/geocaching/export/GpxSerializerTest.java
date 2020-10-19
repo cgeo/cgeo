@@ -179,6 +179,22 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertEqualTags(imported, exported, "groundspeak:date");
     }
 
+    public void testWaypointEmpty() throws IOException, ParserException {
+        final String geocode = "GC31J2H";
+        try {
+            final int cacheResource = R.raw.gc31j2h;
+            final Geocache cache = loadCacheFromResource(cacheResource);
+            final Waypoint waypoint = new Waypoint("WP", WaypointType.FINAL, false);
+            cache.addOrChangeWaypoint(waypoint, true);
+
+            final String gpxFromCache = getGPXFromCache(geocode);
+            assertThat(gpxFromCache).contains("<sym>Final Location</sym>").contains("<type>Waypoint|Final Location</type>");
+            assertThat(gpxFromCache).contains("<cgeo:originalCoordsEmpty>true</cgeo:originalCoordsEmpty>");
+        } finally {
+            DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+        }
+    }
+
     @NonNull
     private static String extractWaypoint(final String gpx) {
         return StringUtils.substringBetween(gpx, "<wpt", "</wpt>");

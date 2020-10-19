@@ -10,6 +10,7 @@ Currently two items are defined: visited and userdefined.
 <xsd:complexType>
 <xsd:sequence>
 <xsd:element name="visited" type="xsd:boolean" />
+<xsd:element name="originalCoordsEmpty" type="xsd:boolean" />
 <xsd:element name="userdefined" type="xsd:boolean" />
 </xsd:sequence>
 </xsd:complexType></xsd:element>
