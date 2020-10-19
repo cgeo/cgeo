@@ -593,11 +593,9 @@
     <string name="init_summary_livelist">Vis retning til cacher i lister</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opret Sikkerhedskopi</string>
-    <string name="init_backup_summary">Bemærk venligst at denne funktion kan sikkerhedskopiere caches, waypoints og indstillinger, men ikke cachebilleder.</string>
     <string name="init_restore_title">Genskab fra sikkerhedskopi</string>
     <string name="init_backup_caches">caches og waypoints</string>
     <string name="init_backup_program_settings">programindstillinger</string>
-    <string name="init_backup_logins">medtag kontooplysninger</string>
     <string name="init_backup">Backup af cache- og rutepunktdata</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Sikkerhedskopiering færdig</string>
@@ -610,7 +608,6 @@
     <string name="init_backup_failed">Backup af database fejlede.</string>
     <string name="init_backup_unnecessary">Databasen er tom og det er ikke nødvendigt at tage backup.</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
-    <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende backup fra %s?</string>
     <string name="init_restore_success">Gendannelse fuldført.</string>
     <string name="init_restore_failed_dbrecreated">Gendannelse mislykkedes: Der er fejl i backupfilen og databasen blev i stedet genskabt.</string>
     <string name="init_restore_failed">Gendannelse fejlede.</string>
