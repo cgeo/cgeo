@@ -6,10 +6,10 @@ package cgeo.geocaching.location;
  */
 public class GeopointWrapper {
 
-    final Geopoint geopoint;
-    final String matcherText;
-    final int matcherStart;
-    final int matcherLength;
+    private final Geopoint geopoint;
+    private final String matcherText;
+    private final int matcherStart;
+    private final int matcherLength;
 
     public GeopointWrapper(final Geopoint geopoint, final int stringStart, final int stringLength, final String matcherText) {
         this.geopoint = geopoint;

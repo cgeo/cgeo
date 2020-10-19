@@ -31,8 +31,8 @@ public class GeopointParser {
     }
 
     private static class ResultWrapper {
-        final double result;
-        final int matcherLength;
+        private final double result;
+        private final int matcherLength;
 
         ResultWrapper(final double result, final int stringLength) {
             this.result = result;
@@ -510,7 +510,7 @@ public class GeopointParser {
     }
 
     private static String swapDotAndComma(@NonNull final String text) {
-        final char characterArray[] = text.toCharArray();
+        final char[] characterArray = text.toCharArray();
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] == '.') {
                 characterArray[i] = ',';
@@ -576,14 +576,14 @@ public class GeopointParser {
                 if (geopointWrapper == null) {
                     continue;
                 }
-                if (best == null || geopointWrapper.matcherLength > best.matcherLength) {
+                if (best == null || geopointWrapper.isBetterThan(best)) {
                     best = geopointWrapper;
                 }
             }
         }
 
         if (best != null) {
-            return best.geopoint;
+            return best.getGeopoint();
         }
 
         throw new Geopoint.ParseException("Cannot parse coordinates");
@@ -602,7 +602,7 @@ public class GeopointParser {
 
         String text = initialText;
         int startIndex = 0;
-        GeopointWrapper best = null;
+        GeopointWrapper best;
         do {
             best = null;
             text = text.substring(startIndex);
