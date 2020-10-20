@@ -128,8 +128,8 @@ public class TrailHistoryExport {
                                     // all decimal points have to be ".", thus use non-localizing methods
                                     gpx.attribute(null, "lat", String.valueOf(trailHistoryElement.getLatitude()));
                                     gpx.attribute(null, "lon", String.valueOf(trailHistoryElement.getLongitude()));
-                                    XmlUtils.simpleText(gpx, null, "time", formatter.format(trailHistoryElement.getTimestamp()));
                                     XmlUtils.simpleText(gpx, null, "ele", String.format(Locale.US, "%.2f", trailHistoryElement.getAltitude()));
+                                    XmlUtils.simpleText(gpx, null, "time", formatter.format(trailHistoryElement.getTimestamp()));
                                 gpx.endTag(null, "trkpt");
                                 countExported++;
                                 publishProgress(countExported);
