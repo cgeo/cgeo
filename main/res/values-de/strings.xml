@@ -595,9 +595,12 @@
     <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
+    <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkt &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
     <string name="init_restore_title">Sicherung wiederherstellen</string>
     <string name="init_backup_caches">Caches und Wegpunkte</string>
     <string name="init_backup_program_settings">Programmeinstellungen</string>
+    <string name="init_backup_logins">Inklusive Zugangsdaten</string>
+    <string name="init_backup_logins_summary">Dies speichert deinen eingegebenen Anmeldedaten mit der Sicherung.</string>
     <string name="init_backup">Caches / Wegpunkte sichern</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_finished">Sicherung abgeschlossen</string>
@@ -606,25 +609,33 @@
     <string name="init_backup_restore">Wiederherstellung</string>
     <string name="init_restore_restored">Wiederherstellung abgeschlossen</string>
     <string name="init_backup_start_restore">Wiederherstellung starten</string>
+    <string name="init_backup_restore_different_backup">Eine andere Sicherung wiederherstellen</string>
     <string name="init_backup_backup_history">Sicherungshistorie</string>
+    <string name="init_backup_history_length_title">Maximal gespeicherte Sicherungen</string>
+    <string name="init_backup_history_length_summary">Entscheide, wie viele Sicherungen behalten werden sollen. Wenn das Limit erreicht ist, werden die ältesten Sicherungen automatisch gelöscht.</string>
+    <string name="init_backup_history_length_min">Nur kürzlich</string>
+    <string name="init_backup_history_length_max">Alle behalten</string>
+    <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
-    <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
+    <string name="init_backup_folder_exists_error">Konnte kein neueres Sicherungsverzeichnis erstellen. Hast du innerhalb der letzten Minute bereits eine Sicherung erstellt?</string>
+    <string name="init_backup_no_backup_available">Es ist keine Sicherung verfügbar.</string>
+    <string name="backup_confirm_overwrite">Möchtest du deine älteste Sicherung vom %s überschreiben?</string>
     <string name="restore_confirm_overwrite_database">WARNUNG: Dies wird %s auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNUNG: Dies wird %s und deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_settings">WARNUNG: Dies wird deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
     <string name="restore_information">Bitte wähle, was du wiederherstellen möchtest:</string>
     <string name="init_restore_success">Wiederherstellung abgeschlossen.</string>
-    <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Backup-Datei ist beschädigt, Datenbank musste neu erstellt werden.</string>
+    <string name="init_restore_failed_dbrecreated">Wiederherstellung fehlgeschlagen: Sicherungsdatei ist beschädigt, Datenbank musste neu erstellt werden.</string>
     <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
     <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
     <string name="init_restore_confirm">Die Datenbank ist leer. Soll die vorhandene Sicherung wiederhergestellt werden?</string>
-    <string name="init_backup_last">Backup verfügbar vom</string>
+    <string name="init_backup_last">Sicherung verfügbar vom</string>
     <string name="init_backup_unavailable">nicht vorhanden</string>
     <string name="init_backup_last_no">Keine Sicherungsdatei gefunden.</string>
-    <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nBackup hat Version %2$d</string>
+    <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nSicherung hat Version %2$d</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
     <string name="init_backup_settings_logins">Zugangsdaten sichern</string>
@@ -1040,6 +1051,7 @@
     <string name="cc_hint_minutes">Minuten</string>
     <string name="cc_hint_seconds">Sekunden</string>
     <string name="cc_hint_fraction">Bruchteil</string>
+    <string name="lowercase">Kleinbuchstaben</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Suche nach Dateien\nin</string>
