@@ -156,7 +156,7 @@
 
     <string name="log_image_scale_option_noscaling">No scaling</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Image</string>
 
 

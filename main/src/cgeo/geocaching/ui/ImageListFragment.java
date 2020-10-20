@@ -209,11 +209,11 @@ public class ImageListFragment extends Fragment {
             if (image == null || holder.imageThumbnail == null) {
                 return;
             }
-            //holder.imageThumbnail.setImageURI(image.getUri());
             ImageActivityHelper.displayImageAsync(image, holder.imageThumbnail);
             holder.imageTitle.setText(getImageTitle(image, position));
-            holder.imageDescription.setText(image.getDescription());
             holder.imageInfo.setText(getImageInfo(image));
+            holder.imageDescription.setText(image.getDescription());
+            holder.imageDescription.setVisibility(!StringUtils.isBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
         }
 
         private String getImageInfo(final Image image) {
