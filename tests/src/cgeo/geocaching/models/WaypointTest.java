@@ -78,6 +78,44 @@ public class WaypointTest {
         assertWaypoint(waypoints.iterator().next(), "Prefix 1", new Geopoint("N 45°3.5 E 27°7.5"));
     }
 
+    @Test
+    public void testParseWaypointsUserNoteWithDotAndWord() {
+        final String note = "1. 0815 - Word 1\n2. 4711 - Word 2\nn 45° 3.565 e 27° 7.578";
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
+        assertThat(waypoints).hasSize(1);
+        final Waypoint wp = waypoints.iterator().next();
+        assertWaypoint(wp, "Prefix 1", new Geopoint("N 45°3.565 E 27°7.578"));
+        assertThat(wp.getUserNote()).isEmpty();
+    }
+
+    @Test
+    public void testParseWaypointsUserNoteWithDot() {
+        final String note = "1. 0815\n2. 4711\nn 45° 3.565 e 27° 7.578";
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
+        assertThat(waypoints).hasSize(2);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp1 = iterator.next();
+        assertWaypoint(wp1, "Prefix 1", new Geopoint("N 01° 4.890 E 2°28.266"));
+        assertThat(wp1.getUserNote()).isEmpty();
+        final Waypoint wp2 = iterator.next();
+        assertWaypoint(wp2, "Prefix 2", new Geopoint("N 45°3.565 E 27°7.578"));
+        assertThat(wp2.getUserNote()).isEmpty();
+    }
+
+    @Test
+    public void testParseWaypointsUserNoteWithDotTwice() {
+        final String note = "1. 0815  2. 4711. 0815 2.4711 \n n 45° 3.565 e 27° 7.578";
+        final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
+        assertThat(waypoints).hasSize(2);
+        final Iterator<Waypoint> iterator = waypoints.iterator();
+        final Waypoint wp1 = iterator.next();
+        assertWaypoint(wp1, "Prefix 1", new Geopoint("N 01° 4.890 E 2°28.266"));
+        assertThat(wp1.getUserNote()).isEqualTo(". 0815 2.4711");
+        final Waypoint wp2 = iterator.next();
+        assertWaypoint(wp2, "Prefix 2", new Geopoint("N 45°3.565 E 27°7.578"));
+        assertThat(wp2.getUserNote()).isEmpty();
+    }
+
     private static void parseAndAssertFirstWaypoint(final String text, final String name, final WaypointType wpType, final String userNote) {
         final Collection<Waypoint> coll = Waypoint.parseWaypoints(text, "Praefix");
         assertThat(coll.size()).isEqualTo(1);

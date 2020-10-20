@@ -3,7 +3,6 @@ package cgeo.geocaching.location;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.assertj.core.api.Assertions.offset;
@@ -175,6 +174,17 @@ public class GeoPointParserTest {
     }
 
     @Test
+    public void testSpace() {
+        final Geopoint referencePoint = GeopointParser.parse("N 47° 38.933 E 122° 20.884");
+        assertGeopointEquals(GeopointParser.parse("47. 648883 122.348067"), referencePoint, 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47.648883   122. 348067"), referencePoint, 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47. 648883   122. 348067"), referencePoint, 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("N 47° 38. 933   E 122° 20. 884"), referencePoint, 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("N  47 38. 933  E  122 20. 884"), referencePoint, 1e-4f);
+        assertParsingFails("N  47 38.   933  E  122 20.   884");
+    }
+
+    @Test
     public void testUTM() {
         GeopointParser.parse("54S E 293848 N 3915114");
     }
@@ -329,29 +339,59 @@ public class GeoPointParserTest {
         assertThat(point).isEqualTo(ref);
     }
 
+    @Test
     public void parseMultipleCoordinatesWithCorrectStartEndPositions() {
-        Collection<ImmutableTriple<Geopoint, Integer, Integer>> parsed = GeopointParser.parseAll(
-                "@n1 (W) N 48° 01.194' · E 011° 43.814'\n" +
-                        "@n2 (W) N 48° 01.194' · E 011° 43.814'");
+        final String initalText = "@n1 (W) N48 01.194 E011 43.814\n" +
+                                  "@n2 (W) N48 01.194 E011 43.814";
+        final Collection<GeopointWrapper> parsed = GeopointParser.parseAll(initalText);
         assertThat(parsed.size()).isEqualTo(2);
-        Iterator<ImmutableTriple<Geopoint, Integer, Integer>> it = parsed.iterator();
-        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 8, 38);
-        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 47, 77);
-
-        parsed = GeopointParser.parseAll(
-                "@n1 (W) N48 01.194 E011 43.814\n" +
-                        "@n2 (W) N48 01.194 E011 43.814");
-        assertThat(parsed.size()).isEqualTo(2);
-        it = parsed.iterator();
-        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 8, 30);
-        assertGeopointTriple(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 39, 61);
-
+        final Iterator<GeopointWrapper> it = parsed.iterator();
+        assertGeopointWrapper(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 8, 30, initalText);
+        assertGeopointWrapper(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 9, 31, initalText.substring(30));
     }
 
-    private static void assertGeopointTriple(final ImmutableTriple<Geopoint, Integer, Integer> triple, final Geopoint gp, final int start, final int end) {
-        assertThat(triple.getLeft()).isEqualTo(gp);
-        assertThat(triple.getMiddle()).isEqualTo(start);
-        assertThat(triple.getRight()).isEqualTo(end);
+    @Test
+    public void parseMultipleCoordinatesWithDotWithCorrectStartEndPositions() {
+        final String initalText = "@n1 (W) N 48° 01.194' · E 011° 43.814'\n" +
+                                  "@n2 (W) N 48° 01.194' · E 011° 43.814'";
+        final Collection<GeopointWrapper> parsed = GeopointParser.parseAll(initalText);
+        assertThat(parsed.size()).isEqualTo(2);
+        final Iterator<GeopointWrapper> it = parsed.iterator();
+        assertGeopointWrapper(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 8, 38, initalText);
+        assertGeopointWrapper(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 9, 39, initalText.substring(38));
     }
 
+    @Test
+    public void parseMultipleCoordinatesWithoutSpaceWithCorrectStartEndPositions() {
+        final String initalText = "N48 01.194 E011 43.814 " +
+                                  "N58 01.194 E011 43.814";
+        final Collection<GeopointWrapper> parsed = GeopointParser.parseAll(initalText);
+        assertThat(parsed.size()).isEqualTo(2);
+        final Iterator<GeopointWrapper> it = parsed.iterator();
+        assertGeopointWrapper(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 0, 22, initalText);
+        assertGeopointWrapper(it.next(), new Geopoint("N 58° 01.194' · E 011° 43.814'"), 1, 23, initalText.substring(22));
+    }
+
+
+    @Test
+    public void parseMultipleCoordinatesWithSpaceAfterDotWithCorrectStartEndPositions() {
+        final String initalText = "N48 01. 194 E011 43. 814 " +
+                                  "N58 01. 194 E011 43. 814";
+        final String parsedText = "N48 01.194 E011 43.814 " +
+                                  "N58 01.194 E011 43.814";
+        final Collection<GeopointWrapper> parsed = GeopointParser.parseAll(initalText);
+        assertThat(parsed.size()).isEqualTo(2);
+        final Iterator<GeopointWrapper> it = parsed.iterator();
+        assertGeopointWrapper(it.next(), new Geopoint("N 48° 01.194' · E 011° 43.814'"), 0, 22, parsedText);
+        assertGeopointWrapper(it.next(), new Geopoint("N 58° 01.194' · E 011° 43.814'"), 1, 23, parsedText.substring(22));
+    }
+
+    private static void assertGeopointWrapper(final GeopointWrapper match, final Geopoint gp, final int start, final int end, final String text) {
+        assertThat(match.getGeopoint()).isEqualTo(gp);
+        assertThat(match.getStart()).isEqualTo(start);
+        assertThat(match.getEnd()).isEqualTo(end);
+        if (text != null && !text.isEmpty()) {
+            assertThat(match.getText()).isEqualTo(text);
+        }
+    }
 }
