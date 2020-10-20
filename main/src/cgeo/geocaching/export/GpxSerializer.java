@@ -78,6 +78,7 @@ public final class GpxSerializer {
 
         this.progressListener = progressListener;
         gpx.setOutput(writer);
+        gpx.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 
         gpx.startDocument(StandardCharsets.UTF_8.name(), true);
         gpx.setPrefix(PREFIX_GPX, NS_GPX);
