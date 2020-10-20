@@ -462,7 +462,6 @@
     <string name="init_backup_failed">Salvarea bazei de date a eşuat.</string>
     <string name="init_backup_unnecessary">Baza de date este goală. Nu este necesară o salvare de siguranţă.</string>
     <string name="init_backup_no_backup_available">Nu există nici o salvare de siguranţă.</string>
-    <string name="backup_confirm_overwrite">Vrei să scrii peste salvarea de siguranţă din %s?</string>
     <string name="init_restore_success">Restaurare finalizată.</string>
     <string name="init_restore_failed">Restaurarea nu a reușit.</string>
     <string name="init_restore_running">Restaurare bază de date cutii…</string>

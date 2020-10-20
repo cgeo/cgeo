@@ -595,11 +595,9 @@
     <string name="init_summary_livelist">Richtung zu Caches in der Liste anzeigen</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
-    <string name="init_backup_summary">Bitte beachten, dass diese Funktion Caches, Wegpunkte &amp; die Einstellungen sichert, aber nicht Cache-Bilder.</string>
     <string name="init_restore_title">Sicherung wiederherstellen</string>
     <string name="init_backup_caches">Caches und Wegpunkte</string>
     <string name="init_backup_program_settings">Programmeinstellungen</string>
-    <string name="init_backup_logins">Inklusive Zugangsdaten</string>
     <string name="init_backup">Caches / Wegpunkte sichern</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_finished">Sicherung abgeschlossen</string>
@@ -609,16 +607,11 @@
     <string name="init_restore_restored">Wiederherstellung abgeschlossen</string>
     <string name="init_backup_start_restore">Wiederherstellung starten</string>
     <string name="init_backup_backup_history">Sicherungshistorie</string>
-    <string name="init_backup_create_backup_history">Sicherungshistorie erstellen</string>
-    <string name="init_backup_history_disabled">Sicherungshistorie ausgeschaltet. Möchtest du alle archivierten Sicherungen löschen?</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
-    <string name="init_backup_backup_history_summary">Die vorherige Sicherung wird nach %s verschoben, während ein neues erstellt wird. Abhängig von der Sicherungsgröße kann dies zu hohem Speicherverbrauch führen!</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
-    <string name="init_backup_move_directory_error">Sicherungsdateien konnten nicht in den Archiv-Ordner verschoben werden. Wahrscheinlich gibt es mehrere Sicherungen, die am selben Tag erstellt wurden.</string>
     <string name="init_backup_no_backup_available">Es ist kein Backup verfügbar.</string>
-    <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
     <string name="restore_confirm_overwrite_database">WARNUNG: Dies wird %s auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNUNG: Dies wird %s und deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_settings">WARNUNG: Dies wird deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>

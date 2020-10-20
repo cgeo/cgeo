@@ -596,11 +596,9 @@
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
-    <string name="init_backup_summary">Majte na pamäti, že táto funkcia dokáže zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek.</string>
     <string name="init_restore_title">Obnoviť zálohu</string>
     <string name="init_backup_caches">kešky a body trasy</string>
     <string name="init_backup_program_settings">nastavenia programu</string>
-    <string name="init_backup_logins">zahrnúť údaje o účte</string>
     <string name="init_backup">Zálohovať kešky/body trasy</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_finished">Zálohovanie dokončené</string>
@@ -610,16 +608,11 @@
     <string name="init_restore_restored">Obnovenie dokončené</string>
     <string name="init_backup_start_restore">Spustiť obnovenie</string>
     <string name="init_backup_backup_history">História zálohovania</string>
-    <string name="init_backup_create_backup_history">Vytvoriť históriu zálohy</string>
-    <string name="init_backup_history_disabled">História zálohy zakázaná. Chcete odstrániť všetky archivované zálohy?</string>
     <string name="init_user_confirmation">Viem, čo robím</string>
-    <string name="init_backup_backup_history_summary">Počas vytvárania novej zálohy bude predchádzajúca presunutá do %s. V závislosti od veľkosti zálohy to môže znamenať veľa obsadeného miesta na disku!</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
     <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
-    <string name="init_backup_move_directory_error">Súbory zálohy nemožno presunúť do archívneho priečinka. Pravdepodobne bolo v rovnaký deň vytvorených viac záloh.</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
-    <string name="backup_confirm_overwrite">Naozaj chceš prepísať existujúcu zálohu z %s?</string>
     <string name="restore_confirm_overwrite_database">UPOZORNENIE: Tým prepíšete %s vo svojom zariadení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">UPOZORNENIE: Tým prepíšete %s a svoje aktuálne nastavenia na zariadení!</string>
     <string name="restore_confirm_overwrite_settings">UPOZORNENIE: Tým prepíšete svoje aktuálne nastavenia na zariadení!</string>

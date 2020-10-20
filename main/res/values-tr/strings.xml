@@ -535,6 +535,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Kayıt metni</string>
     <string name="init_signature_template_size">Boyut</string>
+    <string name="init_signature_template_type">Tür</string>
     <string name="init_ratingwanted">GCvote Derecelendirme</string>
     <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache derecelendirmesini yükle</string>
     <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
@@ -575,21 +576,24 @@
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki Geocache\'lerin yönünü göster</string>
     <!-- backup / restore -->
+    <string name="init_restore_title">Yedeklemeyi geri yükle</string>
     <string name="init_backup">Cache\'leri/ yol noktalarını yedekle</string>
     <string name="init_backup_backup">Yedekle</string>
+    <string name="init_backup_now">Yedeklemeyi başlat</string>
     <string name="init_backup_running">Geocache veritabanı yedeklemesi oluşturuluyor…</string>
     <string name="init_backup_restore">Geri Yükleme</string>
+    <string name="init_backup_backup_history">Yedekleme geçmişi</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
     <string name="init_backup_unnecessary">Veri tabanı boş, yedekleme gerekli değil.</string>
     <string name="init_backup_no_backup_available">Mevcut yedekleme dosyası bulunmuyor.</string>
-    <string name="backup_confirm_overwrite">%s\'den mevcut yedeklemenizin üzerine yazmak ister misiniz?</string>
     <string name="init_restore_success">Geri getirme tamamlandı.</string>
     <string name="init_restore_failed_dbrecreated">Geri yükleme başarısız: Yedek dosyası zarar görmüş, veri tabanı yeniden oluşturulmalı.</string>
     <string name="init_restore_failed">Geri getirme başarısız oldu.</string>
     <string name="init_restore_running">Geocache veritabanı geri yükleniyor…</string>
     <string name="init_restore_confirm">Veritabanı boş. Veritabanı yedeğini geri yüklemek istiyor musunuz?</string>
     <string name="init_backup_last">Tarihinden kullanabilir yedekleme</string>
+    <string name="init_backup_unavailable">mevcut değil</string>
     <string name="init_backup_last_no">Yedeklenmiş bir dosya yok.</string>
     <string name="settings_title_backup">Yedekle /yeniden yükle</string>
     <string name="settings_summary_backup">Yedekleme oluşturun ve Cache/yol noktası verilerini ve program ayarlarını yeniden yükleyin.</string>
@@ -948,6 +952,8 @@
     <string name="cache_share_field">Paylaş</string>
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
+    <string name="context_share_as_text">Metni paylaş</string>
+    <string name="context_share_as_link">Bağlantıyı paylaş</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">Gidilecek hedefler</string>
@@ -1444,6 +1450,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Play\'de c:geo</a></string>
     <string name="about_twitter"><b>c:geo</b> her Geocache\'e kayıt girişinizde Twitter\'da yeni bir durum paylaşmalı mı?</string>
+    <string name="github_title">Bugtracker</string>
     <string name="faq_title">Sıkça Sorulan Sorular</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Yeni sürüm mevcut. \n Yüklemek için tıklayın.</string>

@@ -589,7 +589,6 @@
     <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
     <string name="init_backup_unnecessary">Databasen är tom, säkerhetkopiering behövs inte.</string>
     <string name="init_backup_no_backup_available">Ingen backup-fil tillgänglig.</string>
-    <string name="backup_confirm_overwrite">Vill du skriva över den befintliga säkerhetskopian från %s?</string>
     <string name="init_restore_success">Återställning klar.</string>
     <string name="init_restore_failed_dbrecreated">Återställning misslyckades: Backup fil skadad, databasen måste återskapas.</string>
     <string name="init_restore_failed">Återställningen misslyckades.</string>

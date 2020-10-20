@@ -587,7 +587,6 @@
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
     <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad.</string>
     <string name="init_backup_no_backup_available">No hay ningún archivo de copia de seguridad disponible.</string>
-    <string name="backup_confirm_overwrite">¿Quieres sobreescribir la copia de seguridad existente de %s?</string>
     <string name="init_restore_success">Restauración completa.</string>
     <string name="init_restore_failed_dbrecreated">Restauración fallida: Copia de seguridad corrupta, base de datos tenía que ser recreada.</string>
     <string name="init_restore_failed">Restauración errónea.</string>

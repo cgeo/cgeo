@@ -551,7 +551,6 @@
     <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
     <string name="init_backup_unnecessary">Az adatbázis üres, biztonsági mentés nem szükséges.</string>
     <string name="init_backup_no_backup_available">Nincs elérhető biztonsági mentés.</string>
-    <string name="backup_confirm_overwrite">Felülírod a következő időpontról származó mentést: %s?</string>
     <string name="init_restore_success">Visszaállítás kész.</string>
     <string name="init_restore_failed">A visszaállítás sikertelen.</string>
     <string name="init_restore_running">A ládaadatbázis visszaállítása…</string>

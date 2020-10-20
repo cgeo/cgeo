@@ -471,7 +471,6 @@
     <string name="init_backup_failed">Ang supporta ng c:geo database ay nabigo.</string>
     <string name="init_backup_unnecessary">Ang database ay walang laman, walang supportang kinakailangan.</string>
     <string name="init_backup_no_backup_available">Diyan ay walang pamalit na payl ang magagamit.</string>
-    <string name="backup_confirm_overwrite">Gusto mo bang i-overwrite ang umiiral na backup mula sa %s?</string>
     <string name="init_restore_success">Ang pag-restore ay nakompleto.</string>
     <string name="init_restore_failed">Ang pag-restore ay pumalya.</string>
     <string name="init_restore_running">Ang pag-restore ng cache database&#8230;</string>
