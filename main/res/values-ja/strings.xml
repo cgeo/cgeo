@@ -611,10 +611,6 @@
     <string name="init_restore_confirm">データベースは空です。バックアップから復元しますか?</string>
     <string name="init_backup_last">バックアップ日時:</string>
     <string name="init_backup_unavailable">利用できません</string>
-    <string name="init_backup_last_no">バックアップがありません</string>
-    <string name="init_restore_version_error">予期しないフォーマット - データベースを復元できません。\n\n利用可能バージョンは %1$dです。\nバックアップのバージョンは %2$d です。</string>
-    <string name="settings_title_backup">バックアップ / 復元</string>
-    <string name="settings_summary_backup">キャッシュ/ウェイポイントデータと、プログラム設定のバックアップと復元を実行します。</string>
     <string name="init_backup_settings_logins">アカウント情報をバックアップ</string>
     <string name="init_backup_settings_backup_full_confirm">アカウント情報を保存しますか? これらは他のアプリケーションで読み取られる可能性があり、セキュリティ上のリスクがあります。</string>
     <string name="settings_savingerror">設定の保存エラー</string>
