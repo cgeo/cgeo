@@ -168,8 +168,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                 //if necessary, pass change event to views with position change
                 if (currentDragItemStart >= 0) {
                     if (notifyOnPositionChange && currentDragItemStart != viewHolder.getAdapterPosition()) {
-                        notifyItemChanged(currentDragItemStart);
-                        notifyItemChanged(viewHolder.getAdapterPosition());
+                        notifyItemRangeChanged(Math.min(currentDragItemStart, viewHolder.getAdapterPosition()), Math.abs(currentDragItemStart - viewHolder.getAdapterPosition()) + 1);
                     }
                     currentDragItemStart = -1;
 
