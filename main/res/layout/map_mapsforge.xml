@@ -8,7 +8,7 @@
 
     <include layout="@layout/filter_bar" />
 
-    <RelativeLayout
+   <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
@@ -31,16 +31,34 @@
 
         <view
             android:id="@+id/mfmap"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             class="cgeo.geocaching.maps.mapsforge.MapsforgeMapView"
             android:clickable="true"
             android:focusable="true"
             android:enabled="true"
-            android:keepScreenOn="true" />
+            android:keepScreenOn="true"
+            android:layout_above="@+id/map_attribution"/>
+
+        <TextView
+            android:id="@+id/map_attribution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:lines="1"
+            android:gravity="center"
+            android:textColor="@color/just_black"
+            android:background="#999999"
+            android:textColorLink="#0000EE"
+            android:textSize="10dp"
+            tools:text="Example Map Attribution"/>
+
+
 
         <include layout="@layout/map_progressbar" />
 
     </RelativeLayout>
+
+
 
 </LinearLayout>

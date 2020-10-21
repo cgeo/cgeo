@@ -154,6 +154,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private MapViewImpl<CachesOverlayItemImpl> mapView;
     private PositionAndHistory overlayPositionAndScale;
     private final Progress progress = new Progress();
+    private MapSource mapSource;
 
 
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
@@ -562,6 +563,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             proximityNotification.setTextNotifications(activity);
         }
 
+        activity.setContentView(mapProvider.getMapLayoutId());
+
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
             return;
@@ -576,7 +579,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         // set layout
         ActivityMixin.setTheme(activity);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.setContentView(mapProvider.getMapLayoutId());
+
         setTitle();
 
         // initialize map
@@ -1108,6 +1111,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             centerMap(mapOptions.geocode, mapOptions.searchResult, mapOptions.coords, mapOptions.mapState);
             // re-build menues
             ActivityMixin.invalidateOptionsMenu(activity);
+        }
+
+        if (mapSource != null) {
+            mapSource.releaseResources();
+        }
+        mapSource = newSource;
+
+        final int mapAttributionViewId = mapSource.getMapProvider().getMapAttributionTextId();
+        if (mapAttributionViewId > 0) {
+            mapSource.setMapAttributionTo(activity.findViewById(mapAttributionViewId));
         }
 
         return restartRequired;

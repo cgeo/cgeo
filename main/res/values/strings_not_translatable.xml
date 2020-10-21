@@ -32,6 +32,11 @@
     <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
     <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
 
+    <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright" style="color: blue">© OpenStreetMap contributors</a>]]></string>
+    <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/" style="color: blue">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
+    <string translatable="false" name="map_attribution_cyclosm_html"><![CDATA[© <a href="https://www.cyclosm.org/" style="color: blue">CyclOSM</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
+
+
     <!-- contributors -->
     <string translatable="false" name="contributors_carnero">carnero</string>
     <string translatable="false" name="powered_by">carnero</string>
