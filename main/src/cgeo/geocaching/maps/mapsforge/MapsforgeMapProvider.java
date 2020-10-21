@@ -13,19 +13,29 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.MultiRendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.res.Resources;
+import android.text.Html;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
@@ -33,6 +43,8 @@ import org.mapsforge.map.model.IMapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
 import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+
+
 
 public final class MapsforgeMapProvider extends AbstractMapProvider {
 
@@ -127,6 +139,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     @Override
+    public int getMapAttributionTextId() {
+        return R.id.map_attribution;
+    }
+
+    @Override
     public MapItemFactory getMapItemFactory() {
         return mapItemFactory;
     }
@@ -139,6 +156,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     public static final class OfflineMapSource extends MapsforgeMapSource {
 
         private final String fileName;
+        private MapFile mapFile;
 
         public OfflineMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
             super(fileName, mapProvider, name, generator);
@@ -154,21 +172,49 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return fileName;
         }
 
-        /**
-         * Create new render layer, if mapfile exists
-         */
+        /** Create new render layer, if mapfile exists */
         @Override
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
-            final File mapFile = new File(fileName);
-            if (mapFile.exists()) {
-                final MapFile mf = new MapFile(mapFile, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
+            final MapFile mf = getMapFile();
+            if (mf != null) {
                 MapProviderFactory.setLanguages(mf.getMapLanguages());
                 return new RendererLayer(tileCache, mf, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
             }
             return null;
         }
-    }
 
+        private MapFile getMapFile() {
+            if (mapFile != null) {
+                return mapFile;
+            }
+            this.mapFile = createMapFile(this.fileName);
+            return mapFile;
+        }
+
+        @Override
+        public CharSequence getMapAttribution(final Context ctx) {
+            final String attr = getAttributionFromMapFile(getMapFile());
+            return getName() + (attr == null ? "" : ": " + attr.trim());
+        }
+
+        @Override
+        public void releaseResources() {
+            this.mapFile = null;
+        }
+
+        private String createAttributionFromMapFile(final String praefix, final MapFile mapFile) {
+            String attribution = praefix;
+            if (mapFile != null && mapFile.getMapFileInfo() != null) {
+                if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
+                    attribution += ": " + mapFile.getMapFileInfo().comment;
+                } else if (!StringUtils.isBlank(mapFile.getMapFileInfo().createdBy)) {
+                    attribution += ": " + mapFile.getMapFileInfo().createdBy;
+                }
+            }
+            return attribution;
+        }
+
+   }
     public static final class CyclosmMapSource extends MapsforgeMapSource {
 
         public CyclosmMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
@@ -182,6 +228,10 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
         }
 
+        @Override
+        public CharSequence getMapAttribution(final Context ctx) {
+            return Html.fromHtml(ctx.getString(R.string.map_attribution_cyclosm_html));
+        }
     }
 
     public static final class OsmdeMapSource extends MapsforgeMapSource {
@@ -196,6 +246,12 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
             return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
         }
+
+        @Override
+        public CharSequence getMapAttribution(final Context ctx) {
+            return Html.fromHtml(ctx.getString(R.string.map_attribution_openstreetmapde_html));
+        }
+
 
     }
 
@@ -235,8 +291,71 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             }
 
             return new MultiRendererLayer(tileCache, mapFiles, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
-
         }
+
+        @Override
+        public CharSequence getMapAttribution(final Context ctx) {
+            return ctx.getString(R.string.map_source_osm_offline_combined_attribution_pleasewait, fileNames.size());
+        }
+
+        @Override
+        public void setMapAttributionTo(final TextView textView) {
+            super.setMapAttributionTo(textView);
+
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                final List<String> atts = new ArrayList<>();
+                final Set<String> attsSet = new HashSet<>();
+                String lastAtt = null;
+                for (String fileName : fileNames) {
+                    final String attr = getAttributionFromMapFile(createMapFile(fileName));
+                    atts.add(new File(fileName).getName() + (attr == null ? ": ---" : ": " + attr.trim()));
+                    if (attr == null) {
+                        continue;
+                    }
+                    attsSet.add(attr.trim());
+                    lastAtt = attr.trim();
+                }
+
+                return new ImmutableTriple<>(atts, attsSet, lastAtt);
+            }, triple -> {
+                if (triple.middle.size() == 1) {
+                    textView.setText(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_single,
+                        fileNames.size(), triple.right));
+                } else {
+                    textView.setText(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_details,
+                        fileNames.size(), triple.middle.size()));
+                    textView.setOnClickListener(v -> {
+                        new AlertDialog.Builder(textView.getContext())
+                            .setTitle(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_dialog_title))
+                            .setItems((String[]) CollectionStream.of(triple.left).toArray(String.class), null)
+                            .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
+                            .create()
+                            .show();
+                    });
+                }
+            });
+        }
+
+    }
+
+    private static String getAttributionFromMapFile(final MapFile mapFile) {
+        if (mapFile != null && mapFile.getMapFileInfo() != null) {
+            if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
+                return mapFile.getMapFileInfo().comment;
+            }
+            if (!StringUtils.isBlank(mapFile.getMapFileInfo().createdBy)) {
+               return mapFile.getMapFileInfo().createdBy;
+            }
+        }
+        return null;
+    }
+
+    private static MapFile createMapFile(final String fileName) {
+        final File file = new File(fileName);
+        if (file.exists()) {
+            return new MapFile(file, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
+        }
+        return null;
     }
 
     public void updateOfflineMaps() {
@@ -251,4 +370,8 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
         }
     }
+
+
+
+
 }

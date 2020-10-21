@@ -82,6 +82,21 @@
             android:layout_width="100dp"
             style="@style/map_distanceinfo" />
 
+        <TextView
+            android:id="@+id/map_attribution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:lines="1"
+            android:gravity="center"
+            android:textColor="@color/just_black"
+            android:textSize="10sp"
+            android:background="#99999999"
+            android:textColorLink="#0000EE"
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"/>
+
+
         <include layout="@layout/map_progressbar" />
 
     </RelativeLayout>

@@ -16,6 +16,10 @@ public interface MapProvider {
 
     int getMapLayoutId();
 
+    default int getMapAttributionTextId() {
+        return 0;
+    }
+
     MapItemFactory getMapItemFactory();
 
     void registerMapSource(MapSource mapSource);

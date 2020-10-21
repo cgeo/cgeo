@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.interfaces;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 
 public interface MapSource {
@@ -11,4 +13,11 @@ public interface MapSource {
 
     @NonNull
     MapProvider getMapProvider();
+
+    void setMapAttributionTo(TextView textView);
+
+    default void releaseResources() {
+        //do nothing
+    }
+
 }

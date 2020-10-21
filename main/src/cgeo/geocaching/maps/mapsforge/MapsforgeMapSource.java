@@ -1,10 +1,14 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.maps.AbstractMapSource;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.layers.DownloadLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 
+
+import android.content.Context;
+import android.text.Html;
 
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -32,6 +36,11 @@ public class MapsforgeMapSource extends AbstractMapSource {
         final AbstractTileSource source = OpenStreetMapMapnik.INSTANCE;
         source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
         return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
+    }
+
+    @Override
+    public CharSequence getMapAttribution(final Context ctx) {
+        return Html.fromHtml(ctx.getString(R.string.map_attribution_openstreetmap_html));
     }
 
 }

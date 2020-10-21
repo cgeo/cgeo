@@ -138,6 +138,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private MfMapView mapView;
     private TileCache tileCache;
+    private MapSource mapSource;
     private ITileLayer tileLayer;
     private HistoryLayer historyLayer;
     private PositionLayer positionLayer;
@@ -151,6 +152,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private SharedPreferences sharedPreferences;
 
     private DistanceView distanceView;
+    private TextView mapAttribution;
 
     private ArrayList<TrailHistoryElement> trailHistory = null;
 
@@ -240,6 +242,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         setContentView(R.layout.map_mapsforge_v6);
         setTitle();
+        this.mapAttribution = findViewById(R.id.map_attribution);
+
+        //prepare map attribution
+
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -251,6 +257,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         mapView.setClickable(true);
         mapView.getMapScaleBar().setVisible(true);
         mapView.setBuiltInZoomControls(true);
+
+        //make room for map attribution
+        final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 10);
+        mapView.getMapZoomControls().setMarginVertical(mapAttPx);
+        mapView.getMapScaleBar().setMarginVertical(mapAttPx);
 
         // create a tile cache of suitable size. always initialize it based on the smallest tile size to expect (256 for online tiles)
         tileCache = AndroidUtil.createTileCache(this, "mapcache", 256, 1f, this.mapView.getModel().frameBufferModel.getOverdrawFactor());
@@ -728,6 +739,13 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private void switchTileLayer(final MapSource newSource) {
         final ITileLayer oldLayer = this.tileLayer;
         ITileLayer newLayer = null;
+
+        if (mapSource != null) {
+            mapSource.releaseResources();
+        }
+        mapSource = newSource;
+        mapSource.setMapAttributionTo(this.mapAttribution);
+
         if (newSource instanceof MapsforgeMapSource) {
             newLayer = ((MapsforgeMapSource) newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
         }

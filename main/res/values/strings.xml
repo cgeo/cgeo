@@ -819,6 +819,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Combined (%d maps, please wait...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Combined (%d maps, %d attributions): click for details</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Combined (%d maps): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Combined map attribution</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info on send2cgeo</string>
     <string name="init_sendToCgeo_name">Your device name</string>
