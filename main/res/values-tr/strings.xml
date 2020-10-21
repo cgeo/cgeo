@@ -403,12 +403,12 @@
     <string name="about_system">Sistem</string>
     <string name="about_donate">Bizi destekleyin</string>
     <string name="about_donation_more">Bilgi için web sitesini ziyaret edin</string>
-    <string name="about_contributors">Katkıda bulunanlar</string>
+    <string name="about_contributors">Katılımcılar</string>
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
-    <string name="about_starting">Başlıyor</string>
-    <string name="about_starting_head">Başlıyor</string>
+    <string name="about_starting">Başlarken</string>
+    <string name="about_starting_head">Başlarken</string>
     <string name="about_starting_text_basics_head">Geocaching Temel Kurallar</string>
     <string name="about_starting_text_basics_text">Geocaching \'\'Cache\'\' olarak adlandırılan kutuların aranıp bulunması aktivitesidir. Bu aplikasyon bu aktiviteyi yapmak için kullanılabilir.\n\nDaha fazlasını kullanıcı rehberimizdeki <b>c:geo Temelleri</b> \'nde bulabilirsiniz</string>
     <string name="about_starting_text_device_head">c:geo cihaz izinleri</string>
@@ -456,6 +456,7 @@
     <string name="settings_title_map_rotation">Harita açısı (Google Maps)</string>
     <string name="settings_title_waypoints">Yol noktaları</string>
     <string name="settings_title_map_content">Harita içeriği</string>
+    <string name="settings_title_map_behavior">Harita davranışı</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Geocache veri dizini</string>
     <string name="settings_title_data_dir_usage">Geocache veri dizini (kullanılan%1$s)</string>
@@ -563,6 +564,7 @@
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_archived">Arşivlenmişleri Dahil Etme</string>
     <string name="init_summary_archived">Arşivlenmiş Geocache\'leri dahil etme</string>
+    <string name="init_global_wp_extraction_disable">Yol imi çıkartma</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -620,8 +622,13 @@
     <string name="init_dataDir">Geocache veri dizinini seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
     <string name="init_maptrail">Geçmiş İz\'i göster</string>
+    <string name="init_maptrail_length">İz geçmişi maksimum uzunluğu</string>
+    <string name="init_maptrail_length_summary">İz geçmişi maksimum uzunluğunu ayarlayın (c:geo\'nun her yeniden açılışında yeniden uygulanır) Mevcut hafızanıza göre ayarlanmak üzere varsayılan değer 700\'dür.</string>
     <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
     <string name="init_trailcolor">Geçmiş İz rengi</string>
+    <string name="init_trailcolor_summary">İz geçmişi için renk ve saydamlık seçin</string>
+    <string name="init_trailwidth">İz geçmişi genişliği</string>
+    <string name="init_trailwidth_summary">İz geçmişi çizgisi için genişlik seçin</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
     <string name="init_share_after_export">GPX Dışa aktarmadan sonra paylaşım menüsünü aç</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
@@ -797,8 +804,8 @@
     <string name="cache_log_images_title">Kayıt görselleri</string>
     <string name="cache_log_image_default_title">Görsel</string>
     <string name="cache_personal_note">Kişisel not</string>
-    <string name="cache_menu_preventWaypointsFromNote">Notlardan yol noktası oluşturulmasını engelle</string>
-    <string name="cache_menu_allowWaypointExtraction">Notlardan yol noktası oluşturulmasına izin ver</string>
+    <string name="cache_menu_preventWaypointsFromNote">Nottan yol noktası alınmasını engelle</string>
+    <string name="cache_menu_allowWaypointExtraction">Nottan yol noktası alınmasına izin ver</string>
     <string name="cache_personal_note_edit">Düzenle</string>
     <string name="cache_personal_note_removewaypoints">Yol noktalarını kaldır</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
@@ -958,7 +965,7 @@
     <string name="cache_listed_on">%s listesinde</string>
     <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_owner">Siz</string>
-    <string name="internal_goto_targets_title">Gidilecek hedefler</string>
+    <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
@@ -1574,6 +1581,7 @@
     <string name="color_turquoise">Turkuaz</string>
     <string name="color_black">Siyah</string>
     <string name="preference_colorpicker_select_color">Renk seç</string>
+    <string name="preference_colorpicker_select_opaqueness">Saydamlığı ayarla</string>
     <string name="reset_to_default">Varsayılan</string>
     <!-- number input -->
     <string name="number_input_title">%1$s ve %2$s arasında bir değer girin</string>
@@ -1612,12 +1620,18 @@
     <string name="receivemapfile_option_differentname">Farklı isim</string>
     <string name="receivemapfile_kb_copied">%d kB kopyalandı</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_title">Çevrimdışı harita indir</string>
     <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geçmiş İz\'i sil</string>
     <string name="map_trailhistory_cleared">Geçmiş İz\'i silindi</string>
     <string name="map_trail_show">Geçmiş İz\'i göster</string>
+    <string name="map_trail_hide">İz geçmişini sakla</string>
     <!-- history track export -->
+    <string name="trailhistory">İz geçmişi</string>
+    <string name="export_trailhistory_title">İz geçmişini dışa aktar</string>
+    <string name="export_trailhistory_success">%s\'a aktarılan iz geçmişi</string>
+    <string name="export_trailhistory_clear_after_export">Dışa aktarımdan sonra iz geçmişini temizle</string>
     <!-- individual route export -->
 </resources>
