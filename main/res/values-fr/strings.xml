@@ -147,7 +147,6 @@
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
     <string name="log_image_scale_option_noscaling">Pas de mise à l\'échelle</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d Ko\n%4$s</string>
     <string name="log_image_titleprefix">Image</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduire en %s</string>
