@@ -144,6 +144,7 @@
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきことを報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
     <string name="log_image_scale_option_entry">%1$dピクセル</string>
+    <string name="log_image_info">%1$dx%2$dpx、%3$dKB、%4$s</string>
     <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%sに翻訳</string>
@@ -542,7 +543,7 @@
     <string name="init_signature_template_terrain">地形</string>
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">ログの本文</string>
-    <string name="init_signature_template_size">サイズ</string>
+    <string name="init_signature_template_size">大きさ</string>
     <string name="init_signature_template_type">タイプ</string>
     <string name="init_ratingwanted">GCvote評価</string>
     <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
@@ -573,7 +574,6 @@
     <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
     <string name="init_archived">アーカイブ済みを除外</string>
     <string name="init_summary_archived">アーカイブ済みキャッシュは除く</string>
-    <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。各パーソナルノートでチェックボックスを外せば有効化できます</string>
     <string name="init_save_log_img">画像保存</string>
     <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
@@ -589,7 +589,7 @@
     <string name="init_summary_livelist">キャッシュの一覧で方向をアイコン表示</string>
     <!-- backup / restore -->
     <string name="init_backup_title">バックアップの作成</string>
-    <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルを別の場所にコピーしておく必要があります。</string>
+    <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルを別の場所にコピーしておく必要があります</string>
     <string name="init_restore_title">バックアップから復元</string>
     <string name="init_backup_caches">キャッシュとウェイポイント</string>
     <string name="init_backup_program_settings">c:geoの設定</string>
@@ -601,24 +601,29 @@
     <string name="init_backup_now">バックアップする</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
     <string name="init_backup_restore">復元</string>
-    <string name="init_restore_restored">正常に復元されました。</string>
+    <string name="init_restore_restored">正常に復元されました</string>
     <string name="init_backup_start_restore">復元する</string>
     <string name="init_backup_restore_different_backup">別のバックアップから復元</string>
     <string name="init_backup_backup_history">バックアップ履歴</string>
     <string name="init_backup_history_length_title">バックアップの最大数</string>
-    <string name="init_backup_history_length_summary">保存したいバックアップの最大数(世代数)。最大数に達すると古いバックアップは自動的に削除されます。</string>
+    <string name="init_backup_history_length_summary">保存したいバックアップの最大数(世代数)。最大数に達すると古いバックアップは自動的に削除されます</string>
+    <string name="init_backup_history_length_min">最新のみ</string>
+    <string name="init_backup_history_length_max">無制限</string>
+    <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
     <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません</string>
+    <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません。</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
-    <string name="restore_confirm_overwrite_database">警告: お使いのデバイスで %s を上書きします!</string>
-    <string name="restore_confirm_overwrite_database_and_settings">警告: お使いのデバイスで %s と現在の設定を上書きします!</string>
+    <string name="backup_confirm_overwrite">一番古い%sのバックアップを上書きしますか?</string>
+    <string name="restore_confirm_overwrite_database">警告: お使いのデバイスで%sを上書きします!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">警告: お使いのデバイスで%sと現在の設定を上書きします!</string>
     <string name="restore_confirm_overwrite_settings">警告: お使いのデバイスで現在の設定を上書きします!</string>
     <string name="restore_information">復元したいものを選択してください: </string>
-    <string name="init_restore_success">キャッシュのデータベースは正常に復元されました。</string>
-    <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました。</string>
-    <string name="init_restore_failed">復元できませんでした。</string>
+    <string name="init_restore_success">キャッシュのデータベースは正常に復元されました</string>
+    <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました</string>
+    <string name="init_restore_failed">復元できませんでした</string>
     <string name="init_restore_running">キャッシュのデータベースを復元中…</string>
     <string name="init_restore_confirm">データベースは空です。バックアップから復元しますか?</string>
     <string name="init_backup_last">バックアップ日時:</string>
@@ -626,9 +631,9 @@
     <string name="init_backup_last_no">バックアップがありません</string>
     <string name="init_restore_version_error">予期しないフォーマット - データベースを復元できません。\n\n利用可能バージョンは%1$dです。\nバックアップのバージョンは%2$dです</string>
     <string name="settings_title_backup">バックアップ / 復元</string>
-    <string name="settings_summary_backup">キャッシュ/ウェイポイントのデータとアプリ設定のバックアップと復元を実行します。</string>
+    <string name="settings_summary_backup">キャッシュ/ウェイポイントとアプリ設定のバックアップと復元</string>
     <string name="init_backup_settings_logins">アカウント情報をバックアップ</string>
-    <string name="init_backup_settings_backup_full_confirm">アカウント情報を保存しますか? これらは他のアプリケーションで読み取られる可能性がありセキュリティ上のリスクがあります。</string>
+    <string name="init_backup_settings_backup_full_confirm">アカウント情報を保存しますか? これはほかのアプリケーションで読み取られる可能性がありセキュリティ上のリスクがあります</string>
     <string name="settings_savingerror">設定の保存エラー</string>
     <string name="settings_saved">設定が保存されました: </string>
     <string name="init_backup_settings_restore">復元の設定</string>
@@ -1009,9 +1014,13 @@
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
+    <string name="cache_whereyougo_start">WhereYouGoでWherigoカートリッジをダウンロードして始めます</string>
+    <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoのインストールが必要です</string>
+    <string name="cache_chirpwolf_start">Chirp Wolfでキャッシュのchirpデータを読み込みます</string>
+    <string name="cache_chirpwolf_install">chirpデータを読み込むにはChirp Wolfのインストールが必要です</string>
     <string name="context_share_as_text">テキストを共有</string>
     <string name="context_share_as_link">リンクを共有</string>
-    <string name="create_internal_cache">ユーザ定義のキャッシュを作成</string>
+    <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
     <string name="internal_cache_default_name">ユーザー定義キャッシュ #%1$d</string>
     <string name="internal_cache_default_description">これはユーザー定義キャッシュです</string>
     <string name="internal_cache_default_owner">あなた</string>
@@ -1514,6 +1523,20 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_challengecache_no">チャレンジキャッシュではない</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com解答チェッカーが有効</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com解答チェッカーが有効でない</string>
+    <string name="attribute_handicaching_yes">Handicaching.comで評価されてる</string>
+    <string name="attribute_handicaching_no">Handicaching.comで評価されてない</string>
+    <string name="attribute_munzee_yes">Munzeeを含む</string>
+    <string name="attribute_munzee_no">Munzeeを含まない</string>
+    <string name="attribute_ads_yes">広告を含む</string>
+    <string name="attribute_ads_no">広告を含まない</string>
+    <string name="attribute_military_area_yes">軍事演習エリア</string>
+    <string name="attribute_military_area_no">軍事演習エリアではない</string>
+    <string name="attribute_video_surveil_yes">ビデオ監視中のエリア</string>
+    <string name="attribute_video_surveil_no">ビデオ監視中のエリアではない</string>
+    <string name="attribute_historic_yes">放棄された構造物/廃墟</string>
+    <string name="attribute_historic_no">放棄された構造物/廃墟ではない</string>
+    <string name="attribute_blind_people_yes">視覚障がい者に対応</string>
+    <string name="attribute_blind_people_no">視覚障がい者に非対応</string>
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">サポート</string>
