@@ -568,7 +568,6 @@
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_archived">Wyklucz zarchiwizowane</string>
     <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
-    <string name="init_global_wp_extraction_disable">Wyodrębnienie punktów nawigacji</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
