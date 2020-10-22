@@ -3402,6 +3402,7 @@ public class DataStore {
 
     public static void clearLogsOffline(final Collection<Geocache> caches) {
         DBLogOfflineUtils.remove(caches);
+        CollectionStream.of(caches).forEach(c -> c.setHasLogOffline(false));
     }
 
     private static void setVisitDate(final Collection<String> geocodes, final long visitedDate) {
