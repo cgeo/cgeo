@@ -579,7 +579,6 @@
     <string name="init_summary_disabled">Nezobrazovať deaktivované skrýše</string>
     <string name="init_archived">Okrem archivovaných</string>
     <string name="init_summary_archived">Nezobrazovať archivované kešky</string>
-    <string name="init_global_wp_extraction_disable">Extrakcia bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
     <string name="init_summary_save_log_img">Ukladať obrázky z logov</string>
