@@ -565,7 +565,6 @@
     <string name="init_summary_disabled">Excluir cachés desactivados</string>
     <string name="init_archived">Excluir archivados</string>
     <string name="init_summary_archived">Excluir cachés archivados</string>
-    <string name="init_global_wp_extraction_disable">Extracción de Waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Deshabilita globalmente la extracción de waypoints de notas personales de caché. Todavía se puede habilitar para cachés individuales desactivando la casilla de verificación debajo de la nota personal del caché</string>
     <string name="init_save_log_img">Guardar imágenes</string>
     <string name="init_summary_save_log_img">Guardar imágenes de los registros</string>
