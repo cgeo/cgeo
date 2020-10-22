@@ -136,12 +136,12 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     @Override
     public int getMapViewId() {
-        return R.id.mfmap;
+        return R.id.mfmapv5;
     }
 
     @Override
     public int getMapLayoutId() {
-        return R.layout.map_mapsforge;
+        return R.layout.map_mapsforge_v6;
     }
 
     @Override

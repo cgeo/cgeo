@@ -378,10 +378,6 @@
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:name=".maps.mapsforge.MapsforgeMapActivity"
-            android:label="@string/map_map" >
-        </activity>
-        <activity
             android:name=".maps.mapsforge.v6.NewMap"
             android:label="@string/map_map" >
         </activity>
