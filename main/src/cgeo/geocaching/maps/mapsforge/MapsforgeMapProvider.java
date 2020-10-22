@@ -41,7 +41,6 @@ import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 import org.mapsforge.map.model.IMapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 
 
 public final class MapsforgeMapProvider extends AbstractMapProvider {
