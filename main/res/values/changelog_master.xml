@@ -35,6 +35,7 @@
 <li>Fix: GPX export of position history: timestamps are now GMT-based</li>
 <li>New: GPX export of position history: added elevation info</li>
 <li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
+<li>New: Format GPX export file more human-readable</li>
 <li>Fix: Export waypoints even if they have no coordinates</li>
 <li>Change: Throw a runtime error if db can neither be opened nor created</li>
 <li>New: Automatically convert geocode search input to upper case</li>
