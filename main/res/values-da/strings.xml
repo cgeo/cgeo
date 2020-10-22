@@ -576,7 +576,6 @@
     <string name="init_summary_disabled">Udelad deaktiverede cacher</string>
     <string name="init_archived">Udelad arkiverede</string>
     <string name="init_summary_archived">Udelad arkiverede caches</string>
-    <string name="init_global_wp_extraction_disable">Ekstraktion af rutepunkter</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktivér ekstraktion af rutepunkter personlige cachenoter. Dette kan stadig aktiveres for individuelle cacher ved at deaktivere afkrydsningsfeltet under den personlige cache-note</string>
     <string name="init_save_log_img">Lagring af billeder</string>
     <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
