@@ -147,7 +147,6 @@
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -595,9 +594,12 @@
     <string name="init_summary_livelist">Toon richting tot cache in lijst</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
+    <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
     <string name="init_restore_title">Back-up Herstellen</string>
     <string name="init_backup_caches">caches en waypoints</string>
     <string name="init_backup_program_settings">app-instellingen</string>
+    <string name="init_backup_logins">Accountgegevens opnemen</string>
+    <string name="init_backup_logins_summary">Dit zal je ingevoerde inloggegevens opslaan in de back-up.</string>
     <string name="init_backup">Back-up caches / waypoints</string>
     <string name="init_backup_backup">Back-up</string>
     <string name="init_backup_finished">Back-up voltooid</string>
@@ -606,12 +608,20 @@
     <string name="init_backup_restore">Herstel</string>
     <string name="init_restore_restored">Terugzetten voltooid</string>
     <string name="init_backup_start_restore">Terugzetten starten</string>
+    <string name="init_backup_restore_different_backup">Een andere back-up terugzetten</string>
     <string name="init_backup_backup_history">Back-up geschiedenis</string>
+    <string name="init_backup_history_length_title">Max aantal opgeslagen back-ups</string>
+    <string name="init_backup_history_length_summary">Beslis hoeveel back-ups moeten worden bewaard. Wanneer de limiet wordt bereikt, worden de oudste automatisch verwijderd.</string>
+    <string name="init_backup_history_length_min">Alleen recente</string>
+    <string name="init_backup_history_length_max">Alles behouden</string>
+    <string name="init_backup_history_delete_warning">Je hebt meer back-ups opgeslagen dan je ingestelde maximale waarde toestaat. Wil je echt alle overtollige back-ups verwijderen?</string>
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
     <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
+    <string name="init_backup_folder_exists_error">Kon geen nieuwe back-up map aanmaken. Heb je al een back-up gemaakt in de laatste minuut?</string>
     <string name="init_backup_no_backup_available">Er is geen back-up bestand beschikbaar.</string>
+    <string name="backup_confirm_overwrite">Wil je de oudste bestaande back-up van %s overschrijven?</string>
     <string name="restore_confirm_overwrite_database">WAARSCHUWING: Dit overschrijft %s op je apparaat!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WAARSCHUWING: Dit overschrijft %s en je huidige instellingen op je apparaat!</string>
     <string name="restore_confirm_overwrite_settings">WAARSCHUWING: Dit overschrijft je huidige instellingen op je apparaat!</string>
@@ -1040,6 +1050,7 @@
     <string name="cc_hint_minutes">minuten</string>
     <string name="cc_hint_seconds">seconden</string>
     <string name="cc_hint_fraction">fractie</string>
+    <string name="lowercase">kleine letters</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Zoeken naar bestanden\nin</string>

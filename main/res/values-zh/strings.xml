@@ -145,7 +145,6 @@
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">不缩放</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px，%3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">图片</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>

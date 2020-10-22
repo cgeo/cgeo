@@ -596,9 +596,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_livelist">Mostra a direcção das geocaches numa lista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
+    <string name="init_backup_summary">Por favor, note que este recurso pode fazer cópia de segurança de caches, pontos adicionais &amp; configurações, mas sem imagens de cache. \nPara poder restaurar os dados, mesmo depois de perder o seu telefone, os ficheiros das cópias de segurança devem ser copiados para um local independente.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
+    <string name="init_backup_logins">Incluir dados da conta</string>
+    <string name="init_backup_logins_summary">Isto irá armazenar as suas credenciais inseridas dentro da cópia de segurança.</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
@@ -607,15 +610,20 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_restore">Restaurar</string>
     <string name="init_restore_restored">Restauro concluído</string>
     <string name="init_backup_start_restore">Iniciar restauro</string>
+    <string name="init_backup_restore_different_backup">Restaurar uma cópia de segurança diferente</string>
     <string name="init_backup_backup_history">Histórico de cópias de segurança</string>
+    <string name="init_backup_history_length_title">Nº máximo de cópias de segurança guardadas</string>
+    <string name="init_backup_history_length_summary">Decida quantas cópias de segurança devem ser mantidas. Quando o limite for atingido, as mais antigas serão apagadas automaticamente.</string>
     <string name="init_backup_history_length_min">Apenas recentes</string>
     <string name="init_backup_history_length_max">Manter todas</string>
+    <string name="init_backup_history_delete_warning">Armazenou mais cópias de segurança do que o seu valor máximo configurado. Quer realmente remover todas as cópias de segurança em excesso?</string>
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
     <string name="init_backup_unnecessary">A base de dados está vazia, não é necessária uma cópia de segurança.</string>
     <string name="init_backup_folder_exists_error">Não foi possível criar um novo directório para as cópias de segurança. Realizou alguma cópia de segurança há menos de 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
+    <string name="backup_confirm_overwrite">Quer substituir a cópia de segurança mais antiga existente de %s?</string>
     <string name="restore_confirm_overwrite_database">AVISO: Isto irá sobrescrever %s no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVISO: Isto irá sobrescrever %s e as suas configurações actuais no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">AVISO: Isto irá sobrescrever as suas configurações actuais no seu dispositivo!</string>
@@ -1044,6 +1052,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cc_hint_minutes">minutos</string>
     <string name="cc_hint_seconds">segundos</string>
     <string name="cc_hint_fraction">parcial</string>
+    <string name="lowercase">minúsculas</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">A procurar ficheiros\nem</string>

@@ -147,7 +147,6 @@
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$d KB\n%4$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -595,9 +594,12 @@
     <string name="init_summary_livelist">Visualizza in che direzione sono i cache, nelle liste</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
+    <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
     <string name="init_restore_title">Ripristina backup</string>
     <string name="init_backup_caches">cache e waypoint</string>
     <string name="init_backup_program_settings">Impostazioni programma</string>
+    <string name="init_backup_logins">Includi dati account</string>
+    <string name="init_backup_logins_summary">Questo memorizzerà le credenziali di accesso attuali, all\'interno del backup.</string>
     <string name="init_backup">Backup cache / waypoint</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Backup completato</string>
@@ -606,12 +608,20 @@
     <string name="init_backup_restore">Ripristino</string>
     <string name="init_restore_restored">Ripristino completato</string>
     <string name="init_backup_start_restore">Avvio ripristino</string>
+    <string name="init_backup_restore_different_backup">Ripristina un backup diverso</string>
     <string name="init_backup_backup_history">Backup della cronologia</string>
+    <string name="init_backup_history_length_title">Numero massimo di backup archiviati</string>
+    <string name="init_backup_history_length_summary">Decidi quanti backup devono essere mantenuti. Quando viene raggiunto il limite, quelli più vecchi verranno eliminati automaticamente.</string>
+    <string name="init_backup_history_length_min">Solo recenti</string>
+    <string name="init_backup_history_length_max">Mantieni tutti</string>
+    <string name="init_backup_history_delete_warning">Hai salvato più backup di quelli permessi dal valore massimo configurato. Vuoi davvero rimuovere tutti i backup in eccesso?</string>
     <string name="init_user_confirmation">So cosa sto facendo</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
     <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
+    <string name="init_backup_folder_exists_error">Impossibile creare una nuova directory di backup. Hai forse già fatto un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
+    <string name="backup_confirm_overwrite">Vuoi sovrascrivere il tuo backup più vecchio esistente da %s?</string>
     <string name="restore_confirm_overwrite_database">ATTENZIONE: Questo sovrascriverà %s sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ATTENZIONE: Questo sovrascriverà %s e le impostazioni correnti sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">ATTENZIONE: Questo sovrascriverà le impostazioni correnti sul tuo dispositivo!</string>
@@ -1040,6 +1050,7 @@
     <string name="cc_hint_minutes">minuti</string>
     <string name="cc_hint_seconds">secondi</string>
     <string name="cc_hint_fraction">frazione</string>
+    <string name="lowercase">minuscolo</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Ricerca file\nin</string>
