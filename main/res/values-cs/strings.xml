@@ -580,7 +580,6 @@
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_archived">Vyloučit archivované</string>
     <string name="init_summary_archived">Vyloučit archivované keše</string>
-    <string name="init_global_wp_extraction_disable">Extrakce trasového bodu</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
