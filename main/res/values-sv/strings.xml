@@ -566,7 +566,6 @@
     <string name="init_summary_disabled">Dölj inaktiva cacher</string>
     <string name="init_archived">Exkludera arkiverade</string>
     <string name="init_summary_archived">Exkludera arkiverade cacher</string>
-    <string name="init_global_wp_extraction_disable">Extrahering av vägpunkter</string>
     <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen</string>
     <string name="init_save_log_img">Loggbilder</string>
     <string name="init_summary_save_log_img">Spara bilder från loggar</string>
