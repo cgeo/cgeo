@@ -579,7 +579,6 @@
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
     <string name="init_summary_archived">Exclou els catxés desactivats</string>
-    <string name="init_global_wp_extraction_disable">Extracció de waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_save_log_img">Desa les imatges</string>
     <string name="init_summary_save_log_img">Desa les imatges dels registres</string>
@@ -1139,7 +1138,7 @@
     <string name="map_hide">Ocultar</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
     <string name="map_circles_show">Mostra els cercles</string>
-    <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
+    <string name="map_mycaches_hide">Amaga els propis/trobats</string>
     <string name="map_disabled_hide">Amagar catxés desactivats</string>
     <string name="map_hide_track">Amaga el track individual</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
