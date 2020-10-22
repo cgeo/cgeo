@@ -355,12 +355,8 @@ public class GCLogin extends AbstractLogin {
      */
     public String getAvatarUrl() {
         try {
-            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/dashboard")));
-            final String profile = TextUtils.replaceWhitespace(responseData);
-
-            setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));
-
-            final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
+            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/serverparameters/params")));
+            final String avatarURL = TextUtils.getMatch(responseData, GCConstants.PATTERN_AVATAR_IMAGE_SERVERPARAMETERS, false, null);
             if (avatarURL != null) {
                 return avatarURL.replace("avatar", "user/large");
             }
