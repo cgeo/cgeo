@@ -1141,10 +1141,6 @@
     <string name="map_circles_show">Mostra els cercles</string>
     <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
     <string name="map_disabled_hide">Amagar catxés desactivats</string>
-    <string name="map_archived_hide">Amagar catxés desactivats</string>
-    <string name="map_hidewp_original">Amaga els punts de ruta originals</string>
-    <string name="map_hidewp_parking">Amaga els punts de ruta parking</string>
-    <string name="map_hidewp_visited">Amaga els punts de ruta visitats</string>
     <string name="map_hide_track">Amaga el track individual</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
