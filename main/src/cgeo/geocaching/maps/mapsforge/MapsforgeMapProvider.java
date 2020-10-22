@@ -56,12 +56,8 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
-
-        if (!Settings.useOldMapsforgeAPI()) {
-            registerMapSource(new OsmdeMapSource(MAPSFORGE_OSMDE_ID, this, resources.getString(R.string.map_source_osm_osmde), MapGeneratorInternal.MAPNIK));
-            registerMapSource(new CyclosmMapSource(MAPSFORGE_CYCLOSM_ID, this, resources.getString(R.string.map_source_osm_cyclosm), MapGeneratorInternal.MAPNIK));
-        }
-
+        registerMapSource(new OsmdeMapSource(MAPSFORGE_OSMDE_ID, this, resources.getString(R.string.map_source_osm_osmde), MapGeneratorInternal.MAPNIK));
+        registerMapSource(new CyclosmMapSource(MAPSFORGE_CYCLOSM_ID, this, resources.getString(R.string.map_source_osm_cyclosm), MapGeneratorInternal.MAPNIK));
         updateOfflineMaps();
     }
 
@@ -118,7 +114,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             if (mapFile == null) {
                 return false;
             }
-            return mapFile.getMapFileInfo().fileVersion <= 3 || !Settings.useOldMapsforgeAPI();
+            return mapFile.getMapFileInfo().fileVersion <= 5;
         } catch (MapFileException ex) {
             Log.w(String.format("Exception reading mapfile '%s'", mapUri.toString()), ex);
         } finally {
@@ -135,7 +131,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     @Override
     public Class<? extends Activity> getMapClass() {
         mapItemFactory = new MapsforgeMapItemFactory();
-        return Settings.useOldMapsforgeAPI() ? MapsforgeMapActivity.class : NewMap.class;
+        return NewMap.class;
     }
 
     @Override

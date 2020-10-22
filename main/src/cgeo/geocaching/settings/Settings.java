@@ -1520,15 +1520,6 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
-    public static boolean useOldMapsforgeAPI() {
-        // force NewMap, if Mapsforge is selected
-        return false;
-    }
-
-    static void setOldMapsforgeAPI(final boolean useOldMapsforgeAPI) {
-        putBoolean(R.string.pref_old_mapsforge_api, useOldMapsforgeAPI);
-    }
-
     public static boolean useHardwareAcceleration() {
         return outdatedPhoneModelOrSdk() ? HwAccel.hwAccelShouldBeEnabled() :
                 getBoolean(R.string.pref_hardware_acceleration, HwAccel.hwAccelShouldBeEnabled());
