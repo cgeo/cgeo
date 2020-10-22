@@ -578,7 +578,6 @@
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_archived">Exclure les éléments archivés</string>
     <string name="init_summary_archived">Exclure les caches archivées</string>
-    <string name="init_global_wp_extraction_disable">Extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_save_log_img">Enregistrer les images</string>
     <string name="init_summary_save_log_img">Enregistrer les images des visites</string>
