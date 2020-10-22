@@ -563,8 +563,8 @@
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_useenglish">Auf Englisch</string>
     <string name="init_summary_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
-    <string name="init_exclude">Eigene und gefundene Caches</string>
-    <string name="init_summary_exclude">Eigene und gefundene Caches ausblenden</string>
+    <string name="init_exclude">Eigene/Gefundene ausblenden</string>
+    <string name="init_summary_exclude">Eigene/gefundene Caches ausblenden</string>
     <string name="init_showwaypoints">Wegpunkte zeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
@@ -574,11 +574,10 @@
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
-    <string name="init_disabled">Deaktivierte Caches</string>
+    <string name="init_disabled">Deaktivierte ausblenden</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
-    <string name="init_archived">Archivierte ausschließen</string>
-    <string name="init_summary_archived">Archivierte Caches ausschließen</string>
-    <string name="init_global_wp_extraction_disable">Wegpunkte auslesen</string>
+    <string name="init_archived">Archivierte ausblenden</string>
+    <string name="init_summary_archived">Archivierte Caches ausblenden</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
