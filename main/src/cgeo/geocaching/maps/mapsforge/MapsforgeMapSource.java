@@ -15,7 +15,6 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
 import org.mapsforge.map.model.IMapViewPosition;
-import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
 
 public class MapsforgeMapSource extends AbstractMapSource {
 

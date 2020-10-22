@@ -298,9 +298,6 @@ dependencies {
     //noinspection GradleDependency
     implementation "com.asamm:locus-api-android:0.3.17"
 
-    // Mapsforge old version
-    implementation files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
-
     // Mapsforge new version
     def mapsforgeVersion = '0.14.0'
     implementation "org.mapsforge:mapsforge-core:$mapsforgeVersion"
@@ -312,7 +309,7 @@ dependencies {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class
     }
 
-    // used by mapsforge old/new
+    // used by mapsforge
     implementation 'com.caverock:androidsvg:1.4'
 
     // Maps.ME integration
