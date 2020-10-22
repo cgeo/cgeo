@@ -791,9 +791,6 @@
     <string name="feature_favorite">Adding cache to favorites</string>
     <string name="feature_voting">Voting for caches</string>
     <string name="init_maplines_title">Map lines customization</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Old Mapsforge V3</string>
-    <string name="init_mfold_api_description">We are using a new version of the Mapsforge map by default. If you miss some features or encounter issues you can go back to the old version here.</string>
 
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Proximity notification</string>

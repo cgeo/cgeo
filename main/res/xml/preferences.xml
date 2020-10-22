@@ -792,17 +792,6 @@
                 app:defaultColor="@color/default_circlefillcolor"
                 app:showOpaquenessSlider="true" />
         </PreferenceCategory>
-
-        <PreferenceCategory android:title="@string/init_mapsforge_api_title"
-            android:layout="@layout/preference_category" >
-            <cgeo.geocaching.settings.TextPreference
-                android:layout="@layout/text_preference"
-                android:text="@string/init_mfold_api_description" />
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_old_mapsforge_api"
-                android:title="@string/init_mfold_api" />
-        </PreferenceCategory>
     </PreferenceScreen>
 
     <PreferenceScreen
