@@ -1128,7 +1128,7 @@
     <string name="map_hide">Ocultar</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
     <string name="map_circles_show">Mostra els cercles</string>
-    <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
+    <string name="map_mycaches_hide">Amaga els propis/trobats</string>
     <string name="map_disabled_hide">Amagar catxés desactivats</string>
     <string name="map_hide_track">Amaga el track individual</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
