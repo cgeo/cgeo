@@ -115,7 +115,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
     }
 
     protected class CopyTask extends AsyncTaskWithProgressText<String, CopyStates> {
-        private int bytesCopied = 0;
+        private long bytesCopied = 0;
         private final String progressFormat = getString(R.string.receivemapfile_kb_copied);
         private final AtomicBoolean cancelled = new AtomicBoolean(false);
         private final Activity context;
