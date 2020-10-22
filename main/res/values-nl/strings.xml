@@ -578,7 +578,6 @@
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
-    <string name="init_global_wp_extraction_disable">Waypoint Extractie</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>

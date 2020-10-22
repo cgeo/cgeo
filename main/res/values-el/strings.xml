@@ -578,7 +578,6 @@
     <string name="init_summary_disabled">Εξαίρεση απενεργοποιημένων κρυπτών</string>
     <string name="init_archived">Εξαίρεση των αρχειοθετημένων</string>
     <string name="init_summary_archived">Εξαίρεση των αρχειοθετημένων κρυπτών</string>
-    <string name="init_global_wp_extraction_disable">Εξαγωγή σημείων διαδρομής</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
     <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>

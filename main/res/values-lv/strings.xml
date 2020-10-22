@@ -569,7 +569,6 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="init_summary_disabled">Izlaist atspējotos slēpņus</string>
     <string name="init_archived">Izslēgt arhivētos</string>
     <string name="init_summary_archived">Izslēgt arhivētos slēpņus</string>
-    <string name="init_global_wp_extraction_disable">Starpposmu izvilkšana</string>
     <string name="init_save_log_img">Saglabāt attēlus</string>
     <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
     <string name="init_units">Izmantot imperiālo sistēmu</string>

@@ -580,7 +580,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_disabled">Exclui as geocaches desactivadas</string>
     <string name="init_archived">Excluir Arquivadas</string>
     <string name="init_summary_archived">Exclui as geocaches arquivadas</string>
-    <string name="init_global_wp_extraction_disable">Extracção de pontos adicionais</string>
+    <string name="init_global_wp_extraction_disable">Desactivar a extracção de pontos adicionais</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
