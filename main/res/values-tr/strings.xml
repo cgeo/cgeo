@@ -564,7 +564,6 @@
     <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
     <string name="init_archived">Arşivlenmişleri Dahil Etme</string>
     <string name="init_summary_archived">Arşivlenmiş Geocache\'leri dahil etme</string>
-    <string name="init_global_wp_extraction_disable">Yol imi çıkartma</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
