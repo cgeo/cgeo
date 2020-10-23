@@ -142,7 +142,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
-    private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
     private static final String BUNDLE_ROUTE = "route";
 
@@ -429,7 +428,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putParcelable(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, mapOptions.isLiveEnabled);
-        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale == null ? new ArrayList<>() : overlayPositionAndScale.getHistory());
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
@@ -542,21 +540,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final Bundle extras = activity.getIntent().getExtras();
         mapOptions = new MapOptions(activity, extras);
 
-        final ArrayList<TrailHistoryElement> trailHistory;
+        final ArrayList<TrailHistoryElement> trailHistory = null;
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource().getNumericalId());
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
-            trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             manualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
             manualRoute = null;
-            trailHistory = null;
         }
         if (null != proximityNotification) {
             proximityNotification.setTextNotifications(activity);
@@ -588,7 +584,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (savedInstanceState != null) {
             savedInstanceState.remove(BUNDLE_MAP_SOURCE);
             savedInstanceState.remove(BUNDLE_MAP_STATE);
-            savedInstanceState.remove(BUNDLE_TRAIL_HISTORY);
         }
         mapView.onCreate(savedInstanceState);
 
