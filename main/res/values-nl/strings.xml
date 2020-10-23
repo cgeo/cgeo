@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -578,6 +579,7 @@
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
+    <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
