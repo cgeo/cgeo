@@ -11,6 +11,7 @@
 <li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
 <li>Fix: Individual route: Update distance on item removal</li>
 <li>New: Added attribution to contributors on OpenStreetMap maps</li>
+<li>Fix: Crash on Google Maps map being put into the background</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -35,6 +36,7 @@
 <ul>
 <li>Change: Backup / restore caches and settings in one step</li>
 <li>New: Preserve multiple backups of caches and settings</li>
+<li>Fix: Adapt trackable search to website change on geocaching.com</li>
 <li>Fix: GPX export of position history: timestamps are now GMT-based</li>
 <li>New: GPX export of position history: added elevation info</li>
 <li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
