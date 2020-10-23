@@ -8,6 +8,9 @@
 <ul>
 <li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
 <li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
+<li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
+<li>Fix: Individual route: Update distance on item removal</li>
+<li>New: Added attribution to contributors on OpenStreetMap maps</li>
 </ul>
 
 <h4>Cache details:</h4>
