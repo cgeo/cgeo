@@ -1527,7 +1527,8 @@ public class Settings {
     }
 
     public static boolean useOldMapsforgeAPI() {
-        return getBoolean(R.string.pref_old_mapsforge_api, false);
+        // force NewMap, if Mapsforge is selected
+        return false;
     }
 
     static void setOldMapsforgeAPI(final boolean useOldMapsforgeAPI) {
