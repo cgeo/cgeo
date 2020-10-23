@@ -72,6 +72,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import static org.apache.commons.lang3.StringUtils.INDEX_NOT_FOUND;
+import static org.apache.commons.lang3.StringUtils.substring;
 
 public final class GCParser {
 
@@ -1365,7 +1367,23 @@ public final class GCParser {
 
         // trackable type
         if (StringUtils.isNotBlank(trackable.getName())) {
-            trackable.setType(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType())));
+            // old TB pages include TB type as "alt" attribute
+            String type = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE, true, trackable.getType());
+            if (!StringUtils.isBlank(type)) {
+                type = TextUtils.stripHtml(type);
+            } else {
+                // try alternative way on pages formatted the newer style: <title>\n\t(TBxxxx) Type - Name\n</title>
+                final String title = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_TYPE_TITLE, true, "");
+                if (StringUtils.isNotBlank(title)) {
+                    final String nameWithHTML = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, true, "");
+                    final int pos = StringUtils.lastIndexOfIgnoreCase(title, nameWithHTML);
+                    if (pos != INDEX_NOT_FOUND) {
+                        type = substring(title, 0, pos - 3);
+                        type = TextUtils.stripHtml(type);
+                    }
+                }
+            }
+            trackable.setType(type);
         }
 
         // trackable owner name
