@@ -109,6 +109,7 @@ public class ManualRoute extends Route implements Parcelable {
                 return ToggleItemState.ERROR_NO_POINT;
             }
         } else {
+            distance -= segments.get(pos).getDistance();
             segments.remove(pos);
             calculateNavigationRoute(pos);
             if (pos < segments.size()) {
