@@ -398,11 +398,7 @@ public class Waypoint implements IWaypoint {
             waypoint.setUserNote(userNote.trim());
         }
 
-        if (point != null || prefix != null) {
-            return waypoint;
-        }
-        return null;
-
+        return waypoint;
     }
 
     private static String parseUserNote(final String text, final int end) {

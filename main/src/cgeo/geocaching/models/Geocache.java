@@ -1589,8 +1589,8 @@ public class Geocache implements IWaypoint {
         boolean changed = false;
         if (forceExtraction || !preventWaypointsFromNote) {
             for (final Waypoint parsedWaypoint : Waypoint.parseWaypoints(StringUtils.defaultString(text), namePrefix)) {
-                final Waypoint existingWaypoint = findWaypoint(parsedWaypoint.getPrefix(), parsedWaypoint.getCoords());
-                if (existingWaypoint == null) {
+                final Waypoint existingWaypoint = findWaypoint(parsedWaypoint);
+                if (null == existingWaypoint) {
                     //add as new waypoint
                     addOrChangeWaypoint(parsedWaypoint, updateDb);
                     changed = true;
@@ -1606,21 +1606,40 @@ public class Geocache implements IWaypoint {
         return changed;
     }
 
-    private Waypoint findWaypoint(final String prefix, final Geopoint point) {
-
+    private Waypoint findWaypoint(final Waypoint searchWp) {
         //try to match prefix
-        for (final Waypoint waypoint: waypoints) {
-            if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
-                return waypoint;
+        final String prefix = searchWp.getPrefix();
+        if (null != prefix) {
+            for (final Waypoint waypoint : waypoints) {
+                if (!StringUtils.isBlank(prefix) && !StringUtils.isBlank(waypoint.getPrefix()) && prefix.equals(waypoint.getPrefix())) {
+                    return waypoint;
+                }
             }
+            return null;
         }
 
         //try to match coordinate
-        for (final Waypoint waypoint: waypoints) {
-            // waypoint can have no coords such as a Final set by cache owner
-            final Geopoint coords = waypoint.getCoords();
-            if (coords != null && coords.equalsDecMinute(point)) {
-                return waypoint;
+        final Geopoint point = searchWp.getCoords();
+        if (null != point) {
+            for (final Waypoint waypoint : waypoints) {
+                // waypoint can have no coords such as a Final set by cache owner
+                final Geopoint coords = waypoint.getCoords();
+                if (coords != null && coords.equalsDecMinute(point)) {
+                    return waypoint;
+                }
+            }
+            return null;
+        }
+
+        //try to match name if prefix and coords are null
+        for (final Waypoint waypoint : waypoints) {
+            final String searchWpName = searchWp.getName();
+            if (!StringUtils.isBlank(searchWpName)) {
+                final String wpName = waypoint.getName();
+                final WaypointType wpType = waypoint.getWaypointType();
+                if (searchWpName.equals(wpName) && searchWp.getWaypointType().getL10n().equals(wpType.getL10n())) {
+                    return waypoint;
+                }
             }
         }
         return null;
