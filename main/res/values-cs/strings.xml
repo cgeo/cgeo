@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Tento hráč oznámil, že keš by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -580,6 +581,7 @@
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_archived">Vyloučit archivované</string>
     <string name="init_summary_archived">Vyloučit archivované keše</string>
+    <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
@@ -595,9 +597,12 @@
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
+    <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat keše, trasové body &amp; nastavení, ale žádné obrázky keší. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
     <string name="init_restore_title">Obnovit zálohu</string>
     <string name="init_backup_caches">keše a trasové body</string>
     <string name="init_backup_program_settings">nastavení programu</string>
+    <string name="init_backup_logins">Zahrnout údaje o účtu</string>
+    <string name="init_backup_logins_summary">Tímto do zálohy uložíte zadané přihlašovací údaje.</string>
     <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_finished">Zálohování dokončeno</string>
@@ -606,12 +611,20 @@
     <string name="init_backup_restore">Obnovit</string>
     <string name="init_restore_restored">Obnova dokončena</string>
     <string name="init_backup_start_restore">Spustit obnovení</string>
+    <string name="init_backup_restore_different_backup">Obnovit odlišnou zálohu</string>
     <string name="init_backup_backup_history">Historie záloh</string>
+    <string name="init_backup_history_length_title">Maximální počet uložených záloh</string>
+    <string name="init_backup_history_length_summary">Rozhodněte, kolik záloh by mělo být zachováno. Když je dosaženo limitu, ty nejstarší budou automaticky odstraněny.</string>
+    <string name="init_backup_history_length_min">Pouze nedávné</string>
+    <string name="init_backup_history_length_max">Zachovat všechny</string>
+    <string name="init_backup_history_delete_warning">Uložili jste více záloh, než umožňuje vaše nakonfigurovaná maximální hodnota. Opravdu chcete odstranit všechny přebytečné zálohy?</string>
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
     <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
+    <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku na zálohy. Vytvořili jste již za poslední minutu zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
+    <string name="backup_confirm_overwrite">Opravdu chceš přesat nejstarší existující zálohu z %s?</string>
     <string name="restore_confirm_overwrite_database">VAROVÁNÍ: Toto přepíše %s na vašem zařízení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROVÁNÍ: Toto přepíše %s a vaše aktuální nastavení na vašem zařízení!</string>
     <string name="restore_confirm_overwrite_settings">VAROVÁNÍ: Toto přepíše vaše aktuální nastavení na vašem zařízení!</string>
@@ -770,6 +783,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombinovaná (%d map, čekejte prosím...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Kombinovaná (%d map, %d atributů): klikněte pro podrobnosti</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Kombinovaná (%d map): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Kombinovaný zdroj map</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
@@ -1054,6 +1071,7 @@
     <string name="cc_hint_minutes">minuty</string>
     <string name="cc_hint_seconds">sekundy</string>
     <string name="cc_hint_fraction">zlomek</string>
+    <string name="lowercase">malá písmena</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Hledání souborů\nv</string>
