@@ -221,6 +221,38 @@ public class WaypointTest {
 
     }
 
+    @Test
+    public void testCreateParseableWaypointTextUserWpWithoutCoordinateAndParseIt() {
+        final Waypoint wp = new Waypoint("name", WaypointType.FINAL, false);
+        wp.setCoords(null);
+        wp.setUserDefined();
+        wp.setUserNote("user note with \"escaped\" text\nand a newline");
+        final String parseableText = wp.getParseableText(-1);
+        assertThat(parseableText).isEqualTo(
+            "@name (F) (NO-COORD)\n" +
+                "\"user note with \\\"escaped\\\" text\nand a newline\"");
+
+        final Collection<Waypoint> parsedWaypoints = Waypoint.parseWaypoints(parseableText, "Prefix");
+        assertThat(parsedWaypoints).hasSize(1);
+        final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
+        final Waypoint newWp = iterator.next();
+        assertWaypoint(newWp, wp);
+        assertThat(newWp.isUserDefined()).isTrue();
+
+    }
+
+    @Test
+    public void testParseTwoUserDefinedWaypointWithSameNameAndWithoutCoordinate() {
+        final String parseableText = "@name (F) (NO-COORD)\n" +
+            "\"user note with \\\"escaped\\\" text\nand a newline\"" +
+        "@name (F) (NO-COORD)\n" +
+        "\"user note 2 with \\\"escaped\\\" text\nand a newline\"";
+
+        final Collection<Waypoint> parsedWaypoints = Waypoint.parseWaypoints(parseableText, "Prefix");
+        assertThat(parsedWaypoints).hasSize(2);
+
+    }
+
     private static String toParseableWpString(final Geopoint gp) {
         return gp.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW);
 
