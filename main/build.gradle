@@ -152,6 +152,13 @@ android {
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
+
+        // deactivate this rule only on CI
+        // see https://github.com/cgeo/cgeo/issues/9224
+        // Resource IDs will be non-final in Android Gradle Plugin version 5.0
+        if (isContinuousIntegrationServer()) {
+            disable 'NonConstantResourceId'
+        }
     }
 
     packagingOptions {
