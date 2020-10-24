@@ -458,7 +458,7 @@ public class Waypoint implements IWaypoint {
     private static WaypointType parseWaypointType(final String input, final String lastWord) {
         final String lowerInput = input.toLowerCase(Locale.getDefault());
         final String lowerLastWord = lastWord.toLowerCase(Locale.getDefault());
-        for (final WaypointType wpType : WaypointType.values()) {
+        for (final WaypointType wpType : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
             final String lowerShortId = wpType.getShortId().toLowerCase(Locale.getDefault());
             if (lowerLastWord.equals(lowerShortId)) {
                 return wpType;
