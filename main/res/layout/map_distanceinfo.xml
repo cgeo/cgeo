@@ -44,4 +44,13 @@
         android:layout_alignParentRight="true"
         android:layout_width="100dp"
         style="@style/map_distanceinfo" />
+
+    <TextView
+        android:id="@+id/distanceSupersize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        style="@style/map_distanceinfo_supersize" />
+
 </RelativeLayout>

@@ -1417,6 +1417,14 @@ public class Settings {
         return getBoolean(R.string.pref_showCircles, false);
     }
 
+    public static void setSupersizeDistance(final boolean supersizeDistance) {
+        putBoolean(R.string.pref_supersizeDistance, supersizeDistance);
+    }
+
+    public static boolean getSupersizeDistance() {
+        return getBoolean(R.string.pref_supersizeDistance, false);
+    }
+
     public static void setExcludeMine(final boolean exclude) {
         putBoolean(R.string.pref_excludemine, exclude);
     }
