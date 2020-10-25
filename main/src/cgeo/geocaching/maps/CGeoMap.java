@@ -1108,9 +1108,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             ActivityMixin.invalidateOptionsMenu(activity);
         }
 
-        if (mapSource != null) {
-            mapSource.releaseResources();
-        }
         mapSource = newSource;
 
         final int mapAttributionViewId = mapSource.getMapProvider().getMapAttributionTextId();

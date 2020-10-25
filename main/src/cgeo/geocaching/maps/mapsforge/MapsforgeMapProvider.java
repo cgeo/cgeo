@@ -156,7 +156,6 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     public static final class OfflineMapSource extends MapsforgeMapSource {
 
         private final String fileName;
-        private MapFile mapFile;
 
         public OfflineMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
             super(fileName, mapProvider, name, generator);
@@ -175,7 +174,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         /** Create new render layer, if mapfile exists */
         @Override
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
-            final MapFile mf = getMapFile();
+            final MapFile mf = createMapFile(this.fileName);
             if (mf != null) {
                 MapProviderFactory.setLanguages(mf.getMapLanguages());
                 return new RendererLayer(tileCache, mf, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
@@ -183,35 +182,18 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return null;
         }
 
-        private MapFile getMapFile() {
-            if (mapFile != null) {
-                return mapFile;
-            }
-            this.mapFile = createMapFile(this.fileName);
-            return mapFile;
-        }
 
         @Override
         public CharSequence getMapAttribution(final Context ctx) {
-            final String attr = getAttributionFromMapFile(getMapFile());
-            return getName() + (attr == null ? "" : ": " + attr.trim());
-        }
-
-        @Override
-        public void releaseResources() {
-            this.mapFile = null;
-        }
-
-        private String createAttributionFromMapFile(final String praefix, final MapFile mapFile) {
-            String attribution = praefix;
-            if (mapFile != null && mapFile.getMapFileInfo() != null) {
-                if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
-                    attribution += ": " + mapFile.getMapFileInfo().comment;
-                } else if (!StringUtils.isBlank(mapFile.getMapFileInfo().createdBy)) {
-                    attribution += ": " + mapFile.getMapFileInfo().createdBy;
+            final MapFile mf = createMapFile(this.fileName);
+            try {
+                final String attr = getAttributionFromMapFile(mf);
+                return getName() + (attr == null ? "" : ": " + attr.trim());
+            } finally {
+                if (mf != null) {
+                    mf.close();
                 }
             }
-            return attribution;
         }
 
    }
@@ -307,7 +289,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                 final Set<String> attsSet = new HashSet<>();
                 String lastAtt = null;
                 for (String fileName : fileNames) {
-                    final String attr = getAttributionFromMapFile(createMapFile(fileName));
+                    final MapFile mf = createMapFile(fileName);
+                    final String attr = getAttributionFromMapFile(mf);
+                    if (mf != null) {
+                        mf.close();
+                    }
                     atts.add(new File(fileName).getName() + (attr == null ? ": ---" : ": " + attr.trim()));
                     if (attr == null) {
                         continue;

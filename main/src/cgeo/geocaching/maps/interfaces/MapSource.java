@@ -16,8 +16,4 @@ public interface MapSource {
 
     void setMapAttributionTo(TextView textView);
 
-    default void releaseResources() {
-        //do nothing
-    }
-
 }
