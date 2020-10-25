@@ -136,6 +136,8 @@ import org.xmlpull.v1.XmlPullParserException;
 @SuppressLint("ClickableViewAccessibility")
 public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeMenuCallback, SharedPreferences.OnSharedPreferenceChangeListener, Observer {
 
+    private static final String ROUTING_SERVICE_KEY = "NewMap";
+
     private MfMapView mapView;
     private TileCache tileCache;
     private MapSource mapSource;
@@ -299,7 +301,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
         prepareFilterBar();
-        Routing.connect(() -> resumeRoute(true));
+        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
     }
 
@@ -1009,7 +1011,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.mapView.destroy();
         ResourceBitmapCacheMonitor.release();
 
-        Routing.disconnect();
+        Routing.disconnect(ROUTING_SERVICE_KEY);
         super.onDestroy();
     }
 

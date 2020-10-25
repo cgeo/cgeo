@@ -284,7 +284,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
 
-        Routing.connect(null);
+        Routing.connect();
 
         int startPage = Page.VERSION.ordinal();
         final Bundle extras = getIntent().getExtras();
