@@ -178,7 +178,7 @@ public class WaypointTest {
 
     @Test
     public void testParseWaypointWithMultiwordNameAndMultilineDescription() {
-        final String note = "@ A   longer  name \twith (o) whitespaces  N45 49.739 E9 45.038 \"this is the \\\"description\\\"\nit goes on and on\" some more text";
+        final String note = "@ A   longer  name \twith (r) (o) whitespaces  N45 49.739 E9 45.038 \"this is the \\\"description\\\"\nit goes on and on\" some more text";
         final Collection<Waypoint> waypoints = Waypoint.parseWaypoints(note, "Prefix");
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();

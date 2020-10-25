@@ -66,14 +66,20 @@ public enum WaypointType {
     }
 
     @NonNull
-    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes();
+    public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);
+    @NonNull
+    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes(true);
 
-    private static List<WaypointType> orderedWaypointTypes() {
+    private static List<WaypointType> orderedWaypointTypes(final boolean excludeInternalTypes) {
         // enforce an order for these types
         final Set<WaypointType> waypointTypes = new LinkedHashSet<>();
         waypointTypes.addAll(Arrays.asList(PARKING, TRAILHEAD, PUZZLE, STAGE, FINAL));
         // then add all remaining except "internal" types
         waypointTypes.addAll(EnumSet.complementOf(EnumSet.of(OWN, ORIGINAL)));
+        if (!excludeInternalTypes) {
+            //if wanted, add internal types at the end
+            waypointTypes.addAll(EnumSet.of(OWN, ORIGINAL));
+        }
         return Collections.unmodifiableList(new ArrayList<>(waypointTypes));
     }
 
@@ -97,7 +103,7 @@ public enum WaypointType {
     public final String getL10n() {
         //enable local unit testing
         if (CgeoApplication.getInstance() == null) {
-            return "" + stringId;
+            return name();
         }
         return CgeoApplication.getInstance().getBaseContext().getString(stringId);
     }
