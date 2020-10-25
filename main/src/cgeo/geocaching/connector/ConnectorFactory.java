@@ -112,11 +112,6 @@ public final class ConnectorFactory {
 
     private static boolean forceRelog = false; // c:geo needs to log into cache providers
 
-    // for viewport searchResult caching
-    private static int counterSearchByViewport = 0;     // @todo delete this line after testing
-    private static Viewport lastViewportUsed = null;
-    private static SearchResult lastSearchResult = null;
-
     private ConnectorFactory() {
         // utility class
     }
