@@ -14,7 +14,9 @@ import android.util.Xml;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -31,20 +33,39 @@ public final class Routing {
     private static long timeLastUpdate;
     private static int connectCount = 0;
 
+    private static final Map<String, Runnable> REGISTERED_CALLBACKS = new HashMap<>();
+
+    private static final Runnable SERVICE_CONNECTED_CALLBACK = () -> {
+        synchronized (Routing.class) {
+            for (Runnable r : REGISTERED_CALLBACKS.values()) {
+                r.run();
+            }
+        }
+    };
+
     private Routing() {
         // utility class
     }
 
-    public static synchronized void connect(final Runnable onServiceConnectedCallback) {
+    public static synchronized void connect() {
+        connect(null, null);
+    }
+
+
+    public static synchronized void connect(final String callbackKey, final Runnable onServiceConnectedCallback) {
 
         connectCount++;
+
+        if (callbackKey != null && onServiceConnectedCallback != null) {
+            REGISTERED_CALLBACKS.put(callbackKey, onServiceConnectedCallback);
+        }
 
         if (brouter != null && brouter.isConnected()) {
             //already connected
             return;
         }
 
-        brouter = new BRouterServiceConnection(onServiceConnectedCallback);
+        brouter = new BRouterServiceConnection(SERVICE_CONNECTED_CALLBACK);
         final Intent intent = new Intent();
         intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
 
@@ -61,6 +82,14 @@ public final class Routing {
     }
 
     public static synchronized void disconnect() {
+        disconnect(null);
+    }
+
+    public static synchronized void disconnect(final String callbackKey) {
+
+        if (callbackKey != null) {
+            REGISTERED_CALLBACKS.remove(callbackKey);
+        }
 
         connectCount--;
 
