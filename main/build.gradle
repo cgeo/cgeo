@@ -150,8 +150,8 @@ android {
         // abort release builds in case of FATAL errors
         checkReleaseBuilds true
 
-        // recommended by ButterKnife, http://jakewharton.github.io/butterknife/
-        disable 'InvalidPackage'
+        // ExtraTranslation - old translation will be deleted by the next crowdin import
+        disable 'ExtraTranslation'
     }
 
     packagingOptions {

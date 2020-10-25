@@ -208,7 +208,6 @@
     <string name="err_favorite_failed">Changing favorite status failed.</string>
     <string name="err_select_logimage_failed">Selecting an image for the log failed.</string>
     <string name="err_acquire_image_failed">Acquiring an image failed.</string>
-    <string name="err_unsupported_image_format">Unsupported image format.</string>
     <string name="err_tb_display">c:geo can\'t display the trackable you want. Is it really a trackable?</string>
     <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
     <string name="err_tb_not_loggable">This trackable isn\'t loggable.</string>
@@ -264,7 +263,6 @@
     <string name="info_log_cleared">Log was cleared.</string>
     <string name="info_waypoint_coordinates_cleared">Coordinates cleared.</string>
     <string name="info_log_type_changed">Type of log has been changed!</string>
-    <string name="info_log_report_problem_changed">Available problem reports have changed!</string>
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
@@ -277,7 +275,6 @@
     <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
-    <string name="remind_later">Remind me later</string>
     <string name="undo">Undo</string>
     <string name="dont_show_again">Don\'t show again</string>
 
@@ -890,7 +887,6 @@
     </plurals>
     <string name="last_day_available">last day available</string>
 
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Refresh</string>
     <string name="cache_offline_drop">Remove</string>
     <string name="cache_delete_userdefined_waypoints">Remove user-defined waypoints</string>
@@ -1871,7 +1867,6 @@
     <!-- colors -->
     <string name="color_blue">Blue</string>
     <string name="color_green">Green</string>
-    <string name="color_grey">Grey</string>
     <string name="color_orange">Orange</string>
     <string name="color_red">Red</string>
     <string name="color_turquoise">Turquoise</string>
@@ -1964,7 +1959,6 @@
     <string name="localfile_intenttitle">c:geo Local file handler</string>
     <string name="localfile_title">Open a local file</string>
     <string name="localfile_cannot_handle">Error reading file or c:geo cannot handle this file type.</string>
-    <string name="localfile_foundmap">found a map file</string>
 
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Receive map file</string>

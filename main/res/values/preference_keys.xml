@@ -123,7 +123,6 @@
     <string translatable="false" name="pref_fakekey_dataDir">pref_fakekey_dataDir</string>
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
     <string translatable="false" name="pref_fakekey_preference_backup">fakekey_preference_backup</string>
-    <string translatable="false" name="pref_fakekey_preference_restoresettings">fakekey_preference_restoresettings</string>
     <string translatable="false" name="pref_fakekey_preference_restore">fakekey_preference_restore</string>
     <string translatable="false" name="pref_fakekey_preference_restore_dirselect">fakekey_preference_restore_dirselect</string>
     <string translatable="false" name="pref_backups_backup_history_length">backup_history_length</string>
