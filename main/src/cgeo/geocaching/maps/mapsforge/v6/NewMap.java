@@ -738,9 +738,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         final ITileLayer oldLayer = this.tileLayer;
         ITileLayer newLayer = null;
 
-        if (mapSource != null) {
-            mapSource.releaseResources();
-        }
         mapSource = newSource;
         mapSource.setMapAttributionTo(this.mapAttribution);
 
