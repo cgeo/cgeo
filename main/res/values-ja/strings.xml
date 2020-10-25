@@ -413,11 +413,11 @@
     <string name="about_starting">はじめましょう</string>
     <string name="about_starting_head">はじめましょう</string>
     <string name="about_starting_text_basics_head">ジオキャッシングの基本</string>
-    <string name="about_starting_text_basics_text">ジオキャッシングはいわゆる「キャッシュ」を探して見つけるアウトドアゲームです。このアプリでお楽しみいただけます。\n詳細は<b>c:geo Basics(英語)</b> https://manual.cgeo.org/en/basicuseをご覧ください</string>
+    <string name="about_starting_text_basics_text">ジオキャッシングはいわゆる「キャッシュ」を探して見つけるアウトドアゲームです。このアプリでお楽しみいただけます。\n詳細は<b>c:geo Basics(英語)</b> https://manual.cgeo.org/en/basicuse をご覧ください。</string>
     <string name="about_starting_text_device_head">c:geoアプリの権限</string>
-    <string name="about_starting_text_device_text">c:geoにはお使いのデバイスで特定の権限が必要です。\n<b>位置情報</b>: GPSにアクセスして位置を特定しジオキャッシュの方向と距離を計算します。\n<b>ストレージ</b>: オフライン用にジオキャッシュを保存する時、ファイルのインポート/エクスポートする時、オフラインマップの読み込む時にストレージにデータを読み書きます。\n\nこれらのアクセス権限がないとc:geoを使用することができません</string>
+    <string name="about_starting_text_device_text">c:geoにはお使いのデバイスで特定の権限が必要です。\n<b>位置情報</b>: GPSにアクセスして位置を特定しジオキャッシュの方向と距離を計算します。\n<b>ストレージ</b>: オフライン用にジオキャッシュを保存する時、ファイルのインポート/エクスポートする時、オフラインマップの読み込む時にストレージにデータを読み書きます。\nこれらのアクセス権限がないとc:geoを使用することができません。</string>
     <string name="about_starting_text_first_head">c:geoの最初のステップ</string>
-    <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシング プラットフォーム用のアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシング プラットフォーム」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststepsをご覧ください</string>
+    <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシング プラットフォーム用のアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシング プラットフォーム」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststeps をご覧ください</string>
     <string name="open_services_page">ジオキャッシング プラットフォーム設定</string>
     <string name="about_system_include">バグ報告やお問い合わせする際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
@@ -760,7 +760,7 @@
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
-    <string name="init_sendToCgeo_description"><b>Send2cgeo</b>を使うとFirefoxまたはChrome用のスクリプトでgeocaching.comからAndroidデバイスにキャッシュ情報を直接送信できます。 登録する前に<a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>をご覧ください。 Send2cgeoを使用する場合のみ登録する必要があります。c:geoはデバイスを登録しなくても正常に機能します</string>
+    <string name="init_sendToCgeo_description"><b>Send2cgeo</b>を使うとFirefoxまたはChrome用のスクリプトでgeocaching.comからAndroidデバイスにキャッシュ情報を直接送信できます。 登録する前に <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a> をご覧ください。 Send2cgeoを使用する場合のみ登録する必要があります。c:geoはデバイスを登録しなくても正常に機能します</string>
     <string name="init_sendToCgeo_register">登録を申請</string>
     <string name="init_sendToCgeo_registering">Send2cgeoにこの端末を登録しています…</string>
     <string name="init_sendToCgeo_register_ok">登録しました。PINコードは「%d」です。お使いのブラウザでc:geoのWebサイトを開いてデバイスと接続してください</string>
