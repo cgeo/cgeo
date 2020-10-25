@@ -265,6 +265,10 @@ public final class Viewport {
         return bottomLeft.equals(vp.bottomLeft) && topRight.equals(vp.topRight);
     }
 
+    public boolean isJustADot() {
+        return bottomLeft.equals(topRight);
+    }
+
     @Override
     public int hashCode() {
         return bottomLeft.hashCode() ^ topRight.hashCode();

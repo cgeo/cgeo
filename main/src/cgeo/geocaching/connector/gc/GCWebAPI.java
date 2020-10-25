@@ -34,6 +34,7 @@ import io.reactivex.rxjava3.core.SingleSource;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
@@ -382,10 +383,18 @@ class GCWebAPI {
         return getAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocode), CacheDetails.class);
     }
 
-
-
     static MapSearchResultSet searchMap(@NonNull final Viewport viewport) {
         final Parameters params = new Parameters();
+
+        // on empty viewport silently log stacktrace + return empty searchresult without calling search provider
+        if (viewport.isJustADot()) {
+            try {
+                throw new RuntimeException("searching map with empty viewport");
+            } catch (RuntimeException e) {
+                Log.d("searching map with empty viewport: " + ExceptionUtils.getStackTrace(e));
+            }
+            return new MapSearchResultSet();
+        }
 
         final StringBuilder box = new StringBuilder();
         box.append(viewport.getLatitudeMax()).append(',').append(viewport.getLongitudeMin());
