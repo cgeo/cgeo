@@ -619,11 +619,11 @@
     <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません</string>
     <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません。</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
-    <string name="backup_confirm_overwrite">一番古い%sのバックアップに上書きしますか?</string>
+    <string name="backup_confirm_overwrite">一番古いバックアップ(%s)を上書きしますか?</string>
     <string name="restore_confirm_overwrite_database">警告: お使いのデバイスで%sを上書きします!</string>
     <string name="restore_confirm_overwrite_database_and_settings">警告: お使いのデバイスで%sと現在の設定を上書きします!</string>
     <string name="restore_confirm_overwrite_settings">警告: お使いのデバイスで現在の設定を上書きします!</string>
-    <string name="restore_information">復元したいものを選択してください: </string>
+    <string name="restore_information">復元するものを選択してください</string>
     <string name="init_restore_success">キャッシュのデータベースは正常に復元されました</string>
     <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました</string>
     <string name="init_restore_failed">復元できませんでした</string>
