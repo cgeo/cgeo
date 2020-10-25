@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -578,6 +579,7 @@
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
+    <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
@@ -593,9 +595,12 @@
     <string name="init_summary_livelist">Suunta kätkölle näytetään listauksessa</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
+    <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
     <string name="init_restore_title">Palauta varmuuskopio</string>
     <string name="init_backup_caches">Kätköllä ei ole reittipisteitä</string>
     <string name="init_backup_program_settings">ohjelman asetukset</string>
+    <string name="init_backup_logins">Sisällytä käyttäjätiedot</string>
+    <string name="init_backup_logins_summary">Tämä tallentaa syöttämäsi kirjautumistiedot varmuuskopioon.</string>
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
     <string name="init_backup_finished">Varmuuskopiointi valmis</string>
@@ -604,12 +609,20 @@
     <string name="init_backup_restore">Palauta</string>
     <string name="init_restore_restored">Palautus valmis</string>
     <string name="init_backup_start_restore">Aloita palautus</string>
+    <string name="init_backup_restore_different_backup">Palauta toinen varmuuskopio</string>
     <string name="init_backup_backup_history">Varmuuskopioi historia</string>
+    <string name="init_backup_history_length_title">Varmuuskopioiden maksimimäärä</string>
+    <string name="init_backup_history_length_summary">Päätä, kuinka monta varmuuskopiota säilytetään. Kun raja on saavutettu, vanhimmat poistetaan automaattisesti.</string>
+    <string name="init_backup_history_length_min">Vain viimeisin</string>
+    <string name="init_backup_history_length_max">Pidä kaikki</string>
+    <string name="init_backup_history_delete_warning">Olet tallentanut enemmän varmuuskopioita kuin määritetty maksimiarvo sallii. Haluatko varmasti poistaa kaikki ylimääräiset varmuuskopiot?</string>
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
+    <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
+    <string name="backup_confirm_overwrite">Haluatko korvata vanhimman olemassa olevan varmuuskopion kohteesta %s?</string>
     <string name="restore_confirm_overwrite_database">VAROITUS: Tämä korvaa kohteen %s laitteellasi!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROITUS: Tämä korvaa kohteen %s ja nykyiset asetuksesi laitteellasi!</string>
     <string name="restore_confirm_overwrite_settings">VAROITUS: Tämä korvaa nykyiset asetuksesi laitteellasi!</string>
@@ -768,6 +781,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Yhdistetty (%d karttaa, odota hetki...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Yhdistetyt (%d karttaa, %d ominaisuutta): klikkaa saadaksesi lisätietoja</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Yhdistetty (%d karttaa): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Yhdistetyn kartan ominaisuudet</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
     <string name="init_sendToCgeo_name">Laitteen nimi</string>
@@ -1038,6 +1055,7 @@
     <string name="cc_hint_minutes">minuuttia</string>
     <string name="cc_hint_seconds">sekuntia</string>
     <string name="cc_hint_fraction">murto-osa</string>
+    <string name="lowercase">pienet kirjaimet</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Etsitään tiedostoja\nkohteesta</string>
@@ -1531,6 +1549,22 @@
     <string name="attribute_challengecache_no">Ei haastekätkö</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com:in tarkistin saatavilla</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com:in tarkistin ei saatavilla</string>
+    <string name="attribute_handicaching_yes">Arvosteltu Handicaching.comissa</string>
+    <string name="attribute_handicaching_no">Ei arvosteltu Handicaching.comissa</string>
+    <string name="attribute_munzee_yes">Sisältää Munzeen</string>
+    <string name="attribute_munzee_no">Ei sisällä Munzeeta</string>
+    <string name="attribute_ads_yes">Sisältää mainontaa</string>
+    <string name="attribute_ads_no">Ei sisällä mainontaa</string>
+    <string name="attribute_military_area_yes">Sotilaallinen koulutusalue</string>
+    <string name="attribute_military_area_no">Ei sotilaallinen koulutusalue</string>
+    <string name="attribute_video_surveil_yes">Videovalvonnan alainen alue</string>
+    <string name="attribute_video_surveil_no">Alue ei ole videovalvonnan alainen</string>
+    <string name="attribute_trackables_yes">Soveltuu reissaajille</string>
+    <string name="attribute_trackables_no">Ei sovellu reissaajille</string>
+    <string name="attribute_historic_yes">Hylätty rakenne / rauniot</string>
+    <string name="attribute_historic_no">Ei hylättyä rakennetta / Ei raunioita</string>
+    <string name="attribute_blind_people_yes">Soveltuu sokeille</string>
+    <string name="attribute_blind_people_no">Ei sovellu sokeille</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
