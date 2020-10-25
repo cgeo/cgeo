@@ -37,10 +37,8 @@ public class DistanceView {
 
         final Geopoint currentCoords = new Geopoint(coordinatesIn);
         final float distance = null != destinationCoords ? currentCoords.distanceTo(destinationCoords) : 0.0f;
-
         mapDistanceDrawer.drawDistance(showBothDistances, distance, realDistance);
     }
-
 
     public void setRouteDistance(final float routeDistance) {
         this.routeDistance = routeDistance;
