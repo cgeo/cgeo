@@ -31,6 +31,11 @@ public enum WaypointType {
     ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_reference);
 
     @NonNull
+    public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);
+    @NonNull
+    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes(true);
+
+    @NonNull
     public final String id;
 
     public final String shortId;
@@ -64,11 +69,6 @@ public enum WaypointType {
             FIND_BY_ID.put(wt.id, wt);
         }
     }
-
-    @NonNull
-    public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);
-    @NonNull
-    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes(true);
 
     private static List<WaypointType> orderedWaypointTypes(final boolean excludeInternalTypes) {
         // enforce an order for these types
