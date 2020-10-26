@@ -9,6 +9,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 
 <h4>Map:</h4>
 <ul>
+<li>Change: Old mapsforge map has been disabled and will be removed in future releases.</li>
 <li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
 <li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
 <li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
