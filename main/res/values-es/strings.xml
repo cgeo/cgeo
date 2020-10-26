@@ -188,7 +188,6 @@
     <string name="err_favorite_failed">Falló el cambio de estado de favorito.</string>
     <string name="err_select_logimage_failed">No se pudo seleccionar una imagen para el registro.</string>
     <string name="err_acquire_image_failed">No se pudo obtener una imagen.</string>
-    <string name="err_unsupported_image_format">Formato de imagen no soportado.</string>
     <string name="err_tb_display">c:geo no puede mostrar el rastreable que buscas. ¿Es realmente un rastreable?</string>
     <string name="err_tb_details_open">c:geo no puede abrir los detalles del rastreable.</string>
     <string name="err_tb_not_loggable">Este rastreable no se puede registrar.</string>
@@ -244,7 +243,6 @@
     <string name="info_log_cleared">Registro borrado.</string>
     <string name="info_waypoint_coordinates_cleared">Coordenadas borradas.</string>
     <string name="info_log_type_changed">¡El tipo de registro ha sido cambiado!</string>
-    <string name="info_log_report_problem_changed">¡Los informes de problemas disponibles han cambiado!</string>
     <string name="info_select_logimage_cancelled">La selección de imagen  o captura ha sido cancelada.</string>
     <string name="info_stored_image">Nueva imagen guardada en:</string>
     <string name="info_cache_saved">El caché se ha guardado en el disco local</string>
@@ -705,9 +703,6 @@
     <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
     <string name="feature_favorite">Añadiendo caché a favoritos</string>
     <string name="init_maplines_title">Personalización de líneas de mapa</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Antiguo Mapsforge V3</string>
-    <string name="init_mfold_api_description">Estamos usando una nueva versión del mapa Mapsforge por defecto. Si echas de menos algunas características o encuentras problemas, puedes volver a la versión anterior aquí.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificación de proximidad</string>
     <string name="init_proximityNotificationGeneral">Notificación general de proximidad en el mapa</string>
@@ -777,7 +772,6 @@
         <item quantity="other">quedan %1$d días</item>
     </plurals>
     <string name="last_day_available">último día disponible</string>
-    <string name="cache_offline">Guardado</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Eliminar</string>
     <string name="cache_offline_store">Guardar</string>
