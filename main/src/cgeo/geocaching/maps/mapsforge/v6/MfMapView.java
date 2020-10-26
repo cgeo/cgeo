@@ -48,12 +48,13 @@ public class MfMapView extends MapView {
         if (getHeight() > 0) {
 
             try {
-                final LatLong low = MercatorProjection.fromPixels(center.x, center.y - getHeight() / 2, mapSize);
-                final LatLong high = MercatorProjection.fromPixels(center.x, center.y + getHeight() / 2, mapSize);
+                final LatLong low = mercatorFromPixels(center.x, center.y - getHeight() / 2, mapSize);
+                final LatLong high = mercatorFromPixels(center.x, center.y + getHeight() / 2, mapSize);
 
                 span = Math.abs(high.latitude - low.latitude);
             } catch (final IllegalArgumentException ex) {
-                Log.w("Exception when calculating latitude span", ex);
+                //should never happen due to outlier handling in "mercatorFromPixels", but leave it here just in case
+                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + getDimension(), ex);
             }
         }
 
@@ -69,16 +70,43 @@ public class MfMapView extends MapView {
 
         if (getWidth() > 0) {
             try {
-                final LatLong low = MercatorProjection.fromPixels(center.x - getWidth() / 2, center.y, mapSize);
-                final LatLong high = MercatorProjection.fromPixels(center.x + getWidth() / 2, center.y, mapSize);
+                final LatLong low = mercatorFromPixels(center.x - getWidth() / 2, center.y, mapSize);
+                final LatLong high = mercatorFromPixels(center.x + getWidth() / 2, center.y, mapSize);
 
                 span = Math.abs(high.longitude - low.longitude);
             } catch (final IllegalArgumentException ex) {
-                Log.w("Exception when calculating longitude span", ex);
+                //should never happen due to outlier handling in "mercatorFromPixels", but leave it here just in case
+                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + getDimension(), ex);
             }
         }
 
         return span;
+    }
+
+    /**
+     * Calculates projection of pixel to coord.
+     * For this method to operate normally, it should 0 <= pixelX <= maxSize and 0 <= pixelY <= mapSize
+     *
+     * If either pixelX or pixelY is OUT of these bounds, it is assumed that the map displays the WHOLE WORLD
+     * (and this displayed whole world map is smaller than the device's display size of the map.)
+     * In these cases, lat/lon is projected to the world-border-coordinates (for lat: -85° - 85°, for lon: -180° - 180°)
+     */
+    private static LatLong mercatorFromPixels(final double pixelX, final double pixelY, final long mapSize) {
+
+        final double normedPixelX = toBounds(pixelX, 0, mapSize);
+        final double normedPixelY = toBounds(pixelY, 0, mapSize);
+
+        final LatLong ll = MercatorProjection.fromPixels(normedPixelX, normedPixelY, mapSize);
+
+        final double lon = toBounds(ll.longitude, -180, 180);
+        final double lat = toBounds(ll.latitude, -85, 85);
+
+        return new LatLong(lat, lon);
+
+    }
+
+    private static double toBounds(final double value, final double min, final double max) {
+        return value < min ? min : (value > max ? max : value);
     }
 
     public int getMapZoomLevel() {
