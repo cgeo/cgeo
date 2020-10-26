@@ -1700,7 +1700,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is under maintenance.\nYou might run into various issues.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">You appear to be using an older version of Android. This version of c:geo is no longer compatible with your device and might fail or behave unexpectedly!\nTap on this message for further information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">You are using a version of c:geo which seems to be older than one year. Some features may not work anymore due to website or other technical changes. Please read our FAQ on how to upgrade.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">You appear to be using Android 11, which c:geo does not support fully yet. Please read our FAQ to get more info on this.</string>
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talking compass</string>
