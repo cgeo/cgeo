@@ -195,7 +195,6 @@
     <string name="err_favorite_failed">Errore nella modifica dello stato preferiti.</string>
     <string name="err_select_logimage_failed">La selezione dell\'immagine per il log è fallita.</string>
     <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
-    <string name="err_unsupported_image_format">Formato immagine non supportato.</string>
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
     <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
@@ -251,7 +250,6 @@
     <string name="info_log_cleared">Il log è stato azzerato.</string>
     <string name="info_waypoint_coordinates_cleared">Coordinate eliminate.</string>
     <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
-    <string name="info_log_report_problem_changed">La lista delle segnalazioni dei problemi è stata aggiornata!</string>
     <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
     <string name="info_stored_image">Nuova immagine salvata su:</string>
     <string name="info_cache_saved">Il cache è stato salvato localmente</string>
@@ -264,7 +262,6 @@
     <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
     <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
     <string name="more_information">Ulterioni informazioni</string>
-    <string name="remind_later">Ricordamelo più tardi</string>
     <string name="undo">Annulla</string>
     <string name="dont_show_again">Non mostrare ancora</string>
     <string name="warn_gm_not_available">Google Maps non disponibile.</string>
@@ -756,9 +753,6 @@
     <string name="feature_favorite">Aggiunta del cache ai preferiti</string>
     <string name="feature_voting">Votazione per i cache</string>
     <string name="init_maplines_title">Personalizzazione delle linee della mappa</string>
-    <string name="init_mapsforge_api_title">API Mapsforge</string>
-    <string name="init_mfold_api">Vecchio Mapsforge V3</string>
-    <string name="init_mfold_api_description">Stiamo utilizzando una nuova versione della mappa Mapsforge come impostazione predefinita. Se dovessero mancare alcune informazioni o riscontri problemi, puoi tornare alla vecchia versione qui.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notifica di prossimità</string>
     <string name="init_proximityNotificationGeneral">Notifica generale di prossimità sulla mappa</string>
@@ -829,7 +823,6 @@
         <item quantity="other">%1$d giorni rimanenti</item>
     </plurals>
     <string name="last_day_available">ultimo giorno disponibile</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Aggiorna</string>
     <string name="cache_offline_drop">Rimuovi</string>
     <string name="cache_delete_userdefined_waypoints">Rimuovi waypoint definiti dall\'utente</string>
@@ -1579,7 +1572,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Sembra che tu stia usando Android 11, che c:geo non supporta ancora completamente. Si prega di leggere le nostre FAQ per avere maggiori informazioni.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
@@ -1688,7 +1680,6 @@
     <!-- colors -->
     <string name="color_blue">Blu</string>
     <string name="color_green">Verde</string>
-    <string name="color_grey">Grigio</string>
     <string name="color_orange">Arancione</string>
     <string name="color_red">Rosso</string>
     <string name="color_turquoise">Turchese</string>
@@ -1765,7 +1756,6 @@
     <string name="localfile_intenttitle">c:geo Gestore file locale</string>
     <string name="localfile_title">Apri un file locale</string>
     <string name="localfile_cannot_handle">Errore nella lettura del file o c:geo non può gestire questo tipo di file.</string>
-    <string name="localfile_foundmap">trovato un file mappa</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Ricevi file mappa</string>
     <string name="receivemapfile_success">File mappa ricevuto con successo come \"%s\" e memorizzato nella directory della mappa</string>
