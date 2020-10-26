@@ -4,6 +4,9 @@
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly build:</h1>
 
+<h4>Android 11 notice:</h4>
+Android 11 enforces a new way for storing data, which c:geo does not support yet. For the time being c:geo is using a legacy method to access data on the storage system (e.g. offline maps, imports/exports of GPX, backups, field notes) which seems to work well with Android 11. In parallel we are continuously working to implement the changes enforced by Google for the storage access in future c:geo versions. If you notice any issues on your Android 11 device, please kindly let us know on our support channels.
+
 <h4>Map:</h4>
 <ul>
 <li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
