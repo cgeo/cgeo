@@ -189,7 +189,6 @@
     <string name="err_favorite_failed">Misslyckades att ändra favoritstatus.</string>
     <string name="err_select_logimage_failed">Misslyckades att välja bild till loggen.</string>
     <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
-    <string name="err_unsupported_image_format">Bildformat stöds ej.</string>
     <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
     <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
     <string name="err_tb_not_loggable">Detta spårbara objekt är inte loggbart.</string>
@@ -245,7 +244,6 @@
     <string name="info_log_cleared">Loggen har rensats.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater rensade.</string>
     <string name="info_log_type_changed">Typen av logg har ändrats!</string>
-    <string name="info_log_report_problem_changed">Tillgängliga problemrapporter har förändrats!</string>
     <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
     <string name="info_stored_image">Ny bild sparad som:</string>
     <string name="info_cache_saved">Cachen har lagrats lokalt</string>
@@ -717,9 +715,6 @@
     <string name="feature_favorite">Lägger till cachen till dina favoriter</string>
     <string name="feature_voting">Rösta på cacher</string>
     <string name="init_maplines_title">Anpassa kartrader</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Gamla Mapsforge V3</string>
-    <string name="init_mfold_api_description">Vi använder en ny version av Mapsforge kartan som standard. Om du saknar några funktioner eller stöter på problem kan du gå tillbaka till den gamla versionen här.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Närhetsnotifikation</string>
     <string name="init_proximityNotificationGeneral">Allmän närhetsnotifikation på kartan</string>
@@ -790,7 +785,6 @@
         <item quantity="other">%1$d dagar kvar</item>
     </plurals>
     <string name="last_day_available">sista dagen tillgänglig</string>
-    <string name="cache_offline">Sparad lokalt</string>
     <string name="cache_offline_refresh">Uppdatera</string>
     <string name="cache_offline_drop">Ta bort</string>
     <string name="cache_offline_store">Spara</string>
@@ -1497,7 +1491,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en äldre version av Android. Framtida utgåvor av c:geo kanske inte längre är tillgängliga för din enhet.\nTryck på detta meddelande för ytterligare information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Du använder en version av c:geo som verkar vara äldre än ett år. Vissa funktioner kanske inte fungerar längre på grund av förändringar på webbplatsen eller andra tekniska ändringar. Läs vår FAQ om hur du uppgraderar.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Du verkar använda Android 11, vilket c:geo inte har fullt stöd för ännu. Läs vår FAQ för att få mer information om detta.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talande kompass</string>
     <string name="tts_toggle">Växla samtal</string>
@@ -1606,7 +1599,6 @@
     <!-- colors -->
     <string name="color_blue">Blå</string>
     <string name="color_green">Grön</string>
-    <string name="color_grey">Grå</string>
     <string name="color_orange">Orange</string>
     <string name="color_red">Röd</string>
     <string name="color_turquoise">Turkos</string>
@@ -1678,7 +1670,6 @@
     <string name="localfile_intenttitle">c:geo Lokal filhanterare</string>
     <string name="localfile_title">Välj en fil lokalt</string>
     <string name="localfile_cannot_handle">Fel vid läsning av fil, eller så c:geo kan inte hantera denna filtyp.</string>
-    <string name="localfile_foundmap">hittade en kartfil</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Ta emot kartfil</string>
     <string name="receivemapfile_success">Kartfilen togs emot korrekt som \"%s\" och lagrades i kartkatalogen</string>
