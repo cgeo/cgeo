@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- map line width defaults -->
-    <integer name="default_linewidth">7</integer>
     <integer name="default_trailwidth">5</integer>
     <integer name="default_directionwidth">7</integer>
     <integer name="default_routewidth">7</integer>

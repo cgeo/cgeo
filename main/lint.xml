@@ -10,6 +10,9 @@
     <!-- false positives for return values of RxJava subscribe() calls -->
     <issue id="CheckResult" severity="ignore" />
 
+    <!-- avoid outdated lint warnings typically from external libraries -->
+    <issue id="ObsoleteLintCustomCheck" severity="ignore" />
+
     <issue id="DuplicateIds" severity="error" />
     <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="ExportedContentProvider" severity="ignore" />
@@ -18,16 +21,11 @@
     <issue id="GoogleAppIndexingWarning" severity="ignore" />
 
     <issue id="IconDensities" severity="ignore" />
-    <issue id="ImpliedQuantity" severity="ignore" />
-
-    <!-- do not care about incomplete translations -->
-    <issue id="MissingQuantity">
-        <ignore path="res/values-pl/strings.xml" />
-        <ignore path="res/values-ru/strings.xml" />
-    </issue>
 
     <!-- unfinished localizations are okay since we always have English as fallback -->
     <issue id="MissingTranslation" severity="ignore" />
+    <!-- old translation will be deleted by the next crowdin import -->
+    <issue id="ExtraTranslation" severity="ignore" />
 
     <issue id="Registered" severity="ignore" />
     <issue id="RtlHardcoded" severity="ignore" />
@@ -42,16 +40,14 @@
     <issue id="UnusedAttribute" severity="ignore" />
 
     <!-- let translators create more plural strings than needed -->
-    <issue id="UnusedQuantity">
-        <ignore path="res/values-cs/strings.xml" />
-        <ignore path="res/values-lt/strings.xml" />
-        <ignore path="res/values-ru/strings.xml" />
-        <ignore path="res/values-sk/strings.xml" />
-    </issue>
+    <issue id="UnusedQuantity" severity="ignore" />
 
     <!-- resources loaded by dynamic name lookup -->
     <issue id="UnusedResources">
+        <ignore path="res/*/cgeo_logo.png" />
+        <ignore path="res/*/cgeo_sendto.png" />
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
+        <ignore path="res/*/ic_launcher_round.xml" />
         <ignore path="res/values/vpi__colors.xml" />
     </issue>
 </lint>

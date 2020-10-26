@@ -6,6 +6,14 @@
     <!-- we cannot use App Indexing with the GC website -->
     <issue id="GoogleAppIndexingWarning" severity="ignore" />
 
+    <!-- avoid outdated lint warnings typically from external libraries -->
+    <issue id="ObsoleteLintCustomCheck" severity="ignore" />
+
     <issue id="IconMissingDensityFolder" severity="ignore" />
     <issue id="MissingTranslation" severity="ignore" />
+
+    <issue id="UnusedResources">
+        <ignore path="res/*/cgeo.png" />
+        <ignore path="res/*/ic_launcher_contacts_round.xml" />
+    </issue>
 </lint>
