@@ -195,7 +195,6 @@
     <string name="err_favorite_failed">Η αλλαγή κατάστασης του αγαπημένου απέτυχε.</string>
     <string name="err_select_logimage_failed">Η επιλογή μιας εικόνας για το αρχείο καταγραφής απέτυχε.</string>
     <string name="err_acquire_image_failed">Απέτυχε η λήψη εικόνας.</string>
-    <string name="err_unsupported_image_format">Μη υποστηριζόμενη μορφή εικόνας.</string>
     <string name="err_tb_display">Το c:geo δεν μπορεί να εμφανίσει το ανιχνεύσιμο. Είστε σίγουροι ότι είναι ανιχνεύσιμο;</string>
     <string name="err_tb_details_open">To c:geo δεν μπορεί να ανοίξει τις λεπτομέρειες του ανιχνεύσιμου.</string>
     <string name="err_tb_not_loggable">Αυτό το ανιχνεύσιμο δεν δέχεται καταγραφές.</string>
@@ -251,7 +250,6 @@
     <string name="info_log_cleared">Το αρχείο καταγραφής διαγράφτηκε.</string>
     <string name="info_waypoint_coordinates_cleared">Οι συντεταγμένες εκκαθαρίστηκαν.</string>
     <string name="info_log_type_changed">Ο τύπος του αρχείου καταγραφής έχει αλλάξει!</string>
-    <string name="info_log_report_problem_changed">Οι διαθέσιμες αναφορές προβλημάτων έχουν αλλάξει!</string>
     <string name="info_select_logimage_cancelled">Ακυρώθηκε η επιλογή/απαθανάτιση εικόνας.</string>
     <string name="info_stored_image">Η νέα εικόνα αποθηκεύτηκε στο:</string>
     <string name="info_cache_saved">Η κρύπτη έχει αποθηκευτεί τοπικά</string>
@@ -264,7 +262,6 @@
     <string name="err_request_popup_info">το c:geo απέτυχε να ανακτήσει τις πληροφορίες της κρύπτης.</string>
     <string name="warn_log_load_additional_data">Το c:geo απέτυχε να φορτώσει πρόσθετα δεδομένα (ανιχνεύσιμα/αγαπημένα σημεία) για την καταγραφή.</string>
     <string name="more_information">Περισσότερες πληροφορίες</string>
-    <string name="remind_later">Υπενθύμιση αργότερα</string>
     <string name="undo">Αναίρεση</string>
     <string name="dont_show_again">Να μην εμφανιστεί ξανά</string>
     <string name="warn_gm_not_available">Το Google Maps δεν είναι διαθέσιμο.</string>
@@ -745,9 +742,6 @@
     <string name="feature_favorite">Προσθήκη της κρύπτης στις αγαπημένες</string>
     <string name="feature_voting">Ψηφοφορία κρυπτών</string>
     <string name="init_maplines_title">Προσαρμογή γραμμών χάρτη</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Παλιό Mapsforge V3</string>
-    <string name="init_mfold_api_description">Χρησιμοποιούμε μια νέα έκδοση του χάρτη του Mapsforge ως προεπιλογή. Εάν χάνετε ορισμένες δυνατότητες ή αντιμετωπίζετε ζητήματα μπορείτε να πάτε πίσω στην παλιά έκδοση εδώ.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Ειδοποιήσεις εγγύτητας</string>
     <string name="init_proximityNotificationGeneral">Γενική ειδοποίηση εγγύτητας στον χάρτη</string>
@@ -818,7 +812,6 @@
         <item quantity="other">%1$d ημέρες απομένουν</item>
     </plurals>
     <string name="last_day_available">τελευταία διαθέσιμη ημέρα</string>
-    <string name="cache_offline">Εκτός σύνδεσης</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
     <string name="cache_offline_drop">Διαγραφή</string>
     <string name="cache_delete_userdefined_waypoints">Κατάργηση σημείων που ορίσθηκαν από τον χρήστη</string>
@@ -1549,7 +1542,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Αυτή η έκδοση του c: geo δεν είναι πλέον συμβατή με τη συσκευή σας και ενδέχεται να αποτύχει ή να συμπεριφερθεί απροσδόκητα! \nΠατήστε σε αυτό το μήνυμα για περισσότερες πληροφορίες.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Φαίνεται οτι χρησιμοποιείτε το Android 11, το οποίο όμως το c: geo δεν υποστηρίζει ακόμη πλήρως. Διαβάστε τις Συχνές Ερωτήσεις μας για περισσότερες πληροφορίες σχετικά με αυτό.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
     <string name="tts_toggle">Φωνητική καθοδήγηση</string>
@@ -1658,7 +1650,6 @@
     <!-- colors -->
     <string name="color_blue">Μπλέ</string>
     <string name="color_green">Πράσινο</string>
-    <string name="color_grey">Γκρί</string>
     <string name="color_orange">Πορτοκαλί</string>
     <string name="color_red">Κόκκινο</string>
     <string name="color_turquoise">Τυρκουάζ</string>
@@ -1730,7 +1721,6 @@
     <string name="localfile_intenttitle">c:geo διαχειριστής τοπικού αρχείου</string>
     <string name="localfile_title">Άνοιγμα τοπικού αρχείου</string>
     <string name="localfile_cannot_handle">Σφάλμα ανάγνωσης αρχείου ή το c:geo δεν μπορεί να διαχειριστεί αυτόν το τύπο αρχείου.</string>
-    <string name="localfile_foundmap">Βρέθηκε ένα αρχείο χάρτη</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Λήψη αρχείου χάρτη</string>
     <string name="receivemapfile_success">Η λήψη του αρχείου χάρτη ήταν επιτυχής και αποθηκεύτηκε ως \"%s\" στον κατάλογο των χαρτών</string>
