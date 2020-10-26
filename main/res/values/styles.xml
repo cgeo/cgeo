@@ -440,4 +440,9 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <!-- splash screen style -->
+    <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splashscreen_background</item>
+    </style>
+
 </resources>
