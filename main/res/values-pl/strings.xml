@@ -189,7 +189,6 @@
     <string name="err_favorite_failed">Zmiana statusu skrzynki ulubiona nie powiodła się.</string>
     <string name="err_select_logimage_failed">Nie można wybrać obrazu.</string>
     <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
-    <string name="err_unsupported_image_format">Nieobsługiwany format obrazu.</string>
     <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
     <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
     <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
@@ -245,7 +244,6 @@
     <string name="info_log_cleared">Wpis został usunięty.</string>
     <string name="info_waypoint_coordinates_cleared">Współrzędne wyczyszczone.</string>
     <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
-    <string name="info_log_report_problem_changed">Dostępne raporty o problemach uległy zmianie!</string>
     <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
     <string name="info_stored_image">Nowy obraz zapisany w:</string>
     <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
@@ -718,9 +716,6 @@
     <string name="feature_favorite">Dodaj skrzynkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrzynek</string>
     <string name="init_maplines_title">Dostosowanie linii mapy</string>
-    <string name="init_mapsforge_api_title">MapsForge API</string>
-    <string name="init_mfold_api">Stary Mapsforge V3</string>
-    <string name="init_mfold_api_description">Używamy domyślnie nowej wersji mapy Mapsforge. Jeśli brakuje Ci niektórych możliwości lub natrafiasz na problemy możesz przełączyć się tutaj na starą wersję.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Powiadomienie o bliskości</string>
     <string name="init_proximityNotificationGeneral">Ogólnie powiadomienie o bliskości na mapie</string>
@@ -795,7 +790,6 @@
         <item quantity="other">zostało %1$d dni</item>
     </plurals>
     <string name="last_day_available">dostępne ostatni dzień</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Odśwież</string>
     <string name="cache_offline_drop">Usuń</string>
     <string name="cache_offline_store">Zapisz</string>
@@ -1513,7 +1507,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda na to, że używasz starszej wersji Androida. Przyszłe wydania c:geo mogą nie być już dłużej dostępne dla Twojego urządzenia.\nDotknij tej wiadomości, aby uzyskać więcej informacji.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Używasz wersji c:geo, która wydaje się być starsza niż rok. Niektóre funkcje mogą nie działać już ze względu na strony internetowej lub inne zmiany techniczne. Przeczytaj nasze FAQ na temat aktualizacji aplikacji.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Wygląda na to, że używasz Androida 11, którego c:geo nie obsługuje jeszcze w pełni. Przeczytaj nasze FAQ, aby uzyskać więcej informacji na ten temat.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
     <string name="tts_toggle">Przełącz mówienie</string>
@@ -1644,7 +1637,6 @@
     <!-- colors -->
     <string name="color_blue">Niebieski</string>
     <string name="color_green">Zielony</string>
-    <string name="color_grey">Szary</string>
     <string name="color_orange">Pomarańczowy</string>
     <string name="color_red">Czerwony</string>
     <string name="color_turquoise">Turkusowy</string>
@@ -1725,7 +1717,6 @@
     <string name="localfile_intenttitle">c:geo Lokalny Obsługa plików</string>
     <string name="localfile_title">Otwórz plik lokalny</string>
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
-    <string name="localfile_foundmap">znalazł plik mapy</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Odbierz plik mapy</string>
     <string name="receivemapfile_success">Pomyślnie odebrano plik mapy jako \"%s\" i zapisano go w katalogu mapy</string>
