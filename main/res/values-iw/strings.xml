@@ -166,7 +166,6 @@
     <string name="err_favorite_failed">שינוי מצב ה\"מועדף\" כשל.</string>
     <string name="err_select_logimage_failed">בחירת תמונה עבור הלוג כשלה.</string>
     <string name="err_acquire_image_failed">השגת תמונה כשלה.</string>
-    <string name="err_unsupported_image_format">פורמט התמונה אינו נתמך.</string>
     <string name="err_tb_display">c:geo לא יכול להציג את הTrackable שרצית. האם הוא באמת Trackable?</string>
     <string name="err_tb_details_open">c:geo לא יכול לפתוח את פרטי הTrackable.</string>
     <string name="err_tb_not_loggable">Trackable זה אינו ניתן לרישום.</string>
