@@ -196,7 +196,6 @@
     <string name="err_favorite_failed">S\'ha produït un error al canviar l\'estat de preferit.</string>
     <string name="err_select_logimage_failed">S\'ha produït un error en seleccionar una imatge pel registre.</string>
     <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
-    <string name="err_unsupported_image_format">Format d\'imatge no compatible.</string>
     <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
     <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
     <string name="err_tb_not_loggable">Aquest traçable no es pot registrar.</string>
@@ -252,7 +251,6 @@
     <string name="info_log_cleared">El registre ha estat esborrat.</string>
     <string name="info_waypoint_coordinates_cleared">S\'ha eliminat les coordenades.</string>
     <string name="info_log_type_changed">El tipus de registre ha estat canviat.</string>
-    <string name="info_log_report_problem_changed">Ha canviat l\'informe de problemes disponible!</string>
     <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
     <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
     <string name="info_cache_saved">El catxé ha estat desat localment</string>
@@ -265,7 +263,6 @@
     <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
     <string name="warn_log_load_additional_data">c:geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
     <string name="more_information">Més informació</string>
-    <string name="remind_later">Recorda-m\'ho més tard</string>
     <string name="undo">Desfer</string>
     <string name="dont_show_again">No ho tornis a mostrar</string>
     <string name="warn_gm_not_available">Google Maps no està disponible.</string>
@@ -746,9 +743,6 @@
     <string name="feature_favorite">S\'està afegint el catxé als preferits…</string>
     <string name="feature_voting">Votar els catxés</string>
     <string name="init_maplines_title">Personalització de línies de mapes</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">L\'antic Mapsforge v3</string>
-    <string name="init_mfold_api_description">De manera predeterminada, fem servir una nova versió del mapa de Mapsforge. Si falten algunes funcions o teniu problemes, podeu tornar a la versió anterior aquí.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificació de proximitat</string>
     <string name="init_proximityNotificationGeneral">Notificació de proximitat al mapa</string>
@@ -819,7 +813,6 @@
         <item quantity="other">resten %1$d dies</item>
     </plurals>
     <string name="last_day_available">darrer dia disponible</string>
-    <string name="cache_offline">Fora de línia</string>
     <string name="cache_offline_refresh">Actualitza</string>
     <string name="cache_offline_drop">Esborra</string>
     <string name="cache_delete_userdefined_waypoints">Elimineu els punts de ruta definits per l\'usuari</string>
@@ -1548,7 +1541,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que utilitzeu una versió anterior d\'Android. Aquesta versió de c: geo ja no és compatible amb el vostre dispositiu i pot fallar o comportar-se de manera inesperada.\nPrem aquest missatge per obtenir més informació.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Esteu fent servir una versió de c: geo que sembla tenir més d’un any. És possible que algunes funcions ja no funcionin a causa de canvis tècnics. Llegiu les nostres FAQ sobre com actualitzar.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Sembla que utilitzeu Android 11, c: geo encara no és compatible. Llegiu les nostres  FAQ per obtenir més informació.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
     <string name="tts_toggle">Activa/Desact. la veu</string>
@@ -1657,7 +1649,6 @@
     <!-- colors -->
     <string name="color_blue">Blau</string>
     <string name="color_green">Verd</string>
-    <string name="color_grey">Gris</string>
     <string name="color_orange">Taronja</string>
     <string name="color_red">Vermell</string>
     <string name="color_turquoise">Turquesa</string>
@@ -1729,7 +1720,6 @@
     <string name="localfile_intenttitle">gestor de fitxers local c:geo</string>
     <string name="localfile_title">Obrir un fitxer local</string>
     <string name="localfile_cannot_handle">Error en llegir el fitxer o c: geo no pot gestionar aquest tipus de fitxer.</string>
-    <string name="localfile_foundmap">ha trobat un fitxer de mapa</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Rebre un fitxer de mapa</string>
     <string name="receivemapfile_success">El fitxer del mapa s\'ha rebut correctament com a \"%s\" i s\'ha emmagatzemat al directori del mapa</string>
