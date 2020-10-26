@@ -189,7 +189,6 @@
     <string name="err_favorite_failed">Изменение рекомендации не удалось.</string>
     <string name="err_select_logimage_failed">Выбор изображения для записи не удался.</string>
     <string name="err_acquire_image_failed">Ошибка при загрузке изображения.</string>
-    <string name="err_unsupported_image_format">Неподдерживаемый формат изображения.</string>
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
     <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
@@ -245,7 +244,6 @@
     <string name="info_log_cleared">Запись очищена.</string>
     <string name="info_waypoint_coordinates_cleared">Координаты очищены.</string>
     <string name="info_log_type_changed">Тип записи был изменен!</string>
-    <string name="info_log_report_problem_changed">Список доступных проблем изменился!</string>
     <string name="info_select_logimage_cancelled">Выбор изображения был отменен.</string>
     <string name="info_stored_image">Новое изображение сохранено в:</string>
     <string name="info_cache_saved">Тайник был сохранен локально</string>
@@ -719,9 +717,6 @@
     <string name="feature_favorite">Рекомендации тайников</string>
     <string name="feature_voting">Оценка тайников</string>
     <string name="init_maplines_title">Настройка линий карты</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Старый Mapsforge V3</string>
-    <string name="init_mfold_api_description">По умолчанию мы используем новую версию карты Mapsforge. Если вам не хватает некоторых функций или вы столкнулись с проблемами, вы можете вернуться к старой версии здесь.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Уведомление о приближении</string>
     <string name="init_proximityNotificationGeneral">Общее уведомление о близости на карте</string>
@@ -796,7 +791,6 @@
         <item quantity="other">осталось %1$d дней</item>
     </plurals>
     <string name="last_day_available">остался один день</string>
-    <string name="cache_offline">Оффлайн</string>
     <string name="cache_offline_refresh">Обновить</string>
     <string name="cache_offline_drop">Удалить</string>
     <string name="cache_offline_store">Сохранить</string>
@@ -1533,7 +1527,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Похоже, вы используете старую версию Android. Будущие версии c:geo могут быть недоступны для вашего устройства или работать непредсказуемо.\nНажмите на это сообщение для получения дополнительной информации.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Вы используете версию c:geo, которая, скорее всего, устарела больше, чем на год. Некоторые функции больше не работают из-за технических изменений или веб-сайта. Пожалуйста, прочтите FAQ о том, как обновить.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Похоже, вы используете Android 11, который пока не поддерживается c:geo. Пожалуйста, прочтите наш FAQ для получения дополнительной информации об этом.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Говорящий компас</string>
     <string name="tts_toggle">Включить говорилку</string>
@@ -1664,7 +1657,6 @@
     <!-- colors -->
     <string name="color_blue">Синий</string>
     <string name="color_green">Зеленый</string>
-    <string name="color_grey">Серый</string>
     <string name="color_orange">Оранжевый</string>
     <string name="color_red">Красный</string>
     <string name="color_turquoise">Бирюзовый</string>
@@ -1745,7 +1737,6 @@
     <string name="localfile_intenttitle">Обработчик файлов c:geo</string>
     <string name="localfile_title">Открыть файл</string>
     <string name="localfile_cannot_handle">Ошибка чтения файла или c:geo не может обработать этот тип файла.</string>
-    <string name="localfile_foundmap">найден файл карты</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Получить файл карты</string>
     <string name="receivemapfile_success">Файл карты успешно получен как \"%s\" и сохранен в каталог с картами</string>
