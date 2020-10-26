@@ -458,20 +458,41 @@ public class Waypoint implements IWaypoint {
     private static WaypointType parseWaypointType(final String input, final String lastWord) {
         final String lowerInput = input.toLowerCase(Locale.getDefault());
         final String lowerLastWord = lastWord.toLowerCase(Locale.getDefault());
-        for (final WaypointType wpType : WaypointType.values()) {
+
+        //find the LAST (if any) enclosed one-letter-word in the input
+        String enclosedShortIdCandidate = null;
+        final int lastClosingIdx = lowerInput.lastIndexOf(PARSING_TYPE_CLOSE);
+        if (lastClosingIdx > 0) {
+            final int lastOpeningIdx = lowerInput.lastIndexOf(PARSING_TYPE_OPEN, lastClosingIdx);
+            if (lastOpeningIdx >= 0 && lastOpeningIdx + PARSING_TYPE_OPEN.length() + 1 == lastClosingIdx) {
+                enclosedShortIdCandidate = lowerInput.substring(lastClosingIdx - 1, lastClosingIdx);
+            }
+        }
+
+        for (final WaypointType wpType : WaypointType.ALL_TYPES) {
             final String lowerShortId = wpType.getShortId().toLowerCase(Locale.getDefault());
-            if (lowerLastWord.equals(lowerShortId)) {
+            if (lowerLastWord.equals(lowerShortId) || lowerLastWord.contains(PARSING_TYPE_OPEN + lowerShortId + PARSING_TYPE_CLOSE)) {
                 return wpType;
             }
-            if (lowerInput.contains(PARSING_TYPE_OPEN + lowerShortId + PARSING_TYPE_CLOSE)) {
-                return wpType;
+        }
+        if (enclosedShortIdCandidate != null) {
+            for (final WaypointType wpType : WaypointType.ALL_TYPES) {
+                if (enclosedShortIdCandidate.equals(wpType.getShortId().toLowerCase(Locale.getDefault()))) {
+                    return wpType;
+                }
             }
+        }
+        for (final WaypointType wpType : WaypointType.ALL_TYPES) {
             if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
                 return wpType;
             }
+        }
+        for (final WaypointType wpType : WaypointType.ALL_TYPES) {
             if (lowerInput.contains(wpType.id)) {
                 return wpType;
             }
+        }
+        for (final WaypointType wpType : WaypointType.ALL_TYPES) {
             if (lowerInput.contains(wpType.name().toLowerCase(Locale.US))) {
                 return wpType;
             }
