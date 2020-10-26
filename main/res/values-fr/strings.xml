@@ -195,7 +195,6 @@
     <string name="err_favorite_failed">c:geo ne peut pas modifier le status de favori.</string>
     <string name="err_select_logimage_failed">La sélection d\'une image pour la visite a échoué.</string>
     <string name="err_acquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
-    <string name="err_unsupported_image_format">Format de l\'image non pris en charge.</string>
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
     <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
@@ -251,7 +250,6 @@
     <string name="info_log_cleared">La visite a été effacée.</string>
     <string name="info_waypoint_coordinates_cleared">Coordonnées effacées.</string>
     <string name="info_log_type_changed">Le type de visite a été modifié !</string>
-    <string name="info_log_report_problem_changed">La liste des problèmes connus a été mise à jour !</string>
     <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
     <string name="info_stored_image">Nouvelle image sauvée dans :</string>
     <string name="info_cache_saved">La cache a été enregistrée en local</string>
@@ -264,7 +262,6 @@
     <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
     <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger les données supplémentaires (objets voyageurs / points de favori) pour loguer.</string>
     <string name="more_information">Plus d\'informations</string>
-    <string name="remind_later">Me le rappeler plus tard</string>
     <string name="undo">Annuler</string>
     <string name="dont_show_again">Ne plus afficher</string>
     <string name="warn_gm_not_available">Google Maps n\'est pas disponible.</string>
@@ -745,9 +742,6 @@
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
     <string name="init_maplines_title">Personnalisation des traits de la carte</string>
-    <string name="init_mapsforge_api_title">API Mapsforge</string>
-    <string name="init_mfold_api">Ancienne version Mapsforge V3</string>
-    <string name="init_mfold_api_description">Par défaut nous utilisons une nouvelle version des cartes Mapsforge. Si certaines fonctionnalités vous manquent ou si vous rencontrez des problèmes, vous pouvez revenir à l\'ancienne version ici.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notification de proximité</string>
     <string name="init_proximityNotificationGeneral">Notification générale de proximité sur la carte</string>
@@ -818,7 +812,6 @@
         <item quantity="other">%1$d jours restants</item>
     </plurals>
     <string name="last_day_available">dernier jour de disponibilité</string>
-    <string name="cache_offline">Hors-ligne</string>
     <string name="cache_offline_refresh">Actualiser</string>
     <string name="cache_offline_drop">Supprimer</string>
     <string name="cache_delete_userdefined_waypoints">Supprimer les points de passage définis par l\'utilisateur</string>
@@ -1550,7 +1543,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenance en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous semblez utiliser une ancienne version d\'Android. Cette version de c:geo n\'est plus compatible avec votre appareil et pourrait ne pas fonctionner ou se comporter de façon inattendue !\nAppuyez sur ce message pour plus d\'informations.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Vous utilisez une version de c:geo qui semble avoir plus d\'un an. Certaines fonctionnalités peuvent ne plus fonctionner en raison de modifications du site Web geocaching.com ou d\'autres modifications techniques. Veuillez lire notre FAQ pour savoir comment réaliser la mise à jour.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Il semble que vous utilisez Android 11, que c:geo ne supporte pas encore complètement. Veuillez lire notre FAQ pour obtenir plus d\'informations.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
     <string name="tts_toggle">Basculer la synthèse vocale</string>
@@ -1659,7 +1651,6 @@
     <!-- colors -->
     <string name="color_blue">Bleu</string>
     <string name="color_green">Vert</string>
-    <string name="color_grey">Gris</string>
     <string name="color_orange">Orange</string>
     <string name="color_red">Rouge</string>
     <string name="color_turquoise">Turquoise</string>
@@ -1734,7 +1725,6 @@
     <string name="localfile_intenttitle">Gestionnaire de fichiers locaux c:geo</string>
     <string name="localfile_title">Ouvrir un fichier local</string>
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
-    <string name="localfile_foundmap">Fichier carte trouvé</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Carte en cours de réception</string>
     <string name="receivemapfile_success">Fichier carte «%s» reçu avec succès et enregistré dans le dossier des cartes</string>
