@@ -196,7 +196,6 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
-    <string name="err_unsupported_image_format">Kuvamuotoa ei tueta.</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -252,7 +251,6 @@
     <string name="info_log_cleared">Loki tyhjennetty.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaatit poistettu.</string>
     <string name="info_log_type_changed">Lokityyppi on muuttunut!</string>
-    <string name="info_log_report_problem_changed">Käytettävissä olevat virheraportit ovat muuttuneet!</string>
     <string name="info_select_logimage_cancelled">Kuvan valinta tai kaappaus peruutettiin.</string>
     <string name="info_stored_image">Uusi kuva tallennettu paikkaan:</string>
     <string name="info_cache_saved">Kätkö tallennettu paikallisesti</string>
@@ -265,7 +263,6 @@
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
     <string name="more_information">Lisätietoja</string>
-    <string name="remind_later">Muistuta minua myöhemmin</string>
     <string name="undo">Kumoa</string>
     <string name="dont_show_again">Älä näytä uudelleen</string>
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
@@ -758,9 +755,6 @@
     <string name="feature_favorite">Kätköjen lisäys suosikkeihin</string>
     <string name="feature_voting">Kätköjen arvostelu</string>
     <string name="init_maplines_title">Kartan viivojen muokkaus</string>
-    <string name="init_mapsforge_api_title">Mapsforge-rajapinta</string>
-    <string name="init_mfold_api">Vanha Mapsforge V3</string>
-    <string name="init_mfold_api_description">Käytämme oletuksena Mapsforge-kartan uutta versiota. Jos kaipaat joitakin ominaisuuksia tai kohtaat ongelmia, voit palata vanhaan versioon.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Läheisyysilmoitus</string>
     <string name="init_proximityNotificationGeneral">Yleinen läheisyysilmoitus kartalla</string>
@@ -835,7 +829,6 @@
         <item quantity="other">%1$d päivää jäljellä</item>
     </plurals>
     <string name="last_day_available">saatavilla enää tänään</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Päivitä</string>
     <string name="cache_offline_drop">Poista</string>
     <string name="cache_delete_userdefined_waypoints">Poista käyttäjän määrittämät reittipisteet</string>
@@ -1585,7 +1578,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Näyttää siltä, että käytät Android-käyttöjärjestelmän vanhempaa versiota. Voi olla, että päivitykset ja uusimmat ominaisuudet eivät ole välttämättä saatavilla laitteellesi.\nNapauta tästä saadaksesi lisätietoja.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Näytät käyttävän Android 11:ta, joka c:geo ei tue vielä kokonaan. Lue usein kysyttyjä kysymyksiä saadaksesi lisätietoja tästä.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
@@ -1694,7 +1686,6 @@
     <!-- colors -->
     <string name="color_blue">Sininen</string>
     <string name="color_green">Vihreä</string>
-    <string name="color_grey">Harmaa</string>
     <string name="color_orange">Oranssi</string>
     <string name="color_red">Punainen</string>
     <string name="color_turquoise">Turkoosi</string>
@@ -1771,7 +1762,6 @@
     <string name="localfile_intenttitle">c:geo Paikallisen tiedoston käsittelijä</string>
     <string name="localfile_title">Avaa paikallinen tiedosto</string>
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
-    <string name="localfile_foundmap">karttatiedosto löydetty</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Vastaanota karttatiedosto</string>
     <string name="receivemapfile_success">Karttatiedosto otettu vastaan onnistuneesti ja tallennettu karttahakemistoon, nimi on \"%s\"</string>
