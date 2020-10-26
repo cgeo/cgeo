@@ -102,7 +102,6 @@
     <string name="err_missing_auth">用户名或密码未设置</string>
     <string name="err_wrong">错误的用户名或密码</string>
     <string name="err_cache_not_found">未能找到所需的cache。</string>
-    <string name="err_unsupported_image_format">不支持的图像格式</string>
     <string name="err_log_post_failed_ec">看来您的日志没有被张贴。请在 Extremcaching.com 检查一下。</string>
     <string name="err_log_post_failed_gk">看来您的日志没有被张贴。请在 Extremcaching.com 检查一下。</string>
     <string name="err_logimage_post_failed">似乎您的日志映像未上载。请在缓存源网站上进行检查。</string>
