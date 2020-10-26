@@ -194,7 +194,6 @@
     <string name="err_favorite_failed">Ændring af favoritstatus mislykkedes.</string>
     <string name="err_select_logimage_failed">Valg af billede til logbeskeden mislykkedes.</string>
     <string name="err_acquire_image_failed">Optagelse af et billede mislykkedes.</string>
-    <string name="err_unsupported_image_format">Billedformatet understøttes ikke.</string>
     <string name="err_tb_display">c:geo kan ikke vise den forespurgte Trackable. Er det virkelig en Trackable?</string>
     <string name="err_tb_details_open">c:geo kan ikke åbne Trackable-detaljer.</string>
     <string name="err_tb_not_loggable">Denne trackable kan ikke logges.</string>
@@ -250,7 +249,6 @@
     <string name="info_log_cleared">Logbeskeden blev fjernet.</string>
     <string name="info_waypoint_coordinates_cleared">Position nulstillet</string>
     <string name="info_log_type_changed">Typen af logbeskeden blev ændret!</string>
-    <string name="info_log_report_problem_changed">Der er ændringer i tilgængelige problemrapporter!</string>
     <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
     <string name="info_stored_image">Nyt billede gemt til:</string>
     <string name="info_cache_saved">Cachen blev gemt lokalt</string>
@@ -263,7 +261,6 @@
     <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
     <string name="more_information">Mere information</string>
-    <string name="remind_later">Påmind mig senere</string>
     <string name="undo">Fortryd</string>
     <string name="dont_show_again">Vis ikke dette igen</string>
     <string name="warn_gm_not_available">Google Maps er ikke tilgængelig.</string>
@@ -735,9 +732,6 @@
     <string name="feature_favorite">Tilføjer cache til favoritter</string>
     <string name="feature_voting">Afstemning på cacher</string>
     <string name="init_maplines_title">Tilpasning af kortlinjer</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Tidligere Mapsforge V3</string>
-    <string name="init_mfold_api_description">Den aktuelle udgave af c:geo benytter en beta version af det nye Mapsforge kortformat. Hvis du mangler funktionalitet eller oplever problemer kan du vælge at bruge den tidligere version af Mapsforge kortformat her.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Afstandsnotifikation</string>
     <string name="init_proximityNotificationGeneral">Generel afstandsnotifikation på kort</string>
@@ -808,7 +802,6 @@
         <item quantity="other">%1$d dage tilbage</item>
     </plurals>
     <string name="last_day_available">tilgængelig for sidste dag</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Genindlæs</string>
     <string name="cache_offline_drop">Fjern</string>
     <string name="cache_delete_userdefined_waypoints">Slet brugerdefinerede waypoints</string>
@@ -1532,7 +1525,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er under vedligeholdelse.\nDu kan opleve uregelmæssigheder.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Din enhed bruger en ældre version af Android. Denne version af c:geo er ikke længere kompatibel med din enhed, hvilket kan medføre fejl eller uventet opførsel!\nTryk på denne besked for at få yderligere information.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Din enhed bruger en version af c:geo, som er ældre end et år. Tekniske ændringer på benyttede tjenester kan bevirke at nogle funktioner ikke længere fungerer. Læs venligst vores OSS om hvordan du opgraderer.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Din enhed bruger Android 11, som c:geo endnu ikke understøtter fuldt ud. Læs venligst vores OSS for at få mere information.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompas</string>
     <string name="tts_toggle">Skift tekst-til-tale-tilstand</string>
@@ -1641,7 +1633,6 @@
     <!-- colors -->
     <string name="color_blue">Blå</string>
     <string name="color_green">Grøn</string>
-    <string name="color_grey">Grå</string>
     <string name="color_orange">Orange</string>
     <string name="color_red">Rød</string>
     <string name="color_turquoise">Turkis</string>
@@ -1716,7 +1707,6 @@
     <string name="localfile_intenttitle">Intern filhåndtering</string>
     <string name="localfile_title">Åbn en lokal fil</string>
     <string name="localfile_cannot_handle">Fejl ved læsning af fil eller filen har et ukendt format.</string>
-    <string name="localfile_foundmap">kortfil fundet</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Modtag kortfil</string>
     <string name="receivemapfile_success">Kortfil blev modtaget og gemt som \"%s\" i kortmappen</string>
