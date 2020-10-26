@@ -182,7 +182,6 @@
     <string name="err_favorite_failed">Az állapotmódosítás sikertelen.</string>
     <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
     <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
-    <string name="err_unsupported_image_format">Nem támogatott képformátum.</string>
     <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
     <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni az utazó adatait.</string>
     <string name="err_tb_not_loggable">Ezt az utazót nem lehet logolni.</string>
@@ -238,7 +237,6 @@
     <string name="info_log_cleared">A bejegyzés törölve.</string>
     <string name="info_waypoint_coordinates_cleared">Koordináták törölve.</string>
     <string name="info_log_type_changed">A bejegyzés típusa módosítva!</string>
-    <string name="info_log_report_problem_changed">Elérhető problémajelentések megváltoztak!</string>
     <string name="info_select_logimage_cancelled">A kép kiválasztása vagy készítése meg lett szakítva.</string>
     <string name="info_stored_image">Új kép mentési helyének megadása:</string>
     <string name="info_cache_saved">Láda adati letöltve</string>
@@ -649,8 +647,6 @@
     <string name="feature_search_geocode">Keresés geokód alapján</string>
     <string name="feature_search_owner">Keresés tulajdonos alapján</string>
     <string name="feature_search_finder">Keresés megtalálók alapján</string>
-    <string name="init_mfold_api">Régi Mapsforge V3</string>
-    <string name="init_mfold_api_description">Alapértelmezés szerint a Mapforge-térkép új verzióját használjuk. Ha hiányzik néhány funkció, vagy problémákat tapasztalsz, akkor itt visszatérhetsz a régi verzióhoz.</string>
     <!-- proximity notification -->
     <string name="far_distance">far distance</string>
     <string name="near_distance">near distance</string>
@@ -1425,7 +1421,6 @@
     <!-- colors -->
     <string name="color_blue">Kék</string>
     <string name="color_green">Zöld</string>
-    <string name="color_grey">Szürke</string>
     <string name="color_orange">Narancssárga</string>
     <string name="color_red">Piros</string>
     <string name="color_turquoise">Türkizkék</string>
