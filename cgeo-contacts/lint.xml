@@ -6,7 +6,7 @@
     <!-- we cannot use App Indexing with the GC website -->
     <issue id="GoogleAppIndexingWarning" severity="ignore" />
 
-    <!-- avoid outdated lint warnings typicly from external libraries -->
+    <!-- avoid outdated lint warnings typically from external libraries -->
     <issue id="ObsoleteLintCustomCheck" severity="ignore" />
 
     <issue id="IconMissingDensityFolder" severity="ignore" />

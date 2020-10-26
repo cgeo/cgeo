@@ -10,7 +10,7 @@
     <!-- false positives for return values of RxJava subscribe() calls -->
     <issue id="CheckResult" severity="ignore" />
 
-    <!-- avoid outdated lint warnings typicly from external libraries -->
+    <!-- avoid outdated lint warnings typically from external libraries -->
     <issue id="ObsoleteLintCustomCheck" severity="ignore" />
 
     <issue id="DuplicateIds" severity="error" />
