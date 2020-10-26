@@ -196,7 +196,6 @@
     <string name="err_favorite_failed">A alteração da atribuição de favorito falhou.</string>
     <string name="err_select_logimage_failed">A selecção da imagem para o registo falhou.</string>
     <string name="err_acquire_image_failed">A obtenção da imagem falhou.</string>
-    <string name="err_unsupported_image_format">Formato de imagem não suportado.</string>
     <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
     <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
@@ -252,7 +251,6 @@
     <string name="info_log_cleared">O registo foi limpo.</string>
     <string name="info_waypoint_coordinates_cleared">Coordenadas limpas.</string>
     <string name="info_log_type_changed">O tipo de registo seleccionado foi alterado!</string>
-    <string name="info_log_report_problem_changed">Foram alteradas as opções disponíveis para relatar um problema!</string>
     <string name="info_select_logimage_cancelled">Foi cancelada a selecção ou captura de imagem.</string>
     <string name="info_stored_image">Nova imagem guardada em:</string>
     <string name="info_cache_saved">A cache foi armazenada localmente</string>
@@ -265,7 +263,6 @@
     <string name="err_request_popup_info">O c:geo não conseguiu obter as informações resumidas da geocache.</string>
     <string name="warn_log_load_additional_data">O c:geo falhou ao carregar dados adicionais (de trackables/pontos de favoritos) para o registo.</string>
     <string name="more_information">Mais informação</string>
-    <string name="remind_later">Lembrar-me mais tarde</string>
     <string name="undo">Anular</string>
     <string name="dont_show_again">Não mostrar novamente</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
@@ -759,9 +756,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
     <string name="feature_voting">Dar votação a caches</string>
     <string name="init_maplines_title">Personalização das linhas do mapa</string>
-    <string name="init_mapsforge_api_title">Biblioteca Mapsforge</string>
-    <string name="init_mfold_api">Antigo Mapsforge V3</string>
-    <string name="init_mfold_api_description">Estamos a usar uma versão nova do mapa Mapsforge por predefinição. Se notar falta de alguma funcionalidade ou deparar-se com problemas, pode voltar para a versão antiga aqui.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Notificação de proximidade</string>
     <string name="init_proximityNotificationGeneral">Notificação geral de prox. no mapa</string>
@@ -832,7 +826,6 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="other">%1$d dias restantes</item>
     </plurals>
     <string name="last_day_available">último dia disponível</string>
-    <string name="cache_offline">Armazenada</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Remover</string>
     <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
@@ -1582,7 +1575,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece que está a usar uma versão antiga do Android. Esta versão do c:geo não é compatível com o seu dispositivo e pode falhar, ou comportar-se inesperadamente!\nToque nesta mensagem para obter mais informações.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, devido ao sítio Web ou a outras alterações técnicas. Por favor, leia as nossas FAQ para saber como actualizar.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Parece que está a usar um dispositivo com o Android 11, que o c:geo ainda não suporta completamente. Por favor, leia as nossas FAQ para obter mais informações sobre isso.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
     <string name="tts_toggle">Ligar/desligar a fala</string>
@@ -1691,7 +1683,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <!-- colors -->
     <string name="color_blue">Azul</string>
     <string name="color_green">Verde</string>
-    <string name="color_grey">Cinzento</string>
     <string name="color_orange">Laranja</string>
     <string name="color_red">Vermelho</string>
     <string name="color_turquoise">Turquesa</string>
@@ -1763,7 +1754,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="localfile_intenttitle">Processamento de ficheiros locais do c:geo</string>
     <string name="localfile_title">Abrir um ficheiro local</string>
     <string name="localfile_cannot_handle">Erro ao ler o ficheiro ou o c:geo não consegue processar este tipo de ficheiro.</string>
-    <string name="localfile_foundmap">encontrado um ficheiro de mapa</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Receber um ficheiro de mapa</string>
     <string name="receivemapfile_success">O ficheiro de mapa foi recebido com sucesso como \"%s\" e guardado no directório de mapas</string>
