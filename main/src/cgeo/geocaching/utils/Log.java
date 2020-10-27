@@ -4,6 +4,7 @@ import cgeo.geocaching.storage.LocalStorage;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.Locale;
 import java.util.Properties;
 
 public final class Log {
@@ -106,7 +107,7 @@ public final class Log {
             return null;
         }
         try {
-            return LogLevel.valueOf(logProps.getProperty(propName).toUpperCase());
+            return LogLevel.valueOf(logProps.getProperty(propName).toUpperCase(Locale.US));
         } catch (Exception e) {
             return null;
         }

@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Locale;
 
 /**
  * Helper class to construct log messages. Optimized to log what is happening in a method,
@@ -16,7 +17,7 @@ import java.util.Collection;
  */
 public class ContextLogger implements Closeable {
 
-    private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
+    private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
     static {
         DATETIME_FORMAT.setTimeZone(Calendar.getInstance().getTimeZone());
     }
