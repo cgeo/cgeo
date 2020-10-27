@@ -605,7 +605,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">آخر يوم متاح</string>
-    <string name="cache_offline">وضع عدم الاتصال</string>
     <string name="cache_offline_refresh">تحديث</string>
     <string name="cache_offline_drop">إزالة</string>
     <string name="cache_offline_store">تخزين</string>

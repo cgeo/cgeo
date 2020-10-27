@@ -192,7 +192,6 @@
     <string name="err_favorite_failed">호감캐시 상태를 바꾸지 못했습니다.</string>
     <string name="err_select_logimage_failed">찾지못함 로그에 대한 사진을 선택하는 중</string>
     <string name="err_acquire_image_failed">사진 가져오기 실패</string>
-    <string name="err_unsupported_image_format">지원되지 않는 이미지 형식입니다.</string>
     <string name="err_tb_display">원하시는 추적아이템을 표시할 수 없습니다. 정말 추적아이템이 맞나요?</string>
     <string name="err_tb_details_open">추적아이템 상세정보를 열 수 없습니다.</string>
     <string name="err_tb_not_loggable">이 추적아이템은 로그할 수 없습니다.</string>
@@ -248,7 +247,6 @@
     <string name="info_log_cleared">로그를 비웠습니다.</string>
     <string name="info_waypoint_coordinates_cleared">좌표가 지워졌습니다.</string>
     <string name="info_log_type_changed">로그 유형이 변경되었습니다!</string>
-    <string name="info_log_report_problem_changed">사용할 수 있는 문제점 신고가 변경 되었습니다!</string>
     <string name="info_select_logimage_cancelled">사진 선택 또는 캡처가 취소되었습니다.</string>
     <string name="info_stored_image">새로운 사진 저장 위치 :</string>
     <string name="info_cache_saved">캐시가 기기에 저장되었습니다.</string>
@@ -260,7 +258,6 @@
     <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
     <string name="more_information">자세한 정보 보기</string>
-    <string name="remind_later">나중에 다시 보기</string>
     <string name="undo">실행취소</string>
     <string name="warn_gm_not_available">구글 지도를 사용할 수 없습니다.</string>
     <string name="switch_to_mf">구글 프레이 서비스가 오래되었습니다. 대신 Mapsforge 지도 제공자로 전환 하시겠습니까?</string>
@@ -722,9 +719,6 @@
     <string name="feature_favorite">호감캐시로 추가중…</string>
     <string name="feature_voting">캐시 투표하기</string>
     <string name="init_maplines_title">지도선 맞춤</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">예전 Mapsforge V3</string>
-    <string name="init_mfold_api_description">기본으로 새로운 Mapsforge 지도 버전을 사용합니다. 어떤 기능이 없거나, 문제점을 발견했다면 여기에서 예전 버전으로 되돌릴 수 있습니다.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">근접성 알림</string>
     <string name="init_proximityNotificationGeneral">지도상의 일반 근접성 알림</string>
@@ -793,7 +787,6 @@
         <item quantity="other">%1$d 일 남음</item>
     </plurals>
     <string name="last_day_available">오늘만 가능합니다.</string>
-    <string name="cache_offline">오프라인</string>
     <string name="cache_offline_refresh">새로 고침</string>
     <string name="cache_offline_drop">제거</string>
     <string name="cache_offline_store">저장</string>
@@ -1499,7 +1492,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com 이 유지보수중입니다.\n여러가지 문제를 만날 수 있습니다.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">이전 버전의 안드로이드를 사용하고있는 것 같습니다. 이 c:geo 버전은 더 이상 장치와 호환되지 않으며 예기치 않게 작동하지 않을 수 있습니다!\n자세한 내용을 보려면이 메시지를 누르십시오.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1 년 이상 된 것으로 보이는 c:geo 버전을 사용하고 있습니다. 일부 기능은 웹 사이트 또는 기타 기술 변경으로 인해 더 이상 작동하지 않을 수 있습니다. 업그레이드 방법에 대한 FAQ를 읽어보십시오.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">c:geo가 아직 완전히 지원하지 않는 안드로이드 11을 사용중인 것 같습니다. 안드로이드 지원에 대한 자세한 정보는 FAQ를 참조하십시오.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
     <string name="tts_toggle">말하기 전환</string>
@@ -1597,7 +1589,6 @@
     <!-- colors -->
     <string name="color_blue">파란색</string>
     <string name="color_green">녹색</string>
-    <string name="color_grey">회색</string>
     <string name="color_orange">주황색</string>
     <string name="color_red">빨간색</string>
     <string name="color_turquoise">청록색</string>
@@ -1672,7 +1663,6 @@
     <string name="localfile_intenttitle">c:geo 로컬 파일 핸들러</string>
     <string name="localfile_title">로컬 파일 열기</string>
     <string name="localfile_cannot_handle">파일 읽기 오류 또는 c:geo가 이 파일 유형을 처리 할 수 없습니다.</string>
-    <string name="localfile_foundmap">지도 파일을 찾았습니다</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">지도 파일 받기</string>
     <string name="receivemapfile_success">지도 파일이 \"%s\"(으)로 수신되어 지도 디렉토리에 저장되었습니다.</string>

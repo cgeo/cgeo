@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Kuva</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -195,7 +196,6 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
-    <string name="err_unsupported_image_format">Kuvamuotoa ei tueta.</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -251,7 +251,6 @@
     <string name="info_log_cleared">Loki tyhjennetty.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaatit poistettu.</string>
     <string name="info_log_type_changed">Lokityyppi on muuttunut!</string>
-    <string name="info_log_report_problem_changed">Käytettävissä olevat virheraportit ovat muuttuneet!</string>
     <string name="info_select_logimage_cancelled">Kuvan valinta tai kaappaus peruutettiin.</string>
     <string name="info_stored_image">Uusi kuva tallennettu paikkaan:</string>
     <string name="info_cache_saved">Kätkö tallennettu paikallisesti</string>
@@ -264,7 +263,6 @@
     <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
     <string name="more_information">Lisätietoja</string>
-    <string name="remind_later">Muistuta minua myöhemmin</string>
     <string name="undo">Kumoa</string>
     <string name="dont_show_again">Älä näytä uudelleen</string>
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
@@ -578,6 +576,7 @@
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
     <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
+    <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
@@ -593,9 +592,12 @@
     <string name="init_summary_livelist">Suunta kätkölle näytetään listauksessa</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
+    <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
     <string name="init_restore_title">Palauta varmuuskopio</string>
     <string name="init_backup_caches">Kätköllä ei ole reittipisteitä</string>
     <string name="init_backup_program_settings">ohjelman asetukset</string>
+    <string name="init_backup_logins">Sisällytä käyttäjätiedot</string>
+    <string name="init_backup_logins_summary">Tämä tallentaa syöttämäsi kirjautumistiedot varmuuskopioon.</string>
     <string name="init_backup">Varmuuskopioi kätköt / reittipisteet</string>
     <string name="init_backup_backup">Varmuuskopiointi</string>
     <string name="init_backup_finished">Varmuuskopiointi valmis</string>
@@ -604,12 +606,20 @@
     <string name="init_backup_restore">Palauta</string>
     <string name="init_restore_restored">Palautus valmis</string>
     <string name="init_backup_start_restore">Aloita palautus</string>
+    <string name="init_backup_restore_different_backup">Palauta toinen varmuuskopio</string>
     <string name="init_backup_backup_history">Varmuuskopioi historia</string>
+    <string name="init_backup_history_length_title">Varmuuskopioiden maksimimäärä</string>
+    <string name="init_backup_history_length_summary">Päätä, kuinka monta varmuuskopiota säilytetään. Kun raja on saavutettu, vanhimmat poistetaan automaattisesti.</string>
+    <string name="init_backup_history_length_min">Vain viimeisin</string>
+    <string name="init_backup_history_length_max">Pidä kaikki</string>
+    <string name="init_backup_history_delete_warning">Olet tallentanut enemmän varmuuskopioita kuin määritetty maksimiarvo sallii. Haluatko varmasti poistaa kaikki ylimääräiset varmuuskopiot?</string>
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
+    <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
+    <string name="backup_confirm_overwrite">Haluatko korvata vanhimman olemassa olevan varmuuskopion kohteesta %s?</string>
     <string name="restore_confirm_overwrite_database">VAROITUS: Tämä korvaa kohteen %s laitteellasi!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROITUS: Tämä korvaa kohteen %s ja nykyiset asetuksesi laitteellasi!</string>
     <string name="restore_confirm_overwrite_settings">VAROITUS: Tämä korvaa nykyiset asetuksesi laitteellasi!</string>
@@ -745,9 +755,6 @@
     <string name="feature_favorite">Kätköjen lisäys suosikkeihin</string>
     <string name="feature_voting">Kätköjen arvostelu</string>
     <string name="init_maplines_title">Kartan viivojen muokkaus</string>
-    <string name="init_mapsforge_api_title">Mapsforge-rajapinta</string>
-    <string name="init_mfold_api">Vanha Mapsforge V3</string>
-    <string name="init_mfold_api_description">Käytämme oletuksena Mapsforge-kartan uutta versiota. Jos kaipaat joitakin ominaisuuksia tai kohtaat ongelmia, voit palata vanhaan versioon.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Läheisyysilmoitus</string>
     <string name="init_proximityNotificationGeneral">Yleinen läheisyysilmoitus kartalla</string>
@@ -768,6 +775,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Yhdistetty (%d karttaa, odota hetki...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Yhdistetyt (%d karttaa, %d ominaisuutta): klikkaa saadaksesi lisätietoja</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Yhdistetty (%d karttaa): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Yhdistetyn kartan ominaisuudet</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
     <string name="init_sendToCgeo_name">Laitteen nimi</string>
@@ -818,7 +829,6 @@
         <item quantity="other">%1$d päivää jäljellä</item>
     </plurals>
     <string name="last_day_available">saatavilla enää tänään</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Päivitä</string>
     <string name="cache_offline_drop">Poista</string>
     <string name="cache_delete_userdefined_waypoints">Poista käyttäjän määrittämät reittipisteet</string>
@@ -1038,6 +1048,7 @@
     <string name="cc_hint_minutes">minuuttia</string>
     <string name="cc_hint_seconds">sekuntia</string>
     <string name="cc_hint_fraction">murto-osa</string>
+    <string name="lowercase">pienet kirjaimet</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Etsitään tiedostoja\nkohteesta</string>
@@ -1531,6 +1542,22 @@
     <string name="attribute_challengecache_no">Ei haastekätkö</string>
     <string name="attribute_hqsolutionchecker_yes">Geocaching.com:in tarkistin saatavilla</string>
     <string name="attribute_hqsolutionchecker_no">Geocaching.com:in tarkistin ei saatavilla</string>
+    <string name="attribute_handicaching_yes">Arvosteltu Handicaching.comissa</string>
+    <string name="attribute_handicaching_no">Ei arvosteltu Handicaching.comissa</string>
+    <string name="attribute_munzee_yes">Sisältää Munzeen</string>
+    <string name="attribute_munzee_no">Ei sisällä Munzeeta</string>
+    <string name="attribute_ads_yes">Sisältää mainontaa</string>
+    <string name="attribute_ads_no">Ei sisällä mainontaa</string>
+    <string name="attribute_military_area_yes">Sotilaallinen koulutusalue</string>
+    <string name="attribute_military_area_no">Ei sotilaallinen koulutusalue</string>
+    <string name="attribute_video_surveil_yes">Videovalvonnan alainen alue</string>
+    <string name="attribute_video_surveil_no">Alue ei ole videovalvonnan alainen</string>
+    <string name="attribute_trackables_yes">Soveltuu reissaajille</string>
+    <string name="attribute_trackables_no">Ei sovellu reissaajille</string>
+    <string name="attribute_historic_yes">Hylätty rakenne / rauniot</string>
+    <string name="attribute_historic_no">Ei hylättyä rakennetta / Ei raunioita</string>
+    <string name="attribute_blind_people_yes">Soveltuu sokeille</string>
+    <string name="attribute_blind_people_no">Ei sovellu sokeille</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1551,7 +1578,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com-sivua huolletaan.\nSaatat törmätä useisiin ongelmiin.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Näyttää siltä, että käytät Android-käyttöjärjestelmän vanhempaa versiota. Voi olla, että päivitykset ja uusimmat ominaisuudet eivät ole välttämättä saatavilla laitteellesi.\nNapauta tästä saadaksesi lisätietoja.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Näytät käyttävän Android 11:ta, joka c:geo ei tue vielä kokonaan. Lue usein kysyttyjä kysymyksiä saadaksesi lisätietoja tästä.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
@@ -1660,7 +1686,6 @@
     <!-- colors -->
     <string name="color_blue">Sininen</string>
     <string name="color_green">Vihreä</string>
-    <string name="color_grey">Harmaa</string>
     <string name="color_orange">Oranssi</string>
     <string name="color_red">Punainen</string>
     <string name="color_turquoise">Turkoosi</string>
@@ -1737,7 +1762,6 @@
     <string name="localfile_intenttitle">c:geo Paikallisen tiedoston käsittelijä</string>
     <string name="localfile_title">Avaa paikallinen tiedosto</string>
     <string name="localfile_cannot_handle">Virhe luettaessa tiedostoa tao c:geo ei pysty käsittelemään tätä tiedostomuotoa.</string>
-    <string name="localfile_foundmap">karttatiedosto löydetty</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Vastaanota karttatiedosto</string>
     <string name="receivemapfile_success">Karttatiedosto otettu vastaan onnistuneesti ja tallennettu karttahakemistoon, nimi on \"%s\"</string>

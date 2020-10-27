@@ -196,7 +196,6 @@
     <string name="err_favorite_failed">Ändern des Favoriten-Status ist fehlgeschlagen.</string>
     <string name="err_select_logimage_failed">Auswahl eines Bildes für das Log ist fehlgeschlagen.</string>
     <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
-    <string name="err_unsupported_image_format">Nicht unterstütztes Bildformat.</string>
     <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
     <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
     <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
@@ -252,7 +251,6 @@
     <string name="info_log_cleared">Log wurde geleert.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinaten gelöscht.</string>
     <string name="info_log_type_changed">Logtyp wurde verändert!</string>
-    <string name="info_log_report_problem_changed">Verfügbare Problemberichte haben sich geändert!</string>
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
     <string name="info_stored_image">Neues Foto gespeichert nach:</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
@@ -265,7 +263,6 @@
     <string name="err_request_popup_info">c:geo konnte die Cache-Popup Informationen nicht herunterladen.</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
-    <string name="remind_later">Später erinnern</string>
     <string name="undo">Rückgängig</string>
     <string name="dont_show_again">Nicht erneut anzeigen</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
@@ -758,9 +755,6 @@
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
     <string name="feature_voting">Cache bewerten</string>
     <string name="init_maplines_title">Anpassung der Kartenlinien</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Alte Mapsforge V3</string>
-    <string name="init_mfold_api_description">Wir nutzen standardmäßig eine neue Version der Mapsforge-Karte. Wenn du einige Funktionen vermisst oder Fehler feststellst, kannst du hier zur alten Version zurückkehren.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Annäherungsbenachrichtigung</string>
     <string name="init_proximityNotificationGeneral">Allgemeine Benachrichtigung auf der Karte</string>
@@ -781,6 +775,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombiniert (%d Karten, bitte warten...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Kombiniert (%d Karten, %d Zuordnungen): Für Details klicken</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Kombiniert (%d Karten): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Zuordnung der kombinierten Karten</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
     <string name="init_sendToCgeo_name">Name des Endgerätes</string>
@@ -831,7 +829,6 @@
         <item quantity="other">noch %1$d Tage verbleibend</item>
     </plurals>
     <string name="last_day_available">letzter Tag verfügbar</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Aktualisieren</string>
     <string name="cache_offline_drop">Entfernen</string>
     <string name="cache_delete_userdefined_waypoints">Benutzerdefinierte Wegpunkte löschen</string>
@@ -1581,7 +1578,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com wird gerade gewartet.\nDaher könnten einige Dinge nicht funktionieren.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Du scheinst eine ältere Version von Android zu verwenden. Diese Version von c:geo ist nicht mehr mit deinem Gerät kompatibel und kann Fehler produzieren oder sich unerwartet verhalten!\nTippe auf diese Nachricht für weitere Informationen.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Deine Version von c:geo scheint älter als ein Jahr zu sein. Möglicherweise funktionieren aufgrund von Webseiten- oder anderen technischen Änderungen einige Dinge nicht mehr. Lies unsere FAQ zum Thema Upgrade.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Du scheinst Android 11 zu verwenden, was von c:geo noch nicht vollständig unterstützt wird. Bitte lies unsere FAQ für weitere Informationen.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
     <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
@@ -1690,7 +1686,6 @@
     <!-- colors -->
     <string name="color_blue">Blau</string>
     <string name="color_green">Grün</string>
-    <string name="color_grey">Grau</string>
     <string name="color_orange">Orange</string>
     <string name="color_red">Rot</string>
     <string name="color_turquoise">Türkis</string>
@@ -1767,7 +1762,6 @@
     <string name="localfile_intenttitle">c:geo Lokaler Dateimanager</string>
     <string name="localfile_title">Eine lokale Datei öffnen</string>
     <string name="localfile_cannot_handle">Fehler beim Lesen der Datei oder c:geo kennt diesen Dateityp nicht.</string>
-    <string name="localfile_foundmap">Kartendatei gefunden</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Empfange Kartendatei</string>
     <string name="receivemapfile_success">Kartendatei erfolgreich als \"%s\" empfangen und im lokalen Kartenverzeichnis gespeichert</string>

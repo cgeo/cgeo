@@ -192,7 +192,6 @@
     <string name="err_favorite_failed">改变favorite状态失败。</string>
     <string name="err_select_logimage_failed">选择图片失败。</string>
     <string name="err_acquire_image_failed">获取图片失败。</string>
-    <string name="err_unsupported_image_format">不支持的图像格式</string>
     <string name="err_tb_display">c:geo无法展示你想要的可跟踪物。它真是是一个可跟踪物吗？</string>
     <string name="err_log_post_failed_ec">看来您的日志没有被张贴。请在 Extremcaching.com 检查一下。</string>
     <string name="err_log_post_failed_gk">看来您的日志没有被张贴。请在 Extremcaching.com 检查一下。</string>

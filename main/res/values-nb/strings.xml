@@ -183,7 +183,6 @@
     <string name="err_favorite_failed">Endring av favorittstatus mislyktes.</string>
     <string name="err_select_logimage_failed">Valg av bilde til loggen mislyktes.</string>
     <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
-    <string name="err_unsupported_image_format">Bildeformatet støttes ikke.</string>
     <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
     <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
     <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
@@ -238,7 +237,6 @@
     <string name="info_log_cleared">Loggen ble slettet.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinater fjernet.</string>
     <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
-    <string name="info_log_report_problem_changed">Tilgjengelige problemrapporter har endret seg.</string>
     <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
     <string name="info_stored_image">Nytt bilde lagret til:</string>
     <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
@@ -666,9 +664,6 @@
     <string name="feature_favorite">Legger cachen til dine favoritter</string>
     <string name="feature_voting">Avstemming for cacher</string>
     <string name="init_maplines_title">Tilpassing av kartlinjer</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Gamle Mapsforge V3</string>
-    <string name="init_mfold_api_description">Vi bruker en ny versjon av Mapsforge-kart som standardinnstilling. Hvis du savner noen funksjon eller har problemer med det nye, kan du velge å gå tilbake til den gamle versjonen her.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nærhetsvarsler</string>
     <string name="init_proximityNotificationGeneral">Generell nærhetsvarsling på kart</string>
@@ -728,7 +723,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">siste dag tilgjengelig</string>
-    <string name="cache_offline">Lagret lokalt</string>
     <string name="cache_offline_refresh">Oppdater</string>
     <string name="cache_offline_drop">Fjern</string>
     <string name="cache_offline_store">Lagre</string>
@@ -1497,7 +1491,6 @@
     <!-- colors -->
     <string name="color_blue">Blå</string>
     <string name="color_green">Grønn</string>
-    <string name="color_grey">Grå</string>
     <string name="color_orange">Oransje</string>
     <string name="color_red">Rød</string>
     <string name="color_turquoise">Turkis</string>
@@ -1534,7 +1527,6 @@
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
-    <string name="localfile_foundmap">fant en kartfil</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Motta kartfil</string>
     <string name="receivemapfile_option_overwrite">Overskriv</string>

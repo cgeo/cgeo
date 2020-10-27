@@ -195,7 +195,6 @@
     <string name="err_favorite_failed">Zmena stavu \"Obľúbená\" zlyhala.</string>
     <string name="err_select_logimage_failed">Výber obrázka pre log zlyhal.</string>
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
-    <string name="err_unsupported_image_format">Nepodporovaný formát obrázka.</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
     <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
@@ -251,7 +250,6 @@
     <string name="info_log_cleared">Log bol vyprázdnený.</string>
     <string name="info_waypoint_coordinates_cleared">Súradnice vymazané.</string>
     <string name="info_log_type_changed">Typ logu bol zmenený!</string>
-    <string name="info_log_report_problem_changed">Dostupné hlásenia problému sa zmenili!</string>
     <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
     <string name="info_stored_image">Nový obrázok uložený do:</string>
     <string name="info_cache_saved">Skrýša bola uložená v zariadení</string>
@@ -264,7 +262,6 @@
     <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
     <string name="warn_log_load_additional_data">Aplikácii c:geo sa nepodarilo načítať ďalšie údaje (trasovateľné predmety/favoritné body) na logovanie.</string>
     <string name="more_information">Ďalšie informácie</string>
-    <string name="remind_later">Pripomenúť mi neskôr</string>
     <string name="undo">Späť</string>
     <string name="dont_show_again">Nabudúce nezobrazovať</string>
     <string name="warn_gm_not_available">Mapy Google sú nedostupné.</string>
@@ -746,9 +743,6 @@
     <string name="feature_favorite">Pridanie skrýše medzi obľúbené</string>
     <string name="feature_voting">Hlasovanie pre kešky</string>
     <string name="init_maplines_title">Prispôsobenie čiar na mape</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Staré Mapsforge V3</string>
-    <string name="init_mfold_api_description">Štandardne využívame novú verziu mapy Mapsforge. Ak vám chýbajú nejaké funkcie, prípadne sa vyskytli nejaké problémy, tu sa môžete vrátiť k starej verzii.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Upozornenie na vzdialenosť</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornenie na vzdialenosť na mape</string>
@@ -823,7 +817,6 @@
         <item quantity="other">%1$d dní zostáva</item>
     </plurals>
     <string name="last_day_available">ostáva posledný deň</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Obnoviť</string>
     <string name="cache_offline_drop">Odstrániť</string>
     <string name="cache_delete_userdefined_waypoints">Odstrániť vlastné body trasy</string>
@@ -1568,7 +1561,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vyzerá to tak, že používate staršiu verziu Androidu. Ďalšie vydania c:geo už pre vaše zariadenie nemusia byť dostupné.\nKliknite na túto správu pre ďalšie informácie.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používate verziu c:geo, ktorá vyzerá byť staršia ako jeden rok. Niektoré funkcie už nemusia fungovať z dôvodu zmien webstránky alebo technických zmien. Prečítajte si náš FAQ na tému možnosti aktualizácie.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Vyzerá to tak, že používaš Android 11, ktorý c:geo zatiaľ úplne nepodporuje. Prečítaj si náš FAQ pre viac informácií.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Hovoriaci kompas</string>
     <string name="tts_toggle">Prepnúť hlasové pokyny</string>
@@ -1699,7 +1691,6 @@
     <!-- colors -->
     <string name="color_blue">Modrá</string>
     <string name="color_green">Zelená</string>
-    <string name="color_grey">Sivá</string>
     <string name="color_orange">Oranžová</string>
     <string name="color_red">Červená</string>
     <string name="color_turquoise">Tyrkysová</string>
@@ -1780,7 +1771,6 @@
     <string name="localfile_intenttitle">Lokálny správca súborov c:geo</string>
     <string name="localfile_title">Otvoriť lokálny súbor</string>
     <string name="localfile_cannot_handle">Chyba počas čítania súboru alebo c:geo nevie pracovať s týmto druhom súboru.</string>
-    <string name="localfile_foundmap">nájdený mapový súbor</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Získať mapový súbor</string>
     <string name="receivemapfile_success">Mapový súbor bol úspešne získaný ako \"%s\" a uložený do priečinka máp</string>

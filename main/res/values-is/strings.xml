@@ -422,7 +422,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
-    <string name="cache_offline">Án netsambands</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
     <string name="cache_offline_store">Vista</string>
     <string name="cache_offline_stored">Vistað í tæki</string>

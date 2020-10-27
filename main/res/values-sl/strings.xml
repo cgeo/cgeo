@@ -540,7 +540,6 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
-    <string name="cache_offline">Brez povezave</string>
     <string name="cache_offline_refresh">Osveži</string>
     <string name="cache_offline_store">Shrani</string>
     <string name="cache_offline_stored">Shranjeno na napravi</string>

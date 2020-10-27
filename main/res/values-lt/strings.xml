@@ -189,7 +189,6 @@
     <string name="err_favorite_failed">Nepavyko pakeisti mėgiamos slėptuvės statuso.</string>
     <string name="err_select_logimage_failed">Nepavyko pasirinkti nuotraukos slėptuvės įrašui.</string>
     <string name="err_acquire_image_failed">Nepavyko pasiekti nuotraukos.</string>
-    <string name="err_unsupported_image_format">Nepalaikomas vaizdo formatas.</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
@@ -244,7 +243,6 @@
     <string name="info_log_cleared">Įrašas išvalytas.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinatės išvalytos.</string>
     <string name="info_log_type_changed">Įrašo tipas buvo pakeistas!</string>
-    <string name="info_log_report_problem_changed">Galimos problemos ataskaitos pasikeitė!</string>
     <string name="info_select_logimage_cancelled">Nuotraukos pasirinkimas ar fotografavimas buvo atšauktas.</string>
     <string name="info_stored_image">Nauja nuotrauka įrašyta į:</string>
     <string name="info_cache_saved">Slėptuvė buvo išsaugota įrenginyje</string>
@@ -684,9 +682,6 @@
     <string name="feature_search_finder">Paieška pagal radėją</string>
     <string name="feature_favorite">Pridėti slėptuvę prie mėgiamų</string>
     <string name="feature_voting">Balsuojama už slėptuves</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Senasis Mapsforge V3</string>
-    <string name="init_mfold_api_description">Pagal nutylėjimą naudojame naują Mapforge žemėlapio versiją. Jei pasigedote kai kurių funkcijų arba susiduriate su problemomis, galite grįžti į senąją versiją.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Priartėjimo pranešimas</string>
     <string name="far_distance">Tolimas atstumas</string>
@@ -755,7 +750,6 @@
         <item quantity="other">liko %1$d dienų</item>
     </plurals>
     <string name="last_day_available">liko paskutine diena</string>
-    <string name="cache_offline">Išsaugota</string>
     <string name="cache_offline_refresh">Naujinti</string>
     <string name="cache_offline_drop">Pašalinti</string>
     <string name="cache_offline_store">Saugoti</string>
@@ -1569,7 +1563,6 @@
     <!-- colors -->
     <string name="color_blue">Mėlyna</string>
     <string name="color_green">Žalia</string>
-    <string name="color_grey">Pilka</string>
     <string name="color_orange">Oranžinė</string>
     <string name="color_red">Raudona</string>
     <string name="color_turquoise">Turkis</string>

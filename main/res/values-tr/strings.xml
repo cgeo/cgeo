@@ -191,7 +191,6 @@
     <string name="err_favorite_failed">Favori durumunu değiştirme başarısız oldu.</string>
     <string name="err_select_logimage_failed">Kayıt için görsel seçimi başarısız oldu.</string>
     <string name="err_acquire_image_failed">Görsel alımı başarısız oldu.</string>
-    <string name="err_unsupported_image_format">Desteklenmeyen görsel formatı.</string>
     <string name="err_tb_display">c:geo istediğin Trackable\'ı görüntüleyemez. Bu gerçekten bir trackable mi?</string>
     <string name="err_tb_details_open">c:geo Trackable\'ın ayrıntılarını açamıyor.</string>
     <string name="err_tb_not_loggable">Bu trackable kaydedilebilir değil.</string>
@@ -247,7 +246,6 @@
     <string name="info_log_cleared">Kayıt temizlendi.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinatlar silindi.</string>
     <string name="info_log_type_changed">Kaydın türü değiştirildi!</string>
-    <string name="info_log_report_problem_changed">Mevcut sorun raporları değişti!</string>
     <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
     <string name="info_stored_image">Yeni görsel kaydedildi:</string>
     <string name="info_cache_saved">Geocache yerel olarak kaydedildi</string>
@@ -259,7 +257,6 @@
     <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
     <string name="warn_log_load_additional_data">c:geo kayıt için ek bilgileri (trackable\'lar/favori puanları) yüklemede başarısız oldu.</string>
     <string name="more_information">Daha fazla bilgi</string>
-    <string name="remind_later">Daha sonra hatırlat</string>
     <string name="undo">Geri al</string>
     <string name="dont_show_again">Yeniden gösterme</string>
     <string name="warn_gm_not_available">Google Maps mevcut değildir.</string>
@@ -698,9 +695,6 @@
     <string name="feature_search_geocode">Geocode\'a göre ara</string>
     <string name="feature_search_owner">Sahibine göre ara</string>
     <string name="feature_search_finder">Bulanlara göre ara</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Eski Mapsforge V3</string>
-    <string name="init_mfold_api_description">Mapsforge haritasının yeni bir versiyonunu varsayılan olarak kullanıyoruz. Eğer bazı özellikleri kullanamıyorsanız veya sorun yaşarsanız eski versiyona buradan dönebilirsiniz.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Mesafe bildirimi</string>
     <string name="init_proximityNotificationGeneral">Haritada genel mesafe bildirimi</string>
@@ -769,7 +763,6 @@
         <item quantity="other">%1$d gün kaldı</item>
     </plurals>
     <string name="last_day_available">mevcut olan son gün</string>
-    <string name="cache_offline">Çevrimdışı</string>
     <string name="cache_offline_refresh">Yenile</string>
     <string name="cache_offline_drop">Sil</string>
     <string name="cache_offline_store">Kaydet</string>
@@ -1574,7 +1567,6 @@
     <!-- colors -->
     <string name="color_blue">Mavi</string>
     <string name="color_green">Yeşil</string>
-    <string name="color_grey">Gri</string>
     <string name="color_orange">Turuncu</string>
     <string name="color_red">Kırmızı</string>
     <string name="color_turquoise">Turkuaz</string>
@@ -1613,7 +1605,6 @@
     <string name="delete_setting">Ayarları sil</string>
     <string name="edit_setting">\'\'%s\'\' ayarlarını düzenle</string>
     <!-- HandleLocalFilesActivity -->
-    <string name="localfile_foundmap">bir harita dosyası bulundu</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_option_overwrite">Üzerine yaz</string>
     <string name="receivemapfile_option_differentname">Farklı isim</string>

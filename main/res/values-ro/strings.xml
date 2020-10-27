@@ -595,7 +595,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">ultima zi disponibilă</string>
-    <string name="cache_offline">Salvată</string>
     <string name="cache_offline_refresh">Împrospătează</string>
     <string name="cache_offline_drop">Şterge</string>
     <string name="cache_offline_store">Salvează</string>

@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">%s</string>
@@ -195,7 +196,6 @@
     <string name="err_favorite_failed">Wijzigen favorieten status is mislukt.</string>
     <string name="err_select_logimage_failed">Selecteren van een foto voor het log is mislukt.</string>
     <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
-    <string name="err_unsupported_image_format">Beeldformaat niet ondersteund.</string>
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
     <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
@@ -251,7 +251,6 @@
     <string name="info_log_cleared">Log is gewist.</string>
     <string name="info_waypoint_coordinates_cleared">Coördinaten gewist.</string>
     <string name="info_log_type_changed">Type log is gewijzigd!</string>
-    <string name="info_log_report_problem_changed">Beschikbare probleemrapporten zijn gewijzigd!</string>
     <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
     <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
     <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
@@ -264,7 +263,6 @@
     <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
     <string name="more_information">Meer informatie</string>
-    <string name="remind_later">Herinner mij later</string>
     <string name="undo">Ongedaan maken</string>
     <string name="dont_show_again">Niet meer weergeven</string>
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
@@ -578,6 +576,7 @@
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
+    <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
@@ -756,9 +755,6 @@
     <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
     <string name="feature_voting">Stemmen op caches</string>
     <string name="init_maplines_title">Kaartlijn aanpassingen</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Oude Mapsforge V3</string>
-    <string name="init_mfold_api_description">We gebruiken standaard een nieuwe versie van de Mapsforge kaart. Als je sommige functies mist of problemen tegenkomt, kun je hier terug naar de oude versie.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Nabijheidsmelding</string>
     <string name="init_proximityNotificationGeneral">Algemene nabijheidsmelding op kaart</string>
@@ -779,6 +775,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Gecombineerd (%d kaarten, even geduld...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Gecombineerd (%d kaarten, %d attributen): klik voor details</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Gecombineerd (%d kaarten): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Gecombineerde toewijzing van kaarten</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
     <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
@@ -829,7 +829,6 @@
         <item quantity="other">%1$d dagen resterend</item>
     </plurals>
     <string name="last_day_available">laatste dag beschikbaar</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Verversen</string>
     <string name="cache_offline_drop">Verwijderen</string>
     <string name="cache_delete_userdefined_waypoints">Gebruiker gedefinieerde waypoints verwijderen</string>
@@ -1579,7 +1578,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Het lijkt erop dat je een oudere versie van Android gebruikt. Deze versie van c:geo is niet langer compatibel met je apparaat en kan mogelijk niet werken of onverwacht gedrag vertonen.\nTik op dit bericht voor meer informatie.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Je gebruikt een versie van c:geo die ouder lijkt te zijn dan één jaar. Sommige functies werken mogelijk niet meer vanwege de website of andere technische wijzigingen. Lees onze FAQ over hoe je kunt upgraden.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Je lijkt Android 11 te gebruiken, wat c:geo nog niet volledig ondersteunt. Lees onze FAQ voor meer info hierover.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
     <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
@@ -1688,7 +1686,6 @@
     <!-- colors -->
     <string name="color_blue">Blauw</string>
     <string name="color_green">Groen</string>
-    <string name="color_grey">Grijs</string>
     <string name="color_orange">Oranje</string>
     <string name="color_red">Rood</string>
     <string name="color_turquoise">Turquoise</string>
@@ -1765,7 +1762,6 @@
     <string name="localfile_intenttitle">c:geo Lokale bestandsafhandeling</string>
     <string name="localfile_title">Lokaal bestand openen</string>
     <string name="localfile_cannot_handle">Fout bij lezen van het bestand of c:geo kan dit bestandstype niet verwerken.</string>
-    <string name="localfile_foundmap">kaartbestand gevonden</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Kaartbestand ontvangen</string>
     <string name="receivemapfile_success">Kaartbestand succesvol ontvangen als \"%s\" en opgeslagen in kaarten map</string>

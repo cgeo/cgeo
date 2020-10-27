@@ -189,7 +189,6 @@
     <string name="err_favorite_failed">Favorīta statusa maiņa neizdevās.</string>
     <string name="err_select_logimage_failed">Attēlu atlasīšana priekš pierakstīšanās neizdevās.</string>
     <string name="err_acquire_image_failed">Attēla iegūšana neizdevās.</string>
-    <string name="err_unsupported_image_format">Neatbalstīts attēla formāts.</string>
     <string name="err_tb_display">c:geo nevar parādīt ceļotājus, kurus izvēlējāties. Vai tie patiešām ir ceļotāji?</string>
     <string name="err_tb_details_open">c:geo nevar atvērt ceļotāja datus.</string>
     <string name="err_tb_not_loggable">Šis ceļotājs nav reģistrējams.</string>
@@ -245,7 +244,6 @@
     <string name="info_log_cleared">Ieraksts tika dzēsts.</string>
     <string name="info_waypoint_coordinates_cleared">Koordinātas nodzēstas.</string>
     <string name="info_log_type_changed">Pieraksta tips tika mainīts!</string>
-    <string name="info_log_report_problem_changed">Pieejamie paziņojamo problēmu veidi ir mainījušies!</string>
     <string name="info_select_logimage_cancelled">Attēla atlase vai uzņemšana tika atcelta.</string>
     <string name="info_stored_image">Jauns attēls tika saglabāts:</string>
     <string name="info_cache_saved">Slēpnis ir saglabāts tavā ierīcē bezsaistē</string>
@@ -702,8 +700,6 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="feature_search_finder">Meklēt pēc atradēja</string>
     <string name="feature_favorite">Slēpņa pievienošana favorītiem</string>
     <string name="feature_voting">Balsot par slēpņiem</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Vecais Mapsforge V3</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Paziņojums par tuvumu</string>
     <string name="pn_text_only">Tikai teksts</string>
@@ -765,7 +761,6 @@ https://manual.cgeo.org/en/basicuse</string>
         <item quantity="other">atlikušas %1$d dienas</item>
     </plurals>
     <string name="last_day_available">pieejama pēdējo dienu</string>
-    <string name="cache_offline">Bezsaistes režīmā</string>
     <string name="cache_offline_refresh">Atjaunot</string>
     <string name="cache_offline_drop">Noņemt</string>
     <string name="cache_offline_store">Saglabāt</string>
@@ -1565,7 +1560,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- colors -->
     <string name="color_blue">Zils</string>
     <string name="color_green">Zaļš</string>
-    <string name="color_grey">Pelēks</string>
     <string name="color_orange">Oranžs</string>
     <string name="color_red">Sarkans</string>
     <string name="color_turquoise">Tirkīzs</string>

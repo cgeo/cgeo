@@ -595,7 +595,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">tersedia dihari terakhir</string>
-    <string name="cache_offline">Tidak aktif</string>
     <string name="cache_offline_refresh">Segarkan</string>
     <string name="cache_offline_drop">Hapus</string>
     <string name="cache_offline_store">Toko</string>

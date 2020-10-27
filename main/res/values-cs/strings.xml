@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Tento hráč oznámil, že keš by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -195,7 +196,6 @@
     <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
     <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
-    <string name="err_unsupported_image_format">Nepodporovaný formát obrázku.</string>
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
@@ -251,7 +251,6 @@
     <string name="info_log_cleared">Zápis byl vyprázdněn.</string>
     <string name="info_waypoint_coordinates_cleared">Souřadnice smazány.</string>
     <string name="info_log_type_changed">Typ logu byl změněn!</string>
-    <string name="info_log_report_problem_changed">Dostupná hlášení problémů se změnila!</string>
     <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
     <string name="info_stored_image">Nový obrázek uložen do:</string>
     <string name="info_cache_saved">Keš uložena pro lokální použití</string>
@@ -264,7 +263,6 @@
     <string name="err_request_popup_info">c:geu se nepodařilo otevřít informace o keši.</string>
     <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
     <string name="more_information">Další informace</string>
-    <string name="remind_later">Připomenout později</string>
     <string name="undo">Zpět</string>
     <string name="dont_show_again">Znovu nezobrazovat</string>
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
@@ -580,6 +578,7 @@
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_archived">Vyloučit archivované</string>
     <string name="init_summary_archived">Vyloučit archivované keše</string>
+    <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
@@ -595,9 +594,12 @@
     <string name="init_summary_livelist">Zobrazovat směr v seznamu keší</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
+    <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat keše, trasové body &amp; nastavení, ale žádné obrázky keší. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
     <string name="init_restore_title">Obnovit zálohu</string>
     <string name="init_backup_caches">keše a trasové body</string>
     <string name="init_backup_program_settings">nastavení programu</string>
+    <string name="init_backup_logins">Zahrnout údaje o účtu</string>
+    <string name="init_backup_logins_summary">Tímto do zálohy uložíte zadané přihlašovací údaje.</string>
     <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_finished">Zálohování dokončeno</string>
@@ -606,12 +608,20 @@
     <string name="init_backup_restore">Obnovit</string>
     <string name="init_restore_restored">Obnova dokončena</string>
     <string name="init_backup_start_restore">Spustit obnovení</string>
+    <string name="init_backup_restore_different_backup">Obnovit odlišnou zálohu</string>
     <string name="init_backup_backup_history">Historie záloh</string>
+    <string name="init_backup_history_length_title">Maximální počet uložených záloh</string>
+    <string name="init_backup_history_length_summary">Rozhodněte, kolik záloh by mělo být zachováno. Když je dosaženo limitu, ty nejstarší budou automaticky odstraněny.</string>
+    <string name="init_backup_history_length_min">Pouze nedávné</string>
+    <string name="init_backup_history_length_max">Zachovat všechny</string>
+    <string name="init_backup_history_delete_warning">Uložili jste více záloh, než umožňuje vaše nakonfigurovaná maximální hodnota. Opravdu chcete odstranit všechny přebytečné zálohy?</string>
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
     <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
+    <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku na zálohy. Vytvořili jste již za poslední minutu zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
+    <string name="backup_confirm_overwrite">Opravdu chceš přesat nejstarší existující zálohu z %s?</string>
     <string name="restore_confirm_overwrite_database">VAROVÁNÍ: Toto přepíše %s na vašem zařízení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROVÁNÍ: Toto přepíše %s a vaše aktuální nastavení na vašem zařízení!</string>
     <string name="restore_confirm_overwrite_settings">VAROVÁNÍ: Toto přepíše vaše aktuální nastavení na vašem zařízení!</string>
@@ -747,9 +757,6 @@
     <string name="feature_favorite">Přidání keše do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
     <string name="init_maplines_title">Přizpůsobení čar na mapě</string>
-    <string name="init_mapsforge_api_title">Mapsforge API</string>
-    <string name="init_mfold_api">Staré Mapsforge V3</string>
-    <string name="init_mfold_api_description">Ve výchozím nastavení používáme novou verzi mapy Mapsforge, pokud si necháte ujít některé funkce nebo se setkáte s problémy, které se můžete vrátit zpět do staré verze.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Upozornění na vzdálenost</string>
     <string name="init_proximityNotificationGeneral">Všeobecné upozornění na vzdálenost na mapě</string>
@@ -770,6 +777,10 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombinovaná (%d map, čekejte prosím...)</string>
+    <string name="map_source_osm_offline_combined_attribution_details">Kombinovaná (%d map, %d atributů): klikněte pro podrobnosti</string>
+    <string name="map_source_osm_offline_combined_attribution_single">Kombinovaná (%d map): %s</string>
+    <string name="map_source_osm_offline_combined_attribution_dialog_title">Kombinovaný zdroj map</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
@@ -824,7 +835,6 @@
         <item quantity="other">zbývá %1$d dnů</item>
     </plurals>
     <string name="last_day_available">zbývá poslední den</string>
-    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Aktualizovat</string>
     <string name="cache_offline_drop">Odstranit</string>
     <string name="cache_delete_userdefined_waypoints">Odstranit uživatelsky definovatelné trasové body</string>
@@ -1054,6 +1064,7 @@
     <string name="cc_hint_minutes">minuty</string>
     <string name="cc_hint_seconds">sekundy</string>
     <string name="cc_hint_fraction">zlomek</string>
+    <string name="lowercase">malá písmena</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Hledání souborů\nv</string>
@@ -1587,7 +1598,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Právě probíhá údržba geocaching.com.\nMohou se vyskytnout různé potíže.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi sytému Android. Tato verze c:geo již není kompatibilní s vaším zařízením a může selhávat nebo se chovat neočekávaně!\nKlepněte na tuto zprávu pro další informace.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používáte verzi c:geo, která se zdá být starší než jeden rok. Některé funkce již nemusí fungovat kvůli změnám na webu nebo jiným technickým změnám. Přečtěte si prosím naše FAQ na téma jak aktualizovat na nejnovější verzi.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Zdá se, že používáte Android 11, který c:geo ještě plně nepodporuje. Přečtěte si prosím naše FAQ, abyste o tom získali více informací.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mluvící kompas</string>
     <string name="tts_toggle">Přepnout hlasové pokyny</string>
@@ -1718,7 +1728,6 @@
     <!-- colors -->
     <string name="color_blue">Modrá</string>
     <string name="color_green">Zelená</string>
-    <string name="color_grey">Šedá</string>
     <string name="color_orange">Oranžová</string>
     <string name="color_red">Červená</string>
     <string name="color_turquoise">Tyrkysová</string>
@@ -1799,7 +1808,6 @@
     <string name="localfile_intenttitle">Lokální správce souborů c:geo</string>
     <string name="localfile_title">Otevřít místní soubor</string>
     <string name="localfile_cannot_handle">Chyba při čtení souboru nebo c:geo neumí s tímto typem souboru pracovat.</string>
-    <string name="localfile_foundmap">nalezený mapový soubor</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Získat mapový soubor</string>
     <string name="receivemapfile_success">Mapový soubor byl úspěšně získán jako \"%s\" a uložen do adresáře s mapou</string>
