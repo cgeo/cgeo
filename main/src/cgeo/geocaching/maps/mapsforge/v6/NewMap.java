@@ -199,6 +199,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private Viewport lastViewport = null;
     private boolean lastCompactIconMode = false;
 
+    private MapMode mapMode;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -270,6 +272,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         final DragHandler dragHandler = new DragHandler(this);
         mapView.setOnMapDragListener(dragHandler);
 
+        mapMode = (mapOptions != null && mapOptions.mapMode != null) ? mapOptions.mapMode : MapMode.LIVE;
+
         // prepare initial settings of mapView
         if (mapOptions.mapState != null) {
             this.mapView.getModel().mapViewPosition.setCenter(MapsforgeUtils.toLatLong(mapOptions.mapState.getCenter()));
@@ -306,7 +310,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void postZoomToViewport(final Viewport viewport) {
-        mapView.post(() -> mapView.zoomToViewport(viewport));
+        mapView.post(() -> mapView.zoomToViewport(viewport, this.mapMode));
     }
 
     @Override
@@ -1620,7 +1624,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void savePrefs() {
-        Settings.setMapZoom(MapMode.SINGLE, mapView.getMapZoomLevel());
+        Settings.setMapZoom(this.mapMode, mapView.getMapZoomLevel());
         Settings.setMapCenter(new MapsforgeGeoPoint(mapView.getModel().mapViewPosition.getCenter()));
     }
 
