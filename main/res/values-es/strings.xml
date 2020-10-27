@@ -787,7 +787,7 @@
         <item quantity="other">quedan %1$d días</item>
     </plurals>
     <string name="last_day_available">último día disponible</string>
-    <string name="cache_offline">Guardado</string>
+    <string name="cache_offline">Desconectado</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Eliminar</string>
     <string name="cache_offline_store">Guardar</string>
