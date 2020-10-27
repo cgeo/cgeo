@@ -183,20 +183,31 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         }
 
 
+
         @Override
         public CharSequence getMapAttribution(final Context ctx) {
-            final MapFile mf = createMapFile(this.fileName);
-            try {
-                final String attr = getAttributionFromMapFile(mf);
-                return getName() + (attr == null ? "" : ": " + attr.trim());
-            } finally {
-                if (mf != null) {
-                    mf.close();
-                }
-            }
+            return getName() + " " + ctx.getString(R.string.map_source_osm_offline_attribution_pleasewait);
         }
 
+        @Override
+        public void setMapAttributionTo(final TextView textView) {
+            super.setMapAttributionTo(textView);
+
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                final MapFile mf = createMapFile(this.fileName);
+                try {
+                    final String attr = getAttributionFromMapFile(mf);
+                    return getName() + (attr == null ? "" : ": " + attr.trim());
+                } finally {
+                    if (mf != null) {
+                        mf.close();
+                    }
+                }
+            },
+            textView::setText);
+        }
    }
+
     public static final class CyclosmMapSource extends MapsforgeMapSource {
 
         public CyclosmMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
@@ -310,14 +321,12 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                 } else {
                     textView.setText(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_details,
                         fileNames.size(), triple.middle.size()));
-                    textView.setOnClickListener(v -> {
-                        new AlertDialog.Builder(textView.getContext())
-                            .setTitle(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_dialog_title))
-                            .setItems((String[]) CollectionStream.of(triple.left).toArray(String.class), null)
-                            .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
-                            .create()
-                            .show();
-                    });
+                    textView.setOnClickListener(v -> new AlertDialog.Builder(textView.getContext())
+                        .setTitle(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_dialog_title))
+                        .setItems((String[]) CollectionStream.of(triple.left).toArray(String.class), null)
+                        .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
+                        .create()
+                        .show());
                 }
             });
         }
