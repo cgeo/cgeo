@@ -113,7 +113,7 @@ public class TrailHistoryExport {
                 gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
                 gpx.attribute(NS_XSI, "schemaLocation", NS_GPX + " " + GPX_SCHEMA);
 
-                    final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
                     formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
                     gpx.startTag(NS_GPX, "metadata");

@@ -22,6 +22,7 @@ import androidx.gridlayout.widget.GridLayout;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,7 +81,7 @@ public class CalculatorVariable extends LinearLayout {
         }
 
         public void switchToLowerCase() {
-            this.expression = this.expression.toLowerCase();
+            this.expression = this.expression.toLowerCase(Locale.US);
         }
     }
 

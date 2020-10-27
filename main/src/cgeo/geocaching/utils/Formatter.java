@@ -103,7 +103,7 @@ public final class Formatter {
      */
     @NonNull
     public static String formatDateForFilename(final long date) {
-        return new SimpleDateFormat("yyyy-MM-dd HH-mm").format(date);
+        return new SimpleDateFormat("yyyy-MM-dd HH-mm", Locale.getDefault()).format(date);
     }
 
     /**

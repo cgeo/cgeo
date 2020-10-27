@@ -44,6 +44,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -408,7 +409,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         while (direction >= 360f) {
             direction -= 360f;
         }
-        deviceHeading.setText(String.format("%3.1f°", direction));
+        deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
             deviceOrientationMode.setTextDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
@@ -419,7 +420,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     /** formats a float to a decimal with length 4 and no places behind comma. Handles "-0" case. */
     private static String formatDecimalFloat(final float value) {
-        final String formattedValue = String.format("% 4.0f", value);
+        final String formattedValue = String.format(Locale.US, "% 4.0f", value);
         if (formattedValue.endsWith("-0")) {
             return "   0";
         }
