@@ -813,7 +813,7 @@ https://manual.cgeo.org/pt/basicuse</string>
         <item quantity="other">%1$d dias restantes</item>
     </plurals>
     <string name="last_day_available">último dia disponível</string>
-    <string name="cache_offline">Armazenada</string>
+    <string name="cache_offline">Offline</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Remover</string>
     <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
