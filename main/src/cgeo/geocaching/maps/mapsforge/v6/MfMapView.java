@@ -89,12 +89,12 @@ public class MfMapView extends MapView {
         getModel().mapViewPosition.setZoomLevel((byte) zoomLevel);
     }
 
-    public void zoomToViewport(final Viewport viewport) {
+    public void zoomToViewport(final Viewport viewport, final MapMode mapMode) {
 
         getModel().mapViewPosition.setCenter(new LatLong(viewport.getCenter().getLatitude(), viewport.getCenter().getLongitude()));
 
         if (viewport.bottomLeft.equals(viewport.topRight)) {
-            setMapZoomLevel(Settings.getMapZoom(MapMode.SINGLE));
+            setMapZoomLevel(Settings.getMapZoom(mapMode));
         } else {
             final int tileSize = getModel().displayModel.getTileSize();
             final byte newZoom = LatLongUtils.zoomForBounds(new Dimension(getWidth(), getHeight()),
