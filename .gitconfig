@@ -1,0 +1,9 @@
+# Merge strategy "ours" is a dummy merge strategy only returning "true" which means files using this merge strategy will not be processed in case of merging, except if fast forwarding is applied.
+# For translated strings we do not want automatic merging between branches as Crowdin will deliver translations to each branch as needed.
+# Including these files when merging branches would often result in merge conflicts as we receive regular changes on both branches from Crowdin.
+# IMPORTANT: 
+# In order to make use of this config after you cloned the c:geo repository you need to apply the following command on your local c:geo repository as the content of .gitconfig is not automatically applied to prevent security vulnerabilities: "git config --local include.path ../.gitconfig"
+
+# Define merge strategy "ours"
+[merge "ours"]
+	driver = true
