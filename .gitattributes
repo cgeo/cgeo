@@ -1,0 +1,12 @@
+# For translated strings we do not want automatic merging between branches as Crowdin will deliver translations to each branch as needed
+# Including these files when merging branches would often result in conflicts as we receive regular changes on both branches from Crowdin
+# The merge strategy ours is a dummy merge strategy only returning "true" as defined in .gitconfig for this repository.
+# This will result in the files mentioned here not being processed during merge
+
+# Ignore translated strings
+/main/res/values-*/strings.xml merge=ours
+/cgeo-contacts/res/values-*/strings.xml merge=ours
+
+# Ignore translated playstore description 
+/main/project/playstore/description/translated/* merge=ours
+/cgeo-contacts/project/playstore/description/translated/* merge=ours
