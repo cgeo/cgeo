@@ -48,6 +48,8 @@ public class LogEntry implements Parcelable {
     @NonNull public final LogType logType;
     /** The author */
     @NonNull public final String author;
+    /** The author guid */
+    @NonNull public final String authorGuid;
     /** The log message */
     @NonNull public final String log;
     /** The log date */
@@ -81,6 +83,7 @@ public class LogEntry implements Parcelable {
         serviceLogId = in.readString();
         logType = (LogType) in.readSerializable();
         author = in.readString();
+        authorGuid = in.readString();
         log = in.readString();
         date = in.readLong();
         found = in.readInt();
@@ -99,6 +102,7 @@ public class LogEntry implements Parcelable {
         dest.writeString(serviceLogId);
         dest.writeSerializable(logType);
         dest.writeString(author);
+        dest.writeString(authorGuid);
         dest.writeString(log);
         dest.writeLong(date);
         dest.writeInt(found);
@@ -137,6 +141,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         protected LogType logType = LogType.UNKNOWN;
         @NonNull protected String author = "";
+        @NonNull protected String authorGuid = "";
         @NonNull protected String log = "";
         protected long date = 0;
         protected int found = -1;
@@ -203,6 +208,17 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setAuthor(@NonNull final String author) {
             this.author = author;
+            return (T) this;
+        }
+
+        /**
+         * Set {@link LogEntry} author guid.
+         *
+         * @param authorGuid The author guid
+         */
+        @NonNull
+        public T setAuthorGuid(@NonNull final String authorGuid) {
+            this.authorGuid = authorGuid;
             return (T) this;
         }
 
@@ -327,6 +343,7 @@ public class LogEntry implements Parcelable {
         this.serviceLogId = builder.serviceLogId;
         this.logType = builder.logType;
         this.author = StringUtils.defaultIfBlank(builder.author, Settings.getUserName());
+        this.authorGuid = builder.authorGuid;
         this.log = builder.log;
         this.date = builder.date;
         this.found = builder.found;
@@ -349,6 +366,7 @@ public class LogEntry implements Parcelable {
                 .setServiceLogId(serviceLogId)
                 .setLogType(logType)
                 .setAuthor(author)
+                .setAuthorGuid(authorGuid)
                 .setLog(log)
                 .setDate(date)
                 .setFound(found)

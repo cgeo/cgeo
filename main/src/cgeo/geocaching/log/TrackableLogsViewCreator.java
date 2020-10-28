@@ -77,7 +77,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected View.OnClickListener createUserActionsListener(final LogEntry log) {
-        return UserClickListener.forUser(trackable, StringEscapeUtils.unescapeHtml4(log.author));
+        return UserClickListener.forUser(trackable, StringEscapeUtils.unescapeHtml4(log.author), log.authorGuid);
     }
 
 }

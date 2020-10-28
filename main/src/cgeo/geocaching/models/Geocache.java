@@ -106,6 +106,7 @@ public class Geocache implements IWaypoint {
     private UncertainProperty<CacheType> cacheType = new UncertainProperty<>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
     private String name = "";
     private String ownerDisplayName = "";
+    private String ownerGuid = "";
     private String ownerUserId = "";
     @Nullable
     private Date hidden = null;
@@ -608,6 +609,10 @@ public class Geocache implements IWaypoint {
      */
     public String getOwnerDisplayName() {
         return ownerDisplayName;
+    }
+
+    public String getOwnerGuid() {
+        return ownerGuid;
     }
 
     @NonNull
@@ -1245,6 +1250,10 @@ public class Geocache implements IWaypoint {
 
     public void setOwnerDisplayName(final String ownerDisplayName) {
         this.ownerDisplayName = ownerDisplayName;
+    }
+
+    public void setOwnerGuid(final String ownerGuid) {
+        this.ownerGuid = ownerGuid;
     }
 
     public void setOwnerUserId(final String ownerUserId) {

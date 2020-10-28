@@ -526,6 +526,7 @@ public final class GCParser {
 
             // owner
             cache.setOwnerDisplayName(StringEscapeUtils.unescapeHtml4(TextUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_DISPLAYNAME, true, cache.getOwnerDisplayName())));
+            cache.setOwnerGuid(TextUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER_GUID, true, cache.getOwnerGuid()));
 
             // hidden
             try {
@@ -1508,11 +1509,12 @@ public final class GCParser {
             /*
              * 1. Type (image)
              * 2. Date
-             * 3. Author
-             * 4. Cache-GUID
-             * 5. <ignored> (strike-through property for ancient caches)
-             * 6. Cache-name
-             * 7. Log text
+             * 3. Author-GUID
+             * 4. Author
+             * 5. Cache-GUID
+             * 6. <ignored> (strike-through property for ancient caches)
+             * 7. Cache-name
+             * 8. Log text
              */
             while (matcherLogs.find()) {
                 long date = 0;
@@ -1522,14 +1524,15 @@ public final class GCParser {
                 }
 
                 final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
-                        .setAuthor(TextUtils.stripHtml(matcherLogs.group(3)).trim())
+                        .setAuthor(TextUtils.stripHtml(matcherLogs.group(4)).trim())
+                        .setAuthorGuid(matcherLogs.group(3))
                         .setDate(date)
                         .setLogType(LogType.getByIconName(matcherLogs.group(1)))
-                        .setLog(matcherLogs.group(7).trim());
+                        .setLog(matcherLogs.group(8).trim());
 
-                if (matcherLogs.group(4) != null && matcherLogs.group(6) != null) {
-                    logDoneBuilder.setCacheGuid(matcherLogs.group(4));
-                    logDoneBuilder.setCacheName(matcherLogs.group(6));
+                if (matcherLogs.group(5) != null && matcherLogs.group(7) != null) {
+                    logDoneBuilder.setCacheGuid(matcherLogs.group(5));
+                    logDoneBuilder.setCacheName(matcherLogs.group(7));
                 }
 
                 // Apply the pattern for images in a trackable log entry against each full log (group(0))
@@ -1660,6 +1663,7 @@ public final class GCParser {
                     final LogEntry.Builder logDoneBuilder = new LogEntry.Builder()
                             .setServiceLogId(logCode)
                             .setAuthor(TextUtils.removeControlCharacters(entry.path("UserName").asText()))
+                            .setAuthorGuid(entry.path("AccountGuid").asText())
                             .setDate(date)
                             .setLogType(LogType.getByType(logType))
                             .setLog(logText)

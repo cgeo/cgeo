@@ -529,9 +529,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         }
                     });
                 } else if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
-                    spotted.setOnClickListener(UserClickListener.forUser(trackable, TextUtils.stripHtml(trackable.getSpottedName())));
+                    spotted.setOnClickListener(UserClickListener.forUser(trackable, TextUtils.stripHtml(trackable.getSpottedName()), trackable.getSpottedGuid()));
                 } else if (trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
-                    spotted.setOnClickListener(UserClickListener.forUser(trackable, TextUtils.stripHtml(trackable.getOwner())));
+                    spotted.setOnClickListener(UserClickListener.forUser(trackable, TextUtils.stripHtml(trackable.getOwner()), trackable.getOwnerGuid()));
                 }
             }
 

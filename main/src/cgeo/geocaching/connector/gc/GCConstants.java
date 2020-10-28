@@ -46,6 +46,7 @@ public final class GCConstants {
     static final Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     static final Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize[\\d]+\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\"");
     static final Pattern PATTERN_OWNER_USERID = Pattern.compile("seek/nearest\\.aspx\\?u=(.*?)\">.{1,50}?seek/nearest\\.aspx\\?ul=\\1\">");
+    static final Pattern PATTERN_OWNER_GUID = Pattern.compile(Pattern.quote("/profile/?guid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
     static final Pattern PATTERN_FOUND = Pattern.compile("logtypes/48/(" + StringUtils.join(LogType.foundLogTypes(), "|") + ").png\" id=\"ctl00_ContentBody_GeoNav_logTypeImage\"");
     static final Pattern PATTERN_OWNER_DISPLAYNAME = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a>");
     static final Pattern PATTERN_TYPE = Pattern.compile("<a href=\"/seek/nearest.aspx\\?tx=([0-9a-f-]+)");
@@ -115,7 +116,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_TYPE = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>");
     static final Pattern PATTERN_TRACKABLE_TYPE_TITLE = Pattern.compile("<title>\\s\\(TB[0-9A-Z]*\\) ([^<]*)<\\/title>");
     static final Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("\\(([0-9.,]+)(km|mi)[^\\)]*\\)\\s*<a href=\"map_gm");
-    static final Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data BorderTop .+?/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</th>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span[^>]+>)?([^<]+)</.+?)?<td colspan=\"4\">\\s*<div.*?>(.*?)</div>\\s*(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
+    static final Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data BorderTop .+?/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</th>.+?guid=([^\"]+).+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span[^>]+>)?([^<]+)</.+?)?<td colspan=\"4\">\\s*<div.*?>(.*?)</div>\\s*(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<ul class=\"log_images\"><li><a href=\"([^\"]+)\".+?class=\"tb_images\".+?alt=\"([^<]*)\"" + Pattern.quote(" />"));
     static final String TRACKABLE_IS_LOCKED = ">Found it? Log it! (locked)</a></td>";
 
