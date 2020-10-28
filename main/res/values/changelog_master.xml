@@ -34,6 +34,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Cache lists:</h4>
 <ul>
 <li>New: Improved performance for filtering large cache lists</li>
+<li>New: Added link to the gc message center in several places</li>
 </ul>
 
 <h4>Other:</h4>
