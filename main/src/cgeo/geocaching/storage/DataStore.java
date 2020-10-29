@@ -2396,6 +2396,25 @@ public class DataStore {
         return result;
     }
 
+    /*
+     * Loads a list of all UDC (except "Go To history")
+     * sorted by youngest first
+     */
+    @NonNull
+    public static ArrayList<Geocache> loadUDCSorted() {
+        final Collection<String> geocodes = queryToColl(dbTableCaches,
+            new String[]{"geocode"},
+            "substr(geocode,1," + InternalConnector.PREFIX.length() + ") = ? AND geocode <> ?",
+            new String[]{InternalConnector.PREFIX, InternalConnector.GEOCODE_HISTORY_CACHE},
+            null,
+            null,
+            new LinkedList<>(),
+            GET_STRING_0);
+        final ArrayList<Geocache> caches = new ArrayList<>(loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB));
+        Collections.sort(caches, (final Geocache cache1, final Geocache cache2) -> - Long.compare(cache1.getUpdated(), cache2.getUpdated()));
+        return caches;
+    }
+
     /**
      * Load caches.
      *
