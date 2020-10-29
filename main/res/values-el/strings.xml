@@ -1221,6 +1221,7 @@
     <string name="user_menu_view_found">Κρύπτες που βρέθηκαν</string>
     <string name="user_menu_open_browser">Άνοιγμα προφίλ σε πρόγραμμα περιήγησης</string>
     <string name="user_menu_send_message">Αποστολή μηνύματος</string>
+    <string name="user_menu_send_email">Αποστολή email</string>
     <string name="user_menu_open_contact">Άνοιγμα κάρτας επαφής</string>
     <string name="user_unknown">Άγνωστος χρήστης</string>
     <!-- navigation -->
