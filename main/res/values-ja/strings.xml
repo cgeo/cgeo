@@ -342,7 +342,7 @@
     <string name="caches_upload_modifiedcoords">修正された座標をアップロード</string>
     <string name="caches_upload_modifiedcoords_warning">すべての(選択した)キャッシュの修正された座標をアップロードしますか? サーバー上の座標は上書きしされ、元に戻すことはできません</string>
     <string name="caches_upload_allcoords">すべてのキャッシュの座標をアップロード</string>
-    <string name="caches_upload_allcoords_dialogtitle">警告 - すべての座標をアップロードしています</string>
+    <string name="caches_upload_allcoords_dialogtitle">警告: すべての座標をアップロードしています</string>
     <string name="caches_upload_allcoords_warning">リストにあるすべての(選択した)キャッシュに対するサーバー上の座標がc:geoの現在のリスト座標で上書きされます! これは特別な場合にのみ使用してください。例えばリストの座標として修正した座標を含んだGPXファイルをインポートしたときなど。 これは元に戻すことはできません。何を行うかを理解している場合にのみ使用してください。 通常は同じメニュー内の「修正された座標をアップロード」機能を使用した方がよいでしょう</string>
     <string name="caches_refresh_selected">選択したキャッシュを更新</string>
     <string name="caches_refresh_all">すべてのキャッシュを更新</string>
@@ -607,7 +607,7 @@
     <string name="init_restore_confirm">データベースは空です。バックアップから復元しますか?</string>
     <string name="init_backup_last">バックアップ日時:</string>
     <string name="init_backup_last_no">バックアップがありません</string>
-    <string name="init_restore_version_error">予期しないフォーマット - データベースを復元できません。\n\n利用可能バージョンは%1$dです。\nバックアップのバージョンは%2$dです</string>
+    <string name="init_restore_version_error">予期しないフォーマット: データベースを復元できません。\n\n利用可能バージョンは%1$dです。\nバックアップのバージョンは%2$dです</string>
     <string name="settings_title_backup">バックアップ/復元</string>
     <string name="settings_summary_backup">キャッシュ/ウェイポイントとアプリ設定のバックアップと復元</string>
     <string name="init_backup_settings">プログラム設定のバックアップ</string>
@@ -756,7 +756,6 @@
     <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
-    <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -805,7 +804,6 @@
         <item quantity="other">あと %1$d 日</item>
     </plurals>
     <string name="last_day_available">利用可能期限</string>
-    <string name="cache_offline">オフライン</string>
     <string name="cache_offline_refresh">更新</string>
     <string name="cache_offline_drop">削除</string>
     <string name="cache_delete_userdefined_waypoints">ユーザー定義のウェイポイントを削除</string>
@@ -1628,8 +1626,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="reset_to_default">デフォルト</string>
     <!-- number input -->
     <string name="number_input_title">%1$s と %2$s の間で数値を入力してください</string>
-    <string name="number_input_err_boundarymin">入力した数値が小さすぎます - 最小値にリセットします</string>
-    <string name="number_input_err_boundarymax">入力した数値が大きすぎます - 最大値にリセットします</string>
+    <string name="number_input_err_boundarymin">入力した数値が小さすぎます: 最小値にリセットします</string>
+    <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
     <!-- text notification channel infos & proximity notification title -->
     <string name="notification_channel_name">c:geo通知</string>
@@ -1676,7 +1674,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="delete_setting">設定キーの削除</string>
     <string name="delete_setting_warning">設定キー「%s」を削除しますか?\n\nこの操作は元に戻せません</string>
     <string name="edit_setting">「%s」設定値を編集</string>
-    <string name="edit_setting_error_unknown_type">不明な設定タイプ - 編集はサポートされていません</string>
+    <string name="edit_setting_error_unknown_type">不明な設定タイプ: 編集はサポートされていません</string>
     <string name="edit_setting_error_invalid_data">無効な設定値「%s」 が入力されました。 設定値は変更されません</string>
     <string name="activate_editmode_title">編集モードを有効にする</string>
     <string name="activate_editmode_warning">ここからは危険なエリアです!\n\n設定値を直接変更するとc:geoが異常な挙動を引き起こしたり起動しなくなる可能性もあります。慎重にしてください。\n\nご自身の責任の元で続けますか?</string>

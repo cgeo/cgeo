@@ -812,7 +812,7 @@
         <item quantity="other">%1$d jours restants</item>
     </plurals>
     <string name="last_day_available">dernier jour de disponibilité</string>
-    <string name="cache_offline">Hors-ligne</string>
+    <string name="cache_offline">hors-ligne</string>
     <string name="cache_offline_refresh">Actualiser</string>
     <string name="cache_offline_drop">Supprimer</string>
     <string name="cache_delete_userdefined_waypoints">Supprimer les points de passage définis par l\'utilisateur</string>
