@@ -756,7 +756,6 @@
     <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
-    <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -805,7 +804,6 @@
         <item quantity="other">あと %1$d 日</item>
     </plurals>
     <string name="last_day_available">利用可能期限</string>
-    <string name="cache_offline">OpenStreetMap:オフライン用</string>
     <string name="cache_offline_refresh">更新</string>
     <string name="cache_offline_drop">削除</string>
     <string name="cache_delete_userdefined_waypoints">ユーザー定義のウェイポイントを削除</string>
