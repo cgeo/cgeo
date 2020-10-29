@@ -665,6 +665,7 @@ public final class Dialogs {
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
+        input.setTextColor(context.getResources().getColor(Settings.isLightSkin() ? R.color.text_light : R.color.text_dark));
 
         final AlertDialog.Builder builder = newBuilder(context);
         builder.setTitle(title);
@@ -691,7 +692,6 @@ public final class Dialogs {
             }
         });
         // force keyboard
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         input.requestFocus();
         new Keyboard(context).showDelayed(input);
 
