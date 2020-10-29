@@ -100,7 +100,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/cgeo_main"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
