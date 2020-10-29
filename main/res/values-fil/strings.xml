@@ -605,7 +605,7 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">magagamit sa huling araw</string>
-    <string name="cache_offline">I-offline</string>
+    <string name="cache_offline">Ang naka-offline</string>
     <string name="cache_offline_refresh">Mag-refresh</string>
     <string name="cache_offline_drop">Ang tanggalin</string>
     <string name="cache_offline_store">Ang imbakan</string>
