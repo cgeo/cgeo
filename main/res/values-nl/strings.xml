@@ -775,7 +775,6 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Gecombineerd (%d kaarten, even geduld...)</string>
     <string name="map_source_osm_offline_combined_attribution_details">Gecombineerd (%d kaarten, %d attributen): klik voor details</string>
     <string name="map_source_osm_offline_combined_attribution_single">Gecombineerd (%d kaarten): %s</string>
     <string name="map_source_osm_offline_combined_attribution_dialog_title">Gecombineerde toewijzing van kaarten</string>
@@ -1240,6 +1239,7 @@
     <string name="user_menu_view_found">Caches gevonden</string>
     <string name="user_menu_open_browser">Open profiel in browser</string>
     <string name="user_menu_send_message">Verstuur bericht</string>
+    <string name="user_menu_send_email">E-mail verzenden</string>
     <string name="user_menu_open_contact">Open contactkaart</string>
     <string name="user_unknown">Onbekende gebruiker</string>
     <!-- navigation -->

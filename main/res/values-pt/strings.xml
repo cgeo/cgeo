@@ -1237,6 +1237,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="user_menu_view_found">Caches encontradas</string>
     <string name="user_menu_open_browser">Abrir perfil no browser</string>
     <string name="user_menu_send_message">Enviar mensagem</string>
+    <string name="user_menu_send_email">Enviar e-mail</string>
     <string name="user_menu_open_contact">Abrir contacto</string>
     <string name="user_unknown">Utilizador desconhecido</string>
     <!-- navigation -->
