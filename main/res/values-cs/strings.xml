@@ -777,7 +777,6 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombinovaná (%d map, čekejte prosím...)</string>
     <string name="map_source_osm_offline_combined_attribution_details">Kombinovaná (%d map, %d atributů): klikněte pro podrobnosti</string>
     <string name="map_source_osm_offline_combined_attribution_single">Kombinovaná (%d map): %s</string>
     <string name="map_source_osm_offline_combined_attribution_dialog_title">Kombinovaný zdroj map</string>
