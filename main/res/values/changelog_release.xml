@@ -2,10 +2,33 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2020.10.10:</h1>
+<h1>2020.10.29:</h1>
 
-<h4>Android 11 notice:</h4>
-Android 11 enforces a new way for storing data, which c:geo does not support yet. If you switch your system to Android 11, c:geo will not be able to access part of its data. This will most likely disable storing offline maps, importing/exporting data as well as backing up/restoring c:geo\'s database. Other effects may occur. We recommend to not upgrade to Android 11 for the time being.
+<h4>Android 11 notice (UPDATED):</h4>
+You can use c:geo with Android 11!
+Have a look at our <a href="https://faq.cgeo.org/#android11">FAQ</a> for more details.
+
+<h4>Trackable:</h4>
+<ul>
+<li>Fix: Adapt to another website change, fixing trackable codes not being recognized</li>
+</ul>
+
+<h4>Lists:</h4>
+<ul>
+<li>Fix: Offline logged caches still shown with orange line after clearing the log until list is reopened</li>
+</ul>
+
+<h4>Logging:</h4>
+<ul>
+<li>Fix: Crash when trying to log a cache on some devices</li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>Fix: Strange characters in imported navigation target waypoints (e.g. from Adenventure Lab)</li>
+</ul>
+
+<h1>2020.10.10:</h1>
 
 <h4>Trackable:</h4>
 <ul>
@@ -20,12 +43,10 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <h4>Other:</h4>
 <ul>
 <li>Fix: Prepare for website change regarding avatar loading</li>
+<li>Fix: Major udpate to japanese translation</li>
 </ul>
 
 <h1>Version 2020.10.04:</h1>
-
-<h4>Android 11 notice:</h4>
-Android 11 enforces a new way for storing data, which c:geo does not support yet. If you switch your system to Android 11, c:geo will not be able to access part of its data. This will most likely disable storing offline maps, importing/exporting data as well as backing up/restoring c:geo\'s database. Other effects may occur. We recommend to not upgrade to Android 11 for the time being.
 
 <h4>Map:</h4>
 <ul>
