@@ -775,7 +775,6 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Yhdistetty (%d karttaa, odota hetki...)</string>
     <string name="map_source_osm_offline_combined_attribution_details">Yhdistetyt (%d karttaa, %d ominaisuutta): klikkaa saadaksesi lisätietoja</string>
     <string name="map_source_osm_offline_combined_attribution_single">Yhdistetty (%d karttaa): %s</string>
     <string name="map_source_osm_offline_combined_attribution_dialog_title">Yhdistetyn kartan ominaisuudet</string>
