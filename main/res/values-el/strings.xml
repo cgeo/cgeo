@@ -812,7 +812,7 @@
         <item quantity="other">%1$d ημέρες απομένουν</item>
     </plurals>
     <string name="last_day_available">τελευταία διαθέσιμη ημέρα</string>
-    <string name="cache_offline">Εκτός σύνδεσης</string>
+    <string name="cache_offline">Χωρίς σύνδεση</string>
     <string name="cache_offline_refresh">Ανανέωση</string>
     <string name="cache_offline_drop">Διαγραφή</string>
     <string name="cache_delete_userdefined_waypoints">Κατάργηση σημείων που ορίσθηκαν από τον χρήστη</string>
