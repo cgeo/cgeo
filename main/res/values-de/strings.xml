@@ -774,8 +774,9 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_attribution_pleasewait">(Bitte warten…)</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombiniert (%d Karten, bitte warten...)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombiniert (%d Karten, bitte warten…)</string>
     <string name="map_source_osm_offline_combined_attribution_details">Kombiniert (%d Karten, %d Zuordnungen): Für Details klicken</string>
     <string name="map_source_osm_offline_combined_attribution_single">Kombiniert (%d Karten): %s</string>
     <string name="map_source_osm_offline_combined_attribution_dialog_title">Zuordnung der kombinierten Karten</string>
@@ -1240,6 +1241,7 @@
     <string name="user_menu_view_found">Gefundene Caches</string>
     <string name="user_menu_open_browser">Profil im Browser öffnen</string>
     <string name="user_menu_send_message">Nachricht senden</string>
+    <string name="user_menu_send_email">E-Mail senden</string>
     <string name="user_menu_open_contact">Kontakt öffnen</string>
     <string name="user_unknown">Unbekannter Benutzer</string>
     <!-- navigation -->
