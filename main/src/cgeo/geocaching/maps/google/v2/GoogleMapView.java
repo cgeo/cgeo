@@ -3,7 +3,6 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CGeoMap;
@@ -133,7 +132,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 if (null != cache) {
                     EditWaypointActivity.startActivityAddWaypoint(this.getContext(), cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
                 } else if (Settings.isLongTapOnMapActivated()) {
-                    InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), StoredList.STANDARD_LIST_ID);
+                    InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), InternalConnector.UDC_LIST);
                 }
             }
         });
