@@ -39,8 +39,8 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     public static final int ID_HISTORY_CACHE = 0;
     public static final String GEOCODE_HISTORY_CACHE = geocodeFromId(ID_HISTORY_CACHE);
 
-    // store into new list
-    private static final int NEW_LIST = -1;
+    // store into UDC list
+    public static final int UDC_LIST = -1;
 
     // pattern for internal caches id
     @NonNull private static final Pattern PATTERN_GEOCODE = Pattern.compile("(" + PREFIX + ")[0-9A-Z]{1,4}", Pattern.CASE_INSENSITIVE);
@@ -137,6 +137,22 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return search;
     }
 
+    /* creates user-defined cache list if requested */
+    protected static int getUdcListId(final Context context) {
+        for (StoredList list : DataStore.getLists()) {
+            if (list.getTitle().trim().equals(context.getString(R.string.goto_targets_list).trim())) {
+                return list.id;
+            }
+        }
+
+        int newListId = DataStore.createList(context.getString(R.string.goto_targets_list));
+        if (newListId == -1) {
+            // fallback for errors during new list creation
+            newListId = StoredList.STANDARD_LIST_ID;
+        }
+        return newListId;
+    }
+
     /**
      * creates a new cache with the given id, if it does not exist yet
      * @param context       context in which this function gets called
@@ -148,16 +164,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      */
     protected static void assertCacheExists(final Context context, final long id, @Nullable final String name, @Nullable final String description, @Nullable final Geopoint geopoint, final int listId) {
         final String geocode = geocodeFromId(id);
-        int newListId = listId;
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
 
-            // create new list if requested
-            if (listId == NEW_LIST) {
-                newListId = DataStore.createList(context.getString(R.string.goto_targets_list));
-                if (newListId == -1) {
-                    // fallback for errors during new list creation
-                    newListId = StoredList.STANDARD_LIST_ID;
-                }
+            int newListId = listId;
+            if (listId == UDC_LIST) {
+                newListId = getUdcListId(context);
             }
 
             // create new cache
@@ -191,7 +202,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context   context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), null, NEW_LIST);
+        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), null, UDC_LIST);
     }
 
     /**
