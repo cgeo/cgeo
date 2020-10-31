@@ -37,6 +37,7 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+import android.view.View;
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;
@@ -77,6 +78,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private DistanceDrawer distanceDrawer;
 
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
+    private View root = null;
 
     public interface PostRealDistance {
         void postRealDistance (float realDistance);
@@ -267,7 +269,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     @Override
-    public PositionAndHistory createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode) {
+    public PositionAndHistory createAddPositionAndScaleOverlay(final View root, final Geopoint coords, final String geocode) {
+        this.root = root;
         if (googleMap == null) {
             throw new IllegalStateException("Google map not initialized yet"); // TODO check
         }
@@ -457,7 +460,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     public void setDistanceDrawer(final Geopoint destCoords) {
-        this.distanceDrawer = new DistanceDrawer(this, destCoords, Settings.isBrouterShowBothDistances());
+        this.distanceDrawer = new DistanceDrawer(root, destCoords, Settings.isBrouterShowBothDistances());
     }
 
     public GoogleCacheOverlayItem closest(final Geopoint geopoint) {

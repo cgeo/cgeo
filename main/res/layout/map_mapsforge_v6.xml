@@ -43,44 +43,7 @@
             android:visibility="gone"
             android:maxLines="1" />
 
-        <TextView
-            android:id="@+id/distance1"
-            android:layout_marginTop="-8dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="100dp"
-            style="@style/map_distanceinfo" />
-
-        <TextView
-            android:id="@+id/distance1info"
-            android:layout_marginTop="-8dp"
-            android:layout_toLeftOf="@id/distance1"
-            android:layout_width="wrap_content"
-            style="@style/map_distanceinfo" />
-
-        <TextView
-            android:id="@+id/distance2"
-            android:layout_marginTop="0dp"
-            android:layout_below="@id/distance1"
-            android:layout_alignParentRight="true"
-            android:layout_width="100dp"
-            style="@style/map_distanceinfo" />
-
-        <TextView
-            android:id="@+id/distance2info"
-            android:layout_marginTop="0dp"
-            android:layout_below="@id/distance1info"
-            android:layout_toLeftOf="@id/distance2"
-            android:layout_width="wrap_content"
-            style="@style/map_distanceinfo" />
-
-        <TextView
-            android:id="@+id/routeDistance"
-            android:layout_marginTop="0dp"
-            android:layout_below="@id/distance2"
-            android:layout_alignParentRight="true"
-            android:layout_width="100dp"
-            style="@style/map_distanceinfo" />
+        <include layout="@layout/map_distanceinfo" />
 
         <TextView
             android:id="@+id/map_attribution"

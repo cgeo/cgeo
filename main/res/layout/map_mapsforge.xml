@@ -53,9 +53,9 @@
             android:textSize="10dp"
             tools:text="Example Map Attribution"/>
 
+       <include layout="@layout/map_distanceinfo" />
 
-
-        <include layout="@layout/map_progressbar" />
+       <include layout="@layout/map_progressbar" />
 
     </RelativeLayout>
 

@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Viewport;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -46,7 +47,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     Context getContext();
 
-    PositionAndHistory createAddPositionAndScaleOverlay(Geopoint coords, String geocode);
+    PositionAndHistory createAddPositionAndScaleOverlay(View root, Geopoint coords, String geocode);
 
     void setMapSource();
 

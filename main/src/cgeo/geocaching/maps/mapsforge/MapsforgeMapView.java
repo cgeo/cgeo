@@ -24,6 +24,7 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -125,8 +126,8 @@ public class MapsforgeMapView extends MapView implements MapViewImpl<MapsforgeCa
 
 
     @Override
-    public PositionAndHistory createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode) {
-        final MapsforgeOverlay ovl = new MapsforgeOverlay(this, coords, geocode);
+    public PositionAndHistory createAddPositionAndScaleOverlay(final View root, final Geopoint coords, final String geocode) {
+        final MapsforgeOverlay ovl = new MapsforgeOverlay(root, coords, geocode);
         getOverlays().add(ovl);
         return (MapsforgePositionAndHistory) ovl.getBase();
     }
