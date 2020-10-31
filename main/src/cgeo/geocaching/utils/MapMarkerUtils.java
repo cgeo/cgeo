@@ -11,6 +11,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 
 import android.content.res.Resources;
@@ -224,9 +225,18 @@ public final class MapMarkerUtils {
     }
 
     private static int[] insetHelper(final int width, final int height, final Drawable b, final VERTICAL vPos, final HORIZONTAL hPos) {
-        final int[] insetPadding = { 0, 0, 0, 0 }; // left, top, right, bottom padding for inset
-        final int iWidth = b.getIntrinsicWidth();
-        final int iHeight = b.getIntrinsicHeight();
+        return insetHelper(width, height, b, vPos, hPos, false);
+    }
+
+    private static int[] insetHelper(final int width, final int height, final Drawable b, final VERTICAL vPos, final HORIZONTAL hPos, boolean doubleSize) {
+        final int[] insetPadding = {0, 0, 0, 0}; // left, top, right, bottom padding for inset
+        int iWidth = b.getIntrinsicWidth();
+        int iHeight = b.getIntrinsicHeight();
+
+        if (doubleSize) {
+            iWidth *= 2;
+            iHeight *= 2;
+        }
 
         // vertical offset from bottom:
         final int vDelta = height / 10;
@@ -286,9 +296,11 @@ public final class MapMarkerUtils {
             insets.add(FULLSIZE);
         }
         // cache type
-        Drawable inset = Compatibility.getDrawable(res, cache.getType().markerId);
+        int mainMarkerId = getMainMarkerId(cache, cacheListType);
+        Drawable inset = Compatibility.getDrawable(res, mainMarkerId);
         layers.add(inset);
-        insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.CENTER));
+        boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
+        insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
         // own
         if (cache.isOwner()) {
             inset = Compatibility.getDrawable(res, R.drawable.marker_own);
@@ -301,16 +313,18 @@ public final class MapMarkerUtils {
             insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.RIGHT));
         }
         // found
-        if (cache.isFound()) {
-            inset = Compatibility.getDrawable(res, R.drawable.marker_found);
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
-            // if not, perhaps logged offline
-        } else if (cache.isLogOffline()) {
-            final LogType offlineLogType = cache.getOfflineLogType();
-            inset = Compatibility.getDrawable(res, offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay());
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
+        if (!showBigSmileys(cacheListType)) {
+            if (cache.isFound()) {
+                inset = Compatibility.getDrawable(res, R.drawable.marker_found);
+                layers.add(inset);
+                insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
+                // if not, perhaps logged offline
+            } else if (cache.hasLogOffline()) {
+                final LogType offlineLogType = cache.getOfflineLogType();
+                inset = Compatibility.getDrawable(res, offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay());
+                layers.add(inset);
+                insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
+            }
         }
         // user modified coords
         if (showUserModifiedCoords(cache)) {
@@ -347,6 +361,23 @@ public final class MapMarkerUtils {
         }
 
         return ld;
+    }
+
+    private static int getMainMarkerId(Geocache cache, CacheListType cacheListType) {
+        if (showBigSmileys(cacheListType)) {
+            if (cache.isFound()) {
+                return R.drawable.marker_found;
+            } else if (cache.hasLogOffline()) {
+                final LogType offlineLogType = cache.getOfflineLogType();
+                return offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay();
+            }
+        }
+
+        return cache.getType().markerId;
+    }
+
+    private static boolean showBigSmileys(CacheListType cacheListType) {
+        return Settings.isBigSmileysEnabled() && showBackground(cacheListType);
     }
 
     /**
