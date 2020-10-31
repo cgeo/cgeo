@@ -17,6 +17,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>Fix: Individual route: Update distance on item removal</li>
 <li>Fix: Crash on Google Maps map being put into the background</li>
 <li>New: Added attribution to contributors on OpenStreetMap maps</li>
+<li>New: Added option to show big smileys for found caches</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -30,12 +31,14 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Image upload on logging: always remove EXIF data</li>
 <li>New: Image upload on logging: allow resorting images</li>
 <li>New: Waypoint calculator: add option to lower-case all variables</li>
+<li>New: Show counter for logtext length</li>
 </ul>
 
 <h4>Cache lists:</h4>
 <ul>
 <li>New: Improved performance for filtering large cache lists</li>
 <li>New: Added link to the gc message center in several places</li>
+<li>Change: User-defined caches are stored in a separate list \"user-defined caches\" instead of in default list</li>
 </ul>
 
 <h4>Other:</h4>
@@ -50,6 +53,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Format GPX export file more human-readable</li>
 <li>Change: Throw a runtime error if db can neither be opened nor created</li>
 <li>New: Automatically convert geocode search input to upper case</li>
+<li>New: Select target on geo intents (new user defined cache, waypoint for \"go to\" history, waypoint for existing user defined cache)</li>
 <li>Change: Updated widget icons</li>
 <li>Updated list of contributors</li>
 </ul>
