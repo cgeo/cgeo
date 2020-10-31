@@ -775,7 +775,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
+    <string name="map_source_osm_offline_attribution_pleasewait">(Por favor aguarde…)</string>
     <string name="map_source_osm_offline_combined">Combinado (offline)</string>
+    <string name="map_source_osm_offline_combined_attribution_pleasewait">Combinado ( %d mapas, por favor aguarde…)</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
@@ -1030,6 +1032,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="context_share_as_text">Partilhar texto</string>
     <string name="context_share_as_link">Partilhar hiperligação</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
+    <string name="create_internal_cache_short">Nova cache</string>
     <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
     <string name="internal_cache_default_owner">Você</string>
