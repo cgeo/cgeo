@@ -605,6 +605,8 @@
     <string name="init_brouterShowBothDistances">Show straight distance</string>
     <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
+    <string name="init_bigSmileysOnMap">Big smileys for logged Caches</string>
+    <string name="init_summary_bigSmileysOnMap">If enabled big smileys will be shown for logged caches on the map (requires restart).</string>
     <string name="init_disabled">Exclude Disabled</string>
     <string name="init_summary_disabled">Exclude disabled caches</string>
     <string name="init_archived">Exclude Archived</string>
