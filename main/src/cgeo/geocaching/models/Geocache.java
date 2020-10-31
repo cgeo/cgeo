@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -564,7 +565,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean supportsRefresh() {
-        return getConnector() instanceof ISearchByGeocode;
+        return getConnector() instanceof ISearchByGeocode && getConnector() instanceof ILogin;
     }
 
     public boolean supportsWatchList() {

@@ -673,6 +673,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
+        final IConnector connector = null != cache ? ConnectorFactory.getConnector(cache) : null;
+        final boolean isUDC = null != connector && connector.equals(InternalConnector.getInstance());
+
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
         menu.findItem(R.id.menu_edit_fieldnote).setVisible(true);
@@ -681,7 +684,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache != null && cache.isOffline() && cache.hasUserdefinedWaypoints());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.supportsRefresh());
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
-        menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null);
+        menu.findItem(R.id.menu_extract_waypoints).setVisible(cache != null && !isUDC);
         menu.findItem(R.id.menu_clear_goto_history).setVisible(cache != null && cache.isGotoHistoryUDC());
         menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
         menuItemToggleWaypointsFromNote.setVisible(cache != null);
@@ -689,7 +692,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_toggleWaypointsFromNote).setTitle(cache != null && cache.isPreventWaypointsFromNote() ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
         menu.findItem(R.id.menu_export).setVisible(cache != null);
         if (cache != null) {
-            final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
                 menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
             }
