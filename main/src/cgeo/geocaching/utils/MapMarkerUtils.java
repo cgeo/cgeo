@@ -314,14 +314,9 @@ public final class MapMarkerUtils {
         }
         // found
         if (!showBigSmileys(cacheListType)) {
-            if (cache.isFound()) {
-                inset = Compatibility.getDrawable(res, R.drawable.marker_found);
-                layers.add(inset);
-                insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
-                // if not, perhaps logged offline
-            } else if (cache.hasLogOffline()) {
-                final LogType offlineLogType = cache.getOfflineLogType();
-                inset = Compatibility.getDrawable(res, offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay());
+            Integer loggedMarkerId = getMarkerIdIfLogged(cache);
+            if (loggedMarkerId != null) {
+                inset = Compatibility.getDrawable(res, loggedMarkerId);
                 layers.add(inset);
                 insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
             }
@@ -365,15 +360,24 @@ public final class MapMarkerUtils {
 
     private static int getMainMarkerId(Geocache cache, CacheListType cacheListType) {
         if (showBigSmileys(cacheListType)) {
-            if (cache.isFound()) {
-                return R.drawable.marker_found;
-            } else if (cache.hasLogOffline()) {
-                final LogType offlineLogType = cache.getOfflineLogType();
-                return offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay();
-            }
+            final Integer offlineLogType = getMarkerIdIfLogged(cache);
+            if (offlineLogType != null) return offlineLogType;
         }
 
         return cache.getType().markerId;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    private static Integer getMarkerIdIfLogged(Geocache cache) {
+        if (cache.isFound()) {
+            return R.drawable.marker_found;
+            // if not, perhaps logged offline
+        } else if (cache.hasLogOffline()) {
+            final LogType offlineLogType = cache.getOfflineLogType();
+            return offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay();
+        }
+
+        return null;
     }
 
     private static boolean showBigSmileys(CacheListType cacheListType) {
