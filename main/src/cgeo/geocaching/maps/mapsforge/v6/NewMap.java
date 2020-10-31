@@ -69,6 +69,7 @@ import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_I
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -79,6 +80,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -94,6 +99,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.core.util.Supplier;
 
 import java.io.File;
 import java.io.IOException;
@@ -112,6 +118,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.util.Parameters;
@@ -154,7 +161,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private SharedPreferences sharedPreferences;
 
     private DistanceView distanceView;
-    private TextView mapAttribution;
+    private View mapAttribution;
 
     private ArrayList<TrailHistoryElement> trailHistory = null;
 
@@ -260,10 +267,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         mapView.getMapScaleBar().setVisible(true);
         mapView.setBuiltInZoomControls(true);
 
-        //make room for map attribution
-        final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 10);
-        mapView.getMapZoomControls().setMarginVertical(mapAttPx);
-        mapView.getMapScaleBar().setMarginVertical(mapAttPx);
+        //make room for map attribution icon button
+        final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
+        mapView.getMapScaleBar().setMarginHorizontal(mapAttPx);
 
         // create a tile cache of suitable size. always initialize it based on the smallest tile size to expect (256 for online tiles)
         tileCache = AndroidUtil.createTileCache(this, "mapcache", 256, 1f, this.mapView.getModel().frameBufferModel.getOverdrawFactor());
@@ -745,7 +751,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         ITileLayer newLayer = null;
 
         mapSource = newSource;
-        mapSource.setMapAttributionTo(this.mapAttribution);
+
+        if (this.mapAttribution != null) {
+            this.mapAttribution.setOnClickListener(
+                new MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(this)));
+        }
 
         if (newSource instanceof MapsforgeMapSource) {
             newLayer = ((MapsforgeMapSource) newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
@@ -1013,6 +1023,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         ResourceBitmapCacheMonitor.release();
 
         Routing.disconnect(ROUTING_SERVICE_KEY);
+        if (this.mapAttribution != null) {
+            this.mapAttribution.setOnClickListener(null);
+        }
         super.onDestroy();
     }
 
@@ -1822,5 +1835,54 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             checkCompactIconMode(NO_OVERLAY_ID, 0);
         }
     }
+
+    public static class MapAttributionDisplayHandler implements View.OnClickListener {
+
+        private Supplier<ImmutablePair<String, Boolean>> attributionSupplier;
+        private ImmutablePair<String, Boolean> attributionPair;
+
+        public MapAttributionDisplayHandler(final Supplier<ImmutablePair<String, Boolean>> attributionSupplier) {
+            this.attributionSupplier = attributionSupplier;
+        }
+
+        @Override
+        public void onClick(final View v) {
+
+            if (this.attributionPair == null) {
+                this.attributionPair = attributionSupplier.get();
+                if (this.attributionPair == null || this.attributionPair.left == null) {
+                    this.attributionPair = new ImmutablePair<>("---", false);
+                }
+                this.attributionSupplier = null; //prevent possible memory leaks
+            }
+            displayMapAttribution(v.getContext(), this.attributionPair.left, this.attributionPair.right);
+        }
+    }
+
+    private static void displayMapAttribution(final Context ctx, final String attribution, final boolean linkify) {
+
+        //create text message
+        CharSequence message = Html.fromHtml(attribution);
+        if (linkify) {
+            final SpannableString s = new SpannableString(message);
+            Linkify.addLinks(s, Linkify.ALL);
+            message = s;
+        }
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(ctx)
+            .setTitle(ctx.getString(R.string.map_source_attribution_dialog_title))
+            .setCancelable(true)
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
+            .create();
+
+        alertDialog.show();
+
+        // Make the URLs in TextView clickable. Must be called after show()
+        // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
+        ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+
+    }
+
 
 }

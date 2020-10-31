@@ -4,11 +4,11 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 
 import android.content.Context;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public abstract class AbstractMapSource implements MapSource {
 
@@ -51,23 +51,9 @@ public abstract class AbstractMapSource implements MapSource {
         return mapProvider;
     }
 
-    @Override
-    public void setMapAttributionTo(final TextView textView) {
-        if (textView == null) {
-            return;
-        }
 
-        final CharSequence mapAttribution = getMapAttribution(textView.getContext());
-        if (mapAttribution == null) {
-            textView.setVisibility(View.GONE);
-        } else {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(mapAttribution);
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
-        }
-    }
-
-    protected CharSequence getMapAttribution(final Context ctx) {
+    public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
         return null;
     }
+
 }

@@ -35,6 +35,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
+import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.ManualRoute;
@@ -1110,9 +1111,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapSource = newSource;
 
-        final int mapAttributionViewId = mapSource.getMapProvider().getMapAttributionTextId();
+        final int mapAttributionViewId = mapSource.getMapProvider().getMapAttributionViewId();
         if (mapAttributionViewId > 0) {
-            mapSource.setMapAttributionTo(activity.findViewById(mapAttributionViewId));
+            final View mapAttributionView = activity.findViewById(mapAttributionViewId);
+            if (mapAttributionView != null) {
+                mapAttributionView.setOnClickListener(
+                    new NewMap.MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(mapAttributionView.getContext())));
+            }
         }
 
         return restartRequired;
