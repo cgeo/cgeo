@@ -1279,7 +1279,7 @@ public class DataStore {
                     }
 
                     // redefine & migrate route table
-                    if (oldVersion < 84) {
+                    if (oldVersion < 84 && oldVersion > 80) {
                         try {
                             db.execSQL("ALTER TABLE " + dbTableRoute + " RENAME TO temp_route");
                             db.execSQL(dbCreateRoute);
