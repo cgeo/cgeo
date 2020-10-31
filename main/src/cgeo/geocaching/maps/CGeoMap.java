@@ -484,7 +484,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         final Viewport viewport = getIntentViewport();
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(getIntentCoords(), mapOptions.geocode);
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity.findViewById(R.id.distance1).getRootView(), getIntentCoords(), mapOptions.geocode);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }

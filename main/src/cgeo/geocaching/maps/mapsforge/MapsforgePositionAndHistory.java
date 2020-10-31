@@ -16,6 +16,7 @@ import cgeo.geocaching.storage.DataStore;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.location.Location;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -27,19 +28,19 @@ public class MapsforgePositionAndHistory implements GeneralOverlay, PositionAndH
     DirectionDrawer directionDrawer = null;
     DistanceDrawer distanceDrawer = null;
 
-    public MapsforgePositionAndHistory(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode, final boolean showBothDistances) {
+    public MapsforgePositionAndHistory(final View root, final OverlayImpl ovlImpl, final Geopoint coords, final String geocode, final boolean showBothDistances) {
         this.ovlImpl = ovlImpl;
         positionDrawer = new PositionDrawer();
         scaleDrawer = new ScaleDrawer();
 
         if (coords != null) {
             directionDrawer = new DirectionDrawer(coords, realDistance -> distanceDrawer.setRealDistance(realDistance));
-            distanceDrawer = new DistanceDrawer(mapView, coords, showBothDistances);
+            distanceDrawer = new DistanceDrawer(root, coords, showBothDistances);
         } else if (geocode != null) {
             final Viewport bounds = DataStore.getBounds(geocode);
             if (bounds != null) {
                 directionDrawer = new DirectionDrawer(bounds.center, realDistance -> distanceDrawer.setRealDistance(realDistance));
-                distanceDrawer = new DistanceDrawer(mapView, bounds.center, showBothDistances);
+                distanceDrawer = new DistanceDrawer(root, bounds.center, showBothDistances);
             }
         }
     }

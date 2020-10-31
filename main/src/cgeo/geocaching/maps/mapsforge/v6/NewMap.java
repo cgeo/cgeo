@@ -898,7 +898,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.mapView.getLayerManager().getLayers().add(positionLayer);
 
         //Distance view
-        this.distanceView = new DistanceView(navTarget, (TextView) findViewById(R.id.distance1info), (TextView) findViewById(R.id.distance1), (TextView) findViewById(R.id.distance2info), (TextView) findViewById(R.id.distance2), Settings.isBrouterShowBothDistances(), (TextView) findViewById(R.id.routeDistance));
+        this.distanceView = new DistanceView(findViewById(R.id.distance1info).getRootView(), navTarget, Settings.isBrouterShowBothDistances());
 
         //Target view
         this.targetView = new TargetView((TextView) findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);

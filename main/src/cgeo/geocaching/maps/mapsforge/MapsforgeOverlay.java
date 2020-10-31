@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.view.View;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -20,8 +21,8 @@ public class MapsforgeOverlay extends Overlay implements OverlayImpl {
     private MapsforgePositionAndHistory overlayBase = null;
     private final Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay(final MapViewImpl mapView, final Geopoint coords, final String geocode) {
-        overlayBase = new MapsforgePositionAndHistory(this, mapView, coords, geocode, Settings.isBrouterShowBothDistances());
+    public MapsforgeOverlay(final View root, final Geopoint coords, final String geocode) {
+        overlayBase = new MapsforgePositionAndHistory(root, this, coords, geocode, Settings.isBrouterShowBothDistances());
     }
 
     @Override
