@@ -16,7 +16,7 @@ public interface MapProvider {
 
     int getMapLayoutId();
 
-    default int getMapAttributionTextId() {
+    default int getMapAttributionViewId() {
         return 0;
     }
 

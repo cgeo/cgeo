@@ -45,20 +45,18 @@
 
         <include layout="@layout/map_distanceinfo" />
 
-        <TextView
+        <ImageView
             android:id="@+id/map_attribution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginBottom="11dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:lines="1"
-            android:gravity="center"
-            android:textColor="@color/just_black"
-            android:textSize="10sp"
-            android:background="#99999999"
-            android:textColorLink="#0000EE"
-            android:paddingBottom="2dp"
-            android:paddingLeft="2dp"/>
-
+            android:layout_gravity="left"
+            android:src="@drawable/copyright"
+            tools:src="@drawable/copyright"/>
 
         <include layout="@layout/map_progressbar" />
 

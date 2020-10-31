@@ -13,29 +13,23 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.MultiRendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.Resources;
-import android.text.Html;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
@@ -139,7 +133,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     @Override
-    public int getMapAttributionTextId() {
+    public int getMapAttributionViewId() {
         return R.id.map_attribution;
     }
 
@@ -182,30 +176,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return null;
         }
 
-
-
         @Override
-        public CharSequence getMapAttribution(final Context ctx) {
-            return getName() + " " + ctx.getString(R.string.map_source_osm_offline_attribution_pleasewait);
+        public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
+            return new ImmutablePair<>(getAttributionFromMapFile(this.fileName), true);
         }
 
-        @Override
-        public void setMapAttributionTo(final TextView textView) {
-            super.setMapAttributionTo(textView);
-
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-                final MapFile mf = createMapFile(this.fileName);
-                try {
-                    final String attr = getAttributionFromMapFile(mf);
-                    return getName() + (attr == null ? "" : ": " + attr.trim());
-                } finally {
-                    if (mf != null) {
-                        mf.close();
-                    }
-                }
-            },
-            textView::setText);
-        }
    }
 
     public static final class CyclosmMapSource extends MapsforgeMapSource {
@@ -222,9 +197,10 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         }
 
         @Override
-        public CharSequence getMapAttribution(final Context ctx) {
-            return Html.fromHtml(ctx.getString(R.string.map_attribution_cyclosm_html));
+        public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
+            return new ImmutablePair<>(ctx.getString(R.string.map_attribution_cyclosm_html), false);
         }
+
     }
 
     public static final class OsmdeMapSource extends MapsforgeMapSource {
@@ -241,10 +217,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         }
 
         @Override
-        public CharSequence getMapAttribution(final Context ctx) {
-            return Html.fromHtml(ctx.getString(R.string.map_attribution_openstreetmapde_html));
+        public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
+            return new ImmutablePair<>(ctx.getString(R.string.map_attribution_openstreetmapde_html), false);
         }
-
 
     }
 
@@ -287,62 +262,40 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         }
 
         @Override
-        public CharSequence getMapAttribution(final Context ctx) {
-            return ctx.getString(R.string.map_source_osm_offline_combined_attribution_pleasewait, fileNames.size());
-        }
+        public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
 
-        @Override
-        public void setMapAttributionTo(final TextView textView) {
-            super.setMapAttributionTo(textView);
-
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-                final List<String> atts = new ArrayList<>();
-                final Set<String> attsSet = new HashSet<>();
-                String lastAtt = null;
-                for (String fileName : fileNames) {
-                    final MapFile mf = createMapFile(fileName);
-                    final String attr = getAttributionFromMapFile(mf);
-                    if (mf != null) {
-                        mf.close();
-                    }
-                    atts.add(new File(fileName).getName() + (attr == null ? ": ---" : ": " + attr.trim()));
-                    if (attr == null) {
-                        continue;
-                    }
-                    attsSet.add(attr.trim());
-                    lastAtt = attr.trim();
-                }
-
-                return new ImmutableTriple<>(atts, attsSet, lastAtt);
-            }, triple -> {
-                if (triple.middle.size() == 1) {
-                    textView.setText(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_single,
-                        fileNames.size(), triple.right));
-                } else {
-                    textView.setText(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_details,
-                        fileNames.size(), triple.middle.size()));
-                    textView.setOnClickListener(v -> new AlertDialog.Builder(textView.getContext())
-                        .setTitle(textView.getContext().getString(R.string.map_source_osm_offline_combined_attribution_dialog_title))
-                        .setItems((String[]) CollectionStream.of(triple.left).toArray(String.class), null)
-                        .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
-                        .create()
-                        .show());
-                }
-            });
-        }
-
-    }
-
-    private static String getAttributionFromMapFile(final MapFile mapFile) {
-        if (mapFile != null && mapFile.getMapFileInfo() != null) {
-            if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
-                return mapFile.getMapFileInfo().comment;
+            final StringBuilder attributation = new StringBuilder();
+            for (String fileName : fileNames) {
+                attributation.append("<p><b>" + new File(fileName).getName() + "</b>:<br>");
+                attributation.append(getAttributionFromMapFile(fileName));
+                attributation.append("</p>");
             }
-            if (!StringUtils.isBlank(mapFile.getMapFileInfo().createdBy)) {
-               return mapFile.getMapFileInfo().createdBy;
+            return new ImmutablePair<>(attributation.toString(), true);
+        }
+
+
+     }
+
+    @NonNull
+    private static String getAttributionFromMapFile(final String filePath) {
+
+        MapFile mapFile = null;
+        try {
+            mapFile = createMapFile(filePath);
+            if (mapFile != null && mapFile.getMapFileInfo() != null) {
+                if (!StringUtils.isBlank(mapFile.getMapFileInfo().comment)) {
+                    return mapFile.getMapFileInfo().comment;
+                }
+                if (!StringUtils.isBlank(mapFile.getMapFileInfo().createdBy)) {
+                    return mapFile.getMapFileInfo().createdBy;
+                }
+            }
+            return "---";
+        } finally {
+            if (mapFile != null) {
+                mapFile.close();
             }
         }
-        return null;
     }
 
     private static MapFile createMapFile(final String fileName) {

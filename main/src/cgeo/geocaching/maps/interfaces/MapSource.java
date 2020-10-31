@@ -1,8 +1,10 @@
 package cgeo.geocaching.maps.interfaces;
 
-import android.widget.TextView;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public interface MapSource {
     String getName();
@@ -14,6 +16,6 @@ public interface MapSource {
     @NonNull
     MapProvider getMapProvider();
 
-    void setMapAttributionTo(TextView textView);
+    ImmutablePair<String, Boolean> calculateMapAttribution(Context ctx);
 
 }

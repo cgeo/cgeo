@@ -8,8 +8,8 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 
 
 import android.content.Context;
-import android.text.Html;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
@@ -39,8 +39,8 @@ public class MapsforgeMapSource extends AbstractMapSource {
     }
 
     @Override
-    public CharSequence getMapAttribution(final Context ctx) {
-        return Html.fromHtml(ctx.getString(R.string.map_attribution_openstreetmap_html));
+    public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
+        return new ImmutablePair<>(ctx.getString(R.string.map_attribution_openstreetmap_html), false);
     }
 
 }
