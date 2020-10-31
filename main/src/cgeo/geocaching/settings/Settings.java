@@ -448,7 +448,7 @@ public class Settings {
     /**
      * Set login and password information.
      *
-     * @param connector the connector to retrieve the login information from
+     * @param connector   the connector to retrieve the login information from
      * @param credentials the credential information to store
      */
     public static void setCredentials(@NonNull final ICredentials connector, final Credentials credentials) {
@@ -1120,6 +1120,10 @@ public class Settings {
 
     public static boolean isBrouterShowBothDistances() {
         return getBoolean(R.string.pref_brouterShowBothDistances, false);
+    }
+
+    public static boolean isBigSmileysEnabled() {
+        return getBoolean(R.string.pref_bigSmileysOnMap, false);
     }
 
     /**

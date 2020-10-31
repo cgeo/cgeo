@@ -656,6 +656,11 @@
                 android:key="@string/pref_brouterShowBothDistances"
                 android:summary="@string/init_summary_brouterShowBothDistances"
                 android:title="@string/init_brouterShowBothDistances" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_bigSmileysOnMap"
+                android:summary="@string/init_summary_bigSmileysOnMap"
+                android:title="@string/init_bigSmileysOnMap" />
         </PreferenceCategory>
 
         <PreferenceCategory android:title="@string/settings_title_map_behavior"
