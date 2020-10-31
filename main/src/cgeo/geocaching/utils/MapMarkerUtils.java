@@ -13,6 +13,10 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.builders.InsetBuilder;
+import cgeo.geocaching.utils.builders.InsetBuilder.HORIZONTAL;
+import cgeo.geocaching.utils.builders.InsetBuilder.VERTICAL;
+import cgeo.geocaching.utils.builders.InsetsBuilder;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -32,12 +36,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
-
-    // data for overlays
-    private static final int[] FULLSIZE = { 0, 0, 0, 0 };
-
-    private enum VERTICAL { TOP, CENTER, BOTTOM }
-    private enum HORIZONTAL { LEFT, CENTER, RIGHT }
 
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
@@ -160,43 +158,26 @@ public final class MapMarkerUtils {
     @NonNull
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final int assignedMarkers) {
         final WaypointType waypointType = waypoint.getWaypointType();
-        final List<Drawable> layers = new ArrayList<>(2);
-        final List<int[]> insets = new ArrayList<>(2);
+
 
         final Drawable marker = Compatibility.getDrawable(res, !waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-        layers.add(marker);
-        insets.add(FULLSIZE);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(marker));
 
-        // get actual layer size in px
-        final int width = marker.getIntrinsicWidth();
-        final int height = marker.getIntrinsicHeight();
-
-        Drawable inset = Compatibility.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId);
-        layers.add(inset);
-        insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.CENTER));
-
+        int markerId = null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId;
+        insetsBuilder.withInset(new InsetBuilder(markerId, VERTICAL.CENTER, HORIZONTAL.CENTER));
         // assigned lists with markers
-        int markerId = assignedMarkers & ListMarker.BITMASK;
+        markerId = assignedMarkers & ListMarker.BITMASK;
         if (markerId > 0) {
-            inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.LEFT));
         }
 
         markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
         if (markerId > 0) {
-            inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.RIGHT));
         }
 
-        final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
-
-        int index = 0;
-        for (final int[] temp : insets) {
-            ld.setLayerInset(index++, temp[0], temp[1], temp[2], temp[3]);
-        }
-        return ld;
+        return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
     /**
@@ -224,151 +205,96 @@ public final class MapMarkerUtils {
         }
     }
 
-    private static int[] insetHelper(final int width, final int height, final Drawable b, final VERTICAL vPos, final HORIZONTAL hPos) {
-        return insetHelper(width, height, b, vPos, hPos, false);
-    }
-
-    private static int[] insetHelper(final int width, final int height, final Drawable b, final VERTICAL vPos, final HORIZONTAL hPos, boolean doubleSize) {
-        final int[] insetPadding = {0, 0, 0, 0}; // left, top, right, bottom padding for inset
-        int iWidth = b.getIntrinsicWidth();
-        int iHeight = b.getIntrinsicHeight();
-
-        if (doubleSize) {
-            iWidth *= 2;
-            iHeight *= 2;
-        }
-
-        // vertical offset from bottom:
-        final int vDelta = height / 10;
-
-        // horizontal
-        if (hPos == HORIZONTAL.CENTER) {
-            insetPadding[0] = (width - iWidth) / 2;
-        } else if (hPos == HORIZONTAL.RIGHT) {
-            insetPadding[0] = width - iWidth;
-        }
-        insetPadding[2] = width - iWidth - insetPadding[0];
-
-        // vertical
-        if (vPos == VERTICAL.CENTER) {
-            insetPadding[1] = Math.max((height - iHeight) / 2 - vDelta, 0);
-        } else if (vPos == VERTICAL.BOTTOM) {
-            insetPadding[1] = Math.max(height - iHeight - vDelta, 0);
-        }
-        insetPadding[3] = height - iHeight - insetPadding[1];
-
-        return insetPadding;
-    }
-
     /**
      * Build the drawable for a given cache.
      *
-     * @param res
-     *          the resources to use
-     * @param cache
-     *          the cache to build the drawable for
-     * @param cacheListType
-     *          the current CacheListType or Null
-     * @return
-     *          a drawable representing the current cache status
+     * @param res           the resources to use
+     * @param cache         the cache to build the drawable for
+     * @param cacheListType the current CacheListType or Null
+     * @return a drawable representing the current cache status
      */
     @NonNull
     private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final int assignedMarkers) {
-        // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
-        final List<Drawable> layers = new ArrayList<>(11);
-        final List<int[]> insets = new ArrayList<>(10);
-
         // background: disabled or not
         final Drawable marker = Compatibility.getDrawable(res, cache.getMapMarkerId());
-
-        // get actual layer size in px
-        final int width = marker.getIntrinsicWidth();
-        final int height = marker.getIntrinsicHeight();
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
 
         // Show the background circle only on map
         if (showBackground(cacheListType)) {
-            layers.add(marker);
-            insets.add(FULLSIZE);
+            insetsBuilder.withInset(new InsetBuilder(marker));
         }
         // reliable or not
         if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
-            layers.add(Compatibility.getDrawable(res, R.drawable.marker_notreliable));
-            insets.add(FULLSIZE);
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_notreliable));
         }
         // cache type
-        int mainMarkerId = getMainMarkerId(cache, cacheListType);
-        Drawable inset = Compatibility.getDrawable(res, mainMarkerId);
-        layers.add(inset);
-        boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
-        insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
+        final int mainMarkerId = getMainMarkerId(cache, cacheListType);
+        final boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
+        insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
         // own
         if (cache.isOwner()) {
-            inset = Compatibility.getDrawable(res, R.drawable.marker_own);
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, VERTICAL.TOP, HORIZONTAL.RIGHT));
             // if not, checked if stored
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-            inset = Compatibility.getDrawable(res, R.drawable.marker_stored);
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, VERTICAL.TOP, HORIZONTAL.RIGHT));
         }
         // found
         if (!showBigSmileys(cacheListType)) {
-            Integer loggedMarkerId = getMarkerIdIfLogged(cache);
+            final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
-                inset = Compatibility.getDrawable(res, loggedMarkerId);
-                layers.add(inset);
-                insets.add(insetHelper(width, height, inset, VERTICAL.TOP, HORIZONTAL.LEFT));
+                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, VERTICAL.TOP, HORIZONTAL.LEFT));
             }
         }
         // user modified coords
         if (showUserModifiedCoords(cache)) {
-            inset = Compatibility.getDrawable(res, R.drawable.marker_usermodifiedcoords);
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.BOTTOM, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, VERTICAL.BOTTOM, HORIZONTAL.RIGHT));
         }
         // personal note
         if (cache.getPersonalNote() != null) {
-            inset = Compatibility.getDrawable(res, R.drawable.marker_personalnote);
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.BOTTOM, HORIZONTAL.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, VERTICAL.BOTTOM, HORIZONTAL.LEFT));
         }
         // assigned lists with markers
         int markerId = assignedMarkers & ListMarker.BITMASK;
         if (markerId > 0) {
-            inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.LEFT));
         }
 
         markerId = (assignedMarkers >> ListMarker.MAX_BITS_PER_MARKER) & ListMarker.BITMASK;
         if (markerId > 0) {
-            inset = Compatibility.getDrawable(res, ListMarker.getResDrawable(markerId));
-            layers.add(inset);
-            insets.add(insetHelper(width, height, inset, VERTICAL.CENTER, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(ListMarker.getResDrawable(markerId), VERTICAL.CENTER, HORIZONTAL.RIGHT));
         }
 
+        return buildLayerDrawable(insetsBuilder, 11, 10);
+    }
+
+    private static LayerDrawable buildLayerDrawable(final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
+        // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
+        final List<Drawable> layers = new ArrayList<>(layersInitialCapacity);
+        final List<int[]> insets = new ArrayList<>(insetsInitialCapacity);
+
+        insetsBuilder.build(layers, insets);
         final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
 
         int index = 0;
         for (final int[] temp : insets) {
             ld.setLayerInset(index++, temp[0], temp[1], temp[2], temp[3]);
         }
-
         return ld;
     }
 
-    private static int getMainMarkerId(Geocache cache, CacheListType cacheListType) {
+    private static int getMainMarkerId(final Geocache cache, final CacheListType cacheListType) {
         if (showBigSmileys(cacheListType)) {
             final Integer offlineLogType = getMarkerIdIfLogged(cache);
-            if (offlineLogType != null) return offlineLogType;
+            if (offlineLogType != null) {
+                return offlineLogType;
+            }
         }
 
         return cache.getType().markerId;
     }
 
     @org.jetbrains.annotations.Nullable
-    private static Integer getMarkerIdIfLogged(Geocache cache) {
+    private static Integer getMarkerIdIfLogged(final Geocache cache) {
         if (cache.isFound()) {
             return R.drawable.marker_found;
             // if not, perhaps logged offline
@@ -380,7 +306,7 @@ public final class MapMarkerUtils {
         return null;
     }
 
-    private static boolean showBigSmileys(CacheListType cacheListType) {
+    private static boolean showBigSmileys(final CacheListType cacheListType) {
         return Settings.isBigSmileysEnabled() && showBackground(cacheListType);
     }
 
