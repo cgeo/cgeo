@@ -188,7 +188,7 @@
     <string name="err_cannot_log_visit">ログを書くことができません。キャッシュの詳細画面から書き込みしてみてください</string>
     <string name="err_download_fail">キャッシュ情報のダウンロードに失敗しました</string>
     <string name="err_dwld_details_failed">キャッシュ情報の詳細をダウンロードすることができませんでした</string>
-    <string name="err_load_descr_failed">キャッシュの詳細を読み込むことができません</string>
+    <string name="err_load_descr_failed">キャッシュの説明を読み込むことができません</string>
     <string name="err_location_unknown">キャッシュの所在地が分かりません</string>
     <string name="err_missing_device_name">登録するにはこの端末のデバイス名を入力してください</string>
     <string name="err_favorite_failed">お気に入りの変更に失敗しました</string>
@@ -238,8 +238,8 @@
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
-    <string name="warn_notloggedin_short">未ログイン。地図には保存されたキャッシュのみ表示されます</string>
-    <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはローカルに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
+    <string name="warn_notloggedin_short">ログインしていません\n地図には保存されたキャッシュのみ表示されます</string>
+    <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリのリストの読み取りエラー</string>
     <string name="info_log_posted">ログを投稿しました</string>
     <string name="info_log_saved">ログを保存しました</string>
@@ -850,10 +850,10 @@
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
     <string name="cache_personal_note_upload_error">パーソナルノートのアップロードに失敗しました</string>
     <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルしました</string>
-    <string name="cache_description">詳細</string>
-    <string name="cache_description_table_note">キャッシュの詳細にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません</string>
+    <string name="cache_description">説明</string>
+    <string name="cache_description_table_note">キャッシュの説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません</string>
     <string name="cache_area_description">エリアの説明</string>
-    <string name="cache_cache_description">キャッシュの詳細</string>
+    <string name="cache_cache_description">キャッシュの説明</string>
     <string name="cache_virtual_description">仮想の質問</string>
     <string name="cache_traditional_description">トラディショナルパート</string>
     <string name="cache_box_description">ボックスコンテンツ</string>
@@ -1236,7 +1236,7 @@
     <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやWebサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます</string>
     <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります</string>
     <string name="helper_google_translate_title">Google 翻訳</string>
-    <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
+    <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
     <string name="helper_brouter_title">BRouter Offline Navigation</string>
@@ -1484,8 +1484,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_quick_cache_no">クイックキャッシュではない</string>
     <string name="attribute_wherigo_yes">Wherigoキャッシュ</string>
     <string name="attribute_wherigo_no">Wherigoキャッシュではない</string>
-    <string name="attribute_audio_cache_yes">詳細にオーディオファイルが含まれている</string>
-    <string name="attribute_audio_cache_no">詳細にオーディオファイルは含まれていない</string>
+    <string name="attribute_audio_cache_yes">説明にオーディオファイルが含まれている</string>
+    <string name="attribute_audio_cache_no">説明にオーディオファイルは含まれていない</string>
     <string name="attribute_geohotel_yes">ジオホテルキャッシュ</string>
     <string name="attribute_geohotel_no">ジオホテルキャッシュではない</string>
     <string name="attribute_survey_marker_yes">測量標の近く</string>
@@ -1510,9 +1510,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
     <string name="faq_title">よくある質問</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります。\nタップしてインストールしてください</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります。\nタップしてインストールしてください</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります。\nタップしてインストールしてください</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります\nタップしてインストールしてください</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります\nタップしてインストールしてください</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります\nタップしてインストールしてください</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在作業中です。しばらくお待ちください</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります</string>
