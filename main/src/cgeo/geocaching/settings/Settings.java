@@ -64,11 +64,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class Settings {
 
     /**
-     * On opening a map, we limit the _initial_ zoom. The user can still zoom out afterwards.
-     */
-    private static final int INITIAL_MAP_ZOOM_LIMIT = 16;
-
-    /**
      * Separator char for preferences with multiple elements.
      */
     private static final char SEPARATOR_CHAR = ',';
@@ -924,7 +919,7 @@ public class Settings {
      * @return zoom used for the (live) map
      */
     private static int getMapZoom() {
-        return  Math.max(0, Math.min(getInt(R.string.pref_lastmapzoom, 14), INITIAL_MAP_ZOOM_LIMIT));
+        return  getInt(R.string.pref_lastmapzoom, 14);
     }
 
     private static void setMapZoom(final int mapZoomLevel) {
@@ -935,7 +930,7 @@ public class Settings {
      * @return zoom used for the map of a single cache
      */
     private static int getCacheZoom() {
-        return Math.max(0, Math.min(getInt(R.string.pref_cache_zoom, 14), INITIAL_MAP_ZOOM_LIMIT));
+        return getInt(R.string.pref_cache_zoom, 14);
     }
 
     private static void setCacheZoom(final int zoomLevel) {
