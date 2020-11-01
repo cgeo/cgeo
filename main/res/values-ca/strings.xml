@@ -1538,7 +1538,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que utilitzeu una versió anterior d\'Android. Aquesta versió de c: geo ja no és compatible amb el vostre dispositiu i pot fallar o comportar-se de manera inesperada.\nPrem aquest missatge per obtenir més informació.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Esteu fent servir una versió de c: geo que sembla tenir més d’un any. És possible que algunes funcions ja no funcionin a causa de canvis tècnics. Llegiu les nostres FAQ sobre com actualitzar.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Sembla que utilitzeu Android 11, c: geo encara no és compatible. Llegiu les nostres  FAQ per obtenir més informació.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
     <string name="tts_toggle">Activa/Desact. la veu</string>
