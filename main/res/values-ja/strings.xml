@@ -1518,7 +1518,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com はメンテナンス中です。 \nさまざまな問題が発生する可能性があります</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Androidの古いバージョンを使用しているようです。 このバージョンのc:geoはお使いのデバイスと互換性がないため、突然終了したり予期せぬ動作をする可能性があります!\n詳細についてはこのメッセージをタップしてください</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Android 11を使用しているようですがc:geoはまだ完全には対応していません。詳細はFAQをご覧ください</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
