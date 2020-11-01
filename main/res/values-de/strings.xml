@@ -572,6 +572,8 @@
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
+    <string name="init_bigSmileysOnMap">Große Smileys für geloggte Caches</string>
+    <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden auf der Karte große Smileys für geloggte Caches angezeigt (Neustart erforderlich).</string>
     <string name="init_disabled">Deaktivierte ausblenden</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
     <string name="init_archived">Archivierte ausblenden</string>
@@ -948,6 +950,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Im Browser öffnen</string>
     <string name="cache_menu_visit">Besuch loggen</string>
+    <string name="cache_log_too_long">c:geo konnte deinen Log nicht senden, da er zu lang ist. Aber danke für den Versuch, ein so umfangreiches Log zu schreiben ;-)</string>
     <string name="cache_menu_visit_offline">Schneller Offline-Log</string>
     <string name="cache_menu_spoilers">Hinweisbild</string>
     <string name="cache_menu_around">Caches im Umkreis</string>
@@ -1034,6 +1037,7 @@
     <string name="context_share_as_text">Text teilen</string>
     <string name="context_share_as_link">Link teilen</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
+    <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="internal_cache_default_name">Benutzerdefinierter Cache #%1$d</string>
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
     <string name="internal_cache_default_owner">Du</string>
@@ -1196,6 +1200,7 @@
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
     <string name="search_destination">Öffne Ziel in c:geo</string>
+    <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
     <string name="search_own_caches">Meine Caches suchen</string>
