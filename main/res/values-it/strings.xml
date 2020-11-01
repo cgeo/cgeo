@@ -1540,7 +1540,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Sembra che tu stia usando Android 11, che c:geo non supporta ancora completamente. Si prega di leggere le nostre FAQ per avere maggiori informazioni.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
