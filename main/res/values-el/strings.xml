@@ -1540,7 +1540,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Γίνεται συντήρηση στο geocaching.com.\nΜπορεί να αντιμετωπίσετε διάφορα θέματα.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Αυτή η έκδοση του c: geo δεν είναι πλέον συμβατή με τη συσκευή σας και ενδέχεται να αποτύχει ή να συμπεριφερθεί απροσδόκητα! \nΠατήστε σε αυτό το μήνυμα για περισσότερες πληροφορίες.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Φαίνεται οτι χρησιμοποιείτε το Android 11, το οποίο όμως το c: geo δεν υποστηρίζει ακόμη πλήρως. Διαβάστε τις Συχνές Ερωτήσεις μας για περισσότερες πληροφορίες σχετικά με αυτό.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
     <string name="tts_toggle">Φωνητική καθοδήγηση</string>
