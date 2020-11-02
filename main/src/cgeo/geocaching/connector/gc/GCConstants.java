@@ -168,6 +168,13 @@ public final class GCConstants {
 
     static final String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
     static final String STRING_PREMIUMONLY_1 = "class=\"illustration lock-icon\"";
+    static final Pattern PATTERN_PREMIUMONLY_CACHETYPE = Pattern.compile("/app/ui-icons/sprites/cache-types\\.svg#icon-([^\"\\-]+)-?([^\"]+)?");
+    static final Pattern PATTERN_PREMIUMONLY_CACHENAME = Pattern.compile("<h1 class=\"heading-3\">(.+)</h1>");
+    static final Pattern PATTERN_PREMIUMONLY_GEOCODE = Pattern.compile("<li class=\"li__gccode\">([^<]+)");
+    static final Pattern PATTERN_PREMIUMONLY_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_lblDifficulty\"(?:.|\\s)*?<span>([0-5](?:[\\.,]5)?)</span>");
+    static final Pattern PATTERN_PREMIUMONLY_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_lblTerrain\"(?:.|\\s)*?<span>([0-5](?:[\\.,]5)?)</span>");
+    static final Pattern PATTERN_PREMIUMONLY_SIZE = Pattern.compile("<span id=\"ctl00_ContentBody_lblSize\"(?:.|\\s)*?<span>([^<]+)</span>");
+
     static final String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
     static final String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
     static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred";

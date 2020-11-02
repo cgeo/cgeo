@@ -51,6 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -386,7 +387,13 @@ public final class GCParser {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
         if (parsed.left != StatusCode.NO_ERROR) {
-            return new SearchResult(parsed.left);
+            final SearchResult result = new SearchResult(parsed.left);
+
+            if (parsed.left == StatusCode.PREMIUM_ONLY) {
+                result.addAndPutInCache(Collections.singletonList(parsed.right));
+            }
+
+            return result;
         }
 
         final Geocache cache = parsed.right;
@@ -447,7 +454,21 @@ public final class GCParser {
         }
 
         if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
-            return ImmutablePair.of(StatusCode.PREMIUM_ONLY, null);
+            final Geocache cache = new Geocache();
+            cache.setPremiumMembersOnly(true);
+            final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PREMIUMONLY_CACHETYPE, pageIn);
+            if (matcher.find()) {
+                cache.setType(CacheType.getByWaypointType(matcher.group(1)));
+                if (Objects.equals(matcher.group(2), "disabled")) {
+                    cache.setDisabled(true);
+                }
+            }
+            cache.setName(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_CACHENAME, true, ""));
+            cache.setGeocode(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_GEOCODE, true, ""));
+            cache.setDifficulty(Float.parseFloat(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_DIFFICULTY, true, "0")));
+            cache.setTerrain(Float.parseFloat(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_TERRAIN, true, "0")));
+            cache.setSize(CacheSize.getById(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_SIZE, true, CacheSize.NOT_CHOSEN.id)));
+            return ImmutablePair.of(StatusCode.PREMIUM_ONLY, cache);
         }
 
         final String cacheName = TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, ""));
