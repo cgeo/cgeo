@@ -109,7 +109,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static Geocache testSearchByGeocode(final String geocode) {
         final SearchResult search = Geocache.searchByGeocode(geocode, null, true, null);
         assertThat(search).isNotNull();
-        if (Settings.isGCPremiumMember() || search.getError() == StatusCode.NO_ERROR) {
+        if (Settings.isGCPremiumMember() || search.getError() == StatusCode.NO_ERROR || search.getError() == StatusCode.PREMIUM_ONLY) {
             assertThat(search.getGeocodes()).containsExactly(geocode);
             return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
@@ -159,20 +159,29 @@ public class CgeoApplicationTest extends CGeoTestCase {
             SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes()).containsExactly(cache.getGeocode());
-            final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             // coords must be null if the user is not logged in
             assertThat(searchedCache).isNotNull();
-            assert searchedCache != null; // eclipse bug
             assertThat(searchedCache.getCoords()).isNull();
 
-            // premium cache. Not visible to guests
+            // premium cache. Not fully visible to guests
             cache = new GC2JVEH();
 
             deleteCacheFromDBAndLogout(cache.getGeocode());
 
             search = Geocache.searchByGeocode(cache.getGeocode(), null, true, null);
             assertThat(search).isNotNull();
-            assertThat(search.getGeocodes()).isEmpty();
+            searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            assertThat(searchedCache).isNotNull();
+            assertThat(searchedCache.getCoords()).isNull();
+            assertThat(searchedCache.getName()).isEqualTo(cache.getName());
+            assertThat(searchedCache.getDifficulty()).isEqualTo(cache.getDifficulty());
+            assertThat(searchedCache.getTerrain()).isEqualTo(cache.getTerrain());
+            assertThat(searchedCache.getGeocode()).isEqualTo(cache.getGeocode());
+            assertThat(searchedCache.getSize()).isEqualTo(cache.getSize());
+            assertThat(searchedCache.getType()).isEqualTo(cache.getType());
+            // it's not possible in guest sessions to distinguish whether a PM-only cache is disabled or archived
+            assertThat(searchedCache.isDisabled()).isEqualTo(cache.isDisabled() || cache.isArchived());
         });
     }
 
