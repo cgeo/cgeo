@@ -776,12 +776,7 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_attribution_pleasewait">(Počkejte prosím…)</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Kombinovaná (%d map, čekejte prosím…)</string>
-    <string name="map_source_osm_offline_combined_attribution_details">Kombinovaná (%d map, %d atributů): klikněte pro podrobnosti</string>
-    <string name="map_source_osm_offline_combined_attribution_single">Kombinovaná (%d map): %s</string>
-    <string name="map_source_osm_offline_combined_attribution_dialog_title">Kombinovaný zdroj map</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
