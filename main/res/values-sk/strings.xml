@@ -1560,7 +1560,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vyzerá to tak, že používate staršiu verziu Androidu. Ďalšie vydania c:geo už pre vaše zariadenie nemusia byť dostupné.\nKliknite na túto správu pre ďalšie informácie.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používate verziu c:geo, ktorá vyzerá byť staršia ako jeden rok. Niektoré funkcie už nemusia fungovať z dôvodu zmien webstránky alebo technických zmien. Prečítajte si náš FAQ na tému možnosti aktualizácie.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Vyzerá to tak, že používaš Android 11, ktorý c:geo zatiaľ úplne nepodporuje. Prečítaj si náš FAQ pre viac informácií.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Hovoriaci kompas</string>
     <string name="tts_toggle">Prepnúť hlasové pokyny</string>

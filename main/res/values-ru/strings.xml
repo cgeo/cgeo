@@ -1527,7 +1527,6 @@
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com сейчас не работает.\nВозможны различные проблемы.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Похоже, вы используете старую версию Android. Будущие версии c:geo могут быть недоступны для вашего устройства или работать непредсказуемо.\nНажмите на это сообщение для получения дополнительной информации.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Вы используете версию c:geo, которая, скорее всего, устарела больше, чем на год. Некоторые функции больше не работают из-за технических изменений или веб-сайта. Пожалуйста, прочтите FAQ о том, как обновить.</string>
-    <string name="status_android11notice" tools:ignore="UnusedResources">Похоже, вы используете Android 11, который пока не поддерживается c:geo. Пожалуйста, прочтите наш FAQ для получения дополнительной информации об этом.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Говорящий компас</string>
     <string name="tts_toggle">Включить говорилку</string>
