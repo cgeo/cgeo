@@ -572,6 +572,8 @@
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
+    <string name="init_bigSmileysOnMap">Grote smileys voor gelogde caches</string>
+    <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld worden grote smileys getoond voor gelogde caches op de kaart (vereist herstart).</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
@@ -774,12 +776,9 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
-    <string name="map_source_osm_offline_attribution_pleasewait">(Even geduld…)</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Gecombineerd (%d kaarten, even geduld...)</string>
-    <string name="map_source_osm_offline_combined_attribution_details">Gecombineerd (%d kaarten, %d attributen): klik voor details</string>
-    <string name="map_source_osm_offline_combined_attribution_single">Gecombineerd (%d kaarten): %s</string>
-    <string name="map_source_osm_offline_combined_attribution_dialog_title">Gecombineerde toewijzing van kaarten</string>
+    <string name="map_source_attribution_dialog_title">Kaart copyright</string>
+    <string name="map_source_attribution_legacy_text">Klik voor de kaart copyright</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
     <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
@@ -948,6 +947,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
     <string name="cache_menu_visit">Log bezoek</string>
+    <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
     <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
     <string name="cache_menu_around">Caches rondom</string>
@@ -1034,6 +1034,7 @@
     <string name="context_share_as_text">Tekst delen</string>
     <string name="context_share_as_link">Link delen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
+    <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
     <string name="internal_cache_default_description">Dit is een gebruiker gedefinieerde cache</string>
     <string name="internal_cache_default_owner">Jij</string>
@@ -1196,6 +1197,7 @@
     <string name="search_tb_hint">Trackable identificatie</string>
     <string name="search_tb_button">Zoeken naar trackable</string>
     <string name="search_destination">Open bestemming in c:geo</string>
+    <string name="add_target_to">Doel toevoegen aan</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
     <string name="search_address_result">Gevonden plaatsen</string>
     <string name="search_own_caches">Zoek mijn eigen caches</string>
