@@ -761,9 +761,7 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Χωρίς σύνδεση</string>
-    <string name="map_source_osm_offline_attribution_pleasewait">(Παρακαλώ περιμένετε...)</string>
     <string name="map_source_osm_offline_combined">Συνδυασμένο (Εκτός σύνδεσης)</string>
-    <string name="map_source_osm_offline_combined_attribution_pleasewait">Συνδυασμένο (%d χάρτες, παρακαλώ περιμένετε...)</string>
     <string name="init_sendToCgeo">Αποστολή στο c:geo</string>
     <string name="settings_info_send2cgeo_title">Σχετικά με το send2cgeo</string>
     <string name="init_sendToCgeo_name">Όνομα της συσκευής σας</string>
