@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>Next bugfix release:</h1>
+<h1>2020.11.03:</h1>
 
 <h4>Android 11 notice (UPDATED):</h4>
 You can use c:geo with Android 11!
