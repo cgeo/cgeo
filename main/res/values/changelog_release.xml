@@ -2,11 +2,20 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2020.10.29:</h1>
+<h1>Next bugfix release:</h1>
 
 <h4>Android 11 notice (UPDATED):</h4>
 You can use c:geo with Android 11!
 Have a look at our <a href="https://faq.cgeo.org/#android11">FAQ</a> for more details.
+
+<h4>Changes:</h4>
+<ul>
+<li>Fix: Crashes due to problem in DB conversion after upgrade or when restoring backup</li>
+<li>Fix: List creation dialog in light mode unreadable</li>
+<li>Fix: Remove Android 11 warning from home screen</li>
+</ul>
+
+<h1>2020.10.29:</h1>
 
 <h4>Trackable:</h4>
 <ul>
