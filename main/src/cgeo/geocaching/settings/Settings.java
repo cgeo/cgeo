@@ -1642,7 +1642,7 @@ public class Settings {
     }
 
     public static void setBaseDir(final Uri uri) {
-        putString(R.string.pref_granted_basedir, uri.getPath());
+        putString(R.string.pref_granted_basedir, uri.toString());
         LocalStorage.resetExternalPublicCgeoDirectory();
     }
 

@@ -10,6 +10,8 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
@@ -34,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.core.util.Consumer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.Locale;
@@ -51,6 +54,8 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
+
+    private PublicLocalStorage publicLocalStorage = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -293,6 +298,25 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             return;
         }
         setCacheTitleBar(cache);
+    }
+
+    protected PublicLocalStorage getPublicLocalStorage() {
+        if (this.publicLocalStorage == null) {
+            this.publicLocalStorage = new PublicLocalStorage(this);
+        }
+        return this.publicLocalStorage;
+    }
+
+    protected boolean checkPublicFolderAccess(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
+        return getPublicLocalStorage().checkAndGrantFolderAccess(folder, true, callback);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (this.publicLocalStorage != null) {
+            this.publicLocalStorage.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

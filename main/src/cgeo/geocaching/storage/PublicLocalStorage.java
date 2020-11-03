@@ -4,7 +4,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.UriPermission;
@@ -14,19 +13,19 @@ import android.provider.DocumentsContract;
 import androidx.core.util.Consumer;
 import androidx.documentfile.provider.DocumentFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
 
-//Hackish code, trying out a few things
 public class PublicLocalStorage {
 
-    public static final int REQUEST_CODE_GRANT_URI_ACCESS = -582;
+    public static final int REQUEST_CODE_GRANT_URI_ACCESS = 564856496; //TODO: ensure uniqueness...
 
     private final Context context;
-    private final ContentResolver contentResolver;
 
     private IntentData runningIntentData;
 
@@ -42,7 +41,6 @@ public class PublicLocalStorage {
 
     public PublicLocalStorage(final Context context) {
         this.context = context;
-        this.contentResolver = context.getContentResolver();
     }
 
     /**
@@ -72,9 +70,7 @@ public class PublicLocalStorage {
                 .setPositiveButton("OK", (d, p) -> {
                     // call for document tree dialog
                     final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                    intent.addFlags(
-                        (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : Intent.FLAG_GRANT_READ_URI_PERMISSION) |
-                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | (folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                     Log.e("Start uri dir: " + folder.getBaseUri());
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, folder.getBaseUri());
 
@@ -90,14 +86,13 @@ public class PublicLocalStorage {
         if (requestCode == REQUEST_CODE_GRANT_URI_ACCESS) {
             if (resultCode == Activity.RESULT_OK && intent != null) {
                 final Uri uri = intent.getData();
-                if (uri != null) {
-                    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                if (uri != null && runningIntentData != null) {
+                    final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (runningIntentData.folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
+                    context.getContentResolver().takePersistableUriPermission(uri, flags);
                     Log.e("permissions: " + uri.getPath());
-                    if (runningIntentData != null) {
-                        runningIntentData.folder.setBaseUri(uri);
-                        if (runningIntentData.callback != null) {
-                            runningIntentData.callback.accept(runningIntentData.folder);
-                        }
+                    runningIntentData.folder.setBaseUri(uri);
+                    if (runningIntentData.callback != null) {
+                        runningIntentData.callback.accept(runningIntentData.folder);
                     }
                     runningIntentData = null;
                 }
@@ -132,18 +127,50 @@ public class PublicLocalStorage {
     }
 
     private boolean checkUriPermissions(final Uri uri, final boolean checkWrite) {
-        for (UriPermission up : contentResolver.getPersistedUriPermissions()) {
+        for (UriPermission up : context.getContentResolver().getPersistedUriPermissions()) {
             if (up.getUri().equals(uri)) {
                 final boolean hasAdequateRights = (up.isReadPermission()) && (!checkWrite || up.isWritePermission());
                 if (!hasAdequateRights) {
                     return false;
                 }
                 final int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | (checkWrite ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
-                contentResolver.takePersistableUriPermission(uri, flags);
+                context.getContentResolver().takePersistableUriPermission(uri, flags);
                 return true;
             }
         }
         return false;
+    }
+
+    public File createTempFile() {
+        try {
+            final File outputDir = context.getCacheDir(); // context being the Activity pointer
+            final File outputFile = File.createTempFile("cgeo_tempfile_", ".tmp", outputDir);
+            return outputFile;
+        } catch (IOException ie) {
+            Log.e("Problems creating temporary file", ie);
+        }
+        return null;
+    }
+
+    public boolean checkAvailability(final PublicLocalFolder folder) {
+        return getFolderUri(folder) != null;
+    }
+
+    /** Write something to external storage */
+    public boolean writeTempFileToStorage(final PublicLocalFolder folder, final String name, final File tempFile) {
+        FileInputStream fis = null;
+        final boolean result;
+        try {
+            fis = new FileInputStream(tempFile);
+            result = writeToStorage(folder, name, fis);
+        } catch (IOException ie) {
+            Log.w("Problems writing file '" + tempFile + "' to '" + folder + "'", ie);
+            return false;
+        } finally {
+            IOUtils.closeQuietly(fis);
+        }
+        tempFile.delete();
+        return result;
     }
 
     /** Write something to external storage */
@@ -151,8 +178,9 @@ public class PublicLocalStorage {
         OutputStream out = null;
         try {
             final Uri folderUri = getFolderUri(folder);
-            final Uri newDoc = DocumentsContract.createDocument(contentResolver, folderUri, folder.getDefaultMimeType(), name);
-            out = contentResolver.openOutputStream(newDoc);
+            final String docName = name == null ? folder.createNewFilename() : name;
+            final Uri newDoc = DocumentsContract.createDocument(context.getContentResolver(), folderUri, folder.getDefaultMimeType(), docName);
+            out = context.getContentResolver().openOutputStream(newDoc);
             IOUtils.copy(in, out);
         } catch (IOException ioe) {
             Log.w("Problem copying", ioe);

@@ -22,6 +22,8 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
@@ -87,6 +89,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
 
+    private final PublicLocalStorage publicLocalStorage = new PublicLocalStorage(this);
+
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
      * directory and preference key in onActivityResult() easily just by knowing
@@ -129,6 +133,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
+
+        publicLocalStorage.checkAndGrantFolderAccess(PublicLocalFolder.LOGFILES, true, null);
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -709,6 +715,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (publicLocalStorage.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
 
         if (MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data)) {
             return;
