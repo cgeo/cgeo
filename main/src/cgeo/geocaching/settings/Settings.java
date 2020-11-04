@@ -625,7 +625,7 @@ public class Settings {
     }
 
     public static boolean isValidMapFile(final String mapFileIn) {
-        return MapsforgeMapProvider.isValidMapFile(mapFileIn);
+        return true; //MapsforgeMapProvider.isValidMapFile(mapFileIn); //TODO
     }
 
     public static boolean isScaleMapsforgeText() {
@@ -1016,7 +1016,7 @@ public class Settings {
     public static synchronized void setMapSource(final MapSource newMapSource) {
         putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
         if (newMapSource instanceof OfflineMapSource) {
-            setMapFile(((OfflineMapSource) newMapSource).getFileName());
+            setMapFile(((OfflineMapSource) newMapSource).getMapUri().toString());
         }
         // cache the value
         mapSource = newMapSource;

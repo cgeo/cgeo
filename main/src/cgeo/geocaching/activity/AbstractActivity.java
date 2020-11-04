@@ -11,7 +11,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorage;
+import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
@@ -36,7 +36,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-import androidx.core.util.Consumer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.Locale;
@@ -55,7 +54,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
-    private PublicLocalStorage publicLocalStorage = null; //lazy initalized
+    private PublicLocalStorageActivityHelper publicLocalStorage = null; //lazy initalized
 
     protected AbstractActivity() {
         this(false);
@@ -300,15 +299,15 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         setCacheTitleBar(cache);
     }
 
-    protected PublicLocalStorage getPublicLocalStorage() {
+    protected PublicLocalStorageActivityHelper getPublicLocalStorage() {
         if (this.publicLocalStorage == null) {
-            this.publicLocalStorage = new PublicLocalStorage(this);
+            this.publicLocalStorage = new PublicLocalStorageActivityHelper(this);
         }
         return this.publicLocalStorage;
     }
 
-    protected boolean checkPublicFolderAccess(final PublicLocalFolder folder, final Consumer<PublicLocalFolder> callback) {
-        return getPublicLocalStorage().checkAndGrantFolderAccess(folder, true, callback);
+    protected void checkAndGrantPublicFolderAccess(final PublicLocalFolder ... folders) {
+        getPublicLocalStorage().checkAndGrantFolderAccess(folders);
     }
 
     @Override

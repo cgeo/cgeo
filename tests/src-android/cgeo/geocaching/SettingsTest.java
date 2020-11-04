@@ -21,7 +21,7 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
      */
     public static void testSettingsException() {
         // We just want to ensure that it does not throw any exception but we do not know anything about the result
-        MapsforgeMapProvider.isValidMapFile(Settings.getMapFile());
+        MapsforgeMapProvider.isValidMapFile(null);
     }
 
     public static void testSettings() {

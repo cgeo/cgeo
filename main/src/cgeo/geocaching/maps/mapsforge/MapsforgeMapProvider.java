@@ -13,21 +13,23 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.MultiRendererLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RendererLayer;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.PublicLocalFolder;
+import cgeo.geocaching.storage.PublicLocalStorage;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -69,44 +71,50 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         return Holder.INSTANCE;
     }
 
-    public static List<String> getOfflineMaps() {
-        final String directoryPath = Settings.getMapFileDirectory();
-        if (StringUtils.isBlank(directoryPath)) {
-            return Collections.emptyList();
-        }
+    public static List<ImmutablePair<String, Uri>> getOfflineMaps() {
+        //TODO
+        return PublicLocalStorage.get().listDocuments(PublicLocalFolder.OFFLINE_MAP_DEFAULT);
 
-        final File directory = new File(directoryPath);
-        if (directory.isDirectory()) {
-            try {
-                final List<String> mapFileList = new ArrayList<>();
-                final File[] files = directory.listFiles();
-                if (ArrayUtils.isNotEmpty(files)) {
-                    for (final File file : files) {
-                        if (file.getName().endsWith(".map") && isValidMapFile(file.getAbsolutePath())) {
-                            mapFileList.add(file.getAbsolutePath());
-                        }
-                    }
-                    Collections.sort(mapFileList, TextUtils.COLLATOR);
-                }
-                return mapFileList;
-            } catch (final Exception e) {
-                Log.e("MapsforgeMapProvider.getOfflineMaps: ", e);
-            }
-        }
-        return Collections.emptyList();
     }
 
-    public static boolean isValidMapFile(final String mapFileIn) {
+//    public static List<String> getOfflineMaps() {
+//        final String directoryPath = Settings.getMapFileDirectory();
+//        if (StringUtils.isBlank(directoryPath)) {
+//            return Collections.emptyList();
+//        }
+//
+//        final File directory = new File(directoryPath);
+//        if (directory.isDirectory()) {
+//            try {
+//                final List<String> mapFileList = new ArrayList<>();
+//                final File[] files = directory.listFiles();
+//                if (ArrayUtils.isNotEmpty(files)) {
+//                    for (final File file : files) {
+//                        if (file.getName().endsWith(".map") && isValidMapFile(file.getAbsolutePath())) {
+//                            mapFileList.add(file.getAbsolutePath());
+//                        }
+//                    }
+//                    Collections.sort(mapFileList, TextUtils.COLLATOR);
+//                }
+//                return mapFileList;
+//            } catch (final Exception e) {
+//                Log.e("MapsforgeMapProvider.getOfflineMaps: ", e);
+//            }
+//        }
+//        return Collections.emptyList();
+//    }
 
-        if (StringUtils.isEmpty(mapFileIn)) {
+    public static boolean isValidMapFile(final Uri mapUri) {
+
+        if (!PublicLocalStorage.get().checkUriForRead(mapUri)) {
             return false;
         }
 
         try {
-            final MapFile mapFile = new MapFile(mapFileIn);
+            final MapFile mapFile = createMapFile(mapUri);
             return mapFile.getMapFileInfo().fileVersion <= 3 || !Settings.useOldMapsforgeAPI();
         } catch (MapFileException ex) {
-            Log.w(String.format("Exception reading mapfile '%s'", mapFileIn), ex);
+            Log.w(String.format("Exception reading mapfile '%s'", mapUri.toString()), ex);
         }
         return false;
     }
@@ -149,26 +157,26 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
      */
     public static final class OfflineMapSource extends MapsforgeMapSource {
 
-        private final String fileName;
+        private final Uri mapUri;
 
-        public OfflineMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
-            super(fileName, mapProvider, name, generator);
-            this.fileName = fileName;
+        public OfflineMapSource(final String id, final Uri mapUri, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+            super(id, mapProvider, name, generator);
+            this.mapUri = mapUri;
         }
 
         @Override
         public boolean isAvailable() {
-            return isValidMapFile(fileName);
+            return isValidMapFile(mapUri);
         }
 
-        public String getFileName() {
-            return fileName;
+        public Uri getMapUri() {
+            return mapUri;
         }
 
         /** Create new render layer, if mapfile exists */
         @Override
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
-            final MapFile mf = createMapFile(this.fileName);
+            final MapFile mf = createMapFile(this.mapUri);
             if (mf != null) {
                 MapProviderFactory.setLanguages(mf.getMapLanguages());
                 return new RendererLayer(tileCache, mf, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
@@ -178,7 +186,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
         @Override
         public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
-            return new ImmutablePair<>(getAttributionFromMapFile(this.fileName), true);
+            return new ImmutablePair<>(getAttributionFromMapFile(this.mapUri), true);
         }
 
    }
@@ -224,9 +232,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     public static final class OfflineMultiMapSource extends MapsforgeMapSource {
-        private final List<String> fileNames;
+        private final List<ImmutablePair<String, Uri>> fileNames;
 
-        public OfflineMultiMapSource(final List<String> fileNames, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+        public OfflineMultiMapSource(final List<ImmutablePair<String, Uri>> fileNames, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
             super(StringUtils.join(fileNames, ";"), mapProvider, name, generator);
             this.fileNames = fileNames;
         }
@@ -235,15 +243,15 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public boolean isAvailable() {
             boolean isValid = true;
 
-            for (String fileName : fileNames) {
-                isValid &= isValidMapFile(fileName);
+            for (ImmutablePair<String, Uri> fileName : fileNames) {
+                isValid &= isValidMapFile(fileName.right);
             }
             return isValid;
         }
 
-        public String getFileName() {
-            return fileNames.get(0);
-        }
+        //public String getFileName() {
+        //    return fileNames.get(0);
+        //}
 
         /**
          * Create new render layer, if mapfiles exist
@@ -251,11 +259,8 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         @Override
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
             final List<MapFile> mapFiles = new ArrayList<>();
-            for (String fileName : fileNames) {
-                final File mapFile = new File(fileName);
-                if (mapFile.exists()) {
-                    mapFiles.add(new MapFile(mapFile));
-                }
+            for (ImmutablePair<String, Uri> fileName : fileNames) {
+                mapFiles.add(createMapFile(fileName.right));
             }
 
             return new MultiRendererLayer(tileCache, mapFiles, mapViewPosition, false, true, false, AndroidGraphicFactory.INSTANCE);
@@ -265,9 +270,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public ImmutablePair<String, Boolean> calculateMapAttribution(final Context ctx) {
 
             final StringBuilder attributation = new StringBuilder();
-            for (String fileName : fileNames) {
-                attributation.append("<p><b>" + new File(fileName).getName() + "</b>:<br>");
-                attributation.append(getAttributionFromMapFile(fileName));
+            for (ImmutablePair<String, Uri> fileName : fileNames) {
+                attributation.append("<p><b>" + fileName.left + "</b>:<br>");
+                attributation.append(getAttributionFromMapFile(fileName.right));
                 attributation.append("</p>");
             }
             return new ImmutablePair<>(attributation.toString(), true);
@@ -277,7 +282,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
      }
 
     @NonNull
-    private static String getAttributionFromMapFile(final String filePath) {
+    private static String getAttributionFromMapFile(final Uri filePath) {
 
         MapFile mapFile = null;
         try {
@@ -299,6 +304,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     private static MapFile createMapFile(final String fileName) {
+
         final File file = new File(fileName);
         if (file.exists()) {
             return new MapFile(file, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
@@ -306,18 +312,58 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         return null;
     }
 
+    private static MapFile createMapFile(final Uri mapUri) {
+        final InputStream fis = PublicLocalStorage.get().openForRead(mapUri);
+        return new MapFile((FileInputStream) fis, 0, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
+    }
+
+
     public void updateOfflineMaps() {
         MapProviderFactory.deleteOfflineMapSources();
         final Resources resources = CgeoApplication.getInstance().getResources();
-        final List<String> offlineMaps = getOfflineMaps();
+        final List<ImmutablePair<String, Uri>> offlineMaps = getOfflineMaps();
         if (offlineMaps.size() > 1) {
             registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined), MapGeneratorInternal.DATABASE_RENDERER));
         }
-        for (final String mapFile : offlineMaps) {
-            final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
-            registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
+        for (final ImmutablePair<String, Uri> mapFile : offlineMaps) {
+            final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(mapFile.left, "."));
+            registerMapSource(new OfflineMapSource(mapFile.left, mapFile.right, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
         }
     }
+
+    //Help for SAF framework
+    //following code was copied here as reference provided thankfully by pstorch from
+    //https://github.com/OpenTracksApp/OSMDashboard/blob/main/src/main/java/de/storchp/opentracks/osmplugin/MapsActivity.java#L316
+
+//    protected MapDataStore getMapFile() {
+//        final MultiMapDataStore mapDataStore = new MultiMapDataStore(MultiMapDataStore.DataPolicy.RETURN_ALL);
+//        final Set<Uri> mapFiles = PreferencesUtils.getMapUris(this);
+//        if (mapFiles.isEmpty()) {
+//            return null;
+//        }
+//        int mapsCount = 0;
+//        for (final Uri mapUri: mapFiles) {
+//            try {
+//                final boolean documentUri = DocumentFile.isDocumentUri(this, mapUri);
+//                if (documentUri) {
+//                    final DocumentFile documentFile = DocumentFile.fromSingleUri(this, mapUri);
+//                    if (documentFile != null && documentFile.canRead()) {
+//                        final FileInputStream inputStream = (FileInputStream) getContentResolver().openInputStream(mapUri);
+//                        mapDataStore.addMapDataStore(new MapFile(inputStream, 0, null), false, false);
+//                        mapsCount++;
+//                    }
+//                }
+//            } catch (final Exception e) {
+//                Log.e(TAG, "Can't open mapFile", e);
+//            }
+//        }
+//
+//        if (mapsCount == 0 && !mapFiles.isEmpty()) {
+//            Toast.makeText(this, R.string.error_loading_offline_map, Toast.LENGTH_LONG).show();
+//        }
+//
+//        return mapsCount > 0 ? mapDataStore : null;
+//    }
 
 
 

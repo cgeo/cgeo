@@ -10,12 +10,22 @@ import androidx.core.util.Supplier;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public enum PublicLocalFolder {
+public class PublicLocalFolder {
 
-    LOGFILES("logfiles", "logcat", "txt"),
-    BACKUP("backup", "", "sqlite"),
-    IMAGES("cgeo", "img", "jpg", () -> MediaStore.Images.Media.INTERNAL_CONTENT_URI),
-    OFFLINE_MAP("maps", "map", "map");
+    /** Offline Maps: default folder (also the one where c:geo downloads its own offline maps) */
+    public static final PublicLocalFolder OFFLINE_MAP_DEFAULT = new PublicLocalFolder("maps", "map", "map");
+    /** Offline Maps: optional additional folder (configured in settings) with user-supplied maps acquired outside of c:geo */
+    public static final PublicLocalFolder OFFLINE_MAP_CONFIGURED = new PublicLocalFolder("maps", "map", "map");
+    /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
+    public static final PublicLocalFolder OFFLINE_MAP_THEMES = new PublicLocalFolder("maps", "map", "map");
+
+    /** Target folder for written logfiles */
+    public static final PublicLocalFolder LOGFILES = new PublicLocalFolder("logfiles", "logcat", "txt");
+
+    public static final PublicLocalFolder BACKUP = new PublicLocalFolder("backup", "", "sqlite");
+    public static final PublicLocalFolder IMAGES = new PublicLocalFolder("cgeo", "img", "jpg", () -> MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+    public static final PublicLocalFolder GPX = new PublicLocalFolder("gpx", "gpx", "jpg", () -> MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 
@@ -25,11 +35,11 @@ public enum PublicLocalFolder {
     private final Supplier<Uri> baseUriSupplier;
     private final boolean needsWrite;
 
-    PublicLocalFolder(final String folderName, final String defaultFilePrefix, final String defaultFileSuffix) {
+    private PublicLocalFolder(final String folderName, final String defaultFilePrefix, final String defaultFileSuffix) {
         this(folderName, defaultFilePrefix, defaultFileSuffix, null);
     }
 
-    PublicLocalFolder(final String folderName, final String defaultFilePrefix, final String defaultFileSuffix, final Supplier<Uri> baseUriSupplier) {
+    private PublicLocalFolder(final String folderName, final String defaultFilePrefix, final String defaultFileSuffix, final Supplier<Uri> baseUriSupplier) {
         this.baseUriSupplier = baseUriSupplier;
         this.folderName = folderName;
         this.defaultFilePrefix = defaultFilePrefix;

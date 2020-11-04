@@ -23,7 +23,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PublicLocalFolder;
-import cgeo.geocaching.storage.PublicLocalStorage;
+import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
@@ -89,7 +89,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private final BackupUtils backupUtils = new BackupUtils(SettingsActivity.this);
 
-    private final PublicLocalStorage publicLocalStorage = new PublicLocalStorage(this);
+    private final PublicLocalStorageActivityHelper publicLocalStorage = new PublicLocalStorageActivityHelper(this);
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -134,7 +134,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         setResult(NO_RESTART_NEEDED);
 
-        publicLocalStorage.checkAndGrantFolderAccess(PublicLocalFolder.LOGFILES, true, null);
+        publicLocalStorage.checkAndGrantFolderAccess(PublicLocalFolder.LOGFILES);
     }
 
     private void openInitialScreen(final int initialScreen) {
