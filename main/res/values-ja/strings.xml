@@ -55,7 +55,7 @@
     <string name="wp_original">オリジナル座標</string>
     <!-- logs -->
     <string name="log_found">発見</string>
-    <string name="log_dnf">発見できず</string>
+    <string name="log_dnf">未発見</string>
     <string name="log_note">メモ</string>
     <string name="log_published">公開</string>
     <string name="log_enabled">有効化</string>
