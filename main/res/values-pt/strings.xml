@@ -776,6 +776,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinado (offline)</string>
+    <string name="map_source_attribution_dialog_title">Créditos do mapa</string>
+    <string name="map_source_attribution_legacy_text">Toque para ver os créditos do mapa</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
@@ -944,6 +946,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_streetview">Vista de rua</string>
     <string name="cache_menu_browser">Abrir no browser</string>
     <string name="cache_menu_visit">Registar visita</string>
+    <string name="cache_log_too_long">O c:geo não pôde enviar o seu registo por ser muito longo. Mas obrigado por tentar escrever um registo tão extenso ;-)</string>
     <string name="cache_menu_visit_offline">Registo rápido sem ligação</string>
     <string name="cache_menu_spoilers">Imagens spoiler</string>
     <string name="cache_menu_around">Caches próximas</string>
@@ -1193,6 +1196,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
     <string name="search_destination">Abrir pasta de destino no c:geo</string>
+    <string name="add_target_to">Adicionar destino a</string>
     <string name="search_address_started">Pesquisar por lugares</string>
     <string name="search_address_result">Encontrar lugares</string>
     <string name="search_own_caches">Pesquisar as minhas caches</string>
