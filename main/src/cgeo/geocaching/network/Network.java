@@ -618,7 +618,7 @@ public final class Network {
                 response.close();
             }
         }
-        return Single.error(new IOException("request was not successful"));
+        return Single.error(new IOException("request was not successful: " + response));
     };
 
     /**

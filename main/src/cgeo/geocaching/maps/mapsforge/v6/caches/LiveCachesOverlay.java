@@ -29,7 +29,6 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
     private final Disposable timer;
     private boolean downloading = false;
-    public final long loadThreadRun = -1;
 
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
@@ -49,7 +48,10 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         @NonNull
         private final WeakReference<LiveCachesOverlay> overlayRef;
         private int previousZoom = -100;
-        private Viewport previousViewport;
+        private Viewport previousCycleViewport; //viewport as it was in last time schedule cycle
+
+        private Viewport previousUpdateViewport; //viewport as it was when layer was last updated
+        private long previousMovementTriggeredUpdate = -1; //last time of a movement-triggered update
 
         LoadTimerAction(@NonNull final LiveCachesOverlay overlay) {
             this.overlayRef = new WeakReference<>(overlay);
@@ -68,24 +70,32 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
                 // it is ok to use the Google Maps compatible zoom level of OSM Maps
                 final int zoomNow = overlay.getMapZoomLevel();
 
-                // check if map moved or zoomed
-                //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom ||
-                        mapMoved(previousViewport, viewportNow);
+                // check if map moved and at least some time grace period has passed since last movement-triggered update
+                // Without grace period, HTTP429 "too many requests" are returned at least from gc.com.
+                // This happens still occasionally with e.g. 5 seconds grace periods so we use 10 seconds at least
+                final boolean updateNecessaryDueToMovement = previousUpdateViewport == null || previousMovementTriggeredUpdate < 0 ||
+                        (mapMoved(previousUpdateViewport, viewportNow) && System.currentTimeMillis() - previousMovementTriggeredUpdate > 10000);
 
-                // save new values
-                if (moved) {
-                    final long currentTime = System.currentTimeMillis();
+                //check if other relevant events enforce an update
+                final boolean updateNecessary = overlay.isInvalidated() || previousCycleViewport == null ||
+                        zoomNow != previousZoom || updateNecessaryDueToMovement;
 
-                    if (1000 < (currentTime - overlay.loadThreadRun)) {
-                        overlay.downloading = true;
-                        previousZoom = zoomNow;
-                        overlay.download();
+                if (updateNecessary) {
+                    Log.v("Performing LiveCachesOverlay-Update (updateNecessaryDueToMovement:" + updateNecessaryDueToMovement + ")");
+
+                    overlay.downloading = true;
+                    previousZoom = zoomNow;
+                    overlay.download();
+
+                    previousUpdateViewport = viewportNow;
+                    if (updateNecessaryDueToMovement) {
+                        previousMovementTriggeredUpdate = System.currentTimeMillis();
                     }
-                } else if (!previousViewport.equals(viewportNow)) {
+                }
+                if (previousCycleViewport != null && !previousCycleViewport.equals(viewportNow)) {
                     overlay.updateTitle();
                 }
-                previousViewport = viewportNow;
+                previousCycleViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("LiveCachesOverlay.startLoadtimer.start", e);
             } finally {
