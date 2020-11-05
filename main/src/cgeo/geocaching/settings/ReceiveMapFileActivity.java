@@ -152,7 +152,8 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                         Settings.setMapFile(newMapPath);
                         MapSource newMapSource = null;
                         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
-                            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && ((MapsforgeMapProvider.OfflineMapSource) mapSource).getFileName().equals(newMapPath)) {
+                            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && ((MapsforgeMapProvider.OfflineMapSource) mapSource).getMapUri()
+                                .equals(Uri.fromFile(new File(newMapPath)))) {
                                 newMapSource = mapSource;
                                 break;
                             }

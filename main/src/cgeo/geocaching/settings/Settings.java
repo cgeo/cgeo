@@ -40,6 +40,7 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -597,7 +598,7 @@ public class Settings {
 
     static void setMapFile(final String mapFile) {
         putString(R.string.pref_mapfile, mapFile);
-        if (mapFile != null) {
+        if (!StringUtils.isBlank(mapFile)) {
             setMapFileDirectory(new File(mapFile).getParent());
         }
     }
@@ -619,12 +620,8 @@ public class Settings {
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
 
-    private static boolean isValidMapFile() {
-        return isValidMapFile(getMapFile());
-    }
-
-    public static boolean isValidMapFile(final String mapFileIn) {
-        return MapsforgeMapProvider.isValidMapFile(mapFileIn);
+    public static boolean isCurrentlySelectedMapUriValid() {
+        return MapsforgeMapProvider.isValidMapFile(Uri.fromFile(new File (getMapFile())));
     }
 
     public static boolean isScaleMapsforgeText() {
@@ -967,11 +964,9 @@ public class Settings {
         }
         final int id = getConvertedMapId();
         mapSource = MapProviderFactory.getMapSource(id);
-        if (mapSource != null) {
-            // don't use offline maps if the map file is not valid
-            if (!(mapSource instanceof OfflineMapSource) || isValidMapFile()) {
-                return mapSource;
-            }
+        // don't use offline maps if the map file is not valid
+        if (mapSource != null && (!(mapSource instanceof OfflineMapSource) || isCurrentlySelectedMapUriValid())) {
+            return mapSource;
         }
         // fallback to first available map
         return MapProviderFactory.getDefaultSource();
@@ -1001,7 +996,7 @@ public class Settings {
                 return MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode();
             case MFMAP_BASEID + OFFLINE: {
                 final String mapFile = getMapFile();
-                if (StringUtils.isNotEmpty(mapFile)) {
+                if (mapFile != null) {
                     return mapFile.hashCode();
                 }
                 break;
@@ -1015,7 +1010,7 @@ public class Settings {
     public static synchronized void setMapSource(final MapSource newMapSource) {
         putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
         if (newMapSource instanceof OfflineMapSource) {
-            setMapFile(((OfflineMapSource) newMapSource).getFileName());
+            setMapFile(((OfflineMapSource) newMapSource).getMapUri().getPath());
         }
         // cache the value
         mapSource = newMapSource;
