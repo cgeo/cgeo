@@ -737,7 +737,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     final File file = new File(mapFile);
                     if (!file.isDirectory()) {
                         Settings.setMapFile(mapFile);
-                        if (!Settings.isValidMapFile(Settings.getMapFile())) {
+                        if (!Settings.isCurrentlySelectedMapUriValid()) {
                             showInvalidMapfileMessage(this);
                         } else {
                             // Ensure map source preference is updated accordingly.

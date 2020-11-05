@@ -239,7 +239,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl<MapsforgeCa
                 return;
             }
             setMapFile(new File(Settings.getMapFile()));
-            if (!Settings.isValidMapFile(Settings.getMapFile())) {
+            if (!Settings.isCurrentlySelectedMapUriValid()) {
                 showInvalidMapfileMessage(getContext());
             }
         }
