@@ -49,8 +49,8 @@ public class ImageTest extends CGeoTestCase {
     }
 
     public static void testFileConstructor() throws Exception {
-        final Image image1 = new Image.Builder().setUrl(FileUtils.urlToFile(FILE1)).build();
-        final Image image2 = new Image.Builder().setUrl(FileUtils.urlToFile(FILE2)).build();
+        final Image image1 = new Image.Builder().setUrl(Uri.fromFile(FileUtils.urlToFile(FILE1))).build();
+        final Image image2 = new Image.Builder().setUrl(Uri.fromFile(FileUtils.urlToFile(FILE2))).build();
 
         assertThat(image1).isNotEqualTo(Image.NONE);
         assertThat(image2).isNotEqualTo(Image.NONE);
@@ -116,12 +116,6 @@ public class ImageTest extends CGeoTestCase {
         assertThat(image2.isLocalFile()).isFalse();
         assertThat(image3.isLocalFile()).isTrue();
         assertThat(image4.isLocalFile()).isFalse();
-    }
-
-    public static void testLocalFile() throws Exception {
-        final Image image1 = new Image.Builder().setUrl(FILE1).build();
-
-        assertThat(image1.localFile()).isEqualTo(FileUtils.urlToFile(FILE1));
     }
 
     public static void testGetUrl() throws Exception {

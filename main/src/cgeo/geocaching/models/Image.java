@@ -95,18 +95,6 @@ public class Image implements Parcelable {
         }
 
         /**
-         * Set image from File.
-         *
-         * @param file
-         *          The image url from File
-         */
-        @NonNull
-        public Builder setUrl(@NonNull final File file) {
-            uri = Uri.fromFile(file);
-            return this;
-        }
-
-        /**
          * Set image from Image.
          *
          * @param image
@@ -338,20 +326,6 @@ public class Image implements Parcelable {
         return FileUtils.urlToFile(uri.toString());
     }
 
-    /**
-     * Check if the image exists locally.
-     * Return False if Image is not local.
-     * Todo: May check if we have a cached Image for remote Uri
-     *
-     * @return
-     *          True if image exists on local filesystem
-     */
-    public boolean existsLocal() {
-        if (!isLocalFile()) {
-            return false;
-        }
-        return new File(getPath()).exists();
-    }
 
     /**
      * Check if the image Uri is Empty.

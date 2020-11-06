@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.core.text.HtmlCompat;
 import androidx.exifinterface.media.ExifInterface;
 
@@ -30,6 +31,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
@@ -44,6 +46,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
+import static java.io.File.separator;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -53,6 +56,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public final class ImageUtils {
+
     private static final int[] ORIENTATIONS = {
             ExifInterface.ORIENTATION_ROTATE_90,
             ExifInterface.ORIENTATION_ROTATE_180,
@@ -88,19 +92,20 @@ public final class ImageUtils {
     }
 
     /**
-     * Reads and scales an image file to the device display size.
+     * Reads and scales an image to the device display size.
      *
-     * @param filename
-     *            The image file to read and scale
+     * @param imageData
+     *            The image data to read and scale
      * @return Bitmap The scaled image or Null if source image can't be read
      */
     @Nullable
-    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final String filename) {
+    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final Uri imageData) {
         final Point displaySize = DisplayUtils.getDisplaySize();
         // Restrict image size to 800 x 800 to prevent OOM on tablets
         final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
         final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
-        final Bitmap image = readDownsampledImage(filename, maxWidth, maxHeight);
+
+        final Bitmap image = readDownsampledImage(imageData, maxWidth, maxHeight);
         if (image == null) {
             return null;
         }
@@ -139,7 +144,7 @@ public final class ImageUtils {
     }
 
     /**
-     * Store a bitmap to file.
+     * Store a bitmap to uri.
      *
      * @param bitmap
      *            The bitmap to store
@@ -150,13 +155,10 @@ public final class ImageUtils {
      * @param pathOfOutputImage
      *            Path to store to
      */
-    public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String pathOfOutputImage) {
-        BufferedOutputStream bos = null;
+    public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final Uri targetUri) {
+        final BufferedOutputStream bos = null;
         try {
-            final FileOutputStream out = new FileOutputStream(pathOfOutputImage);
-            bos = new BufferedOutputStream(out);
-            bitmap.compress(format, quality, bos);
-            bos.flush();
+            bitmap.compress(format, quality, CgeoApplication.getInstance().getApplicationContext().getContentResolver().openOutputStream(targetUri));
         } catch (final IOException e) {
             Log.e("ImageHelper.storeBitmap", e);
         } finally {
@@ -165,87 +167,68 @@ public final class ImageUtils {
     }
 
     public static class ScaleImageResult {
-        final String filename;
-        final int width;
-        final int height;
+        public final Uri imageUri;
+        public final int width;
+        public final int height;
+        public final boolean wasCopied;
 
-        public ScaleImageResult(final String filename, final int width, final int height) {
-            this.filename = filename;
+        public ScaleImageResult(final Uri imageUri, final int width, final int height, final boolean wasCopied) {
+            this.imageUri = imageUri;
             this.width = width;
             this.height = height;
-        }
-
-        public String getFilename() {
-            return filename;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
+            this.wasCopied = wasCopied;
         }
     }
 
     /**
-     * This method will COPY the given image file to a new location, sample it down, scales it to given bounds
-     * and remove EXIF information.
+     * This method will scale down a given image and remove EXIF information. During this process the image might be copied,
+     * so returned Uri might not be same than the one put in.
      *
-     * Also, if wanted, it scales an image to the desired bounds.
-     *
-     * @param filePath Image to read
-     * @param maxXY bounds. If <= 0 then no scaling will happen. Rest depends on parameter 'forceCopy'
-     * @param forceCopy if maxXY is <=0 but forceCopy is true, then image will be copied, sampled down and EXIF removed nevertheless
-     * @param deleteOldInSameFolder if true: if we make a copy AND that copy is in the same folder then the old file is deleted
-     * @return scale image result with filename and size, <tt>null</tt> if something fails
+     * @param originalImageUri Image to read
+     * @param maxXY bounds. If <= 0 then no scaling will happen. This might also mean that the image is not copied (depends on preserveOriginal parameter)
+     * @param preserveOriginal if true then a copy will always be made and the original image is not deleted. If false and a copy is made, then the original uri is deleted.
+     * @return scale image result, <tt>null</tt> if something fails
      */
     @Nullable
-    public static ScaleImageResult readScaleAndWriteImage(@NonNull final String filePath, final int maxXY, final boolean forceCopy, final boolean deleteOldInSameFolder) {
-        if (maxXY <= 0 && !forceCopy) {
-            final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
-            return new ScaleImageResult(filePath, sizeOnlyOptions.outWidth, sizeOnlyOptions.outHeight);
+    public static ScaleImageResult readScaleAndWriteImage(@NonNull final Uri originalImageUri, final int maxXY, final boolean preserveOriginal) {
+
+        if (maxXY <= 0 && !preserveOriginal) {
+            final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(originalImageUri));
+            return new ScaleImageResult(originalImageUri, sizeOnlyOptions.outWidth, sizeOnlyOptions.outHeight, false);
         }
-        final Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
+        final Bitmap image = readDownsampledImage(originalImageUri, maxXY, maxXY);
         if (image == null) {
             return null;
         }
 
-        final File tempImageFile = getOutputImageFile();
-        if (tempImageFile == null) {
+        final Uri newImageUri = createNewImageUri(false);
+        if (newImageUri == null) {
             Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
             return null;
         }
-        final String uploadFilename = tempImageFile.getPath();
 
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
-        storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
-        if (deleteOldInSameFolder && tempImageFile.getParentFile().equals(new File(filePath).getParentFile())) {
-            //previous file is in same folder and we made a copy -> delete outdated older file
-            new File(filePath).delete();
+        storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, newImageUri);
+
+        if (!preserveOriginal) {
+            deleteImage(originalImageUri);
         }
-        return new ScaleImageResult(uploadFilename, scaledImage.getBitmap().getWidth(), scaledImage.getBitmap().getHeight());
+        return new ScaleImageResult(newImageUri, scaledImage.getBitmap().getWidth(), scaledImage.getBitmap().getHeight(), true);
     }
 
     /**
-     * Reads and scales an image file with downsampling in one step to prevent memory consumption.
+     * Reads and scales an image with downsampling in one step to prevent memory consumption.
      *
-     * @param filePath The file to read
+     * @param imageUri image to read
      * @param maxX The desired width. If <= 0 then actual bitmap width is used
      * @param maxY The desired height. If <= 0 then actual bitmap height is used
-     * @return Bitmap the image or null if file can't be read
+     * @return Bitmap the image or null if image can't be read
      */
     @Nullable
-    private static Bitmap readDownsampledImage(@NonNull final String filePath, final int maxX, final int maxY) {
+    private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY) {
 
-        int orientation = ExifInterface.ORIENTATION_NORMAL;
-        try {
-            final ExifInterface exif = new ExifInterface(filePath);
-            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-        } catch (final IOException e) {
-            Log.e("ImageUtils.readDownsampledImage", e);
-        }
-        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
+        final int orientation = getImageOrientation(imageUri);
+        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(imageUri));
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX <= 0 ? sizeOnlyOptions.outWidth : maxX, maxY <= 0 ? sizeOnlyOptions.outHeight : maxY);
         final int sampleSize = maxXY <= 0 ? 1 : myMaxXY / maxXY;
@@ -254,83 +237,73 @@ public final class ImageUtils {
             sampleOptions.inSampleSize = sampleSize;
         }
 
-        final Bitmap decodedImage = BitmapFactory.decodeFile(filePath, sampleOptions);
-        if (decodedImage != null) {
-            for (int i = 0; i < ORIENTATIONS.length; i++) {
-                if (orientation == ORIENTATIONS[i]) {
-                    final Matrix matrix = new Matrix();
-                    matrix.postRotate(ROTATION[i]);
-                    return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
+        try (InputStream imageStream = openImageStream(imageUri)) {
+            if (imageStream == null) {
+                return null;
+            }
+            final Bitmap decodedImage = BitmapFactory.decodeStream(imageStream, null, sampleOptions);
+            if (decodedImage != null) {
+                for (int i = 0; i < ORIENTATIONS.length; i++) {
+                    if (orientation == ORIENTATIONS[i]) {
+                        final Matrix matrix = new Matrix();
+                        matrix.postRotate(ROTATION[i]);
+                        return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
+                    }
                 }
             }
+            return decodedImage;
+        } catch (final IOException e) {
+            Log.e("ImageUtils.readDownsampledImage(decode)", e);
         }
-        return decodedImage;
+        return null;
     }
 
+    private static int getImageOrientation(@NonNull final Uri imageUri) {
+        int orientation = ExifInterface.ORIENTATION_NORMAL;
+        try (InputStream imageStream = openImageStream(imageUri)) {
+            if (imageStream != null) {
+                final ExifInterface exif = new ExifInterface(imageStream);
+                orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            }
+        } catch (final IOException e) {
+            Log.e("ImageUtils.getImageOrientation(ExifIf)", e);
+        }
+        return orientation;
+    }
+
+    /** stream will be consumed and closed by method */
     @NonNull
-    private static BitmapFactory.Options getBitmapSizeOptions(@NonNull final String filePath) {
-        final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
-        sizeOnlyOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
+    private static BitmapFactory.Options getBitmapSizeOptions(@NonNull final InputStream imageStream) {
+        if (imageStream == null) {
+            return null;
+        }
+        BitmapFactory.Options sizeOnlyOptions = null;
+        try {
+            sizeOnlyOptions = new BitmapFactory.Options();
+            sizeOnlyOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(imageStream, null, sizeOnlyOptions);
+        } finally {
+            IOUtils.closeQuietly(imageStream);
+        }
 
         return sizeOnlyOptions;
     }
 
     @Nullable
-    public static ImmutablePair<Integer, Integer> getImageSize(@Nullable final File imgFile) {
-        if (imgFile == null || !imgFile.isFile()) {
+    public static ImmutablePair<Integer, Integer> getImageSize(@Nullable final Uri imageData) {
+        if (imageData == null) {
             return null;
         }
-        final Bitmap bm = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-        return bm == null ? null : new ImmutablePair<>(bm.getWidth(), bm.getHeight());
-    }
-
-    /** Create a File for saving an image or video
-     *
-     * @return the temporary image file to use, or <tt>null</tt> if the media directory could
-     * not be created.
-     * */
-    @Nullable
-    public static File getOutputImageFile() {
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-        final File mediaStorageDir = LocalStorage.getLogPictureDirectory();
-
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !FileUtils.mkdirs(mediaStorageDir)) {
-            Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
-            return null;
+        try (InputStream imageStream = openImageStream(imageData)) {
+            if (imageStream == null) {
+                return null;
+            }
+            final Bitmap bm = BitmapFactory.decodeStream(imageStream);
+            return bm == null ? null : new ImmutablePair<>(bm.getWidth(), bm.getHeight());
+        } catch (IOException e) {
+            Log.e("ImageUtils.getImageSize", e);
         }
-
-        // Create a media file name
-        final String timeStamp = new SimpleDateFormat("yyMMdd-HHmmss", Locale.US).format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator + "IMG" + IMG_COUNTER.addAndGet(1) + "-" + timeStamp + ".jpg");
-    }
-
-    @NonNull
-    public static String getRelativePathToOutputImageDir(final File file) {
-        final String basePath = LocalStorage.getLogPictureDirectory().getAbsolutePath();
-        String filePath = file.getAbsolutePath();
-        if (filePath.startsWith(basePath)) {
-            filePath = filePath.substring(basePath.length());
-        }
-
-        if (filePath.length() > 1 && (filePath.charAt(0) == '\\' || filePath.charAt(0) == '/')) {
-            filePath = filePath.substring(1);
-        }
-        return filePath;
-    }
-
-    @Nullable
-    public static Uri getOutputImageFileUri() {
-        final File file = getOutputImageFile();
-        if (file == null) {
-            return null;
-        }
-        return Uri.fromFile(file);
+        return null;
     }
 
     /**
@@ -547,4 +520,116 @@ public final class ImageUtils {
 
         return bitmap;
     }
+
+    public static File copyImageToTemporaryFile(final Image img) {
+        if (img == null || img.getUri() == null) {
+            return null;
+        }
+        final File targetFile = FileUtils.getUniqueNamedFile(new File(LocalStorage.getInternalCgeoDirectory(), "offline_log_image.tmp"));
+        OutputStream os = null;
+        InputStream is = null;
+        try {
+            is = openImageStream(img.getUri());
+            if (is == null) {
+                return null;
+            }
+            os = new FileOutputStream(targetFile);
+            IOUtils.copy(is, os);
+        } catch (IOException ioe) {
+            Log.w("Problem copying img '" + img + "' to '" + targetFile + "'", ioe);
+            return null;
+        } finally {
+            IOUtils.closeQuietly(is, os);
+        }
+        return targetFile;
+    }
+
+
+    // --- SAF: the following methods must be migrated
+
+    /** Create a new Uri for saving an image
+     * */
+    @Nullable
+    public static Uri createNewImageUri(final boolean forShare) {
+
+        //TODO: shall be replaced by SAF storage access later
+
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+        final File mediaStorageDir = LocalStorage.getLogPictureDirectory();
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists() && !FileUtils.mkdirs(mediaStorageDir)) {
+            Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
+            return null;
+        }
+
+        // Create a media file name
+        final String timeStamp = new SimpleDateFormat("yyMMdd-HHmmss", Locale.US).format(new Date());
+        final File newFile = new File(mediaStorageDir.getPath() + separator + (forShare ? "shared-" : "") + "IMG" + IMG_COUNTER.addAndGet(1) + "-" + timeStamp + ".jpg");
+
+        if (forShare) {
+            return FileProvider.getUriForFile(
+                CgeoApplication.getInstance().getApplicationContext(),
+                CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
+                newFile);
+        }
+
+        return Uri.fromFile(newFile);
+    }
+
+
+    @Nullable
+    private static InputStream openImageStream(final Uri imageUri) {
+        //TODO: this method must be replaced with a call to SAF framework later
+        try {
+            return CgeoApplication.getInstance().getApplicationContext().getContentResolver().openInputStream(imageUri);
+        } catch (IOException ioe) {
+            Log.w("Could not open inputstream for file " + imageUri, ioe);
+            return null;
+        }
+
+    }
+
+    public static boolean deleteImage(final Uri uri) {
+        if (uri == null) {
+            return false;
+        }
+        if (uri.toString().startsWith("file")) {
+            return new File(uri.getPath()).delete();
+        }
+        //TODO: this method must be replaced with a call to SAF framework later
+        if (uri.toString().startsWith("content")) {
+            return CgeoApplication.getInstance().getApplicationContext().getContentResolver().delete(uri, null, null) > 0;
+        }
+
+        return false;
+    }
+
+    public static String getImageLocationForUserDisplay(final Image image) {
+        //TODO: this method must be adapted for SAF
+        return image.getUrl();
+    }
+
+    /** Returns image name and size in bytes */
+    public static ImmutablePair<String, Long> getImageFileInfos(final Image image) {
+
+        if (image == null) {
+            return new ImmutablePair<>("", 0l);
+        }
+
+        if (image.isLocalFile()) {
+            return new ImmutablePair<>(image.getFile().getName(), image.getFile().length());
+        }
+
+        //TODO: following must be ADAPTED for SAF framework later
+        if (image.getUri() != null && image.getUri().toString().startsWith("file")) {
+            return new ImmutablePair<>(image.getUri().getLastPathSegment(), new File (image.getUri().getPath()).length());
+        }
+
+        return new ImmutablePair<>("", 0l);
+    }
+
+
 }

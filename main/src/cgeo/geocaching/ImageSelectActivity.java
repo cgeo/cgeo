@@ -21,9 +21,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.util.Arrays;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -145,23 +143,19 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                 @Override
                 protected ImageUtils.ScaleImageResult doInBackground(final Void... params) {
                     final int maxXY = imageScale.get();
-                    if (image.getPath() == null) {
+                    if (image.getUri() == null) {
                         return null;
                     }
-                    return ImageUtils.readScaleAndWriteImage(image.getPath(), maxXY, true, true);
+                    return ImageUtils.readScaleAndWriteImage(image.getUri(), maxXY, false);
                 }
 
                 @Override
                 protected void onPostExecute(final ImageUtils.ScaleImageResult scaleImageResult) {
                     if (scaleImageResult != null) {
-                        image = new Image.Builder().setUrl(scaleImageResult.getFilename()).build();
+                        image = new Image.Builder().setUrl(scaleImageResult.imageUri).build();
 
-                        final File imageFile = image.getFile();
-                        if (imageFile == null) {
-                            showToast(res.getString(R.string.err_select_logimage_failed));
-                            return;
-                        }
-                        if (maxImageUploadSize > 0 && imageFile.length() > maxImageUploadSize) {
+                        final long imageSize = ImageUtils.getImageFileInfos(image).right;
+                        if (maxImageUploadSize > 0 && imageSize > maxImageUploadSize) {
                             showToast(res.getString(R.string.err_select_logimage_upload_size));
                             return;
                         }
@@ -210,7 +204,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     private void selectImageFromCamera() {
 
-        imageActivityHelper.getImageFromCamera(-1, false, false, img -> {
+        imageActivityHelper.getImageFromCamera(-1, false, img -> {
             deleteImageFromDeviceIfNotOriginal(image);
             image = img;
             loadImagePreview();
@@ -218,7 +212,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromStorage() {
-        imageActivityHelper.getImageFromStorage(-1, false, false,  img -> {
+        imageActivityHelper.getImageFromStorage(-1, false,  img -> {
             deleteImageFromDeviceIfNotOriginal(image);
             image = img;
             loadImagePreview();
@@ -226,8 +220,8 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private boolean deleteImageFromDeviceIfNotOriginal(final Image img) {
-        if (img != null &&  !img.getPath().isEmpty() && (originalImage == null || !img.getPath().equals(originalImage.getPath()))) {
-            return new File(img.getPath()).delete();
+        if (img != null &&  img.getUri() != null  && (originalImage == null || !img.getUri().equals(originalImage.getUri()))) {
+            return ImageUtils.deleteImage(img.getUri());
         }
         return false;
     }
