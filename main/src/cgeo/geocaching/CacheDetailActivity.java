@@ -442,91 +442,50 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
-        switch (viewId) {
-            case R.id.waypoint:
-                menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
-                getMenuInflater().inflate(R.menu.waypoint_options, menu);
-                final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType() == WaypointType.ORIGINAL;
-                menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
-                menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
-                menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
-                menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint);
-                final boolean hasCoords = selectedWaypoint.getCoords() != null;
-                final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
-                defaultNavigationMenu.setVisible(hasCoords);
-                defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
-                menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
-                menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
-                menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
-                final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
-                menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
-                menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
-                break;
-            default:
-                if (imagesList != null) {
-                    imagesList.onCreateContextMenu(menu, view);
-                }
-                break;
+        if (viewId == R.id.waypoint) {
+            menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
+            getMenuInflater().inflate(R.menu.waypoint_options, menu);
+            final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType() == WaypointType.ORIGINAL;
+            menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint);
+            final boolean hasCoords = selectedWaypoint.getCoords() != null;
+            final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
+            defaultNavigationMenu.setVisible(hasCoords);
+            defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+            menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
+            menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
+            menu.findItem(R.id.menu_waypoint_copy_coordinates).setVisible(hasCoords);
+            final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
+            menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
+            menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
+        } else {
+            if (imagesList != null) {
+                imagesList.onCreateContextMenu(menu, view);
+            }
         }
     }
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_waypoint_edit) {
             // waypoints
-            case R.id.menu_waypoint_edit:
-                if (selectedWaypoint != null) {
-                    ensureSaved();
-                    EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
-                    refreshOnResume = true;
-                }
-                return true;
-            case R.id.menu_waypoint_visited:
-                if (selectedWaypoint != null) {
-                    ensureSaved();
-                    new AsyncTask<Void, Void, Boolean>() {
-                        @Override
-                        protected Boolean doInBackground(final Void... params) {
-                            selectedWaypoint.setVisited(true);
-                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            return true;
-                        }
-
-                        @Override
-                        protected void onPostExecute(final Boolean result) {
-                            if (result) {
-                                notifyDataSetChanged();
-                            }
-                        }
-                    }.execute();
-                }
-                return true;
-            case R.id.menu_waypoint_copy_coordinates:
-                if (selectedWaypoint != null) {
-                    final Geopoint coordinates = selectedWaypoint.getCoords();
-                    if (coordinates != null) {
-                        ClipboardUtils.copyToClipboard(
-                                GeopointFormatter.reformatForClipboard(coordinates.toString()));
-                        showToast(getString(R.string.clipboard_copy_ok));
-                    }
-                }
-                return true;
-            case R.id.menu_waypoint_clear_coordinates:
-                if (selectedWaypoint != null) {
-                    ensureSaved();
-                    new ClearCoordinatesCommand(this, cache, selectedWaypoint).execute();
-                }
-                return true;
-            case R.id.menu_waypoint_duplicate:
+            if (selectedWaypoint != null) {
+                ensureSaved();
+                EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
+                refreshOnResume = true;
+            }
+        } else if (itemId == R.id.menu_waypoint_visited) {
+            if (selectedWaypoint != null) {
                 ensureSaved();
                 new AsyncTask<Void, Void, Boolean>() {
                     @Override
                     protected Boolean doInBackground(final Void... params) {
-                        if (cache.duplicateWaypoint(selectedWaypoint) != null) {
-                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            return true;
-                        }
-                        return false;
+                        selectedWaypoint.setVisited(true);
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        return true;
                     }
 
                     @Override
@@ -536,73 +495,96 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }
                 }.execute();
-                return true;
-            case R.id.menu_waypoint_toclipboard:
-                if (selectedWaypoint != null) {
-                    ensureSaved();
-                    ClipboardUtils.copyToClipboard(selectedWaypoint.reformatForClipboard());
+            }
+        } else if (itemId == R.id.menu_waypoint_copy_coordinates) {
+            if (selectedWaypoint != null) {
+                final Geopoint coordinates = selectedWaypoint.getCoords();
+                if (coordinates != null) {
+                    ClipboardUtils.copyToClipboard(
+                        GeopointFormatter.reformatForClipboard(coordinates.toString()));
                     showToast(getString(R.string.clipboard_copy_ok));
                 }
-                return true;
-            case R.id.menu_waypoint_delete:
+            }
+        } else if (itemId == R.id.menu_waypoint_clear_coordinates) {
+            if (selectedWaypoint != null) {
                 ensureSaved();
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        if (cache.deleteWaypoint(selectedWaypoint)) {
-                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            return true;
-                        }
-                        return false;
+                new ClearCoordinatesCommand(this, cache, selectedWaypoint).execute();
+            }
+        } else if (itemId == R.id.menu_waypoint_duplicate) {
+            ensureSaved();
+            new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(final Void... params) {
+                    if (cache.duplicateWaypoint(selectedWaypoint) != null) {
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        return true;
                     }
+                    return false;
+                }
 
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            notifyDataSetChanged();
-                            LocalBroadcastManager.getInstance(CacheDetailActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
-                        }
-                    }
-                }.execute();
-                return true;
-            case R.id.menu_waypoint_navigate_default:
-                if (selectedWaypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(1, this, selectedWaypoint);
-                }
-                return true;
-            case R.id.menu_waypoint_navigate:
-                if (selectedWaypoint != null) {
-                    NavigationAppFactory.showNavigationMenu(this, null, selectedWaypoint, null);
-                }
-                return true;
-            case R.id.menu_waypoint_caches_around:
-                if (selectedWaypoint != null) {
-                    final Geopoint coordinates = selectedWaypoint.getCoords();
-                    if (coordinates != null) {
-                        CacheListActivity.startActivityCoordinates(this, coordinates, selectedWaypoint.getName());
+                @Override
+                protected void onPostExecute(final Boolean result) {
+                    if (result) {
+                        notifyDataSetChanged();
                     }
                 }
-                return true;
-            case R.id.menu_waypoint_reset_cache_coords:
+            }.execute();
+        } else if (itemId == R.id.menu_waypoint_toclipboard) {
+            if (selectedWaypoint != null) {
                 ensureSaved();
-                if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-                    createResetCacheCoordinatesDialog(selectedWaypoint).show();
-                } else {
-                    final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
-                    final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
-                    resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
+                ClipboardUtils.copyToClipboard(selectedWaypoint.reformatForClipboard());
+                showToast(getString(R.string.clipboard_copy_ok));
+            }
+        } else if (itemId == R.id.menu_waypoint_delete) {
+            ensureSaved();
+            new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(final Void... params) {
+                    if (cache.deleteWaypoint(selectedWaypoint)) {
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        return true;
+                    }
+                    return false;
                 }
-                return true;
-            case R.id.menu_calendar:
-                CalendarAdder.addToCalendar(this, cache);
-                return true;
-            default:
-                break;
+
+                @Override
+                protected void onPostExecute(final Boolean result) {
+                    if (result) {
+                        notifyDataSetChanged();
+                        LocalBroadcastManager.getInstance(CacheDetailActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
+                    }
+                }
+            }.execute();
+        } else if (itemId == R.id.menu_waypoint_navigate_default) {
+            if (selectedWaypoint != null) {
+                NavigationAppFactory.startDefaultNavigationApplication(1, this, selectedWaypoint);
+            }
+        } else if (itemId == R.id.menu_waypoint_navigate) {
+            if (selectedWaypoint != null) {
+                NavigationAppFactory.showNavigationMenu(this, null, selectedWaypoint, null);
+            }
+        } else if (itemId == R.id.menu_waypoint_caches_around) {
+            if (selectedWaypoint != null) {
+                final Geopoint coordinates = selectedWaypoint.getCoords();
+                if (coordinates != null) {
+                    CacheListActivity.startActivityCoordinates(this, coordinates, selectedWaypoint.getName());
+                }
+            }
+        } else if (itemId == R.id.menu_waypoint_reset_cache_coords) {
+            ensureSaved();
+            if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
+                createResetCacheCoordinatesDialog(selectedWaypoint).show();
+            } else {
+                final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
+                final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
+                resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
+            }
+        } else if (itemId == R.id.menu_calendar) {
+            CalendarAdder.addToCalendar(this, cache);
+        } else if (imagesList == null || !imagesList.onContextItemSelected(item)) {
+            return onOptionsItemSelected(item);
         }
-        if (imagesList != null && imagesList.onContextItemSelected(item)) {
-            return true;
-        }
-        return onOptionsItemSelected(item);
+        return true;
     }
 
     private abstract static class AbstractWaypointModificationCommand extends AbstractCommand {
@@ -712,90 +694,66 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         final int menuItem = item.getItemId();
-
-        switch (menuItem) {
-            case R.id.menu_delete:
-                dropCache();
-                return true;
-            case R.id.menu_delete_userdefined_waypoints:
-                dropUserdefinedWaypoints();
-                return true;
-            case R.id.menu_store_in_list:
-                storeCache(false);
-                return true;
-            case R.id.menu_refresh:
-                refreshCache();
-                return true;
-            case R.id.menu_gcvote:
-                showVoteDialog();
-                return true;
-            case R.id.menu_checker:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CheckerUtils.getCheckerUrl(cache))));
-                return true;
-            case R.id.menu_challenge_checker:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://project-gc.com/Challenges/" + cache.getGeocode())));
-                return true;
-            case R.id.menu_ignore:
-                ignoreCache();
-                return true;
-            case R.id.menu_extract_waypoints:
-                final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
-                extractWaypoints(searchText, cache);
-                return true;
-            case R.id.menu_toggleWaypointsFromNote:
-                cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
-                setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            notifyDataSetChanged();
-                        }
-                    }
-                }.execute();
-
-                return true;
-            case R.id.menu_clear_goto_history:
-                Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
-                    cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
-                    notifyDataSetChanged();
-                }));
-                return true;
-            case R.id.menu_export_gpx:
-                new GpxExport().export(Collections.singletonList(cache), this);
-                return true;
-            case R.id.menu_export_fieldnotes:
-                new FieldNoteExport().export(Collections.singletonList(cache), this);
-                return true;
-            case R.id.menu_export_persnotes:
-                new PersonalNoteExport().export(Collections.singletonList(cache), this);
-                return true;
-            case R.id.menu_edit_fieldnote:
-                ensureSaved();
-                editPersonalNote(cache, this);
-                return true;
-            case R.id.menu_navigate:
-                if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
+        if (menuItem == R.id.menu_delete) {
+            dropCache();
+        } else if (menuItem == R.id.menu_delete_userdefined_waypoints) {
+            dropUserdefinedWaypoints();
+        } else if (menuItem == R.id.menu_store_in_list) {
+            storeCache(false);
+        } else if (menuItem == R.id.menu_refresh) {
+            refreshCache();
+        } else if (menuItem == R.id.menu_gcvote) {
+            showVoteDialog();
+        } else if (menuItem == R.id.menu_checker) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CheckerUtils.getCheckerUrl(cache))));
+        } else if (menuItem == R.id.menu_challenge_checker) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://project-gc.com/Challenges/" + cache.getGeocode())));
+        } else if (menuItem == R.id.menu_ignore) {
+            ignoreCache();
+        } else if (menuItem == R.id.menu_extract_waypoints) {
+            final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
+            extractWaypoints(searchText, cache);
+        } else if (menuItem == R.id.menu_toggleWaypointsFromNote) {
+            cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
+            setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
+            new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(final Void... params) {
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     return true;
                 }
-                break;
-            case R.id.menu_tts_toggle:
-                SpeechService.toggleService(this, cache.getCoords());
-                return true;
-            default:
-                if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
-                    refreshOnResume = true;
-                    return true;
+
+                @Override
+                protected void onPostExecute(final Boolean result) {
+                    if (result) {
+                        notifyDataSetChanged();
+                    }
                 }
+            }.execute();
+        } else if (menuItem == R.id.menu_clear_goto_history) {
+            Dialogs.confirm(this, R.string.clear_goto_history_title, R.string.clear_goto_history, (dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
+                cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+                notifyDataSetChanged();
+            }));
+        } else if (menuItem == R.id.menu_export_gpx) {
+            new GpxExport().export(Collections.singletonList(cache), this);
+        } else if (menuItem == R.id.menu_export_fieldnotes) {
+            new FieldNoteExport().export(Collections.singletonList(cache), this);
+        } else if (menuItem == R.id.menu_export_persnotes) {
+            new PersonalNoteExport().export(Collections.singletonList(cache), this);
+        } else if (menuItem == R.id.menu_edit_fieldnote) {
+            ensureSaved();
+            editPersonalNote(cache, this);
+        } else if (menuItem == R.id.menu_navigate) {
+            NavigationAppFactory.onMenuItemSelected(item, this, cache);
+        } else if (menuItem == R.id.menu_tts_toggle) {
+            SpeechService.toggleService(this, cache.getCoords());
+        } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
+            refreshOnResume = true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void ignoreCache() {
@@ -2236,44 +2194,40 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
 
                 private boolean prepareClipboardActionMode(final View view1, final ActionMode actionMode, final Menu menu) {
-                    switch (view1.getId()) {
-                        case R.id.value: // coordinates, gc-code, name
-                            clickedItemText = ((TextView) view1).getText();
-                            final CharSequence itemTitle = ((TextView) ((View) view1.getParent()).findViewById(R.id.name)).getText();
-                            if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
-                                clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
-                            }
-                            buildDetailsContextMenu(actionMode, menu, itemTitle, true);
-                            return true;
-                        case R.id.description:
-                            // combine short and long description
-                            final String shortDesc = cache.getShortDescription();
-                            if (StringUtils.isBlank(shortDesc)) {
-                                clickedItemText = cache.getDescription();
-                            } else {
-                                clickedItemText = shortDesc + "\n\n" + cache.getDescription();
-                            }
-                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
-                            return true;
-                        case R.id.personalnote:
-                            clickedItemText = cache.getPersonalNote();
-                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
-                            return true;
-                        case R.id.hint:
-                            clickedItemText = cache.getHint();
-                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
-                            return true;
-                        case R.id.log:
-                            clickedItemText = ((TextView) view1).getText();
-                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
-                            return true;
-                        case R.id.date: // event date
-                            clickedItemText = Formatter.formatHiddenDate(cache);
-                            buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
-                            menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
-                            return true;
+                    final int viewId = view1.getId();
+                    if (viewId == R.id.value) { // coordinates, gc-code, name
+                        clickedItemText = ((TextView) view1).getText();
+                        final CharSequence itemTitle = ((TextView) ((View) view1.getParent()).findViewById(R.id.name)).getText();
+                        if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
+                            clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
+                        }
+                        buildDetailsContextMenu(actionMode, menu, itemTitle, true);
+                    } else if (viewId == R.id.description) {
+                        // combine short and long description
+                        final String shortDesc = cache.getShortDescription();
+                        if (StringUtils.isBlank(shortDesc)) {
+                            clickedItemText = cache.getDescription();
+                        } else {
+                            clickedItemText = shortDesc + "\n\n" + cache.getDescription();
+                        }
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
+                    } else if (viewId == R.id.personalnote) {
+                        clickedItemText = cache.getPersonalNote();
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
+                    } else if (viewId == R.id.hint) {
+                        clickedItemText = cache.getHint();
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
+                    } else if (viewId == R.id.log) {
+                        clickedItemText = ((TextView) view1).getText();
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
+                    } else if (viewId == R.id.date) { // event date
+                        clickedItemText = Formatter.formatHiddenDate(cache);
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
+                        menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+                    } else {
+                        return false;
                     }
-                    return false;
+                    return true;
                 }
 
                 @Override
@@ -2291,16 +2245,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 @Override
                 public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        // detail fields
-                        case R.id.menu_calendar:
-                            CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
-                            actionMode.finish();
-                            return true;
+                    // detail fields
+                    if (menuItem.getItemId() == R.id.menu_calendar) {
+                        CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
+                        actionMode.finish();
+                        return true;
                         // handle clipboard actions in base
-                        default:
-                            return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
                     }
+                    return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
                 }
             });
             return true;

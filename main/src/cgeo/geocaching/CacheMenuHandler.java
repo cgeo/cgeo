@@ -50,39 +50,37 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             activity = ((Fragment) activityInterface).getActivity();
         }
 
-        switch (item.getItemId()) {
-            case R.id.menu_default_navigation:
-                activityInterface.navigateTo();
+        final int menuItem = item.getItemId();
+        if (menuItem == R.id.menu_default_navigation) {
+            activityInterface.navigateTo();
+            return true;
+        } else if (menuItem == R.id.menu_navigate) {
+            final NavigationSelectionActionProvider navigationProvider = (NavigationSelectionActionProvider) MenuItemCompat.getActionProvider(item);
+            if (navigationProvider == null) {
+                activityInterface.showNavigationMenu();
                 return true;
-            case R.id.menu_navigate:
-                final NavigationSelectionActionProvider navigationProvider = (NavigationSelectionActionProvider) MenuItemCompat.getActionProvider(item);
-                if (navigationProvider == null) {
-                    activityInterface.showNavigationMenu();
-                    return true;
-                }
-                return false;
-            case R.id.menu_caches_around:
-                activityInterface.cachesAround();
+            }
+            return false;
+        } else if (menuItem == R.id.menu_caches_around) {
+            activityInterface.cachesAround();
+            return true;
+        } else if (menuItem == R.id.menu_show_in_browser) {
+            cache.openInBrowser(activity);
+            return true;
+        } else if (menuItem == R.id.menu_share) {
+            /* If the share menu is a shareActionProvider do nothing and let the share ActionProvider do the work */
+            final ShareActionProvider shareActionProvider = (ShareActionProvider)
+                MenuItemCompat.getActionProvider(item);
+            if (shareActionProvider == null) {
+                cache.shareCache(activity, res);
                 return true;
-            case R.id.menu_show_in_browser:
-                cache.openInBrowser(activity);
-                return true;
-            case R.id.menu_share:
-                /* If the share menu is a shareActionProvider do nothing and let the share ActionProvider do the work */
-                final ShareActionProvider shareActionProvider = (ShareActionProvider)
-                        MenuItemCompat.getActionProvider(item);
-                if (shareActionProvider == null) {
-                    cache.shareCache(activity, res);
-                    return true;
-                }
-                return false;
-            case R.id.menu_calendar:
-                CalendarAdder.addToCalendar(activity, cache);
-                return true;
-
-            default:
-                return false;
+            }
+            return false;
+        } else if (menuItem == R.id.menu_calendar) {
+            CalendarAdder.addToCalendar(activity, cache);
+            return true;
         }
+        return false;
     }
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache) {

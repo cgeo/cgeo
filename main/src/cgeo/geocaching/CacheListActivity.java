@@ -883,121 +883,96 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_show_on_map:
-                goMap();
-                return true;
-            case R.id.menu_switch_select_mode:
-                adapter.switchSelectMode();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_refresh_stored:
-                refreshStored(adapter.getCheckedOrAllCaches());
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_drop_caches:
-                deleteCaches(adapter.getCheckedOrAllCaches());
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_import_pq:
-                importPq();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_import_gpx:
-                importGpx();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_import_android:
-                importGpxFromAndroid();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_create_list:
-                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
-                refreshSpinnerAdapter();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_drop_list:
-                removeList();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_rename_list:
-                renameList();
-                return true;
-            case R.id.menu_invert_selection:
-                adapter.invertSelection();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_filter:
-                showFilterMenu(null);
-                return true;
-            case R.id.menu_import_web:
-                importWeb();
-                return true;
-            case R.id.menu_export_gpx:
-                new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
-                return true;
-            case R.id.menu_export_fieldnotes:
+        final int menuItem = item.getItemId();
+        if (menuItem == R.id.menu_show_on_map) {
+            goMap();
+        } else if (menuItem == R.id.menu_switch_select_mode) {
+            adapter.switchSelectMode();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_refresh_stored) {
+            refreshStored(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_drop_caches) {
+            deleteCaches(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_import_pq) {
+            importPq();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_import_gpx) {
+            importGpx();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_import_android) {
+            importGpxFromAndroid();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_create_list) {
+            new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
+            refreshSpinnerAdapter();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_drop_list) {
+            removeList();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_rename_list) {
+            renameList();
+        } else if (menuItem == R.id.menu_invert_selection) {
+            adapter.invertSelection();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_filter) {
+            showFilterMenu(null);
+        } else if (menuItem == R.id.menu_import_web) {
+            importWeb();
+        } else if (menuItem == R.id.menu_export_gpx) {
+            new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
+        } else if (menuItem == R.id.menu_export_fieldnotes) {
                 new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
-                return true;
-            case R.id.menu_export_persnotes:
-                new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
-                return true;
-            case R.id.menu_upload_modifiedcoords:
-                final Activity that = this;
-                Dialogs.confirm(this, R.string.caches_upload_modifiedcoords, R.string.caches_upload_modifiedcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates(true).export(adapter.getCheckedOrAllCaches(), that));
-                return true;
-            case R.id.menu_upload_allcoords:
-                final Activity that2 = this;
-                Dialogs.confirm(this, R.string.caches_upload_allcoords_dialogtitle, R.string.caches_upload_allcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
-                return true;
-            case R.id.menu_remove_from_history:
-                removeFromHistoryCheck();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_move_to_list:
-                moveCachesToOtherList(adapter.getCheckedOrAllCaches());
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_copy_to_list:
-                copyCachesToOtherList(adapter.getCheckedOrAllCaches());
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_delete_events:
-                deletePastEvents();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_create_internal_cache:
-                InternalConnector.interactiveCreateCache(this, coords, StoredList.getConcreteList(listId));
-                return true;
-            case R.id.menu_clear_offline_logs:
-                clearOfflineLogs();
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_cache_list_app:
-                if (cacheToShow()) {
-                    CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList), this, getFilteredSearch());
+        } else if (menuItem == R.id.menu_export_persnotes) {
+            new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
+        } else if (menuItem == R.id.menu_upload_modifiedcoords) {
+            final Activity that = this;
+            Dialogs.confirm(this, R.string.caches_upload_modifiedcoords, R.string.caches_upload_modifiedcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates(true).export(adapter.getCheckedOrAllCaches(), that));
+        } else if (menuItem == R.id.menu_upload_allcoords) {
+            final Activity that2 = this;
+            Dialogs.confirm(this, R.string.caches_upload_allcoords_dialogtitle, R.string.caches_upload_allcoords_warning, (dialog, which) -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
+        } else if (menuItem == R.id.menu_remove_from_history) {
+            removeFromHistoryCheck();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_move_to_list) {
+            moveCachesToOtherList(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_copy_to_list) {
+            copyCachesToOtherList(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_delete_events) {
+            deletePastEvents();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_create_internal_cache) {
+            InternalConnector.interactiveCreateCache(this, coords, StoredList.getConcreteList(listId));
+        } else if (menuItem == R.id.menu_clear_offline_logs) {
+            clearOfflineLogs();
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_cache_list_app) {
+            if (cacheToShow()) {
+                CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList), this, getFilteredSearch());
+            }
+        } else if (menuItem == R.id.menu_make_list_unique) {
+            new MakeListUniqueCommand(this, listId) {
+
+                @Override
+                protected void onFinished() {
+                    refreshSpinnerAdapter();
                 }
-                return true;
-            case R.id.menu_make_list_unique:
-                new MakeListUniqueCommand(this, listId) {
 
-                    @Override
-                    protected void onFinished() {
-                        refreshSpinnerAdapter();
-                    }
+                @Override
+                protected void onFinishedUndo() {
+                    refreshSpinnerAdapter();
+                }
 
-                    @Override
-                    protected void onFinishedUndo() {
-                        refreshSpinnerAdapter();
-                    }
-
-                }.execute();
-                return true;
-            case R.id.menu_set_listmarker:
+            }.execute();
+        } else if (menuItem == R.id.menu_set_listmarker) {
                 selectListMarker();
-                return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void checkIfEmptyAndRemoveAfterConfirm() {
