@@ -55,8 +55,8 @@
     <string name="wp_original">オリジナル座標</string>
     <!-- logs -->
     <string name="log_found">発見</string>
-    <string name="log_dnf">発見できず</string>
-    <string name="log_note">メモ</string>
+    <string name="log_dnf">未発見</string>
+    <string name="log_note">ノート</string>
     <string name="log_published">公開</string>
     <string name="log_enabled">有効化</string>
     <string name="log_disabled">無効化</string>
@@ -68,11 +68,11 @@
     <string name="log_movecollection">コレクションに移動</string>
     <string name="log_moveinventory">目録に移動</string>
     <string name="log_maintained">メンテナンス済</string>
-    <string name="log_maintenance_needed">メンテナンスが必要</string>
-    <string name="log_update">座標を更新</string>
-    <string name="log_archived">アーカイブされた</string>
+    <string name="log_maintenance_needed">要メンテナンス</string>
+    <string name="log_update">座標更新</string>
+    <string name="log_archived">アーカイブ済み</string>
     <string name="log_unarchived">アーカイブから戻った</string>
-    <string name="log_needs_archived">アーカイブされるべき</string>
+    <string name="log_needs_archived">要アーカイブ</string>
     <string name="log_discovered">発見した</string>
     <string name="log_reviewer">レビューノート</string>
     <string name="log_submit_for_review">レビューを投稿</string>
@@ -83,9 +83,9 @@
     <string name="log_tb_sortby">トラッカブルの並び替え</string>
     <string name="log_tb_changeall">すべてを変更する</string>
     <string name="log_tb_grabbed">どこかで捕まえた</string>
-    <string name="log_tb_note">メモ</string>
+    <string name="log_tb_note">ノート</string>
     <string name="log_tb_discovered">発見した</string>
-    <string name="log_tb_archived">アーカイブされた</string>
+    <string name="log_tb_archived">アーカイブ済み</string>
     <string name="log_save">オフライン保存</string>
     <string name="log_saving">ログを投稿中…</string>
     <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中...</string>
@@ -132,20 +132,20 @@
     <string name="log_your_saved_log">あなたの保存したログ</string>
     <string name="log_empty_logbook">ログブックは空です</string>
     <string name="log_problem_none">問題なし</string>
-    <string name="log_problem_needs_maintenance_label">メンテナンスが必要</string>
+    <string name="log_problem_needs_maintenance_label">要メンテナンス</string>
     <string name="log_problem_needs_maintenance_text">このジオキャッシャーがキャッシュに問題があることを報告しました</string>
     <string name="log_problem_log_full_label">ログブックが満杯</string>
     <string name="log_problem_log_full_text">このジオキャッシャーがログブックが満杯であることを報告しました</string>
-    <string name="log_problem_damaged_label">コンテナーが破損</string>
-    <string name="log_problem_damaged_text">このジオキャッシャーがコンテナーが破損していることを報告しました</string>
+    <string name="log_problem_damaged_label">コンテナが破損</string>
+    <string name="log_problem_damaged_text">このジオキャッシャーがコンテナが破損していることを報告しました</string>
     <string name="log_problem_missing_label">キャッシュがない可能性</string>
     <string name="log_problem_missing_text">このジオキャッシャーがキャッシュがない可能性を報告しました</string>
     <string name="log_problem_other_label">そのほか</string>
     <string name="log_problem_other_text">このジオキャッシャーがキャッシュに問題があることを報告しました</string>
-    <string name="log_problem_archive_label">アーカイブされるべき</string>
-    <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきことを報告しました。コミュニティのボランティアレビューアーに通知されました</string>
+    <string name="log_problem_archive_label">要アーカイブ</string>
+    <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
-    <string name="log_image_scale_option_entry">%1$dピクセル</string>
+    <string name="log_image_scale_option_entry">%1$dpx</string>
     <string name="log_image_info">%1$dx%2$dpx、%3$dKB、%4$s</string>
     <string name="log_image_titleprefix">画像</string>
     <!-- translation -->
@@ -287,7 +287,7 @@
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_pocket_queries">ポケット・クエリ</string>
-    <string name="menu_scan_description">QRコードにしたGCコードをスキャンできますが必要なアプリがインストールされていません。Google Playからインストールしますか?</string>
+    <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playからインストールしますか?</string>
     <!-- main screen -->
     <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
@@ -430,7 +430,7 @@
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
     <string name="changelog_github">すべての変更の一覧</string>
     <string name="about_nutshellmanual">マニュアル</string>
-    <string name="about_contributors_carnerodetails">c:geo の父として</string>
+    <string name="about_contributors_carnerodetails">c:geoの父として</string>
     <string name="about_contributors_recent">最近の貢献者</string>
     <string name="about_contributors_specialthanks">スペシャルサンクス</string>
     <string name="about_contributors_specialthanksdetails">· <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>のすべての翻訳者!\n· 不具合や提案などのすべての報告者\n· すべてのサポーター\n</string>
@@ -553,7 +553,7 @@
     <string name="init_skin">明るいスキン</string>
     <string name="init_summary_skin">明るい色のスキンを使用\n(c:geoの再起動が必要)</string>
     <string name="init_transparentBackground">透明な背景</string>
-    <string name="init_summary_transparentBackground">透明な背景を使用 (c:geoの再起動が必要)</string>
+    <string name="init_summary_transparentBackground">透明な背景を使用\n(c:geoの再起動が必要)</string>
     <string name="init_address">地名表示</string>
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_useenglish">英語表示</string>
@@ -569,6 +569,8 @@
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再計算しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
+    <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
+    <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンを大きなアイコンで地図に表示\n(c:geoの再起動が必要)</string>
     <string name="init_disabled">一時停止中キャッシュ除く</string>
     <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
     <string name="init_archived">アーカイブ済み除く</string>
@@ -633,7 +635,7 @@
     <string name="settings_title_backup">バックアップ/復元</string>
     <string name="settings_summary_backup">キャッシュ/ウェイポイントとアプリ設定のバックアップと復元</string>
     <string name="init_backup_settings_logins">アカウント情報もバックアップ</string>
-    <string name="init_backup_settings_backup_full_confirm">アカウント情報を保存しますか? これはほかのアプリケーションで読み取られる可能性がありセキュリティ上のリスクがあります</string>
+    <string name="init_backup_settings_backup_full_confirm">アカウント情報を保存しますか? これはほかのアプリケーションで読み取られる可能性があり、セキュリティ上のリスクがあります</string>
     <string name="settings_savingerror">設定の保存エラー</string>
     <string name="settings_saved">設定が保存されました: </string>
     <string name="init_backup_settings_restore">復元の設定</string>
@@ -770,6 +772,8 @@
     <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
+    <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
+    <string name="map_source_attribution_dialog_title">地図の著作権</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -871,10 +875,10 @@
     <string name="cache_virtual_description">仮想の質問</string>
     <string name="cache_traditional_description">トラディショナルパート</string>
     <string name="cache_box_description">ボックスコンテンツ</string>
-    <string name="cache_watchlist_on">ウォッチリストに入れてます</string>
-    <string name="cache_watchlist_on_extra">ウォッチリストに入れてます\n(ウォッチしてる人:%1d)</string>
-    <string name="cache_watchlist_not_on">ウォッチリストに入れてません</string>
-    <string name="cache_watchlist_not_on_extra">ウォッチリストに入れてません\n(ウォッチしてる人:%1d)</string>
+    <string name="cache_watchlist_on">ウォッチリストに入っています</string>
+    <string name="cache_watchlist_on_extra">ウォッチリストに入っています\n(ウォッチしてる人:%1d)</string>
+    <string name="cache_watchlist_not_on">ウォッチリストに入っていません</string>
+    <string name="cache_watchlist_not_on_extra">ウォッチリストに入っていません\n(ウォッチしてる人:%1d)</string>
     <string name="cache_favpoint_on">お気に入りに入っています</string>
     <string name="cache_favpoint_not_on">お気に入りに入っていません</string>
     <string name="cache_list_select_last">前回の選択</string>
@@ -931,6 +935,7 @@
     <string name="cache_menu_streetview">Googleストリートビュー</string>
     <string name="cache_menu_browser">ブラウザで開く</string>
     <string name="cache_menu_visit">ログを書く</string>
+    <string name="cache_log_too_long">ログが長すぎるために投稿できませんでした。克明なログを書こうとしてくれてありがとう ;-)</string>
     <string name="cache_menu_visit_offline">オフラインログをすぐに書く</string>
     <string name="cache_menu_spoilers">スポイラー画像</string>
     <string name="cache_menu_around">近くのキャッシュ</string>
@@ -1064,7 +1069,7 @@
     <!-- file selectors -->
     <string name="map_file_select_title">地図ファイルの選択</string>
     <string name="track_file_select_title">トラックファイルを選択</string>
-    <string name="individual_route_file_select_title">個々のルートファイルを選択</string>
+    <string name="individual_route_file_select_title">個別ルートファイルを選択</string>
     <!-- import -->
     <string name="web_import_title">Send2cgeoからインポート</string>
     <string name="web_import_waiting">Send2cgeoから新しいキャッシュ情報を確認中…</string>
@@ -1089,8 +1094,8 @@
     <string name="waypoint_edit_title">ウェイポイントを編集</string>
     <string name="waypoint_add_title">ウェイポイントを追加</string>
     <string name="waypoint_added">ウェイポイントを追加しました</string>
-    <string name="waypoint_note">メモ</string>
-    <string name="waypoint_user_note">ユーザーメモ</string>
+    <string name="waypoint_note">ノート</string>
+    <string name="waypoint_user_note">ウェイポイントノート</string>
     <string name="waypoint_visited">訪問済み</string>
     <string name="waypoint_set_visited">ウェイポイントを訪問済に設定しました</string>
     <string name="waypoint_unset_visited">ウェイポイントを未訪問に設定しました</string>
@@ -1113,7 +1118,7 @@
     <string name="waypoint_duplicate">ウェイポイントを複製</string>
     <string name="waypoint_toclipboard">クリップボードにウェイポイントをコピー</string>
     <string name="waypoint_copy_of">コピー ～ </string>
-    <string name="waypointcalc_notes_prompt">ここにメモを入力…</string>
+    <string name="waypointcalc_notes_prompt">ここにノートを入力…</string>
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
@@ -1277,7 +1282,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
     <string name="export_confirm_title">エクスポート中 %1$s</string>
     <string name="export_confirm_message">フォルダ: %1$s\nファイル名: %2$s</string>
-    <string name="export_persnotes">パーソナルメモ</string>
+    <string name="export_persnotes">パーソナルノート</string>
     <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
     <plurals name="export_persnotes_upload_success">
         <item quantity="other">%1$dノートを正常にアップロードしました</item>
@@ -1533,6 +1538,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_blind_people_yes">視覚障がい者に対応</string>
     <string name="attribute_blind_people_no">視覚障がい者に非対応</string>
     <!-- next things -->
+    <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">サポート</string>
     <string name="website_title">Webサイト</string>
