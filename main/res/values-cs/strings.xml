@@ -574,6 +574,8 @@
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
+    <string name="init_bigSmileysOnMap">Velcí smajlíci pro zalogované keše</string>
+    <string name="init_summary_bigSmileysOnMap">Pokud je to povolené, na mapě se pro zalogované keše zobrazí velcí smajlíci (vyžaduje restart aplikace).</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_archived">Vyloučit archivované</string>
@@ -777,6 +779,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
+    <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
+    <string name="map_source_attribution_legacy_text">Klikněte pro zobrazení zdroje mapy</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
@@ -959,6 +963,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
+    <string name="cache_log_too_long">Aplikace c:geo nemůže odeslat váš log, protože je příliš dlouhý. Děkujeme ale, že jste se pokusili napsat takto obsáhlý log ;-)</string>
     <string name="cache_menu_visit_offline">Rychlý offline log</string>
     <string name="cache_menu_spoilers">Obrázky</string>
     <string name="cache_menu_around">Keš v okolí</string>
@@ -1045,6 +1050,7 @@
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
+    <string name="create_internal_cache_short">Nová keš</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
@@ -1209,6 +1215,7 @@
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
     <string name="search_destination">Otevřít cíl v c:geo</string>
+    <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
     <string name="search_address_result">Nalezená místa</string>
     <string name="search_own_caches">Hledat moje keše</string>
