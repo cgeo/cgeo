@@ -29,7 +29,6 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
     private final Disposable timer;
     private boolean downloading = false;
-    public final long loadThreadRun = -1;
 
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
@@ -49,7 +48,9 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
         @NonNull
         private final WeakReference<LiveCachesOverlay> overlayRef;
         private int previousZoom = -100;
-        private Viewport previousViewport;
+        private Viewport previousCycleViewport; //viewport on last timer cycle
+        private Viewport previousMoveViewport; //viewport on last move
+        private long lastMovedTimestamp = -1;
 
         LoadTimerAction(@NonNull final LiveCachesOverlay overlay) {
             this.overlayRef = new WeakReference<>(overlay);
@@ -70,22 +71,24 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                final boolean moved = overlay.isInvalidated() || previousViewport == null || zoomNow != previousZoom ||
-                        mapMoved(previousViewport, viewportNow);
+                final boolean moved = overlay.isInvalidated() || previousCycleViewport == null || zoomNow != previousZoom ||
+                        previousMoveViewport == null || mapMoved(previousMoveViewport, viewportNow);
 
                 // save new values
                 if (moved) {
                     final long currentTime = System.currentTimeMillis();
 
-                    if (1000 < (currentTime - overlay.loadThreadRun)) {
+                    if (1000 < (currentTime - lastMovedTimestamp)) {
                         overlay.downloading = true;
                         previousZoom = zoomNow;
                         overlay.download();
+                        previousMoveViewport = viewportNow;
+                        lastMovedTimestamp = System.currentTimeMillis();
                     }
-                } else if (!previousViewport.equals(viewportNow)) {
+                } else if (!previousCycleViewport.equals(viewportNow)) {
                     overlay.updateTitle();
                 }
-                previousViewport = viewportNow;
+                previousCycleViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("LiveCachesOverlay.startLoadtimer.start", e);
             } finally {
