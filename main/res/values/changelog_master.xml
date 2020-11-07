@@ -11,6 +11,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <ul>
 <li>Change: Old mapsforge map has been disabled and will be removed in future releases.</li>
 <li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
+<li>Change: Removed restrictions on initial zoom level</li>
 <li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
 <li>Fix: Preserve zoom level for leaving/entering map</li>
 <li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
@@ -32,6 +33,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Image upload on logging: allow resorting images</li>
 <li>New: Waypoint calculator: add option to lower-case all variables</li>
 <li>New: Show counter for logtext length</li>
+<li>Change: Own waypoint with empty coords will be extracted from personal cache note</li>
 </ul>
 
 <h4>Cache lists:</h4>
@@ -39,6 +41,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Improved performance for filtering large cache lists</li>
 <li>New: Added link to the gc message center in several places</li>
 <li>Change: User-defined caches are stored in a separate list \"user-defined caches\" instead of in default list</li>
+<li>Fix: avoid crash when trying to log a PM cache as basic member</li>
 </ul>
 
 <h4>Other:</h4>
