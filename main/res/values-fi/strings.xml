@@ -572,6 +572,8 @@
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
     <string name="brouter_recalculating">Lasketaan reittiä uudelleen taustalla…</string>
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
+    <string name="init_bigSmileysOnMap">Isot hymiöt kirjatuille kätköille</string>
+    <string name="init_summary_bigSmileysOnMap">Jos käytössä, niin kartalla näytetään isot hymiöt kirjatuille kätköille (vaatii uudelleenkäynnistyksen).</string>
     <string name="init_disabled">Piilota hyllytetyt</string>
     <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
     <string name="init_archived">Älä näytä arkistoituja</string>
@@ -775,6 +777,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
+    <string name="map_source_attribution_dialog_title">Kartan attribuutiot</string>
+    <string name="map_source_attribution_legacy_text">Klikkaa nähdäksesi kartan attribuutiot</string>
     <string name="init_sendToCgeo">Lähetä c:geoon</string>
     <string name="settings_info_send2cgeo_title">Send2cgeo tiedot</string>
     <string name="init_sendToCgeo_name">Laitteen nimi</string>
@@ -943,6 +947,7 @@
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
+    <string name="cache_log_too_long">c:geo ei voinut lähettää lokiasi, koska se on liian pitkä. Kiitos kuitenkin siitä, että yrität kirjoittaa näin laajan lokin ;-)</string>
     <string name="cache_menu_visit_offline">Nopea offline-loki</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
     <string name="cache_menu_around">Kätköt lähistöllä</string>
@@ -1029,6 +1034,7 @@
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
+    <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_owner">Sinä</string>
@@ -1191,6 +1197,7 @@
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
     <string name="search_destination">Avaa kohde c:geossa</string>
+    <string name="add_target_to">Lisää kohde kohteeseen</string>
     <string name="search_address_started">Etsitään paikkoja</string>
     <string name="search_address_result">Löydetyt paikat</string>
     <string name="search_own_caches">Etsi minun kätköni</string>
@@ -1236,6 +1243,7 @@
     <string name="user_menu_view_found">Kätköjä löydetty</string>
     <string name="user_menu_open_browser">Avaa profiili selaimessa</string>
     <string name="user_menu_send_message">Lähetä viesti</string>
+    <string name="user_menu_send_email">Lähetä sähköposti</string>
     <string name="user_menu_open_contact">Avaa yhteystiedot</string>
     <string name="user_unknown">Tuntematon käyttäjä</string>
     <!-- navigation -->
