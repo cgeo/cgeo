@@ -80,7 +80,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -99,6 +98,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
 
 import java.io.File;
@@ -1862,7 +1862,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private static void displayMapAttribution(final Context ctx, final String attribution, final boolean linkify) {
 
         //create text message
-        CharSequence message = Html.fromHtml(attribution);
+        CharSequence message = HtmlCompat.fromHtml(attribution, HtmlCompat.FROM_HTML_MODE_LEGACY);
         if (linkify) {
             final SpannableString s = new SpannableString(message);
             Linkify.addLinks(s, Linkify.ALL);

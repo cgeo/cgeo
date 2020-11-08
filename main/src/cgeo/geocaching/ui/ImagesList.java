@@ -20,7 +20,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.text.Html;
 import android.util.SparseArray;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -35,6 +34,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.FileProvider;
+import androidx.core.text.HtmlCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.io.BufferedOutputStream;
@@ -118,12 +118,12 @@ public class ImagesList {
 
             if (StringUtils.isNotBlank(img.getTitle())) {
                 final TextView titleView = rowView.findViewById(R.id.title);
-                titleView.setText(Html.fromHtml(img.getTitle()));
+                titleView.setText(HtmlCompat.fromHtml(img.getTitle(), HtmlCompat.FROM_HTML_MODE_LEGACY));
             }
 
             if (StringUtils.isNotBlank(img.getDescription())) {
                 final TextView descView = rowView.findViewById(R.id.description);
-                descView.setText(Html.fromHtml(img.getDescription()), TextView.BufferType.SPANNABLE);
+                descView.setText(HtmlCompat.fromHtml(img.getDescription(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
                 descView.setVisibility(View.VISIBLE);
             }
 

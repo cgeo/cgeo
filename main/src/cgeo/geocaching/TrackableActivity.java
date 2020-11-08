@@ -37,7 +37,6 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +52,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.view.ActionMode;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -468,7 +468,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable owner
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown)).right;
             if (StringUtils.isNotBlank(trackable.getOwner())) {
-                owner.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
+                owner.setText(HtmlCompat.fromHtml(trackable.getOwner(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
                 owner.setOnClickListener(UserClickListener.forOwnerOf(trackable));
             }
 
@@ -483,11 +483,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 switch (trackable.getSpottedType()) {
                     case Trackable.SPOTTED_CACHE:
                         // TODO: the whole sentence fragment should not be constructed, but taken from the resources
-                        text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache)).append(' ').append(Html.fromHtml(trackable.getSpottedName()));
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache)).append(' ').append(HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
                         break;
                     case Trackable.SPOTTED_USER:
                         // TODO: the whole sentence fragment should not be constructed, but taken from the resources
-                        text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user)).append(' ').append(Html.fromHtml(trackable.getSpottedName()));
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user)).append(' ').append(HtmlCompat.fromHtml(trackable.getSpottedName(), HtmlCompat.FROM_HTML_MODE_LEGACY));
                         break;
                     case Trackable.SPOTTED_UNKNOWN:
                         text = new StringBuilder(res.getString(R.string.trackable_spotted_unknown_location));
@@ -538,7 +538,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable origin
             if (StringUtils.isNotBlank(trackable.getOrigin())) {
                 final TextView origin = details.add(R.string.trackable_origin, "").right;
-                origin.setText(Html.fromHtml(trackable.getOrigin()), TextView.BufferType.SPANNABLE);
+                origin.setText(HtmlCompat.fromHtml(trackable.getOrigin(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
                 addContextMenu(origin);
             }
 
@@ -557,7 +557,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getGoal()))) {
                 goalBox.setVisibility(View.VISIBLE);
                 goalTextView.setVisibility(View.VISIBLE);
-                goalTextView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, false, goalTextView, false), null), TextView.BufferType.SPANNABLE);
+                goalTextView.setText(HtmlCompat.fromHtml(trackable.getGoal(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(geocode, true, false, goalTextView, false), null), TextView.BufferType.SPANNABLE);
                 goalTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 addContextMenu(goalTextView);
             }
@@ -566,7 +566,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotBlank(HtmlUtils.extractText(trackable.getDetails()))) {
                 detailsBox.setVisibility(View.VISIBLE);
                 detailsTextView.setVisibility(View.VISIBLE);
-                detailsTextView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, false, detailsTextView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                detailsTextView.setText(HtmlCompat.fromHtml(trackable.getDetails(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(geocode, true, false, detailsTextView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 detailsTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 addContextMenu(detailsTextView);
             }

@@ -16,13 +16,13 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.text.Html;
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 import androidx.exifinterface.media.ExifInterface;
 
 import java.io.BufferedOutputStream;
@@ -402,7 +402,7 @@ public final class ImageUtils {
             urls.add(image.getUrl());
         }
         for (final String text: htmlText) {
-            Html.fromHtml(StringUtils.defaultString(text), source -> {
+            HtmlCompat.fromHtml(StringUtils.defaultString(text), HtmlCompat.FROM_HTML_MODE_LEGACY, source -> {
                 if (!urls.contains(source) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
                             .setUrl(source)

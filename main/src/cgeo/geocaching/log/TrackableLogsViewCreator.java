@@ -7,8 +7,9 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.text.Html;
 import android.view.View;
+
+import androidx.core.text.HtmlCompat;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     @Override
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         if (StringUtils.isNotBlank(log.cacheName)) {
-            holder.gcinfo.setText(Html.fromHtml(log.cacheName));
+            holder.gcinfo.setText(HtmlCompat.fromHtml(log.cacheName, HtmlCompat.FROM_HTML_MODE_LEGACY));
             holder.gcinfo.setVisibility(View.VISIBLE);
             final String cacheGuid = log.cacheGuid;
             final String cacheName = log.cacheName;

@@ -10,13 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
-import android.text.Html;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -89,7 +89,7 @@ class CalendarEntry {
         description.append(url);
         if (StringUtils.isNotBlank(shortDesc)) {
             // remove images in short description
-            final Spanned spanned = Html.fromHtml(shortDesc, null, null);
+            final Spanned spanned = HtmlCompat.fromHtml(shortDesc, HtmlCompat.FROM_HTML_MODE_LEGACY);
             String text = spanned.toString();
             final ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
             for (int i = spans.length - 1; i >= 0; i--) {

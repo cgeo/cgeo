@@ -16,7 +16,6 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
-import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
@@ -24,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +71,7 @@ public final class CacheDetailsCreator {
     public ImmutablePair<RelativeLayout, TextView> addHtml(final int nameId, final CharSequence value, final String geocode) {
         final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
         final TextView valueView = nameValue.getRight();
-        valueView.setText(Html.fromHtml(value.toString(), new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+        valueView.setText(HtmlCompat.fromHtml(value.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
         return nameValue;
     }
 

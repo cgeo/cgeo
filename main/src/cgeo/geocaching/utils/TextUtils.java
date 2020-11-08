@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -13,6 +12,7 @@ import android.text.style.StrikethroughSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 
 import java.nio.charset.StandardCharsets;
 import java.text.Collator;
@@ -229,7 +229,7 @@ public final class TextUtils {
     }
 
     /**
-     * When converting html to text using {@link Html#fromHtml(String)} then the result often contains unwanted trailing
+     * When converting html to text using {@link HtmlCompat#fromHtml(String, int)} then the result often contains unwanted trailing
      * linebreaks (from the conversion of paragraph tags). This method removes those.
      */
     public static CharSequence trimSpanned(final Spanned source) {
@@ -255,7 +255,7 @@ public final class TextUtils {
      * @return a string without any HTML markup
      */
     public static String stripHtml(final String html) {
-        return containsHtml(html) ? trimSpanned(Html.fromHtml(html)).toString() : html;
+        return containsHtml(html) ? trimSpanned(HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)).toString() : html;
     }
 
     public static SpannableString coloredCacheText(@NonNull final Geocache cache, @NonNull final String text) {

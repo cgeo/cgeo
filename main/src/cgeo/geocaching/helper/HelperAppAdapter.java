@@ -6,7 +6,6 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Arrays;
@@ -66,7 +66,7 @@ final class HelperAppAdapter extends RecyclerView.Adapter<HelperAppAdapter.ViewH
         final Resources resources = context.getResources();
         holder.title.setText(resources.getString(app.titleId));
         holder.image.setImageDrawable(Compatibility.getDrawable(resources, app.iconId));
-        holder.description.setText(Html.fromHtml(resources.getString(app.descriptionId)));
+        holder.description.setText(HtmlCompat.fromHtml(resources.getString(app.descriptionId), HtmlCompat.FROM_HTML_MODE_LEGACY));
     }
 
 }
