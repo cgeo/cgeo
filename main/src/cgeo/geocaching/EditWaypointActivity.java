@@ -38,7 +38,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +55,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
@@ -156,7 +156,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         final AutoCompleteTextView waypointName = activity.waypointName;
                         waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
-                        activity.note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote()), new SmileyImage(activity.geocode, activity.note), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                        activity.note.setText(HtmlCompat.fromHtml(StringUtils.trimToEmpty(waypoint.getNote()), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(activity.geocode, activity.note), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                         final EditText userNote = activity.userNote;
                         userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         Dialogs.moveCursorToEnd(userNote);

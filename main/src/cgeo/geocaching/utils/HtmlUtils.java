@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
-import android.text.Html;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,7 +53,7 @@ public final class HtmlUtils {
         }
 
         // now that images are gone, do a normal html to text conversion
-        return Html.fromHtml(result).toString().trim();
+        return HtmlCompat.fromHtml(result, HtmlCompat.FROM_HTML_MODE_LEGACY).toString().trim();
     }
 
     /**

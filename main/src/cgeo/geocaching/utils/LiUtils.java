@@ -3,9 +3,8 @@ package cgeo.geocaching.utils;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Build;
 import android.text.Editable;
-import android.text.Html;
+import android.text.Html.TagHandler;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -13,6 +12,8 @@ import android.text.Spanned;
 import android.text.style.BulletSpan;
 import android.text.style.LeadingMarginSpan;
 import android.util.TypedValue;
+
+import androidx.core.text.HtmlCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,7 +37,7 @@ public class LiUtils {
         final String input = m.find() ? m.replaceAll("<li>$2</li>") : html;
 
         // now apply HTML formatting (including <li> tags)
-        final Spanned spanned = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ? Html.fromHtml(input, Html.FROM_HTML_MODE_LEGACY) : Html.fromHtml(input, null, new LiTagHandler());
+        final Spanned spanned = HtmlCompat.fromHtml(input, HtmlCompat.FROM_HTML_MODE_LEGACY, null, new LiTagHandler());
         final SpannableStringBuilder builder = new SpannableStringBuilder(spanned);
         final BulletSpan[] bulletSpans = builder.getSpans(0, builder.length(), BulletSpan.class);
         for (BulletSpan bulletSpan :bulletSpans) {
@@ -93,7 +94,7 @@ class LiAwareBulletSpan implements LeadingMarginSpan {
     }
 }
 
-class LiTagHandler implements Html.TagHandler {
+class LiTagHandler implements TagHandler {
 
     @Override
     public void handleTag(final boolean opening, final String tag, final Editable output, final XMLReader xmlReader) {

@@ -17,7 +17,6 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
-import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +95,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         // log text, avoid parsing HTML if not necessary
         if (TextUtils.containsHtml(log.log)) {
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.text.setText(TextUtils.trimSpanned(Html.fromHtml(log.getDisplayText(), new SmileyImage(getGeocode(), holder.text), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
+            holder.text.setText(TextUtils.trimSpanned(HtmlCompat.fromHtml(log.getDisplayText(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(getGeocode(), holder.text), unknownTagsHandler)), TextView.BufferType.SPANNABLE);
         } else {
             holder.text.setText(log.log, TextView.BufferType.SPANNABLE);
         }

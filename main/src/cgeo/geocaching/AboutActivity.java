@@ -17,7 +17,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
+import androidx.core.text.HtmlCompat;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -149,11 +149,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
             sb.append("</ul>");
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                t.setText(Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                t.setText(Html.fromHtml(sb.toString()));
-            }
+            t.setText(HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY));
         }
     }
 

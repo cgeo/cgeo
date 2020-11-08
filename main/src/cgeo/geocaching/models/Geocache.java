@@ -56,10 +56,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -1789,7 +1789,7 @@ public class Geocache implements IWaypoint {
 
             // store images from description
             if (StringUtils.isNotBlank(cache.getDescription())) {
-                Html.fromHtml(cache.getDescription(), imgGetter, null);
+                HtmlCompat.fromHtml(cache.getDescription(), HtmlCompat.FROM_HTML_MODE_LEGACY, imgGetter, null);
             }
 
             if (DisposableHandler.isDisposed(handler)) {
