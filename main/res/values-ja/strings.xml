@@ -59,7 +59,7 @@
     <string name="log_note">ノート</string>
     <string name="log_published">公開</string>
     <string name="log_enabled">有効化</string>
-    <string name="log_disabled">無効化</string>
+    <string name="log_disabled">一時停止</string>
     <string name="log_attend">参加する</string>
     <string name="log_attended">参加した</string>
     <string name="log_retrieved">回収した</string>
@@ -571,8 +571,8 @@
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再計算しています...</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
-    <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
-    <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンを大きなアイコンで地図に表示\n(c:geoの再起動が必要)</string>
+    <string name="init_bigSmileysOnMap">大きなスマイルマーク</string>
+    <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルマークを大きく表示\n(c:geoの再起動が必要)</string>
     <string name="init_disabled">一時停止中キャッシュ除く</string>
     <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
     <string name="init_archived">アーカイブ済み除く</string>
