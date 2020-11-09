@@ -441,6 +441,34 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(ConnectorFactory.getConnector(lab)).isSameAs(unknownConnector);
     }
 
+    public void testLabCachesGeoGet() throws IOException, ParserException {
+        final String labName = "Starý Prostějov";
+        final String labGeoCode = "GC8DAEP";
+        final List<Geocache> caches = readGPX11(R.raw.lab_stary_prostejov);
+        assertThat(caches).hasSize(5);
+
+        for (final Geocache lab :caches) {
+            assertThat(lab).isNotNull();
+
+            // parse labs as virtual for the time being
+            assertThat(lab.getType()).isEqualTo(CacheType.VIRTUAL);
+
+            // no container size
+            assertThat(lab.getSize().comparable).isGreaterThan(CacheSize.VERY_LARGE.comparable);
+
+            // geocodes are just big hashes
+            assertThat(lab.getGeocode()).startsWith(labGeoCode.toUpperCase(Locale.US));
+
+            // other normal cache properties
+            assertThat(lab.getName()).startsWith(labName);
+            assertThat(lab.getShortDescription()).isNotBlank();
+            assertThat(lab.getDescription()).isNotBlank();
+
+            final IConnector unknownConnector = ConnectorFactory.getConnector(lab.getGeocode());
+            assertThat(ConnectorFactory.getConnector(lab)).isSameAs(unknownConnector);
+        }
+    }
+
     public void testGSAKGeocode() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.liptov_gpx);
         assertThat(caches).hasSize(1);
