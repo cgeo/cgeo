@@ -71,6 +71,7 @@ abstract class GPXParser extends FileParser {
     private static final Pattern PATTERN_GEOCODE = Pattern.compile("[0-9A-Z]{5,}");
     private static final Pattern PATTERN_GUID = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+
     /**
      * supported groundspeak extensions of the GPX format
      */
@@ -232,10 +233,11 @@ abstract class GPXParser extends FileParser {
             public void end() {
                 // try to find geocode somewhere else
                 if (StringUtils.isBlank(cache.getGeocode())) {
-                    findGeoCode(name);
-                    findGeoCode(desc);
-                    findGeoCode(cmt);
+                    findGeoCode(name, true);
+                    findGeoCode(desc, false);
+                    findGeoCode(cmt, false);
                 }
+
                 // take the name as code, if nothing else is available
                 if (StringUtils.isBlank(cache.getGeocode()) && StringUtils.isNotBlank(name)) {
                     cache.setGeocode(name.trim());
@@ -270,7 +272,7 @@ abstract class GPXParser extends FileParser {
                     DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
- && (StringUtils.containsIgnoreCase(type, "waypoint") || terraChildWaypoint)) {
+                    && (StringUtils.containsIgnoreCase(type, "waypoint") || terraChildWaypoint)) {
                     addWaypointToCache();
                 }
 
@@ -353,7 +355,7 @@ abstract class GPXParser extends FileParser {
 
             cache.setName(content);
 
-            findGeoCode(cache.getName());
+            findGeoCode(cache.getName(), true);
         });
 
         // waypoint.desc
@@ -847,7 +849,7 @@ abstract class GPXParser extends FileParser {
         return input.trim();
     }
 
-    private void findGeoCode(final String input) {
+    private void findGeoCode(final String input, final Boolean useUnknownConnector) {
         if (input == null || StringUtils.isNotBlank(cache.getGeocode())) {
             return;
         }
@@ -857,7 +859,8 @@ abstract class GPXParser extends FileParser {
             final String geocode = matcherGeocode.group();
             // a geocode should not be part of a word
             if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
-                if (ConnectorFactory.canHandle(geocode)) {
+                final IConnector foundConnector = ConnectorFactory.getConnector(geocode);
+                if (!foundConnector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) || useUnknownConnector) {
                     cache.setGeocode(geocode);
                 }
             }
