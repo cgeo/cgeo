@@ -116,9 +116,11 @@
     <string name="log_yesterday">Vakar</string>
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Nuotrauka</string>
+    <string name="log_images">Nuotraukos</string>
     <string name="log_image_attach">Pridėti nuotrauką</string>
     <string name="log_image_stored">Esamą</string>
     <string name="log_image_camera">Naują</string>
+    <string name="log_image_delete">Ištrinti</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
@@ -143,6 +145,7 @@
     <string name="log_problem_archive_text">Šis lobiautojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
     <string name="log_image_scale_option_noscaling">Nekeisti dydžio</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_titleprefix">Nuotrauka</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Išversti į %s</string>
     <string name="translate_to_english">Išversti į anglų</string>
@@ -225,6 +228,7 @@
     <string name="warn_search_help_tb">Įveskite keliauninko kodą. Pvz. \"TB5303E\".</string>
     <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
     <string name="warn_load_images">c:geo nepavyko įkelti nuotraukų.</string>
+    <string name="warn_invalid_mapfile">Pasirinktas žemėlapis nėra Mapsforge tipo ar palaikomos versijos.\n(c:geo palaiko nuo v3 iki v5 (v3 palaikymą galite įjungti pasirinkę „Senasis Mapsforge V3“).)\n\nŽemėlapiai neprisijungus neprieinami.</string>
     <string name="warn_nonexistant_mapfile">Pasirinktas žemėlapio failas neegzistuoja.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
     <string name="warn_rendertheme_missing">Nerasta žemėlapio tema.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
@@ -445,6 +449,7 @@
     <string name="settings_title_cachedetails">Slėptuvės informacija</string>
     <string name="settings_summary_cachedetails">Pritaikyti vaizdą slėptuvės informacijai.</string>
     <string name="settings_title_offlinedata">Duomenys darbui be interneto</string>
+    <string name="settings_summary_offlinedata">Konfigūruoti duomenis, išsaugotinus darbui neprisijungus, saugojimo vietą ir GPX failų katalogus.</string>
     <string name="settings_title_logging">Registravimas</string>
     <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
     <string name="settings_title_map">Žemėlapis</string>
@@ -453,6 +458,7 @@
     <string name="settings_title_map_rotation">Žemėlapio sukimas (Google Maps)</string>
     <string name="settings_title_waypoints">Papildomi taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
+    <string name="settings_title_map_behavior">Žemėlapio elgesys</string>
     <string name="settings_title_gpx">GPX</string>
     <string name="settings_title_data_dir">Slėptuvių duomenų katalogas</string>
     <string name="settings_title_data_dir_usage">Slėptuvių duomenų katalogas (%1$s naudojama)</string>
@@ -1627,6 +1633,9 @@
     <string name="map_trailhistory_cleared">Pėdsako istorija išvalyta</string>
     <string name="map_trail_show">Rodyti pėdsaką</string>
     <!-- history track export -->
+    <string name="export_trailhistory_success">Pėdsakas eksportuotas į „%s“</string>
+    <string name="export_trailhistory_clear_after_export">Išvalyti pėdsaką po eksportavimo</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Eksportuoti asmeninį maršrutą</string>
+    <string name="export_individualroute_success">Individualus kelias eksportuotas į „%s“</string>
 </resources>
