@@ -1,7 +1,7 @@
 Tai yra naujasis kontaktų papildinys atviro kodo c:geo programėlei. Jis veiks tik su instaliuota c:geo programėle ir suteiks tiesioginę prieigą prie jūsų įrenginio kontaktų vos paspaudus ant kito vartotojo slapyvardžio.
 
 Naudojimas:
-Paspaudus ant vartotojo slapyvardžio c:geo programėlėje (pvz. slėptuvės žurnalo (logbook) puslapyje) meniu matysite atitinkamą pasirinkimą, kuris nukreips į norimo vartotojo kontaktus jūsų įrenginyje. Taip jūs galėsite greitai ir patogiai susisiekti su norimu vartotoju.
+Paspaudus ant vartotojo slapyvardžio c:geo programėlėje (pvz. slėptuvės įrašų žurnalo puslapyje) meniu matysite atitinkamą pasirinkimą, kuris nukreips į norimo vartotojo kontaktus jūsų įrenginyje. Taip jūs galėsite greitai ir patogiai susisiekti su norimu vartotoju.
 
 Pastabos:
 Vartotojo kontaktas turi būti išsaugotas tokiu pačiu vardu ar slapyvardžiu kaip ir geocaching puslapyje, jog papildinys galėtų veikti.

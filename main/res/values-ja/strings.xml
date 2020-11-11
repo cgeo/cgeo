@@ -88,15 +88,15 @@
     <string name="log_tb_discovered">発見した</string>
     <string name="log_tb_archived">アーカイブ済み</string>
     <string name="log_save">オフライン保存</string>
-    <string name="log_saving">ログを投稿中...</string>
-    <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中...</string>
-    <string name="log_posting_log">ログを投稿中...</string>
-    <string name="log_posting_twitter">ツイートを投稿中...</string>
-    <string name="log_posting_vote">キャッシュの評価を投稿中...</string>
-    <string name="log_posting_image">画像を投稿中...</string>
+    <string name="log_saving">ログを投稿中…</string>
+    <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中…</string>
+    <string name="log_posting_log">ログを投稿中…</string>
+    <string name="log_posting_twitter">ツイートを投稿中…</string>
+    <string name="log_posting_vote">キャッシュの評価を投稿中…</string>
+    <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">削除</string>
-    <string name="log_post_not_possible">データをダウンロード中...\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
+    <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
     <string name="log_date_future_not_allowed">ログには未来の日付けを設定できません</string>
     <string name="log_add">挿入</string>
     <string name="log_repeat">最後のログを繰り返す</string>
@@ -262,7 +262,7 @@
     <string name="confirm_discard_wp_changes">ウェイポイントの変更を破棄しますか?</string>
     <string name="err_request_popup_info">キャッシュポップアップ情報の取得に失敗しました</string>
     <string name="warn_log_load_additional_data">ログの追加データ(トラッカブル/お気に入りポイント)を読み込めませんでした</string>
-    <string name="more_information">詳細...</string>
+    <string name="more_information">詳細</string>
     <string name="undo">元に戻す</string>
     <string name="dont_show_again">今後表示しない</string>
     <string name="warn_gm_not_available">Google マップは利用できません</string>
@@ -301,9 +301,9 @@
     <string name="caches_no_cache">キャッシュがありません</string>
     <string name="caches_more_caches">次のキャッシュ</string>
     <string name="caches_more_caches_no">キャッシュは以上です</string>
-    <string name="caches_more_caches_loading">キャッシュ情報を読み込み中...</string>
+    <string name="caches_more_caches_loading">キャッシュ情報を読み込み中…</string>
     <string name="caches_more_caches_currently">現在</string>
-    <string name="caches_downloading">キャッシュ情報をダウンロード中...\n残り時間: </string>
+    <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
     <string name="caches_eta_ltm">1分以内</string>
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 分</item>
@@ -372,7 +372,7 @@
     <string name="caches_filter_missing_gcvote">未評価の発見したキャッシュ</string>
     <string name="caches_filter_lists">リストに保存</string>
     <string name="caches_filter_empty">(未定義)</string>
-    <string name="caches_removing_from_history">履歴から削除中...</string>
+    <string name="caches_removing_from_history">履歴から削除中…</string>
     <string name="caches_clear_offlinelogs">すべてのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
     <string name="caches_clear_offlinelogs_progress">すべてのオフラインログを削除中</string>
@@ -482,12 +482,12 @@
     <string name="settings_category_geocaching_additionals">ほかのサービスとアドオン</string>
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
-    <string name="settings_goto_url_button">詳細...</string>
+    <string name="settings_goto_url_button">詳細…</string>
     <string name="settings_activate_gc">有効化</string>
     <string name="settings_activate_ec">有効化</string>
     <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります</string>
     <string name="settings_info_facebook_login_title">FacebookやGoogleのアカウントでのログインについて</string>
-    <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります...</string>
+    <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります…</string>
     <string name="settings_authorize">c:geoを認証</string>
     <string name="settings_reauthorize">認証を更新または削除</string>
     <string name="settings_gc_description">geocaching.comでc:geoを認証してキャッシュを検索できるようにします</string>
@@ -518,7 +518,7 @@
     <string name="vote_sent">評価は正常に送信されました</string>
     <string name="settings_activate_twitter">有効化</string>
     <string name="init_login_popup">ログイン</string>
-    <string name="init_login_popup_working">ログイン中...</string>
+    <string name="init_login_popup_working">ログイン中…</string>
     <string name="init_login_popup_ok">ログイン完了</string>
     <string name="init_login_popup_failed">ログイン失敗</string>
     <string name="init_login_popup_failed_reason">ログインに失敗しました: %s</string>
@@ -569,7 +569,7 @@
     <string name="init_brouterThreshold">ルートを計算</string>
     <string name="init_brouterThreshold_description">BRouter(インストールされている場合)がルートを計算するまでの最大距離</string>
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
-    <string name="brouter_recalculating">バックグラウンドでルートを再計算しています...</string>
+    <string name="brouter_recalculating">バックグラウンドでルートを再計算しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
     <string name="init_bigSmileysOnMap">大きなスマイルマーク</string>
     <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルマークを大きく表示\n(c:geoの再起動が必要)</string>
@@ -603,7 +603,7 @@
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_finished">バックアップ完了</string>
     <string name="init_backup_now">バックアップする</string>
-    <string name="init_backup_running">キャッシュのデータベースをバックアップ中...</string>
+    <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
     <string name="init_backup_restore">復元</string>
     <string name="init_restore_restored">正常に復元されました</string>
     <string name="init_backup_start_restore">復元する</string>
@@ -628,7 +628,7 @@
     <string name="init_restore_success">キャッシュのデータベースは正常に復元されました</string>
     <string name="init_restore_failed_dbrecreated">復元に失敗しました: バックアップファイルが破損しています。データベースを再作成する必要がありました</string>
     <string name="init_restore_failed">復元できませんでした</string>
-    <string name="init_restore_running">キャッシュのデータベースを復元中...</string>
+    <string name="init_restore_running">キャッシュのデータベースを復元中…</string>
     <string name="init_restore_confirm">データベースは空です。バックアップから復元しますか?</string>
     <string name="init_backup_last">バックアップ日時:</string>
     <string name="init_backup_unavailable">利用できません</string>
@@ -783,7 +783,7 @@
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
     <string name="init_sendToCgeo_description"><b>Send2cgeo</b>を使うとFirefoxまたはChrome用のスクリプトでgeocaching.comからAndroidデバイスにキャッシュ情報を直接送信できます。 登録する前に <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a> をご覧ください。 Send2cgeoを使用する場合のみ登録する必要があります。c:geoはデバイスを登録しなくても正常に機能します</string>
     <string name="init_sendToCgeo_register">登録を申請</string>
-    <string name="init_sendToCgeo_registering">Send2cgeoにこの端末を登録しています...</string>
+    <string name="init_sendToCgeo_registering">Send2cgeoにこの端末を登録しています…</string>
     <string name="init_sendToCgeo_register_ok">登録しました。PINコードは「%d」です。お使いのブラウザでc:geoのWebサイトを開いてデバイスと接続してください</string>
     <string name="init_sendToCgeo_register_fail">登録に失敗しました</string>
     <string name="sendToCgeo_download_fail">キャッシュ情報がダウンロードできませんでした。インターネットに未接続かSend2cgeoのサーバが停止中です</string>
@@ -798,7 +798,7 @@
     <string name="auth_connected">接続しました</string>
     <string name="auth_unconnected">まだ接続されていません</string>
     <string name="auth_connected_as">%sとして接続しました\nここをタップして更新するかロングタップしてc:geoから認証データを削除できます</string>
-    <string name="auth_dialog_waiting">%sからの返答を待っています...</string>
+    <string name="auth_dialog_waiting">%sからの返答を待っています…</string>
     <string name="auth_explain_short">次の処理で<b>c:geo</b>が%sへのアクセスをできるようになります</string>
     <string name="auth_explain_long">「c:geoを認証」ボタンを押すとWebブラウザで%sが開きます。Webサイトにログインし<b>c:geo</b>のアクセスを許可してください</string>
     <string name="auth_forget_title">認証を削除しますか?</string>
@@ -899,7 +899,7 @@
     <string name="cache_hint_not_available">ヒントはありません</string>
     <string name="cache_logs">ログブック</string>
     <string name="cache_logs_friends_and_own">ジオ友達/自分のログ</string>
-    <string name="cache_dialog_loading_details">キャッシュの詳細を読み込み中...</string>
+    <string name="cache_dialog_loading_details">キャッシュの詳細を読み込み中…</string>
     <string name="cache_dialog_loading_details_status_loadpage">ページを読み込み中</string>
     <string name="cache_dialog_loading_details_status_details">詳細を処理中</string>
     <string name="cache_dialog_loading_details_status_spoilers">スポイラー画像を読み込み中</string>
@@ -911,17 +911,17 @@
     <string name="cache_dialog_offline_save_title">オフライン</string>
     <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中...</string>
     <string name="cache_dialog_offline_drop_title">オフライン</string>
-    <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中...</string>
+    <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
     <string name="cache_dialog_refresh_title">更新</string>
     <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中...</string>
     <string name="cache_dialog_watchlist_add_title">ウォッチリスト</string>
-    <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中...</string>
+    <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中…</string>
     <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
-    <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中...</string>
+    <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中…</string>
     <string name="cache_dialog_favorite_add_title">お気に入り</string>
-    <string name="cache_dialog_favorite_add_message">お気に入りに追加中...</string>
+    <string name="cache_dialog_favorite_add_message">お気に入りに追加中…</string>
     <string name="cache_dialog_favorite_remove_title">お気に入り</string>
-    <string name="cache_dialog_favorite_remove_message">お気に入りから削除中...</string>
+    <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
     <string name="cache_menu_navigation_drive_select_target">キャッシュ/駐車場?</string>
@@ -1079,7 +1079,7 @@
     <string name="individual_route_file_select_title">個別ルートファイルを選択</string>
     <!-- import -->
     <string name="web_import_title">Send2cgeoからインポート</string>
-    <string name="web_import_waiting">Send2cgeoから新しいキャッシュ情報を確認中...</string>
+    <string name="web_import_waiting">send2cgeoから新しいキャッシュ情報を確認中…</string>
     <string name="web_downloading">ダウンロード中</string>
     <string name="web_downloaded">ダウンロード完了</string>
     <!-- popup -->
@@ -1108,13 +1108,13 @@
     <string name="waypoint_unset_visited">ウェイポイントを未訪問に設定しました</string>
     <string name="waypoint_save">保存</string>
     <string name="waypoint_cancel_edit">キャンセル</string>
-    <string name="waypoint_loading">ウェイポイントを読み込み中...</string>
+    <string name="waypoint_loading">ウェイポイントをロード中…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">キャッシュ座標を変更しない</string>
     <string name="waypoint_set_as_cache_coords">c:geo内部のみでキャッシュ座標を変更</string>
     <string name="waypoint_save_and_modify_on_website">c:geo内部とWebサイトでキャッシュ座標を変更</string>
     <string name="waypoint_reset_cache_coords">キャッシュ座標をリセット</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Webサイトでのキャッシュ座標をリセットしました</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Webサイトでのキャッシュ座標をリセットしています...</string>
+    <string name="waypoint_coordinates_being_reset_on_website">Webサイトでのキャッシュ座標をリセットしています…</string>
     <string name="waypoint_reset">リセット</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo内部のみでリセット</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">c:geo内部とWebサイトでリセット</string>
@@ -1125,7 +1125,7 @@
     <string name="waypoint_duplicate">ウェイポイントを複製</string>
     <string name="waypoint_toclipboard">クリップボードにウェイポイントをコピー</string>
     <string name="waypoint_copy_of">コピー ～ </string>
-    <string name="waypointcalc_notes_prompt">ここにノートを入力...</string>
+    <string name="waypointcalc_notes_prompt">ここにメモを入力…</string>
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
