@@ -19,6 +19,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>Fix: Crash on Google Maps map being put into the background</li>
 <li>New: Added attribution to contributors on OpenStreetMap maps</li>
 <li>New: Added option to show big smileys for found caches</li>
+<li>New: Enlarge display of distance to current navigation target by tapping on it</li>
 </ul>
 
 <h4>Cache details:</h4>
