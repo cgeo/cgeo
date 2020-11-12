@@ -601,7 +601,7 @@
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
-    <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
+    <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę %s kopiją?</string>
     <string name="restore_confirm_overwrite">Ar norite %s įrenginyje perrašyti iš atsarginės kopijos?</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed_dbrecreated">Nepavyko atkurti: atsarginė kopija pažeista, duomenų bazė perkurta.</string>
@@ -937,6 +937,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Atidaryti naršyklėje</string>
     <string name="cache_menu_visit">Registruoti</string>
+    <string name="cache_menu_visit_offline">Greitas įrašas neprisijungus</string>
     <string name="cache_menu_spoilers">Užuominos vaizdai</string>
     <string name="cache_menu_around">Slėptuvės aplink</string>
     <string name="around">Aplink %s</string>
@@ -1508,6 +1509,12 @@
     <string name="attribute_geohotel_no">Ne GeoHotel slėptuvė</string>
     <string name="attribute_survey_marker_yes">Šalia apžvalgos ženklo</string>
     <string name="attribute_survey_marker_no">Ne šalia apžvalgos ženklo</string>
+    <string name="attribute_bonuscache_yes">Bonus slėptuvė</string>
+    <string name="attribute_bonuscache_no">Ne bonus slėptuvė</string>
+    <string name="attribute_challengecache_yes">Iššūkio slėptuvė</string>
+    <string name="attribute_challengecache_no">Ne iššūkio slėptuvė</string>
+    <string name="attribute_hqsolutionchecker_yes">Įjungtas Geocaching.com sprendimų tikrintuvas</string>
+    <string name="attribute_hqsolutionchecker_no">Neįjungtas Geocaching.com sprendimų tikrintuvas</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1688,6 +1695,13 @@
     <string name="save_sorted_route">Išsaugoti</string>
     <string name="sorted_route_saved">Asmeninis maršrutas išsaugotas</string>
     <string name="load_individual_route_error">Klaida įkeliant asmeninį maršrutą</string>
+    <string name="route_item_not_yet_loaded">Maršruto elementas dar neįkeltas</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Maršrutas įkeltas su %d maršruto tašku</item>
+        <item quantity="few">Maršrutas įkeltas su %d maršruto taškais</item>
+        <item quantity="many">Maršrutas įkeltas su %d maršruto taškų</item>
+        <item quantity="other">Maršrutas įkeltas su %d maršruto taškų</item>
+    </plurals>
     <string name="center_on_route">Centruoti į maršrutą</string>
     <!-- individual track -->
     <string name="individual_track">GPX asmeninis kelias/maršrutas</string>
@@ -1716,18 +1730,22 @@
     <!-- view settings -->
     <string name="view_settings">Atvaizdavimo nustatymai</string>
     <string name="delete_setting">Išvalyti nustatymus</string>
+    <string name="delete_setting_warning">Ištrinti \"%s\" raktą iš nustatymų?\n\nŠios operacijos anuliuoti negalima.</string>
     <string name="edit_setting">Redaguoti \"%s\" nustatymą</string>
     <string name="edit_setting_error_unknown_type">Nežinomas nustatymo tipas - redagavimas nepalaikomas</string>
     <string name="edit_setting_error_invalid_data">Įvesti neteisingi duomenys - \"%s\". Nustatymo reikšmė nepakeista.</string>
     <string name="activate_editmode_title">Įjungti redagavimo rėžimą</string>
     <string name="activate_editmode_warning">Elkitės atsargiai!\n\nTiesiogiai keičiant nustatymus galima sugadinti c:geo!\n\nAr tikrai norite tęsti ir prisiimti visą atsakomybę sau?</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
+    <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_foundmap">rastas žemėlapio failas</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Gauti žemėlapio failą</string>
     <string name="receivemapfile_success">Žemėlapio failas sėkmingai įrašytas kaip \"%s\" ir išsaugotas žemėlapių aplanke</string>
     <string name="receivemapfile_error">Klaida gaunant žemėlapio failą</string>
     <string name="receivemapfile_error_io_exception">Nepavyko įrašyti žemėlapio failo, ar turite rašymo teises žemėlapio kataloge (\"%s\")?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Failas nerastas, klaida gaunant žemėlapio failą.</string>
     <string name="receivemapfile_alreadyexists">Failas šiuo pavadinimu jau yra. Perrašyti jį ar išsaugoti failą kitu pavadinimu?</string>
     <string name="receivemapfile_option_overwrite">Perrašyti</string>
     <string name="receivemapfile_option_differentname">Kitas pavadinimas</string>
@@ -1737,7 +1755,9 @@
     <string name="downloadmap_title">Atsisiųsti žemėlapį naudojimui neprisijungus</string>
     <string name="downloadmap_choose">Pasirinkite žemėlapį</string>
     <string name="downloadmap_filename">Parsisiunčiama %s</string>
+    <string name="downloadmanager_not_available">Žemėlapio failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
     <string name="download_started">Parsiunčiama fone</string>
+    <string name="downloadmap_target_not_writable">Tikslas \"%s\" nėra įrašomas - atsisiųstas žemėlapio failas bus išsaugotas sistemos atsisiuntimo aplanke ir turi būti perkeltas rankiniu būdu į žemėlapio aplanką.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Valyti pėdsaką</string>
     <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>
