@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Imatge</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradueix a %s</string>
@@ -572,10 +573,13 @@
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
+    <string name="init_bigSmileysOnMap">Grans emoticones als catxés registrats</string>
+    <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran  emoticones grans  als catxés registrats  (cal reiniciar-lo).</string>
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
     <string name="init_summary_archived">Exclou els catxés desactivats</string>
+    <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_save_log_img">Desa les imatges</string>
     <string name="init_summary_save_log_img">Desa les imatges dels registres</string>
@@ -591,9 +595,12 @@
     <string name="init_summary_livelist">Mostra la direcció dels catxés a la llista</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
+    <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
     <string name="init_restore_title">Restaura la còpia de seguretat</string>
     <string name="init_backup_caches">catxés i punts de ruta</string>
     <string name="init_backup_program_settings">configuració del programa</string>
+    <string name="init_backup_logins">Inclou les dades del compte</string>
+    <string name="init_backup_logins_summary">Això emmagatzemarà les vostres credencials d\'inici de sessió a la còpia de seguretat.</string>
     <string name="init_backup">Cópia  seguretat Catxés / Punts de ruta</string>
     <string name="init_backup_backup">Còpia de seguretat</string>
     <string name="init_backup_finished">Còpia de seguretat finalitzada</string>
@@ -602,12 +609,20 @@
     <string name="init_backup_restore">Restaura</string>
     <string name="init_restore_restored">La restauració s\'ha completat.</string>
     <string name="init_backup_start_restore">Comença la restauració</string>
+    <string name="init_backup_restore_different_backup">Restaura una còpia de seguretat diferent</string>
     <string name="init_backup_backup_history">Historial de còpies de seguretat</string>
+    <string name="init_backup_history_length_title">Emmagatzemades les  màximes còpies de seguretat</string>
+    <string name="init_backup_history_length_summary">Decidiu quantes còpies de seguretat s\'han de conservar. Quan s’arribi al límit, les més antigues se suprimiran automàticament.</string>
+    <string name="init_backup_history_length_min">Només les recents</string>
+    <string name="init_backup_history_length_max">Guarda-ho tot</string>
+    <string name="init_backup_history_delete_warning">Heu desat més còpies de seguretat de les que permet el màxim configurat. Confirmes que vols eliminar el excés de les còpies de seguretat?</string>
     <string name="init_user_confirmation">Sé el que estic fent</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
     <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
+    <string name="init_backup_folder_exists_error">No s\'ha pogut crear un nou directori de còpia de seguretat . Heu fet una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
+    <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent més antiga de %s?</string>
     <string name="restore_confirm_overwrite_database">AVÍS: Això sobreescriurà %s al vostre dispositiu.</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVÍS: Això sobreescriurà %si la configuració actual al dispositiu.</string>
     <string name="restore_confirm_overwrite_settings">AVÍS: Això sobreescriurà la configuració actual al dispositiu.</string>
@@ -763,6 +778,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
+    <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
+    <string name="map_source_attribution_legacy_text">Feu clic per l\'atribució del mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">El nom del teu dispositiu</string>
@@ -931,6 +948,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Obre al navegador</string>
     <string name="cache_menu_visit">Registra visita</string>
+    <string name="cache_log_too_long">c: geo no ha pogut enviar el registre perquè és massa llarg. Però gràcies per intentar escriure un registre tan extens ;-)</string>
     <string name="cache_menu_visit_offline">Registre ràpid fora de línia</string>
     <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
     <string name="cache_menu_around">Catxés propers</string>
@@ -1017,6 +1035,7 @@
     <string name="context_share_as_text">Compartir text</string>
     <string name="context_share_as_link">Compartir Enllaç</string>
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
+    <string name="create_internal_cache_short">Nou catxé</string>
     <string name="internal_cache_default_name">Catxé definit per l’usuari #%1$d</string>
     <string name="internal_cache_default_description">Es tracta d’un catxé definit per l’usuari</string>
     <string name="internal_cache_default_owner">Tu</string>
@@ -1032,6 +1051,7 @@
     <string name="cc_hint_minutes">minuts</string>
     <string name="cc_hint_seconds">segons</string>
     <string name="cc_hint_fraction">fracció</string>
+    <string name="lowercase">minúscula</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">S\'està buscant els fitxers\na</string>
@@ -1133,6 +1153,10 @@
     <string name="map_circles_show">Mostra els cercles</string>
     <string name="map_mycaches_hide">Amaga els propis/trobats</string>
     <string name="map_disabled_hide">Amagar catxés desactivats</string>
+    <string name="map_archived_hide">Amagar catxés arxivats</string>
+    <string name="map_hidewp_original">Amaga punt ruta originals</string>
+    <string name="map_hidewp_parking">Amaga punts ruta parking</string>
+    <string name="map_hidewp_visited">Amaga punts ruta visitats</string>
     <string name="map_hide_track">Amaga el track individual</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
@@ -1174,6 +1198,7 @@
     <string name="search_tb_hint">Identificació del traçable</string>
     <string name="search_tb_button">Cerca de traçables</string>
     <string name="search_destination">Obre la destinació al c: geo</string>
+    <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
     <string name="search_address_result">Llocs trobats</string>
     <string name="search_own_caches">Cerca els meus catxés</string>
@@ -1219,6 +1244,7 @@
     <string name="user_menu_view_found">Catxés trobats</string>
     <string name="user_menu_open_browser">Obre el perfil al navegador</string>
     <string name="user_menu_send_message">Envia un missatge</string>
+    <string name="user_menu_send_email">Envia un correu electrònic</string>
     <string name="user_menu_open_contact">Obre targeta del contacte</string>
     <string name="user_unknown">Usuari desconegut</string>
     <!-- navigation -->
@@ -1236,7 +1262,7 @@
     <string name="do_unknown">Desconegut</string>
     <string name="do_auto">Auto</string>
     <string name="do_flat">Pla</string>
-    <string name="do_upright">Vertical</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Vertical</string>
     <!-- license -->
     <string name="license">Llicència</string>
     <string name="license_show">Mostra la llicència</string>
@@ -1522,6 +1548,22 @@
     <string name="attribute_hqsolutionchecker_yes">El comprovador de solucions de Geocaching.com està habilitat
  </string>
     <string name="attribute_hqsolutionchecker_no">El comprovador de solucions de Geocaching.com no està habilitat</string>
+    <string name="attribute_handicaching_yes">Puntuat a Handicaching.com</string>
+    <string name="attribute_handicaching_no">Sense puntuació a Handicaching.com</string>
+    <string name="attribute_munzee_yes">Conté un Munzee</string>
+    <string name="attribute_munzee_no">No conté Munzee</string>
+    <string name="attribute_ads_yes">Conté publicitat</string>
+    <string name="attribute_ads_no">No Conté publicitat</string>
+    <string name="attribute_military_area_yes">Zona d\'entrenament militar</string>
+    <string name="attribute_military_area_no">No és Zona d\'entrenament militar</string>
+    <string name="attribute_video_surveil_yes">Zona sota videovigilància</string>
+    <string name="attribute_video_surveil_no">Zona no vigilada per videovigilància</string>
+    <string name="attribute_trackables_yes">Apte per contenir rastrejables</string>
+    <string name="attribute_trackables_no">No és adequat per contenir rastrejables</string>
+    <string name="attribute_historic_yes">Estructura abandonada / Ruïna</string>
+    <string name="attribute_historic_no">No Estructura abandonada /  No Ruïna</string>
+    <string name="attribute_blind_people_yes">Adequat a persones invidents</string>
+    <string name="attribute_blind_people_no">No adequat a persones invidents</string>
     <!-- next things -->
     <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1531,6 +1573,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo a Google Play</a></string>
     <string name="about_twitter">Voleu que <b>el c:geo</b>  publiqui un nou estatus al Twitter cada vegada que registreu un catxé?</string>
+    <string name="github_title">Rastrejador d\'errors</string>
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nCliqueu per instal·lar-la.</string>

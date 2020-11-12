@@ -1163,7 +1163,7 @@
     <string name="do_unknown">Bilinmeyen</string>
     <string name="do_auto">Otomatik</string>
     <string name="do_flat">Düz</string>
-    <string name="do_upright">Dik</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Dik</string>
     <!-- license -->
     <string name="license">Lisans</string>
     <string name="license_show">Lisansı göster</string>

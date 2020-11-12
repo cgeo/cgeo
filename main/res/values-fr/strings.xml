@@ -198,7 +198,7 @@
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
     <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
-    <string name="err_tb_find">c:geo ne peut pas trouver d\'objet voyageur.</string>
+    <string name="err_tb_find">c:geo ne peut pas trouver l\'objet voyageur</string>
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quelle cache vous souhaitez ajouter un point de passage.</string>
     <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à ajouter votre point de passage.</string>
@@ -417,7 +417,7 @@
     <string name="about_starting_text_device_head">Autorisations requises par c:geo</string>
     <string name="about_starting_text_device_text">c:geo a besoin de certaines permissions sur votre appareil :\n<b>Position</b> : accès au GPS pour localiser votre emplacement et calculer la distance et la direction vers les géocaches\n<b>Stockage</b> :  écrire des données sur le stockage de l\'appareil lorsque vous enregistrez des géocaches pour une utilisation hors-ligne, pour importer/exporter des fichiers et lire des cartes hors-ligne.\n\nSans ces permissions vous ne pourrez pas utiliser c:geo.</string>
     <string name="about_starting_text_first_head">Premiers pas avec c:geo</string>
-    <string name="about_starting_text_first_text">Pour utiliser c:geo, vous devez posséder un compte sur une plateforme géocaching de votre choix (indépendante de cette application). Vous devez configurer ce compte dans les paramètres c:geo, rubrique \"service\", avant de pouvoir utiliser c:geo !\n\nVous pouvez en découvrir comme faite vos <b>premiers pas avec c:geo</b> dans notre guide utilisateur : https://manual.cgeo.org/en/firststeps</string>
+    <string name="about_starting_text_first_text">Pour utiliser c:geo, vous devez posséder un compte sur une plateforme géocaching de votre choix (indépendante de cette application). Vous devez configurer ce compte dans les paramètres c:geo, rubrique \"Services\", avant de pouvoir utiliser c:geo !\n\nVous pouvez obtenir plus d\'informations sur <b>les premiers pas avec c:geo</b> dans notre guide utilisateur : https://manual.cgeo.org/fr/firststeps</string>
     <string name="open_services_page">Configurer votre/vos plateforme(s) de geocaching</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
@@ -473,7 +473,7 @@
     <string name="confirm_data_dir_move">Le déplacement du dossier de stockage des Geocaches peut être long et varie en fonction de votre appareil et du nombre de caches.</string>
     <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
     <string name="settings_title_navigation">Navigation</string>
-    <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externe.</string>
+    <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externes.</string>
     <string name="settings_title_system">Système</string>
     <string name="settings_summary_system">Configurer les répertoires de l\'application et d\'autres paramètres spécifiques au système.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
@@ -581,7 +581,7 @@
     <string name="init_units">Unités impériales</string>
     <string name="init_summary_units">Utiliser les unités de distance impériales plutôt que les unités métriques</string>
     <string name="init_log_offline">Toujours utiliser le mode hors-ligne</string>
-    <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne pour les visites (même si vous êtes connectés vos visites ne seront pas envoyées automatiquement)</string>
+    <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne pour les visites (même si vous êtes connecté, vos visites ne seront pas envoyées automatiquement)</string>
     <string name="init_choose_list">Demander la liste</string>
     <string name="init_summary_choose_list">Demander dans quelle liste enregistrer les caches</string>
     <string name="init_listdisplay">Listes supplémentaires</string>
@@ -711,7 +711,7 @@
     <string name="init_force_orientation_sensor_title">Capteur d\'orientation</string>
     <string name="init_force_orientation_sensor_note">Sur certains appareils le capteur de rotation vectorielle utilisé par défaut se comporte de manière erratique et indique la mauvaise direction. Dans ce cas, un capteur alternatif (le capteur d\'orientation) peut donner de meilleurs résultats.</string>
     <string name="init_force_orientation_sensor">Forcer l\'utilisation du capteur d\'orientation</string>
-    <string name="init_create_memory_dump">création mémoire vidage</string>
+    <string name="init_create_memory_dump">Créer une image mémoire</string>
     <string name="init_memory_dump">Image mémoire</string>
     <string name="init_memory_dumped">Mémoire copiée dans %s</string>
     <string name="init_hardware_acceleration_title">Accélération graphique</string>
@@ -1217,7 +1217,7 @@
     <string name="geokret_type_coin">Pièce de monnaie</string>
     <string name="geokret_type_post">Courrier</string>
     <!-- user -->
-    <string name="user_menu_title">A propos</string>
+    <string name="user_menu_title">À propos de</string>
     <string name="user_menu_view_hidden">Caches cachées</string>
     <string name="user_menu_view_found">Caches trouvées</string>
     <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
@@ -1239,7 +1239,7 @@
     <string name="do_unknown">Inconnu</string>
     <string name="do_auto">Auto</string>
     <string name="do_flat">à plat</string>
-    <string name="do_upright">droit</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">droit</string>
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Afficher la licence</string>

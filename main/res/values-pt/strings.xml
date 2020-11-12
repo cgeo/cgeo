@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">A publicar o registo e a enviar as imagens…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
-    <string name="log_posting_vote">A publicar votação em caches…</string>
+    <string name="log_posting_vote">A submeter votação da cache…</string>
     <string name="log_posting_image">A publicar imagens…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
@@ -636,7 +636,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
-    <string name="init_backup_settings_logins">Cópia de seg. das credenciais de contas</string>
+    <string name="init_backup_settings_logins">Cópia de seg. dos dados da conta</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
@@ -864,7 +864,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
-    <string name="cache_personal_note_storewaypoints">➕/🔄 Pont. adicionais</string>
+    <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
     <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
@@ -1260,7 +1260,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="do_unknown">Desconhecido</string>
     <string name="do_auto">Automático</string>
     <string name="do_flat">Horizontal</string>
-    <string name="do_upright">Vertical</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Vertical</string>
     <!-- license -->
     <string name="license">Licença</string>
     <string name="license_show">Mostrar licença</string>

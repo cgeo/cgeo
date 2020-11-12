@@ -1197,7 +1197,7 @@
     <string name="do_unknown">알 수 없음</string>
     <string name="do_auto">자동</string>
     <string name="do_flat">평평한</string>
-    <string name="do_upright">수직으로 세워 둔</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">수직으로 세워 둔</string>
     <!-- license -->
     <string name="license">라이센스</string>
     <string name="license_show">라이선스 보기</string>
