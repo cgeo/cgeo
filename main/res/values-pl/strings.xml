@@ -631,7 +631,7 @@
     <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie naciśnięcie na waypoint/cache. (Musisz najpierw włączyć funkcję długiego przytrzymania, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Pojedyncza szerokość linii</string>
     <string name="init_routewidth_summary">Wybierz szerokość dla pojedynczej linii trasy</string>
-    <string name="init_trackcolor">Indywidualny kolor linii śladu</string>
+    <string name="init_trackcolor">Kolor linii ścieżki</string>
     <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki. Ścieżka składa się z kilku punktów nawigacyjnych i może być załadowana za pomocą pliku GPX utworu.</string>
     <string name="init_trackwidth">Indywidualna szerokość linii ścieżek</string>
     <string name="init_trackwidth_summary">Wybierz szerokość dla indywidualnej linii ścieżki</string>
