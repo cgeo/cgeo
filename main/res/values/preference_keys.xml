@@ -75,7 +75,7 @@
     <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>
     <string translatable="false" name="pref_hide_track">hideTrack</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
-    <string translatable="false" name="pref_supersizeDistance">supersizeDistance</string>
+    <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_signature">signature</string>
     <string translatable="false" name="pref_sigautoinsert">sigautoinsert</string>

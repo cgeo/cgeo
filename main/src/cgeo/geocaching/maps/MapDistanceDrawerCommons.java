@@ -7,6 +7,8 @@ import cgeo.geocaching.settings.Settings;
 import android.view.View;
 import android.widget.TextView;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class MapDistanceDrawerCommons {
     private static final String STRAIGHT_LINE_SYMBOL = Character.toString((char) 0x007C);
     private static final String WAVY_LINE_SYMBOL = Character.toString((char) 0x2307);
@@ -17,6 +19,7 @@ public class MapDistanceDrawerCommons {
     private final TextView distance2View;
     private final TextView routeDistanceView;
     private final TextView distanceSupersizeView;
+    private boolean bothViewsNeeded = false;
 
     public MapDistanceDrawerCommons(final View root) {
         distance1InfoView = root.findViewById(R.id.distance1info);
@@ -28,27 +31,34 @@ public class MapDistanceDrawerCommons {
 
         distance1InfoView.setOnClickListener(v -> swap());
         distance1View.setOnClickListener(v -> swap());
+        distance2InfoView.setOnClickListener(v -> swap());
+        distance2View.setOnClickListener(v -> swap());
+        routeDistanceView.setOnClickListener(v -> swap());
         distanceSupersizeView.setOnClickListener(v -> swap());
     }
 
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
-        final boolean bothViewsNeeded = showBothDistances && realDistance != 0.0f && distance != realDistance;
-        final boolean supersize = Settings.getSupersizeDistance();
-        final TextView d = supersize ? distanceSupersizeView : distance1View;
+        bothViewsNeeded = showBothDistances && realDistance != 0.0f && distance != realDistance;
+        final int supersize = Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
 
-        distance1InfoView.setVisibility(bothViewsNeeded && !supersize ? View.VISIBLE : View.GONE);
-        distance2InfoView.setVisibility(bothViewsNeeded ? View.VISIBLE : View.GONE);
-        distance2View.setVisibility(bothViewsNeeded ? View.VISIBLE : View.GONE);
+        distanceSupersizeView.setVisibility(supersize > 0 ? View.VISIBLE : View.GONE);
         if (bothViewsNeeded) {
-            distance1InfoView.setText(STRAIGHT_LINE_SYMBOL);
-            d.setText(Units.getDistanceFromKilometers(distance));
-            distance2InfoView.setText(WAVY_LINE_SYMBOL);
-            distance2View.setText(Units.getDistanceFromKilometers(realDistance));
+            updateDisplay(supersize == 1, distance1InfoView, STRAIGHT_LINE_SYMBOL, distance1View, Units.getDistanceFromKilometers(distance));
+            updateDisplay(supersize == 2, distance2InfoView, WAVY_LINE_SYMBOL, distance2View, Units.getDistanceFromKilometers(realDistance));
         } else {
-            d.setText(Units.getDistanceFromKilometers(realDistance != 0.0f && distance != realDistance ? realDistance : distance));
+            updateDisplay(supersize > 0, distance1InfoView, "", distance1View, Units.getDistanceFromKilometers(realDistance != 0.0f && distance != realDistance ? realDistance : distance));
         }
-        distance1View.setVisibility(realDistance != 0.0f && !supersize ? View.VISIBLE : View.GONE);
-        distanceSupersizeView.setVisibility(realDistance != 0.0f && supersize ? View.VISIBLE : View.GONE);
+    }
+
+    private void updateDisplay(final boolean showAsSupersize, final TextView infoView, final String info, final TextView distanceView, final String distance) {
+        infoView.setVisibility(showAsSupersize || StringUtils.isEmpty(info) ? View.GONE : View.VISIBLE);
+        distanceView.setVisibility(showAsSupersize ? View.GONE : View.VISIBLE);
+        if (showAsSupersize) {
+            distanceSupersizeView.setText(StringUtils.isNotEmpty(info) ? info + " " + distance : distance);
+        } else {
+            infoView.setText(info);
+            distanceView.setText(distance);
+        }
     }
 
     public void drawRouteDistance(final float routeDistance) {
@@ -59,17 +69,7 @@ public class MapDistanceDrawerCommons {
     }
 
     private void swap() {
-        final boolean supersize = !Settings.getSupersizeDistance();
+        final int supersize = (Settings.getSupersizeDistance() + 1) % (bothViewsNeeded ? 3 : 2);
         Settings.setSupersizeDistance(supersize);
-
-        distanceSupersizeView.setVisibility(supersize ? View.VISIBLE : View.GONE);
-        distance1InfoView.setVisibility(supersize ? View.GONE : View.VISIBLE);
-        distance1View.setVisibility(supersize ? View.GONE : View.VISIBLE);
-
-        if (supersize) {
-            distanceSupersizeView.setText(distance1View.getText());
-        } else {
-            distance1View.setText(distanceSupersizeView.getText());
-        }
     }
 }
