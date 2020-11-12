@@ -5,7 +5,7 @@ Pagrindinės funkcijos:
 - Naudoti Google Maps arba OpenStreetMaps
 - Lobių paieška pagal įvairius kriterijus 
 - Surastų lobių registracija prisijungus arba neprisijungus prie interneto
-- Išsaugoti slėptuvės informaciją jūsų prietaise
+- Išsaugoti slėptuvės informaciją jūsų įrenginyje
 - Kurti ir tvarkyti taškus
 - Naviguoti kompasu, žemėlapiu ar kitomis programėlėmis
 - Importuoti/eksportuoti GPX failus 

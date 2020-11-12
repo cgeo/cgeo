@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
+    <string name="err_captcha">Būtina \"Captcha\". Norėdami gauti patarimų, skaitykite mūsų <a href="https://www.cgeo.org/faq#login-failed">DUK.</a>.</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -572,6 +573,7 @@
     <string name="init_brouterThreshold_description">Maksimalus atstumas, iki kurio BRouter pagalbinė programa (jei įdiegta) apskaičiuoja maršrutą.</string>
     <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone...</string>
+    <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
     <string name="init_disabled">Atmesti išjungtas</string>
     <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
     <string name="init_archived">Atmesti archyvuotas</string>
@@ -599,8 +601,8 @@
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
-    <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
-    <string name="restore_confirm_overwrite">Ar norite perrašyti %s įrenginyje su atsargine kopija?</string>
+    <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę %s kopiją?</string>
+    <string name="restore_confirm_overwrite">Ar norite %s įrenginyje perrašyti iš atsarginės kopijos?</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed_dbrecreated">Nepavyko atkurti: atsarginė kopija pažeista, duomenų bazė perkurta.</string>
     <string name="init_restore_failed">Atkurti nepavyko.</string>
@@ -610,6 +612,7 @@
     <string name="init_backup_last_no">Nėra atsarginės kopijos failo.</string>
     <string name="init_restore_version_error">Nežinomas formatas, negalima atkurti duomenų bazės.\n\nTikėtasi %1$d versijos,\natsarginės kopijos versija - %2$d</string>
     <string name="settings_title_backup">Atsarginė kopija / Atkurti</string>
+    <string name="settings_summary_backup">Atlikite atsarginę kopiją ir atkurkite slėptuvės/papildomo taško duomenis ir programos nustatymus.</string>
     <string name="init_backup_settings">Sukurti atsarginę programos nustatymų kopiją</string>
     <string name="init_backup_settings_backup_light">Sukurti nustatymų kopiją (be paskyros duomenų)</string>
     <string name="init_backup_settings_backup_full">Sukurti nustatymų kopiją (visų)</string>
@@ -691,7 +694,7 @@
     <string name="init_summary_plain_logs">Žurnalo įrašus rodyti be spalvų</string>
     <string name="init_use_native_ua">\"Android\" naršyklė</string>
     <string name="init_summary_use_native_ua">Prisistatyti Android naršykle. Tai išsprendžia prisijungimo problemas naudojant tam tikrus ryšio paslaugų teikėjus.</string>
-    <string name="init_rendertheme_folder">Žemėlapio temų katalogas</string>
+    <string name="init_rendertheme_folder">Žemėlapio temų aplankas</string>
     <string name="init_maintenance">Priežiūra</string>
     <string name="init_maintenance_directories_note">c:geo saugo vaizdus, įrašų vaizdus ir kitus failus, susijusius su slėptuve, atskirame kataloge. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame kataloge gali likti pasenusių failų, kuriuos galima panaikinti čia.</string>
     <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
@@ -934,6 +937,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Atidaryti naršyklėje</string>
     <string name="cache_menu_visit">Registruoti</string>
+    <string name="cache_menu_visit_offline">Greitas įrašas neprisijungus</string>
     <string name="cache_menu_spoilers">Užuominos vaizdai</string>
     <string name="cache_menu_around">Slėptuvės aplink</string>
     <string name="around">Aplink %s</string>
@@ -1025,7 +1029,7 @@
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Ieškoma failų\n</string>
-    <string name="file_searching_sdcard_in">Numatytame kataloge failų nerasta:\n%1$s\n\nIeškoma failų visoje SD kortelėje:\n</string>
+    <string name="file_searching_sdcard_in">Numatytame aplanke failų nerasta:\n%1$s\n\nIeškoma failų visoje SD kortelėje:\n</string>
     <string name="file_list_no_files">c:geo tinkamų failų nerado.</string>
     <string name="file_searching">Ieškoma tinkamų failų</string>
     <string name="file_title_searching">Ieškoma</string>
@@ -1223,10 +1227,12 @@
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
     <string name="device_heading_label">Įrenginys:</string>
+    <string name="device_orientation">Orientacija</string>
     <string name="device_orientation_label">Orientacija:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Nežinoma</string>
     <string name="do_auto">Automatiškai</string>
+    <string name="do_flat">Horizontalus</string>
     <string name="do_upright">Stačiai</string>
     <!-- license -->
     <string name="license">Licencija</string>
@@ -1503,6 +1509,12 @@
     <string name="attribute_geohotel_no">Ne GeoHotel slėptuvė</string>
     <string name="attribute_survey_marker_yes">Šalia apžvalgos ženklo</string>
     <string name="attribute_survey_marker_no">Ne šalia apžvalgos ženklo</string>
+    <string name="attribute_bonuscache_yes">Bonus slėptuvė</string>
+    <string name="attribute_bonuscache_no">Ne bonus slėptuvė</string>
+    <string name="attribute_challengecache_yes">Iššūkio slėptuvė</string>
+    <string name="attribute_challengecache_no">Ne iššūkio slėptuvė</string>
+    <string name="attribute_hqsolutionchecker_yes">Įjungtas Geocaching.com sprendimų tikrintuvas</string>
+    <string name="attribute_hqsolutionchecker_no">Neįjungtas Geocaching.com sprendimų tikrintuvas</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1683,6 +1695,13 @@
     <string name="save_sorted_route">Išsaugoti</string>
     <string name="sorted_route_saved">Asmeninis maršrutas išsaugotas</string>
     <string name="load_individual_route_error">Klaida įkeliant asmeninį maršrutą</string>
+    <string name="route_item_not_yet_loaded">Maršruto elementas dar neįkeltas</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Maršrutas įkeltas su %d maršruto tašku</item>
+        <item quantity="few">Maršrutas įkeltas su %d maršruto taškais</item>
+        <item quantity="many">Maršrutas įkeltas su %d maršruto taškų</item>
+        <item quantity="other">Maršrutas įkeltas su %d maršruto taškų</item>
+    </plurals>
     <string name="center_on_route">Centruoti į maršrutą</string>
     <!-- individual track -->
     <string name="individual_track">GPX asmeninis kelias/maršrutas</string>
@@ -1711,18 +1730,22 @@
     <!-- view settings -->
     <string name="view_settings">Atvaizdavimo nustatymai</string>
     <string name="delete_setting">Išvalyti nustatymus</string>
+    <string name="delete_setting_warning">Ištrinti \"%s\" raktą iš nustatymų?\n\nŠios operacijos anuliuoti negalima.</string>
     <string name="edit_setting">Redaguoti \"%s\" nustatymą</string>
     <string name="edit_setting_error_unknown_type">Nežinomas nustatymo tipas - redagavimas nepalaikomas</string>
     <string name="edit_setting_error_invalid_data">Įvesti neteisingi duomenys - \"%s\". Nustatymo reikšmė nepakeista.</string>
     <string name="activate_editmode_title">Įjungti redagavimo rėžimą</string>
     <string name="activate_editmode_warning">Elkitės atsargiai!\n\nTiesiogiai keičiant nustatymus galima sugadinti c:geo!\n\nAr tikrai norite tęsti ir prisiimti visą atsakomybę sau?</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
+    <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_foundmap">rastas žemėlapio failas</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Gauti žemėlapio failą</string>
     <string name="receivemapfile_success">Žemėlapio failas sėkmingai įrašytas kaip \"%s\" ir išsaugotas žemėlapių aplanke</string>
     <string name="receivemapfile_error">Klaida gaunant žemėlapio failą</string>
     <string name="receivemapfile_error_io_exception">Nepavyko įrašyti žemėlapio failo, ar turite rašymo teises žemėlapio kataloge (\"%s\")?</string>
+    <string name="receivemapfile_error_filenotfound_exception">Failas nerastas, klaida gaunant žemėlapio failą.</string>
     <string name="receivemapfile_alreadyexists">Failas šiuo pavadinimu jau yra. Perrašyti jį ar išsaugoti failą kitu pavadinimu?</string>
     <string name="receivemapfile_option_overwrite">Perrašyti</string>
     <string name="receivemapfile_option_differentname">Kitas pavadinimas</string>
@@ -1732,7 +1755,9 @@
     <string name="downloadmap_title">Atsisiųsti žemėlapį naudojimui neprisijungus</string>
     <string name="downloadmap_choose">Pasirinkite žemėlapį</string>
     <string name="downloadmap_filename">Parsisiunčiama %s</string>
+    <string name="downloadmanager_not_available">Žemėlapio failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
     <string name="download_started">Parsiunčiama fone</string>
+    <string name="downloadmap_target_not_writable">Tikslas \"%s\" nėra įrašomas - atsisiųstas žemėlapio failas bus išsaugotas sistemos atsisiuntimo aplanke ir turi būti perkeltas rankiniu būdu į žemėlapio aplanką.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Valyti pėdsaką</string>
     <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>

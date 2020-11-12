@@ -59,7 +59,7 @@
     <string name="log_note">ノート</string>
     <string name="log_published">公開</string>
     <string name="log_enabled">有効化</string>
-    <string name="log_disabled">無効化</string>
+    <string name="log_disabled">一時停止</string>
     <string name="log_attend">参加する</string>
     <string name="log_attended">参加した</string>
     <string name="log_retrieved">回収した</string>
@@ -76,6 +76,7 @@
     <string name="log_discovered">発見した</string>
     <string name="log_reviewer">レビューノート</string>
     <string name="log_submit_for_review">レビューを投稿</string>
+    <string name="log_retractlisting">公開取り消し</string>
     <string name="log_marked_missing">行方不明としてマーク</string>
     <string name="log_tb_nothing">何もしない</string>
     <string name="log_tb_visit">訪れた</string>
@@ -88,11 +89,11 @@
     <string name="log_tb_archived">アーカイブ済み</string>
     <string name="log_save">オフライン保存</string>
     <string name="log_saving">ログを投稿中…</string>
-    <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中...</string>
+    <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中…</string>
     <string name="log_posting_log">ログを投稿中…</string>
     <string name="log_posting_twitter">ツイートを投稿中…</string>
-    <string name="log_posting_vote">キャッシュの評価を投稿中...</string>
-    <string name="log_posting_image">画像を投稿中...</string>
+    <string name="log_posting_vote">キャッシュの評価を投稿中…</string>
+    <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">削除</string>
     <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
@@ -262,6 +263,7 @@
     <string name="confirm_discard_wp_changes">ウェイポイントの変更を破棄しますか?</string>
     <string name="err_request_popup_info">キャッシュポップアップ情報の取得に失敗しました</string>
     <string name="warn_log_load_additional_data">ログの追加データ(トラッカブル/お気に入りポイント)を読み込めませんでした</string>
+    <string name="more_information">詳細…</string>
     <string name="remind_later">後で再通知する</string>
     <string name="undo">元に戻す</string>
     <string name="dont_show_again">今後表示しない</string>
@@ -359,7 +361,7 @@
     <string name="caches_filter_clear">フィルタをクリア</string>
     <string name="caches_filter_modified">座標の更新あり</string>
     <string name="caches_filter_offline_log">オフラインログあり</string>
-    <string name="caches_filter_origin">ソース</string>
+    <string name="caches_filter_origin">出典</string>
     <string name="caches_filter_distance">距離</string>
     <string name="caches_filter_personal_note">パーソナルノートあり</string>
     <string name="caches_filter_popularity">お気に入り</string>
@@ -417,8 +419,8 @@
     <string name="about_starting_text_device_head">c:geoアプリの権限</string>
     <string name="about_starting_text_device_text">c:geoにはお使いのデバイスで特定の権限が必要です。\n<b>位置情報</b>: GPSにアクセスして位置を特定しジオキャッシュの方向と距離を計算します。\n<b>ストレージ</b>: オフライン用にジオキャッシュを保存する時、ファイルのインポート/エクスポートする時、オフラインマップの読み込む時にストレージにデータを読み書きます。\nこれらのアクセス権限がないとc:geoを使用することができません。</string>
     <string name="about_starting_text_first_head">c:geoの最初のステップ</string>
-    <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシング プラットフォーム用のアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシング プラットフォーム」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststeps をご覧ください</string>
-    <string name="open_services_page">ジオキャッシング プラットフォーム設定</string>
+    <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシングサイトのアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシングサイト」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststeps をご覧ください</string>
+    <string name="open_services_page">ジオキャッシングサイト設定</string>
     <string name="about_system_include">バグ報告やお問い合わせする際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -478,7 +480,7 @@
     <string name="settings_summary_system">アプリのフォルダやそのほかのシステム固有の設定</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
     <string name="settings_category_browser">ブラウザ</string>
-    <string name="settings_category_geocaching_platform">ジオキャッシング プラットフォーム</string>
+    <string name="settings_category_geocaching_platform">ジオキャッシングサイト</string>
     <string name="settings_category_geocaching_additionals">ほかのサービスとアドオン</string>
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
@@ -487,7 +489,7 @@
     <string name="settings_activate_ec">有効化</string>
     <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります</string>
     <string name="settings_info_facebook_login_title">FacebookやGoogleのアカウントでのログインについて</string>
-    <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります...</string>
+    <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります…</string>
     <string name="settings_authorize">c:geoを認証</string>
     <string name="settings_reauthorize">認証を更新または削除</string>
     <string name="settings_gc_description">geocaching.comでc:geoを認証してキャッシュを検索できるようにします</string>
@@ -650,10 +652,10 @@
     <string name="init_routecolor_summary">個別ルートの色と不透明度を選択。個別ルートはウェイポイント/キャッシュをロングタップで選択して作成したルートです(「地図の動作」でロングタップを有効にする必要があります)</string>
     <string name="init_routewidth">個別ルートの線幅</string>
     <string name="init_routewidth_summary">個別ルートの線幅を選択</string>
-    <string name="init_trackcolor">個別トラックの色</string>
+    <string name="init_trackcolor">トラックの色</string>
     <string name="init_trackcolor_summary">トラックの色と不透明度の選択。トラックはトラックポイントの集まりで、GPXトラックファイルから読み込めます</string>
-    <string name="init_trackwidth">個別トラックの線幅</string>
-    <string name="init_trackwidth_summary">個別トラックの色と不透明度の選択</string>
+    <string name="init_trackwidth">トラックの線幅</string>
+    <string name="init_trackwidth_summary">トラックの色と不透明度の選択</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度の選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
@@ -756,7 +758,8 @@
     <string name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
-    <string name="map_source_osm_offline">OpenStreetMap:オフライン用</string>
+    <string name="map_source_osm_offline">オフライン</string>
+    <string name="map_source_osm_offline_combined">OSM結合 (オフライン)</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -805,7 +808,7 @@
         <item quantity="other">あと %1$d 日</item>
     </plurals>
     <string name="last_day_available">利用可能期限</string>
-    <string name="cache_offline">OpenStreetMap:オフライン用</string>
+    <string name="cache_offline">オフライン</string>
     <string name="cache_offline_refresh">更新</string>
     <string name="cache_offline_drop">削除</string>
     <string name="cache_delete_userdefined_waypoints">ユーザー定義のウェイポイントを削除</string>
@@ -980,7 +983,7 @@
     <string name="cache_location">所在地</string>
     <string name="cache_location_country">国</string>
     <string name="cache_coordinates">座標</string>
-    <string name="cache_calculator">計算機</string>
+    <string name="cache_calculator">座標計算</string>
     <string name="cache_coordinates_original">オリジナル座標</string>
     <string name="cache_spoiler_images_title">スポイラー画像</string>
     <string name="cache_log_types">ログタイプ</string>
@@ -1014,6 +1017,7 @@
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
     <string name="cc_hint_seconds">秒</string>
+    <string name="cc_hint_fraction">小数部</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">ファイルを検索中:\n</string>
@@ -1051,7 +1055,7 @@
     <string name="individual_route_file_select_title">個別ルートファイルを選択</string>
     <!-- import -->
     <string name="web_import_title">Send2cgeoからインポート</string>
-    <string name="web_import_waiting">Send2cgeoから新しいキャッシュ情報を確認中…</string>
+    <string name="web_import_waiting">send2cgeoから新しいキャッシュ情報を確認中…</string>
     <string name="web_downloading">ダウンロード中</string>
     <string name="web_downloaded">ダウンロード完了</string>
     <!-- popup -->
@@ -1097,7 +1101,7 @@
     <string name="waypoint_duplicate">ウェイポイントを複製</string>
     <string name="waypoint_toclipboard">クリップボードにウェイポイントをコピー</string>
     <string name="waypoint_copy_of">コピー ～ </string>
-    <string name="waypointcalc_notes_prompt">ここにノートを入力…</string>
+    <string name="waypointcalc_notes_prompt">ここにメモを入力…</string>
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
@@ -1118,7 +1122,7 @@
     <string name="map_hidewp_original">ウェイポイント(オリジナル)を非表示</string>
     <string name="map_hidewp_parking">ウェイポイント(駐車場)を非表示</string>
     <string name="map_hidewp_visited">ウェイポイント(訪問済み)を非表示</string>
-    <string name="map_hide_track">個別トラックの非表示</string>
+    <string name="map_hide_track">トラックの非表示</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
@@ -1192,6 +1196,7 @@
     <string name="trackable_not_activated">有効化されていないトラッカブル</string>
     <string name="trackable_travelbug">トラベルバグ</string>
     <string name="trackable_status">状態</string>
+    <string name="trackable_found">%1$s(%2$s)</string>
     <string name="geokret_type_traditional">トラディショナル</string>
     <string name="geokret_type_book_or_media">本または電子メディア</string>
     <string name="geokret_type_human">人</string>
@@ -1259,7 +1264,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります</string>
     <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
-    <string name="export_confirm_title">エクスポート中 %1$s</string>
+    <string name="export_confirm_title">エクスポート: %1$s</string>
     <string name="export_confirm_message">フォルダ: %1$s\nファイル名: %2$s</string>
     <string name="export_persnotes">パーソナルノート</string>
     <string name="export_persnotes_uploading">パーソナルノート%1$dをアップロード中</string>
@@ -1428,7 +1433,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_inside_no">囲まれた空間内ではない</string>
     <string name="attribute_in_water_yes">水中</string>
     <string name="attribute_in_water_no">水中ではない</string>
-    <string name="attribute_no_gps_yes">GPS使用不可(レターボックス,コンパスが不安定,…)</string>
+    <string name="attribute_no_gps_yes">GPS使用不可(レターボックス,コンパスが不安定など)</string>
     <string name="attribute_no_gps_no">GPS使用可</string>
     <string name="attribute_overnight_yes">宿泊必要</string>
     <string name="attribute_overnight_no">宿泊不要</string>
@@ -1442,6 +1447,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_all_seasons_no">オールシーズンではない</string>
     <string name="attribute_breeding_yes">繁殖期または保護期間</string>
     <string name="attribute_breeding_no">繁殖期や保護期間ではない</string>
+    <string name="attribute_snow_proof_yes">防雪された場所</string>
+    <string name="attribute_snow_proof_no">防雪された場所ではない</string>
     <string name="attribute_compass_yes">コンパス必須</string>
     <string name="attribute_compass_no">コンパス必須ではない</string>
     <string name="attribute_cave_yes">洞窟の知識や準備が必要</string>
@@ -1507,9 +1514,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">サポート</string>
     <string name="website_title">Webサイト</string>
-    <string name="facebook_link"><a href="">c:geo ページ</a></string>
+    <string name="facebook_link"><a href="">c:geoアプリページ</a></string>
     <string name="market_title">Google Play</string>
-    <string name="market_link"><a href="">Google Play の c:geo</a></string>
+    <string name="market_link"><a href="">Google Playのc:geo</a></string>
     <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
     <string name="faq_title">よくある質問</string>
     <!-- status (used via string based resource loading) -->
@@ -1522,6 +1529,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Androidの古いバージョンを使用しているようです。 このバージョンのc:geoはお使いのデバイスと互換性がないため、突然終了したり予期せぬ動作をする可能性があります!\n詳細についてはこのメッセージをタップしてください</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
     <!-- text-to-speech for compass view -->
+    <string name="tts_service">コンパスで音声案内</string>
     <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
     <string name="tts_stopped">音声案内を停止しました</string>
@@ -1637,8 +1645,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="proximity_notification_title">c:geo接近通知</string>
     <!-- individual routes -->
     <string name="individual_route">個別ルート</string>
-    <string name="individual_route_added">ルートに追加</string>
-    <string name="individual_route_removed">ルートから削除</string>
+    <string name="individual_route_added">ルートに追加しました</string>
+    <string name="individual_route_removed">ルートから削除しました</string>
+    <string name="individual_route_error_toggling_waypoint">ルートポイントの切替エラー</string>
+    <string name="individual_route_error_single_waypoint_mode">一つだけのウェイポイントでは利用できません</string>
     <string name="map_sort_individual_route">個別ルートの編集</string>
     <string name="map_export_individual_route">個別ルートのエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
@@ -1649,6 +1659,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="save_sorted_route">保存</string>
     <string name="sorted_route_saved">個別ルートを保存しました</string>
     <string name="load_individual_route_error">個別ルートの読み込みに失敗しました</string>
+    <string name="route_item_not_yet_loaded">ルートアイテムがまだ読み込まれていません</string>
     <plurals name="individual_route_loaded">
         <item quantity="other">ルート(%dルート地点)を読み込みました</item>
     </plurals>
@@ -1681,6 +1692,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="activate_editmode_title">編集モードを有効にする</string>
     <string name="activate_editmode_warning">ここからは危険なエリアです!\n\n設定値を直接変更するとc:geoが異常な挙動を引き起こしたり起動しなくなる可能性もあります。慎重にしてください。\n\nご自身の責任の元で続けますか?</string>
     <!-- HandleLocalFilesActivity -->
+    <string name="localfile_intenttitle">c:geoローカルファイルハンドラ</string>
+    <string name="localfile_title">ローカルファイルを開く</string>
     <string name="localfile_cannot_handle">ファイルの読み取りエラー、またはc:geoはこのファイルタイプを処理できません</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">地図ファイルの保存</string>

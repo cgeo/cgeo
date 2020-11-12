@@ -92,7 +92,7 @@
     <string name="log_saving_and_uploading">A publicar o registo e a enviar as imagens…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_twitter">A publicar tweet…</string>
-    <string name="log_posting_vote">A publicar votação em caches…</string>
+    <string name="log_posting_vote">A submeter votação da cache…</string>
     <string name="log_posting_image">A publicar imagens…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
@@ -850,7 +850,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
-    <string name="cache_personal_note_storewaypoints">➕/🔄 Pont. adicionais</string>
+    <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
     <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
