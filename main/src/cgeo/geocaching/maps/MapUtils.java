@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Geocache;
@@ -46,13 +47,16 @@ public class MapUtils {
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
         final boolean excludeArchived = Settings.isExcludeArchivedCaches();
 
+        final CacheType filterCacheType = Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType();
+
         // filtering required?
-        if (!excludeMine && !excludeDisabled && !excludeArchived) {
+        if (!excludeMine && !excludeDisabled && !excludeArchived && filterCacheType.equals(CacheType.ALL)) {
             return;
         }
         final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeArchived && cache.isArchived())) {
+            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeArchived && cache.isArchived()) ||
+                (!filterCacheType.equals(CacheType.ALL) && !filterCacheType.equals(cache.getType()))) {
                 removeList.add(cache);
             }
         }

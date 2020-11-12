@@ -30,9 +30,11 @@ import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.connector.unknown.UnknownConnector;
 import cgeo.geocaching.connector.wm.WaymarkingConnector;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -338,6 +340,11 @@ public final class ConnectorFactory {
      */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
+        //shortcut: no need to search any server for "user-defined" caches
+        if (Settings.getCacheType() != null && Settings.getCacheType().equals(CacheType.USER_DEFINED)) {
+            return new SearchResult();
+        }
+
         return SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
     }
 
