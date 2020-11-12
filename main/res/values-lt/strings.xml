@@ -156,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
+    <string name="err_captcha">Būtina \"Captcha\". Norėdami gauti patarimų, skaitykite mūsų <a href="https://www.cgeo.org/faq#login-failed">DUK.</a>.</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -570,6 +571,9 @@
     <string name="init_brouterThreshold_description">Maksimalus atstumas, iki kurio BRouter pagalbinė programa (jei įdiegta) apskaičiuoja maršrutą.</string>
     <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone...</string>
+    <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
+    <string name="init_bigSmileysOnMap">Didelės šypsenėlės užregistruotoms slėptuvėms</string>
+    <string name="init_summary_bigSmileysOnMap">Jei įjungta, žemėlapyje užregistruotoms talpykloms bus rodomos didelės šypsenėlės (reikia paleisti iš naujo).</string>
     <string name="init_disabled">Atmesti išjungtas</string>
     <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
     <string name="init_archived">Atmesti archyvuotas</string>
@@ -613,16 +617,24 @@
     <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
+    <string name="init_backup_folder_exists_error">Nepavyko sukurti naujo atsarginės kopijos aplanko. Ar jau padarėte atsarginę kopiją paskutinę minutę?</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
+    <string name="backup_confirm_overwrite">Ar norite perrašyti seniausią esamą atsarginę kopiją nuo %s?</string>
+    <string name="restore_confirm_overwrite_database">ĮSPĖJIMAS: Tai perrašys %s jūsų įrenginyje!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">ĮSPĖJIMAS: Tai perrašys %s ir dabartinius jūsų įrenginio nustatymus!</string>
+    <string name="restore_confirm_overwrite_settings">ĮSPĖJIMAS: Tai perrašys dabartinius jūsų įrenginio nustatymus!</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed_dbrecreated">Nepavyko atkurti: atsarginė kopija pažeista, duomenų bazė perkurta.</string>
     <string name="init_restore_failed">Atkurti nepavyko.</string>
     <string name="init_restore_running">Atkuriama slėptuvių duomenų bazė…</string>
     <string name="init_restore_confirm">Duomenų bazė tuščia. Ar norite atkurti duomenų bazę iš atsarginės kopijos?</string>
     <string name="init_backup_last">Galima atkurti nuo</string>
+    <string name="init_backup_unavailable">nėra</string>
     <string name="init_backup_last_no">Nėra atsarginės kopijos failo.</string>
     <string name="init_restore_version_error">Nežinomas formatas, negalima atkurti duomenų bazės.\n\nTikėtasi %1$d versijos,\natsarginės kopijos versija - %2$d</string>
     <string name="settings_title_backup">Atsarginė kopija / Atkurti</string>
+    <string name="settings_summary_backup">Atlikite atsarginę kopiją ir atkurkite slėptuvės/papildomo taško duomenis ir programos nustatymus.</string>
+    <string name="init_backup_settings_logins">Sukurti atsarginę paskyros duomenų kopiją</string>
     <string name="init_backup_settings_backup_full_confirm">Ar norite išsaugoti slaptus paskyros duomenis? Juos gali perskaityti kitos programos.</string>
     <string name="settings_savingerror">Išsaugant nustatymus įvyko klaida</string>
     <string name="settings_saved">Nustatymai sėkmingai išsaugoti į:</string>
@@ -698,7 +710,7 @@
     <string name="init_summary_plain_logs">Žurnalo įrašus rodyti be spalvų</string>
     <string name="init_use_native_ua">\"Android\" naršyklė</string>
     <string name="init_summary_use_native_ua">Prisistatyti Android naršykle. Tai išsprendžia prisijungimo problemas naudojant tam tikrus ryšio paslaugų teikėjus.</string>
-    <string name="init_rendertheme_folder">Žemėlapio temų katalogas</string>
+    <string name="init_rendertheme_folder">Žemėlapio temų aplankas</string>
     <string name="init_maintenance">Priežiūra</string>
     <string name="init_maintenance_directories_note">c:geo saugo vaizdus, įrašų vaizdus ir kitus failus, susijusius su slėptuve, atskirame kataloge. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame kataloge gali likti pasenusių failų, kuriuos galima panaikinti čia.</string>
     <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
@@ -1033,7 +1045,7 @@
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Ieškoma failų\n</string>
-    <string name="file_searching_sdcard_in">Numatytame kataloge failų nerasta:\n%1$s\n\nIeškoma failų visoje SD kortelėje:\n</string>
+    <string name="file_searching_sdcard_in">Numatytame aplanke failų nerasta:\n%1$s\n\nIeškoma failų visoje SD kortelėje:\n</string>
     <string name="file_list_no_files">c:geo tinkamų failų nerado.</string>
     <string name="file_searching">Ieškoma tinkamų failų</string>
     <string name="file_title_searching">Ieškoma</string>
@@ -1232,10 +1244,12 @@
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
     <string name="device_heading_label">Įrenginys:</string>
+    <string name="device_orientation">Orientacija</string>
     <string name="device_orientation_label">Orientacija:</string>
     <!-- device orientation types -->
     <string name="do_unknown">Nežinoma</string>
     <string name="do_auto">Automatiškai</string>
+    <string name="do_flat">Horizontalus</string>
     <string name="do_upright">Stačiai</string>
     <!-- license -->
     <string name="license">Licencija</string>
