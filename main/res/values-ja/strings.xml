@@ -1249,7 +1249,7 @@
     <string name="do_unknown">不明</string>
     <string name="do_auto">自動</string>
     <string name="do_flat">水平</string>
-    <string name="do_upright">垂直</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">垂直</string>
     <!-- license -->
     <string name="license">ライセンス</string>
     <string name="license_show">ライセンスを表示</string>
