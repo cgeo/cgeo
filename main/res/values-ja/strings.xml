@@ -262,7 +262,7 @@
     <string name="confirm_discard_wp_changes">ウェイポイントの変更を破棄しますか?</string>
     <string name="err_request_popup_info">キャッシュポップアップ情報の取得に失敗しました</string>
     <string name="warn_log_load_additional_data">ログの追加データ(トラッカブル/お気に入りポイント)を読み込めませんでした</string>
-    <string name="more_information">詳細</string>
+    <string name="more_information">詳細…</string>
     <string name="undo">元に戻す</string>
     <string name="dont_show_again">今後表示しない</string>
     <string name="warn_gm_not_available">Google マップは利用できません</string>
@@ -420,7 +420,7 @@
     <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシングサイトのアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシングサイト」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststeps をご覧ください</string>
     <string name="open_services_page">ジオキャッシングサイト設定</string>
     <string name="about_system_include">バグ報告やお問い合わせする際は以下のシステム情報もお知らせください</string>
-    <string name="about_system_info_send_button">メールで送信...</string>
+    <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
     <string name="about_system_info_send_chooser">システム情報を送信</string>
     <string name="about_system_write_logcat">ログファイルを作成</string>
@@ -909,11 +909,11 @@
     <string name="cache_dialog_loading_details_status_cache">データのキャッシュ中</string>
     <string name="cache_dialog_loading_details_status_render">表示の処理中</string>
     <string name="cache_dialog_offline_save_title">オフライン</string>
-    <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中...</string>
+    <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
     <string name="cache_dialog_offline_drop_title">オフライン</string>
     <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
     <string name="cache_dialog_refresh_title">更新</string>
-    <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中...</string>
+    <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中…</string>
     <string name="cache_dialog_watchlist_add_title">ウォッチリスト</string>
     <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中…</string>
     <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
@@ -1108,7 +1108,7 @@
     <string name="waypoint_unset_visited">ウェイポイントを未訪問に設定しました</string>
     <string name="waypoint_save">保存</string>
     <string name="waypoint_cancel_edit">キャンセル</string>
-    <string name="waypoint_loading">ウェイポイントをロード中…</string>
+    <string name="waypoint_loading">ウェイポイントを読み込み中…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">キャッシュ座標を変更しない</string>
     <string name="waypoint_set_as_cache_coords">c:geo内部のみでキャッシュ座標を変更</string>
     <string name="waypoint_save_and_modify_on_website">c:geo内部とWebサイトでキャッシュ座標を変更</string>
@@ -1194,7 +1194,7 @@
     <string name="search_pocket_loading">ポケット・クエリのリストを読み込み中</string>
     <!-- trackable -->
     <string name="trackable">トラッカブル</string>
-    <string name="trackable_details_loading">トラッカブルの詳細を読み込み中...</string>
+    <string name="trackable_details_loading">トラッカブルの詳細を読み込み中…</string>
     <string name="trackable_log_touch">ログを書く</string>
     <string name="trackable_browser_open">ブラウザで開く</string>
     <string name="trackable_refresh">更新</string>
@@ -1282,10 +1282,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_fieldnotes">フィールドノート</string>
     <string name="export_fieldnotes_info">フィールドノートは/sdcard/field-notesフォルダに保存され、ファイル名は現在の日時になります</string>
     <string name="export_fieldnotes_upload">geocaching.comにアップロード</string>
-    <string name="export_fieldnotes_uploading">アップロード中...</string>
+    <string name="export_fieldnotes_uploading">アップロード中…</string>
     <string name="export_fieldnotes_upload_success">geocaching.comにアップロードしました</string>
     <string name="export_fieldnotes_onlynew">最後にエクスポートした時から更新がある場合のみ</string>
-    <string name="export_fieldnotes_creating">フィールドノートを作成中...</string>
+    <string name="export_fieldnotes_creating">フィールドノートを作成中…</string>
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">GPXファイルは%1$sフォルダに保存され、ファイル名は現在の日時になります</string>
     <string name="export_gpx_to">エクスポートしたGPXファイルを送る:</string>
@@ -1708,7 +1708,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- individual track -->
     <string name="individual_track">GPXトラック/ルート</string>
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>
-    <string name="map_load_track_wait">トラック/ルートをバックグラウンドで読み込み中...</string>
+    <string name="map_load_track_wait">トラック/ルートをバックグラウンドで読み込み中…</string>
     <string name="map_load_track_confirm">現在のトラック/ルートに上書きしますか?</string>
     <plurals name="load_track_success">
         <item quantity="other">トラック/ルート(%dトラックポイント)を読み込みました</item>
