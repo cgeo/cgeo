@@ -1417,12 +1417,12 @@ public class Settings {
         return getBoolean(R.string.pref_showCircles, false);
     }
 
-    public static void setSupersizeDistance(final boolean supersizeDistance) {
-        putBoolean(R.string.pref_supersizeDistance, supersizeDistance);
+    public static void setSupersizeDistance(final int supersizeDistance) {
+        putInt(R.string.pref_supersizeDistance, supersizeDistance);
     }
 
-    public static boolean getSupersizeDistance() {
-        return getBoolean(R.string.pref_supersizeDistance, false);
+    public static int getSupersizeDistance() {
+        return getInt(R.string.pref_supersizeDistance, 0);
     }
 
     public static void setExcludeMine(final boolean exclude) {
