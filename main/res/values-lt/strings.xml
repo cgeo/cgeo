@@ -623,6 +623,7 @@
     <string name="restore_confirm_overwrite_database">ĮSPĖJIMAS: Tai perrašys %s jūsų įrenginyje!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ĮSPĖJIMAS: Tai perrašys %s ir dabartinius jūsų įrenginio nustatymus!</string>
     <string name="restore_confirm_overwrite_settings">ĮSPĖJIMAS: Tai perrašys dabartinius jūsų įrenginio nustatymus!</string>
+    <string name="restore_information">Pasirinkite, ką norite atkurti:</string>
     <string name="init_restore_success">Atkūrimas baigtas.</string>
     <string name="init_restore_failed_dbrecreated">Nepavyko atkurti: atsarginė kopija pažeista, duomenų bazė perkurta.</string>
     <string name="init_restore_failed">Atkurti nepavyko.</string>
@@ -771,6 +772,7 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Išsaugotas</string>
+    <string name="map_source_osm_offline_combined">Kombinuotas (neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio atributai</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacija apie send2cgeo</string>
@@ -828,6 +830,9 @@
     <string name="last_day_available">liko paskutine diena</string>
     <string name="cache_offline_refresh">Naujinti</string>
     <string name="cache_offline_drop">Pašalinti</string>
+    <string name="cache_delete_userdefined_waypoints">Ištrinti vartotojo papildomus taškus</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Ištrinti visus vartotojo papildomus taškus iš šios slėptuvės?\n\nPapildomi taškai bus nedelsiant ištrinti, anuliuoti nebus galima.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Vartotojo papildomi taškai ištrinti</string>
     <string name="cache_offline_store">Saugoti</string>
     <string name="cache_offline_stored">Išsaugota įrenginyje</string>
     <string name="cache_offline_not_ready">Neišsaugota</string>
@@ -968,6 +973,7 @@
     <string name="cache_menu_checker">Atidaryti Geochecker</string>
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
+    <string name="cache_log_menu_decrypt">Iššifruoti/Užšifruoti</string>
     <string name="cache_log_menu_title">Įrašas %1$s iš %2$s</string>
     <string name="ignore_confirm_title">Būk atsargus</string>
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
@@ -1028,6 +1034,10 @@
     <string name="cache_share_field">Bendrinti</string>
     <string name="cache_time_full_hours">valanda (-os)</string>
     <string name="cache_listed_on">Publikuota %s</string>
+    <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
+    <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
+    <string name="cache_chirpwolf_start">Atidarykite Chirp Wolf, kad perskaitytumėte šios slėptuvės Chirp duomenis</string>
+    <string name="cache_chirpwolf_install">Įdiekite Chirp Wolf, kad galėtumėte perskaityti Chirp duomenis</string>
     <string name="context_share_as_text">Bendrinti tekstą</string>
     <string name="context_share_as_link">Bendrinti nuorodą</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
@@ -1271,9 +1281,10 @@
     <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Pocket Query sąrašus pagal jūsų esamą vietą arba pasirinktą tašką žemėlapyje. Būtina Premium Geocaching.com narystė.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti geocaches tipo Wherigo. c:Geo automatiškai gali sukelti kasetės per šią programą atsisiųsti.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsiųsti kasetes.</string>
     <string name="helper_brouter_title">BROuter navigacija neprisijungus</string>
     <string name="helper_brouter_description">BRouter suteikia maršrutizavimą be interneto. Jei jis yra įdiegtas ir atsisiųsti reikalingi failai, c:geo automatiškai žemėlapyje rodys maršrutą į slėptuvę.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp slėptuvėms.</string>
     <!-- export -->
     <string name="export">Eksportuoti</string>
     <string name="export_progress">Eksportuojama: %1$s</string>
@@ -1770,6 +1781,7 @@
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
     <string name="localfile_title">Atidaryti vietinį failą</string>
+    <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Gauti žemėlapio failą</string>
     <string name="receivemapfile_success">Žemėlapio failas sėkmingai įrašytas kaip \"%s\" ir išsaugotas žemėlapių aplanke</string>
