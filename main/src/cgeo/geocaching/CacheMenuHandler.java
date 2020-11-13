@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 
@@ -68,14 +67,8 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             cache.openInBrowser(activity);
             return true;
         } else if (menuItem == R.id.menu_share) {
-            /* If the share menu is a shareActionProvider do nothing and let the share ActionProvider do the work */
-            final ShareActionProvider shareActionProvider = (ShareActionProvider)
-                MenuItemCompat.getActionProvider(item);
-            if (shareActionProvider == null) {
-                cache.shareCache(activity, res);
-                return true;
-            }
-            return false;
+            cache.shareCache(activity, res);
+            return true;
         } else if (menuItem == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(activity, cache);
             return true;
@@ -98,14 +91,6 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
 
         menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
-
-        final MenuItem shareItem = menu.findItem(R.id.menu_share);
-        final ShareActionProvider shareActionProvider = (ShareActionProvider)
-                MenuItemCompat.getActionProvider(shareItem);
-        if (shareActionProvider != null) {
-            shareActionProvider.setShareIntent(cache.getShareIntent());
-        }
-
     }
 
     public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache) {

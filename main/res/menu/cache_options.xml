@@ -91,7 +91,6 @@
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_menu_share"
         android:title="@string/cache_menu_share"
-        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
         app:showAsAction="ifRoom">
     </item>
     <item

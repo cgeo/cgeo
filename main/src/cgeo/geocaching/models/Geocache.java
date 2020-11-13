@@ -52,7 +52,6 @@ import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
@@ -794,11 +793,6 @@ public class Geocache implements IWaypoint {
 
     public void shareLog(@NonNull final Activity fromActivity, final LogEntry logEntry) {
         ShareUtils.shareLink(fromActivity, getShareSubject(), getConnector().getCacheLogUrl(this, logEntry));
-    }
-
-    @NonNull
-    public Intent getShareIntent() {
-        return ShareUtils.getShareLinkIntent(getShareSubject(), getUrl());
     }
 
     @Nullable
