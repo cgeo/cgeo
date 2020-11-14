@@ -551,7 +551,7 @@
     <string name="init_ratingwanted">GCvote reitingas</string>
     <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/savo</string>
-    <string name="init_summary_friends_and_own_logs_wanted">Rodyti papildomą draugų ir savų įrašų žurnalo puslapį</string>
+    <string name="init_summary_friends_and_own_logs_wanted">Rodyti draugų ir savų įrašų žurnalo papildomą puslapį</string>
     <string name="init_openlastdetailspage">Paskutinis informacijos puslapis</string>
     <string name="init_summary_openlastdetailspage">Atidaryti informaciją iš paskutinio naudoto puslapio</string>
     <string name="init_skin">Šviesi tema</string>
@@ -757,6 +757,7 @@
     <string name="init_maplines_title">Žemėlapio linijų konfigūracija</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Priartėjimo pranešimas</string>
+    <string name="init_proximityNotificationGeneral">Bendras artumo pranešimas žemėlapyje</string>
     <string name="init_summary_proximityNotificationGeneral">Duoti garsinį pranešimą, jei dabar žemėlapyje matoma slėptuvė ar papildomas taškas yra arčiau nei tolumo ar artumo atstumas. Pranešimai bus skirtingų tonų skirtingiems atstumams atskirti.</string>
     <string name="init_proximityNotificationSpecific">Pasirinkto papildomo taško artumo pranešimas</string>
     <string name="far_distance">Tolimas atstumas</string>
@@ -1178,6 +1179,7 @@
     <string name="map_routing_bike">Dviračiu</string>
     <string name="map_routing_car">Automobiliu</string>
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
+    <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <!-- search -->
     <string name="search_bar_hint">Ieškoti</string>
     <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
@@ -1199,6 +1201,8 @@
     <string name="search_tb">Keliauninkas</string>
     <string name="search_tb_hint">Keliauninko identifikavimas</string>
     <string name="search_tb_button">Ieškoti keliauninko</string>
+    <string name="search_destination">Atidaryti tikslą su c:geo</string>
+    <string name="add_target_to">Pridėti tikslą į</string>
     <string name="search_address_started">Ieškoma vietų</string>
     <string name="search_address_result">Rastos vietos</string>
     <string name="search_own_caches">Ieškoti mano slėptuvių</string>
@@ -1251,6 +1255,7 @@
     <string name="navigation">Navigacija</string>
     <string name="compass_title">Kompasas</string>
     <string name="use_gps">Naudojamas tik GPS</string>
+    <string name="use_compass">Naudojami visi jutikliai</string>
     <string name="destination_select">Pasirinkite tikslą</string>
     <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
@@ -1727,6 +1732,8 @@
     <string name="individual_route">Asmeninis maršrutas</string>
     <string name="individual_route_added">pridėta prie maršruto</string>
     <string name="individual_route_removed">pašalinta iš maršruto</string>
+    <string name="individual_route_error_toggling_waypoint">klaida perjungiant papildomą tašką</string>
+    <string name="individual_route_error_single_waypoint_mode">Negalima vieno papildomo taško režimu</string>
     <string name="map_sort_individual_route">Rūšiuoti asmeninį maršrutą</string>
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
