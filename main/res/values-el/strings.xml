@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -571,10 +572,13 @@
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
     <string name="brouter_recalculating">Επανυπολογισμός διαδρομής στο παρασκήνιο…</string>
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
+    <string name="init_bigSmileysOnMap">Μεγάλο χαμόγελο στις ευρέσεις</string>
+    <string name="init_summary_bigSmileysOnMap">Αν ενεργοποιηθεί θα εμφανίζονται στις κρύπτες που έχετε βρεί (απαιτεί επανεκίνηση).</string>
     <string name="init_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="init_summary_disabled">Εξαίρεση απενεργοποιημένων κρυπτών</string>
     <string name="init_archived">Εξαίρεση των αρχειοθετημένων</string>
     <string name="init_summary_archived">Εξαίρεση των αρχειοθετημένων κρυπτών</string>
+    <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
     <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>
@@ -590,9 +594,12 @@
     <string name="init_summary_livelist">Να φαίνεται στη λίστα η κατεύθυνση των κρύπτών</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
+    <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
     <string name="init_restore_title">Επαναφορά Αντιγράφου Ασφαλείας</string>
     <string name="init_backup_caches">Κρύπτες και ενδιάμεσα σημεία</string>
     <string name="init_backup_program_settings">Ρυθμίσεις Προγράμματος</string>
+    <string name="init_backup_logins">Επισύναψη δεδομένων λογαριασμού</string>
+    <string name="init_backup_logins_summary">Αυτό θα αποθηκεύσει τα εισαχθέντα αναγνωριστικά χρήστη στο αρχείο ασφαλείας.</string>
     <string name="init_backup">Αποθηκευμένες κρύπτες / σημεία</string>
     <string name="init_backup_backup">Αντίγραφα ασφαλείας</string>
     <string name="init_backup_finished">Ολοκλήρωση δημιουργίας αντιγράφου ασφαλείας</string>
@@ -601,12 +608,20 @@
     <string name="init_backup_restore">Επαναφορά</string>
     <string name="init_restore_restored">Η επαναφορά ολοκληρώθηκε</string>
     <string name="init_backup_start_restore">Έναρξη επαναφοράς</string>
+    <string name="init_backup_restore_different_backup">Επαναφορά διαφορετικού αρχείου ασφαλείας</string>
     <string name="init_backup_backup_history">Ιστορικό Αντιγράφων Ασφαλείας</string>
+    <string name="init_backup_history_length_title">Μέγιστος αριθμός αποθηκευμένων αντιγράφων ασφαλείας</string>
+    <string name="init_backup_history_length_summary">Αποφασίστε πόσα αντίγραφα ασφαλείας θα τηρηθούν. Όταν φτάσετε το όριο, το παλιότερο αρχείο θα διαγραφεί αυτόματα.</string>
+    <string name="init_backup_history_length_min">Μονό πρόσφατα</string>
+    <string name="init_backup_history_length_max">Διατήρηση όλων</string>
+    <string name="init_backup_history_delete_warning">Έχετε αποθηκεύσει περισσότερα αρχεία ασφαλείας από το μέγιστο επιτρεπτό όριο. Θέλετε να διαγραφούν όλα τα πλεονάζοντα αρχεία ασφαλείας;</string>
     <string name="init_user_confirmation">Ξέρω τι κάνω</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
     <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζονται αντίγραφα ασφαλείας.</string>
+    <string name="init_backup_folder_exists_error">Δεν μπορεί να δημιουργηθεί νέος φάκελος αποθήκευσης αντιγραφών ασφαλείας. Έχετε δημιουργήσει ήδη ένα αντίγραφό ασφαλείας το τελευταίο λεπτό;</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
+    <string name="backup_confirm_overwrite">Θέλετε να αντικαταστήσετε το υπάρχον, παλιότερο αντίγραφο ασφαλείας του %s;</string>
     <string name="restore_confirm_overwrite_database">ΠΡΟΣΟΧΗ: Αυτό θα επανεγράψει το %s της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει το %s και τις τρέχουσες ρυθμίσεις της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει τις τρέχουσες ρυθμίσεις της συσκευής σας!</string>
@@ -932,6 +947,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
+    <string name="cache_log_too_long">Το c:geoδεν μπορεί να στείλει αυτή την καταγραφή λόγω μεγέθους. Αλλά μπράβο σας για το τόσο μεγάλο κείμενο ;-)</string>
     <string name="cache_menu_visit_offline">Γρήγορη καταγραφή εκτός σύνδεσης</string>
     <string name="cache_menu_spoilers">Βοηθητικές εικόνες</string>
     <string name="cache_menu_around">Κρύπτες τριγύρω</string>
@@ -951,6 +967,7 @@
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
     <string name="cache_log_menu_decrypt">Αποκρυπτογράφιση/Κρυπτογράφιση</string>
+    <string name="cache_log_menu_title">Καταγραφή %1$s από %2$s</string>
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
@@ -1017,6 +1034,7 @@
     <string name="context_share_as_text">Κοινή χρήση κειμένου</string>
     <string name="context_share_as_link">Κοινή χρήση συνδέσμου</string>
     <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
+    <string name="create_internal_cache_short">Νέα κρύπτη</string>
     <string name="internal_cache_default_name">Κρύπτη ορισμένη από τον χρήστη #%1$d</string>
     <string name="internal_cache_default_description">Αυτή είναι μια user-defined κρύπτη</string>
     <string name="internal_cache_default_owner">Εσείς</string>
@@ -1032,6 +1050,7 @@
     <string name="cc_hint_minutes">Λεπτά</string>
     <string name="cc_hint_seconds">Δευτερόλεπτα</string>
     <string name="cc_hint_fraction">Κλάσμα</string>
+    <string name="lowercase">Πεζά</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Γίνεται αναζήτηση αρχείων \n σε</string>
@@ -1178,6 +1197,7 @@
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
     <string name="search_destination">Άνοιγμα προορισμού στο c:geo</string>
+    <string name="add_target_to">Προσθήκη στόχου σε</string>
     <string name="search_address_started">Αναζήτηση τοποθεσιών</string>
     <string name="search_address_result">Τοποθεσίες που βρέθηκαν</string>
     <string name="search_own_caches">Αναζήτηση των κρυπτών μου</string>
@@ -1526,6 +1546,22 @@
     <string name="attribute_challengecache_no">Δεν είναι Κρύπτη Challenge</string>
     <string name="attribute_hqsolutionchecker_yes">Ενεργοποιημένος ο ελεγκτής λύσης της Geocaching.com</string>
     <string name="attribute_hqsolutionchecker_no">Απενεργοποιημένος ο ελεγκτής λύσης της Geocaching.com</string>
+    <string name="attribute_handicaching_yes">Αξιολογημένο στο Handicaching.com</string>
+    <string name="attribute_handicaching_no">Μη αξιολογημένο στο Handicaching.com</string>
+    <string name="attribute_munzee_yes">Περιέχει ένα Munzee</string>
+    <string name="attribute_munzee_no">Δεν περιέχει Munzee</string>
+    <string name="attribute_ads_yes">Περιέχει διαφήμιση</string>
+    <string name="attribute_ads_no">Δεν περιέχει διαφήμιση</string>
+    <string name="attribute_military_area_yes">Περιοχή στρατιωτικής εκπαίδευσης</string>
+    <string name="attribute_military_area_no">Μη στρατιωτική περιοχή εκπαίδευσης</string>
+    <string name="attribute_video_surveil_yes">Περιοχή υπό παρακολούθηση κάμερας</string>
+    <string name="attribute_video_surveil_no">Περιοχή μη παρακολουθούμενη από κάμερα</string>
+    <string name="attribute_trackables_yes">Κατάλληλο για αποθήκευση ανιχνεύσιμων</string>
+    <string name="attribute_trackables_no">Μη κατάλληλο για αποθήκευση ανιχνεύσιμων</string>
+    <string name="attribute_historic_yes">Εγκαταλελειμμένο κτίριο / Ερείπιο</string>
+    <string name="attribute_historic_no">Μη εγκαταλελειμμένο κτίριο / Μη ερείπιο</string>
+    <string name="attribute_blind_people_yes">Αναπηρία: Τυφλός</string>
+    <string name="attribute_blind_people_no">Όχι αναπηρία: Τυφλός</string>
     <!-- next things -->
     <string name="quote">Για να γίνουν οι γεωκρύπτες πιο εύκολες και οι χρήστες πιο τεμπέληδες.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1535,6 +1571,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo στο Google Play</a></string>
     <string name="about_twitter">Να δημοσιεύει το<b>c:geo</b> μια νέα κατάσταση στο Twitter κάθε φορά που καταγράφετε μια κρύπτη;</string>
+    <string name="github_title">Εντοπίστης σφαλμάτων</string>
     <string name="faq_title">Συχνές ερωτήσεις</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Νέα έκδοση διαθέσιμη. \nΚάντε κλικ για την εγκατάσταση.</string>

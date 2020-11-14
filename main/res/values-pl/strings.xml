@@ -89,9 +89,11 @@
     <string name="log_tb_archived">Zarchiwizowana</string>
     <string name="log_save">Zapisz offline</string>
     <string name="log_saving">Zapisuję w dzienniku…</string>
+    <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
     <string name="log_posting_log">Wysyłanie wpisu…</string>
     <string name="log_posting_twitter">Wysyłanie tweetu…</string>
     <string name="log_posting_vote">Wysyłanie oceny skrzynki…</string>
+    <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
     <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
@@ -116,9 +118,11 @@
     <string name="log_yesterday">Wczoraj</string>
     <string name="log_smilies">Uśmiechy</string>
     <string name="log_image">Obraz</string>
+    <string name="log_images">Zdjęcia</string>
     <string name="log_image_attach">Załącz obraz</string>
     <string name="log_image_stored">Zapisany</string>
     <string name="log_image_camera">Nowy</string>
+    <string name="log_image_delete">Usuń</string>
     <string name="log_image_caption">Podpis</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skalowanie obrazu</string>
@@ -143,6 +147,8 @@
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
+    <string name="log_image_titleprefix">Zdjęcie</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
     <string name="translate_to_english">Przetłumacz na angielski</string>
@@ -150,6 +156,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
+    <string name="err_captcha">Wymagana Captcha. Aby uzyskać wskazówki, zapoznaj się z naszym <a href="https://www.cgeo.org/faq#login-failed"> FAQ </a>.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_su">Nieudane połączenie z geocaching.su. Ta strona albo Twoje połączenie internetowe nie działa.</string>
@@ -248,6 +255,7 @@
     <string name="info_stored_image">Nowy obraz zapisany w:</string>
     <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
     <string name="warn_calculator_state_save">Pamiętaj aby zapisać punkt orientacyjny jeśli chcesz zachować stan kalkulatora.</string>
+    <string name="feature_info_offline_counter">Masz kilka skrytek z zapisanym logiem offline, które mogą nie być jeszcze zalogowane online. Dla Twojego komfortu liczba wpisów jest wyświetlana jako \"+ x\" za liczbą znalezionych skrytek w stopce na stronie głównej c:geo. \n\nPonadto te \"x\" logi zostaną dodane do szablonu \"NUMBER\", którego możesz użyć w Twoim podpisze logu. \n\nJeśli nie lubisz tego rozszerzenia licznika, możesz wyłączyć go w sekcji \"Ustawienia\" &gt; \"Logowanie\" i/lub zamiast tego użyć szablonu \"NUMBER (bez logów offline). \n\nAby łatwo znaleźć pozostałe logi offline, przejdź do listy \"Historia\" i filtruj \"Z danymi osobowymi\" &gt; \"Z logiem offline\".</string>
     <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
     <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
@@ -255,6 +263,8 @@
     <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
     <string name="warn_log_load_additional_data">c:geo nie mógł załadować dodatkowych danych (przedmioty podróżne/ulubione) przy logowaniu.</string>
     <string name="more_information">Więcej informacji</string>
+    <string name="undo">Cofnij</string>
+    <string name="dont_show_again">Nie wyświetlaj ponownie</string>
     <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
     <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
@@ -530,6 +540,7 @@
     <string name="init_signature_template_datetime">Data &amp; Czas</string>
     <string name="init_signature_template_user">Użytkownik</string>
     <string name="init_signature_template_number">Numer</string>
+    <string name="init_signature_template_number_legacy">Numer (ignoruj wpisy offline)</string>
     <string name="init_signature_template_owner">Właściciel</string>
     <string name="init_signature_template_name">Nazwa</string>
     <string name="init_signature_template_difficulty">Trudność</string>
@@ -537,6 +548,7 @@
     <string name="init_signature_template_url">Adres URL</string>
     <string name="init_signature_template_log">Wpis</string>
     <string name="init_signature_template_size">Rozmiar</string>
+    <string name="init_signature_template_type">Typ</string>
     <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
@@ -562,10 +574,13 @@
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
+    <string name="init_bigSmileysOnMap">Duże emotikony dla zalogowanych skrytek</string>
+    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, duże emotikony będą wyświetlane dla zalogowanych skrytek na mapie (wymaga ponownego uruchomienia).</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_archived">Wyklucz zarchiwizowane</string>
     <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
+    <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
@@ -580,23 +595,51 @@
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <!-- backup / restore -->
+    <string name="init_backup_title">Utwórz kopię zapasową</string>
+    <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
+    <string name="init_restore_title">Przywróć kopię zapasową</string>
+    <string name="init_backup_caches">skrzynki i punkty nawigacyjne</string>
+    <string name="init_backup_program_settings">ustawienia programu</string>
+    <string name="init_backup_logins">Dołącz dane konta</string>
+    <string name="init_backup_logins_summary">Spowoduje to przechowywanie wprowadzonych danych logowania w kopii zapasowej.</string>
     <string name="init_backup">Kopia skrzynek i punktów nawigacyjnych</string>
     <string name="init_backup_backup">Wykonaj kopię zapasową</string>
+    <string name="init_backup_finished">Utworzono kopię zapasową</string>
+    <string name="init_backup_now">Utwórz kopię zapasową</string>
     <string name="init_backup_running">Tworzę kopię zapasową bazy skrzynek…</string>
     <string name="init_backup_restore">Przywróć</string>
+    <string name="init_restore_restored">Przywracanie zakończone</string>
+    <string name="init_backup_start_restore">Rozpocznij przywracanie</string>
+    <string name="init_backup_restore_different_backup">Przywróć inną kopię zapasową</string>
+    <string name="init_backup_backup_history">Historia kopii zapasowej</string>
+    <string name="init_backup_history_length_title">Maksymalna liczba przechowywanych kopii zapasowych</string>
+    <string name="init_backup_history_length_summary">Zdecyduj, ile kopii zapasowych powinno być zachowanych. Kiedy limit zostanie osiągnięty, najstarsze zostaną automatycznie usunięte.</string>
+    <string name="init_backup_history_length_min">Tylko ostatnie</string>
+    <string name="init_backup_history_length_max">Zachowaj wszystkie</string>
+    <string name="init_backup_history_delete_warning">Zapisałeś więcej kopii zapasowych niż skonfigurowana maksymalna wartość dozwolona. Czy na pewno chcesz usunąć wszystkie nadwyżki kopii zapasowych?</string>
+    <string name="init_user_confirmation">Wiem co robię</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
     <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
+    <string name="init_backup_folder_exists_error">Nie można utworzyć nowego katalogu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
+    <string name="backup_confirm_overwrite">Czy chcesz nadpisać najstarszą istniejącą kopię zapasową z %s?</string>
+    <string name="restore_confirm_overwrite_database">UWAGA: To nadpisze %s na twoim urządzeniu!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">OSTRZEŻENIE: To nadpisze %s i twoje bieżące ustawienia na Twoim urządzeniu!</string>
+    <string name="restore_confirm_overwrite_settings">OSTRZEŻENIE: To nadpisze aktualne ustawienia na twoim urządzeniu!</string>
+    <string name="restore_information">Wybierz co chcesz przywrócić:</string>
     <string name="init_restore_success">Odzyskiwanie zakończone.</string>
     <string name="init_restore_failed_dbrecreated">Przywracanie nie powiodło się. Plik kopii zapasowej został uszkodzony. Baza danych musiała zostać ponownie utworzona.</string>
     <string name="init_restore_failed">Odzyskiwanie nie powiodło się.</string>
     <string name="init_restore_running">Odzyskiwanie bazy skrzynek…</string>
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
     <string name="init_backup_last">Kopia dostępna od</string>
+    <string name="init_backup_unavailable">niedostępne</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
+    <string name="init_restore_version_error">Nieoczekiwany format - nie można przywrócić bazy danych.\n\nOczekiwana wersja to %1$d,\nkopia zapasowa ma wersję %2$d</string>
     <string name="settings_title_backup">Kopia zapasowa / przywracanie</string>
     <string name="settings_summary_backup">Wykonaj kopię zapasową i przywrócenie danych o skrzynkach/punktach nawigacyjnych oraz ustawień programu.</string>
+    <string name="init_backup_settings_logins">Kopia zapasowa danych konta</string>
     <string name="init_backup_settings_backup_full_confirm">Czy na pewno chcesz zachować wrażliwe dane dotyczące konta? Takie dane mogą być odczytane przez inne aplikacje.</string>
     <string name="settings_savingerror">Błąd podczas zapisywania ustawień</string>
     <string name="settings_saved">Ustawienia zapisano w:</string>
@@ -736,6 +779,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
+    <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
+    <string name="map_source_attribution_legacy_text">Kliknij, aby wyświetlić przypisanie mapy</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
@@ -792,6 +837,10 @@
     <string name="last_day_available">dostępne ostatni dzień</string>
     <string name="cache_offline_refresh">Odśwież</string>
     <string name="cache_offline_drop">Usuń</string>
+    <string name="cache_delete_userdefined_waypoints">Usuń punkty zdefiniowane przez użytkownika</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Czy usunąć wszystkie zdefiniowane punkty użytkownika dla tej skrytki?\n\nPunkty zostaną zostaną natychmiast usunięte, nie można tego cofnąć.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Uwaga: Włączono \"Punkty orientacyjne z notatki\". Jeśli masz współrzędne w notatce rozpoznane przez c:geo, punkty orientacyjne zostaną dla nich automatycznie odtworzone. Możesz to wyłączyć w oknie dialogowym edycji notatki.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Punkty zdefiniowane przez użytkownika zostały usunięte</string>
     <string name="cache_offline_store">Zapisz</string>
     <string name="cache_offline_stored">Zapisane w pamięci</string>
     <string name="cache_offline_not_ready">Nie jest pobrana\ndo użytku offline</string>
@@ -914,6 +963,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
+    <string name="cache_log_too_long">c:geo nie mógł przesłać twojego logu, jest zbyt długi. Ale dziękujemy za próbę zapisu tak rozległego logu ;-)</string>
     <string name="cache_menu_visit_offline">Szybki log offline</string>
     <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
     <string name="cache_menu_around">Skrzynki w pobliżu</string>
@@ -932,6 +982,8 @@
     <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
     <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
     <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
+    <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
+    <string name="cache_log_menu_title">Wpis %1$s z %2$s</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
@@ -993,7 +1045,12 @@
     <string name="cache_listed_on">Zapisana w %s</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
+    <string name="cache_chirpwolf_start">Otwórz Chirp Wolf aby odczytać dane chirp dla tej skrytki</string>
+    <string name="cache_chirpwolf_install">Zainstaluj Chirp Wolf aby móc odczytywać dane chirp</string>
+    <string name="context_share_as_text">Udostępnij tekst</string>
+    <string name="context_share_as_link">Udostępnij link</string>
     <string name="create_internal_cache">Utwórz skrzynkę zdefiniowaną przez użytkownika</string>
+    <string name="create_internal_cache_short">Nowa skrzynka</string>
     <string name="internal_cache_default_name">Skrzynka zdefiniowana przez użytkownika #%1$d</string>
     <string name="internal_cache_default_description">To jest skrzynka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
@@ -1009,6 +1066,7 @@
     <string name="cc_hint_minutes">minut(y)</string>
     <string name="cc_hint_seconds">sekund(y)</string>
     <string name="cc_hint_fraction">cz. ułamk.</string>
+    <string name="lowercase">małe litery</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Szukam plików\nw</string>
@@ -1156,6 +1214,8 @@
     <string name="search_tb">Przedmioty podróżne</string>
     <string name="search_tb_hint">Identyfikacja przedmiotu podróżnego</string>
     <string name="search_tb_button">Szukaj przedmiotów podróżnych</string>
+    <string name="search_destination">Otwórz miejsce docelowe w c: geo</string>
+    <string name="add_target_to">Dodaj cel do</string>
     <string name="search_address_started">Wyszukiwanie miejsc</string>
     <string name="search_address_result">Znalezione miejsca</string>
     <string name="search_own_caches">Szukaj moich skrzynek</string>
@@ -1201,16 +1261,25 @@
     <string name="user_menu_view_found">Znalezione skrzynki</string>
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
+    <string name="user_menu_send_email">Wyślij e-mail</string>
     <string name="user_menu_open_contact">Otwórz wizytówkę kontaktu</string>
     <string name="user_unknown">Nieznany użytkownik</string>
     <!-- navigation -->
     <string name="navigation">Nawigacja</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Tylko GPS</string>
+    <string name="use_compass">Wszystkie czujniki użyte</string>
     <string name="destination_select">Wybierz cel</string>
     <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
     <string name="osmand_marker_cgeo">Marker z c:geo</string>
+    <string name="device_heading_label">Urządzenie:</string>
+    <string name="device_orientation">Orientacja</string>
+    <string name="device_orientation_label">Orientacja:</string>
     <!-- device orientation types -->
+    <string name="do_unknown">Nieznana</string>
+    <string name="do_auto">Automatycznie</string>
+    <string name="do_flat">Płaskie</string>
+    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Pionowa</string>
     <!-- license -->
     <string name="license">Licencja</string>
     <string name="license_show">Pokaż licencję</string>
@@ -1233,6 +1302,7 @@
     <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
     <string name="helper_brouter_title">BRouter Nawigacja Offline</string>
     <string name="helper_brouter_description">BRouter pozwala na nawigację offline. Jeśli jest zainstalowany i niezbędne pliki zostały pobrane, c:geo automatycznie pokaże trasę do skrzynki na wewnętrznej mapie.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
     <!-- export -->
     <string name="export">Eksport</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
@@ -1488,6 +1558,30 @@
     <string name="attribute_survey_marker_no">W pobliżu nie ma punktu geodezyjnego</string>
     <string name="attribute_offset_cache_yes">Skrzynka Offset</string>
     <string name="attribute_offset_cache_no">Nie jest to skrzynka Offset</string>
+    <string name="attribute_bonuscache_yes">Skrytka bonusowa</string>
+    <string name="attribute_bonuscache_no">Bez skrytki bonusowej</string>
+    <string name="attribute_powertrail_yes">Część power trail</string>
+    <string name="attribute_powertrail_no">Nie jest częścią power trail</string>
+    <string name="attribute_challengecache_yes">Skrytka wyzwanie</string>
+    <string name="attribute_challengecache_no">To nie skrytka wyzwanie</string>
+    <string name="attribute_hqsolutionchecker_yes">Narzędzie do sprawdzania rozwiązań Geocaching.com włączone</string>
+    <string name="attribute_hqsolutionchecker_no">Narzędzie do sprawdzania rozwiązań Geocaching.com wyłączone</string>
+    <string name="attribute_handicaching_yes">Oceniono na Handicaching.com</string>
+    <string name="attribute_handicaching_no">Nie oceniono na Handicaching.com</string>
+    <string name="attribute_munzee_yes">Zawiera Munzee</string>
+    <string name="attribute_munzee_no">Nie zawiera Munzee</string>
+    <string name="attribute_ads_yes">Zawiera reklamy</string>
+    <string name="attribute_ads_no">Nie zawiera reklam</string>
+    <string name="attribute_military_area_yes">Poligon wojskowy</string>
+    <string name="attribute_military_area_no">Brak poligonu wojskowego</string>
+    <string name="attribute_video_surveil_yes">Teren objęty monitoringiem wideo</string>
+    <string name="attribute_video_surveil_no">Teren nie objęty monitoringiem wideo</string>
+    <string name="attribute_trackables_yes">Odpowiednia do trzymania przedmiotów podróżnych</string>
+    <string name="attribute_trackables_no">Nie można trzymać przedmiotów podróżnych</string>
+    <string name="attribute_historic_yes">Opuszczona budowla/ruiny</string>
+    <string name="attribute_historic_no">Brak opuszczonej budowli / Brak ruin</string>
+    <string name="attribute_blind_people_yes">Odpowiedni dla osób niewidomych</string>
+    <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
     <!-- next things -->
     <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1497,6 +1591,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo w Google Play</a></string>
     <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
+    <string name="github_title">Śledzenie błędów</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
@@ -1732,12 +1827,15 @@
     <string name="downloadmap_title">Pobierz mapę offline</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony \"Zapisz\".\n\n Pobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, pobrany plik zostanie skopiowany do katalogu mapy c:geo\'s i ustawiony jako aktualna mapa dla c:geo.\n\n Bądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_choose">Wybierz mapę</string>
+    <string name="downloadmap_filename">Pobieranie %s</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku mapy, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
+    <string name="downloadmap_target_not_writable">Cel \"%s\" nie jest możliwy do zapisania - pobrany plik mapy zostanie zapisany w systemowym katalogu pobranych i musi być przeniesiony ręcznie do katalogu z mapami.</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
     <string name="map_trail_show">Pokaż historię ścieżki</string>
+    <string name="map_trail_hide">Ukryj historię ścieżki</string>
     <!-- history track export -->
     <string name="trailhistory">Historyczny tor</string>
     <string name="export_trailhistory_title">Pokaż historię ścieżki</string>

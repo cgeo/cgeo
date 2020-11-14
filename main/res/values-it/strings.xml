@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -571,10 +572,13 @@
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
+    <string name="init_bigSmileysOnMap">Grandi faccine per le cache loggate</string>
+    <string name="init_summary_bigSmileysOnMap">Se abilitata, le grandi faccine saranno mostrate sulla mappa per le cache loggate (richiede il riavvio).</string>
     <string name="init_disabled">Escludi disattivati</string>
     <string name="init_summary_disabled">Escludi cache disattivati</string>
     <string name="init_archived">Escludi archiviati</string>
     <string name="init_summary_archived">Escludi cache archiviati</string>
+    <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
@@ -773,6 +777,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
+    <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
+    <string name="map_source_attribution_legacy_text">Clicca per l\'attribuzione della mappa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome dispositivo</string>
@@ -941,6 +947,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
     <string name="cache_menu_visit">Scrivi Log</string>
+    <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
     <string name="cache_menu_visit_offline">Rapido log offline</string>
     <string name="cache_menu_spoilers">Immagini spoiler</string>
     <string name="cache_menu_around">Cache qui intorno</string>
@@ -1027,6 +1034,7 @@
     <string name="context_share_as_text">Condividi testo</string>
     <string name="context_share_as_link">Condividi link</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
+    <string name="create_internal_cache_short">Nuova cache</string>
     <string name="internal_cache_default_name">Cache definito dall\'utente #%1$d</string>
     <string name="internal_cache_default_description">Questo è un cache definito dall\'utente</string>
     <string name="internal_cache_default_owner">Tu</string>
@@ -1189,6 +1197,7 @@
     <string name="search_tb_hint">Identificativo Trackable</string>
     <string name="search_tb_button">Cerca per trackable</string>
     <string name="search_destination">Apri destinazione in c:geo</string>
+    <string name="add_target_to">Aggiungi obiettivo a</string>
     <string name="search_address_started">Cerca per luoghi</string>
     <string name="search_address_result">Cerca luoghi</string>
     <string name="search_own_caches">Cerca i miei cache</string>
@@ -1234,6 +1243,7 @@
     <string name="user_menu_view_found">Cache trovati</string>
     <string name="user_menu_open_browser">Apri profilo nel browser</string>
     <string name="user_menu_send_message">Invia messaggio</string>
+    <string name="user_menu_send_email">Invia email</string>
     <string name="user_menu_open_contact">Aprire scheda contatto</string>
     <string name="user_unknown">Utente sconosciuto</string>
     <!-- navigation -->
