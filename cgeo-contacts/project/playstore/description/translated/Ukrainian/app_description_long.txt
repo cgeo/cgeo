@@ -3,11 +3,7 @@ This is a contacts plugin for c:geo, an open source geocaching app. It will only
 Usage:
 When you click on a username in c:geo (e.g. in the cache logbook) the menu will contain an item to open the corresponding contact card in your phone contacts. This will allow you to directly call or message the user.
 
-<<<<<<< HEAD
 Remark:
-=======
-Remark: 
->>>>>>> release
 The username of the person needs to be stored in the name- or alias-field of your contacts in order for the plugin to match the geocaching username to the contact.
 
 Comments in PlayStore can not be answered! If you have problems installing or using c:geo please first have a look at our FAQ: https://faq.cgeo.org
