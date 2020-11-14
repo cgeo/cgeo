@@ -426,7 +426,7 @@
 
     <style name="map_distanceinfo_supersize" parent="map_distanceinfo">
         <item name="android:layout_marginLeft">-2dp</item>
-        <item name="android:textSize">96sp</item>
+        <item name="android:textSize">72sp</item>
     </style>
 
     <!-- about c:geo contributors style -->
