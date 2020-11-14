@@ -5,11 +5,11 @@
 <h1>Nightly build:</h1>
 
 <h4>Android 11 notice (UPDATED):</h4>
-You can use c:geo with Android 11!
-Have a look at our <a href="https://faq.cgeo.org/#android11">FAQ</a> for more details.
+There are no known issues for using c:geo on Android 11. If you notice any problems, kindly let us know.
 
 <h4>Map:</h4>
 <ul>
+<li>Fix: OSM maps no longer showing caches until manual zoom or move</li>
 <li>Change: Old mapsforge map has been disabled and will be removed in future releases.</li>
 <li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
 <li>Change: Removed restrictions on initial zoom level</li>
@@ -18,7 +18,7 @@ Have a look at our <a href="https://faq.cgeo.org/#android11">FAQ</a> for more de
 <li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
 <li>Fix: Individual route: Update distance on item removal</li>
 <li>Fix: Crash on Google Maps map being put into the background</li>
-<li>Fix: Global filter in \"live map\" mode</li>
+<li>Fix: Global filter in \"live map\" mode for user defined caches</li>
 <li>Fix: Too many server requests on \"live map\" movements</li>
 <li>New: Added attribution to contributors on OpenStreetMap maps</li>
 <li>New: Added option to show big smileys for found caches</li>
