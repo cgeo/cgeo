@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
+<h1>Nightly builds:</h1>
+<h4>Topic:</h4>
+<ul>
+<li>Item</li>
+</ul>
 </div>]]></Data>
   </string>
 </resources>
