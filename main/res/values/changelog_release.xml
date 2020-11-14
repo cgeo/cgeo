@@ -2,149 +2,69 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2020.11.03:</h1>
+<h1>Beta release 2020.11.14-RC:</h1>
 
 <h4>Android 11 notice (UPDATED):</h4>
-You can use c:geo with Android 11!
-Have a look at our <a href="https://faq.cgeo.org/#android11">FAQ</a> for more details.
-
-<h4>Changes:</h4>
-<ul>
-<li>Fix: Crashes due to problem in DB conversion after upgrade or when restoring backup</li>
-<li>Fix: List creation dialog in light mode unreadable</li>
-<li>Fix: Remove Android 11 warning from home screen</li>
-</ul>
-
-<h1>2020.10.29:</h1>
-
-<h4>Trackable:</h4>
-<ul>
-<li>Fix: Adapt to another website change, fixing trackable codes not being recognized</li>
-</ul>
-
-<h4>Lists:</h4>
-<ul>
-<li>Fix: Offline logged caches still shown with orange line after clearing the log until list is reopened</li>
-</ul>
-
-<h4>Logging:</h4>
-<ul>
-<li>Fix: Crash when trying to log a cache on some devices</li>
-</ul>
-
-<h4>Other:</h4>
-<ul>
-<li>Fix: Strange characters in imported navigation target waypoints (e.g. from Adenventure Lab)</li>
-</ul>
-
-<h1>2020.10.10:</h1>
-
-<h4>Trackable:</h4>
-<ul>
-<li>Fix: Adapt to website change, fixing trackable logging</li>
-</ul>
-
-<h4>Logging:</h4>
-<ul>
-<li>Fix: Crash when adding picture from camera</li>
-</ul>
-
-<h4>Other:</h4>
-<ul>
-<li>Fix: Prepare for website change regarding avatar loading</li>
-<li>Fix: Major udpate to japanese translation</li>
-</ul>
-
-<h1>Version 2020.10.04:</h1>
+There are no known issues for using c:geo with Android 11. If you notice any problem, kindly let us know.
 
 <h4>Map:</h4>
 <ul>
-<li>Change: Show list markers also on waypoints</li>
-<li>Fix: Zoom level difference between Google Maps and OpenStreetMap maps</li>
-<li>New: Map downloader for OpenStreetMap offline maps (see map selector menu and Settings - Map)</li>
-<li>New: Open local .map files in c:geo by tapping on them</li>
-<li>New: Colorpicker for map lines offers \"default\" button</li>
-<li>New: OpenstreetMap offline maps support \"default\" language</li>
-<li>Change: Moved \"History track enable/disable\" checkbox to \"History track\" submenu as \"show\" / \"hide\" entries</li>
-</ul>
-
-<h4>Map: Individual routes:</h4>
-<ul>
-<li>New: Export route as GPX route file</li>
-<li>New: Import route from GPX route file</li>
-<li>New: Option added to center on route</li>
-<li>New: Show warning before clearing a route</li>
-<li>Fix: Crash on loading empty route item</li>
-<li>Fix: Distance info still being displayed after clearing a route</li>
-</ul>
-
-<h4>Map: GPX tracks/routes:</h4>
-<ul>
-<li>Change: Renamed \"individual track\" to \"GPX track/route\"</li>
-<li>New: Also load GPX files using the route format</li>
-<li>New: Option added to center on track/route</li>
-<li>New: Show Warning before overwriting an existing track/route</li>
-<li>New: Show warning on \"load track/route\" if an empty track/route file was selected</li>
-<li>Change: Group \"GPX track/route\" related entries into its own sub menu</li>
+<li>Fix: OSM maps no longer showing caches until manual zoom or move</li>
+<li>Change: Old mapsforge map has been disabled and will be removed in future releases.</li>
+<li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
+<li>Change: Removed restrictions on initial zoom level</li>
+<li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
+<li>Fix: Preserve zoom level for leaving/entering map</li>
+<li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
+<li>Fix: Individual route: Update distance on item removal</li>
+<li>Fix: Crash on Google Maps map being put into the background</li>
+<li>Fix: Global filter in \"live map\" mode for user defined caches</li>
+<li>Fix: Too many server requests on \"live map\" movements</li>
+<li>New: Added attribution to contributors on OpenStreetMap maps</li>
+<li>New: Added option to show big smileys for found caches</li>
+<li>New: Enlarge display of distance to current navigation target by tapping on it</li>
 </ul>
 
 <h4>Cache details:</h4>
 <ul>
-<li>Fix: Adapt to website change for trackable logbook on geocaching.com</li>
-<li>New: Allow negative bearing angles for waypoint projection</li>
-<li>New: Voice output: Estimate device orientation and transform coords when mobile is upright</li>
-<li>Fix: Offline log remembers selected image</li>
-<li>New: Offline logging now supports adding multiple images</li>
-<li>Fix: Sped up offline logging with large cache lists</li>
-<li>Fix: [NUMBER] only adds +1 for types found it / attended / webcam photo taken</li>
-<li>New: Support the 4 new attributes at geocaching.com</li>
-<li>New: Added option to remove all user-defined waypoints of a cache in one step</li>
-<li>Changed sync logic for personal notes in caches to avoid duplication of personal notes</li>
-<li>New: Option to globally deactivate waypoint extraction from personal notes</li>
-<li>New: Personal note editor will grow automatically for longer texts</li>
-<li>New: Personal note editor: Directly activate keyboard on opening</li>
-<li>New: Personal note editor: Activate edit by tapping on text</li>
-<li>New: Support backup for waypoints to notes, using format @name (type) coordinates&lt;newline&gt;\"user note\"</li>
-<li>New: Remembers offline found count for every connector and applies those values to the [NUMBER] parameter on logging</li>
-<li>New: Online-only found count variable added: [ONLINENUM]</li>
-<li>Fix: Remembers waypoint coordinate format while scrolling in list</li>
-<li>New: Offer Chirp Wolf app for chirp caches</li>
+<li>Change: Combine note and user note for export waypoint to GPX, on import split them up</li>
+<li>Change: Disable cache detail share menu for user-defined caches</li>
+<li>Fix: Hint is not displayed on compass view, when launched directly from map</li>
+<li>Fix: Update list of waypoints on extract waypoints</li>
+<li>New: provide direct log link ability for gc.com/oc.*/gc.su</li>
+<li>New: Support [TYPE] in signature</li>
+<li>New: Image upload on logging: always remove EXIF data</li>
+<li>New: Image upload on logging: allow resorting images</li>
+<li>New: Waypoint calculator: add option to lower-case all variables</li>
+<li>New: Show counter for logtext length</li>
+<li>Change: Own waypoint with empty coords will be extracted from personal cache note</li>
+<li>Change: Harmonize \"share\" menus to system-wide \"share\"</li>
 </ul>
 
 <h4>Cache lists:</h4>
 <ul>
-<li>Change: Allow cache title to wrap to multi-line</li>
-<li>Change: Widened colored found/offline log marker and removed textual \"Offline\" marker</li>
-<li>Fix: GPX export - label for checkbox \"Include found status\"</li>
-<li>Change: \"New list\" entry moved to top of list creation/selection dialog</li>
-<li>Change: A newly created list for user-defined caches will now be named \"User-defined caches\" instead of \"Internal caches\" (does not change an existing list with user-defined caches)</li>
-<li>New: Offer logging of premium caches from search for basic members of geocaching.com</li>
+<li>New: Improved performance for filtering large cache lists</li>
+<li>New: Added link to the gc message center in several places</li>
+<li>Change: User-defined caches are stored in a separate list \"user-defined caches\" instead of in default list</li>
+<li>Fix: avoid crash when trying to log a PM cache as basic member</li>
 </ul>
 
 <h4>Other:</h4>
 <ul>
-<li>New: Detect and report captcha on login to geocaching.com</li>
-<li>Fix: Correctly detect wrong username/password on login to geocaching.com</li>
-<li>New: Offer c:geo for navigation intents (eg.: from Lab Adventure app)</li>
-<li>Change: Replace outdated undobar with snackbar</li>
-<li>New: Include offline found counter on homescreen (configurable)</li>
-<li>New: Individual route sort view: Tap on item to open cache details</li>
-<li>New: Individual route sort view: Reorder using drag & drop</li>
-<li>New: Display an error message (instead of crashing) when trying to restore an incompatible database version</li>
-<li>New: Updated send2cgeo and GPS Status helper app icons</li>
-<li>New: Add status info on BRouter availability to about - system screen</li>
-<li>New: Added Chirp Wolf in useful apps list</li>
-<li>Fix: Trackable links openened from within some mail programs would not open</li>
-<li>Change: Set colorAccent to c:geo orange in many more places</li>
-<li>Fix: Use 24 hour time formatter for logfile and export files for individual routes and history track</li>
-<li>Many other small fixes</li>
-<li>New: Added one-time messages framework</li>
-<li>Logging: Added more info levels to logfile</li>
-<li>Logging: Added option to write extended logfile with even more info</li>
-<li>Logging: Read log settings from \"logfiles/log-properties.txt\" (if present)</li>
-<li>Internal: Updated contributor\'s list</li>
-<li>Internal: Added extension table to database</li>
-<li>Internal: Fixed some issues with database structure</li>
+<li>Change: Backup / restore caches and settings in one step</li>
+<li>New: Preserve multiple backups of caches and settings</li>
+<li>Fix: Adapt trackable search to website change on geocaching.com</li>
+<li>Fix: Export waypoints even if they have no coordinates</li>
+<li>Fix: GPX export of position history: timestamps are now GMT-based</li>
+<li>New: GPX export of position history: added elevation info</li>
+<li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
+<li>New: Format GPX export file more human-readable</li>
+<li>New: Added splash screen</li>
+<li>Change: Throw a runtime error if db can neither be opened nor created</li>
+<li>New: Automatically convert geocode search input to upper case</li>
+<li>New: Select target on geo intents (new user defined cache, waypoint for \"go to\" history, waypoint for existing user defined cache)</li>
+<li>Change: Updated widget icons</li>
+<li>Updated list of contributors</li>
 </ul>
 </div>]]></Data>
 </string>
