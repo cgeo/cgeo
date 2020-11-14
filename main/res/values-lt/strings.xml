@@ -743,6 +743,7 @@
     <string name="init_mfold_api_description">Pagal nutylėjimą naudojame naują Mapforge žemėlapio versiją. Jei pasigedote kai kurių funkcijų arba susiduriate su problemomis, galite grįžti į senąją versiją.</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Priartėjimo pranešimas</string>
+    <string name="init_proximityNotificationGeneral">Bendras artumo pranešimas žemėlapyje</string>
     <string name="init_summary_proximityNotificationGeneral">Duoti garsinį pranešimą, jei dabar žemėlapyje matoma slėptuvė ar papildomas taškas yra arčiau nei tolumo ar artumo atstumas. Pranešimai bus skirtingų tonų skirtingiems atstumams atskirti.</string>
     <string name="init_proximityNotificationSpecific">Pasirinkto papildomo taško artumo pranešimas</string>
     <string name="far_distance">Tolimas atstumas</string>
@@ -758,6 +759,7 @@
     <string name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Išsaugotas</string>
+    <string name="map_source_osm_offline_combined">Kombinuotas (neprisijungus)</string>
     <string name="init_sendToCgeo">Siųsti į c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacija apie send2cgeo</string>
     <string name="init_sendToCgeo_name">Jūsų įrenginio pavadinimas</string>
@@ -815,6 +817,9 @@
     <string name="cache_offline">Išsaugotas</string>
     <string name="cache_offline_refresh">Naujinti</string>
     <string name="cache_offline_drop">Pašalinti</string>
+    <string name="cache_delete_userdefined_waypoints">Ištrinti vartotojo papildomus taškus</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">Ištrinti visus vartotojo papildomus taškus iš šios slėptuvės?\n\nPapildomi taškai bus nedelsiant ištrinti, anuliuoti nebus galima.</string>
+    <string name="cache_delete_userdefined_waypoints_success">Vartotojo papildomi taškai ištrinti</string>
     <string name="cache_offline_store">Saugoti</string>
     <string name="cache_offline_stored">Išsaugota įrenginyje</string>
     <string name="cache_offline_not_ready">Neišsaugota</string>
@@ -1014,6 +1019,10 @@
     <string name="cache_share_field">Bendrinti</string>
     <string name="cache_time_full_hours">valanda (-os)</string>
     <string name="cache_listed_on">Publikuota %s</string>
+    <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
+    <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
+    <string name="cache_chirpwolf_start">Atidarykite Chirp Wolf, kad perskaitytumėte šios slėptuvės Chirp duomenis</string>
+    <string name="cache_chirpwolf_install">Įdiekite Chirp Wolf, kad galėtumėte perskaityti Chirp duomenis</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="internal_cache_default_name">Vartotojo nustatyta slėptuvė #%1$d</string>
     <string name="internal_cache_default_description">Tai vartotojo nustatyta slėptuvė</string>
@@ -1151,6 +1160,7 @@
     <string name="map_routing_bike">Dviračiu</string>
     <string name="map_routing_car">Automobiliu</string>
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
+    <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <!-- search -->
     <string name="search_bar_hint">Ieškoti</string>
     <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
@@ -1253,9 +1263,10 @@
     <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Pocket Query sąrašus pagal jūsų esamą vietą arba pasirinktą tašką žemėlapyje. Būtina Premium Geocaching.com narystė.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti geocaches tipo Wherigo. c:Geo automatiškai gali sukelti kasetės per šią programą atsisiųsti.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsiųsti kasetes.</string>
     <string name="helper_brouter_title">BROuter navigacija neprisijungus</string>
     <string name="helper_brouter_description">BRouter suteikia maršrutizavimą be interneto. Jei jis yra įdiegtas ir atsisiųsti reikalingi failai, c:geo automatiškai žemėlapyje rodys maršrutą į slėptuvę.</string>
+    <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp slėptuvėms.</string>
     <!-- export -->
     <string name="export">Eksportuoti</string>
     <string name="export_progress">Eksportuojama: %1$s</string>
@@ -1685,6 +1696,8 @@
     <string name="individual_route">Asmeninis maršrutas</string>
     <string name="individual_route_added">pridėta prie maršruto</string>
     <string name="individual_route_removed">pašalinta iš maršruto</string>
+    <string name="individual_route_error_toggling_waypoint">klaida perjungiant papildomą tašką</string>
+    <string name="individual_route_error_single_waypoint_mode">Negalima vieno papildomo taško režimu</string>
     <string name="map_sort_individual_route">Rūšiuoti asmeninį maršrutą</string>
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
@@ -1739,6 +1752,7 @@
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Vietinis failų tvarkytuvas</string>
     <string name="localfile_title">Atidaryti vietinį failą</string>
+    <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <string name="localfile_foundmap">rastas žemėlapio failas</string>
     <!-- ReceiveMapFileActivity -->
     <string name="receivemapfile_intenttitle">Gauti žemėlapio failą</string>
