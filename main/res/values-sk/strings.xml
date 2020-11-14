@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
     <string name="log_image_scale_option_entry">%1$d px</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$d KB, %4$s</string>
     <string name="log_image_titleprefix">Obrázok</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
@@ -547,6 +548,7 @@
     <string name="init_signature_template_url">URL</string>
     <string name="init_signature_template_log">Pozícia pre zápis do logu</string>
     <string name="init_signature_template_size">Veľkosť</string>
+    <string name="init_signature_template_type">Typ</string>
     <string name="init_ratingwanted">GCvote hodnotenie</string>
     <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Logy priateľov a vlastné</string>
@@ -572,10 +574,13 @@
     <string name="init_brouterShowBothDistances">Zobraziť priamu vzdialenosť</string>
     <string name="brouter_recalculating">Trasa sa prepočítava na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
+    <string name="init_bigSmileysOnMap">Veľké emotikony pre zalogované kešky</string>
+    <string name="init_summary_bigSmileysOnMap">Ak je to povolené, na mape sa pre zalogované kešky zobrazujú veľké emotikony (vyžaduje reštart aplikácie).</string>
     <string name="init_disabled">Nezobrazovať deaktivované</string>
     <string name="init_summary_disabled">Nezobrazovať deaktivované skrýše</string>
     <string name="init_archived">Okrem archivovaných</string>
     <string name="init_summary_archived">Nezobrazovať archivované kešky</string>
+    <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
     <string name="init_summary_save_log_img">Ukladať obrázky z logov</string>
@@ -591,9 +596,12 @@
     <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
+    <string name="init_backup_summary">Majte na pamäti, že pomocou tejto funkcie je možné zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek. \nAk chcete mať možnosť obnoviť údaje aj po strate telefónu, súbory so zálohou musia byť skopírované na nezávislé miesto.</string>
     <string name="init_restore_title">Obnoviť zálohu</string>
     <string name="init_backup_caches">kešky a body trasy</string>
     <string name="init_backup_program_settings">nastavenia programu</string>
+    <string name="init_backup_logins">Zahrnúť údaje o konte</string>
+    <string name="init_backup_logins_summary">Tým do zálohy uložíte svoje zadané prihlasovacie údaje.</string>
     <string name="init_backup">Zálohovať kešky/body trasy</string>
     <string name="init_backup_backup">Zálohovať</string>
     <string name="init_backup_finished">Zálohovanie dokončené</string>
@@ -602,12 +610,20 @@
     <string name="init_backup_restore">Obnoviť</string>
     <string name="init_restore_restored">Obnovenie dokončené</string>
     <string name="init_backup_start_restore">Spustiť obnovenie</string>
+    <string name="init_backup_restore_different_backup">Obnoviť odlišnú zálohu</string>
     <string name="init_backup_backup_history">História zálohovania</string>
+    <string name="init_backup_history_length_title">Maximum uložených záloh</string>
+    <string name="init_backup_history_length_summary">Rozhodnite, koľko záloh má byť uchovaných. Keď sa dosiahne limit, najstaršie sa automaticky odstránia.</string>
+    <string name="init_backup_history_length_min">Len najnovšia</string>
+    <string name="init_backup_history_length_max">Ponechať všetky</string>
+    <string name="init_backup_history_delete_warning">Máte uložených viac záloh, než dovoľuje nakonfigurovaná maximálna hodnota. Naozaj chcete odstrániť všetky zálohy, čo sú nad limit?</string>
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
     <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
+    <string name="init_backup_folder_exists_error">Nedá sa vytvoriť nový priečinok na zálohy. Vytvorili ste už zálohu za poslednú minútu?</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
+    <string name="backup_confirm_overwrite">Chcete prepísať svoju najstaršiu existujúcu zálohu z %s?</string>
     <string name="restore_confirm_overwrite_database">UPOZORNENIE: Tým prepíšete %s vo svojom zariadení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">UPOZORNENIE: Tým prepíšete %s a svoje aktuálne nastavenia na zariadení!</string>
     <string name="restore_confirm_overwrite_settings">UPOZORNENIE: Tým prepíšete svoje aktuálne nastavenia na zariadení!</string>
@@ -763,6 +779,8 @@
     <string name="map_source_osm_cyclosm">CyclOSM</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (offline)</string>
+    <string name="map_source_attribution_dialog_title">Autori máp</string>
+    <string name="map_source_attribution_legacy_text">Kliknite pre autora mapy</string>
     <string name="init_sendToCgeo">Poslať do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o send2cgeo</string>
     <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
@@ -945,6 +963,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otvoriť v prehliadači</string>
     <string name="cache_menu_visit">Zalogovať návštevu</string>
+    <string name="cache_log_too_long">Aplikácia c:geo nemôže odoslať váš log, pretože je príliš dlhý. Ďakujeme ale, že ste sa pokúsili napísať taký obsiahly log ;-)</string>
     <string name="cache_menu_visit_offline">Rýchly offline log</string>
     <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
     <string name="cache_menu_around">Skrýše v okolí</string>
@@ -964,6 +983,7 @@
     <string name="cache_menu_challenge_checker">Hľadať challenge checker</string>
     <string name="cache_menu_ignore">Ignorovať skrýšu</string>
     <string name="cache_log_menu_decrypt">Šifrovať/Dešifrovať</string>
+    <string name="cache_log_menu_title">Log %1$s z %2$s</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
@@ -1030,6 +1050,7 @@
     <string name="context_share_as_text">Zdieľať text</string>
     <string name="context_share_as_link">Zdieľať odkaz</string>
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
+    <string name="create_internal_cache_short">Nová keška</string>
     <string name="internal_cache_default_name">Používateľom definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je používateľom definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
@@ -1045,6 +1066,7 @@
     <string name="cc_hint_minutes">minúty</string>
     <string name="cc_hint_seconds">sekundy</string>
     <string name="cc_hint_fraction">zlomok</string>
+    <string name="lowercase">malé písmená</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
@@ -1193,6 +1215,7 @@
     <string name="search_tb_hint">Identifikácia trasovateľného predmetu</string>
     <string name="search_tb_button">Hľadať trasov. predmety</string>
     <string name="search_destination">Otvoriť cieľ v c:geo</string>
+    <string name="add_target_to">Pridať cieľ do</string>
     <string name="search_address_started">Vyhľadávanie miest</string>
     <string name="search_address_result">Nájdené miesta</string>
     <string name="search_own_caches">Hľadať v mojich skrýšach</string>
@@ -1238,6 +1261,7 @@
     <string name="user_menu_view_found">Nájdené skrýše</string>
     <string name="user_menu_open_browser">Otvoriť profil v prehliadači</string>
     <string name="user_menu_send_message">Odoslať správu</string>
+    <string name="user_menu_send_email">Odoslať e-mail</string>
     <string name="user_menu_open_contact">Otvoriť kartu kontaktu</string>
     <string name="user_unknown">Neznámy používateľ</string>
     <!-- navigation -->
@@ -1542,6 +1566,22 @@
     <string name="attribute_challengecache_no">Nie challenge keška</string>
     <string name="attribute_hqsolutionchecker_yes">Overovač na geocaching.com povolený</string>
     <string name="attribute_hqsolutionchecker_no">Overovač na geocaching.com zakázaný</string>
+    <string name="attribute_handicaching_yes">Hodnotené na Handicaching.com</string>
+    <string name="attribute_handicaching_no">Nehodnotené na Handicaching.com</string>
+    <string name="attribute_munzee_yes">Obsahuje Munzee</string>
+    <string name="attribute_munzee_no">Neobsahuje Munzee</string>
+    <string name="attribute_ads_yes">Obsahuje reklamu</string>
+    <string name="attribute_ads_no">Neobsahuje reklamu</string>
+    <string name="attribute_military_area_yes">Vojenský výcvikový priestor</string>
+    <string name="attribute_military_area_no">Nie je vojenský výcvikový priestor</string>
+    <string name="attribute_video_surveil_yes">Oblasť sledovaná kamerami</string>
+    <string name="attribute_video_surveil_no">Oblasť bez sledovania kamerami</string>
+    <string name="attribute_trackables_yes">Vhodné na trackovacie predmety</string>
+    <string name="attribute_trackables_no">Nevhodné na trackovacie predmety</string>
+    <string name="attribute_historic_yes">Zrúcanina/ruina</string>
+    <string name="attribute_historic_no">Nie je zrúcanina/ruina</string>
+    <string name="attribute_blind_people_yes">Postihnutí: zrakovo</string>
+    <string name="attribute_blind_people_no">Nie postihnutí: zrakovo</string>
     <!-- next things -->
     <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1551,6 +1591,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
     <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy, keď zapíšete nájdenie skrýše?</string>
+    <string name="github_title">Sledovanie chýb</string>
     <string name="faq_title">Najčastejšie otázky</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
