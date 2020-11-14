@@ -120,7 +120,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             update(result);
 
             lastSearchResult = searchResult;
-            if (null == lastViewport || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
+            if (null == lastViewport || !useLastSearchResult || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
                 lastViewport = containingGCliveCaches(result);
             }
             Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + lastViewport);
