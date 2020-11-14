@@ -17,6 +17,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
 <li>Fix: Individual route: Update distance on item removal</li>
 <li>Fix: Crash on Google Maps map being put into the background</li>
+<li>Fix: Global filter in \"live map\" mode</li>
 <li>New: Added attribution to contributors on OpenStreetMap maps</li>
 <li>New: Added option to show big smileys for found caches</li>
 <li>New: Enlarge display of distance to current navigation target by tapping on it</li>
@@ -35,6 +36,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: Waypoint calculator: add option to lower-case all variables</li>
 <li>New: Show counter for logtext length</li>
 <li>Change: Own waypoint with empty coords will be extracted from personal cache note</li>
+<li>Change: Harmonize \"share\" menus to system-wide \"share\"</li>
 </ul>
 
 <h4>Cache lists:</h4>
@@ -55,6 +57,7 @@ Android 11 enforces a new way for storing data, which c:geo does not support yet
 <li>New: GPX export of position history: added elevation info</li>
 <li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
 <li>New: Format GPX export file more human-readable</li>
+<li>New: Added splash screen</li>
 <li>Change: Throw a runtime error if db can neither be opened nor created</li>
 <li>New: Automatically convert geocode search input to upper case</li>
 <li>New: Select target on geo intents (new user defined cache, waypoint for \"go to\" history, waypoint for existing user defined cache)</li>
