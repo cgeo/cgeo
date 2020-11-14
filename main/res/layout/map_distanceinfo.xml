@@ -17,7 +17,7 @@
         android:layout_marginTop="-8dp"
         android:layout_toLeftOf="@id/distance1"
         android:layout_marginRight="0dp"
-        android:layout_width="10sp"
+        android:layout_width="15sp"
         style="@style/map_distanceinfo" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_below="@id/distance1info"
         android:layout_toLeftOf="@id/distance2"
         android:layout_marginRight="0dp"
-        android:layout_width="10sp"
+        android:layout_width="15sp"
         style="@style/map_distanceinfo" />
 
     <TextView
