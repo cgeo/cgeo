@@ -89,6 +89,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
                 final OfflineMap offlineMap = activity.getQueries().get(viewHolder.getAdapterPosition());
                 final Intent intent = new Intent();
                 intent.putExtra(MapDownloadUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
+                intent.putExtra(MapDownloadUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
                 setResult(RESULT_OK, intent);
                 finish();
             });
