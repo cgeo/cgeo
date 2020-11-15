@@ -1222,7 +1222,7 @@
     <string name="do_unknown">Ukendt</string>
     <string name="do_auto">Automatisk</string>
     <string name="do_flat">Flad</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Opretstående</string>
+    <string name="do_upright">Opretstående</string>
     <!-- license -->
     <string name="license">Licens</string>
     <string name="license_show">Vis licens</string>
