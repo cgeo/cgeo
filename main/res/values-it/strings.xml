@@ -1261,7 +1261,7 @@
     <string name="do_unknown">Sconosciuto</string>
     <string name="do_auto">Automatico</string>
     <string name="do_flat">Piatto</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Verticale</string>
+    <string name="do_upright">Verticale</string>
     <!-- license -->
     <string name="license">Licenza</string>
     <string name="license_show">Mostra licenza</string>
