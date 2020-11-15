@@ -1279,7 +1279,7 @@
     <string name="do_unknown">Neznámá</string>
     <string name="do_auto">Automaticky</string>
     <string name="do_flat">Plochý</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Vzpřímený</string>
+    <string name="do_upright">Vzpřímený</string>
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Zobrazit licenci</string>
