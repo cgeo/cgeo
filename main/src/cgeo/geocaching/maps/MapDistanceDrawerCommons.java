@@ -18,6 +18,7 @@ public class MapDistanceDrawerCommons {
     private final TextView distance2InfoView;
     private final TextView distance2View;
     private final TextView routeDistanceView;
+    private final TextView routeDistanceViewSupersize;
     private final TextView distanceSupersizeView;
     private boolean bothViewsNeeded = false;
 
@@ -27,6 +28,7 @@ public class MapDistanceDrawerCommons {
         distance2InfoView = root.findViewById(R.id.distance2info);
         distance2View = root.findViewById(R.id.distance2);
         routeDistanceView = root.findViewById(R.id.routeDistance);
+        routeDistanceViewSupersize = root.findViewById(R.id.routeDistanceSupersize);
         distanceSupersizeView = root.findViewById(R.id.distanceSupersize);
 
         distance1InfoView.setOnClickListener(v -> swap());
@@ -62,9 +64,12 @@ public class MapDistanceDrawerCommons {
     }
 
     public void drawRouteDistance(final float routeDistance) {
-        routeDistanceView.setVisibility(routeDistance != 0.0f ? View.VISIBLE : View.GONE);
+        routeDistanceView.setVisibility(View.GONE);
+        routeDistanceViewSupersize.setVisibility(View.GONE);
         if (routeDistance != 0.0f) {
-            routeDistanceView.setText(Units.getDistanceFromKilometers(routeDistance));
+            final TextView view = bothViewsNeeded && Settings.getSupersizeDistance() > 0 ? routeDistanceViewSupersize : routeDistanceView;
+            view.setVisibility(View.VISIBLE);
+            view.setText(Units.getDistanceFromKilometers(routeDistance));
         }
     }
 
