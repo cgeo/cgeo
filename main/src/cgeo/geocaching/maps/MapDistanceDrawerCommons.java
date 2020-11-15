@@ -38,26 +38,30 @@ public class MapDistanceDrawerCommons {
     }
 
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
-        bothViewsNeeded = showBothDistances && realDistance != 0.0f && distance != realDistance;
+        final boolean showRealDistance = realDistance != 0.0f && distance != realDistance;
+        bothViewsNeeded = showBothDistances && showRealDistance;
         final int supersize = Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
 
         distanceSupersizeView.setVisibility(supersize > 0 ? View.VISIBLE : View.GONE);
         if (bothViewsNeeded) {
-            updateDisplay(supersize == 1, distance1InfoView, STRAIGHT_LINE_SYMBOL, distance1View, Units.getDistanceFromKilometers(distance));
-            updateDisplay(supersize == 2, distance2InfoView, WAVY_LINE_SYMBOL, distance2View, Units.getDistanceFromKilometers(realDistance));
+            updateDisplay(supersize == 1, distance1InfoView, STRAIGHT_LINE_SYMBOL, distance1View, distance);
+            updateDisplay(supersize == 2, distance2InfoView, WAVY_LINE_SYMBOL, distance2View, realDistance);
         } else {
-            updateDisplay(supersize > 0, distance1InfoView, "", distance1View, Units.getDistanceFromKilometers(realDistance != 0.0f && distance != realDistance ? realDistance : distance));
+            updateDisplay(supersize > 0, distance1InfoView, "", distance1View, showRealDistance ? realDistance : distance);
         }
     }
 
-    private void updateDisplay(final boolean showAsSupersize, final TextView infoView, final String info, final TextView distanceView, final String distance) {
-        infoView.setVisibility(showAsSupersize || StringUtils.isEmpty(info) ? View.GONE : View.VISIBLE);
-        distanceView.setVisibility(showAsSupersize ? View.GONE : View.VISIBLE);
+    private void updateDisplay(final boolean showAsSupersize, final TextView infoView, final String info, final TextView distanceView, final float distance) {
+        final String distanceString = Units.getDistanceFromKilometers(distance);
+        final boolean zeroDistance = distance == 0.0f;
+
+        infoView.setVisibility(showAsSupersize || zeroDistance || StringUtils.isEmpty(info) ? View.GONE : View.VISIBLE);
+        distanceView.setVisibility(showAsSupersize || zeroDistance ? View.GONE : View.VISIBLE);
         if (showAsSupersize) {
-            distanceSupersizeView.setText(StringUtils.isNotEmpty(info) ? info + " " + distance : distance);
-        } else {
+            distanceSupersizeView.setText(StringUtils.isNotEmpty(info) ? info + " " + distanceString : distanceString);
+        } else if (!zeroDistance) {
             infoView.setText(info);
-            distanceView.setText(distance);
+            distanceView.setText(distanceString);
         }
     }
 
