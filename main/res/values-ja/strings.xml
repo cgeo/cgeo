@@ -419,7 +419,7 @@
     <string name="about_starting_text_first_head">c:geoの最初のステップ</string>
     <string name="about_starting_text_first_text">c:geoを使用するにはジオキャッシングサイトのアカウントが必要です。「設定」&gt;「サービス」&gt;「ジオキャッシングサイト」でアカウントを設定してください。\n詳細は<b>First steps with c:geo(英語)</b> https://manual.cgeo.org/en/firststeps をご覧ください</string>
     <string name="open_services_page">ジオキャッシングサイト設定</string>
-    <string name="about_system_include">バグ報告やお問い合わせする際は以下のシステム情報もお知らせください</string>
+    <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
     <string name="about_system_info_send_chooser">システム情報を送信</string>
