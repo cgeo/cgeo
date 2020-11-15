@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="3dip"
+    tools:context=".export.IndividualRouteExport" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/filename_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="8dp"
+            android:text="@string/filename_without_extension"
+            android:labelFor="@id/filename"/>
+
+        <EditText
+            android:id="@+id/filename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:layout_below="@id/filename_title"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="6dip"
+            android:layout_marginRight="51dip"
+            android:paddingRight="3dip"
+            />
+
+        <ImageButton
+            android:id="@+id/button_reset"
+            style="@style/button_small"
+            android:src="@drawable/ic_menu_delete"
+            android:layout_alignBottom="@id/filename"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/gpx_export_fragment" />
+
+</LinearLayout>
