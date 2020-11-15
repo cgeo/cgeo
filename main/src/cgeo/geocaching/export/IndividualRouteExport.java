@@ -17,9 +17,13 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +33,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
 
 public class IndividualRouteExport {
@@ -40,29 +45,48 @@ public class IndividualRouteExport {
         if (!EnvironmentUtils.isExternalStorageAvailable()) {
             return;
         }
-        filename = "route_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss") + ".gpx";
+        filename = "route_" + CalendarUtils.formatDateTime("yyyy-MM-dd_HH-mm-ss"); // extension will be added on clicking "ok" button
+
+        final InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+            for (int i = start; i < end; i++) {
+                if (FileUtils.FORBIDDEN_FILENAME_CHARS.indexOf(source.charAt(i)) >= 0) {
+                    Toast.makeText(activity, String.format(activity.getString(R.string.err_invalid_filename_char), source.charAt(i)), Toast.LENGTH_SHORT).show();
+                    return "";
+                }
+            }
+            return null;
+        };
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.export_individualroute_title);
 
-        final View layout = View.inflate(activity, R.layout.gpx_export_fragment, null);
+        final View layout = View.inflate(activity, R.layout.gpx_export_individual_route_dialog, null);
         builder.setView(layout);
 
+        final EditText editFilename = layout.findViewById(R.id.filename);
+        editFilename.setFilters(new InputFilter[] { filter });
+        editFilename.setText(filename);
+
+        final ImageButton resetFilename = layout.findViewById(R.id.button_reset);
+        resetFilename.setOnClickListener(v -> editFilename.setText(""));
+
         final TextView text = layout.findViewById(R.id.info);
-        text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), filename));
+        text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         final CheckBox shareOption = layout.findViewById(R.id.share);
         shareOption.setChecked(Settings.getShareAfterExport());
 
-        builder.setPositiveButton(R.string.export, (dialog, which) -> {
-            Settings.setShareAfterExport(shareOption.isChecked());
-            dialog.dismiss();
-            new Export(activity).execute(route.getSegments());
-        });
-
-        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());
-
-        builder.create().show();
+        builder
+            .setPositiveButton(R.string.export, (dialog, which) -> {
+                final String temp = StringUtils.trim(editFilename.getText().toString());
+                filename = (StringUtils.isNotBlank(temp) ? temp : filename) + FileUtils.GPX_FILE_EXTENSION;
+                Settings.setShareAfterExport(shareOption.isChecked());
+                dialog.dismiss();
+                new Export(activity).execute(route.getSegments());
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
+            .create()
+            .show();
     }
 
     private class Export extends AsyncTaskWithProgress<RouteSegment, File> {
