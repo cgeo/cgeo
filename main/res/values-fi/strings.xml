@@ -1261,7 +1261,7 @@
     <string name="do_unknown">Tuntematon</string>
     <string name="do_auto">Automaattinen</string>
     <string name="do_flat">Vaaka</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Pysty</string>
+    <string name="do_upright">Pysty</string>
     <!-- license -->
     <string name="license">Lisenssi</string>
     <string name="license_show">Näytä lisenssi</string>
