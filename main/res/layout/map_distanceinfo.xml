@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/distance1"
-        android:layout_marginTop="-8dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_width="100dp"
@@ -15,7 +14,6 @@
 
     <TextView
         android:id="@+id/distance1info"
-        android:layout_marginTop="-8dp"
         android:layout_toLeftOf="@id/distance1"
         android:layout_marginRight="0dp"
         android:layout_width="15sp"
@@ -48,8 +46,8 @@
 
     <TextView
         android:id="@+id/routeDistanceSupersize"
-        android:layout_marginTop="0dp"
-        android:layout_alignBottom="@id/distanceSupersize"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/distanceSupersize"
         android:layout_alignParentRight="true"
         android:layout_width="100dp"
         style="@style/map_distanceinfo" />

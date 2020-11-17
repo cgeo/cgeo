@@ -25,23 +25,12 @@
             android:id="@+id/target"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="-8dp"
-            android:layout_marginLeft="-8dp"
+            android:layout_marginLeft="-2dp"
             android:layout_marginRight="92dp"
-            android:paddingTop="4dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@drawable/icon_bcg"
-            android:ellipsize="end"
-            android:gravity="center_horizontal"
-            android:lines="1"
-            android:textColor="@color/text_icon"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:maxLines="1" />
+            style="@style/map_distanceinfo"/>
 
         <include layout="@layout/map_distanceinfo" />
 
