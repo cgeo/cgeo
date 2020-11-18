@@ -588,7 +588,7 @@
     <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
     <string name="init_choose_list">Klausti sąrašo</string>
     <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
-    <string name="init_listdisplay">Papildomas sąrašas</string>
+    <string name="init_listdisplay">Papildomas sąrašai</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Sąraše rodyti kryptį į slėptuvę</string>
     <!-- backup / restore -->
@@ -1050,10 +1050,12 @@
     <string name="init_longtap_map">Ilgas paspaudimas ant žemėlapio</string>
     <string name="init_summary_longtap_map">Įjungti ilgą paspaudimą ant žemėlapio piktogramos (asmeninio maršruto kūrimui) ar ant tuščios vietos žemėlapyje (sukurti vartotojo slėptuvę)</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
+    <string name="clear_goto_history_title">Valyti Eiti į istoriją</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
     <string name="cc_hint_seconds">sekundės</string>
+    <string name="lowercase">mažosios raidės</string>
     <!-- editor dialog -->
     <!-- file list base -->
     <string name="file_searching_in">Ieškoma failų\n</string>
@@ -1157,15 +1159,15 @@
     <string name="map_circles_show">Rodyti apskritimus</string>
     <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
     <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
-    <string name="map_archived_hide">Slėpti išjungtas slėptuves</string>
-    <string name="map_hidewp_original">Slėpti originalius papildomus taškus</string>
+    <string name="map_archived_hide">Slėpti archyvuotas slėptuves</string>
+    <string name="map_hidewp_original">Slėpti originalius taškus</string>
     <string name="map_hidewp_parking">Slėpti parkingo taškus</string>
     <string name="map_hidewp_visited">Slėpti aplankytus taškus</string>
     <string name="map_hide_track">Slėpti asmenini kelią</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_visited">Slėpti aplankytus taškus žemėlapyje</string>
+    <string name="init_summary_hidewp_visited">Slėpti aplankytus papildomus taškus žemėlapyje</string>
     <string name="map_theme_select">Pasirinkti žemėlapio temą</string>
     <string name="map_theme_options">Temos parinktys</string>
     <string name="map_language">Žemėlapio kalba</string>
@@ -1734,7 +1736,7 @@
     <string name="individual_route_removed">pašalinta iš maršruto</string>
     <string name="individual_route_error_toggling_waypoint">klaida perjungiant papildomą tašką</string>
     <string name="individual_route_error_single_waypoint_mode">Negalima vieno papildomo taško režimu</string>
-    <string name="map_sort_individual_route">Rūšiuoti asmeninį maršrutą</string>
+    <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
@@ -1771,11 +1773,11 @@
     <string name="unit_yd">jardai</string>
     <string name="unit_mi">mylios</string>
     <!-- switch settings -->
-    <string name="switch_off">Išjungti</string>
-    <string name="switch_on">Įjungti</string>
+    <string name="switch_off">Išjungta</string>
+    <string name="switch_on">Įjungta</string>
     <string name="switch_manual">Rankiniu būdu</string>
     <string name="switch_auto">Automatiškai</string>
-    <string name="switch_default">numatytasis</string>
+    <string name="switch_default">(numatyta)</string>
     <!-- view settings -->
     <string name="view_settings">Atvaizdavimo nustatymai</string>
     <string name="delete_setting">Išvalyti nustatymus</string>
