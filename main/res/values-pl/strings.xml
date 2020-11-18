@@ -1279,7 +1279,7 @@
     <string name="do_unknown">Nieznana</string>
     <string name="do_auto">Automatycznie</string>
     <string name="do_flat">Płaskie</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Pionowa</string>
+    <string name="do_upright">Pionowa</string>
     <!-- license -->
     <string name="license">Licencja</string>
     <string name="license_show">Pokaż licencję</string>

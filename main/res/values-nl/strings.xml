@@ -1261,7 +1261,7 @@
     <string name="do_unknown">Onbekend</string>
     <string name="do_auto">Automatisch</string>
     <string name="do_flat">Plat</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Rechtop</string>
+    <string name="do_upright">Rechtop</string>
     <!-- license -->
     <string name="license">Licentie</string>
     <string name="license_show">Toon licentie</string>

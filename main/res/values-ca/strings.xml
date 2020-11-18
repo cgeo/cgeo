@@ -1262,7 +1262,7 @@
     <string name="do_unknown">Desconegut</string>
     <string name="do_auto">Auto</string>
     <string name="do_flat">Pla</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Vertical</string>
+    <string name="do_upright">Vertical</string>
     <!-- license -->
     <string name="license">Llicència</string>
     <string name="license_show">Mostra la llicència</string>
