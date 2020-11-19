@@ -1239,7 +1239,7 @@
     <string name="do_unknown">Inconnu</string>
     <string name="do_auto">Auto</string>
     <string name="do_flat">à plat</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">droit</string>
+    <string name="do_upright">droit</string>
     <!-- license -->
     <string name="license">Licence</string>
     <string name="license_show">Afficher la licence</string>

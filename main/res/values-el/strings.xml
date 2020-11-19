@@ -1261,7 +1261,7 @@
     <string name="do_unknown">Άγνωστος</string>
     <string name="do_auto">Αυτόματα</string>
     <string name="do_flat">Επίπεδο</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Κατακόρυφος</string>
+    <string name="do_upright">Κατακόρυφος</string>
     <!-- license -->
     <string name="license">Άδεια χρήσης</string>
     <string name="license_show">Εμφάνιση άδειας χρήσης</string>

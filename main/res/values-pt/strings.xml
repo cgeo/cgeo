@@ -1260,7 +1260,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="do_unknown">Desconhecido</string>
     <string name="do_auto">Automático</string>
     <string name="do_flat">Horizontal</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Vertical</string>
+    <string name="do_upright">Vertical</string>
     <!-- license -->
     <string name="license">Licença</string>
     <string name="license_show">Mostrar licença</string>
