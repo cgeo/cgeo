@@ -412,7 +412,7 @@
     <style name="map_distanceinfo">
         <item name="android:layout_marginRight">-2dp</item>
         <item name="android:paddingTop">4dp</item>
-        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_height">28dp</item>
         <item name="android:background">@drawable/icon_bcg</item>
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_horizontal</item>
@@ -427,6 +427,8 @@
     <style name="map_distanceinfo_supersize" parent="map_distanceinfo">
         <item name="android:layout_marginLeft">-2dp</item>
         <item name="android:textSize">72sp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:layout_marginBottom">-10dp</item>
     </style>
 
     <!-- about c:geo contributors style -->
