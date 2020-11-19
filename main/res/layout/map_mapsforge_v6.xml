@@ -21,17 +21,6 @@
             android:enabled="true"
             android:keepScreenOn="true" />
 
-        <TextView
-            android:id="@+id/target"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="-2dp"
-            android:layout_marginRight="92dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_width="wrap_content"
-            style="@style/map_distanceinfo"/>
-
         <include layout="@layout/map_distanceinfo" />
 
         <ImageView
