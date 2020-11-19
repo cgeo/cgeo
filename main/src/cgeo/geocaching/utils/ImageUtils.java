@@ -248,7 +248,7 @@ public final class ImageUtils {
         final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(filePath);
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX <= 0 ? sizeOnlyOptions.outWidth : maxX, maxY <= 0 ? sizeOnlyOptions.outHeight : maxY);
-        final int sampleSize = myMaxXY / maxXY;
+        final int sampleSize = maxXY <= 0 ? 1 : myMaxXY / maxXY;
         final BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
         if (sampleSize > 1) {
             sampleOptions.inSampleSize = sampleSize;
