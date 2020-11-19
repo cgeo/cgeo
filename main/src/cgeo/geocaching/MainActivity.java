@@ -281,12 +281,10 @@ public class MainActivity extends AbstractActionBarActivity {
         // Disable the up navigation for this activity
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
 
             // show c:geo logo
-            actionBar.setLogo(R.drawable.cgeo_actionbar_squircle);
-            actionBar.setDisplayUseLogoEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_transparent_example));
         }
