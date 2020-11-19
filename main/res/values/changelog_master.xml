@@ -3,9 +3,16 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly builds:</h1>
-<h4>Topic:</h4>
+<h4>Map:</h4>
 <ul>
-<li>Item</li>
+<li></li>
+</ul>
+
+<h4>Other:</h4>
+<ul>
+<li>Change: Custom tab implementation instead of internal browser</li>
+<li>New: Ask for filename on individual route export</li>
+<li>Fix: Open about activity on click at c:geo\'s logo</li>
 </ul>
 </div>]]></Data>
   </string>
