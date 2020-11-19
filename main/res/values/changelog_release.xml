@@ -20,6 +20,7 @@ There are no known issues for using c:geo with Android 11. If you notice any pro
 <li>Fix: Crash on Google Maps map being put into the background</li>
 <li>Fix: Global filter in \"live map\" mode for user defined caches</li>
 <li>Fix: Too many server requests on \"live map\" movements</li>
+<li>Fix: Added confirmation and info dialog before map download</li>
 <li>New: Added attribution to contributors on OpenStreetMap maps</li>
 <li>New: Added option to show big smileys for found caches</li>
 <li>New: Enlarge display of distance to current navigation target by tapping on it</li>
