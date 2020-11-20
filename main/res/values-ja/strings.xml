@@ -695,7 +695,7 @@
     <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンをロングタップすると起動できます</string>
     <string name="init_navigation_menu_description">キャッシュまたはウェイポイントのナビゲーションメニューに表示するナビゲーション方法を選択できます。未インストールのツールは選択できません</string>
     <string name="init_debug_title">デバッグ情報</string>
-    <string name="init_debug_note">c:geoは多くのデバッグ情報を作成することができます。この設定を有効にするとc:geoの安定性に影響を与えます。開発者にログを送信するように求められた場合にのみお勧めします。通常時は無効にして下さい!</string>
+    <string name="init_debug_note">c:geoは多くのデバッグ情報を作成することができます。この設定を有効にするとc:geoの安定性に影響を与えます。開発者にログを送信するよう求められた場合のみお勧めします。通常時は無効にして下さい!</string>
     <string name="init_debug">デバッグログを有効化</string>
     <string name="init_dbonsdcard_title">データベースの保存場所</string>
     <string name="init_dbonsdcard_note">c:geoのデータベースはシステム内部ストレージまたはユーザーストレージのフォルダに保存することができます。 ユーザーストレージに格納するとメモリを少し解放することができますがパフォーマンスが悪化することがあます。またストレージにアクセスできないかデータベースファイルを削除した場合にはc:geoは動作しなくなります</string>
@@ -729,7 +729,7 @@
     <string name="init_memory_dump">メモリ・ダンプ</string>
     <string name="init_memory_dumped">%sへメモリがダンプされた</string>
     <string name="init_hardware_acceleration_title">ハードウェアアクセラレーション機能</string>
-    <string name="init_hardware_acceleration_note">ハードウェアアクセラレーション機能は画面表示を高速化します。しかし一部のデバイスではAndroidオペレーティングシステムのバグのせいで一部のテキスト(特に太字の文字)がぼやけて表示されます。これが発生する場合はハードウェアアクセラレーションを無効にしてください</string>
+    <string name="init_hardware_acceleration_note">ハードウェアアクセラレーション機能は画面表示を高速化します。しかし一部のデバイスではAndroidオペレーティングシステムのバグのせいでテキストの一部分(特に太字の文字)がぼやけて表示されます。これが発生する場合はハードウェアアクセラレーションを無効にしてください</string>
     <string name="init_hardware_acceleration">ハードウェアアクセラレーションを有効化</string>
     <string name="settings_open_website">Webサイトを開く</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org</string>
@@ -1755,6 +1755,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmanager_not_available">地図ファイルをダウンロードできません。システムのダウンロードマネージャーが利用できません</string>
     <string name="download_started">バックグラウンドでダウンロードを開始しました</string>
     <string name="downloadmap_target_not_writable">「%s」は書き込みができません。ダウンロードした地図ファイルはシステムのダウンロードフォルダに保存され、マップフォルダに手動で移動する必要があります</string>
+    <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
+    <string name="downloadmap_confirmation">地図ファイル「%1$s」をダウンロードしますか?\n\nネットワーク接続によっては長時間かかり通信料が高額になる場合があります。\n\nファイルサイズ:%2$s</string>
+    <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>
