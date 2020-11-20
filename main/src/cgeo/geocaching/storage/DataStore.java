@@ -709,7 +709,7 @@ public class DataStore {
         return currentBackupFile;
     }
 
-    public static String backupDatabaseInternal(final File backupDir) {
+    public static File backupDatabaseInternal(final File backupDir) {
         final long timestamp = System.currentTimeMillis();
         final File target = getBackupFileInternal(backupDir, false);
         closeDb();
@@ -723,7 +723,7 @@ public class DataStore {
 
         Log.i("Database was copied to " + target);
         target.setLastModified(timestamp);
-        return target.getPath();
+        return target;
     }
 
     /**

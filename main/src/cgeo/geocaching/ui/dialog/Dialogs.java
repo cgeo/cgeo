@@ -642,9 +642,25 @@ public final class Dialogs {
 
     /**
      * Standard message box + additional neutral button.
+     *  @param context
+     *            activity hosting the dialog
+     * @param msg
+     *            dialog message
+     * @param neutralTextButton
+ *            Text for the neutral button
+     * @param neutralListener
+     */
+    public static void messageNeutral(final Activity context, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
+        messageNeutral(context, null, msg, neutralTextButton, neutralListener);
+    }
+
+    /**
+     * Standard message box + additional neutral button.
      *
      * @param context
      *            activity hosting the dialog
+     * @param title
+     *            dialog title
      * @param msg
      *            dialog message
      * @param neutralTextButton
@@ -652,12 +668,17 @@ public final class Dialogs {
      * @param neutralListener
      *            listener of the neutral button
      */
-    public static AlertDialog.Builder messageNeutral(final Activity context, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
+    public static AlertDialog.Builder messageNeutral(final Activity context, @Nullable final String title, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
         final AlertDialog.Builder builder = newBuilder(context);
         final AlertDialog dialog = builder.setMessage(msg)
-                .setPositiveButton(android.R.string.ok, null)
-                .setNeutralButton(neutralTextButton, neutralListener)
-                .create();
+            .setPositiveButton(android.R.string.ok, null)
+            .setNeutralButton(neutralTextButton, neutralListener)
+            .create();
+
+        if (title != null) {
+            dialog.setTitle(title);
+        }
+
         dialog.setOwnerActivity(context);
         dialog.show();
         return builder;

@@ -638,6 +638,7 @@
     <string name="init_backup">Backup caches / waypoints</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Backup finished</string>
+    <string name="init_backup_backup_failed">Backup failed</string>
     <string name="init_backup_now">Start backup</string>
     <string name="init_backup_running">Creating backup of cache database…</string>
     <string name="init_backup_restore">Restore</string>
@@ -677,6 +678,7 @@
     <string name="init_backup_settings_backup_full_confirm">Do you want to store sensitive account related data? Those may be readable by other applications.</string>
     <string name="settings_savingerror">Error saving settings</string>
     <string name="settings_saved">Settings successfully saved to:</string>
+    <string name="backup_saved">Backup was successfully saved to:</string>
     <string name="init_backup_settings_restore">Restore settings</string>
     <string name="settings_readingerror">Error reading settings</string>
     <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
