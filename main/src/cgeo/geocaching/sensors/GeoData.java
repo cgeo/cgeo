@@ -116,4 +116,8 @@ public class GeoData extends Location {
         return null;
     }
 
+    public static boolean isArtificialLocationProvider(final String provider) {
+        return provider.equals(INITIAL_PROVIDER) || provider.equals(HOME_PROVIDER);
+    }
+
 }
