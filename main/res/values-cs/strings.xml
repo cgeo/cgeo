@@ -1831,6 +1831,9 @@
     <string name="downloadmanager_not_available">Soubor s mapou nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
     <string name="downloadmap_target_not_writable">Cíl \"%s\" není zapisovatelný - stažený mapový soubor bude uložen v systémovém adresáři pro stahování souborů a musí být přesunut ručně do adresáře s mapami.</string>
+    <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
+    <string name="downloadmap_confirmation">Stáhnout mapu \"%1$s\"?\n\nMůže to chvíli trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.\n\nInformace o velikosti: %2$s</string>
+    <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
