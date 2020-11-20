@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">Sorry, c:geo kan breedtegraad of lengtegraad niet verwerken.</string>
     <string name="err_rendertheme_file_unreadable">Het geselecteerde render thema kan niet worden geladen. Er wordt teruggekeerd naar het ingebouwde thema.</string>
     <string name="err_rendertheme_invalid">Het geselecteerde render thema is niet geldig voor deze versie van mapsforge. Er wordt teruggekeerd naar het ingebouwde thema.</string>
+    <string name="err_invalid_filename_char">Karakter \'%c\' niet toegestaan</string>
     <string name="warn_save_nothing">Er is niets op te slaan.</string>
     <string name="warn_no_cache_coord">Er is geen cache met deze coördinaten.</string>
     <string name="warn_no_coordinates">Geen coördinaten opgegeven.</string>
@@ -946,6 +947,7 @@
     <string name="cache_menu_map_ext">Andere externe apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
+    <string name="cache_menu_open_with">Open met…</string>
     <string name="cache_menu_visit">Log bezoek</string>
     <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
     <string name="cache_menu_visit_offline">Snelle offline log</string>
@@ -1313,6 +1315,7 @@
     <string name="export_modifiedcoords_success">Upload geslaagd</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Upload voltooid: %1$d is mislukt / %2$d ok</string>
     <string name="export_modifiedcoords_error">Upload mislukt</string>
+    <string name="filename_without_extension">Bestandsnaam (zonder extensie)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Honden toegestaan</string>
     <string name="attribute_dogs_no">Honden niet toegestaan</string>
@@ -1785,6 +1788,9 @@
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
     <string name="downloadmap_target_not_writable">Doel \"%s\" is niet schrijfbaar - gedownload kaartbestand zal worden opgeslagen in de download map en dient handmatig te worden verplaatst naar de \"map\" map.</string>
+    <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
+    <string name="downloadmap_confirmation">Kaart downloaden \"%1$s\"?\n\nDit kan heel wat tijd in beslag nemen en aanzienlijke kosten met zich meebrengen, afhankelijk van je netwerkverbinding.\n\nGrootte info: %2$s</string>
+    <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
