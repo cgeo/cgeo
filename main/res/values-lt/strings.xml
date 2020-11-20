@@ -1268,7 +1268,7 @@
     <string name="do_unknown">Nežinoma</string>
     <string name="do_auto">Automatiškai</string>
     <string name="do_flat">Horizontalus</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">Stačiai</string>
+    <string name="do_upright">Stačiai</string>
     <!-- license -->
     <string name="license">Licencija</string>
     <string name="license_show">Rodyti licenciją</string>
