@@ -12,6 +12,7 @@
 <ul>
 <li>Change: Custom tab implementation instead of internal browser</li>
 <li>New: Ask for filename on individual route export</li>
+<li>New: Added share option after creating a backup</li>
 <li>Fix: Open about activity on click at c:geo\'s logo</li>
 </ul>
 </div>]]></Data>
