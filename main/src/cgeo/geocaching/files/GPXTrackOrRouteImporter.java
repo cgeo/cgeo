@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -48,6 +49,8 @@ public class GPXTrackOrRouteImporter {
         }, () -> {
             if (!success.get()) {
                 Toast.makeText(context, R.string.load_track_error, Toast.LENGTH_SHORT).show();
+                Settings.setTrackFile(null);
+                callback.updateRoute(null);
             }
         });
     }
