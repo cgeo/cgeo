@@ -16,6 +16,8 @@ import androidx.annotation.StringRes;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -91,6 +93,25 @@ public class ShareUtils {
 
     public static Intent getShareLinkIntent(final String subject, final String url) {
         return createShareIntentInternal(null, TYPE_TEXT, subject, StringUtils.defaultString(url), null);
+    }
+
+    public static void shareMultipleFiles(final Context context, @NonNull final List<File> files, @StringRes final int titleResourceId) {
+        final ArrayList<Uri> uris = new ArrayList<Uri>();
+
+        try {
+            for (File file : files) {
+                uris.add(FileProvider.getUriForFile(context, context.getString(R.string.file_provider_authority), file));
+            }
+
+            final Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+            shareIntent.setType("*/*");
+            shareInternal(context, shareIntent, titleResourceId);
+
+        } catch (Exception e) {
+            Log.e("error on sharing", e);
+        }
     }
 
     public static void openUrl(final Context context, final String url) {

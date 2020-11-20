@@ -328,22 +328,10 @@ public class BackupUtils extends Activity {
             Toast.makeText(activityContext, R.string.init_backup_folder_exists_error, Toast.LENGTH_LONG).show();
             return;
         }
-
-        final String message = "\n\n" + createSettingsBackupInternal(backupDir, Settings.getBackupLoginData());
-
-        if (DataStore.getAllCachesCount() != 0) {
-            createDatabaseBackupInternal(backupDir, message, runAfterwards);
-        } else {
-            Dialogs.message(activityContext, R.string.init_backup_finished, message.trim());
-            if (runAfterwards != null) {
-                runAfterwards.run();
-            }
-        }
+        createDatabaseBackupInternal(backupDir, createSettingsBackupInternal(backupDir, Settings.getBackupLoginData()), runAfterwards);
     }
 
-    private String createSettingsBackupInternal(final File backupDir, final Boolean fullBackup) {
-        String exitMessage;
-
+    private File createSettingsBackupInternal(final File backupDir, final Boolean fullBackup) {
         final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
         final Map<String, ?> keys = prefs.getAll();
         final HashSet<String> ignoreKeys = new HashSet<>();
@@ -400,34 +388,56 @@ public class BackupUtils extends Activity {
             final String dataWrite = writer.toString();
             file.write(dataWrite.getBytes());
             file.close();
-            exitMessage = activityContext.getString(R.string.settings_saved) + "\n" + backupfn;
+            return backupfn;
         } catch (IllegalArgumentException | IllegalStateException | IOException e) {
             final String error = e.getMessage();
             if (null != error) {
                 Log.e("error writing settings file: " + error);
             }
-            exitMessage = activityContext.getString(R.string.settings_savingerror);
+            return null;
         }
 
-        return exitMessage;
     }
 
-    private void createDatabaseBackupInternal(final File backupDir, final String additionalText, final Runnable runAfterwards) {
+    private void createDatabaseBackupInternal(final File backupDir, final File settingsFile, final Runnable runAfterwards) {
         final ProgressDialog dialog = ProgressDialog.show(activityContext,
                 activityContext.getString(R.string.init_backup),
                 activityContext.getString(R.string.init_backup_running), true, false);
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.backupDatabaseInternal(backupDir), backupFileName -> {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.backupDatabaseInternal(backupDir), backupFile -> {
             dialog.dismiss();
-            Dialogs.message(activityContext,
-                    R.string.init_backup_finished,
-                    (backupFileName != null
-                            ? activityContext.getString(R.string.init_backup_success)
-                            + "\n" + backupFileName
-                            : activityContext.getString(R.string.init_backup_failed)) + additionalText);
+            showBackupCompletedStatusDialog(backupDir, settingsFile, backupFile);
             if (runAfterwards != null) {
                 runAfterwards.run();
             }
         });
+    }
+
+    private void showBackupCompletedStatusDialog(final File backupDir, final File settingsFile, final File databaseFile) {
+        String msg;
+        final String title;
+        if (settingsFile != null && databaseFile != null) {
+            title = activityContext.getString(R.string.init_backup_finished);
+            msg = activityContext.getString(R.string.backup_saved) + "\n" + backupDir + "/";
+        } else {
+            title = activityContext.getString(R.string.init_backup_backup_failed);
+
+            if (databaseFile != null) {
+                msg = activityContext.getString(R.string.init_backup_success) + "\n" + databaseFile;
+            } else {
+                msg = activityContext.getString(R.string.init_backup_failed);
+            }
+
+            msg += "\n\n";
+
+            if (settingsFile != null) {
+                msg += activityContext.getString(R.string.settings_saved) + "\n" + settingsFile;
+            } else {
+                msg += activityContext.getString(R.string.settings_savingerror);
+            }
+        }
+
+        Dialogs.messageNeutral(activityContext, title, msg, R.string.cache_share_field,
+            (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, Arrays.asList(settingsFile, databaseFile), R.string.init_backup_backup));
     }
 
 
