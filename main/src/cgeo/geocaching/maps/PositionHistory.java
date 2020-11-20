@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 
@@ -53,6 +54,9 @@ public class PositionHistory {
             return;
         }
         if (coordinates.getLatitude() == 0.0 && coordinates.getLongitude() == 0.0) {
+            return;
+        }
+        if (GeoData.isArtificialLocationProvider(coordinates.getProvider())) {
             return;
         }
         if (history.isEmpty()) {
