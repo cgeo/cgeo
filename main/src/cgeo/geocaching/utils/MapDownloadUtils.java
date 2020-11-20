@@ -113,7 +113,7 @@ public class MapDownloadUtils {
                 if (canWrite) {
                     callback.run(mapFileDirectory, true);
                 } else if (beforeDownload) {
-                    Dialogs.confirm(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), "Continue",
+                    Dialogs.confirm(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), activity.getString(R.string.button_continue),
                             (dialog, which) -> callback.run(mapFileDirectory, true), dialog -> callback.run(mapFileDirectory, false));
                 } else {
                     Dialogs.message(activity, activity.getString(R.string.downloadmap_title), String.format(activity.getString(R.string.downloadmap_target_not_writable), mapFileDirectory), activity.getString(android.R.string.ok), (dialog, which) -> callback.run(mapFileDirectory, false));
