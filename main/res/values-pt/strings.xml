@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">O c:geo não conseguiu extrair a latitude ou longitude.</string>
     <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema selecionado. A reverter para o tema predefinido.</string>
     <string name="err_rendertheme_invalid">O tema selecionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
+    <string name="err_invalid_filename_char">Carácter \'%c\' não permitido</string>
     <string name="warn_save_nothing">Não há nada para guardar.</string>
     <string name="warn_no_cache_coord">Não há caches com coordenadas.</string>
     <string name="warn_no_coordinates">Nenhumas coordenadas fornecidas.</string>
@@ -945,6 +946,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_map_ext">Outras aplicações externas</string>
     <string name="cache_menu_streetview">Vista de rua</string>
     <string name="cache_menu_browser">Abrir no browser</string>
+    <string name="cache_menu_open_with">Abrir com…</string>
     <string name="cache_menu_visit">Registar visita</string>
     <string name="cache_log_too_long">O c:geo não pôde enviar o seu registo por ser muito longo. Mas obrigado por tentar escrever um registo tão extenso ;-)</string>
     <string name="cache_menu_visit_offline">Registo rápido sem ligação</string>
@@ -1312,6 +1314,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_modifiedcoords_success">Carregamento com êxito</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Carregamento concluído: %1$d falhou / %2$d ok</string>
     <string name="export_modifiedcoords_error">Falha no carregamento</string>
+    <string name="filename_without_extension">Nome do ficheiro (sem extensão)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cães permitidos</string>
     <string name="attribute_dogs_no">Cães não permitidos</string>
@@ -1779,6 +1782,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="downloadmanager_not_available">Mapa não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
     <string name="downloadmap_target_not_writable">O destino \"%s\" não aceita gravação - o mapa transferido será armazenado no directório de transferências do sistema e tem que ser movido manualmente para o directório dos mapas.</string>
+    <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
+    <string name="downloadmap_confirmation">Transferir o mapa \"%1$s\"?\n\nIsso pode levar algum tempo e pode resultar num custo significativo, dependendo da sua ligação à rede.\n\nInformação de tamanho: %2$s</string>
+    <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
