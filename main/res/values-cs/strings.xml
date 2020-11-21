@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">c:geo nemůže dopočítat zeměpisnou šířku nebo délku.</string>
     <string name="err_rendertheme_file_unreadable">Vybraný styl vykreslování nelze načíst. Bude použit výchozí styl.</string>
     <string name="err_rendertheme_invalid">Vybraný styl vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí styl.</string>
+    <string name="err_invalid_filename_char">Znak %c není povolený</string>
     <string name="warn_save_nothing">Není nic k uložení.</string>
     <string name="warn_no_cache_coord">Není k dispozici žádná keš se souřadnicemi.</string>
     <string name="warn_no_coordinates">Souřadnice nezískány</string>
@@ -605,6 +606,7 @@
     <string name="init_backup">Zálohovat kešky / trasové body</string>
     <string name="init_backup_backup">Zálohovat</string>
     <string name="init_backup_finished">Zálohování dokončeno</string>
+    <string name="init_backup_backup_failed">Zálohování se nezdařilo</string>
     <string name="init_backup_now">Spustit zálohování</string>
     <string name="init_backup_running">Vytváření zálohy databáze keší…</string>
     <string name="init_backup_restore">Obnovit</string>
@@ -643,6 +645,7 @@
     <string name="init_backup_settings_backup_full_confirm">Chcete uložit důvěrné údaje o účtu? Jiné aplikace je mohou přečíst.</string>
     <string name="settings_savingerror">Chyba při ukládaní nastavení</string>
     <string name="settings_saved">Nastavení bylo úspěšně uloženo do:</string>
+    <string name="backup_saved">Záloha byla úspěšně uložena do:</string>
     <string name="init_backup_settings_restore">Obnovit nastavení</string>
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
@@ -962,6 +965,7 @@
     <string name="cache_menu_map_ext">Další externí aplikace</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
+    <string name="cache_menu_open_with">Otevřít pomocí…</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
     <string name="cache_log_too_long">Aplikace c:geo nemůže odeslat váš log, protože je příliš dlouhý. Děkujeme ale, že jste se pokusili napsat takto obsáhlý log ;-)</string>
     <string name="cache_menu_visit_offline">Rychlý offline log</string>
@@ -1333,6 +1337,7 @@
     <string name="export_modifiedcoords_success">Úspěšně nahráno</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Nahrávání dokončeno: %1$d z / %2$d ok</string>
     <string name="export_modifiedcoords_error">Nahrávání selhalo</string>
+    <string name="filename_without_extension">Název souboru (bez přípony)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Vstup se psy povolen</string>
     <string name="attribute_dogs_no">Vstup se psy zakázán</string>
@@ -1834,6 +1839,7 @@
     <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
     <string name="downloadmap_confirmation">Stáhnout mapu \"%1$s\"?\n\nMůže to chvíli trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.\n\nInformace o velikosti: %2$s</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
+    <string name="button_continue">Pokračovat</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
