@@ -604,6 +604,7 @@
     <string name="init_backup">Back-up caches / waypoints</string>
     <string name="init_backup_backup">Back-up</string>
     <string name="init_backup_finished">Back-up voltooid</string>
+    <string name="init_backup_backup_failed">Back-up mislukt</string>
     <string name="init_backup_now">Back-up starten</string>
     <string name="init_backup_running">Backup aan het maken van de cache-database…</string>
     <string name="init_backup_restore">Herstel</string>
@@ -642,6 +643,7 @@
     <string name="init_backup_settings_backup_full_confirm">Wil je gevoelige account gerelateerde gegevens opslaan? Deze zijn mogelijk leesbaar voor andere applicaties.</string>
     <string name="settings_savingerror">Fout bij opslaan instellingen</string>
     <string name="settings_saved">Instellingen succesvol opgeslagen naar:</string>
+    <string name="backup_saved">Back-up is met succes opgeslagen naar:</string>
     <string name="init_backup_settings_restore">Instellingen terugzetten</string>
     <string name="settings_readingerror">Fout bij het lezen van de instellingen</string>
     <string name="settings_restart">c:geo dient nu opnieuw gestart te worden om de geladen instellingen uit te voeren</string>
@@ -1791,6 +1793,7 @@
     <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
     <string name="downloadmap_confirmation">Kaart downloaden \"%1$s\"?\n\nDit kan heel wat tijd in beslag nemen en aanzienlijke kosten met zich meebrengen, afhankelijk van je netwerkverbinding.\n\nGrootte info: %2$s</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
+    <string name="button_continue">Doorgaan</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
