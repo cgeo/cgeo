@@ -1458,7 +1458,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_inside_no">囲まれた空間内ではない</string>
     <string name="attribute_in_water_yes">水中</string>
     <string name="attribute_in_water_no">水中ではない</string>
-    <string name="attribute_no_gps_yes">GPS使用不可(レターボックス,コンパスが不安定など)</string>
+    <string name="attribute_no_gps_yes">GPS使用不可(レターボックス、コンパスが不安定など)</string>
     <string name="attribute_no_gps_no">GPS使用可</string>
     <string name="attribute_overnight_yes">宿泊必要</string>
     <string name="attribute_overnight_no">宿泊不要</string>
