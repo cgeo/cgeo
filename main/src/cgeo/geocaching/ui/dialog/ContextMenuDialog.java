@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +109,7 @@ public class ContextMenuDialog {
                     }
 
                     final int px = Math.round(40 * context.getResources().getDisplayMetrics().density);
-                    final Drawable d = context.getResources().getDrawable(iconId, context.getTheme());
+                    final Drawable d = ResourcesCompat.getDrawable(context.getResources(), iconId, context.getTheme());
                     d.setBounds(new Rect(0, 0, px, px));
                     tv.setCompoundDrawables(d, null, null, null);
 

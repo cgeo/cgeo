@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
@@ -58,6 +59,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         addEmptyLogsHeader();
     }
 
+    @SuppressLint("SetTextI18n")
     private void addLogCountsHeader() {
         final Map<LogType, Integer> logCounts = getCache().getLogCounts();
         if (logCounts != null) {

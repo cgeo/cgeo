@@ -95,7 +95,7 @@ public final class CacheDetailsCreator {
         final TextView valueView = layout.findViewById(R.id.value);
 
         nameView.setText(activity.getString(nameId));
-        valueView.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + activity.getString(R.string.cache_rating_of) + ' ' + String.format(Locale.getDefault(), "%d", max));
+        valueView.setText(String.format(Locale.getDefault(), activity.getString(R.string.cache_rating_of_new), value, max));
 
         final RatingBar layoutStars = layout.findViewById(R.id.stars);
         layoutStars.setNumStars(max);
@@ -150,6 +150,7 @@ public final class CacheDetailsCreator {
         return Sensors.getInstance().currentGeo().getCoords().distanceTo(target);
     }
 
+    @SuppressLint("SetTextI18n")
     public void addRating(final Geocache cache) {
         if (cache.getRating() > 0) {
             final RelativeLayout itemLayout = addStars(R.string.cache_rating, cache.getRating());

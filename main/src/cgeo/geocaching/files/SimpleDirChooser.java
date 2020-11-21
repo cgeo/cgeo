@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -115,6 +116,7 @@ public class SimpleDirChooser extends AbstractListActivity {
                 Environment.getExternalStorageDirectory();
     }
 
+    @SuppressLint("SetTextI18n")
     private void fill(final File dir) {
         lastPosition = -1;
         resetOkButton();

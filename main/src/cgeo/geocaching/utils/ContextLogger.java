@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.annotation.SuppressLint;
+
 import java.io.Closeable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,6 +19,7 @@ import java.util.Locale;
  */
 public class ContextLogger implements Closeable {
 
+    @SuppressLint("ConstantLocale")
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
     static {
         DATETIME_FORMAT.setTimeZone(Calendar.getInstance().getTimeZone());

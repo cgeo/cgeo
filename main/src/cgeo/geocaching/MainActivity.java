@@ -67,6 +67,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.appcompat.widget.SearchView.OnSuggestionListener;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.MenuItemCompat;
 
 import java.util.ArrayList;
@@ -286,7 +287,7 @@ public class MainActivity extends AbstractActionBarActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
             actionBar.setDisplayHomeAsUpEnabled(true);
 
-            actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_transparent_example));
+            actionBar.setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ab_transparent_example, getTheme()));
         }
 
         setContentView(R.layout.main_activity);

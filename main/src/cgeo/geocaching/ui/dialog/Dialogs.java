@@ -34,11 +34,13 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -619,7 +621,7 @@ public final class Dialogs {
 
         if (OneTimeDialogs.getStatus(dialogType, fallbackStatus) == OneTimeDialogs.DialogStatus.DIALOG_SHOW) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
-            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType, Observable.just(context.getResources().getDrawable(R.drawable.ic_info_blue)), false, null);
+            internalOneTimeMessage(context, getString(dialogType.messageTitle), getString(dialogType.messageText), dialogType, Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
         }
     }
 
@@ -649,6 +651,7 @@ public final class Dialogs {
      * @param neutralTextButton
  *            Text for the neutral button
      * @param neutralListener
+     *            listener for neutral button
      */
     public static void messageNeutral(final Activity context, final String msg, final int neutralTextButton, final OnClickListener neutralListener) {
         messageNeutral(context, null, msg, neutralTextButton, neutralListener);

@@ -181,6 +181,7 @@ public class MapDownloadSelectorActivity extends AbstractActionBarActivity {
         }
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.mapdownloader_activity);
