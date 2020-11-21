@@ -2,27 +2,46 @@ package cgeo.geocaching.utils;
 
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 public class SettingsUtils {
 
     public enum SettingsType {
-        TYPE_STRING     ("string"),
-        TYPE_BOOLEAN    ("boolean"),
-        TYPE_INTEGER    ("integer"),
-        TYPE_INTEGER_COMPATIBILITY ("int"),     // for reading compatibility with early backups
-        TYPE_LONG       ("long"),
-        TYPE_FLOAT      ("float"),
-        TYPE_UNKNOWN    ("unknown");
+        TYPE_STRING     ("string", ""),
+        TYPE_BOOLEAN    ("boolean", "false"),
+        TYPE_INTEGER    ("integer", "0"),
+        TYPE_INTEGER_COMPATIBILITY ("int", "0"),     // for reading compatibility with early backups
+        TYPE_LONG       ("long", "0"),
+        TYPE_FLOAT      ("float", "0.0"),
+        TYPE_UNKNOWN    ("unknown", "");
 
         private final String id;
+        private final String defaultString;
 
-        SettingsType(final String id) {
+        SettingsType(final String id, final String defaultString) {
             this.id = id;
+            this.defaultString = defaultString;
         }
 
         public String getId() {
             return id;
+        }
+
+        public String getDefaultString() {
+            return defaultString;
+        }
+
+        public static List<String> getStringList() {
+            final List<String> result = new ArrayList<>();
+            for (final SettingsType type : values()) {
+                if (type != TYPE_INTEGER_COMPATIBILITY && type != TYPE_UNKNOWN) {
+                    result.add(type.id);
+                }
+            }
+            return result;
         }
     }
 

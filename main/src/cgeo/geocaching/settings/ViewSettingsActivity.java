@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.SettingsUtils;
+import static cgeo.geocaching.utils.SettingsUtils.getType;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -19,21 +20,25 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class ViewSettingsActivity extends AbstractActivity {
@@ -67,7 +72,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         for (Map.Entry<String, ?> entry : keys.entrySet()) {
             final Object value = entry.getValue();
             final String key = entry.getKey();
-            final SettingsUtils.SettingsType type = SettingsUtils.getType(value);
+            final SettingsUtils.SettingsType type = getType(value);
             items.add(new KeyValue(key, value.toString(), type));
         }
         Collections.sort(items, (o1, o2) -> o1.key.compareTo(o2.key));
@@ -192,7 +197,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         editText.setInputType(inputType);
         editText.setText(keyValue.value);
 
-        new AlertDialog.Builder(this)
+        Dialogs.newBuilder(this)
             .setTitle(String.format(getString(R.string.edit_setting), key))
             .setView(editText)
             .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
@@ -214,27 +219,97 @@ public class ViewSettingsActivity extends AbstractActivity {
         ;
     }
 
+    private void addItem() {
+        final View layout = View.inflate(this, R.layout.view_settings_add, null);
+
+        final EditText preferenceNameEdit = layout.findViewById(R.id.preference_name);
+
+        final List<String> stringList = SettingsUtils.SettingsType.getStringList();
+        final RadioGroup rg = layout.findViewById(R.id.preference_type);
+        for (int i = 0; i < stringList.size(); i++) {
+            final RadioButton rb = new RadioButton(this);
+            rb.setText(stringList.get(i));
+            rg.addView(rb);
+        }
+
+        Dialogs.newBuilder(this)
+            .setTitle(R.string.add_setting)
+            .setView(layout)
+            .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+            .setPositiveButton(android.R.string.ok, (d, which) -> {
+                final String preferenceName = preferenceNameEdit.getText().toString().trim();
+                final int rbId = rg.getCheckedRadioButtonId();
+                if (rbId == -1) {
+                    Toast.makeText(this, R.string.add_setting_missing_type, Toast.LENGTH_SHORT).show();
+                } else {
+                    final SettingsUtils.SettingsType preferenceType = getType(((RadioButton) rg.findViewById(rbId)).getText().toString());
+                    if (StringUtils.isBlank(preferenceName)) {
+                        Toast.makeText(this, R.string.add_setting_missing_name, Toast.LENGTH_SHORT).show();
+                    } else if (findItem(preferenceName) != -1) {
+                        Toast.makeText(this, R.string.add_setting_already_exists, Toast.LENGTH_SHORT).show();
+                    } else {
+                        final KeyValue newItem = new KeyValue(preferenceName, preferenceType.getDefaultString(), preferenceType);
+                        final SharedPreferences.Editor editor = prefs.edit();
+                        try {
+                            SettingsUtils.putValue(editor, newItem.type, newItem.key, newItem.value);
+                            editor.apply();
+                            final int position = findPosition(newItem.key);
+                            debugAdapter.insert(newItem, position);
+                            editItem(position);
+                        } catch (XmlPullParserException e) {
+                            showToast(R.string.edit_setting_error_unknown_type);
+                        } catch (NumberFormatException e) {
+                            showToast(String.format(getString(R.string.edit_setting_error_invalid_data), preferenceName));
+                        }
+                    }
+                }
+            })
+            .create()
+            .show();
+    }
+
+    private int findItem(final String key) {
+        for (int i = 0; i < items.size(); i++) {
+            if (StringUtils.equals(items.get(i).key, key)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // position at which a new item would have to be inserted
+    private int findPosition(final String key) {
+        final int size = items.size();
+        for (int i = 0; i < size; i++) {
+            if (items.get(i).key.compareTo(key) >= 0) {
+                return i;
+            }
+        }
+        return size;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.view_settings, menu);
+        menu.findItem(R.id.view_settings_edit).setVisible(!editMode);
+        menu.findItem(R.id.view_settings_add).setVisible(editMode);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.view_settings_edit) {
-            if (editMode) {
-                editMode = false;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.view_settings_edit && !editMode) {
+            Dialogs.confirm(this, R.string.activate_editmode_title, R.string.activate_editmode_warning, (dialog, which) -> {
+                editMode = true;
+                invalidateOptionsMenu();
                 debugAdapter.notifyDataSetChanged();
-            } else {
-                Dialogs.confirm(this, R.string.activate_editmode_title, R.string.activate_editmode_warning, (dialog, which) -> {
-                    editMode = true;
-                    debugAdapter.notifyDataSetChanged();
-                });
-            }
-            return true;
+            });
+        } else if (itemId == R.id.view_settings_add && editMode) {
+            addItem();
+        } else {
+            return false;
         }
-        return false;
+        return true;
     }
-
 }
