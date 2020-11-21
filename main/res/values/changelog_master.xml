@@ -3,9 +3,10 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false"><Data><![CDATA[<div>
 <h1>Nightly builds:</h1>
+
 <h4>Map:</h4>
 <ul>
-<li></li>
+<li>Fix: Skip artificial track points in position history</li>
 </ul>
 
 <h4>Other:</h4>
@@ -13,6 +14,7 @@
 <li>Change: Custom tab implementation instead of internal browser</li>
 <li>New: Ask for filename on individual route export</li>
 <li>New: Added share option after creating a backup</li>
+<li>New: View settings: Added option to add new settings</li>
 <li>Fix: Open about activity on click at c:geo\'s logo</li>
 </ul>
 </div>]]></Data>
