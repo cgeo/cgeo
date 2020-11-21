@@ -604,6 +604,7 @@
     <string name="init_backup">Caches / Wegpunkte sichern</string>
     <string name="init_backup_backup">Sicherung</string>
     <string name="init_backup_finished">Sicherung abgeschlossen</string>
+    <string name="init_backup_backup_failed">Sicherung fehlgeschlagen</string>
     <string name="init_backup_now">Sicherung starten</string>
     <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
     <string name="init_backup_restore">Wiederherstellung</string>
@@ -642,6 +643,7 @@
     <string name="init_backup_settings_backup_full_confirm">Möchtest du sensible Anmeldedaten speichern? Sie könnten eventuell von anderen Apps gelesen werden.</string>
     <string name="settings_savingerror">Fehler beim Speichern der Einstellungen</string>
     <string name="settings_saved">Einstellungen erfolgreich gespeichert nach:</string>
+    <string name="backup_saved">Sicherung wurde erfolgreich gespeichert nach:</string>
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
