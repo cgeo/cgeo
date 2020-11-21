@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">緯度または経度の解析ができません</string>
     <string name="err_rendertheme_file_unreadable">選択した地図テーマファイルを読み込めませんでした。組み込みのものに戻します</string>
     <string name="err_rendertheme_invalid">選択した地図テーマファイルはこのMapsforgeバージョンには対応していません。組み込みのものに戻します</string>
+    <string name="err_invalid_filename_char">文字「%c」は使用できません</string>
     <string name="warn_save_nothing">保存すべきものはありません</string>
     <string name="warn_no_cache_coord">座標のあるキャッシュがありません</string>
     <string name="warn_no_coordinates">座標が入力されていません</string>
@@ -1249,7 +1250,7 @@
     <string name="do_unknown">不明</string>
     <string name="do_auto">自動</string>
     <string name="do_flat">水平</string>
-    <string name="do_upright" comment="do_upright&#10;The device is either in upright or flat orientation.">垂直</string>
+    <string name="do_upright">垂直</string>
     <!-- license -->
     <string name="license">ライセンス</string>
     <string name="license_show">ライセンスを表示</string>
@@ -1301,6 +1302,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="export_modifiedcoords_success">アップロードが成功しました</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">アップロードが完了しました: %1$d失敗/%2$d成功</string>
     <string name="export_modifiedcoords_error">アップロードに失敗しました</string>
+    <string name="filename_without_extension">ファイル名(拡張子除く)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">犬連れ可</string>
     <string name="attribute_dogs_no">犬連れ不可</string>
@@ -1755,6 +1757,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmanager_not_available">地図ファイルをダウンロードできません。システムのダウンロードマネージャーが利用できません</string>
     <string name="download_started">バックグラウンドでダウンロードを開始しました</string>
     <string name="downloadmap_target_not_writable">「%s」は書き込みができません。ダウンロードした地図ファイルはシステムのダウンロードフォルダに保存され、マップフォルダに手動で移動する必要があります</string>
+    <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
+    <string name="downloadmap_confirmation">地図ファイル「%1$s」をダウンロードしますか?\n\nネットワーク接続によっては長時間かかり通信料が高額になる場合があります。\n\nファイルサイズ:%2$s</string>
+    <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>

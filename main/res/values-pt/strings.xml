@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">O c:geo não conseguiu extrair a latitude ou longitude.</string>
     <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema selecionado. A reverter para o tema predefinido.</string>
     <string name="err_rendertheme_invalid">O tema selecionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
+    <string name="err_invalid_filename_char">Carácter \'%c\' não permitido</string>
     <string name="warn_save_nothing">Não há nada para guardar.</string>
     <string name="warn_no_cache_coord">Não há caches com coordenadas.</string>
     <string name="warn_no_coordinates">Nenhumas coordenadas fornecidas.</string>
@@ -945,6 +946,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_menu_map_ext">Outras aplicações externas</string>
     <string name="cache_menu_streetview">Vista de rua</string>
     <string name="cache_menu_browser">Abrir no browser</string>
+    <string name="cache_menu_open_with">Abrir com…</string>
     <string name="cache_menu_visit">Registar visita</string>
     <string name="cache_log_too_long">O c:geo não pôde enviar o seu registo por ser muito longo. Mas obrigado por tentar escrever um registo tão extenso ;-)</string>
     <string name="cache_menu_visit_offline">Registo rápido sem ligação</string>
@@ -1312,6 +1314,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="export_modifiedcoords_success">Carregamento com êxito</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Carregamento concluído: %1$d falhou / %2$d ok</string>
     <string name="export_modifiedcoords_error">Falha no carregamento</string>
+    <string name="filename_without_extension">Nome do ficheiro (sem extensão)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cães permitidos</string>
     <string name="attribute_dogs_no">Cães não permitidos</string>

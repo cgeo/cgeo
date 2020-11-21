@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">Το c:geo  δεν μπορεί να καταλάβει το γεωγραφικό πλάτος ή μήκος.</string>
     <string name="err_rendertheme_file_unreadable">Δεν πραγματοποιήθηκε η φόρτωση του συγκεκριμένου θέματος. Γίνεται επαναφορά στο αρχικό.</string>
     <string name="err_rendertheme_invalid">Το επιλεγμένο θέμα δεν είναι συμβατό με αυτή την έκδοση mapsforge. Επιστροφή στο ενσωματωμένο θέμα.</string>
+    <string name="err_invalid_filename_char">Ο χαρακτήρας \'%c\' δεν επιτρέπεται</string>
     <string name="warn_save_nothing">Δεν υπάρχει τίποτα να αποθηκευτεί.</string>
     <string name="warn_no_cache_coord">Δεν υπάρχει καμία κρύπτη με συντεταγμένες.</string>
     <string name="warn_no_coordinates">Δεν δόθηκαν συντεταγμένες.</string>
@@ -946,6 +947,7 @@
     <string name="cache_menu_map_ext">Άλλες εξωτερικές εφαρμογές</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
+    <string name="cache_menu_open_with">Άνοιγμα με…</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
     <string name="cache_log_too_long">Το c:geoδεν μπορεί να στείλει αυτή την καταγραφή λόγω μεγέθους. Αλλά μπράβο σας για το τόσο μεγάλο κείμενο ;-)</string>
     <string name="cache_menu_visit_offline">Γρήγορη καταγραφή εκτός σύνδεσης</string>
@@ -1313,6 +1315,7 @@
     <string name="export_modifiedcoords_success">Επιτυχής μεταφόρτωση</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Τέλος μεταφόρτωσης: %1$d αποτυχία %2$d εντάξει</string>
     <string name="export_modifiedcoords_error">Αποτυχία μεταμόρφωσης</string>
+    <string name="filename_without_extension">Όνομα αρχείου (χωρίς επέκταση)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Επιτρέπονται οι σκύλοι</string>
     <string name="attribute_dogs_no">Δεν επιτρέπονται οι σκύλοι</string>
