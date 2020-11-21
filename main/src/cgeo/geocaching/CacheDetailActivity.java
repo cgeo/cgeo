@@ -449,7 +449,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
             menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
-            menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint);
+            menu.findItem(R.id.menu_waypoint_delete).setVisible(!isOriginalWaypoint || selectedWaypoint.belongsToUserDefinedCache());
             final boolean hasCoords = selectedWaypoint.getCoords() != null;
             final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
             defaultNavigationMenu.setVisible(hasCoords);
