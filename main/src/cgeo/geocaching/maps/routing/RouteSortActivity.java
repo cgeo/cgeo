@@ -46,9 +46,8 @@ public class RouteSortActivity extends AbstractActivity {
     private ArrayList<RouteItem> routeItems;
     private DragSortListView listView;
     private boolean changed = false;
-    private int lastActivatedPosition = -1;
 
-    private DragSortListView.DropListener onDrop = new DragSortListView.DropListener() {
+    private final DragSortListView.DropListener onDrop = new DragSortListView.DropListener() {
         @Override
         public void drop(final int from, final int to) {
             if (from != to) {

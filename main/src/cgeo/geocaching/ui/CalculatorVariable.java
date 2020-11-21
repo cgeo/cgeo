@@ -6,6 +6,7 @@ import cgeo.geocaching.utils.CalculationUtils;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.models.CalcState.ERROR_STRING;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Editable;
@@ -92,6 +93,7 @@ public class CalculatorVariable extends LinearLayout {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public CalculatorVariable(final Context context, final VariableData variableData, final String hintText, final TextWatcher textWatcher) {
         super(context);
         this.variableData = variableData;

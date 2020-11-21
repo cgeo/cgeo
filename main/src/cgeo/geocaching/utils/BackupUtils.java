@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_UNKNOWN;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -66,6 +67,7 @@ public class BackupUtils extends Activity {
      * Public methods also containing question dialogs, etc
      */
 
+    @SuppressLint("SetTextI18n")
     public void restore(final File backupDir) {
         if (!hasBackup(backupDir)) {
             Toast.makeText(activityContext, R.string.init_backup_no_backup_available, Toast.LENGTH_LONG).show();

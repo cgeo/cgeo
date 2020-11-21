@@ -384,6 +384,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateDeviceHeadingAndOrientation(final DirectionData dir) {
 
         if (dir.hasOrientation()) {

@@ -1084,7 +1084,7 @@
     <string name="cache_terrain">Terrain</string>
     <string name="cache_rating">Rating</string>
     <string name="cache_own_rating">Your Rating</string>
-    <string name="cache_rating_of">of</string>
+    <string name="cache_rating_of_new">%1$.1f of %2$d</string>
     <string name="cache_favorite">Favorite</string>
     <string name="cache_owner">Owner</string>
     <string name="cache_hidden">Hidden</string>

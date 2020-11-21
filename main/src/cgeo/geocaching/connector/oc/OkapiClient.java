@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.util.Base64;
 import static android.util.Base64.DEFAULT;
@@ -89,6 +90,7 @@ final class OkapiClient {
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
+    @SuppressLint("ConstantLocale")
     private static final SynchronizedDateFormat ISO8601DATEFORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
 
     private static final String CACHE_ATTRNAMES = "attrnames";

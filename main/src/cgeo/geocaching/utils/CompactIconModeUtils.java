@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 
+import androidx.core.content.res.ResourcesCompat;
+
 public class CompactIconModeUtils {
 
     private static int compactIconModeThreshold = -1;
@@ -54,9 +56,8 @@ public class CompactIconModeUtils {
 
     public static void setCompactIconModeThreshold(final Resources resources) {
         // cache density metrics
-        final Bitmap marker = ((BitmapDrawable) resources.getDrawable(R.drawable.marker)).getBitmap();
+        final Bitmap marker = ((BitmapDrawable) ResourcesCompat.getDrawable(resources, R.drawable.marker, null)).getBitmap();
         final DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        // compactIconModeThreshold = (int) ((displayMetrics.heightPixels / displayMetrics.density) * (displayMetrics.widthPixels / displayMetrics.density) / 1500.0f);
         compactIconModeThreshold = (int) ((displayMetrics.heightPixels / marker.getHeight()) * (displayMetrics.widthPixels / marker.getWidth()) / 4f);
     }
 

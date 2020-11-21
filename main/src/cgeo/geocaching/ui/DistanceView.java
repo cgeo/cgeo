@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -35,6 +36,7 @@ public class DistanceView extends AppCompatTextView {
         setText(Units.getDistanceFromKilometers(coords.distanceTo(cacheCoords)));
     }
 
+    @SuppressLint("SetTextI18n")
     public void setDistance(final Float distance) {
         setText("~" + Units.getDistanceFromKilometers(distance));
     }
