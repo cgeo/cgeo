@@ -1785,6 +1785,9 @@
     <string name="downloadmanager_not_available">Kaartbestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
     <string name="downloadmap_target_not_writable">Doel \"%s\" is niet schrijfbaar - gedownload kaartbestand zal worden opgeslagen in de download map en dient handmatig te worden verplaatst naar de \"map\" map.</string>
+    <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
+    <string name="downloadmap_confirmation">Kaart downloaden \"%1$s\"?\n\nDit kan heel wat tijd in beslag nemen en aanzienlijke kosten met zich meebrengen, afhankelijk van je netwerkverbinding.\n\nGrootte info: %2$s</string>
+    <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
