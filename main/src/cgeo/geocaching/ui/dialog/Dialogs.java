@@ -829,8 +829,7 @@ public final class Dialogs {
         builder.create().show();
     }
 
-    private static AlertDialog.Builder newBuilder(final Activity activity) {
+    public static AlertDialog.Builder newBuilder(final Activity activity) {
         return new AlertDialog.Builder(new ContextThemeWrapper(activity, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert));
     }
-
 }
