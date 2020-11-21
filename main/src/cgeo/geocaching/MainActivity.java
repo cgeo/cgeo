@@ -499,37 +499,26 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
-        switch (id) {
-            case android.R.id.home:
-                // this activity must handle the home navigation different than all others
-                showAbout(null);
-                return true;
-            case R.id.menu_about:
-                showAbout(null);
-                return true;
-            case R.id.menu_helpers:
-                startActivity(new Intent(this, UsefulAppsActivity.class));
-                return true;
-            case R.id.menu_settings:
-                startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
-                return true;
-            case R.id.menu_backup:
-                SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
-                return true;
-            case R.id.menu_history:
-                startActivity(CacheListActivity.getHistoryIntent(this));
-                return true;
-            case R.id.menu_scan:
-                startScannerApplication();
-                return true;
-            case R.id.menu_pocket_queries:
-                if (!Settings.isGCPremiumMember()) {
-                    return true;
-                }
+        if (id == android.R.id.home || id == R.id.menu_about) {
+            showAbout(null);
+        } else if (id == R.id.menu_helpers) {
+            startActivity(new Intent(this, UsefulAppsActivity.class));
+        } else if (id == R.id.menu_settings) {
+            startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
+        } else if (id == R.id.menu_backup) {
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+        } else if (id == R.id.menu_history) {
+            startActivity(CacheListActivity.getHistoryIntent(this));
+        } else if (id == R.id.menu_scan) {
+            startScannerApplication();
+        } else if (id == R.id.menu_pocket_queries) {
+            if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, PocketQueryListActivity.class));
-                return true;
+            }
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void startScannerApplication() {

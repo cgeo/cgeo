@@ -258,18 +258,17 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_log_touch:
-                startActivityForResult(LogTrackableActivity.getIntent(this, trackable, geocache), LogTrackableActivity.LOG_TRACKABLE);
-                return true;
-            case R.id.menu_browser_trackable:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
-                return true;
-            case R.id.menu_refresh_trackable:
-                refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
-                return true;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_log_touch) {
+            startActivityForResult(LogTrackableActivity.getIntent(this, trackable, geocache), LogTrackableActivity.LOG_TRACKABLE);
+        } else if (itemId == R.id.menu_browser_trackable) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
+        } else if (itemId == R.id.menu_refresh_trackable) {
+            refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @Override
@@ -608,25 +607,22 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             private boolean prepareClipboardActionMode(final View view, final ActionMode actionMode, final Menu menu) {
-                final int viewId = view.getId();
                 clickedItemText = ((TextView) view).getText();
-                switch (viewId) {
-                    case R.id.value: // name, TB-code, origin, released, distance
-                        final TextView textView = ((View) view.getParent()).findViewById(R.id.name);
-                        final CharSequence itemTitle = textView.getText();
-                        buildDetailsContextMenu(actionMode, menu, itemTitle, true);
-                        return true;
-                    case R.id.goal:
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_goal), false);
-                        return true;
-                    case R.id.details:
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_details), false);
-                        return true;
-                    case R.id.log:
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
-                        return true;
+                final int viewId = view.getId();
+                if (viewId == R.id.value) { // name, TB-code, origin, released, distance
+                    final TextView textView = ((View) view.getParent()).findViewById(R.id.name);
+                    final CharSequence itemTitle = textView.getText();
+                    buildDetailsContextMenu(actionMode, menu, itemTitle, true);
+                } else if (viewId == R.id.goal) {
+                    buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_goal), false);
+                } else if (viewId == R.id.details) {
+                    buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_details), false);
+                } else if (viewId == R.id.log) {
+                    buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
+                } else {
+                    return false;
                 }
-                return false;
+                return true;
             }
 
             @Override

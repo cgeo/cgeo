@@ -244,28 +244,24 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
-        switch (id) {
-            case R.id.menu_map:
-                if (waypoint != null) {
-                    DefaultMap.startActivityCoords(this, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
-                } else if (cache != null) {
-                    DefaultMap.startActivityGeoCode(this, cache.getGeocode());
-                } else {
-                    DefaultMap.startActivityCoords(this, dstCoords, null, null);
-                }
-                return true;
-            case R.id.menu_tts_toggle:
-                SpeechService.toggleService(this, dstCoords);
-                return true;
-            case R.id.menu_hint:
-                cache.showHintToast(this);
-                return true;
-            default:
-                if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
-                    return true;
-                }
+        if (id == R.id.menu_map) {
+            if (waypoint != null) {
+                DefaultMap.startActivityCoords(this, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
+            } else if (cache != null) {
+                DefaultMap.startActivityGeoCode(this, cache.getGeocode());
+            } else {
+                DefaultMap.startActivityCoords(this, dstCoords, null, null);
+            }
+        } else if (id == R.id.menu_tts_toggle) {
+            SpeechService.toggleService(this, dstCoords);
+        } else if (id == R.id.menu_hint) {
+            cache.showHintToast(this);
+        } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
+            return true; // to satisfy static code analysis
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
