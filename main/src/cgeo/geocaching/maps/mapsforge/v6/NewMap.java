@@ -52,6 +52,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BRouterUtils;
@@ -1869,13 +1870,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             message = s;
         }
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(ctx)
+        final AlertDialog alertDialog = Dialogs.newBuilder(ctx)
             .setTitle(ctx.getString(R.string.map_source_attribution_dialog_title))
             .setCancelable(true)
             .setMessage(message)
             .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
             .create();
-
         alertDialog.show();
 
         // Make the URLs in TextView clickable. Must be called after show()

@@ -11,6 +11,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -61,7 +62,7 @@ public class FieldNoteExport extends AbstractExport {
     }
 
     private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_fieldnotes)));
 
         final View layout = View.inflate(activity, R.layout.fieldnote_export_dialog, null);

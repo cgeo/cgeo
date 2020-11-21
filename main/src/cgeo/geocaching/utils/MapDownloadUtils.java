@@ -56,7 +56,7 @@ public class MapDownloadUtils {
                 }
                 final String filename = temp;
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
                 builder.setTitle(R.string.downloadmap_title);
                 final View layout = View.inflate(activity, R.layout.mapdownloader_confirmation, null);
                 builder.setView(layout);

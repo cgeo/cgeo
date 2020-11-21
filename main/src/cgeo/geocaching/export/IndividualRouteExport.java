@@ -7,6 +7,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteSegment;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
@@ -57,7 +58,7 @@ public class IndividualRouteExport {
             return null;
         };
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.export_individualroute_title);
 
         final View layout = View.inflate(activity, R.layout.gpx_export_individual_route_dialog, null);
