@@ -179,7 +179,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         switch (type) {
             case TYPE_INTEGER:
             case TYPE_LONG:
-                inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL;
+                inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
                 break;
             case TYPE_FLOAT:
                 inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_DECIMAL;
