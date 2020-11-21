@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.ColorStateList;
@@ -834,5 +835,9 @@ public final class Dialogs {
 
     public static AlertDialog.Builder newBuilder(final Activity activity) {
         return new AlertDialog.Builder(new ContextThemeWrapper(activity, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert));
+    }
+
+    public static AlertDialog.Builder newBuilder(final Context context) {
+        return new AlertDialog.Builder(new ContextThemeWrapper(context, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert));
     }
 }

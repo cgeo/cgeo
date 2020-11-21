@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -73,7 +74,7 @@ public class GpxExport extends AbstractExport {
     }
 
     private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_gpx)));
 
         final View layout = View.inflate(activity, R.layout.gpx_export_dialog, null);
