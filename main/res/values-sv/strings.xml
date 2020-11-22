@@ -952,7 +952,6 @@
     <string name="cache_terrain">Terräng</string>
     <string name="cache_rating">Betyg</string>
     <string name="cache_own_rating">Eget betyg</string>
-    <string name="cache_rating_of">av</string>
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Ägare</string>
     <string name="cache_hidden">Gömd</string>
