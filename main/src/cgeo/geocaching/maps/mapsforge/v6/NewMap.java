@@ -387,6 +387,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             TrackUtils.onPrepareOptionsMenu(menu);
             BRouterUtils.onPrepareOptionsMenu(menu);
 
+            // can be moved to IndividualRouteUtils as soon as setAutoTarget is available for all map types
+            menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.getAutotargetIndividualRoute());
+
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
         }
@@ -812,7 +815,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void resumeRoute(final boolean force) {
         if (null == manualRoute || force) {
-            manualRoute = new ManualRoute();
+            manualRoute = new ManualRoute(this::setNavigationTargetFromIndividualRoute);
             manualRoute.reloadRoute(routeLayer);
         } else {
             manualRoute.updateRoute(routeLayer);
@@ -1613,11 +1616,17 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             return;
         }
         if (manualRoute == null) {
-            manualRoute = new ManualRoute();
+            manualRoute = new ManualRoute(this::setNavigationTargetFromIndividualRoute);
         }
         manualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
         ActivityMixin.invalidateOptionsMenu(this);
+    }
+
+    private void setNavigationTargetFromIndividualRoute(@Nullable final Geopoint geopoint, final String geocode) {
+        if (geopoint != null) {
+            setTarget(geopoint, geocode);
+        }
     }
 
     @Nullable
@@ -1633,8 +1642,24 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (StringUtils.isNotBlank(targetGeocode)) {
             return DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
-
         return null;
+    }
+
+    private void setTarget(final Geopoint coords, final String geocode) {
+        lastNavTarget = coords;
+        if (navigationLayer != null) {
+            navigationLayer.setDestination(lastNavTarget);
+            navigationLayer.requestRedraw();
+        }
+        if (distanceView != null) {
+            distanceView.setDestination(lastNavTarget);
+            distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
+        }
+        if (StringUtils.isNotBlank(geocode)) {
+            targetGeocode = geocode;
+            final Geocache target = getCurrentTargetCache();
+            targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+        }
     }
 
     private void savePrefs() {
@@ -1736,22 +1761,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO) {
             if (resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
                 final TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
-
                 if (targetInfo != null) {
-                    lastNavTarget = targetInfo.coords;
-                    if (navigationLayer != null) {
-                        navigationLayer.setDestination(targetInfo.coords);
-                        navigationLayer.requestRedraw();
-                    }
-                    if (distanceView != null) {
-                        distanceView.setDestination(targetInfo.coords);
-                        distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
-                    }
-                    if (StringUtils.isNotBlank(targetInfo.geocode)) {
-                        targetGeocode = targetInfo.geocode;
-                        final Geocache target = getCurrentTargetCache();
-                        targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
-                    }
+                    setTarget(targetInfo.coords, targetInfo.geocode);
                 }
             }
             final List<String> changedGeocodes = new ArrayList<>();

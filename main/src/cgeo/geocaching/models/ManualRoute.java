@@ -1,6 +1,8 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -8,6 +10,8 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -22,13 +26,19 @@ public class ManualRoute extends Route implements Parcelable {
     }
 
     private boolean loadingRoute = false;
+    private SetTarget setTarget = null;
 
-    public ManualRoute() {
+    public ManualRoute(@Nullable final SetTarget setTarget) {
         super(true);
+        this.setTarget = setTarget;
     }
 
     public interface UpdateManualRoute {
         void updateManualRoute(Route route);
+    }
+
+    public interface SetTarget {
+        void setTarget(@Nullable Geopoint geopoint, String geocode);
     }
 
     public void toggleItem(final Context context, final RouteItem item, final UpdateManualRoute routeUpdater) {
@@ -58,11 +68,23 @@ public class ManualRoute extends Route implements Parcelable {
         }
         if (null != routeUpdater) {
             routeUpdater.updateManualRoute(this);
+            triggerTargetUpdate();
         }
     }
 
     public void clearRoute(final UpdateManualRoute routeUpdater) {
         clearRouteInternal(routeUpdater, true);
+    }
+
+    public void triggerTargetUpdate() {
+        if (Settings.getAutotargetIndividualRoute() && setTarget != null) {
+            if (getNumSegments() == 0) {
+                setTarget.setTarget(null, "");
+            } else {
+                final RouteItem firstItem = segments.get(0).getItem();
+                setTarget.setTarget(firstItem.getPoint(), firstItem.getGeocode());
+            }
+        }
     }
 
     private synchronized void loadRouteInternal() {

@@ -288,6 +288,12 @@
                 android:title="@string/map_load_individual_route">
             </item>
             <item
+                android:id="@+id/menu_autotarget_individual_route"
+                android:checkable="true"
+                android:title="@string/map_autotarget_individual_route"
+                android:visible="false">
+            </item>
+            <item
                 android:id="@+id/menu_sort_individual_route"
                 android:title="@string/map_sort_individual_route"
                 android:visible="false">
