@@ -1785,6 +1785,10 @@
     <string name="downloadmanager_not_available">Impossibile scaricare il file mappa, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <string name="downloadmap_target_not_writable">La destinazione \"%s\" non è scrivibile - il file di mappa scaricato sarà memorizzato nella directory di download di sistema e dovrà essere spostato manualmente nella directory mappa.</string>
+    <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
+    <string name="downloadmap_confirmation">Scarica la mappa \"%1$s\"?\n\nQuesto potrebbe richiedere molto tempo e portare a costi significativi, a seconda della tua connessione di rete.\n\nInformazioni sulla dimensione: %2$s</string>
+    <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
+    <string name="button_continue">Continua</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>

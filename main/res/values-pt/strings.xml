@@ -1782,6 +1782,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
     <string name="downloadmap_confirmation">Transferir o mapa \"%1$s\"?\n\nIsso pode levar algum tempo e pode resultar num custo significativo, dependendo da sua ligação à rede.\n\nInformação de tamanho: %2$s</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
+    <string name="button_continue">Continuar</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>

@@ -1744,6 +1744,7 @@
     <string name="downloadmanager_not_available">Impossible de télécharger la carte, le gestionnaire système de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
     <string name="downloadmap_target_not_writable">L\'emplacement «%s» n\'est pas accessible en écriture - la carte téléchargée sera stockée dans le dossier de téléchargements de l\'appareil et devra être placée manuellement dans le dossier des cartes.</string>
+    <string name="button_continue">Continuer</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
     <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
