@@ -927,7 +927,6 @@
     <string name="cache_terrain">Arazi</string>
     <string name="cache_rating">Derecelendirme</string>
     <string name="cache_own_rating">Derecelendirmeniz</string>
-    <string name="cache_rating_of">/</string>
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Sahibi</string>
     <string name="cache_hidden">Yerleştirilme</string>
