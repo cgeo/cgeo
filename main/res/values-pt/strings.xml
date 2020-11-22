@@ -1006,7 +1006,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_terrain">Terreno</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
-    <string name="cache_rating_of">de</string>
     <string name="cache_favorite">Favoritos</string>
     <string name="cache_owner">Dono</string>
     <string name="cache_hidden">Escondida</string>
@@ -1761,6 +1760,12 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="edit_setting_error_invalid_data">Os dados introduzidos \"%s\" são inválidos. O valor da configuração ficou inalterado.</string>
     <string name="activate_editmode_title">Activar o modo de edição</string>
     <string name="activate_editmode_warning">Está a aceder a uma secção perigosa!\n\nAlterar directamente as definições pode criar conflitos no c:geo ou impedir o programa de iniciar no futuro, por isso seja cauteloso!\n\nTem a certeza que pretende prosseguir por sua conta e risco?</string>
+    <string name="add_setting">Adicionar configuração</string>
+    <string name="add_setting_preference_name">Nome da configuração</string>
+    <string name="add_setting_preference_type">Tipo de configuração</string>
+    <string name="add_setting_missing_name">Precisa de seleccionar um nome para a configuração</string>
+    <string name="add_setting_missing_type">Precisa de seleccionar um tipo de configuração</string>
+    <string name="add_setting_already_exists">Já existe uma configuração com esse nome</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Processamento de ficheiros locais do c:geo</string>
     <string name="localfile_title">Abrir um ficheiro local</string>
