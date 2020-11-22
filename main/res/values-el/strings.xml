@@ -1005,7 +1005,6 @@
     <string name="cache_terrain">Έδαφος</string>
     <string name="cache_rating">Βαθμολογία</string>
     <string name="cache_own_rating">Η βαθμολογία σας</string>
-    <string name="cache_rating_of">από</string>
     <string name="cache_favorite">Αγαπημένη</string>
     <string name="cache_owner">Ιδιοκτήτης</string>
     <string name="cache_hidden">Κρυμμένη</string>
