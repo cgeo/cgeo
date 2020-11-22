@@ -1007,7 +1007,6 @@
     <string name="cache_terrain">Terrein</string>
     <string name="cache_rating">Waardering</string>
     <string name="cache_own_rating">Eigen waardering</string>
-    <string name="cache_rating_of">van</string>
     <string name="cache_favorite">Favoriet</string>
     <string name="cache_owner">Eigenaar</string>
     <string name="cache_hidden">Verstopt</string>
