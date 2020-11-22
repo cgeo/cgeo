@@ -1007,7 +1007,6 @@
     <string name="cache_terrain">Gelände</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
-    <string name="cache_rating_of">von</string>
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Besitzer</string>
     <string name="cache_hidden">Versteckt</string>
@@ -1767,6 +1766,12 @@
     <string name="edit_setting_error_invalid_data">Ungültige Daten \"%s\" eingegeben. Einstellung bleibt unverändert.</string>
     <string name="activate_editmode_title">Bearbeitungsmodus aktivieren</string>
     <string name="activate_editmode_warning">Du betrittst hier einen gefährlichen Bereich!\n\nDas direkte Ändern von Einstellungen könnte c:geo verwirren oder weitere Programmstarts verhindern, also sei vorsichtig!\n\nBist du sicher, dass du auf eigene Gefahr fortfahren möchtest?</string>
+    <string name="add_setting">Einstellung hinzufügen</string>
+    <string name="add_setting_preference_name">Name der Einstellung</string>
+    <string name="add_setting_preference_type">Typ der Einstellung</string>
+    <string name="add_setting_missing_name">Du musst einen Namen für die Einstellung wählen</string>
+    <string name="add_setting_missing_type">Du musst einen Typ für die Einstellung wählen</string>
+    <string name="add_setting_already_exists">Eine Einstellung mit diesem Namen existiert bereits</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Lokaler Dateimanager</string>
     <string name="localfile_title">Eine lokale Datei öffnen</string>
@@ -1793,6 +1798,7 @@
     <string name="downloadmap_allow_metered_network">Erlaube Download über getaktetes Netz (z.B.: mobile Verbindung)</string>
     <string name="downloadmap_confirmation">Karte \"%1$s\" herunterladen?\n\nDies kann einige Zeit in Anspruch nehmen und kann, in Abhängigkeit von deiner Netzwerkverbindung, zu erheblichen Kosten führen.\n\nGröße: %2$s</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
+    <string name="button_continue">Weiter</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
