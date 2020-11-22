@@ -835,7 +835,6 @@
     <string name="cache_terrain">Terep</string>
     <string name="cache_rating">Értékelés</string>
     <string name="cache_own_rating">Saját értékelés</string>
-    <string name="cache_rating_of">/</string>
     <string name="cache_favorite">Kedvenc</string>
     <string name="cache_owner">Tulajdonos</string>
     <string name="cache_hidden">Elrejtve</string>
