@@ -28,6 +28,7 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
@@ -52,7 +53,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BRouterUtils;
@@ -215,8 +215,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         Log.d("NewMap: onCreate");
 
-        checkAndGrantPublicFolderAccess(PublicLocalFolder.OFFLINE_MAP_DEFAULT);
-
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
 
@@ -316,6 +314,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         prepareFilterBar();
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
+
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
+
     }
 
     private void postZoomToViewport(final Viewport viewport) {

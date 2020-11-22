@@ -10,7 +10,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.PublicLocalFolder;
 import cgeo.geocaching.storage.PublicLocalStorageActivityHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
@@ -152,6 +151,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
         // create view variables
         ButterKnife.bind(this);
+
     }
 
     /**
@@ -165,6 +165,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         }
         AndroidBeam.disable(this);
         initializeCommonFields();
+        getPublicLocalStorage().checkAndGrantBaseFolderAccess();
     }
 
     private void initializeCommonFields() {
@@ -304,10 +305,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             this.publicLocalStorage = new PublicLocalStorageActivityHelper(this);
         }
         return this.publicLocalStorage;
-    }
-
-    protected void checkAndGrantPublicFolderAccess(final PublicLocalFolder ... folders) {
-        getPublicLocalStorage().checkAndGrantFolderAccess(folders);
     }
 
     @Override

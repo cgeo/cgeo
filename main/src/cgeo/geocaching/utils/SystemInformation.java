@@ -15,6 +15,7 @@ import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PublicLocalFolder;
 
 import android.Manifest;
 import android.content.Context;
@@ -83,7 +84,7 @@ public final class SystemInformation {
         body
                 .append("\nGPX import path: ").append(Settings.getGpxImportDir())
                 .append("\nGPX export path: ").append(Settings.getGpxExportDir())
-                .append("\nOffline maps path: ").append(Settings.getMapFileDirectory())
+                .append("\nOffline maps path: ").append(PublicLocalFolder.OFFLINE_MAPS)
                 .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
                 .append("\nLive map mode: ").append(Settings.isLiveMap())
                 .append("\nGlobal filter: ").append(Settings.getCacheType().pattern);

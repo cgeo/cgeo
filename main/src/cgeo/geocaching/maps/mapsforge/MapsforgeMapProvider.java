@@ -24,9 +24,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +66,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     public static List<ImmutablePair<String, Uri>> getOfflineMaps() {
         //TODO
-        return PublicLocalStorage.get().listDocuments(PublicLocalFolder.OFFLINE_MAP_DEFAULT);
+        return PublicLocalStorage.get().list(PublicLocalFolder.OFFLINE_MAPS);
 
     }
 
@@ -306,15 +304,18 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         }
 
         //SAF Bridge method: for now, assume it is a file
-        final File file = new File(mapUri.getPath());
-        if (!file.exists()) {
-            return null;
-        }
-        try {
-            final InputStream fis = new FileInputStream(file);
-            return new MapFile((FileInputStream) fis, 0, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
-        } catch (IOException ie) {
-            Log.e("Problem opening map file '" + mapUri + "'", ie);
+//        final File file = new File(mapUri.getPath());
+//        if (!file.exists()) {
+//            return null;
+//        }
+
+        final InputStream fis = PublicLocalStorage.get().openForRead(mapUri);
+        if (fis != null) {
+            try {
+                return new MapFile((FileInputStream) fis, 0, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
+            } catch (MapFileException mfe) {
+                Log.e("Problem opening map file '" + mapUri + "'", mfe);
+            }
         }
         return null;
     }

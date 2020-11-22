@@ -3,7 +3,6 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -33,7 +32,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
-import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
 
 import android.R.string;
 import android.app.AlertDialog;
@@ -134,7 +132,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         setResult(NO_RESTART_NEEDED);
 
-        publicLocalStorage.checkAndGrantFolderAccess(PublicLocalFolder.LOGFILES);
+        publicLocalStorage.checkAndGrantBaseFolderAccess();
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -160,7 +158,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initPreferences() {
-        initMapSourcePreference();
+        //initMapSourcePreference();
         initExtCgeoDirPreference();
         initDirChoosers();
         initDefaultNavigationPreferences();
@@ -181,13 +179,18 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_mapsource, R.string.pref_renderthemepath,
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_fakekey_dataDir,
-                R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
+                R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message,
                 R.string.pref_twitter_trackable_message, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
+
+        //PublicFolder initialization
+        for (PublicLocalFolder folder : new PublicLocalFolder[] { PublicLocalFolder.OFFLINE_MAPS }) {
+            initPublicFolder(folder);
+        }
     }
 
     private void initNavigationMenuPreferences() {
@@ -256,22 +259,22 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         return findPreference(this, getKey(keyId));
     }
 
-    /**
-     * Fill the choice list for map sources.
-     */
-    private void initMapSourcePreference() {
-        final ListPreference pref = (ListPreference) getPreference(R.string.pref_mapsource);
-
-        final List<MapSource> mapSources = MapProviderFactory.getMapSources();
-        final CharSequence[] entries = new CharSequence[mapSources.size()];
-        final CharSequence[] values = new CharSequence[mapSources.size()];
-        for (int i = 0; i < mapSources.size(); ++i) {
-            entries[i] = mapSources.get(i).getName();
-            values[i] = String.valueOf(mapSources.get(i).getNumericalId());
-        }
-        pref.setEntries(entries);
-        pref.setEntryValues(values);
-    }
+//    /**
+//     * Fill the choice list for map sources.
+//     */
+//    private void initMapSourcePreference() {
+//        final ListPreference pref = (ListPreference) getPreference(R.string.pref_mapsource);
+//
+//        final List<MapSource> mapSources = MapProviderFactory.getMapSources();
+//        final CharSequence[] entries = new CharSequence[mapSources.size()];
+//        final CharSequence[] values = new CharSequence[mapSources.size()];
+//        for (int i = 0; i < mapSources.size(); ++i) {
+//            entries[i] = mapSources.get(i).getName();
+//            values[i] = String.valueOf(mapSources.get(i).getNumericalId());
+//        }
+//        pref.setEntries(entries);
+//        pref.setEntryValues(values);
+//    }
 
     /**
      * Fill the choice list for external private cgeo directory.
@@ -385,6 +388,21 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         defaultNavigationTool2.setEntryValues(values);
     }
 
+    private void initPublicFolder(final PublicLocalFolder folder) {
+        final Preference pref = getPreference(folder.getPrefKeyId());
+        if (pref == null) {
+            return;
+        }
+
+        bindSummaryToValue(pref, folder.getUserDisplayableUri());
+        pref.setOnPreferenceClickListener(
+            preference -> {
+                publicLocalStorage.selectFolderUri(folder,
+                    plf -> preference.setSummary(plf.getUserDisplayableUri()));
+                return false;
+            });
+    }
+
     private void initDirChoosers() {
         for (final DirChooserType dct : DirChooserType.values()) {
 
@@ -395,13 +413,15 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     });
         }
 
-        getPreference(R.string.pref_mapDirectory).setOnPreferenceClickListener(
-                preference -> {
-                    final Intent intent = new Intent(SettingsActivity.this,
-                            SelectMapfileActivity.class);
-                    startActivityForResult(intent, R.string.pref_mapDirectory);
-                    return false;
-                });
+//        getPreference(R.string.pref_mapDirectory).setOnPreferenceClickListener(
+//                preference -> {
+//                    publicLocalStorage.selectFolderUri(PublicLocalFolder.OFFLINE_MAPS,
+//                        plf -> preference.setSummary(plf.getUserDisplayableUri()));
+////                    final Intent intent = new Intent(SettingsActivity.this,
+////                            SelectMapfileActivity.class);
+////                    startActivityForResult(intent, R.string.pref_mapDirectory);
+//                    return false;
+//                });
     }
 
     /**
@@ -741,29 +761,29 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         }
 
         switch (requestCode) {
-            case R.string.pref_mapDirectory:
-                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
-                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
-                    final File file = new File(mapFile);
-                    if (!file.isDirectory()) {
-                        Settings.setMapFile(mapFile);
-                        if (!Settings.isCurrentlySelectedMapUriValid()) {
-                            showInvalidMapfileMessage(this);
-                        } else {
-                            // Ensure map source preference is updated accordingly.
-                            // TODO: There should be a better way to find and select the map source for a map file
-                            final Integer mapSourceId = mapFile.hashCode();
-                            final ListPreference mapSource = (ListPreference) getPreference(R.string.pref_mapsource);
-                            mapSource.setValue(mapSourceId.toString());
-                            onPreferenceChange(mapSource, mapSourceId);
-                        }
-                    } else {
-                        Settings.setMapFileDirectory(mapFile);
-                    }
-                }
-                initMapSourcePreference();
-                getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
-                break;
+//            case R.string.pref_mapDirectory:
+//                if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
+//                    final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
+//                    final File file = new File(mapFile);
+//                    if (!file.isDirectory()) {
+//                        Settings.setMapFile(mapFile);
+//                        if (!Settings.isCurrentlySelectedMapUriValid()) {
+//                            showInvalidMapfileMessage(this);
+//                        } else {
+//                            // Ensure map source preference is updated accordingly.
+//                            // TODO: There should be a better way to find and select the map source for a map file
+//                            final Integer mapSourceId = mapFile.hashCode();
+//                            final ListPreference mapSource = (ListPreference) getPreference(R.string.pref_mapsource);
+//                            mapSource.setValue(mapSourceId.toString());
+//                            onPreferenceChange(mapSource, mapSourceId);
+//                        }
+//                    } else {
+//                        Settings.setMapFileDirectory(mapFile);
+//                    }
+//                }
+//                initMapSourcePreference();
+//                getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
+//                break;
             case R.string.pref_fakekey_dataDir:
                 getPreference(R.string.pref_fakekey_dataDir).setSummary(Settings.getExternalPrivateCgeoDirectory());
                 break;
