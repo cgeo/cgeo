@@ -879,7 +879,6 @@
     <string name="cache_terrain">Terreng</string>
     <string name="cache_rating">Rangering</string>
     <string name="cache_own_rating">Din rangering</string>
-    <string name="cache_rating_of">av</string>
     <string name="cache_favorite">Favoritt</string>
     <string name="cache_owner">Eier</string>
     <string name="cache_hidden">Publisert</string>
