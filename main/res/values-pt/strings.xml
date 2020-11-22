@@ -603,6 +603,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup">Backup de caches / waypoints</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
+    <string name="init_backup_backup_failed">Erro ao criar a cópia de segurança</string>
     <string name="init_backup_now">Iniciar cópia de segurança</string>
     <string name="init_backup_running">A criar cópia de segurança da base de dados das caches…</string>
     <string name="init_backup_restore">Restaurar</string>
@@ -641,6 +642,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_settings_backup_full_confirm">Deseja guardar dados sensíveis relacionados com a conta? Estes poderão ser lidos por outras aplicações.</string>
     <string name="settings_savingerror">Erro ao guardar definições</string>
     <string name="settings_saved">Definições gravadas com sucesso para:</string>
+    <string name="backup_saved">A cópia de seg. foi guardada em:</string>
     <string name="init_backup_settings_restore">Restaurar definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
@@ -1785,6 +1787,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
     <string name="downloadmap_confirmation">Transferir o mapa \"%1$s\"?\n\nIsso pode levar algum tempo e pode resultar num custo significativo, dependendo da sua ligação à rede.\n\nInformação de tamanho: %2$s</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
+    <string name="button_continue">Continuar</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
