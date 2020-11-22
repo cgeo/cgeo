@@ -7,7 +7,9 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.export.IndividualRouteExport;
 import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
+import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
@@ -31,7 +33,7 @@ public class IndividualRouteUtils {
      *
      * @param menu menu to be configured
      */
-    public static void onPrepareOptionsMenu(final Menu menu, final Route route) {
+    public static void onPrepareOptionsMenu(final Menu menu, final ManualRoute route) {
         final boolean isVisible = route != null && route.getNumSegments() > 0;
         menu.findItem(R.id.menu_sort_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_center_on_route).setVisible(isVisible);
@@ -46,7 +48,7 @@ public class IndividualRouteUtils {
      * @param id       menu entry id
      * @return true, if selected menu entry is individual route related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Route route, final Runnable clearIndividualRoute, final Route.CenterOnPosition centerOnPosition) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final ManualRoute route, final Runnable clearIndividualRoute, final Route.CenterOnPosition centerOnPosition) {
         switch (id) {
             case R.id.menu_load_individual_route:
                 if (null == route || route.getNumSegments() == 0) {
@@ -69,6 +71,11 @@ public class IndividualRouteUtils {
                     clearIndividualRoute.run();
                     ActivityMixin.invalidateOptionsMenu(activity);
                 });
+                return true;
+            case R.id.menu_autotarget_individual_route:
+                Settings.setAutotargetIndividualRoute(!Settings.getAutotargetIndividualRoute());
+                route.triggerTargetUpdate();
+                ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             default:
                 return false;
@@ -97,8 +104,5 @@ public class IndividualRouteUtils {
         }
         return false;
     }
-
-
-
 
 }

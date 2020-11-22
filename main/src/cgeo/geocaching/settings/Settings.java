@@ -650,6 +650,14 @@ public class Settings {
         }
     }
 
+    public static boolean getAutotargetIndividualRoute() {
+        return getBoolean(R.string.pref_autotarget_individualroute, false);
+    }
+
+    public static void setAutotargetIndividualRoute(final boolean autotargetIndividualRoute) {
+        putBoolean(R.string.pref_autotarget_individualroute, autotargetIndividualRoute);
+    }
+
     public static String getTrackFile() {
         return getString(R.string.pref_trackfile, null);
     }

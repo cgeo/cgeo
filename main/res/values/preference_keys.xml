@@ -156,6 +156,7 @@
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
     <string translatable="false" name="pref_trackfile">trackfile</string>
+    <string translatable="false" name="pref_autotarget_individualroute">autotarget_individualroute</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
     <string translatable="false" name="pref_gccustomdate">gccustomdate</string>

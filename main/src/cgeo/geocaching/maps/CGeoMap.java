@@ -490,7 +490,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             overlayPositionAndScale.setHistory(trailHistory);
         }
         if (null == manualRoute) {
-            manualRoute = new ManualRoute();
+            manualRoute = new ManualRoute(null);
             manualRoute.reloadRoute(overlayPositionAndScale);
         } else {
             manualRoute.updateRoute(overlayPositionAndScale);
@@ -603,7 +603,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return;
         }
         if (manualRoute == null) {
-            manualRoute = new ManualRoute();
+            manualRoute = new ManualRoute(null);
         }
         manualRoute.toggleItem(this.mapView.getContext(), new RouteItem(item), overlayPositionAndScale);
         ActivityMixin.invalidateOptionsMenu(activity);
