@@ -9,6 +9,11 @@
 <li>Fix: Skip artificial track points in position history</li>
 </ul>
 
+<h4>Cache details:</h4>
+<ul>
+<li>New: Allow deleting original waypoint for user-defined caches (effectively allowing changing cache coordinates for UDC)</li>
+</ul>
+
 <h4>Other:</h4>
 <ul>
 <li>Change: Custom tab implementation instead of internal browser</li>
