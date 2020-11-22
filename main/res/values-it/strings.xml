@@ -218,6 +218,7 @@
     <string name="err_parse_lat_lon">c:geo non riesce ad interpretare la latitudine o la longitudine.</string>
     <string name="err_rendertheme_file_unreadable">Impossibile caricare il tema di rendering selezionato. Ricarico quello predefinito.</string>
     <string name="err_rendertheme_invalid">Il tema di rendering selezionato non è valido per questa versione di mapsforge. Ricarico quello predefinito.</string>
+    <string name="err_invalid_filename_char">Carattere \'%c\' non consentito</string>
     <string name="warn_save_nothing">Non c\'è nulla da salvare.</string>
     <string name="warn_no_cache_coord">Non ci sono cache con coordinate.</string>
     <string name="warn_no_coordinates">Coordinate non fornite.</string>
@@ -603,6 +604,7 @@
     <string name="init_backup">Backup cache / waypoint</string>
     <string name="init_backup_backup">Backup</string>
     <string name="init_backup_finished">Backup completato</string>
+    <string name="init_backup_backup_failed">Backup non riuscito</string>
     <string name="init_backup_now">Avvia backup</string>
     <string name="init_backup_running">Creazione del backup del database dei cache in corso…</string>
     <string name="init_backup_restore">Ripristino</string>
@@ -641,6 +643,7 @@
     <string name="init_backup_settings_backup_full_confirm">Vuoi memorizzare dati sensibili relativi all\'account? Questi possono essere leggibili da altre applicazioni.</string>
     <string name="settings_savingerror">Errore durante il salvataggio della configurazione</string>
     <string name="settings_saved">Impostazioni salvate con successo in:</string>
+    <string name="backup_saved">Backup salvato correttamente in:</string>
     <string name="init_backup_settings_restore">Ripristina impostazioni</string>
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
@@ -946,6 +949,7 @@
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
+    <string name="cache_menu_open_with">Apri con…</string>
     <string name="cache_menu_visit">Scrivi Log</string>
     <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
     <string name="cache_menu_visit_offline">Rapido log offline</string>
@@ -1003,7 +1007,6 @@
     <string name="cache_terrain">Terreno</string>
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
-    <string name="cache_rating_of">di</string>
     <string name="cache_favorite">Popolarità</string>
     <string name="cache_owner">Proprietario</string>
     <string name="cache_hidden">Nascosto il</string>
@@ -1313,6 +1316,7 @@
     <string name="export_modifiedcoords_success">Caricamento riuscito</string>
     <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Caricamento terminato: %1$d falliti / %2$d OK</string>
     <string name="export_modifiedcoords_error">Caricamento fallito</string>
+    <string name="filename_without_extension">Nome file (senza estensione)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Cani permessi</string>
     <string name="attribute_dogs_no">Cani NON permessi</string>
@@ -1762,6 +1766,12 @@
     <string name="edit_setting_error_invalid_data">Dato inserito \"%s\" non valido. L\'impostazione non è stata modificata.</string>
     <string name="activate_editmode_title">Attiva la modalità di modifica</string>
     <string name="activate_editmode_warning">Stai entrando in una zona pericolosa!\n\nModificare le impostazioni direttamente potrebbe confondere c:geo, potrebbe impedire l\'avvio del programma, quindi fai attenzione!\n\nSei sicuro di voler procedere a tuo rischio?</string>
+    <string name="add_setting">Aggiungi impostazione</string>
+    <string name="add_setting_preference_name">Nome della preferenza</string>
+    <string name="add_setting_preference_type">Tipo di preferenza</string>
+    <string name="add_setting_missing_name">Devi selezionare un nome di preferenza</string>
+    <string name="add_setting_missing_type">È necessario selezionare un tipo di preferenza</string>
+    <string name="add_setting_already_exists">Esiste già una preferenza con questo nome</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Gestore file locale</string>
     <string name="localfile_title">Apri un file locale</string>
