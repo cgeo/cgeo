@@ -1788,6 +1788,7 @@
     <string name="downloadmap_allow_metered_network">Erlaube Download über getaktetes Netz (z.B.: mobile Verbindung)</string>
     <string name="downloadmap_confirmation">Karte \"%1$s\" herunterladen?\n\nDies kann einige Zeit in Anspruch nehmen und kann, in Abhängigkeit von deiner Netzwerkverbindung, zu erheblichen Kosten führen.\n\nGröße: %2$s</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
+    <string name="button_continue">Weiter</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
