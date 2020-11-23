@@ -1006,6 +1006,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="cache_terrain">Terreno</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
+    <string name="cache_rating_of_new">%1$.1f de %2$d</string>
     <string name="cache_favorite">Favoritos</string>
     <string name="cache_owner">Dono</string>
     <string name="cache_hidden">Escondida</string>
