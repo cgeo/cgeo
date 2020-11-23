@@ -2,71 +2,15 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2020.11.22:</h1>
+<h1>2020.11.xx:</h1>
 
 <h4>Android 11 notice (UPDATED):</h4>
 There are no known issues for using c:geo with Android 11. If you notice any problem, kindly let us know.
 
-<h4>Map:</h4>
-<ul>
-<li>Fix: OSM maps no longer showing caches until manual zoom or move</li>
-<li>Change: Old mapsforge map has been disabled and will be removed in future releases.</li>
-<li>Change: Moved \"Combined (Offline)\" map entry to top of offline maps</li>
-<li>Change: Removed restrictions on initial zoom level</li>
-<li>Fix: Missing information (eg.: hint) for stored caches when in live map mode</li>
-<li>Fix: Preserve zoom level for leaving/entering map</li>
-<li>Fix: Remove temporary downloaded map file after successful copy to c:geo</li>
-<li>Fix: Individual route: Update distance on item removal</li>
-<li>Fix: Crash on Google Maps map being put into the background</li>
-<li>Fix: Global filter in \"live map\" mode for user defined caches</li>
-<li>Fix: Too many server requests on \"live map\" movements</li>
-<li>Fix: Added confirmation and info dialog before map download</li>
-<li>Fix: Unload track if track file cannot be read</li>
-<li>New: Added attribution to contributors on OpenStreetMap maps</li>
-<li>New: Added option to show big smileys for found caches</li>
-<li>New: Enlarge display of distance to current navigation target by tapping on it</li>
-</ul>
-
-<h4>Cache details:</h4>
-<ul>
-<li>Change: Combine note and user note for export waypoint to GPX, on import split them up</li>
-<li>Change: Disable cache detail share menu for user-defined caches</li>
-<li>Fix: Hint is not displayed on compass view, when launched directly from map</li>
-<li>Fix: Update list of waypoints on extract waypoints</li>
-<li>New: provide direct log link ability for gc.com/oc.*/gc.su</li>
-<li>New: Support [TYPE] in signature</li>
-<li>New: Image upload on logging: always remove EXIF data</li>
-<li>New: Image upload on logging: allow resorting images</li>
-<li>New: Waypoint calculator: add option to lower-case all variables</li>
-<li>New: Show counter for logtext length</li>
-<li>Change: Own waypoint with empty coords will be extracted from personal cache note</li>
-<li>Change: Harmonize \"share\" menus to system-wide \"share\"</li>
-</ul>
-
-<h4>Cache lists:</h4>
-<ul>
-<li>New: Improved performance for filtering large cache lists</li>
-<li>New: Added link to the gc message center in several places</li>
-<li>Change: User-defined caches are stored in a separate list \"user-defined caches\" instead of in default list</li>
-<li>Fix: avoid crash when trying to log a PM cache as basic member</li>
-</ul>
-
 <h4>Other:</h4>
 <ul>
-<li>Change: Backup / restore caches and settings in one step</li>
-<li>New: Preserve multiple backups of caches and settings</li>
-<li>Fix: Adapt trackable search to website change on geocaching.com</li>
-<li>Fix: Export waypoints even if they have no coordinates</li>
-<li>Fix: GPX export of position history: timestamps are now GMT-based</li>
-<li>New: GPX export of position history: added elevation info</li>
-<li>New: Set/read GSAK "user defined waypoint" flag on GPX export/import (if applicable)</li>
-<li>New: Format GPX export file more human-readable</li>
-<li>New: Added splash screen</li>
-<li>Change: Throw a runtime error if db can neither be opened nor created</li>
-<li>New: Automatically convert geocode search input to upper case</li>
-<li>New: Select target on geo intents (new user defined cache, waypoint for \"go to\" history, waypoint for existing user defined cache)</li>
-<li>Change: Updated widget icons</li>
-<li>Updated list of contributors</li>
+<li>Fix: Crash on map startup due to negative value for zoom level</li>
+<li>Fix: Cache list crashing on moving caches</li>
 </ul>
 </div>]]></Data>
 </string>
