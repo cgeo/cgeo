@@ -93,7 +93,7 @@ public class BackupUtils extends Activity {
                 settingsCheckbox.setText(activityContext.getString(R.string.init_backup_program_settings) + "\n(" + activityContext.getString(R.string.init_backup_unavailable) + ")");
             }
 
-            final AlertDialog dialog = Dialogs.newBuilder(activityContext)
+            final AlertDialog dialog = new AlertDialog.Builder(new ContextThemeWrapper(activityContext, R.style.Dialog_Alert))
                     .setTitle(activityContext.getString(R.string.init_backup_restore))
                     .setView(content)
                     .setPositiveButton(activityContext.getString(android.R.string.yes), (alertDialog, id) -> {
