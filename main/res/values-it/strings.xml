@@ -1007,6 +1007,7 @@
     <string name="cache_terrain">Terreno</string>
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
+    <string name="cache_rating_of_new">%1$.1f di %2$d</string>
     <string name="cache_favorite">Popolarità</string>
     <string name="cache_owner">Proprietario</string>
     <string name="cache_hidden">Nascosto il</string>
