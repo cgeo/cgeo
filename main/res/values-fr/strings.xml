@@ -985,6 +985,7 @@
     <string name="cache_terrain">Terrain</string>
     <string name="cache_rating">Évaluation</string>
     <string name="cache_own_rating">Votre évaluation</string>
+    <string name="cache_rating_of_new">%1$.1f de %2$d</string>
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Propriétaire</string>
     <string name="cache_hidden">Cachée le</string>
