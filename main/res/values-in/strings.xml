@@ -713,7 +713,6 @@
     <string name="cache_terrain">Medan</string>
     <string name="cache_rating">Peringkat</string>
     <string name="cache_own_rating">Nilai anda</string>
-    <string name="cache_rating_of">dari</string>
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Pemilik</string>
     <string name="cache_hidden">Tersembunyi</string>

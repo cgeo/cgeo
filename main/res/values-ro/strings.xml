@@ -720,7 +720,6 @@
     <string name="cache_terrain">Teren</string>
     <string name="cache_rating">Voturi</string>
     <string name="cache_own_rating">Votul tău</string>
-    <string name="cache_rating_of">din</string>
     <string name="cache_owner">Proprietar</string>
     <string name="cache_hidden">Ascunsă</string>
     <string name="cache_event">Data</string>

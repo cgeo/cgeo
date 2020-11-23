@@ -919,7 +919,6 @@
     <string name="cache_terrain">Terreno</string>
     <string name="cache_rating">Puntuación</string>
     <string name="cache_own_rating">Tu puntuación</string>
-    <string name="cache_rating_of">de</string>
     <string name="cache_favorite">Favorito</string>
     <string name="cache_owner">Propietario</string>
     <string name="cache_hidden">Oculto</string>

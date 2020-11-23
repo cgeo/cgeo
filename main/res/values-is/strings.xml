@@ -498,7 +498,6 @@
     <string name="cache_terrain">Landslag</string>
     <string name="cache_rating">Dómar</string>
     <string name="cache_own_rating">Þinn dómur</string>
-    <string name="cache_rating_of">af</string>
     <string name="cache_favorite">Eftirlætis</string>
     <string name="cache_owner">Eigandi</string>
     <string name="cache_hidden">Komið fyrir</string>

@@ -636,7 +636,6 @@
     <string name="cache_terrain">Teren</string>
     <string name="cache_rating">Ocena</string>
     <string name="cache_own_rating">Moja ocena</string>
-    <string name="cache_rating_of">od</string>
     <string name="cache_favorite">Priljubljeni</string>
     <string name="cache_owner">Lastnik</string>
     <string name="cache_hidden">Skritih</string>

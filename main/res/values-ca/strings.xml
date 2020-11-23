@@ -1004,7 +1004,6 @@
     <string name="cache_terrain">Terreny</string>
     <string name="cache_rating">Puntuació</string>
     <string name="cache_own_rating">La vostra valoració</string>
-    <string name="cache_rating_of">de</string>
     <string name="cache_favorite">Preferit</string>
     <string name="cache_owner">Propietari</string>
     <string name="cache_hidden">Amagat</string>

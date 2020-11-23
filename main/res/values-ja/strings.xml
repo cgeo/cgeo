@@ -603,6 +603,7 @@
     <string name="init_backup">キャッシュ/ウェイポイントをバックアップ</string>
     <string name="init_backup_backup">バックアップ</string>
     <string name="init_backup_finished">バックアップ完了</string>
+    <string name="init_backup_backup_failed">バックアップできませんでした</string>
     <string name="init_backup_now">バックアップする</string>
     <string name="init_backup_running">キャッシュのデータベースをバックアップ中…</string>
     <string name="init_backup_restore">復元</string>
@@ -641,6 +642,7 @@
     <string name="init_backup_settings_backup_full_confirm">アカウント情報を保存しますか? これはほかのアプリケーションで読み取られる可能性があり、セキュリティ上のリスクがあります</string>
     <string name="settings_savingerror">設定の保存エラー</string>
     <string name="settings_saved">設定が保存されました: </string>
+    <string name="backup_saved">バックアップは以下のフォルダに保存されました:</string>
     <string name="init_backup_settings_restore">復元の設定</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
     <string name="settings_restart">読み込まれた設定を有効にするにはc:geoを再起動する必要があります</string>
@@ -996,7 +998,6 @@
     <string name="cache_terrain">地形</string>
     <string name="cache_rating">評価</string>
     <string name="cache_own_rating">あなたの評価</string>
-    <string name="cache_rating_of">/</string>
     <string name="cache_favorite">お気に入り</string>
     <string name="cache_owner">オーナー</string>
     <string name="cache_hidden">設置日</string>

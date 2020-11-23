@@ -1023,7 +1023,7 @@
     <string name="cache_terrain">Terén</string>
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
-    <string name="cache_rating_of">z</string>
+    <string name="cache_rating_of_new">%1$.1f z %2$d</string>
     <string name="cache_favorite">Oblíbená</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
@@ -1813,6 +1813,12 @@
     <string name="edit_setting_error_invalid_data">Byla zadána neplatná data \"%s\". Hodnota nastavení se nezměnila.</string>
     <string name="activate_editmode_title">Aktivovat režim úprav</string>
     <string name="activate_editmode_warning">Vstupujete do nebezpečné oblasti!\n\nZměna nastavení může přímo zmást c:geo nebo může zabránit dalšímu spuštění programu, buďte opatrní!\n\nJste si jisti, že chcete pokračovat na vlastní riziko?</string>
+    <string name="add_setting">Přidat nastavení</string>
+    <string name="add_setting_preference_name">Název předvolby</string>
+    <string name="add_setting_preference_type">Typ předvolby</string>
+    <string name="add_setting_missing_name">Musíte vybrat název předvolby</string>
+    <string name="add_setting_missing_type">Musíte vybrat typ předvolby</string>
+    <string name="add_setting_already_exists">Předvolby s tímto názvem již existuje</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">Lokální správce souborů c:geo</string>
     <string name="localfile_title">Otevřít místní soubor</string>

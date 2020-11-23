@@ -949,7 +949,6 @@
     <string name="cache_terrain">지형등급</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
-    <string name="cache_rating_of">/</string>
     <string name="cache_favorite">호감점수</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>

@@ -925,7 +925,6 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="cache_terrain">Piekļuve</string>
     <string name="cache_rating">Vērtējums</string>
     <string name="cache_own_rating">Tavs vērtējums</string>
-    <string name="cache_rating_of">no</string>
     <string name="cache_favorite">Favorīti</string>
     <string name="cache_owner">Īpašnieks</string>
     <string name="cache_hidden">Paslēpts</string>

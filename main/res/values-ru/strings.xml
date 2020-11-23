@@ -968,7 +968,6 @@
     <string name="cache_terrain">Местность</string>
     <string name="cache_rating">Рейтинг</string>
     <string name="cache_own_rating">Ваш рейтинг</string>
-    <string name="cache_rating_of">из</string>
     <string name="cache_favorite">Рекомендуют</string>
     <string name="cache_owner">Создатель</string>
     <string name="cache_hidden">Спрятано</string>
