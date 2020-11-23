@@ -7,6 +7,7 @@
 <h4>Map:</h4>
 <ul>
 <li>Fix: Skip artificial track points in position history</li>
+<li>New: Add option to "Individual route" map menu to automatically set the first route point as navigation target. (OpenStreetMap only)</li>
 </ul>
 
 <h4>Cache details:</h4>
