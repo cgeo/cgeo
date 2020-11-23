@@ -916,7 +916,7 @@ public class Settings {
      * @return zoom used for the (live) map
      */
     private static int getMapZoom() {
-        return  getInt(R.string.pref_lastmapzoom, 14);
+        return  Math.max(0, getInt(R.string.pref_lastmapzoom, 14));
     }
 
     private static void setMapZoom(final int mapZoomLevel) {
@@ -927,7 +927,7 @@ public class Settings {
      * @return zoom used for the map of a single cache
      */
     private static int getCacheZoom() {
-        return getInt(R.string.pref_cache_zoom, 14);
+        return Math.max(0, getInt(R.string.pref_cache_zoom, 14));
     }
 
     private static void setCacheZoom(final int zoomLevel) {
