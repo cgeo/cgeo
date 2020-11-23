@@ -1007,6 +1007,7 @@
     <string name="cache_terrain">Terrein</string>
     <string name="cache_rating">Waardering</string>
     <string name="cache_own_rating">Eigen waardering</string>
+    <string name="cache_rating_of_new">%1$.1f van %2$d</string>
     <string name="cache_favorite">Favoriet</string>
     <string name="cache_owner">Eigenaar</string>
     <string name="cache_hidden">Verstopt</string>
@@ -1766,6 +1767,12 @@
     <string name="edit_setting_error_invalid_data">Ongeldige waarde \"%s\" ingevoerd. Instellingswaarde niet gewijzigd.</string>
     <string name="activate_editmode_title">Activeer bewerkingsmodus</string>
     <string name="activate_editmode_warning">Je betreedt gevaarlijk gebied!\n\nHet wijzigen van instellingen kan c:geo verwarren, kan voorkomen dat het programma nog start of kan je mobiele telefoon laten exploderen!\n\nWeet je zeker dat je verder wilt gaan op eigen risico?</string>
+    <string name="add_setting">Instelling toevoegen</string>
+    <string name="add_setting_preference_name">Voorkeursnaam</string>
+    <string name="add_setting_preference_type">Voorkeurstype</string>
+    <string name="add_setting_missing_name">Je dient een voorkeursnaam te selecteren</string>
+    <string name="add_setting_missing_type">Je dient een voorkeurstype te selecteren</string>
+    <string name="add_setting_already_exists">Een voorkeur met deze naam bestaat al</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geo Lokale bestandsafhandeling</string>
     <string name="localfile_title">Lokaal bestand openen</string>
