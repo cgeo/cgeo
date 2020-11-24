@@ -95,6 +95,8 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
 
+        <item name="colorAccent">@color/colorAccent</item>
+
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
