@@ -1,8 +1,8 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
@@ -167,7 +167,7 @@ public class SeekbarPreference extends Preference {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | (hasDecimals ? InputType.TYPE_NUMBER_FLAG_DECIMAL : 0));
             editText.setText(valueToShownValue(progressToValue(seekBar.getProgress())));
 
-            new AlertDialog.Builder(context)
+            Dialogs.newBuilder(context)
                 .setTitle(String.format(context.getString(R.string.number_input_title), valueToShownValue(progressToValue(minProgress)), valueToShownValue(progressToValue(maxProgress))))
                 .setView(editText)
                 .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {

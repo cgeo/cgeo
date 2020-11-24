@@ -96,7 +96,7 @@ public class ReceiveMapFileActivity extends AbstractActivity {
 
     private void handleMapFile(final Activity activity) {
         if (file.exists()) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
             final AlertDialog dialog = builder.setTitle(R.string.receivemapfile_intenttitle)
                     .setCancelable(true)
                     .setMessage(R.string.receivemapfile_alreadyexists)

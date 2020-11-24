@@ -53,6 +53,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BRouterUtils;
@@ -1030,7 +1031,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         final int selectedItem = currentItem;
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
 
         builder.setTitle(R.string.map_theme_select);
 

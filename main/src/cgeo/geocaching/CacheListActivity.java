@@ -256,7 +256,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void showLicenseConfirmationDialog() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder dialog = Dialogs.newBuilder(this);
         dialog.setTitle(res.getString(R.string.license));
         dialog.setMessage(res.getString(R.string.err_license));
         dialog.setCancelable(true);
@@ -868,7 +868,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void selectListMarker() {
         final ArrayList<ListMarker> items = new ArrayList<>(Arrays.asList(ListMarker.values()));
         final ListMarkerAdapter adapter2 = new ListMarkerAdapter(this, R.layout.cachelist_listmarker_item,  items);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
         builder.setTitle(R.string.caches_set_listmarker);
         builder.setAdapter(adapter2, (dialog, itemSelected) -> {
             final ListMarker selectedItem = adapter2.getItem(itemSelected);

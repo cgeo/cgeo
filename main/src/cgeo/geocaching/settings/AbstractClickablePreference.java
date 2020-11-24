@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -59,7 +60,7 @@ abstract class AbstractClickablePreference extends Preference implements View.On
             return false;
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        final AlertDialog.Builder builder = Dialogs.newBuilder(v.getContext());
         builder.setMessage(R.string.auth_forget_message)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(R.string.auth_forget_title)

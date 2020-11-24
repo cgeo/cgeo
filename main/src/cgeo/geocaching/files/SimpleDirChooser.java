@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
@@ -83,7 +84,7 @@ public class SimpleDirChooser extends AbstractListActivity {
     }
 
     public void editPath() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
         builder.setTitle(R.string.simple_dir_chooser_current_path);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);

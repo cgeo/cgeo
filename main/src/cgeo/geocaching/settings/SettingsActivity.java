@@ -310,7 +310,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             directories.add(dir.getAbsolutePath());
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(SettingsActivity.this);
         builder.setTitle(getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
         builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(SettingsActivity.this,
                                         android.R.layout.simple_list_item_single_choice,

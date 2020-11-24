@@ -17,6 +17,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -174,7 +175,7 @@ public final class NavigationAppFactory {
          */
         final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, items);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
         builder.setAdapter(adapter, (dialog, item) -> {
             final NavigationAppsEnum selectedItem = adapter.getItem(item);

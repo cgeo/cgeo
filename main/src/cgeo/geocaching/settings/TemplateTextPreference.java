@@ -53,7 +53,7 @@ public class TemplateTextPreference extends DialogPreference {
 
         final Button button = view.findViewById(R.id.signature_templates);
         button.setOnClickListener(button1 -> {
-            final AlertDialog.Builder alert = new AlertDialog.Builder(TemplateTextPreference.this.getContext());
+            final AlertDialog.Builder alert = Dialogs.newBuilder(TemplateTextPreference.this.getContext());
             alert.setTitle(R.string.init_signature_template_button);
             final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
             final String[] items = new String[templates.size()];
