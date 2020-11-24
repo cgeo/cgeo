@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@color/text_dark"
+        android:textColor="?text_color"
         android:layout_marginTop="10dp"
         android:text="@string/restore_information" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/database_check_box"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_dark"
+        android:textColor="?text_color"
         android:enabled="false"
         android:text="@string/init_backup_caches" />
 
@@ -29,7 +29,7 @@
         android:id="@+id/settings_check_box"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_dark"
+        android:textColor="?text_color"
         android:enabled="false"
         android:text="@string/init_backup_program_settings" />
 
@@ -39,7 +39,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@color/text_dark"
+        android:textColor="?text_color"
         android:layout_marginTop="5dp"
         android:visibility="gone"/>
 </LinearLayout>
