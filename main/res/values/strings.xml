@@ -606,8 +606,8 @@
     <string name="init_brouterShowBothDistances">Show straight distance</string>
     <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>
-    <string name="init_bigSmileysOnMap">Big smileys for logged Caches</string>
-    <string name="init_summary_bigSmileysOnMap">If enabled big smileys will be shown for logged caches on the map (requires restart).</string>
+    <string name="init_bigSmileysOnMap">Big icons for logged caches</string>
+    <string name="init_summary_bigSmileysOnMap">If enabled big emoticons will be shown for logged caches on the map instead of the cache type icon (requires restart).</string>
     <string name="init_disabled">Exclude Disabled</string>
     <string name="init_summary_disabled">Exclude disabled caches</string>
     <string name="init_archived">Exclude Archived</string>
@@ -819,7 +819,7 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="map_source_attribution_dialog_title">Map Attributions</string>
-    <string name="map_source_attribution_legacy_text">Click for map attribution</string>
+    <string name="map_source_attribution_legacy_text">Tap for map attribution</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info on send2cgeo</string>
     <string name="init_sendToCgeo_name">Your device name</string>
@@ -1294,10 +1294,10 @@
     <string name="search_kw">Keywords</string>
     <string name="search_kw_prefill">Keyword</string>
     <string name="search_kw_button">Search by keyword</string>
-    <string name="search_fbu">Found by user</string>
+    <string name="search_fbu">Found by</string>
     <string name="search_fbu_prefill">User name</string>
     <string name="search_fbu_button">Search by user name</string>
-    <string name="search_hbu">Hidden by users</string>
+    <string name="search_hbu">Hidden by</string>
     <string name="search_hbu_prefill">Owner</string>
     <string name="search_hbu_button">Search by owner name</string>
     <string name="search_tb">Trackable</string>
@@ -1361,9 +1361,9 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Compass</string>
     <string name="use_gps">GPS only used</string>
-    <string name="use_compass">All Sensors used</string>
+    <string name="use_compass">All sensors used</string>
     <string name="destination_select">Select destination</string>
-    <string name="navigation_direct_navigation">Direct Navigation</string>
+    <string name="navigation_direct_navigation">Direct navigation</string>
     <string name="osmand_marker_cgeo">Marker from c:geo</string>
     <string name="device_heading_label">Device:</string>
     <string name="device_orientation">Orientation</string>
