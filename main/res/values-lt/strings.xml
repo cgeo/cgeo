@@ -588,7 +588,7 @@
     <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
     <string name="init_choose_list">Klausti sąrašo</string>
     <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
-    <string name="init_listdisplay">Papildomas sąrašai</string>
+    <string name="init_listdisplay">Papildomi sąrašai</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Sąraše rodyti kryptį į slėptuvę</string>
     <!-- backup / restore -->
@@ -668,12 +668,12 @@
     <string name="init_directionwidth_summary">Pasirinkite krypties linijos plotį</string>
     <string name="init_routecolor">Asmeninio maršruto linijos spalva</string>
     <string name="init_routecolor_summary">Pasirinkite asmeninio maršruto linijos spalvą ir skaidrumą. Asmeninis maršrutas yra papildomų taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai paspaudę papildomą tašką/slėptuvę. (Pirmiausia turite įjungti ilgo paspaudimo funkciją, žr. Žemėlapio nustatymus.)</string>
-    <string name="init_routewidth">Asmeninio maršruto linijos storis</string>
-    <string name="init_routewidth_summary">Pasirinkite asmeninio maršruto linijos storį</string>
+    <string name="init_routewidth">Asmeninio maršruto linijos plotis</string>
+    <string name="init_routewidth_summary">Pasirinkite asmeninio maršruto linijos plotį</string>
     <string name="init_trackcolor">Asmeninio kelio linijos spalva</string>
     <string name="init_trackcolor_summary">Pasirinkite asmeninio kelio linijos spalvą ir skaidrumą. Asmeninis kelias susideda iš kelių papildomų taškų ir gali būti įkeltas per GPX kelio failą.</string>
-    <string name="init_trackwidth">Asmeninio kelio linijos storis</string>
-    <string name="init_trackwidth_summary">Pasirinkite asmeninio kelio linijos storį</string>
+    <string name="init_trackwidth">Asmeninio kelio linijos plotis</string>
+    <string name="init_trackwidth_summary">Pasirinkite asmeninio kelio linijos plotį</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
     <string name="init_circlecolor_summary">Pasirinkite apskritimo krašto spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis pavaizdavimas, rodantis mažiausią spindulį aplink slėptuvę arba papildomą tašką, kur neleidžiama jokios kitos slėptuvės ar papildomi taškai. (Galioja geocaching.com)</string>
     <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
