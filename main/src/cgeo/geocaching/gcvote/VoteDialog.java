@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheVotingBar;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -37,7 +38,7 @@ public class VoteDialog {
 
         final CacheVotingBar votingBar = new CacheVotingBar();
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(context);
         builder.setView(votingLayout);
         builder.setPositiveButton(R.string.cache_menu_vote, (dialog, which) -> vote(cache, votingBar.getRating(), afterVoteSent));
         builder.setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.dismiss());

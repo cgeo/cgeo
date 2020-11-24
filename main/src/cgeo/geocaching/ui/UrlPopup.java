@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,7 +17,7 @@ public class UrlPopup {
     }
 
     public void show(final String title, final String message, final String url, final String urlButtonTitle) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(context);
         builder.setMessage(message)
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(title)
@@ -30,7 +31,7 @@ public class UrlPopup {
     }
 
     public void forward(final String title, final String message, final String url) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(context);
         builder.setMessage(message)
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(title)

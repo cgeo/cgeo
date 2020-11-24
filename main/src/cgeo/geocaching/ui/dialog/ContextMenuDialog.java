@@ -70,7 +70,7 @@ public class ContextMenuDialog {
 
     public void show() {
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this.context);
+        final AlertDialog.Builder alert = Dialogs.newBuilder(this.context);
         if (this.title != null) {
             alert.setTitle(this.title);
         }

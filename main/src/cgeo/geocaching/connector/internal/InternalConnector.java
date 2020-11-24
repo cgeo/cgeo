@@ -12,10 +12,10 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.text.InputType;
 import android.widget.EditText;
@@ -230,7 +230,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         editText.setText("");
 
-        new AlertDialog.Builder(context)
+        Dialogs.newBuilder(context)
             .setTitle(R.string.create_internal_cache)
             .setView(editText)
             .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {

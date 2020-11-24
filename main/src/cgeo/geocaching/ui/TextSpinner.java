@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -289,7 +290,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             set(values.get(newPos));
         } else {
 
-            final AlertDialog.Builder alert = new AlertDialog.Builder(textView.getContext());
+            final AlertDialog.Builder alert = Dialogs.newBuilder(textView.getContext());
             if (this.textDialogTitle != null) {
                 alert.setTitle(this.textDialogTitle);
             }

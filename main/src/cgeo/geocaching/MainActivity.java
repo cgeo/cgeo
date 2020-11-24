@@ -349,7 +349,7 @@ public class MainActivity extends AbstractActionBarActivity {
         } else {
             final Activity activity = this;
             final PermissionRequestContext perm = PermissionRequestContext.fromRequestCode(requestCode);
-            new AlertDialog.Builder(this)
+            Dialogs.newBuilder(this)
                     .setMessage(perm.getAskAgainResource())
                     .setCancelable(false)
                     .setPositiveButton(R.string.ask_again, (dialog, which) -> PermissionHandler.askAgainFor(permissions, activity, perm))

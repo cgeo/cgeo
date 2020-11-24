@@ -599,7 +599,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         private CheckBox doNotAskAgain;
 
         public AlertDialog create(final Activity activity) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
             builder.setTitle(R.string.trackable_title_log_without_geocode);
 
             final View layout = View.inflate(activity, R.layout.logtrackable_without_geocode, null);

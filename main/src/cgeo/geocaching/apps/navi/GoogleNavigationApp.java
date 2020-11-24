@@ -6,9 +6,9 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -112,15 +112,17 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                 }
             };
 
-            new AlertDialog.Builder(context).setTitle(R.string.cache_menu_navigation_drive_select_target).setAdapter(adapter, (dialog, which) -> {
-                final IWaypoint target = targets.get(which);
-                if (target instanceof Geocache) {
-                    GoogleNavigationDrivingApp.super.navigate(context, (Geocache) target);
-                }
-                if (target instanceof Waypoint) {
-                    navigate(context, (Waypoint) target);
-                }
-            }).show();
+            Dialogs.newBuilder(context)
+                .setTitle(R.string.cache_menu_navigation_drive_select_target)
+                .setAdapter(adapter, (dialog, which) -> {
+                    final IWaypoint target = targets.get(which);
+                    if (target instanceof Geocache) {
+                        GoogleNavigationDrivingApp.super.navigate(context, (Geocache) target);
+                    }
+                    if (target instanceof Waypoint) {
+                        navigate(context, (Waypoint) target);
+                    }
+                }).show();
         }
     }
 

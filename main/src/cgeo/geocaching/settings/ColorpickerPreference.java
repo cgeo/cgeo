@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisplayUtils;
 
 import android.app.AlertDialog;
@@ -131,7 +132,7 @@ public class ColorpickerPreference extends DialogPreference {
                     final int min = 0;
                     final int max = 255;
 
-                    new AlertDialog.Builder(context)
+                    Dialogs.newBuilder(context)
                         .setTitle(String.format(context.getString(R.string.number_input_title), String.valueOf(min), String.valueOf(max)))
                         .setView(editText)
                         .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {

@@ -651,7 +651,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         final int selectedItem = currentItem;
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(this);
 
         builder.setTitle(R.string.map_theme_select);
 

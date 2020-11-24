@@ -1126,7 +1126,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
                     editText.setText(cache.getName());
 
-                    new AlertDialog.Builder(context)
+                    Dialogs.newBuilder(context)
                         .setTitle(R.string.cache_name_set)
                         .setView(editText)
                         .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
