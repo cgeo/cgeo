@@ -1035,10 +1035,8 @@
     <string name="search_kw">Nøkkelord</string>
     <string name="search_kw_prefill">Nøkkelord</string>
     <string name="search_kw_button">Søk med nøkkelord</string>
-    <string name="search_fbu">Funnet av bruker</string>
     <string name="search_fbu_prefill">Brukernavn</string>
     <string name="search_fbu_button">Søk med brukernavn</string>
-    <string name="search_hbu">Gjemt av brukere</string>
     <string name="search_hbu_prefill">Eier</string>
     <string name="search_hbu_button">Søk med</string>
     <string name="search_tb">Sporbar (trackable)</string>
@@ -1095,7 +1093,6 @@
     <string name="compass_title">Kompass</string>
     <string name="use_gps">Kun GPS i bruk</string>
     <string name="destination_select">Velg destinasjon</string>
-    <string name="navigation_direct_navigation">Direkte navigering</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
