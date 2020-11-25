@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 
 import android.annotation.TargetApi;
@@ -13,15 +12,6 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public SettingsTest() {
         super(MainActivity.class);
-    }
-
-    /**
-     * access settings.
-     * this should work fine without an exception (once there was an exception because of the empty map file string)
-     */
-    public static void testSettingsException() {
-        // We just want to ensure that it does not throw any exception but we do not know anything about the result
-        MapsforgeMapProvider.isValidMapFile(null);
     }
 
     public static void testSettings() {

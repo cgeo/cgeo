@@ -17,8 +17,11 @@ import android.view.SubMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,7 +29,8 @@ public class MapProviderFactory {
 
     public static final int MAP_LANGUAGE_DEFAULT = 432198765;
 
-    private static final ArrayList<MapSource> mapSources = new ArrayList<>();
+    //use a linkedhashmap to keep track of insertion order (c:geo uses this to control menu order of map sources)
+    private static final HashMap<String, MapSource> mapSources = new LinkedHashMap<>();
     private static String[] languages;
 
     static {
@@ -60,8 +64,8 @@ public class MapProviderFactory {
         return true;
     }
 
-    public static List<MapSource> getMapSources() {
-        return mapSources;
+    public static Collection<MapSource> getMapSources() {
+        return mapSources.values();
     }
 
     public static boolean isSameActivity(@NonNull final MapSource source1, @NonNull final MapSource source2) {
@@ -74,13 +78,19 @@ public class MapProviderFactory {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
 
         final int currentSource = Settings.getMapSource().getNumericalId();
-        for (int i = 0; i < mapSources.size(); i++) {
-            final MapSource mapSource = mapSources.get(i);
+        int i = 0;
+        for (MapSource mapSource : mapSources.values()) {
             final int id = mapSource.getNumericalId();
             parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
+            i++;
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
         parentMenu.add(R.id.menu_group_map_sources, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+    }
+
+    @Nullable
+    public static MapSource getMapSource(final String stringId) {
+        return mapSources.get(stringId);
     }
 
     /**
@@ -91,7 +101,7 @@ public class MapProviderFactory {
      */
     @Nullable
     public static MapSource getMapSource(final int id) {
-        for (final MapSource mapSource : mapSources) {
+        for (final MapSource mapSource : mapSources.values()) {
             if (mapSource.getNumericalId() == id) {
                 return mapSource;
             }
@@ -105,15 +115,11 @@ public class MapProviderFactory {
      * @return the first map source in the collection, or <tt>null</tt> if there are none registered
      */
     public static MapSource getAnyMapSource() {
-        return mapSources.isEmpty() ? null : mapSources.get(0);
+        return mapSources.isEmpty() ? null : mapSources.entrySet().iterator().next().getValue();
     }
 
     public static void registerMapSource(final MapSource mapSource) {
-        mapSources.add(mapSource);
-    }
-
-    public static MapSource getDefaultSource() {
-        return mapSources.get(0);
+        mapSources.put(mapSource.getId(), mapSource);
     }
 
     /**
@@ -165,12 +171,12 @@ public class MapProviderFactory {
      * remove offline map sources after changes of the settings
      */
     public static void deleteOfflineMapSources() {
-        final List<MapSource> deletion = new ArrayList<>();
-        for (final MapSource mapSource : mapSources) {
+        final Iterator<Map.Entry<String, MapSource>> it = mapSources.entrySet().iterator();
+        while (it.hasNext()) {
+            final MapSource mapSource = it.next().getValue();
             if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource || mapSource instanceof MapsforgeMapProvider.OfflineMultiMapSource) {
-                deletion.add(mapSource);
+                it.remove();
             }
         }
-        mapSources.removeAll(deletion);
     }
 }

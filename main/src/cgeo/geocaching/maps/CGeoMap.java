@@ -35,6 +35,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
@@ -535,6 +536,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         // class init
         res = this.getResources();
         activity = this.getActivity();
+
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();

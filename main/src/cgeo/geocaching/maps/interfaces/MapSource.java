@@ -11,6 +11,10 @@ public interface MapSource {
 
     boolean isAvailable();
 
+    default String getId() {
+        return this.getClass().getName();
+    }
+
     int getNumericalId();
 
     @NonNull

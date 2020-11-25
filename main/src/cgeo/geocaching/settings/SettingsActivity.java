@@ -31,7 +31,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
-import static cgeo.geocaching.utils.MapUtils.showInvalidMapfileMessage;
 
 import android.R.string;
 import android.app.AlertDialog;
@@ -60,6 +59,7 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicLong;
@@ -256,12 +256,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void initMapSourcePreference() {
         final ListPreference pref = (ListPreference) getPreference(R.string.pref_mapsource);
 
-        final List<MapSource> mapSources = MapProviderFactory.getMapSources();
+        final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
         final CharSequence[] entries = new CharSequence[mapSources.size()];
         final CharSequence[] values = new CharSequence[mapSources.size()];
-        for (int i = 0; i < mapSources.size(); ++i) {
-            entries[i] = mapSources.get(i).getName();
-            values[i] = String.valueOf(mapSources.get(i).getNumericalId());
+        int idx = 0;
+        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
+            entries[idx] = mapSource.getName();
+            values[idx] = String.valueOf(mapSource.getNumericalId());
+            idx++;
         }
         pref.setEntries(entries);
         pref.setEntryValues(values);
@@ -736,17 +738,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
                     final File file = new File(mapFile);
                     if (!file.isDirectory()) {
-                        Settings.setMapFile(mapFile);
-                        if (!Settings.isCurrentlySelectedMapUriValid()) {
-                            showInvalidMapfileMessage(this);
-                        } else {
-                            // Ensure map source preference is updated accordingly.
-                            // TODO: There should be a better way to find and select the map source for a map file
-                            final Integer mapSourceId = mapFile.hashCode();
-                            final ListPreference mapSource = (ListPreference) getPreference(R.string.pref_mapsource);
-                            mapSource.setValue(mapSourceId.toString());
-                            onPreferenceChange(mapSource, mapSourceId);
-                        }
+                        Settings.setMapFileDirectory(file.getParent());
                     } else {
                         Settings.setMapFileDirectory(mapFile);
                     }

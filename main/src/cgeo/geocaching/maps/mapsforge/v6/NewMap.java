@@ -29,7 +29,8 @@ import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
+import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
@@ -218,6 +219,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
+
+        MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
@@ -703,8 +706,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
                 new MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(this)));
         }
 
-        if (newSource instanceof MapsforgeMapSource) {
-            newLayer = ((MapsforgeMapSource) newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
+        if (newSource instanceof AbstractMapsforgeMapSource) {
+            newLayer = ((AbstractMapsforgeMapSource) newSource).createTileLayer(tileCache, this.mapView.getModel().mapViewPosition);
         }
         ActivityMixin.invalidateOptionsMenu(this);
 

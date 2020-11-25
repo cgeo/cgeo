@@ -13,26 +13,25 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
-import org.mapsforge.map.layer.download.tilesource.OpenStreetMapMapnik;
 import org.mapsforge.map.model.IMapViewPosition;
 
-public class MapsforgeMapSource extends AbstractMapSource {
+public abstract class AbstractMapsforgeMapSource extends AbstractMapSource {
 
     public static final String MAPNIK_TILE_DOWNLOAD_UA = "cgeo";
 
-    private final MapGeneratorInternal generator;
+    private final AbstractTileSource source;
 
-    MapsforgeMapSource(final String id, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
-        super(id, mapProvider, name);
-        this.generator = generator;
+    AbstractMapsforgeMapSource(final MapProvider mapProvider, final String name, final AbstractTileSource source) {
+        super(mapProvider, name);
+        this.source = source;
     }
 
-    public MapGeneratorInternal getGenerator() {
-        return generator;
+    AbstractMapsforgeMapSource(final MapProvider mapProvider, final String name) {
+        this(mapProvider, name, null);
     }
+
 
     public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
-        final AbstractTileSource source = OpenStreetMapMapnik.INSTANCE;
         source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
         return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
     }
