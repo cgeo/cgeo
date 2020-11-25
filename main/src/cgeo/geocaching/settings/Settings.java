@@ -31,6 +31,7 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
@@ -1011,7 +1012,11 @@ public class Settings {
     }
 
     public static boolean isTransparentBackground() {
-        return getBoolean(R.string.pref_transparentBackground, true);
+        return getBoolean(R.string.pref_transparentBackground, EnvironmentUtils.defaultBackgroundTransparent());
+    }
+
+    public static void setIsTransparentBackground(final boolean value) {
+        putBoolean(R.string.pref_transparentBackground, value);
     }
 
     @NonNull
