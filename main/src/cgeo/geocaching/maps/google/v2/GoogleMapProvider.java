@@ -66,8 +66,8 @@ public final class GoogleMapProvider extends AbstractMapProvider {
 
     private abstract static class AbstractGoogleMapSource extends AbstractMapSource {
 
-        protected AbstractGoogleMapSource(final String id, final MapProvider mapProvider, final String name) {
-            super(id, mapProvider, name);
+        protected AbstractGoogleMapSource(final MapProvider mapProvider, final String name) {
+            super(mapProvider, name);
         }
 
     }
@@ -75,7 +75,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     private static final class GoogleMapSource extends AbstractGoogleMapSource {
 
         GoogleMapSource(final MapProvider mapProvider, final String name) {
-            super(GOOGLE_MAP_ID, mapProvider, name);
+            super(mapProvider, name);
         }
 
     }
@@ -83,7 +83,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     private static final class GoogleSatelliteSource extends AbstractGoogleMapSource {
 
         GoogleSatelliteSource(final MapProvider mapProvider, final String name) {
-            super(GOOGLE_SATELLITE_ID, mapProvider, name);
+            super(mapProvider, name);
         }
 
     }

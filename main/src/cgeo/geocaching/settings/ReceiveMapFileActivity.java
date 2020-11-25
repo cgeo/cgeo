@@ -2,8 +2,6 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
@@ -146,21 +144,9 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     inputStream.close();
                     outputStream.close();
 
-                    // remember map file and set it as current map source
+                    // clean up and refresh available map list
                     if (!cancelled.get()) {
-                        final String newMapPath = file.getPath();
-                        Settings.setMapFile(newMapPath);
-                        MapSource newMapSource = null;
-                        for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
-                            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && ((MapsforgeMapProvider.OfflineMapSource) mapSource).getMapUri()
-                                .equals(Uri.fromFile(new File(newMapPath)))) {
-                                newMapSource = mapSource;
-                                break;
-                            }
-                        }
-                        if (newMapSource != null) {
-                            Settings.setMapSource(newMapSource);
-                        }
+                        MapsforgeMapProvider.getInstance().updateOfflineMaps(Uri.fromFile(file));
                         status = CopyStates.SUCCESS;
                         getContentResolver().delete(uri, null, null);
                     } else {

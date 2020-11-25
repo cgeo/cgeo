@@ -20,7 +20,6 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.OfflineMapSource;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.network.HtmlImage;
@@ -40,7 +39,6 @@ import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
@@ -587,25 +585,10 @@ public class Settings {
         return getMapSource().getMapProvider();
     }
 
-    public static String getMapFile() {
-        return getString(R.string.pref_mapfile, null);
-    }
-
-    static void setMapFile(final String mapFile) {
-        putString(R.string.pref_mapfile, mapFile);
-        if (!StringUtils.isBlank(mapFile)) {
-            setMapFileDirectory(new File(mapFile).getParent());
-        }
-    }
-
-    public static String getMapFileDirectory() {
+     public static String getMapFileDirectory() {
         final String mapDir = getString(R.string.pref_mapDirectory, null);
         if (mapDir != null) {
             return mapDir;
-        }
-        final String mapFile = getMapFile();
-        if (mapFile != null) {
-            return new File(mapFile).getParent();
         }
         return null;
     }
@@ -613,10 +596,6 @@ public class Settings {
     public static void setMapFileDirectory(final String mapFileDirectory) {
         putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
-    }
-
-    public static boolean isCurrentlySelectedMapUriValid() {
-        return MapsforgeMapProvider.isValidMapFile(Uri.fromFile(new File (getMapFile())));
     }
 
     public static boolean isScaleMapsforgeText() {
@@ -965,58 +944,22 @@ public class Settings {
         if (mapSource != null) {
             return mapSource;
         }
-        final int id = getConvertedMapId();
-        mapSource = MapProviderFactory.getMapSource(id);
-        // don't use offline maps if the map file is not valid
-        if (mapSource != null && (!(mapSource instanceof OfflineMapSource) || isCurrentlySelectedMapUriValid())) {
-            return mapSource;
+        final String mapSourceId = getString(R.string.pref_mapsource, null);
+        mapSource = MapProviderFactory.getMapSource(mapSourceId);
+        if (mapSource == null || !mapSource.isAvailable()) {
+            mapSource = MapProviderFactory.getAnyMapSource();
         }
-        // fallback to first available map
-        return MapProviderFactory.getDefaultSource();
+        return mapSource;
     }
 
-    private static final int GOOGLEMAP_BASEID = 30;
-    private static final int MAP = 1;
-    private static final int SATELLITE = 2;
-
-    private static final int MFMAP_BASEID = 40;
-    private static final int MAPNIK = 1;
-    private static final int OFFLINE = 4;
     private static final int HISTORY_SIZE = 10;
 
-    /**
-     * Convert old preference ids for maps (based on constant values) into new hash based ids.
-     */
-    private static int getConvertedMapId() {
-        final int id = Integer.parseInt(getString(R.string.pref_mapsource,
-                String.valueOf(MAP_SOURCE_DEFAULT)));
-        switch (id) {
-            case GOOGLEMAP_BASEID + MAP:
-                return GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
-            case GOOGLEMAP_BASEID + SATELLITE:
-                return GoogleMapProvider.GOOGLE_SATELLITE_ID.hashCode();
-            case MFMAP_BASEID + MAPNIK:
-                return MapsforgeMapProvider.MAPSFORGE_MAPNIK_ID.hashCode();
-            case MFMAP_BASEID + OFFLINE: {
-                final String mapFile = getMapFile();
-                if (mapFile != null) {
-                    return mapFile.hashCode();
-                }
-                break;
-            }
-            default:
-                break;
-        }
-        return id;
-    }
-
     public static synchronized void setMapSource(final MapSource newMapSource) {
-        putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
-        if (newMapSource instanceof OfflineMapSource) {
-            setMapFile(((OfflineMapSource) newMapSource).getMapUri().getPath());
+        if (newMapSource != null && newMapSource.isAvailable()) {
+            putString(R.string.pref_mapsource, newMapSource.getId());
+            // cache the value
+            mapSource = newMapSource;
         }
-        // cache the value
-        mapSource = newMapSource;
     }
 
     public static void setMapLanguage(final int languageId) {

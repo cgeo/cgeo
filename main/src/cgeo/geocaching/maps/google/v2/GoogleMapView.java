@@ -19,7 +19,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapSource;
+import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -41,7 +41,6 @@ import android.view.View;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -188,9 +187,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
             Dialogs.confirmYesNo((Activity) context, R.string.warn_gm_not_available, R.string.switch_to_mf, (dialog, whichButton) -> {
                 // switch to first Mapsforge mapsource found
-                final List<MapSource> mapSources = MapProviderFactory.getMapSources();
+                final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
                 for (final MapSource mapSource : mapSources) {
-                    if (mapSource instanceof MapsforgeMapSource) {
+                    if (mapSource instanceof AbstractMapsforgeMapSource) {
                         Settings.setMapSource(mapSource);
                         Dialogs.message((Activity) context, R.string.warn_gm_not_available, R.string.switched_to_mf, (dialog2, whichButton2) -> ((Activity) context).finish());
                         break;

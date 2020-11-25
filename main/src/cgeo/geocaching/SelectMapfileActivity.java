@@ -9,7 +9,7 @@ import java.util.List;
 public class SelectMapfileActivity extends AbstractSelectFileActivity {
 
     public SelectMapfileActivity() {
-        super("map", Intents.EXTRA_MAP_FILE, Settings.getMapFile(), true);
+        super("map", Intents.EXTRA_MAP_FILE, Settings.getMapFileDirectory(), true);
         setContext(SelectMapfileActivity.this);
     }
 
