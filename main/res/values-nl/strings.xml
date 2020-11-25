@@ -573,8 +573,8 @@
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
-    <string name="init_bigSmileysOnMap">Grote smileys voor gelogde caches</string>
-    <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld worden grote smileys getoond voor gelogde caches op de kaart (vereist herstart).</string>
+    <string name="init_bigSmileysOnMap">Grote pictogrammen voor gelogde caches</string>
+    <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen grote emoticons worden getoond voor gelogde caches op de kaart in plaats van het cache type icoon (vereist herstart).</string>
     <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_summary_disabled">Uitgeschakelde caches uitsluiten</string>
     <string name="init_archived">Gearchiveerden uitsluiten</string>
@@ -781,7 +781,7 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
-    <string name="map_source_attribution_legacy_text">Klik voor de kaart copyright</string>
+    <string name="map_source_attribution_legacy_text">Tik voor kaart copyright</string>
     <string name="init_sendToCgeo">Verstuur naar c:geo</string>
     <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
     <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
@@ -1191,10 +1191,10 @@
     <string name="search_kw">Trefwoorden</string>
     <string name="search_kw_prefill">Trefwoord</string>
     <string name="search_kw_button">Zoeken op trefwoord</string>
-    <string name="search_fbu">Gevonden door gebruiker</string>
+    <string name="search_fbu">Gevonden door</string>
     <string name="search_fbu_prefill">Gebruikersnaam</string>
     <string name="search_fbu_button">Zoeken op gebruikersnaam</string>
-    <string name="search_hbu">Verstopt door gebruikers</string>
+    <string name="search_hbu">Verborgen door</string>
     <string name="search_hbu_prefill">Eigenaar</string>
     <string name="search_hbu_button">Zoeken op eigenaar</string>
     <string name="search_tb">Trackable</string>
