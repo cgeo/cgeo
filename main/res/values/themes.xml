@@ -9,11 +9,6 @@
 
     <style name="cgeo_main.base" parent="@style/Theme.AppCompat">
 
-        <!-- copy the style elements of the Wallpaper theme since AppCompat has no Wallpaper theme -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowShowWallpaper">true</item>
-
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- system elements -->
@@ -23,9 +18,17 @@
 
     </style>
 
+    <style name="cgeo_main.transparent" parent="cgeo_main.base">
+
+        <!-- copy the style elements of the Wallpaper theme since AppCompat has no Wallpaper theme -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowShowWallpaper">true</item>
+
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 
     <style name="cgeo_main" parent="cgeo_main.base">
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.ProgressBar">

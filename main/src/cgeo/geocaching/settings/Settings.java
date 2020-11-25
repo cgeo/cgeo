@@ -85,6 +85,16 @@ public class Settings {
     @NonNull private static final String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
     @NonNull private static final String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
+    private static final boolean TRANSPARENT_BACKGROUND_DEFAULT;
+
+    static {
+        if (Build.PRODUCT.startsWith("asop") && Build.VERSION.SDK_INT == 27) {
+            TRANSPARENT_BACKGROUND_DEFAULT = false;
+        } else {
+            TRANSPARENT_BACKGROUND_DEFAULT = true;
+        }
+    }
+
     private static boolean useCompass = true;
     private static DirectionData.DeviceOrientation deviceOrientationMode = DirectionData.DeviceOrientation.AUTO;
 
@@ -1068,7 +1078,7 @@ public class Settings {
     }
 
     public static boolean isTransparentBackground() {
-        return getBoolean(R.string.pref_transparentBackground, true);
+        return getBoolean(R.string.pref_transparentBackground, TRANSPARENT_BACKGROUND_DEFAULT);
     }
 
     @NonNull
