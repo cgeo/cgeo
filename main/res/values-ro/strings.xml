@@ -849,10 +849,8 @@
     <string name="search_kw">Cuvinte cheie</string>
     <string name="search_kw_prefill">Cuvânt cheie</string>
     <string name="search_kw_button">Caută după cuvânt cheie</string>
-    <string name="search_fbu">Găsită de utilizator</string>
     <string name="search_fbu_prefill">Utilizator</string>
     <string name="search_fbu_button">Caută după nume utilizator</string>
-    <string name="search_hbu">Ascunsă de utilizatorii</string>
     <string name="search_hbu_prefill">Proprietar</string>
     <string name="search_hbu_button">Caută după numele proprietarului</string>
     <string name="search_tb">Obiect călător</string>
@@ -906,7 +904,6 @@
     <string name="compass_title">Busolă</string>
     <string name="use_gps">Foloseşte doar GPS</string>
     <string name="destination_select">Alege destinaţia</string>
-    <string name="navigation_direct_navigation">Navigare directă</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
