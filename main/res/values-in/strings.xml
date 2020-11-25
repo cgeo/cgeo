@@ -845,10 +845,8 @@
     <string name="search_kw">Kata kunci</string>
     <string name="search_kw_prefill">Kata kunci</string>
     <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
-    <string name="search_fbu">Ditemukan oleh pengguna</string>
     <string name="search_fbu_prefill">Nama pengguna</string>
     <string name="search_fbu_button">Pencarian berdasarkan nama pengguna</string>
-    <string name="search_hbu">Disembunyikan oleh pengguna</string>
     <string name="search_hbu_prefill">Pemilik</string>
     <string name="search_hbu_button">Cari berdasarkan nama pemilik</string>
     <string name="search_tb">Dilacak</string>
@@ -904,7 +902,6 @@
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Hanya menggunakan GPS</string>
     <string name="destination_select">Pilih tujuan</string>
-    <string name="navigation_direct_navigation">Navigasi langsung</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
     <!-- device orientation types -->
     <!-- license -->
