@@ -573,8 +573,8 @@
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
-    <string name="init_bigSmileysOnMap">Große Smileys für geloggte Caches</string>
-    <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden auf der Karte große Smileys für geloggte Caches angezeigt (Neustart erforderlich).</string>
+    <string name="init_bigSmileysOnMap">Große Symbole für geloggte Caches</string>
+    <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden große Emoticons für geloggte Caches auf der Karte anstatt des Cache-Typs angezeigt (Neustart erforderlich).</string>
     <string name="init_disabled">Deaktivierte ausblenden</string>
     <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
     <string name="init_archived">Archivierte ausblenden</string>
@@ -781,7 +781,7 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartenlizenzen</string>
-    <string name="map_source_attribution_legacy_text">Klicken für Kartenlizenzen</string>
+    <string name="map_source_attribution_legacy_text">Tippen für Kartenlizenzen</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
     <string name="init_sendToCgeo_name">Name des Endgerätes</string>
