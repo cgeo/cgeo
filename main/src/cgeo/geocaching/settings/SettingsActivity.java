@@ -498,6 +498,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         // will get the appropriate ones.
         Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
         Settings.setUseGooglePlayServices(Settings.useGooglePlayServices());
+        Settings.setIsTransparentBackground(Settings.isTransparentBackground());
     }
 
     private static void initUnitPreferences() {

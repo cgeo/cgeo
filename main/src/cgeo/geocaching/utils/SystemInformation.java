@@ -87,7 +87,8 @@ public final class SystemInformation {
                 .append("\nOffline maps path: ").append(Settings.getMapFileDirectory())
                 .append("\nMap render theme path: ").append(Settings.getCustomRenderThemeFilePath())
                 .append("\nLive map mode: ").append(Settings.isLiveMap())
-                .append("\nGlobal filter: ").append(Settings.getCacheType().pattern);
+                .append("\nGlobal filter: ").append(Settings.getCacheType().pattern)
+                .append("\nSailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendPermissions(context, body);
         appendConnectors(body);
         if (GCConnector.getInstance().isActive()) {
