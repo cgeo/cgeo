@@ -1131,10 +1131,8 @@
     <string name="search_kw">Nyckelord</string>
     <string name="search_kw_prefill">Nyckelord</string>
     <string name="search_kw_button">Sök med nyckelord</string>
-    <string name="search_fbu">Hittad av användare</string>
     <string name="search_fbu_prefill">Användare</string>
     <string name="search_fbu_button">Sök baserat på hittare</string>
-    <string name="search_hbu">Gömd av användare</string>
     <string name="search_hbu_prefill">Ägare</string>
     <string name="search_hbu_button">Sök baserat på ägare</string>
     <string name="search_tb">Trackables</string>
@@ -1192,7 +1190,6 @@
     <string name="compass_title">Kompass</string>
     <string name="use_gps">Enbart GPS används</string>
     <string name="destination_select">Välj målpunkt</string>
-    <string name="navigation_direct_navigation">Direkt navigering</string>
     <string name="osmand_marker_cgeo">Markör från c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
