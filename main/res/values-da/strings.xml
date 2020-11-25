@@ -1152,10 +1152,8 @@
     <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
     <string name="search_kw_button">Søg efter nøgleord</string>
-    <string name="search_fbu">Fundet af bruger</string>
     <string name="search_fbu_prefill">Brugernavn</string>
     <string name="search_fbu_button">Søg brugernavn</string>
-    <string name="search_hbu">Gemt af bruger</string>
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
     <string name="search_tb">Trackable</string>
@@ -1214,7 +1212,6 @@
     <string name="compass_title">Kompas</string>
     <string name="use_gps">GPS i brug</string>
     <string name="destination_select">Vælg destination</string>
-    <string name="navigation_direct_navigation">Direkte navigation</string>
     <string name="osmand_marker_cgeo">Markør fra c:geo</string>
     <string name="device_orientation_label">Orientering:</string>
     <!-- device orientation types -->
