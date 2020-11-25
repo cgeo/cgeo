@@ -777,7 +777,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinado (offline)</string>
     <string name="map_source_attribution_dialog_title">Créditos do mapa</string>
-    <string name="map_source_attribution_legacy_text">Toque para ver os créditos do mapa</string>
     <string name="init_sendToCgeo">Enviar para o c:geo</string>
     <string name="settings_info_send2cgeo_title">Informação sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome do seu dispositivo</string>
@@ -1189,7 +1188,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="search_fbu">Encontradas por um utilizador</string>
     <string name="search_fbu_prefill">Nome de utilizador</string>
     <string name="search_fbu_button">Pesquisar por utilizador</string>
-    <string name="search_hbu">Escondidas por um utilizador</string>
     <string name="search_hbu_prefill">Proprietário</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
     <string name="search_tb">Trackable</string>
