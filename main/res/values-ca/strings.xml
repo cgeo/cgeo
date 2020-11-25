@@ -573,8 +573,6 @@
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
-    <string name="init_bigSmileysOnMap">Grans emoticones als catxés registrats</string>
-    <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran  emoticones grans  als catxés registrats  (cal reiniciar-lo).</string>
     <string name="init_disabled">Exclou els desactivats</string>
     <string name="init_summary_disabled">Exclou els catxés desactivats</string>
     <string name="init_archived">Exclou arxivats</string>
@@ -779,7 +777,6 @@
     <string name="map_source_osm_offline">Fora de línia</string>
     <string name="map_source_osm_offline_combined">Combinat (Fora de línia)</string>
     <string name="map_source_attribution_dialog_title">Atribucions del mapa</string>
-    <string name="map_source_attribution_legacy_text">Feu clic per l\'atribució del mapa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informació sobre send2cgeo</string>
     <string name="init_sendToCgeo_name">El nom del teu dispositiu</string>
@@ -1187,10 +1184,8 @@
     <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
-    <string name="search_fbu">Trobat per l\'usuari</string>
     <string name="search_fbu_prefill">Nom d\'usuari</string>
     <string name="search_fbu_button">Cerca per nom d\'usuari</string>
-    <string name="search_hbu">Amagat per l\'usuari</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
     <string name="search_tb">Traçable</string>
@@ -1250,9 +1245,7 @@
     <string name="navigation">Navegació</string>
     <string name="compass_title">Brúixola</string>
     <string name="use_gps">Utilitzar només el GPS</string>
-    <string name="use_compass">Tots els sensors utilitzats</string>
     <string name="destination_select">Tria destinació</string>
-    <string name="navigation_direct_navigation">Navegació directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
     <string name="device_heading_label">Dispositiu:</string>
     <string name="device_orientation">Orientació</string>
