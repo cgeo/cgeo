@@ -1094,10 +1094,8 @@
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
-    <string name="search_fbu">Kullanıcı tarafından bulunan</string>
     <string name="search_fbu_prefill">Kullanıcı adı</string>
     <string name="search_fbu_button">Kullanıcı adına göre ara</string>
-    <string name="search_hbu">Saklayana göre ara</string>
     <string name="search_hbu_prefill">Sahibi</string>
     <string name="search_hbu_button">Sahibine göre ara</string>
     <string name="search_tb">Trackable</string>
@@ -1155,7 +1153,6 @@
     <string name="compass_title">Pusula</string>
     <string name="use_gps">Sadece GPS kullanıldı</string>
     <string name="destination_select">Varış yeri seç</string>
-    <string name="navigation_direct_navigation">Doğrudan navigasyon</string>
     <string name="osmand_marker_cgeo">c:geo\'dan yer işaretleyicisi</string>
     <string name="device_heading_label">Cihaz:</string>
     <!-- device orientation types -->
