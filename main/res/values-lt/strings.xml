@@ -572,8 +572,6 @@
     <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone...</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
-    <string name="init_bigSmileysOnMap">Didelės šypsenėlės užregistruotoms slėptuvėms</string>
-    <string name="init_summary_bigSmileysOnMap">Jei įjungta, žemėlapyje užregistruotoms talpykloms bus rodomos didelės šypsenėlės (reikia paleisti iš naujo).</string>
     <string name="init_disabled">Atmesti išjungtas</string>
     <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
     <string name="init_archived">Atmesti archyvuotas</string>
@@ -1193,10 +1191,8 @@
     <string name="search_kw">Raktiniai žodžiai</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
     <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
-    <string name="search_fbu">Rastos vartotojo</string>
     <string name="search_fbu_prefill">Vartotojo vardas</string>
     <string name="search_fbu_button">Paieška pagal vartotojo vardą</string>
-    <string name="search_hbu">Paslėptos vartotojo</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
     <string name="search_tb">Keliauninkas</string>
@@ -1256,9 +1252,7 @@
     <string name="navigation">Navigacija</string>
     <string name="compass_title">Kompasas</string>
     <string name="use_gps">Naudojamas tik GPS</string>
-    <string name="use_compass">Naudojami visi jutikliai</string>
     <string name="destination_select">Pasirinkite tikslą</string>
-    <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
     <string name="osmand_marker_cgeo">Žymeklis iš c:geo</string>
     <string name="device_heading_label">Įrenginys:</string>
     <string name="device_orientation">Orientacija</string>
