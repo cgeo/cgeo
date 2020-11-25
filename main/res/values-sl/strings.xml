@@ -763,10 +763,8 @@
     <string name="search_kw">Ključne besede</string>
     <string name="search_kw_prefill">Ključna beseda</string>
     <string name="search_kw_button">Iskanje po ključnih besedah</string>
-    <string name="search_fbu">Zakladi, ki jih je našel uporabnik</string>
     <string name="search_fbu_prefill">Uporabniško ime</string>
     <string name="search_fbu_button">Iskanje po uporabniškem imenu</string>
-    <string name="search_hbu">Iskanje po lastniku</string>
     <string name="search_hbu_prefill">Lastnik</string>
     <string name="search_hbu_button">Iskanje po imenu lastnika</string>
     <string name="search_tb">Sledljivčki</string>
@@ -817,7 +815,6 @@
     <string name="compass_title">Kompas</string>
     <string name="use_gps">V uporabi je samo GPS</string>
     <string name="destination_select">Izbira destinacije</string>
-    <string name="navigation_direct_navigation">Direktna navigacija</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
     <!-- device orientation types -->
     <!-- license -->

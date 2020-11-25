@@ -1127,10 +1127,8 @@
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
     <string name="search_kw_button">키워드로 검색</string>
-    <string name="search_fbu">찾은 사용자</string>
     <string name="search_fbu_prefill">사용자명</string>
     <string name="search_fbu_button">사용자명으로 검색</string>
-    <string name="search_hbu">숨긴 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_tb">추적아이템</string>
@@ -1189,7 +1187,6 @@
     <string name="compass_title">나침반</string>
     <string name="use_gps">GPS만 사용</string>
     <string name="destination_select">목적지 선택</string>
-    <string name="navigation_direct_navigation">직접 길찾기</string>
     <string name="osmand_marker_cgeo">c:geo 마커</string>
     <string name="device_orientation_label">지향:</string>
     <!-- device orientation types -->

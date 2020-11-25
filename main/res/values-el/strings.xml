@@ -573,8 +573,8 @@
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
     <string name="brouter_recalculating">Επανυπολογισμός διαδρομής στο παρασκήνιο…</string>
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
-    <string name="init_bigSmileysOnMap">Μεγάλο χαμόγελο στις ευρέσεις</string>
-    <string name="init_summary_bigSmileysOnMap">Αν ενεργοποιηθεί θα εμφανίζονται στις κρύπτες που έχετε βρεί (απαιτεί επανεκίνηση).</string>
+    <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια για καταγεγραμμένες κρύπτες</string>
+    <string name="init_summary_bigSmileysOnMap">Εάν ενεργοποιηθεί θα φαίνονται μεγάλα emoticons στις καταγεγραμμένες κρύπτες στον χάρτη, αντί του εικονιδίου του τύπου της κρύπτης (απαιτείται επανεκκίνηση).</string>
     <string name="init_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="init_summary_disabled">Εξαίρεση απενεργοποιημένων κρυπτών</string>
     <string name="init_archived">Εξαίρεση των αρχειοθετημένων</string>
@@ -1191,10 +1191,10 @@
     <string name="search_kw">Λέξεις-κλειδιά</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
-    <string name="search_fbu">Βρέθηκαν από τον χρήστη</string>
+    <string name="search_fbu">Βρέθηκε από</string>
     <string name="search_fbu_prefill">Όνομα χρήστη</string>
     <string name="search_fbu_button">Αναζήτηση με το όνομα χρήστη</string>
-    <string name="search_hbu">Κρυμμένες από τους χρήστες</string>
+    <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_hbu_prefill">Ιδιοκτήτης</string>
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
@@ -1722,6 +1722,7 @@
     <string name="map_export_individual_route">Εξαγωγή μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
+    <string name="map_autotarget_individual_route">Να τεθεί αυτομάτως σαν στόχος</string>
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
     <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>

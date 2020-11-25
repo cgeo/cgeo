@@ -574,8 +574,6 @@
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
-    <string name="init_bigSmileysOnMap">Duże emotikony dla zalogowanych skrytek</string>
-    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, duże emotikony będą wyświetlane dla zalogowanych skrytek na mapie (wymaga ponownego uruchomienia).</string>
     <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
     <string name="init_archived">Wyklucz zarchiwizowane</string>
@@ -780,7 +778,6 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
-    <string name="map_source_attribution_legacy_text">Kliknij, aby wyświetlić przypisanie mapy</string>
     <string name="init_sendToCgeo">Wyślij do c:geo</string>
     <string name="settings_info_send2cgeo_title">Informacje o send2cgeo</string>
     <string name="init_sendToCgeo_name">Nazwa urządzenia</string>
@@ -1204,10 +1201,8 @@
     <string name="search_kw">Słowa kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
     <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
-    <string name="search_fbu">Znalezione przez użytkownika</string>
     <string name="search_fbu_prefill">Nazwa użytkownika</string>
     <string name="search_fbu_button">Szukaj według nazwy użytkownika</string>
-    <string name="search_hbu">Schowane przez użytkowników</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
     <string name="search_tb">Przedmioty podróżne</string>
@@ -1267,9 +1262,7 @@
     <string name="navigation">Nawigacja</string>
     <string name="compass_title">Kompas</string>
     <string name="use_gps">Tylko GPS</string>
-    <string name="use_compass">Wszystkie czujniki użyte</string>
     <string name="destination_select">Wybierz cel</string>
-    <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
     <string name="osmand_marker_cgeo">Marker z c:geo</string>
     <string name="device_heading_label">Urządzenie:</string>
     <string name="device_orientation">Orientacja</string>

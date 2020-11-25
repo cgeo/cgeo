@@ -1167,10 +1167,8 @@
     <string name="search_kw">Mots-clés</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
-    <string name="search_fbu">Trouvées par un utilisateur</string>
     <string name="search_fbu_prefill">Nom d\'utilisateur</string>
     <string name="search_fbu_button">Rechercher par Découvreur</string>
-    <string name="search_hbu">Cachées par un utilisateur</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_tb">Objet voyageur</string>
@@ -1228,9 +1226,7 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Boussole</string>
     <string name="use_gps">GPS uniquement</string>
-    <string name="use_compass">Tous les capteurs utilisés</string>
     <string name="destination_select">Sélectionnez une destination</string>
-    <string name="navigation_direct_navigation">Navigation directe</string>
     <string name="osmand_marker_cgeo">Repère de c:geo</string>
     <string name="device_heading_label">Appareil:</string>
     <string name="device_orientation">Orientation</string>

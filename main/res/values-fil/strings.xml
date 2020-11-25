@@ -860,10 +860,8 @@
     <string name="search_kw">Ang Mga Keyword</string>
     <string name="search_kw_prefill">Ang Keyword</string>
     <string name="search_kw_button">Ang Magsaliksik sa pamamagitan ng keyword</string>
-    <string name="search_fbu">Natagpuan sa pamamagutan ng gumagamit</string>
     <string name="search_fbu_prefill">Ang pangalan ng gumagamit</string>
     <string name="search_fbu_button">Magsaliksik ayon sa pangalan ng gumagamit</string>
-    <string name="search_hbu">Ang Itinago sa pamamagitan ng mga gumagamit</string>
     <string name="search_hbu_prefill">Ang May-ari</string>
     <string name="search_hbu_button">Magsaliksik ayon sa pangalan ng may-ari</string>
     <string name="search_tb">Ang Pagsusubaybay</string>
@@ -919,7 +917,6 @@
     <string name="compass_title">Ang kompas</string>
     <string name="use_gps">Ang nagamit ay GPS lamang</string>
     <string name="destination_select">Mamili ng destinasyon</string>
-    <string name="navigation_direct_navigation">Ang direktang Nabigasyon</string>
     <string name="osmand_marker_cgeo">Tanda mula sa c:geo</string>
     <!-- device orientation types -->
     <!-- license -->

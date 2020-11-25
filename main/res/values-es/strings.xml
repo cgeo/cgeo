@@ -1081,10 +1081,8 @@
     <string name="search_kw">Palabras clave</string>
     <string name="search_kw_prefill">Palabra clave</string>
     <string name="search_kw_button">Buscar por palabra clave</string>
-    <string name="search_fbu">Encontrados por usuario</string>
     <string name="search_fbu_prefill">Nombre de usuario</string>
     <string name="search_fbu_button">Buscar por usuario</string>
-    <string name="search_hbu">Oculto por usuario</string>
     <string name="search_hbu_prefill">Propietario</string>
     <string name="search_hbu_button">Buscar por propietario</string>
     <string name="search_tb">Rastreable</string>
@@ -1140,7 +1138,6 @@
     <string name="compass_title">Brújula</string>
     <string name="use_gps">Usar sólo GPS</string>
     <string name="destination_select">Seleccionar destino</string>
-    <string name="navigation_direct_navigation">Navegación directa</string>
     <string name="osmand_marker_cgeo">Marcador de c:geo</string>
     <!-- device orientation types -->
     <!-- license -->

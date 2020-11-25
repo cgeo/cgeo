@@ -572,8 +572,6 @@
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再計算しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
-    <string name="init_bigSmileysOnMap">大きなスマイルマーク</string>
-    <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルマークを大きく表示\n(c:geoの再起動が必要)</string>
     <string name="init_disabled">一時停止中キャッシュ除く</string>
     <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
     <string name="init_archived">アーカイブ済み除く</string>
@@ -780,7 +778,6 @@
     <string name="map_source_osm_offline">オフライン</string>
     <string name="map_source_osm_offline_combined">OSM結合 (オフライン)</string>
     <string name="map_source_attribution_dialog_title">地図の著作権</string>
-    <string name="map_source_attribution_legacy_text">地図の著作権はこちらをタップしてください</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -1179,10 +1176,8 @@
     <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
     <string name="search_kw_button">キーワードで検索</string>
-    <string name="search_fbu">キャッシュを発見したユーザー名</string>
     <string name="search_fbu_prefill">ユーザー名</string>
     <string name="search_fbu_button">ユーザー名で検索</string>
-    <string name="search_hbu">キャッシュを設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_tb">トラッカブル</string>
@@ -1241,7 +1236,6 @@
     <string name="navigation">ナビゲーション</string>
     <string name="compass_title">コンパス</string>
     <string name="use_gps">GPS のみ使用</string>
-    <string name="use_compass">すべてのセンサーを使用</string>
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
     <string name="device_heading_label">デバイス:</string>

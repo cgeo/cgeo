@@ -858,10 +858,8 @@
     <string name="search_kw">Mga Keyword</string>
     <string name="search_kw_prefill">Mga Keyword</string>
     <string name="search_kw_button">Sinaliksik sa pamamagitan ng keyword</string>
-    <string name="search_fbu">Natagpuan ng gumagamit</string>
     <string name="search_fbu_prefill">Ang pangalan ng gumagamit</string>
     <string name="search_fbu_button">Sinaliksik sa pamamagitan ng pangalan ng gumagamit</string>
-    <string name="search_hbu">Tinatago ng mga gumagamit</string>
     <string name="search_hbu_prefill">Ang may-ari</string>
     <string name="search_hbu_button">Sinaliksik sa pamamagitan ng sariling pangalan</string>
     <string name="search_tb">Nasasala</string>
@@ -917,7 +915,6 @@
     <string name="compass_title">Kumpas</string>
     <string name="use_gps">GPS lamang ang ginamit</string>
     <string name="destination_select">Pumili ng destinasyon</string>
-    <string name="navigation_direct_navigation">Direktang nabigasyon</string>
     <string name="osmand_marker_cgeo">Taga-marka mula sa c:geo</string>
     <!-- device orientation types -->
     <!-- license -->

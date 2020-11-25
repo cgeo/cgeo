@@ -823,10 +823,8 @@
     <string name="search_kw">Mga importanteng letra</string>
     <string name="search_kw_prefill">Importanteng letra</string>
     <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
-    <string name="search_fbu">Nakita\'an sa mugamit</string>
     <string name="search_fbu_prefill">Pangan na gigamit</string>
     <string name="search_fbu_button">Pangitaa pinaagi sa ngalan sa tag-iya</string>
-    <string name="search_hbu">Kitaguan sa tiggamitan</string>
     <string name="search_hbu_prefill">Tag-iya</string>
     <string name="search_hbu_button">Pagpangita pinaagi sa pangan sa tag-iya</string>
     <string name="search_tb">Masundan</string>
@@ -877,7 +875,6 @@
     <string name="navigation">Nabigasyon</string>
     <string name="use_gps">Ang GPS ra maoy gamiton</string>
     <string name="destination_select">Pili ug destinasyon</string>
-    <string name="navigation_direct_navigation">Diretsong nabigasyon</string>
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
     <!-- device orientation types -->
     <!-- license -->

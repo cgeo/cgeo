@@ -851,10 +851,8 @@
     <string name="search_kw">الكلمات المفتاحية</string>
     <string name="search_kw_prefill">كلمة مفتاحية</string>
     <string name="search_kw_button">البحث بواسطة الكلمة المفتاحية</string>
-    <string name="search_fbu">وجدت بواسطة المستخدم</string>
     <string name="search_fbu_prefill">اسم المستخدم</string>
     <string name="search_fbu_button">البحث بواسطة اسم المستخدم</string>
-    <string name="search_hbu">مخفي بواسطة المستخدمين</string>
     <string name="search_hbu_prefill">المالك</string>
     <string name="search_hbu_button">البحث بواسطة اسم المالك</string>
     <string name="search_tb">أمتعة السفر</string>
@@ -910,7 +908,6 @@
     <string name="compass_title">البوصلة</string>
     <string name="use_gps">يستعمل GPS فقط</string>
     <string name="destination_select">حدد الاتجاه</string>
-    <string name="navigation_direct_navigation">الملاحة مباشرة</string>
     <string name="osmand_marker_cgeo">علامة من c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
