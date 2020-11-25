@@ -1678,6 +1678,7 @@
     <string name="map_export_individual_route">Exporter un itinéraire individuel</string>
     <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
+    <string name="map_autotarget_individual_route">Définir automatiquement comme cible</string>
     <string name="map_clear_individual_route">Effacer l\'itinéraire individuel</string>
     <string name="map_clear_individual_route_confirm">Voulez-vous supprimer toutes les caches/points de passage de votre itinéraire individuel ?</string>
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>

@@ -1007,6 +1007,7 @@
     <string name="cache_terrain">Gelände</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
+    <string name="cache_rating_of_new">%1$.1f von %2$d</string>
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Besitzer</string>
     <string name="cache_hidden">Versteckt</string>
@@ -1721,6 +1722,7 @@
     <string name="map_export_individual_route">Exportiere individuelle Route</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
+    <string name="map_autotarget_individual_route">Automatisch als Ziel setzen</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
