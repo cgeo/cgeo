@@ -575,8 +575,8 @@
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
-    <string name="init_bigSmileysOnMap">Velcí smajlíci pro zalogované keše</string>
-    <string name="init_summary_bigSmileysOnMap">Pokud je to povolené, na mapě se pro zalogované keše zobrazí velcí smajlíci (vyžaduje restart aplikace).</string>
+    <string name="init_bigSmileysOnMap">Velké ikony pro zalogované keše</string>
+    <string name="init_summary_bigSmileysOnMap">Je-li povoleno, budou se na mapě namísto ikon podle typu zalogované keše zobrazovat velké emotikony (vyžaduje restart).</string>
     <string name="init_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_summary_disabled">Nezobrazovat deaktivované keše</string>
     <string name="init_archived">Vyloučit archivované</string>
@@ -783,7 +783,7 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
-    <string name="map_source_attribution_legacy_text">Klikněte pro zobrazení zdroje mapy</string>
+    <string name="map_source_attribution_legacy_text">Klepněte pro zobrazení zdroje mapy</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
@@ -1209,10 +1209,10 @@
     <string name="search_kw">Klíčová slova</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
     <string name="search_kw_button">Hledat podle klíčového slova</string>
-    <string name="search_fbu">Nalezeno uživatelem</string>
+    <string name="search_fbu">Nalezeno</string>
     <string name="search_fbu_prefill">Uživatelské jméno</string>
     <string name="search_fbu_button">Hledat podle nálezce</string>
-    <string name="search_hbu">Skryto uživatelem</string>
+    <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_tb">Sledovatelný předmět</string>
