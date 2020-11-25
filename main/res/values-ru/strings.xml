@@ -1149,10 +1149,8 @@
     <string name="search_kw">Ключевые слова</string>
     <string name="search_kw_prefill">Ключевое слово</string>
     <string name="search_kw_button">Искать по ключевым словам</string>
-    <string name="search_fbu">Найдено пользователем</string>
     <string name="search_fbu_prefill">Имя пользователя</string>
     <string name="search_fbu_button">Поиск по пользователю</string>
-    <string name="search_hbu">Создано пользователем</string>
     <string name="search_hbu_prefill">Создатель</string>
     <string name="search_hbu_button">Поиск по создателю</string>
     <string name="search_tb">Трекабл</string>
@@ -1210,7 +1208,6 @@
     <string name="compass_title">Компас</string>
     <string name="use_gps">Только GPS</string>
     <string name="destination_select">Выберите пункт назначения</string>
-    <string name="navigation_direct_navigation">Прямая навигация</string>
     <string name="osmand_marker_cgeo">Маркер из c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
