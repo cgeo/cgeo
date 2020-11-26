@@ -798,7 +798,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
     private void resumeRoute(final boolean force) {
         if (null == manualRoute || force) {
-            manualRoute = new ManualRoute(this::setNavigationTargetFromIndividualRoute);
+            manualRoute = new ManualRoute(this::setTarget);
             manualRoute.reloadRoute(routeLayer);
         } else {
             manualRoute.updateRoute(routeLayer);
@@ -898,7 +898,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         this.distanceView = new DistanceView(findViewById(R.id.distance1).getRootView(), navTarget, Settings.isBrouterShowBothDistances());
 
         //Target view
-        this.targetView = new TargetView((TextView) findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
+        this.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = getCurrentTargetCache();
         if (target != null) {
             targetView.setTarget(target.getGeocode(), target.getName());
@@ -1599,17 +1599,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             return;
         }
         if (manualRoute == null) {
-            manualRoute = new ManualRoute(this::setNavigationTargetFromIndividualRoute);
+            manualRoute = new ManualRoute(this::setTarget);
         }
         manualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
         ActivityMixin.invalidateOptionsMenu(this);
-    }
-
-    private void setNavigationTargetFromIndividualRoute(@Nullable final Geopoint geopoint, final String geocode) {
-        if (geopoint != null) {
-            setTarget(geopoint, geocode);
-        }
     }
 
     @Nullable
@@ -1642,6 +1636,9 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             targetGeocode = geocode;
             final Geocache target = getCurrentTargetCache();
             targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+        } else {
+            targetGeocode = null;
+            targetView.setTarget(null, null);
         }
     }
 
