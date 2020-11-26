@@ -88,7 +88,7 @@ public class Settings {
     private static final boolean TRANSPARENT_BACKGROUND_DEFAULT;
 
     static {
-        if (Build.PRODUCT.startsWith("asop") && Build.VERSION.SDK_INT == 27) {
+        if (Build.PRODUCT.startsWith("aosp") && Build.VERSION.SDK_INT == 27) {
             TRANSPARENT_BACKGROUND_DEFAULT = false;
         } else {
             TRANSPARENT_BACKGROUND_DEFAULT = true;

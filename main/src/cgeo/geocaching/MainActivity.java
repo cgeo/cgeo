@@ -275,6 +275,9 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        if (Settings.isTransparentBackground()) {
+            setTheme(R.style.cgeo_main_transparent);
+        }
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 
@@ -287,7 +290,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
         setContentView(R.layout.main_activity);
         if (!Settings.isTransparentBackground()) {
-            setTheme(R.style.cgeo_main);
             final View mainscreen = findViewById(R.id.mainscreen);
             mainscreen.setBackgroundColor(getResources().getColor(Settings.isLightSkin() ? R.color.background_light_notice : R.color.background_dark_notice));
         }

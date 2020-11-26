@@ -18,7 +18,7 @@
 
     </style>
 
-    <style name="cgeo_main.transparent" parent="cgeo_main.base">
+    <style name="cgeo_main_transparent" parent="cgeo_main.base">
 
         <!-- copy the style elements of the Wallpaper theme since AppCompat has no Wallpaper theme -->
         <item name="android:windowBackground">@android:color/transparent</item>
