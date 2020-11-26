@@ -24,6 +24,9 @@ public class DistanceView {
     public void setDestination(final Geopoint coords) {
         destinationCoords = coords;
         realDistance = 0.0f;
+        if (destinationCoords == null) {
+            mapDistanceDrawer.drawDistance(showBothDistances, 0.0f, 0.0f);
+        }
     }
 
     public void setRealDistance(final float realDistance) {
