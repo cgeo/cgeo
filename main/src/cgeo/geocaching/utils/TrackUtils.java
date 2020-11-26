@@ -47,30 +47,26 @@ public class TrackUtils {
      * @return true, if selected menu entry is track related and consumed / false else
      */
     public static boolean onOptionsItemSelected(final Activity activity, final int id, final Route tracks, final Runnable hideOptionsChanged, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
-        switch (id) {
-            case R.id.menu_load_track:
-                if (null == tracks || tracks.getNumSegments() == 0) {
-                    startIndividualTrackFileSelector(activity);
-                } else {
-                    Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) -> startIndividualTrackFileSelector(activity));
-                }
-                return true;
-            case R.id.menu_unload_track:
-                Settings.setTrackFile(null);
-                updateTracks.updateRoute(null);
-                return true;
-            case R.id.menu_hide_track:
-                Settings.setHideTrack(!Settings.isHideTrack());
-                hideOptionsChanged.run();
-                return true;
-            case R.id.menu_center_on_track:
-                if (null != tracks) {
-                    tracks.setCenter(centerOnPosition);
-                }
-                return true;
-            default:
-                return false;
+        if (id == R.id.menu_load_track) {
+            if (null == tracks || tracks.getNumSegments() == 0) {
+                startIndividualTrackFileSelector(activity);
+            } else {
+                Dialogs.confirm(activity, R.string.map_load_track, R.string.map_load_track_confirm, (dialog, which) -> startIndividualTrackFileSelector(activity));
+            }
+        } else if (id == R.id.menu_unload_track) {
+            Settings.setTrackFile(null);
+            updateTracks.updateRoute(null);
+        } else if (id == R.id.menu_hide_track) {
+            Settings.setHideTrack(!Settings.isHideTrack());
+            hideOptionsChanged.run();
+        } else if (id == R.id.menu_center_on_track) {
+            if (null != tracks) {
+                tracks.setCenter(centerOnPosition);
+            }
+        } else {
+            return false;
         }
+        return true;
     }
 
     private static void startIndividualTrackFileSelector(final Activity activity) {

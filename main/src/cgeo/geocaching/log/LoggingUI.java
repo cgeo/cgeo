@@ -68,16 +68,15 @@ public final class LoggingUI extends AbstractUIFactory {
     }
 
     public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache, final DialogInterface.OnDismissListener listener) {
-        switch (item.getItemId()) {
-            case R.id.menu_log_visit:
-                cache.logVisit(activity);
-                return true;
-            case R.id.menu_log_visit_offline:
-                showOfflineMenu(cache, activity, listener);
-                return true;
-            default:
-                return false;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_log_visit) {
+            cache.logVisit(activity);
+        } else if (itemId == R.id.menu_log_visit_offline) {
+            showOfflineMenu(cache, activity, listener);
+        } else {
+            return false;
         }
+        return true;
     }
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {

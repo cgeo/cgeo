@@ -535,42 +535,33 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
-        if (imageListFragment.onParentActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
+        imageListFragment.onParentActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
-        switch (item.getItemId()) {
-            case R.id.menu_send:
-                if (TextUtils.getNormalizedStringLength(logEditText.getText().toString()) <= LOG_MAX_LENGTH) {
-                    sendLogAndConfirm();
-                } else {
-                    Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
-                }
-                return true;
-            case R.id.menu_image:
-                imageListFragment.startAddImageDialog();
-                return true;
-            case R.id.save:
-                finish(SaveMode.FORCE);
-                return true;
-            case R.id.clear:
-                clearLog();
-                return true;
-            case R.id.menu_sort_trackables_name:
-                sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_NAME);
-                return true;
-            case R.id.menu_sort_trackables_code:
-                sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_TRACKCODE);
-                return true;
-            default:
-                break;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_send) {
+            if (TextUtils.getNormalizedStringLength(logEditText.getText().toString()) <= LOG_MAX_LENGTH) {
+                sendLogAndConfirm();
+            } else {
+                Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+            }
+        } else if (itemId == R.id.menu_image) {
+            imageListFragment.startAddImageDialog();
+        } else if (itemId == R.id.save) {
+            finish(SaveMode.FORCE);
+        } else if (itemId == R.id.clear) {
+            clearLog();
+        } else if (itemId == R.id.menu_sort_trackables_name) {
+            sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_NAME);
+        } else if (itemId == R.id.menu_sort_trackables_code) {
+            sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_TRACKCODE);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void sendLogAndConfirm() {

@@ -785,125 +785,105 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        switch (id) {
-            case android.R.id.home:
-                ActivityMixin.navigateUp(activity);
-                return true;
-            case R.id.menu_map_rotation_off:
-                setMapRotation(item, Settings.MAPROTATION_OFF);
-                return true;
-            case R.id.menu_map_rotation_manual:
-                setMapRotation(item, Settings.MAPROTATION_MANUAL);
-                return true;
-            case R.id.menu_map_rotation_auto:
-                setMapRotation(item, Settings.MAPROTATION_AUTO);
-                return true;
-            case R.id.menu_direction_line:
-                Settings.setMapDirection(!Settings.isMapDirection());
-                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-                ActivityMixin.invalidateOptionsMenu(activity);
-                return true;
-            case R.id.menu_map_live:
-                mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
-                if (mapOptions.mapMode == MapMode.LIVE) {
-                    Settings.setLiveMap(mapOptions.isLiveEnabled);
-                }
-                markersInvalidated = true;
-                lastSearchResult = null;
-                mapOptions.searchResult = null;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (mapOptions.mapMode != MapMode.SINGLE) {
-                    mapOptions.title = StringUtils.EMPTY;
-                }
-                updateMapTitle();
-                return true;
-            case R.id.menu_store_caches:
-                return storeCaches(getGeocodesForCachesInViewport());
-            case R.id.menu_store_unsaved_caches:
-                return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
-            case R.id.menu_circle_mode:
-                Settings.setCircles(!Settings.getCircles());
-                mapView.setCircles(Settings.getCircles());
-                mapView.repaintRequired(null);
-                ActivityMixin.invalidateOptionsMenu(activity);
-                return true;
-            case R.id.menu_mycaches_mode:
-                Settings.setExcludeMine(!Settings.isExcludeMyCaches());
-                markersInvalidated = true;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (!Settings.isExcludeMyCaches()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_disabled_mode:
-                Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
-                markersInvalidated = true;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (!Settings.isExcludeDisabledCaches()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_archived_mode:
-                Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
-                markersInvalidated = true;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (!Settings.isExcludeArchivedCaches()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_hidewp_original:
-                Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
-                markersInvalidated = true;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (!Settings.isExcludeWpOriginal()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_hidewp_parking:
-                Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
-                markersInvalidated = true;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (!Settings.isExcludeWpParking()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_hidewp_visited:
-                Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
-                markersInvalidated = true;
-                ActivityMixin.invalidateOptionsMenu(activity);
-                if (!Settings.isExcludeWpVisited()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_theme_mode:
-                selectMapTheme();
-                return true;
-            case R.id.menu_as_list: {
-                CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
-                return true;
+        if (id == android.R.id.home) {
+            ActivityMixin.navigateUp(activity);
+        } else if (id == R.id.menu_map_rotation_off) {
+            setMapRotation(item, Settings.MAPROTATION_OFF);
+        } else if (id == R.id.menu_map_rotation_manual) {
+            setMapRotation(item, Settings.MAPROTATION_MANUAL);
+        } else if (id == R.id.menu_map_rotation_auto) {
+            setMapRotation(item, Settings.MAPROTATION_AUTO);
+        } else if (id == R.id.menu_direction_line) {
+            Settings.setMapDirection(!Settings.isMapDirection());
+            mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+            ActivityMixin.invalidateOptionsMenu(activity);
+        } else if (id == R.id.menu_map_live) {
+            mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
+            if (mapOptions.mapMode == MapMode.LIVE) {
+                Settings.setLiveMap(mapOptions.isLiveEnabled);
             }
-            case R.id.menu_hint:
-                menuShowHint();
-                return true;
-            case R.id.menu_compass:
-                menuCompass();
-                return true;
-            default:
-                if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-                && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
-                && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
-                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
-                && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
-                && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
-                    final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                    if (mapSource != null) {
-                        item.setChecked(true);
-                        changeMapSource(mapSource);
-                        return true;
-                    }
-                }
+            markersInvalidated = true;
+            lastSearchResult = null;
+            mapOptions.searchResult = null;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (mapOptions.mapMode != MapMode.SINGLE) {
+                mapOptions.title = StringUtils.EMPTY;
+            }
+            updateMapTitle();
+        } else if (id == R.id.menu_store_caches) {
+            return storeCaches(getGeocodesForCachesInViewport());
+        } else if (id == R.id.menu_store_unsaved_caches) {
+            return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
+        } else if (id == R.id.menu_circle_mode) {
+            Settings.setCircles(!Settings.getCircles());
+            mapView.setCircles(Settings.getCircles());
+            mapView.repaintRequired(null);
+            ActivityMixin.invalidateOptionsMenu(activity);
+        } else if (id == R.id.menu_mycaches_mode) {
+            Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+            markersInvalidated = true;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (!Settings.isExcludeMyCaches()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_disabled_mode) {
+            Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
+            markersInvalidated = true;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (!Settings.isExcludeDisabledCaches()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_archived_mode) {
+            Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
+            markersInvalidated = true;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (!Settings.isExcludeArchivedCaches()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_hidewp_original) {
+            Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
+            markersInvalidated = true;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (!Settings.isExcludeWpOriginal()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_hidewp_parking) {
+            Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
+            markersInvalidated = true;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (!Settings.isExcludeWpParking()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_hidewp_visited) {
+            Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
+            markersInvalidated = true;
+            ActivityMixin.invalidateOptionsMenu(activity);
+            if (!Settings.isExcludeWpVisited()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_theme_mode) {
+            selectMapTheme();
+        } else if (id == R.id.menu_as_list) {
+            CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
+        } else if (id == R.id.menu_hint) {
+            menuShowHint();
+        } else if (id == R.id.menu_compass) {
+            menuCompass();
+        } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
+            && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
+            && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
+            && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
+            && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
+            && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
+            final MapSource mapSource = MapProviderFactory.getMapSource(id);
+            if (mapSource != null) {
+                item.setChecked(true);
+                changeMapSource(mapSource);
+            } else {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     private void routingModeChanged() {
