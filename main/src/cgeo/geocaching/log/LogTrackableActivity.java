@@ -508,26 +508,24 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_send:
-                if (connector.isRegistered()) {
-                    sendLog();
-                } else {
-                    // Redirect user to concerned connector settings
-                    Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
-                        if (connector.getPreferenceActivity() > 0) {
-                            SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
-                        } else {
-                            showToast(res.getString(R.string.err_trackable_no_preference_activity));
-                        }
-                    });
-                }
-                return true;
-            default:
-                break;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_send) {
+            if (connector.isRegistered()) {
+                sendLog();
+            } else {
+                // Redirect user to concerned connector settings
+                Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
+                    if (connector.getPreferenceActivity() > 0) {
+                        SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
+                    } else {
+                        showToast(res.getString(R.string.err_trackable_no_preference_activity));
+                    }
+                });
+            }
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     /**

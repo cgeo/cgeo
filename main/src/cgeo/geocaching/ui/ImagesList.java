@@ -227,35 +227,32 @@ public class ImagesList {
 
     public boolean onContextItemSelected(final MenuItem item) {
         final BitmapDrawable currentDrawable = (BitmapDrawable) currentView.getDrawable();
-        switch (item.getItemId()) {
-            case R.id.image_open_file:
-                viewImageInStandardApp(currentImage, currentDrawable);
-                return true;
-            case R.id.image_open_browser:
-                if (currentImage != null) {
-                    currentImage.openInBrowser(activity);
-                }
-                return true;
-            case R.id.image_add_waypoint:
-                final Geopoint coords = geoPoints.get(currentView.getId());
-                if (geocache != null && coords != null) {
-                    final Waypoint waypoint = new Waypoint(currentImage.getTitle(), WaypointType.WAYPOINT, true);
-                    waypoint.setCoords(coords);
-                    geocache.addOrChangeWaypoint(waypoint, true);
-                    final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                    intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                    LocalBroadcastManager.getInstance(activity).sendBroadcast(intent);
-                }
-                return true;
-            case R.id.menu_navigate:
-                final Geopoint geopoint = geoPoints.get(currentView.getId());
-                if (geopoint != null) {
-                    NavigationAppFactory.showNavigationMenu(activity, null, null, geopoint);
-                }
-                return true;
-            default:
-                return false;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.image_open_file) {
+            viewImageInStandardApp(currentImage, currentDrawable);
+        } else if (itemId == R.id.image_open_browser) {
+            if (currentImage != null) {
+                currentImage.openInBrowser(activity);
+            }
+        } else if (itemId == R.id.image_add_waypoint) {
+            final Geopoint coords = geoPoints.get(currentView.getId());
+            if (geocache != null && coords != null) {
+                final Waypoint waypoint = new Waypoint(currentImage.getTitle(), WaypointType.WAYPOINT, true);
+                waypoint.setCoords(coords);
+                geocache.addOrChangeWaypoint(waypoint, true);
+                final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
+                intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
+                LocalBroadcastManager.getInstance(activity).sendBroadcast(intent);
+            }
+        } else if (itemId == R.id.menu_navigate) {
+            final Geopoint geopoint = geoPoints.get(currentView.getId());
+            if (geopoint != null) {
+                NavigationAppFactory.showNavigationMenu(activity, null, null, geopoint);
+            }
+        } else {
+            return false;
         }
+        return true;
     }
 
     private static String mimeTypeForUrl(final String url) {

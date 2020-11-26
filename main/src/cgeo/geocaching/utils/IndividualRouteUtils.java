@@ -49,37 +49,31 @@ public class IndividualRouteUtils {
      * @return true, if selected menu entry is individual route related and consumed / false else
      */
     public static boolean onOptionsItemSelected(final Activity activity, final int id, final ManualRoute route, final Runnable clearIndividualRoute, final Route.CenterOnPosition centerOnPosition) {
-        switch (id) {
-            case R.id.menu_load_individual_route:
-                if (null == route || route.getNumSegments() == 0) {
-                    startIndividualRouteFileSelector(activity);
-                } else {
-                    Dialogs.confirm(activity, R.string.map_load_individual_route, R.string.map_load_individual_route_confirm, (dialog, which) -> startIndividualRouteFileSelector(activity));
-                }
-                return true;
-            case R.id.menu_sort_individual_route:
-                activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
-                return true;
-            case R.id.menu_center_on_route:
-                route.setCenter(centerOnPosition);
-                return true;
-            case R.id.menu_export_individual_route:
-                new IndividualRouteExport(activity, route);
-                return true;
-            case R.id.menu_clear_individual_route:
-                Dialogs.confirm(activity, R.string.map_clear_individual_route, R.string.map_clear_individual_route_confirm, (dialog, which) -> {
-                    clearIndividualRoute.run();
-                    ActivityMixin.invalidateOptionsMenu(activity);
-                });
-                return true;
-            case R.id.menu_autotarget_individual_route:
-                Settings.setAutotargetIndividualRoute(!Settings.getAutotargetIndividualRoute());
-                route.triggerTargetUpdate();
+        if (id == R.id.menu_load_individual_route) {
+            if (null == route || route.getNumSegments() == 0) {
+                startIndividualRouteFileSelector(activity);
+            } else {
+                Dialogs.confirm(activity, R.string.map_load_individual_route, R.string.map_load_individual_route_confirm, (dialog, which) -> startIndividualRouteFileSelector(activity));
+            }
+        } else if (id == R.id.menu_sort_individual_route) {
+            activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
+        } else if (id == R.id.menu_center_on_route) {
+            route.setCenter(centerOnPosition);
+        } else if (id == R.id.menu_export_individual_route) {
+            new IndividualRouteExport(activity, route);
+        } else if (id == R.id.menu_clear_individual_route) {
+            Dialogs.confirm(activity, R.string.map_clear_individual_route, R.string.map_clear_individual_route_confirm, (dialog, which) -> {
+                clearIndividualRoute.run();
                 ActivityMixin.invalidateOptionsMenu(activity);
-                return true;
-            default:
-                return false;
+            });
+        } else if (id == R.id.menu_autotarget_individual_route) {
+            Settings.setAutotargetIndividualRoute(!Settings.getAutotargetIndividualRoute());
+            route.triggerTargetUpdate();
+            ActivityMixin.invalidateOptionsMenu(activity);
+        } else {
+            return false;
         }
+        return true;
     }
 
     private static void startIndividualRouteFileSelector(final Activity activity) {

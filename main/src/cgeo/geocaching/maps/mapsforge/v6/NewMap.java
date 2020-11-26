@@ -400,134 +400,117 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        switch (id) {
-            case android.R.id.home:
-                ActivityMixin.navigateUp(this);
-                return true;
-            case R.id.menu_direction_line:
-                Settings.setMapDirection(!Settings.isMapDirection());
-                navigationLayer.requestRedraw();
-                ActivityMixin.invalidateOptionsMenu(this);
-                return true;
-            case R.id.menu_map_live:
-                mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
-                if (mapOptions.isLiveEnabled) {
-                    mapOptions.isStoredEnabled = true;
-                }
+        if (id == android.R.id.home) {
+            ActivityMixin.navigateUp(this);
+        } else if (id == R.id.menu_direction_line) {
+            Settings.setMapDirection(!Settings.isMapDirection());
+            navigationLayer.requestRedraw();
+            ActivityMixin.invalidateOptionsMenu(this);
+        } else if (id == R.id.menu_map_live) {
+            mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
+            if (mapOptions.isLiveEnabled) {
+                mapOptions.isStoredEnabled = true;
+            }
 
-                if (mapOptions.mapMode == MapMode.LIVE) {
-                    Settings.setLiveMap(mapOptions.isLiveEnabled);
-                }
-                caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
-                caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (mapOptions.mapMode != MapMode.SINGLE) {
-                    mapOptions.title = StringUtils.EMPTY;
+            if (mapOptions.mapMode == MapMode.LIVE) {
+                Settings.setLiveMap(mapOptions.isLiveEnabled);
+            }
+            caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
+            caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (mapOptions.mapMode != MapMode.SINGLE) {
+                mapOptions.title = StringUtils.EMPTY;
+            } else {
+                // reset target cache on single mode map
+                targetGeocode = mapOptions.geocode;
+            }
+        } else if (id == R.id.menu_store_caches) {
+            return storeCaches(caches.getVisibleCacheGeocodes());
+        } else if (id == R.id.menu_store_unsaved_caches) {
+            return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
+        } else if (id == R.id.menu_circle_mode) {
+            Settings.setCircles(!Settings.getCircles());
+            caches.switchCircles();
+            ActivityMixin.invalidateOptionsMenu(this);
+        } else if (id == R.id.menu_mycaches_mode) {
+            Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+            caches.invalidate();
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (!Settings.isExcludeMyCaches()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_disabled_mode) {
+            Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
+            caches.invalidate();
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (!Settings.isExcludeDisabledCaches()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_archived_mode) {
+            Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
+            caches.invalidate();
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (!Settings.isExcludeArchivedCaches()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_hidewp_original) {
+            Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
+            caches.invalidate();
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (!Settings.isExcludeWpOriginal()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_hidewp_parking) {
+            Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
+            caches.invalidate();
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (!Settings.isExcludeWpParking()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_hidewp_visited) {
+            Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
+            caches.invalidate();
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (!Settings.isExcludeWpVisited()) {
+                Tile.cache.clear();
+            }
+        } else if (id == R.id.menu_theme_mode) {
+            selectMapTheme();
+        } else if (id == R.id.menu_theme_options) {
+            final Intent intent = new Intent(this, RenderThemeSettings.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            if (styleMenu != null) {
+                intent.putExtra(RenderThemeSettings.RENDERTHEME_MENU, styleMenu);
+            }
+            startActivity(intent);
+        } else if (id == R.id.menu_as_list) {
+            CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
+        } else if (id == R.id.menu_hint) {
+            menuShowHint();
+        } else if (id == R.id.menu_compass) {
+            menuCompass();
+        } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
+            && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
+            && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
+            && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
+            && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
+            && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
+            final String language = MapProviderFactory.getLanguage(id);
+            if (language != null || id == MAP_LANGUAGE_DEFAULT) {
+                item.setChecked(true);
+                changeLanguage(id);
+                return true;
+            } else {
+                final MapSource mapSource = MapProviderFactory.getMapSource(id);
+                if (mapSource != null) {
+                    item.setChecked(true);
+                    changeMapSource(mapSource);
                 } else {
-                    // reset target cache on single mode map
-                    targetGeocode = mapOptions.geocode;
+                    return false;
                 }
-                return true;
-            case R.id.menu_store_caches:
-                return storeCaches(caches.getVisibleCacheGeocodes());
-            case R.id.menu_store_unsaved_caches:
-                return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
-            case R.id.menu_circle_mode:
-                Settings.setCircles(!Settings.getCircles());
-                caches.switchCircles();
-                ActivityMixin.invalidateOptionsMenu(this);
-                return true;
-            case R.id.menu_mycaches_mode:
-                Settings.setExcludeMine(!Settings.isExcludeMyCaches());
-                caches.invalidate();
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (!Settings.isExcludeMyCaches()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_disabled_mode:
-                Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
-                caches.invalidate();
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (!Settings.isExcludeDisabledCaches()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_archived_mode:
-                Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
-                caches.invalidate();
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (!Settings.isExcludeArchivedCaches()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_hidewp_original:
-                Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
-                caches.invalidate();
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (!Settings.isExcludeWpOriginal()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_hidewp_parking:
-                Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
-                caches.invalidate();
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (!Settings.isExcludeWpParking()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_hidewp_visited:
-                Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
-                caches.invalidate();
-                ActivityMixin.invalidateOptionsMenu(this);
-                if (!Settings.isExcludeWpVisited()) {
-                    Tile.cache.clear();
-                }
-                return true;
-            case R.id.menu_theme_mode:
-                selectMapTheme();
-                return true;
-            case R.id.menu_theme_options:
-                final Intent intent = new Intent(this, RenderThemeSettings.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                if (styleMenu != null) {
-                    intent.putExtra(RenderThemeSettings.RENDERTHEME_MENU, styleMenu);
-                }
-                startActivity(intent);
-                return true;
-            case R.id.menu_as_list:
-                CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
-                return true;
-            case R.id.menu_hint:
-                menuShowHint();
-                return true;
-            case R.id.menu_compass:
-                menuCompass();
-                return true;
-            default:
-                if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-                && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
-                && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
-                && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
-                && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
-                && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
-                    final String language = MapProviderFactory.getLanguage(id);
-                    if (language != null || id == MAP_LANGUAGE_DEFAULT) {
-                        item.setChecked(true);
-                        changeLanguage(id);
-                        return true;
-                    } else {
-                        final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                        if (mapSource != null) {
-                            item.setChecked(true);
-                            changeMapSource(mapSource);
-                            return true;
-                        }
-                    }
-                }
+            }
         }
-        return false;
+        return true;
     }
 
     private void routingModeChanged() {

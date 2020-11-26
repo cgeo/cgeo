@@ -38,33 +38,26 @@ public class BRouterUtils {
 
 
     public static boolean onOptionsItemSelected(@NonNull final MenuItem item, final Runnable routingModeChanged) {
-        switch (item.getItemId()) {
-            case R.id.menu_routing_straight: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.STRAIGHT);
-                routingModeChanged.run();
-                return true;
-            }
-            case R.id.menu_routing_walk: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.WALK);
-                routingModeChanged.run();
-                return true;
-            }
-            case R.id.menu_routing_bike: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.BIKE);
-                routingModeChanged.run();
-                return true;
-            }
-            case R.id.menu_routing_car: {
-                item.setChecked(true);
-                Settings.setRoutingMode(RoutingMode.CAR);
-                routingModeChanged.run();
-                return true;
-            }
-            default:
-                return false;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_routing_straight) {
+            item.setChecked(true);
+            Settings.setRoutingMode(RoutingMode.STRAIGHT);
+            routingModeChanged.run();
+        } else if (itemId == R.id.menu_routing_walk) {
+            item.setChecked(true);
+            Settings.setRoutingMode(RoutingMode.WALK);
+            routingModeChanged.run();
+        } else if (itemId == R.id.menu_routing_bike) {
+            item.setChecked(true);
+            Settings.setRoutingMode(RoutingMode.BIKE);
+            routingModeChanged.run();
+        } else if (itemId == R.id.menu_routing_car) {
+            item.setChecked(true);
+            Settings.setRoutingMode(RoutingMode.CAR);
+            routingModeChanged.run();
+        } else {
+            return false;
         }
+        return true;
     }
 }

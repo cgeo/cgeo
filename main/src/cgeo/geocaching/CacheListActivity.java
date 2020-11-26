@@ -1145,45 +1145,36 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return true;
         }
 
-        switch (item.getItemId()) {
-            case R.id.menu_default_navigation:
-                NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
-                break;
-            case R.id.menu_navigate:
-                NavigationAppFactory.showNavigationMenu(this, cache, null, null);
-                break;
-            case R.id.menu_cache_details:
-                CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
-                break;
-            case R.id.menu_drop_cache:
-                deleteCaches(Collections.singletonList(cache));
-                break;
-            case R.id.menu_move_to_list:
-                moveCachesToOtherList(Collections.singletonList(cache));
-                break;
-            case R.id.menu_copy_to_list:
-                copyCachesToOtherList(Collections.singletonList(cache));
-                break;
-            case R.id.menu_store_cache:
-            case R.id.menu_refresh:
-                refreshStored(Collections.singletonList(cache));
-                break;
-            default:
-                // we must remember the menu info for the sub menu, there is a bug
-                // in Android:
-                // https://code.google.com/p/android/issues/detail?id=7139
-                lastMenuInfo = info;
-                final View selectedView = adapterInfo.targetView;
-                LoggingUI.onMenuItemSelected(item, this, cache, dialog -> {
-                    if (selectedView != null) {
-                        final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
-                        if (holder != null) {
-                            CacheListAdapter.updateViewHolder(holder, cache, res);
-                        }
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_default_navigation) {
+            NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
+        } else if (itemId == R.id.menu_navigate) {
+            NavigationAppFactory.showNavigationMenu(this, cache, null, null);
+        } else if (itemId == R.id.menu_cache_details) {
+            CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
+        } else if (itemId == R.id.menu_drop_cache) {
+            deleteCaches(Collections.singletonList(cache));
+        } else if (itemId == R.id.menu_move_to_list) {
+            moveCachesToOtherList(Collections.singletonList(cache));
+        } else if (itemId == R.id.menu_copy_to_list) {
+            copyCachesToOtherList(Collections.singletonList(cache));
+        } else if (itemId == R.id.menu_store_cache || itemId == R.id.menu_refresh) {
+            refreshStored(Collections.singletonList(cache));
+        } else {
+            // we must remember the menu info for the sub menu, there is a bug
+            // in Android:
+            // https://code.google.com/p/android/issues/detail?id=7139
+            lastMenuInfo = info;
+            final View selectedView = adapterInfo.targetView;
+            LoggingUI.onMenuItemSelected(item, this, cache, dialog -> {
+                if (selectedView != null) {
+                    final CacheListAdapter.ViewHolder holder = (CacheListAdapter.ViewHolder) selectedView.getTag();
+                    if (holder != null) {
+                        CacheListAdapter.updateViewHolder(holder, cache, res);
                     }
-                });
+                }
+            });
         }
-
         return true;
     }
 

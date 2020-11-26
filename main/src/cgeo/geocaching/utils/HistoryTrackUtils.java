@@ -30,28 +30,22 @@ public class HistoryTrackUtils {
      * @return true, if selected menu entry is track related and consumed / false else
      */
     public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable redrawHistoryTrack, final Runnable clearTrailHistory) {
-        switch (id) {
-            case R.id.menu_trail_show:
-                Settings.setMapTrail(true);
-                redrawHistoryTrack.run();
-                ActivityMixin.invalidateOptionsMenu(activity);
-                return true;
-            case R.id.menu_trail_hide:
-                Settings.setMapTrail(false);
-                redrawHistoryTrack.run();
-                ActivityMixin.invalidateOptionsMenu(activity);
-                return true;
-            case R.id.menu_clear_trailhistory: {
-                clearTrailHistory.run();
-                return true;
-            }
-            case R.id.menu_export_trailhistory: {
-                new TrailHistoryExport(activity, clearTrailHistory);
-                return true;
-            }
-            default:
-                return false;
+        if (id == R.id.menu_trail_show) {
+            Settings.setMapTrail(true);
+            redrawHistoryTrack.run();
+            ActivityMixin.invalidateOptionsMenu(activity);
+        } else if (id == R.id.menu_trail_hide) {
+            Settings.setMapTrail(false);
+            redrawHistoryTrack.run();
+            ActivityMixin.invalidateOptionsMenu(activity);
+        } else if (id == R.id.menu_clear_trailhistory) {
+            clearTrailHistory.run();
+        } else if (id == R.id.menu_export_trailhistory) {
+            new TrailHistoryExport(activity, clearTrailHistory);
+        } else {
+            return false;
         }
+        return true;
     }
 
 

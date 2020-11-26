@@ -37,18 +37,14 @@ public class CompactIconModeUtils {
     }
 
     public static boolean onOptionsItemSelected(final int id, final Runnable setCompactIconMode) {
-        switch (id) {
-            case R.id.menu_map_compactIconModeOff:
-                Settings.setCompactIconMode(Settings.COMPACTICON_OFF);
-                break;
-            case R.id.menu_map_compactIconModeOn:
-                Settings.setCompactIconMode(Settings.COMPACTICON_ON);
-                break;
-            case R.id.menu_map_compactIconModeAuto:
-                Settings.setCompactIconMode(Settings.COMPACTICON_AUTO);
-                break;
-            default:
-                return false;
+        if (id == R.id.menu_map_compactIconModeOff) {
+            Settings.setCompactIconMode(Settings.COMPACTICON_OFF);
+        } else if (id == R.id.menu_map_compactIconModeOn) {
+            Settings.setCompactIconMode(Settings.COMPACTICON_ON);
+        } else if (id == R.id.menu_map_compactIconModeAuto) {
+            Settings.setCompactIconMode(Settings.COMPACTICON_AUTO);
+        } else {
+            return false;
         }
         setCompactIconMode.run();
         return true;

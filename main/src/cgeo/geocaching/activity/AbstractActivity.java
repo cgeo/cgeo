@@ -200,32 +200,27 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         if (clickedItemText == null) {
             return false;
         }
-        switch (item.getItemId()) {
-            // detail fields
-            case R.id.menu_copy:
-                ClipboardUtils.copyToClipboard(clickedItemText);
-                showToast(res.getString(R.string.clipboard_copy_ok));
-                actionMode.finish();
-                return true;
-            case R.id.menu_translate_to_sys_lang:
-                TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
-                actionMode.finish();
-                return true;
-            case R.id.menu_translate_to_english:
-                TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
-                actionMode.finish();
-                return true;
-            case R.id.menu_extract_waypoints:
-                extractWaypoints(clickedItemText, cache);
-                actionMode.finish();
-                return true;
-            case R.id.menu_cache_share_field:
-                ShareUtils.sharePlainText(this, clickedItemText.toString());
-                actionMode.finish();
-                return true;
-            default:
-                return false;
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_copy) {
+            ClipboardUtils.copyToClipboard(clickedItemText);
+            showToast(res.getString(R.string.clipboard_copy_ok));
+            actionMode.finish();
+        } else if (itemId == R.id.menu_translate_to_sys_lang) {
+            TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
+            actionMode.finish();
+        } else if (itemId == R.id.menu_translate_to_english) {
+            TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
+            actionMode.finish();
+        } else if (itemId == R.id.menu_extract_waypoints) {
+            extractWaypoints(clickedItemText, cache);
+            actionMode.finish();
+        } else if (itemId == R.id.menu_cache_share_field) {
+            ShareUtils.sharePlainText(this, clickedItemText.toString());
+            actionMode.finish();
+        } else {
+            return false;
         }
+        return true;
     }
 
     protected void extractWaypoints(@Nullable final CharSequence text, @Nullable final Geocache cache) {
