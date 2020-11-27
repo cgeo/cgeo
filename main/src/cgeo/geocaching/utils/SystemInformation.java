@@ -55,7 +55,8 @@ public final class SystemInformation {
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("--- System information ---")
                 .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
-                .append("\nAndroid version: ").append(VERSION.RELEASE)
+                .append("\nAndroid version: ").append(VERSION.RELEASE).append(", ").append(VERSION.SDK_INT)
+                .append("\nI am a Sailfish: ").append(EnvironmentUtils.isSailfishOs())
                 .append("\nAndroid build: ").append(Build.DISPLAY)
                 .append("\nc:geo version: ").append(Version.getVersionName(context));
         appendGooglePlayServicesVersion(context, body);

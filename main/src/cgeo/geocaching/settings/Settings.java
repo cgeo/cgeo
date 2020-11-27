@@ -32,6 +32,7 @@ import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.FileUtils.FileSelector;
 import cgeo.geocaching.utils.Log;
@@ -88,7 +89,7 @@ public class Settings {
     private static final boolean TRANSPARENT_BACKGROUND_DEFAULT;
 
     static {
-        if (Build.PRODUCT.startsWith("aosp") && Build.VERSION.SDK_INT == 27) {
+        if (EnvironmentUtils.isSailfishOs()) {
             TRANSPARENT_BACKGROUND_DEFAULT = false;
         } else {
             TRANSPARENT_BACKGROUND_DEFAULT = true;
