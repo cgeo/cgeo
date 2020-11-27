@@ -562,6 +562,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         activity.setContentView(mapProvider.getMapLayoutId());
+        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(activity, this::onMapSettingsPopupFinished));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -752,12 +753,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
 
-            menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
-            menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
-            menu.findItem(R.id.menu_archived_mode).setChecked(Settings.isExcludeArchivedCaches());
-            menu.findItem(R.id.menu_hidewp_original).setChecked(Settings.isExcludeWpOriginal());
-            menu.findItem(R.id.menu_hidewp_parking).setChecked(Settings.isExcludeWpParking());
-            menu.findItem(R.id.menu_hidewp_visited).setChecked(Settings.isExcludeWpVisited());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
 
@@ -819,48 +814,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapView.setCircles(Settings.getCircles());
             mapView.repaintRequired(null);
             ActivityMixin.invalidateOptionsMenu(activity);
-        } else if (id == R.id.menu_mycaches_mode) {
-            Settings.setExcludeMine(!Settings.isExcludeMyCaches());
-            markersInvalidated = true;
-            ActivityMixin.invalidateOptionsMenu(activity);
-            if (!Settings.isExcludeMyCaches()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_disabled_mode) {
-            Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
-            markersInvalidated = true;
-            ActivityMixin.invalidateOptionsMenu(activity);
-            if (!Settings.isExcludeDisabledCaches()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_archived_mode) {
-            Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
-            markersInvalidated = true;
-            ActivityMixin.invalidateOptionsMenu(activity);
-            if (!Settings.isExcludeArchivedCaches()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_hidewp_original) {
-            Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
-            markersInvalidated = true;
-            ActivityMixin.invalidateOptionsMenu(activity);
-            if (!Settings.isExcludeWpOriginal()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_hidewp_parking) {
-            Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
-            markersInvalidated = true;
-            ActivityMixin.invalidateOptionsMenu(activity);
-            if (!Settings.isExcludeWpParking()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_hidewp_visited) {
-            Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
-            markersInvalidated = true;
-            ActivityMixin.invalidateOptionsMenu(activity);
-            if (!Settings.isExcludeWpVisited()) {
-                Tile.cache.clear();
-            }
+        } else if (id == R.id.submenu_hide) {
+            MapSettingsUtils.showSettingsPopup(activity, this::onMapSettingsPopupFinished);
         } else if (id == R.id.menu_theme_mode) {
             selectMapTheme();
         } else if (id == R.id.menu_as_list) {
@@ -884,6 +839,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
         }
         return true;
+    }
+
+    private void onMapSettingsPopupFinished() {
+        markersInvalidated = true;
+        Tile.cache.clear();
     }
 
     private void routingModeChanged() {

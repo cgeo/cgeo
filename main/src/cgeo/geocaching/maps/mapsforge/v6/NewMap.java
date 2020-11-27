@@ -25,6 +25,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
@@ -254,8 +255,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
-        //prepare map attribution
-
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, this::onMapSettingsPopupFinished));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -363,12 +363,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(false);
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleCacheGeocodes).hasUnsavedCaches());
 
-            menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
-            menu.findItem(R.id.menu_disabled_mode).setChecked(Settings.isExcludeDisabledCaches());
-            menu.findItem(R.id.menu_archived_mode).setChecked(Settings.isExcludeArchivedCaches());
-            menu.findItem(R.id.menu_hidewp_original).setChecked(Settings.isExcludeWpOriginal());
-            menu.findItem(R.id.menu_hidewp_parking).setChecked(Settings.isExcludeWpParking());
-            menu.findItem(R.id.menu_hidewp_visited).setChecked(Settings.isExcludeWpVisited());
             menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
 
@@ -428,52 +422,12 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
+        } else if (id == R.id.submenu_hide) {
+            MapSettingsUtils.showSettingsPopup(this, this::onMapSettingsPopupFinished);
         } else if (id == R.id.menu_circle_mode) {
             Settings.setCircles(!Settings.getCircles());
             caches.switchCircles();
             ActivityMixin.invalidateOptionsMenu(this);
-        } else if (id == R.id.menu_mycaches_mode) {
-            Settings.setExcludeMine(!Settings.isExcludeMyCaches());
-            caches.invalidate();
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (!Settings.isExcludeMyCaches()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_disabled_mode) {
-            Settings.setExcludeDisabled(!Settings.isExcludeDisabledCaches());
-            caches.invalidate();
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (!Settings.isExcludeDisabledCaches()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_archived_mode) {
-            Settings.setExcludeArchived(!Settings.isExcludeArchivedCaches());
-            caches.invalidate();
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (!Settings.isExcludeArchivedCaches()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_hidewp_original) {
-            Settings.setExcludeWpOriginal(!Settings.isExcludeWpOriginal());
-            caches.invalidate();
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (!Settings.isExcludeWpOriginal()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_hidewp_parking) {
-            Settings.setExcludeWpParking(!Settings.isExcludeWpParking());
-            caches.invalidate();
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (!Settings.isExcludeWpParking()) {
-                Tile.cache.clear();
-            }
-        } else if (id == R.id.menu_hidewp_visited) {
-            Settings.setExcludeWpVisited(!Settings.isExcludeWpVisited());
-            caches.invalidate();
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (!Settings.isExcludeWpVisited()) {
-                Tile.cache.clear();
-            }
         } else if (id == R.id.menu_theme_mode) {
             selectMapTheme();
         } else if (id == R.id.menu_theme_options) {
@@ -511,6 +465,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             }
         }
         return true;
+    }
+
+    private void onMapSettingsPopupFinished() {
+        caches.invalidate();
+        Tile.cache.clear();
     }
 
     private void routingModeChanged() {
