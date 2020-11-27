@@ -41,7 +41,7 @@
             android:keepScreenOn="true" />
 
         <include layout="@layout/map_distanceinfo" />
-
+        <include layout="@layout/map_settings_button" />
         <include layout="@layout/map_progressbar" />
 
     </RelativeLayout>

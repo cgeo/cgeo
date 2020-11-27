@@ -34,8 +34,6 @@ public class TrackUtils {
      */
     public static void onPrepareOptionsMenu(final Menu menu) {
         final boolean trackfileSet = StringUtils.isNotBlank(Settings.getTrackFile());
-        menu.findItem(R.id.menu_hide_track).setVisible(trackfileSet);
-        menu.findItem(R.id.menu_hide_track).setChecked(Settings.isHideTrack());
         menu.findItem(R.id.menu_center_on_track).setVisible(trackfileSet);
         menu.findItem(R.id.menu_unload_track).setVisible(trackfileSet);
     }

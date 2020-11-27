@@ -129,60 +129,7 @@
     <item
         android:id="@+id/submenu_hide"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/map_hide" >
-        <menu>
-            <item
-                android:id="@+id/menu_mycaches_mode"
-                android:checkable="true"
-                android:icon="@android:drawable/ic_menu_myplaces"
-                android:title="@string/map_mycaches_hide"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_disabled_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_disabled"
-                android:title="@string/map_disabled_hide"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_archived_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_archived"
-                android:title="@string/map_archived_hide"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_hidewp_original"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_waypoint"
-                android:title="@string/map_hidewp_original"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_hidewp_parking"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_parking"
-                android:title="@string/map_hidewp_parking"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_hidewp_visited"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_visited"
-                android:title="@string/map_hidewp_visited"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_hide_track"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_hidetrack"
-                android:title="@string/map_hide_track"
-                android:visible="false"
-                app:showAsAction="ifRoom|withText">
-            </item>
-        </menu>
-    </item>
+        android:title="@string/map_hide" />
     <item
         android:id="@+id/submenu_routing"
         android:showAsAction="ifRoom|withText"

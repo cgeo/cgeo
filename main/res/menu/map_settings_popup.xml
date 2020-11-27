@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item
+        android:id="@+id/menu_mycaches_mode"
+        android:checkable="true"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="@string/map_mycaches_hide">
+    </item>
+    <item
+        android:id="@+id/menu_disabled_mode"
+        android:checkable="true"
+        android:icon="@drawable/ic_menu_disabled"
+        android:title="@string/map_disabled_hide">
+    </item>
+    <item
+        android:id="@+id/menu_archived_mode"
+        android:checkable="true"
+        android:icon="@drawable/ic_menu_archived"
+        android:title="@string/map_archived_hide">
+    </item>
+    <item
+        android:id="@+id/menu_hidewp_original"
+        android:checkable="true"
+        android:icon="@drawable/ic_menu_waypoint"
+        android:title="@string/map_hidewp_original">
+    </item>
+    <item
+        android:id="@+id/menu_hidewp_parking"
+        android:checkable="true"
+        android:icon="@drawable/ic_menu_parking"
+        android:title="@string/map_hidewp_parking">
+    </item>
+    <item
+        android:id="@+id/menu_hidewp_visited"
+        android:checkable="true"
+        android:icon="@drawable/ic_menu_visited"
+        android:title="@string/map_hidewp_visited">
+    </item>
+    <item
+        android:id="@+id/menu_hide_track"
+        android:checkable="true"
+        android:icon="@drawable/ic_menu_hidetrack"
+        android:title="@string/map_hide_track"
+        android:visible="false">
+    </item>
+    <item
+        android:id="@+id/menu_confirm_settings"
+        android:title="@string/err_none" />
+</menu>
