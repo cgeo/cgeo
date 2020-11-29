@@ -44,7 +44,7 @@ public class TrackUtils {
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Route tracks, final Runnable hideOptionsChanged, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final Route tracks, final Route.UpdateRoute updateTracks, final Route.CenterOnPosition centerOnPosition) {
         if (id == R.id.menu_load_track) {
             if (null == tracks || tracks.getNumSegments() == 0) {
                 startIndividualTrackFileSelector(activity);
@@ -54,9 +54,6 @@ public class TrackUtils {
         } else if (id == R.id.menu_unload_track) {
             Settings.setTrackFile(null);
             updateTracks.updateRoute(null);
-        } else if (id == R.id.menu_hide_track) {
-            Settings.setHideTrack(!Settings.isHideTrack());
-            hideOptionsChanged.run();
         } else if (id == R.id.menu_center_on_track) {
             if (null != tracks) {
                 tracks.setCenter(centerOnPosition);
