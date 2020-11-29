@@ -15,12 +15,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Xml;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -72,8 +74,9 @@ public class BackupUtils extends Activity {
         if (!hasBackup(backupDir)) {
             Toast.makeText(activityContext, R.string.init_backup_no_backup_available, Toast.LENGTH_LONG).show();
         } else {
-
-            final View content = activityContext.getLayoutInflater().inflate(R.layout.restore_dialog, null);
+            // We are using ContextThemeWrapper to prevent crashes caused by missing attribute definitions when starting the dialog from MainActivity
+            final Context c = new ContextThemeWrapper(activityContext, Settings.isLightSkin() ? R.style.Dialog_Alert_light : R.style.Dialog_Alert);
+            final View content = LayoutInflater.from(c).inflate(R.layout.restore_dialog, null);
             final CheckBox databaseCheckbox = content.findViewById(R.id.database_check_box);
             final CheckBox settingsCheckbox = content.findViewById(R.id.settings_check_box);
             final TextView warningText = content.findViewById(R.id.warning);
