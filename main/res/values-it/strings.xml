@@ -1188,8 +1188,10 @@
     <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
+    <string name="search_fbu">Trovato da</string>
     <string name="search_fbu_prefill">Nome utente</string>
     <string name="search_fbu_button">Cerca per nome utente</string>
+    <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
     <string name="search_tb">Oggetto Trackable</string>

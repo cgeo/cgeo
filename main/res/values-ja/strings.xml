@@ -572,6 +572,8 @@
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="brouter_recalculating">バックグラウンドでルートを再計算しています…</string>
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
+    <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
+    <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
     <string name="init_disabled">一時停止中キャッシュ除く</string>
     <string name="init_summary_disabled">一時停止中キャッシュは除く</string>
     <string name="init_archived">アーカイブ済み除く</string>
@@ -778,6 +780,7 @@
     <string name="map_source_osm_offline">オフライン</string>
     <string name="map_source_osm_offline_combined">OSM結合 (オフライン)</string>
     <string name="map_source_attribution_dialog_title">地図の著作権</string>
+    <string name="map_source_attribution_legacy_text">地図の著作権はこちらをタップしてください</string>
     <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Send2cgeoについて</string>
     <string name="init_sendToCgeo_name">この端末のモデル番号:</string>
@@ -995,6 +998,7 @@
     <string name="cache_terrain">地形</string>
     <string name="cache_rating">評価</string>
     <string name="cache_own_rating">あなたの評価</string>
+    <string name="cache_rating_of_new">%1$.1f / %2$d</string>
     <string name="cache_favorite">お気に入り</string>
     <string name="cache_owner">オーナー</string>
     <string name="cache_hidden">設置日</string>
@@ -1176,8 +1180,10 @@
     <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
     <string name="search_kw_button">キーワードで検索</string>
+    <string name="search_fbu">発見したユーザー名</string>
     <string name="search_fbu_prefill">ユーザー名</string>
     <string name="search_fbu_button">ユーザー名で検索</string>
+    <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_tb">トラッカブル</string>
@@ -1236,6 +1242,7 @@
     <string name="navigation">ナビゲーション</string>
     <string name="compass_title">コンパス</string>
     <string name="use_gps">GPS のみ使用</string>
+    <string name="use_compass">すべてのセンサーを使用</string>
     <string name="destination_select">目的地を選択</string>
     <string name="osmand_marker_cgeo">c:geoからのマーカー</string>
     <string name="device_heading_label">デバイス:</string>
@@ -1691,8 +1698,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_export_individual_route">個別ルートのエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
+    <string name="map_autotarget_individual_route">自動的に目的地として設定</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
-    <string name="map_clear_individual_route_confirm">個別ルートからすべてのキャッシュ/ウェイポイントを削除しますか?</string>
+    <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
     <string name="map_individual_route_cleared">個別ルートを削除しました</string>
     <string name="save_sorted_route">保存</string>
     <string name="sorted_route_saved">個別ルートを保存しました</string>
@@ -1729,6 +1737,12 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="edit_setting_error_invalid_data">無効な設定値「%s」 が入力されました。 設定値は変更されません</string>
     <string name="activate_editmode_title">編集モードを有効にする</string>
     <string name="activate_editmode_warning">ここからは危険なエリアです!\n\n設定値を直接変更するとc:geoが異常な挙動を引き起こしたり起動しなくなる可能性もあります。慎重にしてください。\n\nご自身の責任の元で続けますか?</string>
+    <string name="add_setting">設定値を追加</string>
+    <string name="add_setting_preference_name">設定名</string>
+    <string name="add_setting_preference_type">設定タイプ</string>
+    <string name="add_setting_missing_name">設定名を入力してください</string>
+    <string name="add_setting_missing_type">設定タイプを選択してください</string>
+    <string name="add_setting_already_exists">同じ設定名が既に存在しています</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geoローカルファイルハンドラ</string>
     <string name="localfile_title">ローカルファイルを開く</string>

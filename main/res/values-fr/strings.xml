@@ -571,6 +571,8 @@
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
+    <string name="init_bigSmileysOnMap">Gros icônes pour les caches trouvées</string>
+    <string name="init_summary_bigSmileysOnMap">Si activé, de gros émoticônes seront affichés sur la carte pour les caches loguées (plutôt que les icônes type de cache). Un redémarrage de c:geo est nécessaire pour prise en compte.</string>
     <string name="init_disabled">Exclure les caches désactivées</string>
     <string name="init_summary_disabled">Exclure les caches désactivées</string>
     <string name="init_archived">Exclure les éléments archivés</string>
@@ -1226,7 +1228,9 @@
     <string name="navigation">Navigation</string>
     <string name="compass_title">Boussole</string>
     <string name="use_gps">GPS uniquement</string>
+    <string name="use_compass">Capteurs utilisés</string>
     <string name="destination_select">Sélectionnez une destination</string>
+    <string name="navigation_direct_navigation">Navigation directe</string>
     <string name="osmand_marker_cgeo">Repère de c:geo</string>
     <string name="device_heading_label">Appareil:</string>
     <string name="device_orientation">Orientation</string>
