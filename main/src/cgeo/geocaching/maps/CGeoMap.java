@@ -828,7 +828,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-            && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
+            && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::setTracks, this::centerOnPosition)
             && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
             && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
             && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
@@ -847,6 +847,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private void onMapSettingsPopupFinished() {
         markersInvalidated = true;
         Tile.cache.clear();
+        overlayPositionAndScale.repaintRequired();
     }
 
     private void routingModeChanged() {
@@ -887,10 +888,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void reloadIndividualRoute() {
         manualRoute.reloadRoute(overlayPositionAndScale);
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-    }
-
-    private void updateTrackHideStatus() {
-        overlayPositionAndScale.repaintRequired();
     }
 
     private void clearTrailHistory() {

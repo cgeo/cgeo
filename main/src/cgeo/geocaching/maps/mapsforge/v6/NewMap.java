@@ -447,7 +447,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         } else if (id == R.id.menu_compass) {
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-            && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::updateTrackHideStatus, this::setTracks, this::centerOnPosition)
+            && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::setTracks, this::centerOnPosition)
             && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
             && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
             && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
@@ -473,6 +473,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     private void onMapSettingsPopupFinished() {
         caches.invalidate();
         Tile.cache.clear();
+        if (null != trackLayer) {
+            trackLayer.setHidden(Settings.isHideTrack());
+            trackLayer.requestRedraw();
+        }
     }
 
     private void routingModeChanged() {
@@ -1726,11 +1730,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         tracks = route;
         resumeTrack(null == tracks);
         TrackUtils.showTrackInfo(this, tracks);
-    }
-
-    private void updateTrackHideStatus() {
-        trackLayer.setHidden(Settings.isHideTrack());
-        trackLayer.requestRedraw();
     }
 
     private void reloadIndividualRoute() {
