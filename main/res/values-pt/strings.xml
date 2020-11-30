@@ -1161,7 +1161,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_original">Pontos adicionais originais</string>
     <string name="map_hidewp_parking">Pontos adic. de estacionamento</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
-    <string name="map_hide_track">Ocultar o percurso individual</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
