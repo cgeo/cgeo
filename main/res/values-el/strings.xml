@@ -1160,7 +1160,6 @@
     <string name="map_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών</string>
     <string name="map_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης</string>
     <string name="map_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
-    <string name="map_hide_track">Απόκρυψη μεμονωμένων διαδρομών</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
