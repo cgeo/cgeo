@@ -91,6 +91,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
 
         menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+
+        // some connectors don't support URL - we don't need "open in browser" for those caches
+        menu.findItem(R.id.menu_show_in_browser).setVisible(cache.getUrl() != null);
     }
 
     public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache) {
@@ -100,7 +103,5 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
         addMenuItems(activity.getMenuInflater(), menu, cache);
-        // some connectors don't support URL - we don't need "open in browser" for those caches
-        menu.findItem(R.id.menu_show_in_browser).setVisible(cache != null && cache.getCgeoUrl() != null);
     }
 }
