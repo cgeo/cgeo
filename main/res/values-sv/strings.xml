@@ -1100,7 +1100,6 @@
     <string name="map_hidewp_original">Dölj ursprungliga vägpunkter</string>
     <string name="map_hidewp_parking">Dölj parkerings vägpunkter</string>
     <string name="map_hidewp_visited">Dölj besökta vägpunkter</string>
-    <string name="map_hide_track">Dölj individuella spår</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
