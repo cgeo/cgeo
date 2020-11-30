@@ -809,8 +809,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             // reset the cached map source
             MapSource mapSource;
             try {
-                final int mapSourceId = Integer.parseInt(stringValue);
-                mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                mapSource = MapProviderFactory.getMapSource(stringValue);
             } catch (final NumberFormatException e) {
                 Log.e("SettingsActivity.onPreferenceChange: bad source id '" + stringValue + "'", e);
                 mapSource = null;
