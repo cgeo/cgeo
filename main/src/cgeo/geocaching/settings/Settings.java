@@ -629,7 +629,7 @@ public class Settings {
         }
     }
 
-    public static boolean getAutotargetIndividualRoute() {
+    public static boolean isAutotargetIndividualRoute() {
         return getBoolean(R.string.pref_autotarget_individualroute, false);
     }
 

@@ -385,7 +385,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             BRouterUtils.onPrepareOptionsMenu(menu);
 
             // can be moved to IndividualRouteUtils as soon as setAutoTarget is available for all map types
-            menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.getAutotargetIndividualRoute());
+            menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.isAutotargetIndividualRoute());
 
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
@@ -1704,6 +1704,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             if (resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
                 final TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
                 if (targetInfo != null) {
+                    if (Settings.isAutotargetIndividualRoute()) {
+                        Settings.setAutotargetIndividualRoute(false);
+                        Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+                    }
                     setTarget(targetInfo.coords, targetInfo.geocode);
                 }
             }

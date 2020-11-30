@@ -1903,6 +1903,7 @@
     <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
     <string name="map_autotarget_individual_route">Set as target automatically</string>
+    <string name="map_disable_autotarget_individual_route">Disabled \"Set as target automatically\"</string>
     <string name="map_clear_individual_route">Clear individual route</string>
     <string name="map_clear_individual_route_confirm">Do you want to remove all caches/waypoints from your individual route?</string>>
     <string name="map_individual_route_cleared">Individual route cleared</string>
