@@ -1160,7 +1160,6 @@
     <string name="map_hidewp_original">Slėpti originalius taškus</string>
     <string name="map_hidewp_parking">Slėpti parkingo taškus</string>
     <string name="map_hidewp_visited">Slėpti aplankytus taškus</string>
-    <string name="map_hide_track">Slėpti asmenini kelią</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
