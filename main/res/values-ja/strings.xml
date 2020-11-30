@@ -1695,7 +1695,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
-    <string name="map_clear_individual_route_confirm">個別ルートからすべてのキャッシュ/ウェイポイントを削除しますか?</string>
+    <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
     <string name="map_individual_route_cleared">個別ルートを削除しました</string>
     <string name="save_sorted_route">保存</string>
     <string name="sorted_route_saved">個別ルートを保存しました</string>
