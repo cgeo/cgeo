@@ -1152,7 +1152,6 @@
     <string name="map_hidewp_original">Piilota alkuperäiset reittipisteet</string>
     <string name="map_hidewp_parking">Piilota parkkipaikka-reittipisteet</string>
     <string name="map_hidewp_visited">Piilota vieraillut reittipisteet</string>
-    <string name="map_hide_track">Piilota yksittäinen jälki</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
