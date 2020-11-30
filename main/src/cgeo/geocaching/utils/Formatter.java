@@ -225,6 +225,11 @@ public final class Formatter {
     }
 
     @NonNull
+    public static String formatFavCount(final int favCount) {
+        return favCount >= 1000 ? (favCount / 1000) + "k" : favCount >= 0 ? Integer.toString(favCount) : "?";
+    }
+
+    @NonNull
     public static String formatCacheInfoHistory(final Geocache cache) {
         final List<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
