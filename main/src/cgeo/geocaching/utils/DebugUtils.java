@@ -93,7 +93,7 @@ public class DebugUtils {
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
                         null, null, (dialog, which) -> {
                             final String systemInfo = SystemInformation.getSystemInformation(activity);
-                            ShareUtils.shareAsEMail(activity, activity.getString(R.string.about_system_info), systemInfo, file, R.string.about_system_info_send_chooser);
+                            ShareUtils.shareAsGCSupportEmail(activity, activity.getString(R.string.about_system_info), systemInfo, file, R.string.about_system_info_send_chooser);
                         });
             } else {
                 ActivityMixin.showToast(activity, result.get() == LogcatResults.LOGCAT_EMPTY.ordinal() ? R.string.about_system_write_logcat_empty : R.string.about_system_write_logcat_error);
