@@ -34,7 +34,6 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.maps.routing.RoutingMode;
@@ -153,8 +152,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private Activity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
-    private MapViewImpl<CachesOverlayItemImpl> mapView;
-    private PositionAndHistory overlayPositionAndScale;
     private final Progress progress = new Progress();
     private MapSource mapSource;
 
@@ -562,6 +559,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
         if (null != proximityNotification) {
             proximityNotification.setTextNotifications(activity);
+        }
+        if (mapOptions.mapState != null) {
+            this.targetGeocode = mapOptions.mapState.getTargetGeocode();
+            this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
         }
 
         activity.setContentView(mapProvider.getMapLayoutId());
@@ -1073,7 +1074,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return null;
         }
 
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, mapView.getCircles(), null, null, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, mapView.getCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void savePrefs() {
@@ -1795,7 +1796,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         if (coordType == CoordinatesType.WAYPOINT && waypoint.getId() >= 0) {
             CGeoMap.markCacheAsDirty(waypoint.getGeocode());
-            WaypointPopup.startActivity(context, waypoint.getId(), waypoint.getGeocode());
+            WaypointPopup.startActivityAllowTarget(getActivity(), waypoint.getId(), waypoint.getGeocode());
         } else {
             progress.dismiss();
             return;
@@ -1844,7 +1845,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
             }
             CGeoMap.markCacheAsDirty(cache.getGeocode());
-            CachePopup.startActivity(mapView.getContext(), cache.getGeocode());
+            CachePopup.startActivityAllowTarget(activity, cache.getGeocode());
             progress.dismiss();
         }
     }

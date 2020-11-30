@@ -1,11 +1,15 @@
 package cgeo.geocaching.maps.google.v2;
 
+import cgeo.geocaching.AbstractDialogFragment;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
+import cgeo.geocaching.maps.mapsforge.v6.TargetView;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.MapDownloadUtils;
@@ -21,8 +25,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class GoogleMapActivity extends Activity implements MapActivityImpl, FilteredActivity {
 
@@ -92,6 +100,17 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     }
 
     @Override
+    protected void onStart() {
+        //Target view
+        mapBase.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
+        final Geocache target = mapBase.getCurrentTargetCache();
+        if (target != null) {
+            mapBase.targetView.setTarget(target.getGeocode(), target.getName());
+        }
+        mapBase.onStart();
+    }
+
+    @Override
     protected void onStop() {
         mapBase.onStop();
     }
@@ -124,6 +143,11 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     @Override
     public void superOnResume() {
         super.onResume();
+    }
+
+    @Override
+    public void superOnStart() {
+        super.onStart();
     }
 
     @Override
@@ -166,6 +190,27 @@ public class GoogleMapActivity extends Activity implements MapActivityImpl, Filt
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
+            final AbstractDialogFragment.TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
+            if (targetInfo != null) {
+                if (Settings.isAutotargetIndividualRoute()) {
+                    Settings.setAutotargetIndividualRoute(false);
+                    Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+                }
+                mapBase.setTarget(targetInfo.coords, targetInfo.geocode);
+            }
+            /* @todo: Clarify if needed in GMv2
+            final List<String> changedGeocodes = new ArrayList<>();
+            String geocode = popupGeocodes.poll();
+            while (geocode != null) {
+                changedGeocodes.add(geocode);
+                geocode = popupGeocodes.poll();
+            }
+            if (caches != null) {
+                caches.invalidate(changedGeocodes);
+            }
+            */
+        }
         TrackUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::setTracks);
         IndividualRouteUtils.onActivityResult(this, requestCode, resultCode, data, mapBase::reloadIndividualRoute);
         MapDownloadUtils.onActivityResult(this, requestCode, resultCode, data);
