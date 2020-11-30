@@ -1149,7 +1149,6 @@
     <string name="map_hidewp_original">ウェイポイント(オリジナル)を非表示</string>
     <string name="map_hidewp_parking">ウェイポイント(駐車場)を非表示</string>
     <string name="map_hidewp_visited">ウェイポイント(訪問済み)を非表示</string>
-    <string name="map_hide_track">トラックの非表示</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
