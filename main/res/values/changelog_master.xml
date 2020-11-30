@@ -6,8 +6,10 @@
 
 <h4>Map:</h4>
 <ul>
+<li>Change: Renamed \"Hide individual track\" to \"Hide GPX track/route\" for consistency</li>
 <li>Fix: Skip artificial track points in position history</li>
 <li>New: Add option to "Individual route" map menu to automatically set the first route point as navigation target. (OpenStreetMap only)</li>
+<li>New: \"Quick settings\" icon in the map's bottom center giving access to several map settings</li>
 </ul>
 
 <h4>Cache details:</h4>
@@ -22,6 +24,7 @@
 <li>New: Added share option after creating a backup</li>
 <li>New: View settings: Added option to add new settings</li>
 <li>New: Added Ukrainian translation</li>
+<li>New: Automatically insert support email address if sending logfile</li>
 <li>Fix: Open about activity on click at c:geo\'s logo</li>
 <li>Fixed several theming issues</li>
 </ul>
