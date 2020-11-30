@@ -43,6 +43,8 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     int getHeight();
 
+    void setDestinationCoords(Geopoint destCoords);
+
     MapProjectionImpl getMapProjection();
 
     Context getContext();

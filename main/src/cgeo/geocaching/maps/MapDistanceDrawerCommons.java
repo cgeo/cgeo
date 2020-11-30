@@ -8,7 +8,7 @@ package cgeo.geocaching.maps;
  *                  distance2
  *                  distance3
  *
- * - target is only used when in target navigation mode in OSM
+ * - target is only used when in target navigation (opened via cache/waypoint popup)
  * - distance1, distance2, distance will be filled with straight distance, routed distance,
  *   individual route length (depending on settings and current data)
  * - By tapping on any of the distance fields either straight or routed distance can be supersized.

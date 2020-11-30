@@ -23,6 +23,8 @@ public interface MapActivityImpl {
 
     void superOnDestroy();
 
+    void superOnStart();
+
     void superOnStop();
 
     void superOnPause();
