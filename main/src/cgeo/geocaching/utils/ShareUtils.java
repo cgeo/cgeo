@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ShareUtils {
 
-    public static final String TYPE_EMAIL = "vnd.android.cursor.dir/email";
+    public static final String TYPE_CGEO_SUPPORT_EMAIL = "message/rfc822";
     public static final String TYPE_TEXT = "text/plain";
 
     private ShareUtils() {
@@ -39,8 +39,8 @@ public class ShareUtils {
         shareInternal(context, "*/*", null, null, file, titleResourceId);
     }
 
-    public static void shareAsEMail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        shareInternal(context, TYPE_EMAIL, subject, body, file, titleResourceId);
+    public static void shareAsGCSupportEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
+        shareInternal(context, TYPE_CGEO_SUPPORT_EMAIL, subject, body, file, titleResourceId);
     }
 
     private static void shareInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @StringRes final int titleResourceId) {
@@ -72,6 +72,9 @@ public class ShareUtils {
             }
             if (StringUtils.isNotBlank(body)) {
                 intent.putExtra(Intent.EXTRA_TEXT, body);
+            }
+            if (mimeType.equals(TYPE_CGEO_SUPPORT_EMAIL)) {
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{context.getString(R.string.support_mail)});
             }
             if (null != file) {
                 // Grant temporary read permission to the content URI.
