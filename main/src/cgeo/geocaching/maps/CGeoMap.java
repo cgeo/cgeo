@@ -486,7 +486,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
         }
 
-        final Viewport viewport = getIntentViewport();
         overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity.findViewById(R.id.distance1).getRootView(), getIntentCoords(), mapOptions.geocode);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
@@ -508,7 +507,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.repaintRequired(null);
 
-        if (mapOptions.geocode != null && !viewport.topRight.equals(viewport.bottomLeft)) {
+        final Viewport viewport = getIntentViewport();
+        if (mapOptions.geocode != null && viewport != null && !viewport.topRight.equals(viewport.bottomLeft)) {
             mapView.zoomToBounds(viewport, mapItemFactory.getGeoPointBase(viewport.center));
         } else {
             setZoom(Settings.getMapZoom(mapOptions.mapMode));
