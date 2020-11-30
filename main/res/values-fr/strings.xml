@@ -1138,7 +1138,6 @@
     <string name="map_hidewp_original">Masquer les points de passage d\'origine</string>
     <string name="map_hidewp_parking">Masquer les points de passage de stationnement</string>
     <string name="map_hidewp_visited">Masquer les points de passage visités</string>
-    <string name="map_hide_track">Cacher le parcours individuel</string>
     <string name="init_hidewp">Masquer tous les points de passage</string>
     <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>
