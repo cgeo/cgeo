@@ -380,7 +380,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     @Nullable
     public String getAndroidBeamUri() {
-        return cache != null ? cache.getCgeoUrl() : null;
+        return cache != null ? cache.getUrl() : null;
     }
 
     @Override

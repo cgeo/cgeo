@@ -805,11 +805,6 @@ public class Geocache implements IWaypoint {
         return getConnector().getLongCacheUrl(this);
     }
 
-    @Nullable
-    public String getCgeoUrl() {
-        return getConnector().getCacheUrl(this);
-    }
-
     public void setDescription(final String description) {
         this.description = description;
         this.eventTimeMinutes = null; // will be recalculated if/when necessary
