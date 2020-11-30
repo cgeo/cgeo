@@ -1118,7 +1118,6 @@
     <string name="map_hidewp_original">Скрыть оригинальные точки</string>
     <string name="map_hidewp_parking">Скрыть точки парковки</string>
     <string name="map_hidewp_visited">Скрыть посещенные точки</string>
-    <string name="map_hide_track">Скрыть личный трек</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
     <string name="init_summary_hidewp_parking">Скрыть точки парковки на карте</string>
