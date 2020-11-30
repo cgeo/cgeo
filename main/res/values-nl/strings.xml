@@ -1160,7 +1160,6 @@
     <string name="map_hidewp_original">Originele waypoints verbergen</string>
     <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>
     <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
-    <string name="map_hide_track">Individuele spoor verbergen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
