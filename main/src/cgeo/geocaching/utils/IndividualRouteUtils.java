@@ -67,8 +67,8 @@ public class IndividualRouteUtils {
                 ActivityMixin.invalidateOptionsMenu(activity);
             });
         } else if (id == R.id.menu_autotarget_individual_route) {
-            Settings.setAutotargetIndividualRoute(!Settings.getAutotargetIndividualRoute());
-            route.triggerTargetUpdate(!Settings.getAutotargetIndividualRoute());
+            Settings.setAutotargetIndividualRoute(!Settings.isAutotargetIndividualRoute());
+            route.triggerTargetUpdate(!Settings.isAutotargetIndividualRoute());
             ActivityMixin.invalidateOptionsMenu(activity);
         } else {
             return false;

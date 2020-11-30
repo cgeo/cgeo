@@ -79,7 +79,7 @@ public class ManualRoute extends Route implements Parcelable {
     public void triggerTargetUpdate(final boolean resetTarget) {
         if (resetTarget) {
             setTarget.setTarget(null, "");
-        } else if (Settings.getAutotargetIndividualRoute() && setTarget != null) {
+        } else if (Settings.isAutotargetIndividualRoute() && setTarget != null) {
             if (getNumSegments() == 0) {
                 setTarget.setTarget(null, "");
             } else {
