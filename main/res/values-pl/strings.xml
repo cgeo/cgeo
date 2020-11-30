@@ -1170,7 +1170,6 @@
     <string name="map_hidewp_original">Ukryj oryginalne punkty nawigacji</string>
     <string name="map_hidewp_parking">Ukryj parkingi</string>
     <string name="map_hidewp_visited">Ukryj odwiedzone punkty nawigacji</string>
-    <string name="map_hide_track">Ukryj indywidualną ścieżkę</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
