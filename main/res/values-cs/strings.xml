@@ -1178,7 +1178,6 @@
     <string name="map_hidewp_original">Skrýt původní trasové body</string>
     <string name="map_hidewp_parking">Skrýt parkovací místa</string>
     <string name="map_hidewp_visited">Skrýt navštívené trasové body</string>
-    <string name="map_hide_track">Skrýt individuální trasu</string>
     <string name="init_hidewp">Skrýt trasové body</string>
     <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
