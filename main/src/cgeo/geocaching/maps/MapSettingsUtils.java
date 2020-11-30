@@ -49,13 +49,13 @@ public class MapSettingsUtils {
         Dialogs.newBuilder(activity)
             .setView(dialogView)
             .setTitle(R.string.quick_settings)
-            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
+            .setOnDismissListener(dialog -> {
                 for (SettingsElementModel item : settingsElements) {
                     item.setValue.call(item.currentValue);
                 }
                 onMapSettingsPopupFinished.run();
             })
-            .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
             .create()
             .show();
     }
