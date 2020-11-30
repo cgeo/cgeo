@@ -1157,7 +1157,6 @@
     <string name="map_hidewp_original">Nascondi i waypoint originali</string>
     <string name="map_hidewp_parking">Nascondi waypoint di parcheggio</string>
     <string name="map_hidewp_visited">Nascondi i waypoint visitati</string>
-    <string name="map_hide_track">Nascondi traccia individuale</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
