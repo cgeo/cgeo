@@ -23,6 +23,7 @@
         android:layout_centerVertical="true" />
     <CheckBox
         android:id="@+id/settings_item_checkbox"
+        android:clickable="false"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
