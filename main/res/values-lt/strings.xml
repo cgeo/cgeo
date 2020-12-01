@@ -617,7 +617,6 @@
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_folder_exists_error">Nepavyko sukurti naujo atsarginės kopijos aplanko. Ar jau padarėte atsarginę kopiją paskutinę minutę?</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
-    <string name="backup_confirm_overwrite">Ar norite perrašyti seniausią esamą atsarginę %s kopiją?</string>
     <string name="restore_confirm_overwrite_database">ĮSPĖJIMAS: Tai perrašys %s jūsų įrenginyje!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ĮSPĖJIMAS: Tai perrašys %s ir dabartinius jūsų įrenginio nustatymus!</string>
     <string name="restore_confirm_overwrite_settings">ĮSPĖJIMAS: Tai perrašys dabartinius jūsų įrenginio nustatymus!</string>
