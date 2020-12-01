@@ -507,7 +507,7 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Choose preferred navigation methods and select external navigation apps.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Configure app directories and other system specific settings.</string>
+    <string name="settings_summary_system">System specific settings and debugging options.</string>
     <string name="settings_title_navigation_menu">Navigation Menu</string>
 
     <string name="settings_category_browser">Browser</string>
