@@ -621,7 +621,6 @@
     <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
     <string name="init_backup_folder_exists_error">Impossibile creare una nuova directory di backup. Hai forse già fatto un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
-    <string name="backup_confirm_overwrite">Vuoi sovrascrivere il tuo backup più vecchio esistente da %s?</string>
     <string name="restore_confirm_overwrite_database">ATTENZIONE: Questo sovrascriverà %s sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ATTENZIONE: Questo sovrascriverà %s e le impostazioni correnti sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">ATTENZIONE: Questo sovrascriverà le impostazioni correnti sul tuo dispositivo!</string>
