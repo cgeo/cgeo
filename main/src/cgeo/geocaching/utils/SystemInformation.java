@@ -81,6 +81,7 @@ public final class SystemInformation {
         appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendDatabase(body);
         body
+                .append("\nLast backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
                 .append("\nGPX import path: ").append(Settings.getGpxImportDir())
                 .append("\nGPX export path: ").append(Settings.getGpxExportDir())
                 .append("\nOffline maps path: ").append(Settings.getMapFileDirectory())

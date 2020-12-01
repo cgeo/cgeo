@@ -657,7 +657,7 @@
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
     <string name="init_backup_folder_exists_error">Couldn\'t create a new backup directory. Have you already made a backup in the last minute?</string>
     <string name="init_backup_no_backup_available">There is no backup file available.</string>
-    <string name="backup_confirm_overwrite">Do you want to overwrite your oldest existing backup from %s?</string>
+    <string name="backup_confirm_overwrite">This will delete your oldest existing backup directory from %s. \nDo you want to continue?</string>
     <string name="restore_confirm_overwrite_database">WARNING: This will overwrite %s on your device!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNING: This will overwrite %s and your current settings on your device!</string>
     <string name="restore_confirm_overwrite_settings">WARNING: This will overwrite your current settings on your device!</string>
