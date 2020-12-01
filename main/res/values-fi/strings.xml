@@ -619,7 +619,6 @@
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
     <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
-    <string name="backup_confirm_overwrite">Haluatko korvata vanhimman olemassa olevan varmuuskopion kohteesta %s?</string>
     <string name="restore_confirm_overwrite_database">VAROITUS: Tämä korvaa kohteen %s laitteellasi!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROITUS: Tämä korvaa kohteen %s ja nykyiset asetuksesi laitteellasi!</string>
     <string name="restore_confirm_overwrite_settings">VAROITUS: Tämä korvaa nykyiset asetuksesi laitteellasi!</string>
