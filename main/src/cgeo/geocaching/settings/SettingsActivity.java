@@ -31,6 +31,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.R.string;
 import android.app.AlertDialog;
@@ -169,6 +170,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         initNavigationMenuPreferences();
         initLanguagePreferences();
         initMaintenanceButtons();
+        initCacheDetailsPreference();
 
         for (final int k : new int[] {
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -196,6 +198,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         getPreference(R.string.preference_screen_basicmembers)
                 .setEnabled(!Settings.isGCPremiumMember());
         redrawScreen(R.string.preference_screen_navigation_menu);
+    }
+
+    private void initCacheDetailsPreference() {
+        final CheckBoxPreference customTabsPreference = (CheckBoxPreference) getPreference(R.string.pref_customtabs_as_browser);
+        if (!ShareUtils.isChromeLaunchable()) {
+            customTabsPreference.setEnabled(false);
+            customTabsPreference.setChecked(false);
+        }
     }
 
     private void initServicePreferences() {

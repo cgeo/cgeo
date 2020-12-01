@@ -551,7 +551,7 @@ public class Geocache implements IWaypoint {
     }
 
     public void openInBrowser(final Context context) {
-        ShareUtils.openCustomTab(context, getUrl());
+        ShareUtils.openUrl(context, getUrl(), true);
     }
 
     public void openLogInBrowser(final Context context, final LogEntry logEntry) {

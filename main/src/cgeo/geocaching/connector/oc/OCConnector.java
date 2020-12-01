@@ -9,8 +9,8 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.utils.ShareUtils;
 
-import android.content.Intent;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -195,8 +195,8 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
         final List<UserAction> actions = super.getUserActions(user);
         // caches stored before parsing the UserId will not have the field set, so we must check for correct existence here
         if (NumberUtils.isDigits(user.userName)) {
-            actions.add(new UserAction(R.string.user_menu_open_browser, context -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getSchemeAndHost() + "/viewprofile.php?userid=" + Network.encode(context.userName))))));
-            actions.add(new UserAction(R.string.user_menu_send_message, context -> context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getSchemeAndHost() + "/mailto.php?userid=" + Network.encode(context.userName))))));
+            actions.add(new UserAction(R.string.user_menu_open_browser, context -> ShareUtils.openUrl(context.getContext(), getSchemeAndHost() + "/viewprofile.php?userid=" + Network.encode(context.userName))));
+            actions.add(new UserAction(R.string.user_menu_send_message, context -> ShareUtils.openUrl(context.getContext(), getSchemeAndHost() + "/mailto.php?userid=" + Network.encode(context.userName))));
         }
         return actions;
     }

@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.ShareBroadcastReceiver;
 
 import android.app.PendingIntent;
@@ -24,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ShareUtils {
 
+    public static final String CHROME_PACKAGE_NAME = "com.android.chrome";
     public static final String TYPE_CGEO_SUPPORT_EMAIL = "message/rfc822";
     public static final String TYPE_TEXT = "text/plain";
 
@@ -129,6 +131,11 @@ public class ShareUtils {
         }
 
         try {
+            if (Settings.getUseCustomTabs() && isChromeLaunchable()) {
+                openCustomTab(context, url);
+                return;
+            }
+
             final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 
             // Always shows an application chooser with all possible targets
@@ -146,26 +153,23 @@ public class ShareUtils {
         }
     }
 
-    public static void openCustomTab(final Context context, final String url) {
-        if (ProcessUtils.isLaunchable("com.android.chrome")) {
+    private static void openCustomTab(final Context context, final String url) {
+        final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
+            .enableUrlBarHiding()
+            .setShowTitle(true)
+            .addDefaultShareMenuItem();
 
-            final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
 
-            builder.enableUrlBarHiding();
-            builder.setShowTitle(true);
-            builder.addDefaultShareMenuItem();
+        final CustomTabsIntent customTabsIntent = builder.build();
+        // custom tabs API was restricted to chrome as other browsers like firefox may loop back to c:geo (as of September 2020)
+        customTabsIntent.intent.setPackage(CHROME_PACKAGE_NAME);
+        customTabsIntent.launchUrl(context, Uri.parse(url));
+    }
 
-            final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
-            final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
-
-            final CustomTabsIntent customTabsIntent = builder.build();
-            // custom tabs API was restricted to chrome as other browsers like firefox may loop back to c:geo (as of September 2020)
-            customTabsIntent.intent.setPackage("com.android.chrome");
-            customTabsIntent.launchUrl(context, Uri.parse(url));
-
-        } else {
-            openUrl(context, url, true);
-        }
+    public static boolean isChromeLaunchable() {
+        return ProcessUtils.isLaunchable(CHROME_PACKAGE_NAME);
     }
 }

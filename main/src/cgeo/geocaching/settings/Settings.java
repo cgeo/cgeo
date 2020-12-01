@@ -1579,4 +1579,8 @@ public class Settings {
     public static int allowedBackupsNumber() {
         return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
+
+    public static boolean getUseCustomTabs() {
+        return getBoolean(R.string.pref_customtabs_as_browser, false);
+    }
 }
