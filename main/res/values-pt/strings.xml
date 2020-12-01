@@ -624,7 +624,6 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_unnecessary">A base de dados está vazia, não é necessária uma cópia de segurança.</string>
     <string name="init_backup_folder_exists_error">Não foi possível criar um novo directório para as cópias de segurança. Realizou alguma cópia de segurança há menos de 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
-    <string name="backup_confirm_overwrite">Quer substituir a cópia de segurança mais antiga existente de %s?</string>
     <string name="restore_confirm_overwrite_database">AVISO: Isto irá sobrescrever %s no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVISO: Isto irá sobrescrever %s e as suas configurações actuais no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">AVISO: Isto irá sobrescrever as suas configurações actuais no seu dispositivo!</string>
@@ -1161,6 +1160,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_hidewp_original">Pontos adicionais originais</string>
     <string name="map_hidewp_parking">Pontos adic. de estacionamento</string>
     <string name="map_hidewp_visited">Pontos adicionais visitados</string>
+    <string name="map_hide_track">Ocultar percurso/rota GPX</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1179,6 +1179,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_routing_car">Carro</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
+    <string name="quick_settings">Definições rápidas</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar geocaches</string>
     <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
@@ -1723,6 +1724,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir automaticamente como destino</string>
+    <string name="map_disable_autotarget_individual_route">Desactivado \"Definir destino automaticamente\"</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
