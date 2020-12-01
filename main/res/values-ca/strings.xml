@@ -620,7 +620,6 @@
     <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
     <string name="init_backup_folder_exists_error">No s\'ha pogut crear un nou directori de còpia de seguretat . Heu fet una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
-    <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent més antiga de %s?</string>
     <string name="restore_confirm_overwrite_database">AVÍS: Això sobreescriurà %s al vostre dispositiu.</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVÍS: Això sobreescriurà %si la configuració actual al dispositiu.</string>
     <string name="restore_confirm_overwrite_settings">AVÍS: Això sobreescriurà la configuració actual al dispositiu.</string>
