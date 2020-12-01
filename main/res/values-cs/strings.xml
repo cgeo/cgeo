@@ -625,7 +625,7 @@
     <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
     <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku na zálohy. Vytvořili jste již za poslední minutu zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
-    <string name="backup_confirm_overwrite">Opravdu chceš přesat nejstarší existující zálohu z %s?</string>
+    <string name="backup_confirm_overwrite">Tímto odstraníte váš nejstarší existující záložní adresář z %s. \nChcete pokračovat?</string>
     <string name="restore_confirm_overwrite_database">VAROVÁNÍ: Toto přepíše %s na vašem zařízení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROVÁNÍ: Toto přepíše %s a vaše aktuální nastavení na vašem zařízení!</string>
     <string name="restore_confirm_overwrite_settings">VAROVÁNÍ: Toto přepíše vaše aktuální nastavení na vašem zařízení!</string>
@@ -1178,6 +1178,7 @@
     <string name="map_hidewp_original">Skrýt původní trasové body</string>
     <string name="map_hidewp_parking">Skrýt parkovací místa</string>
     <string name="map_hidewp_visited">Skrýt navštívené trasové body</string>
+    <string name="map_hide_track">Skrýt GPX stopu/trasu</string>
     <string name="init_hidewp">Skrýt trasové body</string>
     <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
@@ -1196,6 +1197,7 @@
     <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
+    <string name="quick_settings">Rychlé nastavení</string>
     <!-- search -->
     <string name="search_bar_hint">Hledaní kešek</string>
     <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
@@ -1764,6 +1766,7 @@
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Automaticky nastavit jako cíl</string>
+    <string name="map_disable_autotarget_individual_route">Zakázáno \"Automaticky nastavit jako cíl\"</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete odstranit všechny keše/trasové body z vaší individuální trasy?</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
