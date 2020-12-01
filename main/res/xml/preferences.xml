@@ -541,6 +541,11 @@
             android:key="@string/pref_global_wp_extraction_disable"
             android:title="@string/init_global_wp_extraction_disable"
             android:summary="@string/init_summary_global_wp_extraction_disable" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_customtabs_as_browser"
+            android:title="@string/init_customtabs_as_browser"
+            android:summary="@string/init_summary_customtabs_as_browser" />
 
     </PreferenceScreen>
 

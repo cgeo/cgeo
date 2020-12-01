@@ -160,6 +160,7 @@
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_coordinputformat">coordinputformat</string>
     <string translatable="false" name="pref_gccustomdate">gccustomdate</string>
+    <string translatable="false" name="pref_customtabs_as_browser">customtabs_as_browser</string>
     <string translatable="false" name="pref_googleplayservices">googleplayservices</string>
     <string translatable="false" name="pref_lowpowermode">lowpowerlocation</string>
     <string translatable="false" name="pref_lastdetailspage">lastdetailspage</string>
