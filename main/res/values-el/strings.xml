@@ -623,7 +623,6 @@
     <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζονται αντίγραφα ασφαλείας.</string>
     <string name="init_backup_folder_exists_error">Δεν μπορεί να δημιουργηθεί νέος φάκελος αποθήκευσης αντιγραφών ασφαλείας. Έχετε δημιουργήσει ήδη ένα αντίγραφό ασφαλείας το τελευταίο λεπτό;</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
-    <string name="backup_confirm_overwrite">Θέλετε να αντικαταστήσετε το υπάρχον, παλιότερο αντίγραφο ασφαλείας του %s;</string>
     <string name="restore_confirm_overwrite_database">ΠΡΟΣΟΧΗ: Αυτό θα επανεγράψει το %s της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει το %s και τις τρέχουσες ρυθμίσεις της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει τις τρέχουσες ρυθμίσεις της συσκευής σας!</string>
