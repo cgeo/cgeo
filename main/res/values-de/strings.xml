@@ -623,7 +623,6 @@
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
     <string name="init_backup_folder_exists_error">Konnte kein neueres Sicherungsverzeichnis erstellen. Hast du innerhalb der letzten Minute bereits eine Sicherung erstellt?</string>
     <string name="init_backup_no_backup_available">Es ist keine Sicherung verfügbar.</string>
-    <string name="backup_confirm_overwrite">Möchtest du deine älteste Sicherung vom %s überschreiben?</string>
     <string name="restore_confirm_overwrite_database">WARNUNG: Dies wird %s auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNUNG: Dies wird %s und deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_settings">WARNUNG: Dies wird deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
@@ -1160,6 +1159,7 @@
     <string name="map_hidewp_original">Originale Wegpunkte verbergen</string>
     <string name="map_hidewp_parking">Park-Wegpunkte verbergen</string>
     <string name="map_hidewp_visited">Besuchte Wegpunkte verbergen</string>
+    <string name="map_hide_track">GPX-Track/-Route ausblenden</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
@@ -1178,6 +1178,7 @@
     <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
+    <string name="quick_settings">Schnelleinstellungen</string>
     <!-- search -->
     <string name="search_bar_hint">Suche nach Caches</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
@@ -1722,6 +1723,7 @@
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Automatisch als Ziel setzen</string>
+    <string name="map_disable_autotarget_individual_route">\"Automatisch als Ziel setzen\" deaktiviert</string>
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
