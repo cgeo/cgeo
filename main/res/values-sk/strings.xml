@@ -621,7 +621,6 @@
     <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
     <string name="init_backup_folder_exists_error">Nedá sa vytvoriť nový priečinok na zálohy. Vytvorili ste už zálohu za poslednú minútu?</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
-    <string name="backup_confirm_overwrite">Chcete prepísať svoju najstaršiu existujúcu zálohu z %s?</string>
     <string name="restore_confirm_overwrite_database">UPOZORNENIE: Tým prepíšete %s vo svojom zariadení!</string>
     <string name="restore_confirm_overwrite_database_and_settings">UPOZORNENIE: Tým prepíšete %s a svoje aktuálne nastavenia na zariadení!</string>
     <string name="restore_confirm_overwrite_settings">UPOZORNENIE: Tým prepíšete svoje aktuálne nastavenia na zariadení!</string>
