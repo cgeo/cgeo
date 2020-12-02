@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Navigacija</string>
     <string name="settings_summary_navigation">Pasirinkite pageidaujamus navigacijos metodus ir išorines navigacijos programas.</string>
     <string name="settings_title_system">Sistema</string>
-    <string name="settings_summary_system">Konfigūruokite programų katalogus ir kitus sistemos parametrus.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
