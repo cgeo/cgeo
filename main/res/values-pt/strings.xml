@@ -478,7 +478,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="settings_title_navigation">Navegação</string>
     <string name="settings_summary_navigation">Escolher os modos de navegação preferidos e seleccionar aplicações de navegação externas.</string>
     <string name="settings_title_system">Sistema</string>
-    <string name="settings_summary_system">Configuração do directório da aplicação e outras definições específicas do sistema.</string>
+    <string name="settings_summary_system">Definições específicas de sistema e opções de depuração.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
@@ -624,6 +624,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_backup_unnecessary">A base de dados está vazia, não é necessária uma cópia de segurança.</string>
     <string name="init_backup_folder_exists_error">Não foi possível criar um novo directório para as cópias de segurança. Realizou alguma cópia de segurança há menos de 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
+    <string name="backup_confirm_overwrite">Isto irá apagar a pasta de cópia de segurança mais antiga de %s. \nPretende continuar?</string>
     <string name="restore_confirm_overwrite_database">AVISO: Isto irá sobrescrever %s no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVISO: Isto irá sobrescrever %s e as suas configurações actuais no seu dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">AVISO: Isto irá sobrescrever as suas configurações actuais no seu dispositivo!</string>
