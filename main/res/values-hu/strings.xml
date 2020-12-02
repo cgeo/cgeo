@@ -445,7 +445,6 @@
     <string name="settings_title_navigation">Navigáció</string>
     <string name="settings_summary_navigation">Preferált navigációs eszközök és külső navigációs programok kiválasztása</string>
     <string name="settings_title_system">Rendszer</string>
-    <string name="settings_summary_system">Alkalmazásmappák és egyéb rendszerbeállítások módosítása</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_browser">Böngésző</string>
     <string name="settings_category_geocaching_platform">Geocaching platformok</string>
