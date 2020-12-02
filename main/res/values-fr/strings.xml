@@ -475,7 +475,6 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externes.</string>
     <string name="settings_title_system">Système</string>
-    <string name="settings_summary_system">Configurer les répertoires de l\'application et d\'autres paramètres spécifiques au système.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
     <string name="settings_category_browser">Navigateur</string>
     <string name="settings_category_geocaching_platform">Plateforme de Géocaching</string>
