@@ -478,7 +478,6 @@
     <string name="settings_title_navigation">Navigácia</string>
     <string name="settings_summary_navigation">Vyberte preferované metódy navigácie a externé navigačné aplikácie.</string>
     <string name="settings_title_system">Systém</string>
-    <string name="settings_summary_system">Nakonfigurujte priečinky aplikácie a ďalšie systémové nastavenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
     <string name="settings_category_browser">Prehliadač</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
