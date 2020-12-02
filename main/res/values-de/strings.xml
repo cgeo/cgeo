@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Konfiguriere Verzeichnisse und andere Systemeinstellungen.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
@@ -623,6 +622,7 @@
     <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
     <string name="init_backup_folder_exists_error">Konnte kein neueres Sicherungsverzeichnis erstellen. Hast du innerhalb der letzten Minute bereits eine Sicherung erstellt?</string>
     <string name="init_backup_no_backup_available">Es ist keine Sicherung verfügbar.</string>
+    <string name="backup_confirm_overwrite">Dadurch wird dein ältestes existierendes Sicherungsverzeichnis vom %s gelöscht. \nMöchten Sie fortfahren?</string>
     <string name="restore_confirm_overwrite_database">WARNUNG: Dies wird %s auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WARNUNG: Dies wird %s und deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
     <string name="restore_confirm_overwrite_settings">WARNUNG: Dies wird deine aktuellen Einstellungen auf deinem Gerät überschreiben!</string>
@@ -1153,8 +1153,8 @@
     <string name="map_hide">Verbergen</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_circles_show">Kreise anzeigen</string>
-    <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
-    <string name="map_disabled_hide">Deaktivierte Caches ausblenden</string>
+    <string name="map_mycaches_hide">Eigene/gefundene Caches verbergen</string>
+    <string name="map_disabled_hide">Deaktivierte Caches verbergen</string>
     <string name="map_archived_hide">Archivierte Caches verbergen</string>
     <string name="map_hidewp_original">Originale Wegpunkte verbergen</string>
     <string name="map_hidewp_parking">Park-Wegpunkte verbergen</string>
