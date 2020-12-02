@@ -523,25 +523,28 @@
             android:title="@string/init_livelist" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_excludemine"
-            android:summary="@string/init_summary_exclude"
-            android:title="@string/init_exclude" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_excludedisabled"
-            android:summary="@string/init_summary_disabled"
-            android:title="@string/init_disabled" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_excludearchived"
-            android:summary="@string/init_summary_archived"
-            android:title="@string/init_archived" />
-        <CheckBoxPreference
-            android:defaultValue="false"
             android:key="@string/pref_global_wp_extraction_disable"
             android:title="@string/init_global_wp_extraction_disable"
             android:summary="@string/init_summary_global_wp_extraction_disable" />
 
+        <PreferenceCategory android:title="@string/init_category_exclude"
+            android:layout="@layout/preference_category" >
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludemine"
+                android:summary="@string/init_summary_exclude"
+                android:title="@string/init_exclude" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludedisabled"
+                android:summary="@string/init_summary_disabled"
+                android:title="@string/init_disabled" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="@string/pref_excludearchived"
+                android:summary="@string/init_summary_archived"
+                android:title="@string/init_archived" />
+        </PreferenceCategory>
     </PreferenceScreen>
 
     <PreferenceScreen
