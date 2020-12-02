@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Πλοήγηση</string>
     <string name="settings_summary_navigation">Επιλέξτε επιθυμητή μέθοδο πλοήγησης και εξωτερικές εφαρμογές πλοήγησης.</string>
     <string name="settings_title_system">Σύστημα</string>
-    <string name="settings_summary_system">Ρύθμιση των καταλόγων της εφαρμογής και άλλων ειδικών ρυθμίσεων του συστήματος.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
