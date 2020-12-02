@@ -37,6 +37,7 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.ManualRoute;
@@ -57,7 +58,6 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
@@ -565,7 +565,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         activity.setContentView(mapProvider.getMapLayoutId());
-        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(activity, this::onMapSettingsPopupFinished));
+        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(activity, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -756,11 +756,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
 
-            menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
-            menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
-
-            CompactIconModeUtils.onPrepareOptionsMenu(menu);
-
             menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
@@ -772,7 +767,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
             // TrackUtils.onPrepareOptionsMenu is in maps/google/v2/GoogleMapActivity only
-            BRouterUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
@@ -791,10 +785,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             setMapRotation(item, Settings.MAPROTATION_MANUAL);
         } else if (id == R.id.menu_map_rotation_auto) {
             setMapRotation(item, Settings.MAPROTATION_AUTO);
-        } else if (id == R.id.menu_direction_line) {
-            Settings.setMapDirection(!Settings.isMapDirection());
-            mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-            ActivityMixin.invalidateOptionsMenu(activity);
         } else if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.mapMode == MapMode.LIVE) {
@@ -812,13 +802,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return storeCaches(getGeocodesForCachesInViewport());
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
-        } else if (id == R.id.menu_circle_mode) {
-            Settings.setCircles(!Settings.getCircles());
-            mapView.setCircles(Settings.getCircles());
-            mapView.repaintRequired(null);
-            ActivityMixin.invalidateOptionsMenu(activity);
-        } else if (id == R.id.submenu_hide) {
-            MapSettingsUtils.showSettingsPopup(activity, this::onMapSettingsPopupFinished);
         } else if (id == R.id.menu_theme_mode) {
             selectMapTheme();
         } else if (id == R.id.menu_as_list) {
@@ -829,8 +812,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
             && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::setTracks, this::centerOnPosition)
-            && !CompactIconModeUtils.onOptionsItemSelected(id, this::compactIconModeChanged)
-            && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
             && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
             && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
@@ -848,9 +829,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         markersInvalidated = true;
         Tile.cache.clear();
         overlayPositionAndScale.repaintRequired();
+        mapView.setCircles(Settings.getCircles());
+        mapView.repaintRequired(null);
     }
 
-    private void routingModeChanged() {
+    private void routingModeChanged(final RoutingMode newValue) {
+        Settings.setRoutingMode(newValue);
         Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         manualRoute.reloadRoute(overlayPositionAndScale);
         if (null != tracks) {
@@ -866,7 +850,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
     }
 
-    private void compactIconModeChanged() {
+    private void compactIconModeChanged(final int newValue) {
+        Settings.setCompactIconMode(newValue);
         markersInvalidated = true;
         mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
     }

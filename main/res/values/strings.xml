@@ -1256,16 +1256,15 @@
     <string name="map_view_map">Map view</string>
     <string name="map_modes">Map settings</string>
     <string name="map_rotation">Map rotation</string>
-    <string name="map_hide">Hide</string>
     <string name="map_dot_mode">Use compact icons</string>
-    <string name="map_circles_show">Show circles</string>
-    <string name="map_mycaches_hide">Hide own/found caches</string>
-    <string name="map_disabled_hide">Hide disabled caches</string>
-    <string name="map_archived_hide">Hide archived caches</string>
-    <string name="map_hidewp_original">Hide original waypoints</string>
-    <string name="map_hidewp_parking">Hide parking waypoints</string>
-    <string name="map_hidewp_visited">Hide visited waypoints</string>
-    <string name="map_hide_track">Hide GPX track/route</string>
+    <string name="map_show_circles">Show circles</string>
+    <string name="map_showc_ownfound">Show own/found caches</string>
+    <string name="map_showc_disabled">Show disabled caches</string>
+    <string name="map_showc_archived">Show archived caches</string>
+    <string name="map_showwp_original">Show original waypoints</string>
+    <string name="map_showwp_parking">Show parking waypoints</string>
+    <string name="map_showwp_visited">Show visited waypoints</string>
+    <string name="map_show_track">Show GPX track/route</string>
     <string name="init_hidewp">Hide waypoints</string>
     <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
     <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
@@ -1278,13 +1277,10 @@
     <string name="map_as_list">Show as list</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
-    <string name="map_routing_straight">Straight line</string>
-    <string name="map_routing_walk">Walk</string>
-    <string name="map_routing_bike">Bicycle</string>
-    <string name="map_routing_car">Car</string>
     <string name="map_gm_autorotation">Map auto rotation</string>
     <string name="map_gm_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
     <string name="quick_settings">Quick settings</string>
+    <string name="map_show_in_map">Show in map</string>
 
     <!-- search -->
     <string name="search_bar_hint">Search for caches</string>

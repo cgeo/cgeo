@@ -1368,6 +1368,14 @@ public class Settings {
         return getBoolean(R.string.pref_showCircles, false);
     }
 
+    public static boolean isHideCircles() {
+        return !getBoolean(R.string.pref_showCircles, false);
+    }
+
+    public static void setHideCircles(final boolean hideCircles) {
+        putBoolean(R.string.pref_showCircles, !hideCircles);
+    }
+
     public static void setSupersizeDistance(final int supersizeDistance) {
         putInt(R.string.pref_supersizeDistance, supersizeDistance);
     }

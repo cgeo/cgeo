@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.DisplayMetrics;
-import android.view.Menu;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -19,36 +18,6 @@ public class CompactIconModeUtils {
         // utility class
     }
 
-
-    public static void onPrepareOptionsMenu(final Menu menu) {
-        switch (Settings.getCompactIconMode()) {
-            case Settings.COMPACTICON_OFF:
-                menu.findItem(R.id.menu_map_compactIconModeOff).setChecked(true);
-                break;
-            case Settings.COMPACTICON_ON:
-                menu.findItem(R.id.menu_map_compactIconModeOn).setChecked(true);
-                break;
-            case Settings.COMPACTICON_AUTO:
-                menu.findItem(R.id.menu_map_compactIconModeAuto).setChecked(true);
-                break;
-            default:
-                // do nothing
-        }
-    }
-
-    public static boolean onOptionsItemSelected(final int id, final Runnable setCompactIconMode) {
-        if (id == R.id.menu_map_compactIconModeOff) {
-            Settings.setCompactIconMode(Settings.COMPACTICON_OFF);
-        } else if (id == R.id.menu_map_compactIconModeOn) {
-            Settings.setCompactIconMode(Settings.COMPACTICON_ON);
-        } else if (id == R.id.menu_map_compactIconModeAuto) {
-            Settings.setCompactIconMode(Settings.COMPACTICON_AUTO);
-        } else {
-            return false;
-        }
-        setCompactIconMode.run();
-        return true;
-    }
 
     public static void setCompactIconModeThreshold(final Resources resources) {
         // cache density metrics
