@@ -448,7 +448,6 @@
     <string name="settings_title_navigation">Navigasjon</string>
     <string name="settings_summary_navigation">Velg navigasjonsmetode og velg eksterne navigasjonsapper.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Konfigurer app-mappe og andre systemspesifikke innstillinger.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
     <string name="settings_category_browser">Nettleser</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
