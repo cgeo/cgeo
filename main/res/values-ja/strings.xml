@@ -476,7 +476,6 @@
     <string name="settings_title_navigation">ナビゲーション</string>
     <string name="settings_summary_navigation">ナビゲーション方法や外部ナビゲーションアプリの選択</string>
     <string name="settings_title_system">システム</string>
-    <string name="settings_summary_system">アプリのフォルダやそのほかのシステム固有の設定</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
     <string name="settings_category_browser">ブラウザ</string>
     <string name="settings_category_geocaching_platform">ジオキャッシングサイト</string>
