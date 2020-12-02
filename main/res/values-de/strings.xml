@@ -1150,8 +1150,8 @@
     <string name="map_hide">Verbergen</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_circles_show">Kreise anzeigen</string>
-    <string name="map_mycaches_hide">Eigene/gefundene Caches ausblenden</string>
-    <string name="map_disabled_hide">Deaktivierte Caches ausblenden</string>
+    <string name="map_mycaches_hide">Eigene/gefundene Caches verbergen</string>
+    <string name="map_disabled_hide">Deaktivierte Caches verbergen</string>
     <string name="map_archived_hide">Archivierte Caches verbergen</string>
     <string name="map_hidewp_original">Originale Wegpunkte verbergen</string>
     <string name="map_hidewp_parking">Park-Wegpunkte verbergen</string>
