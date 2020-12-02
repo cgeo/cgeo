@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.functions.Action1;
@@ -27,58 +28,144 @@ import org.apache.commons.lang3.StringUtils;
 
 public class MapSettingsUtils {
 
+    private static int colorAccent;
+
     private MapSettingsUtils() {
         // utility class
     }
 
-    public static void showSettingsPopup(final Activity activity, final Runnable onMapSettingsPopupFinished) {
-        final ArrayList<SettingsElementModel> settingsElements = new ArrayList<>();
-        settingsElements.add(new SettingsElementModel(R.string.map_mycaches_hide , R.drawable.ic_menu_myplaces, Settings.isExcludeMyCaches(), Settings::setExcludeMine));
-        settingsElements.add(new SettingsElementModel(R.string.map_disabled_hide , R.drawable.ic_menu_disabled, Settings.isExcludeDisabledCaches(), Settings::setExcludeDisabled));
-        settingsElements.add(new SettingsElementModel(R.string.map_archived_hide , R.drawable.ic_menu_archived, Settings.isExcludeArchivedCaches(), Settings::setExcludeArchived));
-        settingsElements.add(new SettingsElementModel(R.string.map_hidewp_original , R.drawable.ic_menu_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal));
-        settingsElements.add(new SettingsElementModel(R.string.map_hidewp_parking , R.drawable.ic_menu_parking, Settings.isExcludeWpParking(), Settings::setExcludeWpParking));
-        settingsElements.add(new SettingsElementModel(R.string.map_hidewp_visited , R.drawable.ic_menu_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited));
+    public static void showSettingsPopup(final Activity activity, final Runnable onMapSettingsPopupFinished, final Action1<RoutingMode> setRoutingValue, final Action1<Integer> setCompactIconValue) {
+        colorAccent = activity.getResources().getColor(R.color.colorAccent);
+
+        final ArrayList<SettingsCheckboxModel> settingsElementsCheckboxes = new ArrayList<>();
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_ownfound, R.drawable.ic_menu_myplaces, Settings.isExcludeMyCaches(), Settings::setExcludeMine, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_disabled, R.drawable.ic_menu_disabled, Settings.isExcludeDisabledCaches(), Settings::setExcludeDisabled, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_archived, R.drawable.ic_menu_archived, Settings.isExcludeArchivedCaches(), Settings::setExcludeArchived, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_original, R.drawable.ic_menu_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_parking, R.drawable.ic_menu_parking, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showwp_visited, R.drawable.ic_menu_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true));
         if (StringUtils.isNotBlank(Settings.getTrackFile())) {
-            settingsElements.add(new SettingsElementModel(R.string.map_hide_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack));
+            settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true));
         }
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, Settings.isHideCircles(), Settings::setHideCircles, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_direction, R.drawable.ic_menu_goto, Settings.isMapDirection(), Settings::setMapDirection, false));
 
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.map_settings_dialog, null);
-        ((ListView) dialogView.findViewById(R.id.map_settings_listview)).setAdapter(new MapSettingsAdapter(activity, settingsElements));
+        ((ListView) dialogView.findViewById(R.id.map_settings_listview)).setAdapter(new MapSettingsAdapter(activity, settingsElementsCheckboxes));
+
+        final ArrayList<ButtonChoiceModel<Integer>> compactIconChoices = new ArrayList<>();
+        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF));
+        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO));
+        compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON));
+        final ButtonController<Integer> compactIcon = new ButtonController<Integer>(dialogView, compactIconChoices, Settings.getCompactIconMode(), setCompactIconValue);
+
+        final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
+        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_straight, RoutingMode.STRAIGHT));
+        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_walk, RoutingMode.WALK));
+        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_bike, RoutingMode.BIKE));
+        routingChoices.add(new ButtonChoiceModel<>(R.id.routing_car, RoutingMode.CAR));
+        final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, routingChoices, Settings.getRoutingMode(), setRoutingValue);
 
         Dialogs.newBuilder(activity)
             .setView(dialogView)
             .setTitle(R.string.quick_settings)
-            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
             .setOnDismissListener(dialog -> {
-                for (SettingsElementModel item : settingsElements) {
-                    item.setValue.call(item.currentValue);
+                for (SettingsCheckboxModel item : settingsElementsCheckboxes) {
+                    item.setValue();
                 }
+                compactIcon.setValue();
+                routing.setValue();
                 onMapSettingsPopupFinished.run();
             })
             .create()
             .show();
+
+        compactIcon.init();
+        routing.init();
     }
 
-    private static class SettingsElementModel {
-        public final int resTitle;
-        public final int resIcon;
-        public boolean currentValue;
-        public final Action1<Boolean> setValue;
+    private static class SettingsCheckboxModel {
+        private final int resTitle;
+        private final int resIcon;
+        private boolean currentValue;
+        private final Action1<Boolean> setValue;
+        private final boolean isNegated;
 
-        SettingsElementModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final boolean currentValue, final Action1<Boolean> setValue) {
+        SettingsCheckboxModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
             this.resTitle = resTitle;
             this.resIcon = resIcon;
-            this.currentValue = currentValue;
+            this.currentValue = isNegated ? !currentValue : currentValue;
             this.setValue = setValue;
+            this.isNegated = isNegated;
+        }
+
+        public void setValue() {
+            this.setValue.call(isNegated ? !currentValue : currentValue);
         }
     }
 
-    private static class MapSettingsAdapter extends ArrayAdapter<SettingsElementModel> {
+    private static class ButtonChoiceModel<T> {
+        public final int resButton;
+        public final T assignedValue;
+        public View button = null;
 
-        private final ArrayList<SettingsElementModel> statusList;
+        ButtonChoiceModel(final int resButton, final T assignedValue) {
+            this.resButton = resButton;
+            this.assignedValue = assignedValue;
+        }
+    }
 
-        MapSettingsAdapter(final Context context, final ArrayList<SettingsElementModel> statusList) {
+    private static class ButtonController<T> {
+        private final View dialogView;
+        private final ArrayList<ButtonChoiceModel<T>> buttons;
+        private T originalValue;
+        private T currentValue;
+        private final Action1<T> setValue;
+
+        ButtonController(final View dialogView, final ArrayList<ButtonChoiceModel<T>> buttons, final T currentValue, final Action1<T> setValue) {
+            this.dialogView = dialogView;
+            this.buttons = buttons;
+            this.originalValue = currentValue;
+            this.currentValue = currentValue;
+            this.setValue = setValue;
+        }
+
+        public void init() {
+            for (final ButtonChoiceModel<T> button : buttons) {
+                button.button = dialogView.findViewById(button.resButton);
+                button.button.setOnClickListener(v -> setLocalValue(button.assignedValue));
+            }
+            update();
+        }
+
+        public void update() {
+            for (final ButtonChoiceModel<T> button : buttons) {
+                if (currentValue == button.assignedValue) {
+                    button.button.setBackgroundColor(colorAccent);
+                } else {
+                    button.button.setBackgroundColor(0x00000000);
+                    button.button.setBackgroundResource(Settings.isLightSkin() ? R.drawable.action_button_light : R.drawable.action_button_dark);
+                }
+            }
+        }
+
+        private void setLocalValue(final T currentValue) {
+            this.currentValue = currentValue;
+            update();
+        }
+
+        public void setValue() {
+            if (!originalValue.equals(currentValue)) {
+                this.setValue.call(currentValue);
+            }
+        }
+    }
+
+    private static class MapSettingsAdapter extends ArrayAdapter<SettingsCheckboxModel> {
+
+        private final ArrayList<SettingsCheckboxModel> statusList;
+
+        MapSettingsAdapter(final Context context, final ArrayList<SettingsCheckboxModel> statusList) {
             super(context, R.layout.map_settings_dialog, statusList);
             this.statusList = statusList;
         }
@@ -91,7 +178,7 @@ public class MapSettingsUtils {
                 v = inflater.inflate(R.layout.map_settings_item, null);
             }
 
-            final SettingsElementModel item = statusList.get(position);
+            final SettingsCheckboxModel item = statusList.get(position);
             if (item != null) {
                 ((ImageView) v.findViewById(R.id.settings_item_icon)).setImageResource(item.resIcon);
                 ((TextView) v.findViewById(R.id.settings_item_text)).setText(item.resTitle);

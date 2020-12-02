@@ -62,50 +62,6 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/submenu_modes"
-        android:icon="@drawable/ic_menu_mark"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/map_modes"
-        app:showAsAction="ifRoom|withText">
-        <menu>
-            <item
-                android:id="@+id/menu_direction_line"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_goto"
-                android:title="@string/map_direction"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_circle_mode"
-                android:checkable="true"
-                android:icon="@drawable/ic_menu_circle"
-                android:title="@string/map_circles_show"
-                app:showAsAction="ifRoom|withText">
-            </item>
-            <item
-                android:id="@+id/menu_compactIconMode"
-                android:icon="@drawable/ic_menu_dot_mode"
-                android:title="@string/map_dot_mode"
-                app:showAsAction="ifRoom|withText">
-                <menu>
-                    <group
-                        android:id="@+id/menu_group_compactIconMode"
-                        android:checkableBehavior="single" >
-                        <item
-                            android:id="@+id/menu_map_compactIconModeOff"
-                            android:title="@string/switch_off" />
-                        <item
-                            android:id="@+id/menu_map_compactIconModeOn"
-                            android:title="@string/switch_on" />
-                        <item
-                            android:id="@+id/menu_map_compactIconModeAuto"
-                            android:title="@string/switch_auto" />
-                    </group>
-                </menu>
-            </item>
-        </menu>
-    </item>
-    <item
         android:id="@+id/menu_map_rotation"
         android:title="@string/map_rotation"
         android:visible="false"
@@ -124,39 +80,6 @@
                     android:id="@+id/menu_map_rotation_auto"
                     android:title="@string/switch_auto" />
             </group>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/submenu_hide"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/map_hide" />
-    <item
-        android:id="@+id/submenu_routing"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/map_routing"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText">
-        <menu>
-            <group
-                android:id="@+id/menu_group_routing"
-                android:checkableBehavior="single" >
-                <item
-                    android:id="@+id/menu_routing_straight"
-                    android:title="@string/map_routing_straight">
-                </item>
-	            <item
-	                android:id="@+id/menu_routing_walk"
-	                android:title="@string/map_routing_walk">
-	            </item>
-	            <item
-	                android:id="@+id/menu_routing_bike"
-	                android:title="@string/map_routing_bike">
-	            </item>
-	            <item
-	                android:id="@+id/menu_routing_car"
-	                android:title="@string/map_routing_car">
-	            </item>
-	        </group>
         </menu>
     </item>
     <item

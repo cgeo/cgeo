@@ -41,6 +41,7 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TrackLayer;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.models.Route;
@@ -57,7 +58,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.BRouterUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
@@ -258,7 +258,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, this::onMapSettingsPopupFinished));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -366,11 +366,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(false);
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleCacheGeocodes).hasUnsavedCaches());
 
-            menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
-            menu.findItem(R.id.menu_circle_mode).setChecked(Settings.getCircles());
-
-            CompactIconModeUtils.onPrepareOptionsMenu(menu);
-
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes());
             menu.findItem(R.id.menu_theme_options).setVisible(styleMenu != null);
 
@@ -382,7 +377,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
             TrackUtils.onPrepareOptionsMenu(menu);
-            BRouterUtils.onPrepareOptionsMenu(menu);
 
             // can be moved to IndividualRouteUtils as soon as setAutoTarget is available for all map types
             menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.isAutotargetIndividualRoute());
@@ -399,10 +393,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         final int id = item.getItemId();
         if (id == android.R.id.home) {
             ActivityMixin.navigateUp(this);
-        } else if (id == R.id.menu_direction_line) {
-            Settings.setMapDirection(!Settings.isMapDirection());
-            navigationLayer.requestRedraw();
-            ActivityMixin.invalidateOptionsMenu(this);
         } else if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.isLiveEnabled) {
@@ -425,12 +415,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
-        } else if (id == R.id.submenu_hide) {
-            MapSettingsUtils.showSettingsPopup(this, this::onMapSettingsPopupFinished);
-        } else if (id == R.id.menu_circle_mode) {
-            Settings.setCircles(!Settings.getCircles());
-            caches.switchCircles();
-            ActivityMixin.invalidateOptionsMenu(this);
         } else if (id == R.id.menu_theme_mode) {
             selectMapTheme();
         } else if (id == R.id.menu_theme_options) {
@@ -448,8 +432,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
             && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::setTracks, this::centerOnPosition)
-            && !CompactIconModeUtils.onOptionsItemSelected(id, () -> caches.invalidateAll(NO_OVERLAY_ID))
-            && !BRouterUtils.onOptionsItemSelected(item, this::routingModeChanged)
             && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
             && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
@@ -471,6 +453,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
     }
 
     private void onMapSettingsPopupFinished() {
+        caches.switchCircles();
         caches.invalidate();
         Tile.cache.clear();
         if (null != trackLayer) {
@@ -479,7 +462,8 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         }
     }
 
-    private void routingModeChanged() {
+    private void routingModeChanged(final RoutingMode newValue) {
+        Settings.setRoutingMode(newValue);
         Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         manualRoute.reloadRoute(routeLayer);
         if (null != tracks) {
@@ -493,6 +477,11 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             }
         }
         navigationLayer.requestRedraw();
+    }
+
+    private void compactIconModeChanged(final int newValue) {
+        Settings.setCompactIconMode(newValue);
+        caches.invalidateAll(NO_OVERLAY_ID);
     }
 
     private void clearTrailHistory() {
