@@ -474,7 +474,6 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Vælg foretrukken navigationsmetode og vælg eksterne apps.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Konfigurér app-mapper og andre systemspecifikke indstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-platform</string>
