@@ -477,7 +477,7 @@
     <string name="settings_title_navigation">Navigatie</string>
     <string name="settings_summary_navigation">Kies uw voorkeur voor navigatiemethoden en externe navigatie apps.</string>
     <string name="settings_title_system">Systeem</string>
-    <string name="settings_summary_system">Configureer app mappen en andere systeemspecifieke instellingen.</string>
+    <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
