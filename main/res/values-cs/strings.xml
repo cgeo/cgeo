@@ -564,6 +564,7 @@
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_useenglish">Používat angličtinu</string>
     <string name="init_summary_useenglish">Používat angličtinu pro c:geo\n(Vyžaduje restart)</string>
+    <string name="init_category_exclude">Vyloučit kešky</string>
     <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
     <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
@@ -583,6 +584,8 @@
     <string name="init_summary_archived">Vyloučit archivované keše</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
+    <string name="init_customtabs_as_browser">Použít Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky</string>
