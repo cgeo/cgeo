@@ -477,7 +477,7 @@
     <string name="settings_title_navigation">Navigatie</string>
     <string name="settings_summary_navigation">Kies uw voorkeur voor navigatiemethoden en externe navigatie apps.</string>
     <string name="settings_title_system">Systeem</string>
-    <string name="settings_summary_system">Configureer app mappen en andere systeemspecifieke instellingen.</string>
+    <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
@@ -623,7 +623,7 @@
     <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
     <string name="init_backup_folder_exists_error">Kon geen nieuwe back-up map aanmaken. Heb je al een back-up gemaakt in de laatste minuut?</string>
     <string name="init_backup_no_backup_available">Er is geen back-up bestand beschikbaar.</string>
-    <string name="backup_confirm_overwrite">Wil je de oudste bestaande back-up van %s overschrijven?</string>
+    <string name="backup_confirm_overwrite">Dit zal je oudste bestaande reservekopie map verwijderen van %s. \nWil je doorgaan?</string>
     <string name="restore_confirm_overwrite_database">WAARSCHUWING: Dit overschrijft %s op je apparaat!</string>
     <string name="restore_confirm_overwrite_database_and_settings">WAARSCHUWING: Dit overschrijft %s en je huidige instellingen op je apparaat!</string>
     <string name="restore_confirm_overwrite_settings">WAARSCHUWING: Dit overschrijft je huidige instellingen op je apparaat!</string>
@@ -1160,7 +1160,7 @@
     <string name="map_hidewp_original">Originele waypoints verbergen</string>
     <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>
     <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
-    <string name="map_hide_track">Individuele spoor verbergen</string>
+    <string name="map_hide_track">Verberg GPX spoor/route</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
@@ -1179,6 +1179,7 @@
     <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
+    <string name="quick_settings">Snelle instellingen</string>
     <!-- search -->
     <string name="search_bar_hint">Zoek naar caches</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
@@ -1723,6 +1724,7 @@
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Automatisch als doel instellen</string>
+    <string name="map_disable_autotarget_individual_route">\"Stel automatisch als doel in\" uitgeschakeld</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>

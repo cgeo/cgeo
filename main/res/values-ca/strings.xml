@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Navegació</string>
     <string name="settings_summary_navigation">Tria un mètode com preferit de navegació i selecciona la aplicació de navegació externa.</string>
     <string name="settings_title_system">Sistema</string>
-    <string name="settings_summary_system">Configura els directoris d\'aplicacions i altres configuracions específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
     <string name="settings_category_browser">Navegador</string>
     <string name="settings_category_geocaching_platform">Plataformes de Geocatxing</string>
@@ -620,7 +619,6 @@
     <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
     <string name="init_backup_folder_exists_error">No s\'ha pogut crear un nou directori de còpia de seguretat . Heu fet una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
-    <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent més antiga de %s?</string>
     <string name="restore_confirm_overwrite_database">AVÍS: Això sobreescriurà %s al vostre dispositiu.</string>
     <string name="restore_confirm_overwrite_database_and_settings">AVÍS: Això sobreescriurà %si la configuració actual al dispositiu.</string>
     <string name="restore_confirm_overwrite_settings">AVÍS: Això sobreescriurà la configuració actual al dispositiu.</string>
@@ -1153,7 +1151,6 @@
     <string name="map_hidewp_original">Amaga punt ruta originals</string>
     <string name="map_hidewp_parking">Amaga punts ruta parking</string>
     <string name="map_hidewp_visited">Amaga punts ruta visitats</string>
-    <string name="map_hide_track">Amaga el track individual</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
     <string name="init_summary_hidewp_parking">Amaga els punts d\'aparcament al mapa</string>

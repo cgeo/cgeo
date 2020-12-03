@@ -474,7 +474,6 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Vælg foretrukken navigationsmetode og vælg eksterne apps.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Konfigurér app-mapper og andre systemspecifikke indstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-platform</string>
@@ -1121,7 +1120,6 @@
     <string name="map_hidewp_original">Skjul originale rutepunkter</string>
     <string name="map_hidewp_parking">Skjul parkeringsrutepunkter</string>
     <string name="map_hidewp_visited">Skjul besøgte rutepunkter</string>
-    <string name="map_hide_track">Skjul spor</string>
     <string name="init_hidewp">Skjul rutepunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>

@@ -476,7 +476,6 @@
     <string name="settings_title_navigation">Navigointi</string>
     <string name="settings_summary_navigation">Määritä ensisijainen navigointitapa ja valitse ulkoiset navigointisovellukset.</string>
     <string name="settings_title_system">Järjestelmä</string>
-    <string name="settings_summary_system">Määritä sovelluksen hakemistot ja muut järjestelmäkohtaiset asetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
     <string name="settings_category_browser">Selain</string>
     <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
@@ -619,7 +618,6 @@
     <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita.</string>
     <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
-    <string name="backup_confirm_overwrite">Haluatko korvata vanhimman olemassa olevan varmuuskopion kohteesta %s?</string>
     <string name="restore_confirm_overwrite_database">VAROITUS: Tämä korvaa kohteen %s laitteellasi!</string>
     <string name="restore_confirm_overwrite_database_and_settings">VAROITUS: Tämä korvaa kohteen %s ja nykyiset asetuksesi laitteellasi!</string>
     <string name="restore_confirm_overwrite_settings">VAROITUS: Tämä korvaa nykyiset asetuksesi laitteellasi!</string>
@@ -1152,7 +1150,6 @@
     <string name="map_hidewp_original">Piilota alkuperäiset reittipisteet</string>
     <string name="map_hidewp_parking">Piilota parkkipaikka-reittipisteet</string>
     <string name="map_hidewp_visited">Piilota vieraillut reittipisteet</string>
-    <string name="map_hide_track">Piilota yksittäinen jälki</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>

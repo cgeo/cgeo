@@ -475,7 +475,6 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Sélectionner les méthodes de navigation préférées et les applications de navigation externes.</string>
     <string name="settings_title_system">Système</string>
-    <string name="settings_summary_system">Configurer les répertoires de l\'application et d\'autres paramètres spécifiques au système.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
     <string name="settings_category_browser">Navigateur</string>
     <string name="settings_category_geocaching_platform">Plateforme de Géocaching</string>
@@ -1138,7 +1137,7 @@
     <string name="map_hidewp_original">Masquer les points de passage d\'origine</string>
     <string name="map_hidewp_parking">Masquer les points de passage de stationnement</string>
     <string name="map_hidewp_visited">Masquer les points de passage visités</string>
-    <string name="map_hide_track">Cacher le parcours individuel</string>
+    <string name="map_hide_track">Masquer la trace GPX</string>
     <string name="init_hidewp">Masquer tous les points de passage</string>
     <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>
@@ -1157,6 +1156,7 @@
     <string name="map_routing_car">En voiture</string>
     <string name="map_gm_autorotation">Rotation automatique de la carte</string>
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
+    <string name="quick_settings">Paramètres rapides</string>
     <!-- search -->
     <string name="search_bar_hint">Recherche globale</string>
     <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>

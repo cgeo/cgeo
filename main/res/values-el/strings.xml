@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Πλοήγηση</string>
     <string name="settings_summary_navigation">Επιλέξτε επιθυμητή μέθοδο πλοήγησης και εξωτερικές εφαρμογές πλοήγησης.</string>
     <string name="settings_title_system">Σύστημα</string>
-    <string name="settings_summary_system">Ρύθμιση των καταλόγων της εφαρμογής και άλλων ειδικών ρυθμίσεων του συστήματος.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
@@ -623,7 +622,6 @@
     <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζονται αντίγραφα ασφαλείας.</string>
     <string name="init_backup_folder_exists_error">Δεν μπορεί να δημιουργηθεί νέος φάκελος αποθήκευσης αντιγραφών ασφαλείας. Έχετε δημιουργήσει ήδη ένα αντίγραφό ασφαλείας το τελευταίο λεπτό;</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
-    <string name="backup_confirm_overwrite">Θέλετε να αντικαταστήσετε το υπάρχον, παλιότερο αντίγραφο ασφαλείας του %s;</string>
     <string name="restore_confirm_overwrite_database">ΠΡΟΣΟΧΗ: Αυτό θα επανεγράψει το %s της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει το %s και τις τρέχουσες ρυθμίσεις της συσκευή σας!</string>
     <string name="restore_confirm_overwrite_settings">ΠΡΟΣΟΧΗ: Αυτό θα επανεγγράψει τις τρέχουσες ρυθμίσεις της συσκευής σας!</string>
@@ -1160,7 +1158,6 @@
     <string name="map_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών</string>
     <string name="map_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης</string>
     <string name="map_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
-    <string name="map_hide_track">Απόκρυψη μεμονωμένων διαδρομών</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>

@@ -478,7 +478,6 @@
     <string name="settings_title_navigation">Nawigacja</string>
     <string name="settings_summary_navigation">Wybierz preferowane metody nawigacji i zewnętrzne aplikacje nawigacyjne.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Skonfiguruj katalogi aplikacji i inne ustawienia specyficzne dla systemu.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_browser">Przeglądarka</string>
     <string name="settings_category_geocaching_platform">Platforma Geocaching</string>
@@ -621,7 +620,6 @@
     <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
     <string name="init_backup_folder_exists_error">Nie można utworzyć nowego katalogu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
-    <string name="backup_confirm_overwrite">Czy chcesz nadpisać najstarszą istniejącą kopię zapasową z %s?</string>
     <string name="restore_confirm_overwrite_database">UWAGA: To nadpisze %s na twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_database_and_settings">OSTRZEŻENIE: To nadpisze %s i twoje bieżące ustawienia na Twoim urządzeniu!</string>
     <string name="restore_confirm_overwrite_settings">OSTRZEŻENIE: To nadpisze aktualne ustawienia na twoim urządzeniu!</string>
@@ -1170,7 +1168,6 @@
     <string name="map_hidewp_original">Ukryj oryginalne punkty nawigacji</string>
     <string name="map_hidewp_parking">Ukryj parkingi</string>
     <string name="map_hidewp_visited">Ukryj odwiedzone punkty nawigacji</string>
-    <string name="map_hide_track">Ukryj indywidualną ścieżkę</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>

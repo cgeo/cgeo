@@ -469,7 +469,6 @@
     <string name="settings_title_navigation">길찾기</string>
     <string name="settings_summary_navigation">원하는 길찾기 방법 및 외부 길찾기 앱 선택하기</string>
     <string name="settings_title_system">시스템</string>
-    <string name="settings_summary_system">앱 디렉토리 및 기타 시스템 특정 설정을 구성하세요.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_browser">브라우저</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
@@ -1096,7 +1095,6 @@
     <string name="map_hidewp_original">최초의 지점 숨기기</string>
     <string name="map_hidewp_parking">주차 지점 숨기기</string>
     <string name="map_hidewp_visited">방문한 지점 숨기기</string>
-    <string name="map_hide_track">개별 트랙 숨기기</string>
     <string name="init_hidewp">지점 숨기기</string>
     <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
     <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>

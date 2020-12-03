@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Navigacija</string>
     <string name="settings_summary_navigation">Pasirinkite pageidaujamus navigacijos metodus ir išorines navigacijos programas.</string>
     <string name="settings_title_system">Sistema</string>
-    <string name="settings_summary_system">Konfigūruokite programų katalogus ir kitus sistemos parametrus.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_browser">Naršyklė</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
@@ -617,7 +616,6 @@
     <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
     <string name="init_backup_folder_exists_error">Nepavyko sukurti naujo atsarginės kopijos aplanko. Ar jau padarėte atsarginę kopiją paskutinę minutę?</string>
     <string name="init_backup_no_backup_available">Nėra atsarginės kopijos failų.</string>
-    <string name="backup_confirm_overwrite">Ar norite perrašyti seniausią esamą atsarginę %s kopiją?</string>
     <string name="restore_confirm_overwrite_database">ĮSPĖJIMAS: Tai perrašys %s jūsų įrenginyje!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ĮSPĖJIMAS: Tai perrašys %s ir dabartinius jūsų įrenginio nustatymus!</string>
     <string name="restore_confirm_overwrite_settings">ĮSPĖJIMAS: Tai perrašys dabartinius jūsų įrenginio nustatymus!</string>
@@ -1160,7 +1158,6 @@
     <string name="map_hidewp_original">Slėpti originalius taškus</string>
     <string name="map_hidewp_parking">Slėpti parkingo taškus</string>
     <string name="map_hidewp_visited">Slėpti aplankytus taškus</string>
-    <string name="map_hide_track">Slėpti asmenini kelią</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>

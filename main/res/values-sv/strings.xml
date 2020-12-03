@@ -466,7 +466,6 @@
     <string name="settings_title_navigation">Navigering</string>
     <string name="settings_summary_navigation">Välj standardmetoder för navigering och välj externa navigationsappar.</string>
     <string name="settings_title_system">System</string>
-    <string name="settings_summary_system">Konfigurera appkataloger och andra systemspecifika inställningar.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
     <string name="settings_category_browser">Webbläsare</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
@@ -1100,7 +1099,6 @@
     <string name="map_hidewp_original">Dölj ursprungliga vägpunkter</string>
     <string name="map_hidewp_parking">Dölj parkerings vägpunkter</string>
     <string name="map_hidewp_visited">Dölj besökta vägpunkter</string>
-    <string name="map_hide_track">Dölj individuella spår</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>

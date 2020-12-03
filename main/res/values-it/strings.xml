@@ -477,7 +477,6 @@
     <string name="settings_title_navigation">Navigazione</string>
     <string name="settings_summary_navigation">Sceglie il metodo di navigazione preferito e seleziona le app di navigazione esterna.</string>
     <string name="settings_title_system">Sistema</string>
-    <string name="settings_summary_system">Configura le cartelle dell\'app e altre impostazioni specifiche di sistema.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Piattaforma Geocaching</string>
@@ -621,7 +620,6 @@
     <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
     <string name="init_backup_folder_exists_error">Impossibile creare una nuova directory di backup. Hai forse già fatto un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
-    <string name="backup_confirm_overwrite">Vuoi sovrascrivere il tuo backup più vecchio esistente da %s?</string>
     <string name="restore_confirm_overwrite_database">ATTENZIONE: Questo sovrascriverà %s sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ATTENZIONE: Questo sovrascriverà %s e le impostazioni correnti sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">ATTENZIONE: Questo sovrascriverà le impostazioni correnti sul tuo dispositivo!</string>
@@ -1157,7 +1155,6 @@
     <string name="map_hidewp_original">Nascondi i waypoint originali</string>
     <string name="map_hidewp_parking">Nascondi waypoint di parcheggio</string>
     <string name="map_hidewp_visited">Nascondi i waypoint visitati</string>
-    <string name="map_hide_track">Nascondi traccia individuale</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
