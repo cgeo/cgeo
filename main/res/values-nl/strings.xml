@@ -562,6 +562,7 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_useenglish">Use English language</string>
     <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
+    <string name="init_category_exclude">Caches uitsluiten</string>
     <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
@@ -581,6 +582,8 @@
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
+    <string name="init_customtabs_as_browser">Gebruik Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">Externe websites worden weergegeven zonder c:geo te verlaten (alleen mogelijk als Chrome is geïnstalleerd)</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
