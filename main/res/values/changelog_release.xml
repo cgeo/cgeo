@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2020.12.03:</h1>
+<h1>2020.12.xx:</h1>
 
 <h4>Android 11 notice (UPDATED):</h4>
 There are no known issues for using c:geo with Android 11. If you notice any problem, kindly let us know.
