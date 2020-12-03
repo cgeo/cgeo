@@ -8,10 +8,20 @@ public class EnvironmentUtils {
         // utility class
     }
 
+    private static final boolean DEFAULT_TRANSPARENT_BACKGROUND;
+
+    static {
+        DEFAULT_TRANSPARENT_BACKGROUND = ! isSailfishOs();
+    }
+
     public static boolean isSailfishOs() {
         return Build.PRODUCT.startsWith("aosp") && Build.VERSION.SDK_INT == 27;
     }
     public static boolean isExternalStorageAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+    }
+
+    public static boolean defaultBackgroundTransparent() {
+        return DEFAULT_TRANSPARENT_BACKGROUND;
     }
 }
