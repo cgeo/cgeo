@@ -20,6 +20,7 @@
 <h4>Other:</h4>
 <ul>
 <li>Change: Custom tab implementation instead of internal browser</li>
+<li>Change: Field note encoding: Charset changed to UTF16 LE</li>
 <li>New: Ask for filename on individual route export</li>
 <li>New: Added share option after creating a backup</li>
 <li>New: View settings: Added option to add new settings</li>
