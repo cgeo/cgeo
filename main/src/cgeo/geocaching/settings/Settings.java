@@ -1072,6 +1072,10 @@ public class Settings {
         return getBoolean(R.string.pref_transparentBackground, EnvironmentUtils.defaultBackgroundTransparent());
     }
 
+    public static void setIsTransparentBackground(final boolean value) {
+        putBoolean(R.string.pref_transparentBackground, value);
+    }
+
     @NonNull
     public static String getTwitterKeyConsumerPublic() {
         return TWITTER_KEY_CONSUMER_PUBLIC;
