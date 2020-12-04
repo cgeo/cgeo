@@ -517,7 +517,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         if (mapOptions.mapState == null) {
             followMyLocation = followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
-            mapView.setCircles(Settings.getCircles());
+            mapView.setCircles(Settings.isShowCircles());
         } else {
             followMyLocation = mapOptions.mapState.followsMyLocation();
             if (mapView.getCircles() != mapOptions.mapState.showsCircles()) {
@@ -829,7 +829,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         markersInvalidated = true;
         Tile.cache.clear();
         overlayPositionAndScale.repaintRequired();
-        mapView.setCircles(Settings.getCircles());
+        mapView.setCircles(Settings.isShowCircles());
         mapView.repaintRequired(null);
     }
 

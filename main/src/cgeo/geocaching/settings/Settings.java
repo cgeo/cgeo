@@ -1360,20 +1360,12 @@ public class Settings {
         putInt(R.string.pref_logImageScale, scale);
     }
 
-    public static void setCircles(final boolean showCircles) {
+    public static void setShowCircles(final boolean showCircles) {
         putBoolean(R.string.pref_showCircles, showCircles);
     }
 
-    public static boolean getCircles() {
+    public static boolean isShowCircles() {
         return getBoolean(R.string.pref_showCircles, false);
-    }
-
-    public static boolean isHideCircles() {
-        return !getBoolean(R.string.pref_showCircles, false);
-    }
-
-    public static void setHideCircles(final boolean hideCircles) {
-        putBoolean(R.string.pref_showCircles, !hideCircles);
     }
 
     public static void setSupersizeDistance(final int supersizeDistance) {
