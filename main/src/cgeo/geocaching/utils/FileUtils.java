@@ -432,7 +432,7 @@ public final class FileUtils {
 
     public static boolean writeFileUTF16(final File file, final String content) {
         try {
-            org.apache.commons.io.FileUtils.write(file, content, StandardCharsets.UTF_16);
+            org.apache.commons.io.FileUtils.write(file, content, StandardCharsets.UTF_16LE);
         } catch (final IOException e) {
             Log.e("FileUtils.writeFileUTF16", e);
             return false;
