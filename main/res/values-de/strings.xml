@@ -561,6 +561,7 @@
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_useenglish">Auf Englisch</string>
     <string name="init_summary_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
+    <string name="init_category_exclude">Caches ausblenden</string>
     <string name="init_exclude">Eigene/Gefundene ausblenden</string>
     <string name="init_summary_exclude">Eigene/gefundene Caches ausblenden</string>
     <string name="init_showwaypoints">Wegpunkte zeigen</string>
