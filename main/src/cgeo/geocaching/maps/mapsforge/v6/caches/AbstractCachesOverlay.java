@@ -49,7 +49,7 @@ public abstract class AbstractCachesOverlay {
         this.anchorLayer = anchorLayer;
         this.mapHandlers = mapHandlers;
         this.circleLayer = bundle.getCirclesSeparator();
-        this.showCircles = Settings.getCircles();
+        this.showCircles = Settings.isShowCircles();
         mapRef = new WeakReference<>(map);
         Log.d(String.format(Locale.ENGLISH, "AbstractCacheOverlay: construct overlay %d", overlayId));
     }
@@ -94,7 +94,7 @@ public abstract class AbstractCachesOverlay {
 
     public void invalidate() {
         invalidated = true;
-        showCircles = Settings.getCircles();
+        showCircles = Settings.isShowCircles();
     }
 
     public void invalidate(final Collection<String> invalidGeocodes) {
@@ -117,7 +117,7 @@ public abstract class AbstractCachesOverlay {
 
     void switchCircles() {
         synchronized (this.bundleRef.get().getMapView()) {
-            showCircles = Settings.getCircles();
+            showCircles = Settings.isShowCircles();
             final Layers layers = getLayers();
             final int circleIndex = layers.indexOf(circleLayer) + 1;
             for (final GeoitemLayer layer : layerList) {

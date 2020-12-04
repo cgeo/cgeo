@@ -47,7 +47,7 @@ public class MapSettingsUtils {
         if (StringUtils.isNotBlank(Settings.getTrackFile())) {
             settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true));
         }
-        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, Settings.isHideCircles(), Settings::setHideCircles, true));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, Settings.isShowCircles(), Settings::setShowCircles, false));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_direction, R.drawable.ic_menu_goto, Settings.isMapDirection(), Settings::setMapDirection, false));
 
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.map_settings_dialog, null);
