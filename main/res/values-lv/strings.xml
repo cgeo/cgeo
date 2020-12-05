@@ -1057,14 +1057,8 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_modes">Kartes iestatījumi</string>
     <string name="map_rotation">Kartes rotācija</string>
-    <string name="map_hide">Slēpt</string>
     <string name="map_dot_mode">Lietot kompakto ikonu skatu</string>
-    <string name="map_circles_show">Rādīt riņķus</string>
-    <string name="map_mycaches_hide">Nerādīt savus/atrastos slēpņus</string>
-    <string name="map_disabled_hide">Paslēpt izslēgtos slēpņus</string>
-    <string name="map_archived_hide">Paslēpt arhivētos slēpņus</string>
-    <string name="map_hidewp_original">Paslēpt oriģinālos starpposmus</string>
-    <string name="map_hidewp_parking">Paslēpt stāvvietu starpposmus</string>
+    <string name="map_show_circles">Rādīt riņķus</string>
     <string name="init_hidewp">Slēpt ceļa punktus</string>
     <string name="init_summary_hidewp_original">Slēpt oriģinālos ceļa punktus kartē</string>
     <string name="map_theme_select">Atlasiet kartes dizainu</string>
@@ -1075,10 +1069,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <string name="map_routing">Maršrutēšana</string>
-    <string name="map_routing_straight">Taisna līnija</string>
-    <string name="map_routing_walk">Kājām</string>
-    <string name="map_routing_bike">Ar velo</string>
-    <string name="map_routing_car">Ar auto</string>
     <!-- search -->
     <string name="search_bar_hint">Meklēt slēpņus</string>
     <string name="search_bar_desc">Slēpņi (GC kods, atslēgas vārds), Ceļotāji (TB kods)</string>
