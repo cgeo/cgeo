@@ -418,7 +418,7 @@ final class OkapiClient {
             return false;
         }
 
-        if (data.get("replaced").asBoolean()) {
+        if (data.get("replaced") != null && data.get("replaced").asBoolean()) {
             Log.d("Successfully uploaded");
             return true;
         }

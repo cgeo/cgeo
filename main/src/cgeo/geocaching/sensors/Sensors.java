@@ -110,6 +110,13 @@ public class Sensors {
             return Observable.<DirectionData>never().startWith(Single.just(DirectionData.EMPTY));
         }).filter(dirData -> Settings.isUseCompass() && !useDirectionFromGps.get());
 
+        if (geoDataObservableLowPower == null) {
+            // when can geoDataObservableLowPower be null? ->
+            // this can happen in the very special case immediately after fresh and first installation of c:geo on a device when user goes into Settings BEFORE granting localization permission to c:geo
+            // for some reason, c:geo does not ask for these permission immediately after installation but only later
+            setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+        }
+
         final Observable<DirectionData> directionFromGpsObservable = geoDataObservableLowPower.filter(geoData -> {
             final boolean useGps = geoData.getSpeed() > 5.0f;
             useDirectionFromGps.set(useGps);
