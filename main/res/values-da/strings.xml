@@ -1111,15 +1111,8 @@
     <string name="map_view_map">Kort-view</string>
     <string name="map_modes">Kortindstillinger</string>
     <string name="map_rotation">Kortrotation</string>
-    <string name="map_hide">Skjul</string>
     <string name="map_dot_mode">Brug små ikoner</string>
-    <string name="map_circles_show">Vis cirkler</string>
-    <string name="map_mycaches_hide">Skjul egne/fundne cacher</string>
-    <string name="map_disabled_hide">Skjul deaktiverede cacher</string>
-    <string name="map_archived_hide">Skjul arkiverede caches</string>
-    <string name="map_hidewp_original">Skjul originale rutepunkter</string>
-    <string name="map_hidewp_parking">Skjul parkeringsrutepunkter</string>
-    <string name="map_hidewp_visited">Skjul besøgte rutepunkter</string>
+    <string name="map_show_circles">Vis cirkler</string>
     <string name="init_hidewp">Skjul rutepunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
@@ -1132,10 +1125,6 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="map_routing">Navigation</string>
-    <string name="map_routing_straight">Lige linje</string>
-    <string name="map_routing_walk">Til fods</string>
-    <string name="map_routing_bike">Cykel</string>
-    <string name="map_routing_car">Bil</string>
     <string name="map_gm_autorotation">Auto-rotér kort</string>
     <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
     <!-- search -->
