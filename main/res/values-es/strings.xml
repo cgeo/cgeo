@@ -1045,12 +1045,7 @@
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_modes">Ajustes del mapa</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
-    <string name="map_circles_show">Mostrar círculos</string>
-    <string name="map_mycaches_hide">Ocultar propios/encontr.</string>
-    <string name="map_disabled_hide">Ocultar cachés desactivados</string>
-    <string name="map_hidewp_original">Ocultar waypoints originales</string>
-    <string name="map_hidewp_parking">Ocultar waypoints de estacionamiento</string>
-    <string name="map_hidewp_visited">Ocultar waypoints visitados</string>
+    <string name="map_show_circles">Mostrar círculos</string>
     <string name="init_hidewp">Ocultar waypoints</string>
     <string name="init_summary_hidewp_original">Ocultar waypoints originales en el mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar waypoints de estacionamiento en el mapa</string>
@@ -1063,10 +1058,6 @@
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <string name="map_routing">Enrutamiento</string>
-    <string name="map_routing_straight">Línea recta</string>
-    <string name="map_routing_walk">Andando</string>
-    <string name="map_routing_bike">Bicicleta</string>
-    <string name="map_routing_car">Coche</string>
     <!-- search -->
     <string name="search_bar_hint">Buscar cachés</string>
     <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
