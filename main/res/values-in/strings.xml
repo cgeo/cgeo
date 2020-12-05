@@ -820,19 +820,13 @@
     <string name="map_live">Peta hidup</string>
     <string name="map_view_map">Tampilan peta</string>
     <string name="map_modes">Pengaturan peta</string>
-    <string name="map_circles_show">Tampilkan lingkaran</string>
-    <string name="map_mycaches_hide">Menyembunyikan sendiri/cache ditemukan</string>
-    <string name="map_disabled_hide">Menyembunyikan cache yang cacat</string>
+    <string name="map_show_circles">Tampilkan lingkaran</string>
     <string name="map_theme_select">Pilih tema peta</string>
     <string name="map_live_enable">Aktifkan hidup</string>
     <string name="map_live_disable">Nonaktifkan hidup</string>
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
     <string name="map_routing">Rute</string>
-    <string name="map_routing_straight">Garis lurus</string>
-    <string name="map_routing_walk">Berjalan</string>
-    <string name="map_routing_bike">Sepeda</string>
-    <string name="map_routing_car">Mobil</string>
     <!-- search -->
     <string name="search_bar_hint">Mencari cache</string>
     <string name="search_bar_desc">Cache (geo kode, kata kunci), Trackables (TB kode)</string>
