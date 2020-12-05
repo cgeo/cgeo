@@ -824,19 +824,13 @@
     <string name="map_live">Hartă</string>
     <string name="map_view_map">Hărţi</string>
     <string name="map_modes">Opţiuni hărţi</string>
-    <string name="map_circles_show">Arată cercurile</string>
-    <string name="map_mycaches_hide">Ascunde geocutiile mele/găsite</string>
-    <string name="map_disabled_hide">Ascunde geocutiile inactive</string>
+    <string name="map_show_circles">Arată cercurile</string>
     <string name="map_theme_select">Alege un stil pentru hartă</string>
     <string name="map_live_enable">Ia de pe net</string>
     <string name="map_live_disable">Fără internet</string>
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
     <string name="map_routing">Dirijare</string>
-    <string name="map_routing_straight">Linie dreaptă</string>
-    <string name="map_routing_walk">Pe jos</string>
-    <string name="map_routing_bike">Bicicletă</string>
-    <string name="map_routing_car">Maşină</string>
     <!-- search -->
     <string name="search_bar_hint">Caută cutii</string>
     <string name="search_bar_desc">Geocutii (geocod, cuvânt cheie), Obiecte călătoare (cod TB)</string>
