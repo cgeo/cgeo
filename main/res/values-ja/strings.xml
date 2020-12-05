@@ -1072,7 +1072,7 @@
     <string name="gpx_import_delete_title">ファイル削除</string>
     <string name="gpx_import_delete_message">%sを削除しますか?</string>
     <string name="gpx_import_select_list_title">GPXファイルをリストへインポート</string>
-    <string name="gpx_import_android">アンドロイド端末からインポート</string>
+    <string name="gpx_import_android">Android端末からインポート</string>
     <!-- file selectors -->
     <string name="map_file_select_title">地図ファイルの選択</string>
     <string name="track_file_select_title">トラックファイルを選択</string>
@@ -1260,10 +1260,10 @@
     <string name="helper_sendtocgeo_title">Send2cgeo</string>
     <string name="helper_contacts_title">c:geo - 連絡先 アドオン</string>
     <string name="helper_contacts_description">ログエントリから直接(連絡帳の)連絡先を開くことができるようになります。簡単に友達に助けを求めることができます</string>
-    <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をアンドロイド端末に直接送ることができます</string>
+    <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をAndroid端末に直接送ることができます</string>
     <string name="helper_locus_description">スマホやタブレット用のアウトドアナビゲーションアプリ。地形図をオフラインで表示、ルートを追跡、ジオキャッシュを探索、音声ガイドを使用、などが行えます</string>
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。またGPSに関するたくさんの情報が得られます</string>
-    <string name="helper_bluetoothgps_description">外部GPS受信機を利用することができます。より正確な位置情報を得られたりアンドロイド端末のバッテリ消費が少なくなるかもしれません</string>
+    <string name="helper_bluetoothgps_description">外部GPS受信機を利用することができます。より正確な位置情報を得られたりデバイスのバッテリ消費が少なくなるかもしれません</string>
     <string name="helper_gps_locker_description">GPS Lockerはアプリケーションを切り替えるときやデバイスの画面がオフのときにGPS信号をアクティブのままにします</string>
     <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやWebサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます</string>
     <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります</string>
@@ -1758,6 +1758,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
     <string name="downloadmap_confirmation">地図ファイル「%1$s」をダウンロードしますか?\n\nネットワーク接続によっては長時間かかり通信料が高額になる場合があります。\n\nファイルサイズ:%2$s</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
+    <string name="button_continue">続ける</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>
