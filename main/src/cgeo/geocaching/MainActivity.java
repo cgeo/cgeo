@@ -34,6 +34,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -278,6 +279,12 @@ public class MainActivity extends AbstractActionBarActivity {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
 
+        //check database
+        final String errorMsg = DataStore.initAndCheck(false);
+        if (errorMsg != null) {
+            DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
+        }
+
         // Disable the up navigation for this activity
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -508,6 +515,9 @@ public class MainActivity extends AbstractActionBarActivity {
                 return true;
             case R.id.menu_about:
                 showAbout(null);
+                return true;
+            case R.id.menu_report_problem:
+                DebugUtils.askUserToReportProblem(this, null);
                 return true;
             case R.id.menu_helpers:
                 startActivity(new Intent(this, UsefulAppsActivity.class));

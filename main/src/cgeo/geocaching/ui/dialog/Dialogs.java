@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -20,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -296,7 +298,7 @@ public final class Dialogs {
      */
     public static AlertDialog.Builder confirmPositiveNegativeNeutral(final Activity context,
                                                                      final String title,
-                                                                     final String msg,
+                                                                     final CharSequence msg,
                                                                      final String positiveTextButton,
                                                                      final String negativeTextButton,
                                                                      final String neutralTextButton,
@@ -319,7 +321,20 @@ public final class Dialogs {
         final AlertDialog dialog = builder.create();
         dialog.setOwnerActivity(context);
         dialog.show();
+
+        makeLinksClickable(dialog);
+
         return builder;
+    }
+
+    private static void makeLinksClickable(final AlertDialog dialog) {
+        try {
+            // Make the URLs in TextView clickable. Must be called after show()
+            // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
+            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+        }  catch (Exception e) {
+            Log.d("Trying to make dialog Links clickable failed, will be ignored", e);
+        }
     }
 
     /**
