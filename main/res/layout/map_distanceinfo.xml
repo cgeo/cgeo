@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="-2dp"
-        android:layout_marginRight="92dp"
+        android:layout_marginRight="97dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
         android:id="@+id/distance1"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         style="@style/map_distanceinfo" />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_marginTop="0dp"
         android:layout_below="@id/distance1"
         android:layout_alignParentRight="true"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         style="@style/map_distanceinfo" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_marginTop="0dp"
         android:layout_below="@id/distance2"
         android:layout_alignParentRight="true"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         style="@style/map_distanceinfo" />
 
     <TextView
@@ -57,7 +57,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="-2dp"
-        android:layout_marginRight="92dp"
+        android:layout_marginRight="97dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
         android:id="@+id/distance1Supersize"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         style="@style/map_distanceinfo_no_background" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/distanceSupersize"
         android:layout_alignParentRight="true"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         style="@style/map_distanceinfo" />
 
 </RelativeLayout>
