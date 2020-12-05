@@ -943,9 +943,7 @@
     <string name="map_view_map">Térképek</string>
     <string name="map_modes">Térképmódok</string>
     <string name="map_dot_mode">Kompakt ikonok használata</string>
-    <string name="map_circles_show">Ládahatárok be</string>
-    <string name="map_mycaches_hide">Saját/megtalált ládák ki</string>
-    <string name="map_disabled_hide">Letiltott ládák ki</string>
+    <string name="map_show_circles">Ládahatárok be</string>
     <string name="map_theme_select">Térképstílusok</string>
     <string name="map_theme_options">Térképstílus beállítások</string>
     <string name="map_live_enable">Élő mód</string>
@@ -953,10 +951,6 @@
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <string name="map_routing">Útvonal</string>
-    <string name="map_routing_straight">Egyenes vonal</string>
-    <string name="map_routing_walk">Gyalogos</string>
-    <string name="map_routing_bike">Kerékpáros</string>
-    <string name="map_routing_car">Autós</string>
     <!-- search -->
     <string name="search_bar_hint">Ládák keresése</string>
     <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
