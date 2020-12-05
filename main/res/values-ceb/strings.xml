@@ -799,18 +799,12 @@
     <string name="map_live">Mga mapa nga live</string>
     <string name="map_view_map">View sa mapa</string>
     <string name="map_modes">Kahimtang sa mapa</string>
-    <string name="map_circles_show">Ipakita nag mga bilog</string>
-    <string name="map_mycaches_hide">Itago ang gitagiya/nakit-an nga mga caches</string>
-    <string name="map_disabled_hide">Tagu-i ang dili mu gana na mga cache</string>
+    <string name="map_show_circles">Ipakita nag mga bilog</string>
     <string name="map_theme_select">Pagpili ug tema sa mapa</string>
     <string name="map_live_enable">Makahimo nga mag-live</string>
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <string name="map_routing">Mga kadaugan</string>
-    <string name="map_routing_straight">Tul-id na linya</string>
-    <string name="map_routing_walk">Lakaw</string>
-    <string name="map_routing_bike">Biseklita</string>
-    <string name="map_routing_car">Sakyanan</string>
     <!-- search -->
     <string name="search_bar_hint">Pangitaa para sa mga cache</string>
     <string name="search_bar_desc">Mga cache (geo code, keyword), Trackable (TB code)</string>
