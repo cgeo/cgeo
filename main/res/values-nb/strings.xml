@@ -995,15 +995,8 @@
     <string name="map_view_map">Kart</string>
     <string name="map_modes">Kartinnstillinger</string>
     <string name="map_rotation">Kartrotasjon</string>
-    <string name="map_hide">Skjul</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
-    <string name="map_circles_show">Vis sirkler</string>
-    <string name="map_mycaches_hide">Skjul egne og funnede cacher</string>
-    <string name="map_disabled_hide">Skjul deaktiverte cacher</string>
-    <string name="map_archived_hide">Skjul arkiverte cacher</string>
-    <string name="map_hidewp_original">Skjul originale veipunkter</string>
-    <string name="map_hidewp_parking">Skjul parkeringsveipunkter</string>
-    <string name="map_hidewp_visited">Skjul besøkte veipunkter</string>
+    <string name="map_show_circles">Vis sirkler</string>
     <string name="init_hidewp">Skjul veipunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsveipunkter på kartet</string>
@@ -1016,10 +1009,6 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Velg objekt</string>
     <string name="map_routing">Rute</string>
-    <string name="map_routing_straight">Rett linje</string>
-    <string name="map_routing_walk">Gå</string>
-    <string name="map_routing_bike">Sykkel</string>
-    <string name="map_routing_car">Bil</string>
     <string name="map_gm_autorotation">Automatisk rotering av kart</string>
     <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
     <!-- search -->
