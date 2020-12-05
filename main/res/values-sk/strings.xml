@@ -1159,15 +1159,8 @@
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_modes">Nastavenia mapy</string>
     <string name="map_rotation">Otáčanie mapy</string>
-    <string name="map_hide">Skryť</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
-    <string name="map_circles_show">Zobraziť kruhy</string>
-    <string name="map_mycaches_hide">Skryť vlastné/nájdené skrýše</string>
-    <string name="map_disabled_hide">Nezobrazovať deaktivované skrýše</string>
-    <string name="map_archived_hide">Skryť archivované kešky</string>
-    <string name="map_hidewp_original">Skryť pôvodné body trasy</string>
-    <string name="map_hidewp_parking">Skryť parkoviská</string>
-    <string name="map_hidewp_visited">Skryť navštívené body trasy</string>
+    <string name="map_show_circles">Zobraziť kruhy</string>
     <string name="init_hidewp">Skryť body trasy</string>
     <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
     <string name="init_summary_hidewp_parking">Skryť parkoviská na mape</string>
@@ -1180,10 +1173,6 @@
     <string name="map_as_list">Zobraziť ako zoznam</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Navigácia</string>
-    <string name="map_routing_straight">Priama čiara</string>
-    <string name="map_routing_walk">Chôdza</string>
-    <string name="map_routing_bike">Bicykel</string>
-    <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
     <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <!-- search -->
