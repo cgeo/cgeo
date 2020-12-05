@@ -60,7 +60,6 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicLong;
@@ -155,7 +154,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initPreferences() {
-        initMapSourcePreference();
         initExtCgeoDirPreference();
         initDirChoosers();
         initDefaultNavigationPreferences();
@@ -258,25 +256,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private Preference getPreference(final int keyId) {
         return findPreference(this, getKey(keyId));
-    }
-
-    /**
-     * Fill the choice list for map sources.
-     */
-    private void initMapSourcePreference() {
-        final ListPreference pref = (ListPreference) getPreference(R.string.pref_mapsource);
-
-        final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
-        final CharSequence[] entries = new CharSequence[mapSources.size()];
-        final CharSequence[] values = new CharSequence[mapSources.size()];
-        int idx = 0;
-        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
-            entries[idx] = mapSource.getName();
-            values[idx] = String.valueOf(mapSource.getNumericalId());
-            idx++;
-        }
-        pref.setEntries(entries);
-        pref.setEntryValues(values);
     }
 
     /**
@@ -753,7 +732,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         Settings.setMapFileDirectory(mapFile);
                     }
                 }
-                initMapSourcePreference();
                 getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
                 break;
             case R.string.pref_fakekey_dataDir:
