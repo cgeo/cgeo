@@ -1090,15 +1090,8 @@
     <string name="map_view_map">Karttyp</string>
     <string name="map_modes">Kartlägen</string>
     <string name="map_rotation">Kartrotering</string>
-    <string name="map_hide">Dölj</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
-    <string name="map_circles_show">Visa cirklar</string>
-    <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
-    <string name="map_disabled_hide">Göm inaktiverade cacher</string>
-    <string name="map_archived_hide">Dölj arkiverade cacher</string>
-    <string name="map_hidewp_original">Dölj ursprungliga vägpunkter</string>
-    <string name="map_hidewp_parking">Dölj parkerings vägpunkter</string>
-    <string name="map_hidewp_visited">Dölj besökta vägpunkter</string>
+    <string name="map_show_circles">Visa cirklar</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj parkerings vägpunkter på kartan</string>
@@ -1111,10 +1104,6 @@
     <string name="map_as_list">Visa som lista</string>
     <string name="map_select_multiple_items">Välj objekt</string>
     <string name="map_routing">Navigering</string>
-    <string name="map_routing_straight">Rak linje</string>
-    <string name="map_routing_walk">Fotgängare</string>
-    <string name="map_routing_bike">Cykel</string>
-    <string name="map_routing_car">Bil</string>
     <string name="map_gm_autorotation">Rotera kartan automatiskt</string>
     <string name="map_gm_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
     <!-- search -->
