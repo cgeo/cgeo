@@ -1149,15 +1149,15 @@
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_modes">Ρυθμίσεις χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
-    <string name="map_hide">Απόκρυψη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
-    <string name="map_circles_show">Εμφάνιση κύκλων</string>
-    <string name="map_mycaches_hide">Απόκρυψη των δικών μου κρυπτών και των ευρέσεών μου</string>
-    <string name="map_disabled_hide">Απόκρυψη απενεργοποιημένων κρυπτών</string>
-    <string name="map_archived_hide">Απόκρυψη αρχειοθετημένων κρυπτών</string>
-    <string name="map_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών</string>
-    <string name="map_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης</string>
-    <string name="map_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
+    <string name="map_show_circles">Εμφάνιση κύκλων</string>
+    <string name="map_showc_ownfound">Εμφάνιση των δικών μου κρυπτών και των ευρέσεών μου</string>
+    <string name="map_showc_disabled">Εμφάνιση απενεργοποιημένων κρυπτών</string>
+    <string name="map_showc_archived">Εμφάνιση αρχειοθετημένων κρυπτών</string>
+    <string name="map_showwp_original">Εμφάνιση αρχικών ενδιάμεσων σταθμών</string>
+    <string name="map_showwp_parking">Εμφάνιση ενδιάμεσων σταθμών στάθμευσης</string>
+    <string name="map_showwp_visited">Εμφάνιση ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
+    <string name="map_show_track">Εμφάνιση GPX διαδρομής</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
@@ -1170,12 +1170,9 @@
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
-    <string name="map_routing_straight">Ευθεία γραμμή</string>
-    <string name="map_routing_walk">Περπάτημα</string>
-    <string name="map_routing_bike">Ποδήλατο</string>
-    <string name="map_routing_car">Αυτοκίνητο</string>
     <string name="map_gm_autorotation">Αυτόματη περιστροφή χάρτη</string>
     <string name="map_gm_autorotation_disable">Απενεργοποίηση αυτόματης περιστροφής χάρτη;\n\nΜπορείτε να την επαναενεργοποιήσετε στο μενού της περιστροφής χάρτη</string>
+    <string name="map_show_in_map">Εμφάνιση στο χάρτη</string>
     <!-- search -->
     <string name="search_bar_hint">Αναζήτηση κρυπτών</string>
     <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>
