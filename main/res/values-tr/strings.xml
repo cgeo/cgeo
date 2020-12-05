@@ -1056,15 +1056,8 @@
     <string name="map_live">Canlı Harita</string>
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_modes">Harita ayarları</string>
-    <string name="map_hide">Sakla</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
-    <string name="map_circles_show">Çemberleri göster</string>
-    <string name="map_mycaches_hide">Geocache\'lerimi/Bulduklarımı gizle</string>
-    <string name="map_disabled_hide">Devredışı Geocache\'leri gizle</string>
-    <string name="map_archived_hide">Arşivlenmiş Geocache\'leri gizle</string>
-    <string name="map_hidewp_original">Orijinal yol noktalarını gizle</string>
-    <string name="map_hidewp_parking">Park yerlerini gizle</string>
-    <string name="map_hidewp_visited">Ziyaret edilmiş yol noktalarını gizle</string>
+    <string name="map_show_circles">Çemberleri göster</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
@@ -1077,10 +1070,6 @@
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
-    <string name="map_routing_straight">Düz çizgi</string>
-    <string name="map_routing_walk">Yürüme</string>
-    <string name="map_routing_bike">Bisiklet</string>
-    <string name="map_routing_car">Araba</string>
     <!-- search -->
     <string name="search_bar_hint">Geocache\'leri ara</string>
     <string name="search_bar_desc">Geocache\'ler (geocode, anahtar kelime), Trackable (TB kodu)</string>
