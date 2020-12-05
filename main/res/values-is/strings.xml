@@ -566,10 +566,6 @@
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <string name="map_routing">Vegvísun</string>
-    <string name="map_routing_straight">Bein lína</string>
-    <string name="map_routing_walk">Gangandi</string>
-    <string name="map_routing_bike">Hjólandi</string>
-    <string name="map_routing_car">Keyrandi</string>
     <!-- search -->
     <string name="search_bar_hint">Leita að kössum</string>
     <string name="search_bar_desc">Kassar (geokóði, leitarorð), Ferðalangar (TB kóði)</string>
