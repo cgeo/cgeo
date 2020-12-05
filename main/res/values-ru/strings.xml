@@ -1108,15 +1108,8 @@
     <string name="map_view_map">Тип карты</string>
     <string name="map_modes">Настройки карты</string>
     <string name="map_rotation">Вращение карты</string>
-    <string name="map_hide">Скрыть</string>
     <string name="map_dot_mode">Маленькие иконки</string>
-    <string name="map_circles_show">Показать круги</string>
-    <string name="map_mycaches_hide">Скрыть свои/посещенные</string>
-    <string name="map_disabled_hide">Скрыть тайники вне игры</string>
-    <string name="map_archived_hide">Скрыть архивные тайники</string>
-    <string name="map_hidewp_original">Скрыть оригинальные точки</string>
-    <string name="map_hidewp_parking">Скрыть точки парковки</string>
-    <string name="map_hidewp_visited">Скрыть посещенные точки</string>
+    <string name="map_show_circles">Показать круги</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
     <string name="init_summary_hidewp_parking">Скрыть точки парковки на карте</string>
@@ -1129,10 +1122,6 @@
     <string name="map_as_list">Показать списком</string>
     <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_routing">Навигация</string>
-    <string name="map_routing_straight">Прямая</string>
-    <string name="map_routing_walk">Пешком</string>
-    <string name="map_routing_bike">На велосипеде</string>
-    <string name="map_routing_car">На авто</string>
     <string name="map_gm_autorotation">Авто-поворот карты</string>
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <!-- search -->
