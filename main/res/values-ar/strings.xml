@@ -826,19 +826,13 @@
     <string name="map_live">خريطة على نات</string>
     <string name="map_view_map">عرض الخريطة</string>
     <string name="map_modes">إعدادات الخريطة</string>
-    <string name="map_circles_show">إظهار الدوائر</string>
-    <string name="map_mycaches_hide">أخفي المخبآت الخاصة أو المعثور عليها</string>
-    <string name="map_disabled_hide">إخفاء المخبآت المعطلة</string>
+    <string name="map_show_circles">إظهار الدوائر</string>
     <string name="map_theme_select">حدد ثيم الخريطة</string>
     <string name="map_live_enable">تمكين عرض مباشر</string>
     <string name="map_live_disable">تعطيل العرض المباشر</string>
     <string name="map_as_list">عرض كقائمة</string>
     <string name="map_select_multiple_items">حدد العنصر</string>
     <string name="map_routing">التوجيه</string>
-    <string name="map_routing_straight">خط مستقيم</string>
-    <string name="map_routing_walk">المشي</string>
-    <string name="map_routing_bike">دراجة</string>
-    <string name="map_routing_car">سيارة</string>
     <!-- search -->
     <string name="search_bar_hint">البحث عن المخبآت</string>
     <string name="search_bar_desc">المخبآت (كود المخبئ، كلمة مفتاحية)، أمتعة السفر (كود TB)</string>
