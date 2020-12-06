@@ -511,7 +511,9 @@ public class DataStore {
         /** get the first entry for this key */
         @Nullable
         protected static DBExtension load(final DBExtensionType type, @NonNull final String key) {
-            init();
+            if (!init(false)) {
+                return null;
+            }
             return load(database, type, key);
         }
 
@@ -554,7 +556,9 @@ public class DataStore {
 
         /**adds a new entry to database */
         protected static DBExtension add(final DBExtensionType type, final String key, final long long1, final long long2, final String string1, final String string2) {
-            init();
+            if (!init(false)) {
+                return null;
+            }
             return add(database, type, key, long1, long2, string1, string2);
         }
 
@@ -583,7 +587,9 @@ public class DataStore {
          * removes all elements with this key from database
          */
         public static void removeAll(final DBExtensionType type, final String key) {
-            init();
+            if (!init(false)) {
+                return;
+            }
             removeAll(database, type, key);
         }
 
@@ -641,35 +647,57 @@ public class DataStore {
     private static boolean databaseCleaned = false;
 
     public static void init() {
+        init(true);
+    }
+    public static boolean init(final boolean force) {
+        return initAndCheck(force) == null;
+    }
+
+    /** checks and inits database if not already initialized. Returns null if everything is fine
+     * In case of error on init:
+     * * when force=true throws exception
+     * * when force=false returns error message (guaranteed to be non-null)
+     */
+    @Nullable
+    public static String initAndCheck(final boolean force) {
         if (database != null) {
-            return;
+            return null;
         }
 
         synchronized (DataStore.class) {
             if (database != null) {
-                return;
+                return null;
             }
             final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
             try {
                 database = dbHelper.getWritableDatabase();
             } catch (final Exception e) {
                 Log.e("DataStore.init: unable to open database for R/W", e);
-                if (!recreateDatabase(dbHelper)) {
+                final String recreateErrorMsg = recreateDatabase(dbHelper);
+                if (recreateErrorMsg != null) {
                     //if we land here we could neither open the DB nor could we recreate it and database remains null
                     //=> failfast here by rethrowing original exception. This might give us better error analysis possibilities
-                    throw new RuntimeException("DataStore.init: Unrecoverable problem opening database ('" +
-                            databasePath().getAbsolutePath() + "')", e);
+                    final String msg = "DataStore.init: Unrecoverable problem opening database ('" +
+                        databasePath().getAbsolutePath() + "')(recreate error: " + recreateErrorMsg + ")";
+                    if (force) {
+                        Log.e(msg, e);
+                        throw new RuntimeException(msg, e);
+                    }
+                    Log.w(msg, e);
+                    return msg + ": " + e.getMessage();
                 }
             }
         }
+        return null;
     }
 
     /**
      * Attempt to recreate the database if opening has failed
      *
      * @param dbHelper dbHelper to use to reopen the database
+     * @return null if everything is ok, error message otherwise
      */
-    private static boolean recreateDatabase(final DbHelper dbHelper) {
+    private static String recreateDatabase(final DbHelper dbHelper) {
         final File dbPath = databasePath();
         final File corruptedPath = new File(LocalStorage.getBackupRootDirectory(), dbPath.getName() + DB_FILE_CORRUPTED_EXTENSION);
         if (FileUtils.copy(dbPath, corruptedPath)) {
@@ -679,11 +707,12 @@ public class DataStore {
         }
         try {
             database = dbHelper.getWritableDatabase();
-            return true;
+            return null;
         } catch (final Exception f) {
-            Log.e("DataStore.init: unable to recreate database and open it for R/W", f);
+            final String msg = "DataStore.init: unable to recreate database and open it for R/W";
+            Log.w(msg, f);
+            return msg + ": " + f.getMessage();
         }
-        return false;
     }
 
     public static synchronized void closeDb() {
@@ -3524,7 +3553,9 @@ public class DataStore {
 
     @NonNull
     public static List<StoredList> getLists() {
-        init();
+        if (!init(false)) {
+            return Collections.emptyList();
+        }
 
         final Resources res = CgeoApplication.getInstance().getResources();
         final List<StoredList> lists = new ArrayList<>();

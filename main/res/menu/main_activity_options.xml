@@ -54,4 +54,11 @@
         app:showAsAction="ifRoom">
     </item>
 
+    <item
+        android:id="@+id/menu_report_problem"
+        android:icon="@drawable/ic_menu_info_details"
+        android:title="@string/debug_user_error_report_title"
+        app:showAsAction="ifRoom">
+    </item>
+
 </menu>

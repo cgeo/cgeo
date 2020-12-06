@@ -45,8 +45,18 @@ public class ShareUtils {
         shareInternal(context, TYPE_CGEO_SUPPORT_EMAIL, subject, body, file, titleResourceId);
     }
 
+    public static void shareAsEMail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
+        shareAsEmail(context, subject, body, file, titleResourceId, null);
+    }
+
+    public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId, final String receiver) {
+        final String usedReceiver = receiver == null ? context.getString(R.string.support_mail) : receiver;
+        final Intent intent = createShareIntentInternal(context, TYPE_CGEO_SUPPORT_EMAIL, subject, body, file, usedReceiver);
+        shareInternal(context, intent, titleResourceId);
+    }
+
     private static void shareInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        final Intent intent = createShareIntentInternal(context, mimeType, subject, body, file);
+        final Intent intent = createShareIntentInternal(context, mimeType, subject, body, file, null);
         shareInternal(context, intent, titleResourceId);
     }
 
@@ -57,7 +67,7 @@ public class ShareUtils {
     }
 
     /** context needs to be filled only when file is not null */
-    private static Intent createShareIntentInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file) {
+    private static Intent createShareIntentInternal(final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final File file, @Nullable final String receiver) {
         Uri uri = null;
         if (null != file) {
             try {
@@ -77,6 +87,8 @@ public class ShareUtils {
             }
             if (mimeType.equals(TYPE_CGEO_SUPPORT_EMAIL)) {
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{context.getString(R.string.support_mail)});
+            } else if (StringUtils.isNotBlank(receiver)) {
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{receiver});
             }
             if (null != file) {
                 // Grant temporary read permission to the content URI.
@@ -98,7 +110,7 @@ public class ShareUtils {
     }
 
     public static Intent getShareLinkIntent(final String subject, final String url) {
-        return createShareIntentInternal(null, TYPE_TEXT, subject, StringUtils.defaultString(url), null);
+        return createShareIntentInternal(null, TYPE_TEXT, subject, StringUtils.defaultString(url), null, null);
     }
 
     public static void shareMultipleFiles(final Context context, @NonNull final List<File> files, @StringRes final int titleResourceId) {

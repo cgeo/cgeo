@@ -11,6 +11,8 @@ import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,10 +45,32 @@ public class DebugUtils {
         }
     }
 
+    public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {
+        final StringBuilder htmlMessage = new StringBuilder();
+        if (errorMsg != null) {
+            htmlMessage.append("<p>").append(context.getString(R.string.debug_user_error_errortext)).append("</p><p><i>")
+                .append(errorMsg).append("</i></p>");
+            Log.w("User was asked to report problem: " + errorMsg);
+        }
+        htmlMessage.append(context.getString(R.string.debug_user_error_explain_options_html));
+
+        Dialogs.confirmPositiveNegativeNeutral(
+            context,
+            context.getString(R.string.debug_user_error_report_title),
+            HtmlCompat.fromHtml(htmlMessage.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY),
+            context.getString(R.string.about_system_info_send_button),
+            null,
+            context.getString(android.R.string.cancel),
+            (dialog, which) -> createLogcatHelper(context, true, true,
+                errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg),
+            null,
+            null);
+    }
+
     public static void createLogcat(@NonNull final Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             // no differentiation possible on older systems, so no need to ask
-            createLogcatHelper(activity, true);
+            createLogcatHelper(activity, true, false, null);
         } else {
             Dialogs.confirmPositiveNegativeNeutral(
                     activity,
@@ -55,13 +79,13 @@ public class DebugUtils {
                     activity.getString(R.string.about_system_write_logcat_type_standard),
                     null,
                     activity.getString(R.string.about_system_write_logcat_type_extended),
-                    (dialog, which) -> createLogcatHelper(activity, false),
+                    (dialog, which) -> createLogcatHelper(activity, false, false, null),
                     null,
-                    (dialog, which) -> createLogcatHelper(activity, true));
+                    (dialog, which) -> createLogcatHelper(activity, true, false, null));
         }
     }
 
-    private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo) {
+    private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
         final AtomicInteger result = new AtomicInteger(LogcatResults.LOGCAT_ERROR.ordinal());
         final File file = FileUtils.getUniqueNamedLogfile("logcat", "txt");
         final String filename = file.getName();
@@ -88,18 +112,26 @@ public class DebugUtils {
             }
         }, () -> {
             if (result.get() == LogcatResults.LOGCAT_OK.ordinal()) {
-                Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
+                if (forceEmail) {
+                    shareLogfileAsEmail(activity, additionalMessage, file);
+                } else {
+                    Dialogs.confirmPositiveNegativeNeutral(activity, activity.getString(R.string.about_system_write_logcat),
                         String.format(activity.getString(R.string.about_system_write_logcat_success), filename, LocalStorage.LOGFILES_DIR_NAME),
                         activity.getString(android.R.string.ok), null, activity.getString(R.string.about_system_info_send_button),
-                        null, null, (dialog, which) -> {
-                            final String systemInfo = SystemInformation.getSystemInformation(activity);
-                            ShareUtils.shareAsGCSupportEmail(activity, activity.getString(R.string.about_system_info), systemInfo, file, R.string.about_system_info_send_chooser);
-                        });
+                        null, null, (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, file));
+                }
             } else {
                 ActivityMixin.showToast(activity, result.get() == LogcatResults.LOGCAT_EMPTY.ordinal() ? R.string.about_system_write_logcat_empty : R.string.about_system_write_logcat_error);
             }
         });
     }
+
+    private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final File file) {
+        final String systemInfo = SystemInformation.getSystemInformation(activity);
+        final String emailText = additionalMessage == null ? systemInfo : additionalMessage + "\n\n" + systemInfo;
+        ShareUtils.shareAsEMail(activity, activity.getString(R.string.about_system_info), emailText, file, R.string.about_system_info_send_chooser);
+    }
+
 
     public static void logClassInformation(final String className) {
         if (Log.isEnabled(Log.LogLevel.VERBOSE)) {

@@ -474,6 +474,10 @@
     <string name="contribution_projectleader">open source project leader</string>
     <string name="contribution_graphics">graphics</string>
 
+    <string name="debug_user_error_report_title">Report a problem</string>
+    <string name="debug_user_error_errortext">An unexpected problem has occured which we would request you to report to us:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Help us fixing c:geo problems by reporting them via email with system information and c:geo logfile included. More contact options can be found at <i>About c:geo</i></p>]]></string>
+
     <!-- settings -->
     <string name="settings_title_open_settings">Open settings?</string>
     <string name="settings_title_services">Services</string>
