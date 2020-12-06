@@ -148,7 +148,11 @@ public class ReceiveMapFileActivity extends AbstractActivity {
                     if (!cancelled.get()) {
                         MapsforgeMapProvider.getInstance().updateOfflineMaps(Uri.fromFile(file));
                         status = CopyStates.SUCCESS;
-                        getContentResolver().delete(uri, null, null);
+                        try {
+                            getContentResolver().delete(uri, null, null);
+                        } catch (IllegalArgumentException iae) {
+                            Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
+                        }
                     } else {
                         file.delete();
                         status = CopyStates.CANCELLED;
