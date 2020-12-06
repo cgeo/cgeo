@@ -18,6 +18,7 @@
         android:lines="1"
         android:maxLines="2"
         android:ellipsize="end"
+        android:textColor="?text_color"
         android:layout_marginLeft="46dp"
         android:layout_marginRight="30dp"
         android:layout_centerVertical="true" />
