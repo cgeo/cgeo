@@ -2,11 +2,18 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
-<h1>2020.12.03:</h1>
+<h1>2020.12.xx:</h1>
 
-<h4>Android 11 notice (UPDATED):</h4>
+<h4>Android 11 notice:</h4>
 There are no known issues for using c:geo with Android 11. If you notice any problem, kindly let us know.
 
+<h4>Fixes:</h4>
+<ul>
+<li>New: Added dialog to report database errors to support</li>
+<li>Fix: Fixed several smaller crashes</li>
+</ul>
+
+<h1>2020.12.03:</h1>
 <h4>Fixes:</h4>
 <ul>
 <li>Fix: Crash on map startup due to negative value for zoom level</li>
