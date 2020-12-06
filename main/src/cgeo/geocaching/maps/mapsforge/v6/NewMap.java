@@ -452,8 +452,10 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         return true;
     }
 
-    private void onMapSettingsPopupFinished() {
-        caches.switchCircles();
+    private void onMapSettingsPopupFinished(final boolean circlesSwitched) {
+        if (circlesSwitched) {
+            caches.switchCircles();
+        }
         caches.invalidate();
         Tile.cache.clear();
         if (null != trackLayer) {

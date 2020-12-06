@@ -825,12 +825,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         return true;
     }
 
-    private void onMapSettingsPopupFinished() {
+    private void onMapSettingsPopupFinished(final boolean circlesSwitched) {
         markersInvalidated = true;
         Tile.cache.clear();
         overlayPositionAndScale.repaintRequired();
-        mapView.setCircles(Settings.isShowCircles());
-        mapView.repaintRequired(null);
+        if (circlesSwitched) {
+            mapView.setCircles(Settings.isShowCircles());
+            mapView.repaintRequired(null);
+        }
     }
 
     private void routingModeChanged(final RoutingMode newValue) {
