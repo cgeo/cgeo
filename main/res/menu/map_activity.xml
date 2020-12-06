@@ -185,6 +185,11 @@
         </menu>
     </item>
     <item
+        android:id="@+id/menu_clear_targets"
+        android:title="@string/map_clear_manual_targets"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_agenda"
         android:title="@string/map_as_list">
