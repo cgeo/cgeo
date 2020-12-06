@@ -371,7 +371,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute);
+            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -432,7 +432,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
             && !TrackUtils.onOptionsItemSelected(this, id, tracks, this::setTracks, this::centerOnPosition)
-            && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition)
+            && !IndividualRouteUtils.onOptionsItemSelected(this, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloadUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT) {
@@ -1595,6 +1595,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             targetGeocode = null;
             targetView.setTarget(null, null);
         }
+        ActivityMixin.invalidateOptionsMenu(this);
     }
 
     private void savePrefs() {
