@@ -29,13 +29,15 @@ import org.apache.commons.lang3.StringUtils;
 public class MapSettingsUtils {
 
     private static int colorAccent;
+    private static boolean isShowCircles;
 
     private MapSettingsUtils() {
         // utility class
     }
 
-    public static void showSettingsPopup(final Activity activity, final Runnable onMapSettingsPopupFinished, final Action1<RoutingMode> setRoutingValue, final Action1<Integer> setCompactIconValue) {
+    public static void showSettingsPopup(final Activity activity, final Action1<Boolean> onMapSettingsPopupFinished, final Action1<RoutingMode> setRoutingValue, final Action1<Integer> setCompactIconValue) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
+        isShowCircles = Settings.isShowCircles();
 
         final ArrayList<SettingsCheckboxModel> settingsElementsCheckboxes = new ArrayList<>();
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_ownfound, R.drawable.ic_menu_myplaces, Settings.isExcludeMyCaches(), Settings::setExcludeMine, true));
@@ -47,7 +49,7 @@ public class MapSettingsUtils {
         if (StringUtils.isNotBlank(Settings.getTrackFile())) {
             settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_track, R.drawable.ic_menu_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true));
         }
-        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, Settings.isShowCircles(), Settings::setShowCircles, false));
+        settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_show_circles, R.drawable.ic_menu_circle, isShowCircles, Settings::setShowCircles, false));
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_direction, R.drawable.ic_menu_goto, Settings.isMapDirection(), Settings::setMapDirection, false));
 
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.map_settings_dialog, null);
@@ -75,7 +77,7 @@ public class MapSettingsUtils {
                 }
                 compactIcon.setValue();
                 routing.setValue();
-                onMapSettingsPopupFinished.run();
+                onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
             })
             .create()
             .show();
