@@ -447,6 +447,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="contribution_documentation">documentação</string>
     <string name="contribution_projectleader">líder do projecto opensource</string>
     <string name="contribution_graphics">grafismo</string>
+    <string name="debug_user_error_report_title">Reportar um problema</string>
+    <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Ajude-nos a corrigir os problemas de c:geo relatando-os por e-mail com informações do sistema e o ficheiro de depuração anexado. Mais opções de contacto podem ser encontradas em <i>Sobre o c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -1157,6 +1160,13 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
     <string name="map_show_circles">Mostrar círculos</string>
+    <string name="map_showc_ownfound">Mostrar caches encontradas e minhas</string>
+    <string name="map_showc_disabled">Mostrar caches desactivadas</string>
+    <string name="map_showc_archived">Mostrar caches arquivadas</string>
+    <string name="map_showwp_original">Mostrar pontos adicionais originais</string>
+    <string name="map_showwp_parking">Mostrar pontos de estacionamento</string>
+    <string name="map_showwp_visited">Mostrar pontos adicionais visitados</string>
+    <string name="map_show_track">Mostrar percurso/rota GPX</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -1172,6 +1182,7 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_gm_autorotation">Rotação do mapa automática</string>
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
+    <string name="map_show_in_map">Mostrar no mapa</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar geocaches</string>
     <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
