@@ -477,6 +477,7 @@
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_summary_navigation">Wähle die Standardnavigation und externe Navigations-Apps.</string>
     <string name="settings_title_system">System</string>
+    <string name="settings_summary_system">Systemeinstellungen und Optionen zur Fehlersuche.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
@@ -581,6 +582,7 @@
     <string name="init_summary_archived">Archivierte Caches ausblenden</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
+    <string name="init_summary_customtabs_as_browser">Externe Websites werden angezeigt, ohne c:geo zu verlassen (nur möglich, wenn Chrome installiert ist)</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
     <string name="init_units">Imperiale Einheiten</string>
