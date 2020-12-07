@@ -446,6 +446,9 @@
     <string name="contribution_documentation">documentatie</string>
     <string name="contribution_projectleader">open source projectleider</string>
     <string name="contribution_graphics">graphics</string>
+    <string name="debug_user_error_report_title">Probleem melden</string>
+    <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Help ons c:geo problemen op te lossen door ze per e-mail te rapporteren met systeeminformatie en het c:geo logbestand. Meer contactopties vind je bij <i>over c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -562,6 +565,7 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_useenglish">Use English language</string>
     <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
+    <string name="init_category_exclude">Caches uitsluiten</string>
     <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_showwaypoints">Laat waypoints zien in map</string>
@@ -581,6 +585,8 @@
     <string name="init_summary_archived">Gearchiveerde caches uitsluiten</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
+    <string name="init_customtabs_as_browser">Gebruik Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">Externe websites worden weergegeven zonder c:geo te verlaten (alleen mogelijk als Chrome is geïnstalleerd)</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
@@ -1151,16 +1157,15 @@
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_modes">Kaartinstellingen</string>
     <string name="map_rotation">Kaart rotatie</string>
-    <string name="map_hide">Verbergen</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
-    <string name="map_circles_show">Toon cirkels</string>
-    <string name="map_mycaches_hide">Verberg eigen/gevonden caches</string>
-    <string name="map_disabled_hide">Verberg uitgeschakelde caches</string>
-    <string name="map_archived_hide">Gearchiveerde notities verbergen</string>
-    <string name="map_hidewp_original">Originele waypoints verbergen</string>
-    <string name="map_hidewp_parking">Parkeer waypoints verbergen</string>
-    <string name="map_hidewp_visited">Bezochte waypoints verbergen</string>
-    <string name="map_hide_track">Verberg GPX spoor/route</string>
+    <string name="map_show_circles">Toon cirkels</string>
+    <string name="map_showc_ownfound">Eigen/gevonden caches tonen</string>
+    <string name="map_showc_disabled">Uitgeschakelde caches tonen</string>
+    <string name="map_showc_archived">Gearchiveerde caches tonen</string>
+    <string name="map_showwp_original">Originele waypoints tonen</string>
+    <string name="map_showwp_parking">Parkeer waypoints tonen</string>
+    <string name="map_showwp_visited">Bezochte waypoints tonen</string>
+    <string name="map_show_track">GPX spoor/route tonen</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
@@ -1173,13 +1178,10 @@
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
-    <string name="map_routing_straight">Rechte lijn</string>
-    <string name="map_routing_walk">Wandelen</string>
-    <string name="map_routing_bike">Fiets</string>
-    <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Automatische kaartrotatie</string>
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
+    <string name="map_show_in_map">Op kaart tonen</string>
     <!-- search -->
     <string name="search_bar_hint">Zoek naar caches</string>
     <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>

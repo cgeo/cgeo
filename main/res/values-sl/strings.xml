@@ -739,18 +739,13 @@
     <string name="map_live">Zemljevid</string>
     <string name="map_view_map">Pogled zemljevida</string>
     <string name="map_modes">Možnosti</string>
-    <string name="map_circles_show">Pokaži kroge</string>
-    <string name="map_mycaches_hide">Skrij lastne ali najdene zaklade</string>
-    <string name="map_disabled_hide">Skrij onemogočene zaklade</string>
+    <string name="map_show_circles">Pokaži kroge</string>
     <string name="map_theme_select">Izberi temo zemljevida</string>
     <string name="map_live_enable">Vklopi podatke v živo</string>
     <string name="map_live_disable">Izklopi podatke v živo</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <string name="map_routing">Usmerjanje</string>
-    <string name="map_routing_walk">Hoja</string>
-    <string name="map_routing_bike">Kolo</string>
-    <string name="map_routing_car">Avtomobil</string>
     <!-- search -->
     <string name="search_bar_hint">Iskanje zakladov</string>
     <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>

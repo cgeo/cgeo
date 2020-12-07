@@ -1159,15 +1159,8 @@
     <string name="map_view_map">Widok mapy</string>
     <string name="map_modes">Tryb mapy</string>
     <string name="map_rotation">Obrót mapy</string>
-    <string name="map_hide">Ukryj</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
-    <string name="map_circles_show">Pokaż okręgi</string>
-    <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
-    <string name="map_disabled_hide">Ukryj nieaktywne skrzynki</string>
-    <string name="map_archived_hide">Ukryj zarchiwizowane skrzynki</string>
-    <string name="map_hidewp_original">Ukryj oryginalne punkty nawigacji</string>
-    <string name="map_hidewp_parking">Ukryj parkingi</string>
-    <string name="map_hidewp_visited">Ukryj odwiedzone punkty nawigacji</string>
+    <string name="map_show_circles">Pokaż okręgi</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
@@ -1180,10 +1173,6 @@
     <string name="map_as_list">Pokaż w postaci listy</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Nawigacja</string>
-    <string name="map_routing_straight">Linia prosta</string>
-    <string name="map_routing_walk">Pieszo</string>
-    <string name="map_routing_bike">Rower</string>
-    <string name="map_routing_car">Samochód</string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczną rotację mapy?\n\nMożesz włączyć ją ponownie za pomocą menu rotacji mapy</string>
     <!-- search -->

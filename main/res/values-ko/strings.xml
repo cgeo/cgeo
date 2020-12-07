@@ -1086,15 +1086,8 @@
     <string name="map_view_map">지도 보기</string>
     <string name="map_modes">지도 설정</string>
     <string name="map_rotation">지도 회전</string>
-    <string name="map_hide">숨기기</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
-    <string name="map_circles_show">원 보이기</string>
-    <string name="map_mycaches_hide">내캐시/찾은 캐시 숨기기</string>
-    <string name="map_disabled_hide">일시정지된 캐시 숨기기</string>
-    <string name="map_archived_hide">영구보관 캐시 숨기기</string>
-    <string name="map_hidewp_original">최초의 지점 숨기기</string>
-    <string name="map_hidewp_parking">주차 지점 숨기기</string>
-    <string name="map_hidewp_visited">방문한 지점 숨기기</string>
+    <string name="map_show_circles">원 보이기</string>
     <string name="init_hidewp">지점 숨기기</string>
     <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
     <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>
@@ -1107,10 +1100,6 @@
     <string name="map_as_list">목록으로 보기</string>
     <string name="map_select_multiple_items">항목 선택</string>
     <string name="map_routing">길찾기</string>
-    <string name="map_routing_straight">직선</string>
-    <string name="map_routing_walk">걷기</string>
-    <string name="map_routing_bike">자전거</string>
-    <string name="map_routing_car">자동차</string>
     <string name="map_gm_autorotation">지도 자동 회전</string>
     <string name="map_gm_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
     <!-- search -->

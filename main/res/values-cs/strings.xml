@@ -448,6 +448,9 @@
     <string name="contribution_documentation">dokumentace</string>
     <string name="contribution_projectleader">lídr projektu otevřeného zdrojového kódu</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Nahlásit problém</string>
+    <string name="debug_user_error_errortext">Došlo k neočekávanému problému a rádi bychom vás požádali, abyste nám jej nahlásili:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo. Další možnosti kontaktu naleznete v <i>O aplikaci</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -564,6 +567,7 @@
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_useenglish">Používat angličtinu</string>
     <string name="init_summary_useenglish">Používat angličtinu pro c:geo\n(Vyžaduje restart)</string>
+    <string name="init_category_exclude">Vyloučit kešky</string>
     <string name="init_exclude">Nezobrazovat vlastní a nalezené keše</string>
     <string name="init_summary_exclude">Nezobrazovat mé vlastní a nalezené keše</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
@@ -583,6 +587,8 @@
     <string name="init_summary_archived">Vyloučit archivované keše</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek keše. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou keše</string>
+    <string name="init_customtabs_as_browser">Použít Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky</string>
@@ -1169,16 +1175,15 @@
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_modes">Režim mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
-    <string name="map_hide">Skrýt</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
-    <string name="map_circles_show">Zobrazit kruhy</string>
-    <string name="map_mycaches_hide">Skrýt vlastní/nalezené keše</string>
-    <string name="map_disabled_hide">Skrýt deaktivované keše</string>
-    <string name="map_archived_hide">Skrýt archivované keše</string>
-    <string name="map_hidewp_original">Skrýt původní trasové body</string>
-    <string name="map_hidewp_parking">Skrýt parkovací místa</string>
-    <string name="map_hidewp_visited">Skrýt navštívené trasové body</string>
-    <string name="map_hide_track">Skrýt GPX stopu/trasu</string>
+    <string name="map_show_circles">Zobrazit kruhy</string>
+    <string name="map_showc_ownfound">Zobrazit vlastní/nalezené kešky</string>
+    <string name="map_showc_disabled">Zobrazit deaktivované kešky</string>
+    <string name="map_showc_archived">Zobrazit archivované kešky</string>
+    <string name="map_showwp_original">Zobrazit původní trasové body</string>
+    <string name="map_showwp_parking">Zobrazit parkovací místa</string>
+    <string name="map_showwp_visited">Zobrazit navštívené trasové body</string>
+    <string name="map_show_track">Zobrazit GPX stopu/trasu</string>
     <string name="init_hidewp">Skrýt trasové body</string>
     <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
@@ -1191,13 +1196,10 @@
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
-    <string name="map_routing_straight">Vzdušná čára</string>
-    <string name="map_routing_walk">Chůze</string>
-    <string name="map_routing_bike">Jízdní kolo</string>
-    <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Automatické otáčení mapy</string>
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
+    <string name="map_show_in_map">Zobrazit na mapě</string>
     <!-- search -->
     <string name="search_bar_hint">Hledaní kešek</string>
     <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>

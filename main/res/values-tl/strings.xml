@@ -833,19 +833,13 @@
     <string name="map_live">Ang live na mapa</string>
     <string name="map_view_map">Tingnan ang mapa</string>
     <string name="map_modes">Ang mga setting ng mapa</string>
-    <string name="map_circles_show">Ipakita ang mga bilog</string>
-    <string name="map_mycaches_hide">Itago ang sarili/natagpuan ang mga cache</string>
-    <string name="map_disabled_hide">Itago ang mga hindi gumaganang mga cache</string>
+    <string name="map_show_circles">Ipakita ang mga bilog</string>
     <string name="map_theme_select">Pumili ng tema na mapa</string>
     <string name="map_live_enable">Paganahin ang live</string>
     <string name="map_live_disable">Huwag paganahin ang live</string>
     <string name="map_as_list">Ipakita bilang listahan</string>
     <string name="map_select_multiple_items">Pumili ng aytem</string>
     <string name="map_routing">Direksiyon</string>
-    <string name="map_routing_straight">Tuwid na linya</string>
-    <string name="map_routing_walk">Ang paglakad</string>
-    <string name="map_routing_bike">Bisekleta</string>
-    <string name="map_routing_car">Kotse</string>
     <!-- search -->
     <string name="search_bar_hint">Magsaliksik tungkol sa mga cache</string>
     <string name="search_bar_desc">Ang mga cache na (geo na code, Keyboard), Mga trackable (TB na code)</string>

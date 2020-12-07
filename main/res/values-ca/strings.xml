@@ -1142,15 +1142,8 @@
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_modes">Configuració del mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
-    <string name="map_hide">Ocultar</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
-    <string name="map_circles_show">Mostra els cercles</string>
-    <string name="map_mycaches_hide">Amaga els propis/trobats</string>
-    <string name="map_disabled_hide">Amagar catxés desactivats</string>
-    <string name="map_archived_hide">Amagar catxés arxivats</string>
-    <string name="map_hidewp_original">Amaga punt ruta originals</string>
-    <string name="map_hidewp_parking">Amaga punts ruta parking</string>
-    <string name="map_hidewp_visited">Amaga punts ruta visitats</string>
+    <string name="map_show_circles">Mostra els cercles</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
     <string name="init_summary_hidewp_parking">Amaga els punts d\'aparcament al mapa</string>
@@ -1163,10 +1156,6 @@
     <string name="map_as_list">Mostra-ho com una llista</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
     <string name="map_routing">Encaminant</string>
-    <string name="map_routing_straight">Línia recta</string>
-    <string name="map_routing_walk">A peu</string>
-    <string name="map_routing_bike">En bici</string>
-    <string name="map_routing_car">En cotxe</string>
     <string name="map_gm_autorotation">Mapa autorotatori</string>
     <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <!-- search -->

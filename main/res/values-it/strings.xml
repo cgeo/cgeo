@@ -477,6 +477,7 @@
     <string name="settings_title_navigation">Navigazione</string>
     <string name="settings_summary_navigation">Sceglie il metodo di navigazione preferito e seleziona le app di navigazione esterna.</string>
     <string name="settings_title_system">Sistema</string>
+    <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Piattaforma Geocaching</string>
@@ -561,6 +562,7 @@
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_useenglish">Use English in c:geo</string>
     <string name="init_summary_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
+    <string name="init_category_exclude">Escludi cache</string>
     <string name="init_exclude">Escludi i miei e quelli trovati</string>
     <string name="init_summary_exclude">Escludi i miei cache e queli che ho già trovato</string>
     <string name="init_showwaypoints">Mostra waypoints</string>
@@ -572,12 +574,16 @@
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
+    <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
+    <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
     <string name="init_disabled">Escludi disattivati</string>
     <string name="init_summary_disabled">Escludi cache disattivati</string>
     <string name="init_archived">Escludi archiviati</string>
     <string name="init_summary_archived">Escludi cache archiviati</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
+    <string name="init_customtabs_as_browser">Usa Chrome webview</string>
+    <string name="init_summary_customtabs_as_browser">I siti web esterni saranno visualizzati senza lasciare c:geo (possibile solo se Chrome è installato)</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
     <string name="init_units">Usa sistema imperiale</string>
@@ -620,6 +626,7 @@
     <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
     <string name="init_backup_folder_exists_error">Impossibile creare una nuova directory di backup. Hai forse già fatto un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
+    <string name="backup_confirm_overwrite">Questo cancellerà la tua più vecchia cartella di backup esistente da %s. \nVuoi continuare?</string>
     <string name="restore_confirm_overwrite_database">ATTENZIONE: Questo sovrascriverà %s sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_database_and_settings">ATTENZIONE: Questo sovrascriverà %s e le impostazioni correnti sul tuo dispositivo!</string>
     <string name="restore_confirm_overwrite_settings">ATTENZIONE: Questo sovrascriverà le impostazioni correnti sul tuo dispositivo!</string>
@@ -777,6 +784,7 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combinato (Offline)</string>
     <string name="map_source_attribution_dialog_title">Attribuzioni Mappa</string>
+    <string name="map_source_attribution_legacy_text">Tocca per l\'attribuzione della mappa</string>
     <string name="init_sendToCgeo">Send to c:geo</string>
     <string name="settings_info_send2cgeo_title">Informazioni su send2cgeo</string>
     <string name="init_sendToCgeo_name">Nome dispositivo</string>
@@ -1146,15 +1154,15 @@
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_modes">Modi mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
-    <string name="map_hide">Nascondi</string>
     <string name="map_dot_mode">Usa icone compatte</string>
-    <string name="map_circles_show">Mostra area cache</string>
-    <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
-    <string name="map_disabled_hide">Nascondi le cache disabilitate</string>
-    <string name="map_archived_hide">Nascondi cache archiviati</string>
-    <string name="map_hidewp_original">Nascondi i waypoint originali</string>
-    <string name="map_hidewp_parking">Nascondi waypoint di parcheggio</string>
-    <string name="map_hidewp_visited">Nascondi i waypoint visitati</string>
+    <string name="map_show_circles">Mostra area cache</string>
+    <string name="map_showc_ownfound">Visualizza cache tuoi o che hai trovato</string>
+    <string name="map_showc_disabled">Mostra cache disabilitati</string>
+    <string name="map_showc_archived">Mostra cache archiviati</string>
+    <string name="map_showwp_original">Mostra waypoint originali</string>
+    <string name="map_showwp_parking">Mostra waypoint dei parcheggi</string>
+    <string name="map_showwp_visited">Mostra waypoint visitati</string>
+    <string name="map_show_track">Mostra traccia/percorso GPX</string>
     <string name="init_hidewp">Nascondi tutti i waypoint</string>
     <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
     <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
@@ -1167,12 +1175,10 @@
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Instradamento</string>
-    <string name="map_routing_straight">Linea diretta</string>
-    <string name="map_routing_walk">A piedi</string>
-    <string name="map_routing_bike">Bicicletta</string>
-    <string name="map_routing_car">Automobile</string>
     <string name="map_gm_autorotation">Rotazione automatica mappa</string>
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
+    <string name="quick_settings">Impostazioni rapide</string>
+    <string name="map_show_in_map">Mostra sulla mappa</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca cache</string>
     <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
@@ -1248,7 +1254,9 @@
     <string name="navigation">Navigazione</string>
     <string name="compass_title">Bussola</string>
     <string name="use_gps">Usa solo GPS</string>
+    <string name="use_compass">Tutti i sensori utilizzati</string>
     <string name="destination_select">Scegli destinazione</string>
+    <string name="navigation_direct_navigation">Navigazione diretta</string>
     <string name="osmand_marker_cgeo">Indicatore da c:geo</string>
     <string name="device_heading_label">Dispositivo:</string>
     <string name="device_orientation">Orientamento</string>
@@ -1714,6 +1722,8 @@
     <string name="map_export_individual_route">Esporta percorso individuale</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
+    <string name="map_autotarget_individual_route">Imposta automaticamente come obiettivo</string>
+    <string name="map_disable_autotarget_individual_route">\"Imposta automaticamente come obiettivo\" disabilitato</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>

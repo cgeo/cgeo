@@ -445,6 +445,9 @@
     <string name="contribution_documentation">ドキュメント</string>
     <string name="contribution_projectleader">オープンソース プロジェクト リーダー</string>
     <string name="contribution_graphics">グラフィックス</string>
+    <string name="debug_user_error_report_title">問題を報告</string>
+    <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。 その他の連絡先などは<i>c:geoについて</i></p>をご覧ください。]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -476,6 +479,7 @@
     <string name="settings_title_navigation">ナビゲーション</string>
     <string name="settings_summary_navigation">ナビゲーション方法や外部ナビゲーションアプリの選択</string>
     <string name="settings_title_system">システム</string>
+    <string name="settings_summary_system">システム固有の設定とデバッグオプション</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
     <string name="settings_category_browser">ブラウザ</string>
     <string name="settings_category_geocaching_platform">ジオキャッシングサイト</string>
@@ -560,6 +564,7 @@
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_useenglish">英語表示</string>
     <string name="init_summary_useenglish">英語で表示\n(c:geoの再起動が必要)</string>
+    <string name="init_category_exclude">キャッシュを除外</string>
     <string name="init_exclude">所有または発見したキャッシュ除く</string>
     <string name="init_summary_exclude">自分で所有または発見したキャッシュは除く</string>
     <string name="init_showwaypoints">地図でウェイポイントの表示</string>
@@ -579,6 +584,8 @@
     <string name="init_summary_archived">アーカイブ済みキャッシュは除く</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
+    <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
+    <string name="init_summary_customtabs_as_browser">外部Webサイトがc:geo内で表示されます(Chromeのインストールが必要です)</string>
     <string name="init_save_log_img">画像保存</string>
     <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
     <string name="init_units">マイル/フィート表示</string>
@@ -621,6 +628,7 @@
     <string name="init_backup_unnecessary">キャッシュのデータベースは空です。バックアップの必要はありません</string>
     <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
+    <string name="backup_confirm_overwrite">一番古いバックアップ(%s)は削除されます。\n続けますか?</string>
     <string name="restore_confirm_overwrite_database">警告: お使いのデバイスで%sを上書きします!</string>
     <string name="restore_confirm_overwrite_database_and_settings">警告: お使いのデバイスで%sと現在の設定を上書きします!</string>
     <string name="restore_confirm_overwrite_settings">警告: お使いのデバイスで現在の設定を上書きします!</string>
@@ -1073,7 +1081,7 @@
     <string name="gpx_import_delete_title">ファイル削除</string>
     <string name="gpx_import_delete_message">%sを削除しますか?</string>
     <string name="gpx_import_select_list_title">GPXファイルをリストへインポート</string>
-    <string name="gpx_import_android">アンドロイド端末からインポート</string>
+    <string name="gpx_import_android">Android端末からインポート</string>
     <!-- file selectors -->
     <string name="map_file_select_title">地図ファイルの選択</string>
     <string name="track_file_select_title">トラックファイルを選択</string>
@@ -1138,15 +1146,15 @@
     <string name="map_view_map">地図の変更</string>
     <string name="map_modes">表示切替</string>
     <string name="map_rotation">地図の回転</string>
-    <string name="map_hide">非表示</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
-    <string name="map_circles_show">0.1マイル円を表示</string>
-    <string name="map_mycaches_hide">所有/発見したキャッシュを非表示</string>
-    <string name="map_disabled_hide">一時停止中キャッシュを非表示</string>
-    <string name="map_archived_hide">アーカイブ済みのキャッシュを非表示</string>
-    <string name="map_hidewp_original">ウェイポイント(オリジナル)を非表示</string>
-    <string name="map_hidewp_parking">ウェイポイント(駐車場)を非表示</string>
-    <string name="map_hidewp_visited">ウェイポイント(訪問済み)を非表示</string>
+    <string name="map_show_circles">0.1マイル円を表示</string>
+    <string name="map_showc_ownfound">所有/発見したキャッシュを表示</string>
+    <string name="map_showc_disabled">一時停止中キャッシュを表示</string>
+    <string name="map_showc_archived">アーカイブ済みキャッシュを表示</string>
+    <string name="map_showwp_original">ウェイポイント(オリジナル)を表示</string>
+    <string name="map_showwp_parking">ウェイポイント(駐車場)を表示</string>
+    <string name="map_showwp_visited">ウェイポイント(訪問済み)を表示</string>
+    <string name="map_show_track">GPXトラック/ルートを表示</string>
     <string name="init_hidewp">ウェイポイントを隠す</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
@@ -1159,12 +1167,10 @@
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索</string>
-    <string name="map_routing_straight">直線</string>
-    <string name="map_routing_walk">徒歩</string>
-    <string name="map_routing_bike">自転車</string>
-    <string name="map_routing_car">車</string>
     <string name="map_gm_autorotation">地図の自動回転</string>
     <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
+    <string name="quick_settings">クイック設定</string>
+    <string name="map_show_in_map">地図に表示</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ検索</string>
     <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
@@ -1260,10 +1266,10 @@
     <string name="helper_sendtocgeo_title">Send2cgeo</string>
     <string name="helper_contacts_title">c:geo - 連絡先 アドオン</string>
     <string name="helper_contacts_description">ログエントリから直接(連絡帳の)連絡先を開くことができるようになります。簡単に友達に助けを求めることができます</string>
-    <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をアンドロイド端末に直接送ることができます</string>
+    <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をAndroid端末に直接送ることができます</string>
     <string name="helper_locus_description">スマホやタブレット用のアウトドアナビゲーションアプリ。地形図をオフラインで表示、ルートを追跡、ジオキャッシュを探索、音声ガイドを使用、などが行えます</string>
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。またGPSに関するたくさんの情報が得られます</string>
-    <string name="helper_bluetoothgps_description">外部GPS受信機を利用することができます。より正確な位置情報を得られたりアンドロイド端末のバッテリ消費が少なくなるかもしれません</string>
+    <string name="helper_bluetoothgps_description">外部GPS受信機を利用することができます。より正確な位置情報を得られたりデバイスのバッテリ消費が少なくなるかもしれません</string>
     <string name="helper_gps_locker_description">GPS Lockerはアプリケーションを切り替えるときやデバイスの画面がオフのときにGPS信号をアクティブのままにします</string>
     <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやWebサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます</string>
     <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります</string>
@@ -1696,6 +1702,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
     <string name="map_autotarget_individual_route">自動的に目的地として設定</string>
+    <string name="map_disable_autotarget_individual_route">「自動的に目的地として設定」を無効にしました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
     <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
     <string name="map_individual_route_cleared">個別ルートを削除しました</string>
@@ -1766,6 +1773,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
     <string name="downloadmap_confirmation">地図ファイル「%1$s」をダウンロードしますか?\n\nネットワーク接続によっては長時間かかり通信料が高額になる場合があります。\n\nファイルサイズ:%2$s</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
+    <string name="button_continue">続ける</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">軌跡を削除</string>
     <string name="map_trailhistory_cleared">軌跡を削除しました</string>

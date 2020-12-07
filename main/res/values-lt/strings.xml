@@ -1149,15 +1149,8 @@
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_modes">Žemėlapio nustatymai</string>
     <string name="map_rotation">Žemėlapio sukimas</string>
-    <string name="map_hide">Slėpti</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
-    <string name="map_circles_show">Rodyti apskritimus</string>
-    <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
-    <string name="map_disabled_hide">Slėpti išjungtas slėptuves</string>
-    <string name="map_archived_hide">Slėpti archyvuotas slėptuves</string>
-    <string name="map_hidewp_original">Slėpti originalius taškus</string>
-    <string name="map_hidewp_parking">Slėpti parkingo taškus</string>
-    <string name="map_hidewp_visited">Slėpti aplankytus taškus</string>
+    <string name="map_show_circles">Rodyti apskritimus</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
@@ -1170,10 +1163,6 @@
     <string name="map_as_list">Rodyti kaip sąrašą</string>
     <string name="map_select_multiple_items">Pasirinkite elementą</string>
     <string name="map_routing">Maršrutizavimas</string>
-    <string name="map_routing_straight">Tiesi linija</string>
-    <string name="map_routing_walk">Pėsčiomis</string>
-    <string name="map_routing_bike">Dviračiu</string>
-    <string name="map_routing_car">Automobiliu</string>
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
     <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <!-- search -->

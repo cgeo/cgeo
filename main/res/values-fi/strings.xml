@@ -1141,15 +1141,8 @@
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_modes">Kartan asetukset</string>
     <string name="map_rotation">Kartan kääntö</string>
-    <string name="map_hide">Piilota</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
-    <string name="map_circles_show">Näytä ympyrät</string>
-    <string name="map_mycaches_hide">Piilota omat/löydetyt kätköt</string>
-    <string name="map_disabled_hide">Piilota hyllytetyt kätköt</string>
-    <string name="map_archived_hide">Piilota arkistoidut kätköt</string>
-    <string name="map_hidewp_original">Piilota alkuperäiset reittipisteet</string>
-    <string name="map_hidewp_parking">Piilota parkkipaikka-reittipisteet</string>
-    <string name="map_hidewp_visited">Piilota vieraillut reittipisteet</string>
+    <string name="map_show_circles">Näytä ympyrät</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
@@ -1162,10 +1155,6 @@
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
-    <string name="map_routing_straight">Linnuntie</string>
-    <string name="map_routing_walk">Kävely</string>
-    <string name="map_routing_bike">Pyöräily</string>
-    <string name="map_routing_car">Auto</string>
     <string name="map_gm_autorotation">Kartan automaattinen kääntö</string>
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <!-- search -->

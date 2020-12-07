@@ -469,7 +469,6 @@
     <string name="waypoint_coordinate_formats_plain">פשוט</string>
     <!-- visit -->
     <!-- map -->
-    <string name="map_routing_straight">קו ישר</string>
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
