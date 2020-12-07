@@ -199,7 +199,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 ClipboardUtils.copyToClipboard(systemInfo);
                 showShortToast(getString(R.string.clipboard_copy_ok));
             });
-            share.setOnClickListener(view12 -> ShareUtils.shareAsGCSupportEmail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
+            share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(AboutActivity.this, getString(R.string.about_system_info), systemInfo, null, R.string.about_system_info_send_chooser));
             logcat.setOnClickListener(view13 -> DebugUtils.createLogcat(AboutActivity.this));
             return view;
         }
