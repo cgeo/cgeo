@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 public class ShareUtils {
 
     public static final String CHROME_PACKAGE_NAME = "com.android.chrome";
-    public static final String TYPE_CGEO_SUPPORT_EMAIL = "message/rfc822";
+    public static final String TYPE_EMAIL = "message/rfc822";
     public static final String TYPE_TEXT = "text/plain";
 
     private ShareUtils() {
@@ -41,17 +41,13 @@ public class ShareUtils {
         shareInternal(context, "*/*", null, null, file, titleResourceId);
     }
 
-    public static void shareAsGCSupportEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
-        shareInternal(context, TYPE_CGEO_SUPPORT_EMAIL, subject, body, file, titleResourceId);
-    }
-
-    public static void shareAsEMail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
+    public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId) {
         shareAsEmail(context, subject, body, file, titleResourceId, null);
     }
 
     public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final File file, @StringRes final int titleResourceId, final String receiver) {
         final String usedReceiver = receiver == null ? context.getString(R.string.support_mail) : receiver;
-        final Intent intent = createShareIntentInternal(context, TYPE_CGEO_SUPPORT_EMAIL, subject, body, file, usedReceiver);
+        final Intent intent = createShareIntentInternal(context, TYPE_EMAIL, subject, body, file, usedReceiver);
         shareInternal(context, intent, titleResourceId);
     }
 
@@ -85,9 +81,7 @@ public class ShareUtils {
             if (StringUtils.isNotBlank(body)) {
                 intent.putExtra(Intent.EXTRA_TEXT, body);
             }
-            if (mimeType.equals(TYPE_CGEO_SUPPORT_EMAIL)) {
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{context.getString(R.string.support_mail)});
-            } else if (StringUtils.isNotBlank(receiver)) {
+            if (StringUtils.isNotBlank(receiver)) {
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{receiver});
             }
             if (null != file) {

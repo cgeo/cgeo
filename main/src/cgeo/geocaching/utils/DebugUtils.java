@@ -129,7 +129,7 @@ public class DebugUtils {
     private static void shareLogfileAsEmail(@NonNull final Activity activity, final String additionalMessage, final File file) {
         final String systemInfo = SystemInformation.getSystemInformation(activity);
         final String emailText = additionalMessage == null ? systemInfo : additionalMessage + "\n\n" + systemInfo;
-        ShareUtils.shareAsEMail(activity, activity.getString(R.string.about_system_info), emailText, file, R.string.about_system_info_send_chooser);
+        ShareUtils.shareAsEmail(activity, activity.getString(R.string.about_system_info), emailText, file, R.string.about_system_info_send_chooser);
     }
 
 
