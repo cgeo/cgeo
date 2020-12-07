@@ -11,6 +11,7 @@ There are no known issues for using c:geo with Android 11. If you notice any pro
 <ul>
 <li>New: Added dialog to report database errors to support</li>
 <li>Fix: Fixed several smaller crashes</li>
+<li>Fix: Use local time of Geokrety server for logging a Geokrety</li>
 </ul>
 
 <h1>2020.12.03:</h1>
