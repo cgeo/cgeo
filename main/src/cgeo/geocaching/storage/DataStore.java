@@ -219,12 +219,12 @@ public class DataStore {
      * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(new Integer[]{
-            85, //adds offline logging columns/tables
-            86, //(re)create indices on c_logs and c_logImages
-            87, //adds service log id to logging tables
-            88, //add timestamp to trail history
-            89, //add altitude to trail history
-            90  //add user guid to caches and logs
+            85, // adds offline logging columns/tables
+            86, // (re)create indices on c_logs and c_logImages
+            87, // adds service log id to logging tables
+            88, // add timestamp to trail history
+            89, // add altitude to trail history
+            90  // add user guid to cg_caches and cg_logs
     }));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -1413,7 +1413,7 @@ public class DataStore {
                         }
                     }
 
-                    // add user guid to caches and logs
+                    // add user guid to cg_caches and cg_logs
                     if (oldVersion < 90) {
                         try {
                             createColumnIfNotExists(db, dbTableCaches, "owner_guid TEXT NOT NULL DEFAULT ''");
@@ -1938,7 +1938,7 @@ public class DataStore {
         values.put("disabled", cache.isDisabled() ? 1 : 0);
         values.put("archived", cache.isArchived() ? 1 : 0);
         values.put("members", cache.isPremiumMembersOnly() ? 1 : 0);
-        values.put("found", cache.isFound() ? 1 : 0);
+        values.put("found", cache.isFound() ? 1 : cache.isDNF() ? -1 : 0);
         values.put("favourite", cache.isFavorite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
@@ -2602,6 +2602,7 @@ public class DataStore {
         cache.setArchived(cursor.getInt(27) == 1);
         cache.setPremiumMembersOnly(cursor.getInt(28) == 1);
         cache.setFound(cursor.getInt(29) == 1);
+        cache.setDNF(cursor.getInt(29) == -1);
         cache.setFavorite(cursor.getInt(30) == 1);
         cache.setInventoryItems(cursor.getInt(31));
         cache.setOnWatchlist(cursor.getInt(32) == 1);

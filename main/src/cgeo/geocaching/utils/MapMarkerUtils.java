@@ -86,6 +86,7 @@ public final class MapMarkerUtils {
                 .append(cache.getMapMarkerId())
                 .append(cache.isOwner())
                 .append(cache.isFound())
+                .append(cache.isDNF())
                 .append(showUserModifiedCoords(cache))
                 .append(cache.getPersonalNote())
                 .append(cache.isLogOffline())
@@ -301,6 +302,9 @@ public final class MapMarkerUtils {
         } else if (cache.hasLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
             return offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay();
+            // an offline log is more important than a DNF
+        } else if (cache.isDNF()) {
+            return R.drawable.marker_not_found_offline;
         }
 
         return null;

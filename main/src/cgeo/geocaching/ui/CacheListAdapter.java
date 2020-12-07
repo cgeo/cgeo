@@ -396,6 +396,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
         } else if (cache.isLogOffline()) {
             holder.logStatusMark.setImageResource(R.drawable.mark_orange);
+        } else if (cache.isDNF()) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_red);
         } else {
             holder.logStatusMark.setImageResource(R.drawable.mark_transparent);
         }
