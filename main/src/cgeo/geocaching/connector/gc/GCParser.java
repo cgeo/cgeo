@@ -580,8 +580,9 @@ public final class GCParser {
             cache.setSize(CacheSize.getById(TextUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id)));
         }
 
-        // cache found
+        // cache found / DNF
         cache.setFound(TextUtils.matches(page, GCConstants.PATTERN_FOUND));
+        cache.setDNF(TextUtils.matches(page, GCConstants.PATTERN_DNF));
 
         // cache type
         cache.setType(CacheType.getByGuid(TextUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
@@ -1815,9 +1816,9 @@ public final class GCParser {
                     return logEntries;
                 }).cache();
         mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries));
-        if (cache.isFound() && cache.getVisitedDate() == 0) {
+        if (cache.isFound() || cache.isDNF()) {
             ownLogs.subscribe(logEntry -> {
-                if (logEntry.getType().isFoundLog()) {
+                if (logEntry.getType().isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.getType() == LogType.DIDNT_FIND_IT)) {
                     cache.setVisitedDate(logEntry.date);
                 }
             });

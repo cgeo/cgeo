@@ -48,6 +48,7 @@ public final class GCConstants {
     static final Pattern PATTERN_OWNER_USERID = Pattern.compile("seek/nearest\\.aspx\\?u=(.*?)\">.{1,50}?seek/nearest\\.aspx\\?ul=\\1\">");
     static final Pattern PATTERN_OWNER_GUID = Pattern.compile(Pattern.quote("/profile/?guid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
     static final Pattern PATTERN_FOUND = Pattern.compile("logtypes/48/(" + StringUtils.join(LogType.foundLogTypes(), "|") + ").png\" id=\"ctl00_ContentBody_GeoNav_logTypeImage\"");
+    static final Pattern PATTERN_DNF = Pattern.compile("logtypes/48/(" + LogType.DIDNT_FIND_IT.id + ").png\" id=\"ctl00_ContentBody_GeoNav_logTypeImage\"");
     static final Pattern PATTERN_OWNER_DISPLAYNAME = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a>");
     static final Pattern PATTERN_TYPE = Pattern.compile("<a href=\"/seek/nearest.aspx\\?tx=([0-9a-f-]+)");
     static final Pattern PATTERN_HIDDEN = Pattern.compile("ctl00_ContentBody_mcd2[^:]+:\\s*([^<]+?)<");

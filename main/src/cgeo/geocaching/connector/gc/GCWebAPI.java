@@ -211,6 +211,8 @@ class GCWebAPI {
         int geocacheType;
         @JsonProperty("userFound")
         boolean userFound;
+        @JsonProperty("userDidNotFind")
+        boolean userDidNotFind;
         @JsonProperty("cacheStatus")
         int cacheStatus;
         @JsonProperty("difficulty")

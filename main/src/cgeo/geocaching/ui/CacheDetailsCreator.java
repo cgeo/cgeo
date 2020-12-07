@@ -116,6 +116,8 @@ public final class CacheDetailsCreator {
         }
         if (cache.isFound()) {
             states.add(res.getString(R.string.cache_status_found) + date);
+        } else if (cache.isDNF()) {
+            states.add(res.getString(R.string.cache_not_status_found) + date);
         }
         if (cache.isEventCache() && states.isEmpty()) {
             for (final LogEntry log : cache.getLogs()) {

@@ -138,6 +138,7 @@ public class Geocache implements IWaypoint {
     private Boolean archived = null;
     private Boolean premiumMembersOnly = null;
     private Boolean found = null;
+    private Boolean didNotFound = null;
     private Boolean favorite = null;
     private Boolean onWatchlist = null;
     private int watchlistCount = -1; // valid numbers are larger than -1
@@ -238,6 +239,9 @@ public class Geocache implements IWaypoint {
         }
         if (found == null) {
             found = other.found;
+        }
+        if (didNotFound == null) {
+            didNotFound = other.didNotFound;
         }
         if (disabled == null) {
             disabled = other.disabled;
@@ -387,6 +391,7 @@ public class Geocache implements IWaypoint {
                 UncertainProperty.equalValues(cacheType, other.cacheType) &&
                 size == other.size &&
                 ObjectUtils.equals(found, other.found) &&
+                ObjectUtils.equals(didNotFound, other.didNotFound) &&
                 ObjectUtils.equals(premiumMembersOnly, other.premiumMembersOnly) &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
@@ -812,6 +817,10 @@ public class Geocache implements IWaypoint {
 
     public boolean isFound() {
         return BooleanUtils.isTrue(found);
+    }
+
+    public boolean isDNF() {
+        return BooleanUtils.isTrue(didNotFound);
     }
 
     /**
@@ -1289,6 +1298,10 @@ public class Geocache implements IWaypoint {
 
     public void setFound(final boolean found) {
         this.found = found;
+    }
+
+    public void setDNF(final boolean didNotFound) {
+        this.didNotFound = didNotFound;
     }
 
     public void setAttributes(final List<String> attributes) {

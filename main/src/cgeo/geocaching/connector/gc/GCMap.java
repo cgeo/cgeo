@@ -159,6 +159,8 @@ public class GCMap {
                     //cache merging if "not found" is set
                     if (r.userFound) {
                         c.setFound(true);
+                    } else if (r.userDidNotFind) {
+                        c.setDNF(true);
                     }
 
                     c.setFavoritePoints(r.favoritePoints);
