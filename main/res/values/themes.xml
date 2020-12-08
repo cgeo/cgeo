@@ -55,11 +55,15 @@
     <style name="cgeo_gmap" parent="@android:style/Theme.DeviceDefault">
         <item name="text_color">@color/text_dark</item>
         <item name="button">@drawable/action_button_dark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="cgeo_gmap_light" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
         <item name="text_color">@color/text_light</item>
         <item name="button">@drawable/action_button_light</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="cgeo.base" parent="@style/Theme.AppCompat">
