@@ -32,6 +32,7 @@
 
     <style name="checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:textColor">?text_color</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="checkbox_full" parent="checkbox">
