@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -386,6 +387,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 Log.d("GeokretyConnector.postLogTrackable: not authenticated");
                 return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.emptyList());
             }
+            // XXX: Use always CET timezone for Geokrety logging
+            // See https://github.com/cgeo/cgeo/issues/9496
+            date.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
 
             // Construct Post Parameters
             final Parameters params = new Parameters(
