@@ -1728,6 +1728,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir automaticamente como destino</string>
     <string name="map_disable_autotarget_individual_route">Desactivado \"Definir destino automaticamente\"</string>
+    <string name="map_clear_manual_targets">Limpar destinos manuais</string>
+    <string name="map_manual_targets_cleared">Destinos manuais limpos</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
