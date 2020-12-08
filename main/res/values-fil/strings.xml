@@ -1285,6 +1285,8 @@
     <!-- number input -->
     <!-- text notification channel infos & proximity notification title -->
     <!-- individual routes -->
+    <string name="map_clear_manual_targets">Manuelle Ziele löschen</string>
+    <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
