@@ -1727,6 +1727,8 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Automatisch als doel instellen</string>
     <string name="map_disable_autotarget_individual_route">\"Stel automatisch als doel in\" uitgeschakeld</string>
+    <string name="map_clear_manual_targets">Handmatige doelen wissen</string>
+    <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>
