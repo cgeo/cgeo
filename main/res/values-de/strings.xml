@@ -582,6 +582,7 @@
     <string name="init_summary_archived">Archivierte Caches ausblenden</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
+    <string name="init_customtabs_as_browser">Chrome Webanzeige verwenden</string>
     <string name="init_summary_customtabs_as_browser">Externe Websites werden angezeigt, ohne c:geo zu verlassen (nur möglich, wenn Chrome installiert ist)</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
@@ -1155,6 +1156,13 @@
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
     <string name="map_show_circles">Kreise anzeigen</string>
+    <string name="map_showc_ownfound">Eigene/gefundene Caches anzeigen</string>
+    <string name="map_showc_disabled">Deaktivierte Caches anzeigen</string>
+    <string name="map_showc_archived">Archivierte Caches anzeigen</string>
+    <string name="map_showwp_original">Originale Wegpunkte anzeigen</string>
+    <string name="map_showwp_parking">Parkplatz-Wegpunkte anzeigen</string>
+    <string name="map_showwp_visited">Besuchte Wegpunkte anzeigen</string>
+    <string name="map_show_track">GPX Track/Route anzeigen</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
@@ -1170,6 +1178,7 @@
     <string name="map_gm_autorotation">Automatische Kartendrehung</string>
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
+    <string name="map_show_in_map">In Karte anzeigen</string>
     <!-- search -->
     <string name="search_bar_hint">Suche nach Caches</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
