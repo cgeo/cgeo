@@ -1918,26 +1918,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view.setOnScrollListener(new FastScrollListener(view));
 
             final Button addWaypointCurrent = header.findViewById(R.id.add_waypoint_currentlocation);
-            addWaypointCurrent.setOnClickListener(v -> new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    ensureSaved();
-                    final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                    newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
-                    newWaypoint.setGeocode(cache.getGeocode());
-                    cache.addOrChangeWaypoint(newWaypoint, true);
+            addWaypointCurrent.setOnClickListener(v -> {
+                ensureSaved();
+                final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                newWaypoint.setGeocode(cache.getGeocode());
+                if (cache.addOrChangeWaypoint(newWaypoint, true)) {
                     addWaypointAndSort(sortedWaypoints, newWaypoint);
-                    return true;
+                    adapter.notifyDataSetChanged();
+                    reinitializePage(Page.WAYPOINTS);
+                    ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
                 }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        adapter.notifyDataSetChanged();
-                        ActivityMixin.showShortToast(CacheDetailActivity.this, getString(R.string.waypoint_added));
-                    }
-                }
-            }.execute());
+            });
 
             // read waypoint from clipboard
             final Button addWaypointFromClipboard = header.findViewById(R.id.add_waypoint_fromclipboard);
