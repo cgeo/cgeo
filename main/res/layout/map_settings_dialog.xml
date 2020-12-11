@@ -58,8 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginRight="8dp">
         <TextView
             android:id="@+id/routing_title"
             android:layout_width="wrap_content"
@@ -98,4 +97,32 @@
             android:layout_toRightOf="@id/routing_bike"
             android:src="@drawable/routing_car" />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/map_settings_autotarget_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/map_settings_autotarget_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dip"
+            android:text="@string/individual_route" />
+        <CheckBox
+            android:id="@+id/map_settings_autotarget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map_autotarget_individual_route"
+            android:layout_below="@id/map_settings_autotarget_title" />
+    </RelativeLayout>
+
+
+
+    <View
+        android:id="@+id/spacer_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp" />
 </LinearLayout>
