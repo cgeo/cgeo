@@ -70,9 +70,7 @@ public class IndividualRouteUtils {
                 ActivityMixin.invalidateOptionsMenu(activity);
             });
         } else if (id == R.id.menu_autotarget_individual_route) {
-            Settings.setAutotargetIndividualRoute(!Settings.isAutotargetIndividualRoute());
-            route.triggerTargetUpdate(!Settings.isAutotargetIndividualRoute());
-            ActivityMixin.invalidateOptionsMenu(activity);
+            setAutotargetIndividualRoute(activity, route, !Settings.isAutotargetIndividualRoute());
         } else if (id == R.id.menu_clear_targets) {
             if (setTarget != null) {
                 setTarget.call(null, null);
@@ -108,6 +106,12 @@ public class IndividualRouteUtils {
             return true;
         }
         return false;
+    }
+
+    public  static void setAutotargetIndividualRoute(final Activity activity, final ManualRoute route, final boolean newValue) {
+        Settings.setAutotargetIndividualRoute(newValue);
+        route.triggerTargetUpdate(!Settings.isAutotargetIndividualRoute());
+        ActivityMixin.invalidateOptionsMenu(activity);
     }
 
 }

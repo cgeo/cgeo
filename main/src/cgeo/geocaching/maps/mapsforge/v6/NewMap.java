@@ -258,7 +258,7 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, manualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);

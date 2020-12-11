@@ -2,8 +2,10 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.routing.RoutingMode;
+import cgeo.geocaching.models.ManualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -30,14 +32,18 @@ public class MapSettingsUtils {
 
     private static int colorAccent;
     private static boolean isShowCircles;
+    private static boolean isAutotargetIndividualRoute;
+    private static boolean showAutotargetIndividualRoute;
 
     private MapSettingsUtils() {
         // utility class
     }
 
-    public static void showSettingsPopup(final Activity activity, final Action1<Boolean> onMapSettingsPopupFinished, final Action1<RoutingMode> setRoutingValue, final Action1<Integer> setCompactIconValue) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final ManualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
+        isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
+        showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
 
         final ArrayList<SettingsCheckboxModel> settingsElementsCheckboxes = new ArrayList<>();
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_showc_ownfound, R.drawable.ic_menu_myplaces, Settings.isExcludeMyCaches(), Settings::setExcludeMine, true));
@@ -68,6 +74,13 @@ public class MapSettingsUtils {
         routingChoices.add(new ButtonChoiceModel<>(R.id.routing_car, RoutingMode.CAR));
         final ButtonController<RoutingMode> routing = new ButtonController<>(dialogView, routingChoices, Settings.getRoutingMode(), setRoutingValue);
 
+        final CheckBox autotargetCheckbox = dialogView.findViewById(R.id.map_settings_autotarget);
+        if (showAutotargetIndividualRoute) {
+            final View autotargetContainer = dialogView.findViewById(R.id.map_settings_autotarget_container);
+            autotargetContainer.setVisibility(View.VISIBLE);
+            autotargetCheckbox.setChecked(isAutotargetIndividualRoute);
+        }
+
         Dialogs.newBuilder(activity)
             .setView(dialogView)
             .setTitle(R.string.quick_settings)
@@ -78,6 +91,13 @@ public class MapSettingsUtils {
                 compactIcon.setValue();
                 routing.setValue();
                 onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
+                if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != autotargetCheckbox.isChecked()) {
+                    if (route == null) {
+                        Settings.setAutotargetIndividualRoute(autotargetCheckbox.isChecked());
+                    } else {
+                        IndividualRouteUtils.setAutotargetIndividualRoute(activity, route, autotargetCheckbox.isChecked());
+                    }
+                }
             })
             .create()
             .show();

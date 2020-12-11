@@ -565,7 +565,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         activity.setContentView(mapProvider.getMapLayoutId());
-        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(activity, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
+        activity.findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(activity, manualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
