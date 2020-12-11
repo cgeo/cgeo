@@ -1944,34 +1944,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             setClipboardButtonVisibility(addWaypointFromClipboard);
             addWaypointFromClipboard.setOnClickListener(v2 -> {
                 final Waypoint oldWaypoint = DataStore.loadWaypoint(Waypoint.hasClipboardWaypoint());
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        if (null != oldWaypoint) {
-                            ensureSaved();
-                            final Waypoint newWaypoint = cache.duplicateWaypoint(oldWaypoint);
-                            if (null != newWaypoint) {
-                                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                                addWaypointAndSort(sortedWaypoints, newWaypoint);
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
-
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            adapter.notifyDataSetChanged();
-                            if (oldWaypoint.isUserDefined()) {
-                                Dialogs.confirmYesNo((Activity) view.getContext(), R.string.cache_waypoints_add_fromclipboard, R.string.cache_waypoints_remove_original_waypoint, (dialog, which) -> {
-                                    DataStore.deleteWaypoint(oldWaypoint.getId());
-                                    ClipboardUtils.clearClipboard();
-                                });
-                            }
+                if (null != oldWaypoint) {
+                    ensureSaved();
+                    final Waypoint newWaypoint = cache.duplicateWaypoint(oldWaypoint);
+                    if (null != newWaypoint) {
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        addWaypointAndSort(sortedWaypoints, newWaypoint);
+                        adapter.notifyDataSetChanged();
+                        reinitializePage(Page.WAYPOINTS);
+                        if (oldWaypoint.isUserDefined()) {
+                            Dialogs.confirmYesNo((Activity) view.getContext(), R.string.cache_waypoints_add_fromclipboard, R.string.cache_waypoints_remove_original_waypoint, (dialog, which) -> {
+                                DataStore.deleteWaypoint(oldWaypoint.getId());
+                                ClipboardUtils.clearClipboard();
+                            });
                         }
                     }
-                }.execute();
+                }
             });
             final ClipboardManager cliboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             cliboardManager.addPrimaryClipChangedListener(() -> setClipboardButtonVisibility(addWaypointFromClipboard));
