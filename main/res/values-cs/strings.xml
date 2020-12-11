@@ -1769,6 +1769,8 @@
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Automaticky nastavit jako cíl</string>
     <string name="map_disable_autotarget_individual_route">Zakázáno \"Automaticky nastavit jako cíl\"</string>
+    <string name="map_clear_manual_targets">Vymazat ruční cíle</string>
+    <string name="map_manual_targets_cleared">Ruční cíle vymazány</string>
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete odstranit všechny keše/trasové body z vaší individuální trasy?</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
