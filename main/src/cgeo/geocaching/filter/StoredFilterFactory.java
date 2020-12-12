@@ -121,49 +121,49 @@ class StoredFilterFactory implements IFilterFactory {
 
     static class StateStoredWithinLastEightHoursFilter extends StateStoredWithinLastXFilter {
         StateStoredWithinLastEightHoursFilter() {
-            super(R.string.cache_status_stored_lasteighthours, true, System.currentTimeMillis() - 8 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_lasteighthours, true, System.currentTimeMillis() - 8 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredWithinLastTwentyFourHoursFilter extends StateStoredWithinLastXFilter {
         StateStoredWithinLastTwentyFourHoursFilter() {
-            super(R.string.cache_status_stored_lasttwentyfourhours, true, System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_lasttwentyfourhours, true, System.currentTimeMillis() - 24 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredWithinLastSevenDaysFilter extends StateStoredWithinLastXFilter {
         StateStoredWithinLastSevenDaysFilter() {
-            super(R.string.cache_status_stored_lastsevendays, true, System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_lastsevendays, true, System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredWithinLastThirtyDaysFilter extends StateStoredWithinLastXFilter {
         StateStoredWithinLastThirtyDaysFilter() {
-            super(R.string.cache_status_stored_lastthirtydays, true, System.currentTimeMillis() - 30 * 24 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_lastthirtydays, true, System.currentTimeMillis() - 30 * 24 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredBeforeLastEightHoursFilter extends StateStoredWithinLastXFilter {
         StateStoredBeforeLastEightHoursFilter() {
-            super(R.string.cache_status_stored_morethaneighthours, false, System.currentTimeMillis() - 8 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_morethaneighthours, false, System.currentTimeMillis() - 8 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredBeforeLastTwentyFourHoursFilter extends StateStoredWithinLastXFilter {
         StateStoredBeforeLastTwentyFourHoursFilter() {
-            super(R.string.cache_status_stored_morethantwentyfourhours, false, System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_morethantwentyfourhours, false, System.currentTimeMillis() - 24 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredBeforeLastSevenDaysFilter extends StateStoredWithinLastXFilter {
         StateStoredBeforeLastSevenDaysFilter() {
-            super(R.string.cache_status_stored_morethansevendays, false, System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_morethansevendays, false, System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000L);
         }
     }
 
     static class StateStoredBeforeLastThirtyDaysFilter extends StateStoredWithinLastXFilter {
         StateStoredBeforeLastThirtyDaysFilter() {
-            super(R.string.cache_status_stored_morethanthirtydays, false, System.currentTimeMillis() - 30 * 24 * 60 * 60 * 1000);
+            super(R.string.cache_status_stored_morethanthirtydays, false, System.currentTimeMillis() - 30 * 24 * 60 * 60 * 1000L);
         }
     }
 

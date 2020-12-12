@@ -10,9 +10,12 @@ There are no known issues for using c:geo with Android 11. If you notice any pro
 <h4>Fixes:</h4>
 <ul>
 <li>New: Added dialog to report database errors to support</li>
+<li>Fix: Avoid crash on adding waypoint from current position</li>
+<li>Fix: Avoid crash on adding waypoint from clipboard</li>
 <li>Fix: Fixed several smaller crashes</li>
 <li>Fix: Use local time of Geokrety server for logging a Geokrety</li>
 <li>Fix: Apply colorAccent to Google Maps for a more consistent theming</li>
+<li>Fix: Avoid overflow in filter \"Stored before/after 30 days\"</li>
 </ul>
 
 <h1>2020.12.03:</h1>
