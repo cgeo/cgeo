@@ -21,6 +21,7 @@
 
 <h4>Other:</h4>
 <ul>
+<li>Change: Disable mainscreen transparency on Sailfish OS</li>
 <li>Change: Custom tab implementation instead of internal browser</li>
 <li>Change: Field note encoding: Charset changed to UTF16 LE</li>
 <li>New: Ask for filename on individual route export</li>
