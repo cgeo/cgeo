@@ -161,9 +161,9 @@ public class ShareUtils {
 
     private static void openCustomTab(final Context context, final String url) {
         final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
-            .enableUrlBarHiding()
+            .setUrlBarHidingEnabled(true)
             .setShowTitle(true)
-            .addDefaultShareMenuItem();
+            .setShareState(CustomTabsIntent.SHARE_STATE_ON);
 
         final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
