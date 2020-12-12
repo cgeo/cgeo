@@ -372,7 +372,7 @@ dependencies {
     implementation 'asia.ivity.android:drag-sort-listview:1.0'
 
     // needed for chrome custom tabs
-    implementation 'androidx.browser:browser:1.2.0'
+    implementation 'androidx.browser:browser:1.3.0'
 
     // ViewPagerIndicator, view pager titles for cache details and similar view pager based activities
     //             url 'https://dl.bintray.com/alexeydanilov/maven'
