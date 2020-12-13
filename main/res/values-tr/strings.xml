@@ -544,8 +544,6 @@
     <string name="init_summary_transparentBackground">Saydam arkaplan kullan (yeniden başlatmak gereklidir)</string>
     <string name="init_address">Adres Göster</string>
     <string name="init_summary_address">Ana ekranda koordinatlar yerine adresi göster</string>
-    <string name="init_useenglish">İngilizce Kullan</string>
-    <string name="init_summary_useenglish">c:geo için İngilizce kullanın (Yeniden başlatma gereklidir)</string>
     <string name="init_exclude">Sahibi Olduklarımı ve Bulduklarımı Dahil Etme</string>
     <string name="init_summary_exclude">Sahibi olduklarımı ve bulduklarımı dahil etme</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
