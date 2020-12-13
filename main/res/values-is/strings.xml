@@ -349,8 +349,6 @@
     <string name="init_skin">Ljós hamur</string>
     <string name="init_summary_skin">Nota ljósan ham (þarfnast endurræsingar)</string>
     <string name="init_address">Sýna heimilisfang</string>
-    <string name="init_useenglish">Nota ensku</string>
-    <string name="init_summary_useenglish">Nota c:geo á ensku (Endurræsingu krafist)</string>
     <string name="init_exclude">Útiloka eigin og fundin</string>
     <string name="init_summary_exclude">Útiloka cache sem þú átt eða hefur fundið</string>
     <string name="init_disabled">Útiloka óvirk</string>
