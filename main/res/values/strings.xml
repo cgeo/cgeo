@@ -599,8 +599,9 @@
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_useenglish">Use English</string>
     <string name="init_summary_useenglish">Use English language for c:geo (restart required). Overrides the next setting.</string>
-    <string name="init_userlocale">Locale for translation</string>
-    <string name="init_summary_userlocale">Enter an ISO language identifier for app-specific language setting, e. g. \"de\" for German. Leave empty to use system setting. (Restart required)</string>
+    <string name="init_select_language">Select language</string>
+    <string name="init_summary_select_language">Select in-app language (requires restart)\n</string>
+    <string name="init_use_default_language">Use default language</string>
     <string name="init_category_exclude">Exclude caches</string>
     <string name="init_exclude">Exclude Own and Found</string>
     <string name="init_summary_exclude">Exclude caches you own or have found</string>

@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
@@ -179,7 +180,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
                 R.string.pref_fakekey_preference_backup, R.string.pref_twitter_cache_message,
-                R.string.pref_twitter_trackable_message, R.string.pref_ec_icons }) {
+                R.string.pref_twitter_trackable_message, R.string.pref_ec_icons, R.string.pref_selected_language }) {
             bindSummaryToStringValue(k);
         }
         bindGeocachingUserToGCVoteuser();
@@ -536,11 +537,27 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initLanguagePreferences() {
+        // use English
         final Preference p = getPreference(R.string.pref_useenglish);
         p.setOnPreferenceChangeListener((preference, newValue) -> {
             setResult(RESTART_NEEDED);
             return true;
         });
+
+        // language selector
+        final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
+        final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
+
+        entries[0] = getString(R.string.init_use_default_language);
+        entryValues[0] = "";
+        for (int i = 0; i < BuildConfig.TRANSLATION_ARRAY.length; i++) {
+            entries[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
+            entryValues[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
+        }
+
+        final ListPreference selectedLanguage = (ListPreference) getPreference(R.string.pref_selected_language);
+        selectedLanguage.setEntries(entries);
+        selectedLanguage.setEntryValues(entryValues);
     }
 
     private void initGeoDirPreferences() {
@@ -853,7 +870,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             // Set the summary to reflect the new value.
             preference.setSummary(
                     index >= 0
-                            ? listPreference.getEntries()[index]
+                            ? (isPreference(preference, R.string.pref_selected_language) ? getString(R.string.init_summary_select_language) : "") + listPreference.getEntries()[index]
                             : null);
         } else if (isPreference(preference, R.string.pref_fakekey_preference_restore)) {
             final String textRestore;
