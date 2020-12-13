@@ -27,7 +27,7 @@ plugins {
     id 'idea'
 
     // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.33.0'
+    id 'com.github.ben-manes.versions' version '0.36.0'
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
     id 'com.github.spotbugs' version '4.5.1'
