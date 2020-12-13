@@ -679,14 +679,6 @@ public class Settings {
                 GCConstants.DEFAULT_GC_DATE);
     }
 
-    public static boolean useEnglish() {
-        return getBoolean(R.string.old_pref_useenglish, false);
-    }
-
-    public static void setUseEnglish(final boolean useEnglish) {
-        putBoolean(R.string.old_pref_useenglish, useEnglish);
-    }
-
     public static boolean isShowAddress() {
         return getBoolean(R.string.pref_showaddress, true);
     }
@@ -1567,8 +1559,16 @@ public class Settings {
      * @return either user-defined locale or system default locale, depending on the settings
      */
     public static Locale getApplicationLocale() {
-        final String selectedLanguage = Settings.getString(R.string.pref_selected_language, Settings.getBoolean(R.string.old_pref_useenglish, false) ? "en" : "");
+        final String selectedLanguage = getUserLanguage();
         return StringUtils.isNotBlank(selectedLanguage) ? new Locale(selectedLanguage, "") : Locale.getDefault();
+    }
+
+    public static String getUserLanguage() {
+        return getString(R.string.pref_selected_language, Settings.getBoolean(R.string.old_pref_useenglish, false) ? "en" : "");
+    }
+
+    public static void putUserLanguage(final String language) {
+        putString(R.string.pref_selected_language, language);
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {

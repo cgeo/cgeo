@@ -85,20 +85,20 @@ public class OkapiClientTest extends CGeoTestCase {
 
     public static void testPreferredLanguage() {
         final Locale savedLocale = Locale.getDefault();
-        final boolean useEnglish = Settings.useEnglish();
+        final String userLanguage = Settings.getUserLanguage();
         try {
-            Settings.setUseEnglish(false);
+            Settings.putUserLanguage("");
             Locale.setDefault(Locale.US);
             assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en");     // US, useEnglish = false
-            Settings.setUseEnglish(true);
+            Settings.putUserLanguage("en");
             assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en");     // US, useEnglish = true
             Locale.setDefault(Locale.GERMANY);
             assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("en|de");  // DE, useEnglish = true
-            Settings.setUseEnglish(false);
+            Settings.putUserLanguage("");
             assertThat(OkapiClient.getPreferredLanguage()).isEqualTo("de|en");  // DE, useEnglish = false
         } finally {
             Locale.setDefault(savedLocale);
-            Settings.setUseEnglish(useEnglish);
+            Settings.putUserLanguage(userLanguage);
         }
     }
 
