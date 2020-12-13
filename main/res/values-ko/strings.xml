@@ -550,8 +550,6 @@
     <string name="init_summary_transparentBackground">투명한 배경 사용 (다시 시작해야 함)</string>
     <string name="init_address">주소 보기</string>
     <string name="init_summary_address">주 화면에 좌표 대신 주소를 표시합니다.</string>
-    <string name="init_useenglish">영어를 사용하기</string>
-    <string name="init_summary_useenglish">C:geo을 영어로만 사용합니다. (재시작 필요)</string>
     <string name="init_exclude">자신의 캐시와 찾은 캐시 제외</string>
     <string name="init_summary_exclude">자신이 숨긴 캐시와 이미 찾은 캐시를 제외합니다.</string>
     <string name="init_showwaypoints">웨이포인트 보기</string>
