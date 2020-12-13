@@ -563,8 +563,6 @@
     <string name="init_summary_transparentBackground">Transparante achtergrond gebruiken (vereist herstart)</string>
     <string name="init_address">Toon adres</string>
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
-    <string name="init_useenglish">Use English language</string>
-    <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
     <string name="init_category_exclude">Caches uitsluiten</string>
     <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
