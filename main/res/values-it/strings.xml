@@ -560,8 +560,6 @@
     <string name="init_summary_transparentBackground">Usa sfondo trasparente (necessario riavvio)</string>
     <string name="init_address">Visualizza indirizzo</string>
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
-    <string name="init_useenglish">Use English in c:geo</string>
-    <string name="init_summary_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
     <string name="init_category_exclude">Escludi cache</string>
     <string name="init_exclude">Escludi i miei e quelli trovati</string>
     <string name="init_summary_exclude">Escludi i miei cache e queli che ho già trovato</string>
