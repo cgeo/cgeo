@@ -437,8 +437,6 @@
     <string name="init_summary_skin">Foloseşte culori luminoase (necesită repornirea aplicaţiei)</string>
     <string name="init_address">Arată adresa</string>
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
-    <string name="init_useenglish">Foloseşte limba engleză</string>
-    <string name="init_summary_useenglish">Foloseşte limba engleză în c:geo (Aplicaţia trebuie repornită)</string>
     <string name="init_exclude">Exclude Găsite şi Ale mele</string>
     <string name="init_summary_exclude">Exclude cutiile găsite şi cele proprii</string>
     <string name="init_showwaypoints">Arată puncte</string>
