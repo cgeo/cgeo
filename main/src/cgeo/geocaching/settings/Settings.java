@@ -175,7 +175,7 @@ public class Settings {
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
             e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
-            e.putBoolean(getKey(R.string.pref_useenglish), prefsV0.getBoolean(getKey(R.string.pref_useenglish), false));
+            e.putBoolean(getKey(R.string.old_pref_useenglish), prefsV0.getBoolean(getKey(R.string.old_pref_useenglish), false));
             e.putBoolean(getKey(R.string.pref_usecompass), prefsV0.getInt(getKey(R.string.pref_usecompass), 1) != 0);
             e.putBoolean(getKey(R.string.pref_trackautovisit), prefsV0.getBoolean(getKey(R.string.pref_trackautovisit), false));
             e.putBoolean(getKey(R.string.pref_sigautoinsert), prefsV0.getBoolean(getKey(R.string.pref_sigautoinsert), false));
@@ -680,11 +680,11 @@ public class Settings {
     }
 
     public static boolean useEnglish() {
-        return getBoolean(R.string.pref_useenglish, false);
+        return getBoolean(R.string.old_pref_useenglish, false);
     }
 
     public static void setUseEnglish(final boolean useEnglish) {
-        putBoolean(R.string.pref_useenglish, useEnglish);
+        putBoolean(R.string.old_pref_useenglish, useEnglish);
     }
 
     public static boolean isShowAddress() {
@@ -1561,15 +1561,13 @@ public class Settings {
 
     /**
      * Return the locale that should be used to display information to the user.
-     * Precedence is useEnglish > userLocale > defaultLocale
+     * Includes migration from the old "useEnglish" preference
+     * Precedence is userLocale > useEnglish > defaultLocale
      *
-     * @return either English locale, user-defined locale or system default locale, depending on the settings
+     * @return either user-defined locale or system default locale, depending on the settings
      */
     public static Locale getApplicationLocale() {
-        if (Settings.useEnglish()) {
-            return Locale.ENGLISH;
-        }
-        final String selectedLanguage = Settings.getString(R.string.pref_selected_language, "");
+        final String selectedLanguage = Settings.getString(R.string.pref_selected_language, Settings.getBoolean(R.string.old_pref_useenglish, false) ? "en" : "");
         return StringUtils.isNotBlank(selectedLanguage) ? new Locale(selectedLanguage, "") : Locale.getDefault();
     }
 

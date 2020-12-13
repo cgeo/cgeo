@@ -490,11 +490,6 @@
             android:key="@string/pref_plainLogs"
             android:summary="@string/init_summary_plain_logs"
             android:title="@string/init_plain_logs" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_useenglish"
-            android:summary="@string/init_summary_useenglish"
-            android:title="@string/init_useenglish" />
         <ListPreference
             android:key="@string/pref_selected_language"
             android:title="@string/init_select_language" />
