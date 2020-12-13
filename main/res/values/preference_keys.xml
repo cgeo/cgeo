@@ -269,4 +269,6 @@
     <string translatable="false" name="pref_compacticon_off">off</string>
     <string translatable="false" name="pref_compacticon_on">manual</string>
     <string translatable="false" name="pref_compacticon_auto">auto</string>
+
+    <string translatable="false" name="pref_userLocale">userLocale</string>
 </resources>

@@ -1561,11 +1561,16 @@ public class Settings {
 
     /**
      * Return the locale that should be used to display information to the user.
+     * Precedence is useEnglish > userLocale > defaultLocale
      *
-     * @return either the system locale or an English one, depending on the settings
+     * @return either English locale, user-defined locale or system default locale, depending on the settings
      */
     public static Locale getApplicationLocale() {
-        return Settings.useEnglish() ? Locale.ENGLISH : Locale.getDefault();
+        if (Settings.useEnglish()) {
+            return Locale.ENGLISH;
+        }
+        final String userLocale = Settings.getString(R.string.pref_userLocale, "");
+        return StringUtils.isNotBlank(userLocale) ? new Locale(userLocale, "") : Locale.getDefault();
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {

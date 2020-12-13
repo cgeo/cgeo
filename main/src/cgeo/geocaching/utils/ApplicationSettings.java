@@ -1,5 +1,10 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.settings.Settings;
+
+import android.app.Activity;
+import android.content.res.Configuration;
+
 /**
  * This utility class contains static settings that do not require a context or
  * an application. It may not depend or use any other package from c:geo.
@@ -23,6 +28,20 @@ public class ApplicationSettings {
         // There is currently no Android API to get the file name of the shared preferences. Let's hardcode
         // it without needing a CgeoApplication instance.
         return "cgeo.geocaching_preferences";
+    }
+
+
+    /**
+     * Sets a user-defined Locale for localized strings
+     *
+     * @param activity Activity to set the new locale for
+     */
+    public static void setLocale(final Activity activity) {
+        if (activity != null) {
+            final Configuration conf = activity.getResources().getConfiguration();
+            conf.setLocale(Settings.getApplicationLocale());
+            activity.getResources().updateConfiguration(conf, activity.getResources().getDisplayMetrics());
+        }
     }
 
 }

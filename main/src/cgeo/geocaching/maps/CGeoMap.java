@@ -58,6 +58,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Formatter;
@@ -531,6 +532,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        ApplicationSettings.setLocale(this.getActivity());
         super.onCreate(savedInstanceState);
 
         // class init
