@@ -526,8 +526,6 @@
     <string name="init_summary_transparentBackground">Bruk gjennomsiktig bakgrunn (krever omstart)</string>
     <string name="init_address">Vis adressen i menyen</string>
     <string name="init_summary_address">Vis adressen i menyen</string>
-    <string name="init_useenglish">Bruk engelsk språk</string>
-    <string name="init_summary_useenglish">Bruk engelsk språk i c:geo (omstart nødvendig)</string>
     <string name="init_exclude">Ekskluder egne og funnede cacher fra kartet</string>
     <string name="init_summary_exclude">Ekskluder egne og funnede cacher fra kartet</string>
     <string name="init_showwaypoints">Vis veipunkter</string>
