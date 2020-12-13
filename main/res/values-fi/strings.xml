@@ -558,8 +558,6 @@
     <string name="init_summary_transparentBackground">Käytä läpinäkyvää taustaa (uudelleenkäynnistys vaaditaan)</string>
     <string name="init_address">Näytä osoite</string>
     <string name="init_summary_address">Näytä osoite koordinaattien sijaan pääsivulla</string>
-    <string name="init_useenglish">Käytä englanniksi</string>
-    <string name="init_summary_useenglish">Käytä c:geoa englanniksi (uudelleenkäynnistys tarvitaan)</string>
     <string name="init_exclude">Piilota omat ja löydetyt</string>
     <string name="init_summary_exclude">Älä näytä jo löytämiäsi tai omia kätköjä</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
