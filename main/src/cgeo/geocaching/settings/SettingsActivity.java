@@ -24,6 +24,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -115,7 +116,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        // Set light skin in preferences only for devices > 2.x, it doesn't work under 2.x
+        ApplicationSettings.setLocale(this);
         setTheme(Settings.isLightSkin() ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 

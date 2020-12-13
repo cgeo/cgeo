@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
@@ -132,6 +133,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         Log.v(logToken + ".onCreate(Bundle)");
+        ApplicationSettings.setLocale(this);
         super.onCreate(savedInstanceState);
         onCreateCommon();
     }
