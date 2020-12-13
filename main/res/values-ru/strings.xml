@@ -548,8 +548,6 @@
     <string name="init_summary_transparentBackground">Использовать прозрачный фон (требуется перезапуск)</string>
     <string name="init_address">Показывать адрес</string>
     <string name="init_summary_address">Показывать адрес вместо координат на главном экране</string>
-    <string name="init_useenglish">Английский язык</string>
-    <string name="init_summary_useenglish">Использовать английский язык для c:geo (требуется перезапуск)</string>
     <string name="init_exclude">Скрыть свои и найденные</string>
     <string name="init_summary_exclude">Исключить ваши собственные и найденные вами тайники</string>
     <string name="init_showwaypoints">Показ путевых точек</string>
