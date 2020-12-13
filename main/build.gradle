@@ -247,7 +247,7 @@ android {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.7.0'
+    def androidAnnotationsVersion = '4.8.0'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
@@ -276,7 +276,7 @@ dependencies {
     implementation 'com.github.spotbugs:spotbugs-annotations:4.1.4'
 
     // GeographicLib
-    implementation 'net.sf.geographiclib:GeographicLib-Java:1.50'
+    implementation 'net.sf.geographiclib:GeographicLib-Java:1.51'
 
     // Jackson XML processing
     def jacksonVersion = '2.11.3'
@@ -344,7 +344,7 @@ dependencies {
     implementation 'androidx.core:core:1.3.2'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.3.1'
+    implementation 'androidx.exifinterface:exifinterface:1.3.2'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
