@@ -559,8 +559,6 @@
     <string name="init_summary_transparentBackground">Utilitzeu un fons transparent (cal reiniciar)</string>
     <string name="init_address">Mostra l\'adreça</string>
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
-    <string name="init_useenglish">Usa l\'anglès</string>
-    <string name="init_summary_useenglish">Usa l\'anglès al c:geo (cal reiniciar)</string>
     <string name="init_exclude">Exclou els propis i els trobats</string>
     <string name="init_summary_exclude">Exclou els teus propis catxés o els que ja has trobat</string>
     <string name="init_showwaypoints">Mostra les fites</string>
