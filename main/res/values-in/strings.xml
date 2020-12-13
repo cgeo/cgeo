@@ -435,8 +435,6 @@
     <string name="init_summary_skin">Gunakan kulit ringan (Restart diperlukan)</string>
     <string name="init_address">Tampilkan Alamat</string>
     <string name="init_summary_address">Tampilkan alamat alternatif dari koordinat pada layar utama</string>
-    <string name="init_useenglish">Menggunakan bahasa Inggris</string>
-    <string name="init_summary_useenglish">Gunakan Bahasa Inggris untuk c: geo (Diperlukan restart)</string>
     <string name="init_exclude">Kecualikan Sendiri dan Ditemukan</string>
     <string name="init_summary_exclude">Kecualikan cache yang Anda miliki atau temukan</string>
     <string name="init_showwaypoints">Tampilkan Titik arah</string>
