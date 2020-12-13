@@ -495,11 +495,9 @@
             android:key="@string/pref_useenglish"
             android:summary="@string/init_summary_useenglish"
             android:title="@string/init_useenglish" />
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/pref_userLocale"
-            android:title="@string/init_userlocale"
-            android:summary="@string/init_summary_userlocale" />
+        <ListPreference
+            android:key="@string/pref_selected_language"
+            android:title="@string/init_select_language" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_units_imperial"

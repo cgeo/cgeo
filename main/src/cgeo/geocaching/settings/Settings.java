@@ -1569,8 +1569,8 @@ public class Settings {
         if (Settings.useEnglish()) {
             return Locale.ENGLISH;
         }
-        final String userLocale = Settings.getString(R.string.pref_userLocale, "");
-        return StringUtils.isNotBlank(userLocale) ? new Locale(userLocale, "") : Locale.getDefault();
+        final String selectedLanguage = Settings.getString(R.string.pref_selected_language, "");
+        return StringUtils.isNotBlank(selectedLanguage) ? new Locale(selectedLanguage, "") : Locale.getDefault();
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {
