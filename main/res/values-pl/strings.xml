@@ -560,8 +560,6 @@
     <string name="init_summary_transparentBackground">Użyj przezroczystego tła (wymagany restart)</string>
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
-    <string name="init_useenglish">Użyj języka angielskiego</string>
-    <string name="init_summary_useenglish">Użyj języka angielskiego wewnątrz c:geo\n(wymaga restartu)</string>
     <string name="init_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_summary_exclude">Wyklucz własne lub już znalezione skrzynki</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
