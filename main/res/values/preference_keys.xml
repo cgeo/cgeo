@@ -61,7 +61,7 @@
     <string translatable="false" name="pref_skin">skin</string>
     <string translatable="false" name="pref_transparentBackground">transparentBackground</string>
     <string translatable="false" name="pref_showaddress">showaddress</string>
-    <string translatable="false" name="pref_useenglish">useenglish</string>
+    <string translatable="false" name="old_pref_useenglish">useenglish</string>
     <string translatable="false" name="pref_units_imperial">units</string>
     <string translatable="false" name="pref_ratingwanted">ratingwanted</string>
     <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>

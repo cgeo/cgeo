@@ -537,14 +537,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     }
 
     private void initLanguagePreferences() {
-        // use English
-        final Preference p = getPreference(R.string.pref_useenglish);
-        p.setOnPreferenceChangeListener((preference, newValue) -> {
-            setResult(RESTART_NEEDED);
-            return true;
-        });
-
-        // language selector
         final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
         final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
 

@@ -597,8 +597,6 @@
     <string name="init_summary_transparentBackground">Use transparent background (restart required)</string>
     <string name="init_address">Show Address</string>
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
-    <string name="init_useenglish">Use English</string>
-    <string name="init_summary_useenglish">Use English language for c:geo (restart required). Overrides the next setting.</string>
     <string name="init_select_language">Select language</string>
     <string name="init_summary_select_language">Select in-app language (requires restart)\n</string>
     <string name="init_use_default_language">Use default language</string>
