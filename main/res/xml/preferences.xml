@@ -893,7 +893,8 @@
             android:summary="@string/init_maintenance_directories_note">
             <Preference
                 android:key="@string/pref_fakekey_preference_maintenance_directories"
-                android:title="@string/init_maintenance_directories" />
+                android:title="@string/init_maintenance_directories"
+                android:layout="@layout/preference_button" />
         </PreferenceCategory>
 
     </PreferenceScreen>
