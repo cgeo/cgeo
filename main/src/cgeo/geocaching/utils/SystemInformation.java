@@ -60,22 +60,19 @@ public final class SystemInformation {
                 .append("\nc:geo version: ").append(Version.getVersionName(context));
         appendGooglePlayServicesVersion(context, body);
         body
-                .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-                .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
-                .append("\nRotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
-                .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
-                .append("\nMagnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
-                .append("\nDirection sensor used: ").append(usedDirectionSensor)
-                .append("\nHide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
-                .append("\nHide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
-                .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
-                .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
-                .append("\nSystem language: ").append(Locale.getDefault());
-        if (Settings.useEnglish()) {
-            body.append(" (c:geo forced to English)");
-        }
-        body.append("\nSystem date format: ").append(Formatter.getShortDateFormat())
-                .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
+            .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
+            .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
+            .append("\nRotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
+            .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
+            .append("\nMagnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
+            .append("\nDirection sensor used: ").append(usedDirectionSensor)
+            .append("\nHide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
+            .append("\nHide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
+            .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
+            .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
+            .append("\nSystem language: ").append(Locale.getDefault()).append(" / user-defined language: ").append(Settings.getUserLanguage())
+            .append("\nSystem date format: ").append(Formatter.getShortDateFormat())
+            .append("\nDebug mode active: ").append(Settings.isDebug() ? "yes" : "no");
         appendDirectory(body, "\nSystem internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
         appendDirectory(body, "\nUser storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\nGeocache data: ", LocalStorage.getGeocacheDataDirectory());

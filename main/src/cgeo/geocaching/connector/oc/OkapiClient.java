@@ -942,15 +942,13 @@ final class OkapiClient {
 
     /**
      * Return a pipe-separated list of preferred languages. English and the device default language (if different) will
-     * always be in the list. Forcing cgeo language to English will prefer English over the device default language.
+     * always be in the list. A user-set language will be first (if set).
      */
     @NonNull
     static String getPreferredLanguage() {
+        final String userLanguage = StringUtils.lowerCase(Settings.getApplicationLocale().getLanguage());
         final String defaultLanguage = StringUtils.defaultIfBlank(StringUtils.lowerCase(Locale.getDefault().getLanguage()), "en");
-        if ("en".equals(defaultLanguage)) {
-            return defaultLanguage;
-        }
-        return Settings.useEnglish() ? "en|" + defaultLanguage : defaultLanguage + "|en";
+        return userLanguage + (userLanguage.equals(defaultLanguage) ? "" : "|" + defaultLanguage) + ("en".equals(userLanguage) || "en".equals(defaultLanguage) ? "" : "|en");
     }
 
     private static void addFilterParams(@NonNull final Map<String, String> valueMap, @NonNull final OCApiConnector connector, final boolean my) {
