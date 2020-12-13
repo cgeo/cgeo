@@ -1093,13 +1093,16 @@
                 android:title="@string/init_debug" />
             <Preference
                 android:key="@string/pref_generate_logcat"
-                android:title="@string/about_system_write_logcat" />
+                android:title="@string/about_system_write_logcat"
+                android:layout="@layout/preference_button" />
             <Preference
                 android:key="@string/pref_memory_dump"
-                android:title="@string/init_create_memory_dump" />
+                android:title="@string/init_create_memory_dump"
+                android:layout="@layout/preference_button" />
             <Preference
                 android:key="@string/pref_view_settings"
-                android:title="@string/view_settings" />
+                android:title="@string/view_settings"
+                android:layout="@layout/preference_button" />
         </PreferenceCategory>
     </PreferenceScreen>
 
