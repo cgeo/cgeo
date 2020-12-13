@@ -539,12 +539,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void initLanguagePreferences() {
         final String[] entries = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
         final String[] entryValues = new String[BuildConfig.TRANSLATION_ARRAY.length + 1];
+        final Locale currentLocale = Settings.getApplicationLocale();
 
         entries[0] = getString(R.string.init_use_default_language);
         entryValues[0] = "";
         for (int i = 0; i < BuildConfig.TRANSLATION_ARRAY.length; i++) {
-            entries[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
             entryValues[1 + i] = BuildConfig.TRANSLATION_ARRAY[i];
+            final Locale l = new Locale(BuildConfig.TRANSLATION_ARRAY[i], "");
+            entries[1 + i] = BuildConfig.TRANSLATION_ARRAY[i] + " (" + l.getDisplayLanguage(currentLocale) + ")";
         }
 
         final ListPreference selectedLanguage = (ListPreference) getPreference(R.string.pref_selected_language);
