@@ -545,8 +545,6 @@
     <string name="init_summary_transparentBackground">Usar fondo transparente (requiere reiniciar)</string>
     <string name="init_address">Mostrar dirección</string>
     <string name="init_summary_address">Mostrar dirección en lugar de coordenadas en la pantalla principal</string>
-    <string name="init_useenglish">Usar inglés</string>
-    <string name="init_summary_useenglish">Usar c:geo en inglés (se necesita reiniciar)</string>
     <string name="init_exclude">Excluir encontrados y propios</string>
     <string name="init_summary_exclude">Excluir cachés ya encontrados y propios</string>
     <string name="init_showwaypoints">Mostrar Waypoints</string>
