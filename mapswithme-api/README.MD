@@ -1,6 +1,9 @@
-# MapsWithMe Android API: Getting Started
+# maps.me Android API: Getting Started
 
 ## Introduction
+
+NOTE: We have changed the name of our maps from MapsWithMe to MAPS.ME, but left all references below unchanged.
+
 MapsWithMe Android API (hereinafter referred to as *"API Library"* or just *"library"*)
 provides interface for client application to perform next tasks:
 
@@ -24,13 +27,13 @@ Your application must target at least *android sdk version 7*.
 First step is to clone [repository][linkRepo] or download it as an archive.
 
 When your are done you find two folders: *lib* and *sample-app-capitals*. First one is a library project that you should add to your project.
-You don't need any additional permissions in your AndroidManifest.xml to use API library, so you can write real code straight away, calling for different `MapsWithMeApi` methods (more details below). 
+You don't need any additional permissions in your AndroidManifest.xml to use API library, so you can write real code straight away, calling for different `MapsWithMeApi` methods (more details below).
 
-##Classes Overview and HOW TO
+## Classes Overview and HOW TO
 Core classes you will work with are:
 
 * [com.mapswithme.maps.api.MapsWithMeApi][linkApiClass] - static class with methods such as `showPointOnMap(Activity, double, double, String)` etc.
-* [com.mapswithme.maps.api.MWMPoint][linkPointClass] - model of POI, includes lat, lon, name, and id data.
+* [com.mapswithme.maps.api.MWMPoint][linkPointClass] - model of POI, includes lat, lon, name, id, and style data.
 * [com.mapswithme.maps.api.MWMResponse][linkRespClass] - helps you to extract response from MapsWithMe by applying `MWMResponse.extractFromIntent(Intent)` to Intent. Contains MWMPoint data.
 
 ### Show Points on the Map
@@ -57,11 +60,11 @@ For multiple points use [MWMPoint][linkPointClass] class:
 
     void showMultiplePoints(List<SomeDomainObject> list)
     {
-      // Convert objects to MMWPoints
+      // Convert objects to MWMPoints
       final MWMPoint[] points = new MWMPoint[list.length];
       for (int i = 0; i < list.size; i++)
       {
-        // Get lat, lon, and name from object and assign it to new MMWPoint
+        // Get lat, lon, and name from object and assign it to new MWMPoint
         points[i] = new MWMPoint(lat, lon, name);
       }
       // Show all point on the map, you could also provide some title
@@ -127,25 +130,21 @@ your application when user press "More Info" button :
 `MapsWithMeApi.isMapsWithMeInstalled(Context)` will return `true` if user has *Lite* or *Pro* version that supports API call installed.
 
 #### Which versions of MapsWithMe support API calls?
-Both *Lite* and *Pro* versions since 2.4.0 and above support API calls.
+All versions since 2.4.0 and above support API calls.
 
 #### What will happen if I call for `MapsWithMeApi.showPoint()` but MapsWithMe application is not installed?
-Nothing serious. API library will show simple dialog with gentle offer to download MapsWithMe. You can see how it looks like below. ![Please install us](site/images/dlg.png)
+Nothing serious. API library will show simple dialog with gentle offer to download MapsWithMe. You can see how it looks like below.
 
-#### If user has both *Lite* and *Pro* versions which one will be called?
-MapsWithMe Pro will serve your request in the case if both *Lite* and *Pro* versions installed. 
+![Please install us](site/images/dlg.png)
 
 ## Sample Code and Application
 
 * [Sample Application at Google Play][linkSampleGooglePlay]
 * [Sample Application Source Code][linkSampleSource]
 
-## Support
-If you have any questions please email to [api@mapswith.me][linkSupport].
-
 -------------------------------------------------------------------------------
 ## API Code License
-Copyright (c) 2013, MapsWithMe GmbH
+Copyright (c) 2019, MY.COM B.V.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -155,12 +154,11 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[linkMwm]: http://mapswith.me/ "MapsWithMe"
+[linkMwm]: https://maps.me/ "MAPS.ME"
 [linkPIntent]: http://developer.android.com/reference/android/app/PendingIntent.html "PendingIntent"
 [linkRepo]: https://github.com/mapswithme/api-android "GitHub Repository"
 [linkLibProj]: http://developer.android.com/tools/projects/index.html#LibraryProjects "Android Library Project"
 [linkIntents]: http://developer.android.com/guide/components/intents-filters.html "Intents and Intent Filters"
-[linkSupport]: mailto:api@mapswith.me "MapsWithMe Support Contact"
 [linkApiClass]: lib/src/com/mapswithme/maps/api/MapsWithMeApi.java "MapsWithMeApi.java"
 [linkPointClass]: lib/src/com/mapswithme/maps/api/MWMPoint.java "MWMPoint.java"
 [linkRespClass]: lib/src/com/mapswithme/maps/api/MWMResponse.java  "MWMResponse.java"
