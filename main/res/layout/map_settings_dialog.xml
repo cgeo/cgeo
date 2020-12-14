@@ -1,128 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/show_hide_title"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="14dip"
-        android:text="@string/map_show_in_map" />
-    <ListView
-        android:id="@+id/map_settings_listview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
-    </ListView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/compacticon_title"
+            android:id="@+id/show_hide_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dip"
-            android:text="@string/map_dot_mode" />
-        <Button
-            android:id="@+id/compacticon_off"
-            style="@style/button_small"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="14dip"
+            android:text="@string/map_show_in_map" />
+        <LinearLayout
+            android:id="@+id/map_settings_listview"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@id/compacticon_title"
-            android:text="@string/switch_off" />
-        <Button
-            android:id="@+id/compacticon_auto"
-            style="@style/button_small"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@id/compacticon_title"
-            android:layout_toRightOf="@id/compacticon_off"
-            android:text="@string/switch_auto" />
-        <Button
-            android:id="@+id/compacticon_on"
-            style="@style/button_small"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@id/compacticon_title"
-            android:layout_toRightOf="@id/compacticon_auto"
-            android:text="@string/switch_on" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
-        <TextView
-            android:id="@+id/routing_title"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical">
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <TextView
+                android:id="@+id/compacticon_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:text="@string/map_dot_mode" />
+            <Button
+                android:id="@+id/compacticon_off"
+                style="@style/button_small"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/compacticon_title"
+                android:text="@string/switch_off" />
+            <Button
+                android:id="@+id/compacticon_auto"
+                style="@style/button_small"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/compacticon_title"
+                android:layout_toRightOf="@id/compacticon_off"
+                android:text="@string/switch_auto" />
+            <Button
+                android:id="@+id/compacticon_on"
+                style="@style/button_small"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/compacticon_title"
+                android:layout_toRightOf="@id/compacticon_auto"
+                android:text="@string/switch_on" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <TextView
+                android:id="@+id/routing_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:text="@string/map_routing" />
+            <ImageButton
+                android:id="@+id/routing_straight"
+                style="@style/button_small"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/routing_title"
+                android:src="@drawable/routing_straight"/>
+            <ImageButton
+                android:id="@+id/routing_walk"
+                style="@style/button_small"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/routing_title"
+                android:layout_toRightOf="@id/routing_straight"
+                android:src="@drawable/routing_walk" />
+            <ImageButton
+                android:id="@+id/routing_bike"
+                style="@style/button_small"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/routing_title"
+                android:layout_toRightOf="@id/routing_walk"
+                android:src="@drawable/routing_bike" />
+            <ImageButton
+                android:id="@+id/routing_car"
+                style="@style/button_small"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/routing_title"
+                android:layout_toRightOf="@id/routing_bike"
+                android:src="@drawable/routing_car" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/map_settings_autotarget_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dip"
-            android:text="@string/map_routing" />
-        <ImageButton
-            android:id="@+id/routing_straight"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/routing_title"
-            android:src="@drawable/routing_straight"/>
-        <ImageButton
-            android:id="@+id/routing_walk"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_straight"
-            android:src="@drawable/routing_walk" />
-        <ImageButton
-            android:id="@+id/routing_bike"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_walk"
-            android:src="@drawable/routing_bike" />
-        <ImageButton
-            android:id="@+id/routing_car"
-            style="@style/button_small"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/routing_title"
-            android:layout_toRightOf="@id/routing_bike"
-            android:src="@drawable/routing_car" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/map_settings_autotarget_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:visibility="gone">
-        <TextView
-            android:id="@+id/map_settings_autotarget_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dip"
-            android:text="@string/individual_route" />
-        <CheckBox
-            android:id="@+id/map_settings_autotarget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/map_autotarget_individual_route"
-            android:layout_below="@id/map_settings_autotarget_title" />
-    </RelativeLayout>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/map_settings_autotarget_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:text="@string/individual_route" />
+            <CheckBox
+                android:id="@+id/map_settings_autotarget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/map_autotarget_individual_route"
+                android:layout_below="@id/map_settings_autotarget_title" />
+        </RelativeLayout>
 
 
 
-    <View
-        android:id="@+id/spacer_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp" />
-</LinearLayout>
+        <View
+            android:id="@+id/spacer_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp" />
+    </LinearLayout>
+</ScrollView>

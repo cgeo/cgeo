@@ -9,14 +9,11 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -59,7 +56,20 @@ public class MapSettingsUtils {
         settingsElementsCheckboxes.add(new SettingsCheckboxModel(R.string.map_direction, R.drawable.ic_menu_goto, Settings.isMapDirection(), Settings::setMapDirection, false));
 
         final View dialogView = activity.getLayoutInflater().inflate(R.layout.map_settings_dialog, null);
-        ((ListView) dialogView.findViewById(R.id.map_settings_listview)).setAdapter(new MapSettingsAdapter(activity, settingsElementsCheckboxes));
+
+        final LinearLayout settingsListview = dialogView.findViewById(R.id.map_settings_listview);
+        for (SettingsCheckboxModel element : settingsElementsCheckboxes) {
+            final RelativeLayout l = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.map_settings_item, null);
+            ((ImageView) l.findViewById(R.id.settings_item_icon)).setImageResource(element.resIcon);
+            ((TextView) l.findViewById(R.id.settings_item_text)).setText(element.resTitle);
+            final CheckBox checkBox = l.findViewById(R.id.settings_item_checkbox);
+            checkBox.setChecked(element.currentValue);
+            l.setOnClickListener(v1 -> {
+                element.currentValue = !element.currentValue;
+                checkBox.setChecked(element.currentValue);
+            });
+            settingsListview.addView(l);
+        }
 
         final ArrayList<ButtonChoiceModel<Integer>> compactIconChoices = new ArrayList<>();
         compactIconChoices.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF));
@@ -182,38 +192,4 @@ public class MapSettingsUtils {
             }
         }
     }
-
-    private static class MapSettingsAdapter extends ArrayAdapter<SettingsCheckboxModel> {
-
-        private final ArrayList<SettingsCheckboxModel> statusList;
-
-        MapSettingsAdapter(final Context context, final ArrayList<SettingsCheckboxModel> statusList) {
-            super(context, R.layout.map_settings_dialog, statusList);
-            this.statusList = statusList;
-        }
-
-        @Override
-        public @NonNull View getView(final int position, final @Nullable View convertView, final @NonNull ViewGroup parent) {
-            View v = convertView;
-            if (v == null) {
-                final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = inflater.inflate(R.layout.map_settings_item, null);
-            }
-
-            final SettingsCheckboxModel item = statusList.get(position);
-            if (item != null) {
-                ((ImageView) v.findViewById(R.id.settings_item_icon)).setImageResource(item.resIcon);
-                ((TextView) v.findViewById(R.id.settings_item_text)).setText(item.resTitle);
-                final CheckBox checkBox = v.findViewById(R.id.settings_item_checkbox);
-                checkBox.setChecked(item.currentValue);
-                v.setOnClickListener(v1 -> {
-                    item.currentValue = !item.currentValue;
-                    checkBox.setChecked(item.currentValue);
-                });
-            }
-            return v;
-        }
-
-    }
-
 }
