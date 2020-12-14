@@ -562,6 +562,9 @@
     <string name="init_summary_transparentBackground">透明な背景を使用\n(c:geoの再起動が必要)</string>
     <string name="init_address">地名表示</string>
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
+    <string name="init_select_language">言語の選択</string>
+    <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
+    <string name="init_use_default_language">システムのデフォルト言語</string>
     <string name="init_category_exclude">キャッシュを除外</string>
     <string name="init_exclude">所有または発見したキャッシュ除く</string>
     <string name="init_summary_exclude">自分で所有または発見したキャッシュは除く</string>
@@ -1701,6 +1704,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
     <string name="map_autotarget_individual_route">自動的に目的地として設定</string>
     <string name="map_disable_autotarget_individual_route">「自動的に目的地として設定」を無効にしました</string>
+    <string name="map_clear_manual_targets">目的地を削除</string>
+    <string name="map_manual_targets_cleared">目的地を削除しました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
     <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
     <string name="map_individual_route_cleared">個別ルートを削除しました</string>
