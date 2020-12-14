@@ -861,6 +861,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             final ListPreference listPreference = (ListPreference) preference;
             final int index = listPreference.findIndexOfValue(stringValue);
 
+            if (isPreference(preference, R.string.pref_selected_language)) {
+                setResult(RESTART_NEEDED);
+            }
+
             // Set the summary to reflect the new value.
             preference.setSummary(
                     index >= 0
