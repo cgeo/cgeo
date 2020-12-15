@@ -1,13 +1,10 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
 
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -121,16 +118,7 @@ public final class ProcessUtils {
         } catch (final RuntimeException ignored) {
             // market not available, fall back to browser
             final String uri = "https://play.google.com/store/apps/details?id=" + packageName;
-            openUri(uri, activity);
-        }
-    }
-
-    public static void openUri(@NonNull final String uri, @NonNull final Activity activity) {
-        try {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
-        } catch (final ActivityNotFoundException e) {
-            Log.e("Cannot find suitable activity", e);
-            ActivityMixin.showToast(activity, R.string.err_application_no);
+            ShareUtils.openUrl(activity, uri);
         }
     }
 
