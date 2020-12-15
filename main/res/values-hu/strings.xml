@@ -518,8 +518,6 @@
     <string name="init_summary_skin">Világos felület\n(a c:geo újraindítását igényli)</string>
     <string name="init_address">Cím mutatása a főablakban</string>
     <string name="init_summary_address">Cím mutatása a főablakban</string>
-    <string name="init_useenglish">Angol nyelv használata</string>
-    <string name="init_summary_useenglish">Angol nyelv használata a c:geo-ban\n(újraindítás szükséges)</string>
     <string name="init_exclude">Saját és megtalált ládák kihagyása</string>
     <string name="init_summary_exclude">Saját és megtalált ládák kihagyása</string>
     <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>

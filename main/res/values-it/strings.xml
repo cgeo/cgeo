@@ -446,6 +446,9 @@
     <string name="contribution_documentation">documentazione</string>
     <string name="contribution_projectleader">leader del progetto open source</string>
     <string name="contribution_graphics">grafica</string>
+    <string name="debug_user_error_report_title">Segnala un problema</string>
+    <string name="debug_user_error_errortext">Si è verificato un problema inatteso che ti chiediamo di segnalarci:</string>
+    <string name="debug_user_error_explain_options_html"><![CDATA[<p>Aiutaci a risolvere i problemi c:geo segnalandoli via email con le informazioni di sistema e il file di registro c:geo incluso. Altri modi per contattarci possono essere trovati su <i>Informazioni su c:geo</i></p>]]></string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -560,8 +563,9 @@
     <string name="init_summary_transparentBackground">Usa sfondo trasparente (necessario riavvio)</string>
     <string name="init_address">Visualizza indirizzo</string>
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
-    <string name="init_useenglish">Use English in c:geo</string>
-    <string name="init_summary_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
+    <string name="init_select_language">Seleziona lingua</string>
+    <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
+    <string name="init_use_default_language">Usa lingua predefinita</string>
     <string name="init_category_exclude">Escludi cache</string>
     <string name="init_exclude">Escludi i miei e quelli trovati</string>
     <string name="init_summary_exclude">Escludi i miei cache e queli che ho già trovato</string>
@@ -1724,6 +1728,8 @@
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta automaticamente come obiettivo</string>
     <string name="map_disable_autotarget_individual_route">\"Imposta automaticamente come obiettivo\" disabilitato</string>
+    <string name="map_clear_manual_targets">Cancella obiettivi manuali</string>
+    <string name="map_manual_targets_cleared">Obiettivi manuali cancellati</string>
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>

@@ -549,8 +549,6 @@ https://manual.cgeo.org/en/basicuse</string>
     <string name="init_summary_transparentBackground">Lietot caurspīdīgu fonu (nepieciešama restartācija)</string>
     <string name="init_address">Rādīt adresi</string>
     <string name="init_summary_address">Rādīt adresi, nevis koordinātes galvenajā ekrānā</string>
-    <string name="init_useenglish">Lietot angļu valodu</string>
-    <string name="init_summary_useenglish">Izmantot angļu valodu c:geo (nepieciešama restartēšana)</string>
     <string name="init_exclude">Nerādīt savus un atrastos</string>
     <string name="init_summary_exclude">Nerādīt tev piederošus vai jau atrastos slēpņus</string>
     <string name="init_showwaypoints">Rādīt starpposmus</string>

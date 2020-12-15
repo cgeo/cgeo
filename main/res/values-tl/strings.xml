@@ -445,8 +445,6 @@
     <string name="init_summary_skin">Gumamit ng maliwanag na balat (kinakailangan ang pag-restart)</string>
     <string name="init_address">Ipakita ang address</string>
     <string name="init_summary_address">Ipakita ang address sa halip na mga koordinate sa pangunahing screen</string>
-    <string name="init_useenglish">Gumamit ng ingles</string>
-    <string name="init_summary_useenglish">Gumamit ng wikang ingles para sa c:geo (kinakailangan ang pag-restart)</string>
     <string name="init_exclude">Ang sariling pagliban at natagpuan</string>
     <string name="init_summary_exclude">Ang pagliban sa mga cache na iyong pag-aari o maaring natapuan</string>
     <string name="init_showwaypoints">Ipakita ang mga waypoint</string>

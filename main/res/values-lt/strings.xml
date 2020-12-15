@@ -559,8 +559,6 @@
     <string name="init_summary_transparentBackground">Naudoti skaidrų foną (reikės perkrauti)</string>
     <string name="init_address">Rodyti adresą</string>
     <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
-    <string name="init_useenglish">Anglu kalba</string>
-    <string name="init_summary_useenglish">Naudoti anglų kalbą (reikia pakartotinai paleisti)</string>
     <string name="init_exclude">Atmesti savo ir rastas</string>
     <string name="init_summary_exclude">Atmesti nuosavas ir rastas slėptuves</string>
     <string name="init_showwaypoints">Rodyti papildomus taškus</string>

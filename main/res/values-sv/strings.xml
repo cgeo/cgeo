@@ -546,8 +546,6 @@
     <string name="init_summary_transparentBackground">Använd genomskinlig bakgrund (omstart krävs)</string>
     <string name="init_address">Adress/koordinater</string>
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
-    <string name="init_useenglish">Språk</string>
-    <string name="init_summary_useenglish">Använd engelska i c:geo (kräver omstart)</string>
     <string name="init_exclude">Egna/hittade cacher</string>
     <string name="init_summary_exclude">Dölj egna och hittade cacher</string>
     <string name="init_showwaypoints">Extra punkter på kartan</string>

@@ -560,8 +560,6 @@
     <string name="init_summary_transparentBackground">Použiť priehľadné pozadie (potrebný reštart)</string>
     <string name="init_address">Ukázať adresu</string>
     <string name="init_summary_address">Adresa namiesto súradníc na úvodnej obrazovke</string>
-    <string name="init_useenglish">Používať angličtinu</string>
-    <string name="init_summary_useenglish">Používať angličtinu v c:geo\n(vyžaduje reštart)</string>
     <string name="init_exclude">Nezobrazovať vlastné a nájdené</string>
     <string name="init_summary_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
     <string name="init_showwaypoints">Body trasy na mape</string>

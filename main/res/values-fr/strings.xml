@@ -557,8 +557,6 @@
     <string name="init_summary_transparentBackground">Utiliser un arrière-plan transparent (redémarrage nécessaire)</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
-    <string name="init_useenglish">Anglais dans c:geo</string>
-    <string name="init_summary_useenglish">Utiliser la langue anglaise dans c:geo (nécessite le redémarrage de c:geo)</string>
     <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
     <string name="init_showwaypoints">Afficher les points de passage</string>

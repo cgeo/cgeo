@@ -425,8 +425,6 @@
     <string name="init_summary_skin">Gamita ang hayag nga panit (Kinahanglanon nga bag-ohon)</string>
     <string name="init_address">Pagpakita sa Address</string>
     <string name="init_summary_address">Ipakita ang address imbis nga coordinate sa main nga screen</string>
-    <string name="init_useenglish">Gamita ang English</string>
-    <string name="init_summary_useenglish">Gamita ang English para sa c:geo (Kinahanglanon pag-restart)</string>
     <string name="init_exclude">Ayaw i-apil ang Kaugalingon ug ang Nakita</string>
     <string name="init_summary_exclude">Ayaw i-apil ang mga caches nga imong gipanag-iya o nakaplagan</string>
     <string name="init_showwaypoints">Ipakita ang Waypoints</string>

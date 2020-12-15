@@ -409,8 +409,6 @@
     <string name="init_summary_skin">Uporabi svetlo različico\n(potrebuje ponovni zagon aplikacije)</string>
     <string name="init_address">Pokaži naslov</string>
     <string name="init_summary_address">Na glavnem zaslonu pokaži naslov namesto koordinat</string>
-    <string name="init_useenglish">Uporabi angleški jezik</string>
-    <string name="init_summary_useenglish">Uporabi angleški jezik za c:geo (potrebuje ponovni zagon)</string>
     <string name="init_exclude">Ne pokaži najdenih ali mojih zakladov</string>
     <string name="init_summary_exclude">Ne pokaži mojih ali najdenih zakladov v iskanjih ali na zemljevidu</string>
     <string name="init_showwaypoints">Dodatne točke na zemljevidu</string>

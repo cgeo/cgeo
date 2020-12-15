@@ -564,8 +564,9 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="init_summary_transparentBackground">Torna a imagem de fundo transparente (requer reinício)</string>
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
-    <string name="init_useenglish">Usar o idioma Inglês</string>
-    <string name="init_summary_useenglish">Aplicação do idioma Inglês no c:geo (requer reinício)</string>
+    <string name="init_select_language">Seleccionar idioma</string>
+    <string name="init_summary_select_language">Seleccionar o idioma da aplicação (requer reinicialização)\n</string>
+    <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_category_exclude">Excluir caches</string>
     <string name="init_exclude">Excluir Encontradas e Minhas</string>
     <string name="init_summary_exclude">Exclui as caches que lhe pertencem ou que tenha encontrado</string>
@@ -1728,6 +1729,8 @@ https://manual.cgeo.org/pt/basicuse</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir automaticamente como destino</string>
     <string name="map_disable_autotarget_individual_route">Desactivado \"Definir destino automaticamente\"</string>
+    <string name="map_clear_manual_targets">Limpar destinos manuais</string>
+    <string name="map_manual_targets_cleared">Destinos manuais limpos</string>
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>

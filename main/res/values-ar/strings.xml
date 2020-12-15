@@ -444,8 +444,6 @@
     <string name="init_summary_skin">استخدم خلفية فاتحة اللون (يتطلب إعادة التشغيل)</string>
     <string name="init_address">عرض العنوان</string>
     <string name="init_summary_address">عرض العنوان بدلاً من الإحدثيات على الشاشة الرئسية</string>
-    <string name="init_useenglish">استخدم الإنجليزية</string>
-    <string name="init_summary_useenglish">استخدم الإنجليزية في c:geo (يتطلب إعادة التشغيل)</string>
     <string name="init_exclude">استبعاد الخاصة والمكتسبة</string>
     <string name="init_summary_exclude">استبعاد المخبآت التي تملكها أو التي عثرت عليها</string>
     <string name="init_showwaypoints">عرض إحداثية الطريق</string>

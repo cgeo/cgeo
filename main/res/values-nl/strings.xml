@@ -563,8 +563,9 @@
     <string name="init_summary_transparentBackground">Transparante achtergrond gebruiken (vereist herstart)</string>
     <string name="init_address">Toon adres</string>
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
-    <string name="init_useenglish">Use English language</string>
-    <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
+    <string name="init_select_language">Taal selecteren</string>
+    <string name="init_summary_select_language">In-app taal selecteren (vereist herstart)\n</string>
+    <string name="init_use_default_language">Standaardtaal gebruiken</string>
     <string name="init_category_exclude">Caches uitsluiten</string>
     <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
     <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
@@ -1727,6 +1728,8 @@
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Automatisch als doel instellen</string>
     <string name="map_disable_autotarget_individual_route">\"Stel automatisch als doel in\" uitgeschakeld</string>
+    <string name="map_clear_manual_targets">Handmatige doelen wissen</string>
+    <string name="map_manual_targets_cleared">Handmatige doelen gewist</string>
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>

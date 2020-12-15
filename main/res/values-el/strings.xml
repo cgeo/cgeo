@@ -559,8 +559,6 @@
     <string name="init_summary_transparentBackground">Χρήση διαφανούς φόντου (απαραίτητη η επανεκκίνηση)</string>
     <string name="init_address">Προβολή διεύθυνσης</string>
     <string name="init_summary_address">Εμφάνιση διεύθυνσης αντί για συντεταγμένες στην κύρια οθόνη</string>
-    <string name="init_useenglish">Χρήση Αγγλικών</string>
-    <string name="init_summary_useenglish">Χρησιμοποιείστε το c:geo στα αγγλικά (απαιτείται επανεκκίνηση)</string>
     <string name="init_exclude">Εξαίρεση των δικών σας και όσων έχετε βρει</string>
     <string name="init_summary_exclude">Εξαίρεση των δικών σας κρυπτών ή όσων έχετε βρει</string>
     <string name="init_showwaypoints">Προβολή σημείων αναφοράς</string>
