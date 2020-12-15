@@ -161,6 +161,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         initDefaultNavigationPreferences();
         initBackupButtons();
         initDbLocationPreference();
+        initMapPreferences();
         initGeoDirPreferences();
         initDebugPreference();
         initForceOrientationSensorPreference();
@@ -552,6 +553,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         final ListPreference selectedLanguage = (ListPreference) getPreference(R.string.pref_selected_language);
         selectedLanguage.setEntries(entries);
         selectedLanguage.setEntryValues(entryValues);
+    }
+
+    private void initMapPreferences() {
+        getPreference(R.string.pref_bigSmileysOnMap).setOnPreferenceChangeListener((preference, newValue) -> {
+            setResult(RESTART_NEEDED);
+            return true;
+        });
     }
 
     private void initGeoDirPreferences() {
