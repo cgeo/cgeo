@@ -32,7 +32,6 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapDownloadUtils;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.R.string;
@@ -243,7 +242,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         final Preference preference = getPreference(preferenceKey);
         preference.setOnPreferenceClickListener(preference1 -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
-            ProcessUtils.openUri(url, SettingsActivity.this);
+            ShareUtils.openUrl(SettingsActivity.this, url);
             return true;
         });
     }

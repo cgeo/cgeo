@@ -131,6 +131,7 @@ public class ShareUtils {
 
     }
 
+    /* Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs */
     public static void openUrl(final Context context, final String url, final boolean forceIntentChooser) {
         if (StringUtils.isBlank(url)) {
             return;
