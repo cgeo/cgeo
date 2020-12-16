@@ -1,3 +1,5 @@
+<img align="right" src="main/res/mipmap-xxhdpi/ic_launcher_round.png">
+
 # c:geo
 
 [c:geo](https://www.cgeo.org/) is an open-source, full-featured, always ready-to-go client for geocaching.com (unofficial).
