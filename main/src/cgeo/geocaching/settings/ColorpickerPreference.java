@@ -232,7 +232,7 @@ public class ColorpickerPreference extends DialogPreference {
     }
 
     private void initColorSchemeGrid() {
-        final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater = LayoutInflater.from(getContext());
         colorSchemeGrid.removeAllViews();
         final int opaqueness = color & 0xff000000;
         for (int r = 0; r < 6; r++) {
@@ -242,7 +242,7 @@ public class ColorpickerPreference extends DialogPreference {
     }
 
     private void initColorGrid(final int red) {
-        final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater = LayoutInflater.from(getContext());
         colorGrid.removeAllViews();
         final int opaqueness = color & 0xff000000;
         for (int green = 0; green < 6; green++) {
