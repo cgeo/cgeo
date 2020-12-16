@@ -13,6 +13,8 @@
 <li>New: Added option to \"Individual route\" map menu to automatically set the first route point as navigation target (OpenStreetMap only)</li>
 <li>New: Added option to reset individual navigation target set from either cache/waypoint popup or \"Individual route\" (OpenStreetMap only)</li>
 <li>New: Ask for filename on individual route export</li>
+<li>New: Display a blue emoji for caches which are logged as DNF</li>
+<li>New: Allow setting navigation target from cache/waypoint popup for Google Maps (already existed for OpenStreetMap maps)</li>
 </ul>
 
 <h4>Cache details:</h4>
