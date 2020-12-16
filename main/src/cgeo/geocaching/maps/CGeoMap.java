@@ -763,7 +763,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, false);
+            IndividualRouteUtils.onPrepareOptionsMenu(menu, manualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -815,7 +815,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menuCompass();
         } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
             && !TrackUtils.onOptionsItemSelected(activity, id, tracks, this::setTracks, this::centerOnPosition)
-            && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition, null)
+            && !IndividualRouteUtils.onOptionsItemSelected(activity, id, manualRoute, this::clearIndividualRoute, this::centerOnPosition, this::setTarget)
             && !MapDownloadUtils.onOptionsItemSelected(activity, id)) {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {

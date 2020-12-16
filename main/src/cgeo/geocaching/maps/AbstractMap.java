@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -121,6 +122,7 @@ public abstract class AbstractMap {
             targetGeocode = null;
             targetView.setTarget(null, null);
         }
+        ActivityMixin.invalidateOptionsMenu(getActivity());
     }
 
 }
