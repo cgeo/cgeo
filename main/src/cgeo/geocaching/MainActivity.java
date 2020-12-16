@@ -68,7 +68,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.appcompat.widget.SearchView.OnSuggestionListener;
-import androidx.core.view.MenuItemCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -456,7 +455,7 @@ public class MainActivity extends AbstractActionBarActivity {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
         final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchItem = menu.findItem(R.id.menu_gosearch);
-        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView = (SearchView) searchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         hideKeyboardOnSearchClick(searchItem);
 
@@ -493,7 +492,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
             @Override
             public boolean onSuggestionClick(final int arg0) {
-                MenuItemCompat.collapseActionView(searchItem);
+                searchItem.collapseActionView();
                 searchView.setIconified(true);
                 // return false to invoke standard behavior of launching the intent for the search result
                 return false;
@@ -504,7 +503,7 @@ public class MainActivity extends AbstractActionBarActivity {
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String s) {
-                MenuItemCompat.collapseActionView(searchItem);
+                searchItem.collapseActionView();
                 searchView.setIconified(true);
                 return false;
             }
@@ -813,7 +812,7 @@ public class MainActivity extends AbstractActionBarActivity {
         // back may exit the app instead of closing the search action bar
         if (searchView != null && !searchView.isIconified()) {
             searchView.setIconified(true);
-            MenuItemCompat.collapseActionView(searchItem);
+            searchItem.collapseActionView();
         } else {
             super.onBackPressed();
         }

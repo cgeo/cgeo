@@ -107,12 +107,11 @@ public final class ProcessUtils {
         return CollectionUtils.isNotEmpty(list) || CollectionUtils.isNotEmpty(servicesList);
     }
 
-    @SuppressWarnings("deprecation")
     public static void openMarket(final Activity activity, @NonNull final String packageName) {
         try {
             final String url = "market://details?id=" + packageName;
             final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             activity.startActivity(marketIntent);
 
         } catch (final RuntimeException ignored) {
