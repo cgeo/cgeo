@@ -846,8 +846,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             View v = convertView;
 
             if (v == null) {
-                final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = inflater.inflate(R.layout.cachelist_listmarker_item, null);
+                v = LayoutInflater.from(getContext()).inflate(R.layout.cachelist_listmarker_item, null);
             }
             final ListMarker item = items.get(position);
             if (item != null) {
