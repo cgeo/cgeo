@@ -459,6 +459,27 @@ public class MainActivity extends AbstractActionBarActivity {
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         hideKeyboardOnSearchClick(searchItem);
+
+        // hide other action icons when search is active
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+
+            @Override
+            public boolean onMenuItemActionExpand(final MenuItem item) {
+                for (int i = 0; i < menu.size(); i++) {
+                    if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
+                        menu.getItem(i).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(final MenuItem item) {
+                invalidateOptionsMenu();
+                return true;
+            }
+        });
+
         return true;
     }
 
