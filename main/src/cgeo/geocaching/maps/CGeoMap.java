@@ -489,7 +489,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             overlayPositionAndScale.setHistory(trailHistory);
         }
         if (null == manualRoute) {
-            manualRoute = new ManualRoute(null);
+            manualRoute = new ManualRoute(this::setNavigationTargetFromIndividualRoute);
             manualRoute.reloadRoute(overlayPositionAndScale);
         } else {
             manualRoute.updateRoute(overlayPositionAndScale);
@@ -611,11 +611,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return;
         }
         if (manualRoute == null) {
-            manualRoute = new ManualRoute(null);
+            manualRoute = new ManualRoute(this::setNavigationTargetFromIndividualRoute);
         }
         manualRoute.toggleItem(this.mapView.getContext(), new RouteItem(item), overlayPositionAndScale);
         ActivityMixin.invalidateOptionsMenu(activity);
         overlayPositionAndScale.repaintRequired();
+    }
+
+    private void setNavigationTargetFromIndividualRoute(@Nullable final Geopoint geopoint, final String geocode) {
+        if (geopoint != null) {
+            setTarget(geopoint, geocode);
+        }
     }
 
     private void initMyLocationSwitchButton(final CheckBox locSwitch) {

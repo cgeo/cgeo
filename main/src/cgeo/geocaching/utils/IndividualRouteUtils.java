@@ -42,6 +42,7 @@ public class IndividualRouteUtils {
         menu.findItem(R.id.menu_export_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_clear_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_clear_targets).setVisible(targetIsSet || Settings.isAutotargetIndividualRoute());
+        menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.isAutotargetIndividualRoute());
     }
 
     /**

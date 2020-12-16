@@ -379,10 +379,6 @@ public class NewMap extends AbstractActionBarActivity implements XmlRenderThemeM
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
             TrackUtils.onPrepareOptionsMenu(menu);
-
-            // can be moved to IndividualRouteUtils as soon as setAutoTarget is available for all map types
-            menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.isAutotargetIndividualRoute());
-
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
         }
