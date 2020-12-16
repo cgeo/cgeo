@@ -227,7 +227,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private void startLoader(@NonNull final Trackable newTrackable) {
         trackable = newTrackable;
         // Start loading in background
-        getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
+        LoaderManager.getInstance(this).initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
         displayTrackable();
     }
 

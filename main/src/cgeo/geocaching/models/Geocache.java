@@ -75,6 +75,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -85,7 +86,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -382,7 +382,6 @@ public class Geocache implements IWaypoint {
      *            the other cache to compare this one to
      * @return true if both caches have the same content
      */
-    @SuppressWarnings("deprecation")
     @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
@@ -390,41 +389,41 @@ public class Geocache implements IWaypoint {
                 StringUtils.equalsIgnoreCase(name, other.name) &&
                 UncertainProperty.equalValues(cacheType, other.cacheType) &&
                 size == other.size &&
-                ObjectUtils.equals(found, other.found) &&
-                ObjectUtils.equals(didNotFound, other.didNotFound) &&
-                ObjectUtils.equals(premiumMembersOnly, other.premiumMembersOnly) &&
+                Objects.equals(found, other.found) &&
+                Objects.equals(didNotFound, other.didNotFound) &&
+                Objects.equals(premiumMembersOnly, other.premiumMembersOnly) &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
                 UncertainProperty.equalValues(coords, other.coords) &&
                 reliableLatLon == other.reliableLatLon &&
-                ObjectUtils.equals(disabled, other.disabled) &&
-                ObjectUtils.equals(archived, other.archived) &&
-                ObjectUtils.equals(lists, other.lists) &&
+                Objects.equals(disabled, other.disabled) &&
+                Objects.equals(archived, other.archived) &&
+                Objects.equals(lists, other.lists) &&
                 StringUtils.equalsIgnoreCase(ownerDisplayName, other.ownerDisplayName) &&
                 StringUtils.equalsIgnoreCase(ownerUserId, other.ownerUserId) &&
                 StringUtils.equalsIgnoreCase(getDescription(), other.getDescription()) &&
-                ObjectUtils.equals(personalNote, other.personalNote) &&
+                Objects.equals(personalNote, other.personalNote) &&
                 StringUtils.equalsIgnoreCase(getShortDescription(), other.getShortDescription()) &&
                 StringUtils.equalsIgnoreCase(getLocation(), other.getLocation()) &&
-                ObjectUtils.equals(favorite, other.favorite) &&
+                Objects.equals(favorite, other.favorite) &&
                 favoritePoints == other.favoritePoints &&
-                ObjectUtils.equals(onWatchlist, other.onWatchlist) &&
-                ObjectUtils.equals(hidden, other.hidden) &&
+                Objects.equals(onWatchlist, other.onWatchlist) &&
+                Objects.equals(hidden, other.hidden) &&
                 StringUtils.equalsIgnoreCase(guid, other.guid) &&
                 StringUtils.equalsIgnoreCase(getHint(), other.getHint()) &&
                 StringUtils.equalsIgnoreCase(cacheId, other.cacheId) &&
-                ObjectUtils.equals(direction, other.direction) &&
-                ObjectUtils.equals(distance, other.distance) &&
+                Objects.equals(direction, other.direction) &&
+                Objects.equals(distance, other.distance) &&
                 rating == other.rating &&
                 votes == other.votes &&
                 myVote == other.myVote &&
                 inventoryItems == other.inventoryItems &&
-                ObjectUtils.equals(attributes, other.attributes) &&
-                ObjectUtils.equals(waypoints, other.waypoints) &&
-                ObjectUtils.equals(spoilers, other.spoilers) &&
-                ObjectUtils.equals(inventory, other.inventory) &&
-                ObjectUtils.equals(logCounts, other.logCounts) &&
-                ObjectUtils.equals(hasLogOffline, other.hasLogOffline) &&
+                attributes.equals(other.attributes) &&
+                waypoints.equals(other.waypoints) &&
+                Objects.equals(spoilers, other.spoilers) &&
+                Objects.equals(inventory, other.inventory) &&
+                Objects.equals(logCounts, other.logCounts) &&
+                Objects.equals(hasLogOffline, other.hasLogOffline) &&
                 finalDefined == other.finalDefined;
     }
 

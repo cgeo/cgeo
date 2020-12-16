@@ -519,7 +519,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             initActionBarSpinner();
         }
 
-        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.getLoaderId(), extras, this);
+        currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).initLoader(type.getLoaderId(), extras, this);
 
         // init
         if (CollectionUtils.isNotEmpty(cacheList)) {
@@ -1536,9 +1536,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             showProgress(true);
             showFooterLoadingCaches();
 
-            getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.getLoaderId(), null, CacheListActivity.this);
+            LoaderManager.getInstance(CacheListActivity.this).restartLoader(CacheListLoaderType.NEXT_PAGE.getLoaderId(), null, CacheListActivity.this);
             // the loader for subsequent pages takes over - therefore the initial loader needs to be destroyed
-            getSupportLoaderManager().destroyLoader(type.getLoaderId());
+            LoaderManager.getInstance(CacheListActivity.this).destroyLoader(type.getLoaderId());
         }
     }
 
@@ -1570,8 +1570,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         if (id == PseudoList.HISTORY_LIST.id) {
             type = CacheListType.HISTORY;
-            getSupportLoaderManager().destroyLoader(CacheListType.OFFLINE.getLoaderId());
-            currentLoader = (AbstractSearchLoader) getSupportLoaderManager().restartLoader(CacheListType.HISTORY.getLoaderId(), extras, this);
+            LoaderManager.getInstance(this).destroyLoader(CacheListType.OFFLINE.getLoaderId());
+            currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.HISTORY.getLoaderId(), extras, this);
         } else {
             if (id == PseudoList.ALL_LIST.id) {
                 listId = id;
@@ -1585,9 +1585,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             type = CacheListType.OFFLINE;
 
-            getSupportLoaderManager().destroyLoader(CacheListType.HISTORY.getLoaderId());
+            LoaderManager.getInstance(this).destroyLoader(CacheListType.HISTORY.getLoaderId());
             extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
-            currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
+            currentLoader = (OfflineGeocacheListLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
 
             Settings.setLastDisplayedList(listId);
         }

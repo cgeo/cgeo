@@ -213,10 +213,10 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 CacheDetailActivity.updateCacheLists(getView(), cache, res);
             } else {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
-                final FragmentActivity activity = getActivity();
+                final FragmentActivity activity = requireActivity();
                 progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
-                    activity.supportInvalidateOptionsMenu();
+                    activity.invalidateOptionsMenu();
                     final View view = getView();
                     if (view != null) {
                         CacheDetailActivity.updateOfflineBox(view, cache, res,

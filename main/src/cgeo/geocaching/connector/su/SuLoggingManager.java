@@ -49,7 +49,7 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
 
     @Override
     public void init() {
-        activity.getSupportLoaderManager().initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
+        LoaderManager.getInstance(activity).initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
     }
 
     @Override

@@ -493,14 +493,13 @@ public final class FileUtils {
     /**
      * Returns the available space in bytes on the mount point used by the given dir.
      */
-    @SuppressWarnings("deprecation")
     public static long getFreeDiskSpace(final File dir) {
         if (dir == null) {
             return 0;
         }
         try {
             final StatFs statFs = new StatFs(dir.getAbsolutePath());
-            return (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
+            return statFs.getAvailableBlocksLong() * statFs.getBlockSizeLong();
         } catch (final IllegalArgumentException ignored) {
             // thrown if the directory isn't pointing to an external storage
         }
