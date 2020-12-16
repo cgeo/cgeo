@@ -28,6 +28,7 @@
 <li>Change: Removed \"Use English\" option in favor of a built-in language selector</li>
 <li>Change: Disable mainscreen transparency on Sailfish OS</li>
 <li>Change: Custom tab implementation instead of internal browser</li>
+<li>Change: Enlarge search field on mainscreen during search</li>
 <li>New: Added share option after creating a backup</li>
 <li>New: View settings: Added option to add new settings</li>
 <li>New: Added Ukrainian translation</li>
